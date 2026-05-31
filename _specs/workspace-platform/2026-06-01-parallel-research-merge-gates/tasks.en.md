@@ -8,4 +8,4 @@
 - [x] Update operating docs
 - [x] Run full verification
 - [x] Update evaluation report and request trace
-- [ ] Commit and push
+- [x] Commit and push
