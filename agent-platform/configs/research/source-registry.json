@@ -115,6 +115,73 @@
         "API-oriented code retrieval rationale"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "azure_architecture_center",
+      "title": "Azure Architecture Center",
+      "url": "https://learn.microsoft.com/azure/architecture/",
+      "source_type": "official",
+      "used_for": [
+        "architecture styles",
+        "reference architectures",
+        "cloud design patterns"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "aws_well_architected_framework",
+      "title": "AWS Well-Architected Framework",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html",
+      "source_type": "official",
+      "used_for": [
+        "architecture quality attributes",
+        "trade-off review",
+        "best-practice architecture questions"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "google_cloud_architecture_framework",
+      "title": "Google Cloud Architecture Framework",
+      "url": "https://cloud.google.com/architecture/framework",
+      "source_type": "official",
+      "used_for": [
+        "system design principles",
+        "architecture quality attribute review"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "arc42_architecture_template",
+      "title": "arc42 architecture documentation template",
+      "url": "https://arc42.org/",
+      "source_type": "standard",
+      "used_for": [
+        "architecture decision documentation",
+        "context, building block, and quality requirement structure"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "c4_model",
+      "title": "C4 model",
+      "url": "https://c4model.info/",
+      "source_type": "standard",
+      "used_for": [
+        "system, container, component, and code-level architecture views"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "sei_views_and_beyond",
+      "title": "Views and Beyond: The SEI Approach for Architecture Documentation",
+      "url": "https://www.sei.cmu.edu/library/views-and-beyond-the-sei-approach-for-architecture-documentation/",
+      "source_type": "official",
+      "used_for": [
+        "architecture view-based documentation",
+        "stakeholder concern coverage"
+      ],
+      "last_checked": "2026-05-31"
     }
   ],
   "structure_rules": [
@@ -142,6 +209,15 @@
       "applies_to": [
         "reference_links",
         "reference_sources"
+      ]
+    },
+    {
+      "id": "architecture_sources_shape_code_structure",
+      "rule": "Architecture frameworks and reference architectures should be used to compare source-code structure options before implementation.",
+      "reason": "The user requires source-code work to look for best architectures, not only examples of working code.",
+      "applies_to": [
+        "reference_sources",
+        "coding-research-profile"
       ]
     }
   ],
@@ -527,6 +603,73 @@
       "used_for": [
         "code search as a coding research channel",
         "API-oriented code retrieval rationale"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "azure_architecture_center",
+      "title": "Azure Architecture Center",
+      "url": "https://learn.microsoft.com/azure/architecture/",
+      "source_type": "official",
+      "used_for": [
+        "architecture styles",
+        "reference architectures",
+        "cloud design patterns"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "aws_well_architected_framework",
+      "title": "AWS Well-Architected Framework",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html",
+      "source_type": "official",
+      "used_for": [
+        "architecture quality attributes",
+        "trade-off review",
+        "best-practice architecture questions"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "google_cloud_architecture_framework",
+      "title": "Google Cloud Architecture Framework",
+      "url": "https://cloud.google.com/architecture/framework",
+      "source_type": "official",
+      "used_for": [
+        "system design principles",
+        "architecture quality attribute review"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "arc42_architecture_template",
+      "title": "arc42 architecture documentation template",
+      "url": "https://arc42.org/",
+      "source_type": "standard",
+      "used_for": [
+        "architecture decision documentation",
+        "context, building block, and quality requirement structure"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "c4_model",
+      "title": "C4 model",
+      "url": "https://c4model.info/",
+      "source_type": "standard",
+      "used_for": [
+        "system, container, component, and code-level architecture views"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "sei_views_and_beyond",
+      "title": "Views and Beyond: The SEI Approach for Architecture Documentation",
+      "url": "https://www.sei.cmu.edu/library/views-and-beyond-the-sei-approach-for-architecture-documentation/",
+      "source_type": "official",
+      "used_for": [
+        "architecture view-based documentation",
+        "stakeholder concern coverage"
       ],
       "last_checked": "2026-05-31"
     }

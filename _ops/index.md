@@ -41,6 +41,7 @@
 - 웹 검색 기반 인사이트로 계획할 때: [_ops/workflows/55-research-insight-planning.md](workflows/55-research-insight-planning.md)
 - 코딩 조사 결과를 구현으로 넘기기 전에: [_ops/workflows/56-coding-research.md](workflows/56-coding-research.md), [agent-platform/docs/coding-research-agent.ko.md](../agent-platform/docs/coding-research-agent.ko.md)
 - 코딩 조사 출처 설정을 확인할 때: [agent-platform/configs/research/README.ko.md](../agent-platform/configs/research/README.ko.md)
+- 소스코드 작성 전 아키텍처 후보 비교 기준을 볼 때: [_docs/architecture-first-coding-policy.ko.md](../_docs/architecture-first-coding-policy.ko.md), [agent-platform/configs/research/coding-research-profile.json](../agent-platform/configs/research/coding-research-profile.json)
 - 최종 사실 주장을 검증할 때: [_ops/workflows/70-hallucination-prevention.md](workflows/70-hallucination-prevention.md), [_docs/hallucination-prevention-policy.ko.md](../_docs/hallucination-prevention-policy.ko.md)
 - 계획 과정을 볼 때: [_history/plans/README.ko.md](../_history/plans/README.ko.md)
 - 컨텍스트가 길어져 재개 패킷이 필요할 때: [_docs/context-archive-policy.ko.md](../_docs/context-archive-policy.ko.md), [_history/context-archives/README.ko.md](../_history/context-archives/README.ko.md), [_ops/workflows/45-context-archive.md](workflows/45-context-archive.md)
@@ -75,6 +76,7 @@
 - 사용자 요청 요약이 `_history/user-requests/YYYY/`에 남았는가
 - 요구사항 기준선, 변경, 검토 기록이 `_requirements/` 또는 해당 프로젝트의 `docs/requirements/`에 남았는가
 - spec-driven 산출물이 `_specs/` 또는 해당 프로젝트의 `specs/`에 남았는가
+- 소스코드 작업이면 코딩 조사에 architecture reference, 최소 2개 architecture option, decision notes가 남았는가
 - 스킬 작업이 있었다면 `_skills/` 원본, 검증 결과, 개선 아이디어가 남았는가
 - 요청-결과 추적표가 `_history/request-traces/YYYY/`에 남았는가
 - 설치가 발생했다면 `_history/installations/YYYY/`와 `_ops/installations/registry.json`이 갱신됐는가

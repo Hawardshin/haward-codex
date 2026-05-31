@@ -12,18 +12,20 @@
 4. Select reference configs and record them in `reference_config_paths`, usually `agent-platform/configs/research/source-registry.json` and `agent-platform/configs/research/coding-research-profile.json`.
 5. Search the web for current external evidence.
 6. Search at least one additional channel: repository docs, official docs, code, package registries, papers, or open-source repos.
-7. Inspect relevant open-source repositories, reference implementations, well-structured source trees, examples, and tests before writing source code.
-8. If installation is needed, follow [_docs/open-source-installation-policy.ko.md](../../_docs/open-source-installation-policy.ko.md) and [_ops/workflows/58-installation-record.md](58-installation-record.md), then record install scope, command, dependency path, installation record path, security/license review, verification, and rollback.
-9. Record `code_reference_sources` with repository URLs, source file paths, test paths, example app paths, or code search results.
-10. Record `code_reference_notes` explaining what structure, boundaries, API patterns, error handling, tests, or implementation details are worth adapting or rejecting.
-11. Record `source_types` explicitly and use at least three distinct non-`other` source types.
-12. Include at least one authoritative source type: `official`, `paper`, `standard`, or `open_source`.
-13. Include at least one practical/adoption/contrary source type: `open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `news`, or `contrary`.
-14. For broad or repeated research, apply [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md) and use `_tools/source-collector/` when useful.
-15. Separate factual evidence from adoption signals such as stars, likes, comments, Hacker News points, Reddit activity, or LinkedIn reactions.
-16. Validate any internal knowledge-base references with `knowledge-skeptic-agent`.
-17. Synthesize findings into options, trade-offs, and a recommendation.
-18. Answer all post-research questions:
+7. Before writing source code, search for best-fit architecture patterns, reference architectures, and architecture documentation frameworks such as well-architected frameworks, C4, arc42, SEI views, ADRs, or strong project `docs/architecture` examples.
+8. Record `architecture_reference_sources`, `architecture_options`, and `architecture_decision_notes`; compare at least two architecture options before implementation.
+9. Inspect relevant open-source repositories, reference implementations, well-structured source trees, examples, and tests before writing source code.
+10. If installation is needed, follow [_docs/open-source-installation-policy.ko.md](../../_docs/open-source-installation-policy.ko.md) and [_ops/workflows/58-installation-record.md](58-installation-record.md), then record install scope, command, dependency path, installation record path, security/license review, verification, and rollback.
+11. Record `code_reference_sources` with repository URLs, source file paths, test paths, example app paths, or code search results.
+12. Record `code_reference_notes` explaining what structure, boundaries, API patterns, error handling, tests, or implementation details are worth adapting or rejecting.
+13. Record `source_types` explicitly and use at least three distinct non-`other` source types.
+14. Include at least one authoritative source type: `official`, `paper`, `standard`, or `open_source`.
+15. Include at least one practical/adoption/contrary source type: `open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `news`, or `contrary`.
+16. For broad or repeated research, apply [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md) and use `_tools/source-collector/` when useful.
+17. Separate factual evidence from adoption signals such as stars, likes, comments, Hacker News points, Reddit activity, or LinkedIn reactions.
+18. Validate any internal knowledge-base references with `knowledge-skeptic-agent`.
+19. Synthesize findings into options, trade-offs, and a recommendation.
+20. Answer all post-research questions:
     - `what_was_verified`
     - `best_option`
     - `why_this_option`
@@ -33,12 +35,12 @@
     - `validation_plan`
     - `reusable_knowledge`
     - `next_action`
-19. Save the plan process under `_history/plans/YYYY/`.
-20. Capture reusable research under `_research/` or promote repeatable assets into `_templates/`, `_tools/`, or `_skills/`.
-21. Run `coding-research-agent` with `complete-coding-research`.
-22. If the result is `more_research_required`, resolve the listed gaps before implementation.
-23. If the result is `ready_to_implement`, proceed with the implementation plan and later close with `work-evaluator-agent`.
+21. Save the plan process under `_history/plans/YYYY/`.
+22. Capture reusable research under `_research/` or promote repeatable assets into `_templates/`, `_tools/`, or `_skills/`.
+23. Run `coding-research-agent` with `complete-coding-research`.
+24. If the result is `more_research_required`, resolve the listed gaps before implementation.
+25. If the result is `ready_to_implement`, proceed with the implementation plan and later close with `work-evaluator-agent`.
 
 ## Rule
 
-Coding research is complete only when it records the source configs it used, inspects concrete code references, uses diverse source types, records any required installation review and installation audit path, produces a recommended next action, names validation steps, saves plan history, and answers the standard post-research questions.
+Coding research is complete only when it records the source configs it used, compares architecture options from credible architecture references, inspects concrete code references, uses diverse source types, records any required installation review and installation audit path, produces a recommended next action, names validation steps, saves plan history, and answers the standard post-research questions.

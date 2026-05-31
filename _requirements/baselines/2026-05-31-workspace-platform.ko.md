@@ -30,6 +30,7 @@
 | REQ-WS-012 | 프로젝트 전용 산출물은 해당 프로젝트에 두고, 공통 자산만 `_` 폴더로 승격해야 한다. | UR-2026-05-31-021 | must | baseline | workspace/projects | project boundary review | `_docs/project-boundary-policy.ko.md` |
 | REQ-WS-013 | 의미 있는 구현 작업은 spec-driven 방식처럼 스펙, 계획, 작업 목록, 검증, traceability 산출물을 거쳐야 한다. | UR-2026-05-31-037 | must | baseline | workspace/projects | spec target과 evaluator check 확인 | `_specs/`, `_docs/spec-driven-development-policy.ko.md` |
 | REQ-WS-014 | 커스텀 스킬 생성/수정은 명시적인 원본, trigger 예시, 검증, 전진 테스트, 개선 backlog, 평가 target을 남겨야 한다. | UR-2026-05-31-038 | must | baseline | workspace/agent-platform | skill validation과 evaluator check 확인 | `_skills/`, `_docs/skill-lifecycle-policy.ko.md`, `skill-lifecycle-agent` |
+| REQ-WS-015 | 소스 코드 작성 전에는 best-fit 아키텍처와 reference architecture를 조사하고 최소 두 개의 구조 후보와 선택 근거를 기록해야 한다. | UR-2026-05-31-039 | must | baseline | agent-platform/projects | `complete-coding-research` 결과와 architecture fields 확인 | `_docs/architecture-first-coding-policy.ko.md`, `coding-research-agent` |
 
 ## 변경 관리
 
@@ -37,6 +38,7 @@
 - 요구사항 검토는 `_requirements/reviews/`에 남긴다.
 - 구현 전에는 관련 요구사항 ID를 계획/작업 요약/평가 입력에 연결한다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
+- 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 스킬 작업이 있으면 `_skills/` 원본, 검증 결과, 개선 아이디어를 연결한다.
 - 구현 후에는 요청-결과 추적표와 요구사항의 관련 산출물을 갱신한다.
 

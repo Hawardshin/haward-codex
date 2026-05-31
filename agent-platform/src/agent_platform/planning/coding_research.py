@@ -67,6 +67,9 @@ class CodingResearchInput:
     reference_config_paths: tuple[str, ...] = ()
     code_reference_sources: tuple[str, ...] = ()
     code_reference_notes: tuple[str, ...] = ()
+    architecture_reference_sources: tuple[str, ...] = ()
+    architecture_options: tuple[str, ...] = ()
+    architecture_decision_notes: tuple[str, ...] = ()
     source_bundle_report: str = ""
     findings: tuple[str, ...] = ()
     options: tuple[str, ...] = ()
@@ -90,6 +93,9 @@ class CodingResearchInput:
             reference_config_paths=_tuple_of_strings(data.get("reference_config_paths", []), "reference_config_paths"),
             code_reference_sources=_tuple_of_strings(data.get("code_reference_sources", []), "code_reference_sources"),
             code_reference_notes=_tuple_of_strings(data.get("code_reference_notes", []), "code_reference_notes"),
+            architecture_reference_sources=_tuple_of_strings(data.get("architecture_reference_sources", []), "architecture_reference_sources"),
+            architecture_options=_tuple_of_strings(data.get("architecture_options", []), "architecture_options"),
+            architecture_decision_notes=_tuple_of_strings(data.get("architecture_decision_notes", []), "architecture_decision_notes"),
             source_bundle_report=_optional_string(data.get("source_bundle_report", ""), "source_bundle_report"),
             findings=_tuple_of_strings(data.get("findings", []), "findings"),
             options=_tuple_of_strings(data.get("options", []), "options"),
@@ -152,6 +158,14 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
         gaps.append("At least one code reference source must be a repository URL, source file path, or code search result.")
     if not research_input.code_reference_notes:
         gaps.append("Code reference notes are missing; record what structure, API pattern, error handling, tests, or implementation detail was learned from the referenced code.")
+    if not research_input.architecture_reference_sources:
+        gaps.append("Architecture reference sources are missing; inspect best-practice architecture frameworks, reference architectures, or well-structured source architectures before implementation.")
+    elif not any(_looks_like_architecture_reference(source) for source in research_input.architecture_reference_sources):
+        gaps.append("At least one architecture reference source must be an architecture framework, reference architecture, ADR, C4/arc42/SEI resource, or architecture-focused repository/source path.")
+    if len(research_input.architecture_options) < 2:
+        gaps.append("At least two architecture options or patterns must be compared before implementation.")
+    if not research_input.architecture_decision_notes:
+        gaps.append("Architecture decision notes are missing; record the selected architecture, rejected alternatives, boundaries, trade-offs, and validation impact.")
     if not research_input.findings:
         gaps.append("Findings are missing.")
     if not research_input.options:
@@ -202,6 +216,9 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
             "reference_config_paths_count": len(research_input.reference_config_paths),
             "code_reference_sources_count": len(research_input.code_reference_sources),
             "code_reference_notes_count": len(research_input.code_reference_notes),
+            "architecture_reference_sources_count": len(research_input.architecture_reference_sources),
+            "architecture_options_count": len(research_input.architecture_options),
+            "architecture_decision_notes_count": len(research_input.architecture_decision_notes),
             "findings_count": len(research_input.findings),
             "options_count": len(research_input.options),
             "post_research_answers_count": len([value for value in answers.values() if value.strip()]),
@@ -274,6 +291,27 @@ def _looks_like_code_reference(source: str) -> bool:
         return True
     path_without_fragment = normalized.split("#", 1)[0].split("?", 1)[0]
     return any(path_without_fragment.endswith(extension) for extension in code_extensions)
+
+
+def _looks_like_architecture_reference(source: str) -> bool:
+    normalized = source.strip().lower().replace("\\", "/")
+    architecture_markers = (
+        "architecture",
+        "wellarchitected",
+        "well-architected",
+        "arc42",
+        "c4model",
+        "c4 model",
+        "sei.cmu.edu",
+        "adr",
+        "decision-record",
+        "reference-architecture",
+        "reference_architecture",
+        "/docs/architecture",
+        "architecture.md",
+        "/architecture/",
+    )
+    return any(marker in normalized for marker in architecture_markers)
 
 
 def _uses_internal_knowledge(sources_checked: tuple[str, ...]) -> bool:

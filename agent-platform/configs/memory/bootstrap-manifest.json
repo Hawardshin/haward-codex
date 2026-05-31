@@ -23,6 +23,7 @@
       "The requirements management layer or requirements baseline contract changes.",
       "The spec-driven development layer or spec artifact contract changes.",
       "The skill lifecycle layer or skill validation contract changes.",
+      "The architecture-first coding layer or coding architecture comparison contract changes.",
       "The request-to-outcome trace layer or traceability contract changes.",
       "The web search record layer or prompt-level search contract changes.",
       "The installation registry or installation audit contract changes.",
@@ -130,6 +131,18 @@
         "custom skill source management",
         "skill validation and forward-test rules",
         "skill improvement and close-out evaluation targets"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "architecture_first_coding_policy",
+      "title": "Architecture-First Coding Policy",
+      "path": "_docs/architecture-first-coding-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "source-code work architecture reference rules",
+        "required architecture options and decision notes before implementation",
+        "coding research readiness criteria"
       ],
       "last_checked": "2026-05-31"
     },
@@ -339,6 +352,16 @@
       ]
     },
     {
+      "id": "architecture_research_must_shape_code",
+      "rule": "Source-code work must record architecture reference sources, at least two architecture options, and architecture decision notes before implementation.",
+      "reason": "The user explicitly requires best architecture research before source-code work, not only generic code references.",
+      "applies_to": [
+        "coding-research-agent",
+        "coding_research_profile",
+        "complete-coding-research"
+      ]
+    },
+    {
       "id": "web_search_records_must_stay_discoverable",
       "rule": "The web search record layer must remain a warm memory anchor and close-out target so future sessions can inspect prompt-level searches and public decision summaries.",
       "reason": "The user explicitly requires every prompt to start with web search and to leave a text record of the search process without storing raw internal reasoning.",
@@ -422,6 +445,7 @@
     "requirements_policy",
     "spec_driven_policy",
     "skill_lifecycle_policy",
+    "architecture_first_coding_policy",
     "request_trace_policy",
     "web_search_record_policy",
     "installation_registry"
@@ -446,6 +470,7 @@
     "requirements_policy",
     "spec_driven_policy",
     "skill_lifecycle_policy",
+    "architecture_first_coding_policy",
     "request_trace_policy",
     "web_search_record_policy",
     "installation_registry"
@@ -660,12 +685,20 @@
       "load_order": 32
     },
     {
+      "id": "architecture_first_coding_policy",
+      "path": "_docs/architecture-first-coding-policy.ko.md",
+      "tier": "warm",
+      "purpose": "Rules for finding, comparing, and recording best-fit architecture references before source-code work.",
+      "required": true,
+      "load_order": 33
+    },
+    {
       "id": "request_trace_policy",
       "path": "_history/request-traces/README.ko.md",
       "tier": "warm",
       "purpose": "Rules for connecting user requests to outcomes, artifacts, evaluations, and commits.",
       "required": true,
-      "load_order": 33
+      "load_order": 34
     },
     {
       "id": "web_search_record_policy",
@@ -673,7 +706,7 @@
       "tier": "warm",
       "purpose": "Prompt-level web search record rules and public search reasoning summary requirements.",
       "required": true,
-      "load_order": 34
+      "load_order": 35
     },
     {
       "id": "installation_registry",
@@ -681,7 +714,7 @@
       "tier": "warm",
       "purpose": "Installation audit registry for installs, upgrades, removals, global environment changes, and rollback tracking.",
       "required": true,
-      "load_order": 35
+      "load_order": 36
     },
     {
       "id": "daily_history",
@@ -689,7 +722,7 @@
       "tier": "warm",
       "purpose": "Current dated work log and compressed context.",
       "required": true,
-      "load_order": 36
+      "load_order": 37
     },
     {
       "id": "repository_map",

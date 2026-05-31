@@ -16,6 +16,7 @@
       "Coding research repeatedly misses a source category.",
       "A new research type needs different evidence coverage.",
       "The source registry changes source type IDs or reference IDs.",
+      "Source-code work starts without comparing architecture options.",
       "The coding-research-agent readiness checker changes required fields."
     ]
   },
@@ -92,6 +93,73 @@
         "code search as part of implementation-pattern research"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "azure_architecture_center",
+      "title": "Azure Architecture Center",
+      "url": "https://learn.microsoft.com/azure/architecture/",
+      "source_type": "official",
+      "used_for": [
+        "architecture styles",
+        "reference architectures",
+        "cloud application patterns"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "aws_well_architected_framework",
+      "title": "AWS Well-Architected Framework",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html",
+      "source_type": "official",
+      "used_for": [
+        "architecture quality attributes",
+        "trade-off review",
+        "best-practice architecture questions"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "google_cloud_architecture_framework",
+      "title": "Google Cloud Architecture Framework",
+      "url": "https://cloud.google.com/architecture/framework",
+      "source_type": "official",
+      "used_for": [
+        "system design principles",
+        "architecture quality attribute review"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "arc42_architecture_template",
+      "title": "arc42 architecture documentation template",
+      "url": "https://arc42.org/",
+      "source_type": "standard",
+      "used_for": [
+        "architecture decision documentation",
+        "context, building block, and quality requirement structure"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "c4_model",
+      "title": "C4 model",
+      "url": "https://c4model.info/",
+      "source_type": "standard",
+      "used_for": [
+        "system, container, component, and code-level architecture views"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "sei_views_and_beyond",
+      "title": "Views and Beyond: The SEI Approach for Architecture Documentation",
+      "url": "https://www.sei.cmu.edu/library/views-and-beyond-the-sei-approach-for-architecture-documentation/",
+      "source_type": "official",
+      "used_for": [
+        "architecture view-based documentation",
+        "stakeholder concern coverage"
+      ],
+      "last_checked": "2026-05-31"
     }
   ],
   "structure_rules": [
@@ -120,6 +188,17 @@
         "required_coverage.must_record_code_references",
         "code_reference_sources",
         "code_reference_notes"
+      ]
+    },
+    {
+      "id": "architecture_references_are_required",
+      "rule": "Before writing source code, compare best-practice architecture frameworks, reference architectures, and well-structured source architectures; record architecture_reference_sources, architecture_options, and architecture_decision_notes.",
+      "reason": "Source code should be shaped by proven architecture options and explicit trade-offs, not only local implementation convenience.",
+      "applies_to": [
+        "required_coverage.must_record_architecture_references",
+        "architecture_reference_sources",
+        "architecture_options",
+        "architecture_decision_notes"
       ]
     },
     {
@@ -155,6 +234,21 @@
     {
       "field": "code_reference_notes",
       "meaning": "What was learned from referenced code about structure, boundaries, API usage, tests, or implementation details.",
+      "required": true
+    },
+    {
+      "field": "architecture_reference_sources",
+      "meaning": "Architecture frameworks, reference architectures, ADRs, C4/arc42/SEI resources, or architecture-focused source paths inspected before implementation.",
+      "required": true
+    },
+    {
+      "field": "architecture_options",
+      "meaning": "At least two architecture patterns or structural options compared before coding.",
+      "required": true
+    },
+    {
+      "field": "architecture_decision_notes",
+      "meaning": "Selected architecture, rejected alternatives, boundaries, trade-offs, quality attributes, and validation impact.",
       "required": true
     },
     {
@@ -210,6 +304,9 @@
     "must_record_source_types": true,
     "must_record_code_references": true,
     "min_code_reference_sources": 1,
+    "must_record_architecture_references": true,
+    "min_architecture_reference_sources": 1,
+    "min_architecture_options": 2,
     "must_record_plan_history_targets": true
   },
   "default_reference_source_ids": [
@@ -221,14 +318,23 @@
     "zotero_item_types",
     "sourcemeta_registry_configuration",
     "public_code_repository_best_practices",
-    "codehow_code_search"
+    "codehow_code_search",
+    "azure_architecture_center",
+    "aws_well_architected_framework",
+    "google_cloud_architecture_framework",
+    "arc42_architecture_template",
+    "c4_model",
+    "sei_views_and_beyond"
   ],
   "source_selection_rules": [
     "Start with web search before local planning.",
     "Use at least one current official or primary source when external behavior matters.",
     "Use open-source source material when implementation behavior, maintenance, or license matters.",
+    "Before writing source code, look for best-fit architecture patterns, reference architectures, and well-structured source architectures.",
+    "Compare at least two architecture options and record why the selected structure fits the current scope, quality attributes, and project boundary.",
     "Inspect relevant open-source repositories, reference implementations, example applications, and tests before writing source code.",
     "Record code_reference_sources and code_reference_notes so implementation choices can be traced back to concrete code examples.",
+    "Record architecture_reference_sources, architecture_options, and architecture_decision_notes so source-code structure can be traced back to architecture evidence.",
     "Use papers, standards, or technical reports when methodology, risk, or security claims matter.",
     "Use technical blogs, analysis articles, community signals, social signals, and contrary examples to discover trade-offs and adoption signals.",
     "Treat popularity and social signals as discovery or adoption signals, not proof.",

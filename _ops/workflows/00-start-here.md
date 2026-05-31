@@ -20,23 +20,24 @@
 12. Read the target project README and relevant docs.
 13. If the request changes behavior, rules, structure, platform capability, or implementation criteria, run [_ops/workflows/35-requirements-lifecycle.md](35-requirements-lifecycle.md) and update requirements before implementation.
 14. If meaningful implementation follows, run [_ops/workflows/36-spec-driven-development.md](36-spec-driven-development.md) and update spec, plan, tasks, validation, and traceability artifacts before coding.
-15. If the work creates, updates, validates, installs, or improves a custom skill, run [_ops/workflows/37-skill-lifecycle.md](37-skill-lifecycle.md).
-16. If planning depends on external facts or current information, run [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md) with `agent-platform/configs/research/research-agent-profile.json`.
-17. If the work installs, upgrades, removes, or globally configures software, follow [_ops/workflows/58-installation-record.md](58-installation-record.md).
-18. Implement the smallest useful change inside the owning project or shared folder.
-19. Verify with tests, checks, or rendered artifacts.
-20. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).
-21. If the active conversation has become too long to resume safely from chat, run [_ops/workflows/45-context-archive.md](45-context-archive.md).
-22. Evaluate completed work against the initial instruction, active requirements, and active specs.
-23. Rework if the evaluator finds gaps, then evaluate again.
-24. Save or update the public web search record under `_history/web-searches/YYYY/`.
-25. Save or update the user request summary under `_history/user-requests/YYYY/`.
-26. Save or update the requirements baseline/change/review under `_requirements/` or the owning project's `docs/requirements/`.
-27. Save or update spec-driven artifacts under `_specs/` or the owning project's `specs/`.
-28. If skill work occurred, save or update `_skills/` source, validation, and improvement records.
-29. Save or update the request-to-outcome trace under `_history/request-traces/YYYY/`.
-30. Update `_history/work-summaries/`, detailed history, and maps.
-31. Commit and push immediately.
+15. If source-code implementation follows, run [_ops/workflows/56-coding-research.md](56-coding-research.md) and record code references plus architecture references, at least two architecture options, and decision notes.
+16. If the work creates, updates, validates, installs, or improves a custom skill, run [_ops/workflows/37-skill-lifecycle.md](37-skill-lifecycle.md).
+17. If planning depends on external facts or current information, run [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md) with `agent-platform/configs/research/research-agent-profile.json`.
+18. If the work installs, upgrades, removes, or globally configures software, follow [_ops/workflows/58-installation-record.md](58-installation-record.md).
+19. Implement the smallest useful change inside the owning project or shared folder.
+20. Verify with tests, checks, or rendered artifacts.
+21. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).
+22. If the active conversation has become too long to resume safely from chat, run [_ops/workflows/45-context-archive.md](45-context-archive.md).
+23. Evaluate completed work against the initial instruction, active requirements, and active specs.
+24. Rework if the evaluator finds gaps, then evaluate again.
+25. Save or update the public web search record under `_history/web-searches/YYYY/`.
+26. Save or update the user request summary under `_history/user-requests/YYYY/`.
+27. Save or update the requirements baseline/change/review under `_requirements/` or the owning project's `docs/requirements/`.
+28. Save or update spec-driven artifacts under `_specs/` or the owning project's `specs/`.
+29. If skill work occurred, save or update `_skills/` source, validation, and improvement records.
+30. Save or update the request-to-outcome trace under `_history/request-traces/YYYY/`.
+31. Update `_history/work-summaries/`, detailed history, and maps.
+32. Commit and push immediately.
 
 ## Rule
 

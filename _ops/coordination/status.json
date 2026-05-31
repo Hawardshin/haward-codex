@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-05-31",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -220,6 +220,25 @@
         "agent-platform/docs/skill-lifecycle-agent.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-05-31-skill-lifecycle.ko.md"
+    },
+    {
+      "id": "2026-05-31-architecture-first-coding",
+      "title": "Require architecture-first coding research",
+      "project": "agent-platform",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-05-31",
+      "updated_at": "2026-05-31",
+      "next_action": "No action. Future source-code work must record architecture references, options, and decision notes before implementation.",
+      "blockers": [],
+      "references": [
+        "_docs/architecture-first-coding-policy.ko.md",
+        "agent-platform/docs/coding-research-agent.ko.md",
+        "agent-platform/configs/research/coding-research-profile.json",
+        "_specs/workspace-platform/2026-05-31-architecture-first-coding/spec.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-05-31-architecture-first-coding.ko.md"
     }
   ]
 }

@@ -34,6 +34,18 @@
   "code_reference_notes": [
     "Record the repository structure, module boundaries, API usage pattern, tests, error handling, and implementation details worth adapting."
   ],
+  "architecture_reference_sources": [
+    "https://learn.microsoft.com/azure/architecture/",
+    "https://c4model.info/",
+    "https://github.com/example/project/blob/main/docs/architecture.md"
+  ],
+  "architecture_options": [
+    "Architecture or pattern A, with its fit and trade-off.",
+    "Architecture or pattern B, with its fit and trade-off."
+  ],
+  "architecture_decision_notes": [
+    "Record the selected architecture, rejected alternatives, module/service boundaries, quality attributes, and validation impact."
+  ],
   "source_bundle_report": "_tools/source-collector report path if a large source bundle was scored.",
   "findings": [
     "Evidence-backed finding that changes the implementation direction."

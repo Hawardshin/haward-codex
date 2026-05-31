@@ -18,6 +18,17 @@ def complete_code_references() -> dict[str, tuple[str, ...]]:
         "code_reference_notes": (
             "Inspected source layout, module boundaries, tests, and error handling patterns.",
         ),
+        "architecture_reference_sources": (
+            "https://learn.microsoft.com/azure/architecture/",
+            "https://github.com/example/project/blob/main/docs/architecture.md",
+        ),
+        "architecture_options": (
+            "Modular monolith with explicit package boundaries.",
+            "Distributed services split by capability.",
+        ),
+        "architecture_decision_notes": (
+            "Selected modular monolith for the current scope; rejected distributed services because coordination cost exceeds the benefit.",
+        ),
     }
 
 
@@ -239,6 +250,63 @@ class CodingResearchTests(unittest.TestCase):
             "Code reference sources are missing; inspect relevant open-source repositories, reference implementations, or well-structured code before implementation.",
             report["gaps"],
         )
+
+    def test_architecture_references_are_required(self) -> None:
+        references = complete_code_references()
+        references.pop("architecture_reference_sources")
+
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research a source-code architecture decision.",
+                coding_context="A Python service.",
+                research_types=("architecture", "implementation_pattern"),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://learn.microsoft.com/azure/architecture/", "https://github.com/example/project"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **references,
+                findings=("Architecture reference sources should shape module boundaries before coding.",),
+                options=("Use modular monolith", "Use distributed services"),
+                recommendation="Use modular monolith.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Reference architectures may not match every local constraint.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn(
+            "Architecture reference sources are missing; inspect best-practice architecture frameworks, reference architectures, or well-structured source architectures before implementation.",
+            report["gaps"],
+        )
+
+    def test_architecture_options_are_required(self) -> None:
+        references = complete_code_references()
+        references["architecture_options"] = ("Modular monolith",)
+
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research a source-code architecture decision.",
+                coding_context="A Python service.",
+                research_types=("architecture",),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://learn.microsoft.com/azure/architecture/", "https://github.com/example/project"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **references,
+                findings=("Architecture options need trade-off comparison.",),
+                options=("Use modular monolith", "Use distributed services"),
+                recommendation="Use modular monolith.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Reference architectures may not match every local constraint.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn("At least two architecture options or patterns must be compared before implementation.", report["gaps"])
 
     def test_documentation_url_is_not_enough_as_code_reference(self) -> None:
         report = complete_coding_research(

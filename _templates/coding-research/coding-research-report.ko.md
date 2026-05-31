@@ -34,6 +34,10 @@
 
 ## Code References
 
+- `architecture_reference_sources`:
+- `architecture_options`:
+- `architecture_decision_notes`:
+- 선택한 아키텍처와 제외한 대안:
 - `code_reference_sources`:
 - `code_reference_notes`:
 - 참고한 오픈소스 구조/구현/테스트에서 적용할 점:

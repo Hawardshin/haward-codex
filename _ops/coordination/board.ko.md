@@ -2,7 +2,7 @@
 
 - 생성 위치: `_ops/coordination/status.json`
 - 마지막 갱신: `2026-05-31`
-- 요약: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.
+- 요약: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.
 
 ## 에이전트
 
@@ -25,6 +25,7 @@
 | 2026-05-31-requirements-management | Add requirements management lifecycle | _requirements | completed | codex-primary | No action. Future meaningful work must update requirements targets before implementation and close-out. |
 | 2026-05-31-spec-driven-development | Add spec-driven operating structure | _specs | completed | codex-primary | No action. Future meaningful implementation work must update spec targets before implementation and close-out. |
 | 2026-05-31-skill-lifecycle | Make skill creation and validation explicit | _skills | completed | codex-primary | No action. Future skill work must update skill source, validation targets, forward-test scenarios, and improvement ideas before close-out. |
+| 2026-05-31-architecture-first-coding | Require architecture-first coding research | agent-platform | completed | codex-primary | No action. Future source-code work must record architecture references, options, and decision notes before implementation. |
 
 ## 차단 요소
 

@@ -9,6 +9,8 @@
 - 조사 결과를 바로 구현으로 넘기기 전에 표준 종료 질문에 답한다.
 - 다양한 출처 유형을 명시한다. 최소 3개 이상의 `other`가 아닌 source type이 필요하며, 권위 출처와 실무/채택 신호를 함께 포함한다.
 - 어떤 출처 설정을 참고했는지 `reference_config_paths`로 기록한다.
+- 구현 전 best-fit 아키텍처 패턴, reference architecture, C4/arc42/SEI/ADR 같은 아키텍처 문서화 기준, 잘 구조화된 프로젝트 architecture 예시를 확인한다.
+- 최소 두 개의 아키텍처 옵션을 비교하고 `architecture_reference_sources`, `architecture_options`, `architecture_decision_notes`에 기록한다.
 - 구현 전 관련 오픈소스 저장소, 참고 구현, 잘 작성된 코드 구조와 테스트를 조사하고 `code_reference_sources`, `code_reference_notes`에 기록한다.
 - 설치가 필요한 오픈소스라면 설치 범위, 설치 명령, dependency 기록 파일, 보안/라이선스 검토, 검증 방법, rollback 계획을 기록한다.
 - 내부 지식 베이스를 근거로 쓰면 `knowledge-skeptic-agent`로 검증한다.
@@ -41,8 +43,13 @@
 
 구현으로 넘어가기 전 다음을 기록한다.
 
+- `architecture_reference_sources`: well-architected framework, reference architecture, C4/arc42/SEI 자료, ADR, 프로젝트 `docs/architecture` 같은 아키텍처 근거
+- `architecture_options`: 비교한 아키텍처/패턴 후보 최소 2개
+- `architecture_decision_notes`: 선택한 구조, 제외한 대안, 모듈/서비스 경계, 품질 속성, trade-off, 검증 영향
 - `code_reference_sources`: 참고한 GitHub/GitLab 저장소, source tree, source file, test file, example app, code search result
 - `code_reference_notes`: 해당 코드에서 배운 구조, 모듈 경계, API 사용 패턴, 예외 처리, 테스트 구성, 재사용하지 않을 부분
+
+아키텍처 레퍼런스는 그대로 복제하는 설계도가 아니다. 현재 프로젝트 범위, 데이터 흐름, 변경 가능성, 보안, 운영 복잡도, 테스트 가능성에 맞는지 비교한 뒤 선택한다.
 
 오픈소스 코드는 그대로 복사하지 않는다. 라이선스, 유지보수 상태, 프로젝트 적합성, 보안 위험, 테스트 품질을 확인한 뒤 로컬 설계에 맞게 적용한다.
 

@@ -12,6 +12,7 @@
 | 에이전트 계획 | [코딩 조사 에이전트](topics/agent-planning/2026-05-31-coding-research-agent.ko.md) |
 | 에이전트 계획 | [참고 출처 설정 파일](topics/agent-planning/2026-05-31-reference-source-config.ko.md) |
 | 에이전트 계획 | [코드 참고 조사](topics/agent-planning/2026-05-31-code-reference-research.ko.md) |
+| 에이전트 계획 | [아키텍처 우선 코딩](topics/agent-planning/2026-05-31-architecture-first-coding.ko.md) |
 | 에이전트 계획 | [Perplexity식 핵심 조사 에이전트 구조](topics/agent-planning/2026-05-31-perplexity-style-research-agent.ko.md) |
 | 에이전트 계획 | [오픈소스 설치 정책](topics/agent-planning/2026-05-31-open-source-installation-policy.ko.md) |
 | 에이전트 신뢰성 | [할루시네이션 방지 운영 레퍼런스](topics/agent-reliability/2026-05-31-hallucination-prevention.ko.md) |

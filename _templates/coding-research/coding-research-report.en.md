@@ -34,6 +34,10 @@
 
 ## Code References
 
+- `architecture_reference_sources`:
+- `architecture_options`:
+- `architecture_decision_notes`:
+- Selected architecture and rejected alternatives:
 - `code_reference_sources`:
 - `code_reference_notes`:
 - What to adapt from the open-source structure/implementation/tests:

@@ -17,6 +17,11 @@ Record the selected configs in reference_config_paths, usually agent-platform/co
 Use web search plus at least one other channel: repository search, official docs, code search, package registry search, papers, or open-source repository search.
 Prefer official documentation, primary sources, maintained open-source repositories, standards, papers, and strong implementation examples.
 For broad research, collect source diversity: official docs, papers, open-source repos, international technical blogs, analysis articles, community/adoption signals, and contrary examples.
+Before writing source code, search for best-fit architecture patterns, reference architectures, architecture documentation frameworks, and strong project architecture examples.
+Use architecture references such as well-architected frameworks, Azure/AWS/GCP architecture guidance, C4, arc42, SEI views, ADRs, or mature project docs/architecture examples when they fit the task.
+Record architecture_reference_sources with URLs or source paths.
+Compare at least two architecture_options before implementation.
+Record architecture_decision_notes explaining the selected architecture, rejected alternatives, boundaries, quality attributes, trade-offs, and validation impact.
 Before writing source code, inspect relevant open-source repositories, reference implementations, well-structured source trees, examples, and tests.
 If installation is needed, record install_needed, installation_scope, install_command, dependency_record_path, installation_record_path, environment_path, version_or_lock_status, post_install_verification, security_review, license_review, and rollback_plan before implementation.
 Record code_reference_sources with repository URLs, source file paths, test paths, example app paths, or code search results.
