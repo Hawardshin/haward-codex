@@ -29,6 +29,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Update the relevant history log before committing when the work changes project direction, repository rules, or meaningful artifacts.
 - Before final close-out of meaningful work, evaluate the result against the user's initial instruction and rework any real gaps before committing or final response.
 - Before evaluation, summarize completed work and check prior internal work or strong external references relevant to the task.
+- Save the final work evaluation as a file under `_history/evaluations/YYYY/` before committing meaningful work.
 
 ## Platformization Rules
 
@@ -68,6 +69,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - If the evaluator identifies missing requirements or mismatches, turn them into follow-up actions and complete them before final close-out.
 - Re-run relevant tests or checks after rework.
 - Non-blocking improvements can be recorded in history or project docs, but blocking gaps must be fixed.
+- Save evaluation reports as `_history/evaluations/YYYY/YYYY-MM-DD-<slug>.ko.md`; add an English companion when the report is important durable context.
 - The Python evaluator entry point is `PYTHONPATH=src python3 -m agent_platform.cli evaluate-work <input.json>` from `agent-platform/`.
 
 ## Capability Creation Rules

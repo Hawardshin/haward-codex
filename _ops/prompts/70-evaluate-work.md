@@ -14,6 +14,7 @@ Compare the result against strong references and identify what is weaker or miss
 Separate mismatches, missing requirements, and improvement opportunities.
 If a mismatch or omission exists, return rework_required and create follow-up actions.
 Reflect follow-up actions back into the work, then repeat the evaluation after completion.
+Save the final evaluation report as a Markdown file under _history/evaluations/YYYY/.
 Return ready_to_close only when there are no blocking gaps.
 ```
 

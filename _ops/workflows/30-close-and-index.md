@@ -11,9 +11,10 @@
 3. Review generated `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md`.
 4. Summarize completed work and checked references.
 5. Run the work evaluation loop from [_ops/workflows/40-evaluate-and-rework.md](40-evaluate-and-rework.md).
-6. Update `_history/YYYY/YYYY-MM-DD.md`.
-7. Commit the coherent change set.
-8. Push to `origin/main`.
+6. Confirm the evaluation report file exists under `_history/evaluations/YYYY/`.
+7. Update `_history/YYYY/YYYY-MM-DD.md`.
+8. Commit the coherent change set.
+9. Push to `origin/main`.
 
 ## Rule
 

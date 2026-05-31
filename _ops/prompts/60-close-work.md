@@ -12,6 +12,7 @@ Summarize the completed work and check prior related work or strong references.
 Use work-evaluator-agent to compare the initial instruction with the result.
 If there are gaps or improvements that must be applied, convert them into follow-up actions and rework.
 After rework, pass the same evaluation again.
+Save the final evaluation as a Markdown file under _history/evaluations/YYYY/.
 Commit the coherent change set and push to origin/main immediately.
 In the final response, report the change summary, verification, commit hash, and push state concisely.
 ```

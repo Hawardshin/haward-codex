@@ -18,4 +18,6 @@ Each daily file should record:
 - verification performed
 - commit hash, after commit
 
+Detailed work evaluation reports live under `_history/evaluations/YYYY/`.
+
 This folder is not a replacement for git history. It explains why work happened and what context future sessions need.

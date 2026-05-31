@@ -108,3 +108,4 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - The evaluator should consider relevant prior internal work, official docs, mature open-source projects, or other strong references.
 - If gaps are found, they become follow-up actions and the work returns to implementation.
 - The default evaluator is `work-evaluator-agent` in `agent-platform/configs/agents/`.
+- Final evaluation reports are stored under `_history/evaluations/YYYY/`.

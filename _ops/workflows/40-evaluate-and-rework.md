@@ -14,7 +14,8 @@
 6. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
 7. Complete the follow-up action.
 8. Evaluate again.
-9. Continue close-out only when there are no blocking gaps.
+9. Save the final evaluation report under `_history/evaluations/YYYY/`.
+10. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
 
 ## Python Command
 
@@ -29,3 +30,5 @@ PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/wo
 Do not treat evaluation as a final report only. If the evaluator finds a real gap, reflect it into the work and run the relevant checks again.
 
 Reference research is part of evaluation. If no useful reference exists, record where you checked and why it did not apply.
+
+The final evaluation must not exist only in chat output. Save it as a Markdown file before commit.
