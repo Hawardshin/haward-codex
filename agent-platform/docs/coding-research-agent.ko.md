@@ -7,6 +7,7 @@
 - 모든 코딩 조사도 웹 검색으로 시작한다.
 - 웹 검색 외에 저장소 검색, 공식 문서, 코드 검색, package registry, 논문, 오픈소스 repo 중 하나 이상을 함께 확인한다.
 - 조사 결과를 바로 구현으로 넘기기 전에 표준 종료 질문에 답한다.
+- 다양한 출처 유형을 명시한다. 최소 3개 이상의 `other`가 아닌 source type이 필요하며, 권위 출처와 실무/채택 신호를 함께 포함한다.
 - 내부 지식 베이스를 근거로 쓰면 `knowledge-skeptic-agent`로 검증한다.
 - 계획 과정은 `_history/plans/YYYY/`에 남기고, 재사용 가능한 지식은 `_research/`, `_templates/`, `_tools/` 중 알맞은 곳에 기록한다.
 
@@ -22,6 +23,16 @@
 - `testing`: 테스트 전략과 검증 경로
 - `open_source`: 오픈소스 후보 평가
 - `implementation_pattern`: 구현 패턴과 사례 조사
+
+## 출처 유형 규칙
+
+`complete-coding-research`는 `source_types`를 확인한다. 코딩 조사가 `ready_to_implement`가 되려면 다음 조건이 필요하다.
+
+- `source_types`를 비워두지 않는다.
+- `official`, `paper`, `standard`, `open_source`, `tech_blog`, `analysis`, `community`, `social`, `contrary`, `internal` 등 다양한 유형을 기록한다.
+- `other`를 제외하고 최소 3개 이상의 서로 다른 source type을 사용한다.
+- `official`, `paper`, `standard`, `open_source` 중 1개 이상의 권위 출처를 포함한다.
+- `open_source`, `tech_blog`, `analysis`, `community`, `social`, `news`, `contrary` 중 1개 이상의 실무/채택/반대 신호 출처를 포함한다.
 
 ## 조사 완료 질문
 

@@ -7,6 +7,7 @@
 - Start every coding research task with web search.
 - Pair web search with at least one other channel: repository search, official docs, code search, package registry, papers, or open-source repositories.
 - Answer standard close-out questions before implementation starts.
+- Record diverse source types. At least three non-`other` source types are required, including authoritative evidence and practical or adoption signals.
 - Validate internal knowledge-base references with `knowledge-skeptic-agent`.
 - Save planning history under `_history/plans/YYYY/` and capture reusable knowledge under `_research/`, `_templates/`, or `_tools/` when appropriate.
 
@@ -22,6 +23,16 @@
 - `testing`: testing strategy and validation paths
 - `open_source`: open-source candidate evaluation
 - `implementation_pattern`: implementation patterns and examples
+
+## Source Type Rules
+
+`complete-coding-research` checks `source_types`. Coding research can return `ready_to_implement` only when these conditions are met.
+
+- Do not leave `source_types` empty.
+- Record diverse types such as `official`, `paper`, `standard`, `open_source`, `tech_blog`, `analysis`, `community`, `social`, `contrary`, and `internal`.
+- Use at least three distinct non-`other` source types.
+- Include at least one authoritative type: `official`, `paper`, `standard`, or `open_source`.
+- Include at least one practical, adoption, or contrary signal type: `open_source`, `tech_blog`, `analysis`, `community`, `social`, `news`, or `contrary`.
 
 ## Post-Research Questions
 

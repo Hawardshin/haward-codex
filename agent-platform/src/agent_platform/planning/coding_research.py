@@ -21,6 +21,25 @@ ALLOWED_RESEARCH_TYPES = {
     "testing",
 }
 
+ALLOWED_SOURCE_TYPES = {
+    "analysis",
+    "community",
+    "contrary",
+    "internal",
+    "news",
+    "official",
+    "open_source",
+    "other",
+    "paper",
+    "social",
+    "standard",
+    "tech_blog",
+}
+
+AUTHORITATIVE_SOURCE_TYPES = {"official", "paper", "standard", "open_source"}
+PRACTICAL_SOURCE_TYPES = {"analysis", "community", "contrary", "news", "open_source", "social", "tech_blog"}
+MIN_DISTINCT_SOURCE_TYPES = 3
+
 REQUIRED_POST_RESEARCH_QUESTIONS = {
     "what_was_verified": "What exactly was verified?",
     "best_option": "What is the best option now?",
@@ -43,6 +62,7 @@ class CodingResearchInput:
     research_types: tuple[str, ...] = ()
     search_channels: tuple[str, ...] = ()
     sources_checked: tuple[str, ...] = ()
+    source_types: tuple[str, ...] = ()
     source_bundle_report: str = ""
     findings: tuple[str, ...] = ()
     options: tuple[str, ...] = ()
@@ -62,6 +82,7 @@ class CodingResearchInput:
             research_types=_tuple_of_strings(data.get("research_types", []), "research_types"),
             search_channels=_tuple_of_strings(data.get("search_channels", []), "search_channels"),
             sources_checked=_tuple_of_strings(data.get("sources_checked", []), "sources_checked"),
+            source_types=_tuple_of_strings(data.get("source_types", []), "source_types"),
             source_bundle_report=_optional_string(data.get("source_bundle_report", ""), "source_bundle_report"),
             findings=_tuple_of_strings(data.get("findings", []), "findings"),
             options=_tuple_of_strings(data.get("options", []), "options"),
@@ -99,6 +120,19 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
         gaps.append("Web search channel is missing.")
     if not research_input.sources_checked:
         gaps.append("Sources checked are missing.")
+    normalized_source_types = _normalized_source_types(research_input.source_types)
+    if not normalized_source_types:
+        gaps.append("Source types are missing; record diverse source types such as official, paper, open_source, tech_blog, community, social, or contrary.")
+    unknown_source_types = sorted(normalized_source_types - ALLOWED_SOURCE_TYPES)
+    if unknown_source_types:
+        gaps.append(f"Unknown source types: {', '.join(unknown_source_types)}.")
+    evidence_source_types = normalized_source_types - {"other"}
+    if normalized_source_types and len(evidence_source_types) < MIN_DISTINCT_SOURCE_TYPES:
+        gaps.append(f"Use at least {MIN_DISTINCT_SOURCE_TYPES} distinct non-other source types for coding research.")
+    if normalized_source_types and not evidence_source_types.intersection(AUTHORITATIVE_SOURCE_TYPES):
+        gaps.append("At least one authoritative source type is required: official, paper, standard, or open_source.")
+    if normalized_source_types and not evidence_source_types.intersection(PRACTICAL_SOURCE_TYPES):
+        gaps.append("At least one practical or adoption source type is required: open_source, tech_blog, analysis, community, social, news, or contrary.")
     if not research_input.findings:
         gaps.append("Findings are missing.")
     if not research_input.options:
@@ -134,11 +168,14 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
         "requires_more_research": bool(gaps),
         "principle": "Coding research must be search-backed, source-aware, skeptical, and closed with reusable answers before implementation.",
         "allowed_research_types": sorted(ALLOWED_RESEARCH_TYPES),
+        "allowed_source_types": sorted(ALLOWED_SOURCE_TYPES),
         "required_post_research_questions": REQUIRED_POST_RESEARCH_QUESTIONS,
         "checks": {
             "research_types_count": len(research_input.research_types),
             "search_channels_count": len(research_input.search_channels),
             "sources_checked_count": len(research_input.sources_checked),
+            "source_types_count": len(evidence_source_types),
+            "source_type_counts": _source_type_counts(research_input.source_types),
             "findings_count": len(research_input.findings),
             "options_count": len(research_input.options),
             "post_research_answers_count": len([value for value in answers.values() if value.strip()]),
@@ -156,6 +193,19 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
 
 def _has_web_channel(search_channels: tuple[str, ...]) -> bool:
     return any("web" in channel.lower() or "internet" in channel.lower() for channel in search_channels)
+
+
+def _normalized_source_types(source_types: tuple[str, ...]) -> set[str]:
+    return {source_type.strip().lower() for source_type in source_types if source_type.strip()}
+
+
+def _source_type_counts(source_types: tuple[str, ...]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for source_type in source_types:
+        normalized = source_type.strip().lower()
+        if normalized:
+            counts[normalized] = counts.get(normalized, 0) + 1
+    return counts
 
 
 def _uses_internal_knowledge(sources_checked: tuple[str, ...]) -> bool:

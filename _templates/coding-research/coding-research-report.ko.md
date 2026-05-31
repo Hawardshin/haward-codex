@@ -22,6 +22,12 @@
 | --- | --- | --- | --- |
 |  |  |  |  |
 
+## 출처 유형 커버리지
+
+- 최소 3개 이상의 `other`가 아닌 source type:
+- 권위 출처 포함 여부 (`official`, `paper`, `standard`, `open_source`):
+- 실무/채택/반대 신호 포함 여부 (`open_source`, `tech_blog`, `analysis`, `community`, `social`, `news`, `contrary`):
+
 ## 주요 발견
 
 -

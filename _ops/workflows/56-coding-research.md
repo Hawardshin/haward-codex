@@ -11,11 +11,14 @@
 3. Choose one or more research types: `api_docs`, `library_selection`, `bug_root_cause`, `architecture`, `performance`, `security`, `migration`, `testing`, `open_source`, `implementation_pattern`.
 4. Search the web for current external evidence.
 5. Search at least one additional channel: repository docs, official docs, code, package registries, papers, or open-source repos.
-6. For broad or repeated research, apply [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md) and use `_tools/source-collector/` when useful.
-7. Separate factual evidence from adoption signals such as stars, likes, comments, Hacker News points, Reddit activity, or LinkedIn reactions.
-8. Validate any internal knowledge-base references with `knowledge-skeptic-agent`.
-9. Synthesize findings into options, trade-offs, and a recommendation.
-10. Answer all post-research questions:
+6. Record `source_types` explicitly and use at least three distinct non-`other` source types.
+7. Include at least one authoritative source type: `official`, `paper`, `standard`, or `open_source`.
+8. Include at least one practical/adoption/contrary source type: `open_source`, `tech_blog`, `analysis`, `community`, `social`, `news`, or `contrary`.
+9. For broad or repeated research, apply [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md) and use `_tools/source-collector/` when useful.
+10. Separate factual evidence from adoption signals such as stars, likes, comments, Hacker News points, Reddit activity, or LinkedIn reactions.
+11. Validate any internal knowledge-base references with `knowledge-skeptic-agent`.
+12. Synthesize findings into options, trade-offs, and a recommendation.
+13. Answer all post-research questions:
     - `what_was_verified`
     - `best_option`
     - `why_this_option`
@@ -25,12 +28,12 @@
     - `validation_plan`
     - `reusable_knowledge`
     - `next_action`
-11. Save the plan process under `_history/plans/YYYY/`.
-12. Capture reusable research under `_research/` or promote repeatable assets into `_templates/`, `_tools/`, or `_skills/`.
-13. Run `coding-research-agent` with `complete-coding-research`.
-14. If the result is `more_research_required`, resolve the listed gaps before implementation.
-15. If the result is `ready_to_implement`, proceed with the implementation plan and later close with `work-evaluator-agent`.
+14. Save the plan process under `_history/plans/YYYY/`.
+15. Capture reusable research under `_research/` or promote repeatable assets into `_templates/`, `_tools/`, or `_skills/`.
+16. Run `coding-research-agent` with `complete-coding-research`.
+17. If the result is `more_research_required`, resolve the listed gaps before implementation.
+18. If the result is `ready_to_implement`, proceed with the implementation plan and later close with `work-evaluator-agent`.
 
 ## Rule
 
-Coding research is complete only when it produces a recommended next action, named validation steps, saved plan history, and answers to the standard post-research questions.
+Coding research is complete only when it uses diverse source types, produces a recommended next action, names validation steps, saves plan history, and answers the standard post-research questions.

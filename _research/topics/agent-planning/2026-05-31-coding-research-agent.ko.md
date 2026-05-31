@@ -16,6 +16,8 @@
 | ADR GitHub Organization: https://adr.github.io/ | 아키텍처 결정 기록 | ADR은 결정, 근거, trade-off, consequences를 남기는 decision log다. | 조사 완료 질문에 `why_this_option`, `alternatives_rejected`, `implementation_impact`를 포함했다. |
 | GitHub Docs, Configuring issue templates: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository | 구조화된 입력 템플릿 | Issue forms는 필요한 정보를 구조화된 필드로 받도록 돕는다. | 코딩 조사 입력을 자유 메모가 아니라 `post_research_answers` 같은 schema로 강제했다. |
 | GitHub Docs, Syntax for issue forms: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms | 구조화된 form schema | 입력 타입, validation, labels 등을 YAML로 정의한다. | `complete-coding-research` CLI도 필수 질문 누락을 gap으로 판정한다. |
+| Guidelines for including grey literature and conducting multivocal literature reviews in software engineering: https://doi.org/10.1016/j.infsof.2018.09.006 | 소프트웨어공학 multivocal review | 소프트웨어공학에서는 공식 학술 문헌과 블로그, white paper 같은 grey literature를 함께 다루는 MLR 방식이 쓰인다. | 코딩 조사에서 `source_types`를 명시하고 여러 유형을 강제하는 근거로 삼았다. |
+| CMU SEI Digital Library: https://www.sei.cmu.edu/library/ | 소프트웨어공학 연구/실무 자료 라이브러리 | technical reports, white papers, presentations 등 여러 publication type을 제공한다. | 코딩 조사에서 논문/보고서/백서/실무 자료처럼 다양한 출처 유형을 함께 보도록 했다. |
 | 내부 정책: `_docs/source-collection-policy.ko.md` | 저장소 정책 | 공식/논문/오픈소스/기술 블로그/커뮤니티/소셜/반대 사례를 폭넓게 수집한다. | 코딩 조사도 source bundle과 adoption signal을 분리한다. |
 | 내부 정책: `_docs/search-insight-planning-policy.ko.md` | 저장소 정책 | 검색 결과를 계획에 영향을 주는 인사이트로 변환하고 계획 히스토리를 남긴다. | 코딩 조사도 `_history/plans/YYYY/`에 계획 과정을 저장한다. |
 
@@ -24,11 +26,13 @@
 - 기술 조사는 “찾았다”에서 끝나지 않고 선택지의 성숙도, 근거, 반대 신호, 적용 맥락을 분리해야 한다.
 - ADR의 결정 기록 패턴은 코딩 조사 종료 질문에 잘 맞는다. 특히 선택 이유와 제외한 대안을 남기면 나중에 같은 조사를 반복하지 않는다.
 - GitHub issue forms처럼 구조화된 필드와 validation을 두면 조사 완료 기준을 사람이 기억하지 않아도 된다.
+- 소프트웨어공학의 MLR 관점은 학술/공식 자료와 grey literature를 함께 보는 방식이므로, 코딩 조사도 `source_types`를 명시하고 다양성을 readiness 조건으로 삼아야 한다.
 - 내부 지식 베이스는 편리하지만 최신성과 정확성을 보장하지 않으므로 `knowledge-skeptic-agent` 결과를 함께 저장해야 한다.
 
 ## 적용 결과
 
 - `coding-research-agent`는 `complete-coding-research` CLI로 구현했다.
 - 표준 종료 질문 9개를 필수로 만들었다.
+- `source_types`를 필수화하고, 최소 3개 이상의 서로 다른 `other`가 아닌 출처 유형을 요구하도록 강화했다.
 - 코딩 조사 보고서 템플릿을 한국어/영어로 추가했다.
 - 운영 프롬프트와 워크플로를 `_ops/`에 연결했다.

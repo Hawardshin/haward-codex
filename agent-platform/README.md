@@ -78,6 +78,7 @@ PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/pl
 - `configs/open-source/`: dependency candidate scoring inputs
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`
 - coding research should pass `coding-research-agent` before implementation when investigation is needed
+- coding research readiness requires diverse `source_types`, including at least three distinct non-`other` types
 - factual final outputs should pass `hallucination-guard-agent` when claims need grounding
 - `docs/python-agent-structure.md`: implementation structure
 - `docs/open-source-integration.md`: dependency evaluation and adapter policy

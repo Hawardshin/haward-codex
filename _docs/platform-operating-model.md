@@ -21,7 +21,7 @@
 8. Prefer Python for agent implementation unless another runtime is clearly better.
 9. Evaluate mature open-source options before building core infrastructure from scratch.
 10. For planning that depends on external facts, use web search and at least one other search channel to derive insights before execution.
-11. For coding research, use `coding-research-agent` to answer standard post-research questions before implementation.
+11. For coding research, use `coding-research-agent` to answer standard post-research questions and verify diverse source types before implementation.
 12. Save important planning processes under `_history/plans/YYYY/`.
 13. Promote repeated work into a template, tool, skill, prompt, or workflow.
 14. Record important context in `_history/`.

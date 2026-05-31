@@ -16,6 +16,12 @@
     "https://github.com/example/project",
     "_docs/example-policy.ko.md"
   ],
+  "source_types": [
+    "official",
+    "open_source",
+    "tech_blog",
+    "community"
+  ],
   "source_bundle_report": "_tools/source-collector report path if a large source bundle was scored.",
   "findings": [
     "Evidence-backed finding that changes the implementation direction."

@@ -22,6 +22,12 @@
 | --- | --- | --- | --- |
 |  |  |  |  |
 
+## Source Type Coverage
+
+- At least three distinct non-`other` source types:
+- Authoritative source included (`official`, `paper`, `standard`, `open_source`):
+- Practical/adoption/contrary signal included (`open_source`, `tech_blog`, `analysis`, `community`, `social`, `news`, `contrary`):
+
 ## Key Findings
 
 -
