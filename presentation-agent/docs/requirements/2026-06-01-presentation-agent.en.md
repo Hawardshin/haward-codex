@@ -33,8 +33,18 @@ The presentation agent researches strong presentation design, PPT/HTML reference
 - Keep presentation-agent specific materials under `presentation-agent/`.
 - Keep reusable skills under `_skills/`, while project catalogs and conversion outputs stay inside the project.
 
+### REQ-PA-006 Script-Collaborative HTML Decks
+
+- The presentation script agent creates `deck-spec` files with slide-level `script_beat`, `speaker_notes`, and `evidence_sources`.
+- The HTML deck renderer turns a `deck-spec` into a 16:9 presentation format.
+- The resulting HTML includes presenter notes, keyboard navigation, progress, and print-friendly structure.
+
+### REQ-PA-007 Reference-Based Design Application
+
+- HTML decks may use structural patterns from the reference catalog and presentation theory, but must not copy source designs.
+- Generated decks should run from local CSS and verified local data without remote images or unknown-license assets.
+
 ## Non-Scope
 
 - This baseline does not bulk-download presentation files.
 - This baseline does not install a pixel-faithful PPTX rendering engine.
-

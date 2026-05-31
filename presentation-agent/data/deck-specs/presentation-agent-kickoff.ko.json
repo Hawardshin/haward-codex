@@ -1,0 +1,164 @@
+{
+  "schema_version": "2026-06-01",
+  "title": "발표 에이전트: 레퍼런스에서 스크립트까지",
+  "language": "ko",
+  "theme": {
+    "name": "reference-studio",
+    "palette": {
+      "background": "#f6f4ef",
+      "surface": "#ffffff",
+      "ink": "#202124",
+      "muted": "#62605a",
+      "accent": "#0f766e",
+      "warm": "#c2410c",
+      "cool": "#2563eb",
+      "line": "#d8d5cc"
+    },
+    "typography": {
+      "display": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+      "body": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+    }
+  },
+  "script_collaboration": {
+    "script_owner": "presentation-script-agent",
+    "workflow": [
+      "reference_catalog_review",
+      "audience_and_goal_definition",
+      "script_beats",
+      "slide_structure",
+      "speaker_notes",
+      "html_render_validation"
+    ],
+    "handoff_contract": {
+      "script_agent_provides": ["script_beat", "speaker_notes", "slide_goal", "evidence_sources"],
+      "deck_renderer_provides": ["16:9 slide layout", "keyboard navigation", "presenter notes panel", "print-friendly HTML"]
+    }
+  },
+  "reference_sources": [
+    "framework-revealjs-official",
+    "framework-slidev-official",
+    "framework-marp-official",
+    "theory-duarte-resources",
+    "theory-tedx-speaker-guide",
+    "templates-pitch",
+    "assets-lucide"
+  ],
+  "slides": [
+    {
+      "id": "opening",
+      "layout": "hero",
+      "kicker": "Presentation Agent",
+      "title": "발표는 자료가 아니라 흐름이다",
+      "subtitle": "레퍼런스, 근거, 스크립트, HTML 덱이 하나의 제작 루프로 이어져야 한다.",
+      "script_beat": "hook",
+      "speaker_notes": [
+        "오늘의 핵심은 예쁜 슬라이드를 바로 베끼는 것이 아니라, 좋은 레퍼런스를 구조화해서 발표 흐름으로 바꾸는 것입니다.",
+        "이 HTML 덱은 그 첫 번째 작동 예시입니다."
+      ],
+      "evidence_sources": ["theory-duarte-resources", "theory-tedx-speaker-guide"]
+    },
+    {
+      "id": "reference-pool",
+      "layout": "evidence",
+      "kicker": "Reference First",
+      "title": "먼저 많이 보고, 엄격하게 걸러낸다",
+      "body": [
+        "HTML 프레임워크는 실제 산출 형식 후보로 본다.",
+        "PPT 템플릿은 라이선스 확인 전까지 메타데이터로만 둔다.",
+        "디자인 갤러리는 시각 영감 신호로 쓰고, 사용 허가로 해석하지 않는다."
+      ],
+      "visual": {
+        "type": "metric",
+        "value": "62",
+        "label": "현재 starter catalog에 들어간 출처 레코드"
+      },
+      "script_beat": "evidence",
+      "speaker_notes": [
+        "이미 레퍼런스 카탈로그에는 62개 출처가 들어가 있습니다.",
+        "하지만 원본 저장은 별도 문제입니다. 그래서 라이선스 게이트가 먼저입니다."
+      ],
+      "evidence_sources": ["framework-revealjs-official", "framework-slidev-official", "templates-pitch"]
+    },
+    {
+      "id": "script-collaboration",
+      "layout": "process",
+      "kicker": "Script Collaboration",
+      "title": "스크립트가 슬라이드를 끌고 간다",
+      "body": [
+        "스크립트 에이전트는 발표 목표와 청중을 먼저 정리한다.",
+        "각 슬라이드는 하나의 script beat를 가진다.",
+        "발표자 노트는 화면 문구보다 구체적인 말의 순서가 된다."
+      ],
+      "visual": {
+        "type": "steps",
+        "steps": ["목표", "흐름", "슬라이드", "노트", "검증"]
+      },
+      "script_beat": "method",
+      "speaker_notes": [
+        "발표 자료가 흔히 실패하는 이유는 화면을 먼저 만들기 때문입니다.",
+        "여기서는 script beat가 먼저 있고, 슬라이드는 그 beat를 보이게 만드는 역할을 합니다."
+      ],
+      "evidence_sources": ["theory-duarte-resources", "theory-tedx-speaker-guide"]
+    },
+    {
+      "id": "html-deck-output",
+      "layout": "split",
+      "kicker": "HTML Deck",
+      "title": "PPT처럼 보이되, 웹처럼 다룬다",
+      "body": [
+        "16:9 슬라이드 프레임으로 발표 형식을 유지한다.",
+        "키보드 이동, 진행률, 발표자 노트를 기본 제공한다.",
+        "인쇄 모드로 PDF나 발표 자료 검토 흐름에 연결할 수 있다."
+      ],
+      "visual": {
+        "type": "cards",
+        "cards": [
+          {"title": "Audience", "text": "슬라이드만 본다"},
+          {"title": "Presenter", "text": "노트와 beat를 함께 본다"},
+          {"title": "Reviewer", "text": "출처와 검증 상태를 본다"}
+        ]
+      },
+      "script_beat": "solution",
+      "speaker_notes": [
+        "PPT 형식은 유지하지만 파일 형식의 제약에 갇히지 않습니다.",
+        "HTML이면 검증, 검색, 버전 관리, 자동 생성이 쉬워집니다."
+      ],
+      "evidence_sources": ["framework-revealjs-official", "framework-marp-official"]
+    },
+    {
+      "id": "license-gate",
+      "layout": "evidence",
+      "kicker": "License Gate",
+      "title": "예쁜 자료일수록 먼저 확인한다",
+      "body": [
+        "원본 PPT와 에셋은 다운로드 가능 여부를 따로 판단한다.",
+        "출처가 불명확한 디자인은 영감으로만 사용한다.",
+        "사용 가능한 에셋은 카탈로그 ID와 함께 추적한다."
+      ],
+      "visual": {
+        "type": "statement",
+        "label": "metadata first, raw files only after review"
+      },
+      "script_beat": "risk_control",
+      "speaker_notes": [
+        "발표 디자인 레퍼런스 수집에서 가장 중요한 안전장치는 라이선스입니다.",
+        "이 프로젝트는 레퍼런스를 많이 모으되, 무단 복제를 기본 동작으로 삼지 않습니다."
+      ],
+      "evidence_sources": ["assets-lucide", "templates-pitch"]
+    },
+    {
+      "id": "closing",
+      "layout": "closing",
+      "kicker": "Next",
+      "title": "다음은 실제 주제별 발표 제작이다",
+      "subtitle": "주제, 청중, 시간, 분위기가 정해지면 스크립트 에이전트가 beat를 만들고 HTML 덱이 바로 생성된다.",
+      "script_beat": "call_to_action",
+      "speaker_notes": [
+        "이제 구조는 생겼습니다.",
+        "다음 요청부터는 주제와 발표 상황을 받아 실제 발표 흐름과 HTML 덱을 생성할 수 있습니다."
+      ],
+      "evidence_sources": ["framework-slidev-official", "framework-marp-official"]
+    }
+  ]
+}
+

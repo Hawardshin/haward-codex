@@ -2,7 +2,7 @@
 
 - 생성 위치: `_ops/coordination/status.json`
 - 마지막 갱신: `2026-06-01`
-- 요약: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, and presentation-agent reference collection foundation added. No separate parallel agent tasks are currently active.
+- 요약: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, and HTML deck/script collaboration added. No separate parallel agent tasks are currently active.
 
 ## 에이전트
 
@@ -34,6 +34,7 @@
 | 2026-06-01-parallel-work-planning | Add parallel work planning structure | agent-platform | completed | codex-primary | No action. Future work should use parallel-work-planner-agent before running independent lanes in parallel. |
 | 2026-06-01-parallel-research-merge-gates | Add parallel research merge gates | agent-platform | completed | codex-primary | No action. Future parallel research should use merge_gates before downstream implementation starts. |
 | 2026-06-01-presentation-reference-collection | Create presentation-agent reference collection foundation | presentation-agent | completed | codex-primary | No action. Future presentation-agent work should expand the catalog through licensed source collection and convert only permitted PPTX files. |
+| 2026-06-01-html-deck-script-collaboration | Create script-aware HTML presentation deck renderer | presentation-agent | completed | codex-primary | No action. Future presentation-agent work can create topic-specific deck specs and render them through html_deck.py. |
 
 ## 차단 요소
 
