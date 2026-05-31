@@ -1,0 +1,11 @@
+{
+  "name": "candidate-name",
+  "purpose": "agent orchestration",
+  "license_name": "unknown",
+  "maintained": 3,
+  "documentation": 3,
+  "community": 3,
+  "fit": 3,
+  "lock_in_risk": 3,
+  "notes": "Replace these placeholder scores after checking current project docs and repository activity."
+}

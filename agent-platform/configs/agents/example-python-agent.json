@@ -1,0 +1,11 @@
+{
+  "name": "example-python-agent",
+  "description": "Minimal Python-first agent spec used to verify the platform skeleton.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [],
+  "metadata": {
+    "status": "template",
+    "owner": "personal"
+  }
+}
