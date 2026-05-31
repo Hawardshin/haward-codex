@@ -21,6 +21,7 @@
 | Agent planning | [Open-source installation policy](topics/agent-planning/2026-05-31-open-source-installation-policy.en.md) |
 | Agent operations | [Work mode routing](topics/agent-operations/2026-05-31-work-mode-routing.en.md) |
 | Agent operations | [Parallel work planning structure](topics/agent-operations/2026-06-01-parallel-work-planning.en.md) |
+| Agent operations | [Parallel research merge gates](topics/agent-operations/2026-06-01-parallel-research-merge-gates.en.md) |
 | Agent reliability | [Hallucination prevention operating references](topics/agent-reliability/2026-05-31-hallucination-prevention.en.md) |
 | Agent memory | [Memory bootstrap](topics/agent-memory/2026-05-31-memory-bootstrap.en.md) |
 | Agent memory | [Context archive policy](topics/agent-memory/2026-05-31-context-archive-policy.en.md) |

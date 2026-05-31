@@ -87,7 +87,7 @@
 - 요구사항 기준선, 변경, 검토 기록이 `_requirements/` 또는 해당 프로젝트의 `docs/requirements/`에 남았는가
 - spec-driven 산출물이 `_specs/` 또는 해당 프로젝트의 `specs/`에 남았는가
 - 소스코드 작업이면 코딩 조사에 architecture reference, 최소 2개 architecture option, decision notes가 남았는가
-- 병렬 작업이면 `plan-parallel-work` 결과, dependency, touch_paths, conflict controls, coordination targets, merge strategy가 남았는가
+- 병렬 작업이면 `plan-parallel-work` 결과, dependency, touch_paths, merge_gates, conflict controls, coordination targets, merge strategy가 남았는가
 - 중요한 원천값과 계획 단계가 `source_value_provenance`, `plan_evidence`, `source_provenance_targets`, `plan_evidence_targets`로 연결됐는가
 - 스킬 작업이 있었다면 `_skills/` 원본, 검증 결과, 개선 아이디어가 남았는가
 - 요청-결과 추적표가 `_history/request-traces/YYYY/`에 남았는가

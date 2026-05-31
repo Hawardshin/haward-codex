@@ -67,6 +67,71 @@ def ready_parallel_plan() -> dict:
     }
 
 
+def ready_parallel_research_merge_plan() -> dict:
+    data = ready_parallel_plan()
+    data["tasks"] = [
+        {
+            "task_id": "official-research",
+            "title": "Official docs research",
+            "owner": "research-agent",
+            "scope": "Research official documentation.",
+            "dependencies": [],
+            "touch_paths": ["_research/topics/platform/official.ko.md"],
+            "output_targets": ["_research/topics/platform/official.ko.md"],
+            "verification_steps": ["Check citations."],
+            "risk_level": "low",
+            "parallelizable": True,
+        },
+        {
+            "task_id": "community-research",
+            "title": "Community signal research",
+            "owner": "research-agent",
+            "scope": "Research high-signal discussions.",
+            "dependencies": [],
+            "touch_paths": ["_research/topics/platform/community.ko.md"],
+            "output_targets": ["_research/topics/platform/community.ko.md"],
+            "verification_steps": ["Treat reactions as signals, not proof."],
+            "risk_level": "low",
+            "parallelizable": True,
+        },
+        {
+            "task_id": "research-synthesis",
+            "title": "Merge research findings",
+            "owner": "primary-agent",
+            "scope": "Synthesize parallel research into one evidence-backed plan.",
+            "dependencies": ["official-research", "community-research"],
+            "touch_paths": ["_research/topics/platform/synthesis.ko.md"],
+            "output_targets": ["_research/topics/platform/synthesis.ko.md"],
+            "verification_steps": ["Resolve contradictions before implementation."],
+            "risk_level": "medium",
+            "parallelizable": False,
+        },
+        {
+            "task_id": "implementation",
+            "title": "Implement after synthesis",
+            "owner": "coding-agent",
+            "scope": "Implement only after research synthesis is ready.",
+            "dependencies": ["research-synthesis"],
+            "touch_paths": ["agent-platform/src/agent_platform/planning/parallel_work.py"],
+            "output_targets": ["agent-platform/src/agent_platform/planning/parallel_work.py"],
+            "verification_steps": ["Run unit tests."],
+            "risk_level": "medium",
+            "parallelizable": True,
+        },
+    ]
+    data["merge_gates"] = [
+        {
+            "gate_id": "research-fan-in",
+            "title": "Research fan-in gate",
+            "wait_for": ["official-research", "community-research"],
+            "merge_task_id": "research-synthesis",
+            "merge_outputs": ["_research/topics/platform/synthesis.ko.md"],
+            "acceptance_checks": ["Every upstream research lane is cited.", "Contradictions are resolved or marked."],
+        }
+    ]
+    return data
+
+
 class ParallelWorkTests(unittest.TestCase):
     def test_ready_when_independent_batch_exists(self) -> None:
         report = plan_parallel_work(ParallelWorkPlanInput.from_dict(ready_parallel_plan()))
@@ -129,6 +194,37 @@ class ParallelWorkTests(unittest.TestCase):
         )
         self.assertIn(
             "Coordination targets are missing; record where active lanes and status will be tracked.",
+            report["gaps"],
+        )
+
+    def test_parallel_research_can_fan_in_through_merge_gate(self) -> None:
+        report = plan_parallel_work(ParallelWorkPlanInput.from_dict(ready_parallel_research_merge_plan()))
+
+        self.assertEqual(report["status"], "ready_to_parallelize")
+        self.assertEqual(report["execution_batches"][0], ["community-research", "official-research"])
+        self.assertEqual(report["execution_batches"][1], ["research-synthesis"])
+        self.assertEqual(report["merge_gates"][0]["ready_after_batch"], 1)
+        self.assertEqual(report["merge_gates"][0]["merge_batch"], 2)
+        self.assertEqual(report["gaps"], [])
+
+    def test_parallel_research_requires_merge_gate(self) -> None:
+        data = ready_parallel_research_merge_plan()
+        data["merge_gates"] = []
+
+        report = plan_parallel_work(ParallelWorkPlanInput.from_dict(data))
+
+        self.assertEqual(report["status"], "rework_required")
+        self.assertTrue(any("Parallel research lanes require a merge gate" in gap for gap in report["gaps"]))
+
+    def test_merge_gate_requires_merge_task_to_depend_on_all_waits(self) -> None:
+        data = ready_parallel_research_merge_plan()
+        data["tasks"][2]["dependencies"] = ["official-research"]
+
+        report = plan_parallel_work(ParallelWorkPlanInput.from_dict(data))
+
+        self.assertEqual(report["status"], "rework_required")
+        self.assertIn(
+            "research-fan-in merge task research-synthesis must depend on all wait_for tasks; missing: community-research.",
             report["gaps"],
         )
 

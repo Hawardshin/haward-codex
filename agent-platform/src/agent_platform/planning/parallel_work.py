@@ -46,12 +46,38 @@ class ParallelWorkTask:
 
 
 @dataclass(frozen=True)
+class ParallelMergeGate:
+    """A fan-in point that waits for parallel lanes and merges their outputs."""
+
+    gate_id: str
+    title: str
+    wait_for: tuple[str, ...]
+    merge_task_id: str
+    merge_outputs: tuple[str, ...] = ()
+    acceptance_checks: tuple[str, ...] = ()
+    notes: str = ""
+
+    @classmethod
+    def from_dict(cls, data: JsonMap) -> "ParallelMergeGate":
+        return cls(
+            gate_id=_required_string(data, "gate_id"),
+            title=_required_string(data, "title"),
+            wait_for=_tuple_of_strings(data.get("wait_for", []), "wait_for"),
+            merge_task_id=_required_string(data, "merge_task_id"),
+            merge_outputs=_tuple_of_strings(data.get("merge_outputs", []), "merge_outputs"),
+            acceptance_checks=_tuple_of_strings(data.get("acceptance_checks", []), "acceptance_checks"),
+            notes=_optional_string(data.get("notes", ""), "notes"),
+        )
+
+
+@dataclass(frozen=True)
 class ParallelWorkPlanInput:
     """Structured input for deciding whether work can be split safely."""
 
     objective: str
     work_mode: str = "standard"
     tasks: tuple[ParallelWorkTask, ...] = ()
+    merge_gates: tuple[ParallelMergeGate, ...] = ()
     shared_resources: tuple[str, ...] = ()
     conflict_controls: tuple[str, ...] = ()
     coordination_targets: tuple[str, ...] = ()
@@ -69,6 +95,9 @@ class ParallelWorkPlanInput:
             objective=_required_string(data, "objective"),
             work_mode=_optional_string(data.get("work_mode", "standard"), "work_mode"),
             tasks=tuple(ParallelWorkTask.from_dict(item) for item in _list_of_maps(data.get("tasks", []), "tasks")),
+            merge_gates=tuple(
+                ParallelMergeGate.from_dict(item) for item in _list_of_maps(data.get("merge_gates", []), "merge_gates")
+            ),
             shared_resources=_tuple_of_strings(data.get("shared_resources", []), "shared_resources"),
             conflict_controls=_tuple_of_strings(data.get("conflict_controls", []), "conflict_controls"),
             coordination_targets=_tuple_of_strings(data.get("coordination_targets", []), "coordination_targets"),
@@ -102,6 +131,7 @@ def plan_parallel_work(plan_input: ParallelWorkPlanInput) -> JsonMap:
     if len(set(task_ids)) != len(task_ids):
         gaps.append("Task IDs must be unique.")
     _validate_dependencies(plan_input.tasks, task_by_id, gaps)
+    _validate_merge_gates(plan_input.merge_gates, task_by_id, gaps)
 
     cycle_path = _find_cycle(plan_input.tasks)
     if cycle_path:
@@ -130,6 +160,7 @@ def plan_parallel_work(plan_input: ParallelWorkPlanInput) -> JsonMap:
 
     batches = [] if cycle_path else _execution_batches(plan_input.tasks)
     _validate_batch_conflicts(batches, task_by_id, gaps)
+    _validate_parallel_research_merge_gates(batches, task_by_id, plan_input.merge_gates, gaps)
 
     max_parallel_width = max((len(batch) for batch in batches), default=0)
     parallelism_available = max_parallel_width > 1
@@ -146,6 +177,7 @@ def plan_parallel_work(plan_input: ParallelWorkPlanInput) -> JsonMap:
         "checks": {
             "work_mode": work_mode,
             "tasks_count": len(plan_input.tasks),
+            "merge_gates_count": len(plan_input.merge_gates),
             "parallelizable_tasks_count": len([task for task in plan_input.tasks if task.parallelizable]),
             "shared_resources_count": len(plan_input.shared_resources),
             "conflict_controls_count": len(plan_input.conflict_controls),
@@ -160,6 +192,7 @@ def plan_parallel_work(plan_input: ParallelWorkPlanInput) -> JsonMap:
             "max_parallel_width": max_parallel_width,
         },
         "execution_batches": batches,
+        "merge_gates": _merge_gate_summaries(plan_input.merge_gates, task_by_id, batches),
         "gaps": gaps,
         "warnings": warnings,
         "follow_up_actions": [f"Resolve gap: {gap}" for gap in gaps],
@@ -200,6 +233,68 @@ def _validate_dependencies(
                 gaps.append(f"{task_id} cannot depend on itself.")
             elif normalized_dependency not in task_by_id:
                 gaps.append(f"{task_id} depends on unknown task_id: {normalized_dependency}.")
+
+
+def _validate_merge_gates(
+    merge_gates: tuple[ParallelMergeGate, ...],
+    task_by_id: dict[str, ParallelWorkTask],
+    gaps: list[str],
+) -> None:
+    gate_ids = [gate.gate_id.strip() for gate in merge_gates]
+    if len(set(gate_ids)) != len(gate_ids):
+        gaps.append("Merge gate IDs must be unique.")
+
+    for index, gate in enumerate(merge_gates, start=1):
+        label = gate.gate_id.strip() or f"merge gate {index}"
+        if not gate.gate_id.strip():
+            gaps.append(f"{label} is missing gate_id.")
+        if not gate.title.strip():
+            gaps.append(f"{label} is missing title.")
+        if len(gate.wait_for) < 2:
+            gaps.append(f"{label} must wait for at least two upstream lanes.")
+        if len(set(gate.wait_for)) != len(gate.wait_for):
+            gaps.append(f"{label} wait_for task IDs must be unique.")
+        if not gate.merge_task_id.strip():
+            gaps.append(f"{label} is missing merge_task_id.")
+        if gate.merge_task_id in gate.wait_for:
+            gaps.append(f"{label} merge_task_id cannot also be in wait_for.")
+        if not gate.merge_outputs:
+            gaps.append(f"{label} is missing merge_outputs.")
+        if not gate.acceptance_checks:
+            gaps.append(f"{label} is missing acceptance_checks.")
+
+        unknown_waits = [task_id for task_id in gate.wait_for if task_id not in task_by_id]
+        if unknown_waits:
+            gaps.append(f"{label} waits for unknown task_id: {', '.join(unknown_waits)}.")
+        if gate.merge_task_id not in task_by_id:
+            gaps.append(f"{label} references unknown merge_task_id: {gate.merge_task_id}.")
+            continue
+
+        merge_task = task_by_id[gate.merge_task_id]
+        missing_dependencies = sorted(set(gate.wait_for) - set(merge_task.dependencies))
+        if missing_dependencies:
+            gaps.append(
+                f"{label} merge task {gate.merge_task_id} must depend on all wait_for tasks; missing: "
+                f"{', '.join(missing_dependencies)}."
+            )
+
+
+def _validate_parallel_research_merge_gates(
+    batches: list[list[str]],
+    task_by_id: dict[str, ParallelWorkTask],
+    merge_gates: tuple[ParallelMergeGate, ...],
+    gaps: list[str],
+) -> None:
+    gate_wait_sets = [set(gate.wait_for) for gate in merge_gates]
+    for batch in batches:
+        research_task_ids = [task_id for task_id in batch if _looks_like_research_task(task_by_id[task_id])]
+        if len(research_task_ids) < 2:
+            continue
+        if not any(set(research_task_ids).issubset(wait_set) for wait_set in gate_wait_sets):
+            gaps.append(
+                "Parallel research lanes require a merge gate that waits for every research lane in the batch: "
+                f"{', '.join(research_task_ids)}."
+            )
 
 
 def _find_cycle(tasks: tuple[ParallelWorkTask, ...]) -> list[str]:
@@ -260,6 +355,33 @@ def _execution_batches(tasks: tuple[ParallelWorkTask, ...]) -> list[list[str]]:
     return batches
 
 
+def _merge_gate_summaries(
+    merge_gates: tuple[ParallelMergeGate, ...],
+    task_by_id: dict[str, ParallelWorkTask],
+    batches: list[list[str]],
+) -> list[JsonMap]:
+    task_to_batch = {task_id: index for index, batch in enumerate(batches, start=1) for task_id in batch}
+    summaries = []
+    for gate in merge_gates:
+        wait_batches = [task_to_batch[task_id] for task_id in gate.wait_for if task_id in task_to_batch]
+        merge_batch = task_to_batch.get(gate.merge_task_id)
+        summaries.append(
+            {
+                "gate_id": gate.gate_id,
+                "title": gate.title,
+                "wait_for": list(gate.wait_for),
+                "merge_task_id": gate.merge_task_id,
+                "wait_batches": sorted(set(wait_batches)),
+                "merge_batch": merge_batch,
+                "merge_outputs": list(gate.merge_outputs),
+                "acceptance_checks": list(gate.acceptance_checks),
+                "ready_after_batch": max(wait_batches) if wait_batches else None,
+                "merge_task_known": gate.merge_task_id in task_by_id,
+            }
+        )
+    return summaries
+
+
 def _validate_batch_conflicts(
     batches: list[list[str]],
     task_by_id: dict[str, ParallelWorkTask],
@@ -286,6 +408,11 @@ def _overlapping_paths(left_paths: tuple[str, ...], right_paths: tuple[str, ...]
             if left == right or left.startswith(f"{right}/") or right.startswith(f"{left}/"):
                 overlaps.append(f"{left} <-> {right}")
     return sorted(set(overlaps))
+
+
+def _looks_like_research_task(task: ParallelWorkTask) -> bool:
+    searchable = " ".join([task.task_id, task.title, task.owner, task.scope]).lower()
+    return "research" in searchable or "조사" in searchable or "리서치" in searchable
 
 
 def _normalize_path(path: str) -> str:

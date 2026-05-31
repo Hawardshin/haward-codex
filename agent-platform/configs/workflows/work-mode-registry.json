@@ -82,7 +82,7 @@
       "source_type": "internal",
       "used_for": [
         "safe parallel lane planning",
-        "dependency and touch-path conflict checks"
+        "dependency, research fan-in merge gate, and touch-path conflict checks"
       ],
       "last_checked": "2026-06-01"
     }
@@ -126,7 +126,7 @@
     },
     {
       "id": "parallelism_is_execution_structure_not_mode",
-      "rule": "Parallel execution does not replace work mode selection; first choose the lightest sufficient mode, then use parallel-work-planner-agent when speed or independent lanes matter.",
+      "rule": "Parallel execution does not replace work mode selection; first choose the lightest sufficient mode, then use parallel-work-planner-agent when speed or independent lanes matter. Multiple parallel research lanes must have a merge gate before downstream implementation.",
       "reason": "The user wants faster work without losing dependency, conflict, coordination, and final verification controls.",
       "applies_to": [
         "modes",

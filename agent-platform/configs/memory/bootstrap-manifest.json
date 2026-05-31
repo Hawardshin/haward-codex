@@ -31,7 +31,7 @@
       "The request-to-outcome trace layer or traceability contract changes.",
       "The web search record layer or prompt-level search contract changes.",
       "The work mode selection or deferred improvement policy changes.",
-      "The parallel work planning workflow, planner agent, or coordination lane contract changes.",
+      "The parallel work planning workflow, planner agent, research merge gate, or coordination lane contract changes.",
       "The installation registry or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
@@ -80,7 +80,7 @@
       "used_for": [
         "dependency-aware lane planning",
         "touch path and shared resource conflict checks",
-        "coordination, merge, rollback, and final verification rules for parallel work"
+        "coordination, research fan-in merge gates, rollback, and final verification rules for parallel work"
       ],
       "last_checked": "2026-06-01"
     },
@@ -477,7 +477,7 @@
     },
     {
       "id": "parallel_work_must_be_planned_before_execution",
-      "rule": "When speed matters or work can split into independent lanes, use parallel-work-planner-agent before parallel execution and do not run overlapping touch paths or shared mutable resources in the same batch without a dependency, lock, branch/worktree rule, or explicit handoff.",
+      "rule": "When speed matters or work can split into independent lanes, use parallel-work-planner-agent before parallel execution. Do not run overlapping touch paths or shared mutable resources in the same batch without a dependency, lock, branch/worktree rule, or explicit handoff. When multiple research lanes run in parallel, require a merge gate that waits for all research lanes and releases downstream implementation only after acceptance checks pass.",
       "reason": "The user explicitly asked for a structure that can process work in parallel when speed is a bottleneck while keeping work understandable and safe.",
       "applies_to": [
         "startup_sequence",
@@ -668,7 +668,7 @@
       "id": "parallel_work_workflow",
       "path": "_ops/workflows/52-parallel-work-planning.md",
       "tier": "warm",
-      "purpose": "Workflow for deciding safe parallel lanes from dependencies, touch paths, conflict controls, coordination targets, merge strategy, and final verification.",
+      "purpose": "Workflow for deciding safe parallel lanes from dependencies, touch paths, research fan-in merge gates, conflict controls, coordination targets, merge strategy, and final verification.",
       "required": true,
       "load_order": 8
     },

@@ -2,7 +2,7 @@
 
 - Generated from: `_ops/coordination/status.json`
 - Last updated: `2026-06-01`
-- Summary: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, and parallel work planning rules added. No separate parallel agent tasks are currently active.
+- Summary: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, and parallel research merge gate rules added. No separate parallel agent tasks are currently active.
 
 ## Agents
 
@@ -32,6 +32,7 @@
 | 2026-05-31-stack-aware-coding-research | Require stack-aware coding research | agent-platform | completed | codex-primary | No action. Future coding research must record stack-specific official docs or standards, version constraints, issue/discussion sources, and community signal interpretation. |
 | 2026-06-01-maintainable-language-architecture-folders | Require maintainable language, architecture, and folder decisions | agent-platform | completed | codex-primary | No action. Future coding research must compare language/runtime options, separate architecture theory from practitioner opinions, and record folder semantics before implementation. |
 | 2026-06-01-parallel-work-planning | Add parallel work planning structure | agent-platform | completed | codex-primary | No action. Future work should use parallel-work-planner-agent before running independent lanes in parallel. |
+| 2026-06-01-parallel-research-merge-gates | Add parallel research merge gates | agent-platform | completed | codex-primary | No action. Future parallel research should use merge_gates before downstream implementation starts. |
 
 ## Blockers
 

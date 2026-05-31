@@ -79,6 +79,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Keep foundational operating philosophy under `_philosophy/`; keep executable rules and workflows under `_docs/` and `_ops/`.
 - When speed matters or a request can be decomposed, use `parallel-work-planner-agent` before parallel execution. Record task IDs, dependencies, touch paths, output targets, verification, shared resources, conflict controls, coordination targets, merge strategy, rollback plan, source provenance, and plan evidence.
 - Do not run tasks that touch overlapping files, configs, generated maps, git state, or other shared mutable resources in parallel unless a dependency, lock, branch/worktree rule, or explicit handoff serializes them.
+- When multiple research lanes run in parallel, require a merge gate such as `research-synthesis` that waits for all research lanes, resolves contradictions, records accepted evidence, and releases downstream implementation only after acceptance checks pass.
 
 ## Platformization Rules
 

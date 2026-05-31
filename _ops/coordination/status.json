@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-01",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, and parallel work planning rules added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, and parallel research merge gate rules added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -353,6 +353,25 @@
         "_specs/workspace-platform/2026-06-01-parallel-work-planning/spec.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-06-01-parallel-work-planning.ko.md"
+    },
+    {
+      "id": "2026-06-01-parallel-research-merge-gates",
+      "title": "Add parallel research merge gates",
+      "project": "agent-platform",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-01",
+      "updated_at": "2026-06-01",
+      "next_action": "No action. Future parallel research should use merge_gates before downstream implementation starts.",
+      "blockers": [],
+      "references": [
+        "agent-platform/src/agent_platform/planning/parallel_work.py",
+        "agent-platform/configs/planning/parallel-work-template.json",
+        "agent-platform/docs/parallel-work-planner-agent.ko.md",
+        "_specs/workspace-platform/2026-06-01-parallel-research-merge-gates/spec.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-06-01-parallel-research-merge-gates.ko.md"
     }
   ]
 }

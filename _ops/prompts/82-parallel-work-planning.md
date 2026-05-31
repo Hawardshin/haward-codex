@@ -19,16 +19,20 @@ Process:
 2. Decompose the request into task candidates.
 3. For each task, record task_id, title, owner, scope, dependencies, touch_paths, output_targets, verification_steps, risk_level, parallelizable, and notes.
 4. Treat touch_paths as file/resource ownership boundaries. Tasks with overlapping touch_paths must not run in the same batch unless a lock or dependency serializes them.
-5. Record shared_resources, conflict_controls, coordination_targets, merge_strategy, communication_checkpoints, verification_steps, rollback_plan, source_value_provenance, plan_evidence, and plan_history_targets.
-6. Run plan-parallel-work.
-7. If status is ready_to_parallelize, execute by batches and keep _ops/coordination/status.json updated.
-8. If status is sequential_required, do not parallelize; reduce overhead through the selected work_mode instead.
-9. If status is rework_required, fix the gaps before parallel execution.
-10. After all lanes finish, merge once, run final verification, evaluate, commit, and push from the primary agent.
+5. If multiple research lanes run in parallel, define merge_gates with gate_id, title, wait_for, merge_task_id, merge_outputs, acceptance_checks, and notes.
+6. Make downstream implementation depend on the merge task, not on partial research lane outputs.
+7. Record shared_resources, conflict_controls, coordination_targets, merge_strategy, communication_checkpoints, verification_steps, rollback_plan, source_value_provenance, plan_evidence, and plan_history_targets.
+8. Run plan-parallel-work.
+9. If status is ready_to_parallelize, execute by batches and keep _ops/coordination/status.json updated.
+10. If a merge gate exists, wait for every wait_for lane and pass acceptance_checks before releasing downstream work.
+11. If status is sequential_required, do not parallelize; reduce overhead through the selected work_mode instead.
+12. If status is rework_required, fix the gaps before parallel execution.
+13. After all lanes finish, merge once, run final verification, evaluate, commit, and push from the primary agent.
 
 Output:
 - Recommended execution batches
 - Serialized tasks and why
+- Merge gates and release criteria
 - Conflict controls
 - Coordination targets
 - Final verification plan
