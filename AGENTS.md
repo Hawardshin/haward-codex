@@ -23,6 +23,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Commit every completed meaningful change set.
 - Use commit messages in the form `type(scope): summary`.
 - Keep commits scoped to the work just completed.
+- Push completed commits to `origin/main` immediately after committing unless the user explicitly says not to push.
 - Do not rewrite history, reset, or discard user changes unless explicitly requested.
 - Update the relevant history log before committing when the work changes project direction, repository rules, or meaningful artifacts.
 

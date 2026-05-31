@@ -61,6 +61,8 @@ Commit after each coherent change set, especially after:
 
 Do not mix unrelated project changes in one commit unless the change is intentionally cross-project.
 
+After each completed commit, push to `origin/main` immediately unless the user explicitly asks to hold local changes.
+
 ## History Policy
 
 - Maintain dated work logs under `_history/YYYY/YYYY-MM-DD.md`.
