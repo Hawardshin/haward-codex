@@ -199,7 +199,7 @@
       ],
       "rollback_path": "rm -rf /Users/shinjoungeun/.codex/skills/create-validated-skill",
       "installation_record_path": "_history/installations/2026/2026-05-31-create-validated-skill.ko.md",
-      "commit": "pending"
+      "commit": "bb30d5a"
     }
   ]
 }

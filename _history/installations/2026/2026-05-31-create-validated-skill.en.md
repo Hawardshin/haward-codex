@@ -38,7 +38,7 @@
 ## Post-Install Result
 
 - Command run: `cp -R _skills/create-validated-skill /Users/shinjoungeun/.codex/skills/`
-- Installed version: `_skills/create-validated-skill/` from this change set
+- Installed version: `_skills/create-validated-skill/` from `bb30d5a`
 - Changed files: `/Users/shinjoungeun/.codex/skills/create-validated-skill/`
 - Lock files: none
 - Verification:
@@ -56,5 +56,4 @@
 - Installation registry: `_ops/installations/registry.json`
 - Work summary: `_history/work-summaries/2026/2026-05-31.en.md`
 - Evaluation report: `_history/evaluations/2026/2026-05-31-skill-lifecycle.en.md`
-- Commit: this change-set commit
-
+- Commit: `bb30d5a`

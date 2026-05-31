@@ -9,7 +9,7 @@
 | Tasks | `T001` - `T010` | Policy, skill, CLI, evaluation, history, verification |
 | Key files | `_skills/`, `_docs/skill-lifecycle-policy.en.md`, `_ops/workflows/37-skill-lifecycle.md` | Operating structure |
 | Evaluation | `_history/evaluations/2026/2026-05-31-skill-lifecycle.en.md` | Close-out evaluation |
-| Commit | this change-set commit | Confirm after push |
+| Commit | `bb30d5a` | Implementation change commit |
 
 ## Coverage
 
@@ -18,4 +18,3 @@
 - `AC-SKILL-003`: `agent-platform/src/agent_platform/evaluation/work_evaluator.py`
 - `AC-SKILL-004`: `_docs/skill-lifecycle-policy.en.md`, `_ops/workflows/37-skill-lifecycle.md`
 - `AC-SKILL-005`: `_ops/installations/registry.json`, `_history/installations/`
-

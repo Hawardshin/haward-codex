@@ -38,7 +38,7 @@
 ## 설치 후 실제 결과
 
 - 실행한 명령: `cp -R _skills/create-validated-skill /Users/shinjoungeun/.codex/skills/`
-- 설치된 버전: 이번 변경 커밋의 `_skills/create-validated-skill/`
+- 설치된 버전: `bb30d5a`의 `_skills/create-validated-skill/`
 - 변경된 파일: `/Users/shinjoungeun/.codex/skills/create-validated-skill/`
 - 생성/갱신된 lock 파일: 없음
 - 검증 명령과 결과:
@@ -56,5 +56,4 @@
 - 설치 레지스트리: `_ops/installations/registry.json`
 - 작업 요약: `_history/work-summaries/2026/2026-05-31.ko.md`
 - 평가 보고서: `_history/evaluations/2026/2026-05-31-skill-lifecycle.ko.md`
-- 커밋: 이번 변경 커밋
-
+- 커밋: `bb30d5a`
