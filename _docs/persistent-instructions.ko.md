@@ -15,6 +15,7 @@
 - 의미 있는 작업의 최종 평가는 `_history/evaluations/YYYY/` 아래 파일로 저장한다.
 - 중요한 계획을 세우는 과정은 `_history/plans/YYYY/` 아래 파일로 저장한다.
 - 의미 있는 사용자 요청은 원문 전체가 아니라 요약으로 `_history/user-requests/YYYY/` 아래에 저장한다.
+- 의미 있는 요청은 `_history/request-traces/YYYY/` 아래에서 요청, 결과, 산출물, 평가, 커밋을 연결해 저장한다.
 - 작업 히스토리는 `_history/YYYY/YYYY-MM-DD.md`에 기록한다.
 - 나중에 문서만 보고도 한 일을 쉽게 파악할 수 있도록 `_history/work-summaries/YYYY/` 아래 빠른 작업 요약을 유지한다.
 - `_ops/`를 프롬프트, 워크플로, 맵을 위한 운영 허브로 사용한다.
@@ -54,6 +55,7 @@
 - 탐색 구조가 바뀌면 저장소 맵과 프롬프트 맵을 갱신한다.
 - `work-evaluator-agent`를 기본 종료 평가 에이전트로 사용한다.
 - 의미 있는 작업의 평가 입력에는 `user_request_summary_targets`를 포함한다.
+- 의미 있는 작업의 평가 입력에는 `request_trace_targets`를 포함한다.
 - 의미 있는 작업의 평가 입력에는 `work_summary_targets`를 포함한다.
 - 에이전트 구현, 오케스트레이션, 백엔드 자동화, 평가, 재사용 로컬 도구는 Python을 우선한다.
 - 작업에 맞는 성숙하고 유지보수되는 오픈소스 도구와 라이브러리를 우선 검토한다.

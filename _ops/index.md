@@ -12,6 +12,7 @@
 | `_history/` | 날짜별 작업 히스토리와 압축된 맥락 |
 | `_history/context-archives/` | 긴 컨텍스트를 문서 기반으로 재개하기 위한 압축 아카이브 패킷 |
 | `_history/user-requests/` | 사용자가 요청한 내용의 의미 요약과 반영 위치 |
+| `_history/request-traces/` | 요청이 실제 결과, 산출물, 평가, 커밋으로 이어진 흐름 |
 | `_history/work-summaries/` | 나중에 빠르게 읽는 날짜별 작업 요약과 HTML 인덱스 |
 | `_history/web-searches/` | 모든 지시/프롬프트 실행의 웹 검색과 공개 판단 요약 |
 | `_history/installations/` | 실제 설치/업그레이드/제거 상세 감사 기록 |
@@ -42,6 +43,7 @@
 - 계획 과정을 볼 때: [_history/plans/README.ko.md](../_history/plans/README.ko.md)
 - 컨텍스트가 길어져 재개 패킷이 필요할 때: [_docs/context-archive-policy.ko.md](../_docs/context-archive-policy.ko.md), [_history/context-archives/README.ko.md](../_history/context-archives/README.ko.md), [_ops/workflows/45-context-archive.md](workflows/45-context-archive.md)
 - 사용자 요청 요약을 볼 때: [_history/user-requests/README.ko.md](../_history/user-requests/README.ko.md), [_docs/user-request-summary-policy.ko.md](../_docs/user-request-summary-policy.ko.md)
+- 요청이 어떤 결과로 이어졌는지 볼 때: [_history/request-traces/README.ko.md](../_history/request-traces/README.ko.md), [_docs/request-traceability-policy.ko.md](../_docs/request-traceability-policy.ko.md)
 - 완료된 작업을 빠르게 볼 때: [_history/work-summaries/README.ko.md](../_history/work-summaries/README.ko.md), [_history/work-summaries/index.html](../_history/work-summaries/index.html)
 - 진행 중인 에이전트/병렬 작업을 볼 때: [_ops/coordination/board.ko.md](coordination/board.ko.md), [_ops/coordination/board.html](coordination/board.html)
 - 재사용 가능한 조사 내용을 볼 때: [_research/index.ko.md](../_research/index.ko.md)
@@ -64,5 +66,6 @@
 - `_history/web-searches/YYYY/`에 공개 검색 판단 기록이 남았는가
 - 컨텍스트 아카이빙이 발생했다면 `_history/context-archives/YYYY/`에 재개 패킷이 남았는가
 - 사용자 요청 요약이 `_history/user-requests/YYYY/`에 남았는가
+- 요청-결과 추적표가 `_history/request-traces/YYYY/`에 남았는가
 - 설치가 발생했다면 `_history/installations/YYYY/`와 `_ops/installations/registry.json`이 갱신됐는가
 - `_ops/maps/`가 현재 구조를 반영하는가

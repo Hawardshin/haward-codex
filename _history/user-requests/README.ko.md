@@ -35,3 +35,5 @@ _history/user-requests/YYYY/YYYY-MM-DD.en.md
 ## 종료 평가 규칙
 
 의미 있는 작업의 `work-evaluator-agent` 입력에는 `user_request_summary_targets`를 포함한다. 누락되면 blocking gap이다.
+
+요청 요약이 실제 결과로 어떻게 이어졌는지는 `_history/request-traces/YYYY/`에 연결한다.

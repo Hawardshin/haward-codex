@@ -21,6 +21,7 @@ _history/evaluations/YYYY/YYYY-MM-DD-<slug>.en.md
 - references checked
 - web search record targets
 - user request summary targets
+- request trace targets
 - context archive targets
 - changed files
 - verification results

@@ -22,3 +22,5 @@ Every prompt in this folder inherits the following common contract.
 ## Close-Out Evaluation
 
 `work-evaluator-agent` input must include `web_search_record_targets` for meaningful work. Missing targets are a blocking gap.
+
+`work-evaluator-agent` input must include `request_trace_targets` for meaningful work. Missing targets are a blocking gap.

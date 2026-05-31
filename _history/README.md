@@ -24,6 +24,8 @@ Context archive resume packets live under `_history/context-archives/YYYY/`.
 
 User request summaries live under `_history/user-requests/YYYY/`.
 
+Request-to-outcome traces live under `_history/request-traces/YYYY/`.
+
 Detailed installation audit records live under `_history/installations/YYYY/`.
 
 Detailed work evaluation reports live under `_history/evaluations/YYYY/`.
@@ -35,6 +37,8 @@ Use `_history/work-summaries/index.html` or the latest `_history/work-summaries/
 Use `_history/context-archives/YYYY/` when a future session needs to resume from compressed context instead of chat history.
 
 Use `_history/user-requests/YYYY/` when you need to understand what the user asked for without reading raw chat.
+
+Use `_history/request-traces/YYYY/` when you need to understand what the user asked for, what happened, where the evidence is, and which commit closed it.
 
 Use `_history/installations/YYYY/` when the work installed, upgraded, removed, or globally configured software.
 

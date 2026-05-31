@@ -15,6 +15,7 @@ This document records durable user instructions in English.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/`.
 - Save important planning processes as files under `_history/plans/YYYY/`.
 - Save summaries of meaningful user requests under `_history/user-requests/YYYY/`, without preserving full original prompt text by default.
+- Save request-to-outcome traces under `_history/request-traces/YYYY/`, linking the request, outcome, artifacts, evaluation, and commit.
 - Track work history under `_history/YYYY/YYYY-MM-DD.md`.
 - Maintain quick human-readable work summaries under `_history/work-summaries/YYYY/` so completed work is easy to understand later.
 - Use `_ops/` as the durable operations hub for prompts, workflows, and maps.
@@ -54,6 +55,7 @@ This document records durable user instructions in English.
 - Keep repository and prompt maps current when navigational structure changes.
 - Use `work-evaluator-agent` as the default close-out evaluator.
 - Include `user_request_summary_targets` in work evaluation input for meaningful work.
+- Include `request_trace_targets` in work evaluation input for meaningful work.
 - Include `work_summary_targets` in work evaluation input for meaningful work.
 - Prefer Python for agent implementations, orchestration, backend automation, evaluation, and reusable local tools.
 - Use mature, maintained, license-compatible open-source tools and libraries when they fit the task.

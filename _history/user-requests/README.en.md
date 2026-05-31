@@ -35,3 +35,5 @@ _history/user-requests/YYYY/YYYY-MM-DD.en.md
 ## Close-Out Rule
 
 Meaningful work must include `user_request_summary_targets` in `work-evaluator-agent` input. Missing targets are a blocking gap.
+
+How a request summary turned into an actual outcome is tracked under `_history/request-traces/YYYY/`.

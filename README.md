@@ -28,6 +28,7 @@
 - 의미 있는 작업의 최종 평가는 `_history/evaluations/YYYY/` 아래 파일로 남긴다.
 - 중요한 계획을 세우는 과정은 `_history/plans/YYYY/` 아래 파일로 남긴다.
 - 사용자가 요청한 다양한 지시와 프롬프트 의도는 `_history/user-requests/YYYY/` 아래 요약으로 남긴다.
+- 의미 있는 요청은 `_history/request-traces/YYYY/`에서 요청, 결과, 산출물, 평가, 커밋을 연결한다.
 - 나중에 문서만 보고도 한 일을 쉽게 파악할 수 있도록 `_history/work-summaries/YYYY/` 아래 빠른 작업 요약을 남긴다.
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/`에서 한 번에 볼 수 있게 관리한다.
 - 여러 프로젝트는 저장소 최상단의 개별 폴더로 관리한다.
@@ -84,6 +85,7 @@ codex/
 - `_history/`: 날짜별 작업 히스토리와 요약
 - `_history/context-archives/`: 긴 대화 후 문서만 보고 재개하기 위한 압축 아카이브 패킷
 - `_history/user-requests/`: 사용자가 요청한 내용의 의미 요약과 반영 위치
+- `_history/request-traces/`: 사용자 요청과 실제 결과, 산출물, 평가, 커밋의 연결표
 - `_history/work-summaries/`: 사람이 빠르게 읽는 날짜별 작업 요약과 HTML 인덱스
 - `_history/web-searches/`: 프롬프트/작업마다 수행한 웹 검색과 공개 판단 요약
 - `_history/plans/`: 에이전트가 계획을 세운 과정 기록
@@ -136,6 +138,7 @@ project-name/
 - 프롬프트 공통 계약은 `_ops/prompts/README.ko.md`에서 확인하고, 검색 기록 템플릿은 `_templates/web-search-record/`에서 확인한다.
 - 컨텍스트 아카이브 정책은 `_docs/context-archive-policy.ko.md`, 재개 패킷은 `_history/context-archives/`에서 확인한다.
 - 사용자 요청 요약 정책은 `_docs/user-request-summary-policy.ko.md`, 날짜별 요청 요약은 `_history/user-requests/`에서 확인한다.
+- 요청-결과 추적 정책은 `_docs/request-traceability-policy.ko.md`, 날짜별 추적표는 `_history/request-traces/`에서 확인한다.
 - AI가 세팅을 잊지 않게 하는 부트스트랩 manifest는 `agent-platform/configs/memory/bootstrap-manifest.json`에 둔다.
 - 공유 설정 파일의 자기 설명 기준은 `_docs/self-documenting-config-policy.ko.md`와 `agent-platform`의 `check-config-contract` 명령을 따른다.
 - 출처 수집 기준은 `_docs/source-collection-policy.ko.md`를 따른다.
@@ -159,6 +162,7 @@ project-name/
 - 평가 입력에는 작업 요약과 확인한 레퍼런스를 포함한다.
 - 평가 입력에는 검색 과정 기록 파일 경로인 `web_search_record_targets`를 포함한다.
 - 평가 입력에는 사용자 요청 요약 파일 경로인 `user_request_summary_targets`를 포함한다.
+- 평가 입력에는 요청-결과 추적 파일 경로인 `request_trace_targets`를 포함한다.
 - 평가 입력에는 사용자가 나중에 읽을 요약 파일 경로인 `work_summary_targets`를 포함한다.
 - 컨텍스트 아카이빙이 발생했다면 평가 입력에는 `context_archiving_occurred=true`와 `context_archive_targets`를 포함한다.
 - 관련 작업을 평가할 때는 저장소 내 이전 작업, 공식 문서, 성숙한 오픈소스, 좋은 외부 사례를 먼저 확인한다.

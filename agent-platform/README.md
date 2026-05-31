@@ -98,6 +98,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - factual final outputs should pass `hallucination-guard-agent` when claims need grounding
 - close-out evaluation should include `web_search_record_targets` pointing to `_history/web-searches/YYYY/`
 - close-out evaluation should include `user_request_summary_targets` pointing to `_history/user-requests/YYYY/`
+- close-out evaluation should include `request_trace_targets` pointing to `_history/request-traces/YYYY/`
 - close-out evaluation should include `work_summary_targets` pointing to `_history/work-summaries/YYYY/`
 - context archive close-out should include `context_archiving_occurred=true` and `context_archive_targets`
 - installation close-out should include `installation_occurred=true` and `installation_record_targets` when dependency or environment state changed

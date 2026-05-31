@@ -157,6 +157,8 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - The evaluator should consider relevant prior internal work, official docs, mature open-source projects, or other strong references.
 - When factual claims are present, run `hallucination-guard-agent` and include the grounding result in evaluation.
 - Include `web_search_record_targets` in evaluation input for meaningful work.
+- Include `user_request_summary_targets` in evaluation input for meaningful work.
+- Include `request_trace_targets` in evaluation input for meaningful work.
 - Include `work_summary_targets` in evaluation input for meaningful work.
 - If gaps are found, they become follow-up actions and the work returns to implementation.
 - The default evaluator is `work-evaluator-agent` in `agent-platform/configs/agents/`.

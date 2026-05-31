@@ -22,3 +22,5 @@
 ## 종료 평가
 
 `work-evaluator-agent` 입력에는 의미 있는 작업마다 `web_search_record_targets`를 포함한다. 누락되면 blocking gap이다.
+
+`work-evaluator-agent` 입력에는 의미 있는 작업마다 `request_trace_targets`를 포함한다. 누락되면 blocking gap이다.

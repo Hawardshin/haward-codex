@@ -10,7 +10,7 @@
 2. Check git status.
 3. Run [_ops/workflows/01-memory-bootstrap.md](01-memory-bootstrap.md) and read the returned hot memory anchors.
 4. Read [_ops/index.md](../index.md).
-5. Read the latest relevant request summary under `_history/user-requests/` when the task depends on durable user preferences.
+5. Read the latest relevant request summary under `_history/user-requests/` and request trace under `_history/request-traces/` when the task depends on durable user preferences or prior outcomes.
 6. Check [_ops/coordination/board.ko.md](../coordination/board.ko.md) when parallel work may exist.
 7. Select a prompt from [_ops/prompts/00-router.md](../prompts/00-router.md).
 8. Read relevant philosophy from `_philosophy/` when the task touches durable worldview or operating principles.
@@ -26,8 +26,9 @@
 18. Rework if the evaluator finds gaps, then evaluate again.
 19. Save or update the public web search record under `_history/web-searches/YYYY/`.
 20. Save or update the user request summary under `_history/user-requests/YYYY/`.
-21. Update `_history/work-summaries/`, detailed history, and maps.
-22. Commit and push immediately.
+21. Save or update the request-to-outcome trace under `_history/request-traces/YYYY/`.
+22. Update `_history/work-summaries/`, detailed history, and maps.
+23. Commit and push immediately.
 
 ## Rule
 
