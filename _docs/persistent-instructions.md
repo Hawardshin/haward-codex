@@ -17,6 +17,8 @@
 - Push completed commits to `origin/main` immediately unless explicitly told not to push.
 - Before closing meaningful work, evaluate the result against the initial user instruction and rework real gaps.
 - Before evaluation, summarize completed work and check prior internal work or strong references for related tasks.
+- Treat user work and instructions as requirement candidates; define, review, update, and baseline relevant requirements before implementation.
+- Save shared requirements under `_requirements/`; save project-specific requirements under the owning project's `docs/requirements/`.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/`.
 - Save important planning processes as files under `_history/plans/YYYY/`.
 - Save summaries of meaningful user requests under `_history/user-requests/YYYY/`, without preserving full original prompt text by default.
@@ -60,6 +62,7 @@
 - Keep repository and prompt maps current when navigational structure changes.
 - Use `work-evaluator-agent` as the default close-out evaluator.
 - Include `user_request_summary_targets` in work evaluation input for meaningful work.
+- Include `requirements_targets` in work evaluation input for meaningful work.
 - Include `request_trace_targets` in work evaluation input for meaningful work.
 - Include `work_summary_targets` in work evaluation input for meaningful work.
 - Prefer Python for agent implementations, orchestration, backend automation, evaluation, and reusable local tools.

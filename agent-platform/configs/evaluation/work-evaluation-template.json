@@ -19,6 +19,9 @@
   "user_request_summary_targets": [
     "_history/user-requests/YYYY/YYYY-MM-DD.ko.md"
   ],
+  "requirements_targets": [
+    "_requirements/baselines/YYYY-MM-DD-project-or-workspace.ko.md"
+  ],
   "request_trace_targets": [
     "_history/request-traces/YYYY/YYYY-MM-DD.ko.md"
   ],

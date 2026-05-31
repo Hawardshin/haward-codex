@@ -22,6 +22,7 @@
 | 문서화 | [읽기 쉬운 작업 요약 구조](topics/documentation/2026-05-31-readable-work-summaries.ko.md) |
 | 문서화 | [오늘 작업 전체 요약](topics/documentation/2026-05-31-daily-collected-summary.ko.md) |
 | 문서화 | [요청-결과 추적](topics/documentation/2026-05-31-request-outcome-trace.ko.md) |
+| 요구사항 관리 | [요구사항 관리 생명주기](topics/requirements/2026-05-31-requirements-management.ko.md) |
 | 의존성 관리 | [설치 감사 기록 정책](topics/dependency-management/2026-05-31-installation-audit-trail.ko.md) |
 
 ## 갱신 규칙

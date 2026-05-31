@@ -14,6 +14,7 @@ If prompts, workflows, folders, or projects changed, refresh _ops/maps/.
 Record the work summary and verification result in _history/YYYY/YYYY-MM-DD.md.
 Record the public web search reasoning summary in _history/web-searches/YYYY/ with queries, sources, ignored weak sources, plan impact, uncertainty, and related links.
 Record the user's request intent summary in _history/user-requests/YYYY/ without preserving full original prompt text by default.
+Record or update requirements baselines, changes, and reviews under _requirements/ or the owning project's docs/requirements/.
 Record the request-to-outcome trace in _history/request-traces/YYYY/ with request, outcome, artifacts, evaluation, commit, and follow-up status.
 Record a scan-friendly summary in _history/work-summaries/YYYY/YYYY-MM-DD.ko.md and an English companion for important durable work.
 Summarize the completed work and check prior related work or strong references.
@@ -27,6 +28,7 @@ Save the final evaluation as a Markdown file under _history/evaluations/YYYY/.
 Include work_summary_targets in the evaluator input.
 Include web_search_record_targets in the evaluator input.
 Include user_request_summary_targets in the evaluator input.
+Include requirements_targets in the evaluator input.
 Include request_trace_targets in the evaluator input.
 If context archiving occurred, include context_archiving_occurred=true and context_archive_targets in the evaluator input.
 If installation occurred, include installation_occurred=true and installation_record_targets in the evaluator input.

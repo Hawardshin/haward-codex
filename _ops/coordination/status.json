@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-05-31",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -163,6 +163,25 @@
         "agent-platform/docs/work-evaluator-agent.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-05-31-request-outcome-trace.ko.md"
+    },
+    {
+      "id": "2026-05-31-requirements-management",
+      "title": "Add requirements management lifecycle",
+      "project": "_requirements",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-05-31",
+      "updated_at": "2026-05-31",
+      "next_action": "No action. Future meaningful work must update requirements targets before implementation and close-out.",
+      "blockers": [],
+      "references": [
+        "_requirements/README.ko.md",
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_ops/workflows/35-requirements-lifecycle.md",
+        "agent-platform/docs/requirements-manager-agent.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-05-31-requirements-management.ko.md"
     }
   ]
 }

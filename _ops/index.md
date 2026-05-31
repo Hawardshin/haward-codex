@@ -9,6 +9,7 @@
 | `_research/` | 인터넷 조사와 외부 레퍼런스 중 재사용 가능한 내용 |
 | `_docs/` | 장기 운영 규칙, 의사결정, 컨텍스트 관리 |
 | `_philosophy/` | 에이전트와 플랫폼 운영의 근본 철학 |
+| `_requirements/` | 공통 요구사항 기준선, 변경 기록, 검토 기록 |
 | `_history/` | 날짜별 작업 히스토리와 압축된 맥락 |
 | `_history/context-archives/` | 긴 컨텍스트를 문서 기반으로 재개하기 위한 압축 아카이브 패킷 |
 | `_history/user-requests/` | 사용자가 요청한 내용의 의미 요약과 반영 위치 |
@@ -43,6 +44,8 @@
 - 계획 과정을 볼 때: [_history/plans/README.ko.md](../_history/plans/README.ko.md)
 - 컨텍스트가 길어져 재개 패킷이 필요할 때: [_docs/context-archive-policy.ko.md](../_docs/context-archive-policy.ko.md), [_history/context-archives/README.ko.md](../_history/context-archives/README.ko.md), [_ops/workflows/45-context-archive.md](workflows/45-context-archive.md)
 - 사용자 요청 요약을 볼 때: [_history/user-requests/README.ko.md](../_history/user-requests/README.ko.md), [_docs/user-request-summary-policy.ko.md](../_docs/user-request-summary-policy.ko.md)
+- 요구사항 기준선을 볼 때: [_requirements/README.ko.md](../_requirements/README.ko.md), [_requirements/baselines/2026-05-31-workspace-platform.ko.md](../_requirements/baselines/2026-05-31-workspace-platform.ko.md)
+- 요구사항을 정의/검토/변경할 때: [_ops/workflows/35-requirements-lifecycle.md](workflows/35-requirements-lifecycle.md), [_ops/prompts/35-manage-requirements.md](prompts/35-manage-requirements.md), [agent-platform/docs/requirements-manager-agent.ko.md](../agent-platform/docs/requirements-manager-agent.ko.md)
 - 요청이 어떤 결과로 이어졌는지 볼 때: [_history/request-traces/README.ko.md](../_history/request-traces/README.ko.md), [_docs/request-traceability-policy.ko.md](../_docs/request-traceability-policy.ko.md)
 - 완료된 작업을 빠르게 볼 때: [_history/work-summaries/README.ko.md](../_history/work-summaries/README.ko.md), [_history/work-summaries/index.html](../_history/work-summaries/index.html)
 - 진행 중인 에이전트/병렬 작업을 볼 때: [_ops/coordination/board.ko.md](coordination/board.ko.md), [_ops/coordination/board.html](coordination/board.html)
@@ -66,6 +69,7 @@
 - `_history/web-searches/YYYY/`에 공개 검색 판단 기록이 남았는가
 - 컨텍스트 아카이빙이 발생했다면 `_history/context-archives/YYYY/`에 재개 패킷이 남았는가
 - 사용자 요청 요약이 `_history/user-requests/YYYY/`에 남았는가
+- 요구사항 기준선, 변경, 검토 기록이 `_requirements/` 또는 해당 프로젝트의 `docs/requirements/`에 남았는가
 - 요청-결과 추적표가 `_history/request-traces/YYYY/`에 남았는가
 - 설치가 발생했다면 `_history/installations/YYYY/`와 `_ops/installations/registry.json`이 갱신됐는가
 - `_ops/maps/`가 현재 구조를 반영하는가

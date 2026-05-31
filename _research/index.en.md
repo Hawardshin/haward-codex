@@ -22,6 +22,7 @@
 | Documentation | [Readable work summary structure](topics/documentation/2026-05-31-readable-work-summaries.en.md) |
 | Documentation | [Daily collected work summary](topics/documentation/2026-05-31-daily-collected-summary.en.md) |
 | Documentation | [Request-to-outcome trace](topics/documentation/2026-05-31-request-outcome-trace.en.md) |
+| Requirements management | [Requirements management lifecycle](topics/requirements/2026-05-31-requirements-management.en.md) |
 | Dependency management | [Installation audit trail policy](topics/dependency-management/2026-05-31-installation-audit-trail.en.md) |
 
 ## Update Rules

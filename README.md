@@ -9,6 +9,7 @@
 - 커밋이 만들어지면 바로 원격 저장소에 push한다.
 - 의미 있는 작업을 닫기 전 초기 지시와 결과를 평가하고, 차이가 있으면 재작업한다.
 - 평가 전에는 했던 작업을 요약하고 관련된 이전 작업이나 좋은 레퍼런스를 먼저 조사한다.
+- 사용자의 작업과 지시는 요구사항 후보로 정의하고, 구현 전 관련 요구사항을 수정/검토/기준선화한 뒤 그 요구사항을 기준으로 만든다.
 - 앞으로 모든 새 지시는 웹 검색을 먼저 수행한 뒤 계획, 저장소 탐색, 구현으로 들어간다.
 - 모든 재사용 프롬프트 실행도 `_ops/prompts/README.ko.md`의 공통 계약을 따라 웹 검색으로 시작한다.
 - 의미 있는 작업은 `_history/web-searches/YYYY/`에 공개 검색 판단 요약을 남기고 평가 입력에 `web_search_record_targets`를 포함한다.
@@ -61,6 +62,7 @@ codex/
   research-agent/
   _docs/
   _philosophy/
+  _requirements/
   _history/
   _ops/
   _ops/projects/
@@ -82,6 +84,7 @@ codex/
 
 - `_docs/`: 저장소 전체 운영 문서와 의사결정 기록
 - `_philosophy/`: 에이전트와 플랫폼 운영의 근본 철학
+- `_requirements/`: 모든 프로젝트에 공통 적용되는 요구사항 기준선, 변경 기록, 검토 기록
 - `_history/`: 날짜별 작업 히스토리와 요약
 - `_history/context-archives/`: 긴 대화 후 문서만 보고 재개하기 위한 압축 아카이브 패킷
 - `_history/user-requests/`: 사용자가 요청한 내용의 의미 요약과 반영 위치
@@ -105,6 +108,7 @@ project-name/
   README.md
   artifacts/
   docs/
+  docs/requirements/
   src/
   tests/
 ```
@@ -126,6 +130,7 @@ project-name/
 
 - 날짜별 작업 로그는 `_history/YYYY/YYYY-MM-DD.md`에 기록한다.
 - 사용자 요청 요약은 `_history/user-requests/YYYY/YYYY-MM-DD.ko.md`와 영어 companion에 기록한다.
+- 공통 요구사항은 `_requirements/`, 프로젝트별 요구사항은 `project-name/docs/requirements/`에 기준선, 변경, 검토 기록으로 관리한다.
 - 빠른 작업 요약은 `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`와 영어 companion에 기록한다.
 - 브라우저로 한눈에 볼 요약은 `_history/work-summaries/index.html`에 둔다.
 - 로그에는 목적, 변경 파일, 주요 결정, 커밋 해시를 남긴다.
@@ -139,6 +144,7 @@ project-name/
 - 컨텍스트 아카이브 정책은 `_docs/context-archive-policy.ko.md`, 재개 패킷은 `_history/context-archives/`에서 확인한다.
 - 사용자 요청 요약 정책은 `_docs/user-request-summary-policy.ko.md`, 날짜별 요청 요약은 `_history/user-requests/`에서 확인한다.
 - 요청-결과 추적 정책은 `_docs/request-traceability-policy.ko.md`, 날짜별 추적표는 `_history/request-traces/`에서 확인한다.
+- 요구사항 관리 정책은 `_docs/requirements-management-policy.ko.md`, 공통 요구사항 기준선은 `_requirements/`, 실행 프롬프트는 `_ops/prompts/35-manage-requirements.md`에서 확인한다.
 - AI가 세팅을 잊지 않게 하는 부트스트랩 manifest는 `agent-platform/configs/memory/bootstrap-manifest.json`에 둔다.
 - 공유 설정 파일의 자기 설명 기준은 `_docs/self-documenting-config-policy.ko.md`와 `agent-platform`의 `check-config-contract` 명령을 따른다.
 - 출처 수집 기준은 `_docs/source-collection-policy.ko.md`를 따른다.
@@ -162,6 +168,7 @@ project-name/
 - 평가 입력에는 작업 요약과 확인한 레퍼런스를 포함한다.
 - 평가 입력에는 검색 과정 기록 파일 경로인 `web_search_record_targets`를 포함한다.
 - 평가 입력에는 사용자 요청 요약 파일 경로인 `user_request_summary_targets`를 포함한다.
+- 평가 입력에는 요구사항 기준선, 변경, 검토 파일 경로인 `requirements_targets`를 포함한다.
 - 평가 입력에는 요청-결과 추적 파일 경로인 `request_trace_targets`를 포함한다.
 - 평가 입력에는 사용자가 나중에 읽을 요약 파일 경로인 `work_summary_targets`를 포함한다.
 - 컨텍스트 아카이빙이 발생했다면 평가 입력에는 `context_archiving_occurred=true`와 `context_archive_targets`를 포함한다.

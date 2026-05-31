@@ -2,7 +2,7 @@
 
 - Generated from: `_ops/coordination/status.json`
 - Last updated: `2026-05-31`
-- Summary: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.
+- Summary: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.
 
 ## Agents
 
@@ -22,6 +22,7 @@
 | 2026-05-31-user-request-summaries | Save user request summaries | _history | completed | codex-primary | No action. Future meaningful work must update _history/user-requests before close-out. |
 | 2026-05-31-daily-collected-summary | Gather today's work summary | _history | completed | codex-primary | No action. Use _history/work-summaries/2026/2026-05-31.ko.md as today's collected summary. |
 | 2026-05-31-request-outcome-trace | Connect requests to outcomes | _history | completed | codex-primary | No action. Future meaningful work must update _history/request-traces before close-out. |
+| 2026-05-31-requirements-management | Add requirements management lifecycle | _requirements | completed | codex-primary | No action. Future meaningful work must update requirements targets before implementation and close-out. |
 
 ## Blockers
 

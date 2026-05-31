@@ -34,6 +34,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep user-readable completed-work summaries under `_history/work-summaries/`.
 - Keep prompt-level web search records under `_history/web-searches/`.
 - Keep user request summaries under `_history/user-requests/`.
+- Keep shared requirements baselines, changes, and reviews under `_requirements/`; use project-local `docs/requirements/` for project-specific requirements.
 - Keep long-context resume packets under `_history/context-archives/` when context saturation risk appears.
 - Prefer Python for agent runtimes, orchestration, evaluation, and backend automation.
 - Prefer mature open-source components before custom platform infrastructure.
@@ -89,6 +90,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `configs/research/`: source registry and research profile configs
 - `configs/open-source/`: dependency candidate scoring inputs
 - `research-insight-planner-agent` is the core Perplexity-style research agent for search, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review
+- `requirements-manager-agent` keeps user requests, reviewed requirements, implementation, and evaluation connected
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`
 - general research readiness requires `research_profile_paths`, all answer-engine stage IDs, and `citation_requirements`
 - coding research should pass `coding-research-agent` before implementation when investigation is needed
@@ -98,6 +100,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - factual final outputs should pass `hallucination-guard-agent` when claims need grounding
 - close-out evaluation should include `web_search_record_targets` pointing to `_history/web-searches/YYYY/`
 - close-out evaluation should include `user_request_summary_targets` pointing to `_history/user-requests/YYYY/`
+- close-out evaluation should include `requirements_targets` pointing to `_requirements/` or project-local requirements files
 - close-out evaluation should include `request_trace_targets` pointing to `_history/request-traces/YYYY/`
 - close-out evaluation should include `work_summary_targets` pointing to `_history/work-summaries/YYYY/`
 - context archive close-out should include `context_archiving_occurred=true` and `context_archive_targets`
