@@ -42,6 +42,7 @@
 - 코딩 조사 결과를 구현으로 넘기기 전에: [_ops/workflows/56-coding-research.md](workflows/56-coding-research.md), [agent-platform/docs/coding-research-agent.ko.md](../agent-platform/docs/coding-research-agent.ko.md)
 - 코딩 조사 출처 설정을 확인할 때: [agent-platform/configs/research/README.ko.md](../agent-platform/configs/research/README.ko.md)
 - 소스코드 작성 전 아키텍처 후보 비교 기준을 볼 때: [_docs/architecture-first-coding-policy.ko.md](../_docs/architecture-first-coding-policy.ko.md), [agent-platform/configs/research/coding-research-profile.json](../agent-platform/configs/research/coding-research-profile.json)
+- 대기업/고신뢰 사이트 목록을 볼 때: [_docs/enterprise-source-list-policy.ko.md](../_docs/enterprise-source-list-policy.ko.md), [enterprise-source-registry.json](../agent-platform/configs/research/enterprise-source-registry.json), [_research/source-lists/enterprise-high-quality-sites.ko.md](../_research/source-lists/enterprise-high-quality-sites.ko.md)
 - 최종 사실 주장을 검증할 때: [_ops/workflows/70-hallucination-prevention.md](workflows/70-hallucination-prevention.md), [_docs/hallucination-prevention-policy.ko.md](../_docs/hallucination-prevention-policy.ko.md)
 - 계획 과정을 볼 때: [_history/plans/README.ko.md](../_history/plans/README.ko.md)
 - 컨텍스트가 길어져 재개 패킷이 필요할 때: [_docs/context-archive-policy.ko.md](../_docs/context-archive-policy.ko.md), [_history/context-archives/README.ko.md](../_history/context-archives/README.ko.md), [_ops/workflows/45-context-archive.md](workflows/45-context-archive.md)

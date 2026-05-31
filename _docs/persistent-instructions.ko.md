@@ -35,6 +35,7 @@
 - 웹 검색 후 로컬 계획 전에 `memory-bootstrap-agent`로 필수 메모리 anchor를 확인하고 hot context를 읽는다.
 - durable rule, 출처 설정, 프롬프트, 워크플로, 프로젝트 경계, 평가 루프가 바뀌면 `agent-platform/configs/memory/bootstrap-manifest.json`도 갱신한다.
 - 조사나 계획 작업은 공식 문서, 논문, 오픈소스 repo, 외국 기술 블로그, 조사 아티클, 커뮤니티/소셜 신호, 반대 사례를 폭넓게 수집한다.
+- 대기업 엔지니어링 블로그, 공식 연구소, architecture center, 고신뢰 독립 자료 목록은 `agent-platform/configs/research/enterprise-source-registry.json`과 `_research/source-lists/`에서 별도로 관리한다.
 - 좋아요, 공유, 댓글, GitHub stars, Hacker News 점수, Reddit 활동, LinkedIn 반응은 adoption 신호로만 보고 단독 사실 근거로 쓰지 않는다.
 - 폭넓은 출처 수집이 반복되거나 출처 묶음 점수화/보고서가 필요하면 `_tools/source-collector/`를 사용한다.
 - 지식 베이스 내용은 틀릴 수 있다고 가정하고, 근거로 사용하기 전 `knowledge-skeptic-agent`로 검증한다.

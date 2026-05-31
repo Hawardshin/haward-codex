@@ -13,6 +13,7 @@
 | Agent planning | [Reference source config](topics/agent-planning/2026-05-31-reference-source-config.en.md) |
 | Agent planning | [Code reference research](topics/agent-planning/2026-05-31-code-reference-research.en.md) |
 | Agent planning | [Architecture-first coding](topics/agent-planning/2026-05-31-architecture-first-coding.en.md) |
+| Agent planning | [Enterprise/high-quality source registry](topics/agent-planning/2026-05-31-enterprise-source-registry.en.md) |
 | Agent planning | [Perplexity-style core research agent](topics/agent-planning/2026-05-31-perplexity-style-research-agent.en.md) |
 | Agent planning | [Open-source installation policy](topics/agent-planning/2026-05-31-open-source-installation-policy.en.md) |
 | Agent reliability | [Hallucination prevention operating references](topics/agent-reliability/2026-05-31-hallucination-prevention.en.md) |
@@ -27,6 +28,12 @@
 | Requirements management | [Spec-driven development structure](topics/requirements/2026-05-31-spec-driven-development.en.md) |
 | Skill lifecycle | [Skill creation, validation, and improvement structure](topics/requirements/2026-05-31-skill-lifecycle.en.md) |
 | Dependency management | [Installation audit trail policy](topics/dependency-management/2026-05-31-installation-audit-trail.en.md) |
+
+## Source Lists
+
+| List | Path |
+| --- | --- |
+| Enterprise and high-quality site list | [source-lists/enterprise-high-quality-sites.en.md](source-lists/enterprise-high-quality-sites.en.md) |
 
 ## Update Rules
 

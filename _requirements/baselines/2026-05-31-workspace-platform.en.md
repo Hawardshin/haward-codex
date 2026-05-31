@@ -31,6 +31,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 | REQ-WS-013 | Meaningful implementation work shall pass through spec, plan, tasks, validation, and traceability artifacts, similar to spec-driven development. | UR-2026-05-31-037 | must | baseline | workspace/projects | spec target and evaluator check | `_specs/`, `_docs/spec-driven-development-policy.en.md` |
 | REQ-WS-014 | Custom skill creation and updates shall leave explicit source, trigger examples, validation, forward tests, improvement backlog, and evaluation targets. | UR-2026-05-31-038 | must | baseline | workspace/agent-platform | skill validation and evaluator check | `_skills/`, `_docs/skill-lifecycle-policy.en.md`, `skill-lifecycle-agent` |
 | REQ-WS-015 | Before writing source code, agents shall research best-fit architectures and reference architectures, then record at least two structure candidates and the decision rationale. | UR-2026-05-31-039 | must | baseline | agent-platform/projects | `complete-coding-research` result and architecture fields | `_docs/architecture-first-coding-policy.en.md`, `coding-research-agent` |
+| REQ-WS-016 | Large-company engineering, official research lab, architecture center, and high-signal independent source lists shall be managed in a registry separate from the general source taxonomy. | UR-2026-05-31-040 | must | baseline | agent-platform/_research | `check-config-contract` and source list review | `agent-platform/configs/research/enterprise-source-registry.json`, `_research/source-lists/` |
 
 ## Change Management
 
@@ -39,6 +40,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 - Before implementation, link relevant requirement IDs from plans, work summaries, and evaluation input.
 - Before implementation, link relevant spec artifacts under `_specs/` or project `specs/`.
 - Before source-code implementation, link architecture references, architecture options, and decision notes in the coding research record.
+- When enterprise/high-quality sources seed research, update or reference `enterprise-source-registry.json` and `_research/source-lists/`.
 - When skill work occurred, link `_skills/` source, validation results, and improvement ideas.
 - After implementation, update request traces and related requirement artifacts.
 

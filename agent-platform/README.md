@@ -33,6 +33,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep project history and decisions outside transient chat context.
 - Keep user-readable completed-work summaries under `_history/work-summaries/`.
 - Keep prompt-level web search records under `_history/web-searches/`.
+- Keep large-company and high-quality research site seeds in `configs/research/enterprise-source-registry.json`.
 - Keep user request summaries under `_history/user-requests/`.
 - Keep shared requirements baselines, changes, and reviews under `_requirements/`; use project-local `docs/requirements/` for project-specific requirements.
 - Keep shared spec-driven artifacts under `_specs/`; use project-local `specs/` for project-specific specs.
@@ -75,7 +76,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/planning/coding-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json
-PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json
 ```
 
 ## Current Skeleton
@@ -92,6 +93,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `configs/memory/`: durable memory bootstrap manifest
 - `configs/planning/`: structured planning inputs
 - `configs/research/`: source registry and research profile configs
+- `configs/research/enterprise-source-registry.json`: curated large-company, research-lab, architecture-center, and high-signal source seed list
 - `configs/open-source/`: dependency candidate scoring inputs
 - `research-insight-planner-agent` is the core Perplexity-style research agent for search, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review
 - `requirements-manager-agent` keeps user requests, reviewed requirements, implementation, and evaluation connected

@@ -135,6 +135,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - If installation occurred, include `installation_occurred=true` and `installation_record_targets`; missing installation records are blocking gaps.
 - Check repository history, existing project docs, official documentation, mature open-source projects, or other strong references before judging related work.
 - Use `research-insight-planner-agent` when planning depends on external facts, current information, prior repository knowledge, or multiple references.
+- Use `agent-platform/configs/research/enterprise-source-registry.json` as the separate seed list for large-company engineering, research-lab, architecture-center, and high-signal independent sources.
 - Use `coding-research-agent` when coding work needs investigation before implementation, especially for APIs, dependencies, architecture, bug root cause, performance, security, migrations, tests, or implementation patterns.
 - Link relevant `_history/plans/YYYY/` files from evaluation reports when a saved plan guided the work.
 - When internet research produces reusable findings, create or update research notes and link them from related docs or evaluation reports.

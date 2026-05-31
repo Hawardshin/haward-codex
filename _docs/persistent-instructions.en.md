@@ -35,6 +35,7 @@ This document records durable user instructions in English.
 - After web search and before local planning, run `memory-bootstrap-agent` to check required memory anchors and read hot context.
 - When durable rules, source configs, prompts, workflows, project boundaries, or evaluation loops change, update `agent-platform/configs/memory/bootstrap-manifest.json`.
 - For research or planning work, collect broad high-authority sources, including official docs, papers, open-source repos, international tech blogs, analysis articles, community/social signals, and contrary examples.
+- Manage large-company engineering blogs, official research labs, architecture centers, and high-signal independent source lists separately in `agent-platform/configs/research/enterprise-source-registry.json` and `_research/source-lists/`.
 - Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption signals, not standalone proof.
 - Use `_tools/source-collector/` when broad source collection becomes repetitive or source bundles need scoring/reporting.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before relying on it.

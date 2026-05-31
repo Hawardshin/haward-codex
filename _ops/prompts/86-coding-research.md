@@ -13,10 +13,11 @@ Act as coding-research-agent.
 Start with web search before planning or editing files.
 Define the coding research goal, project context, and research type.
 Select the source registry and research profile config before collecting sources.
-Record the selected configs in reference_config_paths, usually agent-platform/configs/research/source-registry.json and agent-platform/configs/research/coding-research-profile.json.
+Record the selected configs in reference_config_paths, usually agent-platform/configs/research/source-registry.json, agent-platform/configs/research/enterprise-source-registry.json when high-quality source seeds are useful, and agent-platform/configs/research/coding-research-profile.json.
 Use web search plus at least one other channel: repository search, official docs, code search, package registry search, papers, or open-source repository search.
 Prefer official documentation, primary sources, maintained open-source repositories, standards, papers, and strong implementation examples.
 For broad research, collect source diversity: official docs, papers, open-source repos, international technical blogs, analysis articles, community/adoption signals, and contrary examples.
+For large-company engineering, official research-lab, architecture-center, or high-signal source discovery, check enterprise-source-registry.json first, then re-open exact source pages before citing claims.
 Before writing source code, search for best-fit architecture patterns, reference architectures, architecture documentation frameworks, and strong project architecture examples.
 Use architecture references such as well-architected frameworks, Azure/AWS/GCP architecture guidance, C4, arc42, SEI views, ADRs, or mature project docs/architecture examples when they fit the task.
 Record architecture_reference_sources with URLs or source paths.

@@ -9,7 +9,7 @@
 1. Apply [_ops/workflows/05-web-first-intake.md](05-web-first-intake.md) before local planning.
 2. Write the coding research goal and the owning project or shared workspace boundary.
 3. Choose one or more research types: `api_docs`, `library_selection`, `bug_root_cause`, `architecture`, `performance`, `security`, `migration`, `testing`, `open_source`, `implementation_pattern`.
-4. Select reference configs and record them in `reference_config_paths`, usually `agent-platform/configs/research/source-registry.json` and `agent-platform/configs/research/coding-research-profile.json`.
+4. Select reference configs and record them in `reference_config_paths`, usually `agent-platform/configs/research/source-registry.json`, `agent-platform/configs/research/enterprise-source-registry.json` when high-quality source seeds are useful, and `agent-platform/configs/research/coding-research-profile.json`.
 5. Search the web for current external evidence.
 6. Search at least one additional channel: repository docs, official docs, code, package registries, papers, or open-source repos.
 7. Before writing source code, search for best-fit architecture patterns, reference architectures, and architecture documentation frameworks such as well-architected frameworks, C4, arc42, SEI views, ADRs, or strong project `docs/architecture` examples.
@@ -22,10 +22,11 @@
 14. Include at least one authoritative source type: `official`, `paper`, `standard`, or `open_source`.
 15. Include at least one practical/adoption/contrary source type: `open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `news`, or `contrary`.
 16. For broad or repeated research, apply [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md) and use `_tools/source-collector/` when useful.
-17. Separate factual evidence from adoption signals such as stars, likes, comments, Hacker News points, Reddit activity, or LinkedIn reactions.
-18. Validate any internal knowledge-base references with `knowledge-skeptic-agent`.
-19. Synthesize findings into options, trade-offs, and a recommendation.
-20. Answer all post-research questions:
+17. Check `enterprise-source-registry.json` for large-company engineering, official research-lab, architecture-center, or high-signal independent sources, then re-open exact pages before citing claims.
+18. Separate factual evidence from adoption signals such as stars, likes, comments, Hacker News points, Reddit activity, or LinkedIn reactions.
+19. Validate any internal knowledge-base references with `knowledge-skeptic-agent`.
+20. Synthesize findings into options, trade-offs, and a recommendation.
+21. Answer all post-research questions:
     - `what_was_verified`
     - `best_option`
     - `why_this_option`
@@ -35,11 +36,11 @@
     - `validation_plan`
     - `reusable_knowledge`
     - `next_action`
-21. Save the plan process under `_history/plans/YYYY/`.
-22. Capture reusable research under `_research/` or promote repeatable assets into `_templates/`, `_tools/`, or `_skills/`.
-23. Run `coding-research-agent` with `complete-coding-research`.
-24. If the result is `more_research_required`, resolve the listed gaps before implementation.
-25. If the result is `ready_to_implement`, proceed with the implementation plan and later close with `work-evaluator-agent`.
+22. Save the plan process under `_history/plans/YYYY/`.
+23. Capture reusable research under `_research/` or promote repeatable assets into `_templates/`, `_tools/`, or `_skills/`.
+24. Run `coding-research-agent` with `complete-coding-research`.
+25. If the result is `more_research_required`, resolve the listed gaps before implementation.
+26. If the result is `ready_to_implement`, proceed with the implementation plan and later close with `work-evaluator-agent`.
 
 ## Rule
 

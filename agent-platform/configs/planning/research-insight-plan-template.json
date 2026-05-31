@@ -13,7 +13,8 @@
   ],
   "research_profile_paths": [
     "agent-platform/configs/research/research-agent-profile.json",
-    "agent-platform/configs/research/source-registry.json"
+    "agent-platform/configs/research/source-registry.json",
+    "agent-platform/configs/research/enterprise-source-registry.json"
   ],
   "answer_engine_stages": [
     "query_understanding",

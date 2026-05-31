@@ -23,6 +23,7 @@
 - 공식/1차 출처를 먼저 확인한다.
 - 논문과 기술 블로그를 함께 본다. 논문은 엄밀성, 블로그는 실제 적용과 제약을 보완한다.
 - 외국 기술 블로그와 해외 아티클을 적극 포함한다.
+- 대기업 엔지니어링 블로그, 공식 연구소, architecture center, 고신뢰 독립 자료가 필요하면 `agent-platform/configs/research/enterprise-source-registry.json`을 먼저 확인한다.
 - 좋아요 수, 공유 수, 댓글 수, GitHub stars, Hacker News 점수, LinkedIn 반응은 "인기도/확산 신호"로 기록하되 사실 근거로 단독 사용하지 않는다.
 - LinkedIn 글은 저자, 소속, 날짜, 반응, 원문 링크를 확인하고 1차 근거로 격상하지 않는다.
 - 조사 아티클은 방법론, 데이터 출처, 후원/광고 여부를 확인한다.
@@ -46,7 +47,7 @@
 
 일반 조사와 계획은 `research-insight-planner-agent`와 `agent-platform/configs/research/research-agent-profile.json`을 사용해 출처 순위화, 증거 추출, 종합, citation grounding, skeptic review를 기록한다.
 
-코딩 조사는 조사 완료 전에 `coding-research-agent`로 출처, `source_types`, `reference_config_paths`, `code_reference_sources`, `code_reference_notes`, 선택지, 추천안, 위험, 검증 계획, 표준 종료 질문을 함께 확인한다. 코딩 조사가 구현 준비 상태가 되려면 최소 3개 이상의 `other`가 아닌 출처 유형을 사용하고, 어떤 출처 설정을 참고했는지 `agent-platform/configs/research/` 아래 JSON 설정으로 남겨야 하며, 관련 오픈소스 구조와 참고 구현 또는 잘 작성된 코드/테스트를 조사해야 한다.
+코딩 조사는 조사 완료 전에 `coding-research-agent`로 출처, `source_types`, `reference_config_paths`, `code_reference_sources`, `code_reference_notes`, 선택지, 추천안, 위험, 검증 계획, 표준 종료 질문을 함께 확인한다. 코딩 조사가 구현 준비 상태가 되려면 최소 3개 이상의 `other`가 아닌 출처 유형을 사용하고, 어떤 출처 설정을 참고했는지 `agent-platform/configs/research/` 아래 JSON 설정으로 남겨야 하며, 관련 오픈소스 구조와 참고 구현 또는 잘 작성된 코드/테스트를 조사해야 한다. 대기업/고신뢰 출처를 쓰는 경우 `reference_config_paths`에 `enterprise-source-registry.json`을 함께 기록한다.
 
 오픈소스 설치가 필요하면 [_docs/open-source-installation-policy.ko.md](open-source-installation-policy.ko.md)에 따라 설치 범위, 설치 명령, dependency 기록 파일, 설치 감사 기록, 보안/라이선스 검토, 검증, rollback을 함께 남긴다. 실제 설치가 발생하면 `_ops/installations/registry.json`과 `_history/installations/YYYY/`를 갱신한다.
 
@@ -87,4 +88,5 @@ python3 _tools/source-collector/src/source_collector.py check /tmp/source-bundle
 - [_ops/workflows/05-web-first-intake.md](../_ops/workflows/05-web-first-intake.md)
 - [_ops/workflows/55-research-insight-planning.md](../_ops/workflows/55-research-insight-planning.md)
 - [_ops/workflows/56-coding-research.md](../_ops/workflows/56-coding-research.md)
+- [대기업/고신뢰 사이트 목록](../_research/source-lists/enterprise-high-quality-sites.ko.md)
 - [_research/topics/agent-planning/2026-05-31-source-collection-policy.ko.md](../_research/topics/agent-planning/2026-05-31-source-collection-policy.ko.md)

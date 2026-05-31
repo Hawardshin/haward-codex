@@ -158,6 +158,7 @@ project-name/
 - AI가 세팅을 잊지 않게 하는 부트스트랩 manifest는 `agent-platform/configs/memory/bootstrap-manifest.json`에 둔다.
 - 공유 설정 파일의 자기 설명 기준은 `_docs/self-documenting-config-policy.ko.md`와 `agent-platform`의 `check-config-contract` 명령을 따른다.
 - 출처 수집 기준은 `_docs/source-collection-policy.ko.md`를 따른다.
+- 대기업/고신뢰 사이트 목록은 `agent-platform/configs/research/enterprise-source-registry.json`과 `_research/source-lists/`에서 별도로 관리한다.
 - 오픈소스 설치 기준은 `_docs/open-source-installation-policy.ko.md`를 따른다.
 - 설치 기록은 `_ops/installations/registry.json`과 `_history/installations/`에서 확인한다.
 - 핵심 조사 에이전트 프로필은 `agent-platform/configs/research/research-agent-profile.json`에서 확인한다.

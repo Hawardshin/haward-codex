@@ -25,6 +25,7 @@
   ],
   "reference_config_paths": [
     "agent-platform/configs/research/source-registry.json",
+    "agent-platform/configs/research/enterprise-source-registry.json",
     "agent-platform/configs/research/coding-research-profile.json"
   ],
   "code_reference_sources": [

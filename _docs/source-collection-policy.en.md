@@ -23,6 +23,7 @@ This policy extends [_docs/web-first-work-policy.en.md](web-first-work-policy.en
 - Check official or primary sources first.
 - Use both papers and technical blogs. Papers add rigor; blogs add field constraints and applied patterns.
 - Actively include international tech blogs and foreign-language articles when useful.
+- When large-company engineering blogs, official research labs, architecture centers, or high-signal independent sources are useful, check `agent-platform/configs/research/enterprise-source-registry.json` first.
 - Likes, shares, comments, GitHub stars, Hacker News points, and LinkedIn reactions are popularity or adoption signals, not standalone factual proof.
 - For LinkedIn posts, check author, affiliation, date, reactions, and linked primary sources.
 - For analysis articles, check methodology, data sources, sponsorship, and advertising incentives.
@@ -46,7 +47,7 @@ When collecting or reporting many sources becomes repetitive, use `_tools/source
 
 For general research and planning, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json` to record source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
 
-For coding research, run `coding-research-agent` before completion to check sources, `source_types`, `reference_config_paths`, `code_reference_sources`, `code_reference_notes`, options, recommendation, risks, validation plan, and standard post-research questions. Coding research needs at least three distinct non-`other` source types, must record the source settings it used through JSON configs under `agent-platform/configs/research/`, and must inspect relevant open-source structure, reference implementations, or well-written code/tests.
+For coding research, run `coding-research-agent` before completion to check sources, `source_types`, `reference_config_paths`, `code_reference_sources`, `code_reference_notes`, options, recommendation, risks, validation plan, and standard post-research questions. Coding research needs at least three distinct non-`other` source types, must record the source settings it used through JSON configs under `agent-platform/configs/research/`, and must inspect relevant open-source structure, reference implementations, or well-written code/tests. When enterprise/high-quality sources are used, also include `enterprise-source-registry.json` in `reference_config_paths`.
 
 If open-source installation is needed, follow [_docs/open-source-installation-policy.en.md](open-source-installation-policy.en.md) and record install scope, command, dependency file, installation audit record, security/license review, verification, and rollback. If installation actually occurs, update `_ops/installations/registry.json` and `_history/installations/YYYY/`.
 
@@ -87,4 +88,5 @@ python3 _tools/source-collector/src/source_collector.py check /tmp/source-bundle
 - [_ops/workflows/05-web-first-intake.md](../_ops/workflows/05-web-first-intake.md)
 - [_ops/workflows/55-research-insight-planning.md](../_ops/workflows/55-research-insight-planning.md)
 - [_ops/workflows/56-coding-research.md](../_ops/workflows/56-coding-research.md)
+- [Enterprise and high-quality site list](../_research/source-lists/enterprise-high-quality-sites.en.md)
 - [_research/topics/agent-planning/2026-05-31-source-collection-policy.en.md](../_research/topics/agent-planning/2026-05-31-source-collection-policy.en.md)

@@ -31,6 +31,7 @@
 | REQ-WS-013 | 의미 있는 구현 작업은 spec-driven 방식처럼 스펙, 계획, 작업 목록, 검증, traceability 산출물을 거쳐야 한다. | UR-2026-05-31-037 | must | baseline | workspace/projects | spec target과 evaluator check 확인 | `_specs/`, `_docs/spec-driven-development-policy.ko.md` |
 | REQ-WS-014 | 커스텀 스킬 생성/수정은 명시적인 원본, trigger 예시, 검증, 전진 테스트, 개선 backlog, 평가 target을 남겨야 한다. | UR-2026-05-31-038 | must | baseline | workspace/agent-platform | skill validation과 evaluator check 확인 | `_skills/`, `_docs/skill-lifecycle-policy.ko.md`, `skill-lifecycle-agent` |
 | REQ-WS-015 | 소스 코드 작성 전에는 best-fit 아키텍처와 reference architecture를 조사하고 최소 두 개의 구조 후보와 선택 근거를 기록해야 한다. | UR-2026-05-31-039 | must | baseline | agent-platform/projects | `complete-coding-research` 결과와 architecture fields 확인 | `_docs/architecture-first-coding-policy.ko.md`, `coding-research-agent` |
+| REQ-WS-016 | 대기업 엔지니어링, 공식 연구소, architecture center, 고신뢰 독립 출처 목록은 일반 source taxonomy와 분리된 registry로 관리해야 한다. | UR-2026-05-31-040 | must | baseline | agent-platform/_research | `check-config-contract`와 source list 확인 | `agent-platform/configs/research/enterprise-source-registry.json`, `_research/source-lists/` |
 
 ## 변경 관리
 
@@ -39,6 +40,7 @@
 - 구현 전에는 관련 요구사항 ID를 계획/작업 요약/평가 입력에 연결한다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
+- 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.
 - 스킬 작업이 있으면 `_skills/` 원본, 검증 결과, 개선 아이디어를 연결한다.
 - 구현 후에는 요청-결과 추적표와 요구사항의 관련 산출물을 갱신한다.
 

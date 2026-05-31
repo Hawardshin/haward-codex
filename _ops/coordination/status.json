@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-05-31",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -239,6 +239,25 @@
         "_specs/workspace-platform/2026-05-31-architecture-first-coding/spec.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-05-31-architecture-first-coding.ko.md"
+    },
+    {
+      "id": "2026-05-31-enterprise-source-registry",
+      "title": "Add enterprise and high-quality source registry",
+      "project": "agent-platform",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-05-31",
+      "updated_at": "2026-05-31",
+      "next_action": "No action. Future research should update this registry when new reusable high-quality sources are found.",
+      "blockers": [],
+      "references": [
+        "agent-platform/configs/research/enterprise-source-registry.json",
+        "_research/source-lists/enterprise-high-quality-sites.ko.md",
+        "_docs/enterprise-source-list-policy.ko.md",
+        "_specs/workspace-platform/2026-05-31-enterprise-source-registry/spec.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-05-31-enterprise-source-registry.ko.md"
     }
   ]
 }

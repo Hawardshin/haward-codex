@@ -17,6 +17,7 @@
       "A durable user instruction becomes mandatory for future sessions.",
       "A new shared config, prompt, workflow, project registry, or map becomes part of startup context.",
       "The core research-agent profile or answer-engine stage rules change.",
+      "The enterprise/high-quality source seed registry changes.",
       "The work summary layer or close-out documentation contract changes.",
       "The context archive layer or long-context resume contract changes.",
       "The user request summary layer or request-intent tracking contract changes.",
@@ -203,6 +204,17 @@
       "last_checked": "2026-05-31"
     },
     {
+      "id": "enterprise_source_registry",
+      "title": "Enterprise And High-Quality Source Registry",
+      "path": "agent-platform/configs/research/enterprise-source-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "separate curated source seed list",
+        "large-company engineering, official research-lab, architecture-center, and high-signal source discovery"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
       "id": "agentmemory_md",
       "title": "AgentMemory.md",
       "url": "https://agentmemory.md/",
@@ -362,6 +374,16 @@
       ]
     },
     {
+      "id": "enterprise_source_registry_must_stay_discoverable",
+      "rule": "The enterprise/high-quality source registry must remain a warm memory anchor so future sessions can find large-company engineering, research-lab, architecture-center, and high-signal sites without repeating discovery.",
+      "reason": "The user explicitly asked for those site lists to be managed separately.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors"
+      ]
+    },
+    {
       "id": "web_search_records_must_stay_discoverable",
       "rule": "The web search record layer must remain a warm memory anchor and close-out target so future sessions can inspect prompt-level searches and public decision summaries.",
       "reason": "The user explicitly requires every prompt to start with web search and to leave a text record of the search process without storing raw internal reasoning.",
@@ -437,6 +459,7 @@
     "project_registry",
     "platform_readme",
     "source_registry",
+    "enterprise_source_registry",
     "research_agent_profile",
     "coding_research_profile",
     "work_summary_policy",
@@ -462,6 +485,7 @@
     "project_registry",
     "platform_readme",
     "source_registry",
+    "enterprise_source_registry",
     "research_agent_profile",
     "coding_research_profile",
     "work_summary_policy",
@@ -563,6 +587,14 @@
       "purpose": "Canonical source type taxonomy and reusable reference source catalog.",
       "required": true,
       "load_order": 11
+    },
+    {
+      "id": "enterprise_source_registry",
+      "path": "agent-platform/configs/research/enterprise-source-registry.json",
+      "tier": "warm",
+      "purpose": "Separate curated seed list for large-company engineering, official research-lab, architecture-center, and high-signal sources.",
+      "required": true,
+      "load_order": 22
     },
     {
       "id": "research_agent_profile",

@@ -1,0 +1,779 @@
+{
+  "schema_version": "2026-05-31",
+  "name": "enterprise-high-quality-source-registry",
+  "purpose": "Separate curated list of large-company, research-lab, architecture-center, and high-signal engineering sites to seed future research before broader web search.",
+  "reader_guide": {
+    "summary": "This registry is a seed list, not proof. Use it to quickly find high-quality primary or field-tested sources, then re-check each site before citing or using it for a decision.",
+    "how_to_read": [
+      "Use selection_criteria to understand why a site belongs here.",
+      "Use quality_tiers to decide whether a source is primary evidence, field evidence, or contextual signal.",
+      "Use sites to find candidate links by category and domain.",
+      "Re-check last_checked and source freshness before relying on any entry."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-05-31",
+    "update_triggers": [
+      "A new large-company engineering, architecture, or research site becomes repeatedly useful.",
+      "A listed source becomes stale, low quality, unavailable, or marketing-heavy.",
+      "A research task repeatedly needs a domain-specific high-quality source that is not listed.",
+      "Source collection rules change for coding, architecture, AI, infrastructure, security, or product engineering work."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "source_collection_policy",
+      "title": "Source Collection Policy",
+      "path": "_docs/source-collection-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "source diversity and reliability rules",
+        "adoption signal handling"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "source_registry",
+      "title": "Source Registry",
+      "path": "agent-platform/configs/research/source-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "source type taxonomy",
+        "relationship to general research configs"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "coding_research_profile",
+      "title": "Coding Research Profile",
+      "path": "agent-platform/configs/research/coding-research-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "coding research reference_config_paths",
+        "architecture and code reference requirements"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "meta_engineering",
+      "title": "Engineering at Meta",
+      "url": "https://engineering.fb.com/",
+      "source_type": "official",
+      "used_for": [
+        "large-scale engineering examples",
+        "AI infrastructure and systems cases"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "stripe_engineering",
+      "title": "Stripe Engineering Blog",
+      "url": "https://stripe.com/blog/engineering",
+      "source_type": "official",
+      "used_for": [
+        "API, payments, reliability, developer tooling, and migration examples"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "github_engineering",
+      "title": "GitHub Engineering Blog",
+      "url": "https://github.blog/engineering/",
+      "source_type": "official",
+      "used_for": [
+        "developer platform and large-scale repository engineering"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "cloudflare_blog",
+      "title": "Cloudflare Blog",
+      "url": "https://blog.cloudflare.com/",
+      "source_type": "official",
+      "used_for": [
+        "edge, networking, security, performance, and incident engineering"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "microsoft_research_blog",
+      "title": "Microsoft Research Blog",
+      "url": "https://www.microsoft.com/en-us/research/blog/",
+      "source_type": "official",
+      "used_for": [
+        "AI, systems, security, and research-to-practice references"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "aws_architecture_blog",
+      "title": "AWS Architecture Blog",
+      "url": "https://aws.amazon.com/blogs/architecture/",
+      "source_type": "official",
+      "used_for": [
+        "cloud architecture patterns",
+        "well-architected implementation examples"
+      ],
+      "last_checked": "2026-05-31"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "separate_seed_list",
+      "rule": "Keep this enterprise/high-quality site list separate from source-registry taxonomy entries.",
+      "reason": "The user asked for large-company and high-level site lists to be managed separately.",
+      "applies_to": [
+        "sites",
+        "source-registry.json"
+      ]
+    },
+    {
+      "id": "seed_not_proof",
+      "rule": "A site being listed here does not make a claim true; open and verify the exact page before citing or deciding.",
+      "reason": "Even high-quality sources can be stale, scoped, biased, or unrelated to the current task.",
+      "applies_to": [
+        "sites",
+        "maintenance_rules"
+      ]
+    },
+    {
+      "id": "official_before_aggregator",
+      "rule": "Prefer the official company, lab, architecture center, paper, or maintainer page over aggregators and SEO lists.",
+      "reason": "Primary sources are better for factual claims and reduce hallucination risk.",
+      "applies_to": [
+        "selection_criteria",
+        "sites"
+      ]
+    },
+    {
+      "id": "freshness_required_before_use",
+      "rule": "Before using a listed site for current recommendations, re-check the source and update last_checked or record the fresh check in a web-search record.",
+      "reason": "Source quality and availability change over time.",
+      "applies_to": [
+        "sites.last_checked",
+        "_history/web-searches"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "quality_tiers",
+      "meaning": "How strong the site is as evidence: primary, field-practice, contextual, or adoption signal.",
+      "required": true
+    },
+    {
+      "field": "selection_criteria",
+      "meaning": "Criteria used to add or remove a site from the curated list.",
+      "required": true
+    },
+    {
+      "field": "sites",
+      "meaning": "Curated site entries with id, name, url, organization, category, source type, quality tier, and caveats.",
+      "required": true
+    },
+    {
+      "field": "maintenance_rules",
+      "meaning": "Rules for keeping the list current and trustworthy.",
+      "required": true
+    }
+  ],
+  "quality_tiers": [
+    {
+      "id": "tier_1_primary",
+      "meaning": "Official source suitable for factual claims after page-level verification.",
+      "examples": [
+        "official documentation",
+        "official architecture center",
+        "official research lab page"
+      ]
+    },
+    {
+      "id": "tier_2_field_practice",
+      "meaning": "Company engineering blog or technical case study useful for architecture, coding patterns, incidents, and operational trade-offs.",
+      "examples": [
+        "large-company engineering blog",
+        "architecture post",
+        "incident review"
+      ]
+    },
+    {
+      "id": "tier_3_context",
+      "meaning": "High-quality independent or community-facing source useful for framing and trade-offs, but not primary proof.",
+      "examples": [
+        "expert essay",
+        "industry analysis",
+        "conference write-up"
+      ]
+    }
+  ],
+  "selection_criteria": [
+    "Official company, lab, architecture center, standards body, or recognized expert source.",
+    "Repeatedly useful for architecture, source-code structure, AI agents, infrastructure, security, reliability, developer tools, or product engineering.",
+    "Shows technical detail rather than only product marketing.",
+    "Has a stable URL and a clear publisher.",
+    "Can be re-checked before use and linked from research records."
+  ],
+  "sites": [
+    {
+      "id": "aws_architecture_center",
+      "name": "AWS Architecture Center",
+      "organization": "Amazon Web Services",
+      "url": "https://aws.amazon.com/architecture/",
+      "category": "architecture_center",
+      "source_type": "official",
+      "quality_tier": "tier_1_primary",
+      "use_for": [
+        "reference architectures",
+        "cloud patterns",
+        "well-architected examples"
+      ],
+      "caveats": [
+        "AWS-specific service bias; compare with cloud-neutral sources when portability matters."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "aws_architecture_blog",
+      "name": "AWS Architecture Blog",
+      "organization": "Amazon Web Services",
+      "url": "https://aws.amazon.com/blogs/architecture/",
+      "category": "architecture_blog",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "architecture examples",
+        "cloud implementation trade-offs",
+        "customer solution patterns"
+      ],
+      "caveats": [
+        "Treat customer cases as context-specific."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "azure_architecture_center",
+      "name": "Azure Architecture Center",
+      "organization": "Microsoft",
+      "url": "https://learn.microsoft.com/azure/architecture/",
+      "category": "architecture_center",
+      "source_type": "official",
+      "quality_tier": "tier_1_primary",
+      "use_for": [
+        "reference architectures",
+        "architecture patterns",
+        "cloud design guidance"
+      ],
+      "caveats": [
+        "Azure-specific service bias; compare with other architecture centers."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "google_cloud_architecture_framework",
+      "name": "Google Cloud Architecture Framework",
+      "organization": "Google Cloud",
+      "url": "https://cloud.google.com/architecture/framework",
+      "category": "architecture_framework",
+      "source_type": "official",
+      "quality_tier": "tier_1_primary",
+      "use_for": [
+        "system design principles",
+        "quality attributes",
+        "cloud architecture review"
+      ],
+      "caveats": [
+        "Cloud-specific framing; validate fit for local or non-cloud projects."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "google_developers_blog",
+      "name": "Google Developers Blog",
+      "organization": "Google",
+      "url": "https://developers.googleblog.com/",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "developer platform updates",
+        "API and product engineering examples"
+      ],
+      "caveats": [
+        "Often product-facing; verify technical depth per post."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "google_research_blog",
+      "name": "Google Research Blog",
+      "organization": "Google",
+      "url": "https://research.google/blog/",
+      "category": "research_lab",
+      "source_type": "official",
+      "quality_tier": "tier_1_primary",
+      "use_for": [
+        "AI and systems research",
+        "paper and project context"
+      ],
+      "caveats": [
+        "Research results may not be production-ready."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "google_deepmind_blog",
+      "name": "Google DeepMind Blog",
+      "organization": "Google DeepMind",
+      "url": "https://deepmind.google/discover/blog/",
+      "category": "research_lab",
+      "source_type": "official",
+      "quality_tier": "tier_1_primary",
+      "use_for": [
+        "AI research",
+        "agent and model capability references"
+      ],
+      "caveats": [
+        "Research claims need paper/model-card checks before implementation decisions."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "meta_engineering",
+      "name": "Engineering at Meta",
+      "organization": "Meta",
+      "url": "https://engineering.fb.com/",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "large-scale systems",
+        "AI infrastructure",
+        "production engineering practices"
+      ],
+      "caveats": [
+        "Meta-specific scale may exceed local needs."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "microsoft_research_blog",
+      "name": "Microsoft Research Blog",
+      "organization": "Microsoft Research",
+      "url": "https://www.microsoft.com/en-us/research/blog/",
+      "category": "research_lab",
+      "source_type": "official",
+      "quality_tier": "tier_1_primary",
+      "use_for": [
+        "AI agents",
+        "systems research",
+        "security and reliability research"
+      ],
+      "caveats": [
+        "Research posts need paper or artifact checks for reproducibility."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "netflix_techblog",
+      "name": "Netflix TechBlog",
+      "organization": "Netflix",
+      "url": "https://netflixtechblog.com/",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "streaming architecture",
+        "distributed systems",
+        "data and experimentation platforms"
+      ],
+      "caveats": [
+        "Scale and media-domain constraints may not transfer directly."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "uber_engineering",
+      "name": "Uber Engineering Blog",
+      "organization": "Uber",
+      "url": "https://www.uber.com/blog/engineering/",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "marketplace systems",
+        "data platforms",
+        "mobile and backend engineering"
+      ],
+      "caveats": [
+        "Operational assumptions may depend on Uber-scale workloads."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "stripe_engineering",
+      "name": "Stripe Engineering Blog",
+      "organization": "Stripe",
+      "url": "https://stripe.com/blog/engineering",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "API design",
+        "payments reliability",
+        "developer tooling",
+        "data migration"
+      ],
+      "caveats": [
+        "Financial-domain constraints can be stricter than local projects."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "github_engineering",
+      "name": "GitHub Engineering Blog",
+      "organization": "GitHub",
+      "url": "https://github.blog/engineering/",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "developer platform engineering",
+        "repository-scale systems",
+        "code collaboration infrastructure"
+      ],
+      "caveats": [
+        "Some posts are product-adjacent; verify technical details."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "cloudflare_blog",
+      "name": "Cloudflare Blog",
+      "organization": "Cloudflare",
+      "url": "https://blog.cloudflare.com/",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "edge systems",
+        "networking",
+        "security",
+        "performance and incident analysis"
+      ],
+      "caveats": [
+        "Cloudflare platform specifics may not generalize."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "shopify_engineering",
+      "name": "Shopify Engineering",
+      "organization": "Shopify",
+      "url": "https://shopify.engineering/",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "commerce platforms",
+        "Ruby/Rails scale",
+        "developer productivity"
+      ],
+      "caveats": [
+        "Commerce and Rails assumptions may be domain-specific."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "airbnb_engineering",
+      "name": "Airbnb Engineering and Data Science",
+      "organization": "Airbnb",
+      "url": "https://medium.com/airbnb-engineering",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "marketplace systems",
+        "data science platforms",
+        "frontend and mobile practices"
+      ],
+      "caveats": [
+        "Hosted on Medium; verify publisher and date."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "linkedin_engineering",
+      "name": "LinkedIn Engineering",
+      "organization": "LinkedIn",
+      "url": "https://www.linkedin.com/blog/engineering",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "data infrastructure",
+        "professional network scale",
+        "platform engineering"
+      ],
+      "caveats": [
+        "May require login or have dynamic rendering for some pages."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "dropbox_tech",
+      "name": "Dropbox Tech Blog",
+      "organization": "Dropbox",
+      "url": "https://dropbox.tech/",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "storage systems",
+        "sync architecture",
+        "infrastructure engineering"
+      ],
+      "caveats": [
+        "Storage-domain assumptions may not transfer directly."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "slack_engineering",
+      "name": "Slack Engineering",
+      "organization": "Slack",
+      "url": "https://slack.engineering/",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "collaboration systems",
+        "reliability",
+        "frontend and backend platform work"
+      ],
+      "caveats": [
+        "Some posts are highly organization-specific."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "spotify_engineering",
+      "name": "Spotify Engineering",
+      "organization": "Spotify",
+      "url": "https://engineering.atspotify.com/",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "data platforms",
+        "recommendation systems",
+        "engineering culture and tooling"
+      ],
+      "caveats": [
+        "Product and culture context may be Spotify-specific."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "etsy_codeascraft",
+      "name": "Etsy Code as Craft",
+      "organization": "Etsy",
+      "url": "https://www.etsy.com/codeascraft",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "web operations",
+        "experimentation",
+        "reliability and delivery practices"
+      ],
+      "caveats": [
+        "Older posts may require freshness checks."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "databricks_engineering",
+      "name": "Databricks Engineering Blog",
+      "organization": "Databricks",
+      "url": "https://www.databricks.com/blog/category/engineering",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "data platforms",
+        "lakehouse architecture",
+        "distributed systems"
+      ],
+      "caveats": [
+        "Vendor/product framing can be strong."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "openai_research",
+      "name": "OpenAI Research",
+      "organization": "OpenAI",
+      "url": "https://openai.com/science/",
+      "category": "research_lab",
+      "source_type": "official",
+      "quality_tier": "tier_1_primary",
+      "use_for": [
+        "AI research",
+        "model and agent capability context"
+      ],
+      "caveats": [
+        "Use official docs for product/API behavior; research pages are not API contracts."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "anthropic_research",
+      "name": "Anthropic Research",
+      "organization": "Anthropic",
+      "url": "https://www.anthropic.com/research",
+      "category": "research_lab",
+      "source_type": "official",
+      "quality_tier": "tier_1_primary",
+      "use_for": [
+        "AI safety",
+        "agent behavior",
+        "model capability and evaluation research"
+      ],
+      "caveats": [
+        "Use official docs for product/API behavior; research pages are not API contracts."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "apple_machine_learning_research",
+      "name": "Apple Machine Learning Research",
+      "organization": "Apple",
+      "url": "https://machinelearning.apple.com/",
+      "category": "research_lab",
+      "source_type": "official",
+      "quality_tier": "tier_1_primary",
+      "use_for": [
+        "on-device ML",
+        "privacy-aware ML",
+        "model research"
+      ],
+      "caveats": [
+        "Apple platform constraints may be central."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "nvidia_technical_blog",
+      "name": "NVIDIA Technical Blog",
+      "organization": "NVIDIA",
+      "url": "https://developer.nvidia.com/blog/",
+      "category": "enterprise_engineering",
+      "source_type": "official",
+      "quality_tier": "tier_2_field_practice",
+      "use_for": [
+        "GPU systems",
+        "AI infrastructure",
+        "performance engineering"
+      ],
+      "caveats": [
+        "Hardware and vendor-stack assumptions can be strong."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "amazon_science",
+      "name": "Amazon Science",
+      "organization": "Amazon",
+      "url": "https://www.amazon.science/",
+      "category": "research_lab",
+      "source_type": "official",
+      "quality_tier": "tier_1_primary",
+      "use_for": [
+        "applied research",
+        "ML systems",
+        "operations research"
+      ],
+      "caveats": [
+        "Research topics may not map directly to AWS product guidance."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "martin_fowler",
+      "name": "Martin Fowler",
+      "organization": "Independent / Thoughtworks-associated",
+      "url": "https://martinfowler.com/",
+      "category": "high_signal_independent",
+      "source_type": "analysis",
+      "quality_tier": "tier_3_context",
+      "use_for": [
+        "architecture patterns",
+        "refactoring",
+        "enterprise application design"
+      ],
+      "caveats": [
+        "Use as expert context; verify current implementation details elsewhere."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "thoughtworks_insights",
+      "name": "Thoughtworks Insights",
+      "organization": "Thoughtworks",
+      "url": "https://www.thoughtworks.com/insights",
+      "category": "high_signal_consulting",
+      "source_type": "analysis",
+      "quality_tier": "tier_3_context",
+      "use_for": [
+        "architecture decision framing",
+        "technology radar",
+        "delivery and platform strategy"
+      ],
+      "caveats": [
+        "Consulting perspective; confirm with primary product/docs sources."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "acm_queue",
+      "name": "ACM Queue",
+      "organization": "Association for Computing Machinery",
+      "url": "https://queue.acm.org/",
+      "category": "high_signal_independent",
+      "source_type": "paper",
+      "quality_tier": "tier_3_context",
+      "use_for": [
+        "systems engineering essays",
+        "practitioner research",
+        "architecture and reliability context"
+      ],
+      "caveats": [
+        "Not always current; check date and author context."
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "infoq_architecture",
+      "name": "InfoQ Architecture",
+      "organization": "InfoQ",
+      "url": "https://www.infoq.com/architecture-design/",
+      "category": "high_signal_industry_media",
+      "source_type": "analysis",
+      "quality_tier": "tier_3_context",
+      "use_for": [
+        "industry architecture discussions",
+        "conference and practitioner summaries"
+      ],
+      "caveats": [
+        "Use as discovery/context; trace important claims to primary sources."
+      ],
+      "last_checked": "2026-05-31"
+    }
+  ],
+  "maintenance_rules": [
+    "Add a site only when it is likely to be reused across tasks.",
+    "Prefer official URLs and stable category pages over individual posts.",
+    "Keep caveats for vendor lock-in, domain specificity, marketing bias, and stale posts.",
+    "Record fresh page-level verification in _history/web-searches/ before citing a specific claim.",
+    "Remove or demote sources that become mostly marketing, stale, inaccessible, or low signal."
+  ]
+}

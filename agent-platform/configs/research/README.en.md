@@ -5,6 +5,7 @@ This folder stores configuration files that make source criteria and reference c
 ## Files
 
 - `source-registry.json`: source type taxonomy and reusable reference source catalog
+- `enterprise-source-registry.json`: separate seed list of large-company engineering, official research lab, architecture center, and high-signal independent sources
 - `research-agent-profile.json`: core Perplexity-style answer-engine profile used by the research agent
 - `coding-research-profile.json`: default source coverage profile used by `coding-research-agent` before implementation
 
@@ -14,6 +15,7 @@ This folder stores configuration files that make source criteria and reference c
 - General research/planning input must include `research_profile_paths` and should record `research-agent-profile.json` by default.
 - At least one path must point to a JSON config under `agent-platform/configs/research/`.
 - `source_types` should use the source types defined in `source-registry.json`.
+- When enterprise/high-quality sources are used as research starting points, record `enterprise-source-registry.json` in `research_profile_paths` or `reference_config_paths`.
 - General research should record the `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, and `skeptic_review` stages plus citation requirements.
 - Before implementation, record `code_reference_sources` and `code_reference_notes` for open-source structure, reference implementations, real source code, and tests inspected.
 - External reference sources should update `last_checked` or be added as new config entries.
@@ -43,6 +45,7 @@ This folder stores configuration files that make source criteria and reference c
   ],
   "reference_config_paths": [
     "agent-platform/configs/research/source-registry.json",
+    "agent-platform/configs/research/enterprise-source-registry.json",
     "agent-platform/configs/research/coding-research-profile.json"
   ],
   "source_types": [

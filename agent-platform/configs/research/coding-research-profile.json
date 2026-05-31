@@ -43,19 +43,29 @@
       ],
       "last_checked": "2026-05-31"
     },
-    {
-      "id": "source_collection_policy",
-      "title": "Workspace source collection policy",
+        {
+            "id": "source_collection_policy",
+            "title": "Workspace source collection policy",
       "path": "_docs/source-collection-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "source diversity policy",
         "adoption signal policy"
-      ],
-      "last_checked": "2026-05-31"
-    },
-    {
-      "id": "mlr_guidelines_software_engineering",
+            ],
+            "last_checked": "2026-05-31"
+        },
+        {
+            "id": "enterprise_source_registry",
+            "title": "Enterprise and high-quality source registry",
+            "path": "agent-platform/configs/research/enterprise-source-registry.json",
+            "source_type": "internal",
+            "used_for": [
+                "curated large-company engineering, official research-lab, architecture-center, and high-signal source seeds before coding"
+            ],
+            "last_checked": "2026-05-31"
+        },
+        {
+            "id": "mlr_guidelines_software_engineering",
       "title": "Guidelines for including grey literature and conducting multivocal literature reviews in software engineering",
       "url": "https://doi.org/10.1016/j.infsof.2018.09.006",
       "source_type": "paper",
@@ -201,15 +211,24 @@
         "architecture_decision_notes"
       ]
     },
-    {
-      "id": "settings_used_must_be_recorded",
-      "rule": "Research outputs must record reference_config_paths pointing to the configs used.",
+        {
+            "id": "settings_used_must_be_recorded",
+            "rule": "Research outputs must record reference_config_paths pointing to the configs used.",
       "reason": "Future review needs to know which source rules shaped the decision.",
       "applies_to": [
-        "required_coverage.must_record_reference_config_paths"
-      ]
-    }
-  ],
+                "required_coverage.must_record_reference_config_paths"
+            ]
+        },
+        {
+            "id": "enterprise_source_seed_is_recorded",
+            "rule": "When coding research uses large-company engineering blogs, official research labs, architecture centers, or high-signal independent sources as seeds, include enterprise-source-registry.json in reference_config_paths.",
+            "reason": "The user wants these high-quality site lists managed separately and traceably.",
+            "applies_to": [
+                "reference_config_paths",
+                "source_selection_rules"
+            ]
+        }
+    ],
   "field_guide": [
     {
       "field": "source_registry",
@@ -327,8 +346,9 @@
     "sei_views_and_beyond"
   ],
   "source_selection_rules": [
-    "Start with web search before local planning.",
-    "Use at least one current official or primary source when external behavior matters.",
+        "Start with web search before local planning.",
+        "Check enterprise-source-registry.json when the task benefits from large-company engineering, research-lab, architecture-center, or high-signal independent sources.",
+        "Use at least one current official or primary source when external behavior matters.",
     "Use open-source source material when implementation behavior, maintenance, or license matters.",
     "Before writing source code, look for best-fit architecture patterns, reference architectures, and well-structured source architectures.",
     "Compare at least two architecture options and record why the selected structure fits the current scope, quality attributes, and project boundary.",
