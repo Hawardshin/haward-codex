@@ -10,6 +10,7 @@ This repository is the workspace for building and tracking a personal agent-buil
   - `_docs/` for workspace-level documentation and decision records
   - `_philosophy/` for foundational agent and platform operating philosophy
   - `_requirements/` for shared requirements baselines, change records, and review records
+  - `_specs/` for shared spec-driven artifacts, implementation plans, task lists, validation, and traceability
   - `_history/` for dated work history and compressed context summaries
   - `_ops/` for operations navigation, prompts, workflows, and maps
   - `_research/` for reusable internet research and external reference notes
@@ -36,6 +37,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Before evaluation, summarize completed work and check prior internal work or strong external references relevant to the task.
 - Treat the user's work and instructions as requirement candidates; define, review, update, and baseline relevant requirements before implementation.
 - Save shared requirements under `_requirements/`; save project-specific requirements under the owning project's `docs/requirements/`.
+- For meaningful implementation work, convert active requirements into spec-driven artifacts before coding: `spec`, `plan`, `tasks`, `validation`, and `traceability`.
+- Save shared specs under `_specs/`; save project-specific specs under the owning project's `specs/`.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/` before committing meaningful work.
 - Save important planning processes as files under `_history/plans/YYYY/`.
 - Save summaries of meaningful user requests under `_history/user-requests/YYYY/`; do not preserve full original prompt text unless necessary.
@@ -105,6 +108,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/projects/registry.json` to see registered root projects and ownership boundaries.
 - Use `_ops/workflows/25-project-boundary-management.md` when a request may create a new project or cross project boundaries.
 - Use `_ops/workflows/35-requirements-lifecycle.md` when a request changes durable behavior, rules, project structure, platform capability, or implementation criteria.
+- Use `_ops/workflows/36-spec-driven-development.md` when meaningful work needs implementation from requirements.
 - Check `_ops/coordination/board.ko.md` when parallel work may exist.
 - Use `_ops/workflows/40-evaluate-and-rework.md` before closing meaningful work.
 - Keep `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md` current when folders, prompts, workflows, tools, skills, or project structure change.
@@ -121,6 +125,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Include `web_search_record_targets` in evaluation input; missing web search record targets are blocking gaps.
 - Include `user_request_summary_targets` in evaluation input; missing request summaries are blocking gaps.
 - Include `requirements_targets` in evaluation input; missing active requirements baseline, change, or review targets are blocking gaps.
+- Include `spec_targets` in evaluation input; missing active spec-driven artifacts are blocking gaps.
 - Include `request_trace_targets` in evaluation input; missing request-to-outcome traces are blocking gaps.
 - Include `work_summary_targets` in evaluation input so the user-readable summary location is checked.
 - If installation occurred, include `installation_occurred=true` and `installation_record_targets`; missing installation records are blocking gaps.

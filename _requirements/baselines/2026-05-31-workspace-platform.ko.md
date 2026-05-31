@@ -28,12 +28,14 @@
 | REQ-WS-010 | 최종 산출물의 사실 주장은 근거 기반으로 검증하고, 지식 베이스는 틀릴 수 있다고 가정해야 한다. | UR-2026-05-31-017, 022 | must | baseline | workspace | knowledge/grounding checks 확인 | `knowledge-skeptic-agent`, `hallucination-guard-agent` |
 | REQ-WS-011 | 병렬 작업과 진행 중인 에이전트는 한 곳에서 상태를 볼 수 있어야 한다. | UR-2026-05-31-015 | should | baseline | `_ops` | task board check | `_ops/coordination/` |
 | REQ-WS-012 | 프로젝트 전용 산출물은 해당 프로젝트에 두고, 공통 자산만 `_` 폴더로 승격해야 한다. | UR-2026-05-31-021 | must | baseline | workspace/projects | project boundary review | `_docs/project-boundary-policy.ko.md` |
+| REQ-WS-013 | 의미 있는 구현 작업은 spec-driven 방식처럼 스펙, 계획, 작업 목록, 검증, traceability 산출물을 거쳐야 한다. | UR-2026-05-31-037 | must | baseline | workspace/projects | spec target과 evaluator check 확인 | `_specs/`, `_docs/spec-driven-development-policy.ko.md` |
 
 ## 변경 관리
 
 - 요구사항 변경은 `_requirements/changes/`에 남긴다.
 - 요구사항 검토는 `_requirements/reviews/`에 남긴다.
 - 구현 전에는 관련 요구사항 ID를 계획/작업 요약/평가 입력에 연결한다.
+- 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 구현 후에는 요청-결과 추적표와 요구사항의 관련 산출물을 갱신한다.
 
 ## 현재 검토 결과

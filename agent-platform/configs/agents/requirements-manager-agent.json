@@ -13,6 +13,6 @@
     "trigger": "before meaningful work that changes expected behavior, operating rules, project structure, or platform capability",
     "requirements_home": "_requirements/",
     "project_requirements_home": "project-name/docs/requirements/",
-    "policy": "Derive requirement candidates from user requests, review and baseline them, then build and evaluate against requirements_targets."
+    "policy": "Derive requirement candidates from user requests, review and baseline them, hand off meaningful implementation work to spec-driven-planner-agent, then build and evaluate against requirements_targets and spec_targets."
   }
 }

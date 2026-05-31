@@ -1,6 +1,7 @@
 # Requirements Management
 
 This folder defines, reviews, changes, and baselines requirements derived from user requests so implementation can be driven by those requirements.
+Meaningful implementation work links requirements to spec artifacts under `_specs/` or a project-specific `specs/` directory before implementation starts.
 
 ## Purpose
 
@@ -51,4 +52,4 @@ project-name/docs/requirements/
 
 ## Close-Out Rule
 
-Meaningful work must include `requirements_targets` in `work-evaluator-agent` input. Missing targets are blocking gaps.
+Meaningful work must include `requirements_targets` and `spec_targets` in `work-evaluator-agent` input. Missing targets are blocking gaps.

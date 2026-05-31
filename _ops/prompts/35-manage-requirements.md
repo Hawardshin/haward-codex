@@ -18,6 +18,7 @@ For each requirement, record source request IDs, rationale, priority, status, ow
 If a requirement changes, create or update a change record.
 Review conflicts, duplicates, missing verification, project boundary, and downstream impact.
 Create or update a review record.
-Use the updated requirements as the implementation basis.
-Include requirements_targets in the work evaluation input.
+Hand off meaningful implementation work to spec-driven-planner-agent so the requirements become spec, plan, tasks, validation, and traceability artifacts.
+Use the updated requirements and active specs as the implementation basis.
+Include requirements_targets and spec_targets in the work evaluation input.
 ```

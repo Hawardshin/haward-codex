@@ -15,6 +15,7 @@
 | `_docs/` | 저장소 전체 문서, 규칙, 의사결정 기록 |
 | `_philosophy/` | 에이전트와 플랫폼 운영의 근본 철학 |
 | `_requirements/` | 공통 요구사항 기준선, 변경 기록, 검토 기록 |
+| `_specs/` | 공통 spec-driven 산출물, 구현 계획, 작업 목록, 검증, traceability |
 | `_history/` | 날짜별 작업 로그와 컨텍스트 압축 요약 |
 | `_history/plans/` | 에이전트 계획 과정 기록 |
 | `_ops/` | 운영 허브, 프롬프트 라우터, 워크플로, 저장소 맵 |
@@ -96,6 +97,15 @@ After each completed commit, push to `origin/main` immediately unless the user e
 - Before implementation, confirm the relevant requirement IDs and update or baseline them when the request changes expected behavior, rules, project structure, platform capability, or implementation criteria.
 - Meaningful work must include `requirements_targets` in the close-out evaluator input.
 
+## Spec-Driven Development Policy
+
+- Convert active requirements into spec-driven artifacts before meaningful implementation.
+- Shared workspace specs live under `_specs/`.
+- Project-specific specs live under the owning project's `specs/`.
+- Each spec folder should contain `spec`, `plan`, `tasks`, `validation`, and `traceability` artifacts.
+- Acceptance criteria should be concrete, testable, and linked to requirement IDs.
+- Meaningful work must include `spec_targets` in the close-out evaluator input.
+
 ## Markdown vs HTML
 
 Markdown is the default for durable text documentation.
@@ -171,6 +181,7 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Include `web_search_record_targets` in evaluation input for meaningful work.
 - Include `user_request_summary_targets` in evaluation input for meaningful work.
 - Include `requirements_targets` in evaluation input for meaningful work.
+- Include `spec_targets` in evaluation input for meaningful work.
 - Include `request_trace_targets` in evaluation input for meaningful work.
 - Include `work_summary_targets` in evaluation input for meaningful work.
 - If gaps are found, they become follow-up actions and the work returns to implementation.

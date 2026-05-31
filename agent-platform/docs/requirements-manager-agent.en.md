@@ -19,10 +19,12 @@
 - Requirement change record
 - Requirement review record
 - `requirements_targets` for implementation and evaluation
+- Spec handoff criteria for `spec-driven-planner-agent` on meaningful implementation work
 
 ## Rules
 
 - Write requirements as verifiable statements.
 - Record source request IDs for each requirement.
 - Check relevant requirement IDs before implementation.
+- Convert requirements into spec artifacts before meaningful implementation work.
 - After implementation, link requirements from request traces, work summaries, and evaluation reports.

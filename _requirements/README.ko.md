@@ -1,6 +1,7 @@
 # 요구사항 관리
 
 이 폴더는 사용자 요청에서 도출된 요구사항을 정의, 검토, 변경, 기준선화하고 그 요구사항을 기반으로 구현하도록 관리한다.
+의미 있는 구현 작업은 요구사항을 `_specs/` 또는 프로젝트별 `specs/`의 스펙 산출물로 연결한 뒤 진행한다.
 
 ## 목적
 
@@ -51,4 +52,4 @@ project-name/docs/requirements/
 
 ## 종료 평가 규칙
 
-의미 있는 작업의 `work-evaluator-agent` 입력에는 `requirements_targets`를 포함한다. 누락되면 blocking gap이다.
+의미 있는 작업의 `work-evaluator-agent` 입력에는 `requirements_targets`와 `spec_targets`를 포함한다. 누락되면 blocking gap이다.

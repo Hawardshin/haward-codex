@@ -19,25 +19,27 @@
 6. Decide whether the work belongs to an existing project or a new root-level project.
 7. Keep project-specific work inside the owning project folder and register root projects under `_ops/projects/`.
 8. Keep foundational philosophy in `_philosophy/` and execution rules in `_docs/` or `_ops/`.
-9. Implement or document the smallest useful change.
-10. Prefer Python for agent implementation unless another runtime is clearly better.
-11. Evaluate mature open-source options before building core infrastructure from scratch.
-12. For planning that depends on external facts, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json`.
-13. Treat research as an answer-engine pipeline: query understanding, retrieval, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
-14. For coding research, use `coding-research-agent` to record reference configs, concrete code references, standard post-research answers, and diverse source types before implementation.
-15. If mature open source is the right fit, install it in the owning project or tool scope and record install command, dependency tracking, installation audit record, security/license review, verification, and rollback.
-16. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
-17. Save important planning processes under `_history/plans/YYYY/`.
-18. Promote repeated work into a template, tool, skill, prompt, or workflow.
-19. Record important context in `_history/`.
-20. Refresh `_ops/maps/` when navigational structure changes.
-21. Summarize completed work.
-22. Check prior internal work and strong references relevant to the task.
-23. Capture reusable internet research or external references.
-24. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
-25. Evaluate the completed work against the initial instruction.
-26. Rework real gaps and evaluate again.
-27. Commit the coherent change set and push it.
+9. Define or update requirements for meaningful behavior, rule, structure, or capability changes.
+10. Convert those requirements into spec-driven artifacts under `_specs/` or the owning project's `specs/`.
+11. Implement or document the smallest useful change against the active spec.
+12. Prefer Python for agent implementation unless another runtime is clearly better.
+13. Evaluate mature open-source options before building core infrastructure from scratch.
+14. For planning that depends on external facts, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json`.
+15. Treat research as an answer-engine pipeline: query understanding, retrieval, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
+16. For coding research, use `coding-research-agent` to record reference configs, concrete code references, standard post-research answers, and diverse source types before implementation.
+17. If mature open source is the right fit, install it in the owning project or tool scope and record install command, dependency tracking, installation audit record, security/license review, verification, and rollback.
+18. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
+19. Save important planning processes under `_history/plans/YYYY/`.
+20. Promote repeated work into a template, tool, skill, prompt, or workflow.
+21. Record important context in `_history/`.
+22. Refresh `_ops/maps/` when navigational structure changes.
+23. Summarize completed work.
+24. Check prior internal work and strong references relevant to the task.
+25. Capture reusable internet research or external references.
+26. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
+27. Evaluate the completed work against the initial instruction, requirements, and specs.
+28. Rework real gaps and evaluate again.
+29. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -64,6 +66,7 @@ Promote work only when it will reduce future effort.
 | Same need to avoid forgetting durable settings | Memory bootstrap manifest and agent |
 | Same need to make settings explain their references and rules | Config contract agent |
 | Same open-source installation decision repeated | Open-source installation policy and candidate record |
+| Same need to implement from explicit acceptance criteria | Spec-driven artifact set under `_specs/` or project `specs/` |
 
 ## Context Compression
 

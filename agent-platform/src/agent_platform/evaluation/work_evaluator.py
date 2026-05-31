@@ -22,6 +22,7 @@ class WorkEvaluationInput:
     web_search_record_targets: tuple[str, ...] = ()
     user_request_summary_targets: tuple[str, ...] = ()
     requirements_targets: tuple[str, ...] = ()
+    spec_targets: tuple[str, ...] = ()
     request_trace_targets: tuple[str, ...] = ()
     work_summary_targets: tuple[str, ...] = ()
     context_archiving_occurred: bool = False
@@ -43,6 +44,7 @@ class WorkEvaluationInput:
             web_search_record_targets=_tuple_of_strings(data.get("web_search_record_targets", []), "web_search_record_targets"),
             user_request_summary_targets=_tuple_of_strings(data.get("user_request_summary_targets", []), "user_request_summary_targets"),
             requirements_targets=_tuple_of_strings(data.get("requirements_targets", []), "requirements_targets"),
+            spec_targets=_tuple_of_strings(data.get("spec_targets", []), "spec_targets"),
             request_trace_targets=_tuple_of_strings(data.get("request_trace_targets", []), "request_trace_targets"),
             work_summary_targets=_tuple_of_strings(data.get("work_summary_targets", []), "work_summary_targets"),
             context_archiving_occurred=_optional_bool(data.get("context_archiving_occurred", False), "context_archiving_occurred"),
@@ -78,6 +80,8 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
         gaps.append("User request summary target is missing. Add a request summary under _history/user-requests/.")
     if not evaluation_input.requirements_targets:
         gaps.append("Requirements target is missing. Add or update requirements under _requirements/ or the owning project's docs/requirements/.")
+    if not evaluation_input.spec_targets:
+        gaps.append("Spec target is missing. Add or update spec-driven artifacts under _specs/ or the owning project's specs/.")
     if not evaluation_input.request_trace_targets:
         gaps.append("Request trace target is missing. Add a request-to-outcome trace under _history/request-traces/.")
     if not evaluation_input.work_summary_targets:
@@ -108,6 +112,7 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
             "web_search_record_targets_count": len(evaluation_input.web_search_record_targets),
             "user_request_summary_targets_count": len(evaluation_input.user_request_summary_targets),
             "requirements_targets_count": len(evaluation_input.requirements_targets),
+            "spec_targets_count": len(evaluation_input.spec_targets),
             "request_trace_targets_count": len(evaluation_input.request_trace_targets),
             "work_summary_targets_count": len(evaluation_input.work_summary_targets),
             "context_archiving_occurred": evaluation_input.context_archiving_occurred,

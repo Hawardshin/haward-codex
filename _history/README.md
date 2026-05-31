@@ -26,6 +26,8 @@ User request summaries live under `_history/user-requests/YYYY/`.
 
 Shared requirements baselines, changes, and reviews live under `_requirements/`; project-specific requirements live under the owning project's `docs/requirements/`.
 
+Shared spec-driven artifacts live under `_specs/`; project-specific specs live under the owning project's `specs/`.
+
 Request-to-outcome traces live under `_history/request-traces/YYYY/`.
 
 Detailed installation audit records live under `_history/installations/YYYY/`.
@@ -41,6 +43,8 @@ Use `_history/context-archives/YYYY/` when a future session needs to resume from
 Use `_history/user-requests/YYYY/` when you need to understand what the user asked for without reading raw chat.
 
 Use `_requirements/` when you need to understand the active requirements that should guide implementation and evaluation.
+
+Use `_specs/` when you need to understand the active spec, implementation plan, task breakdown, validation result, and traceability for a work item.
 
 Use `_history/request-traces/YYYY/` when you need to understand what the user asked for, what happened, where the evidence is, and which commit closed it.
 

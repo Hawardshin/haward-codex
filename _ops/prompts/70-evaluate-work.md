@@ -19,6 +19,7 @@ If the final output contains factual claims, require a grounding check from hall
 Require web_search_record_targets that point to public search records under _history/web-searches/YYYY/.
 Require user_request_summary_targets that point to request summaries under _history/user-requests/YYYY/.
 Require requirements_targets that point to active requirements baselines, changes, or reviews under _requirements/ or the owning project's docs/requirements/.
+Require spec_targets that point to active spec-driven artifacts under _specs/ or the owning project's specs/.
 Require request_trace_targets that point to request-to-outcome traces under _history/request-traces/YYYY/.
 Require work_summary_targets that point to the user-readable summary files under _history/work-summaries/YYYY/.
 If context archiving occurred, require context_archiving_occurred=true and context_archive_targets under _history/context-archives/YYYY/.
@@ -41,6 +42,7 @@ Return ready_to_close only when there are no blocking gaps.
 - web search record targets
 - user request summary targets
 - requirements targets
+- spec targets
 - request trace targets
 - work summary targets
 - context archiving occurred

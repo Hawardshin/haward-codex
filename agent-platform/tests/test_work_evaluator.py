@@ -21,6 +21,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
@@ -41,6 +42,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
                 known_gaps=("No Python evaluator agent was added.",),
@@ -61,6 +63,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
@@ -79,6 +82,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
@@ -101,6 +105,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-summary.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
             )
         )
@@ -122,6 +127,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-install.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
                 installation_occurred=True,
@@ -145,6 +151,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-install.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
                 installation_occurred=True,
@@ -165,6 +172,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-context.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
                 context_archiving_occurred=True,
@@ -188,6 +196,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-context.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
                 context_archiving_occurred=True,
@@ -207,6 +216,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 references_checked=("OpenAI web search docs",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
@@ -228,6 +238,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 references_checked=("Agent memory docs",),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-requests.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
@@ -250,6 +261,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-trace.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
         )
@@ -270,6 +282,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 references_checked=("Requirements management references",),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-requirements.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
                 request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
@@ -278,6 +291,28 @@ class WorkEvaluatorTests(unittest.TestCase):
         self.assertTrue(report["requires_rework"])
         self.assertIn(
             "Requirements target is missing. Add or update requirements under _requirements/ or the owning project's docs/requirements/.",
+            report["gaps"],
+        )
+
+    def test_missing_spec_target_requires_rework(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Use a spec-driven structure.",
+                result_summary="Added docs without updating specs.",
+                changed_files=("_docs/spec-driven-development-policy.ko.md",),
+                verification=("manual doc review: OK",),
+                references_checked=("GitHub Spec Kit",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-spec-driven-development.ko.md",),
+                user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
+                requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Spec target is missing. Add or update spec-driven artifacts under _specs/ or the owning project's specs/.",
             report["gaps"],
         )
 

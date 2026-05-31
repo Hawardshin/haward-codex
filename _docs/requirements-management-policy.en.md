@@ -13,7 +13,8 @@ Define requirements from the user's work and conversation, keep revising and rev
 - Project-specific requirements live under the owning project's `docs/requirements/`.
 - Requirement changes live under `_requirements/changes/` or the project-specific change record.
 - Requirement reviews live under `_requirements/reviews/` or the project-specific review record.
-- Meaningful work includes `requirements_targets` in evaluation input.
+- Meaningful implementation work turns requirements into spec-driven artifacts before implementation.
+- Meaningful work includes `requirements_targets` and `spec_targets` in evaluation input.
 
 ## Requirement Lifecycle
 
@@ -22,9 +23,10 @@ Define requirements from the user's work and conversation, keep revising and rev
 3. Review conflicts, duplicates, and gaps against existing requirements.
 4. Decide impact scope and owning project.
 5. Add it to the baseline.
-6. Implement from the baseline.
-7. Verify and link the evaluation report.
-8. Change the requirement when new requests or reviews require it.
+6. Create the related spec, plan, task list, validation, and traceability artifacts.
+7. Implement from the spec.
+8. Verify and link the evaluation report.
+9. Change the requirement when new requests or reviews require it.
 
 ## Related Files
 
@@ -32,4 +34,5 @@ Define requirements from the user's work and conversation, keep revising and rev
 - [_requirements/baselines/2026-05-31-workspace-platform.en.md](../_requirements/baselines/2026-05-31-workspace-platform.en.md)
 - [_templates/requirements/requirement-baseline.en.md](../_templates/requirements/requirement-baseline.en.md)
 - [_ops/workflows/35-requirements-lifecycle.md](../_ops/workflows/35-requirements-lifecycle.md)
+- [_ops/workflows/36-spec-driven-development.md](../_ops/workflows/36-spec-driven-development.md)
 - [agent-platform/docs/requirements-manager-agent.en.md](../agent-platform/docs/requirements-manager-agent.en.md)

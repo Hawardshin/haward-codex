@@ -15,9 +15,10 @@
 7. Record requirement changes under `_requirements/changes/` or the project-specific change record.
 8. Review conflicts, duplicates, testability, scope, and downstream impact.
 9. Record the review under `_requirements/reviews/` or the project-specific review record.
-10. Link requirement IDs from plans, work summaries, request traces, and evaluation reports.
-11. Include `requirements_targets` in `work-evaluator-agent` input.
+10. Create or update spec-driven artifacts under `_specs/` or the owning project's `specs/`.
+11. Link requirement IDs from specs, plans, work summaries, request traces, and evaluation reports.
+12. Include `requirements_targets` and `spec_targets` in `work-evaluator-agent` input.
 
 ## Rule
 
-Do not implement meaningful work from a request alone when it changes expected behavior, operating rules, project structure, or platform capability. First define or update the relevant requirement, then build against it.
+Do not implement meaningful work from a request alone when it changes expected behavior, operating rules, project structure, or platform capability. First define or update the relevant requirement, create or update the corresponding spec-driven artifacts, then build against them.

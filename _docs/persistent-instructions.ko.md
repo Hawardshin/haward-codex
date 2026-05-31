@@ -14,6 +14,8 @@
 - 평가 전에는 완료 작업을 요약하고 관련 이전 작업이나 강한 레퍼런스를 확인한다.
 - 사용자의 작업과 지시는 요구사항 후보로 보고, 구현 전 관련 요구사항을 정의/검토/수정/기준선화한다.
 - 공통 요구사항은 `_requirements/`에, 프로젝트별 요구사항은 해당 프로젝트의 `docs/requirements/`에 저장한다.
+- 의미 있는 구현 작업은 spec-driven 구조로 진행해 요구사항을 스펙, 계획, 작업 목록, 검증, traceability 산출물로 바꾼 뒤 코딩한다.
+- 공통 스펙은 `_specs/`에, 프로젝트별 스펙은 해당 프로젝트의 `specs/`에 저장한다.
 - 의미 있는 작업의 최종 평가는 `_history/evaluations/YYYY/` 아래 파일로 저장한다.
 - 중요한 계획을 세우는 과정은 `_history/plans/YYYY/` 아래 파일로 저장한다.
 - 의미 있는 사용자 요청은 원문 전체가 아니라 요약으로 `_history/user-requests/YYYY/` 아래에 저장한다.
@@ -58,6 +60,7 @@
 - `work-evaluator-agent`를 기본 종료 평가 에이전트로 사용한다.
 - 의미 있는 작업의 평가 입력에는 `user_request_summary_targets`를 포함한다.
 - 의미 있는 작업의 평가 입력에는 `requirements_targets`를 포함한다.
+- 의미 있는 작업의 평가 입력에는 `spec_targets`를 포함한다.
 - 의미 있는 작업의 평가 입력에는 `request_trace_targets`를 포함한다.
 - 의미 있는 작업의 평가 입력에는 `work_summary_targets`를 포함한다.
 - 에이전트 구현, 오케스트레이션, 백엔드 자동화, 평가, 재사용 로컬 도구는 Python을 우선한다.

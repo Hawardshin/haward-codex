@@ -22,6 +22,9 @@
   "requirements_targets": [
     "_requirements/baselines/YYYY-MM-DD-project-or-workspace.ko.md"
   ],
+  "spec_targets": [
+    "_specs/scope/YYYY-MM-DD-slug/spec.ko.md"
+  ],
   "request_trace_targets": [
     "_history/request-traces/YYYY/YYYY-MM-DD.ko.md"
   ],

@@ -1,0 +1,18 @@
+{
+  "name": "spec-driven-planner-agent",
+  "description": "Turns requirements into spec-driven artifacts and keeps specs linked to plans, tasks, validation, and traceability.",
+  "runtime": "document-workflow",
+  "skills": [],
+  "tools": [
+    "repository-docs",
+    "web-search",
+    "agent-platform:evaluate-work"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "before meaningful work that changes behavior, structure, platform capability, or implementation criteria",
+    "shared_specs_home": "_specs/",
+    "project_specs_home": "project-name/specs/",
+    "policy": "Create or update spec, plan, tasks, validation, and traceability artifacts before implementation, then evaluate against spec_targets."
+  }
+}

@@ -25,4 +25,6 @@ Every prompt in this folder inherits the following common contract.
 
 `work-evaluator-agent` input must include `requirements_targets` for meaningful work. Missing targets are a blocking gap.
 
+`work-evaluator-agent` input must include `spec_targets` for meaningful work. Missing targets are a blocking gap.
+
 `work-evaluator-agent` input must include `request_trace_targets` for meaningful work. Missing targets are a blocking gap.

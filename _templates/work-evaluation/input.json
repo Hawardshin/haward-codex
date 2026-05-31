@@ -8,6 +8,7 @@
   "web_search_record_targets": [],
   "user_request_summary_targets": [],
   "requirements_targets": [],
+  "spec_targets": [],
   "request_trace_targets": [],
   "work_summary_targets": [],
   "context_archiving_occurred": false,

@@ -21,6 +21,7 @@
       "The context archive layer or long-context resume contract changes.",
       "The user request summary layer or request-intent tracking contract changes.",
       "The requirements management layer or requirements baseline contract changes.",
+      "The spec-driven development layer or spec artifact contract changes.",
       "The request-to-outcome trace layer or traceability contract changes.",
       "The web search record layer or prompt-level search contract changes.",
       "The installation registry or installation audit contract changes.",
@@ -104,6 +105,18 @@
         "requirements baselines derived from user work",
         "requirements change and review records",
         "implementation and evaluation requirements targets"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "spec_driven_policy",
+      "title": "Spec-Driven Development Policy",
+      "path": "_specs/README.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "spec-driven artifacts derived from requirements",
+        "spec, plan, tasks, validation, and traceability rules",
+        "implementation and evaluation spec targets"
       ],
       "last_checked": "2026-05-31"
     },
@@ -293,6 +306,16 @@
       ]
     },
     {
+      "id": "specs_must_stay_discoverable",
+      "rule": "The spec-driven layer must remain a warm memory anchor and close-out target so future sessions implement from specs, plans, tasks, validation, and traceability instead of raw prompts.",
+      "reason": "The user explicitly requested a structure similar to spec-driven development.",
+      "applies_to": [
+        "anchors",
+        "required_anchor_ids",
+        "work-evaluator-agent"
+      ]
+    },
+    {
       "id": "web_search_records_must_stay_discoverable",
       "rule": "The web search record layer must remain a warm memory anchor and close-out target so future sessions can inspect prompt-level searches and public decision summaries.",
       "reason": "The user explicitly requires every prompt to start with web search and to leave a text record of the search process without storing raw internal reasoning.",
@@ -374,6 +397,7 @@
     "context_archive_policy",
     "user_request_summary_policy",
     "requirements_policy",
+    "spec_driven_policy",
     "request_trace_policy",
     "web_search_record_policy",
     "installation_registry"
@@ -396,6 +420,7 @@
     "context_archive_policy",
     "user_request_summary_policy",
     "requirements_policy",
+    "spec_driven_policy",
     "request_trace_policy",
     "web_search_record_policy",
     "installation_registry"
@@ -594,12 +619,20 @@
       "load_order": 30
     },
     {
+      "id": "spec_driven_policy",
+      "path": "_specs/README.ko.md",
+      "tier": "warm",
+      "purpose": "Rules for turning requirements into spec, plan, tasks, validation, and traceability artifacts before implementation.",
+      "required": true,
+      "load_order": 31
+    },
+    {
       "id": "request_trace_policy",
       "path": "_history/request-traces/README.ko.md",
       "tier": "warm",
       "purpose": "Rules for connecting user requests to outcomes, artifacts, evaluations, and commits.",
       "required": true,
-      "load_order": 31
+      "load_order": 32
     },
     {
       "id": "web_search_record_policy",
@@ -607,7 +640,7 @@
       "tier": "warm",
       "purpose": "Prompt-level web search record rules and public search reasoning summary requirements.",
       "required": true,
-      "load_order": 32
+      "load_order": 33
     },
     {
       "id": "installation_registry",
@@ -615,7 +648,7 @@
       "tier": "warm",
       "purpose": "Installation audit registry for installs, upgrades, removals, global environment changes, and rollback tracking.",
       "required": true,
-      "load_order": 33
+      "load_order": 34
     },
     {
       "id": "daily_history",
@@ -623,7 +656,7 @@
       "tier": "warm",
       "purpose": "Current dated work log and compressed context.",
       "required": true,
-      "load_order": 34
+      "load_order": 35
     },
     {
       "id": "repository_map",
