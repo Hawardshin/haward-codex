@@ -9,4 +9,4 @@
 | 스펙 | `_specs/workspace-platform/2026-05-31-source-discovery-provenance/spec.ko.md` | 완료 |
 | 구현/설정 | `agent-platform/configs/research/source-discovery-registry.json`, `_tools/korean-local-review/` | 완료 |
 | 평가 | `_history/evaluations/2026/2026-05-31-source-discovery-provenance.ko.md` | 완료 |
-| 커밋 | 이번 변경 커밋 | push 후 확인 |
+| 커밋 | `144f77b` | pushed |

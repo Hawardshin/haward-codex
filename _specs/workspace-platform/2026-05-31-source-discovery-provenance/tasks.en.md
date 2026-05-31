@@ -6,4 +6,4 @@
 - [x] `T004` Add Korean local review research tool.
 - [x] `T005` Update policies, prompts, workflows, and memory bootstrap.
 - [x] `T006` Run validation and close-out evaluation.
-- [ ] `T007` Commit and push to `origin/main`.
+- [x] `T007` Commit and push to `origin/main`.
