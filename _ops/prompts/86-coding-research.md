@@ -14,10 +14,13 @@ Start with web search before planning or editing files.
 Define the coding research goal, project context, and research type.
 Select the source registry and research profile config before collecting sources.
 Record the selected configs in reference_config_paths, usually agent-platform/configs/research/source-registry.json, agent-platform/configs/research/enterprise-source-registry.json when high-quality source seeds are useful, and agent-platform/configs/research/coding-research-profile.json.
+Use agent-platform/configs/research/source-discovery-registry.json when broader global, Korean, Indian, paper, or Korean local review source origins are useful.
 Use web search plus at least one other channel: repository search, official docs, code search, package registry search, papers, or open-source repository search.
 Prefer official documentation, primary sources, maintained open-source repositories, standards, papers, and strong implementation examples.
 For broad research, collect source diversity: official docs, papers, open-source repos, international technical blogs, analysis articles, community/adoption signals, and contrary examples.
 For large-company engineering, official research-lab, architecture-center, or high-signal source discovery, check enterprise-source-registry.json first, then re-open exact source pages before citing claims.
+For Korean user-facing or local-market behavior, use Naver Map, Kakao Map, Naver Blog/Search, official pages, and _tools/korean-local-review/.
+For paper-heavy implementation decisions, combine Semantic Scholar, OpenAlex, arXiv, Papers with Code, and related-paper discovery.
 Before writing source code, search for best-fit architecture patterns, reference architectures, architecture documentation frameworks, and strong project architecture examples.
 Use architecture references such as well-architected frameworks, Azure/AWS/GCP architecture guidance, C4, arc42, SEI views, ADRs, or mature project docs/architecture examples when they fit the task.
 Record architecture_reference_sources with URLs or source paths.
@@ -29,6 +32,8 @@ Record code_reference_sources with repository URLs, source file paths, test path
 Record code_reference_notes explaining what structure, boundaries, API patterns, error handling, tests, or implementation details are worth adapting or rejecting.
 Record source_types explicitly. Use at least three distinct non-other source types, including at least one authoritative type (official, paper, standard, or open_source) and at least one practical/adoption/contrary type (open_source, reference_implementation, tech_blog, analysis, community, social, news, or contrary).
 Treat likes, stars, comments, Hacker News points, Reddit activity, and LinkedIn reactions as adoption or discovery signals, not proof.
+Record source_value_provenance for every material source value, config value, version, benchmark, risk, claim, or assumption.
+Record plan_evidence linking the recommendation, architecture choice, file-scope choice, and validation steps to checked sources or explicit assumptions.
 When source volume is high, normalize and score the source bundle with _tools/source-collector.
 Validate internal knowledge-base references with knowledge-skeptic-agent before relying on them.
 Synthesize findings into options and trade-offs.

@@ -27,6 +27,8 @@ Every prompt in this folder inherits the following common contract.
 
 `work-evaluator-agent` input must include `spec_targets` for meaningful work. Missing targets are a blocking gap.
 
+`work-evaluator-agent` input must include `source_provenance_targets` and `plan_evidence_targets` for meaningful work. Missing source provenance or plan evidence is a blocking gap.
+
 If skill work occurred, `work-evaluator-agent` input must include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`. Missing targets are a blocking gap.
 
 `work-evaluator-agent` input must include `request_trace_targets` for meaningful work. Missing targets are a blocking gap.

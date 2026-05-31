@@ -64,6 +64,17 @@
       "last_checked": "2026-05-31"
     },
     {
+      "id": "source_discovery_registry",
+      "title": "Source discovery registry",
+      "path": "agent-platform/configs/research/source-discovery-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "broader source origin discovery",
+        "global engineering blogs, Korean technology blogs, India technology sources, paper discovery, and Korean local review channels"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
       "id": "perplexity_sonar_api",
       "title": "Perplexity Sonar API",
       "url": "https://docs.perplexity.ai/docs/sonar/quickstart",
@@ -219,6 +230,16 @@
       "required": true
     },
     {
+      "field": "source_value_provenance",
+      "meaning": "Claim, value, assumption, or constraint origin recorded in research/planning inputs.",
+      "required": true
+    },
+    {
+      "field": "plan_evidence",
+      "meaning": "Evidence mapping from material plan steps to checked sources, repository evidence, command output, or explicit assumptions.",
+      "required": true
+    },
+    {
       "field": "citation_grounding_rules",
       "meaning": "Rules for mapping generated claims back to checked source content.",
       "required": true
@@ -247,6 +268,8 @@
     "must_record_research_profile_paths": true,
     "must_record_source_types_when_research_is_substantial": true,
     "must_record_citation_requirements": true,
+    "must_record_source_value_provenance": true,
+    "must_record_plan_evidence": true,
     "must_record_plan_history_targets": true,
     "must_validate_internal_knowledge": true,
     "required_answer_engine_stage_ids": [
@@ -386,7 +409,10 @@
     "Prefer official, primary, paper, standard, maintained open-source, or reference implementation sources for factual claims.",
     "Use technical blogs, analysis articles, and community sources to discover trade-offs and practical failure modes.",
     "Use enterprise-source-registry.json to seed large-company engineering, research-lab, architecture-center, and high-signal independent source searches.",
+    "Use source-discovery-registry.json to broaden search through global engineering blogs, Korean technology blogs, India technology sources, paper discovery, and Korean local review channels.",
+    "Use Naver Map, Kakao Map, Naver Blog/Search, official pages, and _tools/korean-local-review/ when Korean user review or local-market evidence matters.",
     "Use social or popularity signals only as adoption, discovery, or attention signals.",
+    "Record source_value_provenance and plan_evidence before treating research as ready for planning.",
     "For current facts, compare publication dates, last-updated dates, and source freshness before synthesis.",
     "For controversial or high-impact claims, require independent confirmation or state uncertainty."
   ],

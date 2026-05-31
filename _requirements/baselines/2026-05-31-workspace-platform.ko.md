@@ -32,6 +32,9 @@
 | REQ-WS-014 | 커스텀 스킬 생성/수정은 명시적인 원본, trigger 예시, 검증, 전진 테스트, 개선 backlog, 평가 target을 남겨야 한다. | UR-2026-05-31-038 | must | baseline | workspace/agent-platform | skill validation과 evaluator check 확인 | `_skills/`, `_docs/skill-lifecycle-policy.ko.md`, `skill-lifecycle-agent` |
 | REQ-WS-015 | 소스 코드 작성 전에는 best-fit 아키텍처와 reference architecture를 조사하고 최소 두 개의 구조 후보와 선택 근거를 기록해야 한다. | UR-2026-05-31-039 | must | baseline | agent-platform/projects | `complete-coding-research` 결과와 architecture fields 확인 | `_docs/architecture-first-coding-policy.ko.md`, `coding-research-agent` |
 | REQ-WS-016 | 대기업 엔지니어링, 공식 연구소, architecture center, 고신뢰 독립 출처 목록은 일반 source taxonomy와 분리된 registry로 관리해야 한다. | UR-2026-05-31-040 | must | baseline | agent-platform/_research | `check-config-contract`와 source list 확인 | `agent-platform/configs/research/enterprise-source-registry.json`, `_research/source-lists/` |
+| REQ-WS-017 | 중요한 원천값, 설정값, 주장, 리뷰 신호, 가정, 계획 제약은 출처와 접근일을 추적하고, 모든 중요한 계획 단계는 근거와 연결해야 한다. | UR-2026-05-31-041 | must | baseline | agent-platform/_history | `plan-from-research`, `complete-coding-research`, `evaluate-work` 결과 확인 | `source_value_provenance`, `plan_evidence`, `source_provenance_targets`, `plan_evidence_targets` |
+| REQ-WS-018 | 웹 검색은 사람이 실제로 검색하듯 세계 기술 블로그, 한국 빅테크 기술 블로그, 인도 기술 소스, 논문 검색 원천, 한국 로컬 리뷰 채널을 폭넓게 사용해야 한다. | UR-2026-05-31-042, 043 | must | baseline | agent-platform/_research | source discovery registry와 source list 확인 | `agent-platform/configs/research/source-discovery-registry.json`, `_research/source-lists/enterprise-high-quality-sites.ko.md` |
+| REQ-WS-019 | 한국 사용자 리뷰나 로컬 판단이 필요한 조사에서는 Naver Map, Kakao Map, Naver Blog/Search, 공식 페이지를 우선 확인하고 후보 페이지 품질을 평가해야 한다. | UR-2026-05-31-044 | must | baseline | `_tools`/`_research` | Korean local review tool tests와 source list 확인 | `_tools/korean-local-review/`, `_research/source-lists/korean-local-review-sources.ko.md` |
 
 ## 변경 관리
 
@@ -41,6 +44,8 @@
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.
+- 원천값과 계획 근거는 `source_value_provenance`, `plan_evidence`, `source_provenance_targets`, `plan_evidence_targets`로 추적한다.
+- 넓은 검색 원천은 `source-discovery-registry.json`을 확인하고, 한국 로컬 리뷰는 `_tools/korean-local-review/`로 점수화한다.
 - 스킬 작업이 있으면 `_skills/` 원본, 검증 결과, 개선 아이디어를 연결한다.
 - 구현 후에는 요청-결과 추적표와 요구사항의 관련 산출물을 갱신한다.
 

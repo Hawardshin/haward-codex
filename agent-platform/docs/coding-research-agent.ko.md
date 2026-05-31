@@ -9,6 +9,8 @@
 - 조사 결과를 바로 구현으로 넘기기 전에 표준 종료 질문에 답한다.
 - 다양한 출처 유형을 명시한다. 최소 3개 이상의 `other`가 아닌 source type이 필요하며, 권위 출처와 실무/채택 신호를 함께 포함한다.
 - 어떤 출처 설정을 참고했는지 `reference_config_paths`로 기록한다.
+- 중요한 원천값, 설정값, 버전, 벤치마크, 위험, 주장, 가정은 `source_value_provenance`로 기록한다.
+- 추천안, 아키텍처 선택, 파일 범위, 검증 단계는 `plan_evidence`로 확인한 출처나 명시적 가정과 연결한다.
 - 구현 전 best-fit 아키텍처 패턴, reference architecture, C4/arc42/SEI/ADR 같은 아키텍처 문서화 기준, 잘 구조화된 프로젝트 architecture 예시를 확인한다.
 - 최소 두 개의 아키텍처 옵션을 비교하고 `architecture_reference_sources`, `architecture_options`, `architecture_decision_notes`에 기록한다.
 - 구현 전 관련 오픈소스 저장소, 참고 구현, 잘 작성된 코드 구조와 테스트를 조사하고 `code_reference_sources`, `code_reference_notes`에 기록한다.
@@ -62,6 +64,7 @@
 기본 설정은 다음과 같다.
 
 - `agent-platform/configs/research/source-registry.json`: 출처 유형과 재사용 reference catalog
+- `agent-platform/configs/research/source-discovery-registry.json`: 세계/한국/인도/논문/한국 로컬 리뷰 검색 원천
 - `agent-platform/configs/research/coding-research-profile.json`: 코딩 조사 기본 coverage profile
 
 ## 조사 완료 질문

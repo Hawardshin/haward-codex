@@ -24,6 +24,9 @@
 - 논문과 기술 블로그를 함께 본다. 논문은 엄밀성, 블로그는 실제 적용과 제약을 보완한다.
 - 외국 기술 블로그와 해외 아티클을 적극 포함한다.
 - 대기업 엔지니어링 블로그, 공식 연구소, architecture center, 고신뢰 독립 자료가 필요하면 `agent-platform/configs/research/enterprise-source-registry.json`을 먼저 확인한다.
+- 더 넓은 검색 원천이 필요하면 `agent-platform/configs/research/source-discovery-registry.json`을 확인해 세계적 기술 블로그, 한국 빅테크 기술 블로그, 인도 기술 소스, 논문 검색 원천을 함께 탐색한다.
+- 한국 사용자의 리뷰/로컬 판단이 필요한 작업은 Naver Map, Kakao Map, Naver Blog/Search, 공식 페이지를 우선 확인하고 `_tools/korean-local-review/`로 후보 품질을 점수화한다.
+- 유명 논문이나 연구 근거가 필요한 작업은 Semantic Scholar, OpenAlex, arXiv, Papers with Code, Connected Papers 같은 원천을 조합해 유명도, 최신성, 코드/데이터 유무, 반대 논문을 확인한다.
 - 좋아요 수, 공유 수, 댓글 수, GitHub stars, Hacker News 점수, LinkedIn 반응은 "인기도/확산 신호"로 기록하되 사실 근거로 단독 사용하지 않는다.
 - LinkedIn 글은 저자, 소속, 날짜, 반응, 원문 링크를 확인하고 1차 근거로 격상하지 않는다.
 - 조사 아티클은 방법론, 데이터 출처, 후원/광고 여부를 확인한다.
@@ -43,11 +46,13 @@
 
 단순 로컬 작업에서는 이 기준을 모두 채우지 않아도 된다. 다만 웹 검색을 먼저 수행하고, 무관하면 그 사실을 기록한다.
 
-반복적으로 많은 출처를 수집하거나 보고서로 정리해야 하면 `_tools/source-collector/`를 사용한다.
+반복적으로 많은 출처를 수집하거나 보고서로 정리해야 하면 `_tools/source-collector/`를 사용한다. 한국 로컬 리뷰나 Naver/Kakao 중심 조사가 필요하면 `_tools/korean-local-review/`를 사용한다.
 
 일반 조사와 계획은 `research-insight-planner-agent`와 `agent-platform/configs/research/research-agent-profile.json`을 사용해 출처 순위화, 증거 추출, 종합, citation grounding, skeptic review를 기록한다.
 
 코딩 조사는 조사 완료 전에 `coding-research-agent`로 출처, `source_types`, `reference_config_paths`, `code_reference_sources`, `code_reference_notes`, 선택지, 추천안, 위험, 검증 계획, 표준 종료 질문을 함께 확인한다. 코딩 조사가 구현 준비 상태가 되려면 최소 3개 이상의 `other`가 아닌 출처 유형을 사용하고, 어떤 출처 설정을 참고했는지 `agent-platform/configs/research/` 아래 JSON 설정으로 남겨야 하며, 관련 오픈소스 구조와 참고 구현 또는 잘 작성된 코드/테스트를 조사해야 한다. 대기업/고신뢰 출처를 쓰는 경우 `reference_config_paths`에 `enterprise-source-registry.json`을 함께 기록한다.
+
+모든 중요한 원천값, 설정값, 주장, 리뷰 신호, 계획 제약은 `source_value_provenance`에 “값 <- 정확한 URL/경로, 접근일, 추출 메모” 형태로 남긴다. 실행 계획은 `plan_evidence`로 각 계획 단계와 근거 출처를 연결한다.
 
 오픈소스 설치가 필요하면 [_docs/open-source-installation-policy.ko.md](open-source-installation-policy.ko.md)에 따라 설치 범위, 설치 명령, dependency 기록 파일, 설치 감사 기록, 보안/라이선스 검토, 검증, rollback을 함께 남긴다. 실제 설치가 발생하면 `_ops/installations/registry.json`과 `_history/installations/YYYY/`를 갱신한다.
 
@@ -68,11 +73,13 @@
 - URL 또는 경로
 - 출처 유형
 - 접근일
+- 원천값 provenance
 - 핵심 claim
 - 신뢰도 판단
 - 인기도/현업 신호
 - 반대 신호
 - 현재 계획에 미친 영향
+- 계획 단계별 근거
 
 ## 자동화 도구
 
@@ -80,13 +87,17 @@
 python3 _tools/source-collector/src/source_collector.py init /tmp/source-bundle.json --topic "topic" --purpose "purpose" --access-date YYYY-MM-DD
 python3 _tools/source-collector/src/source_collector.py report /tmp/source-bundle.json --output /tmp/source-report.md --json-output /tmp/source-report.json
 python3 _tools/source-collector/src/source_collector.py check /tmp/source-bundle.json --strict
+python3 _tools/korean-local-review/src/korean_local_review.py query-plan --topic "topic" --region "region" --category "category"
+python3 _tools/korean-local-review/src/korean_local_review.py score /tmp/korean-review.json --output /tmp/korean-review.md
 ```
 
 ## 관련 파일
 
 - [_tools/source-collector/README.ko.md](../_tools/source-collector/README.ko.md)
+- [_tools/korean-local-review/README.ko.md](../_tools/korean-local-review/README.ko.md)
 - [_ops/workflows/05-web-first-intake.md](../_ops/workflows/05-web-first-intake.md)
 - [_ops/workflows/55-research-insight-planning.md](../_ops/workflows/55-research-insight-planning.md)
 - [_ops/workflows/56-coding-research.md](../_ops/workflows/56-coding-research.md)
 - [대기업/고신뢰 사이트 목록](../_research/source-lists/enterprise-high-quality-sites.ko.md)
+- [한국 사용자 리뷰/로컬 조사 소스](../_research/source-lists/korean-local-review-sources.ko.md)
 - [_research/topics/agent-planning/2026-05-31-source-collection-policy.ko.md](../_research/topics/agent-planning/2026-05-31-source-collection-policy.ko.md)

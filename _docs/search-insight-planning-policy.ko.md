@@ -14,7 +14,11 @@
 - 최신성이나 외부 사실이 중요한 작업은 검색 결과의 원문과 확인 날짜를 남긴다.
 - 웹 검색과 최소 하나 이상의 다른 검색 채널을 함께 사용한다.
 - 기본 조사 프로필은 `agent-platform/configs/research/research-agent-profile.json`이다.
+- 더 넓은 검색 원천은 `agent-platform/configs/research/source-discovery-registry.json`에서 확인한다.
+- 한국 사용자 리뷰나 로컬 판단이 필요한 작업은 Naver Map, Kakao Map, Naver Blog/Search, 공식 페이지를 우선 확인하고 `_tools/korean-local-review/`로 후보 품질을 점수화한다.
 - 계획 입력에는 `research_profile_paths`, `answer_engine_stages`, `citation_requirements`를 기록한다.
+- 중요한 원천값, 설정값, 주장, 리뷰 신호, 가정, 계획 제약은 `source_value_provenance`에 기록한다.
+- 실행 계획의 각 중요한 단계는 `plan_evidence`로 확인한 출처, 저장소 근거, 명시적 가정에 연결한다.
 - `answer_engine_stages`에는 `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, `skeptic_review`를 모두 포함한다.
 - 검색 결과를 그대로 답으로 쓰지 않고, 계획에 영향을 주는 인사이트로 재구성한다.
 - 출처는 권위, 최신성, 독립성, 관련성, 방법론, claim 적합도에 따라 순위화한다.
@@ -44,6 +48,8 @@
 - 사용한 조사 프로필 경로
 - answer engine 단계
 - citation 요구사항
+- 원천값 출처
+- 계획 단계별 근거
 - 도출한 인사이트
 - 계획 단계
 - 검증 단계

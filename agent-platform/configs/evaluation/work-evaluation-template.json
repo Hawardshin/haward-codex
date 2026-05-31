@@ -13,6 +13,14 @@
   "grounding_checks": [
     "hallucination-guard-agent report path or check-grounding command result"
   ],
+  "source_provenance_targets": [
+    "_history/web-searches/YYYY/YYYY-MM-DD-slug.ko.md",
+    "_history/plans/YYYY/YYYY-MM-DD-slug.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/YYYY/YYYY-MM-DD-slug.ko.md",
+    "_specs/scope/YYYY-MM-DD-slug/plan.ko.md"
+  ],
   "web_search_record_targets": [
     "_history/web-searches/YYYY/YYYY-MM-DD-slug.ko.md"
   ],

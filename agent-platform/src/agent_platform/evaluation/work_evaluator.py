@@ -19,6 +19,8 @@ class WorkEvaluationInput:
     verification: tuple[str, ...] = ()
     references_checked: tuple[str, ...] = ()
     grounding_checks: tuple[str, ...] = ()
+    source_provenance_targets: tuple[str, ...] = ()
+    plan_evidence_targets: tuple[str, ...] = ()
     web_search_record_targets: tuple[str, ...] = ()
     user_request_summary_targets: tuple[str, ...] = ()
     requirements_targets: tuple[str, ...] = ()
@@ -44,6 +46,8 @@ class WorkEvaluationInput:
             verification=_tuple_of_strings(data.get("verification", []), "verification"),
             references_checked=_tuple_of_strings(data.get("references_checked", []), "references_checked"),
             grounding_checks=_tuple_of_strings(data.get("grounding_checks", []), "grounding_checks"),
+            source_provenance_targets=_tuple_of_strings(data.get("source_provenance_targets", []), "source_provenance_targets"),
+            plan_evidence_targets=_tuple_of_strings(data.get("plan_evidence_targets", []), "plan_evidence_targets"),
             web_search_record_targets=_tuple_of_strings(data.get("web_search_record_targets", []), "web_search_record_targets"),
             user_request_summary_targets=_tuple_of_strings(data.get("user_request_summary_targets", []), "user_request_summary_targets"),
             requirements_targets=_tuple_of_strings(data.get("requirements_targets", []), "requirements_targets"),
@@ -80,6 +84,10 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
         improvements.append("Record changed files or explain why the work produced no file changes.")
     if not evaluation_input.references_checked:
         gaps.append("Reference research is missing. Check prior internal work or strong external references before evaluation.")
+    if not evaluation_input.source_provenance_targets:
+        gaps.append("Source provenance target is missing. Record where material values, source data, assumptions, claims, or configuration inputs came from.")
+    if not evaluation_input.plan_evidence_targets:
+        gaps.append("Plan evidence target is missing. Record the checked evidence that supports the executed plan.")
     if not evaluation_input.web_search_record_targets:
         gaps.append("Web search record target is missing. Add a public search reasoning record under _history/web-searches/.")
     if not evaluation_input.user_request_summary_targets:
@@ -119,6 +127,8 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
             "verification_count": len(evaluation_input.verification),
             "references_checked_count": len(evaluation_input.references_checked),
             "grounding_checks_count": len(evaluation_input.grounding_checks),
+            "source_provenance_targets_count": len(evaluation_input.source_provenance_targets),
+            "plan_evidence_targets_count": len(evaluation_input.plan_evidence_targets),
             "web_search_record_targets_count": len(evaluation_input.web_search_record_targets),
             "user_request_summary_targets_count": len(evaluation_input.user_request_summary_targets),
             "requirements_targets_count": len(evaluation_input.requirements_targets),

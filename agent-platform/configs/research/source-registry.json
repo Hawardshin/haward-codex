@@ -64,6 +64,17 @@
             "last_checked": "2026-05-31"
         },
         {
+            "id": "source_discovery_registry",
+            "title": "Source discovery registry",
+            "path": "agent-platform/configs/research/source-discovery-registry.json",
+            "source_type": "internal",
+            "used_for": [
+                "broad search-origin discovery",
+                "global tech blogs, Korean tech blogs, Indian technology sources, paper discovery, and Korean local review channels"
+            ],
+            "last_checked": "2026-05-31"
+        },
+        {
             "id": "mlr_guidelines_software_engineering",
       "title": "Guidelines for including grey literature and conducting multivocal literature reviews in software engineering",
       "url": "https://doi.org/10.1016/j.infsof.2018.09.006",

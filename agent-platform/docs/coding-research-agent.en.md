@@ -9,6 +9,8 @@
 - Answer standard close-out questions before implementation starts.
 - Record diverse source types. At least three non-`other` source types are required, including authoritative evidence and practical or adoption signals.
 - Record which source configuration files were used through `reference_config_paths`.
+- Record material source values, config values, versions, benchmarks, risks, claims, and assumptions in `source_value_provenance`.
+- Connect recommendations, architecture choices, file scope, and validation steps to checked sources or explicit assumptions through `plan_evidence`.
 - Before implementation, check best-fit architecture patterns, reference architectures, C4/arc42/SEI/ADR-style architecture documentation, and strong project architecture examples.
 - Compare at least two architecture options and record `architecture_reference_sources`, `architecture_options`, and `architecture_decision_notes`.
 - Before implementation, inspect relevant open-source repositories, reference implementations, or well-structured code and tests, then record `code_reference_sources` and `code_reference_notes`.
@@ -62,6 +64,7 @@ Research input must include `reference_config_paths`. At least one path must poi
 The default configs are:
 
 - `agent-platform/configs/research/source-registry.json`: source types and reusable reference catalog
+- `agent-platform/configs/research/source-discovery-registry.json`: global, Korean, India, paper, and Korean local review search origins
 - `agent-platform/configs/research/coding-research-profile.json`: default coding research coverage profile
 
 ## Post-Research Questions

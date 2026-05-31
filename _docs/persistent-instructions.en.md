@@ -36,18 +36,23 @@ This document records durable user instructions in English.
 - When durable rules, source configs, prompts, workflows, project boundaries, or evaluation loops change, update `agent-platform/configs/memory/bootstrap-manifest.json`.
 - For research or planning work, collect broad high-authority sources, including official docs, papers, open-source repos, international tech blogs, analysis articles, community/social signals, and contrary examples.
 - Manage large-company engineering blogs, official research labs, architecture centers, and high-signal independent source lists separately in `agent-platform/configs/research/enterprise-source-registry.json` and `_research/source-lists/`.
+- Manage broad search origins in `agent-platform/configs/research/source-discovery-registry.json`, including global tech blogs, Korean big-tech blogs, India technology sources, paper discovery sources, and Korean local review channels.
+- For Korean user review or local-market decisions, prioritize Naver Map, Kakao Map, Naver Blog/Search, and official pages, then score candidate quality with `_tools/korean-local-review/`.
+- For famous papers or research-backed evidence, combine Semantic Scholar, OpenAlex, arXiv, Papers with Code, and related-paper search.
 - Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption signals, not standalone proof.
 - Use `_tools/source-collector/` when broad source collection becomes repetitive or source bundles need scoring/reporting.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before relying on it.
 - For important plans, do not rely only on the model's internal guess; use web search plus another search channel to derive insights before planning.
 - Treat `research-insight-planner-agent` as a core research agent and Perplexity-style answer engine.
 - General research plans must record `agent-platform/configs/research/research-agent-profile.json` in `research_profile_paths` and include `answer_engine_stages` plus `citation_requirements`.
+- General research plans must record `source_value_provenance` for material values, claims, assumptions, and constraints, and `plan_evidence` for evidence behind plan steps.
 - The research agent moves through `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, and `skeptic_review`.
 - Rank sources before synthesis and treat citations as verification handles, not proof.
 - Work that uses `research-insight-planner-agent` should set `plan_history_targets` and record plan changes.
 - Before implementing after coding/API/library/architecture/performance/debugging/security/migration research, use `coding-research-agent` to check sources, options, recommendation, risks, validation plan, and standard post-research questions.
 - Coding research must record `source_types` and use at least three distinct non-`other` source types.
 - Coding research must record `reference_config_paths` showing which source registry or research profile config was used.
+- Coding research must record material source values, config values, versions, benchmarks, risks, claims, and assumptions in `source_value_provenance`, and link recommendations, architecture choices, and validation steps through `plan_evidence`.
 - Before writing source code, search for best-fit architecture patterns, reference architectures, and architecture documentation references; compare at least two architecture options; record `architecture_reference_sources`, `architecture_options`, and `architecture_decision_notes`.
 - Source-code-writing agents must inspect relevant open-source repositories, reference implementations, or well-structured code and tests before implementation, then record `code_reference_sources` and `code_reference_notes`.
 - Shared settings files must include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide` so the user can understand references and structural rules by opening one file.
@@ -67,6 +72,7 @@ This document records durable user instructions in English.
 - If skill work occurred, include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets` in work evaluation input.
 - Include `request_trace_targets` in work evaluation input for meaningful work.
 - Include `work_summary_targets` in work evaluation input for meaningful work.
+- Include `source_provenance_targets` and `plan_evidence_targets` in work evaluation input for meaningful work.
 - Prefer Python for agent implementations, orchestration, backend automation, evaluation, and reusable local tools.
 - Use mature, maintained, license-compatible open-source tools and libraries when they fit the task.
 - When a mature open-source tool or library fits the task, do not avoid installation by default; install it in the owning project or tool scope when needed.

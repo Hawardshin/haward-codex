@@ -29,6 +29,12 @@
     "Every material factual claim must be traceable to a checked source.",
     "Conflicting sources require additional research or explicit uncertainty."
   ],
+  "source_value_provenance": [
+    "value, claim, assumption, constraint, or configuration input <- exact source URL/path, checked date, and extraction note"
+  ],
+  "plan_evidence": [
+    "plan step or decision <- checked source IDs, repository evidence, command output, or explicit assumption"
+  ],
   "insights": [
     "Evidence-backed insight that changes or constrains the plan."
   ],

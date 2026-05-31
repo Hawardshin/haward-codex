@@ -2,7 +2,7 @@
 
 - Generated from: `_ops/coordination/status.json`
 - Last updated: `2026-05-31`
-- Summary: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.
+- Summary: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.
 
 ## Agents
 
@@ -27,6 +27,7 @@
 | 2026-05-31-skill-lifecycle | Make skill creation and validation explicit | _skills | completed | codex-primary | No action. Future skill work must update skill source, validation targets, forward-test scenarios, and improvement ideas before close-out. |
 | 2026-05-31-architecture-first-coding | Require architecture-first coding research | agent-platform | completed | codex-primary | No action. Future source-code work must record architecture references, options, and decision notes before implementation. |
 | 2026-05-31-enterprise-source-registry | Add enterprise and high-quality source registry | agent-platform | completed | codex-primary | No action. Future research should update this registry when new reusable high-quality sources are found. |
+| 2026-05-31-source-discovery-provenance | Add source discovery, provenance, and Korean local review research | agent-platform | completed | codex-primary | No action. Future research should use source-discovery-registry.json and _tools/korean-local-review/ when the task needs broad source origins or Korean-user review evidence. |
 
 ## Blockers
 

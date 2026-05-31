@@ -184,6 +184,7 @@ project-name/
 - 스킬 작업이 있었다면 평가 입력에는 `skill_work_occurred=true`, `skill_targets`, `skill_validation_targets`를 포함한다.
 - 평가 입력에는 요청-결과 추적 파일 경로인 `request_trace_targets`를 포함한다.
 - 평가 입력에는 사용자가 나중에 읽을 요약 파일 경로인 `work_summary_targets`를 포함한다.
+- 평가 입력에는 원천값 출처와 계획 근거 파일 경로인 `source_provenance_targets`, `plan_evidence_targets`를 포함한다.
 - 컨텍스트 아카이빙이 발생했다면 평가 입력에는 `context_archiving_occurred=true`와 `context_archive_targets`를 포함한다.
 - 관련 작업을 평가할 때는 저장소 내 이전 작업, 공식 문서, 성숙한 오픈소스, 좋은 외부 사례를 먼저 확인한다.
 - 외부 사실이나 최신 정보가 계획에 영향을 주면 `research-insight-planner-agent`로 검색, 인사이트, 계획, 검증 단계를 구조화한다.
@@ -207,6 +208,8 @@ project-name/
 - 새 스킬이나 수정된 스킬은 `quick_validate.py`와 `agent-platform validate-skill`로 검증하고 개선 아이디어를 남긴다.
 - 실제 Codex 스킬 설치가 필요하면 `$CODEX_HOME/skills`에 반영하되, 원본은 이 저장소에서 관리한다.
 - 많은 출처를 반복적으로 정리할 때는 `_tools/source-collector/`로 출처 묶음을 정규화하고 점수화한다.
+- 더 넓은 검색 원천은 `agent-platform/configs/research/source-discovery-registry.json`에서 관리한다.
+- 한국 사용자 리뷰/로컬 판단은 `_tools/korean-local-review/`로 Naver/Kakao/Naver Blog/Search 후보를 점수화한다.
 
 ## 구현 선호
 

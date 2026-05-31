@@ -18,6 +18,8 @@ Use `agent-platform/configs/evaluation/work-evaluation-template.json` as the sha
 - `verification`: commands, checks, or manual review performed
 - `references_checked`: internal prior work, previous examples, official docs, or strong external references checked before evaluation
 - `grounding_checks`: hallucination-guard-agent results or grounding checks for factual final outputs
+- `source_provenance_targets`: files that record where material values, source data, claims, assumptions, or config inputs came from
+- `plan_evidence_targets`: files that record the evidence behind the executed plan
 - `web_search_record_targets`: public search reasoning record files under `_history/web-searches/YYYY/`
 - `user_request_summary_targets`: user request summary files under `_history/user-requests/YYYY/`
 - `requirements_targets`: workspace or project requirements files under `_requirements/` or `project/docs/requirements/`
@@ -47,6 +49,8 @@ PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/wo
 - `status=ready_to_close`: continue close-out.
 - `status=rework_required`: convert each gap into a follow-up action, complete that work, then evaluate again.
 - Missing reference research is a blocking gap. Record either the references checked or the fact that no relevant reference was found after a reasonable search.
+- Missing source provenance targets are a blocking gap. Record where material values, source data, claims, assumptions, and config inputs came from.
+- Missing plan evidence targets are a blocking gap. Record which evidence supports the executed plan.
 - Missing web search record targets are a blocking gap. Save the visible search process, useful sources, ignored weak sources, plan impact, and public decision summary under `_history/web-searches/YYYY/`.
 - Missing user request summary targets are a blocking gap. Save the user's request intent summary under `_history/user-requests/YYYY/`.
 - Missing requirements targets are a blocking gap. Add or update the active requirements baseline, change, or review file under `_requirements/` or the owning project's `docs/requirements/`.

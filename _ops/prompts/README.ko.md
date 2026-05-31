@@ -27,6 +27,8 @@
 
 `work-evaluator-agent` 입력에는 의미 있는 작업마다 `spec_targets`를 포함한다. 누락되면 blocking gap이다.
 
+`work-evaluator-agent` 입력에는 의미 있는 작업마다 `source_provenance_targets`와 `plan_evidence_targets`를 포함한다. 원천값 출처나 계획 근거가 빠지면 blocking gap이다.
+
 스킬 작업이 있었다면 `work-evaluator-agent` 입력에는 `skill_work_occurred=true`, `skill_targets`, `skill_validation_targets`를 포함한다. 누락되면 blocking gap이다.
 
 `work-evaluator-agent` 입력에는 의미 있는 작업마다 `request_trace_targets`를 포함한다. 누락되면 blocking gap이다.

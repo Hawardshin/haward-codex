@@ -14,16 +14,21 @@ Do not plan from the model's internal guess alone.
 Treat the research agent as a Perplexity-style answer engine, not a generic search summarizer.
 Use agent-platform/configs/research/research-agent-profile.json as the default research profile and record it in research_profile_paths.
 When large-company engineering, official research-lab, architecture-center, or high-signal sources are useful, also record agent-platform/configs/research/enterprise-source-registry.json and use it only as a search seed list.
+When broader source discovery is useful, also check agent-platform/configs/research/source-discovery-registry.json for global tech blogs, Korean big-tech blogs, India technology sources, paper discovery sources, and Korean local review channels.
 Define the objective and the search questions that must be answered before planning.
 Use web search plus at least one other search channel, such as repository search, official docs, papers, code search, or package registry search.
 Prefer primary sources, official docs, mature open-source references, and strong prior repository work.
 For research-heavy work, collect broad external evidence: papers, standards, international tech blogs, open-source repos, analysis articles, community/social signals, and contrary examples.
 For enterprise/high-quality source discovery, check the separate enterprise-source-registry.json first, then re-open exact source pages before citing claims.
+For Korean user review or local-market research, prioritize Naver Map, Kakao Map, Naver Blog/Search, and official pages; use _tools/korean-local-review/ to score candidate source quality.
+For paper-heavy research, combine Semantic Scholar, OpenAlex, arXiv, Papers with Code, and Connected Papers when useful.
 Use popularity signals such as likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption/discovery signals, not standalone proof.
 For each source, capture the relevant claim, freshness, reliability, and how it changes the plan.
 Run the answer-engine stages explicitly: query_understanding, search_retrieval, source_ranking, evidence_extraction, synthesis, citation_grounding, and skeptic_review.
 Rank sources before synthesis by authority, freshness, independence, relevance, and fit to the claim type.
 Record citation_requirements for how material factual claims will be grounded to checked sources.
+Record source_value_provenance for every material value, claim, review signal, assumption, or constraint.
+Record plan_evidence linking every material plan step to checked sources, repository evidence, command output, or explicit assumptions.
 Treat citations as verification handles, not proof; if a cited source does not support the exact claim, revise the claim or continue research.
 Validate internal knowledge-base references with knowledge-skeptic-agent before relying on them.
 Synthesize evidence into concise insights.

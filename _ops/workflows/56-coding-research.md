@@ -9,7 +9,7 @@
 1. Apply [_ops/workflows/05-web-first-intake.md](05-web-first-intake.md) before local planning.
 2. Write the coding research goal and the owning project or shared workspace boundary.
 3. Choose one or more research types: `api_docs`, `library_selection`, `bug_root_cause`, `architecture`, `performance`, `security`, `migration`, `testing`, `open_source`, `implementation_pattern`.
-4. Select reference configs and record them in `reference_config_paths`, usually `agent-platform/configs/research/source-registry.json`, `agent-platform/configs/research/enterprise-source-registry.json` when high-quality source seeds are useful, and `agent-platform/configs/research/coding-research-profile.json`.
+4. Select reference configs and record them in `reference_config_paths`, usually `agent-platform/configs/research/source-registry.json`, `agent-platform/configs/research/source-discovery-registry.json` when broader global/Korean/India/paper/local-review origins are useful, `agent-platform/configs/research/enterprise-source-registry.json` when high-quality source seeds are useful, and `agent-platform/configs/research/coding-research-profile.json`.
 5. Search the web for current external evidence.
 6. Search at least one additional channel: repository docs, official docs, code, package registries, papers, or open-source repos.
 7. Before writing source code, search for best-fit architecture patterns, reference architectures, and architecture documentation frameworks such as well-architected frameworks, C4, arc42, SEI views, ADRs, or strong project `docs/architecture` examples.
@@ -23,10 +23,13 @@
 15. Include at least one practical/adoption/contrary source type: `open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `news`, or `contrary`.
 16. For broad or repeated research, apply [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md) and use `_tools/source-collector/` when useful.
 17. Check `enterprise-source-registry.json` for large-company engineering, official research-lab, architecture-center, or high-signal independent sources, then re-open exact pages before citing claims.
-18. Separate factual evidence from adoption signals such as stars, likes, comments, Hacker News points, Reddit activity, or LinkedIn reactions.
-19. Validate any internal knowledge-base references with `knowledge-skeptic-agent`.
-20. Synthesize findings into options, trade-offs, and a recommendation.
-21. Answer all post-research questions:
+18. For Korean user-facing or local-market behavior, use Naver Map, Kakao Map, Naver Blog/Search, official pages, and `_tools/korean-local-review/` scoring outputs when applicable.
+19. Record `source_value_provenance` for material source values, config values, versions, benchmarks, risks, claims, review signals, and assumptions.
+20. Record `plan_evidence` to connect recommendations, architecture choices, implementation steps, and validation steps to checked evidence.
+21. Separate factual evidence from adoption signals such as stars, likes, comments, Hacker News points, Reddit activity, or LinkedIn reactions.
+22. Validate any internal knowledge-base references with `knowledge-skeptic-agent`.
+23. Synthesize findings into options, trade-offs, and a recommendation.
+24. Answer all post-research questions:
     - `what_was_verified`
     - `best_option`
     - `why_this_option`
@@ -36,12 +39,12 @@
     - `validation_plan`
     - `reusable_knowledge`
     - `next_action`
-22. Save the plan process under `_history/plans/YYYY/`.
-23. Capture reusable research under `_research/` or promote repeatable assets into `_templates/`, `_tools/`, or `_skills/`.
-24. Run `coding-research-agent` with `complete-coding-research`.
-25. If the result is `more_research_required`, resolve the listed gaps before implementation.
-26. If the result is `ready_to_implement`, proceed with the implementation plan and later close with `work-evaluator-agent`.
+25. Save the plan process under `_history/plans/YYYY/`.
+26. Capture reusable research under `_research/` or promote repeatable assets into `_templates/`, `_tools/`, or `_skills/`.
+27. Run `coding-research-agent` with `complete-coding-research`.
+28. If the result is `more_research_required`, resolve the listed gaps before implementation.
+29. If the result is `ready_to_implement`, proceed with the implementation plan and later close with `work-evaluator-agent`.
 
 ## Rule
 
-Coding research is complete only when it records the source configs it used, compares architecture options from credible architecture references, inspects concrete code references, uses diverse source types, records any required installation review and installation audit path, produces a recommended next action, names validation steps, saves plan history, and answers the standard post-research questions.
+Coding research is complete only when it records the source configs it used, records source value provenance and plan evidence, compares architecture options from credible architecture references, inspects concrete code references, uses diverse source types, records any required installation review and installation audit path, produces a recommended next action, names validation steps, saves plan history, and answers the standard post-research questions.

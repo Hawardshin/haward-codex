@@ -6,6 +6,7 @@
 
 - `source-registry.json`: 출처 유형 taxonomy와 재사용 reference source catalog
 - `enterprise-source-registry.json`: 대기업 엔지니어링, 공식 연구소, architecture center, 고신뢰 독립 자료의 별도 seed list
+- `source-discovery-registry.json`: 세계 기술 블로그, 한국 빅테크 기술 블로그, 인도 기술 소스, 논문 검색 원천, 한국 로컬 리뷰 채널의 넓은 search-origin registry
 - `research-agent-profile.json`: Perplexity식 answer engine 구조를 따르는 핵심 조사 에이전트 profile
 - `coding-research-profile.json`: `coding-research-agent`가 구현 전 조사에서 사용하는 기본 source coverage profile
 
@@ -16,6 +17,8 @@
 - 최소 하나의 경로는 `agent-platform/configs/research/` 아래 JSON 설정이어야 한다.
 - `source_types`는 `source-registry.json`의 source type을 사용한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`도 `research_profile_paths` 또는 `reference_config_paths`에 기록한다.
+- 넓은 출처 탐색, 한국 사용자 리뷰, 한국 기술 블로그, 인도 기술 소스, 논문 검색 원천이 필요하면 `source-discovery-registry.json`을 확인한다.
+- 중요한 값과 계획 제약은 `source_value_provenance`와 `plan_evidence`에 연결한다.
 - 일반 조사에는 `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, `skeptic_review` 단계와 citation 요구사항을 남긴다.
 - 소스 코드 구현 전에는 `code_reference_sources`와 `code_reference_notes`로 참고한 오픈소스 구조, 참고 구현, 실제 코드, 테스트에서 배운 점을 기록한다.
 - 외부 reference source는 `last_checked`를 갱신하거나 새 config 항목으로 추가한다.
@@ -29,7 +32,8 @@
 {
   "research_profile_paths": [
     "agent-platform/configs/research/research-agent-profile.json",
-    "agent-platform/configs/research/source-registry.json"
+    "agent-platform/configs/research/source-registry.json",
+    "agent-platform/configs/research/source-discovery-registry.json"
   ],
   "answer_engine_stages": [
     "query_understanding",
@@ -42,6 +46,12 @@
   ],
   "citation_requirements": [
     "중요 사실 주장은 확인된 출처와 연결한다."
+  ],
+  "source_value_provenance": [
+    "값 또는 주장 <- 정확한 URL/경로, 접근일, 추출 메모"
+  ],
+  "plan_evidence": [
+    "계획 단계 <- 확인한 출처, 저장소 근거, 명령 출력, 또는 명시적 가정"
   ],
   "reference_config_paths": [
     "agent-platform/configs/research/source-registry.json",

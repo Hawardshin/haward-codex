@@ -18,6 +18,12 @@ def complete_code_references() -> dict[str, tuple[str, ...]]:
         "code_reference_notes": (
             "Inspected source layout, module boundaries, tests, and error handling patterns.",
         ),
+        "source_value_provenance": (
+            "Technology evaluation pattern <- Thoughtworks Radar FAQ and repository docs checked on 2026-05-31.",
+        ),
+        "plan_evidence": (
+            "Python readiness checker recommendation <- existing CLI pattern, tests, and source registry requirements.",
+        ),
         "architecture_reference_sources": (
             "https://learn.microsoft.com/azure/architecture/",
             "https://github.com/example/project/blob/main/docs/architecture.md",
@@ -248,6 +254,66 @@ class CodingResearchTests(unittest.TestCase):
         self.assertEqual(report["status"], "more_research_required")
         self.assertIn(
             "Code reference sources are missing; inspect relevant open-source repositories, reference implementations, or well-structured code before implementation.",
+            report["gaps"],
+        )
+
+    def test_source_value_provenance_is_required(self) -> None:
+        references = complete_code_references()
+        references.pop("source_value_provenance")
+
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research an API choice.",
+                coding_context="A service integration.",
+                research_types=("api_docs",),
+                search_channels=("web search", "official documentation search", "repository search"),
+                sources_checked=("https://docs.example.com/api", "https://github.com/example/project"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **references,
+                findings=("Official docs describe the API.",),
+                options=("Use API", "Do not use API"),
+                recommendation="Use API.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run integration tests.",),
+                risks_or_unknowns=("The source value origin is not recorded.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn(
+            "Source value provenance is missing; record where material values, assumptions, claims, configuration inputs, or constraints came from.",
+            report["gaps"],
+        )
+
+    def test_plan_evidence_is_required(self) -> None:
+        references = complete_code_references()
+        references.pop("plan_evidence")
+
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research an API choice.",
+                coding_context="A service integration.",
+                research_types=("api_docs",),
+                search_channels=("web search", "official documentation search", "repository search"),
+                sources_checked=("https://docs.example.com/api", "https://github.com/example/project"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **references,
+                findings=("Official docs describe the API.",),
+                options=("Use API", "Do not use API"),
+                recommendation="Use API.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run integration tests.",),
+                risks_or_unknowns=("The plan is not tied to evidence.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn(
+            "Plan evidence is missing; map the recommendation and implementation plan to checked sources, repository evidence, or explicit assumptions.",
             report["gaps"],
         )
 

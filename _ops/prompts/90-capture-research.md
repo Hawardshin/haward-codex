@@ -10,9 +10,12 @@ Use when: 인터넷 조사나 외부 레퍼런스 확인에서 다음에도 참�
 
 ```text
 Review the sources used for the task.
+When broader source discovery is useful, check agent-platform/configs/research/source-discovery-registry.json for global engineering blogs, Korean big-tech blogs, India technology sources, paper discovery sources, and Korean local review channels.
+For Korean user-facing review or local-market decisions, capture Naver Map, Kakao Map, Naver Blog/Search, official pages, and _tools/korean-local-review/ scoring outputs when applicable.
 Identify findings that are likely to be useful again, influence a decision, or support evaluator references_checked.
 Create or update a research note under _research/topics/<topic>/ using the bilingual research-note template when the finding is durable.
 Record source URLs, access date, key summary, derived insights, planning impact, reliability, applicability, and related work.
+Record material source values, review signals, assumptions, and planning constraints in source_value_provenance; record why the plan followed from evidence in plan_evidence.
 Avoid copying long source text; summarize and use only short necessary quotes.
 Update _research/index.ko.md and _research/index.en.md when adding a new topic note.
 Link the research note from related project docs, evaluation reports, or history when useful.

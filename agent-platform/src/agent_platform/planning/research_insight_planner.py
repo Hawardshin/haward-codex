@@ -30,6 +30,8 @@ class ResearchInsightPlanInput:
     research_profile_paths: tuple[str, ...] = ()
     answer_engine_stages: tuple[str, ...] = ()
     citation_requirements: tuple[str, ...] = ()
+    source_value_provenance: tuple[str, ...] = ()
+    plan_evidence: tuple[str, ...] = ()
     insights: tuple[str, ...] = ()
     plan_steps: tuple[str, ...] = ()
     validation_steps: tuple[str, ...] = ()
@@ -48,6 +50,8 @@ class ResearchInsightPlanInput:
             research_profile_paths=_tuple_of_strings(data.get("research_profile_paths", []), "research_profile_paths"),
             answer_engine_stages=_tuple_of_strings(data.get("answer_engine_stages", []), "answer_engine_stages"),
             citation_requirements=_tuple_of_strings(data.get("citation_requirements", []), "citation_requirements"),
+            source_value_provenance=_tuple_of_strings(data.get("source_value_provenance", []), "source_value_provenance"),
+            plan_evidence=_tuple_of_strings(data.get("plan_evidence", []), "plan_evidence"),
             insights=_tuple_of_strings(data.get("insights", []), "insights"),
             plan_steps=_tuple_of_strings(data.get("plan_steps", []), "plan_steps"),
             validation_steps=_tuple_of_strings(data.get("validation_steps", []), "validation_steps"),
@@ -86,10 +90,16 @@ def create_research_insight_plan(plan_input: ResearchInsightPlanInput) -> JsonMa
             gaps.append(f"Answer engine stages are incomplete; missing: {', '.join(missing_stages)}.")
     if not plan_input.citation_requirements:
         gaps.append("Citation requirements are missing; record how claims will be grounded to checked sources.")
+    if not plan_input.source_value_provenance:
+        gaps.append("Source value provenance is missing; record where material values, assumptions, claims, or constraints came from.")
+    if not plan_input.plan_evidence:
+        gaps.append("Plan evidence is missing; map each material plan step to checked sources, repository evidence, or explicit assumptions.")
     if not plan_input.insights:
         gaps.append("Insights are missing.")
     if not plan_input.plan_steps:
         gaps.append("Plan steps are missing.")
+    elif plan_input.plan_evidence and len(plan_input.plan_evidence) < len(plan_input.plan_steps):
+        gaps.append("Each material plan step needs supporting plan_evidence.")
     if not plan_input.validation_steps:
         gaps.append("Validation steps are missing.")
     if not plan_input.plan_history_targets:
@@ -117,6 +127,8 @@ def create_research_insight_plan(plan_input: ResearchInsightPlanInput) -> JsonMa
             "answer_engine_stages_count": len(plan_input.answer_engine_stages),
             "required_answer_engine_stages": sorted(REQUIRED_ANSWER_ENGINE_STAGES),
             "citation_requirements_count": len(plan_input.citation_requirements),
+            "source_value_provenance_count": len(plan_input.source_value_provenance),
+            "plan_evidence_count": len(plan_input.plan_evidence),
             "insights_count": len(plan_input.insights),
             "plan_steps_count": len(plan_input.plan_steps),
             "validation_steps_count": len(plan_input.validation_steps),

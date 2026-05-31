@@ -65,6 +65,17 @@
             "last_checked": "2026-05-31"
         },
         {
+            "id": "source_discovery_registry",
+            "title": "Source discovery registry",
+            "path": "agent-platform/configs/research/source-discovery-registry.json",
+            "source_type": "internal",
+            "used_for": [
+                "broader search origin discovery before implementation",
+                "global engineering blogs, Korean technology blogs, India technology sources, paper discovery, and Korean local review channels"
+            ],
+            "last_checked": "2026-05-31"
+        },
+        {
             "id": "mlr_guidelines_software_engineering",
       "title": "Guidelines for including grey literature and conducting multivocal literature reviews in software engineering",
       "url": "https://doi.org/10.1016/j.infsof.2018.09.006",
@@ -271,6 +282,16 @@
       "required": true
     },
     {
+      "field": "source_value_provenance",
+      "meaning": "Material source values, config values, versions, benchmarks, risks, claims, and assumptions recorded before implementation.",
+      "required": true
+    },
+    {
+      "field": "plan_evidence",
+      "meaning": "Evidence mapping for recommendations, architecture choices, file-scope choices, and validation steps.",
+      "required": true
+    },
+    {
       "field": "default_reference_source_ids",
       "meaning": "Source-registry IDs that should normally be considered in coding research.",
       "required": true
@@ -326,6 +347,8 @@
     "must_record_architecture_references": true,
     "min_architecture_reference_sources": 1,
     "min_architecture_options": 2,
+    "must_record_source_value_provenance": true,
+    "must_record_plan_evidence": true,
     "must_record_plan_history_targets": true
   },
   "default_reference_source_ids": [
@@ -348,6 +371,8 @@
   "source_selection_rules": [
         "Start with web search before local planning.",
         "Check enterprise-source-registry.json when the task benefits from large-company engineering, research-lab, architecture-center, or high-signal independent sources.",
+        "Check source-discovery-registry.json when broader global, Korean, Indian, paper, or Korean local review source origins are useful.",
+        "Use Naver Map, Kakao Map, Naver Blog/Search, official pages, and _tools/korean-local-review/ when Korean user behavior or local-market review signals affect implementation.",
         "Use at least one current official or primary source when external behavior matters.",
     "Use open-source source material when implementation behavior, maintenance, or license matters.",
     "Before writing source code, look for best-fit architecture patterns, reference architectures, and well-structured source architectures.",
@@ -355,6 +380,7 @@
     "Inspect relevant open-source repositories, reference implementations, example applications, and tests before writing source code.",
     "Record code_reference_sources and code_reference_notes so implementation choices can be traced back to concrete code examples.",
     "Record architecture_reference_sources, architecture_options, and architecture_decision_notes so source-code structure can be traced back to architecture evidence.",
+    "Record source_value_provenance and plan_evidence so source values, assumptions, recommendations, and validation choices can be audited.",
     "Use papers, standards, or technical reports when methodology, risk, or security claims matter.",
     "Use technical blogs, analysis articles, community signals, social signals, and contrary examples to discover trade-offs and adoption signals.",
     "Treat popularity and social signals as discovery or adoption signals, not proof.",

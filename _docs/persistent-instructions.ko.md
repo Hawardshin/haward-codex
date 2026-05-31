@@ -36,18 +36,23 @@
 - durable rule, 출처 설정, 프롬프트, 워크플로, 프로젝트 경계, 평가 루프가 바뀌면 `agent-platform/configs/memory/bootstrap-manifest.json`도 갱신한다.
 - 조사나 계획 작업은 공식 문서, 논문, 오픈소스 repo, 외국 기술 블로그, 조사 아티클, 커뮤니티/소셜 신호, 반대 사례를 폭넓게 수집한다.
 - 대기업 엔지니어링 블로그, 공식 연구소, architecture center, 고신뢰 독립 자료 목록은 `agent-platform/configs/research/enterprise-source-registry.json`과 `_research/source-lists/`에서 별도로 관리한다.
+- 넓은 검색 원천은 `agent-platform/configs/research/source-discovery-registry.json`에서 관리하고, 세계 기술 블로그, 한국 빅테크 기술 블로그, 인도 기술 소스, 논문 검색 원천, 한국 로컬 리뷰 채널을 포함한다.
+- 한국 사용자의 리뷰/로컬 판단이 필요한 작업은 Naver Map, Kakao Map, Naver Blog/Search, 공식 페이지를 우선 확인하고 `_tools/korean-local-review/`로 후보 품질을 평가한다.
+- 유명 논문이나 연구 근거가 필요한 작업은 Semantic Scholar, OpenAlex, arXiv, Papers with Code, 관련 논문 검색을 조합한다.
 - 좋아요, 공유, 댓글, GitHub stars, Hacker News 점수, Reddit 활동, LinkedIn 반응은 adoption 신호로만 보고 단독 사실 근거로 쓰지 않는다.
 - 폭넓은 출처 수집이 반복되거나 출처 묶음 점수화/보고서가 필요하면 `_tools/source-collector/`를 사용한다.
 - 지식 베이스 내용은 틀릴 수 있다고 가정하고, 근거로 사용하기 전 `knowledge-skeptic-agent`로 검증한다.
 - 중요한 계획은 AI의 내부 추정만으로 세우지 않고, 웹 검색과 다른 검색 채널을 통해 인사이트를 도출한 뒤 수립한다.
 - `research-insight-planner-agent`는 플랫폼의 핵심 조사 에이전트이며 Perplexity식 answer engine으로 취급한다.
 - 일반 조사 계획은 `research_profile_paths`에 `agent-platform/configs/research/research-agent-profile.json`을 기록하고, `answer_engine_stages`와 `citation_requirements`를 포함해야 한다.
+- 일반 조사 계획은 `source_value_provenance`로 원천값/주장/가정/제약의 출처를 기록하고, `plan_evidence`로 계획 단계별 근거를 연결해야 한다.
 - 조사 에이전트는 `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, `skeptic_review` 단계를 거친다.
 - 출처는 종합 전에 순위화하고, citation은 증명 자체가 아니라 검증 핸들로 취급한다.
 - `research-insight-planner-agent`를 쓰는 작업은 `plan_history_targets`를 지정하고 계획 변경 이력을 남긴다.
 - 코딩/API/라이브러리/아키텍처/성능/디버깅/보안/마이그레이션 조사는 구현 전에 `coding-research-agent`로 출처, 선택지, 추천안, 위험, 검증 계획, 표준 종료 질문을 확인한다.
 - 코딩 조사는 `source_types`를 명시하고 최소 3개 이상의 `other`가 아닌 서로 다른 출처 유형을 사용해야 한다.
 - 코딩 조사는 어떤 출처 레지스트리나 리서치 프로필 설정을 참고했는지 `reference_config_paths`로 기록해야 한다.
+- 코딩 조사는 중요한 원천값, 설정값, 버전, 벤치마크, 위험, 주장, 가정을 `source_value_provenance`에 기록하고 추천안/아키텍처 선택/검증 단계를 `plan_evidence`에 연결해야 한다.
 - 소스 코드를 작성하기 전에는 best-fit 아키텍처 패턴, reference architecture, 아키텍처 문서화 레퍼런스를 찾고 최소 두 개의 아키텍처 옵션을 비교한 뒤 `architecture_reference_sources`, `architecture_options`, `architecture_decision_notes`로 기록해야 한다.
 - 소스 코드를 작성하는 에이전트는 구현 전 관련 오픈소스 저장소, 참고 구현, 잘 작성된 코드 구조와 테스트를 조사하고 `code_reference_sources`, `code_reference_notes`로 기록해야 한다.
 - 공유 설정 파일은 `reader_guide`, `reference_links`, `structure_rules`, `field_guide`를 포함해 파일 하나만 열어도 참고 링크와 구조 규칙을 이해할 수 있어야 한다.
@@ -67,6 +72,7 @@
 - 스킬 작업이 있었다면 평가 입력에는 `skill_work_occurred=true`, `skill_targets`, `skill_validation_targets`를 포함한다.
 - 의미 있는 작업의 평가 입력에는 `request_trace_targets`를 포함한다.
 - 의미 있는 작업의 평가 입력에는 `work_summary_targets`를 포함한다.
+- 의미 있는 작업의 평가 입력에는 `source_provenance_targets`와 `plan_evidence_targets`를 포함한다.
 - 에이전트 구현, 오케스트레이션, 백엔드 자동화, 평가, 재사용 로컬 도구는 Python을 우선한다.
 - 작업에 맞는 성숙하고 유지보수되는 오픈소스 도구와 라이브러리를 우선 검토한다.
 - 성숙한 오픈소스 도구나 라이브러리가 작업에 맞으면 설치를 피하지 말고 프로젝트/도구 범위에 설치해 사용할 수 있다.

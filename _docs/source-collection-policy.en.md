@@ -24,6 +24,9 @@ This policy extends [_docs/web-first-work-policy.en.md](web-first-work-policy.en
 - Use both papers and technical blogs. Papers add rigor; blogs add field constraints and applied patterns.
 - Actively include international tech blogs and foreign-language articles when useful.
 - When large-company engineering blogs, official research labs, architecture centers, or high-signal independent sources are useful, check `agent-platform/configs/research/enterprise-source-registry.json` first.
+- When broader search origins are needed, check `agent-platform/configs/research/source-discovery-registry.json` for global engineering blogs, Korean big-tech blogs, India technology sources, and paper discovery sources.
+- For Korean user review or local-market decisions, prioritize Naver Map, Kakao Map, Naver Blog/Search, and official pages, then score candidate quality with `_tools/korean-local-review/`.
+- For famous or method-critical papers, combine Semantic Scholar, OpenAlex, arXiv, Papers with Code, and Connected Papers to check influence, freshness, code/data availability, and contrary papers.
 - Likes, shares, comments, GitHub stars, Hacker News points, and LinkedIn reactions are popularity or adoption signals, not standalone factual proof.
 - For LinkedIn posts, check author, affiliation, date, reactions, and linked primary sources.
 - For analysis articles, check methodology, data sources, sponsorship, and advertising incentives.
@@ -43,11 +46,13 @@ When research affects a plan or decision, try to collect:
 
 Simple local tasks do not need the full bundle. Still run web-first intake and record when results are irrelevant.
 
-When collecting or reporting many sources becomes repetitive, use `_tools/source-collector/`.
+When collecting or reporting many sources becomes repetitive, use `_tools/source-collector/`. For Korean local reviews or Naver/Kakao-centered research, use `_tools/korean-local-review/`.
 
 For general research and planning, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json` to record source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
 
 For coding research, run `coding-research-agent` before completion to check sources, `source_types`, `reference_config_paths`, `code_reference_sources`, `code_reference_notes`, options, recommendation, risks, validation plan, and standard post-research questions. Coding research needs at least three distinct non-`other` source types, must record the source settings it used through JSON configs under `agent-platform/configs/research/`, and must inspect relevant open-source structure, reference implementations, or well-written code/tests. When enterprise/high-quality sources are used, also include `enterprise-source-registry.json` in `reference_config_paths`.
+
+For every material source value, configuration value, claim, review signal, or planning constraint, record `source_value_provenance` as “value <- exact URL/path, access date, extraction note.” Tie execution steps to supporting evidence through `plan_evidence`.
 
 If open-source installation is needed, follow [_docs/open-source-installation-policy.en.md](open-source-installation-policy.en.md) and record install scope, command, dependency file, installation audit record, security/license review, verification, and rollback. If installation actually occurs, update `_ops/installations/registry.json` and `_history/installations/YYYY/`.
 
@@ -68,11 +73,13 @@ Research notes and evaluation reports should record:
 - URL or path
 - source type
 - access date
+- source value provenance
 - key claim
 - reliability judgment
 - popularity or practitioner signal
 - contrary signals
 - plan impact
+- plan-step evidence
 
 ## Automation Tool
 
@@ -80,13 +87,17 @@ Research notes and evaluation reports should record:
 python3 _tools/source-collector/src/source_collector.py init /tmp/source-bundle.json --topic "topic" --purpose "purpose" --access-date YYYY-MM-DD
 python3 _tools/source-collector/src/source_collector.py report /tmp/source-bundle.json --output /tmp/source-report.md --json-output /tmp/source-report.json
 python3 _tools/source-collector/src/source_collector.py check /tmp/source-bundle.json --strict
+python3 _tools/korean-local-review/src/korean_local_review.py query-plan --topic "topic" --region "region" --category "category"
+python3 _tools/korean-local-review/src/korean_local_review.py score /tmp/korean-review.json --output /tmp/korean-review.md
 ```
 
 ## Related Files
 
 - [_tools/source-collector/README.en.md](../_tools/source-collector/README.en.md)
+- [_tools/korean-local-review/README.en.md](../_tools/korean-local-review/README.en.md)
 - [_ops/workflows/05-web-first-intake.md](../_ops/workflows/05-web-first-intake.md)
 - [_ops/workflows/55-research-insight-planning.md](../_ops/workflows/55-research-insight-planning.md)
 - [_ops/workflows/56-coding-research.md](../_ops/workflows/56-coding-research.md)
 - [Enterprise and high-quality site list](../_research/source-lists/enterprise-high-quality-sites.en.md)
+- [Korean local review sources](../_research/source-lists/korean-local-review-sources.en.md)
 - [_research/topics/agent-planning/2026-05-31-source-collection-policy.en.md](../_research/topics/agent-planning/2026-05-31-source-collection-policy.en.md)

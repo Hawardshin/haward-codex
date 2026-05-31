@@ -65,6 +65,8 @@ class CodingResearchInput:
     sources_checked: tuple[str, ...] = ()
     source_types: tuple[str, ...] = ()
     reference_config_paths: tuple[str, ...] = ()
+    source_value_provenance: tuple[str, ...] = ()
+    plan_evidence: tuple[str, ...] = ()
     code_reference_sources: tuple[str, ...] = ()
     code_reference_notes: tuple[str, ...] = ()
     architecture_reference_sources: tuple[str, ...] = ()
@@ -91,6 +93,8 @@ class CodingResearchInput:
             sources_checked=_tuple_of_strings(data.get("sources_checked", []), "sources_checked"),
             source_types=_tuple_of_strings(data.get("source_types", []), "source_types"),
             reference_config_paths=_tuple_of_strings(data.get("reference_config_paths", []), "reference_config_paths"),
+            source_value_provenance=_tuple_of_strings(data.get("source_value_provenance", []), "source_value_provenance"),
+            plan_evidence=_tuple_of_strings(data.get("plan_evidence", []), "plan_evidence"),
             code_reference_sources=_tuple_of_strings(data.get("code_reference_sources", []), "code_reference_sources"),
             code_reference_notes=_tuple_of_strings(data.get("code_reference_notes", []), "code_reference_notes"),
             architecture_reference_sources=_tuple_of_strings(data.get("architecture_reference_sources", []), "architecture_reference_sources"),
@@ -139,6 +143,10 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
         gaps.append("Reference config paths are missing; point to the source registry or research profile used for this investigation.")
     elif not any(_is_research_config_path(path) for path in research_input.reference_config_paths):
         gaps.append("At least one reference config path must point to agent-platform/configs/research/.")
+    if not research_input.source_value_provenance:
+        gaps.append("Source value provenance is missing; record where material values, assumptions, claims, configuration inputs, or constraints came from.")
+    if not research_input.plan_evidence:
+        gaps.append("Plan evidence is missing; map the recommendation and implementation plan to checked sources, repository evidence, or explicit assumptions.")
     normalized_source_types = _normalized_source_types(research_input.source_types)
     if not normalized_source_types:
         gaps.append("Source types are missing; record diverse source types such as official, paper, open_source, tech_blog, community, social, or contrary.")
@@ -214,6 +222,8 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
             "source_types_count": len(evidence_source_types),
             "source_type_counts": _source_type_counts(research_input.source_types),
             "reference_config_paths_count": len(research_input.reference_config_paths),
+            "source_value_provenance_count": len(research_input.source_value_provenance),
+            "plan_evidence_count": len(research_input.plan_evidence),
             "code_reference_sources_count": len(research_input.code_reference_sources),
             "code_reference_notes_count": len(research_input.code_reference_notes),
             "architecture_reference_sources_count": len(research_input.architecture_reference_sources),

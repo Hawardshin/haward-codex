@@ -14,7 +14,11 @@ The philosophical basis lives in [_philosophy/agent-operating-philosophy.en.md](
 - For current information or external facts, review source content and record the access date.
 - Use web search plus at least one other search channel.
 - The default research profile is `agent-platform/configs/research/research-agent-profile.json`.
+- Use `agent-platform/configs/research/source-discovery-registry.json` for broader search origins.
+- For Korean user reviews or local-market decisions, prioritize Naver Map, Kakao Map, Naver Blog/Search, and official pages, then score candidate quality with `_tools/korean-local-review/`.
 - Planning input must record `research_profile_paths`, `answer_engine_stages`, and `citation_requirements`.
+- Record material source values, config values, claims, review signals, assumptions, and planning constraints in `source_value_provenance`.
+- Connect each material execution plan step to checked sources, repository evidence, or explicit assumptions through `plan_evidence`.
 - `answer_engine_stages` must include `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, and `skeptic_review`.
 - Do not copy search results directly into a plan; turn evidence into decision-relevant insights.
 - Rank sources by authority, freshness, independence, relevance, methodology, and fit to the claim type.
@@ -44,6 +48,8 @@ Before execution, record:
 - research profile paths
 - answer engine stages
 - citation requirements
+- source value provenance
+- plan evidence
 - insights
 - plan steps
 - validation steps

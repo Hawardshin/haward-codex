@@ -1,0 +1,447 @@
+{
+  "schema_version": "2026-05-31",
+  "name": "source-discovery-registry",
+  "purpose": "Reusable search-origin registry for deeper, more human-like source discovery across global engineering blogs, Korean technology blogs, Indian technology sources, paper indexes, and Korean local review channels.",
+  "reader_guide": {
+    "summary": "Use this file before broad research. It tells an agent where to search beyond generic web search, which regional source families matter, and which sources are only discovery signals.",
+    "how_to_read": [
+      "Start with recommended_search_sequences for the task type.",
+      "Use source_groups to pick concrete search origins by region and domain.",
+      "Use quality_evaluation_rules before treating a page as evidence.",
+      "Use this as a search-origin list, not proof; reopen exact pages before citing."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-05-31",
+    "update_triggers": [
+      "A research task repeatedly needs better search coverage.",
+      "A new high-quality engineering, research, Korean local, or paper-discovery source becomes useful.",
+      "Korean user-facing reviews, maps, or local-market context are involved.",
+      "A source is stale, no longer official, blocked, or too marketing-heavy.",
+      "A search or review tool is added, removed, or replaced."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "source_collection_policy",
+      "title": "Source Collection Policy",
+      "path": "_docs/source-collection-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "source diversity",
+        "quality scoring",
+        "adoption signal handling"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "enterprise_source_registry",
+      "title": "Enterprise Source Registry",
+      "path": "agent-platform/configs/research/enterprise-source-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "large-company and high-quality source seed list"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "naver_search_api",
+      "title": "NAVER Search API",
+      "url": "https://developers.naver.com/products/service-api/search/search.md",
+      "source_type": "official",
+      "used_for": [
+        "Naver search, blog, and local-result API origin",
+        "Korean market search channel"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "naver_blog_api",
+      "title": "NAVER Blog Search API",
+      "url": "https://developers.naver.com/docs/serviceapi/search/blog/blog.md",
+      "source_type": "official",
+      "used_for": [
+        "Naver blog review discovery",
+        "Korean long-form user-experience signals"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "kakao_local_api",
+      "title": "Kakao Local API",
+      "url": "https://developers.kakao.com/docs/ko/local/dev-guide",
+      "source_type": "official",
+      "used_for": [
+        "Kakao place search",
+        "Kakao Map detail URL discovery"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "openalex_works",
+      "title": "OpenAlex Works API",
+      "url": "https://docs.openalex.org/api-entities/works",
+      "source_type": "official",
+      "used_for": [
+        "paper discovery",
+        "citation and metadata graph"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "semantic_scholar_api",
+      "title": "Semantic Scholar Academic Graph API",
+      "url": "https://www.semanticscholar.org/product/api",
+      "source_type": "official",
+      "used_for": [
+        "paper search",
+        "author, citation, and related-paper discovery"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "arxiv_api",
+      "title": "arXiv API Documentation",
+      "url": "https://info.arxiv.org/help/api/index.html",
+      "source_type": "official",
+      "used_for": [
+        "preprint search",
+        "machine-readable paper metadata"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "papers_with_code_client",
+      "title": "Papers with Code API Client",
+      "url": "https://github.com/paperswithcode/paperswithcode-client",
+      "source_type": "open_source",
+      "used_for": [
+        "paper-to-code discovery",
+        "ML benchmark and implementation search"
+      ],
+      "last_checked": "2026-05-31"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "search_origin_not_evidence",
+      "rule": "Source groups are search origins, not proof; exact source pages must be checked before claims or recommendations.",
+      "reason": "A good search origin can still return weak, stale, sponsored, or irrelevant pages.",
+      "applies_to": [
+        "source_groups",
+        "recommended_search_sequences"
+      ]
+    },
+    {
+      "id": "regional_fit_matters",
+      "rule": "For Korean user-facing review or local-market tasks, include Korean search and map channels before relying on global web results.",
+      "reason": "Korean consumer/local information often appears first in Naver, Kakao, Naver Blog, and Korean-language sources.",
+      "applies_to": [
+        "korean_local_review_channels",
+        "recommended_search_sequences"
+      ]
+    },
+    {
+      "id": "people_sources_need_extra_checks",
+      "rule": "Individual expert blogs, newsletters, and social posts require author identity, date, conflicts, and corroborating sources before use as evidence.",
+      "reason": "High-signal people can be useful for discovery and insight, but are not automatically authoritative for factual claims.",
+      "applies_to": [
+        "indian_technology_people",
+        "high_signal_independent"
+      ]
+    },
+    {
+      "id": "papers_need_graph_and_code_checks",
+      "rule": "For papers, combine at least one paper index, citation/related-paper discovery, and code/dataset search when implementation relevance matters.",
+      "reason": "A famous paper may be outdated, uncited in practice, unsupported by code, or superseded.",
+      "applies_to": [
+        "paper_discovery_sources"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "source_groups",
+      "meaning": "Grouped search origins by global tech, Korea tech, India tech, papers, and Korean local reviews.",
+      "required": true
+    },
+    {
+      "field": "recommended_search_sequences",
+      "meaning": "Human-like search order by task type.",
+      "required": true
+    },
+    {
+      "field": "quality_evaluation_rules",
+      "meaning": "Rules for judging whether a page is strong enough to cite or only useful for discovery.",
+      "required": true
+    }
+  ],
+  "source_groups": {
+    "global_engineering_blogs": [
+      {
+        "name": "Meta Engineering",
+        "url": "https://engineering.fb.com/",
+        "use_for": "large-scale systems, AI infra, reliability",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Netflix TechBlog",
+        "url": "https://netflixtechblog.com/",
+        "use_for": "streaming, cloud, reliability, data",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Uber Engineering",
+        "url": "https://www.uber.com/blog/engineering/",
+        "use_for": "marketplace, infra, geospatial, reliability",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Stripe Engineering",
+        "url": "https://stripe.com/blog/engineering",
+        "use_for": "API, payments, developer tooling",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Cloudflare Blog",
+        "url": "https://blog.cloudflare.com/",
+        "use_for": "networking, security, edge, performance",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "GitHub Engineering",
+        "url": "https://github.blog/engineering/",
+        "use_for": "developer platform, repositories, AI coding",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Canva Engineering",
+        "url": "https://www.canva.dev/blog/engineering/",
+        "use_for": "frontend, design systems, infra, product engineering",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Figma Engineering",
+        "url": "https://www.figma.com/blog/engineering/",
+        "use_for": "collaboration, frontend, product engineering",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Pinterest Engineering",
+        "url": "https://medium.com/pinterest-engineering",
+        "use_for": "recommendation, ML systems, web scale",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "DoorDash Engineering",
+        "url": "https://careersatdoordash.com/blog/category/engineering/",
+        "use_for": "marketplace, logistics, experimentation",
+        "evidence_role": "field_practice"
+      }
+    ],
+    "korean_bigtech_and_product_tech_blogs": [
+      {
+        "name": "NAVER D2",
+        "url": "https://d2.naver.com/home",
+        "use_for": "Korean-language engineering, AI, search, infra",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Kakao Tech",
+        "url": "https://tech.kakao.com/",
+        "use_for": "Kakao engineering and platform cases",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "KakaoBank Tech Blog",
+        "url": "https://tech.kakaobank.com/",
+        "use_for": "fintech, banking, security, infrastructure",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "LINE Engineering",
+        "url": "https://engineering.linecorp.com/ko/",
+        "use_for": "messaging, global collaboration, platform engineering",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Coupang Engineering Blog",
+        "url": "https://medium.com/coupang-engineering/latest",
+        "use_for": "commerce, logistics, ML, large-scale systems",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Toss Tech",
+        "url": "https://toss.tech/",
+        "use_for": "fintech, frontend, mobile, backend, product engineering",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Woowa Tech Blog",
+        "url": "https://techblog.woowahan.com/",
+        "use_for": "delivery commerce, backend, data, mobile",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Kurly Tech Blog",
+        "url": "https://helloworld.kurly.com/",
+        "use_for": "commerce, logistics, data, backend",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "DEVOCEAN",
+        "url": "https://devocean.sk.com/",
+        "use_for": "SK telecom/platform developer content and Korean engineering references",
+        "evidence_role": "field_practice"
+      }
+    ],
+    "indian_technology_sources": [
+      {
+        "name": "Razorpay Blog / Engineering",
+        "url": "https://razorpay.com/blog/",
+        "use_for": "payments, fintech, agentic SDLC, engineering operations",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Zerodha Tech Blog",
+        "url": "https://zerodha.tech/blog/",
+        "use_for": "lean engineering, fintech, open-source, self-hosted systems",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Zerodha Open Source",
+        "url": "https://zerodha.com/open-source/",
+        "use_for": "India fintech open-source references",
+        "evidence_role": "open_source_discovery"
+      },
+      {
+        "name": "PhonePe Blog",
+        "url": "https://www.phonepe.com/blog/",
+        "use_for": "India payments and platform technology signals",
+        "evidence_role": "context"
+      },
+      {
+        "name": "Arpit Bhayani",
+        "url": "https://arpitbhayani.me/",
+        "use_for": "system design, distributed systems, practical engineering essays",
+        "evidence_role": "expert_context"
+      }
+    ],
+    "paper_discovery_sources": [
+      {
+        "name": "OpenAlex",
+        "url": "https://docs.openalex.org/api-entities/works",
+        "use_for": "open scholarly graph and citation metadata",
+        "evidence_role": "paper_index"
+      },
+      {
+        "name": "Semantic Scholar",
+        "url": "https://www.semanticscholar.org/product/api",
+        "use_for": "paper relevance search, citation graph, related papers",
+        "evidence_role": "paper_index"
+      },
+      {
+        "name": "arXiv API",
+        "url": "https://info.arxiv.org/help/api/index.html",
+        "use_for": "preprints and technical papers",
+        "evidence_role": "paper_index"
+      },
+      {
+        "name": "Papers with Code",
+        "url": "https://paperswithcode.com/",
+        "use_for": "ML papers with code, benchmarks, datasets",
+        "evidence_role": "paper_to_code"
+      },
+      {
+        "name": "Connected Papers",
+        "url": "https://www.connectedpapers.com/index.html",
+        "use_for": "related-paper exploration from a seed paper",
+        "evidence_role": "paper_discovery"
+      }
+    ],
+    "korean_local_review_channels": [
+      {
+        "name": "Naver Map",
+        "url": "https://map.naver.com/",
+        "use_for": "Korean local place discovery, visitor review signals, photos, operational details",
+        "evidence_role": "local_review_signal"
+      },
+      {
+        "name": "Kakao Map",
+        "url": "https://map.kakao.com/",
+        "use_for": "Korean local place cross-check, alternate user reviews, route context",
+        "evidence_role": "local_review_signal"
+      },
+      {
+        "name": "NAVER Blog Search API",
+        "url": "https://developers.naver.com/docs/serviceapi/search/blog/blog.md",
+        "use_for": "Korean long-form review and experience discovery",
+        "evidence_role": "blog_review_signal"
+      },
+      {
+        "name": "Kakao Local API",
+        "url": "https://developers.kakao.com/docs/ko/local/dev-guide",
+        "use_for": "place candidate lookup and Kakao Map detail URLs",
+        "evidence_role": "local_place_discovery"
+      },
+      {
+        "name": "Korean Local Review Tool",
+        "url": "_tools/korean-local-review/",
+        "use_for": "score Korean local review candidates and recommend search channels",
+        "evidence_role": "internal_tool"
+      }
+    ]
+  },
+  "recommended_search_sequences": [
+    {
+      "task_type": "global_technical_decision",
+      "sequence": [
+        "official docs or standards",
+        "paper index if method claims matter",
+        "global engineering blogs",
+        "open-source implementations",
+        "community/social adoption signals",
+        "contrary/failure cases"
+      ]
+    },
+    {
+      "task_type": "korean_user_review_or_local_market",
+      "sequence": [
+        "official place or product page",
+        "Naver Map and Naver local search",
+        "Naver Blog/Search with Korean review terms",
+        "Kakao Map or Kakao Local cross-check",
+        "Korean community/news if relevant",
+        "global web search as supplement"
+      ]
+    },
+    {
+      "task_type": "paper_or_research_method",
+      "sequence": [
+        "Semantic Scholar or OpenAlex",
+        "arXiv or publisher page",
+        "Papers with Code or official repo",
+        "Connected Papers or related-paper graph",
+        "high-quality engineering blog applying the method",
+        "contrary papers or failure cases"
+      ]
+    },
+    {
+      "task_type": "korean_tech_context",
+      "sequence": [
+        "Korean big-tech/product tech blogs",
+        "official Korean product/API docs",
+        "global engineering references for comparison",
+        "open-source code references",
+        "Korean community/social signals only as adoption/context"
+      ]
+    }
+  ],
+  "quality_evaluation_rules": [
+    "Record exact URL/path, access date, publisher, author when available, key claim, and how it changes the plan.",
+    "For Korean local review tasks, do not rely on one platform; compare Naver and Kakao when possible.",
+    "For Naver Blog or influencer posts, check ad disclosure, date, photos, specificity, and whether it is firsthand.",
+    "For maps and reviews, use them as user-experience signals; verify facts such as hours, price, address, and policies through official or map profile pages.",
+    "For papers, prefer authoritative indexes and trace to DOI, arXiv ID, publisher page, code repository, and citation context.",
+    "For individual expert blogs, capture why the person is relevant and verify factual claims against primary sources."
+  ]
+}

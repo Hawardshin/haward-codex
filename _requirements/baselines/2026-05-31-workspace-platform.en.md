@@ -32,6 +32,9 @@ This baseline defines shared workspace/platform requirements derived from the us
 | REQ-WS-014 | Custom skill creation and updates shall leave explicit source, trigger examples, validation, forward tests, improvement backlog, and evaluation targets. | UR-2026-05-31-038 | must | baseline | workspace/agent-platform | skill validation and evaluator check | `_skills/`, `_docs/skill-lifecycle-policy.en.md`, `skill-lifecycle-agent` |
 | REQ-WS-015 | Before writing source code, agents shall research best-fit architectures and reference architectures, then record at least two structure candidates and the decision rationale. | UR-2026-05-31-039 | must | baseline | agent-platform/projects | `complete-coding-research` result and architecture fields | `_docs/architecture-first-coding-policy.en.md`, `coding-research-agent` |
 | REQ-WS-016 | Large-company engineering, official research lab, architecture center, and high-signal independent source lists shall be managed in a registry separate from the general source taxonomy. | UR-2026-05-31-040 | must | baseline | agent-platform/_research | `check-config-contract` and source list review | `agent-platform/configs/research/enterprise-source-registry.json`, `_research/source-lists/` |
+| REQ-WS-017 | Material source values, config values, claims, review signals, assumptions, and planning constraints shall be traced to sources and access dates, and material plan steps shall be linked to evidence. | UR-2026-05-31-041 | must | baseline | agent-platform/_history | `plan-from-research`, `complete-coding-research`, and `evaluate-work` results | `source_value_provenance`, `plan_evidence`, `source_provenance_targets`, `plan_evidence_targets` |
+| REQ-WS-018 | Web search shall behave more like human research by using broad global tech blogs, Korean big-tech blogs, India technology sources, paper discovery sources, and Korean local review channels. | UR-2026-05-31-042, 043 | must | baseline | agent-platform/_research | source discovery registry and source list review | `agent-platform/configs/research/source-discovery-registry.json`, `_research/source-lists/enterprise-high-quality-sites.en.md` |
+| REQ-WS-019 | For Korean user review or local-market decisions, research shall prioritize Naver Map, Kakao Map, Naver Blog/Search, and official pages, then evaluate candidate page quality. | UR-2026-05-31-044 | must | baseline | `_tools`/`_research` | Korean local review tool tests and source list review | `_tools/korean-local-review/`, `_research/source-lists/korean-local-review-sources.en.md` |
 
 ## Change Management
 
@@ -41,6 +44,8 @@ This baseline defines shared workspace/platform requirements derived from the us
 - Before implementation, link relevant spec artifacts under `_specs/` or project `specs/`.
 - Before source-code implementation, link architecture references, architecture options, and decision notes in the coding research record.
 - When enterprise/high-quality sources seed research, update or reference `enterprise-source-registry.json` and `_research/source-lists/`.
+- Track source values and plan evidence through `source_value_provenance`, `plan_evidence`, `source_provenance_targets`, and `plan_evidence_targets`.
+- Check `source-discovery-registry.json` for broad search origins and use `_tools/korean-local-review/` for Korean local review scoring.
 - When skill work occurred, link `_skills/` source, validation results, and improvement ideas.
 - After implementation, update request traces and related requirement artifacts.
 

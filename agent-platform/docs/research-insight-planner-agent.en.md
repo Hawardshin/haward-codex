@@ -33,6 +33,8 @@ Required fields:
 - research profile paths
 - answer engine stages
 - citation requirements
+- source value provenance
+- plan evidence
 - insights
 - plan steps
 - validation steps
@@ -55,6 +57,9 @@ PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning
 - Record `agent-platform/configs/research/research-agent-profile.json` as the default research profile.
 - Record every required stage ID from `research-agent-profile.json` in `answer_engine_stages`.
 - Record how important factual claims will be grounded in `citation_requirements`.
+- Record material source values, claims, review signals, assumptions, and constraints in `source_value_provenance`.
+- Connect material plan steps to checked sources, repository evidence, command output, or explicit assumptions through `plan_evidence`.
+- Check `source-discovery-registry.json` for broader search origins, and score Korean user review/local research candidates with `_tools/korean-local-review/`.
 - Do not turn search results directly into a plan; first state how the evidence changes the plan as insights.
 - Rank sources by authority, freshness, independence, relevance, and fit to the claim type before synthesis.
 - Treat citations as verification handles, not proof; check that the cited source actually supports the claim.

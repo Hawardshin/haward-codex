@@ -33,6 +33,8 @@ agent-platform/configs/planning/research-insight-plan-template.json
 - research profile paths
 - answer engine stages
 - citation requirements
+- source value provenance
+- plan evidence
 - insights
 - plan steps
 - validation steps
@@ -55,6 +57,9 @@ PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning
 - `agent-platform/configs/research/research-agent-profile.json`을 기본 조사 프로필로 기록한다.
 - `answer_engine_stages`에는 `research-agent-profile.json`의 필수 stage ID를 모두 기록한다.
 - 중요한 사실 주장은 어떤 출처로 검증할지 `citation_requirements`에 기록한다.
+- 중요한 원천값, 주장, 리뷰 신호, 가정, 제약은 `source_value_provenance`에 기록한다.
+- 중요한 계획 단계는 `plan_evidence`로 확인한 출처, 저장소 근거, 명령 출력, 명시적 가정과 연결한다.
+- 더 넓은 검색 원천은 `source-discovery-registry.json`에서 확인하고, 한국 사용자 리뷰/로컬 조사는 `_tools/korean-local-review/`로 후보 품질을 점수화한다.
 - 검색 결과를 바로 계획으로 쓰지 말고, 근거가 계획을 어떻게 바꾸는지 인사이트로 정리한다.
 - 출처는 권위, 최신성, 독립성, 관련성, claim 적합도에 따라 순위화한 뒤 종합한다.
 - citation은 증명 자체가 아니라 검증 핸들이므로, 인용된 출처가 해당 주장을 실제로 뒷받침하는지 확인한다.

@@ -159,6 +159,9 @@ This repository is the workspace for building and tracking a personal agent-buil
 - For new tools, prefer `_tools/<tool-name>/` for shared tools or `project-name/tools/` for project-specific tools.
 - Document each reusable tool with its purpose, inputs, outputs, and main command.
 - Use `_tools/source-collector/` when many web/search sources need repeated normalization, bundle coverage checks, or source scoring.
+- Use `agent-platform/configs/research/source-discovery-registry.json` when broad search origins are needed across global tech blogs, Korean big-tech blogs, India technology sources, paper discovery, and Korean local review channels.
+- Use `_tools/korean-local-review/` when Korean user review, Naver/Kakao Map, Naver Blog/Search, or local-market source quality scoring matters.
+- Record `source_value_provenance` and `plan_evidence` for meaningful plans; include `source_provenance_targets` and `plan_evidence_targets` in close-out evaluation.
 - Do not create a new skill or tool when a short documented procedure is enough.
 - Prefer open-source dependencies and tools when they are mature, maintained, license-compatible, and fit the task.
 - When choosing external dependencies for current work, verify their current status and docs instead of relying only on memory.

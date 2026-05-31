@@ -14,6 +14,7 @@
 | Agent planning | [Code reference research](topics/agent-planning/2026-05-31-code-reference-research.en.md) |
 | Agent planning | [Architecture-first coding](topics/agent-planning/2026-05-31-architecture-first-coding.en.md) |
 | Agent planning | [Enterprise/high-quality source registry](topics/agent-planning/2026-05-31-enterprise-source-registry.en.md) |
+| Agent planning | [Source discovery and Korean local reviews](topics/agent-planning/2026-05-31-source-discovery-korean-review.en.md) |
 | Agent planning | [Perplexity-style core research agent](topics/agent-planning/2026-05-31-perplexity-style-research-agent.en.md) |
 | Agent planning | [Open-source installation policy](topics/agent-planning/2026-05-31-open-source-installation-policy.en.md) |
 | Agent reliability | [Hallucination prevention operating references](topics/agent-reliability/2026-05-31-hallucination-prevention.en.md) |
@@ -34,6 +35,13 @@
 | List | Path |
 | --- | --- |
 | Enterprise and high-quality site list | [source-lists/enterprise-high-quality-sites.en.md](source-lists/enterprise-high-quality-sites.en.md) |
+| Korean local review sources | [source-lists/korean-local-review-sources.en.md](source-lists/korean-local-review-sources.en.md) |
+
+## Audit Notes
+
+| Audit | Path |
+| --- | --- |
+| Source discovery and review research overlap audit | [overlap-audits/2026-05-31-source-discovery-overlap.en.md](overlap-audits/2026-05-31-source-discovery-overlap.en.md) |
 
 ## Update Rules
 

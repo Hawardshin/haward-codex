@@ -28,6 +28,12 @@ def complete_answer_engine_fields() -> dict[str, tuple[str, ...]]:
             "Every material factual claim must be traceable to a checked source.",
             "Conflicting sources require additional research or explicit uncertainty.",
         ),
+        "source_value_provenance": (
+            "Iterative retrieval claim <- https://arxiv.org/abs/2212.10509 checked on 2026-05-31",
+        ),
+        "plan_evidence": (
+            "Add a planning prompt and readiness check <- prior workflow docs and retrieval reference.",
+        ),
     }
 
 
@@ -207,6 +213,56 @@ class ResearchInsightPlannerTests(unittest.TestCase):
         self.assertEqual(report["status"], "more_research_required")
         self.assertIn(
             "Citation requirements are missing; record how claims will be grounded to checked sources.",
+            report["gaps"],
+        )
+
+    def test_source_value_provenance_is_required(self) -> None:
+        fields = complete_answer_engine_fields()
+        fields.pop("source_value_provenance")
+
+        report = create_research_insight_plan(
+            ResearchInsightPlanInput(
+                objective="Plan a research workflow.",
+                search_questions=("How should the answer engine work?",),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://docs.perplexity.ai/docs/sonar/quickstart",),
+                **fields,
+                insights=("Search-grounded answers need citations.",),
+                plan_steps=("Update the planner.",),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Citation behavior can still be wrong.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn(
+            "Source value provenance is missing; record where material values, assumptions, claims, or constraints came from.",
+            report["gaps"],
+        )
+
+    def test_plan_evidence_is_required(self) -> None:
+        fields = complete_answer_engine_fields()
+        fields.pop("plan_evidence")
+
+        report = create_research_insight_plan(
+            ResearchInsightPlanInput(
+                objective="Plan a research workflow.",
+                search_questions=("How should the answer engine work?",),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://docs.perplexity.ai/docs/sonar/quickstart",),
+                **fields,
+                insights=("Search-grounded answers need citations.",),
+                plan_steps=("Update the planner.",),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Citation behavior can still be wrong.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn(
+            "Plan evidence is missing; map each material plan step to checked sources, repository evidence, or explicit assumptions.",
             report["gaps"],
         )
 

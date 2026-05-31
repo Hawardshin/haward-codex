@@ -9,6 +9,18 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 
 
+def complete_evidence_targets() -> dict[str, tuple[str, ...]]:
+    return {
+        "source_provenance_targets": (
+            "_history/web-searches/2026/2026-05-31-evaluator.ko.md",
+            "_history/plans/2026/2026-05-31-evaluator.ko.md",
+        ),
+        "plan_evidence_targets": (
+            "_history/plans/2026/2026-05-31-evaluator.ko.md",
+        ),
+    }
+
+
 class WorkEvaluatorTests(unittest.TestCase):
     def test_ready_to_close_without_gaps(self) -> None:
         report = evaluate_work(
@@ -18,6 +30,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
                 verification=("python3 -m unittest discover -s tests: OK",),
                 references_checked=("_ops/workflows/40-evaluate-and-rework.md",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
@@ -39,6 +52,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("AGENTS.md",),
                 verification=("not run",),
                 references_checked=("_ops/prompts/70-evaluate-work.md",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
@@ -60,6 +74,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 result_summary="Added evaluator.",
                 changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
                 references_checked=("agent-platform/docs/work-evaluator-agent.md",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
@@ -79,6 +94,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 result_summary="Added evaluator.",
                 changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
                 verification=("python3 -m unittest discover -s tests: OK",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
@@ -94,6 +110,54 @@ class WorkEvaluatorTests(unittest.TestCase):
             report["gaps"],
         )
 
+    def test_missing_source_provenance_requires_rework(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Add an evaluator.",
+                result_summary="Added evaluator.",
+                changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
+                verification=("python3 -m unittest discover -s tests: OK",),
+                references_checked=("_ops/workflows/40-evaluate-and-rework.md",),
+                plan_evidence_targets=("_history/plans/2026/2026-05-31-evaluator.ko.md",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
+                user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
+                requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
+                request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Source provenance target is missing. Record where material values, source data, assumptions, claims, or configuration inputs came from.",
+            report["gaps"],
+        )
+
+    def test_missing_plan_evidence_requires_rework(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Add an evaluator.",
+                result_summary="Added evaluator.",
+                changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
+                verification=("python3 -m unittest discover -s tests: OK",),
+                references_checked=("_ops/workflows/40-evaluate-and-rework.md",),
+                source_provenance_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
+                user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
+                requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
+                request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Plan evidence target is missing. Record the checked evidence that supports the executed plan.",
+            report["gaps"],
+        )
+
     def test_missing_work_summary_requires_rework(self) -> None:
         report = evaluate_work(
             WorkEvaluationInput(
@@ -102,6 +166,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_history/README.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("Keep a Changelog",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-summary.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
@@ -124,6 +189,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("agent-platform/pyproject.toml",),
                 verification=("python3 -m unittest discover -s tests: OK",),
                 references_checked=("Python Packaging User Guide",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-install.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
@@ -148,6 +214,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("agent-platform/pyproject.toml",),
                 verification=("python3 -m unittest discover -s tests: OK",),
                 references_checked=("Python Packaging User Guide",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-install.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
@@ -169,6 +236,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_docs/context-archive-policy.ko.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("ReadAgent paper",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-context.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
@@ -193,6 +261,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_docs/context-archive-policy.ko.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("ReadAgent paper",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-context.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
@@ -214,6 +283,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_ops/prompts/README.ko.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("OpenAI web search docs",),
+                **complete_evidence_targets(),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
                 spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
@@ -236,6 +306,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_history/user-requests/README.ko.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("Agent memory docs",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-requests.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
                 spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
@@ -258,6 +329,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_history/user-requests/2026/2026-05-31.ko.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("Requirements traceability references",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-trace.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
@@ -280,6 +352,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_docs/requirements-management-policy.ko.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("Requirements management references",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-requirements.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 spec_targets=("_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md",),
@@ -302,6 +375,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_docs/spec-driven-development-policy.ko.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("GitHub Spec Kit",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-spec-driven-development.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
@@ -324,6 +398,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_skills/example-skill/SKILL.md",),
                 verification=("manual review",),
                 references_checked=("skill-creator guidance",),
+                **complete_evidence_targets(),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-skill.ko.md",),
                 user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
                 requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),

@@ -76,7 +76,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/planning/coding-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json
-PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json
 ```
 
 ## Current Skeleton
@@ -94,6 +94,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `configs/planning/`: structured planning inputs
 - `configs/research/`: source registry and research profile configs
 - `configs/research/enterprise-source-registry.json`: curated large-company, research-lab, architecture-center, and high-signal source seed list
+- `configs/research/source-discovery-registry.json`: broad search-origin registry for global, Korean, Indian, paper, and Korean local review sources
 - `configs/open-source/`: dependency candidate scoring inputs
 - `research-insight-planner-agent` is the core Perplexity-style research agent for search, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review
 - `requirements-manager-agent` keeps user requests, reviewed requirements, implementation, and evaluation connected
@@ -101,6 +102,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `skill-lifecycle-agent` creates, validates, tracks, and improves repository-managed Codex skills
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`
 - general research readiness requires `research_profile_paths`, all answer-engine stage IDs, and `citation_requirements`
+- general research readiness requires `source_value_provenance` and `plan_evidence`
 - coding research should pass `coding-research-agent` before implementation when investigation is needed
 - coding research readiness requires diverse `source_types`, including at least three distinct non-`other` types
 - coding research should include `reference_config_paths` pointing to `configs/research/`
@@ -114,6 +116,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - skill close-out should include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`
 - close-out evaluation should include `request_trace_targets` pointing to `_history/request-traces/YYYY/`
 - close-out evaluation should include `work_summary_targets` pointing to `_history/work-summaries/YYYY/`
+- close-out evaluation should include `source_provenance_targets` and `plan_evidence_targets`
 - context archive close-out should include `context_archiving_occurred=true` and `context_archive_targets`
 - installation close-out should include `installation_occurred=true` and `installation_record_targets` when dependency or environment state changed
 - `docs/python-agent-structure.md`: implementation structure

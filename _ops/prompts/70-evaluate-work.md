@@ -20,6 +20,8 @@ Require web_search_record_targets that point to public search records under _his
 Require user_request_summary_targets that point to request summaries under _history/user-requests/YYYY/.
 Require requirements_targets that point to active requirements baselines, changes, or reviews under _requirements/ or the owning project's docs/requirements/.
 Require spec_targets that point to active spec-driven artifacts under _specs/ or the owning project's specs/.
+Require source_provenance_targets that point to records explaining where material values, source data, claims, assumptions, review signals, or config inputs came from.
+Require plan_evidence_targets that point to records connecting executed plan steps to checked sources, repository evidence, or explicit assumptions.
 If skill work occurred, require skill_work_occurred=true, skill_targets, and skill_validation_targets.
 Require request_trace_targets that point to request-to-outcome traces under _history/request-traces/YYYY/.
 Require work_summary_targets that point to the user-readable summary files under _history/work-summaries/YYYY/.
@@ -40,6 +42,8 @@ Return ready_to_close only when there are no blocking gaps.
 - verification results
 - references checked
 - grounding checks
+- source provenance targets
+- plan evidence targets
 - web search record targets
 - user request summary targets
 - requirements targets

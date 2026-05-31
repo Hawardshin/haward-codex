@@ -28,6 +28,12 @@
     "agent-platform/configs/research/enterprise-source-registry.json",
     "agent-platform/configs/research/coding-research-profile.json"
   ],
+  "source_value_provenance": [
+    "API field, config value, version, benchmark, risk, claim, or assumption <- exact source URL/path, checked date, and extraction note"
+  ],
+  "plan_evidence": [
+    "recommendation, architecture choice, file-scope choice, or validation step <- checked source IDs, repository evidence, command output, or explicit assumption"
+  ],
   "code_reference_sources": [
     "https://github.com/example/project/tree/main/src",
     "https://github.com/example/project/tree/main/tests"

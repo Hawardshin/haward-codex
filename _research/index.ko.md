@@ -14,6 +14,7 @@
 | 에이전트 계획 | [코드 참고 조사](topics/agent-planning/2026-05-31-code-reference-research.ko.md) |
 | 에이전트 계획 | [아키텍처 우선 코딩](topics/agent-planning/2026-05-31-architecture-first-coding.ko.md) |
 | 에이전트 계획 | [대기업/고신뢰 출처 registry](topics/agent-planning/2026-05-31-enterprise-source-registry.ko.md) |
+| 에이전트 계획 | [출처 discovery와 한국 로컬 리뷰](topics/agent-planning/2026-05-31-source-discovery-korean-review.ko.md) |
 | 에이전트 계획 | [Perplexity식 핵심 조사 에이전트 구조](topics/agent-planning/2026-05-31-perplexity-style-research-agent.ko.md) |
 | 에이전트 계획 | [오픈소스 설치 정책](topics/agent-planning/2026-05-31-open-source-installation-policy.ko.md) |
 | 에이전트 신뢰성 | [할루시네이션 방지 운영 레퍼런스](topics/agent-reliability/2026-05-31-hallucination-prevention.ko.md) |
@@ -34,6 +35,13 @@
 | 목록 | 경로 |
 | --- | --- |
 | 대기업/고신뢰 사이트 목록 | [source-lists/enterprise-high-quality-sites.ko.md](source-lists/enterprise-high-quality-sites.ko.md) |
+| 한국 사용자 리뷰/로컬 조사 소스 | [source-lists/korean-local-review-sources.ko.md](source-lists/korean-local-review-sources.ko.md) |
+
+## 감사 노트
+
+| 감사 | 경로 |
+| --- | --- |
+| 출처 discovery와 리뷰 조사 중복 감사 | [overlap-audits/2026-05-31-source-discovery-overlap.ko.md](overlap-audits/2026-05-31-source-discovery-overlap.ko.md) |
 
 ## 갱신 규칙
 
