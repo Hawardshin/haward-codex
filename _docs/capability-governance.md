@@ -35,6 +35,8 @@ Start tools inside the project that needs them. Promote to `_tools/` only when t
 
 Prefer Python for shared tools unless another runtime is clearly more appropriate.
 
+If a mature open-source dependency makes the tool or skill better and reduces maintenance cost, install it in the owning project/tool scope. Follow [_docs/open-source-installation-policy.ko.md](open-source-installation-policy.ko.md) before installation.
+
 ## When to Create a Template
 
 Create a template when the repeated value is structure rather than execution:
@@ -79,4 +81,5 @@ Every reusable capability must state:
 - hiding important project state inside a tool without documenting it
 - moving project-specific behavior into shared tools before cross-project reuse is clear
 - installing global capabilities without tracking their source in this repository
+- installing open-source dependencies without dependency tracking, license/security review, verification, and rollback
 - reimplementing mature open-source functionality without a concrete reason

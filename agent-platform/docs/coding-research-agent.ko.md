@@ -10,6 +10,7 @@
 - 다양한 출처 유형을 명시한다. 최소 3개 이상의 `other`가 아닌 source type이 필요하며, 권위 출처와 실무/채택 신호를 함께 포함한다.
 - 어떤 출처 설정을 참고했는지 `reference_config_paths`로 기록한다.
 - 구현 전 관련 오픈소스 저장소, 참고 구현, 잘 작성된 코드 구조와 테스트를 조사하고 `code_reference_sources`, `code_reference_notes`에 기록한다.
+- 설치가 필요한 오픈소스라면 설치 범위, 설치 명령, dependency 기록 파일, 보안/라이선스 검토, 검증 방법, rollback 계획을 기록한다.
 - 내부 지식 베이스를 근거로 쓰면 `knowledge-skeptic-agent`로 검증한다.
 - 계획 과정은 `_history/plans/YYYY/`에 남기고, 재사용 가능한 지식은 `_research/`, `_templates/`, `_tools/` 중 알맞은 곳에 기록한다.
 
@@ -44,6 +45,8 @@
 - `code_reference_notes`: 해당 코드에서 배운 구조, 모듈 경계, API 사용 패턴, 예외 처리, 테스트 구성, 재사용하지 않을 부분
 
 오픈소스 코드는 그대로 복사하지 않는다. 라이선스, 유지보수 상태, 프로젝트 적합성, 보안 위험, 테스트 품질을 확인한 뒤 로컬 설계에 맞게 적용한다.
+
+오픈소스 설치가 필요하면 [_docs/open-source-installation-policy.ko.md](../../_docs/open-source-installation-policy.ko.md)를 따른다.
 
 ## 참고 설정 파일
 

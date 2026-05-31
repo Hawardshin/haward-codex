@@ -51,6 +51,7 @@ class OpenSourceEvaluationTests(unittest.TestCase):
         )
 
         self.assertEqual(result["recommendation"], "adopt")
+        self.assertEqual(result["installation_status"], "not_required")
 
     def test_evaluate_candidate_rejects_invalid_score(self) -> None:
         with self.assertRaises(ValueError):
@@ -66,6 +67,50 @@ class OpenSourceEvaluationTests(unittest.TestCase):
                     lock_in_risk=1,
                 )
             )
+
+    def test_installation_requires_review_fields(self) -> None:
+        result = evaluate_candidate(
+            OpenSourceCandidate(
+                name="candidate",
+                purpose="agent orchestration",
+                license_name="MIT",
+                maintained=5,
+                documentation=4,
+                community=4,
+                fit=5,
+                lock_in_risk=1,
+                install_needed=True,
+            )
+        )
+
+        self.assertEqual(result["recommendation"], "adopt")
+        self.assertEqual(result["installation_status"], "installation_review_required")
+        self.assertIn("install_command is missing.", result["installation_gaps"])
+
+    def test_installation_ready_when_review_is_complete(self) -> None:
+        result = evaluate_candidate(
+            OpenSourceCandidate(
+                name="candidate",
+                purpose="agent orchestration",
+                license_name="MIT",
+                maintained=5,
+                documentation=4,
+                community=4,
+                fit=5,
+                lock_in_risk=1,
+                install_needed=True,
+                installation_scope="project",
+                install_command="python3 -m pip install candidate",
+                dependency_record_path="agent-platform/pyproject.toml",
+                security_review="Checked OpenSSF Scorecard, release activity, and dependency risk.",
+                license_review="MIT license is compatible with this workspace.",
+                rollback_plan="Remove dependency entry and adapter, then rerun tests.",
+            )
+        )
+
+        self.assertEqual(result["recommendation"], "adopt")
+        self.assertEqual(result["installation_status"], "ready_to_install")
+        self.assertEqual(result["installation_gaps"], [])
 
 
 if __name__ == "__main__":

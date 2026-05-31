@@ -30,4 +30,5 @@ project-name/
 - Keep the agent domain model local.
 - Put open-source framework integrations behind adapters.
 - Prefer standard-library tests until external dependencies are justified.
+- When an external dependency is justified, install it in this project scope and record the install command, dependency file, security/license review, verification, and rollback.
 - Document setup, run, test, and evaluation commands as soon as they exist.

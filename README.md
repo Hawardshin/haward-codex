@@ -33,6 +33,8 @@
 - 긴 대화에서 중요한 결정과 작업 내용은 저장소 문서와 히스토리 로그로 압축한다.
 - 에이전트 구현은 특별한 이유가 없으면 Python을 우선한다.
 - 직접 만들기 전에 성숙한 오픈소스 도구와 라이브러리를 먼저 검토한다.
+- 작업에 맞는 성숙한 오픈소스가 있으면 필요할 때 프로젝트/도구 범위에 설치해 사용한다.
+- 오픈소스 설치 전에는 설치 명령, dependency 기록 파일, 라이선스/보안 검토, 검증 방법, rollback 계획을 남긴다.
 - 반복 적용해야 하는 사용자 지시는 저장소 규칙으로 문서화한다.
 - 사용자가 읽는 문서와 히스토리는 한국어를 기본으로 한다.
 - 실제 실행 프롬프트 본문은 토큰 절약을 위해 영어로 작성한다.
@@ -117,6 +119,7 @@ project-name/
 - AI가 세팅을 잊지 않게 하는 부트스트랩 manifest는 `agent-platform/configs/memory/bootstrap-manifest.json`에 둔다.
 - 공유 설정 파일의 자기 설명 기준은 `_docs/self-documenting-config-policy.ko.md`와 `agent-platform`의 `check-config-contract` 명령을 따른다.
 - 출처 수집 기준은 `_docs/source-collection-policy.ko.md`를 따른다.
+- 오픈소스 설치 기준은 `_docs/open-source-installation-policy.ko.md`를 따른다.
 - 핵심 조사 에이전트 프로필은 `agent-platform/configs/research/research-agent-profile.json`에서 확인한다.
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/board.ko.md`와 `_ops/coordination/board.html`에서 확인한다.
 - 프로젝트 목록과 경계는 `_ops/projects/index.ko.md`와 `_ops/projects/registry.json`에서 확인한다.
@@ -159,6 +162,7 @@ project-name/
 - 프론트엔드, 브라우저 UI, 정적 산출물은 프로젝트 성격에 맞춰 HTML, CSS, JavaScript 또는 별도 프레임워크를 사용할 수 있다.
 - 오픈소스는 유지보수 상태, 라이선스, 문서 품질, 커뮤니티 신뢰도를 확인하고 사용한다.
 - 검증된 오픈소스로 해결되는 기반 기능은 직접 구현하지 않는 쪽을 우선 검토한다.
+- 설치가 필요한 오픈소스는 project-local dependency로 기록하고 테스트나 smoke test로 검증한다.
 
 ## 커밋 규칙
 

@@ -7,5 +7,12 @@
   "community": 3,
   "fit": 3,
   "lock_in_risk": 3,
+  "install_needed": false,
+  "installation_scope": "project",
+  "install_command": "Record the exact project-local install command, such as python3 -m pip install <package> or the package-manager equivalent.",
+  "dependency_record_path": "Record the dependency file or lock file that will track this install.",
+  "security_review": "Record maintenance, vulnerability, provenance, or OpenSSF/CISA-style supply-chain checks.",
+  "license_review": "Record license compatibility and attribution obligations.",
+  "rollback_plan": "Record how to remove the package and restore tests if the install is rejected.",
   "notes": "Replace these placeholder scores after checking current project docs and repository activity."
 }

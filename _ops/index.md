@@ -38,6 +38,7 @@
 - 저장소 구조를 볼 때: [_ops/maps/repository-map.md](maps/repository-map.md)
 - 프롬프트 목록을 볼 때: [_ops/maps/prompt-map.md](maps/prompt-map.md)
 - 반복 작업을 줄일 때: [_docs/capability-governance.md](../_docs/capability-governance.md)
+- 오픈소스 설치 기준을 볼 때: [_docs/open-source-installation-policy.ko.md](../_docs/open-source-installation-policy.ko.md), [_docs/open-source-installation-policy.en.md](../_docs/open-source-installation-policy.en.md)
 - 지속 지시를 확인할 때: [_docs/persistent-instructions.md](../_docs/persistent-instructions.md)
 - 검색 기반 계획 정책을 확인할 때: [_docs/search-insight-planning-policy.ko.md](../_docs/search-insight-planning-policy.ko.md), [_docs/search-insight-planning-policy.en.md](../_docs/search-insight-planning-policy.en.md)
 - 문서 언어 정책을 확인할 때: [_docs/documentation-language-policy.ko.md](../_docs/documentation-language-policy.ko.md), [_docs/documentation-language-policy.en.md](../_docs/documentation-language-policy.en.md)

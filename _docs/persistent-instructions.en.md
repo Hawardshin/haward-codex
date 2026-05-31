@@ -47,6 +47,9 @@ This document records durable user instructions in English.
 - Use `work-evaluator-agent` as the default close-out evaluator.
 - Prefer Python for agent implementations, orchestration, backend automation, evaluation, and reusable local tools.
 - Use mature, maintained, license-compatible open-source tools and libraries when they fit the task.
+- When a mature open-source tool or library fits the task, do not avoid installation by default; install it in the owning project or tool scope when needed.
+- Before installing open source, record installation scope, exact install command, dependency record path, security review, license review, verification method, and rollback plan.
+- Avoid global installs; if one is necessary, document the reason and removal path, then request any required permission.
 - Document useful internet research with source URLs, access dates, summaries, reliability, and applicability.
 - Consider HTML artifacts when browser rendering, visual hierarchy, dashboards, or interactive review are useful.
 - Use Korean for user-facing docs and history by default.

@@ -24,18 +24,19 @@
 11. For planning that depends on external facts, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json`.
 12. Treat research as an answer-engine pipeline: query understanding, retrieval, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
 13. For coding research, use `coding-research-agent` to record reference configs, concrete code references, standard post-research answers, and diverse source types before implementation.
-14. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
-15. Save important planning processes under `_history/plans/YYYY/`.
-16. Promote repeated work into a template, tool, skill, prompt, or workflow.
-17. Record important context in `_history/`.
-18. Refresh `_ops/maps/` when navigational structure changes.
-19. Summarize completed work.
-20. Check prior internal work and strong references relevant to the task.
-21. Capture reusable internet research or external references.
-22. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
-23. Evaluate the completed work against the initial instruction.
-24. Rework real gaps and evaluate again.
-25. Commit the coherent change set and push it.
+14. If mature open source is the right fit, install it in the owning project or tool scope and record install command, dependency tracking, security/license review, verification, and rollback.
+15. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
+16. Save important planning processes under `_history/plans/YYYY/`.
+17. Promote repeated work into a template, tool, skill, prompt, or workflow.
+18. Record important context in `_history/`.
+19. Refresh `_ops/maps/` when navigational structure changes.
+20. Summarize completed work.
+21. Check prior internal work and strong references relevant to the task.
+22. Capture reusable internet research or external references.
+23. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
+24. Evaluate the completed work against the initial instruction.
+25. Rework real gaps and evaluate again.
+26. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -60,6 +61,7 @@ Promote work only when it will reduce future effort.
 | Same need to start every instruction with web search | Web-first intake workflow |
 | Same need to avoid forgetting durable settings | Memory bootstrap manifest and agent |
 | Same need to make settings explain their references and rules | Config contract agent |
+| Same open-source installation decision repeated | Open-source installation policy and candidate record |
 
 ## Context Compression
 
@@ -84,4 +86,4 @@ Use other runtimes when they are a better fit for the surface being built:
 - Node.js when the existing project is already Node-based or the ecosystem fit is materially better
 - shell scripts only for small glue tasks
 
-Prefer mature open-source projects when they reduce maintenance cost and fit the task constraints.
+Prefer mature open-source projects when they reduce maintenance cost and fit the task constraints. If installation is needed, use project-local or tool-local scope by default and record install commands, dependency files, security/license review, verification, and rollback before installation.

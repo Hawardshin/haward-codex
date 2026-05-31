@@ -34,6 +34,7 @@ agent-platform/
 - Store declarative agent specs as JSON until a richer schema is needed.
 - Put runtime-specific integrations behind `AgentRuntime`.
 - Treat open-source frameworks as replaceable adapters, not as the platform's domain model.
+- If a dependency is needed, install it in the project scope and record the install command, dependency file, security/license review, verification, and rollback.
 
 ## Extension Points
 

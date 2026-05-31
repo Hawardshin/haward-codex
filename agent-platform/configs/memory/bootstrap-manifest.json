@@ -56,6 +56,17 @@
       "last_checked": "2026-05-31"
     },
     {
+      "id": "open_source_installation_policy",
+      "title": "Open Source Installation Policy",
+      "path": "_docs/open-source-installation-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "open-source install permission and safety rules",
+        "dependency installation record requirements"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
       "id": "research_agent_profile",
       "title": "Research Agent Profile",
       "path": "agent-platform/configs/research/research-agent-profile.json",
@@ -352,12 +363,20 @@
       "load_order": 22
     },
     {
+      "id": "open_source_installation_policy",
+      "path": "_docs/open-source-installation-policy.ko.md",
+      "tier": "warm",
+      "purpose": "Policy for installing mature open-source dependencies with scoped installation, security/license review, verification, and rollback.",
+      "required": true,
+      "load_order": 23
+    },
+    {
       "id": "coding_research_workflow",
       "path": "_ops/workflows/56-coding-research.md",
       "tier": "warm",
       "purpose": "Workflow for coding research before implementation.",
       "required": true,
-      "load_order": 23
+      "load_order": 24
     },
     {
       "id": "evaluation_workflow",
@@ -365,7 +384,7 @@
       "tier": "warm",
       "purpose": "Close-out evaluator and rework workflow.",
       "required": true,
-      "load_order": 24
+      "load_order": 25
     },
     {
       "id": "hallucination_workflow",
@@ -373,7 +392,7 @@
       "tier": "warm",
       "purpose": "Grounding workflow for factual claims.",
       "required": true,
-      "load_order": 25
+      "load_order": 26
     },
     {
       "id": "daily_history",
@@ -381,7 +400,7 @@
       "tier": "warm",
       "purpose": "Current dated work log and compressed context.",
       "required": true,
-      "load_order": 26
+      "load_order": 27
     },
     {
       "id": "repository_map",

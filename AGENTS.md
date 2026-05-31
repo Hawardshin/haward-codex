@@ -69,6 +69,9 @@ This repository is the workspace for building and tracking a personal agent-buil
 - When a workflow repeats or creates avoidable friction, consider promoting it into a template, tool, or skill.
 - Prefer Python for agent implementations unless the project constraints clearly favor another runtime.
 - Before hand-rolling agent infrastructure, evaluate mature open-source libraries, frameworks, and tools that can reduce maintenance cost.
+- If a mature open-source tool or library is the right fit, install it in the owning project/tool environment instead of avoiding installation by default.
+- Before installing open source, record the install scope, exact install command, dependency record path, security review, license review, verification step, and rollback plan.
+- Prefer project-local or tool-local dependency installation; avoid global installs unless the capability truly requires it and the reason/removal path is documented.
 - Prefer the smallest reusable asset that solves the problem:
   - template for repeated file or folder structure
   - tool for deterministic execution, conversion, validation, or generation
@@ -128,6 +131,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Do not create a new skill or tool when a short documented procedure is enough.
 - Prefer open-source dependencies and tools when they are mature, maintained, license-compatible, and fit the task.
 - When choosing external dependencies for current work, verify their current status and docs instead of relying only on memory.
+- When installation is needed, follow `_docs/open-source-installation-policy.ko.md` and verify the installed package or tool with tests, import checks, CLI checks, or smoke tests.
 - Preserve reusable research findings with source URLs, access dates, summaries, reliability, and applicability.
 - Do not treat repository knowledge-base content as authoritative without checking freshness, source quality, and contradictions.
 

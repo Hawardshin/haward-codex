@@ -14,6 +14,7 @@ Use web search plus at least one other channel: repository search, official docs
 Prefer official documentation, primary sources, maintained open-source repositories, standards, papers, and strong implementation examples.
 For broad research, collect source diversity: official docs, papers, open-source repos, international technical blogs, analysis articles, community/adoption signals, and contrary examples.
 Before writing source code, inspect relevant open-source repositories, reference implementations, well-structured source trees, examples, and tests.
+If installation is needed, record install_needed, installation_scope, install_command, dependency_record_path, security_review, license_review, and rollback_plan before implementation.
 Record code_reference_sources with repository URLs, source file paths, test paths, example app paths, or code search results.
 Record code_reference_notes explaining what structure, boundaries, API patterns, error handling, tests, or implementation details are worth adapting or rejecting.
 Record source_types explicitly. Use at least three distinct non-other source types, including at least one authoritative type (official, paper, standard, or open_source) and at least one practical/adoption/contrary type (open_source, reference_implementation, tech_blog, analysis, community, social, news, or contrary).

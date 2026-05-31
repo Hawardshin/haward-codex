@@ -33,6 +33,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep project history and decisions outside transient chat context.
 - Prefer Python for agent runtimes, orchestration, evaluation, and backend automation.
 - Prefer mature open-source components before custom platform infrastructure.
+- Install mature open-source dependencies when they are the right fit, using project/tool-local scope plus documented install command, dependency tracking, security/license review, verification, and rollback.
 - Use Markdown for durable text documentation.
 - Use HTML for visual, reviewable, dashboard-like, or standalone artifacts when useful.
 

@@ -131,6 +131,13 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Treat popularity signals such as likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as discovery or adoption signals, not standalone factual proof.
 - Use [_docs/source-collection-policy.ko.md](source-collection-policy.ko.md) for source bundle targets and evaluation criteria.
 
+## Open-Source Installation Policy
+
+- If mature open source is the right fit, install it in the owning project or tool scope when needed.
+- Record install command, dependency tracking path, security review, license review, verification, and rollback before installation.
+- Avoid global installs unless the need and removal path are documented and required permission is granted.
+- Use [_docs/open-source-installation-policy.ko.md](open-source-installation-policy.ko.md) for installation rules.
+
 ## Evaluation Policy
 
 - Meaningful work should pass an evaluation step before close-out.
