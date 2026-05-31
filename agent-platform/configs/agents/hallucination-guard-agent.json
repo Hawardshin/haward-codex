@@ -1,0 +1,15 @@
+{
+  "name": "hallucination-guard-agent",
+  "description": "Extracts factual claims from an answer or artifact and checks whether each claim is grounded, verified, or explicitly caveated.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "agent-platform:check-grounding"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "before publishing final answers, docs, plans, or evaluations that contain factual claims",
+    "input_schema": "agent-platform/configs/evaluation/hallucination-guard-template.json",
+    "policy": "If the report returns grounding_required, remove unsupported claims, add evidence, verify with tools, or explicitly caveat uncertainty before publishing."
+  }
+}

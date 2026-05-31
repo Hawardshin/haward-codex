@@ -11,6 +11,7 @@ Check prior internal work, strong repository examples, official docs, mature ope
 If an external reference may be time-sensitive, verify current official or highly reliable sources.
 Compare the initial instruction, actual result, changed files, and verification results.
 Compare the result against strong references and identify what is weaker or missing.
+If the final output contains factual claims, require a grounding check from hallucination-guard-agent.
 Separate mismatches, missing requirements, and improvement opportunities.
 If a mismatch or omission exists, return rework_required and create follow-up actions.
 Reflect follow-up actions back into the work, then repeat the evaluation after completion.
@@ -25,6 +26,7 @@ Return ready_to_close only when there are no blocking gaps.
 - changed files
 - verification results
 - references checked
+- grounding checks
 - known gaps
 - improvement ideas
 

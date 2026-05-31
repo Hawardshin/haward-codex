@@ -10,6 +10,9 @@
   "references_checked": [
     "internal path, previous work, official docs, or strong external reference checked before evaluation"
   ],
+  "grounding_checks": [
+    "hallucination-guard-agent report path or check-grounding command result"
+  ],
   "known_gaps": [],
   "improvement_ideas": []
 }

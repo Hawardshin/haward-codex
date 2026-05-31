@@ -17,6 +17,7 @@ Use `agent-platform/configs/evaluation/work-evaluation-template.json` as the sha
 - `changed_files`: files or artifacts changed
 - `verification`: commands, checks, or manual review performed
 - `references_checked`: internal prior work, previous examples, official docs, or strong external references checked before evaluation
+- `grounding_checks`: hallucination-guard-agent results or grounding checks for factual final outputs
 - `known_gaps`: explicit mismatches or unfinished items
 - `improvement_ideas`: non-blocking improvements worth considering
 
@@ -33,6 +34,7 @@ PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/wo
 - `status=ready_to_close`: continue close-out.
 - `status=rework_required`: convert each gap into a follow-up action, complete that work, then evaluate again.
 - Missing reference research is a blocking gap. Record either the references checked or the fact that no relevant reference was found after a reasonable search.
+- If factual final outputs are present, run `hallucination-guard-agent` and record the result in `grounding_checks`.
 - Improvements that are not required can be logged in history or project docs.
 
 ## Agent Config

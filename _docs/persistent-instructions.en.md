@@ -22,6 +22,8 @@ This document records durable user instructions in English.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before relying on it.
 - For important plans, do not rely only on the model's internal guess; use web search plus another search channel to derive insights before planning.
 - Work that uses `research-insight-planner-agent` should set `plan_history_targets` and record plan changes.
+- Use `hallucination-guard-agent` before publishing final outputs that contain factual claims.
+- Unsupported factual claims must be verified, removed, or explicitly caveated as uncertainty.
 - Compress long conversation context into repository docs and history logs.
 - Promote repeated workflows into templates, tools, skills, prompts, or workflows when useful.
 - Keep repository and prompt maps current when navigational structure changes.

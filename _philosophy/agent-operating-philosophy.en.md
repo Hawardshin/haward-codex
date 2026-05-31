@@ -24,19 +24,23 @@ Do not turn search results directly into plans. Check source reliability, freshn
 
 If only the final work is recorded, the reason behind the work disappears. Important plans should be saved under `_history/plans/`, and plan changes during execution should include the reason.
 
-### 5. Results Must Pass Evaluation And Rework
+### 5. Factual Claims Must Be Grounded
+
+Factual claims in final outputs should be held up by evidence, not fluent wording. File state, code behavior, dates, numbers, external facts, and recommendations need claim-level evidence and verification steps. Weak evidence should be represented as uncertainty.
+
+### 6. Results Must Pass Evaluation And Rework
 
 Do not close work just because implementation ended. Use `work-evaluator-agent` to compare the initial instruction with the result, then rework real gaps.
 
-### 6. Repetition Should Become Platform Capability
+### 7. Repetition Should Become Platform Capability
 
 Repeated judgments, procedures, tools, and structures should not stay manual. Promote them into skills, tools, templates, prompts, workflows, or agents when useful.
 
-### 7. Projects Are Boundaries For Interests
+### 8. Projects Are Boundaries For Interests
 
 The shared operating environment applies to every project, but code, docs, settings, and artifacts for a specific interest belong inside that project. If an interest has an independent purpose and lifecycle, split it into a new root project.
 
-### 8. Records Are Interfaces For Future Agents
+### 9. Records Are Interfaces For Future Agents
 
 Docs and history are not passive storage. They are interfaces for the next worker. Korean docs make human tracking easier, while executable prompt bodies stay in English to save tokens.
 
@@ -44,6 +48,7 @@ Docs and history are not passive storage. They are interfaces for the next worke
 
 - Search-backed planning: `_ops/workflows/55-research-insight-planning.md`
 - Knowledge validation: `_ops/workflows/65-validate-knowledge-reference.md`
+- Hallucination prevention: `_ops/workflows/70-hallucination-prevention.md`
 - Plan history: `_history/plans/`
 - Work evaluation: `_ops/workflows/40-evaluate-and-rework.md`
 - Project boundary management: `_ops/workflows/25-project-boundary-management.md`

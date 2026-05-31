@@ -40,6 +40,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before using it as evidence.
 - For important planning, do not rely only on the model's internal guess; use `research-insight-planner-agent` to combine web search with another search channel, derive insights, and plan validation.
 - When using `research-insight-planner-agent`, set `plan_history_targets` and keep the plan process file updated if the plan changes.
+- Before publishing final outputs with factual claims, run or simulate `hallucination-guard-agent` and resolve `grounding_required` gaps.
+- Do not present unsupported or unchecked claims as facts; verify them, remove them, or explicitly caveat uncertainty.
 - Keep foundational operating philosophy under `_philosophy/`; keep executable rules and workflows under `_docs/` and `_ops/`.
 
 ## Platformization Rules
@@ -88,6 +90,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Link relevant `_history/plans/YYYY/` files from evaluation reports when a saved plan guided the work.
 - When internet research produces reusable findings, create or update research notes and link them from related docs or evaluation reports.
 - Use `knowledge-skeptic-agent` when relying on `_research`, `_docs`, `_history`, or previous project docs for important decisions.
+- Use `hallucination-guard-agent` to ground final factual claims, especially dates, numbers, file state, code behavior, external facts, and recommendations.
+- Include grounding check results in the evaluation input when factual claims are present.
 - If the evaluator identifies missing requirements or mismatches, turn them into follow-up actions and complete them before final close-out.
 - Re-run relevant tests or checks after rework.
 - Non-blocking improvements can be recorded in history or project docs, but blocking gaps must be fixed.

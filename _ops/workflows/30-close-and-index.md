@@ -15,11 +15,12 @@
 7. Confirm any project registry change is reflected in `_ops/projects/registry.json` and indexes.
 8. Confirm any important plan process has been saved under `_history/plans/YYYY/`.
 9. Capture reusable internet research or external references with [_ops/workflows/60-capture-research.md](60-capture-research.md).
-10. Run the work evaluation loop from [_ops/workflows/40-evaluate-and-rework.md](40-evaluate-and-rework.md).
-11. Confirm the evaluation report file exists under `_history/evaluations/YYYY/`.
-12. Update `_history/YYYY/YYYY-MM-DD.md`.
-13. Commit the coherent change set.
-14. Push to `origin/main`.
+10. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when final outputs contain factual claims.
+11. Run the work evaluation loop from [_ops/workflows/40-evaluate-and-rework.md](40-evaluate-and-rework.md).
+12. Confirm the evaluation report file exists under `_history/evaluations/YYYY/`.
+13. Update `_history/YYYY/YYYY-MM-DD.md`.
+14. Commit the coherent change set.
+15. Push to `origin/main`.
 
 ## Rule
 

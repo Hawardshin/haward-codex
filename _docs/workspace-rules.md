@@ -122,6 +122,7 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Evaluation starts with a completed-work summary and reference check.
 - The evaluator compares the initial instruction with the actual result, changed files, and verification.
 - The evaluator should consider relevant prior internal work, official docs, mature open-source projects, or other strong references.
+- When factual claims are present, run `hallucination-guard-agent` and include the grounding result in evaluation.
 - If gaps are found, they become follow-up actions and the work returns to implementation.
 - The default evaluator is `work-evaluator-agent` in `agent-platform/configs/agents/`.
 - Final evaluation reports are stored under `_history/evaluations/YYYY/`.
@@ -144,3 +145,12 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Knowledge-base content is not automatically authoritative.
 - Use `knowledge-skeptic-agent` before relying on `_research`, `_docs`, `_history`, or old project docs for important decisions.
 - Resolve freshness, source quality, contradiction, and applicability gaps before using the knowledge as evidence.
+
+## Hallucination Prevention Policy
+
+- Separate factual claims from opinions, recommendations, plans, and preferences.
+- Ground factual claims with files, commands, tests, official docs, papers, web sources, datasets, or tool results.
+- Use `hallucination-guard-agent` before publishing final outputs that contain factual claims.
+- Remove, verify, or caveat unsupported claims before final response.
+- Record access dates for external or freshness-sensitive evidence.
+- High-risk factual outputs require at least two independent non-inference evidence sources.

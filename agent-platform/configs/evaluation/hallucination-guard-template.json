@@ -1,0 +1,35 @@
+{
+  "task": "What answer, plan, document, or artifact is being checked?",
+  "output_summary": "Short summary of the output being checked.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "source-1",
+      "source": "file path, command output, official doc URL, paper URL, tool result, or user instruction",
+      "source_type": "repository_file",
+      "checked_on": "YYYY-MM-DD",
+      "reliability": "Why this source is appropriate for the claim."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "Factual claim extracted from the output.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "source-1"
+      ],
+      "verification_steps": [
+        "How the evidence was checked."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "What remains unknown and how the final output should caveat it."
+  ],
+  "limitation_notes": [
+    "Scope limits, source limits, or checks not performed."
+  ]
+}

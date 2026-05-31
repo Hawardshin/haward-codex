@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 from agent_platform.core.registry import load_agent_spec, load_registry_dir
+from agent_platform.evaluation.hallucination_guard import HallucinationGuardInput, check_hallucination_risk
 from agent_platform.evaluation.knowledge_skeptic import KnowledgeValidationInput, validate_knowledge_reference
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidate
@@ -31,6 +32,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     validate_knowledge = subparsers.add_parser("validate-knowledge", help="Validate a knowledge-base reference skeptically.")
     validate_knowledge.add_argument("path", type=Path)
+
+    check_grounding = subparsers.add_parser("check-grounding", help="Check whether factual claims are grounded before publication.")
+    check_grounding.add_argument("path", type=Path)
 
     plan_from_research = subparsers.add_parser("plan-from-research", help="Check whether search-backed insights are ready for planning.")
     plan_from_research.add_argument("path", type=Path)
@@ -68,6 +72,12 @@ def main(argv: list[str] | None = None) -> int:
         with args.path.open("r", encoding="utf-8") as file:
             validation_input = KnowledgeValidationInput.from_dict(json.load(file))
         print(json.dumps(validate_knowledge_reference(validation_input), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "check-grounding":
+        with args.path.open("r", encoding="utf-8") as file:
+            guard_input = HallucinationGuardInput.from_dict(json.load(file))
+        print(json.dumps(check_hallucination_risk(guard_input), indent=2, ensure_ascii=False))
         return 0
 
     if args.command == "plan-from-research":

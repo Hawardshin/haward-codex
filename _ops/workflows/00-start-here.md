@@ -16,10 +16,11 @@
 8. If planning depends on external facts or current information, run [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md).
 9. Implement the smallest useful change inside the owning project or shared folder.
 10. Verify with tests, checks, or rendered artifacts.
-11. Evaluate completed work against the initial instruction.
-12. Rework if the evaluator finds gaps, then evaluate again.
-13. Update history and maps.
-14. Commit and push immediately.
+11. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).
+12. Evaluate completed work against the initial instruction.
+13. Rework if the evaluator finds gaps, then evaluate again.
+14. Update history and maps.
+15. Commit and push immediately.
 
 ## Rule
 

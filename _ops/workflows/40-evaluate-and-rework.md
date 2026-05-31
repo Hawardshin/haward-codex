@@ -11,14 +11,15 @@
 3. Check prior internal work, repository examples, official docs, mature open-source projects, or other strong references before evaluation.
 4. Validate any reused knowledge-base content with [_ops/workflows/65-validate-knowledge-reference.md](65-validate-knowledge-reference.md).
 5. Capture reusable internet research or external references when useful.
-6. List changed files, verification results, and references checked.
-7. If a plan guided the work, link its `_history/plans/YYYY/` file.
-8. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
-9. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
-10. Complete the follow-up action.
-11. Evaluate again.
-12. Save the final evaluation report under `_history/evaluations/YYYY/`.
-13. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
+6. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when the final output contains factual claims.
+7. List changed files, verification results, references checked, and grounding checks.
+8. If a plan guided the work, link its `_history/plans/YYYY/` file.
+9. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
+10. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
+11. Complete the follow-up action.
+12. Evaluate again.
+13. Save the final evaluation report under `_history/evaluations/YYYY/`.
+14. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
 
 ## Python Command
 
@@ -33,6 +34,8 @@ PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/wo
 Do not treat evaluation as a final report only. If the evaluator finds a real gap, reflect it into the work and run the relevant checks again.
 
 Reference research is part of evaluation. If no useful reference exists, record where you checked and why it did not apply.
+
+Factual grounding is part of evaluation. If the final output contains factual claims, record the `hallucination-guard-agent` result in `grounding_checks`.
 
 The final evaluation must not exist only in chat output. Save it as a Markdown file before commit.
 

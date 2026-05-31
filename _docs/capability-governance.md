@@ -26,6 +26,7 @@ Create a tool when work repeatedly needs deterministic execution:
 - converting Markdown to HTML or other formats
 - rendering previews
 - checking project health
+- checking claim grounding and hallucination risk
 
 Shared tools belong under `_tools/<tool-name>/`. Project-specific tools belong under `project-name/tools/`.
 
@@ -49,6 +50,16 @@ Templates belong under `_templates/`.
 Create a research note when internet research or external references are likely to reduce future work or improve future decisions.
 
 Research notes belong under `_research/topics/<topic>/`.
+
+## When to Create an Evaluation Agent
+
+Create or update an evaluation agent when a repeated quality gate should block close-out.
+
+Examples:
+
+- `work-evaluator-agent`: compares the initial instruction with actual work.
+- `knowledge-skeptic-agent`: validates internal knowledge-base references before reuse.
+- `hallucination-guard-agent`: checks factual claims against evidence before publication.
 
 ## Minimum Documentation
 

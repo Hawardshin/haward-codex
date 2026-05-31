@@ -3,6 +3,7 @@
 from agent_platform.core.models import AgentSpec, ExecutionRequest, ExecutionResult
 from agent_platform.core.registry import AgentRegistry, load_agent_spec, load_registry_dir
 from agent_platform.core.runtime import AgentRuntime, PythonFunctionRuntime
+from agent_platform.evaluation.hallucination_guard import HallucinationGuardInput, check_hallucination_risk
 from agent_platform.evaluation.knowledge_skeptic import KnowledgeValidationInput, validate_knowledge_reference
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 from agent_platform.planning.research_insight_planner import ResearchInsightPlanInput, create_research_insight_plan
@@ -13,10 +14,12 @@ __all__ = [
     "AgentSpec",
     "ExecutionRequest",
     "ExecutionResult",
+    "HallucinationGuardInput",
     "KnowledgeValidationInput",
     "PythonFunctionRuntime",
     "ResearchInsightPlanInput",
     "WorkEvaluationInput",
+    "check_hallucination_risk",
     "create_research_insight_plan",
     "evaluate_work",
     "load_agent_spec",

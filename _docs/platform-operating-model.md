@@ -27,9 +27,10 @@
 14. Summarize completed work.
 15. Check prior internal work and strong references relevant to the task.
 16. Capture reusable internet research or external references.
-17. Evaluate the completed work against the initial instruction.
-18. Rework real gaps and evaluate again.
-19. Commit the coherent change set and push it.
+17. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
+18. Evaluate the completed work against the initial instruction.
+19. Rework real gaps and evaluate again.
+20. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -48,6 +49,7 @@ Promote work only when it will reduce future effort.
 | Same external reference useful for future work | Research note |
 | Same search-to-insight-to-plan pattern repeated | Planning agent |
 | Same need to explain planning decisions later | Plan history template |
+| Same need to block unsupported factual claims | Hallucination guard agent |
 
 ## Context Compression
 

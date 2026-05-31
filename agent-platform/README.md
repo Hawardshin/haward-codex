@@ -60,6 +60,7 @@ PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/exampl
 PYTHONPATH=src python3 -m agent_platform.cli score-oss configs/open-source/candidate-template.json
 PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/work-evaluation-template.json
 PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluation/knowledge-validation-template.json
+PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/hallucination-guard-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 ```
 
@@ -75,6 +76,7 @@ PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning
 - `configs/planning/`: structured planning inputs
 - `configs/open-source/`: dependency candidate scoring inputs
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`
+- factual final outputs should pass `hallucination-guard-agent` when claims need grounding
 - `docs/python-agent-structure.md`: implementation structure
 - `docs/open-source-integration.md`: dependency evaluation and adapter policy
 - `artifacts/structure-overview.html`: browser-viewable structure summary
