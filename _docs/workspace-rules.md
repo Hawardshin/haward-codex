@@ -15,6 +15,7 @@
 | `_docs/` | 저장소 전체 문서, 규칙, 의사결정 기록 |
 | `_history/` | 날짜별 작업 로그와 컨텍스트 압축 요약 |
 | `_ops/` | 운영 허브, 프롬프트 라우터, 워크플로, 저장소 맵 |
+| `_research/` | 인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용 |
 | `_skills/` | git으로 추적할 커스텀 Codex 스킬 원본 |
 | `_templates/` | 새 프로젝트 기본 템플릿 |
 | `_tools/` | 여러 프로젝트에서 재사용하는 로컬 도구와 스크립트 |
@@ -111,3 +112,9 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - If gaps are found, they become follow-up actions and the work returns to implementation.
 - The default evaluator is `work-evaluator-agent` in `agent-platform/configs/agents/`.
 - Final evaluation reports are stored under `_history/evaluations/YYYY/`.
+
+## Research Capture Policy
+
+- Reusable internet research and external references live under `_research/`.
+- Research notes should include source URLs, access dates, summaries, reliability, applicability, and related work.
+- Capture only findings that are likely to reduce future work or improve future decisions.

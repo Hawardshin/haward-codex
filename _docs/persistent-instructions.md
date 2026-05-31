@@ -19,12 +19,14 @@
 - Track work history under `_history/YYYY/YYYY-MM-DD.md`.
 - Use `_ops/` as the durable operations hub for prompts, workflows, and maps.
 - Track active agents and parallel work in `_ops/coordination/`.
+- Capture reusable findings from internet research and external references under `_research/`.
 - Compress long conversation context into repository docs and history logs.
 - Promote repeated workflows into templates, tools, or skills when useful.
 - Keep repository and prompt maps current when navigational structure changes.
 - Use `work-evaluator-agent` as the default close-out evaluator.
 - Prefer Python for agent implementations, orchestration, backend automation, evaluation, and reusable local tools.
 - Use mature, maintained, license-compatible open-source tools and libraries when they fit the task.
+- Document useful internet research with source URLs, access dates, summaries, reliability, and applicability.
 - Consider HTML artifacts when browser rendering, visual hierarchy, dashboards, or interactive review are more useful than Markdown.
 - Use Korean for user-facing docs and history by default.
 - Use English for executable prompt bodies.

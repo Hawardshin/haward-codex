@@ -1,0 +1,41 @@
+# Research Capture Policy
+
+## Purpose
+
+When internet research or external reference checks find useful material, preserve it as repository documentation so future work can reuse it.
+
+## When To Capture
+
+- Official docs or authoritative references were checked.
+- Open-source tools, libraries, or frameworks were compared.
+- A source influenced a design decision.
+- The material is likely to be useful again.
+- The source is meaningful enough to appear in evaluator `references_checked`.
+
+## Where To Store
+
+- Reusable research findings: `_research/topics/<topic>/`
+- Research policies and rules: `_docs/`
+- Task-specific evaluation evidence: `_history/evaluations/YYYY/`
+- Project-specific summaries: the relevant project's `docs/`
+
+## What To Record
+
+Each research note should include at least:
+
+- title
+- research purpose
+- access date
+- source URLs
+- key summary
+- reliability assessment
+- applicability
+- related project or task
+- follow-up checks
+
+## Cautions
+
+- Do not copy long source text.
+- Use only short quotes from copyrighted material and summarize the rest.
+- Mark time-sensitive information with the research date.
+- Record usage terms, licenses, or security risks when relevant.

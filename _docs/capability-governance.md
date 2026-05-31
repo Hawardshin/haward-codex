@@ -42,6 +42,12 @@ Create a template when the repeated value is structure rather than execution:
 
 Templates belong under `_templates/`.
 
+## When to Create a Research Note
+
+Create a research note when internet research or external references are likely to reduce future work or improve future decisions.
+
+Research notes belong under `_research/topics/<topic>/`.
+
 ## Minimum Documentation
 
 Every reusable capability must state:

@@ -21,6 +21,7 @@ ROOT_PURPOSES = {
     "_ops": "operations hub, prompts, workflows, and maps",
     "_docs": "workspace-level rules, decisions, and operating docs",
     "_history": "dated work logs and compressed context",
+    "_research": "reusable internet research and external reference notes",
     "_skills": "tracked source for custom Codex skills",
     "_templates": "reusable project and artifact templates",
     "_tools": "local tools that reduce repeated work",

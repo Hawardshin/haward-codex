@@ -9,6 +9,7 @@ Review the changes and run available verification commands.
 If prompts, workflows, folders, or projects changed, refresh _ops/maps/.
 Record the work summary and verification result in _history/YYYY/YYYY-MM-DD.md.
 Summarize the completed work and check prior related work or strong references.
+If internet research produced reusable findings, capture them under _research/ and link them from the relevant docs.
 Use work-evaluator-agent to compare the initial instruction with the result.
 If there are gaps or improvements that must be applied, convert them into follow-up actions and rework.
 After rework, pass the same evaluation again.

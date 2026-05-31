@@ -9,13 +9,14 @@
 1. Capture the initial instruction and the actual result summary.
 2. Summarize the completed work in plain language.
 3. Check prior internal work, repository examples, official docs, mature open-source projects, or other strong references before evaluation.
-4. List changed files, verification results, and references checked.
-5. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
-6. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
-7. Complete the follow-up action.
-8. Evaluate again.
-9. Save the final evaluation report under `_history/evaluations/YYYY/`.
-10. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
+4. Capture reusable internet research or external references when useful.
+5. List changed files, verification results, and references checked.
+6. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
+7. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
+8. Complete the follow-up action.
+9. Evaluate again.
+10. Save the final evaluation report under `_history/evaluations/YYYY/`.
+11. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
 
 ## Python Command
 

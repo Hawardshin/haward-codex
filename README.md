@@ -34,6 +34,7 @@ codex/
   _docs/
   _history/
   _ops/
+  _research/
   _skills/
   _templates/
   _tools/
@@ -52,6 +53,7 @@ codex/
 - `_docs/`: 저장소 전체 운영 문서와 의사결정 기록
 - `_history/`: 날짜별 작업 히스토리와 요약
 - `_ops/`: 운영 허브, 프롬프트, 워크플로, 저장소 맵
+- `_research/`: 인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용
 - `_skills/`: git으로 추적할 커스텀 Codex 스킬 원본과 레지스트리
 - `_templates/`: 새 프로젝트를 만들 때 복사할 기본 구조
 - `_tools/`: 여러 프로젝트에서 재사용할 로컬 도구와 스크립트
@@ -100,6 +102,7 @@ project-name/
 - `work-evaluator-agent`가 초기 지시, 실제 결과, 변경 파일, 검증 결과를 비교한다.
 - 평가 입력에는 작업 요약과 확인한 레퍼런스를 포함한다.
 - 관련 작업을 평가할 때는 저장소 내 이전 작업, 공식 문서, 성숙한 오픈소스, 좋은 외부 사례를 먼저 확인한다.
+- 인터넷 조사에서 다음에도 참고할 가치가 있는 내용은 `_research/`에 출처와 함께 문서화한다.
 - 누락이나 불일치가 있으면 follow-up action으로 바꾸고 다시 작업한다.
 - 재작업 후 평가와 검증을 다시 통과한 뒤 커밋하고 push한다.
 - 최종 평가 보고서는 `_history/evaluations/YYYY/YYYY-MM-DD-<slug>.ko.md`에 저장한다.

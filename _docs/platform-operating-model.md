@@ -22,9 +22,10 @@
 9. Refresh `_ops/maps/` when navigational structure changes.
 10. Summarize completed work.
 11. Check prior internal work and strong references relevant to the task.
-12. Evaluate the completed work against the initial instruction.
-13. Rework real gaps and evaluate again.
-14. Commit the coherent change set and push it.
+12. Capture reusable internet research or external references.
+13. Evaluate the completed work against the initial instruction.
+14. Rework real gaps and evaluate again.
+15. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -39,6 +40,7 @@ Promote work only when it will reduce future effort.
 | Same user preference or operating instruction repeated | Persistent rule |
 | Same prompt or work sequence repeated | `_ops` prompt or workflow |
 | Same close-out quality check repeated | Evaluation agent |
+| Same external reference useful for future work | Research note |
 
 ## Context Compression
 
