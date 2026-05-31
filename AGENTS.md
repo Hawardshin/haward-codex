@@ -9,6 +9,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Reserve underscore-prefixed root directories for workspace operations:
   - `_docs/` for workspace-level documentation and decision records
   - `_history/` for dated work history and compressed context summaries
+  - `_ops/` for operations navigation, prompts, workflows, and maps
   - `_skills/` for tracked source copies of custom Codex skills
   - `_templates/` for reusable project scaffolds
   - `_tools/` for reusable local tools and scripts
@@ -30,6 +31,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 ## Platformization Rules
 
 - Treat the repository as a monorepo for a personal agent-building platform.
+- Use `_ops/index.md` as the navigation hub for ongoing work.
 - Keep reusable platform concepts in `agent-platform/` unless they clearly belong to another project.
 - When a workflow repeats or creates avoidable friction, consider promoting it into a template, tool, or skill.
 - Prefer Python for agent implementations unless the project constraints clearly favor another runtime.
@@ -46,6 +48,14 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Record the instruction in `_history/YYYY/YYYY-MM-DD.md` when it changes future behavior.
 - Do not rely on chat memory for instructions that should affect future work.
 - If a durable instruction conflicts with an older rule, update the docs so the current rule is explicit.
+
+## Operations Navigation Rules
+
+- Use `_ops/prompts/00-router.md` to select reusable prompts for repeated task types.
+- Use `_ops/workflows/00-start-here.md` as the default sequence for multi-step work.
+- Keep `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md` current when folders, prompts, workflows, tools, skills, or project structure change.
+- Run `python3 _tools/workspace-index/src/workspace_index.py` after changing navigational structure.
+- If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Capability Creation Rules
 

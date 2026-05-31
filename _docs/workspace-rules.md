@@ -14,6 +14,7 @@
 | --- | --- |
 | `_docs/` | 저장소 전체 문서, 규칙, 의사결정 기록 |
 | `_history/` | 날짜별 작업 로그와 컨텍스트 압축 요약 |
+| `_ops/` | 운영 허브, 프롬프트 라우터, 워크플로, 저장소 맵 |
 | `_skills/` | git으로 추적할 커스텀 Codex 스킬 원본 |
 | `_templates/` | 새 프로젝트 기본 템플릿 |
 | `_tools/` | 여러 프로젝트에서 재사용하는 로컬 도구와 스크립트 |
@@ -83,3 +84,11 @@ Use or propose HTML when the output benefits from:
 - UI or product specification mockups
 
 HTML artifacts should normally be stored in `project-name/artifacts/`.
+
+## Operations Hub Policy
+
+- `_ops/index.md` is the first stop for navigation.
+- Reusable prompts live in `_ops/prompts/`.
+- Reusable workflows live in `_ops/workflows/`.
+- Repository and prompt maps live in `_ops/maps/`.
+- Run `_tools/workspace-index` after navigational structure changes.

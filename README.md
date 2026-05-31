@@ -26,6 +26,7 @@ codex/
   research-agent/
   _docs/
   _history/
+  _ops/
   _skills/
   _templates/
   _tools/
@@ -43,6 +44,7 @@ codex/
 
 - `_docs/`: 저장소 전체 운영 문서와 의사결정 기록
 - `_history/`: 날짜별 작업 히스토리와 요약
+- `_ops/`: 운영 허브, 프롬프트, 워크플로, 저장소 맵
 - `_skills/`: git으로 추적할 커스텀 Codex 스킬 원본과 레지스트리
 - `_templates/`: 새 프로젝트를 만들 때 복사할 기본 구조
 - `_tools/`: 여러 프로젝트에서 재사용할 로컬 도구와 스크립트
@@ -73,6 +75,14 @@ project-name/
 - 날짜별 작업 로그는 `_history/YYYY/YYYY-MM-DD.md`에 기록한다.
 - 로그에는 목적, 변경 파일, 주요 결정, 커밋 해시를 남긴다.
 - 컨텍스트가 길어지면 대화 내용을 요약해 히스토리와 관련 프로젝트 문서에 반영한다.
+
+## 운영 허브
+
+- 작업 시작점은 `_ops/index.md`로 둔다.
+- 반복 프롬프트는 `_ops/prompts/`에서 관리한다.
+- 반복 워크플로는 `_ops/workflows/`에서 관리한다.
+- 무엇이 어디에 있는지에 대한 지도는 `_ops/maps/`에 둔다.
+- 구조가 바뀌면 `python3 _tools/workspace-index/src/workspace_index.py`로 맵을 갱신한다.
 
 ## 스킬과 도구 승격 기준
 

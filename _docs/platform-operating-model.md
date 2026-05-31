@@ -12,13 +12,15 @@
 ## Operating Loop
 
 1. Capture the user's intent as a project requirement, rule, or artifact.
-2. Decide whether the work belongs to an existing project or a new root-level project.
-3. Implement or document the smallest useful change.
-4. Prefer Python for agent implementation unless another runtime is clearly better.
-5. Evaluate mature open-source options before building core infrastructure from scratch.
-6. Promote repeated work into a template, tool, or skill.
-7. Record important context in `_history/`.
-8. Commit the coherent change set and push it.
+2. Use `_ops/index.md` and `_ops/prompts/00-router.md` to select the operating path.
+3. Decide whether the work belongs to an existing project or a new root-level project.
+4. Implement or document the smallest useful change.
+5. Prefer Python for agent implementation unless another runtime is clearly better.
+6. Evaluate mature open-source options before building core infrastructure from scratch.
+7. Promote repeated work into a template, tool, skill, prompt, or workflow.
+8. Record important context in `_history/`.
+9. Refresh `_ops/maps/` when navigational structure changes.
+10. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -31,6 +33,7 @@ Promote work only when it will reduce future effort.
 | Same multi-step reasoning or domain workflow repeated | Skill |
 | Same visual artifact style repeated | HTML template |
 | Same user preference or operating instruction repeated | Persistent rule |
+| Same prompt or work sequence repeated | `_ops` prompt or workflow |
 
 ## Context Compression
 
