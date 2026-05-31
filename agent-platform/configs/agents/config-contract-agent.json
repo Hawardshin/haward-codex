@@ -1,0 +1,14 @@
+{
+  "name": "config-contract-agent",
+  "description": "Checks whether shared JSON settings files explain their references, structure rules, and important fields inside the file itself.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "agent-platform:check-config-contract"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "after creating or changing shared JSON settings under agent-platform/configs/",
+    "policy": "Important settings files must include reader_guide, reference_links, structure_rules, and field_guide so the user can understand them by opening the file."
+  }
+}

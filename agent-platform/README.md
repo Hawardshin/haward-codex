@@ -64,6 +64,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/planning/coding-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/coding-research-profile.json
 ```
 
 ## Current Skeleton
@@ -71,6 +72,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memo
 - `src/agent_platform/core/`: local domain model, registry, runtime interface
 - `src/agent_platform/adapters/`: future external framework adapters
 - `src/agent_platform/evaluation/`: evaluation agents and close-out checks
+- `src/agent_platform/governance/`: checks for self-documenting settings and platform governance contracts
 - `src/agent_platform/memory/`: memory bootstrap checks for durable context loading
 - `src/agent_platform/oss/`: open-source dependency evaluation helpers
 - `src/agent_platform/planning/`: research-backed insight and planning checks
@@ -84,6 +86,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memo
 - coding research should pass `coding-research-agent` before implementation when investigation is needed
 - coding research readiness requires diverse `source_types`, including at least three distinct non-`other` types
 - coding research should include `reference_config_paths` pointing to `configs/research/`
+- shared settings should include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide`, then pass `check-config-contract`
 - factual final outputs should pass `hallucination-guard-agent` when claims need grounding
 - `docs/python-agent-structure.md`: implementation structure
 - `docs/open-source-integration.md`: dependency evaluation and adapter policy

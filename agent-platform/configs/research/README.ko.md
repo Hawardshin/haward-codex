@@ -14,6 +14,8 @@
 - `source_types`는 `source-registry.json`의 source type을 사용한다.
 - 외부 reference source는 `last_checked`를 갱신하거나 새 config 항목으로 추가한다.
 - 내부 지식 베이스 항목은 `knowledge-skeptic-agent` 검증 후 근거로 사용한다.
+- 공유 설정 파일은 `reader_guide`, `reference_links`, `structure_rules`, `field_guide`를 포함해야 한다.
+- 설정을 바꾼 뒤 `check-config-contract`로 파일 내부 설명이 충분한지 확인한다.
 
 ## 기본 입력 예
 

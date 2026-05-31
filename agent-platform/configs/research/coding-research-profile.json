@@ -2,6 +2,137 @@
   "schema_version": "2026-05-31",
   "name": "coding-research-profile",
   "purpose": "Default source and evidence profile used by coding-research-agent before implementation.",
+  "reader_guide": {
+    "summary": "This file defines the minimum source coverage and close-out questions required before coding research becomes implementation work.",
+    "how_to_read": [
+      "Read required_coverage to know the minimum evidence mix.",
+      "Read default_reference_source_ids to know which source-registry references should normally be considered.",
+      "Read source_selection_rules to understand how to choose sources.",
+      "Read post_research_question_ids to know what must be answered before implementation."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-05-31",
+    "update_triggers": [
+      "Coding research repeatedly misses a source category.",
+      "A new research type needs different evidence coverage.",
+      "The source registry changes source type IDs or reference IDs.",
+      "The coding-research-agent readiness checker changes required fields."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "source_registry",
+      "title": "Source registry",
+      "path": "agent-platform/configs/research/source-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "source type taxonomy",
+        "reusable reference source IDs"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "coding_research_agent_docs",
+      "title": "Coding research agent documentation",
+      "path": "agent-platform/docs/coding-research-agent.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "agent workflow",
+        "post-research question rationale"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "source_collection_policy",
+      "title": "Workspace source collection policy",
+      "path": "_docs/source-collection-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "source diversity policy",
+        "adoption signal policy"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "mlr_guidelines_software_engineering",
+      "title": "Guidelines for including grey literature and conducting multivocal literature reviews in software engineering",
+      "url": "https://doi.org/10.1016/j.infsof.2018.09.006",
+      "source_type": "paper",
+      "used_for": [
+        "reason for mixing formal and practitioner sources"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "sourcemeta_registry_configuration",
+      "title": "Sourcemeta Registry Configuration",
+      "url": "https://registry.sourcemeta.com/configuration/",
+      "source_type": "official",
+      "used_for": [
+        "configuration-driven registry design pattern"
+      ],
+      "last_checked": "2026-05-31"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "web_first_is_required",
+      "rule": "Every coding research task must include web search before implementation planning.",
+      "reason": "The workspace user explicitly requires web-first work and current external verification.",
+      "applies_to": [
+        "source_selection_rules",
+        "required_coverage"
+      ]
+    },
+    {
+      "id": "source_diversity_is_required",
+      "rule": "Coding research must use at least three distinct non-other source types, including one authoritative and one practical or adoption source type.",
+      "reason": "Single-source research is fragile and can miss implementation trade-offs.",
+      "applies_to": [
+        "required_coverage"
+      ]
+    },
+    {
+      "id": "settings_used_must_be_recorded",
+      "rule": "Research outputs must record reference_config_paths pointing to the configs used.",
+      "reason": "Future review needs to know which source rules shaped the decision.",
+      "applies_to": [
+        "required_coverage.must_record_reference_config_paths"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "source_registry",
+      "meaning": "Path to the taxonomy and reusable source catalog consumed by this profile.",
+      "required": true
+    },
+    {
+      "field": "applies_to_research_types",
+      "meaning": "Coding research categories this default profile covers.",
+      "required": true
+    },
+    {
+      "field": "required_coverage",
+      "meaning": "Minimum evidence mix and recording requirements before coding starts.",
+      "required": true
+    },
+    {
+      "field": "default_reference_source_ids",
+      "meaning": "Source-registry IDs that should normally be considered in coding research.",
+      "required": true
+    },
+    {
+      "field": "source_selection_rules",
+      "meaning": "Human-readable rules for selecting and interpreting sources.",
+      "required": true
+    },
+    {
+      "field": "post_research_question_ids",
+      "meaning": "Questions that must be answered before implementation work begins.",
+      "required": true
+    }
+  ],
   "source_registry": "agent-platform/configs/research/source-registry.json",
   "applies_to_research_types": [
     "api_docs",

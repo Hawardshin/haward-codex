@@ -21,6 +21,7 @@
 - 작업을 시작할 때: [_ops/workflows/00-start-here.md](workflows/00-start-here.md)
 - 모든 지시의 첫 웹 검색: [_ops/workflows/05-web-first-intake.md](workflows/05-web-first-intake.md), [_docs/web-first-work-policy.ko.md](../_docs/web-first-work-policy.ko.md)
 - 새 세션의 AI 메모리 부트스트랩: [_ops/workflows/01-memory-bootstrap.md](workflows/01-memory-bootstrap.md), [agent-platform/configs/memory/bootstrap-manifest.json](../agent-platform/configs/memory/bootstrap-manifest.json)
+- 공유 설정 파일 자기 설명 기준: [_docs/self-documenting-config-policy.ko.md](../_docs/self-documenting-config-policy.ko.md), `agent-platform`의 `check-config-contract`
 - 출처 수집 기준을 볼 때: [_docs/source-collection-policy.ko.md](../_docs/source-collection-policy.ko.md)
 - 많은 출처 묶음을 정리할 때: [_tools/source-collector/README.ko.md](../_tools/source-collector/README.ko.md)
 - 프롬프트를 고를 때: [_ops/prompts/00-router.md](prompts/00-router.md)

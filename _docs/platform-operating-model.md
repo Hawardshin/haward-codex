@@ -23,17 +23,18 @@
 10. Evaluate mature open-source options before building core infrastructure from scratch.
 11. For planning that depends on external facts, use web search and at least one other search channel to derive insights before execution.
 12. For coding research, use `coding-research-agent` to record reference configs, answer standard post-research questions, and verify diverse source types before implementation.
-13. Save important planning processes under `_history/plans/YYYY/`.
-14. Promote repeated work into a template, tool, skill, prompt, or workflow.
-15. Record important context in `_history/`.
-16. Refresh `_ops/maps/` when navigational structure changes.
-17. Summarize completed work.
-18. Check prior internal work and strong references relevant to the task.
-19. Capture reusable internet research or external references.
-20. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
-21. Evaluate the completed work against the initial instruction.
-22. Rework real gaps and evaluate again.
-23. Commit the coherent change set and push it.
+13. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
+14. Save important planning processes under `_history/plans/YYYY/`.
+15. Promote repeated work into a template, tool, skill, prompt, or workflow.
+16. Record important context in `_history/`.
+17. Refresh `_ops/maps/` when navigational structure changes.
+18. Summarize completed work.
+19. Check prior internal work and strong references relevant to the task.
+20. Capture reusable internet research or external references.
+21. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
+22. Evaluate the completed work against the initial instruction.
+23. Rework real gaps and evaluate again.
+24. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -56,6 +57,7 @@ Promote work only when it will reduce future effort.
 | Same need to block unsupported factual claims | Hallucination guard agent |
 | Same need to start every instruction with web search | Web-first intake workflow |
 | Same need to avoid forgetting durable settings | Memory bootstrap manifest and agent |
+| Same need to make settings explain their references and rules | Config contract agent |
 
 ## Context Compression
 

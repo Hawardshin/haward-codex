@@ -2,6 +2,143 @@
   "schema_version": "2026-05-31",
   "name": "source-registry",
   "purpose": "Canonical registry of source types and reusable reference sources for coding and technical research.",
+  "reader_guide": {
+    "summary": "This file explains which source categories the workspace recognizes, which reference links shaped those categories, and how each source type should be used or limited.",
+    "how_to_read": [
+      "Read source_types to understand the taxonomy used in research reports.",
+      "Read reference_links to see the external and internal references behind this taxonomy.",
+      "Read structure_rules before adding a new source type or reference source.",
+      "Use reference_sources as reusable known references for future research tasks."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-05-31",
+    "update_triggers": [
+      "A new source type is needed for repeated research.",
+      "A reference source becomes stale, unavailable, or contradicted.",
+      "A coding research profile changes its required source coverage.",
+      "A source category starts being misused as proof instead of signal."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "source_collection_policy",
+      "title": "Workspace source collection policy",
+      "path": "_docs/source-collection-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "source diversity rules",
+        "adoption signal handling"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "coding_research_agent_docs",
+      "title": "Coding research agent documentation",
+      "path": "agent-platform/docs/coding-research-agent.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "coding research readiness rules"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "mlr_guidelines_software_engineering",
+      "title": "Guidelines for including grey literature and conducting multivocal literature reviews in software engineering",
+      "url": "https://doi.org/10.1016/j.infsof.2018.09.006",
+      "source_type": "paper",
+      "used_for": [
+        "formal plus grey literature rationale",
+        "source quality assessment framing"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "cmu_sei_digital_library",
+      "title": "CMU SEI Digital Library",
+      "url": "https://www.sei.cmu.edu/library/",
+      "source_type": "official",
+      "used_for": [
+        "software engineering publication type diversity"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "zotero_data_formats",
+      "title": "Zotero Bibliographic Data Formats",
+      "url": "https://www.zotero.org/support/dev/data_formats",
+      "source_type": "official",
+      "used_for": [
+        "reference metadata format examples",
+        "CSL JSON and BibTeX compatibility"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "sourcemeta_registry_configuration",
+      "title": "Sourcemeta Registry Configuration",
+      "url": "https://registry.sourcemeta.com/configuration/",
+      "source_type": "official",
+      "used_for": [
+        "configuration-driven registry pattern"
+      ],
+      "last_checked": "2026-05-31"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "types_are_taxonomy_not_evidence",
+      "rule": "source_types classify evidence; they do not by themselves prove a claim.",
+      "reason": "Research still needs source-specific evaluation and grounding.",
+      "applies_to": [
+        "source_types"
+      ]
+    },
+    {
+      "id": "social_and_community_are_signals",
+      "rule": "community and social sources are discovery, adoption, or pain-point signals unless backed by primary evidence.",
+      "reason": "Popularity and reactions can reveal interest but do not establish correctness.",
+      "applies_to": [
+        "source_types",
+        "reference_sources"
+      ]
+    },
+    {
+      "id": "every_reference_needs_use_case",
+      "rule": "Each reusable reference must record what it is used for and when it was last checked.",
+      "reason": "Future agents need to know why a link exists and whether it may be stale.",
+      "applies_to": [
+        "reference_links",
+        "reference_sources"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "source_types",
+      "meaning": "Allowed source categories and how each should be used or limited.",
+      "required": true
+    },
+    {
+      "field": "reference_links",
+      "meaning": "Core links and internal paths that explain the taxonomy itself.",
+      "required": true
+    },
+    {
+      "field": "reference_sources",
+      "meaning": "Reusable source records that coding research tasks can cite by ID.",
+      "required": true
+    },
+    {
+      "field": "metadata.default_profile",
+      "meaning": "Default research profile that consumes this registry.",
+      "required": true
+    },
+    {
+      "field": "structure_rules",
+      "meaning": "Rules that prevent sources and social signals from being misused.",
+      "required": true
+    }
+  ],
   "metadata": {
     "owner": "agent-platform",
     "default_profile": "agent-platform/configs/research/coding-research-profile.json",
@@ -144,6 +281,25 @@
       ],
       "limits": [
         "Not standalone proof."
+      ]
+    },
+    {
+      "id": "news",
+      "label_ko": "뉴스/현재 동향",
+      "label_en": "News or current-events source",
+      "examples": [
+        "technology news article",
+        "security news",
+        "market update"
+      ],
+      "default_reliability": "medium",
+      "use_for": [
+        "recent changes",
+        "ecosystem movement",
+        "incident discovery"
+      ],
+      "limits": [
+        "Needs confirmation from primary sources before implementation decisions."
       ]
     },
     {

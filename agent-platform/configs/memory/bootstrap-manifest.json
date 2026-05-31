@@ -2,6 +2,181 @@
   "schema_version": "2026-05-31",
   "name": "workspace-memory-bootstrap",
   "purpose": "Defines durable memory anchors that an AI agent should load or know how to retrieve before working in this repository.",
+  "reader_guide": {
+    "summary": "This is the boot memory contract. A future AI session should be able to open this file and see what must be loaded first, why it matters, and which references shaped the rule.",
+    "how_to_read": [
+      "Read purpose and structure_rules to understand the contract.",
+      "Read reference_links to see the internal policies and external memory references behind the design.",
+      "Read startup_sequence to know the exact hot-context loading order.",
+      "Read anchors to understand which files are hot, warm, or cold memory.",
+      "Run default_command after changing durable rules, navigation, source configs, project boundaries, prompts, workflows, or maps."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-05-31",
+    "update_triggers": [
+      "A durable user instruction becomes mandatory for future sessions.",
+      "A new shared config, prompt, workflow, project registry, or map becomes part of startup context.",
+      "A hot anchor becomes too large or no longer needs to be loaded every time.",
+      "A reference source behind this memory approach becomes stale or contradicted."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "memory_bootstrap_policy",
+      "title": "Memory Bootstrap Policy",
+      "path": "_docs/memory-bootstrap-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "workspace-specific memory bootstrap rules",
+        "hot/warm/cold tier definitions"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "persistent_instructions",
+      "title": "Persistent Instructions",
+      "path": "_docs/persistent-instructions.md",
+      "source_type": "internal",
+      "used_for": [
+        "durable user preferences",
+        "rules that future sessions must not forget"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "self_documenting_config_policy",
+      "title": "Self-Documenting Config Policy",
+      "path": "_docs/self-documenting-config-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "rule that shared settings must include references and structure rules inside the file",
+        "config contract validation criteria"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "agentmemory_md",
+      "title": "AgentMemory.md",
+      "url": "https://agentmemory.md/",
+      "source_type": "open_source",
+      "used_for": [
+        "persistent memory categories",
+        "session startup memory retrieval pattern"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "microsoft_agent_memory",
+      "title": "Microsoft Agent Framework Memory and Persistence",
+      "url": "https://learn.microsoft.com/en-us/agent-framework/get-started/memory",
+      "source_type": "official",
+      "used_for": [
+        "context and history provider pattern",
+        "memory persistence design reference"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "memory_matters",
+      "title": "Memory Matters: The Need to Improve Long-Term Memory in LLM-Agents",
+      "url": "https://ojs.aaai.org/index.php/AAAI-SS/article/view/27688",
+      "source_type": "paper",
+      "used_for": [
+        "long-term memory motivation",
+        "memory type separation"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "memory_os_ai_agent",
+      "title": "Memory OS of AI Agent",
+      "url": "https://huggingface.co/papers/2506.06326",
+      "source_type": "paper",
+      "used_for": [
+        "hierarchical memory storage and retrieval framing"
+      ],
+      "last_checked": "2026-05-31"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "chat_memory_is_not_source_of_truth",
+      "rule": "Do not rely on chat memory; use this manifest and its anchors as the startup source of truth.",
+      "reason": "Future sessions may not retain prior conversation context.",
+      "applies_to": [
+        "startup_sequence",
+        "anchors"
+      ]
+    },
+    {
+      "id": "hot_context_must_be_compact",
+      "rule": "Hot anchors must stay within hot_context_limit and contain only context needed before almost every task.",
+      "reason": "Large startup context wastes tokens and increases stale-context risk.",
+      "applies_to": [
+        "hot_context_limit",
+        "anchors"
+      ]
+    },
+    {
+      "id": "mandatory_context_must_be_required",
+      "rule": "If a file is mandatory for every future session, add its anchor id to startup_sequence and required_anchor_ids.",
+      "reason": "A mandatory setting should fail the bootstrap check when it disappears.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids"
+      ]
+    },
+    {
+      "id": "references_live_in_config",
+      "rule": "Important reference links and internal policy paths must be recorded in reference_links inside this file.",
+      "reason": "The user should understand the design by opening the setting file alone.",
+      "applies_to": [
+        "reference_links"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "schema_version",
+      "meaning": "Date-based version of this manifest structure.",
+      "required": true
+    },
+    {
+      "field": "reader_guide",
+      "meaning": "Plain-language guide for humans and agents reading this file.",
+      "required": true
+    },
+    {
+      "field": "reference_links",
+      "meaning": "Internal files and external URLs used to justify or maintain this config.",
+      "required": true
+    },
+    {
+      "field": "structure_rules",
+      "meaning": "Rules that govern how this config is maintained.",
+      "required": true
+    },
+    {
+      "field": "startup_sequence",
+      "meaning": "Ordered list of anchor IDs that future sessions should load first.",
+      "required": true
+    },
+    {
+      "field": "required_anchor_ids",
+      "meaning": "Anchor IDs whose absence should block bootstrap readiness.",
+      "required": true
+    },
+    {
+      "field": "anchors",
+      "meaning": "Memory anchor records with id, path, tier, purpose, required flag, and load order.",
+      "required": true
+    },
+    {
+      "field": "refresh_rules",
+      "meaning": "Operational reminders for keeping this manifest current.",
+      "required": true
+    }
+  ],
   "hot_context_limit": 12,
   "default_command": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
   "startup_sequence": [
@@ -146,12 +321,20 @@
       "load_order": 21
     },
     {
+      "id": "self_documenting_config_policy",
+      "path": "_docs/self-documenting-config-policy.ko.md",
+      "tier": "warm",
+      "purpose": "Policy requiring shared settings files to include reference links, structure rules, and field guides.",
+      "required": true,
+      "load_order": 22
+    },
+    {
       "id": "coding_research_workflow",
       "path": "_ops/workflows/56-coding-research.md",
       "tier": "warm",
       "purpose": "Workflow for coding research before implementation.",
       "required": true,
-      "load_order": 22
+      "load_order": 23
     },
     {
       "id": "evaluation_workflow",
@@ -159,7 +342,7 @@
       "tier": "warm",
       "purpose": "Close-out evaluator and rework workflow.",
       "required": true,
-      "load_order": 23
+      "load_order": 24
     },
     {
       "id": "hallucination_workflow",
@@ -167,7 +350,7 @@
       "tier": "warm",
       "purpose": "Grounding workflow for factual claims.",
       "required": true,
-      "load_order": 24
+      "load_order": 25
     },
     {
       "id": "daily_history",
@@ -175,7 +358,7 @@
       "tier": "warm",
       "purpose": "Current dated work log and compressed context.",
       "required": true,
-      "load_order": 25
+      "load_order": 26
     },
     {
       "id": "repository_map",

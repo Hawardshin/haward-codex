@@ -10,6 +10,7 @@ from agent_platform.core.registry import load_agent_spec, load_registry_dir
 from agent_platform.evaluation.hallucination_guard import HallucinationGuardInput, check_hallucination_risk
 from agent_platform.evaluation.knowledge_skeptic import KnowledgeValidationInput, validate_knowledge_reference
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
+from agent_platform.governance.config_contract import check_config_contract
 from agent_platform.memory.bootstrap import MemoryBootstrapManifest, check_memory_bootstrap
 from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidate
 from agent_platform.planning.coding_research import CodingResearchInput, complete_coding_research
@@ -47,6 +48,9 @@ def build_parser() -> argparse.ArgumentParser:
     check_memory = subparsers.add_parser("check-memory-bootstrap", help="Check whether durable memory anchors are ready for a new agent session.")
     check_memory.add_argument("path", type=Path)
     check_memory.add_argument("--root", type=Path, default=None)
+
+    check_config = subparsers.add_parser("check-config-contract", help="Check whether JSON settings files explain references and structure in-place.")
+    check_config.add_argument("paths", type=Path, nargs="+")
 
     return parser
 
@@ -106,6 +110,25 @@ def main(argv: list[str] | None = None) -> int:
             manifest = MemoryBootstrapManifest.from_dict(json.load(file))
         repo_root = args.root if args.root is not None else _default_repo_root()
         print(json.dumps(check_memory_bootstrap(manifest, repo_root), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "check-config-contract":
+        reports = []
+        for path in args.paths:
+            with path.open("r", encoding="utf-8") as file:
+                reports.append({"path": str(path), **check_config_contract(json.load(file), str(path))})
+        overall_requires_rework = any(report["requires_rework"] for report in reports)
+        print(
+            json.dumps(
+                {
+                    "status": "documentation_contract_required" if overall_requires_rework else "self_documenting",
+                    "requires_rework": overall_requires_rework,
+                    "reports": reports,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
         return 0
 
     raise ValueError(f"Unknown command: {args.command}")

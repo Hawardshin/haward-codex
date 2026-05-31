@@ -47,6 +47,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - For coding/API/library/architecture/performance/debugging/security/migration research, use `coding-research-agent` before implementation and answer all standard post-research questions.
 - Coding research must record diverse `source_types` and use at least three distinct non-`other` source types before it can be treated as implementation-ready.
 - Coding research must record `reference_config_paths` showing which source registry or research profile config was used.
+- Shared settings files must be self-documenting: include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide` so the user can understand references and rules by opening the file.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract <config.json>` from `agent-platform/` after creating or changing important shared settings files.
 - Before publishing final outputs with factual claims, run or simulate `hallucination-guard-agent` and resolve `grounding_required` gaps.
 - Do not present unsupported or unchecked claims as facts; verify them, remove them, or explicitly caveat uncertainty.
 - Keep foundational operating philosophy under `_philosophy/`; keep executable rules and workflows under `_docs/` and `_ops/`.
@@ -89,6 +91,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Run `python3 _tools/workspace-index/src/workspace_index.py` after changing navigational structure.
 - Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, or platform memory anchors.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/coding-research-profile.json` from `agent-platform/` after changing core shared settings.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules

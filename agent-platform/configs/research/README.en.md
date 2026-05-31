@@ -14,6 +14,8 @@ This folder stores configuration files that make source criteria and reference c
 - `source_types` should use the source types defined in `source-registry.json`.
 - External reference sources should update `last_checked` or be added as new config entries.
 - Internal knowledge-base entries should pass `knowledge-skeptic-agent` before use as evidence.
+- Shared settings files should include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide`.
+- After changing settings, run `check-config-contract` to confirm the file explains itself.
 
 ## Default Input Example
 

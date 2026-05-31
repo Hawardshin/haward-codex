@@ -32,6 +32,8 @@ This document records durable user instructions in English.
 - Before implementing after coding/API/library/architecture/performance/debugging/security/migration research, use `coding-research-agent` to check sources, options, recommendation, risks, validation plan, and standard post-research questions.
 - Coding research must record `source_types` and use at least three distinct non-`other` source types.
 - Coding research must record `reference_config_paths` showing which source registry or research profile config was used.
+- Shared settings files must include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide` so the user can understand references and structural rules by opening one file.
+- When creating or changing important shared settings files, run `config-contract-agent` to check the self-documenting contract.
 - Use `hallucination-guard-agent` before publishing final outputs that contain factual claims.
 - Unsupported factual claims must be verified, removed, or explicitly caveated as uncertainty.
 - Compress long conversation context into repository docs and history logs.
