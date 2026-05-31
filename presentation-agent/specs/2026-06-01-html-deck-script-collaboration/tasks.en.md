@@ -8,4 +8,4 @@
 - [x] Add unit tests
 - [x] Run verification commands
 - [x] Write evaluation file
-- [ ] Commit and push
+- [x] Commit and push
