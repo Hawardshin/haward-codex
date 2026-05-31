@@ -33,6 +33,9 @@ This document records durable user instructions in English.
 - Record public search reasoning summaries in text: queries, sources checked, weak sources ignored, insights applied, and uncertainty. Do not store raw internal chain-of-thought.
 - If web search is irrelevant or unavailable, record that and continue with stronger local verification.
 - After web search and before local planning, run `memory-bootstrap-agent` to check required memory anchors and read hot context.
+- After web-first intake and memory bootstrap, select a `work_mode` from `agent-platform/configs/workflows/work-mode-registry.json`: `quick`, `standard`, `ship_first`, `research`, or `governance`.
+- Use the lightest work mode that fits risk and durability; do not create requirements, specs, request traces, or full close-out targets every time when the selected mode makes them non-blocking.
+- If `ship_first` mode defers non-blocking improvements, record them in `_ops/backlog/deferred-improvements.ko.md` or the owning project's equivalent backlog and include `deferred_improvement_targets` in evaluation input.
 - When durable rules, source configs, prompts, workflows, project boundaries, or evaluation loops change, update `agent-platform/configs/memory/bootstrap-manifest.json`.
 - For research or planning work, collect broad high-authority sources, including official docs, papers, open-source repos, international tech blogs, analysis articles, community/social signals, and contrary examples.
 - Manage large-company engineering blogs, official research labs, architecture centers, and high-signal independent source lists separately in `agent-platform/configs/research/enterprise-source-registry.json` and `_research/source-lists/`.
@@ -66,13 +69,9 @@ This document records durable user instructions in English.
 - Promote repeated workflows into templates, tools, skills, prompts, or workflows when useful.
 - Keep repository and prompt maps current when navigational structure changes.
 - Use `work-evaluator-agent` as the default close-out evaluator.
-- Include `user_request_summary_targets` in work evaluation input for meaningful work.
-- Include `requirements_targets` in work evaluation input for meaningful work.
-- Include `spec_targets` in work evaluation input for meaningful work.
+- Include `work_mode` in work evaluation input.
+- Include `user_request_summary_targets`, `requirements_targets`, `spec_targets`, `request_trace_targets`, `work_summary_targets`, `source_provenance_targets`, and `plan_evidence_targets` when required by the selected work mode.
 - If skill work occurred, include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets` in work evaluation input.
-- Include `request_trace_targets` in work evaluation input for meaningful work.
-- Include `work_summary_targets` in work evaluation input for meaningful work.
-- Include `source_provenance_targets` and `plan_evidence_targets` in work evaluation input for meaningful work.
 - Prefer Python for agent implementations, orchestration, backend automation, evaluation, and reusable local tools.
 - Use mature, maintained, license-compatible open-source tools and libraries when they fit the task.
 - When a mature open-source tool or library fits the task, do not avoid installation by default; install it in the owning project or tool scope when needed.

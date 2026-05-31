@@ -34,6 +34,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep user-readable completed-work summaries under `_history/work-summaries/`.
 - Keep prompt-level web search records under `_history/web-searches/`.
 - Keep large-company and high-quality research site seeds in `configs/research/enterprise-source-registry.json`.
+- Keep selectable work modes and evaluator target strictness in `configs/workflows/work-mode-registry.json`.
 - Keep user request summaries under `_history/user-requests/`.
 - Keep shared requirements baselines, changes, and reviews under `_requirements/`; use project-local `docs/requirements/` for project-specific requirements.
 - Keep shared spec-driven artifacts under `_specs/`; use project-local `specs/` for project-specific specs.
@@ -76,7 +77,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/planning/coding-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json
-PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json
 ```
 
 ## Current Skeleton
@@ -95,6 +96,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `configs/research/`: source registry and research profile configs
 - `configs/research/enterprise-source-registry.json`: curated large-company, research-lab, architecture-center, and high-signal source seed list
 - `configs/research/source-discovery-registry.json`: broad search-origin registry for global, Korean, Indian, paper, and Korean local review sources
+- `configs/workflows/work-mode-registry.json`: selectable work modes and evaluator target policy
 - `configs/open-source/`: dependency candidate scoring inputs
 - `research-insight-planner-agent` is the core Perplexity-style research agent for search, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review
 - `requirements-manager-agent` keeps user requests, reviewed requirements, implementation, and evaluation connected
@@ -109,14 +111,10 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - coding research for source-code work requires `architecture_reference_sources`, at least two `architecture_options`, and `architecture_decision_notes`
 - shared settings should include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide`, then pass `check-config-contract`
 - factual final outputs should pass `hallucination-guard-agent` when claims need grounding
-- close-out evaluation should include `web_search_record_targets` pointing to `_history/web-searches/YYYY/`
-- close-out evaluation should include `user_request_summary_targets` pointing to `_history/user-requests/YYYY/`
-- close-out evaluation should include `requirements_targets` pointing to `_requirements/` or project-local requirements files
-- close-out evaluation should include `spec_targets` pointing to `_specs/` or project-local specs
+- close-out evaluation should include `work_mode`; `quick`, `standard`, `ship_first`, `research`, and `governance` decide which target fields are blocking
+- close-out evaluation should include `web_search_record_targets`, `user_request_summary_targets`, `requirements_targets`, `spec_targets`, `request_trace_targets`, `work_summary_targets`, `source_provenance_targets`, and `plan_evidence_targets` when required by the selected work mode
+- `ship_first` close-out should include `deferred_improvement_targets` when improvement ideas are intentionally postponed
 - skill close-out should include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`
-- close-out evaluation should include `request_trace_targets` pointing to `_history/request-traces/YYYY/`
-- close-out evaluation should include `work_summary_targets` pointing to `_history/work-summaries/YYYY/`
-- close-out evaluation should include `source_provenance_targets` and `plan_evidence_targets`
 - context archive close-out should include `context_archiving_occurred=true` and `context_archive_targets`
 - installation close-out should include `installation_occurred=true` and `installation_record_targets` when dependency or environment state changed
 - `docs/python-agent-structure.md`: implementation structure

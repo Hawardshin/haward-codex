@@ -8,12 +8,21 @@
 
 Run this evaluator after implementation and normal verification, before final commit or final response for meaningful work.
 
+The evaluator supports selectable work modes so small or urgent tasks do not need to run the full governance loop every time:
+
+- `quick`: low-risk, reversible work; governance targets become non-blocking improvements.
+- `standard`: default; preserves the existing full target set.
+- `ship_first`: ship or repair first; requires reference and web-search records, and requires deferred improvement targets when improvement ideas are postponed.
+- `research`: research and planning work; requires source provenance, plan evidence, references, and web-search records.
+- `governance`: durable repository/platform/rule changes; uses the full target set.
+
 ## Inputs
 
 Use `agent-platform/configs/evaluation/work-evaluation-template.json` as the shape:
 
 - `initial_instruction`: the user's starting request or durable instruction
 - `result_summary`: what was actually changed or produced
+- `work_mode`: one of `quick`, `standard`, `ship_first`, `research`, or `governance`; defaults to `standard`
 - `changed_files`: files or artifacts changed
 - `verification`: commands, checks, or manual review performed
 - `references_checked`: internal prior work, previous examples, official docs, or strong external references checked before evaluation
@@ -33,6 +42,7 @@ Use `agent-platform/configs/evaluation/work-evaluation-template.json` as the sha
 - `context_archive_targets`: context archive packet files under `_history/context-archives/YYYY/`
 - `installation_occurred`: whether the work actually installed, upgraded, removed, or globally configured software
 - `installation_record_targets`: installation audit records under `_history/installations/YYYY/`
+- `deferred_improvement_targets`: backlog files that hold postponed non-blocking improvements
 - `known_gaps`: explicit mismatches or unfinished items
 - `improvement_ideas`: non-blocking improvements worth considering
 
@@ -48,16 +58,12 @@ PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/wo
 
 - `status=ready_to_close`: continue close-out.
 - `status=rework_required`: convert each gap into a follow-up action, complete that work, then evaluate again.
-- Missing reference research is a blocking gap. Record either the references checked or the fact that no relevant reference was found after a reasonable search.
-- Missing source provenance targets are a blocking gap. Record where material values, source data, claims, assumptions, and config inputs came from.
-- Missing plan evidence targets are a blocking gap. Record which evidence supports the executed plan.
-- Missing web search record targets are a blocking gap. Save the visible search process, useful sources, ignored weak sources, plan impact, and public decision summary under `_history/web-searches/YYYY/`.
-- Missing user request summary targets are a blocking gap. Save the user's request intent summary under `_history/user-requests/YYYY/`.
-- Missing requirements targets are a blocking gap. Add or update the active requirements baseline, change, or review file under `_requirements/` or the owning project's `docs/requirements/`.
-- Missing spec targets are a blocking gap. Add or update spec-driven artifacts under `_specs/` or the owning project's `specs/`.
+- Missing targets are blocking according to the selected `work_mode`, defined in `agent-platform/configs/workflows/work-mode-registry.json`.
+- In `standard` and `governance`, missing reference research, source provenance, plan evidence, web search records, user request summaries, requirements targets, spec targets, request traces, and work summaries are blocking.
+- In `quick`, those governance targets are non-blocking improvements unless the user explicitly requested them or another rule makes them mandatory.
+- In `ship_first`, missing `references_checked` and `web_search_record_targets` are blocking, and missing `deferred_improvement_targets` is blocking when `improvement_ideas` are present.
+- In `research`, missing `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, and `web_search_record_targets` are blocking.
 - Missing skill targets or skill validation targets are blocking gaps when `skill_work_occurred=true`.
-- Missing request trace targets are a blocking gap. Save the request, outcome, evidence, evaluation, and commit mapping under `_history/request-traces/YYYY/`.
-- Missing work summary targets are a blocking gap. Save a concise summary that a future user can read before closing the work.
 - If `context_archiving_occurred` is true, missing context archive targets are a blocking gap.
 - If `installation_occurred` is true, missing installation record targets are a blocking gap.
 - If factual final outputs are present, run `hallucination-guard-agent` and record the result in `grounding_checks`.

@@ -17,6 +17,9 @@
 - 의미 있는 작업은 `_history/web-searches/YYYY/`에 공개 검색 판단 요약을 남기고 평가 입력에 `web_search_record_targets`를 포함한다.
 - 공개 검색 판단 요약에는 검색어, 확인한 출처, 제외한 약한 출처, 계획 반영 인사이트, 남은 불확실성을 남기며 내부 추론 원문은 저장하지 않는다.
 - 웹 검색 후에는 `memory-bootstrap-agent`로 필수 메모리 anchor를 확인하고 핵심 세팅을 로드한다.
+- 웹 검색과 메모리 부트스트랩 후에는 작업 성격에 맞게 `quick`, `standard`, `ship_first`, `research`, `governance` 중 하나의 작업 모드를 선택한다.
+- 작업 모드는 `agent-platform/configs/workflows/work-mode-registry.json`에서 관리하며, 작은 작업은 전체 요구사항/스펙/히스토리 루프를 매번 강제하지 않는다.
+- 먼저 결과를 내야 하는 작업은 `ship_first` 모드로 처리하고, 비차단 개선은 `_ops/backlog/deferred-improvements.ko.md`에 미룬다.
 - 조사나 계획에 영향을 주는 검색은 공식 자료, 논문, 외국 기술 블로그, 오픈소스, 조사 아티클, 커뮤니티/소셜 신호를 폭넓게 수집한다.
 - 중요한 계획은 AI의 내부 추정만으로 세우지 않고, 웹 검색과 다른 검색 채널을 통해 인사이트를 도출한 뒤 수립한다.
 - `research-insight-planner-agent`는 핵심 조사 에이전트이며 Perplexity식 answer engine처럼 질문 이해, 검색, 출처 순위화, 증거 추출, 종합, citation grounding, skeptic review 단계를 거친다.
@@ -98,6 +101,7 @@ codex/
 - `_history/web-searches/`: 프롬프트/작업마다 수행한 웹 검색과 공개 판단 요약
 - `_history/plans/`: 에이전트가 계획을 세운 과정 기록
 - `_ops/`: 운영 허브, 프롬프트, 워크플로, 저장소 맵
+- `_ops/backlog/`: `ship_first`나 빠른 작업에서 뒤로 뺀 공통 비차단 개선 목록
 - `_ops/installations/`: 설치 레지스트리와 설치 감사 추적 규칙
 - `_ops/projects/`: 루트 프로젝트 등록부와 경계 관리
 - `_research/`: 인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용
@@ -148,6 +152,8 @@ project-name/
 
 - 작업 시작점은 `_ops/index.md`로 둔다.
 - 모든 새 지시는 `_ops/workflows/05-web-first-intake.md`에 따라 웹 검색으로 시작한다.
+- 작업 모드 선택은 `_ops/workflows/02-select-work-mode.md`와 `agent-platform/configs/workflows/work-mode-registry.json`에서 확인한다.
+- 지연 개선 백로그는 `_ops/backlog/deferred-improvements.ko.md`에서 확인한다.
 - 프롬프트 공통 계약은 `_ops/prompts/README.ko.md`에서 확인하고, 검색 기록 템플릿은 `_templates/web-search-record/`에서 확인한다.
 - 컨텍스트 아카이브 정책은 `_docs/context-archive-policy.ko.md`, 재개 패킷은 `_history/context-archives/`에서 확인한다.
 - 사용자 요청 요약 정책은 `_docs/user-request-summary-policy.ko.md`, 날짜별 요청 요약은 `_history/user-requests/`에서 확인한다.
@@ -176,6 +182,7 @@ project-name/
 ## 작업 평가 루프
 
 - `work-evaluator-agent`가 초기 지시, 실제 결과, 변경 파일, 검증 결과를 비교한다.
+- 평가 입력에는 `work_mode`를 포함하고, 모드별 blocking target은 `agent-platform/configs/workflows/work-mode-registry.json`을 따른다.
 - 평가 입력에는 작업 요약과 확인한 레퍼런스를 포함한다.
 - 평가 입력에는 검색 과정 기록 파일 경로인 `web_search_record_targets`를 포함한다.
 - 평가 입력에는 사용자 요청 요약 파일 경로인 `user_request_summary_targets`를 포함한다.

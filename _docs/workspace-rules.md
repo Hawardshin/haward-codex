@@ -19,6 +19,7 @@
 | `_history/` | 날짜별 작업 로그와 컨텍스트 압축 요약 |
 | `_history/plans/` | 에이전트 계획 과정 기록 |
 | `_ops/` | 운영 허브, 프롬프트 라우터, 워크플로, 저장소 맵 |
+| `_ops/backlog/` | 빠른 작업이나 `ship_first` 모드에서 뒤로 뺀 공통 비차단 개선 목록 |
 | `_ops/projects/` | 루트 프로젝트 등록부와 경계 관리 |
 | `_research/` | 인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용 |
 | `_skills/` | git으로 추적할 커스텀 Codex 스킬 원본 |
@@ -95,7 +96,7 @@ After each completed commit, push to `origin/main` immediately unless the user e
 - Record requirement changes under `_requirements/changes/` or the project-specific equivalent.
 - Record requirement reviews under `_requirements/reviews/` or the project-specific equivalent.
 - Before implementation, confirm the relevant requirement IDs and update or baseline them when the request changes expected behavior, rules, project structure, platform capability, or implementation criteria.
-- Meaningful work must include `requirements_targets` in the close-out evaluator input.
+- Work must include `requirements_targets` in the close-out evaluator input when the selected work mode requires it or when durable behavior changes.
 
 ## Spec-Driven Development Policy
 
@@ -104,7 +105,7 @@ After each completed commit, push to `origin/main` immediately unless the user e
 - Project-specific specs live under the owning project's `specs/`.
 - Each spec folder should contain `spec`, `plan`, `tasks`, `validation`, and `traceability` artifacts.
 - Acceptance criteria should be concrete, testable, and linked to requirement IDs.
-- Meaningful work must include `spec_targets` in the close-out evaluator input.
+- Work must include `spec_targets` in the close-out evaluator input when the selected work mode requires it or when implementation scope is durable.
 
 ## Skill Lifecycle Policy
 
@@ -139,6 +140,9 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 ## Operations Hub Policy
 
 - `_ops/index.md` is the first stop for navigation.
+- `_ops/workflows/02-select-work-mode.md` selects `quick`, `standard`, `ship_first`, `research`, or `governance` mode after web-first intake and memory bootstrap.
+- `agent-platform/configs/workflows/work-mode-registry.json` defines mode criteria, evaluator target policy, and deferred improvement rules.
+- `_ops/backlog/deferred-improvements.ko.md` tracks shared non-blocking improvements intentionally postponed by `ship_first` or quick work.
 - `_philosophy/` stores the durable worldview behind agent behavior and operating rules.
 - `_ops/coordination/` is the first stop for active agents and parallel work.
 - Reusable prompts live in `_ops/prompts/`.
@@ -187,13 +191,11 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - The evaluator compares the initial instruction with the actual result, changed files, and verification.
 - The evaluator should consider relevant prior internal work, official docs, mature open-source projects, or other strong references.
 - When factual claims are present, run `hallucination-guard-agent` and include the grounding result in evaluation.
-- Include `web_search_record_targets` in evaluation input for meaningful work.
-- Include `user_request_summary_targets` in evaluation input for meaningful work.
-- Include `requirements_targets` in evaluation input for meaningful work.
-- Include `spec_targets` in evaluation input for meaningful work.
+- Include `work_mode` in evaluation input.
+- Include `web_search_record_targets`, `user_request_summary_targets`, `requirements_targets`, `spec_targets`, `request_trace_targets`, and `work_summary_targets` when the selected work mode makes them blocking.
+- In `quick` mode, missing full-loop targets are non-blocking improvements unless another rule or the user makes them mandatory.
+- In `ship_first` mode, postponed improvement ideas require `deferred_improvement_targets`.
 - If skill work occurred, include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets` in evaluation input.
-- Include `request_trace_targets` in evaluation input for meaningful work.
-- Include `work_summary_targets` in evaluation input for meaningful work.
 - If gaps are found, they become follow-up actions and the work returns to implementation.
 - The default evaluator is `work-evaluator-agent` in `agent-platform/configs/agents/`.
 - Final evaluation reports are stored under `_history/evaluations/YYYY/`.

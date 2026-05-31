@@ -11,20 +11,19 @@ Use when: 완료된 작업이 초기 사용자 지시와 맞는지, 개선하거
 ```text
 Act as work-evaluator-agent.
 First summarize the completed work concisely.
+Read work_mode from the evaluation input. If missing, use standard.
+Use agent-platform/configs/workflows/work-mode-registry.json to decide which close-out targets are blocking for the selected mode.
 Check prior internal work, strong repository examples, official docs, mature open-source projects, or external references.
 If an external reference may be time-sensitive, verify current official or highly reliable sources.
 Compare the initial instruction, actual result, changed files, and verification results.
 Compare the result against strong references and identify what is weaker or missing.
 If the final output contains factual claims, require a grounding check from hallucination-guard-agent.
-Require web_search_record_targets that point to public search records under _history/web-searches/YYYY/.
-Require user_request_summary_targets that point to request summaries under _history/user-requests/YYYY/.
-Require requirements_targets that point to active requirements baselines, changes, or reviews under _requirements/ or the owning project's docs/requirements/.
-Require spec_targets that point to active spec-driven artifacts under _specs/ or the owning project's specs/.
-Require source_provenance_targets that point to records explaining where material values, source data, claims, assumptions, review signals, or config inputs came from.
-Require plan_evidence_targets that point to records connecting executed plan steps to checked sources, repository evidence, or explicit assumptions.
+Require web_search_record_targets, user_request_summary_targets, requirements_targets, spec_targets, source_provenance_targets, plan_evidence_targets, request_trace_targets, and work_summary_targets only when the selected mode makes them blocking.
 If skill work occurred, require skill_work_occurred=true, skill_targets, and skill_validation_targets.
-Require request_trace_targets that point to request-to-outcome traces under _history/request-traces/YYYY/.
-Require work_summary_targets that point to the user-readable summary files under _history/work-summaries/YYYY/.
+For quick mode, treat missing governance targets as non-blocking improvements unless the user explicitly requested those artifacts.
+For ship_first mode, require references_checked and web_search_record_targets, and require deferred_improvement_targets when improvement_ideas are postponed.
+For research mode, require references_checked, source_provenance_targets, plan_evidence_targets, and web_search_record_targets.
+For governance and standard modes, require the full target set.
 If context archiving occurred, require context_archiving_occurred=true and context_archive_targets under _history/context-archives/YYYY/.
 If installation occurred, require installation_occurred=true and installation_record_targets that point to _history/installations/YYYY/ records.
 Separate mismatches, missing requirements, and improvement opportunities.
@@ -38,6 +37,7 @@ Return ready_to_close only when there are no blocking gaps.
 
 - initial instruction
 - result summary
+- work mode
 - changed files
 - verification results
 - references checked
@@ -57,6 +57,7 @@ Return ready_to_close only when there are no blocking gaps.
 - context archive targets
 - installation occurred
 - installation record targets
+- deferred improvement targets
 - known gaps
 - improvement ideas
 

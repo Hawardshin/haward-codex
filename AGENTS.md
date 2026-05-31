@@ -107,6 +107,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/workflows/00-start-here.md` as the default sequence for multi-step work.
 - Start every new instruction with `_ops/workflows/05-web-first-intake.md`.
 - After web-first intake and before local planning, run or simulate `memory-bootstrap-agent` with `agent-platform/configs/memory/bootstrap-manifest.json` and read the returned hot anchors.
+- After web-first intake and memory bootstrap, select `work_mode` with `_ops/workflows/02-select-work-mode.md` and `agent-platform/configs/workflows/work-mode-registry.json`.
+- Use the lightest sufficient mode: `quick`, `standard`, `ship_first`, `research`, or `governance`; do not force the full requirements/spec/history loop when the selected mode makes those artifacts non-blocking.
 - Use `_ops/projects/registry.json` to see registered root projects and ownership boundaries.
 - Use `_ops/workflows/25-project-boundary-management.md` when a request may create a new project or cross project boundaries.
 - Use `_ops/workflows/35-requirements-lifecycle.md` when a request changes durable behavior, rules, project structure, platform capability, or implementation criteria.
@@ -118,20 +120,19 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Run `python3 _tools/workspace-index/src/workspace_index.py` after changing navigational structure.
 - Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, or platform memory anchors.
-- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json ../_ops/installations/registry.json` from `agent-platform/` after changing core shared settings.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json` from `agent-platform/` after changing core shared settings.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules
 
 - Use `work-evaluator-agent` to compare the initial instruction, actual result, changed files, and verification.
 - Include a completed-work summary and references checked in the evaluation input.
-- Include `web_search_record_targets` in evaluation input; missing web search record targets are blocking gaps.
-- Include `user_request_summary_targets` in evaluation input; missing request summaries are blocking gaps.
-- Include `requirements_targets` in evaluation input; missing active requirements baseline, change, or review targets are blocking gaps.
-- Include `spec_targets` in evaluation input; missing active spec-driven artifacts are blocking gaps.
+- Include `work_mode` in evaluation input. Missing target fields are blocking according to the selected mode's policy in `agent-platform/configs/workflows/work-mode-registry.json`.
+- In `quick` mode, missing governance/history/spec targets are non-blocking improvements unless another rule or the user makes them mandatory.
+- In `ship_first` mode, require `references_checked` and `web_search_record_targets`; if improvements are intentionally postponed, include `deferred_improvement_targets` pointing to `_ops/backlog/deferred-improvements.ko.md` or a project equivalent.
+- In `research` mode, require `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, and `web_search_record_targets`.
+- In `standard` and `governance` modes, missing web search records, user request summaries, requirements targets, spec targets, source provenance, plan evidence, request traces, and work summaries are blocking gaps.
 - If skill work occurred, include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`; missing skill source or validation targets are blocking gaps.
-- Include `request_trace_targets` in evaluation input; missing request-to-outcome traces are blocking gaps.
-- Include `work_summary_targets` in evaluation input so the user-readable summary location is checked.
 - If installation occurred, include `installation_occurred=true` and `installation_record_targets`; missing installation records are blocking gaps.
 - Check repository history, existing project docs, official documentation, mature open-source projects, or other strong references before judging related work.
 - Use `research-insight-planner-agent` when planning depends on external facts, current information, prior repository knowledge, or multiple references.

@@ -7,20 +7,22 @@
 ## Sequence
 
 1. Capture the initial instruction and the actual result summary.
-2. Summarize the completed work in plain language.
-3. Check prior internal work, repository examples, official docs, mature open-source projects, or other strong references before evaluation.
-4. Validate any reused knowledge-base content with [_ops/workflows/65-validate-knowledge-reference.md](65-validate-knowledge-reference.md).
-5. Capture reusable internet research or external references when useful.
-6. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when the final output contains factual claims.
-7. List changed files, verification results, references checked, grounding checks, source provenance targets, plan evidence targets, web search record targets, user request summary targets, requirements targets, spec targets, skill targets and validation targets when skill work occurred, request trace targets, work summary targets, context archive targets when archiving occurred, and installation record targets when installation occurred.
-8. If a plan guided the work, link its `_history/plans/YYYY/` file.
-9. Confirm the user-readable summary exists under `_history/work-summaries/YYYY/`.
-10. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
-11. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
-12. Complete the follow-up action.
-13. Evaluate again.
-14. Save the final evaluation report under `_history/evaluations/YYYY/`.
-15. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
+2. Capture the selected `work_mode`; if missing, default to `standard`.
+3. Read `agent-platform/configs/workflows/work-mode-registry.json` to determine which targets are blocking.
+4. Summarize the completed work in plain language.
+5. Check prior internal work, repository examples, official docs, mature open-source projects, or other strong references before evaluation.
+6. Validate any reused knowledge-base content with [_ops/workflows/65-validate-knowledge-reference.md](65-validate-knowledge-reference.md).
+7. Capture reusable internet research or external references when useful.
+8. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when the final output contains factual claims.
+9. List changed files, verification results, references checked, grounding checks, source provenance targets, plan evidence targets, web search record targets, user request summary targets, requirements targets, spec targets, skill targets and validation targets when skill work occurred, request trace targets, work summary targets, deferred improvement targets, context archive targets when archiving occurred, and installation record targets when installation occurred.
+10. If a plan guided the work, link its `_history/plans/YYYY/` file.
+11. Confirm the user-readable summary exists under `_history/work-summaries/YYYY/` when the mode requires it.
+12. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
+13. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
+14. Complete the follow-up action.
+15. Evaluate again.
+16. Save the final evaluation report under `_history/evaluations/YYYY/`.
+17. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
 
 ## Python Command
 
@@ -38,28 +40,22 @@ Reference research is part of evaluation. If no useful reference exists, record 
 
 Factual grounding is part of evaluation. If the final output contains factual claims, record the `hallucination-guard-agent` result in `grounding_checks`.
 
-The evaluator input must include `web_search_record_targets` for meaningful work. Missing public search records are blocking gaps.
+The evaluator input must include `work_mode`. Missing target fields are blocking according to `agent-platform/configs/workflows/work-mode-registry.json`.
 
-The evaluator input must include `user_request_summary_targets` for meaningful work. Missing request summaries are blocking gaps.
+In `quick` mode, full-loop target gaps are non-blocking improvements unless the user or another rule makes them mandatory.
 
-The evaluator input must include `requirements_targets` for meaningful work. Missing requirements baseline, change, or review targets are blocking gaps.
+In `ship_first` mode, `references_checked` and `web_search_record_targets` are blocking. If `improvement_ideas` are present, `deferred_improvement_targets` is also blocking.
 
-The evaluator input must include `spec_targets` for meaningful work. Missing spec-driven artifacts are blocking gaps.
+In `research` mode, `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, and `web_search_record_targets` are blocking.
 
-The evaluator input must include `source_provenance_targets` for meaningful work. Missing provenance records for material values, claims, assumptions, review signals, source data, or config inputs are blocking gaps.
-
-The evaluator input must include `plan_evidence_targets` for meaningful work. Missing records that connect executed plan steps to checked evidence are blocking gaps.
+In `standard` and `governance` modes, web search records, user request summaries, requirements targets, spec targets, source provenance, plan evidence, request traces, and work summaries are blocking.
 
 When skill work occurred, the evaluator input must include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`. Missing skill source or validation targets are blocking gaps.
-
-The evaluator input must include `request_trace_targets` for meaningful work. Missing request-to-outcome traces are blocking gaps.
 
 If context archiving occurred, the evaluator input must include `context_archiving_occurred=true` and `context_archive_targets`. Missing archive targets are blocking gaps.
 
 The final evaluation must not exist only in chat output. Save it as a Markdown file before commit.
 
 When a saved plan guided the work, the final evaluation should link the relevant `_history/plans/YYYY/` plan history file.
-
-The evaluator input must include `work_summary_targets` for meaningful work. Missing user-readable summary targets are blocking gaps.
 
 If installation occurred, the evaluator input must include `installation_occurred=true` and `installation_record_targets`. Missing installation records are blocking gaps.

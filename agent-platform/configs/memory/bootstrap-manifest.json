@@ -28,6 +28,7 @@
       "The architecture-first coding layer or coding architecture comparison contract changes.",
       "The request-to-outcome trace layer or traceability contract changes.",
       "The web search record layer or prompt-level search contract changes.",
+      "The work mode selection or deferred improvement policy changes.",
       "The installation registry or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
@@ -53,6 +54,18 @@
       "used_for": [
         "durable user preferences",
         "rules that future sessions must not forget"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "work_mode_registry",
+      "title": "Work Mode Registry",
+      "path": "agent-platform/configs/workflows/work-mode-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "mode-based operating loop selection",
+        "evaluator target strictness by work type",
+        "deferred improvement backlog rules"
       ],
       "last_checked": "2026-05-31"
     },
@@ -417,6 +430,17 @@
       ]
     },
     {
+      "id": "work_mode_registry_must_stay_discoverable",
+      "rule": "The work mode registry must remain a hot memory anchor so future sessions can select the lightest sufficient operating loop before planning local work.",
+      "reason": "The user explicitly asked to avoid running every loop every time and to support work-type-specific flows plus deferred improvements.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "work-evaluator-agent"
+      ]
+    },
+    {
       "id": "install_registry_must_stay_discoverable",
       "rule": "The installation registry must remain a warm memory anchor because installs change durable dependency or environment state.",
       "reason": "Installation records are more critical than ordinary summaries because missing dependency history can break reproducibility and rollback.",
@@ -468,7 +492,7 @@
       "required": true
     }
   ],
-  "hot_context_limit": 13,
+  "hot_context_limit": 14,
   "default_command": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
   "startup_sequence": [
     "repo_instructions",
@@ -478,6 +502,7 @@
     "start_workflow",
     "web_first_workflow",
     "memory_bootstrap_workflow",
+    "work_mode_registry",
     "coordination_board",
     "project_registry",
     "platform_readme",
@@ -505,6 +530,7 @@
     "start_workflow",
     "web_first_workflow",
     "memory_bootstrap_workflow",
+    "work_mode_registry",
     "coordination_board",
     "project_registry",
     "platform_readme",
@@ -580,6 +606,14 @@
       "purpose": "Required startup memory workflow for loading durable repository settings.",
       "required": true,
       "load_order": 7
+    },
+    {
+      "id": "work_mode_registry",
+      "path": "agent-platform/configs/workflows/work-mode-registry.json",
+      "tier": "hot",
+      "purpose": "Selectable work modes and evaluator target policy for avoiding unnecessary full-loop overhead.",
+      "required": true,
+      "load_order": 8
     },
     {
       "id": "coordination_board",

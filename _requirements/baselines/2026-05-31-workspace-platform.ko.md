@@ -35,6 +35,7 @@
 | REQ-WS-017 | 중요한 원천값, 설정값, 주장, 리뷰 신호, 가정, 계획 제약은 출처와 접근일을 추적하고, 모든 중요한 계획 단계는 근거와 연결해야 한다. | UR-2026-05-31-041 | must | baseline | agent-platform/_history | `plan-from-research`, `complete-coding-research`, `evaluate-work` 결과 확인 | `source_value_provenance`, `plan_evidence`, `source_provenance_targets`, `plan_evidence_targets` |
 | REQ-WS-018 | 웹 검색은 사람이 실제로 검색하듯 세계 기술 블로그, 한국 빅테크 기술 블로그, 인도 기술 소스, 논문 검색 원천, 한국 로컬 리뷰 채널을 폭넓게 사용해야 한다. | UR-2026-05-31-042, 043 | must | baseline | agent-platform/_research | source discovery registry와 source list 확인 | `agent-platform/configs/research/source-discovery-registry.json`, `_research/source-lists/enterprise-high-quality-sites.ko.md` |
 | REQ-WS-019 | 한국 사용자 리뷰나 로컬 판단이 필요한 조사에서는 Naver Map, Kakao Map, Naver Blog/Search, 공식 페이지를 우선 확인하고 후보 페이지 품질을 평가해야 한다. | UR-2026-05-31-044 | must | baseline | `_tools`/`_research` | Korean local review tool tests와 source list 확인 | `_tools/korean-local-review/`, `_research/source-lists/korean-local-review-sources.ko.md` |
+| REQ-WS-020 | 작업 성격에 따라 `quick`, `standard`, `ship_first`, `research`, `governance` 모드를 선택하고, 모드별로 필수 산출물과 지연 개선을 다르게 관리해야 한다. | UR-2026-05-31-045 | must | baseline | `_ops`/`agent-platform` | work mode registry, evaluator tests, workflow review 확인 | `agent-platform/configs/workflows/work-mode-registry.json`, `_ops/workflows/02-select-work-mode.md`, `_ops/backlog/deferred-improvements.ko.md` |
 
 ## 변경 관리
 
@@ -46,6 +47,8 @@
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.
 - 원천값과 계획 근거는 `source_value_provenance`, `plan_evidence`, `source_provenance_targets`, `plan_evidence_targets`로 추적한다.
 - 넓은 검색 원천은 `source-discovery-registry.json`을 확인하고, 한국 로컬 리뷰는 `_tools/korean-local-review/`로 점수화한다.
+- 작업 시작 후 `work-mode-registry.json`으로 작업 모드를 선택하고, 평가 입력의 필수 target은 선택한 모드를 따른다.
+- `ship_first`에서 뒤로 뺀 비차단 개선은 `_ops/backlog/deferred-improvements.ko.md` 또는 프로젝트별 동등 백로그에 남긴다.
 - 스킬 작업이 있으면 `_skills/` 원본, 검증 결과, 개선 아이디어를 연결한다.
 - 구현 후에는 요청-결과 추적표와 요구사항의 관련 산출물을 갱신한다.
 

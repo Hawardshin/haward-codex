@@ -12,11 +12,13 @@ Use when: 새 작업을 시작하고 현재 저장소 맥락을 빠르게 잡아
 Run web search for the user instruction before planning, repository exploration, or file edits.
 Check git status.
 Run check-memory-bootstrap using agent-platform/configs/memory/bootstrap-manifest.json and read the returned hot_context_paths.
+Read agent-platform/configs/workflows/work-mode-registry.json and select work_mode: quick, standard, ship_first, research, or governance.
 Read _ops/index.md and the relevant project README first.
 Decide which project or operations folder owns the request.
 If ownership is unclear, run the project boundary prompt before editing.
 Persist durable user instructions in _docs/persistent-instructions.md and related operating docs.
-Define the smallest useful scope, read only the necessary files, then implement.
+Define the smallest useful scope for the selected work_mode, read only the necessary files, then implement.
+If ship_first defers non-blocking improvement work, record the deferred target before close-out.
 ```
 
 ## Checklist
@@ -24,6 +26,8 @@ Define the smallest useful scope, read only the necessary files, then implement.
 - `git status --short --branch`
 - `_ops/workflows/05-web-first-intake.md`
 - `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json`
+- `_ops/workflows/02-select-work-mode.md`
+- `agent-platform/configs/workflows/work-mode-registry.json`
 - `_ops/index.md`
 - 관련 프로젝트 `README.md`
 - `_docs/persistent-instructions.md`

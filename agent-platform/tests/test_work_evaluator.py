@@ -419,6 +419,115 @@ class WorkEvaluatorTests(unittest.TestCase):
             report["gaps"],
         )
 
+    def test_quick_mode_relaxes_governance_targets(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Fix a typo.",
+                result_summary="Fixed one typo.",
+                work_mode="quick",
+                changed_files=("_docs/example.ko.md",),
+                verification=("manual review: OK",),
+            )
+        )
+
+        self.assertEqual(report["status"], "ready_to_close")
+        self.assertFalse(report["requires_rework"])
+        self.assertEqual(report["work_mode"], "quick")
+        self.assertEqual(report["gaps"], [])
+        self.assertIn(
+            "requirements_targets omitted under quick mode; add or defer it if the work becomes durable.",
+            report["improvements"],
+        )
+
+    def test_ship_first_requires_deferred_improvement_targets_when_improvements_exist(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Patch the broken dashboard first.",
+                result_summary="Patched the dashboard rendering error.",
+                work_mode="ship_first",
+                changed_files=("_ops/artifacts/ops-dashboard.html",),
+                verification=("browser smoke test: OK",),
+                references_checked=("GitHub Flow",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-dashboard.ko.md",),
+                improvement_ideas=("Backfill the durable spec after the emergency fix.",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Ship-first mode has improvement ideas but deferred_improvement_targets is missing.",
+            report["gaps"],
+        )
+
+    def test_ship_first_ready_when_deferred_improvement_targets_present(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Patch the broken dashboard first.",
+                result_summary="Patched the dashboard rendering error.",
+                work_mode="ship_first",
+                changed_files=("_ops/artifacts/ops-dashboard.html",),
+                verification=("browser smoke test: OK",),
+                references_checked=("GitHub Flow",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-dashboard.ko.md",),
+                deferred_improvement_targets=("_ops/backlog/deferred-improvements.ko.md",),
+                improvement_ideas=("Backfill the durable spec after the emergency fix.",),
+            )
+        )
+
+        self.assertFalse(report["requires_rework"])
+
+    def test_research_mode_requires_provenance_and_plan_evidence(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Research better work modes.",
+                result_summary="Captured source notes.",
+                work_mode="research",
+                changed_files=("_research/topics/agent-operations/work-modes.ko.md",),
+                verification=("manual source review: OK",),
+                references_checked=("Google Engineering Practices",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-work-modes.ko.md",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Source provenance target is missing. Record where material values, source data, assumptions, claims, or configuration inputs came from.",
+            report["gaps"],
+        )
+        self.assertIn(
+            "Plan evidence target is missing. Record the checked evidence that supports the executed plan.",
+            report["gaps"],
+        )
+        self.assertNotIn(
+            "Requirements target is missing. Add or update requirements under _requirements/ or the owning project's docs/requirements/.",
+            report["gaps"],
+        )
+
+    def test_unknown_work_mode_requires_rework(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Use a strange mode.",
+                result_summary="Mode was rejected.",
+                work_mode="experimental",
+                changed_files=("_ops/workflows/00-start-here.md",),
+                verification=("manual review: OK",),
+                references_checked=("_ops/workflows/00-start-here.md",),
+                **complete_evidence_targets(),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-mode.ko.md",),
+                user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
+                requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-work-mode-routing/spec.ko.md",),
+                request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Unknown work_mode 'experimental'. Use one of: governance, quick, research, ship_first, standard.",
+            report["gaps"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

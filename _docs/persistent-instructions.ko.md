@@ -33,6 +33,9 @@
 - 검색 판단 과정은 검색어, 확인한 출처, 제외한 약한 출처, 계획에 반영한 인사이트, 남은 불확실성 형태의 공개 판단 요약으로 텍스트에 남긴다. 내부 추론 원문은 저장하지 않는다.
 - 웹 검색이 무관하거나 불가능하면 그 사실을 기록하고 로컬 검증을 강화해 진행한다.
 - 웹 검색 후 로컬 계획 전에 `memory-bootstrap-agent`로 필수 메모리 anchor를 확인하고 hot context를 읽는다.
+- 웹 검색과 메모리 부트스트랩 후에는 `agent-platform/configs/workflows/work-mode-registry.json`에서 `quick`, `standard`, `ship_first`, `research`, `governance` 중 하나의 `work_mode`를 선택한다.
+- 위험도와 지속성에 맞는 가장 가벼운 작업 모드를 사용하고, 선택한 모드가 비차단으로 둔 요구사항, 스펙, 요청 추적, 전체 종료 target을 매번 강제로 만들지 않는다.
+- `ship_first` 모드에서 비차단 개선을 뒤로 미루면 `_ops/backlog/deferred-improvements.ko.md`나 해당 프로젝트의 동등 백로그에 기록하고 평가 입력에 `deferred_improvement_targets`를 포함한다.
 - durable rule, 출처 설정, 프롬프트, 워크플로, 프로젝트 경계, 평가 루프가 바뀌면 `agent-platform/configs/memory/bootstrap-manifest.json`도 갱신한다.
 - 조사나 계획 작업은 공식 문서, 논문, 오픈소스 repo, 외국 기술 블로그, 조사 아티클, 커뮤니티/소셜 신호, 반대 사례를 폭넓게 수집한다.
 - 대기업 엔지니어링 블로그, 공식 연구소, architecture center, 고신뢰 독립 자료 목록은 `agent-platform/configs/research/enterprise-source-registry.json`과 `_research/source-lists/`에서 별도로 관리한다.
@@ -66,13 +69,9 @@
 - 반복 워크플로는 필요할 때 템플릿, 도구, 스킬, 프롬프트, 워크플로로 승격한다.
 - 탐색 구조가 바뀌면 저장소 맵과 프롬프트 맵을 갱신한다.
 - `work-evaluator-agent`를 기본 종료 평가 에이전트로 사용한다.
-- 의미 있는 작업의 평가 입력에는 `user_request_summary_targets`를 포함한다.
-- 의미 있는 작업의 평가 입력에는 `requirements_targets`를 포함한다.
-- 의미 있는 작업의 평가 입력에는 `spec_targets`를 포함한다.
+- 작업 평가 입력에는 `work_mode`를 포함한다.
+- `user_request_summary_targets`, `requirements_targets`, `spec_targets`, `request_trace_targets`, `work_summary_targets`, `source_provenance_targets`, `plan_evidence_targets`는 선택한 작업 모드가 요구할 때 포함한다.
 - 스킬 작업이 있었다면 평가 입력에는 `skill_work_occurred=true`, `skill_targets`, `skill_validation_targets`를 포함한다.
-- 의미 있는 작업의 평가 입력에는 `request_trace_targets`를 포함한다.
-- 의미 있는 작업의 평가 입력에는 `work_summary_targets`를 포함한다.
-- 의미 있는 작업의 평가 입력에는 `source_provenance_targets`와 `plan_evidence_targets`를 포함한다.
 - 에이전트 구현, 오케스트레이션, 백엔드 자동화, 평가, 재사용 로컬 도구는 Python을 우선한다.
 - 작업에 맞는 성숙하고 유지보수되는 오픈소스 도구와 라이브러리를 우선 검토한다.
 - 성숙한 오픈소스 도구나 라이브러리가 작업에 맞으면 설치를 피하지 말고 프로젝트/도구 범위에 설치해 사용할 수 있다.

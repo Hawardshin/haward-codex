@@ -12,6 +12,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | --- | --- |
 | 모든 새 지시를 처리하기 전에 웹 검색을 먼저 한다 | [05-web-first-intake.md](05-web-first-intake.md) |
 | 새 세션에서 저장소 규칙과 설정을 잊지 않도록 메모리 anchor를 로드한다 | [01-memory-bootstrap.md](01-memory-bootstrap.md) |
+| 작업 성격에 맞게 전체 루프 강도를 고른다 | [02-select-work-mode.md](02-select-work-mode.md) |
 | 새 작업을 시작한다 | [10-start-work.md](10-start-work.md) |
 | 새 프로젝트를 만든다 | [20-create-project.md](20-create-project.md) |
 | 작업이나 관심사의 프로젝트 소유 경계를 정한다 | [25-scope-project-boundary.md](25-scope-project-boundary.md) |
@@ -39,9 +40,10 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 Classify the current request using the repository's persistent rules and _ops/index.md.
 Run web-first intake before planning, repository exploration, or file edits.
 Run memory-bootstrap-agent after web-first intake and before local planning.
+Select work_mode from agent-platform/configs/workflows/work-mode-registry.json before deciding which history, requirements, spec, and evaluation targets are blocking.
 Select the relevant prompt and workflow.
-Derive requirement candidates from the user's request, update or review the relevant requirements baseline before implementation, and include requirements_targets in close-out evaluation.
-Create or update spec-driven artifacts before meaningful implementation and include spec_targets in close-out evaluation.
+Derive requirement candidates from the user's request, update or review the relevant requirements baseline before implementation when the selected mode requires it or durable behavior changes, and include requirements_targets when blocking for that mode.
+Create or update spec-driven artifacts before meaningful implementation when the selected mode requires it, and include spec_targets when blocking for that mode.
 If custom skill work occurred, run skill-lifecycle-agent, validate the skill, record improvement ideas, and include skill_targets plus skill_validation_targets in close-out evaluation.
 If the request expresses a durable worldview or operating philosophy, update _philosophy/ and link policy docs to it.
 If the request creates or touches a specific project, decide the owning project folder before editing files.
@@ -50,5 +52,5 @@ If the request needs coding research before implementation, use coding-research-
 If the request installs, upgrades, removes, or globally configures software, create an installation record and update _ops/installations/registry.json.
 If a reusable pattern appears, record it as a documentation, tool, template, skill, prompt, or workflow candidate.
 Ground factual claims with hallucination-guard-agent before publishing final outputs that contain facts.
-After the work, update work summaries, run the evaluator against the initial instruction, then verify history, maps, commit, and push status.
+After the work, update the targets required by the selected mode, run the evaluator against the initial instruction with work_mode, then verify history, maps, commit, and push status.
 ```

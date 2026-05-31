@@ -1,6 +1,7 @@
 {
   "initial_instruction": "User's initial instruction for the completed task.",
   "result_summary": "What was changed or produced.",
+  "work_mode": "standard",
   "changed_files": [
     "path/to/file"
   ],
@@ -53,6 +54,9 @@
   "installation_occurred": false,
   "installation_record_targets": [
     "_history/installations/YYYY/YYYY-MM-DD-package-name.ko.md"
+  ],
+  "deferred_improvement_targets": [
+    "_ops/backlog/deferred-improvements.ko.md"
   ],
   "known_gaps": [],
   "improvement_ideas": []

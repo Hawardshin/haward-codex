@@ -1,0 +1,370 @@
+{
+  "schema_version": "2026-05-31",
+  "name": "work-mode-registry",
+  "purpose": "Defines selectable work modes so the workspace can avoid running the full governance loop for every task while preserving stronger review for durable, risky, or research-heavy work.",
+  "reader_guide": {
+    "summary": "Choose a work mode after web-first intake and memory bootstrap. The selected mode controls which artifacts are blocking before close-out and which improvements may be deferred.",
+    "how_to_read": [
+      "Read default_mode first to know the fallback when the user does not choose a mode.",
+      "Read modes to pick the lightest mode that still fits the work risk.",
+      "Read evaluator_policy to understand which target fields are blocking in each mode.",
+      "Read deferred_improvement_rules before using ship_first or postponing improvement work."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-05-31",
+    "update_triggers": [
+      "The user asks to change the work loop, close-out strictness, or improvement timing.",
+      "A repeated task feels too slow because it runs unnecessary requirements, specs, or history steps.",
+      "The evaluator target policy changes.",
+      "A new workflow type needs a different risk tier."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "google_engineering_practices",
+      "title": "Google Engineering Practices",
+      "url": "https://google.github.io/eng-practices/",
+      "source_type": "official",
+      "used_for": [
+        "small change and review discipline",
+        "keeping review scope proportional"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "github_flow",
+      "title": "GitHub Flow",
+      "url": "https://docs.github.com/en/get-started/using-github/github-flow",
+      "source_type": "official",
+      "used_for": [
+        "lightweight delivery flow",
+        "small branch and fast feedback model"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "atlassian_technical_debt",
+      "title": "Atlassian Technical Debt",
+      "url": "https://www.atlassian.com/agile/software-development/technical-debt",
+      "source_type": "official",
+      "used_for": [
+        "recording and prioritizing deferred improvement work",
+        "treating postponed improvements as managed debt"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "start_workflow",
+      "title": "Start Here Workflow",
+      "path": "_ops/workflows/00-start-here.md",
+      "source_type": "internal",
+      "used_for": [
+        "placing work mode selection in the operating loop"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "work_evaluator",
+      "title": "Work Evaluator Agent",
+      "path": "agent-platform/docs/work-evaluator-agent.md",
+      "source_type": "internal",
+      "used_for": [
+        "mode-specific close-out target policy",
+        "deferred improvement target requirements"
+      ],
+      "last_checked": "2026-05-31"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "web_first_stays_global",
+      "rule": "Every mode still starts with web-first intake unless it is unavailable or irrelevant and that exception is recorded.",
+      "reason": "The user made web-first intake a durable rule; work modes reduce governance overhead, not source grounding.",
+      "applies_to": [
+        "modes",
+        "evaluator_policy"
+      ]
+    },
+    {
+      "id": "lightest_sufficient_mode",
+      "rule": "Use the lightest mode that covers risk, durability, and user intent; do not run governance artifacts only because they exist.",
+      "reason": "The user asked to avoid running every loop for every task.",
+      "applies_to": [
+        "modes",
+        "selection_rules"
+      ]
+    },
+    {
+      "id": "ship_first_defers_non_blocking_improvements",
+      "rule": "In ship_first mode, implementation and verification may happen before requirements/spec backfill, but explicit improvement ideas must point to deferred_improvement_targets.",
+      "reason": "Deferred work should be visible and reviewable instead of forgotten.",
+      "applies_to": [
+        "deferred_improvement_rules",
+        "evaluator_policy"
+      ]
+    },
+    {
+      "id": "governance_keeps_full_loop",
+      "rule": "Use governance mode for durable rules, platform structure, evaluation policy, memory anchors, source registries, and other cross-workspace behavior.",
+      "reason": "High-blast-radius changes need the existing full loop.",
+      "applies_to": [
+        "modes",
+        "evaluator_policy"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "default_mode",
+      "meaning": "Fallback work mode when the user does not explicitly choose one.",
+      "required": true
+    },
+    {
+      "field": "modes",
+      "meaning": "Selectable modes with intent, examples, required artifacts, and deferred artifacts.",
+      "required": true
+    },
+    {
+      "field": "selection_rules",
+      "meaning": "Rules for selecting a mode from user intent and risk.",
+      "required": true
+    },
+    {
+      "field": "evaluator_policy",
+      "meaning": "Mapping between work modes and blocking work-evaluator target fields.",
+      "required": true
+    },
+    {
+      "field": "deferred_improvement_rules",
+      "meaning": "Rules for recording non-blocking improvement work that should happen later.",
+      "required": true
+    }
+  ],
+  "default_mode": "standard",
+  "modes": [
+    {
+      "id": "quick",
+      "label": "Quick",
+      "intent": "Small, low-risk, reversible work where full requirements/spec/history backfill would cost more than the change.",
+      "use_when": [
+        "typo or wording fix",
+        "small local clarification",
+        "read-only answer or tiny doc correction"
+      ],
+      "avoid_when": [
+        "durable repository rule changes",
+        "source code behavior changes with user impact",
+        "external factual recommendations with high stakes"
+      ],
+      "required_before_close": [
+        "initial_instruction",
+        "result_summary",
+        "changed_files_or_no_file_explanation",
+        "verification_or_manual_check"
+      ],
+      "deferred_or_optional": [
+        "requirements_targets",
+        "spec_targets",
+        "request_trace_targets",
+        "work_summary_targets",
+        "source_provenance_targets",
+        "plan_evidence_targets"
+      ]
+    },
+    {
+      "id": "standard",
+      "label": "Standard",
+      "intent": "Default mode for meaningful but not emergency work. Keeps the established close-out loop.",
+      "use_when": [
+        "normal platform or project change",
+        "moderate documentation update",
+        "implementation where requirements/specs are useful"
+      ],
+      "avoid_when": [
+        "tiny reversible fixes",
+        "urgent patch where backfill should happen after verification",
+        "pure research capture with no implementation"
+      ],
+      "required_before_close": [
+        "references_checked",
+        "source_provenance_targets",
+        "plan_evidence_targets",
+        "web_search_record_targets",
+        "user_request_summary_targets",
+        "requirements_targets",
+        "spec_targets",
+        "request_trace_targets",
+        "work_summary_targets"
+      ],
+      "deferred_or_optional": []
+    },
+    {
+      "id": "ship_first",
+      "label": "Ship First",
+      "intent": "Deliver or repair first, then defer non-blocking improvement work into a visible backlog.",
+      "use_when": [
+        "the user wants a fast working result",
+        "a broken artifact blocks use",
+        "requirements/spec backfill would slow a small urgent fix"
+      ],
+      "avoid_when": [
+        "governance, safety, or source registry changes",
+        "unknown risk or unclear acceptance criteria",
+        "work that cannot be verified immediately"
+      ],
+      "required_before_close": [
+        "references_checked",
+        "web_search_record_targets",
+        "verification",
+        "deferred_improvement_targets_when_improvement_ideas_exist"
+      ],
+      "deferred_or_optional": [
+        "requirements_targets",
+        "spec_targets",
+        "request_trace_targets",
+        "work_summary_targets",
+        "source_provenance_targets",
+        "plan_evidence_targets"
+      ]
+    },
+    {
+      "id": "research",
+      "label": "Research",
+      "intent": "Broad source collection, evidence synthesis, or planning where source provenance matters more than implementation artifacts.",
+      "use_when": [
+        "source comparison",
+        "research note creation",
+        "planning from external facts"
+      ],
+      "avoid_when": [
+        "source code implementation is already selected",
+        "durable repository rules are changing",
+        "tiny local-only edits"
+      ],
+      "required_before_close": [
+        "references_checked",
+        "source_provenance_targets",
+        "plan_evidence_targets",
+        "web_search_record_targets"
+      ],
+      "deferred_or_optional": [
+        "requirements_targets",
+        "spec_targets",
+        "request_trace_targets",
+        "work_summary_targets"
+      ]
+    },
+    {
+      "id": "governance",
+      "label": "Governance",
+      "intent": "High-blast-radius changes to durable rules, workflows, evaluators, memory anchors, platform behavior, source registries, or requirements.",
+      "use_when": [
+        "repository operating rules change",
+        "evaluator, memory, requirement, spec, or source registry behavior changes",
+        "new cross-project platform capability is added"
+      ],
+      "avoid_when": [
+        "small local typo fixes",
+        "temporary experiments inside one project"
+      ],
+      "required_before_close": [
+        "references_checked",
+        "source_provenance_targets",
+        "plan_evidence_targets",
+        "web_search_record_targets",
+        "user_request_summary_targets",
+        "requirements_targets",
+        "spec_targets",
+        "request_trace_targets",
+        "work_summary_targets"
+      ],
+      "deferred_or_optional": []
+    }
+  ],
+  "selection_rules": [
+    "If the user explicitly selects a mode, use that mode unless it conflicts with safety or repository rules; record any override.",
+    "If no mode is selected, classify from risk and durability: quick for tiny reversible work, research for evidence synthesis, ship_first for verified urgent delivery, governance for durable platform/rule changes, otherwise standard.",
+    "When uncertain between two modes, choose the stronger mode only for real risk, durability, or cross-project impact.",
+    "Mode selection does not remove the requirement to avoid unsupported factual claims."
+  ],
+  "evaluator_policy": {
+    "quick": {
+      "blocking_target_fields": [],
+      "non_blocking_target_fields": [
+        "references_checked",
+        "source_provenance_targets",
+        "plan_evidence_targets",
+        "web_search_record_targets",
+        "user_request_summary_targets",
+        "requirements_targets",
+        "spec_targets",
+        "request_trace_targets",
+        "work_summary_targets"
+      ]
+    },
+    "standard": {
+      "blocking_target_fields": [
+        "references_checked",
+        "source_provenance_targets",
+        "plan_evidence_targets",
+        "web_search_record_targets",
+        "user_request_summary_targets",
+        "requirements_targets",
+        "spec_targets",
+        "request_trace_targets",
+        "work_summary_targets"
+      ],
+      "non_blocking_target_fields": []
+    },
+    "ship_first": {
+      "blocking_target_fields": [
+        "references_checked",
+        "web_search_record_targets"
+      ],
+      "non_blocking_target_fields": [
+        "source_provenance_targets",
+        "plan_evidence_targets",
+        "user_request_summary_targets",
+        "requirements_targets",
+        "spec_targets",
+        "request_trace_targets",
+        "work_summary_targets"
+      ]
+    },
+    "research": {
+      "blocking_target_fields": [
+        "references_checked",
+        "source_provenance_targets",
+        "plan_evidence_targets",
+        "web_search_record_targets"
+      ],
+      "non_blocking_target_fields": [
+        "user_request_summary_targets",
+        "requirements_targets",
+        "spec_targets",
+        "request_trace_targets",
+        "work_summary_targets"
+      ]
+    },
+    "governance": {
+      "blocking_target_fields": [
+        "references_checked",
+        "source_provenance_targets",
+        "plan_evidence_targets",
+        "web_search_record_targets",
+        "user_request_summary_targets",
+        "requirements_targets",
+        "spec_targets",
+        "request_trace_targets",
+        "work_summary_targets"
+      ],
+      "non_blocking_target_fields": []
+    }
+  },
+  "deferred_improvement_rules": [
+    "Use _ops/backlog/deferred-improvements.ko.md and .en.md for shared deferred improvements.",
+    "Project-specific deferred improvements belong in the owning project's backlog or docs area.",
+    "A deferred improvement must record why it was deferred, owner scope, trigger to revisit, and related artifacts.",
+    "Do not defer known blocking gaps, failed verification, or unsupported factual claims."
+  ]
+}

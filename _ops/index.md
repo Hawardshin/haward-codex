@@ -24,6 +24,7 @@
 | `_tools/` | 반복 작업을 줄이는 로컬 도구 |
 | `agent-platform/` | 개인 에이전트 구축 플랫폼 중심 프로젝트 |
 | `_ops/installations/` | 설치 레지스트리와 설치 감사 규칙 |
+| `_ops/backlog/` | `ship_first`와 빠른 작업에서 미룬 공통 비차단 개선 목록 |
 
 ## Navigation
 
@@ -31,6 +32,8 @@
 - 모든 지시의 첫 웹 검색: [_ops/workflows/05-web-first-intake.md](workflows/05-web-first-intake.md), [_docs/web-first-work-policy.ko.md](../_docs/web-first-work-policy.ko.md)
 - 프롬프트 공통 웹 검색 계약: [_ops/prompts/README.ko.md](prompts/README.ko.md), [_history/web-searches/README.ko.md](../_history/web-searches/README.ko.md)
 - 새 세션의 AI 메모리 부트스트랩: [_ops/workflows/01-memory-bootstrap.md](workflows/01-memory-bootstrap.md), [agent-platform/configs/memory/bootstrap-manifest.json](../agent-platform/configs/memory/bootstrap-manifest.json)
+- 작업 모드와 전체 루프 강도를 고를 때: [_ops/workflows/02-select-work-mode.md](workflows/02-select-work-mode.md), [_ops/prompts/02-select-work-mode.md](prompts/02-select-work-mode.md), [work-mode-registry.json](../agent-platform/configs/workflows/work-mode-registry.json)
+- 지연 개선 백로그를 볼 때: [_ops/backlog/deferred-improvements.ko.md](backlog/deferred-improvements.ko.md)
 - 공유 설정 파일 자기 설명 기준: [_docs/self-documenting-config-policy.ko.md](../_docs/self-documenting-config-policy.ko.md), `agent-platform`의 `check-config-contract`
 - 출처 수집 기준을 볼 때: [_docs/source-collection-policy.ko.md](../_docs/source-collection-policy.ko.md)
 - 핵심 조사 에이전트 프로필을 볼 때: [agent-platform/configs/research/research-agent-profile.json](../agent-platform/configs/research/research-agent-profile.json)
@@ -76,6 +79,8 @@
 - `_history/YYYY/YYYY-MM-DD.md`에 맥락이 남았는가
 - `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`에 빠른 요약이 남았는가
 - `_history/web-searches/YYYY/`에 공개 검색 판단 기록이 남았는가
+- 선택한 `work_mode`가 evaluator input과 계획/요약에 반영됐는가
+- `ship_first`에서 미룬 비차단 개선이 `_ops/backlog/` 또는 프로젝트별 백로그에 남았는가
 - 컨텍스트 아카이빙이 발생했다면 `_history/context-archives/YYYY/`에 재개 패킷이 남았는가
 - 사용자 요청 요약이 `_history/user-requests/YYYY/`에 남았는가
 - 요구사항 기준선, 변경, 검토 기록이 `_requirements/` 또는 해당 프로젝트의 `docs/requirements/`에 남았는가

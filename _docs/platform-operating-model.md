@@ -15,32 +15,33 @@
 2. Run web search first using `_ops/workflows/05-web-first-intake.md`.
 3. Save meaningful public web search reasoning summaries under `_history/web-searches/YYYY/`.
 4. Run `memory-bootstrap-agent` and read required hot anchors from `agent-platform/configs/memory/bootstrap-manifest.json`.
-5. Use `_ops/index.md` and `_ops/prompts/00-router.md` to select the operating path.
-6. Decide whether the work belongs to an existing project or a new root-level project.
-7. Keep project-specific work inside the owning project folder and register root projects under `_ops/projects/`.
-8. Keep foundational philosophy in `_philosophy/` and execution rules in `_docs/` or `_ops/`.
-9. Define or update requirements for meaningful behavior, rule, structure, or capability changes.
-10. Convert those requirements into spec-driven artifacts under `_specs/` or the owning project's `specs/`.
-11. Implement or document the smallest useful change against the active spec.
-12. Prefer Python for agent implementation unless another runtime is clearly better.
-13. Evaluate mature open-source options before building core infrastructure from scratch.
-14. For planning that depends on external facts, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json`.
-15. Treat research as an answer-engine pipeline: query understanding, retrieval, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
-16. For coding research, use `coding-research-agent` to record reference configs, concrete code references, standard post-research answers, and diverse source types before implementation.
-17. If mature open source is the right fit, install it in the owning project or tool scope and record install command, dependency tracking, installation audit record, security/license review, verification, and rollback.
-18. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
-19. Save important planning processes under `_history/plans/YYYY/`.
-20. Promote repeated work into a template, tool, skill, prompt, or workflow.
-21. For skill work, run the skill lifecycle: source tracking, validation, forward-test scenarios, improvement ideas, and skill evaluation targets.
-22. Record important context in `_history/`.
-23. Refresh `_ops/maps/` when navigational structure changes.
-24. Summarize completed work.
-25. Check prior internal work and strong references relevant to the task.
-26. Capture reusable internet research or external references.
-27. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
-28. Evaluate the completed work against the initial instruction, requirements, and specs.
-29. Rework real gaps and evaluate again.
-30. Commit the coherent change set and push it.
+5. Select `work_mode` from `agent-platform/configs/workflows/work-mode-registry.json`: `quick`, `standard`, `ship_first`, `research`, or `governance`.
+6. Use `_ops/index.md` and `_ops/prompts/00-router.md` to select the operating path required by that mode.
+7. Decide whether the work belongs to an existing project or a new root-level project.
+8. Keep project-specific work inside the owning project folder and register root projects under `_ops/projects/`.
+9. Keep foundational philosophy in `_philosophy/` and execution rules in `_docs/` or `_ops/`.
+10. Define or update requirements for meaningful behavior, rule, structure, or capability changes when the selected mode requires it or the change is durable.
+11. Convert requirements into spec-driven artifacts under `_specs/` or the owning project's `specs/` when the selected mode requires it.
+12. Implement or document the smallest useful change; in `ship_first` mode, implement and verify first, then backfill non-blocking improvements into `_ops/backlog/`.
+13. Prefer Python for agent implementation unless another runtime is clearly better.
+14. Evaluate mature open-source options before building core infrastructure from scratch.
+15. For planning that depends on external facts, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json`.
+16. Treat research as an answer-engine pipeline: query understanding, retrieval, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
+17. For coding research, use `coding-research-agent` to record reference configs, concrete code references, standard post-research answers, and diverse source types before implementation.
+18. If mature open source is the right fit, install it in the owning project or tool scope and record install command, dependency tracking, installation audit record, security/license review, verification, and rollback.
+19. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
+20. Save important planning processes under `_history/plans/YYYY/` when required by the selected mode or useful for future continuation.
+21. Promote repeated work into a template, tool, skill, prompt, or workflow.
+22. For skill work, run the skill lifecycle: source tracking, validation, forward-test scenarios, improvement ideas, and skill evaluation targets.
+23. Record important context in `_history/`.
+24. Refresh `_ops/maps/` when navigational structure changes.
+25. Summarize completed work.
+26. Check prior internal work and strong references relevant to the task.
+27. Capture reusable internet research or external references.
+28. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
+29. Evaluate the completed work against the initial instruction using the selected `work_mode`.
+30. Rework blocking gaps and evaluate again; non-blocking improvements can be recorded in the deferred backlog.
+31. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -69,6 +70,7 @@ Promote work only when it will reduce future effort.
 | Same open-source installation decision repeated | Open-source installation policy and candidate record |
 | Same need to implement from explicit acceptance criteria | Spec-driven artifact set under `_specs/` or project `specs/` |
 | Same need to create or improve Codex skills | Skill lifecycle policy, skill source, and `validate-skill` |
+| Same need to avoid full-loop overhead | Work mode registry, mode-selection workflow, and deferred improvement backlog |
 
 ## Context Compression
 
