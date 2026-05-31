@@ -7,4 +7,4 @@
 - [x] `T005` template, research profile, 문서, prompt, workflow를 갱신한다.
 - [x] `T006` memory bootstrap, coordination board, work summary, request trace를 갱신한다.
 - [x] `T007` 검증과 종료 평가를 실행하고 결과를 반영한다.
-- [ ] `T008` 커밋하고 `origin/main`에 push한다.
+- [x] `T008` 커밋하고 `origin/main`에 push한다. (`d564392`)

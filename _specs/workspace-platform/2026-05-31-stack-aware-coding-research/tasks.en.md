@@ -7,4 +7,4 @@
 - [x] `T005` Update template, research profile, docs, prompt, and workflow.
 - [x] `T006` Update memory bootstrap, coordination board, work summary, and request trace.
 - [x] `T007` Run validation and close-out evaluation.
-- [ ] `T008` Commit and push to `origin/main`.
+- [x] `T008` Commit and push to `origin/main`. (`d564392`)
