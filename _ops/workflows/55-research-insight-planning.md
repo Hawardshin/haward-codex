@@ -24,6 +24,8 @@
 16. If the result is `more_research_required`, resolve the listed gaps before execution.
 17. If the plan changes during execution, update the same plan history file with the change and reason.
 
+For coding-specific research, route through [_ops/workflows/56-coding-research.md](56-coding-research.md) after the general search-to-insight step so the standard post-research questions are answered before implementation.
+
 ## Rule
 
 Search is not the final answer. Search is raw input for insight extraction, planning, validation, and future documentation.

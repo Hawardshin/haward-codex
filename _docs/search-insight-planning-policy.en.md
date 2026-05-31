@@ -16,6 +16,7 @@ The philosophical basis lives in [_philosophy/agent-operating-philosophy.en.md](
 - Save reusable external references under `_research/`.
 - Save the planning process under `_history/plans/YYYY/`.
 - Include both execution steps and validation steps in the plan.
+- For coding research, use `coding-research-agent` after general insight planning to answer implementation close-out questions before coding.
 
 ## Search Channels
 
@@ -46,6 +47,7 @@ Run from `agent-platform/`.
 
 ```bash
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
+PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/planning/coding-research-template.json
 ```
 
 ## Plan History

@@ -44,6 +44,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption or discovery signals, not standalone factual proof.
 - For important planning, do not rely only on the model's internal guess; use `research-insight-planner-agent` to combine web search with another search channel, derive insights, and plan validation.
 - When using `research-insight-planner-agent`, set `plan_history_targets` and keep the plan process file updated if the plan changes.
+- For coding/API/library/architecture/performance/debugging/security/migration research, use `coding-research-agent` before implementation and answer all standard post-research questions.
 - Before publishing final outputs with factual claims, run or simulate `hallucination-guard-agent` and resolve `grounding_required` gaps.
 - Do not present unsupported or unchecked claims as facts; verify them, remove them, or explicitly caveat uncertainty.
 - Keep foundational operating philosophy under `_philosophy/`; keep executable rules and workflows under `_docs/` and `_ops/`.
@@ -92,6 +93,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Include a completed-work summary and references checked in the evaluation input.
 - Check repository history, existing project docs, official documentation, mature open-source projects, or other strong references before judging related work.
 - Use `research-insight-planner-agent` when planning depends on external facts, current information, prior repository knowledge, or multiple references.
+- Use `coding-research-agent` when coding work needs investigation before implementation, especially for APIs, dependencies, architecture, bug root cause, performance, security, migrations, tests, or implementation patterns.
 - Link relevant `_history/plans/YYYY/` files from evaluation reports when a saved plan guided the work.
 - When internet research produces reusable findings, create or update research notes and link them from related docs or evaluation reports.
 - Use `knowledge-skeptic-agent` when relying on `_research`, `_docs`, `_history`, or previous project docs for important decisions.

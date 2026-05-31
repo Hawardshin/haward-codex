@@ -8,6 +8,7 @@
 | 에이전트 계획 | [웹 우선 작업 정책](topics/agent-planning/2026-05-31-web-first-work-policy.ko.md) |
 | 에이전트 계획 | [출처 수집 정책](topics/agent-planning/2026-05-31-source-collection-policy.ko.md) |
 | 에이전트 계획 | [출처 수집 도구](topics/agent-planning/2026-05-31-source-collector-tool.ko.md) |
+| 에이전트 계획 | [코딩 조사 에이전트](topics/agent-planning/2026-05-31-coding-research-agent.ko.md) |
 | 에이전트 신뢰성 | [할루시네이션 방지 운영 레퍼런스](topics/agent-reliability/2026-05-31-hallucination-prevention.ko.md) |
 
 ## 갱신 규칙

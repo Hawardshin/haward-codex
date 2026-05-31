@@ -1,0 +1,16 @@
+{
+  "name": "coding-research-agent",
+  "description": "Performs coding-focused research across web, docs, repositories, papers, package registries, and code before implementation.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "agent-platform:complete-coding-research",
+    "_tools/source-collector"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "before API, library, architecture, bug root cause, performance, security, migration, testing, or implementation-pattern research becomes code work",
+    "input_schema": "agent-platform/configs/planning/coding-research-template.json",
+    "policy": "Run web-first intake, collect authoritative coding references, validate internal knowledge, answer standard post-research questions, save plan history, then implement only when ready_to_implement."
+  }
+}

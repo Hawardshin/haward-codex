@@ -44,6 +44,8 @@
 
 반복적으로 많은 출처를 수집하거나 보고서로 정리해야 하면 `_tools/source-collector/`를 사용한다.
 
+코딩 조사는 조사 완료 전에 `coding-research-agent`로 출처, 선택지, 추천안, 위험, 검증 계획, 표준 종료 질문을 함께 확인한다.
+
 ## 평가 기준
 
 - 권위: 저자와 발행 주체가 신뢰할 만한가?
@@ -80,4 +82,5 @@ python3 _tools/source-collector/src/source_collector.py check /tmp/source-bundle
 - [_tools/source-collector/README.ko.md](../_tools/source-collector/README.ko.md)
 - [_ops/workflows/05-web-first-intake.md](../_ops/workflows/05-web-first-intake.md)
 - [_ops/workflows/55-research-insight-planning.md](../_ops/workflows/55-research-insight-planning.md)
+- [_ops/workflows/56-coding-research.md](../_ops/workflows/56-coding-research.md)
 - [_research/topics/agent-planning/2026-05-31-source-collection-policy.ko.md](../_research/topics/agent-planning/2026-05-31-source-collection-policy.ko.md)

@@ -11,6 +11,7 @@ from agent_platform.evaluation.hallucination_guard import HallucinationGuardInpu
 from agent_platform.evaluation.knowledge_skeptic import KnowledgeValidationInput, validate_knowledge_reference
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidate
+from agent_platform.planning.coding_research import CodingResearchInput, complete_coding_research
 from agent_platform.planning.research_insight_planner import ResearchInsightPlanInput, create_research_insight_plan
 
 
@@ -38,6 +39,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     plan_from_research = subparsers.add_parser("plan-from-research", help="Check whether search-backed insights are ready for planning.")
     plan_from_research.add_argument("path", type=Path)
+
+    complete_research = subparsers.add_parser("complete-coding-research", help="Check whether coding research is ready for implementation.")
+    complete_research.add_argument("path", type=Path)
 
     return parser
 
@@ -84,6 +88,12 @@ def main(argv: list[str] | None = None) -> int:
         with args.path.open("r", encoding="utf-8") as file:
             plan_input = ResearchInsightPlanInput.from_dict(json.load(file))
         print(json.dumps(create_research_insight_plan(plan_input), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "complete-coding-research":
+        with args.path.open("r", encoding="utf-8") as file:
+            research_input = CodingResearchInput.from_dict(json.load(file))
+        print(json.dumps(complete_coding_research(research_input), indent=2, ensure_ascii=False))
         return 0
 
     raise ValueError(f"Unknown command: {args.command}")

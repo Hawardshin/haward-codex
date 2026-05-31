@@ -44,6 +44,8 @@ Simple local tasks do not need the full bundle. Still run web-first intake and r
 
 When collecting or reporting many sources becomes repetitive, use `_tools/source-collector/`.
 
+For coding research, run `coding-research-agent` before completion to check sources, options, recommendation, risks, validation plan, and standard post-research questions.
+
 ## Evaluation Criteria
 
 - Authority: is the author or publisher credible?
@@ -80,4 +82,5 @@ python3 _tools/source-collector/src/source_collector.py check /tmp/source-bundle
 - [_tools/source-collector/README.en.md](../_tools/source-collector/README.en.md)
 - [_ops/workflows/05-web-first-intake.md](../_ops/workflows/05-web-first-intake.md)
 - [_ops/workflows/55-research-insight-planning.md](../_ops/workflows/55-research-insight-planning.md)
+- [_ops/workflows/56-coding-research.md](../_ops/workflows/56-coding-research.md)
 - [_research/topics/agent-planning/2026-05-31-source-collection-policy.en.md](../_research/topics/agent-planning/2026-05-31-source-collection-policy.en.md)

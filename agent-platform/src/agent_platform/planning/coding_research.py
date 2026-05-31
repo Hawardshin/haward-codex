@@ -1,0 +1,210 @@
+"""Validate coding research before turning it into implementation work."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Any
+
+
+JsonMap = dict[str, Any]
+
+ALLOWED_RESEARCH_TYPES = {
+    "api_docs",
+    "architecture",
+    "bug_root_cause",
+    "implementation_pattern",
+    "library_selection",
+    "migration",
+    "open_source",
+    "performance",
+    "security",
+    "testing",
+}
+
+REQUIRED_POST_RESEARCH_QUESTIONS = {
+    "what_was_verified": "What exactly was verified?",
+    "best_option": "What is the best option now?",
+    "why_this_option": "Why is this option better than the alternatives?",
+    "alternatives_rejected": "Which alternatives were rejected, and why?",
+    "implementation_impact": "What files, modules, APIs, or workflows will change?",
+    "risks_and_unknowns": "What remains risky, unknown, stale, or assumption-dependent?",
+    "validation_plan": "How will the implementation be validated?",
+    "reusable_knowledge": "What should be captured for future work?",
+    "next_action": "What is the next concrete action?",
+}
+
+
+@dataclass(frozen=True)
+class CodingResearchInput:
+    """Structured input for checking whether coding research is complete."""
+
+    research_goal: str
+    coding_context: str
+    research_types: tuple[str, ...] = ()
+    search_channels: tuple[str, ...] = ()
+    sources_checked: tuple[str, ...] = ()
+    source_bundle_report: str = ""
+    findings: tuple[str, ...] = ()
+    options: tuple[str, ...] = ()
+    recommendation: str = ""
+    post_research_answers: dict[str, str] | None = None
+    validation_steps: tuple[str, ...] = ()
+    risks_or_unknowns: tuple[str, ...] = ()
+    capture_targets: tuple[str, ...] = ()
+    plan_history_targets: tuple[str, ...] = ()
+    knowledge_validation_status: str = ""
+
+    @classmethod
+    def from_dict(cls, data: JsonMap) -> "CodingResearchInput":
+        return cls(
+            research_goal=_required_string(data, "research_goal"),
+            coding_context=_required_string(data, "coding_context"),
+            research_types=_tuple_of_strings(data.get("research_types", []), "research_types"),
+            search_channels=_tuple_of_strings(data.get("search_channels", []), "search_channels"),
+            sources_checked=_tuple_of_strings(data.get("sources_checked", []), "sources_checked"),
+            source_bundle_report=_optional_string(data.get("source_bundle_report", ""), "source_bundle_report"),
+            findings=_tuple_of_strings(data.get("findings", []), "findings"),
+            options=_tuple_of_strings(data.get("options", []), "options"),
+            recommendation=_optional_string(data.get("recommendation", ""), "recommendation"),
+            post_research_answers=_string_map(data.get("post_research_answers", {}), "post_research_answers"),
+            validation_steps=_tuple_of_strings(data.get("validation_steps", []), "validation_steps"),
+            risks_or_unknowns=_tuple_of_strings(data.get("risks_or_unknowns", []), "risks_or_unknowns"),
+            capture_targets=_tuple_of_strings(data.get("capture_targets", []), "capture_targets"),
+            plan_history_targets=_tuple_of_strings(data.get("plan_history_targets", []), "plan_history_targets"),
+            knowledge_validation_status=_optional_string(data.get("knowledge_validation_status", ""), "knowledge_validation_status"),
+        )
+
+
+def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
+    """Return whether coding research is ready to become implementation work."""
+
+    gaps = []
+    warnings = []
+    answers = research_input.post_research_answers or {}
+
+    if not research_input.research_goal.strip():
+        gaps.append("Research goal is missing.")
+    if not research_input.coding_context.strip():
+        gaps.append("Coding context is missing.")
+    if not research_input.research_types:
+        gaps.append("Research types are missing.")
+
+    unknown_types = sorted(set(research_input.research_types) - ALLOWED_RESEARCH_TYPES)
+    if unknown_types:
+        gaps.append(f"Unknown research types: {', '.join(unknown_types)}.")
+
+    if len(research_input.search_channels) < 2:
+        gaps.append("Use at least two search channels, such as web search plus official docs, repository search, code search, papers, or package registry search.")
+    if research_input.search_channels and not _has_web_channel(research_input.search_channels):
+        gaps.append("Web search channel is missing.")
+    if not research_input.sources_checked:
+        gaps.append("Sources checked are missing.")
+    if not research_input.findings:
+        gaps.append("Findings are missing.")
+    if not research_input.options:
+        gaps.append("Options considered are missing.")
+    if not research_input.recommendation.strip():
+        gaps.append("Recommendation is missing.")
+
+    missing_questions = sorted(set(REQUIRED_POST_RESEARCH_QUESTIONS) - {key for key, value in answers.items() if value.strip()})
+    for question_id in missing_questions:
+        gaps.append(f"Post-research answer is missing: {question_id}.")
+
+    if not research_input.validation_steps:
+        gaps.append("Validation steps are missing.")
+    if not research_input.risks_or_unknowns:
+        gaps.append("Risks or unknowns are missing.")
+    if not research_input.plan_history_targets:
+        gaps.append("Plan history target is missing.")
+
+    if _uses_internal_knowledge(research_input.sources_checked) and research_input.knowledge_validation_status != "ready_to_reference":
+        gaps.append("Internal knowledge-base sources require knowledge_validation_status=ready_to_reference.")
+
+    if len(research_input.sources_checked) >= 8 and not research_input.source_bundle_report.strip():
+        warnings.append("Large source bundle has no source_bundle_report; consider _tools/source-collector for repeatable scoring.")
+    if not research_input.capture_targets:
+        warnings.append("Capture targets are missing; record where reusable coding research should be stored.")
+    if any(source.startswith("http") for source in research_input.sources_checked) and not _has_official_or_primary_signal(research_input.sources_checked):
+        warnings.append("External sources include no obvious official, standards, paper, or repository source.")
+
+    status = "more_research_required" if gaps else "ready_to_implement"
+
+    return {
+        "status": status,
+        "requires_more_research": bool(gaps),
+        "principle": "Coding research must be search-backed, source-aware, skeptical, and closed with reusable answers before implementation.",
+        "allowed_research_types": sorted(ALLOWED_RESEARCH_TYPES),
+        "required_post_research_questions": REQUIRED_POST_RESEARCH_QUESTIONS,
+        "checks": {
+            "research_types_count": len(research_input.research_types),
+            "search_channels_count": len(research_input.search_channels),
+            "sources_checked_count": len(research_input.sources_checked),
+            "findings_count": len(research_input.findings),
+            "options_count": len(research_input.options),
+            "post_research_answers_count": len([value for value in answers.values() if value.strip()]),
+            "validation_steps_count": len(research_input.validation_steps),
+            "risks_or_unknowns_count": len(research_input.risks_or_unknowns),
+            "capture_targets_count": len(research_input.capture_targets),
+            "plan_history_targets_count": len(research_input.plan_history_targets),
+        },
+        "missing_post_research_questions": missing_questions,
+        "gaps": gaps,
+        "warnings": warnings,
+        "follow_up_actions": [f"Resolve gap: {gap}" for gap in gaps],
+    }
+
+
+def _has_web_channel(search_channels: tuple[str, ...]) -> bool:
+    return any("web" in channel.lower() or "internet" in channel.lower() for channel in search_channels)
+
+
+def _uses_internal_knowledge(sources_checked: tuple[str, ...]) -> bool:
+    internal_prefixes = ("_research/", "_docs/", "_history/", "_ops/", "agent-platform/docs/")
+    internal_files = ("AGENTS.md", "README.md")
+    return any(source.startswith(internal_prefixes) or source in internal_files for source in sources_checked)
+
+
+def _has_official_or_primary_signal(sources_checked: tuple[str, ...]) -> bool:
+    primary_markers = (
+        "docs.",
+        "documentation",
+        "github.com",
+        "gitlab.com",
+        "arxiv.org",
+        "doi.org",
+        "ietf.org",
+        "w3.org",
+        "iso.org",
+        "rfc-editor.org",
+        "official",
+    )
+    return any(any(marker in source.lower() for marker in primary_markers) for source in sources_checked)
+
+
+def _required_string(data: JsonMap, field_name: str) -> str:
+    value = data.get(field_name)
+    if not isinstance(value, str):
+        raise TypeError(f"{field_name} must be a string.")
+    return value
+
+
+def _optional_string(value: Any, field_name: str) -> str:
+    if not isinstance(value, str):
+        raise TypeError(f"{field_name} must be a string.")
+    return value
+
+
+def _tuple_of_strings(value: Any, field_name: str) -> tuple[str, ...]:
+    if not isinstance(value, list | tuple):
+        raise TypeError(f"{field_name} must be a list of strings.")
+    if not all(isinstance(item, str) for item in value):
+        raise TypeError(f"{field_name} must contain only strings.")
+    return tuple(value)
+
+
+def _string_map(value: Any, field_name: str) -> dict[str, str]:
+    if not isinstance(value, dict):
+        raise TypeError(f"{field_name} must be an object with string values.")
+    if not all(isinstance(key, str) and isinstance(item, str) for key, item in value.items()):
+        raise TypeError(f"{field_name} must contain only string keys and string values.")
+    return dict(value)

@@ -18,6 +18,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | 진행 중인 에이전트와 병렬 작업을 확인하거나 갱신한다 | [80-coordinate-work.md](80-coordinate-work.md) |
 | 에이전트 운영 철학이나 세계관을 정리한다 | [_philosophy/agent-operating-philosophy.ko.md](../../_philosophy/agent-operating-philosophy.ko.md) |
 | 웹/문서/저장소 검색에서 인사이트를 도출해 계획한다 | [85-research-insight-plan.md](85-research-insight-plan.md) |
+| API, 라이브러리, 버그, 아키텍처, 성능, 보안, 마이그레이션 등 코딩 조사를 완료한다 | [86-coding-research.md](86-coding-research.md) |
 | 인터넷 조사에서 재사용 가치가 있는 내용을 문서화한다 | [90-capture-research.md](90-capture-research.md) |
 | 지식 베이스 내용을 근거로 쓰기 전에 검증한다 | [95-validate-knowledge.md](95-validate-knowledge.md) |
 | 최종 산출물의 사실 주장을 근거로 검증한다 | [96-ground-output.md](96-ground-output.md) |
@@ -30,6 +31,7 @@ Run web-first intake before planning, repository exploration, or file edits.
 Select the relevant prompt and workflow.
 If the request expresses a durable worldview or operating philosophy, update _philosophy/ and link policy docs to it.
 If the request creates or touches a specific project, decide the owning project folder before editing files.
+If the request needs coding research before implementation, use coding-research-agent and answer every post-research question before coding.
 If a reusable pattern appears, record it as a documentation, tool, template, skill, prompt, or workflow candidate.
 Ground factual claims with hallucination-guard-agent before publishing final outputs that contain facts.
 After the work, run the evaluator against the initial instruction, then verify history, maps, commit, and push status.

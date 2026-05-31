@@ -16,6 +16,7 @@
 - 유용한 외부 레퍼런스는 `_research/`에 저장한다.
 - 계획 과정은 `_history/plans/YYYY/`에 저장한다.
 - 계획에는 실행 단계와 검증 단계를 함께 둔다.
+- 코딩 조사는 일반 인사이트 계획 후 `coding-research-agent`로 구현 전 종료 질문까지 확인한다.
 
 ## 검색 채널
 
@@ -46,6 +47,7 @@
 
 ```bash
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
+PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/planning/coding-research-template.json
 ```
 
 ## 계획 히스토리

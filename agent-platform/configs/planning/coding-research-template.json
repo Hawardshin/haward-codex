@@ -1,0 +1,53 @@
+{
+  "research_goal": "Coding question or technical decision to research before implementation.",
+  "coding_context": "Project, files, runtime, API, library, or production behavior involved.",
+  "research_types": [
+    "api_docs",
+    "library_selection",
+    "implementation_pattern"
+  ],
+  "search_channels": [
+    "web search",
+    "repository search",
+    "official documentation search"
+  ],
+  "sources_checked": [
+    "https://example.com/official-docs",
+    "https://github.com/example/project",
+    "_docs/example-policy.ko.md"
+  ],
+  "source_bundle_report": "_tools/source-collector report path if a large source bundle was scored.",
+  "findings": [
+    "Evidence-backed finding that changes the implementation direction."
+  ],
+  "options": [
+    "Option A and its trade-off.",
+    "Option B and its trade-off."
+  ],
+  "recommendation": "Recommended technical direction after research.",
+  "post_research_answers": {
+    "what_was_verified": "What exactly was verified?",
+    "best_option": "What is the best option now?",
+    "why_this_option": "Why is this option better than the alternatives?",
+    "alternatives_rejected": "Which alternatives were rejected, and why?",
+    "implementation_impact": "What files, modules, APIs, or workflows will change?",
+    "risks_and_unknowns": "What remains risky, unknown, stale, or assumption-dependent?",
+    "validation_plan": "How will the implementation be validated?",
+    "reusable_knowledge": "What should be captured for future work?",
+    "next_action": "What is the next concrete action?"
+  },
+  "validation_steps": [
+    "Unit, integration, static, benchmark, security, or manual check to run after implementation."
+  ],
+  "risks_or_unknowns": [
+    "Remaining risk, uncertainty, stale-source risk, or assumption."
+  ],
+  "capture_targets": [
+    "_research/topics/<topic>/",
+    "_templates/<template>/"
+  ],
+  "plan_history_targets": [
+    "_history/plans/YYYY/YYYY-MM-DD-<slug>.ko.md"
+  ],
+  "knowledge_validation_status": "ready_to_reference"
+}

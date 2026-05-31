@@ -21,17 +21,18 @@
 8. Prefer Python for agent implementation unless another runtime is clearly better.
 9. Evaluate mature open-source options before building core infrastructure from scratch.
 10. For planning that depends on external facts, use web search and at least one other search channel to derive insights before execution.
-11. Save important planning processes under `_history/plans/YYYY/`.
-12. Promote repeated work into a template, tool, skill, prompt, or workflow.
-13. Record important context in `_history/`.
-14. Refresh `_ops/maps/` when navigational structure changes.
-15. Summarize completed work.
-16. Check prior internal work and strong references relevant to the task.
-17. Capture reusable internet research or external references.
-18. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
-19. Evaluate the completed work against the initial instruction.
-20. Rework real gaps and evaluate again.
-21. Commit the coherent change set and push it.
+11. For coding research, use `coding-research-agent` to answer standard post-research questions before implementation.
+12. Save important planning processes under `_history/plans/YYYY/`.
+13. Promote repeated work into a template, tool, skill, prompt, or workflow.
+14. Record important context in `_history/`.
+15. Refresh `_ops/maps/` when navigational structure changes.
+16. Summarize completed work.
+17. Check prior internal work and strong references relevant to the task.
+18. Capture reusable internet research or external references.
+19. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
+20. Evaluate the completed work against the initial instruction.
+21. Rework real gaps and evaluate again.
+22. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -49,6 +50,7 @@ Promote work only when it will reduce future effort.
 | Same close-out quality check repeated | Evaluation agent |
 | Same external reference useful for future work | Research note |
 | Same search-to-insight-to-plan pattern repeated | Planning agent |
+| Same coding research close-out questions repeated | Coding research agent |
 | Same need to explain planning decisions later | Plan history template |
 | Same need to block unsupported factual claims | Hallucination guard agent |
 | Same need to start every instruction with web search | Web-first intake workflow |
