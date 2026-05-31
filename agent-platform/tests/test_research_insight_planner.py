@@ -23,6 +23,7 @@ class ResearchInsightPlannerTests(unittest.TestCase):
                 knowledge_validation_status="ready_to_reference",
                 risks_or_unknowns=("Search results can be stale.",),
                 capture_targets=("_research/topics/agent-planning/",),
+                plan_history_targets=("_history/plans/2026/2026-05-31-example-plan.ko.md",),
             )
         )
 
@@ -46,6 +47,24 @@ class ResearchInsightPlannerTests(unittest.TestCase):
 
         self.assertEqual(report["status"], "more_research_required")
         self.assertIn("Web search channel is missing.", report["gaps"])
+
+    def test_missing_plan_history_target_requires_more_research(self) -> None:
+        report = create_research_insight_plan(
+            ResearchInsightPlanInput(
+                objective="Plan a search-backed agent workflow.",
+                search_questions=("What references support iterative retrieval?",),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://arxiv.org/abs/2212.10509",),
+                insights=("Iterative retrieval is useful.",),
+                plan_steps=("Add a planning prompt.",),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Search results can be stale.",),
+                capture_targets=("_research/topics/agent-planning/",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn("Plan history target is missing.", report["gaps"])
 
     def test_internal_knowledge_requires_skeptic_validation(self) -> None:
         report = create_research_insight_plan(

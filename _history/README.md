@@ -20,4 +20,6 @@ Each daily file should record:
 
 Detailed work evaluation reports live under `_history/evaluations/YYYY/`.
 
+Detailed plan process records live under `_history/plans/YYYY/`.
+
 This folder is not a replacement for git history. It explains why work happened and what context future sessions need.

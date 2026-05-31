@@ -34,6 +34,7 @@ agent-platform/configs/planning/research-insight-plan-template.json
 - knowledge validation status
 - risks or unknowns
 - capture targets
+- plan history targets
 
 ## 명령
 
@@ -50,3 +51,5 @@ PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning
 - 내부 지식 베이스를 참고하면 `knowledge-skeptic-agent`로 먼저 검증한다.
 - 재사용 가치가 있는 검색 결과는 `_research/`에 기록한다.
 - 계획에는 실행 단계와 검증 단계를 같이 둔다.
+- 계획 과정은 `_history/plans/YYYY/`에 저장하고, 입력의 `plan_history_targets`에 기록한다.
+- 실행 중 계획이 바뀌면 같은 계획 히스토리 파일에 변경 사유를 남긴다.

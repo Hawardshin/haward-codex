@@ -11,6 +11,7 @@ Do not create important plans from the model's internal probabilistic guess alon
 - Do not copy search results directly into a plan; turn evidence into decision-relevant insights.
 - Validate internal knowledge-base references with `knowledge-skeptic-agent`.
 - Save reusable external references under `_research/`.
+- Save the planning process under `_history/plans/YYYY/`.
 - Include both execution steps and validation steps in the plan.
 
 ## Search Channels
@@ -34,6 +35,7 @@ Before execution, record:
 - validation steps
 - remaining uncertainty
 - reusable research capture target
+- plan history target
 
 ## Command
 
@@ -42,3 +44,13 @@ Run from `agent-platform/`.
 ```bash
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 ```
+
+## Plan History
+
+Save the planning process under:
+
+```text
+_history/plans/YYYY/YYYY-MM-DD-<slug>.ko.md
+```
+
+If the plan changes during execution, record the reason in the same file's change history.

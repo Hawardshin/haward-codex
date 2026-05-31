@@ -15,6 +15,8 @@ Validate internal knowledge-base references with knowledge-skeptic-agent before 
 Synthesize evidence into concise insights.
 Create a plan with concrete execution steps and validation steps.
 Record risks, unknowns, and reusable research capture targets.
+Save the planning process under _history/plans/YYYY/ and include that path as plan_history_targets.
+If the plan changes during execution, update the same plan history file with the change and reason.
 If evidence is weak, conflicting, stale, or insufficient, return more_research_required instead of a plan.
 ```
 
@@ -29,4 +31,5 @@ PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning
 ## References
 
 - [_docs/search-insight-planning-policy.ko.md](../../_docs/search-insight-planning-policy.ko.md)
+- [_history/plans/README.ko.md](../../_history/plans/README.ko.md)
 - [agent-platform/docs/research-insight-planner-agent.ko.md](../../agent-platform/docs/research-insight-planner-agent.ko.md)

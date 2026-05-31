@@ -23,6 +23,7 @@ class ResearchInsightPlanInput:
     knowledge_validation_status: str = ""
     risks_or_unknowns: tuple[str, ...] = ()
     capture_targets: tuple[str, ...] = ()
+    plan_history_targets: tuple[str, ...] = ()
 
     @classmethod
     def from_dict(cls, data: JsonMap) -> "ResearchInsightPlanInput":
@@ -37,6 +38,7 @@ class ResearchInsightPlanInput:
             knowledge_validation_status=_optional_string(data.get("knowledge_validation_status", ""), "knowledge_validation_status"),
             risks_or_unknowns=_tuple_of_strings(data.get("risks_or_unknowns", []), "risks_or_unknowns"),
             capture_targets=_tuple_of_strings(data.get("capture_targets", []), "capture_targets"),
+            plan_history_targets=_tuple_of_strings(data.get("plan_history_targets", []), "plan_history_targets"),
         )
 
 
@@ -62,6 +64,8 @@ def create_research_insight_plan(plan_input: ResearchInsightPlanInput) -> JsonMa
         gaps.append("Plan steps are missing.")
     if not plan_input.validation_steps:
         gaps.append("Validation steps are missing.")
+    if not plan_input.plan_history_targets:
+        gaps.append("Plan history target is missing.")
 
     if _uses_internal_knowledge(plan_input.sources_checked) and plan_input.knowledge_validation_status != "ready_to_reference":
         gaps.append("Internal knowledge-base sources require knowledge_validation_status=ready_to_reference.")
@@ -86,6 +90,7 @@ def create_research_insight_plan(plan_input: ResearchInsightPlanInput) -> JsonMa
             "validation_steps_count": len(plan_input.validation_steps),
             "risks_or_unknowns_count": len(plan_input.risks_or_unknowns),
             "capture_targets_count": len(plan_input.capture_targets),
+            "plan_history_targets_count": len(plan_input.plan_history_targets),
         },
         "gaps": gaps,
         "warnings": warnings,

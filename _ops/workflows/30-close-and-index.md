@@ -11,12 +11,13 @@
 3. Run `python3 _tools/task-board/src/task_board.py` if coordination status changed.
 4. Review generated `_ops/maps/repository-map.md`, `_ops/maps/prompt-map.md`, and `_ops/coordination/board.ko.md`.
 5. Summarize completed work and checked references.
-6. Capture reusable internet research or external references with [_ops/workflows/60-capture-research.md](60-capture-research.md).
-7. Run the work evaluation loop from [_ops/workflows/40-evaluate-and-rework.md](40-evaluate-and-rework.md).
-8. Confirm the evaluation report file exists under `_history/evaluations/YYYY/`.
-9. Update `_history/YYYY/YYYY-MM-DD.md`.
-10. Commit the coherent change set.
-11. Push to `origin/main`.
+6. Confirm any important plan process has been saved under `_history/plans/YYYY/`.
+7. Capture reusable internet research or external references with [_ops/workflows/60-capture-research.md](60-capture-research.md).
+8. Run the work evaluation loop from [_ops/workflows/40-evaluate-and-rework.md](40-evaluate-and-rework.md).
+9. Confirm the evaluation report file exists under `_history/evaluations/YYYY/`.
+10. Update `_history/YYYY/YYYY-MM-DD.md`.
+11. Commit the coherent change set.
+12. Push to `origin/main`.
 
 ## Rule
 

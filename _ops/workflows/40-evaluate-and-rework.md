@@ -12,12 +12,13 @@
 4. Validate any reused knowledge-base content with [_ops/workflows/65-validate-knowledge-reference.md](65-validate-knowledge-reference.md).
 5. Capture reusable internet research or external references when useful.
 6. List changed files, verification results, and references checked.
-7. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
-8. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
-9. Complete the follow-up action.
-10. Evaluate again.
-11. Save the final evaluation report under `_history/evaluations/YYYY/`.
-12. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
+7. If a plan guided the work, link its `_history/plans/YYYY/` file.
+8. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
+9. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
+10. Complete the follow-up action.
+11. Evaluate again.
+12. Save the final evaluation report under `_history/evaluations/YYYY/`.
+13. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
 
 ## Python Command
 
@@ -34,3 +35,5 @@ Do not treat evaluation as a final report only. If the evaluator finds a real ga
 Reference research is part of evaluation. If no useful reference exists, record where you checked and why it did not apply.
 
 The final evaluation must not exist only in chat output. Save it as a Markdown file before commit.
+
+When a saved plan guided the work, the final evaluation should link the relevant `_history/plans/YYYY/` plan history file.

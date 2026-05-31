@@ -10,6 +10,6 @@
     "status": "active",
     "trigger": "before planning work that benefits from current external knowledge, prior repository knowledge, or multiple references",
     "input_schema": "agent-platform/configs/planning/research-insight-plan-template.json",
-    "policy": "Search first, synthesize evidence into insights, validate internal knowledge, then plan execution and verification."
+    "policy": "Search first, synthesize evidence into insights, validate internal knowledge, save the plan process under _history/plans, then plan execution and verification."
   }
 }

@@ -16,12 +16,14 @@
 - Before closing meaningful work, evaluate the result against the initial user instruction and rework real gaps.
 - Before evaluation, summarize completed work and check prior internal work or strong references for related tasks.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/`.
+- Save important planning processes as files under `_history/plans/YYYY/`.
 - Track work history under `_history/YYYY/YYYY-MM-DD.md`.
 - Use `_ops/` as the durable operations hub for prompts, workflows, and maps.
 - Track active agents and parallel work in `_ops/coordination/`.
 - Capture reusable findings from internet research and external references under `_research/`.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before relying on it.
 - For important plans, do not rely only on the model's internal guess; use web search plus another search channel to derive insights before planning.
+- Work that uses `research-insight-planner-agent` should set `plan_history_targets` and record plan changes.
 - Compress long conversation context into repository docs and history logs.
 - Promote repeated workflows into templates, tools, or skills when useful.
 - Keep repository and prompt maps current when navigational structure changes.

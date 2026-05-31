@@ -11,6 +11,7 @@ AI의 내부 확률적 추정만으로 중요한 계획을 세우지 않는다. 
 - 검색 결과를 그대로 답으로 쓰지 않고, 계획에 영향을 주는 인사이트로 재구성한다.
 - 내부 지식 베이스를 참고할 때는 `knowledge-skeptic-agent`로 틀렸을 가능성을 검증한다.
 - 유용한 외부 레퍼런스는 `_research/`에 저장한다.
+- 계획 과정은 `_history/plans/YYYY/`에 저장한다.
 - 계획에는 실행 단계와 검증 단계를 함께 둔다.
 
 ## 검색 채널
@@ -34,6 +35,7 @@ AI의 내부 확률적 추정만으로 중요한 계획을 세우지 않는다. 
 - 검증 단계
 - 남은 불확실성
 - 재사용 리서치 저장 위치
+- 계획 히스토리 저장 위치
 
 ## 명령
 
@@ -42,3 +44,13 @@ AI의 내부 확률적 추정만으로 중요한 계획을 세우지 않는다. 
 ```bash
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 ```
+
+## 계획 히스토리
+
+계획을 세우는 과정은 다음 위치에 저장한다.
+
+```text
+_history/plans/YYYY/YYYY-MM-DD-<slug>.ko.md
+```
+
+계획이 실행 중 바뀌면 같은 파일의 변경 이력에 사유를 남긴다.

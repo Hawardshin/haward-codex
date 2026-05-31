@@ -34,6 +34,7 @@ Required fields:
 - knowledge validation status
 - risks or unknowns
 - capture targets
+- plan history targets
 
 ## Command
 
@@ -50,3 +51,5 @@ PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning
 - Validate internal knowledge-base references with `knowledge-skeptic-agent`.
 - Capture reusable findings under `_research/`.
 - Include both execution steps and validation steps in the plan.
+- Save the planning process under `_history/plans/YYYY/` and record that path in `plan_history_targets`.
+- If the plan changes during execution, update the same plan history file with the reason.

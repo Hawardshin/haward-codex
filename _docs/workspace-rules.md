@@ -14,6 +14,7 @@
 | --- | --- |
 | `_docs/` | 저장소 전체 문서, 규칙, 의사결정 기록 |
 | `_history/` | 날짜별 작업 로그와 컨텍스트 압축 요약 |
+| `_history/plans/` | 에이전트 계획 과정 기록 |
 | `_ops/` | 운영 허브, 프롬프트 라우터, 워크플로, 저장소 맵 |
 | `_research/` | 인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용 |
 | `_skills/` | git으로 추적할 커스텀 Codex 스킬 원본 |
@@ -69,6 +70,7 @@ After each completed commit, push to `origin/main` immediately unless the user e
 
 - Maintain dated work logs under `_history/YYYY/YYYY-MM-DD.md`.
 - Add a log entry when a task changes repository structure, project direction, reusable capabilities, or important artifacts.
+- Maintain important plan process records under `_history/plans/YYYY/`.
 - Include the commit hash after committing when practical.
 - Use the history log to preserve context when a conversation becomes too long.
 
@@ -124,6 +126,7 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Important plans should not rely only on the model's internal probabilistic guess.
 - Use `research-insight-planner-agent` when planning depends on external facts, current information, multiple references, or prior repository knowledge.
 - Use web search plus at least one other channel, then turn evidence into insights, plan steps, and validation steps.
+- Save the planning process under `_history/plans/YYYY/` and link it from the final evaluation when it guided the work.
 
 ## Knowledge Validation Policy
 

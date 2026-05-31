@@ -31,10 +31,12 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Before final close-out of meaningful work, evaluate the result against the user's initial instruction and rework any real gaps before committing or final response.
 - Before evaluation, summarize completed work and check prior internal work or strong external references relevant to the task.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/` before committing meaningful work.
+- Save important planning processes as files under `_history/plans/YYYY/`.
 - Track active agents and parallel work in `_ops/coordination/status.json` and generated coordination boards.
 - Capture reusable internet research and strong external references under `_research/`.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before using it as evidence.
 - For important planning, do not rely only on the model's internal guess; use `research-insight-planner-agent` to combine web search with another search channel, derive insights, and plan validation.
+- When using `research-insight-planner-agent`, set `plan_history_targets` and keep the plan process file updated if the plan changes.
 
 ## Platformization Rules
 
@@ -74,6 +76,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Include a completed-work summary and references checked in the evaluation input.
 - Check repository history, existing project docs, official documentation, mature open-source projects, or other strong references before judging related work.
 - Use `research-insight-planner-agent` when planning depends on external facts, current information, prior repository knowledge, or multiple references.
+- Link relevant `_history/plans/YYYY/` files from evaluation reports when a saved plan guided the work.
 - When internet research produces reusable findings, create or update research notes and link them from related docs or evaluation reports.
 - Use `knowledge-skeptic-agent` when relying on `_research`, `_docs`, `_history`, or previous project docs for important decisions.
 - If the evaluator identifies missing requirements or mismatches, turn them into follow-up actions and complete them before final close-out.

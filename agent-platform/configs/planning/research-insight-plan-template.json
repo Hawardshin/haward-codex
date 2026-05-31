@@ -26,5 +26,8 @@
   ],
   "capture_targets": [
     "_research/topics/<topic>/"
+  ],
+  "plan_history_targets": [
+    "_history/plans/YYYY/YYYY-MM-DD-<slug>.ko.md"
   ]
 }

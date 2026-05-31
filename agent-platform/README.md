@@ -57,6 +57,7 @@ PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning
 - `configs/evaluation/`: structured evaluation inputs
 - `configs/planning/`: structured planning inputs
 - `configs/open-source/`: dependency candidate scoring inputs
+- research-backed plans should point to saved plan history under `_history/plans/YYYY/`
 - `docs/python-agent-structure.md`: implementation structure
 - `docs/open-source-integration.md`: dependency evaluation and adapter policy
 - `artifacts/structure-overview.html`: browser-viewable structure summary

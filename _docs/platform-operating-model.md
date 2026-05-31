@@ -18,15 +18,16 @@
 5. Prefer Python for agent implementation unless another runtime is clearly better.
 6. Evaluate mature open-source options before building core infrastructure from scratch.
 7. For planning that depends on external facts, use web search and at least one other search channel to derive insights before execution.
-8. Promote repeated work into a template, tool, skill, prompt, or workflow.
-9. Record important context in `_history/`.
-10. Refresh `_ops/maps/` when navigational structure changes.
-11. Summarize completed work.
-12. Check prior internal work and strong references relevant to the task.
-13. Capture reusable internet research or external references.
-14. Evaluate the completed work against the initial instruction.
-15. Rework real gaps and evaluate again.
-16. Commit the coherent change set and push it.
+8. Save important planning processes under `_history/plans/YYYY/`.
+9. Promote repeated work into a template, tool, skill, prompt, or workflow.
+10. Record important context in `_history/`.
+11. Refresh `_ops/maps/` when navigational structure changes.
+12. Summarize completed work.
+13. Check prior internal work and strong references relevant to the task.
+14. Capture reusable internet research or external references.
+15. Evaluate the completed work against the initial instruction.
+16. Rework real gaps and evaluate again.
+17. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -43,6 +44,7 @@ Promote work only when it will reduce future effort.
 | Same close-out quality check repeated | Evaluation agent |
 | Same external reference useful for future work | Research note |
 | Same search-to-insight-to-plan pattern repeated | Planning agent |
+| Same need to explain planning decisions later | Plan history template |
 
 ## Context Compression
 
@@ -51,6 +53,7 @@ When the active conversation becomes long, the agent should move durable state i
 - project status and commands into the project `README.md`
 - decisions into `docs/`
 - session history into `_history/YYYY/YYYY-MM-DD.md`
+- planning process into `_history/plans/YYYY/`
 - reusable procedures into `_templates/`, `_tools/`, or `_skills/`
 
 The goal is that future work can resume from the repository without needing the full chat history.
