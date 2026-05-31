@@ -9,9 +9,10 @@
 1. Run relevant tests or checks.
 2. Run `python3 _tools/workspace-index/src/workspace_index.py`.
 3. Review generated `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md`.
-4. Update `_history/YYYY/YYYY-MM-DD.md`.
-5. Commit the coherent change set.
-6. Push to `origin/main`.
+4. Run the work evaluation loop from [_ops/workflows/40-evaluate-and-rework.md](40-evaluate-and-rework.md).
+5. Update `_history/YYYY/YYYY-MM-DD.md`.
+6. Commit the coherent change set.
+7. Push to `origin/main`.
 
 ## Rule
 

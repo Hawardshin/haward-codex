@@ -1,0 +1,12 @@
+{
+  "initial_instruction": "User's initial instruction for the completed task.",
+  "result_summary": "What was changed or produced.",
+  "changed_files": [
+    "path/to/file"
+  ],
+  "verification": [
+    "command or check result"
+  ],
+  "known_gaps": [],
+  "improvement_ideas": []
+}

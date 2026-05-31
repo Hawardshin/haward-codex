@@ -20,6 +20,8 @@ agent-platform/
         models.py
         registry.py
         runtime.py
+      evaluation/
+        work_evaluator.py
       oss/
         evaluation.py
   tests/
@@ -39,6 +41,7 @@ agent-platform/
 - `AgentRegistry`: loading and listing agent specs.
 - `AgentRuntime`: adapter boundary for Python functions and future open-source frameworks.
 - `OpenSourceCandidate`: repeatable scoring for dependency decisions.
+- `WorkEvaluationInput`: structured close-out evaluation against the user's initial instruction.
 - `agent_platform.adapters`: place for third-party framework adapters.
 
 ## Commands
@@ -49,6 +52,7 @@ From `agent-platform/`:
 python3 -m unittest discover -s tests
 python3 -m agent_platform.cli list-agents --registry configs/agents
 python3 -m agent_platform.cli score-oss configs/open-source/candidate-template.json
+python3 -m agent_platform.cli evaluate-work configs/evaluation/work-evaluation-template.json
 ```
 
 For the module command, either install the package or run with `PYTHONPATH=src`.

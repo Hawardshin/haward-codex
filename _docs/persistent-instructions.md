@@ -8,11 +8,13 @@
 - Keep separate projects as root-level `kebab-case` folders.
 - Commit every completed meaningful change set.
 - Push completed commits to `origin/main` immediately unless explicitly told not to push.
+- Before closing meaningful work, evaluate the result against the initial user instruction and rework real gaps.
 - Track work history under `_history/YYYY/YYYY-MM-DD.md`.
 - Use `_ops/` as the durable operations hub for prompts, workflows, and maps.
 - Compress long conversation context into repository docs and history logs.
 - Promote repeated workflows into templates, tools, or skills when useful.
 - Keep repository and prompt maps current when navigational structure changes.
+- Use `work-evaluator-agent` as the default close-out evaluator.
 - Prefer Python for agent implementations, orchestration, backend automation, evaluation, and reusable local tools.
 - Use mature, maintained, license-compatible open-source tools and libraries when they fit the task.
 - Consider HTML artifacts when browser rendering, visual hierarchy, dashboards, or interactive review are more useful than Markdown.

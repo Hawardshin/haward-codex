@@ -27,6 +27,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Push completed commits to `origin/main` immediately after committing unless the user explicitly says not to push.
 - Do not rewrite history, reset, or discard user changes unless explicitly requested.
 - Update the relevant history log before committing when the work changes project direction, repository rules, or meaningful artifacts.
+- Before final close-out of meaningful work, evaluate the result against the user's initial instruction and rework any real gaps before committing or final response.
 
 ## Platformization Rules
 
@@ -53,9 +54,18 @@ This repository is the workspace for building and tracking a personal agent-buil
 
 - Use `_ops/prompts/00-router.md` to select reusable prompts for repeated task types.
 - Use `_ops/workflows/00-start-here.md` as the default sequence for multi-step work.
+- Use `_ops/workflows/40-evaluate-and-rework.md` before closing meaningful work.
 - Keep `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md` current when folders, prompts, workflows, tools, skills, or project structure change.
 - Run `python3 _tools/workspace-index/src/workspace_index.py` after changing navigational structure.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
+
+## Evaluation Rules
+
+- Use `work-evaluator-agent` to compare the initial instruction, actual result, changed files, and verification.
+- If the evaluator identifies missing requirements or mismatches, turn them into follow-up actions and complete them before final close-out.
+- Re-run relevant tests or checks after rework.
+- Non-blocking improvements can be recorded in history or project docs, but blocking gaps must be fixed.
+- The Python evaluator entry point is `PYTHONPATH=src python3 -m agent_platform.cli evaluate-work <input.json>` from `agent-platform/`.
 
 ## Capability Creation Rules
 

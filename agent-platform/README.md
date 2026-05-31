@@ -41,14 +41,17 @@ python3 -m unittest discover -s tests
 PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/example-python-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli score-oss configs/open-source/candidate-template.json
+PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/work-evaluation-template.json
 ```
 
 ## Current Skeleton
 
 - `src/agent_platform/core/`: local domain model, registry, runtime interface
 - `src/agent_platform/adapters/`: future external framework adapters
+- `src/agent_platform/evaluation/`: evaluation agents and close-out checks
 - `src/agent_platform/oss/`: open-source dependency evaluation helpers
 - `configs/agents/`: declarative agent specs
+- `configs/evaluation/`: structured evaluation inputs
 - `configs/open-source/`: dependency candidate scoring inputs
 - `docs/python-agent-structure.md`: implementation structure
 - `docs/open-source-integration.md`: dependency evaluation and adapter policy

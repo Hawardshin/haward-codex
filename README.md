@@ -7,6 +7,7 @@
 - 모든 작업 산출물은 이 저장소의 git 이력으로 추적한다.
 - 의미 있는 변경 단위가 끝날 때마다 커밋한다.
 - 커밋이 만들어지면 바로 원격 저장소에 push한다.
+- 의미 있는 작업을 닫기 전 초기 지시와 결과를 평가하고, 차이가 있으면 재작업한다.
 - 여러 프로젝트는 저장소 최상단의 개별 폴더로 관리한다.
 - 공통 문서, 템플릿, 보관 자료처럼 프로젝트가 아닌 폴더는 `_` 접두어를 사용한다.
 - 반복되는 작업은 필요한 경우 스킬, 도구, 템플릿으로 승격한다.
@@ -81,8 +82,16 @@ project-name/
 - 작업 시작점은 `_ops/index.md`로 둔다.
 - 반복 프롬프트는 `_ops/prompts/`에서 관리한다.
 - 반복 워크플로는 `_ops/workflows/`에서 관리한다.
+- 작업 종료 전 평가는 `_ops/workflows/40-evaluate-and-rework.md`를 따른다.
 - 무엇이 어디에 있는지에 대한 지도는 `_ops/maps/`에 둔다.
 - 구조가 바뀌면 `python3 _tools/workspace-index/src/workspace_index.py`로 맵을 갱신한다.
+
+## 작업 평가 루프
+
+- `work-evaluator-agent`가 초기 지시, 실제 결과, 변경 파일, 검증 결과를 비교한다.
+- 누락이나 불일치가 있으면 follow-up action으로 바꾸고 다시 작업한다.
+- 재작업 후 평가와 검증을 다시 통과한 뒤 커밋하고 push한다.
+- 평가 에이전트 설정은 `agent-platform/configs/agents/work-evaluator-agent.json`에 둔다.
 
 ## 스킬과 도구 승격 기준
 

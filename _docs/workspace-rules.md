@@ -92,3 +92,10 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Reusable workflows live in `_ops/workflows/`.
 - Repository and prompt maps live in `_ops/maps/`.
 - Run `_tools/workspace-index` after navigational structure changes.
+
+## Evaluation Policy
+
+- Meaningful work should pass an evaluation step before close-out.
+- The evaluator compares the initial instruction with the actual result, changed files, and verification.
+- If gaps are found, they become follow-up actions and the work returns to implementation.
+- The default evaluator is `work-evaluator-agent` in `agent-platform/configs/agents/`.

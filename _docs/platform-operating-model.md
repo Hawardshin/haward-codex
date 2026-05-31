@@ -20,7 +20,9 @@
 7. Promote repeated work into a template, tool, skill, prompt, or workflow.
 8. Record important context in `_history/`.
 9. Refresh `_ops/maps/` when navigational structure changes.
-10. Commit the coherent change set and push it.
+10. Evaluate the completed work against the initial instruction.
+11. Rework real gaps and evaluate again.
+12. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -34,6 +36,7 @@ Promote work only when it will reduce future effort.
 | Same visual artifact style repeated | HTML template |
 | Same user preference or operating instruction repeated | Persistent rule |
 | Same prompt or work sequence repeated | `_ops` prompt or workflow |
+| Same close-out quality check repeated | Evaluation agent |
 
 ## Context Compression
 

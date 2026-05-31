@@ -12,8 +12,10 @@
 4. Read the target project README and relevant docs.
 5. Implement the smallest useful change.
 6. Verify with tests, checks, or rendered artifacts.
-7. Update history and maps.
-8. Commit and push immediately.
+7. Evaluate completed work against the initial instruction.
+8. Rework if the evaluator finds gaps, then evaluate again.
+9. Update history and maps.
+10. Commit and push immediately.
 
 ## Rule
 
