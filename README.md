@@ -13,6 +13,8 @@
 - 웹 검색 후에는 `memory-bootstrap-agent`로 필수 메모리 anchor를 확인하고 핵심 세팅을 로드한다.
 - 조사나 계획에 영향을 주는 검색은 공식 자료, 논문, 외국 기술 블로그, 오픈소스, 조사 아티클, 커뮤니티/소셜 신호를 폭넓게 수집한다.
 - 중요한 계획은 AI의 내부 추정만으로 세우지 않고, 웹 검색과 다른 검색 채널을 통해 인사이트를 도출한 뒤 수립한다.
+- `research-insight-planner-agent`는 핵심 조사 에이전트이며 Perplexity식 answer engine처럼 질문 이해, 검색, 출처 순위화, 증거 추출, 종합, citation grounding, skeptic review 단계를 거친다.
+- 일반 조사 계획은 `agent-platform/configs/research/research-agent-profile.json`, `answer_engine_stages`, `citation_requirements`를 기록한다.
 - API, 라이브러리, 버그 원인, 아키텍처, 성능, 보안, 마이그레이션 같은 코딩 조사는 `coding-research-agent`로 표준 종료 질문까지 답한 뒤 구현한다.
 - 코딩 조사는 `source_types`를 명시하고 최소 3개 이상의 서로 다른 출처 유형을 통해 확인한다.
 - 코딩 조사는 어떤 출처 설정을 참고했는지 `reference_config_paths`로 남긴다.
@@ -115,6 +117,7 @@ project-name/
 - AI가 세팅을 잊지 않게 하는 부트스트랩 manifest는 `agent-platform/configs/memory/bootstrap-manifest.json`에 둔다.
 - 공유 설정 파일의 자기 설명 기준은 `_docs/self-documenting-config-policy.ko.md`와 `agent-platform`의 `check-config-contract` 명령을 따른다.
 - 출처 수집 기준은 `_docs/source-collection-policy.ko.md`를 따른다.
+- 핵심 조사 에이전트 프로필은 `agent-platform/configs/research/research-agent-profile.json`에서 확인한다.
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/board.ko.md`와 `_ops/coordination/board.html`에서 확인한다.
 - 프로젝트 목록과 경계는 `_ops/projects/index.ko.md`와 `_ops/projects/registry.json`에서 확인한다.
 - 반복 프롬프트는 `_ops/prompts/`에서 관리한다.

@@ -24,7 +24,7 @@
 3. 공식 문서, 주요 레퍼런스, 최신성 신호, 반대 신호를 확인한다.
 4. 검색 결과가 계획에 영향을 주는지 판단한다.
 5. 저장소 상태와 프로젝트 경계를 확인한다.
-6. 필요한 경우 `research-insight-planner-agent`로 검색 결과를 인사이트와 계획으로 구조화한다.
+6. 필요한 경우 `research-insight-planner-agent`와 `agent-platform/configs/research/research-agent-profile.json`으로 검색 결과를 answer engine 단계, 인사이트, 계획으로 구조화한다.
 7. 구현 또는 문서 작업을 수행한다.
 8. 최종 산출물의 사실 주장을 `hallucination-guard-agent`로 검증한다.
 9. 평가 보고서에 검색/레퍼런스/grounding 결과를 남긴다.

@@ -46,6 +46,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract <config.json>
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract \
   configs/memory/bootstrap-manifest.json \
   configs/research/source-registry.json \
+  configs/research/research-agent-profile.json \
   configs/research/coding-research-profile.json
 ```
 

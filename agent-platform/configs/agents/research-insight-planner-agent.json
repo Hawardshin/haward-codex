@@ -1,15 +1,20 @@
 {
   "name": "research-insight-planner-agent",
-  "description": "Uses web search and other search channels to derive evidence-backed insights before creating an execution plan.",
+  "description": "Core Perplexity-style research agent that retrieves, ranks, extracts, synthesizes, cites, and skeptically verifies evidence before creating an execution plan.",
   "runtime": "python",
   "skills": [],
   "tools": [
-    "agent-platform:plan-from-research"
+    "agent-platform:plan-from-research",
+    "agent-platform:validate-knowledge",
+    "agent-platform:check-grounding",
+    "_tools/source-collector"
   ],
   "metadata": {
     "status": "active",
     "trigger": "before planning work that benefits from current external knowledge, prior repository knowledge, or multiple references",
     "input_schema": "agent-platform/configs/planning/research-insight-plan-template.json",
-    "policy": "Search first, synthesize evidence into insights, validate internal knowledge, save the plan process under _history/plans, then plan execution and verification."
+    "research_profile": "agent-platform/configs/research/research-agent-profile.json",
+    "source_registry": "agent-platform/configs/research/source-registry.json",
+    "policy": "Search first, use the answer-engine stages from the research profile, rank sources, ground citations, validate internal knowledge, save the plan process under _history/plans, then plan execution and verification."
   }
 }

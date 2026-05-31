@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-05-31",
   "name": "source-registry",
-  "purpose": "Canonical registry of source types and reusable reference sources for coding and technical research.",
+  "purpose": "Canonical registry of source types and reusable reference sources for general, coding, and technical research.",
   "reader_guide": {
     "summary": "This file explains which source categories the workspace recognizes, which reference links shaped those categories, and how each source type should be used or limited.",
     "how_to_read": [
@@ -15,7 +15,7 @@
     "update_triggers": [
       "A new source type is needed for repeated research.",
       "A reference source becomes stale, unavailable, or contradicted.",
-      "A coding research profile changes its required source coverage.",
+      "A research or coding profile changes its required source coverage.",
       "A source category starts being misused as proof instead of signal."
     ]
   },
@@ -38,6 +38,17 @@
       "source_type": "internal",
       "used_for": [
         "coding research readiness rules"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "research_agent_profile",
+      "title": "Research agent profile",
+      "path": "agent-platform/configs/research/research-agent-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "core research agent source ranking",
+        "citation grounding rules"
       ],
       "last_checked": "2026-05-31"
     },
@@ -147,12 +158,17 @@
     },
     {
       "field": "reference_sources",
-      "meaning": "Reusable source records that coding research tasks can cite by ID.",
+      "meaning": "Reusable source records that research tasks can cite by ID.",
       "required": true
     },
     {
       "field": "metadata.default_profile",
-      "meaning": "Default research profile that consumes this registry.",
+      "meaning": "Default coding research profile that consumes this registry.",
+      "required": true
+    },
+    {
+      "field": "metadata.general_research_profile",
+      "meaning": "Core general research-agent profile that consumes this registry for answer-engine work.",
       "required": true
     },
     {
@@ -163,6 +179,7 @@
   ],
   "metadata": {
     "owner": "agent-platform",
+    "general_research_profile": "agent-platform/configs/research/research-agent-profile.json",
     "default_profile": "agent-platform/configs/research/coding-research-profile.json",
     "last_reviewed": "2026-05-31",
     "review_policy": "Recheck external URLs when they are used for fresh recommendations or when a source changes materially."
@@ -425,6 +442,17 @@
       "source_type": "internal",
       "used_for": [
         "coding research readiness rules"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "research_agent_profile",
+      "title": "Research agent profile",
+      "path": "agent-platform/configs/research/research-agent-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "core research agent source ranking",
+        "citation grounding rules"
       ],
       "last_checked": "2026-05-31"
     },

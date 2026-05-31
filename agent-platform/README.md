@@ -64,7 +64,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/planning/coding-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json
-PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/coding-research-profile.json
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json
 ```
 
 ## Current Skeleton
@@ -82,7 +82,9 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `configs/planning/`: structured planning inputs
 - `configs/research/`: source registry and research profile configs
 - `configs/open-source/`: dependency candidate scoring inputs
+- `research-insight-planner-agent` is the core Perplexity-style research agent for search, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`
+- general research readiness requires `research_profile_paths`, all answer-engine stage IDs, and `citation_requirements`
 - coding research should pass `coding-research-agent` before implementation when investigation is needed
 - coding research readiness requires diverse `source_types`, including at least three distinct non-`other` types
 - coding research should include `reference_config_paths` pointing to `configs/research/`

@@ -1,0 +1,391 @@
+{
+  "schema_version": "2026-05-31",
+  "name": "research-agent-profile",
+  "purpose": "Core search-grounded research profile for a Perplexity-style answer engine that retrieves, ranks, extracts, synthesizes, cites, and skeptically verifies evidence before planning or answering.",
+  "reader_guide": {
+    "summary": "This file defines the default research-agent operating profile. It turns web-first work into an answer-engine pipeline instead of a simple search summary.",
+    "how_to_read": [
+      "Read required_coverage first to know what must be recorded before a plan is ready.",
+      "Read answer_engine_stages to understand the mandatory pipeline stage IDs used by research-insight-planner-agent.",
+      "Read citation_grounding_rules before publishing factual claims from research.",
+      "Read source_ranking_rules to decide which sources should drive factual claims, adoption signals, and risk discovery."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-05-31",
+    "update_triggers": [
+      "The user changes research depth, source, citation, or Perplexity-style answer-engine requirements.",
+      "A new retrieval, grounding, or citation-verification reference becomes important enough for repeated use.",
+      "Research-insight-planner-agent changes its required fields or answer-engine stage IDs.",
+      "Repeated research outputs show weak source ranking, missing citations, or unsupported synthesis."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "source_registry",
+      "title": "Source registry",
+      "path": "agent-platform/configs/research/source-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "source type taxonomy",
+        "source reliability framing"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "search_insight_planning_policy",
+      "title": "Search insight planning policy",
+      "path": "_docs/search-insight-planning-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "web-first planning rule",
+        "plan history requirement"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "source_collection_policy",
+      "title": "Workspace source collection policy",
+      "path": "_docs/source-collection-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "broad source coverage",
+        "adoption signal handling"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "perplexity_sonar_api",
+      "title": "Perplexity Sonar API",
+      "url": "https://docs.perplexity.ai/docs/sonar/quickstart",
+      "source_type": "official",
+      "used_for": [
+        "web-grounded response model",
+        "search-native answer engine reference"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "perplexity_api_platform",
+      "title": "What is the Perplexity API Platform?",
+      "url": "https://www.perplexity.ai/help-center/en/articles/10354842-what-is-the-perplexity-api-platform",
+      "source_type": "official",
+      "used_for": [
+        "ranked structured search results",
+        "cited answer and source customization model"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "perplexity_agent_presets",
+      "title": "Perplexity Agent API presets",
+      "url": "https://docs.perplexity.ai/docs/agent-api/presets",
+      "source_type": "official",
+      "used_for": [
+        "direct answer format",
+        "inline citation discipline",
+        "cross-validation instruction pattern"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "self_rag",
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+      "url": "https://arxiv.org/abs/2310.11511",
+      "source_type": "paper",
+      "used_for": [
+        "adaptive retrieval",
+        "self-reflection and critique for factuality"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "ma_rag",
+      "title": "MA-RAG: Multi-Agent Retrieval-Augmented Generation via Collaborative Chain-of-Thought Reasoning",
+      "url": "https://arxiv.org/abs/2505.20096",
+      "source_type": "paper",
+      "used_for": [
+        "planner extractor QA agent decomposition",
+        "multi-hop and ambiguous question handling"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "provenance_rag_fact_checker",
+      "title": "Provenance: A Light-weight Fact-checker for Retrieval Augmented LLM Generation Output",
+      "url": "https://arxiv.org/abs/2411.01022",
+      "source_type": "paper",
+      "used_for": [
+        "claim-to-context factuality scoring",
+        "non-LLM grounding check pattern"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "ragtruth",
+      "title": "RAGTruth: A Hallucination Corpus for Developing Trustworthy Retrieval-Augmented Language Models",
+      "url": "https://arxiv.org/abs/2401.00396",
+      "source_type": "paper",
+      "used_for": [
+        "RAG hallucination risk",
+        "unsupported or contradictory claim detection"
+      ],
+      "last_checked": "2026-05-31"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "research_agent_is_core",
+      "rule": "Use this profile as a hot shared setting for non-trivial research, planning, and answer-generation work.",
+      "reason": "The user identified the research agent as a core platform capability.",
+      "applies_to": [
+        "required_coverage",
+        "answer_engine_stages"
+      ]
+    },
+    {
+      "id": "answer_engine_not_search_summary",
+      "rule": "Research must pass through query understanding, retrieval, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.",
+      "reason": "Search results are raw inputs; answer-engine quality depends on ranking, extraction, synthesis, and verification.",
+      "applies_to": [
+        "answer_engine_stages",
+        "required_coverage.required_answer_engine_stage_ids"
+      ]
+    },
+    {
+      "id": "citations_are_handles_not_proof",
+      "rule": "Treat citations as verification handles, not proof; compare each important claim with the cited source content.",
+      "reason": "RAG and answer engines can still attach citations to unsupported or distorted claims.",
+      "applies_to": [
+        "citation_grounding_rules",
+        "required_coverage.must_record_citation_requirements"
+      ]
+    },
+    {
+      "id": "source_ranking_is_explicit",
+      "rule": "Separate authoritative evidence, practical signals, adoption signals, contrary evidence, and internal knowledge before synthesis.",
+      "reason": "A popular or recent source can be useful without being reliable enough to support a factual claim.",
+      "applies_to": [
+        "source_ranking_rules",
+        "source_quality_tiers"
+      ]
+    },
+    {
+      "id": "profile_use_must_be_recorded",
+      "rule": "Research outputs must record research_profile_paths including this file or another JSON profile under agent-platform/configs/research/.",
+      "reason": "Future review needs to know which research rules shaped the answer or plan.",
+      "applies_to": [
+        "required_coverage.must_record_research_profile_paths"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "source_registry",
+      "meaning": "Path to the shared source taxonomy consumed by this research profile.",
+      "required": true
+    },
+    {
+      "field": "required_coverage",
+      "meaning": "Minimum readiness requirements before research can become a plan or factual answer.",
+      "required": true
+    },
+    {
+      "field": "answer_engine_stages",
+      "meaning": "Mandatory pipeline stage IDs and outputs for Perplexity-style research.",
+      "required": true
+    },
+    {
+      "field": "source_ranking_rules",
+      "meaning": "Rules for choosing which sources support facts, context, adoption signals, or risks.",
+      "required": true
+    },
+    {
+      "field": "citation_grounding_rules",
+      "meaning": "Rules for mapping generated claims back to checked source content.",
+      "required": true
+    },
+    {
+      "field": "post_research_question_ids",
+      "meaning": "Standard questions the research agent should answer before handing work to planning, coding, or evaluation.",
+      "required": true
+    }
+  ],
+  "source_registry": "agent-platform/configs/research/source-registry.json",
+  "applies_to_research_types": [
+    "agent_architecture",
+    "answer_engine_design",
+    "coding_preparation",
+    "current_fact_checking",
+    "external_reference_collection",
+    "library_or_tool_selection",
+    "platform_strategy",
+    "project_planning",
+    "technical_explanation"
+  ],
+  "required_coverage": {
+    "must_start_with_web_search": true,
+    "min_search_channels": 2,
+    "must_record_research_profile_paths": true,
+    "must_record_source_types_when_research_is_substantial": true,
+    "must_record_citation_requirements": true,
+    "must_record_plan_history_targets": true,
+    "must_validate_internal_knowledge": true,
+    "required_answer_engine_stage_ids": [
+      "query_understanding",
+      "search_retrieval",
+      "source_ranking",
+      "evidence_extraction",
+      "synthesis",
+      "citation_grounding",
+      "skeptic_review"
+    ]
+  },
+  "answer_engine_patterns": [
+    {
+      "id": "perplexity_style_answer_engine",
+      "summary": "Answer directly, but only after retrieving current evidence, ranking sources, extracting support, synthesizing with inline citations, and checking unsupported claims.",
+      "use_when": [
+        "The user asks for current information.",
+        "A plan depends on external references.",
+        "A research result may become reusable knowledge.",
+        "A final answer includes factual claims that should be source-grounded."
+      ]
+    }
+  ],
+  "answer_engine_stages": [
+    {
+      "id": "query_understanding",
+      "role": "Clarify the task, decompose complex questions, identify time sensitivity, and decide source coverage.",
+      "outputs": [
+        "objective",
+        "search_questions",
+        "known constraints"
+      ]
+    },
+    {
+      "id": "search_retrieval",
+      "role": "Run web search first, then add repository, official docs, paper, code, package, or community searches as needed.",
+      "outputs": [
+        "search_channels",
+        "sources_checked",
+        "freshness notes"
+      ]
+    },
+    {
+      "id": "source_ranking",
+      "role": "Rank retrieved sources by authority, recency, relevance, independence, methodology, and fit to the claim type.",
+      "outputs": [
+        "source types",
+        "source quality notes",
+        "adoption signals separated from proof"
+      ]
+    },
+    {
+      "id": "evidence_extraction",
+      "role": "Extract only the claims, constraints, examples, and contradictions that change the answer or plan.",
+      "outputs": [
+        "evidence snippets or paraphrases",
+        "claim-to-source mapping",
+        "contradictions"
+      ]
+    },
+    {
+      "id": "synthesis",
+      "role": "Turn evidence into concise insights, options, trade-offs, and a recommended plan or answer.",
+      "outputs": [
+        "insights",
+        "options",
+        "plan steps or answer sections"
+      ]
+    },
+    {
+      "id": "citation_grounding",
+      "role": "Attach citations or source references to material factual claims and check that each citation actually supports its claim.",
+      "outputs": [
+        "citation requirements",
+        "grounding checks",
+        "unsupported claim list"
+      ]
+    },
+    {
+      "id": "skeptic_review",
+      "role": "Look for stale sources, unsupported leaps, contradictory evidence, weak internal knowledge, and missing high-authority references.",
+      "outputs": [
+        "risks or unknowns",
+        "follow-up searches",
+        "knowledge validation status"
+      ]
+    }
+  ],
+  "source_quality_tiers": [
+    {
+      "id": "claim_authority",
+      "source_types": [
+        "official",
+        "paper",
+        "standard",
+        "open_source",
+        "reference_implementation"
+      ],
+      "use_for": [
+        "API behavior",
+        "current product facts",
+        "methodology",
+        "implementation structure"
+      ]
+    },
+    {
+      "id": "practical_context",
+      "source_types": [
+        "tech_blog",
+        "analysis",
+        "community",
+        "contrary",
+        "news"
+      ],
+      "use_for": [
+        "trade-offs",
+        "failure cases",
+        "field constraints",
+        "current ecosystem movement"
+      ]
+    },
+    {
+      "id": "adoption_signal",
+      "source_types": [
+        "social",
+        "community"
+      ],
+      "use_for": [
+        "discovery",
+        "interest level",
+        "pain points"
+      ]
+    }
+  ],
+  "source_ranking_rules": [
+    "Prefer official, primary, paper, standard, maintained open-source, or reference implementation sources for factual claims.",
+    "Use technical blogs, analysis articles, and community sources to discover trade-offs and practical failure modes.",
+    "Use social or popularity signals only as adoption, discovery, or attention signals.",
+    "For current facts, compare publication dates, last-updated dates, and source freshness before synthesis.",
+    "For controversial or high-impact claims, require independent confirmation or state uncertainty."
+  ],
+  "citation_grounding_rules": [
+    "Every material factual claim should be traceable to one or more checked sources.",
+    "Citations should sit near the claim they support in final answers or research notes.",
+    "A citation must support the exact claim, not only the broad topic.",
+    "If the citation supports only part of the claim, narrow the claim or add another source.",
+    "If sources conflict, continue searching or present the conflict and uncertainty explicitly.",
+    "Do not cite internal knowledge-base material as authoritative until it passes knowledge-skeptic-agent."
+  ],
+  "post_research_question_ids": [
+    "what_was_asked",
+    "what_was_searched",
+    "which_sources_ranked_highest",
+    "what_changed_the_plan",
+    "what_is_directly_supported",
+    "what_is_uncertain_or_conflicting",
+    "what_should_be_captured",
+    "what_should_be_validated_next"
+  ]
+}

@@ -23,12 +23,13 @@ The operating philosophy lives in [_philosophy/agent-operating-philosophy.en.md]
 1. Classify the factual-risk level of the request.
 2. Confirm which project owns the current work.
 3. Validate internal knowledge-base evidence with `knowledge-skeptic-agent`.
-4. Use `research-insight-planner-agent` when external facts, current information, or multiple references affect the plan.
+4. Use `research-insight-planner-agent` with `research-agent-profile.json` when external facts, current information, or multiple references affect the plan.
 5. Extract factual claims from the draft output.
 6. Attach evidence IDs, source types, access dates, and verification steps to each claim.
-7. Run `hallucination-guard-agent` and require `ready_to_publish`.
-8. If the report returns `grounding_required`, remove unsupported claims, add evidence, verify with tools, or caveat uncertainty.
-9. Record the grounding check in the final evaluation file.
+7. Treat citations as verification handles, not proof, and check that the source directly supports the claim.
+8. Run `hallucination-guard-agent` and require `ready_to_publish`.
+9. If the report returns `grounding_required`, remove unsupported claims, add evidence, verify with tools, or caveat uncertainty.
+10. Record the grounding check in the final evaluation file.
 
 ## Evidence Requirements By Claim Type
 

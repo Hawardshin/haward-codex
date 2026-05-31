@@ -4,6 +4,8 @@
 
 모든 새 지시는 먼저 웹 검색을 수행한다. 중요한 계획은 AI의 내부 확률적 추정만으로 세우지 않고, 웹 검색, 저장소 검색, 공식 문서, 논문, 코드/패키지 자료처럼 여러 검색 채널에서 근거를 모은 뒤 인사이트와 실행 계획으로 바꾼다.
 
+조사 에이전트는 플랫폼의 핵심 기능으로 취급한다. 기본 형태는 Perplexity식 answer engine이다. 즉 검색 결과를 그대로 요약하지 않고, 질문 이해, 검색/검색 확장, 출처 순위화, 증거 추출, 종합, citation grounding, skeptic review 단계를 거친다.
+
 철학적 배경은 [_philosophy/agent-operating-philosophy.ko.md](../_philosophy/agent-operating-philosophy.ko.md)에 둔다. 이 문서는 그 철학을 실행 정책으로 옮긴다.
 
 ## 기본 원칙
@@ -11,7 +13,12 @@
 - 모든 새 사용자 지시는 웹 검색으로 시작한다.
 - 최신성이나 외부 사실이 중요한 작업은 검색 결과의 원문과 확인 날짜를 남긴다.
 - 웹 검색과 최소 하나 이상의 다른 검색 채널을 함께 사용한다.
+- 기본 조사 프로필은 `agent-platform/configs/research/research-agent-profile.json`이다.
+- 계획 입력에는 `research_profile_paths`, `answer_engine_stages`, `citation_requirements`를 기록한다.
+- `answer_engine_stages`에는 `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, `skeptic_review`를 모두 포함한다.
 - 검색 결과를 그대로 답으로 쓰지 않고, 계획에 영향을 주는 인사이트로 재구성한다.
+- 출처는 권위, 최신성, 독립성, 관련성, 방법론, claim 적합도에 따라 순위화한다.
+- citation은 증명 자체가 아니라 검증 핸들이다. 인용된 출처가 해당 주장을 실제로 뒷받침하는지 확인한다.
 - 내부 지식 베이스를 참고할 때는 `knowledge-skeptic-agent`로 틀렸을 가능성을 검증한다.
 - 유용한 외부 레퍼런스는 `_research/`에 저장한다.
 - 계획 과정은 `_history/plans/YYYY/`에 저장한다.
@@ -34,6 +41,9 @@
 - 검색 질문
 - 사용한 검색 채널
 - 확인한 출처
+- 사용한 조사 프로필 경로
+- answer engine 단계
+- citation 요구사항
 - 도출한 인사이트
 - 계획 단계
 - 검증 단계

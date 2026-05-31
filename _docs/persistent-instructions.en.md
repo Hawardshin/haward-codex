@@ -28,6 +28,10 @@ This document records durable user instructions in English.
 - Use `_tools/source-collector/` when broad source collection becomes repetitive or source bundles need scoring/reporting.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before relying on it.
 - For important plans, do not rely only on the model's internal guess; use web search plus another search channel to derive insights before planning.
+- Treat `research-insight-planner-agent` as a core research agent and Perplexity-style answer engine.
+- General research plans must record `agent-platform/configs/research/research-agent-profile.json` in `research_profile_paths` and include `answer_engine_stages` plus `citation_requirements`.
+- The research agent moves through `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, and `skeptic_review`.
+- Rank sources before synthesis and treat citations as verification handles, not proof.
 - Work that uses `research-insight-planner-agent` should set `plan_history_targets` and record plan changes.
 - Before implementing after coding/API/library/architecture/performance/debugging/security/migration research, use `coding-research-agent` to check sources, options, recommendation, risks, validation plan, and standard post-research questions.
 - Coding research must record `source_types` and use at least three distinct non-`other` source types.

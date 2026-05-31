@@ -28,6 +28,10 @@
 - 폭넓은 출처 수집이 반복되거나 출처 묶음 점수화/보고서가 필요하면 `_tools/source-collector/`를 사용한다.
 - 지식 베이스 내용은 틀릴 수 있다고 가정하고, 근거로 사용하기 전 `knowledge-skeptic-agent`로 검증한다.
 - 중요한 계획은 AI의 내부 추정만으로 세우지 않고, 웹 검색과 다른 검색 채널을 통해 인사이트를 도출한 뒤 수립한다.
+- `research-insight-planner-agent`는 플랫폼의 핵심 조사 에이전트이며 Perplexity식 answer engine으로 취급한다.
+- 일반 조사 계획은 `research_profile_paths`에 `agent-platform/configs/research/research-agent-profile.json`을 기록하고, `answer_engine_stages`와 `citation_requirements`를 포함해야 한다.
+- 조사 에이전트는 `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, `skeptic_review` 단계를 거친다.
+- 출처는 종합 전에 순위화하고, citation은 증명 자체가 아니라 검증 핸들로 취급한다.
 - `research-insight-planner-agent`를 쓰는 작업은 `plan_history_targets`를 지정하고 계획 변경 이력을 남긴다.
 - 코딩/API/라이브러리/아키텍처/성능/디버깅/보안/마이그레이션 조사는 구현 전에 `coding-research-agent`로 출처, 선택지, 추천안, 위험, 검증 계획, 표준 종료 질문을 확인한다.
 - 코딩 조사는 `source_types`를 명시하고 최소 3개 이상의 `other`가 아닌 서로 다른 출처 유형을 사용해야 한다.

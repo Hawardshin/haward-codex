@@ -9,6 +9,28 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from agent_platform.planning.research_insight_planner import ResearchInsightPlanInput, create_research_insight_plan
 
 
+def complete_answer_engine_fields() -> dict[str, tuple[str, ...]]:
+    return {
+        "research_profile_paths": (
+            "agent-platform/configs/research/research-agent-profile.json",
+            "agent-platform/configs/research/source-registry.json",
+        ),
+        "answer_engine_stages": (
+            "query_understanding",
+            "search_retrieval",
+            "source_ranking",
+            "evidence_extraction",
+            "synthesis",
+            "citation_grounding",
+            "skeptic_review",
+        ),
+        "citation_requirements": (
+            "Every material factual claim must be traceable to a checked source.",
+            "Conflicting sources require additional research or explicit uncertainty.",
+        ),
+    }
+
+
 class ResearchInsightPlannerTests(unittest.TestCase):
     def test_ready_when_search_insights_and_plan_exist(self) -> None:
         report = create_research_insight_plan(
@@ -17,6 +39,7 @@ class ResearchInsightPlannerTests(unittest.TestCase):
                 search_questions=("What references support iterative retrieval?",),
                 search_channels=("web search", "repository search"),
                 sources_checked=("https://arxiv.org/abs/2212.10509", "_docs/research-capture-policy.ko.md"),
+                **complete_answer_engine_fields(),
                 insights=("Iterative retrieval is useful when each step changes what to search next.",),
                 plan_steps=("Add a planning prompt and CLI readiness check.",),
                 validation_steps=("Run tests and evaluate the result.",),
@@ -38,6 +61,7 @@ class ResearchInsightPlannerTests(unittest.TestCase):
                 search_questions=("What exists already?",),
                 search_channels=("repository search", "documentation search"),
                 sources_checked=("_docs/research-capture-policy.ko.md",),
+                **complete_answer_engine_fields(),
                 insights=("Internal policy exists.",),
                 plan_steps=("Update the workflow.",),
                 validation_steps=("Run checks.",),
@@ -55,6 +79,7 @@ class ResearchInsightPlannerTests(unittest.TestCase):
                 search_questions=("What references support iterative retrieval?",),
                 search_channels=("web search", "repository search"),
                 sources_checked=("https://arxiv.org/abs/2212.10509",),
+                **complete_answer_engine_fields(),
                 insights=("Iterative retrieval is useful.",),
                 plan_steps=("Add a planning prompt.",),
                 validation_steps=("Run tests.",),
@@ -73,6 +98,7 @@ class ResearchInsightPlannerTests(unittest.TestCase):
                 search_questions=("What did prior notes say?",),
                 search_channels=("web search", "repository search"),
                 sources_checked=("_research/topics/example/note.ko.md",),
+                **complete_answer_engine_fields(),
                 insights=("Prior note suggests a direction.",),
                 plan_steps=("Draft a plan.",),
                 validation_steps=("Run evaluator.",),
@@ -92,6 +118,7 @@ class ResearchInsightPlannerTests(unittest.TestCase):
                 search_questions=("What durable rules exist?",),
                 search_channels=("web search", "repository search"),
                 sources_checked=("AGENTS.md",),
+                **complete_answer_engine_fields(),
                 insights=("Repository instructions define durable rules.",),
                 plan_steps=("Update matching docs.",),
                 validation_steps=("Run evaluator.",),
@@ -101,6 +128,85 @@ class ResearchInsightPlannerTests(unittest.TestCase):
         self.assertEqual(report["status"], "more_research_required")
         self.assertIn(
             "Internal knowledge-base sources require knowledge_validation_status=ready_to_reference.",
+            report["gaps"],
+        )
+
+    def test_research_profile_path_is_required(self) -> None:
+        fields = complete_answer_engine_fields()
+        fields.pop("research_profile_paths")
+
+        report = create_research_insight_plan(
+            ResearchInsightPlanInput(
+                objective="Plan a research workflow.",
+                search_questions=("How should the answer engine work?",),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://docs.perplexity.ai/docs/sonar/quickstart",),
+                **fields,
+                insights=("Search-grounded answers need citations.",),
+                plan_steps=("Update the planner.",),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Citation behavior can still be wrong.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn(
+            "Research profile paths are missing; record the research/source configs used for this plan.",
+            report["gaps"],
+        )
+
+    def test_answer_engine_stages_must_be_complete(self) -> None:
+        fields = complete_answer_engine_fields()
+        fields["answer_engine_stages"] = (
+            "query_understanding",
+            "search_retrieval",
+            "synthesis",
+        )
+
+        report = create_research_insight_plan(
+            ResearchInsightPlanInput(
+                objective="Plan a research workflow.",
+                search_questions=("How should the answer engine work?",),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://docs.perplexity.ai/docs/sonar/quickstart",),
+                **fields,
+                insights=("Search-grounded answers need citations.",),
+                plan_steps=("Update the planner.",),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Citation behavior can still be wrong.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn(
+            "Answer engine stages are incomplete; missing: citation_grounding, evidence_extraction, skeptic_review, source_ranking.",
+            report["gaps"],
+        )
+
+    def test_citation_requirements_are_required(self) -> None:
+        fields = complete_answer_engine_fields()
+        fields.pop("citation_requirements")
+
+        report = create_research_insight_plan(
+            ResearchInsightPlanInput(
+                objective="Plan a research workflow.",
+                search_questions=("How should the answer engine work?",),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://docs.perplexity.ai/docs/sonar/quickstart",),
+                **fields,
+                insights=("Search-grounded answers need citations.",),
+                plan_steps=("Update the planner.",),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Citation behavior can still be wrong.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn(
+            "Citation requirements are missing; record how claims will be grounded to checked sources.",
             report["gaps"],
         )
 

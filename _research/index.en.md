@@ -11,6 +11,7 @@
 | Agent planning | [Coding research agent](topics/agent-planning/2026-05-31-coding-research-agent.en.md) |
 | Agent planning | [Reference source config](topics/agent-planning/2026-05-31-reference-source-config.en.md) |
 | Agent planning | [Code reference research](topics/agent-planning/2026-05-31-code-reference-research.en.md) |
+| Agent planning | [Perplexity-style core research agent](topics/agent-planning/2026-05-31-perplexity-style-research-agent.en.md) |
 | Agent reliability | [Hallucination prevention operating references](topics/agent-reliability/2026-05-31-hallucination-prevention.en.md) |
 | Agent memory | [Memory bootstrap](topics/agent-memory/2026-05-31-memory-bootstrap.en.md) |
 | Configuration governance | [Self-documenting configs](topics/configuration/2026-05-31-self-documenting-configs.en.md) |

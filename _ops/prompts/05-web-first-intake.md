@@ -18,6 +18,7 @@ Do not treat search result titles as evidence.
 If search results are irrelevant, say so and continue with repository/local verification.
 If web search fails, record the failure and strengthen local verification.
 If useful reusable findings appear, capture them under _research/.
+If research-insight-planner-agent is needed, use agent-platform/configs/research/research-agent-profile.json and record answer-engine stages plus citation requirements.
 Return:
 - instruction summary
 - search queries used

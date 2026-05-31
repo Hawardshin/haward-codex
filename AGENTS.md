@@ -43,6 +43,10 @@ This repository is the workspace for building and tracking a personal agent-buil
 - For research or planning work, collect broad high-authority sources: official docs, papers, standards, open-source repos, international tech blogs, analysis articles, community signals, social/expert signals, and contrary examples.
 - Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption or discovery signals, not standalone factual proof.
 - For important planning, do not rely only on the model's internal guess; use `research-insight-planner-agent` to combine web search with another search channel, derive insights, and plan validation.
+- Treat `research-insight-planner-agent` as a core Perplexity-style answer engine, not a simple search summarizer.
+- General research plans must record `research_profile_paths`, use `agent-platform/configs/research/research-agent-profile.json`, include all required `answer_engine_stages`, and record `citation_requirements`.
+- Research agent stages are `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, and `skeptic_review`.
+- Rank sources before synthesis and treat citations as verification handles, not proof.
 - When using `research-insight-planner-agent`, set `plan_history_targets` and keep the plan process file updated if the plan changes.
 - For coding/API/library/architecture/performance/debugging/security/migration research, use `coding-research-agent` before implementation and answer all standard post-research questions.
 - Coding research must record diverse `source_types` and use at least three distinct non-`other` source types before it can be treated as implementation-ready.
@@ -92,7 +96,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Run `python3 _tools/workspace-index/src/workspace_index.py` after changing navigational structure.
 - Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, or platform memory anchors.
-- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/coding-research-profile.json` from `agent-platform/` after changing core shared settings.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json` from `agent-platform/` after changing core shared settings.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules

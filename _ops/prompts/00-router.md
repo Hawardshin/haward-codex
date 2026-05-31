@@ -33,6 +33,7 @@ Run memory-bootstrap-agent after web-first intake and before local planning.
 Select the relevant prompt and workflow.
 If the request expresses a durable worldview or operating philosophy, update _philosophy/ and link policy docs to it.
 If the request creates or touches a specific project, decide the owning project folder before editing files.
+For research-heavy work, use research-insight-planner-agent with agent-platform/configs/research/research-agent-profile.json and record the answer-engine stages plus citation requirements.
 If the request needs coding research before implementation, use coding-research-agent and answer every post-research question before coding.
 If a reusable pattern appears, record it as a documentation, tool, template, skill, prompt, or workflow candidate.
 Ground factual claims with hallucination-guard-agent before publishing final outputs that contain facts.

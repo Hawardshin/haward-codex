@@ -21,20 +21,21 @@
 8. Implement or document the smallest useful change.
 9. Prefer Python for agent implementation unless another runtime is clearly better.
 10. Evaluate mature open-source options before building core infrastructure from scratch.
-11. For planning that depends on external facts, use web search and at least one other search channel to derive insights before execution.
-12. For coding research, use `coding-research-agent` to record reference configs, concrete code references, standard post-research answers, and diverse source types before implementation.
-13. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
-14. Save important planning processes under `_history/plans/YYYY/`.
-15. Promote repeated work into a template, tool, skill, prompt, or workflow.
-16. Record important context in `_history/`.
-17. Refresh `_ops/maps/` when navigational structure changes.
-18. Summarize completed work.
-19. Check prior internal work and strong references relevant to the task.
-20. Capture reusable internet research or external references.
-21. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
-22. Evaluate the completed work against the initial instruction.
-23. Rework real gaps and evaluate again.
-24. Commit the coherent change set and push it.
+11. For planning that depends on external facts, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json`.
+12. Treat research as an answer-engine pipeline: query understanding, retrieval, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
+13. For coding research, use `coding-research-agent` to record reference configs, concrete code references, standard post-research answers, and diverse source types before implementation.
+14. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
+15. Save important planning processes under `_history/plans/YYYY/`.
+16. Promote repeated work into a template, tool, skill, prompt, or workflow.
+17. Record important context in `_history/`.
+18. Refresh `_ops/maps/` when navigational structure changes.
+19. Summarize completed work.
+20. Check prior internal work and strong references relevant to the task.
+21. Capture reusable internet research or external references.
+22. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
+23. Evaluate the completed work against the initial instruction.
+24. Rework real gaps and evaluate again.
+25. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -52,6 +53,7 @@ Promote work only when it will reduce future effort.
 | Same close-out quality check repeated | Evaluation agent |
 | Same external reference useful for future work | Research note |
 | Same search-to-insight-to-plan pattern repeated | Planning agent |
+| Same source-grounded answer-engine pattern repeated | Core research agent profile |
 | Same coding research close-out questions repeated | Coding research agent |
 | Same need to explain planning decisions later | Plan history template |
 | Same need to block unsupported factual claims | Hallucination guard agent |

@@ -4,6 +4,8 @@
 
 Every new instruction starts with web search. Important plans should not be created from the model's internal probabilistic guess alone. Gather evidence through web search, repository search, official docs, papers, code/package references, and other search channels, then convert that evidence into insights before creating the execution plan.
 
+The research agent is a core platform capability. Its default shape is a Perplexity-style answer engine: it does not merely summarize search results, but moves through query understanding, search/retrieval, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
+
 The philosophical basis lives in [_philosophy/agent-operating-philosophy.en.md](../_philosophy/agent-operating-philosophy.en.md). This document turns that philosophy into an execution policy.
 
 ## Principles
@@ -11,7 +13,12 @@ The philosophical basis lives in [_philosophy/agent-operating-philosophy.en.md](
 - Start every new user instruction with web search.
 - For current information or external facts, review source content and record the access date.
 - Use web search plus at least one other search channel.
+- The default research profile is `agent-platform/configs/research/research-agent-profile.json`.
+- Planning input must record `research_profile_paths`, `answer_engine_stages`, and `citation_requirements`.
+- `answer_engine_stages` must include `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, and `skeptic_review`.
 - Do not copy search results directly into a plan; turn evidence into decision-relevant insights.
+- Rank sources by authority, freshness, independence, relevance, methodology, and fit to the claim type.
+- Treat citations as verification handles, not proof; check that each cited source supports the exact claim.
 - Validate internal knowledge-base references with `knowledge-skeptic-agent`.
 - Save reusable external references under `_research/`.
 - Save the planning process under `_history/plans/YYYY/`.
@@ -34,6 +41,9 @@ Before execution, record:
 - search questions
 - search channels used
 - sources checked
+- research profile paths
+- answer engine stages
+- citation requirements
 - insights
 - plan steps
 - validation steps

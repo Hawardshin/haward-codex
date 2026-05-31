@@ -15,7 +15,7 @@
 7. 계획에 영향을 주는 출처는 원문을 열어 확인한다.
 8. 검색 결과가 무관하거나 약하면 그 사실을 기록하고 로컬 저장소 검증으로 진행한다.
 9. 외부 사실이나 최신 정보가 있으면 확인 날짜와 출처를 기록한다.
-10. 검색 결과가 계획을 바꾸면 `research-insight-planner-agent`를 사용하고 계획 히스토리에 남긴다.
+10. 검색 결과가 계획을 바꾸면 `research-insight-planner-agent`와 `agent-platform/configs/research/research-agent-profile.json`을 사용하고 계획 히스토리에 남긴다.
 11. 출처가 많거나 반복 정리가 필요하면 `_tools/source-collector/`로 출처 묶음을 정규화하고 보고서를 만든다.
 12. 재사용 가치가 있는 내용은 `_research/`에 저장한다.
 13. 이후 [_ops/workflows/00-start-here.md](00-start-here.md)의 저장소 탐색과 구현 단계로 이동한다.

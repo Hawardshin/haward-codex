@@ -16,6 +16,7 @@
     "update_triggers": [
       "A durable user instruction becomes mandatory for future sessions.",
       "A new shared config, prompt, workflow, project registry, or map becomes part of startup context.",
+      "The core research-agent profile or answer-engine stage rules change.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
     ]
@@ -51,6 +52,18 @@
       "used_for": [
         "rule that shared settings must include references and structure rules inside the file",
         "config contract validation criteria"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "research_agent_profile",
+      "title": "Research Agent Profile",
+      "path": "agent-platform/configs/research/research-agent-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "core Perplexity-style research agent profile",
+        "answer-engine stage rules",
+        "citation grounding and source ranking rules"
       ],
       "last_checked": "2026-05-31"
     },
@@ -177,7 +190,7 @@
       "required": true
     }
   ],
-  "hot_context_limit": 12,
+  "hot_context_limit": 13,
   "default_command": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
   "startup_sequence": [
     "repo_instructions",
@@ -191,6 +204,7 @@
     "project_registry",
     "platform_readme",
     "source_registry",
+    "research_agent_profile",
     "coding_research_profile"
   ],
   "required_anchor_ids": [
@@ -205,6 +219,7 @@
     "project_registry",
     "platform_readme",
     "source_registry",
+    "research_agent_profile",
     "coding_research_profile"
   ],
   "anchors": [
@@ -297,12 +312,20 @@
       "load_order": 11
     },
     {
+      "id": "research_agent_profile",
+      "path": "agent-platform/configs/research/research-agent-profile.json",
+      "tier": "hot",
+      "purpose": "Core Perplexity-style answer-engine research profile for source ranking, evidence extraction, citation grounding, and skeptic review.",
+      "required": true,
+      "load_order": 12
+    },
+    {
       "id": "coding_research_profile",
       "path": "agent-platform/configs/research/coding-research-profile.json",
       "tier": "hot",
       "purpose": "Default source coverage profile for coding research.",
       "required": true,
-      "load_order": 12
+      "load_order": 13
     },
     {
       "id": "platform_operating_model",

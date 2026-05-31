@@ -15,7 +15,7 @@
 7. Read relevant philosophy from `_philosophy/` when the task touches durable worldview or operating principles.
 8. Decide the owning project or shared workspace folder; use [_ops/workflows/25-project-boundary-management.md](25-project-boundary-management.md) when unclear.
 9. Read the target project README and relevant docs.
-10. If planning depends on external facts or current information, run [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md).
+10. If planning depends on external facts or current information, run [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md) with `agent-platform/configs/research/research-agent-profile.json`.
 11. Implement the smallest useful change inside the owning project or shared folder.
 12. Verify with tests, checks, or rendered artifacts.
 13. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).

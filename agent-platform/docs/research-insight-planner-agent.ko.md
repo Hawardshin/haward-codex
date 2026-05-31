@@ -4,6 +4,8 @@
 
 `research-insight-planner-agent`는 AI의 내부 확률적 추정만으로 계획하지 않고, 웹 검색과 저장소 검색, 공식 문서, 논문, 코드/패키지 자료 같은 여러 검색 채널을 통해 근거를 모은 뒤 인사이트와 실행 계획을 만든다.
 
+이 에이전트는 플랫폼의 핵심 조사 에이전트다. Perplexity식 answer engine을 참고해 단순 검색 요약이 아니라 `query_understanding -> search_retrieval -> source_ranking -> evidence_extraction -> synthesis -> citation_grounding -> skeptic_review` 단계를 거친다.
+
 ## 트리거
 
 다음 작업 전에 실행한다.
@@ -28,6 +30,9 @@ agent-platform/configs/planning/research-insight-plan-template.json
 - search questions
 - search channels
 - sources checked
+- research profile paths
+- answer engine stages
+- citation requirements
 - insights
 - plan steps
 - validation steps
@@ -47,7 +52,12 @@ PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning
 ## 규칙
 
 - 최소한 웹 검색과 하나 이상의 다른 검색 채널을 함께 사용한다.
+- `agent-platform/configs/research/research-agent-profile.json`을 기본 조사 프로필로 기록한다.
+- `answer_engine_stages`에는 `research-agent-profile.json`의 필수 stage ID를 모두 기록한다.
+- 중요한 사실 주장은 어떤 출처로 검증할지 `citation_requirements`에 기록한다.
 - 검색 결과를 바로 계획으로 쓰지 말고, 근거가 계획을 어떻게 바꾸는지 인사이트로 정리한다.
+- 출처는 권위, 최신성, 독립성, 관련성, claim 적합도에 따라 순위화한 뒤 종합한다.
+- citation은 증명 자체가 아니라 검증 핸들이므로, 인용된 출처가 해당 주장을 실제로 뒷받침하는지 확인한다.
 - 내부 지식 베이스를 참고하면 `knowledge-skeptic-agent`로 먼저 검증한다.
 - 재사용 가치가 있는 검색 결과는 `_research/`에 기록한다.
 - 계획에는 실행 단계와 검증 단계를 같이 둔다.

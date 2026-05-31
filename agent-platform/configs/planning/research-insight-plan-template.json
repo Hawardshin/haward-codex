@@ -11,6 +11,23 @@
     "https://example.com/official-or-primary-source",
     "_docs/example-policy.ko.md"
   ],
+  "research_profile_paths": [
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/research/source-registry.json"
+  ],
+  "answer_engine_stages": [
+    "query_understanding",
+    "search_retrieval",
+    "source_ranking",
+    "evidence_extraction",
+    "synthesis",
+    "citation_grounding",
+    "skeptic_review"
+  ],
+  "citation_requirements": [
+    "Every material factual claim must be traceable to a checked source.",
+    "Conflicting sources require additional research or explicit uncertainty."
+  ],
   "insights": [
     "Evidence-backed insight that changes or constrains the plan."
   ],

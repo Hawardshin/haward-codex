@@ -24,7 +24,7 @@ This policy is stronger than the earlier rule that required search only for impo
 3. Check official docs, strong references, freshness signals, and contrary signals.
 4. Decide whether the search result changes the plan.
 5. Check repository state and project ownership.
-6. Use `research-insight-planner-agent` when search results should be structured into insights and a plan.
+6. Use `research-insight-planner-agent` and `agent-platform/configs/research/research-agent-profile.json` when search results should be structured into answer-engine stages, insights, and a plan.
 7. Implement or document the work.
 8. Ground factual final claims with `hallucination-guard-agent`.
 9. Record search, reference, and grounding results in the evaluation report.

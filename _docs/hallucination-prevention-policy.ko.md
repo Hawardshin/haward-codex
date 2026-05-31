@@ -23,12 +23,13 @@
 1. 요청에서 사실 주장 위험을 분류한다.
 2. 현재 작업이 어느 프로젝트에 속하는지 확인한다.
 3. 내부 지식 베이스를 근거로 쓸 때는 `knowledge-skeptic-agent`로 검증한다.
-4. 외부 사실, 최신 정보, 여러 레퍼런스가 필요하면 `research-insight-planner-agent`로 검색 기반 계획을 만든다.
+4. 외부 사실, 최신 정보, 여러 레퍼런스가 필요하면 `research-insight-planner-agent`와 `research-agent-profile.json`으로 검색 기반 계획을 만든다.
 5. 산출물 초안에서 사실 주장을 추출한다.
 6. 각 주장에 근거 ID, 출처 종류, 확인 날짜, 검증 단계를 붙인다.
-7. `hallucination-guard-agent`로 `ready_to_publish`가 나오는지 확인한다.
-8. `grounding_required`가 나오면 주장 삭제, 근거 보강, 도구 검증, 불확실성 표시 중 하나로 수정한다.
-9. 완료 평가 파일에 grounding check 결과를 남긴다.
+7. citation은 증명 자체가 아니라 검증 핸들로 보고, 출처가 주장을 직접 지지하는지 확인한다.
+8. `hallucination-guard-agent`로 `ready_to_publish`가 나오는지 확인한다.
+9. `grounding_required`가 나오면 주장 삭제, 근거 보강, 도구 검증, 불확실성 표시 중 하나로 수정한다.
+10. 완료 평가 파일에 grounding check 결과를 남긴다.
 
 ## 주장 유형별 요구 근거
 

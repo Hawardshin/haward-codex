@@ -152,7 +152,10 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 
 - Important plans should not rely only on the model's internal probabilistic guess.
 - Use `research-insight-planner-agent` when planning depends on external facts, current information, multiple references, or prior repository knowledge.
+- Treat `research-insight-planner-agent` as a core Perplexity-style answer engine, backed by `agent-platform/configs/research/research-agent-profile.json`.
+- Record the answer-engine stages and citation requirements before treating research as plan-ready.
 - Use web search plus at least one other channel, then turn evidence into insights, plan steps, and validation steps.
+- Rank sources and verify that citations support the exact claims they are attached to.
 - Save the planning process under `_history/plans/YYYY/` and link it from the final evaluation when it guided the work.
 
 ## Knowledge Validation Policy
