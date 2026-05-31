@@ -9,4 +9,4 @@
 - [x] Create presentation reference curator skill
 - [x] Run verification commands
 - [x] Write evaluation file
-- [ ] Commit and push
+- [x] Commit and push
