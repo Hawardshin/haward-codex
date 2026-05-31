@@ -42,6 +42,7 @@ PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agen
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/example-python-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli score-oss configs/open-source/candidate-template.json
 PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/work-evaluation-template.json
+PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluation/knowledge-validation-template.json
 ```
 
 ## Current Skeleton

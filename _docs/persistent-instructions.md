@@ -20,6 +20,7 @@
 - Use `_ops/` as the durable operations hub for prompts, workflows, and maps.
 - Track active agents and parallel work in `_ops/coordination/`.
 - Capture reusable findings from internet research and external references under `_research/`.
+- Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before relying on it.
 - Compress long conversation context into repository docs and history logs.
 - Promote repeated workflows into templates, tools, or skills when useful.
 - Keep repository and prompt maps current when navigational structure changes.

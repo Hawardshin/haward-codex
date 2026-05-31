@@ -9,14 +9,15 @@
 1. Capture the initial instruction and the actual result summary.
 2. Summarize the completed work in plain language.
 3. Check prior internal work, repository examples, official docs, mature open-source projects, or other strong references before evaluation.
-4. Capture reusable internet research or external references when useful.
-5. List changed files, verification results, and references checked.
-6. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
-7. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
-8. Complete the follow-up action.
-9. Evaluate again.
-10. Save the final evaluation report under `_history/evaluations/YYYY/`.
-11. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
+4. Validate any reused knowledge-base content with [_ops/workflows/65-validate-knowledge-reference.md](65-validate-knowledge-reference.md).
+5. Capture reusable internet research or external references when useful.
+6. List changed files, verification results, and references checked.
+7. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
+8. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
+9. Complete the follow-up action.
+10. Evaluate again.
+11. Save the final evaluation report under `_history/evaluations/YYYY/`.
+12. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
 
 ## Python Command
 

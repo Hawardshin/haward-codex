@@ -22,6 +22,10 @@
 
 -
 
+## Uncertainty And Contrary Signals
+
+-
+
 ## Applicability
 
 -

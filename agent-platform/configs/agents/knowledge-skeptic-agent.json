@@ -1,0 +1,15 @@
+{
+  "name": "knowledge-skeptic-agent",
+  "description": "Assumes knowledge-base content can be outdated, incomplete, or wrong and validates references before reuse.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "agent-platform:validate-knowledge"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "before using _research, _docs, _history, or other knowledge-base content as evidence",
+    "input_schema": "agent-platform/configs/evaluation/knowledge-validation-template.json",
+    "policy": "If validation returns verification_required, resolve gaps before relying on the knowledge."
+  }
+}

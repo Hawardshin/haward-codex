@@ -11,8 +11,9 @@
 3. Choose a topic path under `_research/topics/<topic>/`.
 4. Create Korean and English notes from `_templates/research-note/` when the finding is durable.
 5. Record source URLs, access date, summary, reliability, applicability, and related work.
-6. Update `_research/index.ko.md` and `_research/index.en.md`.
-7. Link the note from the relevant project doc, history entry, or evaluation report.
+6. Record freshness and known uncertainty so future work can validate the note.
+7. Update `_research/index.ko.md` and `_research/index.en.md`.
+8. Link the note from the relevant project doc, history entry, or evaluation report.
 
 ## Rule
 

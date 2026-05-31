@@ -118,3 +118,9 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Reusable internet research and external references live under `_research/`.
 - Research notes should include source URLs, access dates, summaries, reliability, applicability, and related work.
 - Capture only findings that are likely to reduce future work or improve future decisions.
+
+## Knowledge Validation Policy
+
+- Knowledge-base content is not automatically authoritative.
+- Use `knowledge-skeptic-agent` before relying on `_research`, `_docs`, `_history`, or old project docs for important decisions.
+- Resolve freshness, source quality, contradiction, and applicability gaps before using the knowledge as evidence.

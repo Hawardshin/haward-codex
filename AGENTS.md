@@ -33,6 +33,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/` before committing meaningful work.
 - Track active agents and parallel work in `_ops/coordination/status.json` and generated coordination boards.
 - Capture reusable internet research and strong external references under `_research/`.
+- Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before using it as evidence.
 
 ## Platformization Rules
 
@@ -72,6 +73,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Include a completed-work summary and references checked in the evaluation input.
 - Check repository history, existing project docs, official documentation, mature open-source projects, or other strong references before judging related work.
 - When internet research produces reusable findings, create or update research notes and link them from related docs or evaluation reports.
+- Use `knowledge-skeptic-agent` when relying on `_research`, `_docs`, `_history`, or previous project docs for important decisions.
 - If the evaluator identifies missing requirements or mismatches, turn them into follow-up actions and complete them before final close-out.
 - Re-run relevant tests or checks after rework.
 - Non-blocking improvements can be recorded in history or project docs, but blocking gaps must be fixed.
@@ -89,6 +91,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Prefer open-source dependencies and tools when they are mature, maintained, license-compatible, and fit the task.
 - When choosing external dependencies for current work, verify their current status and docs instead of relying only on memory.
 - Preserve reusable research findings with source URLs, access dates, summaries, reliability, and applicability.
+- Do not treat repository knowledge-base content as authoritative without checking freshness, source quality, and contradictions.
 
 ## Context Management Rules
 

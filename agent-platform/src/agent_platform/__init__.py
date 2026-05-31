@@ -3,6 +3,7 @@
 from agent_platform.core.models import AgentSpec, ExecutionRequest, ExecutionResult
 from agent_platform.core.registry import AgentRegistry, load_agent_spec, load_registry_dir
 from agent_platform.core.runtime import AgentRuntime, PythonFunctionRuntime
+from agent_platform.evaluation.knowledge_skeptic import KnowledgeValidationInput, validate_knowledge_reference
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 
 __all__ = [
@@ -11,9 +12,11 @@ __all__ = [
     "AgentSpec",
     "ExecutionRequest",
     "ExecutionResult",
+    "KnowledgeValidationInput",
     "PythonFunctionRuntime",
     "WorkEvaluationInput",
     "evaluate_work",
     "load_agent_spec",
     "load_registry_dir",
+    "validate_knowledge_reference",
 ]

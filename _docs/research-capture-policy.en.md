@@ -39,3 +39,4 @@ Each research note should include at least:
 - Use only short quotes from copyrighted material and summarize the rest.
 - Mark time-sensitive information with the research date.
 - Record usage terms, licenses, or security risks when relevant.
+- Record uncertainty, possible staleness, and contrary signals so future work can validate the note.
