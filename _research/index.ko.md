@@ -17,6 +17,7 @@
 | 에이전트 신뢰성 | [할루시네이션 방지 운영 레퍼런스](topics/agent-reliability/2026-05-31-hallucination-prevention.ko.md) |
 | 에이전트 메모리 | [메모리 부트스트랩](topics/agent-memory/2026-05-31-memory-bootstrap.ko.md) |
 | 에이전트 메모리 | [컨텍스트 아카이브 정책](topics/agent-memory/2026-05-31-context-archive-policy.ko.md) |
+| 에이전트 메모리 | [사용자 요청 요약 저장](topics/agent-memory/2026-05-31-user-request-summaries.ko.md) |
 | 설정 거버넌스 | [자가 설명형 설정 파일](topics/configuration/2026-05-31-self-documenting-configs.ko.md) |
 | 문서화 | [읽기 쉬운 작업 요약 구조](topics/documentation/2026-05-31-readable-work-summaries.ko.md) |
 | 의존성 관리 | [설치 감사 기록 정책](topics/dependency-management/2026-05-31-installation-audit-trail.ko.md) |

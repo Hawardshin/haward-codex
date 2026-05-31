@@ -16,6 +16,9 @@
   "web_search_record_targets": [
     "_history/web-searches/YYYY/YYYY-MM-DD-slug.ko.md"
   ],
+  "user_request_summary_targets": [
+    "_history/user-requests/YYYY/YYYY-MM-DD.ko.md"
+  ],
   "work_summary_targets": [
     "_history/work-summaries/YYYY/YYYY-MM-DD.ko.md"
   ],

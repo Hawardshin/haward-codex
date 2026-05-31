@@ -17,6 +17,7 @@ Compare the initial instruction, actual result, changed files, and verification 
 Compare the result against strong references and identify what is weaker or missing.
 If the final output contains factual claims, require a grounding check from hallucination-guard-agent.
 Require web_search_record_targets that point to public search records under _history/web-searches/YYYY/.
+Require user_request_summary_targets that point to request summaries under _history/user-requests/YYYY/.
 Require work_summary_targets that point to the user-readable summary files under _history/work-summaries/YYYY/.
 If context archiving occurred, require context_archiving_occurred=true and context_archive_targets under _history/context-archives/YYYY/.
 If installation occurred, require installation_occurred=true and installation_record_targets that point to _history/installations/YYYY/ records.
@@ -36,6 +37,7 @@ Return ready_to_close only when there are no blocking gaps.
 - references checked
 - grounding checks
 - web search record targets
+- user request summary targets
 - work summary targets
 - context archiving occurred
 - context archive targets

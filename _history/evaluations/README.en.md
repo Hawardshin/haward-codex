@@ -20,6 +20,7 @@ _history/evaluations/YYYY/YYYY-MM-DD-<slug>.en.md
 - work summary
 - references checked
 - web search record targets
+- user request summary targets
 - context archive targets
 - changed files
 - verification results

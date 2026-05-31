@@ -12,19 +12,20 @@
 4. Review generated `_ops/maps/repository-map.md`, `_ops/maps/prompt-map.md`, and `_ops/coordination/board.ko.md`.
 5. Summarize completed work and checked references.
 6. Confirm the public web search record exists under `_history/web-searches/YYYY/`.
-7. Confirm project-specific files stayed inside the owning project folder, or document why the change is shared.
-8. Confirm any project registry change is reflected in `_ops/projects/registry.json` and indexes.
-9. Confirm any important plan process has been saved under `_history/plans/YYYY/`.
-10. If the next session needs a compact handoff, run [_ops/workflows/45-context-archive.md](45-context-archive.md) and confirm `_history/context-archives/YYYY/` was updated.
-11. Capture reusable internet research or external references with [_ops/workflows/60-capture-research.md](60-capture-research.md).
-12. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when final outputs contain factual claims.
-13. If installation, upgrade, removal, or global environment configuration occurred, run [_ops/workflows/58-installation-record.md](58-installation-record.md) and confirm `_ops/installations/registry.json` plus `_history/installations/YYYY/` were updated.
-14. Run the work evaluation loop from [_ops/workflows/40-evaluate-and-rework.md](40-evaluate-and-rework.md).
-15. Confirm the evaluation report file exists under `_history/evaluations/YYYY/`.
-16. Update `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md` and English companion for important durable context.
-17. Update `_history/YYYY/YYYY-MM-DD.md`.
-18. Commit the coherent change set.
-19. Push to `origin/main`.
+7. Confirm the user request summary exists under `_history/user-requests/YYYY/`.
+8. Confirm project-specific files stayed inside the owning project folder, or document why the change is shared.
+9. Confirm any project registry change is reflected in `_ops/projects/registry.json` and indexes.
+10. Confirm any important plan process has been saved under `_history/plans/YYYY/`.
+11. If the next session needs a compact handoff, run [_ops/workflows/45-context-archive.md](45-context-archive.md) and confirm `_history/context-archives/YYYY/` was updated.
+12. Capture reusable internet research or external references with [_ops/workflows/60-capture-research.md](60-capture-research.md).
+13. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when final outputs contain factual claims.
+14. If installation, upgrade, removal, or global environment configuration occurred, run [_ops/workflows/58-installation-record.md](58-installation-record.md) and confirm `_ops/installations/registry.json` plus `_history/installations/YYYY/` were updated.
+15. Run the work evaluation loop from [_ops/workflows/40-evaluate-and-rework.md](40-evaluate-and-rework.md).
+16. Confirm the evaluation report file exists under `_history/evaluations/YYYY/`.
+17. Update `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md` and English companion for important durable context.
+18. Update `_history/YYYY/YYYY-MM-DD.md`.
+19. Commit the coherent change set.
+20. Push to `origin/main`.
 
 ## Rule
 
@@ -33,6 +34,8 @@ Any change to root folders, `_ops/prompts/`, `_ops/workflows/`, `_tools/`, `_ski
 Meaningful work should leave a scan-friendly summary under `_history/work-summaries/` before close-out.
 
 Meaningful work should leave a public web search record under `_history/web-searches/` before close-out.
+
+Meaningful work should leave a user request summary under `_history/user-requests/` before close-out.
 
 If context was compressed for future resumption, leave a context archive packet under `_history/context-archives/`.
 

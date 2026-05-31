@@ -97,11 +97,11 @@
     <main>
       <header>
         <h1>작업 조율 보드</h1>
-        <p>Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, and context archive structures added. No separate parallel agent tasks are currently active.</p>
+        <p>Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, and user request summary structures added. No separate parallel agent tasks are currently active.</p>
         <div class="meta">
           <span class="pill">Updated: 2026-05-31</span>
           <span class="pill">Agents: 1</span>
-          <span class="pill">Tasks: 5</span>
+          <span class="pill">Tasks: 6</span>
           <span class="pill">Blockers: None</span>
         </div>
       </header>
@@ -164,6 +164,13 @@
               <td>completed</td>
               <td>codex-primary</td>
               <td>No action. Future long-context work should create context archive packets before relying on chat memory.</td>
+            </tr>
+<tr>
+              <td>2026-05-31-user-request-summaries</td>
+              <td>Save user request summaries</td>
+              <td>completed</td>
+              <td>codex-primary</td>
+              <td>No action. Future meaningful work must update _history/user-requests before close-out.</td>
             </tr>
           </tbody>
         </table>

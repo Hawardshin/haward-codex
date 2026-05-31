@@ -19,6 +19,7 @@
       "The core research-agent profile or answer-engine stage rules change.",
       "The work summary layer or close-out documentation contract changes.",
       "The context archive layer or long-context resume contract changes.",
+      "The user request summary layer or request-intent tracking contract changes.",
       "The web search record layer or prompt-level search contract changes.",
       "The installation registry or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
@@ -78,6 +79,17 @@
       "used_for": [
         "long-context compaction and resume packet rules",
         "document-based continuation after context saturation"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "user_request_summary_policy",
+      "title": "User Request Summary Policy",
+      "path": "_history/user-requests/README.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "summary records of user prompts and instructions",
+        "request-intent tracking without storing full original prompt text"
       ],
       "last_checked": "2026-05-31"
     },
@@ -226,6 +238,16 @@
       ]
     },
     {
+      "id": "user_request_summaries_must_stay_discoverable",
+      "rule": "The user request summary layer must remain a warm memory anchor and close-out target so future sessions can inspect what the user asked for without relying on raw chat.",
+      "reason": "The user explicitly requested summaries of their varied prompts and requests to be saved as files.",
+      "applies_to": [
+        "anchors",
+        "required_anchor_ids",
+        "work-evaluator-agent"
+      ]
+    },
+    {
       "id": "web_search_records_must_stay_discoverable",
       "rule": "The web search record layer must remain a warm memory anchor and close-out target so future sessions can inspect prompt-level searches and public decision summaries.",
       "reason": "The user explicitly requires every prompt to start with web search and to leave a text record of the search process without storing raw internal reasoning.",
@@ -305,6 +327,7 @@
     "coding_research_profile",
     "work_summary_policy",
     "context_archive_policy",
+    "user_request_summary_policy",
     "web_search_record_policy",
     "installation_registry"
   ],
@@ -324,6 +347,7 @@
     "coding_research_profile",
     "work_summary_policy",
     "context_archive_policy",
+    "user_request_summary_policy",
     "web_search_record_policy",
     "installation_registry"
   ],
@@ -505,12 +529,20 @@
       "load_order": 28
     },
     {
+      "id": "user_request_summary_policy",
+      "path": "_history/user-requests/README.ko.md",
+      "tier": "warm",
+      "purpose": "Rules for summarizing the user's prompts and instructions into durable request-intent records.",
+      "required": true,
+      "load_order": 29
+    },
+    {
       "id": "web_search_record_policy",
       "path": "_history/web-searches/README.ko.md",
       "tier": "warm",
       "purpose": "Prompt-level web search record rules and public search reasoning summary requirements.",
       "required": true,
-      "load_order": 29
+      "load_order": 30
     },
     {
       "id": "installation_registry",
@@ -518,7 +550,7 @@
       "tier": "warm",
       "purpose": "Installation audit registry for installs, upgrades, removals, global environment changes, and rollback tracking.",
       "required": true,
-      "load_order": 30
+      "load_order": 31
     },
     {
       "id": "daily_history",
@@ -526,7 +558,7 @@
       "tier": "warm",
       "purpose": "Current dated work log and compressed context.",
       "required": true,
-      "load_order": 31
+      "load_order": 32
     },
     {
       "id": "repository_map",

@@ -35,6 +35,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Before evaluation, summarize completed work and check prior internal work or strong external references relevant to the task.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/` before committing meaningful work.
 - Save important planning processes as files under `_history/plans/YYYY/`.
+- Save summaries of meaningful user requests under `_history/user-requests/YYYY/`; do not preserve full original prompt text unless necessary.
 - Maintain quick human-readable work summaries under `_history/work-summaries/YYYY/` before closing meaningful work.
 - Track active agents and parallel work in `_ops/coordination/status.json` and generated coordination boards.
 - Capture reusable internet research and strong external references under `_research/`.
@@ -113,6 +114,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `work-evaluator-agent` to compare the initial instruction, actual result, changed files, and verification.
 - Include a completed-work summary and references checked in the evaluation input.
 - Include `web_search_record_targets` in evaluation input; missing web search record targets are blocking gaps.
+- Include `user_request_summary_targets` in evaluation input; missing request summaries are blocking gaps.
 - Include `work_summary_targets` in evaluation input so the user-readable summary location is checked.
 - If installation occurred, include `installation_occurred=true` and `installation_record_targets`; missing installation records are blocking gaps.
 - Check repository history, existing project docs, official documentation, mature open-source projects, or other strong references before judging related work.
@@ -148,6 +150,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 ## Context Management Rules
 
 - When conversation context becomes long, compress stable decisions into `_history/YYYY/YYYY-MM-DD.md` and the relevant project docs.
+- Preserve the user's request intent as summaries under `_history/user-requests/YYYY/` so future work can inspect what was asked without relying on chat memory.
 - When context saturation risk appears, proactively create a resume packet under `_history/context-archives/YYYY/` and continue from repository documents rather than chat memory.
 - Context archive packets should link must-read files, remaining work, verification state, related web search records, plans, evaluations, and commits.
 - If context archiving occurred, include `context_archiving_occurred=true` and `context_archive_targets` in evaluation input.

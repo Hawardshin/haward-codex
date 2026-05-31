@@ -20,6 +20,7 @@ _history/evaluations/YYYY/YYYY-MM-DD-<slug>.en.md
 - 작업 요약
 - 확인한 레퍼런스
 - 웹 검색 기록 경로
+- 사용자 요청 요약 경로
 - 컨텍스트 아카이브 경로
 - 변경 파일
 - 검증 결과

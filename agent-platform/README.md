@@ -33,6 +33,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep project history and decisions outside transient chat context.
 - Keep user-readable completed-work summaries under `_history/work-summaries/`.
 - Keep prompt-level web search records under `_history/web-searches/`.
+- Keep user request summaries under `_history/user-requests/`.
 - Keep long-context resume packets under `_history/context-archives/` when context saturation risk appears.
 - Prefer Python for agent runtimes, orchestration, evaluation, and backend automation.
 - Prefer mature open-source components before custom platform infrastructure.
@@ -96,6 +97,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - shared settings should include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide`, then pass `check-config-contract`
 - factual final outputs should pass `hallucination-guard-agent` when claims need grounding
 - close-out evaluation should include `web_search_record_targets` pointing to `_history/web-searches/YYYY/`
+- close-out evaluation should include `user_request_summary_targets` pointing to `_history/user-requests/YYYY/`
 - close-out evaluation should include `work_summary_targets` pointing to `_history/work-summaries/YYYY/`
 - context archive close-out should include `context_archiving_occurred=true` and `context_archive_targets`
 - installation close-out should include `installation_occurred=true` and `installation_record_targets` when dependency or environment state changed
