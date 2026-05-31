@@ -1,0 +1,30 @@
+{
+  "objective": "Decision or project plan to create from research.",
+  "search_questions": [
+    "What facts, references, examples, or constraints must be known before planning?"
+  ],
+  "search_channels": [
+    "web search",
+    "repository search"
+  ],
+  "sources_checked": [
+    "https://example.com/official-or-primary-source",
+    "_docs/example-policy.ko.md"
+  ],
+  "insights": [
+    "Evidence-backed insight that changes or constrains the plan."
+  ],
+  "plan_steps": [
+    "Concrete next action based on the insights."
+  ],
+  "validation_steps": [
+    "How the plan result will be checked."
+  ],
+  "knowledge_validation_status": "ready_to_reference",
+  "risks_or_unknowns": [
+    "What may still be wrong, stale, incomplete, or uncertain."
+  ],
+  "capture_targets": [
+    "_research/topics/<topic>/"
+  ]
+}

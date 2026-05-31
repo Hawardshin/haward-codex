@@ -43,6 +43,7 @@ PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/exampl
 PYTHONPATH=src python3 -m agent_platform.cli score-oss configs/open-source/candidate-template.json
 PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/work-evaluation-template.json
 PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluation/knowledge-validation-template.json
+PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 ```
 
 ## Current Skeleton
@@ -51,8 +52,10 @@ PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluati
 - `src/agent_platform/adapters/`: future external framework adapters
 - `src/agent_platform/evaluation/`: evaluation agents and close-out checks
 - `src/agent_platform/oss/`: open-source dependency evaluation helpers
+- `src/agent_platform/planning/`: research-backed insight and planning checks
 - `configs/agents/`: declarative agent specs
 - `configs/evaluation/`: structured evaluation inputs
+- `configs/planning/`: structured planning inputs
 - `configs/open-source/`: dependency candidate scoring inputs
 - `docs/python-agent-structure.md`: implementation structure
 - `docs/open-source-integration.md`: dependency evaluation and adapter policy

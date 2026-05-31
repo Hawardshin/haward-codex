@@ -16,6 +16,7 @@ This document records durable user instructions in English.
 - Track active agents and parallel work in `_ops/coordination/`.
 - Capture reusable findings from internet research and external references under `_research/`.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before relying on it.
+- For important plans, do not rely only on the model's internal guess; use web search plus another search channel to derive insights before planning.
 - Compress long conversation context into repository docs and history logs.
 - Promote repeated workflows into templates, tools, skills, prompts, or workflows when useful.
 - Keep repository and prompt maps current when navigational structure changes.

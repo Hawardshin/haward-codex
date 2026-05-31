@@ -34,6 +34,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Track active agents and parallel work in `_ops/coordination/status.json` and generated coordination boards.
 - Capture reusable internet research and strong external references under `_research/`.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before using it as evidence.
+- For important planning, do not rely only on the model's internal guess; use `research-insight-planner-agent` to combine web search with another search channel, derive insights, and plan validation.
 
 ## Platformization Rules
 
@@ -72,6 +73,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `work-evaluator-agent` to compare the initial instruction, actual result, changed files, and verification.
 - Include a completed-work summary and references checked in the evaluation input.
 - Check repository history, existing project docs, official documentation, mature open-source projects, or other strong references before judging related work.
+- Use `research-insight-planner-agent` when planning depends on external facts, current information, prior repository knowledge, or multiple references.
 - When internet research produces reusable findings, create or update research notes and link them from related docs or evaluation reports.
 - Use `knowledge-skeptic-agent` when relying on `_research`, `_docs`, `_history`, or previous project docs for important decisions.
 - If the evaluator identifies missing requirements or mismatches, turn them into follow-up actions and complete them before final close-out.

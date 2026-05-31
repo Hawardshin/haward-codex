@@ -5,6 +5,7 @@ from agent_platform.core.registry import AgentRegistry, load_agent_spec, load_re
 from agent_platform.core.runtime import AgentRuntime, PythonFunctionRuntime
 from agent_platform.evaluation.knowledge_skeptic import KnowledgeValidationInput, validate_knowledge_reference
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
+from agent_platform.planning.research_insight_planner import ResearchInsightPlanInput, create_research_insight_plan
 
 __all__ = [
     "AgentRegistry",
@@ -14,7 +15,9 @@ __all__ = [
     "ExecutionResult",
     "KnowledgeValidationInput",
     "PythonFunctionRuntime",
+    "ResearchInsightPlanInput",
     "WorkEvaluationInput",
+    "create_research_insight_plan",
     "evaluate_work",
     "load_agent_spec",
     "load_registry_dir",

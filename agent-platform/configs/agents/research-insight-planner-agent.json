@@ -1,0 +1,15 @@
+{
+  "name": "research-insight-planner-agent",
+  "description": "Uses web search and other search channels to derive evidence-backed insights before creating an execution plan.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "agent-platform:plan-from-research"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "before planning work that benefits from current external knowledge, prior repository knowledge, or multiple references",
+    "input_schema": "agent-platform/configs/planning/research-insight-plan-template.json",
+    "policy": "Search first, synthesize evidence into insights, validate internal knowledge, then plan execution and verification."
+  }
+}

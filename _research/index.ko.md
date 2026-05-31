@@ -2,7 +2,9 @@
 
 ## 주제
 
-아직 기록된 주제별 리서치 노트가 없다.
+| 주제 | 노트 |
+| --- | --- |
+| 에이전트 계획 | [검색 기반 인사이트 계획](topics/agent-planning/2026-05-31-search-insight-planning.ko.md) |
 
 ## 갱신 규칙
 

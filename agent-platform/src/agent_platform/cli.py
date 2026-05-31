@@ -10,6 +10,7 @@ from agent_platform.core.registry import load_agent_spec, load_registry_dir
 from agent_platform.evaluation.knowledge_skeptic import KnowledgeValidationInput, validate_knowledge_reference
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidate
+from agent_platform.planning.research_insight_planner import ResearchInsightPlanInput, create_research_insight_plan
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -30,6 +31,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     validate_knowledge = subparsers.add_parser("validate-knowledge", help="Validate a knowledge-base reference skeptically.")
     validate_knowledge.add_argument("path", type=Path)
+
+    plan_from_research = subparsers.add_parser("plan-from-research", help="Check whether search-backed insights are ready for planning.")
+    plan_from_research.add_argument("path", type=Path)
 
     return parser
 
@@ -64,6 +68,12 @@ def main(argv: list[str] | None = None) -> int:
         with args.path.open("r", encoding="utf-8") as file:
             validation_input = KnowledgeValidationInput.from_dict(json.load(file))
         print(json.dumps(validate_knowledge_reference(validation_input), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "plan-from-research":
+        with args.path.open("r", encoding="utf-8") as file:
+            plan_input = ResearchInsightPlanInput.from_dict(json.load(file))
+        print(json.dumps(create_research_insight_plan(plan_input), indent=2, ensure_ascii=False))
         return 0
 
     raise ValueError(f"Unknown command: {args.command}")

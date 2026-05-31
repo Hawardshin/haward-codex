@@ -17,12 +17,14 @@
 
 - 작업을 시작할 때: [_ops/workflows/00-start-here.md](workflows/00-start-here.md)
 - 프롬프트를 고를 때: [_ops/prompts/00-router.md](prompts/00-router.md)
+- 웹 검색 기반 인사이트로 계획할 때: [_ops/workflows/55-research-insight-planning.md](workflows/55-research-insight-planning.md)
 - 진행 중인 에이전트/병렬 작업을 볼 때: [_ops/coordination/board.ko.md](coordination/board.ko.md), [_ops/coordination/board.html](coordination/board.html)
 - 재사용 가능한 조사 내용을 볼 때: [_research/index.ko.md](../_research/index.ko.md)
 - 저장소 구조를 볼 때: [_ops/maps/repository-map.md](maps/repository-map.md)
 - 프롬프트 목록을 볼 때: [_ops/maps/prompt-map.md](maps/prompt-map.md)
 - 반복 작업을 줄일 때: [_docs/capability-governance.md](../_docs/capability-governance.md)
 - 지속 지시를 확인할 때: [_docs/persistent-instructions.md](../_docs/persistent-instructions.md)
+- 검색 기반 계획 정책을 확인할 때: [_docs/search-insight-planning-policy.ko.md](../_docs/search-insight-planning-policy.ko.md), [_docs/search-insight-planning-policy.en.md](../_docs/search-insight-planning-policy.en.md)
 - 문서 언어 정책을 확인할 때: [_docs/documentation-language-policy.ko.md](../_docs/documentation-language-policy.ko.md), [_docs/documentation-language-policy.en.md](../_docs/documentation-language-policy.en.md)
 
 ## Update Rule

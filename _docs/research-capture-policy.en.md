@@ -28,6 +28,8 @@ Each research note should include at least:
 - access date
 - source URLs
 - key summary
+- derived insights
+- planning impact
 - reliability assessment
 - applicability
 - related project or task

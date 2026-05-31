@@ -119,6 +119,12 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Research notes should include source URLs, access dates, summaries, reliability, applicability, and related work.
 - Capture only findings that are likely to reduce future work or improve future decisions.
 
+## Search Insight Planning Policy
+
+- Important plans should not rely only on the model's internal probabilistic guess.
+- Use `research-insight-planner-agent` when planning depends on external facts, current information, multiple references, or prior repository knowledge.
+- Use web search plus at least one other channel, then turn evidence into insights, plan steps, and validation steps.
+
 ## Knowledge Validation Policy
 
 - Knowledge-base content is not automatically authoritative.

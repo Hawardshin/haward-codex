@@ -17,15 +17,16 @@
 4. Implement or document the smallest useful change.
 5. Prefer Python for agent implementation unless another runtime is clearly better.
 6. Evaluate mature open-source options before building core infrastructure from scratch.
-7. Promote repeated work into a template, tool, skill, prompt, or workflow.
-8. Record important context in `_history/`.
-9. Refresh `_ops/maps/` when navigational structure changes.
-10. Summarize completed work.
-11. Check prior internal work and strong references relevant to the task.
-12. Capture reusable internet research or external references.
-13. Evaluate the completed work against the initial instruction.
-14. Rework real gaps and evaluate again.
-15. Commit the coherent change set and push it.
+7. For planning that depends on external facts, use web search and at least one other search channel to derive insights before execution.
+8. Promote repeated work into a template, tool, skill, prompt, or workflow.
+9. Record important context in `_history/`.
+10. Refresh `_ops/maps/` when navigational structure changes.
+11. Summarize completed work.
+12. Check prior internal work and strong references relevant to the task.
+13. Capture reusable internet research or external references.
+14. Evaluate the completed work against the initial instruction.
+15. Rework real gaps and evaluate again.
+16. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -41,6 +42,7 @@ Promote work only when it will reduce future effort.
 | Same prompt or work sequence repeated | `_ops` prompt or workflow |
 | Same close-out quality check repeated | Evaluation agent |
 | Same external reference useful for future work | Research note |
+| Same search-to-insight-to-plan pattern repeated | Planning agent |
 
 ## Context Compression
 

@@ -2,7 +2,9 @@
 
 ## Topics
 
-No topic-specific research notes have been recorded yet.
+| Topic | Note |
+| --- | --- |
+| Agent planning | [Search insight planning](topics/agent-planning/2026-05-31-search-insight-planning.en.md) |
 
 ## Update Rules
 

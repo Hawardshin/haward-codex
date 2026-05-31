@@ -10,7 +10,7 @@
 2. Decide whether the finding is reusable, decision-relevant, or useful for future evaluation.
 3. Choose a topic path under `_research/topics/<topic>/`.
 4. Create Korean and English notes from `_templates/research-note/` when the finding is durable.
-5. Record source URLs, access date, summary, reliability, applicability, and related work.
+5. Record source URLs, access date, summary, derived insights, planning impact, reliability, applicability, and related work.
 6. Record freshness and known uncertainty so future work can validate the note.
 7. Update `_research/index.ko.md` and `_research/index.en.md`.
 8. Link the note from the relevant project doc, history entry, or evaluation report.
