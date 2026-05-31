@@ -7,6 +7,9 @@
   "verification": [
     "command or check result"
   ],
+  "references_checked": [
+    "internal path, previous work, official docs, or strong external reference checked before evaluation"
+  ],
   "known_gaps": [],
   "improvement_ideas": []
 }

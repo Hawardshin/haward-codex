@@ -96,6 +96,8 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 ## Evaluation Policy
 
 - Meaningful work should pass an evaluation step before close-out.
+- Evaluation starts with a completed-work summary and reference check.
 - The evaluator compares the initial instruction with the actual result, changed files, and verification.
+- The evaluator should consider relevant prior internal work, official docs, mature open-source projects, or other strong references.
 - If gaps are found, they become follow-up actions and the work returns to implementation.
 - The default evaluator is `work-evaluator-agent` in `agent-platform/configs/agents/`.

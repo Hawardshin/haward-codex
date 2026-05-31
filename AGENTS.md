@@ -28,6 +28,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Do not rewrite history, reset, or discard user changes unless explicitly requested.
 - Update the relevant history log before committing when the work changes project direction, repository rules, or meaningful artifacts.
 - Before final close-out of meaningful work, evaluate the result against the user's initial instruction and rework any real gaps before committing or final response.
+- Before evaluation, summarize completed work and check prior internal work or strong external references relevant to the task.
 
 ## Platformization Rules
 
@@ -62,6 +63,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 ## Evaluation Rules
 
 - Use `work-evaluator-agent` to compare the initial instruction, actual result, changed files, and verification.
+- Include a completed-work summary and references checked in the evaluation input.
+- Check repository history, existing project docs, official documentation, mature open-source projects, or other strong references before judging related work.
 - If the evaluator identifies missing requirements or mismatches, turn them into follow-up actions and complete them before final close-out.
 - Re-run relevant tests or checks after rework.
 - Non-blocking improvements can be recorded in history or project docs, but blocking gaps must be fixed.

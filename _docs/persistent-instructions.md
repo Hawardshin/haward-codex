@@ -9,6 +9,7 @@
 - Commit every completed meaningful change set.
 - Push completed commits to `origin/main` immediately unless explicitly told not to push.
 - Before closing meaningful work, evaluate the result against the initial user instruction and rework real gaps.
+- Before evaluation, summarize completed work and check prior internal work or strong references for related tasks.
 - Track work history under `_history/YYYY/YYYY-MM-DD.md`.
 - Use `_ops/` as the durable operations hub for prompts, workflows, and maps.
 - Compress long conversation context into repository docs and history logs.

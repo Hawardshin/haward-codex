@@ -17,6 +17,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 result_summary="Added evaluator code and docs.",
                 changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
                 verification=("python3 -m unittest discover -s tests: OK",),
+                references_checked=("_ops/workflows/40-evaluate-and-rework.md",),
             )
         )
 
@@ -31,6 +32,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 result_summary="Added docs only.",
                 changed_files=("AGENTS.md",),
                 verification=("not run",),
+                references_checked=("_ops/prompts/70-evaluate-work.md",),
                 known_gaps=("No Python evaluator agent was added.",),
             )
         )
@@ -45,11 +47,28 @@ class WorkEvaluatorTests(unittest.TestCase):
                 initial_instruction="Add an evaluator.",
                 result_summary="Added evaluator.",
                 changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
+                references_checked=("agent-platform/docs/work-evaluator-agent.md",),
             )
         )
 
         self.assertFalse(report["requires_rework"])
         self.assertIn("Add or run a verification step before close-out.", report["improvements"])
+
+    def test_missing_reference_research_requires_rework(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Add an evaluator.",
+                result_summary="Added evaluator.",
+                changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
+                verification=("python3 -m unittest discover -s tests: OK",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Reference research is missing. Check prior internal work or strong external references before evaluation.",
+            report["gaps"],
+        )
 
 
 if __name__ == "__main__":

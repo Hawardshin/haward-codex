@@ -20,9 +20,11 @@
 7. Promote repeated work into a template, tool, skill, prompt, or workflow.
 8. Record important context in `_history/`.
 9. Refresh `_ops/maps/` when navigational structure changes.
-10. Evaluate the completed work against the initial instruction.
-11. Rework real gaps and evaluate again.
-12. Commit the coherent change set and push it.
+10. Summarize completed work.
+11. Check prior internal work and strong references relevant to the task.
+12. Evaluate the completed work against the initial instruction.
+13. Rework real gaps and evaluate again.
+14. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
