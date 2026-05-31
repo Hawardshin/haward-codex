@@ -72,6 +72,26 @@
         "configuration-driven registry design pattern"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "public_code_repository_best_practices",
+      "title": "Public Code Repository Best Practices",
+      "url": "https://ospo.library.jhu.edu/learn-grow/public-code-repository-best-practices/",
+      "source_type": "official",
+      "used_for": [
+        "open-source repository quality signals before treating code as a reference"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "codehow_code_search",
+      "title": "CodeHow: Effective Code Search based on API Understanding and Extended Boolean Model",
+      "url": "https://www.microsoft.com/en-us/research/publication/codehow-effective-code-search-based-on-api-understanding-and-extended-boolean-model/",
+      "source_type": "paper",
+      "used_for": [
+        "code search as part of implementation-pattern research"
+      ],
+      "last_checked": "2026-05-31"
     }
   ],
   "structure_rules": [
@@ -90,6 +110,16 @@
       "reason": "Single-source research is fragile and can miss implementation trade-offs.",
       "applies_to": [
         "required_coverage"
+      ]
+    },
+    {
+      "id": "code_references_are_required",
+      "rule": "Before implementation, inspect relevant open-source repositories, reference implementations, or well-structured code and record code_reference_sources plus code_reference_notes.",
+      "reason": "Source-code-writing agents need concrete structure and implementation examples, not only docs or summaries.",
+      "applies_to": [
+        "required_coverage.must_record_code_references",
+        "code_reference_sources",
+        "code_reference_notes"
       ]
     },
     {
@@ -114,7 +144,17 @@
     },
     {
       "field": "required_coverage",
-      "meaning": "Minimum evidence mix and recording requirements before coding starts.",
+      "meaning": "Minimum evidence mix and recording requirements before coding starts, including code references.",
+      "required": true
+    },
+    {
+      "field": "code_reference_sources",
+      "meaning": "Repository URLs, source file paths, code search results, or reference implementations inspected before implementation.",
+      "required": true
+    },
+    {
+      "field": "code_reference_notes",
+      "meaning": "What was learned from referenced code about structure, boundaries, API usage, tests, or implementation details.",
       "required": true
     },
     {
@@ -157,6 +197,7 @@
       ],
       [
         "open_source",
+        "reference_implementation",
         "tech_blog",
         "analysis",
         "community",
@@ -167,6 +208,8 @@
     ],
     "must_record_reference_config_paths": true,
     "must_record_source_types": true,
+    "must_record_code_references": true,
+    "min_code_reference_sources": 1,
     "must_record_plan_history_targets": true
   },
   "default_reference_source_ids": [
@@ -176,12 +219,16 @@
     "cmu_sei_digital_library",
     "zotero_data_formats",
     "zotero_item_types",
-    "sourcemeta_registry_configuration"
+    "sourcemeta_registry_configuration",
+    "public_code_repository_best_practices",
+    "codehow_code_search"
   ],
   "source_selection_rules": [
     "Start with web search before local planning.",
     "Use at least one current official or primary source when external behavior matters.",
     "Use open-source source material when implementation behavior, maintenance, or license matters.",
+    "Inspect relevant open-source repositories, reference implementations, example applications, and tests before writing source code.",
+    "Record code_reference_sources and code_reference_notes so implementation choices can be traced back to concrete code examples.",
     "Use papers, standards, or technical reports when methodology, risk, or security claims matter.",
     "Use technical blogs, analysis articles, community signals, social signals, and contrary examples to discover trade-offs and adoption signals.",
     "Treat popularity and social signals as discovery or adoption signals, not proof.",

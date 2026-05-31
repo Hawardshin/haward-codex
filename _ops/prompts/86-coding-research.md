@@ -13,7 +13,10 @@ Record the selected configs in reference_config_paths, usually agent-platform/co
 Use web search plus at least one other channel: repository search, official docs, code search, package registry search, papers, or open-source repository search.
 Prefer official documentation, primary sources, maintained open-source repositories, standards, papers, and strong implementation examples.
 For broad research, collect source diversity: official docs, papers, open-source repos, international technical blogs, analysis articles, community/adoption signals, and contrary examples.
-Record source_types explicitly. Use at least three distinct non-other source types, including at least one authoritative type (official, paper, standard, or open_source) and at least one practical/adoption/contrary type (open_source, tech_blog, analysis, community, social, news, or contrary).
+Before writing source code, inspect relevant open-source repositories, reference implementations, well-structured source trees, examples, and tests.
+Record code_reference_sources with repository URLs, source file paths, test paths, example app paths, or code search results.
+Record code_reference_notes explaining what structure, boundaries, API patterns, error handling, tests, or implementation details are worth adapting or rejecting.
+Record source_types explicitly. Use at least three distinct non-other source types, including at least one authoritative type (official, paper, standard, or open_source) and at least one practical/adoption/contrary type (open_source, reference_implementation, tech_blog, analysis, community, social, news, or contrary).
 Treat likes, stars, comments, Hacker News points, Reddit activity, and LinkedIn reactions as adoption or discovery signals, not proof.
 When source volume is high, normalize and score the source bundle with _tools/source-collector.
 Validate internal knowledge-base references with knowledge-skeptic-agent before relying on them.

@@ -30,7 +30,14 @@
 
 - 최소 3개 이상의 `other`가 아닌 source type:
 - 권위 출처 포함 여부 (`official`, `paper`, `standard`, `open_source`):
-- 실무/채택/반대 신호 포함 여부 (`open_source`, `tech_blog`, `analysis`, `community`, `social`, `news`, `contrary`):
+- 실무/채택/반대 신호 포함 여부 (`open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `news`, `contrary`):
+
+## Code References
+
+- `code_reference_sources`:
+- `code_reference_notes`:
+- 참고한 오픈소스 구조/구현/테스트에서 적용할 점:
+- 그대로 복사하지 않을 점과 이유:
 
 ## 주요 발견
 

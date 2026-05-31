@@ -30,7 +30,14 @@
 
 - At least three distinct non-`other` source types:
 - Authoritative source included (`official`, `paper`, `standard`, `open_source`):
-- Practical/adoption/contrary signal included (`open_source`, `tech_blog`, `analysis`, `community`, `social`, `news`, `contrary`):
+- Practical/adoption/contrary signal included (`open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `news`, `contrary`):
+
+## Code References
+
+- `code_reference_sources`:
+- `code_reference_notes`:
+- What to adapt from the open-source structure/implementation/tests:
+- What not to copy and why:
 
 ## Key Findings
 

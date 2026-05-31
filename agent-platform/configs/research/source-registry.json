@@ -82,6 +82,28 @@
         "configuration-driven registry pattern"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "public_code_repository_best_practices",
+      "title": "Public Code Repository Best Practices",
+      "url": "https://ospo.library.jhu.edu/learn-grow/public-code-repository-best-practices/",
+      "source_type": "official",
+      "used_for": [
+        "repository quality signals",
+        "open-source code reference checklist"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "codehow_code_search",
+      "title": "CodeHow: Effective Code Search based on API Understanding and Extended Boolean Model",
+      "url": "https://www.microsoft.com/en-us/research/publication/codehow-effective-code-search-based-on-api-understanding-and-extended-boolean-model/",
+      "source_type": "paper",
+      "used_for": [
+        "code search as a coding research channel",
+        "API-oriented code retrieval rationale"
+      ],
+      "last_checked": "2026-05-31"
     }
   ],
   "structure_rules": [
@@ -223,6 +245,28 @@
       ],
       "limits": [
         "Repository popularity does not prove technical correctness."
+      ]
+    },
+    {
+      "id": "reference_implementation",
+      "label_ko": "참고 구현/실제 코드",
+      "label_en": "Reference implementation or real source code",
+      "examples": [
+        "well-maintained repository source tree",
+        "reference implementation",
+        "example application",
+        "test suite"
+      ],
+      "default_reliability": "medium_high",
+      "use_for": [
+        "project structure",
+        "module boundaries",
+        "API usage patterns",
+        "error handling",
+        "test design"
+      ],
+      "limits": [
+        "Do not copy blindly; verify license, fit, maintenance state, and local constraints."
       ]
     },
     {
@@ -433,6 +477,28 @@
       "source_type": "official",
       "used_for": [
         "configuration-driven registry pattern"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "public_code_repository_best_practices",
+      "title": "Public Code Repository Best Practices",
+      "url": "https://ospo.library.jhu.edu/learn-grow/public-code-repository-best-practices/",
+      "source_type": "official",
+      "used_for": [
+        "repository quality signals",
+        "open-source code reference checklist"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "codehow_code_search",
+      "title": "CodeHow: Effective Code Search based on API Understanding and Extended Boolean Model",
+      "url": "https://www.microsoft.com/en-us/research/publication/codehow-effective-code-search-based-on-api-understanding-and-extended-boolean-model/",
+      "source_type": "paper",
+      "used_for": [
+        "code search as a coding research channel",
+        "API-oriented code retrieval rationale"
       ],
       "last_checked": "2026-05-31"
     }

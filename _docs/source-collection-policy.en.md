@@ -44,7 +44,7 @@ Simple local tasks do not need the full bundle. Still run web-first intake and r
 
 When collecting or reporting many sources becomes repetitive, use `_tools/source-collector/`.
 
-For coding research, run `coding-research-agent` before completion to check sources, `source_types`, `reference_config_paths`, options, recommendation, risks, validation plan, and standard post-research questions. Coding research needs at least three distinct non-`other` source types and must record the source settings it used through JSON configs under `agent-platform/configs/research/`.
+For coding research, run `coding-research-agent` before completion to check sources, `source_types`, `reference_config_paths`, `code_reference_sources`, `code_reference_notes`, options, recommendation, risks, validation plan, and standard post-research questions. Coding research needs at least three distinct non-`other` source types, must record the source settings it used through JSON configs under `agent-platform/configs/research/`, and must inspect relevant open-source structure, reference implementations, or well-written code/tests.
 
 ## Evaluation Criteria
 

@@ -31,13 +31,14 @@ ALLOWED_SOURCE_TYPES = {
     "open_source",
     "other",
     "paper",
+    "reference_implementation",
     "social",
     "standard",
     "tech_blog",
 }
 
 AUTHORITATIVE_SOURCE_TYPES = {"official", "paper", "standard", "open_source"}
-PRACTICAL_SOURCE_TYPES = {"analysis", "community", "contrary", "news", "open_source", "social", "tech_blog"}
+PRACTICAL_SOURCE_TYPES = {"analysis", "community", "contrary", "news", "open_source", "reference_implementation", "social", "tech_blog"}
 MIN_DISTINCT_SOURCE_TYPES = 3
 
 REQUIRED_POST_RESEARCH_QUESTIONS = {
@@ -64,6 +65,8 @@ class CodingResearchInput:
     sources_checked: tuple[str, ...] = ()
     source_types: tuple[str, ...] = ()
     reference_config_paths: tuple[str, ...] = ()
+    code_reference_sources: tuple[str, ...] = ()
+    code_reference_notes: tuple[str, ...] = ()
     source_bundle_report: str = ""
     findings: tuple[str, ...] = ()
     options: tuple[str, ...] = ()
@@ -85,6 +88,8 @@ class CodingResearchInput:
             sources_checked=_tuple_of_strings(data.get("sources_checked", []), "sources_checked"),
             source_types=_tuple_of_strings(data.get("source_types", []), "source_types"),
             reference_config_paths=_tuple_of_strings(data.get("reference_config_paths", []), "reference_config_paths"),
+            code_reference_sources=_tuple_of_strings(data.get("code_reference_sources", []), "code_reference_sources"),
+            code_reference_notes=_tuple_of_strings(data.get("code_reference_notes", []), "code_reference_notes"),
             source_bundle_report=_optional_string(data.get("source_bundle_report", ""), "source_bundle_report"),
             findings=_tuple_of_strings(data.get("findings", []), "findings"),
             options=_tuple_of_strings(data.get("options", []), "options"),
@@ -120,6 +125,8 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
         gaps.append("Use at least two search channels, such as web search plus official docs, repository search, code search, papers, or package registry search.")
     if research_input.search_channels and not _has_web_channel(research_input.search_channels):
         gaps.append("Web search channel is missing.")
+    if research_input.search_channels and not _has_code_reference_channel(research_input.search_channels):
+        gaps.append("Code reference channel is missing; use repository search, code search, or open-source repository search before implementation.")
     if not research_input.sources_checked:
         gaps.append("Sources checked are missing.")
     if not research_input.reference_config_paths:
@@ -138,7 +145,13 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
     if normalized_source_types and not evidence_source_types.intersection(AUTHORITATIVE_SOURCE_TYPES):
         gaps.append("At least one authoritative source type is required: official, paper, standard, or open_source.")
     if normalized_source_types and not evidence_source_types.intersection(PRACTICAL_SOURCE_TYPES):
-        gaps.append("At least one practical or adoption source type is required: open_source, tech_blog, analysis, community, social, news, or contrary.")
+        gaps.append("At least one practical or adoption source type is required: open_source, reference_implementation, tech_blog, analysis, community, social, news, or contrary.")
+    if not research_input.code_reference_sources:
+        gaps.append("Code reference sources are missing; inspect relevant open-source repositories, reference implementations, or well-structured code before implementation.")
+    elif not any(_looks_like_code_reference(source) for source in research_input.code_reference_sources):
+        gaps.append("At least one code reference source must be a repository URL, source file path, or code search result.")
+    if not research_input.code_reference_notes:
+        gaps.append("Code reference notes are missing; record what structure, API pattern, error handling, tests, or implementation detail was learned from the referenced code.")
     if not research_input.findings:
         gaps.append("Findings are missing.")
     if not research_input.options:
@@ -187,6 +200,8 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
             "source_types_count": len(evidence_source_types),
             "source_type_counts": _source_type_counts(research_input.source_types),
             "reference_config_paths_count": len(research_input.reference_config_paths),
+            "code_reference_sources_count": len(research_input.code_reference_sources),
+            "code_reference_notes_count": len(research_input.code_reference_notes),
             "findings_count": len(research_input.findings),
             "options_count": len(research_input.options),
             "post_research_answers_count": len([value for value in answers.values() if value.strip()]),
@@ -206,6 +221,11 @@ def _has_web_channel(search_channels: tuple[str, ...]) -> bool:
     return any("web" in channel.lower() or "internet" in channel.lower() for channel in search_channels)
 
 
+def _has_code_reference_channel(search_channels: tuple[str, ...]) -> bool:
+    code_markers = ("code", "repository", "repo", "github", "gitlab", "source")
+    return any(any(marker in channel.lower() for marker in code_markers) for channel in search_channels)
+
+
 def _normalized_source_types(source_types: tuple[str, ...]) -> set[str]:
     return {source_type.strip().lower() for source_type in source_types if source_type.strip()}
 
@@ -222,6 +242,38 @@ def _source_type_counts(source_types: tuple[str, ...]) -> dict[str, int]:
 def _is_research_config_path(path: str) -> bool:
     normalized = path.strip().replace("\\", "/")
     return normalized.startswith("agent-platform/configs/research/") and normalized.endswith(".json")
+
+
+def _looks_like_code_reference(source: str) -> bool:
+    normalized = source.strip().lower().replace("\\", "/")
+    location_markers = (
+        "github.com/",
+        "gitlab.com/",
+        "sourcegraph.com/",
+        "searchcode.com/",
+        "/src/",
+        "/tests/",
+        "/examples/",
+    )
+    code_extensions = (
+        ".py",
+        ".js",
+        ".ts",
+        ".tsx",
+        ".go",
+        ".rs",
+        ".java",
+        ".kt",
+        ".rb",
+        ".php",
+        ".cs",
+        ".cpp",
+        ".c",
+    )
+    if any(marker in normalized for marker in location_markers):
+        return True
+    path_without_fragment = normalized.split("#", 1)[0].split("?", 1)[0]
+    return any(path_without_fragment.endswith(extension) for extension in code_extensions)
 
 
 def _uses_internal_knowledge(sources_checked: tuple[str, ...]) -> bool:

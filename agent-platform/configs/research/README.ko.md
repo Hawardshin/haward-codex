@@ -12,6 +12,7 @@
 - 코딩 조사 입력에는 `reference_config_paths`를 포함한다.
 - 최소 하나의 경로는 `agent-platform/configs/research/` 아래 JSON 설정이어야 한다.
 - `source_types`는 `source-registry.json`의 source type을 사용한다.
+- 소스 코드 구현 전에는 `code_reference_sources`와 `code_reference_notes`로 참고한 오픈소스 구조, 참고 구현, 실제 코드, 테스트에서 배운 점을 기록한다.
 - 외부 reference source는 `last_checked`를 갱신하거나 새 config 항목으로 추가한다.
 - 내부 지식 베이스 항목은 `knowledge-skeptic-agent` 검증 후 근거로 사용한다.
 - 공유 설정 파일은 `reader_guide`, `reference_links`, `structure_rules`, `field_guide`를 포함해야 한다.
@@ -28,8 +29,16 @@
   "source_types": [
     "official",
     "open_source",
+    "reference_implementation",
     "tech_blog",
     "community"
+  ],
+  "code_reference_sources": [
+    "https://github.com/example/project/tree/main/src",
+    "https://github.com/example/project/tree/main/tests"
+  ],
+  "code_reference_notes": [
+    "참고한 저장소 구조, 모듈 경계, 테스트, 예외 처리, API 사용 패턴"
   ]
 }
 ```

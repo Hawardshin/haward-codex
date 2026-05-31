@@ -12,6 +12,7 @@ This folder stores configuration files that make source criteria and reference c
 - Coding research input must include `reference_config_paths`.
 - At least one path must point to a JSON config under `agent-platform/configs/research/`.
 - `source_types` should use the source types defined in `source-registry.json`.
+- Before implementation, record `code_reference_sources` and `code_reference_notes` for open-source structure, reference implementations, real source code, and tests inspected.
 - External reference sources should update `last_checked` or be added as new config entries.
 - Internal knowledge-base entries should pass `knowledge-skeptic-agent` before use as evidence.
 - Shared settings files should include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide`.
@@ -28,8 +29,16 @@ This folder stores configuration files that make source criteria and reference c
   "source_types": [
     "official",
     "open_source",
+    "reference_implementation",
     "tech_blog",
     "community"
+  ],
+  "code_reference_sources": [
+    "https://github.com/example/project/tree/main/src",
+    "https://github.com/example/project/tree/main/tests"
+  ],
+  "code_reference_notes": [
+    "Repository structure, module boundaries, tests, error handling, and API usage patterns inspected."
   ]
 }
 ```

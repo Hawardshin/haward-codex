@@ -47,6 +47,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - For coding/API/library/architecture/performance/debugging/security/migration research, use `coding-research-agent` before implementation and answer all standard post-research questions.
 - Coding research must record diverse `source_types` and use at least three distinct non-`other` source types before it can be treated as implementation-ready.
 - Coding research must record `reference_config_paths` showing which source registry or research profile config was used.
+- Source-code-writing agents must inspect relevant open-source repositories, reference implementations, or well-structured code examples and record `code_reference_sources` plus `code_reference_notes` before implementation.
 - Shared settings files must be self-documenting: include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide` so the user can understand references and rules by opening the file.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract <config.json>` from `agent-platform/` after creating or changing important shared settings files.
 - Before publishing final outputs with factual claims, run or simulate `hallucination-guard-agent` and resolve `grounding_required` gaps.

@@ -19,12 +19,20 @@
   "source_types": [
     "official",
     "open_source",
+    "reference_implementation",
     "tech_blog",
     "community"
   ],
   "reference_config_paths": [
     "agent-platform/configs/research/source-registry.json",
     "agent-platform/configs/research/coding-research-profile.json"
+  ],
+  "code_reference_sources": [
+    "https://github.com/example/project/tree/main/src",
+    "https://github.com/example/project/tree/main/tests"
+  ],
+  "code_reference_notes": [
+    "Record the repository structure, module boundaries, API usage pattern, tests, error handling, and implementation details worth adapting."
   ],
   "source_bundle_report": "_tools/source-collector report path if a large source bundle was scored.",
   "findings": [

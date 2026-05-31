@@ -16,6 +16,7 @@
 - API, 라이브러리, 버그 원인, 아키텍처, 성능, 보안, 마이그레이션 같은 코딩 조사는 `coding-research-agent`로 표준 종료 질문까지 답한 뒤 구현한다.
 - 코딩 조사는 `source_types`를 명시하고 최소 3개 이상의 서로 다른 출처 유형을 통해 확인한다.
 - 코딩 조사는 어떤 출처 설정을 참고했는지 `reference_config_paths`로 남긴다.
+- 소스 코드를 작성하는 에이전트는 관련 오픈소스 구조, 참고 구현, 잘 작성된 코드와 테스트를 조사하고 `code_reference_sources`, `code_reference_notes`로 남긴다.
 - 공유 설정 파일은 `reader_guide`, `reference_links`, `structure_rules`, `field_guide`를 포함해 파일만 열어도 참고 링크와 구조 규칙을 알 수 있어야 한다.
 - 최종 산출물에 사실 주장이 포함되면 `hallucination-guard-agent`로 근거, 검증, 불확실성 표시를 확인한다.
 - 이 저장소의 운영 철학은 `_philosophy/`에 둔다.

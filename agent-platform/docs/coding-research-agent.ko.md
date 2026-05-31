@@ -9,6 +9,7 @@
 - 조사 결과를 바로 구현으로 넘기기 전에 표준 종료 질문에 답한다.
 - 다양한 출처 유형을 명시한다. 최소 3개 이상의 `other`가 아닌 source type이 필요하며, 권위 출처와 실무/채택 신호를 함께 포함한다.
 - 어떤 출처 설정을 참고했는지 `reference_config_paths`로 기록한다.
+- 구현 전 관련 오픈소스 저장소, 참고 구현, 잘 작성된 코드 구조와 테스트를 조사하고 `code_reference_sources`, `code_reference_notes`에 기록한다.
 - 내부 지식 베이스를 근거로 쓰면 `knowledge-skeptic-agent`로 검증한다.
 - 계획 과정은 `_history/plans/YYYY/`에 남기고, 재사용 가능한 지식은 `_research/`, `_templates/`, `_tools/` 중 알맞은 곳에 기록한다.
 
@@ -30,10 +31,19 @@
 `complete-coding-research`는 `source_types`를 확인한다. 코딩 조사가 `ready_to_implement`가 되려면 다음 조건이 필요하다.
 
 - `source_types`를 비워두지 않는다.
-- `official`, `paper`, `standard`, `open_source`, `tech_blog`, `analysis`, `community`, `social`, `contrary`, `internal` 등 다양한 유형을 기록한다.
+- `official`, `paper`, `standard`, `open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `contrary`, `internal` 등 다양한 유형을 기록한다.
 - `other`를 제외하고 최소 3개 이상의 서로 다른 source type을 사용한다.
 - `official`, `paper`, `standard`, `open_source` 중 1개 이상의 권위 출처를 포함한다.
-- `open_source`, `tech_blog`, `analysis`, `community`, `social`, `news`, `contrary` 중 1개 이상의 실무/채택/반대 신호 출처를 포함한다.
+- `open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `news`, `contrary` 중 1개 이상의 실무/채택/반대 신호 출처를 포함한다.
+
+## 코드 참고 규칙
+
+구현으로 넘어가기 전 다음을 기록한다.
+
+- `code_reference_sources`: 참고한 GitHub/GitLab 저장소, source tree, source file, test file, example app, code search result
+- `code_reference_notes`: 해당 코드에서 배운 구조, 모듈 경계, API 사용 패턴, 예외 처리, 테스트 구성, 재사용하지 않을 부분
+
+오픈소스 코드는 그대로 복사하지 않는다. 라이선스, 유지보수 상태, 프로젝트 적합성, 보안 위험, 테스트 품질을 확인한 뒤 로컬 설계에 맞게 적용한다.
 
 ## 참고 설정 파일
 

@@ -32,6 +32,7 @@
 - 코딩/API/라이브러리/아키텍처/성능/디버깅/보안/마이그레이션 조사는 구현 전에 `coding-research-agent`로 출처, 선택지, 추천안, 위험, 검증 계획, 표준 종료 질문을 확인한다.
 - 코딩 조사는 `source_types`를 명시하고 최소 3개 이상의 `other`가 아닌 서로 다른 출처 유형을 사용해야 한다.
 - 코딩 조사는 어떤 출처 레지스트리나 리서치 프로필 설정을 참고했는지 `reference_config_paths`로 기록해야 한다.
+- 소스 코드를 작성하는 에이전트는 구현 전 관련 오픈소스 저장소, 참고 구현, 잘 작성된 코드 구조와 테스트를 조사하고 `code_reference_sources`, `code_reference_notes`로 기록해야 한다.
 - 공유 설정 파일은 `reader_guide`, `reference_links`, `structure_rules`, `field_guide`를 포함해 파일 하나만 열어도 참고 링크와 구조 규칙을 이해할 수 있어야 한다.
 - 중요한 공유 설정 파일을 만들거나 바꾸면 `config-contract-agent`로 자기 설명 계약을 검사한다.
 - 최종 산출물에 사실 주장이 포함되면 `hallucination-guard-agent`로 근거를 검증한다.
