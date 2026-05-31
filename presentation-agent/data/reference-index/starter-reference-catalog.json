@@ -1,0 +1,1237 @@
+{
+  "schema_version": "2026-06-01",
+  "name": "presentation-agent-starter-reference-catalog",
+  "purpose": "Provide a broad, provenance-rich starter catalog of presentation design, PPT/HTML, asset, theory, research, and conversion sources for presentation-agent.",
+  "reader_guide": {
+    "summary": "This catalog is a source discovery map for presentation-agent. It stores metadata, quality signals, license status, and conversion routing before any raw file is stored.",
+    "how_to_read": [
+      "Start with structure_rules to understand the metadata-first and license-gated policy.",
+      "Use field_guide to interpret each record field.",
+      "Filter records by source_type when planning a research lane.",
+      "Filter by html_conversion before deciding whether to build HTML natively, extract PPTX text, or manually rebuild a reference.",
+      "Re-check the original source terms before downloading or converting any raw file."
+    ],
+    "owner": "presentation-agent",
+    "last_reviewed": "2026-06-01",
+    "update_triggers": [
+      "A new high-quality presentation source is found.",
+      "A source license, terms page, or access model changes.",
+      "A record is promoted from metadata-only to raw storage allowed.",
+      "A conversion candidate is validated or rejected."
+    ],
+    "copyright_position": "Most sources are metadata-only references. Raw storage is allowed only when download_allowed=true and the source terms still support the intended use."
+  },
+  "reference_links": [
+    {
+      "id": "collection-policy",
+      "title": "Collection policy",
+      "source_type": "local_config",
+      "path": "presentation-agent/configs/collection-policy.json",
+      "used_for": ["license gate", "raw storage policy", "PPTX conversion policy"],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "reference-index-guide",
+      "title": "Reference index guide",
+      "source_type": "local_doc",
+      "path": "presentation-agent/data/reference-index/README.ko.md",
+      "used_for": ["human-readable catalog usage rules"],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "research-summary",
+      "title": "Research summary",
+      "source_type": "local_doc",
+      "path": "presentation-agent/docs/research/2026-06-01-presentation-reference-collection.ko.md",
+      "used_for": ["source synthesis", "planning rationale"],
+      "last_checked": "2026-06-01"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "required-provenance",
+      "rule": "Each record must preserve source URL, access date, source type, license status, and HTML conversion path.",
+      "reason": "Future agents need source provenance and conversion routing without relying on chat memory.",
+      "applies_to": ["records"]
+    },
+    {
+      "id": "primary-source-preference",
+      "rule": "Use official docs, official galleries, or primary repositories when available.",
+      "reason": "Primary sources reduce hallucination and licensing mistakes.",
+      "applies_to": ["records.url", "records.provenance"]
+    },
+    {
+      "id": "community-signal-limit",
+      "rule": "Community popularity is a quality signal only; it is not proof of factual correctness or reuse permission.",
+      "reason": "Likes, views, and comments can help discovery but do not establish truth or legal use.",
+      "applies_to": ["records.quality_signals"]
+    },
+    {
+      "id": "metadata-only-default",
+      "rule": "For unknown, paid, or account-gated sources, store metadata only.",
+      "reason": "The project must not mirror copyrighted or restricted presentation files.",
+      "applies_to": ["records.license_status", "records.download_allowed"]
+    },
+    {
+      "id": "pptx-conversion-caution",
+      "rule": "For PPT/PPTX sources, prefer HTML reconstruction or text-structure extraction until a high-fidelity conversion path is verified.",
+      "reason": "PPTX visual fidelity and licensing require separate checks before conversion output is trusted.",
+      "applies_to": ["records.html_conversion"]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "id",
+      "meaning": "Stable kebab-case identifier for cross-linking conversion notes and generated artifacts.",
+      "required": true
+    },
+    {
+      "field": "source_type",
+      "meaning": "Source role such as html_framework, template_gallery, design_gallery, asset_library, presentation_theory, ai_presentation_research, or conversion_tool_reference.",
+      "required": true
+    },
+    {
+      "field": "formats",
+      "meaning": "Main formats the source can inform: html, markdown, pptx, google_slides, figma, images, icons, fonts, animations, pdf, or article.",
+      "required": true
+    },
+    {
+      "field": "license_status",
+      "meaning": "Conservative reuse status based on current source type and visible source context.",
+      "required": true
+    },
+    {
+      "field": "download_allowed",
+      "meaning": "Whether raw files may be stored locally without another per-item license check.",
+      "required": true
+    },
+    {
+      "field": "html_conversion",
+      "meaning": "native_html, pptx_requires_conversion, manual_rebuild_recommended, reference_only, or asset_reference.",
+      "required": true
+    },
+    {
+      "field": "quality_signals",
+      "meaning": "Evidence that the source is worth checking, such as official, open_source, curated, popular, broad_catalog, designer_signal, practitioner_signal, or research_signal.",
+      "required": true
+    }
+  ],
+  "records": [
+    {
+      "id": "framework-revealjs-official",
+      "title": "reveal.js official site",
+      "url": "https://revealjs.com/",
+      "source_type": "html_framework",
+      "formats": ["html", "markdown", "pdf"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["interactive", "developer", "web-native", "speaker-notes"],
+      "quality_signals": ["official", "open_source", "popular"],
+      "provenance": {
+        "found_via": "web_search: reveal.js HTML presentation framework official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Official HTML presentation framework with web-native slides and export support."
+      },
+      "notes": "Primary candidate for HTML presentation output and reference implementation."
+    },
+    {
+      "id": "framework-revealjs-github",
+      "title": "reveal.js GitHub repository",
+      "url": "https://github.com/hakimel/reveal.js",
+      "source_type": "html_framework",
+      "formats": ["html", "javascript", "css"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["open-source", "plugin-system", "themes"],
+      "quality_signals": ["source_repository", "open_source", "community_signal"],
+      "provenance": {
+        "found_via": "web_search: reveal.js GitHub",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Repository for implementation details, themes, and examples."
+      },
+      "notes": "Inspect code and examples before building custom HTML slide templates."
+    },
+    {
+      "id": "framework-slidev-official",
+      "title": "Slidev official site",
+      "url": "https://sli.dev/",
+      "source_type": "html_framework",
+      "formats": ["html", "markdown", "vue"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["developer", "markdown", "vue", "live-demo"],
+      "quality_signals": ["official", "open_source", "developer-focused"],
+      "provenance": {
+        "found_via": "web_search: Slidev markdown presentation slides official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Developer-focused slide framework powered by Vite and Vue."
+      },
+      "notes": "Useful when presentations need code demos, components, or markdown authoring."
+    },
+    {
+      "id": "framework-slidev-github",
+      "title": "Slidev GitHub repository",
+      "url": "https://github.com/slidevjs/slidev",
+      "source_type": "html_framework",
+      "formats": ["html", "markdown", "vue", "themes"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["themes", "developer", "open-source"],
+      "quality_signals": ["source_repository", "open_source", "community_signal"],
+      "provenance": {
+        "found_via": "web_search: Slidev GitHub",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Source repository for Slidev engine, themes, and examples."
+      },
+      "notes": "Good reference for project structure and theme packaging."
+    },
+    {
+      "id": "framework-marp-official",
+      "title": "Marp Markdown Presentation Ecosystem",
+      "url": "https://marp.app/",
+      "source_type": "html_framework",
+      "formats": ["markdown", "html", "pdf", "pptx"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["markdown", "css-theme", "export", "simple-authoring"],
+      "quality_signals": ["official", "open_source", "export_support"],
+      "provenance": {
+        "found_via": "web_search: Marp markdown presentation ecosystem official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Official ecosystem for markdown-authored slides with HTML, PDF, and PowerPoint export."
+      },
+      "notes": "Strong candidate for maintainable script-to-slide workflows."
+    },
+    {
+      "id": "framework-marp-github",
+      "title": "Marp GitHub organization",
+      "url": "https://github.com/marp-team/marp",
+      "source_type": "html_framework",
+      "formats": ["markdown", "html", "css", "cli"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["theme-system", "cli", "markdown"],
+      "quality_signals": ["source_repository", "open_source"],
+      "provenance": {
+        "found_via": "web_search: Marp GitHub",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Repository hub for Marp toolchain and documentation."
+      },
+      "notes": "Use for CLI and theme architecture references."
+    },
+    {
+      "id": "framework-impressjs-official",
+      "title": "impress.js official site",
+      "url": "https://impress.js.org/",
+      "source_type": "html_framework",
+      "formats": ["html", "javascript", "css"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["spatial", "zoom", "nonlinear", "experimental"],
+      "quality_signals": ["official", "open_source", "distinctive_interaction"],
+      "provenance": {
+        "found_via": "web_search: impress.js presentation official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Web presentation framework known for spatial navigation."
+      },
+      "notes": "Reference for playful or event-style motion presentations, not default business decks."
+    },
+    {
+      "id": "framework-impressjs-github",
+      "title": "impress.js GitHub repository",
+      "url": "https://github.com/impress/impress.js",
+      "source_type": "html_framework",
+      "formats": ["html", "javascript", "css"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["spatial", "open-source", "examples"],
+      "quality_signals": ["source_repository", "open_source"],
+      "provenance": {
+        "found_via": "web_search: impress.js GitHub",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Source repository for impress.js."
+      },
+      "notes": "Review examples before using motion-heavy layouts."
+    },
+    {
+      "id": "framework-spectacle",
+      "title": "Spectacle",
+      "url": "https://formidable.com/open-source/spectacle/",
+      "source_type": "html_framework",
+      "formats": ["html", "react", "javascript"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["react", "component-driven", "developer"],
+      "quality_signals": ["official", "open_source"],
+      "provenance": {
+        "found_via": "web_search: React presentation framework Spectacle official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "React-based presentation library from Formidable."
+      },
+      "notes": "Good fit when the deck needs React components or shared UI logic."
+    },
+    {
+      "id": "framework-webslides",
+      "title": "WebSlides",
+      "url": "https://webslides.tv/",
+      "source_type": "html_framework",
+      "formats": ["html", "css"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["html", "css", "editorial", "simple"],
+      "quality_signals": ["official", "open_source", "visual_examples"],
+      "provenance": {
+        "found_via": "web_search: WebSlides HTML presentation",
+        "accessed_on": "2026-06-01",
+        "source_notes": "HTML/CSS presentation framework with visual examples."
+      },
+      "notes": "Useful as a reference for simple HTML deck patterns."
+    },
+    {
+      "id": "framework-shower",
+      "title": "Shower presentation engine",
+      "url": "https://shwr.me/",
+      "source_type": "html_framework",
+      "formats": ["html", "css", "javascript"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["html", "minimal", "keyboard-navigation"],
+      "quality_signals": ["official", "open_source"],
+      "provenance": {
+        "found_via": "web_search: Shower HTML presentation framework",
+        "accessed_on": "2026-06-01",
+        "source_notes": "HTML presentation engine."
+      },
+      "notes": "Secondary HTML framework reference."
+    },
+    {
+      "id": "framework-remarkjs",
+      "title": "remark",
+      "url": "https://remarkjs.com/",
+      "source_type": "html_framework",
+      "formats": ["markdown", "html", "javascript"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["markdown", "simple", "in-browser"],
+      "quality_signals": ["official", "open_source"],
+      "provenance": {
+        "found_via": "web_search: remark markdown presentation official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Markdown-driven in-browser presentation tool."
+      },
+      "notes": "Good for lightweight markdown decks and narrative drafts."
+    },
+    {
+      "id": "framework-bespokejs",
+      "title": "Bespoke.js",
+      "url": "https://github.com/bespokejs/bespoke",
+      "source_type": "html_framework",
+      "formats": ["html", "javascript", "plugin"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["modular", "plugin", "minimal"],
+      "quality_signals": ["source_repository", "open_source"],
+      "provenance": {
+        "found_via": "web_search: Bespoke.js presentation GitHub",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Modular presentation micro-framework."
+      },
+      "notes": "Reference for minimal plugin-first slide architecture."
+    },
+    {
+      "id": "framework-mdx-deck",
+      "title": "mdx-deck",
+      "url": "https://github.com/jxnblk/mdx-deck",
+      "source_type": "html_framework",
+      "formats": ["mdx", "react", "html"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["mdx", "react", "developer"],
+      "quality_signals": ["source_repository", "open_source"],
+      "provenance": {
+        "found_via": "web_search: mdx-deck GitHub presentation",
+        "accessed_on": "2026-06-01",
+        "source_notes": "MDX-based deck project."
+      },
+      "notes": "Useful reference for mixing prose and components; check maintenance before adopting."
+    },
+    {
+      "id": "framework-deckdeckgo",
+      "title": "DeckDeckGo repository",
+      "url": "https://github.com/deckgo/deckdeckgo",
+      "source_type": "html_framework",
+      "formats": ["html", "web-components", "markdown"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["web-components", "open-source", "presenter-tools"],
+      "quality_signals": ["source_repository", "open_source"],
+      "provenance": {
+        "found_via": "web_search: DeckDeckGo presentation GitHub",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Open-source slide authoring and presentation project."
+      },
+      "notes": "Use as a secondary architecture reference; verify current maintenance before dependency adoption."
+    },
+    {
+      "id": "templates-microsoft-create-powerpoint",
+      "title": "Microsoft Create PowerPoint templates",
+      "url": "https://create.microsoft.com/en-us/powerpoint-templates",
+      "source_type": "template_gallery",
+      "formats": ["pptx", "powerpoint"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "pptx_requires_conversion",
+      "design_tags": ["business", "education", "office-native", "template"],
+      "quality_signals": ["official", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: official PowerPoint presentation templates Microsoft",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Official Microsoft template gallery."
+      },
+      "notes": "Good baseline for PowerPoint-native patterns; check template-specific terms before storage."
+    },
+    {
+      "id": "templates-google-slides-gallery",
+      "title": "Google Slides template gallery",
+      "url": "https://docs.google.com/presentation/u/0/?ftv=1&tgif=d",
+      "source_type": "template_gallery",
+      "formats": ["google_slides", "pptx"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["google-slides", "collaboration", "template"],
+      "quality_signals": ["official", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: Google Slides template gallery official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Google Slides template gallery entry point."
+      },
+      "notes": "Useful for collaborative deck patterns; raw storage requires terms review."
+    },
+    {
+      "id": "templates-canva-presentations",
+      "title": "Canva presentation templates",
+      "url": "https://www.canva.com/presentations/templates/",
+      "source_type": "template_gallery",
+      "formats": ["canva", "pptx", "images"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["visual", "consumer", "broad-style", "template"],
+      "quality_signals": ["official", "broad_catalog", "popular"],
+      "provenance": {
+        "found_via": "web_search: Canva presentation templates official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Large design-template platform."
+      },
+      "notes": "Use for style discovery and layout taxonomy; check Canva terms per asset/template."
+    },
+    {
+      "id": "templates-slidesgo",
+      "title": "Slidesgo templates",
+      "url": "https://slidesgo.com/",
+      "source_type": "template_gallery",
+      "formats": ["pptx", "google_slides"],
+      "license_status": "free_with_terms",
+      "download_allowed": false,
+      "html_conversion": "pptx_requires_conversion",
+      "design_tags": ["education", "creative", "colorful", "template"],
+      "quality_signals": ["official", "broad_catalog", "popular"],
+      "provenance": {
+        "found_via": "web_search: Slidesgo presentation templates official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Presentation template gallery with free and paid content."
+      },
+      "notes": "Record specific template license before any download or conversion."
+    },
+    {
+      "id": "templates-slidescarnival",
+      "title": "SlidesCarnival templates",
+      "url": "https://www.slidescarnival.com/",
+      "source_type": "template_gallery",
+      "formats": ["pptx", "google_slides", "canva"],
+      "license_status": "free_with_terms",
+      "download_allowed": false,
+      "html_conversion": "pptx_requires_conversion",
+      "design_tags": ["free-template", "education", "business", "visual-variety"],
+      "quality_signals": ["official", "broad_catalog", "popular"],
+      "provenance": {
+        "found_via": "web_search: SlidesCarnival presentation templates official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Template gallery with visible categories and license link."
+      },
+      "notes": "Strong source for legal free-template candidates after template-level license check."
+    },
+    {
+      "id": "templates-pitch",
+      "title": "Pitch presentation templates",
+      "url": "https://pitch.com/templates",
+      "source_type": "template_gallery",
+      "formats": ["pitch", "pptx", "pdf"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["startup", "business", "modern", "collaboration"],
+      "quality_signals": ["official", "curated", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: Pitch presentation templates official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Official Pitch template gallery."
+      },
+      "notes": "Use for modern product/business deck patterns and narrative structures."
+    },
+    {
+      "id": "templates-figma-slides",
+      "title": "Figma Slides",
+      "url": "https://www.figma.com/slides/",
+      "source_type": "template_gallery",
+      "formats": ["figma", "pptx"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["designer", "collaboration", "autolayout", "brand-system"],
+      "quality_signals": ["official", "designer_signal"],
+      "provenance": {
+        "found_via": "web_search: Figma Slides official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Figma's presentation product, including PPTX import capability."
+      },
+      "notes": "Good source for designer-centric presentation workflows and brand systems."
+    },
+    {
+      "id": "templates-figma-gallery",
+      "title": "Figma template gallery",
+      "url": "https://www.figma.com/templates/",
+      "source_type": "template_gallery",
+      "formats": ["figma", "figjam"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["figma", "design-system", "collaboration"],
+      "quality_signals": ["official", "curated", "designer_signal"],
+      "provenance": {
+        "found_via": "web_search: Figma presentation templates official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Official Figma template gallery."
+      },
+      "notes": "Use for design-system and workshop-style presentation inspiration."
+    },
+    {
+      "id": "templates-prezi",
+      "title": "Prezi presentation templates",
+      "url": "https://prezi.com/presentation-template/",
+      "source_type": "template_gallery",
+      "formats": ["prezi", "web"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["nonlinear", "zoom", "story-map"],
+      "quality_signals": ["official", "distinctive_interaction"],
+      "provenance": {
+        "found_via": "web_search: Prezi presentation templates official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Prezi's template entry point for zooming presentations."
+      },
+      "notes": "Use for nonlinear flow ideas rather than raw asset storage."
+    },
+    {
+      "id": "templates-beautiful-ai",
+      "title": "Beautiful.ai presentation templates",
+      "url": "https://www.beautiful.ai/presentation-templates",
+      "source_type": "template_gallery",
+      "formats": ["web", "pptx"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["ai-assisted", "business", "smart-layout"],
+      "quality_signals": ["official", "curated"],
+      "provenance": {
+        "found_via": "web_search: Beautiful.ai presentation templates",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Template gallery for AI-assisted presentation tool."
+      },
+      "notes": "Study structure and layout patterns; do not copy gated templates."
+    },
+    {
+      "id": "templates-visme",
+      "title": "Visme presentation templates",
+      "url": "https://www.visme.co/templates/presentations/",
+      "source_type": "template_gallery",
+      "formats": ["web", "pptx", "pdf"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["business", "education", "infographic", "template"],
+      "quality_signals": ["official", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: Visme presentation templates",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Visme presentation template gallery."
+      },
+      "notes": "Useful for infographic-heavy slide inspiration."
+    },
+    {
+      "id": "templates-genially",
+      "title": "Genially presentation templates",
+      "url": "https://genially.com/templates/presentations/",
+      "source_type": "template_gallery",
+      "formats": ["web", "interactive"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["interactive", "education", "visual", "template"],
+      "quality_signals": ["official", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: Genially presentation templates",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Template gallery for interactive presentation tool."
+      },
+      "notes": "Use for interaction patterns and classroom-style decks."
+    },
+    {
+      "id": "templates-tome",
+      "title": "Tome templates",
+      "url": "https://tome.app/templates",
+      "source_type": "template_gallery",
+      "formats": ["web", "ai-generated"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["ai-assisted", "story", "web"],
+      "quality_signals": ["official", "ai_tool_reference"],
+      "provenance": {
+        "found_via": "web_search: Tome presentation templates",
+        "accessed_on": "2026-06-01",
+        "source_notes": "AI storytelling/presentation template source."
+      },
+      "notes": "Use as an AI presentation UX reference after terms review."
+    },
+    {
+      "id": "templates-gamma",
+      "title": "Gamma templates",
+      "url": "https://gamma.app/templates",
+      "source_type": "template_gallery",
+      "formats": ["web", "ai-generated"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["ai-assisted", "web-page-deck", "modern"],
+      "quality_signals": ["official", "ai_tool_reference"],
+      "provenance": {
+        "found_via": "web_search: Gamma presentation templates",
+        "accessed_on": "2026-06-01",
+        "source_notes": "AI-assisted presentation/web document template gallery."
+      },
+      "notes": "Use for deck-as-webpage interaction patterns."
+    },
+    {
+      "id": "templates-pitchdeck-net",
+      "title": "PitchDeck.com templates",
+      "url": "https://www.pitchdeck.net/templates",
+      "source_type": "template_gallery",
+      "formats": ["web", "pitch_deck"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["startup", "fundraising", "sales", "business"],
+      "quality_signals": ["official", "domain-specific"],
+      "provenance": {
+        "found_via": "web_search: pitch deck templates official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Pitch-deck specific template source."
+      },
+      "notes": "Useful for startup deck flow and section taxonomy."
+    },
+    {
+      "id": "templates-sequoia-business-plan",
+      "title": "Sequoia business plan guide",
+      "url": "https://www.sequoiacap.com/article/writing-a-business-plan/",
+      "source_type": "presentation_theory",
+      "formats": ["article", "pitch_deck"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["startup", "fundraising", "structure"],
+      "quality_signals": ["official", "practitioner_signal", "high-authority"],
+      "provenance": {
+        "found_via": "web_search: Sequoia pitch deck guide",
+        "accessed_on": "2026-06-01",
+        "source_notes": "VC guidance for business plan/pitch structure."
+      },
+      "notes": "Use for fundraising narrative structure, not visual asset reuse."
+    },
+    {
+      "id": "templates-yc-seed-deck",
+      "title": "Y Combinator seed round pitch deck guide",
+      "url": "https://www.ycombinator.com/library/4T-how-to-build-your-seed-round-pitch-deck",
+      "source_type": "presentation_theory",
+      "formats": ["article", "pitch_deck"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["startup", "fundraising", "structure", "clarity"],
+      "quality_signals": ["official", "practitioner_signal", "high-authority"],
+      "provenance": {
+        "found_via": "web_search: Y Combinator pitch deck guide",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Startup pitch deck advice from Y Combinator."
+      },
+      "notes": "Use for script-flow and slide-order heuristics."
+    },
+    {
+      "id": "templates-slidebean",
+      "title": "Slidebean pitch deck templates",
+      "url": "https://slidebean.com/pitch-deck-template",
+      "source_type": "template_gallery",
+      "formats": ["web", "pptx", "pitch_deck"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["startup", "pitch", "business"],
+      "quality_signals": ["official", "domain-specific"],
+      "provenance": {
+        "found_via": "web_search: Slidebean pitch deck template",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Pitch-deck template and examples source."
+      },
+      "notes": "Use as inspiration only until template terms are checked."
+    },
+    {
+      "id": "templates-slidesmania",
+      "title": "SlidesMania templates",
+      "url": "https://slidesmania.com/",
+      "source_type": "template_gallery",
+      "formats": ["pptx", "google_slides"],
+      "license_status": "free_with_terms",
+      "download_allowed": false,
+      "html_conversion": "pptx_requires_conversion",
+      "design_tags": ["education", "creative", "free-template"],
+      "quality_signals": ["official", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: SlidesMania presentation templates",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Free presentation templates for Google Slides and PowerPoint."
+      },
+      "notes": "Check template-specific use terms before download."
+    },
+    {
+      "id": "templates-envato-elements",
+      "title": "Envato Elements presentation templates",
+      "url": "https://elements.envato.com/presentation-templates",
+      "source_type": "template_gallery",
+      "formats": ["pptx", "keynote", "google_slides"],
+      "license_status": "paid_or_account_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["premium", "commercial", "broad-style"],
+      "quality_signals": ["broad_catalog", "professional_marketplace"],
+      "provenance": {
+        "found_via": "web_search: premium presentation templates marketplace",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Paid template marketplace."
+      },
+      "notes": "Use only as metadata/inspiration unless a valid subscription and license record exist."
+    },
+    {
+      "id": "gallery-behance-presentation-design",
+      "title": "Behance presentation design search",
+      "url": "https://www.behance.net/search/projects/presentation%20design",
+      "source_type": "design_gallery",
+      "formats": ["images", "case_study", "portfolio"],
+      "license_status": "unknown",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["portfolio", "designer", "visual-inspiration"],
+      "quality_signals": ["designer_signal", "community_signal", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: presentation design inspiration Behance",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Design portfolio discovery channel."
+      },
+      "notes": "Use for pattern extraction only; do not copy portfolio assets without permission."
+    },
+    {
+      "id": "gallery-dribbble-presentation",
+      "title": "Dribbble presentation tag",
+      "url": "https://dribbble.com/tags/presentation",
+      "source_type": "design_gallery",
+      "formats": ["images", "portfolio"],
+      "license_status": "unknown",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["portfolio", "designer", "visual-inspiration", "startup"],
+      "quality_signals": ["designer_signal", "community_signal", "visible_popularity"],
+      "provenance": {
+        "found_via": "web_search: Dribbble presentation deck design official tag",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Design inspiration tag with visible likes/views on items."
+      },
+      "notes": "Use popularity as discovery signal; do not treat it as reuse permission."
+    },
+    {
+      "id": "gallery-speakerdeck",
+      "title": "Speaker Deck",
+      "url": "https://speakerdeck.com/",
+      "source_type": "design_gallery",
+      "formats": ["pdf", "slides"],
+      "license_status": "unknown",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["conference", "technical", "public-decks"],
+      "quality_signals": ["broad_catalog", "real-world-decks"],
+      "provenance": {
+        "found_via": "web_search: public slide deck gallery Speaker Deck",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Public slide deck sharing platform."
+      },
+      "notes": "Useful to study conference deck flow; license varies by uploaded deck."
+    },
+    {
+      "id": "gallery-slideshare",
+      "title": "SlideShare",
+      "url": "https://www.slideshare.net/",
+      "source_type": "design_gallery",
+      "formats": ["slides", "pdf"],
+      "license_status": "unknown",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["public-decks", "business", "education"],
+      "quality_signals": ["broad_catalog", "real-world-decks"],
+      "provenance": {
+        "found_via": "web_search: presentation deck sharing gallery",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Large slide sharing platform."
+      },
+      "notes": "Quality varies; use only after source-level evaluation and license check."
+    },
+    {
+      "id": "assets-unsplash",
+      "title": "Unsplash",
+      "url": "https://unsplash.com/",
+      "source_type": "asset_library",
+      "formats": ["images", "photos"],
+      "license_status": "free_with_terms",
+      "download_allowed": false,
+      "html_conversion": "asset_reference",
+      "design_tags": ["photography", "hero-image", "background"],
+      "quality_signals": ["official", "broad_catalog", "popular"],
+      "provenance": {
+        "found_via": "web_search: free stock photos presentation assets official Unsplash",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Photo source with its own license and terms."
+      },
+      "notes": "Check per-photo model, trademark, and attribution risks before use in production decks."
+    },
+    {
+      "id": "assets-pexels",
+      "title": "Pexels",
+      "url": "https://www.pexels.com/",
+      "source_type": "asset_library",
+      "formats": ["images", "videos"],
+      "license_status": "free_with_terms",
+      "download_allowed": false,
+      "html_conversion": "asset_reference",
+      "design_tags": ["photography", "video", "background"],
+      "quality_signals": ["official", "broad_catalog", "popular"],
+      "provenance": {
+        "found_via": "web_search: Pexels free stock photos official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Stock photo and video source."
+      },
+      "notes": "Check per-asset license and depicted rights before local storage."
+    },
+    {
+      "id": "assets-pixabay",
+      "title": "Pixabay",
+      "url": "https://pixabay.com/",
+      "source_type": "asset_library",
+      "formats": ["images", "videos", "music"],
+      "license_status": "free_with_terms",
+      "download_allowed": false,
+      "html_conversion": "asset_reference",
+      "design_tags": ["stock", "background", "media"],
+      "quality_signals": ["official", "broad_catalog", "popular"],
+      "provenance": {
+        "found_via": "web_search: Pixabay free images official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Stock media source."
+      },
+      "notes": "Use only after per-asset terms and depicted-rights review."
+    },
+    {
+      "id": "assets-google-fonts",
+      "title": "Google Fonts",
+      "url": "https://fonts.google.com/",
+      "source_type": "asset_library",
+      "formats": ["fonts"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "asset_reference",
+      "design_tags": ["typography", "web-fonts", "brand-system"],
+      "quality_signals": ["official", "open_source", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: Google Fonts official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Official Google Fonts library."
+      },
+      "notes": "Good source for HTML deck typography after font-specific license review."
+    },
+    {
+      "id": "assets-lucide",
+      "title": "Lucide icons",
+      "url": "https://lucide.dev/",
+      "source_type": "asset_library",
+      "formats": ["icons", "svg"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "asset_reference",
+      "design_tags": ["icons", "line-icons", "ui"],
+      "quality_signals": ["official", "open_source", "developer-friendly"],
+      "provenance": {
+        "found_via": "web_search: free presentation assets icons official lucide heroicons material symbols",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Open-source icon library."
+      },
+      "notes": "Primary icon source for HTML controls and presentation diagrams."
+    },
+    {
+      "id": "assets-heroicons",
+      "title": "Heroicons",
+      "url": "https://heroicons.com/",
+      "source_type": "asset_library",
+      "formats": ["icons", "svg"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "asset_reference",
+      "design_tags": ["icons", "svg", "ui"],
+      "quality_signals": ["official", "open_source", "developer-friendly"],
+      "provenance": {
+        "found_via": "web_search: Heroicons official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "SVG icon library."
+      },
+      "notes": "Good for interface-like presentation controls and diagrams."
+    },
+    {
+      "id": "assets-material-symbols",
+      "title": "Material Symbols",
+      "url": "https://fonts.google.com/icons",
+      "source_type": "asset_library",
+      "formats": ["icons", "fonts", "svg"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "asset_reference",
+      "design_tags": ["icons", "material", "system"],
+      "quality_signals": ["official", "open_source", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: Material Symbols official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Google icon system."
+      },
+      "notes": "Useful when a familiar symbol set is needed."
+    },
+    {
+      "id": "assets-tabler-icons",
+      "title": "Tabler Icons",
+      "url": "https://tabler.io/icons",
+      "source_type": "asset_library",
+      "formats": ["icons", "svg"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "asset_reference",
+      "design_tags": ["icons", "line-icons", "dashboard"],
+      "quality_signals": ["official", "open_source", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: Tabler Icons official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Icon set with broad UI coverage."
+      },
+      "notes": "Useful for data-heavy presentation diagrams."
+    },
+    {
+      "id": "assets-phosphor-icons",
+      "title": "Phosphor Icons",
+      "url": "https://phosphoricons.com/",
+      "source_type": "asset_library",
+      "formats": ["icons", "svg"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "asset_reference",
+      "design_tags": ["icons", "multi-weight", "expressive"],
+      "quality_signals": ["official", "open_source"],
+      "provenance": {
+        "found_via": "web_search: Phosphor Icons official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Flexible icon family."
+      },
+      "notes": "Useful when slides need more expressive icon weights."
+    },
+    {
+      "id": "assets-font-awesome-free",
+      "title": "Font Awesome Free",
+      "url": "https://fontawesome.com/search?ic=free",
+      "source_type": "asset_library",
+      "formats": ["icons", "svg", "fonts"],
+      "license_status": "free_with_terms",
+      "download_allowed": false,
+      "html_conversion": "asset_reference",
+      "design_tags": ["icons", "broad-catalog", "web"],
+      "quality_signals": ["official", "popular", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: Font Awesome free icons official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Popular icon library with free and paid tiers."
+      },
+      "notes": "Check icon/license tier before local storage."
+    },
+    {
+      "id": "assets-noun-project",
+      "title": "The Noun Project",
+      "url": "https://thenounproject.com/",
+      "source_type": "asset_library",
+      "formats": ["icons", "illustrations"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "asset_reference",
+      "design_tags": ["icons", "concepts", "illustration"],
+      "quality_signals": ["official", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: Noun Project icon library official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Large icon and photo platform."
+      },
+      "notes": "Attribution and paid-license requirements vary; metadata-only until checked."
+    },
+    {
+      "id": "assets-undraw",
+      "title": "unDraw illustrations",
+      "url": "https://undraw.co/",
+      "source_type": "asset_library",
+      "formats": ["illustrations", "svg"],
+      "license_status": "free_with_terms",
+      "download_allowed": false,
+      "html_conversion": "asset_reference",
+      "design_tags": ["illustration", "svg", "startup"],
+      "quality_signals": ["official", "popular"],
+      "provenance": {
+        "found_via": "web_search: unDraw illustrations official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "SVG illustration library."
+      },
+      "notes": "Check current license before use; avoid one-note generic illustrations when real visuals are needed."
+    },
+    {
+      "id": "assets-openmoji",
+      "title": "OpenMoji",
+      "url": "https://openmoji.org/",
+      "source_type": "asset_library",
+      "formats": ["emoji", "svg", "png"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "asset_reference",
+      "design_tags": ["emoji", "friendly", "icons"],
+      "quality_signals": ["official", "open_source"],
+      "provenance": {
+        "found_via": "web_search: OpenMoji official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Open-source emoji set."
+      },
+      "notes": "Use only when a playful tone fits the presentation."
+    },
+    {
+      "id": "assets-lottiefiles-free",
+      "title": "LottieFiles free animations",
+      "url": "https://lottiefiles.com/free-animations",
+      "source_type": "asset_library",
+      "formats": ["animations", "json"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "asset_reference",
+      "design_tags": ["animation", "motion", "web"],
+      "quality_signals": ["official", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: LottieFiles free animations official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Animation asset gallery."
+      },
+      "notes": "Check per-animation license and avoid motion that distracts from content."
+    },
+    {
+      "id": "assets-storyset",
+      "title": "Storyset illustrations",
+      "url": "https://storyset.com/",
+      "source_type": "asset_library",
+      "formats": ["illustrations", "svg", "png"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "asset_reference",
+      "design_tags": ["illustration", "scenes", "editable"],
+      "quality_signals": ["official", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: Storyset illustrations official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Illustration source with terms tied to Freepik/Storyset."
+      },
+      "notes": "Use metadata-only until attribution and commercial terms are checked."
+    },
+    {
+      "id": "theory-duarte-resources",
+      "title": "Duarte presentation skills resources",
+      "url": "https://www.duarte.com/presentation-skills-resources/",
+      "source_type": "presentation_theory",
+      "formats": ["article", "guide"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["storytelling", "structure", "persuasion"],
+      "quality_signals": ["official", "practitioner_signal", "high-authority"],
+      "provenance": {
+        "found_via": "web_search: presentation storytelling Nancy Duarte sparkline official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Presentation consulting and education resources."
+      },
+      "notes": "Use as a practitioner reference for story flow and contrast patterns."
+    },
+    {
+      "id": "theory-tedx-speaker-guide",
+      "title": "TEDx Speaker Guide",
+      "url": "https://storage.ted.com/tedx/manuals/tedxspeakerguide.pdf",
+      "source_type": "presentation_theory",
+      "formats": ["pdf", "guide"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["talk-structure", "speaker", "story"],
+      "quality_signals": ["official", "practitioner_signal"],
+      "provenance": {
+        "found_via": "web_search: TED speaker guide official presentation",
+        "accessed_on": "2026-06-01",
+        "source_notes": "TEDx speaker preparation guide PDF."
+      },
+      "notes": "Use for talk preparation and script-flow criteria; cite sparingly."
+    },
+    {
+      "id": "theory-presentation-zen",
+      "title": "Presentation Zen",
+      "url": "https://www.presentationzen.com/",
+      "source_type": "presentation_theory",
+      "formats": ["article", "blog"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["simplicity", "visual-clarity", "storytelling"],
+      "quality_signals": ["practitioner_signal", "recognized_reference"],
+      "provenance": {
+        "found_via": "web_search: Presentation Zen official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Long-running presentation design and delivery resource."
+      },
+      "notes": "Use as a practitioner viewpoint; cross-check claims with concrete examples."
+    },
+    {
+      "id": "research-slidebot",
+      "title": "SlideBot: Multi-Agent Framework for Generating Presentations",
+      "url": "https://arxiv.org/abs/2511.09804",
+      "source_type": "ai_presentation_research",
+      "formats": ["paper", "pdf"],
+      "license_status": "unknown",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["ai-agent", "multimodal", "reliability"],
+      "quality_signals": ["research_signal", "paper"],
+      "provenance": {
+        "found_via": "web_search: SlideBot multi-agent presentation generation",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Research source for agentic presentation generation."
+      },
+      "notes": "Use for future agent architecture comparison after paper-level review."
+    },
+    {
+      "id": "research-slideaudit",
+      "title": "SlideAudit: Dataset and Taxonomy for Automated Evaluation of Presentation Slides",
+      "url": "https://arxiv.org/abs/2508.03630",
+      "source_type": "ai_presentation_research",
+      "formats": ["paper", "pdf"],
+      "license_status": "unknown",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["evaluation", "taxonomy", "slide-quality"],
+      "quality_signals": ["research_signal", "paper"],
+      "provenance": {
+        "found_via": "web_search: SlideAudit presentation slide evaluation taxonomy",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Research source for automated slide evaluation."
+      },
+      "notes": "Review before formalizing presentation quality rubrics."
+    },
+    {
+      "id": "research-pptarena",
+      "title": "PPTArena: A Benchmark for Agentic PowerPoint Editing",
+      "url": "https://arxiv.org/abs/2512.03042",
+      "source_type": "ai_presentation_research",
+      "formats": ["paper", "pdf"],
+      "license_status": "unknown",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["benchmark", "powerpoint", "agentic-editing"],
+      "quality_signals": ["research_signal", "paper"],
+      "provenance": {
+        "found_via": "web_search: PPTArena benchmark PowerPoint editing",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Research source for PowerPoint editing benchmarks."
+      },
+      "notes": "Useful when implementing or evaluating PowerPoint editing agents."
+    },
+    {
+      "id": "conversion-pptx2html-js",
+      "title": "PPTX2HTML JavaScript converter",
+      "url": "https://github.com/g21589/PPTX2HTML",
+      "source_type": "conversion_tool_reference",
+      "formats": ["pptx", "html", "javascript"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "pptx_requires_conversion",
+      "design_tags": ["conversion", "pptx", "html"],
+      "quality_signals": ["source_repository", "open_source"],
+      "provenance": {
+        "found_via": "web_search: open source pptx to html converter GitHub",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Open-source PPTX-to-HTML conversion project surfaced by search."
+      },
+      "notes": "Candidate for future high-fidelity converter review; verify maintenance, security, and output quality before installation."
+    },
+    {
+      "id": "conversion-pptx-to-html5-pypi",
+      "title": "pptx-to-html5 PyPI project",
+      "url": "https://pypi.org/project/pptx-to-html5/",
+      "source_type": "conversion_tool_reference",
+      "formats": ["pptx", "html", "python"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "pptx_requires_conversion",
+      "design_tags": ["conversion", "python", "pptx"],
+      "quality_signals": ["package_registry", "open_source"],
+      "provenance": {
+        "found_via": "web_search: pptx-to-html5 PyPI",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Python package candidate for PPTX-to-HTML conversion."
+      },
+      "notes": "Do not install until dependency health, license, and output fidelity are reviewed."
+    }
+  ]
+}

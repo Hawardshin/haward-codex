@@ -17,3 +17,4 @@ This file tracks custom skill source folders managed by this repository.
 | Skill | Source | Status | Validation |
 | --- | --- | --- | --- |
 | `create-validated-skill` | `_skills/create-validated-skill/` | source ready | `validate-skill` required before install |
+| `presentation-reference-curator` | `_skills/presentation-reference-curator/` | source ready | `_history/skill-validations/2026/2026-06-01-presentation-reference-curator.json` |

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Presentation Reference Curator"
+  short_description: "Collect and validate presentation references"
+  default_prompt: "Use $presentation-reference-curator to collect presentation design references, license status, reusable assets, and PPTX-to-HTML conversion options."

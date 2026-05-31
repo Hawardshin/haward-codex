@@ -2,7 +2,7 @@
 
 - Generated from: `_ops/coordination/status.json`
 - Last updated: `2026-06-01`
-- Summary: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, and parallel research merge gate rules added. No separate parallel agent tasks are currently active.
+- Summary: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, and presentation-agent reference collection foundation added. No separate parallel agent tasks are currently active.
 
 ## Agents
 
@@ -33,6 +33,7 @@
 | 2026-06-01-maintainable-language-architecture-folders | Require maintainable language, architecture, and folder decisions | agent-platform | completed | codex-primary | No action. Future coding research must compare language/runtime options, separate architecture theory from practitioner opinions, and record folder semantics before implementation. |
 | 2026-06-01-parallel-work-planning | Add parallel work planning structure | agent-platform | completed | codex-primary | No action. Future work should use parallel-work-planner-agent before running independent lanes in parallel. |
 | 2026-06-01-parallel-research-merge-gates | Add parallel research merge gates | agent-platform | completed | codex-primary | No action. Future parallel research should use merge_gates before downstream implementation starts. |
+| 2026-06-01-presentation-reference-collection | Create presentation-agent reference collection foundation | presentation-agent | completed | codex-primary | No action. Future presentation-agent work should expand the catalog through licensed source collection and convert only permitted PPTX files. |
 
 ## Blockers
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-05-31",
+  "updated": "2026-06-01",
   "projects": [
     {
       "name": "agent-platform",
@@ -26,6 +26,33 @@
       "boundary_notes": [
         "Platform-wide reusable capabilities can live here when they are part of the central agent platform.",
         "Domain-specific experiments should become separate root projects instead of being added to agent-platform by default."
+      ]
+    },
+    {
+      "name": "presentation-agent",
+      "path": "presentation-agent/",
+      "status": "active",
+      "type": "domain-agent-project",
+      "purpose": "Presentation-focused agent project for collecting presentation design references, PPT/HTML sources, reusable assets, and script-flow evidence.",
+      "scope": "Presentation reference catalogs, project-specific presentation research, PPTX-to-HTML conversion helpers, presentation asset storage policy, and future presentation script/flow agents.",
+      "project_specific_home": [
+        "presentation-agent/src/",
+        "presentation-agent/tests/",
+        "presentation-agent/configs/",
+        "presentation-agent/docs/",
+        "presentation-agent/data/",
+        "presentation-agent/artifacts/",
+        "presentation-agent/specs/"
+      ],
+      "shared_dependencies": [
+        "_skills/presentation-reference-curator/",
+        "_ops/",
+        "_history/"
+      ],
+      "boundary_notes": [
+        "Keep presentation-specific data, conversions, and generated artifacts inside presentation-agent/.",
+        "Store raw PPT/PPTX/assets only after project-local license review.",
+        "Reusable presentation reference curation behavior is tracked as a skill under _skills/."
       ]
     }
   ]
