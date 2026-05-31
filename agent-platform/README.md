@@ -42,6 +42,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep long-context resume packets under `_history/context-archives/` when context saturation risk appears.
 - Before source-code implementation, research best-fit/reference architectures and record architecture references, at least two architecture options, and decision notes.
 - Before source-code implementation, record the technology stack, stack-specific official docs or standards, version constraints, high-signal issue/discussion sources, and community signal interpretation.
+- Before source-code implementation, compare language/runtime options, separate architecture theory from practitioner opinions, and record folder-structure options plus folder semantics for maintainability.
 - Prefer Python for agent runtimes, orchestration, evaluation, and backend automation.
 - Prefer mature open-source components before custom platform infrastructure.
 - Install mature open-source dependencies when they are the right fit, using project/tool-local scope plus documented install command, dependency tracking, security/license review, verification, and rollback.
@@ -111,6 +112,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - coding research should include `reference_config_paths` pointing to `configs/research/`
 - coding research readiness requires `technology_stack`, `technology_official_docs`, `stack_version_constraints`, `issue_discussion_sources`, `issue_discussion_notes`, and `community_signal_notes`
 - coding research for source-code work requires `architecture_reference_sources`, at least two `architecture_options`, and `architecture_decision_notes`
+- coding research for source-code work requires `language_options`, `selected_language`, `language_decision_notes`, `architecture_theory_sources`, `architecture_practitioner_sources`, `architecture_tradeoff_notes`, `folder_structure_options`, `folder_structure_decision_notes`, `folder_semantics_notes`, and `maintainability_notes`
 - shared settings should include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide`, then pass `check-config-contract`
 - factual final outputs should pass `hallucination-guard-agent` when claims need grounding
 - close-out evaluation should include `work_mode`; `quick`, `standard`, `ship_first`, `research`, and `governance` decide which target fields are blocking

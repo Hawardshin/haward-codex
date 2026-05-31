@@ -14,6 +14,7 @@
 | 에이전트 계획 | [코드 참고 조사](topics/agent-planning/2026-05-31-code-reference-research.ko.md) |
 | 에이전트 계획 | [아키텍처 우선 코딩](topics/agent-planning/2026-05-31-architecture-first-coding.ko.md) |
 | 에이전트 계획 | [스택별 코딩 조사](topics/agent-planning/2026-05-31-stack-aware-coding-research.ko.md) |
+| 에이전트 계획 | [유지보수 가능한 언어/아키텍처/폴더 결정](topics/agent-planning/2026-06-01-maintainable-language-architecture-folders.ko.md) |
 | 에이전트 계획 | [대기업/고신뢰 출처 registry](topics/agent-planning/2026-05-31-enterprise-source-registry.ko.md) |
 | 에이전트 계획 | [출처 discovery와 한국 로컬 리뷰](topics/agent-planning/2026-05-31-source-discovery-korean-review.ko.md) |
 | 에이전트 계획 | [Perplexity식 핵심 조사 에이전트 구조](topics/agent-planning/2026-05-31-perplexity-style-research-agent.ko.md) |

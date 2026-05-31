@@ -17,15 +17,18 @@
 9. Record `stack_version_constraints` with current/target versions, standards, compatibility ranges, or explicit unknowns.
 10. Search high-signal issue and discussion channels where applicable: Stack Overflow high-vote or accepted answers, Reddit discussions, GitHub Issues/Discussions, project forums, and unresolved issue threads.
 11. Record `issue_discussion_sources`, `issue_discussion_notes`, and `community_signal_notes`; treat votes, likes, reactions, and comments as adoption/discovery/risk signals, not proof.
-12. Before writing source code, search for best-fit architecture patterns, reference architectures, and architecture documentation frameworks such as well-architected frameworks, C4, arc42, SEI views, ADRs, or strong project `docs/architecture` examples.
-13. Record `architecture_reference_sources`, `architecture_options`, and `architecture_decision_notes`; compare at least two architecture options before implementation.
-14. Inspect relevant open-source repositories, reference implementations, well-structured source trees, examples, and tests before writing source code.
-15. If installation is needed, follow [_docs/open-source-installation-policy.ko.md](../../_docs/open-source-installation-policy.ko.md) and [_ops/workflows/58-installation-record.md](58-installation-record.md), then record install scope, command, dependency path, installation record path, security/license review, verification, and rollback.
-16. Record `code_reference_sources` with repository URLs, source file paths, test paths, example app paths, or code search results.
-17. Record `code_reference_notes` explaining what structure, boundaries, API patterns, error handling, tests, or implementation details are worth adapting or rejecting.
-18. Record `source_types` explicitly and use at least three distinct non-`other` source types.
-19. Include at least one authoritative source type: `official`, `paper`, `standard`, or `open_source`.
-20. Include at least one practical/adoption/contrary source type: `open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `news`, or `contrary`.
+12. Compare at least two language/runtime options and record `language_options`, `selected_language`, and `language_decision_notes` with maintainability, ecosystem, tooling, testing, and project-boundary trade-offs.
+13. Before writing source code, search for best-fit architecture patterns, reference architectures, and architecture documentation frameworks such as well-architected frameworks, C4, arc42, SEI views, ADRs, or strong project `docs/architecture` examples.
+14. Record `architecture_reference_sources`, `architecture_options`, and `architecture_decision_notes`; compare at least two architecture options before implementation.
+15. Record `architecture_theory_sources`, `architecture_practitioner_sources`, and `architecture_tradeoff_notes` so theory/framework guidance and practitioner opinions are compared explicitly.
+16. Compare at least two `folder_structure_options` and record `folder_structure_decision_notes`, `folder_semantics_notes`, and `maintainability_notes` before creating or reshaping folders.
+17. Inspect relevant open-source repositories, reference implementations, well-structured source trees, examples, and tests before writing source code.
+18. If installation is needed, follow [_docs/open-source-installation-policy.ko.md](../../_docs/open-source-installation-policy.ko.md) and [_ops/workflows/58-installation-record.md](58-installation-record.md), then record install scope, command, dependency path, installation record path, security/license review, verification, and rollback.
+19. Record `code_reference_sources` with repository URLs, source file paths, test paths, example app paths, or code search results.
+20. Record `code_reference_notes` explaining what structure, boundaries, API patterns, error handling, tests, or implementation details are worth adapting or rejecting.
+21. Record `source_types` explicitly and use at least three distinct non-`other` source types.
+22. Include at least one authoritative source type: `official`, `paper`, `standard`, or `open_source`.
+23. Include at least one practical/adoption/contrary source type: `open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `news`, or `contrary`.
 21. For broad or repeated research, apply [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md) and use `_tools/source-collector/` when useful.
 22. Check `enterprise-source-registry.json` for large-company engineering, official research-lab, architecture-center, or high-signal independent sources, then re-open exact pages before citing claims.
 23. For Korean user-facing or local-market behavior, use Naver Map, Kakao Map, Naver Blog/Search, official pages, and `_tools/korean-local-review/` scoring outputs when applicable.
@@ -52,4 +55,4 @@
 
 ## Rule
 
-Coding research is complete only when it records the source configs it used, records technology stack details with stack-specific official docs or standards and version constraints, records issue/discussion sources and community signal interpretation, records source value provenance and plan evidence, compares architecture options from credible architecture references, inspects concrete code references, uses diverse source types, records any required installation review and installation audit path, produces a recommended next action, names validation steps, saves plan history, and answers the standard post-research questions.
+Coding research is complete only when it records the source configs it used, records technology stack details with stack-specific official docs or standards and version constraints, records issue/discussion sources and community signal interpretation, compares maintainable language/runtime options, records source value provenance and plan evidence, compares architecture options from credible architecture references, separates architecture theory from practitioner opinions, records folder-structure options and folder semantics, inspects concrete code references, uses diverse source types, records any required installation review and installation audit path, produces a recommended next action, names validation steps, saves plan history, and answers the standard post-research questions.

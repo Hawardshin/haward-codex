@@ -13,8 +13,11 @@
 - Connect recommendations, architecture choices, file scope, and validation steps to checked sources or explicit assumptions through `plan_evidence`.
 - When technologies have different official docs or standards, such as Java/Spring Boot, C, React, or Next.js, record `technology_stack`, `technology_official_docs`, and `stack_version_constraints` separately.
 - Check high-signal issue/discussion sources such as Stack Overflow, Reddit, GitHub Issues/Discussions, and project forums, then record `issue_discussion_sources`, `issue_discussion_notes`, and `community_signal_notes`.
+- Before implementation, compare language/runtime candidates and record maintainability-focused selection rationale in `language_options`, `selected_language`, and `language_decision_notes`.
 - Before implementation, check best-fit architecture patterns, reference architectures, C4/arc42/SEI/ADR-style architecture documentation, and strong project architecture examples.
 - Compare at least two architecture options and record `architecture_reference_sources`, `architecture_options`, and `architecture_decision_notes`.
+- Separate architecture theory/framework evidence from practitioner opinions in `architecture_theory_sources`, `architecture_practitioner_sources`, and `architecture_tradeoff_notes`.
+- Before implementation, compare folder-structure candidates and record folder meaning and ownership boundaries in `folder_structure_options`, `folder_structure_decision_notes`, `folder_semantics_notes`, and `maintainability_notes`.
 - Before implementation, inspect relevant open-source repositories, reference implementations, or well-structured code and tests, then record `code_reference_sources` and `code_reference_notes`.
 - If open-source installation is needed, record installation scope, install command, dependency record file, installation audit record, security/license review, verification method, and rollback plan.
 - Validate internal knowledge-base references with `knowledge-skeptic-agent`.
@@ -60,13 +63,24 @@ Community signals are useful for discovering problems, adoption, and practical e
 
 Before implementation, record:
 
+- `language_options`: at least two language/runtime candidates compared
+- `selected_language`: the chosen language/runtime
+- `language_decision_notes`: maintainability, ecosystem, tooling, testing, runtime constraints, and project-boundary trade-offs
 - `architecture_reference_sources`: well-architected frameworks, reference architectures, C4/arc42/SEI material, ADRs, or project `docs/architecture` examples
+- `architecture_theory_sources`: architecture theory, frameworks, official architecture centers, standards, papers, or technical reports
+- `architecture_practitioner_sources`: practitioner blogs, high-signal Q&A, Reddit/GitHub discussions, or issue debates
 - `architecture_options`: at least two architecture or pattern candidates compared
 - `architecture_decision_notes`: selected structure, rejected alternatives, module/service boundaries, quality attributes, trade-offs, and validation impact
+- `architecture_tradeoff_notes`: theory-vs-practice disagreements, convergence points, and local validation needs
+- `folder_structure_options`: at least two folder-structure candidates compared
+- `folder_structure_decision_notes`: how the selected folder structure supports navigation, ownership, test placement, and growth
+- `folder_semantics_notes`: what important folders mean and which files belong there
+- `maintainability_notes`: how language, architecture, and folder choices reduce future change cost
 - `code_reference_sources`: GitHub/GitLab repositories, source trees, source files, test files, example apps, or code search results inspected
 - `code_reference_notes`: what the referenced code taught about structure, module boundaries, API usage, error handling, tests, and what should not be reused
 
 Architecture references are not blueprints to copy directly. Compare them against the current project scope, data flow, change profile, security needs, operational complexity, and testability before selecting a structure.
+Practitioner opinions are useful for finding real-world friction and recurring problems, but they are not standalone factual proof. Cross-check them with official docs, standards, papers, and maintained open-source code.
 
 Do not copy open-source code blindly. Check license, maintenance state, fit, security risk, and test quality before adapting ideas locally.
 

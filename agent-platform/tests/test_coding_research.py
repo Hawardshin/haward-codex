@@ -44,9 +44,25 @@ def complete_code_references() -> dict[str, tuple[str, ...]]:
         "community_signal_notes": (
             "Stack Overflow votes and GitHub reactions are treated as adoption or problem signals; official docs remain authoritative.",
         ),
+        "language_options": (
+            "Python 3.11 for local CLI, deterministic validation, and existing agent-platform tests.",
+            "TypeScript for Node-based automation and frontend-adjacent tooling.",
+        ),
+        "selected_language": "Python 3.11",
+        "language_decision_notes": (
+            "Selected Python because the current platform helpers, tests, and CLI are Python-first and easiest to maintain locally.",
+        ),
         "architecture_reference_sources": (
             "https://learn.microsoft.com/azure/architecture/",
             "https://github.com/example/project/blob/main/docs/architecture.md",
+        ),
+        "architecture_theory_sources": (
+            "https://arc42.org/overview",
+            "https://c4model.com/",
+        ),
+        "architecture_practitioner_sources": (
+            "https://martinfowler.com/",
+            "https://stackoverflow.com/questions/tagged/software-architecture",
         ),
         "architecture_options": (
             "Modular monolith with explicit package boundaries.",
@@ -54,6 +70,22 @@ def complete_code_references() -> dict[str, tuple[str, ...]]:
         ),
         "architecture_decision_notes": (
             "Selected modular monolith for the current scope; rejected distributed services because coordination cost exceeds the benefit.",
+        ),
+        "architecture_tradeoff_notes": (
+            "Compared theory-first modular boundaries with practitioner preference for simple explicit folders; selected the simpler package structure.",
+        ),
+        "folder_structure_options": (
+            "Layered package folders by platform capability.",
+            "Feature/capability folders with docs and tests near the implementation.",
+        ),
+        "folder_structure_decision_notes": (
+            "Selected capability-oriented folders because folder names reveal purpose and keep planning/evaluation boundaries obvious.",
+        ),
+        "folder_semantics_notes": (
+            "src/agent_platform/planning contains research and planning checks; evaluation contains close-out evaluators; configs/planning contains structured planning inputs.",
+        ),
+        "maintainability_notes": (
+            "Language, architecture, and folders are chosen to reduce future search cost and make ownership visible.",
         ),
     }
 
@@ -559,6 +591,173 @@ class CodingResearchTests(unittest.TestCase):
 
         self.assertEqual(report["status"], "more_research_required")
         self.assertIn("Issue/discussion sources require community or social in source_types so their evidence role is explicit.", report["gaps"])
+
+    def test_language_selection_is_required(self) -> None:
+        references = complete_code_references()
+        references.pop("language_options")
+        references.pop("selected_language")
+        references.pop("language_decision_notes")
+
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research maintainable implementation language choices.",
+                coding_context="A platform CLI.",
+                research_types=("architecture", "implementation_pattern"),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/", "https://github.com/example/project"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog", "community"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **references,
+                findings=("Language choice should be explicit before coding.",),
+                options=("Python", "TypeScript"),
+                recommendation="Use Python.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Runtime choice was omitted.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn("At least two language or runtime options must be compared before implementation.", report["gaps"])
+        self.assertIn("Selected language or runtime is missing.", report["gaps"])
+        self.assertIn(
+            "Language decision notes are missing; record maintainability, team familiarity, ecosystem, runtime, tooling, and project-boundary trade-offs.",
+            report["gaps"],
+        )
+
+    def test_selected_language_must_match_recorded_options(self) -> None:
+        references = complete_code_references()
+        references["selected_language"] = "Ruby 3.3"
+
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research maintainable implementation language choices.",
+                coding_context="A platform CLI.",
+                research_types=("architecture", "implementation_pattern"),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/", "https://github.com/example/project"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog", "community"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **references,
+                findings=("Language choice should match the compared options.",),
+                options=("Python", "TypeScript"),
+                recommendation="Use Python.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("The selected runtime was inconsistent.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn("Selected language or runtime must match one of the recorded language_options.", report["gaps"])
+
+    def test_architecture_theory_and_practitioner_opinions_are_required(self) -> None:
+        references = complete_code_references()
+        references.pop("architecture_theory_sources")
+        references.pop("architecture_practitioner_sources")
+        references.pop("architecture_tradeoff_notes")
+
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research architecture options before coding.",
+                coding_context="A platform planning module.",
+                research_types=("architecture", "implementation_pattern"),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://arc42.org/overview", "https://stackoverflow.com/questions/tagged/software-architecture", "https://github.com/example/project"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog", "community"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **references,
+                findings=("Architecture research should compare formal and practical sources.",),
+                options=("Layered", "Capability-oriented"),
+                recommendation="Use capability-oriented folders.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Architecture opinion evidence was omitted.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn("Architecture theory sources are missing; record frameworks, models, official architecture docs, standards, or papers.", report["gaps"])
+        self.assertIn(
+            "Architecture practitioner opinion sources are missing; record high-signal practitioner blogs, issue discussions, Q&A, or community debates that may disagree with theory.",
+            report["gaps"],
+        )
+        self.assertIn(
+            "Architecture trade-off notes are missing; compare theory-driven guidance with practitioner opinions and record disagreements or convergence.",
+            report["gaps"],
+        )
+
+    def test_practitioner_sources_require_signal_source_type(self) -> None:
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research practitioner architecture opinions before coding.",
+                coding_context="A platform planning module.",
+                research_types=("architecture", "implementation_pattern"),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://arc42.org/overview", "https://stackoverflow.com/questions/tagged/software-architecture", "https://github.com/example/project"),
+                source_types=("official", "reference_implementation", "open_source"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **complete_code_references(),
+                findings=("Practitioner evidence must be labeled separately.",),
+                options=("Layered", "Capability-oriented"),
+                recommendation="Use capability-oriented folders.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Practitioner evidence role was not labeled.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn(
+            "Practitioner opinion sources require analysis, community, social, or tech_blog in source_types so their evidence role is explicit.",
+            report["gaps"],
+        )
+
+    def test_folder_structure_semantics_are_required(self) -> None:
+        references = complete_code_references()
+        references.pop("folder_structure_options")
+        references.pop("folder_structure_decision_notes")
+        references.pop("folder_semantics_notes")
+        references.pop("maintainability_notes")
+
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research readable folder structure before coding.",
+                coding_context="A platform planning module.",
+                research_types=("architecture", "implementation_pattern"),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://go.dev/doc/modules/layout", "https://nextjs.org/docs/app/getting-started/project-structure", "https://github.com/example/project"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog", "community"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **references,
+                findings=("Folder structure should make ownership visible.",),
+                options=("Layered", "Capability-oriented"),
+                recommendation="Use capability-oriented folders.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Folder meaning was omitted.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn("At least two folder structure options must be compared before implementation.", report["gaps"])
+        self.assertIn(
+            "Folder structure decision notes are missing; record why the selected structure supports maintainability, navigation, ownership, and future growth.",
+            report["gaps"],
+        )
+        self.assertIn(
+            "Folder semantics notes are missing; record the intended meaning of top-level and important nested folders so the structure is understandable by inspection.",
+            report["gaps"],
+        )
+        self.assertIn(
+            "Maintainability notes are missing; record how language, architecture, and folders reduce future change cost.",
+            report["gaps"],
+        )
 
     def test_documentation_url_is_not_enough_as_code_reference(self) -> None:
         report = complete_coding_research(

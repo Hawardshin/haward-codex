@@ -29,8 +29,11 @@
 - 코딩 조사는 어떤 출처 설정을 참고했는지 `reference_config_paths`로 남긴다.
 - 코딩 조사는 `technology_stack`, `technology_official_docs`, `stack_version_constraints`를 기록해 Java/Spring Boot, C, React, Next.js처럼 기술별 공식 문서나 표준을 따로 확인한다.
 - 코딩 조사는 high-signal Stack Overflow, Reddit, GitHub Issues/Discussions 같은 이슈/토론 출처와 반응 신호를 `issue_discussion_sources`, `issue_discussion_notes`, `community_signal_notes`로 남기되, 커뮤니티 반응은 사실 증명이 아니라 문제 발견/채택 신호로만 사용한다.
+- 소스 코드를 작성하기 전에는 언어/런타임 후보를 최소 두 개 비교하고 `language_options`, `selected_language`, `language_decision_notes`에 유지보수성, 생태계, 도구, 테스트, 프로젝트 경계 trade-off를 남긴다.
 - 소스 코드를 작성하기 전에는 best-fit 아키텍처 패턴과 reference architecture를 찾고, 최소 두 개의 아키텍처 옵션을 비교해 `architecture_reference_sources`, `architecture_options`, `architecture_decision_notes`로 남긴다.
+- 아키텍처 이론/프레임워크와 실무자 의견은 서로 다른 근거 역할로 다룬다. `architecture_theory_sources`, `architecture_practitioner_sources`, `architecture_tradeoff_notes`로 의견 차이와 로컬 검증 필요성을 기록한다.
 - 소스 코드를 작성하는 에이전트는 관련 오픈소스 구조, 참고 구현, 잘 작성된 코드와 테스트를 조사하고 `code_reference_sources`, `code_reference_notes`로 남긴다.
+- 폴더를 만들거나 재구성하기 전에는 최소 두 개의 폴더 구조 후보를 비교하고 `folder_structure_options`, `folder_structure_decision_notes`, `folder_semantics_notes`, `maintainability_notes`에 폴더 의미와 소유 경계를 남긴다.
 - 공유 설정 파일은 `reader_guide`, `reference_links`, `structure_rules`, `field_guide`를 포함해 파일만 열어도 참고 링크와 구조 규칙을 알 수 있어야 한다.
 - 최종 산출물에 사실 주장이 포함되면 `hallucination-guard-agent`로 근거, 검증, 불확실성 표시를 확인한다.
 - 이 저장소의 운영 철학은 `_philosophy/`에 둔다.
@@ -200,6 +203,7 @@ project-name/
 - `research-insight-planner-agent`를 쓰는 작업은 계획 히스토리 파일 경로를 지정하고 저장한다.
 - 코딩 조사 후 구현으로 넘어갈 때는 `coding-research-agent`로 확인한 출처, 선택지, 추천안, 위험, 검증 계획, 다음 행동을 구조화한다.
 - 코딩 조사 평가에서는 기술 스택별 공식 문서/표준, 버전 제약, 이슈/토론 출처, 커뮤니티 신호 해석이 빠지지 않았는지 확인한다.
+- 코딩 조사 평가에서는 언어 선택 근거, 이론/실무 아키텍처 근거의 차이, 폴더 구조 후보와 폴더 의미가 빠지지 않았는지 확인한다.
 - 설치가 실제로 발생한 작업은 `_history/installations/YYYY/` 상세 기록과 `_ops/installations/registry.json` 인덱스를 확인한다.
 - 인터넷 조사에서 다음에도 참고할 가치가 있는 내용은 `_research/`에 출처와 함께 문서화한다.
 - 지식 베이스를 근거로 사용할 때는 `knowledge-skeptic-agent`로 틀렸을 가능성을 검증한다.

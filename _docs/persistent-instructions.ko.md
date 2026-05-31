@@ -59,8 +59,11 @@
 - 코딩 조사는 `technology_stack`, `technology_official_docs`, `stack_version_constraints`를 기록해야 하며 Java/Spring Boot, C, React, Next.js 같은 주요 기술은 각각의 공식 문서나 표준을 확인해야 한다.
 - 코딩 조사는 가능한 경우 high-signal Stack Overflow, Reddit, GitHub Issues/Discussions, 프로젝트 forum 같은 이슈/토론 출처를 확인하고 `issue_discussion_sources`, `issue_discussion_notes`, `community_signal_notes`에 기록해야 한다.
 - 이슈/토론의 표, accepted answer, 좋아요, 반응, stars, 댓글은 채택/발견/위험 신호로만 사용하고 단독 사실 증명으로 쓰지 않는다.
+- 소스 코드를 작성하기 전에는 언어/런타임 후보를 최소 두 개 비교하고 `language_options`, `selected_language`, `language_decision_notes`에 유지보수성, 생태계, 런타임, 도구, 테스트, 프로젝트 경계 trade-off를 기록해야 한다.
 - 소스 코드를 작성하기 전에는 best-fit 아키텍처 패턴, reference architecture, 아키텍처 문서화 레퍼런스를 찾고 최소 두 개의 아키텍처 옵션을 비교한 뒤 `architecture_reference_sources`, `architecture_options`, `architecture_decision_notes`로 기록해야 한다.
+- 아키텍처 이론/프레임워크와 실무자 의견은 별도 근거 역할로 다루고 `architecture_theory_sources`, `architecture_practitioner_sources`, `architecture_tradeoff_notes`에 의견 차이, 수렴점, 로컬 검증 필요성을 기록해야 한다.
 - 소스 코드를 작성하는 에이전트는 구현 전 관련 오픈소스 저장소, 참고 구현, 잘 작성된 코드 구조와 테스트를 조사하고 `code_reference_sources`, `code_reference_notes`로 기록해야 한다.
+- 폴더를 만들거나 재구성하기 전에는 최소 두 개의 폴더 구조 후보를 비교하고 `folder_structure_options`, `folder_structure_decision_notes`, `folder_semantics_notes`, `maintainability_notes`에 폴더 의미, 소유 경계, 유지보수 근거를 기록해야 한다.
 - 공유 설정 파일은 `reader_guide`, `reference_links`, `structure_rules`, `field_guide`를 포함해 파일 하나만 열어도 참고 링크와 구조 규칙을 이해할 수 있어야 한다.
 - 중요한 공유 설정 파일을 만들거나 바꾸면 `config-contract-agent`로 자기 설명 계약을 검사한다.
 - 최종 산출물에 사실 주장이 포함되면 `hallucination-guard-agent`로 근거를 검증한다.

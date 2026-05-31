@@ -27,6 +27,7 @@
       "The skill lifecycle layer or skill validation contract changes.",
       "The architecture-first coding layer or coding architecture comparison contract changes.",
       "The stack-aware coding research layer or technology-specific official docs and discussion signal rules change.",
+      "The maintainable language/runtime selection, architecture theory/practitioner comparison, or folder semantics rules change.",
       "The request-to-outcome trace layer or traceability contract changes.",
       "The web search record layer or prompt-level search contract changes.",
       "The work mode selection or deferred improvement policy changes.",
@@ -410,6 +411,16 @@
       ]
     },
     {
+      "id": "maintainable_language_architecture_folders_must_shape_code",
+      "rule": "Source-code work must compare maintainable language/runtime options, separate architecture theory from practitioner opinions, and record folder-structure options plus folder semantics before implementation.",
+      "reason": "The user explicitly asked for easy language selection, architecture decisions that consider theory and practitioner disagreement, and folder structures understandable by inspection.",
+      "applies_to": [
+        "coding-research-agent",
+        "coding_research_profile",
+        "complete-coding-research"
+      ]
+    },
+    {
       "id": "enterprise_source_registry_must_stay_discoverable",
       "rule": "The enterprise/high-quality source registry must remain a warm memory anchor so future sessions can find large-company engineering, research-lab, architecture-center, and high-signal sites without repeating discovery.",
       "reason": "The user explicitly asked for those site lists to be managed separately.",
@@ -686,7 +697,7 @@
       "id": "coding_research_profile",
       "path": "agent-platform/configs/research/coding-research-profile.json",
       "tier": "hot",
-      "purpose": "Default source coverage profile for coding research, including technology-specific official docs, stack versions, issue/discussion sources, and community signal rules.",
+      "purpose": "Default source coverage profile for coding research, including technology-specific official docs, stack versions, issue/discussion sources, language/runtime decisions, theory/practitioner architecture evidence, folder semantics, and community signal rules.",
       "required": true,
       "load_order": 13
     },
@@ -828,7 +839,7 @@
     },
     {
       "id": "daily_history",
-      "path": "_history/2026/2026-05-31.md",
+      "path": "_history/2026/2026-06-01.md",
       "tier": "warm",
       "purpose": "Current dated work log and compressed context.",
       "required": true,

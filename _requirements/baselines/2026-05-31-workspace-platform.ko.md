@@ -37,12 +37,14 @@
 | REQ-WS-019 | 한국 사용자 리뷰나 로컬 판단이 필요한 조사에서는 Naver Map, Kakao Map, Naver Blog/Search, 공식 페이지를 우선 확인하고 후보 페이지 품질을 평가해야 한다. | UR-2026-05-31-044 | must | baseline | `_tools`/`_research` | Korean local review tool tests와 source list 확인 | `_tools/korean-local-review/`, `_research/source-lists/korean-local-review-sources.ko.md` |
 | REQ-WS-020 | 작업 성격에 따라 `quick`, `standard`, `ship_first`, `research`, `governance` 모드를 선택하고, 모드별로 필수 산출물과 지연 개선을 다르게 관리해야 한다. | UR-2026-05-31-045 | must | baseline | `_ops`/`agent-platform` | work mode registry, evaluator tests, workflow review 확인 | `agent-platform/configs/workflows/work-mode-registry.json`, `_ops/workflows/02-select-work-mode.md`, `_ops/backlog/deferred-improvements.ko.md` |
 | REQ-WS-021 | 코딩 조사는 기술 스택별 공식 문서/표준, 버전 제약, high-signal 이슈/토론 출처와 커뮤니티 신호 해석을 기록해야 한다. | UR-2026-05-31-046 | must | baseline | agent-platform/projects | `complete-coding-research` 결과와 stack/discussion fields 확인 | `agent-platform/src/agent_platform/planning/coding_research.py`, `agent-platform/configs/research/coding-research-profile.json`, `agent-platform/docs/coding-research-agent.ko.md` |
+| REQ-WS-022 | 코딩 조사는 유지보수 가능한 언어/런타임 선택, 아키텍처 이론과 실무자 의견의 분리 비교, 폴더 구조 후보와 폴더 의미를 기록해야 한다. | UR-2026-06-01-001 | must | baseline | agent-platform/projects | `complete-coding-research` 결과와 language/architecture/folder fields 확인 | `agent-platform/src/agent_platform/planning/coding_research.py`, `agent-platform/configs/research/coding-research-profile.json`, `_docs/architecture-first-coding-policy.ko.md` |
 
 ## 변경 관리
 
 - 요구사항 변경은 `_requirements/changes/`에 남긴다.
 - 요구사항 검토는 `_requirements/reviews/`에 남긴다.
 - 구현 전에는 관련 요구사항 ID를 계획/작업 요약/평가 입력에 연결한다.
+- 2026-06-01에 REQ-WS-022를 추가해 언어 선택, 이론/실무 아키텍처 비교, 폴더 의미 기록을 구현 준비 조건으로 승격했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.

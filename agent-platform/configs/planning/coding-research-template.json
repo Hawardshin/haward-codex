@@ -62,6 +62,14 @@
   "community_signal_notes": [
     "Treat Stack Overflow votes, Reddit activity, GitHub reactions, stars, likes, and comments as adoption or discovery signals, not standalone factual proof."
   ],
+  "language_options": [
+    "Python 3.11 for agent/platform automation, local CLIs, tests, and maintainable scripting.",
+    "TypeScript for frontend-adjacent tooling, Node automation, and typed web application code."
+  ],
+  "selected_language": "Python 3.11",
+  "language_decision_notes": [
+    "Record why the selected language/runtime is easiest to maintain for this project, including team familiarity, ecosystem maturity, runtime constraints, tooling, testing, and project boundary fit."
+  ],
   "code_reference_sources": [
     "https://github.com/example/project/tree/main/src",
     "https://github.com/example/project/tree/main/tests"
@@ -74,12 +82,38 @@
     "https://c4model.info/",
     "https://github.com/example/project/blob/main/docs/architecture.md"
   ],
+  "architecture_theory_sources": [
+    "https://arc42.org/overview",
+    "https://c4model.com/",
+    "https://www.sei.cmu.edu/library/views-and-beyond-collection/"
+  ],
+  "architecture_practitioner_sources": [
+    "https://martinfowler.com/",
+    "https://stackoverflow.com/questions/tagged/software-architecture",
+    "https://www.reddit.com/r/softwarearchitecture/search/?q=<query>"
+  ],
   "architecture_options": [
     "Architecture or pattern A, with its fit and trade-off.",
     "Architecture or pattern B, with its fit and trade-off."
   ],
   "architecture_decision_notes": [
     "Record the selected architecture, rejected alternatives, module/service boundaries, quality attributes, and validation impact."
+  ],
+  "architecture_tradeoff_notes": [
+    "Compare formal architecture guidance with practitioner opinions and record where they converge, disagree, or need local validation."
+  ],
+  "folder_structure_options": [
+    "Layered folders by technical concern, such as controllers/services/repositories or planning/evaluation/configs.",
+    "Feature or capability folders where related code, docs, tests, and configs stay near the owning behavior."
+  ],
+  "folder_structure_decision_notes": [
+    "Record why the selected folder structure improves maintainability, navigation, ownership, test placement, and future project growth."
+  ],
+  "folder_semantics_notes": [
+    "Explain the intended meaning of top-level and important nested folders so a future maintainer can understand the structure by inspection."
+  ],
+  "maintainability_notes": [
+    "Record how the language, architecture, and folder choices reduce future change cost, onboarding cost, and ambiguity."
   ],
   "source_bundle_report": "_tools/source-collector report path if a large source bundle was scored.",
   "findings": [

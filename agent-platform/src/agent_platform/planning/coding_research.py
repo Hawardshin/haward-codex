@@ -39,6 +39,7 @@ ALLOWED_SOURCE_TYPES = {
 
 AUTHORITATIVE_SOURCE_TYPES = {"official", "paper", "standard", "open_source"}
 PRACTICAL_SOURCE_TYPES = {"analysis", "community", "contrary", "news", "open_source", "reference_implementation", "social", "tech_blog"}
+PRACTITIONER_SOURCE_TYPES = {"analysis", "community", "social", "tech_blog"}
 MIN_DISTINCT_SOURCE_TYPES = 3
 
 TECHNOLOGY_OFFICIAL_DOC_HINTS = (
@@ -104,11 +105,21 @@ class CodingResearchInput:
     issue_discussion_sources: tuple[str, ...] = ()
     issue_discussion_notes: tuple[str, ...] = ()
     community_signal_notes: tuple[str, ...] = ()
+    language_options: tuple[str, ...] = ()
+    selected_language: str = ""
+    language_decision_notes: tuple[str, ...] = ()
     code_reference_sources: tuple[str, ...] = ()
     code_reference_notes: tuple[str, ...] = ()
     architecture_reference_sources: tuple[str, ...] = ()
+    architecture_theory_sources: tuple[str, ...] = ()
+    architecture_practitioner_sources: tuple[str, ...] = ()
     architecture_options: tuple[str, ...] = ()
     architecture_decision_notes: tuple[str, ...] = ()
+    architecture_tradeoff_notes: tuple[str, ...] = ()
+    folder_structure_options: tuple[str, ...] = ()
+    folder_structure_decision_notes: tuple[str, ...] = ()
+    folder_semantics_notes: tuple[str, ...] = ()
+    maintainability_notes: tuple[str, ...] = ()
     source_bundle_report: str = ""
     findings: tuple[str, ...] = ()
     options: tuple[str, ...] = ()
@@ -138,11 +149,21 @@ class CodingResearchInput:
             issue_discussion_sources=_tuple_of_strings(data.get("issue_discussion_sources", []), "issue_discussion_sources"),
             issue_discussion_notes=_tuple_of_strings(data.get("issue_discussion_notes", []), "issue_discussion_notes"),
             community_signal_notes=_tuple_of_strings(data.get("community_signal_notes", []), "community_signal_notes"),
+            language_options=_tuple_of_strings(data.get("language_options", []), "language_options"),
+            selected_language=_optional_string(data.get("selected_language", ""), "selected_language"),
+            language_decision_notes=_tuple_of_strings(data.get("language_decision_notes", []), "language_decision_notes"),
             code_reference_sources=_tuple_of_strings(data.get("code_reference_sources", []), "code_reference_sources"),
             code_reference_notes=_tuple_of_strings(data.get("code_reference_notes", []), "code_reference_notes"),
             architecture_reference_sources=_tuple_of_strings(data.get("architecture_reference_sources", []), "architecture_reference_sources"),
+            architecture_theory_sources=_tuple_of_strings(data.get("architecture_theory_sources", []), "architecture_theory_sources"),
+            architecture_practitioner_sources=_tuple_of_strings(data.get("architecture_practitioner_sources", []), "architecture_practitioner_sources"),
             architecture_options=_tuple_of_strings(data.get("architecture_options", []), "architecture_options"),
             architecture_decision_notes=_tuple_of_strings(data.get("architecture_decision_notes", []), "architecture_decision_notes"),
+            architecture_tradeoff_notes=_tuple_of_strings(data.get("architecture_tradeoff_notes", []), "architecture_tradeoff_notes"),
+            folder_structure_options=_tuple_of_strings(data.get("folder_structure_options", []), "folder_structure_options"),
+            folder_structure_decision_notes=_tuple_of_strings(data.get("folder_structure_decision_notes", []), "folder_structure_decision_notes"),
+            folder_semantics_notes=_tuple_of_strings(data.get("folder_semantics_notes", []), "folder_semantics_notes"),
+            maintainability_notes=_tuple_of_strings(data.get("maintainability_notes", []), "maintainability_notes"),
             source_bundle_report=_optional_string(data.get("source_bundle_report", ""), "source_bundle_report"),
             findings=_tuple_of_strings(data.get("findings", []), "findings"),
             options=_tuple_of_strings(data.get("options", []), "options"),
@@ -222,6 +243,14 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
         gaps.append("At least one practical or adoption source type is required: open_source, reference_implementation, tech_blog, analysis, community, social, news, or contrary.")
     if research_input.issue_discussion_sources and normalized_source_types and not evidence_source_types.intersection({"community", "social"}):
         gaps.append("Issue/discussion sources require community or social in source_types so their evidence role is explicit.")
+    if len(research_input.language_options) < 2:
+        gaps.append("At least two language or runtime options must be compared before implementation.")
+    if not research_input.selected_language.strip():
+        gaps.append("Selected language or runtime is missing.")
+    elif research_input.language_options and not _selected_language_in_options(research_input.selected_language, research_input.language_options):
+        gaps.append("Selected language or runtime must match one of the recorded language_options.")
+    if not research_input.language_decision_notes:
+        gaps.append("Language decision notes are missing; record maintainability, team familiarity, ecosystem, runtime, tooling, and project-boundary trade-offs.")
     if not research_input.code_reference_sources:
         gaps.append("Code reference sources are missing; inspect relevant open-source repositories, reference implementations, or well-structured code before implementation.")
     elif not any(_looks_like_code_reference(source) for source in research_input.code_reference_sources):
@@ -232,10 +261,26 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
         gaps.append("Architecture reference sources are missing; inspect best-practice architecture frameworks, reference architectures, or well-structured source architectures before implementation.")
     elif not any(_looks_like_architecture_reference(source) for source in research_input.architecture_reference_sources):
         gaps.append("At least one architecture reference source must be an architecture framework, reference architecture, ADR, C4/arc42/SEI resource, or architecture-focused repository/source path.")
+    if not research_input.architecture_theory_sources:
+        gaps.append("Architecture theory sources are missing; record frameworks, models, official architecture docs, standards, or papers.")
+    if not research_input.architecture_practitioner_sources:
+        gaps.append("Architecture practitioner opinion sources are missing; record high-signal practitioner blogs, issue discussions, Q&A, or community debates that may disagree with theory.")
+    elif normalized_source_types and not evidence_source_types.intersection(PRACTITIONER_SOURCE_TYPES):
+        gaps.append("Practitioner opinion sources require analysis, community, social, or tech_blog in source_types so their evidence role is explicit.")
     if len(research_input.architecture_options) < 2:
         gaps.append("At least two architecture options or patterns must be compared before implementation.")
     if not research_input.architecture_decision_notes:
         gaps.append("Architecture decision notes are missing; record the selected architecture, rejected alternatives, boundaries, trade-offs, and validation impact.")
+    if not research_input.architecture_tradeoff_notes:
+        gaps.append("Architecture trade-off notes are missing; compare theory-driven guidance with practitioner opinions and record disagreements or convergence.")
+    if len(research_input.folder_structure_options) < 2:
+        gaps.append("At least two folder structure options must be compared before implementation.")
+    if not research_input.folder_structure_decision_notes:
+        gaps.append("Folder structure decision notes are missing; record why the selected structure supports maintainability, navigation, ownership, and future growth.")
+    if not research_input.folder_semantics_notes:
+        gaps.append("Folder semantics notes are missing; record the intended meaning of top-level and important nested folders so the structure is understandable by inspection.")
+    if not research_input.maintainability_notes:
+        gaps.append("Maintainability notes are missing; record how language, architecture, and folders reduce future change cost.")
     if not research_input.findings:
         gaps.append("Findings are missing.")
     if not research_input.options:
@@ -292,11 +337,21 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
             "issue_discussion_sources_count": len(research_input.issue_discussion_sources),
             "issue_discussion_notes_count": len(research_input.issue_discussion_notes),
             "community_signal_notes_count": len(research_input.community_signal_notes),
+            "language_options_count": len(research_input.language_options),
+            "selected_language_present": bool(research_input.selected_language.strip()),
+            "language_decision_notes_count": len(research_input.language_decision_notes),
             "code_reference_sources_count": len(research_input.code_reference_sources),
             "code_reference_notes_count": len(research_input.code_reference_notes),
             "architecture_reference_sources_count": len(research_input.architecture_reference_sources),
+            "architecture_theory_sources_count": len(research_input.architecture_theory_sources),
+            "architecture_practitioner_sources_count": len(research_input.architecture_practitioner_sources),
             "architecture_options_count": len(research_input.architecture_options),
             "architecture_decision_notes_count": len(research_input.architecture_decision_notes),
+            "architecture_tradeoff_notes_count": len(research_input.architecture_tradeoff_notes),
+            "folder_structure_options_count": len(research_input.folder_structure_options),
+            "folder_structure_decision_notes_count": len(research_input.folder_structure_decision_notes),
+            "folder_semantics_notes_count": len(research_input.folder_semantics_notes),
+            "maintainability_notes_count": len(research_input.maintainability_notes),
             "findings_count": len(research_input.findings),
             "options_count": len(research_input.options),
             "post_research_answers_count": len([value for value in answers.values() if value.strip()]),
@@ -332,6 +387,17 @@ def _source_type_counts(source_types: tuple[str, ...]) -> dict[str, int]:
         if normalized:
             counts[normalized] = counts.get(normalized, 0) + 1
     return counts
+
+
+def _selected_language_in_options(selected_language: str, language_options: tuple[str, ...]) -> bool:
+    selected = selected_language.strip().lower()
+    if not selected:
+        return False
+    for option in language_options:
+        normalized_option = option.strip().lower()
+        if selected in normalized_option or normalized_option in selected:
+            return True
+    return False
 
 
 def _missing_stack_official_docs(technology_stack: tuple[str, ...], official_docs: tuple[str, ...]) -> list[str]:

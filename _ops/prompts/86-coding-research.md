@@ -27,11 +27,17 @@ Record stack_version_constraints with current or target versions, standards, com
 Search high-signal issue and discussion channels when available: Stack Overflow high-vote or accepted answers, Reddit discussions, GitHub Issues/Discussions, project forums, unresolved issue threads, and strongly reacted discussions.
 Record issue_discussion_sources and issue_discussion_notes with URLs, signal strength, stale-answer risk, accepted/high-vote answer context, unresolved debates, and contradictions.
 Record community_signal_notes explaining how votes, likes, reactions, stars, or comments were interpreted as adoption, discovery, or risk signals rather than proof.
+Before writing source code, compare at least two language or runtime options.
+Record language_options, selected_language, and language_decision_notes with maintainability, ecosystem, runtime, tooling, testing, and project-boundary trade-offs.
 Before writing source code, search for best-fit architecture patterns, reference architectures, architecture documentation frameworks, and strong project architecture examples.
 Use architecture references such as well-architected frameworks, Azure/AWS/GCP architecture guidance, C4, arc42, SEI views, ADRs, or mature project docs/architecture examples when they fit the task.
 Record architecture_reference_sources with URLs or source paths.
+Separate architecture_theory_sources from architecture_practitioner_sources. Treat practitioner blogs, Q&A, Reddit, GitHub discussions, and issue debates as trade-off discovery signals, not proof.
 Compare at least two architecture_options before implementation.
 Record architecture_decision_notes explaining the selected architecture, rejected alternatives, boundaries, quality attributes, trade-offs, and validation impact.
+Record architecture_tradeoff_notes explaining where formal guidance and practitioner opinions converge, disagree, or require local validation.
+Compare at least two folder_structure_options before creating or reshaping source folders.
+Record folder_structure_decision_notes, folder_semantics_notes, and maintainability_notes so folder purpose and ownership are understandable by inspection.
 Before writing source code, inspect relevant open-source repositories, reference implementations, well-structured source trees, examples, and tests.
 If installation is needed, record install_needed, installation_scope, install_command, dependency_record_path, installation_record_path, environment_path, version_or_lock_status, post_install_verification, security_review, license_review, and rollback_plan before implementation.
 Record code_reference_sources with repository URLs, source file paths, test paths, example app paths, or code search results.

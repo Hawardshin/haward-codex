@@ -11,12 +11,14 @@
       "Read post_research_question_ids to know what must be answered before implementation."
     ],
     "owner": "agent-platform",
-    "last_reviewed": "2026-05-31",
+    "last_reviewed": "2026-06-01",
     "update_triggers": [
       "Coding research repeatedly misses a source category.",
       "A new research type needs different evidence coverage.",
       "The source registry changes source type IDs or reference IDs.",
       "Source-code work starts without comparing architecture options.",
+      "Source-code work starts without an explicit maintainable language/runtime and folder-structure decision.",
+      "Architecture theory and practitioner opinions diverge or need separate evidence handling.",
       "The coding-research-agent readiness checker changes required fields."
     ]
   },
@@ -74,6 +76,46 @@
                 "global engineering blogs, Korean technology blogs, India technology sources, paper discovery, and Korean local review channels"
             ],
             "last_checked": "2026-05-31"
+        },
+        {
+            "id": "spring_boot_structuring_code",
+            "title": "Spring Boot Structuring Your Code",
+            "url": "https://docs.spring.io/spring-boot/reference/using/structuring-your-code.html",
+            "source_type": "official",
+            "used_for": [
+                "Spring Boot package organization and component-scan boundary decisions"
+            ],
+            "last_checked": "2026-06-01"
+        },
+        {
+            "id": "nextjs_project_structure",
+            "title": "Next.js Project Structure",
+            "url": "https://nextjs.org/docs/app/getting-started/project-structure",
+            "source_type": "official",
+            "used_for": [
+                "Next.js file-system routing, colocated files, private folders, and optional src layout"
+            ],
+            "last_checked": "2026-06-01"
+        },
+        {
+            "id": "pypa_src_layout",
+            "title": "Python Packaging User Guide: src layout vs flat layout",
+            "url": "https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/",
+            "source_type": "official",
+            "used_for": [
+                "Python package layout selection and import-path maintainability trade-offs"
+            ],
+            "last_checked": "2026-06-01"
+        },
+        {
+            "id": "go_module_layout",
+            "title": "Organizing a Go module",
+            "url": "https://go.dev/doc/modules/layout",
+            "source_type": "official",
+            "used_for": [
+                "Go module, package, command, and internal folder structure decisions"
+            ],
+            "last_checked": "2026-06-01"
         },
         {
             "id": "spring_boot_reference",
@@ -241,6 +283,26 @@
         "stakeholder concern coverage"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "martin_fowler_architecture",
+      "title": "Martin Fowler architecture writing",
+      "url": "https://martinfowler.com/architecture/",
+      "source_type": "tech_blog",
+      "used_for": [
+        "practitioner architecture opinion and trade-off discovery"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "software_architecture_community_discussions",
+      "title": "Software architecture community discussions",
+      "url": "https://stackoverflow.com/questions/tagged/software-architecture",
+      "source_type": "community",
+      "used_for": [
+        "high-signal practitioner questions, accepted answers, votes, and recurring disagreements"
+      ],
+      "last_checked": "2026-06-01"
     }
   ],
   "structure_rules": [
@@ -275,6 +337,18 @@
       ]
     },
     {
+      "id": "language_selection_must_be_maintainable",
+      "rule": "Coding research must compare at least two language or runtime options, select one explicitly, and record maintainability-focused decision notes.",
+      "reason": "The easiest implementation language is not always the easiest language to maintain across tooling, tests, ecosystem, runtime constraints, and project boundaries.",
+      "applies_to": [
+        "required_coverage.must_record_language_options",
+        "language_options",
+        "selected_language",
+        "language_decision_notes",
+        "maintainability_notes"
+      ]
+    },
+    {
       "id": "issue_discussion_signals_are_required",
       "rule": "Coding research must inspect and record high-signal issue/discussion/community sources when available, including Stack Overflow, Reddit, GitHub Issues/Discussions, and project forums.",
       "reason": "Practical issue threads and high-engagement discussions reveal repeated problems, stale answers, migration friction, and edge cases that official docs may not emphasize.",
@@ -305,6 +379,28 @@
         "architecture_reference_sources",
         "architecture_options",
         "architecture_decision_notes"
+      ]
+    },
+    {
+      "id": "architecture_theory_and_practice_must_be_compared",
+      "rule": "Architecture research must separately record theory/formal sources and practitioner opinion sources, then explain convergence, disagreement, and local trade-offs before choosing structure.",
+      "reason": "Architecture theory, cloud/reference frameworks, and high-signal practitioner discussions can disagree; treating them as separate evidence roles prevents false certainty.",
+      "applies_to": [
+        "architecture_theory_sources",
+        "architecture_practitioner_sources",
+        "architecture_tradeoff_notes",
+        "source_types"
+      ]
+    },
+    {
+      "id": "folder_semantics_must_be_recorded",
+      "rule": "Coding research must compare at least two folder-structure options and record folder semantics so maintainers can infer purpose and ownership by inspecting the tree.",
+      "reason": "Folder structure is part of maintainability; unclear folder names and unrecorded ownership create repeated rediscovery cost.",
+      "applies_to": [
+        "folder_structure_options",
+        "folder_structure_decision_notes",
+        "folder_semantics_notes",
+        "maintainability_notes"
       ]
     },
         {
@@ -357,6 +453,16 @@
       "required": true
     },
     {
+      "field": "architecture_theory_sources",
+      "meaning": "Formal or theory-heavy architecture sources such as architecture frameworks, standards, academic or technical reports, C4, arc42, SEI, or cloud architecture frameworks.",
+      "required": true
+    },
+    {
+      "field": "architecture_practitioner_sources",
+      "meaning": "High-signal practitioner opinions such as engineering blogs, issue discussions, Q&A, Reddit threads, GitHub discussions, or community debates.",
+      "required": true
+    },
+    {
       "field": "architecture_options",
       "meaning": "At least two architecture patterns or structural options compared before coding.",
       "required": true
@@ -364,6 +470,31 @@
     {
       "field": "architecture_decision_notes",
       "meaning": "Selected architecture, rejected alternatives, boundaries, trade-offs, quality attributes, and validation impact.",
+      "required": true
+    },
+    {
+      "field": "architecture_tradeoff_notes",
+      "meaning": "Where formal architecture guidance and practitioner opinions agree, disagree, or need local validation before implementation.",
+      "required": true
+    },
+    {
+      "field": "folder_structure_options",
+      "meaning": "At least two candidate folder structures compared, including ownership, navigation, test placement, and future growth trade-offs.",
+      "required": true
+    },
+    {
+      "field": "folder_structure_decision_notes",
+      "meaning": "Why the selected folder structure supports maintainability, readable ownership boundaries, and future project evolution.",
+      "required": true
+    },
+    {
+      "field": "folder_semantics_notes",
+      "meaning": "The intended meaning of top-level and important nested folders so the tree is understandable by inspection.",
+      "required": true
+    },
+    {
+      "field": "maintainability_notes",
+      "meaning": "How language, architecture, and folder choices reduce future change cost, onboarding cost, and ambiguity.",
       "required": true
     },
     {
@@ -389,6 +520,21 @@
     {
       "field": "stack_version_constraints",
       "meaning": "Current or target versions, standards, runtime ranges, compatibility constraints, or explicit unknowns.",
+      "required": true
+    },
+    {
+      "field": "language_options",
+      "meaning": "At least two implementation language or runtime options compared for maintainability, ecosystem, tooling, runtime fit, and project boundary fit.",
+      "required": true
+    },
+    {
+      "field": "selected_language",
+      "meaning": "The language or runtime selected from language_options for the current implementation.",
+      "required": true
+    },
+    {
+      "field": "language_decision_notes",
+      "meaning": "Why the selected language/runtime is the most maintainable option for this project and why rejected options were not chosen.",
       "required": true
     },
     {
@@ -460,6 +606,10 @@
     "must_record_technology_stack": true,
     "must_record_technology_official_docs": true,
     "must_record_stack_version_constraints": true,
+    "must_record_language_options": true,
+    "min_language_options": 2,
+    "must_record_selected_language": true,
+    "must_record_language_decision_notes": true,
     "must_record_issue_discussion_sources": true,
     "must_record_issue_discussion_notes": true,
     "must_record_community_signal_notes": true,
@@ -467,7 +617,15 @@
     "min_code_reference_sources": 1,
     "must_record_architecture_references": true,
     "min_architecture_reference_sources": 1,
+    "must_record_architecture_theory_sources": true,
+    "must_record_architecture_practitioner_sources": true,
     "min_architecture_options": 2,
+    "must_record_architecture_tradeoff_notes": true,
+    "must_record_folder_structure_options": true,
+    "min_folder_structure_options": 2,
+    "must_record_folder_structure_decision_notes": true,
+    "must_record_folder_semantics_notes": true,
+    "must_record_maintainability_notes": true,
     "must_record_source_value_provenance": true,
     "must_record_plan_evidence": true,
     "must_record_plan_history_targets": true
@@ -482,6 +640,10 @@
     "sourcemeta_registry_configuration",
     "public_code_repository_best_practices",
     "codehow_code_search",
+    "spring_boot_structuring_code",
+    "nextjs_project_structure",
+    "pypa_src_layout",
+    "go_module_layout",
     "spring_boot_reference",
     "react_docs",
     "nextjs_docs",
@@ -493,21 +655,30 @@
     "google_cloud_architecture_framework",
     "arc42_architecture_template",
     "c4_model",
-    "sei_views_and_beyond"
+    "sei_views_and_beyond",
+    "martin_fowler_architecture",
+    "software_architecture_community_discussions"
   ],
   "source_selection_rules": [
         "Start with web search before local planning.",
         "Check enterprise-source-registry.json when the task benefits from large-company engineering, research-lab, architecture-center, or high-signal independent sources.",
         "Check source-discovery-registry.json when broader global, Korean, Indian, paper, or Korean local review source origins are useful.",
         "Use Naver Map, Kakao Map, Naver Blog/Search, official pages, and _tools/korean-local-review/ when Korean user behavior or local-market review signals affect implementation.",
-        "Use at least one current official or primary source when external behavior matters.",
+    "Use at least one current official or primary source when external behavior matters.",
     "Record technology_stack and check stack-specific official docs or standards for each major known technology, such as Spring Boot, ISO C, React, and Next.js.",
     "Record stack_version_constraints with exact versions, standards, compatibility ranges, runtime assumptions, or explicit unknowns.",
+    "Compare at least two language or runtime options and record selected_language plus language_decision_notes before implementation.",
+    "Language selection must prioritize maintainability, testability, ecosystem maturity, runtime constraints, available tooling, and project boundary fit.",
     "Search high-signal issue/discussion sources when available, including Stack Overflow high-vote or accepted answers, Reddit discussions, GitHub Issues/Discussions, and project forums.",
     "Record issue_discussion_sources, issue_discussion_notes, and community_signal_notes so community signals are separated from factual proof.",
     "Use open-source source material when implementation behavior, maintenance, or license matters.",
     "Before writing source code, look for best-fit architecture patterns, reference architectures, and well-structured source architectures.",
+    "Separate architecture_theory_sources from architecture_practitioner_sources so formal guidance and high-signal practitioner opinions can disagree without being collapsed into one truth.",
     "Compare at least two architecture options and record why the selected structure fits the current scope, quality attributes, and project boundary.",
+    "Record architecture_tradeoff_notes with theory-vs-practice disagreements, convergence points, and local validation needs.",
+    "Compare at least two folder_structure_options and record folder_structure_decision_notes before creating or reshaping folders.",
+    "Record folder_semantics_notes so top-level and important nested folders are understandable by inspection.",
+    "Record maintainability_notes that connect the selected language, architecture, and folder structure to future change cost.",
     "Inspect relevant open-source repositories, reference implementations, example applications, and tests before writing source code.",
     "Record code_reference_sources and code_reference_notes so implementation choices can be traced back to concrete code examples.",
     "Record architecture_reference_sources, architecture_options, and architecture_decision_notes so source-code structure can be traced back to architecture evidence.",

@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-31",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, and stack-aware coding research structures added. No separate parallel agent tasks are currently active.",
+  "updated_at": "2026-06-01",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, and maintainable language/architecture/folder decision rules added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -315,6 +315,25 @@
         "_specs/workspace-platform/2026-05-31-stack-aware-coding-research/spec.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-05-31-stack-aware-coding-research.ko.md"
+    },
+    {
+      "id": "2026-06-01-maintainable-language-architecture-folders",
+      "title": "Require maintainable language, architecture, and folder decisions",
+      "project": "agent-platform",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-01",
+      "updated_at": "2026-06-01",
+      "next_action": "No action. Future coding research must compare language/runtime options, separate architecture theory from practitioner opinions, and record folder semantics before implementation.",
+      "blockers": [],
+      "references": [
+        "agent-platform/src/agent_platform/planning/coding_research.py",
+        "agent-platform/configs/research/coding-research-profile.json",
+        "agent-platform/docs/coding-research-agent.ko.md",
+        "_specs/workspace-platform/2026-06-01-maintainable-language-architecture-folders/spec.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-06-01-maintainable-language-architecture-folders.ko.md"
     }
   ]
 }
