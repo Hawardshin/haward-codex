@@ -24,7 +24,7 @@
 11. For planning that depends on external facts, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json`.
 12. Treat research as an answer-engine pipeline: query understanding, retrieval, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
 13. For coding research, use `coding-research-agent` to record reference configs, concrete code references, standard post-research answers, and diverse source types before implementation.
-14. If mature open source is the right fit, install it in the owning project or tool scope and record install command, dependency tracking, security/license review, verification, and rollback.
+14. If mature open source is the right fit, install it in the owning project or tool scope and record install command, dependency tracking, installation audit record, security/license review, verification, and rollback.
 15. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
 16. Save important planning processes under `_history/plans/YYYY/`.
 17. Promote repeated work into a template, tool, skill, prompt, or workflow.
@@ -86,4 +86,4 @@ Use other runtimes when they are a better fit for the surface being built:
 - Node.js when the existing project is already Node-based or the ecosystem fit is materially better
 - shell scripts only for small glue tasks
 
-Prefer mature open-source projects when they reduce maintenance cost and fit the task constraints. If installation is needed, use project-local or tool-local scope by default and record install commands, dependency files, security/license review, verification, and rollback before installation.
+Prefer mature open-source projects when they reduce maintenance cost and fit the task constraints. If installation is needed, use project-local or tool-local scope by default and record install commands, dependency files, installation audit records, security/license review, verification, and rollback before installation. Actual installs must be indexed in `_ops/installations/registry.json`.

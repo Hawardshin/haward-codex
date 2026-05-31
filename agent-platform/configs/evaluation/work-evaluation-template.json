@@ -16,6 +16,10 @@
   "work_summary_targets": [
     "_history/work-summaries/YYYY/YYYY-MM-DD.ko.md"
   ],
+  "installation_occurred": false,
+  "installation_record_targets": [
+    "_history/installations/YYYY/YYYY-MM-DD-package-name.ko.md"
+  ],
   "known_gaps": [],
   "improvement_ideas": []
 }

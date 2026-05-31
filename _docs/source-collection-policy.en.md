@@ -48,7 +48,7 @@ For general research and planning, use `research-insight-planner-agent` with `ag
 
 For coding research, run `coding-research-agent` before completion to check sources, `source_types`, `reference_config_paths`, `code_reference_sources`, `code_reference_notes`, options, recommendation, risks, validation plan, and standard post-research questions. Coding research needs at least three distinct non-`other` source types, must record the source settings it used through JSON configs under `agent-platform/configs/research/`, and must inspect relevant open-source structure, reference implementations, or well-written code/tests.
 
-If open-source installation is needed, follow [_docs/open-source-installation-policy.en.md](open-source-installation-policy.en.md) and record install scope, command, dependency file, security/license review, verification, and rollback.
+If open-source installation is needed, follow [_docs/open-source-installation-policy.en.md](open-source-installation-policy.en.md) and record install scope, command, dependency file, installation audit record, security/license review, verification, and rollback. If installation actually occurs, update `_ops/installations/registry.json` and `_history/installations/YYYY/`.
 
 ## Evaluation Criteria
 

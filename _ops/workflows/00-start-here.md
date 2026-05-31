@@ -16,13 +16,14 @@
 8. Decide the owning project or shared workspace folder; use [_ops/workflows/25-project-boundary-management.md](25-project-boundary-management.md) when unclear.
 9. Read the target project README and relevant docs.
 10. If planning depends on external facts or current information, run [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md) with `agent-platform/configs/research/research-agent-profile.json`.
-11. Implement the smallest useful change inside the owning project or shared folder.
-12. Verify with tests, checks, or rendered artifacts.
-13. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).
-14. Evaluate completed work against the initial instruction.
-15. Rework if the evaluator finds gaps, then evaluate again.
-16. Update `_history/work-summaries/`, detailed history, and maps.
-17. Commit and push immediately.
+11. If the work installs, upgrades, removes, or globally configures software, follow [_ops/workflows/58-installation-record.md](58-installation-record.md).
+12. Implement the smallest useful change inside the owning project or shared folder.
+13. Verify with tests, checks, or rendered artifacts.
+14. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).
+15. Evaluate completed work against the initial instruction.
+16. Rework if the evaluator finds gaps, then evaluate again.
+17. Update `_history/work-summaries/`, detailed history, and maps.
+18. Commit and push immediately.
 
 ## Rule
 

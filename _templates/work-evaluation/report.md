@@ -20,6 +20,11 @@
 
 -
 
+## Installation Records
+
+- Installation occurred:
+- Installation record targets:
+
 ## Alignment
 
 - Status:

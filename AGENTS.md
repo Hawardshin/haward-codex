@@ -72,6 +72,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Before hand-rolling agent infrastructure, evaluate mature open-source libraries, frameworks, and tools that can reduce maintenance cost.
 - If a mature open-source tool or library is the right fit, install it in the owning project/tool environment instead of avoiding installation by default.
 - Before installing open source, record the install scope, exact install command, dependency record path, security review, license review, verification step, and rollback plan.
+- For actual installs, upgrades, removals, or global environment changes, create an installation audit record under `_history/installations/YYYY/` and index it in `_ops/installations/registry.json`.
+- When installation occurred, include `installation_occurred=true` and `installation_record_targets` in the work evaluation input.
 - Prefer project-local or tool-local dependency installation; avoid global installs unless the capability truly requires it and the reason/removal path is documented.
 - Prefer the smallest reusable asset that solves the problem:
   - template for repeated file or folder structure
@@ -100,7 +102,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Run `python3 _tools/workspace-index/src/workspace_index.py` after changing navigational structure.
 - Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, or platform memory anchors.
-- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json` from `agent-platform/` after changing core shared settings.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json ../_ops/installations/registry.json` from `agent-platform/` after changing core shared settings.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules
@@ -108,6 +110,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `work-evaluator-agent` to compare the initial instruction, actual result, changed files, and verification.
 - Include a completed-work summary and references checked in the evaluation input.
 - Include `work_summary_targets` in evaluation input so the user-readable summary location is checked.
+- If installation occurred, include `installation_occurred=true` and `installation_record_targets`; missing installation records are blocking gaps.
 - Check repository history, existing project docs, official documentation, mature open-source projects, or other strong references before judging related work.
 - Use `research-insight-planner-agent` when planning depends on external facts, current information, prior repository knowledge, or multiple references.
 - Use `coding-research-agent` when coding work needs investigation before implementation, especially for APIs, dependencies, architecture, bug root cause, performance, security, migrations, tests, or implementation patterns.
@@ -142,6 +145,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 
 - When conversation context becomes long, compress stable decisions into `_history/YYYY/YYYY-MM-DD.md` and the relevant project docs.
 - When closing meaningful work, update `_history/work-summaries/` with a scan-friendly summary that links to detailed history, plans, evaluations, and key files.
+- When closing installation work, update `_history/installations/` and `_ops/installations/registry.json` before evaluation, commit, and push.
 - Keep the latest project purpose, status, commands, and constraints in that project's `README.md`.
 - Preserve only durable information in docs: decisions, requirements, command results worth reusing, and links to artifacts.
 - Avoid relying on chat history for project state that future work needs.

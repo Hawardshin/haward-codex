@@ -36,6 +36,8 @@
 - 직접 만들기 전에 성숙한 오픈소스 도구와 라이브러리를 먼저 검토한다.
 - 작업에 맞는 성숙한 오픈소스가 있으면 필요할 때 프로젝트/도구 범위에 설치해 사용한다.
 - 오픈소스 설치 전에는 설치 명령, dependency 기록 파일, 라이선스/보안 검토, 검증 방법, rollback 계획을 남긴다.
+- 실제 설치, 업그레이드, 제거, 전역 환경 변경은 `_history/installations/YYYY/`에 상세 기록을 남기고 `_ops/installations/registry.json`에 인덱싱한다.
+- 설치 작업을 닫을 때는 평가 입력에 `installation_occurred`와 `installation_record_targets`를 남긴다.
 - 반복 적용해야 하는 사용자 지시는 저장소 규칙으로 문서화한다.
 - 사용자가 읽는 문서와 히스토리는 한국어를 기본으로 한다.
 - 실제 실행 프롬프트 본문은 토큰 절약을 위해 영어로 작성한다.
@@ -77,6 +79,7 @@ codex/
 - `_history/work-summaries/`: 사람이 빠르게 읽는 날짜별 작업 요약과 HTML 인덱스
 - `_history/plans/`: 에이전트가 계획을 세운 과정 기록
 - `_ops/`: 운영 허브, 프롬프트, 워크플로, 저장소 맵
+- `_ops/installations/`: 설치 레지스트리와 설치 감사 추적 규칙
 - `_ops/projects/`: 루트 프로젝트 등록부와 경계 관리
 - `_research/`: 인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용
 - `_skills/`: git으로 추적할 커스텀 Codex 스킬 원본과 레지스트리
@@ -124,6 +127,7 @@ project-name/
 - 공유 설정 파일의 자기 설명 기준은 `_docs/self-documenting-config-policy.ko.md`와 `agent-platform`의 `check-config-contract` 명령을 따른다.
 - 출처 수집 기준은 `_docs/source-collection-policy.ko.md`를 따른다.
 - 오픈소스 설치 기준은 `_docs/open-source-installation-policy.ko.md`를 따른다.
+- 설치 기록은 `_ops/installations/registry.json`과 `_history/installations/`에서 확인한다.
 - 핵심 조사 에이전트 프로필은 `agent-platform/configs/research/research-agent-profile.json`에서 확인한다.
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/board.ko.md`와 `_ops/coordination/board.html`에서 확인한다.
 - 완료된 작업을 빠르게 볼 때는 `_history/work-summaries/index.html` 또는 `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`를 먼저 확인한다.
@@ -145,6 +149,7 @@ project-name/
 - 외부 사실이나 최신 정보가 계획에 영향을 주면 `research-insight-planner-agent`로 검색, 인사이트, 계획, 검증 단계를 구조화한다.
 - `research-insight-planner-agent`를 쓰는 작업은 계획 히스토리 파일 경로를 지정하고 저장한다.
 - 코딩 조사 후 구현으로 넘어갈 때는 `coding-research-agent`로 확인한 출처, 선택지, 추천안, 위험, 검증 계획, 다음 행동을 구조화한다.
+- 설치가 실제로 발생한 작업은 `_history/installations/YYYY/` 상세 기록과 `_ops/installations/registry.json` 인덱스를 확인한다.
 - 인터넷 조사에서 다음에도 참고할 가치가 있는 내용은 `_research/`에 출처와 함께 문서화한다.
 - 지식 베이스를 근거로 사용할 때는 `knowledge-skeptic-agent`로 틀렸을 가능성을 검증한다.
 - 최종 답변, 문서, 계획, 평가 보고서에 사실 주장이 있으면 `hallucination-guard-agent`가 주장별 근거와 검증 단계를 확인한다.

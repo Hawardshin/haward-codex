@@ -10,7 +10,7 @@
 - Record diverse source types. At least three non-`other` source types are required, including authoritative evidence and practical or adoption signals.
 - Record which source configuration files were used through `reference_config_paths`.
 - Before implementation, inspect relevant open-source repositories, reference implementations, or well-structured code and tests, then record `code_reference_sources` and `code_reference_notes`.
-- If open-source installation is needed, record installation scope, install command, dependency record file, security/license review, verification method, and rollback plan.
+- If open-source installation is needed, record installation scope, install command, dependency record file, installation audit record, security/license review, verification method, and rollback plan.
 - Validate internal knowledge-base references with `knowledge-skeptic-agent`.
 - Save planning history under `_history/plans/YYYY/` and capture reusable knowledge under `_research/`, `_templates/`, or `_tools/` when appropriate.
 
@@ -46,7 +46,7 @@ Before implementation, record:
 
 Do not copy open-source code blindly. Check license, maintenance state, fit, security risk, and test quality before adapting ideas locally.
 
-When open-source installation is needed, follow [_docs/open-source-installation-policy.en.md](../../_docs/open-source-installation-policy.en.md).
+When open-source installation is needed, follow [_docs/open-source-installation-policy.en.md](../../_docs/open-source-installation-policy.en.md) and [_ops/workflows/58-installation-record.md](../../_ops/workflows/58-installation-record.md). If installation actually occurs, update `_history/installations/YYYY/` and `_ops/installations/registry.json`.
 
 ## Reference Config Files
 

@@ -17,6 +17,7 @@
 | Agent memory | [Memory bootstrap](topics/agent-memory/2026-05-31-memory-bootstrap.en.md) |
 | Configuration governance | [Self-documenting configs](topics/configuration/2026-05-31-self-documenting-configs.en.md) |
 | Documentation | [Readable work summary structure](topics/documentation/2026-05-31-readable-work-summaries.en.md) |
+| Dependency management | [Installation audit trail policy](topics/dependency-management/2026-05-31-installation-audit-trail.en.md) |
 
 ## Update Rules
 

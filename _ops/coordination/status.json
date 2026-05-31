@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-05-31",
-  "summary": "Coordination board initialized. Readable work-summary structure added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary and installation audit structures added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -50,6 +50,25 @@
         "agent-platform/docs/work-evaluator-agent.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-05-31-readable-work-summaries.ko.md"
+    },
+    {
+      "id": "2026-05-31-installation-audit-trail",
+      "title": "Strengthen installation audit trail",
+      "project": "_ops",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-05-31",
+      "updated_at": "2026-05-31",
+      "next_action": "No action. Future installation work must create an installation record and registry entry before close-out.",
+      "blockers": [],
+      "references": [
+        "_ops/installations/registry.json",
+        "_history/installations/README.ko.md",
+        "_ops/workflows/58-installation-record.md",
+        "_docs/open-source-installation-policy.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-05-31-installation-audit-trail.ko.md"
     }
   ]
 }

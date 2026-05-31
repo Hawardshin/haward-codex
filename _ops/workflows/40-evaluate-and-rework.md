@@ -12,7 +12,7 @@
 4. Validate any reused knowledge-base content with [_ops/workflows/65-validate-knowledge-reference.md](65-validate-knowledge-reference.md).
 5. Capture reusable internet research or external references when useful.
 6. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when the final output contains factual claims.
-7. List changed files, verification results, references checked, grounding checks, and work summary targets.
+7. List changed files, verification results, references checked, grounding checks, work summary targets, and installation record targets when installation occurred.
 8. If a plan guided the work, link its `_history/plans/YYYY/` file.
 9. Confirm the user-readable summary exists under `_history/work-summaries/YYYY/`.
 10. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
@@ -43,3 +43,5 @@ The final evaluation must not exist only in chat output. Save it as a Markdown f
 When a saved plan guided the work, the final evaluation should link the relevant `_history/plans/YYYY/` plan history file.
 
 The evaluator input must include `work_summary_targets` for meaningful work. Missing user-readable summary targets are blocking gaps.
+
+If installation occurred, the evaluator input must include `installation_occurred=true` and `installation_record_targets`. Missing installation records are blocking gaps.

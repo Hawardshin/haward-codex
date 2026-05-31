@@ -86,6 +86,7 @@ class OpenSourceEvaluationTests(unittest.TestCase):
         self.assertEqual(result["recommendation"], "adopt")
         self.assertEqual(result["installation_status"], "installation_review_required")
         self.assertIn("install_command is missing.", result["installation_gaps"])
+        self.assertIn("installation_record_path is missing.", result["installation_gaps"])
 
     def test_installation_ready_when_review_is_complete(self) -> None:
         result = evaluate_candidate(
@@ -102,6 +103,10 @@ class OpenSourceEvaluationTests(unittest.TestCase):
                 installation_scope="project",
                 install_command="python3 -m pip install candidate",
                 dependency_record_path="agent-platform/pyproject.toml",
+                installation_record_path="_history/installations/2026/2026-05-31-candidate.ko.md",
+                environment_path="agent-platform/.venv",
+                version_or_lock_status="Pinned in pyproject.toml and locked by the project lock file.",
+                post_install_verification="python3 -c 'import candidate' and unit tests passed.",
                 security_review="Checked OpenSSF Scorecard, release activity, and dependency risk.",
                 license_review="MIT license is compatible with this workspace.",
                 rollback_plan="Remove dependency entry and adapter, then rerun tests.",

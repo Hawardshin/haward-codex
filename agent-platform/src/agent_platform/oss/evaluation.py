@@ -22,6 +22,10 @@ class OpenSourceCandidate:
     installation_scope: str = ""
     install_command: str = ""
     dependency_record_path: str = ""
+    installation_record_path: str = ""
+    environment_path: str = ""
+    version_or_lock_status: str = ""
+    post_install_verification: str = ""
     security_review: str = ""
     license_review: str = ""
     rollback_plan: str = ""
@@ -89,6 +93,14 @@ def _installation_gaps(candidate: OpenSourceCandidate) -> list[str]:
         gaps.append("install_command is missing.")
     if not candidate.dependency_record_path.strip():
         gaps.append("dependency_record_path is missing.")
+    if not candidate.installation_record_path.strip():
+        gaps.append("installation_record_path is missing.")
+    if not candidate.environment_path.strip():
+        gaps.append("environment_path is missing.")
+    if not candidate.version_or_lock_status.strip():
+        gaps.append("version_or_lock_status is missing.")
+    if not candidate.post_install_verification.strip():
+        gaps.append("post_install_verification is missing.")
     if not candidate.security_review.strip():
         gaps.append("security_review is missing.")
     if not candidate.license_review.strip():

@@ -1,0 +1,23 @@
+{
+  "id": "YYYY-MM-DD-package-name",
+  "date": "YYYY-MM-DD",
+  "status": "draft",
+  "name": "package-or-tool-name",
+  "scope": "project",
+  "owning_project": "project-name",
+  "package_manager": "pip|uv|poetry|npm|pnpm|yarn|brew|cargo|go|codex-skill|codex-plugin|other",
+  "install_command": "exact command",
+  "environment_path": "project/.venv or tool/runtime path",
+  "dependency_record_paths": [
+    "project/pyproject.toml"
+  ],
+  "version_or_lock_status": "pin, range, lock file, SBOM, or not applicable",
+  "security_review": "maintenance, vulnerability, provenance, dependency risk",
+  "license_review": "license compatibility and attribution",
+  "verification": [
+    "import/CLI/test/smoke check"
+  ],
+  "rollback_path": "remove command and files to restore",
+  "installation_record_path": "_history/installations/YYYY/YYYY-MM-DD-package-name.ko.md",
+  "commit": "pending"
+}

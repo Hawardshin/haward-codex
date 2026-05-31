@@ -6,6 +6,8 @@
   "references_checked": [],
   "grounding_checks": [],
   "work_summary_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
   "known_gaps": [],
   "improvement_ideas": []
 }

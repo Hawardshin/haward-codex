@@ -13,7 +13,7 @@
 5. Search the web for current external evidence.
 6. Search at least one additional channel: repository docs, official docs, code, package registries, papers, or open-source repos.
 7. Inspect relevant open-source repositories, reference implementations, well-structured source trees, examples, and tests before writing source code.
-8. If installation is needed, follow [_docs/open-source-installation-policy.ko.md](../../_docs/open-source-installation-policy.ko.md) and record install scope, command, dependency path, security/license review, verification, and rollback.
+8. If installation is needed, follow [_docs/open-source-installation-policy.ko.md](../../_docs/open-source-installation-policy.ko.md) and [_ops/workflows/58-installation-record.md](58-installation-record.md), then record install scope, command, dependency path, installation record path, security/license review, verification, and rollback.
 9. Record `code_reference_sources` with repository URLs, source file paths, test paths, example app paths, or code search results.
 10. Record `code_reference_notes` explaining what structure, boundaries, API patterns, error handling, tests, or implementation details are worth adapting or rejecting.
 11. Record `source_types` explicitly and use at least three distinct non-`other` source types.
@@ -41,4 +41,4 @@
 
 ## Rule
 
-Coding research is complete only when it records the source configs it used, inspects concrete code references, uses diverse source types, records any required installation review, produces a recommended next action, names validation steps, saves plan history, and answers the standard post-research questions.
+Coding research is complete only when it records the source configs it used, inspects concrete code references, uses diverse source types, records any required installation review and installation audit path, produces a recommended next action, names validation steps, saves plan history, and answers the standard post-research questions.

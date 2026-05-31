@@ -11,11 +11,13 @@
 | `_philosophy/` | 에이전트와 플랫폼 운영의 근본 철학 |
 | `_history/` | 날짜별 작업 히스토리와 압축된 맥락 |
 | `_history/work-summaries/` | 나중에 빠르게 읽는 날짜별 작업 요약과 HTML 인덱스 |
+| `_history/installations/` | 실제 설치/업그레이드/제거 상세 감사 기록 |
 | `_history/plans/` | 에이전트 계획 과정 기록 |
 | `_skills/` | git으로 추적하는 커스텀 Codex 스킬 원본 |
 | `_templates/` | 새 프로젝트, HTML 산출물, Python 에이전트 템플릿 |
 | `_tools/` | 반복 작업을 줄이는 로컬 도구 |
 | `agent-platform/` | 개인 에이전트 구축 플랫폼 중심 프로젝트 |
+| `_ops/installations/` | 설치 레지스트리와 설치 감사 규칙 |
 
 ## Navigation
 
@@ -41,6 +43,7 @@
 - 프롬프트 목록을 볼 때: [_ops/maps/prompt-map.md](maps/prompt-map.md)
 - 반복 작업을 줄일 때: [_docs/capability-governance.md](../_docs/capability-governance.md)
 - 오픈소스 설치 기준을 볼 때: [_docs/open-source-installation-policy.ko.md](../_docs/open-source-installation-policy.ko.md), [_docs/open-source-installation-policy.en.md](../_docs/open-source-installation-policy.en.md)
+- 설치 기록을 확인할 때: [_ops/installations/README.ko.md](installations/README.ko.md), [_ops/installations/registry.json](installations/registry.json), [_history/installations/README.ko.md](../_history/installations/README.ko.md)
 - 지속 지시를 확인할 때: [_docs/persistent-instructions.md](../_docs/persistent-instructions.md)
 - 검색 기반 계획 정책을 확인할 때: [_docs/search-insight-planning-policy.ko.md](../_docs/search-insight-planning-policy.ko.md), [_docs/search-insight-planning-policy.en.md](../_docs/search-insight-planning-policy.en.md)
 - 문서 언어 정책을 확인할 때: [_docs/documentation-language-policy.ko.md](../_docs/documentation-language-policy.ko.md), [_docs/documentation-language-policy.en.md](../_docs/documentation-language-policy.en.md)
@@ -52,4 +55,5 @@
 - 관련 문서가 업데이트됐는가
 - `_history/YYYY/YYYY-MM-DD.md`에 맥락이 남았는가
 - `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`에 빠른 요약이 남았는가
+- 설치가 발생했다면 `_history/installations/YYYY/`와 `_ops/installations/registry.json`이 갱신됐는가
 - `_ops/maps/`가 현재 구조를 반영하는가

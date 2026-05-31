@@ -1,0 +1,179 @@
+{
+  "schema_version": "2026-05-31",
+  "name": "workspace-installation-registry",
+  "purpose": "Tracks installations that change dependency state, tool state, global environment, Codex skills/plugins, or project runtime setup.",
+  "reader_guide": {
+    "summary": "This registry is the index for installation audit records. Open it to see what was installed, where the detailed record lives, and which rules future installation work must follow.",
+    "how_to_read": [
+      "Read purpose and structure_rules before installing anything.",
+      "Use entries to find existing installation records.",
+      "Each entry points to a detailed Markdown record under _history/installations/YYYY/.",
+      "Run config-contract checks after changing registry structure or required fields."
+    ],
+    "owner": "_ops",
+    "last_reviewed": "2026-05-31",
+    "update_triggers": [
+      "A package, tool, runtime, skill, plugin, adapter, or dependency is installed, upgraded, removed, or globally configured.",
+      "A dependency manifest or lock file changes due to installation.",
+      "The installation record template changes.",
+      "Installation security, license, or rollback requirements change."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "open_source_installation_policy",
+      "title": "Open-Source Installation Policy",
+      "path": "_docs/open-source-installation-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "workspace installation rules",
+        "security, license, verification, and rollback requirements"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "python_packaging_venv",
+      "title": "Python Packaging User Guide: pip and virtual environments",
+      "url": "https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/",
+      "source_type": "official",
+      "used_for": [
+        "project-local virtual environment preference",
+        "requirements file and pip installation reference"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "python_installing_modules",
+      "title": "Python documentation: Installing Python modules",
+      "url": "https://docs.python.org/3/installing/index.html",
+      "source_type": "official",
+      "used_for": [
+        "system Python risk",
+        "venv and per-user installation guidance"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "npm_package_lock",
+      "title": "npm Docs: package-lock.json",
+      "url": "https://docs.npmjs.com/cli/v6/configuring-npm/package-lock-json/",
+      "source_type": "official",
+      "used_for": [
+        "lock file audit trail",
+        "reproducible dependency tree reference"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "owasp_developer_dependencies",
+      "title": "OWASP Developer Guide: Dependencies",
+      "url": "https://devguide.owasp.org/en/05-implementation/02-dependencies/",
+      "source_type": "official",
+      "used_for": [
+        "SBOM-style dependency metadata",
+        "dependency version, license, source, and support fields"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "openssf_scorecard",
+      "title": "OpenSSF Scorecard",
+      "url": "https://openssf.org/scorecard/",
+      "source_type": "official",
+      "used_for": [
+        "open-source project risk review",
+        "security posture signal before installation"
+      ],
+      "last_checked": "2026-05-31"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "installations_need_audit_record",
+      "rule": "Every actual install, upgrade, removal, or global configuration must have a detailed record under _history/installations/YYYY/.",
+      "reason": "Installation changes dependency or environment state and must be reproducible and reversible.",
+      "applies_to": [
+        "entries",
+        "installation_record_path"
+      ]
+    },
+    {
+      "id": "record_before_and_after",
+      "rule": "Create a draft record before installation and update it after installation with actual command output, versions, verification, and rollback.",
+      "reason": "Pre-install intent and post-install reality can differ.",
+      "applies_to": [
+        "entries",
+        "status"
+      ]
+    },
+    {
+      "id": "global_installs_are_exceptional",
+      "rule": "Global installs require explicit justification, install location, removal path, and permission approval.",
+      "reason": "Global installs affect future tasks and can be hard to undo.",
+      "applies_to": [
+        "scope",
+        "rollback_path"
+      ]
+    },
+    {
+      "id": "evaluator_must_see_record_targets",
+      "rule": "When installation_occurred is true, work-evaluator-agent input must include installation_record_targets.",
+      "reason": "The close-out loop should catch missing installation audit trails.",
+      "applies_to": [
+        "entries",
+        "work_evaluation"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "schema_version",
+      "meaning": "Date-based version of this registry structure.",
+      "required": true
+    },
+    {
+      "field": "reader_guide",
+      "meaning": "Plain-language guide for humans and agents reading this file.",
+      "required": true
+    },
+    {
+      "field": "reference_links",
+      "meaning": "Internal policies and external references behind this registry.",
+      "required": true
+    },
+    {
+      "field": "structure_rules",
+      "meaning": "Rules that govern installation tracking.",
+      "required": true
+    },
+    {
+      "field": "entries",
+      "meaning": "Installation index entries. Empty means no actual installations have been recorded yet.",
+      "required": true
+    },
+    {
+      "field": "entries[].installation_record_path",
+      "meaning": "Detailed Markdown record under _history/installations/YYYY/.",
+      "required": true
+    }
+  ],
+  "entry_required_fields": [
+    "id",
+    "date",
+    "status",
+    "name",
+    "scope",
+    "owning_project",
+    "package_manager",
+    "install_command",
+    "dependency_record_paths",
+    "version_or_lock_status",
+    "security_review",
+    "license_review",
+    "verification",
+    "rollback_path",
+    "installation_record_path",
+    "commit"
+  ],
+  "entries": []
+}

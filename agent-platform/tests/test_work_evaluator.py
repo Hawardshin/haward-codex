@@ -91,6 +91,41 @@ class WorkEvaluatorTests(unittest.TestCase):
             report["gaps"],
         )
 
+    def test_installation_requires_record_targets(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Install a package.",
+                result_summary="Installed dependency in the project.",
+                changed_files=("agent-platform/pyproject.toml",),
+                verification=("python3 -m unittest discover -s tests: OK",),
+                references_checked=("Python Packaging User Guide",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
+                installation_occurred=True,
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Installation occurred but installation_record_targets is missing. Add an audit record under _history/installations/ and index it in _ops/installations/registry.json.",
+            report["gaps"],
+        )
+
+    def test_installation_ready_when_record_targets_present(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Install a package.",
+                result_summary="Installed dependency in the project.",
+                changed_files=("agent-platform/pyproject.toml",),
+                verification=("python3 -m unittest discover -s tests: OK",),
+                references_checked=("Python Packaging User Guide",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
+                installation_occurred=True,
+                installation_record_targets=("_history/installations/2026/2026-05-31-package.ko.md",),
+            )
+        )
+
+        self.assertFalse(report["requires_rework"])
+
 
 if __name__ == "__main__":
     unittest.main()

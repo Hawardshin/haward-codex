@@ -20,10 +20,14 @@ Each daily file should record:
 
 Quick human-readable summaries live under `_history/work-summaries/YYYY/`.
 
+Detailed installation audit records live under `_history/installations/YYYY/`.
+
 Detailed work evaluation reports live under `_history/evaluations/YYYY/`.
 
 Detailed plan process records live under `_history/plans/YYYY/`.
 
 Use `_history/work-summaries/index.html` or the latest `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md` first when you only need to understand what happened.
+
+Use `_history/installations/YYYY/` when the work installed, upgraded, removed, or globally configured software.
 
 This folder is not a replacement for git history. It explains why work happened, what changed, where to look next, and what context future sessions need.

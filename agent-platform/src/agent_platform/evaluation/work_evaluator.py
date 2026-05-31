@@ -20,6 +20,8 @@ class WorkEvaluationInput:
     references_checked: tuple[str, ...] = ()
     grounding_checks: tuple[str, ...] = ()
     work_summary_targets: tuple[str, ...] = ()
+    installation_occurred: bool = False
+    installation_record_targets: tuple[str, ...] = ()
     known_gaps: tuple[str, ...] = ()
     improvement_ideas: tuple[str, ...] = ()
 
@@ -33,6 +35,8 @@ class WorkEvaluationInput:
             references_checked=_tuple_of_strings(data.get("references_checked", []), "references_checked"),
             grounding_checks=_tuple_of_strings(data.get("grounding_checks", []), "grounding_checks"),
             work_summary_targets=_tuple_of_strings(data.get("work_summary_targets", []), "work_summary_targets"),
+            installation_occurred=_optional_bool(data.get("installation_occurred", False), "installation_occurred"),
+            installation_record_targets=_tuple_of_strings(data.get("installation_record_targets", []), "installation_record_targets"),
             known_gaps=_tuple_of_strings(data.get("known_gaps", []), "known_gaps"),
             improvement_ideas=_tuple_of_strings(data.get("improvement_ideas", []), "improvement_ideas"),
         )
@@ -58,6 +62,8 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
         gaps.append("Reference research is missing. Check prior internal work or strong external references before evaluation.")
     if not evaluation_input.work_summary_targets:
         gaps.append("Work summary target is missing. Add a concise human-readable summary under _history/work-summaries/.")
+    if evaluation_input.installation_occurred and not evaluation_input.installation_record_targets:
+        gaps.append("Installation occurred but installation_record_targets is missing. Add an audit record under _history/installations/ and index it in _ops/installations/registry.json.")
     if not evaluation_input.grounding_checks:
         improvements.append("Run hallucination-guard-agent when the final output contains factual claims.")
 
@@ -78,6 +84,8 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
             "references_checked_count": len(evaluation_input.references_checked),
             "grounding_checks_count": len(evaluation_input.grounding_checks),
             "work_summary_targets_count": len(evaluation_input.work_summary_targets),
+            "installation_occurred": evaluation_input.installation_occurred,
+            "installation_record_targets_count": len(evaluation_input.installation_record_targets),
         },
         "gaps": gaps,
         "improvements": improvements,
@@ -107,3 +115,9 @@ def _tuple_of_strings(value: Any, field_name: str) -> tuple[str, ...]:
     if not all(isinstance(item, str) for item in value):
         raise TypeError(f"{field_name} must contain only strings.")
     return tuple(value)
+
+
+def _optional_bool(value: Any, field_name: str) -> bool:
+    if not isinstance(value, bool):
+        raise TypeError(f"{field_name} must be a bool.")
+    return value
