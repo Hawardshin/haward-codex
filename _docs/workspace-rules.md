@@ -124,6 +124,13 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - If web search fails, record the failure and strengthen local verification before final claims.
 - Save only reusable search findings under `_research/`.
 
+## Source Collection Policy
+
+- For research or planning work, collect broad high-authority source bundles, not only the first few search results.
+- Include official/primary sources, papers, standards, open-source repositories, international tech blogs, analysis articles, community/social signals, and contrary examples when relevant.
+- Treat popularity signals such as likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as discovery or adoption signals, not standalone factual proof.
+- Use [_docs/source-collection-policy.ko.md](source-collection-policy.ko.md) for source bundle targets and evaluation criteria.
+
 ## Evaluation Policy
 
 - Meaningful work should pass an evaluation step before close-out.

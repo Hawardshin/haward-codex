@@ -12,6 +12,7 @@
 - 웹 검색 후 저장소 검색, 공식 문서, 프로젝트 README, 히스토리, 코드 확인으로 들어간다.
 - 검색 결과가 작업과 무관하면 "관련 웹 근거 없음"을 기록하고 로컬 근거로 진행한다.
 - 검색 결과가 유용하면 `_research/`에 재사용 가치가 있는 내용만 저장한다.
+- 조사나 계획에 영향을 주는 작업은 [_docs/source-collection-policy.ko.md](source-collection-policy.ko.md)에 따라 공식 자료, 논문, 외국 기술 블로그, 오픈소스, 조사 아티클, 커뮤니티/소셜 신호를 폭넓게 모은다.
 - 최신 정보, 외부 사실, 제품/라이브러리/법/가격/스케줄/정책은 검색 결과를 반드시 출처와 함께 확인한다.
 - 검색 결과 제목만 보고 근거로 사용하지 않는다. 필요한 경우 원문을 열어 확인한다.
 - 웹 검색이 실패하면 실패 이유를 기록하고, 작업이 안전하게 가능한 경우 로컬 검증을 강화한다.
@@ -48,6 +49,7 @@
 
 - [_ops/workflows/05-web-first-intake.md](../_ops/workflows/05-web-first-intake.md)
 - [_ops/prompts/05-web-first-intake.md](../_ops/prompts/05-web-first-intake.md)
+- [_docs/source-collection-policy.ko.md](source-collection-policy.ko.md)
 - [_docs/search-insight-planning-policy.ko.md](search-insight-planning-policy.ko.md)
 - [_docs/hallucination-prevention-policy.ko.md](hallucination-prevention-policy.ko.md)
 - [_research/topics/agent-planning/2026-05-31-web-first-work-policy.ko.md](../_research/topics/agent-planning/2026-05-31-web-first-work-policy.ko.md)

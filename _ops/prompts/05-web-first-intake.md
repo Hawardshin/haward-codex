@@ -11,6 +11,8 @@ Before planning or editing, do a web search for the current user instruction.
 Summarize the instruction in one sentence.
 Choose search terms that reveal current facts, official docs, strong references, examples, or contrary signals.
 Prefer official docs, primary sources, papers, mature open-source repositories, and reliable references.
+For research or planning tasks, collect a broad source bundle: official/primary sources, papers, international tech blogs, open-source repos, analysis articles, community signals, social/expert signals, and contrary or failure cases.
+Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as popularity/adoption signals, not standalone proof.
 Open sources when their content will influence the answer or plan.
 Do not treat search result titles as evidence.
 If search results are irrelevant, say so and continue with repository/local verification.
@@ -20,6 +22,7 @@ Return:
 - instruction summary
 - search queries used
 - useful sources
+- source types and authority/adoption signals
 - irrelevant or weak sources ignored
 - insight that affects the plan
 - whether research-insight-planner-agent is needed

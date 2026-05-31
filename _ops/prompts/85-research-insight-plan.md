@@ -10,6 +10,8 @@ Do not plan from the model's internal guess alone.
 Define the objective and the search questions that must be answered before planning.
 Use web search plus at least one other search channel, such as repository search, official docs, papers, code search, or package registry search.
 Prefer primary sources, official docs, mature open-source references, and strong prior repository work.
+For research-heavy work, collect broad external evidence: papers, standards, international tech blogs, open-source repos, analysis articles, community/social signals, and contrary examples.
+Use popularity signals such as likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption/discovery signals, not standalone proof.
 For each source, capture the relevant claim, freshness, reliability, and how it changes the plan.
 Validate internal knowledge-base references with knowledge-skeptic-agent before relying on them.
 Synthesize evidence into concise insights.

@@ -12,6 +12,7 @@ This policy is stronger than the earlier rule that required search only for impo
 - After web search, continue with repository search, official docs, project READMEs, history, and code inspection.
 - If search results are irrelevant, record that no relevant web evidence was found and proceed with local evidence.
 - Save only reusable search findings under `_research/`.
+- For research or planning work, follow [_docs/source-collection-policy.en.md](source-collection-policy.en.md) to collect official sources, papers, international tech blogs, open-source references, analysis articles, and community or social signals.
 - Current information, external facts, products, libraries, laws, prices, schedules, and policies require source-backed verification.
 - Do not use search result titles as evidence. Open the source when the content matters.
 - If web search fails, record the failure and strengthen local verification when the task can still proceed safely.
@@ -48,6 +49,7 @@ This policy is stronger than the earlier rule that required search only for impo
 
 - [_ops/workflows/05-web-first-intake.md](../_ops/workflows/05-web-first-intake.md)
 - [_ops/prompts/05-web-first-intake.md](../_ops/prompts/05-web-first-intake.md)
+- [_docs/source-collection-policy.en.md](source-collection-policy.en.md)
 - [_docs/search-insight-planning-policy.en.md](search-insight-planning-policy.en.md)
 - [_docs/hallucination-prevention-policy.en.md](hallucination-prevention-policy.en.md)
 - [_research/topics/agent-planning/2026-05-31-web-first-work-policy.en.md](../_research/topics/agent-planning/2026-05-31-web-first-work-policy.en.md)

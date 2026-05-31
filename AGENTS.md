@@ -40,6 +40,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before using it as evidence.
 - For every new user instruction, run web search first before planning, repository exploration, or file edits.
 - If the web search is irrelevant or unavailable, record that and continue with stronger local verification.
+- For research or planning work, collect broad high-authority sources: official docs, papers, standards, open-source repos, international tech blogs, analysis articles, community signals, social/expert signals, and contrary examples.
+- Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption or discovery signals, not standalone factual proof.
 - For important planning, do not rely only on the model's internal guess; use `research-insight-planner-agent` to combine web search with another search channel, derive insights, and plan validation.
 - When using `research-insight-planner-agent`, set `plan_history_targets` and keep the plan process file updated if the plan changes.
 - Before publishing final outputs with factual claims, run or simulate `hallucination-guard-agent` and resolve `grounding_required` gaps.
