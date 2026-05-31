@@ -9,6 +9,8 @@
 ## 기본 규칙
 
 - 새 사용자 지시를 받으면 먼저 웹 검색을 수행한다.
+- `_ops/prompts/`의 모든 재사용 프롬프트 실행도 계획, 저장소 탐색, 파일 수정 전에 웹 검색을 수행한다.
+- 의미 있는 작업은 `_history/web-searches/YYYY/`에 웹 검색 기록을 남기고, 평가 입력에 `web_search_record_targets`를 포함한다.
 - 웹 검색 후 저장소 검색, 공식 문서, 프로젝트 README, 히스토리, 코드 확인으로 들어간다.
 - 검색 결과가 작업과 무관하면 "관련 웹 근거 없음"을 기록하고 로컬 근거로 진행한다.
 - 검색 결과가 유용하면 `_research/`에 재사용 가치가 있는 내용만 저장한다.
@@ -16,6 +18,7 @@
 - 최신 정보, 외부 사실, 제품/라이브러리/법/가격/스케줄/정책은 검색 결과를 반드시 출처와 함께 확인한다.
 - 검색 결과 제목만 보고 근거로 사용하지 않는다. 필요한 경우 원문을 열어 확인한다.
 - 웹 검색이 실패하면 실패 이유를 기록하고, 작업이 안전하게 가능한 경우 로컬 검증을 강화한다.
+- 문서에는 내부 추론 원문을 남기지 않는다. 대신 검색어, 확인한 출처, 제외한 출처, 계획에 반영한 인사이트, 남은 불확실성을 공개 판단 요약으로 남긴다.
 
 ## 작업 시작 순서
 
@@ -27,7 +30,8 @@
 6. 필요한 경우 `research-insight-planner-agent`와 `agent-platform/configs/research/research-agent-profile.json`으로 검색 결과를 answer engine 단계, 인사이트, 계획으로 구조화한다.
 7. 구현 또는 문서 작업을 수행한다.
 8. 최종 산출물의 사실 주장을 `hallucination-guard-agent`로 검증한다.
-9. 평가 보고서에 검색/레퍼런스/grounding 결과를 남긴다.
+9. `_history/web-searches/YYYY/`에 웹 검색 기록을 남긴다.
+10. 평가 보고서에 검색/레퍼런스/grounding 결과를 남긴다.
 
 ## 검색 강도
 
@@ -49,6 +53,8 @@
 
 - [_ops/workflows/05-web-first-intake.md](../_ops/workflows/05-web-first-intake.md)
 - [_ops/prompts/05-web-first-intake.md](../_ops/prompts/05-web-first-intake.md)
+- [_ops/prompts/README.ko.md](../_ops/prompts/README.ko.md)
+- [_history/web-searches/README.ko.md](../_history/web-searches/README.ko.md)
 - [_docs/source-collection-policy.ko.md](source-collection-policy.ko.md)
 - [_docs/search-insight-planning-policy.ko.md](search-insight-planning-policy.ko.md)
 - [_docs/hallucination-prevention-policy.ko.md](hallucination-prevention-policy.ko.md)

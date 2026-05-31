@@ -18,6 +18,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
                 verification=("python3 -m unittest discover -s tests: OK",),
                 references_checked=("_ops/workflows/40-evaluate-and-rework.md",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
         )
@@ -34,6 +35,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("AGENTS.md",),
                 verification=("not run",),
                 references_checked=("_ops/prompts/70-evaluate-work.md",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
                 known_gaps=("No Python evaluator agent was added.",),
             )
@@ -50,6 +52,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 result_summary="Added evaluator.",
                 changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
                 references_checked=("agent-platform/docs/work-evaluator-agent.md",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
         )
@@ -64,6 +67,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 result_summary="Added evaluator.",
                 changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
                 verification=("python3 -m unittest discover -s tests: OK",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-evaluator.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
         )
@@ -82,6 +86,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_history/README.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("Keep a Changelog",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-summary.ko.md",),
             )
         )
 
@@ -99,6 +104,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("agent-platform/pyproject.toml",),
                 verification=("python3 -m unittest discover -s tests: OK",),
                 references_checked=("Python Packaging User Guide",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-install.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
                 installation_occurred=True,
             )
@@ -118,6 +124,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("agent-platform/pyproject.toml",),
                 verification=("python3 -m unittest discover -s tests: OK",),
                 references_checked=("Python Packaging User Guide",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-install.ko.md",),
                 work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
                 installation_occurred=True,
                 installation_record_targets=("_history/installations/2026/2026-05-31-package.ko.md",),
@@ -125,6 +132,24 @@ class WorkEvaluatorTests(unittest.TestCase):
         )
 
         self.assertFalse(report["requires_rework"])
+
+    def test_missing_web_search_record_requires_rework(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Make web search mandatory.",
+                result_summary="Updated prompt docs.",
+                changed_files=("_ops/prompts/README.ko.md",),
+                verification=("manual doc review: OK",),
+                references_checked=("OpenAI web search docs",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Web search record target is missing. Add a public search reasoning record under _history/web-searches/.",
+            report["gaps"],
+        )
 
 
 if __name__ == "__main__":

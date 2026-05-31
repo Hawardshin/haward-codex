@@ -18,6 +18,7 @@
       "A new shared config, prompt, workflow, project registry, or map becomes part of startup context.",
       "The core research-agent profile or answer-engine stage rules change.",
       "The work summary layer or close-out documentation contract changes.",
+      "The web search record layer or prompt-level search contract changes.",
       "The installation registry or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
@@ -65,6 +66,17 @@
       "used_for": [
         "human-readable completed-work summary requirement",
         "close-out documentation target for future sessions"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "web_search_record_policy",
+      "title": "Web Search Record Policy",
+      "path": "_history/web-searches/README.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "prompt-level web search record requirement",
+        "public search reasoning summary and close-out target"
       ],
       "last_checked": "2026-05-31"
     },
@@ -192,6 +204,16 @@
       ]
     },
     {
+      "id": "web_search_records_must_stay_discoverable",
+      "rule": "The web search record layer must remain a warm memory anchor and close-out target so future sessions can inspect prompt-level searches and public decision summaries.",
+      "reason": "The user explicitly requires every prompt to start with web search and to leave a text record of the search process without storing raw internal reasoning.",
+      "applies_to": [
+        "anchors",
+        "required_anchor_ids",
+        "work-evaluator-agent"
+      ]
+    },
+    {
       "id": "install_registry_must_stay_discoverable",
       "rule": "The installation registry must remain a warm memory anchor because installs change durable dependency or environment state.",
       "reason": "Installation records are more critical than ordinary summaries because missing dependency history can break reproducibility and rollback.",
@@ -260,6 +282,7 @@
     "research_agent_profile",
     "coding_research_profile",
     "work_summary_policy",
+    "web_search_record_policy",
     "installation_registry"
   ],
   "required_anchor_ids": [
@@ -277,6 +300,7 @@
     "research_agent_profile",
     "coding_research_profile",
     "work_summary_policy",
+    "web_search_record_policy",
     "installation_registry"
   ],
   "anchors": [
@@ -449,12 +473,20 @@
       "load_order": 27
     },
     {
+      "id": "web_search_record_policy",
+      "path": "_history/web-searches/README.ko.md",
+      "tier": "warm",
+      "purpose": "Prompt-level web search record rules and public search reasoning summary requirements.",
+      "required": true,
+      "load_order": 28
+    },
+    {
       "id": "installation_registry",
       "path": "_ops/installations/registry.json",
       "tier": "warm",
       "purpose": "Installation audit registry for installs, upgrades, removals, global environment changes, and rollback tracking.",
       "required": true,
-      "load_order": 28
+      "load_order": 29
     },
     {
       "id": "daily_history",
@@ -462,7 +494,7 @@
       "tier": "warm",
       "purpose": "Current dated work log and compressed context.",
       "required": true,
-      "load_order": 29
+      "load_order": 30
     },
     {
       "id": "repository_map",

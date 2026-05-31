@@ -2,6 +2,10 @@
 
 Use when: 모든 새 사용자 지시를 처리하기 전에 웹 검색으로 현재성, 레퍼런스, 반대 신호를 먼저 확인해야 할 때.
 
+## Common Contract
+
+이 프롬프트는 [프롬프트 공통 계약](README.ko.md)을 따른다. 실행 전 웹 검색을 수행하고, 의미 있는 작업은 `_history/web-searches/YYYY/`에 검색어, 출처, 제외한 약한 출처, 계획 반영 인사이트, 공개 판단 요약을 남긴다. 내부 추론 원문은 저장하지 않는다.
+
 ## Prompt
 
 ```text
@@ -26,6 +30,8 @@ Return:
 - source types and authority/adoption signals
 - irrelevant or weak sources ignored
 - insight that affects the plan
+- public decision summary
+- web_search_record_targets for meaningful work
 - whether research-insight-planner-agent is needed
 ```
 

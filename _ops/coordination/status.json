@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-05-31",
-  "summary": "Coordination board initialized. Readable work-summary and installation audit structures added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, and prompt-level web search record structures added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -69,6 +69,25 @@
         "_docs/open-source-installation-policy.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-05-31-installation-audit-trail.ko.md"
+    },
+    {
+      "id": "2026-05-31-prompt-web-search-record",
+      "title": "Require web search records for every prompt",
+      "project": "_ops",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-05-31",
+      "updated_at": "2026-05-31",
+      "next_action": "No action. Future meaningful work must include web_search_record_targets before close-out.",
+      "blockers": [],
+      "references": [
+        "_ops/prompts/README.ko.md",
+        "_history/web-searches/README.ko.md",
+        "_templates/web-search-record/web-search-record.ko.md",
+        "agent-platform/docs/work-evaluator-agent.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-05-31-prompt-web-search-record.ko.md"
     }
   ]
 }

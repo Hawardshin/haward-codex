@@ -12,7 +12,7 @@
 4. Validate any reused knowledge-base content with [_ops/workflows/65-validate-knowledge-reference.md](65-validate-knowledge-reference.md).
 5. Capture reusable internet research or external references when useful.
 6. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when the final output contains factual claims.
-7. List changed files, verification results, references checked, grounding checks, work summary targets, and installation record targets when installation occurred.
+7. List changed files, verification results, references checked, grounding checks, web search record targets, work summary targets, and installation record targets when installation occurred.
 8. If a plan guided the work, link its `_history/plans/YYYY/` file.
 9. Confirm the user-readable summary exists under `_history/work-summaries/YYYY/`.
 10. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
@@ -37,6 +37,8 @@ Do not treat evaluation as a final report only. If the evaluator finds a real ga
 Reference research is part of evaluation. If no useful reference exists, record where you checked and why it did not apply.
 
 Factual grounding is part of evaluation. If the final output contains factual claims, record the `hallucination-guard-agent` result in `grounding_checks`.
+
+The evaluator input must include `web_search_record_targets` for meaningful work. Missing public search records are blocking gaps.
 
 The final evaluation must not exist only in chat output. Save it as a Markdown file before commit.
 

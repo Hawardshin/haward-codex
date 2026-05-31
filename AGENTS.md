@@ -40,6 +40,9 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Capture reusable internet research and strong external references under `_research/`.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before using it as evidence.
 - For every new user instruction, run web search first before planning, repository exploration, or file edits.
+- For every reusable prompt execution under `_ops/prompts/`, run web search first and follow `_ops/prompts/README.ko.md`.
+- Save meaningful web search records under `_history/web-searches/YYYY/` with queries, checked sources, weak sources ignored, plan impact, uncertainty, and a public decision summary.
+- Do not store raw internal chain-of-thought in repository documents; store only verifiable public search reasoning summaries.
 - If the web search is irrelevant or unavailable, record that and continue with stronger local verification.
 - For research or planning work, collect broad high-authority sources: official docs, papers, standards, open-source repos, international tech blogs, analysis articles, community signals, social/expert signals, and contrary examples.
 - Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption or discovery signals, not standalone factual proof.
@@ -109,6 +112,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 
 - Use `work-evaluator-agent` to compare the initial instruction, actual result, changed files, and verification.
 - Include a completed-work summary and references checked in the evaluation input.
+- Include `web_search_record_targets` in evaluation input; missing web search record targets are blocking gaps.
 - Include `work_summary_targets` in evaluation input so the user-readable summary location is checked.
 - If installation occurred, include `installation_occurred=true` and `installation_record_targets`; missing installation records are blocking gaps.
 - Check repository history, existing project docs, official documentation, mature open-source projects, or other strong references before judging related work.

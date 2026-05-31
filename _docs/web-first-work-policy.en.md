@@ -9,6 +9,8 @@ This policy is stronger than the earlier rule that required search only for impo
 ## Core Rules
 
 - Run web search first for every new user instruction.
+- Every reusable prompt under `_ops/prompts/` also starts with web search before planning, repository exploration, or file edits.
+- Meaningful work saves a web search record under `_history/web-searches/YYYY/` and includes `web_search_record_targets` in evaluation input.
 - After web search, continue with repository search, official docs, project READMEs, history, and code inspection.
 - If search results are irrelevant, record that no relevant web evidence was found and proceed with local evidence.
 - Save only reusable search findings under `_research/`.
@@ -16,6 +18,7 @@ This policy is stronger than the earlier rule that required search only for impo
 - Current information, external facts, products, libraries, laws, prices, schedules, and policies require source-backed verification.
 - Do not use search result titles as evidence. Open the source when the content matters.
 - If web search fails, record the failure and strengthen local verification when the task can still proceed safely.
+- Do not store raw internal chain-of-thought. Store a public decision summary: queries used, sources checked, sources excluded, insights applied to the plan, and remaining uncertainty.
 
 ## Start Sequence
 
@@ -27,7 +30,8 @@ This policy is stronger than the earlier rule that required search only for impo
 6. Use `research-insight-planner-agent` and `agent-platform/configs/research/research-agent-profile.json` when search results should be structured into answer-engine stages, insights, and a plan.
 7. Implement or document the work.
 8. Ground factual final claims with `hallucination-guard-agent`.
-9. Record search, reference, and grounding results in the evaluation report.
+9. Save the web search record under `_history/web-searches/YYYY/`.
+10. Record search, reference, and grounding results in the evaluation report.
 
 ## Search Depth
 
@@ -49,6 +53,8 @@ This policy is stronger than the earlier rule that required search only for impo
 
 - [_ops/workflows/05-web-first-intake.md](../_ops/workflows/05-web-first-intake.md)
 - [_ops/prompts/05-web-first-intake.md](../_ops/prompts/05-web-first-intake.md)
+- [_ops/prompts/README.en.md](../_ops/prompts/README.en.md)
+- [_history/web-searches/README.en.md](../_history/web-searches/README.en.md)
 - [_docs/source-collection-policy.en.md](source-collection-policy.en.md)
 - [_docs/search-insight-planning-policy.en.md](search-insight-planning-policy.en.md)
 - [_docs/hallucination-prevention-policy.en.md](hallucination-prevention-policy.en.md)

@@ -21,6 +21,9 @@
 - 인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용은 `_research/`에 기록한다.
 - 에이전트와 플랫폼 운영의 근본 철학은 `_philosophy/`에 기록한다.
 - 모든 새 사용자 지시는 계획, 저장소 탐색, 파일 수정 전에 웹 검색을 먼저 수행한다.
+- `_ops/prompts/`의 모든 재사용 프롬프트 실행도 웹 검색을 먼저 수행한다.
+- 의미 있는 웹 검색 기록은 `_history/web-searches/YYYY/`에 저장하고 작업 평가 입력에 `web_search_record_targets`를 포함한다.
+- 검색 판단 과정은 검색어, 확인한 출처, 제외한 약한 출처, 계획에 반영한 인사이트, 남은 불확실성 형태의 공개 판단 요약으로 텍스트에 남긴다. 내부 추론 원문은 저장하지 않는다.
 - 웹 검색이 무관하거나 불가능하면 그 사실을 기록하고 로컬 검증을 강화해 진행한다.
 - 웹 검색 후 로컬 계획 전에 `memory-bootstrap-agent`로 필수 메모리 anchor를 확인하고 hot context를 읽는다.
 - durable rule, 출처 설정, 프롬프트, 워크플로, 프로젝트 경계, 평가 루프가 바뀌면 `agent-platform/configs/memory/bootstrap-manifest.json`도 갱신한다.

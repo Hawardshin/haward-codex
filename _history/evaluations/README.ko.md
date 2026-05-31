@@ -19,6 +19,7 @@ _history/evaluations/YYYY/YYYY-MM-DD-<slug>.en.md
 - 초기 지시
 - 작업 요약
 - 확인한 레퍼런스
+- 웹 검색 기록 경로
 - 변경 파일
 - 검증 결과
 - 평가 상태

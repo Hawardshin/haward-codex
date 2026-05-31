@@ -19,6 +19,7 @@ _history/evaluations/YYYY/YYYY-MM-DD-<slug>.en.md
 - initial instruction
 - work summary
 - references checked
+- web search record targets
 - changed files
 - verification results
 - evaluation status

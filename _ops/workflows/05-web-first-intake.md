@@ -18,7 +18,8 @@
 10. 검색 결과가 계획을 바꾸면 `research-insight-planner-agent`와 `agent-platform/configs/research/research-agent-profile.json`을 사용하고 계획 히스토리에 남긴다.
 11. 출처가 많거나 반복 정리가 필요하면 `_tools/source-collector/`로 출처 묶음을 정규화하고 보고서를 만든다.
 12. 재사용 가치가 있는 내용은 `_research/`에 저장한다.
-13. 이후 [_ops/workflows/00-start-here.md](00-start-here.md)의 저장소 탐색과 구현 단계로 이동한다.
+13. 의미 있는 작업이면 `_history/web-searches/YYYY/`에 공개 검색 판단 기록을 저장한다.
+14. 이후 [_ops/workflows/00-start-here.md](00-start-here.md)의 저장소 탐색과 구현 단계로 이동한다.
 
 ## Search Quality Rules
 
@@ -35,6 +36,8 @@
 - 출처 유형과 권위/인기도/현업 신호
 - 계획에 반영할 인사이트
 - 무시한 약한 출처 또는 무관한 결과
+- 공개 판단 요약
+- `web_search_record_targets`
 - 추가 검색 필요 여부
 
 ## Related
@@ -44,3 +47,4 @@
 - [_tools/source-collector/README.ko.md](../../_tools/source-collector/README.ko.md)
 - [_ops/prompts/05-web-first-intake.md](../prompts/05-web-first-intake.md)
 - [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md)
+- [_history/web-searches/README.ko.md](../../_history/web-searches/README.ko.md)

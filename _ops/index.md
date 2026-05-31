@@ -11,6 +11,7 @@
 | `_philosophy/` | 에이전트와 플랫폼 운영의 근본 철학 |
 | `_history/` | 날짜별 작업 히스토리와 압축된 맥락 |
 | `_history/work-summaries/` | 나중에 빠르게 읽는 날짜별 작업 요약과 HTML 인덱스 |
+| `_history/web-searches/` | 모든 지시/프롬프트 실행의 웹 검색과 공개 판단 요약 |
 | `_history/installations/` | 실제 설치/업그레이드/제거 상세 감사 기록 |
 | `_history/plans/` | 에이전트 계획 과정 기록 |
 | `_skills/` | git으로 추적하는 커스텀 Codex 스킬 원본 |
@@ -23,6 +24,7 @@
 
 - 작업을 시작할 때: [_ops/workflows/00-start-here.md](workflows/00-start-here.md)
 - 모든 지시의 첫 웹 검색: [_ops/workflows/05-web-first-intake.md](workflows/05-web-first-intake.md), [_docs/web-first-work-policy.ko.md](../_docs/web-first-work-policy.ko.md)
+- 프롬프트 공통 웹 검색 계약: [_ops/prompts/README.ko.md](prompts/README.ko.md), [_history/web-searches/README.ko.md](../_history/web-searches/README.ko.md)
 - 새 세션의 AI 메모리 부트스트랩: [_ops/workflows/01-memory-bootstrap.md](workflows/01-memory-bootstrap.md), [agent-platform/configs/memory/bootstrap-manifest.json](../agent-platform/configs/memory/bootstrap-manifest.json)
 - 공유 설정 파일 자기 설명 기준: [_docs/self-documenting-config-policy.ko.md](../_docs/self-documenting-config-policy.ko.md), `agent-platform`의 `check-config-contract`
 - 출처 수집 기준을 볼 때: [_docs/source-collection-policy.ko.md](../_docs/source-collection-policy.ko.md)
@@ -55,5 +57,6 @@
 - 관련 문서가 업데이트됐는가
 - `_history/YYYY/YYYY-MM-DD.md`에 맥락이 남았는가
 - `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`에 빠른 요약이 남았는가
+- `_history/web-searches/YYYY/`에 공개 검색 판단 기록이 남았는가
 - 설치가 발생했다면 `_history/installations/YYYY/`와 `_ops/installations/registry.json`이 갱신됐는가
 - `_ops/maps/`가 현재 구조를 반영하는가

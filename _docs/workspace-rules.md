@@ -119,7 +119,10 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 ## Web-First Work Policy
 
 - Every new user instruction starts with web search before planning, repository exploration, or file edits.
+- Every reusable prompt execution under `_ops/prompts/` starts with web search and follows `_ops/prompts/README.ko.md`.
 - Use [_docs/web-first-work-policy.ko.md](web-first-work-policy.ko.md) and `_ops/workflows/05-web-first-intake.md` for the intake sequence.
+- Meaningful work saves a public web search record under `_history/web-searches/YYYY/`.
+- Search records include queries, checked sources, weak sources ignored, plan impact, uncertainty, and a public decision summary instead of raw internal reasoning.
 - If search results are irrelevant, record that and proceed with repository-local verification.
 - If web search fails, record the failure and strengthen local verification before final claims.
 - Save only reusable search findings under `_research/`.
@@ -145,6 +148,8 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - The evaluator compares the initial instruction with the actual result, changed files, and verification.
 - The evaluator should consider relevant prior internal work, official docs, mature open-source projects, or other strong references.
 - When factual claims are present, run `hallucination-guard-agent` and include the grounding result in evaluation.
+- Include `web_search_record_targets` in evaluation input for meaningful work.
+- Include `work_summary_targets` in evaluation input for meaningful work.
 - If gaps are found, they become follow-up actions and the work returns to implementation.
 - The default evaluator is `work-evaluator-agent` in `agent-platform/configs/agents/`.
 - Final evaluation reports are stored under `_history/evaluations/YYYY/`.

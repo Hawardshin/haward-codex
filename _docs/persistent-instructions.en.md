@@ -21,6 +21,9 @@ This document records durable user instructions in English.
 - Capture reusable findings from internet research and external references under `_research/`.
 - Keep foundational agent and platform operating philosophy under `_philosophy/`.
 - Run web search first for every new user instruction before planning, repository exploration, or file edits.
+- Run web search first for every reusable prompt execution under `_ops/prompts/`.
+- Save meaningful web search records under `_history/web-searches/YYYY/` and include `web_search_record_targets` in work evaluation input.
+- Record public search reasoning summaries in text: queries, sources checked, weak sources ignored, insights applied, and uncertainty. Do not store raw internal chain-of-thought.
 - If web search is irrelevant or unavailable, record that and continue with stronger local verification.
 - After web search and before local planning, run `memory-bootstrap-agent` to check required memory anchors and read hot context.
 - When durable rules, source configs, prompts, workflows, project boundaries, or evaluation loops change, update `agent-platform/configs/memory/bootstrap-manifest.json`.

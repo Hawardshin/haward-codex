@@ -13,30 +13,31 @@
 
 1. Capture the user's intent as a project requirement, rule, or artifact.
 2. Run web search first using `_ops/workflows/05-web-first-intake.md`.
-3. Run `memory-bootstrap-agent` and read required hot anchors from `agent-platform/configs/memory/bootstrap-manifest.json`.
-4. Use `_ops/index.md` and `_ops/prompts/00-router.md` to select the operating path.
-5. Decide whether the work belongs to an existing project or a new root-level project.
-6. Keep project-specific work inside the owning project folder and register root projects under `_ops/projects/`.
-7. Keep foundational philosophy in `_philosophy/` and execution rules in `_docs/` or `_ops/`.
-8. Implement or document the smallest useful change.
-9. Prefer Python for agent implementation unless another runtime is clearly better.
-10. Evaluate mature open-source options before building core infrastructure from scratch.
-11. For planning that depends on external facts, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json`.
-12. Treat research as an answer-engine pipeline: query understanding, retrieval, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
-13. For coding research, use `coding-research-agent` to record reference configs, concrete code references, standard post-research answers, and diverse source types before implementation.
-14. If mature open source is the right fit, install it in the owning project or tool scope and record install command, dependency tracking, installation audit record, security/license review, verification, and rollback.
-15. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
-16. Save important planning processes under `_history/plans/YYYY/`.
-17. Promote repeated work into a template, tool, skill, prompt, or workflow.
-18. Record important context in `_history/`.
-19. Refresh `_ops/maps/` when navigational structure changes.
-20. Summarize completed work.
-21. Check prior internal work and strong references relevant to the task.
-22. Capture reusable internet research or external references.
-23. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
-24. Evaluate the completed work against the initial instruction.
-25. Rework real gaps and evaluate again.
-26. Commit the coherent change set and push it.
+3. Save meaningful public web search reasoning summaries under `_history/web-searches/YYYY/`.
+4. Run `memory-bootstrap-agent` and read required hot anchors from `agent-platform/configs/memory/bootstrap-manifest.json`.
+5. Use `_ops/index.md` and `_ops/prompts/00-router.md` to select the operating path.
+6. Decide whether the work belongs to an existing project or a new root-level project.
+7. Keep project-specific work inside the owning project folder and register root projects under `_ops/projects/`.
+8. Keep foundational philosophy in `_philosophy/` and execution rules in `_docs/` or `_ops/`.
+9. Implement or document the smallest useful change.
+10. Prefer Python for agent implementation unless another runtime is clearly better.
+11. Evaluate mature open-source options before building core infrastructure from scratch.
+12. For planning that depends on external facts, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json`.
+13. Treat research as an answer-engine pipeline: query understanding, retrieval, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
+14. For coding research, use `coding-research-agent` to record reference configs, concrete code references, standard post-research answers, and diverse source types before implementation.
+15. If mature open source is the right fit, install it in the owning project or tool scope and record install command, dependency tracking, installation audit record, security/license review, verification, and rollback.
+16. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
+17. Save important planning processes under `_history/plans/YYYY/`.
+18. Promote repeated work into a template, tool, skill, prompt, or workflow.
+19. Record important context in `_history/`.
+20. Refresh `_ops/maps/` when navigational structure changes.
+21. Summarize completed work.
+22. Check prior internal work and strong references relevant to the task.
+23. Capture reusable internet research or external references.
+24. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
+25. Evaluate the completed work against the initial instruction.
+26. Rework real gaps and evaluate again.
+27. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -59,6 +60,7 @@ Promote work only when it will reduce future effort.
 | Same need to explain planning decisions later | Plan history template |
 | Same need to block unsupported factual claims | Hallucination guard agent |
 | Same need to start every instruction with web search | Web-first intake workflow |
+| Same need to inspect the search process later | Web search record template and evaluation target |
 | Same need to avoid forgetting durable settings | Memory bootstrap manifest and agent |
 | Same need to make settings explain their references and rules | Config contract agent |
 | Same open-source installation decision repeated | Open-source installation policy and candidate record |

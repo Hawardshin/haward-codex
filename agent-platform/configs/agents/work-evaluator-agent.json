@@ -10,6 +10,6 @@
     "status": "active",
     "trigger": "before final close-out of meaningful work",
     "input_schema": "agent-platform/configs/evaluation/work-evaluation-template.json",
-    "policy": "If gaps are found, reflect them into a follow-up task and rework before final response. Meaningful work must include work_summary_targets. Installation work must include installation_occurred=true and installation_record_targets."
+    "policy": "If gaps are found, reflect them into a follow-up task and rework before final response. Meaningful work must include web_search_record_targets and work_summary_targets. Installation work must include installation_occurred=true and installation_record_targets."
   }
 }

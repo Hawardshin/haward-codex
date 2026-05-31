@@ -32,6 +32,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Track reusable skills and tools as platform capabilities.
 - Keep project history and decisions outside transient chat context.
 - Keep user-readable completed-work summaries under `_history/work-summaries/`.
+- Keep prompt-level web search records under `_history/web-searches/`.
 - Prefer Python for agent runtimes, orchestration, evaluation, and backend automation.
 - Prefer mature open-source components before custom platform infrastructure.
 - Install mature open-source dependencies when they are the right fit, using project/tool-local scope plus documented install command, dependency tracking, security/license review, verification, and rollback.
@@ -93,6 +94,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - coding research should include `reference_config_paths` pointing to `configs/research/`
 - shared settings should include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide`, then pass `check-config-contract`
 - factual final outputs should pass `hallucination-guard-agent` when claims need grounding
+- close-out evaluation should include `web_search_record_targets` pointing to `_history/web-searches/YYYY/`
 - close-out evaluation should include `work_summary_targets` pointing to `_history/work-summaries/YYYY/`
 - installation close-out should include `installation_occurred=true` and `installation_record_targets` when dependency or environment state changed
 - `docs/python-agent-structure.md`: implementation structure
