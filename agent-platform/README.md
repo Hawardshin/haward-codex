@@ -63,6 +63,7 @@ PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluati
 PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/hallucination-guard-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/planning/coding-research-template.json
+PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json
 ```
 
 ## Current Skeleton
@@ -70,10 +71,12 @@ PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/pl
 - `src/agent_platform/core/`: local domain model, registry, runtime interface
 - `src/agent_platform/adapters/`: future external framework adapters
 - `src/agent_platform/evaluation/`: evaluation agents and close-out checks
+- `src/agent_platform/memory/`: memory bootstrap checks for durable context loading
 - `src/agent_platform/oss/`: open-source dependency evaluation helpers
 - `src/agent_platform/planning/`: research-backed insight and planning checks
 - `configs/agents/`: declarative agent specs
 - `configs/evaluation/`: structured evaluation inputs
+- `configs/memory/`: durable memory bootstrap manifest
 - `configs/planning/`: structured planning inputs
 - `configs/research/`: source registry and research profile configs
 - `configs/open-source/`: dependency candidate scoring inputs

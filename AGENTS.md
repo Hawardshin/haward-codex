@@ -80,6 +80,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/prompts/00-router.md` to select reusable prompts for repeated task types.
 - Use `_ops/workflows/00-start-here.md` as the default sequence for multi-step work.
 - Start every new instruction with `_ops/workflows/05-web-first-intake.md`.
+- After web-first intake and before local planning, run or simulate `memory-bootstrap-agent` with `agent-platform/configs/memory/bootstrap-manifest.json` and read the returned hot anchors.
 - Use `_ops/projects/registry.json` to see registered root projects and ownership boundaries.
 - Use `_ops/workflows/25-project-boundary-management.md` when a request may create a new project or cross project boundaries.
 - Check `_ops/coordination/board.ko.md` when parallel work may exist.
@@ -87,6 +88,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Keep `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md` current when folders, prompts, workflows, tools, skills, or project structure change.
 - Run `python3 _tools/workspace-index/src/workspace_index.py` after changing navigational structure.
 - Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, or platform memory anchors.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules

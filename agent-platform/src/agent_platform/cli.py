@@ -10,6 +10,7 @@ from agent_platform.core.registry import load_agent_spec, load_registry_dir
 from agent_platform.evaluation.hallucination_guard import HallucinationGuardInput, check_hallucination_risk
 from agent_platform.evaluation.knowledge_skeptic import KnowledgeValidationInput, validate_knowledge_reference
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
+from agent_platform.memory.bootstrap import MemoryBootstrapManifest, check_memory_bootstrap
 from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidate
 from agent_platform.planning.coding_research import CodingResearchInput, complete_coding_research
 from agent_platform.planning.research_insight_planner import ResearchInsightPlanInput, create_research_insight_plan
@@ -42,6 +43,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     complete_research = subparsers.add_parser("complete-coding-research", help="Check whether coding research is ready for implementation.")
     complete_research.add_argument("path", type=Path)
+
+    check_memory = subparsers.add_parser("check-memory-bootstrap", help="Check whether durable memory anchors are ready for a new agent session.")
+    check_memory.add_argument("path", type=Path)
+    check_memory.add_argument("--root", type=Path, default=None)
 
     return parser
 
@@ -96,7 +101,21 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(complete_coding_research(research_input), indent=2, ensure_ascii=False))
         return 0
 
+    if args.command == "check-memory-bootstrap":
+        with args.path.open("r", encoding="utf-8") as file:
+            manifest = MemoryBootstrapManifest.from_dict(json.load(file))
+        repo_root = args.root if args.root is not None else _default_repo_root()
+        print(json.dumps(check_memory_bootstrap(manifest, repo_root), indent=2, ensure_ascii=False))
+        return 0
+
     raise ValueError(f"Unknown command: {args.command}")
+
+
+def _default_repo_root() -> Path:
+    cwd = Path.cwd()
+    if cwd.name == "agent-platform":
+        return cwd.parent
+    return cwd
 
 
 if __name__ == "__main__":

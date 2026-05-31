@@ -21,6 +21,8 @@ This document records durable user instructions in English.
 - Keep foundational agent and platform operating philosophy under `_philosophy/`.
 - Run web search first for every new user instruction before planning, repository exploration, or file edits.
 - If web search is irrelevant or unavailable, record that and continue with stronger local verification.
+- After web search and before local planning, run `memory-bootstrap-agent` to check required memory anchors and read hot context.
+- When durable rules, source configs, prompts, workflows, project boundaries, or evaluation loops change, update `agent-platform/configs/memory/bootstrap-manifest.json`.
 - For research or planning work, collect broad high-authority sources, including official docs, papers, open-source repos, international tech blogs, analysis articles, community/social signals, and contrary examples.
 - Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption signals, not standalone proof.
 - Use `_tools/source-collector/` when broad source collection becomes repetitive or source bundles need scoring/reporting.

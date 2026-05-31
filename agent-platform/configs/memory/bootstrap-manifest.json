@@ -1,0 +1,203 @@
+{
+  "schema_version": "2026-05-31",
+  "name": "workspace-memory-bootstrap",
+  "purpose": "Defines durable memory anchors that an AI agent should load or know how to retrieve before working in this repository.",
+  "hot_context_limit": 12,
+  "default_command": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
+  "startup_sequence": [
+    "repo_instructions",
+    "persistent_instructions",
+    "ops_index",
+    "prompt_router",
+    "start_workflow",
+    "web_first_workflow",
+    "memory_bootstrap_workflow",
+    "coordination_board",
+    "project_registry",
+    "platform_readme",
+    "source_registry",
+    "coding_research_profile"
+  ],
+  "required_anchor_ids": [
+    "repo_instructions",
+    "persistent_instructions",
+    "ops_index",
+    "prompt_router",
+    "start_workflow",
+    "web_first_workflow",
+    "memory_bootstrap_workflow",
+    "coordination_board",
+    "project_registry",
+    "platform_readme",
+    "source_registry",
+    "coding_research_profile"
+  ],
+  "anchors": [
+    {
+      "id": "repo_instructions",
+      "path": "AGENTS.md",
+      "tier": "hot",
+      "purpose": "Top-level repository rules that every agent should obey.",
+      "required": true,
+      "load_order": 1
+    },
+    {
+      "id": "persistent_instructions",
+      "path": "_docs/persistent-instructions.md",
+      "tier": "hot",
+      "purpose": "Durable user preferences and long-running operating rules.",
+      "required": true,
+      "load_order": 2
+    },
+    {
+      "id": "ops_index",
+      "path": "_ops/index.md",
+      "tier": "hot",
+      "purpose": "Navigation hub for operations, prompts, workflows, maps, projects, and coordination.",
+      "required": true,
+      "load_order": 3
+    },
+    {
+      "id": "prompt_router",
+      "path": "_ops/prompts/00-router.md",
+      "tier": "hot",
+      "purpose": "Prompt selection table for repeated task types.",
+      "required": true,
+      "load_order": 4
+    },
+    {
+      "id": "start_workflow",
+      "path": "_ops/workflows/00-start-here.md",
+      "tier": "hot",
+      "purpose": "Default work sequence for every non-trivial request.",
+      "required": true,
+      "load_order": 5
+    },
+    {
+      "id": "web_first_workflow",
+      "path": "_ops/workflows/05-web-first-intake.md",
+      "tier": "hot",
+      "purpose": "Required web-first intake for every new user instruction.",
+      "required": true,
+      "load_order": 6
+    },
+    {
+      "id": "memory_bootstrap_workflow",
+      "path": "_ops/workflows/01-memory-bootstrap.md",
+      "tier": "hot",
+      "purpose": "Required startup memory workflow for loading durable repository settings.",
+      "required": true,
+      "load_order": 7
+    },
+    {
+      "id": "coordination_board",
+      "path": "_ops/coordination/board.ko.md",
+      "tier": "hot",
+      "purpose": "Current active-agent and parallel-work board.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "project_registry",
+      "path": "_ops/projects/registry.json",
+      "tier": "hot",
+      "purpose": "Root project ownership and boundary registry.",
+      "required": true,
+      "load_order": 9
+    },
+    {
+      "id": "platform_readme",
+      "path": "agent-platform/README.md",
+      "tier": "hot",
+      "purpose": "Core platform project status, commands, and scope boundary.",
+      "required": true,
+      "load_order": 10
+    },
+    {
+      "id": "source_registry",
+      "path": "agent-platform/configs/research/source-registry.json",
+      "tier": "hot",
+      "purpose": "Canonical source type taxonomy and reusable reference source catalog.",
+      "required": true,
+      "load_order": 11
+    },
+    {
+      "id": "coding_research_profile",
+      "path": "agent-platform/configs/research/coding-research-profile.json",
+      "tier": "hot",
+      "purpose": "Default source coverage profile for coding research.",
+      "required": true,
+      "load_order": 12
+    },
+    {
+      "id": "platform_operating_model",
+      "path": "_docs/platform-operating-model.md",
+      "tier": "warm",
+      "purpose": "System-level operating loop and capability promotion model.",
+      "required": true,
+      "load_order": 20
+    },
+    {
+      "id": "source_collection_policy",
+      "path": "_docs/source-collection-policy.ko.md",
+      "tier": "warm",
+      "purpose": "Source collection, source diversity, and adoption signal policy.",
+      "required": true,
+      "load_order": 21
+    },
+    {
+      "id": "coding_research_workflow",
+      "path": "_ops/workflows/56-coding-research.md",
+      "tier": "warm",
+      "purpose": "Workflow for coding research before implementation.",
+      "required": true,
+      "load_order": 22
+    },
+    {
+      "id": "evaluation_workflow",
+      "path": "_ops/workflows/40-evaluate-and-rework.md",
+      "tier": "warm",
+      "purpose": "Close-out evaluator and rework workflow.",
+      "required": true,
+      "load_order": 23
+    },
+    {
+      "id": "hallucination_workflow",
+      "path": "_ops/workflows/70-hallucination-prevention.md",
+      "tier": "warm",
+      "purpose": "Grounding workflow for factual claims.",
+      "required": true,
+      "load_order": 24
+    },
+    {
+      "id": "daily_history",
+      "path": "_history/2026/2026-05-31.md",
+      "tier": "warm",
+      "purpose": "Current dated work log and compressed context.",
+      "required": true,
+      "load_order": 25
+    },
+    {
+      "id": "repository_map",
+      "path": "_ops/maps/repository-map.md",
+      "tier": "cold",
+      "purpose": "Generated repository file index for targeted retrieval.",
+      "required": true,
+      "load_order": 40
+    },
+    {
+      "id": "prompt_map",
+      "path": "_ops/maps/prompt-map.md",
+      "tier": "cold",
+      "purpose": "Generated prompt and workflow map.",
+      "required": true,
+      "load_order": 41
+    }
+  ],
+  "refresh_rules": [
+    "Run this manifest check after changing durable rules, operations navigation, source configs, prompt/workflow maps, or project boundaries.",
+    "Keep hot anchors compact; move detailed context to warm or cold anchors.",
+    "Update required anchors when a new setting becomes mandatory for every future session.",
+    "If a hot anchor becomes stale or too large, split it and record the new path here."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "memory-bootstrap-agent",
+  "description": "Checks durable repository memory anchors so future agent sessions load the correct operating context before work.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "agent-platform:check-memory-bootstrap"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "at the beginning of a non-trivial session after web-first intake, and after durable rules or navigation settings change",
+    "input_schema": "agent-platform/configs/memory/bootstrap-manifest.json",
+    "policy": "Do not rely on chat memory. Load hot anchors, retrieve warm/cold anchors as needed, and keep the manifest current whenever durable settings change."
+  }
+}
