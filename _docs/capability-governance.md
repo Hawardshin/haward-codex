@@ -27,6 +27,7 @@ Create a tool when work repeatedly needs deterministic execution:
 - rendering previews
 - checking project health
 - checking claim grounding and hallucination risk
+- normalizing, scoring, and reporting large source bundles
 
 Shared tools belong under `_tools/<tool-name>/`. Project-specific tools belong under `project-name/tools/`.
 

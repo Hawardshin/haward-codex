@@ -23,6 +23,7 @@ This document records durable user instructions in English.
 - If web search is irrelevant or unavailable, record that and continue with stronger local verification.
 - For research or planning work, collect broad high-authority sources, including official docs, papers, open-source repos, international tech blogs, analysis articles, community/social signals, and contrary examples.
 - Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption signals, not standalone proof.
+- Use `_tools/source-collector/` when broad source collection becomes repetitive or source bundles need scoring/reporting.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before relying on it.
 - For important plans, do not rely only on the model's internal guess; use web search plus another search channel to derive insights before planning.
 - Work that uses `research-insight-planner-agent` should set `plan_history_targets` and record plan changes.

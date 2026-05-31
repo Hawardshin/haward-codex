@@ -1,0 +1,70 @@
+{
+  "topic": "Research topic",
+  "purpose": "Why this source collection is needed.",
+  "access_date": "YYYY-MM-DD",
+  "queries": [
+    {
+      "query": "Research topic official documentation",
+      "channel": "web",
+      "purpose": "official or primary source"
+    },
+    {
+      "query": "Research topic arxiv paper OR conference paper",
+      "channel": "web",
+      "purpose": "papers and technical reports"
+    },
+    {
+      "query": "Research topic engineering blog architecture case study",
+      "channel": "web",
+      "purpose": "international tech blogs and field examples"
+    },
+    {
+      "query": "Research topic GitHub open source implementation",
+      "channel": "web",
+      "purpose": "open-source implementation evidence"
+    },
+    {
+      "query": "Research topic benchmark analysis article survey",
+      "channel": "web",
+      "purpose": "analysis and benchmark articles"
+    },
+    {
+      "query": "Research topic Hacker News Reddit LinkedIn",
+      "channel": "web",
+      "purpose": "community and social adoption signals"
+    },
+    {
+      "query": "Research topic failure case limitations criticism",
+      "channel": "web",
+      "purpose": "contrary or failure cases"
+    }
+  ],
+  "required_bundle": {
+    "official": 1,
+    "paper": 1,
+    "tech_blog": 2,
+    "open_source": 1,
+    "community_or_social": 1,
+    "contrary": 1
+  },
+  "sources": [
+    {
+      "title": "Official documentation or primary source",
+      "url": "https://example.com/docs",
+      "source_type": "official",
+      "publisher": "Publisher",
+      "author": "",
+      "published_date": "",
+      "accessed_date": "YYYY-MM-DD",
+      "key_claim": "What this source supports.",
+      "reliability_notes": "Why this source is reliable.",
+      "plan_impact": "How this changes the plan.",
+      "contrary": false,
+      "signals": {}
+    }
+  ],
+  "notes": [
+    "Popularity signals are adoption or discovery signals, not standalone proof.",
+    "Do not search sensitive project details verbatim."
+  ]
+}

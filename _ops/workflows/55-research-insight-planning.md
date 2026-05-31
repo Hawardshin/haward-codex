@@ -13,15 +13,16 @@
 5. Prefer primary sources and official references when available.
 6. For research-heavy work, apply [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md): include official sources, papers, international tech blogs, open-source repos, analysis articles, community/social signals, and contrary examples.
 7. Record popularity and adoption signals separately from factual evidence.
-8. If internal knowledge-base content is used, validate it with `knowledge-skeptic-agent`.
-9. Turn source findings into concise insights that affect the plan.
-10. Create plan steps and validation steps.
-11. Choose a plan history path under `_history/plans/YYYY/`.
-12. Save the planning process using `_templates/plan-history/`.
-13. Record risks, unknowns, and whether reusable research should be captured under `_research/`.
-14. Run `research-insight-planner-agent` or use its prompt with `plan_history_targets` set.
-15. If the result is `more_research_required`, resolve the listed gaps before execution.
-16. If the plan changes during execution, update the same plan history file with the change and reason.
+8. If source volume is high or repeated, normalize the source bundle with `_tools/source-collector/`.
+9. If internal knowledge-base content is used, validate it with `knowledge-skeptic-agent`.
+10. Turn source findings into concise insights that affect the plan.
+11. Create plan steps and validation steps.
+12. Choose a plan history path under `_history/plans/YYYY/`.
+13. Save the planning process using `_templates/plan-history/`.
+14. Record risks, unknowns, and whether reusable research should be captured under `_research/`.
+15. Run `research-insight-planner-agent` or use its prompt with `plan_history_targets` set.
+16. If the result is `more_research_required`, resolve the listed gaps before execution.
+17. If the plan changes during execution, update the same plan history file with the change and reason.
 
 ## Rule
 

@@ -42,6 +42,8 @@
 
 단순 로컬 작업에서는 이 기준을 모두 채우지 않아도 된다. 다만 웹 검색을 먼저 수행하고, 무관하면 그 사실을 기록한다.
 
+반복적으로 많은 출처를 수집하거나 보고서로 정리해야 하면 `_tools/source-collector/`를 사용한다.
+
 ## 평가 기준
 
 - 권위: 저자와 발행 주체가 신뢰할 만한가?
@@ -65,8 +67,17 @@
 - 반대 신호
 - 현재 계획에 미친 영향
 
+## 자동화 도구
+
+```bash
+python3 _tools/source-collector/src/source_collector.py init /tmp/source-bundle.json --topic "topic" --purpose "purpose" --access-date YYYY-MM-DD
+python3 _tools/source-collector/src/source_collector.py report /tmp/source-bundle.json --output /tmp/source-report.md --json-output /tmp/source-report.json
+python3 _tools/source-collector/src/source_collector.py check /tmp/source-bundle.json --strict
+```
+
 ## 관련 파일
 
+- [_tools/source-collector/README.ko.md](../_tools/source-collector/README.ko.md)
 - [_ops/workflows/05-web-first-intake.md](../_ops/workflows/05-web-first-intake.md)
 - [_ops/workflows/55-research-insight-planning.md](../_ops/workflows/55-research-insight-planning.md)
 - [_research/topics/agent-planning/2026-05-31-source-collection-policy.ko.md](../_research/topics/agent-planning/2026-05-31-source-collection-policy.ko.md)

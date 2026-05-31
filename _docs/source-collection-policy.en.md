@@ -42,6 +42,8 @@ When research affects a plan or decision, try to collect:
 
 Simple local tasks do not need the full bundle. Still run web-first intake and record when results are irrelevant.
 
+When collecting or reporting many sources becomes repetitive, use `_tools/source-collector/`.
+
 ## Evaluation Criteria
 
 - Authority: is the author or publisher credible?
@@ -65,8 +67,17 @@ Research notes and evaluation reports should record:
 - contrary signals
 - plan impact
 
+## Automation Tool
+
+```bash
+python3 _tools/source-collector/src/source_collector.py init /tmp/source-bundle.json --topic "topic" --purpose "purpose" --access-date YYYY-MM-DD
+python3 _tools/source-collector/src/source_collector.py report /tmp/source-bundle.json --output /tmp/source-report.md --json-output /tmp/source-report.json
+python3 _tools/source-collector/src/source_collector.py check /tmp/source-bundle.json --strict
+```
+
 ## Related Files
 
+- [_tools/source-collector/README.en.md](../_tools/source-collector/README.en.md)
 - [_ops/workflows/05-web-first-intake.md](../_ops/workflows/05-web-first-intake.md)
 - [_ops/workflows/55-research-insight-planning.md](../_ops/workflows/55-research-insight-planning.md)
 - [_research/topics/agent-planning/2026-05-31-source-collection-policy.en.md](../_research/topics/agent-planning/2026-05-31-source-collection-policy.en.md)

@@ -13,6 +13,7 @@ Examples:
 - artifact generation
 - project scaffolding
 - test or preview orchestration
+- source collection normalization and scoring
 
 ## Tool Folder Shape
 
@@ -22,6 +23,12 @@ _tools/tool-name/
   src/
   tests/
 ```
+
+## Current Tools
+
+- `workspace-index/`: generate repository and prompt maps.
+- `task-board/`: generate coordination boards.
+- `source-collector/`: normalize, score, and report broad web/source research bundles.
 
 Each tool README should document:
 

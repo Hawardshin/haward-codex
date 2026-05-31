@@ -23,6 +23,7 @@
 - 웹 검색이 무관하거나 불가능하면 그 사실을 기록하고 로컬 검증을 강화해 진행한다.
 - 조사나 계획 작업은 공식 문서, 논문, 오픈소스 repo, 외국 기술 블로그, 조사 아티클, 커뮤니티/소셜 신호, 반대 사례를 폭넓게 수집한다.
 - 좋아요, 공유, 댓글, GitHub stars, Hacker News 점수, Reddit 활동, LinkedIn 반응은 adoption 신호로만 보고 단독 사실 근거로 쓰지 않는다.
+- 폭넓은 출처 수집이 반복되거나 출처 묶음 점수화/보고서가 필요하면 `_tools/source-collector/`를 사용한다.
 - 지식 베이스 내용은 틀릴 수 있다고 가정하고, 근거로 사용하기 전 `knowledge-skeptic-agent`로 검증한다.
 - 중요한 계획은 AI의 내부 추정만으로 세우지 않고, 웹 검색과 다른 검색 채널을 통해 인사이트를 도출한 뒤 수립한다.
 - `research-insight-planner-agent`를 쓰는 작업은 `plan_history_targets`를 지정하고 계획 변경 이력을 남긴다.

@@ -110,6 +110,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - If a skill must be active in Codex, install or copy it into `$CODEX_HOME/skills` only after confirming the target path and permissions.
 - For new tools, prefer `_tools/<tool-name>/` for shared tools or `project-name/tools/` for project-specific tools.
 - Document each reusable tool with its purpose, inputs, outputs, and main command.
+- Use `_tools/source-collector/` when many web/search sources need repeated normalization, bundle coverage checks, or source scoring.
 - Do not create a new skill or tool when a short documented procedure is enough.
 - Prefer open-source dependencies and tools when they are mature, maintained, license-compatible, and fit the task.
 - When choosing external dependencies for current work, verify their current status and docs instead of relying only on memory.
