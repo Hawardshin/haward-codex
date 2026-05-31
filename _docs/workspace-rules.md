@@ -85,6 +85,13 @@ Use or propose HTML when the output benefits from:
 
 HTML artifacts should normally be stored in `project-name/artifacts/`.
 
+## Language Policy
+
+- User-facing documentation and history should be Korean-first.
+- Executable prompt bodies should be English.
+- Important durable documents should have paired Korean and English files with `.ko.md` and `.en.md` suffixes.
+- When paired documents exist, update both in the same change set.
+
 ## Operations Hub Policy
 
 - `_ops/index.md` is the first stop for navigation.

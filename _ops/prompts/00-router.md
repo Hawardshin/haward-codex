@@ -17,7 +17,8 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 ## Operating Prompt
 
 ```text
-현재 요청을 저장소의 지속 규칙과 _ops/index.md 기준으로 분류한다.
-필요한 프롬프트와 워크플로를 선택하고, 새 반복 패턴이 보이면 문서/도구/스킬 후보로 남긴다.
-작업 후 평가 에이전트로 초기 지시 대비 결과를 확인하고, 히스토리, 맵, 커밋, push 상태를 확인한다.
+Classify the current request using the repository's persistent rules and _ops/index.md.
+Select the relevant prompt and workflow.
+If a reusable pattern appears, record it as a documentation, tool, template, skill, prompt, or workflow candidate.
+After the work, run the evaluator against the initial instruction, then verify history, maps, commit, and push status.
 ```

@@ -88,6 +88,14 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Preserve only durable information in docs: decisions, requirements, command results worth reusing, and links to artifacts.
 - Avoid relying on chat history for project state that future work needs.
 
+## Language Rules
+
+- Write user-facing documentation and history in Korean by default.
+- Keep executable prompt bodies in English to reduce token cost.
+- For important durable docs, create paired Korean and English files using `name.ko.md` and `name.en.md`.
+- When paired Korean and English docs exist, update both in the same change set.
+- In prompt files, explanatory text can be Korean, but the actual `Prompt` block must be English.
+
 ## Artifact Format Rules
 
 - Use Markdown for logs, rules, decisions, and lightweight documentation.
