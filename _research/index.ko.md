@@ -20,6 +20,7 @@
 | 에이전트 메모리 | [사용자 요청 요약 저장](topics/agent-memory/2026-05-31-user-request-summaries.ko.md) |
 | 설정 거버넌스 | [자가 설명형 설정 파일](topics/configuration/2026-05-31-self-documenting-configs.ko.md) |
 | 문서화 | [읽기 쉬운 작업 요약 구조](topics/documentation/2026-05-31-readable-work-summaries.ko.md) |
+| 문서화 | [오늘 작업 전체 요약](topics/documentation/2026-05-31-daily-collected-summary.ko.md) |
 | 의존성 관리 | [설치 감사 기록 정책](topics/dependency-management/2026-05-31-installation-audit-trail.ko.md) |
 
 ## 갱신 규칙

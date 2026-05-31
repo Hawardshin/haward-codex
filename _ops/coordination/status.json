@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-05-31",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, and user request summary structures added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, and daily collected summary structures added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -126,6 +126,24 @@
         "agent-platform/docs/work-evaluator-agent.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-05-31-user-request-summaries.ko.md"
+    },
+    {
+      "id": "2026-05-31-daily-collected-summary",
+      "title": "Gather today's work summary",
+      "project": "_history",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-05-31",
+      "updated_at": "2026-05-31",
+      "next_action": "No action. Use _history/work-summaries/2026/2026-05-31.ko.md as today's collected summary.",
+      "blockers": [],
+      "references": [
+        "_history/work-summaries/2026/2026-05-31.ko.md",
+        "_history/user-requests/2026/2026-05-31.ko.md",
+        "_history/web-searches/2026/2026-05-31-daily-collected-summary.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-05-31-daily-collected-summary.ko.md"
     }
   ]
 }

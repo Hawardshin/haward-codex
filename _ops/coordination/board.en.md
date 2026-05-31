@@ -2,7 +2,7 @@
 
 - Generated from: `_ops/coordination/status.json`
 - Last updated: `2026-05-31`
-- Summary: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, and user request summary structures added. No separate parallel agent tasks are currently active.
+- Summary: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, and daily collected summary structures added. No separate parallel agent tasks are currently active.
 
 ## Agents
 
@@ -20,6 +20,7 @@
 | 2026-05-31-prompt-web-search-record | Require web search records for every prompt | _ops | completed | codex-primary | No action. Future meaningful work must include web_search_record_targets before close-out. |
 | 2026-05-31-context-archive-policy | Add context archive resume packets | _history | completed | codex-primary | No action. Future long-context work should create context archive packets before relying on chat memory. |
 | 2026-05-31-user-request-summaries | Save user request summaries | _history | completed | codex-primary | No action. Future meaningful work must update _history/user-requests before close-out. |
+| 2026-05-31-daily-collected-summary | Gather today's work summary | _history | completed | codex-primary | No action. Use _history/work-summaries/2026/2026-05-31.ko.md as today's collected summary. |
 
 ## Blockers
 
