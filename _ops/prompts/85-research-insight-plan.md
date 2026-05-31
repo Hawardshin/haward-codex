@@ -30,6 +30,7 @@ PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning
 
 ## References
 
+- [_philosophy/agent-operating-philosophy.ko.md](../../_philosophy/agent-operating-philosophy.ko.md)
 - [_docs/search-insight-planning-policy.ko.md](../../_docs/search-insight-planning-policy.ko.md)
 - [_history/plans/README.ko.md](../../_history/plans/README.ko.md)
 - [agent-platform/docs/research-insight-planner-agent.ko.md](../../agent-platform/docs/research-insight-planner-agent.ko.md)

@@ -4,6 +4,8 @@
 
 저장소의 지식 베이스는 시간이 지날수록 커진다. `_research`, `_docs`, `_history`, 프로젝트 문서의 내용은 유용하지만 항상 맞다고 가정하면 안 된다. 지식 베이스를 근거로 사용할 때는 `knowledge-skeptic-agent`가 오류 가능성을 의심하고 검증한다.
 
+철학적 배경은 [_philosophy/agent-operating-philosophy.ko.md](../_philosophy/agent-operating-philosophy.ko.md)에 둔다. 이 문서는 그 철학을 지식 검증 정책으로 옮긴다.
+
 ## 기본 원칙
 
 - 지식 베이스 내용은 오래됐거나, 불완전하거나, 틀렸을 수 있다.

@@ -4,6 +4,8 @@
 
 The repository knowledge base will grow over time. Content in `_research`, `_docs`, `_history`, and project docs is useful, but it must not be assumed to be correct. When using knowledge-base content as evidence, `knowledge-skeptic-agent` should question and validate it.
 
+The philosophical basis lives in [_philosophy/agent-operating-philosophy.en.md](../_philosophy/agent-operating-philosophy.en.md). This document turns that philosophy into a knowledge validation policy.
+
 ## Default Principles
 
 - Knowledge-base content may be outdated, incomplete, or wrong.

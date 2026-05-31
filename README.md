@@ -10,6 +10,7 @@
 - 의미 있는 작업을 닫기 전 초기 지시와 결과를 평가하고, 차이가 있으면 재작업한다.
 - 평가 전에는 했던 작업을 요약하고 관련된 이전 작업이나 좋은 레퍼런스를 먼저 조사한다.
 - 중요한 계획은 AI의 내부 추정만으로 세우지 않고, 웹 검색과 다른 검색 채널을 통해 인사이트를 도출한 뒤 수립한다.
+- 이 저장소의 운영 철학은 `_philosophy/`에 둔다.
 - 의미 있는 작업의 최종 평가는 `_history/evaluations/YYYY/` 아래 파일로 남긴다.
 - 중요한 계획을 세우는 과정은 `_history/plans/YYYY/` 아래 파일로 남긴다.
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/`에서 한 번에 볼 수 있게 관리한다.
@@ -34,6 +35,7 @@ codex/
   browser-agent/
   research-agent/
   _docs/
+  _philosophy/
   _history/
   _ops/
   _research/
@@ -53,6 +55,7 @@ codex/
 ## 예약 폴더
 
 - `_docs/`: 저장소 전체 운영 문서와 의사결정 기록
+- `_philosophy/`: 에이전트와 플랫폼 운영의 근본 철학
 - `_history/`: 날짜별 작업 히스토리와 요약
 - `_history/plans/`: 에이전트가 계획을 세운 과정 기록
 - `_ops/`: 운영 허브, 프롬프트, 워크플로, 저장소 맵
@@ -96,6 +99,7 @@ project-name/
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/board.ko.md`와 `_ops/coordination/board.html`에서 확인한다.
 - 반복 프롬프트는 `_ops/prompts/`에서 관리한다.
 - 반복 워크플로는 `_ops/workflows/`에서 관리한다.
+- 운영 철학은 `_philosophy/`에서 관리한다.
 - 작업 종료 전 평가는 `_ops/workflows/40-evaluate-and-rework.md`를 따른다.
 - 검색 기반 계획 과정은 `_history/plans/`에 저장한다.
 - 무엇이 어디에 있는지에 대한 지도는 `_ops/maps/`에 둔다.

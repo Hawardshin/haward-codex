@@ -14,6 +14,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | 작업을 마무리한다 | [60-close-work.md](60-close-work.md) |
 | 완료 결과를 초기 지시와 비교 평가한다 | [70-evaluate-work.md](70-evaluate-work.md) |
 | 진행 중인 에이전트와 병렬 작업을 확인하거나 갱신한다 | [80-coordinate-work.md](80-coordinate-work.md) |
+| 에이전트 운영 철학이나 세계관을 정리한다 | [_philosophy/agent-operating-philosophy.ko.md](../../_philosophy/agent-operating-philosophy.ko.md) |
 | 웹/문서/저장소 검색에서 인사이트를 도출해 계획한다 | [85-research-insight-plan.md](85-research-insight-plan.md) |
 | 인터넷 조사에서 재사용 가치가 있는 내용을 문서화한다 | [90-capture-research.md](90-capture-research.md) |
 | 지식 베이스 내용을 근거로 쓰기 전에 검증한다 | [95-validate-knowledge.md](95-validate-knowledge.md) |
@@ -23,6 +24,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 ```text
 Classify the current request using the repository's persistent rules and _ops/index.md.
 Select the relevant prompt and workflow.
+If the request expresses a durable worldview or operating philosophy, update _philosophy/ and link policy docs to it.
 If a reusable pattern appears, record it as a documentation, tool, template, skill, prompt, or workflow candidate.
 After the work, run the evaluator against the initial instruction, then verify history, maps, commit, and push status.
 ```

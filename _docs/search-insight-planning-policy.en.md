@@ -4,6 +4,8 @@
 
 Do not create important plans from the model's internal probabilistic guess alone. Gather evidence through web search, repository search, official docs, papers, code/package references, and other search channels, then convert that evidence into insights before creating the execution plan.
 
+The philosophical basis lives in [_philosophy/agent-operating-philosophy.en.md](../_philosophy/agent-operating-philosophy.en.md). This document turns that philosophy into an execution policy.
+
 ## Principles
 
 - Search first when the task depends on current information or external facts.

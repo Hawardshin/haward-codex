@@ -13,6 +13,7 @@
 | Folder | Purpose |
 | --- | --- |
 | `_docs/` | 저장소 전체 문서, 규칙, 의사결정 기록 |
+| `_philosophy/` | 에이전트와 플랫폼 운영의 근본 철학 |
 | `_history/` | 날짜별 작업 로그와 컨텍스트 압축 요약 |
 | `_history/plans/` | 에이전트 계획 과정 기록 |
 | `_ops/` | 운영 허브, 프롬프트 라우터, 워크플로, 저장소 맵 |
@@ -98,6 +99,7 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 ## Operations Hub Policy
 
 - `_ops/index.md` is the first stop for navigation.
+- `_philosophy/` stores the durable worldview behind agent behavior and operating rules.
 - `_ops/coordination/` is the first stop for active agents and parallel work.
 - Reusable prompts live in `_ops/prompts/`.
 - Reusable workflows live in `_ops/workflows/`.

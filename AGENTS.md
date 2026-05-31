@@ -8,6 +8,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Create new project directories at the repository root using `kebab-case`.
 - Reserve underscore-prefixed root directories for workspace operations:
   - `_docs/` for workspace-level documentation and decision records
+  - `_philosophy/` for foundational agent and platform operating philosophy
   - `_history/` for dated work history and compressed context summaries
   - `_ops/` for operations navigation, prompts, workflows, and maps
   - `_research/` for reusable internet research and external reference notes
@@ -37,11 +38,13 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before using it as evidence.
 - For important planning, do not rely only on the model's internal guess; use `research-insight-planner-agent` to combine web search with another search channel, derive insights, and plan validation.
 - When using `research-insight-planner-agent`, set `plan_history_targets` and keep the plan process file updated if the plan changes.
+- Keep foundational operating philosophy under `_philosophy/`; keep executable rules and workflows under `_docs/` and `_ops/`.
 
 ## Platformization Rules
 
 - Treat the repository as a monorepo for a personal agent-building platform.
 - Use `_ops/index.md` as the navigation hub for ongoing work.
+- Use `_philosophy/` for the durable worldview behind agent behavior and operating rules.
 - Keep reusable platform concepts in `agent-platform/` unless they clearly belong to another project.
 - When a workflow repeats or creates avoidable friction, consider promoting it into a template, tool, or skill.
 - Prefer Python for agent implementations unless the project constraints clearly favor another runtime.

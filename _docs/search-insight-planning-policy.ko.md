@@ -4,6 +4,8 @@
 
 AI의 내부 확률적 추정만으로 중요한 계획을 세우지 않는다. 웹 검색, 저장소 검색, 공식 문서, 논문, 코드/패키지 자료처럼 여러 검색 채널에서 근거를 모으고, 그 근거에서 인사이트를 뽑은 뒤 실행 계획을 만든다.
 
+철학적 배경은 [_philosophy/agent-operating-philosophy.ko.md](../_philosophy/agent-operating-philosophy.ko.md)에 둔다. 이 문서는 그 철학을 실행 정책으로 옮긴다.
+
 ## 기본 원칙
 
 - 최신성이나 외부 사실이 중요한 작업은 먼저 검색한다.
