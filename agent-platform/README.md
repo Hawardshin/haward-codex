@@ -40,6 +40,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep shared spec-driven artifacts under `_specs/`; use project-local `specs/` for project-specific specs.
 - Keep custom skill source under `_skills/` and validate skill work before close-out.
 - Keep long-context resume packets under `_history/context-archives/` when context saturation risk appears.
+- Use `parallel-work-planner-agent` when speed matters or work can split into independent lanes; record dependencies, touch paths, conflict controls, coordination targets, merge strategy, and final verification.
 - Before source-code implementation, research best-fit/reference architectures and record architecture references, at least two architecture options, and decision notes.
 - Before source-code implementation, record the technology stack, stack-specific official docs or standards, version constraints, high-signal issue/discussion sources, and community signal interpretation.
 - Before source-code implementation, compare language/runtime options, separate architecture theory from practitioner opinions, and record folder-structure options plus folder semantics for maintainability.
@@ -77,6 +78,7 @@ PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluati
 PYTHONPATH=src python3 -m agent_platform.cli validate-skill configs/evaluation/skill-validation-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/hallucination-guard-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
+PYTHONPATH=src python3 -m agent_platform.cli plan-parallel-work configs/planning/parallel-work-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/planning/coding-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json
@@ -104,6 +106,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `requirements-manager-agent` keeps user requests, reviewed requirements, implementation, and evaluation connected
 - `spec-driven-planner-agent` turns requirements into specs, plans, tasks, validation records, and traceability
 - `skill-lifecycle-agent` creates, validates, tracks, and improves repository-managed Codex skills
+- `parallel-work-planner-agent` checks task dependencies, file/resource boundaries, execution batches, coordination targets, and merge verification before parallel execution
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`
 - general research readiness requires `research_profile_paths`, all answer-engine stage IDs, and `citation_requirements`
 - general research readiness requires `source_value_provenance` and `plan_evidence`

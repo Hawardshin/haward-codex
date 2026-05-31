@@ -38,6 +38,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 | REQ-WS-020 | The workspace shall select `quick`, `standard`, `ship_first`, `research`, or `governance` mode based on work type, and manage required artifacts plus deferred improvements differently by mode. | UR-2026-05-31-045 | must | baseline | `_ops`/`agent-platform` | work mode registry, evaluator tests, and workflow review | `agent-platform/configs/workflows/work-mode-registry.json`, `_ops/workflows/02-select-work-mode.md`, `_ops/backlog/deferred-improvements.en.md` |
 | REQ-WS-021 | Coding research shall record stack-specific official docs or standards, version constraints, high-signal issue/discussion sources, and community signal interpretation. | UR-2026-05-31-046 | must | baseline | agent-platform/projects | `complete-coding-research` result and stack/discussion fields | `agent-platform/src/agent_platform/planning/coding_research.py`, `agent-platform/configs/research/coding-research-profile.json`, `agent-platform/docs/coding-research-agent.en.md` |
 | REQ-WS-022 | Coding research shall record maintainable language/runtime selection, separate architecture theory from practitioner opinions, and record folder-structure candidates plus folder semantics. | UR-2026-06-01-001 | must | baseline | agent-platform/projects | `complete-coding-research` result and language/architecture/folder fields | `agent-platform/src/agent_platform/planning/coding_research.py`, `agent-platform/configs/research/coding-research-profile.json`, `_docs/architecture-first-coding-policy.en.md` |
+| REQ-WS-023 | When speed matters or work can split into independent lanes, agents shall validate dependencies, touch paths, conflict controls, coordination targets, and merge/rollback strategy before parallel execution. | UR-2026-06-01-002 | must | baseline | agent-platform/_ops | `plan-parallel-work` result and coordination board review | `agent-platform/src/agent_platform/planning/parallel_work.py`, `agent-platform/configs/planning/parallel-work-template.json`, `_ops/workflows/52-parallel-work-planning.md` |
 
 ## Change Management
 
@@ -45,6 +46,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 - Requirement reviews live under `_requirements/reviews/`.
 - Before implementation, link relevant requirement IDs from plans, work summaries, and evaluation input.
 - On 2026-06-01, REQ-WS-022 promoted language selection, theory/practitioner architecture comparison, and folder semantics to implementation-readiness requirements.
+- On 2026-06-01, REQ-WS-023 promoted parallel work planning and conflict prevention checks to shared operating structure.
 - Before implementation, link relevant spec artifacts under `_specs/` or project `specs/`.
 - Before source-code implementation, link architecture references, architecture options, and decision notes in the coding research record.
 - When enterprise/high-quality sources seed research, update or reference `enterprise-source-registry.json` and `_research/source-lists/`.

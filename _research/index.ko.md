@@ -20,6 +20,7 @@
 | 에이전트 계획 | [Perplexity식 핵심 조사 에이전트 구조](topics/agent-planning/2026-05-31-perplexity-style-research-agent.ko.md) |
 | 에이전트 계획 | [오픈소스 설치 정책](topics/agent-planning/2026-05-31-open-source-installation-policy.ko.md) |
 | 에이전트 운영 | [작업 모드 라우팅](topics/agent-operations/2026-05-31-work-mode-routing.ko.md) |
+| 에이전트 운영 | [병렬 작업 계획 구조](topics/agent-operations/2026-06-01-parallel-work-planning.ko.md) |
 | 에이전트 신뢰성 | [할루시네이션 방지 운영 레퍼런스](topics/agent-reliability/2026-05-31-hallucination-prevention.ko.md) |
 | 에이전트 메모리 | [메모리 부트스트랩](topics/agent-memory/2026-05-31-memory-bootstrap.ko.md) |
 | 에이전트 메모리 | [컨텍스트 아카이브 정책](topics/agent-memory/2026-05-31-context-archive-policy.ko.md) |

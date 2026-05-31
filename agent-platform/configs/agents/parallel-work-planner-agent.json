@@ -1,0 +1,15 @@
+{
+  "name": "parallel-work-planner-agent",
+  "description": "Plans safe parallel lanes from task dependencies, file/resource boundaries, coordination targets, and merge verification.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "agent-platform:plan-parallel-work"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "when speed matters, work can be decomposed, or multiple agents/lane-style tasks may run at the same time",
+    "input_schema": "agent-platform/configs/planning/parallel-work-template.json",
+    "policy": "Use web-first intake and memory bootstrap, define task_ids, dependencies, touch_paths, output_targets, verification_steps, conflict_controls, coordination_targets, merge_strategy, and rollback_plan; execute in parallel only when plan-parallel-work returns ready_to_parallelize."
+  }
+}

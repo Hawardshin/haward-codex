@@ -77,6 +77,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Before publishing final outputs with factual claims, run or simulate `hallucination-guard-agent` and resolve `grounding_required` gaps.
 - Do not present unsupported or unchecked claims as facts; verify them, remove them, or explicitly caveat uncertainty.
 - Keep foundational operating philosophy under `_philosophy/`; keep executable rules and workflows under `_docs/` and `_ops/`.
+- When speed matters or a request can be decomposed, use `parallel-work-planner-agent` before parallel execution. Record task IDs, dependencies, touch paths, output targets, verification, shared resources, conflict controls, coordination targets, merge strategy, rollback plan, source provenance, and plan evidence.
+- Do not run tasks that touch overlapping files, configs, generated maps, git state, or other shared mutable resources in parallel unless a dependency, lock, branch/worktree rule, or explicit handoff serializes them.
 
 ## Platformization Rules
 
@@ -120,6 +122,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/workflows/35-requirements-lifecycle.md` when a request changes durable behavior, rules, project structure, platform capability, or implementation criteria.
 - Use `_ops/workflows/36-spec-driven-development.md` when meaningful work needs implementation from requirements.
 - Use `_ops/workflows/37-skill-lifecycle.md` when creating, updating, validating, installing, or improving a custom Codex skill.
+- Use `_ops/workflows/52-parallel-work-planning.md` when the user asks for speed, multiple agents, or parallel work, or when a meaningful task naturally splits into independent lanes.
 - Check `_ops/coordination/board.ko.md` when parallel work may exist.
 - Use `_ops/workflows/40-evaluate-and-rework.md` before closing meaningful work.
 - Keep `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md` current when folders, prompts, workflows, tools, skills, or project structure change.

@@ -20,6 +20,8 @@
 - 웹 검색과 메모리 부트스트랩 후에는 작업 성격에 맞게 `quick`, `standard`, `ship_first`, `research`, `governance` 중 하나의 작업 모드를 선택한다.
 - 작업 모드는 `agent-platform/configs/workflows/work-mode-registry.json`에서 관리하며, 작은 작업은 전체 요구사항/스펙/히스토리 루프를 매번 강제하지 않는다.
 - 먼저 결과를 내야 하는 작업은 `ship_first` 모드로 처리하고, 비차단 개선은 `_ops/backlog/deferred-improvements.ko.md`에 미룬다.
+- 작업 속도가 문제되거나 여러 lane으로 나눌 수 있으면 `parallel-work-planner-agent`로 의존성, `touch_paths`, 충돌 제어, coordination target, merge 전략을 먼저 확인한다.
+- 같은 파일, 설정, 생성 맵, git 상태 같은 공유 자원을 건드리는 작업은 명시적 dependency, lock, branch/worktree 규칙 없이 병렬 실행하지 않는다.
 - 조사나 계획에 영향을 주는 검색은 공식 자료, 논문, 외국 기술 블로그, 오픈소스, 조사 아티클, 커뮤니티/소셜 신호를 폭넓게 수집한다.
 - 중요한 계획은 AI의 내부 추정만으로 세우지 않고, 웹 검색과 다른 검색 채널을 통해 인사이트를 도출한 뒤 수립한다.
 - `research-insight-planner-agent`는 핵심 조사 에이전트이며 Perplexity식 answer engine처럼 질문 이해, 검색, 출처 순위화, 증거 추출, 종합, citation grounding, skeptic review 단계를 거친다.
@@ -43,6 +45,7 @@
 - 의미 있는 요청은 `_history/request-traces/YYYY/`에서 요청, 결과, 산출물, 평가, 커밋을 연결한다.
 - 나중에 문서만 보고도 한 일을 쉽게 파악할 수 있도록 `_history/work-summaries/YYYY/` 아래 빠른 작업 요약을 남긴다.
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/`에서 한 번에 볼 수 있게 관리한다.
+- 병렬 작업이 있으면 `_ops/coordination/status.json`을 갱신하고 `_ops/coordination/board.ko.md`와 HTML board를 생성한다.
 - 여러 프로젝트는 저장소 최상단의 개별 폴더로 관리한다.
 - 프로젝트별 코드, 문서, 설정, 산출물은 해당 프로젝트 폴더 안에 둔다.
 - 새 관심사나 독립 라이프사이클이 생기면 새 루트 프로젝트로 만들고 `_ops/projects/`에 등록한다.

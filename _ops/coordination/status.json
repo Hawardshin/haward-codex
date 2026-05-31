@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-01",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, and maintainable language/architecture/folder decision rules added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, and parallel work planning rules added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -334,6 +334,25 @@
         "_specs/workspace-platform/2026-06-01-maintainable-language-architecture-folders/spec.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-06-01-maintainable-language-architecture-folders.ko.md"
+    },
+    {
+      "id": "2026-06-01-parallel-work-planning",
+      "title": "Add parallel work planning structure",
+      "project": "agent-platform",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-01",
+      "updated_at": "2026-06-01",
+      "next_action": "No action. Future work should use parallel-work-planner-agent before running independent lanes in parallel.",
+      "blockers": [],
+      "references": [
+        "agent-platform/src/agent_platform/planning/parallel_work.py",
+        "agent-platform/configs/planning/parallel-work-template.json",
+        "_ops/workflows/52-parallel-work-planning.md",
+        "_specs/workspace-platform/2026-06-01-parallel-work-planning/spec.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-06-01-parallel-work-planning.ko.md"
     }
   ]
 }

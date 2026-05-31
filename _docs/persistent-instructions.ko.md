@@ -36,6 +36,8 @@
 - 웹 검색과 메모리 부트스트랩 후에는 `agent-platform/configs/workflows/work-mode-registry.json`에서 `quick`, `standard`, `ship_first`, `research`, `governance` 중 하나의 `work_mode`를 선택한다.
 - 위험도와 지속성에 맞는 가장 가벼운 작업 모드를 사용하고, 선택한 모드가 비차단으로 둔 요구사항, 스펙, 요청 추적, 전체 종료 target을 매번 강제로 만들지 않는다.
 - `ship_first` 모드에서 비차단 개선을 뒤로 미루면 `_ops/backlog/deferred-improvements.ko.md`나 해당 프로젝트의 동등 백로그에 기록하고 평가 입력에 `deferred_improvement_targets`를 포함한다.
+- 작업 속도가 문제되거나 여러 lane으로 나눌 수 있으면 `parallel-work-planner-agent`로 의존성, `touch_paths`, 충돌 제어, coordination target, merge 전략을 먼저 확인한다.
+- 같은 파일, 설정, 생성 맵, git 상태 같은 공유 자원을 건드리는 작업은 명시적 dependency, lock, branch/worktree 규칙 없이 병렬 실행하지 않는다.
 - durable rule, 출처 설정, 프롬프트, 워크플로, 프로젝트 경계, 평가 루프가 바뀌면 `agent-platform/configs/memory/bootstrap-manifest.json`도 갱신한다.
 - 조사나 계획 작업은 공식 문서, 논문, 오픈소스 repo, 외국 기술 블로그, 조사 아티클, 커뮤니티/소셜 신호, 반대 사례를 폭넓게 수집한다.
 - 대기업 엔지니어링 블로그, 공식 연구소, architecture center, 고신뢰 독립 자료 목록은 `agent-platform/configs/research/enterprise-source-registry.json`과 `_research/source-lists/`에서 별도로 관리한다.

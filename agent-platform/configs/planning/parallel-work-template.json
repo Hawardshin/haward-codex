@@ -1,0 +1,108 @@
+{
+  "objective": "Split a meaningful request into safe parallel lanes without creating file conflicts or hidden dependencies.",
+  "work_mode": "standard",
+  "tasks": [
+    {
+      "task_id": "research",
+      "title": "Collect source evidence",
+      "owner": "research-agent",
+      "scope": "Web search, repository search, source ranking, and reusable research capture.",
+      "dependencies": [],
+      "touch_paths": [
+        "_history/web-searches/YYYY/YYYY-MM-DD-<slug>.ko.md",
+        "_research/topics/<topic>/YYYY-MM-DD-<slug>.ko.md"
+      ],
+      "output_targets": [
+        "_history/web-searches/YYYY/YYYY-MM-DD-<slug>.ko.md"
+      ],
+      "verification_steps": [
+        "Run or simulate hallucination-guard-agent for material source claims."
+      ],
+      "risk_level": "low",
+      "parallelizable": true,
+      "notes": "Research can usually run beside implementation only when implementation does not depend on research results."
+    },
+    {
+      "task_id": "implementation",
+      "title": "Implement scoped code or configuration changes",
+      "owner": "coding-agent",
+      "scope": "Source, tests, and deterministic config updates for one capability.",
+      "dependencies": [],
+      "touch_paths": [
+        "agent-platform/src/agent_platform/<area>/<file>.py",
+        "agent-platform/tests/test_<area>.py"
+      ],
+      "output_targets": [
+        "agent-platform/src/agent_platform/<area>/<file>.py"
+      ],
+      "verification_steps": [
+        "Run targeted and full tests before merge."
+      ],
+      "risk_level": "medium",
+      "parallelizable": true,
+      "notes": "Implementation lanes must not touch the same files as another active lane unless serialized."
+    },
+    {
+      "task_id": "docs",
+      "title": "Document workflow and history",
+      "owner": "docs-agent",
+      "scope": "Docs, prompts, workflows, requirements, specs, and history backfill.",
+      "dependencies": [
+        "implementation"
+      ],
+      "touch_paths": [
+        "_ops/workflows/<workflow>.md",
+        "_ops/prompts/<prompt>.md",
+        "_history/work-summaries/YYYY/YYYY-MM-DD.ko.md"
+      ],
+      "output_targets": [
+        "_ops/workflows/<workflow>.md"
+      ],
+      "verification_steps": [
+        "Run workspace index and task board checks."
+      ],
+      "risk_level": "low",
+      "parallelizable": true,
+      "notes": "Docs can run in parallel only after the shape of implementation is stable or if docs touch independent files."
+    }
+  ],
+  "shared_resources": [
+    "git index",
+    "origin/main",
+    "_ops/coordination/status.json"
+  ],
+  "conflict_controls": [
+    "Every lane records touch_paths before execution.",
+    "Tasks with overlapping touch_paths must be serialized through dependencies or a named lock.",
+    "Only the primary agent commits and pushes after final merge verification unless a separate branch/worktree policy is documented."
+  ],
+  "coordination_targets": [
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md"
+  ],
+  "merge_strategy": "Merge each lane after its own verification passes, then run full final checks from the primary workspace before commit.",
+  "communication_checkpoints": [
+    "Update coordination status when a lane starts, blocks, finishes, or changes touch_paths.",
+    "Stop and re-plan when a lane discovers it needs files owned by another lane."
+  ],
+  "verification_steps": [
+    "Run targeted lane checks.",
+    "Run full final tests/checks after merging all lane outputs.",
+    "Run work-evaluator-agent before close-out."
+  ],
+  "rollback_plan": [
+    "Keep lane outputs attributable by task_id.",
+    "If one lane fails, do not revert unrelated completed lanes.",
+    "Re-plan dependencies before retrying the failed lane."
+  ],
+  "source_value_provenance": [
+    "dependency, touch path, ownership, and conflict assumptions <- repository map, git status, project registry, and checked workflow docs"
+  ],
+  "plan_evidence": [
+    "parallel batch choice <- tasks with no dependency edge and no overlapping touch_paths",
+    "serialization choice <- dependency edge, shared touch_path, shared mutable resource, or verification dependency"
+  ],
+  "plan_history_targets": [
+    "_history/plans/YYYY/YYYY-MM-DD-<slug>.ko.md"
+  ]
+}

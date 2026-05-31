@@ -36,6 +36,8 @@ This document records durable user instructions in English.
 - After web-first intake and memory bootstrap, select a `work_mode` from `agent-platform/configs/workflows/work-mode-registry.json`: `quick`, `standard`, `ship_first`, `research`, or `governance`.
 - Use the lightest work mode that fits risk and durability; do not create requirements, specs, request traces, or full close-out targets every time when the selected mode makes them non-blocking.
 - If `ship_first` mode defers non-blocking improvements, record them in `_ops/backlog/deferred-improvements.ko.md` or the owning project's equivalent backlog and include `deferred_improvement_targets` in evaluation input.
+- When speed matters or work can be split into multiple lanes, use `parallel-work-planner-agent` to check dependencies, `touch_paths`, conflict controls, coordination targets, and merge strategy first.
+- Do not run work that touches the same files, settings, generated maps, git state, or other shared mutable resources in parallel without an explicit dependency, lock, branch/worktree rule, or handoff.
 - When durable rules, source configs, prompts, workflows, project boundaries, or evaluation loops change, update `agent-platform/configs/memory/bootstrap-manifest.json`.
 - For research or planning work, collect broad high-authority sources, including official docs, papers, open-source repos, international tech blogs, analysis articles, community/social signals, and contrary examples.
 - Manage large-company engineering blogs, official research labs, architecture centers, and high-signal independent source lists separately in `agent-platform/configs/research/enterprise-source-registry.json` and `_research/source-lists/`.

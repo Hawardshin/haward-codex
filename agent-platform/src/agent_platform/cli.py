@@ -15,6 +15,7 @@ from agent_platform.governance.config_contract import check_config_contract
 from agent_platform.memory.bootstrap import MemoryBootstrapManifest, check_memory_bootstrap
 from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidate
 from agent_platform.planning.coding_research import CodingResearchInput, complete_coding_research
+from agent_platform.planning.parallel_work import ParallelWorkPlanInput, plan_parallel_work
 from agent_platform.planning.research_insight_planner import ResearchInsightPlanInput, create_research_insight_plan
 
 
@@ -48,6 +49,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     complete_research = subparsers.add_parser("complete-coding-research", help="Check whether coding research is ready for implementation.")
     complete_research.add_argument("path", type=Path)
+
+    plan_parallel = subparsers.add_parser("plan-parallel-work", help="Check whether work can be safely split into parallel lanes.")
+    plan_parallel.add_argument("path", type=Path)
 
     check_memory = subparsers.add_parser("check-memory-bootstrap", help="Check whether durable memory anchors are ready for a new agent session.")
     check_memory.add_argument("path", type=Path)
@@ -113,6 +117,12 @@ def main(argv: list[str] | None = None) -> int:
         with args.path.open("r", encoding="utf-8") as file:
             research_input = CodingResearchInput.from_dict(json.load(file))
         print(json.dumps(complete_coding_research(research_input), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "plan-parallel-work":
+        with args.path.open("r", encoding="utf-8") as file:
+            plan_input = ParallelWorkPlanInput.from_dict(json.load(file))
+        print(json.dumps(plan_parallel_work(plan_input), indent=2, ensure_ascii=False))
         return 0
 
     if args.command == "check-memory-bootstrap":

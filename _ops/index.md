@@ -41,6 +41,7 @@
 - 더 넓은 검색 원천을 고를 때: [source-discovery-registry.json](../agent-platform/configs/research/source-discovery-registry.json)
 - 한국 사용자 리뷰/로컬 조사 소스를 볼 때: [_research/source-lists/korean-local-review-sources.ko.md](../_research/source-lists/korean-local-review-sources.ko.md), [_tools/korean-local-review/README.ko.md](../_tools/korean-local-review/README.ko.md)
 - 프롬프트를 고를 때: [_ops/prompts/00-router.md](prompts/00-router.md)
+- 속도 개선을 위해 작업을 병렬 lane으로 나눌 때: [_ops/workflows/52-parallel-work-planning.md](workflows/52-parallel-work-planning.md), [_ops/prompts/82-parallel-work-planning.md](prompts/82-parallel-work-planning.md), [parallel-work-planner-agent](../agent-platform/docs/parallel-work-planner-agent.ko.md)
 - 운영 철학을 볼 때: [_philosophy/agent-operating-philosophy.ko.md](../_philosophy/agent-operating-philosophy.ko.md)
 - 프로젝트 경계를 확인할 때: [_ops/projects/index.ko.md](projects/index.ko.md), [_docs/project-boundary-policy.ko.md](../_docs/project-boundary-policy.ko.md)
 - 웹 검색 기반 인사이트로 계획할 때: [_ops/workflows/55-research-insight-planning.md](workflows/55-research-insight-planning.md)
@@ -86,6 +87,7 @@
 - 요구사항 기준선, 변경, 검토 기록이 `_requirements/` 또는 해당 프로젝트의 `docs/requirements/`에 남았는가
 - spec-driven 산출물이 `_specs/` 또는 해당 프로젝트의 `specs/`에 남았는가
 - 소스코드 작업이면 코딩 조사에 architecture reference, 최소 2개 architecture option, decision notes가 남았는가
+- 병렬 작업이면 `plan-parallel-work` 결과, dependency, touch_paths, conflict controls, coordination targets, merge strategy가 남았는가
 - 중요한 원천값과 계획 단계가 `source_value_provenance`, `plan_evidence`, `source_provenance_targets`, `plan_evidence_targets`로 연결됐는가
 - 스킬 작업이 있었다면 `_skills/` 원본, 검증 결과, 개선 아이디어가 남았는가
 - 요청-결과 추적표가 `_history/request-traces/YYYY/`에 남았는가

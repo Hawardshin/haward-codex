@@ -12,7 +12,7 @@
       "Run default_command after changing durable rules, navigation, source configs, project boundaries, prompts, workflows, or maps."
     ],
     "owner": "agent-platform",
-    "last_reviewed": "2026-05-31",
+    "last_reviewed": "2026-06-01",
     "update_triggers": [
       "A durable user instruction becomes mandatory for future sessions.",
       "A new shared config, prompt, workflow, project registry, or map becomes part of startup context.",
@@ -31,6 +31,7 @@
       "The request-to-outcome trace layer or traceability contract changes.",
       "The web search record layer or prompt-level search contract changes.",
       "The work mode selection or deferred improvement policy changes.",
+      "The parallel work planning workflow, planner agent, or coordination lane contract changes.",
       "The installation registry or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
@@ -70,6 +71,18 @@
         "deferred improvement backlog rules"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "parallel_work_planner",
+      "title": "Parallel Work Planner Agent",
+      "path": "agent-platform/docs/parallel-work-planner-agent.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "dependency-aware lane planning",
+        "touch path and shared resource conflict checks",
+        "coordination, merge, rollback, and final verification rules for parallel work"
+      ],
+      "last_checked": "2026-06-01"
     },
     {
       "id": "self_documenting_config_policy",
@@ -463,6 +476,18 @@
       ]
     },
     {
+      "id": "parallel_work_must_be_planned_before_execution",
+      "rule": "When speed matters or work can split into independent lanes, use parallel-work-planner-agent before parallel execution and do not run overlapping touch paths or shared mutable resources in the same batch without a dependency, lock, branch/worktree rule, or explicit handoff.",
+      "reason": "The user explicitly asked for a structure that can process work in parallel when speed is a bottleneck while keeping work understandable and safe.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "parallel-work-planner-agent",
+        "plan-parallel-work"
+      ]
+    },
+    {
       "id": "install_registry_must_stay_discoverable",
       "rule": "The installation registry must remain a warm memory anchor because installs change durable dependency or environment state.",
       "reason": "Installation records are more critical than ordinary summaries because missing dependency history can break reproducibility and rollback.",
@@ -525,6 +550,7 @@
     "web_first_workflow",
     "memory_bootstrap_workflow",
     "work_mode_registry",
+    "parallel_work_workflow",
     "coordination_board",
     "project_registry",
     "platform_readme",
@@ -553,6 +579,7 @@
     "web_first_workflow",
     "memory_bootstrap_workflow",
     "work_mode_registry",
+    "parallel_work_workflow",
     "coordination_board",
     "project_registry",
     "platform_readme",
@@ -634,6 +661,14 @@
       "path": "agent-platform/configs/workflows/work-mode-registry.json",
       "tier": "hot",
       "purpose": "Selectable work modes and evaluator target policy for avoiding unnecessary full-loop overhead.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "parallel_work_workflow",
+      "path": "_ops/workflows/52-parallel-work-planning.md",
+      "tier": "warm",
+      "purpose": "Workflow for deciding safe parallel lanes from dependencies, touch paths, conflict controls, coordination targets, merge strategy, and final verification.",
       "required": true,
       "load_order": 8
     },
