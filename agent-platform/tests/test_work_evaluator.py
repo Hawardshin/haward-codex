@@ -18,6 +18,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
                 verification=("python3 -m unittest discover -s tests: OK",),
                 references_checked=("_ops/workflows/40-evaluate-and-rework.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
         )
 
@@ -33,6 +34,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("AGENTS.md",),
                 verification=("not run",),
                 references_checked=("_ops/prompts/70-evaluate-work.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
                 known_gaps=("No Python evaluator agent was added.",),
             )
         )
@@ -48,6 +50,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 result_summary="Added evaluator.",
                 changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
                 references_checked=("agent-platform/docs/work-evaluator-agent.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
         )
 
@@ -61,12 +64,30 @@ class WorkEvaluatorTests(unittest.TestCase):
                 result_summary="Added evaluator.",
                 changed_files=("agent-platform/src/agent_platform/evaluation/work_evaluator.py",),
                 verification=("python3 -m unittest discover -s tests: OK",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
             )
         )
 
         self.assertTrue(report["requires_rework"])
         self.assertIn(
             "Reference research is missing. Check prior internal work or strong external references before evaluation.",
+            report["gaps"],
+        )
+
+    def test_missing_work_summary_requires_rework(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Make work easy to understand later.",
+                result_summary="Added documentation.",
+                changed_files=("_history/README.md",),
+                verification=("manual doc review: OK",),
+                references_checked=("Keep a Changelog",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Work summary target is missing. Add a concise human-readable summary under _history/work-summaries/.",
             report["gaps"],
         )
 

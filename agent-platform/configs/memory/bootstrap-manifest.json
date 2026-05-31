@@ -7,7 +7,7 @@
     "how_to_read": [
       "Read purpose and structure_rules to understand the contract.",
       "Read reference_links to see the internal policies and external memory references behind the design.",
-      "Read startup_sequence to know the exact hot-context loading order.",
+      "Read startup_sequence to know the exact startup loading order.",
       "Read anchors to understand which files are hot, warm, or cold memory.",
       "Run default_command after changing durable rules, navigation, source configs, project boundaries, prompts, workflows, or maps."
     ],
@@ -17,6 +17,7 @@
       "A durable user instruction becomes mandatory for future sessions.",
       "A new shared config, prompt, workflow, project registry, or map becomes part of startup context.",
       "The core research-agent profile or answer-engine stage rules change.",
+      "The work summary layer or close-out documentation contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
     ]
@@ -52,6 +53,17 @@
       "used_for": [
         "rule that shared settings must include references and structure rules inside the file",
         "config contract validation criteria"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "work_summary_index",
+      "title": "Work Summary Index",
+      "path": "_history/work-summaries/README.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "human-readable completed-work summary requirement",
+        "close-out documentation target for future sessions"
       ],
       "last_checked": "2026-05-31"
     },
@@ -157,6 +169,15 @@
       "applies_to": [
         "reference_links"
       ]
+    },
+    {
+      "id": "summary_layer_must_stay_discoverable",
+      "rule": "The work summary layer must remain a warm memory anchor and close-out target so future sessions can quickly explain completed work.",
+      "reason": "The user explicitly needs to understand later what Codex did by reading repository documents.",
+      "applies_to": [
+        "anchors",
+        "required_anchor_ids"
+      ]
     }
   ],
   "field_guide": [
@@ -216,7 +237,8 @@
     "platform_readme",
     "source_registry",
     "research_agent_profile",
-    "coding_research_profile"
+    "coding_research_profile",
+    "work_summary_policy"
   ],
   "required_anchor_ids": [
     "repo_instructions",
@@ -231,7 +253,8 @@
     "platform_readme",
     "source_registry",
     "research_agent_profile",
-    "coding_research_profile"
+    "coding_research_profile",
+    "work_summary_policy"
   ],
   "anchors": [
     {
@@ -395,12 +418,20 @@
       "load_order": 26
     },
     {
+      "id": "work_summary_policy",
+      "path": "_history/work-summaries/README.ko.md",
+      "tier": "warm",
+      "purpose": "Quick human-readable completed-work summary rules and navigation.",
+      "required": true,
+      "load_order": 27
+    },
+    {
       "id": "daily_history",
       "path": "_history/2026/2026-05-31.md",
       "tier": "warm",
       "purpose": "Current dated work log and compressed context.",
       "required": true,
-      "load_order": 27
+      "load_order": 28
     },
     {
       "id": "repository_map",

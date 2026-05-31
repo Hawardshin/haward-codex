@@ -21,7 +21,7 @@
 13. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).
 14. Evaluate completed work against the initial instruction.
 15. Rework if the evaluator finds gaps, then evaluate again.
-16. Update history and maps.
+16. Update `_history/work-summaries/`, detailed history, and maps.
 17. Commit and push immediately.
 
 ## Rule

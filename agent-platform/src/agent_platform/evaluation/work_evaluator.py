@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
 
 
@@ -19,6 +19,7 @@ class WorkEvaluationInput:
     verification: tuple[str, ...] = ()
     references_checked: tuple[str, ...] = ()
     grounding_checks: tuple[str, ...] = ()
+    work_summary_targets: tuple[str, ...] = ()
     known_gaps: tuple[str, ...] = ()
     improvement_ideas: tuple[str, ...] = ()
 
@@ -31,6 +32,7 @@ class WorkEvaluationInput:
             verification=_tuple_of_strings(data.get("verification", []), "verification"),
             references_checked=_tuple_of_strings(data.get("references_checked", []), "references_checked"),
             grounding_checks=_tuple_of_strings(data.get("grounding_checks", []), "grounding_checks"),
+            work_summary_targets=_tuple_of_strings(data.get("work_summary_targets", []), "work_summary_targets"),
             known_gaps=_tuple_of_strings(data.get("known_gaps", []), "known_gaps"),
             improvement_ideas=_tuple_of_strings(data.get("improvement_ideas", []), "improvement_ideas"),
         )
@@ -54,6 +56,8 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
         improvements.append("Record changed files or explain why the work produced no file changes.")
     if not evaluation_input.references_checked:
         gaps.append("Reference research is missing. Check prior internal work or strong external references before evaluation.")
+    if not evaluation_input.work_summary_targets:
+        gaps.append("Work summary target is missing. Add a concise human-readable summary under _history/work-summaries/.")
     if not evaluation_input.grounding_checks:
         improvements.append("Run hallucination-guard-agent when the final output contains factual claims.")
 
@@ -73,6 +77,7 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
             "verification_count": len(evaluation_input.verification),
             "references_checked_count": len(evaluation_input.references_checked),
             "grounding_checks_count": len(evaluation_input.grounding_checks),
+            "work_summary_targets_count": len(evaluation_input.work_summary_targets),
         },
         "gaps": gaps,
         "improvements": improvements,

@@ -12,14 +12,15 @@
 4. Validate any reused knowledge-base content with [_ops/workflows/65-validate-knowledge-reference.md](65-validate-knowledge-reference.md).
 5. Capture reusable internet research or external references when useful.
 6. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when the final output contains factual claims.
-7. List changed files, verification results, references checked, and grounding checks.
+7. List changed files, verification results, references checked, grounding checks, and work summary targets.
 8. If a plan guided the work, link its `_history/plans/YYYY/` file.
-9. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
-10. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
-11. Complete the follow-up action.
-12. Evaluate again.
-13. Save the final evaluation report under `_history/evaluations/YYYY/`.
-14. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
+9. Confirm the user-readable summary exists under `_history/work-summaries/YYYY/`.
+10. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
+11. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
+12. Complete the follow-up action.
+13. Evaluate again.
+14. Save the final evaluation report under `_history/evaluations/YYYY/`.
+15. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
 
 ## Python Command
 
@@ -40,3 +41,5 @@ Factual grounding is part of evaluation. If the final output contains factual cl
 The final evaluation must not exist only in chat output. Save it as a Markdown file before commit.
 
 When a saved plan guided the work, the final evaluation should link the relevant `_history/plans/YYYY/` plan history file.
+
+The evaluator input must include `work_summary_targets` for meaningful work. Missing user-readable summary targets are blocking gaps.

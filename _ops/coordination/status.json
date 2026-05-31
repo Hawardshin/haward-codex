@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-05-31",
-  "summary": "Coordination board initialized. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary structure added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -31,6 +31,25 @@
         "_history/evaluations/README.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-05-31-coordination-board.ko.md"
+    },
+    {
+      "id": "2026-05-31-readable-work-summaries",
+      "title": "Add readable work summary index",
+      "project": "_history",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-05-31",
+      "updated_at": "2026-05-31",
+      "next_action": "No action. Future meaningful work should update _history/work-summaries before close-out.",
+      "blockers": [],
+      "references": [
+        "_history/work-summaries/README.ko.md",
+        "_history/work-summaries/index.html",
+        "_ops/workflows/40-evaluate-and-rework.md",
+        "agent-platform/docs/work-evaluator-agent.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-05-31-readable-work-summaries.ko.md"
     }
   ]
 }

@@ -13,6 +13,9 @@
   "grounding_checks": [
     "hallucination-guard-agent report path or check-grounding command result"
   ],
+  "work_summary_targets": [
+    "_history/work-summaries/YYYY/YYYY-MM-DD.ko.md"
+  ],
   "known_gaps": [],
   "improvement_ideas": []
 }

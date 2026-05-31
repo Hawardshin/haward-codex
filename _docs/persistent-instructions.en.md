@@ -15,6 +15,7 @@ This document records durable user instructions in English.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/`.
 - Save important planning processes as files under `_history/plans/YYYY/`.
 - Track work history under `_history/YYYY/YYYY-MM-DD.md`.
+- Maintain quick human-readable work summaries under `_history/work-summaries/YYYY/` so completed work is easy to understand later.
 - Use `_ops/` as the durable operations hub for prompts, workflows, and maps.
 - Track active agents and parallel work in `_ops/coordination/`.
 - Capture reusable findings from internet research and external references under `_research/`.
@@ -45,6 +46,7 @@ This document records durable user instructions in English.
 - Promote repeated workflows into templates, tools, skills, prompts, or workflows when useful.
 - Keep repository and prompt maps current when navigational structure changes.
 - Use `work-evaluator-agent` as the default close-out evaluator.
+- Include `work_summary_targets` in work evaluation input for meaningful work.
 - Prefer Python for agent implementations, orchestration, backend automation, evaluation, and reusable local tools.
 - Use mature, maintained, license-compatible open-source tools and libraries when they fit the task.
 - When a mature open-source tool or library fits the task, do not avoid installation by default; install it in the owning project or tool scope when needed.

@@ -12,6 +12,7 @@ If an external reference may be time-sensitive, verify current official or highl
 Compare the initial instruction, actual result, changed files, and verification results.
 Compare the result against strong references and identify what is weaker or missing.
 If the final output contains factual claims, require a grounding check from hallucination-guard-agent.
+Require work_summary_targets that point to the user-readable summary files under _history/work-summaries/YYYY/.
 Separate mismatches, missing requirements, and improvement opportunities.
 If a mismatch or omission exists, return rework_required and create follow-up actions.
 Reflect follow-up actions back into the work, then repeat the evaluation after completion.
@@ -27,6 +28,7 @@ Return ready_to_close only when there are no blocking gaps.
 - verification results
 - references checked
 - grounding checks
+- work summary targets
 - known gaps
 - improvement ideas
 

@@ -24,6 +24,7 @@
 - 이 저장소의 운영 철학은 `_philosophy/`에 둔다.
 - 의미 있는 작업의 최종 평가는 `_history/evaluations/YYYY/` 아래 파일로 남긴다.
 - 중요한 계획을 세우는 과정은 `_history/plans/YYYY/` 아래 파일로 남긴다.
+- 나중에 문서만 보고도 한 일을 쉽게 파악할 수 있도록 `_history/work-summaries/YYYY/` 아래 빠른 작업 요약을 남긴다.
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/`에서 한 번에 볼 수 있게 관리한다.
 - 여러 프로젝트는 저장소 최상단의 개별 폴더로 관리한다.
 - 프로젝트별 코드, 문서, 설정, 산출물은 해당 프로젝트 폴더 안에 둔다.
@@ -73,6 +74,7 @@ codex/
 - `_docs/`: 저장소 전체 운영 문서와 의사결정 기록
 - `_philosophy/`: 에이전트와 플랫폼 운영의 근본 철학
 - `_history/`: 날짜별 작업 히스토리와 요약
+- `_history/work-summaries/`: 사람이 빠르게 읽는 날짜별 작업 요약과 HTML 인덱스
 - `_history/plans/`: 에이전트가 계획을 세운 과정 기록
 - `_ops/`: 운영 허브, 프롬프트, 워크플로, 저장소 맵
 - `_ops/projects/`: 루트 프로젝트 등록부와 경계 관리
@@ -109,6 +111,8 @@ project-name/
 ## 작업 히스토리
 
 - 날짜별 작업 로그는 `_history/YYYY/YYYY-MM-DD.md`에 기록한다.
+- 빠른 작업 요약은 `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`와 영어 companion에 기록한다.
+- 브라우저로 한눈에 볼 요약은 `_history/work-summaries/index.html`에 둔다.
 - 로그에는 목적, 변경 파일, 주요 결정, 커밋 해시를 남긴다.
 - 컨텍스트가 길어지면 대화 내용을 요약해 히스토리와 관련 프로젝트 문서에 반영한다.
 
@@ -122,6 +126,7 @@ project-name/
 - 오픈소스 설치 기준은 `_docs/open-source-installation-policy.ko.md`를 따른다.
 - 핵심 조사 에이전트 프로필은 `agent-platform/configs/research/research-agent-profile.json`에서 확인한다.
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/board.ko.md`와 `_ops/coordination/board.html`에서 확인한다.
+- 완료된 작업을 빠르게 볼 때는 `_history/work-summaries/index.html` 또는 `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`를 먼저 확인한다.
 - 프로젝트 목록과 경계는 `_ops/projects/index.ko.md`와 `_ops/projects/registry.json`에서 확인한다.
 - 반복 프롬프트는 `_ops/prompts/`에서 관리한다.
 - 반복 워크플로는 `_ops/workflows/`에서 관리한다.
@@ -135,6 +140,7 @@ project-name/
 
 - `work-evaluator-agent`가 초기 지시, 실제 결과, 변경 파일, 검증 결과를 비교한다.
 - 평가 입력에는 작업 요약과 확인한 레퍼런스를 포함한다.
+- 평가 입력에는 사용자가 나중에 읽을 요약 파일 경로인 `work_summary_targets`를 포함한다.
 - 관련 작업을 평가할 때는 저장소 내 이전 작업, 공식 문서, 성숙한 오픈소스, 좋은 외부 사례를 먼저 확인한다.
 - 외부 사실이나 최신 정보가 계획에 영향을 주면 `research-insight-planner-agent`로 검색, 인사이트, 계획, 검증 단계를 구조화한다.
 - `research-insight-planner-agent`를 쓰는 작업은 계획 히스토리 파일 경로를 지정하고 저장한다.

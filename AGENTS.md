@@ -35,6 +35,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Before evaluation, summarize completed work and check prior internal work or strong external references relevant to the task.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/` before committing meaningful work.
 - Save important planning processes as files under `_history/plans/YYYY/`.
+- Maintain quick human-readable work summaries under `_history/work-summaries/YYYY/` before closing meaningful work.
 - Track active agents and parallel work in `_ops/coordination/status.json` and generated coordination boards.
 - Capture reusable internet research and strong external references under `_research/`.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before using it as evidence.
@@ -106,6 +107,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 
 - Use `work-evaluator-agent` to compare the initial instruction, actual result, changed files, and verification.
 - Include a completed-work summary and references checked in the evaluation input.
+- Include `work_summary_targets` in evaluation input so the user-readable summary location is checked.
 - Check repository history, existing project docs, official documentation, mature open-source projects, or other strong references before judging related work.
 - Use `research-insight-planner-agent` when planning depends on external facts, current information, prior repository knowledge, or multiple references.
 - Use `coding-research-agent` when coding work needs investigation before implementation, especially for APIs, dependencies, architecture, bug root cause, performance, security, migrations, tests, or implementation patterns.
@@ -118,6 +120,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Re-run relevant tests or checks after rework.
 - Non-blocking improvements can be recorded in history or project docs, but blocking gaps must be fixed.
 - Save evaluation reports as `_history/evaluations/YYYY/YYYY-MM-DD-<slug>.ko.md`; add an English companion when the report is important durable context.
+- Save quick work summaries as `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`; add an English companion for important durable context.
 - The Python evaluator entry point is `PYTHONPATH=src python3 -m agent_platform.cli evaluate-work <input.json>` from `agent-platform/`.
 
 ## Capability Creation Rules
@@ -138,6 +141,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 ## Context Management Rules
 
 - When conversation context becomes long, compress stable decisions into `_history/YYYY/YYYY-MM-DD.md` and the relevant project docs.
+- When closing meaningful work, update `_history/work-summaries/` with a scan-friendly summary that links to detailed history, plans, evaluations, and key files.
 - Keep the latest project purpose, status, commands, and constraints in that project's `README.md`.
 - Preserve only durable information in docs: decisions, requirements, command results worth reusing, and links to artifacts.
 - Avoid relying on chat history for project state that future work needs.

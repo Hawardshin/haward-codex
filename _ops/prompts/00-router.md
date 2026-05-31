@@ -37,5 +37,5 @@ For research-heavy work, use research-insight-planner-agent with agent-platform/
 If the request needs coding research before implementation, use coding-research-agent and answer every post-research question before coding.
 If a reusable pattern appears, record it as a documentation, tool, template, skill, prompt, or workflow candidate.
 Ground factual claims with hallucination-guard-agent before publishing final outputs that contain facts.
-After the work, run the evaluator against the initial instruction, then verify history, maps, commit, and push status.
+After the work, update work summaries, run the evaluator against the initial instruction, then verify history, maps, commit, and push status.
 ```
