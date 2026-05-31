@@ -2,13 +2,14 @@
 
 ## Purpose
 
-Do not create important plans from the model's internal probabilistic guess alone. Gather evidence through web search, repository search, official docs, papers, code/package references, and other search channels, then convert that evidence into insights before creating the execution plan.
+Every new instruction starts with web search. Important plans should not be created from the model's internal probabilistic guess alone. Gather evidence through web search, repository search, official docs, papers, code/package references, and other search channels, then convert that evidence into insights before creating the execution plan.
 
 The philosophical basis lives in [_philosophy/agent-operating-philosophy.en.md](../_philosophy/agent-operating-philosophy.en.md). This document turns that philosophy into an execution policy.
 
 ## Principles
 
-- Search first when the task depends on current information or external facts.
+- Start every new user instruction with web search.
+- For current information or external facts, review source content and record the access date.
 - Use web search plus at least one other search channel.
 - Do not copy search results directly into a plan; turn evidence into decision-relevant insights.
 - Validate internal knowledge-base references with `knowledge-skeptic-agent`.

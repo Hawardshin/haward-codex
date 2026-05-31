@@ -71,3 +71,9 @@ Record reusable evidence for designing hallucination prevention policy, prompts,
 
 - Refine claim types and risk levels by domain as more projects are created.
 - Recheck this note when OpenAI, Anthropic, or other model providers change grounding, citation, or eval features.
+
+## Later Policy Change
+
+- On 2026-05-31, the user instructed that every new instruction should start with web search.
+- The earlier insight that the shared policy should not be "always search" remains only as guidance for search depth.
+- The current operating rule is to always perform web-first intake, then vary additional search and grounding depth by task risk.

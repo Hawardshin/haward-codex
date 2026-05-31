@@ -9,6 +9,7 @@
 - 커밋이 만들어지면 바로 원격 저장소에 push한다.
 - 의미 있는 작업을 닫기 전 초기 지시와 결과를 평가하고, 차이가 있으면 재작업한다.
 - 평가 전에는 했던 작업을 요약하고 관련된 이전 작업이나 좋은 레퍼런스를 먼저 조사한다.
+- 앞으로 모든 새 지시는 웹 검색을 먼저 수행한 뒤 계획, 저장소 탐색, 구현으로 들어간다.
 - 중요한 계획은 AI의 내부 추정만으로 세우지 않고, 웹 검색과 다른 검색 채널을 통해 인사이트를 도출한 뒤 수립한다.
 - 최종 산출물에 사실 주장이 포함되면 `hallucination-guard-agent`로 근거, 검증, 불확실성 표시를 확인한다.
 - 이 저장소의 운영 철학은 `_philosophy/`에 둔다.
@@ -103,6 +104,7 @@ project-name/
 ## 운영 허브
 
 - 작업 시작점은 `_ops/index.md`로 둔다.
+- 모든 새 지시는 `_ops/workflows/05-web-first-intake.md`에 따라 웹 검색으로 시작한다.
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/board.ko.md`와 `_ops/coordination/board.html`에서 확인한다.
 - 프로젝트 목록과 경계는 `_ops/projects/index.ko.md`와 `_ops/projects/registry.json`에서 확인한다.
 - 반복 프롬프트는 `_ops/prompts/`에서 관리한다.

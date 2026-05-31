@@ -1,0 +1,40 @@
+# Web-First Intake Workflow
+
+## Purpose
+
+모든 새 사용자 지시를 웹 검색으로 먼저 확인한 뒤 작업을 시작한다.
+
+## Sequence
+
+1. 사용자 지시를 한 문장으로 요약한다.
+2. 웹 검색어를 1개 이상 만든다.
+3. 웹 검색을 실행한다.
+4. 공식 문서, 1차 출처, 논문, 성숙한 오픈소스, 신뢰 가능한 레퍼런스를 우선 확인한다.
+5. 계획에 영향을 주는 출처는 원문을 열어 확인한다.
+6. 검색 결과가 무관하거나 약하면 그 사실을 기록하고 로컬 저장소 검증으로 진행한다.
+7. 외부 사실이나 최신 정보가 있으면 확인 날짜와 출처를 기록한다.
+8. 검색 결과가 계획을 바꾸면 `research-insight-planner-agent`를 사용하고 계획 히스토리에 남긴다.
+9. 재사용 가치가 있는 내용은 `_research/`에 저장한다.
+10. 이후 [_ops/workflows/00-start-here.md](00-start-here.md)의 저장소 탐색과 구현 단계로 이동한다.
+
+## Search Quality Rules
+
+- 검색 결과 제목만 근거로 사용하지 않는다.
+- 공식 문서와 1차 출처를 우선한다.
+- 출처가 충돌하면 단정하지 않는다.
+- 민감한 프로젝트 정보는 일반화해서 검색한다.
+- 웹 검색이 실패하면 실패를 평가 보고서에 남긴다.
+
+## Output
+
+- 검색어
+- 확인한 출처
+- 계획에 반영할 인사이트
+- 무시한 약한 출처 또는 무관한 결과
+- 추가 검색 필요 여부
+
+## Related
+
+- [_docs/web-first-work-policy.ko.md](../../_docs/web-first-work-policy.ko.md)
+- [_ops/prompts/05-web-first-intake.md](../prompts/05-web-first-intake.md)
+- [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md)

@@ -5,6 +5,7 @@
 | Topic | Note |
 | --- | --- |
 | Agent planning | [Search insight planning](topics/agent-planning/2026-05-31-search-insight-planning.en.md) |
+| Agent planning | [Web-first work policy](topics/agent-planning/2026-05-31-web-first-work-policy.en.md) |
 | Agent reliability | [Hallucination prevention operating references](topics/agent-reliability/2026-05-31-hallucination-prevention.en.md) |
 
 ## Update Rules

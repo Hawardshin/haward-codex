@@ -19,6 +19,7 @@
 ## Navigation
 
 - 작업을 시작할 때: [_ops/workflows/00-start-here.md](workflows/00-start-here.md)
+- 모든 지시의 첫 웹 검색: [_ops/workflows/05-web-first-intake.md](workflows/05-web-first-intake.md), [_docs/web-first-work-policy.ko.md](../_docs/web-first-work-policy.ko.md)
 - 프롬프트를 고를 때: [_ops/prompts/00-router.md](prompts/00-router.md)
 - 운영 철학을 볼 때: [_philosophy/agent-operating-philosophy.ko.md](../_philosophy/agent-operating-philosophy.ko.md)
 - 프로젝트 경계를 확인할 때: [_ops/projects/index.ko.md](projects/index.ko.md), [_docs/project-boundary-policy.ko.md](../_docs/project-boundary-policy.ko.md)

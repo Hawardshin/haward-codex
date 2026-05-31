@@ -12,25 +12,26 @@
 ## Operating Loop
 
 1. Capture the user's intent as a project requirement, rule, or artifact.
-2. Use `_ops/index.md` and `_ops/prompts/00-router.md` to select the operating path.
-3. Decide whether the work belongs to an existing project or a new root-level project.
-4. Keep project-specific work inside the owning project folder and register root projects under `_ops/projects/`.
-5. Keep foundational philosophy in `_philosophy/` and execution rules in `_docs/` or `_ops/`.
-6. Implement or document the smallest useful change.
-7. Prefer Python for agent implementation unless another runtime is clearly better.
-8. Evaluate mature open-source options before building core infrastructure from scratch.
-9. For planning that depends on external facts, use web search and at least one other search channel to derive insights before execution.
-10. Save important planning processes under `_history/plans/YYYY/`.
-11. Promote repeated work into a template, tool, skill, prompt, or workflow.
-12. Record important context in `_history/`.
-13. Refresh `_ops/maps/` when navigational structure changes.
-14. Summarize completed work.
-15. Check prior internal work and strong references relevant to the task.
-16. Capture reusable internet research or external references.
-17. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
-18. Evaluate the completed work against the initial instruction.
-19. Rework real gaps and evaluate again.
-20. Commit the coherent change set and push it.
+2. Run web search first using `_ops/workflows/05-web-first-intake.md`.
+3. Use `_ops/index.md` and `_ops/prompts/00-router.md` to select the operating path.
+4. Decide whether the work belongs to an existing project or a new root-level project.
+5. Keep project-specific work inside the owning project folder and register root projects under `_ops/projects/`.
+6. Keep foundational philosophy in `_philosophy/` and execution rules in `_docs/` or `_ops/`.
+7. Implement or document the smallest useful change.
+8. Prefer Python for agent implementation unless another runtime is clearly better.
+9. Evaluate mature open-source options before building core infrastructure from scratch.
+10. For planning that depends on external facts, use web search and at least one other search channel to derive insights before execution.
+11. Save important planning processes under `_history/plans/YYYY/`.
+12. Promote repeated work into a template, tool, skill, prompt, or workflow.
+13. Record important context in `_history/`.
+14. Refresh `_ops/maps/` when navigational structure changes.
+15. Summarize completed work.
+16. Check prior internal work and strong references relevant to the task.
+17. Capture reusable internet research or external references.
+18. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
+19. Evaluate the completed work against the initial instruction.
+20. Rework real gaps and evaluate again.
+21. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -50,6 +51,7 @@ Promote work only when it will reduce future effort.
 | Same search-to-insight-to-plan pattern repeated | Planning agent |
 | Same need to explain planning decisions later | Plan history template |
 | Same need to block unsupported factual claims | Hallucination guard agent |
+| Same need to start every instruction with web search | Web-first intake workflow |
 
 ## Context Compression
 

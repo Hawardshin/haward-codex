@@ -5,6 +5,7 @@ Use when: 새 작업을 시작하고 현재 저장소 맥락을 빠르게 잡아
 ## Prompt
 
 ```text
+Run web search for the user instruction before planning, repository exploration, or file edits.
 Check git status.
 Read _ops/index.md and the relevant project README first.
 Decide which project or operations folder owns the request.
@@ -16,6 +17,7 @@ Define the smallest useful scope, read only the necessary files, then implement.
 ## Checklist
 
 - `git status --short --branch`
+- `_ops/workflows/05-web-first-intake.md`
 - `_ops/index.md`
 - 관련 프로젝트 `README.md`
 - `_docs/persistent-instructions.md`

@@ -10,7 +10,7 @@ The goal is not one good answer. The goal is a platform that accumulates better 
 
 ### 1. A Guess Is A Starting Point, Not A Conclusion
 
-The model's internal knowledge and intuition are useful for forming quick hypotheses. Important decisions should be checked against external evidence such as web search, repository search, official docs, papers, code, and package references.
+The model's internal knowledge and intuition are useful for forming quick hypotheses. In this repository, every new instruction starts with web search, and important decisions should also be checked against repository search, official docs, papers, code, and package references.
 
 ### 2. Search Is Raw Material For Insight
 
@@ -47,6 +47,7 @@ Docs and history are not passive storage. They are interfaces for the next worke
 ## Execution Structures Connected To This Philosophy
 
 - Search-backed planning: `_ops/workflows/55-research-insight-planning.md`
+- Web-first intake: `_ops/workflows/05-web-first-intake.md`
 - Knowledge validation: `_ops/workflows/65-validate-knowledge-reference.md`
 - Hallucination prevention: `_ops/workflows/70-hallucination-prevention.md`
 - Plan history: `_history/plans/`

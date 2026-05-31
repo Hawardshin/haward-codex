@@ -14,7 +14,7 @@ The operating philosophy lives in [_philosophy/agent-operating-philosophy.en.md]
 - Mark weakly supported content as `uncertain`, `inferred`, or `needs verification` instead of presenting it as fact.
 - Do not make a definitive claim when sources conflict until the conflict is resolved.
 - Verify code and repository state through real file inspection, tests, or command execution.
-- Prefer web search or official documentation for external facts and current information.
+- Start every new instruction with web search; for external facts and current information, review source content and record the access date.
 - Use at least two independent evidence sources for high-risk judgments.
 - Close final outputs through `hallucination-guard-agent` and `work-evaluator-agent`.
 

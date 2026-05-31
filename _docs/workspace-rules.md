@@ -116,6 +116,14 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Run `_tools/workspace-index` after navigational structure changes.
 - Run `_tools/task-board` after coordination status changes.
 
+## Web-First Work Policy
+
+- Every new user instruction starts with web search before planning, repository exploration, or file edits.
+- Use [_docs/web-first-work-policy.ko.md](web-first-work-policy.ko.md) and `_ops/workflows/05-web-first-intake.md` for the intake sequence.
+- If search results are irrelevant, record that and proceed with repository-local verification.
+- If web search fails, record the failure and strengthen local verification before final claims.
+- Save only reusable search findings under `_research/`.
+
 ## Evaluation Policy
 
 - Meaningful work should pass an evaluation step before close-out.

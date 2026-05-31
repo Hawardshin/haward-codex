@@ -6,6 +6,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 
 | Situation | Use |
 | --- | --- |
+| 모든 새 지시를 처리하기 전에 웹 검색을 먼저 한다 | [05-web-first-intake.md](05-web-first-intake.md) |
 | 새 작업을 시작한다 | [10-start-work.md](10-start-work.md) |
 | 새 프로젝트를 만든다 | [20-create-project.md](20-create-project.md) |
 | 작업이나 관심사의 프로젝트 소유 경계를 정한다 | [25-scope-project-boundary.md](25-scope-project-boundary.md) |
@@ -25,6 +26,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 
 ```text
 Classify the current request using the repository's persistent rules and _ops/index.md.
+Run web-first intake before planning, repository exploration, or file edits.
 Select the relevant prompt and workflow.
 If the request expresses a durable worldview or operating philosophy, update _philosophy/ and link policy docs to it.
 If the request creates or touches a specific project, decide the owning project folder before editing files.

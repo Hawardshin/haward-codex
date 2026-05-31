@@ -19,6 +19,8 @@ This document records durable user instructions in English.
 - Track active agents and parallel work in `_ops/coordination/`.
 - Capture reusable findings from internet research and external references under `_research/`.
 - Keep foundational agent and platform operating philosophy under `_philosophy/`.
+- Run web search first for every new user instruction before planning, repository exploration, or file edits.
+- If web search is irrelevant or unavailable, record that and continue with stronger local verification.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before relying on it.
 - For important plans, do not rely only on the model's internal guess; use web search plus another search channel to derive insights before planning.
 - Work that uses `research-insight-planner-agent` should set `plan_history_targets` and record plan changes.
