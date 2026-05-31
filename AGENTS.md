@@ -32,10 +32,20 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Treat the repository as a monorepo for a personal agent-building platform.
 - Keep reusable platform concepts in `agent-platform/` unless they clearly belong to another project.
 - When a workflow repeats or creates avoidable friction, consider promoting it into a template, tool, or skill.
+- Prefer Python for agent implementations unless the project constraints clearly favor another runtime.
+- Before hand-rolling agent infrastructure, evaluate mature open-source libraries, frameworks, and tools that can reduce maintenance cost.
 - Prefer the smallest reusable asset that solves the problem:
   - template for repeated file or folder structure
   - tool for deterministic execution, conversion, validation, or generation
   - skill for repeated agent behavior, domain rules, or multi-step workflows
+
+## Persistent Instruction Rules
+
+- Treat user instructions phrased as ongoing preferences or future operating rules as durable repository rules.
+- Persist durable instructions in `AGENTS.md`, `README.md`, `_docs/persistent-instructions.md`, or the relevant project docs.
+- Record the instruction in `_history/YYYY/YYYY-MM-DD.md` when it changes future behavior.
+- Do not rely on chat memory for instructions that should affect future work.
+- If a durable instruction conflicts with an older rule, update the docs so the current rule is explicit.
 
 ## Capability Creation Rules
 
@@ -45,6 +55,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - For new tools, prefer `_tools/<tool-name>/` for shared tools or `project-name/tools/` for project-specific tools.
 - Document each reusable tool with its purpose, inputs, outputs, and main command.
 - Do not create a new skill or tool when a short documented procedure is enough.
+- Prefer open-source dependencies and tools when they are mature, maintained, license-compatible, and fit the task.
+- When choosing external dependencies for current work, verify their current status and docs instead of relying only on memory.
 
 ## Context Management Rules
 

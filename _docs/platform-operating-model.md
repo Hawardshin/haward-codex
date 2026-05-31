@@ -14,9 +14,11 @@
 1. Capture the user's intent as a project requirement, rule, or artifact.
 2. Decide whether the work belongs to an existing project or a new root-level project.
 3. Implement or document the smallest useful change.
-4. Promote repeated work into a template, tool, or skill.
-5. Record important context in `_history/`.
-6. Commit the coherent change set.
+4. Prefer Python for agent implementation unless another runtime is clearly better.
+5. Evaluate mature open-source options before building core infrastructure from scratch.
+6. Promote repeated work into a template, tool, or skill.
+7. Record important context in `_history/`.
+8. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -28,6 +30,7 @@ Promote work only when it will reduce future effort.
 | Same command, conversion, validation, or generation repeated | Tool |
 | Same multi-step reasoning or domain workflow repeated | Skill |
 | Same visual artifact style repeated | HTML template |
+| Same user preference or operating instruction repeated | Persistent rule |
 
 ## Context Compression
 
@@ -39,3 +42,15 @@ When the active conversation becomes long, the agent should move durable state i
 - reusable procedures into `_templates/`, `_tools/`, or `_skills/`
 
 The goal is that future work can resume from the repository without needing the full chat history.
+
+## Technology Preference
+
+Python is the default implementation language for agents, orchestration, automation, evaluation, and backend utilities.
+
+Use other runtimes when they are a better fit for the surface being built:
+
+- HTML/CSS/JavaScript for browser-native artifacts and frontend UI
+- Node.js when the existing project is already Node-based or the ecosystem fit is materially better
+- shell scripts only for small glue tasks
+
+Prefer mature open-source projects when they reduce maintenance cost and fit the task constraints.

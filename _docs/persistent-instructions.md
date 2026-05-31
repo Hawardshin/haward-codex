@@ -1,0 +1,20 @@
+# Persistent Instructions
+
+이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다.
+
+## Active Instructions
+
+- Manage this repository as a monorepo for a personal agent-building platform.
+- Keep separate projects as root-level `kebab-case` folders.
+- Commit every completed meaningful change set.
+- Push completed commits to `origin/main` immediately unless explicitly told not to push.
+- Track work history under `_history/YYYY/YYYY-MM-DD.md`.
+- Compress long conversation context into repository docs and history logs.
+- Promote repeated workflows into templates, tools, or skills when useful.
+- Prefer Python for agent implementations, orchestration, backend automation, evaluation, and reusable local tools.
+- Use mature, maintained, license-compatible open-source tools and libraries when they fit the task.
+- Consider HTML artifacts when browser rendering, visual hierarchy, dashboards, or interactive review are more useful than Markdown.
+
+## Maintenance Rule
+
+When the user gives an instruction that should affect future work, update this file and any directly relevant operational document in the same change set.

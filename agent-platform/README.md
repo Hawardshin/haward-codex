@@ -14,6 +14,8 @@
 - Define how agents are created, configured, evaluated, and improved.
 - Track reusable skills and tools as platform capabilities.
 - Keep project history and decisions outside transient chat context.
+- Prefer Python for agent runtimes, orchestration, evaluation, and backend automation.
+- Prefer mature open-source components before custom platform infrastructure.
 - Use Markdown for durable text documentation.
 - Use HTML for visual, reviewable, dashboard-like, or standalone artifacts when useful.
 

@@ -29,6 +29,8 @@ Create a tool when work repeatedly needs deterministic execution:
 
 Shared tools belong under `_tools/<tool-name>/`. Project-specific tools belong under `project-name/tools/`.
 
+Prefer Python for shared tools unless another runtime is clearly more appropriate.
+
 ## When to Create a Template
 
 Create a template when the repeated value is structure rather than execution:
@@ -56,3 +58,4 @@ Every reusable capability must state:
 - creating a script before the workflow is understood
 - hiding important project state inside a tool without documenting it
 - installing global capabilities without tracking their source in this repository
+- reimplementing mature open-source functionality without a concrete reason

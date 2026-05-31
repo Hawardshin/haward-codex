@@ -13,6 +13,8 @@ The platform should eventually help with:
 - compressing long-running context into durable documents
 - producing Markdown and HTML artifacts
 - evaluating agent outputs
+- defaulting to Python for agent implementation
+- leveraging mature open-source software where it fits
 
 ## Near-Term Priorities
 
@@ -20,7 +22,8 @@ The platform should eventually help with:
 2. Establish a repeatable history and documentation process.
 3. Create reusable templates for projects and artifacts.
 4. Promote repeated workflows into tools or skills.
-5. Start implementation only when the operating model is clear enough.
+5. Identify Python-first and open-source-first implementation paths.
+6. Start implementation only when the operating model is clear enough.
 
 ## Open Questions
 
