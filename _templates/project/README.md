@@ -13,6 +13,7 @@ Describe what this project does and why it exists.
 
 ```text
 .
+  artifacts/
   docs/
   src/
   tests/
@@ -21,4 +22,3 @@ Describe what this project does and why it exists.
 ## Commands
 
 Document setup, test, and run commands here as they are introduced.
-

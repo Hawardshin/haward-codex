@@ -13,7 +13,10 @@
 | Folder | Purpose |
 | --- | --- |
 | `_docs/` | 저장소 전체 문서, 규칙, 의사결정 기록 |
+| `_history/` | 날짜별 작업 로그와 컨텍스트 압축 요약 |
+| `_skills/` | git으로 추적할 커스텀 Codex 스킬 원본 |
 | `_templates/` | 새 프로젝트 기본 템플릿 |
+| `_tools/` | 여러 프로젝트에서 재사용하는 로컬 도구와 스크립트 |
 | `_archive/` | 중단, 폐기, 보류된 프로젝트 |
 
 ## Project Naming
@@ -44,6 +47,8 @@ Every project must include a `README.md` with:
 - main commands
 - important decisions or constraints
 
+Project-specific visual or generated outputs should live under `artifacts/`.
+
 ## Commit Cadence
 
 Commit after each coherent change set, especially after:
@@ -56,3 +61,23 @@ Commit after each coherent change set, especially after:
 
 Do not mix unrelated project changes in one commit unless the change is intentionally cross-project.
 
+## History Policy
+
+- Maintain dated work logs under `_history/YYYY/YYYY-MM-DD.md`.
+- Add a log entry when a task changes repository structure, project direction, reusable capabilities, or important artifacts.
+- Include the commit hash after committing when practical.
+- Use the history log to preserve context when a conversation becomes too long.
+
+## Markdown vs HTML
+
+Markdown is the default for durable text documentation.
+
+Use or propose HTML when the output benefits from:
+
+- browser-native layout
+- tables, dashboards, or visual hierarchy
+- interactive review
+- standalone sharing
+- UI or product specification mockups
+
+HTML artifacts should normally be stored in `project-name/artifacts/`.
