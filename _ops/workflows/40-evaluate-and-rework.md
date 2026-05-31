@@ -12,7 +12,7 @@
 4. Validate any reused knowledge-base content with [_ops/workflows/65-validate-knowledge-reference.md](65-validate-knowledge-reference.md).
 5. Capture reusable internet research or external references when useful.
 6. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when the final output contains factual claims.
-7. List changed files, verification results, references checked, grounding checks, web search record targets, user request summary targets, requirements targets, spec targets, request trace targets, work summary targets, context archive targets when archiving occurred, and installation record targets when installation occurred.
+7. List changed files, verification results, references checked, grounding checks, web search record targets, user request summary targets, requirements targets, spec targets, skill targets and validation targets when skill work occurred, request trace targets, work summary targets, context archive targets when archiving occurred, and installation record targets when installation occurred.
 8. If a plan guided the work, link its `_history/plans/YYYY/` file.
 9. Confirm the user-readable summary exists under `_history/work-summaries/YYYY/`.
 10. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
@@ -45,6 +45,8 @@ The evaluator input must include `user_request_summary_targets` for meaningful w
 The evaluator input must include `requirements_targets` for meaningful work. Missing requirements baseline, change, or review targets are blocking gaps.
 
 The evaluator input must include `spec_targets` for meaningful work. Missing spec-driven artifacts are blocking gaps.
+
+When skill work occurred, the evaluator input must include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`. Missing skill source or validation targets are blocking gaps.
 
 The evaluator input must include `request_trace_targets` for meaningful work. Missing request-to-outcome traces are blocking gaps.
 

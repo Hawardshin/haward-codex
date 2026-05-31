@@ -49,6 +49,7 @@
 - 요구사항을 정의/검토/변경할 때: [_ops/workflows/35-requirements-lifecycle.md](workflows/35-requirements-lifecycle.md), [_ops/prompts/35-manage-requirements.md](prompts/35-manage-requirements.md), [agent-platform/docs/requirements-manager-agent.ko.md](../agent-platform/docs/requirements-manager-agent.ko.md)
 - spec-driven 산출물을 볼 때: [_specs/README.ko.md](../_specs/README.ko.md), [_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md](../_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md)
 - 요구사항을 스펙/계획/작업/검증으로 바꿀 때: [_ops/workflows/36-spec-driven-development.md](workflows/36-spec-driven-development.md), [_ops/prompts/36-manage-spec.md](prompts/36-manage-spec.md), [agent-platform/docs/spec-driven-planner-agent.ko.md](../agent-platform/docs/spec-driven-planner-agent.ko.md)
+- 커스텀 스킬을 만들거나 검증/개선할 때: [_docs/skill-lifecycle-policy.ko.md](../_docs/skill-lifecycle-policy.ko.md), [_ops/workflows/37-skill-lifecycle.md](workflows/37-skill-lifecycle.md), [_ops/prompts/37-manage-skill.md](prompts/37-manage-skill.md), [agent-platform/docs/skill-lifecycle-agent.ko.md](../agent-platform/docs/skill-lifecycle-agent.ko.md)
 - 요청이 어떤 결과로 이어졌는지 볼 때: [_history/request-traces/README.ko.md](../_history/request-traces/README.ko.md), [_docs/request-traceability-policy.ko.md](../_docs/request-traceability-policy.ko.md)
 - 완료된 작업을 빠르게 볼 때: [_history/work-summaries/README.ko.md](../_history/work-summaries/README.ko.md), [_history/work-summaries/index.html](../_history/work-summaries/index.html)
 - 진행 중인 에이전트/병렬 작업을 볼 때: [_ops/coordination/board.ko.md](coordination/board.ko.md), [_ops/coordination/board.html](coordination/board.html)
@@ -74,6 +75,7 @@
 - 사용자 요청 요약이 `_history/user-requests/YYYY/`에 남았는가
 - 요구사항 기준선, 변경, 검토 기록이 `_requirements/` 또는 해당 프로젝트의 `docs/requirements/`에 남았는가
 - spec-driven 산출물이 `_specs/` 또는 해당 프로젝트의 `specs/`에 남았는가
+- 스킬 작업이 있었다면 `_skills/` 원본, 검증 결과, 개선 아이디어가 남았는가
 - 요청-결과 추적표가 `_history/request-traces/YYYY/`에 남았는가
 - 설치가 발생했다면 `_history/installations/YYYY/`와 `_ops/installations/registry.json`이 갱신됐는가
 - `_ops/maps/`가 현재 구조를 반영하는가

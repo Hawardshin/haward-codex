@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-05-31",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, request-to-outcome trace, and daily collected summary structures added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -201,6 +201,25 @@
         "agent-platform/docs/spec-driven-planner-agent.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-05-31-spec-driven-development.ko.md"
+    },
+    {
+      "id": "2026-05-31-skill-lifecycle",
+      "title": "Make skill creation and validation explicit",
+      "project": "_skills",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-05-31",
+      "updated_at": "2026-05-31",
+      "next_action": "No action. Future skill work must update skill source, validation targets, forward-test scenarios, and improvement ideas before close-out.",
+      "blockers": [],
+      "references": [
+        "_skills/create-validated-skill/SKILL.md",
+        "_docs/skill-lifecycle-policy.ko.md",
+        "_ops/workflows/37-skill-lifecycle.md",
+        "agent-platform/docs/skill-lifecycle-agent.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-05-31-skill-lifecycle.ko.md"
     }
   ]
 }

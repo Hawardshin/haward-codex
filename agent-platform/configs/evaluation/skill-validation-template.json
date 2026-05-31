@@ -1,0 +1,19 @@
+{
+  "skill_path": "_skills/example-skill",
+  "intended_use": "Why this skill should exist and which repeated workflow it improves.",
+  "trigger_examples": [
+    "User-facing prompt that should trigger this skill.",
+    "Another realistic prompt or update request that should trigger this skill."
+  ],
+  "validation_steps": [
+    "python3 /Users/shinjoungeun/.codex/skills/.system/skill-creator/scripts/quick_validate.py _skills/example-skill",
+    "PYTHONPATH=agent-platform/src python3 -m agent_platform.cli validate-skill /private/tmp/example-skill-validation.json"
+  ],
+  "forward_test_scenarios": [
+    "Use $example-skill to complete a realistic task without leaking expected answers."
+  ],
+  "improvement_ideas": [
+    "Next improvement to test after real usage, or explicit note that no immediate improvement was found."
+  ],
+  "known_gaps": []
+}

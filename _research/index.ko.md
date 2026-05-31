@@ -24,6 +24,7 @@
 | 문서화 | [요청-결과 추적](topics/documentation/2026-05-31-request-outcome-trace.ko.md) |
 | 요구사항 관리 | [요구사항 관리 생명주기](topics/requirements/2026-05-31-requirements-management.ko.md) |
 | 요구사항 관리 | [Spec-Driven 개발 구조](topics/requirements/2026-05-31-spec-driven-development.ko.md) |
+| 스킬 생명주기 | [스킬 생성/검증/개선 구조](topics/requirements/2026-05-31-skill-lifecycle.ko.md) |
 | 의존성 관리 | [설치 감사 기록 정책](topics/dependency-management/2026-05-31-installation-audit-trail.ko.md) |
 
 ## 갱신 규칙

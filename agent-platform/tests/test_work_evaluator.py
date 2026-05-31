@@ -316,6 +316,34 @@ class WorkEvaluatorTests(unittest.TestCase):
             report["gaps"],
         )
 
+    def test_skill_work_requires_skill_targets(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Create a reusable skill.",
+                result_summary="Created a skill without validation targets.",
+                changed_files=("_skills/example-skill/SKILL.md",),
+                verification=("manual review",),
+                references_checked=("skill-creator guidance",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-skill.ko.md",),
+                user_request_summary_targets=("_history/user-requests/2026/2026-05-31.ko.md",),
+                requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-05-31-skill-lifecycle-governance/spec.ko.md",),
+                skill_work_occurred=True,
+                request_trace_targets=("_history/request-traces/2026/2026-05-31.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Skill work occurred but skill_targets is missing. Add the created or updated skill source path.",
+            report["gaps"],
+        )
+        self.assertIn(
+            "Skill work occurred but skill_validation_targets is missing. Add a validate-skill input, report, or evaluation target.",
+            report["gaps"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

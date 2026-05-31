@@ -25,6 +25,13 @@
   "spec_targets": [
     "_specs/scope/YYYY-MM-DD-slug/spec.ko.md"
   ],
+  "skill_work_occurred": false,
+  "skill_targets": [
+    "_skills/example-skill/SKILL.md"
+  ],
+  "skill_validation_targets": [
+    "agent-platform/configs/evaluation/skill-validation-template.json or _history/evaluations/YYYY/YYYY-MM-DD-skill.ko.md"
+  ],
   "request_trace_targets": [
     "_history/request-traces/YYYY/YYYY-MM-DD.ko.md"
   ],

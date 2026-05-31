@@ -21,6 +21,7 @@
 - Save shared requirements under `_requirements/`; save project-specific requirements under the owning project's `docs/requirements/`.
 - Use a spec-driven structure for meaningful implementation work: turn requirements into spec, plan, tasks, validation, and traceability artifacts before coding.
 - Save shared specs under `_specs/`; save project-specific specs under the owning project's `specs/`.
+- Make custom skill creation and updates explicit: keep source under `_skills/`, validate each skill, forward-test realistic scenarios when useful, and record improvement ideas.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/`.
 - Save important planning processes as files under `_history/plans/YYYY/`.
 - Save summaries of meaningful user requests under `_history/user-requests/YYYY/`, without preserving full original prompt text by default.
@@ -66,6 +67,7 @@
 - Include `user_request_summary_targets` in work evaluation input for meaningful work.
 - Include `requirements_targets` in work evaluation input for meaningful work.
 - Include `spec_targets` in work evaluation input for meaningful work.
+- If skill work occurred, include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets` in work evaluation input.
 - Include `request_trace_targets` in work evaluation input for meaningful work.
 - Include `work_summary_targets` in work evaluation input for meaningful work.
 - Prefer Python for agent implementations, orchestration, backend automation, evaluation, and reusable local tools.

@@ -15,20 +15,21 @@
 7. Confirm the user request summary exists under `_history/user-requests/YYYY/`.
 8. Confirm the active requirements baseline, change, or review record exists under `_requirements/` or the owning project's `docs/requirements/`.
 9. Confirm the active spec-driven artifacts exist under `_specs/` or the owning project's `specs/`.
-10. Confirm the request-to-outcome trace exists under `_history/request-traces/YYYY/`.
-11. Confirm project-specific files stayed inside the owning project folder, or document why the change is shared.
-12. Confirm any project registry change is reflected in `_ops/projects/registry.json` and indexes.
-13. Confirm any important plan process has been saved under `_history/plans/YYYY/`.
-14. If the next session needs a compact handoff, run [_ops/workflows/45-context-archive.md](45-context-archive.md) and confirm `_history/context-archives/YYYY/` was updated.
-15. Capture reusable internet research or external references with [_ops/workflows/60-capture-research.md](60-capture-research.md).
-16. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when final outputs contain factual claims.
-17. If installation, upgrade, removal, or global environment configuration occurred, run [_ops/workflows/58-installation-record.md](58-installation-record.md) and confirm `_ops/installations/registry.json` plus `_history/installations/YYYY/` were updated.
-18. Run the work evaluation loop from [_ops/workflows/40-evaluate-and-rework.md](40-evaluate-and-rework.md).
-19. Confirm the evaluation report file exists under `_history/evaluations/YYYY/`.
-20. Update `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md` and English companion for important durable context.
-21. Update `_history/YYYY/YYYY-MM-DD.md`.
-22. Commit the coherent change set.
-23. Push to `origin/main`.
+10. If skill work occurred, confirm `_skills/` source, `_skills/registry.md`, validation result, forward-test scenario, and improvement ideas exist.
+11. Confirm the request-to-outcome trace exists under `_history/request-traces/YYYY/`.
+12. Confirm project-specific files stayed inside the owning project folder, or document why the change is shared.
+13. Confirm any project registry change is reflected in `_ops/projects/registry.json` and indexes.
+14. Confirm any important plan process has been saved under `_history/plans/YYYY/`.
+15. If the next session needs a compact handoff, run [_ops/workflows/45-context-archive.md](45-context-archive.md) and confirm `_history/context-archives/YYYY/` was updated.
+16. Capture reusable internet research or external references with [_ops/workflows/60-capture-research.md](60-capture-research.md).
+17. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when final outputs contain factual claims.
+18. If installation, upgrade, removal, or global environment configuration occurred, run [_ops/workflows/58-installation-record.md](58-installation-record.md) and confirm `_ops/installations/registry.json` plus `_history/installations/YYYY/` were updated.
+19. Run the work evaluation loop from [_ops/workflows/40-evaluate-and-rework.md](40-evaluate-and-rework.md).
+20. Confirm the evaluation report file exists under `_history/evaluations/YYYY/`.
+21. Update `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md` and English companion for important durable context.
+22. Update `_history/YYYY/YYYY-MM-DD.md`.
+23. Commit the coherent change set.
+24. Push to `origin/main`.
 
 ## Rule
 
@@ -43,6 +44,8 @@ Meaningful work should leave a user request summary under `_history/user-request
 Meaningful work should leave an active requirements target under `_requirements/` or the owning project's `docs/requirements/` before close-out.
 
 Meaningful work should leave active spec-driven artifacts under `_specs/` or the owning project's `specs/` before close-out.
+
+Skill work should leave skill source, validation result, forward-test scenarios, and improvement ideas before close-out.
 
 Meaningful work should leave a request-to-outcome trace under `_history/request-traces/` before close-out.
 

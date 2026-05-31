@@ -1,0 +1,21 @@
+{
+  "name": "skill-lifecycle-agent",
+  "description": "Creates, validates, tracks, and improves repository-managed Codex skills with explicit validation and forward-test loops.",
+  "runtime": "python",
+  "skills": [
+    "skill-creator"
+  ],
+  "tools": [
+    "repository-docs",
+    "web-search",
+    "agent-platform:validate-skill",
+    "agent-platform:evaluate-work"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "when creating, updating, validating, installing, or improving a custom Codex skill",
+    "skill_source_home": "_skills/",
+    "validation_template": "agent-platform/configs/evaluation/skill-validation-template.json",
+    "policy": "Skill work must keep source under _skills/, run quick_validate and validate-skill, record forward-test scenarios and improvement ideas, update _skills/registry.md, and include skill_targets plus skill_validation_targets in work evaluation input."
+  }
+}

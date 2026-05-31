@@ -32,6 +32,12 @@
 
 -
 
+## Skill Targets
+
+- Skill work occurred:
+- Skill targets:
+- Skill validation targets:
+
 ## Request Traces
 
 -

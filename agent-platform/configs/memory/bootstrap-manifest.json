@@ -22,6 +22,7 @@
       "The user request summary layer or request-intent tracking contract changes.",
       "The requirements management layer or requirements baseline contract changes.",
       "The spec-driven development layer or spec artifact contract changes.",
+      "The skill lifecycle layer or skill validation contract changes.",
       "The request-to-outcome trace layer or traceability contract changes.",
       "The web search record layer or prompt-level search contract changes.",
       "The installation registry or installation audit contract changes.",
@@ -117,6 +118,18 @@
         "spec-driven artifacts derived from requirements",
         "spec, plan, tasks, validation, and traceability rules",
         "implementation and evaluation spec targets"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "skill_lifecycle_policy",
+      "title": "Skill Lifecycle Policy",
+      "path": "_docs/skill-lifecycle-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "custom skill source management",
+        "skill validation and forward-test rules",
+        "skill improvement and close-out evaluation targets"
       ],
       "last_checked": "2026-05-31"
     },
@@ -316,6 +329,16 @@
       ]
     },
     {
+      "id": "skills_must_stay_discoverable",
+      "rule": "The skill lifecycle layer must remain a warm memory anchor and close-out target so future sessions create, validate, forward-test, and improve skills explicitly.",
+      "reason": "The user explicitly noted skill creation was not explicit enough and asked that created skills keep being verified and improved.",
+      "applies_to": [
+        "anchors",
+        "required_anchor_ids",
+        "work-evaluator-agent"
+      ]
+    },
+    {
       "id": "web_search_records_must_stay_discoverable",
       "rule": "The web search record layer must remain a warm memory anchor and close-out target so future sessions can inspect prompt-level searches and public decision summaries.",
       "reason": "The user explicitly requires every prompt to start with web search and to leave a text record of the search process without storing raw internal reasoning.",
@@ -398,6 +421,7 @@
     "user_request_summary_policy",
     "requirements_policy",
     "spec_driven_policy",
+    "skill_lifecycle_policy",
     "request_trace_policy",
     "web_search_record_policy",
     "installation_registry"
@@ -421,6 +445,7 @@
     "user_request_summary_policy",
     "requirements_policy",
     "spec_driven_policy",
+    "skill_lifecycle_policy",
     "request_trace_policy",
     "web_search_record_policy",
     "installation_registry"
@@ -627,12 +652,20 @@
       "load_order": 31
     },
     {
+      "id": "skill_lifecycle_policy",
+      "path": "_docs/skill-lifecycle-policy.ko.md",
+      "tier": "warm",
+      "purpose": "Rules for creating, validating, forward-testing, improving, and evaluating custom Codex skills.",
+      "required": true,
+      "load_order": 32
+    },
+    {
       "id": "request_trace_policy",
       "path": "_history/request-traces/README.ko.md",
       "tier": "warm",
       "purpose": "Rules for connecting user requests to outcomes, artifacts, evaluations, and commits.",
       "required": true,
-      "load_order": 32
+      "load_order": 33
     },
     {
       "id": "web_search_record_policy",
@@ -640,7 +673,7 @@
       "tier": "warm",
       "purpose": "Prompt-level web search record rules and public search reasoning summary requirements.",
       "required": true,
-      "load_order": 33
+      "load_order": 34
     },
     {
       "id": "installation_registry",
@@ -648,7 +681,7 @@
       "tier": "warm",
       "purpose": "Installation audit registry for installs, upgrades, removals, global environment changes, and rollback tracking.",
       "required": true,
-      "load_order": 34
+      "load_order": 35
     },
     {
       "id": "daily_history",
@@ -656,7 +689,7 @@
       "tier": "warm",
       "purpose": "Current dated work log and compressed context.",
       "required": true,
-      "load_order": 35
+      "load_order": 36
     },
     {
       "id": "repository_map",

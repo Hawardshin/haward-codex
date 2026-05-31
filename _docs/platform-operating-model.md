@@ -31,15 +31,16 @@
 18. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
 19. Save important planning processes under `_history/plans/YYYY/`.
 20. Promote repeated work into a template, tool, skill, prompt, or workflow.
-21. Record important context in `_history/`.
-22. Refresh `_ops/maps/` when navigational structure changes.
-23. Summarize completed work.
-24. Check prior internal work and strong references relevant to the task.
-25. Capture reusable internet research or external references.
-26. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
-27. Evaluate the completed work against the initial instruction, requirements, and specs.
-28. Rework real gaps and evaluate again.
-29. Commit the coherent change set and push it.
+21. For skill work, run the skill lifecycle: source tracking, validation, forward-test scenarios, improvement ideas, and skill evaluation targets.
+22. Record important context in `_history/`.
+23. Refresh `_ops/maps/` when navigational structure changes.
+24. Summarize completed work.
+25. Check prior internal work and strong references relevant to the task.
+26. Capture reusable internet research or external references.
+27. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
+28. Evaluate the completed work against the initial instruction, requirements, and specs.
+29. Rework real gaps and evaluate again.
+30. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -67,6 +68,7 @@ Promote work only when it will reduce future effort.
 | Same need to make settings explain their references and rules | Config contract agent |
 | Same open-source installation decision repeated | Open-source installation policy and candidate record |
 | Same need to implement from explicit acceptance criteria | Spec-driven artifact set under `_specs/` or project `specs/` |
+| Same need to create or improve Codex skills | Skill lifecycle policy, skill source, and `validate-skill` |
 
 ## Context Compression
 

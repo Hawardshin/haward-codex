@@ -9,6 +9,7 @@ from pathlib import Path
 from agent_platform.core.registry import load_agent_spec, load_registry_dir
 from agent_platform.evaluation.hallucination_guard import HallucinationGuardInput, check_hallucination_risk
 from agent_platform.evaluation.knowledge_skeptic import KnowledgeValidationInput, validate_knowledge_reference
+from agent_platform.evaluation.skill_validator import SkillValidationInput, validate_skill_definition
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 from agent_platform.governance.config_contract import check_config_contract
 from agent_platform.memory.bootstrap import MemoryBootstrapManifest, check_memory_bootstrap
@@ -35,6 +36,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     validate_knowledge = subparsers.add_parser("validate-knowledge", help="Validate a knowledge-base reference skeptically.")
     validate_knowledge.add_argument("path", type=Path)
+
+    validate_skill = subparsers.add_parser("validate-skill", help="Validate a repository-managed Codex skill source folder.")
+    validate_skill.add_argument("path", type=Path)
 
     check_grounding = subparsers.add_parser("check-grounding", help="Check whether factual claims are grounded before publication.")
     check_grounding.add_argument("path", type=Path)
@@ -85,6 +89,12 @@ def main(argv: list[str] | None = None) -> int:
         with args.path.open("r", encoding="utf-8") as file:
             validation_input = KnowledgeValidationInput.from_dict(json.load(file))
         print(json.dumps(validate_knowledge_reference(validation_input), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "validate-skill":
+        with args.path.open("r", encoding="utf-8") as file:
+            validation_input = SkillValidationInput.from_dict(json.load(file))
+        print(json.dumps(validate_skill_definition(validation_input, _default_repo_root()), indent=2, ensure_ascii=False))
         return 0
 
     if args.command == "check-grounding":

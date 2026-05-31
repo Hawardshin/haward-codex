@@ -23,6 +23,9 @@ class WorkEvaluationInput:
     user_request_summary_targets: tuple[str, ...] = ()
     requirements_targets: tuple[str, ...] = ()
     spec_targets: tuple[str, ...] = ()
+    skill_work_occurred: bool = False
+    skill_targets: tuple[str, ...] = ()
+    skill_validation_targets: tuple[str, ...] = ()
     request_trace_targets: tuple[str, ...] = ()
     work_summary_targets: tuple[str, ...] = ()
     context_archiving_occurred: bool = False
@@ -45,6 +48,9 @@ class WorkEvaluationInput:
             user_request_summary_targets=_tuple_of_strings(data.get("user_request_summary_targets", []), "user_request_summary_targets"),
             requirements_targets=_tuple_of_strings(data.get("requirements_targets", []), "requirements_targets"),
             spec_targets=_tuple_of_strings(data.get("spec_targets", []), "spec_targets"),
+            skill_work_occurred=_optional_bool(data.get("skill_work_occurred", False), "skill_work_occurred"),
+            skill_targets=_tuple_of_strings(data.get("skill_targets", []), "skill_targets"),
+            skill_validation_targets=_tuple_of_strings(data.get("skill_validation_targets", []), "skill_validation_targets"),
             request_trace_targets=_tuple_of_strings(data.get("request_trace_targets", []), "request_trace_targets"),
             work_summary_targets=_tuple_of_strings(data.get("work_summary_targets", []), "work_summary_targets"),
             context_archiving_occurred=_optional_bool(data.get("context_archiving_occurred", False), "context_archiving_occurred"),
@@ -82,6 +88,10 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
         gaps.append("Requirements target is missing. Add or update requirements under _requirements/ or the owning project's docs/requirements/.")
     if not evaluation_input.spec_targets:
         gaps.append("Spec target is missing. Add or update spec-driven artifacts under _specs/ or the owning project's specs/.")
+    if evaluation_input.skill_work_occurred and not evaluation_input.skill_targets:
+        gaps.append("Skill work occurred but skill_targets is missing. Add the created or updated skill source path.")
+    if evaluation_input.skill_work_occurred and not evaluation_input.skill_validation_targets:
+        gaps.append("Skill work occurred but skill_validation_targets is missing. Add a validate-skill input, report, or evaluation target.")
     if not evaluation_input.request_trace_targets:
         gaps.append("Request trace target is missing. Add a request-to-outcome trace under _history/request-traces/.")
     if not evaluation_input.work_summary_targets:
@@ -113,6 +123,9 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
             "user_request_summary_targets_count": len(evaluation_input.user_request_summary_targets),
             "requirements_targets_count": len(evaluation_input.requirements_targets),
             "spec_targets_count": len(evaluation_input.spec_targets),
+            "skill_work_occurred": evaluation_input.skill_work_occurred,
+            "skill_targets_count": len(evaluation_input.skill_targets),
+            "skill_validation_targets_count": len(evaluation_input.skill_validation_targets),
             "request_trace_targets_count": len(evaluation_input.request_trace_targets),
             "work_summary_targets_count": len(evaluation_input.work_summary_targets),
             "context_archiving_occurred": evaluation_input.context_archiving_occurred,

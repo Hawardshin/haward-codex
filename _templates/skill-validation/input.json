@@ -1,0 +1,19 @@
+{
+  "skill_path": "_skills/example-skill",
+  "intended_use": "Why this skill should exist and which repeated workflow it improves.",
+  "trigger_examples": [
+    "User prompt that should trigger the skill.",
+    "Second realistic prompt that should trigger the skill."
+  ],
+  "validation_steps": [
+    "quick_validate.py passed",
+    "validate-skill returned skill_ready"
+  ],
+  "forward_test_scenarios": [
+    "Use $example-skill to complete a realistic task with no leaked expected answer."
+  ],
+  "improvement_ideas": [
+    "Next improvement to try after real usage, or explicit no-immediate-improvement note."
+  ],
+  "known_gaps": []
+}

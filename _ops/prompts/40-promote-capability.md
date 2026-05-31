@@ -11,6 +11,7 @@ Use when: 반복되는 작업을 스킬, 도구, 템플릿, HTML 산출물 패�
 ```text
 Classify the repeated problem as structure, execution, or judgment.
 Use _templates/ for repeated structure, _tools/ for repeated execution, and _skills/ or _ops/prompts/ for repeated judgment.
+When promoting to a custom Codex skill, run skill-lifecycle-agent and follow _ops/workflows/37-skill-lifecycle.md.
 Document the capability with purpose, when to use it, inputs, outputs, and verification.
 Refresh _ops/maps/ when needed and record the promotion reason in history.
 ```

@@ -17,6 +17,8 @@ Skill source should be tracked under `_skills/<skill-name>/`.
 
 If the skill must be active in Codex, install it into `$CODEX_HOME/skills` after checking permissions. The tracked source in this repository remains the source of truth.
 
+Skill work must run the skill lifecycle checks: create/update source, record trigger examples, run quick validation, run `agent-platform validate-skill`, forward-test realistic scenarios when useful, capture improvement ideas, and include skill targets in work evaluation.
+
 ## When to Create a Tool
 
 Create a tool when work repeatedly needs deterministic execution:
@@ -73,6 +75,7 @@ Every reusable capability must state:
 - inputs
 - outputs
 - main command or activation path
+- validation and improvement path
 
 ## Avoid
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Validated Skill"
+  short_description: "Create and validate reusable skills"
+  default_prompt: "Use $create-validated-skill to turn a repeated workflow into a validated Codex skill."

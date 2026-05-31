@@ -27,4 +27,6 @@
 
 `work-evaluator-agent` 입력에는 의미 있는 작업마다 `spec_targets`를 포함한다. 누락되면 blocking gap이다.
 
+스킬 작업이 있었다면 `work-evaluator-agent` 입력에는 `skill_work_occurred=true`, `skill_targets`, `skill_validation_targets`를 포함한다. 누락되면 blocking gap이다.
+
 `work-evaluator-agent` 입력에는 의미 있는 작업마다 `request_trace_targets`를 포함한다. 누락되면 blocking gap이다.

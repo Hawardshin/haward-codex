@@ -175,5 +175,31 @@
     "installation_record_path",
     "commit"
   ],
-  "entries": []
+  "entries": [
+    {
+      "id": "2026-05-31-create-validated-skill",
+      "date": "2026-05-31",
+      "status": "installed",
+      "name": "create-validated-skill",
+      "scope": "skill",
+      "owning_project": "workspace",
+      "package_manager": "codex-skill",
+      "install_command": "cp -R _skills/create-validated-skill /Users/shinjoungeun/.codex/skills/",
+      "environment_path": "/Users/shinjoungeun/.codex/skills/create-validated-skill",
+      "dependency_record_paths": [
+        "_skills/create-validated-skill/SKILL.md",
+        "_skills/create-validated-skill/agents/openai.yaml"
+      ],
+      "version_or_lock_status": "repository source copy; no lock file",
+      "security_review": "No external package install; copied repository-managed skill source only.",
+      "license_review": "Internal personal workspace artifact; no external code included.",
+      "verification": [
+        "quick_validate.py _skills/create-validated-skill: Skill is valid!",
+        "agent-platform validate-skill /private/tmp/create-validated-skill-validation.json: skill_ready"
+      ],
+      "rollback_path": "rm -rf /Users/shinjoungeun/.codex/skills/create-validated-skill",
+      "installation_record_path": "_history/installations/2026/2026-05-31-create-validated-skill.ko.md",
+      "commit": "pending"
+    }
+  ]
 }

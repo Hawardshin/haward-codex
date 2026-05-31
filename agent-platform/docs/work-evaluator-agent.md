@@ -22,6 +22,9 @@ Use `agent-platform/configs/evaluation/work-evaluation-template.json` as the sha
 - `user_request_summary_targets`: user request summary files under `_history/user-requests/YYYY/`
 - `requirements_targets`: workspace or project requirements files under `_requirements/` or `project/docs/requirements/`
 - `spec_targets`: spec-driven artifacts under `_specs/` or the owning project's `specs/`
+- `skill_work_occurred`: whether custom skill source was created, updated, validated, installed, or improved
+- `skill_targets`: created or updated skill source paths when skill work occurred
+- `skill_validation_targets`: skill validation inputs, reports, or evaluation files when skill work occurred
 - `request_trace_targets`: request-to-outcome trace files under `_history/request-traces/YYYY/`
 - `work_summary_targets`: user-readable work summary files under `_history/work-summaries/YYYY/`
 - `context_archiving_occurred`: whether the agent compressed long context into a durable resume packet
@@ -48,6 +51,7 @@ PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/wo
 - Missing user request summary targets are a blocking gap. Save the user's request intent summary under `_history/user-requests/YYYY/`.
 - Missing requirements targets are a blocking gap. Add or update the active requirements baseline, change, or review file under `_requirements/` or the owning project's `docs/requirements/`.
 - Missing spec targets are a blocking gap. Add or update spec-driven artifacts under `_specs/` or the owning project's `specs/`.
+- Missing skill targets or skill validation targets are blocking gaps when `skill_work_occurred=true`.
 - Missing request trace targets are a blocking gap. Save the request, outcome, evidence, evaluation, and commit mapping under `_history/request-traces/YYYY/`.
 - Missing work summary targets are a blocking gap. Save a concise summary that a future user can read before closing the work.
 - If `context_archiving_occurred` is true, missing context archive targets are a blocking gap.

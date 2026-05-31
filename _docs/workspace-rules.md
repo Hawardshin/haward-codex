@@ -106,6 +106,15 @@ After each completed commit, push to `origin/main` immediately unless the user e
 - Acceptance criteria should be concrete, testable, and linked to requirement IDs.
 - Meaningful work must include `spec_targets` in the close-out evaluator input.
 
+## Skill Lifecycle Policy
+
+- Custom skill source lives under `_skills/<skill-name>/`.
+- New or updated skills follow `skill-creator` guidance.
+- Skill work records trigger examples, validation steps, forward-test scenarios, and improvement ideas.
+- Run `quick_validate.py` and `agent-platform validate-skill` after creating or updating a skill.
+- If skill work occurred, close-out evaluation must include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`.
+- Active Codex skill installation requires permission checks, installation records, and rollback path.
+
 ## Markdown vs HTML
 
 Markdown is the default for durable text documentation.
@@ -182,6 +191,7 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Include `user_request_summary_targets` in evaluation input for meaningful work.
 - Include `requirements_targets` in evaluation input for meaningful work.
 - Include `spec_targets` in evaluation input for meaningful work.
+- If skill work occurred, include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets` in evaluation input.
 - Include `request_trace_targets` in evaluation input for meaningful work.
 - Include `work_summary_targets` in evaluation input for meaningful work.
 - If gaps are found, they become follow-up actions and the work returns to implementation.

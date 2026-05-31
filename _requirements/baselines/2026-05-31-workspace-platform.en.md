@@ -29,6 +29,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 | REQ-WS-011 | Active agents and parallel work should be visible in one coordination board. | UR-2026-05-31-015 | should | baseline | `_ops` | task board check | `_ops/coordination/` |
 | REQ-WS-012 | Project-specific artifacts shall stay inside the owning project; only shared assets should be promoted to `_` folders. | UR-2026-05-31-021 | must | baseline | workspace/projects | project boundary review | `_docs/project-boundary-policy.ko.md` |
 | REQ-WS-013 | Meaningful implementation work shall pass through spec, plan, tasks, validation, and traceability artifacts, similar to spec-driven development. | UR-2026-05-31-037 | must | baseline | workspace/projects | spec target and evaluator check | `_specs/`, `_docs/spec-driven-development-policy.en.md` |
+| REQ-WS-014 | Custom skill creation and updates shall leave explicit source, trigger examples, validation, forward tests, improvement backlog, and evaluation targets. | UR-2026-05-31-038 | must | baseline | workspace/agent-platform | skill validation and evaluator check | `_skills/`, `_docs/skill-lifecycle-policy.en.md`, `skill-lifecycle-agent` |
 
 ## Change Management
 
@@ -36,6 +37,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 - Requirement reviews live under `_requirements/reviews/`.
 - Before implementation, link relevant requirement IDs from plans, work summaries, and evaluation input.
 - Before implementation, link relevant spec artifacts under `_specs/` or project `specs/`.
+- When skill work occurred, link `_skills/` source, validation results, and improvement ideas.
 - After implementation, update request traces and related requirement artifacts.
 
 ## Current Review Result

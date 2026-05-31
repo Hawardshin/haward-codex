@@ -28,6 +28,8 @@ Shared requirements baselines, changes, and reviews live under `_requirements/`;
 
 Shared spec-driven artifacts live under `_specs/`; project-specific specs live under the owning project's `specs/`.
 
+Custom skill source and validation lifecycle records are linked from `_skills/`, `_docs/skill-lifecycle-policy.ko.md`, and skill-related evaluation reports.
+
 Request-to-outcome traces live under `_history/request-traces/YYYY/`.
 
 Detailed installation audit records live under `_history/installations/YYYY/`.
@@ -45,6 +47,8 @@ Use `_history/user-requests/YYYY/` when you need to understand what the user ask
 Use `_requirements/` when you need to understand the active requirements that should guide implementation and evaluation.
 
 Use `_specs/` when you need to understand the active spec, implementation plan, task breakdown, validation result, and traceability for a work item.
+
+Use `_skills/` when you need to understand custom Codex skill source, validation, and improvement status.
 
 Use `_history/request-traces/YYYY/` when you need to understand what the user asked for, what happened, where the evidence is, and which commit closed it.
 
