@@ -95,10 +95,12 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 ## Operations Hub Policy
 
 - `_ops/index.md` is the first stop for navigation.
+- `_ops/coordination/` is the first stop for active agents and parallel work.
 - Reusable prompts live in `_ops/prompts/`.
 - Reusable workflows live in `_ops/workflows/`.
 - Repository and prompt maps live in `_ops/maps/`.
 - Run `_tools/workspace-index` after navigational structure changes.
+- Run `_tools/task-board` after coordination status changes.
 
 ## Evaluation Policy
 

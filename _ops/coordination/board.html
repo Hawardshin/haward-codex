@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Work Coordination Board</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f5f7fb;
+        color: #1f2937;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        width: min(1160px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 36px 0;
+      }
+      header {
+        margin-bottom: 24px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 32px;
+        line-height: 1.2;
+      }
+      p {
+        margin: 0;
+        color: #526173;
+        line-height: 1.6;
+      }
+      .meta {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+      .pill {
+        border: 1px solid #d8dee8;
+        background: #ffffff;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin: 22px 0;
+      }
+      .card, .panel {
+        border: 1px solid #d8dee8;
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 16px;
+      }
+      h2 {
+        margin: 0 0 12px;
+        font-size: 18px;
+      }
+      h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #ffffff;
+        border: 1px solid #d8dee8;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th, td {
+        border-bottom: 1px solid #e5eaf1;
+        padding: 10px;
+        text-align: left;
+        vertical-align: top;
+        font-size: 14px;
+      }
+      th {
+        background: #eef2f7;
+      }
+      tr:last-child td {
+        border-bottom: 0;
+      }
+      @media (max-width: 860px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>작업 조율 보드</h1>
+        <p>Coordination board initialized. No separate parallel agent tasks are currently active.</p>
+        <div class="meta">
+          <span class="pill">Updated: 2026-05-31</span>
+          <span class="pill">Agents: 1</span>
+          <span class="pill">Tasks: 1</span>
+          <span class="pill">Blockers: None</span>
+        </div>
+      </header>
+      <section>
+        <h2>에이전트</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>Codex Primary</h3>
+            <p><strong>ID:</strong> codex-primary</p>
+            <p><strong>Role:</strong> Primary repository coding and operations agent</p>
+            <p><strong>Status:</strong> idle</p>
+            <p><strong>Task:</strong> No active parallel task</p>
+          </article>
+        </div>
+      </section>
+      <section>
+        <h2>작업</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Agent</th>
+              <th>Next Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2026-05-31-coordination-board</td>
+              <td>Create shared coordination board</td>
+              <td>completed</td>
+              <td>codex-primary</td>
+              <td>No action. Coordination board is ready for future parallel work.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>

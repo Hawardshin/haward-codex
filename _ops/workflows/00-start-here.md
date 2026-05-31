@@ -8,14 +8,15 @@
 
 1. Check git status.
 2. Read [_ops/index.md](../index.md).
-3. Select a prompt from [_ops/prompts/00-router.md](../prompts/00-router.md).
-4. Read the target project README and relevant docs.
-5. Implement the smallest useful change.
-6. Verify with tests, checks, or rendered artifacts.
-7. Evaluate completed work against the initial instruction.
-8. Rework if the evaluator finds gaps, then evaluate again.
-9. Update history and maps.
-10. Commit and push immediately.
+3. Check [_ops/coordination/board.ko.md](../coordination/board.ko.md) when parallel work may exist.
+4. Select a prompt from [_ops/prompts/00-router.md](../prompts/00-router.md).
+5. Read the target project README and relevant docs.
+6. Implement the smallest useful change.
+7. Verify with tests, checks, or rendered artifacts.
+8. Evaluate completed work against the initial instruction.
+9. Rework if the evaluator finds gaps, then evaluate again.
+10. Update history and maps.
+11. Commit and push immediately.
 
 ## Rule
 

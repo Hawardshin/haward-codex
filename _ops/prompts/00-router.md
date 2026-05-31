@@ -13,6 +13,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | 컨텍스트가 길어졌다 | [50-compress-context.md](50-compress-context.md) |
 | 작업을 마무리한다 | [60-close-work.md](60-close-work.md) |
 | 완료 결과를 초기 지시와 비교 평가한다 | [70-evaluate-work.md](70-evaluate-work.md) |
+| 진행 중인 에이전트와 병렬 작업을 확인하거나 갱신한다 | [80-coordinate-work.md](80-coordinate-work.md) |
 
 ## Operating Prompt
 

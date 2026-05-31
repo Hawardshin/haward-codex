@@ -30,6 +30,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Before final close-out of meaningful work, evaluate the result against the user's initial instruction and rework any real gaps before committing or final response.
 - Before evaluation, summarize completed work and check prior internal work or strong external references relevant to the task.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/` before committing meaningful work.
+- Track active agents and parallel work in `_ops/coordination/status.json` and generated coordination boards.
 
 ## Platformization Rules
 
@@ -56,9 +57,11 @@ This repository is the workspace for building and tracking a personal agent-buil
 
 - Use `_ops/prompts/00-router.md` to select reusable prompts for repeated task types.
 - Use `_ops/workflows/00-start-here.md` as the default sequence for multi-step work.
+- Check `_ops/coordination/board.ko.md` when parallel work may exist.
 - Use `_ops/workflows/40-evaluate-and-rework.md` before closing meaningful work.
 - Keep `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md` current when folders, prompts, workflows, tools, skills, or project structure change.
 - Run `python3 _tools/workspace-index/src/workspace_index.py` after changing navigational structure.
+- Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules

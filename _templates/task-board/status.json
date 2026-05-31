@@ -1,0 +1,31 @@
+{
+  "updated_at": "YYYY-MM-DD",
+  "summary": "Short current coordination summary.",
+  "agents": [
+    {
+      "id": "agent-id",
+      "name": "Agent Name",
+      "role": "Agent role",
+      "status": "active",
+      "current_task": "Current task",
+      "owner": "Owner",
+      "notes": "Notes"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "YYYY-MM-DD-task-slug",
+      "title": "Task title",
+      "project": "project-name",
+      "status": "active",
+      "agent": "agent-id",
+      "priority": "medium",
+      "started_at": "YYYY-MM-DD",
+      "updated_at": "YYYY-MM-DD",
+      "next_action": "Next concrete action",
+      "blockers": [],
+      "references": [],
+      "evaluation_report": ""
+    }
+  ]
+}

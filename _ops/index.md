@@ -16,6 +16,7 @@
 
 - 작업을 시작할 때: [_ops/workflows/00-start-here.md](workflows/00-start-here.md)
 - 프롬프트를 고를 때: [_ops/prompts/00-router.md](prompts/00-router.md)
+- 진행 중인 에이전트/병렬 작업을 볼 때: [_ops/coordination/board.ko.md](coordination/board.ko.md), [_ops/coordination/board.html](coordination/board.html)
 - 저장소 구조를 볼 때: [_ops/maps/repository-map.md](maps/repository-map.md)
 - 프롬프트 목록을 볼 때: [_ops/maps/prompt-map.md](maps/prompt-map.md)
 - 반복 작업을 줄일 때: [_docs/capability-governance.md](../_docs/capability-governance.md)

@@ -1,0 +1,36 @@
+{
+  "updated_at": "2026-05-31",
+  "summary": "Coordination board initialized. No separate parallel agent tasks are currently active.",
+  "agents": [
+    {
+      "id": "codex-primary",
+      "name": "Codex Primary",
+      "role": "Primary repository coding and operations agent",
+      "status": "idle",
+      "current_task": "No active parallel task",
+      "owner": "Codex",
+      "notes": "Update this entry when another agent or thread starts work."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "2026-05-31-coordination-board",
+      "title": "Create shared coordination board",
+      "project": "_ops",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-05-31",
+      "updated_at": "2026-05-31",
+      "next_action": "No action. Coordination board is ready for future parallel work.",
+      "blockers": [],
+      "references": [
+        "_ops/index.md",
+        "_ops/workflows/00-start-here.md",
+        "_ops/workflows/30-close-and-index.md",
+        "_history/evaluations/README.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-05-31-coordination-board.ko.md"
+    }
+  ]
+}

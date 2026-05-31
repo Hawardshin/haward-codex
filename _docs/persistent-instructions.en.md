@@ -13,6 +13,7 @@ This document records durable user instructions in English.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/`.
 - Track work history under `_history/YYYY/YYYY-MM-DD.md`.
 - Use `_ops/` as the durable operations hub for prompts, workflows, and maps.
+- Track active agents and parallel work in `_ops/coordination/`.
 - Compress long conversation context into repository docs and history logs.
 - Promote repeated workflows into templates, tools, skills, prompts, or workflows when useful.
 - Keep repository and prompt maps current when navigational structure changes.
