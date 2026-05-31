@@ -14,21 +14,22 @@
 1. Capture the user's intent as a project requirement, rule, or artifact.
 2. Use `_ops/index.md` and `_ops/prompts/00-router.md` to select the operating path.
 3. Decide whether the work belongs to an existing project or a new root-level project.
-4. Keep foundational philosophy in `_philosophy/` and execution rules in `_docs/` or `_ops/`.
-5. Implement or document the smallest useful change.
-6. Prefer Python for agent implementation unless another runtime is clearly better.
-7. Evaluate mature open-source options before building core infrastructure from scratch.
-8. For planning that depends on external facts, use web search and at least one other search channel to derive insights before execution.
-9. Save important planning processes under `_history/plans/YYYY/`.
-10. Promote repeated work into a template, tool, skill, prompt, or workflow.
-11. Record important context in `_history/`.
-12. Refresh `_ops/maps/` when navigational structure changes.
-13. Summarize completed work.
-14. Check prior internal work and strong references relevant to the task.
-15. Capture reusable internet research or external references.
-16. Evaluate the completed work against the initial instruction.
-17. Rework real gaps and evaluate again.
-18. Commit the coherent change set and push it.
+4. Keep project-specific work inside the owning project folder and register root projects under `_ops/projects/`.
+5. Keep foundational philosophy in `_philosophy/` and execution rules in `_docs/` or `_ops/`.
+6. Implement or document the smallest useful change.
+7. Prefer Python for agent implementation unless another runtime is clearly better.
+8. Evaluate mature open-source options before building core infrastructure from scratch.
+9. For planning that depends on external facts, use web search and at least one other search channel to derive insights before execution.
+10. Save important planning processes under `_history/plans/YYYY/`.
+11. Promote repeated work into a template, tool, skill, prompt, or workflow.
+12. Record important context in `_history/`.
+13. Refresh `_ops/maps/` when navigational structure changes.
+14. Summarize completed work.
+15. Check prior internal work and strong references relevant to the task.
+16. Capture reusable internet research or external references.
+17. Evaluate the completed work against the initial instruction.
+18. Rework real gaps and evaluate again.
+19. Commit the coherent change set and push it.
 
 ## Capability Promotion
 

@@ -32,7 +32,11 @@ Do not close work just because implementation ended. Use `work-evaluator-agent` 
 
 Repeated judgments, procedures, tools, and structures should not stay manual. Promote them into skills, tools, templates, prompts, workflows, or agents when useful.
 
-### 7. Records Are Interfaces For Future Agents
+### 7. Projects Are Boundaries For Interests
+
+The shared operating environment applies to every project, but code, docs, settings, and artifacts for a specific interest belong inside that project. If an interest has an independent purpose and lifecycle, split it into a new root project.
+
+### 8. Records Are Interfaces For Future Agents
 
 Docs and history are not passive storage. They are interfaces for the next worker. Korean docs make human tracking easier, while executable prompt bodies stay in English to save tokens.
 
@@ -42,5 +46,6 @@ Docs and history are not passive storage. They are interfaces for the next worke
 - Knowledge validation: `_ops/workflows/65-validate-knowledge-reference.md`
 - Plan history: `_history/plans/`
 - Work evaluation: `_ops/workflows/40-evaluate-and-rework.md`
+- Project boundary management: `_ops/workflows/25-project-boundary-management.md`
 - Research accumulation: `_research/`
 - Capability promotion: `_docs/capability-governance.md`

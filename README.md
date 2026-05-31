@@ -15,6 +15,8 @@
 - 중요한 계획을 세우는 과정은 `_history/plans/YYYY/` 아래 파일로 남긴다.
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/`에서 한 번에 볼 수 있게 관리한다.
 - 여러 프로젝트는 저장소 최상단의 개별 폴더로 관리한다.
+- 프로젝트별 코드, 문서, 설정, 산출물은 해당 프로젝트 폴더 안에 둔다.
+- 새 관심사나 독립 라이프사이클이 생기면 새 루트 프로젝트로 만들고 `_ops/projects/`에 등록한다.
 - 공통 문서, 템플릿, 보관 자료처럼 프로젝트가 아닌 폴더는 `_` 접두어를 사용한다.
 - 반복되는 작업은 필요한 경우 스킬, 도구, 템플릿으로 승격한다.
 - 긴 대화에서 중요한 결정과 작업 내용은 저장소 문서와 히스토리 로그로 압축한다.
@@ -38,6 +40,7 @@ codex/
   _philosophy/
   _history/
   _ops/
+  _ops/projects/
   _research/
   _skills/
   _templates/
@@ -59,6 +62,7 @@ codex/
 - `_history/`: 날짜별 작업 히스토리와 요약
 - `_history/plans/`: 에이전트가 계획을 세운 과정 기록
 - `_ops/`: 운영 허브, 프롬프트, 워크플로, 저장소 맵
+- `_ops/projects/`: 루트 프로젝트 등록부와 경계 관리
 - `_research/`: 인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용
 - `_skills/`: git으로 추적할 커스텀 Codex 스킬 원본과 레지스트리
 - `_templates/`: 새 프로젝트를 만들 때 복사할 기본 구조
@@ -77,6 +81,8 @@ project-name/
 ```
 
 프로젝트 성격에 따라 `src/`와 `tests/`가 필요 없을 수 있지만, `README.md`는 반드시 둔다.
+
+프로젝트 전용 파일은 해당 프로젝트 폴더 안에 둔다. 여러 프로젝트에서 재사용되는 자산만 `_tools/`, `_templates/`, `_docs/`, `_ops/`, `_research/`, `_skills/`, `_philosophy/`로 승격한다.
 
 ## 문서와 산출물 형식
 
@@ -97,6 +103,7 @@ project-name/
 
 - 작업 시작점은 `_ops/index.md`로 둔다.
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/board.ko.md`와 `_ops/coordination/board.html`에서 확인한다.
+- 프로젝트 목록과 경계는 `_ops/projects/index.ko.md`와 `_ops/projects/registry.json`에서 확인한다.
 - 반복 프롬프트는 `_ops/prompts/`에서 관리한다.
 - 반복 워크플로는 `_ops/workflows/`에서 관리한다.
 - 운영 철학은 `_philosophy/`에서 관리한다.

@@ -4,6 +4,13 @@
 
 Use this template for new Python-first agent projects.
 
+## Scope Boundary
+
+- Keep this agent project's code, configs, tests, docs, and artifacts inside this folder.
+- Put project-specific tools under `tools/` if needed.
+- Promote only cross-project reusable tools, prompts, templates, or policies to shared workspace folders.
+- Register the project in `_ops/projects/registry.json`.
+
 ## Structure
 
 ```text

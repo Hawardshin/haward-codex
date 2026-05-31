@@ -20,6 +20,7 @@ IGNORE_DIRS = {
 ROOT_PURPOSES = {
     "_ops": "operations hub, prompts, workflows, and maps",
     "_docs": "workspace-level rules, decisions, and operating docs",
+    "_philosophy": "foundational agent and platform operating philosophy",
     "_history": "dated work logs and compressed context",
     "_research": "reusable internet research and external reference notes",
     "_skills": "tracked source for custom Codex skills",

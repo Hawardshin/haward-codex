@@ -11,6 +11,8 @@
 
 - Manage this repository as a monorepo for a personal agent-building platform.
 - Keep separate projects as root-level `kebab-case` folders.
+- Keep project-specific files inside the owning project folder.
+- When a new interest has an independent lifecycle, create a new root project and register it under `_ops/projects/`.
 - Commit every completed meaningful change set.
 - Push completed commits to `origin/main` immediately unless explicitly told not to push.
 - Before closing meaningful work, evaluate the result against the initial user instruction and rework real gaps.

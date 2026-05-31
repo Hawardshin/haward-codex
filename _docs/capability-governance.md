@@ -29,6 +29,8 @@ Create a tool when work repeatedly needs deterministic execution:
 
 Shared tools belong under `_tools/<tool-name>/`. Project-specific tools belong under `project-name/tools/`.
 
+Start tools inside the project that needs them. Promote to `_tools/` only when the tool is useful across projects or clearly belongs to the shared workspace.
+
 Prefer Python for shared tools unless another runtime is clearly more appropriate.
 
 ## When to Create a Template
@@ -63,5 +65,6 @@ Every reusable capability must state:
 - creating a skill for one-off instructions
 - creating a script before the workflow is understood
 - hiding important project state inside a tool without documenting it
+- moving project-specific behavior into shared tools before cross-project reuse is clear
 - installing global capabilities without tracking their source in this repository
 - reimplementing mature open-source functionality without a concrete reason

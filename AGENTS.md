@@ -17,8 +17,10 @@ This repository is the workspace for building and tracking a personal agent-buil
   - `_tools/` for reusable local tools and scripts
   - `_archive/` for paused or retired projects
 - Keep project-specific code, docs, tests, and assets inside that project folder.
+- Keep project-specific configs, artifacts, tools, and decisions inside that project folder as well.
 - Do not move or delete unrelated files unless the user explicitly asks.
 - Prefer creating a project folder for substantial work instead of placing loose files at the repository root.
+- Register root projects and their boundaries in `_ops/projects/registry.json`.
 
 ## Git Rules
 
@@ -46,6 +48,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/index.md` as the navigation hub for ongoing work.
 - Use `_philosophy/` for the durable worldview behind agent behavior and operating rules.
 - Keep reusable platform concepts in `agent-platform/` unless they clearly belong to another project.
+- Keep domain-specific interests and experiments in their own root project folders; do not add them to `agent-platform/` just because the platform exists.
+- Before starting substantial work, classify ownership with `_ops/workflows/25-project-boundary-management.md`.
 - When a workflow repeats or creates avoidable friction, consider promoting it into a template, tool, or skill.
 - Prefer Python for agent implementations unless the project constraints clearly favor another runtime.
 - Before hand-rolling agent infrastructure, evaluate mature open-source libraries, frameworks, and tools that can reduce maintenance cost.
@@ -66,6 +70,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 
 - Use `_ops/prompts/00-router.md` to select reusable prompts for repeated task types.
 - Use `_ops/workflows/00-start-here.md` as the default sequence for multi-step work.
+- Use `_ops/projects/registry.json` to see registered root projects and ownership boundaries.
+- Use `_ops/workflows/25-project-boundary-management.md` when a request may create a new project or cross project boundaries.
 - Check `_ops/coordination/board.ko.md` when parallel work may exist.
 - Use `_ops/workflows/40-evaluate-and-rework.md` before closing meaningful work.
 - Keep `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md` current when folders, prompts, workflows, tools, skills, or project structure change.

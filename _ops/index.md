@@ -5,6 +5,7 @@
 | Path | Role |
 | --- | --- |
 | `_ops/` | 운영 허브, 프롬프트 라우터, 워크플로, 저장소 맵 |
+| `_ops/projects/` | 루트 프로젝트 등록부와 경계 관리 |
 | `_research/` | 인터넷 조사와 외부 레퍼런스 중 재사용 가능한 내용 |
 | `_docs/` | 장기 운영 규칙, 의사결정, 컨텍스트 관리 |
 | `_philosophy/` | 에이전트와 플랫폼 운영의 근본 철학 |
@@ -20,6 +21,7 @@
 - 작업을 시작할 때: [_ops/workflows/00-start-here.md](workflows/00-start-here.md)
 - 프롬프트를 고를 때: [_ops/prompts/00-router.md](prompts/00-router.md)
 - 운영 철학을 볼 때: [_philosophy/agent-operating-philosophy.ko.md](../_philosophy/agent-operating-philosophy.ko.md)
+- 프로젝트 경계를 확인할 때: [_ops/projects/index.ko.md](projects/index.ko.md), [_docs/project-boundary-policy.ko.md](../_docs/project-boundary-policy.ko.md)
 - 웹 검색 기반 인사이트로 계획할 때: [_ops/workflows/55-research-insight-planning.md](workflows/55-research-insight-planning.md)
 - 계획 과정을 볼 때: [_history/plans/README.ko.md](../_history/plans/README.ko.md)
 - 진행 중인 에이전트/병렬 작업을 볼 때: [_ops/coordination/board.ko.md](coordination/board.ko.md), [_ops/coordination/board.html](coordination/board.html)

@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "updated": "2026-05-31",
+  "projects": [
+    {
+      "name": "agent-platform",
+      "path": "agent-platform/",
+      "status": "active",
+      "type": "core-platform",
+      "purpose": "Central Python-first platform project for building, configuring, evaluating, and improving agents.",
+      "scope": "Reusable platform models, agent specs, evaluation helpers, planning helpers, open-source evaluation, and platform docs.",
+      "project_specific_home": [
+        "agent-platform/src/",
+        "agent-platform/tests/",
+        "agent-platform/configs/",
+        "agent-platform/docs/",
+        "agent-platform/artifacts/"
+      ],
+      "shared_dependencies": [
+        "_docs/",
+        "_ops/",
+        "_philosophy/",
+        "_templates/",
+        "_tools/"
+      ],
+      "boundary_notes": [
+        "Platform-wide reusable capabilities can live here when they are part of the central agent platform.",
+        "Domain-specific experiments should become separate root projects instead of being added to agent-platform by default."
+      ]
+    }
+  ]
+}

@@ -8,9 +8,10 @@
 
 1. Start with [_ops/index.md](../index.md).
 2. Check [_ops/maps/repository-map.md](../maps/repository-map.md).
-3. Check the relevant project README.
-4. Search with `rg` only after the map and README do not answer the question.
-5. If a useful path was missing from the map, update the map.
+3. Check [_ops/projects/index.ko.md](../projects/index.ko.md) to identify the owning project.
+4. Check the relevant project README.
+5. Search with `rg` only after the map, project registry, and README do not answer the question.
+6. If a useful path was missing from the map, update the map.
 
 ## Output
 

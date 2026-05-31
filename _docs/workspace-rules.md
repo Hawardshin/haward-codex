@@ -17,6 +17,7 @@
 | `_history/` | 날짜별 작업 로그와 컨텍스트 압축 요약 |
 | `_history/plans/` | 에이전트 계획 과정 기록 |
 | `_ops/` | 운영 허브, 프롬프트 라우터, 워크플로, 저장소 맵 |
+| `_ops/projects/` | 루트 프로젝트 등록부와 경계 관리 |
 | `_research/` | 인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용 |
 | `_skills/` | git으로 추적할 커스텀 Codex 스킬 원본 |
 | `_templates/` | 새 프로젝트 기본 템플릿 |
@@ -52,6 +53,14 @@ Every project must include a `README.md` with:
 - important decisions or constraints
 
 Project-specific visual or generated outputs should live under `artifacts/`.
+
+## Project Boundary Policy
+
+- Project-specific code, docs, configs, tests, tools, and artifacts stay inside the owning project folder.
+- Shared workspace folders are for cross-project operating assets, not project-local work.
+- Register root projects in `_ops/projects/registry.json`.
+- If a request introduces a new independent interest, lifecycle, command set, UI, dataset, or artifact stream, create a new root project.
+- Promote project-local assets to shared folders only when cross-project reuse is clear.
 
 ## Commit Cadence
 

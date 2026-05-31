@@ -11,14 +11,15 @@
 3. Check [_ops/coordination/board.ko.md](../coordination/board.ko.md) when parallel work may exist.
 4. Select a prompt from [_ops/prompts/00-router.md](../prompts/00-router.md).
 5. Read relevant philosophy from `_philosophy/` when the task touches durable worldview or operating principles.
-6. Read the target project README and relevant docs.
-7. If planning depends on external facts or current information, run [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md).
-8. Implement the smallest useful change.
-9. Verify with tests, checks, or rendered artifacts.
-10. Evaluate completed work against the initial instruction.
-11. Rework if the evaluator finds gaps, then evaluate again.
-12. Update history and maps.
-13. Commit and push immediately.
+6. Decide the owning project or shared workspace folder; use [_ops/workflows/25-project-boundary-management.md](25-project-boundary-management.md) when unclear.
+7. Read the target project README and relevant docs.
+8. If planning depends on external facts or current information, run [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md).
+9. Implement the smallest useful change inside the owning project or shared folder.
+10. Verify with tests, checks, or rendered artifacts.
+11. Evaluate completed work against the initial instruction.
+12. Rework if the evaluator finds gaps, then evaluate again.
+13. Update history and maps.
+14. Commit and push immediately.
 
 ## Rule
 

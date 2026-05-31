@@ -8,6 +8,23 @@
 
 - Current phase: planning
 - Workspace role: core project
+- Registry: `_ops/projects/registry.json`
+
+## Scope Boundary
+
+- Belongs here:
+  - reusable platform models and runtime boundaries
+  - declarative agent specs and platform-level configs
+  - evaluation and planning helpers used by the platform
+  - open-source evaluation helpers
+  - platform docs and artifacts
+- Does not belong here by default:
+  - domain-specific experiments
+  - one-off product apps
+  - project-specific tools or artifacts for another interest
+  - data, UI, or workflows with an independent lifecycle
+
+Create a separate root project for domain-specific interests that can be run, tested, archived, or resumed independently.
 
 ## Initial Direction
 
