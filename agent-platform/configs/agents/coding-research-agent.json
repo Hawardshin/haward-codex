@@ -11,6 +11,6 @@
     "status": "active",
     "trigger": "before API, library, architecture, bug root cause, performance, security, migration, testing, or implementation-pattern research becomes code work",
     "input_schema": "agent-platform/configs/planning/coding-research-template.json",
-    "policy": "Run web-first intake, collect authoritative and diverse coding references, record at least three distinct non-other source_types, validate internal knowledge, answer standard post-research questions, save plan history, then implement only when ready_to_implement."
+    "policy": "Run web-first intake, select reference_config_paths from agent-platform/configs/research, collect authoritative and diverse coding references, record at least three distinct non-other source_types, validate internal knowledge, answer standard post-research questions, save plan history, then implement only when ready_to_implement."
   }
 }

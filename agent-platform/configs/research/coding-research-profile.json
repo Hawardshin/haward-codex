@@ -1,0 +1,70 @@
+{
+  "schema_version": "2026-05-31",
+  "name": "coding-research-profile",
+  "purpose": "Default source and evidence profile used by coding-research-agent before implementation.",
+  "source_registry": "agent-platform/configs/research/source-registry.json",
+  "applies_to_research_types": [
+    "api_docs",
+    "architecture",
+    "bug_root_cause",
+    "implementation_pattern",
+    "library_selection",
+    "migration",
+    "open_source",
+    "performance",
+    "security",
+    "testing"
+  ],
+  "required_coverage": {
+    "min_distinct_non_other_source_types": 3,
+    "must_include_one_of": [
+      [
+        "official",
+        "paper",
+        "standard",
+        "open_source"
+      ],
+      [
+        "open_source",
+        "tech_blog",
+        "analysis",
+        "community",
+        "social",
+        "news",
+        "contrary"
+      ]
+    ],
+    "must_record_reference_config_paths": true,
+    "must_record_source_types": true,
+    "must_record_plan_history_targets": true
+  },
+  "default_reference_source_ids": [
+    "source_collection_policy",
+    "coding_research_agent_docs",
+    "mlr_guidelines_software_engineering",
+    "cmu_sei_digital_library",
+    "zotero_data_formats",
+    "zotero_item_types",
+    "sourcemeta_registry_configuration"
+  ],
+  "source_selection_rules": [
+    "Start with web search before local planning.",
+    "Use at least one current official or primary source when external behavior matters.",
+    "Use open-source source material when implementation behavior, maintenance, or license matters.",
+    "Use papers, standards, or technical reports when methodology, risk, or security claims matter.",
+    "Use technical blogs, analysis articles, community signals, social signals, and contrary examples to discover trade-offs and adoption signals.",
+    "Treat popularity and social signals as discovery or adoption signals, not proof.",
+    "Validate internal knowledge with knowledge-skeptic-agent before relying on it."
+  ],
+  "post_research_question_ids": [
+    "what_was_verified",
+    "best_option",
+    "why_this_option",
+    "alternatives_rejected",
+    "implementation_impact",
+    "risks_and_unknowns",
+    "validation_plan",
+    "reusable_knowledge",
+    "next_action"
+  ]
+}

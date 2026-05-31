@@ -9,16 +9,17 @@
 1. Apply [_ops/workflows/05-web-first-intake.md](05-web-first-intake.md) before local planning.
 2. Write the coding research goal and the owning project or shared workspace boundary.
 3. Choose one or more research types: `api_docs`, `library_selection`, `bug_root_cause`, `architecture`, `performance`, `security`, `migration`, `testing`, `open_source`, `implementation_pattern`.
-4. Search the web for current external evidence.
-5. Search at least one additional channel: repository docs, official docs, code, package registries, papers, or open-source repos.
-6. Record `source_types` explicitly and use at least three distinct non-`other` source types.
-7. Include at least one authoritative source type: `official`, `paper`, `standard`, or `open_source`.
-8. Include at least one practical/adoption/contrary source type: `open_source`, `tech_blog`, `analysis`, `community`, `social`, `news`, or `contrary`.
-9. For broad or repeated research, apply [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md) and use `_tools/source-collector/` when useful.
-10. Separate factual evidence from adoption signals such as stars, likes, comments, Hacker News points, Reddit activity, or LinkedIn reactions.
-11. Validate any internal knowledge-base references with `knowledge-skeptic-agent`.
-12. Synthesize findings into options, trade-offs, and a recommendation.
-13. Answer all post-research questions:
+4. Select reference configs and record them in `reference_config_paths`, usually `agent-platform/configs/research/source-registry.json` and `agent-platform/configs/research/coding-research-profile.json`.
+5. Search the web for current external evidence.
+6. Search at least one additional channel: repository docs, official docs, code, package registries, papers, or open-source repos.
+7. Record `source_types` explicitly and use at least three distinct non-`other` source types.
+8. Include at least one authoritative source type: `official`, `paper`, `standard`, or `open_source`.
+9. Include at least one practical/adoption/contrary source type: `open_source`, `tech_blog`, `analysis`, `community`, `social`, `news`, or `contrary`.
+10. For broad or repeated research, apply [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md) and use `_tools/source-collector/` when useful.
+11. Separate factual evidence from adoption signals such as stars, likes, comments, Hacker News points, Reddit activity, or LinkedIn reactions.
+12. Validate any internal knowledge-base references with `knowledge-skeptic-agent`.
+13. Synthesize findings into options, trade-offs, and a recommendation.
+14. Answer all post-research questions:
     - `what_was_verified`
     - `best_option`
     - `why_this_option`
@@ -28,12 +29,12 @@
     - `validation_plan`
     - `reusable_knowledge`
     - `next_action`
-14. Save the plan process under `_history/plans/YYYY/`.
-15. Capture reusable research under `_research/` or promote repeatable assets into `_templates/`, `_tools/`, or `_skills/`.
-16. Run `coding-research-agent` with `complete-coding-research`.
-17. If the result is `more_research_required`, resolve the listed gaps before implementation.
-18. If the result is `ready_to_implement`, proceed with the implementation plan and later close with `work-evaluator-agent`.
+15. Save the plan process under `_history/plans/YYYY/`.
+16. Capture reusable research under `_research/` or promote repeatable assets into `_templates/`, `_tools/`, or `_skills/`.
+17. Run `coding-research-agent` with `complete-coding-research`.
+18. If the result is `more_research_required`, resolve the listed gaps before implementation.
+19. If the result is `ready_to_implement`, proceed with the implementation plan and later close with `work-evaluator-agent`.
 
 ## Rule
 
-Coding research is complete only when it uses diverse source types, produces a recommended next action, names validation steps, saves plan history, and answers the standard post-research questions.
+Coding research is complete only when it records the source configs it used, uses diverse source types, produces a recommended next action, names validation steps, saves plan history, and answers the standard post-research questions.

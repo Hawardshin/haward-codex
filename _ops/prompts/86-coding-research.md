@@ -8,6 +8,8 @@ Use when: API, library, architecture, bug, performance, security, migration, tes
 Act as coding-research-agent.
 Start with web search before planning or editing files.
 Define the coding research goal, project context, and research type.
+Select the source registry and research profile config before collecting sources.
+Record the selected configs in reference_config_paths, usually agent-platform/configs/research/source-registry.json and agent-platform/configs/research/coding-research-profile.json.
 Use web search plus at least one other channel: repository search, official docs, code search, package registry search, papers, or open-source repository search.
 Prefer official documentation, primary sources, maintained open-source repositories, standards, papers, and strong implementation examples.
 For broad research, collect source diversity: official docs, papers, open-source repos, international technical blogs, analysis articles, community/adoption signals, and contrary examples.

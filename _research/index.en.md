@@ -9,6 +9,7 @@
 | Agent planning | [Source collection policy](topics/agent-planning/2026-05-31-source-collection-policy.en.md) |
 | Agent planning | [Source collector tool](topics/agent-planning/2026-05-31-source-collector-tool.en.md) |
 | Agent planning | [Coding research agent](topics/agent-planning/2026-05-31-coding-research-agent.en.md) |
+| Agent planning | [Reference source config](topics/agent-planning/2026-05-31-reference-source-config.en.md) |
 | Agent reliability | [Hallucination prevention operating references](topics/agent-reliability/2026-05-31-hallucination-prevention.en.md) |
 
 ## Update Rules

@@ -1,0 +1,284 @@
+{
+  "schema_version": "2026-05-31",
+  "name": "source-registry",
+  "purpose": "Canonical registry of source types and reusable reference sources for coding and technical research.",
+  "metadata": {
+    "owner": "agent-platform",
+    "default_profile": "agent-platform/configs/research/coding-research-profile.json",
+    "last_reviewed": "2026-05-31",
+    "review_policy": "Recheck external URLs when they are used for fresh recommendations or when a source changes materially."
+  },
+  "source_types": [
+    {
+      "id": "official",
+      "label_ko": "공식/1차 출처",
+      "label_en": "Official or primary source",
+      "examples": [
+        "official documentation",
+        "API reference",
+        "release notes",
+        "vendor engineering blog"
+      ],
+      "default_reliability": "high",
+      "use_for": [
+        "current behavior",
+        "API contract",
+        "supported configuration",
+        "release status"
+      ],
+      "limits": [
+        "May omit third-party trade-offs or failure cases."
+      ]
+    },
+    {
+      "id": "paper",
+      "label_ko": "논문/학술 자료",
+      "label_en": "Paper or academic source",
+      "examples": [
+        "journal article",
+        "conference paper",
+        "arXiv preprint"
+      ],
+      "default_reliability": "medium_high",
+      "use_for": [
+        "methodology",
+        "empirical evidence",
+        "known limitations"
+      ],
+      "limits": [
+        "May be less current than implementation practice."
+      ]
+    },
+    {
+      "id": "standard",
+      "label_ko": "표준/규격",
+      "label_en": "Standard or specification",
+      "examples": [
+        "RFC",
+        "W3C specification",
+        "ISO standard"
+      ],
+      "default_reliability": "high",
+      "use_for": [
+        "protocol requirements",
+        "interoperability",
+        "compliance-sensitive behavior"
+      ],
+      "limits": [
+        "May not explain operational trade-offs."
+      ]
+    },
+    {
+      "id": "open_source",
+      "label_ko": "오픈소스 원천",
+      "label_en": "Open-source source material",
+      "examples": [
+        "GitHub repository",
+        "issue",
+        "pull request",
+        "release notes"
+      ],
+      "default_reliability": "medium_high",
+      "use_for": [
+        "actual implementation",
+        "maintenance status",
+        "license and adoption signals"
+      ],
+      "limits": [
+        "Repository popularity does not prove technical correctness."
+      ]
+    },
+    {
+      "id": "tech_blog",
+      "label_ko": "기술 블로그/실무 사례",
+      "label_en": "Technical blog or field case",
+      "examples": [
+        "engineering blog",
+        "incident review",
+        "benchmark write-up"
+      ],
+      "default_reliability": "medium",
+      "use_for": [
+        "field constraints",
+        "migration stories",
+        "trade-offs"
+      ],
+      "limits": [
+        "Claims need confirmation from primary or independent sources."
+      ]
+    },
+    {
+      "id": "analysis",
+      "label_ko": "분석/조사 아티클",
+      "label_en": "Analysis or survey article",
+      "examples": [
+        "industry report",
+        "benchmark comparison",
+        "long-form analysis"
+      ],
+      "default_reliability": "medium",
+      "use_for": [
+        "comparison",
+        "market context",
+        "trend discovery"
+      ],
+      "limits": [
+        "Check methodology and sponsorship."
+      ]
+    },
+    {
+      "id": "community",
+      "label_ko": "커뮤니티 신호",
+      "label_en": "Community signal",
+      "examples": [
+        "Stack Overflow",
+        "Hacker News",
+        "Reddit",
+        "GitHub discussion"
+      ],
+      "default_reliability": "low_medium",
+      "use_for": [
+        "pain points",
+        "adoption signal",
+        "edge cases"
+      ],
+      "limits": [
+        "Not standalone proof."
+      ]
+    },
+    {
+      "id": "social",
+      "label_ko": "소셜/전문가 신호",
+      "label_en": "Social or expert signal",
+      "examples": [
+        "LinkedIn post",
+        "conference talk",
+        "newsletter"
+      ],
+      "default_reliability": "low_medium",
+      "use_for": [
+        "expert attention",
+        "practitioner reaction",
+        "discovery"
+      ],
+      "limits": [
+        "Must be backed by primary sources before factual use."
+      ]
+    },
+    {
+      "id": "contrary",
+      "label_ko": "반대/실패 사례",
+      "label_en": "Contrary or failure case",
+      "examples": [
+        "negative migration report",
+        "security advisory",
+        "postmortem",
+        "deprecation warning"
+      ],
+      "default_reliability": "medium",
+      "use_for": [
+        "risk discovery",
+        "decision reversal checks",
+        "failure modes"
+      ],
+      "limits": [
+        "May be context-specific."
+      ]
+    },
+    {
+      "id": "internal",
+      "label_ko": "내부 지식 베이스",
+      "label_en": "Internal knowledge base",
+      "examples": [
+        "_docs/",
+        "_research/",
+        "_history/",
+        "project docs"
+      ],
+      "default_reliability": "medium",
+      "use_for": [
+        "workspace rules",
+        "prior decisions",
+        "local context"
+      ],
+      "limits": [
+        "Must pass knowledge-skeptic-agent before use as evidence."
+      ]
+    }
+  ],
+  "reference_sources": [
+    {
+      "id": "source_collection_policy",
+      "title": "Workspace source collection policy",
+      "path": "_docs/source-collection-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "source diversity rules",
+        "adoption signal handling"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "coding_research_agent_docs",
+      "title": "Coding research agent documentation",
+      "path": "agent-platform/docs/coding-research-agent.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "coding research readiness rules"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "mlr_guidelines_software_engineering",
+      "title": "Guidelines for including grey literature and conducting multivocal literature reviews in software engineering",
+      "url": "https://doi.org/10.1016/j.infsof.2018.09.006",
+      "source_type": "paper",
+      "used_for": [
+        "formal plus grey literature rationale",
+        "source quality assessment framing"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "cmu_sei_digital_library",
+      "title": "CMU SEI Digital Library",
+      "url": "https://www.sei.cmu.edu/library/",
+      "source_type": "official",
+      "used_for": [
+        "software engineering publication type diversity"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "zotero_data_formats",
+      "title": "Zotero Bibliographic Data Formats",
+      "url": "https://www.zotero.org/support/dev/data_formats",
+      "source_type": "official",
+      "used_for": [
+        "reference metadata format examples",
+        "CSL JSON and BibTeX compatibility"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "zotero_item_types",
+      "title": "Zotero Item Types and Fields",
+      "url": "https://www.zotero.org/support/kb/item_types_and_fields",
+      "source_type": "official",
+      "used_for": [
+        "reference item type and field modeling"
+      ],
+      "last_checked": "2026-05-31"
+    },
+    {
+      "id": "sourcemeta_registry_configuration",
+      "title": "Sourcemeta Registry Configuration",
+      "url": "https://registry.sourcemeta.com/configuration/",
+      "source_type": "official",
+      "used_for": [
+        "configuration-driven registry pattern"
+      ],
+      "last_checked": "2026-05-31"
+    }
+  ]
+}

@@ -33,6 +33,7 @@ class CodingResearchTests(unittest.TestCase):
                 search_channels=("web search", "repository search"),
                 sources_checked=("https://www.thoughtworks.com/en-us/radar/faq", "_docs/search-insight-planning-policy.ko.md"),
                 source_types=("official", "tech_blog", "internal"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 findings=("Technology evaluation should include staged adoption and trade-off framing.",),
                 options=("Prompt-only checklist", "Python readiness checker"),
                 recommendation="Use a Python readiness checker plus reusable prompts.",
@@ -58,6 +59,7 @@ class CodingResearchTests(unittest.TestCase):
                 search_channels=("repository search", "code search"),
                 sources_checked=("src/example.py",),
                 source_types=("official", "tech_blog", "internal"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 findings=("A local function is involved.",),
                 options=("Fix local function",),
                 recommendation="Fix the local function.",
@@ -83,6 +85,7 @@ class CodingResearchTests(unittest.TestCase):
                 search_channels=("web search", "package registry search"),
                 sources_checked=("https://docs.example.com/migration",),
                 source_types=("official", "open_source", "tech_blog"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 findings=("Migration guide exists.",),
                 options=("Migrate now", "Defer migration"),
                 recommendation="Migrate now.",
@@ -105,6 +108,7 @@ class CodingResearchTests(unittest.TestCase):
                 search_channels=("web search", "repository search"),
                 sources_checked=("_research/topics/agent-planning/example.ko.md",),
                 source_types=("official", "tech_blog", "internal"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 findings=("Prior notes describe the platform pattern.",),
                 options=("Reuse existing pattern",),
                 recommendation="Reuse existing pattern.",
@@ -130,6 +134,7 @@ class CodingResearchTests(unittest.TestCase):
                 search_channels=("web search", "repository search"),
                 sources_checked=("https://github.com/example/project",),
                 source_types=("official", "open_source", "tech_blog"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 findings=("A finding.",),
                 options=("An option.",),
                 recommendation="A recommendation.",
@@ -151,6 +156,7 @@ class CodingResearchTests(unittest.TestCase):
                 search_channels=("web search", "official documentation search"),
                 sources_checked=("https://docs.example.com/api",),
                 source_types=("official",),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 findings=("Official docs describe the API.",),
                 options=("Use API", "Do not use API"),
                 recommendation="Use API.",
@@ -163,6 +169,31 @@ class CodingResearchTests(unittest.TestCase):
 
         self.assertEqual(report["status"], "more_research_required")
         self.assertIn("Use at least 3 distinct non-other source types for coding research.", report["gaps"])
+
+    def test_reference_config_path_is_required(self) -> None:
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research an API choice.",
+                coding_context="A service integration.",
+                research_types=("api_docs",),
+                search_channels=("web search", "official documentation search"),
+                sources_checked=("https://docs.example.com/api",),
+                source_types=("official", "open_source", "tech_blog"),
+                findings=("Official docs describe the API.",),
+                options=("Use API", "Do not use API"),
+                recommendation="Use API.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run integration tests.",),
+                risks_or_unknowns=("The profile config was not recorded.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn(
+            "Reference config paths are missing; point to the source registry or research profile used for this investigation.",
+            report["gaps"],
+        )
 
 
 if __name__ == "__main__":

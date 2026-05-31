@@ -22,6 +22,10 @@
     "tech_blog",
     "community"
   ],
+  "reference_config_paths": [
+    "agent-platform/configs/research/source-registry.json",
+    "agent-platform/configs/research/coding-research-profile.json"
+  ],
   "source_bundle_report": "_tools/source-collector report path if a large source bundle was scored.",
   "findings": [
     "Evidence-backed finding that changes the implementation direction."

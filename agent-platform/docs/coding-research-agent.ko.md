@@ -8,6 +8,7 @@
 - 웹 검색 외에 저장소 검색, 공식 문서, 코드 검색, package registry, 논문, 오픈소스 repo 중 하나 이상을 함께 확인한다.
 - 조사 결과를 바로 구현으로 넘기기 전에 표준 종료 질문에 답한다.
 - 다양한 출처 유형을 명시한다. 최소 3개 이상의 `other`가 아닌 source type이 필요하며, 권위 출처와 실무/채택 신호를 함께 포함한다.
+- 어떤 출처 설정을 참고했는지 `reference_config_paths`로 기록한다.
 - 내부 지식 베이스를 근거로 쓰면 `knowledge-skeptic-agent`로 검증한다.
 - 계획 과정은 `_history/plans/YYYY/`에 남기고, 재사용 가능한 지식은 `_research/`, `_templates/`, `_tools/` 중 알맞은 곳에 기록한다.
 
@@ -33,6 +34,15 @@
 - `other`를 제외하고 최소 3개 이상의 서로 다른 source type을 사용한다.
 - `official`, `paper`, `standard`, `open_source` 중 1개 이상의 권위 출처를 포함한다.
 - `open_source`, `tech_blog`, `analysis`, `community`, `social`, `news`, `contrary` 중 1개 이상의 실무/채택/반대 신호 출처를 포함한다.
+
+## 참고 설정 파일
+
+조사 입력에는 `reference_config_paths`를 넣는다. 최소 하나는 `agent-platform/configs/research/` 아래 JSON 파일이어야 한다.
+
+기본 설정은 다음과 같다.
+
+- `agent-platform/configs/research/source-registry.json`: 출처 유형과 재사용 reference catalog
+- `agent-platform/configs/research/coding-research-profile.json`: 코딩 조사 기본 coverage profile
 
 ## 조사 완료 질문
 
@@ -64,6 +74,7 @@ PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/pl
 
 - 설정: `agent-platform/configs/agents/coding-research-agent.json`
 - 입력 템플릿: `agent-platform/configs/planning/coding-research-template.json`
+- 리서치 설정: `agent-platform/configs/research/`
 - Python 구현: `agent-platform/src/agent_platform/planning/coding_research.py`
 - 운영 프롬프트: `_ops/prompts/86-coding-research.md`
 - 운영 워크플로: `_ops/workflows/56-coding-research.md`

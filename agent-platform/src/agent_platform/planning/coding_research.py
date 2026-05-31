@@ -63,6 +63,7 @@ class CodingResearchInput:
     search_channels: tuple[str, ...] = ()
     sources_checked: tuple[str, ...] = ()
     source_types: tuple[str, ...] = ()
+    reference_config_paths: tuple[str, ...] = ()
     source_bundle_report: str = ""
     findings: tuple[str, ...] = ()
     options: tuple[str, ...] = ()
@@ -83,6 +84,7 @@ class CodingResearchInput:
             search_channels=_tuple_of_strings(data.get("search_channels", []), "search_channels"),
             sources_checked=_tuple_of_strings(data.get("sources_checked", []), "sources_checked"),
             source_types=_tuple_of_strings(data.get("source_types", []), "source_types"),
+            reference_config_paths=_tuple_of_strings(data.get("reference_config_paths", []), "reference_config_paths"),
             source_bundle_report=_optional_string(data.get("source_bundle_report", ""), "source_bundle_report"),
             findings=_tuple_of_strings(data.get("findings", []), "findings"),
             options=_tuple_of_strings(data.get("options", []), "options"),
@@ -120,6 +122,10 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
         gaps.append("Web search channel is missing.")
     if not research_input.sources_checked:
         gaps.append("Sources checked are missing.")
+    if not research_input.reference_config_paths:
+        gaps.append("Reference config paths are missing; point to the source registry or research profile used for this investigation.")
+    elif not any(_is_research_config_path(path) for path in research_input.reference_config_paths):
+        gaps.append("At least one reference config path must point to agent-platform/configs/research/.")
     normalized_source_types = _normalized_source_types(research_input.source_types)
     if not normalized_source_types:
         gaps.append("Source types are missing; record diverse source types such as official, paper, open_source, tech_blog, community, social, or contrary.")
@@ -158,7 +164,11 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
         warnings.append("Large source bundle has no source_bundle_report; consider _tools/source-collector for repeatable scoring.")
     if not research_input.capture_targets:
         warnings.append("Capture targets are missing; record where reusable coding research should be stored.")
-    if any(source.startswith("http") for source in research_input.sources_checked) and not _has_official_or_primary_signal(research_input.sources_checked):
+    if (
+        any(source.startswith("http") for source in research_input.sources_checked)
+        and not evidence_source_types.intersection(AUTHORITATIVE_SOURCE_TYPES)
+        and not _has_official_or_primary_signal(research_input.sources_checked)
+    ):
         warnings.append("External sources include no obvious official, standards, paper, or repository source.")
 
     status = "more_research_required" if gaps else "ready_to_implement"
@@ -176,6 +186,7 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
             "sources_checked_count": len(research_input.sources_checked),
             "source_types_count": len(evidence_source_types),
             "source_type_counts": _source_type_counts(research_input.source_types),
+            "reference_config_paths_count": len(research_input.reference_config_paths),
             "findings_count": len(research_input.findings),
             "options_count": len(research_input.options),
             "post_research_answers_count": len([value for value in answers.values() if value.strip()]),
@@ -206,6 +217,11 @@ def _source_type_counts(source_types: tuple[str, ...]) -> dict[str, int]:
         if normalized:
             counts[normalized] = counts.get(normalized, 0) + 1
     return counts
+
+
+def _is_research_config_path(path: str) -> bool:
+    normalized = path.strip().replace("\\", "/")
+    return normalized.startswith("agent-platform/configs/research/") and normalized.endswith(".json")
 
 
 def _uses_internal_knowledge(sources_checked: tuple[str, ...]) -> bool:
