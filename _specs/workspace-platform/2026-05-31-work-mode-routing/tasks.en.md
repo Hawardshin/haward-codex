@@ -9,4 +9,4 @@
 | T5 | Update start, close, and evaluation prompts plus workflows | done |
 | T6 | Update requirements, specs, history, and research records | done |
 | T7 | Run config, memory, research, grounding, evaluation, and unittest checks | done |
-| T8 | Commit and push | pending |
+| T8 | Commit and push | done (`3927922` pushed) |

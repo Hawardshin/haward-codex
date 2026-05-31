@@ -30,6 +30,7 @@
 
 - 상태: `ready_to_close`
 - blocking gap: 없음
+- 커밋/push: `3927922` pushed to `origin/main`
 - 개선 아이디어: 실제 작업 사례가 쌓이면 `DI-2026-05-31-001` 기준으로 `quick`/`ship_first` 기준을 조정한다.
 
 ## 주요 산출물

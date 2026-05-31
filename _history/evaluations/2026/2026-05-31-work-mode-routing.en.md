@@ -30,6 +30,7 @@
 
 - Status: `ready_to_close`
 - Blocking gaps: none
+- Commit/push: `3927922` pushed to `origin/main`
 - Improvement idea: after real work examples accumulate, tune `quick` and `ship_first` criteria through `DI-2026-05-31-001`.
 
 ## Key Artifacts

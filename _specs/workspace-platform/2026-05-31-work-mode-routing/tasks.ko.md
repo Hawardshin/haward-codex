@@ -9,4 +9,4 @@
 | T5 | 시작/종료/evaluation prompt와 workflow 갱신 | done |
 | T6 | 요구사항, 스펙, 히스토리, 연구 기록 갱신 | done |
 | T7 | config, memory, research, grounding, evaluation, unittest 검증 | done |
-| T8 | 커밋과 push | pending |
+| T8 | 커밋과 push | done (`3927922` pushed) |
