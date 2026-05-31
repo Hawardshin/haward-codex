@@ -10,4 +10,4 @@
 | 구현 | `agent-platform/src/agent_platform/planning/coding_research.py` | 완료 |
 | 테스트 | `agent-platform/tests/test_coding_research.py` | 완료 |
 | 평가 | `_history/evaluations/2026/2026-05-31-architecture-first-coding.ko.md` | 완료 |
-| 커밋 | 이번 변경 커밋 | push 후 확인 |
+| 커밋 | `6612360` | push 완료 |

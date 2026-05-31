@@ -8,4 +8,4 @@
 - [x] `T006` Update source registry and coding research profile.
 - [x] `T007` Update memory bootstrap, maps, coordination board, and history.
 - [x] `T008` Run verification and close-out evaluation, then reflect results.
-- [ ] `T009` Commit and push to `origin/main`.
+- [x] `T009` Commit and push to `origin/main`.

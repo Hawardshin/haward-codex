@@ -8,4 +8,4 @@
 - [x] `T006` source registry와 coding research profile을 갱신한다.
 - [x] `T007` memory bootstrap, maps, coordination board, history를 갱신한다.
 - [x] `T008` 검증과 종료 평가를 실행하고 결과를 반영한다.
-- [ ] `T009` 커밋하고 `origin/main`에 push한다.
+- [x] `T009` 커밋하고 `origin/main`에 push한다.

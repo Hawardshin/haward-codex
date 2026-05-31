@@ -10,4 +10,4 @@
 | Implementation | `agent-platform/src/agent_platform/planning/coding_research.py` | Complete |
 | Tests | `agent-platform/tests/test_coding_research.py` | Complete |
 | Evaluation | `_history/evaluations/2026/2026-05-31-architecture-first-coding.en.md` | Complete |
-| Commit | this change-set commit | Confirm after push |
+| Commit | `6612360` | Pushed |
