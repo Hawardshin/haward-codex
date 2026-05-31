@@ -116,6 +116,14 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Run `_tools/workspace-index` after navigational structure changes.
 - Run `_tools/task-board` after coordination status changes.
 
+## Context Archive Policy
+
+- When context saturation risk appears, create a context archive packet under `_history/context-archives/YYYY/`.
+- Use [_docs/context-archive-policy.ko.md](context-archive-policy.ko.md) and `_ops/workflows/45-context-archive.md`.
+- Context archive packets are resume indexes, not raw chat transcripts.
+- Store stable state, must-read files, remaining tasks, verification state, and links to web search records, plans, evaluations, and commits.
+- If context archiving occurred, include `context_archiving_occurred=true` and `context_archive_targets` in evaluation input.
+
 ## Web-First Work Policy
 
 - Every new user instruction starts with web search before planning, repository exploration, or file edits.

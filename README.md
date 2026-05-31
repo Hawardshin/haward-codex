@@ -35,6 +35,8 @@
 - 공통 문서, 템플릿, 보관 자료처럼 프로젝트가 아닌 폴더는 `_` 접두어를 사용한다.
 - 반복되는 작업은 필요한 경우 스킬, 도구, 템플릿으로 승격한다.
 - 긴 대화에서 중요한 결정과 작업 내용은 저장소 문서와 히스토리 로그로 압축한다.
+- 컨텍스트가 많이 찼다고 판단되면 `_history/context-archives/YYYY/`에 재개 패킷을 만들고, 이후 작업은 채팅 기억이 아니라 문서 기반으로 이어간다.
+- 컨텍스트 아카이브가 실제로 발생한 작업은 평가 입력에 `context_archiving_occurred`와 `context_archive_targets`를 남긴다.
 - 에이전트 구현은 특별한 이유가 없으면 Python을 우선한다.
 - 직접 만들기 전에 성숙한 오픈소스 도구와 라이브러리를 먼저 검토한다.
 - 작업에 맞는 성숙한 오픈소스가 있으면 필요할 때 프로젝트/도구 범위에 설치해 사용한다.
@@ -79,6 +81,7 @@ codex/
 - `_docs/`: 저장소 전체 운영 문서와 의사결정 기록
 - `_philosophy/`: 에이전트와 플랫폼 운영의 근본 철학
 - `_history/`: 날짜별 작업 히스토리와 요약
+- `_history/context-archives/`: 긴 대화 후 문서만 보고 재개하기 위한 압축 아카이브 패킷
 - `_history/work-summaries/`: 사람이 빠르게 읽는 날짜별 작업 요약과 HTML 인덱스
 - `_history/web-searches/`: 프롬프트/작업마다 수행한 웹 검색과 공개 판단 요약
 - `_history/plans/`: 에이전트가 계획을 세운 과정 기록
@@ -121,13 +124,14 @@ project-name/
 - 빠른 작업 요약은 `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`와 영어 companion에 기록한다.
 - 브라우저로 한눈에 볼 요약은 `_history/work-summaries/index.html`에 둔다.
 - 로그에는 목적, 변경 파일, 주요 결정, 커밋 해시를 남긴다.
-- 컨텍스트가 길어지면 대화 내용을 요약해 히스토리와 관련 프로젝트 문서에 반영한다.
+- 컨텍스트가 길어지면 대화 내용을 요약해 히스토리와 관련 프로젝트 문서에 반영하고, 다음 세션 재개가 필요하면 `_history/context-archives/`에 재개 패킷을 만든다.
 
 ## 운영 허브
 
 - 작업 시작점은 `_ops/index.md`로 둔다.
 - 모든 새 지시는 `_ops/workflows/05-web-first-intake.md`에 따라 웹 검색으로 시작한다.
 - 프롬프트 공통 계약은 `_ops/prompts/README.ko.md`에서 확인하고, 검색 기록 템플릿은 `_templates/web-search-record/`에서 확인한다.
+- 컨텍스트 아카이브 정책은 `_docs/context-archive-policy.ko.md`, 재개 패킷은 `_history/context-archives/`에서 확인한다.
 - AI가 세팅을 잊지 않게 하는 부트스트랩 manifest는 `agent-platform/configs/memory/bootstrap-manifest.json`에 둔다.
 - 공유 설정 파일의 자기 설명 기준은 `_docs/self-documenting-config-policy.ko.md`와 `agent-platform`의 `check-config-contract` 명령을 따른다.
 - 출처 수집 기준은 `_docs/source-collection-policy.ko.md`를 따른다.
@@ -151,6 +155,7 @@ project-name/
 - 평가 입력에는 작업 요약과 확인한 레퍼런스를 포함한다.
 - 평가 입력에는 검색 과정 기록 파일 경로인 `web_search_record_targets`를 포함한다.
 - 평가 입력에는 사용자가 나중에 읽을 요약 파일 경로인 `work_summary_targets`를 포함한다.
+- 컨텍스트 아카이빙이 발생했다면 평가 입력에는 `context_archiving_occurred=true`와 `context_archive_targets`를 포함한다.
 - 관련 작업을 평가할 때는 저장소 내 이전 작업, 공식 문서, 성숙한 오픈소스, 좋은 외부 사례를 먼저 확인한다.
 - 외부 사실이나 최신 정보가 계획에 영향을 주면 `research-insight-planner-agent`로 검색, 인사이트, 계획, 검증 단계를 구조화한다.
 - `research-insight-planner-agent`를 쓰는 작업은 계획 히스토리 파일 경로를 지정하고 저장한다.

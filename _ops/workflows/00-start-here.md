@@ -20,11 +20,12 @@
 12. Implement the smallest useful change inside the owning project or shared folder.
 13. Verify with tests, checks, or rendered artifacts.
 14. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).
-15. Evaluate completed work against the initial instruction.
-16. Rework if the evaluator finds gaps, then evaluate again.
-17. Save or update the public web search record under `_history/web-searches/YYYY/`.
-18. Update `_history/work-summaries/`, detailed history, and maps.
-19. Commit and push immediately.
+15. If the active conversation has become too long to resume safely from chat, run [_ops/workflows/45-context-archive.md](45-context-archive.md).
+16. Evaluate completed work against the initial instruction.
+17. Rework if the evaluator finds gaps, then evaluate again.
+18. Save or update the public web search record under `_history/web-searches/YYYY/`.
+19. Update `_history/work-summaries/`, detailed history, and maps.
+20. Commit and push immediately.
 
 ## Rule
 

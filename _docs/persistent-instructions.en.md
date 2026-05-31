@@ -46,6 +46,9 @@ This document records durable user instructions in English.
 - Use `hallucination-guard-agent` before publishing final outputs that contain factual claims.
 - Unsupported factual claims must be verified, removed, or explicitly caveated as uncertainty.
 - Compress long conversation context into repository docs and history logs.
+- When context saturation risk appears, proactively create a context archive packet under `_history/context-archives/YYYY/` and resume future work from repository documents.
+- Context archive packets must link must-read files, remaining tasks, verification state, related web search records, plan records, evaluation reports, and commits.
+- If context archiving occurred, include `context_archiving_occurred=true` and `context_archive_targets` in work evaluation input.
 - Promote repeated workflows into templates, tools, skills, prompts, or workflows when useful.
 - Keep repository and prompt maps current when navigational structure changes.
 - Use `work-evaluator-agent` as the default close-out evaluator.

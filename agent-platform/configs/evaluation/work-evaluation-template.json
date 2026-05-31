@@ -19,6 +19,10 @@
   "work_summary_targets": [
     "_history/work-summaries/YYYY/YYYY-MM-DD.ko.md"
   ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [
+    "_history/context-archives/YYYY/YYYY-MM-DD-slug.ko.md"
+  ],
   "installation_occurred": false,
   "installation_record_targets": [
     "_history/installations/YYYY/YYYY-MM-DD-package-name.ko.md"

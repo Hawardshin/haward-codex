@@ -148,6 +148,9 @@ This repository is the workspace for building and tracking a personal agent-buil
 ## Context Management Rules
 
 - When conversation context becomes long, compress stable decisions into `_history/YYYY/YYYY-MM-DD.md` and the relevant project docs.
+- When context saturation risk appears, proactively create a resume packet under `_history/context-archives/YYYY/` and continue from repository documents rather than chat memory.
+- Context archive packets should link must-read files, remaining work, verification state, related web search records, plans, evaluations, and commits.
+- If context archiving occurred, include `context_archiving_occurred=true` and `context_archive_targets` in evaluation input.
 - When closing meaningful work, update `_history/work-summaries/` with a scan-friendly summary that links to detailed history, plans, evaluations, and key files.
 - When closing installation work, update `_history/installations/` and `_ops/installations/registry.json` before evaluation, commit, and push.
 - Keep the latest project purpose, status, commands, and constraints in that project's `README.md`.

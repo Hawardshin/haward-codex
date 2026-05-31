@@ -2,7 +2,7 @@
 
 - 생성 위치: `_ops/coordination/status.json`
 - 마지막 갱신: `2026-05-31`
-- 요약: Coordination board initialized. Readable work-summary, installation audit, and prompt-level web search record structures added. No separate parallel agent tasks are currently active.
+- 요약: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, and context archive structures added. No separate parallel agent tasks are currently active.
 
 ## 에이전트
 
@@ -18,6 +18,7 @@
 | 2026-05-31-readable-work-summaries | Add readable work summary index | _history | completed | codex-primary | No action. Future meaningful work should update _history/work-summaries before close-out. |
 | 2026-05-31-installation-audit-trail | Strengthen installation audit trail | _ops | completed | codex-primary | No action. Future installation work must create an installation record and registry entry before close-out. |
 | 2026-05-31-prompt-web-search-record | Require web search records for every prompt | _ops | completed | codex-primary | No action. Future meaningful work must include web_search_record_targets before close-out. |
+| 2026-05-31-context-archive-policy | Add context archive resume packets | _history | completed | codex-primary | No action. Future long-context work should create context archive packets before relying on chat memory. |
 
 ## 차단 요소
 

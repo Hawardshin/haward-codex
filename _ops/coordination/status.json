@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-05-31",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, and prompt-level web search record structures added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, and context archive structures added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -88,6 +88,25 @@
         "agent-platform/docs/work-evaluator-agent.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-05-31-prompt-web-search-record.ko.md"
+    },
+    {
+      "id": "2026-05-31-context-archive-policy",
+      "title": "Add context archive resume packets",
+      "project": "_history",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-05-31",
+      "updated_at": "2026-05-31",
+      "next_action": "No action. Future long-context work should create context archive packets before relying on chat memory.",
+      "blockers": [],
+      "references": [
+        "_docs/context-archive-policy.ko.md",
+        "_history/context-archives/README.ko.md",
+        "_templates/context-archive/context-archive.ko.md",
+        "_ops/workflows/45-context-archive.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-05-31-context-archive-policy.ko.md"
     }
   ]
 }

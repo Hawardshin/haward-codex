@@ -20,6 +20,8 @@ Use `agent-platform/configs/evaluation/work-evaluation-template.json` as the sha
 - `grounding_checks`: hallucination-guard-agent results or grounding checks for factual final outputs
 - `web_search_record_targets`: public search reasoning record files under `_history/web-searches/YYYY/`
 - `work_summary_targets`: user-readable work summary files under `_history/work-summaries/YYYY/`
+- `context_archiving_occurred`: whether the agent compressed long context into a durable resume packet
+- `context_archive_targets`: context archive packet files under `_history/context-archives/YYYY/`
 - `installation_occurred`: whether the work actually installed, upgraded, removed, or globally configured software
 - `installation_record_targets`: installation audit records under `_history/installations/YYYY/`
 - `known_gaps`: explicit mismatches or unfinished items
@@ -40,6 +42,7 @@ PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/wo
 - Missing reference research is a blocking gap. Record either the references checked or the fact that no relevant reference was found after a reasonable search.
 - Missing web search record targets are a blocking gap. Save the visible search process, useful sources, ignored weak sources, plan impact, and public decision summary under `_history/web-searches/YYYY/`.
 - Missing work summary targets are a blocking gap. Save a concise summary that a future user can read before closing the work.
+- If `context_archiving_occurred` is true, missing context archive targets are a blocking gap.
 - If `installation_occurred` is true, missing installation record targets are a blocking gap.
 - If factual final outputs are present, run `hallucination-guard-agent` and record the result in `grounding_checks`.
 - Improvements that are not required can be logged in history or project docs.

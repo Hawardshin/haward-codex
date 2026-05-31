@@ -16,6 +16,7 @@
 | Agent planning | [Open-source installation policy](topics/agent-planning/2026-05-31-open-source-installation-policy.en.md) |
 | Agent reliability | [Hallucination prevention operating references](topics/agent-reliability/2026-05-31-hallucination-prevention.en.md) |
 | Agent memory | [Memory bootstrap](topics/agent-memory/2026-05-31-memory-bootstrap.en.md) |
+| Agent memory | [Context archive policy](topics/agent-memory/2026-05-31-context-archive-policy.en.md) |
 | Configuration governance | [Self-documenting configs](topics/configuration/2026-05-31-self-documenting-configs.en.md) |
 | Documentation | [Readable work summary structure](topics/documentation/2026-05-31-readable-work-summaries.en.md) |
 | Dependency management | [Installation audit trail policy](topics/dependency-management/2026-05-31-installation-audit-trail.en.md) |

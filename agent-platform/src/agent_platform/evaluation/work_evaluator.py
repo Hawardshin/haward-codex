@@ -21,6 +21,8 @@ class WorkEvaluationInput:
     grounding_checks: tuple[str, ...] = ()
     web_search_record_targets: tuple[str, ...] = ()
     work_summary_targets: tuple[str, ...] = ()
+    context_archiving_occurred: bool = False
+    context_archive_targets: tuple[str, ...] = ()
     installation_occurred: bool = False
     installation_record_targets: tuple[str, ...] = ()
     known_gaps: tuple[str, ...] = ()
@@ -37,6 +39,8 @@ class WorkEvaluationInput:
             grounding_checks=_tuple_of_strings(data.get("grounding_checks", []), "grounding_checks"),
             web_search_record_targets=_tuple_of_strings(data.get("web_search_record_targets", []), "web_search_record_targets"),
             work_summary_targets=_tuple_of_strings(data.get("work_summary_targets", []), "work_summary_targets"),
+            context_archiving_occurred=_optional_bool(data.get("context_archiving_occurred", False), "context_archiving_occurred"),
+            context_archive_targets=_tuple_of_strings(data.get("context_archive_targets", []), "context_archive_targets"),
             installation_occurred=_optional_bool(data.get("installation_occurred", False), "installation_occurred"),
             installation_record_targets=_tuple_of_strings(data.get("installation_record_targets", []), "installation_record_targets"),
             known_gaps=_tuple_of_strings(data.get("known_gaps", []), "known_gaps"),
@@ -66,6 +70,8 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
         gaps.append("Web search record target is missing. Add a public search reasoning record under _history/web-searches/.")
     if not evaluation_input.work_summary_targets:
         gaps.append("Work summary target is missing. Add a concise human-readable summary under _history/work-summaries/.")
+    if evaluation_input.context_archiving_occurred and not evaluation_input.context_archive_targets:
+        gaps.append("Context archiving occurred but context_archive_targets is missing. Add a resume packet under _history/context-archives/.")
     if evaluation_input.installation_occurred and not evaluation_input.installation_record_targets:
         gaps.append("Installation occurred but installation_record_targets is missing. Add an audit record under _history/installations/ and index it in _ops/installations/registry.json.")
     if not evaluation_input.grounding_checks:
@@ -89,6 +95,8 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
             "grounding_checks_count": len(evaluation_input.grounding_checks),
             "web_search_record_targets_count": len(evaluation_input.web_search_record_targets),
             "work_summary_targets_count": len(evaluation_input.work_summary_targets),
+            "context_archiving_occurred": evaluation_input.context_archiving_occurred,
+            "context_archive_targets_count": len(evaluation_input.context_archive_targets),
             "installation_occurred": evaluation_input.installation_occurred,
             "installation_record_targets_count": len(evaluation_input.installation_record_targets),
         },

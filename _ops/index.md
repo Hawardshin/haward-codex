@@ -10,6 +10,7 @@
 | `_docs/` | 장기 운영 규칙, 의사결정, 컨텍스트 관리 |
 | `_philosophy/` | 에이전트와 플랫폼 운영의 근본 철학 |
 | `_history/` | 날짜별 작업 히스토리와 압축된 맥락 |
+| `_history/context-archives/` | 긴 컨텍스트를 문서 기반으로 재개하기 위한 압축 아카이브 패킷 |
 | `_history/work-summaries/` | 나중에 빠르게 읽는 날짜별 작업 요약과 HTML 인덱스 |
 | `_history/web-searches/` | 모든 지시/프롬프트 실행의 웹 검색과 공개 판단 요약 |
 | `_history/installations/` | 실제 설치/업그레이드/제거 상세 감사 기록 |
@@ -38,6 +39,7 @@
 - 코딩 조사 출처 설정을 확인할 때: [agent-platform/configs/research/README.ko.md](../agent-platform/configs/research/README.ko.md)
 - 최종 사실 주장을 검증할 때: [_ops/workflows/70-hallucination-prevention.md](workflows/70-hallucination-prevention.md), [_docs/hallucination-prevention-policy.ko.md](../_docs/hallucination-prevention-policy.ko.md)
 - 계획 과정을 볼 때: [_history/plans/README.ko.md](../_history/plans/README.ko.md)
+- 컨텍스트가 길어져 재개 패킷이 필요할 때: [_docs/context-archive-policy.ko.md](../_docs/context-archive-policy.ko.md), [_history/context-archives/README.ko.md](../_history/context-archives/README.ko.md), [_ops/workflows/45-context-archive.md](workflows/45-context-archive.md)
 - 완료된 작업을 빠르게 볼 때: [_history/work-summaries/README.ko.md](../_history/work-summaries/README.ko.md), [_history/work-summaries/index.html](../_history/work-summaries/index.html)
 - 진행 중인 에이전트/병렬 작업을 볼 때: [_ops/coordination/board.ko.md](coordination/board.ko.md), [_ops/coordination/board.html](coordination/board.html)
 - 재사용 가능한 조사 내용을 볼 때: [_research/index.ko.md](../_research/index.ko.md)
@@ -58,5 +60,6 @@
 - `_history/YYYY/YYYY-MM-DD.md`에 맥락이 남았는가
 - `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`에 빠른 요약이 남았는가
 - `_history/web-searches/YYYY/`에 공개 검색 판단 기록이 남았는가
+- 컨텍스트 아카이빙이 발생했다면 `_history/context-archives/YYYY/`에 재개 패킷이 남았는가
 - 설치가 발생했다면 `_history/installations/YYYY/`와 `_ops/installations/registry.json`이 갱신됐는가
 - `_ops/maps/`가 현재 구조를 반영하는가

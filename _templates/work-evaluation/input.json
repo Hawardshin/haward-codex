@@ -7,6 +7,8 @@
   "grounding_checks": [],
   "web_search_record_targets": [],
   "work_summary_targets": [],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
   "installation_occurred": false,
   "installation_record_targets": [],
   "known_gaps": [],

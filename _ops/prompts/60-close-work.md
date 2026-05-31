@@ -16,6 +16,7 @@ Record the public web search reasoning summary in _history/web-searches/YYYY/ wi
 Record a scan-friendly summary in _history/work-summaries/YYYY/YYYY-MM-DD.ko.md and an English companion for important durable work.
 Summarize the completed work and check prior related work or strong references.
 If internet research produced reusable findings, capture them under _research/ and link them from the relevant docs.
+If context archiving occurred, create or update _history/context-archives/YYYY/ and include context_archiving_occurred=true plus context_archive_targets in the evaluator input.
 If installation, upgrade, removal, or global configuration occurred, update _history/installations/YYYY/ and _ops/installations/registry.json before evaluation.
 Use work-evaluator-agent to compare the initial instruction with the result.
 If there are gaps or improvements that must be applied, convert them into follow-up actions and rework.
@@ -23,6 +24,7 @@ After rework, pass the same evaluation again.
 Save the final evaluation as a Markdown file under _history/evaluations/YYYY/.
 Include work_summary_targets in the evaluator input.
 Include web_search_record_targets in the evaluator input.
+If context archiving occurred, include context_archiving_occurred=true and context_archive_targets in the evaluator input.
 If installation occurred, include installation_occurred=true and installation_record_targets in the evaluator input.
 Commit the coherent change set and push to origin/main immediately.
 In the final response, report the change summary, verification, commit hash, and push state concisely.

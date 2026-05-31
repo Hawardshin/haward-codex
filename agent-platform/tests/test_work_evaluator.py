@@ -133,6 +133,43 @@ class WorkEvaluatorTests(unittest.TestCase):
 
         self.assertFalse(report["requires_rework"])
 
+    def test_context_archiving_requires_record_targets(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Summarize long context.",
+                result_summary="Created summary docs.",
+                changed_files=("_docs/context-archive-policy.ko.md",),
+                verification=("manual doc review: OK",),
+                references_checked=("ReadAgent paper",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-context.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
+                context_archiving_occurred=True,
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Context archiving occurred but context_archive_targets is missing. Add a resume packet under _history/context-archives/.",
+            report["gaps"],
+        )
+
+    def test_context_archiving_ready_when_record_targets_present(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Summarize long context.",
+                result_summary="Created summary docs.",
+                changed_files=("_docs/context-archive-policy.ko.md",),
+                verification=("manual doc review: OK",),
+                references_checked=("ReadAgent paper",),
+                web_search_record_targets=("_history/web-searches/2026/2026-05-31-context.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-05-31.ko.md",),
+                context_archiving_occurred=True,
+                context_archive_targets=("_history/context-archives/2026/2026-05-31-context.ko.md",),
+            )
+        )
+
+        self.assertFalse(report["requires_rework"])
+
     def test_missing_web_search_record_requires_rework(self) -> None:
         report = evaluate_work(
             WorkEvaluationInput(
