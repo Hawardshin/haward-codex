@@ -56,6 +56,9 @@
 - 코딩 조사는 `source_types`를 명시하고 최소 3개 이상의 `other`가 아닌 서로 다른 출처 유형을 사용해야 한다.
 - 코딩 조사는 어떤 출처 레지스트리나 리서치 프로필 설정을 참고했는지 `reference_config_paths`로 기록해야 한다.
 - 코딩 조사는 중요한 원천값, 설정값, 버전, 벤치마크, 위험, 주장, 가정을 `source_value_provenance`에 기록하고 추천안/아키텍처 선택/검증 단계를 `plan_evidence`에 연결해야 한다.
+- 코딩 조사는 `technology_stack`, `technology_official_docs`, `stack_version_constraints`를 기록해야 하며 Java/Spring Boot, C, React, Next.js 같은 주요 기술은 각각의 공식 문서나 표준을 확인해야 한다.
+- 코딩 조사는 가능한 경우 high-signal Stack Overflow, Reddit, GitHub Issues/Discussions, 프로젝트 forum 같은 이슈/토론 출처를 확인하고 `issue_discussion_sources`, `issue_discussion_notes`, `community_signal_notes`에 기록해야 한다.
+- 이슈/토론의 표, accepted answer, 좋아요, 반응, stars, 댓글은 채택/발견/위험 신호로만 사용하고 단독 사실 증명으로 쓰지 않는다.
 - 소스 코드를 작성하기 전에는 best-fit 아키텍처 패턴, reference architecture, 아키텍처 문서화 레퍼런스를 찾고 최소 두 개의 아키텍처 옵션을 비교한 뒤 `architecture_reference_sources`, `architecture_options`, `architecture_decision_notes`로 기록해야 한다.
 - 소스 코드를 작성하는 에이전트는 구현 전 관련 오픈소스 저장소, 참고 구현, 잘 작성된 코드 구조와 테스트를 조사하고 `code_reference_sources`, `code_reference_notes`로 기록해야 한다.
 - 공유 설정 파일은 `reader_guide`, `reference_links`, `structure_rules`, `field_guide`를 포함해 파일 하나만 열어도 참고 링크와 구조 규칙을 이해할 수 있어야 한다.

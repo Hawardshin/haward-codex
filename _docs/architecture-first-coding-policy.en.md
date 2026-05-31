@@ -8,6 +8,8 @@ Source code should express a chosen architecture, not just a local implementatio
 
 - Use `coding-research-agent` before writing source code.
 - Start with web search for current external grounding.
+- When technologies use different official docs or standards, such as Java/Spring Boot, C, React, or Next.js, record `technology_stack`, `technology_official_docs`, and `stack_version_constraints` separately.
+- Record high-signal Stack Overflow, Reddit, GitHub Issues/Discussions, or similar discussions in `issue_discussion_sources`, `issue_discussion_notes`, and `community_signal_notes`, but treat them as adoption, problem-discovery, or risk signals rather than proof.
 - Compare at least two architecture options.
 - Record architecture frameworks, reference architectures, ADRs, C4/arc42/SEI material, or project `docs/architecture` examples in `architecture_reference_sources`.
 - Record candidate structures and trade-offs in `architecture_options`.
@@ -23,6 +25,8 @@ Source code should express a chosen architecture, not just a local implementatio
 | Reference Architecture | Official reference architecture, mature project architecture docs | Comparing structure candidates and boundaries |
 | Source Architecture | Maintained open-source `src/`, `tests/`, `docs/architecture` | Checking real code boundaries and tests |
 | ADR | Architecture decision record | Tracking decision rationale and alternatives |
+| Technology Official Docs | Spring Boot reference, React docs, Next.js docs, ISO C standard | Aligning structure with API, runtime, and standard differences |
+| Issue/Discussion Signals | Stack Overflow, Reddit, GitHub Issues/Discussions | Finding repeated problems, migration risks, and practical edge cases |
 
 ## Prohibitions
 
@@ -35,4 +39,3 @@ Source code should express a chosen architecture, not just a local implementatio
 
 - `complete-coding-research` treats missing `architecture_reference_sources`, `architecture_options`, and `architecture_decision_notes` as gaps.
 - Post-implementation validation should check the selected architecture's boundaries, error handling, integration points, and regression risks.
-

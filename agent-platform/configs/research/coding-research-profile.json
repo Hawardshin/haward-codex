@@ -76,6 +76,66 @@
             "last_checked": "2026-05-31"
         },
         {
+            "id": "spring_boot_reference",
+            "title": "Spring Boot Reference Documentation",
+            "url": "https://docs.spring.io/spring-boot/reference/index.html",
+            "source_type": "official",
+            "used_for": [
+                "Spring Boot stack-specific API and runtime behavior"
+            ],
+            "last_checked": "2026-05-31"
+        },
+        {
+            "id": "react_docs",
+            "title": "React documentation",
+            "url": "https://react.dev/learn",
+            "source_type": "official",
+            "used_for": [
+                "React stack-specific behavior and recommended APIs"
+            ],
+            "last_checked": "2026-05-31"
+        },
+        {
+            "id": "nextjs_docs",
+            "title": "Next.js documentation",
+            "url": "https://nextjs.org/docs",
+            "source_type": "official",
+            "used_for": [
+                "Next.js stack-specific routing, rendering, and API behavior"
+            ],
+            "last_checked": "2026-05-31"
+        },
+        {
+            "id": "iso_c_standard",
+            "title": "ISO/IEC 9899 C standard",
+            "url": "https://www.iso.org/standard/82075.html",
+            "source_type": "standard",
+            "used_for": [
+                "C language standard constraints"
+            ],
+            "last_checked": "2026-05-31"
+        },
+        {
+            "id": "stackoverflow_vote_up_help",
+            "title": "Stack Overflow vote-up help",
+            "url": "https://stackoverflow.com/help/privileges/vote-up",
+            "source_type": "community",
+            "used_for": [
+                "interpreting answer/question votes as community usefulness signals"
+            ],
+            "last_checked": "2026-05-31"
+        },
+        {
+            "id": "github_reactions_docs",
+            "title": "GitHub reactions API documentation",
+            "url": "https://docs.github.com/en/rest/reactions/reactions",
+            "source_type": "official",
+            "used_for": [
+                "interpreting GitHub reactions on issues, pull requests, comments, and discussions as engagement signals"
+            ],
+            "last_checked": "2026-05-31"
+        },
+        {
             "id": "mlr_guidelines_software_engineering",
       "title": "Guidelines for including grey literature and conducting multivocal literature reviews in software engineering",
       "url": "https://doi.org/10.1016/j.infsof.2018.09.006",
@@ -202,6 +262,31 @@
       ]
     },
     {
+      "id": "stack_specific_official_docs_are_required",
+      "rule": "Coding research must record technology_stack, technology_official_docs, and stack_version_constraints; known major technologies such as Spring Boot, C, React, and Next.js require their own official docs or standards.",
+      "reason": "Different languages and frameworks have different official APIs, standards, runtime constraints, and migration risks.",
+      "applies_to": [
+        "required_coverage.must_record_technology_stack",
+        "required_coverage.must_record_technology_official_docs",
+        "required_coverage.must_record_stack_version_constraints",
+        "technology_stack",
+        "technology_official_docs",
+        "stack_version_constraints"
+      ]
+    },
+    {
+      "id": "issue_discussion_signals_are_required",
+      "rule": "Coding research must inspect and record high-signal issue/discussion/community sources when available, including Stack Overflow, Reddit, GitHub Issues/Discussions, and project forums.",
+      "reason": "Practical issue threads and high-engagement discussions reveal repeated problems, stale answers, migration friction, and edge cases that official docs may not emphasize.",
+      "applies_to": [
+        "required_coverage.must_record_issue_discussion_sources",
+        "required_coverage.must_record_community_signal_notes",
+        "issue_discussion_sources",
+        "issue_discussion_notes",
+        "community_signal_notes"
+      ]
+    },
+    {
       "id": "code_references_are_required",
       "rule": "Before implementation, inspect relevant open-source repositories, reference implementations, or well-structured code and record code_reference_sources plus code_reference_notes.",
       "reason": "Source-code-writing agents need concrete structure and implementation examples, not only docs or summaries.",
@@ -292,6 +377,36 @@
       "required": true
     },
     {
+      "field": "technology_stack",
+      "meaning": "Languages, runtimes, frameworks, major libraries, and standards involved in the coding decision.",
+      "required": true
+    },
+    {
+      "field": "technology_official_docs",
+      "meaning": "Official documentation or standards checked for each major stack technology, such as Spring Boot, ISO C, React, or Next.js.",
+      "required": true
+    },
+    {
+      "field": "stack_version_constraints",
+      "meaning": "Current or target versions, standards, runtime ranges, compatibility constraints, or explicit unknowns.",
+      "required": true
+    },
+    {
+      "field": "issue_discussion_sources",
+      "meaning": "High-signal issue, Q&A, forum, or discussion sources checked, including Stack Overflow, Reddit, GitHub Issues/Discussions, or an explicit none-found search record.",
+      "required": true
+    },
+    {
+      "field": "issue_discussion_notes",
+      "meaning": "What issue/discussion sources revealed about repeated problems, high-vote or accepted answers, stale answers, unresolved debates, contradictions, and risk.",
+      "required": true
+    },
+    {
+      "field": "community_signal_notes",
+      "meaning": "How votes, likes, comments, reactions, stars, or other community signals were interpreted as adoption, discovery, or risk signals rather than proof.",
+      "required": true
+    },
+    {
       "field": "default_reference_source_ids",
       "meaning": "Source-registry IDs that should normally be considered in coding research.",
       "required": true
@@ -342,6 +457,12 @@
     ],
     "must_record_reference_config_paths": true,
     "must_record_source_types": true,
+    "must_record_technology_stack": true,
+    "must_record_technology_official_docs": true,
+    "must_record_stack_version_constraints": true,
+    "must_record_issue_discussion_sources": true,
+    "must_record_issue_discussion_notes": true,
+    "must_record_community_signal_notes": true,
     "must_record_code_references": true,
     "min_code_reference_sources": 1,
     "must_record_architecture_references": true,
@@ -361,6 +482,12 @@
     "sourcemeta_registry_configuration",
     "public_code_repository_best_practices",
     "codehow_code_search",
+    "spring_boot_reference",
+    "react_docs",
+    "nextjs_docs",
+    "iso_c_standard",
+    "stackoverflow_vote_up_help",
+    "github_reactions_docs",
     "azure_architecture_center",
     "aws_well_architected_framework",
     "google_cloud_architecture_framework",
@@ -374,6 +501,10 @@
         "Check source-discovery-registry.json when broader global, Korean, Indian, paper, or Korean local review source origins are useful.",
         "Use Naver Map, Kakao Map, Naver Blog/Search, official pages, and _tools/korean-local-review/ when Korean user behavior or local-market review signals affect implementation.",
         "Use at least one current official or primary source when external behavior matters.",
+    "Record technology_stack and check stack-specific official docs or standards for each major known technology, such as Spring Boot, ISO C, React, and Next.js.",
+    "Record stack_version_constraints with exact versions, standards, compatibility ranges, runtime assumptions, or explicit unknowns.",
+    "Search high-signal issue/discussion sources when available, including Stack Overflow high-vote or accepted answers, Reddit discussions, GitHub Issues/Discussions, and project forums.",
+    "Record issue_discussion_sources, issue_discussion_notes, and community_signal_notes so community signals are separated from factual proof.",
     "Use open-source source material when implementation behavior, maintenance, or license matters.",
     "Before writing source code, look for best-fit architecture patterns, reference architectures, and well-structured source architectures.",
     "Compare at least two architecture options and record why the selected structure fits the current scope, quality attributes, and project boundary.",

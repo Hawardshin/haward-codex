@@ -24,6 +24,26 @@ def complete_code_references() -> dict[str, tuple[str, ...]]:
         "plan_evidence": (
             "Python readiness checker recommendation <- existing CLI pattern, tests, and source registry requirements.",
         ),
+        "technology_stack": (
+            "Python 3.11",
+            "agent-platform CLI",
+        ),
+        "technology_official_docs": (
+            "https://docs.python.org/3/",
+        ),
+        "stack_version_constraints": (
+            "Python 3.11+ local CLI execution; no external runtime dependency.",
+        ),
+        "issue_discussion_sources": (
+            "https://github.com/python/cpython/issues",
+            "https://stackoverflow.com/questions/tagged/python",
+        ),
+        "issue_discussion_notes": (
+            "Checked issue and discussion channels for recurring CLI/test patterns; used as implementation risk signals, not factual proof.",
+        ),
+        "community_signal_notes": (
+            "Stack Overflow votes and GitHub reactions are treated as adoption or problem signals; official docs remain authoritative.",
+        ),
         "architecture_reference_sources": (
             "https://learn.microsoft.com/azure/architecture/",
             "https://github.com/example/project/blob/main/docs/architecture.md",
@@ -60,8 +80,8 @@ class CodingResearchTests(unittest.TestCase):
                 coding_context="agent-platform planning helpers and operations prompts.",
                 research_types=("architecture", "implementation_pattern"),
                 search_channels=("web search", "repository search"),
-                sources_checked=("https://www.thoughtworks.com/en-us/radar/faq", "_docs/search-insight-planning-policy.ko.md"),
-                source_types=("official", "reference_implementation", "tech_blog", "internal"),
+                sources_checked=("https://www.thoughtworks.com/en-us/radar/faq", "_docs/search-insight-planning-policy.ko.md", "https://stackoverflow.com/questions/tagged/python"),
+                source_types=("official", "reference_implementation", "tech_blog", "community", "internal"),
                 reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 **complete_code_references(),
                 findings=("Technology evaluation should include staged adoption and trade-off framing.",),
@@ -88,7 +108,7 @@ class CodingResearchTests(unittest.TestCase):
                 research_types=("bug_root_cause",),
                 search_channels=("repository search", "code search"),
                 sources_checked=("src/example.py",),
-                source_types=("official", "reference_implementation", "tech_blog", "internal"),
+                source_types=("official", "reference_implementation", "tech_blog", "community", "internal"),
                 reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 **complete_code_references(),
                 findings=("A local function is involved.",),
@@ -115,7 +135,7 @@ class CodingResearchTests(unittest.TestCase):
                 research_types=("migration",),
                 search_channels=("web search", "package registry search"),
                 sources_checked=("https://docs.example.com/migration",),
-                source_types=("official", "reference_implementation", "open_source", "tech_blog"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog", "community"),
                 reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 **complete_code_references(),
                 findings=("Migration guide exists.",),
@@ -139,7 +159,7 @@ class CodingResearchTests(unittest.TestCase):
                 research_types=("implementation_pattern",),
                 search_channels=("web search", "repository search"),
                 sources_checked=("_research/topics/agent-planning/example.ko.md",),
-                source_types=("official", "reference_implementation", "tech_blog", "internal"),
+                source_types=("official", "reference_implementation", "tech_blog", "community", "internal"),
                 reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 **complete_code_references(),
                 findings=("Prior notes describe the platform pattern.",),
@@ -166,7 +186,7 @@ class CodingResearchTests(unittest.TestCase):
                 research_types=("unknown",),
                 search_channels=("web search", "repository search"),
                 sources_checked=("https://github.com/example/project",),
-                source_types=("official", "reference_implementation", "open_source", "tech_blog"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog", "community"),
                 reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 **complete_code_references(),
                 findings=("A finding.",),
@@ -213,7 +233,7 @@ class CodingResearchTests(unittest.TestCase):
                 research_types=("api_docs",),
                 search_channels=("web search", "official documentation search"),
                 sources_checked=("https://docs.example.com/api",),
-                source_types=("official", "reference_implementation", "open_source", "tech_blog"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog", "community"),
                 **complete_code_references(),
                 findings=("Official docs describe the API.",),
                 options=("Use API", "Do not use API"),
@@ -239,7 +259,7 @@ class CodingResearchTests(unittest.TestCase):
                 research_types=("implementation_pattern",),
                 search_channels=("web search", "repository search"),
                 sources_checked=("https://github.com/example/project", "https://docs.example.com/api"),
-                source_types=("official", "reference_implementation", "tech_blog"),
+                source_types=("official", "reference_implementation", "tech_blog", "community"),
                 reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 findings=("A maintained project has a useful service layout.",),
                 options=("Reuse similar module boundaries", "Use a custom layout"),
@@ -268,7 +288,7 @@ class CodingResearchTests(unittest.TestCase):
                 research_types=("api_docs",),
                 search_channels=("web search", "official documentation search", "repository search"),
                 sources_checked=("https://docs.example.com/api", "https://github.com/example/project"),
-                source_types=("official", "reference_implementation", "open_source", "tech_blog"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog", "community"),
                 reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 **references,
                 findings=("Official docs describe the API.",),
@@ -298,7 +318,7 @@ class CodingResearchTests(unittest.TestCase):
                 research_types=("api_docs",),
                 search_channels=("web search", "official documentation search", "repository search"),
                 sources_checked=("https://docs.example.com/api", "https://github.com/example/project"),
-                source_types=("official", "reference_implementation", "open_source", "tech_blog"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog", "community"),
                 reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 **references,
                 findings=("Official docs describe the API.",),
@@ -328,7 +348,7 @@ class CodingResearchTests(unittest.TestCase):
                 research_types=("architecture", "implementation_pattern"),
                 search_channels=("web search", "repository search"),
                 sources_checked=("https://learn.microsoft.com/azure/architecture/", "https://github.com/example/project"),
-                source_types=("official", "reference_implementation", "open_source", "tech_blog"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog", "community"),
                 reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 **references,
                 findings=("Architecture reference sources should shape module boundaries before coding.",),
@@ -358,7 +378,7 @@ class CodingResearchTests(unittest.TestCase):
                 research_types=("architecture",),
                 search_channels=("web search", "repository search"),
                 sources_checked=("https://learn.microsoft.com/azure/architecture/", "https://github.com/example/project"),
-                source_types=("official", "reference_implementation", "open_source", "tech_blog"),
+                source_types=("official", "reference_implementation", "open_source", "tech_blog", "community"),
                 reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 **references,
                 findings=("Architecture options need trade-off comparison.",),
@@ -374,6 +394,172 @@ class CodingResearchTests(unittest.TestCase):
         self.assertEqual(report["status"], "more_research_required")
         self.assertIn("At least two architecture options or patterns must be compared before implementation.", report["gaps"])
 
+    def test_technology_stack_and_official_docs_are_required(self) -> None:
+        references = complete_code_references()
+        references.pop("technology_stack")
+        references.pop("technology_official_docs")
+
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research a stack-specific API choice.",
+                coding_context="A React and Next.js application.",
+                research_types=("api_docs", "implementation_pattern"),
+                search_channels=("web search", "official documentation search", "repository search"),
+                sources_checked=("https://react.dev/learn", "https://nextjs.org/docs", "https://github.com/example/project"),
+                source_types=("official", "reference_implementation", "open_source", "community"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **references,
+                findings=("Stack-specific official docs must drive API choices.",),
+                options=("Use framework API", "Use custom abstraction"),
+                recommendation="Use the framework API.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Framework docs can change across versions.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn(
+            "Technology stack is missing; record languages, frameworks, runtimes, and major libraries involved, such as Spring Boot, C, React, or Next.js.",
+            report["gaps"],
+        )
+        self.assertIn(
+            "Technology-specific official docs are missing; record official documentation or standards for each major technology in the stack.",
+            report["gaps"],
+        )
+
+    def test_stack_specific_official_docs_are_checked_for_known_technologies(self) -> None:
+        references = complete_code_references()
+        references["technology_stack"] = ("Spring Boot 3.3", "React 19", "Next.js 15", "ISO C23")
+        references["technology_official_docs"] = (
+            "https://docs.spring.io/spring-boot/reference/index.html",
+            "https://react.dev/learn",
+            "https://www.iso.org/standard/82075.html",
+        )
+        references["stack_version_constraints"] = (
+            "Spring Boot 3.3, React 19, Next.js 15, and ISO/IEC 9899:2024 C23 constraints must be verified before coding.",
+        )
+
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research stack-specific implementation docs.",
+                coding_context="Java Spring Boot backend, React/Next.js frontend, and C interop.",
+                research_types=("api_docs", "architecture", "implementation_pattern"),
+                search_channels=("web search", "official documentation search", "repository search"),
+                sources_checked=(
+                    "https://docs.spring.io/spring-boot/reference/index.html",
+                    "https://react.dev/learn",
+                    "https://www.iso.org/standard/82075.html",
+                    "https://github.com/example/project",
+                ),
+                source_types=("official", "standard", "open_source", "community"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **references,
+                findings=("Known stack technologies need matching official docs or standards.",),
+                options=("Use stack defaults", "Build custom wrappers"),
+                recommendation="Use stack defaults.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Missing Next.js docs would make router assumptions weak.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn("Technology-specific official docs are missing for Next.js.", report["gaps"])
+
+    def test_stack_version_constraints_are_required(self) -> None:
+        references = complete_code_references()
+        references.pop("stack_version_constraints")
+
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research a version-sensitive API choice.",
+                coding_context="A Python service.",
+                research_types=("api_docs",),
+                search_channels=("web search", "official documentation search", "repository search"),
+                sources_checked=("https://docs.python.org/3/", "https://github.com/example/project"),
+                source_types=("official", "reference_implementation", "open_source", "community"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **references,
+                findings=("Runtime versions shape API behavior.",),
+                options=("Use current runtime", "Upgrade runtime first"),
+                recommendation="Use current runtime.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Version constraints were omitted.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn("Stack version constraints are missing; record relevant versions, standards, runtime ranges, or an explicit unknown.", report["gaps"])
+
+    def test_issue_discussion_sources_and_notes_are_required(self) -> None:
+        references = complete_code_references()
+        references.pop("issue_discussion_sources")
+        references.pop("issue_discussion_notes")
+        references.pop("community_signal_notes")
+
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research a known implementation issue.",
+                coding_context="A Python service.",
+                research_types=("bug_root_cause", "implementation_pattern"),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://docs.python.org/3/", "https://github.com/example/project"),
+                source_types=("official", "reference_implementation", "open_source", "community"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **references,
+                findings=("Issue history can reveal recurring edge cases.",),
+                options=("Patch locally", "Change library"),
+                recommendation="Patch locally.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run regression tests.",),
+                risks_or_unknowns=("Discussion evidence was omitted.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn(
+            "Issue or discussion sources are missing; inspect high-signal issues, Stack Overflow answers, Reddit discussions, project discussions, or record why none applied.",
+            report["gaps"],
+        )
+        self.assertIn(
+            "Issue or discussion notes are missing; record what the discussions revealed and whether signals were strong, weak, stale, or contradicted.",
+            report["gaps"],
+        )
+        self.assertIn(
+            "Community signal notes are missing; record how votes, reactions, comments, stars, or likes were used as adoption/discovery signals rather than proof.",
+            report["gaps"],
+        )
+
+    def test_issue_sources_require_community_or_social_source_type(self) -> None:
+        report = complete_coding_research(
+            CodingResearchInput(
+                research_goal="Research a high-vote discussion before coding.",
+                coding_context="A Python service.",
+                research_types=("implementation_pattern",),
+                search_channels=("web search", "repository search"),
+                sources_checked=("https://docs.python.org/3/", "https://github.com/example/project", "https://stackoverflow.com/questions/tagged/python"),
+                source_types=("official", "reference_implementation", "open_source"),
+                reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                **complete_code_references(),
+                findings=("Stack Overflow can surface recurring implementation problems.",),
+                options=("Use pattern A", "Use pattern B"),
+                recommendation="Use pattern A.",
+                post_research_answers=complete_answers(),
+                validation_steps=("Run tests.",),
+                risks_or_unknowns=("Community evidence must be labeled correctly.",),
+                plan_history_targets=("_history/plans/2026/example.ko.md",),
+            )
+        )
+
+        self.assertEqual(report["status"], "more_research_required")
+        self.assertIn("Issue/discussion sources require community or social in source_types so their evidence role is explicit.", report["gaps"])
+
     def test_documentation_url_is_not_enough_as_code_reference(self) -> None:
         report = complete_coding_research(
             CodingResearchInput(
@@ -382,8 +568,14 @@ class CodingResearchTests(unittest.TestCase):
                 research_types=("implementation_pattern",),
                 search_channels=("web search", "repository search"),
                 sources_checked=("https://github.com/example/project", "https://docs.example.com/api"),
-                source_types=("official", "reference_implementation", "tech_blog"),
+                source_types=("official", "reference_implementation", "tech_blog", "community"),
                 reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
+                technology_stack=("Python 3.11",),
+                technology_official_docs=("https://docs.python.org/3/",),
+                stack_version_constraints=("Python 3.11+.",),
+                issue_discussion_sources=("https://stackoverflow.com/questions/tagged/python",),
+                issue_discussion_notes=("Checked high-vote Stack Overflow Python questions as problem-discovery signals.",),
+                community_signal_notes=("Votes and comments are signals, not proof.",),
                 code_reference_sources=("https://docs.example.com/api",),
                 code_reference_notes=("Only checked docs, not code.",),
                 findings=("A maintained project has a useful service layout.",),

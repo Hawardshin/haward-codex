@@ -21,6 +21,12 @@ For broad research, collect source diversity: official docs, papers, open-source
 For large-company engineering, official research-lab, architecture-center, or high-signal source discovery, check enterprise-source-registry.json first, then re-open exact source pages before citing claims.
 For Korean user-facing or local-market behavior, use Naver Map, Kakao Map, Naver Blog/Search, official pages, and _tools/korean-local-review/.
 For paper-heavy implementation decisions, combine Semantic Scholar, OpenAlex, arXiv, Papers with Code, and related-paper discovery.
+Record technology_stack with languages, runtimes, frameworks, major libraries, and standards involved.
+For each major known technology, record technology_official_docs using its own official documentation or standard. Examples: Spring Boot -> docs.spring.io, React -> react.dev, Next.js -> nextjs.org/docs, C -> ISO C or WG14 material.
+Record stack_version_constraints with current or target versions, standards, compatibility ranges, or explicit unknowns.
+Search high-signal issue and discussion channels when available: Stack Overflow high-vote or accepted answers, Reddit discussions, GitHub Issues/Discussions, project forums, unresolved issue threads, and strongly reacted discussions.
+Record issue_discussion_sources and issue_discussion_notes with URLs, signal strength, stale-answer risk, accepted/high-vote answer context, unresolved debates, and contradictions.
+Record community_signal_notes explaining how votes, likes, reactions, stars, or comments were interpreted as adoption, discovery, or risk signals rather than proof.
 Before writing source code, search for best-fit architecture patterns, reference architectures, architecture documentation frameworks, and strong project architecture examples.
 Use architecture references such as well-architected frameworks, Azure/AWS/GCP architecture guidance, C4, arc42, SEI views, ADRs, or mature project docs/architecture examples when they fit the task.
 Record architecture_reference_sources with URLs or source paths.

@@ -36,6 +36,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 | REQ-WS-018 | Web search shall behave more like human research by using broad global tech blogs, Korean big-tech blogs, India technology sources, paper discovery sources, and Korean local review channels. | UR-2026-05-31-042, 043 | must | baseline | agent-platform/_research | source discovery registry and source list review | `agent-platform/configs/research/source-discovery-registry.json`, `_research/source-lists/enterprise-high-quality-sites.en.md` |
 | REQ-WS-019 | For Korean user review or local-market decisions, research shall prioritize Naver Map, Kakao Map, Naver Blog/Search, and official pages, then evaluate candidate page quality. | UR-2026-05-31-044 | must | baseline | `_tools`/`_research` | Korean local review tool tests and source list review | `_tools/korean-local-review/`, `_research/source-lists/korean-local-review-sources.en.md` |
 | REQ-WS-020 | The workspace shall select `quick`, `standard`, `ship_first`, `research`, or `governance` mode based on work type, and manage required artifacts plus deferred improvements differently by mode. | UR-2026-05-31-045 | must | baseline | `_ops`/`agent-platform` | work mode registry, evaluator tests, and workflow review | `agent-platform/configs/workflows/work-mode-registry.json`, `_ops/workflows/02-select-work-mode.md`, `_ops/backlog/deferred-improvements.en.md` |
+| REQ-WS-021 | Coding research shall record stack-specific official docs or standards, version constraints, high-signal issue/discussion sources, and community signal interpretation. | UR-2026-05-31-046 | must | baseline | agent-platform/projects | `complete-coding-research` result and stack/discussion fields | `agent-platform/src/agent_platform/planning/coding_research.py`, `agent-platform/configs/research/coding-research-profile.json`, `agent-platform/docs/coding-research-agent.en.md` |
 
 ## Change Management
 
@@ -49,6 +50,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 - Check `source-discovery-registry.json` for broad search origins and use `_tools/korean-local-review/` for Korean local review scoring.
 - Select a work mode from `work-mode-registry.json` after work intake, and let the selected mode determine required evaluator targets.
 - Deferred non-blocking improvements from `ship_first` mode belong in `_ops/backlog/deferred-improvements.en.md` or a project-specific equivalent backlog.
+- Coding research must not omit major technology-specific official docs or standards, version constraints, issue/discussion sources, or community signal interpretation for stacks such as Java/Spring Boot, C, React, and Next.js.
 - When skill work occurred, link `_skills/` source, validation results, and improvement ideas.
 - After implementation, update request traces and related requirement artifacts.
 

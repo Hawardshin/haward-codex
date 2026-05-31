@@ -11,6 +11,8 @@
 - Record which source configuration files were used through `reference_config_paths`.
 - Record material source values, config values, versions, benchmarks, risks, claims, and assumptions in `source_value_provenance`.
 - Connect recommendations, architecture choices, file scope, and validation steps to checked sources or explicit assumptions through `plan_evidence`.
+- When technologies have different official docs or standards, such as Java/Spring Boot, C, React, or Next.js, record `technology_stack`, `technology_official_docs`, and `stack_version_constraints` separately.
+- Check high-signal issue/discussion sources such as Stack Overflow, Reddit, GitHub Issues/Discussions, and project forums, then record `issue_discussion_sources`, `issue_discussion_notes`, and `community_signal_notes`.
 - Before implementation, check best-fit architecture patterns, reference architectures, C4/arc42/SEI/ADR-style architecture documentation, and strong project architecture examples.
 - Compare at least two architecture options and record `architecture_reference_sources`, `architecture_options`, and `architecture_decision_notes`.
 - Before implementation, inspect relevant open-source repositories, reference implementations, or well-structured code and tests, then record `code_reference_sources` and `code_reference_notes`.
@@ -40,6 +42,19 @@
 - Use at least three distinct non-`other` source types.
 - Include at least one authoritative type: `official`, `paper`, `standard`, or `open_source`.
 - Include at least one practical, adoption, or contrary signal type: `open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `news`, or `contrary`.
+
+## Technology Stack And Discussion Signal Rules
+
+Implementation readiness requires:
+
+- `technology_stack`: languages, runtimes, frameworks, major libraries, and relevant standards
+- `technology_official_docs`: official docs or standards for each major technology. Examples: Spring Boot uses `docs.spring.io`, React uses `react.dev`, Next.js uses `nextjs.org/docs`, and C uses ISO C or WG14 material
+- `stack_version_constraints`: current or target versions, standards, compatibility ranges, or explicit unknowns
+- `issue_discussion_sources`: Stack Overflow, Reddit, GitHub Issues/Discussions, project forums, or a none-found search record
+- `issue_discussion_notes`: repeated problems, accepted or high-vote answers, stale answers, unresolved debates, and contrary views found in those discussions
+- `community_signal_notes`: how votes, likes, reactions, stars, or comments were interpreted and why they are not factual proof
+
+Community signals are useful for discovering problems, adoption, and practical edge cases, but factual decisions must be cross-checked against official docs, standards, papers, or maintained repositories.
 
 ## Code Reference Rules
 

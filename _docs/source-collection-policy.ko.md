@@ -50,7 +50,9 @@
 
 일반 조사와 계획은 `research-insight-planner-agent`와 `agent-platform/configs/research/research-agent-profile.json`을 사용해 출처 순위화, 증거 추출, 종합, citation grounding, skeptic review를 기록한다.
 
-코딩 조사는 조사 완료 전에 `coding-research-agent`로 출처, `source_types`, `reference_config_paths`, `code_reference_sources`, `code_reference_notes`, 선택지, 추천안, 위험, 검증 계획, 표준 종료 질문을 함께 확인한다. 코딩 조사가 구현 준비 상태가 되려면 최소 3개 이상의 `other`가 아닌 출처 유형을 사용하고, 어떤 출처 설정을 참고했는지 `agent-platform/configs/research/` 아래 JSON 설정으로 남겨야 하며, 관련 오픈소스 구조와 참고 구현 또는 잘 작성된 코드/테스트를 조사해야 한다. 대기업/고신뢰 출처를 쓰는 경우 `reference_config_paths`에 `enterprise-source-registry.json`을 함께 기록한다.
+코딩 조사는 조사 완료 전에 `coding-research-agent`로 출처, `source_types`, `reference_config_paths`, `technology_stack`, `technology_official_docs`, `stack_version_constraints`, `issue_discussion_sources`, `issue_discussion_notes`, `community_signal_notes`, `code_reference_sources`, `code_reference_notes`, 선택지, 추천안, 위험, 검증 계획, 표준 종료 질문을 함께 확인한다. 코딩 조사가 구현 준비 상태가 되려면 최소 3개 이상의 `other`가 아닌 출처 유형을 사용하고, Java/Spring Boot, C, React, Next.js처럼 주요 기술별 공식 문서나 표준을 확인하며, 어떤 출처 설정을 참고했는지 `agent-platform/configs/research/` 아래 JSON 설정으로 남겨야 하고, 관련 오픈소스 구조와 참고 구현 또는 잘 작성된 코드/테스트를 조사해야 한다. 대기업/고신뢰 출처를 쓰는 경우 `reference_config_paths`에 `enterprise-source-registry.json`을 함께 기록한다.
+
+Stack Overflow의 표/accepted answer, Reddit 토론, GitHub Issues/Discussions, 프로젝트 forum과 같은 커뮤니티 신호는 반복 문제, 채택도, 엣지 케이스, 반대 의견을 찾는 데 유용하다. 다만 해당 신호는 사실 증명이 아니라 discovery/adoption/risk signal로 기록하고, 사실 판단은 공식 문서, 표준, paper, maintained repository 같은 권위 출처와 교차 확인한다.
 
 모든 중요한 원천값, 설정값, 주장, 리뷰 신호, 계획 제약은 `source_value_provenance`에 “값 <- 정확한 URL/경로, 접근일, 추출 메모” 형태로 남긴다. 실행 계획은 `plan_evidence`로 각 계획 단계와 근거 출처를 연결한다.
 

@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-05-31",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, and work mode routing structures added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, and stack-aware coding research structures added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -296,6 +296,25 @@
         "_specs/workspace-platform/2026-05-31-work-mode-routing/spec.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-05-31-work-mode-routing.ko.md"
+    },
+    {
+      "id": "2026-05-31-stack-aware-coding-research",
+      "title": "Require stack-aware coding research",
+      "project": "agent-platform",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-05-31",
+      "updated_at": "2026-05-31",
+      "next_action": "No action. Future coding research must record stack-specific official docs or standards, version constraints, issue/discussion sources, and community signal interpretation.",
+      "blockers": [],
+      "references": [
+        "agent-platform/src/agent_platform/planning/coding_research.py",
+        "agent-platform/configs/research/coding-research-profile.json",
+        "agent-platform/docs/coding-research-agent.ko.md",
+        "_specs/workspace-platform/2026-05-31-stack-aware-coding-research/spec.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-05-31-stack-aware-coding-research.ko.md"
     }
   ]
 }

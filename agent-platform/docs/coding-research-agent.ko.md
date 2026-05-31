@@ -11,6 +11,8 @@
 - 어떤 출처 설정을 참고했는지 `reference_config_paths`로 기록한다.
 - 중요한 원천값, 설정값, 버전, 벤치마크, 위험, 주장, 가정은 `source_value_provenance`로 기록한다.
 - 추천안, 아키텍처 선택, 파일 범위, 검증 단계는 `plan_evidence`로 확인한 출처나 명시적 가정과 연결한다.
+- Java/Spring Boot, C, React, Next.js처럼 기술별 공식 문서나 표준이 다른 경우 `technology_stack`, `technology_official_docs`, `stack_version_constraints`를 별도로 기록한다.
+- Stack Overflow, Reddit, GitHub Issues/Discussions, 프로젝트 forum 같은 high-signal 이슈/토론 출처를 확인하고 `issue_discussion_sources`, `issue_discussion_notes`, `community_signal_notes`에 남긴다.
 - 구현 전 best-fit 아키텍처 패턴, reference architecture, C4/arc42/SEI/ADR 같은 아키텍처 문서화 기준, 잘 구조화된 프로젝트 architecture 예시를 확인한다.
 - 최소 두 개의 아키텍처 옵션을 비교하고 `architecture_reference_sources`, `architecture_options`, `architecture_decision_notes`에 기록한다.
 - 구현 전 관련 오픈소스 저장소, 참고 구현, 잘 작성된 코드 구조와 테스트를 조사하고 `code_reference_sources`, `code_reference_notes`에 기록한다.
@@ -40,6 +42,19 @@
 - `other`를 제외하고 최소 3개 이상의 서로 다른 source type을 사용한다.
 - `official`, `paper`, `standard`, `open_source` 중 1개 이상의 권위 출처를 포함한다.
 - `open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `news`, `contrary` 중 1개 이상의 실무/채택/반대 신호 출처를 포함한다.
+
+## 기술 스택과 토론 신호 규칙
+
+구현 준비 상태가 되려면 다음을 기록한다.
+
+- `technology_stack`: 언어, 런타임, 프레임워크, 주요 라이브러리와 관련 표준
+- `technology_official_docs`: 각 주요 기술의 공식 문서나 표준 URL. 예: Spring Boot는 `docs.spring.io`, React는 `react.dev`, Next.js는 `nextjs.org/docs`, C는 ISO C 표준 또는 WG14 자료
+- `stack_version_constraints`: 사용 중이거나 목표로 하는 버전, 표준, 호환성 범위, 또는 아직 모르는 값
+- `issue_discussion_sources`: Stack Overflow, Reddit, GitHub Issues/Discussions, project forum, 또는 검색했지만 관련 토론이 없었다는 기록
+- `issue_discussion_notes`: 해당 토론에서 드러난 반복 문제, accepted/high-vote 답변, 오래된 답변, unresolved debate, 반대 의견
+- `community_signal_notes`: 표, 좋아요, 반응, stars, 댓글을 어떻게 해석했는지와 왜 사실 증명으로 쓰지 않았는지
+
+커뮤니티 신호는 문제 발견, 채택도, 실무 edge case를 찾는 데 유용하지만 공식 문서, 표준, paper, maintained repository와 교차 확인해야 한다.
 
 ## 코드 참고 규칙
 

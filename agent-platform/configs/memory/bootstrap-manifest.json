@@ -26,6 +26,7 @@
       "The spec-driven development layer or spec artifact contract changes.",
       "The skill lifecycle layer or skill validation contract changes.",
       "The architecture-first coding layer or coding architecture comparison contract changes.",
+      "The stack-aware coding research layer or technology-specific official docs and discussion signal rules change.",
       "The request-to-outcome trace layer or traceability contract changes.",
       "The web search record layer or prompt-level search contract changes.",
       "The work mode selection or deferred improvement policy changes.",
@@ -399,6 +400,16 @@
       ]
     },
     {
+      "id": "stack_specific_research_must_shape_code",
+      "rule": "Source-code work must record the technology stack, stack-specific official docs or standards, version constraints, issue/discussion sources, and community signal interpretation before implementation.",
+      "reason": "The user explicitly called out Java/Spring Boot, C, React, Next.js, high-vote Stack Overflow, Reddit, and discussion evidence as technology-specific coding research inputs.",
+      "applies_to": [
+        "coding-research-agent",
+        "coding_research_profile",
+        "complete-coding-research"
+      ]
+    },
+    {
       "id": "enterprise_source_registry_must_stay_discoverable",
       "rule": "The enterprise/high-quality source registry must remain a warm memory anchor so future sessions can find large-company engineering, research-lab, architecture-center, and high-signal sites without repeating discovery.",
       "reason": "The user explicitly asked for those site lists to be managed separately.",
@@ -675,7 +686,7 @@
       "id": "coding_research_profile",
       "path": "agent-platform/configs/research/coding-research-profile.json",
       "tier": "hot",
-      "purpose": "Default source coverage profile for coding research.",
+      "purpose": "Default source coverage profile for coding research, including technology-specific official docs, stack versions, issue/discussion sources, and community signal rules.",
       "required": true,
       "load_order": 13
     },

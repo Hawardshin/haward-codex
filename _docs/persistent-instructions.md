@@ -61,6 +61,9 @@
 - Coding research must record `source_types` and use at least three distinct non-`other` source types.
 - Coding research must record `reference_config_paths` showing which source registry or research profile config was used.
 - Coding research must record material source values, config values, versions, benchmarks, risks, claims, and assumptions in `source_value_provenance`, and link recommendations, architecture choices, and validation steps through `plan_evidence`.
+- Coding research must record `technology_stack`, `technology_official_docs`, and `stack_version_constraints`; major technologies such as Java/Spring Boot, C, React, and Next.js require their own official docs or standards.
+- Coding research must inspect high-signal Stack Overflow, Reddit, GitHub Issues/Discussions, project forum, or similar issue/discussion sources when available, and record `issue_discussion_sources`, `issue_discussion_notes`, and `community_signal_notes`.
+- Treat issue/discussion votes, accepted answers, likes, reactions, stars, and comments as adoption, discovery, or risk signals, not standalone factual proof.
 - Before writing source code, search for best-fit architecture patterns, reference architectures, and architecture documentation references; compare at least two architecture options; record `architecture_reference_sources`, `architecture_options`, and `architecture_decision_notes`.
 - Source-code-writing agents must inspect relevant open-source repositories, reference implementations, or well-structured code and tests before implementation, then record `code_reference_sources` and `code_reference_notes`.
 - Shared settings files must include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide` so the user can understand references and structural rules by opening one file.

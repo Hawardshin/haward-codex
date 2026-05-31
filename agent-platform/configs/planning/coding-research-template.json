@@ -34,6 +34,34 @@
   "plan_evidence": [
     "recommendation, architecture choice, file-scope choice, or validation step <- checked source IDs, repository evidence, command output, or explicit assumption"
   ],
+  "technology_stack": [
+    "Java 21",
+    "Spring Boot 3.3",
+    "React 19",
+    "Next.js 15",
+    "ISO C23"
+  ],
+  "technology_official_docs": [
+    "https://docs.oracle.com/en/java/",
+    "https://docs.spring.io/spring-boot/reference/index.html",
+    "https://react.dev/learn",
+    "https://nextjs.org/docs",
+    "https://www.iso.org/standard/82075.html"
+  ],
+  "stack_version_constraints": [
+    "Record exact framework/runtime versions, standards, compatibility ranges, or explicit unknowns before implementation."
+  ],
+  "issue_discussion_sources": [
+    "https://stackoverflow.com/questions/tagged/<technology>",
+    "https://github.com/<owner>/<repo>/issues?q=<query>",
+    "https://www.reddit.com/r/<community>/search/?q=<query>"
+  ],
+  "issue_discussion_notes": [
+    "Record high-vote or high-reaction issue/discussion patterns, accepted answers, unresolved debates, stale answers, and contradictions."
+  ],
+  "community_signal_notes": [
+    "Treat Stack Overflow votes, Reddit activity, GitHub reactions, stars, likes, and comments as adoption or discovery signals, not standalone factual proof."
+  ],
   "code_reference_sources": [
     "https://github.com/example/project/tree/main/src",
     "https://github.com/example/project/tree/main/tests"

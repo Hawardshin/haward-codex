@@ -13,6 +13,7 @@
 | Agent planning | [Reference source config](topics/agent-planning/2026-05-31-reference-source-config.en.md) |
 | Agent planning | [Code reference research](topics/agent-planning/2026-05-31-code-reference-research.en.md) |
 | Agent planning | [Architecture-first coding](topics/agent-planning/2026-05-31-architecture-first-coding.en.md) |
+| Agent planning | [Stack-aware coding research](topics/agent-planning/2026-05-31-stack-aware-coding-research.en.md) |
 | Agent planning | [Enterprise/high-quality source registry](topics/agent-planning/2026-05-31-enterprise-source-registry.en.md) |
 | Agent planning | [Source discovery and Korean local reviews](topics/agent-planning/2026-05-31-source-discovery-korean-review.en.md) |
 | Agent planning | [Perplexity-style core research agent](topics/agent-planning/2026-05-31-perplexity-style-research-agent.en.md) |

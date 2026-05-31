@@ -64,6 +64,9 @@ This repository is the workspace for building and tracking a personal agent-buil
 - For coding/API/library/architecture/performance/debugging/security/migration research, use `coding-research-agent` before implementation and answer all standard post-research questions.
 - Coding research must record diverse `source_types` and use at least three distinct non-`other` source types before it can be treated as implementation-ready.
 - Coding research must record `reference_config_paths` showing which source registry or research profile config was used.
+- Coding research must record `technology_stack`, `technology_official_docs`, and `stack_version_constraints`; each major known technology such as Java/Spring Boot, C, React, or Next.js must be checked against its own official documentation or standard before implementation.
+- Coding research must inspect high-signal issue/discussion/community sources when available, including Stack Overflow votes/accepted answers, Reddit discussions, GitHub Issues/Discussions, and project forums; record them in `issue_discussion_sources`, `issue_discussion_notes`, and `community_signal_notes`.
+- Treat issue/discussion votes, likes, reactions, stars, and comments as adoption, discovery, or risk signals, not standalone factual proof.
 - Before writing source code, search for best-fit architecture patterns and reference architectures, compare at least two architecture options, and record `architecture_reference_sources`, `architecture_options`, and `architecture_decision_notes`.
 - Source-code-writing agents must inspect relevant open-source repositories, reference implementations, or well-structured code examples and record `code_reference_sources` plus `code_reference_notes` before implementation.
 - Shared settings files must be self-documenting: include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide` so the user can understand references and rules by opening the file.

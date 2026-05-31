@@ -41,6 +41,37 @@ AUTHORITATIVE_SOURCE_TYPES = {"official", "paper", "standard", "open_source"}
 PRACTICAL_SOURCE_TYPES = {"analysis", "community", "contrary", "news", "open_source", "reference_implementation", "social", "tech_blog"}
 MIN_DISTINCT_SOURCE_TYPES = 3
 
+TECHNOLOGY_OFFICIAL_DOC_HINTS = (
+    ("Spring Boot", ("spring boot",), ("docs.spring.io/spring-boot", "spring.io/projects/spring-boot")),
+    ("React", ("react",), ("react.dev",)),
+    ("Next.js", ("next.js", "nextjs"), ("nextjs.org/docs", "nextjs.org/learn", "nextjs.org")),
+    ("ISO C", ("c", "c11", "c17", "c18", "c23", "c language", "iso c"), ("iso.org/standard", "open-std.org", "wg14")),
+    ("JavaScript", ("javascript", "ecmascript"), ("tc39.es", "developer.mozilla.org")),
+    ("TypeScript", ("typescript",), ("typescriptlang.org",)),
+    ("Java", ("java", "jdk"), ("docs.oracle.com", "openjdk.org", "dev.java")),
+    ("Python", ("python",), ("docs.python.org", "peps.python.org")),
+    ("Node.js", ("node.js", "nodejs"), ("nodejs.org",)),
+    ("Go", ("go", "golang"), ("go.dev", "pkg.go.dev")),
+    ("Rust", ("rust",), ("doc.rust-lang.org",)),
+    ("Kubernetes", ("kubernetes",), ("kubernetes.io/docs",)),
+    ("Docker", ("docker",), ("docs.docker.com",)),
+    ("PostgreSQL", ("postgres", "postgresql"), ("postgresql.org/docs",)),
+    ("MySQL", ("mysql",), ("dev.mysql.com/doc",)),
+)
+
+ISSUE_DISCUSSION_MARKERS = (
+    "stackoverflow.com",
+    "stack overflow",
+    "reddit.com",
+    "github.com",
+    "/issues",
+    "/discussions",
+    "github discussions",
+    "discussion",
+    "issue",
+    "forum",
+)
+
 REQUIRED_POST_RESEARCH_QUESTIONS = {
     "what_was_verified": "What exactly was verified?",
     "best_option": "What is the best option now?",
@@ -67,6 +98,12 @@ class CodingResearchInput:
     reference_config_paths: tuple[str, ...] = ()
     source_value_provenance: tuple[str, ...] = ()
     plan_evidence: tuple[str, ...] = ()
+    technology_stack: tuple[str, ...] = ()
+    technology_official_docs: tuple[str, ...] = ()
+    stack_version_constraints: tuple[str, ...] = ()
+    issue_discussion_sources: tuple[str, ...] = ()
+    issue_discussion_notes: tuple[str, ...] = ()
+    community_signal_notes: tuple[str, ...] = ()
     code_reference_sources: tuple[str, ...] = ()
     code_reference_notes: tuple[str, ...] = ()
     architecture_reference_sources: tuple[str, ...] = ()
@@ -95,6 +132,12 @@ class CodingResearchInput:
             reference_config_paths=_tuple_of_strings(data.get("reference_config_paths", []), "reference_config_paths"),
             source_value_provenance=_tuple_of_strings(data.get("source_value_provenance", []), "source_value_provenance"),
             plan_evidence=_tuple_of_strings(data.get("plan_evidence", []), "plan_evidence"),
+            technology_stack=_tuple_of_strings(data.get("technology_stack", []), "technology_stack"),
+            technology_official_docs=_tuple_of_strings(data.get("technology_official_docs", []), "technology_official_docs"),
+            stack_version_constraints=_tuple_of_strings(data.get("stack_version_constraints", []), "stack_version_constraints"),
+            issue_discussion_sources=_tuple_of_strings(data.get("issue_discussion_sources", []), "issue_discussion_sources"),
+            issue_discussion_notes=_tuple_of_strings(data.get("issue_discussion_notes", []), "issue_discussion_notes"),
+            community_signal_notes=_tuple_of_strings(data.get("community_signal_notes", []), "community_signal_notes"),
             code_reference_sources=_tuple_of_strings(data.get("code_reference_sources", []), "code_reference_sources"),
             code_reference_notes=_tuple_of_strings(data.get("code_reference_notes", []), "code_reference_notes"),
             architecture_reference_sources=_tuple_of_strings(data.get("architecture_reference_sources", []), "architecture_reference_sources"),
@@ -147,6 +190,23 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
         gaps.append("Source value provenance is missing; record where material values, assumptions, claims, configuration inputs, or constraints came from.")
     if not research_input.plan_evidence:
         gaps.append("Plan evidence is missing; map the recommendation and implementation plan to checked sources, repository evidence, or explicit assumptions.")
+    if not research_input.technology_stack:
+        gaps.append("Technology stack is missing; record languages, frameworks, runtimes, and major libraries involved, such as Spring Boot, C, React, or Next.js.")
+    if not research_input.technology_official_docs:
+        gaps.append("Technology-specific official docs are missing; record official documentation or standards for each major technology in the stack.")
+    else:
+        for technology in _missing_stack_official_docs(research_input.technology_stack, research_input.technology_official_docs):
+            gaps.append(f"Technology-specific official docs are missing for {technology}.")
+    if not research_input.stack_version_constraints:
+        gaps.append("Stack version constraints are missing; record relevant versions, standards, runtime ranges, or an explicit unknown.")
+    if not research_input.issue_discussion_sources:
+        gaps.append("Issue or discussion sources are missing; inspect high-signal issues, Stack Overflow answers, Reddit discussions, project discussions, or record why none applied.")
+    elif not any(_looks_like_issue_discussion_source(source) for source in research_input.issue_discussion_sources):
+        gaps.append("At least one issue or discussion source must be an issue thread, project discussion, Stack Overflow result, Reddit discussion, forum, or explicit none-found search record.")
+    if not research_input.issue_discussion_notes:
+        gaps.append("Issue or discussion notes are missing; record what the discussions revealed and whether signals were strong, weak, stale, or contradicted.")
+    if not research_input.community_signal_notes:
+        gaps.append("Community signal notes are missing; record how votes, reactions, comments, stars, or likes were used as adoption/discovery signals rather than proof.")
     normalized_source_types = _normalized_source_types(research_input.source_types)
     if not normalized_source_types:
         gaps.append("Source types are missing; record diverse source types such as official, paper, open_source, tech_blog, community, social, or contrary.")
@@ -160,6 +220,8 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
         gaps.append("At least one authoritative source type is required: official, paper, standard, or open_source.")
     if normalized_source_types and not evidence_source_types.intersection(PRACTICAL_SOURCE_TYPES):
         gaps.append("At least one practical or adoption source type is required: open_source, reference_implementation, tech_blog, analysis, community, social, news, or contrary.")
+    if research_input.issue_discussion_sources and normalized_source_types and not evidence_source_types.intersection({"community", "social"}):
+        gaps.append("Issue/discussion sources require community or social in source_types so their evidence role is explicit.")
     if not research_input.code_reference_sources:
         gaps.append("Code reference sources are missing; inspect relevant open-source repositories, reference implementations, or well-structured code before implementation.")
     elif not any(_looks_like_code_reference(source) for source in research_input.code_reference_sources):
@@ -224,6 +286,12 @@ def complete_coding_research(research_input: CodingResearchInput) -> JsonMap:
             "reference_config_paths_count": len(research_input.reference_config_paths),
             "source_value_provenance_count": len(research_input.source_value_provenance),
             "plan_evidence_count": len(research_input.plan_evidence),
+            "technology_stack_count": len(research_input.technology_stack),
+            "technology_official_docs_count": len(research_input.technology_official_docs),
+            "stack_version_constraints_count": len(research_input.stack_version_constraints),
+            "issue_discussion_sources_count": len(research_input.issue_discussion_sources),
+            "issue_discussion_notes_count": len(research_input.issue_discussion_notes),
+            "community_signal_notes_count": len(research_input.community_signal_notes),
             "code_reference_sources_count": len(research_input.code_reference_sources),
             "code_reference_notes_count": len(research_input.code_reference_notes),
             "architecture_reference_sources_count": len(research_input.architecture_reference_sources),
@@ -264,6 +332,56 @@ def _source_type_counts(source_types: tuple[str, ...]) -> dict[str, int]:
         if normalized:
             counts[normalized] = counts.get(normalized, 0) + 1
     return counts
+
+
+def _missing_stack_official_docs(technology_stack: tuple[str, ...], official_docs: tuple[str, ...]) -> list[str]:
+    normalized_docs = tuple(doc.strip().lower() for doc in official_docs if doc.strip())
+    missing: set[str] = set()
+    for technology in technology_stack:
+        normalized_technology = technology.strip().lower()
+        for label, technology_markers, doc_markers in TECHNOLOGY_OFFICIAL_DOC_HINTS:
+            has_matching_doc = any(marker in doc for doc in normalized_docs for marker in doc_markers)
+            if _technology_matches(normalized_technology, technology_markers) and not has_matching_doc:
+                missing.add(label)
+    return sorted(missing)
+
+
+def _technology_matches(technology: str, markers: tuple[str, ...]) -> bool:
+    if not technology:
+        return False
+    tokens = technology.replace(".", " ").replace("-", " ").replace("_", " ").replace("+", " ").split()
+    token_markers = {
+        "docker",
+        "go",
+        "java",
+        "javascript",
+        "kubernetes",
+        "mysql",
+        "postgres",
+        "postgresql",
+        "python",
+        "react",
+        "rust",
+        "spring",
+        "typescript",
+    }
+    for marker in markers:
+        if len(marker) == 1:
+            if technology == marker or technology.startswith(f"{marker} ") or technology.startswith(f"{marker}-"):
+                return True
+        elif marker in token_markers:
+            if marker in tokens:
+                return True
+        elif marker in technology:
+            return True
+    return False
+
+
+def _looks_like_issue_discussion_source(source: str) -> bool:
+    normalized = source.strip().lower()
+    if "none found" in normalized or "no relevant" in normalized:
+        return True
+    return any(marker in normalized for marker in ISSUE_DISCUSSION_MARKERS)
 
 
 def _is_research_config_path(path: str) -> bool:

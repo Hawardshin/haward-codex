@@ -8,6 +8,8 @@
 
 - 소스 코드 작성 전 `coding-research-agent`를 사용한다.
 - 웹 검색으로 최신/외부 근거를 확인한다.
+- Java/Spring Boot, C, React, Next.js처럼 기술별로 공식 문서나 표준이 다른 경우 `technology_stack`, `technology_official_docs`, `stack_version_constraints`를 분리해 기록한다.
+- Stack Overflow, Reddit, GitHub Issues/Discussions 같은 high-signal 토론은 `issue_discussion_sources`, `issue_discussion_notes`, `community_signal_notes`에 남기되 사실 증명이 아니라 채택/문제 발견/위험 신호로만 해석한다.
 - 최소 두 개의 아키텍처 옵션을 비교한다.
 - `architecture_reference_sources`에 아키텍처 프레임워크, reference architecture, ADR, C4/arc42/SEI 자료, 프로젝트 `docs/architecture` 예시를 기록한다.
 - `architecture_options`에 후보 구조와 trade-off를 기록한다.
@@ -23,6 +25,8 @@
 | Reference Architecture | 공식 reference architecture, 성숙한 프로젝트 architecture 문서 | 구조 후보와 경계 비교 |
 | Source Architecture | 유지보수되는 오픈소스의 `src/`, `tests/`, `docs/architecture` | 실제 코드 경계와 테스트 구조 확인 |
 | ADR | architecture decision record | 선택 근거와 대안 추적 |
+| Technology Official Docs | Spring Boot reference, React docs, Next.js docs, ISO C standard | API/런타임/표준 차이를 구조 결정에 반영 |
+| Issue/Discussion Signals | Stack Overflow, Reddit, GitHub Issues/Discussions | 반복 문제, 마이그레이션 위험, 실무 edge case 탐색 |
 
 ## 금지
 
@@ -35,4 +39,3 @@
 
 - `complete-coding-research`가 `architecture_reference_sources`, `architecture_options`, `architecture_decision_notes` 누락을 gap으로 잡는다.
 - 구현 후 테스트 계획은 선택한 아키텍처의 경계, 에러 처리, 통합점, 회귀 위험을 검증해야 한다.
-
