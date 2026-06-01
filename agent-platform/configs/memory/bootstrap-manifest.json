@@ -12,7 +12,7 @@
       "Run default_command after changing durable rules, navigation, source configs, project boundaries, prompts, workflows, or maps."
     ],
     "owner": "agent-platform",
-    "last_reviewed": "2026-06-01",
+    "last_reviewed": "2026-06-02",
     "update_triggers": [
       "A durable user instruction becomes mandatory for future sessions.",
       "A new shared config, prompt, workflow, project registry, or map becomes part of startup context.",
@@ -48,6 +48,7 @@
       "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
       "The install mode registry, installation registry, or installation audit contract changes.",
       "The installable desktop software productization project, desktop distribution registry, or installer release gate policy changes.",
+      "The runtime language decision registry, Rust/Go/Tauri/Wails direction, or runtime language selection policy changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
     ]
@@ -130,6 +131,29 @@
         "end-user installable software productization",
         "desktop installer framework and release gate decisions",
         "separating installer packaging from repository setup install_mode"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "language_decision_registry",
+      "title": "Language Decision Registry",
+      "path": "agent-platform/configs/runtime/language-decision-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "component-specific runtime placement for Python, TypeScript/Next.js, Rust/Tauri, Go, and Electron",
+        "measured-bottleneck gates before Rust or Go migration",
+        "desktop shell versus local service language boundary"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "runtime_language_selection_policy",
+      "title": "Runtime Language Selection Policy",
+      "path": "_docs/policies/runtime-language-selection-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "durable policy for selecting efficient implementation languages by component boundary",
+        "Rust, Go, Python, TypeScript/Next.js, and Electron default roles"
       ],
       "last_checked": "2026-06-02"
     },
@@ -969,6 +993,7 @@
     "memory_bootstrap_workflow",
     "work_mode_registry",
     "install_mode_registry",
+    "language_decision_registry",
     "work_timing_policy",
     "work_timing_workflow",
     "parallel_work_workflow",
@@ -997,6 +1022,7 @@
     "spec_driven_policy",
     "skill_lifecycle_policy",
     "architecture_first_coding_policy",
+    "runtime_language_selection_policy",
     "request_trace_policy",
     "web_search_record_policy",
     "spec_source_reconciliation_workflow",
@@ -1015,6 +1041,7 @@
     "memory_bootstrap_workflow",
     "work_mode_registry",
     "install_mode_registry",
+    "language_decision_registry",
     "work_timing_policy",
     "work_timing_workflow",
     "parallel_work_workflow",
@@ -1043,6 +1070,7 @@
     "spec_driven_policy",
     "skill_lifecycle_policy",
     "architecture_first_coding_policy",
+    "runtime_language_selection_policy",
     "request_trace_policy",
     "web_search_record_policy",
     "spec_source_reconciliation_workflow",
@@ -1136,6 +1164,14 @@
       "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
       "tier": "warm",
       "purpose": "End-user installable desktop software productization registry, kept separate from repository setup install_mode.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "language_decision_registry",
+      "path": "agent-platform/configs/runtime/language-decision-registry.json",
+      "tier": "warm",
+      "purpose": "Component-specific runtime placement for Python, TypeScript/Next.js, Rust/Tauri, Go, and Electron, with measured-bottleneck gates before rewrites.",
       "required": true,
       "load_order": 8
     },
@@ -1440,6 +1476,14 @@
       "path": "_docs/policies/architecture-first-coding-policy.ko.md",
       "tier": "warm",
       "purpose": "Rules for finding, comparing, and recording best-fit architecture references before source-code work.",
+      "required": true,
+      "load_order": 33
+    },
+    {
+      "id": "runtime_language_selection_policy",
+      "path": "_docs/policies/runtime-language-selection-policy.ko.md",
+      "tier": "warm",
+      "purpose": "Rules for selecting Python, TypeScript/Next.js, Rust/Tauri, Go, or Electron by component boundary and measured bottleneck.",
       "required": true,
       "load_order": 33
     },

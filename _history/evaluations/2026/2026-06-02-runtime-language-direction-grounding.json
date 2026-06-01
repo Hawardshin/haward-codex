@@ -1,0 +1,93 @@
+{
+  "task": "Ground factual claims for runtime language direction.",
+  "output_summary": "The workspace now records component-specific runtime direction: Python for agent logic, TypeScript/Next.js for UI, Rust/Tauri for desktop shell/native boundaries, Go for local daemons/CLIs, and Electron as fallback.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable user request summary for UR-2026-06-02-006."
+    },
+    {
+      "evidence_id": "language_registry",
+      "source": "agent-platform/configs/runtime/language-decision-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Self-documenting config added for runtime language decisions."
+    },
+    {
+      "evidence_id": "desktop_registry",
+      "source": "platform-desktop-app/configs/desktop-distribution-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Desktop productization config updated with language runtime strategy and Wails/Go comparison."
+    },
+    {
+      "evidence_id": "rust_official",
+      "source": "https://www.rust-lang.org/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Rust language site."
+    },
+    {
+      "evidence_id": "go_at_google",
+      "source": "https://go.dev/talks/2012/splash.article",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Go article explaining language design for software engineering."
+    },
+    {
+      "evidence_id": "tauri_official",
+      "source": "https://tauri.app/start/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tauri docs."
+    },
+    {
+      "evidence_id": "wails_official",
+      "source": "https://wails.io/docs/next/introduction",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Wails docs."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The workspace now has a language decision registry for runtime placement.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["language_registry"],
+      "verification_steps": ["Run config contract check on language-decision-registry.json."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The current default direction is Python for agent logic, TypeScript/Next.js for UI, Rust/Tauri for desktop shell/native boundaries, Go for local daemons/CLIs, and Electron as fallback.",
+      "claim_type": "recommendation",
+      "support_level": "supported",
+      "evidence_ids": ["language_registry", "desktop_registry", "rust_official", "go_at_google", "tauri_official", "wails_official"],
+      "verification_steps": ["Inspect the runtime policy and registry after web source review."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Rust or Go migration should require measured bottlenecks and prototype measurements.",
+      "claim_type": "recommendation",
+      "support_level": "supported",
+      "evidence_ids": ["language_registry"],
+      "verification_steps": ["Inspect decision_gates and prototype_measurements in the registry."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "This is a directional policy, not a benchmark result.",
+    "Final runtime choices still require component-specific prototypes and measurements."
+  ],
+  "limitation_notes": [
+    "No Rust, Go, Tauri, Wails, or Electron dependency was installed.",
+    "No local desktop prototype or performance benchmark was run in this task."
+  ]
+}

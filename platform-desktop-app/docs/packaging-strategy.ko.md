@@ -18,6 +18,14 @@
 - 리스크: Rust/toolchain, Python sidecar 또는 local service 경계 설계가 필요하다.
 - 확인 필요: `workspace-monitor` static export 호환성, update 전략, macOS/Windows signing.
 
+### Go local service / Wails 비교
+
+Go는 desktop shell의 기본값이라기보다는 local service와 운영 CLI의 1차 후보로 둔다.
+
+- 장점: 단순한 cross-platform binary, 빠른 빌드, 동시성 기반 file watcher/local daemon, 운영 CLI에 적합하다.
+- 리스크: Wails를 desktop shell로 쓰려면 Tauri와 같은 배포/보안/installer release gate를 별도 비교해야 한다.
+- 확인 필요: local service lifecycle, shutdown/restart, repository path permission, Python agent와의 IPC/API boundary.
+
 ### Electron fallback
 
 Electron은 mature ecosystem과 풍부한 installer 사례가 강점이다.
@@ -32,6 +40,14 @@ Electron은 mature ecosystem과 풍부한 installer 사례가 강점이다.
 
 - 장점: 제품 표면이 작다.
 - 리스크: 데스크톱 통합 경험이 약하고 사용자가 local service를 이해해야 할 수 있다.
+
+## 언어/런타임 방향
+
+- Core agent layer는 Python-first를 유지한다.
+- Desktop shell은 현재 Tauri/Rust-first prototype이 가장 맞다.
+- 별도 background service가 필요해지면 Go를 먼저 검토한다.
+- 성능 병목이 안정된 parsing/index/search hot path로 확인되면 Rust native module을 검토한다.
+- 상세 판단 기준은 `agent-platform/configs/runtime/language-decision-registry.json`과 `_docs/policies/runtime-language-selection-policy.ko.md`를 따른다.
 
 ## Release Gate
 

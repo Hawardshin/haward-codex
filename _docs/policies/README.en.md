@@ -7,4 +7,5 @@ Examples:
 - Research and source collection policies
 - Requirements and spec-driven development policies
 - Installation, install mode, installable software productization, validation, and hallucination-prevention policies
+- Runtime and language selection policies
 - Documentation language and context archive policies

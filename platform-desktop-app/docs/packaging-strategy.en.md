@@ -18,6 +18,14 @@ The current recommendation is a Tauri-first prototype.
 - Risks: Rust/toolchain setup and explicit Python sidecar or local service boundary design.
 - Must check: `workspace-monitor` static export compatibility, update strategy, macOS/Windows signing.
 
+### Go Local Service / Wails Comparison
+
+Go is the first candidate for local services and operational CLIs rather than the default desktop shell.
+
+- Strengths: simple cross-platform binaries, fast builds, concurrent file watchers/local daemons, and operational CLIs.
+- Risks: if Wails becomes the desktop shell candidate, it still needs the same distribution, security, and installer release-gate comparison as Tauri.
+- Must check: local service lifecycle, shutdown/restart behavior, repository path permissions, and IPC/API boundary with Python agents.
+
 ### Electron Fallback
 
 Electron has a mature ecosystem and many installer examples.
@@ -32,6 +40,14 @@ If a desktop shell adds little product value, compare OS installers around a CLI
 
 - Strengths: smaller product surface.
 - Risks: weaker desktop integration and more user understanding of local services.
+
+## Language And Runtime Direction
+
+- Keep the core agent layer Python-first.
+- Keep the current desktop shell prototype direction Tauri/Rust-first.
+- If a separate background service becomes necessary, evaluate Go first.
+- If profiling proves a stable parsing/index/search hot path is the bottleneck, evaluate a Rust native module.
+- Detailed decision criteria live in `agent-platform/configs/runtime/language-decision-registry.json` and `_docs/policies/runtime-language-selection-policy.en.md`.
 
 ## Release Gate
 

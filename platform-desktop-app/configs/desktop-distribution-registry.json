@@ -64,6 +64,36 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "go_docs",
+      "title": "Go Documentation",
+      "url": "https://go.dev/doc/docs.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "Go as a compiled language and local service or CLI candidate"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "wails_introduction",
+      "title": "Wails Introduction",
+      "url": "https://wails.io/docs/next/introduction",
+      "source_type": "official_docs",
+      "used_for": [
+        "Wails as a Go backend plus web technology desktop app comparison candidate"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "language_decision_registry",
+      "title": "Language Decision Registry",
+      "path": "agent-platform/configs/runtime/language-decision-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "component-specific Rust, Go, Python, TypeScript, and Electron runtime placement"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
       "id": "microsoft_msix",
       "title": "Microsoft Learn: MSIX documentation",
       "url": "https://learn.microsoft.com/en-us/windows/msix/",
@@ -163,7 +193,7 @@
     },
     {
       "field": "runtime_strategy",
-      "meaning": "How the desktop shell connects UI, local Python agents, repository data, and optional services.",
+      "meaning": "How the desktop shell connects UI, local Python agents, repository data, optional services, and language/runtime boundaries.",
       "required": true
     },
     {
@@ -250,6 +280,26 @@
       ]
     },
     {
+      "id": "wails_go",
+      "status": "comparison_candidate",
+      "best_for": [
+        "Go-owned local service plus web UI desktop shell",
+        "simple cross-platform binary expectations",
+        "teams that strongly prefer Go over Rust for native desktop backend work"
+      ],
+      "risks": [
+        "desktop shell ecosystem and security release gates must be compared with Tauri",
+        "Wails should not replace the existing Next.js monitor unless it lowers total maintenance cost",
+        "installer/signing/update details still require OS-specific validation"
+      ],
+      "must_check_before_install": [
+        "whether the desktop backend is mostly a Go service",
+        "Tauri versus Wails proof-of-concept size and lifecycle comparison",
+        "license and dependency review",
+        "auto-update and installer strategy"
+      ]
+    },
+    {
       "id": "native_packaging_only",
       "status": "comparison_candidate",
       "best_for": [
@@ -312,6 +362,7 @@
   "runtime_strategy": {
     "ui_strategy": "Reuse workspace-monitor first, then add desktop-specific UI only when local desktop behavior needs it.",
     "agent_runtime_strategy": "Keep agent-platform as a Python-first platform layer. Decide later whether a desktop app launches a local service, uses a sidecar process, or talks to a separate runtime.",
+    "language_runtime_strategy": "Use Rust/Tauri first for the desktop shell, Go first for a separate local daemon or operational CLI, Python for agent logic, and TypeScript/Next.js for the UI. Follow agent-platform/configs/runtime/language-decision-registry.json before changing this split.",
     "data_strategy": "Read repository documents or generated snapshots through explicit user-selected workspace paths. Do not silently bundle private repository data.",
     "settings_strategy": "Store user settings separately from bundled defaults. Secrets must be environment variables, OS credential storage, or user-provided runtime input, not checked-in config."
   },
