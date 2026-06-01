@@ -1,0 +1,145 @@
+{
+  "task": "Show agents working with each other in the Workspace Monitor UI.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "agent-collaboration-visible",
+      "description": "The UI must show agents working with each other instead of only listing agents.",
+      "source": "UR-2026-06-02-019, REQ-WM-013",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "snapshot-collaboration-data",
+      "description": "The generated snapshot must include agent collaboration data derived from coordination status and agent configs.",
+      "source": "REQ-WM-013",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "workspace-monitor/lib/snapshot.ts",
+        "workspace-monitor/src/generated/workspace-snapshot.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "task-lanes-and-flow",
+      "description": "The UI must show work lanes and agent-task-project flow so collaboration can be understood visually.",
+      "source": "workspace-monitor/specs/2026-06-02-agent-collaboration-board/spec.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "blockers-next-actions-visible",
+      "description": "The UI must expose blockers and next actions when task data includes them.",
+      "source": "workspace-monitor/specs/2026-06-02-agent-collaboration-board/spec.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/scripts/collect-workspace.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "tests-cover-lanes",
+      "description": "Collector tests must cover lane grouping so collaboration data does not silently regress.",
+      "source": "workspace-monitor/specs/2026-06-02-agent-collaboration-board/validation.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/tests/collector.test.mjs",
+        "npm test"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "real-time-tracing",
+      "description": "Implement live websocket/event-store tracing of running agents.",
+      "source": "scope review",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "workspace-monitor/specs/2026-06-02-agent-collaboration-board/spec.ko.md"
+      ],
+      "rationale": "The request can be satisfied by making current coordination state visible in the static monitor. Real-time tracing needs separate runtime/event-store design."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "workspace-monitor/scripts/collect-workspace.mjs",
+      "purpose": "Build collaborationBoard data.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Render collaboration board and flow UI.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/app/globals.css",
+      "purpose": "Style collaboration lanes and flow map responsively.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/specs/2026-06-02-agent-collaboration-board/spec.ko.md",
+      "purpose": "Record implementation scope and non-goals.",
+      "required": true
+    },
+    {
+      "path": "_history/work-timings/2026/2026-06-02-agent-collaboration-board.json",
+      "purpose": "Record timing and bottleneck data for the task.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "collector-tests",
+      "description": "Collector tests include collaboration lane grouping.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm test"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "snapshot-smoke",
+      "description": "Generated snapshot contains collaborationBoard summary, lanes, and flows.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "node snapshot smoke check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-build",
+      "description": "Workspace Monitor type check and static build pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm run check",
+        "npm run build"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "The current UI is static-snapshot based; real-time agent trace streaming remains future work.",
+    "Only one runtime coordination agent is registered today, so the board is structurally ready but not yet visually crowded with multiple live agents."
+  ],
+  "notes": [
+    "This change makes collaboration visible from existing coordination data without adding a new runtime dependency."
+  ]
+}

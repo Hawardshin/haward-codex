@@ -870,6 +870,214 @@ h3 {
   gap: 6px;
 }
 
+.collaboration-board {
+  display: grid;
+  gap: 14px;
+}
+
+.collaboration-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.collaboration-summary article,
+.collaboration-lane,
+.agent-workload-strip article,
+.agent-flow-map article {
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+}
+
+.collaboration-summary article {
+  min-height: 82px;
+  padding: 12px;
+}
+
+.collaboration-summary span,
+.collaboration-lane header span,
+.task-card-heading span,
+.agent-workload-strip span,
+.flow-node span,
+.flow-node small,
+.collaboration-lane small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.collaboration-summary strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.collaboration-lanes {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(180px, 1fr));
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.collaboration-lane {
+  display: grid;
+  min-width: 180px;
+  align-content: start;
+  gap: 9px;
+  padding: 10px;
+}
+
+.collaboration-lane header,
+.task-card-heading,
+.agent-workload-strip article > div {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.collaboration-lane h3 {
+  margin: 0;
+}
+
+.collaboration-lane header span {
+  display: inline-flex;
+  min-width: 28px;
+  height: 28px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.collaboration-lane article {
+  display: grid;
+  gap: 7px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  padding: 10px;
+}
+
+.task-card-heading strong,
+.flow-node strong,
+.agent-workload-strip strong {
+  overflow-wrap: anywhere;
+}
+
+.task-card-heading span,
+.blocker-list span {
+  display: inline-flex;
+  width: fit-content;
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  padding: 3px 7px;
+}
+
+.collaboration-lane p,
+.agent-workload-strip p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.blocker-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.blocker-list span {
+  color: var(--red);
+  font-size: 11px;
+}
+
+.lane-empty {
+  min-height: 70px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--line);
+  border-radius: 7px;
+}
+
+.agent-workload-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.agent-workload-strip article {
+  display: grid;
+  gap: 7px;
+  padding: 10px;
+}
+
+.agent-workload-strip span {
+  display: inline-flex;
+  width: fit-content;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 3px 7px;
+}
+
+.agent-flow-map {
+  display: grid;
+  gap: 10px;
+}
+
+.agent-flow-map article {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.9fr) 28px minmax(220px, 1.3fr) 28px minmax(160px, 0.8fr);
+  gap: 8px;
+  align-items: stretch;
+  padding: 10px;
+}
+
+.flow-node {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  padding: 9px;
+}
+
+.agent-node {
+  border-left: 4px solid var(--green);
+}
+
+.task-node {
+  border-left: 4px solid var(--blue);
+}
+
+.project-node {
+  border-left: 4px solid var(--amber);
+}
+
+.flow-blocked .task-node {
+  border-left-color: var(--red);
+}
+
+.flow-active .task-node {
+  border-left-color: var(--green);
+}
+
+.flow-arrow {
+  display: grid;
+  place-items: center;
+  color: var(--slate);
+  font-weight: 700;
+}
+
 .task-lanes {
   display: grid;
   gap: 10px;
@@ -1016,12 +1224,14 @@ h3 {
 @media (max-width: 1080px) {
   .metrics-band,
   .history-summary-band,
+  .collaboration-summary,
   .records-grid,
   .document-browser,
   .timeline-docs,
   .folder-table,
   .project-home-grid,
-  .agent-map {
+  .agent-map,
+  .agent-workload-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1029,8 +1239,14 @@ h3 {
   .structure-grid,
   .history-visual-grid,
   .agent-visual-grid,
+  .agent-flow-map article,
   .source-layout {
     grid-template-columns: 1fr;
+  }
+
+  .flow-arrow {
+    min-height: 16px;
+    transform: rotate(90deg);
   }
 }
 
@@ -1054,12 +1270,14 @@ h3 {
 
   .metrics-band,
   .history-summary-band,
+  .collaboration-summary,
   .records-grid,
   .document-browser,
   .timeline-docs,
   .folder-table,
   .project-home-grid,
   .agent-map,
+  .agent-workload-strip,
   .agent-bars,
   .task-lanes > div,
   .requirements-table {

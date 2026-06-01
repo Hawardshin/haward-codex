@@ -1,0 +1,125 @@
+{
+  "task": "Ground factual claims for the agent collaboration board close-out.",
+  "output_summary": "Workspace Monitor now generates collaborationBoard data and renders an agent collaboration board plus agent-task-project flow in the Agents tab.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "collector",
+      "source": "workspace-monitor/scripts/collect-workspace.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary implementation for collaborationBoard snapshot data."
+    },
+    {
+      "evidence_id": "ui",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary UI implementation for the collaboration board and flow map."
+    },
+    {
+      "evidence_id": "types",
+      "source": "workspace-monitor/lib/snapshot.ts",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Snapshot type contract for collaborationBoard."
+    },
+    {
+      "evidence_id": "tests-build",
+      "source": "npm test; npm run collect; npm run check; npm run build",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local verification commands passed."
+    },
+    {
+      "evidence_id": "snapshot-smoke",
+      "source": "node snapshot smoke check on workspace-monitor/src/generated/workspace-snapshot.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Confirmed collaborationBoard summary, lanes, flows, and timing bottleneck output."
+    },
+    {
+      "evidence_id": "openai-tracing",
+      "source": "https://openai.github.io/openai-agents-python/tracing/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Agents SDK tracing documentation used as an observability reference."
+    },
+    {
+      "evidence_id": "autogen-agentchat",
+      "source": "https://microsoft.github.io/autogen/docs/Use-Cases/agent_chat/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official AutoGen AgentChat documentation used as a multi-agent conversation reference."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "Workspace Monitor now includes collaborationBoard in the generated snapshot.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "collector",
+        "types",
+        "tests-build",
+        "snapshot-smoke"
+      ],
+      "verification_steps": [
+        "Read the collector and type definitions.",
+        "Ran npm run collect.",
+        "Checked generated snapshot with a Node smoke command."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Agents tab now renders a collaboration board and agent-task-project flow map.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "ui",
+        "tests-build"
+      ],
+      "verification_steps": [
+        "Read MonitorShell.tsx.",
+        "Ran npm run check and npm run build."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The current snapshot has 60 collaboration handoffs, all in the completed lane, with no active or blocked tasks.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "snapshot-smoke"
+      ],
+      "verification_steps": [
+        "Ran Node snapshot smoke check after npm run build."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "OpenAI Agents SDK tracing records agent-run events such as handoffs, tool calls, guardrails, and custom events.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "openai-tracing"
+      ],
+      "verification_steps": [
+        "Checked the official OpenAI Agents SDK tracing documentation."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "The UI was not visually inspected in a browser because a Browser tool was not available in this session.",
+    "The current repository has one runtime coordination agent, so multi-live-agent appearance will become more informative when status.json records more active agents."
+  ],
+  "limitation_notes": [
+    "This is static snapshot visualization, not real-time tracing.",
+    "No new charting or observability dependency was installed."
+  ]
+}

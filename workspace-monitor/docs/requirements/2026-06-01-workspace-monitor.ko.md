@@ -23,6 +23,7 @@
 | REQ-WM-010 | 웹 UI는 `_history/` 문서의 날짜별 밀도와 유형별 분포를 시각화해야 한다. | must | History UI의 밀도 차트와 유형 막대 확인 |
 | REQ-WM-011 | 웹 UI는 `agent-platform/configs/access/view-mode-registry.json`을 읽어 `user`, `developer`, `superadmin_developer` 보기 모드를 선택할 수 있어야 하며, 현재 기본값은 슈퍼어드민 개발 보기여야 한다. | must | snapshot의 `viewModeCatalog`, 상단 view mode selector, `check-view-modes` 확인 |
 | REQ-WM-012 | 웹 UI는 developer와 superadmin 개발 보기에서 주요 프로젝트와 도구의 소스 코드를 읽기 전용으로 탐색할 수 있어야 한다. | must | snapshot의 `sourceFiles`, Source 탭, `npm run build` 확인 |
+| REQ-WM-013 | 웹 UI는 에이전트들이 어떤 작업 lane에서 움직이고 어떤 task/project와 연결되어 있는지 협업 작업판과 흐름도로 보여줘야 한다. | must | snapshot의 `collaborationBoard`, Agents UI 협업 lane/flow, `npm run build` 확인 |
 
 ## 범위
 
@@ -33,6 +34,7 @@
 - 에이전트 인벤토리와 히스토리 밀도/유형 시각화
 - 사용자/개발자/슈퍼어드민 개발 view mode 선택 UI
 - developer/superadmin용 읽기 전용 소스 코드 뷰어
+- 에이전트 협업 lane, agent-task-project 흐름도, blocker/next-action 표시
 - Vercel 배포 문서
 
 ## 제외 범위

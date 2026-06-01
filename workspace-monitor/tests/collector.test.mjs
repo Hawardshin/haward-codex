@@ -5,6 +5,7 @@ import path from "node:path";
 import test from "node:test";
 
 import {
+  buildAgentCollaborationBoard,
   buildSnapshot,
   collectAgentCatalog,
   collectSourceFiles,
@@ -105,6 +106,8 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.stats.projects, 1);
   assert.equal(snapshot.stats.agentDefinitions, 1);
   assert.equal(snapshot.stats.completedTasks, 1);
+  assert.equal(snapshot.collaborationBoard.summary.completedTasks, 1);
+  assert.equal(snapshot.collaborationBoard.flows.length, 1);
   assert.equal(snapshot.documents.length, 6);
   assert.equal(snapshot.stats.sourceFiles, 1);
   assert.equal(snapshot.sourceFiles[0].language, "python");
@@ -117,6 +120,33 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.folderStructure.docsCategories[0].path, "_docs/instructions");
   assert.equal(snapshot.requirements[0].id, "REQ-WM-001");
   assert.equal(snapshot.viewModeCatalog.defaultMode, "superadmin_developer");
+});
+
+test("buildAgentCollaborationBoard groups agent work by lane", () => {
+  const board = buildAgentCollaborationBoard(
+    [{ id: "runner-agent", status: "running", current_task: "ship work" }],
+    [{ id: "runner-agent", name: "runner-agent", description: "Runner", runtimeStatus: "running", definitionStatus: "active" }],
+    [
+      { id: "task-active", title: "Active work", status: "in_progress", agent: "runner-agent", project: "demo", priority: "high" },
+      {
+        id: "task-blocked",
+        title: "Blocked work",
+        status: "pending",
+        agent: "runner-agent",
+        project: "demo",
+        blockers: ["needs decision"]
+      },
+      { id: "task-done", title: "Done work", status: "completed", agent: "runner-agent", project: "demo" }
+    ]
+  );
+
+  assert.equal(board.summary.activeTasks, 1);
+  assert.equal(board.summary.blockedTasks, 1);
+  assert.equal(board.summary.completedTasks, 1);
+  assert.equal(board.summary.handoffs, 3);
+  assert.equal(board.agents[0].activeTaskCount, 1);
+  assert.equal(board.blockers[0].blockers[0], "needs decision");
+  assert.equal(board.lanes.find((lane) => lane.id === "active").tasks[0].title, "Active work");
 });
 
 test("collectSourceFiles skips generated snapshots and reads source roots", () => {

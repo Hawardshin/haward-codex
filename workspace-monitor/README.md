@@ -9,6 +9,7 @@
 - Markdown 문서는 snapshot 생성 시 읽기 쉬운 HTML preview로 변환한다.
 - `_history/` 문서는 날짜별 타임라인으로 묶어 어떤 날 어떤 작업이 있었는지 본다.
 - `agent-platform/configs/agents/`의 에이전트 정의와 `_ops/coordination/status.json`의 runtime 상태를 합쳐 에이전트 인벤토리를 본다.
+- Agents 탭에서 에이전트별 작업 lane, agent-task-project 연결 흐름, blocker와 next action을 본다.
 - 히스토리 문서의 날짜별 밀도와 유형별 분포를 CSS 기반 차트로 본다.
 - 루트 폴더, `_docs` 카테고리, 프로젝트 홈, 히스토리 수집 위치를 구조 지도에서 확인한다.
 - `agent-platform/configs/access/view-mode-registry.json`을 읽어 사용자 보기, 개발자 보기, 슈퍼어드민 개발 보기를 전환한다. 현재 기본값은 `superadmin_developer`다.
@@ -39,7 +40,7 @@ npm run build
 npm run dev
 ```
 
-`npm run collect`는 repository root의 `_history`, `_ops`, `_requirements`, `_specs`, 프로젝트 docs/specs, 에이전트 설정, view mode 설정, source code catalog를 읽어 `src/generated/workspace-snapshot.json`과 `public/workspace-snapshot.json`을 만든다. snapshot에는 문서 목록뿐 아니라 `historyDays` 날짜 index, `agentCatalog`, `folderStructure`, `viewModeCatalog`, `sourceFiles`도 포함된다.
+`npm run collect`는 repository root의 `_history`, `_ops`, `_requirements`, `_specs`, 프로젝트 docs/specs, 에이전트 설정, view mode 설정, source code catalog를 읽어 `src/generated/workspace-snapshot.json`과 `public/workspace-snapshot.json`을 만든다. snapshot에는 문서 목록뿐 아니라 `historyDays` 날짜 index, `agentCatalog`, `collaborationBoard`, `folderStructure`, `viewModeCatalog`, `sourceFiles`도 포함된다.
 
 ## Vercel 배포
 

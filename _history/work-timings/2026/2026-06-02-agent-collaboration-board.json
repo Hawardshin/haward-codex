@@ -1,0 +1,58 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-02-agent-collaboration-board",
+  "title": "Show agent collaboration in Workspace Monitor UI",
+  "work_mode": "governance",
+  "status": "complete",
+  "measurement_method": "manual_partial",
+  "recorded_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "web first intake",
+      "duration_seconds": 240,
+      "notes": "Checked OpenAI Agents SDK tracing, Agent Builder, LangGraph, AutoGen, Temporal visibility, and related papers."
+    },
+    {
+      "phase_id": "local_context_review",
+      "label": "local context review",
+      "duration_seconds": 360,
+      "notes": "Reviewed Workspace Monitor collector, snapshot types, Agents UI, CSS, tests, requirements, and coordination status."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "snapshot and UI implementation",
+      "duration_seconds": 1080,
+      "notes": "Added collaborationBoard snapshot, lane/flow UI, CSS, types, and collector tests."
+    },
+    {
+      "phase_id": "documentation_history",
+      "label": "documentation and history",
+      "duration_seconds": 720,
+      "notes": "Updated requirements, README, specs, web search record, research note, request trace, and work summary."
+    },
+    {
+      "phase_id": "validation",
+      "label": "validation",
+      "duration_seconds": 780,
+      "notes": "Ran collector tests, snapshot generation, snapshot smoke check, TypeScript check, static build, omission check, grounding check, and evaluate-work."
+    }
+  ],
+  "bottlenecks": [
+    {
+      "phase": "implementation",
+      "reason": "The feature spans snapshot schema, UI layout, responsive styling, tests, and generated data.",
+      "mitigation": "Kept the UI dependency-free and derived all state from the existing coordination snapshot."
+    }
+  ],
+  "summary": {
+    "total_seconds": 3180,
+    "slowest_phase": "snapshot and UI implementation",
+    "bottleneck_candidates": [
+      "The feature spans snapshot schema, UI layout, responsive styling, tests, and generated data.",
+      "Static snapshot generation is simpler than real-time tracing but requires clear provenance and public snapshot review."
+    ],
+    "confidence": "partial",
+    "next_measurement_improvement": "Use _tools/work-timer at task start for automatic start/end timestamps."
+  }
+}

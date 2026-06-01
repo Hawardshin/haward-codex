@@ -5,6 +5,8 @@ export type WorkspaceStats = {
   agents: number;
   agentDefinitions?: number;
   activeAgents: number;
+  activeCollaborationTasks?: number;
+  blockedCollaborationTasks?: number;
   tasks: number;
   completedTasks: number;
   documents: number;
@@ -67,6 +69,74 @@ export type WorkspaceTask = {
     total?: string;
     bottleneck?: string;
   };
+};
+
+export type WorkspaceCollaborationTask = {
+  id: string;
+  title: string;
+  project: string;
+  status: string;
+  priority: string;
+  agent: string;
+  lane: string;
+  nextAction: string;
+  blockers: string[];
+  references: string[];
+  timingTotal: string;
+  bottleneck: string;
+  evaluationReport: string;
+};
+
+export type WorkspaceCollaborationBoard = {
+  summary: {
+    agents: number;
+    activeAgents: number;
+    activeTasks: number;
+    blockedTasks: number;
+    queuedTasks: number;
+    completedTasks: number;
+    handoffs: number;
+    blockers: number;
+  };
+  agents: Array<{
+    id: string;
+    name: string;
+    role: string;
+    status: string;
+    currentTask: string;
+    taskCount: number;
+    activeTaskCount: number;
+    blockedTaskCount: number;
+    completedTaskCount: number;
+  }>;
+  lanes: Array<{
+    id: string;
+    label: string;
+    tasks: WorkspaceCollaborationTask[];
+  }>;
+  flows: Array<{
+    id: string;
+    agent: string;
+    task: string;
+    project: string;
+    status: string;
+    lane: string;
+    priority: string;
+    timingTotal: string;
+    bottleneck: string;
+  }>;
+  blockers: Array<{
+    taskId: string;
+    title: string;
+    agent: string;
+    blockers: string[];
+  }>;
+  nextActions: Array<{
+    taskId: string;
+    title: string;
+    agent: string;
+    nextAction: string;
+  }>;
 };
 
 export type WorkspaceRequirement = {
@@ -163,6 +233,7 @@ export type WorkspaceSnapshot = {
   projects: WorkspaceProject[];
   agents: WorkspaceAgent[];
   agentCatalog?: WorkspaceAgentDefinition[];
+  collaborationBoard?: WorkspaceCollaborationBoard;
   tasks: WorkspaceTask[];
   requirements: WorkspaceRequirement[];
   documents: WorkspaceDocument[];

@@ -106,6 +106,7 @@ export function buildSnapshot(repoRoot) {
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
   const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
   const agentCatalog = collectAgentCatalog(repoRoot, coordination.agents || [], tasks);
+  const collaborationBoard = buildAgentCollaborationBoard(coordination.agents || [], agentCatalog, tasks);
   const completedTasks = tasks.filter((task) => task.status === "completed").length;
   const activeAgents = (coordination.agents || []).filter((agent) => agent.status !== "idle").length;
 
@@ -118,6 +119,8 @@ export function buildSnapshot(repoRoot) {
       agents: (coordination.agents || []).length,
       agentDefinitions: agentCatalog.length,
       activeAgents,
+      activeCollaborationTasks: collaborationBoard.summary.activeTasks,
+      blockedCollaborationTasks: collaborationBoard.summary.blockedTasks,
       tasks: (coordination.tasks || []).length,
       completedTasks,
       documents: documents.length,
@@ -132,6 +135,7 @@ export function buildSnapshot(repoRoot) {
     projects: projects.map(normalizeProject),
     agents: coordination.agents || [],
     agentCatalog,
+    collaborationBoard,
     tasks,
     requirements,
     documents,
@@ -148,6 +152,158 @@ export function buildSnapshot(repoRoot) {
         "Regenerate the snapshot after any redaction and run npm run build again."
       ]
     }
+  };
+}
+
+export function buildAgentCollaborationBoard(runtimeAgents = [], agentCatalog = [], tasks = []) {
+  const agentsByKey = new Map();
+  for (const agent of agentCatalog || []) {
+    agentsByKey.set(agent.name, {
+      id: agent.id,
+      name: agent.name,
+      role: agent.description || agent.trigger || "",
+      status: agent.runtimeStatus || agent.definitionStatus || "unknown",
+      currentTask: agent.currentTask || "",
+      taskCount: 0,
+      activeTaskCount: 0,
+      blockedTaskCount: 0,
+      completedTaskCount: 0
+    });
+  }
+  for (const agent of runtimeAgents || []) {
+    const key = agent.name || agent.id;
+    const existing = agentsByKey.get(key);
+    agentsByKey.set(key, {
+      id: existing?.id || slugify(key),
+      name: key,
+      role: agent.role || existing?.role || "",
+      status: agent.status || existing?.status || "unknown",
+      currentTask: agent.current_task || existing?.currentTask || "",
+      taskCount: existing?.taskCount || 0,
+      activeTaskCount: existing?.activeTaskCount || 0,
+      blockedTaskCount: existing?.blockedTaskCount || 0,
+      completedTaskCount: existing?.completedTaskCount || 0
+    });
+  }
+
+  const laneSpecs = [
+    { id: "active", label: "작업 중" },
+    { id: "blocked", label: "대기/차단" },
+    { id: "queued", label: "예정" },
+    { id: "completed", label: "완료" },
+    { id: "other", label: "기타" }
+  ];
+  const lanes = laneSpecs.map((lane) => ({ ...lane, tasks: [] }));
+  const laneById = new Map(lanes.map((lane) => [lane.id, lane]));
+  const flows = [];
+  const blockers = [];
+  const nextActions = [];
+
+  for (const task of tasks || []) {
+    const agentName = task.agent || "unassigned";
+    if (!agentsByKey.has(agentName)) {
+      agentsByKey.set(agentName, {
+        id: slugify(agentName),
+        name: agentName,
+        role: "",
+        status: "not_registered",
+        currentTask: "",
+        taskCount: 0,
+        activeTaskCount: 0,
+        blockedTaskCount: 0,
+        completedTaskCount: 0
+      });
+    }
+
+    const laneId = collaborationLaneForTask(task);
+    const summary = {
+      id: task.id || slugify(task.title || "task"),
+      title: task.title || task.id || "Untitled task",
+      project: task.project || "workspace",
+      status: task.status || "unknown",
+      priority: task.priority || "",
+      agent: agentName,
+      lane: laneId,
+      nextAction: task.next_action || "",
+      blockers: Array.isArray(task.blockers) ? task.blockers : [],
+      references: Array.isArray(task.references) ? task.references.slice(0, 4) : [],
+      timingTotal: task.timing_summary?.total || "",
+      bottleneck: task.timing_summary?.bottleneck || "",
+      evaluationReport: task.evaluation_report || ""
+    };
+    laneById.get(laneId)?.tasks.push(summary);
+    flows.push({
+      id: `${summary.id}-${slugify(agentName)}`,
+      agent: agentName,
+      task: summary.title,
+      project: summary.project,
+      status: summary.status,
+      lane: laneId,
+      priority: summary.priority,
+      timingTotal: summary.timingTotal,
+      bottleneck: summary.bottleneck
+    });
+
+    if (summary.blockers.length) {
+      blockers.push({
+        taskId: summary.id,
+        title: summary.title,
+        agent: agentName,
+        blockers: summary.blockers
+      });
+    }
+    if (summary.nextAction) {
+      nextActions.push({
+        taskId: summary.id,
+        title: summary.title,
+        agent: agentName,
+        nextAction: summary.nextAction
+      });
+    }
+
+    const agent = agentsByKey.get(agentName);
+    agent.taskCount += 1;
+    if (laneId === "active") {
+      agent.activeTaskCount += 1;
+    }
+    if (laneId === "blocked") {
+      agent.blockedTaskCount += 1;
+    }
+    if (laneId === "completed") {
+      agent.completedTaskCount += 1;
+    }
+  }
+
+  const agents = Array.from(agentsByKey.values()).sort(
+    (left, right) =>
+      right.activeTaskCount - left.activeTaskCount ||
+      right.blockedTaskCount - left.blockedTaskCount ||
+      right.taskCount - left.taskCount ||
+      left.name.localeCompare(right.name)
+  );
+  const sortedLanes = lanes.map((lane) => ({
+    ...lane,
+    tasks: lane.tasks.sort(
+      (left, right) => priorityRank(right.priority) - priorityRank(left.priority) || left.title.localeCompare(right.title)
+    )
+  }));
+
+  return {
+    summary: {
+      agents: agents.length,
+      activeAgents: agents.filter((agent) => agent.status !== "idle" && agent.status !== "not_running").length,
+      activeTasks: sortedLanes.find((lane) => lane.id === "active")?.tasks.length || 0,
+      blockedTasks: sortedLanes.find((lane) => lane.id === "blocked")?.tasks.length || 0,
+      queuedTasks: sortedLanes.find((lane) => lane.id === "queued")?.tasks.length || 0,
+      completedTasks: sortedLanes.find((lane) => lane.id === "completed")?.tasks.length || 0,
+      handoffs: flows.length,
+      blockers: blockers.length
+    },
+    agents,
+    lanes: sortedLanes,
+    flows: flows.slice(0, 40),
+    blockers: blockers.slice(0, 20),
+    nextActions: nextActions.slice(0, 20)
   };
 }
 
@@ -295,6 +451,42 @@ function formatDuration(seconds) {
   const hours = Math.floor(minutes / 60);
   const remainingMinutes = minutes % 60;
   return `${hours}h ${remainingMinutes}m`;
+}
+
+function collaborationLaneForTask(task) {
+  const status = String(task?.status || "").toLowerCase();
+  const blockers = Array.isArray(task?.blockers) ? task.blockers : [];
+  if (blockers.length && !["completed", "done", "closed"].includes(status)) {
+    return "blocked";
+  }
+  if (["in_progress", "running", "active", "working", "reviewing"].includes(status)) {
+    return "active";
+  }
+  if (["blocked", "waiting", "paused"].includes(status)) {
+    return "blocked";
+  }
+  if (["pending", "planned", "queued", "todo", "not_started"].includes(status)) {
+    return "queued";
+  }
+  if (["completed", "complete", "done", "closed"].includes(status)) {
+    return "completed";
+  }
+  return "other";
+}
+
+function priorityRank(priority = "") {
+  const normalized = String(priority).toLowerCase();
+  const ranks = {
+    critical: 5,
+    highest: 5,
+    high: 4,
+    must: 4,
+    medium: 3,
+    normal: 3,
+    low: 2,
+    optional: 1
+  };
+  return ranks[normalized] || 0;
 }
 
 export function collectDocuments(repoRoot) {

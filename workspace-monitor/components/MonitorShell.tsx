@@ -13,6 +13,7 @@ import {
   History,
   Layers,
   ListFilter,
+  Network,
   Search,
   ShieldCheck
 } from "lucide-react";
@@ -41,6 +42,7 @@ const sections: Section[] = [
 ];
 
 type MonitorViewMode = NonNullable<WorkspaceSnapshot["viewModeCatalog"]>["modes"][number];
+type CollaborationBoard = NonNullable<WorkspaceSnapshot["collaborationBoard"]>;
 
 const fallbackViewModes: MonitorViewMode[] = [
   {
@@ -68,6 +70,24 @@ const fallbackViewModes: MonitorViewMode[] = [
     securityNotes: []
   }
 ];
+
+const emptyCollaborationBoard: CollaborationBoard = {
+  summary: {
+    agents: 0,
+    activeAgents: 0,
+    activeTasks: 0,
+    blockedTasks: 0,
+    queuedTasks: 0,
+    completedTasks: 0,
+    handoffs: 0,
+    blockers: 0
+  },
+  agents: [],
+  lanes: [],
+  flows: [],
+  blockers: [],
+  nextActions: []
+};
 
 export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [section, setSection] = useState<SectionId>("overview");
@@ -152,6 +172,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     [agentCatalog]
   );
   const taskStatusCounts = useMemo(() => countBy(snapshot.tasks, (task) => task.status || "unknown"), [snapshot.tasks]);
+  const collaborationBoard = snapshot.collaborationBoard ?? emptyCollaborationBoard;
   const historyCategoryTotals = useMemo(() => {
     const totals = new Map<string, number>();
     for (const day of visibleHistoryDays) {
@@ -629,9 +650,31 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             <Metric label="Agent Configs" value={snapshot.stats.agentDefinitions ?? agentCatalog.length} icon={Bot} tone="green" />
             <Metric label="Runtime Agents" value={snapshot.stats.agents} icon={Activity} tone="blue" />
             <Metric label="Active Agents" value={snapshot.stats.activeAgents} icon={GitBranch} tone="amber" />
-            <Metric label="Tasks" value={snapshot.stats.tasks} icon={Layers} tone="slate" />
-            <Metric label="Completed" value={snapshot.stats.completedTasks} icon={ClipboardCheck} tone="green" />
-            <Metric label="Timing Records" value={snapshot.stats.timingRecords ?? 0} icon={History} tone="violet" />
+            <Metric label="Working Tasks" value={collaborationBoard.summary.activeTasks} icon={Network} tone="red" />
+            <Metric label="Handoffs" value={collaborationBoard.summary.handoffs} icon={Layers} tone="slate" />
+            <Metric label="Blocked" value={collaborationBoard.summary.blockedTasks} icon={ShieldCheck} tone="violet" />
+          </section>
+
+          <section className="panel wide">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Collaboration</p>
+                <h2>에이전트 협업 작업판</h2>
+              </div>
+              <Network size={18} aria-hidden="true" />
+            </div>
+            <AgentCollaborationBoard board={collaborationBoard} />
+          </section>
+
+          <section className="panel wide">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Flow</p>
+                <h2>에이전트와 작업 연결</h2>
+              </div>
+              <GitBranch size={18} aria-hidden="true" />
+            </div>
+            <AgentFlowMap flows={collaborationBoard.flows} />
           </section>
 
           <section className="panel wide">
@@ -726,6 +769,120 @@ function AgentInventory({ agents }: { agents: NonNullable<WorkspaceSnapshot["age
             <span>{agent.docPaths.length} docs</span>
           </div>
           {agent.trigger && <small>{agent.trigger}</small>}
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function AgentCollaborationBoard({ board }: { board: CollaborationBoard }) {
+  if (!board.lanes.length) {
+    return <p className="empty-state">표시할 에이전트 협업 데이터가 없습니다.</p>;
+  }
+
+  return (
+    <div className="collaboration-board">
+      <div className="collaboration-summary">
+        <article>
+          <span>agents</span>
+          <strong>{board.summary.agents}</strong>
+        </article>
+        <article>
+          <span>active</span>
+          <strong>{board.summary.activeTasks}</strong>
+        </article>
+        <article>
+          <span>queued</span>
+          <strong>{board.summary.queuedTasks}</strong>
+        </article>
+        <article>
+          <span>blocked</span>
+          <strong>{board.summary.blockedTasks}</strong>
+        </article>
+      </div>
+      <div className="collaboration-lanes">
+        {board.lanes.map((lane) => (
+          <section key={lane.id} className={`collaboration-lane lane-${lane.id}`}>
+            <header>
+              <h3>{lane.label}</h3>
+              <span>{lane.tasks.length}</span>
+            </header>
+            {lane.tasks.length === 0 ? (
+              <p className="lane-empty">현재 항목 없음</p>
+            ) : (
+              lane.tasks.slice(0, 8).map((task) => (
+                <article key={task.id}>
+                  <div className="task-card-heading">
+                    <strong>{task.title}</strong>
+                    <span>{task.priority || task.status}</span>
+                  </div>
+                  <p>
+                    {task.agent} / {task.project}
+                  </p>
+                  {(task.timingTotal || task.bottleneck) && (
+                    <small>
+                      {task.timingTotal || "unknown"} {task.bottleneck ? `/ ${task.bottleneck}` : ""}
+                    </small>
+                  )}
+                  {task.nextAction && <small>{task.nextAction}</small>}
+                  {task.blockers.length > 0 && (
+                    <div className="blocker-list">
+                      {task.blockers.slice(0, 2).map((blocker) => (
+                        <span key={blocker}>{blocker}</span>
+                      ))}
+                    </div>
+                  )}
+                </article>
+              ))
+            )}
+          </section>
+        ))}
+      </div>
+      <div className="agent-workload-strip">
+        {board.agents.slice(0, 10).map((agent) => (
+          <article key={agent.id}>
+            <div>
+              <strong>{agent.name}</strong>
+              <span>{agent.status}</span>
+            </div>
+            <p>
+              active {agent.activeTaskCount} / blocked {agent.blockedTaskCount} / total {agent.taskCount}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function AgentFlowMap({ flows }: { flows: CollaborationBoard["flows"] }) {
+  if (!flows.length) {
+    return <p className="empty-state">표시할 에이전트 작업 흐름이 없습니다.</p>;
+  }
+
+  return (
+    <div className="agent-flow-map">
+      {flows.slice(0, 18).map((flow) => (
+        <article key={flow.id} className={`flow-row flow-${flow.lane}`}>
+          <div className="flow-node agent-node">
+            <span>agent</span>
+            <strong>{flow.agent}</strong>
+          </div>
+          <div className="flow-arrow" aria-hidden="true">
+            →
+          </div>
+          <div className="flow-node task-node">
+            <span>{flow.status}</span>
+            <strong>{flow.task}</strong>
+            {flow.timingTotal && <small>{flow.timingTotal}</small>}
+          </div>
+          <div className="flow-arrow" aria-hidden="true">
+            →
+          </div>
+          <div className="flow-node project-node">
+            <span>project</span>
+            <strong>{flow.project}</strong>
+          </div>
         </article>
       ))}
     </div>

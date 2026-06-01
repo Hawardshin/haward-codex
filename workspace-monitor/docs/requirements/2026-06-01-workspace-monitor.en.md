@@ -23,6 +23,7 @@
 | REQ-WM-010 | The UI shall visualize `_history/` document density by date and distribution by history type. | must | Check the History density chart and category bars |
 | REQ-WM-011 | The UI shall read `agent-platform/configs/access/view-mode-registry.json` and allow selecting `user`, `developer`, and `superadmin_developer` view modes, with superadmin development view as the current default. | must | Check snapshot `viewModeCatalog`, the top view mode selector, and `check-view-modes` |
 | REQ-WM-012 | The UI shall let developer and superadmin development views browse source code from key projects and tools as read-only content. | must | Check snapshot `sourceFiles`, the Source tab, and `npm run build` |
+| REQ-WM-013 | The UI shall show which work lane each agent is moving through and which task/project each agent is connected to through a collaboration board and flow map. | must | Check snapshot `collaborationBoard`, Agents UI collaboration lanes/flow, and `npm run build` |
 
 ## Scope
 
@@ -33,6 +34,7 @@
 - Agent inventory plus history density/type visualization
 - User/developer/superadmin development view mode selector
 - Developer/superadmin read-only source-code viewer
+- Agent collaboration lanes, agent-task-project flow map, and blocker/next-action display
 - Vercel deployment docs
 
 ## Non-Goals
