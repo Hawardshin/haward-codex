@@ -38,7 +38,7 @@ AI와 오래 일할 때 문제는 답변 하나의 품질만이 아니다. 더 �
   -> 반복 능력의 도구화
 ```
 
-목표는 매번 같은 절차를 무겁게 반복하는 것이 아니다. 작업 성격에 따라 `quick`, `standard`, `ship_first`, `research`, `governance` 모드를 고르고, 필요한 만큼만 엄격하게 실행한다. 빠르게 먼저 결과를 내야 할 때는 개선을 뒤로 미루되, 미룬 항목도 백로그에 남겨 플랫폼의 부채가 보이게 한다.
+목표는 매번 같은 절차를 무겁게 반복하는 것이 아니다. 작업 성격에 따라 `quick`, `standard`, `ship_first`, `research`, `governance` 모드를 고르고, 필요한 만큼만 엄격하게 실행한다. 단, 모드는 프롬프트 선호가 아니라 `work-mode-registry.json`, `check-work-modes`, mode selection record, evaluator로 강제되는 실행 계약이다. 빠르게 먼저 결과를 내야 할 때는 개선을 뒤로 미루되, 미룬 항목도 백로그에 남겨 플랫폼의 부채가 보이게 한다.
 
 반복이 보이면 그 반복을 줄이는 것이 플랫폼의 제품 방향이다. 같은 검색, 같은 문서 탐색, 같은 검증, 같은 산출물 변환이 반복되면 먼저 사람이 하는 순서를 기록하고, 시간을 줄일 수 있는 가장 작은 프롬프트/워크플로/템플릿/도구/스킬로 바꾼다.
 
@@ -76,7 +76,7 @@ AI와 오래 일할 때 문제는 답변 하나의 품질만이 아니다. 더 �
 - 공개 검색 판단 요약에는 검색어, 확인한 출처, 제외한 약한 출처, 계획 반영 인사이트, 남은 불확실성을 남기며 내부 추론 원문은 저장하지 않는다.
 - 웹 검색 후에는 `memory-bootstrap-agent`로 필수 메모리 anchor를 확인하고 핵심 세팅을 로드한다.
 - 웹 검색과 메모리 부트스트랩 후에는 작업 성격에 맞게 `quick`, `standard`, `ship_first`, `research`, `governance` 중 하나의 작업 모드를 선택한다.
-- 작업 모드는 `agent-platform/configs/workflows/work-mode-registry.json`에서 관리하며, 작은 작업은 전체 요구사항/스펙/히스토리 루프를 매번 강제하지 않는다.
+- 작업 모드는 `agent-platform/configs/workflows/work-mode-registry.json`에서 관리하며, 작은 작업은 전체 요구사항/스펙/히스토리 루프를 매번 강제하지 않는다. `quick`이 아닌 작업은 모드 선택 기록과 evaluator target으로 강제한다.
 - 먼저 결과를 내야 하는 작업은 `ship_first` 모드로 처리하고, 비차단 개선은 `_ops/backlog/deferred-improvements.ko.md`에 미룬다.
 - 작업 속도가 문제되거나 여러 lane으로 나눌 수 있으면 `parallel-work-planner-agent`로 의존성, `touch_paths`, 충돌 제어, coordination target, merge 전략을 먼저 확인한다.
 - 같은 파일, 설정, 생성 맵, git 상태 같은 공유 자원을 건드리는 작업은 명시적 dependency, lock, branch/worktree 규칙 없이 병렬 실행하지 않는다.

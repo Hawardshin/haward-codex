@@ -46,7 +46,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep user-readable completed-work summaries under `_history/work-summaries/`.
 - Keep prompt-level web search records under `_history/web-searches/`.
 - Keep large-company and high-quality research site seeds in `configs/research/enterprise-source-registry.json`.
-- Keep selectable work modes and evaluator target strictness in `configs/workflows/work-mode-registry.json`.
+- Keep selectable work modes, enforcement layers, mode selection record requirements, and evaluator target strictness in `configs/workflows/work-mode-registry.json`.
 - Keep user/developer installation profiles in `configs/installations/install-mode-registry.json`; `install_mode` controls setup audience while `work_mode` controls task close-out strictness.
 - Keep end-user desktop installer productization in `platform-desktop-app/`; this is separate from repository setup `install_mode`.
 - Keep external CLI integration in `configs/integrations/cli-adapter-registry.json`; the installable platform may use many CLIs through adapters but must not depend on one CLI to function.
@@ -106,6 +106,9 @@ PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notific
 PYTHONPATH=src python3 -m agent_platform.cli check-install-modes configs/installations/install-mode-registry.json
 PYTHONPATH=src python3 -m agent_platform.cli list-install-modes configs/installations/install-mode-registry.json
 PYTHONPATH=src python3 -m agent_platform.cli show-install-mode configs/installations/install-mode-registry.json developer
+PYTHONPATH=src python3 -m agent_platform.cli check-work-modes configs/workflows/work-mode-registry.json
+PYTHONPATH=src python3 -m agent_platform.cli list-work-modes configs/workflows/work-mode-registry.json
+PYTHONPATH=src python3 -m agent_platform.cli show-work-mode configs/workflows/work-mode-registry.json governance
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/deep-research-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/planning/deep-research-template.json configs/integrations/notification-channels.json
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/unstructured-data-structuring-profile.json
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json
@@ -130,7 +133,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `configs/research/enterprise-source-registry.json`: curated large-company, research-lab, architecture-center, and high-signal source seed list
 - `configs/research/source-discovery-registry.json`: broad search-origin registry for global, Korean, Indian, paper, and Korean local review sources
 - `configs/research/deep-research-profile.json`: source, depth, stage, citation-audit, and report contract for long-form deep research
-- `configs/workflows/work-mode-registry.json`: selectable work modes and evaluator target policy
+- `configs/workflows/work-mode-registry.json`: selectable work modes, mode enforcement layers, mode selection record requirements, and evaluator target policy
 - `configs/installations/install-mode-registry.json`: user install and developer improvement install setup profiles
 - `configs/integrations/cli-adapter-registry.json`: optional CLI adapter boundaries, execution contract, dependency posture, and missing-CLI fallback policy
 - `configs/integrations/notification-channels.json`: notification on/off routing, event filters, provider payload options, and environment-variable secret indirection
@@ -156,7 +159,8 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - shared settings should include `reader_guide`, `reference_links`, `structure_rules`, and `field_guide`, then pass `check-config-contract`
 - factual final outputs should pass `hallucination-guard-agent` when claims need grounding
 - close-out evaluation should include `work_mode`; `quick`, `standard`, `ship_first`, `research`, and `governance` decide which target fields are blocking
-- close-out evaluation should include `web_search_record_targets`, `user_request_summary_targets`, `requirements_targets`, `spec_targets`, `request_trace_targets`, `work_summary_targets`, `source_provenance_targets`, and `plan_evidence_targets` when required by the selected work mode
+- close-out evaluation should include `web_search_record_targets`, `user_request_summary_targets`, `requirements_targets`, `spec_targets`, `request_trace_targets`, `work_summary_targets`, `source_provenance_targets`, `plan_evidence_targets`, and `mode_selection_record_targets` when required by the selected work mode
+- work mode policy is not prompt-only; `check-work-modes` validates registry shape and drift against evaluator target policy
 - `ship_first` close-out should include `deferred_improvement_targets` when improvement ideas are intentionally postponed
 - skill close-out should include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`
 - context archive close-out should include `context_archiving_occurred=true` and `context_archive_targets`

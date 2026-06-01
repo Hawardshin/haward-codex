@@ -22,6 +22,9 @@
     "_history/plans/YYYY/YYYY-MM-DD-slug.ko.md",
     "_specs/scope/YYYY-MM-DD-slug/plan.ko.md"
   ],
+  "mode_selection_record_targets": [
+    "_history/plans/YYYY/YYYY-MM-DD-work-mode-selection.ko.md"
+  ],
   "web_search_record_targets": [
     "_history/web-searches/YYYY/YYYY-MM-DD-slug.ko.md"
   ],

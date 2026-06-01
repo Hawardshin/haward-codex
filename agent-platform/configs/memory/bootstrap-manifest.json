@@ -109,9 +109,11 @@
       "used_for": [
         "mode-based operating loop selection",
         "evaluator target strictness by work type",
+        "mode selection record enforcement",
+        "registry-to-evaluator drift checks",
         "deferred improvement backlog rules"
       ],
-      "last_checked": "2026-05-31"
+      "last_checked": "2026-06-02"
     },
     {
       "id": "install_mode_registry",
@@ -855,8 +857,8 @@
     },
     {
       "id": "work_mode_registry_must_stay_discoverable",
-      "rule": "The work mode registry must remain a hot memory anchor so future sessions can select the lightest sufficient operating loop before planning local work.",
-      "reason": "The user explicitly asked to avoid running every loop every time and to support work-type-specific flows plus deferred improvements.",
+      "rule": "The work mode registry must remain a hot memory anchor so future sessions can select the lightest sufficient operating loop before planning local work and enforce non-quick modes with mode selection records plus evaluator gates.",
+      "reason": "The user explicitly asked to avoid running every loop every time while also making modes enforceable instead of prompt-only preferences.",
       "applies_to": [
         "startup_sequence",
         "required_anchor_ids",
@@ -1199,7 +1201,7 @@
       "id": "work_mode_registry",
       "path": "agent-platform/configs/workflows/work-mode-registry.json",
       "tier": "hot",
-      "purpose": "Selectable work modes and evaluator target policy for avoiding unnecessary full-loop overhead.",
+      "purpose": "Selectable work modes, deterministic mode enforcement layers, mode selection record requirements, and evaluator target policy for avoiding unnecessary full-loop overhead without relying on prompt-only rules.",
       "required": true,
       "load_order": 8
     },

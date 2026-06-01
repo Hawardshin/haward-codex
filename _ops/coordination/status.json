@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-02",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, platform description narrative, platform presentation pack, coding project bootstrap, work timing/bottleneck visibility, deep research agent, PPT reference expansion, non-blocking clarification, human decision inbox interrupt/resume, install mode split, installable software productization, agent/history visualization, runtime language direction, runtime language research/design workflow, CLI adapter boundary, and unstructured-data structuring capability work tracked. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, platform description narrative, platform presentation pack, coding project bootstrap, work timing/bottleneck visibility, deep research agent, PPT reference expansion, non-blocking clarification, human decision inbox interrupt/resume, install mode split, installable software productization, agent/history visualization, runtime language direction, runtime language research/design workflow, CLI adapter boundary, unstructured-data structuring capability, and work mode enforcement work tracked. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -13,6 +13,27 @@
     }
   ],
   "tasks": [
+    {
+      "id": "2026-06-02-work-mode-enforcement",
+      "title": "Enforce work modes beyond prompt guidance",
+      "project": "agent-platform",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-02",
+      "updated_at": "2026-06-02",
+      "next_action": "No action. Future non-quick work should include mode_selection_record_targets, and future mode policy/evaluator changes should run check-work-modes.",
+      "blockers": [],
+      "references": [
+        "agent-platform/configs/workflows/work-mode-registry.json",
+        "agent-platform/src/agent_platform/work_modes.py",
+        "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+        "_docs/policies/work-mode-enforcement-policy.ko.md",
+        "_specs/workspace-platform/2026-06-02-work-mode-enforcement/"
+      ],
+      "timing_report": "_history/work-timings/2026/2026-06-02-work-mode-enforcement.json",
+      "evaluation_report": "_history/evaluations/2026/2026-06-02-work-mode-enforcement.ko.md"
+    },
     {
       "id": "2026-06-02-unstructured-data-structuring",
       "title": "Define unstructured-data structuring platform capability",

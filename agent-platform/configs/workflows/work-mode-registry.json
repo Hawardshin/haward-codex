@@ -7,15 +7,17 @@
     "how_to_read": [
       "Read default_mode first to know the fallback when the user does not choose a mode.",
       "Read modes to pick the lightest mode that still fits the work risk.",
+      "Read mode_enforcement to understand which parts are prompt guidance and which parts are deterministic gates.",
       "Read evaluator_policy to understand which target fields are blocking in each mode.",
       "Read deferred_improvement_rules before using ship_first or postponing improvement work."
     ],
     "owner": "agent-platform",
-    "last_reviewed": "2026-06-01",
+    "last_reviewed": "2026-06-02",
     "update_triggers": [
       "The user asks to change the work loop, close-out strictness, or improvement timing.",
       "A repeated task feels too slow because it runs unnecessary requirements, specs, or history steps.",
       "A repeated task feels too slow because independent lanes could run in parallel.",
+      "The user asks to make modes enforceable instead of prompt-only.",
       "The evaluator target policy changes.",
       "A new workflow type needs a different risk tier."
     ]
@@ -96,6 +98,39 @@
         "bottleneck visibility in evaluator input and coordination boards"
       ],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "open_policy_agent_docs",
+      "title": "Open Policy Agent Documentation",
+      "url": "https://www.openpolicyagent.org/docs/latest",
+      "source_type": "official_docs",
+      "used_for": [
+        "policy-as-code precedent",
+        "separating policy decision from prompt guidance"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "json_schema_spec",
+      "title": "JSON Schema Specification",
+      "url": "https://json-schema.org/specification",
+      "source_type": "standard",
+      "used_for": [
+        "schema-based validation precedent",
+        "machine-checkable configuration constraints"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "akka_guardrails_docs",
+      "title": "Akka Guardrails",
+      "url": "https://doc.akka.io/sdk/agents/guardrails.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "runtime-enforced guardrail precedent",
+        "documenting why governance must not depend on remembering prompts"
+      ],
+      "last_checked": "2026-06-02"
     }
   ],
   "structure_rules": [
@@ -143,9 +178,24 @@
         "modes",
         "selection_rules"
       ]
+    },
+    {
+      "id": "prompt_is_not_enforcement",
+      "rule": "A work mode described only in a prompt is advisory. Enforceable modes must be represented in this registry, checked by the work-mode CLI, recorded in a mode selection artifact, and blocked by the evaluator when required fields are missing.",
+      "reason": "The user noted that prompt-only modes increase freedom but do not make the platform design robust.",
+      "applies_to": [
+        "mode_enforcement",
+        "modes",
+        "evaluator_policy"
+      ]
     }
   ],
   "field_guide": [
+    {
+      "field": "mode_enforcement",
+      "meaning": "Machine-checkable enforcement layers that make work modes stronger than prompt guidance.",
+      "required": true
+    },
     {
       "field": "default_mode",
       "meaning": "Fallback work mode when the user does not explicitly choose one.",
@@ -172,6 +222,40 @@
       "required": true
     }
   ],
+  "mode_enforcement": {
+    "principle": "Prompt instructions are advisory; durable work modes become reliable only when a deterministic gate checks registry shape, mode selection records, evaluator policy, and final reports.",
+    "layers": [
+      {
+        "id": "registry_config",
+        "purpose": "Keep mode definitions, intended use, required artifacts, and evaluator target fields in one self-documenting JSON file.",
+        "enforced_by": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/workflows/work-mode-registry.json"
+      },
+      {
+        "id": "cli_registry_check",
+        "purpose": "Block drift between registry modes and the Python evaluator's required target policy.",
+        "enforced_by": "PYTHONPATH=src python3 -m agent_platform.cli check-work-modes configs/workflows/work-mode-registry.json"
+      },
+      {
+        "id": "mode_selection_record",
+        "purpose": "Require standard, ship_first, research, and governance work to leave a mode selection record with reason, overrides, and enforcement checks.",
+        "enforced_by": "mode_selection_record_targets in evaluate-work input"
+      },
+      {
+        "id": "work_evaluator_gate",
+        "purpose": "Turn missing mode-required artifacts into blocking close-out gaps.",
+        "enforced_by": "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work <input.json>"
+      },
+      {
+        "id": "evaluation_report",
+        "purpose": "Persist the final enforcement result so future agents can audit the mode decision and close-out state.",
+        "enforced_by": "_history/evaluations/YYYY/YYYY-MM-DD-<slug>.ko.md"
+      }
+    ],
+    "non_goals": [
+      "Do not remove agent judgment; enforce the minimum gates that protect platform integrity.",
+      "Do not force full governance for quick, tiny, reversible work unless another rule makes it mandatory."
+    ]
+  },
   "default_mode": "standard",
   "modes": [
     {
@@ -201,8 +285,12 @@
         "work_summary_targets",
         "timing_summary_targets",
         "source_provenance_targets",
-        "plan_evidence_targets"
-      ]
+        "plan_evidence_targets",
+        "mode_selection_record_targets"
+      ],
+      "enforcement_level": "advisory",
+      "selection_record_required": false,
+      "closeout_gate": "evaluate-work still checks initial instruction, result summary, changed files, and verification; full governance targets are advisory unless another rule makes them mandatory."
     },
     {
       "id": "standard",
@@ -222,6 +310,7 @@
         "references_checked",
         "source_provenance_targets",
         "plan_evidence_targets",
+        "mode_selection_record_targets",
         "web_search_record_targets",
         "user_request_summary_targets",
         "requirements_targets",
@@ -230,7 +319,10 @@
         "work_summary_targets",
         "timing_summary_targets"
       ],
-      "deferred_or_optional": []
+      "deferred_or_optional": [],
+      "enforcement_level": "blocking",
+      "selection_record_required": true,
+      "closeout_gate": "evaluate-work blocks close-out when any standard required target, including mode_selection_record_targets, is missing."
     },
     {
       "id": "ship_first",
@@ -248,6 +340,7 @@
       ],
       "required_before_close": [
         "references_checked",
+        "mode_selection_record_targets",
         "web_search_record_targets",
         "verification",
         "deferred_improvement_targets_when_improvement_ideas_exist"
@@ -260,7 +353,10 @@
         "timing_summary_targets",
         "source_provenance_targets",
         "plan_evidence_targets"
-      ]
+      ],
+      "enforcement_level": "blocking",
+      "selection_record_required": true,
+      "closeout_gate": "evaluate-work blocks close-out on references_checked, mode_selection_record_targets, web_search_record_targets, and deferred_improvement_targets when improvement ideas exist."
     },
     {
       "id": "research",
@@ -280,6 +376,7 @@
         "references_checked",
         "source_provenance_targets",
         "plan_evidence_targets",
+        "mode_selection_record_targets",
         "web_search_record_targets",
         "timing_summary_targets"
       ],
@@ -287,9 +384,11 @@
         "requirements_targets",
         "spec_targets",
         "request_trace_targets",
-        "work_summary_targets",
-        "timing_summary_targets"
-      ]
+        "work_summary_targets"
+      ],
+      "enforcement_level": "blocking",
+      "selection_record_required": true,
+      "closeout_gate": "evaluate-work blocks close-out on research evidence, source provenance, mode selection record, web search record, and timing summary."
     },
     {
       "id": "governance",
@@ -308,6 +407,7 @@
         "references_checked",
         "source_provenance_targets",
         "plan_evidence_targets",
+        "mode_selection_record_targets",
         "web_search_record_targets",
         "user_request_summary_targets",
         "requirements_targets",
@@ -316,7 +416,10 @@
         "work_summary_targets",
         "timing_summary_targets"
       ],
-      "deferred_or_optional": []
+      "deferred_or_optional": [],
+      "enforcement_level": "blocking",
+      "selection_record_required": true,
+      "closeout_gate": "evaluate-work blocks close-out when any governance required target, including mode_selection_record_targets, is missing."
     }
   ],
   "selection_rules": [
@@ -324,6 +427,7 @@
     "If no mode is selected, classify from risk and durability: quick for tiny reversible work, research for evidence synthesis, ship_first for verified urgent delivery, governance for durable platform/rule changes, otherwise standard.",
     "When uncertain between two modes, choose the stronger mode only for real risk, durability, or cross-project impact.",
     "If speed matters and independent lanes exist, keep the selected work_mode and add a parallel-work plan instead of inventing a new mode.",
+    "For every non-quick mode, create or update a mode selection record and include it in mode_selection_record_targets before close-out.",
     "Mode selection does not remove the requirement to avoid unsupported factual claims."
   ],
   "evaluator_policy": {
@@ -333,6 +437,7 @@
         "references_checked",
         "source_provenance_targets",
         "plan_evidence_targets",
+        "mode_selection_record_targets",
         "web_search_record_targets",
         "user_request_summary_targets",
         "requirements_targets",
@@ -347,6 +452,7 @@
         "references_checked",
         "source_provenance_targets",
         "plan_evidence_targets",
+        "mode_selection_record_targets",
         "web_search_record_targets",
         "user_request_summary_targets",
         "requirements_targets",
@@ -360,6 +466,7 @@
     "ship_first": {
       "blocking_target_fields": [
         "references_checked",
+        "mode_selection_record_targets",
         "web_search_record_targets"
       ],
       "non_blocking_target_fields": [
@@ -378,6 +485,7 @@
         "references_checked",
         "source_provenance_targets",
         "plan_evidence_targets",
+        "mode_selection_record_targets",
         "web_search_record_targets",
         "timing_summary_targets"
       ],
@@ -394,6 +502,7 @@
         "references_checked",
         "source_provenance_targets",
         "plan_evidence_targets",
+        "mode_selection_record_targets",
         "web_search_record_targets",
         "user_request_summary_targets",
         "requirements_targets",

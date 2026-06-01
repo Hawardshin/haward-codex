@@ -15,6 +15,7 @@ TARGET_GAP_MESSAGES = {
     "references_checked": "Reference research is missing. Check prior internal work or strong external references before evaluation.",
     "source_provenance_targets": "Source provenance target is missing. Record where material values, source data, assumptions, claims, or configuration inputs came from.",
     "plan_evidence_targets": "Plan evidence target is missing. Record the checked evidence that supports the executed plan.",
+    "mode_selection_record_targets": "Mode selection record target is missing. Record the selected mode, selection reason, overrides, and enforcement checks under _history/plans/ or the owning spec plan.",
     "web_search_record_targets": "Web search record target is missing. Add a public search reasoning record under _history/web-searches/.",
     "user_request_summary_targets": "User request summary target is missing. Add a request summary under _history/user-requests/.",
     "requirements_targets": "Requirements target is missing. Add or update requirements under _requirements/ or the owning project's docs/requirements/.",
@@ -27,11 +28,12 @@ TARGET_GAP_MESSAGES = {
 MODE_REQUIRED_TARGETS = {
     "quick": set(),
     "standard": set(TARGET_GAP_MESSAGES),
-    "ship_first": {"references_checked", "web_search_record_targets"},
+    "ship_first": {"references_checked", "mode_selection_record_targets", "web_search_record_targets"},
     "research": {
         "references_checked",
         "source_provenance_targets",
         "plan_evidence_targets",
+        "mode_selection_record_targets",
         "web_search_record_targets",
         "timing_summary_targets",
     },
@@ -52,6 +54,7 @@ class WorkEvaluationInput:
     grounding_checks: tuple[str, ...] = ()
     source_provenance_targets: tuple[str, ...] = ()
     plan_evidence_targets: tuple[str, ...] = ()
+    mode_selection_record_targets: tuple[str, ...] = ()
     web_search_record_targets: tuple[str, ...] = ()
     user_request_summary_targets: tuple[str, ...] = ()
     requirements_targets: tuple[str, ...] = ()
@@ -82,6 +85,10 @@ class WorkEvaluationInput:
             grounding_checks=_tuple_of_strings(data.get("grounding_checks", []), "grounding_checks"),
             source_provenance_targets=_tuple_of_strings(data.get("source_provenance_targets", []), "source_provenance_targets"),
             plan_evidence_targets=_tuple_of_strings(data.get("plan_evidence_targets", []), "plan_evidence_targets"),
+            mode_selection_record_targets=_tuple_of_strings(
+                data.get("mode_selection_record_targets", []),
+                "mode_selection_record_targets",
+            ),
             web_search_record_targets=_tuple_of_strings(data.get("web_search_record_targets", []), "web_search_record_targets"),
             user_request_summary_targets=_tuple_of_strings(data.get("user_request_summary_targets", []), "user_request_summary_targets"),
             requirements_targets=_tuple_of_strings(data.get("requirements_targets", []), "requirements_targets"),
@@ -171,6 +178,7 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
             "grounding_checks_count": len(evaluation_input.grounding_checks),
             "source_provenance_targets_count": len(evaluation_input.source_provenance_targets),
             "plan_evidence_targets_count": len(evaluation_input.plan_evidence_targets),
+            "mode_selection_record_targets_count": len(evaluation_input.mode_selection_record_targets),
             "web_search_record_targets_count": len(evaluation_input.web_search_record_targets),
             "user_request_summary_targets_count": len(evaluation_input.user_request_summary_targets),
             "requirements_targets_count": len(evaluation_input.requirements_targets),

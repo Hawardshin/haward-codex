@@ -31,6 +31,12 @@ from agent_platform.planning.deep_research import DeepResearchInput, complete_de
 from agent_platform.planning.parallel_work import ParallelWorkPlanInput, plan_parallel_work
 from agent_platform.planning.research_insight_planner import ResearchInsightPlanInput, create_research_insight_plan
 from agent_platform.planning.spec_reconciliation import SpecReconciliationInput, reconcile_spec_source
+from agent_platform.work_modes import (
+    check_work_mode_registry,
+    list_work_modes,
+    load_work_mode_registry,
+    show_work_mode,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -92,6 +98,16 @@ def build_parser() -> argparse.ArgumentParser:
     show_install_mode_cmd = subparsers.add_parser("show-install-mode", help="Show one installation mode as JSON.")
     show_install_mode_cmd.add_argument("path", type=Path)
     show_install_mode_cmd.add_argument("mode_id")
+
+    check_work_modes = subparsers.add_parser("check-work-modes", help="Validate the work mode registry and evaluator enforcement policy.")
+    check_work_modes.add_argument("path", type=Path)
+
+    list_work_modes_cmd = subparsers.add_parser("list-work-modes", help="List available work modes.")
+    list_work_modes_cmd.add_argument("path", type=Path)
+
+    show_work_mode_cmd = subparsers.add_parser("show-work-mode", help="Show one work mode as JSON.")
+    show_work_mode_cmd.add_argument("path", type=Path)
+    show_work_mode_cmd.add_argument("mode_id")
 
     check_notifications = subparsers.add_parser("check-notifications", help="Validate notification channel settings without sending messages.")
     check_notifications.add_argument("path", type=Path)
@@ -239,6 +255,36 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "show-install-mode":
         registry = load_install_mode_registry(args.path)
         print(json.dumps(show_install_mode(registry, args.mode_id), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "check-work-modes":
+        registry = load_work_mode_registry(args.path)
+        config_contract_report = check_config_contract(registry, str(args.path))
+        work_mode_report = check_work_mode_registry(registry)
+        print(
+            json.dumps(
+                {
+                    "status": "rework_required"
+                    if config_contract_report["requires_rework"] or work_mode_report["requires_rework"]
+                    else "ready",
+                    "requires_rework": config_contract_report["requires_rework"] or work_mode_report["requires_rework"],
+                    "config_contract": config_contract_report,
+                    "work_modes": work_mode_report,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
+        return 0
+
+    if args.command == "list-work-modes":
+        registry = load_work_mode_registry(args.path)
+        print(json.dumps(list_work_modes(registry), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "show-work-mode":
+        registry = load_work_mode_registry(args.path)
+        print(json.dumps(show_work_mode(registry, args.mode_id), indent=2, ensure_ascii=False))
         return 0
 
     if args.command == "check-notifications":

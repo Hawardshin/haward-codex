@@ -70,6 +70,7 @@
 | REQ-WS-052 | 런타임/언어 선택은 조사에서 끝나지 않고 설계로 이어져야 한다. Rust, Go, Tauri, Wails, Electron, Python, TypeScript/Next.js 같은 선택은 공식 문서, 아키텍처/ADR 참고, 오픈소스 구현, 이슈/토론 신호, 반대 사례를 조사하고, 최소 두 후보 설계, ADR-style 결정 기록, prototype measurement plan, 설치 감사/rollback 계획을 남긴 뒤 구현 또는 의존성 설치로 넘어가야 한다. | UR-2026-06-02-007 | must | baseline | agent-platform/_ops/_templates/_docs | runtime research/design workflow, prompt, template, language registry, config contract, grounding/evaluation 확인 | `agent-platform/configs/runtime/language-decision-registry.json`, `_ops/workflows/64-runtime-language-research-design.md`, `_ops/prompts/94-runtime-language-research-design.md`, `_templates/runtime-language-decision/runtime-language-decision.ko.md` |
 | REQ-WS-053 | 플랫폼은 설치형으로 발전하더라도 특정 CLI, AI assistant CLI, package manager, deployment CLI, vendor shell에 종속되면 안 된다. 설치형 플랫폼은 workspace, history, docs, evaluation, settings, UI, orchestration layer를 제공하고, 외부 CLI는 availability/version/permission/output/fallback contract를 가진 교체 가능한 adapter로 붙여야 한다. CLI가 없으면 전체 플랫폼 실패가 아니라 `capability_missing`으로 degrade해야 하며, CLI를 required/bundled/global install 대상으로 승격하기 전에는 설치 감사, 보안 경계, rollback, 검증 명령을 기록해야 한다. | UR-2026-06-02-008 | must | baseline | agent-platform/platform-desktop-app/_docs/_ops | CLI adapter registry, policy, workflow/prompt, desktop distribution registry, config contract, memory bootstrap, grounding/evaluation 확인 | `agent-platform/configs/integrations/cli-adapter-registry.json`, `_docs/policies/cli-adapter-policy.ko.md`, `_ops/workflows/66-cli-adapter-integration.md`, `_ops/prompts/97-cli-adapter-integration.md` |
 | REQ-WS-054 | 플랫폼은 AI의 핵심 강점 중 하나를 비정형 또는 반정형 데이터를 정형 기록으로 바꾸는 능력으로 취급해야 한다. 긴 대화, 조사 자료, 문서, 리뷰, 로그, 메모, 스크린샷을 요구사항, 스펙, 태스크, evidence item, 표, JSON, 평가 입력으로 바꿀 때는 target schema, source provenance, null/ambiguity handling, validation note를 함께 남겨야 하며, 정형화 결과를 근거나 자동화 입력으로 쓰기 전에는 schema validation과 sample/source audit를 거쳐야 한다. | UR-2026-06-02-009 | must | baseline | agent-platform/_docs/_ops/_philosophy | structuring profile, policy, workflow/prompt, memory bootstrap, config contract, grounding/evaluation 확인 | `agent-platform/configs/usage/unstructured-data-structuring-profile.json`, `_docs/policies/unstructured-data-structuring-policy.ko.md`, `_ops/workflows/67-structure-unstructured-data.md`, `_ops/prompts/98-structure-unstructured-data.md` |
+| REQ-WS-055 | 작업 모드는 단순 프롬프트 선호가 아니라 강제 가능한 실행 계약이어야 한다. `quick`이 아닌 `standard`, `ship_first`, `research`, `governance` 작업은 모드 선택 이유, override, enforcement check를 기록한 `mode_selection_record_targets`를 평가 입력에 포함해야 하며, 모드 정책이나 evaluator target이 바뀌면 `check-work-modes`가 registry와 evaluator drift를 검사해야 한다. | UR-2026-06-02-010 | must | baseline | agent-platform/_docs/_ops | work mode registry, work mode CLI check, evaluator tests, policy, workflow, memory bootstrap, grounding/evaluation 확인 | `agent-platform/configs/workflows/work-mode-registry.json`, `agent-platform/src/agent_platform/work_modes.py`, `_docs/policies/work-mode-enforcement-policy.ko.md`, `_ops/workflows/02-select-work-mode.md`, `_ops/workflows/40-evaluate-and-rework.md` |
 
 ## 변경 관리
 
@@ -109,12 +110,13 @@
 - 2026-06-02에 REQ-WS-052를 추가해 런타임/언어 선택이 조사, 후보 설계, ADR-style 결정 기록, prototype measurement plan으로 이어지도록 승격했다.
 - 2026-06-02에 REQ-WS-053을 추가해 설치형 플랫폼이 특정 CLI에 종속되지 않고 외부 CLI를 교체 가능한 adapter capability로 사용하는 원칙을 공통 통합 구조로 승격했다.
 - 2026-06-02에 REQ-WS-054를 추가해 AI의 비정형 데이터 정형화 능력을 schema, provenance, null/ambiguity handling, validation을 갖춘 공통 플랫폼 capability로 승격했다.
+- 2026-06-02에 REQ-WS-055를 추가해 작업 모드를 프롬프트 선호가 아니라 registry, mode selection record, CLI check, evaluator gate로 강제하는 공통 운영 구조로 승격했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.
 - 원천값과 계획 근거는 `source_value_provenance`, `plan_evidence`, `source_provenance_targets`, `plan_evidence_targets`로 추적한다.
 - 넓은 검색 원천은 `source-discovery-registry.json`을 확인하고, 한국 로컬 리뷰는 `_tools/korean-local-review/`로 점수화한다.
-- 작업 시작 후 `work-mode-registry.json`으로 작업 모드를 선택하고, 평가 입력의 필수 target은 선택한 모드를 따른다.
+- 작업 시작 후 `work-mode-registry.json`으로 작업 모드를 선택하고, 평가 입력의 필수 target은 선택한 모드를 따른다. `quick`이 아닌 작업은 `mode_selection_record_targets`를 남긴다.
 - `ship_first`에서 뒤로 뺀 비차단 개선은 `_ops/backlog/deferred-improvements.ko.md` 또는 프로젝트별 동등 백로그에 남긴다.
 - 코딩 조사에서 Java/Spring Boot, C, React, Next.js 등 주요 기술별 공식 문서/표준, 버전 제약, 이슈/토론 출처, 커뮤니티 신호 해석을 누락하지 않는다.
 - 스킬 작업이 있으면 `_skills/` 원본, 검증 결과, 개선 아이디어를 연결한다.

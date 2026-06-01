@@ -8,21 +8,22 @@
 
 1. Capture the initial instruction and the actual result summary.
 2. Capture the selected `work_mode`; if missing, default to `standard`.
-3. Read `agent-platform/configs/workflows/work-mode-registry.json` to determine which targets are blocking.
+3. Read `agent-platform/configs/workflows/work-mode-registry.json` to determine which targets are blocking, and run `check-work-modes` when mode policy, evaluator targets, or close-out strictness changed.
 4. Summarize the completed work in plain language.
 5. Check prior internal work, repository examples, official docs, mature open-source projects, or other strong references before evaluation.
 6. Validate any reused knowledge-base content with [_ops/workflows/65-validate-knowledge-reference.md](65-validate-knowledge-reference.md).
 7. Capture reusable internet research or external references when useful.
 8. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when the final output contains factual claims.
 9. List changed files, verification results, references checked, grounding checks, source provenance targets, plan evidence targets, web search record targets, user request summary targets, requirements targets, spec targets, skill targets and validation targets when skill work occurred, request trace targets, work summary targets, timing summary targets, deferred improvement targets, context archive targets when archiving occurred, and installation record targets when installation occurred.
-10. If a plan guided the work, link its `_history/plans/YYYY/` file.
-11. Confirm the user-readable summary exists under `_history/work-summaries/YYYY/` when the mode requires it.
-12. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
-13. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
-14. Complete the follow-up action.
-15. Evaluate again.
-16. Save the final evaluation report under `_history/evaluations/YYYY/`.
-17. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
+10. For non-`quick` modes, include `mode_selection_record_targets`.
+11. If a plan guided the work, link its `_history/plans/YYYY/` file.
+12. Confirm the user-readable summary exists under `_history/work-summaries/YYYY/` when the mode requires it.
+13. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
+14. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
+15. Complete the follow-up action.
+16. Evaluate again.
+17. Save the final evaluation report under `_history/evaluations/YYYY/`.
+18. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
 
 ## Python Command
 
@@ -42,13 +43,15 @@ Factual grounding is part of evaluation. If the final output contains factual cl
 
 The evaluator input must include `work_mode`. Missing target fields are blocking according to `agent-platform/configs/workflows/work-mode-registry.json`.
 
+The evaluator input must include `mode_selection_record_targets` for `standard`, `ship_first`, `research`, and `governance`. This prevents work modes from staying prompt-only.
+
 In `quick` mode, full-loop target gaps are non-blocking improvements unless the user or another rule makes them mandatory.
 
-In `ship_first` mode, `references_checked` and `web_search_record_targets` are blocking. If `improvement_ideas` are present, `deferred_improvement_targets` is also blocking.
+In `ship_first` mode, `references_checked`, `mode_selection_record_targets`, and `web_search_record_targets` are blocking. If `improvement_ideas` are present, `deferred_improvement_targets` is also blocking.
 
-In `research` mode, `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, and `web_search_record_targets` are blocking.
+In `research` mode, `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, `mode_selection_record_targets`, and `web_search_record_targets` are blocking.
 
-In `standard` and `governance` modes, web search records, user request summaries, requirements targets, spec targets, source provenance, plan evidence, request traces, work summaries, and timing summaries are blocking.
+In `standard` and `governance` modes, web search records, user request summaries, requirements targets, spec targets, source provenance, plan evidence, mode selection records, request traces, work summaries, and timing summaries are blocking.
 
 In `research` mode, timing summaries are blocking so slow source collection or synthesis phases stay visible.
 

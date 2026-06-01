@@ -4,11 +4,14 @@
 
 작업마다 같은 전체 루프를 반복하지 않도록, 사용자 의도와 위험도에 맞는 작업 모드를 먼저 고른다.
 
+작업 모드는 프롬프트 안내가 아니라 close-out gate다. `quick`을 제외한 모드는 모드 선택 기록과 evaluator target으로 강제한다.
+
 ## Inputs
 
 - 사용자 지시
 - 웹 검색 결과와 공개 검색 기록 후보
 - `agent-platform/configs/workflows/work-mode-registry.json`
+- `agent-platform/src/agent_platform/work_modes.py`
 - 현재 작업의 위험도, 범위, 지속성, 검증 가능성
 
 ## Modes
@@ -34,9 +37,17 @@
    - `governance`: durable repository rules, platform behavior, evaluator, memory, source registry, requirements, specs.
    - `standard`: everything else.
 6. Record the selected mode in the plan, evaluator input, and meaningful work history.
-7. For `ship_first`, create or update `_ops/backlog/deferred-improvements.ko.md` when improvement ideas are intentionally postponed.
-8. Do not use a lighter mode to skip failed verification, unsupported factual claims, install audits, or user-requested rigor.
+7. For non-`quick` modes, create or update a mode selection record under `_history/plans/YYYY/` or the owning spec plan and include it in `mode_selection_record_targets`.
+8. For `ship_first`, create or update `_ops/backlog/deferred-improvements.ko.md` when improvement ideas are intentionally postponed.
+9. Do not use a lighter mode to skip failed verification, unsupported factual claims, install audits, or user-requested rigor.
+10. If mode policy or evaluator target fields changed, run:
+
+```bash
+PYTHONPATH=src python3 -m agent_platform.cli check-work-modes configs/workflows/work-mode-registry.json
+```
 
 ## Rule
 
 Work modes reduce unnecessary artifact overhead. They do not remove web-first intake, git/push rules, or the requirement to ground factual claims.
+
+Prompt text alone is not enforcement. Enforcement requires registry config, `check-work-modes`, a mode selection record, `evaluate-work`, and a saved evaluation report.

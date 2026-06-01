@@ -1,0 +1,125 @@
+{
+  "task": "Ground factual claims for work mode enforcement.",
+  "output_summary": "The workspace now treats work modes as enforceable execution contracts backed by registry config, CLI checks, mode selection records, evaluator gates, and evaluation reports.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request_summary",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable summary of the user's prompt-only mode enforcement request."
+    },
+    {
+      "evidence_id": "work_mode_registry",
+      "source": "agent-platform/configs/workflows/work-mode-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Self-documenting source of truth for work modes and enforcement layers."
+    },
+    {
+      "evidence_id": "work_modes_py",
+      "source": "agent-platform/src/agent_platform/work_modes.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Python validator for work mode registry shape and registry/evaluator target drift."
+    },
+    {
+      "evidence_id": "work_evaluator_py",
+      "source": "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Deterministic close-out evaluator that now includes mode_selection_record_targets in mode-required targets."
+    },
+    {
+      "evidence_id": "work_mode_tests",
+      "source": "agent-platform/tests/test_work_modes.py and agent-platform/tests/test_work_evaluator.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Unit tests covering registry readiness, drift detection, and missing mode selection records."
+    },
+    {
+      "evidence_id": "work_mode_policy",
+      "source": "_docs/policies/work-mode-enforcement-policy.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Workspace policy that states prompt-only modes are not sufficient."
+    },
+    {
+      "evidence_id": "opa_docs",
+      "source": "https://www.openpolicyagent.org/docs/latest",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official OPA documentation for policy-as-code and policy decision delegation."
+    },
+    {
+      "evidence_id": "json_schema",
+      "source": "https://json-schema.org/specification",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official JSON Schema specification for schema and validation concepts."
+    },
+    {
+      "evidence_id": "akka_guardrails",
+      "source": "https://doc.akka.io/sdk/agents/guardrails.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official guardrails documentation showing config/runtime enforcement patterns for AI systems."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The user asked to make work modes enforceable because prompt-only mode instructions are not enough.",
+      "claim_type": "user_instruction",
+      "support_level": "supported",
+      "evidence_ids": ["user_request_summary"],
+      "verification_steps": ["Inspect UR-2026-06-02-010 in the user request summary."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The work mode registry now contains explicit enforcement layers and non-quick mode selection record requirements.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["work_mode_registry"],
+      "verification_steps": ["Inspect mode_enforcement, modes[].selection_record_required, and evaluator_policy in the registry."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The platform now has a check-work-modes CLI path backed by a Python validator.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["work_modes_py"],
+      "verification_steps": ["Inspect work_modes.py and CLI command registration; run check-work-modes."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The evaluator now blocks non-quick modes when mode_selection_record_targets are missing.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["work_evaluator_py", "work_mode_tests"],
+      "verification_steps": ["Inspect MODE_REQUIRED_TARGETS and test_standard_mode_requires_mode_selection_record; run unit tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The enforcement design was informed by policy-as-code, schema validation, and AI guardrail documentation.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": ["opa_docs", "json_schema", "akka_guardrails"],
+      "verification_steps": ["Inspect saved web search and research notes for source use and limitations."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "No external policy engine was installed; enforcement is repository-local Python validation plus evaluator gating.",
+    "External guardrail sources are analogous design evidence, not proof that this exact repository design is optimal."
+  ],
+  "limitation_notes": [
+    "This task does not add a full workflow engine or runtime scheduler.",
+    "Quick mode intentionally remains advisory for small reversible work."
+  ]
+}

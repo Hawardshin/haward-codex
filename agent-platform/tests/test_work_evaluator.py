@@ -18,6 +18,9 @@ def complete_evidence_targets() -> dict[str, tuple[str, ...]]:
         "plan_evidence_targets": (
             "_history/plans/2026/2026-05-31-evaluator.ko.md",
         ),
+        "mode_selection_record_targets": (
+            "_history/plans/2026/2026-05-31-work-mode-selection.ko.md",
+        ),
         "timing_summary_targets": (
             "_history/work-timings/2026/2026-05-31-evaluator.json",
         ),
@@ -476,6 +479,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_ops/artifacts/ops-dashboard.html",),
                 verification=("browser smoke test: OK",),
                 references_checked=("GitHub Flow",),
+                mode_selection_record_targets=("_history/plans/2026/2026-05-31-dashboard-mode.ko.md",),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-dashboard.ko.md",),
                 improvement_ideas=("Backfill the durable spec after the emergency fix.",),
             )
@@ -496,6 +500,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_ops/artifacts/ops-dashboard.html",),
                 verification=("browser smoke test: OK",),
                 references_checked=("GitHub Flow",),
+                mode_selection_record_targets=("_history/plans/2026/2026-05-31-dashboard-mode.ko.md",),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-dashboard.ko.md",),
                 deferred_improvement_targets=("_ops/backlog/deferred-improvements.ko.md",),
                 improvement_ideas=("Backfill the durable spec after the emergency fix.",),
@@ -513,6 +518,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 changed_files=("_research/topics/agent-operations/work-modes.ko.md",),
                 verification=("manual source review: OK",),
                 references_checked=("Google Engineering Practices",),
+                mode_selection_record_targets=("_history/plans/2026/2026-05-31-research-mode.ko.md",),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-work-modes.ko.md",),
             )
         )
@@ -528,6 +534,32 @@ class WorkEvaluatorTests(unittest.TestCase):
         )
         self.assertNotIn(
             "Requirements target is missing. Add or update requirements under _requirements/ or the owning project's docs/requirements/.",
+            report["gaps"],
+        )
+
+    def test_standard_mode_requires_mode_selection_record(self) -> None:
+        targets = complete_evidence_targets()
+        targets.pop("mode_selection_record_targets")
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Make modes enforceable.",
+                result_summary="Added evaluator and registry gates.",
+                changed_files=("agent-platform/src/agent_platform/work_modes.py",),
+                verification=("python3 -m unittest discover -s tests: OK",),
+                references_checked=("Open Policy Agent docs",),
+                **targets,
+                web_search_record_targets=("_history/web-searches/2026/2026-06-02-mode-enforcement.ko.md",),
+                user_request_summary_targets=("_history/user-requests/2026/2026-06-02.ko.md",),
+                requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-06-02-mode-enforcement/spec.ko.md",),
+                request_trace_targets=("_history/request-traces/2026/2026-06-02-mode-enforcement.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-06-02.ko.md",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Mode selection record target is missing. Record the selected mode, selection reason, overrides, and enforcement checks under _history/plans/ or the owning spec plan.",
             report["gaps"],
         )
 

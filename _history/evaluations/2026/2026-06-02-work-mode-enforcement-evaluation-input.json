@@ -1,0 +1,110 @@
+{
+  "initial_instruction": "모드는 단순 프롬프트로 시키면 자유도는 올라가지만 강제되지 않는다. 나의 설계가 탄탄해지지 않는다. 결국 강제화가 되어야한다.",
+  "result_summary": "Work modes are now treated as enforceable execution contracts through work-mode-registry enforcement layers, a new check-work-modes CLI, evaluator-required mode_selection_record_targets for non-quick modes, and updated policies, workflows, requirements, specs, memory bootstrap, and history.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "README.md",
+    "agent-platform/README.md",
+    "agent-platform/configs/workflows/work-mode-registry.json",
+    "agent-platform/configs/evaluation/work-evaluation-template.json",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "agent-platform/src/agent_platform/work_modes.py",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+    "agent-platform/tests/test_work_modes.py",
+    "agent-platform/tests/test_work_evaluator.py",
+    "agent-platform/docs/work-evaluator-agent.md",
+    "_docs/policies/work-mode-enforcement-policy.ko.md",
+    "_docs/policies/work-mode-enforcement-policy.en.md",
+    "_ops/workflows/02-select-work-mode.md",
+    "_ops/workflows/40-evaluate-and-rework.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_specs/workspace-platform/2026-06-02-work-mode-enforcement/",
+    "_history/web-searches/2026/2026-06-02-work-mode-enforcement.ko.md",
+    "_history/plans/2026/2026-06-02-work-mode-enforcement.ko.md",
+    "_history/request-traces/2026/2026-06-02-work-mode-enforcement.ko.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-timings/2026/2026-06-02-work-mode-enforcement.json"
+  ],
+  "verification": [
+    "python3 -m json.tool agent-platform/configs/workflows/work-mode-registry.json: OK",
+    "python3 -m json.tool agent-platform/configs/evaluation/work-evaluation-template.json: OK",
+    "python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json: OK",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-work-modes configs/workflows/work-mode-registry.json: ready",
+    "python3 -m unittest discover -s tests: OK, 118 tests",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract <core configs>: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json --root ..: ready_to_bootstrap",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean with existing presentation-agent generated-output warnings"
+  ],
+  "references_checked": [
+    "https://www.openpolicyagent.org/docs/latest",
+    "https://json-schema.org/specification",
+    "https://doc.akka.io/sdk/agents/guardrails.html",
+    "https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/content-filter-prompt-shields",
+    "agent-platform/configs/workflows/work-mode-registry.json",
+    "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+    "_ops/workflows/02-select-work-mode.md",
+    "_ops/workflows/40-evaluate-and-rework.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-work-mode-enforcement-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-work-mode-enforcement.ko.md",
+    "_research/topics/agent-operations/2026-06-02-work-mode-enforcement.ko.md",
+    "_specs/workspace-platform/2026-06-02-work-mode-enforcement/plan.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-work-mode-enforcement.ko.md",
+    "_specs/workspace-platform/2026-06-02-work-mode-enforcement/plan.ko.md",
+    "_research/topics/agent-operations/2026-06-02-work-mode-enforcement.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-02-work-mode-enforcement.ko.md",
+    "_specs/workspace-platform/2026-06-02-work-mode-enforcement/plan.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-work-mode-enforcement.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-02-work-mode-enforcement.ko.md",
+    "_requirements/reviews/2026-06-02-work-mode-enforcement.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-work-mode-enforcement/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-work-mode-enforcement/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-work-mode-enforcement/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-work-mode-enforcement/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-work-mode-enforcement/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-work-mode-enforcement.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-work-mode-enforcement.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Expose mode selection record status in workspace-monitor.",
+    "Create a governance-change scaffold generator if this pattern repeats."
+  ]
+}
