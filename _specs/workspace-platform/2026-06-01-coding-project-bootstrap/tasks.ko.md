@@ -9,4 +9,4 @@
 - [x] workspace monitor 반영
 - [x] 검증 실행
 - [x] 평가 작성
-- [ ] 커밋 및 push
+- [x] 커밋 및 push

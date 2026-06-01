@@ -36,7 +36,7 @@
 
 - 상태: `ready_to_close`
 - blocking gap: 없음
-- 커밋/push: 예정
+- 커밋/push: `8d21602` pushed
 - 개선 아이디어:
   - CLI flag 대신 질문형 안내가 필요하면 interactive mode를 추가한다.
   - 실제 생성 프로젝트 사례가 쌓이면 stack별 post-bootstrap checklist를 강화한다.

@@ -8,4 +8,4 @@
 | 스펙 | `_specs/workspace-platform/2026-06-01-coding-project-bootstrap/spec.ko.md` |
 | 구현 | `_tools/coding-project-bootstrap/`, `_ops/workflows/27-bootstrap-coding-project.md`, `_ops/prompts/27-bootstrap-coding-project.md` |
 | 평가 | `_history/evaluations/2026/2026-06-01-coding-project-bootstrap.ko.md` |
-| 커밋 | 예정 |
+| 커밋 | `8d21602` pushed |

@@ -36,7 +36,7 @@
 
 - Status: `ready_to_close`
 - Blocking gaps: none
-- Commit/push: pending
+- Commit/push: `8d21602` pushed
 - Improvement ideas:
   - Add guided interactive mode if the user wants prompts instead of CLI flags.
   - Strengthen stack-specific post-bootstrap checklists after more real projects are created.
