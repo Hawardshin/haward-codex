@@ -1,0 +1,200 @@
+{
+  "research_goal": "Research the safest maintainable architecture for a Vercel-deployable Next.js repository monitoring site.",
+  "coding_context": "New root project workspace-monitor with Next.js App Router, repository document snapshot generation, and static dashboard UI.",
+  "research_types": [
+    "api_docs",
+    "architecture",
+    "implementation_pattern",
+    "open_source",
+    "security"
+  ],
+  "search_channels": [
+    "web search",
+    "official documentation search",
+    "repository search",
+    "package registry search"
+  ],
+  "sources_checked": [
+    "https://nextjs.org/docs/app/guides/static-exports",
+    "https://vercel.com/docs/frameworks/full-stack/nextjs",
+    "https://nextjs.org/docs/app/guides/mdx",
+    "https://www.npmjs.com/package/lucide-react",
+    "_ops/projects/registry.json",
+    "_ops/workflows/25-project-boundary-management.md",
+    "_docs/open-source-installation-policy.ko.md"
+  ],
+  "source_types": [
+    "official",
+    "open_source",
+    "internal",
+    "reference_implementation",
+    "community",
+    "analysis",
+    "tech_blog"
+  ],
+  "reference_config_paths": [
+    "agent-platform/configs/research/source-registry.json",
+    "agent-platform/configs/research/coding-research-profile.json"
+  ],
+  "source_value_provenance": [
+    "Next.js static export output mode <- Next.js Static Exports official docs checked 2026-06-01.",
+    "Vercel Next.js deployment support <- Vercel Next.js official docs checked 2026-06-01.",
+    "Markdown/MDX handling alternatives <- Next.js MDX guide checked 2026-06-01.",
+    "Icon package install and license review <- lucide-react npm page checked 2026-06-01.",
+    "Project boundary and install audit rules <- local _ops and _docs policies checked 2026-06-01."
+  ],
+  "plan_evidence": [
+    "Use Next.js static export <- user requested Vercel and public deploy readiness, official docs support output export.",
+    "Use generated snapshot <- repository is private now and public later, so data exposure should be reviewable before deploy.",
+    "Use a separate root project <- project-boundary workflow says substantial independent work belongs in its own root folder.",
+    "Avoid full MDX execution for repository docs <- escaped preview meets readability goal while reducing raw HTML execution risk."
+  ],
+  "technology_stack": [
+    "Node.js 20.9+",
+    "Next.js 16.2.2",
+    "React",
+    "TypeScript",
+    "lucide-react",
+    "Vercel"
+  ],
+  "technology_official_docs": [
+    "https://nextjs.org/docs/app/guides/static-exports",
+    "https://react.dev/",
+    "https://www.typescriptlang.org/docs/",
+    "https://vercel.com/docs/frameworks/full-stack/nextjs",
+    "https://nextjs.org/docs/app/guides/mdx",
+    "https://www.npmjs.com/package/lucide-react",
+    "https://nodejs.org/api/test.html"
+  ],
+  "stack_version_constraints": [
+    "Use Node >=20.9.0 in package engines for modern Next.js support.",
+    "Next.js docs checked on 2026-06-01 show latest version 16.2.2.",
+    "package-lock.json records exact installed dependency tree after npm install."
+  ],
+  "issue_discussion_sources": [
+    "https://github.com/vercel/next.js/discussions",
+    "https://stackoverflow.com/questions/tagged/next.js",
+    "https://github.com/lucide-icons/lucide/issues"
+  ],
+  "issue_discussion_notes": [
+    "High-signal project discussions and Q&A are useful for future debugging, but this implementation uses official docs and small local tests as primary proof.",
+    "No blocking current issue was found before implementation; community sources are treated as risk discovery signals."
+  ],
+  "community_signal_notes": [
+    "GitHub discussions, Stack Overflow votes, and package registry popularity are adoption/discovery signals, not standalone factual proof."
+  ],
+  "language_options": [
+    "TypeScript with Next.js for Vercel-ready UI, typed snapshot imports, and React component structure.",
+    "Python static HTML generator using existing workspace Python tools.",
+    "Plain HTML/CSS/JS static artifact without framework."
+  ],
+  "selected_language": "TypeScript with Next.js for Vercel-ready UI, typed snapshot imports, and React component structure.",
+  "language_decision_notes": [
+    "Selected TypeScript/Next.js because the user explicitly requested Next.js and Vercel deployment.",
+    "Rejected Python-only static HTML because it would be less aligned with Vercel's Next.js workflow.",
+    "Rejected plain HTML because the dashboard is expected to grow into richer management UI."
+  ],
+  "code_reference_sources": [
+    "https://nextjs.org/docs/app/guides/static-exports",
+    "https://vercel.com/docs/frameworks/full-stack/nextjs",
+    "_tools/workspace-index/src/workspace_index.py",
+    "_tools/task-board/src/task_board.py"
+  ],
+  "code_reference_notes": [
+    "Reuse the repository's existing pattern of generated operation maps and coordination boards, but keep monitor-specific code inside workspace-monitor.",
+    "Use App Router files app/layout.tsx and app/page.tsx with project-local components and generated data."
+  ],
+  "architecture_reference_sources": [
+    "https://nextjs.org/docs/app/guides/static-exports",
+    "https://vercel.com/docs/frameworks/full-stack/nextjs",
+    "https://c4model.com/",
+    "https://arc42.org/overview",
+    "_ops/workflows/25-project-boundary-management.md"
+  ],
+  "architecture_theory_sources": [
+    "https://c4model.com/",
+    "https://arc42.org/overview",
+    "https://nextjs.org/docs/app/guides/static-exports"
+  ],
+  "architecture_practitioner_sources": [
+    "https://github.com/vercel/next.js/discussions",
+    "https://stackoverflow.com/questions/tagged/next.js",
+    "_tools/workspace-index/src/workspace_index.py"
+  ],
+  "architecture_options": [
+    "Static snapshot dashboard: collect repository docs into JSON and render with static Next.js pages.",
+    "Server-side repository reader: deploy a server function that reads repository files at request time.",
+    "Single generated HTML artifact: generate one static HTML dashboard without Next.js."
+  ],
+  "architecture_decision_notes": [
+    "Selected static snapshot dashboard because it is Vercel-friendly, public-reviewable, and avoids runtime file access ambiguity.",
+    "Rejected server-side repository reader because Vercel runtime file access and private data exposure are harder to reason about.",
+    "Rejected single HTML artifact because the user requested Next.js and future extensibility."
+  ],
+  "architecture_tradeoff_notes": [
+    "Theory favors clear data producer/consumer boundaries; practitioner deployment guidance favors static assets for simple public dashboards. Both support the snapshot-first architecture."
+  ],
+  "folder_structure_options": [
+    "Next.js feature folders inside workspace-monitor with app, components, lib, scripts, src/generated, docs, specs, tests.",
+    "Shared _tools source collector extension plus standalone HTML artifact.",
+    "Add the monitor into agent-platform as a platform artifact."
+  ],
+  "folder_structure_decision_notes": [
+    "Selected workspace-monitor root project because it has independent deployment, UI lifecycle, generated data, and tests.",
+    "Rejected adding it to agent-platform because the monitoring site has a separate product/deployment boundary."
+  ],
+  "folder_semantics_notes": [
+    "app contains Next.js routes and global CSS.",
+    "components contains reusable UI surfaces.",
+    "scripts contains repository parsing and snapshot generation.",
+    "src/generated contains committed monitor data used by static builds.",
+    "docs/specs/tests contain project-local documentation, spec, and validation."
+  ],
+  "maintainability_notes": [
+    "Snapshot generation separates data collection from UI rendering.",
+    "TypeScript types make future document categories and UI fields easier to extend.",
+    "Project-local docs and specs keep deployment decisions discoverable."
+  ],
+  "findings": [
+    "Next.js static export is a fit for a document snapshot dashboard.",
+    "Vercel has first-class Next.js deployment support.",
+    "Public deployment needs a committed, reviewable snapshot rather than opaque runtime scanning."
+  ],
+  "options": [
+    "Next.js static snapshot dashboard.",
+    "Next.js server-side repository reader.",
+    "Generated HTML artifact."
+  ],
+  "recommendation": "Build a separate workspace-monitor Next.js project with a repository snapshot generator and static dashboard UI.",
+  "post_research_answers": {
+    "what_was_verified": "Verified Next.js static export docs, Vercel Next.js deployment docs, MDX guidance, icon package source, and repository project-boundary rules.",
+    "best_option": "A separate Next.js static snapshot dashboard project.",
+    "why_this_option": "It matches the user's Next.js/Vercel request, keeps project boundaries clean, and makes public data review explicit.",
+    "alternatives_rejected": "Server-side runtime reader was rejected due to public/private data and Vercel runtime ambiguity; single HTML artifact was rejected because it limits future management UI growth.",
+    "implementation_impact": "Create workspace-monitor package, collector script, generated snapshot, UI components, docs, tests, installation record, and project registry entry.",
+    "risks_and_unknowns": "Vercel parent path behavior may differ; public snapshot may contain private data unless reviewed.",
+    "validation_plan": "Run npm run collect, npm test, npm run check, npm run build, local browser verification, grounding, and work evaluation.",
+    "reusable_knowledge": "Capture deployment and public snapshot review rules in workspace-monitor docs.",
+    "next_action": "Implement the project and install project-local dependencies."
+  },
+  "validation_steps": [
+    "npm run collect",
+    "npm test",
+    "npm run check",
+    "npm run build",
+    "browser verification"
+  ],
+  "risks_or_unknowns": [
+    "Public snapshot content must be reviewed before deploy.",
+    "Vercel build root behavior may require adjusting MONITOR_REPO_ROOT.",
+    "Markdown preview is intentionally limited."
+  ],
+  "capture_targets": [
+    "workspace-monitor/docs/deployment.ko.md",
+    "_history/web-searches/2026/2026-06-01-workspace-monitor.ko.md"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-01-workspace-monitor.ko.md"
+  ],
+  "knowledge_validation_status": "ready_to_reference"
+}

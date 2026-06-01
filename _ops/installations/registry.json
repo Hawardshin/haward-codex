@@ -200,6 +200,34 @@
       "rollback_path": "rm -rf /Users/shinjoungeun/.codex/skills/create-validated-skill",
       "installation_record_path": "_history/installations/2026/2026-05-31-create-validated-skill.ko.md",
       "commit": "bb30d5a"
+    },
+    {
+      "id": "2026-06-01-workspace-monitor-nextjs",
+      "date": "2026-06-01",
+      "status": "installed",
+      "name": "workspace-monitor Next.js dependencies",
+      "scope": "project",
+      "owning_project": "workspace-monitor",
+      "package_manager": "npm",
+      "install_command": "npm install --save-exact next@16.2.2 react@latest react-dom@latest lucide-react@latest; npm install --save-exact next@16.2.6; npm install --save-dev --save-exact typescript@latest @types/node@latest @types/react@latest @types/react-dom@latest; npm install",
+      "environment_path": "workspace-monitor/node_modules/",
+      "dependency_record_paths": [
+        "workspace-monitor/package.json",
+        "workspace-monitor/package-lock.json"
+      ],
+      "version_or_lock_status": "Exact versions recorded in package.json and package-lock.json; postcss override pinned to 8.5.10.",
+      "security_review": "Initial audit found Next/PostCSS vulnerabilities; Next was updated to 16.2.6 and postcss overridden to 8.5.10. Final npm audit reported 0 vulnerabilities.",
+      "license_review": "Direct dependency metadata checked: Next MIT, React MIT, React DOM MIT, lucide-react ISC, TypeScript Apache-2.0.",
+      "verification": [
+        "npm audit --json: 0 vulnerabilities after postcss override",
+        "npm ls --depth=0: installed versions confirmed",
+        "npm test: 4 tests passed",
+        "npm run check: passed",
+        "npm run build: passed"
+      ],
+      "rollback_path": "Remove workspace-monitor/node_modules and package-lock.json, then remove dependencies from workspace-monitor/package.json or revert the commit.",
+      "installation_record_path": "_history/installations/2026/2026-06-01-workspace-monitor-nextjs.ko.md",
+      "commit": "PENDING"
     }
   ]
 }

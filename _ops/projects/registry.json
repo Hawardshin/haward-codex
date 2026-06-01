@@ -54,6 +54,37 @@
         "Store raw PPT/PPTX/assets only after project-local license review.",
         "Reusable presentation reference curation behavior is tracked as a skill under _skills/."
       ]
+    },
+    {
+      "name": "workspace-monitor",
+      "path": "workspace-monitor/",
+      "status": "active",
+      "type": "repository-monitoring-site",
+      "purpose": "Vercel-deployable Next.js monitoring site that visualizes repository history, projects, agents, requirements, specs, evaluations, and Markdown documents from a generated workspace snapshot.",
+      "scope": "Project-local Next.js UI, repository snapshot generator, generated monitor data, deployment docs, tests, and monitor-specific requirements/specs.",
+      "project_specific_home": [
+        "workspace-monitor/app/",
+        "workspace-monitor/components/",
+        "workspace-monitor/lib/",
+        "workspace-monitor/scripts/",
+        "workspace-monitor/src/generated/",
+        "workspace-monitor/docs/",
+        "workspace-monitor/tests/",
+        "workspace-monitor/specs/"
+      ],
+      "shared_dependencies": [
+        "_history/",
+        "_ops/",
+        "_requirements/",
+        "_specs/",
+        "agent-platform/",
+        "presentation-agent/"
+      ],
+      "boundary_notes": [
+        "Keep monitor UI code, data collection scripts, generated snapshots, and deployment settings inside workspace-monitor/.",
+        "Read shared repository documents as data sources; do not move source histories or project docs into the monitor project.",
+        "Before deploying publicly, review generated snapshots for private data and regenerate only the documents intended for public visibility."
+      ]
     }
   ]
 }

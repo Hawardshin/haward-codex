@@ -1,0 +1,165 @@
+{
+  "task": "Ground factual claims for the workspace-monitor Next.js repository monitoring site.",
+  "output_summary": "A new workspace-monitor Next.js project was added with a static repository snapshot collector, dashboard UI, Vercel static export configuration, deployment docs, installation records, and verification notes.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "project_files",
+      "source": "workspace-monitor/",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked project folder containing the Next.js app, collector, tests, docs, specs, and generated snapshot files."
+    },
+    {
+      "evidence_id": "collector",
+      "source": "workspace-monitor/scripts/collect-workspace.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked collector script that scans repository Markdown and JSON documents into generated snapshot files."
+    },
+    {
+      "evidence_id": "ui",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked dashboard component implementing project, history, document, requirement, and agent views."
+    },
+    {
+      "evidence_id": "static_config",
+      "source": "workspace-monitor/next.config.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked Next.js config using static export settings for Vercel-compatible static deployment."
+    },
+    {
+      "evidence_id": "deployment_docs",
+      "source": "workspace-monitor/docs/deployment.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked deployment guide documenting Vercel project root, build command, output directory, and public review checklist."
+    },
+    {
+      "evidence_id": "validation",
+      "source": "workspace-monitor/specs/2026-06-01-workspace-monitor/validation.ko.md",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked validation log for collector tests, TypeScript check, Next build, npm audit, and HTTP/HTML smoke checks."
+    },
+    {
+      "evidence_id": "install_record",
+      "source": "_history/installations/2026/2026-06-01-workspace-monitor-nextjs.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked installation audit record for project-local npm dependencies and license/security checks."
+    },
+    {
+      "evidence_id": "next_static_docs",
+      "source": "https://nextjs.org/docs/app/guides/static-exports",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Next.js documentation for static export behavior."
+    },
+    {
+      "evidence_id": "vercel_next_docs",
+      "source": "https://vercel.com/docs/frameworks/full-stack/nextjs",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Vercel documentation for deploying Next.js applications."
+    },
+    {
+      "evidence_id": "next_mdx_docs",
+      "source": "https://nextjs.org/docs/app/guides/mdx",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Next.js documentation reviewed while choosing whether to render Markdown through MDX or a generated snapshot preview."
+    },
+    {
+      "evidence_id": "lucide_docs",
+      "source": "https://www.npmjs.com/package/lucide-react",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "NPM package metadata for the icon dependency used in the UI."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now contains a separate workspace-monitor Next.js project.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "project_files"
+      ],
+      "verification_steps": [
+        "Checked the tracked workspace-monitor file list and project registry entry."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The workspace-monitor collector builds repository history, project, agent, requirement, and document data into generated JSON snapshots.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "collector",
+        "validation"
+      ],
+      "verification_steps": [
+        "Ran npm run collect and collector tests."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The dashboard UI includes overview, project, history, document, requirement, and agent views with search or filter controls and Markdown/JSON previews.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "ui",
+        "validation"
+      ],
+      "verification_steps": [
+        "Inspected MonitorShell.tsx and verified rendered HTML via local HTTP smoke check."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The project is configured for a static Next.js export suitable for later Vercel deployment when the repository is made public or otherwise connected to Vercel.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "static_config",
+        "deployment_docs",
+        "next_static_docs",
+        "vercel_next_docs"
+      ],
+      "verification_steps": [
+        "Checked next.config.mjs, vercel.json, deployment docs, and ran npm run build."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Project-local dependencies were installed and audited, with npm audit reporting zero vulnerabilities at verification time.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "install_record",
+        "validation"
+      ],
+      "verification_steps": [
+        "Ran npm audit --json and recorded installation details."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Vercel behavior can change over time; deployment instructions should be rechecked against official Vercel and Next.js docs before first production deployment.",
+    "The generated snapshot may contain private repository history and must be reviewed before making the repository or deployment public."
+  ],
+  "limitation_notes": [
+    "The in-app Browser tool was not exposed in this session, so screenshot verification was replaced with HTTP 200 and rendered HTML content checks.",
+    "No live Vercel deployment was created because the repository is currently private and the user asked for Vercel-ready implementation rather than deployment credentials."
+  ]
+}

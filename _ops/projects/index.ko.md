@@ -5,6 +5,8 @@
 | 프로젝트 | 상태 | 유형 | 목적 | 경계 |
 | --- | --- | --- | --- | --- |
 | `agent-platform/` | active | core-platform | 에이전트 구축 플랫폼 중심 프로젝트 | 플랫폼 공통 기능은 여기, 도메인 실험은 별도 루트 프로젝트 |
+| `presentation-agent/` | active | domain-agent-project | 발표 자료와 발표 스킬을 위한 전용 프로젝트 | 발표 레퍼런스, 에셋, 변환 도구, 산출물은 이 프로젝트 안에 둔다 |
+| `workspace-monitor/` | active | repository-monitoring-site | 저장소 히스토리, 프로젝트, 에이전트, 요구사항, 문서를 시각화하는 Next.js 모니터링 사이트 | UI, snapshot 생성기, 배포 설정은 이 프로젝트 안에 두고 원천 문서는 공유 폴더에서 읽는다 |
 
 ## 운영 규칙
 
