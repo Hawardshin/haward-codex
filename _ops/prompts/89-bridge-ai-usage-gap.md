@@ -12,6 +12,9 @@ Use agent-platform/configs/usage/ai-usage-gap-profile.json as the diagnostic pro
 
 Classify the user's current AI-use gap, if any:
 - vague_intent
+- bad_or_biased_instruction
+- no_output_contract
+- deterministic_truth_machine_assumption
 - single_shot_oracle_use
 - poor_task_fit_judgment
 - missing_verification
@@ -23,13 +26,27 @@ Do not blame the user. Treat the gap as a solvable workflow, context, verificati
 
 For the current task:
 1. Improve the task framing with goal, context, constraints, examples, and success criteria when needed.
-2. Check task fit: whether AI should draft, search, code, test, critique, automate, or defer to human/source/tool review.
-3. Add an iteration loop: draft, critique, revise, verify.
-4. Add evidence: sources for factual claims, tests for code, and value provenance for numbers.
-5. Promote reusable patterns into the smallest durable asset: prompt, workflow, template, tool, skill, config, operating model, or history note.
+2. If the instruction is biased, leading, or conclusion-seeking, rewrite it into a neutral task brief before execution.
+3. If the prompt lacks an output contract, add output format, depth, tone, examples, exclusions, and acceptance criteria.
+4. If the user treats the LLM as a deterministic truth machine, briefly apply the probabilistic model framing and add verification requirements.
+5. Check task fit: whether AI should draft, search, code, test, critique, automate, or defer to human/source/tool review.
+6. Add an iteration loop: draft, critique, revise, verify.
+7. Add evidence: sources for factual claims, tests for code, and value provenance for numbers.
+8. Promote reusable patterns into the smallest durable asset: prompt, workflow, template, tool, skill, config, operating model, or history note.
+
+Minimum rewritten instruction fields:
+- goal
+- context
+- constraints
+- output format
+- acceptance criteria
+- counterevidence or alternatives
+- verification path
+- assumptions or questions
 
 Return:
 - gap classification
+- rewritten instruction when useful
 - bridge intervention
 - changed or proposed durable assets
 - verification path

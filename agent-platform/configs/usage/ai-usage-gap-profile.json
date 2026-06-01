@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-06-01",
   "name": "ai-usage-gap-profile",
-  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
+  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: question and instruction quality, task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
   "reader_guide": {
     "summary": "Use this profile when a user asks how to use AI better, when an AI-assisted task is vague, when outputs repeatedly miss intent, or when the platform should coach a user from one-off prompting toward reliable workflows.",
     "how_to_read": [
@@ -127,6 +127,74 @@
         "user need for understanding system actions"
       ],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "openai_prompt_engineering",
+      "title": "Best practices for prompt engineering with the OpenAI API",
+      "url": "https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-the-openai-api",
+      "source_type": "official",
+      "used_for": [
+        "clear instructions",
+        "separating instructions from context",
+        "desired output format examples"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "anthropic_clear_direct",
+      "title": "Be clear, direct, and detailed",
+      "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/be-clear-and-direct",
+      "source_type": "official",
+      "used_for": [
+        "clear and direct instruction quality",
+        "context that a person with little background could follow"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "azure_prompt_engineering",
+      "title": "Prompt engineering techniques - Azure OpenAI",
+      "url": "https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/prompt-engineering",
+      "source_type": "official",
+      "used_for": [
+        "LLM next-word likelihood framing",
+        "clear instructions and prompt structure",
+        "recency bias in prompt placement"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "nist_generative_ai_profile",
+      "title": "AI RMF Generative AI Profile",
+      "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+      "source_type": "official",
+      "used_for": [
+        "generative AI risks",
+        "overreliance, automation bias, and human-AI interaction risks"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "nist_bias_sp1270",
+      "title": "Towards a Standard for Identifying and Managing Bias in Artificial Intelligence",
+      "url": "https://www.nist.gov/publications/towards-standard-identifying-and-managing-bias-artificial-intelligence",
+      "source_type": "official",
+      "used_for": [
+        "harmful AI bias identification and management",
+        "bias as a risk to manage rather than ignore"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "stanford_language_modeling",
+      "title": "CS224N language modeling lecture materials",
+      "url": "https://cs224n.stanford.edu/slides/cs224n-spr2024-lecture05-rnnlm.pdf",
+      "source_type": "course",
+      "used_for": [
+        "language modeling as predicting the next word/token",
+        "probabilistic framing for prompt sensitivity"
+      ],
+      "last_checked": "2026-06-01"
     }
   ],
   "structure_rules": [
@@ -174,6 +242,24 @@
         "verification_lens",
         "risk_controls"
       ]
+    },
+    {
+      "id": "biased_or_leading_instructions_must_be_rewritten",
+      "rule": "If an instruction is biased, leading, loaded, or asks the model to prove a desired conclusion, rewrite it into a neutral task with assumptions, counterevidence, and verification requirements.",
+      "reason": "A probabilistic language model will follow prompt framing; biased prompts can produce confident but distorted outputs.",
+      "applies_to": [
+        "bad_instruction_patterns",
+        "instruction_rewrite_contract"
+      ]
+    },
+    {
+      "id": "probabilistic_models_need_precise_context",
+      "rule": "Treat LLM outputs as probabilistic completions conditioned on the prompt; improve the conditioning with clear goals, context, constraints, examples, output format, and verification path.",
+      "reason": "Better questions and instructions shift the model toward more useful output distributions.",
+      "applies_to": [
+        "llm_assumptions",
+        "prompt_quality_checklist"
+      ]
     }
   ],
   "field_guide": [
@@ -201,11 +287,23 @@
       "field": "asset_promotion_rules",
       "meaning": "When to turn a good AI-use pattern into a durable platform asset.",
       "required": true
+    },
+    {
+      "field": "bad_instruction_patterns",
+      "meaning": "Common poor instructions that should be rewritten before execution.",
+      "required": true
+    },
+    {
+      "field": "instruction_rewrite_contract",
+      "meaning": "How to turn vague, biased, or overloaded instructions into usable task briefs.",
+      "required": true
     }
   ],
   "trigger_situations": [
     "The user asks why some people use AI well and others do not.",
+    "The user says questions or instructions must be improved before AI can answer well.",
     "A request is too vague to produce a useful result without adding context, criteria, or examples.",
+    "A request is biased, leading, or asks the model to confirm a preferred conclusion.",
     "The user repeatedly asks for the same AI-assisted workflow.",
     "An AI output would be risky without verification, sources, tests, or human review.",
     "A successful prompt or collaboration pattern should be preserved for future use."
@@ -220,6 +318,36 @@
         "expectation that AI will infer hidden preferences"
       ],
       "first_intervention": "Restate the goal, add missing context, propose success criteria, and continue with reasonable assumptions when safe."
+    },
+    {
+      "id": "bad_or_biased_instruction",
+      "symptom": "The user gives a leading, loaded, one-sided, or conclusion-seeking instruction.",
+      "likely_root_causes": [
+        "confirmation-seeking",
+        "unclear evidence standard",
+        "not asking for alternatives or counterarguments"
+      ],
+      "first_intervention": "Rewrite the task neutrally, state assumptions, ask for evidence and counterevidence, and separate facts from preferences."
+    },
+    {
+      "id": "no_output_contract",
+      "symptom": "The user asks for work without specifying output format, depth, audience, constraints, or acceptance criteria.",
+      "likely_root_causes": [
+        "assuming the model can infer hidden expectations",
+        "not separating task from desired artifact",
+        "lack of review criteria"
+      ],
+      "first_intervention": "Add an explicit output contract: format, scope, depth, exclusions, examples, and verification path."
+    },
+    {
+      "id": "deterministic_truth_machine_assumption",
+      "symptom": "The user treats an LLM as if it deterministically knows truth rather than generating likely continuations conditioned on context.",
+      "likely_root_causes": [
+        "weak mental model of LLM behavior",
+        "overreliance",
+        "lack of source or test habits"
+      ],
+      "first_intervention": "Explain the probabilistic framing briefly, then add source grounding, tests, or uncertainty markers."
     },
     {
       "id": "single_shot_oracle_use",
@@ -284,6 +412,8 @@
   ],
   "strong_user_behaviors": [
     "Defines task outcome, audience, constraints, input data, and success criteria.",
+    "Writes neutral instructions that ask for evidence, alternatives, counterarguments, and uncertainty when the topic is debatable.",
+    "Specifies output contract: format, depth, tone, exclusions, examples, acceptance criteria, and verification path.",
     "Uses AI for exploration, drafting, critique, transformation, automation planning, and verification support instead of only final-answer generation.",
     "Decomposes large work into plan, evidence, implementation, validation, and evaluation steps.",
     "Iterates with the model: asks for alternatives, compares trade-offs, tests assumptions, and revises prompts.",
@@ -306,10 +436,36 @@
       ]
     },
     {
+      "id": "instruction_quality_gate",
+      "use_when": [
+        "vague_intent",
+        "no_output_contract"
+      ],
+      "action": "Rewrite the user's prompt into a clear task brief with goal, context, constraints, output format, acceptance criteria, examples, and verification path.",
+      "output_artifacts": [
+        "rewritten instruction",
+        "prompt quality checklist",
+        "acceptance criteria"
+      ]
+    },
+    {
+      "id": "bias_neutralization",
+      "use_when": [
+        "bad_or_biased_instruction"
+      ],
+      "action": "Remove leading framing, separate facts from preferences, ask for counterevidence, and require source-grounded claims.",
+      "output_artifacts": [
+        "neutralized prompt",
+        "assumption list",
+        "counterevidence checklist"
+      ]
+    },
+    {
       "id": "task_fit_check",
       "use_when": [
         "poor_task_fit_judgment",
-        "missing_verification"
+        "missing_verification",
+        "deterministic_truth_machine_assumption"
       ],
       "action": "Classify whether AI should draft, search, critique, calculate, code, verify, or defer to human/source/tool review.",
       "output_artifacts": [
@@ -372,6 +528,8 @@
   "agent_response_contract": [
     "Do not merely answer vague AI-use questions; convert them into a reusable operating pattern when the request is durable.",
     "When the user seems blocked by low AI literacy, improve the task shape first: goal, context, constraints, examples, criteria, verification.",
+    "When the user's instruction is biased or leading, rewrite it neutrally before execution and preserve the user's intent separately from factual claims.",
+    "When the user implies the LLM should simply know the truth, briefly apply the probabilistic model framing and add grounding or verification.",
     "When a user asks for broad AI improvement advice, ground it in external research and internal workflow evidence.",
     "When an AI-use gap is observed during work, fix the immediate task and record the repeatable lesson if it will help future work.",
     "Do not over-ask for clarification; make reasonable assumptions for low-risk gaps and record them.",
@@ -399,6 +557,80 @@
       "promote_to": "persistent instruction, policy, or operating model"
     }
   ],
+  "llm_assumptions": [
+    "LLM outputs are conditioned on the prompt and available context.",
+    "Many LLMs generate by selecting likely next tokens from a probability distribution, so wording, order, examples, and constraints materially affect outputs.",
+    "A fluent answer is not proof that the claim is true.",
+    "Bias in the prompt can amplify biased or one-sided outputs.",
+    "Prompt quality does not replace verification; it improves the chance that the output is useful and checkable."
+  ],
+  "bad_instruction_patterns": [
+    {
+      "id": "vague_command",
+      "example": "Do this well.",
+      "problem": "No goal, context, scope, output shape, or acceptance criteria.",
+      "rewrite_rule": "State the desired outcome, audience, context, constraints, output format, and verification path."
+    },
+    {
+      "id": "leading_confirmation",
+      "example": "Prove that this plan is the best.",
+      "problem": "Asks the model to confirm a conclusion rather than evaluate alternatives.",
+      "rewrite_rule": "Ask for pros, cons, alternatives, counterevidence, risks, and decision criteria."
+    },
+    {
+      "id": "biased_framing",
+      "example": "Explain why users who disagree are wrong.",
+      "problem": "Frames one side as correct before evidence is examined.",
+      "rewrite_rule": "Ask for perspectives, evidence quality, uncertainty, and where each side may be right."
+    },
+    {
+      "id": "hidden_preference",
+      "example": "Make it good.",
+      "problem": "Relies on unstated taste or quality criteria.",
+      "rewrite_rule": "Provide examples, style constraints, quality bar, target user, and review checklist."
+    },
+    {
+      "id": "unsupported_factual_claim",
+      "example": "Use the latest numbers and explain the trend.",
+      "problem": "Requests factual claims without source, date, region, definition, or citation requirements.",
+      "rewrite_rule": "Require current web search, source URLs, access dates, definitions, and uncertainty notes."
+    },
+    {
+      "id": "overloaded_prompt",
+      "example": "Research everything, make a plan, code it, test it, design it, and summarize it.",
+      "problem": "Mixes tasks with different evidence, implementation, and verification needs.",
+      "rewrite_rule": "Split into phases with dependencies, deliverables, and stop/merge gates."
+    }
+  ],
+  "prompt_quality_checklist": [
+    "Goal: what outcome should change?",
+    "Audience: who will use or judge the result?",
+    "Context: what source material, constraints, and prior decisions matter?",
+    "Task role: should AI search, draft, critique, compare, calculate, code, verify, or ask questions?",
+    "Output contract: format, length/depth, tone, examples, exclusions, and acceptance criteria.",
+    "Neutrality: does the prompt ask for evidence and alternatives instead of confirming a preferred answer?",
+    "Verification: what sources, tests, citations, screenshots, calculations, or human review are required?",
+    "Uncertainty: what should be marked as assumption, unknown, or needs user decision?"
+  ],
+  "instruction_rewrite_contract": {
+    "rewrite_sequence": [
+      "Preserve the user's real goal.",
+      "Remove leading, biased, or unsupported factual framing.",
+      "Add missing context, constraints, output contract, and acceptance criteria.",
+      "Separate facts, assumptions, preferences, and open questions.",
+      "Add verification requirements proportionate to risk.",
+      "Ask concise clarification questions only when the missing answer would materially change the result."
+    ],
+    "minimum_rewritten_prompt_fields": [
+      "goal",
+      "context",
+      "constraints",
+      "output_format",
+      "acceptance_criteria",
+      "evidence_or_verification",
+      "assumptions_or_questions"
+    ]
+  },
   "risk_controls": [
     "For factual claims, use web search or source documents and grounding checks.",
     "For code, use official docs, reference implementations, tests, and review.",

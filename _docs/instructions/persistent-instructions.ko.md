@@ -50,6 +50,8 @@
 - 사용자가 웹 검색 품질 개선을 요구하거나 많은 출처 탐색이 필요한 작업은 `agent-platform/configs/research/human-search-profile.json`을 사용해 seed, synonym, operator, source-lane, regional, community, contrary, snowballing 검색 단계를 query ladder로 만든다.
 - 사람형 검색에서 찾은 좋은 출처는 답변, 계획, 위험 모델, 출처 목록, 재사용 지식 베이스를 바꿀 때만 요약하고 URL, 접근일, 신뢰도, 한계, plan impact와 함께 `_research/` 또는 해당 프로젝트 docs에 저장한다.
 - 사용자가 AI를 더 잘 쓰고 싶어 하거나 작업 중 AI 사용 간극이 보이면 `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`, `_ops/prompts/89-bridge-ai-usage-gap.md`를 사용해 요청 맥락, 작업 적합성, 반복, 검증, 자산화를 개선한다.
+- 사용자 지시가 모호하거나, 편향적이거나, 결론을 유도하거나, 출력 계약이 없거나, LLM이 진실을 그대로 아는 기계라는 가정에 기대면 실행 전에 목표, 맥락, 제약, 출력 형식, 성공 기준, 반대 근거, 검증 경로를 포함한 중립적 task brief로 재작성한다.
+- LLM은 prompt와 context에 조건화된 확률적 출력 생성기로 다룬다. 제대로 질문하고 지시한다는 것은 말투를 다듬는 일이 아니라 모델이 생성할 답의 조건을 설계하고 검증 가능하게 만드는 일이다.
 - 마케팅, 소비자 인사이트, 시장 규모, 브랜드 전략, GTM, 설문 기반 주장, 책/이론 근거, 정량 수치 근거가 필요한 조사는 `agent-platform/configs/research/marketing-evidence-profile.json`을 `research_profile_paths`에 포함한다.
 - 마케팅/시장 규모 숫자는 값, 단위, 분모/base, 지역, 기간, 모집단, 방법론, 표본, 스폰서/펀더, 접근일, 비교 가능성 메모를 함께 기록한 뒤 근거로 사용한다.
 - 설문 근거는 가능한 경우 모집단, 표본 크기, 표본추출 방식, 조사 기간, 조사 모드, 가중치, 스폰서/펀더, 질문 문구나 조사 도구를 기록하고, 방법론이 없으면 약한 근거로 낮춘다.

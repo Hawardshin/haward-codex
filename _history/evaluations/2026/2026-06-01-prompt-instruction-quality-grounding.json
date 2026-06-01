@@ -1,0 +1,162 @@
+{
+  "task": "Ground factual claims for prompt and instruction quality gate work.",
+  "output_summary": "Added a durable rule that vague, biased, leading, or unverifiable instructions should be rewritten into neutral, source-checkable task briefs before execution.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-prompt-instruction-quality.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked web-first record with queries, checked sources, weak-source notes, plan impact, and uncertainty."
+    },
+    {
+      "evidence_id": "ai_usage_gap_profile",
+      "source": "agent-platform/configs/usage/ai-usage-gap-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Self-documenting usage profile containing bad instruction patterns, LLM assumptions, prompt quality checklist, and instruction rewrite contract."
+    },
+    {
+      "evidence_id": "operating_docs",
+      "source": "_docs/operating-models/ai-usage-gap-operating-model.ko.md; _docs/instructions/persistent-instructions.ko.md; _ops/workflows/59-bridge-ai-usage-gap.md; _ops/prompts/89-bridge-ai-usage-gap.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked operating documents that expose the instruction rewrite gate."
+    },
+    {
+      "evidence_id": "requirements_specs",
+      "source": "_requirements/baselines/2026-05-31-workspace-platform.ko.md; _specs/workspace-platform/2026-06-01-prompt-instruction-quality/spec.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked requirement baseline and spec artifacts for REQ-WS-043."
+    },
+    {
+      "evidence_id": "memory_bootstrap",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json --root ..",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command expected to verify that memory bootstrap remains ready after this change."
+    },
+    {
+      "evidence_id": "config_contract",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/ai-usage-gap-profile.json configs/memory/bootstrap-manifest.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command expected to verify self-documenting config contract after this change."
+    },
+    {
+      "evidence_id": "openai_prompt_best_practices",
+      "source": "https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-the-openai-api",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official OpenAI prompt guidance checked for clear instructions, context separation, and output format patterns."
+    },
+    {
+      "evidence_id": "openai_prompting_fundamentals",
+      "source": "https://openai.com/academy/prompting/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official OpenAI Academy article checked for clear prompts and iteration framing."
+    },
+    {
+      "evidence_id": "anthropic_prompting",
+      "source": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/be-clear-and-direct",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Anthropic/Claude prompt guidance checked for clear, direct, detailed instructions."
+    },
+    {
+      "evidence_id": "microsoft_prompt_engineering",
+      "source": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/prompt-engineering",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Microsoft prompt engineering guide checked for validation, grounding data, clear syntax, task decomposition, and recency bias."
+    },
+    {
+      "evidence_id": "nist_genai_profile",
+      "source": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "NIST Generative AI Profile checked for bias, fairness assessment, and harmful output risk management."
+    },
+    {
+      "evidence_id": "nist_bias_guidance",
+      "source": "https://www.nist.gov/publications/towards-standard-identifying-and-managing-bias-artificial-intelligence",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "NIST publication page checked for bias identification and management framing."
+    },
+    {
+      "evidence_id": "stanford_language_modeling",
+      "source": "https://cs224n.stanford.edu/slides/cs224n-spr2024-lecture05-rnnlm.pdf",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "Stanford CS224N lecture material checked for language modeling as predicting a next-word probability distribution."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now has REQ-WS-043 requiring poor, biased, or unverifiable instructions to be rewritten into neutral task briefs before execution.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["requirements_specs", "ai_usage_gap_profile"],
+      "verification_steps": ["Read the requirements baseline and prompt instruction quality spec."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The AI usage gap profile now includes bad instruction patterns, LLM assumptions, prompt quality checklist, and instruction rewrite contract.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["ai_usage_gap_profile", "config_contract"],
+      "verification_steps": ["Read the profile and run config contract checks."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Persistent instructions, operating model, workflow, and prompt now expose the pre-execution instruction rewrite rule.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["operating_docs", "memory_bootstrap"],
+      "verification_steps": ["Read the docs and run memory bootstrap checks."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Official prompt guidance supports clear instructions, context, output format, examples, decomposition, and validation as practical prompt quality controls.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["openai_prompt_best_practices", "openai_prompting_fundamentals", "anthropic_prompting", "microsoft_prompt_engineering", "web_search_record"],
+      "verification_steps": ["Checked the listed official prompt guidance sources and recorded plan impact."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Bias in generative AI outputs should be treated as a risk to measure and manage, not ignored as neutral output.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["nist_genai_profile", "nist_bias_guidance", "web_search_record"],
+      "verification_steps": ["Checked NIST Generative AI Profile and NIST bias guidance."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Language modeling can be described as predicting a probability distribution over the next word, supporting a prompt-conditioned probabilistic mental model for LLM use.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["stanford_language_modeling", "web_search_record"],
+      "verification_steps": ["Checked Stanford CS224N language modeling material."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Prompt guidance and model-specific behavior can change, so model-specific prompt optimization should recheck current official docs.",
+    "The probabilistic language-model explanation is an operating mental model; exact internals vary by model and product system."
+  ],
+  "limitation_notes": [
+    "No new prompt scoring UI or validator CLI was added.",
+    "The rule improves future task framing but cannot guarantee a correct answer without verification."
+  ]
+}

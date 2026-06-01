@@ -9,6 +9,7 @@ The difference between weak and strong AI use is treated as a repeatable work-sy
 Weak AI use often shows these patterns:
 
 - The goal and success criteria are unclear.
+- Questions and instructions are vague, biased, or framed to force a desired conclusion.
 - The user does not distinguish where AI is useful from where it is risky.
 - The first answer is either trusted blindly or abandoned immediately.
 - Outputs are used without evidence, tests, sources, or contrary checks.
@@ -19,6 +20,8 @@ Weak AI use often shows these patterns:
 Strong AI users behave differently:
 
 - They define purpose, audience, constraints, input material, and success criteria first.
+- They write neutral questions and ask for alternatives plus counterevidence.
+- They specify output format, depth, verification criteria, and examples.
 - They use AI as an explorer, drafter, critic, transformer, and verification assistant rather than as an oracle.
 - They split work into planning, evidence gathering, implementation, validation, and evaluation.
 - They combine AI with web search, official docs, tests, local files, evaluators, and human judgment.
@@ -28,10 +31,37 @@ Strong AI users behave differently:
 ## Bridging The Gap
 
 1. Improve the request: add goal, context, constraints, examples, and success criteria.
-2. Check task fit: decide whether AI should draft, search, code, test, critique, or defer to human judgment.
-3. Avoid one-shot work: run short draft, critique, revise, and verify loops.
-4. Attach evidence: sources for factual claims, tests for code, and unit/base/timeframe/method for numbers.
-5. Save repeatable patterns: promote useful patterns into the smallest durable asset.
+2. Fix bad instructions: turn biased framing, forced conclusions, hidden preferences, oversized requests, and source-free current-claims into neutral task briefs.
+3. Check task fit: decide whether AI should draft, search, code, test, critique, or defer to human judgment.
+4. Avoid one-shot work: run short draft, critique, revise, and verify loops.
+5. Attach evidence: sources for factual claims, tests for code, and unit/base/timeframe/method for numbers.
+6. Save repeatable patterns: promote useful patterns into the smallest durable asset.
+
+## Question And Instruction Quality
+
+LLM output is probabilistic output conditioned on the prompt and available context. A good question is therefore not decorative wording; it changes the answer distribution the model is likely to produce.
+
+In this operating model, "ask better questions" is not a prompt trick. A poor instruction gives the model poor conditions, and biased or conclusion-seeking framing increases the chance of a fluent but distorted answer.
+
+A useful instruction should include:
+
+- Goal: what should be decided or changed.
+- Context: what materials, constraints, and prior decisions matter.
+- Output contract: format, depth, tone, examples, exclusions, and success criteria.
+- Neutrality: whether it asks for alternatives and counterevidence instead of proving a desired conclusion.
+- Verification: what sources, tests, calculations, or review should be used.
+- Uncertainty: what should be marked as an assumption, unknown, or user decision.
+
+Common bad instructions:
+
+- `Make it good`: no criteria.
+- `Prove this is the best`: forces a conclusion.
+- `Explain why people who disagree are wrong`: biased framing.
+- `Use the latest numbers`: no source, date, definition, or geography.
+- `Research, plan, and code everything`: mixes phases with different verification needs.
+
+These instructions should be rewritten into neutral prompts with goal, context, constraints, output format, success criteria, and verification path before execution.
+The rewrite should preserve the user's real goal while separating factual claims from preferences and making alternatives, counterevidence, and uncertainty checkable.
 
 ## Platform Integration
 
@@ -44,5 +74,6 @@ Strong AI users behave differently:
 
 - Do not blame the user. Treat gaps as literacy, context, verification, work-structure, tooling, or learning-loop gaps.
 - Do not block unnecessarily on vague requests. For low-risk work, make reasonable assumptions and record them with verification paths.
+- Rewrite biased or conclusion-seeking instructions by separating the user's intent from factual claims and neutralizing the task.
 - For high-risk or preference-sensitive ambiguity, use `clarification_needed`.
 - Effective AI-use patterns should not remain in chat; they should become repository assets.

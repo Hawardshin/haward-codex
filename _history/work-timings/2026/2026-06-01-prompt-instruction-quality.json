@@ -1,0 +1,56 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-01-prompt-instruction-quality",
+  "title": "Add prompt and instruction quality gate",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "started_at": "2026-06-01T22:31:00+0900",
+  "ended_at": "2026-06-01T22:50:10+0900",
+  "measurement_note": "Timing is estimated from web-first intake, memory bootstrap, edit, and validation milestones after the user request.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "started_at": "2026-06-01T22:31:00+0900",
+      "ended_at": "2026-06-01T22:34:00+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Checked official prompt guidance, NIST bias/GenAI risk materials, and Stanford language modeling material."
+    },
+    {
+      "phase_id": "memory_and_structure_review",
+      "label": "Memory and structure review",
+      "status": "completed",
+      "started_at": "2026-06-01T22:34:00+0900",
+      "ended_at": "2026-06-01T22:37:00+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Reviewed existing AI usage gap profile, operating docs, persistent instructions, requirements baseline, prompt router, and memory bootstrap anchors."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Rule and artifact implementation",
+      "status": "completed",
+      "started_at": "2026-06-01T22:37:00+0900",
+      "ended_at": "2026-06-01T22:44:00+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Cross-cutting governance edits touched settings, operating docs, workflows, prompts, requirements, specs, and history records."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "started_at": "2026-06-01T22:44:00+0900",
+      "ended_at": "2026-06-01T22:50:10+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Ran JSON, config contract, memory bootstrap, docs, naming, structure, map, task-board, governance health, grounding, evaluator, work-timer, and diff whitespace checks."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "implementation",
+    "interpretation": "The slowest step is not the wording update itself but keeping the durable rule discoverable across config, docs, requirements, specs, memory, and history.",
+    "improvement_candidates": [
+      "If prompt instruction quality checks repeat often, add a small deterministic prompt-brief validator.",
+      "Add more before/after examples after real user instructions accumulate."
+    ]
+  }
+}

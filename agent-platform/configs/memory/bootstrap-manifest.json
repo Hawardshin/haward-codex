@@ -44,7 +44,7 @@
     "The foundational agent operating philosophy or platform concept review changes.",
       "The platform identity narrative or top-level platform description changes.",
       "The AI assistant runtime adapter registry or tool-specific adapter files change.",
-      "The AI usage gap profile, coaching workflow, or AI-use asset promotion rules change.",
+      "The AI usage gap profile, coaching workflow, prompt instruction quality gate, or AI-use asset promotion rules change.",
       "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
       "The installation registry or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
@@ -472,7 +472,8 @@
       "source_type": "internal",
       "used_for": [
         "diagnosing gaps between weak and strong AI use",
-        "task framing, task-fit checks, iteration, verification, and durable asset promotion"
+        "task framing, task-fit checks, iteration, verification, and durable asset promotion",
+        "rewriting vague, biased, leading, or unverifiable instructions into neutral task briefs"
       ],
       "last_checked": "2026-06-01"
     },
@@ -733,7 +734,7 @@
     },
     {
       "id": "ai_usage_gap_profile_must_stay_discoverable",
-      "rule": "The AI usage gap profile must remain a warm memory anchor so future sessions can diagnose weak AI usage as a workflow/context/verification/iteration/tooling gap and promote useful patterns into durable assets.",
+      "rule": "The AI usage gap profile must remain a warm memory anchor so future sessions can diagnose weak AI usage as a workflow/context/verification/iteration/tooling gap, rewrite poor instructions into neutral task briefs, and promote useful patterns into durable assets.",
       "reason": "The user asked to understand why some people use AI well and others do not, then reflect that gap-closing behavior into the platform.",
       "applies_to": [
         "startup_sequence",
@@ -1210,7 +1211,7 @@
       "id": "ai_usage_gap_profile",
       "path": "agent-platform/configs/usage/ai-usage-gap-profile.json",
       "tier": "warm",
-      "purpose": "AI usage gap diagnosis and bridge profile for task framing, task-fit judgment, iteration, verification, and durable asset promotion.",
+      "purpose": "AI usage gap diagnosis and prompt instruction quality profile for task framing, neutral instruction rewriting, task-fit judgment, iteration, verification, and durable asset promotion.",
       "required": true,
       "load_order": 24
     },

@@ -28,21 +28,23 @@
 15. For planning that depends on external facts, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json`.
 16. Treat research as an answer-engine pipeline: query understanding, retrieval, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
 17. When the request shows an AI-use gap, use `agent-platform/configs/usage/ai-usage-gap-profile.json` to improve task framing, task-fit judgment, iteration, verification, and durable asset promotion.
-18. For coding research, use `coding-research-agent` to record reference configs, concrete code references, standard post-research answers, and diverse source types before implementation.
-19. If mature open source is the right fit, install it in the owning project or tool scope and record install command, dependency tracking, installation audit record, security/license review, verification, and rollback.
-20. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
-21. Save important planning processes under `_history/plans/YYYY/` when required by the selected mode or useful for future continuation.
-22. Promote repeated work into a template, tool, skill, prompt, or workflow.
-23. For skill work, run the skill lifecycle: source tracking, validation, forward-test scenarios, improvement ideas, and skill evaluation targets.
-24. Record important context in `_history/`.
-25. Refresh `_ops/maps/` when navigational structure changes.
-26. Summarize completed work.
-27. Check prior internal work and strong references relevant to the task.
-28. Capture reusable internet research or external references.
-29. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
-30. Evaluate the completed work against the initial instruction using the selected `work_mode`.
-31. Rework blocking gaps and evaluate again; non-blocking improvements can be recorded in the deferred backlog.
-32. Commit the coherent change set and push it.
+18. If the instruction is vague, biased, leading, conclusion-seeking, or missing an output contract, rewrite it into a neutral task brief with evidence and verification requirements before execution.
+19. Treat LLMs as probabilistic prompt-conditioned systems; do not treat fluent output as proof without source, test, or review grounding.
+20. For coding research, use `coding-research-agent` to record reference configs, concrete code references, standard post-research answers, and diverse source types before implementation.
+21. If mature open source is the right fit, install it in the owning project or tool scope and record install command, dependency tracking, installation audit record, security/license review, verification, and rollback.
+22. For shared settings, keep references and structure rules inside the config file and run `config-contract-agent`.
+23. Save important planning processes under `_history/plans/YYYY/` when required by the selected mode or useful for future continuation.
+24. Promote repeated work into a template, tool, skill, prompt, or workflow.
+25. For skill work, run the skill lifecycle: source tracking, validation, forward-test scenarios, improvement ideas, and skill evaluation targets.
+26. Record important context in `_history/`.
+27. Refresh `_ops/maps/` when navigational structure changes.
+28. Summarize completed work.
+29. Check prior internal work and strong references relevant to the task.
+30. Capture reusable internet research or external references.
+31. Ground factual claims with `hallucination-guard-agent` before publishing final outputs.
+32. Evaluate the completed work against the initial instruction using the selected `work_mode`.
+33. Rework blocking gaps and evaluate again; non-blocking improvements can be recorded in the deferred backlog.
+34. Commit the coherent change set and push it.
 
 ## Capability Promotion
 
@@ -73,6 +75,7 @@ Promote work only when it will reduce future effort.
 | Same need to create or improve Codex skills | Skill lifecycle policy, skill source, and `validate-skill` |
 | Same need to avoid full-loop overhead | Work mode registry, mode-selection workflow, and deferred improvement backlog |
 | Same need to help users become better AI operators | AI usage gap profile, coaching workflow, prompt, or durable operating model |
+| Same need to rewrite poor, biased, or unverifiable instructions | Prompt instruction quality gate in the AI usage gap profile and workflow |
 
 ## Context Compression
 

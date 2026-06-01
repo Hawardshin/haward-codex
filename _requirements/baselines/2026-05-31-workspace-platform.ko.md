@@ -58,6 +58,7 @@
 | REQ-WS-040 | 특정 상황에서 깊은 조사가 필요하면 `deep-research-agent`가 다중 검색 채널, 반복 조사 단계, 출처 품질 평가, evidence item, contradiction mapping, citation audit, report outline, report target을 기록하고 긴 보고서 작성 준비 상태를 검증해야 한다. | UR-2026-06-01-025 | must | baseline | agent-platform/_research/_history | `complete-deep-research` 테스트/CLI, deep research profile config contract, memory bootstrap 확인 | `agent-platform/src/agent_platform/planning/deep_research.py`, `agent-platform/configs/research/deep-research-profile.json`, `_ops/workflows/57-deep-research.md` |
 | REQ-WS-041 | 웹 검색 품질이 중요한 작업은 사람이 실제로 검색하듯 query ladder, 검색 연산자, source lane, regional/community/contrary search, snowballing, selective summary capture를 사용하고, 좋은 출처는 재사용 가능할 때만 요약해야 한다. | UR-2026-06-01-026 | must | baseline | agent-platform/_ops/_tools/_research | human-search-profile config contract, source-collector query-plan test, web search record, memory bootstrap 확인 | `agent-platform/configs/research/human-search-profile.json`, `_ops/workflows/54-human-like-source-discovery.md`, `_ops/prompts/84-human-like-source-discovery.md`, `_tools/source-collector/` |
 | REQ-WS-042 | 사용자가 AI를 더 잘 쓰고 싶어 하거나 작업 중 AI 사용 간극이 보이면, 플랫폼은 이를 개인 탓이 아니라 작업 맥락, task-fit, 반복, 검증, 도구화, 자산화 gap으로 진단하고 가장 작은 bridge intervention을 적용해야 한다. | UR-2026-06-01-031 | must | baseline | agent-platform/_ops/_docs | ai-usage-gap profile config contract, workflow/prompt, memory bootstrap, evaluation 확인 | `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`, `_ops/prompts/89-bridge-ai-usage-gap.md`, `_docs/operating-models/ai-usage-gap-operating-model.ko.md` |
+| REQ-WS-043 | 사용자 지시가 모호하거나 편향적이거나 결론을 유도하거나 검증 가능한 출력 계약이 없거나 LLM을 결정론적 진실 기계로 가정하면, 실행 전에 목표, 맥락, 제약, 출력 형식, 성공 기준, 반대 근거, 검증 경로를 포함한 중립적 task brief로 재작성해야 한다. | UR-2026-06-01-032 | must | baseline | agent-platform/_ops/_docs | ai-usage-gap profile, workflow/prompt, persistent instructions, grounding/evaluation 확인 | `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`, `_ops/prompts/89-bridge-ai-usage-gap.md`, `_docs/operating-models/ai-usage-gap-operating-model.ko.md` |
 
 ## 변경 관리
 
@@ -85,6 +86,7 @@
 - 2026-06-01에 REQ-WS-040을 추가해 특정 상황의 긴 보고서형 딥리서치를 별도 에이전트와 readiness check로 승격했다.
 - 2026-06-01에 REQ-WS-041을 추가해 사람형 검색 query ladder, operator/source-lane/snowballing 검색, 좋은 출처 선택 요약을 공통 리서치 구조로 승격했다.
 - 2026-06-01에 REQ-WS-042를 추가해 AI 사용 격차를 작업 구조 gap으로 진단하고 task framing, task-fit, iteration, verification, asset promotion으로 줄이는 구조를 공통 운영 모델로 승격했다.
+- 2026-06-01에 REQ-WS-043을 추가해 모호하거나 편향적이거나 결론 유도형인 지시, 출력 계약이 없는 지시, LLM을 결정론적 진실 기계로 보는 지시를 중립적이고 검증 가능한 task brief로 재작성하는 규칙을 공통 운영 모델로 승격했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.
