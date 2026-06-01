@@ -28,4 +28,4 @@
 
 ## 커밋
 
-- 검증 후 기록한다.
+- `60e458e` docs(ai-usage): prevent global clarification blocking

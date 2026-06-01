@@ -8,4 +8,4 @@
 - [x] Update memory bootstrap, router, and operations index
 - [x] Write history, research notes, evaluation input, and timing record
 - [x] Run validation
-- [ ] Commit and push
+- [x] Commit and push

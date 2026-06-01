@@ -28,4 +28,4 @@
 
 ## Commit
 
-- To be recorded after validation.
+- `60e458e` docs(ai-usage): prevent global clarification blocking
