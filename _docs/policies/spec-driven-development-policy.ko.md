@@ -13,7 +13,7 @@
 - 검증 기록은 "스펙과 구현이 맞는가"를 확인한다.
 - traceability는 요청, 요구사항, 스펙, 작업, 파일, 평가, 커밋을 연결한다.
 - 활성 스펙이 애매하거나 현재 소스/테스트/산출물과 다르면 구현 전 `_ops/workflows/38-spec-source-reconciliation.md`를 실행해 `update_spec`, `update_source`, `ask_user`, `defer`로 분류한다.
-- `ask_user`로 분류한 이슈는 `clarification_needed` 알림으로 질문하고, 사용자 답변이 기록될 때까지 관련 스펙이나 소스를 수정하지 않는다.
+- `ask_user`로 분류한 이슈는 `clarification_needed` 알림으로 질문하고, 사용자 답변이 기록될 때까지 관련 스펙이나 소스를 수정하지 않는다. 단, 해당 답변과 무관한 조사, 대안 비교, 테스트, 문서화는 `unblocked_work`로 계속 진행할 수 있다.
 
 ## 적용 조건
 

@@ -1,0 +1,74 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-02-non-blocking-clarification",
+  "title": "Add non-blocking clarification policy",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": null,
+  "measurement_note": "Timing was reconstructed after web-first intake and several edits, so phase durations are approximate.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before exact phase timing started."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Memory bootstrap ran successfully before edits."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "Included REQ-WS-047, change/review records, and spec artifacts."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Policy and workflow updates",
+      "status": "completed",
+      "duration_seconds": 540,
+      "measurement": "estimated",
+      "bottleneck_notes": "Included usage profile, operating model, workflow, prompt, persistent instructions, AGENTS, memory bootstrap, and reconciliation docs."
+    },
+    {
+      "phase_id": "history_evaluation",
+      "label": "History and evaluation records",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "Included web records, research notes, plan, request trace, work summary, grounding, evaluator input, and timing."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 240,
+      "measurement": "estimated",
+      "bottleneck_notes": "Reserved for config, memory, docs, naming, structure, workspace index, task board, workspace health, grounding, evaluator, work timer, and diff checks."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "duration_seconds": 90,
+      "measurement": "estimated",
+      "bottleneck_notes": "Commit and push are expected to be fast; update if retries occur."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "policy_and_workflow_updates",
+    "interpretation": "The main cost is synchronizing one durable rule across the config, operating docs, workflow, prompt, instructions, and history targets.",
+    "improvement_candidates": [
+      "Create a scaffold command for durable AI usage gap rule changes if this pattern repeats.",
+      "Add reusable examples for blocked_decision and unblocked_work in the prompt test set."
+    ]
+  }
+}

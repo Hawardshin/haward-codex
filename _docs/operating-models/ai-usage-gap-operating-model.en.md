@@ -77,6 +77,20 @@ Clarification is a device for moving the work forward, not a process for creatin
 
 A good clarifying question is not “What should I do?” It shows how the decision changes the result. When useful, provide 2-3 options with a recommended default.
 
+### Pending Answers And Non-Blocking Progress
+
+Needing clarification does not mean the whole task should stop. Only the part that truly depends on the missing answer should be isolated as a `blocked_decision`; independent research, source collection, option comparison, drafting, testing, validation, documentation, and risk analysis should continue.
+
+Default rules for non-blocking progress:
+
+- Record each question with a `question_id`, decision impact, reason for waiting, and expected correction scope.
+- Pause only the dependent artifact or action, not the whole task.
+- Mark continued work as `unblocked_work`, including any assumptions and defaults used.
+- When the answer arrives, compare it with the assumption and patch only affected files or decisions.
+- Do not proceed with irreversible or high-risk work when guessing would be unsafe.
+
+This rule reduces a major AI-era bottleneck. If the user cannot answer immediately, the agent should still do useful work and leave only the human-dependent decision small and explicit.
+
 ## Model-Adaptive Strategy
 
 Strong and weak models should not be used the same way. A weak model that is not optimized for reasoning can produce unstable first answers, so when cost and latency allow and task variance is high, two independent attempts or a draft-critique-revise loop should be a default candidate strategy.
@@ -102,6 +116,7 @@ Operating rules:
 - Do not blame the user. Treat gaps as literacy, context, verification, work-structure, tooling, or learning-loop gaps.
 - Do not block unnecessarily on vague requests. For low-risk work, make reasonable assumptions and record them with verification paths.
 - When ambiguity would materially change the result, ask clarifying counter-questions, but limit the rounds and question count with a `clarification_budget`.
+- Do not stop the whole task while waiting for a clarification answer. Isolate only the dependent decision as `blocked_decision` and continue unaffected work as `unblocked_work`.
 - Rewrite biased or conclusion-seeking instructions by separating the user's intent from factual claims and neutralizing the task.
 - For high-risk or preference-sensitive ambiguity, use `clarification_needed`.
 - Effective AI-use patterns should not remain in chat; they should become repository assets.

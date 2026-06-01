@@ -38,6 +38,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | AI를 잘 쓰는 사람과 못 쓰는 사람의 차이를 진단하고 간극을 줄이는 작업 구조를 만든다 | [89-bridge-ai-usage-gap.md](89-bridge-ai-usage-gap.md) |
 | 질문/지시가 모호하거나 편향적이거나 결론을 유도하거나 검증 가능한 출력 계약이 없다 | [89-bridge-ai-usage-gap.md](89-bridge-ai-usage-gap.md) |
 | 모호한 지시에 역질문이 필요하지만 질문 루프가 길어지지 않게 제한해야 한다 | [89-bridge-ai-usage-gap.md](89-bridge-ai-usage-gap.md) |
+| 역질문 답변 대기 때문에 전체 작업이 멈추는 병목을 줄이고, `blocked_decision`만 격리한 뒤 `unblocked_work`를 계속 진행해야 한다 | [89-bridge-ai-usage-gap.md](89-bridge-ai-usage-gap.md) |
 | 약한/비추론/불확실 모델과 추론/강한 모델의 사용 전략을 다르게 적용해야 한다 | [89-bridge-ai-usage-gap.md](89-bridge-ai-usage-gap.md) |
 | 오픈소스/도구/런타임/스킬 설치를 기록한다 | [58-installation-record.md](58-installation-record.md) |
 | 인터넷 조사에서 재사용 가치가 있는 내용을 문서화한다 | [90-capture-research.md](90-capture-research.md) |

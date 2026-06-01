@@ -1,0 +1,136 @@
+{
+  "task": "Ground factual claims for the non-blocking clarification policy work.",
+  "output_summary": "Added a durable rule that pending clarification answers should block only dependent decisions while safe independent work continues.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable user request summary for UR-2026-06-02-001."
+    },
+    {
+      "evidence_id": "requirements_specs",
+      "source": "_requirements/baselines/2026-05-31-workspace-platform.ko.md; _specs/workspace-platform/2026-06-02-non-blocking-clarification/spec.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Tracked requirement baseline and spec artifacts for REQ-WS-047."
+    },
+    {
+      "evidence_id": "ai_usage_gap_profile",
+      "source": "agent-platform/configs/usage/ai-usage-gap-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Self-documenting config updated with non-blocking clarification policy."
+    },
+    {
+      "evidence_id": "operating_docs",
+      "source": "_docs/operating-models/ai-usage-gap-operating-model.ko.md; _ops/workflows/59-bridge-ai-usage-gap.md; _ops/prompts/89-bridge-ai-usage-gap.md; _docs/instructions/persistent-instructions.ko.md; AGENTS.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Tracked operating documents that expose the non-blocking clarification rule."
+    },
+    {
+      "evidence_id": "elastic_hitl",
+      "source": "https://www.elastic.co/docs/explore-analyze/workflows/authoring-techniques/human-in-the-loop",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Elastic documentation checked for human review at critical decision points."
+    },
+    {
+      "evidence_id": "github_dependencies",
+      "source": "https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official GitHub documentation checked for blocked-by and blocking dependency relationships."
+    },
+    {
+      "evidence_id": "zapier_hitl",
+      "source": "https://help.zapier.com/hc/en-us/articles/38838306755981-Special-step-run-statuses-in-Human-in-the-Loop-actions",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Zapier help checked for HITL waiting states and workflow continuation behavior."
+    },
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-02-non-blocking-clarification.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Tracked web-first record with queries, checked sources, weak-source notes, plan impact, and uncertainty."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now has REQ-WS-047 requiring pending clarification answers to block only dependent decisions while safe independent work continues.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["requirements_specs"],
+      "verification_steps": ["Read the requirements baseline and non-blocking clarification spec."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The AI usage gap profile now includes a non_blocking_clarification_policy with blocked decision fields, unblocked work, and resume actions.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["ai_usage_gap_profile"],
+      "verification_steps": ["Read the AI usage gap profile and validate JSON/config contract."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The operating model, workflow, prompt, persistent instructions, and AGENTS now include the no-global-pause clarification rule.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["operating_docs"],
+      "verification_steps": ["Read the operating model, workflow, prompt, persistent instructions, and AGENTS."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Elastic documentation supports the idea of placing human review at critical decision points in HITL workflows.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["elastic_hitl", "web_search_record"],
+      "verification_steps": ["Checked Elastic HITL documentation and recorded plan impact."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "GitHub documentation supports explicit blocked-by and blocking dependency relationships for visible bottleneck management.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["github_dependencies", "web_search_record"],
+      "verification_steps": ["Checked GitHub issue dependency documentation and recorded plan impact."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Zapier documentation describes HITL states where the rest of the workflow can continue while a human-in-the-loop step waits.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["zapier_hitl", "web_search_record"],
+      "verification_steps": ["Checked Zapier HITL status documentation and recorded plan impact."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Treating pending clarification as a local dependency rather than a global pause is an operating-rule inference derived from the user request, workflow-dependency sources, and repository policy goals.",
+      "claim_type": "inference",
+      "support_level": "supported",
+      "evidence_ids": ["user_request", "requirements_specs", "web_search_record"],
+      "verification_steps": ["Checked the user request, requirements/specs, and web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "The boundary between dependent and independent work still requires local judgment.",
+    "Some domains require pausing more work because the unanswered decision affects safety, legality, privacy, or irreversible product intent."
+  ],
+  "limitation_notes": [
+    "This change adds policy and workflow behavior, not a fully automated dependency scheduler.",
+    "The rule permits safe progress only; it does not authorize guessing on high-risk decisions."
+  ]
+}

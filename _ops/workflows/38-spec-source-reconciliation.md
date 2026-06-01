@@ -20,8 +20,10 @@
 8. Run `PYTHONPATH=src python3 -m agent_platform.cli reconcile-spec <input.json>` from `agent-platform/`.
 9. If the result is `clarification_required`, surface `notification_event` in chat and, when configured, send or dry-run the `clarification_needed` notification.
 10. Do not change spec or source for `ask_user` issues until the answer is recorded in the plan/history.
-11. After the answer is available, update requirements/spec/plan/tasks/validation/traceability first, then update source if needed.
-12. Include reconciliation input/output, clarification alert, user answer, and resulting spec/source changes in close-out evaluation.
+11. Continue safe unrelated work as `unblocked_work`: collect sources, compare options, run unaffected tests, document risks, or draft reversible alternatives.
+12. Record `blocked_decision`, `unblocked_work`, assumptions/defaults, and `resume_action` so the later answer can be merged without restarting the whole task.
+13. After the answer is available, update requirements/spec/plan/tasks/validation/traceability first, then update source if needed.
+14. Include reconciliation input/output, clarification alert, user answer, unblocked work, and resulting spec/source changes in close-out evaluation.
 
 ## Clarification Alert Format
 
@@ -40,3 +42,4 @@ Q1=<answer>
 ## Rule
 
 When the agent cannot prove whether the spec or the source is wrong, ask the user before changing either. The question must be specific enough that the user's answer can be copied into a requirement, spec, or task decision.
+Do not let one unanswered question globally pause independent work; isolate the blocked decision and keep safe work moving.

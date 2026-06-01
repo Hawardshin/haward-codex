@@ -13,6 +13,7 @@ Use agent-platform/configs/usage/ai-usage-gap-profile.json as the diagnostic pro
 Classify the user's current AI-use gap, if any:
 - vague_intent
 - clarification_loop_risk
+- global_pause_on_clarification
 - bad_or_biased_instruction
 - no_output_contract
 - deterministic_truth_machine_assumption
@@ -39,15 +40,20 @@ For the current task:
    - Include the assumption/default you will use if the user does not answer.
    - If the ambiguity remains after the budget, proceed with explicit assumptions, choose an option default, produce a reversible draft for confirmation, or defer the unsafe decision.
 6. Classify the model capability if it matters: reasoning_model, general_or_non_reasoning_model, weak_or_uncertain_model, or unknown.
-7. Use a model-adaptive strategy:
+7. If a user answer is pending, do not globally pause by default:
+   - Create blocked_decision only for the decision, artifact, or action that depends on the answer.
+   - Continue safe unblocked_work such as research, source collection, option comparison, drafts, tests, validation, documentation, and risk analysis.
+   - Record assumptions, defaults, deferred items, and resume_action for merging or correcting the work after the answer arrives.
+   - Pause the whole task only when every meaningful next step depends on the answer or proceeding would be unsafe.
+8. Use a model-adaptive strategy:
    - For weak, non-reasoning, or uncertain models on high-variance tasks, and when cost/latency allow, run two independent attempts or a draft-critique-revise loop.
    - Compare convergence, contradictions, missing requirements, and supported claims before merging.
    - For strong reasoning models, improve goal, context, constraints, success criteria, and verification first; avoid duplicate calls unless variance or evaluator needs justify them.
    - Never treat repeated model agreement as factual proof.
-8. Check task fit: whether AI should draft, search, code, test, critique, automate, or defer to human/source/tool review.
-9. Add an iteration loop: draft, critique, revise, verify.
-10. Add evidence: sources for factual claims, tests for code, and value provenance for numbers.
-11. Promote reusable patterns into the smallest durable asset: prompt, workflow, template, tool, skill, config, operating model, or history note.
+9. Check task fit: whether AI should draft, search, code, test, critique, automate, or defer to human/source/tool review.
+10. Add an iteration loop: draft, critique, revise, verify.
+11. Add evidence: sources for factual claims, tests for code, and value provenance for numbers.
+12. Promote reusable patterns into the smallest durable asset: prompt, workflow, template, tool, skill, config, operating model, or history note.
 
 Minimum rewritten instruction fields:
 - goal
@@ -59,11 +65,13 @@ Minimum rewritten instruction fields:
 - verification path
 - assumptions or questions
 - clarification budget used, if any
+- blocked_decision, unblocked_work, and resume_action if a user answer is pending
 
 Return:
 - gap classification
 - rewritten instruction when useful
 - clarification questions, assumptions, defaults, or deferral decision when relevant
+- blocked_decision, unblocked_work, assumptions, and resume_action when relevant
 - bridge intervention
 - model capability and retry strategy when relevant
 - changed or proposed durable assets

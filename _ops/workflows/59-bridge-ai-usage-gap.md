@@ -19,6 +19,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
 4. Classify the visible gap:
    - `vague_intent`
    - `clarification_loop_risk`
+   - `global_pause_on_clarification`
    - `bad_or_biased_instruction`
    - `no_output_contract`
    - `deterministic_truth_machine_assumption`
@@ -33,6 +34,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - intent upgrade
    - instruction quality gate
    - bounded clarification
+   - non-blocking progress
    - bias neutralization
    - task-fit check
    - iteration scaffold
@@ -59,10 +61,16 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - option-based default;
    - reversible ship-first-then-confirm draft;
    - explicit defer/`clarification_needed` when proceeding would be unsafe.
-14. If the lesson is reusable, save it as a prompt, workflow, template, tool, skill, config, operating model, or history note.
-15. If ambiguity is high-risk or user-preference-sensitive, use spec/source reconciliation or `clarification_needed`, but keep the question set short and decision-focused.
-16. Ground factual claims before close-out.
-17. Evaluate whether the intervention actually reduced the gap against the initial request.
+14. If a user answer is pending, split the task:
+   - `blocked_decision`: the exact decision, artifact, or action that depends on the answer;
+   - `unblocked_work`: research, source collection, option comparison, drafts, tests, validation, documentation, and risk analysis that can continue safely;
+   - `assumptions`: explicit assumptions/defaults used while waiting;
+   - `resume_action`: how to merge or correct the work after the answer arrives.
+15. Do not pause the whole task unless every meaningful next step depends on the answer or proceeding would be unsafe.
+16. If the lesson is reusable, save it as a prompt, workflow, template, tool, skill, config, operating model, or history note.
+17. If ambiguity is high-risk or user-preference-sensitive, use spec/source reconciliation or `clarification_needed`, but keep the question set short and decision-focused.
+18. Ground factual claims before close-out.
+19. Evaluate whether the intervention actually reduced the gap against the initial request.
 
 ## Output Contract
 
@@ -71,6 +79,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
 - Model capability classification and retry strategy when relevant.
 - Rewritten instruction when the original instruction was vague, biased, or missing an output contract.
 - Clarification questions asked, budget used, assumptions/defaults selected, or deferral reason when relevant.
+- Pending-answer handling when relevant: `blocked_decision`, `unblocked_work`, `assumptions`, and `resume_action`.
 - Any durable asset created or updated.
 - Evidence and verification path.
 - Request trace, work summary, and evaluation targets when required by the selected mode.

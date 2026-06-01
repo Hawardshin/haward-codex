@@ -13,7 +13,7 @@ Implement user requests and requirements through explicit specs, implementation 
 - Validation records confirm whether implementation matches the spec.
 - Traceability links request, requirement, spec, tasks, files, evaluation, and commit.
 - If an active spec is ambiguous or differs from current source, tests, or artifacts, run `_ops/workflows/38-spec-source-reconciliation.md` before implementation and classify issues as `update_spec`, `update_source`, `ask_user`, or `defer`.
-- For `ask_user` issues, send or surface a `clarification_needed` alert and do not edit the related spec or source until the user answer is recorded.
+- For `ask_user` issues, send or surface a `clarification_needed` alert and do not edit the related spec or source until the user answer is recorded. Research, option comparison, tests, and documentation that do not depend on that answer may continue as `unblocked_work`.
 
 ## When To Apply
 
