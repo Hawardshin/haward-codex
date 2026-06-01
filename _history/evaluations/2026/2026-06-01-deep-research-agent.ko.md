@@ -41,7 +41,7 @@
 
 - 상태: `ready_to_close`
 - blocking gap: 없음
-- 커밋/push: 예정
+- 커밋/push: `8bb2e73` pushed
 - 개선 아이디어:
   - 실제 딥리서치 실행이 필요해지면 search API, browser, file-search, MCP connector 중 적합한 실행 채널을 연결한다.
   - 실제 보고서 누적 후 depth별 source/evidence threshold를 조정한다.

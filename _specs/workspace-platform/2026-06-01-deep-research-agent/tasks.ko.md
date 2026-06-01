@@ -10,4 +10,4 @@
 - [x] memory bootstrap, workspace-health, maps, coordination 연결
 - [x] 검증 실행
 - [x] 평가 작성
-- [ ] 커밋 및 push
+- [x] 커밋 및 push

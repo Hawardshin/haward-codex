@@ -10,4 +10,4 @@
 | Configs | `agent-platform/configs/research/deep-research-profile.json`, `agent-platform/configs/planning/deep-research-template.json` |
 | Timing record | `_history/work-timings/2026/2026-06-01-deep-research-agent.json` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-deep-research-agent.en.md` |
-| Commit | Pending |
+| Commit | `8bb2e73` pushed |

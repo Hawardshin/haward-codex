@@ -6,8 +6,8 @@
       "id": "codex-primary",
       "name": "Codex Primary",
       "role": "Primary repository coding and operations agent",
-      "status": "working",
-      "current_task": "2026-06-01-deep-research-agent",
+      "status": "idle",
+      "current_task": "",
       "owner": "Codex",
       "notes": "Update this entry when another agent or thread starts work."
     }
@@ -17,12 +17,12 @@
       "id": "2026-06-01-deep-research-agent",
       "title": "Create deep-research-agent for detailed source-grounded reports",
       "project": "agent-platform",
-      "status": "in_progress",
+      "status": "completed",
       "agent": "codex-primary",
       "priority": "high",
       "started_at": "2026-06-01",
       "updated_at": "2026-06-01",
-      "next_action": "Finish implementation, verification, evaluation, commit, and push.",
+      "next_action": "No action. Future deep research report work should use complete-deep-research after collecting sources, evidence, contradictions, citation audit notes, and report targets.",
       "blockers": [],
       "references": [
         "agent-platform/src/agent_platform/planning/deep_research.py",

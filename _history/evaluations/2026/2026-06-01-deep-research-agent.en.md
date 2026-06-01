@@ -41,7 +41,7 @@
 
 - Status: `ready_to_close`
 - Blocking gaps: none
-- Commit/push: pending
+- Commit/push: `8bb2e73` pushed
 - Improvement ideas:
   - Add a real search API, browser, file-search, or MCP connector channel when concrete deep research runs need automation.
   - Tune source/evidence thresholds by depth after several real reports accumulate.

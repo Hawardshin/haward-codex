@@ -10,4 +10,4 @@
 | 설정 | `agent-platform/configs/research/deep-research-profile.json`, `agent-platform/configs/planning/deep-research-template.json` |
 | 시간 기록 | `_history/work-timings/2026/2026-06-01-deep-research-agent.json` |
 | 평가 | `_history/evaluations/2026/2026-06-01-deep-research-agent.ko.md` |
-| 커밋 | 예정 |
+| 커밋 | `8bb2e73` pushed |
