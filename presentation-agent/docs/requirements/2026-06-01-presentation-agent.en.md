@@ -63,6 +63,24 @@ The presentation agent researches strong presentation design, PPT/HTML reference
 - The overall deck shall cover the platform philosophy, operating loop, project boundaries, research, requirements, specs, evaluation, history, and capability-promotion structure without omitting major parts.
 - Each project deck shall separately explain the project purpose, scope, key files, current artifacts, verification method, and next usage flow.
 
+### REQ-PA-011 PPT Template Reference Expansion
+
+- The presentation agent can repeatedly reference high-quality PPT/slide template sources such as MiriCanvas, Canva, Microsoft Create, Slidesgo, PresentationGO, Pitch, Figma Slides, and Adobe Express.
+- New template sources are recorded in `starter-reference-catalog.json` with URL, access date, source type, license status, download permission, HTML conversion path, and quality signals.
+- Sources useful for Korean users are tagged or noted so they can be selected easily during real deck production.
+
+### REQ-PA-012 User-Provided PPT References
+
+- When the user provides a PPT/PPTX file, the agent rebuilds it into an internal template profile by extracting design tokens, layout archetypes, repeated components, and section rhythm instead of copying the original deck.
+- Raw PPT/PPTX files stay in a local-only raw area and are not committed to git until usage rights and storage permission are confirmed.
+- `pptx_to_html.py` is used for narrative/text structure extraction and must not be treated as a pixel-faithful converter.
+
+### REQ-PA-013 Consistent Template Generation
+
+- PPT/HTML generation follows a Genspark-inspired staged flow that separates `strategy`, `substance`, `structure`, `design`, and `build`.
+- Final templates lock color, typography, spacing, grid, component style, and layout family to reduce slide-to-slide drift.
+- New slides assign content to validated layout archetypes instead of using free-form placement.
+
 ## Non-Scope
 
 - This baseline does not bulk-download presentation files.

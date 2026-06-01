@@ -13,3 +13,9 @@
 
 - `starter-reference-catalog.json`: 발표 에이전트가 반복 조사할 때 사용할 초기 레퍼런스 묶음.
 
+## PPT 레퍼런스 확장 규칙
+
+- 미리캔버스, Canva, Slidesgo, Microsoft Create, Pitch, Figma, Adobe Express 같은 템플릿 출처는 먼저 메타데이터로만 저장한다.
+- 원본 PPT/PPTX 파일은 사용 권한, 저장 가능 여부, attribution 조건을 확인하기 전까지 저장하지 않는다.
+- 사용자가 직접 PPT를 제공하면 원본을 복제하지 말고 색상, 타이포그래피, spacing, layout archetype, 반복 컴포넌트, 섹션 리듬을 추출해 내부 template profile로 만든다.
+- Genspark식 생성 흐름은 `strategy -> substance -> structure -> design -> build` 단계로 참고하되, 최종 산출물은 레퍼런스 출처와 디자인 토큰이 남아야 한다.

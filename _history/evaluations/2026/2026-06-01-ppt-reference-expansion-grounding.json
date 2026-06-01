@@ -1,0 +1,119 @@
+{
+  "task": "Ground factual claims for PPT reference expansion.",
+  "output_summary": "Expanded presentation-agent PPT references, added user-provided PPT workflow, local-only raw storage rule, and consistent template generation policy.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "catalog_file",
+      "source": "presentation-agent/data/reference-index/starter-reference-catalog.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked catalog file containing the added PPT/template/AI slide sources."
+    },
+    {
+      "evidence_id": "catalog_validation",
+      "source": "PYTHONPATH=src python3 -m presentation_agent.catalog data/reference-index/starter-reference-catalog.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output reported 82 records and no validation gaps."
+    },
+    {
+      "evidence_id": "presentation_tests",
+      "source": "PYTHONPATH=src python3 -m unittest discover -s tests from presentation-agent/",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output showed 10 tests passed."
+    },
+    {
+      "evidence_id": "import_workflow",
+      "source": "presentation-agent/docs/workflows/imported-ppt-reference-workflow.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked workflow document for user-provided PPT intake and template profile creation."
+    },
+    {
+      "evidence_id": "collection_policy",
+      "source": "presentation-agent/configs/collection-policy.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked collection policy now includes local-only user-provided PPT and consistent template policies."
+    },
+    {
+      "evidence_id": "raw_folder_rule",
+      "source": ".gitignore; presentation-agent/data/assets/raw/user-provided/README.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked git ignore rule and README for local-only user-provided PPT raw files."
+    },
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-ppt-reference-expansion.ko.md",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "Search record lists checked external sources and plan impact."
+    },
+    {
+      "evidence_id": "config_contract",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../presentation-agent/configs/collection-policy.json ../presentation-agent/data/reference-index/starter-reference-catalog.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output returned self_documenting for the changed config/catalog files."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The presentation reference catalog was expanded to 82 records.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["catalog_file", "catalog_validation"],
+      "verification_steps": ["Ran the catalog validator and checked the summary output."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The catalog now includes MiriCanvas, Genspark, Canva, Microsoft Create, Slidesgo, PresentationGO, Pitch, Figma, Adobe Express, PPTMON, open-source discovery, and AI slide research records.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["catalog_file", "web_search_record"],
+      "verification_steps": ["Read the catalog additions and web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "User-provided PPT files are now documented as local-only raw inputs by default.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["raw_folder_rule", "collection_policy", "import_workflow"],
+      "verification_steps": ["Read .gitignore, raw folder README, collection policy, and workflow docs."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The imported PPT workflow turns user-provided decks into design tokens, layout archetypes, and template profiles instead of direct copies.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["import_workflow", "collection_policy"],
+      "verification_steps": ["Read workflow and collection policy sections."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The changed presentation-agent files passed tests and config/catalog validation.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["presentation_tests", "catalog_validation", "config_contract"],
+      "verification_steps": ["Ran presentation-agent tests, catalog validator, and config contract command."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "External template source license details can vary per item and must be rechecked before downloading or storing raw files.",
+    "No user-provided PPT file was analyzed in this task because the user has not supplied one yet."
+  ],
+  "limitation_notes": [
+    "This change expands metadata and workflow, not a high-fidelity PPTX visual analysis engine.",
+    "Genspark and other AI slide tool behavior may change, so future automation should re-check current official docs."
+  ]
+}
+

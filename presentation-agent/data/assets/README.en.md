@@ -5,6 +5,7 @@ This folder stores images, icons, fonts, illustrations, and reusable template pi
 ## Subfolders
 
 - `raw/`: source files, only after license, provenance, access date, and usage terms are checked.
+- `raw/user-provided/`: local-only temporary analysis location for user-provided PPT/PPTX files. Raw files are not committed by default.
 - `html/`: assets reconstructed for HTML presentations.
 - `pptx/`: PPTX originals or samples that are legal to keep locally.
 - `thumbnails/`: catalog previews, subject to the original asset terms.
@@ -14,4 +15,3 @@ This folder stores images, icons, fonts, illustrations, and reusable template pi
 - Do not bypass paid template access or store account-gated files.
 - Do not store raw PPT or image files merely because they are visible online.
 - Do not use unprovenanced assets as evidence or production inputs.
-

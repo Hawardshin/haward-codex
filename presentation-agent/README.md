@@ -9,6 +9,7 @@
 - PPTX 파일은 우선 텍스트 구조를 HTML로 추출하고, 고품질 시각 변환은 별도 렌더러나 수동 HTML 재구성 대상으로 분리한다.
 - 발표 스크립트/흐름 생성 에이전트가 참고할 수 있도록 디자인 패턴, 출처, 라이선스, 변환 가능성을 함께 기록한다.
 - 발표 스크립트 에이전트와 협업할 수 있는 `deck-spec` JSON을 HTML 발표 덱으로 렌더링한다.
+- 미리캔버스, Canva, Slidesgo, Pitch, Figma, Genspark 같은 PPT/AI slide 출처를 메타데이터로 수집하고, 사용자가 제공한 PPT는 local-only 분석 후 내부 template profile로 재구성한다.
 
 ## 폴더 구조
 
@@ -36,6 +37,8 @@ presentation-agent/
 
 - `data/reference-index/starter-reference-catalog.json`: 50개 이상의 발표 디자인/HTML/에셋 출처 카탈로그.
 - `configs/collection-policy.json`: 출처 수집, 라이선스 게이트, PPTX HTML 변환 정책.
+- `docs/workflows/imported-ppt-reference-workflow.ko.md`: 사용자가 가져온 PPT/PPTX를 디자인 토큰과 레이아웃 archetype으로 전환하는 workflow.
+- `data/assets/raw/user-provided/`: 사용자가 제공한 PPT/PPTX를 임시 분석하는 local-only 위치.
 - `src/presentation_agent/catalog.py`: 카탈로그 검증과 요약 CLI.
 - `src/presentation_agent/pptx_to_html.py`: 라이선스가 허용된 PPTX를 기본 HTML 구조로 변환하는 최소 도구.
 - `src/presentation_agent/html_deck.py`: 발표 스크립트가 포함된 `deck-spec`을 HTML 발표 덱으로 렌더링하는 도구.

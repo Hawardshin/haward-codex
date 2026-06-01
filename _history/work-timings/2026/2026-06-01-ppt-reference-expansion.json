@@ -1,0 +1,86 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-01-ppt-reference-expansion",
+  "title": "Expand PPT template references and imported PPT workflow",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": null,
+  "measurement_note": "Timing record started after web-first intake and memory bootstrap, so early phases are explicitly marked as not measured.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before this timing record was created."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before this timing record was created."
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan",
+      "status": "completed",
+      "started_at": "2026-06-01T19:24:08+0900",
+      "ended_at": "2026-06-01T19:30:00+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Selected standard mode and scoped the request to presentation-agent reference catalog, imported PPT workflow, and durable source notes."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "started_at": "2026-06-01T19:30:00+0900",
+      "ended_at": "2026-06-01T19:33:10+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Created requirement updates, spec artifacts, web search record, and research notes."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "started_at": "2026-06-01T19:33:10+0900",
+      "ended_at": "2026-06-01T19:36:45+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Expanded the reference catalog, added imported PPT workflow docs, local-only raw folder policy, collection-policy rules, README and taxonomy updates."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "started_at": "2026-06-01T19:36:45+0900",
+      "ended_at": "2026-06-01T19:38:01+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Ran presentation-agent tests, catalog validation, self-documenting config checks, workspace maps, task board, Workspace Monitor build, and governance health."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "started_at": "2026-06-01T19:38:01+0900",
+      "ended_at": "2026-06-01T19:40:11+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Ran grounding and work evaluation, then wrote evaluation reports and history summaries."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured",
+      "bottleneck_notes": ""
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "mode_boundary_planning",
+    "interpretation": "Among measured completed phases before commit/push, initial scope planning took the longest because the request combined source research, catalog expansion, user-provided PPT handling, and template consistency policy.",
+    "improvement_candidates": [
+      "If repeated PPT source expansion is slow, add a deterministic source-catalog append helper with license checks.",
+      "If imported PPT analysis becomes common, promote the workflow into a tool that extracts design tokens and layout archetypes."
+    ]
+  }
+}

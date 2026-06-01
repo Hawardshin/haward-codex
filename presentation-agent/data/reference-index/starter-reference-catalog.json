@@ -87,7 +87,7 @@
     },
     {
       "field": "source_type",
-      "meaning": "Source role such as html_framework, template_gallery, design_gallery, asset_library, presentation_theory, ai_presentation_research, or conversion_tool_reference.",
+      "meaning": "Source role such as html_framework, template_gallery, design_gallery, asset_library, presentation_theory, ai_presentation_tool, ai_presentation_research, conversion_tool_reference, open_source_reference, or official_docs.",
       "required": true
     },
     {
@@ -112,7 +112,7 @@
     },
     {
       "field": "quality_signals",
-      "meaning": "Evidence that the source is worth checking, such as official, open_source, curated, popular, broad_catalog, designer_signal, practitioner_signal, or research_signal.",
+      "meaning": "Evidence that the source is worth checking, such as official, open_source, curated, popular, broad_catalog, designer_signal, practitioner_signal, research_signal, workflow_reference, or korean_user_relevance.",
       "required": true
     }
   ],
@@ -1232,6 +1232,366 @@
         "source_notes": "Python package candidate for PPTX-to-HTML conversion."
       },
       "notes": "Do not install until dependency health, license, and output fidelity are reviewed."
+    },
+    {
+      "id": "template-miricanvas-presentation",
+      "title": "MiriCanvas presentation templates",
+      "url": "https://www.miricanvas.com/templates/presentation",
+      "source_type": "template_gallery",
+      "formats": ["pptx", "web_template", "images"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["korean-market", "template-gallery", "business", "education"],
+      "quality_signals": ["official", "broad_catalog", "korean_user_relevance"],
+      "provenance": {
+        "found_via": "web_search: MiriCanvas presentation templates 미리캔버스 프레젠테이션 템플릿",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Korea-friendly presentation template gallery."
+      },
+      "notes": "Use as a Korean-market design reference. Keep metadata-only until item-level template terms allow storage or reuse."
+    },
+    {
+      "id": "ai-tool-miricanvas-ai-presentation",
+      "title": "MiriCanvas AI presentation",
+      "url": "https://www.miricanvas.com/ai-presentation",
+      "source_type": "ai_presentation_tool",
+      "formats": ["web_template", "pptx"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["ai-generation", "korean-market", "template-application"],
+      "quality_signals": ["official", "korean_user_relevance", "workflow_reference"],
+      "provenance": {
+        "found_via": "web_search: 미리캔버스 AI 프레젠테이션",
+        "accessed_on": "2026-06-01",
+        "source_notes": "AI presentation generation flow from MiriCanvas."
+      },
+      "notes": "Reference the workflow and prompt pattern, not raw output files, unless the user exports and confirms reuse rights."
+    },
+    {
+      "id": "ai-tool-genspark-ai-slides",
+      "title": "Genspark AI Slides",
+      "url": "https://www.genspark.ai/ai-slides",
+      "source_type": "ai_presentation_tool",
+      "formats": ["pptx", "web_template", "pdf"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["ai-generation", "template-upload", "pptx-export", "workflow"],
+      "quality_signals": ["official", "workflow_reference", "popular"],
+      "provenance": {
+        "found_via": "web_search: Genspark AI slides presentation generation templates design consistency references",
+        "accessed_on": "2026-06-01",
+        "source_notes": "AI slide tool with generated slide output and PPTX-oriented workflow."
+      },
+      "notes": "Use Genspark as a workflow reference for staged slide generation. Do not treat generated style as reusable without checking output rights."
+    },
+    {
+      "id": "ai-tool-genspark-slideshow-guide",
+      "title": "Genspark slideshow creation guide",
+      "url": "https://www.genspark.ai/help/how-to-create-a-slideshow-with-genspark-ai-slides",
+      "source_type": "ai_presentation_tool",
+      "formats": ["article", "workflow"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["strategy", "substance", "structure", "design", "build"],
+      "quality_signals": ["official", "workflow_reference"],
+      "provenance": {
+        "found_via": "web_search: Genspark AI slides presentation generation templates design consistency references",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Help article describing staged slideshow creation and reference/template use."
+      },
+      "notes": "Adapt the staged workflow into presentation-agent: strategy, substance, structure, design, build."
+    },
+    {
+      "id": "template-canva-presentations",
+      "title": "Canva presentation templates",
+      "url": "https://www.canva.com/presentations/templates/",
+      "source_type": "template_gallery",
+      "formats": ["pptx", "web_template", "images"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["template-gallery", "broad-catalog", "visual-variety"],
+      "quality_signals": ["official", "broad_catalog", "popular"],
+      "provenance": {
+        "found_via": "web_search: Canva presentation templates official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Large official gallery of presentation templates."
+      },
+      "notes": "Use for design inspiration and layout archetype discovery; do not mirror templates."
+    },
+    {
+      "id": "template-microsoft-create-powerpoint",
+      "title": "Microsoft Create PowerPoint templates",
+      "url": "https://create.microsoft.com/en-us/powerpoint-templates",
+      "source_type": "template_gallery",
+      "formats": ["pptx", "office_template"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "pptx_requires_conversion",
+      "design_tags": ["official", "powerpoint", "business", "office"],
+      "quality_signals": ["official", "primary_source"],
+      "provenance": {
+        "found_via": "web_search: Microsoft Create PowerPoint presentation templates official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Official Microsoft Create template gallery."
+      },
+      "notes": "Prefer as a high-authority reference for PowerPoint-native templates; check item terms before download."
+    },
+    {
+      "id": "docs-microsoft-personal-powerpoint-template",
+      "title": "Microsoft: use a personal template to create a PowerPoint presentation",
+      "url": "https://support.microsoft.com/en-us/office/use-a-personal-template-to-create-a-new-powerpoint-presentation-8c9b67c2-3317-4635-b3d7-3c8b68b6d881",
+      "source_type": "official_docs",
+      "formats": ["article", "pptx"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["personal-template", "powerpoint", "workflow"],
+      "quality_signals": ["official", "primary_source"],
+      "provenance": {
+        "found_via": "web_search: Microsoft PowerPoint use a personal template official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Official PowerPoint guidance for creating new presentations from personal templates."
+      },
+      "notes": "Use as a workflow reference when the user provides a PPT template or wants reusable local PowerPoint templates."
+    },
+    {
+      "id": "template-slidesgo-official",
+      "title": "Slidesgo templates",
+      "url": "https://slidesgo.com/",
+      "source_type": "template_gallery",
+      "formats": ["pptx", "google_slides"],
+      "license_status": "free_with_terms",
+      "download_allowed": false,
+      "html_conversion": "pptx_requires_conversion",
+      "design_tags": ["template-gallery", "education", "business", "visual"],
+      "quality_signals": ["official", "broad_catalog", "popular"],
+      "provenance": {
+        "found_via": "web_search: Slidesgo presentation templates official free templates PowerPoint Google Slides",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Template source for PowerPoint and Google Slides with item-level usage terms."
+      },
+      "notes": "Treat as source discovery. Check attribution and plan limits per template before use."
+    },
+    {
+      "id": "template-presentationgo",
+      "title": "PresentationGO templates",
+      "url": "https://www.presentationgo.com/",
+      "source_type": "template_gallery",
+      "formats": ["pptx", "google_slides", "diagrams"],
+      "license_status": "free_with_terms",
+      "download_allowed": false,
+      "html_conversion": "pptx_requires_conversion",
+      "design_tags": ["diagrams", "business", "process", "template-gallery"],
+      "quality_signals": ["curated", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: PresentationGO PowerPoint templates Google Slides",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Presentation template and diagram source."
+      },
+      "notes": "Useful for process/comparison/evidence layouts; verify per-item license before raw storage."
+    },
+    {
+      "id": "template-pitch-templates",
+      "title": "Pitch presentation templates",
+      "url": "https://pitch.com/templates",
+      "source_type": "template_gallery",
+      "formats": ["web_template", "pptx", "pdf"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["business", "startup", "saas", "modern"],
+      "quality_signals": ["official", "curated", "practitioner_signal"],
+      "provenance": {
+        "found_via": "web_search: Pitch presentation templates gallery official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Official Pitch template gallery."
+      },
+      "notes": "Strong reference for consistent SaaS/business deck systems and section rhythm."
+    },
+    {
+      "id": "gallery-pitch-presentations",
+      "title": "Pitch presentation gallery",
+      "url": "https://pitch.com/presentations",
+      "source_type": "design_gallery",
+      "formats": ["web_template", "examples"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["presentation-examples", "business", "flow", "layout"],
+      "quality_signals": ["official", "curated", "designer_signal"],
+      "provenance": {
+        "found_via": "web_search: Pitch presentation gallery official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Public presentation examples and gallery from Pitch."
+      },
+      "notes": "Use for flow and layout inspiration; do not copy visual assets."
+    },
+    {
+      "id": "template-figma-slides",
+      "title": "Figma Slides",
+      "url": "https://www.figma.com/slides/",
+      "source_type": "template_gallery",
+      "formats": ["figma", "web_template", "slides"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["design-tool", "collaboration", "templates", "interactive"],
+      "quality_signals": ["official", "designer_signal", "workflow_reference"],
+      "provenance": {
+        "found_via": "web_search: Figma presentation deck slides official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Official Figma slide creation surface."
+      },
+      "notes": "Use for design-system slide workflow and collaboration references."
+    },
+    {
+      "id": "template-figma-community-slide-decks",
+      "title": "Figma Community slide deck templates",
+      "url": "https://www.figma.com/community/search?resource_type=mixed&sort_by=popular&query=slide%20deck%20presentation",
+      "source_type": "template_gallery",
+      "formats": ["figma", "slides", "templates"],
+      "license_status": "free_with_terms",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["community", "slide-deck", "designer-signal", "templates"],
+      "quality_signals": ["community_signal", "designer_signal", "popular"],
+      "provenance": {
+        "found_via": "web_search: Figma community presentation templates official presentation deck templates",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Figma Community search for popular slide deck and presentation templates."
+      },
+      "notes": "Treat duplicates/likes as discovery signals only. Confirm license and attribution per file."
+    },
+    {
+      "id": "template-adobe-express-presentations",
+      "title": "Adobe Express presentation templates",
+      "url": "https://www.adobe.com/express/templates/presentation",
+      "source_type": "template_gallery",
+      "formats": ["web_template", "images", "pdf"],
+      "license_status": "official_terms_required",
+      "download_allowed": false,
+      "html_conversion": "manual_rebuild_recommended",
+      "design_tags": ["template-gallery", "brand", "visual-variety"],
+      "quality_signals": ["official", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: Adobe Express presentation templates official",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Official Adobe Express presentation template gallery."
+      },
+      "notes": "Use as design inspiration and brand/layout reference; do not copy raw template assets without terms review."
+    },
+    {
+      "id": "template-pptmon",
+      "title": "PPTMON templates",
+      "url": "https://pptmon.com/",
+      "source_type": "template_gallery",
+      "formats": ["pptx", "google_slides"],
+      "license_status": "free_with_terms",
+      "download_allowed": false,
+      "html_conversion": "pptx_requires_conversion",
+      "design_tags": ["template-gallery", "free-templates", "education", "business"],
+      "quality_signals": ["curated", "broad_catalog"],
+      "provenance": {
+        "found_via": "web_search: free PowerPoint templates PPTMON",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Free PowerPoint and Google Slides template site."
+      },
+      "notes": "Potential source for permitted template experiments; check each template license and attribution."
+    },
+    {
+      "id": "open-source-github-slideshow-template-topic",
+      "title": "GitHub slideshow-template topic",
+      "url": "https://github.com/topics/slideshow-template",
+      "source_type": "open_source_reference",
+      "formats": ["html", "css", "javascript", "templates"],
+      "license_status": "open_source",
+      "download_allowed": true,
+      "html_conversion": "native_html",
+      "design_tags": ["open-source", "template-discovery", "web-native"],
+      "quality_signals": ["source_repository", "open_source", "community_signal"],
+      "provenance": {
+        "found_via": "web_search: open source presentation templates pptx html reveal.js marp slidev pptxgenjs templates",
+        "accessed_on": "2026-06-01",
+        "source_notes": "GitHub topic for discovering open-source slideshow template projects."
+      },
+      "notes": "Use as a discovery seed, then inspect each repository's license, freshness, and code quality separately."
+    },
+    {
+      "id": "research-pptagent",
+      "title": "PPTAgent: Generating and Evaluating Presentations Beyond Text-to-Slides",
+      "url": "https://arxiv.org/abs/2501.03936",
+      "source_type": "ai_presentation_research",
+      "formats": ["paper", "pdf"],
+      "license_status": "unknown",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["reference-presentation", "style-learning", "llm", "evaluation"],
+      "quality_signals": ["research_signal", "paper"],
+      "provenance": {
+        "found_via": "web_search: PPTAgent reference presentation style generation",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Research on presentation generation and evaluation beyond simple text-to-slides."
+      },
+      "notes": "Use as a research reference for extracting style from user-provided reference presentations."
+    },
+    {
+      "id": "research-pregenie",
+      "title": "PreGenie: A Generation Framework for Personalized Presentation Slides",
+      "url": "https://arxiv.org/abs/2501.03436",
+      "source_type": "ai_presentation_research",
+      "formats": ["paper", "pdf"],
+      "license_status": "unknown",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["outline", "presenter-notes", "layout", "personalization"],
+      "quality_signals": ["research_signal", "paper"],
+      "provenance": {
+        "found_via": "web_search: PreGenie personalized presentation slides",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Research on personalized presentation slide generation."
+      },
+      "notes": "Use for slide outline, presenter note, and layout coordination ideas."
+    },
+    {
+      "id": "research-outlinespark",
+      "title": "OutlineSpark: Igniting AI-powered Presentation Slides Creation from Computational Notebooks",
+      "url": "https://arxiv.org/abs/2503.07610",
+      "source_type": "ai_presentation_research",
+      "formats": ["paper", "pdf"],
+      "license_status": "unknown",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["outline", "script-to-slides", "notebook-to-slides"],
+      "quality_signals": ["research_signal", "paper"],
+      "provenance": {
+        "found_via": "web_search: OutlineSpark AI presentation slides",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Research on generating presentation slides from computational notebooks."
+      },
+      "notes": "Use for turning dense source material into structured outlines before visual design."
+    },
+    {
+      "id": "research-deepslides",
+      "title": "DeepSlides: Exploring Effective Strategies for Automatic Slide Generation from Academic Papers",
+      "url": "https://arxiv.org/abs/2505.09859",
+      "source_type": "ai_presentation_research",
+      "formats": ["paper", "pdf"],
+      "license_status": "unknown",
+      "download_allowed": false,
+      "html_conversion": "reference_only",
+      "design_tags": ["manuscript-to-slides", "knowledge-retrieval", "academic"],
+      "quality_signals": ["research_signal", "paper"],
+      "provenance": {
+        "found_via": "web_search: DeepSlides automatic slide generation academic papers",
+        "accessed_on": "2026-06-01",
+        "source_notes": "Research on automatic slide generation from academic papers."
+      },
+      "notes": "Use for research-heavy presentations where evidence material must be compressed into slides."
     }
   ]
 }

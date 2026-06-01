@@ -12,6 +12,7 @@
    - 공식/원천 출처, 템플릿 갤러리, 디자인 갤러리, 에셋 라이브러리, 논문/가이드를 분리한다.
 3. 카탈로그에 출처를 저장한다.
    - URL, 접근일, 라이선스 상태, `download_allowed`, `quality_signals`, `html_conversion`을 기록한다.
+   - 미리캔버스, Canva, Slidesgo, Genspark 같은 출처는 기본적으로 원본 저장이 아니라 메타데이터와 구조 참고로 다룬다.
 4. 라이선스 게이트를 통과한 에셋만 `data/assets/`에 저장한다.
    - 불명확한 자료는 영감과 메타데이터로만 사용한다.
 5. 발표 스크립트 에이전트가 `deck-spec`을 갱신한다.
@@ -28,4 +29,4 @@
 - 가능한 경우 Presentations skill의 artifact-tool export를 우선한다.
 - `python-pptx`, PptxGenJS, LibreOffice, 직접 OOXML 편집은 설치/보안/라이선스/품질 검토 후 채택한다.
 - 외부 디자인을 복제하지 않고, 수집한 레퍼런스의 구조적 패턴만 재해석한다.
-
+- 사용자가 PPT를 직접 가져온 경우에는 `imported-ppt-reference-workflow.ko.md`를 따라 local-only 분석 후 template profile로 전환한다.

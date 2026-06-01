@@ -63,6 +63,24 @@
 - 전체 발표는 플랫폼의 철학, 운영 루프, 프로젝트 경계, 리서치/요구사항/스펙/평가/히스토리/도구화 구조를 빠짐없이 다룬다.
 - 프로젝트별 발표는 각 프로젝트의 목적, 범위, 주요 파일, 현재 산출물, 검증 방법, 다음 사용 흐름을 따로 설명한다.
 
+### REQ-PA-011 PPT 템플릿 레퍼런스 확장
+
+- 발표 에이전트는 미리캔버스, Canva, Microsoft Create, Slidesgo, PresentationGO, Pitch, Figma Slides, Adobe Express 같은 고품질 PPT/slide 템플릿 출처를 반복 참고할 수 있어야 한다.
+- 새 템플릿 출처는 `starter-reference-catalog.json`에 URL, 접근일, 출처 유형, 라이선스 상태, 다운로드 가능성, HTML 변환 방식, 품질 신호를 기록한다.
+- 한국 사용자에게 유용한 출처는 별도 태그나 메모로 구분해 실제 발표 제작 시 쉽게 고를 수 있게 한다.
+
+### REQ-PA-012 사용자 제공 PPT 레퍼런스화
+
+- 사용자가 PPT/PPTX 파일을 제공하면 원본 복제가 아니라 디자인 토큰, 레이아웃 archetype, 반복 컴포넌트, 섹션 리듬을 추출해 내부 template profile로 재구성한다.
+- 원본 PPT/PPTX는 사용 권한과 저장 허가가 확인되기 전까지 git에 커밋하지 않는 local-only raw 영역에 둔다.
+- `pptx_to_html.py`는 narrative/text structure 추출에 사용하고, 픽셀 단위 faithful conversion으로 오해하지 않는다.
+
+### REQ-PA-013 일관성 있는 템플릿 생성
+
+- PPT/HTML 생성은 Genspark식 단계형 흐름을 참고해 `strategy`, `substance`, `structure`, `design`, `build`를 분리한다.
+- 최종 템플릿은 색상, 타이포그래피, spacing, grid, component style, layout family를 고정해 슬라이드별 편차를 줄인다.
+- 새 슬라이드는 자유 배치보다 검증된 layout archetype에 내용을 배정한다.
+
 ## 비범위
 
 - 이번 기준선은 실제 발표 PPT 파일을 대량 다운로드하지 않는다.

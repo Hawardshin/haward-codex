@@ -45,6 +45,14 @@
       "path": "presentation-agent/src/presentation_agent/pptx_to_html.py",
       "used_for": ["permitted PPTX text extraction", "HTML structure generation"],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "imported-ppt-reference-workflow",
+      "title": "User-provided PPT reference workflow",
+      "source_type": "local_doc",
+      "path": "presentation-agent/docs/workflows/imported-ppt-reference-workflow.ko.md",
+      "used_for": ["user-provided PPT intake", "design token extraction", "template profile creation"],
+      "last_checked": "2026-06-01"
     }
   ],
   "structure_rules": [
@@ -65,6 +73,12 @@
       "rule": "Keep converted HTML under data/conversions/html/ or artifacts/html/ with a provenance note linking the source catalog record.",
       "reason": "Every conversion must remain traceable to its source and license decision.",
       "applies_to": ["presentation-agent/data/conversions/", "presentation-agent/artifacts/html/"]
+    },
+    {
+      "id": "user-provided-ppt-local-only",
+      "rule": "Keep user-provided raw PPT/PPTX files local-only until the user confirms usage rights and explicit permission to commit them.",
+      "reason": "A file supplied for reference may still contain licensed or private content.",
+      "applies_to": ["presentation-agent/data/assets/raw/user-provided/"]
     },
     {
       "id": "metadata-first-index",
@@ -136,6 +150,12 @@
       "goal": "Collect evidence about storytelling, slide structure, cognitive load, and AI slide evaluation.",
       "preferred_sources": ["official guide", "paper", "recognized practitioner resource"],
       "output": "records used for script-flow and evaluation agents"
+    },
+    {
+      "id": "ai-slide-generation-workflows",
+      "goal": "Collect AI slide generation workflows such as Genspark-style staged creation, template upload, and PPTX export/import.",
+      "preferred_sources": ["official docs", "help center", "research paper"],
+      "output": "records with source_type=ai_presentation_tool or ai_presentation_research"
     }
   ],
   "license_gate": {
@@ -162,6 +182,37 @@
       "Do not download paid or account-gated templates through third-party sharing requests.",
       "Do not store copyrighted template files only because they are viewable online.",
       "Do not present a visual conversion as faithful unless layout was rendered and checked."
+    ]
+  },
+  "user_provided_ppt_policy": {
+    "default_storage": "presentation-agent/data/assets/raw/user-provided/",
+    "default_git_policy": "ignored_until_permission_confirmed",
+    "required_before_analysis": [
+      "user confirms they can provide the file for reference",
+      "usage purpose is recorded",
+      "raw file path is recorded outside committed catalog unless commit permission is explicit"
+    ],
+    "analysis_outputs": [
+      "text structure HTML from pptx_to_html.py",
+      "design token notes",
+      "layout archetype notes",
+      "template profile summary",
+      "source/provenance note"
+    ],
+    "prohibited_actions": [
+      "Do not commit user-provided PPT/PPTX files by default.",
+      "Do not copy the original visual design directly into public templates without permission.",
+      "Do not claim the internal template is original if it closely follows a protected source."
+    ]
+  },
+  "consistent_template_policy": {
+    "stages": ["strategy", "substance", "structure", "design", "build"],
+    "locked_design_tokens": ["color_roles", "typography_roles", "spacing_scale", "grid", "component_styles"],
+    "required_layout_archetypes": ["hero", "section_divider", "problem_solution", "comparison", "process", "evidence", "quote", "closing"],
+    "review_checks": [
+      "Every slide maps to a known layout archetype.",
+      "Every slide uses the same token set unless a deliberate exception is recorded.",
+      "The final deck has source notes and template profile notes."
     ]
   }
 }
