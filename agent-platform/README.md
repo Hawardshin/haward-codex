@@ -91,13 +91,14 @@ PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluati
 PYTHONPATH=src python3 -m agent_platform.cli validate-skill configs/evaluation/skill-validation-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/hallucination-guard-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
+PYTHONPATH=src python3 -m agent_platform.cli complete-deep-research configs/planning/deep-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-parallel-work configs/planning/parallel-work-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/planning/coding-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli reconcile-spec artifacts/spec-reconciliation/example-clarification-input.json
 PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json
 PYTHONPATH=src python3 -m agent_platform.cli check-notifications configs/integrations/notification-channels.json
 PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notification-channels.json --event work_completed --title "Dry run" --message "Notification dry run" --severity info --dry-run
-PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/integrations/notification-channels.json
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/deep-research-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/planning/deep-research-template.json configs/integrations/notification-channels.json
 ```
 
 ## Current Skeleton
@@ -117,10 +118,12 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `configs/research/`: source registry and research profile configs
 - `configs/research/enterprise-source-registry.json`: curated large-company, research-lab, architecture-center, and high-signal source seed list
 - `configs/research/source-discovery-registry.json`: broad search-origin registry for global, Korean, Indian, paper, and Korean local review sources
+- `configs/research/deep-research-profile.json`: source, depth, stage, citation-audit, and report contract for long-form deep research
 - `configs/workflows/work-mode-registry.json`: selectable work modes and evaluator target policy
 - `configs/integrations/notification-channels.json`: notification on/off routing, event filters, provider payload options, and environment-variable secret indirection
 - `configs/open-source/`: dependency candidate scoring inputs
 - `research-insight-planner-agent` is the core Perplexity-style research agent for search, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review
+- `deep-research-agent` validates multi-step deep research packages before long-form report writing
 - `requirements-manager-agent` keeps user requests, reviewed requirements, implementation, and evaluation connected
 - `spec-driven-planner-agent` turns requirements into specs, plans, tasks, validation records, and traceability
 - `spec-reconciliation-agent` decides whether ambiguous specs or spec/source drift should update the spec, update source, ask the user, or defer; user decisions are surfaced as `clarification_needed`
@@ -129,6 +132,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`
 - general research readiness requires `research_profile_paths`, all answer-engine stage IDs, and `citation_requirements`
 - general research readiness requires `source_value_provenance` and `plan_evidence`
+- deep research readiness requires multiple search channels, research iterations, evidence items, contradiction notes, citation audit notes, unsupported/weak claim notes, report outline, and report targets
 - coding research should pass `coding-research-agent` before implementation when investigation is needed
 - coding research readiness requires diverse `source_types`, including at least three distinct non-`other` types
 - coding research should include `reference_config_paths` pointing to `configs/research/`

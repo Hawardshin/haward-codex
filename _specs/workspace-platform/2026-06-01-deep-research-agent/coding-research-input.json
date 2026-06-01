@@ -1,0 +1,205 @@
+{
+  "research_goal": "Design and implement a Python deep-research-agent readiness checker for long-form source-grounded report generation.",
+  "coding_context": "agent-platform uses Python dataclasses and deterministic CLI commands for planning and evaluation agents.",
+  "research_types": [
+    "architecture",
+    "implementation_pattern",
+    "open_source",
+    "testing"
+  ],
+  "search_channels": [
+    "web search",
+    "repository search",
+    "official docs",
+    "paper search",
+    "open-source repository search"
+  ],
+  "sources_checked": [
+    "https://developers.openai.com/api/docs/guides/deep-research",
+    "https://exa.ai/docs/reference/exa-research",
+    "https://docs.langchain.com/oss/python/deepagents/deep-research",
+    "https://github.com/langchain-ai/open_deep_research",
+    "https://github.com/langchain-ai/deepagents",
+    "https://arxiv.org/abs/2605.06635",
+    "https://arxiv.org/abs/2508.15804",
+    "https://c4model.com/",
+    "https://arc42.org/overview/",
+    "https://docs.python.org/3/library/dataclasses.html",
+    "https://docs.python.org/3/library/argparse.html",
+    "agent-platform/src/agent_platform/planning/research_insight_planner.py",
+    "agent-platform/src/agent_platform/planning/coding_research.py",
+    "agent-platform/tests/test_research_insight_planner.py"
+  ],
+  "source_types": [
+    "official",
+    "open_source",
+    "paper",
+    "standard",
+    "community",
+    "social",
+    "internal"
+  ],
+  "reference_config_paths": [
+    "agent-platform/configs/research/source-registry.json",
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/research/coding-research-profile.json",
+    "agent-platform/configs/research/source-discovery-registry.json"
+  ],
+  "source_value_provenance": [
+    "Deep research report stages <- OpenAI, Exa, LangChain docs checked 2026-06-01",
+    "Citation verification risk <- Cited but Not Verified and ReportBench papers checked 2026-06-01",
+    "Python dataclass/argparse pattern <- Python official docs plus existing agent-platform CLI code"
+  ],
+  "plan_evidence": [
+    "Separate module <- existing research_insight_planner.py is planning readiness, not report readiness",
+    "CLI name complete-deep-research <- existing complete-coding-research naming pattern",
+    "Tests should mirror test_research_insight_planner.py and test_coding_research.py deterministic gap checks"
+  ],
+  "technology_stack": [
+    "Python 3",
+    "dataclasses",
+    "argparse",
+    "unittest",
+    "JSON config files",
+    "agent-platform CLI"
+  ],
+  "technology_official_docs": [
+    "Python dataclasses documentation: https://docs.python.org/3/library/dataclasses.html",
+    "Python argparse documentation: https://docs.python.org/3/library/argparse.html",
+    "Python unittest documentation: https://docs.python.org/3/library/unittest.html"
+  ],
+  "stack_version_constraints": [
+    "Use repository's current Python 3 execution path; avoid new dependencies.",
+    "Keep code compatible with existing Python unittest and dataclass style."
+  ],
+  "issue_discussion_sources": [
+    "https://github.com/langchain-ai/open_deep_research",
+    "https://github.com/langchain-ai/deepagents",
+    "https://www.reddit.com/r/OpenAI/comments/1jj0439",
+    "https://www.reddit.com/r/AI_Agents/comments/1jk14wz"
+  ],
+  "issue_discussion_notes": [
+    "Open-source deep research examples commonly split research into parallel or focused lanes and synthesize a final cited report.",
+    "Community discussions mention workflow-based implementations to avoid pure-agent loops and token waste."
+  ],
+  "community_signal_notes": [
+    "GitHub stars and Reddit comments were used as discovery and adoption signals, not proof of correctness.",
+    "The implementation relies on official docs and papers for factual claims, while community sources inform risks and usage patterns."
+  ],
+  "language_options": [
+    "Python in agent-platform",
+    "TypeScript/Node in workspace-monitor or a separate tool"
+  ],
+  "selected_language": "Python in agent-platform",
+  "language_decision_notes": [
+    "Python matches existing planning/evaluation agents and CLI structure.",
+    "No new dependency is required.",
+    "TypeScript would split shared agent logic across runtimes without clear benefit for this readiness checker."
+  ],
+  "code_reference_sources": [
+    "agent-platform/src/agent_platform/planning/research_insight_planner.py",
+    "agent-platform/src/agent_platform/planning/coding_research.py",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/tests/test_research_insight_planner.py",
+    "https://github.com/langchain-ai/open_deep_research",
+    "https://github.com/langchain-ai/deepagents"
+  ],
+  "code_reference_notes": [
+    "Use frozen dataclass input plus from_dict conversion and deterministic gap list pattern.",
+    "Expose one CLI command that loads JSON and prints a stable JSON report.",
+    "Tests should assert status and exact gap messages for missing critical fields.",
+    "Open-source references show deep research often needs planning, parallel/focused sub-research, and final synthesis."
+  ],
+  "architecture_reference_sources": [
+    "agent-platform/src/agent_platform/planning/research_insight_planner.py",
+    "agent-platform/src/agent_platform/planning/coding_research.py",
+    "https://docs.langchain.com/oss/python/deepagents/deep-research",
+    "https://github.com/langchain-ai/open_deep_research",
+    "https://c4model.com/",
+    "https://arc42.org/overview/"
+  ],
+  "architecture_theory_sources": [
+    "OpenAI API Deep Research docs",
+    "Exa Research API docs",
+    "C4 model",
+    "arc42 overview",
+    "ReportBench paper",
+    "Cited but Not Verified paper"
+  ],
+  "architecture_practitioner_sources": [
+    "LangChain Deep Agents docs",
+    "langchain-ai/open_deep_research",
+    "Reddit Open Source Deep Research discussions"
+  ],
+  "architecture_options": [
+    "Extend research_insight_planner.py with deep report fields",
+    "Create separate deep_research.py readiness checker"
+  ],
+  "architecture_decision_notes": [
+    "Selected separate deep_research.py because deep report readiness has different fields and thresholds from plan readiness.",
+    "Keeping modules separate avoids weakening the simpler research-insight planner with long-report-specific constraints."
+  ],
+  "architecture_tradeoff_notes": [
+    "A separate checker adds one more CLI command but keeps responsibilities clear.",
+    "Future real search automation can call this checker after retrieval and synthesis."
+  ],
+  "folder_structure_options": [
+    "Add code under agent-platform/src/agent_platform/planning with tests under agent-platform/tests",
+    "Create a separate _tools/deep-research tool"
+  ],
+  "folder_structure_decision_notes": [
+    "Selected agent-platform because this is a shared agent capability and mirrors coding-research-agent.",
+    "_tools would be better for deterministic crawling or report conversion tools, not agent readiness policy."
+  ],
+  "folder_semantics_notes": [
+    "configs/research stores source/depth policy.",
+    "configs/planning stores structured input templates.",
+    "docs explains usage in Korean/English.",
+    "_ops/workflows and _ops/prompts expose the reusable operating path."
+  ],
+  "maintainability_notes": [
+    "Use the existing tuple-of-strings validation helpers style.",
+    "Keep thresholds as constants so tests document the policy.",
+    "Avoid adding runtime dependencies in this first version."
+  ],
+  "source_bundle_report": "_history/web-searches/2026/2026-06-01-deep-research-agent.ko.md",
+  "findings": [
+    "Deep research report generation needs planning, iterative retrieval, extraction, synthesis, citations, and skeptical review.",
+    "Citation presence is insufficient unless checked against source support.",
+    "Existing agent-platform patterns are enough for a deterministic readiness checker."
+  ],
+  "options": [
+    "Extend existing planner",
+    "Add separate deep research checker",
+    "Install an external deep research framework now"
+  ],
+  "recommendation": "Add a separate no-dependency Python readiness checker and defer external search framework installation until a concrete retrieval integration is required.",
+  "post_research_answers": {
+    "what_was_verified": "Verified deep research stage patterns, citation audit risks, existing Python agent-platform implementation style, and open-source reference patterns.",
+    "best_option": "Separate Python deep_research.py readiness checker plus config/template/docs.",
+    "why_this_option": "It fits existing agent-platform boundaries, avoids new dependencies, and keeps report-readiness separate from plan-readiness.",
+    "alternatives_rejected": "Extending research_insight_planner.py would blur responsibilities. Installing LangChain Deep Agents now is premature because the user asked for the platform agent structure, not a live retrieval backend.",
+    "implementation_impact": "Add planning module, CLI command, tests, configs, docs, workflow, prompt, memory/bootstrap references, and history artifacts.",
+    "risks_and_unknowns": "No real crawler is installed in this first version. Citation audit still depends on checking source content.",
+    "validation_plan": "Run unit tests, complete-deep-research sample, config contract, memory bootstrap, workspace health, grounding, and work evaluator.",
+    "reusable_knowledge": "Capture deep research stage model and citation audit requirements in config, docs, workflow, and prompt.",
+    "next_action": "Implement deep_research.py and connect CLI/configs/docs."
+  },
+  "validation_steps": [
+    "Run complete-coding-research on this input.",
+    "Run agent-platform unit tests.",
+    "Run complete-deep-research on the template.",
+    "Run config contract and memory bootstrap checks."
+  ],
+  "risks_or_unknowns": [
+    "The first version validates completed research packages, not retrieval execution.",
+    "Thresholds may need tuning after several real deep research reports."
+  ],
+  "capture_targets": [
+    "_research/topics/agent-planning/2026-06-01-deep-research-agent.ko.md"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-01-deep-research-agent.ko.md"
+  ],
+  "knowledge_validation_status": "ready_to_reference"
+}

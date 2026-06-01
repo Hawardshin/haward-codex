@@ -8,6 +8,7 @@ This folder stores configuration files that make source criteria and reference c
 - `enterprise-source-registry.json`: separate seed list of large-company engineering, official research lab, architecture center, and high-signal independent sources
 - `source-discovery-registry.json`: broad search-origin registry for global technology blogs, Korean big-tech blogs, India technology sources, paper discovery, and Korean local review channels
 - `research-agent-profile.json`: core Perplexity-style answer-engine profile used by the research agent
+- `deep-research-profile.json`: research depth, stage, citation-audit, and report contract profile for deep research, long-form reports, and landscape/literature reviews
 - `coding-research-profile.json`: default source coverage profile used by `coding-research-agent` before implementation
 - `marketing-evidence-profile.json`: research profile for marketing strategy, market sizing, consumer insight, books/theory, surveys, and quantitative evidence
 
@@ -15,6 +16,7 @@ This folder stores configuration files that make source criteria and reference c
 
 - Coding research input must include `reference_config_paths`.
 - General research/planning input must include `research_profile_paths` and should record `research-agent-profile.json` by default.
+- Deep research or long-form report input should record `deep-research-profile.json` in `research_profile_paths` and run `complete-deep-research` before report writing.
 - At least one path must point to a JSON config under `agent-platform/configs/research/`.
 - `source_types` should use the source types defined in `source-registry.json`.
 - When enterprise/high-quality sources are used as research starting points, record `enterprise-source-registry.json` in `research_profile_paths` or `reference_config_paths`.
@@ -23,6 +25,7 @@ This folder stores configuration files that make source criteria and reference c
 - Marketing numeric evidence must preserve value, unit, denominator/base, geography, timeframe, population, method, sample, sponsor, and comparability notes.
 - Tie material values and planning constraints to `source_value_provenance` and `plan_evidence`.
 - General research should record the `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, and `skeptic_review` stages plus citation requirements.
+- Deep research should record research iterations, evidence items, contradiction notes, citation audit notes, unsupported/weak claims, report outline, and report targets.
 - Before implementation, record `code_reference_sources` and `code_reference_notes` for open-source structure, reference implementations, real source code, and tests inspected.
 - External reference sources should update `last_checked` or be added as new config entries.
 - Internal knowledge-base entries should pass `knowledge-skeptic-agent` before use as evidence.
@@ -35,6 +38,7 @@ This folder stores configuration files that make source criteria and reference c
 {
   "research_profile_paths": [
     "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/research/deep-research-profile.json",
     "agent-platform/configs/research/source-registry.json",
     "agent-platform/configs/research/source-discovery-registry.json",
     "agent-platform/configs/research/marketing-evidence-profile.json"
@@ -50,6 +54,9 @@ This folder stores configuration files that make source criteria and reference c
   ],
   "citation_requirements": [
     "Material factual claims are tied to checked sources."
+  ],
+  "deep_research_fields": [
+    "research_iterations, evidence_items, contradiction_notes, citation_audit_notes, unsupported_or_weak_claims, report_outline, report_targets"
   ],
   "source_value_provenance": [
     "value or claim <- exact URL/path, access date, extraction note"

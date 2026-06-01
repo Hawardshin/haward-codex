@@ -1,0 +1,148 @@
+{
+  "task": "Ground factual claims for deep-research-agent creation.",
+  "output_summary": "Added deep-research-agent, complete-deep-research CLI, deep research profile/template, docs, workflow, prompt, memory anchors, and tests.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "deep_research_source",
+      "source": "agent-platform/src/agent_platform/planning/deep_research.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked Python source implementing DeepResearchInput and complete_deep_research."
+    },
+    {
+      "evidence_id": "deep_research_tests",
+      "source": "PYTHONPATH=src python3 -m unittest agent-platform/tests/test_deep_research.py",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output showed 6 tests passed."
+    },
+    {
+      "evidence_id": "agent_platform_tests",
+      "source": "PYTHONPATH=src python3 -m unittest discover -s tests from agent-platform/",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output showed 110 tests passed."
+    },
+    {
+      "evidence_id": "deep_cli",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli complete-deep-research configs/planning/deep-research-template.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output returned ready_to_write_report."
+    },
+    {
+      "evidence_id": "deep_profile",
+      "source": "agent-platform/configs/research/deep-research-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked self-documenting profile for deep research stages and report contract."
+    },
+    {
+      "evidence_id": "deep_template",
+      "source": "agent-platform/configs/planning/deep-research-template.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked self-documenting sample input for complete-deep-research."
+    },
+    {
+      "evidence_id": "config_contract",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ...",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output returned self_documenting for core config set including deep research profile/template."
+    },
+    {
+      "evidence_id": "memory_bootstrap",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output returned ready_to_bootstrap with deep_research_profile anchor."
+    },
+    {
+      "evidence_id": "agent_spec",
+      "source": "agent-platform/configs/agents/deep-research-agent.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked agent spec and list-agents output includes deep-research-agent."
+    },
+    {
+      "evidence_id": "workflow_prompt_docs",
+      "source": "agent-platform/docs/deep-research-agent.ko.md; _ops/workflows/57-deep-research.md; _ops/prompts/87-deep-research.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked documentation and operating entrypoints for the new agent."
+    },
+    {
+      "evidence_id": "external_references",
+      "source": "_history/web-searches/2026/2026-06-01-deep-research-agent.ko.md",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "Search record lists external sources used to shape the agent design."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "A new deep-research-agent spec was added under agent-platform configs.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["agent_spec"],
+      "verification_steps": ["Read the agent spec and ran list-agents."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "complete-deep-research validates deep research readiness and returns ready_to_write_report for the sample template.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["deep_research_source", "deep_cli", "deep_research_tests"],
+      "verification_steps": ["Read the source, ran focused tests, and ran the sample CLI command."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The deep research profile and template are self-documenting configs.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["deep_profile", "deep_template", "config_contract"],
+      "verification_steps": ["Ran check-config-contract on the deep research config files and core config set."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Memory bootstrap includes deep_research_profile as an anchor.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["memory_bootstrap"],
+      "verification_steps": ["Ran check-memory-bootstrap and checked startup anchors."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Docs, workflow, and prompt entrypoints were added for deep-research-agent.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["workflow_prompt_docs"],
+      "verification_steps": ["Read the added docs, workflow, and prompt files."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The deep-research-agent design was informed by external deep research docs, open-source examples, and citation-evaluation papers.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["external_references"],
+      "verification_steps": ["Ran web search and saved a public search record with checked sources."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "The first version validates research packages but does not execute a real search API or crawler.",
+    "Deep research thresholds may need tuning after several real reports are produced."
+  ],
+  "limitation_notes": [
+    "Citation audit requires actual source-content checking by the researcher or a later grounding pass.",
+    "External deep research tools evolve quickly; future integrations should re-check current official docs."
+  ]
+}

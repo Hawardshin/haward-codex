@@ -1,0 +1,86 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-01-deep-research-agent",
+  "title": "Create deep-research-agent for detailed source-grounded reports",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": null,
+  "measurement_note": "Timing record started after web-first intake and memory bootstrap, so early phases are explicitly marked as not measured.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before this timing record was created."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before this timing record was created."
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan",
+      "status": "completed",
+      "started_at": "2026-06-01T18:51:09+0900",
+      "ended_at": "2026-06-01T18:53:50+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Selected standard mode, identified agent-platform ownership, and separated deep research report readiness from existing research insight planning."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "started_at": "2026-06-01T18:53:50+0900",
+      "ended_at": "2026-06-01T19:00:04+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Created requirement, plan, traceability, research insight input, coding research input, and reusable research notes before implementation."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "started_at": "2026-06-01T19:00:04+0900",
+      "ended_at": "2026-06-01T19:11:12+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Added deep-research readiness code, CLI, configs, docs, workflow, prompt, memory links, and initial tests."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "started_at": "2026-06-01T19:11:12+0900",
+      "ended_at": "2026-06-01T19:12:21+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Ran deep research tests, complete-deep-research sample, config contracts, memory bootstrap, maps, task board, timing check, agent listing, workspace health, and Workspace Monitor build."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "started_at": "2026-06-01T19:12:21+0900",
+      "ended_at": "2026-06-01T19:16:41+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Prepared grounding, work evaluation, request trace, work summary, and close-out records."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured",
+      "bottleneck_notes": ""
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "implementation",
+    "interpretation": "Among measured completed phases before commit/push, implementation took the longest because it added Python readiness logic, CLI wiring, configs, docs, workflow, prompt, memory anchors, and tests in one pass.",
+    "improvement_candidates": [
+      "If deep research setup repeatedly spends most time in documentation, consider a template generator for agent readiness specs.",
+      "If verification dominates, consider a grouped test command for agent-platform config and planning checks."
+    ]
+  }
+}

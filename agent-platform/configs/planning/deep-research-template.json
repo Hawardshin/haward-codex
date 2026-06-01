@@ -1,0 +1,200 @@
+{
+  "schema_version": "2026-06-01",
+  "name": "deep-research-template",
+  "purpose": "Template input for complete-deep-research. It validates whether a deep research package is ready for long-form report writing.",
+  "reader_guide": {
+    "summary": "Copy this file when a task needs a detailed source-grounded report. Fill the research package fields, then run complete-deep-research before writing or publishing the report.",
+    "how_to_read": [
+      "Read research_question and report_goal to understand the report task.",
+      "Check research_profile_paths to see which research rules shaped the package.",
+      "Check deep_research_stages and research_iterations to confirm the work was not single-pass search.",
+      "Check evidence_items, citation_audit_notes, and unsupported_or_weak_claims before trusting the report.",
+      "Check report_targets to find where the final report should be saved."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-06-01",
+    "update_triggers": [
+      "complete-deep-research adds or removes input fields.",
+      "deep-research-profile thresholds or required stages change.",
+      "A real deep research report exposes missing fields in this template."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "deep_research_profile",
+      "title": "Deep Research Profile",
+      "path": "agent-platform/configs/research/deep-research-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "readiness thresholds",
+        "stage and report contract"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "complete_deep_research",
+      "title": "Deep Research Readiness Checker",
+      "path": "agent-platform/src/agent_platform/planning/deep_research.py",
+      "source_type": "internal",
+      "used_for": [
+        "input schema behavior",
+        "readiness gap messages"
+      ],
+      "last_checked": "2026-06-01"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "template_is_valid_sample",
+      "rule": "This template should remain a valid sample that returns ready_to_write_report.",
+      "reason": "The template doubles as documentation and a CLI smoke test.",
+      "applies_to": [
+        "complete-deep-research"
+      ]
+    },
+    {
+      "id": "claim_source_mapping_required",
+      "rule": "Evidence items should use a claim <- source pattern.",
+      "reason": "Future report writers and evaluators need to audit citation support quickly.",
+      "applies_to": [
+        "evidence_items",
+        "source_value_provenance"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "research_question",
+      "meaning": "The question the report should answer.",
+      "required": true
+    },
+    {
+      "field": "depth_level",
+      "meaning": "Research depth: standard, deep, or exhaustive.",
+      "required": true
+    },
+    {
+      "field": "deep_research_stages",
+      "meaning": "Completed stage IDs from deep-research-profile.",
+      "required": true
+    },
+    {
+      "field": "evidence_items",
+      "meaning": "Claim-to-source evidence items that will support the report.",
+      "required": true
+    },
+    {
+      "field": "citation_audit_notes",
+      "meaning": "Notes confirming whether citations support the claims they are attached to.",
+      "required": true
+    },
+    {
+      "field": "report_targets",
+      "meaning": "Where the final report should be written.",
+      "required": true
+    }
+  ],
+  "research_question": "What should a deep research agent validate before writing a detailed source-grounded report?",
+  "report_goal": "Prepare a detailed report that explains deep research agent requirements and cites checked sources.",
+  "intended_audience": "Workspace owner and future agents",
+  "trigger_situation": "The user asks for deep multi-source research or a detailed report.",
+  "depth_level": "deep",
+  "research_profile_paths": [
+    "agent-platform/configs/research/deep-research-profile.json",
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/research/source-registry.json"
+  ],
+  "search_channels": [
+    "web search",
+    "official documentation search",
+    "paper search",
+    "open-source repository search"
+  ],
+  "sources_checked": [
+    "https://developers.openai.com/api/docs/guides/deep-research",
+    "https://help.openai.com/articles/10500283",
+    "https://exa.ai/docs/reference/exa-research",
+    "https://docs.langchain.com/oss/python/deepagents/deep-research",
+    "https://github.com/langchain-ai/open_deep_research",
+    "https://github.com/langchain-ai/deepagents",
+    "https://arxiv.org/abs/2605.06635",
+    "https://arxiv.org/abs/2508.15804"
+  ],
+  "source_types": [
+    "official",
+    "open_source",
+    "paper",
+    "community"
+  ],
+  "deep_research_stages": [
+    "scope_definition",
+    "query_decomposition",
+    "source_strategy",
+    "iterative_retrieval",
+    "source_quality_review",
+    "evidence_extraction",
+    "contradiction_mapping",
+    "synthesis",
+    "report_outline",
+    "citation_audit",
+    "skeptic_review"
+  ],
+  "research_iterations": [
+    "Iteration 1: searched official deep research product/API docs to identify report-generation stages.",
+    "Iteration 2: searched open-source implementations and papers to identify citation audit and evaluation risks."
+  ],
+  "source_quality_notes": [
+    "Official vendor docs are used for workflow and tool capability framing.",
+    "Papers are used for citation-audit and faithfulness risk framing.",
+    "Open-source repositories are used for architecture pattern discovery, not as proof of product capability."
+  ],
+  "evidence_items": [
+    "Deep research should handle complex analysis across many sources <- OpenAI API Deep Research docs.",
+    "Research tasks can decompose into planning, searching, and reasoning/synthesis <- Exa Research API docs.",
+    "Deep research can use todo planning and sub-agent research before cited report synthesis <- LangChain Deep Agents docs.",
+    "Open-source deep research can use supervisor-researcher and parallel processing patterns <- langchain-ai/open_deep_research.",
+    "Citations in deep research reports can be unreliable without verification <- Cited but Not Verified paper.",
+    "Report evaluation can extract citations and statements to check faithfulness <- ReportBench paper."
+  ],
+  "contradiction_notes": [
+    "Vendor docs emphasize comprehensive reports, while evaluation papers emphasize that citations and report fluency do not guarantee factual faithfulness."
+  ],
+  "synthesis_notes": [
+    "A deep research readiness agent should require iterative retrieval, source quality notes, evidence items, contradiction mapping, citation audit, and report targets."
+  ],
+  "citation_requirements": [
+    "Every material factual claim in the final report must be traceable to a checked source.",
+    "Claims with weak, partial, stale, or conflicting support must be listed before publication."
+  ],
+  "citation_audit_notes": [
+    "Evidence items use claim <- source format so a report writer can verify citation support before drafting.",
+    "The final report must run hallucination-guard-agent if it contains factual claims."
+  ],
+  "unsupported_or_weak_claims": [
+    "No unresolved claim is accepted in this template; future reports must record explicit none-found audits or unresolved claims."
+  ],
+  "report_outline": [
+    "Executive summary",
+    "Research scope and method",
+    "Source map and quality notes",
+    "Evidence synthesis",
+    "Contradictions, uncertainty, and citation audit",
+    "Recommendations and next research"
+  ],
+  "report_targets": [
+    "_research/topics/<topic>/YYYY-MM-DD-deep-research-report.ko.md"
+  ],
+  "source_value_provenance": [
+    "Deep research stage model <- checked OpenAI, Exa, LangChain docs on 2026-06-01.",
+    "Citation audit requirement <- checked Cited but Not Verified and ReportBench papers on 2026-06-01."
+  ],
+  "risks_or_unknowns": [
+    "This template validates a research package but does not run retrieval itself.",
+    "Citation audit quality depends on actual source-content checking."
+  ],
+  "follow_up_questions": [
+    "Should a future implementation integrate web search API, browser automation, file search, or MCP connectors?"
+  ],
+  "knowledge_validation_status": ""
+}
+

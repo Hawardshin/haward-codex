@@ -59,6 +59,7 @@
 - root folder class와 local-only 규칙을 확인할 때: [_ops/projects/root-structure-policy.json](projects/root-structure-policy.json), [_tools/structure-audit/README.ko.md](../_tools/structure-audit/README.ko.md)
 - 웹 검색 기반 인사이트로 계획할 때: [_ops/workflows/55-research-insight-planning.md](workflows/55-research-insight-planning.md)
 - 코딩 조사 결과를 구현으로 넘기기 전에: [_ops/workflows/56-coding-research.md](workflows/56-coding-research.md), [agent-platform/docs/coding-research-agent.ko.md](../agent-platform/docs/coding-research-agent.ko.md)
+- 딥리서치나 긴 보고서형 조사를 수행할 때: [_ops/workflows/57-deep-research.md](workflows/57-deep-research.md), [agent-platform/docs/deep-research-agent.ko.md](../agent-platform/docs/deep-research-agent.ko.md)
 - 코딩 조사 출처 설정을 확인할 때: [agent-platform/configs/research/README.ko.md](../agent-platform/configs/research/README.ko.md)
 - 소스코드 작성 전 아키텍처 후보 비교 기준을 볼 때: [_docs/policies/architecture-first-coding-policy.ko.md](../_docs/policies/architecture-first-coding-policy.ko.md), [agent-platform/configs/research/coding-research-profile.json](../agent-platform/configs/research/coding-research-profile.json)
 - 대기업/고신뢰 사이트 목록을 볼 때: [_docs/policies/enterprise-source-list-policy.ko.md](../_docs/policies/enterprise-source-list-policy.ko.md), [enterprise-source-registry.json](../agent-platform/configs/research/enterprise-source-registry.json), [_research/source-lists/enterprise-high-quality-sites.ko.md](../_research/source-lists/enterprise-high-quality-sites.ko.md)

@@ -17,6 +17,7 @@
       "A durable user instruction becomes mandatory for future sessions.",
       "A new shared config, prompt, workflow, project registry, or map becomes part of startup context.",
       "The core research-agent profile or answer-engine stage rules change.",
+      "The deep research profile, report-readiness rules, or citation audit contract changes.",
       "The enterprise/high-quality source seed registry changes.",
       "The broad source discovery registry or Korean local review source rules change.",
       "The work summary layer or close-out documentation contract changes.",
@@ -405,6 +406,18 @@
         "citation grounding and source ranking rules"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "deep_research_profile",
+      "title": "Deep Research Profile",
+      "path": "agent-platform/configs/research/deep-research-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "deep research report readiness",
+        "citation audit and source quality contract",
+        "long-form report stage requirements"
+      ],
+      "last_checked": "2026-06-01"
     },
     {
       "id": "enterprise_source_registry",
@@ -875,6 +888,7 @@
     "source_discovery_registry",
     "marketing_evidence_profile",
     "research_agent_profile",
+    "deep_research_profile",
     "coding_research_profile",
     "work_summary_policy",
     "context_archive_policy",
@@ -917,6 +931,7 @@
     "source_discovery_registry",
     "marketing_evidence_profile",
     "research_agent_profile",
+    "deep_research_profile",
     "coding_research_profile",
     "work_summary_policy",
     "context_archive_policy",
@@ -1140,6 +1155,14 @@
       "purpose": "Core Perplexity-style answer-engine research profile for source ranking, evidence extraction, citation grounding, and skeptic review.",
       "required": true,
       "load_order": 12
+    },
+    {
+      "id": "deep_research_profile",
+      "path": "agent-platform/configs/research/deep-research-profile.json",
+      "tier": "warm",
+      "purpose": "Deep research profile for multi-step source collection, citation audit, and long-form report readiness.",
+      "required": true,
+      "load_order": 24
     },
     {
       "id": "coding_research_profile",

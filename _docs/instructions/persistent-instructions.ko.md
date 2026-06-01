@@ -64,6 +64,7 @@
 - 조사 에이전트는 `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, `skeptic_review` 단계를 거친다.
 - 출처는 종합 전에 순위화하고, citation은 증명 자체가 아니라 검증 핸들로 취급한다.
 - `research-insight-planner-agent`를 쓰는 작업은 `plan_history_targets`를 지정하고 계획 변경 이력을 남긴다.
+- 딥리서치, 긴 보고서, landscape/literature review, 여러 출처 기반 근거 종합 작업에는 `deep-research-agent`와 `agent-platform/configs/research/deep-research-profile.json`을 사용하고, 반복 조사, evidence item, contradiction note, citation audit note, unsupported/weak claim, report outline, report target을 기록한 뒤 `complete-deep-research`로 준비 상태를 확인한다.
 - 코딩/API/라이브러리/아키텍처/성능/디버깅/보안/마이그레이션 조사는 구현 전에 `coding-research-agent`로 출처, 선택지, 추천안, 위험, 검증 계획, 표준 종료 질문을 확인한다.
 - 코딩 조사는 `source_types`를 명시하고 최소 3개 이상의 `other`가 아닌 서로 다른 출처 유형을 사용해야 한다.
 - 코딩 조사는 어떤 출처 레지스트리나 리서치 프로필 설정을 참고했는지 `reference_config_paths`로 기록해야 한다.

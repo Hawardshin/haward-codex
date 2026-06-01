@@ -34,3 +34,5 @@ If skill work occurred, `work-evaluator-agent` input must include `skill_work_oc
 `work-evaluator-agent` input must include `request_trace_targets` for meaningful work. Missing targets are a blocking gap.
 
 When required by the selected work mode, `work-evaluator-agent` input must include `timing_summary_targets`. Missing targets are a blocking gap.
+
+For deep research or long-form report work, use `87-deep-research.md` and run `complete-deep-research` before writing the report.

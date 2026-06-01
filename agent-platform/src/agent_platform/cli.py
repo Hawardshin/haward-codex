@@ -21,6 +21,7 @@ from agent_platform.integrations.notifications import (
 from agent_platform.memory.bootstrap import MemoryBootstrapManifest, check_memory_bootstrap
 from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidate
 from agent_platform.planning.coding_research import CodingResearchInput, complete_coding_research
+from agent_platform.planning.deep_research import DeepResearchInput, complete_deep_research
 from agent_platform.planning.parallel_work import ParallelWorkPlanInput, plan_parallel_work
 from agent_platform.planning.research_insight_planner import ResearchInsightPlanInput, create_research_insight_plan
 from agent_platform.planning.spec_reconciliation import SpecReconciliationInput, reconcile_spec_source
@@ -56,6 +57,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     complete_research = subparsers.add_parser("complete-coding-research", help="Check whether coding research is ready for implementation.")
     complete_research.add_argument("path", type=Path)
+
+    complete_deep = subparsers.add_parser("complete-deep-research", help="Check whether deep research is ready for long-form report writing.")
+    complete_deep.add_argument("path", type=Path)
 
     plan_parallel = subparsers.add_parser("plan-parallel-work", help="Check whether work can be safely split into parallel lanes.")
     plan_parallel.add_argument("path", type=Path)
@@ -145,6 +149,12 @@ def main(argv: list[str] | None = None) -> int:
         with args.path.open("r", encoding="utf-8") as file:
             research_input = CodingResearchInput.from_dict(json.load(file))
         print(json.dumps(complete_coding_research(research_input), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "complete-deep-research":
+        with args.path.open("r", encoding="utf-8") as file:
+            research_input = DeepResearchInput.from_dict(json.load(file))
+        print(json.dumps(complete_deep_research(research_input), indent=2, ensure_ascii=False))
         return 0
 
     if args.command == "plan-parallel-work":

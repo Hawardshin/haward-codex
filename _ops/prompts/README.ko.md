@@ -34,3 +34,5 @@
 `work-evaluator-agent` 입력에는 의미 있는 작업마다 `request_trace_targets`를 포함한다. 누락되면 blocking gap이다.
 
 선택한 작업 모드가 요구하면 `work-evaluator-agent` 입력에는 `timing_summary_targets`를 포함한다. 누락되면 blocking gap이다.
+
+딥리서치나 긴 보고서 작업에는 `87-deep-research.md`를 사용하고, 보고서 작성 전 `complete-deep-research`로 조사 패키지 준비 상태를 확인한다.

@@ -64,6 +64,7 @@ This document records durable user instructions in English.
 - The research agent moves through `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, and `skeptic_review`.
 - Rank sources before synthesis and treat citations as verification handles, not proof.
 - Work that uses `research-insight-planner-agent` should set `plan_history_targets` and record plan changes.
+- For deep research, long-form reports, landscape/literature reviews, or multi-source evidence synthesis, use `deep-research-agent` and `agent-platform/configs/research/deep-research-profile.json`; record repeated research iterations, evidence items, contradiction notes, citation audit notes, unsupported/weak claims, report outline, and report target, then validate readiness with `complete-deep-research`.
 - Before implementing after coding/API/library/architecture/performance/debugging/security/migration research, use `coding-research-agent` to check sources, options, recommendation, risks, validation plan, and standard post-research questions.
 - Coding research must record `source_types` and use at least three distinct non-`other` source types.
 - Coding research must record `reference_config_paths` showing which source registry or research profile config was used.

@@ -1,0 +1,81 @@
+{
+  "objective": "Plan a deep-research-agent that validates multi-step source-grounded research packages and report-writing readiness.",
+  "search_questions": [
+    "What stages do current deep research agents use before producing a report?",
+    "What source and citation checks reduce hallucination risk in deep research reports?",
+    "How should this repository separate deep report research from existing planning research?"
+  ],
+  "search_channels": [
+    "web search",
+    "repository search",
+    "official documentation search",
+    "paper search",
+    "open-source repository search"
+  ],
+  "sources_checked": [
+    "https://developers.openai.com/api/docs/guides/deep-research",
+    "https://help.openai.com/articles/10500283",
+    "https://exa.ai/docs/reference/exa-research",
+    "https://docs.langchain.com/oss/python/deepagents/deep-research",
+    "https://github.com/langchain-ai/open_deep_research",
+    "https://arxiv.org/abs/2605.06635",
+    "https://arxiv.org/abs/2508.15804",
+    "agent-platform/src/agent_platform/planning/research_insight_planner.py",
+    "agent-platform/src/agent_platform/planning/coding_research.py",
+    "agent-platform/configs/research/research-agent-profile.json"
+  ],
+  "research_profile_paths": [
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/research/source-registry.json",
+    "agent-platform/configs/research/source-discovery-registry.json"
+  ],
+  "answer_engine_stages": [
+    "query_understanding",
+    "search_retrieval",
+    "source_ranking",
+    "evidence_extraction",
+    "synthesis",
+    "citation_grounding",
+    "skeptic_review"
+  ],
+  "citation_requirements": [
+    "Every material factual claim in a deep research report must be mapped to checked source evidence.",
+    "Citation audit must flag unsupported, stale, weak, or partially supported claims before publication."
+  ],
+  "source_value_provenance": [
+    "Deep research stages <- OpenAI API docs, Exa docs, LangChain docs, checked 2026-06-01",
+    "Citation audit requirement <- Cited but Not Verified and ReportBench papers, checked 2026-06-01"
+  ],
+  "plan_evidence": [
+    "Add separate deep_research.py readiness checker <- existing planner handles planning readiness and user asked for long report research",
+    "Require iterative retrieval, evidence items, contradictions, and citation audit <- OpenAI/Exa/LangChain plus citation-evaluation papers",
+    "Use Python dataclass/CLI pattern <- existing agent-platform planning/evaluation modules"
+  ],
+  "insights": [
+    "Deep research should validate a report-ready evidence package, not only create a work plan.",
+    "Citation validation must be explicit because cited reports can still attach weak or unsupported sources.",
+    "A deterministic readiness checker fits the current platform better than installing a search crawler immediately."
+  ],
+  "plan_steps": [
+    "Add deep-research profile and input template.",
+    "Add Python readiness checker and CLI.",
+    "Add tests, docs, workflow, prompt, memory, and evaluation links."
+  ],
+  "validation_steps": [
+    "Run plan-from-research on this input.",
+    "Run complete-coding-research before implementation.",
+    "Run agent-platform unit tests and config/memory checks."
+  ],
+  "knowledge_validation_status": "ready_to_reference",
+  "risks_or_unknowns": [
+    "The first version validates research packages but does not run an external search API.",
+    "Citation audit quality still depends on actually checking source content."
+  ],
+  "capture_targets": [
+    "_research/topics/agent-planning/2026-06-01-deep-research-agent.ko.md"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-01-deep-research-agent.ko.md"
+  ]
+}
+

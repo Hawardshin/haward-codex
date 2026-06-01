@@ -1,0 +1,107 @@
+{
+  "initial_instruction": "딥리서치 에이전트 만들어서 특정 상황에서 검색을 해서 매우 자세한 조사 여러가지 깊은 스텝까지 자료를 모아서 보고서를 쓰는 에이전트로 만들어봐",
+  "result_summary": "Added deep-research-agent as a Python readiness agent for long-form source-grounded research reports, including complete-deep-research CLI, deep research profile/template, agent spec, docs, workflow, prompt, memory/bootstrap links, workspace-health config checks, research notes, and tests.",
+  "work_mode": "standard",
+  "changed_files": [
+    "agent-platform/src/agent_platform/planning/deep_research.py",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/tests/test_deep_research.py",
+    "agent-platform/configs/research/deep-research-profile.json",
+    "agent-platform/configs/planning/deep-research-template.json",
+    "agent-platform/configs/agents/deep-research-agent.json",
+    "agent-platform/docs/deep-research-agent.ko.md",
+    "agent-platform/docs/deep-research-agent.en.md",
+    "_ops/workflows/57-deep-research.md",
+    "_ops/prompts/87-deep-research.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "_tools/workspace-health/src/workspace_health/checks.py",
+    "_requirements/",
+    "_specs/workspace-platform/2026-06-01-deep-research-agent/",
+    "_history/web-searches/2026/2026-06-01-deep-research-agent.ko.md",
+    "_history/plans/2026/2026-06-01-deep-research-agent.ko.md",
+    "_research/topics/agent-planning/2026-06-01-deep-research-agent.ko.md",
+    "_history/work-timings/2026/2026-06-01-deep-research-agent.json",
+    "_ops/coordination/status.json",
+    "workspace-monitor/src/generated/workspace-snapshot.json"
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli plan-from-research ../_specs/workspace-platform/2026-06-01-deep-research-agent/research-insight-plan-input.json: ready_to_plan",
+    "PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research ../_specs/workspace-platform/2026-06-01-deep-research-agent/coding-research-input.json: ready_to_implement",
+    "PYTHONPATH=src python3 -m unittest agent-platform/tests/test_deep_research.py: 6 tests passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli complete-deep-research configs/planning/deep-research-template.json: ready_to_write_report",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/research/deep-research-profile.json configs/planning/deep-research-template.json: self_documenting",
+    "PYTHONPATH=src python3 -m unittest discover -s tests from agent-platform/: 110 tests passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract core config set: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "python3 _tools/workspace-index/src/workspace_index.py: maps regenerated",
+    "python3 _tools/task-board/src/task_board.py: coordination boards regenerated",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-01-deep-research-agent.json: ready",
+    "python3 _tools/workspace-health/src/workspace_health.py --category governance: 7 checks passed",
+    "npm run build from workspace-monitor/: passed"
+  ],
+  "references_checked": [
+    "OpenAI API Deep Research: https://developers.openai.com/api/docs/guides/deep-research",
+    "OpenAI Help Center Deep Research: https://help.openai.com/articles/10500283",
+    "Exa Research API: https://exa.ai/docs/reference/exa-research",
+    "LangChain Deep Agents Deep Research: https://docs.langchain.com/oss/python/deepagents/deep-research",
+    "langchain-ai/open_deep_research: https://github.com/langchain-ai/open_deep_research",
+    "Cited but Not Verified: https://arxiv.org/abs/2605.06635",
+    "ReportBench: https://arxiv.org/abs/2508.15804",
+    "agent-platform/src/agent_platform/planning/research_insight_planner.py",
+    "agent-platform/src/agent_platform/planning/coding_research.py",
+    "agent-platform/src/agent_platform/cli.py"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-deep-research-agent-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-deep-research-agent.ko.md",
+    "_research/topics/agent-planning/2026-06-01-deep-research-agent.ko.md",
+    "_specs/workspace-platform/2026-06-01-deep-research-agent/coding-research-input.json",
+    "_specs/workspace-platform/2026-06-01-deep-research-agent/research-insight-plan-input.json",
+    "agent-platform/configs/research/deep-research-profile.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-01-deep-research-agent.ko.md",
+    "_specs/workspace-platform/2026-06-01-deep-research-agent/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-deep-research-agent/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-deep-research-agent/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-01-deep-research-agent/traceability.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-deep-research-agent.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-01-deep-research-agent.ko.md",
+    "_requirements/reviews/2026-06-01-deep-research-agent.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-01-deep-research-agent/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-deep-research-agent/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-deep-research-agent/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-01-deep-research-agent/validation.ko.md",
+    "_specs/workspace-platform/2026-06-01-deep-research-agent/traceability.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-01-deep-research-agent.json"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Add real search API, browser, file-search, or MCP connector integration when a concrete deep research run needs automation.",
+    "Tune depth thresholds after multiple real deep research reports accumulate."
+  ]
+}
+
