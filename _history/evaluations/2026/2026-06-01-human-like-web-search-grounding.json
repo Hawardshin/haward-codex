@@ -1,109 +1,174 @@
 {
   "task": "Ground factual claims for human-like web search improvement.",
-  "output_summary": "Added a human-like search method profile, connected it to research workflows/configs, and added a source-collector query-plan command.",
+  "output_summary": "Added a human-like search profile, reusable workflow and prompt, source collector query-plan support, and policy/profile connections so agents can expand queries, search multiple source lanes, snowball from strong seeds, triage weak sources, and selectively summarize reusable findings.",
   "risk_level": "medium",
   "evidence": [
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-human-like-web-search.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked web-first record with queries, checked sources, weak-source notes, plan impact, and uncertainty."
+    },
     {
       "evidence_id": "human_search_profile",
       "source": "agent-platform/configs/research/human-search-profile.json",
       "source_type": "repository_file",
       "checked_on": "2026-06-01",
-      "reliability": "Tracked self-documenting profile with trigger situations, stages, query ladder templates, source lane targets, snowballing rules, and summary capture contract."
+      "reliability": "Self-documenting shared config containing reference links, structure rules, field guide, query ladder templates, source lanes, snowballing rules, and summary capture contract."
     },
     {
-      "evidence_id": "source_collector_code",
-      "source": "_tools/source-collector/src/source_collector.py",
+      "evidence_id": "source_collector_tool",
+      "source": "_tools/source-collector/src/source_collector.py; _tools/source-collector/tests/test_source_collector.py",
       "source_type": "repository_file",
       "checked_on": "2026-06-01",
-      "reliability": "Tracked local tool code that implements build_human_query_plan and query-plan CLI rendering."
+      "reliability": "Tracked source collector implementation and tests for the new query-plan command."
+    },
+    {
+      "evidence_id": "workflow_prompt",
+      "source": "_ops/workflows/54-human-like-source-discovery.md; _ops/prompts/84-human-like-source-discovery.md; _ops/prompts/00-router.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked operational workflow and prompt-router connection for repeated use."
+    },
+    {
+      "evidence_id": "profile_connections",
+      "source": "agent-platform/configs/research/source-discovery-registry.json; agent-platform/configs/research/research-agent-profile.json; agent-platform/configs/research/deep-research-profile.json; agent-platform/configs/memory/bootstrap-manifest.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked research and memory configs that reference the human search profile."
     },
     {
       "evidence_id": "source_collector_tests",
-      "source": "_tools/source-collector/tests/test_source_collector.py; python3 -m unittest discover -s _tools/source-collector/tests",
+      "source": "python3 -m unittest discover -s _tools/source-collector/tests",
       "source_type": "command_output",
       "checked_on": "2026-06-01",
-      "reliability": "Source collector unit tests passed: 6 tests OK."
+      "reliability": "Command returned 6 tests OK."
     },
     {
       "evidence_id": "query_plan_smoke",
       "source": "python3 _tools/source-collector/src/source_collector.py query-plan \"human-like web search\" --depth deep",
       "source_type": "command_output",
       "checked_on": "2026-06-01",
-      "reliability": "Command rendered a staged query ladder with operator, authority, field-practice, community, contrary, snowballing, summary, and stop-rule sections."
-    },
-    {
-      "evidence_id": "workflow_prompt_policy",
-      "source": "_ops/workflows/54-human-like-source-discovery.md; _ops/prompts/84-human-like-source-discovery.md; _docs/policies/source-collection-policy.ko.md",
-      "source_type": "repository_file",
-      "checked_on": "2026-06-01",
-      "reliability": "Tracked workflow, prompt, and policy connections for repeated use."
-    },
-    {
-      "evidence_id": "memory_bootstrap",
-      "source": "agent-platform/configs/memory/bootstrap-manifest.json; PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
-      "source_type": "command_output",
-      "checked_on": "2026-06-01",
-      "reliability": "Memory bootstrap check returned ready_to_bootstrap with the human_search_profile anchor present."
+      "reliability": "Command returned a deep query ladder with seed, synonym, operator, authority, field-practice, community, contrary, snowballing, summary, and stop-rule sections."
     },
     {
       "evidence_id": "config_contract",
-      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/research/human-search-profile.json ...",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/human-search-profile.json configs/research/source-discovery-registry.json configs/research/enterprise-source-registry.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/deep-research-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json",
       "source_type": "command_output",
       "checked_on": "2026-06-01",
-      "reliability": "Config contract check returned self_documenting with no gaps."
+      "reliability": "Command returned self_documenting with no gaps."
     },
     {
-      "evidence_id": "web_search_record",
-      "source": "_history/web-searches/2026/2026-06-01-human-like-web-search.ko.md",
-      "source_type": "repository_file",
+      "evidence_id": "memory_bootstrap",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json --root ..",
+      "source_type": "command_output",
       "checked_on": "2026-06-01",
-      "reliability": "Tracked web-first record listing search-method references and weak sources ignored."
+      "reliability": "Command returned ready_to_bootstrap with no gaps."
+    },
+    {
+      "evidence_id": "governance_health",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --category governance --json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command passed 7 governance checks."
+    },
+    {
+      "evidence_id": "google_refine_search",
+      "source": "https://support.google.com/websearch/answer/2466433",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Google Search Help page checked for search refinement patterns."
+    },
+    {
+      "evidence_id": "google_search_operators",
+      "source": "https://developers.google.com/search/docs/monitor-debug/search-operators",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Google Search Central page checked for search operator behavior and constraints."
+    },
+    {
+      "evidence_id": "cochrane_searching",
+      "source": "https://training.cochrane.org/handbook/current/chapter-04",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Cochrane Handbook chapter checked for multi-source search and search documentation discipline."
+    },
+    {
+      "evidence_id": "prisma_s",
+      "source": "https://www.prisma-statement.org/prisma-s/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "PRISMA-S page checked for search strategy reporting expectations."
+    },
+    {
+      "evidence_id": "wohlin_snowballing",
+      "source": "https://www.wohlin.eu/ease14.pdf",
+      "source_type": "paper",
+      "checked_on": "2026-06-01",
+      "reliability": "Software engineering snowballing paper checked for backward and forward snowballing concepts."
+    },
+    {
+      "evidence_id": "sift_lateral_reading",
+      "source": "https://hapgood.us/2019/06/19/sift-the-four-moves/",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "Source evaluation article checked for SIFT and lateral reading framing."
     }
   ],
   "claims": [
     {
-      "statement": "A new human-search-profile config defines when and how agents should run query expansion, operator searches, source-lane searches, snowballing, triage, and selective source summaries.",
+      "statement": "The repository now has a human-search-profile config that defines query ladders, operator searches, source lanes, snowballing, source triage, and selective summary capture.",
       "claim_type": "repository_state",
       "support_level": "supported",
       "evidence_ids": ["human_search_profile", "config_contract"],
-      "verification_steps": ["Read human-search-profile.json and ran the config contract check."],
+      "verification_steps": ["Read the profile and ran config contract checks."],
       "presented_as_fact": true,
       "freshness_sensitive": false
     },
     {
-      "statement": "The source collector now has a query-plan command that renders a staged human-like search query ladder.",
-      "claim_type": "code_behavior",
-      "support_level": "supported",
-      "evidence_ids": ["source_collector_code", "source_collector_tests", "query_plan_smoke"],
-      "verification_steps": ["Ran source collector tests and a query-plan smoke command."],
-      "presented_as_fact": true,
-      "freshness_sensitive": false
-    },
-    {
-      "statement": "Workflow, prompt, policy, and memory bootstrap files now point future work to the human-like source discovery method.",
+      "statement": "The source collector now supports a query-plan command that can generate a reusable human-like search plan.",
       "claim_type": "repository_state",
       "support_level": "supported",
-      "evidence_ids": ["workflow_prompt_policy", "memory_bootstrap"],
-      "verification_steps": ["Read linked files and ran memory bootstrap validation."],
+      "evidence_ids": ["source_collector_tool", "source_collector_tests", "query_plan_smoke"],
+      "verification_steps": ["Read the implementation and tests, ran unit tests, and ran the query-plan smoke command."],
       "presented_as_fact": true,
       "freshness_sensitive": false
     },
     {
-      "statement": "Good-source summaries are now meant to be selective and saved only when they change the answer, plan, risk model, source list, or reusable knowledge base.",
+      "statement": "The workflow, prompt router, research profiles, source discovery registry, and memory bootstrap now point future agents toward the human search profile for broad research.",
       "claim_type": "repository_state",
       "support_level": "supported",
-      "evidence_ids": ["human_search_profile", "workflow_prompt_policy"],
-      "verification_steps": ["Read summary_capture_contract and updated policy/workflow text."],
+      "evidence_ids": ["workflow_prompt", "profile_connections", "config_contract", "memory_bootstrap"],
+      "verification_steps": ["Read the workflow/prompt/profile files and ran config plus memory checks."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The web search record documents external references checked for search refinement, search strategy reporting, snowballing, and lateral source evaluation.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["google_refine_search", "google_search_operators", "cochrane_searching", "prisma_s", "wohlin_snowballing", "sift_lateral_reading", "web_search_record"],
+      "verification_steps": ["Checked the external references and recorded plan impact in the web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "The governance checks passed after regenerating workspace maps and coordination boards.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["governance_health"],
+      "verification_steps": ["Ran workspace index, task board, and governance health checks."],
       "presented_as_fact": true,
       "freshness_sensitive": false
     }
   ],
   "uncertainty_notes": [
-    "This change improves the search process and source-recording structure; it does not guarantee that every future search result is high quality.",
-    "Exact source pages still need to be opened and verified before citation."
+    "The profile improves source discovery process quality but does not guarantee that every future search will find all relevant sources.",
+    "Search engine result ordering and operator behavior can change, so agents must still record queries, access dates, and uncertainty."
   ],
   "limitation_notes": [
-    "No external search provider API integration was added.",
-    "The query ladder generator is deterministic and does not yet execute searches automatically."
+    "No search-provider API adapter or crawler was installed in this change.",
+    "The query-plan generator creates search plans; it does not execute searches or rank live results by itself."
   ]
 }
