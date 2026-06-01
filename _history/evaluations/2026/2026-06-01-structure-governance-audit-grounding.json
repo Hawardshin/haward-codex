@@ -1,0 +1,169 @@
+{
+  "task": "Ground factual claims for the structure governance audit work.",
+  "output_summary": "Root folder classes, local-only folder rules, deterministic structure audit tooling, workspace monitor document coverage, and related governance docs were added or updated.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "policy",
+      "source": "_ops/projects/root-structure-policy.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked self-documenting config defining root folder classes, reserved operational folders, local-only folders, generated outputs, and audit command."
+    },
+    {
+      "evidence_id": "tool",
+      "source": "_tools/structure-audit/src/structure_audit.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked deterministic tool for auditing root folder classifications and registered project README coverage."
+    },
+    {
+      "evidence_id": "tool_tests",
+      "source": "_tools/structure-audit/tests/test_structure_audit.py",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Unit tests verified clean structure, unknown root folder gap, and missing README gap."
+    },
+    {
+      "evidence_id": "audit_result",
+      "source": "python3 _tools/structure-audit/src/structure_audit.py --check",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command returned status clean with no gaps for the current repository root."
+    },
+    {
+      "evidence_id": "gitignore",
+      "source": ".gitignore",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked gitignore now marks local-only and generated-output paths."
+    },
+    {
+      "evidence_id": "monitor_collector",
+      "source": "workspace-monitor/scripts/collect-workspace.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked collector includes workspace-doc and philosophy document categories."
+    },
+    {
+      "evidence_id": "validation",
+      "source": "_specs/workspace-platform/2026-06-01-structure-governance-audit/validation.ko.md",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked validation record for audit, tests, config, memory, monitor, maps, grounding, and evaluation."
+    },
+    {
+      "evidence_id": "google_monorepo",
+      "source": "https://abseil.io/resources/swe-book/html/ch16.html",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "Google software engineering book chapter used for monorepo context and tooling trade-offs."
+    },
+    {
+      "evidence_id": "gitlab_codeowners",
+      "source": "https://docs.gitlab.com/user/project/codeowners/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official GitLab documentation used for repository path ownership and responsibility reference."
+    },
+    {
+      "evidence_id": "gitlab_docs_arch",
+      "source": "https://docs.gitlab.com/development/documentation/site_architecture/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official GitLab documentation used for source-vs-generated documentation separation reference."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now has a root structure policy that separates registered projects, reserved operational folders, local-only folders, and generated outputs.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "policy"
+      ],
+      "verification_steps": [
+        "Checked root-structure-policy.json and ran check-config-contract."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The structure-audit tool detects unregistered root folders and registered projects missing README files.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tool",
+        "tool_tests"
+      ],
+      "verification_steps": [
+        "Ran python3 -m unittest discover -s _tools/structure-audit/tests."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The current repository root structure passed the structure audit.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "audit_result"
+      ],
+      "verification_steps": [
+        "Ran python3 _tools/structure-audit/src/structure_audit.py --check."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "_private and outputs are now treated as local-only ignored folders, while durable artifacts belong under owning project folders.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "policy",
+        "gitignore"
+      ],
+      "verification_steps": [
+        "Checked root-structure-policy.json and .gitignore."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace Monitor now collects _docs and _philosophy documents as additional categories.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor_collector"
+      ],
+      "verification_steps": [
+        "Checked collect-workspace.mjs and ran npm run collect/build."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The structural approach was informed by monorepo ownership and docs-as-code separation references.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "google_monorepo",
+        "gitlab_codeowners",
+        "gitlab_docs_arch"
+      ],
+      "verification_steps": [
+        "Checked the external sources and recorded them in the web search record."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "A future multi-user collaboration model may justify CODEOWNERS or a richer owner map, but current repository scale does not require it.",
+    "No registered project was moved because that would require a separate migration plan and broader validation."
+  ],
+  "limitation_notes": [
+    "The audit validates first-level root folder classification and project README presence; it does not inspect every nested folder.",
+    "The audit is policy-based and should be updated when new root folder classes become legitimate."
+  ]
+}

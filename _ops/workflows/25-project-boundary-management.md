@@ -7,14 +7,17 @@
 ## Sequence
 
 1. Read [_docs/project-boundary-policy.ko.md](../../_docs/project-boundary-policy.ko.md).
-2. Classify the request as existing project, new root project, shared workspace capability, research note, or archive/maintenance.
-3. If it belongs to an existing project, read that project's `README.md`.
-4. If it needs a new project, create a root `kebab-case` folder from `_templates/project/` or `_templates/python-agent-project/`.
-5. Keep project-specific code, configs, docs, tests, tools, and artifacts inside the owning project folder.
-6. Promote only cross-project assets to `_docs/`, `_ops/`, `_tools/`, `_templates/`, `_skills/`, `_research/`, or `_philosophy/`.
-7. Update `_ops/projects/registry.json`, `_ops/projects/index.ko.md`, and `_ops/projects/index.en.md` when project status or boundaries change.
-8. Record meaningful boundary decisions in `_history/YYYY/YYYY-MM-DD.md` and, when relevant, the project `README.md`.
-9. Refresh `_ops/maps/`.
+2. Read [_ops/projects/root-structure-policy.json](../projects/root-structure-policy.json) when the request may affect root folders.
+3. Classify the request as existing project, new root project, shared workspace capability, research note, local-only scratch, generated output, or archive/maintenance.
+4. If it belongs to an existing project, read that project's `README.md`.
+5. If it needs a new project, create a root `kebab-case` folder from `_templates/project/` or `_templates/python-agent-project/`.
+6. Keep project-specific code, configs, docs, tests, tools, and artifacts inside the owning project folder.
+7. Promote only cross-project assets to `_docs/`, `_ops/`, `_tools/`, `_templates/`, `_skills/`, `_research/`, or `_philosophy/`.
+8. Treat `_private/` and `outputs/` as local-only ignored folders, not durable knowledge or project artifacts.
+9. Update `_ops/projects/registry.json`, `_ops/projects/index.ko.md`, and `_ops/projects/index.en.md` when project status or boundaries change.
+10. Run `python3 _tools/structure-audit/src/structure_audit.py --check` after root folder or registry changes.
+11. Record meaningful boundary decisions in `_history/YYYY/YYYY-MM-DD.md` and, when relevant, the project `README.md`.
+12. Refresh `_ops/maps/`.
 
 ## Rule
 

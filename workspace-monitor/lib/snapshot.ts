@@ -97,6 +97,7 @@ export function categoryLabel(category: string) {
     coordination: "조율",
     "daily-history": "일일 기록",
     evaluation: "평가",
+    philosophy: "철학",
     plan: "계획",
     "project-doc": "프로젝트 문서",
     "project-spec": "프로젝트 스펙",
@@ -105,8 +106,8 @@ export function categoryLabel(category: string) {
     "shared-spec": "공유 스펙",
     "user-request": "요청 요약",
     "web-search": "웹 검색",
+    "workspace-doc": "워크스페이스 문서",
     "work-summary": "작업 요약"
   };
   return labels[category] ?? category;
 }
-

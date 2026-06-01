@@ -1,0 +1,283 @@
+{
+  "schema_version": "2026-06-01",
+  "name": "root-structure-policy",
+  "purpose": "Defines root-level directory classes so the workspace can distinguish registered projects, shared operating folders, local-only folders, and generated outputs.",
+  "reader_guide": {
+    "summary": "Open this file when deciding whether a root folder should become a project, a shared operations folder, a private local-only folder, or ignored generated output.",
+    "how_to_read": [
+      "Read directory_classes first to understand the allowed root folder categories.",
+      "Use reserved_operational_dirs for tracked shared workspace folders.",
+      "Use local_only_dirs for folders that may exist on disk but must not become durable knowledge sources.",
+      "Use project_registry_path to find tracked root projects and ownership boundaries.",
+      "Run the structure audit command before and after root-level structure changes."
+    ],
+    "owner": "_ops/projects",
+    "last_reviewed": "2026-06-01",
+    "update_triggers": [
+      "A new root-level folder category is introduced.",
+      "A root-level project is created, archived, or renamed.",
+      "A local-only or generated-output folder appears at repository root.",
+      "Project boundary rules or reserved workspace folders change.",
+      "The structure-audit tool reports unknown root folders."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "project_boundary_policy",
+      "title": "Project Boundary Policy",
+      "path": "_docs/project-boundary-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "workspace project boundary rules",
+        "shared-vs-project ownership decisions"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "workspace_rules",
+      "title": "Workspace Rules",
+      "path": "_docs/workspace-rules.md",
+      "source_type": "internal",
+      "used_for": [
+        "root folder policy",
+        "reserved folder purpose table"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "project_registry",
+      "title": "Project Registry",
+      "path": "_ops/projects/registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "registered root project list",
+        "project ownership boundaries"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "google_monorepo",
+      "title": "Software Engineering at Google - Version Control and Branch Management",
+      "url": "https://abseil.io/resources/swe-book/html/ch16.html",
+      "source_type": "book",
+      "used_for": [
+        "monorepo trade-off reference",
+        "single-repository visibility and tooling context"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "gitlab_codeowners",
+      "title": "GitLab Docs - Code Owners",
+      "url": "https://docs.gitlab.com/user/project/codeowners/",
+      "source_type": "official",
+      "used_for": [
+        "path ownership and review responsibility reference",
+        "directory expertise signaling"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "gitlab_docs_architecture",
+      "title": "GitLab Docs - Documentation Site Architecture",
+      "url": "https://docs.gitlab.com/development/documentation/site_architecture/",
+      "source_type": "official",
+      "used_for": [
+        "documentation source and generated-site separation",
+        "docs-as-code repository organization reference"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "gitlab_component_ownership",
+      "title": "GitLab Handbook - Component Ownership Model",
+      "url": "https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/production/component-ownership-model/",
+      "source_type": "web_source",
+      "used_for": [
+        "component ownership model",
+        "clear boundaries and continuous validation reference"
+      ],
+      "last_checked": "2026-06-01"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "root_projects_must_be_registered",
+      "rule": "Every tracked non-underscore root directory must be registered in _ops/projects/registry.json unless it is a documented local-only or generated-output directory.",
+      "reason": "Unregistered root folders make ownership and lifecycle ambiguous.",
+      "applies_to": [
+        "project_registry_path",
+        "directory_classes",
+        "structure_audit_command"
+      ]
+    },
+    {
+      "id": "reserved_dirs_are_shared_only",
+      "rule": "Reserved operational directories must contain shared workspace assets, not project-specific work that belongs inside a project folder.",
+      "reason": "Shared folders should reduce repeated work, not hide project ownership.",
+      "applies_to": [
+        "reserved_operational_dirs"
+      ]
+    },
+    {
+      "id": "local_only_dirs_are_not_knowledge",
+      "rule": "Local-only directories may exist on disk but must be ignored by git and must not be used as durable source-of-truth for future agents.",
+      "reason": "Private local scratch state can disappear or contain material that should not be committed or indexed.",
+      "applies_to": [
+        "local_only_dirs",
+        ".gitignore"
+      ]
+    },
+    {
+      "id": "generated_outputs_stay_project_local",
+      "rule": "Generated build outputs should stay inside the owning project and be ignored unless the artifact is intentionally committed as a durable deliverable.",
+      "reason": "Root-level generated output folders become hard to attribute and can confuse project boundaries.",
+      "applies_to": [
+        "generated_output_dirs",
+        "project_registry_path"
+      ]
+    },
+    {
+      "id": "audit_before_restructure",
+      "rule": "Run the structure audit before and after root-level folder changes, project creation, archive moves, or reserved-folder changes.",
+      "reason": "A deterministic check catches ambiguous folders before they become long-lived conventions.",
+      "applies_to": [
+        "structure_audit_command"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "project_registry_path",
+      "meaning": "Path to the source-of-truth registry for tracked root projects.",
+      "required": true
+    },
+    {
+      "field": "directory_classes",
+      "meaning": "Allowed conceptual categories for root-level directories.",
+      "required": true
+    },
+    {
+      "field": "reserved_operational_dirs",
+      "meaning": "Tracked underscore-prefixed folders for shared workspace operations and knowledge.",
+      "required": true
+    },
+    {
+      "field": "local_only_dirs",
+      "meaning": "Root folders that may exist locally but must stay ignored and non-authoritative.",
+      "required": true
+    },
+    {
+      "field": "generated_output_dirs",
+      "meaning": "Known generated or dependency directories that should stay project-local and ignored.",
+      "required": true
+    },
+    {
+      "field": "structure_audit_command",
+      "meaning": "Deterministic command for checking root structure against this policy.",
+      "required": true
+    }
+  ],
+  "project_registry_path": "_ops/projects/registry.json",
+  "directory_classes": [
+    {
+      "class": "registered_project",
+      "description": "Root project with its own purpose, lifecycle, README, commands, and project registry entry."
+    },
+    {
+      "class": "reserved_operational",
+      "description": "Tracked underscore-prefixed shared workspace folder for cross-project rules, operations, templates, tools, research, or history."
+    },
+    {
+      "class": "local_only",
+      "description": "Ignored private or scratch folder that can exist locally but is not durable repository state."
+    },
+    {
+      "class": "generated_output",
+      "description": "Ignored build output, dependency cache, or generated runtime state owned by a project."
+    }
+  ],
+  "reserved_operational_dirs": [
+    {
+      "name": "_archive",
+      "purpose": "Paused or retired tracked projects."
+    },
+    {
+      "name": "_docs",
+      "purpose": "Workspace-level documentation, policies, and decision records."
+    },
+    {
+      "name": "_history",
+      "purpose": "Dated work history, request summaries, traces, evaluations, plans, installations, and context archives."
+    },
+    {
+      "name": "_ops",
+      "purpose": "Operations hub, prompts, workflows, coordination, maps, project registry, and install registry."
+    },
+    {
+      "name": "_philosophy",
+      "purpose": "Foundational agent and platform operating philosophy."
+    },
+    {
+      "name": "_requirements",
+      "purpose": "Shared requirements baselines, changes, and reviews."
+    },
+    {
+      "name": "_research",
+      "purpose": "Reusable internet research and external reference notes."
+    },
+    {
+      "name": "_skills",
+      "purpose": "Tracked source copies of custom Codex skills."
+    },
+    {
+      "name": "_specs",
+      "purpose": "Shared spec-driven artifacts, plans, tasks, validation, and traceability."
+    },
+    {
+      "name": "_templates",
+      "purpose": "Reusable project, document, research, and artifact templates."
+    },
+    {
+      "name": "_tools",
+      "purpose": "Reusable deterministic local tools and scripts."
+    }
+  ],
+  "local_only_dirs": [
+    {
+      "name": "_private",
+      "purpose": "Local private notes or scratch state that must not be committed or used as durable knowledge."
+    },
+    {
+      "name": "outputs",
+      "purpose": "Transient local output from one-off tool runs; durable artifacts must move into the owning project artifacts folder."
+    }
+  ],
+  "generated_output_dirs": [
+    {
+      "pattern": "**/node_modules/",
+      "purpose": "Project-local Node dependencies."
+    },
+    {
+      "pattern": "**/.next/",
+      "purpose": "Next.js build cache and runtime output."
+    },
+    {
+      "pattern": "**/out/",
+      "purpose": "Static export output that can be regenerated from project source."
+    },
+    {
+      "pattern": "**/tsconfig.tsbuildinfo",
+      "purpose": "TypeScript incremental build metadata."
+    },
+    {
+      "pattern": "**/__pycache__/",
+      "purpose": "Python bytecode cache."
+    },
+    {
+      "pattern": "**/.pytest_cache/",
+      "purpose": "Pytest runtime cache."
+    }
+  ],
+  "structure_audit_command": "python3 _tools/structure-audit/src/structure_audit.py --check"
+}

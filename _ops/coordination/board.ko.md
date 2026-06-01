@@ -2,7 +2,7 @@
 
 - 생성 위치: `_ops/coordination/status.json`
 - 마지막 갱신: `2026-06-01`
-- 요약: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, and workspace-monitor repository dashboard added. No separate parallel agent tasks are currently active.
+- 요약: Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, and root structure governance audit added. No separate parallel agent tasks are currently active.
 
 ## 에이전트
 
@@ -38,6 +38,7 @@
 | 2026-06-01-design-to-ppt-production | Add design search-to-PPT production loop | presentation-agent | completed | codex-primary | No action. Future presentation work should search and record design assets before adding them to PPTX outputs. |
 | 2026-06-01-notification-settings | Add platform notification settings | agent-platform | completed | codex-primary | No action. Enable channels by setting enabled=true and providing webhook URL environment variables when real notifications are needed. |
 | 2026-06-01-workspace-monitor | Create repository monitoring site | workspace-monitor | completed | codex-primary | No action. Future monitoring features should extend the snapshot collector and dashboard inside workspace-monitor. |
+| 2026-06-01-structure-governance-audit | Add root structure governance audit | _ops | completed | codex-primary | No action. Future root folder changes should run structure-audit before close-out. |
 
 ## 차단 요소
 

@@ -10,6 +10,8 @@ const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.
 
 const IGNORE_DIRS = new Set([".git", ".next", "node_modules", "out", "__pycache__", ".pytest_cache"]);
 const DOCUMENT_SOURCES = [
+  { category: "workspace-doc", root: "_docs" },
+  { category: "philosophy", root: "_philosophy" },
   { category: "work-summary", root: "_history/work-summaries" },
   { category: "user-request", root: "_history/user-requests" },
   { category: "request-trace", root: "_history/request-traces" },
@@ -364,4 +366,3 @@ function parseArgs(argv) {
 if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
-

@@ -12,8 +12,10 @@ The philosophical basis lives in [_philosophy/agent-operating-philosophy.en.md](
 - Project folder names use `kebab-case`.
 - Project-specific content stays inside the owning project folder.
 - Shared operating rules, templates, tools, research, and philosophy live under underscore-prefixed folders.
+- `_private/` and `outputs/` are exceptions used only as local-only ignored folders, not as shared knowledge or durable artifacts.
 - Promote something to shared only when cross-project reuse is clear.
 - Register project status and boundaries in `_ops/projects/registry.json`.
+- Root folder classification rules live in `_ops/projects/root-structure-policy.json`.
 
 ## What Belongs Inside A Project
 
@@ -61,3 +63,13 @@ Tools, templates, and rules that start inside a project can move to shared locat
 - Do not make shared tools depend secretly on project-local state.
 - Do not create a root project without a README.
 - Do not leave project status only in chat memory instead of the registry.
+- Do not leave durable artifacts in `outputs/`. Durable artifacts belong under the owning project's `artifacts/`.
+- Do not use `_private/` content as work evidence, requirements, history, or knowledge-base source.
+
+## Structure Validation
+
+After changing root folders, the project registry, reserved operational folders, or local-only folder rules, run:
+
+```bash
+python3 _tools/structure-audit/src/structure_audit.py --check
+```

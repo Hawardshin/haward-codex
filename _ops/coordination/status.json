@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-01",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, and workspace-monitor repository dashboard added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, and root structure governance audit added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -467,6 +467,25 @@
         "workspace-monitor/specs/2026-06-01-workspace-monitor/spec.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-06-01-workspace-monitor.ko.md"
+    },
+    {
+      "id": "2026-06-01-structure-governance-audit",
+      "title": "Add root structure governance audit",
+      "project": "_ops",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-01",
+      "updated_at": "2026-06-01",
+      "next_action": "No action. Future root folder changes should run structure-audit before close-out.",
+      "blockers": [],
+      "references": [
+        "_ops/projects/root-structure-policy.json",
+        "_tools/structure-audit/README.ko.md",
+        "_docs/repository-structure-governance.ko.md",
+        "_specs/workspace-platform/2026-06-01-structure-governance-audit/spec.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-06-01-structure-governance-audit.ko.md"
     }
   ]
 }

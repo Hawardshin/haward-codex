@@ -27,6 +27,15 @@
 | `_tools/` | 여러 프로젝트에서 재사용하는 로컬 도구와 스크립트 |
 | `_archive/` | 중단, 폐기, 보류된 프로젝트 |
 
+Local-only root folders are not durable repository knowledge:
+
+| Folder | Purpose |
+| --- | --- |
+| `_private/` | Local private scratch state ignored by git |
+| `outputs/` | Transient one-off tool output ignored by git |
+
+Durable artifacts must live under the owning project, usually `project-name/artifacts/`.
+
 ## Project Naming
 
 - Use `kebab-case`.
@@ -62,6 +71,8 @@ Project-specific visual or generated outputs should live under `artifacts/`.
 - Project-specific code, docs, configs, tests, tools, and artifacts stay inside the owning project folder.
 - Shared workspace folders are for cross-project operating assets, not project-local work.
 - Register root projects in `_ops/projects/registry.json`.
+- Classify root folder types in `_ops/projects/root-structure-policy.json`.
+- Run `python3 _tools/structure-audit/src/structure_audit.py --check` after root structure changes.
 - If a request introduces a new independent interest, lifecycle, command set, UI, dataset, or artifact stream, create a new root project.
 - Promote project-local assets to shared folders only when cross-project reuse is clear.
 
@@ -149,6 +160,7 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Reusable workflows live in `_ops/workflows/`.
 - Repository and prompt maps live in `_ops/maps/`.
 - Run `_tools/workspace-index` after navigational structure changes.
+- Run `_tools/structure-audit` after root folder, project registry, reserved folder, or local-only folder changes.
 - Run `_tools/task-board` after coordination status changes.
 
 ## Context Archive Policy

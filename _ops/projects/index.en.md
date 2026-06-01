@@ -1,6 +1,7 @@
 # Project Index
 
 Source data: [registry.json](registry.json)
+Root structure policy: [root-structure-policy.json](root-structure-policy.json)
 
 | Project | Status | Type | Purpose | Boundary |
 | --- | --- | --- | --- | --- |
@@ -13,4 +14,6 @@ Source data: [registry.json](registry.json)
 - If a new interest has an independent purpose and artifacts, create a new root project.
 - Keep project-specific files inside the owning project folder.
 - Promote to `_tools/`, `_templates/`, `_docs/`, or `_ops/` only when reuse crosses projects.
+- `_private/` and `outputs/` are local-only ignored folders, not projects or knowledge-base sources.
+- After changing root folders, project registry, or reserved folder rules, run `python3 _tools/structure-audit/src/structure_audit.py --check`.
 - Update this index and `registry.json` when projects are created or their status changes.

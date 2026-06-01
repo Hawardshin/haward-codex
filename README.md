@@ -51,6 +51,8 @@
 - 프로젝트별 코드, 문서, 설정, 산출물은 해당 프로젝트 폴더 안에 둔다.
 - 새 관심사나 독립 라이프사이클이 생기면 새 루트 프로젝트로 만들고 `_ops/projects/`에 등록한다.
 - 공통 문서, 템플릿, 보관 자료처럼 프로젝트가 아닌 폴더는 `_` 접두어를 사용한다.
+- root folder class는 `_ops/projects/root-structure-policy.json`에서 관리하고, 구조 변경 뒤에는 `python3 _tools/structure-audit/src/structure_audit.py --check`를 실행한다.
+- `_private/`와 `outputs/`는 로컬 전용 ignored folder로만 사용하고, 지속 산출물이나 지식 베이스로 쓰지 않는다.
 - 반복되는 작업은 필요한 경우 스킬, 도구, 템플릿으로 승격한다.
 - 긴 대화에서 중요한 결정과 작업 내용은 저장소 문서와 히스토리 로그로 압축한다.
 - 컨텍스트가 많이 찼다고 판단되면 `_history/context-archives/YYYY/`에 재개 패킷을 만들고, 이후 작업은 채팅 기억이 아니라 문서 기반으로 이어간다.
@@ -118,6 +120,8 @@ codex/
 - `_templates/`: 새 프로젝트를 만들 때 복사할 기본 구조
 - `_tools/`: 여러 프로젝트에서 재사용할 로컬 도구와 스크립트
 - `_archive/`: 중단, 폐기, 보류된 프로젝트
+- `_private/`: git에 올리지 않는 로컬 private scratch state
+- `outputs/`: git에 올리지 않는 임시 tool output. 지속 산출물은 프로젝트 `artifacts/`로 옮긴다.
 
 ## 새 프로젝트 기본 구조
 
@@ -180,6 +184,7 @@ project-name/
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/board.ko.md`와 `_ops/coordination/board.html`에서 확인한다.
 - 완료된 작업을 빠르게 볼 때는 `_history/work-summaries/index.html` 또는 `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`를 먼저 확인한다.
 - 프로젝트 목록과 경계는 `_ops/projects/index.ko.md`와 `_ops/projects/registry.json`에서 확인한다.
+- root folder 분류와 local-only 규칙은 `_ops/projects/root-structure-policy.json`에서 확인한다.
 - 반복 프롬프트는 `_ops/prompts/`에서 관리한다.
 - 반복 워크플로는 `_ops/workflows/`에서 관리한다.
 - 운영 철학은 `_philosophy/`에서 관리한다.
@@ -187,6 +192,7 @@ project-name/
 - 검색 기반 계획 과정은 `_history/plans/`에 저장한다.
 - 무엇이 어디에 있는지에 대한 지도는 `_ops/maps/`에 둔다.
 - 구조가 바뀌면 `python3 _tools/workspace-index/src/workspace_index.py`로 맵을 갱신한다.
+- root folder, project registry, reserved folder가 바뀌면 `python3 _tools/structure-audit/src/structure_audit.py --check`로 구조를 검증한다.
 
 ## 작업 평가 루프
 

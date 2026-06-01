@@ -8,6 +8,10 @@
 # Logs
 *.log
 
+# Local-only workspace scratch
+/_private/
+/outputs/
+
 # Environment files
 .env
 .env.*
@@ -18,6 +22,9 @@ node_modules/
 dist/
 build/
 coverage/
+.next/
+out/
+*.tsbuildinfo
 
 # Python
 __pycache__/
@@ -25,4 +32,3 @@ __pycache__/
 .pytest_cache/
 .venv/
 venv/
-

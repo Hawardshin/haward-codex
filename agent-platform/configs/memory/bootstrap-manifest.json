@@ -33,6 +33,7 @@
       "The work mode selection or deferred improvement policy changes.",
       "The parallel work planning workflow, planner agent, research merge gate, or coordination lane contract changes.",
       "The notification settings, provider routing, or webhook secret handling contract changes.",
+      "The root structure policy, local-only folder rule, or structure audit command changes.",
       "The installation registry or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
@@ -230,6 +231,18 @@
         "platform notification provider routing",
         "environment-variable secret indirection",
         "Slack, Discord, and Teams channel on/off settings"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "root_structure_policy",
+      "title": "Root Structure Policy",
+      "path": "_ops/projects/root-structure-policy.json",
+      "source_type": "internal",
+      "used_for": [
+        "root folder classification",
+        "registered project, reserved operational folder, local-only folder, and generated output rules",
+        "structure audit command"
       ],
       "last_checked": "2026-06-01"
     },
@@ -519,6 +532,17 @@
         "check-notifications",
         "notify"
       ]
+    },
+    {
+      "id": "root_structure_policy_must_stay_discoverable",
+      "rule": "The root structure policy must remain a warm memory anchor because future sessions need a deterministic way to classify root folders, local-only scratch, generated outputs, and registered projects.",
+      "reason": "The user explicitly asked to improve any folder-structure contradictions or management friction as the workspace grows.",
+      "applies_to": [
+        "anchors",
+        "required_anchor_ids",
+        "structure-audit",
+        "project-boundary-management"
+      ]
     }
   ],
   "field_guide": [
@@ -577,6 +601,7 @@
     "parallel_work_workflow",
     "coordination_board",
     "project_registry",
+    "root_structure_policy",
     "platform_readme",
     "source_registry",
     "enterprise_source_registry",
@@ -607,6 +632,7 @@
     "parallel_work_workflow",
     "coordination_board",
     "project_registry",
+    "root_structure_policy",
     "platform_readme",
     "source_registry",
     "enterprise_source_registry",
@@ -711,6 +737,14 @@
       "path": "_ops/projects/registry.json",
       "tier": "hot",
       "purpose": "Root project ownership and boundary registry.",
+      "required": true,
+      "load_order": 9
+    },
+    {
+      "id": "root_structure_policy",
+      "path": "_ops/projects/root-structure-policy.json",
+      "tier": "warm",
+      "purpose": "Root folder classification policy for registered projects, reserved operational folders, local-only folders, and generated outputs.",
       "required": true,
       "load_order": 9
     },

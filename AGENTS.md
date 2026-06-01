@@ -18,6 +18,10 @@ This repository is the workspace for building and tracking a personal agent-buil
   - `_templates/` for reusable project scaffolds
   - `_tools/` for reusable local tools and scripts
   - `_archive/` for paused or retired projects
+- Treat `_private/` and `outputs/` as local-only ignored folders, not durable repository knowledge:
+  - `_private/` is for local private scratch state only.
+  - `outputs/` is for transient one-off tool output only.
+  - Durable project artifacts must move into the owning project's `artifacts/` folder.
 - Keep project-specific code, docs, tests, and assets inside that project folder.
 - Keep project-specific configs, artifacts, tools, and decisions inside that project folder as well.
 - Do not move or delete unrelated files unless the user explicitly asks.
@@ -119,6 +123,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - After web-first intake and memory bootstrap, select `work_mode` with `_ops/workflows/02-select-work-mode.md` and `agent-platform/configs/workflows/work-mode-registry.json`.
 - Use the lightest sufficient mode: `quick`, `standard`, `ship_first`, `research`, or `governance`; do not force the full requirements/spec/history loop when the selected mode makes those artifacts non-blocking.
 - Use `_ops/projects/registry.json` to see registered root projects and ownership boundaries.
+- Use `_ops/projects/root-structure-policy.json` to classify root folders as registered projects, reserved operational folders, local-only folders, or generated output.
 - Use `_ops/workflows/25-project-boundary-management.md` when a request may create a new project or cross project boundaries.
 - Use `_ops/workflows/35-requirements-lifecycle.md` when a request changes durable behavior, rules, project structure, platform capability, or implementation criteria.
 - Use `_ops/workflows/36-spec-driven-development.md` when meaningful work needs implementation from requirements.
@@ -128,6 +133,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/workflows/40-evaluate-and-rework.md` before closing meaningful work.
 - Keep `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md` current when folders, prompts, workflows, tools, skills, or project structure change.
 - Run `python3 _tools/workspace-index/src/workspace_index.py` after changing navigational structure.
+- Run `python3 _tools/structure-audit/src/structure_audit.py --check` after changing root folders, project registry, reserved operational folders, or local-only folder rules.
 - Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, or platform memory anchors.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json` from `agent-platform/` after changing core shared settings.

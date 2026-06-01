@@ -1,6 +1,7 @@
 # 프로젝트 인덱스
 
 원본 데이터: [registry.json](registry.json)
+루트 구조 정책: [root-structure-policy.json](root-structure-policy.json)
 
 | 프로젝트 | 상태 | 유형 | 목적 | 경계 |
 | --- | --- | --- | --- | --- |
@@ -13,4 +14,6 @@
 - 새 관심사가 독립 목적과 산출물을 가지면 새 루트 프로젝트로 만든다.
 - 프로젝트 전용 파일은 해당 프로젝트 폴더 안에 둔다.
 - 여러 프로젝트에서 재사용될 때만 `_tools/`, `_templates/`, `_docs/`, `_ops/`로 승격한다.
+- `_private/`와 `outputs/`는 local-only ignored folder이며 프로젝트나 지식 베이스가 아니다.
+- 루트 폴더, 프로젝트 등록부, 예약 폴더 규칙을 바꾸면 `python3 _tools/structure-audit/src/structure_audit.py --check`를 실행한다.
 - 프로젝트를 만들거나 상태가 바뀌면 이 인덱스와 `registry.json`을 업데이트한다.
