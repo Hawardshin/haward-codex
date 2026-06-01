@@ -47,6 +47,7 @@
       "The AI usage gap profile, coaching workflow, prompt instruction quality gate, bounded clarification policy, non-blocking clarification policy, human decision inbox, interrupt/resume policy, model-adaptive prompting policy, or AI-use asset promotion rules change.",
       "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
       "The install mode registry, installation registry, or installation audit contract changes.",
+      "The installable desktop software productization project, desktop distribution registry, or installer release gate policy changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
     ]
@@ -117,6 +118,18 @@
       "used_for": [
         "user versus developer installation setup selection",
         "separating install_mode from work_mode"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "desktop_distribution_registry",
+      "title": "Desktop Distribution Registry",
+      "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "end-user installable software productization",
+        "desktop installer framework and release gate decisions",
+        "separating installer packaging from repository setup install_mode"
       ],
       "last_checked": "2026-06-02"
     },
@@ -1115,6 +1128,14 @@
       "path": "agent-platform/configs/installations/install-mode-registry.json",
       "tier": "warm",
       "purpose": "User install and developer improvement install setup profiles, kept separate from work_mode.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "desktop_distribution_registry",
+      "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
+      "tier": "warm",
+      "purpose": "End-user installable desktop software productization registry, kept separate from repository setup install_mode.",
       "required": true,
       "load_order": 8
     },

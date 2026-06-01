@@ -1,0 +1,133 @@
+{
+  "task": "Ground factual claims for installable software productization work.",
+  "output_summary": "Created platform-desktop-app as the project for end-user installable desktop software productization and documented distribution candidates, release gates, and policy boundaries.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable user request summary for UR-2026-06-02-004."
+    },
+    {
+      "evidence_id": "project_registry",
+      "source": "_ops/projects/registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Source-of-truth registry for root projects."
+    },
+    {
+      "evidence_id": "desktop_distribution_registry",
+      "source": "platform-desktop-app/configs/desktop-distribution-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Self-documenting distribution registry created in this work."
+    },
+    {
+      "evidence_id": "electron_docs",
+      "source": "https://www.electronjs.org/docs/tutorial/application-distribution/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Electron packaging documentation."
+    },
+    {
+      "evidence_id": "tauri_docs",
+      "source": "https://tauri.app/distribute/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tauri distribution documentation."
+    },
+    {
+      "evidence_id": "msix_docs",
+      "source": "https://learn.microsoft.com/en-us/windows/msix/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Microsoft MSIX documentation."
+    },
+    {
+      "evidence_id": "apple_notarization",
+      "source": "https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Apple Developer notarization documentation."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "platform-desktop-app is now the registered root project for installable desktop software productization.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "project_registry",
+        "desktop_distribution_registry"
+      ],
+      "verification_steps": [
+        "Read _ops/projects/registry.json and platform-desktop-app/configs/desktop-distribution-registry.json."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "This work did not install Tauri, Electron, or desktop packager dependencies.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "desktop_distribution_registry"
+      ],
+      "verification_steps": [
+        "Check planned_commands statuses and git diff for dependency manifests."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Electron and Tauri both provide official distribution documentation for desktop applications.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "electron_docs",
+        "tauri_docs"
+      ],
+      "verification_steps": [
+        "Checked official Electron and Tauri distribution docs."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Microsoft documents MSIX as a Windows app package format.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "msix_docs"
+      ],
+      "verification_steps": [
+        "Checked Microsoft MSIX documentation."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Apple documents notarization as part of distributing macOS software outside the App Store.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "apple_notarization"
+      ],
+      "verification_steps": [
+        "Checked Apple Developer notarization documentation."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "The final desktop framework has not been selected.",
+    "Signing certificate, notarization account, and Windows signing status are unknown."
+  ],
+  "limitation_notes": [
+    "No desktop app prototype was implemented.",
+    "No dependency installation or release packaging was performed."
+  ]
+}

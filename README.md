@@ -42,6 +42,7 @@ AI와 오래 일할 때 문제는 답변 하나의 품질만이 아니다. 더 �
 - `agent-platform/`: 에이전트, 조사, 평가, 메모리, 알림, 설정 검증을 다루는 중심 프로젝트
 - `workspace-monitor/`: 히스토리, 문서, 프로젝트 구조를 웹에서 볼 수 있게 하는 모니터링 UI
 - `presentation-agent/`: 발표 조사, 스크립트, HTML/PPT 산출물을 만드는 독립 프로젝트
+- `platform-desktop-app/`: 플랫폼을 사용자가 설치하는 desktop software로 제품화하기 위한 독립 프로젝트
 - `_research/`: 반복해서 참고할 인터넷 조사와 외부 레퍼런스
 - `_history/`: 요청, 계획, 작업 요약, 평가, 검색 기록, 설치 감사
 - `_ops/`: 작업 시작점, 프롬프트, 워크플로, 프로젝트 경계, coordination board

@@ -48,6 +48,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep large-company and high-quality research site seeds in `configs/research/enterprise-source-registry.json`.
 - Keep selectable work modes and evaluator target strictness in `configs/workflows/work-mode-registry.json`.
 - Keep user/developer installation profiles in `configs/installations/install-mode-registry.json`; `install_mode` controls setup audience while `work_mode` controls task close-out strictness.
+- Keep end-user desktop installer productization in `platform-desktop-app/`; this is separate from repository setup `install_mode`.
 - Keep platform notification routing in `configs/integrations/notification-channels.json`; store only environment variable names there, never real webhook URLs or tokens.
 - Keep user request summaries under `_history/user-requests/`.
 - Keep shared requirements baselines, changes, and reviews under `_requirements/`; use project-local `docs/requirements/` for project-specific requirements.

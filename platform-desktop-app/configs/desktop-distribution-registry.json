@@ -1,0 +1,350 @@
+{
+  "schema_version": "2026-06-02",
+  "name": "desktop-distribution-registry",
+  "purpose": "Defines how the workspace platform should become installable desktop software without confusing repository setup modes with end-user installer packaging.",
+  "reader_guide": {
+    "summary": "Use this registry before turning the platform into a desktop app, choosing Electron or Tauri, adding packaging scripts, or preparing an installer release.",
+    "how_to_read": [
+      "Read product_boundary first so repository setup install_mode is not confused with end-user installers.",
+      "Read candidate_frameworks to compare Tauri, Electron, and native packaging routes.",
+      "Read packaging_targets to understand OS-specific installer and signing expectations.",
+      "Read release_gates before claiming that a build is production-ready.",
+      "Treat commands as planned future commands until dependencies are actually installed and audited."
+    ],
+    "owner": "platform-desktop-app",
+    "last_reviewed": "2026-06-02",
+    "update_triggers": [
+      "A desktop app framework is selected or changed.",
+      "The installer target OS list changes.",
+      "The platform runtime strategy changes between bundled, sidecar, local service, or remote service.",
+      "Signing, notarization, update, uninstall, privacy, or dependency release gates change.",
+      "A real packaging dependency is installed, upgraded, or removed."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "electron_application_distribution",
+      "title": "Electron: Application Packaging",
+      "url": "https://www.electronjs.org/docs/tutorial/application-distribution/",
+      "source_type": "official_docs",
+      "used_for": [
+        "Electron application packaging and distribution concepts",
+        "manual packaging versus tool-assisted packaging"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "electron_forge_makers",
+      "title": "Electron Forge: Makers",
+      "url": "https://www.electronforge.io/config/makers",
+      "source_type": "official_docs",
+      "used_for": [
+        "Electron installer maker options by platform"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "tauri_distribute",
+      "title": "Tauri: Distribute",
+      "url": "https://tauri.app/distribute/",
+      "source_type": "official_docs",
+      "used_for": [
+        "Tauri app distribution and bundling entry point"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "tauri_windows_installer",
+      "title": "Tauri: Windows Installer",
+      "url": "https://tauri.app/distribute/windows-installer/",
+      "source_type": "official_docs",
+      "used_for": [
+        "Windows MSI and setup executable packaging options for Tauri"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "microsoft_msix",
+      "title": "Microsoft Learn: MSIX documentation",
+      "url": "https://learn.microsoft.com/en-us/windows/msix/",
+      "source_type": "official_docs",
+      "used_for": [
+        "Windows modern application package format",
+        "future Windows packaging option comparison"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "apple_notarization",
+      "title": "Apple Developer: Notarizing macOS software before distribution",
+      "url": "https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution",
+      "source_type": "official_docs",
+      "used_for": [
+        "macOS distribution trust gate",
+        "Developer ID signing and notarization release criteria"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "workspace_monitor",
+      "title": "Workspace Monitor",
+      "path": "workspace-monitor/README.md",
+      "source_type": "internal",
+      "used_for": [
+        "initial web UI candidate for the desktop shell"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "install_mode_registry",
+      "title": "Install Mode Registry",
+      "path": "agent-platform/configs/installations/install-mode-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "distinguishing repository setup install modes from distributable installers"
+      ],
+      "last_checked": "2026-06-02"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "installer_is_not_install_mode",
+      "rule": "End-user installer packaging belongs to platform-desktop-app. Repository setup profiles remain in agent-platform install_mode.",
+      "reason": "A developer setup and a distributed app installer have different audiences, risks, commands, and verification gates.",
+      "applies_to": [
+        "product_boundary",
+        "candidate_frameworks",
+        "release_gates"
+      ]
+    },
+    {
+      "id": "desktop_shell_reuses_existing_ui",
+      "rule": "The first desktop prototype should reuse workspace-monitor as the UI candidate unless research proves a separate UI is cheaper to maintain.",
+      "reason": "The monitor already parses repository history and documents, so duplicating it would add product surface before the installer architecture is proven.",
+      "applies_to": [
+        "runtime_strategy",
+        "recommended_initial_path"
+      ]
+    },
+    {
+      "id": "secrets_are_never_bundled",
+      "rule": "Installers must not include real tokens, webhook URLs, browser cookies, private repository snapshots, or environment-specific secrets.",
+      "reason": "A distributable app can leave the developer machine and must have a stronger privacy boundary than local setup scripts.",
+      "applies_to": [
+        "security_privacy_rules",
+        "release_gates"
+      ]
+    },
+    {
+      "id": "release_ready_requires_distribution_gates",
+      "rule": "A desktop build is not production-ready until signing, notarization where applicable, installer smoke tests, update policy, uninstall/rollback behavior, privacy review, and dependency/license review are complete.",
+      "reason": "Installable software creates trust and recovery obligations that a local repository prototype does not.",
+      "applies_to": [
+        "packaging_targets",
+        "release_gates"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "product_boundary",
+      "meaning": "Defines what the desktop app project owns and what remains in agent-platform or workspace-monitor.",
+      "required": true
+    },
+    {
+      "field": "candidate_frameworks",
+      "meaning": "Framework options to compare before installing or implementing desktop app code.",
+      "required": true
+    },
+    {
+      "field": "packaging_targets",
+      "meaning": "OS-specific package formats, signing expectations, and smoke tests.",
+      "required": true
+    },
+    {
+      "field": "runtime_strategy",
+      "meaning": "How the desktop shell connects UI, local Python agents, repository data, and optional services.",
+      "required": true
+    },
+    {
+      "field": "release_gates",
+      "meaning": "Checks required before a desktop installer can be called production-ready.",
+      "required": true
+    }
+  ],
+  "product_boundary": {
+    "owns": [
+      "desktop shell product requirements",
+      "installer packaging strategy",
+      "desktop release gates",
+      "desktop runtime integration decisions",
+      "user-facing installable software documentation"
+    ],
+    "does_not_own": [
+      "core agent planning and evaluation implementation in agent-platform",
+      "repository setup install_mode profiles",
+      "workspace-monitor web UI source unless a desktop-specific adapter is required",
+      "presentation-agent domain workflows"
+    ],
+    "integration_points": [
+      "workspace-monitor as the initial UI surface",
+      "agent-platform as the Python-first local platform layer",
+      "_history and _ops documents as repository data sources"
+    ]
+  },
+  "recommended_initial_path": {
+    "id": "tauri_first_desktop_shell",
+    "status": "recommended_for_prototype",
+    "summary": "Prototype a Tauri desktop shell that wraps the existing monitor UI and calls a documented platform service boundary only after runtime needs are clearer.",
+    "why": [
+      "The repository already has web UI output in workspace-monitor.",
+      "A smaller desktop shell is preferable while the product boundary is still forming.",
+      "Tauri and Electron should still be compared before any dependency installation."
+    ],
+    "decision_not_locked_until": [
+      "native API needs are known",
+      "auto-update requirements are known",
+      "Python sidecar or local service strategy is decided",
+      "macOS, Windows, and optional Linux installer needs are prioritized"
+    ]
+  },
+  "candidate_frameworks": [
+    {
+      "id": "tauri",
+      "status": "primary_candidate",
+      "best_for": [
+        "web UI desktop shell",
+        "smaller native bundle goals",
+        "clear native command boundary"
+      ],
+      "risks": [
+        "Rust toolchain and platform bundler learning curve",
+        "sidecar/local service design must be explicit for Python agents",
+        "platform-specific signing and installer details still require work"
+      ],
+      "must_check_before_install": [
+        "license and dependency review",
+        "workspace-monitor static export compatibility",
+        "Python sidecar or local service pattern",
+        "auto-update requirements"
+      ]
+    },
+    {
+      "id": "electron",
+      "status": "fallback_candidate",
+      "best_for": [
+        "mature JavaScript desktop ecosystem",
+        "wide installer tooling examples",
+        "Node-based native integration patterns"
+      ],
+      "risks": [
+        "larger app bundles",
+        "Chromium runtime overhead",
+        "security hardening must be strict for local file and shell access"
+      ],
+      "must_check_before_install": [
+        "Electron Forge or electron-builder choice",
+        "code signing and notarization workflow",
+        "sandbox and context isolation defaults",
+        "auto-update path"
+      ]
+    },
+    {
+      "id": "native_packaging_only",
+      "status": "comparison_candidate",
+      "best_for": [
+        "CLI plus browser-based UI distribution",
+        "cases where a desktop shell adds little user value"
+      ],
+      "risks": [
+        "less integrated desktop experience",
+        "more user setup burden if local services are exposed directly",
+        "platform-specific packaging complexity remains"
+      ],
+      "must_check_before_install": [
+        "whether a desktop shell is actually needed",
+        "whether workspace-monitor can be hosted or opened locally",
+        "Windows MSIX and macOS package/notarization paths"
+      ]
+    }
+  ],
+  "packaging_targets": [
+    {
+      "os": "macos",
+      "candidate_formats": [
+        "dmg",
+        "zip",
+        "pkg"
+      ],
+      "release_requirements": [
+        "Developer ID signing for outside-App-Store distribution",
+        "notarization before normal Gatekeeper-friendly distribution",
+        "installer/open smoke test on a clean macOS account or machine"
+      ]
+    },
+    {
+      "os": "windows",
+      "candidate_formats": [
+        "msix",
+        "msi",
+        "nsis setup exe"
+      ],
+      "release_requirements": [
+        "code signing strategy",
+        "install and uninstall smoke tests",
+        "user data path and update path verification"
+      ]
+    },
+    {
+      "os": "linux",
+      "candidate_formats": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
+      "release_requirements": [
+        "desktop entry and icon checks",
+        "distribution-specific dependency notes",
+        "install/uninstall smoke tests when Linux becomes a target"
+      ]
+    }
+  ],
+  "runtime_strategy": {
+    "ui_strategy": "Reuse workspace-monitor first, then add desktop-specific UI only when local desktop behavior needs it.",
+    "agent_runtime_strategy": "Keep agent-platform as a Python-first platform layer. Decide later whether a desktop app launches a local service, uses a sidecar process, or talks to a separate runtime.",
+    "data_strategy": "Read repository documents or generated snapshots through explicit user-selected workspace paths. Do not silently bundle private repository data.",
+    "settings_strategy": "Store user settings separately from bundled defaults. Secrets must be environment variables, OS credential storage, or user-provided runtime input, not checked-in config."
+  },
+  "security_privacy_rules": [
+    "Do not bundle real webhook URLs, API keys, tokens, browser cookies, or private notes into installers.",
+    "Prefer explicit user workspace selection over scanning arbitrary folders.",
+    "Document any local server port, sidecar process, file-system permission, or network behavior before release.",
+    "Review generated snapshots before public or distributable builds."
+  ],
+  "planned_commands": [
+    {
+      "id": "future-tauri-install",
+      "status": "not_run",
+      "scope": "platform-desktop-app",
+      "command": "To be decided after Tauri/Electron comparison and installation audit planning.",
+      "audit_required_if_run": true
+    },
+    {
+      "id": "future-electron-install",
+      "status": "not_run",
+      "scope": "platform-desktop-app",
+      "command": "To be decided after Tauri/Electron comparison and installation audit planning.",
+      "audit_required_if_run": true
+    }
+  ],
+  "release_gates": [
+    "Framework decision record with Tauri/Electron/native packaging comparison",
+    "Project-local dependency installation audit if dependencies are installed",
+    "License and security review for desktop framework and packager dependencies",
+    "macOS signing and notarization plan before macOS public installer",
+    "Windows signing and installer format decision before Windows public installer",
+    "Install, first-run, update, uninstall, and rollback smoke tests",
+    "Privacy review for workspace data, generated snapshots, tokens, and local service behavior",
+    "User-facing documentation that distinguishes repository setup from desktop app installation"
+  ]
+}

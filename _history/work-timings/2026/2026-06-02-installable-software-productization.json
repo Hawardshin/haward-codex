@@ -1,0 +1,77 @@
+{
+  "task_id": "2026-06-02-installable-software-productization",
+  "title": "Installable software productization project setup",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Official Electron, Tauri, Microsoft MSIX, and Apple notarization docs were checked."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "check-memory-bootstrap passed before durable edits."
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Selected governance mode and separated install_mode from end-user installer packaging."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added REQ-WS-050 and project-local requirements/specs."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Created project skeleton, config, docs, workflow, prompt, and history records."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "JSON, config contract, memory bootstrap, docs audit, naming audit, structure audit, workspace index, task board, grounding, evaluator, and workspace-health governance checks were run."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "work-evaluator returned ready_to_close after known limitations were moved to improvement ideas instead of blocking gaps."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Commit and push are completed at close-out."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "Timing is partial because the request began before a timer was started. Main expected bottleneck is governance documentation breadth, not external waiting.",
+    "improvement_candidates": [
+      "Add a reusable productization scaffold if more installable projects appear.",
+      "Create a future installer smoke-test checklist generator."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-installable-software-productization.ko.md",
+    "platform-desktop-app/specs/2026-06-02-installable-desktop/plan.ko.md"
+  ]
+}

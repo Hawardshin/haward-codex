@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-06-01",
+  "updated": "2026-06-02",
   "projects": [
     {
       "name": "agent-platform",
@@ -54,6 +54,36 @@
         "Keep presentation-specific data, conversions, and generated artifacts inside presentation-agent/.",
         "Store raw PPT/PPTX/assets only after project-local license review.",
         "Reusable presentation reference curation behavior is tracked as a skill under _skills/."
+      ]
+    },
+    {
+      "name": "platform-desktop-app",
+      "path": "platform-desktop-app/",
+      "status": "active",
+      "type": "installable-desktop-product",
+      "purpose": "Desktop/installable software productization project for turning the workspace platform into an end-user application with OS-specific installer, release, privacy, and update gates.",
+      "scope": "Desktop product boundary, distribution registry, packaging strategy, installer release gates, project-local requirements/specs, and future desktop shell implementation.",
+      "project_specific_home": [
+        "platform-desktop-app/artifacts/",
+        "platform-desktop-app/configs/",
+        "platform-desktop-app/docs/",
+        "platform-desktop-app/docs/requirements/",
+        "platform-desktop-app/src/",
+        "platform-desktop-app/tests/",
+        "platform-desktop-app/specs/"
+      ],
+      "shared_dependencies": [
+        "agent-platform/",
+        "workspace-monitor/",
+        "_docs/",
+        "_ops/",
+        "_history/"
+      ],
+      "boundary_notes": [
+        "End-user installer packaging belongs here, not in agent-platform install_mode setup profiles.",
+        "Reuse workspace-monitor as the initial UI candidate unless desktop-specific research proves a separate UI is easier to maintain.",
+        "Do not bundle real secrets, private snapshots, or environment-specific tokens in installers.",
+        "Actual Tauri, Electron, or packager dependency installation must follow the installation audit workflow."
       ]
     },
     {
