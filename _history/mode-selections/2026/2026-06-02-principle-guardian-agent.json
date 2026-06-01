@@ -1,0 +1,33 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-02-principle-guardian-agent",
+  "selected_work_mode": "governance",
+  "selection_reason": "The request adds a durable principle-adherence rule and a reusable governance agent that changes how future agents handle shortcuts, conflicts, and close-out gates.",
+  "lighter_modes_considered": [
+    {
+      "mode": "quick",
+      "reason_not_selected": "Would not preserve durable instructions, requirements, specs, and evaluation."
+    },
+    {
+      "mode": "standard",
+      "reason_not_selected": "The change affects platform governance and future agent behavior."
+    },
+    {
+      "mode": "research",
+      "reason_not_selected": "The task includes capability creation and durable behavior change, not only research."
+    }
+  ],
+  "required_targets": [
+    "web_search_record_targets",
+    "requirements_targets",
+    "spec_targets",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "mode_selection_record_targets",
+    "omission_check_targets",
+    "grounding_checks",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets"
+  ]
+}

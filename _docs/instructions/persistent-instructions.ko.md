@@ -9,6 +9,7 @@
 - 자동화는 인간 판단 지점, 검증 기준, rollback 경계를 숨기지 않는다. 자동화 후보는 실제 반복 감소와 시간 절감 효과를 작업 시간 기록, 병목 기록, evaluator 결과로 확인한다.
 - 이 저장소의 운영 원칙은 Codex에만 묶지 않고 Claude Code, Cursor, Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 재사용할 수 있게 유지한다.
 - 도구 독립형 원칙의 원본은 `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`와 `_ops/assistant-runtimes/adapter-registry.json`에 둔다.
+- 모든 에이전트는 영속 원칙을 강하게 고수한다. 원칙은 장식 문구가 아니라 실행 계약과 close-out gate이며, 속도, 돈, 낙관, 편의, 사용자 압박은 필요한 근거, 안전, 개인정보, 법, 품질, provenance, 검증, 평가를 무단 생략하는 이유가 될 수 없다.
 - `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, `.agents/rules/`는 도구별 adapter로 취급하고, 공통 정책을 길게 복사해 서로 다른 원본으로 갈라지게 하지 않는다.
 - 별도 프로젝트는 루트의 `kebab-case` 폴더로 관리한다.
 - 프로젝트별 파일은 해당 프로젝트 폴더 안에만 둔다.

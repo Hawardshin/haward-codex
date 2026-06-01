@@ -1,0 +1,157 @@
+{
+  "task": "Add reusable Principle Guardian agent",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "interpret-request",
+      "description": "Interpret the user's principle-adherence request as a durable instruction and reusable governance agent.",
+      "source": "UR-2026-06-02-025",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_history/plans/2026/2026-06-02-principle-guardian-agent.ko.md"
+      ],
+      "rationale": "The request was summarized and the plan records the Principle Guardian agent interpretation."
+    },
+    {
+      "item_id": "web-first",
+      "description": "Run web-first research and save a public search record.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-principle-guardian-agent.ko.md"
+      ],
+      "rationale": "The search record lists queries, sources checked, weak sources ignored, plan impact, and uncertainty."
+    },
+    {
+      "item_id": "requirements",
+      "description": "Add or link the durable requirement for principle adherence.",
+      "source": "governance work mode",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_requirements/changes/2026-06-02-principle-guardian-agent.ko.md",
+        "_requirements/reviews/2026-06-02-principle-guardian-agent.ko.md"
+      ],
+      "rationale": "REQ-WS-067 was added and reviewed."
+    },
+    {
+      "item_id": "agent-spec",
+      "description": "Create an inspectable Principle Guardian agent spec with guarded principles, escalation rules, and validation commands.",
+      "source": "REQ-WS-067",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/agents/principle-guardian-agent.json",
+        "agent-platform/docs/principle-guardian-agent.ko.md"
+      ],
+      "rationale": "The agent spec includes trigger, output contract, principle sources, guarded principles, escalation rules, and validation commands."
+    },
+    {
+      "item_id": "persistent-instructions",
+      "description": "Persist the instruction that all agents strongly adhere to principles.",
+      "source": "persistent instruction rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "AGENTS.md",
+        "_docs/instructions/persistent-instructions.ko.md",
+        "_docs/instructions/persistent-instructions.en.md"
+      ],
+      "rationale": "Durable instructions now state principles are execution contracts and close-out gates."
+    },
+    {
+      "item_id": "shortcut-blocking",
+      "description": "Ensure speed, profit, optimism, convenience, or pressure cannot bypass evidence, safety, privacy, legality, quality, provenance, validation, or evaluation.",
+      "source": "REQ-WS-067",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "AGENTS.md",
+        "agent-platform/configs/agents/principle-guardian-agent.json",
+        "agent-platform/docs/principle-guardian-agent.ko.md"
+      ],
+      "rationale": "The persistent instructions and agent policy explicitly block principle-bypassing shortcuts."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/agents/principle-guardian-agent.json",
+      "purpose": "Reusable Principle Guardian agent spec.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/docs/principle-guardian-agent.ko.md",
+      "purpose": "Korean user-facing agent docs.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/docs/principle-guardian-agent.en.md",
+      "purpose": "English companion agent docs.",
+      "required": true
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Top-level durable repository instruction.",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-02-principle-guardian-agent/spec.ko.md",
+      "purpose": "Spec artifact.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "inspect-agent",
+      "description": "Inspect the new agent spec.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/principle-guardian-agent.json"
+      ],
+      "rationale": "Command completed with exit code 0."
+    },
+    {
+      "check_id": "list-agents",
+      "description": "Confirm the new agent appears in the registry list.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents"
+      ],
+      "rationale": "Command output included principle-guardian-agent."
+    },
+    {
+      "check_id": "memory-bootstrap",
+      "description": "Confirm durable instruction changes do not break bootstrap.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": "Command returned ready_to_bootstrap."
+    },
+    {
+      "check_id": "tests-and-monitor",
+      "description": "Run platform tests and monitor build checks.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "agent-platform unit tests: 150 tests OK",
+        "workspace-monitor npm test/check/build passed",
+        "workspace-health: 18 checks passed"
+      ],
+      "rationale": "All commands completed with exit code 0."
+    }
+  ],
+  "known_omission_risks": [
+    "No separate runtime supervisor was implemented because this request was satisfied by durable instructions and an inspectable governance agent spec."
+  ],
+  "notes": [
+    "The agent complements existing guard agents by judging principle conflicts across them."
+  ]
+}

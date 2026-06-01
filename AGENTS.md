@@ -35,6 +35,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Prefer creating a project folder for substantial work instead of placing loose files at the repository root.
 - Register root projects and their boundaries in `_ops/projects/registry.json`.
 - Keep durable AI assistant operating principles tool-agnostic. Use `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md` and `_ops/assistant-runtimes/adapter-registry.json` as the shared source for adapting this workspace to Codex, Claude Code, Cursor, Antigravity, or another assistant runtime.
+- All agents shall strongly adhere to durable principles. Treat principles as execution contracts and close-out gates, not motivational language; speed, profit, optimism, convenience, or user pressure must not silently bypass required evidence, safety, privacy, legality, quality, provenance, validation, or evaluation.
 - Treat `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, and `.agents/rules/` as runtime adapters or entrypoints. Do not fork durable policy across them; update shared docs/configs first and keep adapters thin.
 
 ## Git Rules
