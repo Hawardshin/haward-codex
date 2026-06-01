@@ -1,0 +1,132 @@
+{
+  "task": "Add user/developer/superadmin view mode selection with superadmin development as the current default.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "separate-user-developer-views",
+      "description": "Separate what users and developers see without mixing it into installation or work mode.",
+      "source": "UR-2026-06-02-016, REQ-WS-061",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/access/view-mode-registry.json",
+        "_docs/policies/view-mode-policy.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "superadmin-development-default",
+      "description": "Allow selecting a superadmin-focused development mode and make it the current default.",
+      "source": "UR-2026-06-02-016",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/access/view-mode-registry.json",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "monitor-ui-selector",
+      "description": "Expose user, developer, and superadmin development modes in Workspace Monitor.",
+      "source": "REQ-WM-011",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/src/generated/workspace-snapshot.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "security-scope-caveat",
+      "description": "Clarify that client-side view mode is not real authorization.",
+      "source": "web search record and requirements review",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/access/view-mode-registry.json",
+        "_docs/policies/view-mode-policy.ko.md",
+        "_history/web-searches/2026/2026-06-02-view-mode-selection.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "real-authentication-implementation",
+      "description": "Implement actual login, authentication, server authorization, and multi-user permission matrix.",
+      "source": "scope review",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "_specs/workspace-platform/2026-06-02-view-mode-selection/spec.ko.md",
+        "workspace-monitor/specs/2026-06-02-view-mode-selector/spec.ko.md"
+      ],
+      "rationale": "The request asked for mode selection now, not a complete auth system. The non-goal and future enforcement caveat are documented."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/access/view-mode-registry.json",
+      "purpose": "Source of truth for view modes.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/src/agent_platform/view_modes.py",
+      "purpose": "View mode registry validator.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "View mode selector UI.",
+      "required": true
+    },
+    {
+      "path": "_docs/policies/view-mode-policy.ko.md",
+      "purpose": "Durable policy.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "check-view-modes",
+      "description": "Validate view mode registry and config contract.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "agent-platform-tests",
+      "description": "Run platform unit tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m unittest discover -s tests"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-build",
+      "description": "Regenerate monitor snapshot and build static site.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm run collect",
+        "npm test",
+        "npm run check",
+        "npm run build"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Actual authentication and authorization remain future work, not part of this change.",
+    "Public snapshot filtering remains a future publication-safety design."
+  ],
+  "notes": [
+    "View mode is a UI/operations lens and must stay separate from install_mode and work_mode."
+  ]
+}

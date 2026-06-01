@@ -27,6 +27,7 @@
       "The requirements management layer or requirements baseline contract changes.",
       "The spec-driven development layer or spec artifact contract changes.",
       "The spec/source reconciliation layer, clarification question format, or clarification notification contract changes.",
+      "The view mode registry, user/developer/superadmin surface split, monitor view selector, or admin UI audience rules change.",
       "The categorized _docs registry, docs audit tool, or required durable docs path changes.",
       "The skill lifecycle layer or skill validation contract changes.",
       "The architecture-first coding layer or coding architecture comparison contract changes.",
@@ -149,6 +150,18 @@
       "used_for": [
         "user versus developer installation setup selection",
         "separating install_mode from work_mode"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "view_mode_registry",
+      "title": "View Mode Registry",
+      "path": "agent-platform/configs/access/view-mode-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "user versus developer versus superadmin development view selection",
+        "separating view_mode from install_mode and work_mode",
+        "workspace monitor and future admin surface audience rules"
       ],
       "last_checked": "2026-06-02"
     },
@@ -953,6 +966,17 @@
       ]
     },
     {
+      "id": "view_mode_registry_must_stay_discoverable",
+      "rule": "The view mode registry must remain a warm memory anchor so future sessions can select user, developer, or superadmin development views for UI, dashboard, monitor, admin surface, desktop surface, or generated snapshot work without confusing view_mode with install_mode or work_mode.",
+      "reason": "The user explicitly asked to make user and developer views distinct and to allow the current superadmin-focused development mode to be selected.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "check-view-modes"
+      ]
+    },
+    {
       "id": "work_timing_must_stay_discoverable",
       "rule": "The work timing policy and workflow must remain warm memory anchors so future sessions can record phase durations and bottleneck candidates for meaningful work.",
       "reason": "The user explicitly asked to make it easy to see where each task spends time and where bottlenecks occur.",
@@ -1141,6 +1165,7 @@
     "web_first_workflow",
     "memory_bootstrap_workflow",
     "work_mode_registry",
+    "view_mode_registry",
     "omission_prevention_workflow",
     "resource_leak_prevention_workflow",
     "install_mode_registry",
@@ -1195,6 +1220,7 @@
     "web_first_workflow",
     "memory_bootstrap_workflow",
     "work_mode_registry",
+    "view_mode_registry",
     "omission_prevention_workflow",
     "resource_leak_prevention_workflow",
     "install_mode_registry",
@@ -1309,6 +1335,14 @@
       "path": "agent-platform/configs/workflows/work-mode-registry.json",
       "tier": "hot",
       "purpose": "Selectable work modes, deterministic mode enforcement layers, mode selection and omission check requirements, and evaluator target policy for avoiding unnecessary full-loop overhead without relying on prompt-only rules.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "view_mode_registry",
+      "path": "agent-platform/configs/access/view-mode-registry.json",
+      "tier": "warm",
+      "purpose": "Selectable user, developer, and superadmin development UI/operations lenses for dashboards, monitors, admin surfaces, desktop surfaces, and generated snapshots, kept separate from install_mode and work_mode.",
       "required": true,
       "load_order": 8
     },

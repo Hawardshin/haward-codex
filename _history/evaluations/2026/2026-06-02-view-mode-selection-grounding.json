@@ -1,0 +1,106 @@
+{
+  "task": "Ground factual claims for view mode selection close-out.",
+  "output_summary": "The platform now has a view_mode registry, CLI checks, Workspace Monitor selector, and documentation distinguishing UI lens from security enforcement.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "view-mode-registry",
+      "source": "agent-platform/configs/access/view-mode-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary source of truth for view modes created in this change."
+    },
+    {
+      "evidence_id": "view-mode-cli",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local validator returned ready with no gaps."
+    },
+    {
+      "evidence_id": "monitor-build",
+      "source": "npm run collect; npm test; npm run check; npm run build",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Workspace Monitor snapshot generation, tests, TypeScript check, and static build completed."
+    },
+    {
+      "evidence_id": "owasp-authz",
+      "source": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "OWASP cheat sheet is a high-authority security guidance source for authorization design."
+    },
+    {
+      "evidence_id": "nist-rbac",
+      "source": "https://csrc.nist.gov/Projects/Role-Based-Access-Control",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "NIST RBAC project is authoritative as a model reference, but archived, so not treated as current product guidance."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now contains a self-documenting view mode registry with user, developer, and superadmin_developer modes.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "view-mode-registry",
+        "view-mode-cli"
+      ],
+      "verification_steps": [
+        "Opened the registry and ran check-view-modes."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The current default view mode is superadmin_developer.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "view-mode-registry",
+        "view-mode-cli"
+      ],
+      "verification_steps": [
+        "Checked default_mode in the registry and validator output."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace Monitor builds with the view mode selector and regenerated snapshot.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-build"
+      ],
+      "verification_steps": [
+        "Ran collect, test, TypeScript check, and Next.js build."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Client-side hiding is not sufficient as an authorization boundary for public or multi-user deployments.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "owasp-authz"
+      ],
+      "verification_steps": [
+        "Checked OWASP authorization guidance on least privilege, deny by default, and permission validation."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "No actual authentication or authorization layer was implemented.",
+    "Public snapshot filtering is documented as future work."
+  ],
+  "limitation_notes": [
+    "NIST RBAC was used as an archived model reference only.",
+    "No browser screenshot verification was run because the static build and TypeScript checks were sufficient for this non-3D UI change in the current tool context."
+  ]
+}

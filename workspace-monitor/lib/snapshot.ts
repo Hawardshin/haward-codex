@@ -132,6 +132,15 @@ export type WorkspaceFolderStructure = {
   }>;
 };
 
+export type WorkspaceViewMode = {
+  id: string;
+  label: string;
+  intent: string;
+  allowedSections: string[];
+  visibilityRules: Record<string, string[]>;
+  securityNotes: string[];
+};
+
 export type WorkspaceSnapshot = {
   schemaVersion: string;
   generatedAt: string;
@@ -145,6 +154,10 @@ export type WorkspaceSnapshot = {
   documents: WorkspaceDocument[];
   historyDays: WorkspaceHistoryDay[];
   folderStructure: WorkspaceFolderStructure;
+  viewModeCatalog?: {
+    defaultMode: string;
+    modes: WorkspaceViewMode[];
+  };
   categories: string[];
   publicReview: {
     status: string;

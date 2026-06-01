@@ -40,6 +40,7 @@
 - 프롬프트 공통 웹 검색 계약: [_ops/prompts/README.ko.md](prompts/README.ko.md), [_history/web-searches/README.ko.md](../_history/web-searches/README.ko.md)
 - 새 세션의 AI 메모리 부트스트랩: [_ops/workflows/01-memory-bootstrap.md](workflows/01-memory-bootstrap.md), [agent-platform/configs/memory/bootstrap-manifest.json](../agent-platform/configs/memory/bootstrap-manifest.json)
 - 작업 모드와 전체 루프 강도를 고르고 prompt-only가 아니라 강제되는 mode gate를 확인할 때: [_ops/workflows/02-select-work-mode.md](workflows/02-select-work-mode.md), [_ops/prompts/02-select-work-mode.md](prompts/02-select-work-mode.md), [work-mode-registry.json](../agent-platform/configs/workflows/work-mode-registry.json), [_docs/policies/work-mode-enforcement-policy.ko.md](../_docs/policies/work-mode-enforcement-policy.ko.md)
+- 사용자 보기, 개발자 보기, 슈퍼어드민 개발 보기를 UI/운영 화면에서 나눌 때: [_ops/workflows/73-view-mode-selection.md](workflows/73-view-mode-selection.md), [_ops/prompts/103-view-mode-selection.md](prompts/103-view-mode-selection.md), [view-mode-registry.json](../agent-platform/configs/access/view-mode-registry.json), [_docs/policies/view-mode-policy.ko.md](../_docs/policies/view-mode-policy.ko.md)
 - 설치 대상을 사용자용 사용 환경과 개발자용 개선 환경으로 나눌 때: [_ops/workflows/62-select-install-mode.md](workflows/62-select-install-mode.md), [_ops/prompts/92-select-install-mode.md](prompts/92-select-install-mode.md), [install-mode-registry.json](../agent-platform/configs/installations/install-mode-registry.json)
 - 플랫폼을 사용자가 설치하는 desktop/end-user software로 제품화하거나 Tauri/Electron/MSIX/DMG/signing/notarization/update/uninstall을 검토할 때: [_ops/workflows/63-installable-software-productization.md](workflows/63-installable-software-productization.md), [_ops/prompts/93-installable-software-productization.md](prompts/93-installable-software-productization.md), [desktop-distribution-registry.json](../platform-desktop-app/configs/desktop-distribution-registry.json)
 - Rust, Go, Tauri, Wails, Electron, Python, TypeScript/Next.js 같은 런타임/언어 선택을 조사하고 설계할 때: [_ops/workflows/64-runtime-language-research-design.md](workflows/64-runtime-language-research-design.md), [_ops/prompts/94-runtime-language-research-design.md](prompts/94-runtime-language-research-design.md), [language-decision-registry.json](../agent-platform/configs/runtime/language-decision-registry.json)
@@ -113,6 +114,7 @@
 - `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`에 빠른 요약이 남았는가
 - `_history/web-searches/YYYY/`에 공개 검색 판단 기록이 남았는가
 - 선택한 `work_mode`가 evaluator input과 계획/요약에 반영됐는가
+- UI, dashboard, monitor, admin surface의 audience가 바뀌었다면 `view_mode`가 선택됐고 `check-view-modes`를 통과했는가
 - `quick`이 아닌 작업이면 `mode_selection_record_targets`가 남았고, 모드 정책 변경 시 `check-work-modes`를 통과했는가
 - `quick`이 아닌 작업이면 `omission_check_targets`가 남아 필수 지시/요구사항/산출물/검증 coverage가 확인됐는가
 - 메모리/리소스 누수 위험이 있는 작업이면 `resource_risk_occurred=true`와 `resource_check_targets`가 남았는가

@@ -1,0 +1,44 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-02-view-mode-selection",
+  "title": "Add user/developer/superadmin view mode selection",
+  "work_mode": "governance",
+  "measurement_method": "manual_partial",
+  "recorded_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_research_and_intake",
+      "label": "web research and intake",
+      "duration_seconds": 480,
+      "notes": "Checked OWASP, NIST RBAC, and Next.js proxy references; saved web search records."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "registry, CLI, and monitor implementation",
+      "duration_seconds": 1800,
+      "notes": "Added view mode registry, Python validator/CLI/tests, Workspace Monitor snapshot catalog, selector UI, and filters."
+    },
+    {
+      "phase_id": "documentation_and_traceability",
+      "label": "requirements, specs, and operating docs",
+      "duration_seconds": 2100,
+      "notes": "Updated requirements, policies, workflows, prompts, persistent instructions, memory bootstrap, specs, plans, and traces."
+    },
+    {
+      "phase_id": "verification",
+      "label": "verification",
+      "duration_seconds": 900,
+      "notes": "Ran Python tests, view mode CLI, memory bootstrap, config contract, workspace-monitor collect/test/check/build."
+    }
+  ],
+  "summary": {
+    "total_seconds": 5280,
+    "slowest_phase": "documentation_and_traceability",
+    "bottleneck_candidates": [
+      "Durable governance documentation and paired Korean/English artifacts dominate this kind of platform rule change.",
+      "Workspace snapshot regeneration touches large generated files and should stay deterministic."
+    ],
+    "confidence": "partial",
+    "next_measurement_improvement": "Use _tools/work-timer at task start for automatic start/end timestamps."
+  }
+}

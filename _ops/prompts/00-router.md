@@ -13,6 +13,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | 모든 새 지시를 처리하기 전에 웹 검색을 먼저 한다 | [05-web-first-intake.md](05-web-first-intake.md) |
 | 새 세션에서 저장소 규칙과 설정을 잊지 않도록 메모리 anchor를 로드한다 | [01-memory-bootstrap.md](01-memory-bootstrap.md) |
 | 작업 성격에 맞게 전체 루프 강도를 고른다 | [02-select-work-mode.md](02-select-work-mode.md) |
+| 사용자 보기, 개발자 보기, 슈퍼어드민 개발 보기를 UI/운영 화면에서 나눈다 | [103-view-mode-selection.md](103-view-mode-selection.md) |
 | 플랫폼을 사용하는 설치인지, 플랫폼을 개선하는 개발자 설치인지 구분한다 | [92-select-install-mode.md](92-select-install-mode.md) |
 | 플랫폼을 설치형 desktop/end-user software로 제품화하거나 Tauri/Electron/MSIX/DMG/signing/notarization/update/uninstall을 검토한다 | [93-installable-software-productization.md](93-installable-software-productization.md) |
 | Rust, Go, Tauri, Wails, Electron, Python, TypeScript/Next.js 같은 런타임/언어 선택을 조사하고 설계한다 | [94-runtime-language-research-design.md](94-runtime-language-research-design.md) |
@@ -63,6 +64,7 @@ Run web-first intake before planning, repository exploration, or file edits.
 Run memory-bootstrap-agent after web-first intake and before local planning.
 Select work_mode from agent-platform/configs/workflows/work-mode-registry.json before deciding which history, requirements, spec, and evaluation targets are blocking.
 
+Select view_mode from agent-platform/configs/access/view-mode-registry.json when the request involves what a user, developer, or superadmin should see in a UI, dashboard, monitor, generated snapshot, or admin surface. Keep view_mode separate from install_mode and work_mode. Treat client-side hiding as a UI lens, not a security boundary.
 Select install_mode from agent-platform/configs/installations/install-mode-registry.json when the request involves setup, running, deployment, or developer improvement installation. Keep install_mode separate from work_mode.
 Use platform-desktop-app and _ops/prompts/93-installable-software-productization.md when the request involves end-user installable software, desktop apps, OS installer packaging, Tauri, Electron, MSIX, DMG, signing, notarization, updates, or uninstall behavior. Keep this separate from repository setup install_mode.
 Use agent-platform/configs/runtime/language-decision-registry.json and _ops/prompts/94-runtime-language-research-design.md when the request involves choosing or changing Rust, Go, Tauri, Wails, Electron, Python, TypeScript/Next.js, native modules, local daemons, desktop shells, or performance-sensitive runtime boundaries.

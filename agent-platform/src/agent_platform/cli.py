@@ -44,6 +44,12 @@ from agent_platform.work_modes import (
     load_work_mode_registry,
     show_work_mode,
 )
+from agent_platform.view_modes import (
+    check_view_mode_registry,
+    list_view_modes,
+    load_view_mode_registry,
+    show_view_mode,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -123,6 +129,16 @@ def build_parser() -> argparse.ArgumentParser:
     show_install_mode_cmd = subparsers.add_parser("show-install-mode", help="Show one installation mode as JSON.")
     show_install_mode_cmd.add_argument("path", type=Path)
     show_install_mode_cmd.add_argument("mode_id")
+
+    check_view_modes = subparsers.add_parser("check-view-modes", help="Validate the user/developer/superadmin view mode registry.")
+    check_view_modes.add_argument("path", type=Path)
+
+    list_view_modes_cmd = subparsers.add_parser("list-view-modes", help="List available view modes.")
+    list_view_modes_cmd.add_argument("path", type=Path)
+
+    show_view_mode_cmd = subparsers.add_parser("show-view-mode", help="Show one view mode as JSON.")
+    show_view_mode_cmd.add_argument("path", type=Path)
+    show_view_mode_cmd.add_argument("mode_id")
 
     check_work_modes = subparsers.add_parser("check-work-modes", help="Validate the work mode registry and evaluator enforcement policy.")
     check_work_modes.add_argument("path", type=Path)
@@ -319,6 +335,36 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "show-install-mode":
         registry = load_install_mode_registry(args.path)
         print(json.dumps(show_install_mode(registry, args.mode_id), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "check-view-modes":
+        registry = load_view_mode_registry(args.path)
+        config_contract_report = check_config_contract(registry, str(args.path))
+        view_mode_report = check_view_mode_registry(registry)
+        print(
+            json.dumps(
+                {
+                    "status": "rework_required"
+                    if config_contract_report["requires_rework"] or view_mode_report["requires_rework"]
+                    else "ready",
+                    "requires_rework": config_contract_report["requires_rework"] or view_mode_report["requires_rework"],
+                    "config_contract": config_contract_report,
+                    "view_modes": view_mode_report,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
+        return 0
+
+    if args.command == "list-view-modes":
+        registry = load_view_mode_registry(args.path)
+        print(json.dumps(list_view_modes(registry), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "show-view-mode":
+        registry = load_view_mode_registry(args.path)
+        print(json.dumps(show_view_mode(registry, args.mode_id), indent=2, ensure_ascii=False))
         return 0
 
     if args.command == "check-work-modes":

@@ -38,35 +38,93 @@ const sections: Section[] = [
   { id: "agents", label: "Agents", icon: Bot }
 ];
 
+type MonitorViewMode = NonNullable<WorkspaceSnapshot["viewModeCatalog"]>["modes"][number];
+
+const fallbackViewModes: MonitorViewMode[] = [
+  {
+    id: "user",
+    label: "User View",
+    intent: "Stable project, history, and documentation surfaces.",
+    allowedSections: ["overview", "projects", "history", "documents"],
+    visibilityRules: {},
+    securityNotes: []
+  },
+  {
+    id: "developer",
+    label: "Developer View",
+    intent: "Implementation, requirements, specs, agents, and verification surfaces.",
+    allowedSections: ["overview", "projects", "history", "structure", "documents", "requirements", "agents"],
+    visibilityRules: {},
+    securityNotes: []
+  },
+  {
+    id: "superadmin_developer",
+    label: "Super Admin Dev",
+    intent: "Full owner/operator view for building the platform itself.",
+    allowedSections: ["overview", "projects", "history", "structure", "documents", "requirements", "agents"],
+    visibilityRules: {},
+    securityNotes: []
+  }
+];
+
 export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [section, setSection] = useState<SectionId>("overview");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [historyDate, setHistoryDate] = useState("all");
   const [historyCategory, setHistoryCategory] = useState("all");
+  const viewModes = snapshot.viewModeCatalog?.modes?.length ? snapshot.viewModeCatalog.modes : fallbackViewModes;
+  const [viewMode, setViewMode] = useState(snapshot.viewModeCatalog?.defaultMode || "superadmin_developer");
+  const currentViewMode = useMemo(() => {
+    return viewModes.find((mode) => mode.id === viewMode) || viewModes[0] || fallbackViewModes[2];
+  }, [viewMode, viewModes]);
+  const visibleSections = useMemo(() => {
+    const allowed = new Set(currentViewMode.allowedSections);
+    return sections.filter((item) => allowed.has(item.id));
+  }, [currentViewMode]);
+  const selectViewMode = (modeId: string) => {
+    const nextMode = viewModes.find((mode) => mode.id === modeId) || currentViewMode;
+    setViewMode(nextMode.id);
+    if (!nextMode.allowedSections.includes(section)) {
+      setSection((nextMode.allowedSections[0] as SectionId | undefined) || "overview");
+    }
+  };
 
   const normalizedQuery = query.trim().toLowerCase();
+  const viewFilteredDocuments = useMemo(() => {
+    return snapshot.documents.filter((document) => documentVisibleForMode(document, currentViewMode.id));
+  }, [currentViewMode, snapshot.documents]);
+  const viewCategories = useMemo(() => {
+    return Array.from(new Set(viewFilteredDocuments.map((document) => document.category))).sort();
+  }, [viewFilteredDocuments]);
   const filteredDocuments = useMemo(() => {
-    return snapshot.documents.filter((document) => {
+    return viewFilteredDocuments.filter((document) => {
       const categoryMatches = category === "all" || document.category === category;
       const queryMatches =
         !normalizedQuery ||
         `${document.title} ${document.path} ${document.excerpt}`.toLowerCase().includes(normalizedQuery);
       return categoryMatches && queryMatches;
     });
-  }, [category, normalizedQuery, snapshot.documents]);
+  }, [category, normalizedQuery, viewFilteredDocuments]);
 
-  const recentHistory = snapshot.documents
+  const recentHistory = viewFilteredDocuments
     .filter((document) => ["work-summary", "request-trace", "user-request", "evaluation"].includes(document.category))
     .slice(0, 8);
   const recentDocuments = filteredDocuments.slice(0, section === "documents" ? 30 : 10);
-  const historyCategories = useMemo(() => {
-    return Array.from(
-      new Set(snapshot.historyDays.flatMap((day) => day.categories.map((item) => item.category)))
-    ).sort();
-  }, [snapshot.historyDays]);
-  const filteredHistoryDays = useMemo(() => {
+  const visibleHistoryDays = useMemo(() => {
     return snapshot.historyDays
+      .map((day) => {
+        const documents = day.documents.filter((document) => documentVisibleForMode(document, currentViewMode.id));
+        const categories = summarizeCategories(documents);
+        return { ...day, documents, documentsCount: documents.length, categories };
+      })
+      .filter((day) => day.documents.length > 0);
+  }, [currentViewMode, snapshot.historyDays]);
+  const historyCategories = useMemo(() => {
+    return Array.from(new Set(visibleHistoryDays.flatMap((day) => day.categories.map((item) => item.category)))).sort();
+  }, [visibleHistoryDays]);
+  const filteredHistoryDays = useMemo(() => {
+    return visibleHistoryDays
       .filter((day) => historyDate === "all" || day.date === historyDate)
       .map((day) => {
         const documents = day.documents.filter((document) => {
@@ -80,8 +138,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         return { ...day, documents, documentsCount: documents.length, categories };
       })
       .filter((day) => day.documents.length > 0);
-  }, [historyCategory, historyDate, normalizedQuery, snapshot.historyDays]);
-  const latestHistoryDate = snapshot.historyDays[0]?.date || "";
+  }, [historyCategory, historyDate, normalizedQuery, visibleHistoryDays]);
+  const latestHistoryDate = visibleHistoryDays[0]?.date || "";
   const agentCatalog = snapshot.agentCatalog ?? [];
   const agentRuntimeCounts = useMemo(() => countBy(agentCatalog, (agent) => agent.runtime || "unknown"), [agentCatalog]);
   const agentStatusCounts = useMemo(
@@ -91,7 +149,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const taskStatusCounts = useMemo(() => countBy(snapshot.tasks, (task) => task.status || "unknown"), [snapshot.tasks]);
   const historyCategoryTotals = useMemo(() => {
     const totals = new Map<string, number>();
-    for (const day of snapshot.historyDays) {
+    for (const day of visibleHistoryDays) {
       for (const item of day.categories) {
         totals.set(item.category, (totals.get(item.category) || 0) + item.count);
       }
@@ -99,7 +157,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     return Array.from(totals.entries())
       .map(([category, count]) => ({ category, count }))
       .sort((left, right) => right.count - left.count || left.category.localeCompare(right.category));
-  }, [snapshot.historyDays]);
+  }, [visibleHistoryDays]);
+  const visibleRequirements = currentViewMode.allowedSections.includes("requirements") ? snapshot.requirements : [];
+  const visibleEvaluations = viewFilteredDocuments.filter((document) => document.category === "evaluation").length;
+  const visibleWebSearches = viewFilteredDocuments.filter((document) => document.category === "web-search").length;
 
   return (
     <main>
@@ -117,8 +178,31 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         </div>
       </header>
 
+      <section className="view-mode-bar" aria-label="View mode selector">
+        <div className="view-mode-current">
+          <ShieldCheck size={16} aria-hidden="true" />
+          <div>
+            <span>View Mode</span>
+            <strong>{currentViewMode.label}</strong>
+          </div>
+        </div>
+        <div className="segmented-control">
+          {viewModes.map((mode) => (
+            <button
+              key={mode.id}
+              className={currentViewMode.id === mode.id ? "active" : ""}
+              onClick={() => selectViewMode(mode.id)}
+              type="button"
+              title={mode.intent}
+            >
+              {mode.label}
+            </button>
+          ))}
+        </div>
+      </section>
+
       <nav className="section-tabs" aria-label="Monitor sections">
-        {sections.map((item) => (
+        {visibleSections.map((item) => (
           <button
             key={item.id}
             className={section === item.id ? "active" : ""}
@@ -145,7 +229,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           <ListFilter size={16} aria-hidden="true" />
           <select value={category} onChange={(event) => setCategory(event.target.value)}>
             <option value="all">모든 문서</option>
-            {snapshot.categories.map((item) => (
+            {viewCategories.map((item) => (
               <option key={item} value={item}>
                 {categoryLabel(item)}
               </option>
@@ -158,11 +242,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         <div className="content-grid">
           <section className="metrics-band">
             <Metric label="Projects" value={snapshot.stats.projects} icon={FolderKanban} tone="green" />
-            <Metric label="Documents" value={snapshot.stats.documents} icon={BookOpenText} tone="blue" />
-            <Metric label="Requirements" value={snapshot.stats.requirements} icon={ClipboardCheck} tone="amber" />
-            <Metric label="Evaluations" value={snapshot.stats.evaluations} icon={ShieldCheck} tone="red" />
-            <Metric label="Web Searches" value={snapshot.stats.webSearches} icon={FileSearch} tone="violet" />
-            <Metric label="History Days" value={snapshot.stats.historyDays} icon={CalendarDays} tone="slate" />
+            <Metric label="Documents" value={viewFilteredDocuments.length} icon={BookOpenText} tone="blue" />
+            <Metric label="Requirements" value={visibleRequirements.length} icon={ClipboardCheck} tone="amber" />
+            <Metric label="Evaluations" value={visibleEvaluations} icon={ShieldCheck} tone="red" />
+            <Metric label="Web Searches" value={visibleWebSearches} icon={FileSearch} tone="violet" />
+            <Metric label="History Days" value={visibleHistoryDays.length} icon={CalendarDays} tone="slate" />
           </section>
 
           <section className="panel wide">
@@ -250,8 +334,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       {section === "history" && (
         <section className="history-board">
           <div className="history-summary-band">
-            <Metric label="History Days" value={snapshot.stats.historyDays} icon={CalendarDays} tone="green" />
-            <Metric label="History Docs" value={snapshot.historyDays.reduce((total, day) => total + day.documentsCount, 0)} icon={History} tone="blue" />
+            <Metric label="History Days" value={visibleHistoryDays.length} icon={CalendarDays} tone="green" />
+            <Metric label="History Docs" value={visibleHistoryDays.reduce((total, day) => total + day.documentsCount, 0)} icon={History} tone="blue" />
             <Metric label="Root Folders" value={snapshot.stats.rootFolders} icon={FolderKanban} tone="amber" />
             <article className="history-latest">
               <span>Latest History Date</span>
@@ -273,7 +357,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <CalendarDays size={16} aria-hidden="true" />
                 <select value={historyDate} onChange={(event) => setHistoryDate(event.target.value)}>
                   <option value="all">모든 날짜</option>
-                  {snapshot.historyDays.map((day) => (
+                  {visibleHistoryDays.map((day) => (
                     <option key={day.date} value={day.date}>
                       {day.date} ({day.documentsCount})
                     </option>
@@ -414,10 +498,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               <p className="eyebrow">Requirements</p>
               <h2>요구사항 목록</h2>
             </div>
-            <span className="result-count">{snapshot.requirements.length} total</span>
+            <span className="result-count">{visibleRequirements.length} total</span>
           </div>
           <div className="requirements-table">
-            {snapshot.requirements.map((requirement) => (
+            {visibleRequirements.map((requirement) => (
               <article key={`${requirement.id}-${requirement.sourcePath}`}>
                 <strong>{requirement.id}</strong>
                 <span>{requirement.priority}</span>
@@ -674,6 +758,30 @@ function summarizeCategories(documents: WorkspaceSnapshot["historyDays"][number]
   return Array.from(counts.entries())
     .map(([category, count]) => ({ category, count }))
     .sort((left, right) => right.count - left.count || left.category.localeCompare(right.category));
+}
+
+function documentVisibleForMode(
+  document: WorkspaceSnapshot["documents"][number] | WorkspaceSnapshot["historyDays"][number]["documents"][number],
+  modeId: string
+) {
+  if (modeId === "superadmin_developer" || modeId === "developer") {
+    return true;
+  }
+
+  const userCategories = new Set(["workspace-doc", "project-doc", "work-summary", "daily-history", "philosophy"]);
+  if (!userCategories.has(document.category)) {
+    return false;
+  }
+
+  const hiddenPrefixes = [
+    "_ops/",
+    "_requirements/",
+    "_specs/",
+    "agent-platform/configs/",
+    "agent-platform/src/",
+    "agent-platform/tests/"
+  ];
+  return !hiddenPrefixes.some((prefix) => document.path.startsWith(prefix));
 }
 
 function countBy<T>(items: T[], getKey: (item: T) => string) {

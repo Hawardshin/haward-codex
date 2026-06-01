@@ -116,6 +116,69 @@ h3 {
   font-size: 15px;
 }
 
+.view-mode-bar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 10px;
+}
+
+.view-mode-current {
+  display: inline-flex;
+  min-width: 230px;
+  align-items: center;
+  gap: 9px;
+}
+
+.view-mode-current svg {
+  color: var(--green);
+}
+
+.view-mode-current span,
+.view-mode-current strong {
+  display: block;
+}
+
+.view-mode-current span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.view-mode-current strong {
+  margin-top: 2px;
+  font-size: 14px;
+}
+
+.segmented-control {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.segmented-control button {
+  min-height: 34px;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  color: var(--text);
+  border-radius: 7px;
+  padding: 7px 10px;
+  font-size: 13px;
+}
+
+.segmented-control button.active {
+  border-color: #a8b5c3;
+  background: #25313f;
+  color: #ffffff;
+}
+
 .section-tabs,
 .toolbar {
   display: flex;
@@ -861,6 +924,14 @@ h3 {
 
   .topbar {
     grid-template-columns: 1fr;
+  }
+
+  .view-mode-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .segmented-control {
+    justify-content: flex-start;
   }
 
   .metrics-band,

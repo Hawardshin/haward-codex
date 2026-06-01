@@ -39,6 +39,7 @@ const DOCUMENT_SOURCES = [
   { category: "runtime-adapter", root: ".cursor/rules" },
   { category: "runtime-adapter", root: ".agents/rules" },
   { category: "agent-config", root: "agent-platform/configs/agents" },
+  { category: "agent-config", root: "agent-platform/configs/access" },
   { category: "template", root: "_templates/assistant-operating-principles" },
   { category: "project-doc", root: "agent-platform/docs" },
   { category: "project-doc", root: "presentation-agent/docs" },
@@ -80,6 +81,7 @@ export function buildSnapshot(repoRoot) {
   const requirements = collectRequirements(repoRoot);
   const historyDays = buildHistoryDays(documents);
   const folderStructure = buildFolderStructure(repoRoot, projects, documents);
+  const viewModeCatalog = collectViewModeCatalog(repoRoot);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
   const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
   const agentCatalog = collectAgentCatalog(repoRoot, coordination.agents || [], tasks);
@@ -87,7 +89,7 @@ export function buildSnapshot(repoRoot) {
   const activeAgents = (coordination.agents || []).filter((agent) => agent.status !== "idle").length;
 
   return {
-    schemaVersion: "2026-06-01",
+    schemaVersion: "2026-06-02",
     generatedAt: new Date().toISOString(),
     repoRootName: path.basename(repoRoot),
     stats: {
@@ -113,6 +115,7 @@ export function buildSnapshot(repoRoot) {
     documents,
     historyDays,
     folderStructure,
+    viewModeCatalog,
     categories,
     publicReview: {
       status: "review_required_before_public_deploy",
@@ -122,6 +125,31 @@ export function buildSnapshot(repoRoot) {
         "Regenerate the snapshot after any redaction and run npm run build again."
       ]
     }
+  };
+}
+
+export function collectViewModeCatalog(repoRoot) {
+  const registry = readJson(path.join(repoRoot, "agent-platform", "configs", "access", "view-mode-registry.json"), {
+    default_mode: "superadmin_developer",
+    modes: []
+  });
+  const modes = Array.isArray(registry.modes)
+    ? registry.modes
+        .filter((mode) => mode && typeof mode === "object")
+        .map((mode) => ({
+          id: mode.id || "",
+          label: mode.label || mode.id || "",
+          intent: mode.intent || "",
+          allowedSections: Array.isArray(mode.allowed_sections) ? mode.allowed_sections : [],
+          visibilityRules: mode.visibility_rules || {},
+          securityNotes: Array.isArray(mode.security_notes) ? mode.security_notes : []
+        }))
+        .filter((mode) => mode.id)
+    : [];
+
+  return {
+    defaultMode: registry.default_mode || "superadmin_developer",
+    modes
   };
 }
 

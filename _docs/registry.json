@@ -204,6 +204,8 @@
     "_docs/policies/memory-bootstrap-policy.ko.md",
     "_docs/policies/resource-leak-prevention-policy.ko.md",
     "_docs/policies/resource-leak-prevention-policy.en.md",
+    "_docs/policies/view-mode-policy.ko.md",
+    "_docs/policies/view-mode-policy.en.md",
     "_docs/policies/project-boundary-policy.ko.md",
     "_docs/policies/spec-driven-development-policy.ko.md",
     "_docs/operating-models/platform-operating-model.md",

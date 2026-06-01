@@ -7,6 +7,7 @@ import test from "node:test";
 import {
   buildSnapshot,
   collectAgentCatalog,
+  collectViewModeCatalog,
   extractHistoryDate,
   extractTitle,
   markdownToHtml,
@@ -109,6 +110,34 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.folderStructure.rootFolders.some((folder) => folder.path === "demo/"), true);
   assert.equal(snapshot.folderStructure.docsCategories[0].path, "_docs/instructions");
   assert.equal(snapshot.requirements[0].id, "REQ-WM-001");
+  assert.equal(snapshot.viewModeCatalog.defaultMode, "superadmin_developer");
+});
+
+test("collectViewModeCatalog reads platform access modes", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-view-mode-test-"));
+  fs.mkdirSync(path.join(root, "agent-platform", "configs", "access"), { recursive: true });
+  fs.writeFileSync(
+    path.join(root, "agent-platform", "configs", "access", "view-mode-registry.json"),
+    JSON.stringify({
+      default_mode: "superadmin_developer",
+      modes: [
+        {
+          id: "superadmin_developer",
+          label: "Super Admin Dev",
+          intent: "Full view",
+          allowed_sections: ["overview", "agents"],
+          visibility_rules: { foreground: ["all"] },
+          security_notes: ["Design only"]
+        }
+      ]
+    })
+  );
+
+  const catalog = collectViewModeCatalog(root);
+
+  assert.equal(catalog.defaultMode, "superadmin_developer");
+  assert.equal(catalog.modes.length, 1);
+  assert.deepEqual(catalog.modes[0].allowedSections, ["overview", "agents"]);
 });
 
 test("collectAgentCatalog merges definitions with runtime status", () => {
