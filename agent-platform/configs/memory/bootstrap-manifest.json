@@ -45,6 +45,7 @@
       "The platform identity narrative or top-level platform description changes.",
       "The AI assistant runtime adapter registry or tool-specific adapter files change.",
       "The AI usage gap profile, coaching workflow, prompt instruction quality gate, bounded clarification policy, non-blocking clarification policy, human decision inbox, interrupt/resume policy, model-adaptive prompting policy, or AI-use asset promotion rules change.",
+      "The unstructured data structuring profile, schema/provenance extraction contract, or structured-output validation workflow changes.",
       "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
       "The install mode registry, installation registry, or installation audit contract changes.",
       "The installable desktop software productization project, desktop distribution registry, or installer release gate policy changes.",
@@ -543,6 +544,18 @@
       "last_checked": "2026-06-01"
     },
     {
+      "id": "unstructured_data_structuring_profile",
+      "title": "Unstructured Data Structuring Profile",
+      "path": "agent-platform/configs/usage/unstructured-data-structuring-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "turning messy input into structured records",
+        "schema, provenance, null handling, and validation contract",
+        "requirements, evidence item, task, table, JSON, and evaluation input extraction"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
       "id": "agentmemory_md",
       "title": "AgentMemory.md",
       "url": "https://agentmemory.md/",
@@ -809,6 +822,17 @@
       ]
     },
     {
+      "id": "unstructured_data_structuring_profile_must_stay_discoverable",
+      "rule": "The unstructured data structuring profile must remain a warm memory anchor so future sessions treat AI's messy-input-to-structured-record strength as a platform capability with schema, provenance, null/ambiguity handling, and validation.",
+      "reason": "The user explicitly said AI is good at structuring unstructured data, and this capability should shape how the platform turns chats, documents, research, reviews, logs, and notes into reusable assets.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "structure-unstructured-data"
+      ]
+    },
+    {
       "id": "human_decision_inbox_must_stay_discoverable",
       "rule": "The human decision inbox must remain a warm memory anchor so future sessions can collect pending human answers, approvals, and preference decisions in one place, continue unblocked work, and resume affected work through checkpointed interrupt handling when answers arrive.",
       "reason": "The user explicitly identified unanswered questions as a major bottleneck and asked to collect decisions, work elsewhere until the human returns, then interrupt and resume the affected work.",
@@ -1036,6 +1060,7 @@
     "human_search_profile",
     "marketing_evidence_profile",
     "ai_usage_gap_profile",
+    "unstructured_data_structuring_profile",
     "research_agent_profile",
     "deep_research_profile",
     "coding_research_profile",
@@ -1085,6 +1110,7 @@
     "human_search_profile",
     "marketing_evidence_profile",
     "ai_usage_gap_profile",
+    "unstructured_data_structuring_profile",
     "research_agent_profile",
     "deep_research_profile",
     "coding_research_profile",
@@ -1350,6 +1376,14 @@
       "path": "agent-platform/configs/usage/ai-usage-gap-profile.json",
       "tier": "warm",
       "purpose": "AI usage gap diagnosis, prompt instruction quality, bounded clarification, non-blocking clarification, human decision inbox, interrupt/resume, and model-adaptive prompting profile for task framing, neutral instruction rewriting, blocked-decision isolation, unblocked-work continuation, weak/non-reasoning model two-pass compare/merge, task-fit judgment, iteration, verification, and durable asset promotion.",
+      "required": true,
+      "load_order": 24
+    },
+    {
+      "id": "unstructured_data_structuring_profile",
+      "path": "agent-platform/configs/usage/unstructured-data-structuring-profile.json",
+      "tier": "warm",
+      "purpose": "Schema, provenance, null handling, and validation profile for turning unstructured or semi-structured inputs into structured records and reusable platform assets.",
       "required": true,
       "load_order": 24
     },

@@ -30,7 +30,11 @@ Web search records, source lists, requirements, specs, plans, summaries, evaluat
 
 The platform does not stop at imitating human process. It looks for repeated actions across research, comparison, judgment, execution, and verification, then turns them into a better sequence, a smaller tool, a better prompt, or a clearer template. The goal is not more automation for its own sake; it is less repeated human work and less elapsed time.
 
-### 5. Installable But CLI-Neutral Execution Layer
+### 5. Transformation Layer From Unstructured Input To Structured Assets
+
+AI is strong at finding structure in scattered conversation, long documents, research material, reviews, logs, notes, and other messy input. The platform uses that strength to turn user intent and source material into requirements, specs, tasks, evidence items, tables, JSON, and evaluation inputs. Structured output is treated as trustworthy only when provenance and validation are attached.
+
+### 6. Installable But CLI-Neutral Execution Layer
 
 The platform can become installable software, but it must not become a wrapper around one CLI. The installed app provides the workspace, history, documents, evaluations, settings, and UI. External commands such as Codex CLI, Claude Code, GitHub CLI, package managers, and deployment CLIs attach as replaceable adapter capabilities. If a CLI is missing, only that capability is unavailable; the whole platform should continue and show a safe fallback path.
 
@@ -71,6 +75,7 @@ The platform should become sharper through use. Its strength is not decorative a
 Over time, it should move toward this shape:
 
 - When the user states a goal, the agent asks better questions and builds a research plan first.
+- Agents turn unstructured instructions and source material into structured records with schema, provenance, and validation.
 - Research agents collect evidence from official docs, papers, engineering blogs, community signals, and Korean local sources when relevant.
 - Implementation agents compare language, architecture, folder structure, and open-source options before choosing a maintainable path.
 - The execution layer can use many CLIs while staying independent through adapter contracts and permission boundaries.

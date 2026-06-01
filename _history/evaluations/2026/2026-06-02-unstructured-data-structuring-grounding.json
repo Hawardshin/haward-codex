@@ -1,0 +1,132 @@
+{
+  "task": "Ground factual claims for the unstructured data structuring platform capability.",
+  "output_summary": "The workspace now treats AI's ability to turn unstructured or semi-structured input into structured records as a shared platform capability with schema, provenance, null/ambiguity handling, and validation.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request_summary",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable summary of the user's unstructured data structuring request."
+    },
+    {
+      "evidence_id": "structuring_profile",
+      "source": "agent-platform/configs/usage/unstructured-data-structuring-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Self-documenting profile for schema-grounded unstructured-to-structured data work."
+    },
+    {
+      "evidence_id": "structuring_policy",
+      "source": "_docs/policies/unstructured-data-structuring-policy.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Workspace policy for using AI to structure messy input."
+    },
+    {
+      "evidence_id": "structuring_workflow",
+      "source": "_ops/workflows/67-structure-unstructured-data.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Operational workflow for structuring unstructured input."
+    },
+    {
+      "evidence_id": "structuring_prompt",
+      "source": "_ops/prompts/98-structure-unstructured-data.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Reusable prompt for structuring unstructured data."
+    },
+    {
+      "evidence_id": "philosophy",
+      "source": "_philosophy/agent-operating-philosophy.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Foundational platform philosophy updated with the principle."
+    },
+    {
+      "evidence_id": "google_document_ai",
+      "source": "https://docs.cloud.google.com/document-ai/docs/extracting-overview",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Google Cloud documentation on document extraction, custom extractor schemas, and layout parsing."
+    },
+    {
+      "evidence_id": "azure_custom_ner",
+      "source": "https://learn.microsoft.com/en-us/azure/ai-services/language-service/custom-named-entity-recognition/overview",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Microsoft documentation on extracting domain-specific entities from unstructured text."
+    },
+    {
+      "evidence_id": "aws_textract",
+      "source": "https://docs.aws.amazon.com/textract/latest/dg/what-is.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official AWS documentation on extracting document text, forms, and tables."
+    },
+    {
+      "evidence_id": "aws_textract_response_objects",
+      "source": "https://docs.aws.amazon.com/textract/latest/dg/how-it-works-document-layout.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official AWS documentation on block objects, location, and confidence for document extraction."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The user asked to reflect the principle that AI is good at structuring unstructured data.",
+      "claim_type": "user_instruction",
+      "support_level": "supported",
+      "evidence_ids": ["user_request_summary"],
+      "verification_steps": ["Inspect UR-2026-06-02-009 in the user request summary."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The workspace now has a profile for transforming unstructured or semi-structured input into structured records with schema, provenance, null handling, and validation.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["structuring_profile"],
+      "verification_steps": ["Inspect schema_contract, provenance_contract, validation_contract, target_structures, and structure_rules in the profile."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The workspace now exposes a policy, workflow, and reusable prompt for unstructured-data structuring.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["structuring_policy", "structuring_workflow", "structuring_prompt"],
+      "verification_steps": ["Inspect the policy, workflow 67, prompt 98, router, and index references."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The platform philosophy now treats unstructured-to-structured transformation as a core capability but not as factual proof by itself.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["philosophy"],
+      "verification_steps": ["Inspect the added philosophy principle and execution-structure link."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The design was informed by official document AI/entity extraction sources that support extracting fields, tables, key-value pairs, entities, locations, confidence, or schema-defined data from unstructured or semi-structured inputs.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": ["google_document_ai", "azure_custom_ner", "aws_textract", "aws_textract_response_objects"],
+      "verification_steps": ["Inspect the saved web search record and research note for checked sources and plan impact."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "This task defines the platform capability and workflow; it does not implement a new extractor.",
+    "Concrete extractor choices still need tool-specific evaluation, licensing, cost, security, and tests."
+  ],
+  "limitation_notes": [
+    "No OCR, LLM extraction, or document parsing dependency was installed.",
+    "No real unstructured dataset was converted in this task."
+  ]
+}

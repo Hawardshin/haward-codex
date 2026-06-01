@@ -42,27 +42,33 @@ This platform observes the way people actually research, compare, judge, execute
 
 Automation must not hide human-judgment checkpoints, validation criteria, or rollback boundaries. Before replacing a human process, make it explainable, automate it in small steps, and record whether it actually saved time.
 
-### 9. Projects Are Boundaries For Interests
+### 9. Treat Unstructured-To-Structured Work As A Core Capability
+
+One thing AI does well is find fields, patterns, and candidate structure inside messy speech, long documents, research notes, reviews, logs, and other unstructured input. This platform uses that strength to turn messy input into requirements, specs, tasks, evidence items, tables, JSON, and evaluation inputs.
+
+Structuring is not proof. The cleaner the structure looks, the easier it is to overtrust. Every material value should keep a schema, source location, missing or ambiguous state, and validation result. Structured output becomes a platform asset when a person can review it and tools can validate it.
+
+### 10. Projects Are Boundaries For Interests
 
 The shared operating environment applies to every project, but code, docs, settings, and artifacts for a specific interest belong inside that project. If an interest has an independent purpose and lifecycle, split it into a new root project.
 
-### 10. Records Are Interfaces For Future Agents
+### 11. Records Are Interfaces For Future Agents
 
 Docs and history are not passive storage. They are interfaces for the next worker. Korean docs make human tracking easier, while executable prompt bodies stay in English to save tokens.
 
-### 11. The User Holds Final Authority
+### 12. The User Holds Final Authority
 
 Agents can research and act with autonomy, but the user owns the final decision about goals, priorities, and acceptable risk. When product intent, safety, cost, publication, or hard-to-reverse changes require human judgment, the agent should ask clearly or surface an alert.
 
-### 12. Autonomy Requires Scope And Reversibility
+### 13. Autonomy Requires Scope And Reversibility
 
 As agents use more tools and touch more projects, scope, permissions, change boundaries, and rollback paths must be clear first. Fast execution matters less than being able to observe, stop, and reverse a bad action.
 
-### 13. Security And Privacy Are Preconditions
+### 14. Security And Privacy Are Preconditions
 
 Tokens, personal data, private research, and local scratch state should not be promoted into the knowledge base or durable artifacts. Installation, notifications, external deployment, public release, and agent memory should be handled through secret indirection, scoped access, publication review, and audit records.
 
-### 14. Operating Cost And Debt Are Design Objects
+### 15. Operating Cost And Debt Are Design Objects
 
 Running the full loop for everything makes the platform heavy. Accumulating fast temporary work creates agentic technical debt. Work modes, deferred backlogs, naming audit, structure audit, and workspace-health exist to manage the tradeoff between speed and quality.
 
@@ -78,6 +84,7 @@ Running the full loop for everything makes the platform heavy. Accumulating fast
 - Project boundary management: `_ops/workflows/25-project-boundary-management.md`
 - Research accumulation: `_research/`
 - Capability promotion: `_docs/governance/capability-governance.md`
+- Unstructured data structuring: `agent-platform/configs/usage/unstructured-data-structuring-profile.json`, `_ops/workflows/67-structure-unstructured-data.md`
 - Work timing and bottlenecks: `_ops/workflows/42-record-work-timing.md`, `_history/work-timings/`
 - Work modes and debt management: `agent-platform/configs/workflows/work-mode-registry.json`, `_ops/backlog/`
 - Structure and naming audits: `_tools/structure-audit/`, `_tools/naming-audit/`, `_tools/workspace-health/`

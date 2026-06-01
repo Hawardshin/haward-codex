@@ -8,6 +8,8 @@
 
 설치형 제품으로 발전해도 특정 CLI에 묶이지 않는다. 설치형 앱은 플랫폼의 작업 공간, 히스토리, 문서, 평가, 설정, UI를 제공하고, Codex CLI, Claude Code, GitHub CLI, Vercel CLI 같은 외부 명령은 필요할 때 교체 가능한 adapter capability로 붙여 사용한다.
 
+AI가 특히 잘하는 일 중 하나는 비정형 입력을 정형화하는 것이다. 이 플랫폼은 긴 대화, 조사 자료, 문서, 리뷰, 로그, 메모를 요구사항, 스펙, 태스크, evidence item, 표, JSON, 평가 입력처럼 검토 가능한 구조로 바꾸고, 각 값의 출처와 검증 상태를 함께 남긴다.
+
 ## 이 플랫폼은 무엇을 해결하는가
 
 AI와 오래 일할 때 문제는 답변 하나의 품질만이 아니다. 더 큰 문제는 무엇을 왜 결정했는지 사라지고, 좋은 조사와 나쁜 추정이 섞이고, 프로젝트가 늘어날수록 폴더와 히스토리와 스펙이 서로 어긋나는 것이다.
@@ -16,6 +18,7 @@ AI와 오래 일할 때 문제는 답변 하나의 품질만이 아니다. 더 �
 
 - 지시는 요구사항 후보로 바꾸고, 요구사항은 스펙과 계획과 검증 기준으로 연결한다.
 - 웹 검색과 공식 문서, 논문, 기술 블로그, 커뮤니티 신호를 통해 모델의 추정을 근거 있는 판단으로 바꾼다.
+- 비정형 자료를 schema, provenance, validation이 있는 정형 기록으로 바꾼다.
 - 모든 중요한 산출물에는 출처, 계획 근거, 검증 결과, 평가 기록, 커밋을 연결한다.
 - 반복되는 작업은 매번 새로 고민하지 않고 프롬프트, 워크플로, 도구, 템플릿, 스킬, 에이전트로 승격한다.
 - 인간이 실제로 수행하는 조사, 비교, 판단, 실행, 검증 프로세스를 관찰하고 자동화 가능한 최소 단위로 모델링한다.
@@ -58,6 +61,7 @@ AI와 오래 일할 때 문제는 답변 하나의 품질만이 아니다. 더 �
 - 모든 작업 산출물은 이 저장소의 git 이력으로 추적한다.
 - durable operating principle은 도구 독립형으로 관리하고, 도구별 instruction 파일은 얇은 adapter로 둔다.
 - 설치형 플랫폼은 특정 CLI wrapper가 아니다. 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`의 adapter contract를 통해 optional capability로 붙인다.
+- 비정형 입력을 정형화할 때는 `agent-platform/configs/usage/unstructured-data-structuring-profile.json`과 `_ops/workflows/67-structure-unstructured-data.md`를 사용해 schema, 출처, 모호성, 검증 결과를 남긴다.
 - Codex는 `AGENTS.md`, Claude Code는 `CLAUDE.md`와 `.claude/rules/`, Cursor는 `.cursor/rules/`, Antigravity는 `.agents/rules/`를 사용하되, 정책 원본은 `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`와 `_ops/assistant-runtimes/adapter-registry.json`에서 확인한다.
 - 의미 있는 변경 단위가 끝날 때마다 커밋한다.
 - 커밋이 만들어지면 바로 원격 저장소에 push한다.

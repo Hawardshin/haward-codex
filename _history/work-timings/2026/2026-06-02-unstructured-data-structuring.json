@@ -1,0 +1,69 @@
+{
+  "task_id": "2026-06-02-unstructured-data-structuring",
+  "title": "Unstructured data structuring platform capability",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked Document AI, custom NER, Textract, and structured information extraction sources."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured"
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added REQ-WS-054 and spec artifacts."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Profile, policy, workflow, and docs",
+      "status": "completed",
+      "measurement": "not_measured"
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Config contracts, memory bootstrap, docs/naming/structure audits, maps, boards, workspace snapshot, grounding, evaluator, timer check, and diff whitespace checks were run."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Evaluator returned ready_to_close. Follow-up ideas were recorded as future improvements, not blocking gaps."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Completed by the final close-out commit and push."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "Timing was not started at phase boundaries. Main cost is governance propagation across memory, requirements, specs, prompts, and docs.",
+    "improvement_candidates": [
+      "Create a governance scaffold generator for repeated durable-principle changes.",
+      "Later promote repeated structuring jobs into deterministic extractors or validated skills."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-unstructured-data-structuring.ko.md",
+    "_research/topics/data-structuring/2026-06-02-unstructured-data-structuring.ko.md",
+    "_specs/workspace-platform/2026-06-02-unstructured-data-structuring/plan.ko.md"
+  ]
+}

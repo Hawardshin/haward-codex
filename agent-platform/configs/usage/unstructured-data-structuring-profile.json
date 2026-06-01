@@ -1,0 +1,358 @@
+{
+  "schema_version": "2026-06-02",
+  "name": "unstructured-data-structuring-profile",
+  "purpose": "Defines how agents should use AI's strength at turning unstructured or semi-structured inputs into structured records, tables, JSON, requirements, evidence items, tasks, and reviewable knowledge assets.",
+  "reader_guide": {
+    "summary": "Use this profile when a task contains messy notes, chat history, documents, PDFs, reviews, research sources, transcripts, screenshots, logs, or mixed-format evidence that should become a reliable structure.",
+    "how_to_read": [
+      "Start with trigger_situations to decide whether structuring is the right move.",
+      "Use target_structures to select the output form before extracting facts.",
+      "Use structuring_stages to move from messy input to schema, extraction, normalization, validation, and reusable artifact.",
+      "Use provenance_contract so each extracted value can be traced back to its source span, file, URL, or observation.",
+      "Use validation_contract before treating structured output as factual evidence or automation input."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-06-02",
+    "update_triggers": [
+      "A repeated task involves turning messy input into requirements, specs, tasks, records, tables, or JSON.",
+      "Structured extraction output is used as evidence for a plan, report, evaluation, or automation.",
+      "The platform adds a deterministic extractor, schema validator, OCR/document parser, or source normalizer.",
+      "New research or tooling changes the best practice for information extraction, document AI, or schema-grounded LLM output.",
+      "A structured output causes errors because provenance, null handling, confidence, or validation rules were missing."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "google_document_ai_extraction_overview",
+      "title": "Google Cloud Document AI Extraction Overview",
+      "url": "https://docs.cloud.google.com/document-ai/docs/extracting-overview",
+      "source_type": "official_docs",
+      "used_for": [
+        "document extraction product categories",
+        "schema-defined custom extraction",
+        "layout to structured representation"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "azure_custom_ner_overview",
+      "title": "Azure AI Language Custom Named Entity Recognition Overview",
+      "url": "https://learn.microsoft.com/en-us/azure/ai-services/language-service/custom-named-entity-recognition/overview",
+      "source_type": "official_docs",
+      "used_for": [
+        "domain-specific entity extraction from unstructured text",
+        "information extraction scenarios"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "aws_textract_documentation",
+      "title": "Amazon Textract Documentation",
+      "url": "https://docs.aws.amazon.com/textract/",
+      "source_type": "official_docs",
+      "used_for": [
+        "document text and table/form extraction",
+        "OCR and document analysis boundary"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "aws_textract_what_is",
+      "title": "What is Amazon Textract?",
+      "url": "https://docs.aws.amazon.com/textract/latest/dg/what-is.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "unstructured and structured document data extraction",
+        "forms and tables as structured output"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "structured_information_extraction_scientific_text",
+      "title": "Structured information extraction from scientific text with large language models",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10869356/",
+      "source_type": "paper",
+      "used_for": [
+        "schema-following structured information extraction",
+        "LLMs for extracting records from scientific text",
+        "need for task-specific evaluation"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "llm_schema_discovery",
+      "title": "LLMs4SchemaDiscovery: A Human-in-the-Loop Workflow for Scientific Schema Mining",
+      "url": "https://research.tue.nl/en/publications/llms4schemadiscovery-a-human-in-the-loop-workflow-for-scientific-/",
+      "source_type": "paper",
+      "used_for": [
+        "schema mining from unstructured text",
+        "human feedback for schema refinement"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "ai_usage_gap_profile",
+      "title": "AI Usage Gap Profile",
+      "path": "agent-platform/configs/usage/ai-usage-gap-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "task-fit judgment",
+        "prompt quality and verification"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "research_agent_profile",
+      "title": "Research Agent Profile",
+      "path": "agent-platform/configs/research/research-agent-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "evidence extraction",
+        "citation grounding",
+        "skeptic review"
+      ],
+      "last_checked": "2026-06-02"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "schema_before_extraction",
+      "rule": "Define or select a target schema before extracting values from messy input.",
+      "reason": "Without a schema, the model may summarize fluently while losing fields, boundaries, units, or null cases.",
+      "applies_to": [
+        "target_structures",
+        "schema_contract",
+        "structuring_stages"
+      ]
+    },
+    {
+      "id": "preserve_source_provenance",
+      "rule": "Every material extracted value should keep a source pointer such as file path, URL, document page, row, timestamp, quoted span, screenshot region, or observation note.",
+      "reason": "Structured output is useful only when the user can audit where the value came from.",
+      "applies_to": [
+        "provenance_contract",
+        "output_contract"
+      ]
+    },
+    {
+      "id": "separate_extraction_from_interpretation",
+      "rule": "Separate directly extracted values from inferred classifications, summaries, scores, or recommendations.",
+      "reason": "Facts, model judgments, and derived labels require different confidence and validation treatment.",
+      "applies_to": [
+        "output_contract",
+        "quality_risks"
+      ]
+    },
+    {
+      "id": "nulls_are_explicit",
+      "rule": "Represent missing, unknown, ambiguous, conflicting, or not-applicable fields explicitly instead of filling plausible values.",
+      "reason": "Hallucinated structure is worse than an honest empty field because downstream tools may treat it as data.",
+      "applies_to": [
+        "schema_contract",
+        "validation_contract"
+      ]
+    },
+    {
+      "id": "validate_before_automation",
+      "rule": "Before structured output drives automation, plans, reports, or decisions, validate schema conformance, field coverage, source grounding, contradictions, and sample rows.",
+      "reason": "AI is good at structuring messy data, but extraction errors can become systematic when reused.",
+      "applies_to": [
+        "validation_contract",
+        "reuse_targets"
+      ]
+    },
+    {
+      "id": "human_review_for_high_impact_fields",
+      "rule": "Fields that affect money, legal/medical/safety decisions, public claims, or irreversible actions need human review or stronger independent verification.",
+      "reason": "Structured output can appear more certain than the evidence supports.",
+      "applies_to": [
+        "risk_classes",
+        "validation_contract"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "trigger_situations",
+      "meaning": "When to use this profile.",
+      "required": true
+    },
+    {
+      "field": "target_structures",
+      "meaning": "Candidate structured outputs such as JSON, tables, requirements, tasks, evidence items, and decision records.",
+      "required": true
+    },
+    {
+      "field": "structuring_stages",
+      "meaning": "Step-by-step flow from messy input to validated structured artifact.",
+      "required": true
+    },
+    {
+      "field": "provenance_contract",
+      "meaning": "How extracted values remain traceable to their source.",
+      "required": true
+    },
+    {
+      "field": "validation_contract",
+      "meaning": "Checks required before using structured output downstream.",
+      "required": true
+    }
+  ],
+  "trigger_situations": [
+    "The user provides long, messy, or mixed-format text and asks for action.",
+    "Chat history should become requirements, specs, tasks, or a decision log.",
+    "Research sources should become evidence items, source tables, or citation-backed claims.",
+    "Reviews, survey responses, support tickets, interviews, logs, transcripts, or notes should become categories, tags, counts, or patterns.",
+    "Documents, PDFs, screenshots, or web pages should become structured records or extraction targets.",
+    "A workflow repeats because humans keep manually copying values from messy sources into tables or JSON."
+  ],
+  "target_structures": [
+    {
+      "id": "requirements",
+      "outputs": [
+        "requirement_id",
+        "statement",
+        "source_request",
+        "priority",
+        "acceptance_check",
+        "artifact_targets"
+      ]
+    },
+    {
+      "id": "evidence_items",
+      "outputs": [
+        "claim",
+        "source",
+        "source_type",
+        "accessed_on",
+        "source_span_or_location",
+        "support_level",
+        "limitations"
+      ]
+    },
+    {
+      "id": "task_records",
+      "outputs": [
+        "task_id",
+        "owner",
+        "dependency",
+        "touch_paths",
+        "verification",
+        "status"
+      ]
+    },
+    {
+      "id": "review_or_survey_table",
+      "outputs": [
+        "respondent_or_source",
+        "topic",
+        "sentiment_or_label",
+        "quoted_evidence",
+        "confidence",
+        "notes"
+      ]
+    },
+    {
+      "id": "json_api_or_config",
+      "outputs": [
+        "schema_version",
+        "reader_guide",
+        "reference_links",
+        "structure_rules",
+        "field_guide",
+        "records"
+      ]
+    }
+  ],
+  "structuring_stages": [
+    "input_inventory",
+    "target_schema_selection",
+    "source_segmentation",
+    "field_extraction",
+    "normalization",
+    "deduplication",
+    "ambiguity_and_conflict_marking",
+    "provenance_attachment",
+    "schema_validation",
+    "sample_review",
+    "artifact_publication"
+  ],
+  "schema_contract": {
+    "required_schema_fields": [
+      "schema_version",
+      "record_type",
+      "field_definitions",
+      "required_fields",
+      "nullable_fields",
+      "allowed_values_or_patterns",
+      "provenance_fields",
+      "validation_rules"
+    ],
+    "null_markers": [
+      "unknown",
+      "not_provided",
+      "not_applicable",
+      "conflicting",
+      "ambiguous"
+    ],
+    "normalization_notes": [
+      "Keep original value and normalized value when units, dates, names, or categories are transformed.",
+      "Do not silently infer missing fields. Add an inference note and support level when a value is derived."
+    ]
+  },
+  "provenance_contract": {
+    "minimum_fields": [
+      "source_id",
+      "source_path_or_url",
+      "accessed_on_or_observed_on",
+      "source_location",
+      "extraction_method",
+      "support_level"
+    ],
+    "source_location_examples": [
+      "document page",
+      "line number",
+      "table row",
+      "timestamp",
+      "review URL",
+      "screenshot region",
+      "chat summary section"
+    ]
+  },
+  "validation_contract": {
+    "checks": [
+      "schema_conformance",
+      "required_field_coverage",
+      "provenance_presence",
+      "source_sample_audit",
+      "duplicate_record_check",
+      "contradiction_check",
+      "unsupported_inference_check",
+      "downstream_consumer_smoke_test"
+    ],
+    "blocking_gaps": [
+      "structured records without source pointers",
+      "required fields filled with guesses",
+      "claims or numeric values without provenance",
+      "high-impact fields without review plan",
+      "schema mismatch with downstream consumer"
+    ]
+  },
+  "quality_risks": [
+    "overconfident structured hallucinations",
+    "lost context from aggressive summarization",
+    "schema drift across repeated runs",
+    "duplicate records from overlapping sources",
+    "unit/date/category normalization errors",
+    "bias from extracting only easily visible fields"
+  ],
+  "reuse_targets": [
+    "_requirements/",
+    "_specs/",
+    "_history/request-traces/",
+    "_history/evaluations/",
+    "_research/",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "project-specific docs or data folders"
+  ]
+}
