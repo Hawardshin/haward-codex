@@ -1,0 +1,116 @@
+{
+  "task": "Ground final claims for the infrastructure expert agent work",
+  "output_summary": "A reusable infrastructure expert agent spec, docs, requirement, specs, and history records were added and verified.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "agent-spec",
+      "source": "agent-platform/configs/agents/infrastructure-expert-agent.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "The created agent spec is the source of truth for the new agent metadata and policy."
+    },
+    {
+      "evidence_id": "agent-docs",
+      "source": "agent-platform/docs/infrastructure-expert-agent.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "The docs describe the intended role, safety rules, and validation commands."
+    },
+    {
+      "evidence_id": "requirement",
+      "source": "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "The shared requirements baseline records REQ-WS-063."
+    },
+    {
+      "evidence_id": "web-record",
+      "source": "_history/web-searches/2026/2026-06-02-infrastructure-expert-agent.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "The search record lists external official references and plan impact."
+    },
+    {
+      "evidence_id": "validation-output",
+      "source": "local command outputs in this work turn",
+      "source_type": "tool_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Commands returned exit code 0 for agent inspection/list/orchestration, tests, monitor build, and workspace health."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now contains `infrastructure-expert-agent` as an agent spec.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "agent-spec"
+      ],
+      "verification_steps": [
+        "Read the agent spec file.",
+        "Ran inspect-agent and list-agents."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The agent is documented in Korean and English.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "agent-docs"
+      ],
+      "verification_steps": [
+        "Checked docs files and docs-audit."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "REQ-WS-063 was added for the infrastructure expert agent.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "requirement"
+      ],
+      "verification_steps": [
+        "Checked the shared requirements baseline."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The work used official infrastructure-related sources including SRE, AWS/Azure Well-Architected, Kubernetes, and Terraform references.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "web-record"
+      ],
+      "verification_steps": [
+        "Checked the saved web-search record."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "The relevant validation commands passed.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "validation-output"
+      ],
+      "verification_steps": [
+        "Ran local validation commands and reviewed exit codes."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "No provider-specific infrastructure target was selected, so future infrastructure work must re-check the selected provider's current official docs."
+  ],
+  "limitation_notes": [
+    "No real infrastructure command, CLI installation, provisioning, migration, or deletion was performed."
+  ]
+}

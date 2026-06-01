@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-02",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, platform description narrative, platform presentation pack, coding project bootstrap, work timing/bottleneck visibility, deep research agent, PPT reference expansion, non-blocking clarification, human decision inbox interrupt/resume, install mode split, installable software productization, agent/history visualization, runtime language direction, runtime language research/design workflow, CLI adapter boundary, unstructured-data structuring capability, work mode enforcement, omission prevention gate, resource leak prevention gate, CLI pipeline orchestration gate, CLI pipeline file/artifact handoff contract, reusable agent creation/orchestration registry, view mode selection, installable desktop user-flow design, source code viewer, agent collaboration board, and subtle cute UI tone work tracked. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, platform description narrative, platform presentation pack, coding project bootstrap, work timing/bottleneck visibility, deep research agent, PPT reference expansion, non-blocking clarification, human decision inbox interrupt/resume, install mode split, installable software productization, agent/history visualization, runtime language direction, runtime language research/design workflow, CLI adapter boundary, unstructured-data structuring capability, work mode enforcement, omission prevention gate, resource leak prevention gate, CLI pipeline orchestration gate, CLI pipeline file/artifact handoff contract, reusable agent creation/orchestration registry, view mode selection, installable desktop user-flow design, source code viewer, agent collaboration board, subtle cute UI tone, and infrastructure expert agent work tracked. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -13,6 +13,26 @@
     }
   ],
   "tasks": [
+    {
+      "id": "2026-06-02-infrastructure-expert-agent",
+      "title": "Add reusable infrastructure expert agent",
+      "project": "agent-platform",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-02",
+      "updated_at": "2026-06-02",
+      "next_action": "No action. Future infrastructure, deployment, cloud, SRE, IaC, Kubernetes, security, cost, observability, backup/DR, or production-readiness work should use infrastructure-expert-agent and provider-specific official docs before execution.",
+      "blockers": [],
+      "references": [
+        "agent-platform/configs/agents/infrastructure-expert-agent.json",
+        "agent-platform/docs/infrastructure-expert-agent.ko.md",
+        "_specs/workspace-platform/2026-06-02-infrastructure-expert-agent/",
+        "_history/web-searches/2026/2026-06-02-infrastructure-expert-agent.ko.md"
+      ],
+      "timing_report": "_history/work-timings/2026/2026-06-02-infrastructure-expert-agent.json",
+      "evaluation_report": "_history/evaluations/2026/2026-06-02-infrastructure-expert-agent.ko.md"
+    },
     {
       "id": "2026-06-02-subtle-cute-ui-tone",
       "title": "Add subtle cute UI tone policy and monitor accents",

@@ -1,0 +1,40 @@
+{
+  "schema_version": "2026-06-01",
+  "work_id": "2026-06-02-infrastructure-expert-agent",
+  "work_mode": "governance",
+  "summary": "Added an infrastructure expert agent spec with source-grounded SRE/cloud/IaC/Kubernetes safety policy, docs, specs, and evaluation records.",
+  "time_zone": "Asia/Seoul",
+  "timing_status": "measured_estimate",
+  "phases": [
+    {
+      "phase_id": "web_research",
+      "status": "measured_estimate",
+      "duration_minutes": 8,
+      "notes": "Checked official SRE, cloud well-architected, Kubernetes production, and Terraform style sources."
+    },
+    {
+      "phase_id": "local_contract_review",
+      "status": "measured_estimate",
+      "duration_minutes": 7,
+      "notes": "Reviewed existing agent specs, orchestration registry, requirements, and history conventions."
+    },
+    {
+      "phase_id": "implementation",
+      "status": "measured_estimate",
+      "duration_minutes": 20,
+      "notes": "Added the agent spec, docs, requirement, specs, and research/history records."
+    },
+    {
+      "phase_id": "verification",
+      "status": "measured_estimate",
+      "duration_minutes": 12,
+      "notes": "Ran agent inspection/list/orchestration, unit tests, config/docs checks, workspace maps, task board, workspace health, monitor collect/test/check/build, omission, grounding, and evaluator checks."
+    }
+  ],
+  "slowest_phase": "implementation",
+  "bottleneck_candidates": [
+    "Governance artifacts for a durable platform agent take longer than the JSON agent spec itself.",
+    "Infrastructure scope is broad, so safety boundaries must be explicit even without a selected provider."
+  ],
+  "notes": "Durations are estimates because the turn did not start with an external timer."
+}

@@ -1,0 +1,121 @@
+{
+  "initial_instruction": "The user requested: '인프라 전문가'.",
+  "result_summary": "Added a reusable infrastructure expert agent spec with official-source evidence lanes, human checkpoints, rollback, resource/CLI safety policy, Korean/English docs, requirements, specs, search records, and history links.",
+  "work_mode": "governance",
+  "changed_files": [
+    "agent-platform/configs/agents/infrastructure-expert-agent.json",
+    "agent-platform/docs/infrastructure-expert-agent.ko.md",
+    "agent-platform/docs/infrastructure-expert-agent.en.md",
+    "agent-platform/README.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-infrastructure-expert-agent.ko.md",
+    "_requirements/changes/2026-06-02-infrastructure-expert-agent.en.md",
+    "_requirements/reviews/2026-06-02-infrastructure-expert-agent.ko.md",
+    "_requirements/reviews/2026-06-02-infrastructure-expert-agent.en.md",
+    "_specs/workspace-platform/2026-06-02-infrastructure-expert-agent/",
+    "_research/topics/infrastructure/2026-06-02-infrastructure-expert-agent.ko.md",
+    "_research/topics/infrastructure/2026-06-02-infrastructure-expert-agent.en.md",
+    "_history/web-searches/2026/2026-06-02-infrastructure-expert-agent.ko.md",
+    "_history/plans/2026/2026-06-02-infrastructure-expert-agent.ko.md",
+    "_history/request-traces/2026/2026-06-02-infrastructure-expert-agent.ko.md",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/maps/repository-map.md",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json"
+  ],
+  "verification": [
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/infrastructure-expert-agent.json: passed",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents: infrastructure-expert-agent listed",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json: ready",
+    "cd agent-platform && PYTHONPATH=src python3 -m unittest discover -s tests: 150 tests OK",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json: self_documenting",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "python3 _tools/workspace-index/src/workspace_index.py: updated maps",
+    "python3 _tools/task-board/src/task_board.py: updated boards",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean with pre-existing presentation-agent generated-output warnings",
+    "python3 _tools/workspace-health/src/workspace_health.py --category governance --category projects --category tools: 18 checks passed",
+    "cd workspace-monitor && npm run collect && npm test && npm run check && npm run build: passed"
+  ],
+  "references_checked": [
+    "https://sre.google/books/",
+    "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html",
+    "https://learn.microsoft.com/en-us/azure/well-architected/",
+    "https://kubernetes.io/docs/setup/production-environment/",
+    "https://developer.hashicorp.com/terraform/language/style",
+    "agent-platform/configs/orchestration/agent-orchestration-registry.json",
+    "agent-platform/configs/agents/agent-orchestrator-agent.json",
+    "agent-platform/README.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-infrastructure-expert-agent-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-02-infrastructure-expert-agent.ko.md",
+    "_history/source-provenance/2026/2026-06-02-infrastructure-expert-agent.en.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-02-infrastructure-expert-agent.ko.md",
+    "_history/plan-evidence/2026/2026-06-02-infrastructure-expert-agent.en.md",
+    "_specs/workspace-platform/2026-06-02-infrastructure-expert-agent/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-infrastructure-expert-agent.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-infrastructure-expert-agent-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-infrastructure-expert-agent.ko.md",
+    "_history/web-searches/2026/2026-06-02-infrastructure-expert-agent.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-infrastructure-expert-agent.ko.md",
+    "_requirements/reviews/2026-06-02-infrastructure-expert-agent.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-infrastructure-expert-agent/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-infrastructure-expert-agent/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-infrastructure-expert-agent/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-infrastructure-expert-agent/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-infrastructure-expert-agent/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-infrastructure-expert-agent.ko.md",
+    "_history/request-traces/2026/2026-06-02-infrastructure-expert-agent.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-infrastructure-expert-agent.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "When a real infrastructure target appears, add provider-specific project templates and readiness checklists.",
+    "Consider adding an infrastructure-decision template after two or more real uses reveal repeated fields."
+  ]
+}
