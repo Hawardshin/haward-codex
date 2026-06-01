@@ -9,4 +9,4 @@
 | Plan | `_specs/workspace-platform/2026-06-01-naming-conventions-audit/plan.en.md` |
 | Implementation | `_ops/naming/naming-policy.json`, `_tools/naming-audit/`, `_docs/governance/naming-governance.en.md` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-naming-conventions-audit.en.md` |
-| Commit | Pending |
+| Commit | `2ecab47` |
