@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-06-01",
   "name": "ai-usage-gap-profile",
-  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: question and instruction quality, bounded clarification, non-blocking clarification, model-adaptive prompting, task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
+  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: question and instruction quality, bounded clarification, non-blocking clarification, human decision inbox, interrupt/resume, model-adaptive prompting, task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
   "reader_guide": {
     "summary": "Use this profile when a user asks how to use AI better, when an AI-assisted task is vague, when outputs repeatedly miss intent, or when the platform should coach a user from one-off prompting toward reliable workflows.",
     "how_to_read": [
@@ -10,7 +10,8 @@
       "Use strong_user_behaviors as target behaviors to reinforce.",
       "Use bridge_interventions to choose the smallest useful improvement.",
       "Use agent_response_contract to shape how the assistant should help in the current task.",
-      "Use non_blocking_clarification_policy when a pending answer should block only a specific decision, not the whole task."
+      "Use non_blocking_clarification_policy when a pending answer should block only a specific decision, not the whole task.",
+      "Use human_decision_inbox_policy when multiple human decisions should be collected, answered later, and resumed through an interrupt-safe workflow."
     ],
     "owner": "agent-platform",
     "last_reviewed": "2026-06-01",
@@ -20,7 +21,7 @@
       "A new workflow, prompt, tool, or skill is added to help users use AI better.",
       "The platform's coaching, clarification, or evaluation behavior changes.",
       "The model capability profile or two-pass prompting policy changes.",
-      "The clarification question budget, question format, convergence rule, blocked-decision isolation, or non-blocking progress rule changes."
+      "The clarification question budget, question format, convergence rule, blocked-decision isolation, non-blocking progress rule, human decision inbox, or interrupt/resume rule changes."
     ]
   },
   "reference_links": [
@@ -319,6 +320,39 @@
         "rest-of-workflow continuation as a non-blocking pattern"
       ],
       "last_checked": "2026-06-02"
+    },
+    {
+      "id": "langchain_human_in_the_loop",
+      "title": "Human-in-the-Loop",
+      "url": "https://docs.langchain.com/oss/python/langchain/human-in-the-loop",
+      "source_type": "official_docs",
+      "used_for": [
+        "agent pause for pending human decisions",
+        "resume with explicit approval or response"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "microsoft_agent_framework_ag_ui_workflows",
+      "title": "Workflows with AG-UI",
+      "url": "https://learn.microsoft.com/en-us/agent-framework/integrations/ag-ui/workflows",
+      "source_type": "official_docs",
+      "used_for": [
+        "pending request events",
+        "resume payloads keyed by interrupt ID"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "conductor_human_task",
+      "title": "Human Task",
+      "url": "https://docs.conductor-oss.org/documentation/configuration/workflowdef/systemtasks/human-task.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "human task waits for an external signal",
+        "workflow state for external human response"
+      ],
+      "last_checked": "2026-06-02"
     }
   ],
   "structure_rules": [
@@ -367,6 +401,16 @@
         "non_blocking_clarification_policy",
         "blocked_decision_record",
         "agent_response_contract"
+      ]
+    },
+    {
+      "id": "human_decisions_need_an_inbox_and_resume_contract",
+      "rule": "Collect pending human decisions in _ops/coordination/human-decision-inbox.json with answer format, blocked work, unblocked work, checkpoint requirement, interrupt policy, and resume_action.",
+      "reason": "A human should be able to return later, answer a batch of decisions, and let the agent resume affected work without losing current context.",
+      "applies_to": [
+        "human_decision_inbox_policy",
+        "agent_response_contract",
+        "bridge_interventions"
       ]
     },
     {
@@ -464,6 +508,11 @@
       "required": true
     },
     {
+      "field": "human_decision_inbox_policy",
+      "meaning": "Rules for centralizing human decision records and resuming affected work when answers arrive.",
+      "required": true
+    },
+    {
       "field": "model_capability_profiles",
       "meaning": "Prompting and retry strategy profiles for reasoning, general, weak, or uncertain models.",
       "required": true
@@ -479,6 +528,7 @@
     "The user says questions or instructions must be improved before AI can answer well.",
     "The user says vague or poor instructions should cause the AI to ask clarifying counter-questions.",
     "The user says unanswered clarification questions block too much work or create an AI-era bottleneck.",
+    "The user wants pending questions collected in one place and resumed when the human returns.",
     "A request is too vague to produce a useful result without adding context, criteria, or examples.",
     "A request is biased, leading, or asks the model to confirm a preferred conclusion.",
     "The user distinguishes weak/non-reasoning models from strong/reasoning models or asks for model-specific usage strategy.",
@@ -516,6 +566,17 @@
         "no resume path for merging the later answer"
       ],
       "first_intervention": "Create a blocked_decision record for the dependent choice, continue unaffected work, record assumptions/defaults, and define the resume_action for when the answer arrives."
+    },
+    {
+      "id": "scattered_human_decisions",
+      "symptom": "Pending questions, approvals, or preference decisions are spread across chat, docs, and task notes, so the human cannot answer them as a batch and the agent cannot resume reliably.",
+      "likely_root_causes": [
+        "no central decision inbox",
+        "missing stable decision IDs",
+        "resume actions not recorded at the time of asking",
+        "no interrupt-safe checkpoint protocol"
+      ],
+      "first_intervention": "Register each decision in the human decision inbox, continue unblocked work, and resume through checkpointed interrupt handling when the answer arrives."
     },
     {
       "id": "bad_or_biased_instruction",
@@ -688,6 +749,22 @@
       ]
     },
     {
+      "id": "decision_inbox_interrupt_resume",
+      "use_when": [
+        "scattered_human_decisions",
+        "global_pause_on_clarification",
+        "clarification_loop_risk"
+      ],
+      "action": "Create or update a human decision inbox item, batch related decisions, keep safe unblocked_work moving, checkpoint current work when a human answer arrives, then interrupt or schedule resume according to priority and risk.",
+      "output_artifacts": [
+        "human decision inbox item",
+        "decision batch",
+        "checkpoint summary",
+        "resume action result",
+        "decision history entry"
+      ]
+    },
+    {
       "id": "bias_neutralization",
       "use_when": [
         "bad_or_biased_instruction"
@@ -793,6 +870,8 @@
     "If the user does not answer or the answer remains vague after the budget is used, converge through explicit assumptions, option-based defaults, ship-first-then-confirm, or explicit deferral.",
     "Do not pause the entire task just because one answer is pending; isolate the dependent decision as blocked_decision and continue safe unblocked_work.",
     "When continuing while a decision is pending, record assumptions, defaults, deferred items, and the resume_action for merging or correcting the work after the user answer arrives.",
+    "When there are multiple pending human decisions, collect them in _ops/coordination/human-decision-inbox.json instead of scattering them through chat.",
+    "When a human answer arrives, checkpoint current work before interrupting, then resume only the affected task or schedule the resume at the next safe point.",
     "For high-risk, ambiguous, or user-preference-sensitive gaps, use spec/source reconciliation or clarification_needed alerts, but still keep the question set short and decision-focused."
   ],
   "asset_promotion_rules": [
@@ -1043,6 +1122,45 @@
       "forgetting to merge or correct assumption-based work after the answer arrives"
     ]
   },
+  "human_decision_inbox_policy": {
+    "source_of_truth": "_ops/coordination/human-decision-inbox.json",
+    "principle": "Human decisions are first-class workflow events, not loose chat messages.",
+    "create_inbox_item_when": [
+      "a user answer blocks a decision, approval, preference, spec/source choice, or high-risk action",
+      "multiple questions should be answered together later",
+      "work should continue until the human returns",
+      "the answer should trigger interrupt/resume rather than restarting from memory"
+    ],
+    "required_item_fields": [
+      "id",
+      "question",
+      "options",
+      "answer_format",
+      "decision_impact",
+      "blocked_work",
+      "unblocked_work",
+      "assumptions",
+      "notification_event",
+      "interrupt_policy",
+      "checkpoint_required",
+      "resume_action"
+    ],
+    "answer_arrival_protocol": [
+      "match answer to decision id or clear context",
+      "mark decision as answered",
+      "checkpoint current work before switching context",
+      "interrupt immediately only when priority or risk justifies it",
+      "execute resume_action on affected work",
+      "run targeted verification",
+      "record decision_history and return to interrupted work if still relevant"
+    ],
+    "anti_patterns": [
+      "asking unrelated questions one by one instead of batching them",
+      "losing pending decisions in chat history",
+      "interrupting current work without checkpointing",
+      "resuming from an answer without a recorded resume_action"
+    ]
+  },
   "risk_controls": [
     "For factual claims, use web search or source documents and grounding checks.",
     "For code, use official docs, reference implementations, tests, and review.",
@@ -1055,6 +1173,7 @@
     "The response includes at least one concrete bridge intervention when a gap exists.",
     "Durable lessons are saved as docs, prompts, workflows, templates, tools, skills, configs, or history when reusable.",
     "Pending-answer dependencies are isolated as blocked_decision records and safe unblocked_work continues when useful.",
+    "Human decisions that require later answers are collected in the human decision inbox with checkpoint and resume contracts.",
     "Factual claims about AI usage research are source-grounded."
   ]
 }

@@ -91,6 +91,21 @@ Default rules for non-blocking progress:
 
 This rule reduces a major AI-era bottleneck. If the user cannot answer immediately, the agent should still do useful work and leave only the human-dependent decision small and explicit.
 
+### Human Decision Inbox And Interrupt Resume
+
+When multiple decisions need human answers, do not leave them scattered in chat. Collect every `blocked_decision`, `clarification_needed`, approval, and preference decision in `_ops/coordination/human-decision-inbox.json`.
+
+Each decision item includes:
+
+- stable decision ID
+- question, options, recommended default, and answer format
+- blocked work and still-unblocked work
+- assumptions and risks while waiting
+- `resume_action` to run after the answer arrives
+- checkpoint fields required before interrupting current work
+
+When the human returns with an answer, the agent checkpoints current work first. If the answer is high priority or directly unblocks the current user goal, the agent interrupts and resumes the affected work immediately. Otherwise, it schedules resume at the next safe point. In both cases, the agent updates inbox status and decision history after applying the answer.
+
 ## Model-Adaptive Strategy
 
 Strong and weak models should not be used the same way. A weak model that is not optimized for reasoning can produce unstable first answers, so when cost and latency allow and task variance is high, two independent attempts or a draft-critique-revise loop should be a default candidate strategy.
@@ -117,6 +132,7 @@ Operating rules:
 - Do not block unnecessarily on vague requests. For low-risk work, make reasonable assumptions and record them with verification paths.
 - When ambiguity would materially change the result, ask clarifying counter-questions, but limit the rounds and question count with a `clarification_budget`.
 - Do not stop the whole task while waiting for a clarification answer. Isolate only the dependent decision as `blocked_decision` and continue unaffected work as `unblocked_work`.
+- Collect multiple pending answer items in the human decision inbox, then checkpoint current work and interrupt/resume by priority and risk when the human answers.
 - Rewrite biased or conclusion-seeking instructions by separating the user's intent from factual claims and neutralizing the task.
 - For high-risk or preference-sensitive ambiguity, use `clarification_needed`.
 - Effective AI-use patterns should not remain in chat; they should become repository assets.

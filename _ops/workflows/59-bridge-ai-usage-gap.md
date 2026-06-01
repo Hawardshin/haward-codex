@@ -20,6 +20,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - `vague_intent`
    - `clarification_loop_risk`
    - `global_pause_on_clarification`
+   - `scattered_human_decisions`
    - `bad_or_biased_instruction`
    - `no_output_contract`
    - `deterministic_truth_machine_assumption`
@@ -35,6 +36,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - instruction quality gate
    - bounded clarification
    - non-blocking progress
+   - decision inbox interrupt/resume
    - bias neutralization
    - task-fit check
    - iteration scaffold
@@ -67,10 +69,12 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - `assumptions`: explicit assumptions/defaults used while waiting;
    - `resume_action`: how to merge or correct the work after the answer arrives.
 15. Do not pause the whole task unless every meaningful next step depends on the answer or proceeding would be unsafe.
-16. If the lesson is reusable, save it as a prompt, workflow, template, tool, skill, config, operating model, or history note.
-17. If ambiguity is high-risk or user-preference-sensitive, use spec/source reconciliation or `clarification_needed`, but keep the question set short and decision-focused.
-18. Ground factual claims before close-out.
-19. Evaluate whether the intervention actually reduced the gap against the initial request.
+16. If there are multiple pending human decisions, or if the answer should trigger a later resume, use `_ops/workflows/61-human-decision-inbox.md` and register the decision in `_ops/coordination/human-decision-inbox.json`.
+17. When a human answer arrives, checkpoint current work before interrupting, then run the recorded `resume_action` or schedule it for the next safe point.
+18. If the lesson is reusable, save it as a prompt, workflow, template, tool, skill, config, operating model, or history note.
+19. If ambiguity is high-risk or user-preference-sensitive, use spec/source reconciliation or `clarification_needed`, but keep the question set short and decision-focused.
+20. Ground factual claims before close-out.
+21. Evaluate whether the intervention actually reduced the gap against the initial request.
 
 ## Output Contract
 
@@ -80,6 +84,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
 - Rewritten instruction when the original instruction was vague, biased, or missing an output contract.
 - Clarification questions asked, budget used, assumptions/defaults selected, or deferral reason when relevant.
 - Pending-answer handling when relevant: `blocked_decision`, `unblocked_work`, `assumptions`, and `resume_action`.
+- Human decision inbox updates when relevant: inbox item IDs, interrupt policy, checkpoint summary, resume action taken or scheduled.
 - Any durable asset created or updated.
 - Evidence and verification path.
 - Request trace, work summary, and evaluation targets when required by the selected mode.

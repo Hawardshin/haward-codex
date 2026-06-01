@@ -17,6 +17,7 @@
       "Slack, Discord, or Teams webhook payload requirements change.",
       "A new platform event should notify the user.",
       "Spec/source reconciliation needs a clarification_needed alert before implementation can continue.",
+      "Human decision inbox needs a new event for decision-needed, decision-answered, or resume-ready routing.",
       "A token handling or secret storage policy changes."
     ]
   },
@@ -134,7 +135,10 @@
     "enabled_events": [
       "approval_needed",
       "clarification_needed",
+      "human_decision_needed",
+      "human_decision_answered",
       "long_running_update",
+      "resume_ready",
       "work_completed",
       "work_failed"
     ],
@@ -150,6 +154,9 @@
       "events": [
         "approval_needed",
         "clarification_needed",
+        "human_decision_needed",
+        "human_decision_answered",
+        "resume_ready",
         "work_completed",
         "work_failed"
       ],
@@ -167,7 +174,10 @@
       "events": [
         "approval_needed",
         "clarification_needed",
+        "human_decision_needed",
+        "human_decision_answered",
         "long_running_update",
+        "resume_ready",
         "work_completed",
         "work_failed"
       ],
@@ -184,6 +194,9 @@
       "events": [
         "approval_needed",
         "clarification_needed",
+        "human_decision_needed",
+        "human_decision_answered",
+        "resume_ready",
         "work_completed",
         "work_failed"
       ],

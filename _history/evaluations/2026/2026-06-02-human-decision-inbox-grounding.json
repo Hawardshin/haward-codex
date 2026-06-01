@@ -1,0 +1,118 @@
+{
+  "task": "Ground factual claims for the human decision inbox work.",
+  "output_summary": "Added a central human decision inbox and interrupt/resume operating workflow for human-needed decisions.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable user request summary for UR-2026-06-02-002."
+    },
+    {
+      "evidence_id": "requirements_specs",
+      "source": "_requirements/baselines/2026-05-31-workspace-platform.ko.md; _specs/workspace-platform/2026-06-02-human-decision-inbox/spec.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Tracked requirement baseline and spec artifacts for REQ-WS-048."
+    },
+    {
+      "evidence_id": "inbox_config",
+      "source": "_ops/coordination/human-decision-inbox.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Self-documenting inbox config created for pending human decisions."
+    },
+    {
+      "evidence_id": "workflow_prompt",
+      "source": "_ops/workflows/61-human-decision-inbox.md; _ops/prompts/91-human-decision-inbox.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Tracked workflow and prompt for inbox creation and answered-decision resume."
+    },
+    {
+      "evidence_id": "langchain_hitl",
+      "source": "https://docs.langchain.com/oss/python/langchain/human-in-the-loop",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official LangChain documentation checked for interrupt, checkpoint, and resume patterns."
+    },
+    {
+      "evidence_id": "microsoft_ag_ui",
+      "source": "https://learn.microsoft.com/en-us/agent-framework/integrations/ag-ui/workflows",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Microsoft documentation checked for workflow pending request and resume behavior."
+    },
+    {
+      "evidence_id": "conductor_human_task",
+      "source": "https://docs.conductor-oss.org/documentation/configuration/workflowdef/systemtasks/human-task.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Conductor documentation checked for human task wait-state patterns."
+    },
+    {
+      "evidence_id": "github_dependencies",
+      "source": "https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official GitHub documentation checked for visible blocked/blocking dependency tracking."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now has REQ-WS-048 requiring a central human decision inbox and checkpointed interrupt/resume handling.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["requirements_specs"],
+      "verification_steps": ["Read the requirements baseline and human decision inbox spec."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "_ops/coordination/human-decision-inbox.json is the central source of truth for pending human decisions.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["inbox_config"],
+      "verification_steps": ["Read and validate the inbox JSON."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The workflow and prompt require checkpointing current work before interrupting to resume an answered decision.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["workflow_prompt"],
+      "verification_steps": ["Read workflow 61 and prompt 91."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "LangChain documents human-in-the-loop interrupt and resume behavior.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["langchain_hitl"],
+      "verification_steps": ["Checked LangChain Human-in-the-Loop documentation."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Conductor documents human task wait states that wait for external human signals.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["conductor_human_task"],
+      "verification_steps": ["Checked Conductor Human Task documentation."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "This change defines operating structure and config, not a fully automated runtime scheduler.",
+    "Whether to interrupt immediately still depends on current task safety and priority."
+  ],
+  "limitation_notes": [
+    "Future automation can add a CLI or dashboard panel for inbox operations.",
+    "Inbox records must still be maintained by the acting agent until a deterministic tool is introduced."
+  ]
+}

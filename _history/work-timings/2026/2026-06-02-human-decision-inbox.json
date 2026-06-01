@@ -1,0 +1,74 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-02-human-decision-inbox",
+  "title": "Add human decision inbox and interrupt resume workflow",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": null,
+  "measurement_note": "Timing was reconstructed during a long governance update, so phase durations are approximate.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "External HITL and workflow sources were checked before local planning."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Memory bootstrap ran before edits and confirmed hot anchors."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "duration_seconds": 480,
+      "measurement": "estimated",
+      "bottleneck_notes": "Included REQ-WS-048, change/review records, and spec artifacts."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Inbox, workflow, prompt, and config updates",
+      "status": "completed",
+      "duration_seconds": 720,
+      "measurement": "estimated",
+      "bottleneck_notes": "Main cost was synchronizing the new inbox rule across ops, configs, instructions, notification settings, memory bootstrap, and routing docs."
+    },
+    {
+      "phase_id": "history_evaluation",
+      "label": "History and evaluation records",
+      "status": "completed",
+      "duration_seconds": 540,
+      "measurement": "estimated",
+      "bottleneck_notes": "Included web records, research notes, plan, request trace, work summary, grounding, evaluator input, and timing."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 300,
+      "measurement": "estimated",
+      "bottleneck_notes": "Reserved for JSON, config contract, memory, docs, naming, structure, workspace index, task board, grounding, evaluator, work timer, and diff checks."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "duration_seconds": 90,
+      "measurement": "estimated",
+      "bottleneck_notes": "Commit and push expected to be short unless remote rejects."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "implementation",
+    "interpretation": "The slowest part is keeping a durable governance rule discoverable across many repository surfaces.",
+    "improvement_candidates": [
+      "Create a small deterministic inbox CLI if this workflow is used repeatedly.",
+      "Expose open human decisions in workspace-monitor so humans can answer from a dashboard."
+    ]
+  }
+}

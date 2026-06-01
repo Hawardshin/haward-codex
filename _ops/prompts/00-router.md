@@ -39,6 +39,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | 질문/지시가 모호하거나 편향적이거나 결론을 유도하거나 검증 가능한 출력 계약이 없다 | [89-bridge-ai-usage-gap.md](89-bridge-ai-usage-gap.md) |
 | 모호한 지시에 역질문이 필요하지만 질문 루프가 길어지지 않게 제한해야 한다 | [89-bridge-ai-usage-gap.md](89-bridge-ai-usage-gap.md) |
 | 역질문 답변 대기 때문에 전체 작업이 멈추는 병목을 줄이고, `blocked_decision`만 격리한 뒤 `unblocked_work`를 계속 진행해야 한다 | [89-bridge-ai-usage-gap.md](89-bridge-ai-usage-gap.md) |
+| 사람 답변/승인/선호 결정들을 한 곳에 모으고 답변이 오면 현재 작업을 checkpoint한 뒤 interrupt/resume 해야 한다 | [91-human-decision-inbox.md](91-human-decision-inbox.md) |
 | 약한/비추론/불확실 모델과 추론/강한 모델의 사용 전략을 다르게 적용해야 한다 | [89-bridge-ai-usage-gap.md](89-bridge-ai-usage-gap.md) |
 | 오픈소스/도구/런타임/스킬 설치를 기록한다 | [58-installation-record.md](58-installation-record.md) |
 | 인터넷 조사에서 재사용 가치가 있는 내용을 문서화한다 | [90-capture-research.md](90-capture-research.md) |
@@ -63,6 +64,7 @@ If speed matters or multiple agents/lane-style tasks may run, use parallel-work-
 For research-heavy work, use research-insight-planner-agent with agent-platform/configs/research/research-agent-profile.json and record the answer-engine stages plus citation requirements.
 When the task needs many sources or better search quality, use human-search-profile.json and _ops/prompts/84-human-like-source-discovery.md to build a query ladder, source lanes, snowballing paths, and selective source summaries.
 When the task asks how to use AI better or reveals a repeated AI-use gap, use ai-usage-gap-profile.json and _ops/prompts/89-bridge-ai-usage-gap.md to improve task framing, bounded clarification, task fit, iteration, verification, and durable asset promotion.
+When human decisions, approvals, or clarification answers should be answered later and resumed, use _ops/prompts/91-human-decision-inbox.md and _ops/coordination/human-decision-inbox.json.
 When an instruction is vague, biased, leading, conclusion-seeking, missing an output contract, or assumes an LLM knows truth deterministically, rewrite it into a neutral, source-checkable task brief before execution.
 When model capability matters, use model-adaptive prompting: weak/non-reasoning/uncertain models can use two-pass compare/merge loops on high-variance tasks, while strong reasoning models should get concise task framing and verification before duplicate calls.
 If the request needs coding research before implementation, use coding-research-agent and answer every post-research question before coding.

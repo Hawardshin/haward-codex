@@ -1,0 +1,146 @@
+{
+  "initial_instruction": "이걸 해결하기 위한방법 한번에 모으고 사람이 왔을 때 그걸 해결하면 인터럽트 해서 다시 진행하는 구조 그때까지 다른걸 하고 있고.",
+  "result_summary": "Added REQ-WS-048 and created a central human decision inbox, workflow, prompt, notification events, AI usage profile updates, persistent instructions, memory bootstrap links, and history/spec/evaluation records so future agents collect human-needed decisions, continue safe unblocked work, checkpoint current work, and resume affected tasks after the human answers.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "agent-platform/configs/usage/ai-usage-gap-profile.json",
+    "agent-platform/configs/integrations/notification-channels.json",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "_docs/operating-models/ai-usage-gap-operating-model.ko.md",
+    "_docs/operating-models/ai-usage-gap-operating-model.en.md",
+    "_ops/coordination/human-decision-inbox.json",
+    "_ops/coordination/human-decision-inbox.ko.md",
+    "_ops/coordination/human-decision-inbox.en.md",
+    "_ops/workflows/61-human-decision-inbox.md",
+    "_ops/prompts/91-human-decision-inbox.md",
+    "_ops/workflows/59-bridge-ai-usage-gap.md",
+    "_ops/prompts/89-bridge-ai-usage-gap.md",
+    "_ops/prompts/00-router.md",
+    "_ops/index.md",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-human-decision-inbox.ko.md",
+    "_requirements/changes/2026-06-02-human-decision-inbox.en.md",
+    "_requirements/reviews/2026-06-02-human-decision-inbox.ko.md",
+    "_requirements/reviews/2026-06-02-human-decision-inbox.en.md",
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/",
+    "_history/web-searches/2026/2026-06-02-human-decision-inbox.ko.md",
+    "_history/web-searches/2026/2026-06-02-human-decision-inbox.en.md",
+    "_research/topics/agent-planning/2026-06-02-human-decision-inbox.ko.md",
+    "_research/topics/agent-planning/2026-06-02-human-decision-inbox.en.md",
+    "_history/plans/2026/2026-06-02-human-decision-inbox.ko.md",
+    "_history/plans/2026/2026-06-02-human-decision-inbox.en.md",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/request-traces/2026/2026-06-02-human-decision-inbox.ko.md",
+    "_history/request-traces/2026/2026-06-02-human-decision-inbox.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/work-timings/2026/2026-06-02-human-decision-inbox.json",
+    "_history/evaluations/2026/2026-06-02-human-decision-inbox-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-02-human-decision-inbox-grounding.json",
+    "_history/evaluations/2026/2026-06-02-human-decision-inbox.ko.md",
+    "_history/evaluations/2026/2026-06-02-human-decision-inbox.en.md",
+    "_history/2026/2026-06-02.md"
+  ],
+  "verification": [
+    "python3 -m json.tool _ops/coordination/human-decision-inbox.json",
+    "python3 -m json.tool agent-platform/configs/usage/ai-usage-gap-profile.json",
+    "python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json",
+    "python3 -m json.tool agent-platform/configs/integrations/notification-channels.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/ai-usage-gap-profile.json configs/memory/bootstrap-manifest.json configs/integrations/notification-channels.json ../_ops/coordination/human-decision-inbox.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json --root ..",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/deep-research-profile.json configs/research/coding-research-profile.json configs/research/marketing-evidence-profile.json configs/usage/ai-usage-gap-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/planning/deep-research-template.json configs/integrations/notification-channels.json ../_docs/registry.json ../_ops/coordination/human-decision-inbox.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json ../_ops/naming/naming-policy.json ../_tools/work-timer/configs/work-timing-policy.json",
+    "python3 _tools/docs-audit/src/docs_audit.py --check",
+    "python3 _tools/naming-audit/src/naming_audit.py --check",
+    "python3 _tools/structure-audit/src/structure_audit.py --check",
+    "python3 _tools/workspace-index/src/workspace_index.py",
+    "python3 _tools/workspace-index/src/workspace_index.py --check",
+    "python3 _tools/task-board/src/task_board.py",
+    "python3 _tools/task-board/src/task_board.py --check",
+    "python3 _tools/workspace-health/src/workspace_health.py --category governance --json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-human-decision-inbox-grounding.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-02-human-decision-inbox-evaluation-input.json",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-human-decision-inbox.json",
+    "git diff --check"
+  ],
+  "references_checked": [
+    "https://docs.langchain.com/oss/python/langchain/human-in-the-loop",
+    "https://learn.microsoft.com/en-us/agent-framework/integrations/ag-ui/workflows",
+    "https://docs.conductor-oss.org/documentation/configuration/workflowdef/systemtasks/human-task.html",
+    "https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies",
+    "_history/web-searches/2026/2026-06-02-non-blocking-clarification.ko.md",
+    "agent-platform/configs/usage/ai-usage-gap-profile.json",
+    "_ops/workflows/59-bridge-ai-usage-gap.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-human-decision-inbox-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-human-decision-inbox.ko.md",
+    "_research/topics/agent-planning/2026-06-02-human-decision-inbox.ko.md",
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/traceability.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-human-decision-inbox.ko.md",
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/plan.ko.md",
+    "_history/web-searches/2026/2026-06-02-human-decision-inbox.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-human-decision-inbox.ko.md",
+    "_history/web-searches/2026/2026-06-02-human-decision-inbox.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-human-decision-inbox.ko.md",
+    "_requirements/changes/2026-06-02-human-decision-inbox.en.md",
+    "_requirements/reviews/2026-06-02-human-decision-inbox.ko.md",
+    "_requirements/reviews/2026-06-02-human-decision-inbox.en.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/spec.en.md",
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/plan.en.md",
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/tasks.en.md",
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/validation.en.md",
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/traceability.ko.md",
+    "_specs/workspace-platform/2026-06-02-human-decision-inbox/traceability.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-human-decision-inbox.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-human-decision-inbox.ko.md",
+    "_history/request-traces/2026/2026-06-02-human-decision-inbox.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "skill_work_occurred": false,
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Add a deterministic inbox CLI after repeated usage proves the exact operations.",
+    "Expose open human decisions in workspace-monitor so humans can answer from the monitoring site."
+  ]
+}

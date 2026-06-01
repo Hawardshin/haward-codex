@@ -1,0 +1,186 @@
+{
+  "schema_version": "2026-06-02",
+  "name": "human-decision-inbox",
+  "purpose": "Central source of truth for pending human decisions, approvals, clarification answers, and interrupt/resume handoffs across repository work.",
+  "reader_guide": {
+    "summary": "Use this inbox when work is waiting for a human answer but other work can continue. Keep every pending decision visible, answerable, and resumable.",
+    "how_to_read": [
+      "Read inbox_policy first to understand state transitions and interrupt rules.",
+      "Read decisions to find open human decisions and their answer formats.",
+      "Use blocked_work to see what is paused and unblocked_work to see what can continue.",
+      "When an answer arrives, follow resume_action and update status."
+    ],
+    "owner": "_ops/coordination",
+    "last_reviewed": "2026-06-02",
+    "update_triggers": [
+      "A new human decision, approval, preference, or clarification answer is needed.",
+      "A human answer arrives for an open decision.",
+      "A decision is superseded, cancelled, expired, or resumed.",
+      "The interrupt/resume policy changes."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "langchain_hitl",
+      "title": "LangChain Human-in-the-Loop",
+      "url": "https://docs.langchain.com/oss/python/langchain/human-in-the-loop",
+      "source_type": "official_docs",
+      "used_for": [
+        "pause execution for pending user decisions",
+        "resume with explicit approval or rejection"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "microsoft_agent_framework_ag_ui",
+      "title": "Microsoft Agent Framework Workflows with AG-UI",
+      "url": "https://learn.microsoft.com/en-us/agent-framework/integrations/ag-ui/workflows",
+      "source_type": "official_docs",
+      "used_for": [
+        "pending request payloads",
+        "resume payloads keyed by interrupt ID"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "conductor_human_task",
+      "title": "Conductor Human Task",
+      "url": "https://docs.conductor-oss.org/documentation/configuration/workflowdef/systemtasks/human-task.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "human task waits for an external signal",
+        "workflow-level human task state"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "github_issue_dependencies",
+      "title": "GitHub Creating issue dependencies",
+      "url": "https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies",
+      "source_type": "official_docs",
+      "used_for": [
+        "blocked-by and blocking relationships",
+        "visible bottleneck tracking"
+      ],
+      "last_checked": "2026-06-02"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "one_decision_one_record",
+      "rule": "Every pending human choice gets one stable decision record with a unique id.",
+      "reason": "Scattered questions in chat are hard to answer later and cannot reliably resume work.",
+      "applies_to": [
+        "decisions"
+      ]
+    },
+    {
+      "id": "answerable_contract_required",
+      "rule": "Each open decision must include question, options when useful, answer_format, impact, blocked_work, unblocked_work, and resume_action.",
+      "reason": "A person should be able to answer without reconstructing the whole conversation.",
+      "applies_to": [
+        "decisions.question",
+        "decisions.answer_format",
+        "decisions.resume_action"
+      ]
+    },
+    {
+      "id": "checkpoint_before_interrupt",
+      "rule": "Before interrupting current work to resume an answered decision, record the current task, touched paths, verification state, and next safe return point.",
+      "reason": "Interrupt/resume should not lose work or create hidden context debt.",
+      "applies_to": [
+        "inbox_policy.interrupt_protocol"
+      ]
+    },
+    {
+      "id": "state_changes_are_logged",
+      "rule": "Decision status changes must update decision_history with timestamp, actor, from_status, to_status, and reason.",
+      "reason": "Human decisions are audit events and should be traceable.",
+      "applies_to": [
+        "decision_history"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "inbox_policy",
+      "meaning": "State machine, priority, notification, batching, and interrupt/resume rules.",
+      "required": true
+    },
+    {
+      "field": "decisions",
+      "meaning": "Current human decision records. Empty means no pending human decision is blocking work.",
+      "required": true
+    },
+    {
+      "field": "decisions.status",
+      "meaning": "open, answered, resuming, resumed, deferred, expired, cancelled, or superseded.",
+      "required": true
+    },
+    {
+      "field": "decisions.resume_action",
+      "meaning": "Exact action the agent should take after the answer arrives.",
+      "required": true
+    },
+    {
+      "field": "decision_history",
+      "meaning": "Audit trail of created, answered, interrupted, resumed, or closed decisions.",
+      "required": true
+    }
+  ],
+  "inbox_policy": {
+    "states": [
+      "open",
+      "answered",
+      "resuming",
+      "resumed",
+      "deferred",
+      "expired",
+      "cancelled",
+      "superseded"
+    ],
+    "priority_levels": [
+      "critical",
+      "high",
+      "normal",
+      "low"
+    ],
+    "default_notification_events": [
+      "human_decision_needed",
+      "human_decision_answered",
+      "resume_ready"
+    ],
+    "batching_rule": "Collect related open decisions into one inbox update when the answers can be handled together.",
+    "default_interrupt_policy": "continue_until_answered_then_interrupt_at_safe_checkpoint",
+    "interrupt_now_when": [
+      "priority is critical",
+      "the answer unblocks the user's current top-priority task",
+      "continuing other work would increase rework or risk",
+      "the user explicitly says to resume immediately"
+    ],
+    "schedule_resume_when": [
+      "current work is in the middle of an unsafe edit",
+      "the decision priority is normal or low and current work has a near-term safe stopping point",
+      "the answer only affects documentation or backlog cleanup"
+    ],
+    "checkpoint_required_fields": [
+      "current_task_id",
+      "current_work_mode",
+      "touched_paths",
+      "verification_state",
+      "next_safe_return_point",
+      "uncommitted_changes_summary"
+    ],
+    "resume_protocol": [
+      "mark decision status as answered",
+      "checkpoint current work before switching context",
+      "load the decision record and related artifacts",
+      "execute resume_action only on affected work",
+      "run targeted verification",
+      "mark decision status as resumed or deferred",
+      "return to the interrupted task if it is still relevant"
+    ]
+  },
+  "decisions": [],
+  "decision_history": []
+}
