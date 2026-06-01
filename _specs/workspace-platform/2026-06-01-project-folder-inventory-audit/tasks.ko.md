@@ -8,4 +8,4 @@
 - [x] 정책/운영 문서 갱신
 - [x] 전체 검증 실행
 - [x] 평가 보고서 저장
-- [ ] commit 및 push
+- [x] commit 및 push

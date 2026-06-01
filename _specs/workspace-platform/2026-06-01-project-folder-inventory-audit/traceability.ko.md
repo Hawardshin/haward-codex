@@ -10,4 +10,4 @@
 | 테스트 | `_tools/structure-audit/tests/test_structure_audit.py` |
 | 설정 | `_ops/projects/registry.json`, `_ops/projects/root-structure-policy.json` |
 | 평가 | `_history/evaluations/2026/2026-06-01-project-folder-inventory-audit.ko.md` |
-| 커밋 | 예정 |
+| 커밋 | `1628dd6` |

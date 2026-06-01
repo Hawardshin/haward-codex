@@ -7,6 +7,7 @@
 - Date: 2026-06-01
 - Related request: `UR-2026-06-01-010`
 - Related requirement: `REQ-WS-027`
+- Commit: `1628dd6`
 
 ## Completed Summary
 
@@ -33,4 +34,3 @@
 ## Judgment
 
 The result matches the initial instruction. Remaining improvements, such as CODEOWNERS or an explicit owner map, are only worth revisiting if multi-user collaboration becomes real. There are no blocking gaps for this close-out.
-
