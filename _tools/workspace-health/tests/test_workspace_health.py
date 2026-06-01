@@ -7,7 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "_tools" / "workspace-health" / "src"))
 
-from workspace_health import build_checks, discover_tool_test_dirs, filter_checks, serialize_check
+from workspace_health.checks import build_checks, discover_tool_test_dirs, filter_checks
+from workspace_health.runner import serialize_check
 
 
 class WorkspaceHealthTests(unittest.TestCase):
@@ -59,6 +60,11 @@ class WorkspaceHealthTests(unittest.TestCase):
 
         self.assertIn(data["category"], {"projects"})
         self.assertNotIn(str(root), data["cwd"])
+
+    def test_legacy_wrapper_preserves_script_entrypoint(self):
+        wrapper = ROOT / "_tools" / "workspace-health" / "src" / "workspace_health.py"
+
+        self.assertTrue(wrapper.exists())
 
 
 if __name__ == "__main__":

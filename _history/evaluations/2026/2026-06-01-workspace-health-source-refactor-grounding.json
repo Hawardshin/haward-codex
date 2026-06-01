@@ -1,0 +1,140 @@
+{
+  "task": "Ground factual claims for the workspace-health source structure refactor.",
+  "output_summary": "Workspace Health now keeps its existing script command while splitting internal source responsibilities into package modules.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-workspace-health-source-refactor.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked web-first research record for source/folder structure refactoring."
+    },
+    {
+      "evidence_id": "pypa_src_layout",
+      "source": "https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Python Packaging User Guide reference for src layout and package boundaries."
+    },
+    {
+      "evidence_id": "refactoring_guru",
+      "source": "https://refactoring.guru/refactoring",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "Reference used for behavior-preserving refactoring principle."
+    },
+    {
+      "evidence_id": "workspace_health_wrapper",
+      "source": "_tools/workspace-health/src/workspace_health.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked legacy wrapper source."
+    },
+    {
+      "evidence_id": "workspace_health_package",
+      "source": "_tools/workspace-health/src/workspace_health/",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked package module source for checks, models, runner, and CLI."
+    },
+    {
+      "evidence_id": "workspace_health_tests",
+      "source": "_tools/workspace-health/tests/test_workspace_health.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked tests importing new package modules and checking legacy wrapper presence."
+    },
+    {
+      "evidence_id": "unit_tests",
+      "source": "python3 -m unittest discover -s _tools/workspace-health/tests",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output reported 6 tests passed."
+    },
+    {
+      "evidence_id": "full_health",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --include-build",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output reported 17 checks passed."
+    },
+    {
+      "evidence_id": "json_category",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --category governance --json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output reported passed governance JSON summary."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The existing `python3 _tools/workspace-health/src/workspace_health.py` command remains available through a wrapper.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace_health_wrapper",
+        "json_category",
+        "full_health"
+      ],
+      "verification_steps": [
+        "Ran the wrapper with `--list`.",
+        "Ran the wrapper with `--category governance --json`.",
+        "Ran the wrapper with `--include-build`."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace Health internal responsibilities are split into `checks.py`, `models.py`, `runner.py`, and `cli.py` package modules.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace_health_package",
+        "workspace_health_tests"
+      ],
+      "verification_steps": [
+        "Read the package files.",
+        "Ran tests importing `workspace_health.checks` and `workspace_health.runner`."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The source refactor preserves category and JSON behavior.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "json_category",
+        "unit_tests"
+      ],
+      "verification_steps": [
+        "Ran category-filtered JSON output.",
+        "Ran workspace-health unit tests."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The full workspace-health run passed 17 checks after the refactor.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "full_health"
+      ],
+      "verification_steps": [
+        "Read final `--include-build` command output."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "This pass intentionally did not migrate every `_tools/*` script to package layout.",
+    "Future tools can use this refactor as a pattern when their source grows."
+  ],
+  "limitation_notes": [
+    "No external package was installed.",
+    "The root repository folder structure was not broadly moved in this pass."
+  ]
+}

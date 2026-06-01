@@ -45,6 +45,21 @@ python3 _tools/workspace-health/src/workspace_health.py --include-build
 - `tools`: `_tools/*/tests`
 - `frontend`: `workspace-monitor` tests, typecheck, and optional build
 
+## Source Structure
+
+```text
+src/
+  workspace_health.py          # wrapper that preserves the existing command
+  workspace_health/
+    __init__.py
+    checks.py                  # check discovery, check list construction, category filtering
+    cli.py                     # argparse, human output, JSON output
+    models.py                  # Check dataclass and category constants
+    runner.py                  # subprocess execution, result serialization, command formatting
+```
+
+External use should continue through `python3 _tools/workspace-health/src/workspace_health.py`. Tests and new code should import package modules such as `workspace_health.checks` and `workspace_health.runner`.
+
 ## Inputs
 
 - `_docs/registry.json`

@@ -45,6 +45,21 @@ python3 _tools/workspace-health/src/workspace_health.py --include-build
 - `tools`: `_tools/*/tests` 테스트
 - `frontend`: `workspace-monitor` 테스트와 typecheck, 선택적 build
 
+## 소스 구조
+
+```text
+src/
+  workspace_health.py          # 기존 명령을 보존하는 wrapper
+  workspace_health/
+    __init__.py
+    checks.py                  # check discovery, check 목록 구성, category filter
+    cli.py                     # argparse, 사람용 출력, JSON 출력
+    models.py                  # Check dataclass, category 상수
+    runner.py                  # subprocess 실행, 결과 직렬화, command 표시
+```
+
+외부에서는 계속 `python3 _tools/workspace-health/src/workspace_health.py`를 사용한다. 내부 테스트나 새 코드에서는 `workspace_health.checks`, `workspace_health.runner`처럼 package module을 import한다.
+
 ## 입력
 
 - `_docs/registry.json`
