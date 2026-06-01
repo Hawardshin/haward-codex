@@ -9,4 +9,4 @@
 - [x] Install dependencies and write installation record
 - [x] Run tests/build/browser verification
 - [x] Update docs, history, and evaluation
-- [ ] Commit and push
+- [x] Commit and push

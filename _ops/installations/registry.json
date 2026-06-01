@@ -227,7 +227,7 @@
       ],
       "rollback_path": "Remove workspace-monitor/node_modules and package-lock.json, then remove dependencies from workspace-monitor/package.json or revert the commit.",
       "installation_record_path": "_history/installations/2026/2026-06-01-workspace-monitor-nextjs.ko.md",
-      "commit": "PENDING"
+      "commit": "a8c085e"
     }
   ]
 }

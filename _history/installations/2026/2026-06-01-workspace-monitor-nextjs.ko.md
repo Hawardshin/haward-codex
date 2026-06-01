@@ -86,4 +86,4 @@
 - 설치 레지스트리: `_ops/installations/registry.json`
 - 작업 요약: `_history/work-summaries/2026/2026-06-01.ko.md`
 - 평가 보고서: `_history/evaluations/2026/2026-06-01-workspace-monitor.ko.md`
-- 커밋: `PENDING`
+- 커밋: `a8c085e`

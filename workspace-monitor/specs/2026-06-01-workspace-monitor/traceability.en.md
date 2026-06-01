@@ -9,5 +9,4 @@
 | Implementation | `workspace-monitor/` |
 | Validation | `workspace-monitor/specs/2026-06-01-workspace-monitor/validation.en.md` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-workspace-monitor.en.md` |
-| Commit | `PENDING` |
-
+| Commit | `a8c085e` |

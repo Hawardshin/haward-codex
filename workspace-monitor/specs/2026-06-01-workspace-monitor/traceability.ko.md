@@ -9,5 +9,4 @@
 | 구현 | `workspace-monitor/` |
 | 검증 | `workspace-monitor/specs/2026-06-01-workspace-monitor/validation.ko.md` |
 | 평가 | `_history/evaluations/2026/2026-06-01-workspace-monitor.ko.md` |
-| 커밋 | `PENDING` |
-
+| 커밋 | `a8c085e` |
