@@ -18,11 +18,32 @@ List checks without running them:
 python3 _tools/workspace-health/src/workspace_health.py --list
 ```
 
+Run selected categories:
+
+```bash
+python3 _tools/workspace-health/src/workspace_health.py --category governance
+python3 _tools/workspace-health/src/workspace_health.py --category projects --category tools
+```
+
+Machine-readable JSON for automation or dashboards:
+
+```bash
+python3 _tools/workspace-health/src/workspace_health.py --json
+python3 _tools/workspace-health/src/workspace_health.py --list --json
+```
+
 Include the Next.js static build:
 
 ```bash
 python3 _tools/workspace-health/src/workspace_health.py --include-build
 ```
+
+## Check Categories
+
+- `governance`: docs/structure audits, map/board freshness, memory/config contracts
+- `projects`: `agent-platform` and `presentation-agent` tests
+- `tools`: `_tools/*/tests`
+- `frontend`: `workspace-monitor` tests, typecheck, and optional build
 
 ## Inputs
 
@@ -36,6 +57,8 @@ python3 _tools/workspace-health/src/workspace_health.py --include-build
 ## Outputs
 
 - Pass/fail summary per check on standard output
+- Check list from `--list`
+- Machine-readable summary from `--json`
 - Failed command, stdout, and stderr when a check fails
 
 ## Verification
@@ -43,4 +66,5 @@ python3 _tools/workspace-health/src/workspace_health.py --include-build
 ```bash
 python3 -m unittest discover -s _tools/workspace-health/tests
 python3 _tools/workspace-health/src/workspace_health.py --list
+python3 _tools/workspace-health/src/workspace_health.py --category governance --json
 ```

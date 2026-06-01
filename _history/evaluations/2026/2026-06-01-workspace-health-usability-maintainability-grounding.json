@@ -1,0 +1,138 @@
+{
+  "task": "Ground factual claims for the workspace-health usability and maintainability improvement.",
+  "output_summary": "Workspace Health now supports category-filtered runs, pure JSON output, JSON list output, and clearer relative-path list output while preserving the human-readable default summary.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-workspace-health-usability-maintainability.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked web-first research record for CLI usability and maintainability."
+    },
+    {
+      "evidence_id": "clig",
+      "source": "https://clig.dev/",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "CLI design guide used for human output and JSON output separation."
+    },
+    {
+      "evidence_id": "patternfly_cli",
+      "source": "https://www.patternfly.org/developer-resources/cli-handbook",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "CLI handbook used for structured, filterable command output."
+    },
+    {
+      "evidence_id": "microsoft_cli",
+      "source": "https://learn.microsoft.com/en-us/dotnet/standard/commandline/design-guidance",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Microsoft CLI design guidance."
+    },
+    {
+      "evidence_id": "heroku_cli",
+      "source": "https://devcenter.heroku.com/articles/cli-style-guide",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Heroku CLI style guide, including machine-readable output guidance."
+    },
+    {
+      "evidence_id": "workspace_health_source",
+      "source": "_tools/workspace-health/src/workspace_health.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked source for the workspace-health CLI."
+    },
+    {
+      "evidence_id": "workspace_health_tests",
+      "source": "_tools/workspace-health/tests/test_workspace_health.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked unit tests for category filtering and serialization behavior."
+    },
+    {
+      "evidence_id": "workspace_health_output",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --include-build",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output reported 17 checks passed with category-prefixed human output."
+    },
+    {
+      "evidence_id": "json_parse",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --category governance --json | python3 -m json.tool",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "JSON parse check passed for the category-filtered JSON output."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "Workspace Health now supports `--category` filtering for governance, projects, tools, and frontend checks.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace_health_source",
+        "workspace_health_tests",
+        "workspace_health_output"
+      ],
+      "verification_steps": [
+        "Ran workspace-health unit tests.",
+        "Ran `python3 _tools/workspace-health/src/workspace_health.py --category governance --json`."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace Health now supports pure JSON output through `--json` and `--list --json`.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace_health_source",
+        "json_parse"
+      ],
+      "verification_steps": [
+        "Parsed `--list --json` output with `python3 -m json.tool`.",
+        "Parsed `--category governance --json` output with `python3 -m json.tool`."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The default human output still reports pass/fail status and now includes each check category.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace_health_output",
+        "workspace_health_source"
+      ],
+      "verification_steps": [
+        "Ran `python3 _tools/workspace-health/src/workspace_health.py --include-build`."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The full workspace-health run passed 17 checks after the usability/maintainability update.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace_health_output"
+      ],
+      "verification_steps": [
+        "Read the final `--include-build` command output."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "CI and Workspace Monitor integration remain future work.",
+    "Category boundaries may evolve as new projects or tools are added."
+  ],
+  "limitation_notes": [
+    "No external package was installed.",
+    "The change is limited to the local workspace-health CLI and its documentation/tests."
+  ]
+}

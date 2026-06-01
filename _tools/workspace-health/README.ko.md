@@ -18,11 +18,32 @@ python3 _tools/workspace-health/src/workspace_health.py
 python3 _tools/workspace-health/src/workspace_health.py --list
 ```
 
+범주별로 일부만 실행할 때:
+
+```bash
+python3 _tools/workspace-health/src/workspace_health.py --category governance
+python3 _tools/workspace-health/src/workspace_health.py --category projects --category tools
+```
+
+자동화나 dashboard에서 재사용할 JSON 출력:
+
+```bash
+python3 _tools/workspace-health/src/workspace_health.py --json
+python3 _tools/workspace-health/src/workspace_health.py --list --json
+```
+
 Next.js static build까지 포함할 때:
 
 ```bash
 python3 _tools/workspace-health/src/workspace_health.py --include-build
 ```
+
+## 검사 범주
+
+- `governance`: 문서/구조 감사, map/board freshness, memory/config 계약
+- `projects`: `agent-platform`, `presentation-agent` 테스트
+- `tools`: `_tools/*/tests` 테스트
+- `frontend`: `workspace-monitor` 테스트와 typecheck, 선택적 build
 
 ## 입력
 
@@ -36,6 +57,8 @@ python3 _tools/workspace-health/src/workspace_health.py --include-build
 ## 출력
 
 - 표준 출력의 check별 pass/fail 요약
+- `--list`의 실행 전 check 목록
+- `--json`의 machine-readable 요약
 - 실패 시 해당 command, stdout, stderr
 
 ## 검증
@@ -43,4 +66,5 @@ python3 _tools/workspace-health/src/workspace_health.py --include-build
 ```bash
 python3 -m unittest discover -s _tools/workspace-health/tests
 python3 _tools/workspace-health/src/workspace_health.py --list
+python3 _tools/workspace-health/src/workspace_health.py --category governance --json
 ```
