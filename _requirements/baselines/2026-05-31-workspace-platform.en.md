@@ -42,6 +42,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 | REQ-WS-024 | When multiple research lanes run in parallel, agents shall use a merge gate that waits for all research lanes, synthesizes contradictions and accepted evidence, and releases downstream implementation only after acceptance checks pass. | UR-2026-06-01-003 | must | baseline | agent-platform/_ops | `plan-parallel-work` merge_gates result and tests | `agent-platform/src/agent_platform/planning/parallel_work.py`, `agent-platform/configs/planning/parallel-work-template.json`, `agent-platform/docs/parallel-work-planner-agent.en.md` |
 | REQ-WS-025 | The platform shall allow Slack, Discord, and Microsoft Teams notifications to be enabled or disabled through config while real tokens or webhook URLs are injected by the user through environment variables. | UR-2026-06-01-007 | must | baseline | agent-platform | notification config validation, dry-run, and unit tests | `agent-platform/configs/integrations/notification-channels.json`, `agent-platform/src/agent_platform/integrations/notifications.py` |
 | REQ-WS-026 | Root folder structure shall be classified as registered projects, reserved operational folders, local-only folders, or generated outputs, and root structure changes shall pass a deterministic audit. | UR-2026-06-01-009 | must | baseline | workspace/_ops/_tools | `structure-audit` result and root structure policy review | `_ops/projects/root-structure-policy.json`, `_tools/structure-audit/`, `_docs/repository-structure-governance.en.md` |
+| REQ-WS-027 | Durable top-level folders in registered projects shall be explained in the project registry, and generated output patterns shall be verified against `.gitignore`. | UR-2026-06-01-010 | must | baseline | workspace/_ops/_tools | `structure-audit` project inventory and generated output ignore checks | `_ops/projects/registry.json`, `_ops/projects/root-structure-policy.json`, `_tools/structure-audit/` |
 
 ## Change Management
 
@@ -53,6 +54,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 - On 2026-06-01, REQ-WS-024 promoted parallel research fan-out/fan-in and merge gate release criteria to shared operating structure.
 - On 2026-06-01, REQ-WS-025 promoted platform-wide notification toggles and environment-variable secret injection to a shared capability.
 - On 2026-06-01, REQ-WS-026 promoted root folder classification, local-only exceptions, generated output placement, and deterministic structure audit to shared operating structure.
+- On 2026-06-01, REQ-WS-027 added project top-level folder inventory and generated output ignore validation to the structure audit scope.
 - Before implementation, link relevant spec artifacts under `_specs/` or project `specs/`.
 - Before source-code implementation, link architecture references, architecture options, and decision notes in the coding research record.
 - When enterprise/high-quality sources seed research, update or reference `enterprise-source-registry.json` and `_research/source-lists/`.

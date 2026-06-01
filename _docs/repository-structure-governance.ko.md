@@ -17,6 +17,7 @@
 2. root `outputs/`가 비어 있더라도 이름만으로는 durable artifact 위치인지 transient output인지 구분이 어려웠다.
 3. 프로젝트 경계 검토는 문서 중심이었고, root folder를 기계적으로 확인하는 deterministic check가 없었다.
 4. `workspace-monitor`가 `_history`와 프로젝트 문서는 보여주지만 `_docs`와 `_philosophy` 같은 구조 규칙 문서를 snapshot에 포함하지 않아 전체 구조 파악이 덜 직접적이었다.
+5. 최초 감사는 root folder 중심이라 프로젝트 내부 top-level folder가 등록부에 설명되어 있는지 확인하지 못했다.
 
 ## 적용한 구조
 
@@ -25,6 +26,8 @@
 - `.gitignore`는 `_private/`, `outputs/`, build output, TypeScript build metadata를 명시적으로 제외한다.
 - 프로젝트 경계 workflow는 local-only scratch와 generated output을 별도 분류로 다룬다.
 - `workspace-monitor`는 `_docs`와 `_philosophy`를 문서 category로 수집한다.
+- `structure-audit`는 등록된 프로젝트의 top-level folder inventory를 생성하고, `project_specific_home`에 없는 durable folder를 warning으로 보고한다.
+- `generated_output_dirs`에 선언한 pattern은 `.gitignore`에도 반영되어야 하며, 누락되면 gap으로 처리한다.
 
 ## 변경 금지 기준
 

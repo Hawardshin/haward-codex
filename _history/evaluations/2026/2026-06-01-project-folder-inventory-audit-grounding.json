@@ -1,0 +1,141 @@
+{
+  "task": "Ground factual claims for the project folder inventory audit work.",
+  "output_summary": "Structure audit was extended to report registered project top-level folder inventories, warn about undocumented durable project folders, and validate generated output patterns against .gitignore.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "tool",
+      "source": "_tools/structure-audit/src/structure_audit.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked deterministic audit tool updated to inspect project inventories and generated output ignore coverage."
+    },
+    {
+      "evidence_id": "tool_tests",
+      "source": "_tools/structure-audit/tests/test_structure_audit.py",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Unit tests cover clean structure, unknown root folder gap, missing README gap, generated output ignore gap, undocumented project folder warning, and generated project folder handling."
+    },
+    {
+      "evidence_id": "audit_result",
+      "source": "python3 _tools/structure-audit/src/structure_audit.py --check",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command returned clean status with no gaps or warnings and printed inventories for three registered projects."
+    },
+    {
+      "evidence_id": "registry",
+      "source": "_ops/projects/registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Project registry now lists durable top-level folders, including agent-platform/specs and workspace-monitor/public."
+    },
+    {
+      "evidence_id": "policy",
+      "source": "_ops/projects/root-structure-policy.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Self-documenting root structure policy defines generated output patterns and project top-level folder explanation rule."
+    },
+    {
+      "evidence_id": "validation",
+      "source": "_specs/workspace-platform/2026-06-01-project-folder-inventory-audit/validation.ko.md",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked validation record summarizing unit tests, audit, config, memory, workspace monitor, and diff checks."
+    },
+    {
+      "evidence_id": "web_search",
+      "source": "_history/web-searches/2026/2026-06-01-structure-governance-audit.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Search-backed public reasoning record for repository structure ownership and docs-as-code separation references."
+    },
+    {
+      "evidence_id": "gitlab_codeowners",
+      "source": "https://docs.gitlab.com/user/project/codeowners/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official GitLab documentation used as an external reference for repository path ownership and review responsibility."
+    },
+    {
+      "evidence_id": "gitlab_docs_architecture",
+      "source": "https://docs.gitlab.com/development/documentation/site_architecture/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official GitLab documentation used as an external reference for source-vs-generated documentation separation."
+    },
+    {
+      "evidence_id": "google_monorepo",
+      "source": "https://abseil.io/resources/swe-book/html/ch16.html",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "Software Engineering at Google book chapter used as an external reference for monorepo visibility, tooling, and trade-off context."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The structure-audit tool now outputs project_inventories for registered projects.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["tool", "audit_result"],
+      "verification_steps": ["Ran python3 _tools/structure-audit/src/structure_audit.py --check."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The structure-audit tool reports warnings for durable project top-level folders that are not listed in project_specific_home.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["tool", "tool_tests"],
+      "verification_steps": ["Ran python3 -m unittest discover -s _tools/structure-audit/tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The structure-audit tool reports gaps when generated output patterns are not covered by .gitignore.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["tool", "tool_tests"],
+      "verification_steps": ["Ran python3 -m unittest discover -s _tools/structure-audit/tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The current repository structure audit is clean with no warnings or gaps.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["audit_result"],
+      "verification_steps": ["Ran python3 _tools/structure-audit/src/structure_audit.py --check."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The project registry now explains agent-platform/specs and workspace-monitor/public as project-specific homes.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["registry"],
+      "verification_steps": ["Checked _ops/projects/registry.json and structure-audit output."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The structure governance decision is informed by repository ownership and documentation source/generated-output separation references.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["web_search", "gitlab_codeowners", "gitlab_docs_architecture", "google_monorepo"],
+      "verification_steps": ["Recorded checked external references in the web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "The audit intentionally checks top-level project folders only; deeper per-project folder conventions should be added after real drift appears.",
+    "CODEOWNERS or an owner map remains optional until the repository has multi-user review needs."
+  ],
+  "limitation_notes": [
+    "Warnings do not fail the command; they are intended to surface structure drift without blocking unrelated work.",
+    "The audit relies on the registry and policy files staying current."
+  ]
+}

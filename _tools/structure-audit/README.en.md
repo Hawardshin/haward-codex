@@ -1,6 +1,6 @@
 # Structure Audit
 
-This tool checks whether root folders are registered projects, shared operational folders, or local-only folders.
+This tool checks whether root folders are registered projects, shared operational folders, or local-only folders, and whether registered project top-level directories are explained in the project registry.
 
 ## Inputs
 
@@ -8,6 +8,7 @@ This tool checks whether root folders are registered projects, shared operationa
 - `_ops/projects/registry.json`
 - `.gitignore`
 - first-level repository directories
+- first-level registered project directories
 
 ## Output
 
@@ -15,6 +16,9 @@ This tool checks whether root folders are registered projects, shared operationa
 - gaps for unregistered root folders
 - gaps for registered projects missing `README.md`
 - gaps for local-only folders missing `.gitignore` coverage
+- gaps for generated output patterns missing `.gitignore` coverage
+- registered project top-level folder inventory
+- warnings for project top-level folders not listed in `project_specific_home`
 
 ## Command
 
@@ -34,5 +38,7 @@ python3 -m unittest discover -s _tools/structure-audit/tests
 
 - After creating a new root project, register it in `_ops/projects/registry.json`, then run this tool.
 - Add new reserved operational folders to `_ops/projects/root-structure-policy.json` first.
+- Add new durable top-level project folders to that project's `project_specific_home`.
+- Keep generated folders in both `_ops/projects/root-structure-policy.json` `generated_output_dirs` and `.gitignore`.
 - Use `_private/` and `outputs/` only as local-only folders, not as durable knowledge sources.
 - Project artifacts belong under the owning project's `artifacts/`, not root `outputs/`.

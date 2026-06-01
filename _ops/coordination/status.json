@@ -486,6 +486,25 @@
         "_specs/workspace-platform/2026-06-01-structure-governance-audit/spec.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-06-01-structure-governance-audit.ko.md"
+    },
+    {
+      "id": "2026-06-01-project-folder-inventory-audit",
+      "title": "Extend structure audit to project folder inventories",
+      "project": "_ops",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-01",
+      "updated_at": "2026-06-01",
+      "next_action": "No action. Future durable project top-level folders should be added to project_specific_home; generated outputs should be listed in generated_output_dirs and ignored.",
+      "blockers": [],
+      "references": [
+        "_tools/structure-audit/src/structure_audit.py",
+        "_ops/projects/registry.json",
+        "_ops/projects/root-structure-policy.json",
+        "_specs/workspace-platform/2026-06-01-project-folder-inventory-audit/spec.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-06-01-project-folder-inventory-audit.ko.md"
     }
   ]
 }

@@ -15,9 +15,10 @@
 7. Promote only cross-project assets to `_docs/`, `_ops/`, `_tools/`, `_templates/`, `_skills/`, `_research/`, or `_philosophy/`.
 8. Treat `_private/` and `outputs/` as local-only ignored folders, not durable knowledge or project artifacts.
 9. Update `_ops/projects/registry.json`, `_ops/projects/index.ko.md`, and `_ops/projects/index.en.md` when project status or boundaries change.
-10. Run `python3 _tools/structure-audit/src/structure_audit.py --check` after root folder or registry changes.
-11. Record meaningful boundary decisions in `_history/YYYY/YYYY-MM-DD.md` and, when relevant, the project `README.md`.
-12. Refresh `_ops/maps/`.
+10. Add durable project top-level folders to that project's `project_specific_home`; generated folders should instead be covered by `generated_output_dirs` and `.gitignore`.
+11. Run `python3 _tools/structure-audit/src/structure_audit.py --check` after root folder, registry, project top-level folder, local-only, or generated-output rule changes.
+12. Record meaningful boundary decisions in `_history/YYYY/YYYY-MM-DD.md` and, when relevant, the project `README.md`.
+13. Refresh `_ops/maps/`.
 
 ## Rule
 

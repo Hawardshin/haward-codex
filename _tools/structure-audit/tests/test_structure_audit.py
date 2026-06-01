@@ -18,9 +18,26 @@ class StructureAuditTests(unittest.TestCase):
         (root / "_docs").mkdir()
         (root / "demo").mkdir()
         (root / "demo" / "README.md").write_text("# Demo\n", encoding="utf-8")
-        (root / ".gitignore").write_text("/_private/\n/outputs/\n", encoding="utf-8")
+        (root / ".gitignore").write_text(
+            "/_private/\n/outputs/\nnode_modules/\n*.tsbuildinfo\n",
+            encoding="utf-8",
+        )
         (root / "_ops" / "projects" / "registry.json").write_text(
-            json.dumps({"projects": [{"name": "demo", "path": "demo/"}]}),
+            json.dumps(
+                {
+                    "projects": [
+                        {
+                            "name": "demo",
+                            "path": "demo/",
+                            "project_specific_home": [
+                                "demo/src/",
+                                "demo/tests/",
+                                "demo/docs/",
+                            ],
+                        }
+                    ]
+                }
+            ),
             encoding="utf-8",
         )
         (root / "_ops" / "projects" / "root-structure-policy.json").write_text(
@@ -29,6 +46,10 @@ class StructureAuditTests(unittest.TestCase):
                     "project_registry_path": "_ops/projects/registry.json",
                     "reserved_operational_dirs": [{"name": "_docs"}, {"name": "_ops"}],
                     "local_only_dirs": [{"name": "_private"}, {"name": "outputs"}],
+                    "generated_output_dirs": [
+                        {"pattern": "**/node_modules/"},
+                        {"pattern": "**/tsconfig.tsbuildinfo"},
+                    ],
                 }
             ),
             encoding="utf-8",
@@ -61,6 +82,31 @@ class StructureAuditTests(unittest.TestCase):
         report = audit_structure(root)
 
         self.assertTrue(any("README.md" in gap for gap in report["gaps"]))
+
+    def test_generated_output_pattern_must_be_ignored(self):
+        root = self.make_repo()
+        (root / ".gitignore").write_text("/_private/\n/outputs/\n", encoding="utf-8")
+
+        report = audit_structure(root)
+
+        self.assertTrue(any("Generated output pattern" in gap for gap in report["gaps"]))
+
+    def test_project_top_level_inventory_warns_for_undocumented_folder(self):
+        root = self.make_repo()
+        (root / "demo" / "public").mkdir()
+
+        report = audit_structure(root)
+
+        self.assertTrue(any("public" in warning for warning in report["warnings"]))
+        self.assertEqual(report["status"], "clean")
+
+    def test_project_generated_folder_does_not_warn_as_undocumented(self):
+        root = self.make_repo()
+        (root / "demo" / "node_modules").mkdir()
+
+        report = audit_structure(root)
+
+        self.assertFalse(any("node_modules" in warning for warning in report["warnings"]))
 
 
 if __name__ == "__main__":

@@ -15,6 +15,7 @@
 - `_private/`와 `outputs/`는 예외적으로 로컬 전용 ignored folder로만 사용하며 공통 지식이나 지속 산출물로 보지 않는다.
 - 공통으로 승격할 때는 여러 프로젝트에서 재사용될 가능성이 분명해야 한다.
 - 프로젝트 상태와 경계는 `_ops/projects/registry.json`에 등록한다.
+- 프로젝트 내부 durable top-level folder는 `_ops/projects/registry.json`의 `project_specific_home`에 설명한다.
 - 루트 폴더 분류 규칙은 `_ops/projects/root-structure-policy.json`에 둔다.
 
 ## 프로젝트 안에 둘 것
@@ -69,6 +70,7 @@
 ## 구조 검증
 
 루트 폴더, 프로젝트 등록부, 예약 운영 폴더, 로컬 전용 폴더 규칙을 바꾼 뒤에는 다음 명령을 실행한다.
+프로젝트 내부 durable top-level folder나 generated output 규칙이 바뀐 뒤에도 같은 명령을 실행한다.
 
 ```bash
 python3 _tools/structure-audit/src/structure_audit.py --check

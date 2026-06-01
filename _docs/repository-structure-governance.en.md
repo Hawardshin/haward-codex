@@ -17,6 +17,7 @@ This document defines how root folders should stay separated as projects, shared
 2. A root `outputs/` folder was ambiguous by name, even when empty, because it could be mistaken for a durable artifact location.
 3. Project boundary review was document-based and did not include a deterministic root-folder check.
 4. `workspace-monitor` showed history and project docs but did not include `_docs` and `_philosophy`, making structural rules less directly visible.
+5. The first audit pass focused on root folders and did not verify whether project-internal top-level folders were explained in the registry.
 
 ## Applied Structure
 
@@ -25,6 +26,8 @@ This document defines how root folders should stay separated as projects, shared
 - `.gitignore` explicitly excludes `_private/`, `outputs/`, build outputs, and TypeScript build metadata.
 - The project boundary workflow treats local-only scratch and generated output as separate classifications.
 - `workspace-monitor` collects `_docs` and `_philosophy` as document categories.
+- `structure-audit` now produces registered project top-level folder inventories and warns when durable folders are missing from `project_specific_home`.
+- Patterns declared in `generated_output_dirs` must also be covered by `.gitignore`; missing coverage is treated as a gap.
 
 ## Do Not Do
 

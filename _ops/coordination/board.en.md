@@ -39,6 +39,7 @@
 | 2026-06-01-notification-settings | Add platform notification settings | agent-platform | completed | codex-primary | No action. Enable channels by setting enabled=true and providing webhook URL environment variables when real notifications are needed. |
 | 2026-06-01-workspace-monitor | Create repository monitoring site | workspace-monitor | completed | codex-primary | No action. Future monitoring features should extend the snapshot collector and dashboard inside workspace-monitor. |
 | 2026-06-01-structure-governance-audit | Add root structure governance audit | _ops | completed | codex-primary | No action. Future root folder changes should run structure-audit before close-out. |
+| 2026-06-01-project-folder-inventory-audit | Extend structure audit to project folder inventories | _ops | completed | codex-primary | No action. Future durable project top-level folders should be added to project_specific_home; generated outputs should be listed in generated_output_dirs and ignored. |
 
 ## Blockers
 

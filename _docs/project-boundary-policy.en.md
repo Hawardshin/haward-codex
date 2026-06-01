@@ -15,6 +15,7 @@ The philosophical basis lives in [_philosophy/agent-operating-philosophy.en.md](
 - `_private/` and `outputs/` are exceptions used only as local-only ignored folders, not as shared knowledge or durable artifacts.
 - Promote something to shared only when cross-project reuse is clear.
 - Register project status and boundaries in `_ops/projects/registry.json`.
+- Explain durable project top-level folders in each registry entry's `project_specific_home`.
 - Root folder classification rules live in `_ops/projects/root-structure-policy.json`.
 
 ## What Belongs Inside A Project
@@ -68,7 +69,7 @@ Tools, templates, and rules that start inside a project can move to shared locat
 
 ## Structure Validation
 
-After changing root folders, the project registry, reserved operational folders, or local-only folder rules, run:
+After changing root folders, the project registry, reserved operational folders, local-only folder rules, durable project top-level folders, or generated-output rules, run:
 
 ```bash
 python3 _tools/structure-audit/src/structure_audit.py --check

@@ -10,6 +10,9 @@
 - `docs as code repository structure documentation architecture decision records best practices`
 - `GitLab Code Owners repository ownership path ownership docs`
 - `Software Engineering at Google monorepo version control`
+- Second pass: `monorepo repository structure project ownership documentation best practices codeowners docs-as-code`
+- Second pass: `GitLab documentation site architecture project structure docs-as-code`
+- Second pass: `Google monorepo source code repository structure ownership software engineering at Google`
 
 ## Sources Checked
 
@@ -33,6 +36,8 @@
 - Mark `_private/` and `outputs/` as local-only and protect them through `.gitignore`.
 - Separate generated output from durable artifacts.
 - Make workspace monitor expose structure-rule documents.
+- In the second pass, extend auditing from root folders to registered project top-level folders so registry ownership semantics stay visible.
+- Add validation that `generated_output_dirs` patterns are synchronized with `.gitignore`.
 
 ## Uncertainty
 
@@ -42,3 +47,4 @@
 ## Public Decision Summary
 
 - The right improvement is not a broad folder move. The repository needs explicit root folder classes, local-only exceptions, generated artifact rules, and a deterministic structure audit.
+- The additional improvement is to track durable project-internal folder semantics in the registry and validate generated output exceptions in both policy and ignore rules.

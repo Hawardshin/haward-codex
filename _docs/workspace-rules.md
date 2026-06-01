@@ -72,7 +72,9 @@ Project-specific visual or generated outputs should live under `artifacts/`.
 - Shared workspace folders are for cross-project operating assets, not project-local work.
 - Register root projects in `_ops/projects/registry.json`.
 - Classify root folder types in `_ops/projects/root-structure-policy.json`.
-- Run `python3 _tools/structure-audit/src/structure_audit.py --check` after root structure changes.
+- List durable project top-level folders in each registry entry's `project_specific_home`.
+- Keep generated folders covered by `generated_output_dirs` and `.gitignore`.
+- Run `python3 _tools/structure-audit/src/structure_audit.py --check` after root or project folder structure changes.
 - If a request introduces a new independent interest, lifecycle, command set, UI, dataset, or artifact stream, create a new root project.
 - Promote project-local assets to shared folders only when cross-project reuse is clear.
 
@@ -160,7 +162,7 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Reusable workflows live in `_ops/workflows/`.
 - Repository and prompt maps live in `_ops/maps/`.
 - Run `_tools/workspace-index` after navigational structure changes.
-- Run `_tools/structure-audit` after root folder, project registry, reserved folder, or local-only folder changes.
+- Run `_tools/structure-audit` after root folder, project registry, durable project top-level folder, reserved folder, local-only folder, or generated-output rule changes.
 - Run `_tools/task-board` after coordination status changes.
 
 ## Context Archive Policy

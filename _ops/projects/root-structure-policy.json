@@ -138,6 +138,16 @@
       ]
     },
     {
+      "id": "project_top_level_dirs_are_explained",
+      "rule": "Each registered project's durable top-level directories should be listed in that project registry entry's project_specific_home list unless they match generated_output_dirs.",
+      "reason": "A maintainer should be able to understand project folder purpose from the registry without inspecting every file.",
+      "applies_to": [
+        "project_registry_path",
+        "generated_output_dirs",
+        "structure_audit_command"
+      ]
+    },
+    {
       "id": "audit_before_restructure",
       "rule": "Run the structure audit before and after root-level folder changes, project creation, archive moves, or reserved-folder changes.",
       "reason": "A deterministic check catches ambiguous folders before they become long-lived conventions.",
@@ -263,6 +273,18 @@
       "purpose": "Next.js build cache and runtime output."
     },
     {
+      "pattern": "**/dist/",
+      "purpose": "Project-local distributable build output that can be regenerated."
+    },
+    {
+      "pattern": "**/build/",
+      "purpose": "Project-local compiled build output that can be regenerated."
+    },
+    {
+      "pattern": "**/coverage/",
+      "purpose": "Project-local test coverage output."
+    },
+    {
       "pattern": "**/out/",
       "purpose": "Static export output that can be regenerated from project source."
     },
@@ -277,6 +299,14 @@
     {
       "pattern": "**/.pytest_cache/",
       "purpose": "Pytest runtime cache."
+    },
+    {
+      "pattern": "**/.venv/",
+      "purpose": "Project-local Python virtual environment."
+    },
+    {
+      "pattern": "**/venv/",
+      "purpose": "Project-local Python virtual environment."
     }
   ],
   "structure_audit_command": "python3 _tools/structure-audit/src/structure_audit.py --check"

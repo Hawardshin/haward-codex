@@ -1,8 +1,9 @@
-"""Audit root-level workspace structure against the project boundary policy."""
+"""Audit workspace structure against the project boundary policy."""
 
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import json
 from pathlib import Path
 from typing import Any
@@ -27,6 +28,7 @@ def audit_structure(repo_root: Path, policy_path: Path | None = None) -> JsonMap
     registered_projects.discard("")
     reserved_dirs = {item["name"] for item in policy.get("reserved_operational_dirs", [])}
     local_only_dirs = {item["name"] for item in policy.get("local_only_dirs", [])}
+    generated_output_patterns = [item["pattern"] for item in policy.get("generated_output_dirs", [])]
 
     root_dirs = sorted(
         path.name
@@ -37,6 +39,7 @@ def audit_structure(repo_root: Path, policy_path: Path | None = None) -> JsonMap
     gaps: list[str] = []
     warnings: list[str] = []
     classifications = []
+    project_inventories = []
 
     for name in root_dirs:
         classification = _classify_root_dir(name, registered_projects, reserved_dirs, local_only_dirs)
@@ -61,6 +64,45 @@ def audit_structure(repo_root: Path, policy_path: Path | None = None) -> JsonMap
         if not _gitignore_mentions(gitignore_text, name):
             warnings.append(f"Local-only directory '{name}' is declared but not ignored in .gitignore.")
 
+    for pattern in generated_output_patterns:
+        if not _gitignore_mentions_pattern(gitignore_text, pattern):
+            gaps.append(f"Generated output pattern '{pattern}' must be ignored in .gitignore.")
+
+    for project in registry.get("projects", []):
+        project_path_value = project.get("path", "")
+        project_path = repo_root / project_path_value
+        if not project_path.exists() or not project_path.is_dir():
+            continue
+
+        declared_dirs = _declared_project_top_dirs(project)
+        top_dirs = sorted(path.name for path in project_path.iterdir() if path.is_dir())
+        generated_dirs = []
+        undocumented_dirs = []
+
+        for name in top_dirs:
+            if _is_generated_output_name(name, generated_output_patterns):
+                generated_dirs.append(name)
+                continue
+            if name not in declared_dirs:
+                undocumented_dirs.append(name)
+
+        for name in undocumented_dirs:
+            warnings.append(
+                f"Project '{project.get('name', project_path_value)}' has undocumented top-level directory '{name}'. "
+                "Add it to project_specific_home or mark it as generated output."
+            )
+
+        project_inventories.append(
+            {
+                "project": project.get("name", _normalize_root_name(project_path_value)),
+                "path": project_path_value,
+                "declared_top_level_dirs": declared_dirs,
+                "actual_top_level_dirs": top_dirs,
+                "generated_top_level_dirs": generated_dirs,
+                "undocumented_top_level_dirs": undocumented_dirs,
+            }
+        )
+
     status = "clean" if not gaps else "structure_rework_required"
     return {
         "status": status,
@@ -72,8 +114,11 @@ def audit_structure(repo_root: Path, policy_path: Path | None = None) -> JsonMap
             "registered_projects_count": len(registered_projects),
             "reserved_dirs_count": len(reserved_dirs),
             "local_only_dirs_count": len(local_only_dirs),
+            "generated_output_patterns_count": len(generated_output_patterns),
+            "project_inventories_count": len(project_inventories),
         },
         "classifications": classifications,
+        "project_inventories": project_inventories,
         "gaps": gaps,
         "warnings": warnings,
         "follow_up_actions": [f"Resolve structure gap: {gap}" for gap in gaps],
@@ -117,6 +162,55 @@ def _gitignore_mentions(gitignore_text: str, name: str) -> bool:
     candidates = {name, f"{name}/", f"/{name}", f"/{name}/"}
     lines = {line.strip() for line in gitignore_text.splitlines() if line.strip() and not line.strip().startswith("#")}
     return bool(candidates.intersection(lines))
+
+
+def _gitignore_mentions_pattern(gitignore_text: str, pattern: str) -> bool:
+    lines = {line.strip() for line in gitignore_text.splitlines() if line.strip() and not line.strip().startswith("#")}
+    normalized = pattern.strip()
+    suffix = normalized.removeprefix("**/").strip("/")
+    basename = suffix.rsplit("/", 1)[-1]
+    candidates = {
+        normalized,
+        normalized.strip("/"),
+        suffix,
+        f"{suffix}/",
+        f"/{suffix}/",
+        basename,
+        f"{basename}/",
+        f"/{basename}/",
+    }
+    wildcard_suffix = Path(basename).suffix
+    if wildcard_suffix:
+        candidates.add(f"*{wildcard_suffix}")
+    return bool(candidates.intersection(lines))
+
+
+def _declared_project_top_dirs(project: JsonMap) -> list[str]:
+    project_root = _normalize_root_name(project.get("path", project.get("name", "")))
+    declared = set()
+    for value in project.get("project_specific_home", []):
+        path = value.strip().strip("/")
+        if not path:
+            continue
+        if path == project_root:
+            continue
+        if path.startswith(f"{project_root}/"):
+            path = path[len(project_root) + 1 :]
+        declared.add(path.split("/", 1)[0])
+    return sorted(declared)
+
+
+def _is_generated_output_name(name: str, patterns: list[str]) -> bool:
+    candidates = {name, f"{name}/"}
+    for pattern in patterns:
+        suffix = pattern.removeprefix("**/").strip("/")
+        basename = suffix.rsplit("/", 1)[-1]
+        pattern_candidates = {suffix, f"{suffix}/", basename, f"{basename}/"}
+        if candidates.intersection(pattern_candidates):
+            return True
+        if any(fnmatch.fnmatch(candidate, pattern.removeprefix("**/")) for candidate in candidates):
+            return True
+    return False
 
 
 def _read_json(path: Path) -> JsonMap:

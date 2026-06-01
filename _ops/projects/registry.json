@@ -14,7 +14,8 @@
         "agent-platform/tests/",
         "agent-platform/configs/",
         "agent-platform/docs/",
-        "agent-platform/artifacts/"
+        "agent-platform/artifacts/",
+        "agent-platform/specs/"
       ],
       "shared_dependencies": [
         "_docs/",
@@ -67,6 +68,7 @@
         "workspace-monitor/components/",
         "workspace-monitor/lib/",
         "workspace-monitor/scripts/",
+        "workspace-monitor/public/",
         "workspace-monitor/src/generated/",
         "workspace-monitor/docs/",
         "workspace-monitor/tests/",

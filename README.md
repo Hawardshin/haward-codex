@@ -52,6 +52,7 @@
 - 새 관심사나 독립 라이프사이클이 생기면 새 루트 프로젝트로 만들고 `_ops/projects/`에 등록한다.
 - 공통 문서, 템플릿, 보관 자료처럼 프로젝트가 아닌 폴더는 `_` 접두어를 사용한다.
 - root folder class는 `_ops/projects/root-structure-policy.json`에서 관리하고, 구조 변경 뒤에는 `python3 _tools/structure-audit/src/structure_audit.py --check`를 실행한다.
+- 프로젝트 내부의 durable top-level folder는 `_ops/projects/registry.json`의 `project_specific_home`에 설명하고, 생성물은 `generated_output_dirs`와 `.gitignore`로 관리한다.
 - `_private/`와 `outputs/`는 로컬 전용 ignored folder로만 사용하고, 지속 산출물이나 지식 베이스로 쓰지 않는다.
 - 반복되는 작업은 필요한 경우 스킬, 도구, 템플릿으로 승격한다.
 - 긴 대화에서 중요한 결정과 작업 내용은 저장소 문서와 히스토리 로그로 압축한다.
@@ -192,7 +193,7 @@ project-name/
 - 검색 기반 계획 과정은 `_history/plans/`에 저장한다.
 - 무엇이 어디에 있는지에 대한 지도는 `_ops/maps/`에 둔다.
 - 구조가 바뀌면 `python3 _tools/workspace-index/src/workspace_index.py`로 맵을 갱신한다.
-- root folder, project registry, reserved folder가 바뀌면 `python3 _tools/structure-audit/src/structure_audit.py --check`로 구조를 검증한다.
+- root folder, project registry, project top-level folder, reserved folder, local-only/generated-output 규칙이 바뀌면 `python3 _tools/structure-audit/src/structure_audit.py --check`로 구조를 검증한다.
 
 ## 작업 평가 루프
 
