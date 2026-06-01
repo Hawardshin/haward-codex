@@ -44,10 +44,27 @@ AI의 내부 지식과 직관은 빠른 가설을 만드는 데 유용하다. �
 
 문서와 히스토리는 단순 보관이 아니라 다음 작업자가 이어받는 인터페이스다. 한국어 문서는 사람이 추적하기 쉽게 하고, 실제 실행 프롬프트는 토큰 절약을 위해 영어로 둔다.
 
+### 10. 사용자가 최종 권한을 가진다
+
+에이전트는 자율적으로 조사하고 실행할 수 있지만, 목표와 우선순위와 위험 허용 범위의 최종 결정권은 사용자에게 있다. 제품 의도, 안전, 비용, 공개 여부, 되돌리기 어려운 변경처럼 사용자의 판단이 필요한 부분은 명확히 질문하거나 알림으로 되돌린다.
+
+### 11. 자율성은 범위와 되돌림 가능성 위에 세운다
+
+에이전트가 더 많은 도구와 프로젝트를 다룰수록 작업 범위, 권한, 변경 경계, rollback 경로가 먼저 명확해야 한다. 빠른 실행보다 중요한 것은 잘못된 실행을 관찰하고, 멈추고, 되돌릴 수 있는 구조다.
+
+### 12. 보안과 프라이버시는 기능이 아니라 전제다
+
+토큰, 개인 정보, 비공개 조사, 로컬 scratch state는 지식 베이스나 산출물로 승격하지 않는다. 설치, 알림, 외부 배포, 공개 전환, 에이전트 메모리는 항상 secret indirection, 접근 범위, 공개 가능성, 감사 기록을 기준으로 다룬다.
+
+### 13. 운영 비용과 부채도 설계 대상이다
+
+모든 것을 매번 full loop로 돌리면 플랫폼이 무거워진다. 반대로 빠른 임시 처리만 쌓이면 agentic technical debt가 된다. 작업 모드, deferred backlog, naming audit, structure audit, workspace-health는 속도와 품질 사이의 균형을 운영하기 위한 장치다.
+
 ## 이 철학이 연결되는 실행 구조
 
 - 검색 기반 계획: `_ops/workflows/55-research-insight-planning.md`
 - 웹 우선 접수: `_ops/workflows/05-web-first-intake.md`
+- 메모리 부트스트랩: `agent-platform/configs/memory/bootstrap-manifest.json`
 - 지식 검증: `_ops/workflows/65-validate-knowledge-reference.md`
 - 할루시네이션 방지: `_ops/workflows/70-hallucination-prevention.md`
 - 계획 히스토리: `_history/plans/`
@@ -55,3 +72,5 @@ AI의 내부 지식과 직관은 빠른 가설을 만드는 데 유용하다. �
 - 프로젝트 경계 관리: `_ops/workflows/25-project-boundary-management.md`
 - 리서치 축적: `_research/`
 - 반복 능력 승격: `_docs/governance/capability-governance.md`
+- 작업 모드와 부채 관리: `agent-platform/configs/workflows/work-mode-registry.json`, `_ops/backlog/`
+- 구조와 이름 감사: `_tools/structure-audit/`, `_tools/naming-audit/`, `_tools/workspace-health/`

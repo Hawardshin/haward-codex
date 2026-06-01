@@ -51,6 +51,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 | REQ-WS-033 | Repository operations CLIs shall separate human-readable output from automation-oriented JSON output and provide category filters so maintainers can run only the checks they need. | UR-2026-06-01-017 | must | baseline | workspace/_tools | workspace-health category/json runs and JSON parse checks | `_tools/workspace-health/` |
 | REQ-WS-034 | When repository operations tools grow, they shall not mix CLI, domain models, check definitions, execution, and serialization in one script; they shall be split into responsibility-focused modules while preserving existing command compatibility. | UR-2026-06-01-018 | must | baseline | workspace/_tools | workspace-health unit tests, legacy entrypoint, JSON/category run, and full health check | `_tools/workspace-health/`, `_specs/workspace-platform/2026-06-01-workspace-health-source-refactor/` |
 | REQ-WS-035 | Durable names for projects, tools, skills, docs, specs, history, configs, and source code shall be managed by namespace-specific rules and pass deterministic naming audit after changes. | UR-2026-06-01-019 | must | baseline | workspace/_ops/_tools/_docs | naming-audit, workspace-health, config contract, and memory bootstrap checks | `_ops/naming/naming-policy.json`, `_docs/governance/naming-governance.en.md`, `_tools/naming-audit/` |
+| REQ-WS-036 | The platform concept and operating philosophy shall be reviewed periodically, and user authority, scoped autonomy, rollback capability, security/privacy, operating cost, and agentic debt shall be reflected in philosophy and memory bootstrap. | UR-2026-06-01-020 | must | baseline | workspace/_philosophy/agent-platform | philosophy review, memory bootstrap, and workspace-health checks | `_philosophy/agent-operating-philosophy.en.md`, `_philosophy/platform-concept-review.en.md`, `agent-platform/configs/memory/bootstrap-manifest.json` |
 
 ## Change Management
 
@@ -71,6 +72,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 - On 2026-06-01, REQ-WS-033 promoted human output, JSON output, and category filtering for operations CLIs such as workspace health.
 - On 2026-06-01, REQ-WS-034 promoted responsibility-focused Python package structure for growing operations tools while preserving existing script commands.
 - On 2026-06-01, REQ-WS-035 promoted namespace-specific durable naming rules and deterministic naming audit.
+- On 2026-06-01, REQ-WS-036 promoted platform concept/philosophy review plus user authority, autonomy boundaries, reversibility, security/privacy, and operating-debt principles into shared philosophy and memory anchors.
 - Before implementation, link relevant spec artifacts under `_specs/` or project `specs/`.
 - Before source-code implementation, link architecture references, architecture options, and decision notes in the coding research record.
 - When enterprise/high-quality sources seed research, update or reference `enterprise-source-registry.json` and `_research/source-lists/`.

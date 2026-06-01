@@ -7,6 +7,7 @@
 ## 문서
 
 - [에이전트 운영 철학](agent-operating-philosophy.ko.md)
+- [플랫폼 컨셉 재검토](platform-concept-review.ko.md)
 
 ## 기록 기준
 

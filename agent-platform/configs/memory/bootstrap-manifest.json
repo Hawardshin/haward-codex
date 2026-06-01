@@ -37,6 +37,7 @@
       "The notification settings, provider routing, or webhook secret handling contract changes.",
       "The root structure policy, local-only folder rule, or structure audit command changes.",
       "The naming policy, naming governance document, or naming audit command changes.",
+      "The foundational agent operating philosophy or platform concept review changes.",
       "The AI assistant runtime adapter registry or tool-specific adapter files change.",
       "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
       "The installation registry or installation audit contract changes.",
@@ -329,6 +330,17 @@
       "used_for": [
         "shared AI assistant operating principles independent of any one tool",
         "runtime adapter design rules"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "agent_operating_philosophy",
+      "title": "Agent Operating Philosophy",
+      "path": "_philosophy/agent-operating-philosophy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "foundational worldview behind repository operations",
+        "search, validation, planning, evaluation, autonomy, reversibility, privacy, and debt principles"
       ],
       "last_checked": "2026-06-01"
     },
@@ -706,6 +718,17 @@
         "assistant_runtime_adapter_registry",
         "runtime_adapter_dirs"
       ]
+    },
+    {
+      "id": "agent_operating_philosophy_must_stay_discoverable",
+      "rule": "The foundational agent operating philosophy must remain a warm memory anchor so future sessions understand why the workspace uses web-first research, skepticism, evaluation, project boundaries, human authority, scoped autonomy, privacy, and debt control.",
+      "reason": "The user explicitly asked to keep the project concept and philosophy visible and to check for missing parts.",
+      "applies_to": [
+        "anchors",
+        "required_anchor_ids",
+        "_philosophy",
+        "memory-bootstrap"
+      ]
     }
   ],
   "field_guide": [
@@ -769,6 +792,7 @@
     "naming_policy",
     "assistant_runtime_adapter_registry",
     "tool_agnostic_agent_operating_model",
+    "agent_operating_philosophy",
     "platform_readme",
     "source_registry",
     "enterprise_source_registry",
@@ -807,6 +831,7 @@
     "naming_policy",
     "assistant_runtime_adapter_registry",
     "tool_agnostic_agent_operating_model",
+    "agent_operating_philosophy",
     "platform_readme",
     "source_registry",
     "enterprise_source_registry",
@@ -954,6 +979,14 @@
       "path": "_docs/operating-models/tool-agnostic-agent-operating-model.ko.md",
       "tier": "warm",
       "purpose": "Shared AI assistant operating model that keeps runtime-specific instruction files as thin adapters.",
+      "required": true,
+      "load_order": 9
+    },
+    {
+      "id": "agent_operating_philosophy",
+      "path": "_philosophy/agent-operating-philosophy.ko.md",
+      "tier": "warm",
+      "purpose": "Foundational agent operating philosophy for search, skepticism, evaluation, autonomy, reversibility, privacy, and operating debt.",
       "required": true,
       "load_order": 9
     },

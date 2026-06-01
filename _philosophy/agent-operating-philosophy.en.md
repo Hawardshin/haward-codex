@@ -44,10 +44,27 @@ The shared operating environment applies to every project, but code, docs, setti
 
 Docs and history are not passive storage. They are interfaces for the next worker. Korean docs make human tracking easier, while executable prompt bodies stay in English to save tokens.
 
+### 10. The User Holds Final Authority
+
+Agents can research and act with autonomy, but the user owns the final decision about goals, priorities, and acceptable risk. When product intent, safety, cost, publication, or hard-to-reverse changes require human judgment, the agent should ask clearly or surface an alert.
+
+### 11. Autonomy Requires Scope And Reversibility
+
+As agents use more tools and touch more projects, scope, permissions, change boundaries, and rollback paths must be clear first. Fast execution matters less than being able to observe, stop, and reverse a bad action.
+
+### 12. Security And Privacy Are Preconditions
+
+Tokens, personal data, private research, and local scratch state should not be promoted into the knowledge base or durable artifacts. Installation, notifications, external deployment, public release, and agent memory should be handled through secret indirection, scoped access, publication review, and audit records.
+
+### 13. Operating Cost And Debt Are Design Objects
+
+Running the full loop for everything makes the platform heavy. Accumulating fast temporary work creates agentic technical debt. Work modes, deferred backlogs, naming audit, structure audit, and workspace-health exist to manage the tradeoff between speed and quality.
+
 ## Execution Structures Connected To This Philosophy
 
 - Search-backed planning: `_ops/workflows/55-research-insight-planning.md`
 - Web-first intake: `_ops/workflows/05-web-first-intake.md`
+- Memory bootstrap: `agent-platform/configs/memory/bootstrap-manifest.json`
 - Knowledge validation: `_ops/workflows/65-validate-knowledge-reference.md`
 - Hallucination prevention: `_ops/workflows/70-hallucination-prevention.md`
 - Plan history: `_history/plans/`
@@ -55,3 +72,5 @@ Docs and history are not passive storage. They are interfaces for the next worke
 - Project boundary management: `_ops/workflows/25-project-boundary-management.md`
 - Research accumulation: `_research/`
 - Capability promotion: `_docs/governance/capability-governance.md`
+- Work modes and debt management: `agent-platform/configs/workflows/work-mode-registry.json`, `_ops/backlog/`
+- Structure and naming audits: `_tools/structure-audit/`, `_tools/naming-audit/`, `_tools/workspace-health/`

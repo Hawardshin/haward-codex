@@ -7,6 +7,7 @@ Policy documents live under `_docs/`, executable procedures live under `_ops/`, 
 ## Documents
 
 - [Agent Operating Philosophy](agent-operating-philosophy.en.md)
+- [Platform Concept Review](platform-concept-review.en.md)
 
 ## What Belongs Here
 

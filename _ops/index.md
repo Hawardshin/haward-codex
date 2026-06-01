@@ -51,7 +51,7 @@
 - 한국 사용자 리뷰/로컬 조사 소스를 볼 때: [_research/source-lists/korean-local-review-sources.ko.md](../_research/source-lists/korean-local-review-sources.ko.md), [_tools/korean-local-review/README.ko.md](../_tools/korean-local-review/README.ko.md)
 - 프롬프트를 고를 때: [_ops/prompts/00-router.md](prompts/00-router.md)
 - 속도 개선을 위해 작업을 병렬 lane으로 나눌 때: [_ops/workflows/52-parallel-work-planning.md](workflows/52-parallel-work-planning.md), [_ops/prompts/82-parallel-work-planning.md](prompts/82-parallel-work-planning.md), [parallel-work-planner-agent](../agent-platform/docs/parallel-work-planner-agent.ko.md)
-- 운영 철학을 볼 때: [_philosophy/agent-operating-philosophy.ko.md](../_philosophy/agent-operating-philosophy.ko.md)
+- 운영 철학과 컨셉 재검토를 볼 때: [_philosophy/agent-operating-philosophy.ko.md](../_philosophy/agent-operating-philosophy.ko.md), [_philosophy/platform-concept-review.ko.md](../_philosophy/platform-concept-review.ko.md)
 - 프로젝트 경계를 확인할 때: [_ops/projects/index.ko.md](projects/index.ko.md), [_docs/policies/project-boundary-policy.ko.md](../_docs/policies/project-boundary-policy.ko.md)
 - root folder class와 local-only 규칙을 확인할 때: [_ops/projects/root-structure-policy.json](projects/root-structure-policy.json), [_tools/structure-audit/README.ko.md](../_tools/structure-audit/README.ko.md)
 - 웹 검색 기반 인사이트로 계획할 때: [_ops/workflows/55-research-insight-planning.md](workflows/55-research-insight-planning.md)
