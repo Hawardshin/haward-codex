@@ -9,4 +9,4 @@
 | 구현 | `_ops/projects/root-structure-policy.json`, `_tools/structure-audit/` |
 | 검증 | `_specs/workspace-platform/2026-06-01-structure-governance-audit/validation.ko.md` |
 | 평가 | `_history/evaluations/2026/2026-06-01-structure-governance-audit.ko.md` |
-| 커밋 | `PENDING` |
+| 커밋 | `009a634` |

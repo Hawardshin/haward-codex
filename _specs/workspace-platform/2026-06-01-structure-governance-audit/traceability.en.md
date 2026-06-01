@@ -9,4 +9,4 @@
 | Implementation | `_ops/projects/root-structure-policy.json`, `_tools/structure-audit/` |
 | Validation | `_specs/workspace-platform/2026-06-01-structure-governance-audit/validation.en.md` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-structure-governance-audit.en.md` |
-| Commit | `PENDING` |
+| Commit | `009a634` |
