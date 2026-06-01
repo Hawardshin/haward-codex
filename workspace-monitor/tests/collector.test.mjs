@@ -7,6 +7,7 @@ import test from "node:test";
 import {
   buildSnapshot,
   collectAgentCatalog,
+  collectSourceFiles,
   collectViewModeCatalog,
   extractHistoryDate,
   extractTitle,
@@ -52,6 +53,7 @@ test("buildSnapshot reads minimal repository shape", () => {
   fs.mkdirSync(path.join(root, "_requirements", "baselines"), { recursive: true });
   fs.mkdirSync(path.join(root, "agent-platform", "configs", "agents"), { recursive: true });
   fs.mkdirSync(path.join(root, "agent-platform", "docs"), { recursive: true });
+  fs.mkdirSync(path.join(root, "demo", "src"), { recursive: true });
 
   fs.writeFileSync(
     path.join(root, "_ops", "projects", "registry.json"),
@@ -96,6 +98,7 @@ test("buildSnapshot reads minimal repository shape", () => {
     path.join(root, "_requirements", "baselines", "requirements.ko.md"),
     "| ID | 요구사항 | 우선순위 |\n| --- | --- | --- |\n| REQ-WM-001 | Build monitor | must |"
   );
+  fs.writeFileSync(path.join(root, "demo", "src", "main.py"), "print('hello')\n");
 
   const snapshot = buildSnapshot(root);
 
@@ -103,6 +106,9 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.stats.agentDefinitions, 1);
   assert.equal(snapshot.stats.completedTasks, 1);
   assert.equal(snapshot.documents.length, 6);
+  assert.equal(snapshot.stats.sourceFiles, 1);
+  assert.equal(snapshot.sourceFiles[0].language, "python");
+  assert.match(snapshot.sourceFiles[0].content, /hello/);
   assert.equal(snapshot.agentCatalog[0].name, "demo-agent");
   assert.equal(snapshot.agentCatalog[0].tools.length, 1);
   assert.equal(snapshot.agentCatalog[0].docPaths[0], "agent-platform/docs/demo-agent.ko.md");
@@ -111,6 +117,20 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.folderStructure.docsCategories[0].path, "_docs/instructions");
   assert.equal(snapshot.requirements[0].id, "REQ-WM-001");
   assert.equal(snapshot.viewModeCatalog.defaultMode, "superadmin_developer");
+});
+
+test("collectSourceFiles skips generated snapshots and reads source roots", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-source-test-"));
+  fs.mkdirSync(path.join(root, "app", "src", "generated"), { recursive: true });
+  fs.mkdirSync(path.join(root, "app", "src", "core"), { recursive: true });
+  fs.writeFileSync(path.join(root, "app", "src", "core", "index.ts"), "export const value = 1;\n");
+  fs.writeFileSync(path.join(root, "app", "src", "generated", "snapshot.json"), "{}\n");
+
+  const files = collectSourceFiles(root, [{ name: "app", path: "app/" }]);
+
+  assert.equal(files.length, 1);
+  assert.equal(files[0].path, "app/src/core/index.ts");
+  assert.equal(files[0].language, "typescript");
 });
 
 test("collectViewModeCatalog reads platform access modes", () => {

@@ -1,0 +1,151 @@
+{
+  "initial_instruction": "단 소스코드도 볼 수 있게.",
+  "result_summary": "Added a read-only Source section to Workspace Monitor. The collector now captures bounded sourceFiles from allowlisted source roots, the generated snapshot includes source counts, developer and superadmin_developer view modes can see the source section, the ordinary user view cannot, and the installable platform user flow now includes source code browsing for developer/superadmin usage.",
+  "work_mode": "governance",
+  "changed_files": [
+    "agent-platform/configs/access/view-mode-registry.json",
+    "platform-desktop-app/configs/user-flow-registry.json",
+    "platform-desktop-app/docs/user-flow.en.md",
+    "platform-desktop-app/docs/user-flow.ko.md",
+    "workspace-monitor/README.md",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/lib/snapshot.ts",
+    "workspace-monitor/scripts/collect-workspace.mjs",
+    "workspace-monitor/tests/collector.test.mjs",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/spec.ko.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/spec.en.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/plan.ko.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/plan.en.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/tasks.ko.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/tasks.en.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/validation.ko.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/validation.en.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/traceability.ko.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/traceability.en.md",
+    "_history/2026/2026-06-02.md",
+    "_history/plans/2026/2026-06-02-source-code-viewer.ko.md",
+    "_history/plans/2026/2026-06-02-source-code-viewer.en.md",
+    "_history/request-traces/2026/2026-06-02-source-code-viewer.ko.md",
+    "_history/request-traces/2026/2026-06-02-source-code-viewer.en.md",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/web-searches/2026/2026-06-02-source-code-viewer.ko.md",
+    "_history/web-searches/2026/2026-06-02-source-code-viewer.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/work-timings/2026/2026-06-02-source-code-viewer.json",
+    "_history/evaluations/2026/2026-06-02-source-code-viewer-omission.json",
+    "_history/evaluations/2026/2026-06-02-source-code-viewer-grounding.json",
+    "_history/evaluations/2026/2026-06-02-source-code-viewer-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-02-source-code-viewer.ko.md",
+    "_history/evaluations/2026/2026-06-02-source-code-viewer.en.md",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_ops/coordination/status.json",
+    "_ops/maps/repository-map.md",
+    "_research/topics/workspace-monitor/2026-06-02-source-code-viewer.ko.md",
+    "_research/topics/workspace-monitor/2026-06-02-source-code-viewer.en.md"
+  ],
+  "verification": [
+    "npm test",
+    "npm run collect",
+    "npm run check",
+    "npm run build",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/access/view-mode-registry.json ../_ops/installations/registry.json",
+    "python3 -m json.tool platform-desktop-app/configs/user-flow-registry.json >/dev/null",
+    "python3 -m json.tool agent-platform/configs/access/view-mode-registry.json >/dev/null",
+    "PYTHONPATH=src python3 -m unittest discover -s tests",
+    "python3 _tools/docs-audit/src/docs_audit.py --check",
+    "python3 _tools/workspace-index/src/workspace_index.py",
+    "python3 _tools/task-board/src/task_board.py",
+    "node -e snapshot smoke check for sourceFiles and view-mode source visibility",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-source-code-viewer-omission.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-source-code-viewer-grounding.json",
+    "python3 _tools/workspace-health/src/workspace_health.py",
+    "git diff --check"
+  ],
+  "references_checked": [
+    "Node.js fs official documentation",
+    "Next.js Static Exports official documentation",
+    "Shiki install documentation",
+    "Monaco Editor documentation",
+    "Existing Workspace Monitor collector, snapshot type, MonitorShell, and collector tests",
+    "Existing platform view-mode registry and installable user-flow registry"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-source-code-viewer-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-source-code-viewer.ko.md",
+    "_history/web-searches/2026/2026-06-02-source-code-viewer.en.md",
+    "_research/topics/workspace-monitor/2026-06-02-source-code-viewer.ko.md",
+    "_research/topics/workspace-monitor/2026-06-02-source-code-viewer.en.md",
+    "agent-platform/configs/access/view-mode-registry.json",
+    "platform-desktop-app/configs/user-flow-registry.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-source-code-viewer.ko.md",
+    "_history/plans/2026/2026-06-02-source-code-viewer.en.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/plan.ko.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/traceability.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-02-source-code-viewer.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-source-code-viewer-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-source-code-viewer.ko.md",
+    "_history/web-searches/2026/2026-06-02-source-code-viewer.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "platform-desktop-app/docs/user-flow.ko.md",
+    "platform-desktop-app/docs/user-flow.en.md"
+  ],
+  "spec_targets": [
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/spec.ko.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/spec.en.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/plan.ko.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/plan.en.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/tasks.ko.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/tasks.en.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/validation.ko.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/validation.en.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/traceability.ko.md",
+    "workspace-monitor/specs/2026-06-02-source-code-viewer/traceability.en.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-source-code-viewer.ko.md",
+    "_history/request-traces/2026/2026-06-02-source-code-viewer.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-source-code-viewer.json"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": false,
+  "cli_pipeline_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Before public deployment, add a public/private snapshot profile so sourceFiles can be excluded or restricted by build mode.",
+    "If code inspection becomes central, reconsider Shiki for syntax highlighting or Monaco for deeper read-only navigation.",
+    "Add a browser screenshot smoke test once Browser or Playwright is available in the project environment."
+  ]
+}

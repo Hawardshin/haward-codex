@@ -1,0 +1,169 @@
+{
+  "task": "Make source code viewable from the Workspace Monitor / installable platform interface.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "source-code-visible",
+      "description": "The monitor must expose repository source code so the user can inspect implementation files.",
+      "source": "UR-2026-06-02-018, REQ-WM-012",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/src/generated/workspace-snapshot.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "read-only-scope",
+      "description": "Source visibility must stay read-only and must not imply browser-based editing or saving.",
+      "source": "workspace-monitor/specs/2026-06-02-source-code-viewer/spec.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "view-mode-boundary",
+      "description": "Source code visibility must be limited to developer and superadmin developer views, not the ordinary user view.",
+      "source": "agent-platform/configs/access/view-mode-registry.json",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/access/view-mode-registry.json",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "source-collection-boundary",
+      "description": "The source collector must use a narrow allowlist and skip generated snapshots, build outputs, dependencies, and large files.",
+      "source": "workspace-monitor/specs/2026-06-02-source-code-viewer/plan.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "workspace-monitor/tests/collector.test.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "platform-user-flow-reflection",
+      "description": "The installable desktop platform user flow must mention source code browsing for developer/superadmin usage.",
+      "source": "platform-desktop-app request context",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/user-flow-registry.json",
+        "platform-desktop-app/docs/user-flow.ko.md",
+        "platform-desktop-app/docs/user-flow.en.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "full-code-editor",
+      "description": "Implement in-browser editing, saving, diffing, or IDE-like code actions.",
+      "source": "scope review",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "workspace-monitor/specs/2026-06-02-source-code-viewer/spec.ko.md"
+      ],
+      "rationale": "The request was to make source code viewable. Editing is intentionally outside this change because it would add write risk and permission design."
+    },
+    {
+      "item_id": "monaco-or-shiki",
+      "description": "Install Monaco or Shiki for richer code rendering.",
+      "source": "web search and implementation decision",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-source-code-viewer.ko.md",
+        "_research/topics/workspace-monitor/2026-06-02-source-code-viewer.ko.md"
+      ],
+      "rationale": "A dependency-free read-only viewer is sufficient for the current requirement. Rich highlighting can be reconsidered when the viewer becomes a deeper code inspection tool."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "workspace-monitor/scripts/collect-workspace.mjs",
+      "purpose": "Collect source files into the Workspace Monitor snapshot.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Render the Source section, filters, file list, and read-only source viewer.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/access/view-mode-registry.json",
+      "purpose": "Define which view modes can access the source section.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/specs/2026-06-02-source-code-viewer/spec.ko.md",
+      "purpose": "Record the implementation spec.",
+      "required": true
+    },
+    {
+      "path": "_history/work-timings/2026/2026-06-02-source-code-viewer.json",
+      "purpose": "Record timing and bottleneck information.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-tests",
+      "description": "Collector tests confirm sourceFiles are collected and generated snapshots are skipped.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm test"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-build",
+      "description": "Workspace Monitor snapshot, type check, and static build pass with the Source section.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm run collect",
+        "npm run check",
+        "npm run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "view-mode-validation",
+      "description": "View mode registry validates after adding the source section.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "snapshot-source-smoke",
+      "description": "Generated snapshot contains sourceFiles and exposes source only in developer/superadmin views.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "node -e snapshot smoke check"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Public deployment must review whether sourceFiles should be removed, restricted, or generated only for private/admin builds.",
+    "Browser screenshot verification was not run because the Browser tool was unavailable in this session and Playwright was not installed in the project."
+  ],
+  "notes": [
+    "The source viewer is intentionally dependency-free and read-only."
+  ]
+}

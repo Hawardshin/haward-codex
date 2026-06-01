@@ -1,0 +1,138 @@
+{
+  "task": "Ground factual claims for the source code viewer close-out.",
+  "output_summary": "Workspace Monitor now includes a read-only Source section backed by sourceFiles in the generated snapshot and gated by developer/superadmin view modes.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "collector-source",
+      "source": "workspace-monitor/scripts/collect-workspace.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary implementation for sourceFiles collection."
+    },
+    {
+      "evidence_id": "monitor-ui",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary UI implementation for the Source section."
+    },
+    {
+      "evidence_id": "view-mode-registry",
+      "source": "agent-platform/configs/access/view-mode-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Source of truth for user/developer/superadmin view-mode sections."
+    },
+    {
+      "evidence_id": "workspace-monitor-build",
+      "source": "npm test; npm run collect; npm run check; npm run build",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local verification commands passed before close-out."
+    },
+    {
+      "evidence_id": "view-mode-check",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local validator accepted the registry with source sections."
+    },
+    {
+      "evidence_id": "snapshot-smoke",
+      "source": "node -e snapshot smoke check on workspace-monitor/src/generated/workspace-snapshot.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Confirmed sourceFiles count and view-mode source section behavior in generated data."
+    },
+    {
+      "evidence_id": "node-fs-docs",
+      "source": "https://nodejs.org/api/fs.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Node.js documentation for filesystem access used by the collector."
+    },
+    {
+      "evidence_id": "next-static-export",
+      "source": "https://nextjs.org/docs/app/guides/static-exports",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Next.js documentation for static export constraints."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "Workspace Monitor now generates a sourceFiles collection in the snapshot.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "collector-source",
+        "workspace-monitor-build",
+        "snapshot-smoke"
+      ],
+      "verification_steps": [
+        "Read collect-workspace.mjs.",
+        "Ran npm run collect.",
+        "Checked generated workspace-snapshot.json with a Node smoke command."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace Monitor now has a read-only Source section with project/language filters and a code viewer.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "workspace-monitor-build"
+      ],
+      "verification_steps": [
+        "Read MonitorShell.tsx.",
+        "Ran npm run check and npm run build."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The ordinary user view does not include the source section, while developer and superadmin_developer views do.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "view-mode-registry",
+        "view-mode-check",
+        "snapshot-smoke"
+      ],
+      "verification_steps": [
+        "Read view-mode-registry.json.",
+        "Ran check-view-modes.",
+        "Checked generated viewModeCatalog source section membership."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "A dependency-free viewer was selected instead of Monaco or Shiki for this change.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "next-static-export",
+        "node-fs-docs"
+      ],
+      "verification_steps": [
+        "Checked package and UI implementation for no new code viewer dependency.",
+        "Compared external documentation in the web search record."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "The source viewer has not been browser-screenshot verified in this session.",
+    "Source snapshot contents should be reviewed again before a public deployment."
+  ],
+  "limitation_notes": [
+    "The Source section does not edit, save, diff, or execute code.",
+    "Syntax highlighting is intentionally basic because no Shiki/Monaco dependency was installed."
+  ]
+}

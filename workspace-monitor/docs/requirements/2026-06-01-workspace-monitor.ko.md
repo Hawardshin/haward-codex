@@ -22,6 +22,7 @@
 | REQ-WM-009 | 웹 UI는 `agent-platform/configs/agents/`의 에이전트 정의와 coordination runtime 상태를 합쳐 어떤 에이전트가 있는지 시각적으로 보여줘야 한다. | must | snapshot의 `agentCatalog`와 Agents UI 구성 맵 확인 |
 | REQ-WM-010 | 웹 UI는 `_history/` 문서의 날짜별 밀도와 유형별 분포를 시각화해야 한다. | must | History UI의 밀도 차트와 유형 막대 확인 |
 | REQ-WM-011 | 웹 UI는 `agent-platform/configs/access/view-mode-registry.json`을 읽어 `user`, `developer`, `superadmin_developer` 보기 모드를 선택할 수 있어야 하며, 현재 기본값은 슈퍼어드민 개발 보기여야 한다. | must | snapshot의 `viewModeCatalog`, 상단 view mode selector, `check-view-modes` 확인 |
+| REQ-WM-012 | 웹 UI는 developer와 superadmin 개발 보기에서 주요 프로젝트와 도구의 소스 코드를 읽기 전용으로 탐색할 수 있어야 한다. | must | snapshot의 `sourceFiles`, Source 탭, `npm run build` 확인 |
 
 ## 범위
 
@@ -31,12 +32,14 @@
 - 날짜별 히스토리 타임라인과 폴더 구조 지도
 - 에이전트 인벤토리와 히스토리 밀도/유형 시각화
 - 사용자/개발자/슈퍼어드민 개발 view mode 선택 UI
+- developer/superadmin용 읽기 전용 소스 코드 뷰어
 - Vercel 배포 문서
 
 ## 제외 범위
 
 - 인증, 로그인, 실시간 서버 monitoring
 - client-side view mode를 보안 경계로 취급하는 것
+- 브라우저에서 소스 코드를 편집하거나 저장하는 것
 - GitHub API 연동
 - 원격 DB 저장
 - private secret 또는 원본 대화 전문 공개

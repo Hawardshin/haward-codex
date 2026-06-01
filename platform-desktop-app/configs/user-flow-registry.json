@@ -475,12 +475,13 @@
         "developer",
         "superadmin_developer"
       ],
-      "contents": [
-        "agent registry",
-        "CLI adapters",
-        "notification channels",
-        "validators",
-        "install state"
+        "contents": [
+          "agent registry",
+          "CLI adapters",
+          "notification channels",
+          "read-only source code browser",
+          "validators",
+          "install state"
       ]
     },
     {
@@ -488,10 +489,11 @@
       "visible_in": [
         "superadmin_developer"
       ],
-      "contents": [
-        "raw configs",
-        "platform policies",
-        "coordination status",
+        "contents": [
+          "raw configs",
+          "source code",
+          "platform policies",
+          "coordination status",
         "validation gaps",
         "desktop release gates"
       ]
@@ -576,6 +578,7 @@
         "open raw registries",
         "run validators",
         "inspect source provenance",
+        "inspect source code",
         "inspect memory bootstrap anchors",
         "open coordination board"
       ]

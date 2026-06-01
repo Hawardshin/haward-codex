@@ -13,6 +13,7 @@ export type WorkspaceStats = {
   webSearches: number;
   timingRecords?: number;
   historyDays: number;
+  sourceFiles?: number;
   rootFolders: number;
 };
 
@@ -89,6 +90,19 @@ export type WorkspaceDocument = {
   workspaceArea: string;
 };
 
+export type WorkspaceSourceFile = {
+  id: string;
+  path: string;
+  project: string;
+  language: string;
+  extension: string;
+  sizeBytes: number;
+  lineCount: number;
+  updatedAt: string;
+  truncated: boolean;
+  content: string;
+};
+
 export type WorkspaceHistoryDocument = Omit<WorkspaceDocument, "html" | "historyYear" | "workspaceArea">;
 
 export type WorkspaceHistoryDay = {
@@ -153,6 +167,7 @@ export type WorkspaceSnapshot = {
   requirements: WorkspaceRequirement[];
   documents: WorkspaceDocument[];
   historyDays: WorkspaceHistoryDay[];
+  sourceFiles?: WorkspaceSourceFile[];
   folderStructure: WorkspaceFolderStructure;
   viewModeCatalog?: {
     defaultMode: string;

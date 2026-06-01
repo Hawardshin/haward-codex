@@ -1,0 +1,53 @@
+{
+  "schema_version": "2026-06-02",
+  "task_id": "2026-06-02-source-code-viewer",
+  "work_mode": "governance",
+  "status": "complete",
+  "measurement_method": "manual phase timestamps estimated from tool execution sequence",
+  "phases": [
+    {
+      "id": "web_first_intake",
+      "status": "measured",
+      "duration_minutes": 3,
+      "notes": "Checked official Node.js, Next.js, Shiki, and Monaco references."
+    },
+    {
+      "id": "local_context_review",
+      "status": "measured",
+      "duration_minutes": 5,
+      "notes": "Read Workspace Monitor collector, snapshot types, UI, tests, and view mode registry."
+    },
+    {
+      "id": "implementation",
+      "status": "measured",
+      "duration_minutes": 18,
+      "notes": "Added sourceFiles collector, types, Source tab, CSS, view mode source section, and tests."
+    },
+    {
+      "id": "documentation_history",
+      "status": "measured",
+      "duration_minutes": 12,
+      "notes": "Updated requirements, README, desktop user flow docs, specs, web search record, request trace, and work summary."
+    },
+    {
+      "id": "validation",
+      "status": "measured",
+      "duration_minutes": 11,
+      "notes": "Ran Workspace Monitor tests, collection, checks, build, source snapshot smoke checks, view-mode validation, JSON validation, and agent-platform unit tests."
+    },
+    {
+      "id": "commit_push",
+      "status": "not_measured",
+      "duration_minutes": null,
+      "notes": "Commit and push duration is not measured inside the work timing record."
+    }
+  ],
+  "bottlenecks": [
+    {
+      "phase": "implementation",
+      "reason": "The source viewer needed collector, type, UI, CSS, view mode, and public snapshot review changes together.",
+      "mitigation": "Kept the viewer read-only and dependency-free."
+    }
+  ],
+  "summary": "The work added source-code visibility with a narrow allowlisted snapshot and no new dependency."
+}

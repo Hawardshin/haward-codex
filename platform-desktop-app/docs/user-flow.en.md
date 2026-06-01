@@ -57,8 +57,8 @@ Required readiness checks include workspace readability, core platform files, an
 | Projects | visible | visible | visible | Root projects, requirements, specs, history |
 | Run | visible | visible | visible | Task start, work mode, output type, notification |
 | History | visible | visible | visible | Request summaries, traces, evaluations, web search records |
-| Capabilities | hidden | visible | visible | Agents, CLIs, notifications, validators, install state |
-| Superadmin | hidden | hidden | visible | Raw configs, policies, coordination, release gates |
+| Capabilities | hidden | visible | visible | Agents, CLIs, notifications, source code, validators, install state |
+| Superadmin | hidden | hidden | visible | Raw configs, source code, policies, coordination, release gates |
 
 ## Task Run Flow
 
@@ -106,6 +106,7 @@ Developer and superadmin views should expose:
 
 - View mode, work mode, and install mode comparison
 - Raw registries and config files
+- Read source code from key projects and tools
 - Validator execution
 - Source provenance and hallucination guard results
 - Memory bootstrap anchors

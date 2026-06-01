@@ -6,6 +6,7 @@ import {
   Bot,
   CalendarDays,
   ClipboardCheck,
+  Code2,
   FileSearch,
   FolderKanban,
   GitBranch,
@@ -20,7 +21,7 @@ import { useMemo, useState } from "react";
 
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot } from "@/lib/snapshot";
 
-type SectionId = "overview" | "projects" | "history" | "structure" | "documents" | "requirements" | "agents";
+type SectionId = "overview" | "projects" | "history" | "structure" | "documents" | "source" | "requirements" | "agents";
 
 type Section = {
   id: SectionId;
@@ -34,6 +35,7 @@ const sections: Section[] = [
   { id: "history", label: "History", icon: History },
   { id: "structure", label: "Structure", icon: Layers },
   { id: "documents", label: "Documents", icon: BookOpenText },
+  { id: "source", label: "Source", icon: Code2 },
   { id: "requirements", label: "Requirements", icon: ClipboardCheck },
   { id: "agents", label: "Agents", icon: Bot }
 ];
@@ -53,7 +55,7 @@ const fallbackViewModes: MonitorViewMode[] = [
     id: "developer",
     label: "Developer View",
     intent: "Implementation, requirements, specs, agents, and verification surfaces.",
-    allowedSections: ["overview", "projects", "history", "structure", "documents", "requirements", "agents"],
+    allowedSections: ["overview", "projects", "history", "structure", "documents", "source", "requirements", "agents"],
     visibilityRules: {},
     securityNotes: []
   },
@@ -61,7 +63,7 @@ const fallbackViewModes: MonitorViewMode[] = [
     id: "superadmin_developer",
     label: "Super Admin Dev",
     intent: "Full owner/operator view for building the platform itself.",
-    allowedSections: ["overview", "projects", "history", "structure", "documents", "requirements", "agents"],
+    allowedSections: ["overview", "projects", "history", "structure", "documents", "source", "requirements", "agents"],
     visibilityRules: {},
     securityNotes: []
   }
@@ -73,6 +75,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [category, setCategory] = useState("all");
   const [historyDate, setHistoryDate] = useState("all");
   const [historyCategory, setHistoryCategory] = useState("all");
+  const [sourceProject, setSourceProject] = useState("all");
+  const [sourceLanguage, setSourceLanguage] = useState("all");
+  const [selectedSourceId, setSelectedSourceId] = useState("");
   const viewModes = snapshot.viewModeCatalog?.modes?.length ? snapshot.viewModeCatalog.modes : fallbackViewModes;
   const [viewMode, setViewMode] = useState(snapshot.viewModeCatalog?.defaultMode || "superadmin_developer");
   const currentViewMode = useMemo(() => {
@@ -159,6 +164,23 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       .sort((left, right) => right.count - left.count || left.category.localeCompare(right.category));
   }, [visibleHistoryDays]);
   const visibleRequirements = currentViewMode.allowedSections.includes("requirements") ? snapshot.requirements : [];
+  const visibleSourceFiles = currentViewMode.allowedSections.includes("source") ? snapshot.sourceFiles ?? [] : [];
+  const sourceProjects = useMemo(() => {
+    return Array.from(new Set(visibleSourceFiles.map((file) => file.project))).sort();
+  }, [visibleSourceFiles]);
+  const sourceLanguages = useMemo(() => {
+    return Array.from(new Set(visibleSourceFiles.map((file) => file.language))).sort();
+  }, [visibleSourceFiles]);
+  const filteredSourceFiles = useMemo(() => {
+    return visibleSourceFiles.filter((file) => {
+      const projectMatches = sourceProject === "all" || file.project === sourceProject;
+      const languageMatches = sourceLanguage === "all" || file.language === sourceLanguage;
+      const queryMatches =
+        !normalizedQuery || `${file.path} ${file.project} ${file.language} ${file.content}`.toLowerCase().includes(normalizedQuery);
+      return projectMatches && languageMatches && queryMatches;
+    });
+  }, [normalizedQuery, sourceLanguage, sourceProject, visibleSourceFiles]);
+  const selectedSource = filteredSourceFiles.find((file) => file.id === selectedSourceId) || filteredSourceFiles[0];
   const visibleEvaluations = viewFilteredDocuments.filter((document) => document.category === "evaluation").length;
   const visibleWebSearches = viewFilteredDocuments.filter((document) => document.category === "web-search").length;
 
@@ -222,20 +244,22 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="문서, 경로, 요약 검색"
+            placeholder={section === "source" ? "소스 경로, 언어, 코드 검색" : "문서, 경로, 요약 검색"}
           />
         </label>
-        <label className="select-box">
-          <ListFilter size={16} aria-hidden="true" />
-          <select value={category} onChange={(event) => setCategory(event.target.value)}>
-            <option value="all">모든 문서</option>
-            {viewCategories.map((item) => (
-              <option key={item} value={item}>
-                {categoryLabel(item)}
-              </option>
-            ))}
-          </select>
-        </label>
+        {section !== "source" && (
+          <label className="select-box">
+            <ListFilter size={16} aria-hidden="true" />
+            <select value={category} onChange={(event) => setCategory(event.target.value)}>
+              <option value="all">모든 문서</option>
+              {viewCategories.map((item) => (
+                <option key={item} value={item}>
+                  {categoryLabel(item)}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
       </section>
 
       {section === "overview" && (
@@ -246,7 +270,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             <Metric label="Requirements" value={visibleRequirements.length} icon={ClipboardCheck} tone="amber" />
             <Metric label="Evaluations" value={visibleEvaluations} icon={ShieldCheck} tone="red" />
             <Metric label="Web Searches" value={visibleWebSearches} icon={FileSearch} tone="violet" />
-            <Metric label="History Days" value={visibleHistoryDays.length} icon={CalendarDays} tone="slate" />
+            {currentViewMode.allowedSections.includes("source") ? (
+              <Metric label="Source Files" value={visibleSourceFiles.length} icon={Code2} tone="slate" />
+            ) : (
+              <Metric label="History Days" value={visibleHistoryDays.length} icon={CalendarDays} tone="slate" />
+            )}
           </section>
 
           <section className="panel wide">
@@ -488,6 +516,88 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               <div className="markdown-preview" dangerouslySetInnerHTML={{ __html: document.html }} />
             </article>
           ))}
+        </section>
+      )}
+
+      {section === "source" && (
+        <section className="source-browser">
+          <section className="panel wide">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Source</p>
+                <h2>소스 코드 보기</h2>
+              </div>
+              <span className="result-count">{filteredSourceFiles.length} files</span>
+            </div>
+            <div className="source-filters">
+              <label className="select-box">
+                <FolderKanban size={16} aria-hidden="true" />
+                <select value={sourceProject} onChange={(event) => setSourceProject(event.target.value)}>
+                  <option value="all">모든 프로젝트</option>
+                  {sourceProjects.map((project) => (
+                    <option key={project} value={project}>
+                      {project}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="select-box">
+                <Code2 size={16} aria-hidden="true" />
+                <select value={sourceLanguage} onChange={(event) => setSourceLanguage(event.target.value)}>
+                  <option value="all">모든 언어</option>
+                  {sourceLanguages.map((language) => (
+                    <option key={language} value={language}>
+                      {language}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            {filteredSourceFiles.length === 0 ? (
+              <p className="empty-state">검색 조건에 맞는 소스 파일이 없습니다.</p>
+            ) : (
+              <div className="source-layout">
+                <div className="source-list" aria-label="Source files">
+                  {filteredSourceFiles.slice(0, 120).map((file) => (
+                    <button
+                      key={file.id}
+                      className={selectedSource?.id === file.id ? "active" : ""}
+                      onClick={() => setSelectedSourceId(file.id)}
+                      type="button"
+                    >
+                      <strong>{file.path}</strong>
+                      <span>
+                        {file.project} / {file.language} / {file.lineCount.toLocaleString("ko-KR")} lines
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                <article className="source-viewer">
+                  {selectedSource ? (
+                    <>
+                      <header>
+                        <div>
+                          <span>{selectedSource.language}</span>
+                          <h3>{selectedSource.path}</h3>
+                          <p>
+                            {selectedSource.project} / {selectedSource.sizeBytes.toLocaleString("ko-KR")} bytes /{" "}
+                            {selectedSource.lineCount.toLocaleString("ko-KR")} lines
+                          </p>
+                        </div>
+                        {selectedSource.truncated && <strong>truncated</strong>}
+                      </header>
+                      <pre>
+                        <code>{selectedSource.content}</code>
+                      </pre>
+                    </>
+                  ) : (
+                    <p className="empty-state">왼쪽에서 소스 파일을 선택하세요.</p>
+                  )}
+                </article>
+              </div>
+            )}
+          </section>
         </section>
       )}
 

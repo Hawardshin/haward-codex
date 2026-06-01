@@ -10,6 +10,26 @@ const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.
 
 const IGNORE_DIRS = new Set([".git", ".next", "node_modules", "out", "__pycache__", ".pytest_cache"]);
 const MAX_DOCUMENTS = 1200;
+const MAX_SOURCE_FILES = 260;
+const MAX_SOURCE_CHARS = 22000;
+const MAX_SOURCE_FILE_BYTES = 180000;
+const SOURCE_DIR_NAMES = ["src", "tests", "app", "components", "lib", "scripts"];
+const SOURCE_EXTENSIONS = new Set([
+  ".py",
+  ".js",
+  ".mjs",
+  ".cjs",
+  ".ts",
+  ".tsx",
+  ".css",
+  ".html",
+  ".json",
+  ".toml",
+  ".yaml",
+  ".yml",
+  ".sh"
+]);
+const SOURCE_EXCLUDED_SEGMENTS = ["/src/generated/", "/public/", "/out/", "/.next/", "/node_modules/"];
 const HISTORY_CATEGORIES = new Set([
   "daily-history",
   "evaluation",
@@ -82,6 +102,7 @@ export function buildSnapshot(repoRoot) {
   const historyDays = buildHistoryDays(documents);
   const folderStructure = buildFolderStructure(repoRoot, projects, documents);
   const viewModeCatalog = collectViewModeCatalog(repoRoot);
+  const sourceFiles = collectSourceFiles(repoRoot, projects);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
   const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
   const agentCatalog = collectAgentCatalog(repoRoot, coordination.agents || [], tasks);
@@ -105,6 +126,7 @@ export function buildSnapshot(repoRoot) {
       webSearches: documents.filter((document) => document.category === "web-search").length,
       timingRecords: documents.filter((document) => document.category === "work-timing").length,
       historyDays: historyDays.length,
+      sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
     },
     projects: projects.map(normalizeProject),
@@ -114,6 +136,7 @@ export function buildSnapshot(repoRoot) {
     requirements,
     documents,
     historyDays,
+    sourceFiles,
     folderStructure,
     viewModeCatalog,
     categories,
@@ -126,6 +149,31 @@ export function buildSnapshot(repoRoot) {
       ]
     }
   };
+}
+
+export function collectSourceFiles(repoRoot, projects = []) {
+  const roots = sourceRoots(repoRoot, projects);
+  const seen = new Set();
+  const files = [];
+
+  for (const root of roots) {
+    for (const filePath of walkFiles(root.path)) {
+      const relativePath = toPosix(path.relative(repoRoot, filePath));
+      if (seen.has(relativePath) || !isSourceFile(relativePath)) {
+        continue;
+      }
+      const stats = fs.statSync(filePath);
+      if (stats.size > MAX_SOURCE_FILE_BYTES) {
+        continue;
+      }
+      seen.add(relativePath);
+      files.push(readSourceFile(repoRoot, filePath, root.project));
+    }
+  }
+
+  return files
+    .sort((left, right) => left.path.localeCompare(right.path))
+    .slice(0, MAX_SOURCE_FILES);
 }
 
 export function collectViewModeCatalog(repoRoot) {
@@ -532,6 +580,91 @@ function historyDocumentSummary(document) {
     updatedAt: document.updatedAt,
     historyDate: document.historyDate
   };
+}
+
+function sourceRoots(repoRoot, projects = []) {
+  const roots = [];
+  for (const project of projects || []) {
+    const projectPath = stripTrailingSlash(project.path || project.name || "");
+    if (!projectPath || projectPath.startsWith("_")) {
+      continue;
+    }
+    for (const dirName of SOURCE_DIR_NAMES) {
+      const rootPath = path.join(repoRoot, projectPath, dirName);
+      if (fs.existsSync(rootPath)) {
+        roots.push({ project: project.name || projectPath, path: rootPath });
+      }
+    }
+  }
+
+  const toolsRoot = path.join(repoRoot, "_tools");
+  if (fs.existsSync(toolsRoot)) {
+    for (const entry of fs.readdirSync(toolsRoot, { withFileTypes: true })) {
+      if (!entry.isDirectory()) {
+        continue;
+      }
+      for (const dirName of ["src", "tests", "scripts"]) {
+        const rootPath = path.join(toolsRoot, entry.name, dirName);
+        if (fs.existsSync(rootPath)) {
+          roots.push({ project: `_tools/${entry.name}`, path: rootPath });
+        }
+      }
+    }
+  }
+
+  return roots;
+}
+
+function isSourceFile(relativePath) {
+  const normalized = `/${relativePath}`;
+  if (SOURCE_EXCLUDED_SEGMENTS.some((segment) => normalized.includes(segment))) {
+    return false;
+  }
+  if (/package-lock\.json$|tsconfig\.tsbuildinfo$/.test(relativePath)) {
+    return false;
+  }
+  return SOURCE_EXTENSIONS.has(path.extname(relativePath).toLowerCase());
+}
+
+function readSourceFile(repoRoot, filePath, project) {
+  const relativePath = toPosix(path.relative(repoRoot, filePath));
+  const content = fs.readFileSync(filePath, "utf8");
+  const stats = fs.statSync(filePath);
+  const truncated = content.length > MAX_SOURCE_CHARS;
+  const preview = truncated ? content.slice(0, MAX_SOURCE_CHARS) : content;
+
+  return {
+    id: slugify(relativePath),
+    path: relativePath,
+    project,
+    language: sourceLanguage(relativePath),
+    extension: path.extname(relativePath).replace(/^\./, ""),
+    sizeBytes: stats.size,
+    lineCount: content.split(/\r?\n/).length,
+    updatedAt: stats.mtime.toISOString(),
+    truncated,
+    content: preview
+  };
+}
+
+function sourceLanguage(relativePath) {
+  const extension = path.extname(relativePath).toLowerCase();
+  const languages = {
+    ".py": "python",
+    ".js": "javascript",
+    ".mjs": "javascript",
+    ".cjs": "javascript",
+    ".ts": "typescript",
+    ".tsx": "tsx",
+    ".css": "css",
+    ".html": "html",
+    ".json": "json",
+    ".toml": "toml",
+    ".yaml": "yaml",
+    ".yml": "yaml",
+    ".sh": "shell"
+  };
+  return languages[extension] || extension.replace(/^\./, "") || "unknown";
 }
 
 function workspaceArea(relativePath) {

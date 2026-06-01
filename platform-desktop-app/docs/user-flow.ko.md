@@ -57,8 +57,8 @@ Slack, Discord, Teams, 외부 CLI, 고급 검증, 브라우저 자동화 같은 
 | Projects | 표시 | 표시 | 표시 | 루트 프로젝트, 요구사항, 스펙, 히스토리 |
 | Run | 표시 | 표시 | 표시 | 작업 시작, work mode, 출력 유형, 알림 |
 | History | 표시 | 표시 | 표시 | 요청 요약, trace, 평가, 검색 기록 |
-| Capabilities | 숨김 | 표시 | 표시 | 에이전트, CLI, 알림, 검증, 설치 상태 |
-| Superadmin | 숨김 | 숨김 | 표시 | raw config, 정책, coordination, release gate |
+| Capabilities | 숨김 | 표시 | 표시 | 에이전트, CLI, 알림, 소스 코드, 검증, 설치 상태 |
+| Superadmin | 숨김 | 숨김 | 표시 | raw config, 소스 코드, 정책, coordination, release gate |
 
 ## 작업 실행 흐름
 
@@ -106,6 +106,7 @@ AI가 사용자에게 질문해야 할 때는 전체 작업을 멈추지 않는�
 
 - view mode, work mode, install mode 비교
 - raw registry와 설정 파일 열기
+- 주요 프로젝트와 도구의 소스 코드 읽기
 - validator 실행
 - source provenance와 hallucination guard 결과 보기
 - memory bootstrap anchor 확인

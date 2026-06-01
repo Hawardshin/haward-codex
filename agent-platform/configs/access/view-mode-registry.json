@@ -218,6 +218,7 @@
           "requirements",
           "specs",
           "agent inventory",
+          "source code",
           "tests and validation",
           "workspace monitor data"
         ],
@@ -242,6 +243,7 @@
         "history",
         "structure",
         "documents",
+        "source",
         "requirements",
         "agents"
       ],
@@ -270,6 +272,7 @@
           "history and request traces",
           "requirements and specs",
           "agent inventory and runtime status",
+          "source code",
           "governance docs",
           "source configs",
           "coordination boards",
@@ -296,6 +299,7 @@
         "history",
         "structure",
         "documents",
+        "source",
         "requirements",
         "agents"
       ],
