@@ -1,35 +1,46 @@
-# Work Evaluation: Playwright Browser Validation Install
+# Work Evaluation: presentation-agent Playwright Browser Validation
 
-## Initial Request
+## Scope
 
-The user asked to install and configure Playwright validation so it can actually run.
+- User request: install and configure Playwright so browser validation can actually run.
+- Work mode: `standard`
+- Requirement: `REQ-PA-015`
+- Related plan: `_history/plans/2026/2026-06-01-playwright-browser-validation.en.md`
 
 ## Completed Work
 
-- Installed `@playwright/test@1.60.0` and `@axe-core/playwright@4.11.3` as project-local devDependencies in `presentation-agent`.
-- Installed the Chromium browser binary.
-- Added `playwright.config.ts` and `tests/browser/html-deck.spec.ts`.
-- Validates generated HTML decks in desktop/mobile Chromium for rendering, nonblank slides, keyboard navigation, progress, presenter notes, and axe accessibility violations.
-- Updated installation audit records and `_ops/installations/registry.json`.
+- Added a project-local npm Playwright validation setup to `presentation-agent`.
+- Recorded `@playwright/test@1.60.0` and `@axe-core/playwright@4.11.3` as exact devDependencies.
+- Added `playwright.config.ts` and `tests/browser/html-deck.spec.ts` for Chromium browser validation.
+- The generated HTML decks are checked across desktop/mobile viewports for rendering, keyboard navigation, presenter notes, nonblank slide content, and automated axe-core accessibility violations.
+- Updated the installation audit trail and installation registry.
+
+## References Checked
+
+- Playwright Getting Started: https://playwright.dev/docs/intro
+- Playwright Browsers: https://playwright.dev/docs/browsers
+- Playwright Accessibility Testing: https://playwright.dev/docs/accessibility-testing
+- Playwright Visual Comparisons: https://playwright.dev/docs/test-snapshots
+- Deque axe-core repository: https://github.com/dequelabs/axe-core
+- Internal harness candidate review: `presentation-agent/configs/evaluation/harness-candidates.json`
 
 ## Verification
 
-- `npm run test:browser`: 20 tests passed.
-- `npm audit --json`: 0 vulnerabilities.
-- `npm ls --depth=0`: installed versions confirmed.
-- `npx playwright --version`: `Version 1.60.0`.
-- 10 presentation-agent Python tests passed.
-- Catalog validation passed with 82 records.
-- Installation registry/config contract passed.
-- workspace-monitor check/test/build passed.
-- workspace-health governance 7 checks passed.
-- work-timer check passed.
+- `cd presentation-agent && npm ls --depth=0`: `@axe-core/playwright@4.11.3`, `@playwright/test@1.60.0`
+- `cd presentation-agent && npm audit --json`: 0 vulnerabilities
+- `cd presentation-agent && npx playwright --version`: `Version 1.60.0`
+- `cd presentation-agent && npm run test:browser`: 20 Playwright tests passed
+- `PYTHONPATH=presentation-agent/src python3 -m unittest discover -s presentation-agent/tests`: 10 tests passed
+- `PYTHONPATH=presentation-agent/src python3 -m presentation_agent.catalog presentation-agent/data/reference-index/starter-reference-catalog.json`: `record_count=82`
+- `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../presentation-agent/configs/evaluation/harness-candidates.json ../_ops/installations/registry.json`: `self_documenting`
+- `PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research ../_history/plans/2026/2026-06-01-playwright-browser-validation-coding-research.json`: `ready_to_implement`
+- `python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-01-presentation-agent-playwright-validation.json`: `ready`
 
-## Evaluation
+## Result
 
-The result matches the initial request. The user can now run browser validation with `cd presentation-agent && npm run test:browser`. In this Codex macOS sandbox, default execution can fail on Mach port permissions, so use approved external execution or a normal terminal.
-
-## Remaining Improvements
-
-- Add visual screenshot baselines after rendering environment rules are defined.
-- Add a no-install `deck-spec` quality harness for faster pre-browser checks.
+- Difference from the initial instruction: none. Playwright validation was installed, configured, and executed.
+- Intentional deferral: screenshot baselines remain out of scope until a stable rendering environment and visual baseline policy exist.
+- Blocking gaps: none.
+- Improvement ideas:
+  - Add screenshot baseline validation after fonts/rendering environment are stable.
+  - Add a dev-server Playwright path if future decks depend on fetched assets or route behavior.

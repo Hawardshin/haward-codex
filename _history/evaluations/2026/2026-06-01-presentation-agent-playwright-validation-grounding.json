@@ -1,129 +1,187 @@
 {
-  "task": "Ground factual claims for presentation-agent Playwright browser validation installation.",
-  "output_summary": "Installed project-local Playwright Test and @axe-core/playwright for presentation-agent, added browser validation tests, and verified generated HTML decks in Chromium desktop/mobile viewports.",
+  "task": "Ground factual claims for presentation-agent Playwright browser validation.",
+  "output_summary": "The presentation-agent project now has a project-local Playwright and axe-core browser validation harness for generated HTML decks.",
   "risk_level": "medium",
   "evidence": [
     {
-      "evidence_id": "playwright_docs",
-      "source": "https://playwright.dev/docs/intro",
-      "source_type": "official_docs",
-      "checked_on": "2026-06-01",
-      "reliability": "Official Playwright installation and test-runner documentation."
-    },
-    {
-      "evidence_id": "playwright_accessibility_docs",
-      "source": "https://playwright.dev/docs/accessibility-testing",
-      "source_type": "official_docs",
-      "checked_on": "2026-06-01",
-      "reliability": "Official Playwright accessibility testing documentation for axe integration."
-    },
-    {
-      "evidence_id": "package_manifest",
-      "source": "presentation-agent/package.json",
+      "evidence_id": "package_files",
+      "source": "presentation-agent/package.json; presentation-agent/package-lock.json",
       "source_type": "repository_file",
       "checked_on": "2026-06-01",
-      "reliability": "Tracked package manifest records exact project-local devDependency versions and scripts."
+      "reliability": "Tracked npm dependency files for the project-local Playwright validation harness."
     },
     {
-      "evidence_id": "browser_test",
+      "evidence_id": "playwright_config",
+      "source": "presentation-agent/playwright.config.ts",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked Playwright configuration for Chromium desktop and mobile viewports."
+    },
+    {
+      "evidence_id": "browser_spec",
       "source": "presentation-agent/tests/browser/html-deck.spec.ts",
       "source_type": "repository_file",
       "checked_on": "2026-06-01",
-      "reliability": "Tracked Playwright browser/accessibility test file."
+      "reliability": "Tracked Playwright test file for generated HTML deck rendering, navigation, presenter controls, and axe checks."
     },
     {
       "evidence_id": "npm_ls",
-      "source": "npm ls --depth=0 from presentation-agent",
+      "source": "cd presentation-agent && npm ls --depth=0",
       "source_type": "command_output",
       "checked_on": "2026-06-01",
-      "reliability": "Command output confirmed @axe-core/playwright@4.11.3 and @playwright/test@1.60.0."
+      "reliability": "Command output showed @axe-core/playwright@4.11.3 and @playwright/test@1.60.0 installed."
     },
     {
       "evidence_id": "npm_audit",
-      "source": "npm audit --json from presentation-agent",
+      "source": "cd presentation-agent && npm audit --json",
       "source_type": "command_output",
       "checked_on": "2026-06-01",
-      "reliability": "Command output reported 0 vulnerabilities."
+      "reliability": "Command output reported total vulnerabilities 0."
     },
     {
-      "evidence_id": "playwright_test",
-      "source": "npm run test:browser from presentation-agent",
+      "evidence_id": "playwright_version",
+      "source": "cd presentation-agent && npx playwright --version",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output reported Version 1.60.0."
+    },
+    {
+      "evidence_id": "browser_tests",
+      "source": "cd presentation-agent && npm run test:browser",
       "source_type": "test_result",
       "checked_on": "2026-06-01",
-      "reliability": "Command output showed 20 Playwright browser/accessibility tests passed under approved external execution."
+      "reliability": "Command output reported 20 Playwright tests passed."
     },
     {
-      "evidence_id": "installation_record",
-      "source": "_history/installations/2026/2026-06-01-presentation-agent-playwright.ko.md",
+      "evidence_id": "python_tests",
+      "source": "PYTHONPATH=presentation-agent/src python3 -m unittest discover -s presentation-agent/tests",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output reported 10 tests passed."
+    },
+    {
+      "evidence_id": "catalog_validation",
+      "source": "PYTHONPATH=presentation-agent/src python3 -m presentation_agent.catalog presentation-agent/data/reference-index/starter-reference-catalog.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output reported record_count 82 with no validation error."
+    },
+    {
+      "evidence_id": "config_contract",
+      "source": "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../presentation-agent/configs/evaluation/harness-candidates.json ../_ops/installations/registry.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output returned self_documenting with no rework required."
+    },
+    {
+      "evidence_id": "coding_research_check",
+      "source": "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research ../_history/plans/2026/2026-06-01-playwright-browser-validation-coding-research.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output returned ready_to_implement."
+    },
+    {
+      "evidence_id": "install_record",
+      "source": "_history/installations/2026/2026-06-01-presentation-agent-playwright.ko.md; _ops/installations/registry.json",
       "source_type": "repository_file",
       "checked_on": "2026-06-01",
-      "reliability": "Tracked installation audit record includes install commands, versions, security/license review, verification, and rollback."
+      "reliability": "Tracked installation audit and registry entry for the project-local npm install and browser binary."
+    },
+    {
+      "evidence_id": "requirements_specs",
+      "source": "presentation-agent/docs/requirements/2026-06-01-presentation-agent.ko.md; presentation-agent/specs/2026-06-01-playwright-browser-validation/",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked project requirements and spec-driven artifacts for REQ-PA-015."
+    },
+    {
+      "evidence_id": "timing_check",
+      "source": "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-01-presentation-agent-playwright-validation.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output returned ready with partial measurement warnings."
     }
   ],
   "claims": [
     {
-      "statement": "presentation-agent now has project-local Playwright Test and @axe-core/playwright devDependencies.",
+      "statement": "presentation-agent now has project-local npm dependency files for Playwright browser validation.",
       "claim_type": "repository_state",
       "support_level": "supported",
-      "evidence_ids": ["package_manifest", "npm_ls"],
-      "verification_steps": ["Read package.json and ran npm ls --depth=0."],
+      "evidence_ids": ["package_files", "npm_ls"],
+      "verification_steps": ["Read package files and ran npm ls --depth=0."],
       "presented_as_fact": true,
       "freshness_sensitive": false
     },
     {
-      "statement": "The installed direct versions are @playwright/test@1.60.0 and @axe-core/playwright@4.11.3.",
+      "statement": "The installed project-local validation dependencies include @playwright/test@1.60.0 and @axe-core/playwright@4.11.3.",
       "claim_type": "repository_state",
       "support_level": "supported",
-      "evidence_ids": ["package_manifest", "npm_ls", "installation_record"],
-      "verification_steps": ["Read package.json, ran npm ls, and updated the installation record."],
+      "evidence_ids": ["package_files", "npm_ls"],
+      "verification_steps": ["Checked package.json and npm ls --depth=0 output."],
       "presented_as_fact": true,
       "freshness_sensitive": false
     },
     {
-      "statement": "The Playwright test validates generated HTML decks across Chromium desktop and mobile viewports.",
+      "statement": "The Playwright configuration runs Chromium desktop and mobile viewport projects.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["playwright_config"],
+      "verification_steps": ["Read playwright.config.ts."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The browser test validates generated HTML decks with slide rendering, keyboard navigation, presenter controls, and axe accessibility checks.",
       "claim_type": "code_behavior",
       "support_level": "supported",
-      "evidence_ids": ["browser_test", "playwright_test"],
+      "evidence_ids": ["browser_spec", "browser_tests"],
       "verification_steps": ["Read html-deck.spec.ts and ran npm run test:browser."],
       "presented_as_fact": true,
       "freshness_sensitive": false
     },
     {
-      "statement": "The browser validation currently passes 20 tests.",
+      "statement": "npm run test:browser passed 20 Playwright tests on 2026-06-01.",
       "claim_type": "code_behavior",
       "support_level": "supported",
-      "evidence_ids": ["playwright_test"],
-      "verification_steps": ["Ran npm run test:browser under approved external execution."],
+      "evidence_ids": ["browser_tests"],
+      "verification_steps": ["Ran npm run test:browser from presentation-agent."],
       "presented_as_fact": true,
       "freshness_sensitive": false
     },
     {
-      "statement": "npm audit reported 0 vulnerabilities for this project-local install.",
+      "statement": "npm audit reported zero vulnerabilities for the presentation-agent npm dependency set on 2026-06-01.",
       "claim_type": "code_behavior",
       "support_level": "supported",
       "evidence_ids": ["npm_audit"],
       "verification_steps": ["Ran npm audit --json from presentation-agent."],
       "presented_as_fact": true,
-      "freshness_sensitive": true
+      "freshness_sensitive": false
     },
     {
-      "statement": "Default Codex sandbox execution failed for Chromium on macOS Mach port permissions, while approved external execution passed.",
-      "claim_type": "code_behavior",
+      "statement": "The Playwright installation is recorded in the installation audit trail and registry.",
+      "claim_type": "repository_state",
       "support_level": "supported",
-      "evidence_ids": ["playwright_test", "installation_record"],
-      "verification_steps": ["Observed sandbox test failure output and re-ran the same command with approved external execution."],
+      "evidence_ids": ["install_record"],
+      "verification_steps": ["Read the installation audit record and registry entry."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The Playwright validation work has project requirements, spec artifacts, timing, and coding research checks linked for future review.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["requirements_specs", "timing_check", "coding_research_check"],
+      "verification_steps": ["Checked requirements, spec directory, timing validator, and coding research validator."],
       "presented_as_fact": true,
       "freshness_sensitive": false
     }
   ],
   "uncertainty_notes": [
-    "npm audit results can change as advisory databases change.",
-    "Other machines need npm install and npm run install:browsers before running the tests.",
-    "axe-core validates automated accessibility rules, not full narrative or design quality."
+    "Playwright screenshot baseline testing remains deferred because visual baselines require stable fonts, viewport policy, and artifact review rules.",
+    "The npm audit result is a point-in-time check from 2026-06-01 and should be re-run when dependencies change."
   ],
   "limitation_notes": [
-    "Visual screenshot baselines were not added.",
-    "Only Chromium was installed and tested.",
-    "Browser tests require external execution in this Codex macOS sandbox when Chromium launch is blocked."
+    "The browser harness validates generated HTML deck behavior and automated accessibility checks, not subjective slide design quality.",
+    "The tests currently use file URLs for generated artifacts rather than a project web server."
   ]
 }
