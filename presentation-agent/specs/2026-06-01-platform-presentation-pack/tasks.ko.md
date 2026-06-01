@@ -9,4 +9,4 @@
 - [x] 발표 가이드와 source notes 작성
 - [x] 검증 실행
 - [x] 평가 실행
-- [ ] 커밋 및 push
+- [x] 커밋 및 push

@@ -9,4 +9,4 @@
 - [x] Write presentation guide and source notes
 - [x] Run verification
 - [x] Run evaluation
-- [ ] Commit and push
+- [x] Commit and push

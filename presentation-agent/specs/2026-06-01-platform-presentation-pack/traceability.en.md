@@ -8,4 +8,4 @@
 | Spec | `presentation-agent/specs/2026-06-01-platform-presentation-pack/spec.en.md` |
 | Implementation | `presentation-agent/data/deck-specs/`, `presentation-agent/artifacts/html/`, `presentation-agent/docs/scripts/`, `presentation-agent/docs/source-notes/` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-platform-presentation-pack.en.md` |
-| Commit | Pending |
+| Commit | `954f58a` |

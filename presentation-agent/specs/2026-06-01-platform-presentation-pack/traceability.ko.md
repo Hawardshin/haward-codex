@@ -8,4 +8,4 @@
 | 스펙 | `presentation-agent/specs/2026-06-01-platform-presentation-pack/spec.ko.md` |
 | 구현 | `presentation-agent/data/deck-specs/`, `presentation-agent/artifacts/html/`, `presentation-agent/docs/scripts/`, `presentation-agent/docs/source-notes/` |
 | 평가 | `_history/evaluations/2026/2026-06-01-platform-presentation-pack.ko.md` |
-| 커밋 | 예정 |
+| 커밋 | `954f58a` |
