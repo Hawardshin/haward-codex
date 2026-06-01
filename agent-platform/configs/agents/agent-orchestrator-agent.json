@@ -1,0 +1,27 @@
+{
+  "name": "agent-orchestrator-agent",
+  "description": "Helps create reusable platform agents and select explicit orchestration patterns, lifecycle gates, controls, and validation commands before agents are connected.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "agent-platform:check-agent-orchestration",
+    "agent-platform:list-agents",
+    "agent-platform:inspect-agent"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "before creating a new reusable agent, changing agent specs, connecting multiple agents, selecting supervisor/router/pipeline/fanout/handoff patterns, or adding framework-neutral orchestration contracts",
+    "input_schema": "agent-platform/configs/orchestration/agent-orchestration-registry.json",
+    "output_contract": "selected blueprint, selected orchestration pattern, required controls, validation commands, and affected docs/history targets",
+    "work_mode_registry": "agent-platform/configs/workflows/work-mode-registry.json",
+    "policy": "Use the agent orchestration registry as the source of truth. Every new reusable agent should select one blueprint, expose input/output/tool/policy/validation metadata, and run check-agent-orchestration plus list/inspect agent checks. Multi-agent work must select a pattern and declare state, handoff, tool access, human checkpoint, observability, resource, and evaluation controls.",
+    "docs_targets": [
+      "agent-platform/docs/agent-orchestration-platform.ko.md",
+      "agent-platform/docs/agent-orchestration-platform.en.md"
+    ],
+    "validation_commands": [
+      "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json",
+      "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/agent-orchestrator-agent.json"
+    ]
+  }
+}

@@ -53,6 +53,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep end-user desktop installer productization in `platform-desktop-app/`; this is separate from repository setup `install_mode`.
 - Keep external CLI integration in `configs/integrations/cli-adapter-registry.json`; the installable platform may use many CLIs through adapters but must not depend on one CLI to function.
 - Keep multi-process CLI orchestration plans in `configs/integrations/cli-pipeline-template.json` or task-specific history targets; use `cli-pipeline-agent` before launching, piping, exchanging file/artifact handoffs, merging, or cancelling several CLI processes together.
+- Keep reusable agent creation and multi-agent orchestration contracts in `configs/orchestration/agent-orchestration-registry.json`; use `agent-orchestrator-agent` before creating new reusable agents, changing agent specs, or connecting agents through supervisor/router/pipeline/fan-out/handoff patterns.
 - Keep unstructured-to-structured data transformation rules in `configs/usage/unstructured-data-structuring-profile.json`; AI-generated structure must preserve schema, provenance, null/ambiguity handling, and validation before downstream reuse.
 - Keep platform notification routing in `configs/integrations/notification-channels.json`; store only environment variable names there, never real webhook URLs or tokens.
 - Keep user request summaries under `_history/user-requests/`.
@@ -90,7 +91,7 @@ agent-platform/
 From `agent-platform/`:
 
 ```bash
-python3 -m unittest discover -s tests
+PYTHONPATH=src python3 -m unittest discover -s tests
 PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/example-python-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli score-oss configs/open-source/candidate-template.json
@@ -101,6 +102,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/
 PYTHONPATH=src python3 -m agent_platform.cli check-omissions configs/evaluation/omission-guard-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-resources configs/evaluation/resource-guard-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline configs/integrations/cli-pipeline-template.json
+PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-deep-research configs/planning/deep-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-parallel-work configs/planning/parallel-work-template.json
@@ -117,7 +119,7 @@ PYTHONPATH=src python3 -m agent_platform.cli list-work-modes configs/workflows/w
 PYTHONPATH=src python3 -m agent_platform.cli show-work-mode configs/workflows/work-mode-registry.json governance
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/deep-research-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/planning/deep-research-template.json configs/integrations/notification-channels.json
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/unstructured-data-structuring-profile.json
-PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json configs/integrations/cli-pipeline-template.json
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json configs/integrations/cli-pipeline-template.json configs/orchestration/agent-orchestration-registry.json
 ```
 
 ## Current Skeleton
@@ -128,6 +130,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `src/agent_platform/governance/`: checks for self-documenting settings and platform governance contracts
 - `src/agent_platform/integrations/`: external service integrations such as Slack, Discord, and Teams notifications
 - `src/agent_platform/memory/`: memory bootstrap checks for durable context loading
+- `src/agent_platform/orchestration/`: agent creation and orchestration registry checks
 - `src/agent_platform/oss/`: open-source dependency evaluation helpers
 - `src/agent_platform/planning/`: research-backed insight and planning checks
 - `configs/agents/`: declarative agent specs
@@ -144,6 +147,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `configs/integrations/cli-adapter-registry.json`: optional CLI adapter boundaries, execution contract, dependency posture, and missing-CLI fallback policy
 - `configs/integrations/cli-pipeline-template.json`: process graph, explicit pipe/file/artifact handoff, safety control, resource control, source provenance, and verification template for multi-CLI orchestration
 - `configs/integrations/notification-channels.json`: notification on/off routing, event filters, provider payload options, and environment-variable secret indirection
+- `configs/orchestration/agent-orchestration-registry.json`: framework-neutral agent spec, blueprint, pattern, control, lifecycle gate, and validation contract for reusable agents and multi-agent orchestration
 - `configs/usage/unstructured-data-structuring-profile.json`: schema, provenance, null handling, and validation contract for turning messy input into structured records
 - `configs/evaluation/omission-guard-template.json`: required item, artifact, and acceptance-check coverage template for omission prevention
 - `configs/evaluation/resource-guard-template.json`: memory and runtime resource leak risk, lifecycle cleanup, and measurement evidence template
@@ -156,6 +160,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `omission-guard-agent` checks required instructions, requirements, artifacts, and acceptance checks before non-`quick` close-out
 - `resource-guard-agent` checks memory and resource leak risks for long-running runtimes, browser automation, workers, caches, streams, large-data processing, subprocesses, file handles, network connections, timers, and subscriptions
 - `cli-pipeline-agent` checks multi-process CLI process graphs, pipes, file/artifact handoffs, adapter allowlists, safety controls, resource controls, provenance, merge strategy, and verification before several CLIs run together
+- `agent-orchestrator-agent` checks agent creation blueprints, agent specs, orchestration patterns, state and handoff contracts, controls, lifecycle gates, and validation commands before reusable agents are created or connected
 - `skill-lifecycle-agent` creates, validates, tracks, and improves repository-managed Codex skills
 - `parallel-work-planner-agent` checks task dependencies, file/resource boundaries, execution batches, research fan-in merge gates, coordination targets, and merge verification before parallel execution
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`

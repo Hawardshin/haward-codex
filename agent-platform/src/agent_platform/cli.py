@@ -28,6 +28,10 @@ from agent_platform.install_modes import (
     show_install_mode,
 )
 from agent_platform.memory.bootstrap import MemoryBootstrapManifest, check_memory_bootstrap
+from agent_platform.orchestration.agent_orchestration import (
+    check_agent_orchestration_registry,
+    load_agent_orchestration_registry,
+)
 from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidate
 from agent_platform.planning.coding_research import CodingResearchInput, complete_coding_research
 from agent_platform.planning.deep_research import DeepResearchInput, complete_deep_research
@@ -78,6 +82,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Check whether a multi-process CLI pipeline plan is safe and ready to execute.",
     )
     check_cli_pipeline_cmd.add_argument("path", type=Path)
+
+    check_agent_orchestration = subparsers.add_parser(
+        "check-agent-orchestration",
+        help="Validate the shared agent creation and orchestration registry.",
+    )
+    check_agent_orchestration.add_argument("path", type=Path)
 
     plan_from_research = subparsers.add_parser("plan-from-research", help="Check whether search-backed insights are ready for planning.")
     plan_from_research.add_argument("path", type=Path)
@@ -202,6 +212,27 @@ def main(argv: list[str] | None = None) -> int:
         with args.path.open("r", encoding="utf-8") as file:
             pipeline_input = CliPipelineInput.from_dict(json.load(file))
         print(json.dumps(check_cli_pipeline(pipeline_input), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "check-agent-orchestration":
+        registry = load_agent_orchestration_registry(args.path)
+        config_contract_report = check_config_contract(registry, str(args.path))
+        orchestration_report = check_agent_orchestration_registry(registry)
+        print(
+            json.dumps(
+                {
+                    "status": "rework_required"
+                    if config_contract_report["requires_rework"] or orchestration_report["requires_rework"]
+                    else "ready",
+                    "requires_rework": config_contract_report["requires_rework"]
+                    or orchestration_report["requires_rework"],
+                    "config_contract": config_contract_report,
+                    "agent_orchestration": orchestration_report,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
         return 0
 
     if args.command == "plan-from-research":

@@ -1,0 +1,101 @@
+{
+  "task": "Ground factual claims for the agent creation and orchestration platform change.",
+  "output_summary": "The platform now has a framework-neutral registry and CLI gate for reusable agent creation and multi-agent orchestration.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "registry",
+      "source": "agent-platform/configs/orchestration/agent-orchestration-registry.json",
+      "source_type": "repository_file",
+      "reliability": "direct file inspection"
+    },
+    {
+      "evidence_id": "tests",
+      "source": "PYTHONPATH=src python3 -m unittest discover -s tests",
+      "source_type": "test_result",
+      "reliability": "146 tests passed"
+    },
+    {
+      "evidence_id": "check-agent-orchestration",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json",
+      "source_type": "tool_result",
+      "reliability": "returned ready"
+    },
+    {
+      "evidence_id": "langchain-docs",
+      "source": "https://docs.langchain.com/oss/python/langchain/multi-agent",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "official documentation"
+    },
+    {
+      "evidence_id": "autogen-docs",
+      "source": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/index.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "official documentation"
+    },
+    {
+      "evidence_id": "crewai-docs",
+      "source": "https://docs.crewai.com/concepts/crews",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "official documentation"
+    },
+    {
+      "evidence_id": "openai-agents-docs",
+      "source": "https://openai.github.io/openai-agents-python/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "official documentation"
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now contains an agent orchestration registry.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "registry"
+      ],
+      "verification_steps": [
+        "File exists and check-agent-orchestration returned ready."
+      ],
+      "presented_as_fact": true
+    },
+    {
+      "statement": "The new CLI gate validates the registry and returned ready.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "check-agent-orchestration"
+      ],
+      "verification_steps": [
+        "Ran the command from agent-platform."
+      ],
+      "presented_as_fact": true
+    },
+    {
+      "statement": "Modern agent framework docs commonly separate agents, tools/tasks, state, handoffs, observability, and evaluation concepts.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "langchain-docs",
+        "autogen-docs",
+        "crewai-docs",
+        "openai-agents-docs"
+      ],
+      "verification_steps": [
+        "Checked official docs before implementation."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Framework APIs and documentation can change; recheck official docs before adopting a runtime framework."
+  ],
+  "limitation_notes": [
+    "This change does not implement a runtime scheduler or install a multi-agent framework."
+  ]
+}

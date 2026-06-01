@@ -1,0 +1,108 @@
+{
+  "task": "Create a platform structure for reusable agent creation and multi-agent orchestration.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "user-request-agent-platform",
+      "description": "Reflect the user's request that the platform should make many agents easy to create and orchestrate.",
+      "source": "UR-2026-06-02-015",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md#REQ-WS-060",
+        "agent-platform/configs/orchestration/agent-orchestration-registry.json"
+      ]
+    },
+    {
+      "item_id": "validation-gate",
+      "description": "Add a deterministic validation gate for the agent orchestration registry.",
+      "source": "REQ-WS-060",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/orchestration/agent_orchestration.py",
+        "agent-platform/src/agent_platform/cli.py",
+        "agent-platform/tests/test_agent_orchestration.py"
+      ]
+    },
+    {
+      "item_id": "operations-discovery",
+      "description": "Make future agent creation/orchestration work discoverable through workflow, prompt, maps, and memory.",
+      "source": "AGENTS.md Operations Navigation Rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_ops/workflows/72-agent-creation-orchestration.md",
+        "_ops/prompts/102-agent-creation-orchestration.md",
+        "_ops/prompts/00-router.md",
+        "agent-platform/configs/memory/bootstrap-manifest.json"
+      ]
+    },
+    {
+      "item_id": "runtime-framework-install",
+      "description": "Install a multi-agent framework runtime.",
+      "source": "scope decision",
+      "required": false,
+      "status": "not_applicable",
+      "rationale": "This work established the framework-neutral contract and validation gate. Runtime adoption is intentionally left to a future scoped implementation with installation audit."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/orchestration/agent-orchestration-registry.json",
+      "purpose": "Agent creation/orchestration registry",
+      "required": true
+    },
+    {
+      "path": "agent-platform/src/agent_platform/orchestration/agent_orchestration.py",
+      "purpose": "Registry validation logic",
+      "required": true
+    },
+    {
+      "path": "agent-platform/tests/test_agent_orchestration.py",
+      "purpose": "Unit tests for registry readiness and gap detection",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-02-agent-creation-orchestration-platform/spec.ko.md",
+      "purpose": "Spec-driven artifact",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "agent-platform-tests",
+      "description": "All agent-platform tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m unittest discover -s tests: 146 tests OK"
+      ]
+    },
+    {
+      "check_id": "agent-orchestration-ready",
+      "description": "Agent orchestration registry passes validation.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-agent-orchestration returned ready"
+      ]
+    },
+    {
+      "check_id": "workspace-health",
+      "description": "Workspace health governance/projects/tools checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace health passed: 18 checks"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "A future runtime orchestrator is not implemented in this scope.",
+    "External framework docs can change and must be rechecked before adoption."
+  ],
+  "notes": [
+    "No dependency installation occurred."
+  ]
+}

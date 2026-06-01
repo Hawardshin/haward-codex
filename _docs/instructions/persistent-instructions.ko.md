@@ -46,12 +46,13 @@
 - 에이전트는 뭔가를 빼먹을 수 있다고 가정한다. `quick`이 아닌 작업은 `_ops/workflows/68-omission-prevention.md` 또는 동등한 coverage check를 통해 필수 지시, 요구사항, 산출물, acceptance check를 확인하고 `omission_check_targets`를 평가 입력에 포함한다.
 - 이 플랫폼은 메모리 누수와 런타임 리소스 누수를 신뢰성 문제로 다룬다. 장시간 실행 에이전트, 서버, 브라우저 자동화, subprocess, worker, queue, cache, stream, 대용량 처리, 파일 핸들, 네트워크 연결, timer, subscription을 건드리면 `_ops/workflows/69-resource-leak-prevention.md`를 사용하고 `resource_risk_occurred=true`, `resource_check_targets`를 평가 입력에 포함한다.
 - 하나의 작업에서 여러 CLI 프로세스를 실행하거나 stdout/stderr/stdin pipe, 파일/임시 아티팩트/cache/log/report handoff, fan-out/fan-in merge, desktop/monitor/local daemon 기반 CLI orchestration을 설계하면 `_ops/workflows/71-cli-pipeline-orchestration.md`를 사용하고 `cli_pipeline_occurred=true`, `cli_pipeline_targets`를 평가 입력에 포함한다.
+- 재사용 에이전트를 만들거나 agent spec을 변경하거나 supervisor/router, 순차 pipeline, 병렬 fan-out/merge, handoff pattern으로 여러 에이전트를 조정하면 `agent-platform/configs/orchestration/agent-orchestration-registry.json`, `_ops/workflows/72-agent-creation-orchestration.md`, `check-agent-orchestration`을 사용한다.
 - 의미 있는 작업은 `_tools/work-timer/` 기준에 따라 `_history/work-timings/YYYY/`에 단계별 소요시간을 기록하고, 가장 오래 걸린 phase와 병목 후보를 확인할 수 있게 한다.
 - `ship_first` 모드에서 비차단 개선을 뒤로 미루면 `_ops/backlog/deferred-improvements.ko.md`나 해당 프로젝트의 동등 백로그에 기록하고 평가 입력에 `deferred_improvement_targets`를 포함한다.
 - 작업 속도가 문제되거나 여러 lane으로 나눌 수 있으면 `parallel-work-planner-agent`로 의존성, `touch_paths`, 충돌 제어, coordination target, merge 전략을 먼저 확인한다.
 - 같은 파일, 설정, 생성 맵, git 상태 같은 공유 자원을 건드리는 작업은 명시적 dependency, lock, branch/worktree 규칙 없이 병렬 실행하지 않는다.
 - 여러 조사 lane을 병렬 실행할 때는 모든 조사 lane을 기다리는 merge gate를 두고, contradiction과 accepted evidence를 합성한 뒤 downstream 구현을 release한다.
-- durable rule, 출처 설정, 프롬프트, 워크플로, 프로젝트 경계, AI assistant runtime adapter, 평가 루프가 바뀌면 `agent-platform/configs/memory/bootstrap-manifest.json`도 갱신한다.
+- durable rule, 출처 설정, 프롬프트, 워크플로, 프로젝트 경계, AI assistant runtime adapter, agent orchestration contract, 평가 루프가 바뀌면 `agent-platform/configs/memory/bootstrap-manifest.json`도 갱신한다.
 - 설치형 플랫폼은 특정 CLI wrapper가 아니다. 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`을 통해 교체 가능한 capability로 붙이고, optional CLI가 없으면 전체 실패가 아니라 `capability_missing`으로 degrade한다.
 - AI가 잘하는 핵심 작업 중 하나는 비정형 또는 반정형 데이터를 정형화하는 것이다. 긴 대화, 조사 자료, 문서, 리뷰, 로그, 메모, 스크린샷을 요구사항, 스펙, 태스크, evidence item, 표, JSON, 평가 입력으로 바꿀 때는 `agent-platform/configs/usage/unstructured-data-structuring-profile.json`과 `_ops/workflows/67-structure-unstructured-data.md`를 사용한다.
 - 비정형 데이터 정형화 결과는 보기 좋다는 이유로 믿지 말고 schema, source provenance, null/ambiguity handling, validation note를 함께 남긴 뒤 근거나 자동화 입력으로 사용한다.
@@ -112,6 +113,7 @@
 - `omission_check_targets`는 선택한 작업 모드가 요구할 때 포함한다. 필수 항목이 `covered`면 근거가 있어야 하고, `deferred`나 `not_applicable`이면 이유가 있어야 하며, 필수 `missing`은 재작업 대상이다.
 - 리소스 위험이 있는 작업은 `resource_check_targets`를 포함한다. 필수 리소스 위험은 mitigation과 근거가 있거나, rationale과 함께 accepted/not_applicable이어야 하며, 생명주기 cleanup path와 가능한 측정 근거가 있어야 한다.
 - Multi-process CLI pipeline 작업은 `cli_pipeline_targets`를 포함한다. 필수 process graph, pipe/artifact edge, safety control, resource control, provenance, verification이 빠지면 재작업 대상이다.
+- Reusable agent 생성, agent spec 변경, multi-agent orchestration contract 변경 작업은 검증 결과에 `check-agent-orchestration` 결과를 포함한다.
 - `timing_summary_targets`는 선택한 작업 모드가 요구할 때 포함하고, timing record는 측정하지 못한 구간을 `partial` 또는 `not_measured`로 명시한다.
 - 스킬 작업이 있었다면 평가 입력에는 `skill_work_occurred=true`, `skill_targets`, `skill_validation_targets`를 포함한다.
 - 에이전트 구현, 오케스트레이션, 백엔드 자동화, 평가, 재사용 로컬 도구는 Python을 우선한다.

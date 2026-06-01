@@ -53,6 +53,7 @@
       "The installable desktop software productization project, desktop distribution registry, or installer release gate policy changes.",
       "The runtime language decision registry, Rust/Go/Tauri/Wails direction, or runtime language selection policy changes.",
       "The CLI adapter registry, CLI pipeline template, external command execution boundary, optional CLI dependency posture, multi-process pipe orchestration, or missing-CLI fallback policy changes.",
+      "The agent orchestration registry, reusable agent blueprint contract, multi-agent orchestration pattern, or agent spec validation command changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
     ]
@@ -427,6 +428,18 @@
         "multi-process CLI process graph validation",
         "explicit pipe, file, artifact, and fan-in merge contract",
         "cli_pipeline_targets close-out policy"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "agent_orchestration_registry",
+      "title": "Agent Orchestration Registry",
+      "path": "agent-platform/configs/orchestration/agent-orchestration-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "reusable agent blueprint contract",
+        "agent spec validation",
+        "multi-agent supervisor, router, pipeline, fan-out, merge, and handoff orchestration patterns"
       ],
       "last_checked": "2026-06-02"
     },
@@ -1007,6 +1020,18 @@
       ]
     },
     {
+      "id": "agent_orchestration_registry_must_stay_discoverable",
+      "rule": "The agent orchestration registry must remain a warm memory anchor so future sessions can create reusable agents and connect multiple agents through explicit blueprints, patterns, controls, lifecycle gates, and validation commands.",
+      "reason": "The user clarified that the platform should make many agents easy to create and orchestrate as a durable platform capability.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "agent-orchestration-registry",
+        "check-agent-orchestration"
+      ]
+    },
+    {
       "id": "root_structure_policy_must_stay_discoverable",
       "rule": "The root structure policy must remain a warm memory anchor because future sessions need a deterministic way to classify root folders, runtime adapters, local-only scratch, generated outputs, and registered projects.",
       "reason": "The user explicitly asked to improve any folder-structure contradictions or management friction as the workspace grows.",
@@ -1157,6 +1182,7 @@
     "notification_settings",
     "cli_adapter_registry",
     "cli_pipeline_template",
+    "agent_orchestration_registry",
     "installation_registry"
   ],
   "required_anchor_ids": [
@@ -1210,6 +1236,7 @@
     "notification_settings",
     "cli_adapter_registry",
     "cli_pipeline_template",
+    "agent_orchestration_registry",
     "installation_registry"
   ],
   "anchors": [
@@ -1706,6 +1733,14 @@
       "path": "agent-platform/configs/integrations/cli-pipeline-template.json",
       "tier": "warm",
       "purpose": "Multi-process CLI pipeline contract for explicit process nodes, pipe edges, safety controls, resource controls, source provenance, merge strategy, and verification.",
+      "required": true,
+      "load_order": 37
+    },
+    {
+      "id": "agent_orchestration_registry",
+      "path": "agent-platform/configs/orchestration/agent-orchestration-registry.json",
+      "tier": "warm",
+      "purpose": "Framework-neutral contract for creating reusable agents and selecting multi-agent orchestration blueprints, patterns, controls, gates, and validation commands.",
       "required": true,
       "load_order": 37
     },
