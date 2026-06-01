@@ -1,0 +1,82 @@
+{
+  "name": "human-arbitration-agent",
+  "description": "Routes irreducible judgment calls to humans when multiple agent outputs, sources, principles, or options are defensible and the remaining choice depends on values, preference, risk appetite, strategy, accountability, or irreversible trade-offs.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "agent-platform:validate-knowledge",
+    "agent-platform:check-omissions",
+    "agent-platform:check-grounding",
+    "agent-platform:reconcile-spec",
+    "agent-platform:evaluate-work",
+    "agent-platform:check-notifications",
+    "agent-platform:notify"
+  ],
+  "metadata": {
+    "status": "active",
+    "owner": "personal",
+    "blueprint": "governance_agent",
+    "orchestration_pattern": "single_agent",
+    "trigger": "Use when two or more defensible options, sources, principles, or agent recommendations remain valid and the final choice depends on human values, preference, risk appetite, strategy, accountability, or an irreversible trade-off.",
+    "input_schema": "_ops/coordination/human-decision-inbox.json",
+    "output_contract": "Human arbitration packet with decision question, context, defensible options, evidence for each option, trade-offs, affected principles, risks, reversibility, recommended default if any, blocked_work, unblocked_work, answer format, resume_action, and notification need.",
+    "work_mode_registry": "agent-platform/configs/workflows/work-mode-registry.json",
+    "decision_inbox": "_ops/coordination/human-decision-inbox.json",
+    "policy": "Do not pretend certainty when competing options are each defensible. Separate factual disagreement from value, preference, strategy, authority, or risk-appetite disagreement. If facts are unresolved, send the work back to research, grounding, or knowledge skepticism. If facts are sufficiently grounded but the choice depends on human judgment, create a compact arbitration packet and register or update a human decision inbox record. Ask for the smallest decision that resolves the branch, continue safe unblocked work, and resume only affected work after the human answer arrives.",
+    "arbitration_modes": [
+      {
+        "mode": "principle_conflict",
+        "meaning": "Two principles both apply and must be prioritized by a human."
+      },
+      {
+        "mode": "strategy_tradeoff",
+        "meaning": "Options differ by speed, quality, cost, growth, risk, or maintainability but are each valid."
+      },
+      {
+        "mode": "preference_choice",
+        "meaning": "The choice depends on user taste, brand, UX tone, or subjective priority."
+      },
+      {
+        "mode": "risk_appetite",
+        "meaning": "The decision depends on how much uncertainty or downside the user accepts."
+      },
+      {
+        "mode": "authority_checkpoint",
+        "meaning": "The action is high-impact, irreversible, or responsibility-sensitive and needs owner approval."
+      }
+    ],
+    "safety_rules": [
+      "Do not escalate factual uncertainty as arbitration until source quality and grounding have been checked.",
+      "Do not ask humans to decide what tests or tools can resolve cheaply.",
+      "Do not block the whole task when only one branch depends on the answer.",
+      "Do not bury the recommended default; label it as a default, not a fact.",
+      "Record blocked_work, unblocked_work, assumptions, and resume_action for every arbitration decision."
+    ],
+    "arbitration_packet_fields": [
+      "decision_id",
+      "decision_question",
+      "why_human_judgment_is_required",
+      "options",
+      "evidence_by_option",
+      "tradeoffs",
+      "affected_principles",
+      "risk_and_reversibility",
+      "recommended_default",
+      "blocked_work",
+      "unblocked_work",
+      "answer_format",
+      "notification_event",
+      "resume_action"
+    ],
+    "docs_targets": [
+      "agent-platform/docs/human-arbitration-agent.ko.md",
+      "agent-platform/docs/human-arbitration-agent.en.md"
+    ],
+    "validation_commands": [
+      "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/human-arbitration-agent.json",
+      "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents",
+      "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json",
+      "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/coordination/human-decision-inbox.json"
+    ]
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "task": "Add reusable Human Arbitration agent",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "interpret-request",
+      "description": "Interpret the user's both-sides-are-right request as a durable human judgment arbitration structure.",
+      "source": "UR-2026-06-02-026",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_history/plans/2026/2026-06-02-human-arbitration-agent.ko.md"
+      ],
+      "rationale": "The request was summarized and planned as a Human Arbitration governance agent."
+    },
+    {
+      "item_id": "web-first",
+      "description": "Run web-first research and save a public search record.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-human-arbitration-agent.ko.md"
+      ],
+      "rationale": "The search record lists queries, sources checked, weak sources ignored, plan impact, and uncertainty."
+    },
+    {
+      "item_id": "requirements",
+      "description": "Add or link the durable requirement for human arbitration.",
+      "source": "governance work mode",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_requirements/changes/2026-06-02-human-arbitration-agent.ko.md",
+        "_requirements/reviews/2026-06-02-human-arbitration-agent.ko.md"
+      ],
+      "rationale": "REQ-WS-068 was added and reviewed."
+    },
+    {
+      "item_id": "agent-spec",
+      "description": "Create an inspectable Human Arbitration agent spec with trigger, policy, packet fields, and validation commands.",
+      "source": "REQ-WS-068",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/agents/human-arbitration-agent.json",
+        "agent-platform/docs/human-arbitration-agent.ko.md"
+      ],
+      "rationale": "The agent spec includes trigger, output contract, arbitration modes, safety rules, packet fields, and validation commands."
+    },
+    {
+      "item_id": "persistent-instructions",
+      "description": "Persist the rule that irreducible judgment calls go to human arbitration.",
+      "source": "persistent instruction rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "AGENTS.md",
+        "_docs/instructions/persistent-instructions.ko.md",
+        "_docs/instructions/persistent-instructions.en.md"
+      ],
+      "rationale": "Durable instructions now include the arbitration rule."
+    },
+    {
+      "item_id": "decision-inbox-link",
+      "description": "Connect the arbitration packet to the human decision inbox and non-blocking work policy.",
+      "source": "REQ-WS-068",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/agents/human-arbitration-agent.json",
+        "_ops/coordination/human-decision-inbox.json"
+      ],
+      "rationale": "The agent spec references the inbox and records blocked_work, unblocked_work, and resume_action."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/agents/human-arbitration-agent.json",
+      "purpose": "Reusable Human Arbitration agent spec.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/docs/human-arbitration-agent.ko.md",
+      "purpose": "Korean user-facing agent docs.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/docs/human-arbitration-agent.en.md",
+      "purpose": "English companion agent docs.",
+      "required": true
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Top-level durable repository instruction.",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-02-human-arbitration-agent/spec.ko.md",
+      "purpose": "Spec artifact.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "inspect-agent",
+      "description": "Inspect the new agent spec.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/human-arbitration-agent.json"
+      ],
+      "rationale": "Command completed with exit code 0."
+    },
+    {
+      "check_id": "list-agents",
+      "description": "Confirm the new agent appears in the registry list.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents"
+      ],
+      "rationale": "Command output included human-arbitration-agent."
+    },
+    {
+      "check_id": "full-verification",
+      "description": "Run full repository validation before close-out.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "agent-platform unit tests: 150 tests OK",
+        "memory bootstrap: ready_to_bootstrap",
+        "core config contracts: self_documenting",
+        "docs/naming/structure audits: passed",
+        "workspace index and task board regenerated",
+        "workspace-monitor collect/test/check/build: passed",
+        "workspace-health: 18 checks passed"
+      ],
+      "rationale": "Full verification completed with exit code 0 after regenerating stale maps and boards."
+    }
+  ],
+  "known_omission_risks": [
+    "No runtime arbitration engine or UI panel was implemented because the request is currently satisfied by durable governance structure and an inspectable agent spec."
+  ],
+  "notes": [
+    "The agent complements human-decision-inbox, principle-guardian-agent, and spec-reconciliation-agent rather than replacing them."
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "initial_instruction": "The user said: '이렇게 하다가 도저히 둘 다 맞는 말을 하는 경우에는 사람이 이제 그런걸 판단을 하는구조.'",
+  "result_summary": "Added a reusable Human Arbitration agent and persistent instructions so facts-checked but irreducible judgment calls are turned into structured human decision packets instead of fake certainty.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "agent-platform/configs/agents/human-arbitration-agent.json",
+    "agent-platform/docs/human-arbitration-agent.ko.md",
+    "agent-platform/docs/human-arbitration-agent.en.md",
+    "agent-platform/README.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-human-arbitration-agent.ko.md",
+    "_requirements/changes/2026-06-02-human-arbitration-agent.en.md",
+    "_requirements/reviews/2026-06-02-human-arbitration-agent.ko.md",
+    "_requirements/reviews/2026-06-02-human-arbitration-agent.en.md",
+    "_specs/workspace-platform/2026-06-02-human-arbitration-agent/",
+    "_research/topics/human-arbitration/2026-06-02-human-arbitration-agent.ko.md",
+    "_research/topics/human-arbitration/2026-06-02-human-arbitration-agent.en.md",
+    "_history/web-searches/2026/2026-06-02-human-arbitration-agent.ko.md",
+    "_history/web-searches/2026/2026-06-02-human-arbitration-agent.en.md",
+    "_history/source-provenance/2026/2026-06-02-human-arbitration-agent.ko.md",
+    "_history/source-provenance/2026/2026-06-02-human-arbitration-agent.en.md",
+    "_history/plan-evidence/2026/2026-06-02-human-arbitration-agent.ko.md",
+    "_history/plan-evidence/2026/2026-06-02-human-arbitration-agent.en.md",
+    "_history/plans/2026/2026-06-02-human-arbitration-agent.ko.md",
+    "_history/plans/2026/2026-06-02-human-arbitration-agent.en.md",
+    "_history/mode-selections/2026/2026-06-02-human-arbitration-agent.json",
+    "_history/request-traces/2026/2026-06-02-human-arbitration-agent.ko.md",
+    "_history/request-traces/2026/2026-06-02-human-arbitration-agent.en.md",
+    "_history/work-timings/2026/2026-06-02-human-arbitration-agent.json",
+    "_history/evaluations/2026/2026-06-02-human-arbitration-agent-omission.json",
+    "_history/evaluations/2026/2026-06-02-human-arbitration-agent-grounding.json",
+    "_history/evaluations/2026/2026-06-02-human-arbitration-agent-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-02-human-arbitration-agent.ko.md",
+    "_history/evaluations/2026/2026-06-02-human-arbitration-agent.en.md",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/2026/2026-06-02.md",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json"
+  ],
+  "verification": [
+    "JSON parse checks for human-arbitration-agent, bootstrap manifest, and coordination status: passed",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/human-arbitration-agent.json: passed",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents: human-arbitration-agent listed",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json: ready",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-human-arbitration-agent.json: ready",
+    "cd agent-platform && PYTHONPATH=src python3 -m unittest discover -s tests: 150 tests OK",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ...: self_documenting",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean with pre-existing presentation-agent generated-output warnings",
+    "python3 _tools/workspace-index/src/workspace_index.py: updated maps",
+    "python3 _tools/task-board/src/task_board.py: updated boards",
+    "cd workspace-monitor && npm run collect && npm test && npm run check && npm run build: passed",
+    "python3 _tools/workspace-health/src/workspace_health.py --category governance --category projects --category tools: 18 checks passed"
+  ],
+  "references_checked": [
+    "https://www.nist.gov/itl/ai-risk-management-framework",
+    "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10",
+    "https://www.oecd.org/en/topics/ai-principles.html",
+    "https://www.iso.org/standard/42001",
+    "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+    "AGENTS.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_ops/coordination/human-decision-inbox.json",
+    "agent-platform/configs/agents/principle-guardian-agent.json",
+    "agent-platform/configs/orchestration/agent-orchestration-registry.json",
+    "agent-platform/README.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-human-arbitration-agent-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-02-human-arbitration-agent.ko.md",
+    "_history/source-provenance/2026/2026-06-02-human-arbitration-agent.en.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-02-human-arbitration-agent.ko.md",
+    "_history/plan-evidence/2026/2026-06-02-human-arbitration-agent.en.md",
+    "_specs/workspace-platform/2026-06-02-human-arbitration-agent/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-human-arbitration-agent.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-human-arbitration-agent-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-human-arbitration-agent.ko.md",
+    "_history/web-searches/2026/2026-06-02-human-arbitration-agent.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-human-arbitration-agent.ko.md",
+    "_requirements/changes/2026-06-02-human-arbitration-agent.en.md",
+    "_requirements/reviews/2026-06-02-human-arbitration-agent.ko.md",
+    "_requirements/reviews/2026-06-02-human-arbitration-agent.en.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-human-arbitration-agent/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-human-arbitration-agent/spec.en.md",
+    "_specs/workspace-platform/2026-06-02-human-arbitration-agent/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-human-arbitration-agent/plan.en.md",
+    "_specs/workspace-platform/2026-06-02-human-arbitration-agent/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-human-arbitration-agent/tasks.en.md",
+    "_specs/workspace-platform/2026-06-02-human-arbitration-agent/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-human-arbitration-agent/validation.en.md",
+    "_specs/workspace-platform/2026-06-02-human-arbitration-agent/traceability.ko.md",
+    "_specs/workspace-platform/2026-06-02-human-arbitration-agent/traceability.en.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-human-arbitration-agent.ko.md",
+    "_history/request-traces/2026/2026-06-02-human-arbitration-agent.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-human-arbitration-agent.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "After several real arbitration packets exist, add a deterministic packet validator or Workspace Monitor decision panel.",
+    "Consider adding examples of arbitration packets for design preference, architecture trade-off, and principle conflict decisions."
+  ]
+}

@@ -55,6 +55,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep make-it-happen positive vision in `positive-vision-agent`; optimism should produce agency, pathways, if-then next steps, risk truth, fallback options, and verification gates, not unsupported guarantees.
 - Keep money-side judgment in `profit-analyst-agent`; profit analysis should expose revenue/cost drivers, ROI, break-even, unit economics, opportunity cost, scenario/sensitivity, source provenance, and high-risk financial review needs.
 - Keep principle adherence in `principle-guardian-agent`; all agents should treat durable principles as execution contracts and close-out gates, so speed, profit, optimism, convenience, or pressure cannot bypass required checks.
+- Keep irreducible human judgment in `human-arbitration-agent`; when multiple defensible options remain after grounding, route a structured arbitration packet to the human decision inbox instead of pretending certainty.
 - Keep external CLI integration in `configs/integrations/cli-adapter-registry.json`; the installable platform may use many CLIs through adapters but must not depend on one CLI to function.
 - Keep multi-process CLI orchestration plans in `configs/integrations/cli-pipeline-template.json` or task-specific history targets; use `cli-pipeline-agent` before launching, piping, exchanging file/artifact handoffs, merging, or cancelling several CLI processes together.
 - Keep reusable agent creation and multi-agent orchestration contracts in `configs/orchestration/agent-orchestration-registry.json`; use `agent-orchestrator-agent` before creating new reusable agents, changing agent specs, or connecting agents through supervisor/router/pipeline/fan-out/handoff patterns.
@@ -104,6 +105,7 @@ PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/timeke
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/positive-vision-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/profit-analyst-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/principle-guardian-agent.json
+PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/human-arbitration-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli score-oss configs/open-source/candidate-template.json
 PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/work-evaluation-template.json
 PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluation/knowledge-validation-template.json
@@ -176,6 +178,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `positive-vision-agent` turns difficult-work pressure into grounded positive vision, agency levers, multiple pathways, if-then implementation intentions, risk truth, fallback options, and verification gates
 - `profit-analyst-agent` evaluates work through profit, ROI, cost-benefit, pricing, unit economics, opportunity cost, scenario/sensitivity, source provenance, and high-risk financial review gates
 - `principle-guardian-agent` guards durable principles across agents and blocks shortcuts that would bypass evidence, safety, privacy, legality, quality, provenance, validation, or evaluation
+- `human-arbitration-agent` turns facts-checked but irreducible value, strategy, preference, risk-appetite, authority, or accountability conflicts into human decision packets
 - `skill-lifecycle-agent` creates, validates, tracks, and improves repository-managed Codex skills
 - `parallel-work-planner-agent` checks task dependencies, file/resource boundaries, execution batches, research fan-in merge gates, coordination targets, and merge verification before parallel execution
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`

@@ -1,0 +1,37 @@
+{
+  "schema_version": "2026-06-02",
+  "task_id": "2026-06-02-human-arbitration-agent",
+  "selected_work_mode": "governance",
+  "reason": "The request changes durable platform behavior by adding a reusable governance agent, persistent instructions, requirements, specs, memory bootstrap anchors, and close-out records.",
+  "considered_modes": [
+    {
+      "mode": "quick",
+      "decision": "rejected",
+      "reason": "The change is durable and cross-platform, not a small local answer."
+    },
+    {
+      "mode": "standard",
+      "decision": "rejected",
+      "reason": "A new governance agent and persistent rule affect future sessions."
+    },
+    {
+      "mode": "governance",
+      "decision": "selected",
+      "reason": "The work changes operating rules, agent specs, memory anchors, requirements, and evaluation targets."
+    }
+  ],
+  "required_closeout_targets": [
+    "references_checked",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "mode_selection_record_targets",
+    "omission_check_targets",
+    "web_search_record_targets",
+    "user_request_summary_targets",
+    "requirements_targets",
+    "spec_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets"
+  ]
+}
