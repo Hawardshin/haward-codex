@@ -27,6 +27,7 @@ _tools/tool-name/
 ## Current Tools
 
 - `workspace-index/`: generate repository and prompt maps.
+- `workspace-health/`: run baseline workspace audits and project/tool tests from one command.
 - `task-board/`: generate coordination boards.
 - `source-collector/`: normalize, score, and report broad web/source research bundles.
 - `structure-audit/`: validate root folders against project registry, reserved operational folders, and local-only folder rules.

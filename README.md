@@ -208,6 +208,7 @@ project-name/
 - 무엇이 어디에 있는지에 대한 지도는 `_ops/maps/`에 둔다.
 - 구조가 바뀌면 `python3 _tools/workspace-index/src/workspace_index.py`로 맵을 갱신한다.
 - root folder, project registry, project top-level folder, reserved folder, local-only/generated-output 규칙이 바뀌면 `python3 _tools/structure-audit/src/structure_audit.py --check`로 구조를 검증한다.
+- 전체 감사와 테스트를 한 번에 확인할 때는 `python3 _tools/workspace-health/src/workspace_health.py`를 실행한다.
 
 ## 작업 평가 루프
 

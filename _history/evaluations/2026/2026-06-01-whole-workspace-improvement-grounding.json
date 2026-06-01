@@ -1,0 +1,161 @@
+{
+  "task": "Ground factual claims for the whole-workspace navigation and health-check improvement.",
+  "output_summary": "The repository map now derives root folder class, purpose, and source from the root structure policy and project registry, and a new workspace-health tool runs core audits and tests from one command.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request",
+      "source": "_history/user-requests/2026/2026-06-01.ko.md",
+      "source_type": "user_instruction",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked user request summary for the whole-workspace improvement request."
+    },
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-whole-workspace-improvement.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked web-first research record with sources checked and plan impact."
+    },
+    {
+      "evidence_id": "diataxis",
+      "source": "https://diataxis.fr/",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "Documentation framework source used for navigation structure reasoning."
+    },
+    {
+      "evidence_id": "google_cloud_adr",
+      "source": "https://docs.cloud.google.com/architecture/architecture-decision-records",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official cloud architecture guidance for source-controlled decision records."
+    },
+    {
+      "evidence_id": "workspace_index",
+      "source": "_tools/workspace-index/src/workspace_index.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked tool source for generating repository and prompt maps."
+    },
+    {
+      "evidence_id": "repository_map",
+      "source": "_ops/maps/repository-map.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Generated repository map showing root folder classes, purposes, and metadata source paths."
+    },
+    {
+      "evidence_id": "workspace_health",
+      "source": "_tools/workspace-health/src/workspace_health.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked tool source that builds and runs workspace health checks."
+    },
+    {
+      "evidence_id": "workspace_health_output",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --include-build",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output reported 17 passing checks including audits, config checks, tests, typecheck, and build."
+    },
+    {
+      "evidence_id": "workspace_index_tests",
+      "source": "_tools/workspace-index/tests/test_workspace_index.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked tests for policy/registry metadata loading and map rendering."
+    },
+    {
+      "evidence_id": "workspace_health_tests",
+      "source": "_tools/workspace-health/tests/test_workspace_health.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked tests for health check discovery and build-check selection."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository map now shows root folder class, purpose, and source metadata.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace_index",
+        "repository_map",
+        "workspace_index_tests"
+      ],
+      "verification_steps": [
+        "Ran `python3 _tools/workspace-index/src/workspace_index.py`.",
+        "Ran `python3 _tools/workspace-index/src/workspace_index.py --check` through workspace-health."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "`workspace-index` reads root folder metadata from root structure policy and project registry.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace_index",
+        "workspace_index_tests"
+      ],
+      "verification_steps": [
+        "Added and ran workspace-index tests for policy/registry metadata loading."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The new `workspace-health` tool runs core audits and project/tool checks from one command.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace_health",
+        "workspace_health_tests",
+        "workspace_health_output"
+      ],
+      "verification_steps": [
+        "Ran `python3 _tools/workspace-health/src/workspace_health.py --list`.",
+        "Ran `python3 _tools/workspace-health/src/workspace_health.py --include-build`."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The full workspace-health run passed 17 checks including audits, config checks, tests, typecheck, and build.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace_health_output"
+      ],
+      "verification_steps": [
+        "Read command output from the `--include-build` run."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "The improvement follows a documented decision-record style by linking requirements, plan, spec, traceability, and evaluation artifacts.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "google_cloud_adr",
+        "web_search_record",
+        "user_request"
+      ],
+      "verification_steps": [
+        "Created requirement change/review files, spec artifacts, request trace, work summary, and evaluation files."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "The request was intentionally broad; this change improves navigation and health foundations rather than attempting an unsafe full restructure.",
+    "Future broader restructuring should be based on repeated friction observed through actual work."
+  ],
+  "limitation_notes": [
+    "No root folders were moved.",
+    "No CI workflow was added; the health command is local and repository-tracked."
+  ]
+}

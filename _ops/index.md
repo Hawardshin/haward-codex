@@ -73,6 +73,7 @@
 - 재사용 가능한 조사 내용을 볼 때: [_research/index.ko.md](../_research/index.ko.md)
 - 겹치는 운영 구조와 source of truth를 확인할 때: [_research/overlap-audits/2026-05-31-source-discovery-overlap.ko.md](../_research/overlap-audits/2026-05-31-source-discovery-overlap.ko.md)
 - 저장소 구조를 볼 때: [_ops/maps/repository-map.md](maps/repository-map.md)
+- 전체 health check를 한 번에 실행할 때: [_tools/workspace-health/README.ko.md](../_tools/workspace-health/README.ko.md)
 - 프롬프트 목록을 볼 때: [_ops/maps/prompt-map.md](maps/prompt-map.md)
 - 반복 작업을 줄일 때: [_docs/governance/capability-governance.md](../_docs/governance/capability-governance.md)
 - 오픈소스 설치 기준을 볼 때: [_docs/policies/open-source-installation-policy.ko.md](../_docs/policies/open-source-installation-policy.ko.md), [_docs/policies/open-source-installation-policy.en.md](../_docs/policies/open-source-installation-policy.en.md)
@@ -100,6 +101,7 @@
 - 소스코드 작업이면 코딩 조사에 architecture reference, 최소 2개 architecture option, decision notes가 남았는가
 - 병렬 작업이면 `plan-parallel-work` 결과, dependency, touch_paths, merge_gates, conflict controls, coordination targets, merge strategy가 남았는가
 - root folder, project registry, reserved folder, runtime adapter folder, local-only rule이 바뀌면 `python3 _tools/structure-audit/src/structure_audit.py --check`를 통과했는가
+- 전체 감사/테스트 상태가 필요하면 `python3 _tools/workspace-health/src/workspace_health.py`를 실행했는가
 - 중요한 원천값과 계획 단계가 `source_value_provenance`, `plan_evidence`, `source_provenance_targets`, `plan_evidence_targets`로 연결됐는가
 - 스킬 작업이 있었다면 `_skills/` 원본, 검증 결과, 개선 아이디어가 남았는가
 - 요청-결과 추적표가 `_history/request-traces/YYYY/`에 남았는가

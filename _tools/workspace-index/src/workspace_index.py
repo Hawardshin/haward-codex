@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
+from typing import Any
 
 
 IGNORE_DIRS = {
     ".git",
+    ".next",
     ".pytest_cache",
     "__pycache__",
     ".venv",
@@ -15,6 +18,7 @@ IGNORE_DIRS = {
     "dist",
     "build",
     "coverage",
+    "out",
 }
 
 ROOT_PURPOSES = {
@@ -65,12 +69,14 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def render_repository_map(root: Path) -> str:
+    ignored_parts = IGNORE_DIRS | load_generated_ignore_parts(root)
     files = sorted(
         path.relative_to(root)
         for path in root.rglob("*")
-        if path.is_file() and not should_ignore(path.relative_to(root))
+        if path.is_file() and not should_ignore_with_parts(path.relative_to(root), ignored_parts)
     )
-    root_entries = sorted(path for path in root.iterdir() if not path.name.startswith("."))
+    root_entries = sorted(path for path in root.iterdir() if path.is_dir() and path.name not in ignored_parts)
+    root_metadata = load_root_folder_metadata(root)
 
     lines = [
         "# Repository Map",
@@ -79,14 +85,22 @@ def render_repository_map(root: Path) -> str:
         "",
         "## Root Folders",
         "",
-        "| Path | Purpose |",
-        "| --- | --- |",
+        "| Path | Class | Purpose | Source |",
+        "| --- | --- | --- | --- |",
     ]
 
     for entry in root_entries:
-        if entry.is_dir() and entry.name not in IGNORE_DIRS:
-            purpose = ROOT_PURPOSES.get(entry.name, "project or workspace folder")
-            lines.append(f"| `{entry.name}/` | {purpose} |")
+        metadata = root_metadata.get(
+            entry.name,
+            {
+                "class": "unclassified",
+                "purpose": "project or workspace folder",
+                "source": "workspace-index fallback",
+            },
+        )
+        lines.append(
+            f"| `{entry.name}/` | {metadata['class']} | {metadata['purpose']} | {metadata['source']} |"
+        )
 
     lines.extend(
         [
@@ -115,6 +129,45 @@ def render_repository_map(root: Path) -> str:
         lines.append(f"- `{file_path.as_posix()}`")
 
     return "\n".join(lines)
+
+
+def load_root_folder_metadata(root: Path) -> dict[str, dict[str, str]]:
+    metadata = {
+        name: {"class": "known_root", "purpose": purpose, "source": "workspace-index built-in"}
+        for name, purpose in ROOT_PURPOSES.items()
+    }
+
+    policy_path = root / "_ops" / "projects" / "root-structure-policy.json"
+    policy = read_json(policy_path)
+    if policy:
+        for field_name, class_name in [
+            ("reserved_operational_dirs", "reserved_operational"),
+            ("local_only_dirs", "local_only"),
+            ("runtime_adapter_dirs", "runtime_adapter"),
+        ]:
+            for item in list_of_dicts(policy.get(field_name, [])):
+                name = str(item.get("name", "")).strip()
+                if not name:
+                    continue
+                metadata[name] = {
+                    "class": class_name,
+                    "purpose": str(item.get("purpose", "")).strip() or metadata.get(name, {}).get("purpose", ""),
+                    "source": policy_path.relative_to(root).as_posix(),
+                }
+
+    registry_path = root / str(policy.get("project_registry_path", "_ops/projects/registry.json")) if policy else root / "_ops" / "projects" / "registry.json"
+    registry = read_json(registry_path)
+    for project in list_of_dicts(registry.get("projects", [])):
+        project_root = root_folder_name(str(project.get("path", project.get("name", ""))))
+        if not project_root:
+            continue
+        metadata[project_root] = {
+            "class": "registered_project",
+            "purpose": str(project.get("purpose", "")).strip() or metadata.get(project_root, {}).get("purpose", ""),
+            "source": registry_path.relative_to(root).as_posix(),
+        }
+
+    return metadata
 
 
 def render_prompt_map(root: Path) -> str:
@@ -155,7 +208,48 @@ def render_prompt_map(root: Path) -> str:
 
 
 def should_ignore(relative_path: Path) -> bool:
-    return any(part in IGNORE_DIRS for part in relative_path.parts)
+    return should_ignore_with_parts(relative_path, IGNORE_DIRS)
+
+
+def should_ignore_with_parts(relative_path: Path, ignored_parts: set[str]) -> bool:
+    return any(part in ignored_parts for part in relative_path.parts)
+
+
+def load_generated_ignore_parts(root: Path) -> set[str]:
+    policy_path = root / "_ops" / "projects" / "root-structure-policy.json"
+    policy = read_json(policy_path)
+    parts = set()
+    for item in list_of_dicts(policy.get("generated_output_dirs", [])):
+        pattern = str(item.get("pattern", "")).strip().rstrip("/")
+        if not pattern:
+            continue
+        leaf = pattern.split("/")[-1]
+        if leaf and "*" not in leaf:
+            parts.add(leaf)
+    return parts
+
+
+def read_json(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def list_of_dicts(value: Any) -> list[dict[str, Any]]:
+    if not isinstance(value, list):
+        return []
+    return [item for item in value if isinstance(item, dict)]
+
+
+def root_folder_name(path_value: str) -> str:
+    stripped = path_value.strip().strip("/")
+    if not stripped:
+        return ""
+    return Path(stripped).parts[0]
 
 
 def extract_use_when(path: Path) -> str:

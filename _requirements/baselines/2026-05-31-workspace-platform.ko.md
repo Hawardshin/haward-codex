@@ -47,6 +47,7 @@
 | REQ-WS-029 | 마케팅, 소비자 인사이트, 시장 규모, 브랜드/GTM, 책/이론, 설문, 정량 수치 근거 조사는 `marketing-evidence-profile.json`을 사용해 책/학술, 설문 방법론, 공개 통계, 시장 리포트, 플랫폼 행동 데이터의 evidence lane을 분리하고, 모든 숫자 근거의 값/단위/base/지역/기간/모집단/방법론/표본/스폰서/비교 가능성을 기록해야 한다. | UR-2026-06-01-012 | must | baseline | agent-platform/_research | marketing evidence profile, source registry, source discovery registry, memory bootstrap, source list, config contract 확인 | `agent-platform/configs/research/marketing-evidence-profile.json`, `_research/source-lists/marketing-evidence-sources.ko.md` |
 | REQ-WS-030 | 프로젝트 스펙이 애매하거나 현재 소스/테스트/산출물과 다를 경우, 구현 전에 비교 근거를 기록하고 `update_spec`, `update_source`, `ask_user`, `defer` 중 하나로 분류해야 한다. `ask_user` 이슈는 안정적인 질문 ID, 선택지, 답변 형식, 결정 영향을 포함한 `clarification_needed` 알림으로 사용자에게 질문하고, 답변이 기록되기 전까지 해당 스펙이나 소스를 변경하지 않아야 한다. | UR-2026-06-01-013 | must | baseline | agent-platform/_ops/projects | `reconcile-spec` 결과, 알림 dry-run, 단위 테스트, config contract, memory bootstrap 확인 | `agent-platform/src/agent_platform/planning/spec_reconciliation.py`, `agent-platform/configs/planning/spec-reconciliation-template.json`, `_ops/workflows/38-spec-source-reconciliation.md` |
 | REQ-WS-031 | `_docs/`는 `instructions`, `policies`, `operating-models`, `governance` 카테고리로 관리해야 하며, 새 문서가 루트에 흩어지거나 필수 문서가 누락되지 않도록 `_docs/registry.json`과 `docs-audit`로 root 허용 파일, category placement, 필수 문서, 한영 companion을 검증해야 한다. | UR-2026-06-01-014 | must | baseline | workspace/_docs/_tools | docs-audit, config contract, memory bootstrap, link/path 검증 | `_docs/registry.json`, `_docs/README.ko.md`, `_tools/docs-audit/` |
+| REQ-WS-032 | 전체 저장소 navigation과 health check는 `_ops/projects/root-structure-policy.json`, `_ops/projects/registry.json`, `_docs/registry.json` 같은 source-of-truth를 사용해야 하며, root folder class/source와 핵심 감사/테스트를 한 곳에서 확인할 수 있어야 한다. | UR-2026-06-01-016 | must | baseline | workspace/_ops/_tools | workspace-index map 확인, workspace-health 실행, tool tests 확인 | `_tools/workspace-index/`, `_tools/workspace-health/`, `_ops/maps/repository-map.md` |
 
 ## 변경 관리
 
@@ -63,6 +64,7 @@
 - 2026-06-01에 REQ-WS-029를 추가해 마케터식 자료조사, 이론/책 근거, 설문 방법론, 공식 통계, 시장 리포트, 플랫폼 행동 데이터, 정량 수치 출처 추적을 공통 리서치 구조로 승격했다.
 - 2026-06-01에 REQ-WS-030을 추가해 스펙 애매함과 스펙/소스 불일치를 구현 전에 근거 기반으로 분류하고, 필요한 경우 사용자 답변 가능한 `clarification_needed` 알림으로 되돌리는 구조를 공통 운영 구조로 승격했다.
 - 2026-06-01에 REQ-WS-031을 추가해 `_docs/`를 종류별 카테고리로 나누고 registry와 docs-audit로 문서 누락을 막는 구조를 공통 운영 구조로 승격했다.
+- 2026-06-01에 REQ-WS-032를 추가해 repository map이 root structure policy/project registry를 직접 사용하고, workspace health check가 핵심 감사와 테스트를 한 명령으로 묶도록 승격했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.

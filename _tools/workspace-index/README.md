@@ -23,8 +23,17 @@ python3 _tools/workspace-index/src/workspace_index.py --check
 - Repository files and folders
 - `_ops/prompts/*.md`
 - `_ops/workflows/*.md`
+- `_ops/projects/root-structure-policy.json`
+- `_ops/projects/registry.json`
 
 ## Outputs
 
 - `_ops/maps/repository-map.md`
 - `_ops/maps/prompt-map.md`
+
+## Verification
+
+```bash
+python3 -m unittest discover -s _tools/workspace-index/tests
+python3 _tools/workspace-index/src/workspace_index.py --check
+```
