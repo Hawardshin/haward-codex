@@ -6,6 +6,7 @@ import test from "node:test";
 
 import {
   buildSnapshot,
+  collectAgentCatalog,
   extractHistoryDate,
   extractTitle,
   markdownToHtml,
@@ -48,6 +49,8 @@ test("buildSnapshot reads minimal repository shape", () => {
   fs.mkdirSync(path.join(root, "_history", "work-summaries", "2026"), { recursive: true });
   fs.mkdirSync(path.join(root, "_docs"), { recursive: true });
   fs.mkdirSync(path.join(root, "_requirements", "baselines"), { recursive: true });
+  fs.mkdirSync(path.join(root, "agent-platform", "configs", "agents"), { recursive: true });
+  fs.mkdirSync(path.join(root, "agent-platform", "docs"), { recursive: true });
 
   fs.writeFileSync(
     path.join(root, "_ops", "projects", "registry.json"),
@@ -65,6 +68,18 @@ test("buildSnapshot reads minimal repository shape", () => {
     path.join(root, "_ops", "coordination", "status.json"),
     JSON.stringify({ agents: [{ id: "agent", status: "idle" }], tasks: [{ id: "task", status: "completed" }] })
   );
+  fs.writeFileSync(
+    path.join(root, "agent-platform", "configs", "agents", "demo-agent.json"),
+    JSON.stringify({
+      name: "demo-agent",
+      description: "Demo agent",
+      runtime: "python",
+      tools: ["demo:run"],
+      skills: [],
+      metadata: { status: "active", trigger: "demo trigger" }
+    })
+  );
+  fs.writeFileSync(path.join(root, "agent-platform", "docs", "demo-agent.ko.md"), "# Demo Agent\n\n설명");
   fs.writeFileSync(
     path.join(root, "_docs", "registry.json"),
     JSON.stringify({
@@ -84,10 +99,34 @@ test("buildSnapshot reads minimal repository shape", () => {
   const snapshot = buildSnapshot(root);
 
   assert.equal(snapshot.stats.projects, 1);
+  assert.equal(snapshot.stats.agentDefinitions, 1);
   assert.equal(snapshot.stats.completedTasks, 1);
-  assert.equal(snapshot.documents.length, 4);
+  assert.equal(snapshot.documents.length, 6);
+  assert.equal(snapshot.agentCatalog[0].name, "demo-agent");
+  assert.equal(snapshot.agentCatalog[0].tools.length, 1);
+  assert.equal(snapshot.agentCatalog[0].docPaths[0], "agent-platform/docs/demo-agent.ko.md");
   assert.equal(snapshot.historyDays[0].date, "2026-06-01");
   assert.equal(snapshot.folderStructure.rootFolders.some((folder) => folder.path === "demo/"), true);
   assert.equal(snapshot.folderStructure.docsCategories[0].path, "_docs/instructions");
   assert.equal(snapshot.requirements[0].id, "REQ-WM-001");
+});
+
+test("collectAgentCatalog merges definitions with runtime status", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-agent-test-"));
+  fs.mkdirSync(path.join(root, "agent-platform", "configs", "agents"), { recursive: true });
+  fs.writeFileSync(
+    path.join(root, "agent-platform", "configs", "agents", "runner-agent.json"),
+    JSON.stringify({ name: "runner-agent", runtime: "python", metadata: { status: "active" } })
+  );
+
+  const catalog = collectAgentCatalog(
+    root,
+    [{ id: "runner-agent", status: "running", current_task: "work" }],
+    [{ id: "task-1", agent: "runner-agent", status: "completed" }]
+  );
+
+  assert.equal(catalog.length, 1);
+  assert.equal(catalog[0].runtimeStatus, "running");
+  assert.equal(catalog[0].taskCount, 1);
+  assert.equal(catalog[0].completedTaskCount, 1);
 });

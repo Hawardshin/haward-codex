@@ -38,12 +38,15 @@ const DOCUMENT_SOURCES = [
   { category: "runtime-adapter", root: ".claude/rules" },
   { category: "runtime-adapter", root: ".cursor/rules" },
   { category: "runtime-adapter", root: ".agents/rules" },
+  { category: "agent-config", root: "agent-platform/configs/agents" },
   { category: "template", root: "_templates/assistant-operating-principles" },
   { category: "project-doc", root: "agent-platform/docs" },
   { category: "project-doc", root: "presentation-agent/docs" },
+  { category: "project-doc", root: "platform-desktop-app/docs" },
   { category: "project-doc", root: "workspace-monitor/docs" },
   { category: "project-spec", root: "agent-platform/specs" },
   { category: "project-spec", root: "presentation-agent/specs" },
+  { category: "project-spec", root: "platform-desktop-app/specs" },
   { category: "project-spec", root: "workspace-monitor/specs" }
 ];
 const DOCUMENT_FILES = [
@@ -79,6 +82,7 @@ export function buildSnapshot(repoRoot) {
   const folderStructure = buildFolderStructure(repoRoot, projects, documents);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
   const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
+  const agentCatalog = collectAgentCatalog(repoRoot, coordination.agents || [], tasks);
   const completedTasks = tasks.filter((task) => task.status === "completed").length;
   const activeAgents = (coordination.agents || []).filter((agent) => agent.status !== "idle").length;
 
@@ -89,6 +93,7 @@ export function buildSnapshot(repoRoot) {
     stats: {
       projects: projects.length,
       agents: (coordination.agents || []).length,
+      agentDefinitions: agentCatalog.length,
       activeAgents,
       tasks: (coordination.tasks || []).length,
       completedTasks,
@@ -102,6 +107,7 @@ export function buildSnapshot(repoRoot) {
     },
     projects: projects.map(normalizeProject),
     agents: coordination.agents || [],
+    agentCatalog,
     tasks,
     requirements,
     documents,
@@ -117,6 +123,44 @@ export function buildSnapshot(repoRoot) {
       ]
     }
   };
+}
+
+export function collectAgentCatalog(repoRoot, coordinationAgents = [], tasks = []) {
+  const root = path.join(repoRoot, "agent-platform", "configs", "agents");
+  return walkFiles(root)
+    .filter((filePath) => filePath.endsWith(".json"))
+    .map((filePath) => {
+      const config = readJson(filePath, {});
+      const name = config.name || titleFromPath(filePath);
+      const runtimeAgent = coordinationAgents.find((agent) => agent.id === name || agent.name === name) || null;
+      const ownedTasks = tasks.filter((task) => task.agent === name || (runtimeAgent && task.agent === runtimeAgent.id));
+      const docPaths = ["ko", "en", ""]
+        .map((language) =>
+          language
+            ? path.join(repoRoot, "agent-platform", "docs", `${name}.${language}.md`)
+            : path.join(repoRoot, "agent-platform", "docs", `${name}.md`)
+        )
+        .filter((docPath) => fs.existsSync(docPath))
+        .map((docPath) => toPosix(path.relative(repoRoot, docPath)));
+
+      return {
+        id: slugify(name),
+        name,
+        description: config.description || "",
+        runtime: config.runtime || "unknown",
+        definitionStatus: config.metadata?.status || "unknown",
+        runtimeStatus: runtimeAgent?.status || "not_running",
+        trigger: config.metadata?.trigger || "",
+        currentTask: runtimeAgent?.current_task || "",
+        tools: Array.isArray(config.tools) ? config.tools : [],
+        skills: Array.isArray(config.skills) ? config.skills : [],
+        taskCount: ownedTasks.length,
+        completedTaskCount: ownedTasks.filter((task) => task.status === "completed").length,
+        configPath: toPosix(path.relative(repoRoot, filePath)),
+        docPaths
+      };
+    })
+    .sort((left, right) => left.name.localeCompare(right.name));
 }
 
 function attachTaskTiming(repoRoot, task) {
@@ -331,7 +375,8 @@ export function collectRequirements(repoRoot) {
   const roots = [
     path.join(repoRoot, "_requirements"),
     path.join(repoRoot, "workspace-monitor", "docs", "requirements"),
-    path.join(repoRoot, "presentation-agent", "docs", "requirements")
+    path.join(repoRoot, "presentation-agent", "docs", "requirements"),
+    path.join(repoRoot, "platform-desktop-app", "docs", "requirements")
   ];
   return roots.flatMap((root) =>
     walkFiles(root)

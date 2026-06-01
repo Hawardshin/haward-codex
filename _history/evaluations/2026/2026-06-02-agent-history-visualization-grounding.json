@@ -1,0 +1,78 @@
+{
+  "task": "Ground factual claims for agent and history visualization work.",
+  "output_summary": "Workspace Monitor now collects agent definitions into agentCatalog and renders agent inventory plus history density visualizations.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable user request summary for UR-2026-06-02-005."
+    },
+    {
+      "evidence_id": "implementation",
+      "source": "workspace-monitor/scripts/collect-workspace.mjs; workspace-monitor/components/MonitorShell.tsx; workspace-monitor/app/globals.css",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Implementation files changed for collector and visualization UI."
+    },
+    {
+      "evidence_id": "generated_snapshot",
+      "source": "workspace-monitor/src/generated/workspace-snapshot.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Generated static snapshot after collector change."
+    },
+    {
+      "evidence_id": "grafana_state_timeline",
+      "source": "https://grafana.com/docs/grafana/latest/visualizations/panels-visualizations/visualizations/state-timeline/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Grafana docs for state timeline visualization."
+    },
+    {
+      "evidence_id": "opentelemetry_docs",
+      "source": "https://opentelemetry.io/docs/concepts/observability-primer/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official OpenTelemetry observability concept docs."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "Workspace Monitor now collects agent definitions into agentCatalog.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["implementation", "generated_snapshot"],
+      "verification_steps": ["Run npm run collect and inspect generated snapshot."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The UI now includes agent inventory and history density visualizations.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["implementation"],
+      "verification_steps": ["Run npm run build and static HTTP smoke check against exported HTML and snapshot JSON."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "No new chart dependency was installed.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["implementation"],
+      "verification_steps": ["Inspect package.json and package-lock diff."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "This is static snapshot visualization, not real-time telemetry."
+  ],
+  "limitation_notes": [
+    "Runtime agent traces are not collected.",
+    "The visualization depends on repository files being regenerated through npm run collect."
+  ]
+}

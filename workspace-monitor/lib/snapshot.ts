@@ -3,6 +3,7 @@ import snapshotJson from "@/src/generated/workspace-snapshot.json";
 export type WorkspaceStats = {
   projects: number;
   agents: number;
+  agentDefinitions?: number;
   activeAgents: number;
   tasks: number;
   completedTasks: number;
@@ -32,6 +33,23 @@ export type WorkspaceAgent = {
   status: string;
   current_task?: string;
   notes?: string;
+};
+
+export type WorkspaceAgentDefinition = {
+  id: string;
+  name: string;
+  description: string;
+  runtime: string;
+  definitionStatus: string;
+  runtimeStatus: string;
+  trigger: string;
+  currentTask: string;
+  tools: string[];
+  skills: string[];
+  taskCount: number;
+  completedTaskCount: number;
+  configPath: string;
+  docPaths: string[];
 };
 
 export type WorkspaceTask = {
@@ -121,6 +139,7 @@ export type WorkspaceSnapshot = {
   stats: WorkspaceStats;
   projects: WorkspaceProject[];
   agents: WorkspaceAgent[];
+  agentCatalog?: WorkspaceAgentDefinition[];
   tasks: WorkspaceTask[];
   requirements: WorkspaceRequirement[];
   documents: WorkspaceDocument[];
@@ -161,6 +180,7 @@ export function formatDay(value: string) {
 
 export function categoryLabel(category: string) {
   const labels: Record<string, string> = {
+    "agent-config": "에이전트 설정",
     coordination: "조율",
     "daily-history": "일일 기록",
     evaluation: "평가",

@@ -82,6 +82,24 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       .filter((day) => day.documents.length > 0);
   }, [historyCategory, historyDate, normalizedQuery, snapshot.historyDays]);
   const latestHistoryDate = snapshot.historyDays[0]?.date || "";
+  const agentCatalog = snapshot.agentCatalog ?? [];
+  const agentRuntimeCounts = useMemo(() => countBy(agentCatalog, (agent) => agent.runtime || "unknown"), [agentCatalog]);
+  const agentStatusCounts = useMemo(
+    () => countBy(agentCatalog, (agent) => agent.runtimeStatus || agent.definitionStatus || "unknown"),
+    [agentCatalog]
+  );
+  const taskStatusCounts = useMemo(() => countBy(snapshot.tasks, (task) => task.status || "unknown"), [snapshot.tasks]);
+  const historyCategoryTotals = useMemo(() => {
+    const totals = new Map<string, number>();
+    for (const day of snapshot.historyDays) {
+      for (const item of day.categories) {
+        totals.set(item.category, (totals.get(item.category) || 0) + item.count);
+      }
+    }
+    return Array.from(totals.entries())
+      .map(([category, count]) => ({ category, count }))
+      .sort((left, right) => right.count - left.count || left.category.localeCompare(right.category));
+  }, [snapshot.historyDays]);
 
   return (
     <main>
@@ -145,6 +163,31 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             <Metric label="Evaluations" value={snapshot.stats.evaluations} icon={ShieldCheck} tone="red" />
             <Metric label="Web Searches" value={snapshot.stats.webSearches} icon={FileSearch} tone="violet" />
             <Metric label="History Days" value={snapshot.stats.historyDays} icon={CalendarDays} tone="slate" />
+          </section>
+
+          <section className="panel wide">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Agent Map</p>
+                <h2>에이전트 인벤토리</h2>
+              </div>
+              <button type="button" onClick={() => setSection("agents")}>
+                <Bot size={16} aria-hidden="true" />
+                <span>에이전트 보기</span>
+              </button>
+            </div>
+            <AgentRuntimeBars runtimeCounts={agentRuntimeCounts} statusCounts={agentStatusCounts} />
+          </section>
+
+          <section className="panel">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">History Shape</p>
+                <h2>히스토리 밀도</h2>
+              </div>
+              <History size={18} aria-hidden="true" />
+            </div>
+            <HistoryDensityChart days={snapshot.historyDays.slice(0, 16)} />
           </section>
 
           <section className="panel wide">
@@ -248,6 +291,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                   ))}
                 </select>
               </label>
+            </div>
+            <div className="history-visual-grid">
+              <HistoryDensityChart days={filteredHistoryDays.slice(0, 28)} />
+              <HistoryCategoryBars categories={historyCategoryTotals.slice(0, 10)} />
             </div>
             <HistoryTimeline days={filteredHistoryDays.slice(0, 36)} />
           </section>
@@ -384,31 +431,37 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
 
       {section === "agents" && (
         <div className="content-grid">
-          <section className="panel">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Agents</p>
-                <h2>에이전트 상태</h2>
-              </div>
-              <Bot size={18} aria-hidden="true" />
-            </div>
-            <div className="agent-list">
-              {snapshot.agents.map((agent) => (
-                <article key={agent.id}>
-                  <strong>{agent.name || agent.id}</strong>
-                  <span>{agent.status}</span>
-                  <p>{agent.current_task || agent.role || "No current task"}</p>
-                </article>
-              ))}
-            </div>
+          <section className="metrics-band">
+            <Metric label="Agent Configs" value={snapshot.stats.agentDefinitions ?? agentCatalog.length} icon={Bot} tone="green" />
+            <Metric label="Runtime Agents" value={snapshot.stats.agents} icon={Activity} tone="blue" />
+            <Metric label="Active Agents" value={snapshot.stats.activeAgents} icon={GitBranch} tone="amber" />
+            <Metric label="Tasks" value={snapshot.stats.tasks} icon={Layers} tone="slate" />
+            <Metric label="Completed" value={snapshot.stats.completedTasks} icon={ClipboardCheck} tone="green" />
+            <Metric label="Timing Records" value={snapshot.stats.timingRecords ?? 0} icon={History} tone="violet" />
           </section>
+
           <section className="panel wide">
             <div className="panel-heading">
               <div>
-                <p className="eyebrow">Tasks</p>
-                <h2>작업 보드</h2>
+                <p className="eyebrow">Inventory</p>
+                <h2>에이전트 구성 맵</h2>
+              </div>
+              <Bot size={18} aria-hidden="true" />
+            </div>
+            <AgentInventory agents={agentCatalog} />
+          </section>
+
+          <section className="panel wide">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Runtime</p>
+                <h2>상태와 작업 흐름</h2>
               </div>
               <Layers size={18} aria-hidden="true" />
+            </div>
+            <div className="agent-visual-grid">
+              <AgentRuntimeBars runtimeCounts={agentRuntimeCounts} statusCounts={agentStatusCounts} />
+              <TaskStatusLanes taskStatusCounts={taskStatusCounts} />
             </div>
             <div className="task-table">
               {snapshot.tasks.slice(0, 28).map((task) => (
@@ -437,6 +490,116 @@ function Metric({ label, value, icon: Icon, tone }: { label: string; value: numb
       <span>{label}</span>
       <strong>{value.toLocaleString("ko-KR")}</strong>
     </article>
+  );
+}
+
+function AgentRuntimeBars({
+  runtimeCounts,
+  statusCounts
+}: {
+  runtimeCounts: Array<{ key: string; count: number }>;
+  statusCounts: Array<{ key: string; count: number }>;
+}) {
+  return (
+    <div className="agent-bars">
+      <BarGroup title="Runtime" items={runtimeCounts} />
+      <BarGroup title="Status" items={statusCounts} />
+    </div>
+  );
+}
+
+function AgentInventory({ agents }: { agents: NonNullable<WorkspaceSnapshot["agentCatalog"]> }) {
+  if (!agents.length) {
+    return <p className="empty-state">등록된 에이전트 설정을 찾지 못했습니다.</p>;
+  }
+
+  return (
+    <div className="agent-map">
+      {agents.map((agent) => (
+        <article key={agent.id}>
+          <header>
+            <div>
+              <span>{agent.runtime}</span>
+              <h3>{agent.name}</h3>
+            </div>
+            <strong>{agent.definitionStatus}</strong>
+          </header>
+          <p>{agent.description}</p>
+          <div className="agent-signal-row">
+            <span>{agent.runtimeStatus}</span>
+            <span>{agent.tools.length} tools</span>
+            <span>{agent.skills.length} skills</span>
+            <span>{agent.docPaths.length} docs</span>
+          </div>
+          {agent.trigger && <small>{agent.trigger}</small>}
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function TaskStatusLanes({ taskStatusCounts }: { taskStatusCounts: Array<{ key: string; count: number }> }) {
+  return (
+    <div className="task-lanes" aria-label="Task status visualization">
+      <h3>작업 상태</h3>
+      <div>
+        {taskStatusCounts.map((item) => (
+          <article key={item.key}>
+            <span>{item.key}</span>
+            <strong>{item.count}</strong>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function HistoryDensityChart({ days }: { days: WorkspaceSnapshot["historyDays"] }) {
+  if (!days.length) {
+    return <p className="empty-state">시각화할 히스토리 기록이 없습니다.</p>;
+  }
+  const maxCount = Math.max(...days.map((day) => day.documentsCount), 1);
+
+  return (
+    <div className="density-chart" aria-label="History density chart">
+      {days.map((day) => {
+        const height = Math.max(10, Math.round((day.documentsCount / maxCount) * 100));
+        return (
+          <article key={day.date}>
+            <div className="density-bar" style={{ height: `${height}%` }} title={`${day.date}: ${day.documentsCount}`} />
+            <span>{day.date.slice(5)}</span>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+function HistoryCategoryBars({ categories }: { categories: Array<{ category: string; count: number }> }) {
+  return <BarGroup title="히스토리 유형" items={categories.map((item) => ({ key: categoryLabel(item.category), count: item.count }))} />;
+}
+
+function BarGroup({ title, items }: { title: string; items: Array<{ key: string; count: number }> }) {
+  if (!items.length) {
+    return <p className="empty-state">{title} 데이터가 없습니다.</p>;
+  }
+  const maxCount = Math.max(...items.map((item) => item.count), 1);
+
+  return (
+    <div className="bar-group">
+      <h3>{title}</h3>
+      {items.map((item) => (
+        <article key={item.key}>
+          <div>
+            <span>{item.key}</span>
+            <strong>{item.count}</strong>
+          </div>
+          <div className="bar-track">
+            <span style={{ width: `${Math.max(8, Math.round((item.count / maxCount) * 100))}%` }} />
+          </div>
+        </article>
+      ))}
+    </div>
   );
 }
 
@@ -511,4 +674,15 @@ function summarizeCategories(documents: WorkspaceSnapshot["historyDays"][number]
   return Array.from(counts.entries())
     .map(([category, count]) => ({ category, count }))
     .sort((left, right) => right.count - left.count || left.category.localeCompare(right.category));
+}
+
+function countBy<T>(items: T[], getKey: (item: T) => string) {
+  const counts = new Map<string, number>();
+  for (const item of items) {
+    const key = getKey(item);
+    counts.set(key, (counts.get(key) || 0) + 1);
+  }
+  return Array.from(counts.entries())
+    .map(([key, count]) => ({ key, count }))
+    .sort((left, right) => right.count - left.count || left.key.localeCompare(right.key));
 }

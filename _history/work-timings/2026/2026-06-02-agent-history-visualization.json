@@ -1,0 +1,76 @@
+{
+  "task_id": "2026-06-02-agent-history-visualization",
+  "title": "Agent and history visualization in workspace-monitor",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked Grafana, OpenTelemetry, Datadog, and workflow visualization references."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured"
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Selected workspace-monitor ownership and standard mode."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added REQ-WM-009 and REQ-WM-010 plus project specs."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added agent catalog collection and CSS-based agent/history visuals."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "npm test, npm run check, npm run collect, npm run build, static HTTP smoke check, and source smoke check passed."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Evaluation and grounding records updated after verification."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured",
+      "notes": "Commit and push run after final repository checks."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "Timing started after work began, so exact durations are unavailable. Main bottleneck candidate is frontend visual QA rather than implementation complexity.",
+    "improvement_candidates": [
+      "Add visual regression checks once monitor UI stabilizes.",
+      "Add a real trace model later only if runtime agent telemetry becomes necessary."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-agent-history-visualization.ko.md",
+    "workspace-monitor/specs/2026-06-02-agent-history-visualization/plan.ko.md"
+  ]
+}
