@@ -36,4 +36,4 @@
 
 ## 커밋
 
-- 예정: `docs(platform): add model-adaptive prompting policy`
+- `dbbe34f` pushed: `docs(platform): add model-adaptive prompting policy`

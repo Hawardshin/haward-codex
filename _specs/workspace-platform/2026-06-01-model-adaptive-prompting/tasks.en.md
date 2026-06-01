@@ -8,4 +8,4 @@
 - [x] Update memory bootstrap
 - [x] Write history and evaluation files
 - [x] Run validation
-- [ ] Commit and push
+- [x] Commit and push
