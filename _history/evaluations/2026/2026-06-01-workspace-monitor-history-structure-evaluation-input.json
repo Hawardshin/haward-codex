@@ -1,0 +1,105 @@
+{
+  "initial_instruction": "히스토리를 모으고 날짜별로 볼 수 있게 웹에 보여주며, 그 과정에서 폴더 구조도 다시 잘 생각해 달라는 요청.",
+  "result_summary": "Extended the existing workspace-monitor project with date-indexed history collection, History filters, a Structure section backed by governance registries, requirements/spec/history records, and close-out grounding/evaluation artifacts.",
+  "work_mode": "standard",
+  "changed_files": [
+    "workspace-monitor/scripts/collect-workspace.mjs",
+    "workspace-monitor/lib/snapshot.ts",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/tests/collector.test.mjs",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "workspace-monitor/README.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "workspace-monitor/specs/2026-06-01-history-timeline-folder-map/",
+    "_history/web-searches/2026/2026-06-01-workspace-monitor-history-structure.ko.md",
+    "_history/web-searches/2026/2026-06-01-workspace-monitor-history-structure.en.md",
+    "_history/plans/2026/2026-06-01-workspace-monitor-history-structure.ko.md",
+    "_history/plans/2026/2026-06-01-workspace-monitor-history-structure.en.md",
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/user-requests/2026/2026-06-01.en.md",
+    "_history/request-traces/2026/2026-06-01.ko.md",
+    "_history/request-traces/2026/2026-06-01.en.md",
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.en.md",
+    "_history/2026/2026-06-01.md",
+    "_ops/coordination/status.json",
+    "_history/evaluations/2026/2026-06-01-workspace-monitor-history-structure-grounding.json",
+    "_history/evaluations/2026/2026-06-01-workspace-monitor-history-structure-evaluation-input.json"
+  ],
+  "verification": [
+    "npm run collect: generated workspace-monitor/src/generated/workspace-snapshot.json and workspace-monitor/public/workspace-snapshot.json with historyDays and folderStructure",
+    "npm run test: collector tests passed",
+    "npm run check: TypeScript check passed",
+    "npm run build: Next.js static build passed",
+    "Snapshot smoke check: confirmed nonzero documents, historyDays, rootFolders, docsCategories, projectHomes, and historyRoots",
+    "Static output smoke check: confirmed History Days and Structure text in workspace-monitor/out/index.html",
+    "python3 _tools/workspace-index/src/workspace_index.py: repository maps regenerated",
+    "python3 _tools/task-board/src/task_board.py: coordination board regenerated",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: structure audit passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-workspace-monitor-history-structure-grounding.json: ready_to_publish",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-01-workspace-monitor-history-structure-evaluation-input.json: ready_to_close",
+    "git diff --check: no whitespace errors"
+  ],
+  "references_checked": [
+    "Next.js official docs - Static Exports",
+    "React official docs - Rendering Lists",
+    "React official docs - Conditional Rendering",
+    "Diataxis documentation framework",
+    "workspace-monitor/scripts/collect-workspace.mjs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/lib/snapshot.ts",
+    "workspace-monitor/tests/collector.test.mjs",
+    "_ops/projects/root-structure-policy.json",
+    "_docs/registry.json",
+    "_ops/projects/registry.json"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-workspace-monitor-history-structure-grounding.json",
+    "check-grounding command: ready_to_publish"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-workspace-monitor-history-structure.ko.md",
+    "_history/plans/2026/2026-06-01-workspace-monitor-history-structure.ko.md",
+    "workspace-monitor/specs/2026-06-01-history-timeline-folder-map/traceability.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-01-workspace-monitor-history-structure.ko.md",
+    "workspace-monitor/specs/2026-06-01-history-timeline-folder-map/plan.ko.md",
+    "workspace-monitor/specs/2026-06-01-history-timeline-folder-map/validation.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-workspace-monitor-history-structure.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md"
+  ],
+  "requirements_targets": [
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md"
+  ],
+  "spec_targets": [
+    "workspace-monitor/specs/2026-06-01-history-timeline-folder-map/spec.ko.md",
+    "workspace-monitor/specs/2026-06-01-history-timeline-folder-map/plan.ko.md",
+    "workspace-monitor/specs/2026-06-01-history-timeline-folder-map/tasks.ko.md",
+    "workspace-monitor/specs/2026-06-01-history-timeline-folder-map/validation.ko.md",
+    "workspace-monitor/specs/2026-06-01-history-timeline-folder-map/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Before public deployment, review generated snapshot excerpts for private or sensitive content.",
+    "Add richer document diffing or full-text search only after the static monitor becomes too limited for daily use.",
+    "Run browser screenshot verification when the in-app Browser tool is available."
+  ]
+}

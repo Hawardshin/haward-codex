@@ -9,6 +9,16 @@ const snapshotPath = path.join(projectRoot, "src", "generated", "workspace-snaps
 const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.json");
 
 const IGNORE_DIRS = new Set([".git", ".next", "node_modules", "out", "__pycache__", ".pytest_cache"]);
+const MAX_DOCUMENTS = 1200;
+const HISTORY_CATEGORIES = new Set([
+  "daily-history",
+  "evaluation",
+  "plan",
+  "request-trace",
+  "user-request",
+  "web-search",
+  "work-summary"
+]);
 const DOCUMENT_SOURCES = [
   { category: "workspace-doc", root: "_docs" },
   { category: "philosophy", root: "_philosophy" },
@@ -63,6 +73,8 @@ export function buildSnapshot(repoRoot) {
   const coordination = readJson(path.join(repoRoot, "_ops", "coordination", "status.json"), { agents: [], tasks: [] });
   const documents = collectDocuments(repoRoot);
   const requirements = collectRequirements(repoRoot);
+  const historyDays = buildHistoryDays(documents);
+  const folderStructure = buildFolderStructure(repoRoot, projects, documents);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
   const completedTasks = (coordination.tasks || []).filter((task) => task.status === "completed").length;
   const activeAgents = (coordination.agents || []).filter((agent) => agent.status !== "idle").length;
@@ -80,13 +92,17 @@ export function buildSnapshot(repoRoot) {
       documents: documents.length,
       requirements: requirements.length,
       evaluations: documents.filter((document) => document.category === "evaluation").length,
-      webSearches: documents.filter((document) => document.category === "web-search").length
+      webSearches: documents.filter((document) => document.category === "web-search").length,
+      historyDays: historyDays.length,
+      rootFolders: folderStructure.rootFolders.length
     },
     projects: projects.map(normalizeProject),
     agents: coordination.agents || [],
     tasks: coordination.tasks || [],
     requirements,
     documents,
+    historyDays,
+    folderStructure,
     categories,
     publicReview: {
       status: "review_required_before_public_deploy",
@@ -117,7 +133,7 @@ export function collectDocuments(repoRoot) {
       documents.push(readDocument(repoRoot, filePath, source.category));
     }
   }
-  return documents.sort((left, right) => right.updatedAt.localeCompare(left.updatedAt)).slice(0, 600);
+  return documents.sort((left, right) => right.updatedAt.localeCompare(left.updatedAt)).slice(0, MAX_DOCUMENTS);
 }
 
 function readDocument(repoRoot, filePath, category) {
@@ -125,6 +141,7 @@ function readDocument(repoRoot, filePath, category) {
   const content = fs.readFileSync(filePath, "utf8");
   const stats = fs.statSync(filePath);
   const isMarkdown = filePath.endsWith(".md") || filePath.endsWith(".mdc");
+  const historyDate = extractHistoryDate(relativePath);
   return {
     id: slugify(relativePath),
     path: relativePath,
@@ -133,8 +150,119 @@ function readDocument(repoRoot, filePath, category) {
     title: isMarkdown ? extractTitle(content, relativePath) : titleFromPath(relativePath),
     excerpt: makeExcerpt(content),
     html: isMarkdown ? markdownToHtml(content) : jsonPreviewToHtml(content),
-    updatedAt: stats.mtime.toISOString()
+    updatedAt: stats.mtime.toISOString(),
+    historyDate,
+    historyYear: historyDate ? historyDate.slice(0, 4) : "",
+    workspaceArea: workspaceArea(relativePath)
   };
+}
+
+export function buildHistoryDays(documents) {
+  const byDate = new Map();
+  const historyDocuments = documents.filter((document) => HISTORY_CATEGORIES.has(document.category) && document.historyDate);
+
+  for (const document of historyDocuments) {
+    const date = document.historyDate;
+    const record = byDate.get(date) || {
+      date,
+      year: date.slice(0, 4),
+      documentsCount: 0,
+      categories: {},
+      documents: []
+    };
+    record.documentsCount += 1;
+    record.categories[document.category] = (record.categories[document.category] || 0) + 1;
+    record.documents.push(historyDocumentSummary(document));
+    byDate.set(date, record);
+  }
+
+  return Array.from(byDate.values())
+    .map((day) => ({
+      ...day,
+      categories: Object.entries(day.categories)
+        .map(([category, count]) => ({ category, count }))
+        .sort((left, right) => right.count - left.count || left.category.localeCompare(right.category)),
+      documents: day.documents.sort((left, right) => left.category.localeCompare(right.category) || left.path.localeCompare(right.path))
+    }))
+    .sort((left, right) => right.date.localeCompare(left.date));
+}
+
+export function buildFolderStructure(repoRoot, projects, documents) {
+  const rootPolicy = readJson(path.join(repoRoot, "_ops", "projects", "root-structure-policy.json"), {});
+  const docsRegistry = readJson(path.join(repoRoot, "_docs", "registry.json"), { categories: [], required_documents: [] });
+  const rootFolders = [
+    ...(projects || []).map((project) => ({
+      name: stripTrailingSlash(project.path || project.name || ""),
+      path: project.path || `${project.name}/`,
+      className: "registered_project",
+      purpose: project.purpose || "",
+      source: "_ops/projects/registry.json"
+    })),
+    ...(rootPolicy.reserved_operational_dirs || []).map((item) => ({
+      name: item.name,
+      path: `${item.name}/`,
+      className: "reserved_operational",
+      purpose: item.purpose || "",
+      source: "_ops/projects/root-structure-policy.json"
+    })),
+    ...(rootPolicy.runtime_adapter_dirs || []).map((item) => ({
+      name: item.name,
+      path: `${item.name}/`,
+      className: "runtime_adapter",
+      purpose: item.purpose || "",
+      source: "_ops/projects/root-structure-policy.json"
+    })),
+    ...(rootPolicy.local_only_dirs || []).map((item) => ({
+      name: item.name,
+      path: `${item.name}/`,
+      className: "local_only",
+      purpose: item.purpose || "",
+      source: "_ops/projects/root-structure-policy.json"
+    }))
+  ].sort((left, right) => left.className.localeCompare(right.className) || left.name.localeCompare(right.name));
+
+  const docsCategories = (docsRegistry.categories || []).map((category) => ({
+    id: category.id,
+    path: category.path,
+    purpose: category.purpose || "",
+    documentsCount: documents.filter((document) => document.path.startsWith(`${category.path}/`)).length,
+    requiredDocumentsCount: (docsRegistry.required_documents || []).filter((requiredPath) =>
+      requiredPath.startsWith(`${category.path}/`)
+    ).length
+  }));
+
+  const projectHomes = (projects || []).map((project) => ({
+    name: project.name,
+    path: project.path,
+    purpose: project.purpose || "",
+    topLevelDirs: project.project_specific_home || [],
+    sharedDependencies: project.shared_dependencies || [],
+    boundaryNotes: project.boundary_notes || []
+  }));
+
+  const historyRoots = DOCUMENT_SOURCES.filter((source) => source.root.startsWith("_history/") || source.root === "_history/2026").map(
+    (source) => ({
+      category: source.category,
+      root: source.root,
+      documentsCount: documents.filter((document) => document.category === source.category && document.path.startsWith(source.root)).length
+    })
+  );
+
+  return {
+    rootFolders,
+    docsCategories,
+    projectHomes,
+    historyRoots
+  };
+}
+
+export function extractHistoryDate(relativePath) {
+  const datedFolderMatch = relativePath.match(/(?:^|\/)(20\d{2})\/(20\d{2}-\d{2}-\d{2})(?:[-./]|$)/);
+  if (datedFolderMatch) {
+    return datedFolderMatch[2];
+  }
+  const dateMatch = relativePath.match(/(?:^|\/)(20\d{2}-\d{2}-\d{2})(?:[-./]|$)/);
+  return dateMatch ? dateMatch[1] : "";
 }
 
 export function collectRequirements(repoRoot) {
@@ -256,6 +384,31 @@ function renderTable(rows) {
     `<tbody>${body.map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`).join("")}</tbody>`,
     "</table>"
   ].join("");
+}
+
+function historyDocumentSummary(document) {
+  return {
+    id: document.id,
+    path: document.path,
+    category: document.category,
+    language: document.language,
+    title: document.title,
+    excerpt: document.excerpt,
+    updatedAt: document.updatedAt,
+    historyDate: document.historyDate
+  };
+}
+
+function workspaceArea(relativePath) {
+  const parts = relativePath.split("/");
+  if (parts[0].startsWith("_") && parts.length > 1) {
+    return `${parts[0]}/${parts[1]}`;
+  }
+  return parts[0] || "";
+}
+
+function stripTrailingSlash(value) {
+  return value.replace(/\/$/, "");
 }
 
 function inlineMarkdown(value) {

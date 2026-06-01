@@ -4,6 +4,7 @@ import {
   Activity,
   BookOpenText,
   Bot,
+  CalendarDays,
   ClipboardCheck,
   FileSearch,
   FolderKanban,
@@ -17,9 +18,9 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { useMemo, useState } from "react";
 
-import { categoryLabel, formatDate, type WorkspaceSnapshot } from "@/lib/snapshot";
+import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot } from "@/lib/snapshot";
 
-type SectionId = "overview" | "projects" | "history" | "documents" | "requirements" | "agents";
+type SectionId = "overview" | "projects" | "history" | "structure" | "documents" | "requirements" | "agents";
 
 type Section = {
   id: SectionId;
@@ -31,6 +32,7 @@ const sections: Section[] = [
   { id: "overview", label: "Overview", icon: Activity },
   { id: "projects", label: "Projects", icon: FolderKanban },
   { id: "history", label: "History", icon: History },
+  { id: "structure", label: "Structure", icon: Layers },
   { id: "documents", label: "Documents", icon: BookOpenText },
   { id: "requirements", label: "Requirements", icon: ClipboardCheck },
   { id: "agents", label: "Agents", icon: Bot }
@@ -40,6 +42,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [section, setSection] = useState<SectionId>("overview");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
+  const [historyDate, setHistoryDate] = useState("all");
+  const [historyCategory, setHistoryCategory] = useState("all");
 
   const normalizedQuery = query.trim().toLowerCase();
   const filteredDocuments = useMemo(() => {
@@ -56,6 +60,28 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     .filter((document) => ["work-summary", "request-trace", "user-request", "evaluation"].includes(document.category))
     .slice(0, 8);
   const recentDocuments = filteredDocuments.slice(0, section === "documents" ? 30 : 10);
+  const historyCategories = useMemo(() => {
+    return Array.from(
+      new Set(snapshot.historyDays.flatMap((day) => day.categories.map((item) => item.category)))
+    ).sort();
+  }, [snapshot.historyDays]);
+  const filteredHistoryDays = useMemo(() => {
+    return snapshot.historyDays
+      .filter((day) => historyDate === "all" || day.date === historyDate)
+      .map((day) => {
+        const documents = day.documents.filter((document) => {
+          const categoryMatches = historyCategory === "all" || document.category === historyCategory;
+          const queryMatches =
+            !normalizedQuery ||
+            `${document.title} ${document.path} ${document.excerpt}`.toLowerCase().includes(normalizedQuery);
+          return categoryMatches && queryMatches;
+        });
+        const categories = summarizeCategories(documents);
+        return { ...day, documents, documentsCount: documents.length, categories };
+      })
+      .filter((day) => day.documents.length > 0);
+  }, [historyCategory, historyDate, normalizedQuery, snapshot.historyDays]);
+  const latestHistoryDate = snapshot.historyDays[0]?.date || "";
 
   return (
     <main>
@@ -118,7 +144,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             <Metric label="Requirements" value={snapshot.stats.requirements} icon={ClipboardCheck} tone="amber" />
             <Metric label="Evaluations" value={snapshot.stats.evaluations} icon={ShieldCheck} tone="red" />
             <Metric label="Web Searches" value={snapshot.stats.webSearches} icon={FileSearch} tone="violet" />
-            <Metric label="Tasks" value={snapshot.stats.tasks} icon={GitBranch} tone="slate" />
+            <Metric label="History Days" value={snapshot.stats.historyDays} icon={CalendarDays} tone="slate" />
           </section>
 
           <section className="panel wide">
@@ -179,15 +205,142 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       )}
 
       {section === "history" && (
-        <section className="panel wide">
-          <div className="panel-heading">
-            <div>
-              <p className="eyebrow">History</p>
-              <h2>작업 흐름</h2>
-            </div>
-            <span className="result-count">{recentDocuments.length} shown</span>
+        <section className="history-board">
+          <div className="history-summary-band">
+            <Metric label="History Days" value={snapshot.stats.historyDays} icon={CalendarDays} tone="green" />
+            <Metric label="History Docs" value={snapshot.historyDays.reduce((total, day) => total + day.documentsCount, 0)} icon={History} tone="blue" />
+            <Metric label="Root Folders" value={snapshot.stats.rootFolders} icon={FolderKanban} tone="amber" />
+            <article className="history-latest">
+              <span>Latest History Date</span>
+              <strong>{latestHistoryDate ? formatDay(latestHistoryDate) : "기록 없음"}</strong>
+              <p>{latestHistoryDate || "No dated history records"}</p>
+            </article>
           </div>
-          <DocumentList documents={recentDocuments} />
+
+          <section className="panel wide">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">History</p>
+                <h2>날짜별 작업 기록</h2>
+              </div>
+              <span className="result-count">{filteredHistoryDays.length} days</span>
+            </div>
+            <div className="history-filters">
+              <label className="select-box">
+                <CalendarDays size={16} aria-hidden="true" />
+                <select value={historyDate} onChange={(event) => setHistoryDate(event.target.value)}>
+                  <option value="all">모든 날짜</option>
+                  {snapshot.historyDays.map((day) => (
+                    <option key={day.date} value={day.date}>
+                      {day.date} ({day.documentsCount})
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="select-box">
+                <ListFilter size={16} aria-hidden="true" />
+                <select value={historyCategory} onChange={(event) => setHistoryCategory(event.target.value)}>
+                  <option value="all">모든 히스토리 유형</option>
+                  {historyCategories.map((item) => (
+                    <option key={item} value={item}>
+                      {categoryLabel(item)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <HistoryTimeline days={filteredHistoryDays.slice(0, 36)} />
+          </section>
+        </section>
+      )}
+
+      {section === "structure" && (
+        <section className="structure-grid">
+          <section className="panel wide">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Structure</p>
+                <h2>루트 폴더 구조</h2>
+              </div>
+              <span className="result-count">{snapshot.folderStructure.rootFolders.length} roots</span>
+            </div>
+            <div className="folder-table">
+              {snapshot.folderStructure.rootFolders.map((folder) => (
+                <article key={`${folder.className}-${folder.path}`}>
+                  <span>{folder.className}</span>
+                  <strong>{folder.path}</strong>
+                  <p>{folder.purpose}</p>
+                  <small>{folder.source}</small>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="panel">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Docs</p>
+                <h2>문서 카테고리</h2>
+              </div>
+              <BookOpenText size={18} aria-hidden="true" />
+            </div>
+            <div className="stack-list">
+              {snapshot.folderStructure.docsCategories.map((folder) => (
+                <article key={folder.id}>
+                  <strong>{folder.path}</strong>
+                  <p>{folder.purpose}</p>
+                  <div className="chip-row">
+                    <span>{folder.documentsCount} docs</span>
+                    <span>{folder.requiredDocumentsCount} required</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="panel wide">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Projects</p>
+                <h2>프로젝트 내부 홈</h2>
+              </div>
+              <FolderKanban size={18} aria-hidden="true" />
+            </div>
+            <div className="project-home-grid">
+              {snapshot.folderStructure.projectHomes.map((project) => (
+                <article key={project.name}>
+                  <strong>{project.name}</strong>
+                  <p>{project.purpose}</p>
+                  <div className="path-list">
+                    {project.topLevelDirs.map((item) => (
+                      <span key={item}>{item}</span>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="panel">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">History Sources</p>
+                <h2>히스토리 수집 위치</h2>
+              </div>
+              <History size={18} aria-hidden="true" />
+            </div>
+            <div className="stack-list">
+              {snapshot.folderStructure.historyRoots.map((source) => (
+                <article key={`${source.category}-${source.root}`}>
+                  <strong>{categoryLabel(source.category)}</strong>
+                  <p>{source.root}</p>
+                  <div className="chip-row">
+                    <span>{source.documentsCount} docs</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
         </section>
       )}
 
@@ -306,3 +459,52 @@ function DocumentList({
   );
 }
 
+function HistoryTimeline({ days }: { days: WorkspaceSnapshot["historyDays"] }) {
+  if (days.length === 0) {
+    return <p className="empty-state">검색 조건에 맞는 날짜별 히스토리가 없습니다.</p>;
+  }
+
+  return (
+    <div className="timeline-list">
+      {days.map((day) => (
+        <article className="history-day" key={day.date}>
+          <header>
+            <div>
+              <span className="date-label">{day.date}</span>
+              <h3>{formatDay(day.date)}</h3>
+            </div>
+            <strong>{day.documentsCount} docs</strong>
+          </header>
+          <div className="chip-row">
+            {day.categories.map((item) => (
+              <span key={item.category}>
+                {categoryLabel(item.category)} {item.count}
+              </span>
+            ))}
+          </div>
+          <div className="timeline-docs">
+            {day.documents.slice(0, 14).map((document) => (
+              <article key={document.id}>
+                <span>{categoryLabel(document.category)}</span>
+                <div>
+                  <strong>{document.title}</strong>
+                  <p>{document.path}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function summarizeCategories(documents: WorkspaceSnapshot["historyDays"][number]["documents"]) {
+  const counts = new Map<string, number>();
+  for (const document of documents) {
+    counts.set(document.category, (counts.get(document.category) || 0) + 1);
+  }
+  return Array.from(counts.entries())
+    .map(([category, count]) => ({ category, count }))
+    .sort((left, right) => right.count - left.count || left.category.localeCompare(right.category));
+}

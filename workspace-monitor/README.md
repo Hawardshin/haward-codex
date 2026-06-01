@@ -7,6 +7,8 @@
 - private repository 상태에서는 로컬에서 문서 기반 운영 현황을 빠르게 본다.
 - 나중에 repository를 public으로 바꾸면 Vercel에 배포할 수 있다.
 - Markdown 문서는 snapshot 생성 시 읽기 쉬운 HTML preview로 변환한다.
+- `_history/` 문서는 날짜별 타임라인으로 묶어 어떤 날 어떤 작업이 있었는지 본다.
+- 루트 폴더, `_docs` 카테고리, 프로젝트 홈, 히스토리 수집 위치를 구조 지도에서 확인한다.
 
 ## 구조
 
@@ -33,7 +35,7 @@ npm run build
 npm run dev
 ```
 
-`npm run collect`는 repository root의 `_history`, `_ops`, `_requirements`, `_specs`, 프로젝트 docs/specs를 읽어 `src/generated/workspace-snapshot.json`과 `public/workspace-snapshot.json`을 만든다.
+`npm run collect`는 repository root의 `_history`, `_ops`, `_requirements`, `_specs`, 프로젝트 docs/specs를 읽어 `src/generated/workspace-snapshot.json`과 `public/workspace-snapshot.json`을 만든다. snapshot에는 문서 목록뿐 아니라 `historyDays` 날짜 index와 `folderStructure` 구조 지도도 포함된다.
 
 ## Vercel 배포
 
@@ -49,4 +51,3 @@ public 배포 전에 반드시 `src/generated/workspace-snapshot.json`을 확인
 - private note, secret, raw prompt, 로컬 절대 경로가 공개되어도 되는지 확인한다.
 - 공개하면 안 되는 문서가 있으면 원천 문서 또는 collector 범위를 조정한다.
 - 조정 후 `npm run collect`와 `npm run build`를 다시 실행한다.
-

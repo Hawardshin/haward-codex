@@ -10,6 +10,8 @@ export type WorkspaceStats = {
   requirements: number;
   evaluations: number;
   webSearches: number;
+  historyDays: number;
+  rootFolders: number;
 };
 
 export type WorkspaceProject = {
@@ -58,6 +60,52 @@ export type WorkspaceDocument = {
   excerpt: string;
   html: string;
   updatedAt: string;
+  historyDate: string;
+  historyYear: string;
+  workspaceArea: string;
+};
+
+export type WorkspaceHistoryDocument = Omit<WorkspaceDocument, "html" | "historyYear" | "workspaceArea">;
+
+export type WorkspaceHistoryDay = {
+  date: string;
+  year: string;
+  documentsCount: number;
+  categories: Array<{
+    category: string;
+    count: number;
+  }>;
+  documents: WorkspaceHistoryDocument[];
+};
+
+export type WorkspaceFolderStructure = {
+  rootFolders: Array<{
+    name: string;
+    path: string;
+    className: string;
+    purpose: string;
+    source: string;
+  }>;
+  docsCategories: Array<{
+    id: string;
+    path: string;
+    purpose: string;
+    documentsCount: number;
+    requiredDocumentsCount: number;
+  }>;
+  projectHomes: Array<{
+    name: string;
+    path: string;
+    purpose: string;
+    topLevelDirs: string[];
+    sharedDependencies: string[];
+    boundaryNotes: string[];
+  }>;
+  historyRoots: Array<{
+    category: string;
+    root: string;
+    documentsCount: number;
+  }>;
 };
 
 export type WorkspaceSnapshot = {
@@ -70,6 +118,8 @@ export type WorkspaceSnapshot = {
   tasks: WorkspaceTask[];
   requirements: WorkspaceRequirement[];
   documents: WorkspaceDocument[];
+  historyDays: WorkspaceHistoryDay[];
+  folderStructure: WorkspaceFolderStructure;
   categories: string[];
   publicReview: {
     status: string;
@@ -90,6 +140,17 @@ export function formatDate(value: string) {
     hour: "2-digit",
     minute: "2-digit"
   }).format(new Date(value));
+}
+
+export function formatDay(value: string) {
+  if (!value) {
+    return "날짜 없음";
+  }
+  return new Intl.DateTimeFormat("ko-KR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(new Date(`${value}T00:00:00`));
 }
 
 export function categoryLabel(category: string) {
