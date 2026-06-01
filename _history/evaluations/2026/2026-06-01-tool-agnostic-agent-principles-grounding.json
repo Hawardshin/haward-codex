@@ -40,7 +40,7 @@
     },
     {
       "evidence_id": "operating_model",
-      "source": "_docs/tool-agnostic-agent-operating-model.ko.md",
+      "source": "_docs/operating-models/tool-agnostic-agent-operating-model.ko.md",
       "source_type": "repository_file",
       "checked_on": "2026-06-01",
       "reliability": "Tracked shared operating model added in this repository."

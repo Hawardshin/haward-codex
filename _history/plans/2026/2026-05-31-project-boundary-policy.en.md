@@ -28,15 +28,15 @@ Separate the shared operating environment from individual projects so file owner
 | --- | --- | --- |
 | Repository instructions | `AGENTS.md` | Checked existing root project and shared-folder rules |
 | Workspace README | `README.md` | Checked project folder and reserved folder rules |
-| Workspace rules | `_docs/workspace-rules.md` | Checked project README, commit, and history policy |
-| Capability governance | `_docs/capability-governance.md` | Checked shared tool versus project tool guidance |
+| Workspace rules | `_docs/instructions/workspace-rules.md` | Checked project README, commit, and history policy |
+| Capability governance | `_docs/governance/capability-governance.md` | Checked shared tool versus project tool guidance |
 | Project template | `_templates/project/README.md` | Found where to add a scope boundary section |
 | Create project prompt | `_ops/prompts/20-create-project.md` | Found where to add registry updates during project creation |
 
 ## Knowledge Base Validation
 
 - Internal operating docs were used as evidence, so they were validated with `knowledge-skeptic-agent`.
-- Validation input targets: `AGENTS.md`, `README.md`, `_docs/workspace-rules.md`, `_docs/capability-governance.md`, `_templates/project/README.md`, `_ops/prompts/20-create-project.md`
+- Validation input targets: `AGENTS.md`, `README.md`, `_docs/instructions/workspace-rules.md`, `_docs/governance/capability-governance.md`, `_templates/project/README.md`, `_ops/prompts/20-create-project.md`
 - Result: `ready_to_reference`
 - Contrary signals: none
 

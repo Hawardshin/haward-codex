@@ -54,4 +54,4 @@ Docs and history are not passive storage. They are interfaces for the next worke
 - Work evaluation: `_ops/workflows/40-evaluate-and-rework.md`
 - Project boundary management: `_ops/workflows/25-project-boundary-management.md`
 - Research accumulation: `_research/`
-- Capability promotion: `_docs/capability-governance.md`
+- Capability promotion: `_docs/governance/capability-governance.md`

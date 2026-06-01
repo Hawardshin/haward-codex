@@ -24,7 +24,7 @@ The repository currently operates in Codex, but the user wants the same principl
 
 ## Acceptance Criteria
 
-- `_docs/tool-agnostic-agent-operating-model.ko.md` and `.en.md` exist.
+- `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md` and `.en.md` exist.
 - `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, and `.agents/rules/` point back to shared principles.
 - `_ops/assistant-runtimes/adapter-registry.json` passes the self-documenting config contract.
 - `_ops/projects/root-structure-policy.json` and `structure-audit` recognize runtime adapter roots.

@@ -49,7 +49,7 @@ Skill creation did not feel explicit enough. Created skills should be continuous
 ## Linked Artifacts
 
 - Skill source: `_skills/create-validated-skill/SKILL.md`
-- Skill policy: `_docs/skill-lifecycle-policy.ko.md`
+- Skill policy: `_docs/policies/skill-lifecycle-policy.ko.md`
 - Skill workflow: `_ops/workflows/37-skill-lifecycle.md`
 - Skill agent: `agent-platform/docs/skill-lifecycle-agent.ko.md`
 - Skill validator: `agent-platform/src/agent_platform/evaluation/skill_validator.py`

@@ -22,7 +22,7 @@
 - OpenAI File Search docs: https://developers.openai.com/api/docs/guides/tools-file-search
 - `AGENTS.md`
 - `README.md`
-- `_docs/workspace-rules.md`
+- `_docs/instructions/workspace-rules.md`
 - `_ops/workflows/40-evaluate-and-rework.md`
 - `_ops/workflows/60-capture-research.md`
 

@@ -35,7 +35,7 @@
 ## 지식 베이스 검증
 
 - 내부 운영 문서를 근거로 사용하므로 `knowledge-skeptic-agent`로 검증한다.
-- 검증 대상: `_docs/web-first-work-policy.ko.md`, `_ops/workflows/05-web-first-intake.md`, `_ops/workflows/55-research-insight-planning.md`, `AGENTS.md`, `README.md`
+- 검증 대상: `_docs/policies/web-first-work-policy.ko.md`, `_ops/workflows/05-web-first-intake.md`, `_ops/workflows/55-research-insight-planning.md`, `AGENTS.md`, `README.md`
 - 기대 결과: `ready_to_reference`
 
 ## 도출한 인사이트
@@ -46,7 +46,7 @@
 
 ## 계획 단계
 
-1. `_docs/source-collection-policy.ko.md`와 `.en.md`를 추가한다.
+1. `_docs/policies/source-collection-policy.ko.md`와 `.en.md`를 추가한다.
 2. web-first policy, web-first prompt/workflow, research insight prompt/workflow에 출처 묶음 기준을 반영한다.
 3. persistent instructions, workspace rules, README, AGENTS, ops index를 갱신한다.
 4. 리서치 노트를 `_research/topics/agent-planning/`에 저장한다.

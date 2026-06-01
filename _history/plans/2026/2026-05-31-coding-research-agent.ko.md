@@ -31,8 +31,8 @@
 | ADR GitHub Organization | https://adr.github.io/ | 결정, 근거, trade-off, consequences 기록 방식 |
 | GitHub issue template docs | https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository | 구조화된 입력과 필드 기반 정보 수집 |
 | GitHub issue forms syntax | https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms | form schema와 validation 개념 |
-| 내부 출처 수집 정책 | `_docs/source-collection-policy.ko.md` | 공식/논문/오픈소스/기술 블로그/소셜/반대 사례 수집 기준 |
-| 내부 검색 기반 계획 정책 | `_docs/search-insight-planning-policy.ko.md` | 검색 결과를 인사이트와 계획으로 전환하는 규칙 |
+| 내부 출처 수집 정책 | `_docs/policies/source-collection-policy.ko.md` | 공식/논문/오픈소스/기술 블로그/소셜/반대 사례 수집 기준 |
+| 내부 검색 기반 계획 정책 | `_docs/policies/search-insight-planning-policy.ko.md` | 검색 결과를 인사이트와 계획으로 전환하는 규칙 |
 
 ## 지식 베이스 검증
 

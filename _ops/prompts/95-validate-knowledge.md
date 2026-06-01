@@ -30,5 +30,5 @@ PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluati
 
 ## References
 
-- [_docs/knowledge-base-validation-policy.ko.md](../../_docs/knowledge-base-validation-policy.ko.md)
+- [_docs/policies/knowledge-base-validation-policy.ko.md](../../_docs/policies/knowledge-base-validation-policy.ko.md)
 - [agent-platform/docs/knowledge-skeptic-agent.ko.md](../../agent-platform/docs/knowledge-skeptic-agent.ko.md)

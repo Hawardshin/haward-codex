@@ -23,13 +23,13 @@
 15. Record `architecture_theory_sources`, `architecture_practitioner_sources`, and `architecture_tradeoff_notes` so theory/framework guidance and practitioner opinions are compared explicitly.
 16. Compare at least two `folder_structure_options` and record `folder_structure_decision_notes`, `folder_semantics_notes`, and `maintainability_notes` before creating or reshaping folders.
 17. Inspect relevant open-source repositories, reference implementations, well-structured source trees, examples, and tests before writing source code.
-18. If installation is needed, follow [_docs/open-source-installation-policy.ko.md](../../_docs/open-source-installation-policy.ko.md) and [_ops/workflows/58-installation-record.md](58-installation-record.md), then record install scope, command, dependency path, installation record path, security/license review, verification, and rollback.
+18. If installation is needed, follow [_docs/policies/open-source-installation-policy.ko.md](../../_docs/policies/open-source-installation-policy.ko.md) and [_ops/workflows/58-installation-record.md](58-installation-record.md), then record install scope, command, dependency path, installation record path, security/license review, verification, and rollback.
 19. Record `code_reference_sources` with repository URLs, source file paths, test paths, example app paths, or code search results.
 20. Record `code_reference_notes` explaining what structure, boundaries, API patterns, error handling, tests, or implementation details are worth adapting or rejecting.
 21. Record `source_types` explicitly and use at least three distinct non-`other` source types.
 22. Include at least one authoritative source type: `official`, `paper`, `standard`, or `open_source`.
 23. Include at least one practical/adoption/contrary source type: `open_source`, `reference_implementation`, `tech_blog`, `analysis`, `community`, `social`, `news`, or `contrary`.
-21. For broad or repeated research, apply [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md) and use `_tools/source-collector/` when useful.
+21. For broad or repeated research, apply [_docs/policies/source-collection-policy.ko.md](../../_docs/policies/source-collection-policy.ko.md) and use `_tools/source-collector/` when useful.
 22. Check `enterprise-source-registry.json` for large-company engineering, official research-lab, architecture-center, or high-signal independent sources, then re-open exact pages before citing claims.
 23. For Korean user-facing or local-market behavior, use Naver Map, Kakao Map, Naver Blog/Search, official pages, and `_tools/korean-local-review/` scoring outputs when applicable.
 24. Record `source_value_provenance` for material source values, config values, versions, benchmarks, risks, claims, review signals, and assumptions.

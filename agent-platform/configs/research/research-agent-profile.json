@@ -35,7 +35,7 @@
     {
       "id": "search_insight_planning_policy",
       "title": "Search insight planning policy",
-      "path": "_docs/search-insight-planning-policy.ko.md",
+      "path": "_docs/policies/search-insight-planning-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "web-first planning rule",
@@ -46,7 +46,7 @@
     {
       "id": "source_collection_policy",
       "title": "Workspace source collection policy",
-      "path": "_docs/source-collection-policy.ko.md",
+      "path": "_docs/policies/source-collection-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "broad source coverage",

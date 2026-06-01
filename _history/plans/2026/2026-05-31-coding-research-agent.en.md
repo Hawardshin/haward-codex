@@ -31,8 +31,8 @@
 | ADR GitHub Organization | https://adr.github.io/ | Decision, rationale, trade-off, and consequence recording |
 | GitHub issue template docs | https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository | Structured inputs and field-based information capture |
 | GitHub issue forms syntax | https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms | Form schema and validation concepts |
-| Internal source collection policy | `_docs/source-collection-policy.en.md` | Source diversity rules |
-| Internal search insight planning policy | `_docs/search-insight-planning-policy.en.md` | Convert search results into insights and plans |
+| Internal source collection policy | `_docs/policies/source-collection-policy.en.md` | Source diversity rules |
+| Internal search insight planning policy | `_docs/policies/search-insight-planning-policy.en.md` | Convert search results into insights and plans |
 
 ## Knowledge-Base Validation
 

@@ -3,7 +3,7 @@
 ## Review Target
 
 - `REQ-WS-015`
-- `_docs/architecture-first-coding-policy.en.md`
+- `_docs/policies/architecture-first-coding-policy.en.md`
 - `coding-research-agent`
 
 ## Review Result

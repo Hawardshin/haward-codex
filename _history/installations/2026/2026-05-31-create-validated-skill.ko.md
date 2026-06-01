@@ -18,7 +18,7 @@
 | 출처 | 확인일 | 사용한 이유 |
 | --- | --- | --- |
 | `skill-creator` 시스템 스킬 | 2026-05-31 | 스킬 구조, frontmatter, 검증 기준 |
-| `_docs/skill-lifecycle-policy.ko.md` | 2026-05-31 | 설치 전 원본/검증/rollback 규칙 |
+| `_docs/policies/skill-lifecycle-policy.ko.md` | 2026-05-31 | 설치 전 원본/검증/rollback 규칙 |
 
 ## 설치 계획
 

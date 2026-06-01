@@ -28,15 +28,15 @@
 | --- | --- | --- |
 | Repository instructions | `AGENTS.md` | 기존 루트 프로젝트/공통 폴더 규칙 확인 |
 | Workspace README | `README.md` | 프로젝트 폴더 규칙과 예약 폴더 확인 |
-| Workspace rules | `_docs/workspace-rules.md` | 프로젝트 README, commit, history 정책 확인 |
-| Capability governance | `_docs/capability-governance.md` | 공통 도구와 프로젝트 도구 구분 확인 |
+| Workspace rules | `_docs/instructions/workspace-rules.md` | 프로젝트 README, commit, history 정책 확인 |
+| Capability governance | `_docs/governance/capability-governance.md` | 공통 도구와 프로젝트 도구 구분 확인 |
 | Project template | `_templates/project/README.md` | 새 프로젝트 기본 문서에 경계 섹션 추가 위치 확인 |
 | Create project prompt | `_ops/prompts/20-create-project.md` | 새 프로젝트 생성 시 등록부 업데이트를 넣을 위치 확인 |
 
 ## 지식 베이스 검증
 
 - 내부 운영 문서를 근거로 사용하므로 `knowledge-skeptic-agent`로 검증했다.
-- 검증 입력 대상: `AGENTS.md`, `README.md`, `_docs/workspace-rules.md`, `_docs/capability-governance.md`, `_templates/project/README.md`, `_ops/prompts/20-create-project.md`
+- 검증 입력 대상: `AGENTS.md`, `README.md`, `_docs/instructions/workspace-rules.md`, `_docs/governance/capability-governance.md`, `_templates/project/README.md`, `_ops/prompts/20-create-project.md`
 - 결과: `ready_to_reference`
 - 반대 신호: 없음
 

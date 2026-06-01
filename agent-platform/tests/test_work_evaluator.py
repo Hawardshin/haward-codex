@@ -233,7 +233,7 @@ class WorkEvaluatorTests(unittest.TestCase):
             WorkEvaluationInput(
                 initial_instruction="Summarize long context.",
                 result_summary="Created summary docs.",
-                changed_files=("_docs/context-archive-policy.ko.md",),
+                changed_files=("_docs/policies/context-archive-policy.ko.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("ReadAgent paper",),
                 **complete_evidence_targets(),
@@ -258,7 +258,7 @@ class WorkEvaluatorTests(unittest.TestCase):
             WorkEvaluationInput(
                 initial_instruction="Summarize long context.",
                 result_summary="Created summary docs.",
-                changed_files=("_docs/context-archive-policy.ko.md",),
+                changed_files=("_docs/policies/context-archive-policy.ko.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("ReadAgent paper",),
                 **complete_evidence_targets(),
@@ -349,7 +349,7 @@ class WorkEvaluatorTests(unittest.TestCase):
             WorkEvaluationInput(
                 initial_instruction="Manage requirements iteratively.",
                 result_summary="Added docs without updating requirements.",
-                changed_files=("_docs/requirements-management-policy.ko.md",),
+                changed_files=("_docs/policies/requirements-management-policy.ko.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("Requirements management references",),
                 **complete_evidence_targets(),
@@ -372,7 +372,7 @@ class WorkEvaluatorTests(unittest.TestCase):
             WorkEvaluationInput(
                 initial_instruction="Use a spec-driven structure.",
                 result_summary="Added docs without updating specs.",
-                changed_files=("_docs/spec-driven-development-policy.ko.md",),
+                changed_files=("_docs/policies/spec-driven-development-policy.ko.md",),
                 verification=("manual doc review: OK",),
                 references_checked=("GitHub Spec Kit",),
                 **complete_evidence_targets(),

@@ -27,7 +27,7 @@ Coding research should account for technology-specific official docs or standard
 - Stack Overflow vote-up privilege: https://stackoverflow.com/help/privileges/vote-up
 - GitHub Reactions API docs: https://docs.github.com/en/rest/reactions/reactions
 - Existing coding research docs: `agent-platform/docs/coding-research-agent.en.md`
-- Existing architecture-first coding policy: `_docs/architecture-first-coding-policy.en.md`
+- Existing architecture-first coding policy: `_docs/policies/architecture-first-coding-policy.en.md`
 
 ## Verification
 

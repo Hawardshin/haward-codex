@@ -6,7 +6,7 @@ Source-code work should search for best architectures.
 
 ## Result Summary
 
-- Added `_docs/architecture-first-coding-policy.ko.md` and its English companion.
+- Added `_docs/policies/architecture-first-coding-policy.ko.md` and its English companion.
 - Added `architecture_reference_sources`, `architecture_options`, and `architecture_decision_notes` as required readiness checks for `coding-research-agent` and `complete-coding-research`.
 - Updated the coding research profile, source registry, template, workflow, prompt, requirements, spec, request summary, request trace, work summary, memory bootstrap, and coordination board.
 

@@ -28,7 +28,7 @@
 | Zotero Item Types and Fields | https://www.zotero.org/support/kb/item_types_and_fields | Item type, URL, DOI, and access-date field modeling |
 | Sourcemeta Registry Configuration | https://registry.sourcemeta.com/configuration/ | Configuration-driven registry pattern |
 | Existing coding research implementation | `agent-platform/src/agent_platform/planning/coding_research.py` | Readiness check extension point |
-| Existing source collection policy | `_docs/source-collection-policy.en.md` | Source type and adoption signal policy |
+| Existing source collection policy | `_docs/policies/source-collection-policy.en.md` | Source type and adoption signal policy |
 
 ## Knowledge-Base Validation
 

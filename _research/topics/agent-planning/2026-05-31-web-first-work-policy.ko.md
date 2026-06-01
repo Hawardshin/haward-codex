@@ -56,7 +56,7 @@
 
 ## 관련 작업
 
-- `_docs/web-first-work-policy.ko.md`
+- `_docs/policies/web-first-work-policy.ko.md`
 - `_ops/workflows/05-web-first-intake.md`
 - `_ops/prompts/05-web-first-intake.md`
 

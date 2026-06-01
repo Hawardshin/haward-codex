@@ -77,5 +77,5 @@ PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/pl
 
 - [agent-platform/docs/coding-research-agent.ko.md](../../agent-platform/docs/coding-research-agent.ko.md)
 - [_ops/workflows/56-coding-research.md](../workflows/56-coding-research.md)
-- [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md)
+- [_docs/policies/source-collection-policy.ko.md](../../_docs/policies/source-collection-policy.ko.md)
 - [_tools/source-collector/README.ko.md](../../_tools/source-collector/README.ko.md)

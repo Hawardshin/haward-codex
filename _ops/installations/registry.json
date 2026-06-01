@@ -23,7 +23,7 @@
     {
       "id": "open_source_installation_policy",
       "title": "Open-Source Installation Policy",
-      "path": "_docs/open-source-installation-policy.ko.md",
+      "path": "_docs/policies/open-source-installation-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "workspace installation rules",

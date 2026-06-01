@@ -20,8 +20,8 @@
 - ADR GitHub Organization: https://adr.github.io/
 - GitHub Docs, Configuring issue templates: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository
 - GitHub Docs, Syntax for issue forms: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms
-- 내부 출처 수집 정책: `_docs/source-collection-policy.ko.md`
-- 내부 검색 기반 계획 정책: `_docs/search-insight-planning-policy.ko.md`
+- 내부 출처 수집 정책: `_docs/policies/source-collection-policy.ko.md`
+- 내부 검색 기반 계획 정책: `_docs/policies/search-insight-planning-policy.ko.md`
 - 계획 기록: `_history/plans/2026/2026-05-31-coding-research-agent.ko.md`
 
 ## Grounding Checks

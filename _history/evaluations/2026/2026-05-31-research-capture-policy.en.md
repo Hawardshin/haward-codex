@@ -15,7 +15,7 @@
 
 ## References Checked
 
-- `_docs/persistent-instructions.ko.md`
+- `_docs/instructions/persistent-instructions.ko.md`
 - `_ops/workflows/30-close-and-index.md`
 - `_ops/workflows/40-evaluate-and-rework.md`
 - `_ops/prompts/60-close-work.md`
@@ -27,19 +27,19 @@
 - `_research/README.en.md`
 - `_research/index.ko.md`
 - `_research/index.en.md`
-- `_docs/research-capture-policy.ko.md`
-- `_docs/research-capture-policy.en.md`
+- `_docs/policies/research-capture-policy.ko.md`
+- `_docs/policies/research-capture-policy.en.md`
 - `_templates/research-note/research-note.ko.md`
 - `_templates/research-note/research-note.en.md`
 - `_ops/prompts/90-capture-research.md`
 - `_ops/workflows/60-capture-research.md`
 - `AGENTS.md`
 - `README.md`
-- `_docs/persistent-instructions.ko.md`
-- `_docs/persistent-instructions.en.md`
-- `_docs/workspace-rules.md`
-- `_docs/platform-operating-model.md`
-- `_docs/capability-governance.md`
+- `_docs/instructions/persistent-instructions.ko.md`
+- `_docs/instructions/persistent-instructions.en.md`
+- `_docs/instructions/workspace-rules.md`
+- `_docs/operating-models/platform-operating-model.md`
+- `_docs/governance/capability-governance.md`
 - `_tools/workspace-index/src/workspace_index.py`
 
 ## Verification

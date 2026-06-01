@@ -19,9 +19,9 @@
 - `_history/plans/2026/2026-05-31-philosophy-folder.ko.md`
 - `README.md`
 - `AGENTS.md`
-- `_docs/search-insight-planning-policy.ko.md`
-- `_docs/knowledge-base-validation-policy.ko.md`
-- `_docs/platform-operating-model.md`
+- `_docs/policies/search-insight-planning-policy.ko.md`
+- `_docs/policies/knowledge-base-validation-policy.ko.md`
+- `_docs/operating-models/platform-operating-model.md`
 - `_ops/index.md`
 
 This work changed internal philosophy and documentation structure, so additional internet research was not needed.

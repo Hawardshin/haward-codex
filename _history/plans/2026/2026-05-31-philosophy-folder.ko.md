@@ -26,15 +26,15 @@
 | --- | --- | --- |
 | Workspace README | `README.md` | 운영 원칙과 예약 폴더 구조 확인 |
 | Repository instructions | `AGENTS.md` | 지속 규칙과 운영 책임 확인 |
-| Search insight policy | `_docs/search-insight-planning-policy.ko.md` | AI 추정, 검색, 인사이트, 계획 철학이 섞여 있는 위치 확인 |
-| Knowledge validation policy | `_docs/knowledge-base-validation-policy.ko.md` | 저장된 지식도 의심한다는 철학이 섞여 있는 위치 확인 |
-| Platform operating model | `_docs/platform-operating-model.md` | 철학/정책/워크플로 역할 분리 위치 확인 |
+| Search insight policy | `_docs/policies/search-insight-planning-policy.ko.md` | AI 추정, 검색, 인사이트, 계획 철학이 섞여 있는 위치 확인 |
+| Knowledge validation policy | `_docs/policies/knowledge-base-validation-policy.ko.md` | 저장된 지식도 의심한다는 철학이 섞여 있는 위치 확인 |
+| Platform operating model | `_docs/operating-models/platform-operating-model.md` | 철학/정책/워크플로 역할 분리 위치 확인 |
 | Operations index | `_ops/index.md` | 새 폴더 탐색 경로를 연결할 위치 확인 |
 
 ## 지식 베이스 검증
 
 - 내부 문서를 근거로 사용하므로 `knowledge-skeptic-agent`로 검증했다.
-- 검증 입력 대상: `README.md`, `AGENTS.md`, `_docs/search-insight-planning-policy.ko.md`, `_docs/knowledge-base-validation-policy.ko.md`, `_docs/platform-operating-model.md`, `_ops/index.md`, `_history/plans/2026/2026-05-31-philosophy-folder.ko.md`
+- 검증 입력 대상: `README.md`, `AGENTS.md`, `_docs/policies/search-insight-planning-policy.ko.md`, `_docs/policies/knowledge-base-validation-policy.ko.md`, `_docs/operating-models/platform-operating-model.md`, `_ops/index.md`, `_history/plans/2026/2026-05-31-philosophy-folder.ko.md`
 - 결과: `ready_to_reference`
 - 반대 신호: 없음
 

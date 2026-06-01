@@ -25,6 +25,7 @@
       "The requirements management layer or requirements baseline contract changes.",
       "The spec-driven development layer or spec artifact contract changes.",
       "The spec/source reconciliation layer, clarification question format, or clarification notification contract changes.",
+      "The categorized _docs registry, docs audit tool, or required durable docs path changes.",
       "The skill lifecycle layer or skill validation contract changes.",
       "The architecture-first coding layer or coding architecture comparison contract changes.",
       "The stack-aware coding research layer or technology-specific official docs and discussion signal rules change.",
@@ -46,7 +47,7 @@
     {
       "id": "memory_bootstrap_policy",
       "title": "Memory Bootstrap Policy",
-      "path": "_docs/memory-bootstrap-policy.ko.md",
+      "path": "_docs/policies/memory-bootstrap-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "workspace-specific memory bootstrap rules",
@@ -57,13 +58,36 @@
     {
       "id": "persistent_instructions",
       "title": "Persistent Instructions",
-      "path": "_docs/persistent-instructions.md",
+      "path": "_docs/instructions/persistent-instructions.md",
       "source_type": "internal",
       "used_for": [
         "durable user preferences",
         "rules that future sessions must not forget"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "docs_registry",
+      "title": "Workspace Docs Registry",
+      "path": "_docs/registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "categorized _docs structure",
+        "required durable documentation paths",
+        "docs audit command"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "docs_audit_tool",
+      "title": "Docs Audit Tool",
+      "path": "_tools/docs-audit/README.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "missing-document prevention",
+        "category placement validation"
+      ],
+      "last_checked": "2026-06-01"
     },
     {
       "id": "work_mode_registry",
@@ -92,7 +116,7 @@
     {
       "id": "self_documenting_config_policy",
       "title": "Self-Documenting Config Policy",
-      "path": "_docs/self-documenting-config-policy.ko.md",
+      "path": "_docs/policies/self-documenting-config-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "rule that shared settings must include references and structure rules inside the file",
@@ -114,7 +138,7 @@
     {
       "id": "context_archive_policy",
       "title": "Context Archive Policy",
-      "path": "_docs/context-archive-policy.ko.md",
+      "path": "_docs/policies/context-archive-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "long-context compaction and resume packet rules",
@@ -183,7 +207,7 @@
     {
       "id": "skill_lifecycle_policy",
       "title": "Skill Lifecycle Policy",
-      "path": "_docs/skill-lifecycle-policy.ko.md",
+      "path": "_docs/policies/skill-lifecycle-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "custom skill source management",
@@ -195,7 +219,7 @@
     {
       "id": "architecture_first_coding_policy",
       "title": "Architecture-First Coding Policy",
-      "path": "_docs/architecture-first-coding-policy.ko.md",
+      "path": "_docs/policies/architecture-first-coding-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "source-code work architecture reference rules",
@@ -229,7 +253,7 @@
     {
       "id": "open_source_installation_policy",
       "title": "Open Source Installation Policy",
-      "path": "_docs/open-source-installation-policy.ko.md",
+      "path": "_docs/policies/open-source-installation-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "open-source install permission and safety rules",
@@ -287,7 +311,7 @@
     {
       "id": "tool_agnostic_agent_operating_model",
       "title": "Tool-Agnostic Agent Operating Model",
-      "path": "_docs/tool-agnostic-agent-operating-model.ko.md",
+      "path": "_docs/operating-models/tool-agnostic-agent-operating-model.ko.md",
       "source_type": "internal",
       "used_for": [
         "shared AI assistant operating principles independent of any one tool",
@@ -410,6 +434,17 @@
       "applies_to": [
         "startup_sequence",
         "required_anchor_ids"
+      ]
+    },
+    {
+      "id": "docs_registry_must_stay_discoverable",
+      "rule": "The categorized docs registry must remain a warm memory anchor; no loose root _docs Markdown files are allowed except registered root index files, and docs-audit must run after durable docs structure changes.",
+      "reason": "The user asked to prevent missing durable documentation as the workspace grows and to split the docs folder by document type.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "docs-audit"
       ]
     },
     {
@@ -696,6 +731,7 @@
   "startup_sequence": [
     "repo_instructions",
     "persistent_instructions",
+    "docs_registry",
     "ops_index",
     "prompt_router",
     "start_workflow",
@@ -732,6 +768,7 @@
   "required_anchor_ids": [
     "repo_instructions",
     "persistent_instructions",
+    "docs_registry",
     "ops_index",
     "prompt_router",
     "start_workflow",
@@ -776,11 +813,19 @@
     },
     {
       "id": "persistent_instructions",
-      "path": "_docs/persistent-instructions.md",
+      "path": "_docs/instructions/persistent-instructions.md",
       "tier": "hot",
       "purpose": "Durable user preferences and long-running operating rules.",
       "required": true,
       "load_order": 2
+    },
+    {
+      "id": "docs_registry",
+      "path": "_docs/registry.json",
+      "tier": "warm",
+      "purpose": "Categorized _docs structure, required durable docs paths, and docs-audit command.",
+      "required": true,
+      "load_order": 3
     },
     {
       "id": "ops_index",
@@ -872,7 +917,7 @@
     },
     {
       "id": "tool_agnostic_agent_operating_model",
-      "path": "_docs/tool-agnostic-agent-operating-model.ko.md",
+      "path": "_docs/operating-models/tool-agnostic-agent-operating-model.ko.md",
       "tier": "warm",
       "purpose": "Shared AI assistant operating model that keeps runtime-specific instruction files as thin adapters.",
       "required": true,
@@ -936,7 +981,7 @@
     },
     {
       "id": "platform_operating_model",
-      "path": "_docs/platform-operating-model.md",
+      "path": "_docs/operating-models/platform-operating-model.md",
       "tier": "warm",
       "purpose": "System-level operating loop and capability promotion model.",
       "required": true,
@@ -944,7 +989,7 @@
     },
     {
       "id": "source_collection_policy",
-      "path": "_docs/source-collection-policy.ko.md",
+      "path": "_docs/policies/source-collection-policy.ko.md",
       "tier": "warm",
       "purpose": "Source collection, source diversity, and adoption signal policy.",
       "required": true,
@@ -952,7 +997,7 @@
     },
     {
       "id": "self_documenting_config_policy",
-      "path": "_docs/self-documenting-config-policy.ko.md",
+      "path": "_docs/policies/self-documenting-config-policy.ko.md",
       "tier": "warm",
       "purpose": "Policy requiring shared settings files to include reference links, structure rules, and field guides.",
       "required": true,
@@ -960,7 +1005,7 @@
     },
     {
       "id": "open_source_installation_policy",
-      "path": "_docs/open-source-installation-policy.ko.md",
+      "path": "_docs/policies/open-source-installation-policy.ko.md",
       "tier": "warm",
       "purpose": "Policy for installing mature open-source dependencies with scoped installation, security/license review, verification, and rollback.",
       "required": true,
@@ -1000,7 +1045,7 @@
     },
     {
       "id": "context_archive_policy",
-      "path": "_docs/context-archive-policy.ko.md",
+      "path": "_docs/policies/context-archive-policy.ko.md",
       "tier": "warm",
       "purpose": "Rules for proactively compacting long chat context into document-based resume packets.",
       "required": true,
@@ -1032,7 +1077,7 @@
     },
     {
       "id": "skill_lifecycle_policy",
-      "path": "_docs/skill-lifecycle-policy.ko.md",
+      "path": "_docs/policies/skill-lifecycle-policy.ko.md",
       "tier": "warm",
       "purpose": "Rules for creating, validating, forward-testing, improving, and evaluating custom Codex skills.",
       "required": true,
@@ -1040,7 +1085,7 @@
     },
     {
       "id": "architecture_first_coding_policy",
-      "path": "_docs/architecture-first-coding-policy.ko.md",
+      "path": "_docs/policies/architecture-first-coding-policy.ko.md",
       "tier": "warm",
       "purpose": "Rules for finding, comparing, and recording best-fit architecture references before source-code work.",
       "required": true,

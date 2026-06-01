@@ -20,7 +20,7 @@
 - Guidelines for including grey literature and conducting multivocal literature reviews in software engineering: https://doi.org/10.1016/j.infsof.2018.09.006
 - CMU SEI Digital Library: https://www.sei.cmu.edu/library/
 - Existing implementation: `agent-platform/src/agent_platform/planning/coding_research.py`
-- Existing source collection policy: `_docs/source-collection-policy.en.md`
+- Existing source collection policy: `_docs/policies/source-collection-policy.en.md`
 - Plan history: `_history/plans/2026/2026-05-31-coding-research-source-diversity.en.md`
 
 ## Grounding Checks

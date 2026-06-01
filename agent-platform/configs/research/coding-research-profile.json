@@ -48,7 +48,7 @@
         {
             "id": "source_collection_policy",
             "title": "Workspace source collection policy",
-      "path": "_docs/source-collection-policy.ko.md",
+      "path": "_docs/policies/source-collection-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "source diversity policy",

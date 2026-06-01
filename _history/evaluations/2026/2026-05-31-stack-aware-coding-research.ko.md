@@ -27,7 +27,7 @@
 - Stack Overflow vote-up privilege: https://stackoverflow.com/help/privileges/vote-up
 - GitHub Reactions API docs: https://docs.github.com/en/rest/reactions/reactions
 - 기존 코딩 조사 문서: `agent-platform/docs/coding-research-agent.ko.md`
-- 기존 아키텍처 우선 코딩 정책: `_docs/architecture-first-coding-policy.ko.md`
+- 기존 아키텍처 우선 코딩 정책: `_docs/policies/architecture-first-coding-policy.ko.md`
 
 ## 검증
 

@@ -16,7 +16,7 @@
 - Evaluating Very Long-Term Conversational Memory of LLM Agents: 장기 대화 기억 평가
 - Active Context Compression: 에이전트의 능동적 context bloat 관리
 - Microsoft Agent Framework Memory and Persistence: memory/history/session state 분리
-- 기존 내부 문서: `_docs/context-management.md`, `_docs/memory-bootstrap-policy.ko.md`, `_ops/prompts/50-compress-context.md`
+- 기존 내부 문서: `_docs/operating-models/context-management.md`, `_docs/policies/memory-bootstrap-policy.ko.md`, `_ops/prompts/50-compress-context.md`
 
 ## 도출한 인사이트
 

@@ -11,11 +11,11 @@
 
 ## 완료 요약
 
-Codex 중심으로 보일 수 있는 현재 저장소 운영 구조를 공통 원칙과 runtime adapter로 분리했다. 공통 원칙은 `_docs/tool-agnostic-agent-operating-model.ko.md`와 `_ops/assistant-runtimes/adapter-registry.json`에 두고, `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, `.agents/rules/`는 얇은 도구별 adapter로 관리하게 했다.
+Codex 중심으로 보일 수 있는 현재 저장소 운영 구조를 공통 원칙과 runtime adapter로 분리했다. 공통 원칙은 `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`와 `_ops/assistant-runtimes/adapter-registry.json`에 두고, `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, `.agents/rules/`는 얇은 도구별 adapter로 관리하게 했다.
 
 ## 주요 산출물
 
-- `_docs/tool-agnostic-agent-operating-model.ko.md`
+- `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`
 - `_ops/assistant-runtimes/adapter-registry.json`
 - `CLAUDE.md`
 - `.claude/rules/workspace-operating-principles.md`

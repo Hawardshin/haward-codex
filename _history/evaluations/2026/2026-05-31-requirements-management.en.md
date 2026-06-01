@@ -54,7 +54,7 @@ The user instructed that work should define requirements, keep revising and revi
 - `_requirements/baselines/2026-05-31-workspace-platform.en.md`
 - `_requirements/changes/2026-05-31-requirements-management.en.md`
 - `_requirements/reviews/2026-05-31-workspace-platform.en.md`
-- `_docs/requirements-management-policy.en.md`
+- `_docs/policies/requirements-management-policy.en.md`
 - `_ops/workflows/35-requirements-lifecycle.md`
 - `_ops/prompts/35-manage-requirements.md`
 - `agent-platform/docs/requirements-manager-agent.en.md`

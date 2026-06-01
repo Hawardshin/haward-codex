@@ -8,7 +8,7 @@
 
 - `agent-platform/configs/research/enterprise-source-registry.json`을 별도 기계 판독 seed list로 추가했다.
 - `_research/source-lists/enterprise-high-quality-sites.ko.md`와 영어 companion을 추가했다.
-- `_docs/enterprise-source-list-policy.ko.md`와 영어 companion을 추가했다.
+- `_docs/policies/enterprise-source-list-policy.ko.md`와 영어 companion을 추가했다.
 - source collection, research insight planning, coding research, prompt, persistent instructions, memory bootstrap, planning template, requirements, spec, request summary, request trace, work summary, coordination board를 갱신했다.
 
 ## 평가 결과

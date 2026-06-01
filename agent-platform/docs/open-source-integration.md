@@ -4,7 +4,7 @@
 
 Use mature open-source software when it reduces platform maintenance cost and fits the task. Do not adopt a framework just because it is popular.
 
-If the best open-source candidate needs to be installed, install it in the owning project or tool environment rather than avoiding the dependency by default. Follow `_docs/open-source-installation-policy.ko.md`: record the install command, dependency file, installation audit record, environment path, version/lock status, security review, license review, verification, and rollback plan.
+If the best open-source candidate needs to be installed, install it in the owning project or tool environment rather than avoiding the dependency by default. Follow `_docs/policies/open-source-installation-policy.ko.md`: record the install command, dependency file, installation audit record, environment path, version/lock status, security review, license review, verification, and rollback plan.
 
 ## Evaluation Criteria
 

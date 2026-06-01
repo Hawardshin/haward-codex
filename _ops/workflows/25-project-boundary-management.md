@@ -6,7 +6,7 @@
 
 ## Sequence
 
-1. Read [_docs/project-boundary-policy.ko.md](../../_docs/project-boundary-policy.ko.md).
+1. Read [_docs/policies/project-boundary-policy.ko.md](../../_docs/policies/project-boundary-policy.ko.md).
 2. Read [_ops/projects/root-structure-policy.json](../projects/root-structure-policy.json) when the request may affect root folders.
 3. Classify the request as existing project, new root project, shared workspace capability, research note, local-only scratch, generated output, or archive/maintenance.
 4. If it belongs to an existing project, read that project's `README.md`.

@@ -23,7 +23,7 @@
 - [RAGTruth](https://arxiv.org/abs/2401.00396)
 - [The Atlantic: Generative AI Can't Cite Its Sources](https://www.theatlantic.com/technology/archive/2024/06/chatgpt-citations-rag/678796/)
 - `AGENTS.md`
-- `_docs/search-insight-planning-policy.ko.md`
+- `_docs/policies/search-insight-planning-policy.ko.md`
 - `agent-platform/configs/research/source-registry.json`
 - `agent-platform/configs/memory/bootstrap-manifest.json`
 

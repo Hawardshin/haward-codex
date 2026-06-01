@@ -21,7 +21,7 @@
 | `https://nextjs.org/docs/app/guides/static-exports` | 2026-06-01 | static export 설정 근거 |
 | `https://vercel.com/docs/frameworks/full-stack/nextjs` | 2026-06-01 | Vercel Next.js 배포 근거 |
 | `https://www.npmjs.com/package/lucide-react` | 2026-06-01 | icon dependency와 라이선스 확인 |
-| `_docs/open-source-installation-policy.ko.md` | 2026-06-01 | 설치 기록과 rollback 정책 |
+| `_docs/policies/open-source-installation-policy.ko.md` | 2026-06-01 | 설치 기록과 rollback 정책 |
 
 ## 설치 계획
 

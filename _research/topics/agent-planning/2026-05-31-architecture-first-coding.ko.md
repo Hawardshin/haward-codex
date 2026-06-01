@@ -17,7 +17,7 @@
 
 - `complete-coding-research`가 아키텍처 reference, option, decision note 누락을 gap으로 판정한다.
 - `coding-research-profile.json`과 `source-registry.json`에 아키텍처 reference source를 추가했다.
-- `_docs/architecture-first-coding-policy.ko.md`를 durable policy로 추가했다.
+- `_docs/policies/architecture-first-coding-policy.ko.md`를 durable policy로 추가했다.
 
 ## 재사용 주의
 

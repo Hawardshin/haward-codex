@@ -8,7 +8,7 @@ Manage large-company and high-quality site lists separately.
 
 - Added `agent-platform/configs/research/enterprise-source-registry.json` as a separate machine-readable seed list.
 - Added `_research/source-lists/enterprise-high-quality-sites.ko.md` and its English companion.
-- Added `_docs/enterprise-source-list-policy.ko.md` and its English companion.
+- Added `_docs/policies/enterprise-source-list-policy.ko.md` and its English companion.
 - Updated source collection, research insight planning, coding research, prompts, persistent instructions, memory bootstrap, planning templates, requirements, spec, request summaries, request traces, work summaries, and the coordination board.
 
 ## Evaluation Result

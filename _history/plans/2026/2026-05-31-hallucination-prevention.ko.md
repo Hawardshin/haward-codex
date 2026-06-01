@@ -34,12 +34,12 @@
 | Chain-of-Verification | https://arxiv.org/abs/2309.11495 | 초안 후 독립 검증 루프 |
 | SelfCheckGPT | https://aclanthology.org/2023.emnlp-main.557/ | 자기검사 기반 오류 탐지 |
 | Self-RAG | https://arxiv.org/abs/2310.11511 | 검색/생성/비평 결합 |
-| 기존 운영 문서 | `AGENTS.md`, `_docs/workspace-rules.md`, `_docs/search-insight-planning-policy.ko.md`, `_docs/knowledge-base-validation-policy.ko.md` | 기존 검색/검증/평가 정책 |
+| 기존 운영 문서 | `AGENTS.md`, `_docs/instructions/workspace-rules.md`, `_docs/policies/search-insight-planning-policy.ko.md`, `_docs/policies/knowledge-base-validation-policy.ko.md` | 기존 검색/검증/평가 정책 |
 
 ## 지식 베이스 검증
 
 - 내부 운영 문서를 근거로 사용하므로 `knowledge-skeptic-agent`로 검증한다.
-- 검증 대상: `AGENTS.md`, `_docs/workspace-rules.md`, `_docs/search-insight-planning-policy.ko.md`, `_docs/knowledge-base-validation-policy.ko.md`, `agent-platform/docs/knowledge-skeptic-agent.ko.md`, `agent-platform/docs/work-evaluator-agent.md`
+- 검증 대상: `AGENTS.md`, `_docs/instructions/workspace-rules.md`, `_docs/policies/search-insight-planning-policy.ko.md`, `_docs/policies/knowledge-base-validation-policy.ko.md`, `agent-platform/docs/knowledge-skeptic-agent.ko.md`, `agent-platform/docs/work-evaluator-agent.md`
 - 기대 결과: `ready_to_reference`
 
 ## 도출한 인사이트
@@ -52,7 +52,7 @@
 ## 계획 단계
 
 1. 리서치 노트를 `_research/topics/agent-reliability/`에 한국어/영어로 저장한다.
-2. `_docs/hallucination-prevention-policy.ko.md`와 `.en.md`를 추가한다.
+2. `_docs/policies/hallucination-prevention-policy.ko.md`와 `.en.md`를 추가한다.
 3. `_ops/prompts/96-ground-output.md`와 `_ops/workflows/70-hallucination-prevention.md`를 추가한다.
 4. `agent-platform`에 `hallucination-guard-agent` 설정, 입력 템플릿, Python evaluator, CLI 명령을 추가한다.
 5. `work-evaluator-agent` 입력에 `grounding_checks`를 추가한다.

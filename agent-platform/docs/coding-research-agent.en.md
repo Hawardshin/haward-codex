@@ -84,7 +84,7 @@ Practitioner opinions are useful for finding real-world friction and recurring p
 
 Do not copy open-source code blindly. Check license, maintenance state, fit, security risk, and test quality before adapting ideas locally.
 
-When open-source installation is needed, follow [_docs/open-source-installation-policy.en.md](../../_docs/open-source-installation-policy.en.md) and [_ops/workflows/58-installation-record.md](../../_ops/workflows/58-installation-record.md). If installation actually occurs, update `_history/installations/YYYY/` and `_ops/installations/registry.json`.
+When open-source installation is needed, follow [_docs/policies/open-source-installation-policy.en.md](../../_docs/policies/open-source-installation-policy.en.md) and [_ops/workflows/58-installation-record.md](../../_ops/workflows/58-installation-record.md). If installation actually occurs, update `_history/installations/YYYY/` and `_ops/installations/registry.json`.
 
 ## Reference Config Files
 

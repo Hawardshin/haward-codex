@@ -14,7 +14,7 @@
   "sources_checked": [
     "https://example.com/official-docs",
     "https://github.com/example/project",
-    "_docs/example-policy.ko.md"
+    "_docs/policies/example-policy.ko.md"
   ],
   "source_types": [
     "official",

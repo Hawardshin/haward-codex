@@ -84,7 +84,7 @@
     {
       "id": "tool_agnostic_operating_model",
       "title": "Tool-Agnostic Agent Operating Model",
-      "path": "_docs/tool-agnostic-agent-operating-model.ko.md",
+      "path": "_docs/operating-models/tool-agnostic-agent-operating-model.ko.md",
       "source_type": "internal",
       "used_for": [
         "shared principles independent of any one coding assistant",
@@ -179,8 +179,8 @@
   ],
   "canonical_policy_paths": [
     "AGENTS.md",
-    "_docs/tool-agnostic-agent-operating-model.ko.md",
-    "_docs/persistent-instructions.md",
+    "_docs/operating-models/tool-agnostic-agent-operating-model.ko.md",
+    "_docs/instructions/persistent-instructions.md",
     "_ops/workflows/00-start-here.md",
     "_ops/workflows/05-web-first-intake.md",
     "agent-platform/configs/memory/bootstrap-manifest.json",

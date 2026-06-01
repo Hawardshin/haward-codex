@@ -24,7 +24,7 @@
 
 ## 수용 기준
 
-- `_docs/tool-agnostic-agent-operating-model.ko.md`와 `.en.md`가 존재한다.
+- `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`와 `.en.md`가 존재한다.
 - `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, `.agents/rules/`가 공통 원칙을 가리킨다.
 - `_ops/assistant-runtimes/adapter-registry.json`이 self-documenting config contract를 통과한다.
 - `_ops/projects/root-structure-policy.json`과 `structure-audit`가 runtime adapter root를 인식한다.

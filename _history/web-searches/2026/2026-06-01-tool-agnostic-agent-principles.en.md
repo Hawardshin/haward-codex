@@ -36,7 +36,7 @@
 
 ## Plan Impact
 
-- Do not duplicate policy source text into every assistant runtime file. Use `_docs/tool-agnostic-agent-operating-model.*.md` and `_ops/assistant-runtimes/adapter-registry.json` as the shared source of truth.
+- Do not duplicate policy source text into every assistant runtime file. Use `_docs/operating-models/tool-agnostic-agent-operating-model.*.md` and `_ops/assistant-runtimes/adapter-registry.json` as the shared source of truth.
 - Keep `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, and `.agents/rules/` as thin adapters that point back to the shared principles.
 - Add `.claude`, `.cursor`, and `.agents` to root structure audit as `runtime_adapter` folder classes, not projects.
 - Extend `workspace-monitor` so runtime adapter and assistant operating principle template documents are visible in the repository dashboard.

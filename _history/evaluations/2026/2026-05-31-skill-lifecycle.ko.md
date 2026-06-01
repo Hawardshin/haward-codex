@@ -49,7 +49,7 @@
 ## 연결 산출물
 
 - 스킬 원본: `_skills/create-validated-skill/SKILL.md`
-- 스킬 정책: `_docs/skill-lifecycle-policy.ko.md`
+- 스킬 정책: `_docs/policies/skill-lifecycle-policy.ko.md`
 - 스킬 워크플로: `_ops/workflows/37-skill-lifecycle.md`
 - 스킬 에이전트: `agent-platform/docs/skill-lifecycle-agent.ko.md`
 - 스킬 검증기: `agent-platform/src/agent_platform/evaluation/skill_validator.py`

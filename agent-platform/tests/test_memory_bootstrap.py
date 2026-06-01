@@ -15,8 +15,8 @@ class MemoryBootstrapTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
             (root / "AGENTS.md").write_text("rules", encoding="utf-8")
-            (root / "_docs").mkdir()
-            (root / "_docs" / "persistent-instructions.md").write_text("memory", encoding="utf-8")
+            (root / "_docs" / "instructions").mkdir(parents=True)
+            (root / "_docs" / "instructions" / "persistent-instructions.md").write_text("memory", encoding="utf-8")
 
             report = check_memory_bootstrap(
                 MemoryBootstrapManifest(
@@ -25,7 +25,7 @@ class MemoryBootstrapTests(unittest.TestCase):
                     purpose="Load memory.",
                     anchors=(
                         MemoryAnchor("repo_rules", "AGENTS.md", "hot", "Rules", True, 1),
-                        MemoryAnchor("persistent", "_docs/persistent-instructions.md", "hot", "Persistent rules", True, 2),
+                        MemoryAnchor("persistent", "_docs/instructions/persistent-instructions.md", "hot", "Persistent rules", True, 2),
                     ),
                     startup_sequence=("repo_rules", "persistent"),
                     required_anchor_ids=("repo_rules", "persistent"),
@@ -34,7 +34,7 @@ class MemoryBootstrapTests(unittest.TestCase):
             )
 
         self.assertEqual(report["status"], "ready_to_bootstrap")
-        self.assertEqual(report["hot_context_paths"], ["AGENTS.md", "_docs/persistent-instructions.md"])
+        self.assertEqual(report["hot_context_paths"], ["AGENTS.md", "_docs/instructions/persistent-instructions.md"])
         self.assertEqual(report["gaps"], [])
 
     def test_missing_required_anchor_path_blocks_bootstrap(self) -> None:

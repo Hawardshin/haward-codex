@@ -24,7 +24,7 @@
 
 ## Outputs
 
-- `_docs/tool-agnostic-agent-operating-model.en.md`
+- `_docs/operating-models/tool-agnostic-agent-operating-model.en.md`
 - `_ops/assistant-runtimes/adapter-registry.json`
 - `CLAUDE.md`
 - `.claude/rules/workspace-operating-principles.md`

@@ -47,7 +47,7 @@
 
 - `_history/request-traces/2026/2026-05-31.ko.md`
 - `_history/request-traces/README.ko.md`
-- `_docs/request-traceability-policy.ko.md`
+- `_docs/policies/request-traceability-policy.ko.md`
 - `_templates/request-trace/request-trace.ko.md`
 - `_history/web-searches/2026/2026-05-31-request-outcome-trace.ko.md`
 - `_research/topics/documentation/2026-05-31-request-outcome-trace.ko.md`

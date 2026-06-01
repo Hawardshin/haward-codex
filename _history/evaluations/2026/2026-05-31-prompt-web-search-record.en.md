@@ -18,7 +18,7 @@ Always run web search for every prompt, and put that reasoning/search process in
 - [OpenAI Web search docs](https://platform.openai.com/docs/guides/tools-web-search)
 - [Anthropic Search results docs](https://docs.anthropic.com/en/docs/build-with-claude/search-results)
 - [Firebase AI Logic: Grounding with Google Search](https://firebase.google.com/docs/ai-logic/grounding-google-search)
-- `_docs/web-first-work-policy.ko.md`
+- `_docs/policies/web-first-work-policy.ko.md`
 - `_ops/workflows/40-evaluate-and-rework.md`
 - `agent-platform/docs/work-evaluator-agent.md`
 

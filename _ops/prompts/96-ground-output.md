@@ -40,6 +40,6 @@ Required output:
 
 ## References
 
-- [Hallucination prevention policy](../../_docs/hallucination-prevention-policy.ko.md)
+- [Hallucination prevention policy](../../_docs/policies/hallucination-prevention-policy.ko.md)
 - [Hallucination guard agent](../../agent-platform/docs/hallucination-guard-agent.ko.md)
 - [Hallucination prevention workflow](../workflows/70-hallucination-prevention.md)

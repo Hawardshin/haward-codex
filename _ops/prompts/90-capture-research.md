@@ -23,5 +23,5 @@ Link the research note from related project docs, evaluation reports, or history
 
 ## References
 
-- [_docs/research-capture-policy.ko.md](../../_docs/research-capture-policy.ko.md)
+- [_docs/policies/research-capture-policy.ko.md](../../_docs/policies/research-capture-policy.ko.md)
 - [_research/README.ko.md](../../_research/README.ko.md)

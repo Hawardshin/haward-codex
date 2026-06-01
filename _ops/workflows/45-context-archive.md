@@ -24,6 +24,6 @@ When resuming from a context archive, read the latest work summary first, then t
 
 ## References
 
-- [_docs/context-archive-policy.ko.md](../../_docs/context-archive-policy.ko.md)
+- [_docs/policies/context-archive-policy.ko.md](../../_docs/policies/context-archive-policy.ko.md)
 - [_history/context-archives/README.ko.md](../../_history/context-archives/README.ko.md)
 - [_templates/context-archive/context-archive.ko.md](../../_templates/context-archive/context-archive.ko.md)

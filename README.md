@@ -6,7 +6,7 @@
 
 - 모든 작업 산출물은 이 저장소의 git 이력으로 추적한다.
 - durable operating principle은 도구 독립형으로 관리하고, 도구별 instruction 파일은 얇은 adapter로 둔다.
-- Codex는 `AGENTS.md`, Claude Code는 `CLAUDE.md`와 `.claude/rules/`, Cursor는 `.cursor/rules/`, Antigravity는 `.agents/rules/`를 사용하되, 정책 원본은 `_docs/tool-agnostic-agent-operating-model.ko.md`와 `_ops/assistant-runtimes/adapter-registry.json`에서 확인한다.
+- Codex는 `AGENTS.md`, Claude Code는 `CLAUDE.md`와 `.claude/rules/`, Cursor는 `.cursor/rules/`, Antigravity는 `.agents/rules/`를 사용하되, 정책 원본은 `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`와 `_ops/assistant-runtimes/adapter-registry.json`에서 확인한다.
 - 의미 있는 변경 단위가 끝날 때마다 커밋한다.
 - 커밋이 만들어지면 바로 원격 저장소에 push한다.
 - 의미 있는 작업을 닫기 전 초기 지시와 결과를 평가하고, 차이가 있으면 재작업한다.
@@ -81,6 +81,10 @@ codex/
   browser-agent/
   research-agent/
   _docs/
+  _docs/instructions/
+  _docs/policies/
+  _docs/operating-models/
+  _docs/governance/
   _philosophy/
   _requirements/
   _specs/
@@ -103,7 +107,11 @@ codex/
 
 ## 예약 폴더
 
-- `_docs/`: 저장소 전체 운영 문서와 의사결정 기록
+- `_docs/`: 저장소 전체 운영 문서와 의사결정 기록. 카테고리와 누락 방지 규칙은 `_docs/registry.json`에서 관리한다.
+- `_docs/instructions/`: 지속 지시와 기본 workspace rule
+- `_docs/policies/`: 실행 정책
+- `_docs/operating-models/`: 플랫폼/컨텍스트/assistant 운영 모델
+- `_docs/governance/`: 구조와 capability 관리 기준
 - `_philosophy/`: 에이전트와 플랫폼 운영의 근본 철학
 - `_requirements/`: 모든 프로젝트에 공통 적용되는 요구사항 기준선, 변경 기록, 검토 기록
 - `_specs/`: 공통 spec-driven 산출물, 구현 계획, 작업 목록, 검증, traceability
@@ -159,7 +167,7 @@ project-name/
 - 사용자 요청 요약은 `_history/user-requests/YYYY/YYYY-MM-DD.ko.md`와 영어 companion에 기록한다.
 - 공통 요구사항은 `_requirements/`, 프로젝트별 요구사항은 `project-name/docs/requirements/`에 기준선, 변경, 검토 기록으로 관리한다.
 - 공통 스펙은 `_specs/`, 프로젝트별 스펙은 `project-name/specs/`에 `spec`, `plan`, `tasks`, `validation`, `traceability`로 관리한다.
-- 커스텀 스킬은 `_skills/`, 스킬 lifecycle 정책은 `_docs/skill-lifecycle-policy.ko.md`, 실행 프롬프트는 `_ops/prompts/37-manage-skill.md`에서 관리한다.
+- 커스텀 스킬은 `_skills/`, 스킬 lifecycle 정책은 `_docs/policies/skill-lifecycle-policy.ko.md`, 실행 프롬프트는 `_ops/prompts/37-manage-skill.md`에서 관리한다.
 - 빠른 작업 요약은 `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`와 영어 companion에 기록한다.
 - 브라우저로 한눈에 볼 요약은 `_history/work-summaries/index.html`에 둔다.
 - 로그에는 목적, 변경 파일, 주요 결정, 커밋 해시를 남긴다.
@@ -168,23 +176,24 @@ project-name/
 ## 운영 허브
 
 - 작업 시작점은 `_ops/index.md`로 둔다.
+- 문서 카테고리와 누락 방지 규칙은 `_docs/README.ko.md`와 `_docs/registry.json`에서 확인하고, 변경 후 `python3 _tools/docs-audit/src/docs_audit.py --check`를 실행한다.
 - 모든 새 지시는 `_ops/workflows/05-web-first-intake.md`에 따라 웹 검색으로 시작한다.
 - 작업 모드 선택은 `_ops/workflows/02-select-work-mode.md`와 `agent-platform/configs/workflows/work-mode-registry.json`에서 확인한다.
 - 지연 개선 백로그는 `_ops/backlog/deferred-improvements.ko.md`에서 확인한다.
 - 프롬프트 공통 계약은 `_ops/prompts/README.ko.md`에서 확인하고, 검색 기록 템플릿은 `_templates/web-search-record/`에서 확인한다.
-- 도구 독립형 AI assistant 운영 원칙은 `_docs/tool-agnostic-agent-operating-model.ko.md`와 `_templates/assistant-operating-principles/`에서 확인한다.
+- 도구 독립형 AI assistant 운영 원칙은 `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`와 `_templates/assistant-operating-principles/`에서 확인한다.
 - AI assistant runtime adapter 목록과 도구별 적용 경로는 `_ops/assistant-runtimes/adapter-registry.json`에서 확인한다.
-- 컨텍스트 아카이브 정책은 `_docs/context-archive-policy.ko.md`, 재개 패킷은 `_history/context-archives/`에서 확인한다.
-- 사용자 요청 요약 정책은 `_docs/user-request-summary-policy.ko.md`, 날짜별 요청 요약은 `_history/user-requests/`에서 확인한다.
-- 요청-결과 추적 정책은 `_docs/request-traceability-policy.ko.md`, 날짜별 추적표는 `_history/request-traces/`에서 확인한다.
-- 요구사항 관리 정책은 `_docs/requirements-management-policy.ko.md`, 공통 요구사항 기준선은 `_requirements/`, 실행 프롬프트는 `_ops/prompts/35-manage-requirements.md`에서 확인한다.
-- spec-driven 개발 정책은 `_docs/spec-driven-development-policy.ko.md`, 공통 스펙은 `_specs/`, 실행 프롬프트는 `_ops/prompts/36-manage-spec.md`에서 확인한다.
-- 스킬 생명주기 정책은 `_docs/skill-lifecycle-policy.ko.md`, 스킬 원본은 `_skills/`, 실행 프롬프트는 `_ops/prompts/37-manage-skill.md`에서 확인한다.
+- 컨텍스트 아카이브 정책은 `_docs/policies/context-archive-policy.ko.md`, 재개 패킷은 `_history/context-archives/`에서 확인한다.
+- 사용자 요청 요약 정책은 `_docs/policies/user-request-summary-policy.ko.md`, 날짜별 요청 요약은 `_history/user-requests/`에서 확인한다.
+- 요청-결과 추적 정책은 `_docs/policies/request-traceability-policy.ko.md`, 날짜별 추적표는 `_history/request-traces/`에서 확인한다.
+- 요구사항 관리 정책은 `_docs/policies/requirements-management-policy.ko.md`, 공통 요구사항 기준선은 `_requirements/`, 실행 프롬프트는 `_ops/prompts/35-manage-requirements.md`에서 확인한다.
+- spec-driven 개발 정책은 `_docs/policies/spec-driven-development-policy.ko.md`, 공통 스펙은 `_specs/`, 실행 프롬프트는 `_ops/prompts/36-manage-spec.md`에서 확인한다.
+- 스킬 생명주기 정책은 `_docs/policies/skill-lifecycle-policy.ko.md`, 스킬 원본은 `_skills/`, 실행 프롬프트는 `_ops/prompts/37-manage-skill.md`에서 확인한다.
 - AI가 세팅을 잊지 않게 하는 부트스트랩 manifest는 `agent-platform/configs/memory/bootstrap-manifest.json`에 둔다.
-- 공유 설정 파일의 자기 설명 기준은 `_docs/self-documenting-config-policy.ko.md`와 `agent-platform`의 `check-config-contract` 명령을 따른다.
-- 출처 수집 기준은 `_docs/source-collection-policy.ko.md`를 따른다.
+- 공유 설정 파일의 자기 설명 기준은 `_docs/policies/self-documenting-config-policy.ko.md`와 `agent-platform`의 `check-config-contract` 명령을 따른다.
+- 출처 수집 기준은 `_docs/policies/source-collection-policy.ko.md`를 따른다.
 - 대기업/고신뢰 사이트 목록은 `agent-platform/configs/research/enterprise-source-registry.json`과 `_research/source-lists/`에서 별도로 관리한다.
-- 오픈소스 설치 기준은 `_docs/open-source-installation-policy.ko.md`를 따른다.
+- 오픈소스 설치 기준은 `_docs/policies/open-source-installation-policy.ko.md`를 따른다.
 - 설치 기록은 `_ops/installations/registry.json`과 `_history/installations/`에서 확인한다.
 - 핵심 조사 에이전트 프로필은 `agent-platform/configs/research/research-agent-profile.json`에서 확인한다.
 - 진행 중인 에이전트와 병렬 작업은 `_ops/coordination/board.ko.md`와 `_ops/coordination/board.html`에서 확인한다.

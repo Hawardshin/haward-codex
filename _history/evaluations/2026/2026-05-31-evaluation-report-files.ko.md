@@ -25,10 +25,10 @@
 
 - `AGENTS.md`
 - `README.md`
-- `_docs/persistent-instructions.md`
-- `_docs/persistent-instructions.ko.md`
-- `_docs/persistent-instructions.en.md`
-- `_docs/workspace-rules.md`
+- `_docs/instructions/persistent-instructions.md`
+- `_docs/instructions/persistent-instructions.ko.md`
+- `_docs/instructions/persistent-instructions.en.md`
+- `_docs/instructions/workspace-rules.md`
 - `_ops/workflows/40-evaluate-and-rework.md`
 - `_ops/workflows/30-close-and-index.md`
 - `_ops/prompts/60-close-work.md`

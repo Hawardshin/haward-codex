@@ -36,7 +36,7 @@
 
 ## 계획에 준 영향
 
-- 각 도구별 instruction 파일을 정책 원본으로 복제하지 않고, `_docs/tool-agnostic-agent-operating-model.*.md`와 `_ops/assistant-runtimes/adapter-registry.json`을 공통 원본으로 삼는다.
+- 각 도구별 instruction 파일을 정책 원본으로 복제하지 않고, `_docs/operating-models/tool-agnostic-agent-operating-model.*.md`와 `_ops/assistant-runtimes/adapter-registry.json`을 공통 원본으로 삼는다.
 - `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, `.agents/rules/`는 공통 원칙을 가리키는 thin adapter로 둔다.
 - root structure audit에는 `.claude`, `.cursor`, `.agents`를 프로젝트가 아닌 `runtime_adapter` folder class로 추가한다.
 - workspace monitor는 runtime adapter와 assistant operating principle template 문서를 수집해, 어떤 도구에서 어떤 규칙이 활성화되는지 볼 수 있게 한다.

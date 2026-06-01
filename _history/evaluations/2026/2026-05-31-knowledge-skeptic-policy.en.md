@@ -16,7 +16,7 @@
 ## References Checked First
 
 - `_research/README.ko.md`
-- `_docs/research-capture-policy.ko.md`
+- `_docs/policies/research-capture-policy.ko.md`
 - `_ops/workflows/40-evaluate-and-rework.md`
 - `agent-platform/src/agent_platform/evaluation/work_evaluator.py`
 - `agent-platform/docs/work-evaluator-agent.md`

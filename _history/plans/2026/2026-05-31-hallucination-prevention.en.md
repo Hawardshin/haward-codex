@@ -34,12 +34,12 @@
 | Chain-of-Verification | https://arxiv.org/abs/2309.11495 | Draft-then-verify loop |
 | SelfCheckGPT | https://aclanthology.org/2023.emnlp-main.557/ | Self-checking signal for unsupported statements |
 | Self-RAG | https://arxiv.org/abs/2310.11511 | Retrieval, generation, and critique loop |
-| Existing operations docs | `AGENTS.md`, `_docs/workspace-rules.md`, `_docs/search-insight-planning-policy.ko.md`, `_docs/knowledge-base-validation-policy.ko.md` | Existing search, validation, and evaluation policy |
+| Existing operations docs | `AGENTS.md`, `_docs/instructions/workspace-rules.md`, `_docs/policies/search-insight-planning-policy.ko.md`, `_docs/policies/knowledge-base-validation-policy.ko.md` | Existing search, validation, and evaluation policy |
 
 ## Knowledge-Base Validation
 
 - Internal operating docs are used as evidence, so they should be validated with `knowledge-skeptic-agent`.
-- Validation targets: `AGENTS.md`, `_docs/workspace-rules.md`, `_docs/search-insight-planning-policy.ko.md`, `_docs/knowledge-base-validation-policy.ko.md`, `agent-platform/docs/knowledge-skeptic-agent.ko.md`, `agent-platform/docs/work-evaluator-agent.md`
+- Validation targets: `AGENTS.md`, `_docs/instructions/workspace-rules.md`, `_docs/policies/search-insight-planning-policy.ko.md`, `_docs/policies/knowledge-base-validation-policy.ko.md`, `agent-platform/docs/knowledge-skeptic-agent.ko.md`, `agent-platform/docs/work-evaluator-agent.md`
 - Expected result: `ready_to_reference`
 
 ## Insights
@@ -52,7 +52,7 @@
 ## Plan Steps
 
 1. Save Korean and English research notes under `_research/topics/agent-reliability/`.
-2. Add `_docs/hallucination-prevention-policy.ko.md` and `.en.md`.
+2. Add `_docs/policies/hallucination-prevention-policy.ko.md` and `.en.md`.
 3. Add `_ops/prompts/96-ground-output.md` and `_ops/workflows/70-hallucination-prevention.md`.
 4. Add `hallucination-guard-agent` config, input template, Python evaluator, and CLI command to `agent-platform`.
 5. Add `grounding_checks` to `work-evaluator-agent` input.

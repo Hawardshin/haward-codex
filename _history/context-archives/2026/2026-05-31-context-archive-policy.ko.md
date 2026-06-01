@@ -16,7 +16,7 @@
 | --- | --- | --- |
 | 아카이브 위치 | `_history/context-archives/YYYY/`를 컨텍스트 재개 패킷 저장소로 둔다. | `_history/context-archives/README.ko.md` |
 | 템플릿 | 한영 context archive 템플릿을 추가했다. | `_templates/context-archive/` |
-| 정책 | 컨텍스트 포화 신호, 표준 절차, 저장하지 않을 내용을 정책화했다. | `_docs/context-archive-policy.ko.md` |
+| 정책 | 컨텍스트 포화 신호, 표준 절차, 저장하지 않을 내용을 정책화했다. | `_docs/policies/context-archive-policy.ko.md` |
 | 워크플로 | 컨텍스트 아카이빙 절차를 `_ops/workflows/45-context-archive.md`로 추가했다. | `_ops/workflows/45-context-archive.md` |
 | 평가 | 아카이빙 발생 시 `context_archive_targets` 누락을 gap으로 잡는다. | `agent-platform/src/agent_platform/evaluation/work_evaluator.py` |
 
@@ -24,7 +24,7 @@
 
 | 우선순위 | 파일 | 이유 |
 | --- | --- | --- |
-| 1 | `_docs/context-archive-policy.ko.md` | 컨텍스트 아카이빙의 기준과 절차 |
+| 1 | `_docs/policies/context-archive-policy.ko.md` | 컨텍스트 아카이빙의 기준과 절차 |
 | 2 | `_history/context-archives/README.ko.md` | archive packet 저장 규칙 |
 | 3 | `_ops/workflows/45-context-archive.md` | 실제 실행 순서 |
 | 4 | `_ops/prompts/50-compress-context.md` | 프롬프트 기반 압축 지시 |

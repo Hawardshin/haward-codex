@@ -1,0 +1,222 @@
+{
+  "schema_version": "2026-06-01",
+  "name": "workspace-docs-registry",
+  "purpose": "Defines the categorized _docs structure and the checks that prevent durable workspace documentation from being missed or placed in the wrong folder.",
+  "reader_guide": {
+    "summary": "Open this file before adding or moving workspace-level documentation. It explains which category owns each type of document and which audit command catches missing or misplaced docs.",
+    "how_to_read": [
+      "Read categories to choose the target folder.",
+      "Read root_file_policy before adding anything directly under _docs.",
+      "Read required_documents to see the minimum docs that future agents must not lose.",
+      "Run audit_command after moving, adding, or deleting files under _docs."
+    ],
+    "owner": "_docs",
+    "last_reviewed": "2026-06-01",
+    "update_triggers": [
+      "A new _docs category is needed.",
+      "A durable workspace document is added, moved, renamed, or deleted.",
+      "A required policy, instruction, operating model, or governance document changes path.",
+      "The docs audit command starts missing real gaps or reporting false positives."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "diataxis",
+      "title": "Diataxis Documentation Framework",
+      "url": "https://diataxis.fr/",
+      "source_type": "web_source",
+      "used_for": [
+        "separating documentation by user need and document purpose"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "gitlab_topic_types",
+      "title": "GitLab Documentation Topic Types",
+      "url": "https://docs.gitlab.com/development/documentation/topic_types/",
+      "source_type": "official",
+      "used_for": [
+        "topic-type separation and documentation taxonomy"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "google_developer_style",
+      "title": "Google Developer Documentation Style Guide",
+      "url": "https://developers.google.com/style/",
+      "source_type": "official",
+      "used_for": [
+        "consistent technical documentation style and reference use"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "docs_audit_tool",
+      "title": "Docs Audit Tool",
+      "path": "_tools/docs-audit/README.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "missing-document prevention",
+        "category placement validation"
+      ],
+      "last_checked": "2026-06-01"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "category_required",
+      "rule": "Every durable Markdown document under _docs must live in one of the registered category folders unless it is an allowed root index file.",
+      "reason": "Root-level document sprawl makes important rules hard to find and easy to miss.",
+      "applies_to": [
+        "categories",
+        "allowed_root_files"
+      ]
+    },
+    {
+      "id": "category_indexes_required",
+      "rule": "Every category folder must include Korean and English README index files.",
+      "reason": "A human should be able to open each folder and know what belongs there.",
+      "applies_to": [
+        "categories.required_index_files"
+      ]
+    },
+    {
+      "id": "important_bilingual_docs_stay_paired",
+      "rule": "Files ending in .ko.md or .en.md under _docs must have the opposite-language companion unless explicitly exempted.",
+      "reason": "The user asked important durable docs to be available in both Korean and English.",
+      "applies_to": [
+        "language_pair_policy"
+      ]
+    },
+    {
+      "id": "required_documents_must_exist",
+      "rule": "Required instruction, policy, operating-model, and governance documents must always exist at their registered paths.",
+      "reason": "Future agents should not lose the minimum durable operating context as documents move.",
+      "applies_to": [
+        "required_documents"
+      ]
+    },
+    {
+      "id": "audit_after_docs_change",
+      "rule": "Run docs-audit after changing _docs, docs registry, durable docs paths, or docs category rules.",
+      "reason": "A deterministic check catches omissions before they become hidden context loss.",
+      "applies_to": [
+        "audit_command"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "allowed_root_files",
+      "meaning": "Files allowed directly under _docs.",
+      "required": true
+    },
+    {
+      "field": "categories",
+      "meaning": "Registered document categories with paths, include patterns, and required README files.",
+      "required": true
+    },
+    {
+      "field": "required_documents",
+      "meaning": "Minimum durable docs that must exist for future agents.",
+      "required": true
+    },
+    {
+      "field": "language_pair_policy",
+      "meaning": "Rules for requiring Korean and English companion files.",
+      "required": true
+    },
+    {
+      "field": "audit_command",
+      "meaning": "Command that checks the registry against the file tree.",
+      "required": true
+    }
+  ],
+  "docs_root": "_docs",
+  "allowed_root_files": [
+    "README.ko.md",
+    "README.en.md"
+  ],
+  "categories": [
+    {
+      "id": "instructions",
+      "path": "_docs/instructions",
+      "purpose": "Durable user instructions and baseline workspace rules.",
+      "include_patterns": [
+        "persistent-instructions*.md",
+        "workspace-rules.md"
+      ],
+      "required_index_files": [
+        "README.ko.md",
+        "README.en.md"
+      ]
+    },
+    {
+      "id": "policies",
+      "path": "_docs/policies",
+      "purpose": "Workspace-wide execution policies.",
+      "include_patterns": [
+        "*-policy.ko.md",
+        "*-policy.en.md"
+      ],
+      "required_index_files": [
+        "README.ko.md",
+        "README.en.md"
+      ]
+    },
+    {
+      "id": "operating-models",
+      "path": "_docs/operating-models",
+      "purpose": "Conceptual operating models for platform, context, and assistant runtime behavior.",
+      "include_patterns": [
+        "*-operating-model.ko.md",
+        "*-operating-model.en.md",
+        "*-operating-model.md",
+        "context-management.md"
+      ],
+      "required_index_files": [
+        "README.ko.md",
+        "README.en.md"
+      ]
+    },
+    {
+      "id": "governance",
+      "path": "_docs/governance",
+      "purpose": "Cross-cutting governance for repository structure and capability promotion.",
+      "include_patterns": [
+        "*-governance.md",
+        "*-governance.ko.md",
+        "*-governance.en.md"
+      ],
+      "required_index_files": [
+        "README.ko.md",
+        "README.en.md"
+      ]
+    }
+  ],
+  "required_documents": [
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "_docs/instructions/workspace-rules.md",
+    "_docs/policies/documentation-language-policy.ko.md",
+    "_docs/policies/documentation-language-policy.en.md",
+    "_docs/policies/memory-bootstrap-policy.ko.md",
+    "_docs/policies/project-boundary-policy.ko.md",
+    "_docs/policies/spec-driven-development-policy.ko.md",
+    "_docs/operating-models/platform-operating-model.md",
+    "_docs/operating-models/tool-agnostic-agent-operating-model.ko.md",
+    "_docs/operating-models/tool-agnostic-agent-operating-model.en.md",
+    "_docs/governance/capability-governance.md",
+    "_docs/governance/repository-structure-governance.ko.md",
+    "_docs/governance/repository-structure-governance.en.md"
+  ],
+  "language_pair_policy": {
+    "required_for_suffixes": [
+      ".ko.md",
+      ".en.md"
+    ],
+    "exceptions": []
+  },
+  "audit_command": "python3 _tools/docs-audit/src/docs_audit.py --check"
+}

@@ -18,8 +18,8 @@
 | GitHub Docs, Syntax for issue forms: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms | 구조화된 form schema | 입력 타입, validation, labels 등을 YAML로 정의한다. | `complete-coding-research` CLI도 필수 질문 누락을 gap으로 판정한다. |
 | Guidelines for including grey literature and conducting multivocal literature reviews in software engineering: https://doi.org/10.1016/j.infsof.2018.09.006 | 소프트웨어공학 multivocal review | 소프트웨어공학에서는 공식 학술 문헌과 블로그, white paper 같은 grey literature를 함께 다루는 MLR 방식이 쓰인다. | 코딩 조사에서 `source_types`를 명시하고 여러 유형을 강제하는 근거로 삼았다. |
 | CMU SEI Digital Library: https://www.sei.cmu.edu/library/ | 소프트웨어공학 연구/실무 자료 라이브러리 | technical reports, white papers, presentations 등 여러 publication type을 제공한다. | 코딩 조사에서 논문/보고서/백서/실무 자료처럼 다양한 출처 유형을 함께 보도록 했다. |
-| 내부 정책: `_docs/source-collection-policy.ko.md` | 저장소 정책 | 공식/논문/오픈소스/기술 블로그/커뮤니티/소셜/반대 사례를 폭넓게 수집한다. | 코딩 조사도 source bundle과 adoption signal을 분리한다. |
-| 내부 정책: `_docs/search-insight-planning-policy.ko.md` | 저장소 정책 | 검색 결과를 계획에 영향을 주는 인사이트로 변환하고 계획 히스토리를 남긴다. | 코딩 조사도 `_history/plans/YYYY/`에 계획 과정을 저장한다. |
+| 내부 정책: `_docs/policies/source-collection-policy.ko.md` | 저장소 정책 | 공식/논문/오픈소스/기술 블로그/커뮤니티/소셜/반대 사례를 폭넓게 수집한다. | 코딩 조사도 source bundle과 adoption signal을 분리한다. |
+| 내부 정책: `_docs/policies/search-insight-planning-policy.ko.md` | 저장소 정책 | 검색 결과를 계획에 영향을 주는 인사이트로 변환하고 계획 히스토리를 남긴다. | 코딩 조사도 `_history/plans/YYYY/`에 계획 과정을 저장한다. |
 
 ## 인사이트
 

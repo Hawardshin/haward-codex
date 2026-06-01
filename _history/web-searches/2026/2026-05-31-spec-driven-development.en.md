@@ -41,5 +41,5 @@ The user instructed that the requirements management structure should resemble s
 ## Links
 
 - Spec: `_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.en.md`
-- Policy: `_docs/spec-driven-development-policy.en.md`
+- Policy: `_docs/policies/spec-driven-development-policy.en.md`
 - Evaluation report: `_history/evaluations/2026/2026-05-31-spec-driven-development.en.md`

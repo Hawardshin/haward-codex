@@ -63,7 +63,7 @@ Record reusable evidence for designing hallucination prevention policy, prompts,
 
 ## Related Work
 
-- `_docs/hallucination-prevention-policy.en.md`
+- `_docs/policies/hallucination-prevention-policy.en.md`
 - `_ops/workflows/70-hallucination-prevention.md`
 - `agent-platform/docs/hallucination-guard-agent.en.md`
 

@@ -27,7 +27,7 @@
     {
       "id": "project_boundary_policy",
       "title": "Project Boundary Policy",
-      "path": "_docs/project-boundary-policy.ko.md",
+      "path": "_docs/policies/project-boundary-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "workspace project boundary rules",
@@ -38,7 +38,7 @@
     {
       "id": "workspace_rules",
       "title": "Workspace Rules",
-      "path": "_docs/workspace-rules.md",
+      "path": "_docs/instructions/workspace-rules.md",
       "source_type": "internal",
       "used_for": [
         "root folder policy",

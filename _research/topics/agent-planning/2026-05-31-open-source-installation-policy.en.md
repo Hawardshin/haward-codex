@@ -22,7 +22,7 @@ The user said open-source installation should happen when needed. This note capt
 
 ## Platform Impact
 
-- Add `_docs/open-source-installation-policy.ko.md` and `.en.md`.
+- Add `_docs/policies/open-source-installation-policy.ko.md` and `.en.md`.
 - Add installation record fields to `agent-platform/configs/open-source/candidate-template.json`.
 - Add installation readiness to `OpenSourceCandidate` evaluation.
 - Reflect installation rules in persistent instructions, AGENTS, README, and the coding research workflow.

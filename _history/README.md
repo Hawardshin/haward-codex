@@ -28,7 +28,7 @@ Shared requirements baselines, changes, and reviews live under `_requirements/`;
 
 Shared spec-driven artifacts live under `_specs/`; project-specific specs live under the owning project's `specs/`.
 
-Custom skill source and validation lifecycle records are linked from `_skills/`, `_docs/skill-lifecycle-policy.ko.md`, and skill-related evaluation reports.
+Custom skill source and validation lifecycle records are linked from `_skills/`, `_docs/policies/skill-lifecycle-policy.ko.md`, and skill-related evaluation reports.
 
 Request-to-outcome traces live under `_history/request-traces/YYYY/`.
 

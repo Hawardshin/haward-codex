@@ -10,7 +10,7 @@
 
 - The user asked to improve folder structure and management rules when contradictions or management friction exist in the overall structure.
 - The audit found that large folder moves were not justified; the stronger improvement was to define root folder classes, local-only exceptions, generated output rules, and deterministic audit.
-- The result adds or updates `_ops/projects/root-structure-policy.json`, `_tools/structure-audit/`, `_docs/repository-structure-governance.*.md`, `.gitignore` local-only rules, the project boundary workflow, and memory bootstrap anchor.
+- The result adds or updates `_ops/projects/root-structure-policy.json`, `_tools/structure-audit/`, `_docs/governance/repository-structure-governance.*.md`, `.gitignore` local-only rules, the project boundary workflow, and memory bootstrap anchor.
 - `workspace-monitor` now snapshots `_docs` and `_philosophy`.
 
 ## Verification

@@ -17,7 +17,7 @@ Source-code work is not complete with implementation-pattern research alone. Bef
 
 - `complete-coding-research` now treats missing architecture references, options, and decision notes as gaps.
 - `coding-research-profile.json` and `source-registry.json` now include architecture reference sources.
-- `_docs/architecture-first-coding-policy.ko.md` was added as durable policy.
+- `_docs/policies/architecture-first-coding-policy.ko.md` was added as durable policy.
 
 ## Reuse Caution
 

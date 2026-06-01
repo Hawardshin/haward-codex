@@ -31,6 +31,6 @@ Do not report installation complete unless the detailed record and registry entr
 
 ## References
 
-- [_docs/open-source-installation-policy.ko.md](../../_docs/open-source-installation-policy.ko.md)
+- [_docs/policies/open-source-installation-policy.ko.md](../../_docs/policies/open-source-installation-policy.ko.md)
 - [_ops/installations/README.ko.md](../installations/README.ko.md)
 - [_history/installations/README.ko.md](../../_history/installations/README.ko.md)

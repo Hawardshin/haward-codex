@@ -32,7 +32,7 @@ PYTHONPATH=src python3 -m agent_platform.cli validate-skill configs/evaluation/s
 
 ## Reference
 
-- [_docs/skill-lifecycle-policy.ko.md](../../_docs/skill-lifecycle-policy.ko.md)
+- [_docs/policies/skill-lifecycle-policy.ko.md](../../_docs/policies/skill-lifecycle-policy.ko.md)
 - [_skills/registry.md](../../_skills/registry.md)
 - [agent-platform/docs/skill-lifecycle-agent.ko.md](../../agent-platform/docs/skill-lifecycle-agent.ko.md)
 

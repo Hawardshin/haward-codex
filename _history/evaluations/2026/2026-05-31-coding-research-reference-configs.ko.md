@@ -19,7 +19,7 @@
 - Zotero Item Types and Fields: https://www.zotero.org/support/kb/item_types_and_fields
 - Sourcemeta Registry Configuration: https://registry.sourcemeta.com/configuration/
 - 기존 구현: `agent-platform/src/agent_platform/planning/coding_research.py`
-- 기존 출처 수집 정책: `_docs/source-collection-policy.ko.md`
+- 기존 출처 수집 정책: `_docs/policies/source-collection-policy.ko.md`
 - 계획 기록: `_history/plans/2026/2026-05-31-coding-research-reference-configs.ko.md`
 
 ## Grounding Checks

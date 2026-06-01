@@ -18,7 +18,7 @@
 - `_ops/workflows/00-start-here.md`
 - `_ops/workflows/30-close-and-index.md`
 - `_history/evaluations/README.ko.md`
-- `_docs/persistent-instructions.ko.md`
+- `_docs/instructions/persistent-instructions.ko.md`
 
 ## Changed Files
 
@@ -36,9 +36,9 @@
 - `_templates/task-board/status.json`
 - `AGENTS.md`
 - `README.md`
-- `_docs/persistent-instructions.ko.md`
-- `_docs/persistent-instructions.en.md`
-- `_docs/workspace-rules.md`
+- `_docs/instructions/persistent-instructions.ko.md`
+- `_docs/instructions/persistent-instructions.en.md`
+- `_docs/instructions/workspace-rules.md`
 - `_history/evaluations/2026/2026-05-31-coordination-board.ko.md`
 - `_history/evaluations/2026/2026-05-31-coordination-board.en.md`
 

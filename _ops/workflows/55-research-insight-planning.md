@@ -13,7 +13,7 @@
 5. Search the web for current or external evidence.
 6. Search at least one additional channel: repository docs, official docs, papers, code, package registries, or prior work.
 7. Prefer primary sources and official references when available.
-8. For research-heavy work, apply [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md): include official sources, papers, international tech blogs, open-source repos, analysis articles, community/social signals, and contrary examples.
+8. For research-heavy work, apply [_docs/policies/source-collection-policy.ko.md](../../_docs/policies/source-collection-policy.ko.md): include official sources, papers, international tech blogs, open-source repos, analysis articles, community/social signals, and contrary examples.
 9. Check `agent-platform/configs/research/enterprise-source-registry.json` when the task benefits from large-company engineering blogs, official research labs, architecture centers, or high-signal independent sources.
 10. Check `agent-platform/configs/research/source-discovery-registry.json` when the task needs broader source origins, Korean tech blogs, Korean local review channels, India technology sources, or paper discovery sources.
 11. For Korean user review/local-market tasks, use Naver Map, Kakao Map, Naver Blog/Search, official pages, and `_tools/korean-local-review/`.

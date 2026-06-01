@@ -6,7 +6,7 @@
 
 ## 결과 요약
 
-- `_docs/architecture-first-coding-policy.ko.md`와 영어 companion을 추가했다.
+- `_docs/policies/architecture-first-coding-policy.ko.md`와 영어 companion을 추가했다.
 - `coding-research-agent`와 `complete-coding-research`에 `architecture_reference_sources`, `architecture_options`, `architecture_decision_notes`를 필수 검증 대상으로 추가했다.
 - coding research profile, source registry, template, workflow, prompt, requirements, spec, request summary, request trace, work summary, memory bootstrap, coordination board를 갱신했다.
 

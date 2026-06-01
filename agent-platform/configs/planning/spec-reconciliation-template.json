@@ -25,7 +25,7 @@
     {
       "id": "spec_driven_policy",
       "title": "Spec-Driven Development Policy",
-      "path": "_docs/spec-driven-development-policy.ko.md",
+      "path": "_docs/policies/spec-driven-development-policy.ko.md",
       "source_type": "internal",
       "used_for": [
         "spec artifact rules",

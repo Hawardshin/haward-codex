@@ -7,7 +7,7 @@
 | 스펙 | `SPEC-WS-SKILL-001` | 스킬 생명주기 거버넌스 |
 | Acceptance Criteria | `AC-SKILL-001` - `AC-SKILL-005` | 스킬 원본, 검증, 평가, 개선, 설치 기록 |
 | 작업 | `T001` - `T010` | 정책, 스킬, CLI, 평가, 히스토리, 검증 |
-| 주요 파일 | `_skills/`, `_docs/skill-lifecycle-policy.ko.md`, `_ops/workflows/37-skill-lifecycle.md` | 운영 구조 |
+| 주요 파일 | `_skills/`, `_docs/policies/skill-lifecycle-policy.ko.md`, `_ops/workflows/37-skill-lifecycle.md` | 운영 구조 |
 | 평가 | `_history/evaluations/2026/2026-05-31-skill-lifecycle.ko.md` | 종료 평가 |
 | 커밋 | `bb30d5a` | 구현 변경 커밋 |
 
@@ -16,5 +16,5 @@
 - `AC-SKILL-001`: `_skills/registry.md`, `_skills/create-validated-skill/SKILL.md`
 - `AC-SKILL-002`: `agent-platform/src/agent_platform/evaluation/skill_validator.py`
 - `AC-SKILL-003`: `agent-platform/src/agent_platform/evaluation/work_evaluator.py`
-- `AC-SKILL-004`: `_docs/skill-lifecycle-policy.ko.md`, `_ops/workflows/37-skill-lifecycle.md`
+- `AC-SKILL-004`: `_docs/policies/skill-lifecycle-policy.ko.md`, `_ops/workflows/37-skill-lifecycle.md`
 - `AC-SKILL-005`: `_ops/installations/registry.json`, `_history/installations/`

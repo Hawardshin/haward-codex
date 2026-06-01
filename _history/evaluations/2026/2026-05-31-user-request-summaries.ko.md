@@ -16,7 +16,7 @@
 
 - `_history/work-summaries/README.ko.md`
 - `_history/web-searches/README.ko.md`
-- `_docs/context-archive-policy.ko.md`
+- `_docs/policies/context-archive-policy.ko.md`
 - [Microsoft Agent Framework Memory & Persistence](https://learn.microsoft.com/en-us/agent-framework/get-started/memory)
 - [Memory Matters](https://ojs.aaai.org/index.php/AAAI-SS/article/view/27688)
 - [agentmemory.md](https://agentmemory.md/)
@@ -48,7 +48,7 @@
 
 - `_history/user-requests/2026/2026-05-31.ko.md`
 - `_history/user-requests/2026/2026-05-31.en.md`
-- `_docs/user-request-summary-policy.ko.md`
+- `_docs/policies/user-request-summary-policy.ko.md`
 - `_templates/user-request-summary/user-request-summary.ko.md`
 - `_history/web-searches/2026/2026-05-31-user-request-summaries.ko.md`
 - `_research/topics/agent-memory/2026-05-31-user-request-summaries.ko.md`

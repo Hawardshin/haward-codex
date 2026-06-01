@@ -10,7 +10,7 @@
 2. 웹 검색어를 1개 이상 만든다.
 3. 웹 검색을 실행한다.
 4. 공식 문서, 1차 출처, 논문, 성숙한 오픈소스, 신뢰 가능한 레퍼런스를 우선 확인한다.
-5. 조사나 계획에 영향을 주는 작업이면 [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md)의 출처 묶음 기준을 적용한다.
+5. 조사나 계획에 영향을 주는 작업이면 [_docs/policies/source-collection-policy.ko.md](../../_docs/policies/source-collection-policy.ko.md)의 출처 묶음 기준을 적용한다.
 6. 외국 기술 블로그, 조사 아티클, 오픈소스 repo, LinkedIn/커뮤니티 반응, 좋아요/공유/댓글 같은 현업 신호도 수집하되 단독 사실 근거로 쓰지 않는다.
 7. 계획에 영향을 주는 출처는 원문을 열어 확인한다.
 8. 검색 결과가 무관하거나 약하면 그 사실을 기록하고 로컬 저장소 검증으로 진행한다.
@@ -42,8 +42,8 @@
 
 ## Related
 
-- [_docs/web-first-work-policy.ko.md](../../_docs/web-first-work-policy.ko.md)
-- [_docs/source-collection-policy.ko.md](../../_docs/source-collection-policy.ko.md)
+- [_docs/policies/web-first-work-policy.ko.md](../../_docs/policies/web-first-work-policy.ko.md)
+- [_docs/policies/source-collection-policy.ko.md](../../_docs/policies/source-collection-policy.ko.md)
 - [_tools/source-collector/README.ko.md](../../_tools/source-collector/README.ko.md)
 - [_ops/prompts/05-web-first-intake.md](../prompts/05-web-first-intake.md)
 - [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md)

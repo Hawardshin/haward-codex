@@ -59,7 +59,7 @@ Record evidence for an automation tool that reduces the repeated effort of colle
 
 - `_tools/source-collector/README.en.md`
 - `_tools/source-collector/src/source_collector.py`
-- `_docs/source-collection-policy.en.md`
+- `_docs/policies/source-collection-policy.en.md`
 
 ## Next Checks
 

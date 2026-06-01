@@ -8,7 +8,11 @@
 | `_ops/assistant-runtimes/` | Codex, Claude Code, Cursor, Antigravity 등 runtime adapter 레지스트리 |
 | `_ops/projects/` | 루트 프로젝트 등록부와 경계 관리 |
 | `_research/` | 인터넷 조사와 외부 레퍼런스 중 재사용 가능한 내용 |
-| `_docs/` | 장기 운영 규칙, 의사결정, 컨텍스트 관리 |
+| `_docs/` | 장기 운영 규칙, 의사결정, 컨텍스트 관리의 카테고리형 문서 루트 |
+| `_docs/instructions/` | 지속 지시와 기본 workspace rule |
+| `_docs/policies/` | 실행 정책 |
+| `_docs/operating-models/` | 플랫폼/컨텍스트/assistant 운영 모델 |
+| `_docs/governance/` | 구조와 capability 관리 기준 |
 | `_philosophy/` | 에이전트와 플랫폼 운영의 근본 철학 |
 | `_requirements/` | 공통 요구사항 기준선, 변경 기록, 검토 기록 |
 | `_specs/` | 공통 spec-driven 산출물, 구현 계획, 작업 목록, 검증, traceability |
@@ -30,14 +34,15 @@
 ## Navigation
 
 - 작업을 시작할 때: [_ops/workflows/00-start-here.md](workflows/00-start-here.md)
-- 모든 지시의 첫 웹 검색: [_ops/workflows/05-web-first-intake.md](workflows/05-web-first-intake.md), [_docs/web-first-work-policy.ko.md](../_docs/web-first-work-policy.ko.md)
+- 모든 지시의 첫 웹 검색: [_ops/workflows/05-web-first-intake.md](workflows/05-web-first-intake.md), [_docs/policies/web-first-work-policy.ko.md](../_docs/policies/web-first-work-policy.ko.md)
 - 프롬프트 공통 웹 검색 계약: [_ops/prompts/README.ko.md](prompts/README.ko.md), [_history/web-searches/README.ko.md](../_history/web-searches/README.ko.md)
 - 새 세션의 AI 메모리 부트스트랩: [_ops/workflows/01-memory-bootstrap.md](workflows/01-memory-bootstrap.md), [agent-platform/configs/memory/bootstrap-manifest.json](../agent-platform/configs/memory/bootstrap-manifest.json)
 - 작업 모드와 전체 루프 강도를 고를 때: [_ops/workflows/02-select-work-mode.md](workflows/02-select-work-mode.md), [_ops/prompts/02-select-work-mode.md](prompts/02-select-work-mode.md), [work-mode-registry.json](../agent-platform/configs/workflows/work-mode-registry.json)
 - 지연 개선 백로그를 볼 때: [_ops/backlog/deferred-improvements.ko.md](backlog/deferred-improvements.ko.md)
-- 공유 설정 파일 자기 설명 기준: [_docs/self-documenting-config-policy.ko.md](../_docs/self-documenting-config-policy.ko.md), `agent-platform`의 `check-config-contract`
-- 도구 독립형 AI assistant 운영 원칙: [_docs/tool-agnostic-agent-operating-model.ko.md](../_docs/tool-agnostic-agent-operating-model.ko.md), [_ops/assistant-runtimes/adapter-registry.json](assistant-runtimes/adapter-registry.json), [_templates/assistant-operating-principles/README.ko.md](../_templates/assistant-operating-principles/README.ko.md)
-- 출처 수집 기준을 볼 때: [_docs/source-collection-policy.ko.md](../_docs/source-collection-policy.ko.md)
+- `_docs` 카테고리와 누락 방지 규칙을 볼 때: [_docs/README.ko.md](../_docs/README.ko.md), [_docs/registry.json](../_docs/registry.json), [_tools/docs-audit/README.ko.md](../_tools/docs-audit/README.ko.md)
+- 공유 설정 파일 자기 설명 기준: [_docs/policies/self-documenting-config-policy.ko.md](../_docs/policies/self-documenting-config-policy.ko.md), `agent-platform`의 `check-config-contract`
+- 도구 독립형 AI assistant 운영 원칙: [_docs/operating-models/tool-agnostic-agent-operating-model.ko.md](../_docs/operating-models/tool-agnostic-agent-operating-model.ko.md), [_ops/assistant-runtimes/adapter-registry.json](assistant-runtimes/adapter-registry.json), [_templates/assistant-operating-principles/README.ko.md](../_templates/assistant-operating-principles/README.ko.md)
+- 출처 수집 기준을 볼 때: [_docs/policies/source-collection-policy.ko.md](../_docs/policies/source-collection-policy.ko.md)
 - 핵심 조사 에이전트 프로필을 볼 때: [agent-platform/configs/research/research-agent-profile.json](../agent-platform/configs/research/research-agent-profile.json)
 - 많은 출처 묶음을 정리할 때: [_tools/source-collector/README.ko.md](../_tools/source-collector/README.ko.md)
 - 더 넓은 검색 원천을 고를 때: [source-discovery-registry.json](../agent-platform/configs/research/source-discovery-registry.json)
@@ -45,42 +50,43 @@
 - 프롬프트를 고를 때: [_ops/prompts/00-router.md](prompts/00-router.md)
 - 속도 개선을 위해 작업을 병렬 lane으로 나눌 때: [_ops/workflows/52-parallel-work-planning.md](workflows/52-parallel-work-planning.md), [_ops/prompts/82-parallel-work-planning.md](prompts/82-parallel-work-planning.md), [parallel-work-planner-agent](../agent-platform/docs/parallel-work-planner-agent.ko.md)
 - 운영 철학을 볼 때: [_philosophy/agent-operating-philosophy.ko.md](../_philosophy/agent-operating-philosophy.ko.md)
-- 프로젝트 경계를 확인할 때: [_ops/projects/index.ko.md](projects/index.ko.md), [_docs/project-boundary-policy.ko.md](../_docs/project-boundary-policy.ko.md)
+- 프로젝트 경계를 확인할 때: [_ops/projects/index.ko.md](projects/index.ko.md), [_docs/policies/project-boundary-policy.ko.md](../_docs/policies/project-boundary-policy.ko.md)
 - root folder class와 local-only 규칙을 확인할 때: [_ops/projects/root-structure-policy.json](projects/root-structure-policy.json), [_tools/structure-audit/README.ko.md](../_tools/structure-audit/README.ko.md)
 - 웹 검색 기반 인사이트로 계획할 때: [_ops/workflows/55-research-insight-planning.md](workflows/55-research-insight-planning.md)
 - 코딩 조사 결과를 구현으로 넘기기 전에: [_ops/workflows/56-coding-research.md](workflows/56-coding-research.md), [agent-platform/docs/coding-research-agent.ko.md](../agent-platform/docs/coding-research-agent.ko.md)
 - 코딩 조사 출처 설정을 확인할 때: [agent-platform/configs/research/README.ko.md](../agent-platform/configs/research/README.ko.md)
-- 소스코드 작성 전 아키텍처 후보 비교 기준을 볼 때: [_docs/architecture-first-coding-policy.ko.md](../_docs/architecture-first-coding-policy.ko.md), [agent-platform/configs/research/coding-research-profile.json](../agent-platform/configs/research/coding-research-profile.json)
-- 대기업/고신뢰 사이트 목록을 볼 때: [_docs/enterprise-source-list-policy.ko.md](../_docs/enterprise-source-list-policy.ko.md), [enterprise-source-registry.json](../agent-platform/configs/research/enterprise-source-registry.json), [_research/source-lists/enterprise-high-quality-sites.ko.md](../_research/source-lists/enterprise-high-quality-sites.ko.md)
-- 최종 사실 주장을 검증할 때: [_ops/workflows/70-hallucination-prevention.md](workflows/70-hallucination-prevention.md), [_docs/hallucination-prevention-policy.ko.md](../_docs/hallucination-prevention-policy.ko.md)
+- 소스코드 작성 전 아키텍처 후보 비교 기준을 볼 때: [_docs/policies/architecture-first-coding-policy.ko.md](../_docs/policies/architecture-first-coding-policy.ko.md), [agent-platform/configs/research/coding-research-profile.json](../agent-platform/configs/research/coding-research-profile.json)
+- 대기업/고신뢰 사이트 목록을 볼 때: [_docs/policies/enterprise-source-list-policy.ko.md](../_docs/policies/enterprise-source-list-policy.ko.md), [enterprise-source-registry.json](../agent-platform/configs/research/enterprise-source-registry.json), [_research/source-lists/enterprise-high-quality-sites.ko.md](../_research/source-lists/enterprise-high-quality-sites.ko.md)
+- 최종 사실 주장을 검증할 때: [_ops/workflows/70-hallucination-prevention.md](workflows/70-hallucination-prevention.md), [_docs/policies/hallucination-prevention-policy.ko.md](../_docs/policies/hallucination-prevention-policy.ko.md)
 - 계획 과정을 볼 때: [_history/plans/README.ko.md](../_history/plans/README.ko.md)
-- 컨텍스트가 길어져 재개 패킷이 필요할 때: [_docs/context-archive-policy.ko.md](../_docs/context-archive-policy.ko.md), [_history/context-archives/README.ko.md](../_history/context-archives/README.ko.md), [_ops/workflows/45-context-archive.md](workflows/45-context-archive.md)
-- 사용자 요청 요약을 볼 때: [_history/user-requests/README.ko.md](../_history/user-requests/README.ko.md), [_docs/user-request-summary-policy.ko.md](../_docs/user-request-summary-policy.ko.md)
+- 컨텍스트가 길어져 재개 패킷이 필요할 때: [_docs/policies/context-archive-policy.ko.md](../_docs/policies/context-archive-policy.ko.md), [_history/context-archives/README.ko.md](../_history/context-archives/README.ko.md), [_ops/workflows/45-context-archive.md](workflows/45-context-archive.md)
+- 사용자 요청 요약을 볼 때: [_history/user-requests/README.ko.md](../_history/user-requests/README.ko.md), [_docs/policies/user-request-summary-policy.ko.md](../_docs/policies/user-request-summary-policy.ko.md)
 - 요구사항 기준선을 볼 때: [_requirements/README.ko.md](../_requirements/README.ko.md), [_requirements/baselines/2026-05-31-workspace-platform.ko.md](../_requirements/baselines/2026-05-31-workspace-platform.ko.md)
 - 요구사항을 정의/검토/변경할 때: [_ops/workflows/35-requirements-lifecycle.md](workflows/35-requirements-lifecycle.md), [_ops/prompts/35-manage-requirements.md](prompts/35-manage-requirements.md), [agent-platform/docs/requirements-manager-agent.ko.md](../agent-platform/docs/requirements-manager-agent.ko.md)
 - spec-driven 산출물을 볼 때: [_specs/README.ko.md](../_specs/README.ko.md), [_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md](../_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md)
 - 요구사항을 스펙/계획/작업/검증으로 바꿀 때: [_ops/workflows/36-spec-driven-development.md](workflows/36-spec-driven-development.md), [_ops/prompts/36-manage-spec.md](prompts/36-manage-spec.md), [agent-platform/docs/spec-driven-planner-agent.ko.md](../agent-platform/docs/spec-driven-planner-agent.ko.md)
 - 스펙이 애매하거나 현재 소스/테스트/산출물과 다를 때: [_ops/workflows/38-spec-source-reconciliation.md](workflows/38-spec-source-reconciliation.md), [_ops/prompts/38-reconcile-spec-source.md](prompts/38-reconcile-spec-source.md), [agent-platform/docs/spec-reconciliation-agent.ko.md](../agent-platform/docs/spec-reconciliation-agent.ko.md)
-- 커스텀 스킬을 만들거나 검증/개선할 때: [_docs/skill-lifecycle-policy.ko.md](../_docs/skill-lifecycle-policy.ko.md), [_ops/workflows/37-skill-lifecycle.md](workflows/37-skill-lifecycle.md), [_ops/prompts/37-manage-skill.md](prompts/37-manage-skill.md), [agent-platform/docs/skill-lifecycle-agent.ko.md](../agent-platform/docs/skill-lifecycle-agent.ko.md)
-- 요청이 어떤 결과로 이어졌는지 볼 때: [_history/request-traces/README.ko.md](../_history/request-traces/README.ko.md), [_docs/request-traceability-policy.ko.md](../_docs/request-traceability-policy.ko.md)
+- 커스텀 스킬을 만들거나 검증/개선할 때: [_docs/policies/skill-lifecycle-policy.ko.md](../_docs/policies/skill-lifecycle-policy.ko.md), [_ops/workflows/37-skill-lifecycle.md](workflows/37-skill-lifecycle.md), [_ops/prompts/37-manage-skill.md](prompts/37-manage-skill.md), [agent-platform/docs/skill-lifecycle-agent.ko.md](../agent-platform/docs/skill-lifecycle-agent.ko.md)
+- 요청이 어떤 결과로 이어졌는지 볼 때: [_history/request-traces/README.ko.md](../_history/request-traces/README.ko.md), [_docs/policies/request-traceability-policy.ko.md](../_docs/policies/request-traceability-policy.ko.md)
 - 완료된 작업을 빠르게 볼 때: [_history/work-summaries/README.ko.md](../_history/work-summaries/README.ko.md), [_history/work-summaries/index.html](../_history/work-summaries/index.html)
 - 진행 중인 에이전트/병렬 작업을 볼 때: [_ops/coordination/board.ko.md](coordination/board.ko.md), [_ops/coordination/board.html](coordination/board.html)
 - 재사용 가능한 조사 내용을 볼 때: [_research/index.ko.md](../_research/index.ko.md)
 - 겹치는 운영 구조와 source of truth를 확인할 때: [_research/overlap-audits/2026-05-31-source-discovery-overlap.ko.md](../_research/overlap-audits/2026-05-31-source-discovery-overlap.ko.md)
 - 저장소 구조를 볼 때: [_ops/maps/repository-map.md](maps/repository-map.md)
 - 프롬프트 목록을 볼 때: [_ops/maps/prompt-map.md](maps/prompt-map.md)
-- 반복 작업을 줄일 때: [_docs/capability-governance.md](../_docs/capability-governance.md)
-- 오픈소스 설치 기준을 볼 때: [_docs/open-source-installation-policy.ko.md](../_docs/open-source-installation-policy.ko.md), [_docs/open-source-installation-policy.en.md](../_docs/open-source-installation-policy.en.md)
+- 반복 작업을 줄일 때: [_docs/governance/capability-governance.md](../_docs/governance/capability-governance.md)
+- 오픈소스 설치 기준을 볼 때: [_docs/policies/open-source-installation-policy.ko.md](../_docs/policies/open-source-installation-policy.ko.md), [_docs/policies/open-source-installation-policy.en.md](../_docs/policies/open-source-installation-policy.en.md)
 - 설치 기록을 확인할 때: [_ops/installations/README.ko.md](installations/README.ko.md), [_ops/installations/registry.json](installations/registry.json), [_history/installations/README.ko.md](../_history/installations/README.ko.md)
-- 지속 지시를 확인할 때: [_docs/persistent-instructions.md](../_docs/persistent-instructions.md)
-- 검색 기반 계획 정책을 확인할 때: [_docs/search-insight-planning-policy.ko.md](../_docs/search-insight-planning-policy.ko.md), [_docs/search-insight-planning-policy.en.md](../_docs/search-insight-planning-policy.en.md)
-- 문서 언어 정책을 확인할 때: [_docs/documentation-language-policy.ko.md](../_docs/documentation-language-policy.ko.md), [_docs/documentation-language-policy.en.md](../_docs/documentation-language-policy.en.md)
+- 지속 지시를 확인할 때: [_docs/instructions/persistent-instructions.md](../_docs/instructions/persistent-instructions.md)
+- 검색 기반 계획 정책을 확인할 때: [_docs/policies/search-insight-planning-policy.ko.md](../_docs/policies/search-insight-planning-policy.ko.md), [_docs/policies/search-insight-planning-policy.en.md](../_docs/policies/search-insight-planning-policy.en.md)
+- 문서 언어 정책을 확인할 때: [_docs/policies/documentation-language-policy.ko.md](../_docs/policies/documentation-language-policy.ko.md), [_docs/policies/documentation-language-policy.en.md](../_docs/policies/documentation-language-policy.en.md)
 
 ## Update Rule
 
 새 폴더, 새 프롬프트, 새 워크플로, 새 운영 규칙을 추가하면 다음을 함께 확인한다.
 
 - 관련 문서가 업데이트됐는가
+- `_docs`를 바꿨다면 `_docs/registry.json` category와 `python3 _tools/docs-audit/src/docs_audit.py --check` 결과가 맞는가
 - `_history/YYYY/YYYY-MM-DD.md`에 맥락이 남았는가
 - `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`에 빠른 요약이 남았는가
 - `_history/web-searches/YYYY/`에 공개 검색 판단 기록이 남았는가

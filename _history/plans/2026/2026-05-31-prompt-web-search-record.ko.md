@@ -20,7 +20,7 @@
 - OpenAI Web search docs
 - Anthropic Search results docs
 - Firebase AI Logic Grounding with Google Search
-- 기존 내부 문서: `_docs/web-first-work-policy.ko.md`, `_ops/prompts/05-web-first-intake.md`, `_ops/workflows/40-evaluate-and-rework.md`
+- 기존 내부 문서: `_docs/policies/web-first-work-policy.ko.md`, `_ops/prompts/05-web-first-intake.md`, `_ops/workflows/40-evaluate-and-rework.md`
 
 ## 도출한 인사이트
 

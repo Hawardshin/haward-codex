@@ -54,4 +54,4 @@ AI의 내부 지식과 직관은 빠른 가설을 만드는 데 유용하다. �
 - 작업 평가: `_ops/workflows/40-evaluate-and-rework.md`
 - 프로젝트 경계 관리: `_ops/workflows/25-project-boundary-management.md`
 - 리서치 축적: `_research/`
-- 반복 능력 승격: `_docs/capability-governance.md`
+- 반복 능력 승격: `_docs/governance/capability-governance.md`

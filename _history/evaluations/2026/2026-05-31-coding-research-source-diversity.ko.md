@@ -20,7 +20,7 @@
 - Guidelines for including grey literature and conducting multivocal literature reviews in software engineering: https://doi.org/10.1016/j.infsof.2018.09.006
 - CMU SEI Digital Library: https://www.sei.cmu.edu/library/
 - 기존 구현: `agent-platform/src/agent_platform/planning/coding_research.py`
-- 기존 출처 수집 정책: `_docs/source-collection-policy.ko.md`
+- 기존 출처 수집 정책: `_docs/policies/source-collection-policy.ko.md`
 - 계획 기록: `_history/plans/2026/2026-05-31-coding-research-source-diversity.ko.md`
 
 ## Grounding Checks

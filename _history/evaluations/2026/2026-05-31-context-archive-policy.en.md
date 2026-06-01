@@ -8,7 +8,7 @@ When you believe the context is getting full, summarize and archive it well, and
 
 - Added `_history/context-archives/` as the long-context resume packet store.
 - Added Korean and English context archive templates under `_templates/context-archive/`.
-- Added `_docs/context-archive-policy.ko.md` and `.en.md` with saturation signals, standard procedure, and what not to preserve.
+- Added `_docs/policies/context-archive-policy.ko.md` and `.en.md` with saturation signals, standard procedure, and what not to preserve.
 - Added `_ops/workflows/45-context-archive.md` and strengthened `_ops/prompts/50-compress-context.md`.
 - Added `context_archiving_occurred` and `context_archive_targets` to `work-evaluator-agent`.
 - Added context archive policy as a warm required anchor in the memory bootstrap manifest.
@@ -20,8 +20,8 @@ When you believe the context is getting full, summarize and archive it well, and
 - [Evaluating Very Long-Term Conversational Memory of LLM Agents](https://arxiv.org/abs/2402.17753)
 - [Active Context Compression](https://arxiv.org/abs/2601.07190)
 - [Microsoft Agent Framework Memory and Persistence](https://learn.microsoft.com/en-us/agent-framework/get-started/memory)
-- `_docs/context-management.md`
-- `_docs/memory-bootstrap-policy.ko.md`
+- `_docs/operating-models/context-management.md`
+- `_docs/policies/memory-bootstrap-policy.ko.md`
 
 ## Web Search Records
 
@@ -35,7 +35,7 @@ When you believe the context is getting full, summarize and archive it well, and
 
 ## Changed Files
 
-- `_docs/context-archive-policy.ko.md`, `_docs/context-archive-policy.en.md`
+- `_docs/policies/context-archive-policy.ko.md`, `_docs/policies/context-archive-policy.en.md`
 - `_history/context-archives/README.ko.md`, `_history/context-archives/README.en.md`
 - `_templates/context-archive/context-archive.ko.md`, `_templates/context-archive/context-archive.en.md`
 - `_ops/workflows/45-context-archive.md`

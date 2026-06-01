@@ -18,4 +18,4 @@ Refresh _ops/maps/ when needed and record the promotion reason in history.
 
 ## Reference
 
-- [_docs/capability-governance.md](../../_docs/capability-governance.md)
+- [_docs/governance/capability-governance.md](../../_docs/governance/capability-governance.md)

@@ -1,0 +1,113 @@
+# 출처 수집 정책
+
+## 목적
+
+웹 검색을 할 때 단순히 검색 결과 몇 개를 보는 데서 끝내지 않고, 공신력 높은 자료와 현업 신호를 최대한 폭넓게 모아 판단 품질을 높인다.
+
+이 정책은 [_docs/policies/web-first-work-policy.ko.md](web-first-work-policy.ko.md)의 후속 규칙이다. 모든 새 지시는 웹 검색으로 시작하고, 필요한 경우 이 문서의 출처 수집 기준으로 검색 깊이를 넓힌다.
+
+## 우선 수집할 출처
+
+| 우선순위 | 출처 유형 | 예시 | 사용 방식 |
+| --- | --- | --- | --- |
+| 1 | 공식/1차 출처 | 공식 문서, 표준, RFC, 제품 블로그, 릴리스 노트, API 문서 | 사실 확인의 1차 근거 |
+| 2 | 논문/학술 자료와 책/이론서 | arXiv, ACL, NeurIPS, ACM, IEEE, 학술 PDF, textbook, publisher page, library catalog | 방법론, 이론, 프레임워크, 한계 근거 |
+| 3 | 공식 통계/공공 데이터와 설문 데이터 | national statistics, World Bank/OECD, Census, KOSIS, Pew, Gallup, CMO Survey | 정량 수치, 모집단/분모, 소비자/마케터 태도 근거 |
+| 4 | 오픈소스 원천 | GitHub repo, issue, PR, release, README, docs | 실제 구현과 유지보수 상태 확인 |
+| 5 | 외국 기술 블로그 | engineering blog, architecture post, incident review, benchmark write-up | 현업 적용 방식과 tradeoff 탐색 |
+| 6 | 시장/산업 리포트와 조사/분석 아티클 | industry report, survey report, benchmark article, long-form analysis | 시장/사례/비교 관점 |
+| 7 | 커뮤니티 신호 | Hacker News, Reddit, Stack Overflow, GitHub stars, article likes/bookmarks | 발견과 반대 신호 탐색 |
+| 8 | 소셜/전문가 신호 | LinkedIn posts, author profiles, conference talks, newsletters | 실무자 반응과 adoption 신호 |
+
+## 수집 원칙
+
+- 공식/1차 출처를 먼저 확인한다.
+- 논문과 기술 블로그를 함께 본다. 논문은 엄밀성, 블로그는 실제 적용과 제약을 보완한다.
+- 외국 기술 블로그와 해외 아티클을 적극 포함한다.
+- 대기업 엔지니어링 블로그, 공식 연구소, architecture center, 고신뢰 독립 자료가 필요하면 `agent-platform/configs/research/enterprise-source-registry.json`을 먼저 확인한다.
+- 더 넓은 검색 원천이 필요하면 `agent-platform/configs/research/source-discovery-registry.json`을 확인해 세계적 기술 블로그, 한국 빅테크 기술 블로그, 인도 기술 소스, 논문 검색 원천을 함께 탐색한다.
+- 마케팅, 시장 규모, 소비자 인사이트, 브랜드 전략, GTM, 설문 기반 주장, 책/이론 근거, 정량 수치 근거가 필요하면 `agent-platform/configs/research/marketing-evidence-profile.json`을 함께 사용한다.
+- 마케팅/시장 규모 숫자는 값, 단위, 분모/base, 지역, 기간, 모집단, 방법론, 표본, 스폰서/펀더, 접근일, 비교 가능성 메모를 함께 기록한다.
+- 설문 근거는 가능한 경우 모집단, 표본 크기, 표본추출 방식, 조사 기간, 조사 모드, 가중치, 스폰서/펀더, 질문 문구나 조사 도구를 확인한다. 방법론이 없으면 약한 근거로 낮춘다.
+- 한국 사용자의 리뷰/로컬 판단이 필요한 작업은 Naver Map, Kakao Map, Naver Blog/Search, 공식 페이지를 우선 확인하고 `_tools/korean-local-review/`로 후보 품질을 점수화한다.
+- 유명 논문이나 연구 근거가 필요한 작업은 Semantic Scholar, OpenAlex, arXiv, Papers with Code, Connected Papers 같은 원천을 조합해 유명도, 최신성, 코드/데이터 유무, 반대 논문을 확인한다.
+- 좋아요 수, 공유 수, 댓글 수, GitHub stars, Hacker News 점수, LinkedIn 반응은 "인기도/확산 신호"로 기록하되 사실 근거로 단독 사용하지 않는다.
+- LinkedIn 글은 저자, 소속, 날짜, 반응, 원문 링크를 확인하고 1차 근거로 격상하지 않는다.
+- 조사 아티클은 방법론, 데이터 출처, 후원/광고 여부를 확인한다.
+- 검색 결과 제목만 근거로 쓰지 않고 원문을 확인한다.
+- 서로 충돌하는 출처는 둘 다 기록하고 결론을 보류하거나 조건부로 쓴다.
+
+## 출처 묶음 기준
+
+작업이 조사나 계획에 영향을 주면 가능한 한 다음 묶음을 모은다.
+
+- 공식/1차 출처 1개 이상
+- 논문 또는 표준/기술 보고서 1개 이상
+- 마케팅/시장/소비자 조사라면 책/이론 또는 peer-reviewed marketing source 1개 이상
+- 마케팅/시장/소비자 조사라면 공식 통계, 공개 설문, 또는 survey methodology가 있는 정량 출처 1개 이상
+- 외국 기술 블로그나 실무 사례 2개 이상
+- 오픈소스 repo 또는 실제 구현 사례 1개 이상
+- 커뮤니티/소셜 신호 1개 이상
+- 반대 의견이나 실패 사례 1개 이상
+
+단순 로컬 작업에서는 이 기준을 모두 채우지 않아도 된다. 다만 웹 검색을 먼저 수행하고, 무관하면 그 사실을 기록한다.
+
+반복적으로 많은 출처를 수집하거나 보고서로 정리해야 하면 `_tools/source-collector/`를 사용한다. 한국 로컬 리뷰나 Naver/Kakao 중심 조사가 필요하면 `_tools/korean-local-review/`를 사용한다.
+
+일반 조사와 계획은 `research-insight-planner-agent`와 `agent-platform/configs/research/research-agent-profile.json`을 사용해 출처 순위화, 증거 추출, 종합, citation grounding, skeptic review를 기록한다.
+
+마케팅 전략, 시장 규모, 소비자 인사이트, 책/이론, 설문조사, 정량 수치 근거 조사는 `marketing-evidence-profile.json`을 `research_profile_paths`에 포함한다. 시장 규모 산정은 공식 통계/공공 데이터, 산업 리포트, 명시적 가정 또는 플랫폼 행동 데이터를 최소 세 갈래로 삼각 검증한다.
+
+코딩 조사는 조사 완료 전에 `coding-research-agent`로 출처, `source_types`, `reference_config_paths`, `technology_stack`, `technology_official_docs`, `stack_version_constraints`, `issue_discussion_sources`, `issue_discussion_notes`, `community_signal_notes`, `language_options`, `selected_language`, `language_decision_notes`, `architecture_theory_sources`, `architecture_practitioner_sources`, `architecture_tradeoff_notes`, `folder_structure_options`, `folder_structure_decision_notes`, `folder_semantics_notes`, `maintainability_notes`, `code_reference_sources`, `code_reference_notes`, 선택지, 추천안, 위험, 검증 계획, 표준 종료 질문을 함께 확인한다. 코딩 조사가 구현 준비 상태가 되려면 최소 3개 이상의 `other`가 아닌 출처 유형을 사용하고, Java/Spring Boot, C, React, Next.js처럼 주요 기술별 공식 문서나 표준을 확인하며, 언어/런타임 유지보수성, 아키텍처 이론과 실무 의견의 차이, 폴더 의미와 소유 경계를 기록해야 한다. 어떤 출처 설정을 참고했는지 `agent-platform/configs/research/` 아래 JSON 설정으로 남겨야 하고, 관련 오픈소스 구조와 참고 구현 또는 잘 작성된 코드/테스트를 조사해야 한다. 대기업/고신뢰 출처를 쓰는 경우 `reference_config_paths`에 `enterprise-source-registry.json`을 함께 기록한다.
+
+Stack Overflow의 표/accepted answer, Reddit 토론, GitHub Issues/Discussions, 프로젝트 forum과 같은 커뮤니티 신호는 반복 문제, 채택도, 엣지 케이스, 반대 의견을 찾는 데 유용하다. 다만 해당 신호는 사실 증명이 아니라 discovery/adoption/risk signal로 기록하고, 사실 판단은 공식 문서, 표준, paper, maintained repository 같은 권위 출처와 교차 확인한다.
+
+모든 중요한 원천값, 설정값, 주장, 리뷰 신호, 계획 제약은 `source_value_provenance`에 “값 <- 정확한 URL/경로, 접근일, 추출 메모” 형태로 남긴다. 실행 계획은 `plan_evidence`로 각 계획 단계와 근거 출처를 연결한다.
+
+오픈소스 설치가 필요하면 [_docs/policies/open-source-installation-policy.ko.md](open-source-installation-policy.ko.md)에 따라 설치 범위, 설치 명령, dependency 기록 파일, 설치 감사 기록, 보안/라이선스 검토, 검증, rollback을 함께 남긴다. 실제 설치가 발생하면 `_ops/installations/registry.json`과 `_history/installations/YYYY/`를 갱신한다.
+
+## 평가 기준
+
+- 권위: 저자와 발행 주체가 신뢰할 만한가?
+- 정확성: 근거, 데이터, 코드, 인용이 있는가?
+- 최신성: 현재 작업에 맞는 날짜인가?
+- 관련성: 지금 결정에 직접 영향을 주는가?
+- 독립성: 서로 독립된 출처인가?
+- 투명성: 방법론, 한계, 이해관계가 드러나는가?
+- 현업 신호: 실제 사용, 토론, 반응, 유지보수 흔적이 있는가?
+
+## 기록 형식
+
+리서치 노트나 평가 보고서에는 다음을 남긴다.
+
+- URL 또는 경로
+- 출처 유형
+- 접근일
+- 원천값 provenance
+- 핵심 claim
+- 신뢰도 판단
+- 인기도/현업 신호
+- 반대 신호
+- 현재 계획에 미친 영향
+- 계획 단계별 근거
+
+## 자동화 도구
+
+```bash
+python3 _tools/source-collector/src/source_collector.py init /tmp/source-bundle.json --topic "topic" --purpose "purpose" --access-date YYYY-MM-DD
+python3 _tools/source-collector/src/source_collector.py report /tmp/source-bundle.json --output /tmp/source-report.md --json-output /tmp/source-report.json
+python3 _tools/source-collector/src/source_collector.py check /tmp/source-bundle.json --strict
+python3 _tools/korean-local-review/src/korean_local_review.py query-plan --topic "topic" --region "region" --category "category"
+python3 _tools/korean-local-review/src/korean_local_review.py score /tmp/korean-review.json --output /tmp/korean-review.md
+```
+
+## 관련 파일
+
+- [_tools/source-collector/README.ko.md](../../_tools/source-collector/README.ko.md)
+- [_tools/korean-local-review/README.ko.md](../../_tools/korean-local-review/README.ko.md)
+- [_ops/workflows/05-web-first-intake.md](../../_ops/workflows/05-web-first-intake.md)
+- [_ops/workflows/55-research-insight-planning.md](../../_ops/workflows/55-research-insight-planning.md)
+- [_ops/workflows/56-coding-research.md](../../_ops/workflows/56-coding-research.md)
+- [대기업/고신뢰 사이트 목록](../../_research/source-lists/enterprise-high-quality-sites.ko.md)
+- [한국 사용자 리뷰/로컬 조사 소스](../../_research/source-lists/korean-local-review-sources.ko.md)
+- [_research/topics/agent-planning/2026-05-31-source-collection-policy.ko.md](../../_research/topics/agent-planning/2026-05-31-source-collection-policy.ko.md)

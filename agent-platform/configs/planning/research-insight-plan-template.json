@@ -9,7 +9,7 @@
   ],
   "sources_checked": [
     "https://example.com/official-or-primary-source",
-    "_docs/example-policy.ko.md"
+    "_docs/policies/example-policy.ko.md"
   ],
   "research_profile_paths": [
     "agent-platform/configs/research/research-agent-profile.json",

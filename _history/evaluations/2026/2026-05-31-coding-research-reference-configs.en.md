@@ -19,7 +19,7 @@
 - Zotero Item Types and Fields: https://www.zotero.org/support/kb/item_types_and_fields
 - Sourcemeta Registry Configuration: https://registry.sourcemeta.com/configuration/
 - Existing implementation: `agent-platform/src/agent_platform/planning/coding_research.py`
-- Existing source collection policy: `_docs/source-collection-policy.en.md`
+- Existing source collection policy: `_docs/policies/source-collection-policy.en.md`
 - Plan history: `_history/plans/2026/2026-05-31-coding-research-reference-configs.en.md`
 
 ## Grounding Checks

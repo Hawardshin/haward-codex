@@ -37,6 +37,6 @@ Return:
 
 ## References
 
-- [Web-first work policy](../../_docs/web-first-work-policy.ko.md)
-- [Search insight planning policy](../../_docs/search-insight-planning-policy.ko.md)
-- [Hallucination prevention policy](../../_docs/hallucination-prevention-policy.ko.md)
+- [Web-first work policy](../../_docs/policies/web-first-work-policy.ko.md)
+- [Search insight planning policy](../../_docs/policies/search-insight-planning-policy.ko.md)
+- [Hallucination prevention policy](../../_docs/policies/hallucination-prevention-policy.ko.md)

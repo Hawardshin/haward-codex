@@ -3,7 +3,7 @@
 ## 검토 대상
 
 - `REQ-WS-015`
-- `_docs/architecture-first-coding-policy.ko.md`
+- `_docs/policies/architecture-first-coding-policy.ko.md`
 - `coding-research-agent`
 
 ## 검토 결과

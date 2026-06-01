@@ -61,7 +61,7 @@
 
 - `agent-platform/configs/agents/research-insight-planner-agent.json`
 - `_ops/workflows/55-research-insight-planning.md`
-- `_docs/search-insight-planning-policy.en.md`
+- `_docs/policies/search-insight-planning-policy.en.md`
 
 ## Follow-Up Checks
 

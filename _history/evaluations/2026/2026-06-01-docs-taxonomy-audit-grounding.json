@@ -1,0 +1,150 @@
+{
+  "task": "Ground factual claims for the docs taxonomy and missing-document audit work.",
+  "output_summary": "Split _docs into typed categories, added a self-documenting docs registry, added docs-audit with tests, updated durable operating rules and memory bootstrap, regenerated maps and monitor snapshots, and verified the new structure.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "diataxis",
+      "source": "https://diataxis.fr/",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "Documentation framework checked for purpose-based documentation structure."
+    },
+    {
+      "evidence_id": "gitlab_topic_types",
+      "source": "https://docs.gitlab.com/development/documentation/topic_types/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official GitLab documentation checked for documentation topic-type separation."
+    },
+    {
+      "evidence_id": "google_style",
+      "source": "https://developers.google.com/style/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Google developer documentation style guide checked for technical documentation consistency and organization."
+    },
+    {
+      "evidence_id": "docs_registry",
+      "source": "_docs/registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked self-documenting registry defining categories, required documents, companion policy, and audit command."
+    },
+    {
+      "evidence_id": "docs_audit_files",
+      "source": "_tools/docs-audit/src/docs_audit.py, _tools/docs-audit/tests/test_docs_audit.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked tool source and tests added for deterministic docs structure validation."
+    },
+    {
+      "evidence_id": "docs_audit_result",
+      "source": "python3 _tools/docs-audit/src/docs_audit.py --check",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command returned docs_ready with 4 categories, 49 documents, and 0 gaps."
+    },
+    {
+      "evidence_id": "docs_audit_tests",
+      "source": "python3 -m unittest discover -s _tools/docs-audit/tests",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Four docs-audit tests passed."
+    },
+    {
+      "evidence_id": "config_contract",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json ... ../_docs/registry.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Config contract returned self_documenting with no gaps for core configs and docs registry."
+    },
+    {
+      "evidence_id": "memory_bootstrap",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Memory bootstrap returned ready_to_bootstrap and includes docs_registry in startup_order."
+    },
+    {
+      "evidence_id": "workspace_monitor",
+      "source": "npm run collect, npm run test, npm run check, npm run build in workspace-monitor",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Workspace monitor regenerated a 600-document snapshot and passed test, TypeScript check, and production build."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "Diataxis supports organizing documentation around user needs and document purpose.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["diataxis"],
+      "verification_steps": ["Checked the Diataxis site."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "GitLab documentation guidance separates documentation by topic types such as concept, task, reference, and troubleshooting.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["gitlab_topic_types"],
+      "verification_steps": ["Checked the official GitLab documentation topic types page."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "This work added a self-documenting docs registry defining the categorized _docs structure and audit command.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["docs_registry"],
+      "verification_steps": ["Inspected _docs/registry.json and ran config contract."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "This work added docs-audit with tests for root sprawl, companion gaps, category pattern mismatch, and clean structure.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["docs_audit_files", "docs_audit_tests"],
+      "verification_steps": ["Inspected docs-audit files and ran unit tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The current _docs structure passes docs-audit with no gaps or warnings.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["docs_audit_result"],
+      "verification_steps": ["Ran docs-audit --check."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Memory bootstrap now includes docs_registry in startup order and remains ready to bootstrap.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["memory_bootstrap"],
+      "verification_steps": ["Ran check-memory-bootstrap and inspected startup output."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace monitor snapshot and build were regenerated after the docs move.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["workspace_monitor"],
+      "verification_steps": ["Ran collect, test, check, and build in workspace-monitor."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "The local docs taxonomy adapts external documentation frameworks to this repository's operating-document types rather than copying any framework directly.",
+    "Future new document types may require updating _docs/registry.json and docs-audit patterns."
+  ],
+  "limitation_notes": [
+    "The audit validates file placement and required companions; it does not judge prose quality.",
+    "External documentation guidance can evolve, so future governance changes should recheck official sources."
+  ]
+}

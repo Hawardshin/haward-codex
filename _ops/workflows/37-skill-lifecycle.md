@@ -8,7 +8,7 @@
 
 1. Run web-first intake and record the search process.
 2. Check whether the repeated need is better as a skill, prompt, workflow, template, or tool.
-3. Read `_docs/skill-lifecycle-policy.ko.md`, `_skills/registry.md`, and existing related skills.
+3. Read `_docs/policies/skill-lifecycle-policy.ko.md`, `_skills/registry.md`, and existing related skills.
 4. If creating a new skill, use `skill-creator` guidance and initialize source under `_skills/<skill-name>/`.
 5. Keep `SKILL.md` concise and put when-to-use triggers in frontmatter description.
 6. Add only necessary `references/`, `scripts/`, or `assets/`.

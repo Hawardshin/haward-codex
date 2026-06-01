@@ -29,7 +29,7 @@
 | Microsoft Learn Memory & Persistence | https://learn.microsoft.com/en-us/agent-framework/get-started/memory | context provider, history provider, session state 구조 |
 | Memory Matters | https://ojs.aaai.org/index.php/AAAI-SS/article/view/27688 | long-term memory와 memory type separation |
 | Memory OS of AI Agent | https://huggingface.co/papers/2506.06326 | 계층형 memory storage/retrieval 관점 |
-| 기존 persistent instructions | `_docs/persistent-instructions.ko.md` | 현재 durable rule 목록 |
+| 기존 persistent instructions | `_docs/instructions/persistent-instructions.ko.md` | 현재 durable rule 목록 |
 | 기존 ops index | `_ops/index.md` | 운영 탐색 시작점 |
 
 ## 지식 베이스 검증

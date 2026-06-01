@@ -21,7 +21,7 @@
     "https://www.npmjs.com/package/lucide-react",
     "_ops/projects/registry.json",
     "_ops/workflows/25-project-boundary-management.md",
-    "_docs/open-source-installation-policy.ko.md"
+    "_docs/policies/open-source-installation-policy.ko.md"
   ],
   "source_types": [
     "official",

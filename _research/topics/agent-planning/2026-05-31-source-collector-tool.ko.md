@@ -59,7 +59,7 @@
 
 - `_tools/source-collector/README.ko.md`
 - `_tools/source-collector/src/source_collector.py`
-- `_docs/source-collection-policy.ko.md`
+- `_docs/policies/source-collection-policy.ko.md`
 
 ## 다음 확인 사항
 

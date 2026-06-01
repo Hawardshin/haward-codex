@@ -35,7 +35,7 @@
 ## Knowledge-Base Validation
 
 - Internal operating docs are used as evidence, so validate them with `knowledge-skeptic-agent`.
-- Validation targets: `_docs/source-collection-policy.ko.md`, `_tools/README.md`, `_ops/workflows/05-web-first-intake.md`, `_ops/workflows/55-research-insight-planning.md`
+- Validation targets: `_docs/policies/source-collection-policy.ko.md`, `_tools/README.md`, `_ops/workflows/05-web-first-intake.md`, `_ops/workflows/55-research-insight-planning.md`
 - Expected result: `ready_to_reference`
 
 ## Insights

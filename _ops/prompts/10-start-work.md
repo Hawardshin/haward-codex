@@ -16,7 +16,7 @@ Read agent-platform/configs/workflows/work-mode-registry.json and select work_mo
 Read _ops/index.md and the relevant project README first.
 Decide which project or operations folder owns the request.
 If ownership is unclear, run the project boundary prompt before editing.
-Persist durable user instructions in _docs/persistent-instructions.md and related operating docs.
+Persist durable user instructions in _docs/instructions/persistent-instructions.md and related operating docs.
 Define the smallest useful scope for the selected work_mode, read only the necessary files, then implement.
 If ship_first defers non-blocking improvement work, record the deferred target before close-out.
 ```
@@ -30,5 +30,5 @@ If ship_first defers non-blocking improvement work, record the deferred target b
 - `agent-platform/configs/workflows/work-mode-registry.json`
 - `_ops/index.md`
 - 관련 프로젝트 `README.md`
-- `_docs/persistent-instructions.md`
+- `_docs/instructions/persistent-instructions.md`
 - `_history/YYYY/YYYY-MM-DD.md`

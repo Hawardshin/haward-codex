@@ -10,7 +10,7 @@
 
 - 사용자는 전체 구조에서 모순이나 관리 불편이 발견되면 폴더 구조와 관리 규칙을 개선하라고 요청했다.
 - 현재 구조 감사에서 대규모 폴더 이동보다 root folder class, local-only 예외, generated output 정책, deterministic audit가 더 필요한 개선으로 판단했다.
-- 결과적으로 `_ops/projects/root-structure-policy.json`, `_tools/structure-audit/`, `_docs/repository-structure-governance.*.md`, `.gitignore` local-only 규칙, project boundary workflow, memory bootstrap anchor를 추가/갱신했다.
+- 결과적으로 `_ops/projects/root-structure-policy.json`, `_tools/structure-audit/`, `_docs/governance/repository-structure-governance.*.md`, `.gitignore` local-only 규칙, project boundary workflow, memory bootstrap anchor를 추가/갱신했다.
 - `workspace-monitor`는 `_docs`와 `_philosophy`도 snapshot으로 수집하게 했다.
 
 ## 검증

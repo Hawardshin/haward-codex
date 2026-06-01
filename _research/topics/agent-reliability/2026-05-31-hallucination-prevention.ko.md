@@ -63,7 +63,7 @@
 
 ## 관련 작업
 
-- `_docs/hallucination-prevention-policy.ko.md`
+- `_docs/policies/hallucination-prevention-policy.ko.md`
 - `_ops/workflows/70-hallucination-prevention.md`
 - `agent-platform/docs/hallucination-guard-agent.ko.md`
 

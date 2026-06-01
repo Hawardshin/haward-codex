@@ -41,5 +41,5 @@
 ## 연결
 
 - 스펙: `_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md`
-- 정책: `_docs/spec-driven-development-policy.ko.md`
+- 정책: `_docs/policies/spec-driven-development-policy.ko.md`
 - 평가 보고서: `_history/evaluations/2026/2026-05-31-spec-driven-development.ko.md`

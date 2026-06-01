@@ -21,5 +21,5 @@ Record the boundary decision in the project README or related history.
 
 ## References
 
-- [_docs/project-boundary-policy.ko.md](../../_docs/project-boundary-policy.ko.md)
+- [_docs/policies/project-boundary-policy.ko.md](../../_docs/policies/project-boundary-policy.ko.md)
 - [_ops/projects/index.ko.md](../projects/index.ko.md)

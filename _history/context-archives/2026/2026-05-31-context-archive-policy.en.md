@@ -16,7 +16,7 @@ Strengthen the repository so the agent can proactively summarize/archive long co
 | --- | --- | --- |
 | Archive location | `_history/context-archives/YYYY/` stores context resume packets. | `_history/context-archives/README.ko.md` |
 | Templates | Added Korean and English context archive templates. | `_templates/context-archive/` |
-| Policy | Documented saturation signals, standard procedure, and what not to preserve. | `_docs/context-archive-policy.ko.md` |
+| Policy | Documented saturation signals, standard procedure, and what not to preserve. | `_docs/policies/context-archive-policy.ko.md` |
 | Workflow | Added context archiving procedure under `_ops/workflows/45-context-archive.md`. | `_ops/workflows/45-context-archive.md` |
 | Evaluation | Missing `context_archive_targets` becomes a gap when archiving occurred. | `agent-platform/src/agent_platform/evaluation/work_evaluator.py` |
 
@@ -24,7 +24,7 @@ Strengthen the repository so the agent can proactively summarize/archive long co
 
 | Priority | File | Reason |
 | --- | --- | --- |
-| 1 | `_docs/context-archive-policy.ko.md` | Criteria and procedure for context archiving |
+| 1 | `_docs/policies/context-archive-policy.ko.md` | Criteria and procedure for context archiving |
 | 2 | `_history/context-archives/README.ko.md` | Archive packet storage rules |
 | 3 | `_ops/workflows/45-context-archive.md` | Execution sequence |
 | 4 | `_ops/prompts/50-compress-context.md` | Prompt-level compression instruction |

@@ -22,7 +22,7 @@
 
 ## 플랫폼 반영
 
-- `_docs/open-source-installation-policy.ko.md`와 `.en.md`를 추가한다.
+- `_docs/policies/open-source-installation-policy.ko.md`와 `.en.md`를 추가한다.
 - `agent-platform/configs/open-source/candidate-template.json`에 설치 기록 필드를 추가한다.
 - `OpenSourceCandidate` 평가에 설치 준비 상태를 추가한다.
 - 지속 지시, AGENTS, README, coding research workflow에 설치 규칙을 반영한다.

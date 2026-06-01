@@ -18,7 +18,7 @@
 | Source | Checked | Reason Used |
 | --- | --- | --- |
 | `skill-creator` system skill | 2026-05-31 | Skill structure, frontmatter, validation criteria |
-| `_docs/skill-lifecycle-policy.en.md` | 2026-05-31 | Source, validation, and rollback rules before install |
+| `_docs/policies/skill-lifecycle-policy.en.md` | 2026-05-31 | Source, validation, and rollback rules before install |
 
 ## Install Plan
 

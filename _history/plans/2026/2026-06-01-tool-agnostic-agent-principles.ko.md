@@ -24,7 +24,7 @@
 
 ## 산출물
 
-- `_docs/tool-agnostic-agent-operating-model.ko.md`
+- `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`
 - `_ops/assistant-runtimes/adapter-registry.json`
 - `CLAUDE.md`
 - `.claude/rules/workspace-operating-principles.md`

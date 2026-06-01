@@ -18,7 +18,7 @@
 - Microsoft Agent Framework memory documentation: https://learn.microsoft.com/en-us/agent-framework/get-started/memory
 - Memory Matters: https://ojs.aaai.org/index.php/AAAI-SS/article/view/27688
 - Memory OS of AI Agent: https://huggingface.co/papers/2506.06326
-- Existing persistent instructions: `_docs/persistent-instructions.md`
+- Existing persistent instructions: `_docs/instructions/persistent-instructions.md`
 - Start workflow: `_ops/workflows/00-start-here.md`
 - Prompt router: `_ops/prompts/00-router.md`
 

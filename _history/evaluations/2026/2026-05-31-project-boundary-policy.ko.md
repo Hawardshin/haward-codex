@@ -19,8 +19,8 @@
 - `_history/plans/2026/2026-05-31-project-boundary-policy.ko.md`
 - `AGENTS.md`
 - `README.md`
-- `_docs/workspace-rules.md`
-- `_docs/capability-governance.md`
+- `_docs/instructions/workspace-rules.md`
+- `_docs/governance/capability-governance.md`
 - `_templates/project/README.md`
 - `_templates/python-agent-project/README.md`
 - `_ops/prompts/20-create-project.md`

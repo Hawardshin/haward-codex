@@ -23,7 +23,7 @@ The user said "especially for installation, more."
 - [OWASP Developer Guide: Dependencies](https://devguide.owasp.org/en/05-implementation/02-dependencies/)
 - [OWASP CycloneDX](https://owasp.org/www-project-cyclonedx/)
 - [OpenSSF Scorecard](https://openssf.org/scorecard/)
-- `_docs/open-source-installation-policy.ko.md`
+- `_docs/policies/open-source-installation-policy.ko.md`
 - `agent-platform/docs/open-source-integration.md`
 
 ## Verification

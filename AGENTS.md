@@ -7,7 +7,11 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Treat each root-level non-reserved directory as a separate project.
 - Create new project directories at the repository root using `kebab-case`.
 - Reserve underscore-prefixed root directories for workspace operations:
-  - `_docs/` for workspace-level documentation and decision records
+  - `_docs/` for workspace-level documentation and decision records; keep it categorized through `_docs/registry.json`
+  - `_docs/instructions/` for durable instructions and baseline workspace rules
+  - `_docs/policies/` for execution policies
+  - `_docs/operating-models/` for conceptual operating models
+  - `_docs/governance/` for cross-workspace governance documents
   - `_philosophy/` for foundational agent and platform operating philosophy
   - `_requirements/` for shared requirements baselines, change records, and review records
   - `_specs/` for shared spec-driven artifacts, implementation plans, task lists, validation, and traceability
@@ -27,7 +31,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Do not move or delete unrelated files unless the user explicitly asks.
 - Prefer creating a project folder for substantial work instead of placing loose files at the repository root.
 - Register root projects and their boundaries in `_ops/projects/registry.json`.
-- Keep durable AI assistant operating principles tool-agnostic. Use `_docs/tool-agnostic-agent-operating-model.ko.md` and `_ops/assistant-runtimes/adapter-registry.json` as the shared source for adapting this workspace to Codex, Claude Code, Cursor, Antigravity, or another assistant runtime.
+- Keep durable AI assistant operating principles tool-agnostic. Use `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md` and `_ops/assistant-runtimes/adapter-registry.json` as the shared source for adapting this workspace to Codex, Claude Code, Cursor, Antigravity, or another assistant runtime.
 - Treat `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, and `.agents/rules/` as runtime adapters or entrypoints. Do not fork durable policy across them; update shared docs/configs first and keep adapters thin.
 
 ## Git Rules
@@ -87,6 +91,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Before publishing final outputs with factual claims, run or simulate `hallucination-guard-agent` and resolve `grounding_required` gaps.
 - Do not present unsupported or unchecked claims as facts; verify them, remove them, or explicitly caveat uncertainty.
 - Keep foundational operating philosophy under `_philosophy/`; keep executable rules and workflows under `_docs/` and `_ops/`.
+- Keep `_docs/` categorized by `_docs/registry.json`. Do not add loose root Markdown files under `_docs` except allowed index files; after changing `_docs`, run `python3 _tools/docs-audit/src/docs_audit.py --check`.
 - When speed matters or a request can be decomposed, use `parallel-work-planner-agent` before parallel execution. Record task IDs, dependencies, touch paths, output targets, verification, shared resources, conflict controls, coordination targets, merge strategy, rollback plan, source provenance, and plan evidence.
 - Do not run tasks that touch overlapping files, configs, generated maps, git state, or other shared mutable resources in parallel unless a dependency, lock, branch/worktree rule, or explicit handoff serializes them.
 - When multiple research lanes run in parallel, require a merge gate such as `research-synthesis` that waits for all research lanes, resolves contradictions, records accepted evidence, and releases downstream implementation only after acceptance checks pass.
@@ -115,7 +120,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 ## Persistent Instruction Rules
 
 - Treat user instructions phrased as ongoing preferences or future operating rules as durable repository rules.
-- Persist durable instructions in `AGENTS.md`, `README.md`, `_docs/persistent-instructions.md`, or the relevant project docs.
+- Persist durable instructions in `AGENTS.md`, `README.md`, `_docs/instructions/persistent-instructions.md`, or the relevant project docs.
 - Record the instruction in `_history/YYYY/YYYY-MM-DD.md` when it changes future behavior.
 - Do not rely on chat memory for instructions that should affect future work.
 - If a durable instruction conflicts with an older rule, update the docs so the current rule is explicit.
@@ -142,10 +147,11 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/workflows/40-evaluate-and-rework.md` before closing meaningful work.
 - Keep `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md` current when folders, prompts, workflows, tools, skills, or project structure change.
 - Run `python3 _tools/workspace-index/src/workspace_index.py` after changing navigational structure.
+- Run `python3 _tools/docs-audit/src/docs_audit.py --check` after changing `_docs`, `_docs/registry.json`, docs category rules, or required durable document paths.
 - Run `python3 _tools/structure-audit/src/structure_audit.py --check` after changing root folders, project registry, durable project top-level folders, reserved operational folders, runtime adapter folders, local-only folder rules, or generated-output rules.
 - Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, assistant runtime adapters, or platform memory anchors.
-- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/research/marketing-evidence-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/integrations/notification-channels.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json` from `agent-platform/` after changing core shared settings.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/research/marketing-evidence-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/integrations/notification-channels.json ../_docs/registry.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json` from `agent-platform/` after changing core shared settings.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules
@@ -192,7 +198,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Do not create a new skill or tool when a short documented procedure is enough.
 - Prefer open-source dependencies and tools when they are mature, maintained, license-compatible, and fit the task.
 - When choosing external dependencies for current work, verify their current status and docs instead of relying only on memory.
-- When installation is needed, follow `_docs/open-source-installation-policy.ko.md` and verify the installed package or tool with tests, import checks, CLI checks, or smoke tests.
+- When installation is needed, follow `_docs/policies/open-source-installation-policy.ko.md` and verify the installed package or tool with tests, import checks, CLI checks, or smoke tests.
 - Preserve reusable research findings with source URLs, access dates, summaries, reliability, and applicability.
 - Do not treat repository knowledge-base content as authoritative without checking freshness, source quality, and contradictions.
 

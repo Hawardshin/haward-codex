@@ -20,7 +20,7 @@ The user required every prompt to always run web search and to include the reaso
 - OpenAI Web search docs
 - Anthropic Search results docs
 - Firebase AI Logic Grounding with Google Search
-- Internal docs: `_docs/web-first-work-policy.ko.md`, `_ops/prompts/05-web-first-intake.md`, `_ops/workflows/40-evaluate-and-rework.md`
+- Internal docs: `_docs/policies/web-first-work-policy.ko.md`, `_ops/prompts/05-web-first-intake.md`, `_ops/workflows/40-evaluate-and-rework.md`
 
 ## Insights
 

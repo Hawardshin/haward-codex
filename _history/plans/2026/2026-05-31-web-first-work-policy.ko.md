@@ -30,12 +30,12 @@
 | OpenAI Knowledge Retrieval blueprint | https://openai.com/solutions/blueprints/knowledge-retrieval/ | grounded answers, citations, evals 조합 |
 | RAG NeurIPS paper | https://proceedings.neurips.cc/paper/2020/hash/6b493230-Abstract.html | 검색 지식 결합 근거 |
 | Anthropic Reduce hallucinations | https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations | 출처/인용 검증, 불확실성, 중요 정보 검증 |
-| 기존 운영 문서 | `AGENTS.md`, `_docs/search-insight-planning-policy.ko.md`, `_docs/hallucination-prevention-policy.ko.md`, `_ops/workflows/00-start-here.md` | 기존 검색/검증 구조 |
+| 기존 운영 문서 | `AGENTS.md`, `_docs/policies/search-insight-planning-policy.ko.md`, `_docs/policies/hallucination-prevention-policy.ko.md`, `_ops/workflows/00-start-here.md` | 기존 검색/검증 구조 |
 
 ## 지식 베이스 검증
 
 - 내부 운영 문서를 근거로 사용하므로 `knowledge-skeptic-agent`로 검증한다.
-- 검증 대상: `AGENTS.md`, `README.md`, `_docs/search-insight-planning-policy.ko.md`, `_docs/hallucination-prevention-policy.ko.md`, `_ops/workflows/00-start-here.md`
+- 검증 대상: `AGENTS.md`, `README.md`, `_docs/policies/search-insight-planning-policy.ko.md`, `_docs/policies/hallucination-prevention-policy.ko.md`, `_ops/workflows/00-start-here.md`
 - 기대 결과: `ready_to_reference`
 
 ## 도출한 인사이트
@@ -47,7 +47,7 @@
 
 ## 계획 단계
 
-1. `_docs/web-first-work-policy.ko.md`와 `.en.md`를 추가한다.
+1. `_docs/policies/web-first-work-policy.ko.md`와 `.en.md`를 추가한다.
 2. `_ops/prompts/05-web-first-intake.md`와 `_ops/workflows/05-web-first-intake.md`를 추가한다.
 3. `AGENTS.md`, `README.md`, persistent instructions, workspace rules, platform operating model, start workflow, prompt router를 갱신한다.
 4. 검색 기반 계획 정책과 할루시네이션 방지 정책에 web-first 규칙을 반영한다.

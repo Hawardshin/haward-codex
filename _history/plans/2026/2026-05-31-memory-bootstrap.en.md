@@ -29,7 +29,7 @@
 | Microsoft Learn Memory & Persistence | https://learn.microsoft.com/en-us/agent-framework/get-started/memory | Context provider, history provider, and session state structure |
 | Memory Matters | https://ojs.aaai.org/index.php/AAAI-SS/article/view/27688 | Long-term memory and memory type separation |
 | Memory OS of AI Agent | https://huggingface.co/papers/2506.06326 | Hierarchical memory storage and retrieval framing |
-| Existing persistent instructions | `_docs/persistent-instructions.en.md` | Current durable rule list |
+| Existing persistent instructions | `_docs/instructions/persistent-instructions.en.md` | Current durable rule list |
 | Existing ops index | `_ops/index.md` | Operations navigation entry point |
 
 ## Knowledge-Base Validation

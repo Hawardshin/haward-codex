@@ -1,0 +1,79 @@
+# 프로젝트 경계 정책
+
+## 목적
+
+이 저장소는 여러 관심사와 프로젝트가 장기적으로 늘어나는 monorepo다. 강력한 공통 운영 환경은 모두에게 적용하되, 특정 프로젝트에 속한 코드, 문서, 설정, 산출물은 해당 프로젝트 폴더 안에 둔다.
+
+철학적 배경은 [_philosophy/agent-operating-philosophy.ko.md](../../_philosophy/agent-operating-philosophy.ko.md)에 둔다. 이 문서는 그 철학을 프로젝트 관리 정책으로 옮긴다.
+
+## 기본 원칙
+
+- 루트의 일반 폴더는 개별 프로젝트다.
+- 프로젝트 폴더 이름은 `kebab-case`를 사용한다.
+- 프로젝트별 내용은 해당 프로젝트 폴더 안에 둔다.
+- 공통 운영 규칙, 템플릿, 도구, 리서치, 철학은 `_` 접두어 폴더에 둔다.
+- `_private/`와 `outputs/`는 예외적으로 로컬 전용 ignored folder로만 사용하며 공통 지식이나 지속 산출물로 보지 않는다.
+- 공통으로 승격할 때는 여러 프로젝트에서 재사용될 가능성이 분명해야 한다.
+- 프로젝트 상태와 경계는 `_ops/projects/registry.json`에 등록한다.
+- 프로젝트 내부 durable top-level folder는 `_ops/projects/registry.json`의 `project_specific_home`에 설명한다.
+- 루트 폴더 분류 규칙은 `_ops/projects/root-structure-policy.json`에 둔다.
+- `.claude/`, `.cursor/`, `.agents/`는 프로젝트가 아니라 AI assistant runtime adapter folder다. 이 폴더들은 `_ops/assistant-runtimes/adapter-registry.json`과 공유 운영 원칙을 가리키는 얇은 adapter만 담는다.
+
+## 프로젝트 안에 둘 것
+
+- 프로젝트 코드: `project-name/src/`
+- 프로젝트 테스트: `project-name/tests/`
+- 프로젝트 문서와 결정: `project-name/docs/`
+- 프로젝트 산출물: `project-name/artifacts/`
+- 프로젝트 설정: `project-name/configs/`
+- 프로젝트 전용 도구: `project-name/tools/`
+- 프로젝트 실행/검증 명령: `project-name/README.md`
+
+## 공통 폴더에 둘 것
+
+- 공통 운영 정책: `_docs/`
+- 운영 철학: `_philosophy/`
+- 프롬프트와 워크플로: `_ops/`
+- 공통 도구: `_tools/`
+- 템플릿: `_templates/`
+- 재사용 리서치: `_research/`
+- 커스텀 스킬 원본: `_skills/`
+- 작업/계획/평가 히스토리: `_history/`
+
+## 새 프로젝트를 만들 때
+
+새 관심사나 작업이 다음 조건 중 하나에 해당하면 새 루트 프로젝트를 만든다.
+
+- 독립적인 목적과 라이프사이클이 있다.
+- 자체 코드, 데이터, UI, 문서, 산출물이 생긴다.
+- 나중에 따로 실행, 검증, 배포, 보관할 가능성이 있다.
+- 기존 프로젝트에 넣으면 관심사가 섞인다.
+
+## 공통으로 승격할 때
+
+프로젝트 내부에서 시작한 도구, 템플릿, 규칙은 다음 조건을 만족할 때 공통 위치로 승격한다.
+
+- 두 개 이상의 프로젝트에서 재사용된다.
+- 앞으로 여러 프로젝트에서 반복될 가능성이 높다.
+- 프로젝트 고유 맥락 없이도 사용할 수 있다.
+- 사용법과 경계가 문서화되어 있다.
+
+## 금지할 것
+
+- 프로젝트 전용 파일을 `_docs/`, `_ops/`, `_tools/`에 바로 넣지 않는다.
+- 공통 운영 정책을 `AGENTS.md`, `CLAUDE.md`, `.cursor/rules`, `.agents/rules`에 각각 복사해 별도 정책으로 갈라지게 하지 않는다.
+- 서로 다른 관심사의 코드를 한 프로젝트에 섞지 않는다.
+- 공통 도구가 프로젝트 내부 상태에 몰래 의존하게 만들지 않는다.
+- 프로젝트 README 없이 루트에 새 프로젝트 폴더를 만들지 않는다.
+- 등록부 없이 프로젝트 상태를 채팅 기억에만 두지 않는다.
+- `outputs/`에 지속 산출물을 남기지 않는다. 지속 산출물은 소유 프로젝트의 `artifacts/` 아래에 둔다.
+- `_private/`의 내용을 작업 근거, 요구사항, 히스토리, 지식 베이스로 사용하지 않는다.
+
+## 구조 검증
+
+루트 폴더, 프로젝트 등록부, 예약 운영 폴더, runtime adapter folder, 로컬 전용 폴더 규칙을 바꾼 뒤에는 다음 명령을 실행한다.
+프로젝트 내부 durable top-level folder나 generated output 규칙이 바뀐 뒤에도 같은 명령을 실행한다.
+
+```bash
+python3 _tools/structure-audit/src/structure_audit.py --check
+```

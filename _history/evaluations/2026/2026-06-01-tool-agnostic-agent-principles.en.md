@@ -11,11 +11,11 @@
 
 ## Completed Summary
 
-The Codex-centered repository operating structure was split into shared principles and runtime adapters. Shared principles now live in `_docs/tool-agnostic-agent-operating-model.en.md` and `_ops/assistant-runtimes/adapter-registry.json`, while `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, and `.agents/rules/` are managed as thin tool-specific adapters.
+The Codex-centered repository operating structure was split into shared principles and runtime adapters. Shared principles now live in `_docs/operating-models/tool-agnostic-agent-operating-model.en.md` and `_ops/assistant-runtimes/adapter-registry.json`, while `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, and `.agents/rules/` are managed as thin tool-specific adapters.
 
 ## Main Outputs
 
-- `_docs/tool-agnostic-agent-operating-model.en.md`
+- `_docs/operating-models/tool-agnostic-agent-operating-model.en.md`
 - `_ops/assistant-runtimes/adapter-registry.json`
 - `CLAUDE.md`
 - `.claude/rules/workspace-operating-principles.md`

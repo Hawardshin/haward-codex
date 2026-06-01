@@ -56,7 +56,7 @@ Record evidence and limits for the operating rule that every new user instructio
 
 ## Related Work
 
-- `_docs/web-first-work-policy.en.md`
+- `_docs/policies/web-first-work-policy.en.md`
 - `_ops/workflows/05-web-first-intake.md`
 - `_ops/prompts/05-web-first-intake.md`
 

@@ -1,0 +1,115 @@
+{
+  "initial_instruction": "사용자가 작업 맥락이 길어지면서 현재 구조에서 누락되는 것이 있는 것 같으니 누락되지 않게 하고, docs 폴더도 종류별로 나눠 달라고 요청했다.",
+  "result_summary": "Split _docs into instructions, policies, operating-models, and governance; added _docs/registry.json; added docs-audit with tests; updated AGENTS, README, _ops index, persistent instructions, memory bootstrap, requirements, specs, history, coordination board, repository maps, and workspace-monitor snapshot so future sessions can discover and verify the docs structure.",
+  "work_mode": "standard",
+  "changed_files": [
+    "AGENTS.md",
+    "README.md",
+    "_docs/README.ko.md",
+    "_docs/README.en.md",
+    "_docs/registry.json",
+    "_docs/instructions/",
+    "_docs/policies/",
+    "_docs/operating-models/",
+    "_docs/governance/",
+    "_tools/docs-audit/",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "agent-platform/tests/test_memory_bootstrap.py",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-01-docs-taxonomy-audit.ko.md",
+    "_requirements/reviews/2026-06-01-docs-taxonomy-audit.ko.md",
+    "_specs/workspace-platform/2026-06-01-docs-taxonomy-audit/",
+    "_history/web-searches/2026/2026-06-01-docs-taxonomy-audit.ko.md",
+    "_history/plans/2026/2026-06-01-docs-taxonomy-audit.ko.md",
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/request-traces/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_ops/coordination/status.json",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json"
+  ],
+  "verification": [
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready, 4 categories, 49 documents, 0 gaps, 0 warnings",
+    "python3 -m unittest discover -s _tools/docs-audit/tests: 4 tests passed",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json ../_docs/registry.json: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap with docs_registry in startup_order",
+    "rg old root _docs direct paths: no matches",
+    "python3 _tools/workspace-index/src/workspace_index.py: repository and prompt maps updated",
+    "python3 _tools/task-board/src/task_board.py: coordination boards updated",
+    "npm run collect in workspace-monitor: wrote 600 documents",
+    "npm run test in workspace-monitor: 4 tests passed",
+    "npm run check in workspace-monitor: passed",
+    "npm run build in workspace-monitor: passed",
+    "PYTHONPATH=src python3 -m unittest discover -s tests in agent-platform: 103 tests passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-docs-taxonomy-audit-grounding.json: ready_to_publish"
+  ],
+  "references_checked": [
+    "https://diataxis.fr/",
+    "https://docs.gitlab.com/development/documentation/topic_types/",
+    "https://developers.google.com/style/",
+    "_docs/registry.json",
+    "_docs/README.ko.md",
+    "_tools/docs-audit/README.ko.md",
+    "_requirements/reviews/2026-06-01-docs-taxonomy-audit.ko.md",
+    "_history/plans/2026/2026-06-01-docs-taxonomy-audit.ko.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-docs-taxonomy-audit-grounding.json",
+    "check-grounding returned ready_to_publish"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-docs-taxonomy-audit.ko.md",
+    "_history/plans/2026/2026-06-01-docs-taxonomy-audit.ko.md",
+    "_docs/registry.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-01-docs-taxonomy-audit.ko.md",
+    "_specs/workspace-platform/2026-06-01-docs-taxonomy-audit/plan.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-docs-taxonomy-audit.ko.md",
+    "_history/web-searches/2026/2026-06-01-docs-taxonomy-audit.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/user-requests/2026/2026-06-01.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-01-docs-taxonomy-audit.ko.md",
+    "_requirements/reviews/2026-06-01-docs-taxonomy-audit.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-01-docs-taxonomy-audit/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-docs-taxonomy-audit/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-docs-taxonomy-audit/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-01-docs-taxonomy-audit/validation.ko.md",
+    "_specs/workspace-platform/2026-06-01-docs-taxonomy-audit/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01.ko.md",
+    "_history/request-traces/2026/2026-06-01.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.en.md"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "If _docs gains many more categories, add a category ownership field and optional per-category maintainer guide.",
+    "If prose quality starts drifting, add a separate docs-style lint that checks headings and required sections."
+  ]
+}

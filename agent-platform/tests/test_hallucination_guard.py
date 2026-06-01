@@ -24,7 +24,7 @@ class HallucinationGuardTests(unittest.TestCase):
                 evidence=(
                     EvidenceItem(
                         evidence_id="repo-policy",
-                        source="_docs/hallucination-prevention-policy.ko.md",
+                        source="_docs/policies/hallucination-prevention-policy.ko.md",
                         source_type="repository_file",
                         reliability="Owned workspace policy.",
                     ),

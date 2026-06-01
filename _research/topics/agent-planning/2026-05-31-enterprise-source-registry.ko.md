@@ -24,7 +24,7 @@
 
 - 별도 기계 판독 registry: `agent-platform/configs/research/enterprise-source-registry.json`
 - 사람용 요약 목록: `_research/source-lists/enterprise-high-quality-sites.ko.md`
-- 관리 정책: `_docs/enterprise-source-list-policy.ko.md`
+- 관리 정책: `_docs/policies/enterprise-source-list-policy.ko.md`
 
 ## 적용
 

@@ -28,7 +28,7 @@
 | Zotero Item Types and Fields | https://www.zotero.org/support/kb/item_types_and_fields | item type, URL, DOI, accessed date 같은 reference field 모델 참고 |
 | Sourcemeta Registry Configuration | https://registry.sourcemeta.com/configuration/ | configuration-driven registry 패턴 참고 |
 | 기존 코딩 조사 에이전트 구현 | `agent-platform/src/agent_platform/planning/coding_research.py` | readiness check 추가 위치 |
-| 기존 출처 수집 정책 | `_docs/source-collection-policy.ko.md` | source type과 adoption signal 정책 |
+| 기존 출처 수집 정책 | `_docs/policies/source-collection-policy.ko.md` | source type과 adoption signal 정책 |
 
 ## 지식 베이스 검증
 

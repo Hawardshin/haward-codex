@@ -84,7 +84,7 @@
 
 오픈소스 코드는 그대로 복사하지 않는다. 라이선스, 유지보수 상태, 프로젝트 적합성, 보안 위험, 테스트 품질을 확인한 뒤 로컬 설계에 맞게 적용한다.
 
-오픈소스 설치가 필요하면 [_docs/open-source-installation-policy.ko.md](../../_docs/open-source-installation-policy.ko.md)와 [_ops/workflows/58-installation-record.md](../../_ops/workflows/58-installation-record.md)를 따른다. 실제 설치가 발생하면 `_history/installations/YYYY/`와 `_ops/installations/registry.json`을 갱신한다.
+오픈소스 설치가 필요하면 [_docs/policies/open-source-installation-policy.ko.md](../../_docs/policies/open-source-installation-policy.ko.md)와 [_ops/workflows/58-installation-record.md](../../_ops/workflows/58-installation-record.md)를 따른다. 실제 설치가 발생하면 `_history/installations/YYYY/`와 `_ops/installations/registry.json`을 갱신한다.
 
 ## 참고 설정 파일
 

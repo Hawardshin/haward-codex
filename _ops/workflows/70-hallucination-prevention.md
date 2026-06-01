@@ -61,6 +61,6 @@
 
 ## Related
 
-- [_docs/hallucination-prevention-policy.ko.md](../../_docs/hallucination-prevention-policy.ko.md)
+- [_docs/policies/hallucination-prevention-policy.ko.md](../../_docs/policies/hallucination-prevention-policy.ko.md)
 - [_ops/prompts/96-ground-output.md](../prompts/96-ground-output.md)
 - [agent-platform/docs/hallucination-guard-agent.ko.md](../../agent-platform/docs/hallucination-guard-agent.ko.md)

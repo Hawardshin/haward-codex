@@ -18,8 +18,8 @@ This note records references for closing coding research with implementation-rea
 | GitHub Docs, Syntax for issue forms: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms | structured form schema | Form syntax supports fields and validations. | `complete-coding-research` treats missing required questions as gaps. |
 | Guidelines for including grey literature and conducting multivocal literature reviews in software engineering: https://doi.org/10.1016/j.infsof.2018.09.006 | software engineering multivocal review | Software engineering MLRs combine formal literature with grey literature such as blogs and white papers. | Coding research should require explicit `source_types` and diverse source coverage. |
 | CMU SEI Digital Library: https://www.sei.cmu.edu/library/ | software engineering research and practice library | The library includes technical reports, white papers, presentations, and other publication types. | Coding research should use varied source types instead of a single channel. |
-| Internal policy: `_docs/source-collection-policy.en.md` | repository policy | Source collection should include official, paper, open-source, technical blog, community/social, and contrary examples when useful. | Coding research separates evidence from adoption signals. |
-| Internal policy: `_docs/search-insight-planning-policy.en.md` | repository policy | Search results should become decision-relevant insights and saved plan history. | Coding research stores planning process under `_history/plans/YYYY/`. |
+| Internal policy: `_docs/policies/source-collection-policy.en.md` | repository policy | Source collection should include official, paper, open-source, technical blog, community/social, and contrary examples when useful. | Coding research separates evidence from adoption signals. |
+| Internal policy: `_docs/policies/search-insight-planning-policy.en.md` | repository policy | Search results should become decision-relevant insights and saved plan history. | Coding research stores planning process under `_history/plans/YYYY/`. |
 
 ## Insights
 

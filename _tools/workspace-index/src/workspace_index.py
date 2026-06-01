@@ -96,7 +96,7 @@ def render_repository_map(root: Path) -> str:
             "- `_ops/index.md`: operations navigation",
             "- `_ops/prompts/00-router.md`: prompt selection",
             "- `_ops/workflows/00-start-here.md`: default work sequence",
-            "- `_docs/persistent-instructions.md`: durable user instructions",
+            "- `_docs/instructions/persistent-instructions.md`: durable user instructions",
             "- `agent-platform/README.md`: platform project overview",
             "",
             "## File Index",

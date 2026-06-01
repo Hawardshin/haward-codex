@@ -35,7 +35,7 @@
 ## Knowledge-Base Validation
 
 - Internal operating docs are used as evidence, so validate them with `knowledge-skeptic-agent`.
-- Validation targets: `_docs/web-first-work-policy.ko.md`, `_ops/workflows/05-web-first-intake.md`, `_ops/workflows/55-research-insight-planning.md`, `AGENTS.md`, `README.md`
+- Validation targets: `_docs/policies/web-first-work-policy.ko.md`, `_ops/workflows/05-web-first-intake.md`, `_ops/workflows/55-research-insight-planning.md`, `AGENTS.md`, `README.md`
 - Expected result: `ready_to_reference`
 
 ## Insights
@@ -46,7 +46,7 @@
 
 ## Plan Steps
 
-1. Add `_docs/source-collection-policy.ko.md` and `.en.md`.
+1. Add `_docs/policies/source-collection-policy.ko.md` and `.en.md`.
 2. Update web-first policy, web-first prompt/workflow, and research insight prompt/workflow with source bundle guidance.
 3. Update persistent instructions, workspace rules, README, AGENTS, and ops index.
 4. Save research notes under `_research/topics/agent-planning/`.

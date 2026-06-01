@@ -11,7 +11,7 @@ Re-check the overall structure improvement request and improve remaining folder 
 ## Evidence
 
 - Web search record: `_history/web-searches/2026/2026-06-01-structure-governance-audit.en.md`
-- Internal policy: `_ops/projects/root-structure-policy.json`, `_docs/project-boundary-policy.en.md`
+- Internal policy: `_ops/projects/root-structure-policy.json`, `_docs/policies/project-boundary-policy.en.md`
 - Existing audit result: root structure was clean, but project-internal top-level folder explanation checks were missing.
 
 ## Plan

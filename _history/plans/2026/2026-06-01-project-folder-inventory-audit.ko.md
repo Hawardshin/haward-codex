@@ -11,7 +11,7 @@
 ## 참고 근거
 
 - 웹 검색 기록: `_history/web-searches/2026/2026-06-01-structure-governance-audit.ko.md`
-- 내부 정책: `_ops/projects/root-structure-policy.json`, `_docs/project-boundary-policy.ko.md`
+- 내부 정책: `_ops/projects/root-structure-policy.json`, `_docs/policies/project-boundary-policy.ko.md`
 - 기존 감사 결과: root structure는 clean이지만 project-internal top-level folder 설명 검증은 없었다.
 
 ## 계획

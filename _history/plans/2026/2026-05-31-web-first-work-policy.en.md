@@ -30,12 +30,12 @@
 | OpenAI Knowledge Retrieval blueprint | https://openai.com/solutions/blueprints/knowledge-retrieval/ | Combining grounded answers, citations, and evals |
 | RAG NeurIPS paper | https://proceedings.neurips.cc/paper/2020/hash/6b493230-Abstract.html | Evidence for retrieval-augmented knowledge |
 | Anthropic Reduce hallucinations | https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations | Citation checks, uncertainty, validation of important information |
-| Existing operating docs | `AGENTS.md`, `_docs/search-insight-planning-policy.ko.md`, `_docs/hallucination-prevention-policy.ko.md`, `_ops/workflows/00-start-here.md` | Existing search and verification structure |
+| Existing operating docs | `AGENTS.md`, `_docs/policies/search-insight-planning-policy.ko.md`, `_docs/policies/hallucination-prevention-policy.ko.md`, `_ops/workflows/00-start-here.md` | Existing search and verification structure |
 
 ## Knowledge-Base Validation
 
 - Internal operating docs are used as evidence, so validate them with `knowledge-skeptic-agent`.
-- Validation targets: `AGENTS.md`, `README.md`, `_docs/search-insight-planning-policy.ko.md`, `_docs/hallucination-prevention-policy.ko.md`, `_ops/workflows/00-start-here.md`
+- Validation targets: `AGENTS.md`, `README.md`, `_docs/policies/search-insight-planning-policy.ko.md`, `_docs/policies/hallucination-prevention-policy.ko.md`, `_ops/workflows/00-start-here.md`
 - Expected result: `ready_to_reference`
 
 ## Insights
@@ -47,7 +47,7 @@
 
 ## Plan Steps
 
-1. Add `_docs/web-first-work-policy.ko.md` and `.en.md`.
+1. Add `_docs/policies/web-first-work-policy.ko.md` and `.en.md`.
 2. Add `_ops/prompts/05-web-first-intake.md` and `_ops/workflows/05-web-first-intake.md`.
 3. Update `AGENTS.md`, `README.md`, persistent instructions, workspace rules, platform operating model, start workflow, and prompt router.
 4. Update search insight planning and hallucination prevention policies with the web-first rule.

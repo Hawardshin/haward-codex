@@ -34,7 +34,7 @@ Strengthen `research-insight-planner-agent` from a search-summary helper into a 
 - [The Atlantic: Generative AI Can't Cite Its Sources](https://www.theatlantic.com/technology/archive/2024/06/chatgpt-citations-rag/678796/)
 - `agent-platform/src/agent_platform/planning/research_insight_planner.py`
 - `agent-platform/configs/research/source-registry.json`
-- `_docs/search-insight-planning-policy.ko.md`
+- `_docs/policies/search-insight-planning-policy.ko.md`
 - `AGENTS.md`
 
 ## Insights

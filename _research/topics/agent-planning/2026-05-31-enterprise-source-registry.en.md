@@ -24,7 +24,7 @@ Large-company engineering blogs, official research labs, architecture centers, a
 
 - Machine-readable registry: `agent-platform/configs/research/enterprise-source-registry.json`
 - Human-readable summary list: `_research/source-lists/enterprise-high-quality-sites.en.md`
-- Management policy: `_docs/enterprise-source-list-policy.en.md`
+- Management policy: `_docs/policies/enterprise-source-list-policy.en.md`
 
 ## Application
 

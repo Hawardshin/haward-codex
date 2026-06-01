@@ -112,7 +112,7 @@ class CodingResearchTests(unittest.TestCase):
                 coding_context="agent-platform planning helpers and operations prompts.",
                 research_types=("architecture", "implementation_pattern"),
                 search_channels=("web search", "repository search"),
-                sources_checked=("https://www.thoughtworks.com/en-us/radar/faq", "_docs/search-insight-planning-policy.ko.md", "https://stackoverflow.com/questions/tagged/python"),
+                sources_checked=("https://www.thoughtworks.com/en-us/radar/faq", "_docs/policies/search-insight-planning-policy.ko.md", "https://stackoverflow.com/questions/tagged/python"),
                 source_types=("official", "reference_implementation", "tech_blog", "community", "internal"),
                 reference_config_paths=("agent-platform/configs/research/coding-research-profile.json",),
                 **complete_code_references(),

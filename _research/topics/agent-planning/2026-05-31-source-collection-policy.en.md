@@ -57,7 +57,7 @@ Record evidence for collecting many high-authority sources, international tech b
 
 ## Related Work
 
-- `_docs/source-collection-policy.en.md`
+- `_docs/policies/source-collection-policy.en.md`
 - `_ops/workflows/05-web-first-intake.md`
 - `_ops/workflows/55-research-insight-planning.md`
 

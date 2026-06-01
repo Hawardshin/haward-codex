@@ -6,7 +6,7 @@
 | REQ-WS-020 | `spec.en.md` | `agent-platform/src/agent_platform/evaluation/work_evaluator.py` | `agent-platform/tests/test_work_evaluator.py` |
 | REQ-WS-020 | `plan.en.md` | `_ops/workflows/02-select-work-mode.md`, `_ops/prompts/02-select-work-mode.md` | doc review, workspace index |
 | REQ-WS-020 | `plan.en.md` | `_ops/backlog/deferred-improvements.en.md` | evaluator `deferred_improvement_targets` |
-| REQ-WS-020 | `validation.en.md` | `_docs/persistent-instructions.md`, `AGENTS.md`, `README.md` | memory bootstrap, final evaluation |
+| REQ-WS-020 | `validation.en.md` | `_docs/instructions/persistent-instructions.md`, `AGENTS.md`, `README.md` | memory bootstrap, final evaluation |
 
 ## Request Link
 

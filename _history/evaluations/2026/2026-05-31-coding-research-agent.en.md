@@ -20,8 +20,8 @@
 - ADR GitHub Organization: https://adr.github.io/
 - GitHub Docs, Configuring issue templates: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository
 - GitHub Docs, Syntax for issue forms: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms
-- Internal source collection policy: `_docs/source-collection-policy.en.md`
-- Internal search insight planning policy: `_docs/search-insight-planning-policy.en.md`
+- Internal source collection policy: `_docs/policies/source-collection-policy.en.md`
+- Internal search insight planning policy: `_docs/policies/search-insight-planning-policy.en.md`
 - Plan history: `_history/plans/2026/2026-05-31-coding-research-agent.en.md`
 
 ## Grounding Checks

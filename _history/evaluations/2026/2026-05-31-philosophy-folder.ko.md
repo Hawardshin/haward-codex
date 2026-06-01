@@ -19,9 +19,9 @@
 - `_history/plans/2026/2026-05-31-philosophy-folder.ko.md`
 - `README.md`
 - `AGENTS.md`
-- `_docs/search-insight-planning-policy.ko.md`
-- `_docs/knowledge-base-validation-policy.ko.md`
-- `_docs/platform-operating-model.md`
+- `_docs/policies/search-insight-planning-policy.ko.md`
+- `_docs/policies/knowledge-base-validation-policy.ko.md`
+- `_docs/operating-models/platform-operating-model.md`
 - `_ops/index.md`
 
 이번 작업은 내부 철학/문서 구조 변경이므로 추가 인터넷 조사는 필요하지 않았다.

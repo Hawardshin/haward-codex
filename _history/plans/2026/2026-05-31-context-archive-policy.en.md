@@ -16,7 +16,7 @@ The user instructed the agent to summarize and archive context proactively when 
 - Evaluating Very Long-Term Conversational Memory of LLM Agents: long-term conversation memory evaluation
 - Active Context Compression: agent-managed context bloat
 - Microsoft Agent Framework Memory and Persistence: separation of memory, history, and session state
-- Internal docs: `_docs/context-management.md`, `_docs/memory-bootstrap-policy.ko.md`, `_ops/prompts/50-compress-context.md`
+- Internal docs: `_docs/operating-models/context-management.md`, `_docs/policies/memory-bootstrap-policy.ko.md`, `_ops/prompts/50-compress-context.md`
 
 ## Insights
 

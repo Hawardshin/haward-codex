@@ -57,7 +57,7 @@
 
 ## 관련 작업
 
-- `_docs/source-collection-policy.ko.md`
+- `_docs/policies/source-collection-policy.ko.md`
 - `_ops/workflows/05-web-first-intake.md`
 - `_ops/workflows/55-research-insight-planning.md`
 
