@@ -14,4 +14,4 @@
 | Structure audit | `_tools/structure-audit/` |
 | Monitor | `workspace-monitor/scripts/collect-workspace.mjs`, `workspace-monitor/lib/snapshot.ts` |
 | 평가 | `_history/evaluations/2026/2026-06-01-tool-agnostic-agent-principles.ko.md` |
-| 커밋 | 검증 후 기록 |
+| 커밋 | `453dd98` |

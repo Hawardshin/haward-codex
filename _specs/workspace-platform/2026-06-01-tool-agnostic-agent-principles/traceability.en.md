@@ -14,4 +14,4 @@
 | Structure audit | `_tools/structure-audit/` |
 | Monitor | `workspace-monitor/scripts/collect-workspace.mjs`, `workspace-monitor/lib/snapshot.ts` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-tool-agnostic-agent-principles.en.md` |
-| Commit | Record after verification |
+| Commit | `453dd98` |

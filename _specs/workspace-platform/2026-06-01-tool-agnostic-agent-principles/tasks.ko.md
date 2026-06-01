@@ -13,4 +13,4 @@
 - [x] workspace monitor snapshot source 갱신
 - [x] 검증 실행
 - [x] 평가, 히스토리, 요청 추적 갱신
-- [ ] 커밋 및 push
+- [x] 커밋 및 push
