@@ -12,16 +12,19 @@
    - 슬라이드 수, 레이아웃 분포, 제목 길이, 본문 밀도, 원격/미확인 에셋 사용 여부를 확인한다.
 2. 기존 Python 단위 테스트와 카탈로그 검증을 실행한다.
 3. HTML 덱을 재생성하고 원격 에셋이 없는지 정적 검사한다.
-4. Playwright 도입 이후에는 데스크톱/모바일형 viewport에서 열림, 키보드 이동, nonblank slide, print 구조를 확인한다.
-5. axe-core 도입 이후에는 자동 접근성 위반을 확인하되, 자동 검사만으로 발표 품질이 보장된다고 보지 않는다.
+4. Playwright 검증은 `cd presentation-agent && npm run test:browser`로 실행한다.
+   - Chromium desktop/mobile viewport에서 HTML 덱이 열린다.
+   - `.pa-slide`가 있는 실제 덱만 검증하고, 링크 인덱스 HTML은 제외한다.
+   - 키보드 이동, nonblank slide, 진행률, 발표자 노트 토글을 확인한다.
+5. axe-core 검증은 같은 Playwright test 안에서 자동 접근성 위반을 확인한다. 단, 자동 검사만으로 발표 품질이 보장된다고 보지 않는다.
 6. 시각 회귀 검증은 브라우저, OS, font, viewport, snapshot update 규칙이 고정된 뒤 blocking check로 승격한다.
 7. LLM/에이전트 평가 하네스는 프롬프트 입출력 계약이 안정된 뒤 prompt drift와 evidence grounding 회귀 검사에 사용한다.
 
 ## 채택 우선순위
 
 - 1순위: Python 기반 no-install `deck-spec` 품질 하네스.
-- 2순위: Playwright HTML 렌더 smoke test.
-- 3순위: `@axe-core/playwright` 접근성 scan.
+- 2순위: Playwright HTML 렌더 smoke test. 현재 `presentation-agent`에 설치됨.
+- 3순위: `@axe-core/playwright` 접근성 scan. 현재 `presentation-agent`에 설치됨.
 - 4순위: Playwright screenshot baseline.
 - 5순위: promptfoo, DeepEval, Inspect AI 같은 LLM/agent 평가 하네스.
 
@@ -36,3 +39,5 @@
 
 - `presentation-agent/configs/evaluation/harness-candidates.json`
 - `presentation-agent/docs/research/2026-06-01-open-source-harness-review.ko.md`
+- `presentation-agent/playwright.config.ts`
+- `presentation-agent/tests/browser/html-deck.spec.ts`

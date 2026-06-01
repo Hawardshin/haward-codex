@@ -228,6 +228,33 @@
       "rollback_path": "Remove workspace-monitor/node_modules and package-lock.json, then remove dependencies from workspace-monitor/package.json or revert the commit.",
       "installation_record_path": "_history/installations/2026/2026-06-01-workspace-monitor-nextjs.ko.md",
       "commit": "a8c085e"
+    },
+    {
+      "id": "2026-06-01-presentation-agent-playwright",
+      "date": "2026-06-01",
+      "status": "installed",
+      "name": "presentation-agent Playwright browser validation",
+      "scope": "project",
+      "owning_project": "presentation-agent",
+      "package_manager": "npm",
+      "install_command": "npm install --save-dev --save-exact @playwright/test @axe-core/playwright; npx playwright install chromium",
+      "environment_path": "presentation-agent/node_modules/ and /Users/shinjoungeun/Library/Caches/ms-playwright/",
+      "dependency_record_paths": [
+        "presentation-agent/package.json",
+        "presentation-agent/package-lock.json"
+      ],
+      "version_or_lock_status": "Exact devDependency versions recorded in package.json and package-lock.json; Chromium browser binary installed through Playwright cache.",
+      "security_review": "npm audit reported 0 vulnerabilities after install. Packages are project-local devDependencies; browser binary is installed in the user Playwright cache.",
+      "license_review": "@playwright/test@1.60.0 license Apache-2.0; @axe-core/playwright@4.11.3 and axe-core@4.11.4 license MPL-2.0.",
+      "verification": [
+        "npm ls --depth=0: @axe-core/playwright@4.11.3 and @playwright/test@1.60.0 installed",
+        "npm audit --json: 0 vulnerabilities",
+        "npx playwright --version: Version 1.60.0",
+        "npm run test:browser: 20 Playwright browser/accessibility tests passed under approved external execution"
+      ],
+      "rollback_path": "Run npm uninstall @playwright/test @axe-core/playwright from presentation-agent and npx playwright uninstall chromium, then remove package-lock/package.json/playwright config/test files if no longer needed.",
+      "installation_record_path": "_history/installations/2026/2026-06-01-presentation-agent-playwright.ko.md",
+      "commit": "pending"
     }
   ]
 }

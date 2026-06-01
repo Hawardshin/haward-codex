@@ -42,6 +42,8 @@ presentation-agent/
 - `docs/workflows/imported-ppt-reference-workflow.ko.md`: 사용자가 가져온 PPT/PPTX를 디자인 토큰과 레이아웃 archetype으로 전환하는 workflow.
 - `docs/workflows/presentation-quality-harness-workflow.ko.md`: deck spec, HTML, PPTX 품질 하네스 적용 순서.
 - `docs/research/2026-06-01-open-source-harness-review.ko.md`: 오픈소스 평가 하네스 조사와 적용 판단.
+- `playwright.config.ts`: 생성 HTML 덱을 Chromium desktop/mobile viewport와 axe-core로 검증하는 Playwright 설정.
+- `tests/browser/html-deck.spec.ts`: HTML 덱 렌더링, 키보드 이동, 발표자 노트, 접근성 smoke test.
 - `data/assets/raw/user-provided/`: 사용자가 제공한 PPT/PPTX를 임시 분석하는 local-only 위치.
 - `src/presentation_agent/catalog.py`: 카탈로그 검증과 요약 CLI.
 - `src/presentation_agent/pptx_to_html.py`: 라이선스가 허용된 PPTX를 기본 HTML 구조로 변환하는 최소 도구.
@@ -66,4 +68,7 @@ PYTHONPATH=presentation-agent/src python3 -m presentation_agent.catalog presenta
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/presentation-agent-kickoff.ko.json presentation-agent/artifacts/html/presentation-agent-kickoff.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.artifact_pptx presentation-agent/data/deck-specs/presentation-agent-kickoff.ko.json outputs/manual-presentation-agent/presentations/presentation-agent-kickoff --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/workspace-platform-overview.ko.json presentation-agent/artifacts/html/workspace-platform-overview.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
+cd presentation-agent && npm run test:browser
 ```
+
+브라우저 검증을 처음 실행하는 환경에서는 먼저 `cd presentation-agent && npm install && npm run install:browsers`를 실행한다.

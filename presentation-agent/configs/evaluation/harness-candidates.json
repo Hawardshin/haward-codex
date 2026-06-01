@@ -256,18 +256,18 @@
       "lane": "browser_render_accessibility",
       "type": "open_source_tool",
       "fit": "strong_near_term_fit",
-      "adoption_status": "defer_until_install_audit",
+      "adoption_status": "installed_for_browser_smoke",
       "installation_posture": "project_local_node_dependency",
-      "notes": "Useful for opening generated HTML decks, checking navigation, and later screenshot baselines. Visual baselines need fixed environment rules."
+      "notes": "Installed project-locally in presentation-agent with @playwright/test 1.60.0 and Chromium v1223. Used for generated HTML deck desktop/mobile render, navigation, nonblank slide, controls, progress, and presenter notes checks. Visual baselines still need fixed environment rules."
     },
     {
       "id": "axe_core_playwright",
       "lane": "browser_render_accessibility",
       "type": "open_source_tool",
       "fit": "strong_near_term_fit",
-      "adoption_status": "pair_with_playwright",
+      "adoption_status": "installed_for_accessibility_scan",
       "installation_posture": "project_local_node_dependency",
-      "notes": "Automated accessibility scans catch common issues but must be paired with manual review for slide readability and narrative quality."
+      "notes": "Installed project-locally as @axe-core/playwright 4.11.3 and run inside the Playwright browser test. Automated scans catch common accessibility issues but must be paired with manual review for slide readability and narrative quality."
     },
     {
       "id": "promptfoo",
@@ -344,7 +344,7 @@
   ],
   "adoption_gates": [
     "Write a no-install static deck quality harness before adding browser dependencies.",
-    "Before Playwright or axe-core installation, create an installation audit record, license review, security review, exact command, verification step, and rollback plan.",
+    "Playwright and axe-core installation now has an audit record under _history/installations/2026/2026-06-01-presentation-agent-playwright.ko.md; future upgrades still require a new installation audit or update record.",
     "Before visual regression becomes blocking, define viewport, browser, font, OS, snapshot update, and false-positive handling rules.",
     "Before LLM harness adoption, define deterministic prompt inputs, expected output contracts, cost controls, API-key handling, and evaluator disagreement policy.",
     "Before using benchmark-inspired rubrics as acceptance criteria, translate them into local deck-specific checks and run a manual sanity review."
@@ -361,12 +361,12 @@
     },
     {
       "order": 2,
-      "action": "Add optional Playwright plus axe-core browser smoke tests after install audit.",
+      "action": "Maintain Playwright plus axe-core browser smoke tests and run them after generated HTML deck changes.",
       "target_paths": [
         "presentation-agent/package.json",
         "presentation-agent/tests/browser/"
       ],
-      "reason": "Generated HTML decks need render, navigation, responsive, and accessibility checks."
+      "reason": "Generated HTML decks now have project-local Chromium render, navigation, responsive, and accessibility checks."
     },
     {
       "order": 3,

@@ -89,8 +89,15 @@ The presentation agent researches strong presentation design, PPT/HTML reference
 - LLM and agent evaluation harnesses such as Inspect AI, OpenAI Evals, promptfoo, and DeepEval are reviewed for later use after presentation script and design-generation prompts become repeatable.
 - Presentation-specific research benchmarks can inform evaluation axes from PPTAgent/PPTEval, SlideAudit, and PresentBench, but papers and benchmark results are not treated as direct quality guarantees.
 
+### REQ-PA-015 Playwright Browser Validation
+
+- `presentation-agent` must be able to validate generated HTML decks with project-local Playwright Test and `@axe-core/playwright`.
+- Validation targets only HTML files that contain real slide structure through `.pa-slide`; link index HTML is excluded from deck validation.
+- Validation checks Chromium desktop/mobile rendering, nonblank slides, keyboard navigation, progress, presenter notes toggling, and automated accessibility violations.
+- Playwright package installation and browser binary downloads are recorded under `_history/installations/` and `_ops/installations/registry.json`.
+
 ## Non-Scope
 
 - This baseline does not bulk-download presentation files.
 - This baseline does not install a pixel-faithful PPTX rendering engine.
-- This baseline does not immediately install new harness dependencies.
+- Visual regression screenshot baselines are not yet blocking validation.

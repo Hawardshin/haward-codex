@@ -28,6 +28,9 @@ coverage/
 .next/
 out/
 *.tsbuildinfo
+test-results/
+playwright-report/
+blob-report/
 
 # Python
 __pycache__/

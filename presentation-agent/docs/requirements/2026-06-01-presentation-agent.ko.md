@@ -89,8 +89,15 @@
 - LLM/에이전트 평가 하네스는 Inspect AI, OpenAI Evals, promptfoo, DeepEval 같은 도구를 검토하되, 발표 스크립트/디자인 생성 프롬프트가 반복 실행 가능한 형태가 된 뒤 적용한다.
 - 발표 특화 연구 벤치마크는 PPTAgent/PPTEval, SlideAudit, PresentBench의 평가 축을 참고하되, 논문/벤치마크 결과를 그대로 품질 보증으로 간주하지 않는다.
 
+### REQ-PA-015 Playwright 브라우저 검증
+
+- `presentation-agent`는 project-local Playwright Test와 `@axe-core/playwright`로 생성 HTML 덱을 검증할 수 있어야 한다.
+- 검증 대상은 실제 슬라이드 구조인 `.pa-slide`를 포함한 HTML 덱으로 제한하고, 링크 인덱스 HTML은 덱 검증에서 제외한다.
+- 검증은 Chromium desktop/mobile viewport에서 열림, nonblank slide, 키보드 이동, 진행률, 발표자 노트 토글, 자동 접근성 위반을 확인한다.
+- Playwright 설치와 browser binary 다운로드는 `_history/installations/`와 `_ops/installations/registry.json`에 기록한다.
+
 ## 비범위
 
 - 이번 기준선은 실제 발표 PPT 파일을 대량 다운로드하지 않는다.
 - 이번 기준선은 픽셀 단위 PPTX 렌더링 엔진을 설치하지 않는다.
-- 이번 기준선은 새 하네스 의존성을 즉시 설치하지 않는다.
+- 시각 회귀 screenshot baseline은 아직 blocking 검증으로 사용하지 않는다.

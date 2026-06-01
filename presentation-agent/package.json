@@ -1,0 +1,16 @@
+{
+  "name": "presentation-agent-browser-validation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Project-local Playwright validation harness for generated presentation-agent HTML decks.",
+  "scripts": {
+    "install:browsers": "playwright install chromium",
+    "test:browser": "playwright test",
+    "test:browser:headed": "playwright test --headed",
+    "test:browser:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.11.3",
+    "@playwright/test": "1.60.0"
+  }
+}

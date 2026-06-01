@@ -1,0 +1,208 @@
+{
+  "research_goal": "Select and implement a project-local browser validation harness for presentation-agent generated HTML decks.",
+  "coding_context": "presentation-agent currently renders HTML presentation decks through Python, but needs real browser validation for Chromium rendering, navigation, presenter controls, and automated accessibility checks.",
+  "research_types": [
+    "api_docs",
+    "library_selection",
+    "testing",
+    "open_source",
+    "implementation_pattern"
+  ],
+  "search_channels": [
+    "web search",
+    "official documentation search",
+    "repository search",
+    "package registry search",
+    "local repository code search"
+  ],
+  "sources_checked": [
+    "https://playwright.dev/docs/intro",
+    "https://playwright.dev/docs/browsers",
+    "https://playwright.dev/docs/accessibility-testing",
+    "https://playwright.dev/docs/test-snapshots",
+    "https://github.com/microsoft/playwright",
+    "https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright",
+    "https://github.com/microsoft/playwright/issues?q=MachPortRendezvousServer",
+    "presentation-agent/src/presentation_agent/html_deck.py",
+    "presentation-agent/tests/test_html_deck.py",
+    "presentation-agent/configs/evaluation/harness-candidates.json"
+  ],
+  "source_types": [
+    "official",
+    "open_source",
+    "community",
+    "internal"
+  ],
+  "reference_config_paths": [
+    "agent-platform/configs/research/source-registry.json",
+    "agent-platform/configs/research/coding-research-profile.json",
+    "presentation-agent/configs/evaluation/harness-candidates.json"
+  ],
+  "source_value_provenance": [
+    "Playwright Test install command and browser install command <- https://playwright.dev/docs/intro and https://playwright.dev/docs/browsers checked 2026-06-01",
+    "@axe-core/playwright usage pattern <- https://playwright.dev/docs/accessibility-testing checked 2026-06-01",
+    "screenshot baseline deferral <- https://playwright.dev/docs/test-snapshots checked 2026-06-01; host rendering differences can affect screenshots",
+    "HTML deck selectors <- presentation-agent/artifacts/html/*.html and presentation-agent/src/presentation_agent/html_deck.py checked 2026-06-01",
+    "sandbox Mach port failure <- local npm run test:browser command output checked 2026-06-01"
+  ],
+  "plan_evidence": [
+    "Use project-local npm devDependencies <- open-source installation policy and presentation-agent project boundary",
+    "Use TypeScript Playwright tests <- Playwright official docs and generated HTML deck is browser-facing",
+    "Use desktop/mobile Chromium projects <- user request asks Playwright validation and current generated decks need responsive validation",
+    "Exclude platform-presentation-pack-index.html from deck tests <- local artifact inspection shows it is an index, not a .pa-slide deck",
+    "Run browser tests outside Codex sandbox when needed <- local MachPortRendezvousServer permission failure under sandbox"
+  ],
+  "technology_stack": [
+    "Node.js",
+    "npm",
+    "TypeScript",
+    "Playwright Test 1.60.0",
+    "@axe-core/playwright 4.11.3",
+    "Chromium 148.0.7778.96"
+  ],
+  "technology_official_docs": [
+    "https://nodejs.org/en/docs",
+    "https://docs.npmjs.com/",
+    "https://www.typescriptlang.org/docs/",
+    "https://playwright.dev/docs/intro",
+    "https://playwright.dev/docs/browsers",
+    "https://playwright.dev/docs/accessibility-testing"
+  ],
+  "stack_version_constraints": [
+    "Installed @playwright/test@1.60.0 as an exact devDependency.",
+    "Installed @axe-core/playwright@4.11.3 as an exact devDependency.",
+    "Installed Chromium through Playwright as Chrome for Testing 148.0.7778.96 / playwright chromium v1223.",
+    "Node.js version in this environment reports v23.4.0 for package metadata inspection."
+  ],
+  "issue_discussion_sources": [
+    "https://github.com/microsoft/playwright/issues?q=MachPortRendezvousServer",
+    "local command output from npm run test:browser under sandbox showing bootstrap_check_in MachPortRendezvousServer Permission denied"
+  ],
+  "issue_discussion_notes": [
+    "The local sandbox failed to launch Chromium due macOS Mach port permissions. Approved external execution is required in this Codex environment, while normal terminal execution should not need Codex sandbox escalation.",
+    "Issue/discussion signals are used to classify launch-environment risk, not to prove product behavior."
+  ],
+  "community_signal_notes": [
+    "GitHub issues and repository activity were treated as operational risk signals only.",
+    "Playwright and axe-core adoption is grounded in official docs plus local passing tests rather than stars or popularity."
+  ],
+  "language_options": [
+    "TypeScript with Playwright Test for first-class browser test configuration, selectors, fixtures, traces, and axe integration.",
+    "Python Playwright for staying in the existing Python-first project runtime.",
+    "Shell-only browser smoke checks using open or static scans."
+  ],
+  "selected_language": "TypeScript with Playwright Test",
+  "language_decision_notes": [
+    "TypeScript is the native path for Playwright Test examples, config, fixtures, reporters, traces, and @axe-core/playwright integration.",
+    "Python remains the project runtime for deck generation, but browser validation is frontend-facing and benefits from Playwright's Node test runner.",
+    "Shell-only checks cannot validate DOM state, keyboard navigation, or accessibility scan results with enough structure."
+  ],
+  "code_reference_sources": [
+    "https://playwright.dev/docs/intro",
+    "https://playwright.dev/docs/accessibility-testing",
+    "https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright",
+    "presentation-agent/tests/test_html_deck.py",
+    "presentation-agent/artifacts/html/presentation-agent-kickoff.html"
+  ],
+  "code_reference_notes": [
+    "Playwright official examples support defineConfig, projects, page.goto, locator assertions, and keyboard events.",
+    "@axe-core/playwright examples use AxeBuilder with a Playwright page and return violations.",
+    "Existing Python tests validate generation, while new browser tests validate runtime HTML behavior.",
+    "Generated HTML uses .pa-slide, .pa-count, .pa-controls, .pa-presenter, and data-action selectors that are stable enough for smoke tests."
+  ],
+  "architecture_reference_sources": [
+    "https://c4model.com/",
+    "https://playwright.dev/docs/test-configuration",
+    "https://playwright.dev/docs/accessibility-testing",
+    "presentation-agent/configs/evaluation/harness-candidates.json",
+    "presentation-agent/docs/workflows/presentation-quality-harness-workflow.ko.md"
+  ],
+  "architecture_theory_sources": [
+    "https://playwright.dev/docs/test-configuration",
+    "https://playwright.dev/docs/test-snapshots"
+  ],
+  "architecture_practitioner_sources": [
+    "https://github.com/microsoft/playwright/issues?q=MachPortRendezvousServer",
+    "https://github.com/microsoft/playwright/issues?q=accessibility+axe"
+  ],
+  "architecture_options": [
+    "Project-local Playwright harness under presentation-agent with package.json, playwright.config.ts, and tests/browser.",
+    "Shared workspace-wide browser validation tool under _tools/ that validates multiple projects.",
+    "Python-only static or Playwright wrapper inside presentation-agent/src."
+  ],
+  "architecture_decision_notes": [
+    "Selected project-local Playwright harness because the generated HTML decks are project-owned and validation should move with presentation-agent.",
+    "Rejected a shared _tools browser harness because only presentation-agent currently owns slide DOM and selectors.",
+    "Rejected Python-only wrapper because @axe-core/playwright and Playwright Test config/reporting are more direct in Node/TypeScript."
+  ],
+  "architecture_tradeoff_notes": [
+    "Formal Playwright guidance favors Playwright Test projects/config, while practitioner risk signals warn that browser launch can depend on host permissions.",
+    "Keeping the harness project-local reduces cross-project dependency blast radius but adds a Node devDependency to an otherwise Python-first project.",
+    "Screenshot baseline is deferred because Playwright docs note environment differences can affect snapshots."
+  ],
+  "folder_structure_options": [
+    "presentation-agent/tests/browser with Playwright spec files and root-level presentation-agent/playwright.config.ts.",
+    "presentation-agent/browser-tests with separate config and fixtures.",
+    "_tools/browser-validation with project-specific adapters."
+  ],
+  "folder_structure_decision_notes": [
+    "Selected presentation-agent/tests/browser because tests stay under the owning project and separate browser tests from Python unit tests.",
+    "Root-level presentation-agent/playwright.config.ts follows Playwright convention and keeps npm scripts simple.",
+    "Generated reports and test-results are ignored to avoid repository noise."
+  ],
+  "folder_semantics_notes": [
+    "presentation-agent/tests/browser contains browser-facing validation for generated HTML artifacts.",
+    "presentation-agent/playwright.config.ts owns browser projects, reporter settings, traces, screenshots, and test discovery.",
+    "presentation-agent/package.json owns only project-local browser validation scripts and devDependencies."
+  ],
+  "maintainability_notes": [
+    "Exact npm devDependency versions and package-lock make the browser validation reproducible.",
+    "Tests discover actual slide decks by checking for .pa-slide so index HTML files do not create false failures.",
+    "The harness validates multiple generated decks in both desktop and mobile viewports without duplicating test code."
+  ],
+  "source_bundle_report": "",
+  "findings": [
+    "Playwright Test is the best fit for browser-level validation of generated HTML decks.",
+    "@axe-core/playwright fits automated accessibility scans but does not replace manual presentation quality review.",
+    "Visual screenshot baselines should stay deferred until environment rules are fixed.",
+    "Codex sandbox may block Chromium on macOS; approved external execution passes."
+  ],
+  "options": [
+    "Project-local TypeScript Playwright harness: best fit, adds Node devDependencies but provides first-class browser validation.",
+    "Python Playwright wrapper: keeps Python-first shape, but weaker fit for @axe-core/playwright and Playwright Test projects.",
+    "Static-only validation: no install, but cannot prove real browser behavior."
+  ],
+  "recommendation": "Implement project-local TypeScript Playwright Test plus @axe-core/playwright for generated HTML deck smoke and accessibility validation.",
+  "post_research_answers": {
+    "what_was_verified": "Official Playwright install/browser/accessibility docs, existing presentation-agent HTML deck structure, package versions, local sandbox behavior, and browser test pass conditions.",
+    "best_option": "Project-local TypeScript Playwright Test with @axe-core/playwright.",
+    "why_this_option": "It directly validates browser-rendered HTML decks, keyboard navigation, presenter controls, mobile/desktop viewports, and automated accessibility violations.",
+    "alternatives_rejected": "Python Playwright wrapper was rejected for weaker integration with Playwright Test conventions; shared _tools harness was rejected because deck selectors are presentation-agent specific; static-only checks were rejected because the user asked for Playwright validation.",
+    "implementation_impact": "Add presentation-agent/package.json, package-lock.json, playwright.config.ts, tests/browser/html-deck.spec.ts, README/workflow updates, and installation audit records.",
+    "risks_and_unknowns": "Playwright browser execution needs approved external execution in Codex on this macOS sandbox; visual snapshots are still deferred; axe cannot judge narrative quality.",
+    "validation_plan": "Run npm audit, npm ls, npx playwright --version, npm run test:browser, Python unit tests, config contract, workspace health, grounding, and work evaluation.",
+    "reusable_knowledge": "Keep Playwright/axe install and sandbox behavior in installation records and presentation quality harness workflow.",
+    "next_action": "Run complete-coding-research, finish docs/history/evaluation, then commit and push."
+  },
+  "validation_steps": [
+    "npm audit --json",
+    "npm ls --depth=0",
+    "npx playwright --version",
+    "npm run test:browser",
+    "PYTHONPATH=presentation-agent/src python3 -m unittest discover -s presentation-agent/tests",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../presentation-agent/configs/evaluation/harness-candidates.json ../_ops/installations/registry.json"
+  ],
+  "risks_or_unknowns": [
+    "Codex sandbox can block Chromium; external approved execution was required.",
+    "Browser binary lives in user Playwright cache, so another machine must run npm run install:browsers first.",
+    "No screenshot baseline has been added yet."
+  ],
+  "capture_targets": [
+    "presentation-agent/docs/workflows/presentation-quality-harness-workflow.ko.md",
+    "_history/installations/2026/2026-06-01-presentation-agent-playwright.ko.md"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-01-playwright-browser-validation.ko.md"
+  ],
+  "knowledge_validation_status": "ready_to_reference"
+}

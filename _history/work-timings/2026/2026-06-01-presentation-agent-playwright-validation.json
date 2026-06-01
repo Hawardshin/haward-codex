@@ -1,0 +1,77 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-01-presentation-agent-playwright-validation",
+  "title": "Install Playwright browser validation for presentation-agent",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": "2026-06-01T21:38:16+0900",
+  "measurement_note": "Timing record was created after web-first intake and installation had already started, so early phases are recorded as partial or not measured.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Official Playwright install, browser, accessibility, and snapshot docs were checked before implementation."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before the timing record was created."
+    },
+    {
+      "phase_id": "installation_and_implementation",
+      "label": "Installation and implementation",
+      "status": "completed",
+      "started_at": "2026-06-01T21:24:00+0900",
+      "ended_at": "2026-06-01T21:29:30+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Added package/config/test files, installed npm devDependencies, and downloaded Chromium browser binaries."
+    },
+    {
+      "phase_id": "browser_validation_rework",
+      "label": "Browser validation and rework",
+      "status": "completed",
+      "started_at": "2026-06-01T21:29:30+0900",
+      "ended_at": "2026-06-01T21:32:20+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Initial sandbox run failed on macOS Mach port permissions; external execution passed after excluding the link index HTML from deck validation."
+    },
+    {
+      "phase_id": "documentation_history",
+      "label": "Documentation and history",
+      "status": "completed",
+      "started_at": "2026-06-01T21:32:20+0900",
+      "ended_at": "2026-06-01T21:35:04+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Updated requirements, workflow, installation records, registry, specs, request traces, and work summaries."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "started_at": "2026-06-01T21:35:04+0900",
+      "ended_at": "2026-06-01T21:38:16+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Ran Python tests, catalog validation, JSON/config checks, npm audit, npm ls, Playwright version, Playwright browser tests, workspace monitor check/test/build, workspace index, and governance health."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Will be completed after verification."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "installation_and_implementation",
+    "interpretation": "The largest estimated cost was installing browser binaries and adapting the test target list after actual execution revealed the link index is not a slide deck.",
+    "improvement_candidates": [
+      "Keep browser validation target discovery tied to .pa-slide so future index pages do not cause false failures.",
+      "Run Playwright validation from a normal terminal or approved external execution when using Codex on macOS."
+    ]
+  }
+}
