@@ -1,0 +1,100 @@
+{
+  "task": "CLI pipeline orchestration final factual claims",
+  "output_summary": "The work adds a CLI pipeline validator, template, agent docs, evaluator gate, and operations navigation for multi-process CLI orchestration.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "python-subprocess-docs",
+      "source": "https://docs.python.org/3/library/subprocess.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Python standard library documentation for subprocess behavior."
+    },
+    {
+      "evidence_id": "node-child-process-docs",
+      "source": "https://nodejs.org/api/child_process.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Node.js API documentation for child process streams."
+    },
+    {
+      "evidence_id": "bash-pipeline-docs",
+      "source": "https://www.gnu.org/software/bash/manual/html_node/Pipelines.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Bash reference manual for pipeline semantics."
+    },
+    {
+      "evidence_id": "owasp-command-injection",
+      "source": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Widely used OWASP security guidance for command injection prevention."
+    },
+    {
+      "evidence_id": "repo-implementation",
+      "source": "agent-platform/src/agent_platform/integrations/cli_pipeline.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local implementation added in this change."
+    },
+    {
+      "evidence_id": "test-output",
+      "source": "cd agent-platform && python3 -m unittest discover -s tests: 138 tests OK",
+      "source_type": "test_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Local unit test result from this work session."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The change adds a check-cli-pipeline CLI command and a CLI pipeline validator.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "repo-implementation",
+        "test-output"
+      ],
+      "verification_steps": [
+        "Inspected agent-platform/src/agent_platform/cli.py and ran unit tests."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The validator models multi-CLI orchestration as process nodes and pipe edges rather than shell string pipelines.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "repo-implementation",
+        "bash-pipeline-docs"
+      ],
+      "verification_steps": [
+        "Inspected cli_pipeline.py and ran check-cli-pipeline against the template."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Official process APIs and security guidance support explicit process, pipe, timeout, stream, allowlist, and argument-handling controls.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "python-subprocess-docs",
+        "node-child-process-docs",
+        "owasp-command-injection"
+      ],
+      "verification_steps": [
+        "Opened official documentation and recorded the web search summary."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "The actual multi-process runner runtime is not selected or implemented in this change."
+  ],
+  "limitation_notes": [
+    "No real child process lifecycle measurement was run because this change adds validator/governance only."
+  ]
+}

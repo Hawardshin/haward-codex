@@ -47,6 +47,29 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "bash_pipelines",
+      "title": "Bash Reference Manual: Pipelines",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Pipelines.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "pipeline semantics",
+        "explicit pipe graph design"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "owasp_command_injection",
+      "title": "OWASP OS Command Injection Defense Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html",
+      "source_type": "security_guidance",
+      "used_for": [
+        "command allowlists",
+        "argument handling",
+        "shell injection risk control"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
       "id": "tauri_command_scopes",
       "title": "Tauri Command Scopes",
       "url": "https://v2.tauri.app/security/scope/",
@@ -152,6 +175,16 @@
       ]
     },
     {
+      "id": "multi_cli_pipeline_is_a_process_graph",
+      "rule": "When one action launches multiple CLIs, model each CLI as a process node and each stdout/stderr/stdin connection as an explicit pipe edge before execution.",
+      "reason": "Explicit process graphs make fan-out/fan-in, timeout, cancellation, cleanup, audit logging, and retry behavior inspectable.",
+      "applies_to": [
+        "execution_contract",
+        "pipeline_orchestration_contract",
+        "validation_contract"
+      ]
+    },
+    {
       "id": "desktop_invocation_requires_scopes",
       "rule": "If the installable desktop shell invokes local commands, the allowed commands, arguments, workspace paths, and permission scope must be explicit before release.",
       "reason": "A desktop app has a stronger local-security boundary than a developer terminal session.",
@@ -203,6 +236,11 @@
     {
       "field": "execution_contract",
       "meaning": "Command execution rules for safety, portability, logging, timeouts, and output handling.",
+      "required": true
+    },
+    {
+      "field": "pipeline_orchestration_contract",
+      "meaning": "Rules for launching several CLI processes, connecting pipes, bounding output, cancelling children, and merging results.",
       "required": true
     },
     {
@@ -321,6 +359,59 @@
     "logging_policy": "Record command intent, adapter id, version, duration, exit status, and redacted stderr. Do not store raw secrets or oversized outputs.",
     "desktop_policy": "Desktop-originated command execution must be scoped by command allowlist, workspace path allowlist, and user-visible permission settings."
   },
+  "pipeline_orchestration_contract": {
+    "source_template": "agent-platform/configs/integrations/cli-pipeline-template.json",
+    "agent": "cli-pipeline-agent",
+    "validation_command": "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline <pipeline-input.json>",
+    "principle": "A CLI pipeline is a process graph, not a shell string. Keep commands as argv-style nodes and model pipes as explicit edges.",
+    "required_when": [
+      "one user action launches multiple CLI processes",
+      "stdout, stderr, stdin, files, or artifacts connect one CLI to another",
+      "parallel CLI lanes need a fan-in merge gate",
+      "a desktop shell, monitor, local daemon, or agent workflow executes several CLIs together"
+    ],
+    "process_node_contract": [
+      "process_id",
+      "adapter_id",
+      "command",
+      "args",
+      "cwd",
+      "env_keys",
+      "timeout_seconds",
+      "max_output_bytes",
+      "required"
+    ],
+    "pipe_edge_contract": [
+      "pipe_id",
+      "from_process",
+      "from_stream",
+      "to_process",
+      "to_stream",
+      "mode",
+      "required"
+    ],
+    "safety_controls": [
+      "adapter_allowlist",
+      "argv_arguments",
+      "shell_disabled_by_default",
+      "explicit_cwd_boundary",
+      "environment_allowlist",
+      "secret_redaction",
+      "output_redaction",
+      "permission_scope",
+      "fallback_behavior",
+      "audit_logging"
+    ],
+    "resource_controls": [
+      "timeout_policy",
+      "max_output_bytes",
+      "cancellation_policy",
+      "cleanup_policy",
+      "orphan_process_policy",
+      "backpressure_policy"
+    ],
+    "closeout_policy": "If multi-process CLI orchestration work occurred, set cli_pipeline_occurred=true and include cli_pipeline_targets in work-evaluator input."
+  },
   "capability_classes": [
     {
       "id": "ai_assistant_cli",
@@ -415,7 +506,9 @@
   },
   "validation_contract": {
     "config_checks": [
-      "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json"
+      "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json",
+      "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-pipeline-template.json",
+      "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline configs/integrations/cli-pipeline-template.json"
     ],
     "expected_future_adapter_checks": [
       "availability check",

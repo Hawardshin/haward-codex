@@ -254,6 +254,16 @@
         "modes",
         "evaluator_policy"
       ]
+    },
+    {
+      "id": "cli_pipeline_needs_conditional_gate",
+      "rule": "When a task designs or changes multi-process CLI orchestration, it must set cli_pipeline_occurred=true and leave cli_pipeline_targets with process graph, explicit pipe edges, safety controls, resource controls, source provenance, merge strategy, and verification evidence.",
+      "reason": "The user wants one CLI action to run several internal processes through pipes, so the platform needs an execution contract stronger than prompt guidance.",
+      "applies_to": [
+        "mode_enforcement",
+        "modes",
+        "evaluator_policy"
+      ]
     }
   ],
   "field_guide": [
@@ -317,6 +327,11 @@
         "enforced_by": "resource_check_targets in evaluate-work input when resource_risk_occurred=true, backed by PYTHONPATH=src python3 -m agent_platform.cli check-resources <input.json>"
       },
       {
+        "id": "cli_pipeline_record",
+        "purpose": "Require multi-process CLI orchestration work to prove process graph, pipe edges, safety controls, resource controls, provenance, merge strategy, and verification before close-out.",
+        "enforced_by": "cli_pipeline_targets in evaluate-work input when cli_pipeline_occurred=true, backed by PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline <input.json>"
+      },
+      {
         "id": "work_evaluator_gate",
         "purpose": "Turn missing mode-required artifacts into blocking close-out gaps.",
         "enforced_by": "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work <input.json>"
@@ -353,7 +368,8 @@
         "result_summary",
         "changed_files_or_no_file_explanation",
         "verification_or_manual_check",
-        "resource_check_targets_when_resource_risk_occurred"
+        "resource_check_targets_when_resource_risk_occurred",
+        "cli_pipeline_targets_when_cli_pipeline_occurred"
       ],
       "deferred_or_optional": [
         "requirements_targets",
@@ -365,7 +381,8 @@
         "source_provenance_targets",
         "plan_evidence_targets",
         "mode_selection_record_targets",
-        "omission_check_targets"
+        "omission_check_targets",
+        "cli_pipeline_targets_when_cli_pipeline_occurred"
       ],
       "enforcement_level": "advisory",
       "selection_record_required": false,
@@ -398,7 +415,8 @@
         "request_trace_targets",
         "work_summary_targets",
         "timing_summary_targets",
-        "resource_check_targets_when_resource_risk_occurred"
+        "resource_check_targets_when_resource_risk_occurred",
+        "cli_pipeline_targets_when_cli_pipeline_occurred"
       ],
       "deferred_or_optional": [],
       "enforcement_level": "blocking",
@@ -426,7 +444,8 @@
         "web_search_record_targets",
         "verification",
         "deferred_improvement_targets_when_improvement_ideas_exist",
-        "resource_check_targets_when_resource_risk_occurred"
+        "resource_check_targets_when_resource_risk_occurred",
+        "cli_pipeline_targets_when_cli_pipeline_occurred"
       ],
       "deferred_or_optional": [
         "requirements_targets",
@@ -463,7 +482,8 @@
         "omission_check_targets",
         "web_search_record_targets",
         "timing_summary_targets",
-        "resource_check_targets_when_resource_risk_occurred"
+        "resource_check_targets_when_resource_risk_occurred",
+        "cli_pipeline_targets_when_cli_pipeline_occurred"
       ],
       "deferred_or_optional": [
         "requirements_targets",
@@ -501,7 +521,8 @@
         "request_trace_targets",
         "work_summary_targets",
         "timing_summary_targets",
-        "resource_check_targets_when_resource_risk_occurred"
+        "resource_check_targets_when_resource_risk_occurred",
+        "cli_pipeline_targets_when_cli_pipeline_occurred"
       ],
       "deferred_or_optional": [],
       "enforcement_level": "blocking",
@@ -517,6 +538,7 @@
     "For every non-quick mode, create or update a mode selection record and include it in mode_selection_record_targets before close-out.",
     "For every non-quick mode, create or update an omission check record and include it in omission_check_targets before close-out.",
     "When runtime resource risk exists in any mode, create or update a resource leak check record and include it in resource_check_targets before close-out.",
+    "When multi-process CLI orchestration exists in any mode, create or update a CLI pipeline check record and include it in cli_pipeline_targets before close-out.",
     "Mode selection does not remove the requirement to avoid unsupported factual claims."
   ],
   "evaluator_policy": {

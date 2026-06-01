@@ -52,6 +52,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep user/developer installation profiles in `configs/installations/install-mode-registry.json`; `install_mode` controls setup audience while `work_mode` controls task close-out strictness.
 - Keep end-user desktop installer productization in `platform-desktop-app/`; this is separate from repository setup `install_mode`.
 - Keep external CLI integration in `configs/integrations/cli-adapter-registry.json`; the installable platform may use many CLIs through adapters but must not depend on one CLI to function.
+- Keep multi-process CLI orchestration plans in `configs/integrations/cli-pipeline-template.json` or task-specific history targets; use `cli-pipeline-agent` before launching, piping, merging, or cancelling several CLI processes together.
 - Keep unstructured-to-structured data transformation rules in `configs/usage/unstructured-data-structuring-profile.json`; AI-generated structure must preserve schema, provenance, null/ambiguity handling, and validation before downstream reuse.
 - Keep platform notification routing in `configs/integrations/notification-channels.json`; store only environment variable names there, never real webhook URLs or tokens.
 - Keep user request summaries under `_history/user-requests/`.
@@ -99,6 +100,7 @@ PYTHONPATH=src python3 -m agent_platform.cli validate-skill configs/evaluation/s
 PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/hallucination-guard-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-omissions configs/evaluation/omission-guard-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-resources configs/evaluation/resource-guard-template.json
+PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline configs/integrations/cli-pipeline-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-deep-research configs/planning/deep-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-parallel-work configs/planning/parallel-work-template.json
@@ -115,7 +117,7 @@ PYTHONPATH=src python3 -m agent_platform.cli list-work-modes configs/workflows/w
 PYTHONPATH=src python3 -m agent_platform.cli show-work-mode configs/workflows/work-mode-registry.json governance
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/deep-research-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/planning/deep-research-template.json configs/integrations/notification-channels.json
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/unstructured-data-structuring-profile.json
-PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json configs/integrations/cli-pipeline-template.json
 ```
 
 ## Current Skeleton
@@ -140,6 +142,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `configs/workflows/work-mode-registry.json`: selectable work modes, mode enforcement layers, mode selection record requirements, and evaluator target policy
 - `configs/installations/install-mode-registry.json`: user install and developer improvement install setup profiles
 - `configs/integrations/cli-adapter-registry.json`: optional CLI adapter boundaries, execution contract, dependency posture, and missing-CLI fallback policy
+- `configs/integrations/cli-pipeline-template.json`: process graph, explicit pipe, safety control, resource control, source provenance, and verification template for multi-CLI orchestration
 - `configs/integrations/notification-channels.json`: notification on/off routing, event filters, provider payload options, and environment-variable secret indirection
 - `configs/usage/unstructured-data-structuring-profile.json`: schema, provenance, null handling, and validation contract for turning messy input into structured records
 - `configs/evaluation/omission-guard-template.json`: required item, artifact, and acceptance-check coverage template for omission prevention
@@ -152,6 +155,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `spec-reconciliation-agent` decides whether ambiguous specs or spec/source drift should update the spec, update source, ask the user, or defer; user decisions are surfaced as `clarification_needed`
 - `omission-guard-agent` checks required instructions, requirements, artifacts, and acceptance checks before non-`quick` close-out
 - `resource-guard-agent` checks memory and resource leak risks for long-running runtimes, browser automation, workers, caches, streams, large-data processing, subprocesses, file handles, network connections, timers, and subscriptions
+- `cli-pipeline-agent` checks multi-process CLI process graphs, pipes, adapter allowlists, safety controls, resource controls, provenance, merge strategy, and verification before several CLIs run together
 - `skill-lifecycle-agent` creates, validates, tracks, and improves repository-managed Codex skills
 - `parallel-work-planner-agent` checks task dependencies, file/resource boundaries, execution batches, research fan-in merge gates, coordination targets, and merge verification before parallel execution
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`
@@ -169,6 +173,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - close-out evaluation should include `work_mode`; `quick`, `standard`, `ship_first`, `research`, and `governance` decide which target fields are blocking
 - close-out evaluation should include `web_search_record_targets`, `user_request_summary_targets`, `requirements_targets`, `spec_targets`, `request_trace_targets`, `work_summary_targets`, `source_provenance_targets`, `plan_evidence_targets`, `mode_selection_record_targets`, and `omission_check_targets` when required by the selected work mode
 - close-out evaluation should include `resource_risk_occurred=true` and `resource_check_targets` when memory or runtime resource leak risk exists
+- close-out evaluation should include `cli_pipeline_occurred=true` and `cli_pipeline_targets` when work designs or changes multi-process CLI orchestration
 - work mode policy is not prompt-only; `check-work-modes` validates registry shape and drift against evaluator target policy
 - `ship_first` close-out should include `deferred_improvement_targets` when improvement ideas are intentionally postponed
 - skill close-out should include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`

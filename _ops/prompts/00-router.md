@@ -17,6 +17,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | 플랫폼을 설치형 desktop/end-user software로 제품화하거나 Tauri/Electron/MSIX/DMG/signing/notarization/update/uninstall을 검토한다 | [93-installable-software-productization.md](93-installable-software-productization.md) |
 | Rust, Go, Tauri, Wails, Electron, Python, TypeScript/Next.js 같은 런타임/언어 선택을 조사하고 설계한다 | [94-runtime-language-research-design.md](94-runtime-language-research-design.md) |
 | 설치형 플랫폼 또는 프로젝트가 외부 CLI를 사용하되 특정 CLI에 종속되지 않는 adapter 경계를 설계한다 | [97-cli-adapter-integration.md](97-cli-adapter-integration.md) |
+| 하나의 동작이 여러 CLI 프로세스를 실행하거나 pipe/fan-out/fan-in/merge 구조를 가져야 한다 | [101-cli-pipeline-orchestration.md](101-cli-pipeline-orchestration.md) |
 | 긴 대화, 문서, 조사 자료, 리뷰, 로그, 메모 같은 비정형 입력을 요구사항, 태스크, evidence item, 표, JSON 등 정형 기록으로 바꾼다 | [98-structure-unstructured-data.md](98-structure-unstructured-data.md) |
 | 작업을 닫기 전에 빠뜨린 지시, 요구사항, 산출물, 검증이 없는지 coverage를 만든다 | [99-omission-prevention.md](99-omission-prevention.md) |
 | 장시간 실행, 브라우저 자동화, worker, cache, stream, 대용량 처리, 외부 CLI 등에서 메모리/리소스 누수 위험을 확인한다 | [100-resource-leak-prevention.md](100-resource-leak-prevention.md) |
@@ -65,9 +66,11 @@ Select install_mode from agent-platform/configs/installations/install-mode-regis
 Use platform-desktop-app and _ops/prompts/93-installable-software-productization.md when the request involves end-user installable software, desktop apps, OS installer packaging, Tauri, Electron, MSIX, DMG, signing, notarization, updates, or uninstall behavior. Keep this separate from repository setup install_mode.
 Use agent-platform/configs/runtime/language-decision-registry.json and _ops/prompts/94-runtime-language-research-design.md when the request involves choosing or changing Rust, Go, Tauri, Wails, Electron, Python, TypeScript/Next.js, native modules, local daemons, desktop shells, or performance-sensitive runtime boundaries.
 Use agent-platform/configs/integrations/cli-adapter-registry.json and _ops/prompts/97-cli-adapter-integration.md when the request involves external CLI use, CLI adapter boundaries, command execution, bundled sidecars, optional CLI capabilities, or keeping the installable platform independent from one CLI.
+Use agent-platform/configs/integrations/cli-pipeline-template.json and _ops/prompts/101-cli-pipeline-orchestration.md when one action launches multiple CLI processes, connects stdout/stderr/stdin pipes, fans out/fans in CLI work, or embeds multi-CLI orchestration in a desktop shell, monitor, local daemon, or agent workflow.
 Use agent-platform/configs/usage/unstructured-data-structuring-profile.json and _ops/prompts/98-structure-unstructured-data.md when messy or mixed-format inputs should become schema-grounded structured records with source provenance and validation.
 Use _ops/prompts/99-omission-prevention.md and agent-platform check-omissions when non-quick work needs proof that required instructions, requirements, artifacts, and acceptance checks were not missed.
 Use _ops/prompts/100-resource-leak-prevention.md and agent-platform check-resources when work touches long-running agents, servers, browser automation, subprocesses, workers, queues, caches, streams, large data, file handles, network connections, timers, or subscriptions.
+Use agent-platform check-cli-pipeline before closing multi-process CLI orchestration work; set cli_pipeline_occurred=true and include cli_pipeline_targets in evaluator input.
 Select the relevant prompt and workflow.
 Derive requirement candidates from the user's request, update or review the relevant requirements baseline before implementation when the selected mode requires it or durable behavior changes, and include requirements_targets when blocking for that mode.
 Create or update spec-driven artifacts before meaningful implementation when the selected mode requires it, and include spec_targets when blocking for that mode.

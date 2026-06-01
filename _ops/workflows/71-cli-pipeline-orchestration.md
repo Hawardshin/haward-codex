@@ -1,0 +1,81 @@
+# CLI Pipeline Orchestration Workflow
+
+## Purpose
+
+Use this workflow when one action should run several CLI processes, connect streams with pipes, fan out work and merge results, or embed multi-CLI orchestration in a desktop shell, monitor, local daemon, or agent workflow.
+
+## Inputs
+
+- User request or feature proposal
+- `agent-platform/configs/integrations/cli-adapter-registry.json`
+- `agent-platform/configs/integrations/cli-pipeline-template.json`
+- `_docs/policies/cli-adapter-policy.ko.md`
+- `_ops/workflows/66-cli-adapter-integration.md`
+- Candidate CLI official docs and security guidance
+
+## Sequence
+
+1. Run web-first intake and record the search.
+2. Run memory bootstrap.
+3. Select `work_mode`; use `governance` when CLI orchestration changes platform behavior or evaluator gates.
+4. Classify each CLI as an adapter-backed process node:
+   - `process_id`
+   - `adapter_id`
+   - `command`
+   - `args`
+   - `cwd`
+   - `env_keys`
+   - `timeout_seconds`
+   - `max_output_bytes`
+5. Model every stream connection as an explicit pipe edge:
+   - `pipe_id`
+   - `from_process`
+   - `from_stream`
+   - `to_process`
+   - `to_stream`
+   - `mode`
+6. Keep `shell_allowed=false` by default. Do not hide `|`, `;`, redirects, or chained execution inside command strings unless a separate injection review exists.
+7. Define safety controls:
+   - adapter allowlist
+   - argv arguments
+   - explicit cwd boundary
+   - environment allowlist
+   - secret redaction
+   - output redaction
+   - permission scope
+   - fallback behavior
+   - audit logging
+8. Define resource controls:
+   - timeout policy
+   - max output bytes
+   - cancellation policy
+   - cleanup policy
+   - orphan-process policy
+   - backpressure policy
+9. Define merge strategy for fan-out/fan-in work.
+10. Record source provenance and plan evidence.
+11. Save a task-specific pipeline input under `_history/evaluations/YYYY/` or the owning project history area.
+12. Run:
+
+```bash
+cd agent-platform
+PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline <pipeline-input.json>
+```
+
+13. If the pipeline actually changes runtime risk, also run `_ops/workflows/69-resource-leak-prevention.md`.
+14. Set `cli_pipeline_occurred=true` and include `cli_pipeline_targets` in the final work-evaluator input.
+
+## Output Contract
+
+- Process graph record
+- Explicit pipe edge record
+- Adapter allowlist and shell policy
+- Safety controls and resource controls
+- Merge strategy
+- Source provenance and plan evidence
+- Verification command/result
+- Rollback or manual fallback path
+
+## Rule
+
+Do not design multi-CLI orchestration as a single shell string. The platform should understand and validate the graph it is about to run.

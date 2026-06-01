@@ -30,6 +30,8 @@ Then classify the owning layer:
 - project adapter
 - external CLI
 
+If one action needs multiple CLI processes, stdout/stderr/stdin pipes, or fan-in merge, switch to _ops/prompts/101-cli-pipeline-orchestration.md after defining the adapter boundary.
+
 Research before design:
 - official CLI docs
 - security and command-execution guidance
@@ -48,6 +50,7 @@ Return:
 - permission scope and desktop allowlist needs
 - missing-CLI and unsupported-version fallback behavior
 - installation status and audit target if installation occurred or is planned
+- cli_pipeline_targets if multiple CLI processes, pipes, or fan-in merge are involved
 - validation commands
 
 Do not make a CLI mandatory unless the requirement, installation audit, security boundary, fallback behavior, and validation commands are explicit.

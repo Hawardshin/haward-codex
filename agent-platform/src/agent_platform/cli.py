@@ -14,6 +14,7 @@ from agent_platform.evaluation.resource_guard import ResourceGuardInput, check_r
 from agent_platform.evaluation.skill_validator import SkillValidationInput, validate_skill_definition
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 from agent_platform.governance.config_contract import check_config_contract
+from agent_platform.integrations.cli_pipeline import CliPipelineInput, check_cli_pipeline
 from agent_platform.integrations.notifications import (
     NotificationEvent,
     check_notification_config,
@@ -71,6 +72,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     check_resources = subparsers.add_parser("check-resources", help="Check memory and resource leak readiness for runtime work.")
     check_resources.add_argument("path", type=Path)
+
+    check_cli_pipeline_cmd = subparsers.add_parser(
+        "check-cli-pipeline",
+        help="Check whether a multi-process CLI pipeline plan is safe and ready to execute.",
+    )
+    check_cli_pipeline_cmd.add_argument("path", type=Path)
 
     plan_from_research = subparsers.add_parser("plan-from-research", help="Check whether search-backed insights are ready for planning.")
     plan_from_research.add_argument("path", type=Path)
@@ -189,6 +196,12 @@ def main(argv: list[str] | None = None) -> int:
         with args.path.open("r", encoding="utf-8") as file:
             guard_input = ResourceGuardInput.from_dict(json.load(file))
         print(json.dumps(check_resource_leaks(guard_input), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "check-cli-pipeline":
+        with args.path.open("r", encoding="utf-8") as file:
+            pipeline_input = CliPipelineInput.from_dict(json.load(file))
+        print(json.dumps(check_cli_pipeline(pipeline_input), indent=2, ensure_ascii=False))
         return 0
 
     if args.command == "plan-from-research":

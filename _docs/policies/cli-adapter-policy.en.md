@@ -12,12 +12,14 @@ Even as the platform becomes installable software, it must not become dependent 
 - CLI adapters need availability checks, version checks, permission scopes, timeouts, output contracts, and fallbacks.
 - A missing CLI should become `capability_missing`, not a whole-platform failure.
 - Prefer argv-style execution, explicit cwd, timeouts, environment allowlists, and redacted stdout/stderr handling over shell strings.
+- If several CLIs run together, model the pipeline as a process graph instead of a shell string pipeline. Each CLI is a process node, stdout/stderr/stdin links are pipe edges, and fan-in behavior is a merge strategy.
 - If a desktop shell runs local commands, document command allowlists, workspace path allowlists, and user approval/settings boundaries first.
 - If a CLI becomes required, bundled, globally installed, or auto-installed, create an installation audit plan and rollback path first.
 
 ## Source Of Truth
 
 - CLI adapter registry: `agent-platform/configs/integrations/cli-adapter-registry.json`
+- CLI pipeline template: `agent-platform/configs/integrations/cli-pipeline-template.json`
 - Installable app boundary: `platform-desktop-app/configs/desktop-distribution-registry.json`
 - Installation audit: `_ops/workflows/58-installation-record.md`
 - Productization policy: `_docs/policies/installable-software-policy.en.md`
@@ -28,6 +30,7 @@ Even as the platform becomes installable software, it must not become dependent 
 - Git/GitHub CLI: these can enrich history and remote work, but document/history browsing itself must not depend on `gh`.
 - Package managers: these can support installation or validation, but dependency state changes require installation audit records.
 - Deployment CLIs: Vercel, Docker, and cloud CLIs can be deployment adapters, but credential, target, rollback, and preview boundaries must be explicit.
+- Multi-CLI pipelines: source collectors, planners, and document converters can be connected, but `cli-pipeline-agent` must first check process graph, pipe edges, timeout, output bounds, cleanup, and merge strategy.
 
 ## Validation
 
@@ -36,4 +39,6 @@ After creating or changing important CLI adapter settings, run:
 ```bash
 cd agent-platform
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-pipeline-template.json
+PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline configs/integrations/cli-pipeline-template.json
 ```

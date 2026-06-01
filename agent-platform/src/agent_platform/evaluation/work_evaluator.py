@@ -74,6 +74,8 @@ class WorkEvaluationInput:
     installation_record_targets: tuple[str, ...] = ()
     resource_risk_occurred: bool = False
     resource_check_targets: tuple[str, ...] = ()
+    cli_pipeline_occurred: bool = False
+    cli_pipeline_targets: tuple[str, ...] = ()
     deferred_improvement_targets: tuple[str, ...] = ()
     known_gaps: tuple[str, ...] = ()
     improvement_ideas: tuple[str, ...] = ()
@@ -111,6 +113,8 @@ class WorkEvaluationInput:
             installation_record_targets=_tuple_of_strings(data.get("installation_record_targets", []), "installation_record_targets"),
             resource_risk_occurred=_optional_bool(data.get("resource_risk_occurred", False), "resource_risk_occurred"),
             resource_check_targets=_tuple_of_strings(data.get("resource_check_targets", []), "resource_check_targets"),
+            cli_pipeline_occurred=_optional_bool(data.get("cli_pipeline_occurred", False), "cli_pipeline_occurred"),
+            cli_pipeline_targets=_tuple_of_strings(data.get("cli_pipeline_targets", []), "cli_pipeline_targets"),
             deferred_improvement_targets=_tuple_of_strings(
                 data.get("deferred_improvement_targets", []),
                 "deferred_improvement_targets",
@@ -156,6 +160,10 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
     if evaluation_input.resource_risk_occurred and not evaluation_input.resource_check_targets:
         gaps.append(
             "Resource leak risk occurred but resource_check_targets is missing. Run resource-guard-agent/check-resources or record lifecycle, cleanup, and memory measurement evidence."
+        )
+    if evaluation_input.cli_pipeline_occurred and not evaluation_input.cli_pipeline_targets:
+        gaps.append(
+            "CLI pipeline work occurred but cli_pipeline_targets is missing. Run cli-pipeline-agent/check-cli-pipeline or record the process graph, pipe plan, safety controls, resource controls, and verification evidence."
         )
     if (
         work_mode == "ship_first"
@@ -208,6 +216,8 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
             "installation_record_targets_count": len(evaluation_input.installation_record_targets),
             "resource_risk_occurred": evaluation_input.resource_risk_occurred,
             "resource_check_targets_count": len(evaluation_input.resource_check_targets),
+            "cli_pipeline_occurred": evaluation_input.cli_pipeline_occurred,
+            "cli_pipeline_targets_count": len(evaluation_input.cli_pipeline_targets),
             "deferred_improvement_targets_count": len(evaluation_input.deferred_improvement_targets),
         },
         "gaps": gaps,

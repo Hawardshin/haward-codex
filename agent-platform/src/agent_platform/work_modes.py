@@ -46,6 +46,7 @@ REQUIRED_ENFORCEMENT_LAYERS = {
     "mode_selection_record",
     "omission_coverage_record",
     "resource_leak_record",
+    "cli_pipeline_record",
     "work_evaluator_gate",
     "evaluation_report",
 }
@@ -58,6 +59,7 @@ ALLOWED_CLOSEOUT_REFERENCES = set(TARGET_GAP_MESSAGES) | {
     "verification_or_manual_check",
     "deferred_improvement_targets_when_improvement_ideas_exist",
     "resource_check_targets_when_resource_risk_occurred",
+    "cli_pipeline_targets_when_cli_pipeline_occurred",
 }
 
 

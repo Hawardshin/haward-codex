@@ -1,0 +1,128 @@
+{
+  "task": "CLI pipeline orchestration governance change",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "user-request-multi-cli-processes",
+      "description": "Capture the user's request that one CLI action should run several internal CLI processes through pipes or similar orchestration.",
+      "source": "UR-2026-06-02-013",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "process-graph-not-shell-string",
+      "description": "Model multiple CLI processes as process nodes and pipe edges instead of hiding pipes in shell strings.",
+      "source": "REQ-WS-058",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/integrations/cli_pipeline.py",
+        "agent-platform/configs/integrations/cli-pipeline-template.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "conditional-evaluator-target",
+      "description": "Make work-evaluator-agent block close-out when CLI pipeline work occurred but cli_pipeline_targets is missing.",
+      "source": "REQ-WS-058",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+        "agent-platform/tests/test_work_evaluator.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "navigation-and-memory",
+      "description": "Keep CLI pipeline workflow discoverable in persistent instructions, router, operations index, and memory bootstrap.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_docs/instructions/persistent-instructions.ko.md",
+        "_ops/prompts/00-router.md",
+        "_ops/index.md",
+        "agent-platform/configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "actual-runner-out-of-scope",
+      "description": "Avoid implying that an actual multi-process runner was implemented in this change.",
+      "source": "_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/spec.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/spec.ko.md",
+        "agent-platform/docs/cli-pipeline-agent.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/src/agent_platform/integrations/cli_pipeline.py",
+      "purpose": "CLI pipeline validator implementation",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/integrations/cli-pipeline-template.json",
+      "purpose": "Self-documenting pipeline input template",
+      "required": true
+    },
+    {
+      "path": "_ops/workflows/71-cli-pipeline-orchestration.md",
+      "purpose": "Reusable workflow for future multi-CLI orchestration",
+      "required": true
+    },
+    {
+      "path": "_ops/prompts/101-cli-pipeline-orchestration.md",
+      "purpose": "Reusable prompt for future multi-CLI orchestration",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "unit-tests",
+      "description": "Run agent-platform unit tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cd agent-platform && python3 -m unittest discover -s tests: 138 tests OK"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "pipeline-template-ready",
+      "description": "Validate the CLI pipeline template.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-cli-pipeline configs/integrations/cli-pipeline-template.json: pipeline_ready"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "work-mode-registry-ready",
+      "description": "Check work mode registry and evaluator drift.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-work-modes configs/workflows/work-mode-registry.json: ready"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Actual multi-process runner was intentionally not implemented; docs and spec state this non-goal."
+  ],
+  "notes": [
+    "This file is the input record. The checked result is saved separately after running check-omissions."
+  ]
+}

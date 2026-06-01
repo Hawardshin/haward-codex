@@ -1,0 +1,69 @@
+{
+  "task": "CLI pipeline orchestration resource risk review",
+  "work_mode": "governance",
+  "runtime_context": [
+    "python",
+    "future subprocess runner",
+    "cli process graph",
+    "stdin stdout stderr streams"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "future-child-process-leak",
+      "category": "process",
+      "description": "A future multi-CLI runner could leave child processes running if cancellation and cleanup are not explicit.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The pipeline contract requires timeout_policy, cancellation_policy, cleanup_policy, orphan_process_policy, and per-process timeout_seconds before execution readiness.",
+      "evidence": [
+        "agent-platform/configs/integrations/cli-pipeline-template.json",
+        "agent-platform/src/agent_platform/integrations/cli_pipeline.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "future-stream-backpressure",
+      "category": "stream",
+      "description": "A future runner could hang or grow memory if stdout/stderr pipes are unbounded.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The pipeline contract requires per-process max_output_bytes, pipeline max_output_bytes, and backpressure_policy.",
+      "evidence": [
+        "agent-platform/configs/integrations/cli-pipeline-template.json",
+        "agent-platform/tests/test_cli_pipeline.py"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "runner-not-implemented",
+      "resource": "Actual child process runner",
+      "create_path": "No runner implemented in this change.",
+      "cleanup_path": "Not applicable because no new process-spawning runtime path was added.",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/spec.ko.md"
+      ],
+      "rationale": "This change adds validator and governance records only."
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "no-runtime-measurement",
+      "metric": "Child process count or stream memory growth",
+      "tool": "Not run",
+      "threshold": "Not applicable until a real runner exists.",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/spec.ko.md"
+      ],
+      "rationale": "No executable multi-process runner was added, so there is no new runtime path to measure."
+    }
+  ],
+  "notes": [
+    "Future runner implementation must add real lifecycle and measurement checks."
+  ]
+}

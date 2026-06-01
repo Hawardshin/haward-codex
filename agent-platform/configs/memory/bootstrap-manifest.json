@@ -52,7 +52,7 @@
       "The install mode registry, installation registry, or installation audit contract changes.",
       "The installable desktop software productization project, desktop distribution registry, or installer release gate policy changes.",
       "The runtime language decision registry, Rust/Go/Tauri/Wails direction, or runtime language selection policy changes.",
-      "The CLI adapter registry, external command execution boundary, optional CLI dependency posture, or missing-CLI fallback policy changes.",
+      "The CLI adapter registry, CLI pipeline template, external command execution boundary, optional CLI dependency posture, multi-process pipe orchestration, or missing-CLI fallback policy changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
     ]
@@ -413,7 +413,20 @@
       "used_for": [
         "external CLI adapter boundaries",
         "installable platform CLI-neutral execution",
-        "missing-CLI fallback and dependency posture rules"
+        "missing-CLI fallback and dependency posture rules",
+        "multi-process CLI pipeline orchestration contract"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "cli_pipeline_template",
+      "title": "CLI Pipeline Template",
+      "path": "agent-platform/configs/integrations/cli-pipeline-template.json",
+      "source_type": "internal",
+      "used_for": [
+        "multi-process CLI process graph validation",
+        "explicit pipe edge and fan-in merge contract",
+        "cli_pipeline_targets close-out policy"
       ],
       "last_checked": "2026-06-02"
     },
@@ -982,6 +995,18 @@
       ]
     },
     {
+      "id": "cli_pipeline_template_must_stay_discoverable",
+      "rule": "The CLI pipeline template must remain a warm memory anchor so future sessions model multi-CLI orchestration as process graphs with explicit pipe edges, bounded resources, and verification records.",
+      "reason": "The user said one CLI action should run several internal processes and use pipes; future agents should not collapse that into opaque shell strings.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "cli-pipeline-template",
+        "cli_pipeline_targets"
+      ]
+    },
+    {
       "id": "root_structure_policy_must_stay_discoverable",
       "rule": "The root structure policy must remain a warm memory anchor because future sessions need a deterministic way to classify root folders, runtime adapters, local-only scratch, generated outputs, and registered projects.",
       "reason": "The user explicitly asked to improve any folder-structure contradictions or management friction as the workspace grows.",
@@ -1131,6 +1156,7 @@
     "spec_reconciliation_template",
     "notification_settings",
     "cli_adapter_registry",
+    "cli_pipeline_template",
     "installation_registry"
   ],
   "required_anchor_ids": [
@@ -1183,6 +1209,7 @@
     "spec_reconciliation_template",
     "notification_settings",
     "cli_adapter_registry",
+    "cli_pipeline_template",
     "installation_registry"
   ],
   "anchors": [
@@ -1675,12 +1702,20 @@
       "load_order": 36
     },
     {
+      "id": "cli_pipeline_template",
+      "path": "agent-platform/configs/integrations/cli-pipeline-template.json",
+      "tier": "warm",
+      "purpose": "Multi-process CLI pipeline contract for explicit process nodes, pipe edges, safety controls, resource controls, source provenance, merge strategy, and verification.",
+      "required": true,
+      "load_order": 37
+    },
+    {
       "id": "daily_history",
       "path": "_history/2026/2026-06-01.md",
       "tier": "warm",
       "purpose": "Current dated work log and compressed context.",
       "required": true,
-      "load_order": 37
+      "load_order": 38
     },
     {
       "id": "repository_map",

@@ -309,6 +309,53 @@ class WorkEvaluatorTests(unittest.TestCase):
 
         self.assertFalse(report["requires_rework"])
 
+    def test_cli_pipeline_requires_pipeline_targets(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Run several CLIs as a pipeline.",
+                result_summary="Added a CLI pipeline design.",
+                changed_files=("agent-platform/src/agent_platform/integrations/cli_pipeline.py",),
+                verification=("python3 -m unittest discover -s tests: OK",),
+                references_checked=("Python subprocess docs",),
+                **complete_evidence_targets(),
+                web_search_record_targets=("_history/web-searches/2026/2026-06-02-cli-pipeline.ko.md",),
+                user_request_summary_targets=("_history/user-requests/2026/2026-06-02.ko.md",),
+                requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/spec.ko.md",),
+                request_trace_targets=("_history/request-traces/2026/2026-06-02-cli-pipeline-orchestration.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-06-02.ko.md",),
+                cli_pipeline_occurred=True,
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "CLI pipeline work occurred but cli_pipeline_targets is missing. Run cli-pipeline-agent/check-cli-pipeline or record the process graph, pipe plan, safety controls, resource controls, and verification evidence.",
+            report["gaps"],
+        )
+
+    def test_cli_pipeline_ready_when_targets_present(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Run several CLIs as a pipeline.",
+                result_summary="Added a CLI pipeline design.",
+                changed_files=("agent-platform/src/agent_platform/integrations/cli_pipeline.py",),
+                verification=("python3 -m unittest discover -s tests: OK",),
+                references_checked=("Python subprocess docs",),
+                **complete_evidence_targets(),
+                web_search_record_targets=("_history/web-searches/2026/2026-06-02-cli-pipeline.ko.md",),
+                user_request_summary_targets=("_history/user-requests/2026/2026-06-02.ko.md",),
+                requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/spec.ko.md",),
+                request_trace_targets=("_history/request-traces/2026/2026-06-02-cli-pipeline-orchestration.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-06-02.ko.md",),
+                cli_pipeline_occurred=True,
+                cli_pipeline_targets=("_history/evaluations/2026/2026-06-02-cli-pipeline-check.json",),
+            )
+        )
+
+        self.assertFalse(report["requires_rework"])
+
     def test_context_archiving_requires_record_targets(self) -> None:
         report = evaluate_work(
             WorkEvaluationInput(

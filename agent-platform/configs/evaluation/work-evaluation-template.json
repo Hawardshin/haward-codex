@@ -68,6 +68,10 @@
   "resource_check_targets": [
     "_history/evaluations/YYYY/YYYY-MM-DD-resource-check.json"
   ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [
+    "_history/evaluations/YYYY/YYYY-MM-DD-cli-pipeline-check.json"
+  ],
   "deferred_improvement_targets": [
     "_ops/backlog/deferred-improvements.ko.md"
   ],

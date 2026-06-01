@@ -1,0 +1,280 @@
+{
+  "schema_version": "2026-06-02",
+  "name": "cli-pipeline-template",
+  "purpose": "Template for validating a multi-process CLI pipeline before the platform executes several external CLIs through adapters and pipes.",
+  "reader_guide": {
+    "summary": "Use this template when one user action should launch multiple CLI processes, connect stdout/stderr/stdin, merge results, or fan out/fan in independent CLI work.",
+    "how_to_read": [
+      "Read execution_policy to confirm shell usage is disabled by default and each CLI is allowlisted.",
+      "Read processes to see each process node, adapter, argv command, cwd, timeout, and output bound.",
+      "Read pipes to see how streams are connected. Do not hide pipes inside command strings.",
+      "Read safety_controls and resource_controls before any implementation that actually starts processes.",
+      "Read source_provenance and plan_evidence to see why this process graph is justified."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-06-02",
+    "update_triggers": [
+      "The platform adds a process runner or local daemon that launches more than one CLI.",
+      "Pipe, fan-out, fan-in, cancellation, timeout, output bound, or merge behavior changes.",
+      "A desktop shell or web monitor starts invoking local CLI pipelines.",
+      "Command execution security, allowlist, secret handling, or resource cleanup rules change."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "python_subprocess",
+      "title": "Python subprocess",
+      "url": "https://docs.python.org/3/library/subprocess.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "spawning processes",
+        "stdin/stdout/stderr pipes",
+        "timeouts",
+        "argv-style invocation"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "node_child_process",
+      "title": "Node.js child_process",
+      "url": "https://nodejs.org/api/child_process.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "spawned process streams",
+        "pipe handling",
+        "shell invocation trade-offs"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "bash_pipelines",
+      "title": "Bash Reference Manual: Pipelines",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Pipelines.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "pipeline semantics",
+        "why shell-style pipes should be modeled explicitly in platform process graphs"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "owasp_command_injection",
+      "title": "OWASP OS Command Injection Defense Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html",
+      "source_type": "security_guidance",
+      "used_for": [
+        "command execution allowlists",
+        "argument handling",
+        "injection risk controls"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "cli_adapter_registry",
+      "title": "CLI Adapter Registry",
+      "path": "agent-platform/configs/integrations/cli-adapter-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "adapter boundary",
+        "CLI-neutral platform principle"
+      ],
+      "last_checked": "2026-06-02"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "process_graph_not_shell_string",
+      "rule": "Represent pipelines as process nodes and pipe edges instead of putting `|`, `;`, redirects, or chained shell logic inside command strings.",
+      "reason": "Explicit graphs are easier to validate, inspect, cancel, retry, and explain in history.",
+      "applies_to": [
+        "processes",
+        "pipes",
+        "execution_policy"
+      ]
+    },
+    {
+      "id": "argv_by_default",
+      "rule": "Each process uses command plus args arrays. Shell execution requires a separate recorded security review.",
+      "reason": "Argv-style execution avoids unnecessary shell parsing and reduces injection/portability risk.",
+      "applies_to": [
+        "processes",
+        "execution_policy",
+        "safety_controls"
+      ]
+    },
+    {
+      "id": "bounded_processes",
+      "rule": "Every required process needs cwd, timeout_seconds, max_output_bytes, and cleanup/cancellation policy.",
+      "reason": "Multi-process orchestration can otherwise hang, leak child processes, or store oversized output.",
+      "applies_to": [
+        "processes",
+        "resource_controls",
+        "verification"
+      ]
+    },
+    {
+      "id": "adapter_allowlist_required",
+      "rule": "Only allowlisted adapters may appear in the process graph.",
+      "reason": "The installable platform must remain CLI-neutral while still controlling which attached capabilities can run.",
+      "applies_to": [
+        "execution_policy",
+        "safety_controls",
+        "processes"
+      ]
+    },
+    {
+      "id": "merge_gate_required",
+      "rule": "A multi-process pipeline must name how outputs are merged or released downstream.",
+      "reason": "Fan-out research and multi-CLI workflows need a deterministic fan-in point before results affect plans or artifacts.",
+      "applies_to": [
+        "merge_strategy",
+        "plan_evidence",
+        "verification"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "pipeline_id",
+      "meaning": "Stable identifier for the planned pipeline.",
+      "required": true
+    },
+    {
+      "field": "processes",
+      "meaning": "CLI process nodes. Each node names an adapter, executable command, argv args, cwd, env allowlist, timeout, and output bound.",
+      "required": true
+    },
+    {
+      "field": "pipes",
+      "meaning": "Explicit stream edges from a process stdout/stderr to another process stdin, file, or artifact.",
+      "required": true
+    },
+    {
+      "field": "execution_policy",
+      "meaning": "Global execution constraints such as shell_allowed=false, argv arrays, explicit pipe graph, explicit cwd, and adapter allowlist.",
+      "required": true
+    },
+    {
+      "field": "safety_controls",
+      "meaning": "Named controls that must be consciously present before execution.",
+      "required": true
+    },
+    {
+      "field": "resource_controls",
+      "meaning": "Timeout, output bound, cancellation, cleanup, orphan-process, and backpressure rules.",
+      "required": true
+    },
+    {
+      "field": "source_provenance",
+      "meaning": "Where the process graph and command-execution assumptions came from.",
+      "required": true
+    },
+    {
+      "field": "plan_evidence",
+      "meaning": "Why this pipeline structure is justified instead of a single command, separate manual steps, or another tool.",
+      "required": true
+    }
+  ],
+  "pipeline_id": "example-research-fan-in",
+  "purpose": "Collect source metadata with one CLI and pass the accepted output to a planning CLI as an explicit pipe.",
+  "work_mode": "governance",
+  "risk_level": "medium",
+  "processes": [
+    {
+      "process_id": "collect_sources",
+      "adapter_id": "source-collector",
+      "command": "source-collector",
+      "args": [
+        "collect",
+        "--query-plan",
+        "query-plan.json"
+      ],
+      "cwd": "_tools/source-collector",
+      "env_keys": [
+        "PYTHONPATH"
+      ],
+      "timeout_seconds": 120,
+      "max_output_bytes": 1000000,
+      "required": true
+    },
+    {
+      "process_id": "synthesize_plan",
+      "adapter_id": "agent-platform",
+      "command": "python3",
+      "args": [
+        "-m",
+        "agent_platform.cli",
+        "plan-from-research",
+        "plan.json"
+      ],
+      "cwd": "agent-platform",
+      "env_keys": [
+        "PYTHONPATH"
+      ],
+      "timeout_seconds": 120,
+      "max_output_bytes": 1000000,
+      "required": true
+    }
+  ],
+  "pipes": [
+    {
+      "pipe_id": "collector_stdout_to_planner_stdin",
+      "from_process": "collect_sources",
+      "from_stream": "stdout",
+      "to_process": "synthesize_plan",
+      "to_stream": "stdin",
+      "mode": "pipe",
+      "required": true
+    }
+  ],
+  "execution_policy": {
+    "shell_allowed": false,
+    "argv_arrays_required": true,
+    "explicit_pipe_graph_required": true,
+    "explicit_cwd_required": true,
+    "adapter_allowlist": [
+      "source-collector",
+      "agent-platform"
+    ]
+  },
+  "safety_controls": [
+    "adapter_allowlist",
+    "argv_arguments",
+    "shell_disabled_by_default",
+    "explicit_cwd_boundary",
+    "environment_allowlist",
+    "secret_redaction",
+    "output_redaction",
+    "permission_scope",
+    "fallback_behavior",
+    "audit_logging"
+  ],
+  "resource_controls": {
+    "timeout_policy": "Each process has timeout_seconds; timeout cancels downstream execution.",
+    "max_output_bytes": 2000000,
+    "cancellation_policy": "Cancel child processes and close stream handles on failure.",
+    "cleanup_policy": "Wait for child processes, close stdin/stdout/stderr handles, and remove bounded temporary artifacts.",
+    "orphan_process_policy": "Terminate the process group when the pipeline is cancelled.",
+    "backpressure_policy": "Use streaming pipes for small output and bounded temp artifacts for large output."
+  },
+  "merge_strategy": "Only accepted collector output reaches synthesize_plan; final output is a structured planning report.",
+  "source_provenance": [
+    "https://docs.python.org/3/library/subprocess.html",
+    "https://nodejs.org/api/child_process.html",
+    "agent-platform/configs/integrations/cli-adapter-registry.json"
+  ],
+  "plan_evidence": [
+    "The user asked for multiple internal CLI processes connected through pipes.",
+    "Existing CLI adapter policy already requires CLI-neutral external command boundaries."
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline configs/integrations/cli-pipeline-template.json"
+  ],
+  "rollback_plan": [
+    "Disable the pipeline plan and run the two CLI adapters as separate manual commands.",
+    "Keep generated outputs out of downstream plans unless the pipeline check is pipeline_ready."
+  ],
+  "notes": [
+    "This template validates a process graph; it does not execute arbitrary commands."
+  ]
+}

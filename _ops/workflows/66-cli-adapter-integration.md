@@ -38,10 +38,11 @@ Use this workflow when the installable platform, agent-platform, workspace-monit
    - secret redaction
    - permission scope
    - fallback behavior
-7. If the CLI changes dependency or environment state, run installation audit planning before install.
-8. If the desktop shell invokes the CLI, record command/path allowlists and user-visible permission settings.
-9. Update requirements, specs, traceability, and source provenance.
-10. Validate config contracts, docs, maps, task board, grounding, evaluation, and timing records.
+7. If one action will run several CLI processes or connect CLI streams, switch to `_ops/workflows/71-cli-pipeline-orchestration.md` and model the work as process nodes plus pipe edges.
+8. If the CLI changes dependency or environment state, run installation audit planning before install.
+9. If the desktop shell invokes the CLI, record command/path allowlists and user-visible permission settings.
+10. Update requirements, specs, traceability, and source provenance.
+11. Validate config contracts, docs, maps, task board, grounding, evaluation, and timing records.
 
 ## Output Contract
 
@@ -51,6 +52,7 @@ Use this workflow when the installable platform, agent-platform, workspace-monit
 - security/permission boundary
 - fallback behavior for missing or unsupported CLI
 - install audit target if installation occurred or is planned
+- CLI pipeline target if multiple CLI processes, pipes, or fan-in merge are involved
 - validation commands
 
 ## Rule

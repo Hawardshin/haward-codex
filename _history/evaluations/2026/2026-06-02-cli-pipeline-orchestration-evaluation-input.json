@@ -1,0 +1,106 @@
+{
+  "initial_instruction": "CLI를 하면 내부에서 여러 프로세스가 돌게 하는 것이다. 여러 CLI를 실행하는 구조를 만드는 것이다 파이프라던가 그런걸 이용해서.",
+  "result_summary": "Added a CLI pipeline orchestration gate: process graph validator, check-cli-pipeline CLI command, self-documenting pipeline template, cli-pipeline-agent docs/config, evaluator cli_pipeline_targets gate, work mode enforcement layer, workflow/prompt navigation, persistent instructions, memory bootstrap, requirements, specs, history, and verification records.",
+  "work_mode": "governance",
+  "changed_files": [
+    "agent-platform/src/agent_platform/integrations/cli_pipeline.py",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+    "agent-platform/src/agent_platform/work_modes.py",
+    "agent-platform/configs/integrations/cli-pipeline-template.json",
+    "agent-platform/configs/integrations/cli-adapter-registry.json",
+    "agent-platform/configs/workflows/work-mode-registry.json",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "agent-platform/configs/agents/cli-pipeline-agent.json",
+    "agent-platform/docs/cli-pipeline-agent.ko.md",
+    "_ops/workflows/71-cli-pipeline-orchestration.md",
+    "_ops/prompts/101-cli-pipeline-orchestration.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/spec.ko.md"
+  ],
+  "verification": [
+    "cd agent-platform && python3 -m unittest discover -s tests: 138 tests OK",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline configs/integrations/cli-pipeline-template.json: pipeline_ready",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-work-modes configs/workflows/work-mode-registry.json: ready",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-pipeline-template.json configs/integrations/cli-adapter-registry.json configs/workflows/work-mode-registry.json configs/memory/bootstrap-manifest.json: self_documenting",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json --root ..: ready_to_bootstrap",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean with existing presentation-agent generated-output warnings",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-cli-pipeline-orchestration.json: ready",
+    "python3 _tools/workspace-index/src/workspace_index.py: updated maps",
+    "python3 _tools/task-board/src/task_board.py: updated boards",
+    "cd workspace-monitor && npm run collect: wrote 1200 documents"
+  ],
+  "references_checked": [
+    "https://docs.python.org/3/library/subprocess.html",
+    "https://nodejs.org/api/child_process.html",
+    "https://www.gnu.org/software/bash/manual/html_node/Pipelines.html",
+    "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html",
+    "agent-platform/configs/integrations/cli-adapter-registry.json",
+    "_ops/workflows/66-cli-adapter-integration.md",
+    "_history/evaluations/2026/2026-06-02-resource-leak-prevention.ko.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-cli-pipeline-orchestration-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-cli-pipeline-orchestration.ko.md",
+    "_research/topics/agent-operations/2026-06-02-cli-pipeline-orchestration.ko.md",
+    "_history/plans/2026/2026-06-02-cli-pipeline-orchestration.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-cli-pipeline-orchestration.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/validation.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-02-cli-pipeline-orchestration.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-cli-pipeline-orchestration-omission-check.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-cli-pipeline-orchestration.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-02-cli-pipeline-orchestration.ko.md",
+    "_requirements/reviews/2026-06-02-cli-pipeline-orchestration.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-orchestration/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-cli-pipeline-orchestration.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-cli-pipeline-orchestration.json"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-02-cli-pipeline-orchestration-resource-check.json"
+  ],
+  "cli_pipeline_occurred": true,
+  "cli_pipeline_targets": [
+    "agent-platform/configs/integrations/cli-pipeline-template.json",
+    "_history/evaluations/2026/2026-06-02-cli-pipeline-orchestration-pipeline-check.json"
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Future work can implement the actual multi-process runner after a separate runtime decision and prototype measurement plan."
+  ]
+}
