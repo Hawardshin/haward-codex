@@ -26,4 +26,4 @@
 
 - 평가 파일: `_history/evaluations/2026/2026-06-01-bounded-clarification-loop.ko.md`
 - Grounding: `_history/evaluations/2026/2026-06-01-bounded-clarification-loop-grounding.json`
-- 커밋: pending
+- 커밋: `512a815` pushed

@@ -7,4 +7,4 @@
 - [x] 스펙, 연구 노트, 계획, 요청 요약, trace, timing record 작성
 - [x] 검증 실행
 - [x] 평가 작성
-- [ ] 커밋 및 push
+- [x] 커밋 및 push

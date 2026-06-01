@@ -26,4 +26,4 @@
 
 - Evaluation file: `_history/evaluations/2026/2026-06-01-bounded-clarification-loop.en.md`
 - Grounding: `_history/evaluations/2026/2026-06-01-bounded-clarification-loop-grounding.json`
-- Commit: pending
+- Commit: `512a815` pushed

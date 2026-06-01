@@ -57,9 +57,10 @@
     {
       "phase_id": "commit_push",
       "label": "Commit and push",
-      "status": "pending",
-      "measurement": "not_measured",
-      "bottleneck_notes": "Will be completed after final commit and push."
+      "status": "completed",
+      "duration_seconds": 90,
+      "measurement": "measured",
+      "bottleneck_notes": "Measured the primary implementation commit and push. A follow-up metadata commit records finalized close-out references."
     }
   ],
   "bottleneck_analysis": {
