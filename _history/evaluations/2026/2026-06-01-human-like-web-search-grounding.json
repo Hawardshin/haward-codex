@@ -1,0 +1,109 @@
+{
+  "task": "Ground factual claims for human-like web search improvement.",
+  "output_summary": "Added a human-like search method profile, connected it to research workflows/configs, and added a source-collector query-plan command.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "human_search_profile",
+      "source": "agent-platform/configs/research/human-search-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked self-documenting profile with trigger situations, stages, query ladder templates, source lane targets, snowballing rules, and summary capture contract."
+    },
+    {
+      "evidence_id": "source_collector_code",
+      "source": "_tools/source-collector/src/source_collector.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked local tool code that implements build_human_query_plan and query-plan CLI rendering."
+    },
+    {
+      "evidence_id": "source_collector_tests",
+      "source": "_tools/source-collector/tests/test_source_collector.py; python3 -m unittest discover -s _tools/source-collector/tests",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Source collector unit tests passed: 6 tests OK."
+    },
+    {
+      "evidence_id": "query_plan_smoke",
+      "source": "python3 _tools/source-collector/src/source_collector.py query-plan \"human-like web search\" --depth deep",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command rendered a staged query ladder with operator, authority, field-practice, community, contrary, snowballing, summary, and stop-rule sections."
+    },
+    {
+      "evidence_id": "workflow_prompt_policy",
+      "source": "_ops/workflows/54-human-like-source-discovery.md; _ops/prompts/84-human-like-source-discovery.md; _docs/policies/source-collection-policy.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked workflow, prompt, and policy connections for repeated use."
+    },
+    {
+      "evidence_id": "memory_bootstrap",
+      "source": "agent-platform/configs/memory/bootstrap-manifest.json; PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Memory bootstrap check returned ready_to_bootstrap with the human_search_profile anchor present."
+    },
+    {
+      "evidence_id": "config_contract",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/research/human-search-profile.json ...",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Config contract check returned self_documenting with no gaps."
+    },
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-human-like-web-search.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked web-first record listing search-method references and weak sources ignored."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "A new human-search-profile config defines when and how agents should run query expansion, operator searches, source-lane searches, snowballing, triage, and selective source summaries.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["human_search_profile", "config_contract"],
+      "verification_steps": ["Read human-search-profile.json and ran the config contract check."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The source collector now has a query-plan command that renders a staged human-like search query ladder.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["source_collector_code", "source_collector_tests", "query_plan_smoke"],
+      "verification_steps": ["Ran source collector tests and a query-plan smoke command."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workflow, prompt, policy, and memory bootstrap files now point future work to the human-like source discovery method.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["workflow_prompt_policy", "memory_bootstrap"],
+      "verification_steps": ["Read linked files and ran memory bootstrap validation."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Good-source summaries are now meant to be selective and saved only when they change the answer, plan, risk model, source list, or reusable knowledge base.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["human_search_profile", "workflow_prompt_policy"],
+      "verification_steps": ["Read summary_capture_contract and updated policy/workflow text."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "This change improves the search process and source-recording structure; it does not guarantee that every future search result is high quality.",
+    "Exact source pages still need to be opened and verified before citation."
+  ],
+  "limitation_notes": [
+    "No external search provider API integration was added.",
+    "The query ladder generator is deterministic and does not yet execute searches automatically."
+  ]
+}

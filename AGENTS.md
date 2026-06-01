@@ -68,6 +68,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Do not store raw internal chain-of-thought in repository documents; store only verifiable public search reasoning summaries.
 - If the web search is irrelevant or unavailable, record that and continue with stronger local verification.
 - For research or planning work, collect broad high-authority sources: official docs, papers, standards, books, official statistics, survey datasets, market/industry reports, open-source repos, international tech blogs, analysis articles, community signals, social/expert signals, and contrary examples.
+- When the user asks for better web search or a task needs broad source discovery, use `agent-platform/configs/research/human-search-profile.json` to build a query ladder with seed, synonym, operator, source-lane, regional, community, contrary, and snowballing searches before synthesis.
+- Good sources found through human-like search should be summarized only when they change the answer, plan, risk model, source list, or reusable knowledge base; save reusable summaries under `_research/` or the owning project docs with URL, access date, reliability, limitations, and plan impact.
 - Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption or discovery signals, not standalone factual proof.
 - For important planning, do not rely only on the model's internal guess; use `research-insight-planner-agent` to combine web search with another search channel, derive insights, and plan validation.
 - Treat `research-insight-planner-agent` as a core Perplexity-style answer engine, not a simple search summarizer.
@@ -199,7 +201,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - If a skill must be active in Codex, install or copy it into `$CODEX_HOME/skills` only after confirming the target path and permissions.
 - For new tools, prefer `_tools/<tool-name>/` for shared tools or `project-name/tools/` for project-specific tools.
 - Document each reusable tool with its purpose, inputs, outputs, and main command.
-- Use `_tools/source-collector/` when many web/search sources need repeated normalization, bundle coverage checks, or source scoring.
+- Use `_tools/source-collector/` when many web/search sources need repeated normalization, query ladder generation, bundle coverage checks, or source scoring.
+- Use `_ops/workflows/54-human-like-source-discovery.md` and `_ops/prompts/84-human-like-source-discovery.md` when search should behave like careful human research with query expansion, operators, source lanes, snowballing, and selective summary capture.
 - Use `agent-platform/configs/research/source-discovery-registry.json` when broad search origins are needed across global tech blogs, Korean big-tech blogs, India technology sources, paper discovery, and Korean local review channels.
 - Use `agent-platform/configs/research/marketing-evidence-profile.json` when marketer-style desk research, theory/book grounding, market sizing, consumer surveys, public statistics, commercial research reports, or quantitative evidence matter.
 - Use `_tools/korean-local-review/` when Korean user review, Naver/Kakao Map, Naver Blog/Search, or local-market source quality scoring matters.

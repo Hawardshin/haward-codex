@@ -19,6 +19,7 @@
       "The core research-agent profile or answer-engine stage rules change.",
       "The deep research profile, report-readiness rules, or citation audit contract changes.",
       "The enterprise/high-quality source seed registry changes.",
+      "The human-like search profile, query ladder, operator search, snowballing, or summary capture contract changes.",
       "The broad source discovery registry or Korean local review source rules change.",
       "The work summary layer or close-out documentation contract changes.",
       "The context archive layer or long-context resume contract changes.",
@@ -442,6 +443,17 @@
       "last_checked": "2026-05-31"
     },
     {
+      "id": "human_search_profile",
+      "title": "Human Search Profile",
+      "path": "agent-platform/configs/research/human-search-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "human-like query ladder and operator search",
+        "snowballing and selective summary capture"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
       "id": "marketing_evidence_profile",
       "title": "Marketing Evidence Profile",
       "path": "agent-platform/configs/research/marketing-evidence-profile.json",
@@ -676,6 +688,17 @@
       ]
     },
     {
+      "id": "human_search_profile_must_stay_discoverable",
+      "rule": "The human search profile must remain a warm memory anchor so future sessions can search like a careful human researcher with query ladders, operators, source lanes, snowballing, and selective source summaries.",
+      "reason": "The user explicitly asked for web search to find more sources like a person would and to summarize good reusable sources.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "research-insight-planner-agent"
+      ]
+    },
+    {
       "id": "marketing_evidence_profile_must_stay_discoverable",
       "rule": "The marketing evidence profile must remain a warm memory anchor so future sessions can find books, theory, surveys, public statistics, market reports, and quantitative evidence with full numeric provenance.",
       "reason": "The user explicitly asked for better methods to find marketer research materials, theoretical books, survey evidence, and quantitative numeric support.",
@@ -886,6 +909,7 @@
     "source_registry",
     "enterprise_source_registry",
     "source_discovery_registry",
+    "human_search_profile",
     "marketing_evidence_profile",
     "research_agent_profile",
     "deep_research_profile",
@@ -929,6 +953,7 @@
     "source_registry",
     "enterprise_source_registry",
     "source_discovery_registry",
+    "human_search_profile",
     "marketing_evidence_profile",
     "research_agent_profile",
     "deep_research_profile",
@@ -1137,6 +1162,14 @@
       "path": "agent-platform/configs/research/source-discovery-registry.json",
       "tier": "warm",
       "purpose": "Broad search-origin registry for global engineering blogs, Korean big-tech blogs, India technology sources, paper discovery, and Korean local review channels.",
+      "required": true,
+      "load_order": 23
+    },
+    {
+      "id": "human_search_profile",
+      "path": "agent-platform/configs/research/human-search-profile.json",
+      "tier": "warm",
+      "purpose": "Human-like search method profile for query ladders, operator searches, source lanes, snowballing, and selective source summaries.",
       "required": true,
       "load_order": 23
     },

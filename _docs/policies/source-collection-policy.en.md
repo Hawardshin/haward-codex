@@ -26,6 +26,8 @@ This policy extends [_docs/policies/web-first-work-policy.en.md](web-first-work-
 - Actively include international tech blogs and foreign-language articles when useful.
 - When large-company engineering blogs, official research labs, architecture centers, or high-signal independent sources are useful, check `agent-platform/configs/research/enterprise-source-registry.json` first.
 - When broader search origins are needed, check `agent-platform/configs/research/source-discovery-registry.json` for global engineering blogs, Korean big-tech blogs, India technology sources, and paper discovery sources.
+- When search quality itself matters or more sources are needed, use `agent-platform/configs/research/human-search-profile.json` to create a seed, synonym, operator, source-lane, regional, community, contrary, and snowballing query ladder.
+- Source summaries are selective. Save only sources that affect the answer, plan, risk model, or reusable knowledge, with URL, access date, key claim, reliability, limitation, and plan impact.
 - When marketing, market sizing, consumer insight, brand strategy, go-to-market, survey-backed claims, book/theory grounding, or quantitative evidence is needed, use `agent-platform/configs/research/marketing-evidence-profile.json`.
 - Marketing and market-sizing numbers must preserve value, unit, denominator/base, geography, timeframe, population, methodology, sample, sponsor/funder, access date, and comparability notes.
 - Survey evidence should record population, sample size, sampling method, field dates, mode, weighting, sponsor/funder, and question wording or instrument when available. Missing methodology downgrades the source to weak evidence.
@@ -52,7 +54,7 @@ When research affects a plan or decision, try to collect:
 
 Simple local tasks do not need the full bundle. Still run web-first intake and record when results are irrelevant.
 
-When collecting or reporting many sources becomes repetitive, use `_tools/source-collector/`. For Korean local reviews or Naver/Kakao-centered research, use `_tools/korean-local-review/`.
+When collecting many sources or creating query ladders, reports, or scoring becomes repetitive, use `_tools/source-collector/`. For Korean local reviews or Naver/Kakao-centered research, use `_tools/korean-local-review/`.
 
 For general research and planning, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json` to record source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
 
@@ -95,6 +97,7 @@ Research notes and evaluation reports should record:
 
 ```bash
 python3 _tools/source-collector/src/source_collector.py init /tmp/source-bundle.json --topic "topic" --purpose "purpose" --access-date YYYY-MM-DD
+python3 _tools/source-collector/src/source_collector.py query-plan "topic" --depth deep --output /tmp/query-plan.md --json-output /tmp/query-plan.json
 python3 _tools/source-collector/src/source_collector.py report /tmp/source-bundle.json --output /tmp/source-report.md --json-output /tmp/source-report.json
 python3 _tools/source-collector/src/source_collector.py check /tmp/source-bundle.json --strict
 python3 _tools/korean-local-review/src/korean_local_review.py query-plan --topic "topic" --region "region" --category "category"

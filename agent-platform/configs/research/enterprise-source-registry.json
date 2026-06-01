@@ -11,7 +11,7 @@
       "Re-check last_checked and source freshness before relying on any entry."
     ],
     "owner": "agent-platform",
-    "last_reviewed": "2026-05-31",
+    "last_reviewed": "2026-06-01",
     "update_triggers": [
       "A new large-company engineering, architecture, or research site becomes repeatedly useful.",
       "A listed source becomes stale, low quality, unavailable, or marketing-heavy.",
@@ -590,10 +590,10 @@
       ],
       "last_checked": "2026-05-31"
     },
-    {
-      "id": "databricks_engineering",
-      "name": "Databricks Engineering Blog",
-      "organization": "Databricks",
+        {
+            "id": "databricks_engineering",
+            "name": "Databricks Engineering Blog",
+            "organization": "Databricks",
       "url": "https://www.databricks.com/blog/category/engineering",
       "category": "enterprise_engineering",
       "source_type": "official",
@@ -605,12 +605,144 @@
       ],
       "caveats": [
         "Vendor/product framing can be strong."
-      ],
-      "last_checked": "2026-05-31"
-    },
-    {
-      "id": "openai_research",
-      "name": "OpenAI Research",
+            ],
+            "last_checked": "2026-05-31"
+        },
+        {
+            "id": "canva_engineering",
+            "name": "Canva Engineering",
+            "organization": "Canva",
+            "url": "https://www.canva.dev/blog/engineering/",
+            "category": "enterprise_engineering",
+            "source_type": "official",
+            "quality_tier": "tier_2_field_practice",
+            "use_for": [
+                "frontend platform engineering",
+                "design systems",
+                "product engineering",
+                "AI and infrastructure cases"
+            ],
+            "caveats": [
+                "Design/product context may not transfer to non-creative tools."
+            ],
+            "last_checked": "2026-06-01"
+        },
+        {
+            "id": "figma_engineering",
+            "name": "Figma Engineering",
+            "organization": "Figma",
+            "url": "https://www.figma.com/blog/engineering/",
+            "category": "enterprise_engineering",
+            "source_type": "official",
+            "quality_tier": "tier_2_field_practice",
+            "use_for": [
+                "collaborative editing",
+                "frontend systems",
+                "graphics and product platform engineering"
+            ],
+            "caveats": [
+                "Highly interactive product constraints may be domain-specific."
+            ],
+            "last_checked": "2026-06-01"
+        },
+        {
+            "id": "doordash_engineering",
+            "name": "DoorDash Engineering",
+            "organization": "DoorDash",
+            "url": "https://careersatdoordash.com/blog/category/engineering/",
+            "category": "enterprise_engineering",
+            "source_type": "official",
+            "quality_tier": "tier_2_field_practice",
+            "use_for": [
+                "marketplace systems",
+                "logistics",
+                "experimentation",
+                "data platforms"
+            ],
+            "caveats": [
+                "Marketplace logistics assumptions may not apply outside delivery products."
+            ],
+            "last_checked": "2026-06-01"
+        },
+        {
+            "id": "discord_engineering",
+            "name": "Discord Engineering",
+            "organization": "Discord",
+            "url": "https://discord.com/category/engineering",
+            "category": "enterprise_engineering",
+            "source_type": "official",
+            "quality_tier": "tier_2_field_practice",
+            "use_for": [
+                "real-time communication",
+                "low-latency systems",
+                "safety systems",
+                "product infrastructure"
+            ],
+            "caveats": [
+                "Community and real-time chat assumptions may be product-specific."
+            ],
+            "last_checked": "2026-06-01"
+        },
+        {
+            "id": "vercel_blog",
+            "name": "Vercel Blog",
+            "organization": "Vercel",
+            "url": "https://vercel.com/blog",
+            "category": "enterprise_engineering",
+            "source_type": "official",
+            "quality_tier": "tier_2_field_practice",
+            "use_for": [
+                "frontend platforms",
+                "Next.js ecosystem",
+                "deployment and edge architecture",
+                "developer experience"
+            ],
+            "caveats": [
+                "Vendor/product framing can be strong; compare with framework official docs and independent examples."
+            ],
+            "last_checked": "2026-06-01"
+        },
+        {
+            "id": "datadog_engineering",
+            "name": "Datadog Engineering",
+            "organization": "Datadog",
+            "url": "https://www.datadoghq.com/blog/engineering/",
+            "category": "enterprise_engineering",
+            "source_type": "official",
+            "quality_tier": "tier_2_field_practice",
+            "use_for": [
+                "observability",
+                "telemetry pipelines",
+                "reliability",
+                "security monitoring"
+            ],
+            "caveats": [
+                "Observability vendor perspective; verify implementation details against open standards where relevant."
+            ],
+            "last_checked": "2026-06-01"
+        },
+        {
+            "id": "sentry_engineering",
+            "name": "Sentry Engineering",
+            "organization": "Sentry",
+            "url": "https://blog.sentry.io/engineering/",
+            "category": "enterprise_engineering",
+            "source_type": "official",
+            "quality_tier": "tier_2_field_practice",
+            "use_for": [
+                "developer tooling",
+                "observability",
+                "error monitoring",
+                "performance debugging"
+            ],
+            "caveats": [
+                "Product and vendor perspective; verify broad claims against standards and implementation docs."
+            ],
+            "last_checked": "2026-06-01"
+        },
+        {
+            "id": "openai_research",
+            "name": "OpenAI Research",
       "organization": "OpenAI",
       "url": "https://openai.com/science/",
       "category": "research_lab",

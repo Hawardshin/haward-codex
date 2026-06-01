@@ -56,6 +56,7 @@
 | REQ-WS-038 | 새 코딩 프로젝트는 기술별 blueprint로 dry-run 계획을 먼저 확인하고, 적용 시 root project 등록, 프로젝트별 README/docs/specs/configs/tests/tools/artifacts, 기술별 공식 문서 체크리스트, coding research 연결점을 자동 준비할 수 있어야 한다. | UR-2026-06-01-023 | must | baseline | workspace/_tools/_ops/projects | bootstrap tool tests, structure audit, workspace-health, project registry dry-run 확인 | `_tools/coding-project-bootstrap/`, `_ops/workflows/27-bootstrap-coding-project.md`, `_ops/prompts/27-bootstrap-coding-project.md` |
 | REQ-WS-039 | 의미 있는 작업은 phase별 소요시간을 `_history/work-timings/`에 기록하고, coordination board, Workspace Monitor, 평가 입력에서 slowest phase와 병목 후보를 확인할 수 있어야 한다. | UR-2026-06-01-024 | must | baseline | workspace/_tools/_ops/agent-platform/workspace-monitor | work-timer check, task-board, workspace-health, evaluator 확인 | `_tools/work-timer/`, `_history/work-timings/`, `_ops/workflows/42-record-work-timing.md`, `agent-platform/src/agent_platform/evaluation/work_evaluator.py` |
 | REQ-WS-040 | 특정 상황에서 깊은 조사가 필요하면 `deep-research-agent`가 다중 검색 채널, 반복 조사 단계, 출처 품질 평가, evidence item, contradiction mapping, citation audit, report outline, report target을 기록하고 긴 보고서 작성 준비 상태를 검증해야 한다. | UR-2026-06-01-025 | must | baseline | agent-platform/_research/_history | `complete-deep-research` 테스트/CLI, deep research profile config contract, memory bootstrap 확인 | `agent-platform/src/agent_platform/planning/deep_research.py`, `agent-platform/configs/research/deep-research-profile.json`, `_ops/workflows/57-deep-research.md` |
+| REQ-WS-041 | 웹 검색 품질이 중요한 작업은 사람이 실제로 검색하듯 query ladder, 검색 연산자, source lane, regional/community/contrary search, snowballing, selective summary capture를 사용하고, 좋은 출처는 재사용 가능할 때만 요약해야 한다. | UR-2026-06-01-026 | must | baseline | agent-platform/_ops/_tools/_research | human-search-profile config contract, source-collector query-plan test, web search record, memory bootstrap 확인 | `agent-platform/configs/research/human-search-profile.json`, `_ops/workflows/54-human-like-source-discovery.md`, `_ops/prompts/84-human-like-source-discovery.md`, `_tools/source-collector/` |
 
 ## 변경 관리
 
@@ -81,6 +82,7 @@
 - 2026-06-01에 REQ-WS-038을 추가해 새 코딩 프로젝트 생성 시 기술별 blueprint, dry-run, root registry 선택 등록, 프로젝트별 구조와 coding research 연결을 공통 도구로 승격했다.
 - 2026-06-01에 REQ-WS-039를 추가해 작업별 phase timing, 병목 후보, coordination/monitor/evaluator 연결을 공통 운영 구조로 승격했다.
 - 2026-06-01에 REQ-WS-040을 추가해 특정 상황의 긴 보고서형 딥리서치를 별도 에이전트와 readiness check로 승격했다.
+- 2026-06-01에 REQ-WS-041을 추가해 사람형 검색 query ladder, operator/source-lane/snowballing 검색, 좋은 출처 선택 요약을 공통 리서치 구조로 승격했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.

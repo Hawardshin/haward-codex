@@ -7,6 +7,7 @@ This folder stores configuration files that make source criteria and reference c
 - `source-registry.json`: source type taxonomy and reusable reference source catalog
 - `enterprise-source-registry.json`: separate seed list of large-company engineering, official research lab, architecture center, and high-signal independent sources
 - `source-discovery-registry.json`: broad search-origin registry for global technology blogs, Korean big-tech blogs, India technology sources, paper discovery, and Korean local review channels
+- `human-search-profile.json`: search-method profile for human-like query ladders, operators, source lanes, snowballing, and good-source summary criteria
 - `research-agent-profile.json`: core Perplexity-style answer-engine profile used by the research agent
 - `deep-research-profile.json`: research depth, stage, citation-audit, and report contract profile for deep research, long-form reports, and landscape/literature reviews
 - `coding-research-profile.json`: default source coverage profile used by `coding-research-agent` before implementation
@@ -21,6 +22,9 @@ This folder stores configuration files that make source criteria and reference c
 - `source_types` should use the source types defined in `source-registry.json`.
 - When enterprise/high-quality sources are used as research starting points, record `enterprise-source-registry.json` in `research_profile_paths` or `reference_config_paths`.
 - When broader source discovery, Korean user reviews, Korean technology blogs, India technology sources, or paper discovery sources are useful, check `source-discovery-registry.json`.
+- When search quality itself matters or many sources are needed, check `human-search-profile.json` and record seed, synonym, operator, source-lane, community, contrary, and snowballing search stages.
+- When using global, Korean, or India technology sources, record regional fit and evidence role, and separate individual blogs, YouTube, or community signals from primary proof.
+- For paper-backed evidence, combine graph indexes such as OpenAlex/Semantic Scholar, source indexes such as DBLP/ACM/IEEE/USENIX/venue proceedings, arXiv or publisher pages, and code/adoption signals such as Papers with Code or Hugging Face Papers.
 - When marketing, market sizing, consumer insight, books/theory, survey research, or quantitative evidence is needed, check `marketing-evidence-profile.json` and record it in `research_profile_paths`.
 - Marketing numeric evidence must preserve value, unit, denominator/base, geography, timeframe, population, method, sample, sponsor, and comparability notes.
 - Tie material values and planning constraints to `source_value_provenance` and `plan_evidence`.
@@ -37,9 +41,10 @@ This folder stores configuration files that make source criteria and reference c
 ```json
 {
   "research_profile_paths": [
-    "agent-platform/configs/research/research-agent-profile.json",
-    "agent-platform/configs/research/deep-research-profile.json",
-    "agent-platform/configs/research/source-registry.json",
+	    "agent-platform/configs/research/research-agent-profile.json",
+	    "agent-platform/configs/research/deep-research-profile.json",
+	    "agent-platform/configs/research/human-search-profile.json",
+	    "agent-platform/configs/research/source-registry.json",
     "agent-platform/configs/research/source-discovery-registry.json",
     "agent-platform/configs/research/marketing-evidence-profile.json"
   ],

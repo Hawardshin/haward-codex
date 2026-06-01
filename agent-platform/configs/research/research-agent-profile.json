@@ -76,6 +76,17 @@
             "last_checked": "2026-05-31"
         },
         {
+            "id": "human_search_profile",
+            "title": "Human Search Profile",
+            "path": "agent-platform/configs/research/human-search-profile.json",
+            "source_type": "internal",
+            "used_for": [
+                "query ladder, search operator, and snowballing rules",
+                "selective summary capture for reusable findings"
+            ],
+            "last_checked": "2026-06-01"
+        },
+        {
             "id": "marketing_evidence_profile",
             "title": "Marketing Evidence Profile",
             "path": "agent-platform/configs/research/marketing-evidence-profile.json",
@@ -212,6 +223,16 @@
       ]
     },
     {
+      "id": "human_search_before_broad_research",
+      "rule": "When research quality matters, use human-search-profile.json to create a query ladder, operator searches, source-lane searches, contrary searches, and snowballing before synthesis.",
+      "reason": "The answer engine needs broader retrieval before source ranking and evidence extraction can be reliable.",
+      "applies_to": [
+        "required_coverage",
+        "answer_engine_stages",
+        "source_ranking_rules"
+      ]
+    },
+    {
       "id": "profile_use_must_be_recorded",
       "rule": "Research outputs must record research_profile_paths including this file or another JSON profile under agent-platform/configs/research/.",
       "reason": "Future review needs to know which research rules shaped the answer or plan.",
@@ -288,6 +309,8 @@
     "must_record_plan_evidence": true,
     "must_record_plan_history_targets": true,
     "must_validate_internal_knowledge": true,
+    "must_record_query_ladder_when_broad_research": true,
+    "must_record_snowballing_when_used": true,
     "required_answer_engine_stage_ids": [
       "query_understanding",
       "search_retrieval",
@@ -431,6 +454,7 @@
   "source_ranking_rules": [
     "Prefer official, primary, paper, standard, maintained open-source, or reference implementation sources for factual claims.",
     "Use technical blogs, analysis articles, and community sources to discover trade-offs and practical failure modes.",
+    "Use human-search-profile.json when a task needs broad source discovery, query expansion, operator searches, snowballing, or reusable source summaries.",
     "Use enterprise-source-registry.json to seed large-company engineering, research-lab, architecture-center, and high-signal independent source searches.",
         "Use source-discovery-registry.json to broaden search through global engineering blogs, Korean technology blogs, India technology sources, paper discovery, and Korean local review channels.",
         "Use marketing-evidence-profile.json when the task needs marketing strategy, market sizing, consumer insight, survey-backed claims, books, public statistics, or quantitative evidence.",

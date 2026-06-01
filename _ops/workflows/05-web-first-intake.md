@@ -17,9 +17,10 @@
 9. 외부 사실이나 최신 정보가 있으면 확인 날짜와 출처를 기록한다.
 10. 검색 결과가 계획을 바꾸면 `research-insight-planner-agent`와 `agent-platform/configs/research/research-agent-profile.json`을 사용하고 계획 히스토리에 남긴다.
 11. 출처가 많거나 반복 정리가 필요하면 `_tools/source-collector/`로 출처 묶음을 정규화하고 보고서를 만든다.
-12. 재사용 가치가 있는 내용은 `_research/`에 저장한다.
-13. 의미 있는 작업이면 `_history/web-searches/YYYY/`에 공개 검색 판단 기록을 저장한다.
-14. 이후 [_ops/workflows/00-start-here.md](00-start-here.md)의 저장소 탐색과 구현 단계로 이동한다.
+12. 더 많은 소스를 사람이 실제로 검색하듯 찾아야 하면 [_ops/workflows/54-human-like-source-discovery.md](54-human-like-source-discovery.md)와 `agent-platform/configs/research/human-search-profile.json`을 사용한다.
+13. 재사용 가치가 있는 내용은 `_research/`에 저장한다.
+14. 의미 있는 작업이면 `_history/web-searches/YYYY/`에 공개 검색 판단 기록을 저장한다.
+15. 이후 [_ops/workflows/00-start-here.md](00-start-here.md)의 저장소 탐색과 구현 단계로 이동한다.
 
 ## Search Quality Rules
 
@@ -45,6 +46,7 @@
 - [_docs/policies/web-first-work-policy.ko.md](../../_docs/policies/web-first-work-policy.ko.md)
 - [_docs/policies/source-collection-policy.ko.md](../../_docs/policies/source-collection-policy.ko.md)
 - [_tools/source-collector/README.ko.md](../../_tools/source-collector/README.ko.md)
+- [_ops/workflows/54-human-like-source-discovery.md](54-human-like-source-discovery.md)
 - [_ops/prompts/05-web-first-intake.md](../prompts/05-web-first-intake.md)
 - [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md)
 - [_history/web-searches/README.ko.md](../../_history/web-searches/README.ko.md)

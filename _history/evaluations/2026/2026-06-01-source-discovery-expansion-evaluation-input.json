@@ -1,0 +1,121 @@
+{
+  "initial_instruction": "원천데이터 조사 소스에 세계적인 많은 기술 블로그의 내용과 한국의 빅테크 기업들의 기술블로그 또 인도의 유명한 사람들의 블로그 들도 참고해주고 논문들도 좀 더 유명한 논문들을 찾을 수 있는 검색의 원천 소스들을 더 모아줘.",
+  "result_summary": "Expanded shared source discovery registries and bilingual source lists with broader global engineering blogs, Korean technology blogs, Indian technology/company/person sources, and paper-discovery origins while preserving evidence-role caveats and source provenance.",
+  "work_mode": "governance",
+  "changed_files": [
+    "agent-platform/configs/research/source-discovery-registry.json",
+    "agent-platform/configs/research/enterprise-source-registry.json",
+    "agent-platform/configs/research/README.ko.md",
+    "agent-platform/configs/research/README.en.md",
+    "_research/source-lists/enterprise-high-quality-sites.ko.md",
+    "_research/source-lists/enterprise-high-quality-sites.en.md",
+    "_research/topics/agent-planning/2026-06-01-source-discovery-expansion.ko.md",
+    "_research/topics/agent-planning/2026-06-01-source-discovery-expansion.en.md",
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/",
+    "_requirements/reviews/2026-06-01-source-discovery-expansion.ko.md",
+    "_requirements/reviews/2026-06-01-source-discovery-expansion.en.md",
+    "_history/web-searches/2026/2026-06-01-source-discovery-expansion.ko.md",
+    "_history/web-searches/2026/2026-06-01-source-discovery-expansion.en.md",
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/user-requests/2026/2026-06-01.en.md",
+    "_history/request-traces/2026/2026-06-01-source-discovery-expansion.ko.md",
+    "_history/request-traces/2026/2026-06-01-source-discovery-expansion.en.md",
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.en.md",
+    "_history/2026/2026-06-01.md",
+    "_history/work-timings/2026/2026-06-01-source-discovery-expansion.json",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md"
+  ],
+  "verification": [
+    "python3 -m json.tool agent-platform/configs/research/source-discovery-registry.json: parsed successfully",
+    "python3 -m json.tool agent-platform/configs/research/enterprise-source-registry.json: parsed successfully",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/research/source-discovery-registry.json configs/research/enterprise-source-registry.json configs/research/source-registry.json configs/research/research-agent-profile.json: self_documenting",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "python3 _tools/workspace-index/src/workspace_index.py: maps regenerated",
+    "python3 _tools/workspace-index/src/workspace_index.py --check: passed",
+    "python3 _tools/workspace-health/src/workspace_health.py --category governance --json: 7 checks passed",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-01-source-discovery-expansion.json: ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-source-discovery-expansion-grounding.json: ready_to_publish",
+    "git diff --check: passed"
+  ],
+  "references_checked": [
+    "Kakao Tech: https://tech.kakao.com/",
+    "NAVER D2: https://d2.naver.com/home",
+    "Woowa Tech Blog: https://techblog.woowahan.com/",
+    "Kurly Tech Blog: https://helloworld.kurly.com/",
+    "Daangn Tech Blog: https://medium.com/daangn",
+    "Razorpay Engineering: https://engineering.razorpay.com/",
+    "Zerodha Tech Blog: https://zerodha.tech/",
+    "PhonePe Tech Blog: https://tech.phonepe.com/",
+    "Arpit Bhayani Blogs: https://arpitbhayani.me/blogs/",
+    "OpenAlex Works: https://docs.openalex.org/api-entities/works",
+    "Semantic Scholar: https://www.semanticscholar.org/",
+    "DBLP: https://dblp.org/",
+    "ACM Digital Library: https://www.acm.org/publications/digital-library",
+    "USENIX Proceedings: https://www.usenix.org/publications/proceedings",
+    "Hugging Face Papers: https://huggingface.co/papers",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "agent-platform/configs/research/source-discovery-registry.json",
+    "agent-platform/configs/research/enterprise-source-registry.json"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-source-discovery-expansion-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-source-discovery-expansion.ko.md",
+    "_research/topics/agent-planning/2026-06-01-source-discovery-expansion.ko.md",
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/traceability.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/plan.ko.md",
+    "_history/web-searches/2026/2026-06-01-source-discovery-expansion.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-source-discovery-expansion.ko.md",
+    "_history/web-searches/2026/2026-06-01-source-discovery-expansion.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/user-requests/2026/2026-06-01.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/reviews/2026-06-01-source-discovery-expansion.ko.md",
+    "_requirements/reviews/2026-06-01-source-discovery-expansion.en.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/spec.en.md",
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/plan.en.md",
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/tasks.en.md",
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/validation.ko.md",
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/validation.en.md",
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/traceability.ko.md",
+    "_specs/workspace-platform/2026-06-01-source-discovery-expansion/traceability.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-01-source-discovery-expansion.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01-source-discovery-expansion.ko.md",
+    "_history/request-traces/2026/2026-06-01-source-discovery-expansion.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.en.md"
+  ],
+  "skill_work_occurred": false,
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Add a deterministic source freshness checker if these source lists start changing often.",
+    "After several real research tasks use the expanded registry, demote stale or low-signal sources based on observed usefulness."
+  ]
+}

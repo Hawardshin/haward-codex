@@ -16,6 +16,7 @@ Summarize the instruction in one sentence.
 Choose search terms that reveal current facts, official docs, strong references, examples, or contrary signals.
 Prefer official docs, primary sources, papers, mature open-source repositories, and reliable references.
 For research or planning tasks, collect a broad source bundle: official/primary sources, papers, international tech blogs, open-source repos, analysis articles, community signals, social/expert signals, and contrary or failure cases.
+When many sources or better search quality are needed, use agent-platform/configs/research/human-search-profile.json to build a query ladder with seed, synonym, operator, source-lane, community, contrary, regional, and snowballing searches.
 Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as popularity/adoption signals, not standalone proof.
 Open sources when their content will influence the answer or plan.
 Do not treat search result titles as evidence.

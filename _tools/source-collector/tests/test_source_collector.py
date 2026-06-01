@@ -6,7 +6,16 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from source_collector import Source, SourceCollectionInput, SearchQuery, analyze, infer_source_type, render_markdown
+from source_collector import (
+    Source,
+    SourceCollectionInput,
+    SearchQuery,
+    analyze,
+    build_human_query_plan,
+    infer_source_type,
+    render_markdown,
+    render_query_plan_markdown,
+)
 
 
 class SourceCollectorTests(unittest.TestCase):
@@ -66,6 +75,22 @@ class SourceCollectorTests(unittest.TestCase):
         self.assertIn("# 출처 수집 보고서", report)
         self.assertIn("Bundle Coverage", report)
         self.assertIn("Missing Bundle Items", report)
+
+    def test_human_query_plan_contains_operator_and_snowballing_stages(self) -> None:
+        plan = build_human_query_plan("agent search automation", "deep")
+        stage_ids = [stage["stage_id"] for stage in plan["query_ladder"]]
+        queries = [query for stage in plan["query_ladder"] for query in stage["queries"]]
+
+        self.assertIn("operator_precision", stage_ids)
+        self.assertIn("snowballing_steps", plan)
+        self.assertTrue(any("filetype:pdf" in query for query in queries))
+        self.assertTrue(any("site:github.com" in query for query in queries))
+
+    def test_query_plan_markdown_renders_summary_contract(self) -> None:
+        markdown = render_query_plan_markdown(build_human_query_plan("source discovery", "standard"), "en")
+
+        self.assertIn("# Human-Like Search Query Plan", markdown)
+        self.assertIn("Summary Capture", markdown)
 
 
 if __name__ == "__main__":

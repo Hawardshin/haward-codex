@@ -135,6 +135,13 @@ def main(argv: list[str] | None = None) -> int:
     init_parser.add_argument("--purpose", default="Why this source collection is needed.")
     init_parser.add_argument("--access-date", default="YYYY-MM-DD")
 
+    query_plan_parser = subparsers.add_parser("query-plan", help="Create a human-like search query ladder.")
+    query_plan_parser.add_argument("topic")
+    query_plan_parser.add_argument("--depth", choices=("standard", "deep", "exhaustive"), default="deep")
+    query_plan_parser.add_argument("--output", type=Path, help="Markdown output path.")
+    query_plan_parser.add_argument("--json-output", type=Path, help="JSON output path.")
+    query_plan_parser.add_argument("--language", choices=("ko", "en"), default="ko")
+
     report_parser = subparsers.add_parser("report", help="Render a source collection report.")
     report_parser.add_argument("input", type=Path)
     report_parser.add_argument("--output", type=Path, help="Markdown output path.")
@@ -151,6 +158,20 @@ def main(argv: list[str] | None = None) -> int:
         data = template(args.topic, args.purpose, args.access_date)
         write_json(args.path, data)
         print(f"created: {args.path}")
+        return 0
+
+    if args.command == "query-plan":
+        data = build_human_query_plan(args.topic, args.depth)
+        markdown = render_query_plan_markdown(data, args.language)
+        if args.output:
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.write_text(markdown.rstrip() + "\n", encoding="utf-8")
+            print(f"wrote: {args.output}")
+        else:
+            print(markdown)
+        if args.json_output:
+            write_json(args.json_output, data)
+            print(f"wrote: {args.json_output}")
         return 0
 
     if args.command == "report":
@@ -220,6 +241,155 @@ def build_queries(topic: str) -> list[JsonMap]:
         {"query": f"{clean_topic} Hacker News Reddit LinkedIn", "channel": "web", "purpose": "community and social adoption signals"},
         {"query": f"{clean_topic} failure case limitations criticism", "channel": "web", "purpose": "contrary or failure cases"},
     ]
+
+
+def build_human_query_plan(topic: str, depth: str = "deep") -> JsonMap:
+    """Return a staged search plan that mirrors how a careful human researcher searches."""
+
+    clean_topic = topic.strip() or "research topic"
+    depth = depth if depth in {"standard", "deep", "exhaustive"} else "deep"
+    stage_limit = {"standard": 5, "deep": 7, "exhaustive": 9}[depth]
+    stages = [
+        {
+            "stage_id": "seed_understanding",
+            "goal": "Find the official vocabulary, product names, aliases, and first-party statements.",
+            "queries": [
+                f"{clean_topic} official documentation",
+                f"{clean_topic} official blog release notes",
+                f"{clean_topic} overview terminology glossary",
+            ],
+        },
+        {
+            "stage_id": "synonym_and_intent_expansion",
+            "goal": "Search adjacent wording so the result set is not trapped by one phrase.",
+            "queries": [
+                f"{clean_topic} alternatives OR comparison OR landscape",
+                f"{clean_topic} best practices OR guide OR checklist",
+                f"{clean_topic} case study OR architecture OR implementation",
+            ],
+        },
+        {
+            "stage_id": "operator_precision",
+            "goal": "Use exact-match, site, filetype, title, and exclusion operators to force narrower result sets.",
+            "queries": [
+                f"\"{clean_topic}\" filetype:pdf",
+                f"\"{clean_topic}\" site:github.com",
+                f"\"{clean_topic}\" site:stackoverflow.com OR site:reddit.com",
+                f"intitle:\"{clean_topic}\" guide OR playbook",
+                f"\"{clean_topic}\" -sponsored -advertisement",
+            ],
+        },
+        {
+            "stage_id": "authority_lanes",
+            "goal": "Search source families that can support claims rather than only discover ideas.",
+            "queries": [
+                f"{clean_topic} standard RFC specification",
+                f"{clean_topic} arxiv OR ACM OR IEEE OR paper",
+                f"{clean_topic} dataset benchmark survey",
+                f"{clean_topic} government official statistics methodology",
+            ],
+        },
+        {
+            "stage_id": "field_practice_lanes",
+            "goal": "Find high-quality implementation, operations, and practitioner evidence.",
+            "queries": [
+                f"{clean_topic} engineering blog case study",
+                f"{clean_topic} incident postmortem reliability lessons",
+                f"{clean_topic} GitHub implementation tests examples",
+                f"{clean_topic} migration lessons learned",
+            ],
+        },
+        {
+            "stage_id": "community_and_adoption_signals",
+            "goal": "Find repeated pain points, votes, discussion intensity, and adoption signals without treating them as proof.",
+            "queries": [
+                f"{clean_topic} Stack Overflow accepted answer votes",
+                f"{clean_topic} Reddit discussion limitations",
+                f"{clean_topic} Hacker News discussion",
+                f"{clean_topic} GitHub issues discussions",
+            ],
+        },
+        {
+            "stage_id": "contrary_and_failure_search",
+            "goal": "Actively search for disagreement, failed attempts, stale guidance, and hidden costs.",
+            "queries": [
+                f"{clean_topic} limitations failure case",
+                f"{clean_topic} criticism drawbacks risks",
+                f"{clean_topic} not recommended anti pattern",
+                f"{clean_topic} deprecated security issue",
+            ],
+        },
+        {
+            "stage_id": "regional_or_language_expansion",
+            "goal": "Add regional channels when the audience, market, or source ecosystem is local.",
+            "queries": [
+                f"{clean_topic} 한국 사례 기술블로그",
+                f"{clean_topic} 네이버 블로그 후기",
+                f"{clean_topic} 카카오 네이버 공식 문서",
+                f"{clean_topic} India engineering blog",
+            ],
+        },
+        {
+            "stage_id": "snowballing",
+            "goal": "Follow references, citations, backlinks, related papers, repos, authors, and named tools from the best seeds.",
+            "queries": [
+                f"{clean_topic} cited by related work",
+                f"{clean_topic} references bibliography",
+                f"{clean_topic} related papers implementation",
+                f"{clean_topic} author talk slides repository",
+            ],
+        },
+    ][:stage_limit]
+    return {
+        "topic": clean_topic,
+        "depth": depth,
+        "query_ladder": stages,
+        "snowballing_steps": [
+            "Pick the best 3 to 5 seed sources after initial triage.",
+            "Open their references, cited-by links, related papers, GitHub repositories, author pages, and linked talks.",
+            "Run one backward pass from references and one forward pass from citations, issues, or later articles.",
+            "Record which snowball links were followed and which were ignored as stale, weak, promotional, or off-topic.",
+        ],
+        "summary_capture_contract": [
+            "Summarize only sources that change the answer, plan, risk model, or reusable knowledge base.",
+            "For each summarized source, record URL, access date, source type, key claim, reliability, signal strength, limitation, and plan impact.",
+            "Keep community and social metrics as adoption or discovery signals, never as standalone proof.",
+            "Record unsupported or contradictory claims before synthesis.",
+        ],
+        "stop_rules": [
+            "Stop early for quick tasks when official/current facts and local verification are sufficient.",
+            "Continue for research/governance tasks until authority, field practice, community signal, and contrary lanes are represented or explicitly unavailable.",
+            "For exhaustive research, add another iteration when new high-quality sources keep changing the conclusion.",
+        ],
+    }
+
+
+def render_query_plan_markdown(plan: JsonMap, language: str) -> str:
+    ko = language == "ko"
+    title = "사람형 검색 쿼리 계획" if ko else "Human-Like Search Query Plan"
+    lines = [
+        f"# {title}: {plan['topic']}",
+        "",
+        f"- {'깊이' if ko else 'Depth'}: `{plan['depth']}`",
+        "",
+        "## Query Ladder",
+        "",
+    ]
+    for stage in plan["query_ladder"]:
+        lines.extend([f"### `{stage['stage_id']}`", "", f"- {'목표' if ko else 'Goal'}: {stage['goal']}", "", "| Query |", "| --- |"])
+        for query in stage["queries"]:
+            lines.append(f"| {md(query)} |")
+        lines.append("")
+    lines.extend(["## Snowballing", ""])
+    for step in plan["snowballing_steps"]:
+        lines.append(f"- {step}")
+    lines.extend(["", "## Summary Capture", ""])
+    for item in plan["summary_capture_contract"]:
+        lines.append(f"- {item}")
+    lines.extend(["", "## Stop Rules", ""])
+    for rule in plan["stop_rules"]:
+        lines.append(f"- {rule}")
+    return "\n".join(lines)
 
 
 def load_input(path: Path) -> SourceCollectionInput:

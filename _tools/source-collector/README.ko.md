@@ -7,6 +7,7 @@
 이 도구는 현재 단계에서 직접 웹을 크롤링하지 않는다. 대신 웹 검색, OpenAI web search, SearXNG, Tavily, SerpApi, 수동 조사 등에서 얻은 결과를 JSON으로 넣으면 다음을 수행한다.
 
 - 검색어와 출처 목록 정규화
+- 사람이 실제로 검색하듯 query ladder 생성
 - 출처 유형별 bundle coverage 확인
 - 공식 자료, 논문, 기술 블로그, 오픈소스, 커뮤니티/소셜 신호, 반대 사례 충족 여부 확인
 - 출처 품질 점수와 adoption signal 점수 계산
@@ -49,6 +50,12 @@ python3 _tools/source-collector/src/source_collector.py init /tmp/source-bundle.
 
 ## 명령
 
+사람형 검색 query ladder 생성:
+
+```bash
+python3 _tools/source-collector/src/source_collector.py query-plan "agent search automation" --depth deep --output /tmp/query-plan.md --json-output /tmp/query-plan.json
+```
+
 보고서 생성:
 
 ```bash
@@ -86,4 +93,5 @@ python3 -m unittest discover -s _tools/source-collector/tests
 - Tavily adapter
 - SerpApi adapter
 - OpenAI web search 결과 importer
+- query plan을 실제 provider별 검색 요청으로 변환하는 adapter
 - source-quality evaluator agent 연동

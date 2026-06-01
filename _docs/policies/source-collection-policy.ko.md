@@ -26,6 +26,8 @@
 - 외국 기술 블로그와 해외 아티클을 적극 포함한다.
 - 대기업 엔지니어링 블로그, 공식 연구소, architecture center, 고신뢰 독립 자료가 필요하면 `agent-platform/configs/research/enterprise-source-registry.json`을 먼저 확인한다.
 - 더 넓은 검색 원천이 필요하면 `agent-platform/configs/research/source-discovery-registry.json`을 확인해 세계적 기술 블로그, 한국 빅테크 기술 블로그, 인도 기술 소스, 논문 검색 원천을 함께 탐색한다.
+- 웹 검색 품질 자체가 중요하거나 더 많은 출처를 찾아야 하면 `agent-platform/configs/research/human-search-profile.json`을 사용해 seed, synonym, operator, source-lane, regional, community, contrary, snowballing query ladder를 만든다.
+- 좋은 출처 요약은 선택적으로 한다. 답변/계획/위험/재사용 지식에 영향을 주는 출처만 URL, 접근일, 핵심 claim, 신뢰도, 한계, plan impact와 함께 저장한다.
 - 마케팅, 시장 규모, 소비자 인사이트, 브랜드 전략, GTM, 설문 기반 주장, 책/이론 근거, 정량 수치 근거가 필요하면 `agent-platform/configs/research/marketing-evidence-profile.json`을 함께 사용한다.
 - 마케팅/시장 규모 숫자는 값, 단위, 분모/base, 지역, 기간, 모집단, 방법론, 표본, 스폰서/펀더, 접근일, 비교 가능성 메모를 함께 기록한다.
 - 설문 근거는 가능한 경우 모집단, 표본 크기, 표본추출 방식, 조사 기간, 조사 모드, 가중치, 스폰서/펀더, 질문 문구나 조사 도구를 확인한다. 방법론이 없으면 약한 근거로 낮춘다.
@@ -52,7 +54,7 @@
 
 단순 로컬 작업에서는 이 기준을 모두 채우지 않아도 된다. 다만 웹 검색을 먼저 수행하고, 무관하면 그 사실을 기록한다.
 
-반복적으로 많은 출처를 수집하거나 보고서로 정리해야 하면 `_tools/source-collector/`를 사용한다. 한국 로컬 리뷰나 Naver/Kakao 중심 조사가 필요하면 `_tools/korean-local-review/`를 사용한다.
+반복적으로 많은 출처를 수집하거나 query ladder, 보고서, 점수화가 필요하면 `_tools/source-collector/`를 사용한다. 한국 로컬 리뷰나 Naver/Kakao 중심 조사가 필요하면 `_tools/korean-local-review/`를 사용한다.
 
 일반 조사와 계획은 `research-insight-planner-agent`와 `agent-platform/configs/research/research-agent-profile.json`을 사용해 출처 순위화, 증거 추출, 종합, citation grounding, skeptic review를 기록한다.
 
@@ -95,6 +97,7 @@ Stack Overflow의 표/accepted answer, Reddit 토론, GitHub Issues/Discussions,
 
 ```bash
 python3 _tools/source-collector/src/source_collector.py init /tmp/source-bundle.json --topic "topic" --purpose "purpose" --access-date YYYY-MM-DD
+python3 _tools/source-collector/src/source_collector.py query-plan "topic" --depth deep --output /tmp/query-plan.md --json-output /tmp/query-plan.json
 python3 _tools/source-collector/src/source_collector.py report /tmp/source-bundle.json --output /tmp/source-report.md --json-output /tmp/source-report.json
 python3 _tools/source-collector/src/source_collector.py check /tmp/source-bundle.json --strict
 python3 _tools/korean-local-review/src/korean_local_review.py query-plan --topic "topic" --region "region" --category "category"

@@ -44,6 +44,17 @@
       "last_checked": "2026-06-01"
     },
     {
+      "id": "human_search_profile",
+      "title": "Human Search Profile",
+      "path": "agent-platform/configs/research/human-search-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "query ladder and operator search before iterative retrieval",
+        "snowballing and selective summary capture"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
       "id": "openai_deep_research_api",
       "title": "OpenAI API Deep Research",
       "url": "https://developers.openai.com/api/docs/guides/deep-research",
@@ -123,6 +134,16 @@
     }
   ],
   "structure_rules": [
+    {
+      "id": "deep_research_uses_human_search",
+      "rule": "Deep research should use human-search-profile.json during source_strategy and iterative_retrieval so retrieval includes query expansion, source-lane search, contrary search, and snowballing from strong seeds.",
+      "reason": "Long-form reports need more than a single web result pass and should leave enough search evidence to audit later.",
+      "applies_to": [
+        "deep_research_stages",
+        "source_lanes",
+        "report_contract"
+      ]
+    },
     {
       "id": "deep_research_is_report_readiness",
       "rule": "Use deep-research-agent when a task needs a long-form source-grounded report, not merely a plan or short answer.",
@@ -286,4 +307,3 @@
     ]
   }
 }
-

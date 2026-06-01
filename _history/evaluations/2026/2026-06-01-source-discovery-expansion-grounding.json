@@ -1,0 +1,118 @@
+{
+  "task": "Ground factual claims for source discovery expansion.",
+  "output_summary": "Expanded reusable source discovery origins across global engineering blogs, Korean technology blogs, Indian technology and people sources, and paper discovery sources; updated enterprise source seeds and bilingual source lists.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-source-discovery-expansion.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked web-first record with queries, checked sources, weak-source notes, plan impact, and uncertainty."
+    },
+    {
+      "evidence_id": "source_discovery_registry",
+      "source": "agent-platform/configs/research/source-discovery-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked self-documenting config containing source groups, evidence roles, and search sequences."
+    },
+    {
+      "evidence_id": "enterprise_registry",
+      "source": "agent-platform/configs/research/enterprise-source-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked self-documenting enterprise/high-quality source registry."
+    },
+    {
+      "evidence_id": "source_list",
+      "source": "_research/source-lists/enterprise-high-quality-sites.ko.md; _research/source-lists/enterprise-high-quality-sites.en.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked bilingual human-readable source lists reflecting the registry expansion."
+    },
+    {
+      "evidence_id": "research_readme",
+      "source": "agent-platform/configs/research/README.ko.md; agent-platform/configs/research/README.en.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked bilingual usage rules for regional, people, and paper source handling."
+    },
+    {
+      "evidence_id": "json_validation",
+      "source": "python3 -m json.tool agent-platform/configs/research/source-discovery-registry.json; python3 -m json.tool agent-platform/configs/research/enterprise-source-registry.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Both JSON files parsed successfully."
+    },
+    {
+      "evidence_id": "config_contract",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/research/source-discovery-registry.json configs/research/enterprise-source-registry.json configs/research/source-registry.json configs/research/research-agent-profile.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command returned self_documenting with no gaps."
+    },
+    {
+      "evidence_id": "governance_health",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --category governance --json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command passed 7 governance checks after regenerating workspace maps."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The source discovery registry now includes expanded global, Korean, India, India people, and paper-discovery source groups.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["source_discovery_registry", "json_validation", "config_contract"],
+      "verification_steps": ["Read registry groups and ran JSON plus config contract checks."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The enterprise source registry now includes additional globally reusable engineering sources such as Canva, Figma, DoorDash, Discord, Vercel, Datadog, and Sentry.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["enterprise_registry", "json_validation", "config_contract"],
+      "verification_steps": ["Read enterprise registry site entries and ran JSON plus config contract checks."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Bilingual human-readable source lists were updated to reflect the expanded source coverage.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["source_list"],
+      "verification_steps": ["Read the Korean and English source list files."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The research README now instructs agents to separate regional fit, people/creator signals, and paper source roles.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["research_readme"],
+      "verification_steps": ["Read paired research README files."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The governance health check passed after regenerating workspace maps.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["governance_health"],
+      "verification_steps": ["Ran workspace-health governance category after running workspace-index."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "This work registers source origins and evidence roles; each exact article, paper, or claim still needs page-level verification before citation.",
+    "Some Medium, YouTube, and dynamic pages can change or require account/browser access, so they are treated as discovery/context sources where appropriate."
+  ],
+  "limitation_notes": [
+    "No automated freshness crawler was added in this change.",
+    "Swiggy Bytes was retained as a discovery signal because direct domain access was unstable during search."
+  ]
+}

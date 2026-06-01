@@ -1,0 +1,83 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-01-source-discovery-expansion",
+  "title": "Expand global, Korean, India, and paper source discovery origins",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "started_at": "2026-06-01T21:40:00+0900",
+  "ended_at": "2026-06-01T22:03:06+0900",
+  "measurement_note": "The task began with web search before exact timing was started, so phase boundaries are approximate but explicit.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "started_at": "2026-06-01T21:40:00+0900",
+      "ended_at": "2026-06-01T21:44:30+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Collected global, Korean, India, and paper discovery sources through broad web search and direct page checks."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "started_at": "2026-06-01T21:44:30+0900",
+      "ended_at": "2026-06-01T21:45:00+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Ran memory bootstrap and selected governance mode."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "started_at": "2026-06-01T21:45:00+0900",
+      "ended_at": "2026-06-01T21:51:30+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Reviewed existing requirements and created source-discovery expansion spec artifacts."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Registry and documentation updates",
+      "status": "completed",
+      "started_at": "2026-06-01T21:51:30+0900",
+      "ended_at": "2026-06-01T21:55:47+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Expanded JSON registries, source lists, research README, web-search record, research note, request summary, trace, and work summary."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "started_at": "2026-06-01T21:55:47+0900",
+      "ended_at": "2026-06-01T22:02:45+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Ran JSON, config contract, memory bootstrap, docs, naming, structure, workspace index, workspace health, grounding, and diff checks."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "started_at": "2026-06-01T22:02:45+0900",
+      "ended_at": "2026-06-01T22:03:06+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Saved grounding/evaluator input and produced final evaluation report with no blocking gaps."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "started_at": "2026-06-01T22:03:06+0900",
+      "ended_at": "2026-06-01T22:03:06+0900",
+      "measurement": "recorded_after_verification",
+      "bottleneck_notes": "Completed after validation and evaluation records were prepared."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "web_first_intake",
+    "interpretation": "The longest visible phase is source discovery because the request explicitly asked for broader search-origin collection.",
+    "improvement_candidates": [
+      "Use the expanded source registry as a seed next time to reduce repeated broad source discovery.",
+      "Consider a deterministic source freshness checker later if source expansion becomes repetitive."
+    ]
+  }
+}

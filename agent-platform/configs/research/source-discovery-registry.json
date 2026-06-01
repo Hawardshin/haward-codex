@@ -11,14 +11,16 @@
       "Use this as a search-origin list, not proof; reopen exact pages before citing."
     ],
     "owner": "agent-platform",
-    "last_reviewed": "2026-05-31",
+    "last_reviewed": "2026-06-01",
     "update_triggers": [
       "A research task repeatedly needs better search coverage.",
       "A new high-quality engineering, research, Korean local, or paper-discovery source becomes useful.",
       "Korean user-facing reviews, maps, or local-market context are involved.",
       "A source is stale, no longer official, blocked, or too marketing-heavy.",
       "Marketing, consumer insight, market sizing, book/theory, survey, or quantitative-evidence research needs broader source origins.",
-      "A search or review tool is added, removed, or replaced."
+      "Human-like search methods, query ladder rules, operators, snowballing, or summary capture rules change.",
+      "A search or review tool is added, removed, or replaced.",
+      "The user asks for broader global, Korean, India, people-led, or paper-discovery source coverage."
     ]
   },
   "reference_links": [
@@ -33,6 +35,17 @@
         "adoption signal handling"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "human_search_profile",
+      "title": "Human Search Profile",
+      "path": "agent-platform/configs/research/human-search-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "query ladder and search operator strategy",
+        "snowballing and selective summary capture"
+      ],
+      "last_checked": "2026-06-01"
     },
     {
       "id": "enterprise_source_registry",
@@ -122,6 +135,50 @@
       "last_checked": "2026-05-31"
     },
     {
+      "id": "awesome_engineering_blogs",
+      "title": "Awesome Engineering Blogs",
+      "url": "https://github.com/crispgm/awesome-engineering-blogs",
+      "source_type": "open_source",
+      "used_for": [
+        "engineering blog discovery",
+        "candidate source expansion before official URL verification"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "acm_digital_library",
+      "title": "ACM Digital Library",
+      "url": "https://www.acm.org/publications/digital-library",
+      "source_type": "official",
+      "used_for": [
+        "computer science paper discovery",
+        "publisher and bibliography cross-check"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "dblp",
+      "title": "DBLP Computer Science Bibliography",
+      "url": "https://dblp.org/",
+      "source_type": "official",
+      "used_for": [
+        "computer science bibliography search",
+        "author, venue, and publication cross-check"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "usenix_proceedings",
+      "title": "USENIX Proceedings",
+      "url": "https://www.usenix.org/publications/proceedings",
+      "source_type": "official",
+      "used_for": [
+        "systems, security, SRE, and operations papers",
+        "conference proceeding discovery"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
       "id": "marketing_evidence_profile",
       "title": "Marketing Evidence Profile",
       "path": "agent-platform/configs/research/marketing-evidence-profile.json",
@@ -134,6 +191,16 @@
     }
   ],
   "structure_rules": [
+    {
+      "id": "human_like_search_needs_method_profile",
+      "rule": "When the task needs broad source discovery, use human-search-profile.json to build the query ladder before using this registry's source groups.",
+      "reason": "This registry names where to search; the human search profile defines how to search across those places.",
+      "applies_to": [
+        "recommended_search_sequences",
+        "source_groups",
+        "quality_evaluation_rules"
+      ]
+    },
     {
       "id": "search_origin_not_evidence",
       "rule": "Source groups are search origins, not proof; exact source pages must be checked before claims or recommendations.",
@@ -167,6 +234,17 @@
       "reason": "A famous paper may be outdated, uncited in practice, unsupported by code, or superseded.",
       "applies_to": [
         "paper_discovery_sources"
+      ]
+    },
+    {
+      "id": "regional_sources_need_explicit_fit",
+      "rule": "For global, Korean, and India source groups, record why the region or market is relevant before using regional practice as planning evidence.",
+      "reason": "A strong regional source is valuable for discovery, but implementation constraints can be market-specific.",
+      "applies_to": [
+        "global_engineering_blogs",
+        "korean_bigtech_and_product_tech_blogs",
+        "indian_technology_sources",
+        "indian_technology_people"
       ]
     },
     {
@@ -257,6 +335,54 @@
         "url": "https://careersatdoordash.com/blog/category/engineering/",
         "use_for": "marketplace, logistics, experimentation",
         "evidence_role": "field_practice"
+      },
+      {
+        "name": "Google Developers Blog",
+        "url": "https://developers.googleblog.com/",
+        "use_for": "developer platforms, APIs, web, Android, cloud-adjacent product engineering",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Shopify Engineering",
+        "url": "https://shopify.engineering/",
+        "use_for": "commerce platforms, Rails scale, GraphQL, developer tooling, AI-assisted product engineering",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Slack Engineering",
+        "url": "https://slack.engineering/",
+        "use_for": "collaboration systems, multi-cloud, long-running agentic applications, data pipelines",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Databricks Engineering",
+        "url": "https://www.databricks.com/blog/category/engineering",
+        "use_for": "data platforms, lakehouse architecture, distributed execution, ML infrastructure",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Discord Engineering",
+        "url": "https://discord.com/category/engineering",
+        "use_for": "real-time communication, low-latency systems, product infrastructure, safety systems",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Vercel Blog",
+        "url": "https://vercel.com/blog",
+        "use_for": "frontend platforms, Next.js ecosystem, deployment, edge, developer experience",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Datadog Engineering",
+        "url": "https://www.datadoghq.com/blog/engineering/",
+        "use_for": "observability, infrastructure telemetry, reliability, security monitoring",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Sentry Engineering",
+        "url": "https://blog.sentry.io/engineering/",
+        "use_for": "developer tooling, observability, error monitoring, performance debugging",
+        "evidence_role": "field_practice"
       }
     ],
     "korean_bigtech_and_product_tech_blogs": [
@@ -313,13 +439,37 @@
         "url": "https://devocean.sk.com/",
         "use_for": "SK telecom/platform developer content and Korean engineering references",
         "evidence_role": "field_practice"
+      },
+      {
+        "name": "LY Corporation Tech Blog",
+        "url": "https://techblog.lycorp.co.jp/ko/",
+        "use_for": "LINE/Yahoo Japan successor engineering, messaging, platform, global collaboration",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Daangn Tech Blog",
+        "url": "https://medium.com/daangn",
+        "use_for": "Korean local-market engineering, search, AI/ML, neighborhood product systems",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Devsisters DEVTECH",
+        "url": "https://tech.devsisters.com/",
+        "use_for": "game server, client, data, Infra/SRE, QA, web engineering",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "RIDI Tech Blog",
+        "url": "https://ridicorp.com/story-category/tech-blog/",
+        "use_for": "content platform, mobile/web, backend, product engineering",
+        "evidence_role": "field_practice"
       }
     ],
     "indian_technology_sources": [
       {
-        "name": "Razorpay Blog / Engineering",
-        "url": "https://razorpay.com/blog/",
-        "use_for": "payments, fintech, agentic SDLC, engineering operations",
+        "name": "Razorpay Engineering",
+        "url": "https://engineering.razorpay.com/",
+        "use_for": "payments, fintech, gateway routing, backend/frontend/data engineering",
         "evidence_role": "field_practice"
       },
       {
@@ -335,16 +485,60 @@
         "evidence_role": "open_source_discovery"
       },
       {
-        "name": "PhonePe Blog",
-        "url": "https://www.phonepe.com/blog/",
-        "use_for": "India payments and platform technology signals",
-        "evidence_role": "context"
+        "name": "Swiggy Bytes",
+        "url": "https://bytes.swiggy.com/",
+        "use_for": "food delivery marketplace, logistics, experimentation, reliability",
+        "evidence_role": "field_practice"
       },
       {
+        "name": "Flipkart Tech Blog",
+        "url": "https://blog.flipkart.tech/",
+        "use_for": "India-scale commerce, data, backend, web, mobile, security",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "PhonePe Tech Blog",
+        "url": "https://tech.phonepe.com/",
+        "use_for": "payments, high-throughput transaction systems, mobile platform, architecture",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "CRED Engineering",
+        "url": "https://engineering.cred.club/",
+        "use_for": "fintech product engineering, security, backend/platform trade-offs",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Meesho Tech Blog",
+        "url": "https://www.meesho.io/blog",
+        "use_for": "commerce for Indian users, backend, data science, product systems",
+        "evidence_role": "field_practice"
+      },
+      {
+        "name": "Zomato Technology Blog",
+        "url": "https://www.zomato.com/blog/category/technology/",
+        "use_for": "food-commerce product engineering, data streaming, testing, backend operations",
+        "evidence_role": "field_practice"
+      }
+    ],
+    "indian_technology_people": [
+      {
         "name": "Arpit Bhayani",
-        "url": "https://arpitbhayani.me/",
-        "use_for": "system design, distributed systems, practical engineering essays",
+        "url": "https://arpitbhayani.me/blogs/",
+        "use_for": "system design, database internals, distributed systems, practical engineering essays",
         "evidence_role": "expert_context"
+      },
+      {
+        "name": "Kailash Nadh / Zerodha Tech author page",
+        "url": "https://zerodha.tech/authors/knadh/",
+        "use_for": "lean fintech engineering, self-hosted systems, open-source and engineering philosophy",
+        "evidence_role": "expert_context"
+      },
+      {
+        "name": "Gaurav Sen",
+        "url": "https://www.youtube.com/@gkcs",
+        "use_for": "system design education and community discovery signal; verify exact materials before citation",
+        "evidence_role": "community_signal"
       }
     ],
     "paper_discovery_sources": [
@@ -377,6 +571,84 @@
         "url": "https://www.connectedpapers.com/index.html",
         "use_for": "related-paper exploration from a seed paper",
         "evidence_role": "paper_discovery"
+      },
+      {
+        "name": "Google Scholar",
+        "url": "https://scholar.google.com/",
+        "use_for": "broad scholarly discovery, cited-by chains, author profiles",
+        "evidence_role": "paper_discovery"
+      },
+      {
+        "name": "DBLP",
+        "url": "https://dblp.org/",
+        "use_for": "computer science bibliography, authors, venues, publication cross-check",
+        "evidence_role": "bibliography_index"
+      },
+      {
+        "name": "ACM Digital Library",
+        "url": "https://www.acm.org/publications/digital-library",
+        "use_for": "computer science publisher search, ACM venue papers, bibliographic literature",
+        "evidence_role": "publisher_index"
+      },
+      {
+        "name": "IEEE Xplore",
+        "url": "https://ieeexplore.ieee.org/Xplore/home.jsp",
+        "use_for": "engineering, computer science, electronics, standards-adjacent papers",
+        "evidence_role": "publisher_index"
+      },
+      {
+        "name": "USENIX Proceedings",
+        "url": "https://www.usenix.org/publications/proceedings",
+        "use_for": "systems, security, operations, reliability conference papers",
+        "evidence_role": "conference_proceedings"
+      },
+      {
+        "name": "NeurIPS Proceedings",
+        "url": "https://proceedings.neurips.cc/",
+        "use_for": "machine learning and AI conference papers",
+        "evidence_role": "conference_proceedings"
+      },
+      {
+        "name": "PMLR / ICML Proceedings",
+        "url": "https://proceedings.mlr.press/",
+        "use_for": "machine learning proceedings including ICML/AISTATS and related venues",
+        "evidence_role": "conference_proceedings"
+      },
+      {
+        "name": "ICLR OpenReview",
+        "url": "https://openreview.net/group?id=ICLR.cc",
+        "use_for": "ICLR submissions, reviews, revisions, and reviewer discussion context",
+        "evidence_role": "conference_review_record"
+      },
+      {
+        "name": "ACL Anthology",
+        "url": "https://aclanthology.org/",
+        "use_for": "NLP and computational linguistics papers",
+        "evidence_role": "publisher_index"
+      },
+      {
+        "name": "Crossref",
+        "url": "https://crossref.org/",
+        "use_for": "DOI metadata and publisher identity cross-check",
+        "evidence_role": "scholarly_metadata"
+      },
+      {
+        "name": "ResearchRabbit",
+        "url": "https://www.researchrabbit.ai/",
+        "use_for": "literature review exploration and collection mapping from seed papers",
+        "evidence_role": "paper_discovery"
+      },
+      {
+        "name": "Litmaps",
+        "url": "https://www.litmaps.com/",
+        "use_for": "citation-map exploration, related-paper discovery, literature review tracking",
+        "evidence_role": "paper_discovery"
+      },
+      {
+        "name": "Hugging Face Papers",
+        "url": "https://huggingface.co/papers",
+        "use_for": "trending ML/AI papers, community upvotes, GitHub and arXiv links",
+        "evidence_role": "paper_adoption_signal"
       }
     ],
     "marketing_evidence_sources": [
@@ -482,11 +754,23 @@
   },
   "recommended_search_sequences": [
     {
+      "task_type": "human_like_broad_source_discovery",
+      "sequence": [
+        "scope source questions and build query ladder with human-search-profile.json",
+        "run seed, synonym, operator, source-lane, community, contrary, and regional searches as needed",
+        "rank sources before synthesis",
+        "snowball from the strongest seed sources through references, citations, authors, repos, and related pages",
+        "summarize only sources that change the plan, answer, risk model, or reusable knowledge base",
+        "record ignored weak sources and remaining uncertainty in the web search record"
+      ]
+    },
+    {
       "task_type": "global_technical_decision",
       "sequence": [
         "official docs or standards",
         "paper index if method claims matter",
         "global engineering blogs",
+        "region-specific engineering blogs when user market or operating context matters",
         "open-source implementations",
         "community/social adoption signals",
         "contrary/failure cases"
@@ -507,10 +791,12 @@
       "task_type": "paper_or_research_method",
       "sequence": [
         "Semantic Scholar or OpenAlex",
+        "DBLP, ACM Digital Library, IEEE Xplore, USENIX, ACL Anthology, or venue proceedings when the field has a known canonical venue",
         "arXiv or publisher page",
         "Papers with Code or official repo",
-        "Connected Papers or related-paper graph",
+        "Google Scholar, Connected Papers, ResearchRabbit, or Litmaps for related-paper graph exploration",
         "high-quality engineering blog applying the method",
+        "survey papers or benchmark leaderboards when the field is crowded",
         "contrary papers or failure cases"
       ]
     },
@@ -535,6 +821,16 @@
         "open-source code references",
         "Korean community/social signals only as adoption/context"
       ]
+    },
+    {
+      "task_type": "india_technology_context",
+      "sequence": [
+        "official India company engineering blog or tech category",
+        "India expert blogs and author pages for practical framing",
+        "global engineering references for comparison",
+        "open-source repos and architecture references",
+        "Reddit, YouTube, LinkedIn, and community signals only as discovery/context"
+      ]
     }
   ],
   "quality_evaluation_rules": [
@@ -542,8 +838,10 @@
     "For Korean local review tasks, do not rely on one platform; compare Naver and Kakao when possible.",
     "For Naver Blog or influencer posts, check ad disclosure, date, photos, specificity, and whether it is firsthand.",
     "For maps and reviews, use them as user-experience signals; verify facts such as hours, price, address, and policies through official or map profile pages.",
-    "For papers, prefer authoritative indexes and trace to DOI, arXiv ID, publisher page, code repository, and citation context.",
+    "For papers, prefer authoritative indexes and trace to DOI, arXiv ID, publisher page, code repository, venue proceedings, citation context, and whether the work is peer reviewed or only a preprint.",
     "For individual expert blogs, capture why the person is relevant and verify factual claims against primary sources.",
+    "For India expert or creator sources, separate educational/community signal from production evidence and confirm identity plus current relevance before citation.",
+    "For Hugging Face Papers, Reddit, Hacker News, LinkedIn, GitHub stars, comments, or upvotes, treat the signal as discovery/adoption only, not proof of correctness.",
     "For marketing statistics and survey claims, record value, unit, base, geography, timeframe, method, sponsor, sample, and comparability notes before treating the number as evidence."
   ]
 }
