@@ -1,0 +1,88 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-02-timekeeper-agent",
+  "title": "Add reusable Timekeeper agent",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "summary": "Added a Timekeeper agent spec that keeps deadlines, timeboxes, critical path, schedule risk, and hurry-up trade-offs visible.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 420,
+      "notes": "Checked Scrum timeboxes, Microsoft critical path, Atlassian scheduling, and PMI scheduling references."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 120,
+      "notes": "Ran memory bootstrap and reviewed hot anchors."
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 360,
+      "notes": "Selected governance mode and reused agent-platform plus work-timer boundaries."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 900,
+      "notes": "Added REQ-WS-064, specs, docs, source provenance, and plan evidence."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 900,
+      "notes": "Added timekeeper-agent config, documentation, and history artifacts."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 720,
+      "notes": "Ran agent inspection/list/orchestration, work-timer, unit tests, memory/config/docs checks, workspace maps, task board, workspace health, and monitor collect/test/check/build."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 360,
+      "notes": "Ran omission, grounding, and work evaluator checks; wrote evaluation reports."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 60,
+      "notes": "Commit and push are performed as the final close-out step."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "requirements_spec",
+    "bottleneck_notes": [
+      "Governance artifacts and bilingual documentation dominate this agent-only change.",
+      "The reusable agent avoids a new timing runtime, reducing future maintenance cost."
+    ],
+    "improvement_candidates": [
+      "If more schedule agents appear, create an agent-spec scaffold template for time/deadline roles."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-timekeeper-agent.ko.md",
+    "agent-platform/configs/agents/timekeeper-agent.json"
+  ]
+}
