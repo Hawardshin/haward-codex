@@ -126,6 +126,7 @@
 - 실제 설치, 업그레이드, 제거, 전역 환경 변경이 발생하면 `_history/installations/YYYY/`에 설치 감사 기록을 만들고 `_ops/installations/registry.json`에 인덱싱한다.
 - 설정, 실행, 배포, 개발 환경 준비가 필요하면 `agent-platform/configs/installations/install-mode-registry.json`에서 `install_mode`를 선택한다. 플랫폼 사용/보기/배포는 `user`, 플랫폼 소스/규칙/도구/스킬/검증기/대시보드/테스트 개선은 `developer`를 사용한다. `install_mode`는 환경 준비 범위이고 `work_mode`는 작업 평가 강도다.
 - 플랫폼을 사용자가 설치하는 소프트웨어, desktop app, OS installer, Tauri, Electron, MSIX, DMG, app signing, notarization, update, uninstall 구조로 만들 때는 `platform-desktop-app/`에서 관리한다. 이것은 레포지토리 setup `install_mode`와 다르다.
+- 설치형 앱의 사용자 플로우, 첫 실행 온보딩, workspace chooser, task timeline, decision inbox, 설정/복구 흐름을 설계하거나 구현할 때는 `platform-desktop-app/configs/user-flow-registry.json`과 `_ops/workflows/74-desktop-user-flow-design.md`를 먼저 확인한다.
 - 설치가 실제로 발생한 작업의 평가 입력에는 `installation_occurred=true`와 `installation_record_targets`를 포함한다.
 - 전역 설치는 피하고, 꼭 필요하면 이유와 제거 방법을 문서화하고 필요한 권한 승인을 받는다.
 - 유용한 인터넷 조사 내용은 출처 URL, 접근일, 요약, 신뢰도, 적용 가능성과 함께 문서화한다.

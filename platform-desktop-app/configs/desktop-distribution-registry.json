@@ -146,6 +146,20 @@
         "command execution, permission, fallback, and installation audit rules"
       ],
       "last_checked": "2026-06-02"
+    },
+    {
+      "id": "desktop_user_flow_registry",
+      "title": "Desktop User Flow Registry",
+      "path": "platform-desktop-app/configs/user-flow-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "installer first-run flow",
+        "workspace chooser",
+        "view mode selection",
+        "non-blocking optional capability setup",
+        "task run timeline and recovery"
+      ],
+      "last_checked": "2026-06-02"
     }
   ],
   "structure_rules": [
@@ -195,6 +209,16 @@
         "runtime_strategy",
         "security_privacy_rules"
       ]
+    },
+    {
+      "id": "desktop_user_flow_is_release_input",
+      "rule": "Desktop packaging and release planning must check platform-desktop-app/configs/user-flow-registry.json before implementation or production-readiness claims.",
+      "reason": "A technically packaged app is not useful if first-run setup, workspace selection, optional capability deferral, task visibility, and recovery are not designed.",
+      "applies_to": [
+        "recommended_initial_path",
+        "runtime_strategy",
+        "release_gates"
+      ]
     }
   ],
   "field_guide": [
@@ -222,8 +246,24 @@
       "field": "release_gates",
       "meaning": "Checks required before a desktop installer can be called production-ready.",
       "required": true
+    },
+    {
+      "field": "user_flow_registry",
+      "meaning": "Companion registry defining install, first-run, task-run, decision inbox, settings, and recovery flows.",
+      "required": true
     }
   ],
+  "user_flow_registry": {
+    "path": "platform-desktop-app/configs/user-flow-registry.json",
+    "status": "required_before_desktop_ui_or_installer_implementation",
+    "required_checks": [
+      "open, create, and demo workspace first-run paths exist",
+      "optional CLIs and notifications can be configured later",
+      "user, developer, and superadmin developer views are separated",
+      "task run timeline shows phase, time, artifacts, decisions, evidence, and verification",
+      "failure recovery exists for unreadable workspace, missing optional CLI, pending decision, stale snapshot, and update failure"
+    ]
+  },
   "product_boundary": {
     "owns": [
       "desktop shell product requirements",
@@ -391,7 +431,7 @@
     "data_strategy": "Read repository documents or generated snapshots through explicit user-selected workspace paths. Do not silently bundle private repository data.",
     "settings_strategy": "Store user settings separately from bundled defaults. Secrets must be environment variables, OS credential storage, or user-provided runtime input, not checked-in config."
   },
-  "security_privacy_rules": [
+    "security_privacy_rules": [
     "Do not bundle real webhook URLs, API keys, tokens, browser cookies, or private notes into installers.",
     "Prefer explicit user workspace selection over scanning arbitrary folders.",
     "Do not assume one external CLI is installed; use adapter capability checks and missing-CLI fallback guidance.",
@@ -417,6 +457,7 @@
   ],
   "release_gates": [
     "Framework decision record with Tauri/Electron/native packaging comparison",
+    "User-flow registry acceptance checks before desktop UI or installer implementation",
     "Project-local dependency installation audit if dependencies are installed",
     "License and security review for desktop framework and packager dependencies",
     "macOS signing and notarization plan before macOS public installer",

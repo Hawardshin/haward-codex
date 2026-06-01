@@ -1,0 +1,53 @@
+{
+  "schema_version": "2026-06-02",
+  "task_id": "2026-06-02-installable-user-flow",
+  "work_mode": "governance",
+  "status": "complete",
+  "measurement_method": "manual phase timestamps estimated from tool execution sequence",
+  "phases": [
+    {
+      "id": "web_first_intake",
+      "status": "measured",
+      "duration_minutes": 4,
+      "notes": "Searched official onboarding and desktop distribution sources."
+    },
+    {
+      "id": "local_context_review",
+      "status": "measured",
+      "duration_minutes": 5,
+      "notes": "Checked desktop project, installable software policy, distribution registry, and memory bootstrap."
+    },
+    {
+      "id": "config_and_docs",
+      "status": "measured",
+      "duration_minutes": 22,
+      "notes": "Created user-flow registry, docs, HTML artifact, workflow, prompt, requirements, and specs."
+    },
+    {
+      "id": "history_and_evaluation_artifacts",
+      "status": "measured",
+      "duration_minutes": 10,
+      "notes": "Created web search record, research note, plan, request trace, work summary, and evaluation inputs."
+    },
+    {
+      "id": "validation",
+      "status": "measured",
+      "duration_minutes": 8,
+      "notes": "JSON checks, config contract, memory bootstrap, docs audit, workspace index, task board, workspace-monitor collect/test/check/build, agent-platform tests, naming audit, and workspace health passed."
+    },
+    {
+      "id": "commit_push",
+      "status": "not_measured",
+      "duration_minutes": null,
+      "notes": "Commit/push duration is not measured separately."
+    }
+  ],
+  "bottlenecks": [
+    {
+      "phase": "config_and_docs",
+      "reason": "Many durable surfaces had to be updated together so future sessions do not miss the user-flow rule.",
+      "mitigation": "Added a dedicated workflow and prompt for future desktop user-flow work."
+    }
+  ],
+  "summary": "The main cost was not implementation code but durable propagation across config, docs, workflow, prompt, memory, and history surfaces."
+}

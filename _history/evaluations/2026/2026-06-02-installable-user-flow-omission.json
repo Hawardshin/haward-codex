@@ -1,0 +1,153 @@
+{
+  "task": "Design installable desktop app user flow for easy use.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first-research",
+      "description": "Run web search before planning and record sources.",
+      "source": "AGENTS.md, user durable rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-installable-user-flow.ko.md",
+        "_research/topics/desktop-productization/2026-06-02-installable-user-flow.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "desktop-user-flow-source-of-truth",
+      "description": "Create a source of truth for installable app user flow.",
+      "source": "UR-2026-06-02-017, PDA-UX requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/user-flow-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "first-run-flow",
+      "description": "Define open/create/demo workspace, workspace boundary review, view mode, readiness scan, and dashboard arrival.",
+      "source": "PDA-UX-001 to PDA-UX-004",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/user-flow-registry.json",
+        "platform-desktop-app/docs/first-run-onboarding.ko.md",
+        "platform-desktop-app/artifacts/user-flow-map.html"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "task-run-and-decision-inbox",
+      "description": "Define task timeline and decision inbox so blocked questions do not stop unrelated work.",
+      "source": "PDA-UX-005, PDA-UX-006",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/user-flow-registry.json",
+        "platform-desktop-app/docs/user-flow.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "failure-recovery",
+      "description": "Define recovery for unreadable workspace, missing optional CLI, pending decision, stale snapshot, and update failure.",
+      "source": "PDA-UX-007",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/user-flow-registry.json",
+        "platform-desktop-app/docs/user-flow.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "developer-superadmin-flow",
+      "description": "Expose raw configs, validators, release gates, coordination, and source provenance for builder views.",
+      "source": "PDA-UX-008",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/user-flow-registry.json",
+        "_ops/workflows/74-desktop-user-flow-design.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "actual-desktop-implementation",
+      "description": "Install Tauri/Electron and implement the real desktop app shell.",
+      "source": "scope review",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-02-installable-user-flow/spec.ko.md"
+      ],
+      "rationale": "The request was handled as design and durable product-flow criteria. No framework dependency installation or runtime implementation was necessary in this change."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/configs/user-flow-registry.json",
+      "purpose": "Source of truth for installable app user flow.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/user-flow.ko.md",
+      "purpose": "Human-readable user-flow documentation.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/first-run-onboarding.ko.md",
+      "purpose": "First-run onboarding documentation.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/artifacts/user-flow-map.html",
+      "purpose": "Visual flow map artifact.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "Validate self-documenting config contract.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ... ../platform-desktop-app/configs/user-flow-registry.json ..."
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-build",
+      "description": "Regenerate monitor snapshot and build static site.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm run collect",
+        "npm test",
+        "npm run check",
+        "npm run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-health",
+      "description": "Run workspace health checks.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/workspace-health/src/workspace_health.py"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "No actual Tauri/Electron shell was implemented.",
+    "No real usability test or desktop installer smoke test was run."
+  ],
+  "notes": [
+    "This change creates the design and governance layer required before installable desktop implementation."
+  ]
+}

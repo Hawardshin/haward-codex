@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Platform Desktop App User Flow</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f7f9;
+        --surface: #ffffff;
+        --text: #1f2937;
+        --muted: #667085;
+        --line: #d9dee7;
+        --blue: #2563eb;
+        --green: #0f766e;
+        --amber: #b45309;
+        --red: #b91c1c;
+        --purple: #7c3aed;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      main {
+        width: min(1180px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 32px 0 56px;
+      }
+
+      header {
+        display: grid;
+        gap: 10px;
+        margin-bottom: 28px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 32px;
+        line-height: 1.15;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        font-size: 20px;
+        line-height: 1.25;
+      }
+
+      h3 {
+        font-size: 15px;
+        line-height: 1.3;
+      }
+
+      p {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--surface);
+        padding: 6px 10px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 650;
+      }
+
+      .section {
+        display: grid;
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .card {
+        min-height: 160px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 16px;
+        display: grid;
+        align-content: start;
+        gap: 10px;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+      }
+
+      .step {
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .accent-blue {
+        border-top: 4px solid var(--blue);
+      }
+
+      .accent-green {
+        border-top: 4px solid var(--green);
+      }
+
+      .accent-amber {
+        border-top: 4px solid var(--amber);
+      }
+
+      .accent-purple {
+        border-top: 4px solid var(--purple);
+      }
+
+      .accent-red {
+        border-top: 4px solid var(--red);
+      }
+
+      .lane-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .tag {
+        border-radius: 6px;
+        padding: 4px 7px;
+        background: #eef2ff;
+        color: #3730a3;
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .table {
+        display: grid;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        background: var(--surface);
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 180px 1fr 1fr;
+        min-height: 52px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .row:last-child {
+        border-bottom: 0;
+      }
+
+      .cell {
+        padding: 12px;
+        border-right: 1px solid var(--line);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .cell:last-child {
+        border-right: 0;
+      }
+
+      .head {
+        background: #edf2f7;
+        color: #344054;
+        font-weight: 800;
+      }
+
+      @media (max-width: 980px) {
+        .flow,
+        .grid-3,
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+
+        .row {
+          grid-template-columns: 1fr;
+        }
+
+        .cell {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .cell:last-child {
+          border-bottom: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="meta">
+          <span class="pill">platform-desktop-app</span>
+          <span class="pill">installable program</span>
+          <span class="pill">user flow</span>
+          <span class="pill">2026-06-02</span>
+        </div>
+        <h1>사용자가 바로 쓸 수 있는 설치형 에이전트 플랫폼 흐름</h1>
+        <p>
+          설치형 프로그램의 첫 목표는 모든 설정을 끝내게 하는 것이 아니라
+          워크스페이스를 열고 현재 상태를 이해하게 하는 것이다. 선택 기능은
+          나중에 설정하고, 막힌 질문은 결정함에 모으며, 개발자 내부 도구는
+          슈퍼어드민 모드에서 다룬다.
+        </p>
+      </header>
+
+      <section class="section">
+        <h2>첫 실행 흐름</h2>
+        <div class="flow">
+          <article class="card accent-blue">
+            <span class="step">01</span>
+            <h3>시작</h3>
+            <p>기존 워크스페이스 열기, 새 워크스페이스 만들기, 데모로 둘러보기.</p>
+          </article>
+          <article class="card accent-blue">
+            <span class="step">02</span>
+            <h3>범위 확인</h3>
+            <p>어떤 문서와 설정을 읽고 어떤 스냅샷을 만들지 명확히 확인.</p>
+          </article>
+          <article class="card accent-purple">
+            <span class="step">03</span>
+            <h3>보기 모드</h3>
+            <p>기본은 user, 고급 사용자는 developer 또는 superadmin_developer.</p>
+          </article>
+          <article class="card accent-amber">
+            <span class="step">04</span>
+            <h3>준비 검사</h3>
+            <p>필수 문제만 막고, 선택 CLI와 알림은 설정 카드로 보류.</p>
+          </article>
+          <article class="card accent-green">
+            <span class="step">05</span>
+            <h3>대시보드</h3>
+            <p>진행 중 작업, 막힌 질문, 프로젝트, 히스토리, 새 작업 시작.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>홈 정보 구조</h2>
+        <div class="grid-3">
+          <article class="card accent-green">
+            <div class="lane-title">
+              <h3>사용자 모드</h3>
+              <span class="tag">user</span>
+            </div>
+            <ul>
+              <li>Now, Projects, Run, History 중심</li>
+              <li>작업 시작과 결과 검토를 우선</li>
+              <li>raw config와 검증 내부 구조는 숨김</li>
+            </ul>
+          </article>
+          <article class="card accent-purple">
+            <div class="lane-title">
+              <h3>개발자 모드</h3>
+              <span class="tag">developer</span>
+            </div>
+            <ul>
+              <li>Capabilities 영역 표시</li>
+              <li>에이전트, CLI, 알림, 검증 상태 확인</li>
+              <li>스펙과 설정 변경 흐름 지원</li>
+            </ul>
+          </article>
+          <article class="card accent-red">
+            <div class="lane-title">
+              <h3>슈퍼어드민 개발자</h3>
+              <span class="tag">superadmin</span>
+            </div>
+            <ul>
+              <li>raw registry와 정책 전체 확인</li>
+              <li>coordination, release gate, validation gap 확인</li>
+              <li>제품화와 플랫폼 개선을 함께 관리</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>작업 실행 흐름</h2>
+        <div class="grid-2">
+          <article class="card accent-blue">
+            <h3>입력은 작게</h3>
+            <ul>
+              <li>목표</li>
+              <li>대상 프로젝트 또는 워크스페이스</li>
+              <li>원하는 산출물</li>
+            </ul>
+          </article>
+          <article class="card accent-green">
+            <h3>진행은 투명하게</h3>
+            <ul>
+              <li>현재 단계와 경과 시간</li>
+              <li>활성 에이전트와 subprocess</li>
+              <li>생성 파일, 근거, 검증, 커밋/푸시 상태</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>막힘 처리</h2>
+        <div class="table">
+          <div class="row head">
+            <div class="cell">상황</div>
+            <div class="cell">사용자에게 보여줄 것</div>
+            <div class="cell">앱 동작</div>
+          </div>
+          <div class="row">
+            <div class="cell">선택 CLI 없음</div>
+            <div class="cell">해당 기능에 필요한 CLI가 없다는 안내</div>
+            <div class="cell">그 기능만 비활성화하고 나머지는 계속</div>
+          </div>
+          <div class="row">
+            <div class="cell">사용자 결정 대기</div>
+            <div class="cell">질문, 영향, 기본 가정, 답변 필요 시점</div>
+            <div class="cell">결정함에 저장하고 독립 작업은 계속</div>
+          </div>
+          <div class="row">
+            <div class="cell">스냅샷 오래됨</div>
+            <div class="cell">마지막 생성 시간과 새로고침 버튼</div>
+            <div class="cell">경고와 함께 읽기 또는 즉시 갱신</div>
+          </div>
+          <div class="row">
+            <div class="cell">업데이트 실패</div>
+            <div class="cell">현재 버전 유지, 재시도, 수동 다운로드</div>
+            <div class="cell">현재 버전으로 계속 사용 가능</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

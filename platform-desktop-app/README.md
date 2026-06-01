@@ -10,6 +10,8 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 
 - Treat the first installable product as a desktop shell over existing platform capabilities.
 - Keep `workspace-monitor/` as the initial UI candidate instead of duplicating the monitoring interface.
+- Design the first-run user flow before implementing installer code: open/create/demo workspace, confirm workspace boundary, select view mode, run required readiness checks, then reach the dashboard.
+- Keep optional CLIs, notifications, browser automation, and advanced validators as capability cards that can be configured later instead of blocking initial use.
 - Keep `agent-platform/` as the Python-first agent/config/evaluation layer.
 - Do not bundle user secrets, webhook tokens, browser cookies, or private repository data into installers.
 - Require distribution gates before calling a build production-ready: code signing, notarization where required, installer smoke tests, update policy, uninstall/rollback behavior, privacy review, and dependency/license review.
@@ -41,8 +43,12 @@ platform-desktop-app/
 ## Source Of Truth
 
 - Distribution registry: `configs/desktop-distribution-registry.json`
+- User flow registry: `configs/user-flow-registry.json`
 - Product boundary: `docs/product-boundary.ko.md`
 - Packaging strategy: `docs/packaging-strategy.ko.md`
+- User flow: `docs/user-flow.ko.md`
+- First-run onboarding: `docs/first-run-onboarding.ko.md`
+- Flow map: `artifacts/user-flow-map.html`
 - First spec: `specs/2026-06-02-installable-desktop/`
 
 ## Commands

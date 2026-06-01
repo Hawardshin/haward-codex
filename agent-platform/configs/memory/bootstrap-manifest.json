@@ -178,6 +178,20 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "desktop_user_flow_registry",
+      "title": "Desktop User Flow Registry",
+      "path": "platform-desktop-app/configs/user-flow-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "installable app first-run flow",
+        "workspace chooser and workspace boundary review",
+        "view mode selection during onboarding",
+        "non-blocking optional capability setup",
+        "task timeline, decision inbox, and recovery behavior"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
       "id": "language_decision_registry",
       "title": "Language Decision Registry",
       "path": "agent-platform/configs/runtime/language-decision-registry.json",
@@ -1169,6 +1183,8 @@
     "omission_prevention_workflow",
     "resource_leak_prevention_workflow",
     "install_mode_registry",
+    "desktop_distribution_registry",
+    "desktop_user_flow_registry",
     "language_decision_registry",
     "work_timing_policy",
     "work_timing_workflow",
@@ -1224,6 +1240,8 @@
     "omission_prevention_workflow",
     "resource_leak_prevention_workflow",
     "install_mode_registry",
+    "desktop_distribution_registry",
+    "desktop_user_flow_registry",
     "language_decision_registry",
     "work_timing_policy",
     "work_timing_workflow",
@@ -1375,6 +1393,14 @@
       "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
       "tier": "warm",
       "purpose": "End-user installable desktop software productization registry, kept separate from repository setup install_mode.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "desktop_user_flow_registry",
+      "path": "platform-desktop-app/configs/user-flow-registry.json",
+      "tier": "warm",
+      "purpose": "Installable desktop app user-flow registry for first-run onboarding, workspace chooser, optional setup deferral, task timeline, decision inbox, and recovery behavior.",
       "required": true,
       "load_order": 8
     },

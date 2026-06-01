@@ -1,0 +1,129 @@
+{
+  "task": "Ground factual claims for installable app user-flow close-out.",
+  "output_summary": "The platform-desktop-app project now has a user-flow registry, onboarding docs, HTML flow map, requirements/specs, and workflow/prompt links for installable desktop app usability.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user-flow-registry",
+      "source": "platform-desktop-app/configs/user-flow-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary source of truth for this change."
+    },
+    {
+      "evidence_id": "config-contract",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ... ../platform-desktop-app/configs/user-flow-registry.json ...",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local validator returned self_documenting with no gaps."
+    },
+    {
+      "evidence_id": "workspace-monitor-build",
+      "source": "npm run collect; npm test; npm run check; npm run build",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Workspace Monitor snapshot generation, tests, TypeScript check, and static build completed."
+    },
+    {
+      "evidence_id": "agent-platform-tests",
+      "source": "PYTHONPATH=src python3 -m unittest discover -s tests",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "150 local unit tests passed."
+    },
+    {
+      "evidence_id": "apple-onboarding",
+      "source": "https://developer.apple.com/design/human-interface-guidelines/onboarding",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Apple design guidance; search result text confirmed the relevant onboarding guidance."
+    },
+    {
+      "evidence_id": "microsoft-fluent-onboarding",
+      "source": "https://fluent2.microsoft.design/onboarding/",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Microsoft design guidance, text accessible in web open result."
+    },
+    {
+      "evidence_id": "tauri-distribute",
+      "source": "https://v2.tauri.app/distribute/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tauri distribution documentation."
+    },
+    {
+      "evidence_id": "electron-forge",
+      "source": "https://www.electronforge.io/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Electron Forge documentation."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now contains a self-documenting user-flow registry for installable desktop app first-run, task, settings, and recovery flows.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "user-flow-registry",
+        "config-contract"
+      ],
+      "verification_steps": [
+        "Created the registry and ran config-contract."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The change did not install Tauri, Electron, or desktop packaging dependencies.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "user-flow-registry"
+      ],
+      "verification_steps": [
+        "No installation records or dependency installation commands were created or run."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Official onboarding guidance supports short, optional, contextual onboarding and deferring nonessential setup.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "apple-onboarding",
+        "microsoft-fluent-onboarding"
+      ],
+      "verification_steps": [
+        "Checked official Apple and Microsoft onboarding guidance."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Tauri and Electron remain desktop distribution candidates rather than implemented dependencies in this change.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-distribute",
+        "electron-forge",
+        "user-flow-registry"
+      ],
+      "verification_steps": [
+        "Checked official docs and local desktop distribution registry state."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Actual installer UX must still be validated in a future prototype.",
+    "OS-specific signing, updater, and uninstall behavior remain future release gates."
+  ],
+  "limitation_notes": [
+    "No browser screenshot or desktop shell smoke test was run because this change created design/config/docs artifacts, not an interactive desktop implementation.",
+    "Apple HIG page required JavaScript on direct open, but search result content exposed the relevant official guidance."
+  ]
+}

@@ -13,6 +13,7 @@ Treat this as installable software productization, not repository setup.
 
 Read:
 - platform-desktop-app/configs/desktop-distribution-registry.json
+- platform-desktop-app/configs/user-flow-registry.json
 - _docs/policies/installable-software-policy.ko.md
 - agent-platform/configs/installations/install-mode-registry.json
 
@@ -28,6 +29,8 @@ Before implementation or dependency installation, compare at least two routes:
 Return:
 - product boundary
 - UI/runtime integration strategy
+- first-run user flow and time-to-first-value path
+- optional setup deferral behavior
 - selected framework or reason selection is deferred
 - packaging targets by OS
 - signing/notarization/update/uninstall/privacy/license release gates
@@ -42,6 +45,7 @@ Do not call the app production-ready until install, first-run, update, uninstall
 ## Checklist
 
 - `platform-desktop-app/configs/desktop-distribution-registry.json`
+- `platform-desktop-app/configs/user-flow-registry.json`
 - `_docs/policies/installable-software-policy.ko.md`
 - `_ops/workflows/63-installable-software-productization.md`
 - `_ops/workflows/58-installation-record.md` if dependencies are installed

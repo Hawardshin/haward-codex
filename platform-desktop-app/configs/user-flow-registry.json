@@ -1,0 +1,765 @@
+{
+  "schema_version": "2026-06-02",
+  "name": "desktop-user-flow-registry",
+  "purpose": "Defines the end-user and developer-superadmin flow for making the agent platform usable as installable desktop software.",
+  "reader_guide": {
+    "summary": "Use this registry before designing desktop screens, onboarding, installer behavior, first-run setup, workspace selection, CLI capability checks, or user-facing task execution flows.",
+    "how_to_read": [
+      "Read product_principles first to understand the usability bar.",
+      "Read install_flow and first_run_flow before adding installer or desktop shell code.",
+      "Read home_information_architecture and task_run_flow before designing app navigation.",
+      "Read developer_superadmin_flow when exposing internal configs, traces, agents, logs, and validation tools.",
+      "Read failure_recovery_flows before adding background processes, CLI adapters, local services, or updates."
+    ],
+    "owner": "platform-desktop-app",
+    "last_reviewed": "2026-06-02",
+    "update_triggers": [
+      "The desktop shell framework changes.",
+      "The app adds real installer, updater, sidecar, local service, or CLI execution.",
+      "The workspace monitor navigation changes.",
+      "View mode, install mode, work mode, notification, CLI adapter, or orchestration behavior changes.",
+      "A usability test, user session, or support issue shows friction in install, first run, task start, result review, or recovery."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "apple_onboarding",
+      "title": "Apple Human Interface Guidelines: Onboarding",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/onboarding",
+      "source_type": "official_design_guidance",
+      "used_for": [
+        "postpone nonessential setup",
+        "place instructions near relevant UI",
+        "request permissions only when needed for function"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "microsoft_fluent_onboarding",
+      "title": "Fluent 2 Design System: Onboarding",
+      "url": "https://fluent2.microsoft.design/onboarding/",
+      "source_type": "official_design_guidance",
+      "used_for": [
+        "active onboarding",
+        "standard components",
+        "setup wizard or multi-step flow when setup is required"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "tauri_distribute",
+      "title": "Tauri: Distribute",
+      "url": "https://v2.tauri.app/distribute/",
+      "source_type": "official_docs",
+      "used_for": [
+        "desktop installer distribution direction",
+        "platform-specific packaging reference"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "tauri_updater",
+      "title": "Tauri: Updater",
+      "url": "https://v2.tauri.app/plugin/updater/",
+      "source_type": "official_docs",
+      "used_for": [
+        "future update flow and user-wide installer implications"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "electron_forge",
+      "title": "Electron Forge",
+      "url": "https://www.electronforge.io/",
+      "source_type": "official_docs",
+      "used_for": [
+        "fallback desktop packaging and makers comparison"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "electron_utility_process",
+      "title": "Electron: utilityProcess",
+      "url": "https://www.electronjs.org/docs/latest/api/utility-process",
+      "source_type": "official_docs",
+      "used_for": [
+        "fallback child-process isolation comparison for CLI orchestration"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "desktop_distribution_registry",
+      "title": "Desktop Distribution Registry",
+      "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "desktop framework and installer release gates"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "view_mode_registry",
+      "title": "View Mode Registry",
+      "path": "agent-platform/configs/access/view-mode-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "user, developer, and superadmin developer view separation"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "install_mode_registry",
+      "title": "Install Mode Registry",
+      "path": "agent-platform/configs/installations/install-mode-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "repository setup modes distinct from desktop installer flow"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "work_mode_registry",
+      "title": "Work Mode Registry",
+      "path": "agent-platform/configs/workflows/work-mode-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "task execution modes exposed after first-run setup"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "cli_adapter_registry",
+      "title": "CLI Adapter Registry",
+      "path": "agent-platform/configs/integrations/cli-adapter-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "optional CLI capability checks and setup-later behavior"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "notification_channels",
+      "title": "Notification Channels",
+      "path": "agent-platform/configs/integrations/notification-channels.json",
+      "source_type": "internal",
+      "used_for": [
+        "optional Slack, Discord, Teams, and webhook notification setup"
+      ],
+      "last_checked": "2026-06-02"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "time_to_first_value_over_full_setup",
+      "rule": "First run must reach a readable workspace dashboard or demo dashboard before asking the user to configure every optional integration.",
+      "reason": "A long setup wizard blocks value discovery and repeats the same clarification bottleneck the platform is meant to reduce.",
+      "applies_to": [
+        "first_run_flow",
+        "home_information_architecture",
+        "settings_flow"
+      ]
+    },
+    {
+      "id": "progressive_disclosure_for_complexity",
+      "rule": "User mode shows the smallest useful task flow; developer and superadmin details are available through explicit view mode selection and advanced drawers.",
+      "reason": "The platform has many internal artifacts, but an installable product must not make a new user understand all of them before starting work.",
+      "applies_to": [
+        "home_information_architecture",
+        "developer_superadmin_flow",
+        "mvp_screens"
+      ]
+    },
+    {
+      "id": "non_blocking_capability_setup",
+      "rule": "Missing optional CLIs, notification channels, or advanced validators must create setup guidance and disabled capabilities, not block unrelated work.",
+      "reason": "Waiting for one unanswered setup question should not stop other usable flows.",
+      "applies_to": [
+        "first_run_flow",
+        "task_run_flow",
+        "failure_recovery_flows"
+      ]
+    },
+    {
+      "id": "explicit_workspace_boundary",
+      "rule": "The desktop app must ask the user to open or create a workspace path and explain what will be indexed before scanning or executing commands.",
+      "reason": "Installable software needs a stronger privacy boundary than a local repository prototype.",
+      "applies_to": [
+        "install_flow",
+        "first_run_flow",
+        "settings_flow"
+      ]
+    },
+    {
+      "id": "visible_execution_and_recovery",
+      "rule": "Every task run should show active step, elapsed time, waiting decisions, produced artifacts, verification, and recovery action.",
+      "reason": "The product value is reducing repeated work, so the user must be able to see what the platform is doing and where it is blocked.",
+      "applies_to": [
+        "task_run_flow",
+        "decision_inbox_flow",
+        "failure_recovery_flows"
+      ]
+    },
+    {
+      "id": "installable_app_is_tool_agnostic",
+      "rule": "The desktop app may orchestrate Codex, Claude Code, Cursor, Antigravity, browser tools, or local CLIs through adapters, but it must not hard-code one assistant runtime as the product identity.",
+      "reason": "The platform concept is a reusable operating layer over many tools, not a wrapper around one vendor.",
+      "applies_to": [
+        "task_run_flow",
+        "developer_superadmin_flow",
+        "settings_flow"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "product_principles",
+      "meaning": "User-facing design principles for the installable product.",
+      "required": true
+    },
+    {
+      "field": "install_flow",
+      "meaning": "End-user path from download to first launch.",
+      "required": true
+    },
+    {
+      "field": "first_run_flow",
+      "meaning": "Initial in-app setup and time-to-first-value path.",
+      "required": true
+    },
+    {
+      "field": "task_run_flow",
+      "meaning": "How a user starts, monitors, interrupts, reviews, and saves a task.",
+      "required": true
+    },
+    {
+      "field": "developer_superadmin_flow",
+      "meaning": "Advanced flow for platform builders who need internals, configs, traces, and validators.",
+      "required": true
+    },
+    {
+      "field": "failure_recovery_flows",
+      "meaning": "How missing dependencies, failed commands, blocked decisions, stale snapshots, and update failures recover.",
+      "required": true
+    }
+  ],
+  "product_principles": [
+    {
+      "id": "one_click_to_workspace",
+      "principle": "Open an existing workspace or create a new one in one obvious path.",
+      "design_implication": "The first screen prioritizes workspace open/create/demo, not settings."
+    },
+    {
+      "id": "setup_later_by_default",
+      "principle": "Optional integrations are discovered and can be configured later.",
+      "design_implication": "Capability cards show status, missing setup, and a setup button without blocking the dashboard."
+    },
+    {
+      "id": "show_work_as_timeline",
+      "principle": "Agent work should be visible as a timeline with evidence, artifacts, timing, decisions, and next action.",
+      "design_implication": "Task detail uses a run timeline instead of a hidden terminal-only process."
+    },
+    {
+      "id": "separate_user_and_builder_views",
+      "principle": "User mode is task-oriented; developer and superadmin mode expose platform internals.",
+      "design_implication": "The app reuses view_mode but does not treat UI hiding as security."
+    },
+    {
+      "id": "local_first_privacy",
+      "principle": "Workspace selection, secrets, external CLI use, and network behavior are explicit.",
+      "design_implication": "The app explains local indexing and never bundles private data or tokens into installers."
+    }
+  ],
+  "user_segments": [
+    {
+      "id": "task_user",
+      "label": "Task user",
+      "default_view_mode": "user",
+      "needs": [
+        "open a workspace",
+        "see projects and history",
+        "start guided work",
+        "answer pending questions in one place",
+        "review results and evidence"
+      ],
+      "hidden_by_default": [
+        "raw config registries",
+        "agent validation internals",
+        "spec trace internals",
+        "installer/debug logs"
+      ]
+    },
+    {
+      "id": "platform_builder",
+      "label": "Platform builder",
+      "default_view_mode": "developer",
+      "needs": [
+        "edit projects, specs, prompts, and configs",
+        "run validators",
+        "inspect source provenance",
+        "compare framework choices",
+        "ship local changes"
+      ],
+      "hidden_by_default": [
+        "security-sensitive secrets",
+        "raw external account sessions"
+      ]
+    },
+    {
+      "id": "superadmin_developer",
+      "label": "Superadmin developer",
+      "default_view_mode": "superadmin_developer",
+      "needs": [
+        "see all projects and operational state",
+        "manage agent registries and adapters",
+        "inspect timing and bottlenecks",
+        "review validation gaps",
+        "prepare productization decisions"
+      ],
+      "hidden_by_default": []
+    }
+  ],
+  "install_flow": [
+    {
+      "step": "download_or_build",
+      "user_goal": "Get the installer or development build.",
+      "screen": "Download page or release artifact",
+      "required_behavior": [
+        "show supported OS and version",
+        "show signature/notarization status when production-ready",
+        "link privacy and local-data behavior",
+        "distinguish user install from developer setup"
+      ]
+    },
+    {
+      "step": "os_install",
+      "user_goal": "Install with normal OS expectations.",
+      "screen": "DMG/MSI/NSIS/MSIX/AppImage/deb/rpm flow",
+      "required_behavior": [
+        "avoid admin prompts unless a selected installer target requires them",
+        "install app without bundling secrets or private workspace data",
+        "leave rollback/uninstall path documented"
+      ]
+    },
+    {
+      "step": "first_launch",
+      "user_goal": "Open the app and understand what to do next.",
+      "screen": "Welcome and workspace chooser",
+      "required_behavior": [
+        "prioritize Open Workspace, Create Workspace, and Demo Workspace",
+        "postpone optional integrations",
+        "offer view mode selection with user mode as the simple path and superadmin as the builder path"
+      ]
+    }
+  ],
+  "first_run_flow": [
+    {
+      "step": "welcome",
+      "primary_action": "Open Workspace",
+      "secondary_actions": [
+        "Create Workspace",
+        "Use Demo Workspace",
+        "Developer Setup"
+      ],
+      "blocking": true,
+      "notes": "A workspace path is required before real repository data is indexed. Demo mode is allowed when no workspace is ready."
+    },
+    {
+      "step": "workspace_boundary_review",
+      "primary_action": "Confirm Workspace",
+      "secondary_actions": [
+        "Change Folder",
+        "Open Privacy Notes"
+      ],
+      "blocking": true,
+      "notes": "Explain what folders, generated snapshots, history, and configs will be read."
+    },
+    {
+      "step": "view_mode_selection",
+      "primary_action": "Continue",
+      "secondary_actions": [
+        "Show Advanced Modes"
+      ],
+      "blocking": false,
+      "default": "user",
+      "notes": "Developer and superadmin developer modes are visible but framed as advanced product-building modes."
+    },
+    {
+      "step": "readiness_scan",
+      "primary_action": "Go To Dashboard",
+      "secondary_actions": [
+        "Fix Required Issues",
+        "Set Up Optional Integrations Later"
+      ],
+      "blocking": "required_only",
+      "checks": [
+        "workspace readable",
+        "required platform files found",
+        "optional CLI adapters detected",
+        "optional notification channels configured",
+        "local generated snapshot status"
+      ],
+      "notes": "Only required workspace problems block. Optional capability gaps become setup cards."
+    },
+    {
+      "step": "dashboard_arrival",
+      "primary_action": "Start New Task",
+      "secondary_actions": [
+        "Review History",
+        "Open Decision Inbox",
+        "Configure Integrations"
+      ],
+      "blocking": false,
+      "notes": "This is the first-value moment. The user sees projects, recent history, active agents, and next actions."
+    }
+  ],
+  "home_information_architecture": [
+    {
+      "section": "Now",
+      "visible_in": [
+        "user",
+        "developer",
+        "superadmin_developer"
+      ],
+      "contents": [
+        "active tasks",
+        "blocked decisions",
+        "recent outputs",
+        "elapsed time and bottlenecks"
+      ]
+    },
+    {
+      "section": "Projects",
+      "visible_in": [
+        "user",
+        "developer",
+        "superadmin_developer"
+      ],
+      "contents": [
+        "registered root projects",
+        "project status",
+        "requirements/spec/history links"
+      ]
+    },
+    {
+      "section": "Run",
+      "visible_in": [
+        "user",
+        "developer",
+        "superadmin_developer"
+      ],
+      "contents": [
+        "guided task form",
+        "work mode selector",
+        "research requirement indicator",
+        "notification toggle"
+      ]
+    },
+    {
+      "section": "History",
+      "visible_in": [
+        "user",
+        "developer",
+        "superadmin_developer"
+      ],
+      "contents": [
+        "request summaries",
+        "request traces",
+        "evaluations",
+        "work summaries",
+        "web search records"
+      ]
+    },
+    {
+      "section": "Capabilities",
+      "visible_in": [
+        "developer",
+        "superadmin_developer"
+      ],
+      "contents": [
+        "agent registry",
+        "CLI adapters",
+        "notification channels",
+        "validators",
+        "install state"
+      ]
+    },
+    {
+      "section": "Superadmin",
+      "visible_in": [
+        "superadmin_developer"
+      ],
+      "contents": [
+        "raw configs",
+        "platform policies",
+        "coordination status",
+        "validation gaps",
+        "desktop release gates"
+      ]
+    }
+  ],
+  "task_run_flow": [
+    {
+      "step": "describe_goal",
+      "screen": "Guided task form",
+      "required_inputs": [
+        "goal",
+        "target project or workspace",
+        "desired output type"
+      ],
+      "optional_inputs": [
+        "deadline or depth",
+        "notification channel",
+        "work mode override",
+        "preferred tools"
+      ]
+    },
+    {
+      "step": "preflight",
+      "screen": "Readiness and evidence panel",
+      "required_behavior": [
+        "show web-first requirement status",
+        "show missing required capabilities",
+        "show optional capability gaps",
+        "offer setup-later for non-blocking gaps"
+      ]
+    },
+    {
+      "step": "run",
+      "screen": "Run timeline",
+      "required_behavior": [
+        "show current phase",
+        "show elapsed time by phase",
+        "show active agents and subprocesses",
+        "show produced files",
+        "send user questions to decision inbox instead of stopping unrelated lanes"
+      ]
+    },
+    {
+      "step": "review",
+      "screen": "Result review",
+      "required_behavior": [
+        "show request-to-outcome trace",
+        "show source provenance and verification",
+        "show evaluator result",
+        "show commit and push state when applicable",
+        "offer rework or accept"
+      ]
+    }
+  ],
+  "decision_inbox_flow": [
+    {
+      "step": "capture_question",
+      "required_behavior": "Record user-answerable questions with task ID, impact, default assumption, deadline, and whether other work can continue."
+    },
+    {
+      "step": "continue_unblocked_work",
+      "required_behavior": "Run independent lanes while waiting when dependencies allow it."
+    },
+    {
+      "step": "interrupt_resume",
+      "required_behavior": "When the user answers, resume the blocked task from saved context rather than restarting the whole workflow."
+    }
+  ],
+  "developer_superadmin_flow": [
+    {
+      "area": "Mode control",
+      "actions": [
+        "switch view mode",
+        "inspect work mode",
+        "inspect install mode",
+        "compare user-facing and developer-facing state"
+      ]
+    },
+    {
+      "area": "Platform internals",
+      "actions": [
+        "open raw registries",
+        "run validators",
+        "inspect source provenance",
+        "inspect memory bootstrap anchors",
+        "open coordination board"
+      ]
+    },
+    {
+      "area": "Desktop productization",
+      "actions": [
+        "review installer release gates",
+        "compare Tauri, Electron, and native packaging",
+        "inspect sidecar/local-service assumptions",
+        "review privacy and update readiness"
+      ]
+    }
+  ],
+  "settings_flow": [
+    {
+      "group": "Workspace",
+      "settings": [
+        "workspace path",
+        "snapshot refresh",
+        "indexing scope",
+        "public/private export warnings"
+      ]
+    },
+    {
+      "group": "Capabilities",
+      "settings": [
+        "optional CLI adapters",
+        "notification channels",
+        "browser automation availability",
+        "presentation and document plugins"
+      ]
+    },
+    {
+      "group": "Privacy and secrets",
+      "settings": [
+        "secret storage method",
+        "redaction preview",
+        "local process disclosure",
+        "network access disclosure"
+      ]
+    },
+    {
+      "group": "Developer",
+      "settings": [
+        "view mode",
+        "validation commands",
+        "installer release gates",
+        "logs and traces"
+      ]
+    }
+  ],
+  "failure_recovery_flows": [
+    {
+      "failure": "workspace_unreadable",
+      "user_message": "The selected workspace cannot be read.",
+      "recovery_actions": [
+        "choose another folder",
+        "open permissions help",
+        "use demo workspace"
+      ],
+      "blocks": [
+        "real workspace dashboard",
+        "task execution"
+      ]
+    },
+    {
+      "failure": "optional_cli_missing",
+      "user_message": "This capability needs an optional CLI that is not configured.",
+      "recovery_actions": [
+        "open setup guide",
+        "disable only that capability",
+        "continue with available tools"
+      ],
+      "blocks": [
+        "that specific adapter only"
+      ]
+    },
+    {
+      "failure": "task_waiting_for_user_decision",
+      "user_message": "A decision is needed before this task can continue.",
+      "recovery_actions": [
+        "answer now",
+        "use recorded default assumption",
+        "defer and continue independent work"
+      ],
+      "blocks": [
+        "dependent task lane"
+      ]
+    },
+    {
+      "failure": "snapshot_stale",
+      "user_message": "The dashboard snapshot is stale.",
+      "recovery_actions": [
+        "refresh snapshot",
+        "show last generated time",
+        "continue with stale warning"
+      ],
+      "blocks": []
+    },
+    {
+      "failure": "update_failed",
+      "user_message": "The app update did not complete.",
+      "recovery_actions": [
+        "keep current version",
+        "retry update",
+        "open release notes and manual download"
+      ],
+      "blocks": [
+        "new version only"
+      ]
+    }
+  ],
+  "mvp_screens": [
+    {
+      "id": "welcome_workspace_chooser",
+      "priority": "must",
+      "purpose": "Open, create, or demo a workspace."
+    },
+    {
+      "id": "workspace_home",
+      "priority": "must",
+      "purpose": "Show projects, recent work, active tasks, and next actions."
+    },
+    {
+      "id": "guided_task_start",
+      "priority": "must",
+      "purpose": "Start a task with goal, project, work mode, output type, and optional notification."
+    },
+    {
+      "id": "run_timeline",
+      "priority": "must",
+      "purpose": "Show progress, timing, agents, artifacts, decisions, and verification."
+    },
+    {
+      "id": "decision_inbox",
+      "priority": "must",
+      "purpose": "Collect pending user questions without blocking unrelated work."
+    },
+    {
+      "id": "history_and_outputs",
+      "priority": "should",
+      "purpose": "Browse summaries, traces, evaluations, commits, and generated artifacts."
+    },
+    {
+      "id": "settings_capabilities",
+      "priority": "should",
+      "purpose": "Configure workspace, optional CLIs, notifications, secrets, and privacy."
+    },
+    {
+      "id": "superadmin_console",
+      "priority": "should",
+      "purpose": "Expose raw configs, validators, release gates, and platform health for builders."
+    }
+  ],
+  "measurement_targets": [
+    {
+      "id": "time_to_first_workspace_dashboard",
+      "target": "A new user should reach a dashboard or demo dashboard without configuring optional integrations.",
+      "measurement": "elapsed time from app launch to dashboard arrival"
+    },
+    {
+      "id": "time_to_first_task_start",
+      "target": "A user should be able to start a guided task after workspace confirmation and readiness scan.",
+      "measurement": "elapsed time from dashboard arrival to task preflight"
+    },
+    {
+      "id": "blocked_question_isolation",
+      "target": "A user-answerable question should block only dependent task lanes.",
+      "measurement": "number of independent lanes paused by a single pending decision"
+    },
+    {
+      "id": "optional_setup_non_blocking_rate",
+      "target": "Missing optional CLIs or notification channels should not block core dashboard and history viewing.",
+      "measurement": "percentage of optional setup failures that remain capability-scoped"
+    }
+  ],
+  "acceptance_checks": [
+    "A user can understand the difference between installed app usage and repository developer setup.",
+    "A first-run path exists for Open Workspace, Create Workspace, and Demo Workspace.",
+    "Optional CLI and notification setup can be deferred.",
+    "Task execution shows active phase, elapsed time, evidence, artifacts, decisions, and verification state.",
+    "Developer and superadmin developer views expose internal configs and release gates without cluttering user mode.",
+    "Failure recovery is defined for unreadable workspace, missing optional CLI, pending user decision, stale snapshot, and update failure.",
+    "No real token, private snapshot, or browser session is bundled into installer artifacts."
+  ]
+}

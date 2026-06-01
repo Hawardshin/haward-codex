@@ -8,6 +8,7 @@ Use this workflow when the platform should become software that a user installs,
 
 - User productization request
 - `platform-desktop-app/configs/desktop-distribution-registry.json`
+- `platform-desktop-app/configs/user-flow-registry.json`
 - Existing setup install modes in `agent-platform/configs/installations/install-mode-registry.json`
 - Target OS list
 - UI/runtime candidates such as `workspace-monitor` and `agent-platform`
@@ -20,17 +21,18 @@ Use this workflow when the platform should become software that a user installs,
 4. Confirm boundary:
    - Repository setup belongs to `install_mode`.
    - End-user installer packaging belongs to `platform-desktop-app/`.
-5. Open `platform-desktop-app/configs/desktop-distribution-registry.json`.
-6. Compare at least two framework or packaging routes before installing dependencies:
+5. Open `platform-desktop-app/configs/desktop-distribution-registry.json` and `platform-desktop-app/configs/user-flow-registry.json`.
+6. Confirm the installable app can reach first value through open/create/demo workspace, workspace boundary review, view mode selection, readiness scan, and dashboard arrival.
+7. Compare at least two framework or packaging routes before installing dependencies:
    - Tauri
    - Electron
    - native packaging-only
-7. Decide whether this turn is:
+8. Decide whether this turn is:
    - productization structure only
    - prototype implementation
    - release packaging
-8. If installing dependencies, follow `_ops/workflows/58-installation-record.md` first.
-9. Record release gates:
+9. If installing dependencies, follow `_ops/workflows/58-installation-record.md` first.
+10. Record release gates:
    - signing
    - notarization where applicable
    - installer format
@@ -38,8 +40,8 @@ Use this workflow when the platform should become software that a user installs,
    - uninstall and rollback
    - privacy/security/license review
    - install/first-run/update smoke tests
-10. Update project-local requirements/specs and shared navigation if durable structure changed.
-11. Validate configs, structure, docs, naming, maps, board, grounding, and evaluator outputs.
+11. Update project-local requirements/specs and shared navigation if durable structure changed.
+12. Validate configs, structure, docs, naming, maps, board, grounding, and evaluator outputs.
 
 ## Output Contract
 
@@ -48,6 +50,7 @@ Use this workflow when the platform should become software that a user installs,
 - compared routes and trade-offs
 - packaging targets by OS
 - release gates
+- first-run user flow and optional setup deferral behavior
 - dependency installation status
 - installation audit targets if installation occurred
 - privacy and secret-handling rules
