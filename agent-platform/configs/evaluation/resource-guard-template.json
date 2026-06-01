@@ -1,0 +1,55 @@
+{
+  "task": "Example memory and resource leak check.",
+  "work_mode": "standard",
+  "runtime_context": [
+    "python",
+    "node",
+    "playwright"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "example-browser-context",
+      "category": "browser_context",
+      "description": "Replace this example with one resource that can remain open or grow unbounded.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Close browser contexts and browsers in finally blocks or test fixtures.",
+      "evidence": [
+        "Template example only."
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "example-cleanup-path",
+      "resource": "BrowserContext",
+      "create_path": "browser.newContext()",
+      "cleanup_path": "context.close() in finally or fixture teardown",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Template example only."
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "example-memory-smoke",
+      "metric": "rss or heapUsed",
+      "tool": "tracemalloc, process.memoryUsage, next build --experimental-debug-memory-usage, or OS/process monitor",
+      "threshold": "No unbounded growth across the relevant smoke run.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Template example only."
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "Use this file as a shape example. Save real resource checks under _history/evaluations/YYYY/ or the owning project history folder.",
+    "Use status=accepted only with a rationale that names the owner, risk, and follow-up trigger."
+  ]
+}

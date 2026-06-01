@@ -20,6 +20,7 @@ Compare the result against strong references and identify what is weaker or miss
 If the final output contains factual claims, require a grounding check from hallucination-guard-agent.
 Require web_search_record_targets, user_request_summary_targets, requirements_targets, spec_targets, source_provenance_targets, plan_evidence_targets, mode_selection_record_targets, omission_check_targets, request_trace_targets, work_summary_targets, and timing_summary_targets only when the selected mode makes them blocking.
 If skill work occurred, require skill_work_occurred=true, skill_targets, and skill_validation_targets.
+If resource_risk_occurred=true, require resource_check_targets that point to resource-guard-agent/check-resources evidence.
 For quick mode, treat missing governance targets as non-blocking improvements unless the user explicitly requested those artifacts.
 For ship_first mode, require references_checked, mode_selection_record_targets, omission_check_targets, and web_search_record_targets, and require deferred_improvement_targets when improvement_ideas are postponed.
 For research mode, require references_checked, source_provenance_targets, plan_evidence_targets, mode_selection_record_targets, omission_check_targets, web_search_record_targets, and timing_summary_targets.
@@ -60,6 +61,8 @@ Return ready_to_close only when there are no blocking gaps.
 - context archive targets
 - installation occurred
 - installation record targets
+- resource risk occurred
+- resource check targets
 - deferred improvement targets
 - known gaps
 - improvement ideas

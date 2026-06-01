@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-02",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, platform description narrative, platform presentation pack, coding project bootstrap, work timing/bottleneck visibility, deep research agent, PPT reference expansion, non-blocking clarification, human decision inbox interrupt/resume, install mode split, installable software productization, agent/history visualization, runtime language direction, runtime language research/design workflow, CLI adapter boundary, unstructured-data structuring capability, work mode enforcement, and omission prevention gate work tracked. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, platform description narrative, platform presentation pack, coding project bootstrap, work timing/bottleneck visibility, deep research agent, PPT reference expansion, non-blocking clarification, human decision inbox interrupt/resume, install mode split, installable software productization, agent/history visualization, runtime language direction, runtime language research/design workflow, CLI adapter boundary, unstructured-data structuring capability, work mode enforcement, omission prevention gate, and resource leak prevention gate work tracked. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -13,6 +13,27 @@
     }
   ],
   "tasks": [
+    {
+      "id": "2026-06-02-resource-leak-prevention",
+      "title": "Add memory and resource leak prevention gate",
+      "project": "agent-platform",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-02",
+      "updated_at": "2026-06-02",
+      "next_action": "No action. Future runtime-risk work should set resource_risk_occurred=true and include resource_check_targets backed by check-resources or an equivalent lifecycle and measurement record.",
+      "blockers": [],
+      "references": [
+        "agent-platform/src/agent_platform/evaluation/resource_guard.py",
+        "agent-platform/configs/evaluation/resource-guard-template.json",
+        "_docs/policies/resource-leak-prevention-policy.ko.md",
+        "_ops/workflows/69-resource-leak-prevention.md",
+        "_specs/workspace-platform/2026-06-02-resource-leak-prevention/"
+      ],
+      "timing_report": "_history/work-timings/2026/2026-06-02-resource-leak-prevention.json",
+      "evaluation_report": "_history/evaluations/2026/2026-06-02-resource-leak-prevention.ko.md"
+    },
     {
       "id": "2026-06-02-omission-prevention",
       "title": "Add omission prevention close-out gate",

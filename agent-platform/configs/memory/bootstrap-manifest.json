@@ -37,6 +37,7 @@
       "The web search record layer or prompt-level search contract changes.",
       "The work mode selection or deferred improvement policy changes.",
       "The omission prevention workflow, omission guard agent, or omission_check_targets contract changes.",
+      "The resource leak prevention workflow, resource guard agent, or resource_check_targets contract changes.",
       "The work timing, bottleneck visibility, or timing_summary_targets contract changes.",
       "The parallel work planning workflow, planner agent, research merge gate, or coordination lane contract changes.",
       "The notification settings, provider routing, or webhook secret handling contract changes.",
@@ -125,6 +126,17 @@
       "used_for": [
         "required item coverage before close-out",
         "omission_check_targets close-out policy"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "resource_leak_prevention_policy",
+      "title": "Resource Leak Prevention Policy",
+      "path": "_docs/policies/resource-leak-prevention-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "memory and runtime resource leak risk handling",
+        "resource_check_targets close-out policy"
       ],
       "last_checked": "2026-06-02"
     },
@@ -892,6 +904,18 @@
       ]
     },
     {
+      "id": "resource_leak_prevention_must_stay_discoverable",
+      "rule": "The resource leak prevention workflow must remain a warm memory anchor so future sessions treat memory leaks and runtime resource leaks as platform reliability risks, not optional reminders.",
+      "reason": "The user explicitly noted that this kind of platform must be careful about memory leaks.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "work-evaluator-agent",
+        "resource-guard-agent"
+      ]
+    },
+    {
       "id": "install_mode_registry_must_stay_discoverable",
       "rule": "The install mode registry must remain a warm memory anchor so future sessions can choose user install for using/viewing/deploying the platform and developer install for improving platform source, rules, tools, skills, validators, dashboards, or tests.",
       "reason": "The user explicitly asked for a user-facing installation and a developer-facing installation for improving the platform.",
@@ -1068,6 +1092,7 @@
     "memory_bootstrap_workflow",
     "work_mode_registry",
     "omission_prevention_workflow",
+    "resource_leak_prevention_workflow",
     "install_mode_registry",
     "language_decision_registry",
     "work_timing_policy",
@@ -1119,6 +1144,7 @@
     "memory_bootstrap_workflow",
     "work_mode_registry",
     "omission_prevention_workflow",
+    "resource_leak_prevention_workflow",
     "install_mode_registry",
     "language_decision_registry",
     "work_timing_policy",
@@ -1239,6 +1265,14 @@
       "purpose": "Close-out workflow for proving required instructions, requirements, artifacts, and acceptance checks were not silently missed.",
       "required": true,
       "load_order": 9
+    },
+    {
+      "id": "resource_leak_prevention_workflow",
+      "path": "_ops/workflows/69-resource-leak-prevention.md",
+      "tier": "warm",
+      "purpose": "Conditional close-out workflow for proving memory and runtime resource leak risks have lifecycle cleanup and measurement evidence.",
+      "required": true,
+      "load_order": 10
     },
     {
       "id": "install_mode_registry",

@@ -1,0 +1,107 @@
+{
+  "task": "Ground final claims for resource leak prevention work.",
+  "output_summary": "The final response will state that a resource guard, conditional evaluator gate, policies, workflows, tests, and push were completed.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "resource-guard-source",
+      "source": "agent-platform/src/agent_platform/evaluation/resource_guard.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Implementation file in the repository."
+    },
+    {
+      "evidence_id": "work-evaluator-source",
+      "source": "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Evaluator source file containing conditional resource target gap logic."
+    },
+    {
+      "evidence_id": "unit-test-result",
+      "source": "python3 -m unittest discover -s tests: Ran 131 tests OK",
+      "source_type": "test_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Local test command output."
+    },
+    {
+      "evidence_id": "python-docs",
+      "source": "https://docs.python.org/3/library/tracemalloc.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Python documentation."
+    },
+    {
+      "evidence_id": "node-docs",
+      "source": "https://nodejs.org/api/process.html#processmemoryusage",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Node.js documentation."
+    },
+    {
+      "evidence_id": "playwright-docs",
+      "source": "https://playwright.dev/docs/api/class-browsercontext",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Playwright documentation."
+    },
+    {
+      "evidence_id": "nextjs-docs",
+      "source": "https://nextjs.org/docs/app/guides/memory-usage",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Next.js documentation."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now contains a resource guard implementation and check-resources CLI path.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "resource-guard-source"
+      ],
+      "verification_steps": [
+        "Inspected changed source files and ran unit tests."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The work evaluator blocks close-out when resource_risk_occurred is true and resource_check_targets is missing.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "work-evaluator-source",
+        "unit-test-result"
+      ],
+      "verification_steps": [
+        "Added evaluator tests for missing and present resource check targets."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Python, Node.js, Playwright, and Next.js each have official documentation relevant to memory or lifecycle checks.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "python-docs",
+        "node-docs",
+        "playwright-docs",
+        "nextjs-docs"
+      ],
+      "verification_steps": [
+        "Checked official documentation URLs and recorded them in the web search record."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Future actual daemons or desktop sidecars need project-specific leak/stress thresholds."
+  ],
+  "limitation_notes": [
+    "No long-running runtime component was added in this change; this work adds the gate and policy."
+  ]
+}

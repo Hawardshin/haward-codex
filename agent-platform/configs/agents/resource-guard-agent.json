@@ -1,0 +1,16 @@
+{
+  "name": "resource-guard-agent",
+  "description": "Checks memory and runtime resource leak risks for agents, servers, browser automation, workers, caches, streams, and large-data tasks.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "agent-platform:check-resources"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "before closing work that touches long-running runtimes, background workers, browser automation, subprocesses, caches, streams, large-data processing, file handles, network connections, timers, or subscriptions",
+    "input_schema": "agent-platform/configs/evaluation/resource-guard-template.json",
+    "work_mode_registry": "agent-platform/configs/workflows/work-mode-registry.json",
+    "policy": "If resource_risk_occurred=true in work-evaluator input, resource_check_targets must be present. Required resource risks must be mitigated with evidence, accepted with rationale, marked not_applicable with rationale, or treated as rework. Required lifecycle checks must show create/open/start and cleanup/close/stop paths. Required measurement checks must name the metric, tool, threshold, and evidence."
+  }
+}

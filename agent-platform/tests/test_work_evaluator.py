@@ -262,6 +262,53 @@ class WorkEvaluatorTests(unittest.TestCase):
 
         self.assertFalse(report["requires_rework"])
 
+    def test_resource_risk_requires_resource_check_targets(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Add a long-running worker.",
+                result_summary="Added worker code.",
+                changed_files=("agent-platform/src/agent_platform/core/runtime.py",),
+                verification=("python3 -m unittest discover -s tests: OK",),
+                references_checked=("Python tracemalloc docs",),
+                **complete_evidence_targets(),
+                web_search_record_targets=("_history/web-searches/2026/2026-06-02-resource-leak.ko.md",),
+                user_request_summary_targets=("_history/user-requests/2026/2026-06-02.ko.md",),
+                requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-06-02-resource-leak-prevention/spec.ko.md",),
+                request_trace_targets=("_history/request-traces/2026/2026-06-02-resource-leak-prevention.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-06-02.ko.md",),
+                resource_risk_occurred=True,
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Resource leak risk occurred but resource_check_targets is missing. Run resource-guard-agent/check-resources or record lifecycle, cleanup, and memory measurement evidence.",
+            report["gaps"],
+        )
+
+    def test_resource_risk_ready_when_check_targets_present(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Add a long-running worker.",
+                result_summary="Added worker code.",
+                changed_files=("agent-platform/src/agent_platform/core/runtime.py",),
+                verification=("python3 -m unittest discover -s tests: OK",),
+                references_checked=("Python tracemalloc docs",),
+                **complete_evidence_targets(),
+                web_search_record_targets=("_history/web-searches/2026/2026-06-02-resource-leak.ko.md",),
+                user_request_summary_targets=("_history/user-requests/2026/2026-06-02.ko.md",),
+                requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-06-02-resource-leak-prevention/spec.ko.md",),
+                request_trace_targets=("_history/request-traces/2026/2026-06-02-resource-leak-prevention.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-06-02.ko.md",),
+                resource_risk_occurred=True,
+                resource_check_targets=("_history/evaluations/2026/2026-06-02-resource-leak-check.json",),
+            )
+        )
+
+        self.assertFalse(report["requires_rework"])
+
     def test_context_archiving_requires_record_targets(self) -> None:
         report = evaluate_work(
             WorkEvaluationInput(

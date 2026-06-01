@@ -1,0 +1,98 @@
+{
+  "task": "Add memory and resource leak prevention gate.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "memory-leak-user-instruction",
+      "description": "Capture the user's durable instruction that this platform must be careful about memory leaks.",
+      "source": "UR-2026-06-02-012",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_docs/policies/resource-leak-prevention-policy.ko.md",
+        "_docs/instructions/persistent-instructions.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "conditional-resource-gate",
+      "description": "Make resource leak prevention a conditional gate so every tiny task is not forced through profiling.",
+      "source": "REQ-WS-057",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+        "_ops/workflows/69-resource-leak-prevention.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "resource-cli-and-tests",
+      "description": "Provide a deterministic CLI and tests for resource leak checks.",
+      "source": "_specs/workspace-platform/2026-06-02-resource-leak-prevention/spec.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/evaluation/resource_guard.py",
+        "agent-platform/tests/test_resource_guard.py"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/src/agent_platform/evaluation/resource_guard.py",
+      "purpose": "Resource leak guard implementation.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/evaluation/resource-guard-template.json",
+      "purpose": "Reusable resource guard input template.",
+      "required": true
+    },
+    {
+      "path": "_docs/policies/resource-leak-prevention-policy.ko.md",
+      "purpose": "Durable Korean policy document.",
+      "required": true
+    },
+    {
+      "path": "_ops/workflows/69-resource-leak-prevention.md",
+      "purpose": "Reusable workflow for resource leak prevention.",
+      "required": true
+    },
+    {
+      "path": "_ops/prompts/100-resource-leak-prevention.md",
+      "purpose": "Reusable prompt for resource leak checks.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "unit-tests",
+      "description": "agent-platform unit tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 -m unittest discover -s tests: Ran 131 tests OK"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "resource-template",
+      "description": "Resource guard template passes check-resources.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-resources configs/evaluation/resource-guard-template.json: resource_ready"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "A future actual daemon or desktop sidecar will need project-specific leak/stress thresholds beyond this shared guard."
+  ],
+  "notes": [
+    "The guard is conditional through resource_risk_occurred to avoid forcing every small task through memory profiling."
+  ]
+}

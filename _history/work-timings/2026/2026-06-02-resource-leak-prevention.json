@@ -1,0 +1,76 @@
+{
+  "task_id": "2026-06-02-resource-leak-prevention",
+  "title": "Add memory and resource leak prevention gate",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "duration_seconds": 180,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official source lookup for Python, Node.js, Playwright, and Next.js resource/memory guidance."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "duration_seconds": 30,
+      "measurement": "measured",
+      "bottleneck_notes": "No bottleneck."
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan",
+      "status": "completed",
+      "duration_seconds": 240,
+      "measurement": "estimated",
+      "bottleneck_notes": "Governance mode selected because evaluator, policy, workflow, and memory anchors changed."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "duration_seconds": 600,
+      "measurement": "estimated",
+      "bottleneck_notes": "Paired Korean/English requirements, spec, and traceability artifacts add overhead but preserve future context."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "duration_seconds": 1800,
+      "measurement": "estimated",
+      "bottleneck_notes": "Largest phase: adding resource guard, evaluator fields, CLI, docs, policies, workflow, prompt, and memory links."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 600,
+      "measurement": "estimated",
+      "bottleneck_notes": "Unit tests and resource/work-mode/evaluator gates passed."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "Omission, resource, grounding, and work evaluation records were created and checked."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "duration_seconds": 120,
+      "measurement": "estimated",
+      "bottleneck_notes": "Final git staging, commit, push, and status confirmation."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_expected_phase": "implementation",
+    "notes": "The main cost is governance fan-out across code, config, bilingual docs, memory anchors, history, and evaluation records."
+  }
+}

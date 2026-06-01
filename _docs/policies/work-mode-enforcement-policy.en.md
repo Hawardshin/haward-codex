@@ -10,6 +10,7 @@ Work modes must be execution contracts, not prompt-only preferences. If a mode o
 - All non-`quick` work, including `standard`, `ship_first`, `research`, and `governance`, must leave a record of the selected mode, selection reason, applied overrides, and enforcement checks.
 - Evaluation input must include `mode_selection_record_targets` whenever the selected mode requires it.
 - Evaluation input must also include `omission_check_targets` whenever the selected mode requires it, so required instructions, requirements, artifacts, and acceptance checks have coverage.
+- Work with resource risk must include `resource_risk_occurred=true` and `resource_check_targets`, independent of mode.
 - Run `check-work-modes` when mode policy, evaluator targets, or close-out strictness changes.
 - The evaluator must return rework when selected-mode blocking targets are missing.
 - Mode policy must be coordinated across prompts, workflow docs, config, CLI checks, evaluator logic, and final evaluation reports.
@@ -20,8 +21,9 @@ Work modes must be execution contracts, not prompt-only preferences. If a mode o
 2. CLI layer: `check-work-modes` checks drift between the registry and Python evaluator policy.
 3. Record layer: non-`quick` work leaves a mode selection record and an omission coverage record.
 4. Omission-prevention layer: `check-omissions` checks required item coverage.
-5. Evaluation layer: `evaluate-work` turns missing blocking targets into gaps.
-6. Audit layer: save final evaluations under `_history/evaluations/YYYY/`.
+5. Resource-leak-prevention layer: `check-resources` checks runtime resource lifecycle and measurement evidence.
+6. Evaluation layer: `evaluate-work` turns missing blocking targets into gaps.
+7. Audit layer: save final evaluations under `_history/evaluations/YYYY/`.
 
 ## Evidence
 
@@ -34,4 +36,5 @@ Work modes must be execution contracts, not prompt-only preferences. If a mode o
 - Do not assume a rule will hold because it appears in a prompt.
 - Do not close meaningful non-`quick` work without a mode selection record.
 - Do not close meaningful non-`quick` work without omission coverage.
+- Do not close meaningful resource-risk work without a resource check.
 - Do not push work mode changes when the mode registry and evaluator policy disagree.

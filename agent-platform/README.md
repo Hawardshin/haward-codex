@@ -48,6 +48,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep large-company and high-quality research site seeds in `configs/research/enterprise-source-registry.json`.
 - Keep selectable work modes, enforcement layers, mode selection record requirements, and evaluator target strictness in `configs/workflows/work-mode-registry.json`.
 - Keep omission coverage checks in `configs/evaluation/omission-guard-template.json` and use `omission-guard-agent` before closing non-`quick` work.
+- Keep memory and resource leak checks in `configs/evaluation/resource-guard-template.json` and use `resource-guard-agent` when work touches long-running runtimes, browser automation, workers, caches, streams, large data, subprocesses, file handles, network connections, timers, or subscriptions.
 - Keep user/developer installation profiles in `configs/installations/install-mode-registry.json`; `install_mode` controls setup audience while `work_mode` controls task close-out strictness.
 - Keep end-user desktop installer productization in `platform-desktop-app/`; this is separate from repository setup `install_mode`.
 - Keep external CLI integration in `configs/integrations/cli-adapter-registry.json`; the installable platform may use many CLIs through adapters but must not depend on one CLI to function.
@@ -97,6 +98,7 @@ PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluati
 PYTHONPATH=src python3 -m agent_platform.cli validate-skill configs/evaluation/skill-validation-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/hallucination-guard-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-omissions configs/evaluation/omission-guard-template.json
+PYTHONPATH=src python3 -m agent_platform.cli check-resources configs/evaluation/resource-guard-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-deep-research configs/planning/deep-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-parallel-work configs/planning/parallel-work-template.json
@@ -141,6 +143,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `configs/integrations/notification-channels.json`: notification on/off routing, event filters, provider payload options, and environment-variable secret indirection
 - `configs/usage/unstructured-data-structuring-profile.json`: schema, provenance, null handling, and validation contract for turning messy input into structured records
 - `configs/evaluation/omission-guard-template.json`: required item, artifact, and acceptance-check coverage template for omission prevention
+- `configs/evaluation/resource-guard-template.json`: memory and runtime resource leak risk, lifecycle cleanup, and measurement evidence template
 - `configs/open-source/`: dependency candidate scoring inputs
 - `research-insight-planner-agent` is the core Perplexity-style research agent for search, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review
 - `deep-research-agent` validates multi-step deep research packages before long-form report writing
@@ -148,6 +151,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `spec-driven-planner-agent` turns requirements into specs, plans, tasks, validation records, and traceability
 - `spec-reconciliation-agent` decides whether ambiguous specs or spec/source drift should update the spec, update source, ask the user, or defer; user decisions are surfaced as `clarification_needed`
 - `omission-guard-agent` checks required instructions, requirements, artifacts, and acceptance checks before non-`quick` close-out
+- `resource-guard-agent` checks memory and resource leak risks for long-running runtimes, browser automation, workers, caches, streams, large-data processing, subprocesses, file handles, network connections, timers, and subscriptions
 - `skill-lifecycle-agent` creates, validates, tracks, and improves repository-managed Codex skills
 - `parallel-work-planner-agent` checks task dependencies, file/resource boundaries, execution batches, research fan-in merge gates, coordination targets, and merge verification before parallel execution
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`
@@ -164,6 +168,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - factual final outputs should pass `hallucination-guard-agent` when claims need grounding
 - close-out evaluation should include `work_mode`; `quick`, `standard`, `ship_first`, `research`, and `governance` decide which target fields are blocking
 - close-out evaluation should include `web_search_record_targets`, `user_request_summary_targets`, `requirements_targets`, `spec_targets`, `request_trace_targets`, `work_summary_targets`, `source_provenance_targets`, `plan_evidence_targets`, `mode_selection_record_targets`, and `omission_check_targets` when required by the selected work mode
+- close-out evaluation should include `resource_risk_occurred=true` and `resource_check_targets` when memory or runtime resource leak risk exists
 - work mode policy is not prompt-only; `check-work-modes` validates registry shape and drift against evaluator target policy
 - `ship_first` close-out should include `deferred_improvement_targets` when improvement ideas are intentionally postponed
 - skill close-out should include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`

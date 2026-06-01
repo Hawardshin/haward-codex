@@ -1,0 +1,72 @@
+{
+  "task": "Add memory and resource leak prevention gate.",
+  "work_mode": "governance",
+  "runtime_context": [
+    "python",
+    "agent-platform-cli",
+    "workspace-evaluator"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "resource-guard-runtime-overhead",
+      "category": "memory",
+      "description": "The new resource guard should not become a long-running process or retain unbounded state while checking resource risk inputs.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The implementation loads one JSON input, converts bounded arrays into dataclasses, produces a report, and exits. It does not create a persistent worker, browser, cache, stream, network connection, or file handle.",
+      "evidence": [
+        "agent-platform/src/agent_platform/evaluation/resource_guard.py",
+        "agent-platform/src/agent_platform/cli.py",
+        "agent-platform/tests/test_resource_guard.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "future-runtime-work-forgets-cleanup",
+      "category": "other",
+      "description": "Future agents could add long-running servers, browser automation, workers, caches, or subprocesses without cleanup and measurement evidence.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Persistent instructions, workflow 69, prompt 100, work mode registry, and work evaluator now require resource_check_targets when resource_risk_occurred=true.",
+      "evidence": [
+        "_docs/policies/resource-leak-prevention-policy.ko.md",
+        "_ops/workflows/69-resource-leak-prevention.md",
+        "_ops/prompts/100-resource-leak-prevention.md",
+        "agent-platform/src/agent_platform/evaluation/work_evaluator.py"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "resource-guard-no-persistent-lifecycle",
+      "resource": "resource guard CLI invocation",
+      "create_path": "CLI opens and parses the supplied JSON file for one command invocation.",
+      "cleanup_path": "The command exits after printing JSON; resource_guard.py creates no persistent process, browser context, worker, cache, stream, or network connection.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "agent-platform/src/agent_platform/evaluation/resource_guard.py",
+        "agent-platform/src/agent_platform/cli.py"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "unit-test-smoke",
+      "metric": "bounded in-process execution",
+      "tool": "python3 -m unittest discover -s tests",
+      "threshold": "131 tests complete without hanging or starting persistent runtime resources.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Ran 131 tests in 0.016s OK"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "This task added the guard and conditional evaluator gate; it did not add a long-running runtime component."
+  ]
+}

@@ -45,6 +45,8 @@ Use `agent-platform/configs/evaluation/work-evaluation-template.json` as the sha
 - `context_archive_targets`: context archive packet files under `_history/context-archives/YYYY/`
 - `installation_occurred`: whether the work actually installed, upgraded, removed, or globally configured software
 - `installation_record_targets`: installation audit records under `_history/installations/YYYY/`
+- `resource_risk_occurred`: whether the work touched memory or runtime resource leak risk
+- `resource_check_targets`: resource-guard-agent inputs, reports, or lifecycle and measurement records
 - `deferred_improvement_targets`: backlog files that hold postponed non-blocking improvements
 - `known_gaps`: explicit mismatches or unfinished items
 - `improvement_ideas`: non-blocking improvements worth considering
@@ -71,6 +73,7 @@ PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/wo
 - Missing skill targets or skill validation targets are blocking gaps when `skill_work_occurred=true`.
 - If `context_archiving_occurred` is true, missing context archive targets are a blocking gap.
 - If `installation_occurred` is true, missing installation record targets are a blocking gap.
+- If `resource_risk_occurred` is true, missing `resource_check_targets` is a blocking gap.
 - If factual final outputs are present, run `hallucination-guard-agent` and record the result in `grounding_checks`.
 - Improvements that are not required can be logged in history or project docs.
 

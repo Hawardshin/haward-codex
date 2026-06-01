@@ -44,6 +44,7 @@ This document records durable user instructions in English.
 - Use the lightest work mode that fits risk and durability; do not create requirements, specs, request traces, or full close-out targets every time when the selected mode makes them non-blocking.
 - A work mode is not reliable when it exists only as prompt guidance. Non-`quick` work must record the mode selection reason, override, and enforcement checks, then include `mode_selection_record_targets` in the evaluator input.
 - Assume agents can miss required items. Non-`quick` work must use `_ops/workflows/68-omission-prevention.md` or an equivalent coverage check to verify required instructions, requirements, artifacts, and acceptance checks, then include `omission_check_targets` in the evaluator input.
+- Treat memory leaks and runtime resource leaks as platform reliability risks. If work touches long-running agents, servers, browser automation, subprocesses, workers, queues, caches, streams, large-data processing, file handles, network connections, timers, or subscriptions, use `_ops/workflows/69-resource-leak-prevention.md` and include `resource_risk_occurred=true` plus `resource_check_targets` in the evaluator input.
 - For meaningful work, record phase-level duration under `_history/work-timings/YYYY/` using `_tools/work-timer/` so the slowest phase and bottleneck candidates are visible.
 - If `ship_first` mode defers non-blocking improvements, record them in `_ops/backlog/deferred-improvements.ko.md` or the owning project's equivalent backlog and include `deferred_improvement_targets` in evaluation input.
 - When speed matters or work can be split into multiple lanes, use `parallel-work-planner-agent` to check dependencies, `touch_paths`, conflict controls, coordination targets, and merge strategy first.
@@ -103,7 +104,7 @@ This document records durable user instructions in English.
 - Keep repository and prompt maps current when navigational structure changes.
 - Use `work-evaluator-agent` as the default close-out evaluator.
 - Include `work_mode` in work evaluation input.
-- Include `user_request_summary_targets`, `requirements_targets`, `spec_targets`, `request_trace_targets`, `work_summary_targets`, `source_provenance_targets`, `plan_evidence_targets`, `mode_selection_record_targets`, and `omission_check_targets` when required by the selected work mode.
+- Include `user_request_summary_targets`, `requirements_targets`, `spec_targets`, `request_trace_targets`, `work_summary_targets`, `source_provenance_targets`, `plan_evidence_targets`, `mode_selection_record_targets`, and `omission_check_targets` when required by the selected work mode. Include `resource_check_targets` when `resource_risk_occurred=true`.
 - When an item is `covered`, it needs evidence; when it is `deferred` or `not_applicable`, it needs rationale; required `missing` items require rework.
 - Include `timing_summary_targets` when required by the selected work mode, and mark unmeasured timing spans as `partial` or `not_measured`.
 - If skill work occurred, include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets` in work evaluation input.

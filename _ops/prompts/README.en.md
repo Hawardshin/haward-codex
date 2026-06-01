@@ -31,6 +31,8 @@ Every prompt in this folder inherits the following common contract.
 
 When required by the selected work mode, `work-evaluator-agent` input must include `mode_selection_record_targets` and `omission_check_targets`. Missing mode selection records or required-item coverage is a blocking gap.
 
+When memory or resource leak risk exists, `work-evaluator-agent` input must include `resource_risk_occurred=true` and `resource_check_targets`. Missing lifecycle and measurement evidence is a blocking gap.
+
 If skill work occurred, `work-evaluator-agent` input must include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`. Missing targets are a blocking gap.
 
 `work-evaluator-agent` input must include `request_trace_targets` for meaningful work. Missing targets are a blocking gap.

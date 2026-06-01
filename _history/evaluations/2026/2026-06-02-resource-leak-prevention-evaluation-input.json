@@ -1,0 +1,100 @@
+{
+  "initial_instruction": "The user said this kind of platform must be careful about memory leaks.",
+  "result_summary": "Added REQ-WS-057, resource-guard-agent, check-resources CLI, conditional work-evaluator resource targets, resource leak policy/workflow/prompt, persistent instructions, memory bootstrap anchors, and history/spec records.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/policies/resource-leak-prevention-policy.ko.md",
+    "_docs/policies/resource-leak-prevention-policy.en.md",
+    "_ops/workflows/69-resource-leak-prevention.md",
+    "_ops/prompts/100-resource-leak-prevention.md",
+    "agent-platform/src/agent_platform/evaluation/resource_guard.py",
+    "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/configs/evaluation/resource-guard-template.json",
+    "agent-platform/configs/agents/resource-guard-agent.json",
+    "agent-platform/configs/workflows/work-mode-registry.json",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "agent-platform/tests/test_resource_guard.py",
+    "agent-platform/tests/test_work_evaluator.py"
+  ],
+  "verification": [
+    "python3 -m unittest discover -s tests: Ran 131 tests OK",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources configs/evaluation/resource-guard-template.json: resource_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-work-modes configs/workflows/work-mode-registry.json: ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json --root ..: ready_to_bootstrap",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract <core shared settings>: self_documenting",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean with existing presentation-agent generated-output warnings",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-resource-leak-prevention.json: ready"
+  ],
+  "references_checked": [
+    "https://docs.python.org/3/library/tracemalloc.html",
+    "https://nodejs.org/api/process.html#processmemoryusage",
+    "https://playwright.dev/docs/api/class-browsercontext",
+    "https://nextjs.org/docs/app/guides/memory-usage",
+    "_history/evaluations/2026/2026-06-02-omission-prevention.ko.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-resource-leak-prevention-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-resource-leak-prevention.ko.md",
+    "_research/topics/agent-operations/2026-06-02-resource-leak-prevention.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-resource-leak-prevention.ko.md",
+    "_specs/workspace-platform/2026-06-02-resource-leak-prevention/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-02-resource-leak-prevention.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-resource-leak-prevention-omission-check.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-resource-leak-prevention.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-02-resource-leak-prevention.ko.md",
+    "_requirements/reviews/2026-06-02-resource-leak-prevention.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-resource-leak-prevention/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-resource-leak-prevention/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-resource-leak-prevention/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-resource-leak-prevention/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-resource-leak-prevention/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-resource-leak-prevention.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-resource-leak-prevention.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-02-resource-leak-prevention-resource-check.json"
+  ],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": []
+}

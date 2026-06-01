@@ -14,16 +14,17 @@
 6. Validate any reused knowledge-base content with [_ops/workflows/65-validate-knowledge-reference.md](65-validate-knowledge-reference.md).
 7. Capture reusable internet research or external references when useful.
 8. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when the final output contains factual claims.
-9. List changed files, verification results, references checked, grounding checks, source provenance targets, plan evidence targets, omission check targets, web search record targets, user request summary targets, requirements targets, spec targets, skill targets and validation targets when skill work occurred, request trace targets, work summary targets, timing summary targets, deferred improvement targets, context archive targets when archiving occurred, and installation record targets when installation occurred.
+9. List changed files, verification results, references checked, grounding checks, source provenance targets, plan evidence targets, omission check targets, resource check targets when resource risk occurred, web search record targets, user request summary targets, requirements targets, spec targets, skill targets and validation targets when skill work occurred, request trace targets, work summary targets, timing summary targets, deferred improvement targets, context archive targets when archiving occurred, and installation record targets when installation occurred.
 10. For non-`quick` modes, include `mode_selection_record_targets` and `omission_check_targets`.
-11. If a plan guided the work, link its `_history/plans/YYYY/` file.
-12. Confirm the user-readable summary exists under `_history/work-summaries/YYYY/` when the mode requires it.
-13. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
-14. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
-15. Complete the follow-up action.
-16. Evaluate again.
-17. Save the final evaluation report under `_history/evaluations/YYYY/`.
-18. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
+11. If runtime resource risk occurred, include `resource_risk_occurred=true` and `resource_check_targets`.
+12. If a plan guided the work, link its `_history/plans/YYYY/` file.
+13. Confirm the user-readable summary exists under `_history/work-summaries/YYYY/` when the mode requires it.
+14. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
+15. If the evaluator returns `rework_required`, convert each gap into a follow-up action.
+16. Complete the follow-up action.
+17. Evaluate again.
+18. Save the final evaluation report under `_history/evaluations/YYYY/`.
+19. Continue close-out only when there are no blocking gaps and the evaluation report file exists.
 
 ## Python Command
 
@@ -46,6 +47,8 @@ The evaluator input must include `work_mode`. Missing target fields are blocking
 The evaluator input must include `mode_selection_record_targets` for `standard`, `ship_first`, `research`, and `governance`. This prevents work modes from staying prompt-only.
 
 The evaluator input must include `omission_check_targets` for `standard`, `ship_first`, `research`, and `governance`. Run [_ops/workflows/68-omission-prevention.md](68-omission-prevention.md) when required items, artifacts, or acceptance checks could be missed.
+
+If work touched long-running agents, servers, browser automation, subprocesses, workers, queues, caches, streams, large data, file handles, network connections, timers, or subscriptions, set `resource_risk_occurred=true` and include `resource_check_targets`. Run [_ops/workflows/69-resource-leak-prevention.md](69-resource-leak-prevention.md) when resource lifecycle or memory growth could be missed.
 
 In `quick` mode, full-loop target gaps are non-blocking improvements unless the user or another rule makes them mandatory.
 

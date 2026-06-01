@@ -64,6 +64,10 @@
   "installation_record_targets": [
     "_history/installations/YYYY/YYYY-MM-DD-package-name.ko.md"
   ],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [
+    "_history/evaluations/YYYY/YYYY-MM-DD-resource-check.json"
+  ],
   "deferred_improvement_targets": [
     "_ops/backlog/deferred-improvements.ko.md"
   ],

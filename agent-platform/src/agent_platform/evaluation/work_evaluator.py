@@ -72,6 +72,8 @@ class WorkEvaluationInput:
     context_archive_targets: tuple[str, ...] = ()
     installation_occurred: bool = False
     installation_record_targets: tuple[str, ...] = ()
+    resource_risk_occurred: bool = False
+    resource_check_targets: tuple[str, ...] = ()
     deferred_improvement_targets: tuple[str, ...] = ()
     known_gaps: tuple[str, ...] = ()
     improvement_ideas: tuple[str, ...] = ()
@@ -107,6 +109,8 @@ class WorkEvaluationInput:
             context_archive_targets=_tuple_of_strings(data.get("context_archive_targets", []), "context_archive_targets"),
             installation_occurred=_optional_bool(data.get("installation_occurred", False), "installation_occurred"),
             installation_record_targets=_tuple_of_strings(data.get("installation_record_targets", []), "installation_record_targets"),
+            resource_risk_occurred=_optional_bool(data.get("resource_risk_occurred", False), "resource_risk_occurred"),
+            resource_check_targets=_tuple_of_strings(data.get("resource_check_targets", []), "resource_check_targets"),
             deferred_improvement_targets=_tuple_of_strings(
                 data.get("deferred_improvement_targets", []),
                 "deferred_improvement_targets",
@@ -149,6 +153,10 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
         gaps.append("Context archiving occurred but context_archive_targets is missing. Add a resume packet under _history/context-archives/.")
     if evaluation_input.installation_occurred and not evaluation_input.installation_record_targets:
         gaps.append("Installation occurred but installation_record_targets is missing. Add an audit record under _history/installations/ and index it in _ops/installations/registry.json.")
+    if evaluation_input.resource_risk_occurred and not evaluation_input.resource_check_targets:
+        gaps.append(
+            "Resource leak risk occurred but resource_check_targets is missing. Run resource-guard-agent/check-resources or record lifecycle, cleanup, and memory measurement evidence."
+        )
     if (
         work_mode == "ship_first"
         and evaluation_input.improvement_ideas
@@ -198,6 +206,8 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
             "context_archive_targets_count": len(evaluation_input.context_archive_targets),
             "installation_occurred": evaluation_input.installation_occurred,
             "installation_record_targets_count": len(evaluation_input.installation_record_targets),
+            "resource_risk_occurred": evaluation_input.resource_risk_occurred,
+            "resource_check_targets_count": len(evaluation_input.resource_check_targets),
             "deferred_improvement_targets_count": len(evaluation_input.deferred_improvement_targets),
         },
         "gaps": gaps,

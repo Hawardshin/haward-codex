@@ -31,6 +31,8 @@
 
 선택한 작업 모드가 요구하면 `work-evaluator-agent` 입력에는 `mode_selection_record_targets`와 `omission_check_targets`를 포함한다. 작업 모드 선택 기록이나 필수 항목 coverage가 빠지면 blocking gap이다.
 
+메모리/리소스 누수 위험이 있으면 `work-evaluator-agent` 입력에는 `resource_risk_occurred=true`와 `resource_check_targets`를 포함한다. 리소스 생명주기와 측정 근거가 빠지면 blocking gap이다.
+
 스킬 작업이 있었다면 `work-evaluator-agent` 입력에는 `skill_work_occurred=true`, `skill_targets`, `skill_validation_targets`를 포함한다. 누락되면 blocking gap이다.
 
 `work-evaluator-agent` 입력에는 의미 있는 작업마다 `request_trace_targets`를 포함한다. 누락되면 blocking gap이다.
