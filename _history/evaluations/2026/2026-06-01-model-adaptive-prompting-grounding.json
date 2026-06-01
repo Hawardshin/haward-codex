@@ -1,0 +1,150 @@
+{
+  "task": "Ground factual claims for model-adaptive prompting policy work.",
+  "output_summary": "Added a durable rule that prompting and retry strategy should vary by model capability, with two-pass compare/merge loops scoped to weak, non-reasoning, or uncertain models on high-variance tasks.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-model-adaptive-prompting.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked web-first record with queries, checked sources, weak-source notes, plan impact, and uncertainty."
+    },
+    {
+      "evidence_id": "ai_usage_gap_profile",
+      "source": "agent-platform/configs/usage/ai-usage-gap-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Self-documenting usage profile containing model capability profiles and model-adaptive prompting policy."
+    },
+    {
+      "evidence_id": "requirements_specs",
+      "source": "_requirements/baselines/2026-05-31-workspace-platform.ko.md; _specs/workspace-platform/2026-06-01-model-adaptive-prompting/spec.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked requirement baseline and spec artifacts for REQ-WS-044."
+    },
+    {
+      "evidence_id": "operating_docs",
+      "source": "_docs/operating-models/ai-usage-gap-operating-model.ko.md; _docs/instructions/persistent-instructions.ko.md; _ops/workflows/59-bridge-ai-usage-gap.md; _ops/prompts/89-bridge-ai-usage-gap.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked operating documents that expose the model-adaptive prompting rule."
+    },
+    {
+      "evidence_id": "self_consistency",
+      "source": "https://arxiv.org/abs/2203.11171",
+      "source_type": "paper",
+      "checked_on": "2026-06-01",
+      "reliability": "Research paper checked for multi-sample reasoning path evidence."
+    },
+    {
+      "evidence_id": "self_refine",
+      "source": "https://arxiv.org/abs/2303.17651",
+      "source_type": "paper",
+      "checked_on": "2026-06-01",
+      "reliability": "Research paper checked for iterative feedback/refinement loop evidence."
+    },
+    {
+      "evidence_id": "reflexion",
+      "source": "https://arxiv.org/abs/2303.11366",
+      "source_type": "paper",
+      "checked_on": "2026-06-01",
+      "reliability": "Research paper checked for feedback-informed retry and verbal memory evidence."
+    },
+    {
+      "evidence_id": "openai_reasoning_docs",
+      "source": "https://developers.openai.com/api/docs/guides/reasoning-best-practices",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official OpenAI reasoning guidance checked for model-family-specific prompting differences."
+    },
+    {
+      "evidence_id": "microsoft_prompt_engineering",
+      "source": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/prompt-engineering",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Microsoft prompt engineering guidance checked for model-specific prompting caveats."
+    },
+    {
+      "evidence_id": "config_and_memory_checks",
+      "source": "Config contract and memory bootstrap commands executed on 2026-06-01.",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Commands returned self_documenting and ready_to_bootstrap statuses."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now has REQ-WS-044 requiring prompting strategy to vary by model capability and type.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["requirements_specs", "ai_usage_gap_profile"],
+      "verification_steps": ["Read the requirements baseline and model-adaptive prompting spec."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The AI usage gap profile now includes model capability profiles and a model-adaptive prompting policy.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["ai_usage_gap_profile", "config_and_memory_checks"],
+      "verification_steps": ["Read the profile and run config contract checks."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The operating docs, workflow, prompt, and persistent instructions now expose the model-adaptive prompting rule.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["operating_docs"],
+      "verification_steps": ["Read the operating model, workflow, prompt, and persistent instruction files."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Research on self-consistency supports using multiple sampled reasoning paths as a technique that can improve some reasoning tasks.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["self_consistency", "web_search_record"],
+      "verification_steps": ["Checked the arXiv paper and captured plan impact in the web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Self-Refine and Reflexion support iterative feedback or retry loops as improvement techniques.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["self_refine", "reflexion", "web_search_record"],
+      "verification_steps": ["Checked the listed arXiv papers and captured plan impact in the web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "OpenAI and Microsoft documentation support treating reasoning models and general model families as needing different prompting approaches.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["openai_reasoning_docs", "microsoft_prompt_engineering", "web_search_record"],
+      "verification_steps": ["Checked the listed official documentation and recorded plan impact."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Two matching model attempts are agreement signals, not factual proof.",
+      "claim_type": "inference",
+      "support_level": "supported",
+      "evidence_ids": ["ai_usage_gap_profile", "operating_docs", "web_search_record"],
+      "verification_steps": ["Checked that the rule is recorded as an operating boundary and not as an empirical universal claim."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "The magnitude of benefit from two-pass prompting depends on model, task, prompt, sampling method, evaluator, and cost constraints.",
+    "Official model prompting guidance can change, so future model-specific behavior should be rechecked before being made more concrete."
+  ],
+  "limitation_notes": [
+    "This change adds governance and prompt strategy rules, not an automatic model router or API-level two-pass execution engine.",
+    "The policy intentionally avoids claiming that two calls always outperform one call."
+  ]
+}

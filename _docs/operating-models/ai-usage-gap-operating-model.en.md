@@ -63,6 +63,19 @@ Common bad instructions:
 These instructions should be rewritten into neutral prompts with goal, context, constraints, output format, success criteria, and verification path before execution.
 The rewrite should preserve the user's real goal while separating factual claims from preferences and making alternatives, counterevidence, and uncertainty checkable.
 
+## Model-Adaptive Strategy
+
+Strong and weak models should not be used the same way. A weak model that is not optimized for reasoning can produce unstable first answers, so when cost and latency allow and task variance is high, two independent attempts or a draft-critique-revise loop should be a default candidate strategy.
+
+This does not mean "two matching answers are true." Agreement across attempts is only an agreement signal; factual claims and important judgments still need sources, tests, tools, evaluators, or human judgment.
+
+Operating rules:
+
+- Weak, non-reasoning, or uncertain models: decompose the task, run two-pass comparison when useful, and separate convergence from conflict.
+- General models: make examples, output contracts, and constraints explicit; use two-pass or draft-critique-revise loops for high-variance tasks.
+- Strong reasoning models: do not start by adding duplicate calls; first improve goal, context, constraints, success criteria, and verification path.
+- All models: never mistake repeated model agreement for evidence.
+
 ## Platform Integration
 
 - Config: `agent-platform/configs/usage/ai-usage-gap-profile.json`

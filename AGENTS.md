@@ -152,6 +152,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/workflows/37-skill-lifecycle.md` when creating, updating, validating, installing, or improving a custom Codex skill.
 - Use `_ops/workflows/59-bridge-ai-usage-gap.md` when the user asks how to use AI better or when a repeated AI-use gap should be turned into better task framing, verification, iteration, or durable assets.
 - If a user instruction is vague, biased, leading, conclusion-seeking, missing an output contract, or assumes the LLM simply knows truth, rewrite it into a neutral, source-checkable task brief before execution using `agent-platform/configs/usage/ai-usage-gap-profile.json`.
+- Vary prompting strategy by model capability. For weak, non-reasoning, or uncertain models, use two independent attempts or a draft-critique-revise loop when cost and latency allow and task variance is high, then compare and merge results. For strong reasoning models, prioritize clear task framing and verification over unnecessary duplicate calls.
+- Matching answers from repeated calls are not proof. Treat them as agreement signals and verify important claims through sources, tests, tools, evaluators, or human judgment.
 - Use `_ops/workflows/52-parallel-work-planning.md` when the user asks for speed, multiple agents, or parallel work, or when a meaningful task naturally splits into independent lanes.
 - Check `_ops/coordination/board.ko.md` when parallel work may exist.
 - Use `_ops/workflows/40-evaluate-and-rework.md` before closing meaningful work.
@@ -207,6 +209,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/workflows/54-human-like-source-discovery.md` and `_ops/prompts/84-human-like-source-discovery.md` when search should behave like careful human research with query expansion, operators, source lanes, snowballing, and selective summary capture.
 - Use `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`, and `_ops/prompts/89-bridge-ai-usage-gap.md` when diagnosing weak AI usage, improving task framing, calibrating reliance, adding verification, or promoting repeated AI-use patterns into durable assets.
 - Treat LLMs as probabilistic prompt-conditioned systems. Clear questions, neutral framing, explicit context, output contracts, and verification paths are part of the work, not optional wording polish.
+- Use model-adaptive prompting from `agent-platform/configs/usage/ai-usage-gap-profile.json`: weak/non-reasoning/uncertain models may need two-pass compare/merge loops, while strong reasoning models usually need better task framing and verification before duplicate calls.
 - Use `agent-platform/configs/research/source-discovery-registry.json` when broad search origins are needed across global tech blogs, Korean big-tech blogs, India technology sources, paper discovery, and Korean local review channels.
 - Use `agent-platform/configs/research/marketing-evidence-profile.json` when marketer-style desk research, theory/book grounding, market sizing, consumer surveys, public statistics, commercial research reports, or quantitative evidence matter.
 - Use `_tools/korean-local-review/` when Korean user review, Naver/Kakao Map, Naver Blog/Search, or local-market source quality scoring matters.

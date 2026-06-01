@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-06-01",
   "name": "ai-usage-gap-profile",
-  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: question and instruction quality, task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
+  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: question and instruction quality, model-adaptive prompting, task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
   "reader_guide": {
     "summary": "Use this profile when a user asks how to use AI better, when an AI-assisted task is vague, when outputs repeatedly miss intent, or when the platform should coach a user from one-off prompting toward reliable workflows.",
     "how_to_read": [
@@ -17,7 +17,8 @@
       "A repeated user failure mode appears in AI-assisted work.",
       "New research changes the understanding of AI adoption, training, overreliance, or effective human-AI collaboration.",
       "A new workflow, prompt, tool, or skill is added to help users use AI better.",
-      "The platform's coaching, clarification, or evaluation behavior changes."
+      "The platform's coaching, clarification, or evaluation behavior changes.",
+      "The model capability profile or two-pass prompting policy changes."
     ]
   },
   "reference_links": [
@@ -195,6 +196,61 @@
         "probabilistic framing for prompt sensitivity"
       ],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "self_consistency_cot",
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "url": "https://arxiv.org/abs/2203.11171",
+      "source_type": "paper",
+      "used_for": [
+        "multi-sample reasoning paths",
+        "compare or vote across multiple attempts instead of trusting a single greedy answer"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "self_refine_iterative_feedback",
+      "title": "Self-Refine: Iterative Refinement with Self-Feedback",
+      "url": "https://arxiv.org/abs/2303.17651",
+      "source_type": "paper",
+      "used_for": [
+        "draft, feedback, and revise loops",
+        "using self-feedback as a structured second pass"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "reflexion_verbal_feedback",
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2303.11366",
+      "source_type": "paper",
+      "used_for": [
+        "retrying agent tasks with feedback from prior attempts",
+        "using reflection as memory for improvement"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "openai_reasoning_best_practices",
+      "title": "Reasoning best practices",
+      "url": "https://platform.openai.com/docs/guides/reasoning-best-practices",
+      "source_type": "official",
+      "used_for": [
+        "reasoning and non-reasoning model families behaving differently",
+        "model-specific prompting strategy"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "microsoft_model_specific_prompting",
+      "title": "Prompt engineering techniques - Microsoft Foundry",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/prompt-engineering",
+      "source_type": "official",
+      "used_for": [
+        "each model behaves differently",
+        "some prompt engineering techniques are not recommended for reasoning models"
+      ],
+      "last_checked": "2026-06-01"
     }
   ],
   "structure_rules": [
@@ -260,6 +316,17 @@
         "llm_assumptions",
         "prompt_quality_checklist"
       ]
+    },
+    {
+      "id": "model_capability_changes_prompting_strategy",
+      "rule": "Choose prompting and retry strategy by model capability. For weak, non-reasoning, or uncertain models, use two independent attempts or a draft-critique-revise loop when cost and latency allow; for strong reasoning models, prefer precise goals, context, constraints, and verification before duplicate calls.",
+      "reason": "Multiple sampled or refined attempts can improve high-variance outputs, but reasoning models and general GPT-style models respond differently to prompting techniques.",
+      "applies_to": [
+        "model_capability_profiles",
+        "model_adaptive_prompting_policy",
+        "bridge_interventions",
+        "agent_response_contract"
+      ]
     }
   ],
   "field_guide": [
@@ -297,6 +364,16 @@
       "field": "instruction_rewrite_contract",
       "meaning": "How to turn vague, biased, or overloaded instructions into usable task briefs.",
       "required": true
+    },
+    {
+      "field": "model_capability_profiles",
+      "meaning": "Prompting and retry strategy profiles for reasoning, general, weak, or uncertain models.",
+      "required": true
+    },
+    {
+      "field": "model_adaptive_prompting_policy",
+      "meaning": "Rules for when to use two-pass prompting, how to compare attempts, and when to avoid duplicate calls.",
+      "required": true
     }
   ],
   "trigger_situations": [
@@ -304,6 +381,7 @@
     "The user says questions or instructions must be improved before AI can answer well.",
     "A request is too vague to produce a useful result without adding context, criteria, or examples.",
     "A request is biased, leading, or asks the model to confirm a preferred conclusion.",
+    "The user distinguishes weak/non-reasoning models from strong/reasoning models or asks for model-specific usage strategy.",
     "The user repeatedly asks for the same AI-assisted workflow.",
     "An AI output would be risky without verification, sources, tests, or human review.",
     "A successful prompt or collaboration pattern should be preserved for future use."
@@ -358,6 +436,16 @@
         "no versioning of attempts"
       ],
       "first_intervention": "Use a short plan-check-revise loop and preserve the useful prompt pattern."
+    },
+    {
+      "id": "model_capability_mismatch",
+      "symptom": "The same prompt strategy is used for weak, non-reasoning, strong reasoning, and domain-specialized models without adjusting for model behavior.",
+      "likely_root_causes": [
+        "assuming all LLMs respond the same way",
+        "not accounting for variance in weaker models",
+        "using duplicate calls without compare, merge, or verification"
+      ],
+      "first_intervention": "Classify the model capability, then choose a two-pass compare/merge loop for weak or uncertain models when useful, or a concise structured prompt plus verification for stronger reasoning models."
     },
     {
       "id": "poor_task_fit_judgment",
@@ -417,6 +505,7 @@
     "Uses AI for exploration, drafting, critique, transformation, automation planning, and verification support instead of only final-answer generation.",
     "Decomposes large work into plan, evidence, implementation, validation, and evaluation steps.",
     "Iterates with the model: asks for alternatives, compares trade-offs, tests assumptions, and revises prompts.",
+    "Selects prompting strategy by model capability: weaker or non-reasoning models get decomposition and two-pass comparison when useful; stronger reasoning models get concise structured prompts and verification instead of unnecessary duplicate calls.",
     "Uses web search, primary sources, local files, tests, linters, screenshots, evaluators, and human judgment as verification channels.",
     "Understands that AI capability is uneven across tasks and changes over time.",
     "Turns repeated prompts and workflows into durable assets under the owning project or shared operations folder.",
@@ -487,6 +576,19 @@
       ]
     },
     {
+      "id": "model_adaptive_retry",
+      "use_when": [
+        "model_capability_mismatch",
+        "single_shot_oracle_use"
+      ],
+      "action": "For weak, non-reasoning, or uncertain models, run two independent attempts or a draft-critique-revise pass when task variance is high and cost/latency allow; compare contradictions, merge only supported parts, and verify claims. For strong reasoning models, prefer precise task framing and evidence checks before adding duplicate calls.",
+      "output_artifacts": [
+        "model capability classification",
+        "two-pass comparison note",
+        "merged answer with verification"
+      ]
+    },
+    {
       "id": "verification_gate",
       "use_when": [
         "missing_verification"
@@ -530,6 +632,9 @@
     "When the user seems blocked by low AI literacy, improve the task shape first: goal, context, constraints, examples, criteria, verification.",
     "When the user's instruction is biased or leading, rewrite it neutrally before execution and preserve the user's intent separately from factual claims.",
     "When the user implies the LLM should simply know the truth, briefly apply the probabilistic model framing and add grounding or verification.",
+    "When the user or task depends on model capability, classify the model as reasoning, general/non-reasoning, weak, or uncertain; choose a model-adaptive prompting strategy rather than using one universal prompt loop.",
+    "When using a weak, non-reasoning, or uncertain model on a high-variance task and cost/latency allow, run two independent attempts or a draft-critique-revise loop, compare conflicts, merge supported parts, and verify claims before treating the result as reliable.",
+    "Do not treat repeated model agreement as factual proof; use sources, tests, tools, evaluators, or human judgment for grounding.",
     "When a user asks for broad AI improvement advice, ground it in external research and internal workflow evidence.",
     "When an AI-use gap is observed during work, fix the immediate task and record the repeatable lesson if it will help future work.",
     "Do not over-ask for clarification; make reasonable assumptions for low-risk gaps and record them.",
@@ -562,8 +667,74 @@
     "Many LLMs generate by selecting likely next tokens from a probability distribution, so wording, order, examples, and constraints materially affect outputs.",
     "A fluent answer is not proof that the claim is true.",
     "Bias in the prompt can amplify biased or one-sided outputs.",
-    "Prompt quality does not replace verification; it improves the chance that the output is useful and checkable."
+    "Prompt quality does not replace verification; it improves the chance that the output is useful and checkable.",
+    "Different model families and capability levels can require different prompting strategies.",
+    "Two-pass or multi-sample prompting can improve high-variance tasks, but it is a reliability tactic, not evidence by itself."
   ],
+  "model_capability_profiles": [
+    {
+      "id": "reasoning_model",
+      "use_when": [
+        "The selected model is explicitly a reasoning model.",
+        "The task requires complex planning, code reasoning, math, scientific reasoning, or multi-step decision-making."
+      ],
+      "prompting_strategy": [
+        "Use concise goals, relevant context, constraints, success criteria, and verification requirements.",
+        "Avoid unnecessary duplicate calls when the model already has strong reasoning capability and the task can be verified directly.",
+        "Use additional attempts when output variance remains high or when an evaluator needs alternatives."
+      ],
+      "verification": "Verify factual, technical, numerical, or decision-critical claims with sources, tests, tools, or human review."
+    },
+    {
+      "id": "general_or_non_reasoning_model",
+      "use_when": [
+        "The selected model is not explicitly optimized for reasoning.",
+        "The task is creative, summarization-oriented, classification-oriented, transformation-oriented, or moderate reasoning."
+      ],
+      "prompting_strategy": [
+        "Use explicit context, examples, output contract, and step boundaries.",
+        "For high-variance outputs, run two independent attempts or an answer-critique-revision pass.",
+        "Compare differences before accepting or merging the result."
+      ],
+      "verification": "Treat repeated agreement as a signal to inspect, not as proof."
+    },
+    {
+      "id": "weak_or_uncertain_model",
+      "use_when": [
+        "The selected model is known to be weak for the task.",
+        "The model capability is unknown.",
+        "Early output shows shallow reasoning, missed constraints, hallucinated facts, or unstable formatting."
+      ],
+      "prompting_strategy": [
+        "Decompose the task into smaller subtasks.",
+        "Run two independent attempts or a draft-critique-revise loop when cost and latency allow.",
+        "Use an explicit rubric or evaluator to compare attempts.",
+        "Escalate to a stronger model, tool, source, or human review when attempts disagree on important claims."
+      ],
+      "verification": "Do not publish high-risk claims from this profile without external grounding."
+    }
+  ],
+  "model_adaptive_prompting_policy": {
+    "default_two_pass_for": [
+      "weak_or_uncertain_model",
+      "general_or_non_reasoning_model on high-variance reasoning, design, classification, summarization, planning, or critique tasks",
+      "situations where cost and latency are acceptable and the output can be compared against criteria"
+    ],
+    "two_pass_modes": [
+      "independent_attempts: run two separately framed attempts and compare convergence, contradictions, and missing requirements",
+      "draft_critique_revise: produce a draft, critique it against acceptance criteria, then revise",
+      "best_of_two_with_rubric: generate two candidates, score with an explicit rubric, and merge supported parts"
+    ],
+    "do_not_use_two_pass_when": [
+      "a deterministic tool, source lookup, test, calculation, or parser can answer directly",
+      "the task is high-stakes and lacks source/test verification",
+      "cost or latency is more important than marginal quality gain",
+      "the user explicitly asks for the fastest sufficient answer",
+      "duplicate calls would touch shared mutable state or create conflicting side effects"
+    ],
+    "merge_rule": "Compare attempts before merging. Keep convergent, source-supported, or test-supported parts; list conflicts when material; discard unsupported claims; verify the final answer through the appropriate grounding path.",
+    "claim_boundary": "Two attempts producing the same answer is an agreement signal, not factual proof."
+  },
   "bad_instruction_patterns": [
     {
       "id": "vague_command",

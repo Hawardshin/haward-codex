@@ -1,0 +1,56 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-01-model-adaptive-prompting",
+  "title": "Add model-adaptive prompting policy",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "started_at": "2026-06-01T23:00:00+0900",
+  "ended_at": "2026-06-01T23:31:57+0900",
+  "measurement_note": "Timing is estimated from the web-first intake, memory bootstrap, edits, generated map refresh, and validation milestones after the user request.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "started_at": "2026-06-01T23:00:00+0900",
+      "ended_at": "2026-06-01T23:05:00+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Checked self-consistency, Self-Refine, Reflexion, OpenAI reasoning, and Microsoft model-specific prompting sources."
+    },
+    {
+      "phase_id": "memory_and_structure_review",
+      "label": "Memory and structure review",
+      "status": "completed",
+      "started_at": "2026-06-01T23:05:00+0900",
+      "ended_at": "2026-06-01T23:10:00+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Reviewed AI usage gap profile, requirements baseline, operating docs, persistent instructions, workflow, prompt, memory bootstrap, router, and current history patterns."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Rule and artifact implementation",
+      "status": "completed",
+      "started_at": "2026-06-01T23:10:00+0900",
+      "ended_at": "2026-06-01T23:25:00+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "The cross-cutting governance update touched config, requirements, specs, operating docs, prompts, memory, maps, research notes, and history."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "started_at": "2026-06-01T23:25:00+0900",
+      "ended_at": "2026-06-01T23:31:57+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Initial JSON, config contract, memory bootstrap, docs audit, naming audit, structure audit, workspace map, and task board checks completed before final evaluator checks."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "implementation",
+    "interpretation": "The main time cost is maintaining consistency across durable governance surfaces rather than writing the rule itself.",
+    "improvement_candidates": [
+      "Create a reusable governance-rule update checklist that enumerates config, requirements, specs, docs, workflows, prompts, memory, and history targets.",
+      "Consider a deterministic two-pass comparison helper if the model-adaptive strategy is used often."
+    ]
+  }
+}

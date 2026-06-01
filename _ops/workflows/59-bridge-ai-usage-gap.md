@@ -22,6 +22,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - `no_output_contract`
    - `deterministic_truth_machine_assumption`
    - `single_shot_oracle_use`
+   - `model_capability_mismatch`
    - `poor_task_fit_judgment`
    - `missing_verification`
    - `context_not_saved`
@@ -33,22 +34,29 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - bias neutralization
    - task-fit check
    - iteration scaffold
+   - model-adaptive retry
    - verification gate
    - asset promotion
    - learning loop
-6. Apply the smallest useful intervention to the current task.
-7. If the instruction is biased, leading, or asks to prove a preferred conclusion, rewrite it neutrally before execution and separate user preference from factual claims.
-8. If the user treats the LLM as a deterministic truth machine, add a short probabilistic-model note and attach sources, tests, or uncertainty labels.
-9. If the instruction has no output contract, add the expected format, depth, exclusions, acceptance criteria, and review method.
-10. If the lesson is reusable, save it as a prompt, workflow, template, tool, skill, config, operating model, or history note.
-11. If ambiguity is high-risk or user-preference-sensitive, use spec/source reconciliation or `clarification_needed`.
-12. Ground factual claims before close-out.
-13. Evaluate whether the intervention actually reduced the gap against the initial request.
+6. Classify the model capability when it affects output quality: `reasoning_model`, `general_or_non_reasoning_model`, `weak_or_uncertain_model`, or `unknown`.
+7. Apply model-adaptive retry when useful:
+   - weak/non-reasoning/uncertain model + high-variance task + acceptable cost/latency: run two independent attempts or a draft-critique-revise loop.
+   - reasoning/strong model: improve task framing and verification first; add duplicate calls only if variance or evaluator needs justify it.
+   - never treat repeated agreement as proof without source, test, tool, evaluator, or human verification.
+8. Apply the smallest useful intervention to the current task.
+9. If the instruction is biased, leading, or asks to prove a preferred conclusion, rewrite it neutrally before execution and separate user preference from factual claims.
+10. If the user treats the LLM as a deterministic truth machine, add a short probabilistic-model note and attach sources, tests, or uncertainty labels.
+11. If the instruction has no output contract, add the expected format, depth, exclusions, acceptance criteria, and review method.
+12. If the lesson is reusable, save it as a prompt, workflow, template, tool, skill, config, operating model, or history note.
+13. If ambiguity is high-risk or user-preference-sensitive, use spec/source reconciliation or `clarification_needed`.
+14. Ground factual claims before close-out.
+15. Evaluate whether the intervention actually reduced the gap against the initial request.
 
 ## Output Contract
 
 - Gap classification or an explicit note that no AI-use gap was relevant.
 - Bridge intervention chosen and why.
+- Model capability classification and retry strategy when relevant.
 - Rewritten instruction when the original instruction was vague, biased, or missing an output contract.
 - Any durable asset created or updated.
 - Evidence and verification path.
