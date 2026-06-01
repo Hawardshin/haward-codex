@@ -12,6 +12,12 @@ from agent_platform.evaluation.knowledge_skeptic import KnowledgeValidationInput
 from agent_platform.evaluation.skill_validator import SkillValidationInput, validate_skill_definition
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 from agent_platform.governance.config_contract import check_config_contract
+from agent_platform.integrations.notifications import (
+    NotificationEvent,
+    check_notification_config,
+    dispatch_notification,
+    load_notification_config,
+)
 from agent_platform.memory.bootstrap import MemoryBootstrapManifest, check_memory_bootstrap
 from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidate
 from agent_platform.planning.coding_research import CodingResearchInput, complete_coding_research
@@ -59,6 +65,21 @@ def build_parser() -> argparse.ArgumentParser:
 
     check_config = subparsers.add_parser("check-config-contract", help="Check whether JSON settings files explain references and structure in-place.")
     check_config.add_argument("paths", type=Path, nargs="+")
+
+    check_notifications = subparsers.add_parser("check-notifications", help="Validate notification channel settings without sending messages.")
+    check_notifications.add_argument("path", type=Path)
+    check_notifications.add_argument("--require-secrets", action="store_true", help="Require enabled channel webhook environment variables to be present.")
+
+    notify = subparsers.add_parser("notify", help="Send or dry-run a configured notification event.")
+    notify.add_argument("path", type=Path)
+    notify.add_argument("--event", required=True)
+    notify.add_argument("--title", required=True)
+    notify.add_argument("--message", required=True)
+    notify.add_argument("--severity", default="info", choices=["debug", "info", "warning", "error", "critical"])
+    notify.add_argument("--metadata", action="append", default=[], help="Optional key=value metadata item. Can be repeated.")
+    notify_mode = notify.add_mutually_exclusive_group()
+    notify_mode.add_argument("--dry-run", dest="dry_run", action="store_true", default=None, help="Preview payloads without sending.")
+    notify_mode.add_argument("--send", dest="dry_run", action="store_false", help="Send to enabled channels with configured environment variables.")
 
     return parser
 
@@ -151,6 +172,38 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 0
 
+    if args.command == "check-notifications":
+        config = load_notification_config(args.path)
+        config_contract_report = check_config_contract(config, str(args.path))
+        notification_report = check_notification_config(config, require_secrets=args.require_secrets)
+        print(
+            json.dumps(
+                {
+                    "status": "rework_required"
+                    if config_contract_report["requires_rework"] or notification_report["requires_rework"]
+                    else "ready",
+                    "requires_rework": config_contract_report["requires_rework"] or notification_report["requires_rework"],
+                    "config_contract": config_contract_report,
+                    "notification_config": notification_report,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
+        return 0
+
+    if args.command == "notify":
+        config = load_notification_config(args.path)
+        event = NotificationEvent(
+            event_type=args.event,
+            title=args.title,
+            message=args.message,
+            severity=args.severity,
+            metadata=_metadata_from_cli(args.metadata),
+        )
+        print(json.dumps(dispatch_notification(config, event, dry_run=args.dry_run), indent=2, ensure_ascii=False))
+        return 0
+
     raise ValueError(f"Unknown command: {args.command}")
 
 
@@ -159,6 +212,19 @@ def _default_repo_root() -> Path:
     if cwd.name == "agent-platform":
         return cwd.parent
     return cwd
+
+
+def _metadata_from_cli(values: list[str]) -> dict[str, str]:
+    metadata: dict[str, str] = {}
+    for value in values:
+        if "=" not in value:
+            raise ValueError(f"Metadata must use key=value format: {value}")
+        key, item_value = value.split("=", 1)
+        key = key.strip()
+        if not key:
+            raise ValueError(f"Metadata key is empty: {value}")
+        metadata[key] = item_value.strip()
+    return metadata
 
 
 if __name__ == "__main__":

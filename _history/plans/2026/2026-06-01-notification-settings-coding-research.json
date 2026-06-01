@@ -1,0 +1,189 @@
+{
+  "research_goal": "Research the safest maintainable way to add platform notification settings and webhook dispatch for Slack, Discord, and Microsoft Teams.",
+  "coding_context": "agent-platform Python CLI, self-documenting JSON configs, and integration helper modules.",
+  "research_types": [
+    "api_docs",
+    "architecture",
+    "implementation_pattern",
+    "security"
+  ],
+  "search_channels": [
+    "web search",
+    "official documentation search",
+    "repository search",
+    "community discussion search"
+  ],
+  "sources_checked": [
+    "https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks/",
+    "https://docs.discord.com/developers/resources/webhook#execute-webhook",
+    "https://support.microsoft.com/en-US/Workflows/send-messages-in-teams-using-incoming-webhooks",
+    "https://learn.microsoft.com/en-us/microsoftteams/m365-custom-connectors",
+    "https://docs.python.org/3/library/urllib.request.html",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/src/agent_platform/governance/config_contract.py",
+    "agent-platform/tests/test_config_contract.py",
+    "https://www.reddit.com/r/MicrosoftTeams/search/?q=incoming%20webhook%20workflow"
+  ],
+  "source_types": [
+    "official",
+    "reference_implementation",
+    "internal",
+    "community"
+  ],
+  "reference_config_paths": [
+    "agent-platform/configs/research/source-registry.json",
+    "agent-platform/configs/research/coding-research-profile.json"
+  ],
+  "source_value_provenance": [
+    "Slack payload text field <- Slack official incoming webhook docs checked 2026-06-01.",
+    "Discord payload content field and allowed mention risk <- Discord Execute Webhook docs checked 2026-06-01.",
+    "Teams Workflows webhook preference and connector deprecation risk <- Microsoft Support and Microsoft Learn docs checked 2026-06-01.",
+    "HTTP POST implementation without extra dependency <- Python urllib.request official docs checked 2026-06-01.",
+    "CLI and config validation structure <- agent-platform/src/agent_platform/cli.py and governance/config_contract.py inspected 2026-06-01."
+  ],
+  "plan_evidence": [
+    "Use environment-variable secret injection <- provider webhook URLs behave as credentials and repository config contract requires self-documenting settings.",
+    "Use Python standard library urllib <- no installation is required and simple JSON POST is sufficient for webhook delivery.",
+    "Add integrations package <- existing agent-platform folders separate planning, evaluation, governance, memory, and oss by capability.",
+    "Default dry-run <- avoids accidental external messages during tests and evaluations."
+  ],
+  "technology_stack": [
+    "Python 3.11+",
+    "agent-platform CLI",
+    "JSON config",
+    "Slack incoming webhooks",
+    "Discord incoming webhooks",
+    "Microsoft Teams Workflows webhooks"
+  ],
+  "technology_official_docs": [
+    "https://docs.python.org/3/library/urllib.request.html",
+    "https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks/",
+    "https://docs.discord.com/developers/resources/webhook#execute-webhook",
+    "https://support.microsoft.com/en-US/Workflows/send-messages-in-teams-using-incoming-webhooks",
+    "https://learn.microsoft.com/en-us/microsoftteams/m365-custom-connectors"
+  ],
+  "stack_version_constraints": [
+    "Python 3.11+ local CLI execution; no external package required.",
+    "Slack, Discord, and Teams webhook APIs are external services and should be rechecked before changing payload behavior.",
+    "Teams Workflows payload behavior may vary by tenant and workflow template, so payload_style remains configurable."
+  ],
+  "issue_discussion_sources": [
+    "https://www.reddit.com/r/MicrosoftTeams/search/?q=incoming%20webhook%20workflow",
+    "https://stackoverflow.com/questions/tagged/webhooks",
+    "https://stackoverflow.com/questions/tagged/python-urllib"
+  ],
+  "issue_discussion_notes": [
+    "Community results indicate Teams migration confusion, but official Microsoft docs control the implementation decision.",
+    "Webhook and urllib Q&A are treated as implementation risk signals only; provider official docs are authoritative."
+  ],
+  "community_signal_notes": [
+    "Reddit and Stack Overflow activity are discovery signals for migration pain and common pitfalls, not standalone factual proof."
+  ],
+  "language_options": [
+    "Python 3.11+ for local CLI, tests, config validation, and existing platform helper consistency.",
+    "TypeScript/Node for webhook tooling and richer typed integration packages."
+  ],
+  "selected_language": "Python 3.11+ for local CLI, tests, config validation, and existing platform helper consistency.",
+  "language_decision_notes": [
+    "Selected Python because agent-platform is already Python-first, tested with unittest, and can send JSON POST requests with the standard library.",
+    "Rejected TypeScript because this change is not frontend-adjacent and would add another runtime boundary."
+  ],
+  "code_reference_sources": [
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/src/agent_platform/governance/config_contract.py",
+    "agent-platform/tests/test_config_contract.py"
+  ],
+  "code_reference_notes": [
+    "Follow the existing pattern of dataclasses or pure functions, JSON inputs, CLI subcommands, and unittest coverage.",
+    "Keep provider-specific behavior deterministic and isolated in one module."
+  ],
+  "architecture_reference_sources": [
+    "https://c4model.com/",
+    "https://arc42.org/overview",
+    "agent-platform/README.md",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/src/agent_platform/governance/config_contract.py"
+  ],
+  "architecture_theory_sources": [
+    "https://c4model.com/",
+    "https://arc42.org/overview"
+  ],
+  "architecture_practitioner_sources": [
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/tests/test_config_contract.py",
+    "https://stackoverflow.com/questions/tagged/webhooks"
+  ],
+  "architecture_options": [
+    "Capability package inside agent-platform with pure validation and dispatch functions plus CLI entry points.",
+    "Prompt-only workflow that tells agents how to send notifications manually.",
+    "Background notification service with queue, retry, and delivery store."
+  ],
+  "architecture_decision_notes": [
+    "Selected capability package plus CLI because it is testable, small, and consistent with the platform's current modular monolith.",
+    "Rejected prompt-only workflow because it cannot guard secrets or payload shape deterministically.",
+    "Rejected background service because no queue or retry requirement exists yet."
+  ],
+  "architecture_tradeoff_notes": [
+    "Theory sources favor explicit boundaries and documented interfaces; practitioner repository evidence favors small modules and unittest-backed CLI checks. Both converge on a small capability package for this scope."
+  ],
+  "folder_structure_options": [
+    "Add src/agent_platform/integrations for external service integrations and configs/integrations for shared settings.",
+    "Place notification code under adapters because webhook providers are external endpoints.",
+    "Place notification code under ops because it supports operational reporting."
+  ],
+  "folder_structure_decision_notes": [
+    "Selected integrations because notifications are external service integrations, not runtime adapters or planning/evaluation logic.",
+    "Keep config under configs/integrations so providers and secret policy are discoverable next to other platform settings."
+  ],
+  "folder_semantics_notes": [
+    "src/agent_platform/integrations contains reusable external-provider integration helpers.",
+    "configs/integrations contains self-documenting settings for external platforms and secret indirection.",
+    "tests/test_notifications.py validates provider payload and policy behavior."
+  ],
+  "maintainability_notes": [
+    "A single config and module reduce duplicated prompt-level webhook logic.",
+    "Environment-variable secret indirection avoids repeated config edits when tokens rotate.",
+    "Dry-run and sender injection keep tests deterministic and safe."
+  ],
+  "findings": [
+    "Provider payloads differ enough to justify deterministic provider builders.",
+    "Teams connector deprecation makes Workflows webhook documentation necessary.",
+    "No external package is necessary for simple JSON webhook POST."
+  ],
+  "options": [
+    "Python standard-library notifier with dry-run and env var secrets.",
+    "Install a provider SDK for Slack and custom code for Discord/Teams.",
+    "Document-only workflow with no code."
+  ],
+  "recommendation": "Use a Python standard-library notifier, self-documenting config, environment-variable secrets, provider payload builders, and dry-run default.",
+  "post_research_answers": {
+    "what_was_verified": "Verified provider official webhook docs, Python standard library HTTP POST support, and existing repository CLI/config patterns.",
+    "best_option": "Python standard-library notifier with self-documenting config and environment-variable secret injection.",
+    "why_this_option": "It satisfies the user request without new dependencies, keeps secrets out of git, and fits the existing platform structure.",
+    "alternatives_rejected": "Provider SDK installation was rejected as unnecessary for simple webhook POST; prompt-only instructions were rejected because they cannot be tested; a background service was rejected as out of scope.",
+    "implementation_impact": "Add configs/integrations settings, src/agent_platform/integrations module, CLI commands, docs, tests, and history records.",
+    "risks_and_unknowns": "Teams Workflows payload compatibility can vary; real sending needs user-provided webhook URL and provider-side setup.",
+    "validation_plan": "Run notification unit tests, full unittest suite, config contract, check-notifications, notify dry-run, memory bootstrap, grounding, and work evaluation.",
+    "reusable_knowledge": "Capture provider docs and secret policy in notification config and docs for future platform events.",
+    "next_action": "Implement and verify the notification module, config, CLI, and docs."
+  },
+  "validation_steps": [
+    "Run tests/test_notifications.py.",
+    "Run full unittest discovery.",
+    "Run check-config-contract and check-notifications.",
+    "Run notify dry-run."
+  ],
+  "risks_or_unknowns": [
+    "Teams Workflows payload expectations may differ by setup.",
+    "No real notification send can be verified until the user supplies webhook environment variables.",
+    "Provider rate limits and retries are not implemented yet."
+  ],
+  "capture_targets": [
+    "agent-platform/docs/notification-channels.ko.md",
+    "_history/web-searches/2026/2026-06-01-notification-settings.ko.md"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-01-notification-settings.ko.md"
+  ],
+  "knowledge_validation_status": "ready_to_reference"
+}

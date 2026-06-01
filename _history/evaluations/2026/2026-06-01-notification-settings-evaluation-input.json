@@ -1,0 +1,113 @@
+{
+  "initial_instruction": "플랫폼 전체에서 설정 파일로 Discord, Slack, Teams 알림을 켜고 끄고, 토큰은 사용자가 넣을 수 있게 하는 기능을 추가한다.",
+  "result_summary": "Added self-documenting notification channel settings, environment-variable secret policy, Python notification integration module, check-notifications and notify CLI commands, tests, docs, requirements, specs, history, and memory bootstrap anchor.",
+  "work_mode": "governance",
+  "changed_files": [
+    "agent-platform/configs/integrations/notification-channels.json",
+    "agent-platform/configs/integrations/notification-secrets.example.env",
+    "agent-platform/src/agent_platform/integrations/__init__.py",
+    "agent-platform/src/agent_platform/integrations/notifications.py",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/tests/test_notifications.py",
+    "agent-platform/docs/notification-channels.ko.md",
+    "agent-platform/docs/notification-channels.en.md",
+    "agent-platform/README.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "agent-platform/specs/2026-06-01-notification-settings/",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-01-notification-settings.ko.md",
+    "_requirements/changes/2026-06-01-notification-settings.en.md",
+    "_requirements/reviews/2026-06-01-notification-settings.ko.md",
+    "_requirements/reviews/2026-06-01-notification-settings.en.md",
+    "_history/web-searches/2026/2026-06-01-notification-settings.ko.md",
+    "_history/web-searches/2026/2026-06-01-notification-settings.en.md",
+    "_history/plans/2026/2026-06-01-notification-settings.ko.md",
+    "_history/plans/2026/2026-06-01-notification-settings.en.md",
+    "_history/plans/2026/2026-06-01-notification-settings-coding-research.json",
+    "_history/evaluations/2026/2026-06-01-notification-settings-grounding.json",
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/user-requests/2026/2026-06-01.en.md",
+    "_history/request-traces/2026/2026-06-01.ko.md",
+    "_history/request-traces/2026/2026-06-01.en.md",
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.en.md",
+    "_history/2026/2026-06-01.md",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md"
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m unittest tests/test_notifications.py: passed, 8 tests",
+    "PYTHONPATH=src python3 -m unittest discover -s tests: passed, 99 tests",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/notification-channels.json: self_documenting, no gaps",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-notifications configs/integrations/notification-channels.json --require-secrets: ready, no gaps",
+    "PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notification-channels.json --event work_completed --title 'Dry run' --message 'Notification dry run' --severity info --dry-run: nothing_to_send because default channels are disabled",
+    "PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research ../_history/plans/2026/2026-06-01-notification-settings-coding-research.json: ready_to_implement",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "Core check-config-contract command including notification config: self_documenting, no gaps",
+    "python3 _tools/workspace-index/src/workspace_index.py: maps regenerated",
+    "python3 _tools/task-board/src/task_board.py: coordination board regenerated",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-notification-settings-grounding.json: ready_to_publish"
+  ],
+  "references_checked": [
+    "Slack Developer Docs - Sending messages using incoming webhooks",
+    "Discord Developer Docs - Execute Webhook",
+    "Microsoft Support - Send messages in Teams using incoming webhooks",
+    "Microsoft Learn - Manage Microsoft 365 connectors and custom connectors",
+    "Python urllib.request official docs",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/src/agent_platform/governance/config_contract.py",
+    "agent-platform/tests/test_config_contract.py",
+    "agent-platform/configs/workflows/work-mode-registry.json"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-notification-settings-grounding.json",
+    "check-grounding command: ready_to_publish"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-notification-settings.ko.md",
+    "_history/plans/2026/2026-06-01-notification-settings-coding-research.json",
+    "agent-platform/configs/integrations/notification-channels.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-01-notification-settings.ko.md",
+    "_history/plans/2026/2026-06-01-notification-settings-coding-research.json",
+    "agent-platform/specs/2026-06-01-notification-settings/plan.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-notification-settings.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-01-notification-settings.ko.md",
+    "_requirements/reviews/2026-06-01-notification-settings.ko.md"
+  ],
+  "spec_targets": [
+    "agent-platform/specs/2026-06-01-notification-settings/spec.ko.md",
+    "agent-platform/specs/2026-06-01-notification-settings/plan.ko.md",
+    "agent-platform/specs/2026-06-01-notification-settings/tasks.ko.md",
+    "agent-platform/specs/2026-06-01-notification-settings/validation.ko.md",
+    "agent-platform/specs/2026-06-01-notification-settings/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Add retry/backoff and delivery history only if real notification usage creates that need."
+  ]
+}
+

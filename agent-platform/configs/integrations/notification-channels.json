@@ -1,0 +1,206 @@
+{
+  "schema_version": "2026-06-01",
+  "name": "notification-channels",
+  "purpose": "Controls platform-wide notification routing for Slack, Discord, and Microsoft Teams without storing webhook URLs or tokens in git.",
+  "reader_guide": {
+    "summary": "Use this file to turn notification channels on or off and to choose which events each provider receives. Put real webhook URLs only in environment variables.",
+    "how_to_read": [
+      "Read notifications_enabled first to see whether dispatch is globally allowed.",
+      "Read default_event_policy to understand default event and severity filtering.",
+      "Read channels to see provider-specific toggles and the environment variable name that must contain the webhook URL.",
+      "Read secret_policy before adding any field that could contain a token, webhook URL, or secret."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-06-01",
+    "update_triggers": [
+      "A new notification provider is added.",
+      "Slack, Discord, or Teams webhook payload requirements change.",
+      "A new platform event should notify the user.",
+      "A token handling or secret storage policy changes."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "slack_incoming_webhooks",
+      "title": "Slack Developer Docs - Sending messages using incoming webhooks",
+      "url": "https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks/",
+      "source_type": "official",
+      "used_for": [
+        "Slack webhook URL stays secret",
+        "Slack payload can include text JSON field"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "discord_execute_webhook",
+      "title": "Discord Developer Docs - Execute Webhook",
+      "url": "https://docs.discord.com/developers/resources/webhook#execute-webhook",
+      "source_type": "official",
+      "used_for": [
+        "Discord incoming webhook payload shape",
+        "Discord content field and allowed mention safety"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "teams_workflows_webhooks",
+      "title": "Microsoft Support - Send messages in Teams using incoming webhooks",
+      "url": "https://support.microsoft.com/en-US/Workflows/send-messages-in-teams-using-incoming-webhooks",
+      "source_type": "official",
+      "used_for": [
+        "Teams Workflows webhook setup",
+        "Teams Adaptive Card and Message Card support"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "teams_connector_deprecation",
+      "title": "Microsoft Learn - Manage Microsoft 365 connectors and custom connectors",
+      "url": "https://learn.microsoft.com/en-us/microsoftteams/m365-custom-connectors",
+      "source_type": "official",
+      "used_for": [
+        "Prefer Workflows webhook URLs for new Teams notification setup",
+        "Track connector deprecation risk"
+      ],
+      "last_checked": "2026-06-01"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "no_inline_secrets",
+      "rule": "Do not store webhook_url, token, secret, bearer_token, bot_token, or incoming_webhook fields in any channel entry.",
+      "reason": "Webhook URLs are credentials and must not be committed to git.",
+      "applies_to": [
+        "channels"
+      ]
+    },
+    {
+      "id": "environment_variable_only",
+      "rule": "Each channel must point to a webhook_url_env value and the user supplies the actual value in their shell or local secret manager.",
+      "reason": "The user can add or rotate tokens without editing tracked repository files.",
+      "applies_to": [
+        "channels.webhook_url_env",
+        "secret_policy"
+      ]
+    },
+    {
+      "id": "provider_payloads_are_explicit",
+      "rule": "Provider-specific payload differences belong in agent_platform.integrations.notifications, not in ad hoc prompt text.",
+      "reason": "Notification behavior should be testable and reusable across projects.",
+      "applies_to": [
+        "channels.provider",
+        "channels.payload_style"
+      ]
+    },
+    {
+      "id": "dry_run_by_default",
+      "rule": "Default notification execution should be dry-run unless the caller passes --send.",
+      "reason": "Avoid accidental external messages during tests, evaluations, or prompt exploration.",
+      "applies_to": [
+        "default_event_policy.dry_run_default"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "notifications_enabled",
+      "meaning": "Global switch that allows or blocks notification dispatch even when individual channels are enabled.",
+      "required": true
+    },
+    {
+      "field": "default_event_policy",
+      "meaning": "Default event names, minimum severity, and dry-run behavior used when a channel does not override them.",
+      "required": true
+    },
+    {
+      "field": "channels",
+      "meaning": "Provider-specific notification routes with id, provider, enabled flag, event filter, severity filter, and webhook environment variable name.",
+      "required": true
+    },
+    {
+      "field": "channels.webhook_url_env",
+      "meaning": "Name of the environment variable that contains the real webhook URL. The value itself must not appear in this config.",
+      "required": true
+    },
+    {
+      "field": "secret_policy",
+      "meaning": "Rules that prevent tokens and webhook URLs from being stored in the repository.",
+      "required": true
+    }
+  ],
+  "notifications_enabled": true,
+  "default_event_policy": {
+    "enabled_events": [
+      "approval_needed",
+      "long_running_update",
+      "work_completed",
+      "work_failed"
+    ],
+    "minimum_severity": "info",
+    "dry_run_default": true
+  },
+  "channels": [
+    {
+      "id": "discord-default",
+      "provider": "discord",
+      "enabled": false,
+      "webhook_url_env": "AGENT_PLATFORM_DISCORD_WEBHOOK_URL",
+      "events": [
+        "approval_needed",
+        "work_completed",
+        "work_failed"
+      ],
+      "minimum_severity": "info",
+      "format": {
+        "username": "Agent Platform",
+        "include_event_type": true
+      }
+    },
+    {
+      "id": "slack-default",
+      "provider": "slack",
+      "enabled": false,
+      "webhook_url_env": "AGENT_PLATFORM_SLACK_WEBHOOK_URL",
+      "events": [
+        "approval_needed",
+        "long_running_update",
+        "work_completed",
+        "work_failed"
+      ],
+      "minimum_severity": "info",
+      "format": {
+        "include_event_type": true
+      }
+    },
+    {
+      "id": "teams-default",
+      "provider": "teams",
+      "enabled": false,
+      "webhook_url_env": "AGENT_PLATFORM_TEAMS_WEBHOOK_URL",
+      "events": [
+        "approval_needed",
+        "work_completed",
+        "work_failed"
+      ],
+      "minimum_severity": "warning",
+      "payload_style": "message_card",
+      "format": {
+        "include_event_type": true
+      },
+      "setup_note": "For new Teams setup, prefer a Workflows webhook URL. Existing Microsoft 365 connectors are a migration risk."
+    }
+  ],
+  "secret_policy": {
+    "store_secrets_in_config": false,
+    "allowed_secret_sources": [
+      "environment_variables"
+    ],
+    "example_environment_variables": [
+      "AGENT_PLATFORM_DISCORD_WEBHOOK_URL",
+      "AGENT_PLATFORM_SLACK_WEBHOOK_URL",
+      "AGENT_PLATFORM_TEAMS_WEBHOOK_URL"
+    ],
+    "rotation_note": "Rotate a provider webhook in the provider UI or secret manager, then update the local environment variable. Do not commit the actual URL."
+  }
+}
+

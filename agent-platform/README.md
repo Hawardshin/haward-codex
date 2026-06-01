@@ -35,6 +35,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep prompt-level web search records under `_history/web-searches/`.
 - Keep large-company and high-quality research site seeds in `configs/research/enterprise-source-registry.json`.
 - Keep selectable work modes and evaluator target strictness in `configs/workflows/work-mode-registry.json`.
+- Keep platform notification routing in `configs/integrations/notification-channels.json`; store only environment variable names there, never real webhook URLs or tokens.
 - Keep user request summaries under `_history/user-requests/`.
 - Keep shared requirements baselines, changes, and reviews under `_requirements/`; use project-local `docs/requirements/` for project-specific requirements.
 - Keep shared spec-driven artifacts under `_specs/`; use project-local `specs/` for project-specific specs.
@@ -81,7 +82,9 @@ PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning
 PYTHONPATH=src python3 -m agent_platform.cli plan-parallel-work configs/planning/parallel-work-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/planning/coding-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json
-PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json
+PYTHONPATH=src python3 -m agent_platform.cli check-notifications configs/integrations/notification-channels.json
+PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notification-channels.json --event work_completed --title "Dry run" --message "Notification dry run" --severity info --dry-run
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/integrations/notification-channels.json
 ```
 
 ## Current Skeleton
@@ -90,6 +93,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `src/agent_platform/adapters/`: future external framework adapters
 - `src/agent_platform/evaluation/`: evaluation agents and close-out checks
 - `src/agent_platform/governance/`: checks for self-documenting settings and platform governance contracts
+- `src/agent_platform/integrations/`: external service integrations such as Slack, Discord, and Teams notifications
 - `src/agent_platform/memory/`: memory bootstrap checks for durable context loading
 - `src/agent_platform/oss/`: open-source dependency evaluation helpers
 - `src/agent_platform/planning/`: research-backed insight and planning checks
@@ -101,6 +105,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `configs/research/enterprise-source-registry.json`: curated large-company, research-lab, architecture-center, and high-signal source seed list
 - `configs/research/source-discovery-registry.json`: broad search-origin registry for global, Korean, Indian, paper, and Korean local review sources
 - `configs/workflows/work-mode-registry.json`: selectable work modes and evaluator target policy
+- `configs/integrations/notification-channels.json`: notification on/off routing, event filters, provider payload options, and environment-variable secret indirection
 - `configs/open-source/`: dependency candidate scoring inputs
 - `research-insight-planner-agent` is the core Perplexity-style research agent for search, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review
 - `requirements-manager-agent` keeps user requests, reviewed requirements, implementation, and evaluation connected

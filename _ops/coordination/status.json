@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-01",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, and design-to-PPT production loop added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, and platform notification settings added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -429,6 +429,25 @@
         "presentation-agent/specs/2026-06-01-design-to-ppt-production/spec.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-06-01-design-to-ppt-production.ko.md"
+    },
+    {
+      "id": "2026-06-01-notification-settings",
+      "title": "Add platform notification settings",
+      "project": "agent-platform",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-01",
+      "updated_at": "2026-06-01",
+      "next_action": "No action. Enable channels by setting enabled=true and providing webhook URL environment variables when real notifications are needed.",
+      "blockers": [],
+      "references": [
+        "agent-platform/configs/integrations/notification-channels.json",
+        "agent-platform/src/agent_platform/integrations/notifications.py",
+        "agent-platform/docs/notification-channels.ko.md",
+        "agent-platform/specs/2026-06-01-notification-settings/spec.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-06-01-notification-settings.ko.md"
     }
   ]
 }

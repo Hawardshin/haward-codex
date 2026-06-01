@@ -1,0 +1,130 @@
+{
+  "task": "Ground factual claims for the platform notification settings work.",
+  "output_summary": "Platform notification settings, CLI, docs, and tests were added for Slack, Discord, and Microsoft Teams.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "config",
+      "source": "agent-platform/configs/integrations/notification-channels.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked settings file that defines providers, channel toggles, event filters, secret policy, and references."
+    },
+    {
+      "evidence_id": "module",
+      "source": "agent-platform/src/agent_platform/integrations/notifications.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked implementation file for notification validation, payload generation, dry-run, and POST dispatch."
+    },
+    {
+      "evidence_id": "cli",
+      "source": "agent-platform/src/agent_platform/cli.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked CLI entry point containing check-notifications and notify commands."
+    },
+    {
+      "evidence_id": "tests",
+      "source": "agent-platform/specs/2026-06-01-notification-settings/validation.ko.md",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Validation record with unit, full-suite, config, notification, memory, and tool checks."
+    },
+    {
+      "evidence_id": "slack_docs",
+      "source": "https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Slack developer documentation for incoming webhooks."
+    },
+    {
+      "evidence_id": "discord_docs",
+      "source": "https://docs.discord.com/developers/resources/webhook#execute-webhook",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Discord developer documentation for Execute Webhook."
+    },
+    {
+      "evidence_id": "teams_docs",
+      "source": "https://support.microsoft.com/en-US/Workflows/send-messages-in-teams-using-incoming-webhooks",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Microsoft support documentation for Teams Workflows incoming webhooks."
+    },
+    {
+      "evidence_id": "teams_connector_docs",
+      "source": "https://learn.microsoft.com/en-us/microsoftteams/m365-custom-connectors",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Microsoft Learn documentation for Microsoft 365 connector migration/deprecation context."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now has a platform notification settings file for Slack, Discord, and Teams with channel toggles and environment-variable secret indirection.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "config"
+      ],
+      "verification_steps": [
+        "Opened the tracked config and ran check-config-contract plus check-notifications."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The notification module supports config validation, provider payload generation, dry-run preview, and actual webhook POST dispatch.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "module",
+        "tests"
+      ],
+      "verification_steps": [
+        "Ran notification unit tests and full unittest discovery."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The CLI includes check-notifications and notify commands.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "cli",
+        "tests"
+      ],
+      "verification_steps": [
+        "Ran check-notifications and notify dry-run commands."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Slack, Discord, and Teams webhook behavior was designed from official provider documentation checked on 2026-06-01.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "slack_docs",
+        "discord_docs",
+        "teams_docs",
+        "teams_connector_docs"
+      ],
+      "verification_steps": [
+        "Opened official provider documentation and recorded the links in the web search record and notification config."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Teams Workflows payload compatibility can vary by tenant and workflow template; real sending still needs user-provided webhook URLs."
+  ],
+  "limitation_notes": [
+    "No real external notification was sent because the user has not supplied webhook environment variables.",
+    "Provider rate-limit, retry queue, and delivery history storage are outside this scope."
+  ]
+}
+
