@@ -7,4 +7,4 @@
 - [x] `_ops`, `_docs`, memory bootstrap 연결
 - [x] 검증 실행
 - [x] 평가 실행
-- [ ] 커밋 및 push
+- [x] 커밋 및 push

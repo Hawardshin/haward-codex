@@ -9,4 +9,4 @@
 | 계획 | `_specs/workspace-platform/2026-06-01-platform-description-narrative/plan.ko.md` |
 | 구현 | `README.md`, `_docs/operating-models/platform-identity-operating-model.ko.md`, `agent-platform/README.md`, `agent-platform/configs/memory/bootstrap-manifest.json` |
 | 평가 | `_history/evaluations/2026/2026-06-01-platform-description-narrative.ko.md` |
-| 커밋 | 예정 |
+| 커밋 | `892eb3a` pushed |

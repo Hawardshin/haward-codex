@@ -7,4 +7,4 @@
 - [x] Connect `_ops`, `_docs`, and memory bootstrap
 - [x] Run verification
 - [x] Run evaluation
-- [ ] Commit and push
+- [x] Commit and push
