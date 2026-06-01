@@ -9,4 +9,4 @@
 | 계획 | `_specs/workspace-platform/2026-06-01-platform-concept-philosophy-review/plan.ko.md` |
 | 구현 | `_philosophy/agent-operating-philosophy.ko.md`, `_philosophy/platform-concept-review.ko.md`, `agent-platform/configs/memory/bootstrap-manifest.json` |
 | 평가 | `_history/evaluations/2026/2026-06-01-platform-concept-philosophy-review.ko.md` |
-| 커밋 | 예정 |
+| 커밋 | `d248de7` pushed |

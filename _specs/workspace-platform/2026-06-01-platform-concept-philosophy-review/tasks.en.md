@@ -7,4 +7,4 @@
 - [x] Draft requirements/spec/history
 - [x] Run verification
 - [x] Run evaluation
-- [ ] Commit and push
+- [x] Commit and push
