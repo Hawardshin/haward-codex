@@ -213,17 +213,17 @@ def _render_slide(slide: JsonMap, index: int, total: int) -> str:
     visual = _render_visual(slide)
     references = _render_references(slide.get("evidence_sources", []))
     notes = _render_hidden_notes(slide.get("speaker_notes", []))
+    content_lines = ['        <div class="pa-slide__content">']
+    for block in (kicker, title, subtitle, body, references):
+        if block:
+            content_lines.append(f"          {block}")
+    content_lines.append("        </div>")
+
     return "\n".join(
         [
             f'    <section class="{classes}" data-slide="{index}" data-script-beat="{html.escape(_text(slide.get("script_beat", "")))}" aria-label="Slide {index} of {total}">',
             '      <div class="pa-slide__frame">',
-            '        <div class="pa-slide__content">',
-            f"          {kicker}",
-            f"          {title}",
-            f"          {subtitle}",
-            f"          {body}",
-            f"          {references}",
-            "        </div>",
+            *content_lines,
             f"        {visual}",
             "      </div>",
             f"      {notes}",
@@ -676,4 +676,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

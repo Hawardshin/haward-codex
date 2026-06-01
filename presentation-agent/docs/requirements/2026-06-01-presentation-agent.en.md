@@ -56,6 +56,13 @@ The presentation agent researches strong presentation design, PPT/HTML reference
 - PPTX output is generated from `deck-spec` and preserves `script_beat`, `speaker_notes`, and `evidence_sources`.
 - Prefer Presentations skill artifact-tool export when available.
 
+### REQ-PA-010 Platform And Project Presentation Pack
+
+- The presentation agent shall be able to create an overall presentation deck for the current workspace platform plus separate decks for each registered root project.
+- Each deck shall include a `deck-spec` JSON file, an HTML output, speaker notes, and source/evidence notes.
+- The overall deck shall cover the platform philosophy, operating loop, project boundaries, research, requirements, specs, evaluation, history, and capability-promotion structure without omitting major parts.
+- Each project deck shall separately explain the project purpose, scope, key files, current artifacts, verification method, and next usage flow.
+
 ## Non-Scope
 
 - This baseline does not bulk-download presentation files.

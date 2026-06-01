@@ -1,0 +1,385 @@
+{
+  "schema_version": "2026-06-01",
+  "title": "AI Agent Workspace: 개인 에이전트 작업 OS",
+  "language": "ko",
+  "theme": {
+    "name": "platform-command-room",
+    "palette": {
+      "background": "#f5f1e8",
+      "surface": "#fffdf8",
+      "ink": "#202124",
+      "muted": "#625f56",
+      "accent": "#0f766e",
+      "warm": "#b45309",
+      "cool": "#1d4ed8",
+      "line": "#d8d2c4"
+    },
+    "typography": {
+      "display": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+      "body": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+    }
+  },
+  "script_collaboration": {
+    "script_owner": "presentation-script-agent",
+    "workflow": [
+      "platform_context_review",
+      "claim_spine",
+      "project_split",
+      "deck_spec",
+      "html_render",
+      "speaker_notes_review"
+    ],
+    "handoff_contract": {
+      "script_agent_provides": ["claim", "script_beat", "speaker_notes", "source_paths"],
+      "deck_renderer_provides": ["16:9 HTML slides", "presenter notes panel", "keyboard navigation", "print-friendly review surface"]
+    }
+  },
+  "reference_sources": [
+    "theory-duarte-resources",
+    "theory-tedx-speaker-guide",
+    "framework-revealjs-official",
+    "framework-slidev-official",
+    "framework-marp-official",
+    "templates-pitch",
+    "assets-lucide",
+    "research-slideaudit"
+  ],
+  "slides": [
+    {
+      "id": "opening",
+      "layout": "hero",
+      "kicker": "AI Agent Workspace",
+      "title": "대화가 아니라, 축적되는 작업 OS다",
+      "subtitle": "이 플랫폼은 사용자의 의도를 요구사항, 조사, 스펙, 실행, 평가, 히스토리로 바꿔 다음 작업의 자산으로 남긴다.",
+      "script_beat": "hook",
+      "speaker_notes": [
+        "이 발표의 핵심은 하나입니다. 이 저장소는 AI에게 일을 시키는 폴더가 아니라, AI와 오래 일하기 위한 운영체계입니다.",
+        "대화에서 사라지기 쉬운 판단을 문서, 도구, 스펙, 평가, 커밋으로 고정하는 구조를 설명합니다.",
+        "근거 문서: README.md, _docs/operating-models/platform-identity-operating-model.ko.md"
+      ],
+      "evidence_sources": ["theory-duarte-resources", "framework-slidev-official"]
+    },
+    {
+      "id": "problem",
+      "layout": "split",
+      "kicker": "Problem",
+      "title": "AI와 오래 일할 때 진짜 문제는 기억의 손실이다",
+      "body": [
+        "좋은 답변도 출처와 맥락이 없으면 다음 작업에서 다시 의심해야 한다.",
+        "프로젝트가 늘어나면 폴더, 스펙, 히스토리, 코드가 서로 어긋난다.",
+        "모델의 추정과 실제 근거가 섞이면 계획 품질이 빠르게 떨어진다.",
+        "대화 컨텍스트가 길어질수록 이전 결정은 점점 찾기 어려워진다."
+      ],
+      "visual": {
+        "type": "statement",
+        "label": "lost context becomes platform debt"
+      },
+      "script_beat": "problem",
+      "speaker_notes": [
+        "이 플랫폼은 AI 성능 자체보다, AI와 일할 때 생기는 운영 문제를 먼저 해결합니다.",
+        "문제는 답변 하나가 아니라 작업의 연속성입니다. 어떤 근거로 결정했고, 어떤 요청이 어떤 결과가 됐는지가 남아야 합니다.",
+        "근거 문서: _philosophy/agent-operating-philosophy.ko.md, _history/work-summaries/"
+      ],
+      "evidence_sources": ["theory-duarte-resources", "research-slideaudit"]
+    },
+    {
+      "id": "big-idea",
+      "layout": "evidence",
+      "kicker": "Big Idea",
+      "title": "플랫폼의 단위는 답변이 아니라 검증 가능한 작업 흐름이다",
+      "body": [
+        "사용자 의도는 요구사항 후보가 된다.",
+        "요구사항은 스펙, 계획, 작업, 검증, 추적성으로 내려간다.",
+        "결과는 평가와 재작업을 통과한 뒤 히스토리와 커밋으로 남는다."
+      ],
+      "visual": {
+        "type": "metric",
+        "value": "1",
+        "label": "intent -> evidence -> execution -> memory"
+      },
+      "script_beat": "thesis",
+      "speaker_notes": [
+        "이 플랫폼의 Big Idea는 작업 흐름을 제품화하는 것입니다.",
+        "즉, AI가 뭔가를 만들었다는 사실보다 왜 만들었고, 어떤 근거로 만들었고, 어떻게 검증했는지가 더 중요합니다.",
+        "근거 문서: _docs/operating-models/platform-identity-operating-model.ko.md"
+      ],
+      "evidence_sources": ["theory-duarte-resources"]
+    },
+    {
+      "id": "operating-loop",
+      "layout": "process",
+      "kicker": "Operating Loop",
+      "title": "모든 의미 있는 작업은 하나의 루프로 닫힌다",
+      "body": [
+        "웹 우선 조사와 memory bootstrap으로 시작한다.",
+        "작업 모드로 루프의 강도를 정한다.",
+        "요구사항과 스펙으로 실행을 좁힌다.",
+        "검증, grounding, 평가를 통과하고 push한다."
+      ],
+      "visual": {
+        "type": "steps",
+        "steps": ["검색", "메모리", "스펙", "실행", "평가"]
+      },
+      "script_beat": "method",
+      "speaker_notes": [
+        "운영 루프는 과한 문서화가 아니라 판단 손실을 막는 장치입니다.",
+        "작업이 작으면 quick, 먼저 결과가 필요하면 ship_first, 구조와 정책이면 governance처럼 모드를 고릅니다.",
+        "근거 문서: _docs/operating-models/platform-operating-model.md, agent-platform/configs/workflows/work-mode-registry.json"
+      ],
+      "evidence_sources": ["framework-revealjs-official", "framework-marp-official"]
+    },
+    {
+      "id": "project-portfolio",
+      "layout": "evidence",
+      "kicker": "Portfolio",
+      "title": "현재 루트 프로젝트는 세 개의 역할로 나뉜다",
+      "body": [
+        "`agent-platform`: 에이전트 구축과 평가의 중심 엔진",
+        "`presentation-agent`: 발표 조사, 스크립트, HTML/PPT 산출물 제작",
+        "`workspace-monitor`: 히스토리와 구조를 웹에서 보는 모니터링 사이트"
+      ],
+      "visual": {
+        "type": "metric",
+        "value": "3",
+        "label": "registered active root projects"
+      },
+      "script_beat": "portfolio",
+      "speaker_notes": [
+        "프로젝트 경계는 이 저장소의 핵심입니다. 공통 능력은 공유 폴더로 승격하고, 독립 관심사는 루트 프로젝트로 둡니다.",
+        "현재 등록된 active root project는 agent-platform, presentation-agent, workspace-monitor입니다.",
+        "근거 문서: _ops/projects/registry.json"
+      ],
+      "evidence_sources": ["templates-pitch"]
+    },
+    {
+      "id": "ops-map",
+      "layout": "split",
+      "kicker": "Workspace Map",
+      "title": "언더스코어 폴더는 플랫폼 운영의 공용 장기 기억이다",
+      "body": [
+        "`_docs`: 지속 지시, 정책, 운영 모델, 거버넌스",
+        "`_ops`: 프롬프트, 워크플로, 프로젝트 경계, coordination",
+        "`_history`: 요청, 계획, 검색, 평가, 작업 요약",
+        "`_requirements`와 `_specs`: 요구사항과 spec-driven 산출물",
+        "`_research`, `_tools`, `_skills`: 재사용 가능한 근거와 능력"
+      ],
+      "visual": {
+        "type": "statement",
+        "label": "shared memory lives outside project folders"
+      },
+      "script_beat": "structure",
+      "speaker_notes": [
+        "프로젝트별 산출물은 프로젝트 안에 둡니다. 반대로 모든 프로젝트에 공통 적용되는 운영 규칙과 도구는 언더스코어 폴더에 둡니다.",
+        "이 분리가 시간이 지날수록 유지보수성을 만듭니다.",
+        "근거 문서: README.md, _ops/projects/root-structure-policy.json"
+      ],
+      "evidence_sources": ["framework-slidev-official"]
+    },
+    {
+      "id": "research-engine",
+      "layout": "process",
+      "kicker": "Research Engine",
+      "title": "검색은 시작점이고, 출처 순위화와 skeptic review가 결론을 만든다",
+      "body": [
+        "모든 새 지시는 웹 검색으로 시작한다.",
+        "공식 문서, 논문, 기술 블로그, 커뮤니티 신호를 분리해 다룬다.",
+        "research profile은 query, retrieval, ranking, extraction, synthesis, grounding, skeptic review를 요구한다."
+      ],
+      "visual": {
+        "type": "steps",
+        "steps": ["질문", "검색", "순위화", "증거", "회의"]
+      },
+      "script_beat": "evidence_engine",
+      "speaker_notes": [
+        "이 플랫폼은 모델의 내부 추정을 바로 믿지 않습니다.",
+        "출처는 단순 링크가 아니라 검증 핸들입니다. 특히 커뮤니티 반응은 사실 증명이 아니라 발견 신호로만 사용합니다.",
+        "근거 문서: agent-platform/configs/research/research-agent-profile.json, source-discovery-registry.json"
+      ],
+      "evidence_sources": ["research-slideaudit", "theory-tedx-speaker-guide"]
+    },
+    {
+      "id": "requirements-specs",
+      "layout": "split",
+      "kicker": "Spec Driven",
+      "title": "사용자 요청은 요구사항이 되고, 요구사항은 실행 가능한 스펙이 된다",
+      "body": [
+        "`_history/user-requests`: 요청 의도 요약",
+        "`_requirements`: 공통 요구사항 기준선과 변경/검토",
+        "`_specs`: spec, plan, tasks, validation, traceability",
+        "`request-traces`: 요청과 산출물, 평가, 커밋 연결"
+      ],
+      "visual": {
+        "type": "cards",
+        "cards": [
+          {"title": "Request", "text": "무엇을 원했는가"},
+          {"title": "Requirement", "text": "무엇이 기준인가"},
+          {"title": "Trace", "text": "무엇이 됐는가"}
+        ]
+      },
+      "script_beat": "requirements",
+      "speaker_notes": [
+        "이 구조 덕분에 나중에 사용자가 어떤 요청을 했고, 그 요청이 무엇으로 바뀌었는지 찾을 수 있습니다.",
+        "스펙이 애매하거나 소스와 다르면 spec-reconciliation flow가 사용자에게 질문할 수 있게 되어 있습니다.",
+        "근거 문서: _requirements/baselines/2026-05-31-workspace-platform.ko.md, _ops/workflows/38-spec-source-reconciliation.md"
+      ],
+      "evidence_sources": ["framework-marp-official"]
+    },
+    {
+      "id": "quality-gates",
+      "layout": "evidence",
+      "kicker": "Quality Gates",
+      "title": "최종 결과는 평가, grounding, health check를 통과해야 닫힌다",
+      "body": [
+        "`work-evaluator-agent`: 초기 지시와 실제 결과 비교",
+        "`hallucination-guard-agent`: 사실 주장별 근거 확인",
+        "`knowledge-skeptic-agent`: 저장된 지식도 다시 의심",
+        "`workspace-health`: 핵심 감사와 테스트를 한 번에 실행"
+      ],
+      "visual": {
+        "type": "statement",
+        "label": "ready_to_close is earned"
+      },
+      "script_beat": "quality",
+      "speaker_notes": [
+        "작업이 끝났다고 바로 닫지 않습니다. 평가에서 gap이 나오면 재작업합니다.",
+        "특히 외부 사실, 파일 상태, 코드 동작, 추천에는 grounding이 필요합니다.",
+        "근거 문서: _ops/workflows/40-evaluate-and-rework.md, _ops/workflows/70-hallucination-prevention.md"
+      ],
+      "evidence_sources": ["research-slideaudit"]
+    },
+    {
+      "id": "coding-discipline",
+      "layout": "split",
+      "kicker": "Coding Discipline",
+      "title": "코딩은 바로 쓰기보다 언어, 아키텍처, 폴더 의미를 먼저 고른다",
+      "body": [
+        "Python-first이지만 기술 제약에 따라 런타임 후보를 비교한다.",
+        "Java/Spring Boot, C, React, Next.js 등은 각 기술의 공식 문서를 따로 확인한다.",
+        "아키텍처 이론과 실무자 의견을 분리해 기록한다.",
+        "폴더 구조 후보와 폴더 의미를 남긴다."
+      ],
+      "visual": {
+        "type": "cards",
+        "cards": [
+          {"title": "Language", "text": "유지보수성"},
+          {"title": "Architecture", "text": "이론+실무"},
+          {"title": "Folders", "text": "의미와 경계"}
+        ]
+      },
+      "script_beat": "implementation_rules",
+      "speaker_notes": [
+        "코딩 조사 에이전트는 단순 검색 요약이 아니라 구현 준비 상태를 판단합니다.",
+        "언어 선택, 공식 문서, 버전 제약, 이슈/토론 신호, 오픈소스 reference code를 기록해야 합니다.",
+        "근거 문서: agent-platform/configs/research/coding-research-profile.json, _docs/policies/architecture-first-coding-policy.ko.md"
+      ],
+      "evidence_sources": ["templates-pitch"]
+    },
+    {
+      "id": "speed-control",
+      "layout": "process",
+      "kicker": "Speed Control",
+      "title": "모든 작업을 full loop로 돌리지 않고, 모드와 병렬 계획으로 속도를 조절한다",
+      "body": [
+        "`quick`: 작은 작업",
+        "`standard`: 일반 구현/문서 작업",
+        "`ship_first`: 먼저 결과를 내고 개선을 백로그화",
+        "`research`: 근거 수집 중심",
+        "`governance`: 구조와 규칙 변경"
+      ],
+      "visual": {
+        "type": "steps",
+        "steps": ["quick", "standard", "ship", "research", "govern"]
+      },
+      "script_beat": "speed",
+      "speaker_notes": [
+        "사용자는 이전에 모든 루프를 매번 도는 비효율을 지적했습니다.",
+        "그래서 work mode registry와 deferred backlog, parallel-work-planner가 생겼습니다.",
+        "근거 문서: agent-platform/configs/workflows/work-mode-registry.json, _ops/workflows/52-parallel-work-planning.md"
+      ],
+      "evidence_sources": ["framework-revealjs-official"]
+    },
+    {
+      "id": "capability-promotion",
+      "layout": "evidence",
+      "kicker": "Capability Promotion",
+      "title": "반복되는 좋은 흐름은 도구, 스킬, 템플릿, 에이전트가 된다",
+      "body": [
+        "반복 파일 구조는 template로 승격한다.",
+        "반복 검증과 변환은 tool로 만든다.",
+        "반복 reasoning workflow는 skill로 관리한다.",
+        "반복 평가와 계획은 agent profile과 CLI로 고정한다."
+      ],
+      "visual": {
+        "type": "metric",
+        "value": "4",
+        "label": "template / tool / skill / agent"
+      },
+      "script_beat": "platform_learning",
+      "speaker_notes": [
+        "이 플랫폼의 학습은 모델 내부에만 있지 않습니다. 파일과 도구와 스킬로 외부화됩니다.",
+        "그래서 다음 작업자는 이전 채팅이 없어도 구조를 이어받을 수 있습니다.",
+        "근거 문서: _docs/governance/capability-governance.md, _skills/"
+      ],
+      "evidence_sources": ["theory-duarte-resources"]
+    },
+    {
+      "id": "monitoring",
+      "layout": "split",
+      "kicker": "Observability",
+      "title": "히스토리와 프로젝트 상태는 Workspace Monitor가 웹에서 보여준다",
+      "body": [
+        "Next.js 정적 사이트로 Vercel 배포를 준비한다.",
+        "Markdown 문서와 히스토리를 snapshot으로 모은다.",
+        "날짜별 history timeline과 folder structure를 제공한다.",
+        "public 전환 전 private data review가 필요하다."
+      ],
+      "visual": {
+        "type": "statement",
+        "label": "repo state becomes visible"
+      },
+      "script_beat": "visibility",
+      "speaker_notes": [
+        "운영 시스템은 보이지 않으면 유지하기 어렵습니다.",
+        "workspace-monitor는 이 저장소의 문서 기반 상태를 웹 UI로 보여주기 위한 프로젝트입니다.",
+        "근거 문서: workspace-monitor/README.md"
+      ],
+      "evidence_sources": ["framework-slidev-official", "templates-pitch"]
+    },
+    {
+      "id": "how-to-use",
+      "layout": "process",
+      "kicker": "Use It",
+      "title": "다음 작업은 운영 허브에서 시작하고, 결과는 히스토리로 닫는다",
+      "body": [
+        "`_ops/index.md`에서 어디를 볼지 찾는다.",
+        "웹 검색 기록과 memory bootstrap을 먼저 남긴다.",
+        "작업 모드에 맞는 요구사항/스펙/평가 대상을 정한다.",
+        "완료 후 커밋하고 즉시 push한다."
+      ],
+      "visual": {
+        "type": "steps",
+        "steps": ["Index", "Search", "Mode", "Build", "Push"]
+      },
+      "script_beat": "operating_instruction",
+      "speaker_notes": [
+        "이 슬라이드는 실제 사용 설명입니다. 새 세션은 _ops/index.md와 memory bootstrap에서 시작하면 됩니다.",
+        "어떤 프로젝트인지 애매하면 project boundary workflow를 먼저 봅니다.",
+        "근거 문서: _ops/index.md, _ops/workflows/00-start-here.md"
+      ],
+      "evidence_sources": ["framework-marp-official"]
+    },
+    {
+      "id": "closing",
+      "layout": "closing",
+      "kicker": "Close",
+      "title": "이 플랫폼은 AI가 한 일을 잊지 않게 만드는 구조다",
+      "subtitle": "검색하고, 근거를 남기고, 만들고, 평가하고, 다시 사용할 수 있게 승격한다. 그래서 시간이 지날수록 더 좋은 작업 환경이 된다.",
+      "script_beat": "close",
+      "speaker_notes": [
+        "마지막 메시지는 단순합니다. 이 플랫폼의 목적은 AI를 더 많이 쓰는 것이 아니라, AI와 함께한 작업을 잃지 않는 것입니다.",
+        "다음 발표는 프로젝트별 덱으로 이어가면 됩니다."
+      ],
+      "evidence_sources": ["theory-duarte-resources", "theory-tedx-speaker-guide"]
+    }
+  ]
+}

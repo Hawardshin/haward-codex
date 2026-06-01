@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>프로젝트 발표: workspace-monitor</title>
+  <style>
+
+    :root { --pa-bg: #eef2ff; --pa-ink: #1e1b4b; --pa-muted: #5b5f75; --pa-surface: #ffffff; --pa-accent: #4f46e5; --pa-warm: #b45309; --pa-cool: #0f766e; --pa-line: #d7d7f0; --pa-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; --pa-display: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--pa-bg);
+      color: var(--pa-ink);
+      font-family: var(--pa-font);
+      overflow: hidden;
+    }
+    .pa-deck {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: min(3vw, 32px);
+    }
+    .pa-slide {
+      display: none;
+      width: min(100%, calc(100vh * 16 / 9 - 64px));
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+      background: var(--pa-surface);
+      border: 1px solid var(--pa-line);
+      box-shadow: 0 18px 60px rgb(0 0 0 / 14%);
+      overflow: hidden;
+    }
+    .pa-slide.is-active { display: block; }
+    .pa-slide__frame {
+      min-height: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(260px, .95fr);
+      gap: clamp(24px, 4vw, 64px);
+      padding: clamp(32px, 5vw, 72px);
+      position: relative;
+    }
+    .pa-slide--hero .pa-slide__frame,
+    .pa-slide--closing .pa-slide__frame {
+      grid-template-columns: 1fr;
+      align-content: center;
+    }
+    .pa-slide__content {
+      min-width: 0;
+      align-self: center;
+    }
+    .pa-kicker {
+      margin: 0 0 18px;
+      color: var(--pa-accent);
+      font-size: clamp(14px, 1.4vw, 18px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    h1 {
+      margin: 0;
+      max-width: 11ch;
+      font-family: var(--pa-display);
+      font-size: clamp(44px, 6vw, 84px);
+      line-height: .98;
+      letter-spacing: 0;
+    }
+    .pa-slide--split h1,
+    .pa-slide--evidence h1,
+    .pa-slide--process h1 {
+      max-width: 13ch;
+      font-size: clamp(34px, 4.6vw, 60px);
+      line-height: 1.04;
+    }
+    .pa-subtitle {
+      margin: 24px 0 0;
+      max-width: 54ch;
+      color: var(--pa-muted);
+      font-size: clamp(18px, 2vw, 25px);
+      line-height: 1.4;
+    }
+    ul:not(.pa-source-list) {
+      display: grid;
+      gap: 14px;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+      max-width: 54ch;
+      color: var(--pa-ink);
+      font-size: clamp(18px, 1.8vw, 24px);
+      line-height: 1.35;
+    }
+    ul:not(.pa-source-list) li {
+      border-left: 4px solid var(--pa-accent);
+      padding-left: 16px;
+    }
+    blockquote {
+      margin: 28px 0 0;
+      padding: 0 0 0 24px;
+      border-left: 6px solid var(--pa-warm);
+      font-size: clamp(24px, 3vw, 40px);
+      line-height: 1.18;
+    }
+    .pa-visual {
+      align-self: stretch;
+      min-width: 0;
+      display: grid;
+      align-content: center;
+      border-left: 1px solid var(--pa-line);
+      padding-left: clamp(24px, 4vw, 56px);
+    }
+    .pa-slide--hero .pa-visual,
+    .pa-slide--closing .pa-visual {
+      display: none;
+    }
+    .pa-visual--metric strong {
+      display: block;
+      color: var(--pa-warm);
+      font-size: clamp(70px, 12vw, 150px);
+      line-height: .85;
+      letter-spacing: 0;
+    }
+    .pa-visual--metric span,
+    .pa-visual--statement span {
+      display: block;
+      margin-top: 18px;
+      color: var(--pa-muted);
+      font-size: clamp(18px, 2vw, 26px);
+      line-height: 1.3;
+    }
+    .pa-visual--steps {
+      align-content: center;
+      gap: 16px;
+    }
+    .pa-visual--steps span {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      align-items: center;
+      gap: 14px;
+      font-size: clamp(17px, 1.8vw, 23px);
+      color: var(--pa-ink);
+    }
+    .pa-visual--steps b {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--pa-cool);
+      color: white;
+      font-size: 16px;
+    }
+    .pa-visual--cards {
+      align-content: center;
+      gap: 14px;
+    }
+    .pa-visual--cards article {
+      border: 1px solid var(--pa-line);
+      border-radius: 8px;
+      padding: 18px;
+      background: color-mix(in srgb, var(--pa-bg) 42%, white);
+    }
+    .pa-visual--cards h2 {
+      margin: 0 0 8px;
+      font-size: clamp(17px, 1.7vw, 23px);
+    }
+    .pa-visual--cards p {
+      margin: 0;
+      color: var(--pa-muted);
+      font-size: clamp(15px, 1.35vw, 18px);
+      line-height: 1.35;
+    }
+    .pa-source-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--pa-muted);
+      font-size: 12px;
+    }
+    .pa-source-list li {
+      border: 1px solid var(--pa-line);
+      border-radius: 999px;
+      padding: 5px 8px;
+    }
+    .pa-controls {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--pa-line);
+      border-radius: 999px;
+      background: rgb(255 255 255 / 84%);
+      backdrop-filter: blur(12px);
+      padding: 6px;
+    }
+    .pa-controls button {
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--pa-ink);
+      font: 700 18px/1 var(--pa-font);
+      cursor: pointer;
+    }
+    .pa-controls button:hover,
+    .pa-controls button:focus-visible {
+      outline: 2px solid var(--pa-accent);
+      outline-offset: 2px;
+      background: white;
+    }
+    .pa-count {
+      min-width: 54px;
+      text-align: center;
+      color: var(--pa-muted);
+      font-size: 13px;
+    }
+    .pa-progress {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 4px;
+      background: rgb(0 0 0 / 10%);
+    }
+    .pa-progress span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--pa-accent);
+      transition: width .2s ease;
+    }
+    .pa-presenter {
+      position: fixed;
+      right: 18px;
+      top: 18px;
+      width: min(360px, calc(100vw - 36px));
+      max-height: calc(100vh - 110px);
+      overflow: auto;
+      transform: translateX(calc(100% + 24px));
+      transition: transform .2s ease;
+      border: 1px solid var(--pa-line);
+      border-radius: 8px;
+      background: rgb(255 255 255 / 92%);
+      backdrop-filter: blur(12px);
+      padding: 18px;
+      box-shadow: 0 16px 42px rgb(0 0 0 / 14%);
+    }
+    body.show-notes .pa-presenter { transform: translateX(0); }
+    .pa-presenter__label {
+      color: var(--pa-accent);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .pa-presenter__beat {
+      margin-top: 8px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .pa-presenter__notes {
+      margin: 14px 0 0;
+      padding-left: 20px;
+      color: var(--pa-muted);
+      line-height: 1.45;
+    }
+    @media (max-width: 760px) {
+      body { overflow: auto; }
+      .pa-deck { height: auto; padding: 0; }
+      .pa-slide {
+        display: block;
+        width: 100%;
+        min-height: 100svh;
+        aspect-ratio: auto;
+        border: 0;
+        box-shadow: none;
+      }
+      .pa-slide:not(.is-active) { display: none; }
+      .pa-slide__frame {
+        grid-template-columns: 1fr;
+        min-height: 100svh;
+        padding: 34px 24px 86px;
+      }
+      .pa-visual { border-left: 0; border-top: 1px solid var(--pa-line); padding: 24px 0 0; }
+      h1, .pa-slide--split h1, .pa-slide--evidence h1, .pa-slide--process h1 { font-size: 42px; }
+      .pa-controls { bottom: 12px; }
+    }
+    @media print {
+      body { overflow: visible; background: white; }
+      .pa-deck { display: block; width: auto; height: auto; padding: 0; }
+      .pa-slide { display: block; width: 100vw; height: 100vh; page-break-after: always; box-shadow: none; border: 0; }
+      .pa-controls, .pa-progress, .pa-presenter { display: none; }
+    }
+
+  </style>
+</head>
+<body>
+  <main class="pa-deck" aria-label="프로젝트 발표: workspace-monitor">
+    <section class="pa-slide pa-slide--hero is-active" data-slide="1" data-script-beat="hook" aria-label="Slide 1 of 7">
+      <div class="pa-slide__frame">
+        <div class="pa-slide__content">
+          <p class="pa-kicker">workspace-monitor</p>
+          <h1>문서 기반 운영 상태를 웹에서 보이게 만든다</h1>
+          <p class="pa-subtitle">히스토리, 프로젝트, 요구사항, 스펙, 평가, 폴더 구조를 snapshot으로 모아 Next.js UI에서 탐색한다.</p>
+          <ul class="pa-source-list" aria-label="Reference source IDs"><li>framework-slidev-official</li></ul>
+        </div>
+        <div class="pa-visual pa-visual--statement">
+  <span></span>
+</div>
+      </div>
+      <aside class="pa-notes" hidden><ol><li>workspace-monitor는 이 저장소의 관측성 프로젝트입니다.</li><li>문서와 히스토리가 많아질수록 사람이 한눈에 볼 UI가 필요합니다.</li><li>근거 문서: workspace-monitor/README.md</li></ol></aside>
+    </section>
+    <section class="pa-slide pa-slide--split" data-slide="2" data-script-beat="problem" aria-label="Slide 2 of 7">
+      <div class="pa-slide__frame">
+        <div class="pa-slide__content">
+          <p class="pa-kicker">Why</p>
+          <h1>운영 구조는 보이지 않으면 유지되지 않는다</h1>
+          <ul><li>완료 작업은 `_history`에 남지만, 폴더만 보면 전체 흐름을 빠르게 보기 어렵다.</li><li>요구사항과 스펙과 평가는 서로 다른 폴더에 흩어져 있다.</li><li>프로젝트가 늘수록 사람이 보는 navigation layer가 필요하다.</li><li>public 전환 시 Vercel 배포 가능한 형태가 필요하다.</li></ul>
+          <ul class="pa-source-list" aria-label="Reference source IDs"><li>templates-pitch</li></ul>
+        </div>
+        <div class="pa-visual pa-visual--statement">
+  <span>documentation needs observability</span>
+</div>
+      </div>
+      <aside class="pa-notes" hidden><ol><li>이 프로젝트는 운영 문서가 많아질수록 생기는 탐색 문제를 해결합니다.</li><li>문서 자체를 옮기는 것이 아니라, snapshot으로 읽어 UI에서 보여줍니다.</li><li>근거 문서: workspace-monitor/README.md, workspace-monitor/specs/</li></ol></aside>
+    </section>
+    <section class="pa-slide pa-slide--process" data-slide="3" data-script-beat="architecture" aria-label="Slide 3 of 7">
+      <div class="pa-slide__frame">
+        <div class="pa-slide__content">
+          <p class="pa-kicker">Architecture</p>
+          <h1>collector가 repository를 읽고 정적 snapshot을 만든다</h1>
+          <ul><li>`scripts/collect-workspace.mjs`: 문서와 구조 수집</li><li>`src/generated/workspace-snapshot.json`: commit되는 데이터</li><li>`public/workspace-snapshot.json`: 브라우저 접근용 복사본</li><li>`components/MonitorShell.tsx`: dashboard UI</li><li>`next.config.mjs`: static export</li></ul>
+          <ul class="pa-source-list" aria-label="Reference source IDs"><li>framework-revealjs-official</li></ul>
+        </div>
+        <div class="pa-visual pa-visual--steps"><span><b>1</b>collect</span><span><b>2</b>snapshot</span><span><b>3</b>render</span><span><b>4</b>export</span><span><b>5</b>deploy</span></div>
+      </div>
+      <aside class="pa-notes" hidden><ol><li>핵심은 Next.js 앱이 런타임에 저장소를 읽는 것이 아니라, build 전에 snapshot을 만든다는 점입니다.</li><li>이 방식은 Vercel static export와 잘 맞고, public 전환 전 snapshot을 검토할 수 있습니다.</li><li>근거 문서: workspace-monitor/scripts/collect-workspace.mjs, README.md</li></ol></aside>
+    </section>
+    <section class="pa-slide pa-slide--evidence" data-slide="4" data-script-beat="features" aria-label="Slide 4 of 7">
+      <div class="pa-slide__frame">
+        <div class="pa-slide__content">
+          <p class="pa-kicker">UI Surfaces</p>
+          <h1>대시보드는 히스토리, 프로젝트, 스펙, 구조를 동시에 보여준다</h1>
+          <ul><li>historyDays 날짜 index</li><li>History 날짜/유형 filter</li><li>folderStructure 구조 지도</li><li>Markdown HTML preview</li><li>coordination and evaluation documents</li></ul>
+          <ul class="pa-source-list" aria-label="Reference source IDs"><li>research-slideaudit</li></ul>
+        </div>
+        <div class="pa-visual pa-visual--metric">
+  <strong>5</strong>
+  <span>core monitor surfaces</span>
+</div>
+      </div>
+      <aside class="pa-notes" hidden><ol><li>이미 history timeline과 folder map이 들어가 있습니다.</li><li>이제 사용자는 날짜와 문서 종류, 프로젝트 경계를 기준으로 작업을 탐색할 수 있습니다.</li><li>근거 문서: workspace-monitor/components/MonitorShell.tsx</li></ol></aside>
+    </section>
+    <section class="pa-slide pa-slide--split" data-slide="5" data-script-beat="risk_control" aria-label="Slide 5 of 7">
+      <div class="pa-slide__frame">
+        <div class="pa-slide__content">
+          <p class="pa-kicker">Public Boundary</p>
+          <h1>Vercel 배포 전에 snapshot 공개 범위를 반드시 확인한다</h1>
+          <ul><li>private note와 secret이 포함되지 않았는지 확인한다.</li><li>raw prompt나 로컬 절대 경로가 공개 가능한지 본다.</li><li>공개하면 안 되는 문서는 collector 범위를 조정한다.</li><li>`npm run collect`와 `npm run build`를 다시 실행한다.</li></ul>
+          <ul class="pa-source-list" aria-label="Reference source IDs"><li>templates-pitch</li></ul>
+        </div>
+        <div class="pa-visual pa-visual--statement">
+  <span>public snapshot must be reviewed</span>
+</div>
+      </div>
+      <aside class="pa-notes" hidden><ol><li>workspace-monitor는 public 배포를 염두에 두지만, 이 저장소는 현재 private입니다.</li><li>따라서 public 전환 전에는 snapshot을 반드시 검토해야 합니다.</li><li>근거 문서: workspace-monitor/README.md 공개 전 점검</li></ol></aside>
+    </section>
+    <section class="pa-slide pa-slide--process" data-slide="6" data-script-beat="verification" aria-label="Slide 6 of 7">
+      <div class="pa-slide__frame">
+        <div class="pa-slide__content">
+          <p class="pa-kicker">Commands</p>
+          <h1>운영 명령은 수집, 테스트, 타입체크, 빌드로 닫힌다</h1>
+          <ul><li>`npm run collect`</li><li>`npm test`</li><li>`npm run check`</li><li>`npm run build`</li><li>`npm run dev`</li></ul>
+          <ul class="pa-source-list" aria-label="Reference source IDs"><li>framework-slidev-official</li></ul>
+        </div>
+        <div class="pa-visual pa-visual--steps"><span><b>1</b>collect</span><span><b>2</b>test</span><span><b>3</b>check</span><span><b>4</b>build</span><span><b>5</b>dev</span></div>
+      </div>
+      <aside class="pa-notes" hidden><ol><li>workspace-monitor는 프론트엔드 프로젝트이므로 테스트와 typecheck와 build가 모두 중요합니다.</li><li>workspace-health는 이 흐름을 전체 저장소 검증에 포함합니다.</li><li>근거 문서: workspace-monitor/README.md Commands</li></ol></aside>
+    </section>
+    <section class="pa-slide pa-slide--closing" data-slide="7" data-script-beat="next" aria-label="Slide 7 of 7">
+      <div class="pa-slide__frame">
+        <div class="pa-slide__content">
+          <p class="pa-kicker">Next</p>
+          <h1>다음 단계는 히스토리 탐색을 더 질문 가능하게 만드는 것이다</h1>
+          <p class="pa-subtitle">요청-결과-평가-커밋이 UI에서 더 직접적으로 이어지면, 플랫폼의 장기 기억은 사람이 쓰기 쉬운 지식 지도에 가까워진다.</p>
+          <ul class="pa-source-list" aria-label="Reference source IDs"><li>theory-duarte-resources</li></ul>
+        </div>
+        <div class="pa-visual pa-visual--statement">
+  <span></span>
+</div>
+      </div>
+      <aside class="pa-notes" hidden><ol><li>현재는 문서와 snapshot 중심입니다.</li><li>앞으로는 clarification_needed 질문, 진행 중 작업, private/public review 같은 운영 상태를 더 직접적으로 보여줄 수 있습니다.</li></ol></aside>
+    </section>
+  </main>
+  <aside class="pa-presenter" aria-live="polite" aria-label="Presenter notes">
+    <div class="pa-presenter__label">Script</div>
+    <div class="pa-presenter__beat"></div>
+    <ol class="pa-presenter__notes"></ol>
+  </aside>
+  <nav class="pa-controls" aria-label="Slide controls">
+    <button type="button" data-action="prev" aria-label="Previous slide">‹</button>
+    <output class="pa-count" aria-live="polite"></output>
+    <button type="button" data-action="next" aria-label="Next slide">›</button>
+    <button type="button" data-action="notes" aria-label="Toggle speaker notes">S</button>
+  </nav>
+  <div class="pa-progress" aria-hidden="true"><span></span></div>
+  <script>
+    const speakerNotes = [["workspace-monitor는 이 저장소의 관측성 프로젝트입니다.", "문서와 히스토리가 많아질수록 사람이 한눈에 볼 UI가 필요합니다.", "근거 문서: workspace-monitor/README.md"], ["이 프로젝트는 운영 문서가 많아질수록 생기는 탐색 문제를 해결합니다.", "문서 자체를 옮기는 것이 아니라, snapshot으로 읽어 UI에서 보여줍니다.", "근거 문서: workspace-monitor/README.md, workspace-monitor/specs/"], ["핵심은 Next.js 앱이 런타임에 저장소를 읽는 것이 아니라, build 전에 snapshot을 만든다는 점입니다.", "이 방식은 Vercel static export와 잘 맞고, public 전환 전 snapshot을 검토할 수 있습니다.", "근거 문서: workspace-monitor/scripts/collect-workspace.mjs, README.md"], ["이미 history timeline과 folder map이 들어가 있습니다.", "이제 사용자는 날짜와 문서 종류, 프로젝트 경계를 기준으로 작업을 탐색할 수 있습니다.", "근거 문서: workspace-monitor/components/MonitorShell.tsx"], ["workspace-monitor는 public 배포를 염두에 두지만, 이 저장소는 현재 private입니다.", "따라서 public 전환 전에는 snapshot을 반드시 검토해야 합니다.", "근거 문서: workspace-monitor/README.md 공개 전 점검"], ["workspace-monitor는 프론트엔드 프로젝트이므로 테스트와 typecheck와 build가 모두 중요합니다.", "workspace-health는 이 흐름을 전체 저장소 검증에 포함합니다.", "근거 문서: workspace-monitor/README.md Commands"], ["현재는 문서와 snapshot 중심입니다.", "앞으로는 clarification_needed 질문, 진행 중 작업, private/public review 같은 운영 상태를 더 직접적으로 보여줄 수 있습니다."]];
+    const scriptBeats = ["hook", "problem", "architecture", "features", "risk_control", "verification", "next"];
+
+    let currentSlide = 0;
+    const slides = Array.from(document.querySelectorAll('.pa-slide'));
+    const progress = document.querySelector('.pa-progress span');
+    const count = document.querySelector('.pa-count');
+    const notesList = document.querySelector('.pa-presenter__notes');
+    const beat = document.querySelector('.pa-presenter__beat');
+
+    function showSlide(index) {
+      currentSlide = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle('is-active', slideIndex === currentSlide);
+      });
+      count.value = `${currentSlide + 1} / ${slides.length}`;
+      progress.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+      beat.textContent = scriptBeats[currentSlide] || '';
+      notesList.innerHTML = '';
+      (speakerNotes[currentSlide] || []).forEach((note) => {
+        const item = document.createElement('li');
+        item.textContent = note;
+        notesList.appendChild(item);
+      });
+    }
+
+    function nextSlide() { showSlide(currentSlide + 1); }
+    function previousSlide() { showSlide(currentSlide - 1); }
+
+    document.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        nextSlide();
+      }
+      if (['ArrowLeft', 'PageUp', 'Backspace'].includes(event.key)) {
+        event.preventDefault();
+        previousSlide();
+      }
+      if (event.key.toLowerCase() === 's') {
+        document.body.classList.toggle('show-notes');
+      }
+    });
+
+    document.querySelector('[data-action="prev"]').addEventListener('click', previousSlide);
+    document.querySelector('[data-action="next"]').addEventListener('click', nextSlide);
+    document.querySelector('[data-action="notes"]').addEventListener('click', () => {
+      document.body.classList.toggle('show-notes');
+    });
+
+    showSlide(0);
+
+  </script>
+</body>
+</html>

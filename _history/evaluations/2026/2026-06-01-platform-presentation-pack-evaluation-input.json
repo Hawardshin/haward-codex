@@ -1,0 +1,123 @@
+{
+  "initial_instruction": "발표 에이전트 이용해서 현재 플랫폼에 대한 내용 발표 준비하기. 프로젝트 별로도 따로 만들기. 길어져도 빠지지 않고 다 하기.",
+  "result_summary": "Used the presentation-agent deck-spec and HTML renderer workflow to prepare one comprehensive overall platform deck, three separate per-project decks, an HTML index page, a presentation guide, source notes, project-specific requirement/spec/history records, and validation/evaluation artifacts.",
+  "work_mode": "standard",
+  "changed_files": [
+    "presentation-agent/docs/requirements/2026-06-01-presentation-agent.ko.md",
+    "presentation-agent/docs/requirements/2026-06-01-presentation-agent.en.md",
+    "presentation-agent/specs/2026-06-01-platform-presentation-pack/",
+    "presentation-agent/data/deck-specs/workspace-platform-overview.ko.json",
+    "presentation-agent/data/deck-specs/project-agent-platform.ko.json",
+    "presentation-agent/data/deck-specs/project-workspace-monitor.ko.json",
+    "presentation-agent/data/deck-specs/project-presentation-agent.ko.json",
+    "presentation-agent/data/deck-specs/README.ko.md",
+    "presentation-agent/data/deck-specs/README.en.md",
+    "presentation-agent/artifacts/html/platform-presentation-pack-index.html",
+    "presentation-agent/artifacts/html/workspace-platform-overview.html",
+    "presentation-agent/artifacts/html/project-agent-platform.html",
+    "presentation-agent/artifacts/html/project-workspace-monitor.html",
+    "presentation-agent/artifacts/html/project-presentation-agent.html",
+    "presentation-agent/docs/scripts/2026-06-01-platform-presentation-pack.ko.md",
+    "presentation-agent/docs/scripts/2026-06-01-platform-presentation-pack.en.md",
+    "presentation-agent/docs/source-notes/2026-06-01-platform-presentation-pack.ko.md",
+    "presentation-agent/docs/source-notes/2026-06-01-platform-presentation-pack.en.md",
+    "presentation-agent/src/presentation_agent/html_deck.py",
+    "presentation-agent/tests/test_html_deck.py",
+    "presentation-agent/README.md",
+    "_history/web-searches/2026/2026-06-01-platform-presentation-pack.ko.md",
+    "_history/web-searches/2026/2026-06-01-platform-presentation-pack.en.md",
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/user-requests/2026/2026-06-01.en.md",
+    "_history/request-traces/2026/2026-06-01.ko.md",
+    "_history/request-traces/2026/2026-06-01.en.md",
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.en.md",
+    "_history/2026/2026-06-01.md",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "_history/evaluations/2026/2026-06-01-platform-presentation-pack-grounding.json",
+    "_history/evaluations/2026/2026-06-01-platform-presentation-pack-evaluation-input.json"
+  ],
+  "verification": [
+    "PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/workspace-platform-overview.ko.json presentation-agent/artifacts/html/workspace-platform-overview.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json: generated HTML artifact",
+    "PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/project-agent-platform.ko.json presentation-agent/artifacts/html/project-agent-platform.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json: generated HTML artifact",
+    "PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/project-workspace-monitor.ko.json presentation-agent/artifacts/html/project-workspace-monitor.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json: generated HTML artifact",
+    "PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/project-presentation-agent.ko.json presentation-agent/artifacts/html/project-presentation-agent.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json: generated HTML artifact",
+    "python3 -m json.tool on all four deck-spec files: valid JSON",
+    "node -e deck spec slide count check: overall 15, agent-platform 8, workspace-monitor 7, presentation-agent 8",
+    "PYTHONPATH=presentation-agent/src python3 -m unittest discover -s presentation-agent/tests: 10 tests passed",
+    "PYTHONPATH=presentation-agent/src python3 -m presentation_agent.catalog presentation-agent/data/reference-index/starter-reference-catalog.json: 62 records, no validation error",
+    "node -e HTML speaker notes presence check: all four generated HTML decks include speaker-note related markup",
+    "python3 _tools/workspace-index/src/workspace_index.py: repository and prompt maps regenerated",
+    "python3 _tools/task-board/src/task_board.py: coordination boards regenerated",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "python3 _tools/workspace-health/src/workspace_health.py --include-build: 19 checks passed"
+  ],
+  "references_checked": [
+    "Duarte Presentation Formula: https://www.duarte.com/training/presentation-formula/",
+    "Duarte story techniques: https://www.duarte.com/blog/move-presentation-audience-with-story-techniques-in-presentations/",
+    "Harvard Catalyst slide guidance: https://catalyst.harvard.edu/writing-communication-center/visualize-science/slides/",
+    "MIT AeroAstro slide design: https://mitcommlab.mit.edu/aeroastro/commkit/slide-design/",
+    "Pitch presentation structure guide: https://pitch.com/guides/presentation/structure-your-presentation",
+    "presentation-agent/README.md",
+    "presentation-agent/src/presentation_agent/html_deck.py",
+    "presentation-agent/tests/test_html_deck.py",
+    "presentation-agent/data/reference-index/starter-reference-catalog.json",
+    "_docs/operating-models/platform-identity-operating-model.ko.md",
+    "_ops/projects/registry.json",
+    "agent-platform/README.md",
+    "workspace-monitor/README.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-platform-presentation-pack-grounding.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-platform-presentation-pack-grounding.json: ready_to_publish"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-platform-presentation-pack.ko.md",
+    "presentation-agent/docs/source-notes/2026-06-01-platform-presentation-pack.ko.md",
+    "presentation-agent/specs/2026-06-01-platform-presentation-pack/traceability.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "presentation-agent/specs/2026-06-01-platform-presentation-pack/spec.ko.md",
+    "presentation-agent/specs/2026-06-01-platform-presentation-pack/plan.ko.md",
+    "presentation-agent/specs/2026-06-01-platform-presentation-pack/tasks.ko.md",
+    "_history/web-searches/2026/2026-06-01-platform-presentation-pack.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-platform-presentation-pack.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md"
+  ],
+  "requirements_targets": [
+    "presentation-agent/docs/requirements/2026-06-01-presentation-agent.ko.md"
+  ],
+  "spec_targets": [
+    "presentation-agent/specs/2026-06-01-platform-presentation-pack/spec.ko.md",
+    "presentation-agent/specs/2026-06-01-platform-presentation-pack/plan.ko.md",
+    "presentation-agent/specs/2026-06-01-platform-presentation-pack/tasks.ko.md",
+    "presentation-agent/specs/2026-06-01-platform-presentation-pack/validation.ko.md",
+    "presentation-agent/specs/2026-06-01-platform-presentation-pack/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Generate a compact 10-minute version and a full 60-minute version from the same deck-spec pack.",
+    "Add project screenshots or architecture diagrams after the UI and platform projects stabilize.",
+    "Connect the pack to a formal Presentations skill PPTX export when an editable deck is specifically requested."
+  ]
+}

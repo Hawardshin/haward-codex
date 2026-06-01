@@ -32,6 +32,14 @@ class HtmlDeckTests(unittest.TestCase):
         self.assertIn("발표는 자료가 아니라 흐름이다", rendered)
         self.assertIn("speakerNotes", rendered)
 
+    def test_render_deck_does_not_emit_trailing_whitespace(self) -> None:
+        spec = load_json(SPEC_PATH)
+
+        rendered = render_deck(spec)
+
+        for line in rendered.splitlines():
+            self.assertEqual(line.rstrip(), line)
+
     def test_build_html_deck_writes_output(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             output_path = Path(temp_dir) / "deck.html"

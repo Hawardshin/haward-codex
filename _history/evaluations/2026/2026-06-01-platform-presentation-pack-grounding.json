@@ -1,0 +1,139 @@
+{
+  "task": "Ground factual claims for the platform presentation pack.",
+  "output_summary": "The presentation-agent project now contains one overall platform deck, three per-project decks, an HTML index, a presentation guide, and source notes for the current repository platform.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "overall_deck_spec",
+      "source": "presentation-agent/data/deck-specs/workspace-platform-overview.ko.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked deck-spec JSON for the overall platform presentation."
+    },
+    {
+      "evidence_id": "project_deck_specs",
+      "source": "presentation-agent/data/deck-specs/project-agent-platform.ko.json; presentation-agent/data/deck-specs/project-workspace-monitor.ko.json; presentation-agent/data/deck-specs/project-presentation-agent.ko.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked deck-spec JSON files for the three registered root projects."
+    },
+    {
+      "evidence_id": "deck_counts",
+      "source": "node -e deck spec slide count check",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output showed slide counts: overall 15, agent-platform 8, workspace-monitor 7, presentation-agent 8."
+    },
+    {
+      "evidence_id": "html_artifacts",
+      "source": "presentation-agent/artifacts/html/platform-presentation-pack-index.html; presentation-agent/artifacts/html/workspace-platform-overview.html; presentation-agent/artifacts/html/project-agent-platform.html; presentation-agent/artifacts/html/project-workspace-monitor.html; presentation-agent/artifacts/html/project-presentation-agent.html",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked generated HTML artifacts and index page."
+    },
+    {
+      "evidence_id": "speaker_notes_check",
+      "source": "node -e HTML speaker notes presence check",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output confirmed speaker-note related markup is present in all four generated HTML decks."
+    },
+    {
+      "evidence_id": "guide_and_sources",
+      "source": "presentation-agent/docs/scripts/2026-06-01-platform-presentation-pack.ko.md; presentation-agent/docs/source-notes/2026-06-01-platform-presentation-pack.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked Korean presentation guide and source notes, with English companions."
+    },
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-platform-presentation-pack.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked public web search reasoning summary for this presentation work."
+    },
+    {
+      "evidence_id": "presentation_tests",
+      "source": "PYTHONPATH=presentation-agent/src python3 -m unittest discover -s presentation-agent/tests",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output showed 10 tests passed, including a trailing-whitespace regression check for generated decks."
+    },
+    {
+      "evidence_id": "catalog_validation",
+      "source": "PYTHONPATH=presentation-agent/src python3 -m presentation_agent.catalog presentation-agent/data/reference-index/starter-reference-catalog.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output showed 62 catalog records and no validation error."
+    },
+    {
+      "evidence_id": "workspace_health",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --include-build",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Workspace health command passed 19 checks."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The work created an overall platform deck-spec with 15 slides.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["overall_deck_spec", "deck_counts"],
+      "verification_steps": ["Read the overall deck-spec and counted slides with a Node command."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The work created separate project deck-specs for agent-platform, workspace-monitor, and presentation-agent.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["project_deck_specs", "deck_counts"],
+      "verification_steps": ["Read the three project deck-spec files and counted slides with a Node command."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The work generated HTML presentation artifacts for the overall platform deck and each project deck, plus an index page.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["html_artifacts"],
+      "verification_steps": ["Ran the html_deck renderer for each deck and listed the artifact directory."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "All four generated HTML decks include speaker-note related markup.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["speaker_notes_check"],
+      "verification_steps": ["Checked generated HTML files with a Node command."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The presentation guide and source notes were added with Korean and English companion files.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["guide_and_sources"],
+      "verification_steps": ["Checked the script guide and source notes paths."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Presentation-agent tests, catalog validation, and the full workspace-health check passed.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["presentation_tests", "catalog_validation", "workspace_health"],
+      "verification_steps": ["Ran presentation-agent tests, catalog validation, and workspace-health --include-build."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "The deck quality and talk length are human-reviewable presentation judgments; the verified facts here cover files, structure, notes, and automated checks."
+  ],
+  "limitation_notes": [
+    "This work produced HTML decks. A new editable PPTX export was not generated for this pack."
+  ]
+}

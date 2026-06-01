@@ -1,0 +1,184 @@
+{
+  "schema_version": "2026-06-01",
+  "title": "프로젝트 발표: workspace-monitor",
+  "language": "ko",
+  "theme": {
+    "name": "monitoring-room",
+    "palette": {
+      "background": "#eef2ff",
+      "surface": "#ffffff",
+      "ink": "#1e1b4b",
+      "muted": "#5b5f75",
+      "accent": "#4f46e5",
+      "warm": "#b45309",
+      "cool": "#0f766e",
+      "line": "#d7d7f0"
+    },
+    "typography": {
+      "display": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+      "body": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+    }
+  },
+  "script_collaboration": {
+    "script_owner": "presentation-script-agent",
+    "workflow": ["monitor_readme_review", "snapshot_story", "ui_sections", "deployment_notes"],
+    "handoff_contract": {
+      "script_agent_provides": ["monitor_claims", "speaker_notes", "source_paths"],
+      "deck_renderer_provides": ["project deck", "presenter notes", "source footer"]
+    }
+  },
+  "reference_sources": [
+    "framework-slidev-official",
+    "framework-revealjs-official",
+    "templates-pitch",
+    "research-slideaudit"
+  ],
+  "slides": [
+    {
+      "id": "opening",
+      "layout": "hero",
+      "kicker": "workspace-monitor",
+      "title": "문서 기반 운영 상태를 웹에서 보이게 만든다",
+      "subtitle": "히스토리, 프로젝트, 요구사항, 스펙, 평가, 폴더 구조를 snapshot으로 모아 Next.js UI에서 탐색한다.",
+      "script_beat": "hook",
+      "speaker_notes": [
+        "workspace-monitor는 이 저장소의 관측성 프로젝트입니다.",
+        "문서와 히스토리가 많아질수록 사람이 한눈에 볼 UI가 필요합니다.",
+        "근거 문서: workspace-monitor/README.md"
+      ],
+      "evidence_sources": ["framework-slidev-official"]
+    },
+    {
+      "id": "why-monitor",
+      "layout": "split",
+      "kicker": "Why",
+      "title": "운영 구조는 보이지 않으면 유지되지 않는다",
+      "body": [
+        "완료 작업은 `_history`에 남지만, 폴더만 보면 전체 흐름을 빠르게 보기 어렵다.",
+        "요구사항과 스펙과 평가는 서로 다른 폴더에 흩어져 있다.",
+        "프로젝트가 늘수록 사람이 보는 navigation layer가 필요하다.",
+        "public 전환 시 Vercel 배포 가능한 형태가 필요하다."
+      ],
+      "visual": {
+        "type": "statement",
+        "label": "documentation needs observability"
+      },
+      "script_beat": "problem",
+      "speaker_notes": [
+        "이 프로젝트는 운영 문서가 많아질수록 생기는 탐색 문제를 해결합니다.",
+        "문서 자체를 옮기는 것이 아니라, snapshot으로 읽어 UI에서 보여줍니다.",
+        "근거 문서: workspace-monitor/README.md, workspace-monitor/specs/"
+      ],
+      "evidence_sources": ["templates-pitch"]
+    },
+    {
+      "id": "architecture",
+      "layout": "process",
+      "kicker": "Architecture",
+      "title": "collector가 repository를 읽고 정적 snapshot을 만든다",
+      "body": [
+        "`scripts/collect-workspace.mjs`: 문서와 구조 수집",
+        "`src/generated/workspace-snapshot.json`: commit되는 데이터",
+        "`public/workspace-snapshot.json`: 브라우저 접근용 복사본",
+        "`components/MonitorShell.tsx`: dashboard UI",
+        "`next.config.mjs`: static export"
+      ],
+      "visual": {
+        "type": "steps",
+        "steps": ["collect", "snapshot", "render", "export", "deploy"]
+      },
+      "script_beat": "architecture",
+      "speaker_notes": [
+        "핵심은 Next.js 앱이 런타임에 저장소를 읽는 것이 아니라, build 전에 snapshot을 만든다는 점입니다.",
+        "이 방식은 Vercel static export와 잘 맞고, public 전환 전 snapshot을 검토할 수 있습니다.",
+        "근거 문서: workspace-monitor/scripts/collect-workspace.mjs, README.md"
+      ],
+      "evidence_sources": ["framework-revealjs-official"]
+    },
+    {
+      "id": "ui-surfaces",
+      "layout": "evidence",
+      "kicker": "UI Surfaces",
+      "title": "대시보드는 히스토리, 프로젝트, 스펙, 구조를 동시에 보여준다",
+      "body": [
+        "historyDays 날짜 index",
+        "History 날짜/유형 filter",
+        "folderStructure 구조 지도",
+        "Markdown HTML preview",
+        "coordination and evaluation documents"
+      ],
+      "visual": {
+        "type": "metric",
+        "value": "5",
+        "label": "core monitor surfaces"
+      },
+      "script_beat": "features",
+      "speaker_notes": [
+        "이미 history timeline과 folder map이 들어가 있습니다.",
+        "이제 사용자는 날짜와 문서 종류, 프로젝트 경계를 기준으로 작업을 탐색할 수 있습니다.",
+        "근거 문서: workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "evidence_sources": ["research-slideaudit"]
+    },
+    {
+      "id": "public-boundary",
+      "layout": "split",
+      "kicker": "Public Boundary",
+      "title": "Vercel 배포 전에 snapshot 공개 범위를 반드시 확인한다",
+      "body": [
+        "private note와 secret이 포함되지 않았는지 확인한다.",
+        "raw prompt나 로컬 절대 경로가 공개 가능한지 본다.",
+        "공개하면 안 되는 문서는 collector 범위를 조정한다.",
+        "`npm run collect`와 `npm run build`를 다시 실행한다."
+      ],
+      "visual": {
+        "type": "statement",
+        "label": "public snapshot must be reviewed"
+      },
+      "script_beat": "risk_control",
+      "speaker_notes": [
+        "workspace-monitor는 public 배포를 염두에 두지만, 이 저장소는 현재 private입니다.",
+        "따라서 public 전환 전에는 snapshot을 반드시 검토해야 합니다.",
+        "근거 문서: workspace-monitor/README.md 공개 전 점검"
+      ],
+      "evidence_sources": ["templates-pitch"]
+    },
+    {
+      "id": "commands",
+      "layout": "process",
+      "kicker": "Commands",
+      "title": "운영 명령은 수집, 테스트, 타입체크, 빌드로 닫힌다",
+      "body": [
+        "`npm run collect`",
+        "`npm test`",
+        "`npm run check`",
+        "`npm run build`",
+        "`npm run dev`"
+      ],
+      "visual": {
+        "type": "steps",
+        "steps": ["collect", "test", "check", "build", "dev"]
+      },
+      "script_beat": "verification",
+      "speaker_notes": [
+        "workspace-monitor는 프론트엔드 프로젝트이므로 테스트와 typecheck와 build가 모두 중요합니다.",
+        "workspace-health는 이 흐름을 전체 저장소 검증에 포함합니다.",
+        "근거 문서: workspace-monitor/README.md Commands"
+      ],
+      "evidence_sources": ["framework-slidev-official"]
+    },
+    {
+      "id": "close",
+      "layout": "closing",
+      "kicker": "Next",
+      "title": "다음 단계는 히스토리 탐색을 더 질문 가능하게 만드는 것이다",
+      "subtitle": "요청-결과-평가-커밋이 UI에서 더 직접적으로 이어지면, 플랫폼의 장기 기억은 사람이 쓰기 쉬운 지식 지도에 가까워진다.",
+      "script_beat": "next",
+      "speaker_notes": [
+        "현재는 문서와 snapshot 중심입니다.",
+        "앞으로는 clarification_needed 질문, 진행 중 작업, private/public review 같은 운영 상태를 더 직접적으로 보여줄 수 있습니다."
+      ],
+      "evidence_sources": ["theory-duarte-resources"]
+    }
+  ]
+}

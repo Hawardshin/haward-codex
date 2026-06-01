@@ -25,6 +25,8 @@ presentation-agent/
     design/               # 디자인 분류와 평가 기준
     requirements/         # 프로젝트 요구사항
     research/             # 조사 요약과 근거
+    scripts/              # 발표 순서, 대본 운영 가이드
+    source-notes/         # 발표 근거와 출처 노트
   specs/                  # spec-driven 산출물
   src/presentation_agent/ # Python-first 도구 코드
   tests/                  # 단위 테스트
@@ -41,6 +43,13 @@ presentation-agent/
 - `data/deck-specs/presentation-agent-kickoff.ko.json`: 발표 에이전트 소개용 샘플 deck spec.
 - `artifacts/html/presentation-agent-kickoff.html`: 생성된 HTML 발표 샘플.
 - `artifacts/pptx/presentation-agent-kickoff.pptx`: 생성된 PPTX 발표 샘플.
+- `data/deck-specs/workspace-platform-overview.ko.json`: 현재 저장소 플랫폼 전체 발표 deck spec.
+- `data/deck-specs/project-agent-platform.ko.json`: `agent-platform` 프로젝트별 발표 deck spec.
+- `data/deck-specs/project-workspace-monitor.ko.json`: `workspace-monitor` 프로젝트별 발표 deck spec.
+- `data/deck-specs/project-presentation-agent.ko.json`: `presentation-agent` 프로젝트별 발표 deck spec.
+- `artifacts/html/platform-presentation-pack-index.html`: 플랫폼 발표 팩 HTML 인덱스.
+- `docs/scripts/2026-06-01-platform-presentation-pack.ko.md`: 발표 순서와 사용 가이드.
+- `docs/source-notes/2026-06-01-platform-presentation-pack.ko.md`: 발표 근거와 출처 노트.
 
 ## 검증 명령
 
@@ -49,4 +58,5 @@ PYTHONPATH=presentation-agent/src python3 -m unittest discover -s presentation-a
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/presentation-agent-kickoff.ko.json presentation-agent/artifacts/html/presentation-agent-kickoff.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.artifact_pptx presentation-agent/data/deck-specs/presentation-agent-kickoff.ko.json outputs/manual-presentation-agent/presentations/presentation-agent-kickoff --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
+PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/workspace-platform-overview.ko.json presentation-agent/artifacts/html/workspace-platform-overview.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 ```
