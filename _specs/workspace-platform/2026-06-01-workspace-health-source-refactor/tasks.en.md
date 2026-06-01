@@ -8,4 +8,4 @@
 - [x] Document source structure in README files
 - [x] Run verification
 - [x] Save evaluation files
-- [ ] Commit and push
+- [x] Prepare commit and push record (`0c86d9e`)

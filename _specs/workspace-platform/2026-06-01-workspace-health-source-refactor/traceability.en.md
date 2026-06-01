@@ -10,4 +10,4 @@
 | Implementation | `_tools/workspace-health/src/workspace_health.py`, `_tools/workspace-health/src/workspace_health/` |
 | Tests | `_tools/workspace-health/tests/test_workspace_health.py` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-workspace-health-source-refactor.en.md` |
-| Commit | Pending |
+| Commit | `0c86d9e` |
