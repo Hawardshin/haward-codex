@@ -6,8 +6,8 @@
       "id": "codex-primary",
       "name": "Codex Primary",
       "role": "Primary repository coding and operations agent",
-      "status": "working",
-      "current_task": "2026-06-01-ppt-reference-expansion",
+      "status": "idle",
+      "current_task": "",
       "owner": "Codex",
       "notes": "Update this entry when another agent or thread starts work."
     }
@@ -17,12 +17,12 @@
       "id": "2026-06-01-ppt-reference-expansion",
       "title": "Expand PPT template references and imported PPT workflow",
       "project": "presentation-agent",
-      "status": "in_progress",
+      "status": "completed",
       "agent": "codex-primary",
       "priority": "high",
       "started_at": "2026-06-01",
       "updated_at": "2026-06-01",
-      "next_action": "Update presentation-agent catalog, PPT import workflow, requirements/spec/history/evaluation, then verify, commit, and push.",
+      "next_action": "No action. Future PPT reference work can add item-level licensed templates or analyze a user-provided PPT through imported-ppt-reference-workflow.",
       "blockers": [],
       "references": [
         "presentation-agent/data/reference-index/starter-reference-catalog.json",

@@ -9,4 +9,4 @@
 | 구현/문서 | `presentation-agent/data/reference-index/starter-reference-catalog.json`, `presentation-agent/docs/workflows/imported-ppt-reference-workflow.ko.md`, `presentation-agent/configs/collection-policy.json`, `presentation-agent/data/assets/raw/user-provided/README.ko.md` |
 | 시간 기록 | `_history/work-timings/2026/2026-06-01-ppt-reference-expansion.json` |
 | 평가 | `_history/evaluations/2026/2026-06-01-ppt-reference-expansion.ko.md` |
-| 커밋 | 예정 |
+| 커밋 | `d0ffdc1` pushed |

@@ -45,7 +45,7 @@
 
 - 상태: `ready_to_close`
 - blocking gap: 없음
-- 커밋/push: 예정
+- 커밋/push: `d0ffdc1` pushed
 - 개선 아이디어:
   - 사용자가 실제 PPT를 제공하면 PPTX theme/master/layout에서 design token을 추출하는 deterministic analyzer를 추가한다.
   - 첫 실제 PPT 분석 후 template-profile JSON schema와 renderer support를 추가한다.

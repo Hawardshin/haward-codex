@@ -45,7 +45,7 @@
 
 - Status: `ready_to_close`
 - Blocking gaps: none
-- Commit/push: pending
+- Commit/push: `d0ffdc1` pushed
 - Improvement ideas:
   - Add a deterministic analyzer for extracting design tokens from PPTX theme/master/layout files when the user provides a real deck.
   - Add a template-profile JSON schema and renderer support after the first real PPT analysis.

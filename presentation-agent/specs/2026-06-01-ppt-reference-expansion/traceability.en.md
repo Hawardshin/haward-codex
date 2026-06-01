@@ -9,4 +9,4 @@
 | Implementation/docs | `presentation-agent/data/reference-index/starter-reference-catalog.json`, `presentation-agent/docs/workflows/imported-ppt-reference-workflow.en.md`, `presentation-agent/configs/collection-policy.json`, `presentation-agent/data/assets/raw/user-provided/README.en.md` |
 | Timing record | `_history/work-timings/2026/2026-06-01-ppt-reference-expansion.json` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-ppt-reference-expansion.en.md` |
-| Commit | Pending |
+| Commit | `d0ffdc1` pushed |

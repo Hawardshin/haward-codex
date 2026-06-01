@@ -7,4 +7,4 @@
 - [x] Update README, taxonomy, and research notes
 - [x] Run verification
 - [x] Write evaluation
-- [ ] Commit and push
+- [x] Commit and push

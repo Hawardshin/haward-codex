@@ -8,13 +8,13 @@
 
 | ID | Name | Role | Status | Current Task |
 | --- | --- | --- | --- | --- |
-| codex-primary | Codex Primary | Primary repository coding and operations agent | working | 2026-06-01-ppt-reference-expansion |
+| codex-primary | Codex Primary | Primary repository coding and operations agent | idle |  |
 
 ## Tasks
 
 | ID | Title | Project | Status | Agent | Timing | Bottleneck | Next Action |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2026-06-01-ppt-reference-expansion | Expand PPT template references and imported PPT workflow | presentation-agent | in_progress | codex-primary | 16m 3s | Mode, boundary, and plan (5m 52s) | Update presentation-agent catalog, PPT import workflow, requirements/spec/history/evaluation, then verify, commit, and push. |
+| 2026-06-01-ppt-reference-expansion | Expand PPT template references and imported PPT workflow | presentation-agent | completed | codex-primary | 19m 55s | Mode, boundary, and plan (5m 52s) | No action. Future PPT reference work can add item-level licensed templates or analyze a user-provided PPT through imported-ppt-reference-workflow. |
 | 2026-06-01-deep-research-agent | Create deep-research-agent for detailed source-grounded reports | agent-platform | completed | codex-primary | 30m 16s | Implementation (11m 8s) | No action. Future deep research report work should use complete-deep-research after collecting sources, evidence, contradictions, citation audit notes, and report targets. |
 | 2026-06-01-work-timing-instrumentation | Add phase-level work timing and bottleneck visibility | _tools | completed | codex-primary | 20m 7s | Implementation (14m 1s) | No action. Future meaningful work should create or update a timing report and include timing_summary_targets when required by work mode. |
 | 2026-06-01-coding-project-bootstrap | Add technology-aware coding project bootstrap tool | _tools | completed | codex-primary | not recorded | not recorded | No action. Future new coding projects can run coding-project-bootstrap plan first, then create with --apply and optional --register. |
