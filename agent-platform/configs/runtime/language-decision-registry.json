@@ -56,9 +56,42 @@
       "id": "go_at_google",
       "title": "Go at Google: Language Design in the Service of Software Engineering",
       "url": "https://go.dev/talks/2012/splash.article",
-      "source_type": "official_article",
+      "source_type": "official_docs",
       "used_for": [
         "Go's large-scale software engineering, build, dependency, readability, and tooling rationale"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "adr_github",
+      "title": "Architectural Decision Records",
+      "url": "https://adr.github.io/",
+      "source_type": "web_source",
+      "used_for": [
+        "ADR pattern and architectural knowledge management references",
+        "decision record practice for runtime and architecture choices"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "thoughtworks_lightweight_adr",
+      "title": "Thoughtworks Technology Radar: Lightweight Architecture Decision Records",
+      "url": "https://www.thoughtworks.com/en-us/radar/techniques/lightweight-architecture-decision-records",
+      "source_type": "web_source",
+      "used_for": [
+        "lightweight architecture decision record practice",
+        "recording context and consequences for future maintainers"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "google_cloud_architecture_framework",
+      "title": "Google Cloud Well-Architected Framework",
+      "url": "https://docs.cloud.google.com/architecture/framework",
+      "source_type": "official_docs",
+      "used_for": [
+        "architecture documentation and design-decision guidance",
+        "quality attribute review framing"
       ],
       "last_checked": "2026-06-02"
     },
@@ -167,6 +200,16 @@
         "decision_gates",
         "non_goals"
       ]
+    },
+    {
+      "id": "research_design_before_runtime_choice",
+      "rule": "Runtime decisions must go through research, candidate architecture design, decision recording, and prototype measurement planning before implementation or dependency installation.",
+      "reason": "The user wants language choices to be evidence-backed and designed, not guessed from broad language reputation.",
+      "applies_to": [
+        "research_design_process",
+        "decision_record_contract",
+        "prototype_measurements"
+      ]
     }
   ],
   "field_guide": [
@@ -193,6 +236,21 @@
     {
       "field": "non_goals",
       "meaning": "Choices this registry explicitly prevents, such as premature language rewrites.",
+      "required": true
+    },
+    {
+      "field": "research_design_process",
+      "meaning": "Required stages that convert web/open-source research into a runtime design proposal.",
+      "required": true
+    },
+    {
+      "field": "decision_record_contract",
+      "meaning": "Minimum ADR-style fields required before accepting a runtime or language decision.",
+      "required": true
+    },
+    {
+      "field": "prototype_design_contract",
+      "meaning": "Minimum fields for a benchmark/prototype design before installing or implementing a runtime candidate.",
       "required": true
     }
   ],
@@ -343,6 +401,115 @@
       "default_answer": "Choose the simplest runtime that passes release gates and performance targets."
     }
   ],
+  "research_design_process": [
+    {
+      "stage": "problem_framing",
+      "required_outputs": [
+        "component_boundary",
+        "user_workflow_impact",
+        "quality_attributes",
+        "constraints",
+        "non_goals"
+      ],
+      "notes": "Define whether the issue is UI, agent logic, local service, desktop shell, native command, or hot path before comparing languages."
+    },
+    {
+      "stage": "source_research",
+      "required_outputs": [
+        "official_docs",
+        "architecture_references",
+        "open_source_examples",
+        "issue_discussion_signals",
+        "contrary_sources"
+      ],
+      "notes": "Use official docs as factual anchors. Use community and issue discussions as adoption, risk, and edge-case signals."
+    },
+    {
+      "stage": "candidate_design",
+      "required_outputs": [
+        "candidate_runtime_options",
+        "process_boundaries",
+        "data_flow",
+        "security_boundary",
+        "dependency_and_packaging_impact",
+        "maintenance_cost"
+      ],
+      "notes": "Design at least two options when the decision has meaningful blast radius."
+    },
+    {
+      "stage": "adr_draft",
+      "required_outputs": [
+        "context",
+        "decision",
+        "considered_options",
+        "accepted_consequences",
+        "rejected_options",
+        "revisit_triggers"
+      ],
+      "notes": "Record important runtime decisions as ADR-style documents or project decision records."
+    },
+    {
+      "stage": "prototype_measurement_plan",
+      "required_outputs": [
+        "benchmark_scope",
+        "test_dataset",
+        "measurement_metrics",
+        "success_thresholds",
+        "rollback_plan"
+      ],
+      "notes": "Prototype only the smallest boundary needed to test the decision."
+    },
+    {
+      "stage": "implementation_release_gate",
+      "required_outputs": [
+        "install_audit_if_dependencies_change",
+        "validation_commands",
+        "security_review",
+        "license_review",
+        "decision_record_link"
+      ],
+      "notes": "Do not install or implement a new runtime path until the decision and rollback are explicit."
+    }
+  ],
+  "decision_record_contract": {
+    "template_paths": [
+      "_templates/runtime-language-decision/runtime-language-decision.ko.md",
+      "_templates/runtime-language-decision/runtime-language-decision.en.md"
+    ],
+    "required_fields": [
+      "decision_id",
+      "status",
+      "date",
+      "component_boundary",
+      "problem_statement",
+      "quality_attributes",
+      "source_summary",
+      "candidate_options",
+      "selected_option_or_deferred_reason",
+      "consequences",
+      "prototype_measurement_plan",
+      "install_audit_plan",
+      "rollback_plan",
+      "revisit_triggers"
+    ],
+    "storage_rule": "Store shared runtime decisions under _specs/workspace-platform/<date-runtime-topic>/ or project-specific docs/decisions/ when the decision belongs to a project."
+  },
+  "prototype_design_contract": {
+    "minimum_scope": "Prototype the smallest isolated boundary that can answer the runtime question.",
+    "required_fields": [
+      "candidate_runtime",
+      "prototype_owner_project",
+      "touch_paths",
+      "dependency_installation_status",
+      "dataset_or_fixture",
+      "metrics",
+      "commands",
+      "expected_thresholds",
+      "cleanup_and_rollback",
+      "result_record_target"
+    ],
+    "measurement_rule": "If the decision is performance-driven, do not accept the runtime change without at least one local measurement record or an explicit reason measurement is impossible."
+  },
   "prototype_measurements": [
     "cold_start_ms",
     "memory_mb_idle",

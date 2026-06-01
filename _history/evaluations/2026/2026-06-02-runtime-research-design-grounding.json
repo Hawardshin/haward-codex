@@ -1,0 +1,116 @@
+{
+  "task": "Ground factual claims for runtime language research and design workflow.",
+  "output_summary": "The workspace now requires runtime and language choices to continue from research into candidate design, ADR-style decision records, and prototype measurement plans before implementation or dependency installation.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request_summary",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable summary of the user's runtime research/design request."
+    },
+    {
+      "evidence_id": "runtime_registry",
+      "source": "agent-platform/configs/runtime/language-decision-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Self-documenting runtime/language decision config."
+    },
+    {
+      "evidence_id": "runtime_policy",
+      "source": "_docs/policies/runtime-language-selection-policy.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Workspace-level policy for runtime and language selection."
+    },
+    {
+      "evidence_id": "runtime_workflow",
+      "source": "_ops/workflows/64-runtime-language-research-design.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Executable workflow added for runtime/language research and design."
+    },
+    {
+      "evidence_id": "runtime_prompt",
+      "source": "_ops/prompts/94-runtime-language-research-design.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Reusable prompt added for runtime/language research and design."
+    },
+    {
+      "evidence_id": "decision_templates",
+      "source": "_templates/runtime-language-decision/",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Korean and English ADR-style runtime decision templates."
+    },
+    {
+      "evidence_id": "adr_github",
+      "source": "https://adr.github.io/",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Public ADR reference hub used for architecture decision record framing."
+    },
+    {
+      "evidence_id": "thoughtworks_lightweight_adr",
+      "source": "https://www.thoughtworks.com/en-us/radar/techniques/lightweight-architecture-decision-records",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Thoughtworks Technology Radar note on lightweight ADR practice."
+    },
+    {
+      "evidence_id": "google_cloud_architecture_framework",
+      "source": "https://docs.cloud.google.com/architecture/framework",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Google Cloud architecture framework reference."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The user asked that runtime/language choices include both research and design.",
+      "claim_type": "user_instruction",
+      "support_level": "supported",
+      "evidence_ids": ["user_request_summary"],
+      "verification_steps": ["Inspect UR-2026-06-02-007 in the user request summary."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The runtime language registry now includes a research design process plus decision record and prototype design contracts.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["runtime_registry"],
+      "verification_steps": ["Inspect research_design_process, decision_record_contract, and prototype_design_contract in language-decision-registry.json."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The workspace now has a workflow, reusable prompt, and templates for runtime/language research and design before implementation.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["runtime_workflow", "runtime_prompt", "decision_templates"],
+      "verification_steps": ["Inspect workflow 64, prompt 94, and the runtime-language-decision templates."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The research/design workflow is grounded in ADR and architecture documentation references, not only local preference.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": ["adr_github", "thoughtworks_lightweight_adr", "google_cloud_architecture_framework", "runtime_policy"],
+      "verification_steps": ["Inspect the web search record and policy section that links ADR and architecture documentation sources to the workflow."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "This task designed the decision workflow; it did not select a concrete runtime for a new component.",
+    "Future concrete runtime choices still need component-specific source review and prototype measurements."
+  ],
+  "limitation_notes": [
+    "No Rust, Go, Tauri, Wails, Electron, or other runtime dependency was installed.",
+    "No benchmark or prototype was run in this task."
+  ]
+}

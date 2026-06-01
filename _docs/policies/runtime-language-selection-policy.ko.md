@@ -20,6 +20,17 @@
 4. Rust/Go/Electron 의존성을 실제 설치하면 설치 감사 기록과 rollback 계획을 남긴다.
 5. 커뮤니티 반응, GitHub star, Reddit 의견은 채택/위험 신호로만 보고, 공식 문서와 로컬 prototype 측정으로 결정한다.
 
+## 조사와 설계 절차
+
+런타임 선택은 조사에서 끝나지 않고 설계 기록으로 이어져야 한다.
+
+1. `agent-platform/configs/runtime/language-decision-registry.json`의 `research_design_process`를 따른다.
+2. 공식 문서, architecture/ADR 참고, 유지보수되는 오픈소스 구현, 이슈/토론 신호, 반대 사례를 분리해 조사한다.
+3. 의미 있는 blast radius가 있으면 최소 두 후보 설계를 비교한다.
+4. `_templates/runtime-language-decision/` 템플릿으로 ADR-style 결정 기록을 남긴다.
+5. 성능이나 packaging이 선택 이유라면 prototype measurement plan을 작성한 뒤 구현 또는 설치로 넘어간다.
+6. 실제 dependency 설치가 발생하면 설치 감사 기록을 먼저 만든다.
+
 ## 현재 추천
 
 현재 플랫폼에는 hybrid 구조가 맞다.

@@ -1,0 +1,68 @@
+{
+  "task_id": "2026-06-02-runtime-research-design",
+  "title": "Runtime language research and design process",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked ADR, Thoughtworks lightweight ADR, and architecture documentation references."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured"
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added REQ-WS-052 and spec artifacts."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Workflow, prompt, template, and registry design",
+      "status": "completed",
+      "measurement": "not_measured"
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "JSON syntax, config contract, memory bootstrap, docs audit, naming audit, structure audit, workspace index, task board, workspace monitor collect, grounding, evaluator, work-timer, and git diff checks passed."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Grounding check returned ready_to_publish and work evaluator returned ready_to_close."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured"
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "Timing started after work began, so exact durations are unavailable. Main cost is governance/documentation artifact creation.",
+    "improvement_candidates": [
+      "Create a generator for repetitive requirement/spec/evaluation bundles.",
+      "Use the new runtime decision template for future concrete runtime decisions instead of rebuilding structure."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-runtime-research-design.ko.md",
+    "_research/topics/runtime-language/2026-06-02-runtime-research-design.ko.md",
+    "_specs/workspace-platform/2026-06-02-runtime-research-design/plan.ko.md"
+  ]
+}

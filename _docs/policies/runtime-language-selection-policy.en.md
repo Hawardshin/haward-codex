@@ -20,6 +20,17 @@ The platform should not force every component into one language. Agent logic, we
 4. If Rust, Go, or Electron dependencies are actually installed, record installation audit and rollback plans.
 5. Community reactions, GitHub stars, and Reddit opinions are adoption or risk signals only; decisions need official docs and local prototype measurements.
 
+## Research And Design Procedure
+
+Runtime selection must move from research into a design record.
+
+1. Follow `research_design_process` in `agent-platform/configs/runtime/language-decision-registry.json`.
+2. Separate official docs, architecture/ADR references, maintained open-source implementations, issue/discussion signals, and contrary examples.
+3. Compare at least two candidate designs when blast radius is meaningful.
+4. Record an ADR-style decision using `_templates/runtime-language-decision/`.
+5. If performance or packaging is a reason for the choice, write a prototype measurement plan before implementation or installation.
+6. If dependency installation occurs, create the installation audit record first.
+
 ## Current Recommendation
 
 The current platform should use a hybrid structure.
