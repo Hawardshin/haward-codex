@@ -15,6 +15,7 @@ The philosophical basis lives in [_philosophy/agent-operating-philosophy.en.md](
 - Use web search plus at least one other search channel.
 - The default research profile is `agent-platform/configs/research/research-agent-profile.json`.
 - Use `agent-platform/configs/research/source-discovery-registry.json` for broader search origins.
+- For marketing, market sizing, consumer insight, books/theory, surveys, or quantitative evidence, include `agent-platform/configs/research/marketing-evidence-profile.json` in `research_profile_paths`.
 - For Korean user reviews or local-market decisions, prioritize Naver Map, Kakao Map, Naver Blog/Search, and official pages, then score candidate quality with `_tools/korean-local-review/`.
 - Planning input must record `research_profile_paths`, `answer_engine_stages`, and `citation_requirements`.
 - Record material source values, config values, claims, review signals, assumptions, and planning constraints in `source_value_provenance`.
@@ -35,6 +36,7 @@ The philosophical basis lives in [_philosophy/agent-operating-philosophy.en.md](
 - Repository search: existing policy, history, project docs
 - Official documentation search: APIs, libraries, product specs
 - Paper or technical reference search: agent design and retrieval/reasoning patterns
+- Book, academic, survey, and statistics search: theory frameworks, marketing research, public surveys, official statistics, and market-size evidence
 - Code/package search: implementation examples, maintenance status, licenses
 
 ## Output

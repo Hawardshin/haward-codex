@@ -1,0 +1,827 @@
+{
+  "schema_version": "2026-06-01",
+  "name": "marketing-evidence-profile",
+  "purpose": "Research profile for marketing, market sizing, consumer insight, business planning, theory/book grounding, survey evidence, and quantitative claims.",
+  "reader_guide": {
+    "summary": "Use this profile when a task needs marketer-style desk research, marketing theory from books or journals, survey-backed claims, market-size estimates, consumer behavior data, or quantitative evidence.",
+    "how_to_read": [
+      "Read evidence_lanes first to decide which evidence families must be searched.",
+      "Use source_groups as search origins, not proof; open exact reports, methods pages, datasets, or book records before citing.",
+      "Use quantitative_evidence_fields whenever a number, percentage, ranking, market size, spend figure, or survey result is extracted.",
+      "Use quality_scoring to decide whether a source can support a claim or only serve as discovery/context.",
+      "Use recommended_search_sequences to choose a human-like search order by task type."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-06-01",
+    "update_triggers": [
+      "A marketing, consumer insight, market sizing, or go-to-market research task repeatedly needs stronger quantitative evidence.",
+      "A new survey source, public dataset, industry report, book index, or marketing journal becomes useful.",
+      "A source becomes stale, paywalled, unavailable, sponsored without methodology, or unreliable.",
+      "A repeated marketing plan lacks numeric provenance, survey methodology, or theory/book grounding.",
+      "Korean market research needs additional Korean public data, survey, or consumer review channels."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "source_registry",
+      "title": "Source Registry",
+      "path": "agent-platform/configs/research/source-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "source type taxonomy",
+        "source reliability framing"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "research_agent_profile",
+      "title": "Research Agent Profile",
+      "path": "agent-platform/configs/research/research-agent-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "answer-engine stages",
+        "citation grounding and skeptic review"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "source_discovery_registry",
+      "title": "Source Discovery Registry",
+      "path": "agent-platform/configs/research/source-discovery-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "broad source discovery",
+        "regional and paper search origins"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "ama_journal_of_marketing_research",
+      "title": "Journal of Marketing Research",
+      "url": "https://www.ama.org/journal-of-marketing-research/",
+      "source_type": "paper",
+      "used_for": [
+        "marketing research concepts",
+        "marketing research methods and applications",
+        "peer-reviewed marketing evidence"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "ama_jmr_research_transparency",
+      "title": "Journal of Marketing Research Policy for Research Transparency",
+      "url": "https://www.ama.org/journal-of-marketing-research-policy-for-research-transparency/",
+      "source_type": "official",
+      "used_for": [
+        "method disclosure expectations",
+        "data, code, and methodological material expectations"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "aapor_transparency_initiative",
+      "title": "AAPOR Transparency Initiative",
+      "url": "https://aapor.org/standards-and-ethics/transparency-initiative/",
+      "source_type": "standard",
+      "used_for": [
+        "survey method disclosure checklist",
+        "sponsor, population, instrument, mode, and field-date requirements"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "aapor_best_practices",
+      "title": "AAPOR Best Practices for Survey Research",
+      "url": "https://aapor.org/standards-and-ethics/best-practices/",
+      "source_type": "standard",
+      "used_for": [
+        "survey planning and analysis quality checks",
+        "nonprobability survey caution"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "esomar_online_sample_quality",
+      "title": "ESOMAR/GRBN Guideline on Online Sample Quality",
+      "url": "https://api.esomar.org/what-we-do/code-guidelines/esomargrbn-guideline-on-online-sample-quality",
+      "source_type": "standard",
+      "used_for": [
+        "online panel and sample quality checks",
+        "fraud prevention, respondent validation, sampling, weighting, and screening transparency"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "pew_methods",
+      "title": "Pew Research Center Methods",
+      "url": "https://www.pewresearch.org/our-methods/",
+      "source_type": "official",
+      "used_for": [
+        "survey methodology examples",
+        "public survey method disclosure"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "pew_us_survey_methodology",
+      "title": "Pew Research Center U.S. Survey Methodology",
+      "url": "https://www.pewresearch.org/u-s-survey-methodology/",
+      "source_type": "official",
+      "used_for": [
+        "total survey error framing",
+        "probability-based panel methodology"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "gallup_methodology_center",
+      "title": "Gallup Methodology Center",
+      "url": "https://www.gallup.com/178685/methodology-center.aspx",
+      "source_type": "official",
+      "used_for": [
+        "survey trend data methodology",
+        "polling method reference"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "cmo_survey",
+      "title": "The CMO Survey",
+      "url": "https://cmosurvey.org/",
+      "source_type": "survey_dataset",
+      "used_for": [
+        "marketing leader survey evidence",
+        "marketing spend, analytics, strategy, and CMO sentiment trends"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "deloitte_cmo_survey",
+      "title": "Deloitte CMO Survey",
+      "url": "https://www.deloitte.com/us/en/programs/chief-marketing-officer/articles/cmo-survey.html",
+      "source_type": "market_report",
+      "used_for": [
+        "current CMO survey reporting",
+        "marketing leadership trend context"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "datareportal",
+      "title": "DataReportal Global Digital Insights",
+      "url": "https://datareportal.com/",
+      "source_type": "market_report",
+      "used_for": [
+        "digital adoption, social media, ecommerce, and digital marketing statistics",
+        "global and country-level digital trend discovery"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "world_bank_indicators_api",
+      "title": "World Bank Indicators API",
+      "url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/889392",
+      "source_type": "official_statistics",
+      "used_for": [
+        "country-level official indicators",
+        "market macro context and population/economic denominators"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "google_books_api",
+      "title": "Google Books API",
+      "url": "https://developers.google.com/books/docs/v1/using",
+      "source_type": "book",
+      "used_for": [
+        "book discovery",
+        "theory source bibliographic metadata"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "open_library_api",
+      "title": "Open Library APIs",
+      "url": "https://openlibrary.org/developers/api",
+      "source_type": "book",
+      "used_for": [
+        "book and author metadata",
+        "open bibliographic discovery"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "crossref_rest_api",
+      "title": "Crossref REST API",
+      "url": "https://www.production.crossref.org/documentation/retrieve-metadata/rest-api/",
+      "source_type": "paper",
+      "used_for": [
+        "DOI metadata",
+        "journal article and citation metadata discovery"
+      ],
+      "last_checked": "2026-06-01"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "separate_evidence_lanes",
+      "rule": "Marketing research must separate theory/book grounding, survey evidence, public statistics, commercial market reports, platform data, and qualitative/user signals before synthesis.",
+      "reason": "Each lane answers a different question and has different failure modes.",
+      "applies_to": [
+        "evidence_lanes",
+        "recommended_search_sequences"
+      ]
+    },
+    {
+      "id": "numbers_need_full_provenance",
+      "rule": "Every extracted quantitative value must record unit, geography, timeframe, population/base, method, source, access date, and comparability notes when available.",
+      "reason": "Marketing numbers are often reused out of context, which causes misleading plans.",
+      "applies_to": [
+        "quantitative_evidence_fields",
+        "extraction_template"
+      ]
+    },
+    {
+      "id": "survey_method_before_survey_claim",
+      "rule": "Survey claims must include method disclosure or be downgraded to weak evidence.",
+      "reason": "Sample source, population, mode, weighting, field dates, and sponsor strongly affect interpretation.",
+      "applies_to": [
+        "quality_scoring",
+        "survey_methodology_checks"
+      ]
+    },
+    {
+      "id": "books_ground_theory_not_current_market_size",
+      "rule": "Books and classic frameworks can ground concepts and theory, but current market facts need fresh data or official statistics.",
+      "reason": "Books are valuable for theory but can be stale for current market behavior.",
+      "applies_to": [
+        "source_groups.marketing_theory_and_books",
+        "evidence_lanes"
+      ]
+    },
+    {
+      "id": "commercial_reports_need_sponsorship_checks",
+      "rule": "Commercial reports and vendor surveys must record sponsor, business model, methodology disclosure, sample, and paywall limitations.",
+      "reason": "Industry reports can contain useful numbers but often mix evidence, sales positioning, and proprietary methods.",
+      "applies_to": [
+        "source_groups.marketing_industry_reports",
+        "quality_scoring"
+      ]
+    },
+    {
+      "id": "market_size_requires_triangulation",
+      "rule": "Market sizing should triangulate at least three evidence families, normally official statistics, industry report data, and explicit assumptions or observed platform data.",
+      "reason": "TAM/SAM/SOM claims are frequently modeled estimates, not directly observed facts.",
+      "applies_to": [
+        "recommended_search_sequences",
+        "required_coverage"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "evidence_lanes",
+      "meaning": "Evidence families that should be searched and kept separate before synthesis.",
+      "required": true
+    },
+    {
+      "field": "source_groups",
+      "meaning": "Reusable source origins for marketing theory, survey quality, public statistics, industry reports, books, and platform data.",
+      "required": true
+    },
+    {
+      "field": "recommended_search_sequences",
+      "meaning": "Search order by marketing task type.",
+      "required": true
+    },
+    {
+      "field": "quantitative_evidence_fields",
+      "meaning": "Fields to record for any extracted number or survey result.",
+      "required": true
+    },
+    {
+      "field": "quality_scoring",
+      "meaning": "Scoring dimensions for deciding whether a source supports a claim or only provides context.",
+      "required": true
+    },
+    {
+      "field": "extraction_template",
+      "meaning": "Reusable shape for recording marketing evidence in plans, research notes, or evaluation inputs.",
+      "required": true
+    }
+  ],
+  "applies_to_research_types": [
+    "brand_strategy",
+    "business_plan",
+    "campaign_planning",
+    "consumer_insight",
+    "content_strategy",
+    "go_to_market",
+    "market_sizing",
+    "marketing_strategy",
+    "positioning",
+    "pricing_research",
+    "survey_backed_claims"
+  ],
+  "required_coverage": {
+    "must_record_research_profile_paths": true,
+    "must_record_source_value_provenance": true,
+    "must_record_quantitative_evidence_fields": true,
+    "must_record_survey_methodology_when_using_surveys": true,
+    "must_record_sponsor_and_conflict_notes": true,
+    "must_record_comparability_notes_for_time_series": true,
+    "min_distinct_evidence_lanes_for_substantial_work": 3,
+    "market_sizing_min_evidence_lanes": [
+      "official_statistics_or_public_dataset",
+      "industry_or_commercial_report",
+      "explicit_model_assumptions_or_platform_data"
+    ],
+    "survey_claim_required_fields": [
+      "population",
+      "sample_size",
+      "sampling_method",
+      "field_dates",
+      "mode",
+      "weighting",
+      "sponsor_or_funder",
+      "question_wording_or_instrument"
+    ]
+  },
+  "evidence_lanes": [
+    {
+      "id": "theory_and_books",
+      "use_for": [
+        "conceptual frameworks",
+        "classic marketing theory",
+        "strategy language",
+        "model selection"
+      ],
+      "preferred_source_types": [
+        "book",
+        "paper",
+        "standard"
+      ],
+      "limits": [
+        "Do not use as proof of current market size or current consumer behavior without fresh data."
+      ]
+    },
+    {
+      "id": "survey_and_panel_data",
+      "use_for": [
+        "attitudes",
+        "preferences",
+        "awareness",
+        "self-reported behavior",
+        "marketing leader sentiment"
+      ],
+      "preferred_source_types": [
+        "survey_dataset",
+        "market_report",
+        "official"
+      ],
+      "limits": [
+        "Requires methodology disclosure and population fit."
+      ]
+    },
+    {
+      "id": "official_statistics_or_public_dataset",
+      "use_for": [
+        "population denominator",
+        "income and spending context",
+        "industry baseline",
+        "regional market context"
+      ],
+      "preferred_source_types": [
+        "official_statistics",
+        "official"
+      ],
+      "limits": [
+        "May not map directly to target audience or product category."
+      ]
+    },
+    {
+      "id": "industry_or_commercial_report",
+      "use_for": [
+        "category trends",
+        "ad spend",
+        "digital behavior",
+        "benchmark numbers",
+        "market narratives"
+      ],
+      "preferred_source_types": [
+        "market_report",
+        "analysis"
+      ],
+      "limits": [
+        "Check sponsorship, methodology, paywall limits, and whether estimates are modeled."
+      ]
+    },
+    {
+      "id": "platform_and_behavioral_data",
+      "use_for": [
+        "search interest",
+        "ad reach estimates",
+        "traffic signals",
+        "social behavior",
+        "content performance benchmarks"
+      ],
+      "preferred_source_types": [
+        "official",
+        "market_report",
+        "analysis"
+      ],
+      "limits": [
+        "Platform estimates may be modeled and not comparable across platforms."
+      ]
+    },
+    {
+      "id": "qualitative_user_and_community_signal",
+      "use_for": [
+        "customer language",
+        "objections",
+        "review themes",
+        "pain-point discovery"
+      ],
+      "preferred_source_types": [
+        "community",
+        "social",
+        "analysis"
+      ],
+      "limits": [
+        "Use as discovery or voice-of-customer signal, not standalone proof."
+      ]
+    }
+  ],
+  "source_groups": {
+    "marketing_theory_and_books": [
+      {
+        "name": "Journal of Marketing Research",
+        "url": "https://www.ama.org/journal-of-marketing-research/",
+        "source_type": "paper",
+        "use_for": "peer-reviewed marketing methods, empirical research, and marketing research concepts",
+        "evidence_role": "theory_and_empirical"
+      },
+      {
+        "name": "Journal of Marketing",
+        "url": "https://www.ama.org/journal-of-marketing/",
+        "source_type": "paper",
+        "use_for": "peer-reviewed marketing strategy and market-facing research",
+        "evidence_role": "theory_and_empirical"
+      },
+      {
+        "name": "Google Books API",
+        "url": "https://developers.google.com/books/docs/v1/using",
+        "source_type": "book",
+        "use_for": "book discovery by title, author, ISBN, subject, and publisher",
+        "evidence_role": "bibliographic_discovery"
+      },
+      {
+        "name": "Open Library APIs",
+        "url": "https://openlibrary.org/developers/api",
+        "source_type": "book",
+        "use_for": "book, author, works, editions, and subject metadata",
+        "evidence_role": "bibliographic_discovery"
+      },
+      {
+        "name": "Crossref REST API",
+        "url": "https://www.production.crossref.org/documentation/retrieve-metadata/rest-api/",
+        "source_type": "paper",
+        "use_for": "DOI and scholarly metadata discovery",
+        "evidence_role": "scholarly_metadata"
+      }
+    ],
+    "survey_methodology_quality": [
+      {
+        "name": "AAPOR Transparency Initiative",
+        "url": "https://aapor.org/standards-and-ethics/transparency-initiative/",
+        "source_type": "standard",
+        "use_for": "survey disclosure requirements and transparency checks",
+        "evidence_role": "method_quality_standard"
+      },
+      {
+        "name": "AAPOR Best Practices for Survey Research",
+        "url": "https://aapor.org/standards-and-ethics/best-practices/",
+        "source_type": "standard",
+        "use_for": "survey planning, analysis, and nonprobability caution",
+        "evidence_role": "method_quality_standard"
+      },
+      {
+        "name": "ESOMAR/GRBN Guideline on Online Sample Quality",
+        "url": "https://api.esomar.org/what-we-do/code-guidelines/esomargrbn-guideline-on-online-sample-quality",
+        "source_type": "standard",
+        "use_for": "online sample validation, fraud prevention, engagement, exclusions, sampling, and weighting",
+        "evidence_role": "method_quality_standard"
+      },
+      {
+        "name": "Pew Research Center Methods",
+        "url": "https://www.pewresearch.org/our-methods/",
+        "source_type": "official",
+        "use_for": "survey methodology examples and public polling method disclosure",
+        "evidence_role": "method_example"
+      },
+      {
+        "name": "Gallup Methodology Center",
+        "url": "https://www.gallup.com/178685/methodology-center.aspx",
+        "source_type": "official",
+        "use_for": "polling method and trend-data methodology reference",
+        "evidence_role": "method_example"
+      }
+    ],
+    "public_survey_and_opinion_data": [
+      {
+        "name": "Pew Research Center",
+        "url": "https://www.pewresearch.org/",
+        "source_type": "survey_dataset",
+        "use_for": "public opinion, demographics, media, technology, and social trend surveys",
+        "evidence_role": "survey_evidence"
+      },
+      {
+        "name": "Gallup",
+        "url": "https://www.gallup.com/",
+        "source_type": "survey_dataset",
+        "use_for": "public opinion, workplace, global trend, and panel survey evidence",
+        "evidence_role": "survey_evidence"
+      },
+      {
+        "name": "The CMO Survey",
+        "url": "https://cmosurvey.org/",
+        "source_type": "survey_dataset",
+        "use_for": "marketing leader sentiment, spend, analytics, and strategy survey data",
+        "evidence_role": "marketing_leader_survey"
+      },
+      {
+        "name": "OpenSurvey",
+        "url": "https://blog.opensurvey.co.kr/",
+        "source_type": "survey_dataset",
+        "use_for": "Korean consumer trend reports and survey-backed market insights",
+        "evidence_role": "korean_consumer_survey_signal"
+      }
+    ],
+    "quantitative_public_statistics": [
+      {
+        "name": "World Bank Indicators API",
+        "url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/889392",
+        "source_type": "official_statistics",
+        "use_for": "country-level macro, population, development, and economic indicators",
+        "evidence_role": "official_statistics"
+      },
+      {
+        "name": "OECD Data",
+        "url": "https://data.oecd.org/",
+        "source_type": "official_statistics",
+        "use_for": "OECD country statistics and market context indicators",
+        "evidence_role": "official_statistics"
+      },
+      {
+        "name": "FRED",
+        "url": "https://fred.stlouisfed.org/",
+        "source_type": "official_statistics",
+        "use_for": "U.S. and international economic time series",
+        "evidence_role": "official_statistics"
+      },
+      {
+        "name": "U.S. Census Data",
+        "url": "https://data.census.gov/",
+        "source_type": "official_statistics",
+        "use_for": "U.S. population, household, business, and demographic denominators",
+        "evidence_role": "official_statistics"
+      },
+      {
+        "name": "KOSIS",
+        "url": "https://kosis.kr/",
+        "source_type": "official_statistics",
+        "use_for": "Korean official statistics for population, household, industry, and regional context",
+        "evidence_role": "korean_official_statistics"
+      },
+      {
+        "name": "Bank of Korea ECOS",
+        "url": "https://ecos.bok.or.kr/",
+        "source_type": "official_statistics",
+        "use_for": "Korean macroeconomic and financial time series",
+        "evidence_role": "korean_official_statistics"
+      }
+    ],
+    "marketing_industry_reports": [
+      {
+        "name": "DataReportal",
+        "url": "https://datareportal.com/",
+        "source_type": "market_report",
+        "use_for": "global and country-level digital, social, ecommerce, and ad-related statistics",
+        "evidence_role": "market_report"
+      },
+      {
+        "name": "Deloitte CMO Survey",
+        "url": "https://www.deloitte.com/us/en/programs/chief-marketing-officer/articles/cmo-survey.html",
+        "source_type": "market_report",
+        "use_for": "current CMO survey reporting and marketing leadership trends",
+        "evidence_role": "market_report"
+      },
+      {
+        "name": "HubSpot State of Marketing",
+        "url": "https://www.hubspot.com/state-of-marketing",
+        "source_type": "market_report",
+        "use_for": "marketing team, content, automation, and channel trend discovery",
+        "evidence_role": "vendor_report"
+      },
+      {
+        "name": "Salesforce State of Marketing",
+        "url": "https://www.salesforce.com/resources/research-reports/state-of-marketing/",
+        "source_type": "market_report",
+        "use_for": "marketing operations, CRM, AI, and customer engagement trend discovery",
+        "evidence_role": "vendor_report"
+      },
+      {
+        "name": "NielsenIQ Insights",
+        "url": "https://nielseniq.com/global/en/insights/",
+        "source_type": "market_report",
+        "use_for": "consumer goods, retail, shopper, and category trend context",
+        "evidence_role": "commercial_research"
+      },
+      {
+        "name": "Kantar Insights",
+        "url": "https://www.kantar.com/inspiration",
+        "source_type": "market_report",
+        "use_for": "brand, media, consumer, and shopper insight context",
+        "evidence_role": "commercial_research"
+      }
+    ],
+    "platform_and_behavioral_data": [
+      {
+        "name": "Google Trends",
+        "url": "https://trends.google.com/",
+        "source_type": "analysis",
+        "use_for": "relative search interest and demand signal discovery",
+        "evidence_role": "platform_signal"
+      },
+      {
+        "name": "Google Ads Keyword Planner",
+        "url": "https://ads.google.com/home/tools/keyword-planner/",
+        "source_type": "official",
+        "use_for": "search volume and keyword planning signals when account access exists",
+        "evidence_role": "platform_signal"
+      },
+      {
+        "name": "Meta Ads Library",
+        "url": "https://www.facebook.com/ads/library/",
+        "source_type": "official",
+        "use_for": "active ad creative and political/social issue ad transparency discovery",
+        "evidence_role": "platform_signal"
+      },
+      {
+        "name": "TikTok Creative Center",
+        "url": "https://ads.tiktok.com/business/creativecenter/",
+        "source_type": "official",
+        "use_for": "TikTok creative, trend, and ad inspiration signals",
+        "evidence_role": "platform_signal"
+      }
+    ]
+  },
+  "recommended_search_sequences": [
+    {
+      "task_type": "marketing_strategy_research",
+      "sequence": [
+        "define target market, geography, time horizon, and decision question",
+        "search marketing theory and books for frameworks",
+        "search peer-reviewed marketing journals for empirical or methodological support",
+        "search public statistics for denominators and market context",
+        "search survey and panel sources for consumer or marketer attitudes",
+        "search industry reports for current category benchmarks",
+        "search qualitative/community/review sources for customer language and pain points",
+        "synthesize only after numeric provenance and source quality notes are recorded"
+      ]
+    },
+    {
+      "task_type": "market_sizing_or_tam_sam_som",
+      "sequence": [
+        "define market boundary, buyer segment, geography, period, currency, and unit",
+        "collect official population, business, household, income, or industry denominators",
+        "collect at least one industry or commercial report with methodology notes",
+        "collect platform, transaction, search, or behavioral proxies when relevant",
+        "record assumptions and model formula explicitly",
+        "triangulate high, base, and low estimates and mark modeled values as estimates"
+      ]
+    },
+    {
+      "task_type": "survey_backed_consumer_insight",
+      "sequence": [
+        "search public survey sources first",
+        "open methodology pages before extracting survey claims",
+        "record population, sample, mode, field dates, weighting, sponsor, and question wording",
+        "compare with at least one independent survey or public statistic when available",
+        "downgrade findings with missing method disclosure to weak evidence"
+      ]
+    },
+    {
+      "task_type": "book_or_theory_grounded_marketing_plan",
+      "sequence": [
+        "search book metadata through Google Books, Open Library, WorldCat, or publisher pages",
+        "search related peer-reviewed articles or DOI metadata through Crossref, AMA journals, OpenAlex, or Semantic Scholar",
+        "separate timeless theory from current market claims",
+        "use current survey, statistics, or market reports for present-day evidence"
+      ]
+    },
+    {
+      "task_type": "korean_market_research",
+      "sequence": [
+        "search Korean official statistics through KOSIS and relevant ministries when population or market baselines matter",
+        "search Korean consumer surveys and local market reports such as OpenSurvey when consumer behavior matters",
+        "search Naver Blog/Search, Naver Map, Kakao Map, or Korean communities when user language and local signals matter",
+        "cross-check global market reports only after Korean source coverage is recorded",
+        "record source limitations for sponsored posts, sample ambiguity, and local platform bias"
+      ]
+    }
+  ],
+  "quantitative_evidence_fields": [
+    "claim_or_metric",
+    "numeric_value",
+    "unit",
+    "denominator_or_base",
+    "geography",
+    "target_population",
+    "segment_or_category",
+    "time_period",
+    "collection_or_publication_date",
+    "source_url_or_path",
+    "source_type",
+    "methodology_url_or_note",
+    "sample_size",
+    "sampling_method",
+    "survey_mode",
+    "weighting_or_adjustment",
+    "question_wording_or_instrument",
+    "sponsor_or_funder",
+    "currency_and_exchange_rate_if_any",
+    "confidence_interval_or_margin_of_error_if_any",
+    "comparability_notes",
+    "extraction_note",
+    "access_date"
+  ],
+  "survey_methodology_checks": [
+    "Who sponsored and who conducted the research?",
+    "What population was studied?",
+    "What sampling frame and recruitment method were used?",
+    "What method and mode of data collection were used?",
+    "What were the field dates?",
+    "What was the sample size and subgroup base for the reported number?",
+    "Was weighting used, and what variables were used for weighting?",
+    "What exact question wording produced the metric?",
+    "Are response rates, panel source, or online sample quality controls disclosed?",
+    "Can the number be compared with prior waves, or did methodology change?"
+  ],
+  "quality_scoring": [
+    {
+      "dimension": "authority",
+      "high_signal": "official statistics agency, peer-reviewed journal, recognized survey organization, or disclosed primary data source",
+      "weak_signal": "anonymous blog, unsourced slide, press release without methodology"
+    },
+    {
+      "dimension": "methodology_disclosure",
+      "high_signal": "population, sample, mode, dates, weighting, instrument, sponsor, and limitations are disclosed",
+      "weak_signal": "only headline percentages are given"
+    },
+    {
+      "dimension": "recency_and_comparability",
+      "high_signal": "current publication and stable methodology across time",
+      "weak_signal": "old number reused without dates or method changes"
+    },
+    {
+      "dimension": "geographic_and_segment_fit",
+      "high_signal": "source population matches the target market and segment",
+      "weak_signal": "global or U.S. source used for Korean market without caveat"
+    },
+    {
+      "dimension": "independence_and_sponsorship",
+      "high_signal": "independent or transparent sponsor with disclosed conflicts",
+      "weak_signal": "vendor-funded report directly selling the solution category"
+    },
+    {
+      "dimension": "reproducibility",
+      "high_signal": "data table, API, downloadable dataset, appendix, or method document exists",
+      "weak_signal": "only a chart image or uncited claim exists"
+    },
+    {
+      "dimension": "triangulation",
+      "high_signal": "claim is consistent across official statistics, survey data, and market reports",
+      "weak_signal": "claim depends on one modeled estimate"
+    }
+  ],
+  "extraction_template": {
+    "evidence_id": "",
+    "claim_or_metric": "",
+    "numeric_value": "",
+    "unit": "",
+    "source_type": "",
+    "source_url_or_path": "",
+    "access_date": "",
+    "geography": "",
+    "target_population": "",
+    "time_period": "",
+    "methodology_summary": "",
+    "sample_size_or_base": "",
+    "sponsor_or_funder": "",
+    "quality_score_notes": "",
+    "comparability_notes": "",
+    "used_for_plan_step": "",
+    "limitations": ""
+  }
+}

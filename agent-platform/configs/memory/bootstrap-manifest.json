@@ -35,6 +35,7 @@
       "The notification settings, provider routing, or webhook secret handling contract changes.",
       "The root structure policy, local-only folder rule, or structure audit command changes.",
       "The AI assistant runtime adapter registry or tool-specific adapter files change.",
+      "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
       "The installation registry or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
@@ -305,6 +306,17 @@
       "last_checked": "2026-05-31"
     },
     {
+      "id": "marketing_evidence_profile",
+      "title": "Marketing Evidence Profile",
+      "path": "agent-platform/configs/research/marketing-evidence-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "marketing, consumer insight, market sizing, survey, book/theory, and quantitative evidence research",
+        "numeric value provenance and survey methodology requirements"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
       "id": "agentmemory_md",
       "title": "AgentMemory.md",
       "url": "https://agentmemory.md/",
@@ -505,6 +517,27 @@
       ]
     },
     {
+      "id": "marketing_evidence_profile_must_stay_discoverable",
+      "rule": "The marketing evidence profile must remain a warm memory anchor so future sessions can find books, theory, surveys, public statistics, market reports, and quantitative evidence with full numeric provenance.",
+      "reason": "The user explicitly asked for better methods to find marketer research materials, theoretical books, survey evidence, and quantitative numeric support.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "research-insight-planner-agent"
+      ]
+    },
+    {
+      "id": "marketing_numbers_need_context",
+      "rule": "Marketing and market-sizing numbers must preserve unit, denominator/base, geography, timeframe, target population, method, sample, sponsor, access date, and comparability notes before use as evidence.",
+      "reason": "Quantitative claims without context can mislead marketing plans and market sizing.",
+      "applies_to": [
+        "marketing_evidence_profile",
+        "source_value_provenance",
+        "plan_evidence"
+      ]
+    },
+    {
       "id": "web_search_records_must_stay_discoverable",
       "rule": "The web search record layer must remain a warm memory anchor and close-out target so future sessions can inspect prompt-level searches and public decision summaries.",
       "reason": "The user explicitly requires every prompt to start with web search and to leave a text record of the search process without storing raw internal reasoning.",
@@ -643,6 +676,7 @@
     "source_registry",
     "enterprise_source_registry",
     "source_discovery_registry",
+    "marketing_evidence_profile",
     "research_agent_profile",
     "coding_research_profile",
     "work_summary_policy",
@@ -676,6 +710,7 @@
     "source_registry",
     "enterprise_source_registry",
     "source_discovery_registry",
+    "marketing_evidence_profile",
     "research_agent_profile",
     "coding_research_profile",
     "work_summary_policy",
@@ -832,6 +867,14 @@
       "path": "agent-platform/configs/research/source-discovery-registry.json",
       "tier": "warm",
       "purpose": "Broad search-origin registry for global engineering blogs, Korean big-tech blogs, India technology sources, paper discovery, and Korean local review channels.",
+      "required": true,
+      "load_order": 23
+    },
+    {
+      "id": "marketing_evidence_profile",
+      "path": "agent-platform/configs/research/marketing-evidence-profile.json",
+      "tier": "warm",
+      "purpose": "Marketing, market sizing, consumer insight, survey, book/theory, and quantitative evidence profile with numeric provenance and methodology requirements.",
       "required": true,
       "load_order": 23
     },

@@ -11,12 +11,13 @@ This policy extends [_docs/web-first-work-policy.en.md](web-first-work-policy.en
 | Priority | Source Type | Examples | Use |
 | --- | --- | --- | --- |
 | 1 | Official or primary sources | Official docs, standards, RFCs, product blogs, release notes, API docs | Primary factual evidence |
-| 2 | Papers and academic sources | arXiv, ACL, NeurIPS, ACM, IEEE, academic PDFs | Methodology, performance, and limitations |
-| 3 | Open-source source material | GitHub repo, issue, PR, release, README, docs | Implementation and maintenance evidence |
-| 4 | International tech blogs | Engineering blogs, architecture posts, incident reviews, benchmark write-ups | Real-world patterns and tradeoffs |
-| 5 | Research and analysis articles | Industry reports, surveys, benchmark articles, long-form analysis | Market, case, and comparison context |
-| 6 | Community signals | Hacker News, Reddit, Stack Overflow, GitHub stars, article likes/bookmarks | Discovery and contrary signals |
-| 7 | Social and expert signals | LinkedIn posts, author profiles, conference talks, newsletters | Practitioner reaction and adoption signals |
+| 2 | Papers, academic sources, and books/theory | arXiv, ACL, NeurIPS, ACM, IEEE, academic PDFs, textbooks, publisher pages, library catalogs | Methodology, theory, frameworks, and limitations |
+| 3 | Official statistics, public data, and survey data | National statistics, World Bank/OECD, Census, KOSIS, Pew, Gallup, CMO Survey | Quantitative values, denominators, consumer/marketer attitudes |
+| 4 | Open-source source material | GitHub repo, issue, PR, release, README, docs | Implementation and maintenance evidence |
+| 5 | International tech blogs | Engineering blogs, architecture posts, incident reviews, benchmark write-ups | Real-world patterns and tradeoffs |
+| 6 | Market/industry reports and research articles | Industry reports, survey reports, benchmark articles, long-form analysis | Market, case, and comparison context |
+| 7 | Community signals | Hacker News, Reddit, Stack Overflow, GitHub stars, article likes/bookmarks | Discovery and contrary signals |
+| 8 | Social and expert signals | LinkedIn posts, author profiles, conference talks, newsletters | Practitioner reaction and adoption signals |
 
 ## Collection Rules
 
@@ -25,6 +26,9 @@ This policy extends [_docs/web-first-work-policy.en.md](web-first-work-policy.en
 - Actively include international tech blogs and foreign-language articles when useful.
 - When large-company engineering blogs, official research labs, architecture centers, or high-signal independent sources are useful, check `agent-platform/configs/research/enterprise-source-registry.json` first.
 - When broader search origins are needed, check `agent-platform/configs/research/source-discovery-registry.json` for global engineering blogs, Korean big-tech blogs, India technology sources, and paper discovery sources.
+- When marketing, market sizing, consumer insight, brand strategy, go-to-market, survey-backed claims, book/theory grounding, or quantitative evidence is needed, use `agent-platform/configs/research/marketing-evidence-profile.json`.
+- Marketing and market-sizing numbers must preserve value, unit, denominator/base, geography, timeframe, population, methodology, sample, sponsor/funder, access date, and comparability notes.
+- Survey evidence should record population, sample size, sampling method, field dates, mode, weighting, sponsor/funder, and question wording or instrument when available. Missing methodology downgrades the source to weak evidence.
 - For Korean user review or local-market decisions, prioritize Naver Map, Kakao Map, Naver Blog/Search, and official pages, then score candidate quality with `_tools/korean-local-review/`.
 - For famous or method-critical papers, combine Semantic Scholar, OpenAlex, arXiv, Papers with Code, and Connected Papers to check influence, freshness, code/data availability, and contrary papers.
 - Likes, shares, comments, GitHub stars, Hacker News points, and LinkedIn reactions are popularity or adoption signals, not standalone factual proof.
@@ -39,6 +43,8 @@ When research affects a plan or decision, try to collect:
 
 - at least one official or primary source
 - at least one paper, standard, or technical report
+- for marketing/market/consumer research, at least one book/theory or peer-reviewed marketing source
+- for marketing/market/consumer research, at least one official statistics, public survey, or quantitative source with survey methodology
 - at least two international tech blogs or field examples
 - at least one open-source repository or implementation example
 - at least one community or social signal
@@ -49,6 +55,8 @@ Simple local tasks do not need the full bundle. Still run web-first intake and r
 When collecting or reporting many sources becomes repetitive, use `_tools/source-collector/`. For Korean local reviews or Naver/Kakao-centered research, use `_tools/korean-local-review/`.
 
 For general research and planning, use `research-insight-planner-agent` with `agent-platform/configs/research/research-agent-profile.json` to record source ranking, evidence extraction, synthesis, citation grounding, and skeptic review.
+
+For marketing strategy, market sizing, consumer insight, books/theory, survey research, or quantitative evidence, include `marketing-evidence-profile.json` in `research_profile_paths`. Market sizing should triangulate at least three lanes: official statistics/public data, industry report evidence, and explicit assumptions or platform behavior data.
 
 For coding research, run `coding-research-agent` before completion to check sources, `source_types`, `reference_config_paths`, `technology_stack`, `technology_official_docs`, `stack_version_constraints`, `issue_discussion_sources`, `issue_discussion_notes`, `community_signal_notes`, `language_options`, `selected_language`, `language_decision_notes`, `architecture_theory_sources`, `architecture_practitioner_sources`, `architecture_tradeoff_notes`, `folder_structure_options`, `folder_structure_decision_notes`, `folder_semantics_notes`, `maintainability_notes`, `code_reference_sources`, `code_reference_notes`, options, recommendation, risks, validation plan, and standard post-research questions. Coding research needs at least three distinct non-`other` source types, must check technology-specific official docs or standards for major stack items such as Java/Spring Boot, C, React, and Next.js, must record language/runtime maintainability, theory-vs-practitioner architecture evidence, folder meaning, and ownership boundaries, must record the source settings it used through JSON configs under `agent-platform/configs/research/`, and must inspect relevant open-source structure, reference implementations, or well-written code/tests. When enterprise/high-quality sources are used, also include `enterprise-source-registry.json` in `reference_config_paths`.
 

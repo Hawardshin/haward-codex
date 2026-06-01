@@ -16,7 +16,8 @@
       "The user changes research depth, source, citation, or Perplexity-style answer-engine requirements.",
       "A new retrieval, grounding, or citation-verification reference becomes important enough for repeated use.",
       "Research-insight-planner-agent changes its required fields or answer-engine stage IDs.",
-      "Repeated research outputs show weak source ranking, missing citations, or unsupported synthesis."
+      "Repeated research outputs show weak source ranking, missing citations, or unsupported synthesis.",
+      "Marketing, consumer insight, market sizing, survey, book, or quantitative evidence tasks need stronger source coverage."
     ]
   },
   "reference_links": [
@@ -63,19 +64,30 @@
       ],
       "last_checked": "2026-05-31"
     },
-    {
-      "id": "source_discovery_registry",
-      "title": "Source discovery registry",
-      "path": "agent-platform/configs/research/source-discovery-registry.json",
+        {
+            "id": "source_discovery_registry",
+            "title": "Source discovery registry",
+            "path": "agent-platform/configs/research/source-discovery-registry.json",
       "source_type": "internal",
       "used_for": [
         "broader source origin discovery",
         "global engineering blogs, Korean technology blogs, India technology sources, paper discovery, and Korean local review channels"
-      ],
-      "last_checked": "2026-05-31"
-    },
-    {
-      "id": "perplexity_sonar_api",
+            ],
+            "last_checked": "2026-05-31"
+        },
+        {
+            "id": "marketing_evidence_profile",
+            "title": "Marketing Evidence Profile",
+            "path": "agent-platform/configs/research/marketing-evidence-profile.json",
+            "source_type": "internal",
+            "used_for": [
+                "marketing strategy, market sizing, consumer insight, book/theory, survey, and quantitative evidence research",
+                "numeric value provenance and survey methodology requirements"
+            ],
+            "last_checked": "2026-06-01"
+        },
+        {
+            "id": "perplexity_sonar_api",
       "title": "Perplexity Sonar API",
       "url": "https://docs.perplexity.ai/docs/sonar/quickstart",
       "source_type": "official",
@@ -256,8 +268,12 @@
     "answer_engine_design",
     "coding_preparation",
     "current_fact_checking",
-    "external_reference_collection",
-    "library_or_tool_selection",
+        "external_reference_collection",
+        "market_sizing",
+        "marketing_evidence_research",
+        "consumer_insight",
+        "survey_backed_claims",
+        "library_or_tool_selection",
     "platform_strategy",
     "project_planning",
     "technical_explanation"
@@ -362,28 +378,35 @@
   "source_quality_tiers": [
     {
       "id": "claim_authority",
-      "source_types": [
-        "official",
-        "paper",
-        "standard",
-        "open_source",
-        "reference_implementation"
-      ],
-      "use_for": [
-        "API behavior",
-        "current product facts",
-        "methodology",
-        "implementation structure"
-      ]
-    },
-    {
-      "id": "practical_context",
-      "source_types": [
-        "tech_blog",
-        "analysis",
-        "community",
-        "contrary",
-        "news"
+            "source_types": [
+                "official",
+                "paper",
+                "standard",
+                "book",
+                "official_statistics",
+                "survey_dataset",
+                "open_source",
+                "reference_implementation"
+            ],
+            "use_for": [
+                "API behavior",
+                "current product facts",
+                "methodology",
+                "implementation structure",
+                "theory grounding",
+                "survey-backed claims",
+                "quantitative denominators"
+            ]
+        },
+        {
+            "id": "practical_context",
+            "source_types": [
+                "tech_blog",
+                "analysis",
+                "market_report",
+                "community",
+                "contrary",
+                "news"
       ],
       "use_for": [
         "trade-offs",
@@ -409,8 +432,9 @@
     "Prefer official, primary, paper, standard, maintained open-source, or reference implementation sources for factual claims.",
     "Use technical blogs, analysis articles, and community sources to discover trade-offs and practical failure modes.",
     "Use enterprise-source-registry.json to seed large-company engineering, research-lab, architecture-center, and high-signal independent source searches.",
-    "Use source-discovery-registry.json to broaden search through global engineering blogs, Korean technology blogs, India technology sources, paper discovery, and Korean local review channels.",
-    "Use Naver Map, Kakao Map, Naver Blog/Search, official pages, and _tools/korean-local-review/ when Korean user review or local-market evidence matters.",
+        "Use source-discovery-registry.json to broaden search through global engineering blogs, Korean technology blogs, India technology sources, paper discovery, and Korean local review channels.",
+        "Use marketing-evidence-profile.json when the task needs marketing strategy, market sizing, consumer insight, survey-backed claims, books, public statistics, or quantitative evidence.",
+        "Use Naver Map, Kakao Map, Naver Blog/Search, official pages, and _tools/korean-local-review/ when Korean user review or local-market evidence matters.",
     "Use social or popularity signals only as adoption, discovery, or attention signals.",
     "Record source_value_provenance and plan_evidence before treating research as ready for planning.",
     "For current facts, compare publication dates, last-updated dates, and source freshness before synthesis.",

@@ -9,6 +9,7 @@ This folder stores configuration files that make source criteria and reference c
 - `source-discovery-registry.json`: broad search-origin registry for global technology blogs, Korean big-tech blogs, India technology sources, paper discovery, and Korean local review channels
 - `research-agent-profile.json`: core Perplexity-style answer-engine profile used by the research agent
 - `coding-research-profile.json`: default source coverage profile used by `coding-research-agent` before implementation
+- `marketing-evidence-profile.json`: research profile for marketing strategy, market sizing, consumer insight, books/theory, surveys, and quantitative evidence
 
 ## Usage Rules
 
@@ -18,6 +19,8 @@ This folder stores configuration files that make source criteria and reference c
 - `source_types` should use the source types defined in `source-registry.json`.
 - When enterprise/high-quality sources are used as research starting points, record `enterprise-source-registry.json` in `research_profile_paths` or `reference_config_paths`.
 - When broader source discovery, Korean user reviews, Korean technology blogs, India technology sources, or paper discovery sources are useful, check `source-discovery-registry.json`.
+- When marketing, market sizing, consumer insight, books/theory, survey research, or quantitative evidence is needed, check `marketing-evidence-profile.json` and record it in `research_profile_paths`.
+- Marketing numeric evidence must preserve value, unit, denominator/base, geography, timeframe, population, method, sample, sponsor, and comparability notes.
 - Tie material values and planning constraints to `source_value_provenance` and `plan_evidence`.
 - General research should record the `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, and `skeptic_review` stages plus citation requirements.
 - Before implementation, record `code_reference_sources` and `code_reference_notes` for open-source structure, reference implementations, real source code, and tests inspected.
@@ -33,7 +36,8 @@ This folder stores configuration files that make source criteria and reference c
   "research_profile_paths": [
     "agent-platform/configs/research/research-agent-profile.json",
     "agent-platform/configs/research/source-registry.json",
-    "agent-platform/configs/research/source-discovery-registry.json"
+    "agent-platform/configs/research/source-discovery-registry.json",
+    "agent-platform/configs/research/marketing-evidence-profile.json"
   ],
   "answer_engine_stages": [
     "query_understanding",
@@ -60,6 +64,10 @@ This folder stores configuration files that make source criteria and reference c
   ],
   "source_types": [
     "official",
+    "official_statistics",
+    "survey_dataset",
+    "book",
+    "market_report",
     "open_source",
     "reference_implementation",
     "tech_blog",
@@ -71,6 +79,9 @@ This folder stores configuration files that make source criteria and reference c
   ],
   "code_reference_notes": [
     "Repository structure, module boundaries, tests, error handling, and API usage patterns inspected."
+  ],
+  "quantitative_evidence_fields": [
+    "value, unit, base, geography, timeframe, population, method, sample, sponsor, access date"
   ]
 }
 ```

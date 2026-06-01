@@ -59,11 +59,14 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Save meaningful web search records under `_history/web-searches/YYYY/` with queries, checked sources, weak sources ignored, plan impact, uncertainty, and a public decision summary.
 - Do not store raw internal chain-of-thought in repository documents; store only verifiable public search reasoning summaries.
 - If the web search is irrelevant or unavailable, record that and continue with stronger local verification.
-- For research or planning work, collect broad high-authority sources: official docs, papers, standards, open-source repos, international tech blogs, analysis articles, community signals, social/expert signals, and contrary examples.
+- For research or planning work, collect broad high-authority sources: official docs, papers, standards, books, official statistics, survey datasets, market/industry reports, open-source repos, international tech blogs, analysis articles, community signals, social/expert signals, and contrary examples.
 - Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption or discovery signals, not standalone factual proof.
 - For important planning, do not rely only on the model's internal guess; use `research-insight-planner-agent` to combine web search with another search channel, derive insights, and plan validation.
 - Treat `research-insight-planner-agent` as a core Perplexity-style answer engine, not a simple search summarizer.
 - General research plans must record `research_profile_paths`, use `agent-platform/configs/research/research-agent-profile.json`, include all required `answer_engine_stages`, and record `citation_requirements`.
+- For marketing, consumer insight, market sizing, brand strategy, go-to-market, survey-backed claims, book/theory grounding, or quantitative evidence research, include `agent-platform/configs/research/marketing-evidence-profile.json` in `research_profile_paths`.
+- Marketing and market-sizing numbers must record value, unit, denominator/base, geography, timeframe, target population, methodology, sample, sponsor/funder, access date, and comparability notes before use as evidence.
+- Survey evidence must record population, sample size, sampling method, field dates, mode, weighting, sponsor/funder, and question wording or instrument when available; missing methodology downgrades the source to weak evidence.
 - Research agent stages are `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, and `skeptic_review`.
 - Rank sources before synthesis and treat citations as verification handles, not proof.
 - When using `research-insight-planner-agent`, set `plan_history_targets` and keep the plan process file updated if the plan changes.
@@ -140,7 +143,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Run `python3 _tools/structure-audit/src/structure_audit.py --check` after changing root folders, project registry, durable project top-level folders, reserved operational folders, runtime adapter folders, local-only folder rules, or generated-output rules.
 - Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, assistant runtime adapters, or platform memory anchors.
-- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json` from `agent-platform/` after changing core shared settings.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/research/marketing-evidence-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json` from `agent-platform/` after changing core shared settings.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules
@@ -181,6 +184,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Document each reusable tool with its purpose, inputs, outputs, and main command.
 - Use `_tools/source-collector/` when many web/search sources need repeated normalization, bundle coverage checks, or source scoring.
 - Use `agent-platform/configs/research/source-discovery-registry.json` when broad search origins are needed across global tech blogs, Korean big-tech blogs, India technology sources, paper discovery, and Korean local review channels.
+- Use `agent-platform/configs/research/marketing-evidence-profile.json` when marketer-style desk research, theory/book grounding, market sizing, consumer surveys, public statistics, commercial research reports, or quantitative evidence matter.
 - Use `_tools/korean-local-review/` when Korean user review, Naver/Kakao Map, Naver Blog/Search, or local-market source quality scoring matters.
 - Record `source_value_provenance` and `plan_evidence` for meaningful plans; include `source_provenance_targets` and `plan_evidence_targets` in close-out evaluation.
 - Do not create a new skill or tool when a short documented procedure is enough.

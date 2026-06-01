@@ -11,12 +11,13 @@
 | 우선순위 | 출처 유형 | 예시 | 사용 방식 |
 | --- | --- | --- | --- |
 | 1 | 공식/1차 출처 | 공식 문서, 표준, RFC, 제품 블로그, 릴리스 노트, API 문서 | 사실 확인의 1차 근거 |
-| 2 | 논문/학술 자료 | arXiv, ACL, NeurIPS, ACM, IEEE, 학술 PDF | 방법론, 성능, 한계 근거 |
-| 3 | 오픈소스 원천 | GitHub repo, issue, PR, release, README, docs | 실제 구현과 유지보수 상태 확인 |
-| 4 | 외국 기술 블로그 | engineering blog, architecture post, incident review, benchmark write-up | 현업 적용 방식과 tradeoff 탐색 |
-| 5 | 조사/분석 아티클 | industry report, survey, benchmark article, long-form analysis | 시장/사례/비교 관점 |
-| 6 | 커뮤니티 신호 | Hacker News, Reddit, Stack Overflow, GitHub stars, article likes/bookmarks | 발견과 반대 신호 탐색 |
-| 7 | 소셜/전문가 신호 | LinkedIn posts, author profiles, conference talks, newsletters | 실무자 반응과 adoption 신호 |
+| 2 | 논문/학술 자료와 책/이론서 | arXiv, ACL, NeurIPS, ACM, IEEE, 학술 PDF, textbook, publisher page, library catalog | 방법론, 이론, 프레임워크, 한계 근거 |
+| 3 | 공식 통계/공공 데이터와 설문 데이터 | national statistics, World Bank/OECD, Census, KOSIS, Pew, Gallup, CMO Survey | 정량 수치, 모집단/분모, 소비자/마케터 태도 근거 |
+| 4 | 오픈소스 원천 | GitHub repo, issue, PR, release, README, docs | 실제 구현과 유지보수 상태 확인 |
+| 5 | 외국 기술 블로그 | engineering blog, architecture post, incident review, benchmark write-up | 현업 적용 방식과 tradeoff 탐색 |
+| 6 | 시장/산업 리포트와 조사/분석 아티클 | industry report, survey report, benchmark article, long-form analysis | 시장/사례/비교 관점 |
+| 7 | 커뮤니티 신호 | Hacker News, Reddit, Stack Overflow, GitHub stars, article likes/bookmarks | 발견과 반대 신호 탐색 |
+| 8 | 소셜/전문가 신호 | LinkedIn posts, author profiles, conference talks, newsletters | 실무자 반응과 adoption 신호 |
 
 ## 수집 원칙
 
@@ -25,6 +26,9 @@
 - 외국 기술 블로그와 해외 아티클을 적극 포함한다.
 - 대기업 엔지니어링 블로그, 공식 연구소, architecture center, 고신뢰 독립 자료가 필요하면 `agent-platform/configs/research/enterprise-source-registry.json`을 먼저 확인한다.
 - 더 넓은 검색 원천이 필요하면 `agent-platform/configs/research/source-discovery-registry.json`을 확인해 세계적 기술 블로그, 한국 빅테크 기술 블로그, 인도 기술 소스, 논문 검색 원천을 함께 탐색한다.
+- 마케팅, 시장 규모, 소비자 인사이트, 브랜드 전략, GTM, 설문 기반 주장, 책/이론 근거, 정량 수치 근거가 필요하면 `agent-platform/configs/research/marketing-evidence-profile.json`을 함께 사용한다.
+- 마케팅/시장 규모 숫자는 값, 단위, 분모/base, 지역, 기간, 모집단, 방법론, 표본, 스폰서/펀더, 접근일, 비교 가능성 메모를 함께 기록한다.
+- 설문 근거는 가능한 경우 모집단, 표본 크기, 표본추출 방식, 조사 기간, 조사 모드, 가중치, 스폰서/펀더, 질문 문구나 조사 도구를 확인한다. 방법론이 없으면 약한 근거로 낮춘다.
 - 한국 사용자의 리뷰/로컬 판단이 필요한 작업은 Naver Map, Kakao Map, Naver Blog/Search, 공식 페이지를 우선 확인하고 `_tools/korean-local-review/`로 후보 품질을 점수화한다.
 - 유명 논문이나 연구 근거가 필요한 작업은 Semantic Scholar, OpenAlex, arXiv, Papers with Code, Connected Papers 같은 원천을 조합해 유명도, 최신성, 코드/데이터 유무, 반대 논문을 확인한다.
 - 좋아요 수, 공유 수, 댓글 수, GitHub stars, Hacker News 점수, LinkedIn 반응은 "인기도/확산 신호"로 기록하되 사실 근거로 단독 사용하지 않는다.
@@ -39,6 +43,8 @@
 
 - 공식/1차 출처 1개 이상
 - 논문 또는 표준/기술 보고서 1개 이상
+- 마케팅/시장/소비자 조사라면 책/이론 또는 peer-reviewed marketing source 1개 이상
+- 마케팅/시장/소비자 조사라면 공식 통계, 공개 설문, 또는 survey methodology가 있는 정량 출처 1개 이상
 - 외국 기술 블로그나 실무 사례 2개 이상
 - 오픈소스 repo 또는 실제 구현 사례 1개 이상
 - 커뮤니티/소셜 신호 1개 이상
@@ -49,6 +55,8 @@
 반복적으로 많은 출처를 수집하거나 보고서로 정리해야 하면 `_tools/source-collector/`를 사용한다. 한국 로컬 리뷰나 Naver/Kakao 중심 조사가 필요하면 `_tools/korean-local-review/`를 사용한다.
 
 일반 조사와 계획은 `research-insight-planner-agent`와 `agent-platform/configs/research/research-agent-profile.json`을 사용해 출처 순위화, 증거 추출, 종합, citation grounding, skeptic review를 기록한다.
+
+마케팅 전략, 시장 규모, 소비자 인사이트, 책/이론, 설문조사, 정량 수치 근거 조사는 `marketing-evidence-profile.json`을 `research_profile_paths`에 포함한다. 시장 규모 산정은 공식 통계/공공 데이터, 산업 리포트, 명시적 가정 또는 플랫폼 행동 데이터를 최소 세 갈래로 삼각 검증한다.
 
 코딩 조사는 조사 완료 전에 `coding-research-agent`로 출처, `source_types`, `reference_config_paths`, `technology_stack`, `technology_official_docs`, `stack_version_constraints`, `issue_discussion_sources`, `issue_discussion_notes`, `community_signal_notes`, `language_options`, `selected_language`, `language_decision_notes`, `architecture_theory_sources`, `architecture_practitioner_sources`, `architecture_tradeoff_notes`, `folder_structure_options`, `folder_structure_decision_notes`, `folder_semantics_notes`, `maintainability_notes`, `code_reference_sources`, `code_reference_notes`, 선택지, 추천안, 위험, 검증 계획, 표준 종료 질문을 함께 확인한다. 코딩 조사가 구현 준비 상태가 되려면 최소 3개 이상의 `other`가 아닌 출처 유형을 사용하고, Java/Spring Boot, C, React, Next.js처럼 주요 기술별 공식 문서나 표준을 확인하며, 언어/런타임 유지보수성, 아키텍처 이론과 실무 의견의 차이, 폴더 의미와 소유 경계를 기록해야 한다. 어떤 출처 설정을 참고했는지 `agent-platform/configs/research/` 아래 JSON 설정으로 남겨야 하고, 관련 오픈소스 구조와 참고 구현 또는 잘 작성된 코드/테스트를 조사해야 한다. 대기업/고신뢰 출처를 쓰는 경우 `reference_config_paths`에 `enterprise-source-registry.json`을 함께 기록한다.
 

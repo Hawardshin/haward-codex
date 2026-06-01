@@ -9,6 +9,7 @@
 - `source-discovery-registry.json`: 세계 기술 블로그, 한국 빅테크 기술 블로그, 인도 기술 소스, 논문 검색 원천, 한국 로컬 리뷰 채널의 넓은 search-origin registry
 - `research-agent-profile.json`: Perplexity식 answer engine 구조를 따르는 핵심 조사 에이전트 profile
 - `coding-research-profile.json`: `coding-research-agent`가 구현 전 조사에서 사용하는 기본 source coverage profile
+- `marketing-evidence-profile.json`: 마케팅 전략, 시장 규모, 소비자 인사이트, 책/이론, 설문, 정량 수치 근거 조사 profile
 
 ## 사용 규칙
 
@@ -18,6 +19,8 @@
 - `source_types`는 `source-registry.json`의 source type을 사용한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`도 `research_profile_paths` 또는 `reference_config_paths`에 기록한다.
 - 넓은 출처 탐색, 한국 사용자 리뷰, 한국 기술 블로그, 인도 기술 소스, 논문 검색 원천이 필요하면 `source-discovery-registry.json`을 확인한다.
+- 마케팅, 시장 규모, 소비자 인사이트, 책/이론, 설문조사, 정량 수치 근거가 필요하면 `marketing-evidence-profile.json`을 확인하고 `research_profile_paths`에 기록한다.
+- 마케팅 숫자 근거는 값, 단위, 분모/base, 지역, 기간, 모집단, 방법론, 표본, 스폰서, 비교 가능성 메모를 함께 저장한다.
 - 중요한 값과 계획 제약은 `source_value_provenance`와 `plan_evidence`에 연결한다.
 - 일반 조사에는 `query_understanding`, `search_retrieval`, `source_ranking`, `evidence_extraction`, `synthesis`, `citation_grounding`, `skeptic_review` 단계와 citation 요구사항을 남긴다.
 - 소스 코드 구현 전에는 `code_reference_sources`와 `code_reference_notes`로 참고한 오픈소스 구조, 참고 구현, 실제 코드, 테스트에서 배운 점을 기록한다.
@@ -33,7 +36,8 @@
   "research_profile_paths": [
     "agent-platform/configs/research/research-agent-profile.json",
     "agent-platform/configs/research/source-registry.json",
-    "agent-platform/configs/research/source-discovery-registry.json"
+    "agent-platform/configs/research/source-discovery-registry.json",
+    "agent-platform/configs/research/marketing-evidence-profile.json"
   ],
   "answer_engine_stages": [
     "query_understanding",
@@ -60,6 +64,10 @@
   ],
   "source_types": [
     "official",
+    "official_statistics",
+    "survey_dataset",
+    "book",
+    "market_report",
     "open_source",
     "reference_implementation",
     "tech_blog",
@@ -71,6 +79,9 @@
   ],
   "code_reference_notes": [
     "참고한 저장소 구조, 모듈 경계, 테스트, 예외 처리, API 사용 패턴"
+  ],
+  "quantitative_evidence_fields": [
+    "값, 단위, base, 지역, 기간, 모집단, 방법론, 표본, 스폰서, 접근일"
   ]
 }
 ```

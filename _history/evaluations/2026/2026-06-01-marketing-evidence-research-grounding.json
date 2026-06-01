@@ -1,0 +1,221 @@
+{
+  "task": "Ground factual claims for the marketing, survey, and quantitative evidence research profile work.",
+  "output_summary": "Added a marketing evidence research profile, source registry/source discovery updates, research README updates, memory bootstrap anchor, source lists, requirements/spec/history records, and quantitative/survey evidence rules.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "marketing_profile",
+      "source": "agent-platform/configs/research/marketing-evidence-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked self-documenting config added for marketing evidence research."
+    },
+    {
+      "evidence_id": "source_registry",
+      "source": "agent-platform/configs/research/source-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked source taxonomy updated with marketing evidence source types."
+    },
+    {
+      "evidence_id": "research_profile",
+      "source": "agent-platform/configs/research/research-agent-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked general research profile updated to route marketing, consumer insight, market sizing, survey, book, and quantitative evidence work."
+    },
+    {
+      "evidence_id": "source_discovery",
+      "source": "agent-platform/configs/research/source-discovery-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked source discovery registry updated with marketing evidence search origins and search sequence."
+    },
+    {
+      "evidence_id": "memory_bootstrap",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command returned ready_to_bootstrap and startup output included marketing_evidence_profile."
+    },
+    {
+      "evidence_id": "config_contract",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/research/marketing-evidence-profile.json and core config command",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Config contract returned self_documenting with no gaps for marketing evidence profile and core shared configs."
+    },
+    {
+      "evidence_id": "source_list",
+      "source": "_research/source-lists/marketing-evidence-sources.ko.md and .en.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked reusable source list and extraction checklist added."
+    },
+    {
+      "evidence_id": "aapor_transparency",
+      "source": "https://aapor.org/standards-and-ethics/transparency-initiative/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Professional association source checked for survey transparency and disclosure framing."
+    },
+    {
+      "evidence_id": "aapor_best_practices",
+      "source": "https://aapor.org/standards-and-ethics/best-practices/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Professional association source checked for survey best-practice quality checks."
+    },
+    {
+      "evidence_id": "esomar_online_sample",
+      "source": "https://api.esomar.org/what-we-do/code-guidelines/esomargrbn-guideline-on-online-sample-quality",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Industry standard source checked for online sample quality considerations."
+    },
+    {
+      "evidence_id": "pew_methods",
+      "source": "https://www.pewresearch.org/our-methods/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Research organization source checked for public methodology disclosure examples."
+    },
+    {
+      "evidence_id": "gallup_methods",
+      "source": "https://www.gallup.com/178685/methodology-center.aspx",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Research organization source checked for polling methodology references."
+    },
+    {
+      "evidence_id": "world_bank_api",
+      "source": "https://datahelpdesk.worldbank.org/knowledgebase/articles/889392",
+      "source_type": "dataset",
+      "checked_on": "2026-06-01",
+      "reliability": "Official data source checked for country-level indicator API origin."
+    },
+    {
+      "evidence_id": "google_books_api",
+      "source": "https://developers.google.com/books/docs/v1/using",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official API documentation checked for book metadata discovery."
+    },
+    {
+      "evidence_id": "crossref_api",
+      "source": "https://www.production.crossref.org/documentation/retrieve-metadata/rest-api/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Crossref documentation checked for scholarly metadata discovery."
+    },
+    {
+      "evidence_id": "workspace_monitor_build",
+      "source": "npm run build in workspace-monitor",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Next.js static build passed after regenerating the workspace snapshot."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "This work added a dedicated marketing evidence research profile.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["marketing_profile", "config_contract"],
+      "verification_steps": ["Checked the new profile and ran config contract validation."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The source taxonomy now includes marketing evidence source types such as book, official_statistics, survey_dataset, and market_report.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["source_registry"],
+      "verification_steps": ["Checked source-registry.json and JSON validation output."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The broad source discovery registry now includes marketing evidence search origins and a marketing evidence or market sizing search sequence.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["source_discovery"],
+      "verification_steps": ["Checked source-discovery-registry.json and JSON validation output."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Memory bootstrap now includes marketing_evidence_profile as a required anchor.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["memory_bootstrap"],
+      "verification_steps": ["Ran check-memory-bootstrap and inspected startup output."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The marketing source list records repeatable source origins and a quantitative evidence extraction checklist.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["source_list"],
+      "verification_steps": ["Checked the Korean and English source list files."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "AAPOR and ESOMAR are appropriate methodology references for judging survey transparency and online sample quality.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["aapor_transparency", "aapor_best_practices", "esomar_online_sample"],
+      "verification_steps": ["Checked AAPOR and ESOMAR methodology pages."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Pew and Gallup provide useful examples of public survey methodology disclosure.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["pew_methods", "gallup_methods"],
+      "verification_steps": ["Checked Pew Research Center methods and Gallup Methodology Center pages."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "World Bank Indicators API is a suitable official source origin for country-level indicators used in market denominators.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["world_bank_api"],
+      "verification_steps": ["Checked the World Bank Indicators API documentation page."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Google Books API and Crossref REST API are discovery sources for book and scholarly metadata, not proof of source contents by themselves.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["google_books_api", "crossref_api"],
+      "verification_steps": ["Checked official Google Books and Crossref REST API documentation."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Workspace monitor builds successfully after adding the new research documents and regenerated snapshot.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["workspace_monitor_build"],
+      "verification_steps": ["Ran npm run build in workspace-monitor."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Commercial marketing reports and vendor survey pages can change availability and methodology disclosure over time.",
+    "Source origins in the new profile are not proof by themselves; exact reports, datasets, methods pages, or records must be opened before final factual claims.",
+    "Book and paper metadata APIs help discovery but do not replace checking accessible source content."
+  ],
+  "limitation_notes": [
+    "No external API client was installed or executed in this work.",
+    "No paid report or copyrighted book text was stored.",
+    "The profile defines research rules; future task-specific research still needs fresh source checking."
+  ]
+}

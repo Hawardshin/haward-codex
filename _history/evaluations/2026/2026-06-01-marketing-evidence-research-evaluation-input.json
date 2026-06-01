@@ -1,0 +1,131 @@
+{
+  "initial_instruction": "마케터의 자료조사나 이론적인 책의 내용, 실제 설문조사, 정량적인 수치 근거들을 많이 찾을 수 있는 방법을 고안해 달라는 요청.",
+  "result_summary": "Added a marketing evidence research profile that separates theory/books, survey methodology, official statistics, market reports, platform behavior data, and qualitative signals; updated research/source discovery settings, durable instructions, memory bootstrap, source lists, requirements, specs, history, grounding, and workspace monitor snapshot.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "_docs/persistent-instructions.md",
+    "_docs/persistent-instructions.ko.md",
+    "_docs/persistent-instructions.en.md",
+    "_docs/source-collection-policy.ko.md",
+    "_docs/source-collection-policy.en.md",
+    "_docs/search-insight-planning-policy.ko.md",
+    "_docs/search-insight-planning-policy.en.md",
+    "agent-platform/configs/research/marketing-evidence-profile.json",
+    "agent-platform/configs/research/source-registry.json",
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/research/source-discovery-registry.json",
+    "agent-platform/configs/research/README.ko.md",
+    "agent-platform/configs/research/README.en.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "_research/source-lists/marketing-evidence-sources.ko.md",
+    "_research/source-lists/marketing-evidence-sources.en.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-01-marketing-evidence-research.ko.md",
+    "_requirements/changes/2026-06-01-marketing-evidence-research.en.md",
+    "_requirements/reviews/2026-06-01-marketing-evidence-research.ko.md",
+    "_requirements/reviews/2026-06-01-marketing-evidence-research.en.md",
+    "_specs/workspace-platform/2026-06-01-marketing-evidence-research/",
+    "_history/web-searches/2026/2026-06-01-marketing-evidence-research.ko.md",
+    "_history/web-searches/2026/2026-06-01-marketing-evidence-research.en.md",
+    "_history/plans/2026/2026-06-01-marketing-evidence-research.ko.md",
+    "_history/plans/2026/2026-06-01-marketing-evidence-research.en.md",
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/user-requests/2026/2026-06-01.en.md",
+    "_history/request-traces/2026/2026-06-01.ko.md",
+    "_history/request-traces/2026/2026-06-01.en.md",
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.en.md",
+    "_history/2026/2026-06-01.md",
+    "_history/evaluations/2026/2026-06-01-marketing-evidence-research-grounding.json",
+    "_history/evaluations/2026/2026-06-01-marketing-evidence-research-evaluation-input.json",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json"
+  ],
+  "verification": [
+    "python3 -m json.tool agent-platform/configs/research/marketing-evidence-profile.json: passed",
+    "python3 -m json.tool agent-platform/configs/research/source-registry.json: passed",
+    "python3 -m json.tool agent-platform/configs/research/research-agent-profile.json: passed",
+    "python3 -m json.tool agent-platform/configs/research/source-discovery-registry.json: passed",
+    "python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json: passed",
+    "python3 -m json.tool _ops/coordination/status.json: passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/research/marketing-evidence-profile.json: self_documenting, no gaps",
+    "Core check-config-contract including bootstrap manifest, research/workflow/install configs, marketing profile, and assistant adapter registry: self_documenting, no gaps",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean, no gaps or warnings",
+    "workspace-monitor npm run build: Next.js static build passed and collected 600 documents",
+    "python3 _tools/workspace-index/src/workspace_index.py: maps regenerated",
+    "python3 _tools/task-board/src/task_board.py: coordination board regenerated",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-marketing-evidence-research-grounding.json: ready_to_publish"
+  ],
+  "references_checked": [
+    "AAPOR Transparency Initiative: https://aapor.org/standards-and-ethics/transparency-initiative/",
+    "AAPOR Best Practices: https://aapor.org/standards-and-ethics/best-practices/",
+    "ESOMAR/GRBN Online Sample Quality: https://api.esomar.org/what-we-do/code-guidelines/esomargrbn-guideline-on-online-sample-quality",
+    "Pew Research Center Methods: https://www.pewresearch.org/our-methods/",
+    "Gallup Methodology Center: https://www.gallup.com/178685/methodology-center.aspx",
+    "The CMO Survey: https://cmosurvey.org/",
+    "Deloitte CMO Survey: https://www.deloitte.com/us/en/programs/chief-marketing-officer/articles/cmo-survey.html",
+    "DataReportal: https://datareportal.com/",
+    "World Bank Indicators API: https://datahelpdesk.worldbank.org/knowledgebase/articles/889392",
+    "Google Books API: https://developers.google.com/books/docs/v1/using",
+    "Open Library APIs: https://openlibrary.org/developers/api",
+    "Crossref REST API: https://www.production.crossref.org/documentation/retrieve-metadata/rest-api/",
+    "KOSIS: https://kosis.kr/",
+    "agent-platform/configs/research/marketing-evidence-profile.json",
+    "_research/source-lists/marketing-evidence-sources.ko.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-marketing-evidence-research-grounding.json",
+    "check-grounding command: ready_to_publish"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-marketing-evidence-research.ko.md",
+    "agent-platform/configs/research/marketing-evidence-profile.json",
+    "_research/source-lists/marketing-evidence-sources.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-01-marketing-evidence-research.ko.md",
+    "_specs/workspace-platform/2026-06-01-marketing-evidence-research/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-marketing-evidence-research/spec.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-marketing-evidence-research.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-01-marketing-evidence-research.ko.md",
+    "_requirements/reviews/2026-06-01-marketing-evidence-research.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-01-marketing-evidence-research/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-marketing-evidence-research/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-marketing-evidence-research/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-01-marketing-evidence-research/validation.ko.md",
+    "_specs/workspace-platform/2026-06-01-marketing-evidence-research/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "For a future specific marketing project, add API-backed collection helpers only after choosing exact data sources and confirming license/API terms.",
+    "If market-sizing work repeats often, add a deterministic extraction template generator that emits the quantitative_evidence_fields shape."
+  ]
+}

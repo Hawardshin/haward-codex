@@ -15,6 +15,7 @@
 - 웹 검색과 최소 하나 이상의 다른 검색 채널을 함께 사용한다.
 - 기본 조사 프로필은 `agent-platform/configs/research/research-agent-profile.json`이다.
 - 더 넓은 검색 원천은 `agent-platform/configs/research/source-discovery-registry.json`에서 확인한다.
+- 마케팅, 시장 규모, 소비자 인사이트, 책/이론, 설문, 정량 수치 근거가 필요한 작업은 `agent-platform/configs/research/marketing-evidence-profile.json`을 `research_profile_paths`에 포함한다.
 - 한국 사용자 리뷰나 로컬 판단이 필요한 작업은 Naver Map, Kakao Map, Naver Blog/Search, 공식 페이지를 우선 확인하고 `_tools/korean-local-review/`로 후보 품질을 점수화한다.
 - 계획 입력에는 `research_profile_paths`, `answer_engine_stages`, `citation_requirements`를 기록한다.
 - 중요한 원천값, 설정값, 주장, 리뷰 신호, 가정, 계획 제약은 `source_value_provenance`에 기록한다.
@@ -35,6 +36,7 @@
 - 저장소 검색: 기존 정책, 히스토리, 프로젝트 문서
 - 공식 문서 검색: API, 라이브러리, 제품 사양
 - 논문/기술 자료 검색: 에이전트 설계, 검색/추론 패턴
+- 책/학술/설문/통계 검색: 이론 프레임워크, 마케팅 연구, 공개 설문, 공식 통계, 시장 규모 근거
 - 코드/패키지 검색: 실제 구현 방식, 유지보수 상태, 라이선스
 
 ## 산출물

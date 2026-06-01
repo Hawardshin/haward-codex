@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-05-31",
   "name": "source-registry",
-  "purpose": "Canonical registry of source types and reusable reference sources for general, coding, and technical research.",
+  "purpose": "Canonical registry of source types and reusable reference sources for general, coding, technical, marketing, survey, and quantitative research.",
   "reader_guide": {
     "summary": "This file explains which source categories the workspace recognizes, which reference links shaped those categories, and how each source type should be used or limited.",
     "how_to_read": [
@@ -73,6 +73,17 @@
                 "global tech blogs, Korean tech blogs, Indian technology sources, paper discovery, and Korean local review channels"
             ],
             "last_checked": "2026-05-31"
+        },
+        {
+            "id": "marketing_evidence_profile",
+            "title": "Marketing Evidence Profile",
+            "path": "agent-platform/configs/research/marketing-evidence-profile.json",
+            "source_type": "internal",
+            "used_for": [
+                "marketing, consumer insight, market sizing, survey, book, and quantitative evidence research",
+                "numeric value provenance and survey methodology requirements"
+            ],
+            "last_checked": "2026-06-01"
         },
         {
             "id": "mlr_guidelines_software_engineering",
@@ -251,6 +262,15 @@
                 "reference_sources",
                 "enterprise-source-registry.json"
             ]
+        },
+        {
+            "id": "quantitative_values_need_provenance",
+            "rule": "Quantitative marketing, survey, market-size, and business-planning values must record source, unit, denominator, geography, timeframe, population, method, sponsor, and access date before being used as evidence.",
+            "reason": "Numbers without context are easy to misuse in marketing plans and market sizing.",
+            "applies_to": [
+                "source_types",
+                "marketing-evidence-profile.json"
+            ]
         }
     ],
   "field_guide": [
@@ -289,6 +309,7 @@
     "owner": "agent-platform",
     "general_research_profile": "agent-platform/configs/research/research-agent-profile.json",
     "default_profile": "agent-platform/configs/research/coding-research-profile.json",
+    "marketing_evidence_profile": "agent-platform/configs/research/marketing-evidence-profile.json",
     "last_reviewed": "2026-05-31",
     "review_policy": "Recheck external URLs when they are used for fresh recommendations or when a source changes materially."
   },
@@ -334,6 +355,28 @@
       ]
     },
     {
+      "id": "book",
+      "label_ko": "책/이론서",
+      "label_en": "Book or theory source",
+      "examples": [
+        "marketing textbook",
+        "strategy book",
+        "publisher page",
+        "library catalog record",
+        "book metadata API"
+      ],
+      "default_reliability": "medium_high",
+      "use_for": [
+        "conceptual frameworks",
+        "classic theory",
+        "terminology",
+        "bibliographic discovery"
+      ],
+      "limits": [
+        "Not proof of current market size or current consumer behavior without fresh data."
+      ]
+    },
+    {
       "id": "standard",
       "label_ko": "표준/규격",
       "label_en": "Standard or specification",
@@ -350,6 +393,51 @@
       ],
       "limits": [
         "May not explain operational trade-offs."
+      ]
+    },
+    {
+      "id": "official_statistics",
+      "label_ko": "공식 통계/공공 데이터",
+      "label_en": "Official statistics or public dataset",
+      "examples": [
+        "national statistics office",
+        "central bank dataset",
+        "World Bank indicators",
+        "OECD data",
+        "census data"
+      ],
+      "default_reliability": "high",
+      "use_for": [
+        "population denominator",
+        "macroeconomic context",
+        "industry baseline",
+        "regional market sizing"
+      ],
+      "limits": [
+        "May not map exactly to the target buyer, category, or behavior being studied."
+      ]
+    },
+    {
+      "id": "survey_dataset",
+      "label_ko": "설문/패널 데이터",
+      "label_en": "Survey or panel dataset",
+      "examples": [
+        "Pew Research survey",
+        "Gallup poll",
+        "CMO Survey",
+        "consumer panel report",
+        "public opinion dataset"
+      ],
+      "default_reliability": "medium_high",
+      "use_for": [
+        "attitudes",
+        "preferences",
+        "awareness",
+        "self-reported behavior",
+        "marketing leader sentiment"
+      ],
+      "limits": [
+        "Requires methodology disclosure including population, sample, mode, dates, weighting, sponsor, and question wording."
       ]
     },
     {
@@ -430,6 +518,29 @@
       ],
       "limits": [
         "Check methodology and sponsorship."
+      ]
+    },
+    {
+      "id": "market_report",
+      "label_ko": "시장/산업 리포트",
+      "label_en": "Market or industry report",
+      "examples": [
+        "industry benchmark report",
+        "consulting report",
+        "vendor state-of report",
+        "market research firm report",
+        "CMO trend report"
+      ],
+      "default_reliability": "medium",
+      "use_for": [
+        "current market context",
+        "category benchmarks",
+        "ad spend",
+        "consumer trend estimates",
+        "competitive context"
+      ],
+      "limits": [
+        "Check sponsor, business model, methodology disclosure, sample, and paywall limitations before using as factual evidence."
       ]
     },
     {
@@ -573,6 +684,17 @@
                 "curated large-company engineering, research-lab, architecture-center, and high-signal source seeds"
             ],
             "last_checked": "2026-05-31"
+        },
+        {
+            "id": "marketing_evidence_profile",
+            "title": "Marketing Evidence Profile",
+            "path": "agent-platform/configs/research/marketing-evidence-profile.json",
+            "source_type": "internal",
+            "used_for": [
+                "marketing, consumer insight, market sizing, survey, book, and quantitative evidence research",
+                "numeric value provenance and survey methodology requirements"
+            ],
+            "last_checked": "2026-06-01"
         },
         {
             "id": "mlr_guidelines_software_engineering",

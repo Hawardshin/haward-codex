@@ -43,7 +43,10 @@
 - 같은 파일, 설정, 생성 맵, git 상태 같은 공유 자원을 건드리는 작업은 명시적 dependency, lock, branch/worktree 규칙 없이 병렬 실행하지 않는다.
 - 여러 조사 lane을 병렬 실행할 때는 모든 조사 lane을 기다리는 merge gate를 두고, contradiction과 accepted evidence를 합성한 뒤 downstream 구현을 release한다.
 - durable rule, 출처 설정, 프롬프트, 워크플로, 프로젝트 경계, AI assistant runtime adapter, 평가 루프가 바뀌면 `agent-platform/configs/memory/bootstrap-manifest.json`도 갱신한다.
-- 조사나 계획 작업은 공식 문서, 논문, 오픈소스 repo, 외국 기술 블로그, 조사 아티클, 커뮤니티/소셜 신호, 반대 사례를 폭넓게 수집한다.
+- 조사나 계획 작업은 공식 문서, 논문, 책/이론서, 공식 통계, 설문 데이터, 시장/산업 리포트, 오픈소스 repo, 외국 기술 블로그, 조사 아티클, 커뮤니티/소셜 신호, 반대 사례를 폭넓게 수집한다.
+- 마케팅, 소비자 인사이트, 시장 규모, 브랜드 전략, GTM, 설문 기반 주장, 책/이론 근거, 정량 수치 근거가 필요한 조사는 `agent-platform/configs/research/marketing-evidence-profile.json`을 `research_profile_paths`에 포함한다.
+- 마케팅/시장 규모 숫자는 값, 단위, 분모/base, 지역, 기간, 모집단, 방법론, 표본, 스폰서/펀더, 접근일, 비교 가능성 메모를 함께 기록한 뒤 근거로 사용한다.
+- 설문 근거는 가능한 경우 모집단, 표본 크기, 표본추출 방식, 조사 기간, 조사 모드, 가중치, 스폰서/펀더, 질문 문구나 조사 도구를 기록하고, 방법론이 없으면 약한 근거로 낮춘다.
 - 대기업 엔지니어링 블로그, 공식 연구소, architecture center, 고신뢰 독립 자료 목록은 `agent-platform/configs/research/enterprise-source-registry.json`과 `_research/source-lists/`에서 별도로 관리한다.
 - 넓은 검색 원천은 `agent-platform/configs/research/source-discovery-registry.json`에서 관리하고, 세계 기술 블로그, 한국 빅테크 기술 블로그, 인도 기술 소스, 논문 검색 원천, 한국 로컬 리뷰 채널을 포함한다.
 - 한국 사용자의 리뷰/로컬 판단이 필요한 작업은 Naver Map, Kakao Map, Naver Blog/Search, 공식 페이지를 우선 확인하고 `_tools/korean-local-review/`로 후보 품질을 평가한다.
