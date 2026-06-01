@@ -1,0 +1,150 @@
+{
+  "task": "Ground factual claims for the bounded clarification loop policy work.",
+  "output_summary": "Added a durable rule for vague instructions: ask clarifying counter-questions when material, but keep clarification bounded and converge through assumptions, defaults, ship-first confirmation, or deferral.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-bounded-clarification-loop.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked web-first record with queries, checked sources, weak-source notes, plan impact, and uncertainty."
+    },
+    {
+      "evidence_id": "requirements_specs",
+      "source": "_requirements/baselines/2026-05-31-workspace-platform.ko.md; _specs/workspace-platform/2026-06-01-bounded-clarification-loop/spec.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked requirement baseline and spec artifacts for REQ-WS-046."
+    },
+    {
+      "evidence_id": "ai_usage_gap_profile",
+      "source": "agent-platform/configs/usage/ai-usage-gap-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Self-documenting config updated with bounded clarification policy and validated by config contract."
+    },
+    {
+      "evidence_id": "operating_docs",
+      "source": "_docs/operating-models/ai-usage-gap-operating-model.ko.md; _ops/workflows/59-bridge-ai-usage-gap.md; _ops/prompts/89-bridge-ai-usage-gap.md; _docs/instructions/persistent-instructions.ko.md; AGENTS.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked operating documents that expose the bounded clarification rule."
+    },
+    {
+      "evidence_id": "microsoft_disambiguation",
+      "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/cux-disambiguate-intent",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Microsoft official guidance checked for clarification questions, intent narrowing, and fallback/handoff."
+    },
+    {
+      "evidence_id": "openai_prompt_engineering",
+      "source": "https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-the-openai-api",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official OpenAI prompt guidance checked for clear and specific instructions."
+    },
+    {
+      "evidence_id": "microsoft_prompt_engineering",
+      "source": "https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/prompt-engineering",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Microsoft prompt guidance checked for prompt sensitivity and clear instruction structure."
+    },
+    {
+      "evidence_id": "tasklint",
+      "source": "https://ojs.aaai.org/index.php/HCOMP/article/view/21996",
+      "source_type": "paper",
+      "checked_on": "2026-06-01",
+      "reliability": "Research paper checked for task instruction ambiguity detection and task accuracy relationship."
+    },
+    {
+      "evidence_id": "clam",
+      "source": "https://arxiv.org/abs/2212.07769",
+      "source_type": "paper",
+      "checked_on": "2026-06-01",
+      "reliability": "Research paper checked for selective clarification before answering ambiguous questions."
+    },
+    {
+      "evidence_id": "validation_commands",
+      "source": "Local validation commands run on 2026-06-01.",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "JSON syntax, config contract, memory bootstrap, docs audit, naming audit, structure audit, workspace index, task board, workspace health, and work timer checks passed."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now has REQ-WS-046 requiring bounded clarification for materially vague instructions.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["requirements_specs"],
+      "verification_steps": ["Read the requirements baseline and bounded clarification spec."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The AI usage gap profile now includes a bounded_clarification_policy with question budget, ask/do-not-ask conditions, question priority, and convergence options.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["ai_usage_gap_profile", "validation_commands"],
+      "verification_steps": ["Read the profile and run config contract checks."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The operating model, workflow, prompt, persistent instructions, and AGENTS now expose the bounded clarification rule.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["operating_docs"],
+      "verification_steps": ["Read the operating model, workflow, prompt, persistent instructions, and AGENTS."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Microsoft Copilot Studio guidance supports using clarification questions to narrow ambiguous user intent and providing fallback or handoff when options do not fit.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["microsoft_disambiguation", "web_search_record"],
+      "verification_steps": ["Checked Microsoft guidance and recorded plan impact in the web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "OpenAI and Microsoft prompt guidance support clear, specific, structured instructions as a way to improve model outputs.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["openai_prompt_engineering", "microsoft_prompt_engineering", "web_search_record"],
+      "verification_steps": ["Checked official prompt guidance sources and recorded plan impact."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "TaskLint and CLAM support treating ambiguity as an instruction quality issue and using selective clarification before final answering.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["tasklint", "clam", "web_search_record"],
+      "verification_steps": ["Checked the listed research sources and recorded plan impact."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Clarification should be bounded and converge rather than continuing indefinitely.",
+      "claim_type": "inference",
+      "support_level": "supported",
+      "evidence_ids": ["requirements_specs", "ai_usage_gap_profile", "operating_docs", "web_search_record"],
+      "verification_steps": ["Checked that this is recorded as a repository operating rule derived from user instruction plus ambiguity/fallback evidence."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "The best clarification budget may vary by task type and user preference; the policy uses a conservative default that can be changed later.",
+    "Whether a question would materially change the result still requires local judgment."
+  ],
+  "limitation_notes": [
+    "This change adds governance and prompting policy, not an automated dialog manager.",
+    "The policy does not prohibit asking more questions when the user explicitly requests a discovery interview or questionnaire."
+  ]
+}

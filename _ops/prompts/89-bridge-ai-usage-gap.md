@@ -12,6 +12,7 @@ Use agent-platform/configs/usage/ai-usage-gap-profile.json as the diagnostic pro
 
 Classify the user's current AI-use gap, if any:
 - vague_intent
+- clarification_loop_risk
 - bad_or_biased_instruction
 - no_output_contract
 - deterministic_truth_machine_assumption
@@ -30,16 +31,23 @@ For the current task:
 2. If the instruction is biased, leading, or conclusion-seeking, rewrite it into a neutral task brief before execution.
 3. If the prompt lacks an output contract, add output format, depth, tone, examples, exclusions, and acceptance criteria.
 4. If the user treats the LLM as a deterministic truth machine, briefly apply the probabilistic model framing and add verification requirements.
-5. Classify the model capability if it matters: reasoning_model, general_or_non_reasoning_model, weak_or_uncertain_model, or unknown.
-6. Use a model-adaptive strategy:
+5. If the instruction is materially ambiguous, apply bounded clarification:
+   - Ask only if the missing answer would materially change scope, direction, cost, risk, preference, or acceptance criteria.
+   - Ask usually one round and at most two rounds.
+   - Ask no more than three prioritized questions per round.
+   - Offer 2-3 options and a recommended default when useful.
+   - Include the assumption/default you will use if the user does not answer.
+   - If the ambiguity remains after the budget, proceed with explicit assumptions, choose an option default, produce a reversible draft for confirmation, or defer the unsafe decision.
+6. Classify the model capability if it matters: reasoning_model, general_or_non_reasoning_model, weak_or_uncertain_model, or unknown.
+7. Use a model-adaptive strategy:
    - For weak, non-reasoning, or uncertain models on high-variance tasks, and when cost/latency allow, run two independent attempts or a draft-critique-revise loop.
    - Compare convergence, contradictions, missing requirements, and supported claims before merging.
    - For strong reasoning models, improve goal, context, constraints, success criteria, and verification first; avoid duplicate calls unless variance or evaluator needs justify them.
    - Never treat repeated model agreement as factual proof.
-7. Check task fit: whether AI should draft, search, code, test, critique, automate, or defer to human/source/tool review.
-8. Add an iteration loop: draft, critique, revise, verify.
-9. Add evidence: sources for factual claims, tests for code, and value provenance for numbers.
-10. Promote reusable patterns into the smallest durable asset: prompt, workflow, template, tool, skill, config, operating model, or history note.
+8. Check task fit: whether AI should draft, search, code, test, critique, automate, or defer to human/source/tool review.
+9. Add an iteration loop: draft, critique, revise, verify.
+10. Add evidence: sources for factual claims, tests for code, and value provenance for numbers.
+11. Promote reusable patterns into the smallest durable asset: prompt, workflow, template, tool, skill, config, operating model, or history note.
 
 Minimum rewritten instruction fields:
 - goal
@@ -50,10 +58,12 @@ Minimum rewritten instruction fields:
 - counterevidence or alternatives
 - verification path
 - assumptions or questions
+- clarification budget used, if any
 
 Return:
 - gap classification
 - rewritten instruction when useful
+- clarification questions, assumptions, defaults, or deferral decision when relevant
 - bridge intervention
 - model capability and retry strategy when relevant
 - changed or proposed durable assets

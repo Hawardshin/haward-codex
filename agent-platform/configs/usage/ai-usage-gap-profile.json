@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-06-01",
   "name": "ai-usage-gap-profile",
-  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: question and instruction quality, model-adaptive prompting, task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
+  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: question and instruction quality, bounded clarification, model-adaptive prompting, task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
   "reader_guide": {
     "summary": "Use this profile when a user asks how to use AI better, when an AI-assisted task is vague, when outputs repeatedly miss intent, or when the platform should coach a user from one-off prompting toward reliable workflows.",
     "how_to_read": [
@@ -18,7 +18,8 @@
       "New research changes the understanding of AI adoption, training, overreliance, or effective human-AI collaboration.",
       "A new workflow, prompt, tool, or skill is added to help users use AI better.",
       "The platform's coaching, clarification, or evaluation behavior changes.",
-      "The model capability profile or two-pass prompting policy changes."
+      "The model capability profile or two-pass prompting policy changes.",
+      "The clarification question budget, question format, or convergence rule changes."
     ]
   },
   "reference_links": [
@@ -251,6 +252,39 @@
         "some prompt engineering techniques are not recommended for reasoning models"
       ],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "microsoft_copilot_disambiguate_intent",
+      "title": "Disambiguate customer intent",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/cux-disambiguate-intent",
+      "source_type": "official",
+      "used_for": [
+        "clarifying ambiguous user intent",
+        "providing fallback or handoff when options do not match user intent"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "tasklint_instruction_ambiguity",
+      "title": "TaskLint: Automated Detection of Ambiguities in Task Instructions",
+      "url": "https://ojs.aaai.org/index.php/HCOMP/article/view/21996",
+      "source_type": "paper",
+      "used_for": [
+        "task instruction ambiguity as a quality problem",
+        "detecting ambiguity before execution"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "clam_selective_clarification",
+      "title": "CLAM: Selective Clarification for Ambiguous Questions with Generative Language Models",
+      "url": "https://arxiv.org/abs/2212.07769",
+      "source_type": "paper",
+      "used_for": [
+        "selective clarification for ambiguous questions",
+        "asking clarification before final answer when needed"
+      ],
+      "last_checked": "2026-06-01"
     }
   ],
   "structure_rules": [
@@ -279,6 +313,16 @@
       "applies_to": [
         "prompt_quality_lens",
         "agent_response_contract"
+      ]
+    },
+    {
+      "id": "bounded_clarification_before_guessing",
+      "rule": "When a vague instruction has missing information that would materially change the result, ask prioritized clarification questions before guessing; keep the loop bounded with a clarification_budget and converge through assumptions, defaults, ship-first confirmation, or deferral.",
+      "reason": "Clarification improves intent fit, but unlimited back-and-forth increases latency and prevents useful work from happening.",
+      "applies_to": [
+        "bounded_clarification_policy",
+        "agent_response_contract",
+        "instruction_rewrite_contract"
       ]
     },
     {
@@ -366,6 +410,11 @@
       "required": true
     },
     {
+      "field": "bounded_clarification_policy",
+      "meaning": "Question budget, priority rules, and convergence options for ambiguous instructions.",
+      "required": true
+    },
+    {
       "field": "model_capability_profiles",
       "meaning": "Prompting and retry strategy profiles for reasoning, general, weak, or uncertain models.",
       "required": true
@@ -379,6 +428,7 @@
   "trigger_situations": [
     "The user asks why some people use AI well and others do not.",
     "The user says questions or instructions must be improved before AI can answer well.",
+    "The user says vague or poor instructions should cause the AI to ask clarifying counter-questions.",
     "A request is too vague to produce a useful result without adding context, criteria, or examples.",
     "A request is biased, leading, or asks the model to confirm a preferred conclusion.",
     "The user distinguishes weak/non-reasoning models from strong/reasoning models or asks for model-specific usage strategy.",
@@ -396,6 +446,16 @@
         "expectation that AI will infer hidden preferences"
       ],
       "first_intervention": "Restate the goal, add missing context, propose success criteria, and continue with reasonable assumptions when safe."
+    },
+    {
+      "id": "clarification_loop_risk",
+      "symptom": "The request is vague enough to need user input, but repeated follow-up questions would delay progress or frustrate the user.",
+      "likely_root_causes": [
+        "too many missing preferences",
+        "unclear decision owner",
+        "agent asking low-value questions instead of prioritizing blocking uncertainty"
+      ],
+      "first_intervention": "Ask only the highest-impact questions within the clarification budget, then converge through explicit assumptions, option defaults, ship-first confirmation, or deferral."
     },
     {
       "id": "bad_or_biased_instruction",
@@ -538,6 +598,21 @@
       ]
     },
     {
+      "id": "bounded_clarification",
+      "use_when": [
+        "vague_intent",
+        "clarification_loop_risk",
+        "no_output_contract"
+      ],
+      "action": "Ask one short prioritized clarification round when missing information would materially change the result; ask at most three questions, avoid repeating the same uncertainty, and converge after the budget using assumptions, option defaults, ship-first confirmation, or deferral.",
+      "output_artifacts": [
+        "clarification_needed note",
+        "assumption list",
+        "decision impact note",
+        "converged task brief"
+      ]
+    },
+    {
       "id": "bias_neutralization",
       "use_when": [
         "bad_or_biased_instruction"
@@ -638,7 +713,10 @@
     "When a user asks for broad AI improvement advice, ground it in external research and internal workflow evidence.",
     "When an AI-use gap is observed during work, fix the immediate task and record the repeatable lesson if it will help future work.",
     "Do not over-ask for clarification; make reasonable assumptions for low-risk gaps and record them.",
-    "For high-risk, ambiguous, or user-preference-sensitive gaps, use spec/source reconciliation or clarification_needed alerts."
+    "For materially ambiguous requests, ask only the highest-impact clarification questions within the clarification_budget, usually one round and at most two.",
+    "Do not ask more than three clarification questions in one round unless the user explicitly asks for a questionnaire or discovery interview.",
+    "If the user does not answer or the answer remains vague after the budget is used, converge through explicit assumptions, option-based defaults, ship-first-then-confirm, or explicit deferral.",
+    "For high-risk, ambiguous, or user-preference-sensitive gaps, use spec/source reconciliation or clarification_needed alerts, but still keep the question set short and decision-focused."
   ],
   "asset_promotion_rules": [
     {
@@ -790,7 +868,8 @@
       "Add missing context, constraints, output contract, and acceptance criteria.",
       "Separate facts, assumptions, preferences, and open questions.",
       "Add verification requirements proportionate to risk.",
-      "Ask concise clarification questions only when the missing answer would materially change the result."
+      "Ask concise clarification questions only when the missing answer would materially change the result.",
+      "Apply the bounded_clarification_policy so the rewrite converges instead of creating an open-ended interview."
     ],
     "minimum_rewritten_prompt_fields": [
       "goal",
@@ -800,6 +879,50 @@
       "acceptance_criteria",
       "evidence_or_verification",
       "assumptions_or_questions"
+    ]
+  },
+  "bounded_clarification_policy": {
+    "default_budget": {
+      "rounds": 1,
+      "max_rounds": 2,
+      "max_questions_per_round": 3
+    },
+    "ask_when": [
+      "the missing answer would materially change scope, direction, cost, risk, user preference, or acceptance criteria",
+      "multiple interpretations are plausible and choosing the wrong one would cause rework",
+      "the task is high-risk, irreversible, user-preference-sensitive, or tied to product/spec intent"
+    ],
+    "do_not_ask_when": [
+      "the gap is low-risk and a reasonable assumption can be stated",
+      "a local file, source, test, tool, or existing spec can answer the question",
+      "the question is about a preference that can be handled with an explicit default",
+      "asking would delay a reversible first draft that can be evaluated quickly"
+    ],
+    "question_priority_order": [
+      "blocking decision",
+      "scope boundary",
+      "success criteria",
+      "output format",
+      "user preference"
+    ],
+    "question_format": [
+      "Ask the fewest questions needed to unblock the next meaningful step.",
+      "Explain the decision impact in one short sentence when it is not obvious.",
+      "Offer 2-3 concrete options with a recommended default when useful.",
+      "Include the assumption that will be used if the user does not answer."
+    ],
+    "convergence_options": [
+      "reasonable_assumption: proceed while recording the assumption and verification path",
+      "option_default: choose the recommended option and explain the tradeoff",
+      "ship_first_then_confirm: produce a reversible draft or plan and mark what needs confirmation",
+      "explicit_defer: defer the ambiguous decision to a backlog or clarification_needed item when proceeding would be unsafe"
+    ],
+    "anti_patterns": [
+      "asking broad discovery questions with no decision impact",
+      "asking the same question in different words",
+      "turning every vague request into a long interview",
+      "blocking low-risk reversible work instead of stating assumptions",
+      "continuing to ask questions after the clarification budget is exhausted"
     ]
   },
   "risk_controls": [

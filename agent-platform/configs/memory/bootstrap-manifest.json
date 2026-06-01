@@ -44,7 +44,7 @@
     "The foundational agent operating philosophy or platform concept review changes.",
       "The platform identity narrative or top-level platform description changes.",
       "The AI assistant runtime adapter registry or tool-specific adapter files change.",
-      "The AI usage gap profile, coaching workflow, prompt instruction quality gate, model-adaptive prompting policy, or AI-use asset promotion rules change.",
+      "The AI usage gap profile, coaching workflow, prompt instruction quality gate, bounded clarification policy, model-adaptive prompting policy, or AI-use asset promotion rules change.",
       "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
       "The installation registry or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
@@ -476,6 +476,7 @@
         "diagnosing gaps between weak and strong AI use",
         "task framing, task-fit checks, iteration, verification, and durable asset promotion",
         "rewriting vague, biased, leading, or unverifiable instructions into neutral task briefs",
+        "bounded clarification budget, prioritized counter-questions, and convergence rules for vague instructions",
         "model capability classification and weak/non-reasoning model two-pass compare/merge strategy"
       ],
       "last_checked": "2026-06-01"
@@ -737,8 +738,8 @@
     },
     {
       "id": "ai_usage_gap_profile_must_stay_discoverable",
-      "rule": "The AI usage gap profile must remain a warm memory anchor so future sessions can diagnose weak AI usage as a workflow/context/verification/iteration/tooling gap, rewrite poor instructions into neutral task briefs, choose model-adaptive retry strategies, and promote useful patterns into durable assets.",
-      "reason": "The user asked to understand why some people use AI well and others do not, then reflect gap-closing behavior, prompt quality, and model-specific retry strategy into the platform.",
+      "rule": "The AI usage gap profile must remain a warm memory anchor so future sessions can diagnose weak AI usage as a workflow/context/verification/iteration/tooling gap, rewrite poor instructions into neutral task briefs, ask bounded clarification questions for materially vague instructions, choose model-adaptive retry strategies, and promote useful patterns into durable assets.",
+      "reason": "The user asked to understand why some people use AI well and others do not, then reflect gap-closing behavior, prompt quality, bounded clarification, and model-specific retry strategy into the platform.",
       "applies_to": [
         "startup_sequence",
         "required_anchor_ids",
@@ -1214,7 +1215,7 @@
       "id": "ai_usage_gap_profile",
       "path": "agent-platform/configs/usage/ai-usage-gap-profile.json",
       "tier": "warm",
-      "purpose": "AI usage gap diagnosis, prompt instruction quality, and model-adaptive prompting profile for task framing, neutral instruction rewriting, weak/non-reasoning model two-pass compare/merge, task-fit judgment, iteration, verification, and durable asset promotion.",
+      "purpose": "AI usage gap diagnosis, prompt instruction quality, bounded clarification, and model-adaptive prompting profile for task framing, neutral instruction rewriting, weak/non-reasoning model two-pass compare/merge, task-fit judgment, iteration, verification, and durable asset promotion.",
       "required": true,
       "load_order": 24
     },

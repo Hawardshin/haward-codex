@@ -18,6 +18,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
 3. Open `agent-platform/configs/usage/ai-usage-gap-profile.json`.
 4. Classify the visible gap:
    - `vague_intent`
+   - `clarification_loop_risk`
    - `bad_or_biased_instruction`
    - `no_output_contract`
    - `deterministic_truth_machine_assumption`
@@ -31,6 +32,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
 5. Translate the gap into one or more bridge interventions:
    - intent upgrade
    - instruction quality gate
+   - bounded clarification
    - bias neutralization
    - task-fit check
    - iteration scaffold
@@ -47,10 +49,20 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
 9. If the instruction is biased, leading, or asks to prove a preferred conclusion, rewrite it neutrally before execution and separate user preference from factual claims.
 10. If the user treats the LLM as a deterministic truth machine, add a short probabilistic-model note and attach sources, tests, or uncertainty labels.
 11. If the instruction has no output contract, add the expected format, depth, exclusions, acceptance criteria, and review method.
-12. If the lesson is reusable, save it as a prompt, workflow, template, tool, skill, config, operating model, or history note.
-13. If ambiguity is high-risk or user-preference-sensitive, use spec/source reconciliation or `clarification_needed`.
-14. Ground factual claims before close-out.
-15. Evaluate whether the intervention actually reduced the gap against the initial request.
+12. If missing information would materially change the result, apply the bounded clarification policy:
+   - ask usually one clarification round and at most two;
+   - ask no more than three prioritized questions per round;
+   - ask only questions with clear decision impact;
+   - include assumptions or recommended defaults when useful.
+13. If the user does not answer or the request remains vague after the budget, converge through one of:
+   - reasonable assumption with verification path;
+   - option-based default;
+   - reversible ship-first-then-confirm draft;
+   - explicit defer/`clarification_needed` when proceeding would be unsafe.
+14. If the lesson is reusable, save it as a prompt, workflow, template, tool, skill, config, operating model, or history note.
+15. If ambiguity is high-risk or user-preference-sensitive, use spec/source reconciliation or `clarification_needed`, but keep the question set short and decision-focused.
+16. Ground factual claims before close-out.
+17. Evaluate whether the intervention actually reduced the gap against the initial request.
 
 ## Output Contract
 
@@ -58,6 +70,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
 - Bridge intervention chosen and why.
 - Model capability classification and retry strategy when relevant.
 - Rewritten instruction when the original instruction was vague, biased, or missing an output contract.
+- Clarification questions asked, budget used, assumptions/defaults selected, or deferral reason when relevant.
 - Any durable asset created or updated.
 - Evidence and verification path.
 - Request trace, work summary, and evaluation targets when required by the selected mode.

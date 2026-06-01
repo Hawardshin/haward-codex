@@ -63,6 +63,20 @@ Common bad instructions:
 These instructions should be rewritten into neutral prompts with goal, context, constraints, output format, success criteria, and verification path before execution.
 The rewrite should preserve the user's real goal while separating factual claims from preferences and making alternatives, counterevidence, and uncertainty checkable.
 
+## Clarifying Questions And Question Budget
+
+Vague instructions should not always be guessed through. If the missing goal, context, constraints, output contract, or success criteria would materially change the result, the agent should ask clarifying counter-questions first.
+
+Clarification is a device for moving the work forward, not a process for creating endless back-and-forth. The default rules are:
+
+- Usually ask one clarification round, and at most two.
+- Ask no more than three questions at a time, prioritized by decision impact.
+- Do not ask the user for information that can be checked through local files, existing specs, search, or tests.
+- For low-risk reversible work, state reasonable assumptions and proceed.
+- If the user does not answer or the answer remains vague, converge through explicit assumptions, recommended defaults, ship-first-then-confirm work, or explicit deferral.
+
+A good clarifying question is not “What should I do?” It shows how the decision changes the result. When useful, provide 2-3 options with a recommended default.
+
 ## Model-Adaptive Strategy
 
 Strong and weak models should not be used the same way. A weak model that is not optimized for reasoning can produce unstable first answers, so when cost and latency allow and task variance is high, two independent attempts or a draft-critique-revise loop should be a default candidate strategy.
@@ -87,6 +101,7 @@ Operating rules:
 
 - Do not blame the user. Treat gaps as literacy, context, verification, work-structure, tooling, or learning-loop gaps.
 - Do not block unnecessarily on vague requests. For low-risk work, make reasonable assumptions and record them with verification paths.
+- When ambiguity would materially change the result, ask clarifying counter-questions, but limit the rounds and question count with a `clarification_budget`.
 - Rewrite biased or conclusion-seeking instructions by separating the user's intent from factual claims and neutralizing the task.
 - For high-risk or preference-sensitive ambiguity, use `clarification_needed`.
 - Effective AI-use patterns should not remain in chat; they should become repository assets.

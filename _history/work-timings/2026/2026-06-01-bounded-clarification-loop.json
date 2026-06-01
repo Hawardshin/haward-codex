@@ -1,0 +1,73 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-01-bounded-clarification-loop",
+  "title": "Add bounded clarification loop for vague instructions",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": null,
+  "measurement_note": "Timing was started after web-first intake and memory bootstrap, so early phases are not measured.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before the timing record existed."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before exact timing started."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "duration_seconds": 600,
+      "measurement": "measured",
+      "bottleneck_notes": "Included requirement baseline, change/review records, and spec artifacts."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Policy and workflow updates",
+      "status": "completed",
+      "duration_seconds": 600,
+      "measurement": "measured",
+      "bottleneck_notes": "Included usage profile, operating model, workflow, prompt, router, index, persistent instructions, AGENTS, and memory bootstrap updates."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 180,
+      "measurement": "measured",
+      "bottleneck_notes": "Included JSON syntax, config contract, memory bootstrap, docs, naming, structure, workspace index, task board, workspace health, grounding, evaluator, and diff whitespace checks."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "duration_seconds": 90,
+      "measurement": "measured",
+      "bottleneck_notes": "Included grounding check, work evaluator, and paired evaluation report creation."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Will be completed after final commit and push."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "requirements_spec_and_implementation",
+    "interpretation": "The visible measured work is evenly split between governance artifacts and policy/profile updates.",
+    "improvement_candidates": [
+      "If similar operating-rule changes continue, automate the requirement/spec/history scaffold.",
+      "Keep clarification policy examples in a reusable prompt test set if this pattern repeats."
+    ]
+  }
+}
