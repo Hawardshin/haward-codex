@@ -49,6 +49,7 @@
 - 조사나 계획 작업은 공식 문서, 논문, 책/이론서, 공식 통계, 설문 데이터, 시장/산업 리포트, 오픈소스 repo, 외국 기술 블로그, 조사 아티클, 커뮤니티/소셜 신호, 반대 사례를 폭넓게 수집한다.
 - 사용자가 웹 검색 품질 개선을 요구하거나 많은 출처 탐색이 필요한 작업은 `agent-platform/configs/research/human-search-profile.json`을 사용해 seed, synonym, operator, source-lane, regional, community, contrary, snowballing 검색 단계를 query ladder로 만든다.
 - 사람형 검색에서 찾은 좋은 출처는 답변, 계획, 위험 모델, 출처 목록, 재사용 지식 베이스를 바꿀 때만 요약하고 URL, 접근일, 신뢰도, 한계, plan impact와 함께 `_research/` 또는 해당 프로젝트 docs에 저장한다.
+- 사용자가 AI를 더 잘 쓰고 싶어 하거나 작업 중 AI 사용 간극이 보이면 `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`, `_ops/prompts/89-bridge-ai-usage-gap.md`를 사용해 요청 맥락, 작업 적합성, 반복, 검증, 자산화를 개선한다.
 - 마케팅, 소비자 인사이트, 시장 규모, 브랜드 전략, GTM, 설문 기반 주장, 책/이론 근거, 정량 수치 근거가 필요한 조사는 `agent-platform/configs/research/marketing-evidence-profile.json`을 `research_profile_paths`에 포함한다.
 - 마케팅/시장 규모 숫자는 값, 단위, 분모/base, 지역, 기간, 모집단, 방법론, 표본, 스폰서/펀더, 접근일, 비교 가능성 메모를 함께 기록한 뒤 근거로 사용한다.
 - 설문 근거는 가능한 경우 모집단, 표본 크기, 표본추출 방식, 조사 기간, 조사 모드, 가중치, 스폰서/펀더, 질문 문구나 조사 도구를 기록하고, 방법론이 없으면 약한 근거로 낮춘다.

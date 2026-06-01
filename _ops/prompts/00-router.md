@@ -35,6 +35,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | 웹 검색을 사람이 실제로 하듯 query ladder, source lane, snowballing, 좋은 출처 요약으로 확장한다 | [84-human-like-source-discovery.md](84-human-like-source-discovery.md) |
 | API, 라이브러리, 버그, 아키텍처, 성능, 보안, 마이그레이션 등 코딩 조사를 완료한다 | [86-coding-research.md](86-coding-research.md) |
 | 딥리서치, 긴 보고서, landscape/literature review, 여러 출처 기반 근거 보고서를 만든다 | [87-deep-research.md](87-deep-research.md) |
+| AI를 잘 쓰는 사람과 못 쓰는 사람의 차이를 진단하고 간극을 줄이는 작업 구조를 만든다 | [89-bridge-ai-usage-gap.md](89-bridge-ai-usage-gap.md) |
 | 오픈소스/도구/런타임/스킬 설치를 기록한다 | [58-installation-record.md](58-installation-record.md) |
 | 인터넷 조사에서 재사용 가치가 있는 내용을 문서화한다 | [90-capture-research.md](90-capture-research.md) |
 | 지식 베이스 내용을 근거로 쓰기 전에 검증한다 | [95-validate-knowledge.md](95-validate-knowledge.md) |
@@ -57,6 +58,7 @@ If the request creates or touches a specific project, decide the owning project 
 If speed matters or multiple agents/lane-style tasks may run, use parallel-work-planner-agent before parallel execution and keep coordination status updated.
 For research-heavy work, use research-insight-planner-agent with agent-platform/configs/research/research-agent-profile.json and record the answer-engine stages plus citation requirements.
 When the task needs many sources or better search quality, use human-search-profile.json and _ops/prompts/84-human-like-source-discovery.md to build a query ladder, source lanes, snowballing paths, and selective source summaries.
+When the task asks how to use AI better or reveals a repeated AI-use gap, use ai-usage-gap-profile.json and _ops/prompts/89-bridge-ai-usage-gap.md to improve task framing, task fit, iteration, verification, and durable asset promotion.
 If the request needs coding research before implementation, use coding-research-agent and answer every post-research question before coding.
 If the request installs, upgrades, removes, or globally configures software, create an installation record and update _ops/installations/registry.json.
 Record phase-level work timing under _history/work-timings/ when the selected mode requires timing_summary_targets.

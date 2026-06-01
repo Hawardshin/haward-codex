@@ -1,0 +1,72 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-01-ai-usage-gap-bridge",
+  "title": "Bridge weak and strong AI usage patterns",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "started_at": "2026-06-01T22:09:00+0900",
+  "ended_at": "2026-06-01T22:27:04+0900",
+  "measurement_note": "Timing is estimated from command/log milestones after web-first intake began.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "started_at": "2026-06-01T22:09:00+0900",
+      "ended_at": "2026-06-01T22:13:00+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Checked AI power user, AI literacy, task-fit, adoption, appropriate reliance, risk, and mental model sources."
+    },
+    {
+      "phase_id": "structure_review",
+      "label": "Existing structure review",
+      "status": "completed",
+      "started_at": "2026-06-01T22:13:00+0900",
+      "ended_at": "2026-06-01T22:16:00+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Reviewed memory bootstrap, operations index, prompt router, persistent instructions, requirements baseline, and operating model placement."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Profile and workflow implementation",
+      "status": "completed",
+      "started_at": "2026-06-01T22:16:00+0900",
+      "ended_at": "2026-06-01T22:24:00+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Added usage profile, operating model, workflow, prompt, router/index/persistent instruction updates, memory anchor, and requirements/spec artifacts."
+    },
+    {
+      "phase_id": "documentation_history",
+      "label": "Documentation and history",
+      "status": "completed",
+      "started_at": "2026-06-01T22:24:00+0900",
+      "ended_at": "2026-06-01T22:26:00+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Writing web search records, research notes, request traces, work summaries, and evaluation files."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "started_at": "2026-06-01T22:26:00+0900",
+      "ended_at": "2026-06-01T22:27:04+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Ran config, memory, docs, naming, structure, map, task-board, workspace-health, grounding, evaluator, and timing checks."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Pending verification."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "implementation",
+    "interpretation": "The main cost is cross-cutting governance integration across configs, docs, memory bootstrap, prompts, workflows, requirements, specs, and history.",
+    "improvement_candidates": [
+      "If AI-use coaching repeats often, add a deterministic diagnosis helper that emits gap classification and bridge intervention suggestions.",
+      "Use this profile during future vague user requests before creating new tools or workflows."
+    ]
+  }
+}

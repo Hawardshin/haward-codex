@@ -42,8 +42,9 @@
     "The root structure policy, local-only folder rule, or structure audit command changes.",
     "The naming policy, naming governance document, or naming audit command changes.",
     "The foundational agent operating philosophy or platform concept review changes.",
-    "The platform identity narrative or top-level platform description changes.",
-    "The AI assistant runtime adapter registry or tool-specific adapter files change.",
+      "The platform identity narrative or top-level platform description changes.",
+      "The AI assistant runtime adapter registry or tool-specific adapter files change.",
+      "The AI usage gap profile, coaching workflow, or AI-use asset promotion rules change.",
       "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
       "The installation registry or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
@@ -465,6 +466,17 @@
       "last_checked": "2026-06-01"
     },
     {
+      "id": "ai_usage_gap_profile",
+      "title": "AI Usage Gap Profile",
+      "path": "agent-platform/configs/usage/ai-usage-gap-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "diagnosing gaps between weak and strong AI use",
+        "task framing, task-fit checks, iteration, verification, and durable asset promotion"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
       "id": "agentmemory_md",
       "title": "AgentMemory.md",
       "url": "https://agentmemory.md/",
@@ -720,6 +732,17 @@
       ]
     },
     {
+      "id": "ai_usage_gap_profile_must_stay_discoverable",
+      "rule": "The AI usage gap profile must remain a warm memory anchor so future sessions can diagnose weak AI usage as a workflow/context/verification/iteration/tooling gap and promote useful patterns into durable assets.",
+      "reason": "The user asked to understand why some people use AI well and others do not, then reflect that gap-closing behavior into the platform.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "agent_response_contract"
+      ]
+    },
+    {
       "id": "web_search_records_must_stay_discoverable",
       "rule": "The web search record layer must remain a warm memory anchor and close-out target so future sessions can inspect prompt-level searches and public decision summaries.",
       "reason": "The user explicitly requires every prompt to start with web search and to leave a text record of the search process without storing raw internal reasoning.",
@@ -911,6 +934,7 @@
     "source_discovery_registry",
     "human_search_profile",
     "marketing_evidence_profile",
+    "ai_usage_gap_profile",
     "research_agent_profile",
     "deep_research_profile",
     "coding_research_profile",
@@ -955,6 +979,7 @@
     "source_discovery_registry",
     "human_search_profile",
     "marketing_evidence_profile",
+    "ai_usage_gap_profile",
     "research_agent_profile",
     "deep_research_profile",
     "coding_research_profile",
@@ -1180,6 +1205,14 @@
       "purpose": "Marketing, market sizing, consumer insight, survey, book/theory, and quantitative evidence profile with numeric provenance and methodology requirements.",
       "required": true,
       "load_order": 23
+    },
+    {
+      "id": "ai_usage_gap_profile",
+      "path": "agent-platform/configs/usage/ai-usage-gap-profile.json",
+      "tier": "warm",
+      "purpose": "AI usage gap diagnosis and bridge profile for task framing, task-fit judgment, iteration, verification, and durable asset promotion.",
+      "required": true,
+      "load_order": 24
     },
     {
       "id": "research_agent_profile",

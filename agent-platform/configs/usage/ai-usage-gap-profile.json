@@ -1,0 +1,415 @@
+{
+  "schema_version": "2026-06-01",
+  "name": "ai-usage-gap-profile",
+  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
+  "reader_guide": {
+    "summary": "Use this profile when a user asks how to use AI better, when an AI-assisted task is vague, when outputs repeatedly miss intent, or when the platform should coach a user from one-off prompting toward reliable workflows.",
+    "how_to_read": [
+      "Start with trigger_situations to decide whether the profile applies.",
+      "Use observed_gap_patterns to classify the user's current AI-use friction without blame.",
+      "Use strong_user_behaviors as target behaviors to reinforce.",
+      "Use bridge_interventions to choose the smallest useful improvement.",
+      "Use agent_response_contract to shape how the assistant should help in the current task."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-06-01",
+    "update_triggers": [
+      "A repeated user failure mode appears in AI-assisted work.",
+      "New research changes the understanding of AI adoption, training, overreliance, or effective human-AI collaboration.",
+      "A new workflow, prompt, tool, or skill is added to help users use AI better.",
+      "The platform's coaching, clarification, or evaluation behavior changes."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "harvard_bcg_jagged_frontier",
+      "title": "Navigating the Jagged Technological Frontier",
+      "url": "https://www.hbs.edu/faculty/Pages/item.aspx?num=64700",
+      "source_type": "paper",
+      "used_for": [
+        "task-fit and capability-frontier judgment",
+        "risk of value destruction when AI is used outside its fit"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "bcg_create_destroy_value",
+      "title": "How People Create and Destroy Value with Generative AI",
+      "url": "https://www.bcg.com/publications/2023/how-people-create-and-destroy-value-with-gen-ai",
+      "source_type": "analysis",
+      "used_for": [
+        "task context and training implications",
+        "human-AI collaboration modes"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "microsoft_wti_2026",
+      "title": "Agents, human agency, and the opportunity for every organization",
+      "url": "https://www.microsoft.com/en-us/worklab/work-trend-index/agents-human-agency-and-the-opportunity-for-every-organization",
+      "source_type": "official",
+      "used_for": [
+        "AI power user and frontier professional behavior",
+        "organizational support and agentic workflow adoption"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "microsoft_wti_2024",
+      "title": "AI at Work Is Here. Now Comes the Hard Part",
+      "url": "https://www.microsoft.com/en-us/worklab/work-trend-index/ai-at-work-is-here-now-comes-the-hard-part",
+      "source_type": "official",
+      "used_for": [
+        "power user habit formation",
+        "experimentation and repeated prompt trying"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "gallup_ai_indicator",
+      "title": "Gallup Global Indicator: Artificial Intelligence",
+      "url": "https://www.gallup.com/699797/indicator-artificial-intelligence.aspx",
+      "source_type": "dataset",
+      "used_for": [
+        "AI adoption, comfort, manager support, and organizational integration signals"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "oecd_ai_skills_gap",
+      "title": "Bridging the AI skills gap: Is training keeping up?",
+      "url": "https://www.oecd.org/en/publications/bridging-the-ai-skills-gap_66d0702e-en.html",
+      "source_type": "official",
+      "used_for": [
+        "general AI literacy and workforce training gap framing"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "unesco_ai_competency",
+      "title": "AI competency framework for students",
+      "url": "https://www.unesco.org/en/articles/ai-competency-framework-students?hub=750",
+      "source_type": "official",
+      "used_for": [
+        "AI literacy dimensions and responsible co-creator framing"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "microsoft_appropriate_reliance",
+      "title": "Appropriate Reliance Research Initiative",
+      "url": "https://www.microsoft.com/en-us/research/articles/appropriate-reliance-research-initiative",
+      "source_type": "official",
+      "used_for": [
+        "overreliance and underreliance risk",
+        "calibrated trust in human-AI teams"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "nist_ai_rmf",
+      "title": "AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "source_type": "official",
+      "used_for": [
+        "risk-aware AI use",
+        "trustworthy AI governance framing"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "ibm_agentic_mental_models",
+      "title": "Building Appropriate Mental Models: What Users Know and Want to Know about an Agentic AI Chatbot",
+      "url": "https://research.ibm.com/publications/building-appropriate-mental-models-what-users-know-and-want-to-know-about-an-agentic-ai-chatbot",
+      "source_type": "paper",
+      "used_for": [
+        "mental model gaps in agentic AI use",
+        "user need for understanding system actions"
+      ],
+      "last_checked": "2026-06-01"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "gap_is_systemic_not_moral",
+      "rule": "Classify weak AI use as a solvable system, workflow, literacy, context, or verification gap; do not frame it as personal incompetence.",
+      "reason": "The platform should reduce friction and improve outcomes, not shame the user.",
+      "applies_to": [
+        "observed_gap_patterns",
+        "agent_response_contract"
+      ]
+    },
+    {
+      "id": "task_fit_before_prompting",
+      "rule": "Before optimizing a prompt, decide whether the task is inside, outside, or uncertain relative to current AI capability and available verification.",
+      "reason": "AI can improve performance on some tasks and harm it on others when users overtrust it outside its fit.",
+      "applies_to": [
+        "task_fit_lens",
+        "bridge_interventions"
+      ]
+    },
+    {
+      "id": "context_criteria_verification_triplet",
+      "rule": "When a user's request is vague, improve it by adding context, success criteria, and verification path before doing more generation.",
+      "reason": "Good AI usage depends on making intent observable and outputs checkable.",
+      "applies_to": [
+        "prompt_quality_lens",
+        "agent_response_contract"
+      ]
+    },
+    {
+      "id": "move_from_one_off_chat_to_reusable_workflow",
+      "rule": "When a successful prompt or process repeats, convert it into a prompt, template, tool, skill, workflow, or config instead of leaving it as chat memory.",
+      "reason": "Power use compounds when effective patterns become reusable assets.",
+      "applies_to": [
+        "bridge_interventions",
+        "asset_promotion_rules"
+      ]
+    },
+    {
+      "id": "calibrated_reliance_required",
+      "rule": "Avoid both blind trust and blanket rejection; ask what evidence, tests, sources, or expert judgment are needed for the risk level.",
+      "reason": "Overreliance and underreliance both reduce human-AI team performance.",
+      "applies_to": [
+        "verification_lens",
+        "risk_controls"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "observed_gap_patterns",
+      "meaning": "Common failure modes shown by weak AI usage.",
+      "required": true
+    },
+    {
+      "field": "strong_user_behaviors",
+      "meaning": "Behaviors that characterize strong AI users and should be coached or automated.",
+      "required": true
+    },
+    {
+      "field": "bridge_interventions",
+      "meaning": "Practical moves that reduce the gap between weak and strong AI use.",
+      "required": true
+    },
+    {
+      "field": "agent_response_contract",
+      "meaning": "How an agent should respond when it sees an AI-use gap during a task.",
+      "required": true
+    },
+    {
+      "field": "asset_promotion_rules",
+      "meaning": "When to turn a good AI-use pattern into a durable platform asset.",
+      "required": true
+    }
+  ],
+  "trigger_situations": [
+    "The user asks why some people use AI well and others do not.",
+    "A request is too vague to produce a useful result without adding context, criteria, or examples.",
+    "The user repeatedly asks for the same AI-assisted workflow.",
+    "An AI output would be risky without verification, sources, tests, or human review.",
+    "A successful prompt or collaboration pattern should be preserved for future use."
+  ],
+  "observed_gap_patterns": [
+    {
+      "id": "vague_intent",
+      "symptom": "The user asks for a broad result without goal, audience, constraints, examples, or success criteria.",
+      "likely_root_causes": [
+        "unclear desired outcome",
+        "unfamiliarity with context-setting",
+        "expectation that AI will infer hidden preferences"
+      ],
+      "first_intervention": "Restate the goal, add missing context, propose success criteria, and continue with reasonable assumptions when safe."
+    },
+    {
+      "id": "single_shot_oracle_use",
+      "symptom": "The user accepts or rejects one answer instead of iterating, comparing, and testing.",
+      "likely_root_causes": [
+        "AI seen as a search box or oracle",
+        "no review loop",
+        "no versioning of attempts"
+      ],
+      "first_intervention": "Use a short plan-check-revise loop and preserve the useful prompt pattern."
+    },
+    {
+      "id": "poor_task_fit_judgment",
+      "symptom": "The user applies AI to tasks where current model capability, data access, or verification is insufficient.",
+      "likely_root_causes": [
+        "weak mental model of AI limits",
+        "unclear risk level",
+        "no capability frontier check"
+      ],
+      "first_intervention": "Classify task fit as good, uncertain, or poor; add human review, tools, tests, or external sources when needed."
+    },
+    {
+      "id": "missing_verification",
+      "symptom": "The output contains factual, legal, technical, numerical, or source-sensitive claims without grounding.",
+      "likely_root_causes": [
+        "overreliance",
+        "no source habit",
+        "no test or evaluator path"
+      ],
+      "first_intervention": "Attach sources, run tests or checks, and mark unsupported claims as assumptions or remove them."
+    },
+    {
+      "id": "context_not_saved",
+      "symptom": "Useful instructions, prompts, decisions, or evaluation lessons stay only in chat.",
+      "likely_root_causes": [
+        "no durable memory habit",
+        "no project boundary",
+        "no asset promotion rule"
+      ],
+      "first_intervention": "Move durable context into docs, configs, prompts, workflows, templates, tools, or skills."
+    },
+    {
+      "id": "tool_avoidance",
+      "symptom": "The user uses AI manually for deterministic work that should be scripted, validated, or automated.",
+      "likely_root_causes": [
+        "not recognizing repeatability",
+        "fear of setup cost",
+        "no local tool pattern"
+      ],
+      "first_intervention": "Build the smallest reusable tool or template after the pattern repeats or risk justifies automation."
+    },
+    {
+      "id": "hidden_or_unsupported_use",
+      "symptom": "AI is used privately without shared standards, review, or organizational learning.",
+      "likely_root_causes": [
+        "low psychological safety",
+        "unclear policy",
+        "no training or examples"
+      ],
+      "first_intervention": "Make allowed use cases, review expectations, and reusable examples explicit."
+    }
+  ],
+  "strong_user_behaviors": [
+    "Defines task outcome, audience, constraints, input data, and success criteria.",
+    "Uses AI for exploration, drafting, critique, transformation, automation planning, and verification support instead of only final-answer generation.",
+    "Decomposes large work into plan, evidence, implementation, validation, and evaluation steps.",
+    "Iterates with the model: asks for alternatives, compares trade-offs, tests assumptions, and revises prompts.",
+    "Uses web search, primary sources, local files, tests, linters, screenshots, evaluators, and human judgment as verification channels.",
+    "Understands that AI capability is uneven across tasks and changes over time.",
+    "Turns repeated prompts and workflows into durable assets under the owning project or shared operations folder.",
+    "Shares reusable learnings through docs, examples, source records, and history instead of relying on memory."
+  ],
+  "bridge_interventions": [
+    {
+      "id": "intent_upgrade",
+      "use_when": [
+        "vague_intent"
+      ],
+      "action": "Convert the request into outcome, audience, context, constraints, examples, and acceptance criteria.",
+      "output_artifacts": [
+        "clarified task brief",
+        "requirements candidate",
+        "success criteria"
+      ]
+    },
+    {
+      "id": "task_fit_check",
+      "use_when": [
+        "poor_task_fit_judgment",
+        "missing_verification"
+      ],
+      "action": "Classify whether AI should draft, search, critique, calculate, code, verify, or defer to human/source/tool review.",
+      "output_artifacts": [
+        "task-fit note",
+        "risk controls",
+        "verification plan"
+      ]
+    },
+    {
+      "id": "iteration_scaffold",
+      "use_when": [
+        "single_shot_oracle_use"
+      ],
+      "action": "Run a short loop: first answer or plan, critique against criteria, revise, then validate.",
+      "output_artifacts": [
+        "plan",
+        "revision notes",
+        "evaluation summary"
+      ]
+    },
+    {
+      "id": "verification_gate",
+      "use_when": [
+        "missing_verification"
+      ],
+      "action": "Attach sources, tests, commands, evaluator output, or explicit uncertainty before final claims.",
+      "output_artifacts": [
+        "source provenance",
+        "test output summary",
+        "grounding report"
+      ]
+    },
+    {
+      "id": "asset_promotion",
+      "use_when": [
+        "context_not_saved",
+        "tool_avoidance"
+      ],
+      "action": "Promote the repeated pattern into the smallest durable asset: prompt, workflow, template, config, tool, or skill.",
+      "output_artifacts": [
+        "prompt or workflow",
+        "tool or template",
+        "skill source when behavior is reusable"
+      ]
+    },
+    {
+      "id": "learning_loop",
+      "use_when": [
+        "hidden_or_unsupported_use",
+        "single_shot_oracle_use"
+      ],
+      "action": "Record what worked, what failed, and what should be tried next in history or project docs.",
+      "output_artifacts": [
+        "work summary",
+        "request trace",
+        "improvement backlog"
+      ]
+    }
+  ],
+  "agent_response_contract": [
+    "Do not merely answer vague AI-use questions; convert them into a reusable operating pattern when the request is durable.",
+    "When the user seems blocked by low AI literacy, improve the task shape first: goal, context, constraints, examples, criteria, verification.",
+    "When a user asks for broad AI improvement advice, ground it in external research and internal workflow evidence.",
+    "When an AI-use gap is observed during work, fix the immediate task and record the repeatable lesson if it will help future work.",
+    "Do not over-ask for clarification; make reasonable assumptions for low-risk gaps and record them.",
+    "For high-risk, ambiguous, or user-preference-sensitive gaps, use spec/source reconciliation or clarification_needed alerts."
+  ],
+  "asset_promotion_rules": [
+    {
+      "pattern": "The user repeats the same kind of AI prompt or evaluation.",
+      "promote_to": "prompt or workflow"
+    },
+    {
+      "pattern": "The same deterministic validation, conversion, scoring, or extraction repeats.",
+      "promote_to": "tool"
+    },
+    {
+      "pattern": "The same multi-step behavior should be reused by future agents.",
+      "promote_to": "skill or agent profile"
+    },
+    {
+      "pattern": "The same project scaffold, output shape, or checklist repeats.",
+      "promote_to": "template"
+    },
+    {
+      "pattern": "The same durable preference or philosophy appears.",
+      "promote_to": "persistent instruction, policy, or operating model"
+    }
+  ],
+  "risk_controls": [
+    "For factual claims, use web search or source documents and grounding checks.",
+    "For code, use official docs, reference implementations, tests, and review.",
+    "For numerical claims, preserve value, unit, base, geography, timeframe, method, and source.",
+    "For strategic decisions, compare alternatives and document uncertainty.",
+    "For user-preference decisions, ask concise clarification questions when assumptions would be risky."
+  ],
+  "minimum_closeout_checks": [
+    "The user's AI-use gap is classified or explicitly marked as not applicable.",
+    "The response includes at least one concrete bridge intervention when a gap exists.",
+    "Durable lessons are saved as docs, prompts, workflows, templates, tools, skills, configs, or history when reusable.",
+    "Factual claims about AI usage research are source-grounded."
+  ]
+}

@@ -10,3 +10,5 @@
 - `context-management.md`
 - `tool-agnostic-agent-operating-model.ko.md`
 - `tool-agnostic-agent-operating-model.en.md`
+- `ai-usage-gap-operating-model.ko.md`
+- `ai-usage-gap-operating-model.en.md`

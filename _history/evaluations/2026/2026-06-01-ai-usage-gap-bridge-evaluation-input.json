@@ -1,0 +1,141 @@
+{
+  "initial_instruction": "AI를 잘 못쓰는 사람의 문제점은 무엇인지 보고 그런걸 개선하도록. AI를 잘 쓰는사람과 못 쓰는 사람은 무엇이 다를까? 그러면 그런 간극을 어떻게 해소할까? 그런거 반영",
+  "result_summary": "Added an AI usage gap profile and connected it to operating docs, workflow, prompt routing, persistent instructions, memory bootstrap, requirements, specs, research notes, and history. The platform now treats weak AI use as a solvable task framing, task-fit, iteration, verification, tooling, or asset-promotion gap rather than a personal flaw.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "_docs/operating-models/ai-usage-gap-operating-model.ko.md",
+    "_docs/operating-models/ai-usage-gap-operating-model.en.md",
+    "_docs/operating-models/README.ko.md",
+    "_docs/operating-models/README.en.md",
+    "_docs/operating-models/platform-operating-model.md",
+    "_ops/index.md",
+    "_ops/prompts/00-router.md",
+    "_ops/prompts/89-bridge-ai-usage-gap.md",
+    "_ops/workflows/59-bridge-ai-usage-gap.md",
+    "agent-platform/configs/usage/ai-usage-gap-profile.json",
+    "agent-platform/configs/usage/README.ko.md",
+    "agent-platform/configs/usage/README.en.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_requirements/changes/2026-06-01-ai-usage-gap-bridge.en.md",
+    "_requirements/reviews/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_requirements/reviews/2026-06-01-ai-usage-gap-bridge.en.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/",
+    "_research/topics/agent-planning/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_research/topics/agent-planning/2026-06-01-ai-usage-gap-bridge.en.md",
+    "_history/web-searches/2026/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_history/web-searches/2026/2026-06-01-ai-usage-gap-bridge.en.md",
+    "_history/plans/2026/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_history/plans/2026/2026-06-01-ai-usage-gap-bridge.en.md",
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/user-requests/2026/2026-06-01.en.md",
+    "_history/request-traces/2026/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_history/request-traces/2026/2026-06-01-ai-usage-gap-bridge.en.md",
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.en.md",
+    "_history/work-timings/2026/2026-06-01-ai-usage-gap-bridge.json",
+    "_history/2026/2026-06-01.md",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html"
+  ],
+  "verification": [
+    "python3 -m json.tool agent-platform/configs/usage/ai-usage-gap-profile.json: parsed successfully",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/ai-usage-gap-profile.json configs/memory/bootstrap-manifest.json: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json --root ..: ready_to_bootstrap",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract core command including configs/usage/ai-usage-gap-profile.json: self_documenting",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean with pre-existing presentation-agent generated-folder warnings",
+    "python3 _tools/workspace-index/src/workspace_index.py: maps regenerated",
+    "python3 _tools/task-board/src/task_board.py: coordination board regenerated",
+    "python3 _tools/workspace-index/src/workspace_index.py --check: passed",
+    "python3 _tools/task-board/src/task_board.py --check: passed",
+    "python3 _tools/workspace-health/src/workspace_health.py --category governance --json: 7 checks passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-ai-usage-gap-bridge-grounding.json: ready_to_publish",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-01-ai-usage-gap-bridge.json: ready"
+  ],
+  "references_checked": [
+    "Harvard Business School working paper: https://www.hbs.edu/faculty/Pages/item.aspx?num=64700",
+    "BCG: https://www.bcg.com/publications/2023/how-people-create-and-destroy-value-with-gen-ai",
+    "Microsoft Work Trend Index 2026: https://www.microsoft.com/en-us/worklab/work-trend-index/agents-human-agency-and-the-opportunity-for-every-organization",
+    "Microsoft Work Trend Index 2024: https://www.microsoft.com/en-us/worklab/work-trend-index/ai-at-work-is-here-now-comes-the-hard-part",
+    "Gallup AI Indicator: https://www.gallup.com/699797/indicator-artificial-intelligence.aspx",
+    "OECD AI skills gap: https://www.oecd.org/en/publications/bridging-the-ai-skills-gap_66d0702e-en.html",
+    "UNESCO AI competency framework: https://www.unesco.org/en/articles/ai-competency-framework-students?hub=750",
+    "Microsoft Research Appropriate Reliance: https://www.microsoft.com/en-us/research/articles/appropriate-reliance-research-initiative",
+    "NIST AI RMF: https://www.nist.gov/itl/ai-risk-management-framework",
+    "IBM Research agentic AI mental models: https://research.ibm.com/publications/building-appropriate-mental-models-what-users-know-and-want-to-know-about-an-agentic-ai-chatbot",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "agent-platform/configs/usage/ai-usage-gap-profile.json"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-ai-usage-gap-bridge-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_research/topics/agent-planning/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/traceability.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/plan.ko.md",
+    "_history/web-searches/2026/2026-06-01-ai-usage-gap-bridge.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_history/web-searches/2026/2026-06-01-ai-usage-gap-bridge.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/user-requests/2026/2026-06-01.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_requirements/changes/2026-06-01-ai-usage-gap-bridge.en.md",
+    "_requirements/reviews/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_requirements/reviews/2026-06-01-ai-usage-gap-bridge.en.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/spec.en.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/plan.en.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/tasks.en.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/validation.ko.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/validation.en.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/traceability.ko.md",
+    "_specs/workspace-platform/2026-06-01-ai-usage-gap-bridge/traceability.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-01-ai-usage-gap-bridge.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01-ai-usage-gap-bridge.ko.md",
+    "_history/request-traces/2026/2026-06-01-ai-usage-gap-bridge.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.en.md"
+  ],
+  "skill_work_occurred": false,
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Add an ai-usage-gap diagnosis CLI if future work repeatedly needs structured gap classification.",
+    "Add examples of before/after user prompts by domain after enough real requests accumulate."
+  ]
+}

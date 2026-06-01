@@ -52,6 +52,8 @@
 - When multiple research lanes run in parallel, use a merge gate that waits for every research lane, synthesizes contradictions and accepted evidence, and releases downstream implementation only after the gate passes.
 - When durable rules, source configs, prompts, workflows, project boundaries, assistant runtime adapters, or evaluation loops change, update `agent-platform/configs/memory/bootstrap-manifest.json`.
 - For research or planning work, collect broad high-authority sources, including official docs, papers, books/theory sources, official statistics, survey data, market/industry reports, open-source repos, international tech blogs, analysis articles, community/social signals, and contrary examples.
+- When the user asks for better web search or a task needs many sources, use `agent-platform/configs/research/human-search-profile.json` to build query ladders, source lanes, snowballing paths, and selective reusable summaries.
+- When the user wants to use AI better or an AI-use gap appears during work, use `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`, and `_ops/prompts/89-bridge-ai-usage-gap.md` to improve task framing, task fit, iteration, verification, and durable asset promotion.
 - For marketing, consumer insight, market sizing, brand strategy, go-to-market, survey-backed claims, book/theory grounding, or quantitative evidence research, include `agent-platform/configs/research/marketing-evidence-profile.json` in `research_profile_paths`.
 - Marketing and market-sizing numbers must preserve value, unit, denominator/base, geography, timeframe, target population, methodology, sample, sponsor/funder, access date, and comparability notes before being used as evidence.
 - Survey evidence should record population, sample size, sampling method, field dates, mode, weighting, sponsor/funder, and question wording or instrument when available; missing methodology downgrades the source to weak evidence.
@@ -60,7 +62,7 @@
 - For Korean user review or local-market decisions, prioritize Naver Map, Kakao Map, Naver Blog/Search, and official pages, then score candidate quality with `_tools/korean-local-review/`.
 - For famous papers or research-backed evidence, combine Semantic Scholar, OpenAlex, arXiv, Papers with Code, and related-paper search.
 - Treat likes, shares, comments, GitHub stars, Hacker News points, Reddit activity, and LinkedIn reactions as adoption signals, not standalone proof.
-- Use `_tools/source-collector/` when broad source collection becomes repetitive or source bundles need scoring/reporting.
+- Use `_tools/source-collector/` when broad source collection becomes repetitive or source bundles need query ladder generation, scoring, or reporting.
 - Treat knowledge-base content as fallible and validate it with `knowledge-skeptic-agent` before relying on it.
 - For important plans, do not rely only on the model's internal guess; use web search plus another search channel to derive insights before planning.
 - Treat `research-insight-planner-agent` as a core research agent and Perplexity-style answer engine.

@@ -1,0 +1,181 @@
+{
+  "task": "Ground factual claims for AI usage gap bridge work.",
+  "output_summary": "Added an AI usage gap profile, operating model, workflow, prompt, memory anchor, requirements, specs, and history records so future agents diagnose weak AI usage as task framing, task-fit, iteration, verification, tooling, or asset-promotion gaps.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-ai-usage-gap-bridge.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked web-first record with queries, checked sources, weak-source notes, plan impact, and public decision summary."
+    },
+    {
+      "evidence_id": "ai_usage_gap_profile",
+      "source": "agent-platform/configs/usage/ai-usage-gap-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Self-documenting config containing references, structure rules, field guide, gap patterns, strong user behaviors, bridge interventions, and response contract."
+    },
+    {
+      "evidence_id": "operating_model",
+      "source": "_docs/operating-models/ai-usage-gap-operating-model.ko.md; _docs/operating-models/ai-usage-gap-operating-model.en.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked paired operating model docs."
+    },
+    {
+      "evidence_id": "workflow_prompt",
+      "source": "_ops/workflows/59-bridge-ai-usage-gap.md; _ops/prompts/89-bridge-ai-usage-gap.md; _ops/prompts/00-router.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked workflow and prompt routing for repeated use."
+    },
+    {
+      "evidence_id": "memory_bootstrap",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json --root ..",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command returned ready_to_bootstrap and startup output included ai_usage_gap_profile."
+    },
+    {
+      "evidence_id": "config_contract",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/ai-usage-gap-profile.json configs/memory/bootstrap-manifest.json and core config command",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Config contract returned self_documenting with no gaps."
+    },
+    {
+      "evidence_id": "governance_health",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --category governance --json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command passed 7 governance checks."
+    },
+    {
+      "evidence_id": "hbs_jagged_frontier",
+      "source": "https://www.hbs.edu/faculty/Pages/item.aspx?num=64700",
+      "source_type": "paper",
+      "checked_on": "2026-06-01",
+      "reliability": "Harvard Business School working paper page checked for jagged frontier and task-fit evidence."
+    },
+    {
+      "evidence_id": "bcg_value",
+      "source": "https://www.bcg.com/publications/2023/how-people-create-and-destroy-value-with-gen-ai",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "BCG article checked for task context and training implications."
+    },
+    {
+      "evidence_id": "microsoft_wti_2026",
+      "source": "https://www.microsoft.com/en-us/worklab/work-trend-index/agents-human-agency-and-the-opportunity-for-every-organization",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Microsoft Work Trend Index 2026 page checked for AI-at-work and agentic workflow framing."
+    },
+    {
+      "evidence_id": "microsoft_wti_2024",
+      "source": "https://www.microsoft.com/en-us/worklab/work-trend-index/ai-at-work-is-here-now-comes-the-hard-part",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Microsoft Work Trend Index 2024 page checked for power-user habits."
+    },
+    {
+      "evidence_id": "gallup_ai_indicator",
+      "source": "https://www.gallup.com/699797/indicator-artificial-intelligence.aspx",
+      "source_type": "dataset",
+      "checked_on": "2026-06-01",
+      "reliability": "Gallup indicator page checked for adoption, comfort, manager support, and organizational integration signals."
+    },
+    {
+      "evidence_id": "oecd_skills_gap",
+      "source": "https://www.oecd.org/en/publications/bridging-the-ai-skills-gap_66d0702e-en.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "OECD publication page checked for AI skills gap and general AI literacy framing."
+    },
+    {
+      "evidence_id": "unesco_competency",
+      "source": "https://www.unesco.org/en/articles/ai-competency-framework-students?hub=750",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "UNESCO page checked for AI competency and responsible user/co-creator framing."
+    },
+    {
+      "evidence_id": "microsoft_reliance",
+      "source": "https://www.microsoft.com/en-us/research/articles/appropriate-reliance-research-initiative",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Microsoft Research page checked for overreliance and underreliance framing."
+    },
+    {
+      "evidence_id": "nist_ai_rmf",
+      "source": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "NIST AI RMF page checked for risk-aware AI use."
+    },
+    {
+      "evidence_id": "ibm_mental_models",
+      "source": "https://research.ibm.com/publications/building-appropriate-mental-models-what-users-know-and-want-to-know-about-an-agentic-ai-chatbot",
+      "source_type": "paper",
+      "checked_on": "2026-06-01",
+      "reliability": "IBM Research page checked for agentic AI mental-model gaps."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now has an AI usage gap profile that defines observed gap patterns, strong user behaviors, bridge interventions, response contract, and asset promotion rules.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["ai_usage_gap_profile", "config_contract"],
+      "verification_steps": ["Read the profile and ran config contract checks."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The operations model, workflow, prompt router, and memory bootstrap now expose the AI usage gap bridge behavior for future sessions.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["operating_model", "workflow_prompt", "memory_bootstrap"],
+      "verification_steps": ["Read the docs/workflow/prompt files and ran memory bootstrap checks."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Research and practitioner sources support treating effective AI use as task-fit judgment, iteration, verification, literacy, appropriate reliance, and mental-model calibration rather than prompt wording alone.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["hbs_jagged_frontier", "bcg_value", "microsoft_wti_2026", "microsoft_wti_2024", "oecd_skills_gap", "unesco_competency", "microsoft_reliance", "ibm_mental_models", "web_search_record"],
+      "verification_steps": ["Checked the listed sources and recorded their plan impact in the web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "AI adoption and workplace support are active measurable topics in current workforce research, so future claims about adoption should be freshly checked.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["gallup_ai_indicator", "microsoft_wti_2026", "web_search_record"],
+      "verification_steps": ["Checked Gallup and Microsoft Work Trend Index source pages."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Governance checks passed after adding the profile and regenerated navigation artifacts.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["governance_health"],
+      "verification_steps": ["Ran workspace health governance category."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Workplace AI adoption statistics and power-user descriptions change quickly, so exact numbers should be rechecked for future factual claims.",
+    "The new profile improves future task behavior but does not by itself guarantee that every AI-assisted task will succeed."
+  ],
+  "limitation_notes": [
+    "No separate training UI, course, or diagnostic CLI was added in this change.",
+    "The profile is a process/config artifact; future work can add deterministic scoring if repeated use proves the need."
+  ]
+}
