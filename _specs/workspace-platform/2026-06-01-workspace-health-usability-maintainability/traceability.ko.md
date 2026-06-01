@@ -8,4 +8,4 @@
 | 계획 | `_history/plans/2026/2026-06-01-workspace-health-usability-maintainability.ko.md` |
 | 구현 | `_tools/workspace-health/` |
 | 평가 | `_history/evaluations/2026/2026-06-01-workspace-health-usability-maintainability.ko.md` |
-| 커밋 | 예정 |
+| 커밋 | `412b178` |

@@ -8,4 +8,4 @@
 | Plan | `_history/plans/2026/2026-06-01-workspace-health-usability-maintainability.en.md` |
 | Implementation | `_tools/workspace-health/` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-workspace-health-usability-maintainability.en.md` |
-| Commit | Pending |
+| Commit | `412b178` |

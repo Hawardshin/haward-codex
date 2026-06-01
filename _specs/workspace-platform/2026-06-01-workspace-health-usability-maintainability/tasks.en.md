@@ -6,4 +6,4 @@
 - [x] Update README
 - [x] Update tests
 - [x] Record verification and evaluation
-- [ ] Commit and push
+- [x] Commit and push
