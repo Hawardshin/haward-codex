@@ -7,4 +7,4 @@
 - [x] Add Structure folder map UI
 - [x] Expand collector tests
 - [x] Record final verification and evaluation
-- [ ] Commit and push
+- [x] Commit and push

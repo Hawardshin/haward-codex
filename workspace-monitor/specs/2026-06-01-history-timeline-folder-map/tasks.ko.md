@@ -7,4 +7,4 @@
 - [x] Structure 폴더 구조 UI 추가
 - [x] collector 테스트 보강
 - [x] 최종 검증과 평가 기록
-- [ ] 커밋과 push
+- [x] 커밋과 push

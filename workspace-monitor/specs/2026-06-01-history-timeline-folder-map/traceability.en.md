@@ -9,4 +9,4 @@
 | Implementation | `workspace-monitor/scripts/collect-workspace.mjs`, `workspace-monitor/components/MonitorShell.tsx`, `workspace-monitor/lib/snapshot.ts` |
 | Validation | `workspace-monitor/specs/2026-06-01-history-timeline-folder-map/validation.en.md` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-workspace-monitor-history-structure.en.md` |
-| Commit | Pending |
+| Commit | `fe6f645` |

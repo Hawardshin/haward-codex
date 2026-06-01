@@ -9,4 +9,4 @@
 | 구현 | `workspace-monitor/scripts/collect-workspace.mjs`, `workspace-monitor/components/MonitorShell.tsx`, `workspace-monitor/lib/snapshot.ts` |
 | 검증 | `workspace-monitor/specs/2026-06-01-history-timeline-folder-map/validation.ko.md` |
 | 평가 | `_history/evaluations/2026/2026-06-01-workspace-monitor-history-structure.ko.md` |
-| 커밋 | 예정 |
+| 커밋 | `fe6f645` |
