@@ -9,4 +9,4 @@
 | T5 | 운영 규칙과 메모리 부트스트랩 연결 | 완료 | `AGENTS.md`, `README.md`, `_ops/index.md`, `bootstrap-manifest.json` |
 | T6 | 요구사항, 스펙, 히스토리, 평가 기록 | 완료 | `_requirements/`, `_specs/`, `_history/` |
 | T7 | 검증 실행 후 gap 재작업 | 완료 | validation/evaluation records |
-| T8 | 커밋과 push | 대기 | git commit, `origin/main` |
+| T8 | 커밋과 push | 완료 | commit `4639ef0`, 후속 history 정리 커밋, `origin/main` push |

@@ -9,4 +9,4 @@
 | T5 | Connect operating rules and memory bootstrap | Done | `AGENTS.md`, `README.md`, `_ops/index.md`, `bootstrap-manifest.json` |
 | T6 | Record requirements, specs, history, and evaluation | Done | `_requirements/`, `_specs/`, `_history/` |
 | T7 | Run verification and rework gaps | Done | validation/evaluation records |
-| T8 | Commit and push | Pending | git commit, `origin/main` |
+| T8 | Commit and push | Done | commit `4639ef0`, follow-up history commit, `origin/main` push |
