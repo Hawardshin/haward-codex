@@ -1,0 +1,154 @@
+{
+  "task": "Ground factual claims for the platform description narrative update.",
+  "output_summary": "The platform explanation was strengthened in the root README, a paired platform identity operating model was added, the core project README was improved, and the new document was connected to navigation and memory bootstrap.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "root_readme",
+      "source": "README.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked root README updated with first-read platform description."
+    },
+    {
+      "evidence_id": "identity_ko",
+      "source": "_docs/operating-models/platform-identity-operating-model.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked Korean platform identity operating model added by this work."
+    },
+    {
+      "evidence_id": "identity_en",
+      "source": "_docs/operating-models/platform-identity-operating-model.en.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked English platform identity operating model added by this work."
+    },
+    {
+      "evidence_id": "agent_platform_readme",
+      "source": "agent-platform/README.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked core project README updated with platform-layer purpose."
+    },
+    {
+      "evidence_id": "ops_index",
+      "source": "_ops/index.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked operations navigation updated to include platform description links."
+    },
+    {
+      "evidence_id": "bootstrap",
+      "source": "agent-platform/configs/memory/bootstrap-manifest.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked memory bootstrap config updated with platform_identity_operating_model anchor."
+    },
+    {
+      "evidence_id": "memory_check",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output confirmed ready_to_bootstrap and included platform_identity_operating_model."
+    },
+    {
+      "evidence_id": "docs_audit",
+      "source": "python3 _tools/docs-audit/src/docs_audit.py --check",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output returned docs_ready with no gaps."
+    },
+    {
+      "evidence_id": "workspace_health",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --include-build",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Workspace health command passed 19 checks."
+    },
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-platform-description-narrative.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked public web search reasoning summary for this documentation update."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The root README now includes a first-read platform description covering purpose, problem, operating loop, and accumulated assets.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "root_readme"
+      ],
+      "verification_steps": [
+        "Read the opening sections of README.md."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "A paired Korean and English platform identity operating model was added under _docs/operating-models.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "identity_ko",
+        "identity_en",
+        "docs_audit"
+      ],
+      "verification_steps": [
+        "Checked both files and ran docs-audit."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The agent-platform README now describes the core project as a reusable platform layer for research, planning, evaluation, grounding, config validation, and memory.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "agent_platform_readme"
+      ],
+      "verification_steps": [
+        "Read the Purpose section of agent-platform/README.md."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The new platform identity document is discoverable through the operations index and memory bootstrap.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "ops_index",
+        "bootstrap",
+        "memory_check"
+      ],
+      "verification_steps": [
+        "Checked _ops/index.md and ran check-memory-bootstrap."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The documentation update passed the full workspace health check.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace_health"
+      ],
+      "verification_steps": [
+        "Ran python3 _tools/workspace-health/src/workspace_health.py --include-build."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "The tone of 'compelling' is subjective and can be adjusted later toward product landing copy, manifesto style, or shorter technical reference."
+  ],
+  "limitation_notes": [
+    "This work changed documentation and memory navigation, not runtime platform behavior."
+  ]
+}

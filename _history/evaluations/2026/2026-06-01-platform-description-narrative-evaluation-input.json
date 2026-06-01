@@ -1,0 +1,111 @@
+{
+  "initial_instruction": "이 플랫폼에 대한 설명을 좀 더 자세히 멋지게 적기.",
+  "result_summary": "Added a stronger first-read platform narrative to the root README, added paired Korean/English platform identity operating model documents, improved the agent-platform README purpose section, connected the new description through operations navigation and memory bootstrap, and recorded requirements, specs, web search, request trace, work summary, validation, grounding, and evaluation artifacts.",
+  "work_mode": "standard",
+  "changed_files": [
+    "README.md",
+    "agent-platform/README.md",
+    "_docs/operating-models/platform-identity-operating-model.ko.md",
+    "_docs/operating-models/platform-identity-operating-model.en.md",
+    "_docs/operating-models/README.ko.md",
+    "_docs/operating-models/README.en.md",
+    "_ops/index.md",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_ops/maps/repository-map.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-01-platform-description-narrative.ko.md",
+    "_requirements/changes/2026-06-01-platform-description-narrative.en.md",
+    "_requirements/reviews/2026-06-01-platform-description-narrative.ko.md",
+    "_requirements/reviews/2026-06-01-platform-description-narrative.en.md",
+    "_specs/workspace-platform/2026-06-01-platform-description-narrative/",
+    "_history/web-searches/2026/2026-06-01-platform-description-narrative.ko.md",
+    "_history/web-searches/2026/2026-06-01-platform-description-narrative.en.md",
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/user-requests/2026/2026-06-01.en.md",
+    "_history/request-traces/2026/2026-06-01.ko.md",
+    "_history/request-traces/2026/2026-06-01.en.md",
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.en.md",
+    "_history/2026/2026-06-01.md",
+    "_history/evaluations/2026/2026-06-01-platform-description-narrative-grounding.json",
+    "_history/evaluations/2026/2026-06-01-platform-description-narrative-evaluation-input.json"
+  ],
+  "verification": [
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready, no gaps",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap, platform_identity_operating_model included",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/research/marketing-evidence-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/integrations/notification-channels.json ../_docs/registry.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json ../_ops/naming/naming-policy.json: self_documenting, no gaps",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean, no gaps",
+    "python3 _tools/workspace-index/src/workspace_index.py: repository and prompt maps regenerated",
+    "python3 _tools/task-board/src/task_board.py: coordination boards regenerated",
+    "python3 _tools/workspace-health/src/workspace_health.py --include-build: 19 checks passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-platform-description-narrative-grounding.json: ready_to_publish",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-01-platform-description-narrative-evaluation-input.json: ready_to_close",
+    "git diff --check: passed"
+  ],
+  "references_checked": [
+    "NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework",
+    "Google PAIR People + AI Guidebook: https://pair.withgoogle.com/guidebook/",
+    "Anthropic Engineering - Building Effective Agents: https://www.anthropic.com/engineering/building-effective-agents",
+    "OpenAI Evals: https://github.com/openai/evals",
+    "Google Developer Documentation Style Guide: https://developers.google.com/style/",
+    "Diataxis Documentation Framework: https://diataxis.fr/",
+    "README.md",
+    "agent-platform/README.md",
+    "_philosophy/platform-concept-review.ko.md",
+    "_docs/operating-models/platform-operating-model.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-platform-description-narrative-grounding.json",
+    "check-grounding command: ready_to_publish"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-platform-description-narrative.ko.md",
+    "_requirements/changes/2026-06-01-platform-description-narrative.ko.md",
+    "_specs/workspace-platform/2026-06-01-platform-description-narrative/traceability.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_specs/workspace-platform/2026-06-01-platform-description-narrative/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-platform-description-narrative/spec.ko.md",
+    "_history/web-searches/2026/2026-06-01-platform-description-narrative.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-platform-description-narrative.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-01-platform-description-narrative.ko.md",
+    "_requirements/reviews/2026-06-01-platform-description-narrative.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-01-platform-description-narrative/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-platform-description-narrative/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-platform-description-narrative/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-01-platform-description-narrative/validation.ko.md",
+    "_specs/workspace-platform/2026-06-01-platform-description-narrative/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "If the platform later needs a public landing page, reuse this identity narrative but rewrite it into a shorter product-facing version.",
+    "If the user wants a stronger manifesto tone, split the identity document into a concise README overview and a more expressive philosophy note."
+  ]
+}

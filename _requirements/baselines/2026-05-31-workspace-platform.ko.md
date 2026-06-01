@@ -52,6 +52,7 @@
 | REQ-WS-034 | 저장소 운영 도구의 소스가 커지면 단일 스크립트에 CLI, 도메인 모델, 체크 정의, 실행, 직렬화를 섞지 말고 책임별 모듈로 분리해야 하며 기존 명령 호환성은 보존해야 한다. | UR-2026-06-01-018 | must | baseline | workspace/_tools | workspace-health 단위 테스트, legacy entrypoint, JSON/category 실행, 전체 health check 확인 | `_tools/workspace-health/`, `_specs/workspace-platform/2026-06-01-workspace-health-source-refactor/` |
 | REQ-WS-035 | 프로젝트, 도구, 스킬, 문서, 스펙, 히스토리, 설정, 소스 코드의 durable name은 네임스페이스별 규칙으로 관리하고, 변경 후 deterministic naming audit를 통과해야 한다. | UR-2026-06-01-019 | must | baseline | workspace/_ops/_tools/_docs | naming-audit, workspace-health, config contract, memory bootstrap 확인 | `_ops/naming/naming-policy.json`, `_docs/governance/naming-governance.ko.md`, `_tools/naming-audit/` |
 | REQ-WS-036 | 플랫폼 컨셉과 운영 철학은 주기적으로 재검토하고, 인간 최종 권한, scoped autonomy, rollback 가능성, 보안/프라이버시, 운영 비용과 agentic debt가 철학과 메모리 부트스트랩에 반영되어야 한다. | UR-2026-06-01-020 | must | baseline | workspace/_philosophy/agent-platform | philosophy review, memory bootstrap, workspace-health 확인 | `_philosophy/agent-operating-philosophy.ko.md`, `_philosophy/platform-concept-review.ko.md`, `agent-platform/configs/memory/bootstrap-manifest.json` |
+| REQ-WS-037 | 플랫폼은 첫 진입점과 운영 모델 문서에서 목적, 해결하는 문제, 핵심 루프, 축적되는 자산, 프로젝트 경계, 근거 기반 평가 가치를 포함한 상세한 정체성 설명을 제공해야 한다. | UR-2026-06-01-021 | should | baseline | workspace/_docs/agent-platform | README, docs audit, memory bootstrap 확인 | `README.md`, `_docs/operating-models/platform-identity-operating-model.ko.md`, `agent-platform/README.md` |
 
 ## 변경 관리
 
@@ -73,6 +74,7 @@
 - 2026-06-01에 REQ-WS-034를 추가해 운영 도구가 커질 때 책임별 Python package 구조로 분리하고 기존 스크립트 명령은 보존하도록 승격했다.
 - 2026-06-01에 REQ-WS-035를 추가해 durable name을 네임스페이스별 규칙으로 관리하고 naming audit로 검증하도록 승격했다.
 - 2026-06-01에 REQ-WS-036을 추가해 플랫폼 컨셉/철학 재검토와 인간 권한, 자율성 경계, 되돌림 가능성, 보안/프라이버시, 운영 부채 관점을 공통 철학과 memory anchor로 승격했다.
+- 2026-06-01에 REQ-WS-037을 추가해 플랫폼의 첫 진입점 설명과 상세 identity operating model을 공통 운영 문서로 승격했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.

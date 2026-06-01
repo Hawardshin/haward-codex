@@ -40,6 +40,7 @@
 - 새 세션의 AI 메모리 부트스트랩: [_ops/workflows/01-memory-bootstrap.md](workflows/01-memory-bootstrap.md), [agent-platform/configs/memory/bootstrap-manifest.json](../agent-platform/configs/memory/bootstrap-manifest.json)
 - 작업 모드와 전체 루프 강도를 고를 때: [_ops/workflows/02-select-work-mode.md](workflows/02-select-work-mode.md), [_ops/prompts/02-select-work-mode.md](prompts/02-select-work-mode.md), [work-mode-registry.json](../agent-platform/configs/workflows/work-mode-registry.json)
 - 지연 개선 백로그를 볼 때: [_ops/backlog/deferred-improvements.ko.md](backlog/deferred-improvements.ko.md)
+- 플랫폼 설명을 볼 때: [README.md](../README.md), [_docs/operating-models/platform-identity-operating-model.ko.md](../_docs/operating-models/platform-identity-operating-model.ko.md), [agent-platform/README.md](../agent-platform/README.md)
 - `_docs` 카테고리와 누락 방지 규칙을 볼 때: [_docs/README.ko.md](../_docs/README.ko.md), [_docs/registry.json](../_docs/registry.json), [_tools/docs-audit/README.ko.md](../_tools/docs-audit/README.ko.md)
 - 이름 구조와 네이밍 규칙을 볼 때: [_docs/governance/naming-governance.ko.md](../_docs/governance/naming-governance.ko.md), [_ops/naming/naming-policy.json](naming/naming-policy.json), [_tools/naming-audit/README.ko.md](../_tools/naming-audit/README.ko.md)
 - 공유 설정 파일 자기 설명 기준: [_docs/policies/self-documenting-config-policy.ko.md](../_docs/policies/self-documenting-config-policy.ko.md), `agent-platform`의 `check-config-contract`

@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-01",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, and platform concept/philosophy review added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, and platform description narrative added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -13,6 +13,25 @@
     }
   ],
   "tasks": [
+    {
+      "id": "2026-06-01-platform-description-narrative",
+      "title": "Improve platform description narrative",
+      "project": "_docs",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "medium",
+      "started_at": "2026-06-01",
+      "updated_at": "2026-06-01",
+      "next_action": "No action. Future platform overview edits should keep README, platform identity operating model, and memory bootstrap aligned.",
+      "blockers": [],
+      "references": [
+        "README.md",
+        "_docs/operating-models/platform-identity-operating-model.ko.md",
+        "agent-platform/README.md",
+        "_specs/workspace-platform/2026-06-01-platform-description-narrative/"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-06-01-platform-description-narrative.ko.md"
+    },
     {
       "id": "2026-06-01-platform-concept-philosophy-review",
       "title": "Review platform concept and operating philosophy",

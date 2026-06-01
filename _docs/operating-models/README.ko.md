@@ -5,6 +5,8 @@
 대표 문서:
 
 - `platform-operating-model.md`
+- `platform-identity-operating-model.ko.md`
+- `platform-identity-operating-model.en.md`
 - `context-management.md`
 - `tool-agnostic-agent-operating-model.ko.md`
 - `tool-agnostic-agent-operating-model.en.md`

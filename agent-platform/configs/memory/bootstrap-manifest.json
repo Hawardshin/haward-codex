@@ -35,10 +35,11 @@
       "The work mode selection or deferred improvement policy changes.",
       "The parallel work planning workflow, planner agent, research merge gate, or coordination lane contract changes.",
       "The notification settings, provider routing, or webhook secret handling contract changes.",
-      "The root structure policy, local-only folder rule, or structure audit command changes.",
-      "The naming policy, naming governance document, or naming audit command changes.",
-      "The foundational agent operating philosophy or platform concept review changes.",
-      "The AI assistant runtime adapter registry or tool-specific adapter files change.",
+    "The root structure policy, local-only folder rule, or structure audit command changes.",
+    "The naming policy, naming governance document, or naming audit command changes.",
+    "The foundational agent operating philosophy or platform concept review changes.",
+    "The platform identity narrative or top-level platform description changes.",
+    "The AI assistant runtime adapter registry or tool-specific adapter files change.",
       "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
       "The installation registry or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
@@ -341,6 +342,17 @@
       "used_for": [
         "foundational worldview behind repository operations",
         "search, validation, planning, evaluation, autonomy, reversibility, privacy, and debt principles"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "platform_identity_operating_model",
+      "title": "Platform Identity Operating Model",
+      "path": "_docs/operating-models/platform-identity-operating-model.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "clear first-read explanation of the platform identity",
+        "narrative bridge between philosophy, operating rules, projects, and history"
       ],
       "last_checked": "2026-06-01"
     },
@@ -729,6 +741,17 @@
         "_philosophy",
         "memory-bootstrap"
       ]
+    },
+    {
+      "id": "platform_identity_must_stay_discoverable",
+      "rule": "The platform identity operating model must remain a warm memory anchor so future sessions can explain what this workspace is before diving into detailed rules.",
+      "reason": "The user explicitly asked for a more detailed and compelling explanation of the platform.",
+      "applies_to": [
+        "anchors",
+        "required_anchor_ids",
+        "_docs/operating-models",
+        "memory-bootstrap"
+      ]
     }
   ],
   "field_guide": [
@@ -793,6 +816,7 @@
     "assistant_runtime_adapter_registry",
     "tool_agnostic_agent_operating_model",
     "agent_operating_philosophy",
+    "platform_identity_operating_model",
     "platform_readme",
     "source_registry",
     "enterprise_source_registry",
@@ -832,6 +856,7 @@
     "assistant_runtime_adapter_registry",
     "tool_agnostic_agent_operating_model",
     "agent_operating_philosophy",
+    "platform_identity_operating_model",
     "platform_readme",
     "source_registry",
     "enterprise_source_registry",
@@ -987,6 +1012,14 @@
       "path": "_philosophy/agent-operating-philosophy.ko.md",
       "tier": "warm",
       "purpose": "Foundational agent operating philosophy for search, skepticism, evaluation, autonomy, reversibility, privacy, and operating debt.",
+      "required": true,
+      "load_order": 9
+    },
+    {
+      "id": "platform_identity_operating_model",
+      "path": "_docs/operating-models/platform-identity-operating-model.ko.md",
+      "tier": "warm",
+      "purpose": "Clear first-read platform identity narrative connecting philosophy, operating loop, project structure, evidence, and long-term memory.",
       "required": true,
       "load_order": 9
     },
