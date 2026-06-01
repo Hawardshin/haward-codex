@@ -37,7 +37,7 @@
 
 - Status: `ready_to_close`
 - Blocking gaps: none
-- Commit/push: pending
+- Commit/push: `12c8992` pushed
 - Improvement ideas:
   - Tune bottleneck thresholds from observed data after multiple work timing records accumulate.
   - Add an automatic start/stop helper if manual timing updates become repetitive.

@@ -37,7 +37,7 @@
 
 - 상태: `ready_to_close`
 - blocking gap: 없음
-- 커밋/push: 예정
+- 커밋/push: `12c8992` pushed
 - 개선 아이디어:
   - 여러 작업 timing record가 쌓이면 실제 데이터로 bottleneck threshold를 조정한다.
   - 수동 timing 갱신이 반복되면 start/stop helper를 추가한다.

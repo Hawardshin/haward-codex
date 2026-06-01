@@ -9,4 +9,4 @@
 - [x] timing record 작성 및 검증
 - [x] 전체 검증 실행
 - [x] 평가 작성
-- [ ] 커밋 및 push
+- [x] 커밋 및 push

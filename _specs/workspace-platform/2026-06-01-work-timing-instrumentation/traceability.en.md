@@ -9,4 +9,4 @@
 | Implementation | `_tools/work-timer/`, `_ops/workflows/42-record-work-timing.md`, `agent-platform/src/agent_platform/evaluation/work_evaluator.py`, `workspace-monitor/` |
 | Timing record | `_history/work-timings/2026/2026-06-01-work-timing-instrumentation.json` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-work-timing-instrumentation.en.md` |
-| Commit | Pending |
+| Commit | `12c8992` pushed |

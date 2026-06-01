@@ -1,6 +1,6 @@
 # Validation: Work Timing And Bottleneck Records
 
-## Planned Checks
+## Check Items
 
 - `python3 -m unittest discover -s _tools/work-timer/tests`
 - `python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-01-work-timing-instrumentation.json`
@@ -28,3 +28,7 @@
 - `python3 _tools/workspace-health/src/workspace_health.py --include-build`: 21 checks passed
 - `PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-work-timing-instrumentation-grounding.json`: `ready_to_publish`
 - `PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-01-work-timing-instrumentation-evaluation-input.json`: `ready_to_close`
+- After recording commit/push status, `python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-01-work-timing-instrumentation.json`: `ready`, measured total 1207 seconds
+- After recording commit/push status, `python3 _tools/task-board/src/task_board.py`: coordination boards regenerated
+- After recording commit/push status, `npm run build` from `workspace-monitor/`: passed and regenerated snapshot
+- After recording commit/push status, `python3 _tools/workspace-health/src/workspace_health.py --category governance`: 7 checks passed

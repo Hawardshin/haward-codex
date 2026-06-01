@@ -9,4 +9,4 @@
 - [x] Write and validate timing record
 - [x] Run full verification
 - [x] Write evaluation
-- [ ] Commit and push
+- [x] Commit and push

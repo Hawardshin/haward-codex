@@ -5,7 +5,7 @@
   "work_mode": "governance",
   "measurement_quality": "partial",
   "started_at": null,
-  "ended_at": null,
+  "ended_at": "2026-06-01T18:47:55+0900",
   "measurement_note": "Timing instrumentation was introduced during this task, so early phases are explicitly marked as not measured. Measured spans start when the work-timing implementation phase was consciously tracked.",
   "phases": [
     {
@@ -66,14 +66,16 @@
     {
       "phase_id": "commit_push",
       "label": "Commit and push",
-      "status": "pending",
-      "measurement": "not_measured",
-      "bottleneck_notes": ""
+      "status": "completed",
+      "started_at": "2026-06-01T18:47:14+0900",
+      "ended_at": "2026-06-01T18:47:55+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Measured the first implementation commit and push. A follow-up metadata commit records the finalized commit references."
     }
   ],
   "bottleneck_analysis": {
     "current_candidate": "implementation",
-    "interpretation": "The measured implementation span is currently the only measured phase and therefore the visible bottleneck candidate. Early intake and planning phases were not measured because timing instrumentation did not exist yet.",
+    "interpretation": "Among measured phases, implementation is the visible bottleneck candidate. Early intake and planning phases were not measured because timing instrumentation did not exist yet.",
     "improvement_candidates": [
       "For future tasks, create the timing record immediately after work_mode selection.",
       "After several records accumulate, compare repeated verification and documentation phases for automation opportunities."

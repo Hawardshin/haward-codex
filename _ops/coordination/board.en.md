@@ -14,7 +14,7 @@
 
 | ID | Title | Project | Status | Agent | Timing | Bottleneck | Next Action |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2026-06-01-work-timing-instrumentation | Add phase-level work timing and bottleneck visibility | _tools | in_progress | codex-primary | 19m 26s | Implementation (14m 1s) | Finish verification, evaluation, commit, and push. |
+| 2026-06-01-work-timing-instrumentation | Add phase-level work timing and bottleneck visibility | _tools | completed | codex-primary | 20m 7s | Implementation (14m 1s) | No action. Future meaningful work should create or update a timing report and include timing_summary_targets when required by work mode. |
 | 2026-06-01-coding-project-bootstrap | Add technology-aware coding project bootstrap tool | _tools | completed | codex-primary | not recorded | not recorded | No action. Future new coding projects can run coding-project-bootstrap plan first, then create with --apply and optional --register. |
 | 2026-06-01-platform-presentation-pack | Prepare platform and per-project presentation decks | presentation-agent | completed | codex-primary | not recorded | not recorded | No action. Future presentation work can build on the deck-specs, HTML artifacts, script guide, and source notes. |
 | 2026-06-01-platform-description-narrative | Improve platform description narrative | _docs | completed | codex-primary | not recorded | not recorded | No action. Future platform overview edits should keep README, platform identity operating model, and memory bootstrap aligned. |

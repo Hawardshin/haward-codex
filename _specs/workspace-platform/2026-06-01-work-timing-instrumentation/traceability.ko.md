@@ -9,4 +9,4 @@
 | 구현 | `_tools/work-timer/`, `_ops/workflows/42-record-work-timing.md`, `agent-platform/src/agent_platform/evaluation/work_evaluator.py`, `workspace-monitor/` |
 | 시간 기록 | `_history/work-timings/2026/2026-06-01-work-timing-instrumentation.json` |
 | 평가 | `_history/evaluations/2026/2026-06-01-work-timing-instrumentation.ko.md` |
-| 커밋 | 예정 |
+| 커밋 | `12c8992` pushed |
