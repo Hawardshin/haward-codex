@@ -1,0 +1,88 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-02-profit-analyst-agent",
+  "title": "Add reusable Profit Analyst agent",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "summary": "Added a Profit Analyst agent spec that evaluates work through money, profit, ROI, cost-benefit, pricing, unit economics, opportunity cost, and scenario/sensitivity lenses.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 540,
+      "notes": "Checked OMB A-94, SBA break-even guidance, HBS value-based strategy, KPMG SaaS performance, ICAEW financial modelling, and FCA scenario analysis references."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 120,
+      "notes": "Ran memory bootstrap and reused platform governance anchors."
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 300,
+      "notes": "Selected governance mode and agent-platform ownership."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 840,
+      "notes": "Added REQ-WS-066, specs, source provenance, and plan evidence."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 600,
+      "notes": "Added agent config, docs, and history artifacts."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 720,
+      "notes": "Run agent inspection/list/orchestration, unit tests, memory/config/docs checks, workspace maps, task board, workspace health, and monitor collect/test/check/build."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 360,
+      "notes": "Run omission, grounding, and work evaluator checks; write evaluation reports."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 60,
+      "notes": "Commit and push are performed as the final close-out step after evaluation."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "requirements_spec",
+    "bottleneck_notes": [
+      "Governance artifacts and bilingual documentation dominate this agent-only change.",
+      "The agent reuses existing research, grounding, omission, source collection, and timing tools instead of creating a financial modelling runtime."
+    ],
+    "improvement_candidates": [
+      "Create a profit decision brief template after real uses reveal stable fields and formulas."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-profit-analyst-agent.ko.md",
+    "agent-platform/configs/agents/profit-analyst-agent.json"
+  ]
+}

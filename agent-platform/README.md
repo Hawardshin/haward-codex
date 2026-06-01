@@ -53,6 +53,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep end-user desktop installer productization in `platform-desktop-app/`; this is separate from repository setup `install_mode`.
 - Keep deadline, duration, timebox, critical-path, schedule-risk, and hurry-up trade-off reminders in `timekeeper-agent`; urgency should change scope, sequence, parallelization, or checkpoint cadence, not bypass required checks.
 - Keep make-it-happen positive vision in `positive-vision-agent`; optimism should produce agency, pathways, if-then next steps, risk truth, fallback options, and verification gates, not unsupported guarantees.
+- Keep money-side judgment in `profit-analyst-agent`; profit analysis should expose revenue/cost drivers, ROI, break-even, unit economics, opportunity cost, scenario/sensitivity, source provenance, and high-risk financial review needs.
 - Keep external CLI integration in `configs/integrations/cli-adapter-registry.json`; the installable platform may use many CLIs through adapters but must not depend on one CLI to function.
 - Keep multi-process CLI orchestration plans in `configs/integrations/cli-pipeline-template.json` or task-specific history targets; use `cli-pipeline-agent` before launching, piping, exchanging file/artifact handoffs, merging, or cancelling several CLI processes together.
 - Keep reusable agent creation and multi-agent orchestration contracts in `configs/orchestration/agent-orchestration-registry.json`; use `agent-orchestrator-agent` before creating new reusable agents, changing agent specs, or connecting agents through supervisor/router/pipeline/fan-out/handoff patterns.
@@ -100,6 +101,7 @@ PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/exampl
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/infrastructure-expert-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/timekeeper-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/positive-vision-agent.json
+PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/profit-analyst-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli score-oss configs/open-source/candidate-template.json
 PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/work-evaluation-template.json
 PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluation/knowledge-validation-template.json
@@ -170,6 +172,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `infrastructure-expert-agent` plans and reviews infrastructure, deployment, cloud, SRE, IaC, Kubernetes, networking, security, cost, observability, backup/DR, and production-readiness decisions with official-source grounding, human checkpoints, rollback, and resource/CLI safety gates
 - `timekeeper-agent` keeps deadlines, duration, timeboxes, critical path, schedule risk, bottlenecks, next checkpoints, and hurry-up trade-offs visible while preserving quality and safety gates
 - `positive-vision-agent` turns difficult-work pressure into grounded positive vision, agency levers, multiple pathways, if-then implementation intentions, risk truth, fallback options, and verification gates
+- `profit-analyst-agent` evaluates work through profit, ROI, cost-benefit, pricing, unit economics, opportunity cost, scenario/sensitivity, source provenance, and high-risk financial review gates
 - `skill-lifecycle-agent` creates, validates, tracks, and improves repository-managed Codex skills
 - `parallel-work-planner-agent` checks task dependencies, file/resource boundaries, execution batches, research fan-in merge gates, coordination targets, and merge verification before parallel execution
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`

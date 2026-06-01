@@ -1,0 +1,124 @@
+{
+  "initial_instruction": "The user requested a money/profit-side expert: '이득 즉 돈적으로 전문가'.",
+  "result_summary": "Added a reusable Profit Analyst agent spec with money-side judgment, revenue/cost drivers, ROI, NPV, payback, break-even, unit economics, pricing, opportunity cost, scenario/sensitivity analysis, source provenance, Korean/English docs, requirements, specs, research notes, timing, and history links.",
+  "work_mode": "governance",
+  "changed_files": [
+    "agent-platform/configs/agents/profit-analyst-agent.json",
+    "agent-platform/docs/profit-analyst-agent.ko.md",
+    "agent-platform/docs/profit-analyst-agent.en.md",
+    "agent-platform/README.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-profit-analyst-agent.ko.md",
+    "_requirements/changes/2026-06-02-profit-analyst-agent.en.md",
+    "_requirements/reviews/2026-06-02-profit-analyst-agent.ko.md",
+    "_requirements/reviews/2026-06-02-profit-analyst-agent.en.md",
+    "_specs/workspace-platform/2026-06-02-profit-analyst-agent/",
+    "_research/topics/profit-analysis/2026-06-02-profit-analyst-agent.ko.md",
+    "_research/topics/profit-analysis/2026-06-02-profit-analyst-agent.en.md",
+    "_history/web-searches/2026/2026-06-02-profit-analyst-agent.ko.md",
+    "_history/plans/2026/2026-06-02-profit-analyst-agent.ko.md",
+    "_history/request-traces/2026/2026-06-02-profit-analyst-agent.ko.md",
+    "_history/work-timings/2026/2026-06-02-profit-analyst-agent.json",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/maps/repository-map.md",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json"
+  ],
+  "verification": [
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/profit-analyst-agent.json: passed",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents: profit-analyst-agent listed",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json: ready",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-profit-analyst-agent.json: ready",
+    "cd agent-platform && PYTHONPATH=src python3 -m unittest discover -s tests: 150 tests OK",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json: self_documenting",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "python3 _tools/workspace-index/src/workspace_index.py: updated maps",
+    "python3 _tools/task-board/src/task_board.py: updated boards",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean with pre-existing presentation-agent generated-output warnings",
+    "python3 _tools/workspace-health/src/workspace_health.py --category governance --category projects --category tools: 18 checks passed",
+    "cd workspace-monitor && npm run collect && npm test && npm run check && npm run build: passed"
+  ],
+  "references_checked": [
+    "https://www.whitehouse.gov/wp-content/uploads/2023/11/CircularA-94.pdf",
+    "https://www.transportation.gov/regulations/omb-circular-94",
+    "https://www.sba.gov/business-guide/plan-your-business/calculate-your-startup-costs/break-even-point",
+    "https://online.hbs.edu/blog/post/value-based-strategy",
+    "https://www.hbs.edu/faculty/Pages/item.aspx?num=42546",
+    "https://assets.kpmg.com/content/dam/kpmg/pdf/2016/07/transforming-your-SAAS-business-a-strategic-guide-for-optimizing-business-performance.pdf",
+    "https://www.icaew.com/-/media/corporate/files/technical/technology/excel/2019-webinars/305---1911358-financial-modelling-code.ashx",
+    "https://www.fca.org.uk/publication/corporate/cfrf-guide-2022-scenario-analysis-banking-guide.pdf",
+    "agent-platform/configs/orchestration/agent-orchestration-registry.json",
+    "agent-platform/README.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-profit-analyst-agent-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-02-profit-analyst-agent.ko.md",
+    "_history/source-provenance/2026/2026-06-02-profit-analyst-agent.en.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-02-profit-analyst-agent.ko.md",
+    "_history/plan-evidence/2026/2026-06-02-profit-analyst-agent.en.md",
+    "_specs/workspace-platform/2026-06-02-profit-analyst-agent/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-profit-analyst-agent.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-profit-analyst-agent-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-profit-analyst-agent.ko.md",
+    "_history/web-searches/2026/2026-06-02-profit-analyst-agent.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-profit-analyst-agent.ko.md",
+    "_requirements/reviews/2026-06-02-profit-analyst-agent.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-profit-analyst-agent/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-profit-analyst-agent/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-profit-analyst-agent/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-profit-analyst-agent/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-profit-analyst-agent/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-profit-analyst-agent.ko.md",
+    "_history/request-traces/2026/2026-06-02-profit-analyst-agent.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-profit-analyst-agent.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Create a reusable profit decision brief template with formulas after two or more real uses reveal stable fields.",
+    "Consider a spreadsheet or HTML calculator artifact only after a real project needs repeatable numeric modelling."
+  ]
+}
