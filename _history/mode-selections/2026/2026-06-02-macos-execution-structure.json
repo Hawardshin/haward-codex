@@ -1,0 +1,38 @@
+{
+  "schema_version": "2026-06-02",
+  "request_id": "UR-2026-06-02-027",
+  "selected_mode": "governance",
+  "reason": "The request changes durable platform structure, installable desktop productization rules, requirements, specs, memory anchors, and future release gates.",
+  "considered_modes": [
+    {
+      "mode": "quick",
+      "decision": "rejected",
+      "reason": "Too durable and cross-cutting for a quick answer."
+    },
+    {
+      "mode": "standard",
+      "decision": "rejected",
+      "reason": "The change affects persistent instructions, requirements baselines, memory bootstrap, and release governance."
+    },
+    {
+      "mode": "governance",
+      "decision": "selected",
+      "reason": "A macOS execution structure is a long-lived operating rule for the installable platform."
+    }
+  ],
+  "required_targets": [
+    "web_search_record_targets",
+    "user_request_summary_targets",
+    "requirements_targets",
+    "spec_targets",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "mode_selection_record_targets",
+    "omission_check_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets"
+  ],
+  "overrides": []
+}
+

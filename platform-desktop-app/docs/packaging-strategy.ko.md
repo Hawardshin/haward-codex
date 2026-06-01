@@ -17,6 +17,7 @@
 - 장점: 기존 web UI를 감싸기 쉽고, 작은 번들 목표에 맞다.
 - 리스크: Rust/toolchain, Python sidecar 또는 local service 경계 설계가 필요하다.
 - 확인 필요: `workspace-monitor` static export 호환성, update 전략, macOS/Windows signing.
+- macOS 실행 구조: `platform-desktop-app/configs/macos-execution-profile.json`을 먼저 확인한다.
 
 ### Go local service / Wails 비교
 
@@ -66,6 +67,7 @@ Electron은 mature ecosystem과 풍부한 installer 사례가 강점이다.
 - project-local dependency install audit
 - license/security review
 - macOS signing/notarization plan
+- macOS execution profile review
 - Windows signing/installer format decision
 - install/first-run/update/uninstall/rollback smoke tests
 - privacy review

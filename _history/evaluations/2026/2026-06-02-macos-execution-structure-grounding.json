@@ -1,0 +1,126 @@
+{
+  "task": "Ground final claims for the macOS execution structure work",
+  "output_summary": "A macOS execution profile, docs, requirements, specs, memory anchor, and history records were added for platform-desktop-app. No actual macOS app build, signing, or notarization was performed.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "macos-profile",
+      "source": "platform-desktop-app/configs/macos-execution-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "The created config is the source of truth for macOS execution levels and release gates."
+    },
+    {
+      "evidence_id": "requirement",
+      "source": "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "The shared requirements baseline records REQ-WS-069."
+    },
+    {
+      "evidence_id": "persistent-instructions",
+      "source": "AGENTS.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Top-level repository instructions record the macOS execution rule."
+    },
+    {
+      "evidence_id": "apple-docs",
+      "source": "https://help.apple.com/xcode/mac/current/en.lproj/dev033e997ca.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Apple/Xcode official guidance for outside-App-Store distribution, Developer ID signing, notarization, and Gatekeeper testing."
+    },
+    {
+      "evidence_id": "tauri-docs",
+      "source": "https://v2.tauri.app/distribute/sign/macos/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Tauri official guidance for macOS code signing and notarization in Tauri apps."
+    },
+    {
+      "evidence_id": "validation-output",
+      "source": "local command outputs in this work turn",
+      "source_type": "tool_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Config contract, unit tests, audits, workspace monitor build, and workspace health checks returned success."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now contains `platform-desktop-app/configs/macos-execution-profile.json` as a macOS execution profile.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "macos-profile"
+      ],
+      "verification_steps": [
+        "Parsed the JSON file.",
+        "Ran config contract checks."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "REQ-WS-069 was added for macOS executable structure.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "requirement"
+      ],
+      "verification_steps": [
+        "Checked the shared requirements baseline."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Durable instructions now point future macOS runnable work to the macOS execution profile and warn against public readiness claims without signing/notarization gates.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "persistent-instructions"
+      ],
+      "verification_steps": [
+        "Checked AGENTS.md and persistent instructions."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Public outside-App-Store macOS distribution needs stronger signing, hardened runtime, notarization, and launch-test gates than a local developer run.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "apple-docs",
+        "tauri-docs"
+      ],
+      "verification_steps": [
+        "Checked official Apple/Xcode and Tauri documentation through the saved web search record."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "No actual macOS .app build, code signing, notarization, or updater implementation was completed in this task.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "macos-profile",
+        "validation-output"
+      ],
+      "verification_steps": [
+        "Checked docs and task list scope exclusions.",
+        "No install audit or build artifact was created."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Actual macOS release readiness cannot be verified until Tauri/Electron app code exists and Apple Developer signing/notarization credentials are available."
+  ],
+  "limitation_notes": [
+    "This work defines macOS structure and release gates only; it does not produce a runnable .app."
+  ]
+}

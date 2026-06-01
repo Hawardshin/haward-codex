@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-02",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, platform description narrative, platform presentation pack, coding project bootstrap, work timing/bottleneck visibility, deep research agent, PPT reference expansion, non-blocking clarification, human decision inbox interrupt/resume, install mode split, installable software productization, agent/history visualization, runtime language direction, runtime language research/design workflow, CLI adapter boundary, unstructured-data structuring capability, work mode enforcement, omission prevention gate, resource leak prevention gate, CLI pipeline orchestration gate, CLI pipeline file/artifact handoff contract, reusable agent creation/orchestration registry, view mode selection, installable desktop user-flow design, source code viewer, agent collaboration board, subtle cute UI tone, infrastructure expert agent, timekeeper agent, positive vision agent, profit analyst agent, principle guardian agent, and human arbitration agent work tracked. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, platform description narrative, platform presentation pack, coding project bootstrap, work timing/bottleneck visibility, deep research agent, PPT reference expansion, non-blocking clarification, human decision inbox interrupt/resume, install mode split, installable software productization, agent/history visualization, runtime language direction, runtime language research/design workflow, CLI adapter boundary, unstructured-data structuring capability, work mode enforcement, omission prevention gate, resource leak prevention gate, CLI pipeline orchestration gate, CLI pipeline file/artifact handoff contract, reusable agent creation/orchestration registry, view mode selection, installable desktop user-flow design, macOS execution structure, source code viewer, agent collaboration board, subtle cute UI tone, infrastructure expert agent, timekeeper agent, positive vision agent, profit analyst agent, principle guardian agent, and human arbitration agent work tracked. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -13,6 +13,28 @@
     }
   ],
   "tasks": [
+    {
+      "id": "2026-06-02-macos-execution-structure",
+      "title": "Define macOS runnable desktop structure",
+      "project": "platform-desktop-app",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-02",
+      "updated_at": "2026-06-02",
+      "next_action": "No action. Future macOS desktop implementation, Tauri scaffolding, .app packaging, signing, notarization, update, or clean Mac smoke-test work should use macos-execution-profile before implementation.",
+      "blockers": [],
+      "references": [
+        "platform-desktop-app/configs/macos-execution-profile.json",
+        "platform-desktop-app/docs/macos-execution-structure.ko.md",
+        "platform-desktop-app/specs/2026-06-02-macos-execution-structure/",
+        "_requirements/changes/2026-06-02-macos-execution-structure.ko.md",
+        "_history/web-searches/2026/2026-06-02-macos-execution-structure.ko.md",
+        "_history/plan-evidence/2026/2026-06-02-macos-execution-structure.ko.md"
+      ],
+      "timing_report": "_history/work-timings/2026/2026-06-02-macos-execution-structure.json",
+      "evaluation_report": "_history/evaluations/2026/2026-06-02-macos-execution-structure.ko.md"
+    },
     {
       "id": "2026-06-02-human-arbitration-agent",
       "title": "Add reusable Human Arbitration agent",

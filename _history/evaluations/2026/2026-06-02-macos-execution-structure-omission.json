@@ -1,0 +1,169 @@
+{
+  "task": "Define macOS runnable desktop structure",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "interpret-request",
+      "description": "Interpret the user's macOS request as a durable installable desktop execution structure.",
+      "source": "UR-2026-06-02-027",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_history/plans/2026/2026-06-02-macos-execution-structure.ko.md"
+      ],
+      "rationale": "The request was summarized and planned as a macOS execution structure for platform-desktop-app."
+    },
+    {
+      "item_id": "web-first",
+      "description": "Run web-first research and save a public search record.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-macos-execution-structure.ko.md",
+        "_history/web-searches/2026/2026-06-02-macos-execution-structure.en.md"
+      ],
+      "rationale": "The search record lists queries, official sources checked, weak sources ignored, plan impact, and uncertainty."
+    },
+    {
+      "item_id": "requirements",
+      "description": "Add or link shared and project requirements for macOS executable structure.",
+      "source": "governance work mode",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_requirements/changes/2026-06-02-macos-execution-structure.ko.md",
+        "_requirements/reviews/2026-06-02-macos-execution-structure.ko.md",
+        "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md"
+      ],
+      "rationale": "REQ-WS-069 and PDA-REQ-007 were added and reviewed."
+    },
+    {
+      "item_id": "macos-config",
+      "description": "Create a self-documenting macOS execution source-of-truth config.",
+      "source": "REQ-WS-069",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/macos-execution-profile.json",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/macos-execution-profile.json"
+      ],
+      "rationale": "The config includes reader_guide, reference_links, structure_rules, field_guide, execution levels, process model, signing/notarization gates, update strategy, and smoke tests."
+    },
+    {
+      "item_id": "docs-and-spec",
+      "description": "Create paired docs and project spec artifacts.",
+      "source": "language and spec-driven rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/docs/macos-execution-structure.ko.md",
+        "platform-desktop-app/docs/macos-execution-structure.en.md",
+        "platform-desktop-app/specs/2026-06-02-macos-execution-structure/"
+      ],
+      "rationale": "Korean/English docs and spec, plan, tasks, validation, traceability files exist."
+    },
+    {
+      "item_id": "persistent-memory",
+      "description": "Persist the macOS execution rule and make the config discoverable through memory bootstrap.",
+      "source": "persistent instruction rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "AGENTS.md",
+        "_docs/instructions/persistent-instructions.ko.md",
+        "_docs/instructions/persistent-instructions.en.md",
+        "agent-platform/configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": "Durable instructions now point to the macOS profile, and memory bootstrap includes macos_execution_profile."
+    },
+    {
+      "item_id": "no-false-build-claim",
+      "description": "Explicitly avoid claiming actual .app build, signing, notarization, or public macOS readiness.",
+      "source": "hallucination prevention",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/docs/macos-execution-structure.ko.md",
+        "platform-desktop-app/specs/2026-06-02-macos-execution-structure/tasks.ko.md"
+      ],
+      "rationale": "Docs and tasks explicitly mark Tauri/Electron install, .app build, signing certificate, notarization, and auto-update implementation as not done/deferred."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/configs/macos-execution-profile.json",
+      "purpose": "macOS execution source-of-truth config.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/macos-execution-structure.ko.md",
+      "purpose": "Korean user-facing macOS execution structure document.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/macos-execution-structure.en.md",
+      "purpose": "English companion macOS execution structure document.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-02-macos-execution-structure/spec.ko.md",
+      "purpose": "Project spec artifact.",
+      "required": true
+    },
+    {
+      "path": "_history/source-provenance/2026/2026-06-02-macos-execution-structure.ko.md",
+      "purpose": "Source provenance record.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "json-configs",
+      "description": "Parse the macOS and desktop distribution configs as JSON.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 -m json.tool platform-desktop-app/configs/macos-execution-profile.json: passed",
+        "python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json: passed"
+      ],
+      "rationale": "Both config files parsed successfully."
+    },
+    {
+      "check_id": "config-contract",
+      "description": "Run self-documenting config contract checks.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "macos-execution-profile: self_documenting",
+        "core config contracts: self_documenting"
+      ],
+      "rationale": "Config contract reports require no rework."
+    },
+    {
+      "check_id": "full-verification",
+      "description": "Run repository validation before close-out.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "agent-platform unit tests: 150 tests OK",
+        "memory bootstrap: ready_to_bootstrap",
+        "docs/naming/structure audits: passed",
+        "work timer: ready",
+        "workspace index and task board regenerated",
+        "workspace-monitor collect/test/check/build: passed",
+        "workspace-health: 18 checks passed"
+      ],
+      "rationale": "Full verification completed successfully. Structure audit retained pre-existing presentation-agent generated-output warnings but returned clean/requires_rework=false."
+    }
+  ],
+  "known_omission_risks": [
+    "No Tauri/Electron dependency was installed and no .app, DMG, ZIP, PKG, signing, notarization, or updater was executed because this task defines the runnable macOS structure only."
+  ],
+  "notes": [
+    "Actual macOS implementation should become a separate install-audited task."
+  ]
+}
+

@@ -17,6 +17,7 @@ The current recommendation is a Tauri-first prototype.
 - Strengths: wraps an existing web UI and aligns with smaller bundle goals.
 - Risks: Rust/toolchain setup and explicit Python sidecar or local service boundary design.
 - Must check: `workspace-monitor` static export compatibility, update strategy, macOS/Windows signing.
+- macOS execution structure: check `platform-desktop-app/configs/macos-execution-profile.json` first.
 
 ### Go Local Service / Wails Comparison
 
@@ -66,6 +67,7 @@ Before calling a build distributable installable software, complete:
 - Project-local dependency installation audit
 - License and security review
 - macOS signing/notarization plan
+- macOS execution profile review
 - Windows signing and installer format decision
 - Install, first-run, update, uninstall, and rollback smoke tests
 - Privacy review

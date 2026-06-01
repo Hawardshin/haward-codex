@@ -1,0 +1,171 @@
+{
+  "initial_instruction": "The user said: 'MACOS에서 실행이 가능한 구조.'",
+  "result_summary": "Defined the installable platform's macOS runnable structure by adding a self-documenting macOS execution profile, docs, shared/project requirements, spec artifacts, memory anchors, persistent instructions, provenance, plan evidence, timing, and evaluation records. The work explicitly does not claim that an actual macOS .app was built, signed, or notarized.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "agent-platform/README.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/configs/desktop-distribution-registry.json",
+    "platform-desktop-app/configs/macos-execution-profile.json",
+    "platform-desktop-app/docs/macos-execution-structure.ko.md",
+    "platform-desktop-app/docs/macos-execution-structure.en.md",
+    "platform-desktop-app/docs/packaging-strategy.ko.md",
+    "platform-desktop-app/docs/packaging-strategy.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-macos-execution-structure.ko.md",
+    "_requirements/changes/2026-06-02-macos-execution-structure.en.md",
+    "_requirements/reviews/2026-06-02-macos-execution-structure.ko.md",
+    "_requirements/reviews/2026-06-02-macos-execution-structure.en.md",
+    "_research/topics/macos-execution/2026-06-02-macos-execution-structure.ko.md",
+    "_research/topics/macos-execution/2026-06-02-macos-execution-structure.en.md",
+    "_history/web-searches/2026/2026-06-02-macos-execution-structure.ko.md",
+    "_history/web-searches/2026/2026-06-02-macos-execution-structure.en.md",
+    "_history/source-provenance/2026/2026-06-02-macos-execution-structure.ko.md",
+    "_history/source-provenance/2026/2026-06-02-macos-execution-structure.en.md",
+    "_history/plan-evidence/2026/2026-06-02-macos-execution-structure.ko.md",
+    "_history/plan-evidence/2026/2026-06-02-macos-execution-structure.en.md",
+    "_history/plans/2026/2026-06-02-macos-execution-structure.ko.md",
+    "_history/plans/2026/2026-06-02-macos-execution-structure.en.md",
+    "_history/mode-selections/2026/2026-06-02-macos-execution-structure.json",
+    "_history/request-traces/2026/2026-06-02-macos-execution-structure.ko.md",
+    "_history/request-traces/2026/2026-06-02-macos-execution-structure.en.md",
+    "_history/work-timings/2026/2026-06-02-macos-execution-structure.json",
+    "_history/evaluations/2026/2026-06-02-macos-execution-structure-omission.json",
+    "_history/evaluations/2026/2026-06-02-macos-execution-structure-grounding.json",
+    "_history/evaluations/2026/2026-06-02-macos-execution-structure-evaluation-input.json",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/2026/2026-06-02.md",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json"
+  ],
+  "verification": [
+    "python3 -m json.tool platform-desktop-app/configs/macos-execution-profile.json: passed",
+    "python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json: passed",
+    "python3 -m json.tool _ops/coordination/status.json: passed",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/macos-execution-profile.json ../platform-desktop-app/configs/desktop-distribution-registry.json: self_documenting",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract <core configs including macos-execution-profile>: self_documenting",
+    "cd agent-platform && PYTHONPATH=src python3 -m unittest discover -s tests: 150 tests OK",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean with pre-existing presentation-agent generated-output warnings",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-macos-execution-structure.json: ready",
+    "python3 _tools/workspace-index/src/workspace_index.py: updated maps",
+    "python3 _tools/task-board/src/task_board.py: updated boards",
+    "cd workspace-monitor && npm run collect && npm test && npm run check && npm run build: passed",
+    "python3 _tools/workspace-health/src/workspace_health.py --category governance --category projects --category tools: 18 checks passed"
+  ],
+  "references_checked": [
+    "https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution",
+    "https://developer.apple.com/documentation/security/hardened-runtime",
+    "https://developer.apple.com/documentation/xcode/packaging-mac-software-for-distribution",
+    "https://help.apple.com/xcode/mac/current/en.lproj/dev033e997ca.html",
+    "https://v2.tauri.app/distribute/",
+    "https://v2.tauri.app/distribute/sign/macos/",
+    "https://v2.tauri.app/plugin/updater/",
+    "https://www.electronjs.org/docs/latest/tutorial/code-signing",
+    "https://www.electronjs.org/docs/api/auto-updater/",
+    "platform-desktop-app/configs/desktop-distribution-registry.json",
+    "platform-desktop-app/configs/user-flow-registry.json",
+    "agent-platform/configs/integrations/cli-adapter-registry.json",
+    "agent-platform/configs/runtime/language-decision-registry.json",
+    "AGENTS.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-macos-execution-structure-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-02-macos-execution-structure.ko.md",
+    "_history/source-provenance/2026/2026-06-02-macos-execution-structure.en.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-02-macos-execution-structure.ko.md",
+    "_history/plan-evidence/2026/2026-06-02-macos-execution-structure.en.md",
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-macos-execution-structure.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-macos-execution-structure-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-macos-execution-structure.ko.md",
+    "_history/web-searches/2026/2026-06-02-macos-execution-structure.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-macos-execution-structure.ko.md",
+    "_requirements/changes/2026-06-02-macos-execution-structure.en.md",
+    "_requirements/reviews/2026-06-02-macos-execution-structure.ko.md",
+    "_requirements/reviews/2026-06-02-macos-execution-structure.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/spec.en.md",
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/plan.en.md",
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/tasks.en.md",
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/validation.en.md",
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/traceability.ko.md",
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/traceability.en.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-macos-execution-structure.ko.md",
+    "_history/request-traces/2026/2026-06-02-macos-execution-structure.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-macos-execution-structure.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "limitation_notes": [
+    "Actual macOS .app implementation, dependency installation, signing, notarization, and updater are intentionally outside this structural task."
+  ],
+  "improvement_ideas": [
+    "After Tauri scaffolding exists, add a deterministic macOS release readiness checker for app bundle, signing, notarization, stapling, updater, and smoke-test evidence.",
+    "Create a clean Mac smoke-test checklist or script when Apple signing credentials and a build artifact are available."
+  ]
+}

@@ -53,6 +53,7 @@
       "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
       "The install mode registry, installation registry, or installation audit contract changes.",
       "The installable desktop software productization project, desktop distribution registry, or installer release gate policy changes.",
+      "The macOS execution profile, macOS runnable structure, signing, hardened runtime, notarization, stapling, update, or clean Mac smoke-test gate changes.",
       "The runtime language decision registry, Rust/Go/Tauri/Wails direction, or runtime language selection policy changes.",
       "The CLI adapter registry, CLI pipeline template, external command execution boundary, optional CLI dependency posture, multi-process pipe orchestration, or missing-CLI fallback policy changes.",
       "The agent orchestration registry, reusable agent blueprint contract, multi-agent orchestration pattern, or agent spec validation command changes.",
@@ -187,6 +188,18 @@
         "end-user installable software productization",
         "desktop installer framework and release gate decisions",
         "separating installer packaging from repository setup install_mode"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "macos_execution_profile",
+      "title": "macOS Execution Profile",
+      "path": "platform-desktop-app/configs/macos-execution-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "macOS developer local run versus internal test app versus public distribution levels",
+        "Tauri-first app shell and Python agent sidecar boundary",
+        "Developer ID signing, hardened runtime, notarization, stapling, update, and clean Mac smoke-test gates"
       ],
       "last_checked": "2026-06-02"
     },
@@ -1094,6 +1107,17 @@
       ]
     },
     {
+      "id": "macos_execution_profile_must_stay_discoverable",
+      "rule": "The macOS execution profile must remain a warm memory anchor so future installable desktop work does not confuse local runnable prototypes with signed, hardened, notarized, and smoke-tested public macOS distribution.",
+      "reason": "The user explicitly asked for a macOS-runnable structure; public macOS readiness has stronger security, signing, notarization, update, and workspace-boundary gates than local development.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "macos-execution-profile"
+      ]
+    },
+    {
       "id": "root_structure_policy_must_stay_discoverable",
       "rule": "The root structure policy must remain a warm memory anchor because future sessions need a deterministic way to classify root folders, runtime adapters, local-only scratch, generated outputs, and registered projects.",
       "reason": "The user explicitly asked to improve any folder-structure contradictions or management friction as the workspace grows.",
@@ -1209,6 +1233,7 @@
     "resource_leak_prevention_workflow",
     "install_mode_registry",
     "desktop_distribution_registry",
+    "macos_execution_profile",
     "desktop_user_flow_registry",
     "language_decision_registry",
     "work_timing_policy",
@@ -1269,6 +1294,7 @@
     "resource_leak_prevention_workflow",
     "install_mode_registry",
     "desktop_distribution_registry",
+    "macos_execution_profile",
     "desktop_user_flow_registry",
     "language_decision_registry",
     "work_timing_policy",
@@ -1431,6 +1457,14 @@
       "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
       "tier": "warm",
       "purpose": "End-user installable desktop software productization registry, kept separate from repository setup install_mode.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "macos_execution_profile",
+      "path": "platform-desktop-app/configs/macos-execution-profile.json",
+      "tier": "warm",
+      "purpose": "macOS-specific execution levels, process model, bundle/signing/notarization/update/smoke-test gates for runnable desktop app structure.",
       "required": true,
       "load_order": 8
     },

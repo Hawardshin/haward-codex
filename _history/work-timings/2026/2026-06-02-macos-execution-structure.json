@@ -1,0 +1,97 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-02-macos-execution-structure",
+  "title": "Define macOS runnable desktop structure",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "summary": "Added a macOS execution profile and governance artifacts so the installable platform separates local run, internal .app testing, and public signed/notarized distribution readiness.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 360,
+      "bottleneck_notes": "Official Apple, Tauri, and Electron docs were checked before local planning.",
+      "notes": "Checked signing, hardened runtime, notarization, Gatekeeper testing, app bundle, DMG, and updater references."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 90,
+      "bottleneck_notes": "No blocker; existing installable desktop and runtime anchors were available.",
+      "notes": "Ran memory bootstrap and selected governance mode."
+    },
+    {
+      "phase_id": "local_context_review",
+      "label": "Local context review",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 480,
+      "bottleneck_notes": "The request intersects installable desktop, runtime language, CLI adapter, user-flow, and release governance files.",
+      "notes": "Reviewed platform-desktop-app, memory bootstrap, requirements, persistent instructions, and coordination status."
+    },
+    {
+      "phase_id": "config_and_docs",
+      "label": "Config and docs",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 1080,
+      "bottleneck_notes": "The largest productive step was making the config self-documenting and keeping paired KO/EN docs aligned.",
+      "notes": "Added macOS execution profile and updated project docs, packaging docs, README, and project requirements."
+    },
+    {
+      "phase_id": "governance_artifacts",
+      "label": "Governance artifacts",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 1320,
+      "bottleneck_notes": "Governance mode requires requirements, spec, provenance, plan evidence, request trace, work summary, coordination, omission, grounding, and evaluation artifacts.",
+      "notes": "Added REQ-WS-069, requirements change/review, spec set, web search record, research note, provenance, plan evidence, mode selection, request trace, and work summary."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 900,
+      "bottleneck_notes": "Validation is broad because the macOS profile becomes a shared memory anchor and platform release gate.",
+      "notes": "Ran JSON, config contract, memory bootstrap, unit tests, docs/naming/structure audits, work timer, workspace index, task board, workspace monitor, and workspace health checks."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 420,
+      "bottleneck_notes": "Omission and grounding checks are necessary because the task contains external platform-distribution claims.",
+      "notes": "Prepared omission, grounding, and evaluator inputs and resolved timing schema rework."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "measurement": "estimated",
+      "duration_seconds": 60,
+      "bottleneck_notes": "No bottleneck expected; performed after final validation and evaluation.",
+      "notes": "Commit and push happen at close-out."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "governance_artifacts",
+    "bottleneck_notes": [
+      "The main cost is the durable governance loop required for a cross-cutting platform release rule.",
+      "Future actual macOS packaging will likely bottleneck on Apple Developer credentials, signing/notarization automation, and clean Mac smoke-test environment availability."
+    ],
+    "improvement_candidates": [
+      "Create a future deterministic macOS release readiness checker after Tauri scaffolding exists."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-macos-execution-structure.ko.md",
+    "platform-desktop-app/configs/macos-execution-profile.json",
+    "platform-desktop-app/specs/2026-06-02-macos-execution-structure/"
+  ]
+}

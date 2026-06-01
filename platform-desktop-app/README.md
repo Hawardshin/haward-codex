@@ -13,6 +13,7 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 - Design the first-run user flow before implementing installer code: open/create/demo workspace, confirm workspace boundary, select view mode, run required readiness checks, then reach the dashboard.
 - Keep optional CLIs, notifications, browser automation, and advanced validators as capability cards that can be configured later instead of blocking initial use.
 - Keep `agent-platform/` as the Python-first agent/config/evaluation layer.
+- For macOS, treat `configs/macos-execution-profile.json` as the source of truth for local run, internal `.app`, and public signed/notarized distribution structure.
 - Do not bundle user secrets, webhook tokens, browser cookies, or private repository data into installers.
 - Require distribution gates before calling a build production-ready: code signing, notarization where required, installer smoke tests, update policy, uninstall/rollback behavior, privacy review, and dependency/license review.
 
@@ -43,9 +44,11 @@ platform-desktop-app/
 ## Source Of Truth
 
 - Distribution registry: `configs/desktop-distribution-registry.json`
+- macOS execution profile: `configs/macos-execution-profile.json`
 - User flow registry: `configs/user-flow-registry.json`
 - Product boundary: `docs/product-boundary.ko.md`
 - Packaging strategy: `docs/packaging-strategy.ko.md`
+- macOS execution structure: `docs/macos-execution-structure.ko.md`
 - User flow: `docs/user-flow.ko.md`
 - First-run onboarding: `docs/first-run-onboarding.ko.md`
 - Flow map: `artifacts/user-flow-map.html`
@@ -59,7 +62,9 @@ Current verification is documentation/config focused:
 
 ```bash
 python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json
+python3 -m json.tool platform-desktop-app/configs/macos-execution-profile.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/desktop-distribution-registry.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/macos-execution-profile.json
 ```
 
 When a desktop framework is actually installed later, create an installation audit record under `_history/installations/YYYY/` and update `_ops/installations/registry.json`.

@@ -116,6 +116,18 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "macos_execution_profile",
+      "title": "macOS Execution Profile",
+      "path": "platform-desktop-app/configs/macos-execution-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "macOS-specific execution levels",
+        "macOS app process model",
+        "Developer ID, hardened runtime, notarization, stapling, and smoke-test gates"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
       "id": "workspace_monitor",
       "title": "Workspace Monitor",
       "path": "workspace-monitor/README.md",
@@ -251,6 +263,11 @@
       "field": "user_flow_registry",
       "meaning": "Companion registry defining install, first-run, task-run, decision inbox, settings, and recovery flows.",
       "required": true
+    },
+    {
+      "field": "macos_execution_profile",
+      "meaning": "Companion registry defining macOS execution levels, process model, app bundle targets, signing/notarization, permissions, updates, and smoke tests.",
+      "required": true
     }
   ],
   "user_flow_registry": {
@@ -262,6 +279,16 @@
       "user, developer, and superadmin developer views are separated",
       "task run timeline shows phase, time, artifacts, decisions, evidence, and verification",
       "failure recovery exists for unreadable workspace, missing optional CLI, pending decision, stale snapshot, and update failure"
+    ]
+  },
+  "macos_execution_profile": {
+    "path": "platform-desktop-app/configs/macos-execution-profile.json",
+    "status": "required_before_macos_app_or_installer_claim",
+    "required_checks": [
+      "execution level is declared as developer_local_run, internal_test_app, or public_outside_app_store",
+      "macOS process model is documented before launching Python agents or external CLIs from the desktop shell",
+      "Developer ID, hardened runtime, notarization, and stapling plan exists before public outside-App-Store distribution",
+      "fresh Mac install/open smoke test exists before release-ready claim"
     ]
   },
   "product_boundary": {
@@ -392,7 +419,10 @@
       ],
       "release_requirements": [
         "Developer ID signing for outside-App-Store distribution",
+        "hardened runtime and minimal entitlements plan",
         "notarization before normal Gatekeeper-friendly distribution",
+        "stapling when applicable",
+        "workspace boundary and optional CLI degradation smoke tests",
         "installer/open smoke test on a clean macOS account or machine"
       ]
     },
@@ -460,7 +490,7 @@
     "User-flow registry acceptance checks before desktop UI or installer implementation",
     "Project-local dependency installation audit if dependencies are installed",
     "License and security review for desktop framework and packager dependencies",
-    "macOS signing and notarization plan before macOS public installer",
+    "macOS execution profile review plus signing, hardened runtime, notarization, stapling, permission, update, and smoke-test plan before macOS public installer",
     "Windows signing and installer format decision before Windows public installer",
     "Install, first-run, update, uninstall, and rollback smoke tests",
     "Privacy review for workspace data, generated snapshots, tokens, and local service behavior",
