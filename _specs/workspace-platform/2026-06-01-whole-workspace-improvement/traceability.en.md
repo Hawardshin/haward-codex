@@ -8,4 +8,4 @@
 | Plan | `_history/plans/2026/2026-06-01-whole-workspace-improvement.en.md` |
 | Implementation | `_tools/workspace-index/`, `_tools/workspace-health/`, `_ops/maps/repository-map.md` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-whole-workspace-improvement.en.md` |
-| Commit | Pending |
+| Commit | `232e41d` |

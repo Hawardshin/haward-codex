@@ -8,4 +8,4 @@
 - [x] workspace-health 테스트 추가
 - [x] 전체 health check 실행
 - [x] 평가 기록
-- [ ] 커밋과 push
+- [x] 커밋과 push

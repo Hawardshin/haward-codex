@@ -8,4 +8,4 @@
 | 계획 | `_history/plans/2026/2026-06-01-whole-workspace-improvement.ko.md` |
 | 구현 | `_tools/workspace-index/`, `_tools/workspace-health/`, `_ops/maps/repository-map.md` |
 | 평가 | `_history/evaluations/2026/2026-06-01-whole-workspace-improvement.ko.md` |
-| 커밋 | 예정 |
+| 커밋 | `232e41d` |

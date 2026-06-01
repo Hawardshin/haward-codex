@@ -8,4 +8,4 @@
 - [x] Add workspace-health tests
 - [x] Run whole workspace health checks
 - [x] Record evaluation
-- [ ] Commit and push
+- [x] Commit and push
