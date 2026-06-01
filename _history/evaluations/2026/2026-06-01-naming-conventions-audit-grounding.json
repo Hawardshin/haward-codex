@@ -1,0 +1,129 @@
+{
+  "task": "Ground factual claims for the naming rules and audit work.",
+  "output_summary": "The workspace now has a naming policy, naming governance docs, a deterministic naming audit tool, and workspace-health/memory/config integration.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-naming-conventions-audit.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked web-first research record for naming convention decisions."
+    },
+    {
+      "evidence_id": "naming_policy",
+      "source": "_ops/naming/naming-policy.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Machine-readable naming source of truth."
+    },
+    {
+      "evidence_id": "naming_docs",
+      "source": "_docs/governance/naming-governance.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Human-readable naming governance document."
+    },
+    {
+      "evidence_id": "naming_audit_source",
+      "source": "_tools/naming-audit/src/naming_audit.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Executable audit source."
+    },
+    {
+      "evidence_id": "naming_audit_output",
+      "source": "python3 _tools/naming-audit/src/naming_audit.py --check",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output reported status clean with no gaps."
+    },
+    {
+      "evidence_id": "workspace_health_source",
+      "source": "_tools/workspace-health/src/workspace_health/checks.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Workspace health check list includes naming audit."
+    },
+    {
+      "evidence_id": "memory_bootstrap",
+      "source": "agent-platform/configs/memory/bootstrap-manifest.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Memory bootstrap includes naming policy anchor."
+    },
+    {
+      "evidence_id": "config_contract_output",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ... ../_ops/naming/naming-policy.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output reported self_documenting."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The workspace has a machine-readable naming policy at `_ops/naming/naming-policy.json`.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "naming_policy",
+        "config_contract_output"
+      ],
+      "verification_steps": [
+        "Read the naming policy.",
+        "Ran config contract including the naming policy."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The naming audit command reports the current repository as clean.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "naming_audit_source",
+        "naming_audit_output"
+      ],
+      "verification_steps": [
+        "Ran `python3 _tools/naming-audit/src/naming_audit.py --check`."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "workspace-health governance checks include naming audit.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace_health_source"
+      ],
+      "verification_steps": [
+        "Read `_tools/workspace-health/src/workspace_health/checks.py`.",
+        "Ran workspace-health after adding naming audit; the naming audit check passed."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The naming policy is part of memory bootstrap.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "memory_bootstrap"
+      ],
+      "verification_steps": [
+        "Ran `check-memory-bootstrap` and saw `naming_policy` in startup order."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "The audit intentionally avoids mass-renaming existing paths.",
+    "Commit message history is documented as a rule but not audited to avoid rewriting history."
+  ],
+  "limitation_notes": [
+    "No external package was installed.",
+    "Language-specific symbol naming lint for every runtime is outside this change."
+  ]
+}

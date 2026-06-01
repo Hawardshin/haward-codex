@@ -36,6 +36,7 @@
       "The parallel work planning workflow, planner agent, research merge gate, or coordination lane contract changes.",
       "The notification settings, provider routing, or webhook secret handling contract changes.",
       "The root structure policy, local-only folder rule, or structure audit command changes.",
+      "The naming policy, naming governance document, or naming audit command changes.",
       "The AI assistant runtime adapter registry or tool-specific adapter files change.",
       "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
       "The installation registry or installation audit contract changes.",
@@ -293,6 +294,18 @@
         "root folder classification",
         "registered project, reserved operational folder, runtime adapter folder, local-only folder, and generated output rules",
         "structure audit command"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "naming_policy",
+      "title": "Workspace Naming Policy",
+      "path": "_ops/naming/naming-policy.json",
+      "source_type": "internal",
+      "used_for": [
+        "durable naming rules",
+        "project, tool, skill, doc, spec, history, config, and source naming conventions",
+        "naming audit command"
       ],
       "last_checked": "2026-06-01"
     },
@@ -673,6 +686,17 @@
       ]
     },
     {
+      "id": "naming_policy_must_stay_discoverable",
+      "rule": "The naming policy must remain a warm memory anchor because future sessions need a deterministic way to name projects, tools, skills, docs, specs, history artifacts, configs, and source files.",
+      "reason": "The user explicitly asked for name structure and naming rules.",
+      "applies_to": [
+        "anchors",
+        "required_anchor_ids",
+        "naming-audit",
+        "workspace-health"
+      ]
+    },
+    {
       "id": "assistant_runtime_adapters_must_stay_discoverable",
       "rule": "The assistant runtime adapter registry and tool-agnostic operating model must remain warm memory anchors so future sessions can use the workspace from Codex, Claude Code, Cursor, Antigravity, or another preferred AI coding assistant without policy drift.",
       "reason": "The user explicitly asked for the current Codex-based setup to become a principle template usable from other tools.",
@@ -742,6 +766,7 @@
     "coordination_board",
     "project_registry",
     "root_structure_policy",
+    "naming_policy",
     "assistant_runtime_adapter_registry",
     "tool_agnostic_agent_operating_model",
     "platform_readme",
@@ -779,6 +804,7 @@
     "coordination_board",
     "project_registry",
     "root_structure_policy",
+    "naming_policy",
     "assistant_runtime_adapter_registry",
     "tool_agnostic_agent_operating_model",
     "platform_readme",
@@ -904,6 +930,14 @@
       "path": "_ops/projects/root-structure-policy.json",
       "tier": "warm",
       "purpose": "Root folder classification policy for registered projects, reserved operational folders, runtime adapter folders, local-only folders, and generated outputs.",
+      "required": true,
+      "load_order": 9
+    },
+    {
+      "id": "naming_policy",
+      "path": "_ops/naming/naming-policy.json",
+      "tier": "warm",
+      "purpose": "Workspace naming policy for projects, tools, skills, docs, specs, history artifacts, configs, source files, and commits.",
       "required": true,
       "load_order": 9
     },

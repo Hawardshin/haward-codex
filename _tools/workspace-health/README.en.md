@@ -40,7 +40,7 @@ python3 _tools/workspace-health/src/workspace_health.py --include-build
 
 ## Check Categories
 
-- `governance`: docs/structure audits, map/board freshness, memory/config contracts
+- `governance`: docs/naming/structure audits, map/board freshness, memory/config contracts
 - `projects`: `agent-platform` and `presentation-agent` tests
 - `tools`: `_tools/*/tests`
 - `frontend`: `workspace-monitor` tests, typecheck, and optional build

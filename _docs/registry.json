@@ -208,6 +208,8 @@
     "_docs/operating-models/tool-agnostic-agent-operating-model.ko.md",
     "_docs/operating-models/tool-agnostic-agent-operating-model.en.md",
     "_docs/governance/capability-governance.md",
+    "_docs/governance/naming-governance.ko.md",
+    "_docs/governance/naming-governance.en.md",
     "_docs/governance/repository-structure-governance.ko.md",
     "_docs/governance/repository-structure-governance.en.md"
   ],

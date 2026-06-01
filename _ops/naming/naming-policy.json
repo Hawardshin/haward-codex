@@ -1,0 +1,297 @@
+{
+  "schema_version": "2026-06-01",
+  "name": "workspace-naming-policy",
+  "purpose": "Defines naming conventions for root projects, reserved workspace folders, tools, skills, specs, history artifacts, docs, configs, source files, identifiers, and commits.",
+  "reader_guide": {
+    "summary": "Open this file before naming or renaming projects, folders, tools, skills, specs, configs, docs, generated artifacts, or commits. It explains the default case style, allowed exceptions, and audit command.",
+    "how_to_read": [
+      "Read default_principles before creating a new name.",
+      "Read namespaces to find the convention for the folder or artifact type.",
+      "Read exceptions before renaming an existing special file.",
+      "Run audit_command after adding, moving, or renaming durable files and folders."
+    ],
+    "owner": "_ops/naming",
+    "last_reviewed": "2026-06-01",
+    "update_triggers": [
+      "A new namespace or artifact type needs a naming rule.",
+      "A project, tool, skill, workflow, prompt, spec, history artifact, or config is renamed.",
+      "A naming-audit false positive or false negative appears.",
+      "An external ecosystem convention conflicts with the workspace default.",
+      "The user asks for naming, folder structure, or source structure rules."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "pypa_src_layout",
+      "title": "Python Packaging User Guide - src layout vs flat layout",
+      "url": "https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/",
+      "source_type": "official",
+      "used_for": [
+        "Python importable package boundaries",
+        "source layout naming expectations"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "google_style_guides",
+      "title": "Google Style Guides",
+      "url": "https://google.github.io/styleguide/",
+      "source_type": "official",
+      "used_for": [
+        "language-specific style guide precedent",
+        "local convention should follow project/language convention"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "conventional_commits",
+      "title": "Conventional Commits 1.0.0",
+      "url": "https://www.conventionalcommits.org/en/v1.0.0/",
+      "source_type": "specification",
+      "used_for": [
+        "structured commit message format",
+        "type(scope): summary convention"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "repo_structure_governance",
+      "title": "Repository Structure Governance",
+      "path": "_docs/governance/repository-structure-governance.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "root folder ownership and classification",
+        "project boundary naming context"
+      ],
+      "last_checked": "2026-06-01"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "names_signal_ownership",
+      "rule": "A durable name must reveal its owning scope and artifact type without requiring chat history.",
+      "reason": "The user wants the repository to become easier to understand over time from folders and files alone.",
+      "applies_to": [
+        "namespaces",
+        "audit_command"
+      ]
+    },
+    {
+      "id": "kebab_for_path_slugs",
+      "rule": "Use lowercase kebab-case for project, tool, skill, prompt, workflow, spec slug, and human-facing Markdown file slugs unless the ecosystem has a stronger convention.",
+      "reason": "Kebab-case is readable in URLs, shell paths, docs, and repository navigation.",
+      "applies_to": [
+        "root_projects",
+        "tools",
+        "skills",
+        "specs",
+        "docs",
+        "ops_prompts",
+        "ops_workflows"
+      ]
+    },
+    {
+      "id": "snake_for_python",
+      "rule": "Use snake_case for Python package names, module files, function names, and JSON object field names.",
+      "reason": "Python and JSON ecosystem conventions differ from human-facing path slugs.",
+      "applies_to": [
+        "python_source",
+        "config_fields"
+      ]
+    },
+    {
+      "id": "date_prefix_for_chronological_records",
+      "rule": "Use YYYY-MM-DD-<lower-kebab-slug> for dated specs, research, plans, evaluations, and history artifacts.",
+      "reason": "Date prefixes make long-running work sortable and traceable.",
+      "applies_to": [
+        "dated_records",
+        "specs",
+        "history"
+      ]
+    },
+    {
+      "id": "language_suffix_for_bilingual_docs",
+      "rule": "Use name.ko.md and name.en.md for important bilingual durable docs.",
+      "reason": "The user reads Korean docs while prompt/runtime material can stay English.",
+      "applies_to": [
+        "docs",
+        "history",
+        "requirements",
+        "specs"
+      ]
+    },
+    {
+      "id": "no_unplanned_renames",
+      "rule": "Do not rename existing durable paths without a migration plan, trace update, and validation run.",
+      "reason": "Many docs, specs, dashboards, and generated maps link to existing paths.",
+      "applies_to": [
+        "exceptions",
+        "audit_command"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "default_principles",
+      "meaning": "Small set of naming principles used when no namespace-specific rule is stronger.",
+      "required": true
+    },
+    {
+      "field": "namespaces",
+      "meaning": "Artifact-specific naming rules with examples and audit behavior.",
+      "required": true
+    },
+    {
+      "field": "exceptions",
+      "meaning": "Allowed names that intentionally do not follow the default convention.",
+      "required": true
+    },
+    {
+      "field": "audit_command",
+      "meaning": "Deterministic command for checking enforceable naming rules.",
+      "required": true
+    }
+  ],
+  "default_principles": [
+    "Prefer names that describe ownership, artifact type, and purpose.",
+    "Prefer one naming convention per namespace over case-style mixing.",
+    "Keep names lowercase in paths unless the ecosystem requires uppercase.",
+    "Avoid abbreviations unless they are common in the ecosystem or already established in this repository.",
+    "Prefer adding a clear new file over renaming linked durable history without a migration plan."
+  ],
+  "namespaces": [
+    {
+      "id": "root_projects",
+      "case": "kebab-case",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "examples": [
+        "agent-platform",
+        "presentation-agent",
+        "workspace-monitor"
+      ],
+      "audit": true
+    },
+    {
+      "id": "reserved_operational_dirs",
+      "case": "underscore-prefix plus lower-kebab",
+      "pattern": "^_[a-z0-9]+(-[a-z0-9]+)*$",
+      "examples": [
+        "_docs",
+        "_history",
+        "_requirements"
+      ],
+      "audit": true
+    },
+    {
+      "id": "runtime_adapter_dirs",
+      "case": "dot-prefix plus lower-kebab",
+      "pattern": "^\\.[a-z0-9]+(-[a-z0-9]+)*$",
+      "examples": [
+        ".claude",
+        ".cursor",
+        ".agents"
+      ],
+      "audit": true
+    },
+    {
+      "id": "tools",
+      "case": "kebab-case folder, snake_case Python modules",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "examples": [
+        "_tools/workspace-health",
+        "_tools/naming-audit"
+      ],
+      "audit": true
+    },
+    {
+      "id": "skills",
+      "case": "kebab-case folder",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "examples": [
+        "_skills/presentation-reference-curator",
+        "_skills/create-validated-skill"
+      ],
+      "audit": true
+    },
+    {
+      "id": "python_source",
+      "case": "snake_case",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "examples": [
+        "workspace_health",
+        "naming_audit.py"
+      ],
+      "audit": true
+    },
+    {
+      "id": "dated_records",
+      "case": "YYYY-MM-DD-lower-kebab",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}-[a-z0-9]+(-[a-z0-9]+)*$",
+      "examples": [
+        "2026-06-01-naming-conventions-audit"
+      ],
+      "audit": true
+    },
+    {
+      "id": "docs",
+      "case": "lower-kebab plus optional language suffix",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*(\\.(ko|en))?\\.md$",
+      "examples": [
+        "naming-governance.ko.md",
+        "project-boundary-policy.en.md"
+      ],
+      "audit": true
+    },
+    {
+      "id": "config_files",
+      "case": "lower-kebab filename, snake_case JSON fields, lower-kebab name/id values",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*\\.json$",
+      "examples": [
+        "naming-policy.json",
+        "bootstrap-manifest.json"
+      ],
+      "audit": true
+    },
+    {
+      "id": "commits",
+      "case": "Conventional Commit compatible",
+      "pattern": "^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)\\([a-z0-9-]+\\): .+",
+      "examples": [
+        "docs(workspace): add naming governance",
+        "feat(tools): add naming audit"
+      ],
+      "audit": false
+    }
+  ],
+  "exceptions": [
+    {
+      "name": "README.md",
+      "reason": "Repository and project entrypoint convention."
+    },
+    {
+      "name": "README.ko.md",
+      "reason": "Korean folder index convention."
+    },
+    {
+      "name": "README.en.md",
+      "reason": "English folder index convention."
+    },
+    {
+      "name": "AGENTS.md",
+      "reason": "Agent instruction entrypoint convention."
+    },
+    {
+      "name": "CLAUDE.md",
+      "reason": "Claude Code runtime adapter convention."
+    },
+    {
+      "name": "SKILL.md",
+      "reason": "Codex skill entrypoint convention."
+    },
+    {
+      "name": "__init__.py",
+      "reason": "Python package marker convention."
+    }
+  ],
+  "audit_command": "python3 _tools/naming-audit/src/naming_audit.py --check"
+}

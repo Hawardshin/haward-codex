@@ -50,6 +50,7 @@
 | REQ-WS-032 | 전체 저장소 navigation과 health check는 `_ops/projects/root-structure-policy.json`, `_ops/projects/registry.json`, `_docs/registry.json` 같은 source-of-truth를 사용해야 하며, root folder class/source와 핵심 감사/테스트를 한 곳에서 확인할 수 있어야 한다. | UR-2026-06-01-016 | must | baseline | workspace/_ops/_tools | workspace-index map 확인, workspace-health 실행, tool tests 확인 | `_tools/workspace-index/`, `_tools/workspace-health/`, `_ops/maps/repository-map.md` |
 | REQ-WS-033 | 저장소 운영 CLI는 유지보수를 위해 사람용 출력과 자동화용 JSON 출력을 분리하고, 필요한 검사 범위만 실행할 수 있는 category filter를 제공해야 한다. | UR-2026-06-01-017 | must | baseline | workspace/_tools | workspace-health category/json 실행과 JSON parse 확인 | `_tools/workspace-health/` |
 | REQ-WS-034 | 저장소 운영 도구의 소스가 커지면 단일 스크립트에 CLI, 도메인 모델, 체크 정의, 실행, 직렬화를 섞지 말고 책임별 모듈로 분리해야 하며 기존 명령 호환성은 보존해야 한다. | UR-2026-06-01-018 | must | baseline | workspace/_tools | workspace-health 단위 테스트, legacy entrypoint, JSON/category 실행, 전체 health check 확인 | `_tools/workspace-health/`, `_specs/workspace-platform/2026-06-01-workspace-health-source-refactor/` |
+| REQ-WS-035 | 프로젝트, 도구, 스킬, 문서, 스펙, 히스토리, 설정, 소스 코드의 durable name은 네임스페이스별 규칙으로 관리하고, 변경 후 deterministic naming audit를 통과해야 한다. | UR-2026-06-01-019 | must | baseline | workspace/_ops/_tools/_docs | naming-audit, workspace-health, config contract, memory bootstrap 확인 | `_ops/naming/naming-policy.json`, `_docs/governance/naming-governance.ko.md`, `_tools/naming-audit/` |
 
 ## 변경 관리
 
@@ -69,6 +70,7 @@
 - 2026-06-01에 REQ-WS-032를 추가해 repository map이 root structure policy/project registry를 직접 사용하고, workspace health check가 핵심 감사와 테스트를 한 명령으로 묶도록 승격했다.
 - 2026-06-01에 REQ-WS-033을 추가해 workspace health 같은 운영 CLI가 사람용 출력, JSON 출력, category filter를 제공하도록 승격했다.
 - 2026-06-01에 REQ-WS-034를 추가해 운영 도구가 커질 때 책임별 Python package 구조로 분리하고 기존 스크립트 명령은 보존하도록 승격했다.
+- 2026-06-01에 REQ-WS-035를 추가해 durable name을 네임스페이스별 규칙으로 관리하고 naming audit로 검증하도록 승격했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.

@@ -10,6 +10,7 @@ def build_checks(root: Path, include_build: bool = False) -> list[Check]:
     py = sys.executable
     checks = [
         Check("docs audit", "governance", root, (py, "_tools/docs-audit/src/docs_audit.py", "--check")),
+        Check("naming audit", "governance", root, (py, "_tools/naming-audit/src/naming_audit.py", "--check")),
         Check("structure audit", "governance", root, (py, "_tools/structure-audit/src/structure_audit.py", "--check")),
         Check("workspace index freshness", "governance", root, (py, "_tools/workspace-index/src/workspace_index.py", "--check")),
         Check("task board freshness", "governance", root, (py, "_tools/task-board/src/task_board.py", "--check")),
@@ -41,6 +42,7 @@ def build_checks(root: Path, include_build: bool = False) -> list[Check]:
                         "configs/research/coding-research-profile.json",
                         "configs/workflows/work-mode-registry.json",
                         "../_ops/installations/registry.json",
+                        "../_ops/naming/naming-policy.json",
                     ),
                     {"PYTHONPATH": "src"},
                 ),

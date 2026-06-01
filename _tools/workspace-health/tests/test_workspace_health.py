@@ -34,6 +34,7 @@ class WorkspaceHealthTests(unittest.TestCase):
         names = [check.name for check in checks]
 
         self.assertIn("docs audit", names)
+        self.assertIn("naming audit", names)
         self.assertIn("agent-platform tests", names)
         self.assertIn("presentation-agent tests", names)
         self.assertIn("tool tests: alpha", names)

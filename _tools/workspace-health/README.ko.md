@@ -40,7 +40,7 @@ python3 _tools/workspace-health/src/workspace_health.py --include-build
 
 ## 검사 범주
 
-- `governance`: 문서/구조 감사, map/board freshness, memory/config 계약
+- `governance`: 문서/네이밍/구조 감사, map/board freshness, memory/config 계약
 - `projects`: `agent-platform`, `presentation-agent` 테스트
 - `tools`: `_tools/*/tests` 테스트
 - `frontend`: `workspace-monitor` 테스트와 typecheck, 선택적 build

@@ -50,6 +50,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 | REQ-WS-032 | Repository-wide navigation and health checks shall use source-of-truth files such as `_ops/projects/root-structure-policy.json`, `_ops/projects/registry.json`, and `_docs/registry.json`, and shall expose root folder class/source plus core audits and tests from one place. | UR-2026-06-01-016 | must | baseline | workspace/_ops/_tools | workspace-index map review, workspace-health execution, and tool tests | `_tools/workspace-index/`, `_tools/workspace-health/`, `_ops/maps/repository-map.md` |
 | REQ-WS-033 | Repository operations CLIs shall separate human-readable output from automation-oriented JSON output and provide category filters so maintainers can run only the checks they need. | UR-2026-06-01-017 | must | baseline | workspace/_tools | workspace-health category/json runs and JSON parse checks | `_tools/workspace-health/` |
 | REQ-WS-034 | When repository operations tools grow, they shall not mix CLI, domain models, check definitions, execution, and serialization in one script; they shall be split into responsibility-focused modules while preserving existing command compatibility. | UR-2026-06-01-018 | must | baseline | workspace/_tools | workspace-health unit tests, legacy entrypoint, JSON/category run, and full health check | `_tools/workspace-health/`, `_specs/workspace-platform/2026-06-01-workspace-health-source-refactor/` |
+| REQ-WS-035 | Durable names for projects, tools, skills, docs, specs, history, configs, and source code shall be managed by namespace-specific rules and pass deterministic naming audit after changes. | UR-2026-06-01-019 | must | baseline | workspace/_ops/_tools/_docs | naming-audit, workspace-health, config contract, and memory bootstrap checks | `_ops/naming/naming-policy.json`, `_docs/governance/naming-governance.en.md`, `_tools/naming-audit/` |
 
 ## Change Management
 
@@ -69,6 +70,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 - On 2026-06-01, REQ-WS-032 promoted repository maps that read root structure policy/project registry directly and a workspace health check that bundles core audits and tests into one command.
 - On 2026-06-01, REQ-WS-033 promoted human output, JSON output, and category filtering for operations CLIs such as workspace health.
 - On 2026-06-01, REQ-WS-034 promoted responsibility-focused Python package structure for growing operations tools while preserving existing script commands.
+- On 2026-06-01, REQ-WS-035 promoted namespace-specific durable naming rules and deterministic naming audit.
 - Before implementation, link relevant spec artifacts under `_specs/` or project `specs/`.
 - Before source-code implementation, link architecture references, architecture options, and decision notes in the coding research record.
 - When enterprise/high-quality sources seed research, update or reference `enterprise-source-registry.json` and `_research/source-lists/`.

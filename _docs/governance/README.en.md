@@ -5,5 +5,7 @@ This folder stores operating governance documents that cut across policies and p
 Key documents:
 
 - `capability-governance.md`
+- `naming-governance.ko.md`
+- `naming-governance.en.md`
 - `repository-structure-governance.ko.md`
 - `repository-structure-governance.en.md`

@@ -105,6 +105,8 @@ codex/
 - 실험용 프로젝트는 `experiment-` 접두어를 붙인다.
 - 더 이상 진행하지 않는 프로젝트는 `_archive/`로 옮긴다.
 
+이름 구조와 네이밍 규칙의 source of truth는 `_ops/naming/naming-policy.json`이다. durable path를 만들거나 바꿀 때는 `_docs/governance/naming-governance.ko.md`를 확인하고, 변경 후 `python3 _tools/naming-audit/src/naming_audit.py --check`를 실행한다.
+
 ## 예약 폴더
 
 - `_docs/`: 저장소 전체 운영 문서와 의사결정 기록. 카테고리와 누락 방지 규칙은 `_docs/registry.json`에서 관리한다.
@@ -126,6 +128,7 @@ codex/
 - `_ops/assistant-runtimes/`: Codex, Claude Code, Cursor, Antigravity 등 AI assistant runtime adapter 레지스트리
 - `_ops/backlog/`: `ship_first`나 빠른 작업에서 뒤로 뺀 공통 비차단 개선 목록
 - `_ops/installations/`: 설치 레지스트리와 설치 감사 추적 규칙
+- `_ops/naming/`: 저장소 전체 네이밍 정책과 audit source of truth
 - `_ops/projects/`: 루트 프로젝트 등록부와 경계 관리
 - `_research/`: 인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용
 - `_skills/`: git으로 추적할 커스텀 Codex 스킬 원본과 레지스트리

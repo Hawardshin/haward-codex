@@ -6,6 +6,7 @@
 | --- | --- |
 | `_ops/` | 운영 허브, 프롬프트 라우터, 워크플로, 저장소 맵 |
 | `_ops/assistant-runtimes/` | Codex, Claude Code, Cursor, Antigravity 등 runtime adapter 레지스트리 |
+| `_ops/naming/` | 프로젝트, 도구, 스킬, 문서, 스펙, 히스토리, 설정, 소스 이름 규칙 |
 | `_ops/projects/` | 루트 프로젝트 등록부와 경계 관리 |
 | `_research/` | 인터넷 조사와 외부 레퍼런스 중 재사용 가능한 내용 |
 | `_docs/` | 장기 운영 규칙, 의사결정, 컨텍스트 관리의 카테고리형 문서 루트 |
@@ -40,6 +41,7 @@
 - 작업 모드와 전체 루프 강도를 고를 때: [_ops/workflows/02-select-work-mode.md](workflows/02-select-work-mode.md), [_ops/prompts/02-select-work-mode.md](prompts/02-select-work-mode.md), [work-mode-registry.json](../agent-platform/configs/workflows/work-mode-registry.json)
 - 지연 개선 백로그를 볼 때: [_ops/backlog/deferred-improvements.ko.md](backlog/deferred-improvements.ko.md)
 - `_docs` 카테고리와 누락 방지 규칙을 볼 때: [_docs/README.ko.md](../_docs/README.ko.md), [_docs/registry.json](../_docs/registry.json), [_tools/docs-audit/README.ko.md](../_tools/docs-audit/README.ko.md)
+- 이름 구조와 네이밍 규칙을 볼 때: [_docs/governance/naming-governance.ko.md](../_docs/governance/naming-governance.ko.md), [_ops/naming/naming-policy.json](naming/naming-policy.json), [_tools/naming-audit/README.ko.md](../_tools/naming-audit/README.ko.md)
 - 공유 설정 파일 자기 설명 기준: [_docs/policies/self-documenting-config-policy.ko.md](../_docs/policies/self-documenting-config-policy.ko.md), `agent-platform`의 `check-config-contract`
 - 도구 독립형 AI assistant 운영 원칙: [_docs/operating-models/tool-agnostic-agent-operating-model.ko.md](../_docs/operating-models/tool-agnostic-agent-operating-model.ko.md), [_ops/assistant-runtimes/adapter-registry.json](assistant-runtimes/adapter-registry.json), [_templates/assistant-operating-principles/README.ko.md](../_templates/assistant-operating-principles/README.ko.md)
 - 출처 수집 기준을 볼 때: [_docs/policies/source-collection-policy.ko.md](../_docs/policies/source-collection-policy.ko.md)
@@ -88,6 +90,7 @@
 
 - 관련 문서가 업데이트됐는가
 - `_docs`를 바꿨다면 `_docs/registry.json` category와 `python3 _tools/docs-audit/src/docs_audit.py --check` 결과가 맞는가
+- durable name, naming policy, naming governance가 바뀌면 `python3 _tools/naming-audit/src/naming_audit.py --check`를 통과했는가
 - `_history/YYYY/YYYY-MM-DD.md`에 맥락이 남았는가
 - `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`에 빠른 요약이 남았는가
 - `_history/web-searches/YYYY/`에 공개 검색 판단 기록이 남았는가

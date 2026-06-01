@@ -6,6 +6,9 @@ This repository is the workspace for building and tracking a personal agent-buil
 
 - Treat each root-level non-reserved directory as a separate project.
 - Create new project directories at the repository root using `kebab-case`.
+- Use `_ops/naming/naming-policy.json` as the source of truth for durable naming rules.
+- For new durable paths, use lower `kebab-case` for project/tool/skill/workflow/prompt/spec slugs, `snake_case` for Python packages and modules, `YYYY-MM-DD-<slug>` for dated records, and `name.ko.md`/`name.en.md` for important bilingual docs.
+- Do not rename existing durable paths without a migration plan, trace update, and validation run.
 - Reserve underscore-prefixed root directories for workspace operations:
   - `_docs/` for workspace-level documentation and decision records; keep it categorized through `_docs/registry.json`
   - `_docs/instructions/` for durable instructions and baseline workspace rules
@@ -136,6 +139,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/projects/registry.json` to see registered root projects and ownership boundaries.
 - Use `_ops/projects/root-structure-policy.json` to classify root folders as registered projects, reserved operational folders, local-only folders, or generated output.
 - Keep durable project top-level folders listed in each registry entry's `project_specific_home`; generated folders should be covered by `generated_output_dirs` and `.gitignore`.
+- Use `_docs/governance/naming-governance.ko.md` and `_ops/naming/naming-policy.json` when creating, moving, or renaming durable files, folders, projects, tools, skills, configs, prompts, workflows, specs, or history artifacts.
 - Use `_ops/assistant-runtimes/adapter-registry.json` when adding or changing AI assistant runtime adapters such as Claude Code, Cursor, or Antigravity.
 - Use `_ops/workflows/25-project-boundary-management.md` when a request may create a new project or cross project boundaries.
 - Use `_ops/workflows/35-requirements-lifecycle.md` when a request changes durable behavior, rules, project structure, platform capability, or implementation criteria.
@@ -148,10 +152,11 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Keep `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md` current when folders, prompts, workflows, tools, skills, or project structure change.
 - Run `python3 _tools/workspace-index/src/workspace_index.py` after changing navigational structure.
 - Run `python3 _tools/docs-audit/src/docs_audit.py --check` after changing `_docs`, `_docs/registry.json`, docs category rules, or required durable document paths.
+- Run `python3 _tools/naming-audit/src/naming_audit.py --check` after changing durable names or naming rules.
 - Run `python3 _tools/structure-audit/src/structure_audit.py --check` after changing root folders, project registry, durable project top-level folders, reserved operational folders, runtime adapter folders, local-only folder rules, or generated-output rules.
 - Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, assistant runtime adapters, or platform memory anchors.
-- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/research/marketing-evidence-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/integrations/notification-channels.json ../_docs/registry.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json` from `agent-platform/` after changing core shared settings.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/research/marketing-evidence-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/integrations/notification-channels.json ../_docs/registry.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json ../_ops/naming/naming-policy.json` from `agent-platform/` after changing core shared settings.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules
