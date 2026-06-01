@@ -44,6 +44,18 @@ The presentation agent researches strong presentation design, PPT/HTML reference
 - HTML decks may use structural patterns from the reference catalog and presentation theory, but must not copy source designs.
 - Generated decks should run from local CSS and verified local data without remote images or unknown-license assets.
 
+### REQ-PA-008 Design Search-Collect-PPT Loop
+
+- When a design element is needed during presentation production, run web search first.
+- Record collected design/asset sources in the catalog or task source notes with URL, access date, license status, and usage purpose.
+- Include only license-cleared assets in actual PPT/HTML outputs.
+
+### REQ-PA-009 PPTX Output
+
+- The presentation agent must be able to create editable PPTX output, not only HTML output.
+- PPTX output is generated from `deck-spec` and preserves `script_beat`, `speaker_notes`, and `evidence_sources`.
+- Prefer Presentations skill artifact-tool export when available.
+
 ## Non-Scope
 
 - This baseline does not bulk-download presentation files.

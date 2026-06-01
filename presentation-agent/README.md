@@ -37,8 +37,10 @@ presentation-agent/
 - `src/presentation_agent/catalog.py`: 카탈로그 검증과 요약 CLI.
 - `src/presentation_agent/pptx_to_html.py`: 라이선스가 허용된 PPTX를 기본 HTML 구조로 변환하는 최소 도구.
 - `src/presentation_agent/html_deck.py`: 발표 스크립트가 포함된 `deck-spec`을 HTML 발표 덱으로 렌더링하는 도구.
+- `src/presentation_agent/artifact_pptx.py`: `deck-spec`을 editable PPTX 생성을 위한 artifact-tool slide workspace로 변환하는 도구.
 - `data/deck-specs/presentation-agent-kickoff.ko.json`: 발표 에이전트 소개용 샘플 deck spec.
 - `artifacts/html/presentation-agent-kickoff.html`: 생성된 HTML 발표 샘플.
+- `artifacts/pptx/presentation-agent-kickoff.pptx`: 생성된 PPTX 발표 샘플.
 
 ## 검증 명령
 
@@ -46,4 +48,5 @@ presentation-agent/
 PYTHONPATH=presentation-agent/src python3 -m unittest discover -s presentation-agent/tests
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/presentation-agent-kickoff.ko.json presentation-agent/artifacts/html/presentation-agent-kickoff.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
+PYTHONPATH=presentation-agent/src python3 -m presentation_agent.artifact_pptx presentation-agent/data/deck-specs/presentation-agent-kickoff.ko.json outputs/manual-presentation-agent/presentations/presentation-agent-kickoff --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 ```

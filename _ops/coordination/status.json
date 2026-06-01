@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-01",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, and HTML deck/script collaboration added. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, and design-to-PPT production loop added. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -410,6 +410,25 @@
         "presentation-agent/specs/2026-06-01-html-deck-script-collaboration/spec.ko.md"
       ],
       "evaluation_report": "_history/evaluations/2026/2026-06-01-html-deck-script-collaboration.ko.md"
+    },
+    {
+      "id": "2026-06-01-design-to-ppt-production",
+      "title": "Add design search-to-PPT production loop",
+      "project": "presentation-agent",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-01",
+      "updated_at": "2026-06-01",
+      "next_action": "No action. Future presentation work should search and record design assets before adding them to PPTX outputs.",
+      "blockers": [],
+      "references": [
+        "presentation-agent/docs/workflows/design-to-ppt-workflow.ko.md",
+        "presentation-agent/src/presentation_agent/artifact_pptx.py",
+        "presentation-agent/artifacts/pptx/presentation-agent-kickoff.pptx",
+        "presentation-agent/specs/2026-06-01-design-to-ppt-production/spec.ko.md"
+      ],
+      "evaluation_report": "_history/evaluations/2026/2026-06-01-design-to-ppt-production.ko.md"
     }
   ]
 }
