@@ -1,0 +1,108 @@
+{
+  "task": "Ground CLI pipeline file/artifact handoff close-out claims",
+  "output_summary": "The change adds artifact-aware CLI pipeline validation, docs, requirements, and workflow records.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "code-validator",
+      "source": "agent-platform/src/agent_platform/integrations/cli_pipeline.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Validator implementation is the source of truth for artifact checks."
+    },
+    {
+      "evidence_id": "tests",
+      "source": "cd agent-platform && python3 -m unittest discover -s tests: 142 tests OK",
+      "source_type": "test_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Unit tests cover ready artifact handoff, unsafe path, missing artifact id, and unknown producer."
+    },
+    {
+      "evidence_id": "pipeline-check",
+      "source": "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline configs/integrations/cli-pipeline-template.json: pipeline_ready",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "The platform's deterministic CLI pipeline checker validated the template."
+    },
+    {
+      "evidence_id": "python-tempfile",
+      "source": "https://docs.python.org/3/library/tempfile.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Python docs for temporary file cleanup behavior."
+    },
+    {
+      "evidence_id": "node-fs",
+      "source": "https://nodejs.org/api/fs.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Node.js docs for file system and stream behavior."
+    },
+    {
+      "evidence_id": "owasp-path",
+      "source": "https://owasp.org/www-community/attacks/Path_Traversal",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "OWASP security guidance for path traversal risk."
+    },
+    {
+      "evidence_id": "cwe-22",
+      "source": "https://cwe.mitre.org/data/definitions/22",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "MITRE CWE entry for path traversal classification and mitigation guidance."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The CLI pipeline validator now supports explicit artifact handoff records.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "code-validator",
+        "tests"
+      ],
+      "verification_steps": [
+        "Inspected cli_pipeline.py for PipelineArtifact and artifact validation.",
+        "Ran unit tests."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The artifact-aware template passes check-cli-pipeline.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "pipeline-check"
+      ],
+      "verification_steps": [
+        "Ran check-cli-pipeline against configs/integrations/cli-pipeline-template.json."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Temporary file cleanup and path traversal risk justify explicit cleanup and workspace-relative path rules.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "python-tempfile",
+        "node-fs",
+        "owasp-path",
+        "cwe-22"
+      ],
+      "verification_steps": [
+        "Checked official/runtime docs and security guidance during web-first intake."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "No actual runner was implemented, so runtime file handle or temp-file cleanup behavior was not measured."
+  ],
+  "limitation_notes": [
+    "This grounding check covers the validator and governance contract, not a future process runner."
+  ]
+}

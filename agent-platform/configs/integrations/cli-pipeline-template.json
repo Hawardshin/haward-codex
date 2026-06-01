@@ -1,13 +1,14 @@
 {
   "schema_version": "2026-06-02",
   "name": "cli-pipeline-template",
-  "purpose": "Template for validating a multi-process CLI pipeline before the platform executes several external CLIs through adapters and pipes.",
+  "purpose": "Template for validating a multi-process CLI pipeline before the platform executes several external CLIs through adapters, pipes, files, temporary artifacts, logs, caches, reports, or other handoff channels.",
   "reader_guide": {
     "summary": "Use this template when one user action should launch multiple CLI processes, connect stdout/stderr/stdin, merge results, or fan out/fan in independent CLI work.",
     "how_to_read": [
       "Read execution_policy to confirm shell usage is disabled by default and each CLI is allowlisted.",
       "Read processes to see each process node, adapter, argv command, cwd, timeout, and output bound.",
       "Read pipes to see how streams are connected. Do not hide pipes inside command strings.",
+      "Read artifacts to see file, temporary file, log, cache, report, and directory handoffs with path, size, cleanup, retention, provenance, and validation contracts.",
       "Read safety_controls and resource_controls before any implementation that actually starts processes.",
       "Read source_provenance and plan_evidence to see why this process graph is justified."
     ],
@@ -15,7 +16,7 @@
     "last_reviewed": "2026-06-02",
     "update_triggers": [
       "The platform adds a process runner or local daemon that launches more than one CLI.",
-      "Pipe, fan-out, fan-in, cancellation, timeout, output bound, or merge behavior changes.",
+      "Pipe, file handoff, artifact handoff, fan-out, fan-in, cancellation, timeout, output bound, or merge behavior changes.",
       "A desktop shell or web monitor starts invoking local CLI pipelines.",
       "Command execution security, allowlist, secret handling, or resource cleanup rules change."
     ]
@@ -47,6 +48,30 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "python_tempfile",
+      "title": "Python tempfile",
+      "url": "https://docs.python.org/3/library/tempfile.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "temporary file and directory cleanup",
+        "context-managed temporary artifacts",
+        "manual cleanup risk when lower-level temp APIs are used"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "node_fs",
+      "title": "Node.js File system",
+      "url": "https://nodejs.org/api/fs.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "file read/write stream behavior",
+        "large-output file handoff",
+        "unsafe repeated writes without waiting for completion"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
       "id": "bash_pipelines",
       "title": "Bash Reference Manual: Pipelines",
       "url": "https://www.gnu.org/software/bash/manual/html_node/Pipelines.html",
@@ -66,6 +91,28 @@
         "command execution allowlists",
         "argument handling",
         "injection risk controls"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "owasp_path_traversal",
+      "title": "OWASP Path Traversal",
+      "url": "https://owasp.org/www-community/attacks/Path_Traversal",
+      "source_type": "security_guidance",
+      "used_for": [
+        "workspace-relative path boundaries",
+        "rejecting absolute paths and dot-dot traversal in artifact contracts"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "cwe_22_path_traversal",
+      "title": "CWE-22 Path Traversal",
+      "url": "https://cwe.mitre.org/data/definitions/22",
+      "source_type": "security_guidance",
+      "used_for": [
+        "file path input validation",
+        "allowlist-oriented filename and path restrictions"
       ],
       "last_checked": "2026-06-02"
     },
@@ -113,6 +160,26 @@
       ]
     },
     {
+      "id": "bounded_artifacts",
+      "rule": "Every file or artifact handoff must declare artifact_id, kind, workspace-relative path, producer or provenance, consumers when known, max_bytes, format when parsed downstream, cleanup or retention policy, and validation steps.",
+      "reason": "File handoffs can leak data, grow unbounded, become stale, or cross workspace boundaries unless the contract is explicit.",
+      "applies_to": [
+        "pipes",
+        "artifacts",
+        "resource_controls",
+        "verification"
+      ]
+    },
+    {
+      "id": "artifact_paths_are_workspace_relative",
+      "rule": "Artifact paths must be workspace-relative and must not contain absolute paths, drive prefixes, backslashes, '~', or '..'.",
+      "reason": "Path traversal and accidental absolute paths can read, overwrite, or leak files outside the intended workspace boundary.",
+      "applies_to": [
+        "artifacts",
+        "safety_controls"
+      ]
+    },
+    {
       "id": "adapter_allowlist_required",
       "rule": "Only allowlisted adapters may appear in the process graph.",
       "reason": "The installable platform must remain CLI-neutral while still controlling which attached capabilities can run.",
@@ -146,7 +213,12 @@
     },
     {
       "field": "pipes",
-      "meaning": "Explicit stream edges from a process stdout/stderr to another process stdin, file, or artifact.",
+      "meaning": "Explicit stream edges from a process stdout/stderr to another process stdin, file, or artifact. File and artifact modes must reference artifact_id.",
+      "required": true
+    },
+    {
+      "field": "artifacts",
+      "meaning": "Explicit file, temporary file, directory, cache, log, report, or other handoff contracts with path, size, cleanup, retention, provenance, and validation.",
       "required": true
     },
     {
@@ -176,7 +248,7 @@
     }
   ],
   "pipeline_id": "example-research-fan-in",
-  "purpose": "Collect source metadata with one CLI and pass the accepted output to a planning CLI as an explicit pipe.",
+  "purpose": "Collect source metadata with one CLI and pass the accepted output to a planning CLI through an explicit bounded temporary artifact.",
   "work_mode": "governance",
   "risk_level": "medium",
   "processes": [
@@ -218,13 +290,40 @@
   ],
   "pipes": [
     {
-      "pipe_id": "collector_stdout_to_planner_stdin",
+      "pipe_id": "collector_artifact_to_planner_stdin",
       "from_process": "collect_sources",
       "from_stream": "stdout",
       "to_process": "synthesize_plan",
       "to_stream": "stdin",
-      "mode": "pipe",
+      "mode": "artifact",
+      "artifact_id": "accepted_source_bundle",
       "required": true
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "accepted_source_bundle",
+      "kind": "temp_file",
+      "path": "agent-platform/artifacts/cli-pipelines/example-research-fan-in/accepted-source-bundle.jsonl",
+      "produced_by": "collect_sources",
+      "consumed_by": [
+        "synthesize_plan"
+      ],
+      "required": true,
+      "max_bytes": 2000000,
+      "format": "jsonl",
+      "retention_policy": "",
+      "cleanup_policy": "Delete the temporary artifact after synthesize_plan accepts the structured result, unless it is promoted into a dated evidence record.",
+      "provenance": [
+        "collect_sources stdout",
+        "source_provenance entries in this template"
+      ],
+      "validation": [
+        "The file path stays under the workspace-relative artifact path.",
+        "The file size stays under max_bytes.",
+        "Each line parses as JSON before synthesize_plan consumes it.",
+        "No raw secrets are present in the artifact."
+      ]
     }
   ],
   "execution_policy": {
@@ -253,18 +352,22 @@
     "timeout_policy": "Each process has timeout_seconds; timeout cancels downstream execution.",
     "max_output_bytes": 2000000,
     "cancellation_policy": "Cancel child processes and close stream handles on failure.",
-    "cleanup_policy": "Wait for child processes, close stdin/stdout/stderr handles, and remove bounded temporary artifacts.",
+    "cleanup_policy": "Wait for child processes, close stdin/stdout/stderr handles and file handles, and remove bounded temporary artifacts.",
     "orphan_process_policy": "Terminate the process group when the pipeline is cancelled.",
     "backpressure_policy": "Use streaming pipes for small output and bounded temp artifacts for large output."
   },
   "merge_strategy": "Only accepted collector output reaches synthesize_plan; final output is a structured planning report.",
   "source_provenance": [
     "https://docs.python.org/3/library/subprocess.html",
+    "https://docs.python.org/3/library/tempfile.html",
     "https://nodejs.org/api/child_process.html",
+    "https://nodejs.org/api/fs.html",
+    "https://owasp.org/www-community/attacks/Path_Traversal",
+    "https://cwe.mitre.org/data/definitions/22",
     "agent-platform/configs/integrations/cli-adapter-registry.json"
   ],
   "plan_evidence": [
-    "The user asked for multiple internal CLI processes connected through pipes.",
+    "The user asked for multiple internal CLI processes connected through pipes, files, and similar mechanisms.",
     "Existing CLI adapter policy already requires CLI-neutral external command boundaries."
   ],
   "verification": [

@@ -52,7 +52,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep user/developer installation profiles in `configs/installations/install-mode-registry.json`; `install_mode` controls setup audience while `work_mode` controls task close-out strictness.
 - Keep end-user desktop installer productization in `platform-desktop-app/`; this is separate from repository setup `install_mode`.
 - Keep external CLI integration in `configs/integrations/cli-adapter-registry.json`; the installable platform may use many CLIs through adapters but must not depend on one CLI to function.
-- Keep multi-process CLI orchestration plans in `configs/integrations/cli-pipeline-template.json` or task-specific history targets; use `cli-pipeline-agent` before launching, piping, merging, or cancelling several CLI processes together.
+- Keep multi-process CLI orchestration plans in `configs/integrations/cli-pipeline-template.json` or task-specific history targets; use `cli-pipeline-agent` before launching, piping, exchanging file/artifact handoffs, merging, or cancelling several CLI processes together.
 - Keep unstructured-to-structured data transformation rules in `configs/usage/unstructured-data-structuring-profile.json`; AI-generated structure must preserve schema, provenance, null/ambiguity handling, and validation before downstream reuse.
 - Keep platform notification routing in `configs/integrations/notification-channels.json`; store only environment variable names there, never real webhook URLs or tokens.
 - Keep user request summaries under `_history/user-requests/`.
@@ -142,7 +142,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `configs/workflows/work-mode-registry.json`: selectable work modes, mode enforcement layers, mode selection record requirements, and evaluator target policy
 - `configs/installations/install-mode-registry.json`: user install and developer improvement install setup profiles
 - `configs/integrations/cli-adapter-registry.json`: optional CLI adapter boundaries, execution contract, dependency posture, and missing-CLI fallback policy
-- `configs/integrations/cli-pipeline-template.json`: process graph, explicit pipe, safety control, resource control, source provenance, and verification template for multi-CLI orchestration
+- `configs/integrations/cli-pipeline-template.json`: process graph, explicit pipe/file/artifact handoff, safety control, resource control, source provenance, and verification template for multi-CLI orchestration
 - `configs/integrations/notification-channels.json`: notification on/off routing, event filters, provider payload options, and environment-variable secret indirection
 - `configs/usage/unstructured-data-structuring-profile.json`: schema, provenance, null handling, and validation contract for turning messy input into structured records
 - `configs/evaluation/omission-guard-template.json`: required item, artifact, and acceptance-check coverage template for omission prevention
@@ -155,7 +155,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `spec-reconciliation-agent` decides whether ambiguous specs or spec/source drift should update the spec, update source, ask the user, or defer; user decisions are surfaced as `clarification_needed`
 - `omission-guard-agent` checks required instructions, requirements, artifacts, and acceptance checks before non-`quick` close-out
 - `resource-guard-agent` checks memory and resource leak risks for long-running runtimes, browser automation, workers, caches, streams, large-data processing, subprocesses, file handles, network connections, timers, and subscriptions
-- `cli-pipeline-agent` checks multi-process CLI process graphs, pipes, adapter allowlists, safety controls, resource controls, provenance, merge strategy, and verification before several CLIs run together
+- `cli-pipeline-agent` checks multi-process CLI process graphs, pipes, file/artifact handoffs, adapter allowlists, safety controls, resource controls, provenance, merge strategy, and verification before several CLIs run together
 - `skill-lifecycle-agent` creates, validates, tracks, and improves repository-managed Codex skills
 - `parallel-work-planner-agent` checks task dependencies, file/resource boundaries, execution batches, research fan-in merge gates, coordination targets, and merge verification before parallel execution
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`

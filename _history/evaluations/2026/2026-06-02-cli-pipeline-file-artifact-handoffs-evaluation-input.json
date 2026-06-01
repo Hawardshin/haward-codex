@@ -1,0 +1,117 @@
+{
+  "initial_instruction": "파일과 기타 등등",
+  "result_summary": "Extended the CLI pipeline orchestration contract beyond direct pipes to cover file, temporary file, directory, cache, log, report, and other artifact handoffs. Added artifact validation to check-cli-pipeline, updated the self-documenting template, docs, workflows, prompts, persistent instructions, memory bootstrap, requirements, specs, history, coordination board, and tests.",
+  "work_mode": "governance",
+  "changed_files": [
+    "agent-platform/src/agent_platform/integrations/cli_pipeline.py",
+    "agent-platform/tests/test_cli_pipeline.py",
+    "agent-platform/configs/integrations/cli-pipeline-template.json",
+    "agent-platform/configs/integrations/cli-adapter-registry.json",
+    "agent-platform/configs/workflows/work-mode-registry.json",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "agent-platform/configs/agents/cli-pipeline-agent.json",
+    "agent-platform/docs/cli-pipeline-agent.ko.md",
+    "agent-platform/docs/cli-pipeline-agent.en.md",
+    "agent-platform/README.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/policies/cli-adapter-policy.ko.md",
+    "_docs/policies/cli-adapter-policy.en.md",
+    "AGENTS.md",
+    "_ops/workflows/71-cli-pipeline-orchestration.md",
+    "_ops/prompts/101-cli-pipeline-orchestration.md",
+    "_ops/coordination/status.json",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/spec.ko.md"
+  ],
+  "verification": [
+    "cd agent-platform && python3 -m unittest discover -s tests: 142 tests OK",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline configs/integrations/cli-pipeline-template.json: pipeline_ready",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-work-modes configs/workflows/work-mode-registry.json: ready",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json --root ..: ready_to_bootstrap",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract <core shared settings>: self_documenting",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean with existing presentation-agent generated-output warnings",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-cli-pipeline-file-artifact-handoffs.json: ready",
+    "python3 _tools/workspace-index/src/workspace_index.py: updated maps",
+    "python3 _tools/task-board/src/task_board.py: updated boards",
+    "cd workspace-monitor && npm run collect: wrote 1200 documents",
+    "git diff --check: no whitespace errors"
+  ],
+  "references_checked": [
+    "https://docs.python.org/3/library/tempfile.html",
+    "https://nodejs.org/api/fs.html",
+    "https://owasp.org/www-community/attacks/Path_Traversal",
+    "https://cwe.mitre.org/data/definitions/22",
+    "agent-platform/configs/integrations/cli-pipeline-template.json",
+    "agent-platform/src/agent_platform/integrations/cli_pipeline.py",
+    "_history/evaluations/2026/2026-06-02-cli-pipeline-orchestration.ko.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-cli-pipeline-file-artifact-handoffs-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-cli-pipeline-file-artifact-handoffs.ko.md",
+    "_research/topics/agent-operations/2026-06-02-cli-pipeline-file-artifact-handoffs.ko.md",
+    "_history/plans/2026/2026-06-02-cli-pipeline-file-artifact-handoffs.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-cli-pipeline-file-artifact-handoffs.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/validation.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-02-cli-pipeline-file-artifact-handoffs.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-cli-pipeline-file-artifact-handoffs-omission-check.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-cli-pipeline-file-artifact-handoffs.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-02-cli-pipeline-file-artifact-handoffs.ko.md",
+    "_requirements/reviews/2026-06-02-cli-pipeline-file-artifact-handoffs.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-cli-pipeline-file-artifact-handoffs.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-cli-pipeline-file-artifact-handoffs.json"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-02-cli-pipeline-file-artifact-handoffs-resource-check.json"
+  ],
+  "cli_pipeline_occurred": true,
+  "cli_pipeline_targets": [
+    "agent-platform/configs/integrations/cli-pipeline-template.json",
+    "_history/evaluations/2026/2026-06-02-cli-pipeline-file-artifact-handoffs-pipeline-check.json"
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Actual file-producing multi-process runner remains a future feature outside this governance/validation change.",
+    "structure-audit still reports pre-existing presentation-agent generated-output warnings for playwright-report and test-results.",
+    "Future runner implementation should measure file-handle lifecycle, temp-file cleanup, artifact size growth, and stream backpressure with resource-guard-agent."
+  ]
+}

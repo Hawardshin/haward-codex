@@ -149,7 +149,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/workflows/62-select-install-mode.md` when setup or dependency preparation should distinguish user install from developer improvement install.
 - Use `_ops/workflows/63-installable-software-productization.md` when the platform should become installable desktop/end-user software or when packaging choices such as Tauri, Electron, MSIX, DMG, signing, notarization, update, or uninstall behavior matter.
 - Use `_ops/workflows/66-cli-adapter-integration.md` when platform work adds, invokes, bundles, requires, or compares external CLIs. Keep CLI adapters replaceable and avoid turning the platform into a single CLI wrapper.
-- Use `_ops/workflows/71-cli-pipeline-orchestration.md` when one action launches multiple CLI processes, connects stdout/stderr/stdin pipes, fans out/fans in CLI work, or embeds multi-CLI orchestration in a desktop shell, monitor, local daemon, or agent workflow.
+- Use `_ops/workflows/71-cli-pipeline-orchestration.md` when one action launches multiple CLI processes, connects stdout/stderr/stdin pipes, exchanges files/temp artifacts/caches/logs/reports, fans out/fans in CLI work, or embeds multi-CLI orchestration in a desktop shell, monitor, local daemon, or agent workflow.
 - Use `_ops/workflows/67-structure-unstructured-data.md` when messy or mixed-format input should become durable structured records with schema, provenance, null handling, and validation.
 - Use `_ops/workflows/68-omission-prevention.md` before closing non-`quick` work, or whenever required user instructions, requirements, artifacts, or acceptance checks could be missed.
 - Use `_ops/workflows/69-resource-leak-prevention.md` whenever work touches long-running agents, servers, browser automation, subprocesses, workers, queues, caches, streams, large data, file handles, network connections, timers, or subscriptions.
@@ -157,7 +157,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Treat work modes as enforced gates, not prompt-only preferences: non-`quick` work must leave `mode_selection_record_targets`, and close-out must run `check-work-modes` when mode policy or evaluator behavior changes.
 - Non-`quick` work must leave `omission_check_targets`, backed by `omission-guard-agent` or an equivalent task coverage checklist, so required items are not silently skipped.
 - Runtime-risk work must leave `resource_check_targets`, backed by `resource-guard-agent` or an equivalent lifecycle and memory/resource measurement record, and set `resource_risk_occurred=true` in evaluator input.
-- Multi-process CLI orchestration work must leave `cli_pipeline_targets`, backed by `cli-pipeline-agent` or an equivalent process graph and pipe validation record, and set `cli_pipeline_occurred=true` in evaluator input.
+- Multi-process CLI orchestration work must leave `cli_pipeline_targets`, backed by `cli-pipeline-agent` or an equivalent process graph plus pipe/artifact validation record, and set `cli_pipeline_occurred=true` in evaluator input.
 - For meaningful work, record phase-level timing under `_history/work-timings/YYYY/` using `_tools/work-timer/` so slow phases and bottleneck candidates are visible.
 - Use `_ops/projects/registry.json` to see registered root projects and ownership boundaries.
 - Use `_ops/projects/root-structure-policy.json` to classify root folders as registered projects, reserved operational folders, local-only folders, or generated output.
@@ -190,7 +190,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-work-modes configs/workflows/work-mode-registry.json` from `agent-platform/` after changing work modes, evaluator target fields, or close-out strictness.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-omissions <input.json>` from `agent-platform/` before closing non-`quick` work when omission coverage is required.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-resources <input.json>` from `agent-platform/` before closing work with memory or runtime resource leak risk.
-- Run `PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline <input.json>` from `agent-platform/` before closing work that designs or changes multi-process CLI orchestration.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline <input.json>` from `agent-platform/` before closing work that designs or changes multi-process CLI orchestration, including file or artifact handoffs.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules
@@ -201,7 +201,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Include `mode_selection_record_targets` for `standard`, `ship_first`, `research`, and `governance` work so the selected mode, reason, overrides, and enforcement checks are auditable.
 - Include `omission_check_targets` for `standard`, `ship_first`, `research`, and `governance` work so required instructions, requirements, artifacts, and acceptance checks are auditable.
 - Include `resource_risk_occurred=true` and `resource_check_targets` when work has memory or runtime resource leak risk. Missing resource checks are blocking gaps when resource risk occurred.
-- Include `cli_pipeline_occurred=true` and `cli_pipeline_targets` when work has multi-process CLI orchestration. Missing CLI pipeline checks are blocking gaps when CLI pipeline work occurred.
+- Include `cli_pipeline_occurred=true` and `cli_pipeline_targets` when work has multi-process CLI orchestration, including file or artifact handoffs. Missing CLI pipeline checks are blocking gaps when CLI pipeline work occurred.
 - In `quick` mode, missing governance/history/spec targets are non-blocking improvements unless another rule or the user makes them mandatory.
 - In `ship_first` mode, require `references_checked`, `mode_selection_record_targets`, `omission_check_targets`, and `web_search_record_targets`; if improvements are intentionally postponed, include `deferred_improvement_targets` pointing to `_ops/backlog/deferred-improvements.ko.md` or a project equivalent.
 - In `research` mode, require `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, `mode_selection_record_targets`, `omission_check_targets`, `web_search_record_targets`, and `timing_summary_targets`.

@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from agent_platform.integrations.cli_pipeline import CliPipelineInput, check_cli_pipeline
+from agent_platform.integrations.cli_pipeline import CliPipelineInput, PipelineArtifact, check_cli_pipeline
 
 
 def ready_input() -> CliPipelineInput:
@@ -51,6 +51,7 @@ def ready_input() -> CliPipelineInput:
                     "required": True,
                 }
             ],
+            "artifacts": [],
             "execution_policy": {
                 "shell_allowed": False,
                 "argv_arrays_required": True,
@@ -127,6 +128,107 @@ class CliPipelineTests(unittest.TestCase):
 
         self.assertTrue(report["requires_rework"])
         self.assertIn("Pipe collector_stdout_to_planner_stdin references unknown to_process 'missing_process'.", report["gaps"])
+
+    def test_artifact_handoff_pipeline_ready(self) -> None:
+        data = ready_input().__dict__.copy()
+        data["artifacts"] = (
+            PipelineArtifact.from_dict(
+                {
+                "artifact_id": "collector_output",
+                "kind": "temp_file",
+                "path": "agent-platform/artifacts/cli-pipelines/demo-search-to-summary/collector-output.jsonl",
+                "produced_by": "collect_sources",
+                "consumed_by": ["summarize_sources"],
+                "required": True,
+                "max_bytes": 2000000,
+                "format": "jsonl",
+                "retention_policy": "",
+                "cleanup_policy": "Delete after summarize_sources accepts the structured result.",
+                "provenance": ["collect_sources stdout"],
+                "validation": ["jsonl parses", "size stays under max_bytes"],
+                }
+            ),
+        )
+        data["pipes"] = (
+            data["pipes"][0].__class__(
+                **{
+                    **data["pipes"][0].__dict__,
+                    "mode": "artifact",
+                    "artifact_id": "collector_output",
+                }
+            ),
+        )
+
+        report = check_cli_pipeline(CliPipelineInput(**data))
+
+        self.assertEqual(report["status"], "pipeline_ready")
+        self.assertEqual(report["checks"]["artifact_count"], 1)
+
+    def test_artifact_path_traversal_requires_rework(self) -> None:
+        data = ready_input().__dict__.copy()
+        data["artifacts"] = (
+            PipelineArtifact.from_dict(
+                {
+                "artifact_id": "unsafe_output",
+                "kind": "temp_file",
+                "path": "../outside.json",
+                "produced_by": "collect_sources",
+                "consumed_by": ["summarize_sources"],
+                "required": True,
+                "max_bytes": 100,
+                "format": "json",
+                "cleanup_policy": "Delete after use.",
+                "validation": ["json parses"],
+                }
+            ),
+        )
+        data["pipes"] = (
+            data["pipes"][0].__class__(
+                **{
+                    **data["pipes"][0].__dict__,
+                    "mode": "artifact",
+                    "artifact_id": "unsafe_output",
+                }
+            ),
+        )
+
+        report = check_cli_pipeline(CliPipelineInput(**data))
+
+        self.assertTrue(report["requires_rework"])
+        self.assertTrue(any("path must be workspace-relative" in gap for gap in report["gaps"]))
+
+    def test_file_pipe_missing_artifact_id_requires_rework(self) -> None:
+        data = ready_input().__dict__.copy()
+        data["pipes"] = (
+            data["pipes"][0].__class__(**{**data["pipes"][0].__dict__, "mode": "file"}),
+        )
+        report = check_cli_pipeline(CliPipelineInput(**data))
+
+        self.assertTrue(report["requires_rework"])
+        self.assertTrue(any("artifact_id is missing" in gap for gap in report["gaps"]))
+
+    def test_artifact_unknown_process_requires_rework(self) -> None:
+        data = ready_input().__dict__.copy()
+        data["artifacts"] = (
+            PipelineArtifact.from_dict(
+                {
+                "artifact_id": "collector_output",
+                "kind": "temp_file",
+                "path": "agent-platform/artifacts/cli-pipelines/demo-search-to-summary/collector-output.jsonl",
+                "produced_by": "missing_process",
+                "consumed_by": ["summarize_sources"],
+                "required": True,
+                "max_bytes": 100,
+                "format": "jsonl",
+                "cleanup_policy": "Delete after use.",
+                "validation": ["jsonl parses"],
+                }
+            ),
+        )
+        report = check_cli_pipeline(CliPipelineInput(**data))
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn("Artifact collector_output references unknown produced_by process 'missing_process'.", report["gaps"])
 
     def test_missing_safety_controls_requires_rework(self) -> None:
         data = ready_input().__dict__.copy()

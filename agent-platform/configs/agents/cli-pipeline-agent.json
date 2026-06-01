@@ -1,6 +1,6 @@
 {
   "name": "cli-pipeline-agent",
-  "description": "Checks multi-process CLI orchestration plans before several external CLIs are launched, piped, merged, or cancelled together.",
+  "description": "Checks multi-process CLI orchestration plans before several external CLIs are launched, piped, exchanged through files/artifacts, merged, or cancelled together.",
   "runtime": "python",
   "skills": [],
   "tools": [
@@ -8,9 +8,9 @@
   ],
   "metadata": {
     "status": "active",
-    "trigger": "before implementing or closing work that starts multiple CLI processes, connects stdout/stderr/stdin pipes, fans out/fans in CLI work, or embeds CLI orchestration in a desktop shell, monitor, local daemon, or agent workflow",
+    "trigger": "before implementing or closing work that starts multiple CLI processes, connects stdout/stderr/stdin pipes, exchanges files/temp artifacts/caches/logs/reports, fans out/fans in CLI work, or embeds CLI orchestration in a desktop shell, monitor, local daemon, or agent workflow",
     "input_schema": "agent-platform/configs/integrations/cli-pipeline-template.json",
     "work_mode_registry": "agent-platform/configs/workflows/work-mode-registry.json",
-    "policy": "Represent CLI orchestration as explicit process nodes and pipe edges. Prefer argv-style commands, shell_allowed=false, adapter allowlists, explicit cwd, timeout, output bounds, cancellation, cleanup, backpressure, source provenance, plan evidence, verification, and rollback. If cli_pipeline_occurred=true in work-evaluator input, cli_pipeline_targets must be present."
+    "policy": "Represent CLI orchestration as explicit process nodes plus pipe and artifact edges. Prefer argv-style commands, shell_allowed=false, adapter allowlists, explicit cwd, workspace-relative artifact paths, timeout, output bounds, cleanup/retention, cancellation, backpressure, source provenance, plan evidence, verification, and rollback. If cli_pipeline_occurred=true in work-evaluator input, cli_pipeline_targets must be present."
   }
 }

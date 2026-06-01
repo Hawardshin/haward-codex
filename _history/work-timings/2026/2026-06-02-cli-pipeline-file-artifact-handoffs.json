@@ -1,0 +1,68 @@
+{
+  "task_id": "2026-06-02-cli-pipeline-file-artifact-handoffs",
+  "title": "Add CLI pipeline file and artifact handoff contracts",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "duration_seconds": 180,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official Python tempfile, Node fs, OWASP path traversal, and CWE-22 sources were checked."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap and mode selection",
+      "status": "completed",
+      "duration_seconds": 40,
+      "measurement": "partial",
+      "bottleneck_notes": "Memory bootstrap and governance mode selection were completed before local edits."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec records",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "The task required paired KO/EN requirements, spec, plan, tasks, validation, traceability, research, and history records."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Validator, config, docs, and tests",
+      "status": "completed",
+      "duration_seconds": 1500,
+      "measurement": "estimated",
+      "bottleneck_notes": "Largest phase because the artifact contract touched validator code, tests, template, docs, workflows, prompts, memory, README, persistent instructions, and CLI adapter registry."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Automated verification",
+      "status": "completed",
+      "duration_seconds": 480,
+      "measurement": "partial",
+      "bottleneck_notes": "Unit tests and core config checks were run first; full close-out checks are recorded in evaluation."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and close-out records",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "Omission, resource, grounding, evaluator, request trace, and work summary records were created."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "duration_seconds": null,
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed after final verification."
+    }
+  ],
+  "bottleneck_notes": [
+    "The implementation phase is the bottleneck because this is a cross-cutting governance and validator change.",
+    "Future similar changes could be faster with a generator for paired KO/EN governance artifacts."
+  ]
+}

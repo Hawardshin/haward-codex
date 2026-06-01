@@ -12,7 +12,7 @@ Even as the platform becomes installable software, it must not become dependent 
 - CLI adapters need availability checks, version checks, permission scopes, timeouts, output contracts, and fallbacks.
 - A missing CLI should become `capability_missing`, not a whole-platform failure.
 - Prefer argv-style execution, explicit cwd, timeouts, environment allowlists, and redacted stdout/stderr handling over shell strings.
-- If several CLIs run together, model the pipeline as a process graph instead of a shell string pipeline. Each CLI is a process node, stdout/stderr/stdin links are pipe edges, and fan-in behavior is a merge strategy.
+- If several CLIs run together, model the pipeline as a process graph instead of a shell string pipeline. Each CLI is a process node, stdout/stderr/stdin links are pipe edges, file/temp artifact/cache/log/report handoffs are artifact records, and fan-in behavior is a merge strategy.
 - If a desktop shell runs local commands, document command allowlists, workspace path allowlists, and user approval/settings boundaries first.
 - If a CLI becomes required, bundled, globally installed, or auto-installed, create an installation audit plan and rollback path first.
 
@@ -30,7 +30,7 @@ Even as the platform becomes installable software, it must not become dependent 
 - Git/GitHub CLI: these can enrich history and remote work, but document/history browsing itself must not depend on `gh`.
 - Package managers: these can support installation or validation, but dependency state changes require installation audit records.
 - Deployment CLIs: Vercel, Docker, and cloud CLIs can be deployment adapters, but credential, target, rollback, and preview boundaries must be explicit.
-- Multi-CLI pipelines: source collectors, planners, and document converters can be connected, but `cli-pipeline-agent` must first check process graph, pipe edges, timeout, output bounds, cleanup, and merge strategy.
+- Multi-CLI pipelines: source collectors, planners, and document converters can be connected, but `cli-pipeline-agent` must first check process graph, pipe/artifact edges, workspace-relative paths, timeout, output bounds, cleanup/retention, and merge strategy.
 
 ## Validation
 

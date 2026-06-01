@@ -1,0 +1,72 @@
+{
+  "task": "CLI pipeline file/artifact handoff resource risk review",
+  "work_mode": "governance",
+  "runtime_context": [
+    "python",
+    "future subprocess runner",
+    "cli process graph",
+    "stdin stdout stderr streams",
+    "temporary files",
+    "file handles",
+    "artifact cache"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "future-temp-artifact-leak",
+      "category": "temporary_file",
+      "description": "A future runner could leave temporary files or caches behind if cleanup policy is not explicit.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The pipeline contract requires cleanup_policy for temp_file and cache artifacts before readiness.",
+      "evidence": [
+        "agent-platform/src/agent_platform/integrations/cli_pipeline.py",
+        "agent-platform/configs/integrations/cli-pipeline-template.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "future-file-handle-leak",
+      "category": "file_handle",
+      "description": "A future file handoff runner could leak file handles if stream and file lifecycle are not recorded.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The resource_controls cleanup_policy now explicitly covers file handles, and artifact validation requires validation and size bounds.",
+      "evidence": [
+        "agent-platform/configs/integrations/cli-pipeline-template.json",
+        "_ops/workflows/71-cli-pipeline-orchestration.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "runner-not-implemented",
+      "resource": "Actual file-producing CLI runner",
+      "create_path": "No runner implemented in this change.",
+      "cleanup_path": "Not applicable because this change adds validation contracts only.",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/spec.ko.md"
+      ],
+      "rationale": "The current change does not open files, create temp files, or spawn subprocesses."
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "no-runtime-file-measurement",
+      "metric": "Open file handles, temp-file count, and artifact size growth",
+      "tool": "Not run",
+      "threshold": "Not applicable until a real runner exists.",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/spec.ko.md"
+      ],
+      "rationale": "No executable file-producing orchestration runtime was added."
+    }
+  ],
+  "notes": [
+    "Future runner implementation must add real lifecycle and measurement checks for file handles and temporary artifacts."
+  ]
+}

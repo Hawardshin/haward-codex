@@ -257,8 +257,8 @@
     },
     {
       "id": "cli_pipeline_needs_conditional_gate",
-      "rule": "When a task designs or changes multi-process CLI orchestration, it must set cli_pipeline_occurred=true and leave cli_pipeline_targets with process graph, explicit pipe edges, safety controls, resource controls, source provenance, merge strategy, and verification evidence.",
-      "reason": "The user wants one CLI action to run several internal processes through pipes, so the platform needs an execution contract stronger than prompt guidance.",
+      "rule": "When a task designs or changes multi-process CLI orchestration, including pipe, file, temporary artifact, cache, log, report, or other handoff channels, it must set cli_pipeline_occurred=true and leave cli_pipeline_targets with process graph, explicit pipe/artifact edges, safety controls, resource controls, source provenance, merge strategy, and verification evidence.",
+      "reason": "The user wants one CLI action to run several internal processes through pipes, files, and similar mechanisms, so the platform needs an execution contract stronger than prompt guidance.",
       "applies_to": [
         "mode_enforcement",
         "modes",

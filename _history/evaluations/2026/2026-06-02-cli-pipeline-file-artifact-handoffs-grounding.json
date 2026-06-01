@@ -1,0 +1,15 @@
+{
+  "status": "ready_to_publish",
+  "requires_rework": false,
+  "principle": "Publish only claims that are grounded, verified, or explicitly caveated.",
+  "checks": {
+    "risk_level": "medium",
+    "claims_count": 3,
+    "evidence_count": 7,
+    "uncertainty_notes_count": 1,
+    "limitation_notes_count": 1
+  },
+  "gaps": [],
+  "warnings": [],
+  "follow_up_actions": []
+}

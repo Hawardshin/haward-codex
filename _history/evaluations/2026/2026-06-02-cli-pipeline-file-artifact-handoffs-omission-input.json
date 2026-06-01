@@ -1,0 +1,128 @@
+{
+  "task": "CLI pipeline file/artifact handoff governance change",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "user-request-files-and-etc",
+      "description": "Capture the user's request to account for files and other handoff methods in CLI orchestration.",
+      "source": "UR-2026-06-02-014",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "artifact-contract",
+      "description": "Add explicit artifact handoff records with path, size, cleanup/retention, provenance, and validation.",
+      "source": "REQ-WS-059",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/integrations/cli_pipeline.py",
+        "agent-platform/configs/integrations/cli-pipeline-template.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "path-boundary",
+      "description": "Reject unsafe artifact paths with absolute paths, drive prefixes, backslashes, '~', or '..'.",
+      "source": "REQ-WS-059",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/integrations/cli_pipeline.py",
+        "agent-platform/tests/test_cli_pipeline.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "workflow-and-prompt",
+      "description": "Make future agents discover file/artifact handoff rules in workflow, prompt, persistent instructions, and memory bootstrap.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_ops/workflows/71-cli-pipeline-orchestration.md",
+        "_ops/prompts/101-cli-pipeline-orchestration.md",
+        "_docs/instructions/persistent-instructions.ko.md",
+        "agent-platform/configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "actual-runner-out-of-scope",
+      "description": "Avoid implying that actual file-producing CLI orchestration was implemented.",
+      "source": "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/spec.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/spec.ko.md",
+        "agent-platform/docs/cli-pipeline-agent.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/src/agent_platform/integrations/cli_pipeline.py",
+      "purpose": "Artifact-aware CLI pipeline validator implementation",
+      "required": true
+    },
+    {
+      "path": "agent-platform/tests/test_cli_pipeline.py",
+      "purpose": "Artifact handoff and unsafe path tests",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/integrations/cli-pipeline-template.json",
+      "purpose": "Self-documenting pipeline template with artifact handoff example",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/spec.ko.md",
+      "purpose": "Spec record for the governance change",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "unit-tests",
+      "description": "Run agent-platform unit tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cd agent-platform && python3 -m unittest discover -s tests: 142 tests OK"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "pipeline-template-ready",
+      "description": "Validate the artifact-aware CLI pipeline template.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-cli-pipeline configs/integrations/cli-pipeline-template.json: pipeline_ready"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "config-contract",
+      "description": "Validate changed shared settings as self-documenting configs.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract cli-pipeline-template/cli-adapter-registry/work-mode-registry/bootstrap-manifest: self_documenting"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Actual file-producing process runner remains out of scope and must be implemented separately."
+  ],
+  "notes": [
+    "This file is the input record. The checked result is saved separately after running check-omissions."
+  ]
+}

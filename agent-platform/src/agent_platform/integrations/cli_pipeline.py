@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import PurePosixPath
 from typing import Any
 
 
@@ -10,9 +11,13 @@ JsonMap = dict[str, Any]
 
 RISK_LEVELS = {"low", "medium", "high", "critical"}
 VALID_PIPE_MODES = {"pipe", "file", "artifact"}
+VALID_ARTIFACT_KINDS = {"input_file", "output_file", "temp_file", "directory", "log", "cache", "report", "other"}
 VALID_SOURCE_STREAMS = {"stdout", "stderr"}
 VALID_DESTINATION_STREAMS = {"stdin"}
 SHELL_METACHAR_PATTERNS = ("|", ";", "&&", "||", "$(", "`", ">", "<")
+ARTIFACT_PIPE_MODES = {"file", "artifact"}
+TEMPORARY_ARTIFACT_KINDS = {"temp_file", "cache"}
+RETAINED_ARTIFACT_KINDS = {"output_file", "directory", "log", "report"}
 
 REQUIRED_SAFETY_CONTROLS = {
     "adapter_allowlist",
@@ -76,6 +81,7 @@ class PipelinePipe:
     to_process: str
     to_stream: str
     mode: str = "pipe"
+    artifact_id: str = ""
     required: bool = True
 
     @classmethod
@@ -87,7 +93,43 @@ class PipelinePipe:
             to_process=_required_string(data, "to_process"),
             to_stream=_optional_string(data.get("to_stream", "stdin"), "to_stream"),
             mode=_optional_string(data.get("mode", "pipe"), "mode"),
+            artifact_id=_optional_string(data.get("artifact_id", ""), "artifact_id"),
             required=_optional_bool(data.get("required", True), "required"),
+        )
+
+
+@dataclass(frozen=True)
+class PipelineArtifact:
+    """A file, directory, temp file, cache, log, or report used between CLI process nodes."""
+
+    artifact_id: str
+    kind: str
+    path: str
+    produced_by: str = ""
+    consumed_by: tuple[str, ...] = ()
+    required: bool = True
+    max_bytes: int = 0
+    format: str = ""
+    retention_policy: str = ""
+    cleanup_policy: str = ""
+    provenance: tuple[str, ...] = ()
+    validation: tuple[str, ...] = ()
+
+    @classmethod
+    def from_dict(cls, data: JsonMap) -> "PipelineArtifact":
+        return cls(
+            artifact_id=_required_string(data, "artifact_id"),
+            kind=_required_string(data, "kind"),
+            path=_required_string(data, "path"),
+            produced_by=_optional_string(data.get("produced_by", ""), "produced_by"),
+            consumed_by=_tuple_of_strings(data.get("consumed_by", []), "consumed_by"),
+            required=_optional_bool(data.get("required", True), "required"),
+            max_bytes=_optional_int(data.get("max_bytes", 0), "max_bytes"),
+            format=_optional_string(data.get("format", ""), "format"),
+            retention_policy=_optional_string(data.get("retention_policy", ""), "retention_policy"),
+            cleanup_policy=_optional_string(data.get("cleanup_policy", ""), "cleanup_policy"),
+            provenance=_tuple_of_strings(data.get("provenance", []), "provenance"),
+            validation=_tuple_of_strings(data.get("validation", []), "validation"),
         )
 
 
@@ -101,6 +143,7 @@ class CliPipelineInput:
     risk_level: str = "medium"
     processes: tuple[PipelineProcess, ...] = ()
     pipes: tuple[PipelinePipe, ...] = ()
+    artifacts: tuple[PipelineArtifact, ...] = ()
     execution_policy: JsonMap | None = None
     safety_controls: tuple[str, ...] = ()
     resource_controls: JsonMap | None = None
@@ -120,6 +163,7 @@ class CliPipelineInput:
             risk_level=_optional_string(data.get("risk_level", "medium"), "risk_level"),
             processes=_tuple_from_objects(data.get("processes", []), "processes", PipelineProcess.from_dict),
             pipes=_tuple_from_objects(data.get("pipes", []), "pipes", PipelinePipe.from_dict),
+            artifacts=_tuple_from_objects(data.get("artifacts", []), "artifacts", PipelineArtifact.from_dict),
             execution_policy=_optional_map(data.get("execution_policy", {}), "execution_policy"),
             safety_controls=_tuple_of_strings(data.get("safety_controls", []), "safety_controls"),
             resource_controls=_optional_map(data.get("resource_controls", {}), "resource_controls"),
@@ -140,7 +184,8 @@ def check_cli_pipeline(pipeline_input: CliPipelineInput) -> JsonMap:
 
     _check_header(pipeline_input, gaps)
     process_ids = _check_processes(pipeline_input, gaps, warnings)
-    _check_pipes(pipeline_input, process_ids, gaps, warnings)
+    artifact_ids = _check_artifacts(pipeline_input, process_ids, gaps, warnings)
+    _check_pipes(pipeline_input, process_ids, artifact_ids, gaps, warnings)
     _check_execution_policy(pipeline_input, gaps, warnings)
     _check_safety_controls(pipeline_input, gaps)
     _check_resource_controls(pipeline_input, gaps)
@@ -156,6 +201,7 @@ def check_cli_pipeline(pipeline_input: CliPipelineInput) -> JsonMap:
             "risk_level": pipeline_input.risk_level,
             "process_count": len(pipeline_input.processes),
             "pipe_count": len(pipeline_input.pipes),
+            "artifact_count": len(pipeline_input.artifacts),
             "adapter_count": len({process.adapter_id for process in pipeline_input.processes if process.adapter_id}),
             "safety_control_count": len(pipeline_input.safety_controls),
             "source_provenance_count": len(pipeline_input.source_provenance),
@@ -226,6 +272,7 @@ def _check_processes(
 def _check_pipes(
     pipeline_input: CliPipelineInput,
     process_ids: set[str],
+    artifact_ids: set[str],
     gaps: list[str],
     warnings: list[str],
 ) -> None:
@@ -251,12 +298,65 @@ def _check_pipes(
             gaps.append(f"Pipe {label} has invalid to_stream '{pipe.to_stream}'.")
         if pipe.mode not in VALID_PIPE_MODES:
             gaps.append(f"Pipe {label} has invalid mode '{pipe.mode}'.")
+        if pipe.mode in ARTIFACT_PIPE_MODES:
+            if not pipe.artifact_id.strip():
+                gaps.append(f"Pipe {label} uses mode '{pipe.mode}' but artifact_id is missing.")
+            elif pipe.artifact_id not in artifact_ids:
+                gaps.append(f"Pipe {label} references unknown artifact_id '{pipe.artifact_id}'.")
+        elif pipe.artifact_id.strip():
+            warnings.append(f"Pipe {label} is direct pipe mode but artifact_id is set; confirm this is intentional metadata.")
         if not pipe.required:
             warnings.append(f"Pipe {label} is optional; record how missing upstream output affects downstream behavior.")
 
     duplicated = sorted({pipe_id for pipe_id in pipe_ids if pipe_ids.count(pipe_id) > 1 and pipe_id})
     for pipe_id in duplicated:
         gaps.append(f"Duplicate pipe_id '{pipe_id}'.")
+
+
+def _check_artifacts(
+    pipeline_input: CliPipelineInput,
+    process_ids: set[str],
+    gaps: list[str],
+    warnings: list[str],
+) -> set[str]:
+    artifact_ids: list[str] = []
+    for artifact in pipeline_input.artifacts:
+        label = artifact.artifact_id or artifact.path or "<unnamed-artifact>"
+        if not artifact.artifact_id.strip():
+            gaps.append("Pipeline artifact is missing artifact_id.")
+        artifact_ids.append(artifact.artifact_id)
+        if artifact.kind not in VALID_ARTIFACT_KINDS:
+            gaps.append(f"Artifact {label} has invalid kind '{artifact.kind}'.")
+        if not artifact.path.strip():
+            gaps.append(f"Artifact {label} is missing path.")
+        elif not _is_safe_workspace_relative_path(artifact.path):
+            gaps.append(
+                f"Artifact {label} path must be workspace-relative and must not contain absolute paths, drive prefixes, backslashes, '~', or '..'."
+            )
+        if artifact.produced_by and artifact.produced_by not in process_ids:
+            gaps.append(f"Artifact {label} references unknown produced_by process '{artifact.produced_by}'.")
+        for consumer in artifact.consumed_by:
+            if consumer not in process_ids:
+                gaps.append(f"Artifact {label} references unknown consumed_by process '{consumer}'.")
+        if artifact.required and artifact.max_bytes <= 0:
+            gaps.append(f"Required artifact {label} is missing positive max_bytes.")
+        if artifact.required and not artifact.validation:
+            gaps.append(f"Required artifact {label} is missing validation steps.")
+        if artifact.kind == "input_file" and not artifact.provenance:
+            gaps.append(f"Input artifact {label} is missing provenance.")
+        if artifact.kind in TEMPORARY_ARTIFACT_KINDS and not artifact.cleanup_policy.strip():
+            gaps.append(f"Temporary artifact {label} is missing cleanup_policy.")
+        if artifact.kind in RETAINED_ARTIFACT_KINDS and not artifact.retention_policy.strip():
+            gaps.append(f"Retained artifact {label} is missing retention_policy.")
+        if artifact.kind in RETAINED_ARTIFACT_KINDS | TEMPORARY_ARTIFACT_KINDS and not artifact.produced_by.strip():
+            warnings.append(f"Artifact {label} has no produced_by process; confirm it is externally supplied.")
+        if artifact.kind in {"input_file", "output_file", "temp_file", "cache", "report"} and not artifact.format.strip():
+            warnings.append(f"Artifact {label} has no format; record one when downstream parsing depends on it.")
+
+    duplicated = sorted({artifact_id for artifact_id in artifact_ids if artifact_ids.count(artifact_id) > 1 and artifact_id})
+    for artifact_id in duplicated:
+        gaps.append(f"Duplicate artifact_id '{artifact_id}'.")
+    return {artifact_id for artifact_id in artifact_ids if artifact_id}
 
 
 def _check_execution_policy(
@@ -327,6 +427,17 @@ def _check_evidence_and_closeout(
 
 def _contains_shell_metachar(value: str) -> bool:
     return any(pattern in value for pattern in SHELL_METACHAR_PATTERNS)
+
+
+def _is_safe_workspace_relative_path(value: str) -> bool:
+    if not value.strip():
+        return False
+    if value.startswith(("/", "~")) or "\\" in value or ":" in value:
+        return False
+    path = PurePosixPath(value)
+    if path.is_absolute():
+        return False
+    return ".." not in path.parts
 
 
 def _execution_list(policy: JsonMap | None, field_name: str) -> tuple[str, ...]:

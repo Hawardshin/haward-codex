@@ -425,7 +425,7 @@
       "source_type": "internal",
       "used_for": [
         "multi-process CLI process graph validation",
-        "explicit pipe edge and fan-in merge contract",
+        "explicit pipe, file, artifact, and fan-in merge contract",
         "cli_pipeline_targets close-out policy"
       ],
       "last_checked": "2026-06-02"
@@ -996,8 +996,8 @@
     },
     {
       "id": "cli_pipeline_template_must_stay_discoverable",
-      "rule": "The CLI pipeline template must remain a warm memory anchor so future sessions model multi-CLI orchestration as process graphs with explicit pipe edges, bounded resources, and verification records.",
-      "reason": "The user said one CLI action should run several internal processes and use pipes; future agents should not collapse that into opaque shell strings.",
+      "rule": "The CLI pipeline template must remain a warm memory anchor so future sessions model multi-CLI orchestration as process graphs with explicit pipe/file/artifact edges, bounded resources, and verification records.",
+      "reason": "The user said one CLI action should run several internal processes and use pipes, files, and similar mechanisms; future agents should not collapse that into opaque shell strings or implicit temp paths.",
       "applies_to": [
         "startup_sequence",
         "required_anchor_ids",

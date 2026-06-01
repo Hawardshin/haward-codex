@@ -1,6 +1,6 @@
 # CLI Pipeline Orchestration Prompt
 
-Use when: one user action needs to run several CLI processes, connect stdout/stderr/stdin pipes, fan out work and merge results, or embed multi-CLI orchestration in a desktop shell, monitor, local daemon, or agent workflow.
+Use when: one user action needs to run several CLI processes, connect stdout/stderr/stdin pipes, exchange files or artifacts, fan out work and merge results, or embed multi-CLI orchestration in a desktop shell, monitor, local daemon, or agent workflow.
 
 ## Common Contract
 
@@ -20,7 +20,9 @@ Read:
 
 Research before design:
 - official process/pipe documentation for the implementation runtime
+- official file-system, stream, and temp-file documentation for the implementation runtime when any handoff touches files or artifacts
 - command execution and injection-prevention guidance
+- path traversal and workspace-boundary guidance when paths are generated or consumed
 - official docs for every CLI adapter involved
 - issue/discussion signals when process behavior, portability, or output format is uncertain
 - fallback/manual workflows
@@ -28,6 +30,7 @@ Research before design:
 Return:
 - process graph with process_id, adapter_id, command, args, cwd, env_keys, timeout_seconds, max_output_bytes
 - explicit pipe edges with from_process/from_stream/to_process/to_stream/mode
+- explicit artifact handoffs for file/artifact modes with artifact_id, kind, workspace-relative path, produced_by, consumed_by, max_bytes, format, cleanup/retention policy, provenance, and validation
 - shell policy and argv policy
 - adapter allowlist
 - safety controls
@@ -41,7 +44,7 @@ Run or prepare:
 - PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline <pipeline-input.json>
 
 If multi-process CLI orchestration occurred, set cli_pipeline_occurred=true and include cli_pipeline_targets in work-evaluator input.
-Do not hide pipes, redirects, or command chaining inside shell strings unless a separate security review and escaping plan exists.
+Do not hide pipes, redirects, command chaining, file paths, or temp artifacts inside shell strings unless a separate security/path review and escaping plan exists.
 ```
 
 ## Checklist

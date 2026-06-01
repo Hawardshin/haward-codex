@@ -1,0 +1,20 @@
+{
+  "status": "pipeline_ready",
+  "requires_rework": false,
+  "work_mode": "governance",
+  "checks": {
+    "pipeline_id": "example-research-fan-in",
+    "risk_level": "medium",
+    "process_count": 2,
+    "pipe_count": 1,
+    "artifact_count": 1,
+    "adapter_count": 2,
+    "safety_control_count": 10,
+    "source_provenance_count": 7,
+    "plan_evidence_count": 2,
+    "verification_count": 1
+  },
+  "gaps": [],
+  "warnings": [],
+  "follow_up_actions": []
+}
