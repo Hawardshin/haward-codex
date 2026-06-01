@@ -23,6 +23,7 @@ from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidat
 from agent_platform.planning.coding_research import CodingResearchInput, complete_coding_research
 from agent_platform.planning.parallel_work import ParallelWorkPlanInput, plan_parallel_work
 from agent_platform.planning.research_insight_planner import ResearchInsightPlanInput, create_research_insight_plan
+from agent_platform.planning.spec_reconciliation import SpecReconciliationInput, reconcile_spec_source
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -58,6 +59,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     plan_parallel = subparsers.add_parser("plan-parallel-work", help="Check whether work can be safely split into parallel lanes.")
     plan_parallel.add_argument("path", type=Path)
+
+    reconcile_spec = subparsers.add_parser(
+        "reconcile-spec",
+        help="Check whether spec/source drift needs a spec update, source update, or user clarification.",
+    )
+    reconcile_spec.add_argument("path", type=Path)
 
     check_memory = subparsers.add_parser("check-memory-bootstrap", help="Check whether durable memory anchors are ready for a new agent session.")
     check_memory.add_argument("path", type=Path)
@@ -144,6 +151,12 @@ def main(argv: list[str] | None = None) -> int:
         with args.path.open("r", encoding="utf-8") as file:
             plan_input = ParallelWorkPlanInput.from_dict(json.load(file))
         print(json.dumps(plan_parallel_work(plan_input), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "reconcile-spec":
+        with args.path.open("r", encoding="utf-8") as file:
+            reconciliation_input = SpecReconciliationInput.from_dict(json.load(file))
+        print(json.dumps(reconcile_spec_source(reconciliation_input), indent=2, ensure_ascii=False))
         return 0
 
     if args.command == "check-memory-bootstrap":

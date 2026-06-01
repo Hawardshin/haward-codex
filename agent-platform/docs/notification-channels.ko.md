@@ -2,7 +2,7 @@
 
 ## 목적
 
-`agent-platform`은 작업 완료, 실패, 승인 필요, 장시간 진행 업데이트 같은 이벤트를 Slack, Discord, Microsoft Teams로 보낼 수 있다. 실제 웹훅 URL은 credential이므로 저장소에 저장하지 않고, 설정 파일에는 환경변수 이름만 저장한다.
+`agent-platform`은 작업 완료, 실패, 승인 필요, 스펙 구체화 필요, 장시간 진행 업데이트 같은 이벤트를 Slack, Discord, Microsoft Teams로 보낼 수 있다. 실제 웹훅 URL은 credential이므로 저장소에 저장하지 않고, 설정 파일에는 환경변수 이름만 저장한다.
 
 ## 설정 파일
 
@@ -25,10 +25,13 @@ export AGENT_PLATFORM_TEAMS_WEBHOOK_URL="https://..."
 PYTHONPATH=src python3 -m agent_platform.cli check-notifications configs/integrations/notification-channels.json
 PYTHONPATH=src python3 -m agent_platform.cli check-notifications configs/integrations/notification-channels.json --require-secrets
 PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notification-channels.json --event work_completed --title "작업 완료" --message "검증까지 끝났습니다." --severity info --dry-run
+PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notification-channels.json --event clarification_needed --title "스펙 구체화 필요" --message "Q1=<answer>" --severity warning --dry-run
 PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notification-channels.json --event work_completed --title "작업 완료" --message "검증까지 끝났습니다." --severity info --send
 ```
 
 `--dry-run`은 provider별 payload preview만 반환한다. 실제 메시지를 보내려면 `--send`를 명시해야 한다.
+
+`clarification_needed`는 스펙이 애매하거나 스펙/소스가 다를 때 사용한다. 메시지에는 사용자가 그대로 답할 수 있는 질문 ID와 답변 형식을 포함해야 한다.
 
 ## Provider 메모
 
@@ -42,4 +45,3 @@ PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notific
 - config에는 환경변수 이름만 둔다.
 - `check-notifications --require-secrets`는 enabled channel의 환경변수 존재 여부를 검사한다.
 - 환경변수 값이 바뀌면 config를 수정하지 말고 shell, direnv, secret manager에서 값을 교체한다.
-

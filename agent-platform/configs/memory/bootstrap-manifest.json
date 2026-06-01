@@ -24,6 +24,7 @@
       "The user request summary layer or request-intent tracking contract changes.",
       "The requirements management layer or requirements baseline contract changes.",
       "The spec-driven development layer or spec artifact contract changes.",
+      "The spec/source reconciliation layer, clarification question format, or clarification notification contract changes.",
       "The skill lifecycle layer or skill validation contract changes.",
       "The architecture-first coding layer or coding architecture comparison contract changes.",
       "The stack-aware coding research layer or technology-specific official docs and discussion signal rules change.",
@@ -155,6 +156,29 @@
         "implementation and evaluation spec targets"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "spec_source_reconciliation_policy",
+      "title": "Spec Source Reconciliation Workflow",
+      "path": "_ops/workflows/38-spec-source-reconciliation.md",
+      "source_type": "internal",
+      "used_for": [
+        "deciding whether ambiguous spec/source drift should update the spec, update the source, ask the user, or defer",
+        "clarification_needed alert format and user-answerable question rules"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "spec_reconciliation_template",
+      "title": "Spec Reconciliation Template",
+      "path": "agent-platform/configs/planning/spec-reconciliation-template.json",
+      "source_type": "internal",
+      "used_for": [
+        "structured comparison evidence",
+        "issue classification",
+        "clarification question fields"
+      ],
+      "last_checked": "2026-06-01"
     },
     {
       "id": "skill_lifecycle_policy",
@@ -456,6 +480,18 @@
       ]
     },
     {
+      "id": "spec_source_reconciliation_must_stay_discoverable",
+      "rule": "The spec/source reconciliation workflow and template must remain warm memory anchors so future sessions can classify ambiguous spec/source drift before changing either side, and can surface ask_user decisions as clarification_needed alerts.",
+      "reason": "The user explicitly asked for a way to decide whether the spec or source should change and to ask answerable questions through alerts when more detail is needed.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "spec-reconciliation-agent",
+        "clarification_needed"
+      ]
+    },
+    {
       "id": "skills_must_stay_discoverable",
       "rule": "The skill lifecycle layer must remain a warm memory anchor and close-out target so future sessions create, validate, forward-test, and improve skills explicitly.",
       "reason": "The user explicitly noted skill creation was not explicit enough and asked that created skills keep being verified and improved.",
@@ -688,6 +724,8 @@
     "architecture_first_coding_policy",
     "request_trace_policy",
     "web_search_record_policy",
+    "spec_source_reconciliation_workflow",
+    "spec_reconciliation_template",
     "notification_settings",
     "installation_registry"
   ],
@@ -722,6 +760,8 @@
     "architecture_first_coding_policy",
     "request_trace_policy",
     "web_search_record_policy",
+    "spec_source_reconciliation_workflow",
+    "spec_reconciliation_template",
     "notification_settings",
     "installation_registry"
   ],
@@ -1019,6 +1059,22 @@
       "path": "_history/web-searches/README.ko.md",
       "tier": "warm",
       "purpose": "Prompt-level web search record rules and public search reasoning summary requirements.",
+      "required": true,
+      "load_order": 35
+    },
+    {
+      "id": "spec_source_reconciliation_workflow",
+      "path": "_ops/workflows/38-spec-source-reconciliation.md",
+      "tier": "warm",
+      "purpose": "Workflow for classifying ambiguous specs or spec/source drift before editing either side and surfacing user-answerable clarification_needed alerts.",
+      "required": true,
+      "load_order": 35
+    },
+    {
+      "id": "spec_reconciliation_template",
+      "path": "agent-platform/configs/planning/spec-reconciliation-template.json",
+      "tier": "warm",
+      "purpose": "Structured template for recording spec/source comparison evidence, issue classification, and clarification questions.",
       "required": true,
       "load_order": 35
     },

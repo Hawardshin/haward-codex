@@ -39,6 +39,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep user request summaries under `_history/user-requests/`.
 - Keep shared requirements baselines, changes, and reviews under `_requirements/`; use project-local `docs/requirements/` for project-specific requirements.
 - Keep shared spec-driven artifacts under `_specs/`; use project-local `specs/` for project-specific specs.
+- When an active spec is ambiguous or differs from source/tests/artifacts, use `spec-reconciliation-agent` and `reconcile-spec` before editing either side; `ask_user` issues must produce `clarification_needed` alerts and wait for the recorded answer.
 - Keep custom skill source under `_skills/` and validate skill work before close-out.
 - Keep long-context resume packets under `_history/context-archives/` when context saturation risk appears.
 - Use `parallel-work-planner-agent` when speed matters or work can split into independent lanes; record dependencies, touch paths, merge gates for parallel research fan-in, conflict controls, coordination targets, merge strategy, and final verification.
@@ -81,10 +82,11 @@ PYTHONPATH=src python3 -m agent_platform.cli check-grounding configs/evaluation/
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-parallel-work configs/planning/parallel-work-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research configs/planning/coding-research-template.json
+PYTHONPATH=src python3 -m agent_platform.cli reconcile-spec artifacts/spec-reconciliation/example-clarification-input.json
 PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json
 PYTHONPATH=src python3 -m agent_platform.cli check-notifications configs/integrations/notification-channels.json
 PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notification-channels.json --event work_completed --title "Dry run" --message "Notification dry run" --severity info --dry-run
-PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/integrations/notification-channels.json
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/integrations/notification-channels.json
 ```
 
 ## Current Skeleton
@@ -110,6 +112,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `research-insight-planner-agent` is the core Perplexity-style research agent for search, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review
 - `requirements-manager-agent` keeps user requests, reviewed requirements, implementation, and evaluation connected
 - `spec-driven-planner-agent` turns requirements into specs, plans, tasks, validation records, and traceability
+- `spec-reconciliation-agent` decides whether ambiguous specs or spec/source drift should update the spec, update source, ask the user, or defer; user decisions are surfaced as `clarification_needed`
 - `skill-lifecycle-agent` creates, validates, tracks, and improves repository-managed Codex skills
 - `parallel-work-planner-agent` checks task dependencies, file/resource boundaries, execution batches, research fan-in merge gates, coordination targets, and merge verification before parallel execution
 - research-backed plans should point to saved plan history under `_history/plans/YYYY/`

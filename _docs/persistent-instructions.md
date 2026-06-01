@@ -24,6 +24,7 @@
 - Save shared requirements under `_requirements/`; save project-specific requirements under the owning project's `docs/requirements/`.
 - Use a spec-driven structure for meaningful implementation work: turn requirements into spec, plan, tasks, validation, and traceability artifacts before coding.
 - Save shared specs under `_specs/`; save project-specific specs under the owning project's `specs/`.
+- If an active project spec is ambiguous or differs from current source, tests, or generated artifacts, run the spec/source reconciliation workflow before changing either side. Classify issues as `update_spec`, `update_source`, `ask_user`, or `defer`; for `ask_user`, surface a `clarification_needed` alert with stable question IDs and answer format, then wait for the answer before editing the affected spec or source.
 - Make custom skill creation and updates explicit: keep source under `_skills/`, validate each skill, forward-test realistic scenarios when useful, and record improvement ideas.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/`.
 - Save important planning processes as files under `_history/plans/YYYY/`.

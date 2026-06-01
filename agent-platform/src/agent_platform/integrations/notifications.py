@@ -17,7 +17,7 @@ Sender = Callable[[str, JsonMap, float], JsonMap]
 
 ALLOWED_PROVIDERS = {"discord", "slack", "teams"}
 ALLOWED_SEVERITIES = {"debug": 10, "info": 20, "warning": 30, "error": 40, "critical": 50}
-DEFAULT_EVENTS = {"approval_needed", "long_running_update", "work_completed", "work_failed"}
+DEFAULT_EVENTS = {"approval_needed", "clarification_needed", "long_running_update", "work_completed", "work_failed"}
 INLINE_SECRET_FIELDS = {
     "webhook_url",
     "url",

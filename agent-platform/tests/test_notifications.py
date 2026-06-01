@@ -64,6 +64,20 @@ class NotificationTests(unittest.TestCase):
         self.assertEqual(report["attempted"][0]["payload_preview"]["allowed_mentions"], {"parse": []})
         self.assertIn("commit=abc1234", report["attempted"][0]["payload_preview"]["content"])
 
+    def test_clarification_needed_event_is_routable(self) -> None:
+        config = load_notification_config(CONFIG_PATH)
+        config["channels"][1]["enabled"] = True
+
+        report = dispatch_notification(
+            config,
+            NotificationEvent("clarification_needed", "Question", "Q1=<answer>", "warning"),
+            env={"AGENT_PLATFORM_SLACK_WEBHOOK_URL": "https://hooks.slack.com/services/test"},
+            dry_run=True,
+        )
+
+        self.assertEqual(report["status"], "dry_run_ready")
+        self.assertIn("clarification_needed", report["attempted"][0]["payload_preview"]["text"])
+
     def test_global_disable_skips_all_channels(self) -> None:
         config = load_notification_config(CONFIG_PATH)
         config["notifications_enabled"] = False

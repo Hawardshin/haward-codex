@@ -16,6 +16,7 @@
       "A new notification provider is added.",
       "Slack, Discord, or Teams webhook payload requirements change.",
       "A new platform event should notify the user.",
+      "Spec/source reconciliation needs a clarification_needed alert before implementation can continue.",
       "A token handling or secret storage policy changes."
     ]
   },
@@ -132,6 +133,7 @@
   "default_event_policy": {
     "enabled_events": [
       "approval_needed",
+      "clarification_needed",
       "long_running_update",
       "work_completed",
       "work_failed"
@@ -147,6 +149,7 @@
       "webhook_url_env": "AGENT_PLATFORM_DISCORD_WEBHOOK_URL",
       "events": [
         "approval_needed",
+        "clarification_needed",
         "work_completed",
         "work_failed"
       ],
@@ -163,6 +166,7 @@
       "webhook_url_env": "AGENT_PLATFORM_SLACK_WEBHOOK_URL",
       "events": [
         "approval_needed",
+        "clarification_needed",
         "long_running_update",
         "work_completed",
         "work_failed"
@@ -179,6 +183,7 @@
       "webhook_url_env": "AGENT_PLATFORM_TEAMS_WEBHOOK_URL",
       "events": [
         "approval_needed",
+        "clarification_needed",
         "work_completed",
         "work_failed"
       ],
@@ -203,4 +208,3 @@
     "rotation_note": "Rotate a provider webhook in the provider UI or secret manager, then update the local environment variable. Do not commit the actual URL."
   }
 }
-

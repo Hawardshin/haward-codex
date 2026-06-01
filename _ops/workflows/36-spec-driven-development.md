@@ -12,12 +12,13 @@
 4. Create or update the spec folder under `_specs/<scope>/YYYY-MM-DD-<slug>/` or `project-name/specs/YYYY-MM-DD-<slug>/`.
 5. Write or update `spec.*.md` with scope, behavior, acceptance criteria, non-goals, and related requirement IDs.
 6. Analyze the spec for ambiguity, conflict, missing edge cases, testability, and project-boundary leakage.
-7. Write or update `plan.*.md` with implementation strategy, file scope, risks, and validation strategy.
-8. Write or update `tasks.*.md` with task IDs and requirement/spec references.
-9. Implement only after the spec, plan, and tasks are ready.
-10. Write or update `validation.*.md` with commands, checks, and results.
-11. Write or update `traceability.*.md` with request, requirement, spec, task, file, evaluation, commit, and push links.
-12. Include `spec_targets` in `work-evaluator-agent` input.
+7. If the active spec is ambiguous or differs from current source, tests, generated artifacts, or validation output, run [_ops/workflows/38-spec-source-reconciliation.md](38-spec-source-reconciliation.md).
+8. Write or update `plan.*.md` with implementation strategy, file scope, risks, and validation strategy.
+9. Write or update `tasks.*.md` with task IDs and requirement/spec references.
+10. Implement only after the spec, plan, and tasks are ready, and after user clarification is recorded for any `ask_user` issue.
+11. Write or update `validation.*.md` with commands, checks, and results.
+12. Write or update `traceability.*.md` with request, requirement, spec, task, file, evaluation, commit, push links, and any spec/source reconciliation decision.
+13. Include `spec_targets` in `work-evaluator-agent` input.
 
 ## Rule
 

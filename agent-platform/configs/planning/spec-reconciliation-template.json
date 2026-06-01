@@ -1,0 +1,190 @@
+{
+  "schema_version": "2026-06-01",
+  "name": "spec-reconciliation-template",
+  "purpose": "Template for deciding whether ambiguous specs or spec/source mismatches require a spec update, source update, or user clarification alert.",
+  "reader_guide": {
+    "summary": "Use this template when a project spec is unclear, missing, or contradicted by current source, tests, or generated artifacts.",
+    "how_to_read": [
+      "Fill project, request_summary, spec_paths, source_paths, and comparison_evidence first.",
+      "Add one issue object per ambiguity or mismatch.",
+      "Use default_resolution=update_spec when the source reflects accepted behavior and the spec is stale.",
+      "Use default_resolution=update_source when the active approved spec is clear and source behavior is wrong.",
+      "Use default_resolution=ask_user when intent, priority, acceptance criteria, or product behavior is ambiguous.",
+      "Run agent-platform reconcile-spec before editing source or spec for the recorded issues."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-06-01",
+    "update_triggers": [
+      "Spec ambiguity repeatedly blocks implementation.",
+      "Source and spec drift is found during review, test, or evaluation.",
+      "User clarification alerts need a different answer format.",
+      "Notification events for clarification change."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "spec_driven_policy",
+      "title": "Spec-Driven Development Policy",
+      "path": "_docs/spec-driven-development-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "spec artifact rules",
+        "implementation from active specs"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "spec_reconciliation_agent",
+      "title": "Spec Reconciliation Agent Docs",
+      "path": "agent-platform/docs/spec-reconciliation-agent.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "spec/source drift decision rules",
+        "clarification alert format"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "notification_channels",
+      "title": "Notification Channel Settings",
+      "path": "agent-platform/configs/integrations/notification-channels.json",
+      "source_type": "internal",
+      "used_for": [
+        "clarification_needed notification routing"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "iso_iec_ieee_29148",
+      "title": "ISO/IEC/IEEE 29148:2018",
+      "url": "https://www.iso.org/standard/72089.html",
+      "source_type": "standard",
+      "used_for": [
+        "requirements engineering process and information item guidance",
+        "requirements validation and clarity framing"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "ibm_traceability",
+      "title": "IBM Engineering Requirements Management Traceability",
+      "url": "https://www.ibm.com/docs/SSCP65_6.0.6.1/com.ibm.rational.rrm.help.doc/topics/c_trace.html",
+      "source_type": "official",
+      "used_for": [
+        "traceability and impact analysis framing",
+        "requirements-to-implementation relationship checks"
+      ],
+      "last_checked": "2026-06-01"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "evidence_before_decision",
+      "rule": "Every issue must record comparison evidence before proposing update_spec, update_source, ask_user, or defer.",
+      "reason": "Spec/source drift should not be resolved from memory or intuition alone.",
+      "applies_to": [
+        "comparison_evidence",
+        "issues.evidence"
+      ]
+    },
+    {
+      "id": "spec_update_when_spec_is_stale",
+      "rule": "Choose update_spec when current source behavior is confirmed as intentional, validated, and better aligned with the user's latest requirement than the old spec.",
+      "reason": "Specs should describe accepted behavior rather than forcing implementation back to stale expectations.",
+      "applies_to": [
+        "issues.default_resolution"
+      ]
+    },
+    {
+      "id": "source_update_when_spec_is_approved",
+      "rule": "Choose update_source when the active approved spec is concrete, current, and source behavior is a regression or incomplete implementation.",
+      "reason": "A clear current spec should drive implementation and validation.",
+      "applies_to": [
+        "issues.default_resolution"
+      ]
+    },
+    {
+      "id": "ask_user_when_intent_is_ambiguous",
+      "rule": "Choose ask_user when product intent, priority, acceptance criteria, backward compatibility, or trade-off preference is unclear.",
+      "reason": "The user should decide ambiguous product/spec intent instead of the agent guessing.",
+      "applies_to": [
+        "issues.questions",
+        "notification_event"
+      ]
+    },
+    {
+      "id": "questions_must_be_answerable",
+      "rule": "Clarification questions must have a stable question_id, short prompt, answer_format, and decision_impact; provide mutually exclusive options when possible.",
+      "reason": "The user needs to answer quickly and the answer must be traceable into spec or source changes.",
+      "applies_to": [
+        "issues.questions"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "spec_paths",
+      "meaning": "Active spec files being compared.",
+      "required": true
+    },
+    {
+      "field": "source_paths",
+      "meaning": "Current source, tests, generated artifacts, or docs being compared against the spec.",
+      "required": true
+    },
+    {
+      "field": "comparison_evidence",
+      "meaning": "Checked facts such as spec lines, source paths, tests, command output, or trace links.",
+      "required": true
+    },
+    {
+      "field": "issues.default_resolution",
+      "meaning": "One of update_spec, update_source, ask_user, or defer.",
+      "required": true
+    },
+    {
+      "field": "issues.questions",
+      "meaning": "User-answerable questions required when default_resolution is ask_user or issue_type is ambiguous_spec.",
+      "required": false
+    },
+    {
+      "field": "notification_targets",
+      "meaning": "Where the clarification alert should be surfaced, such as chat, Slack, Discord, Teams, or a project issue file.",
+      "required": false
+    }
+  ],
+  "project": "",
+  "request_summary": "",
+  "spec_paths": [],
+  "source_paths": [],
+  "comparison_evidence": [],
+  "issues": [
+    {
+      "issue_id": "SSR-001",
+      "issue_type": "ambiguous_spec",
+      "summary": "",
+      "severity": "warning",
+      "affected_spec_refs": [],
+      "affected_source_paths": [],
+      "observed_spec_behavior": "",
+      "observed_source_behavior": "",
+      "evidence": [],
+      "default_resolution": "ask_user",
+      "questions": [
+        {
+          "question_id": "Q1",
+          "question": "",
+          "options": [],
+          "recommended_option": "",
+          "answer_format": "Q1=<answer>",
+          "decision_impact": ""
+        }
+      ]
+    }
+  ],
+  "notification_targets": [
+    "chat"
+  ],
+  "decision_deadline": "",
+  "plan_history_targets": []
+}

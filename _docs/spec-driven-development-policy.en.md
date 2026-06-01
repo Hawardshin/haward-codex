@@ -12,6 +12,8 @@ Implement user requests and requirements through explicit specs, implementation 
 - Task lists define execution order.
 - Validation records confirm whether implementation matches the spec.
 - Traceability links request, requirement, spec, tasks, files, evaluation, and commit.
+- If an active spec is ambiguous or differs from current source, tests, or artifacts, run `_ops/workflows/38-spec-source-reconciliation.md` before implementation and classify issues as `update_spec`, `update_source`, `ask_user`, or `defer`.
+- For `ask_user` issues, send or surface a `clarification_needed` alert and do not edit the related spec or source until the user answer is recorded.
 
 ## When To Apply
 
@@ -48,4 +50,6 @@ Meaningful work includes `spec_targets` in evaluation input. Missing targets are
 - [_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.en.md](../_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.en.md)
 - [_templates/spec-driven/spec.en.md](../_templates/spec-driven/spec.en.md)
 - [_ops/workflows/36-spec-driven-development.md](../_ops/workflows/36-spec-driven-development.md)
+- [_ops/workflows/38-spec-source-reconciliation.md](../_ops/workflows/38-spec-source-reconciliation.md)
 - [agent-platform/docs/spec-driven-planner-agent.en.md](../agent-platform/docs/spec-driven-planner-agent.en.md)
+- [agent-platform/docs/spec-reconciliation-agent.en.md](../agent-platform/docs/spec-reconciliation-agent.en.md)

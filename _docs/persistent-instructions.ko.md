@@ -19,6 +19,7 @@
 - 공통 요구사항은 `_requirements/`에, 프로젝트별 요구사항은 해당 프로젝트의 `docs/requirements/`에 저장한다.
 - 의미 있는 구현 작업은 spec-driven 구조로 진행해 요구사항을 스펙, 계획, 작업 목록, 검증, traceability 산출물로 바꾼 뒤 코딩한다.
 - 공통 스펙은 `_specs/`에, 프로젝트별 스펙은 해당 프로젝트의 `specs/`에 저장한다.
+- 활성 프로젝트 스펙이 애매하거나 현재 소스, 테스트, 생성 산출물과 다를 때는 어느 쪽도 바로 수정하지 말고 스펙/소스 조정 workflow를 먼저 실행한다. 이슈를 `update_spec`, `update_source`, `ask_user`, `defer`로 분류하고, `ask_user`는 안정적인 질문 ID와 답변 형식이 포함된 `clarification_needed` 알림으로 사용자에게 질문한 뒤 답변이 기록되기 전까지 관련 스펙이나 소스를 수정하지 않는다.
 - 커스텀 스킬 생성/수정은 명시적으로 관리하며 `_skills/` 원본, 검증, 필요한 전진 테스트, 개선 아이디어를 남긴다.
 - 의미 있는 작업의 최종 평가는 `_history/evaluations/YYYY/` 아래 파일로 저장한다.
 - 중요한 계획을 세우는 과정은 `_history/plans/YYYY/` 아래 파일로 저장한다.

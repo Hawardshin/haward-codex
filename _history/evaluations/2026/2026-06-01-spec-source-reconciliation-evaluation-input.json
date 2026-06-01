@@ -1,0 +1,102 @@
+{
+  "initial_instruction": "프로젝트의 스펙이 애매하거나 프로젝트 스펙과 현재 소스가 다를 때, 스펙을 수정해야 하는지 소스를 수정해야 하는지 더 구체화할 부분을 사용자에게 답변 가능한 알림 형식으로 질문하는 구조를 만들어 달라는 요청.",
+  "result_summary": "Added spec-reconciliation-agent, reconcile-spec CLI, self-documenting reconciliation template, clarification_needed notification routing, workflow/prompt routing, durable requirements/spec/history records, and validation artifacts for spec/source ambiguity handling.",
+  "work_mode": "standard",
+  "changed_files": [
+    "AGENTS.md",
+    "_docs/persistent-instructions.md",
+    "_docs/persistent-instructions.ko.md",
+    "_docs/persistent-instructions.en.md",
+    "_docs/spec-driven-development-policy.ko.md",
+    "_docs/spec-driven-development-policy.en.md",
+    "_ops/index.md",
+    "_ops/prompts/00-router.md",
+    "_ops/prompts/38-reconcile-spec-source.md",
+    "_ops/workflows/00-start-here.md",
+    "_ops/workflows/36-spec-driven-development.md",
+    "_ops/workflows/38-spec-source-reconciliation.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_specs/workspace-platform/2026-06-01-spec-source-reconciliation/",
+    "agent-platform/src/agent_platform/planning/spec_reconciliation.py",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/src/agent_platform/integrations/notifications.py",
+    "agent-platform/configs/planning/spec-reconciliation-template.json",
+    "agent-platform/configs/agents/spec-reconciliation-agent.json",
+    "agent-platform/configs/integrations/notification-channels.json",
+    "agent-platform/docs/spec-reconciliation-agent.ko.md",
+    "agent-platform/docs/spec-reconciliation-agent.en.md",
+    "agent-platform/tests/test_spec_reconciliation.py",
+    "agent-platform/tests/test_notifications.py"
+  ],
+  "verification": [
+    "python3 -m unittest discover -s tests from agent-platform: 103 tests passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli reconcile-spec artifacts/spec-reconciliation/example-clarification-input.json: clarification_required, clarification_needed, no gaps",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-notifications configs/integrations/notification-channels.json: ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notification-channels.json --event clarification_needed --title \"Spec clarification needed\" --message \"Q1=<answer>\" --severity warning --dry-run: nothing_to_send because channels disabled, no failures",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ...: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean",
+    "python3 _tools/workspace-index/src/workspace_index.py: maps updated",
+    "python3 _tools/task-board/src/task_board.py: boards updated",
+    "workspace-monitor npm run test/check/build: passed"
+  ],
+  "references_checked": [
+    "https://standards.ieee.org/ieee/29148/6937/",
+    "https://www.iso.org/standard/72089.html",
+    "https://www.ibm.com/docs/SSCP65_6.0.6.1/com.ibm.rational.rrm.help.doc/topics/c_trace.html",
+    "https://www.ibm.com/think/topics/what-is-requirements-management",
+    "_docs/spec-driven-development-policy.ko.md",
+    "_ops/workflows/36-spec-driven-development.md",
+    "agent-platform/configs/integrations/notification-channels.json"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-spec-source-reconciliation-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-spec-source-reconciliation.ko.md",
+    "_history/plans/2026/2026-06-01-spec-source-reconciliation.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-01-spec-source-reconciliation.ko.md",
+    "_specs/workspace-platform/2026-06-01-spec-source-reconciliation/plan.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-spec-source-reconciliation.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-01-spec-source-reconciliation.ko.md",
+    "_requirements/reviews/2026-06-01-spec-source-reconciliation.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-01-spec-source-reconciliation/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-spec-source-reconciliation/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-spec-source-reconciliation/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-01-spec-source-reconciliation/validation.ko.md",
+    "_specs/workspace-platform/2026-06-01-spec-source-reconciliation/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "deferred_improvement_targets": [
+    "_ops/backlog/deferred-improvements.ko.md"
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Later, add an interactive UI panel in workspace-monitor that lists open clarification_needed questions from reconciliation outputs."
+  ]
+}

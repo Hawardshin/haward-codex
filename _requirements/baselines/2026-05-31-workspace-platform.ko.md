@@ -45,6 +45,7 @@
 | REQ-WS-027 | 등록된 프로젝트의 durable top-level folder는 프로젝트 등록부에 설명되어야 하며, generated output pattern은 `.gitignore`와 함께 검증되어야 한다. | UR-2026-06-01-010 | must | baseline | workspace/_ops/_tools | `structure-audit` project inventory와 generated output ignore 검증 확인 | `_ops/projects/registry.json`, `_ops/projects/root-structure-policy.json`, `_tools/structure-audit/` |
 | REQ-WS-028 | 이 저장소의 AI assistant 운영 원칙은 Codex 전용으로 고정하지 않고 Claude Code, Cursor, Antigravity, 또는 사용자가 선호하는 도구에서도 사용할 수 있는 tool-agnostic principle과 thin runtime adapter 구조로 관리해야 한다. | UR-2026-06-01-011 | must | baseline | workspace/_docs/_ops/_templates | runtime adapter registry, structure audit, config contract, memory bootstrap 확인 | `_docs/tool-agnostic-agent-operating-model.ko.md`, `_ops/assistant-runtimes/adapter-registry.json`, `_templates/assistant-operating-principles/` |
 | REQ-WS-029 | 마케팅, 소비자 인사이트, 시장 규모, 브랜드/GTM, 책/이론, 설문, 정량 수치 근거 조사는 `marketing-evidence-profile.json`을 사용해 책/학술, 설문 방법론, 공개 통계, 시장 리포트, 플랫폼 행동 데이터의 evidence lane을 분리하고, 모든 숫자 근거의 값/단위/base/지역/기간/모집단/방법론/표본/스폰서/비교 가능성을 기록해야 한다. | UR-2026-06-01-012 | must | baseline | agent-platform/_research | marketing evidence profile, source registry, source discovery registry, memory bootstrap, source list, config contract 확인 | `agent-platform/configs/research/marketing-evidence-profile.json`, `_research/source-lists/marketing-evidence-sources.ko.md` |
+| REQ-WS-030 | 프로젝트 스펙이 애매하거나 현재 소스/테스트/산출물과 다를 경우, 구현 전에 비교 근거를 기록하고 `update_spec`, `update_source`, `ask_user`, `defer` 중 하나로 분류해야 한다. `ask_user` 이슈는 안정적인 질문 ID, 선택지, 답변 형식, 결정 영향을 포함한 `clarification_needed` 알림으로 사용자에게 질문하고, 답변이 기록되기 전까지 해당 스펙이나 소스를 변경하지 않아야 한다. | UR-2026-06-01-013 | must | baseline | agent-platform/_ops/projects | `reconcile-spec` 결과, 알림 dry-run, 단위 테스트, config contract, memory bootstrap 확인 | `agent-platform/src/agent_platform/planning/spec_reconciliation.py`, `agent-platform/configs/planning/spec-reconciliation-template.json`, `_ops/workflows/38-spec-source-reconciliation.md` |
 
 ## 변경 관리
 
@@ -59,6 +60,7 @@
 - 2026-06-01에 REQ-WS-027을 추가해 프로젝트 내부 top-level folder inventory와 generated output ignore 검증을 structure audit 범위에 포함했다.
 - 2026-06-01에 REQ-WS-028을 추가해 Codex, Claude Code, Cursor, Antigravity, 기타 AI assistant가 공유할 수 있는 tool-agnostic 운영 원칙과 thin runtime adapter 구조를 공통 운영 구조로 승격했다.
 - 2026-06-01에 REQ-WS-029를 추가해 마케터식 자료조사, 이론/책 근거, 설문 방법론, 공식 통계, 시장 리포트, 플랫폼 행동 데이터, 정량 수치 출처 추적을 공통 리서치 구조로 승격했다.
+- 2026-06-01에 REQ-WS-030을 추가해 스펙 애매함과 스펙/소스 불일치를 구현 전에 근거 기반으로 분류하고, 필요한 경우 사용자 답변 가능한 `clarification_needed` 알림으로 되돌리는 구조를 공통 운영 구조로 승격했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.

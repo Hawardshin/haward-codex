@@ -1,0 +1,19 @@
+{
+  "name": "spec-reconciliation-agent",
+  "description": "Classifies ambiguous specs and spec/source mismatches, then emits user-answerable clarification alerts when the agent should not guess.",
+  "runtime": "document-workflow",
+  "skills": [],
+  "tools": [
+    "repository-docs",
+    "web-search",
+    "agent-platform:reconcile-spec",
+    "agent-platform:notify",
+    "agent-platform:evaluate-work"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "when an active spec is ambiguous, missing important acceptance criteria, or differs from current source, tests, generated artifacts, or docs",
+    "template": "agent-platform/configs/planning/spec-reconciliation-template.json",
+    "policy": "Inspect evidence first, classify update_spec versus update_source versus ask_user, and surface clarification_needed alerts before changing ambiguous behavior."
+  }
+}

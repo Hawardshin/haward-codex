@@ -45,6 +45,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Save shared requirements under `_requirements/`; save project-specific requirements under the owning project's `docs/requirements/`.
 - For meaningful implementation work, convert active requirements into spec-driven artifacts before coding: `spec`, `plan`, `tasks`, `validation`, and `traceability`.
 - Save shared specs under `_specs/`; save project-specific specs under the owning project's `specs/`.
+- If an active spec is ambiguous or differs from current source, tests, or generated artifacts, run `spec-reconciliation-agent` before changing either side. Classify each issue as `update_spec`, `update_source`, `ask_user`, or `defer`; for `ask_user`, surface a `clarification_needed` alert with stable question IDs, options, answer format, and decision impact, then wait for the answer before editing the affected spec or source.
 - For custom skill work, keep source under `_skills/`, record trigger examples, run skill validation, forward-test realistic scenarios when useful, and capture improvement ideas before close-out.
 - Save the final work evaluation as a file under `_history/evaluations/YYYY/` before committing meaningful work.
 - Save important planning processes as files under `_history/plans/YYYY/`.
@@ -134,6 +135,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/workflows/25-project-boundary-management.md` when a request may create a new project or cross project boundaries.
 - Use `_ops/workflows/35-requirements-lifecycle.md` when a request changes durable behavior, rules, project structure, platform capability, or implementation criteria.
 - Use `_ops/workflows/36-spec-driven-development.md` when meaningful work needs implementation from requirements.
+- Use `_ops/workflows/38-spec-source-reconciliation.md` when a project spec is ambiguous, missing, or inconsistent with current source, tests, generated artifacts, or validation output.
 - Use `_ops/workflows/37-skill-lifecycle.md` when creating, updating, validating, installing, or improving a custom Codex skill.
 - Use `_ops/workflows/52-parallel-work-planning.md` when the user asks for speed, multiple agents, or parallel work, or when a meaningful task naturally splits into independent lanes.
 - Check `_ops/coordination/board.ko.md` when parallel work may exist.
@@ -143,7 +145,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Run `python3 _tools/structure-audit/src/structure_audit.py --check` after changing root folders, project registry, durable project top-level folders, reserved operational folders, runtime adapter folders, local-only folder rules, or generated-output rules.
 - Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, assistant runtime adapters, or platform memory anchors.
-- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/research/marketing-evidence-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json` from `agent-platform/` after changing core shared settings.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/research/marketing-evidence-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/integrations/notification-channels.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json` from `agent-platform/` after changing core shared settings.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules

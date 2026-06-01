@@ -60,6 +60,7 @@
 - 요구사항을 정의/검토/변경할 때: [_ops/workflows/35-requirements-lifecycle.md](workflows/35-requirements-lifecycle.md), [_ops/prompts/35-manage-requirements.md](prompts/35-manage-requirements.md), [agent-platform/docs/requirements-manager-agent.ko.md](../agent-platform/docs/requirements-manager-agent.ko.md)
 - spec-driven 산출물을 볼 때: [_specs/README.ko.md](../_specs/README.ko.md), [_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md](../_specs/workspace-platform/2026-05-31-spec-driven-operating-loop/spec.ko.md)
 - 요구사항을 스펙/계획/작업/검증으로 바꿀 때: [_ops/workflows/36-spec-driven-development.md](workflows/36-spec-driven-development.md), [_ops/prompts/36-manage-spec.md](prompts/36-manage-spec.md), [agent-platform/docs/spec-driven-planner-agent.ko.md](../agent-platform/docs/spec-driven-planner-agent.ko.md)
+- 스펙이 애매하거나 현재 소스/테스트/산출물과 다를 때: [_ops/workflows/38-spec-source-reconciliation.md](workflows/38-spec-source-reconciliation.md), [_ops/prompts/38-reconcile-spec-source.md](prompts/38-reconcile-spec-source.md), [agent-platform/docs/spec-reconciliation-agent.ko.md](../agent-platform/docs/spec-reconciliation-agent.ko.md)
 - 커스텀 스킬을 만들거나 검증/개선할 때: [_docs/skill-lifecycle-policy.ko.md](../_docs/skill-lifecycle-policy.ko.md), [_ops/workflows/37-skill-lifecycle.md](workflows/37-skill-lifecycle.md), [_ops/prompts/37-manage-skill.md](prompts/37-manage-skill.md), [agent-platform/docs/skill-lifecycle-agent.ko.md](../agent-platform/docs/skill-lifecycle-agent.ko.md)
 - 요청이 어떤 결과로 이어졌는지 볼 때: [_history/request-traces/README.ko.md](../_history/request-traces/README.ko.md), [_docs/request-traceability-policy.ko.md](../_docs/request-traceability-policy.ko.md)
 - 완료된 작업을 빠르게 볼 때: [_history/work-summaries/README.ko.md](../_history/work-summaries/README.ko.md), [_history/work-summaries/index.html](../_history/work-summaries/index.html)
@@ -89,6 +90,7 @@
 - 사용자 요청 요약이 `_history/user-requests/YYYY/`에 남았는가
 - 요구사항 기준선, 변경, 검토 기록이 `_requirements/` 또는 해당 프로젝트의 `docs/requirements/`에 남았는가
 - spec-driven 산출물이 `_specs/` 또는 해당 프로젝트의 `specs/`에 남았는가
+- 스펙이 애매하거나 소스/테스트/산출물과 달랐다면 `reconcile-spec` 결과와 `clarification_needed` 질문/답변 기록이 남았는가
 - 소스코드 작업이면 코딩 조사에 architecture reference, 최소 2개 architecture option, decision notes가 남았는가
 - 병렬 작업이면 `plan-parallel-work` 결과, dependency, touch_paths, merge_gates, conflict controls, coordination targets, merge strategy가 남았는가
 - root folder, project registry, reserved folder, runtime adapter folder, local-only rule이 바뀌면 `python3 _tools/structure-audit/src/structure_audit.py --check`를 통과했는가

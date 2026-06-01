@@ -1,0 +1,124 @@
+{
+  "task": "Ground final claims for the spec/source reconciliation workflow change.",
+  "output_summary": "The work added a spec/source reconciliation CLI, planning template, agent config, clarification notification event, workflow/prompt routing, and durable history/spec records.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "impl",
+      "source": "agent-platform/src/agent_platform/planning/spec_reconciliation.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Primary implementation file for the reconciliation checker."
+    },
+    {
+      "evidence_id": "cli",
+      "source": "agent-platform/src/agent_platform/cli.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "CLI entry point showing the reconcile-spec command wiring."
+    },
+    {
+      "evidence_id": "tests",
+      "source": "python3 -m unittest discover -s tests from agent-platform: 103 tests passed",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output from the local test suite."
+    },
+    {
+      "evidence_id": "cli-smoke",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli reconcile-spec artifacts/spec-reconciliation/example-clarification-input.json returned clarification_required with clarification_needed",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Smoke test output for the new CLI and example input."
+    },
+    {
+      "evidence_id": "notification",
+      "source": "agent-platform/configs/integrations/notification-channels.json and notification CLI dry-run/check output",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Config and CLI output confirming the clarification_needed event is accepted and routed."
+    },
+    {
+      "evidence_id": "iso",
+      "source": "https://www.iso.org/standard/72089.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official ISO page for ISO/IEC/IEEE 29148:2018."
+    },
+    {
+      "evidence_id": "ibm-trace",
+      "source": "https://www.ibm.com/docs/SSCP65_6.0.6.1/com.ibm.rational.rrm.help.doc/topics/c_trace.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official IBM documentation for requirements traceability."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now has a deterministic spec/source reconciliation checker and reconcile-spec CLI.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "impl",
+        "cli",
+        "cli-smoke"
+      ],
+      "verification_steps": [
+        "Inspected implementation and CLI files.",
+        "Ran the example reconcile-spec command and confirmed clarification_required output."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The checker emits a clarification_needed event when user clarification is required.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "impl",
+        "cli-smoke",
+        "notification"
+      ],
+      "verification_steps": [
+        "Ran unit tests.",
+        "Ran the example reconcile-spec command and confirmed notification_event.event_type=clarification_needed."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The external requirements-management rationale is grounded in official ISO/IEEE and IBM sources.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "iso",
+        "ibm-trace"
+      ],
+      "verification_steps": [
+        "Checked ISO/IEC/IEEE 29148 official page.",
+        "Checked IBM traceability documentation."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "The local test suite passed after adding the reconciliation workflow.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tests"
+      ],
+      "verification_steps": [
+        "Ran python3 -m unittest discover -s tests from agent-platform."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Actual external notification delivery was not tested because all webhook channels are disabled by default and no user secrets were provided."
+  ],
+  "limitation_notes": [
+    "The workflow is deterministic policy tooling, not a replacement for user product decisions."
+  ]
+}

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-`agent-platform` can send events such as work completion, failures, approval needs, and long-running updates to Slack, Discord, and Microsoft Teams. Real webhook URLs are credentials, so the repository stores only environment variable names.
+`agent-platform` can send events such as work completion, failures, approval needs, spec clarification needs, and long-running updates to Slack, Discord, and Microsoft Teams. Real webhook URLs are credentials, so the repository stores only environment variable names.
 
 ## Settings File
 
@@ -25,10 +25,13 @@ Run from `agent-platform/`.
 PYTHONPATH=src python3 -m agent_platform.cli check-notifications configs/integrations/notification-channels.json
 PYTHONPATH=src python3 -m agent_platform.cli check-notifications configs/integrations/notification-channels.json --require-secrets
 PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notification-channels.json --event work_completed --title "Work complete" --message "Verification is done." --severity info --dry-run
+PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notification-channels.json --event clarification_needed --title "Spec clarification needed" --message "Q1=<answer>" --severity warning --dry-run
 PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notification-channels.json --event work_completed --title "Work complete" --message "Verification is done." --severity info --send
 ```
 
 `--dry-run` returns provider payload previews only. Use explicit `--send` to send a real message.
+
+`clarification_needed` is used when a spec is ambiguous or differs from source. Its message should include question IDs and answer formats the user can reply with directly.
 
 ## Provider Notes
 
@@ -42,4 +45,3 @@ PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notific
 - Store only environment variable names in config.
 - `check-notifications --require-secrets` checks whether enabled channels have their environment variables.
 - When a webhook value changes, update the shell, direnv, or secret manager value instead of editing tracked config.
-

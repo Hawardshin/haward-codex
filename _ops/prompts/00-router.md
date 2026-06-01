@@ -19,6 +19,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | Python 에이전트나 플랫폼 기능을 만든다 | [30-build-agent.md](30-build-agent.md) |
 | 사용자 요청을 요구사항으로 정의/수정/검토하고 구현 기준으로 삼는다 | [35-manage-requirements.md](35-manage-requirements.md) |
 | 요구사항을 spec, plan, tasks, validation, traceability로 바꾼 뒤 구현한다 | [36-manage-spec.md](36-manage-spec.md) |
+| 프로젝트 스펙이 애매하거나 현재 소스/테스트/산출물이 스펙과 다르다 | [38-reconcile-spec-source.md](38-reconcile-spec-source.md) |
 | 커스텀 Codex 스킬을 생성, 수정, 검증, 개선한다 | [37-manage-skill.md](37-manage-skill.md) |
 | 반복 작업을 스킬, 도구, 템플릿으로 승격한다 | [40-promote-capability.md](40-promote-capability.md) |
 | 컨텍스트가 길어졌다 | [50-compress-context.md](50-compress-context.md) |
@@ -45,6 +46,7 @@ Select work_mode from agent-platform/configs/workflows/work-mode-registry.json b
 Select the relevant prompt and workflow.
 Derive requirement candidates from the user's request, update or review the relevant requirements baseline before implementation when the selected mode requires it or durable behavior changes, and include requirements_targets when blocking for that mode.
 Create or update spec-driven artifacts before meaningful implementation when the selected mode requires it, and include spec_targets when blocking for that mode.
+When active specs are ambiguous or differ from current source/tests/artifacts, run spec-reconciliation-agent, classify update_spec versus update_source versus ask_user, and surface clarification_needed questions before changing ambiguous behavior.
 If custom skill work occurred, run skill-lifecycle-agent, validate the skill, record improvement ideas, and include skill_targets plus skill_validation_targets in close-out evaluation.
 If the request expresses a durable worldview or operating philosophy, update _philosophy/ and link policy docs to it.
 If the request creates or touches a specific project, decide the owning project folder before editing files.
