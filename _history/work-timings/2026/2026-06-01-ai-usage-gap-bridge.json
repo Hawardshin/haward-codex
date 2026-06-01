@@ -5,7 +5,7 @@
   "work_mode": "governance",
   "measurement_quality": "partial",
   "started_at": "2026-06-01T22:09:00+0900",
-  "ended_at": "2026-06-01T22:27:04+0900",
+  "ended_at": "2026-06-01T22:30:52+0900",
   "measurement_note": "Timing is estimated from command/log milestones after web-first intake began.",
   "phases": [
     {
@@ -56,9 +56,11 @@
     {
       "phase_id": "commit_push",
       "label": "Commit and push",
-      "status": "pending",
-      "measurement": "not_measured",
-      "bottleneck_notes": "Pending verification."
+      "status": "completed",
+      "started_at": "2026-06-01T22:27:04+0900",
+      "ended_at": "2026-06-01T22:30:52+0900",
+      "measurement": "estimated",
+      "bottleneck_notes": "Committed coherent change set and prepared immediate push."
     }
   ],
   "bottleneck_analysis": {

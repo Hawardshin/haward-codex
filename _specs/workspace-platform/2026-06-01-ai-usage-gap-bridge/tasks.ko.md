@@ -7,4 +7,4 @@
 - [x] persistent instructions와 memory bootstrap 갱신
 - [x] 요구사항과 스펙 기록
 - [x] 검증 및 평가
-- [ ] 커밋 및 푸시
+- [x] 커밋 및 푸시
