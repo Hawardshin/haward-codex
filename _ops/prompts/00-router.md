@@ -16,6 +16,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | 플랫폼을 사용하는 설치인지, 플랫폼을 개선하는 개발자 설치인지 구분한다 | [92-select-install-mode.md](92-select-install-mode.md) |
 | 플랫폼을 설치형 desktop/end-user software로 제품화하거나 Tauri/Electron/MSIX/DMG/signing/notarization/update/uninstall을 검토한다 | [93-installable-software-productization.md](93-installable-software-productization.md) |
 | Rust, Go, Tauri, Wails, Electron, Python, TypeScript/Next.js 같은 런타임/언어 선택을 조사하고 설계한다 | [94-runtime-language-research-design.md](94-runtime-language-research-design.md) |
+| 설치형 플랫폼 또는 프로젝트가 외부 CLI를 사용하되 특정 CLI에 종속되지 않는 adapter 경계를 설계한다 | [97-cli-adapter-integration.md](97-cli-adapter-integration.md) |
 | 새 작업을 시작한다 | [10-start-work.md](10-start-work.md) |
 | 새 프로젝트를 만든다 | [20-create-project.md](20-create-project.md) |
 | 작업이나 관심사의 프로젝트 소유 경계를 정한다 | [25-scope-project-boundary.md](25-scope-project-boundary.md) |
@@ -60,6 +61,7 @@ Select work_mode from agent-platform/configs/workflows/work-mode-registry.json b
 Select install_mode from agent-platform/configs/installations/install-mode-registry.json when the request involves setup, running, deployment, or developer improvement installation. Keep install_mode separate from work_mode.
 Use platform-desktop-app and _ops/prompts/93-installable-software-productization.md when the request involves end-user installable software, desktop apps, OS installer packaging, Tauri, Electron, MSIX, DMG, signing, notarization, updates, or uninstall behavior. Keep this separate from repository setup install_mode.
 Use agent-platform/configs/runtime/language-decision-registry.json and _ops/prompts/94-runtime-language-research-design.md when the request involves choosing or changing Rust, Go, Tauri, Wails, Electron, Python, TypeScript/Next.js, native modules, local daemons, desktop shells, or performance-sensitive runtime boundaries.
+Use agent-platform/configs/integrations/cli-adapter-registry.json and _ops/prompts/97-cli-adapter-integration.md when the request involves external CLI use, CLI adapter boundaries, command execution, bundled sidecars, optional CLI capabilities, or keeping the installable platform independent from one CLI.
 Select the relevant prompt and workflow.
 Derive requirement candidates from the user's request, update or review the relevant requirements baseline before implementation when the selected mode requires it or durable behavior changes, and include requirements_targets when blocking for that mode.
 Create or update spec-driven artifacts before meaningful implementation when the selected mode requires it, and include spec_targets when blocking for that mode.

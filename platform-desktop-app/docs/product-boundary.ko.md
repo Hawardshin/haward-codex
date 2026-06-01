@@ -11,12 +11,14 @@
 - macOS, Windows, Linux 설치 패키지 전략
 - code signing, notarization, update, uninstall, rollback release gate
 - 사용자 설정, workspace 선택, private data 보호 경계
+- 외부 CLI를 실행해야 할 때 command allowlist, workspace path allowlist, permission 설정, missing-CLI fallback 경계
 
 ## 소유하지 않는 범위
 
 - `agent-platform/`의 핵심 에이전트/평가/조사 구현
 - `workspace-monitor/`의 일반 웹 대시보드 구현
 - 레포지토리 세팅용 사용자/개발자 `install_mode`
+- Codex CLI, Claude Code, GitHub CLI, package manager, 배포 CLI 같은 외부 CLI 자체의 동작이나 인증 세션
 - 발표 에이전트 같은 도메인 프로젝트 기능
 
 ## 첫 제품 가정
@@ -27,6 +29,7 @@
 
 - 로컬 Python 에이전트를 앱에서 실행해야 한다.
 - 파일 시스템 감시, 알림, OS credential store 같은 native API가 필요하다.
+- 여러 CLI를 앱에서 호출하되 특정 CLI에 종속되지 않는 adapter/permission UI가 필요하다.
 - update channel, workspace profile, plugin 관리 같은 데스크톱 제품 기능이 필요하다.
 
 ## 핵심 규칙
@@ -35,3 +38,4 @@
 - 실제 token, webhook URL, browser cookie, private snapshot은 번들에 넣지 않는다.
 - 배포 가능한 앱이라고 부르려면 signing, notarization 또는 OS별 신뢰 체인, 설치/삭제 smoke test, privacy review가 끝나야 한다.
 - Tauri/Electron 중 하나를 설치하기 전에는 dependency audit와 설치 감사 계획을 먼저 남긴다.
+- 설치형 앱은 특정 CLI wrapper가 아니다. 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`에 등록된 optional adapter capability로만 붙인다.

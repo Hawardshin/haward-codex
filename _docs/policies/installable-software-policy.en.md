@@ -9,6 +9,7 @@ When turning the platform into software that an end user installs, separate repo
 - Installable desktop app productization belongs in `platform-desktop-app/`.
 - `agent-platform/configs/installations/install-mode-registry.json` describes repository user/developer setup modes, not DMG/MSIX/MSI/NSIS-style distribution packaging.
 - The first desktop shell should evaluate reuse of `workspace-monitor/`.
+- The installable app is not a single CLI wrapper. External CLIs attach as optional capabilities through `agent-platform/configs/integrations/cli-adapter-registry.json`.
 - Compare at least two routes among Tauri, Electron, and native packaging-only before installing framework or packager dependencies.
 - If dependency installation, upgrade, or removal actually occurs, create an installation audit record.
 - Installers must not include real tokens, webhook URLs, browser cookies, private snapshots, or local-only secrets.
@@ -19,6 +20,7 @@ When turning the platform into software that an end user installs, separate repo
 
 - Project: `platform-desktop-app/`
 - Distribution config: `platform-desktop-app/configs/desktop-distribution-registry.json`
+- CLI adapter config: `agent-platform/configs/integrations/cli-adapter-registry.json`
 - Workflow: `_ops/workflows/63-installable-software-productization.md`
 - Prompt: `_ops/prompts/93-installable-software-productization.md`
 

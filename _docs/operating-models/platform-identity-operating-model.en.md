@@ -12,7 +12,7 @@ This repository is designed to reverse that pattern. User intent becomes require
 
 ## Core Identity
 
-The platform has three identities.
+The platform has several identities.
 
 ### 1. Agent-Building Platform
 
@@ -29,6 +29,10 @@ Web search records, source lists, requirements, specs, plans, summaries, evaluat
 ### 4. Repetitive-Work Reduction Engine
 
 The platform does not stop at imitating human process. It looks for repeated actions across research, comparison, judgment, execution, and verification, then turns them into a better sequence, a smaller tool, a better prompt, or a clearer template. The goal is not more automation for its own sake; it is less repeated human work and less elapsed time.
+
+### 5. Installable But CLI-Neutral Execution Layer
+
+The platform can become installable software, but it must not become a wrapper around one CLI. The installed app provides the workspace, history, documents, evaluations, settings, and UI. External commands such as Codex CLI, Claude Code, GitHub CLI, package managers, and deployment CLIs attach as replaceable adapter capabilities. If a CLI is missing, only that capability is unavailable; the whole platform should continue and show a safe fallback path.
 
 ## Operating Loop
 
@@ -69,6 +73,7 @@ Over time, it should move toward this shape:
 - When the user states a goal, the agent asks better questions and builds a research plan first.
 - Research agents collect evidence from official docs, papers, engineering blogs, community signals, and Korean local sources when relevant.
 - Implementation agents compare language, architecture, folder structure, and open-source options before choosing a maintainable path.
+- The execution layer can use many CLIs while staying independent through adapter contracts and permission boundaries.
 - Evaluation agents compare the initial intent with the actual result and send gaps back into rework.
 - Monitoring UI shows history, projects, specs, evaluations, and active work in one place.
 - Repeated workflows become skills, tools, prompts, and templates so future work becomes faster and more reliable.

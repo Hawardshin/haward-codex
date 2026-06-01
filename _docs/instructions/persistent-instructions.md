@@ -115,6 +115,7 @@
 - For actual installs, upgrades, removals, or global environment changes, create an installation audit record under `_history/installations/YYYY/` and index it in `_ops/installations/registry.json`.
 - When setup, running, deployment, or development environment preparation is needed, select `install_mode` from `agent-platform/configs/installations/install-mode-registry.json`. Use `user` for using/viewing/deploying the platform and `developer` for improving platform source, rules, tools, skills, validators, dashboards, or tests. `install_mode` controls setup scope; `work_mode` controls evaluation strictness.
 - When turning the platform into end-user installable software, desktop apps, OS installers, Tauri, Electron, MSIX, DMG, app signing, notarization, update, or uninstall behavior, manage it under `platform-desktop-app/`. This is separate from repository setup `install_mode`.
+- The installable platform is not a hard wrapper around one CLI. External CLIs should be attached as replaceable capabilities through `agent-platform/configs/integrations/cli-adapter-registry.json`; missing optional CLIs should degrade as `capability_missing`.
 - When installation occurred, include `installation_occurred=true` and `installation_record_targets` in the work evaluation input.
 - Avoid global installs; if one is necessary, document the reason and removal path, then request any required permission.
 - Document useful internet research with source URLs, access dates, summaries, reliability, and applicability.

@@ -11,12 +11,14 @@
 - macOS, Windows, and Linux packaging strategy
 - Code signing, notarization, update, uninstall, and rollback release gates
 - User settings, workspace selection, and private-data protection boundaries
+- Command allowlists, workspace path allowlists, permission settings, and missing-CLI fallback boundaries when external CLI execution is needed
 
 ## Out Of Scope
 
 - Core agent, evaluation, and research implementation in `agent-platform/`
 - General web dashboard implementation in `workspace-monitor/`
 - Repository setup `install_mode`
+- Behavior or authenticated sessions of external CLIs such as Codex CLI, Claude Code, GitHub CLI, package managers, or deployment CLIs
 - Domain projects such as `presentation-agent/`
 
 ## First Product Assumption
@@ -27,6 +29,7 @@ Add desktop-specific UI or native behavior later when requirements are concrete:
 
 - Running local Python agents from the app
 - File-system watching, notifications, OS credential storage, or other native APIs
+- Adapter and permission UI for invoking multiple CLIs without becoming dependent on any one of them
 - Update channels, workspace profiles, or plugin management
 
 ## Core Rules
@@ -35,3 +38,4 @@ Add desktop-specific UI or native behavior later when requirements are concrete:
 - Do not bundle real tokens, webhook URLs, browser cookies, or private snapshots.
 - A build is not distributable until signing, notarization or OS-specific trust requirements, install/uninstall smoke tests, and privacy review are complete.
 - Before installing Tauri or Electron, record dependency audit and installation-audit plans.
+- The installable app is not a single CLI wrapper. External CLIs attach only as optional adapter capabilities registered in `agent-platform/configs/integrations/cli-adapter-registry.json`.

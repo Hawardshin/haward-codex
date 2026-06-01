@@ -1,0 +1,430 @@
+{
+  "schema_version": "2026-06-02",
+  "name": "cli-adapter-registry",
+  "purpose": "Defines how the installable platform can use many external CLIs without becoming dependent on any single CLI, vendor, shell, or developer environment.",
+  "reader_guide": {
+    "summary": "Use this registry before adding, invoking, bundling, or depending on a command-line tool from the platform, desktop app, monitor, or agent workflows.",
+    "how_to_read": [
+      "Read platform_principle first: the platform is installable, but CLI tools are optional attached capabilities.",
+      "Read integration_layers to understand which layer owns UI, platform logic, adapter contracts, and external CLI execution.",
+      "Read structure_rules before adding a CLI so a missing tool degrades gracefully instead of breaking the platform.",
+      "Read cli_adapter_contract and execution_contract before designing a concrete adapter.",
+      "Read installation_policy before installing or bundling a CLI dependency."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-06-02",
+    "update_triggers": [
+      "A new CLI capability is added to the platform or desktop app.",
+      "A CLI is promoted from optional local tool to required dependency.",
+      "The platform starts invoking CLIs from a desktop shell, local service, or web monitor action.",
+      "Command execution security, allowlist, timeout, logging, output parsing, or secret redaction rules change.",
+      "A CLI provider, package manager, deployment tool, AI assistant CLI, or document conversion tool becomes a supported adapter."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "python_subprocess",
+      "title": "Python subprocess",
+      "url": "https://docs.python.org/3/library/subprocess.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "Python command invocation",
+        "shell=True security considerations",
+        "timeouts and captured output"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "node_child_process",
+      "title": "Node.js child_process",
+      "url": "https://nodejs.org/api/child_process.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "spawn versus exec/execFile trade-offs",
+        "shell invocation and argument handling",
+        "streaming process output"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "tauri_command_scopes",
+      "title": "Tauri Command Scopes",
+      "url": "https://v2.tauri.app/security/scope/",
+      "source_type": "official_docs",
+      "used_for": [
+        "desktop shell permission scoping",
+        "native command allowlist design"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "github_cli_extensions",
+      "title": "GitHub CLI Extensions",
+      "url": "https://docs.github.com/github-cli/github-cli/using-github-cli-extensions",
+      "source_type": "official_docs",
+      "used_for": [
+        "CLI extension model",
+        "optional external command capability framing"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "twelve_factor_backing_services",
+      "title": "The Twelve-Factor App: Backing Services",
+      "url": "https://www.12factor.net/backing-services",
+      "source_type": "web_source",
+      "used_for": [
+        "loose coupling through attached resources",
+        "replaceable external capability framing"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "hexagonal_architecture",
+      "title": "Hexagonal Architecture",
+      "url": "https://alistair.cockburn.us/hexagonal-architecture",
+      "source_type": "web_source",
+      "used_for": [
+        "ports and adapters boundary",
+        "keeping application core independent from external tools"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "desktop_distribution_registry",
+      "title": "Desktop Distribution Registry",
+      "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "installable app boundary",
+        "desktop shell and local runtime integration strategy"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "install_mode_registry",
+      "title": "Install Mode Registry",
+      "path": "agent-platform/configs/installations/install-mode-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "user versus developer setup",
+        "planned commands versus executed installation audit"
+      ],
+      "last_checked": "2026-06-02"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "installable_platform_is_not_cli_dependent",
+      "rule": "The installed platform must not require a specific external CLI just to open, browse history, view docs, or understand project state.",
+      "reason": "The user wants an installable platform that can use CLIs on top of it, not a wrapper that breaks when one CLI is missing.",
+      "applies_to": [
+        "platform_principle",
+        "dependency_posture",
+        "failure_behavior"
+      ]
+    },
+    {
+      "id": "cli_tools_are_attached_capabilities",
+      "rule": "Treat each CLI as an attached capability behind an adapter contract with availability checks, version checks, permission scope, output contract, and fallback behavior.",
+      "reason": "Loose coupling keeps the platform usable across Codex, Claude Code, Cursor, Antigravity, package managers, deployment tools, and future CLIs.",
+      "applies_to": [
+        "cli_adapter_contract",
+        "capability_classes"
+      ]
+    },
+    {
+      "id": "platform_core_owns_intent_not_cli_behavior",
+      "rule": "Platform workflows should express intent and output contracts; CLI adapters translate that intent into provider-specific commands.",
+      "reason": "The platform should orchestrate reusable work, while concrete CLIs remain replaceable implementation details.",
+      "applies_to": [
+        "integration_layers",
+        "adapter_selection"
+      ]
+    },
+    {
+      "id": "no_shell_string_by_default",
+      "rule": "Prefer argv-style command invocation, explicit cwd, timeout, environment allowlist, and structured stdout/stderr handling. Avoid shell strings unless there is a recorded reason and escaping plan.",
+      "reason": "Shell strings increase portability and injection risks, especially when user or repository data becomes command input.",
+      "applies_to": [
+        "execution_contract",
+        "security_contract"
+      ]
+    },
+    {
+      "id": "desktop_invocation_requires_scopes",
+      "rule": "If the installable desktop shell invokes local commands, the allowed commands, arguments, workspace paths, and permission scope must be explicit before release.",
+      "reason": "A desktop app has a stronger local-security boundary than a developer terminal session.",
+      "applies_to": [
+        "desktop_boundary",
+        "security_contract"
+      ]
+    },
+    {
+      "id": "missing_cli_degrades_gracefully",
+      "rule": "A missing optional CLI should produce a human-readable capability_missing result with setup guidance, not crash the whole platform.",
+      "reason": "The platform should remain useful even when optional toolchains are absent.",
+      "applies_to": [
+        "failure_behavior",
+        "cli_adapter_contract"
+      ]
+    },
+    {
+      "id": "install_audit_before_required_cli",
+      "rule": "Before a CLI becomes required, bundled, auto-installed, or globally configured, create an installation audit plan and rollback path.",
+      "reason": "A required CLI changes dependency state and user environment expectations.",
+      "applies_to": [
+        "installation_policy",
+        "dependency_posture"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "platform_principle",
+      "meaning": "The core statement that the platform is installable but CLI-neutral.",
+      "required": true
+    },
+    {
+      "field": "integration_layers",
+      "meaning": "Layered ownership boundaries from installed shell to platform core to external CLI.",
+      "required": true
+    },
+    {
+      "field": "dependency_posture",
+      "meaning": "Rules that decide whether a CLI is optional, supported, required, bundled, or explicitly not supported.",
+      "required": true
+    },
+    {
+      "field": "cli_adapter_contract",
+      "meaning": "Minimum fields a concrete CLI adapter must define before implementation.",
+      "required": true
+    },
+    {
+      "field": "execution_contract",
+      "meaning": "Command execution rules for safety, portability, logging, timeouts, and output handling.",
+      "required": true
+    },
+    {
+      "field": "failure_behavior",
+      "meaning": "How the platform behaves when a CLI is unavailable, unsupported, times out, or returns unexpected output.",
+      "required": true
+    }
+  ],
+  "platform_principle": {
+    "summary": "The platform is installable and user-facing, but it is not locked to one CLI. It provides the durable workspace, UI, history, policies, and orchestration layer, then uses external CLIs through replaceable adapters when they are useful.",
+    "short_form": "Installable platform, CLI-neutral execution.",
+    "non_goals": [
+      "becoming a thin wrapper around one AI assistant CLI",
+      "requiring every user to install developer CLIs before opening the app",
+      "embedding secrets or user-specific tool sessions into distributable builds",
+      "hard-coding shell commands in prompts instead of adapter contracts"
+    ]
+  },
+  "integration_layers": [
+    {
+      "layer": "installed_shell",
+      "owns": [
+        "user-facing app window",
+        "workspace selection",
+        "settings and permissions",
+        "safe command launch boundary"
+      ],
+      "must_not_own": [
+        "provider-specific CLI logic",
+        "raw secret values",
+        "project-specific task rules"
+      ]
+    },
+    {
+      "layer": "platform_core",
+      "owns": [
+        "requirements, specs, history, evaluations, and navigation",
+        "intent-level workflows",
+        "adapter selection policy",
+        "capability discovery and degradation behavior"
+      ],
+      "must_not_own": [
+        "vendor-specific command quirks unless isolated in an adapter"
+      ]
+    },
+    {
+      "layer": "cli_adapter",
+      "owns": [
+        "availability checks",
+        "version checks",
+        "argument mapping",
+        "stdout/stderr parsing",
+        "exit-code mapping",
+        "fallback guidance"
+      ],
+      "must_not_own": [
+        "durable platform policy",
+        "cross-project requirements"
+      ]
+    },
+    {
+      "layer": "external_cli",
+      "owns": [
+        "its own command behavior",
+        "provider-specific authentication",
+        "provider-specific updates and terms"
+      ],
+      "must_not_own": [
+        "workspace source of truth",
+        "platform memory or evaluation policy"
+      ]
+    }
+  ],
+  "dependency_posture": {
+    "default": "optional_supported",
+    "allowed_states": [
+      "optional_supported",
+      "project_local_required",
+      "bundled_sidecar",
+      "user_supplied",
+      "not_supported"
+    ],
+    "promotion_rule": "Promote a CLI from optional_supported to project_local_required or bundled_sidecar only after requirements, security review, installation audit, fallback plan, and validation commands exist.",
+    "degradation_rule": "If an optional CLI is missing, return capability_missing with setup instructions and continue all unrelated platform features."
+  },
+  "cli_adapter_contract": {
+    "required_fields": [
+      "adapter_id",
+      "capability_class",
+      "supported_commands",
+      "availability_check",
+      "version_check",
+      "input_contract",
+      "output_contract",
+      "exit_code_mapping",
+      "timeout_seconds",
+      "cwd_policy",
+      "environment_policy",
+      "secret_redaction_policy",
+      "permission_scope",
+      "fallback_behavior",
+      "installation_status",
+      "verification_commands"
+    ],
+    "storage_rule": "Store shared adapter definitions under agent-platform/configs/integrations/ or project-specific configs/integrations/ when the adapter belongs to one project."
+  },
+  "execution_contract": {
+    "prefer_argv_arrays": true,
+    "avoid_shell_by_default": true,
+    "require_explicit_cwd": true,
+    "require_timeout": true,
+    "capture_stdout_stderr": true,
+    "output_size_limit_required": true,
+    "structured_output_preferred": true,
+    "environment_policy": "Pass only allowlisted environment variables. Never log secret values.",
+    "logging_policy": "Record command intent, adapter id, version, duration, exit status, and redacted stderr. Do not store raw secrets or oversized outputs.",
+    "desktop_policy": "Desktop-originated command execution must be scoped by command allowlist, workspace path allowlist, and user-visible permission settings."
+  },
+  "capability_classes": [
+    {
+      "id": "ai_assistant_cli",
+      "examples": [
+        "Codex CLI",
+        "Claude Code CLI",
+        "Cursor CLI or command hooks",
+        "Antigravity adapter commands"
+      ],
+      "default_state": "optional_supported",
+      "notes": "Assistant CLIs are execution providers, not the platform source of truth."
+    },
+    {
+      "id": "version_control",
+      "examples": [
+        "git",
+        "gh"
+      ],
+      "default_state": "optional_supported",
+      "notes": "Git history can enrich the platform, but repository documents remain readable without GitHub-specific tooling."
+    },
+    {
+      "id": "package_manager",
+      "examples": [
+        "pip",
+        "uv",
+        "npm",
+        "pnpm",
+        "brew"
+      ],
+      "default_state": "user_supplied",
+      "notes": "Package manager use follows installation audit rules when it changes dependency or environment state."
+    },
+    {
+      "id": "deployment_cli",
+      "examples": [
+        "vercel",
+        "docker",
+        "cloud provider CLIs"
+      ],
+      "default_state": "optional_supported",
+      "notes": "Deployment CLIs require explicit target, credentials boundary, dry-run or preview path, and rollback notes."
+    },
+    {
+      "id": "artifact_conversion",
+      "examples": [
+        "pandoc",
+        "playwright",
+        "libreoffice"
+      ],
+      "default_state": "optional_supported",
+      "notes": "Conversion tools should have deterministic input/output paths and preserve source provenance."
+    }
+  ],
+  "adapter_selection": {
+    "selection_order": [
+      "capability requirement",
+      "available adapter check",
+      "user preference or project config",
+      "security and permission scope",
+      "lowest-maintenance supported adapter",
+      "fallback or manual workflow"
+    ],
+    "tie_breaker": "Prefer the adapter that requires the least new installation and leaves the clearest verification record."
+  },
+  "failure_behavior": {
+    "missing_cli": "Return capability_missing with adapter_id, missing command, setup doc path, and safe next action.",
+    "unsupported_version": "Return capability_blocked with installed version, supported range if known, and upgrade or fallback guidance.",
+    "timeout": "Return command_timeout with duration, adapter_id, and partial output summary if safe.",
+    "unexpected_output": "Return output_contract_failed and preserve redacted sample output for debugging.",
+    "permission_denied": "Return permission_required and ask for explicit user approval or settings change."
+  },
+  "installation_policy": {
+    "install_by_default": false,
+    "allowed_install_scopes": [
+      "project_local",
+      "tool_local",
+      "user_supplied"
+    ],
+    "global_install_rule": "Avoid global install. If global install is necessary, record why project-local or tool-local is insufficient and document removal.",
+    "audit_required_when": [
+      "dependency or lock file changes",
+      "global environment changes",
+      "CLI becomes required",
+      "CLI is bundled in an installer",
+      "authentication helper or credential store integration is added"
+    ],
+    "audit_targets": [
+      "_history/installations/YYYY/",
+      "_ops/installations/registry.json"
+    ]
+  },
+  "validation_contract": {
+    "config_checks": [
+      "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json"
+    ],
+    "expected_future_adapter_checks": [
+      "availability check",
+      "version check",
+      "dry-run command",
+      "permission-denied path",
+      "missing-CLI path",
+      "redaction test",
+      "timeout test"
+    ]
+  }
+}

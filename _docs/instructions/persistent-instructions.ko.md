@@ -48,6 +48,7 @@
 - 같은 파일, 설정, 생성 맵, git 상태 같은 공유 자원을 건드리는 작업은 명시적 dependency, lock, branch/worktree 규칙 없이 병렬 실행하지 않는다.
 - 여러 조사 lane을 병렬 실행할 때는 모든 조사 lane을 기다리는 merge gate를 두고, contradiction과 accepted evidence를 합성한 뒤 downstream 구현을 release한다.
 - durable rule, 출처 설정, 프롬프트, 워크플로, 프로젝트 경계, AI assistant runtime adapter, 평가 루프가 바뀌면 `agent-platform/configs/memory/bootstrap-manifest.json`도 갱신한다.
+- 설치형 플랫폼은 특정 CLI wrapper가 아니다. 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`을 통해 교체 가능한 capability로 붙이고, optional CLI가 없으면 전체 실패가 아니라 `capability_missing`으로 degrade한다.
 - 조사나 계획 작업은 공식 문서, 논문, 책/이론서, 공식 통계, 설문 데이터, 시장/산업 리포트, 오픈소스 repo, 외국 기술 블로그, 조사 아티클, 커뮤니티/소셜 신호, 반대 사례를 폭넓게 수집한다.
 - 사용자가 웹 검색 품질 개선을 요구하거나 많은 출처 탐색이 필요한 작업은 `agent-platform/configs/research/human-search-profile.json`을 사용해 seed, synonym, operator, source-lane, regional, community, contrary, snowballing 검색 단계를 query ladder로 만든다.
 - 사람형 검색에서 찾은 좋은 출처는 답변, 계획, 위험 모델, 출처 목록, 재사용 지식 베이스를 바꿀 때만 요약하고 URL, 접근일, 신뢰도, 한계, plan impact와 함께 `_research/` 또는 해당 프로젝트 docs에 저장한다.

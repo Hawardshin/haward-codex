@@ -1,0 +1,137 @@
+{
+  "task": "Ground factual claims for the CLI-neutral adapter boundary of the installable platform.",
+  "output_summary": "The workspace now records that the installable platform can use many CLIs through replaceable adapters, but must not depend on one CLI to function.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request_summary",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable summary of the user's CLI-neutral installable platform request."
+    },
+    {
+      "evidence_id": "cli_registry",
+      "source": "agent-platform/configs/integrations/cli-adapter-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Self-documenting registry for external CLI adapter boundaries."
+    },
+    {
+      "evidence_id": "cli_policy",
+      "source": "_docs/policies/cli-adapter-policy.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Workspace-level policy for optional CLI adapters and external command boundaries."
+    },
+    {
+      "evidence_id": "cli_workflow",
+      "source": "_ops/workflows/66-cli-adapter-integration.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Operational workflow for adding, invoking, bundling, or comparing CLI adapters."
+    },
+    {
+      "evidence_id": "cli_prompt",
+      "source": "_ops/prompts/97-cli-adapter-integration.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Reusable prompt for CLI adapter integration."
+    },
+    {
+      "evidence_id": "desktop_registry",
+      "source": "platform-desktop-app/configs/desktop-distribution-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Desktop productization registry that now references CLI-neutral adapter integration."
+    },
+    {
+      "evidence_id": "python_subprocess_docs",
+      "source": "https://docs.python.org/3/library/subprocess.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Python documentation for external process execution."
+    },
+    {
+      "evidence_id": "node_child_process_docs",
+      "source": "https://nodejs.org/api/child_process.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Node.js documentation for child process execution."
+    },
+    {
+      "evidence_id": "tauri_scope_docs",
+      "source": "https://v2.tauri.app/security/scope/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tauri security scope documentation for permission-bounded capabilities."
+    },
+    {
+      "evidence_id": "ports_adapters_reference",
+      "source": "https://alistair.cockburn.us/hexagonal-architecture",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Original hexagonal architecture reference used for adapter-boundary framing."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The user asked for the platform to be installable while still able to use many CLIs without being dependent on one CLI.",
+      "claim_type": "user_instruction",
+      "support_level": "supported",
+      "evidence_ids": ["user_request_summary"],
+      "verification_steps": ["Inspect UR-2026-06-02-008 in the user request summary."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The workspace now has a CLI adapter registry that defines external CLIs as optional adapter capabilities and records missing-CLI fallback behavior.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["cli_registry"],
+      "verification_steps": ["Inspect cli-neutral principle, adapter_contract, execution_contract, and failure_behavior in cli-adapter-registry.json."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The workspace now exposes a policy, workflow, and reusable prompt for CLI adapter integration.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["cli_policy", "cli_workflow", "cli_prompt"],
+      "verification_steps": ["Inspect the CLI adapter policy, workflow 66, prompt 97, and router/index references."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The desktop productization registry now records that external CLIs are optional adapters and that missing optional CLIs should disable only the related capability.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["desktop_registry"],
+      "verification_steps": ["Inspect product boundary and runtime strategy fields in desktop-distribution-registry.json."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The adapter-boundary design was informed by official process execution documentation and an adapter architecture reference, not only by local preference.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "python_subprocess_docs",
+        "node_child_process_docs",
+        "tauri_scope_docs",
+        "ports_adapters_reference"
+      ],
+      "verification_steps": ["Inspect the saved web search and research notes for source links and plan impact."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "This task defines the adapter boundary and governance layer; it does not implement a concrete CLI runner.",
+    "Concrete CLI adapters still need implementation-specific tests, version checks, and permission review."
+  ],
+  "limitation_notes": [
+    "No external CLI was installed, bundled, or made required in this task.",
+    "No concrete CLI invocation was executed through a new adapter in this task."
+  ]
+}

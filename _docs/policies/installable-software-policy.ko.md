@@ -9,6 +9,7 @@
 - 설치형 desktop app 제품화는 `platform-desktop-app/`에서 관리한다.
 - `agent-platform/configs/installations/install-mode-registry.json`은 레포지토리 사용/개발 환경 설치 모드이고, DMG/MSIX/MSI/NSIS 같은 배포 패키징과 다르다.
 - desktop shell은 처음에는 `workspace-monitor/` 재사용을 우선 검토한다.
+- 설치형 앱은 특정 CLI wrapper가 아니다. 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`의 adapter contract를 통해 optional capability로 붙인다.
 - Tauri, Electron, native packaging-only 중 최소 두 경로를 비교한 뒤 framework나 packager dependency를 설치한다.
 - 실제 dependency 설치, 업그레이드, 제거가 발생하면 설치 감사 기록을 남긴다.
 - installer에는 실제 token, webhook URL, browser cookie, private snapshot, 로컬 전용 secret을 넣지 않는다.
@@ -19,6 +20,7 @@
 
 - 프로젝트: `platform-desktop-app/`
 - 배포 설정: `platform-desktop-app/configs/desktop-distribution-registry.json`
+- CLI adapter 설정: `agent-platform/configs/integrations/cli-adapter-registry.json`
 - workflow: `_ops/workflows/63-installable-software-productization.md`
 - prompt: `_ops/prompts/93-installable-software-productization.md`
 

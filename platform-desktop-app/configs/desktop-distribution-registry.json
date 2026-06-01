@@ -134,6 +134,18 @@
         "distinguishing repository setup install modes from distributable installers"
       ],
       "last_checked": "2026-06-02"
+    },
+    {
+      "id": "cli_adapter_registry",
+      "title": "CLI Adapter Registry",
+      "path": "agent-platform/configs/integrations/cli-adapter-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "using external CLIs as optional adapter capabilities",
+        "keeping the installable app independent from one CLI provider",
+        "command execution, permission, fallback, and installation audit rules"
+      ],
+      "last_checked": "2026-06-02"
     }
   ],
   "structure_rules": [
@@ -173,6 +185,16 @@
         "packaging_targets",
         "release_gates"
       ]
+    },
+    {
+      "id": "external_clis_are_optional_adapters",
+      "rule": "The desktop app may use external CLIs through explicit adapters, but it must not become a hard wrapper around one CLI.",
+      "reason": "The platform should remain usable when optional CLIs are missing and should keep provider-specific command behavior outside the platform core.",
+      "applies_to": [
+        "product_boundary",
+        "runtime_strategy",
+        "security_privacy_rules"
+      ]
     }
   ],
   "field_guide": [
@@ -193,7 +215,7 @@
     },
     {
       "field": "runtime_strategy",
-      "meaning": "How the desktop shell connects UI, local Python agents, repository data, optional services, and language/runtime boundaries.",
+      "meaning": "How the desktop shell connects UI, local Python agents, repository data, optional services, CLI adapters, and language/runtime boundaries.",
       "required": true
     },
     {
@@ -214,11 +236,13 @@
       "core agent planning and evaluation implementation in agent-platform",
       "repository setup install_mode profiles",
       "workspace-monitor web UI source unless a desktop-specific adapter is required",
+      "external CLI behavior or authenticated provider sessions",
       "presentation-agent domain workflows"
     ],
     "integration_points": [
       "workspace-monitor as the initial UI surface",
       "agent-platform as the Python-first local platform layer",
+      "agent-platform CLI adapter registry for optional external command capabilities",
       "_history and _ops documents as repository data sources"
     ]
   },
@@ -363,12 +387,15 @@
     "ui_strategy": "Reuse workspace-monitor first, then add desktop-specific UI only when local desktop behavior needs it.",
     "agent_runtime_strategy": "Keep agent-platform as a Python-first platform layer. Decide later whether a desktop app launches a local service, uses a sidecar process, or talks to a separate runtime.",
     "language_runtime_strategy": "Use Rust/Tauri first for the desktop shell, Go first for a separate local daemon or operational CLI, Python for agent logic, and TypeScript/Next.js for the UI. Follow agent-platform/configs/runtime/language-decision-registry.json before changing this split.",
+    "cli_integration_strategy": "Use external CLIs only through explicit adapter contracts from agent-platform/configs/integrations/cli-adapter-registry.json. Missing optional CLIs should disable only that capability and show setup guidance.",
     "data_strategy": "Read repository documents or generated snapshots through explicit user-selected workspace paths. Do not silently bundle private repository data.",
     "settings_strategy": "Store user settings separately from bundled defaults. Secrets must be environment variables, OS credential storage, or user-provided runtime input, not checked-in config."
   },
   "security_privacy_rules": [
     "Do not bundle real webhook URLs, API keys, tokens, browser cookies, or private notes into installers.",
     "Prefer explicit user workspace selection over scanning arbitrary folders.",
+    "Do not assume one external CLI is installed; use adapter capability checks and missing-CLI fallback guidance.",
+    "Before desktop-originated CLI execution, document command allowlists, workspace path allowlists, timeout, and secret redaction behavior.",
     "Document any local server port, sidecar process, file-system permission, or network behavior before release.",
     "Review generated snapshots before public or distributable builds."
   ],

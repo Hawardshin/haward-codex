@@ -49,6 +49,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep selectable work modes and evaluator target strictness in `configs/workflows/work-mode-registry.json`.
 - Keep user/developer installation profiles in `configs/installations/install-mode-registry.json`; `install_mode` controls setup audience while `work_mode` controls task close-out strictness.
 - Keep end-user desktop installer productization in `platform-desktop-app/`; this is separate from repository setup `install_mode`.
+- Keep external CLI integration in `configs/integrations/cli-adapter-registry.json`; the installable platform may use many CLIs through adapters but must not depend on one CLI to function.
 - Keep platform notification routing in `configs/integrations/notification-channels.json`; store only environment variable names there, never real webhook URLs or tokens.
 - Keep user request summaries under `_history/user-requests/`.
 - Keep shared requirements baselines, changes, and reviews under `_requirements/`; use project-local `docs/requirements/` for project-specific requirements.
@@ -105,6 +106,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-install-modes configs/install
 PYTHONPATH=src python3 -m agent_platform.cli list-install-modes configs/installations/install-mode-registry.json
 PYTHONPATH=src python3 -m agent_platform.cli show-install-mode configs/installations/install-mode-registry.json developer
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/deep-research-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/planning/deep-research-template.json configs/integrations/notification-channels.json
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json
 ```
 
 ## Current Skeleton
@@ -128,6 +130,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `configs/research/deep-research-profile.json`: source, depth, stage, citation-audit, and report contract for long-form deep research
 - `configs/workflows/work-mode-registry.json`: selectable work modes and evaluator target policy
 - `configs/installations/install-mode-registry.json`: user install and developer improvement install setup profiles
+- `configs/integrations/cli-adapter-registry.json`: optional CLI adapter boundaries, execution contract, dependency posture, and missing-CLI fallback policy
 - `configs/integrations/notification-channels.json`: notification on/off routing, event filters, provider payload options, and environment-variable secret indirection
 - `configs/open-source/`: dependency candidate scoring inputs
 - `research-insight-planner-agent` is the core Perplexity-style research agent for search, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review

@@ -6,6 +6,8 @@
 
 현재는 Codex에서 운영하지만 핵심 원칙은 특정 AI 도구에 묶지 않는다. Claude Code, Cursor, Google Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 같은 방식으로 사용할 수 있도록 공통 원칙과 도구별 adapter를 분리한다.
 
+설치형 제품으로 발전해도 특정 CLI에 묶이지 않는다. 설치형 앱은 플랫폼의 작업 공간, 히스토리, 문서, 평가, 설정, UI를 제공하고, Codex CLI, Claude Code, GitHub CLI, Vercel CLI 같은 외부 명령은 필요할 때 교체 가능한 adapter capability로 붙여 사용한다.
+
 ## 이 플랫폼은 무엇을 해결하는가
 
 AI와 오래 일할 때 문제는 답변 하나의 품질만이 아니다. 더 큰 문제는 무엇을 왜 결정했는지 사라지고, 좋은 조사와 나쁜 추정이 섞이고, 프로젝트가 늘어날수록 폴더와 히스토리와 스펙이 서로 어긋나는 것이다.
@@ -55,6 +57,7 @@ AI와 오래 일할 때 문제는 답변 하나의 품질만이 아니다. 더 �
 
 - 모든 작업 산출물은 이 저장소의 git 이력으로 추적한다.
 - durable operating principle은 도구 독립형으로 관리하고, 도구별 instruction 파일은 얇은 adapter로 둔다.
+- 설치형 플랫폼은 특정 CLI wrapper가 아니다. 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`의 adapter contract를 통해 optional capability로 붙인다.
 - Codex는 `AGENTS.md`, Claude Code는 `CLAUDE.md`와 `.claude/rules/`, Cursor는 `.cursor/rules/`, Antigravity는 `.agents/rules/`를 사용하되, 정책 원본은 `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`와 `_ops/assistant-runtimes/adapter-registry.json`에서 확인한다.
 - 의미 있는 변경 단위가 끝날 때마다 커밋한다.
 - 커밋이 만들어지면 바로 원격 저장소에 push한다.
