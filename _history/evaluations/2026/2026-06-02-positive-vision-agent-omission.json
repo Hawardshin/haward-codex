@@ -1,0 +1,156 @@
+{
+  "task": "Add reusable Positive Vision agent",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "interpret-request",
+      "description": "Interpret the user's positive vision expert request as a reusable platform agent for grounded optimism and make-it-happen execution framing.",
+      "source": "UR-2026-06-02-023",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_history/plans/2026/2026-06-02-positive-vision-agent.ko.md"
+      ],
+      "rationale": "The request was summarized and the plan records the Positive Vision agent interpretation."
+    },
+    {
+      "item_id": "web-first",
+      "description": "Run web-first research and save a public search record.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-positive-vision-agent.ko.md"
+      ],
+      "rationale": "The search record lists queries, sources checked, weak sources ignored, plan impact, and uncertainty."
+    },
+    {
+      "item_id": "requirements",
+      "description": "Add or link the durable requirement for the Positive Vision agent.",
+      "source": "governance work mode",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_requirements/changes/2026-06-02-positive-vision-agent.ko.md",
+        "_requirements/reviews/2026-06-02-positive-vision-agent.ko.md"
+      ],
+      "rationale": "REQ-WS-065 was added and reviewed."
+    },
+    {
+      "item_id": "agent-spec",
+      "description": "Create an inspectable agent spec with positive vision, agency, pathways, if-then plans, risk truth, fallback, and verification gates.",
+      "source": "REQ-WS-065",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/agents/positive-vision-agent.json",
+        "agent-platform/docs/positive-vision-agent.ko.md"
+      ],
+      "rationale": "The agent spec includes trigger, output contract, vision modes, safety rules, and validation commands."
+    },
+    {
+      "item_id": "no-false-optimism",
+      "description": "Ensure positive vision does not become unsupported success guarantees, risk hiding, dissent suppression, or verification bypass.",
+      "source": "REQ-WS-065",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/agents/positive-vision-agent.json",
+        "agent-platform/docs/positive-vision-agent.ko.md",
+        "_specs/workspace-platform/2026-06-02-positive-vision-agent/spec.ko.md"
+      ],
+      "rationale": "The policy and docs explicitly prohibit unsupported guarantees and require risk truth plus verification gates."
+    },
+    {
+      "item_id": "reuse-existing-structure",
+      "description": "Reuse existing planning, timing, omission, grounding, and evaluation tools instead of creating a duplicate runtime.",
+      "source": "platformization rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/agents/positive-vision-agent.json",
+        "_history/work-timings/2026/2026-06-02-positive-vision-agent.json"
+      ],
+      "rationale": "The agent links existing planning/evaluation tools and the timing record validates with work-timer."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/agents/positive-vision-agent.json",
+      "purpose": "Reusable Positive Vision agent spec.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/docs/positive-vision-agent.ko.md",
+      "purpose": "Korean user-facing agent docs.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/docs/positive-vision-agent.en.md",
+      "purpose": "English companion agent docs.",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-02-positive-vision-agent/spec.ko.md",
+      "purpose": "Spec artifact.",
+      "required": true
+    },
+    {
+      "path": "_history/work-timings/2026/2026-06-02-positive-vision-agent.json",
+      "purpose": "Timing record.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "inspect-agent",
+      "description": "Inspect the new agent spec.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/positive-vision-agent.json"
+      ],
+      "rationale": "Command completed with exit code 0."
+    },
+    {
+      "check_id": "list-agents",
+      "description": "Confirm the new agent appears in the registry list.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents"
+      ],
+      "rationale": "Command output included positive-vision-agent."
+    },
+    {
+      "check_id": "work-timer",
+      "description": "Validate the timing record.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-positive-vision-agent.json"
+      ],
+      "rationale": "Command returned status ready."
+    },
+    {
+      "check_id": "tests-and-monitor",
+      "description": "Run platform tests and monitor build checks.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "agent-platform unit tests: 150 tests OK",
+        "workspace-monitor npm test/check/build passed",
+        "workspace-health: 18 checks passed"
+      ],
+      "rationale": "All commands completed with exit code 0."
+    }
+  ],
+  "known_omission_risks": [
+    "No standalone UI, voice interface, or runtime behavior was implemented because the current request was satisfied by a reusable platform agent spec and docs."
+  ],
+  "notes": [
+    "The agent complements timekeeper-agent rather than replacing it."
+  ]
+}
