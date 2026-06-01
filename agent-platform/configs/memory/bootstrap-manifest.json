@@ -29,6 +29,7 @@
       "The skill lifecycle layer or skill validation contract changes.",
       "The architecture-first coding layer or coding architecture comparison contract changes.",
       "The stack-aware coding research layer or technology-specific official docs and discussion signal rules change.",
+      "The coding project bootstrap workflow, blueprint config, or new project creation tool changes.",
       "The maintainable language/runtime selection, architecture theory/practitioner comparison, or folder semantics rules change.",
       "The request-to-outcome trace layer or traceability contract changes.",
       "The web search record layer or prompt-level search contract changes.",
@@ -230,6 +231,30 @@
         "coding research readiness criteria"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "coding_project_bootstrap_tool",
+      "title": "Coding Project Bootstrap Tool",
+      "path": "_tools/coding-project-bootstrap/README.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "technology-aware new coding project scaffold",
+        "dry-run-first project creation",
+        "root project registry update guidance"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "coding_project_bootstrap_blueprints",
+      "title": "Coding Project Bootstrap Blueprints",
+      "path": "_tools/coding-project-bootstrap/configs/blueprints.json",
+      "source_type": "internal",
+      "used_for": [
+        "technology-specific starter structures",
+        "official-doc checklist for generated projects",
+        "project-local folder contract"
+      ],
+      "last_checked": "2026-06-01"
     },
     {
       "id": "request_trace_policy",
@@ -1110,6 +1135,22 @@
       "purpose": "Policy for installing mature open-source dependencies with scoped installation, security/license review, verification, and rollback.",
       "required": true,
       "load_order": 23
+    },
+    {
+      "id": "coding_project_bootstrap_workflow",
+      "path": "_ops/workflows/27-bootstrap-coding-project.md",
+      "tier": "warm",
+      "purpose": "Workflow for creating technology-aware coding project structures through a dry-run-first local bootstrap tool.",
+      "required": true,
+      "load_order": 24
+    },
+    {
+      "id": "coding_project_bootstrap_tool",
+      "path": "_tools/coding-project-bootstrap/README.ko.md",
+      "tier": "warm",
+      "purpose": "Tool documentation for listing, planning, and applying new coding project blueprints.",
+      "required": true,
+      "load_order": 24
     },
     {
       "id": "coding_research_workflow",

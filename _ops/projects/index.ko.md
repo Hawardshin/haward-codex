@@ -13,6 +13,7 @@ AI assistant runtime adapter: [../assistant-runtimes/adapter-registry.json](../a
 ## 운영 규칙
 
 - 새 관심사가 독립 목적과 산출물을 가지면 새 루트 프로젝트로 만든다.
+- 새 코딩 프로젝트는 먼저 `_tools/coding-project-bootstrap/`으로 dry-run plan을 확인하고, root project일 때만 `--register`로 등록한다.
 - 프로젝트 전용 파일은 해당 프로젝트 폴더 안에 둔다.
 - 여러 프로젝트에서 재사용될 때만 `_tools/`, `_templates/`, `_docs/`, `_ops/`로 승격한다.
 - `_private/`와 `outputs/`는 local-only ignored folder이며 프로젝트나 지식 베이스가 아니다.

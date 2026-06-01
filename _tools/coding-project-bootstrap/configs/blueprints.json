@@ -1,0 +1,591 @@
+{
+  "schema_version": "2026-06-01",
+  "name": "coding-project-bootstrap-blueprints",
+  "purpose": "Defines safe, minimal, technology-aware starter structures for new coding projects in this workspace.",
+  "reader_guide": {
+    "summary": "Use this file when creating a new coding project. It separates the durable workspace contract from technology-specific starter choices so new projects stay isolated while still inheriting the platform's research, spec, history, and evaluation loop.",
+    "how_to_read": [
+      "Read structure_rules before adding or changing a blueprint.",
+      "Use field_guide to understand required blueprint fields.",
+      "Pick a blueprint by matching the intended runtime and maintenance style, not by copying all possible framework files.",
+      "Run the coding-project-bootstrap tool in dry-run mode before applying changes.",
+      "After applying, run structure-audit and workspace-health so the management platform can see the new project."
+    ],
+    "owner": "_tools/coding-project-bootstrap",
+    "last_reviewed": "2026-06-01",
+    "update_triggers": [
+      "A new technology stack becomes a repeated project type.",
+      "A generated project folder contract changes.",
+      "A blueprint starts requiring dependency installation.",
+      "Project registry fields or workspace structure rules change.",
+      "External official docs or generator practices change."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "backstage-software-templates",
+      "title": "Backstage Software Templates",
+      "url": "https://backstage.io/docs/features/software-templates",
+      "source_type": "official",
+      "used_for": [
+        "scaffolding as a repeatable template task",
+        "template inputs, actions, and outputs concept"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "copier-generating-projects",
+      "title": "Copier - Generating a project",
+      "url": "https://copier.readthedocs.io/en/stable/generating/",
+      "source_type": "official",
+      "used_for": [
+        "copying a template to a destination with explicit data",
+        "local template reusability model"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "nx-generators",
+      "title": "Nx Workspace Generators",
+      "url": "https://nx.dev/docs/reference/workspace/generators",
+      "source_type": "official",
+      "used_for": [
+        "workspace generator concept",
+        "technology-aware project creation inside one workspace"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "project-boundary-workflow",
+      "title": "Project Boundary Management Workflow",
+      "path": "_ops/workflows/25-project-boundary-management.md",
+      "source_type": "internal",
+      "used_for": [
+        "root project ownership rules",
+        "registered project and shared tool separation"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "coding-research-profile",
+      "title": "Coding Research Profile",
+      "path": "agent-platform/configs/research/coding-research-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "technology-specific official docs",
+        "architecture and folder-structure readiness"
+      ],
+      "last_checked": "2026-06-01"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "dry_run_first",
+      "rule": "The tool should produce a dry-run plan by default; filesystem changes require an explicit apply flag.",
+      "reason": "The user is concerned about waste and accidental project sprawl.",
+      "applies_to": [
+        "tool_cli",
+        "blueprints"
+      ]
+    },
+    {
+      "id": "minimal_stack_contract",
+      "rule": "Blueprints should create a durable project contract and minimal stack-specific paths, not a full dependency tree or generated framework cache.",
+      "reason": "Framework installers can become stale, heavy, or install dependencies before the project intent is confirmed.",
+      "applies_to": [
+        "blueprints.files",
+        "blueprints.directories"
+      ]
+    },
+    {
+      "id": "registry_is_optional_but_preferred",
+      "rule": "Root-level project creation should support project registry updates, but custom target locations must not be auto-registered as root projects.",
+      "reason": "Root projects need lifecycle visibility, while nested modules may belong to an existing project.",
+      "applies_to": [
+        "tool_cli",
+        "_ops/projects/registry.json"
+      ]
+    },
+    {
+      "id": "official_docs_before_implementation",
+      "rule": "Each blueprint must list official documentation or standards to check before source-code implementation.",
+      "reason": "The bootstrap only creates a starting boundary; implementation decisions still require current stack research.",
+      "applies_to": [
+        "blueprints.official_docs"
+      ]
+    },
+    {
+      "id": "project_local_extensions",
+      "rule": "Project-specific tools, configs, docs, tests, assets, and artifacts created after bootstrap belong inside the generated project unless they are promoted as shared capabilities.",
+      "reason": "This keeps each coding project isolated while still allowing reusable tools to live under _tools.",
+      "applies_to": [
+        "blueprints.project_specific_home",
+        "blueprints.boundary_notes"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "blueprints.id",
+      "meaning": "Stable command-line ID for selecting the blueprint.",
+      "required": true
+    },
+    {
+      "field": "blueprints.label",
+      "meaning": "Human-readable blueprint name.",
+      "required": true
+    },
+    {
+      "field": "blueprints.registry_type",
+      "meaning": "Project type written to _ops/projects/registry.json when --register is used.",
+      "required": true
+    },
+    {
+      "field": "blueprints.official_docs",
+      "meaning": "Official docs or standards that must be rechecked before implementation work.",
+      "required": true
+    },
+    {
+      "field": "blueprints.directories",
+      "meaning": "Project-local directories created for this stack.",
+      "required": true
+    },
+    {
+      "field": "blueprints.files",
+      "meaning": "Minimal stack-specific starter files rendered with project variables.",
+      "required": true
+    },
+    {
+      "field": "blueprints.project_specific_home",
+      "meaning": "Durable top-level folders to register for root project visibility.",
+      "required": true
+    }
+  ],
+  "common_directories": [
+    "artifacts",
+    "configs",
+    "docs",
+    "docs/architecture",
+    "docs/decisions",
+    "docs/requirements",
+    "docs/research",
+    "specs",
+    "src",
+    "tests",
+    "tools"
+  ],
+  "common_project_specific_home": [
+    "{{project_name}}/artifacts/",
+    "{{project_name}}/configs/",
+    "{{project_name}}/docs/",
+    "{{project_name}}/specs/",
+    "{{project_name}}/src/",
+    "{{project_name}}/tests/",
+    "{{project_name}}/tools/"
+  ],
+  "common_shared_dependencies": [
+    "_ops/",
+    "_history/",
+    "_requirements/",
+    "_specs/",
+    "_tools/coding-project-bootstrap/",
+    "agent-platform/configs/research/coding-research-profile.json"
+  ],
+  "common_boundary_notes": [
+    "Keep project-specific source, docs, tests, configs, artifacts, and helper tools inside this project folder.",
+    "Use shared workspace folders only for reusable capabilities that serve multiple projects.",
+    "Before source-code implementation, run coding research for the selected stack and record language, architecture, folder, and official-doc decisions."
+  ],
+  "blueprints": [
+    {
+      "id": "generic",
+      "label": "Generic Coding Project",
+      "registry_type": "coding-project",
+      "purpose_template": "General coding project for {{project_title}}.",
+      "scope_template": "Project-local source, tests, docs, specs, configs, tools, and artifacts for {{project_title}}.",
+      "technology_stack": [
+        "generic"
+      ],
+      "official_docs": [
+        "Select and record official technology documentation during coding research."
+      ],
+      "directories": [],
+      "files": [],
+      "project_specific_home": []
+    },
+    {
+      "id": "python-agent",
+      "label": "Python Agent Project",
+      "registry_type": "python-agent-project",
+      "purpose_template": "Python-first agent project for {{project_title}}.",
+      "scope_template": "Project-local Python agent source, tests, docs, specs, configs, tools, and artifacts.",
+      "technology_stack": [
+        "Python",
+        "unittest",
+        "agent workflow"
+      ],
+      "official_docs": [
+        "https://docs.python.org/3/",
+        "https://packaging.python.org/en/latest/"
+      ],
+      "directories": [
+        "src/{{package_name}}",
+        "configs/agents"
+      ],
+      "files": [
+        {
+          "path": "pyproject.toml",
+          "content": [
+            "[project]",
+            "name = \"{{project_name}}\"",
+            "version = \"0.1.0\"",
+            "description = \"Python agent project for {{project_title}}.\"",
+            "requires-python = \">=3.11\"",
+            "dependencies = []",
+            "",
+            "[tool.setuptools.packages.find]",
+            "where = [\"src\"]",
+            "",
+            "[build-system]",
+            "requires = [\"setuptools>=68\"]",
+            "build-backend = \"setuptools.build_meta\""
+          ]
+        },
+        {
+          "path": "src/{{package_name}}/__init__.py",
+          "content": [
+            "\"\"\"{{project_title}} agent package.\"\"\"",
+            "",
+            "__all__ = []"
+          ]
+        },
+        {
+          "path": "tests/test_smoke.py",
+          "content": [
+            "from __future__ import annotations",
+            "",
+            "",
+            "def test_smoke() -> None:",
+            "    assert True"
+          ]
+        }
+      ],
+      "project_specific_home": [
+        "{{project_name}}/configs/agents/"
+      ]
+    },
+    {
+      "id": "python-cli",
+      "label": "Python CLI Project",
+      "registry_type": "python-cli-project",
+      "purpose_template": "Python CLI project for {{project_title}}.",
+      "scope_template": "Project-local Python CLI source, tests, docs, specs, configs, tools, and artifacts.",
+      "technology_stack": [
+        "Python",
+        "argparse",
+        "unittest"
+      ],
+      "official_docs": [
+        "https://docs.python.org/3/library/argparse.html",
+        "https://packaging.python.org/en/latest/"
+      ],
+      "directories": [
+        "src/{{package_name}}"
+      ],
+      "files": [
+        {
+          "path": "pyproject.toml",
+          "content": [
+            "[project]",
+            "name = \"{{project_name}}\"",
+            "version = \"0.1.0\"",
+            "description = \"Python CLI project for {{project_title}}.\"",
+            "requires-python = \">=3.11\"",
+            "dependencies = []",
+            "",
+            "[project.scripts]",
+            "{{project_name}} = \"{{package_name}}.cli:main\"",
+            "",
+            "[tool.setuptools.packages.find]",
+            "where = [\"src\"]",
+            "",
+            "[build-system]",
+            "requires = [\"setuptools>=68\"]",
+            "build-backend = \"setuptools.build_meta\""
+          ]
+        },
+        {
+          "path": "src/{{package_name}}/__init__.py",
+          "content": [
+            "\"\"\"{{project_title}} CLI package.\"\"\""
+          ]
+        },
+        {
+          "path": "src/{{package_name}}/cli.py",
+          "content": [
+            "from __future__ import annotations",
+            "",
+            "import argparse",
+            "",
+            "",
+            "def build_parser() -> argparse.ArgumentParser:",
+            "    parser = argparse.ArgumentParser(description=\"{{project_title}} CLI\")",
+            "    parser.add_argument(\"--version\", action=\"store_true\", help=\"print version and exit\")",
+            "    return parser",
+            "",
+            "",
+            "def main(argv: list[str] | None = None) -> int:",
+            "    parser = build_parser()",
+            "    args = parser.parse_args(argv)",
+            "    if args.version:",
+            "        print(\"0.1.0\")",
+            "    return 0",
+            "",
+            "",
+            "if __name__ == \"__main__\":",
+            "    raise SystemExit(main())"
+          ]
+        },
+        {
+          "path": "tests/test_cli.py",
+          "content": [
+            "from __future__ import annotations",
+            "",
+            "from {{package_name}}.cli import main",
+            "",
+            "",
+            "def test_cli_smoke() -> None:",
+            "    assert main([]) == 0"
+          ]
+        }
+      ],
+      "project_specific_home": []
+    },
+    {
+      "id": "next-app",
+      "label": "Next.js App Project",
+      "registry_type": "nextjs-app-project",
+      "purpose_template": "Next.js app project for {{project_title}}.",
+      "scope_template": "Project-local Next.js app UI, scripts, tests, docs, specs, configs, and artifacts.",
+      "technology_stack": [
+        "Node.js",
+        "Next.js",
+        "React",
+        "TypeScript"
+      ],
+      "official_docs": [
+        "https://nextjs.org/docs",
+        "https://react.dev/reference/react",
+        "https://www.typescriptlang.org/docs/"
+      ],
+      "directories": [
+        "app",
+        "components",
+        "lib",
+        "public",
+        "scripts"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "content": [
+            "{",
+            "  \"name\": \"{{project_name}}\",",
+            "  \"version\": \"0.1.0\",",
+            "  \"private\": true,",
+            "  \"scripts\": {",
+            "    \"dev\": \"next dev\",",
+            "    \"build\": \"next build\",",
+            "    \"check\": \"tsc --noEmit\",",
+            "    \"test\": \"node --test\"",
+            "  },",
+            "  \"dependencies\": {},",
+            "  \"devDependencies\": {}",
+            "}"
+          ]
+        },
+        {
+          "path": "app/.gitkeep",
+          "content": []
+        },
+        {
+          "path": "components/.gitkeep",
+          "content": []
+        },
+        {
+          "path": "lib/.gitkeep",
+          "content": []
+        },
+        {
+          "path": "public/.gitkeep",
+          "content": []
+        }
+      ],
+      "project_specific_home": [
+        "{{project_name}}/app/",
+        "{{project_name}}/components/",
+        "{{project_name}}/lib/",
+        "{{project_name}}/public/",
+        "{{project_name}}/scripts/"
+      ]
+    },
+    {
+      "id": "react-vite",
+      "label": "React Vite App Project",
+      "registry_type": "react-vite-project",
+      "purpose_template": "React/Vite app project for {{project_title}}.",
+      "scope_template": "Project-local React/Vite UI, tests, docs, specs, configs, scripts, and artifacts.",
+      "technology_stack": [
+        "Node.js",
+        "React",
+        "Vite",
+        "TypeScript"
+      ],
+      "official_docs": [
+        "https://vite.dev/guide/",
+        "https://react.dev/reference/react",
+        "https://www.typescriptlang.org/docs/"
+      ],
+      "directories": [
+        "public"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "content": [
+            "{",
+            "  \"name\": \"{{project_name}}\",",
+            "  \"version\": \"0.1.0\",",
+            "  \"private\": true,",
+            "  \"type\": \"module\",",
+            "  \"scripts\": {",
+            "    \"dev\": \"vite\",",
+            "    \"build\": \"tsc -b && vite build\",",
+            "    \"check\": \"tsc --noEmit\",",
+            "    \"test\": \"node --test\"",
+            "  },",
+            "  \"dependencies\": {},",
+            "  \"devDependencies\": {}",
+            "}"
+          ]
+        },
+        {
+          "path": "index.html",
+          "content": [
+            "<!doctype html>",
+            "<html lang=\"en\">",
+            "  <head>",
+            "    <meta charset=\"UTF-8\" />",
+            "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />",
+            "    <title>{{project_title}}</title>",
+            "  </head>",
+            "  <body>",
+            "    <div id=\"root\"></div>",
+            "    <script type=\"module\" src=\"/src/main.tsx\"></script>",
+            "  </body>",
+            "</html>"
+          ]
+        },
+        {
+          "path": "src/main.tsx",
+          "content": [
+            "console.log(\"{{project_title}}\");"
+          ]
+        }
+      ],
+      "project_specific_home": [
+        "{{project_name}}/public/"
+      ]
+    },
+    {
+      "id": "spring-boot",
+      "label": "Java Spring Boot Project",
+      "registry_type": "spring-boot-project",
+      "purpose_template": "Java Spring Boot project for {{project_title}}.",
+      "scope_template": "Project-local Spring Boot source, tests, docs, specs, configs, tools, and artifacts.",
+      "technology_stack": [
+        "Java",
+        "Spring Boot",
+        "Maven"
+      ],
+      "official_docs": [
+        "https://spring.io/projects/spring-boot",
+        "https://docs.spring.io/spring-boot/",
+        "https://maven.apache.org/guides/"
+      ],
+      "directories": [
+        "src/main/java/{{java_package_path}}",
+        "src/main/resources",
+        "src/test/java/{{java_package_path}}"
+      ],
+      "files": [
+        {
+          "path": "pom.xml",
+          "content": [
+            "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"",
+            "  xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">",
+            "  <modelVersion>4.0.0</modelVersion>",
+            "  <groupId>local.workspace</groupId>",
+            "  <artifactId>{{project_name}}</artifactId>",
+            "  <version>0.1.0-SNAPSHOT</version>",
+            "  <name>{{project_title}}</name>",
+            "  <description>Spring Boot project scaffold. Confirm Spring Boot version during coding research before adding dependencies.</description>",
+            "</project>"
+          ]
+        }
+      ],
+      "project_specific_home": []
+    },
+    {
+      "id": "c-library",
+      "label": "C Library Project",
+      "registry_type": "c-library-project",
+      "purpose_template": "C library or systems project for {{project_title}}.",
+      "scope_template": "Project-local C source, headers, tests, docs, specs, configs, tools, and artifacts.",
+      "technology_stack": [
+        "C",
+        "Make",
+        "system tests"
+      ],
+      "official_docs": [
+        "https://www.open-std.org/jtc1/sc22/wg14/",
+        "https://www.gnu.org/software/make/manual/make.html"
+      ],
+      "directories": [
+        "include/{{package_name}}"
+      ],
+      "files": [
+        {
+          "path": "Makefile",
+          "content": [
+            "CC ?= cc",
+            "CFLAGS ?= -Wall -Wextra -Werror -std=c17 -Iinclude",
+            "",
+            ".PHONY: test clean",
+            "",
+            "test:",
+            "\t$(CC) $(CFLAGS) tests/test_smoke.c -o artifacts/test_smoke",
+            "\t./artifacts/test_smoke",
+            "",
+            "clean:",
+            "\trm -f artifacts/test_smoke"
+          ]
+        },
+        {
+          "path": "tests/test_smoke.c",
+          "content": [
+            "#include <assert.h>",
+            "",
+            "int main(void) {",
+            "    assert(1);",
+            "    return 0;",
+            "}"
+          ]
+        }
+      ],
+      "project_specific_home": [
+        "{{project_name}}/include/"
+      ]
+    }
+  ]
+}

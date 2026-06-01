@@ -30,6 +30,7 @@ _tools/tool-name/
 - `workspace-health/`: run baseline workspace audits and project/tool tests from one command, with category filters and JSON output for automation.
 - `task-board/`: generate coordination boards.
 - `source-collector/`: normalize, score, and report broad web/source research bundles.
+- `coding-project-bootstrap/`: plan and create technology-aware starter structures for new coding projects with dry-run-first safety.
 - `naming-audit/`: validate enforceable naming conventions for projects, tools, docs, specs, Python source, and configs.
 - `structure-audit/`: validate root folders against project registry, reserved operational folders, and local-only folder rules.
 

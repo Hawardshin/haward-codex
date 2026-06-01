@@ -43,6 +43,7 @@ def build_checks(root: Path, include_build: bool = False) -> list[Check]:
                         "configs/workflows/work-mode-registry.json",
                         "../_ops/installations/registry.json",
                         "../_ops/naming/naming-policy.json",
+                        "../_tools/coding-project-bootstrap/configs/blueprints.json",
                     ),
                     {"PYTHONPATH": "src"},
                 ),

@@ -16,6 +16,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | 새 작업을 시작한다 | [10-start-work.md](10-start-work.md) |
 | 새 프로젝트를 만든다 | [20-create-project.md](20-create-project.md) |
 | 작업이나 관심사의 프로젝트 소유 경계를 정한다 | [25-scope-project-boundary.md](25-scope-project-boundary.md) |
+| 새 코딩 프로젝트나 프로젝트 내부 코딩 모듈을 기술별 구조로 준비한다 | [27-bootstrap-coding-project.md](27-bootstrap-coding-project.md) |
 | Python 에이전트나 플랫폼 기능을 만든다 | [30-build-agent.md](30-build-agent.md) |
 | 사용자 요청을 요구사항으로 정의/수정/검토하고 구현 기준으로 삼는다 | [35-manage-requirements.md](35-manage-requirements.md) |
 | 요구사항을 spec, plan, tasks, validation, traceability로 바꾼 뒤 구현한다 | [36-manage-spec.md](36-manage-spec.md) |

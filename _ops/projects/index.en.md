@@ -13,6 +13,7 @@ AI assistant runtime adapters: [../assistant-runtimes/adapter-registry.json](../
 ## Operating Rules
 
 - If a new interest has an independent purpose and artifacts, create a new root project.
+- For new coding projects, first inspect a dry-run plan with `_tools/coding-project-bootstrap/`, and use `--register` only for root projects.
 - Keep project-specific files inside the owning project folder.
 - Promote to `_tools/`, `_templates/`, `_docs/`, or `_ops/` only when reuse crosses projects.
 - `_private/` and `outputs/` are local-only ignored folders, not projects or knowledge-base sources.

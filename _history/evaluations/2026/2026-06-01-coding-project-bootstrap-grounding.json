@@ -1,0 +1,140 @@
+{
+  "task": "Ground factual claims for the coding project bootstrap structure.",
+  "output_summary": "A new coding-project-bootstrap tool, blueprint config, workflow, prompt, memory anchor, and history/spec records were added so future coding projects can be planned and created with technology-aware dry-run-first scaffolding.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "tool_source",
+      "source": "_tools/coding-project-bootstrap/src/coding_project_bootstrap.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked Python CLI implementing list, plan, and create behavior."
+    },
+    {
+      "evidence_id": "blueprints_config",
+      "source": "_tools/coding-project-bootstrap/configs/blueprints.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked self-documenting blueprint config."
+    },
+    {
+      "evidence_id": "tool_tests",
+      "source": "python3 -m unittest discover -s _tools/coding-project-bootstrap/tests",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output showed 5 tests passed."
+    },
+    {
+      "evidence_id": "list_command",
+      "source": "python3 _tools/coding-project-bootstrap/src/coding_project_bootstrap.py list",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output listed 7 blueprints."
+    },
+    {
+      "evidence_id": "root_plan_command",
+      "source": "python3 _tools/coding-project-bootstrap/src/coding_project_bootstrap.py plan sample-agent --blueprint python-agent --register",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output included a root target path, generated files, and a registry_entry."
+    },
+    {
+      "evidence_id": "nested_plan_command",
+      "source": "python3 _tools/coding-project-bootstrap/src/coding_project_bootstrap.py plan my-helper --blueprint python-cli --target-dir existing-project/tools/my-helper",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output targeted a nested path and showed registry_entry null."
+    },
+    {
+      "evidence_id": "workflow_prompt",
+      "source": "_ops/workflows/27-bootstrap-coding-project.md; _ops/prompts/27-bootstrap-coding-project.md; _ops/prompts/00-router.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked workflow, prompt, and router link."
+    },
+    {
+      "evidence_id": "memory_bootstrap",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output returned ready_to_bootstrap and included coding_project_bootstrap anchors."
+    },
+    {
+      "evidence_id": "config_contract",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ... ../_tools/coding-project-bootstrap/configs/blueprints.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output returned self_documenting for the blueprint config."
+    },
+    {
+      "evidence_id": "workspace_health",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --include-build",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Workspace health command passed 20 checks."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "A reusable coding-project-bootstrap CLI was added under _tools.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["tool_source", "tool_tests"],
+      "verification_steps": ["Read the tool source and ran its unit tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The blueprint config defines 7 supported blueprints: generic, python-agent, python-cli, next-app, react-vite, spring-boot, and c-library.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["blueprints_config", "list_command"],
+      "verification_steps": ["Read blueprints.json and ran the list command."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The tool can produce a dry-run root project plan with a registry entry when --register is used.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["root_plan_command"],
+      "verification_steps": ["Ran the root project plan command with --register."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The tool can produce a nested target plan without a registry entry.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["nested_plan_command"],
+      "verification_steps": ["Ran the nested target plan command."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The workflow, prompt router, and memory bootstrap were connected to the new bootstrap flow.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["workflow_prompt", "memory_bootstrap"],
+      "verification_steps": ["Checked workflow/prompt files and ran memory bootstrap check."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The new blueprint config is self-documenting and the full workspace-health check passed.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["config_contract", "workspace_health"],
+      "verification_steps": ["Ran config contract and workspace-health checks."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Generated starter files are intentionally minimal. Real implementation still needs stack-specific coding research and installation review."
+  ],
+  "limitation_notes": [
+    "No actual product project was created in this work.",
+    "No dependencies were installed."
+  ]
+}

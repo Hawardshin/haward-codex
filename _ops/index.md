@@ -54,6 +54,7 @@
 - 속도 개선을 위해 작업을 병렬 lane으로 나눌 때: [_ops/workflows/52-parallel-work-planning.md](workflows/52-parallel-work-planning.md), [_ops/prompts/82-parallel-work-planning.md](prompts/82-parallel-work-planning.md), [parallel-work-planner-agent](../agent-platform/docs/parallel-work-planner-agent.ko.md)
 - 운영 철학과 컨셉 재검토를 볼 때: [_philosophy/agent-operating-philosophy.ko.md](../_philosophy/agent-operating-philosophy.ko.md), [_philosophy/platform-concept-review.ko.md](../_philosophy/platform-concept-review.ko.md)
 - 프로젝트 경계를 확인할 때: [_ops/projects/index.ko.md](projects/index.ko.md), [_docs/policies/project-boundary-policy.ko.md](../_docs/policies/project-boundary-policy.ko.md)
+- 새 코딩 프로젝트를 기술별 구조로 준비할 때: [_ops/workflows/27-bootstrap-coding-project.md](workflows/27-bootstrap-coding-project.md), [_ops/prompts/27-bootstrap-coding-project.md](prompts/27-bootstrap-coding-project.md), [_tools/coding-project-bootstrap/README.ko.md](../_tools/coding-project-bootstrap/README.ko.md)
 - root folder class와 local-only 규칙을 확인할 때: [_ops/projects/root-structure-policy.json](projects/root-structure-policy.json), [_tools/structure-audit/README.ko.md](../_tools/structure-audit/README.ko.md)
 - 웹 검색 기반 인사이트로 계획할 때: [_ops/workflows/55-research-insight-planning.md](workflows/55-research-insight-planning.md)
 - 코딩 조사 결과를 구현으로 넘기기 전에: [_ops/workflows/56-coding-research.md](workflows/56-coding-research.md), [agent-platform/docs/coding-research-agent.ko.md](../agent-platform/docs/coding-research-agent.ko.md)

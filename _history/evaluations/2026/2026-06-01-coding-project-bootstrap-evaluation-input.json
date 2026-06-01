@@ -1,0 +1,115 @@
+{
+  "initial_instruction": "코딩 신규 프로젝트를 넣었을 때도 할 수 있는 구조 만들기 해당 작업 공간에서 다양한 기술들을 기반으로 이어갈 수 있는 구조 만들기 현재 위치에서 특정위치에 그것을 가져오고 사용하는 구조. 더 효율적인 방법이 있으면 그러한 방식을 고려해서하도록 하기. 좋은 아이디어있으면 그 방식대로 해주고 편리하게 사용자가 쉽게 쓸 수 있는 구조 만들어줘. 이건 툴이자 프로젝트 다양한 것들을 할 때 각자 분리가 되긴 해야하니까 괜히 낭비할까봐 걱정인거야. 사용법은 역시 잘 넣어주고. 지금 구축한 관리 플랫폼에도 잘 반영되도록 해주고",
+  "result_summary": "Added a dry-run-first coding-project-bootstrap tool with technology-aware blueprints, optional root project registry updates, nested target support, generated project context files, workflow/prompt/router/memory integration, history/spec/requirements records, and Workspace Monitor snapshot updates.",
+  "work_mode": "standard",
+  "changed_files": [
+    "_tools/coding-project-bootstrap/",
+    "_tools/workspace-health/src/workspace_health/checks.py",
+    "_tools/README.md",
+    "_ops/workflows/27-bootstrap-coding-project.md",
+    "_ops/workflows/25-project-boundary-management.md",
+    "_ops/prompts/27-bootstrap-coding-project.md",
+    "_ops/prompts/20-create-project.md",
+    "_ops/prompts/00-router.md",
+    "_ops/index.md",
+    "_ops/projects/index.ko.md",
+    "_ops/projects/index.en.md",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-01-coding-project-bootstrap.ko.md",
+    "_requirements/changes/2026-06-01-coding-project-bootstrap.en.md",
+    "_requirements/reviews/2026-06-01-coding-project-bootstrap.ko.md",
+    "_requirements/reviews/2026-06-01-coding-project-bootstrap.en.md",
+    "_specs/workspace-platform/2026-06-01-coding-project-bootstrap/",
+    "_history/web-searches/2026/2026-06-01-coding-project-bootstrap.ko.md",
+    "_history/web-searches/2026/2026-06-01-coding-project-bootstrap.en.md",
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/user-requests/2026/2026-06-01.en.md",
+    "_history/request-traces/2026/2026-06-01.ko.md",
+    "_history/request-traces/2026/2026-06-01.en.md",
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.en.md",
+    "_history/2026/2026-06-01.md",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "_history/evaluations/2026/2026-06-01-coding-project-bootstrap-grounding.json",
+    "_history/evaluations/2026/2026-06-01-coding-project-bootstrap-evaluation-input.json"
+  ],
+  "verification": [
+    "python3 -m unittest discover -s _tools/coding-project-bootstrap/tests: 5 tests passed",
+    "python3 _tools/coding-project-bootstrap/src/coding_project_bootstrap.py list: listed 7 blueprints",
+    "python3 _tools/coding-project-bootstrap/src/coding_project_bootstrap.py plan sample-agent --blueprint python-agent --register: dry-run plan included registry_entry",
+    "python3 _tools/coding-project-bootstrap/src/coding_project_bootstrap.py plan my-helper --blueprint python-cli --target-dir existing-project/tools/my-helper: dry-run plan had registry_entry null",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json ../_ops/naming/naming-policy.json ../_tools/coding-project-bootstrap/configs/blueprints.json: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "python3 _tools/workspace-index/src/workspace_index.py: repository and prompt maps regenerated",
+    "python3 _tools/task-board/src/task_board.py: coordination boards regenerated",
+    "python3 _tools/workspace-health/src/workspace_health.py --include-build: 20 checks passed"
+  ],
+  "references_checked": [
+    "Backstage Software Templates: https://backstage.io/docs/features/software-templates",
+    "Backstage Writing Templates: https://backstage.io/docs/features/software-templates/writing-templates/",
+    "Copier generating projects: https://copier.readthedocs.io/en/stable/generating/",
+    "Nx Workspace Generators: https://nx.dev/docs/reference/workspace/generators",
+    "Backstage software-templates GitHub: https://github.com/backstage/software-templates",
+    "_ops/workflows/25-project-boundary-management.md",
+    "_ops/projects/registry.json",
+    "agent-platform/configs/research/coding-research-profile.json",
+    "_docs/policies/open-source-installation-policy.ko.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-coding-project-bootstrap-grounding.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-coding-project-bootstrap-grounding.json: ready_to_publish, requires_rework=false"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-coding-project-bootstrap.ko.md",
+    "_tools/coding-project-bootstrap/configs/blueprints.json",
+    "_specs/workspace-platform/2026-06-01-coding-project-bootstrap/traceability.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_specs/workspace-platform/2026-06-01-coding-project-bootstrap/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-coding-project-bootstrap/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-coding-project-bootstrap/tasks.ko.md",
+    "_history/web-searches/2026/2026-06-01-coding-project-bootstrap.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-coding-project-bootstrap.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-01-coding-project-bootstrap.ko.md",
+    "_requirements/reviews/2026-06-01-coding-project-bootstrap.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-01-coding-project-bootstrap/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-coding-project-bootstrap/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-coding-project-bootstrap/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-01-coding-project-bootstrap/validation.ko.md",
+    "_specs/workspace-platform/2026-06-01-coding-project-bootstrap/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Add a guided interactive mode later if the user wants prompts instead of CLI flags.",
+    "Add stack-specific post-bootstrap checklist generation after more real projects are created.",
+    "Add a Workspace Monitor UI panel that can show bootstrap commands directly."
+  ]
+}
