@@ -1,0 +1,37 @@
+{
+  "request_id": "UR-2026-06-02-028",
+  "selected_work_mode": "governance",
+  "selected_at": "2026-06-02",
+  "reason": "The request changes durable platform behavior, creates a reusable agent, adds an orchestration registry, updates requirements, memory bootstrap, prompts, workflows, and persistent instructions.",
+  "rejected_modes": [
+    {
+      "mode": "quick",
+      "reason": "Too durable and cross-cutting for a lightweight answer."
+    },
+    {
+      "mode": "standard",
+      "reason": "Reusable platform rule and agent creation need stricter governance targets."
+    },
+    {
+      "mode": "research",
+      "reason": "External research is needed, but the main output is a governance capability."
+    },
+    {
+      "mode": "ship_first",
+      "reason": "The user asked for platform structure, not a fast partial feature with deferred governance."
+    }
+  ],
+  "required_targets": [
+    "web_search_record_targets",
+    "user_request_summary_targets",
+    "requirements_targets",
+    "spec_targets",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "mode_selection_record_targets",
+    "omission_check_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "name": "capability-promotion-agent",
+  "description": "Detects repeated work, bottlenecks, omissions, validation failures, and manual rework, then promotes them into the smallest reusable prompt, workflow, template, tool, skill, agent, or project feature through a bounded and auditable black-box-style process.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "repository-docs",
+    "web-search",
+    "agent-platform:check-config-contract",
+    "agent-platform:inspect-agent",
+    "agent-platform:list-agents",
+    "agent-platform:check-agent-orchestration",
+    "agent-platform:evaluate-work",
+    "agent-platform:check-omissions",
+    "agent-platform:check-grounding"
+  ],
+  "metadata": {
+    "status": "active",
+    "owner": "personal",
+    "blueprint": "governance_agent",
+    "orchestration_pattern": "single_agent",
+    "trigger": "Use when work patterns, slow phases, repeated prompts, recurring omissions, recurring validation failures, manual rework, or user requests imply that the platform should add or improve a reusable capability automatically.",
+    "input_schema": "agent-platform/configs/orchestration/capability-promotion-registry.json",
+    "output_contract": "Capability promotion candidate with observed signals, source records, proposed capability type, rejected lighter options, expected repetition/time reduction, risk tier, human checkpoint requirement, validation plan, rollback or disablement plan, implementation targets, evaluation target, commit and push trace.",
+    "work_mode_registry": "agent-platform/configs/workflows/work-mode-registry.json",
+    "policy": "Treat autonomous feature addition as bounded black-box automation. The user-facing experience may be automatic, but internal records must remain inspectable. Prefer the smallest useful asset. Draft candidates from evidence, check existing assets first, classify risk, and require human checkpoint before destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible work. Applied promotions must be validated, documented, evaluated, committed, and pushed.",
+    "promotion_inputs": [
+      "_history/work-timings/",
+      "_history/evaluations/",
+      "_history/request-traces/",
+      "_history/web-searches/",
+      "_ops/coordination/status.json",
+      "_ops/backlog/",
+      "workspace-monitor/src/generated/workspace-snapshot.json"
+    ],
+    "capability_type_order": [
+      "prompt",
+      "workflow",
+      "template",
+      "tool",
+      "skill",
+      "agent",
+      "project_feature"
+    ],
+    "risk_rules": [
+      "low-risk documentation, prompt, workflow, or template improvements can be drafted and applied when validation is clear.",
+      "medium-risk local tools, read-only monitor features, agent specs, or config rules require governance records and validation.",
+      "high-risk installs, secrets, permissions, paid services, destructive changes, public deployment, security/privacy-sensitive work, or irreversible migrations require human checkpoint and rollback plan before execution."
+    ],
+    "docs_targets": [
+      "agent-platform/docs/capability-promotion-agent.ko.md",
+      "agent-platform/docs/capability-promotion-agent.en.md",
+      "_docs/policies/capability-promotion-policy.ko.md",
+      "_docs/policies/capability-promotion-policy.en.md"
+    ],
+    "validation_commands": [
+      "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/capability-promotion-agent.json",
+      "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents",
+      "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/orchestration/capability-promotion-registry.json",
+      "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json"
+    ]
+  }
+}

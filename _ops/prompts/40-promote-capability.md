@@ -1,6 +1,6 @@
 # Promote Capability Prompt
 
-Use when: 반복되는 작업을 스킬, 도구, 템플릿, HTML 산출물 패턴으로 승격해야 할 때.
+Use when: 반복되는 작업을 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트, 프로젝트 기능으로 승격해야 할 때.
 
 ## Common Contract
 
@@ -9,8 +9,12 @@ Use when: 반복되는 작업을 스킬, 도구, 템플릿, HTML 산출물 패�
 ## Prompt
 
 ```text
-Classify the repeated problem as structure, execution, or judgment.
-Use _templates/ for repeated structure, _tools/ for repeated execution, and _skills/ or _ops/prompts/ for repeated judgment.
+Read agent-platform/configs/orchestration/capability-promotion-registry.json before deciding what to create.
+Classify the repeated problem as framing, sequence, structure, execution, domain behavior, agent role, or product surface.
+Use _ops/prompts/ for repeated framing, _ops/workflows/ for repeated sequence, _templates/ for repeated structure, _tools/ for repeated deterministic execution, _skills/ for repeated Codex behavior, agent-platform/configs/agents/ for reusable agents, and the owning project for project features.
+Prefer the smallest useful capability type before creating a heavier asset.
+Record observed signals, existing assets checked, rejected lighter options, expected repetition/time reduction, risk tier, validation plan, and rollback or disablement path.
+Require human checkpoint before destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes.
 When promoting to a custom Codex skill, run skill-lifecycle-agent and follow _ops/workflows/37-skill-lifecycle.md.
 Document the capability with purpose, when to use it, inputs, outputs, and verification.
 Refresh _ops/maps/ when needed and record the promotion reason in history.
@@ -19,3 +23,5 @@ Refresh _ops/maps/ when needed and record the promotion reason in history.
 ## Reference
 
 - [_docs/governance/capability-governance.md](../../_docs/governance/capability-governance.md)
+- [agent-platform/configs/orchestration/capability-promotion-registry.json](../../agent-platform/configs/orchestration/capability-promotion-registry.json)
+- [_ops/workflows/75-capability-promotion.md](../workflows/75-capability-promotion.md)

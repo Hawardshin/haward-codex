@@ -1,0 +1,188 @@
+{
+  "task": "Add bounded black-box capability promotion structure.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and record reusable search evidence.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-capability-promotion-agent.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "requirement",
+      "description": "Convert the durable user instruction into a reviewed requirement.",
+      "source": "governance work mode",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_requirements/changes/2026-06-02-capability-promotion-agent.ko.md",
+        "_requirements/reviews/2026-06-02-capability-promotion-agent.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "spec",
+      "description": "Create spec-driven artifacts for the new reusable platform capability.",
+      "source": "REQ-WS-070",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_specs/workspace-platform/2026-06-02-capability-promotion-agent/spec.ko.md",
+        "_specs/workspace-platform/2026-06-02-capability-promotion-agent/plan.ko.md",
+        "_specs/workspace-platform/2026-06-02-capability-promotion-agent/tasks.ko.md",
+        "_specs/workspace-platform/2026-06-02-capability-promotion-agent/validation.ko.md",
+        "_specs/workspace-platform/2026-06-02-capability-promotion-agent/traceability.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "agent-and-registry",
+      "description": "Create agent spec and self-documenting registry for capability promotion.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/agents/capability-promotion-agent.json",
+        "agent-platform/configs/orchestration/capability-promotion-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "bounded-black-box-policy",
+      "description": "Ensure the design is not opaque or unsafe, and includes risk gates and human checkpoints.",
+      "source": "user request and safety requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_docs/policies/capability-promotion-policy.ko.md",
+        "agent-platform/configs/orchestration/capability-promotion-registry.json",
+        "_docs/instructions/persistent-instructions.ko.md",
+        "AGENTS.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "navigation",
+      "description": "Make the new workflow and prompt discoverable.",
+      "source": "operations navigation rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_ops/workflows/75-capability-promotion.md",
+        "_ops/prompts/105-capability-promotion.md",
+        "_ops/prompts/00-router.md",
+        "_ops/index.md",
+        "_ops/maps/prompt-map.md",
+        "_ops/maps/repository-map.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "memory-anchor",
+      "description": "Keep the new durable rule discoverable through memory bootstrap.",
+      "source": "memory bootstrap rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "history-and-trace",
+      "description": "Record request summary, request trace, plan evidence, source provenance, and work summary.",
+      "source": "history rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_history/request-traces/2026/2026-06-02-capability-promotion-agent.ko.md",
+        "_history/source-provenance/2026/2026-06-02-capability-promotion-agent.ko.md",
+        "_history/plan-evidence/2026/2026-06-02-capability-promotion-agent.ko.md",
+        "_history/work-summaries/2026/2026-06-02.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/orchestration/capability-promotion-registry.json",
+      "purpose": "Source of truth for capability promotion",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/agents/capability-promotion-agent.json",
+      "purpose": "Reusable agent spec",
+      "required": true
+    },
+    {
+      "path": "_ops/workflows/75-capability-promotion.md",
+      "purpose": "Workflow",
+      "required": true
+    },
+    {
+      "path": "_ops/prompts/105-capability-promotion.md",
+      "purpose": "Prompt",
+      "required": true
+    },
+    {
+      "path": "_docs/policies/capability-promotion-policy.ko.md",
+      "purpose": "Policy",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "json-parse",
+      "description": "New and modified JSON files parse successfully.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 -m json.tool on capability promotion registry, agent spec, memory bootstrap, and agent orchestration registry passed."
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "agent-inspect",
+      "description": "New agent spec is inspectable.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/capability-promotion-agent.json passed."
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "config-contract",
+      "description": "New registry satisfies self-documenting config contract.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/orchestration/capability-promotion-registry.json passed."
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "memory-bootstrap",
+      "description": "Memory bootstrap sees the new anchor.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json passed."
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "No background worker or UI candidate board was implemented; this was intentionally out of scope and documented in spec."
+  ],
+  "notes": [
+    "This omission check covers the governance and artifact work for REQ-WS-070."
+  ]
+}

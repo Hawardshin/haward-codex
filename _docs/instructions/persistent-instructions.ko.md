@@ -7,6 +7,8 @@
 - 이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다.
 - 플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다.
 - 자동화는 인간 판단 지점, 검증 기준, rollback 경계를 숨기지 않는다. 자동화 후보는 실제 반복 감소와 시간 절감 효과를 작업 시간 기록, 병목 기록, evaluator 결과로 확인한다.
+- 플랫폼이 작업 중 반복, 병목, 누락, 검증 실패, 수동 재작업, 자주 쓰는 조사/프롬프트/도구 패턴을 발견하면 `capability-promotion-agent`와 `agent-platform/configs/orchestration/capability-promotion-registry.json`을 사용해 자동 기능 후보로 만들 수 있다. 이 흐름은 bounded black-box로만 허용한다. 사용자 경험은 자동 개선처럼 보일 수 있지만 내부 observation, candidate, evidence, risk, rejected lighter options, validation, rollback 또는 disablement, documentation, evaluation, commit/push trace는 감사 가능해야 한다.
+- capability promotion은 `prompt`, `workflow`, `template`, `tool`, `skill`, `agent`, `project_feature` 순서로 가장 작은 자산을 먼저 검토한다. destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, irreversible change는 human checkpoint와 rollback 계획 없이 자동 실행하지 않는다.
 - 이 저장소의 운영 원칙은 Codex에만 묶지 않고 Claude Code, Cursor, Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 재사용할 수 있게 유지한다.
 - 도구 독립형 원칙의 원본은 `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`와 `_ops/assistant-runtimes/adapter-registry.json`에 둔다.
 - 모든 에이전트는 영속 원칙을 강하게 고수한다. 원칙은 장식 문구가 아니라 실행 계약과 close-out gate이며, 속도, 돈, 낙관, 편의, 사용자 압박은 필요한 근거, 안전, 개인정보, 법, 품질, provenance, 검증, 평가를 무단 생략하는 이유가 될 수 없다.

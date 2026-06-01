@@ -15,6 +15,17 @@
 
 이 질문에 답하지 못하면 새 도구나 스킬보다 문서화, 체크리스트, 프롬프트 개선이 먼저다.
 
+## Bounded Black-Box Promotion
+
+플랫폼은 작업 중 반복, 병목, 누락, 검증 실패, 수동 재작업을 발견하면 capability 후보를 자동으로 만들 수 있다. 다만 이것은 완전한 블랙박스가 아니다.
+
+- 사용자 경험은 자동 개선처럼 보일 수 있다.
+- 내부에는 관찰 신호, 후보, 기존 자산 확인, 기각한 더 가벼운 대안, 위험도, 검증, rollback 또는 disablement, 평가, 커밋/push trace가 남아야 한다.
+- 기능 승격 순서는 `prompt`, `workflow`, `template`, `tool`, `skill`, `agent`, `project_feature`다.
+- destructive change, secret, 권한, 설치, 비용, public 배포, 보안/개인정보, irreversible migration은 human checkpoint 없이 자동 실행하지 않는다.
+
+구체적인 source of truth는 `agent-platform/configs/orchestration/capability-promotion-registry.json`과 `_ops/workflows/75-capability-promotion.md`다.
+
 ## When to Create a Skill
 
 Create or update a skill when work repeatedly needs:

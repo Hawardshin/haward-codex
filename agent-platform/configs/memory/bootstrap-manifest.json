@@ -57,6 +57,7 @@
       "The runtime language decision registry, Rust/Go/Tauri/Wails direction, or runtime language selection policy changes.",
       "The CLI adapter registry, CLI pipeline template, external command execution boundary, optional CLI dependency posture, multi-process pipe orchestration, or missing-CLI fallback policy changes.",
       "The agent orchestration registry, reusable agent blueprint contract, multi-agent orchestration pattern, or agent spec validation command changes.",
+      "The capability promotion registry, bounded black-box automation policy, self-improvement candidate contract, or automatic feature promotion risk gate changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
     ]
@@ -493,6 +494,18 @@
         "reusable agent blueprint contract",
         "agent spec validation",
         "multi-agent supervisor, router, pipeline, fan-out, merge, and handoff orchestration patterns"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "capability_promotion_registry",
+      "title": "Capability Promotion Registry",
+      "path": "agent-platform/configs/orchestration/capability-promotion-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "bounded black-box capability promotion",
+        "automatic feature candidate discovery",
+        "risk tiers, human checkpoint rules, validation, rollback, and commit/push trace requirements"
       ],
       "last_checked": "2026-06-02"
     },
@@ -1107,6 +1120,18 @@
       ]
     },
     {
+      "id": "capability_promotion_registry_must_stay_discoverable",
+      "rule": "The capability promotion registry must remain a warm memory anchor so future sessions can turn repeated work, bottlenecks, omissions, validation failures, and manual rework into bounded, auditable capability candidates.",
+      "reason": "The user asked for black-box-like self-directed feature addition while doing varied work; future agents need the autonomy limits and trace requirements before promoting capabilities.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "capability-promotion-registry",
+        "capability-promotion-agent"
+      ]
+    },
+    {
       "id": "macos_execution_profile_must_stay_discoverable",
       "rule": "The macOS execution profile must remain a warm memory anchor so future installable desktop work does not confuse local runnable prototypes with signed, hardened, notarized, and smoke-tested public macOS distribution.",
       "reason": "The user explicitly asked for a macOS-runnable structure; public macOS readiness has stronger security, signing, notarization, update, and workspace-boundary gates than local development.",
@@ -1276,6 +1301,7 @@
     "cli_adapter_registry",
     "cli_pipeline_template",
     "agent_orchestration_registry",
+    "capability_promotion_registry",
     "installation_registry"
   ],
   "required_anchor_ids": [
@@ -1337,6 +1363,7 @@
     "cli_adapter_registry",
     "cli_pipeline_template",
     "agent_orchestration_registry",
+    "capability_promotion_registry",
     "installation_registry"
   ],
   "anchors": [
@@ -1885,12 +1912,20 @@
       "load_order": 37
     },
     {
+      "id": "capability_promotion_registry",
+      "path": "agent-platform/configs/orchestration/capability-promotion-registry.json",
+      "tier": "warm",
+      "purpose": "Bounded black-box contract for turning repeated work, bottlenecks, omissions, validation failures, and manual rework into auditable reusable capability candidates.",
+      "required": true,
+      "load_order": 38
+    },
+    {
       "id": "daily_history",
       "path": "_history/2026/2026-06-01.md",
       "tier": "warm",
       "purpose": "Current dated work log and compressed context.",
       "required": true,
-      "load_order": 38
+      "load_order": 39
     },
     {
       "id": "repository_map",

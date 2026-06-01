@@ -1,0 +1,451 @@
+{
+  "schema_version": "2026-06-02",
+  "name": "capability-promotion-registry",
+  "purpose": "Defines the bounded black-box process for detecting repeated work, bottlenecks, omissions, and manual rework, then promoting them into the smallest reusable platform capability.",
+  "reader_guide": {
+    "summary": "Open this file when the platform should improve itself while work is happening. User-facing automation may feel black-box-like, but every observation, candidate, risk decision, validation, rollback path, and promotion result must remain auditable.",
+    "how_to_read": [
+      "Read platform_principle before interpreting this as full autonomy.",
+      "Use observation_sources and promotion_triggers to decide whether a recurring pattern is real.",
+      "Use capability_types to choose the smallest reusable asset.",
+      "Use risk_tiers and autonomy_limits before applying changes.",
+      "Use promotion_pipeline and required_records to close the loop with validation, evaluation, documentation, commit, and push."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-06-02",
+    "update_triggers": [
+      "The platform starts creating prompts, workflows, templates, tools, skills, agents, or project features from observed work patterns.",
+      "Repeated friction, bottleneck, omission, validation failure, or manual rework rules change.",
+      "Automatic capability promotion risk tiers or human checkpoint rules change.",
+      "A new reusable capability type is added.",
+      "A monitor, desktop app, or orchestration layer starts showing capability candidates or promotion status."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "internal_capability_governance",
+      "title": "Capability Governance",
+      "path": "_docs/governance/capability-governance.md",
+      "source_type": "internal",
+      "used_for": [
+        "smallest reusable asset decision",
+        "skill/tool/template creation boundaries"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "internal_agent_orchestration_registry",
+      "title": "Agent Orchestration Registry",
+      "path": "agent-platform/configs/orchestration/agent-orchestration-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "reusable agent spec contract",
+        "orchestration pattern and validation gates"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "internal_work_timing_policy",
+      "title": "Work Timing Policy",
+      "path": "_tools/work-timer/configs/work-timing-policy.json",
+      "source_type": "internal",
+      "used_for": [
+        "bottleneck evidence",
+        "time-saving validation"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "internal_human_decision_inbox",
+      "title": "Human Decision Inbox",
+      "path": "_ops/coordination/human-decision-inbox.json",
+      "source_type": "internal",
+      "used_for": [
+        "human checkpoint routing",
+        "interrupt and resume for risky capability decisions"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "anthropic_effective_agents",
+      "title": "Anthropic: Building Effective Agents",
+      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "source_type": "official_blog",
+      "used_for": [
+        "simple composable patterns",
+        "workflow versus agent distinction",
+        "transparency and guardrail rationale"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "openai_agents_sdk",
+      "title": "OpenAI Agents SDK Documentation",
+      "url": "https://openai.github.io/openai-agents-python/",
+      "source_type": "official_docs",
+      "used_for": [
+        "guardrails, tracing, human-in-the-loop, handoff, session, and orchestration references"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "nist_ai_rmf",
+      "title": "NIST AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "source_type": "standard_like_guidance",
+      "used_for": [
+        "risk management framing",
+        "governance and measurement posture for autonomous improvement"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "langchain_multi_agent_docs",
+      "title": "LangChain Multi-agent Documentation",
+      "url": "https://docs.langchain.com/oss/python/langchain/multi-agent",
+      "source_type": "official_docs",
+      "used_for": [
+        "multi-agent context management and specialized capability boundaries"
+      ],
+      "last_checked": "2026-06-02"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "bounded_black_box_only",
+      "rule": "The user-facing flow may feel automatic, but the platform must not hide internal observations, candidate decisions, risks, validation, rollback, or promotion records.",
+      "reason": "Autonomous self-improvement without traceability creates hallucination, maintenance, and accountability risk.",
+      "applies_to": [
+        "promotion_pipeline",
+        "required_records",
+        "observability"
+      ]
+    },
+    {
+      "id": "smallest_reusable_asset_first",
+      "rule": "Promote repeated work to the smallest useful asset before creating a heavier agent or project feature.",
+      "reason": "The platform should reduce repetitive work without creating unnecessary maintenance burden.",
+      "applies_to": [
+        "capability_types",
+        "promotion_pipeline"
+      ]
+    },
+    {
+      "id": "evidence_before_promotion",
+      "rule": "Promotion candidates need at least one concrete observation source and a predicted reduction in time, repetition, omission risk, or validation friction.",
+      "reason": "The platform should not generate features from vague preference alone.",
+      "applies_to": [
+        "promotion_triggers",
+        "candidate_contract"
+      ]
+    },
+    {
+      "id": "human_checkpoint_for_high_risk",
+      "rule": "Destructive, secret-bearing, permission-changing, install, paid, public-release, security, privacy, irreversible migration, or ownership-boundary changes require a human checkpoint before execution.",
+      "reason": "Self-improving automation must keep owner authority over high-impact actions.",
+      "applies_to": [
+        "risk_tiers",
+        "autonomy_limits"
+      ]
+    },
+    {
+      "id": "validation_and_rollback_required",
+      "rule": "Every applied capability promotion must define validation and rollback or disablement before it is marked complete.",
+      "reason": "Self-created platform capabilities should be reversible and testable.",
+      "applies_to": [
+        "required_records",
+        "promotion_pipeline"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "platform_principle",
+      "meaning": "Plain-language principle for bounded autonomous platform improvement.",
+      "required": true
+    },
+    {
+      "field": "observation_sources",
+      "meaning": "Repository records the agent can inspect to discover repeated work and bottlenecks.",
+      "required": true
+    },
+    {
+      "field": "promotion_triggers",
+      "meaning": "Signals that allow a candidate capability to be proposed.",
+      "required": true
+    },
+    {
+      "field": "capability_types",
+      "meaning": "Allowed reusable assets and their target directories and validation requirements.",
+      "required": true
+    },
+    {
+      "field": "risk_tiers",
+      "meaning": "Autonomy limits by risk level.",
+      "required": true
+    },
+    {
+      "field": "promotion_pipeline",
+      "meaning": "Ordered process for turning observations into validated reusable capabilities.",
+      "required": true
+    },
+    {
+      "field": "required_records",
+      "meaning": "Records that must exist before promotion can be considered complete.",
+      "required": true
+    },
+    {
+      "field": "autonomy_limits",
+      "meaning": "Actions the platform must not execute automatically.",
+      "required": true
+    }
+  ],
+  "platform_principle": "The platform may automate capability discovery and candidate drafting, but it must remain transparent, testable, reversible, and owner-controlled. It should feel automatic to the user only because the boring discovery and bookkeeping are handled, not because decisions become invisible.",
+  "observation_sources": [
+    {
+      "id": "work_timings",
+      "path": "_history/work-timings/",
+      "signals": [
+        "slow phases",
+        "repeated bottlenecks",
+        "manual setup time"
+      ]
+    },
+    {
+      "id": "evaluations",
+      "path": "_history/evaluations/",
+      "signals": [
+        "recurring missing targets",
+        "rework causes",
+        "grounding or omission failures"
+      ]
+    },
+    {
+      "id": "request_traces",
+      "path": "_history/request-traces/",
+      "signals": [
+        "repeated request shapes",
+        "similar artifacts created across projects",
+        "manual handoff patterns"
+      ]
+    },
+    {
+      "id": "web_search_records",
+      "path": "_history/web-searches/",
+      "signals": [
+        "repeated query ladders",
+        "frequently reused external references",
+        "source collection friction"
+      ]
+    },
+    {
+      "id": "coordination_status",
+      "path": "_ops/coordination/status.json",
+      "signals": [
+        "blocked tasks",
+        "parallel work merge friction",
+        "human checkpoint queues"
+      ]
+    },
+    {
+      "id": "workspace_monitor_snapshot",
+      "path": "workspace-monitor/src/generated/workspace-snapshot.json",
+      "signals": [
+        "project growth",
+        "agent inventory changes",
+        "history density"
+      ]
+    }
+  ],
+  "promotion_triggers": [
+    {
+      "id": "repeated_manual_steps",
+      "condition": "The same manual sequence appears at least twice or is expected to recur across projects.",
+      "default_action": "Create a prompt, workflow, or template candidate."
+    },
+    {
+      "id": "measured_bottleneck",
+      "condition": "A timing record or evaluator note identifies a slow phase that can be reduced by deterministic execution or better routing.",
+      "default_action": "Create a tool, workflow, or monitor enhancement candidate."
+    },
+    {
+      "id": "recurring_quality_gap",
+      "condition": "Omission, grounding, config, spec, resource, or evaluation checks repeatedly fail for the same reason.",
+      "default_action": "Create a guardrail, checklist, evaluator, or workflow candidate."
+    },
+    {
+      "id": "repeated_domain_judgment",
+      "condition": "The same domain-specific judgment rules need to be remembered across sessions.",
+      "default_action": "Create a skill or agent candidate."
+    },
+    {
+      "id": "project_feature_pull",
+      "condition": "A recurring platform operation would be easier from UI, desktop app, or monitor surface.",
+      "default_action": "Create a project feature candidate with UX, risk, and validation notes."
+    }
+  ],
+  "capability_types": [
+    {
+      "type": "prompt",
+      "target": "_ops/prompts/",
+      "use_when": "The repeated work is judgment framing or a reusable instruction sequence.",
+      "validation": [
+        "prompt map refresh",
+        "web-first common contract"
+      ]
+    },
+    {
+      "type": "workflow",
+      "target": "_ops/workflows/",
+      "use_when": "The repeated work has ordered steps and close-out requirements.",
+      "validation": [
+        "workflow navigation update",
+        "repository map refresh"
+      ]
+    },
+    {
+      "type": "template",
+      "target": "_templates/",
+      "use_when": "The repeated value is structure, not execution.",
+      "validation": [
+        "example output check",
+        "usage documentation"
+      ]
+    },
+    {
+      "type": "tool",
+      "target": "_tools/ or project-name/tools/",
+      "use_when": "The repeated work is deterministic execution, conversion, validation, indexing, scoring, or generation.",
+      "validation": [
+        "tool tests",
+        "README",
+        "installation record when dependencies change"
+      ]
+    },
+    {
+      "type": "skill",
+      "target": "_skills/",
+      "use_when": "The repeated work is agent behavior, domain rules, or tool integration knowledge that Codex should load on demand.",
+      "validation": [
+        "quick_validate.py",
+        "agent-platform validate-skill",
+        "forward-test scenarios"
+      ]
+    },
+    {
+      "type": "agent",
+      "target": "agent-platform/configs/agents/",
+      "use_when": "The repeated work needs explicit input/output contracts, tools, policy, validation, and orchestration metadata.",
+      "validation": [
+        "inspect-agent",
+        "list-agents",
+        "check-agent-orchestration"
+      ]
+    },
+    {
+      "type": "project_feature",
+      "target": "owning project folder",
+      "use_when": "The repeated work belongs in a product surface, monitor, desktop app, or project-specific module.",
+      "validation": [
+        "project tests",
+        "spec validation",
+        "UI or artifact verification when applicable"
+      ]
+    }
+  ],
+  "risk_tiers": [
+    {
+      "tier": "low",
+      "examples": [
+        "documentation refinement",
+        "candidate note",
+        "prompt draft",
+        "workflow draft",
+        "template draft"
+      ],
+      "autonomy": "May be drafted and applied when repository rules, validation, and rollback are clear."
+    },
+    {
+      "tier": "medium",
+      "examples": [
+        "new local tool without new dependencies",
+        "agent spec",
+        "monitor read-only feature",
+        "config rule"
+      ],
+      "autonomy": "May be implemented after requirements/spec/evaluation gates in governance mode."
+    },
+    {
+      "tier": "high",
+      "examples": [
+        "install or dependency change",
+        "secret or token handling",
+        "permission change",
+        "destructive migration",
+        "public deployment",
+        "paid external service",
+        "security/privacy-sensitive feature"
+      ],
+      "autonomy": "Requires human checkpoint, rollback plan, and dedicated audit record before execution."
+    }
+  ],
+  "promotion_pipeline": [
+    "observe",
+    "cluster_related_signals",
+    "draft_candidate",
+    "classify_capability_type",
+    "check_existing_assets",
+    "research_or_verify_if_external_claims_matter",
+    "select_smallest_asset",
+    "classify_risk",
+    "create_spec_or_decision_record",
+    "implement_or_queue",
+    "validate",
+    "evaluate",
+    "document",
+    "commit_and_push"
+  ],
+  "required_records": [
+    "candidate_id",
+    "observed_signals",
+    "source_records",
+    "problem_statement",
+    "proposed_capability_type",
+    "rejected_lighter_options",
+    "risk_tier",
+    "human_checkpoint_required",
+    "validation_plan",
+    "rollback_or_disablement_plan",
+    "promotion_result",
+    "evaluation_target",
+    "commit_hash"
+  ],
+  "autonomy_limits": [
+    "Do not auto-run destructive file, git, database, or infrastructure changes.",
+    "Do not auto-add or expose secrets, tokens, credentials, or private data.",
+    "Do not auto-install, upgrade, remove, or globally configure software without installation audit and human checkpoint when risk is high.",
+    "Do not auto-enable paid services, external publishing, public deployment, or permission changes.",
+    "Do not auto-promote a capability when a lighter existing asset already solves the observed problem.",
+    "Do not treat repeated LLM agreement as factual proof; use sources, tests, tools, evaluators, or human judgment."
+  ],
+  "candidate_contract": {
+    "candidate_id_format": "CAP-YYYY-MM-DD-slug",
+    "minimum_fields": [
+      "observed_signals",
+      "source_records",
+      "proposed_capability_type",
+      "rejected_lighter_options",
+      "expected_repetition_reduction",
+      "expected_time_reduction",
+      "risk_tier",
+      "validation_plan",
+      "rollback_or_disablement_plan"
+    ],
+    "default_storage": "_history/plans/YYYY/"
+  },
+  "validation_commands": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/orchestration/capability-promotion-registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/capability-promotion-agent.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json"
+  ]
+}

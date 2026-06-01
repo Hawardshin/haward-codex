@@ -1,0 +1,63 @@
+{
+  "task_id": "2026-06-02-capability-promotion-agent",
+  "request_id": "UR-2026-06-02-028",
+  "work_mode": "governance",
+  "status": "completed",
+  "recorded_on": "2026-06-02",
+  "time_zone": "Asia/Seoul",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes": 6,
+      "status": "completed",
+      "notes": "Web search was performed before local continuation and recorded in web search history."
+    },
+    {
+      "phase": "repository_context_review",
+      "duration_minutes": 12,
+      "status": "completed",
+      "notes": "Reviewed existing agent orchestration registry, capability governance, prompt router, persistent instructions, and requirements baseline."
+    },
+    {
+      "phase": "requirements_and_spec",
+      "duration_minutes": 18,
+      "status": "completed",
+      "notes": "Added REQ-WS-070, change/review records, and spec-driven artifacts."
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes": 34,
+      "status": "completed",
+      "notes": "Added registry, agent spec, docs, policy, workflow, prompt, router/memory/readme/history updates."
+    },
+    {
+      "phase": "validation_and_rework",
+      "duration_minutes": 20,
+      "status": "completed",
+      "notes": "Ran config, agent, memory, docs, naming, tests, workspace health, omission, and grounding checks; reran workspace index after health detected stale maps."
+    },
+    {
+      "phase": "evaluation_commit_push",
+      "duration_minutes": 8,
+      "status": "completed",
+      "notes": "Evaluator returned ready_to_close. Commit and push are performed after final artifact refresh."
+    }
+  ],
+  "bottleneck_candidates": [
+    {
+      "phase": "implementation",
+      "reason": "Many durable docs and bilingual history targets had to be created for governance mode."
+    },
+    {
+      "phase": "validation_and_rework",
+      "reason": "Generated maps can become stale after later evaluation artifacts are added; run workspace-index after final artifact creation."
+    }
+  ],
+  "automation_candidates": [
+    {
+      "candidate": "capability promotion close-out pack generator",
+      "reason": "Governance-mode capability work repeatedly creates web search, source provenance, plan evidence, omission, grounding, evaluation, timing, request trace, and work-summary files."
+    }
+  ]
+}

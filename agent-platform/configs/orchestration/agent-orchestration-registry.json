@@ -316,6 +316,26 @@
       ]
     },
     {
+      "blueprint_id": "governance_agent",
+      "purpose": "Maintain durable platform rules, risk boundaries, human checkpoints, and auditable operating contracts across agents, workflows, and capability promotion.",
+      "default_runtime": "python",
+      "spec_template_path": "agent-platform/configs/agents/principle-guardian-agent.json",
+      "creation_gates": [
+        "intake",
+        "research",
+        "requirements",
+        "spec",
+        "validation",
+        "evaluation"
+      ],
+      "validation_commands": [
+        "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/principle-guardian-agent.json"
+      ],
+      "docs_targets": [
+        "agent-platform/docs/principle-guardian-agent.ko.md"
+      ]
+    },
+    {
       "blueprint_id": "integration_agent",
       "purpose": "Wrap replaceable external tools, CLIs, notification providers, or service adapters behind explicit contracts.",
       "default_runtime": "python",

@@ -1,0 +1,104 @@
+{
+  "task": "Ground factual claims for capability promotion close-out.",
+  "output_summary": "The platform now has a bounded black-box capability promotion registry, agent spec, policy, workflow, prompt, and history records.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "local-registry",
+      "source": "agent-platform/configs/orchestration/capability-promotion-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "New self-documenting config file parsed and passed config-contract checks."
+    },
+    {
+      "evidence_id": "local-agent",
+      "source": "agent-platform/configs/agents/capability-promotion-agent.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "New agent spec parsed and passed inspect-agent."
+    },
+    {
+      "evidence_id": "anthropic",
+      "source": "https://www.anthropic.com/engineering/building-effective-agents",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Anthropic engineering article used for agent/workflow design references."
+    },
+    {
+      "evidence_id": "openai-agents",
+      "source": "https://openai.github.io/openai-agents-python/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official OpenAI Agents SDK docs used for guardrail, tracing, and human-in-the-loop references."
+    },
+    {
+      "evidence_id": "nist",
+      "source": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "NIST AI RMF used for risk-management framing."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "A new capability promotion registry exists and defines bounded black-box capability promotion rules.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "local-registry"
+      ],
+      "verification_steps": [
+        "Parsed JSON and ran check-config-contract."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "A new capability-promotion-agent spec exists and is inspectable.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "local-agent"
+      ],
+      "verification_steps": [
+        "Ran inspect-agent and list-agents."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The design intentionally avoids a fully opaque black box by recording observations, risk, validation, rollback, evaluation, and commit/push traces.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "local-registry"
+      ],
+      "verification_steps": [
+        "Checked registry structure_rules, risk_tiers, promotion_pipeline, required_records, and autonomy_limits."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "External references informed the small-workflow-first, guardrail, tracing, human checkpoint, and risk-tier design.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "anthropic",
+        "openai-agents",
+        "nist"
+      ],
+      "verification_steps": [
+        "Recorded search and plan impact in web search, source provenance, and research notes."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "No claim is made that an autonomous background worker or UI candidate board is implemented."
+  ],
+  "limitation_notes": [
+    "This grounding check validates the repository changes and cited design references, not future runtime behavior."
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "initial_instruction": "다양한 작업들을 스스로 하다가 기능을 추가하도록 하는 블랙박스적 처리",
+  "result_summary": "Added a bounded black-box capability promotion structure: REQ-WS-070, capability-promotion-agent, capability-promotion-registry, policy, docs, workflow, prompt, memory/bootstrap routing, source provenance, plan evidence, request trace, work summary, omission and grounding checks.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "_docs/governance/capability-governance.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/policies/capability-promotion-policy.ko.md",
+    "_docs/policies/capability-promotion-policy.en.md",
+    "_docs/registry.json",
+    "_ops/workflows/75-capability-promotion.md",
+    "_ops/prompts/105-capability-promotion.md",
+    "_ops/prompts/40-promote-capability.md",
+    "_ops/prompts/00-router.md",
+    "_ops/index.md",
+    "agent-platform/configs/orchestration/capability-promotion-registry.json",
+    "agent-platform/configs/agents/capability-promotion-agent.json",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "agent-platform/configs/orchestration/agent-orchestration-registry.json",
+    "agent-platform/docs/capability-promotion-agent.ko.md",
+    "agent-platform/docs/capability-promotion-agent.en.md",
+    "agent-platform/README.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-capability-promotion-agent.ko.md",
+    "_requirements/changes/2026-06-02-capability-promotion-agent.en.md",
+    "_requirements/reviews/2026-06-02-capability-promotion-agent.ko.md",
+    "_requirements/reviews/2026-06-02-capability-promotion-agent.en.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/",
+    "_history/web-searches/2026/2026-06-02-capability-promotion-agent.ko.md",
+    "_history/source-provenance/2026/2026-06-02-capability-promotion-agent.ko.md",
+    "_history/plan-evidence/2026/2026-06-02-capability-promotion-agent.ko.md",
+    "_history/request-traces/2026/2026-06-02-capability-promotion-agent.ko.md",
+    "_history/work-timings/2026/2026-06-02-capability-promotion-agent.json",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md"
+  ],
+  "verification": [
+    "python3 -m json.tool passed for new/changed JSON files.",
+    "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/capability-promotion-agent.json passed.",
+    "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents listed capability-promotion-agent.",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/orchestration/capability-promotion-registry.json passed.",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json passed.",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json passed.",
+    "python3 _tools/docs-audit/src/docs_audit.py --check passed.",
+    "python3 _tools/naming-audit/src/naming_audit.py --check passed.",
+    "PYTHONPATH=src python3 -m unittest discover -s tests passed: 150 tests.",
+    "python3 _tools/workspace-health/src/workspace_health.py passed: 20 checks.",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-capability-promotion-agent-omission.json passed.",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-capability-promotion-agent-grounding.json passed.",
+    "git diff --check passed."
+  ],
+  "references_checked": [
+    "_docs/governance/capability-governance.md",
+    "agent-platform/configs/orchestration/agent-orchestration-registry.json",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "https://www.anthropic.com/engineering/building-effective-agents",
+    "https://openai.github.io/openai-agents-python/",
+    "https://www.nist.gov/itl/ai-risk-management-framework",
+    "https://docs.langchain.com/oss/python/langchain/multi-agent"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-capability-promotion-agent-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-02-capability-promotion-agent.ko.md",
+    "_history/source-provenance/2026/2026-06-02-capability-promotion-agent.en.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-02-capability-promotion-agent.ko.md",
+    "_history/plan-evidence/2026/2026-06-02-capability-promotion-agent.en.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-capability-promotion-agent.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-capability-promotion-agent-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-capability-promotion-agent.ko.md",
+    "_history/web-searches/2026/2026-06-02-capability-promotion-agent.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-capability-promotion-agent.ko.md",
+    "_requirements/reviews/2026-06-02-capability-promotion-agent.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-capability-promotion-agent.ko.md",
+    "_history/request-traces/2026/2026-06-02-capability-promotion-agent.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-capability-promotion-agent.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Later add a read-only capability candidate board to workspace-monitor.",
+    "Later add a deterministic candidate pack generator for governance-mode capability promotions."
+  ]
+}

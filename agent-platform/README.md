@@ -60,6 +60,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep external CLI integration in `configs/integrations/cli-adapter-registry.json`; the installable platform may use many CLIs through adapters but must not depend on one CLI to function.
 - Keep multi-process CLI orchestration plans in `configs/integrations/cli-pipeline-template.json` or task-specific history targets; use `cli-pipeline-agent` before launching, piping, exchanging file/artifact handoffs, merging, or cancelling several CLI processes together.
 - Keep reusable agent creation and multi-agent orchestration contracts in `configs/orchestration/agent-orchestration-registry.json`; use `agent-orchestrator-agent` before creating new reusable agents, changing agent specs, or connecting agents through supervisor/router/pipeline/fan-out/handoff patterns.
+- Keep bounded black-box capability promotion in `configs/orchestration/capability-promotion-registry.json`; use `capability-promotion-agent` when repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns should become automatic capability candidates.
 - Keep infrastructure, deployment, cloud, SRE, IaC, Kubernetes, networking, security, cost, observability, backup/DR, and production-readiness reviews in `infrastructure-expert-agent`; it must ground recommendations in official sources and local evidence before risky execution.
 - Keep unstructured-to-structured data transformation rules in `configs/usage/unstructured-data-structuring-profile.json`; AI-generated structure must preserve schema, provenance, null/ambiguity handling, and validation before downstream reuse.
 - Keep platform notification routing in `configs/integrations/notification-channels.json`; store only environment variable names there, never real webhook URLs or tokens.
@@ -107,6 +108,7 @@ PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/positi
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/profit-analyst-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/principle-guardian-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/human-arbitration-agent.json
+PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/capability-promotion-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli score-oss configs/open-source/candidate-template.json
 PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/work-evaluation-template.json
 PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluation/knowledge-validation-template.json
@@ -132,7 +134,7 @@ PYTHONPATH=src python3 -m agent_platform.cli list-work-modes configs/workflows/w
 PYTHONPATH=src python3 -m agent_platform.cli show-work-mode configs/workflows/work-mode-registry.json governance
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/deep-research-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/planning/deep-research-template.json configs/integrations/notification-channels.json
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/unstructured-data-structuring-profile.json
-PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json configs/integrations/cli-pipeline-template.json configs/orchestration/agent-orchestration-registry.json
+PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json configs/integrations/cli-pipeline-template.json configs/orchestration/agent-orchestration-registry.json configs/orchestration/capability-promotion-registry.json
 ```
 
 ## Current Skeleton
@@ -161,6 +163,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `configs/integrations/cli-pipeline-template.json`: process graph, explicit pipe/file/artifact handoff, safety control, resource control, source provenance, and verification template for multi-CLI orchestration
 - `configs/integrations/notification-channels.json`: notification on/off routing, event filters, provider payload options, and environment-variable secret indirection
 - `configs/orchestration/agent-orchestration-registry.json`: framework-neutral agent spec, blueprint, pattern, control, lifecycle gate, and validation contract for reusable agents and multi-agent orchestration
+- `configs/orchestration/capability-promotion-registry.json`: bounded black-box capability promotion contract for automatic feature candidates, risk tiers, human checkpoints, validation, rollback, and traceability
 - `configs/usage/unstructured-data-structuring-profile.json`: schema, provenance, null handling, and validation contract for turning messy input into structured records
 - `configs/evaluation/omission-guard-template.json`: required item, artifact, and acceptance-check coverage template for omission prevention
 - `configs/evaluation/resource-guard-template.json`: memory and runtime resource leak risk, lifecycle cleanup, and measurement evidence template
@@ -174,6 +177,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `resource-guard-agent` checks memory and resource leak risks for long-running runtimes, browser automation, workers, caches, streams, large-data processing, subprocesses, file handles, network connections, timers, and subscriptions
 - `cli-pipeline-agent` checks multi-process CLI process graphs, pipes, file/artifact handoffs, adapter allowlists, safety controls, resource controls, provenance, merge strategy, and verification before several CLIs run together
 - `agent-orchestrator-agent` checks agent creation blueprints, agent specs, orchestration patterns, state and handoff contracts, controls, lifecycle gates, and validation commands before reusable agents are created or connected
+- `capability-promotion-agent` turns repeated work, bottlenecks, omissions, validation failures, and manual rework into auditable capability candidates while preserving human checkpoints for high-risk changes
 - `infrastructure-expert-agent` plans and reviews infrastructure, deployment, cloud, SRE, IaC, Kubernetes, networking, security, cost, observability, backup/DR, and production-readiness decisions with official-source grounding, human checkpoints, rollback, and resource/CLI safety gates
 - `timekeeper-agent` keeps deadlines, duration, timeboxes, critical path, schedule risk, bottlenecks, next checkpoints, and hurry-up trade-offs visible while preserving quality and safety gates
 - `positive-vision-agent` turns difficult-work pressure into grounded positive vision, agency levers, multiple pathways, if-then implementation intentions, risk truth, fallback options, and verification gates
