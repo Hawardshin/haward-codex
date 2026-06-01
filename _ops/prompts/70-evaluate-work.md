@@ -18,11 +18,11 @@ If an external reference may be time-sensitive, verify current official or highl
 Compare the initial instruction, actual result, changed files, and verification results.
 Compare the result against strong references and identify what is weaker or missing.
 If the final output contains factual claims, require a grounding check from hallucination-guard-agent.
-Require web_search_record_targets, user_request_summary_targets, requirements_targets, spec_targets, source_provenance_targets, plan_evidence_targets, request_trace_targets, work_summary_targets, and timing_summary_targets only when the selected mode makes them blocking.
+Require web_search_record_targets, user_request_summary_targets, requirements_targets, spec_targets, source_provenance_targets, plan_evidence_targets, mode_selection_record_targets, omission_check_targets, request_trace_targets, work_summary_targets, and timing_summary_targets only when the selected mode makes them blocking.
 If skill work occurred, require skill_work_occurred=true, skill_targets, and skill_validation_targets.
 For quick mode, treat missing governance targets as non-blocking improvements unless the user explicitly requested those artifacts.
-For ship_first mode, require references_checked and web_search_record_targets, and require deferred_improvement_targets when improvement_ideas are postponed.
-For research mode, require references_checked, source_provenance_targets, plan_evidence_targets, web_search_record_targets, and timing_summary_targets.
+For ship_first mode, require references_checked, mode_selection_record_targets, omission_check_targets, and web_search_record_targets, and require deferred_improvement_targets when improvement_ideas are postponed.
+For research mode, require references_checked, source_provenance_targets, plan_evidence_targets, mode_selection_record_targets, omission_check_targets, web_search_record_targets, and timing_summary_targets.
 For governance and standard modes, require the full target set.
 If context archiving occurred, require context_archiving_occurred=true and context_archive_targets under _history/context-archives/YYYY/.
 If installation occurred, require installation_occurred=true and installation_record_targets that point to _history/installations/YYYY/ records.
@@ -44,6 +44,8 @@ Return ready_to_close only when there are no blocking gaps.
 - grounding checks
 - source provenance targets
 - plan evidence targets
+- mode selection record targets
+- omission check targets
 - web search record targets
 - user request summary targets
 - requirements targets

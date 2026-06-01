@@ -36,6 +36,7 @@
       "The request-to-outcome trace layer or traceability contract changes.",
       "The web search record layer or prompt-level search contract changes.",
       "The work mode selection or deferred improvement policy changes.",
+      "The omission prevention workflow, omission guard agent, or omission_check_targets contract changes.",
       "The work timing, bottleneck visibility, or timing_summary_targets contract changes.",
       "The parallel work planning workflow, planner agent, research merge gate, or coordination lane contract changes.",
       "The notification settings, provider routing, or webhook secret handling contract changes.",
@@ -110,8 +111,20 @@
         "mode-based operating loop selection",
         "evaluator target strictness by work type",
         "mode selection record enforcement",
+        "omission_check_targets enforcement by mode",
         "registry-to-evaluator drift checks",
         "deferred improvement backlog rules"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "omission_prevention_policy",
+      "title": "Omission Prevention Policy",
+      "path": "_docs/policies/omission-prevention-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "required item coverage before close-out",
+        "omission_check_targets close-out policy"
       ],
       "last_checked": "2026-06-02"
     },
@@ -857,13 +870,25 @@
     },
     {
       "id": "work_mode_registry_must_stay_discoverable",
-      "rule": "The work mode registry must remain a hot memory anchor so future sessions can select the lightest sufficient operating loop before planning local work and enforce non-quick modes with mode selection records plus evaluator gates.",
+      "rule": "The work mode registry must remain a hot memory anchor so future sessions can select the lightest sufficient operating loop before planning local work and enforce non-quick modes with mode selection records, omission checks, and evaluator gates.",
       "reason": "The user explicitly asked to avoid running every loop every time while also making modes enforceable instead of prompt-only preferences.",
       "applies_to": [
         "startup_sequence",
         "required_anchor_ids",
         "anchors",
         "work-evaluator-agent"
+      ]
+    },
+    {
+      "id": "omission_prevention_must_stay_discoverable",
+      "rule": "The omission prevention workflow must remain a warm memory anchor so future sessions assume agents can miss required items and run coverage checks before non-quick close-out.",
+      "reason": "The user explicitly noted that something can be missed, so omission coverage must be enforceable instead of relying on memory.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "work-evaluator-agent",
+        "omission-guard-agent"
       ]
     },
     {
@@ -1042,6 +1067,7 @@
     "web_first_workflow",
     "memory_bootstrap_workflow",
     "work_mode_registry",
+    "omission_prevention_workflow",
     "install_mode_registry",
     "language_decision_registry",
     "work_timing_policy",
@@ -1092,6 +1118,7 @@
     "web_first_workflow",
     "memory_bootstrap_workflow",
     "work_mode_registry",
+    "omission_prevention_workflow",
     "install_mode_registry",
     "language_decision_registry",
     "work_timing_policy",
@@ -1201,9 +1228,17 @@
       "id": "work_mode_registry",
       "path": "agent-platform/configs/workflows/work-mode-registry.json",
       "tier": "hot",
-      "purpose": "Selectable work modes, deterministic mode enforcement layers, mode selection record requirements, and evaluator target policy for avoiding unnecessary full-loop overhead without relying on prompt-only rules.",
+      "purpose": "Selectable work modes, deterministic mode enforcement layers, mode selection and omission check requirements, and evaluator target policy for avoiding unnecessary full-loop overhead without relying on prompt-only rules.",
       "required": true,
       "load_order": 8
+    },
+    {
+      "id": "omission_prevention_workflow",
+      "path": "_ops/workflows/68-omission-prevention.md",
+      "tier": "warm",
+      "purpose": "Close-out workflow for proving required instructions, requirements, artifacts, and acceptance checks were not silently missed.",
+      "required": true,
+      "load_order": 9
     },
     {
       "id": "install_mode_registry",

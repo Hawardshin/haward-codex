@@ -1,0 +1,16 @@
+{
+  "name": "omission-guard-agent",
+  "description": "Checks that required user instructions, requirements, artifacts, and acceptance checks are explicitly covered before close-out.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "agent-platform:check-omissions"
+  ],
+  "metadata": {
+    "status": "active",
+    "trigger": "before closing non-quick work or whenever missed requirements are a material risk",
+    "input_schema": "agent-platform/configs/evaluation/omission-guard-template.json",
+    "work_mode_registry": "agent-platform/configs/workflows/work-mode-registry.json",
+    "policy": "Non-quick work must produce omission_check_targets. Required expected items need evidence when covered, rationale when deferred or not applicable, and rework when missing. Required artifact checks must point to files or folders inside the repository. Required acceptance checks must pass with evidence before close-out."
+  }
+}

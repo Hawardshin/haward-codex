@@ -7,6 +7,7 @@ Examples:
 - Research and source collection policies
 - Requirements and spec-driven development policies
 - Installation, install mode, work mode enforcement, installable software productization, validation, and hallucination-prevention policies
+- Omission prevention and close-out coverage policies
 - CLI adapter and external command execution boundary policies
 - Unstructured data structuring policies
 - Runtime and language selection policies

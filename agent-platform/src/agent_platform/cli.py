@@ -9,6 +9,7 @@ from pathlib import Path
 from agent_platform.core.registry import load_agent_spec, load_registry_dir
 from agent_platform.evaluation.hallucination_guard import HallucinationGuardInput, check_hallucination_risk
 from agent_platform.evaluation.knowledge_skeptic import KnowledgeValidationInput, validate_knowledge_reference
+from agent_platform.evaluation.omission_guard import OmissionGuardInput, check_omissions
 from agent_platform.evaluation.skill_validator import SkillValidationInput, validate_skill_definition
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 from agent_platform.governance.config_contract import check_config_contract
@@ -63,6 +64,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     check_grounding = subparsers.add_parser("check-grounding", help="Check whether factual claims are grounded before publication.")
     check_grounding.add_argument("path", type=Path)
+
+    check_omissions_cmd = subparsers.add_parser("check-omissions", help="Check whether required work items were explicitly covered.")
+    check_omissions_cmd.add_argument("path", type=Path)
 
     plan_from_research = subparsers.add_parser("plan-from-research", help="Check whether search-backed insights are ready for planning.")
     plan_from_research.add_argument("path", type=Path)
@@ -169,6 +173,12 @@ def main(argv: list[str] | None = None) -> int:
         with args.path.open("r", encoding="utf-8") as file:
             guard_input = HallucinationGuardInput.from_dict(json.load(file))
         print(json.dumps(check_hallucination_risk(guard_input), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "check-omissions":
+        with args.path.open("r", encoding="utf-8") as file:
+            guard_input = OmissionGuardInput.from_dict(json.load(file))
+        print(json.dumps(check_omissions(guard_input, _default_repo_root()), indent=2, ensure_ascii=False))
         return 0
 
     if args.command == "plan-from-research":

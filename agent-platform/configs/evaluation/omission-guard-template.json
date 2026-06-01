@@ -1,0 +1,42 @@
+{
+  "task": "Example omission-prevention close-out check.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "example-required-item",
+      "description": "Replace this example with one user instruction, requirement, plan item, or acceptance criterion that could be missed.",
+      "source": "template",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "README.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "README.md",
+      "purpose": "Example existing artifact path. Replace with required outputs for real work.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "example-review",
+      "description": "Replace this example with a concrete verification, test, audit, or manual review.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Template example only."
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Template entries must be replaced with task-specific coverage before using this as close-out evidence."
+  ],
+  "notes": [
+    "Use this file as a shape example. Save real omission checks under _history/evaluations/YYYY/ or the owning project history folder."
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "task_id": "2026-06-02-omission-prevention",
+  "title": "Add omission prevention gate",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official checklist and traceability sources were checked before local implementation."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "duration_seconds": 90,
+      "measurement": "estimated",
+      "bottleneck_notes": "Existing bootstrap manifest was already available and later rechecked after updates."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and specs",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "New durable requirement, review, change records, and bilingual spec artifacts were created."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation and docs",
+      "status": "completed",
+      "duration_seconds": 2100,
+      "measurement": "estimated",
+      "bottleneck_notes": "Most time went into threading the new target through evaluator, CLI, registry, memory anchors, policies, prompts, and navigation."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 480,
+      "measurement": "estimated",
+      "bottleneck_notes": "Unit tests and config checks were run, then follow-up docs and generated maps needed validation."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation",
+      "status": "completed",
+      "duration_seconds": 540,
+      "measurement": "estimated",
+      "bottleneck_notes": "Omission coverage, grounding, and work evaluation had to be created after implementation."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "duration_seconds": 180,
+      "measurement": "estimated",
+      "bottleneck_notes": "Final git commit and push were expected to be short after verification; actual remote push status is checked separately."
+    }
+  ],
+  "bottleneck_notes": [
+    "Implementation and documentation fan-out is the slowest measured phase.",
+    "Future improvement: generate evaluator-target propagation patches from a small schema to reduce manual updates."
+  ]
+}

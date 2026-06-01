@@ -1,0 +1,132 @@
+{
+  "task": "Ground final claims for the omission prevention platform change.",
+  "output_summary": "The final output will state that omission guard code, CLI, evaluator target enforcement, docs, tests, and history were added and verified.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "repo-omission-guard",
+      "source": "agent-platform/src/agent_platform/evaluation/omission_guard.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Direct implementation file in the repository."
+    },
+    {
+      "evidence_id": "repo-work-evaluator",
+      "source": "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Direct evaluator policy implementation file."
+    },
+    {
+      "evidence_id": "repo-work-mode-registry",
+      "source": "agent-platform/configs/workflows/work-mode-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Source-of-truth work mode registry."
+    },
+    {
+      "evidence_id": "repo-policy-docs",
+      "source": "_docs/policies/omission-prevention-policy.ko.md and _ops/workflows/68-omission-prevention.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable policy and workflow documents created for this task."
+    },
+    {
+      "evidence_id": "test-results",
+      "source": "python3 -m unittest discover -s tests from agent-platform: Ran 125 tests, OK",
+      "source_type": "test_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Direct command result from the local repository."
+    },
+    {
+      "evidence_id": "cli-check-results",
+      "source": "check-omissions, check-work-modes, check-memory-bootstrap, check-config-contract, docs-audit, naming-audit, structure-audit, workspace-index, task-board, npm run collect command outputs",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Direct command outputs from this session."
+    },
+    {
+      "evidence_id": "who-checklist",
+      "source": "https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery/tool-and-resources",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official WHO source for checklist-oriented safety tools."
+    },
+    {
+      "evidence_id": "nasa-swehb",
+      "source": "https://swehb.nasa.gov/display/SWEHBVC",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official NASA software engineering and assurance handbook site."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now contains a deterministic omission guard implementation and check-omissions CLI command.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "repo-omission-guard",
+        "cli-check-results"
+      ],
+      "verification_steps": [
+        "Read omission_guard.py.",
+        "Ran check-omissions on the template and on this task's omission check JSON."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Non-quick work modes now require omission_check_targets in evaluator policy.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "repo-work-evaluator",
+        "repo-work-mode-registry",
+        "cli-check-results"
+      ],
+      "verification_steps": [
+        "Read work_evaluator.py and work-mode-registry.json.",
+        "Ran check-work-modes successfully."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The omission-prevention design is based on checklist and traceability practices from official or strong sources.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "who-checklist",
+        "nasa-swehb"
+      ],
+      "verification_steps": [
+        "Performed web-first search.",
+        "Recorded source findings in _history/web-searches/2026/2026-06-02-omission-prevention.ko.md."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "The local verification suite for this change passed.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "test-results",
+        "cli-check-results"
+      ],
+      "verification_steps": [
+        "Ran unit tests.",
+        "Ran config, docs, naming, structure, memory, work mode, omission, map, task board, and monitor collection checks."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "The structure audit warning for presentation-agent generated folders predates this task and is not treated as a blocking omission-prevention gap."
+  ],
+  "limitation_notes": [
+    "External sources support the design direction; they do not prove that every future omission will be prevented."
+  ]
+}

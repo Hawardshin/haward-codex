@@ -12,8 +12,8 @@ The evaluator supports selectable work modes so small or urgent tasks do not nee
 
 - `quick`: low-risk, reversible work; governance targets become non-blocking improvements.
 - `standard`: default; preserves the existing full target set and requires a mode selection record.
-- `ship_first`: ship or repair first; requires reference, mode selection, and web-search records, and requires deferred improvement targets when improvement ideas are postponed.
-- `research`: research and planning work; requires source provenance, plan evidence, mode selection, references, and web-search records.
+- `ship_first`: ship or repair first; requires reference, mode selection, omission check, and web-search records, and requires deferred improvement targets when improvement ideas are postponed.
+- `research`: research and planning work; requires source provenance, plan evidence, mode selection, omission check, references, and web-search records.
 - `governance`: durable repository/platform/rule changes; uses the full target set.
 
 ## Inputs
@@ -30,6 +30,7 @@ Use `agent-platform/configs/evaluation/work-evaluation-template.json` as the sha
 - `source_provenance_targets`: files that record where material values, source data, claims, assumptions, or config inputs came from
 - `plan_evidence_targets`: files that record the evidence behind the executed plan
 - `mode_selection_record_targets`: files that record the selected mode, selection reason, overrides, and enforcement checks
+- `omission_check_targets`: files that record required item, artifact, and acceptance-check coverage
 - `web_search_record_targets`: public search reasoning record files under `_history/web-searches/YYYY/`
 - `user_request_summary_targets`: user request summary files under `_history/user-requests/YYYY/`
 - `requirements_targets`: workspace or project requirements files under `_requirements/` or `project/docs/requirements/`
@@ -62,10 +63,11 @@ PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/wo
 - `status=rework_required`: convert each gap into a follow-up action, complete that work, then evaluate again.
 - Missing targets are blocking according to the selected `work_mode`, defined in `agent-platform/configs/workflows/work-mode-registry.json`.
 - Work modes are not prompt-only; non-`quick` modes must include `mode_selection_record_targets`.
+- Non-`quick` modes must include `omission_check_targets` so required work items are explicitly covered before close-out.
 - In `standard` and `governance`, missing reference research, source provenance, plan evidence, mode selection records, web search records, user request summaries, requirements targets, spec targets, request traces, work summaries, and timing summaries are blocking.
 - In `quick`, those governance targets are non-blocking improvements unless the user explicitly requested them or another rule makes them mandatory.
-- In `ship_first`, missing `references_checked`, `mode_selection_record_targets`, and `web_search_record_targets` are blocking, and missing `deferred_improvement_targets` is blocking when `improvement_ideas` are present.
-- In `research`, missing `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, `mode_selection_record_targets`, `web_search_record_targets`, and `timing_summary_targets` are blocking.
+- In `ship_first`, missing `references_checked`, `mode_selection_record_targets`, `omission_check_targets`, and `web_search_record_targets` are blocking, and missing `deferred_improvement_targets` is blocking when `improvement_ideas` are present.
+- In `research`, missing `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, `mode_selection_record_targets`, `omission_check_targets`, `web_search_record_targets`, and `timing_summary_targets` are blocking.
 - Missing skill targets or skill validation targets are blocking gaps when `skill_work_occurred=true`.
 - If `context_archiving_occurred` is true, missing context archive targets are a blocking gap.
 - If `installation_occurred` is true, missing installation record targets are a blocking gap.

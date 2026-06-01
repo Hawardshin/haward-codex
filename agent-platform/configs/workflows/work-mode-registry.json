@@ -18,6 +18,7 @@
       "A repeated task feels too slow because it runs unnecessary requirements, specs, or history steps.",
       "A repeated task feels too slow because independent lanes could run in parallel.",
       "The user asks to make modes enforceable instead of prompt-only.",
+      "The user asks to prevent omissions or require explicit task coverage checks.",
       "The evaluator target policy changes.",
       "A new workflow type needs a different risk tier."
     ]
@@ -98,6 +99,28 @@
         "bottleneck visibility in evaluator input and coordination boards"
       ],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "omission_prevention_policy",
+      "title": "Omission Prevention Policy",
+      "path": "_docs/policies/omission-prevention-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "non-quick omission_check_targets policy",
+        "required item and acceptance coverage before close-out"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "omission_guard_agent",
+      "title": "Omission Guard Agent",
+      "path": "agent-platform/docs/omission-guard-agent.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "check-omissions command contract",
+        "coverage_ready versus rework_required close-out states"
+      ],
+      "last_checked": "2026-06-02"
     },
     {
       "id": "open_policy_agent_docs",
@@ -188,6 +211,16 @@
         "modes",
         "evaluator_policy"
       ]
+    },
+    {
+      "id": "omissions_need_explicit_coverage",
+      "rule": "Non-quick work must leave an omission_check_targets record that maps required user instructions, requirements, artifacts, and acceptance checks to evidence, deferral, or not-applicable rationale.",
+      "reason": "The user noted that an agent can miss something; omissions should be caught by an explicit close-out gate instead of relying on memory.",
+      "applies_to": [
+        "mode_enforcement",
+        "modes",
+        "evaluator_policy"
+      ]
     }
   ],
   "field_guide": [
@@ -241,6 +274,11 @@
         "enforced_by": "mode_selection_record_targets in evaluate-work input"
       },
       {
+        "id": "omission_coverage_record",
+        "purpose": "Require non-quick work to prove required items, outputs, and acceptance checks were explicitly covered or consciously deferred.",
+        "enforced_by": "omission_check_targets in evaluate-work input, backed by PYTHONPATH=src python3 -m agent_platform.cli check-omissions <input.json>"
+      },
+      {
         "id": "work_evaluator_gate",
         "purpose": "Turn missing mode-required artifacts into blocking close-out gaps.",
         "enforced_by": "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work <input.json>"
@@ -286,7 +324,8 @@
         "timing_summary_targets",
         "source_provenance_targets",
         "plan_evidence_targets",
-        "mode_selection_record_targets"
+        "mode_selection_record_targets",
+        "omission_check_targets"
       ],
       "enforcement_level": "advisory",
       "selection_record_required": false,
@@ -311,6 +350,7 @@
         "source_provenance_targets",
         "plan_evidence_targets",
         "mode_selection_record_targets",
+        "omission_check_targets",
         "web_search_record_targets",
         "user_request_summary_targets",
         "requirements_targets",
@@ -322,7 +362,7 @@
       "deferred_or_optional": [],
       "enforcement_level": "blocking",
       "selection_record_required": true,
-      "closeout_gate": "evaluate-work blocks close-out when any standard required target, including mode_selection_record_targets, is missing."
+      "closeout_gate": "evaluate-work blocks close-out when any standard required target, including mode_selection_record_targets and omission_check_targets, is missing."
     },
     {
       "id": "ship_first",
@@ -341,6 +381,7 @@
       "required_before_close": [
         "references_checked",
         "mode_selection_record_targets",
+        "omission_check_targets",
         "web_search_record_targets",
         "verification",
         "deferred_improvement_targets_when_improvement_ideas_exist"
@@ -356,7 +397,7 @@
       ],
       "enforcement_level": "blocking",
       "selection_record_required": true,
-      "closeout_gate": "evaluate-work blocks close-out on references_checked, mode_selection_record_targets, web_search_record_targets, and deferred_improvement_targets when improvement ideas exist."
+      "closeout_gate": "evaluate-work blocks close-out on references_checked, mode_selection_record_targets, omission_check_targets, web_search_record_targets, and deferred_improvement_targets when improvement ideas exist."
     },
     {
       "id": "research",
@@ -377,6 +418,7 @@
         "source_provenance_targets",
         "plan_evidence_targets",
         "mode_selection_record_targets",
+        "omission_check_targets",
         "web_search_record_targets",
         "timing_summary_targets"
       ],
@@ -388,7 +430,7 @@
       ],
       "enforcement_level": "blocking",
       "selection_record_required": true,
-      "closeout_gate": "evaluate-work blocks close-out on research evidence, source provenance, mode selection record, web search record, and timing summary."
+      "closeout_gate": "evaluate-work blocks close-out on research evidence, source provenance, mode selection record, omission coverage, web search record, and timing summary."
     },
     {
       "id": "governance",
@@ -408,6 +450,7 @@
         "source_provenance_targets",
         "plan_evidence_targets",
         "mode_selection_record_targets",
+        "omission_check_targets",
         "web_search_record_targets",
         "user_request_summary_targets",
         "requirements_targets",
@@ -419,7 +462,7 @@
       "deferred_or_optional": [],
       "enforcement_level": "blocking",
       "selection_record_required": true,
-      "closeout_gate": "evaluate-work blocks close-out when any governance required target, including mode_selection_record_targets, is missing."
+      "closeout_gate": "evaluate-work blocks close-out when any governance required target, including mode_selection_record_targets and omission_check_targets, is missing."
     }
   ],
   "selection_rules": [
@@ -428,6 +471,7 @@
     "When uncertain between two modes, choose the stronger mode only for real risk, durability, or cross-project impact.",
     "If speed matters and independent lanes exist, keep the selected work_mode and add a parallel-work plan instead of inventing a new mode.",
     "For every non-quick mode, create or update a mode selection record and include it in mode_selection_record_targets before close-out.",
+    "For every non-quick mode, create or update an omission check record and include it in omission_check_targets before close-out.",
     "Mode selection does not remove the requirement to avoid unsupported factual claims."
   ],
   "evaluator_policy": {
@@ -438,6 +482,7 @@
         "source_provenance_targets",
         "plan_evidence_targets",
         "mode_selection_record_targets",
+        "omission_check_targets",
         "web_search_record_targets",
         "user_request_summary_targets",
         "requirements_targets",
@@ -453,6 +498,7 @@
         "source_provenance_targets",
         "plan_evidence_targets",
         "mode_selection_record_targets",
+        "omission_check_targets",
         "web_search_record_targets",
         "user_request_summary_targets",
         "requirements_targets",
@@ -467,6 +513,7 @@
       "blocking_target_fields": [
         "references_checked",
         "mode_selection_record_targets",
+        "omission_check_targets",
         "web_search_record_targets"
       ],
       "non_blocking_target_fields": [
@@ -486,6 +533,7 @@
         "source_provenance_targets",
         "plan_evidence_targets",
         "mode_selection_record_targets",
+        "omission_check_targets",
         "web_search_record_targets",
         "timing_summary_targets"
       ],
@@ -503,6 +551,7 @@
         "source_provenance_targets",
         "plan_evidence_targets",
         "mode_selection_record_targets",
+        "omission_check_targets",
         "web_search_record_targets",
         "user_request_summary_targets",
         "requirements_targets",

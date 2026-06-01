@@ -21,6 +21,9 @@ def complete_evidence_targets() -> dict[str, tuple[str, ...]]:
         "mode_selection_record_targets": (
             "_history/plans/2026/2026-05-31-work-mode-selection.ko.md",
         ),
+        "omission_check_targets": (
+            "_history/evaluations/2026/2026-05-31-omission-check.json",
+        ),
         "timing_summary_targets": (
             "_history/work-timings/2026/2026-05-31-evaluator.json",
         ),
@@ -480,6 +483,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 verification=("browser smoke test: OK",),
                 references_checked=("GitHub Flow",),
                 mode_selection_record_targets=("_history/plans/2026/2026-05-31-dashboard-mode.ko.md",),
+                omission_check_targets=("_history/evaluations/2026/2026-05-31-dashboard-omission-check.json",),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-dashboard.ko.md",),
                 improvement_ideas=("Backfill the durable spec after the emergency fix.",),
             )
@@ -501,6 +505,7 @@ class WorkEvaluatorTests(unittest.TestCase):
                 verification=("browser smoke test: OK",),
                 references_checked=("GitHub Flow",),
                 mode_selection_record_targets=("_history/plans/2026/2026-05-31-dashboard-mode.ko.md",),
+                omission_check_targets=("_history/evaluations/2026/2026-05-31-dashboard-omission-check.json",),
                 web_search_record_targets=("_history/web-searches/2026/2026-05-31-dashboard.ko.md",),
                 deferred_improvement_targets=("_ops/backlog/deferred-improvements.ko.md",),
                 improvement_ideas=("Backfill the durable spec after the emergency fix.",),
@@ -560,6 +565,32 @@ class WorkEvaluatorTests(unittest.TestCase):
         self.assertTrue(report["requires_rework"])
         self.assertIn(
             "Mode selection record target is missing. Record the selected mode, selection reason, overrides, and enforcement checks under _history/plans/ or the owning spec plan.",
+            report["gaps"],
+        )
+
+    def test_standard_mode_requires_omission_check_target(self) -> None:
+        targets = complete_evidence_targets()
+        targets.pop("omission_check_targets")
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Prevent missed work items.",
+                result_summary="Added omission prevention gate.",
+                changed_files=("agent-platform/src/agent_platform/evaluation/omission_guard.py",),
+                verification=("python3 -m unittest discover -s tests: OK",),
+                references_checked=("WHO Surgical Safety Checklist",),
+                **targets,
+                web_search_record_targets=("_history/web-searches/2026/2026-06-02-omission-prevention.ko.md",),
+                user_request_summary_targets=("_history/user-requests/2026/2026-06-02.ko.md",),
+                requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-06-02-omission-prevention/spec.ko.md",),
+                request_trace_targets=("_history/request-traces/2026/2026-06-02-omission-prevention.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-06-02.ko.md",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Omission check target is missing. Run omission-guard-agent/check-omissions or record a task coverage checklist so required items are not silently skipped.",
             report["gaps"],
         )
 

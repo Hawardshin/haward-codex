@@ -44,6 +44,7 @@ REQUIRED_ENFORCEMENT_LAYERS = {
     "registry_config",
     "cli_registry_check",
     "mode_selection_record",
+    "omission_coverage_record",
     "work_evaluator_gate",
     "evaluation_report",
 }
@@ -266,6 +267,8 @@ def _check_evaluator_policy(
             )
         if mode_id != "quick" and "mode_selection_record_targets" not in blocking:
             gaps.append(f"evaluator_policy.{mode_id} must block on mode_selection_record_targets.")
+        if mode_id != "quick" and "omission_check_targets" not in blocking:
+            gaps.append(f"evaluator_policy.{mode_id} must block on omission_check_targets.")
 
     for mode_id in REQUIRED_MODE_IDS - policy_ids:
         warnings.append(f"evaluator_policy for {mode_id} could not be checked because it is missing.")

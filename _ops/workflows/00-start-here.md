@@ -31,20 +31,21 @@
 23. If the work installs, upgrades, removes, or globally configures software, follow [_ops/workflows/58-installation-record.md](58-installation-record.md).
 24. Implement the smallest useful change inside the owning project or shared folder.
 25. Verify with tests, checks, or rendered artifacts.
-26. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).
-27. If the active conversation has become too long to resume safely from chat, run [_ops/workflows/45-context-archive.md](45-context-archive.md).
-28. Update and validate the timing record with [_ops/workflows/42-record-work-timing.md](42-record-work-timing.md).
-29. Evaluate completed work using the selected `work_mode` against the initial instruction and the artifacts required by that mode.
-30. Rework if the evaluator finds blocking gaps, then evaluate again.
-31. Save or update the public web search record under `_history/web-searches/YYYY/` when required by the selected mode or when the search produced reusable insight.
-32. Save or update the user request summary under `_history/user-requests/YYYY/` when required by the selected mode or when the request changes durable state.
-33. Save or update the requirements baseline/change/review under `_requirements/` or the owning project's `docs/requirements/` when required by the selected mode or when durable behavior changes.
-34. Save or update spec-driven artifacts under `_specs/` or the owning project's `specs/` when required by the selected mode or when implementation scope is durable.
-35. If skill work occurred, save or update `_skills/` source, validation, and improvement records.
-36. Save or update the request-to-outcome trace under `_history/request-traces/YYYY/` when required by the selected mode or when the request is meaningful durable work.
-37. Update `_history/work-summaries/`, `_history/work-timings/`, detailed history, and maps when required by the selected mode or when the navigation/history layer changed.
-38. For `ship_first`, update `_ops/backlog/deferred-improvements.ko.md` if non-blocking improvements were intentionally postponed.
-39. Commit and push immediately.
+26. For non-`quick` work, run [_ops/workflows/68-omission-prevention.md](68-omission-prevention.md) or produce an equivalent coverage check and include `omission_check_targets`.
+27. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).
+28. If the active conversation has become too long to resume safely from chat, run [_ops/workflows/45-context-archive.md](45-context-archive.md).
+29. Update and validate the timing record with [_ops/workflows/42-record-work-timing.md](42-record-work-timing.md).
+30. Evaluate completed work using the selected `work_mode` against the initial instruction and the artifacts required by that mode.
+31. Rework if the evaluator finds blocking gaps, then evaluate again.
+32. Save or update the public web search record under `_history/web-searches/YYYY/` when required by the selected mode or when the search produced reusable insight.
+33. Save or update the user request summary under `_history/user-requests/YYYY/` when required by the selected mode or when the request changes durable state.
+34. Save or update the requirements baseline/change/review under `_requirements/` or the owning project's `docs/requirements/` when required by the selected mode or when durable behavior changes.
+35. Save or update spec-driven artifacts under `_specs/` or the owning project's `specs/` when required by the selected mode or when implementation scope is durable.
+36. If skill work occurred, save or update `_skills/` source, validation, and improvement records.
+37. Save or update the request-to-outcome trace under `_history/request-traces/YYYY/` when required by the selected mode or when the request is meaningful durable work.
+38. Update `_history/work-summaries/`, `_history/work-timings/`, detailed history, and maps when required by the selected mode or when the navigation/history layer changed.
+39. For `ship_first`, update `_ops/backlog/deferred-improvements.ko.md` if non-blocking improvements were intentionally postponed.
+40. Commit and push immediately.
 
 ## Rule
 

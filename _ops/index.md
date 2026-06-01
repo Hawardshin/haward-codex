@@ -45,6 +45,7 @@
 - Rust, Go, Tauri, Wails, Electron, Python, TypeScript/Next.js 같은 런타임/언어 선택을 조사하고 설계할 때: [_ops/workflows/64-runtime-language-research-design.md](workflows/64-runtime-language-research-design.md), [_ops/prompts/94-runtime-language-research-design.md](prompts/94-runtime-language-research-design.md), [language-decision-registry.json](../agent-platform/configs/runtime/language-decision-registry.json)
 - 설치형 플랫폼이나 프로젝트가 외부 CLI를 사용하되 특정 CLI에 종속되지 않는 adapter 경계를 설계할 때: [_ops/workflows/66-cli-adapter-integration.md](workflows/66-cli-adapter-integration.md), [_ops/prompts/97-cli-adapter-integration.md](prompts/97-cli-adapter-integration.md), [cli-adapter-registry.json](../agent-platform/configs/integrations/cli-adapter-registry.json)
 - 비정형 입력을 요구사항, 스펙, 태스크, evidence item, 표, JSON 같은 정형 기록으로 바꿀 때: [_ops/workflows/67-structure-unstructured-data.md](workflows/67-structure-unstructured-data.md), [_ops/prompts/98-structure-unstructured-data.md](prompts/98-structure-unstructured-data.md), [unstructured-data-structuring-profile.json](../agent-platform/configs/usage/unstructured-data-structuring-profile.json)
+- 작업을 닫기 전에 빠뜨린 지시/요구사항/산출물/검증이 없는지 확인할 때: [_ops/workflows/68-omission-prevention.md](workflows/68-omission-prevention.md), [_ops/prompts/99-omission-prevention.md](prompts/99-omission-prevention.md), [_docs/policies/omission-prevention-policy.ko.md](../_docs/policies/omission-prevention-policy.ko.md), [omission-guard-agent](../agent-platform/docs/omission-guard-agent.ko.md)
 - 지연 개선 백로그를 볼 때: [_ops/backlog/deferred-improvements.ko.md](backlog/deferred-improvements.ko.md)
 - 플랫폼 설명을 볼 때: [README.md](../README.md), [_docs/operating-models/platform-identity-operating-model.ko.md](../_docs/operating-models/platform-identity-operating-model.ko.md), [agent-platform/README.md](../agent-platform/README.md)
 - `_docs` 카테고리와 누락 방지 규칙을 볼 때: [_docs/README.ko.md](../_docs/README.ko.md), [_docs/registry.json](../_docs/registry.json), [_tools/docs-audit/README.ko.md](../_tools/docs-audit/README.ko.md)
@@ -110,6 +111,7 @@
 - `_history/web-searches/YYYY/`에 공개 검색 판단 기록이 남았는가
 - 선택한 `work_mode`가 evaluator input과 계획/요약에 반영됐는가
 - `quick`이 아닌 작업이면 `mode_selection_record_targets`가 남았고, 모드 정책 변경 시 `check-work-modes`를 통과했는가
+- `quick`이 아닌 작업이면 `omission_check_targets`가 남아 필수 지시/요구사항/산출물/검증 coverage가 확인됐는가
 - 작업별 timing record가 `_history/work-timings/YYYY/`에 남고 `timing_summary_targets`에 연결됐는가
 - `ship_first`에서 미룬 비차단 개선이 `_ops/backlog/` 또는 프로젝트별 백로그에 남았는가
 - 컨텍스트 아카이빙이 발생했다면 `_history/context-archives/YYYY/`에 재개 패킷이 남았는가

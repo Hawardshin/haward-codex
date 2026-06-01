@@ -25,6 +25,9 @@
   "mode_selection_record_targets": [
     "_history/plans/YYYY/YYYY-MM-DD-work-mode-selection.ko.md"
   ],
+  "omission_check_targets": [
+    "_history/evaluations/YYYY/YYYY-MM-DD-omission-check.json"
+  ],
   "web_search_record_targets": [
     "_history/web-searches/YYYY/YYYY-MM-DD-slug.ko.md"
   ],

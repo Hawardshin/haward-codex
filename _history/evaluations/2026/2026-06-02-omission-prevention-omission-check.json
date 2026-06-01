@@ -1,0 +1,199 @@
+{
+  "task": "Add omission prevention gate for agent-platform close-out.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "capture-user-risk",
+      "description": "Capture the user's instruction that an agent can miss required work items.",
+      "source": "UR-2026-06-02-011",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "enforce-non-quick-target",
+      "description": "Make omission coverage a non-quick close-out target instead of prompt-only guidance.",
+      "source": "REQ-WS-056",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+        "agent-platform/configs/workflows/work-mode-registry.json",
+        "agent-platform/tests/test_work_evaluator.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "deterministic-checker",
+      "description": "Add a deterministic checker that validates required items, artifacts, and acceptance checks.",
+      "source": "REQ-WS-056",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/evaluation/omission_guard.py",
+        "agent-platform/src/agent_platform/cli.py",
+        "agent-platform/tests/test_omission_guard.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "docs-and-workflow",
+      "description": "Document the omission prevention policy, workflow, and reusable prompt.",
+      "source": "REQ-WS-056",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_docs/policies/omission-prevention-policy.ko.md",
+        "_docs/policies/omission-prevention-policy.en.md",
+        "_ops/workflows/68-omission-prevention.md",
+        "_ops/prompts/99-omission-prevention.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "history-and-trace",
+      "description": "Preserve request, plan, source, outcome, timing, and evaluation history for future agents.",
+      "source": "repository close-out rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-omission-prevention.ko.md",
+        "_history/plans/2026/2026-06-02-omission-prevention.ko.md",
+        "_history/request-traces/2026/2026-06-02-omission-prevention.ko.md",
+        "_history/work-timings/2026/2026-06-02-omission-prevention.json",
+        "_history/work-summaries/2026/2026-06-02.ko.md",
+        "_history/evaluations/2026/2026-06-02-omission-prevention.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/src/agent_platform/evaluation/omission_guard.py",
+      "purpose": "Omission guard implementation.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/evaluation/omission-guard-template.json",
+      "purpose": "Reusable omission guard input template.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/agents/omission-guard-agent.json",
+      "purpose": "Agent registry entry.",
+      "required": true
+    },
+    {
+      "path": "_docs/policies/omission-prevention-policy.ko.md",
+      "purpose": "Korean durable policy.",
+      "required": true
+    },
+    {
+      "path": "_docs/policies/omission-prevention-policy.en.md",
+      "purpose": "English durable policy companion.",
+      "required": true
+    },
+    {
+      "path": "_ops/workflows/68-omission-prevention.md",
+      "purpose": "Reusable workflow.",
+      "required": true
+    },
+    {
+      "path": "_ops/prompts/99-omission-prevention.md",
+      "purpose": "Reusable prompt.",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-02-omission-prevention/spec.ko.md",
+      "purpose": "Spec artifact.",
+      "required": true
+    },
+    {
+      "path": "_history/evaluations/2026/2026-06-02-omission-prevention.ko.md",
+      "purpose": "Final Korean evaluation report.",
+      "required": true
+    },
+    {
+      "path": "_history/evaluations/2026/2026-06-02-omission-prevention.en.md",
+      "purpose": "Final English evaluation report.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "unit-tests",
+      "description": "Agent platform unit tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 -m unittest discover -s tests from agent-platform: Ran 125 tests, OK"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "omission-template-cli",
+      "description": "The check-omissions CLI accepts the template and returns coverage_ready.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-omissions configs/evaluation/omission-guard-template.json: coverage_ready"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "work-mode-drift",
+      "description": "Work mode registry stays in sync with evaluator target policy.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-work-modes configs/workflows/work-mode-registry.json: ready"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "memory-bootstrap",
+      "description": "Memory bootstrap remains ready after adding omission prevention anchors.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json --root ..: ready_to_bootstrap"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "docs-and-structure-audits",
+      "description": "Docs, naming, and structure audits have no blocking gaps.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+        "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+        "python3 _tools/structure-audit/src/structure_audit.py --check: clean with pre-existing presentation-agent warnings"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "navigation-and-monitor",
+      "description": "Repository maps, task board, and workspace monitor snapshot were regenerated.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/workspace-index/src/workspace_index.py: updated repository-map and prompt-map",
+        "python3 _tools/task-board/src/task_board.py: updated coordination boards",
+        "npm run collect from workspace-monitor: wrote 1200 documents"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Structure audit still reports pre-existing presentation-agent generated folders as warnings, not blocking gaps for this task.",
+    "Commit and push happen after this check and are recorded in final close-out rather than this pre-commit coverage record."
+  ],
+  "notes": [
+    "This file is the omission_check_targets artifact for REQ-WS-056 work."
+  ]
+}
