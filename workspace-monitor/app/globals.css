@@ -12,6 +12,10 @@
   --red: #a43d3d;
   --violet: #7057a8;
   --slate: #4b5968;
+  --rose: #b85b7d;
+  --mint-soft: #e8f6ef;
+  --peach-soft: #fff1e7;
+  --soft-shadow: 0 10px 24px rgba(31, 41, 51, 0.08);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -34,6 +38,27 @@ select {
 
 button {
   cursor: pointer;
+}
+
+button,
+.metric,
+.record-card,
+.doc-preview,
+.history-latest,
+.source-list button,
+.timeline-docs article,
+.agent-map article,
+.collaboration-summary article,
+.collaboration-lane,
+.collaboration-lane article,
+.agent-workload-strip article,
+.agent-flow-map article,
+.task-lanes article {
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
 }
 
 main {
@@ -175,7 +200,7 @@ h3 {
 
 .segmented-control button.active {
   border-color: #a8b5c3;
-  background: #25313f;
+  background: linear-gradient(135deg, #25313f 0%, #2f3d4e 100%);
   color: #ffffff;
 }
 
@@ -206,7 +231,7 @@ h3 {
 
 .section-tabs button.active {
   border-color: #a8b5c3;
-  background: #25313f;
+  background: linear-gradient(135deg, #25313f 0%, #2f3d4e 100%);
   color: #ffffff;
 }
 
@@ -289,8 +314,23 @@ h3 {
 }
 
 .metric {
+  position: relative;
   min-height: 112px;
+  overflow: hidden;
   padding: 14px;
+}
+
+.metric::after {
+  content: "";
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--rose);
+  box-shadow: 0 0 0 4px var(--peach-soft);
+  opacity: 0.55;
 }
 
 .metric svg {
@@ -350,24 +390,54 @@ h3 {
   color: var(--green);
 }
 
+.metric-green::after {
+  background: var(--green);
+  box-shadow: 0 0 0 4px var(--mint-soft);
+}
+
 .metric-blue svg {
   color: var(--blue);
+}
+
+.metric-blue::after {
+  background: var(--blue);
+  box-shadow: 0 0 0 4px #e7effb;
 }
 
 .metric-amber svg {
   color: var(--amber);
 }
 
+.metric-amber::after {
+  background: var(--amber);
+  box-shadow: 0 0 0 4px #fff3d8;
+}
+
 .metric-red svg {
   color: var(--red);
+}
+
+.metric-red::after {
+  background: var(--red);
+  box-shadow: 0 0 0 4px #fdecec;
 }
 
 .metric-violet svg {
   color: var(--violet);
 }
 
+.metric-violet::after {
+  background: var(--violet);
+  box-shadow: 0 0 0 4px #f0ecfb;
+}
+
 .metric-slate svg {
   color: var(--slate);
+}
+
+.metric-slate::after {
+  background: var(--slate);
+  box-shadow: 0 0 0 4px #eef2f6;
 }
 
 .panel {
@@ -578,6 +648,7 @@ h3 {
 
 .empty-state {
   border: 1px dashed var(--line);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
   border-radius: 8px;
   padding: 16px;
   color: var(--muted);
@@ -1219,6 +1290,38 @@ h3 {
 .requirements-table p {
   margin: 3px 0;
   line-height: 1.5;
+}
+
+@media (hover: hover) {
+  .section-tabs button:hover,
+  .panel-heading button:hover,
+  .segmented-control button:hover,
+  .source-list button:hover,
+  .metric:hover,
+  .record-card:hover,
+  .history-latest:hover,
+  .timeline-docs article:hover,
+  .agent-map article:hover,
+  .collaboration-summary article:hover,
+  .collaboration-lane article:hover,
+  .agent-workload-strip article:hover,
+  .agent-flow-map article:hover,
+  .task-lanes article:hover {
+    transform: translateY(-1px);
+    border-color: #c1ccd8;
+    box-shadow: var(--soft-shadow);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 @media (max-width: 1080px) {

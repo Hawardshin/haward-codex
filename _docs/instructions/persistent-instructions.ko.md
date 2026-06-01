@@ -46,6 +46,7 @@
 - UI, dashboard, monitor, admin surface, generated snapshot에서 사용자가 보는 것, 개발자가 보는 것, 슈퍼어드민이 보는 것을 나눠야 하면 `agent-platform/configs/access/view-mode-registry.json`에서 `view_mode`를 선택한다.
 - 현재 기본 `view_mode`는 `superadmin_developer`다. `view_mode`는 화면/운영 렌즈이고, 환경 준비 범위인 `install_mode`나 작업 평가 강도인 `work_mode`와 섞지 않는다.
 - client-side hiding은 보안 경계가 아니다. public 또는 multi-user 배포에서는 snapshot collector, server authorization, 인증/인가, 테스트로 강제해야 한다.
+- 플랫폼 UI는 명확성, 훑어보기, 접근성, 운영 신뢰를 해치지 않는 선에서 은근히 귀엽고 조용히 기분 좋은 톤을 사용할 수 있다. 작은 색상 accent, 상태 신호, 친근한 empty state, 절제된 micro-interaction을 우선하고 장식 과잉, emoji 남용, 시각적 소음은 피한다.
 - 에이전트는 뭔가를 빼먹을 수 있다고 가정한다. `quick`이 아닌 작업은 `_ops/workflows/68-omission-prevention.md` 또는 동등한 coverage check를 통해 필수 지시, 요구사항, 산출물, acceptance check를 확인하고 `omission_check_targets`를 평가 입력에 포함한다.
 - 이 플랫폼은 메모리 누수와 런타임 리소스 누수를 신뢰성 문제로 다룬다. 장시간 실행 에이전트, 서버, 브라우저 자동화, subprocess, worker, queue, cache, stream, 대용량 처리, 파일 핸들, 네트워크 연결, timer, subscription을 건드리면 `_ops/workflows/69-resource-leak-prevention.md`를 사용하고 `resource_risk_occurred=true`, `resource_check_targets`를 평가 입력에 포함한다.
 - 하나의 작업에서 여러 CLI 프로세스를 실행하거나 stdout/stderr/stdin pipe, 파일/임시 아티팩트/cache/log/report handoff, fan-out/fan-in merge, desktop/monitor/local daemon 기반 CLI orchestration을 설계하면 `_ops/workflows/71-cli-pipeline-orchestration.md`를 사용하고 `cli_pipeline_occurred=true`, `cli_pipeline_targets`를 평가 입력에 포함한다.

@@ -1,0 +1,147 @@
+{
+  "task": "Persist and apply the user's preference for a subtly cute platform UI tone.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "durable-ui-tone-rule",
+      "description": "The user's UI tone preference must be saved as a durable rule for future work.",
+      "source": "UR-2026-06-02-020, REQ-WS-062",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_docs/instructions/persistent-instructions.ko.md",
+        "_docs/instructions/persistent-instructions.en.md",
+        "AGENTS.md",
+        "agent-platform/configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "ui-tone-policy",
+      "description": "A policy must define how to keep cute/delightful UI details subordinate to operational clarity.",
+      "source": "REQ-WS-062",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_docs/policies/ui-tone-policy.ko.md",
+        "_docs/policies/ui-tone-policy.en.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "workspace-monitor-requirement",
+      "description": "Workspace Monitor must record the visual tone requirement for future UI work.",
+      "source": "REQ-WM-014",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+        "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "css-implementation",
+      "description": "Workspace Monitor should apply the tone through restrained, maintainable CSS details.",
+      "source": "workspace-monitor/specs/2026-06-02-subtle-cute-ui-tone/spec.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "avoid-large-redesign",
+      "description": "The task should not become a large redesign, mascot, or decorative theme.",
+      "source": "workspace-monitor/specs/2026-06-02-subtle-cute-ui-tone/spec.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/app/globals.css",
+        "_docs/policies/ui-tone-policy.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "browser-screenshot",
+      "description": "Run browser screenshot visual verification.",
+      "source": "workspace-monitor/specs/2026-06-02-subtle-cute-ui-tone/validation.ko.md",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "npm run build"
+      ],
+      "rationale": "The Browser tool was not exposed in this session. Static build, TypeScript check, CSS grep, and generated snapshot checks were used instead."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "_docs/policies/ui-tone-policy.ko.md",
+      "purpose": "Korean durable UI tone policy.",
+      "required": true
+    },
+    {
+      "path": "_docs/policies/ui-tone-policy.en.md",
+      "purpose": "English durable UI tone policy.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/app/globals.css",
+      "purpose": "CSS implementation for subtle accents and motion guardrails.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/specs/2026-06-02-subtle-cute-ui-tone/spec.ko.md",
+      "purpose": "Project spec for the UI tone change.",
+      "required": true
+    },
+    {
+      "path": "_history/work-timings/2026/2026-06-02-subtle-cute-ui-tone.json",
+      "purpose": "Timing and bottleneck record.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-tests",
+      "description": "Workspace Monitor tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm test"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-build",
+      "description": "Workspace Monitor type check and static build pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm run check",
+        "npm run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "docs-config-checks",
+      "description": "Docs and config checks pass after adding a new policy and memory anchor.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/docs-audit/src/docs_audit.py --check",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ..."
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "The user's exact preferred intensity for cuteness still needs future visual review.",
+    "Browser screenshot verification was not available in this session."
+  ],
+  "notes": [
+    "This task intentionally stayed CSS-only for the monitor and did not change snapshot schema."
+  ]
+}

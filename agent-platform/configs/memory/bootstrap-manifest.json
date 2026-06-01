@@ -166,6 +166,18 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "ui_tone_policy",
+      "title": "UI Tone Policy",
+      "path": "_docs/policies/ui-tone-policy.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "subtly cute platform UI tone",
+        "operational trust and scanability limits for delightful details",
+        "motion and micro-interaction guardrails"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
       "id": "desktop_distribution_registry",
       "title": "Desktop Distribution Registry",
       "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
@@ -1180,6 +1192,7 @@
     "memory_bootstrap_workflow",
     "work_mode_registry",
     "view_mode_registry",
+    "ui_tone_policy",
     "omission_prevention_workflow",
     "resource_leak_prevention_workflow",
     "install_mode_registry",
@@ -1237,6 +1250,7 @@
     "memory_bootstrap_workflow",
     "work_mode_registry",
     "view_mode_registry",
+    "ui_tone_policy",
     "omission_prevention_workflow",
     "resource_leak_prevention_workflow",
     "install_mode_registry",
@@ -1361,6 +1375,14 @@
       "path": "agent-platform/configs/access/view-mode-registry.json",
       "tier": "warm",
       "purpose": "Selectable user, developer, and superadmin development UI/operations lenses for dashboards, monitors, admin surfaces, desktop surfaces, and generated snapshots, kept separate from install_mode and work_mode.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "ui_tone_policy",
+      "path": "_docs/policies/ui-tone-policy.ko.md",
+      "tier": "warm",
+      "purpose": "Subtle cute and quietly delightful UI tone policy that keeps clarity, scanability, accessibility, and operational trust first.",
       "required": true,
       "load_order": 8
     },

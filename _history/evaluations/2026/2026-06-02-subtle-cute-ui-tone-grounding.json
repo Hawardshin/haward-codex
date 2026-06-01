@@ -1,0 +1,119 @@
+{
+  "task": "Ground factual claims for the subtle cute UI tone close-out.",
+  "output_summary": "The repository now records a durable subtle UI delight policy and Workspace Monitor applies small CSS accents plus reduced-motion handling.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user-request",
+      "source": "UR-2026-06-02-020 in _history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "user_instruction",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable summary of the user's UI tone preference."
+    },
+    {
+      "evidence_id": "policy",
+      "source": "_docs/policies/ui-tone-policy.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary policy added for subtle cute UI tone."
+    },
+    {
+      "evidence_id": "css",
+      "source": "workspace-monitor/app/globals.css",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary CSS implementation."
+    },
+    {
+      "evidence_id": "requirements",
+      "source": "_requirements/baselines/2026-05-31-workspace-platform.ko.md and workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Requirement records for the shared platform and Workspace Monitor."
+    },
+    {
+      "evidence_id": "validation",
+      "source": "npm test; npm run collect; npm run check; npm run build; docs-audit; memory bootstrap; config contract",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local validation commands for repository state and build readiness."
+    },
+    {
+      "evidence_id": "apple-motion",
+      "source": "https://developer.apple.com/design/Human-Interface-Guidelines/motion",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Apple design guidance on purposeful motion and accessibility."
+    },
+    {
+      "evidence_id": "fluent-principles",
+      "source": "https://fluent2.microsoft.design/design-principles",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Microsoft Fluent 2 guidance on focus, trust, and personality."
+    },
+    {
+      "evidence_id": "material-motion",
+      "source": "https://m2.material.io/design/motion/understanding-motion.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Material motion guidance on using motion to communicate UI relationships and outcomes."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The user's subtle cute UI preference is now recorded as a durable platform instruction.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "user-request",
+        "policy",
+        "requirements"
+      ],
+      "verification_steps": [
+        "Checked persistent instruction files.",
+        "Checked UI tone policy and requirements records."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace Monitor CSS now includes small accent tokens, metric status dots, hover feedback, and prefers-reduced-motion handling.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "css",
+        "validation"
+      ],
+      "verification_steps": [
+        "Read workspace-monitor/app/globals.css.",
+        "Ran TypeScript check and static build."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The external design references support restrained, purposeful motion and low-clutter UI personality rather than decorative overload.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "apple-motion",
+        "fluent-principles",
+        "material-motion"
+      ],
+      "verification_steps": [
+        "Checked official design system documents during web-first intake."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "The user's exact preferred visual intensity still needs future visual feedback.",
+    "No browser screenshot verification was available in this session."
+  ],
+  "limitation_notes": [
+    "This change is static CSS and policy work, not a full design system rewrite.",
+    "No new UI dependency was installed."
+  ]
+}

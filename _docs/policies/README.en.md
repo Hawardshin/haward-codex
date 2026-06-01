@@ -12,4 +12,5 @@ Examples:
 - CLI adapter and external command execution boundary policies
 - Unstructured data structuring policies
 - Runtime and language selection policies
+- UI tone and operational-surface delight policies
 - Documentation language and context archive policies
