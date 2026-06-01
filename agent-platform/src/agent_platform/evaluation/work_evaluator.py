@@ -21,6 +21,7 @@ TARGET_GAP_MESSAGES = {
     "spec_targets": "Spec target is missing. Add or update spec-driven artifacts under _specs/ or the owning project's specs/.",
     "request_trace_targets": "Request trace target is missing. Add a request-to-outcome trace under _history/request-traces/.",
     "work_summary_targets": "Work summary target is missing. Add a concise human-readable summary under _history/work-summaries/.",
+    "timing_summary_targets": "Timing summary target is missing. Add a phase-level work timing record under _history/work-timings/ so bottlenecks are visible.",
 }
 
 MODE_REQUIRED_TARGETS = {
@@ -32,6 +33,7 @@ MODE_REQUIRED_TARGETS = {
         "source_provenance_targets",
         "plan_evidence_targets",
         "web_search_record_targets",
+        "timing_summary_targets",
     },
     "governance": set(TARGET_GAP_MESSAGES),
 }
@@ -59,6 +61,7 @@ class WorkEvaluationInput:
     skill_validation_targets: tuple[str, ...] = ()
     request_trace_targets: tuple[str, ...] = ()
     work_summary_targets: tuple[str, ...] = ()
+    timing_summary_targets: tuple[str, ...] = ()
     context_archiving_occurred: bool = False
     context_archive_targets: tuple[str, ...] = ()
     installation_occurred: bool = False
@@ -88,6 +91,7 @@ class WorkEvaluationInput:
             skill_validation_targets=_tuple_of_strings(data.get("skill_validation_targets", []), "skill_validation_targets"),
             request_trace_targets=_tuple_of_strings(data.get("request_trace_targets", []), "request_trace_targets"),
             work_summary_targets=_tuple_of_strings(data.get("work_summary_targets", []), "work_summary_targets"),
+            timing_summary_targets=_tuple_of_strings(data.get("timing_summary_targets", []), "timing_summary_targets"),
             context_archiving_occurred=_optional_bool(data.get("context_archiving_occurred", False), "context_archiving_occurred"),
             context_archive_targets=_tuple_of_strings(data.get("context_archive_targets", []), "context_archive_targets"),
             installation_occurred=_optional_bool(data.get("installation_occurred", False), "installation_occurred"),
@@ -176,6 +180,7 @@ def evaluate_work(evaluation_input: WorkEvaluationInput) -> JsonMap:
             "skill_validation_targets_count": len(evaluation_input.skill_validation_targets),
             "request_trace_targets_count": len(evaluation_input.request_trace_targets),
             "work_summary_targets_count": len(evaluation_input.work_summary_targets),
+            "timing_summary_targets_count": len(evaluation_input.timing_summary_targets),
             "context_archiving_occurred": evaluation_input.context_archiving_occurred,
             "context_archive_targets_count": len(evaluation_input.context_archive_targets),
             "installation_occurred": evaluation_input.installation_occurred,

@@ -23,6 +23,7 @@
 | `_history/request-traces/` | 요청이 실제 결과, 산출물, 평가, 커밋으로 이어진 흐름 |
 | `_history/work-summaries/` | 나중에 빠르게 읽는 날짜별 작업 요약과 HTML 인덱스 |
 | `_history/web-searches/` | 모든 지시/프롬프트 실행의 웹 검색과 공개 판단 요약 |
+| `_history/work-timings/` | 작업별 phase 소요시간과 병목 후보 |
 | `_history/installations/` | 실제 설치/업그레이드/제거 상세 감사 기록 |
 | `_history/plans/` | 에이전트 계획 과정 기록 |
 | `_skills/` | git으로 추적하는 커스텀 Codex 스킬 원본 |
@@ -74,6 +75,7 @@
 - 요청이 어떤 결과로 이어졌는지 볼 때: [_history/request-traces/README.ko.md](../_history/request-traces/README.ko.md), [_docs/policies/request-traceability-policy.ko.md](../_docs/policies/request-traceability-policy.ko.md)
 - 완료된 작업을 빠르게 볼 때: [_history/work-summaries/README.ko.md](../_history/work-summaries/README.ko.md), [_history/work-summaries/index.html](../_history/work-summaries/index.html)
 - 진행 중인 에이전트/병렬 작업을 볼 때: [_ops/coordination/board.ko.md](coordination/board.ko.md), [_ops/coordination/board.html](coordination/board.html)
+- 작업별 병목과 소요시간을 볼 때: [_history/work-timings/README.ko.md](../_history/work-timings/README.ko.md), [_tools/work-timer/README.ko.md](../_tools/work-timer/README.ko.md)
 - 재사용 가능한 조사 내용을 볼 때: [_research/index.ko.md](../_research/index.ko.md)
 - 겹치는 운영 구조와 source of truth를 확인할 때: [_research/overlap-audits/2026-05-31-source-discovery-overlap.ko.md](../_research/overlap-audits/2026-05-31-source-discovery-overlap.ko.md)
 - 저장소 구조를 볼 때: [_ops/maps/repository-map.md](maps/repository-map.md)
@@ -97,6 +99,7 @@
 - `_history/work-summaries/YYYY/YYYY-MM-DD.ko.md`에 빠른 요약이 남았는가
 - `_history/web-searches/YYYY/`에 공개 검색 판단 기록이 남았는가
 - 선택한 `work_mode`가 evaluator input과 계획/요약에 반영됐는가
+- 작업별 timing record가 `_history/work-timings/YYYY/`에 남고 `timing_summary_targets`에 연결됐는가
 - `ship_first`에서 미룬 비차단 개선이 `_ops/backlog/` 또는 프로젝트별 백로그에 남았는가
 - 컨텍스트 아카이빙이 발생했다면 `_history/context-archives/YYYY/`에 재개 패킷이 남았는가
 - 사용자 요청 요약이 `_history/user-requests/YYYY/`에 남았는가

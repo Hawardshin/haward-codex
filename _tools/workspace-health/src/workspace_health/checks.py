@@ -44,6 +44,7 @@ def build_checks(root: Path, include_build: bool = False) -> list[Check]:
                         "../_ops/installations/registry.json",
                         "../_ops/naming/naming-policy.json",
                         "../_tools/coding-project-bootstrap/configs/blueprints.json",
+                        "../_tools/work-timer/configs/work-timing-policy.json",
                     ),
                     {"PYTHONPATH": "src"},
                 ),

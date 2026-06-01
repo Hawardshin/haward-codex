@@ -415,7 +415,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <article key={task.id}>
                   <strong>{task.title || task.id}</strong>
                   <span>{task.status}</span>
-                  <p>{task.next_action || task.evaluation_report || "No next action"}</p>
+                  <p>
+                    {task.timing_summary
+                      ? `시간 ${task.timing_summary.total || "unknown"} / 병목 ${task.timing_summary.bottleneck || "unknown"}`
+                      : task.next_action || task.evaluation_report || "No next action"}
+                  </p>
                 </article>
               ))}
             </div>

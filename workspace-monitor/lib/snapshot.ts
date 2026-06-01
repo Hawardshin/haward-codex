@@ -10,6 +10,7 @@ export type WorkspaceStats = {
   requirements: number;
   evaluations: number;
   webSearches: number;
+  timingRecords?: number;
   historyDays: number;
   rootFolders: number;
 };
@@ -42,6 +43,11 @@ export type WorkspaceTask = {
   priority?: string;
   next_action?: string;
   evaluation_report?: string;
+  timing_report?: string;
+  timing_summary?: {
+    total?: string;
+    bottleneck?: string;
+  };
 };
 
 export type WorkspaceRequirement = {
@@ -169,6 +175,7 @@ export function categoryLabel(category: string) {
     template: "템플릿",
     "user-request": "요청 요약",
     "web-search": "웹 검색",
+    "work-timing": "작업 시간",
     "workspace-doc": "워크스페이스 문서",
     "work-summary": "작업 요약"
   };

@@ -34,6 +34,7 @@
       "The request-to-outcome trace layer or traceability contract changes.",
       "The web search record layer or prompt-level search contract changes.",
       "The work mode selection or deferred improvement policy changes.",
+      "The work timing, bottleneck visibility, or timing_summary_targets contract changes.",
       "The parallel work planning workflow, planner agent, research merge gate, or coordination lane contract changes.",
       "The notification settings, provider routing, or webhook secret handling contract changes.",
     "The root structure policy, local-only folder rule, or structure audit command changes.",
@@ -104,6 +105,18 @@
         "deferred improvement backlog rules"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "work_timing_policy",
+      "title": "Work Timing Policy",
+      "path": "_tools/work-timer/configs/work-timing-policy.json",
+      "source_type": "internal",
+      "used_for": [
+        "phase-level task timing",
+        "bottleneck visibility",
+        "timing_summary_targets close-out policy"
+      ],
+      "last_checked": "2026-06-01"
     },
     {
       "id": "parallel_work_planner",
@@ -692,6 +705,18 @@
       ]
     },
     {
+      "id": "work_timing_must_stay_discoverable",
+      "rule": "The work timing policy and workflow must remain warm memory anchors so future sessions can record phase durations and bottleneck candidates for meaningful work.",
+      "reason": "The user explicitly asked to make it easy to see where each task spends time and where bottlenecks occur.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "work-timer",
+        "work-evaluator-agent"
+      ]
+    },
+    {
       "id": "parallel_work_must_be_planned_before_execution",
       "rule": "When speed matters or work can split into independent lanes, use parallel-work-planner-agent before parallel execution. Do not run overlapping touch paths or shared mutable resources in the same batch without a dependency, lock, branch/worktree rule, or explicit handoff. When multiple research lanes run in parallel, require a merge gate that waits for all research lanes and releases downstream implementation only after acceptance checks pass.",
       "reason": "The user explicitly asked for a structure that can process work in parallel when speed is a bottleneck while keeping work understandable and safe.",
@@ -833,6 +858,8 @@
     "web_first_workflow",
     "memory_bootstrap_workflow",
     "work_mode_registry",
+    "work_timing_policy",
+    "work_timing_workflow",
     "parallel_work_workflow",
     "coordination_board",
     "project_registry",
@@ -873,6 +900,8 @@
     "web_first_workflow",
     "memory_bootstrap_workflow",
     "work_mode_registry",
+    "work_timing_policy",
+    "work_timing_workflow",
     "parallel_work_workflow",
     "coordination_board",
     "project_registry",
@@ -973,6 +1002,22 @@
       "path": "agent-platform/configs/workflows/work-mode-registry.json",
       "tier": "hot",
       "purpose": "Selectable work modes and evaluator target policy for avoiding unnecessary full-loop overhead.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "work_timing_policy",
+      "path": "_tools/work-timer/configs/work-timing-policy.json",
+      "tier": "warm",
+      "purpose": "Phase-level timing and bottleneck policy for meaningful work.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "work_timing_workflow",
+      "path": "_ops/workflows/42-record-work-timing.md",
+      "tier": "warm",
+      "purpose": "Workflow for recording and validating task phase timing records.",
       "required": true,
       "load_order": 8
     },

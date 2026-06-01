@@ -1,0 +1,134 @@
+{
+  "task": "Ground factual claims for work timing and bottleneck visibility.",
+  "output_summary": "Added phase-level work timing records, a work-timer validation/summary tool, evaluator timing targets, timing workflow/prompt guidance, and timing display in coordination board plus Workspace Monitor.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "work_timer_source",
+      "source": "_tools/work-timer/src/work_timer.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked Python CLI implementing check and summarize commands."
+    },
+    {
+      "evidence_id": "work_timer_policy",
+      "source": "_tools/work-timer/configs/work-timing-policy.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked self-documenting config defining timing phases and thresholds."
+    },
+    {
+      "evidence_id": "timing_record",
+      "source": "_history/work-timings/2026/2026-06-01-work-timing-instrumentation.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked timing record for the current task."
+    },
+    {
+      "evidence_id": "work_timer_tests",
+      "source": "python3 -m unittest discover -s _tools/work-timer/tests",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output showed 5 tests passed."
+    },
+    {
+      "evidence_id": "timing_check",
+      "source": "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-01-work-timing-instrumentation.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command output returned ready."
+    },
+    {
+      "evidence_id": "work_evaluator",
+      "source": "agent-platform/src/agent_platform/evaluation/work_evaluator.py; agent-platform/tests/test_work_evaluator.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked evaluator code and tests include timing_summary_targets."
+    },
+    {
+      "evidence_id": "task_board",
+      "source": "_tools/task-board/src/task_board.py; _ops/coordination/board.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked board generator and generated board include timing and bottleneck columns."
+    },
+    {
+      "evidence_id": "workspace_monitor",
+      "source": "workspace-monitor/scripts/collect-workspace.mjs; workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked monitor collector and UI read timing reports and display summaries."
+    },
+    {
+      "evidence_id": "workspace_health",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --include-build",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Workspace health command passed 21 checks."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "A reusable work-timer CLI was added under _tools.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["work_timer_source", "work_timer_tests"],
+      "verification_steps": ["Read the tool source and ran its unit tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The timing policy defines phase-level work timing and bottleneck thresholds.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["work_timer_policy"],
+      "verification_steps": ["Read the work timing policy and ran config contract checks."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The current task has a partial timing record and the work-timer check command returned ready.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["timing_record", "timing_check"],
+      "verification_steps": ["Read the timing record and ran the check command."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "work-evaluator-agent now recognizes timing_summary_targets.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["work_evaluator"],
+      "verification_steps": ["Read evaluator code and ran agent-platform tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The coordination board can display timing and bottleneck columns from timing_report.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["task_board"],
+      "verification_steps": ["Regenerated the coordination board and inspected the generated Markdown."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace Monitor can ingest timing reports and display timing summaries for tasks.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["workspace_monitor", "workspace_health"],
+      "verification_steps": ["Ran Workspace Monitor tests, typecheck, build, and full workspace-health."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Timing thresholds are initial defaults and should be tuned after several real timing records accumulate.",
+    "The current task timing is partial because the timing workflow was introduced after the task started."
+  ],
+  "limitation_notes": [
+    "The tool does not automatically measure every command; future agents still need to create or update timing records.",
+    "Historical tasks were not backfilled with exact timing because that would create false precision."
+  ]
+}

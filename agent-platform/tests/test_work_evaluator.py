@@ -18,6 +18,9 @@ def complete_evidence_targets() -> dict[str, tuple[str, ...]]:
         "plan_evidence_targets": (
             "_history/plans/2026/2026-05-31-evaluator.ko.md",
         ),
+        "timing_summary_targets": (
+            "_history/work-timings/2026/2026-05-31-evaluator.json",
+        ),
     }
 
 
@@ -178,6 +181,31 @@ class WorkEvaluatorTests(unittest.TestCase):
         self.assertTrue(report["requires_rework"])
         self.assertIn(
             "Work summary target is missing. Add a concise human-readable summary under _history/work-summaries/.",
+            report["gaps"],
+        )
+
+    def test_missing_timing_summary_requires_rework(self) -> None:
+        report = evaluate_work(
+            WorkEvaluationInput(
+                initial_instruction="Make bottlenecks easy to see.",
+                result_summary="Added operational timing rules.",
+                changed_files=("_ops/workflows/00-start-here.md",),
+                verification=("manual doc review: OK",),
+                references_checked=("OpenTelemetry Tracing API",),
+                source_provenance_targets=("_history/web-searches/2026/2026-06-01-timing.ko.md",),
+                plan_evidence_targets=("_specs/workspace-platform/2026-06-01-work-timing-instrumentation/plan.ko.md",),
+                web_search_record_targets=("_history/web-searches/2026/2026-06-01-timing.ko.md",),
+                user_request_summary_targets=("_history/user-requests/2026/2026-06-01.ko.md",),
+                requirements_targets=("_requirements/baselines/2026-05-31-workspace-platform.ko.md",),
+                spec_targets=("_specs/workspace-platform/2026-06-01-work-timing-instrumentation/spec.ko.md",),
+                request_trace_targets=("_history/request-traces/2026/2026-06-01.ko.md",),
+                work_summary_targets=("_history/work-summaries/2026/2026-06-01.ko.md",),
+            )
+        )
+
+        self.assertTrue(report["requires_rework"])
+        self.assertIn(
+            "Timing summary target is missing. Add a phase-level work timing record under _history/work-timings/ so bottlenecks are visible.",
             report["gaps"],
         )
 

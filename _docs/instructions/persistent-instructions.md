@@ -45,6 +45,7 @@
 - After web search and before local planning, run `memory-bootstrap-agent` to check required memory anchors and read hot context.
 - After web-first intake and memory bootstrap, select a `work_mode` from `agent-platform/configs/workflows/work-mode-registry.json`: `quick`, `standard`, `ship_first`, `research`, or `governance`.
 - Use the lightest work mode that fits risk and durability; do not run requirements, specs, request traces, and full close-out targets when the selected mode makes them non-blocking.
+- For meaningful work, record phase-level duration under `_history/work-timings/YYYY/` using `_tools/work-timer/` so the slowest phase and bottleneck candidates are visible.
 - If `ship_first` mode defers non-blocking improvements, record them in `_ops/backlog/deferred-improvements.ko.md` or the owning project's equivalent backlog and include `deferred_improvement_targets` in evaluation input.
 - When speed matters or work can be split into multiple lanes, use `parallel-work-planner-agent` to check dependencies, `touch_paths`, conflict controls, coordination targets, and merge strategy first.
 - Do not run work that touches the same files, settings, generated maps, git state, or other shared mutable resources in parallel without an explicit dependency, lock, branch/worktree rule, or handoff.
@@ -93,6 +94,7 @@
 - Use `work-evaluator-agent` as the default close-out evaluator.
 - Include `work_mode` in work evaluation input.
 - Include `user_request_summary_targets`, `requirements_targets`, `spec_targets`, `request_trace_targets`, `work_summary_targets`, `source_provenance_targets`, and `plan_evidence_targets` when required by the selected work mode.
+- Include `timing_summary_targets` when required by the selected work mode, and mark unmeasured timing spans as `partial` or `not_measured`.
 - If skill work occurred, include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets` in work evaluation input.
 - Prefer Python for agent implementations, orchestration, backend automation, evaluation, and reusable local tools.
 - Use mature, maintained, license-compatible open-source tools and libraries when they fit the task.

@@ -14,7 +14,7 @@
 6. Validate any reused knowledge-base content with [_ops/workflows/65-validate-knowledge-reference.md](65-validate-knowledge-reference.md).
 7. Capture reusable internet research or external references when useful.
 8. Run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md) when the final output contains factual claims.
-9. List changed files, verification results, references checked, grounding checks, source provenance targets, plan evidence targets, web search record targets, user request summary targets, requirements targets, spec targets, skill targets and validation targets when skill work occurred, request trace targets, work summary targets, deferred improvement targets, context archive targets when archiving occurred, and installation record targets when installation occurred.
+9. List changed files, verification results, references checked, grounding checks, source provenance targets, plan evidence targets, web search record targets, user request summary targets, requirements targets, spec targets, skill targets and validation targets when skill work occurred, request trace targets, work summary targets, timing summary targets, deferred improvement targets, context archive targets when archiving occurred, and installation record targets when installation occurred.
 10. If a plan guided the work, link its `_history/plans/YYYY/` file.
 11. Confirm the user-readable summary exists under `_history/work-summaries/YYYY/` when the mode requires it.
 12. Run or simulate `work-evaluator-agent` using [../prompts/70-evaluate-work.md](../prompts/70-evaluate-work.md).
@@ -48,7 +48,9 @@ In `ship_first` mode, `references_checked` and `web_search_record_targets` are b
 
 In `research` mode, `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, and `web_search_record_targets` are blocking.
 
-In `standard` and `governance` modes, web search records, user request summaries, requirements targets, spec targets, source provenance, plan evidence, request traces, and work summaries are blocking.
+In `standard` and `governance` modes, web search records, user request summaries, requirements targets, spec targets, source provenance, plan evidence, request traces, work summaries, and timing summaries are blocking.
+
+In `research` mode, timing summaries are blocking so slow source collection or synthesis phases stay visible.
 
 When skill work occurred, the evaluator input must include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`. Missing skill source or validation targets are blocking gaps.
 

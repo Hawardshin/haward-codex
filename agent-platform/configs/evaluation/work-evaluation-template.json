@@ -47,6 +47,9 @@
   "work_summary_targets": [
     "_history/work-summaries/YYYY/YYYY-MM-DD.ko.md"
   ],
+  "timing_summary_targets": [
+    "_history/work-timings/YYYY/YYYY-MM-DD-slug.json"
+  ],
   "context_archiving_occurred": false,
   "context_archive_targets": [
     "_history/context-archives/YYYY/YYYY-MM-DD-slug.ko.md"

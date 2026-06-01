@@ -1,0 +1,113 @@
+{
+  "initial_instruction": "야 그리고 지금 각 작업에서 어디에서 병목이 있는지 쉽게 알 수 있게 걸리는 시간들을 기록해줘.",
+  "result_summary": "Added phase-level work timing records, a reusable work-timer validation/summary tool, timing policy config, timing workflow/prompt, evaluator timing_summary_targets, coordination board timing columns, Workspace Monitor timing display, and a partial timing record for this task.",
+  "work_mode": "governance",
+  "changed_files": [
+    "_tools/work-timer/",
+    "_history/work-timings/",
+    "_ops/workflows/42-record-work-timing.md",
+    "_ops/prompts/42-record-work-timing.md",
+    "_ops/workflows/00-start-here.md",
+    "_ops/workflows/40-evaluate-and-rework.md",
+    "_ops/prompts/00-router.md",
+    "_ops/prompts/70-evaluate-work.md",
+    "_ops/prompts/README.ko.md",
+    "_ops/prompts/README.en.md",
+    "_ops/index.md",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_tools/task-board/src/task_board.py",
+    "_tools/workspace-health/src/workspace_health/checks.py",
+    "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+    "agent-platform/tests/test_work_evaluator.py",
+    "agent-platform/configs/evaluation/work-evaluation-template.json",
+    "agent-platform/configs/workflows/work-mode-registry.json",
+    "agent-platform/configs/agents/work-evaluator-agent.json",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "workspace-monitor/scripts/collect-workspace.mjs",
+    "workspace-monitor/lib/snapshot.ts",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "_requirements/",
+    "_specs/workspace-platform/2026-06-01-work-timing-instrumentation/",
+    "_history/web-searches/2026/2026-06-01-work-timing-instrumentation.ko.md",
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/request-traces/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/2026/2026-06-01.md"
+  ],
+  "verification": [
+    "python3 -m unittest discover -s _tools/work-timer/tests: 5 tests passed",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-01-work-timing-instrumentation.json: ready",
+    "python3 _tools/work-timer/src/work_timer.py summarize _history/work-timings/2026/2026-06-01-work-timing-instrumentation.json: slowest phase implementation",
+    "PYTHONPATH=src python3 -m unittest discover -s tests from agent-platform/: 104 tests passed",
+    "python3 _tools/task-board/src/task_board.py: coordination boards regenerated",
+    "npm run test from workspace-monitor/: 5 tests passed",
+    "npm run check from workspace-monitor/: passed",
+    "npm run build from workspace-monitor/: passed",
+    "check-config-contract: self_documenting",
+    "check-memory-bootstrap: ready_to_bootstrap",
+    "python3 _tools/workspace-health/src/workspace_health.py --include-build: 21 checks passed"
+  ],
+  "references_checked": [
+    "OpenTelemetry Tracing API: https://opentelemetry.io/docs/specs/otel/trace/api/",
+    "Google SRE Book - Monitoring Distributed Systems: https://sre.google/sre-book/monitoring-distributed-systems/",
+    "DORA metrics: https://dora.dev/guides/dora-metrics/",
+    "_ops/workflows/00-start-here.md",
+    "_ops/workflows/40-evaluate-and-rework.md",
+    "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+    "_ops/coordination/status.json",
+    "workspace-monitor/scripts/collect-workspace.mjs"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-work-timing-instrumentation-grounding.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-work-timing-instrumentation-grounding.json: ready_to_publish, requires_rework=false"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-work-timing-instrumentation.ko.md",
+    "_tools/work-timer/configs/work-timing-policy.json",
+    "_specs/workspace-platform/2026-06-01-work-timing-instrumentation/traceability.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_specs/workspace-platform/2026-06-01-work-timing-instrumentation/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-work-timing-instrumentation/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-work-timing-instrumentation/tasks.ko.md",
+    "_history/web-searches/2026/2026-06-01-work-timing-instrumentation.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-work-timing-instrumentation.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-01-work-timing-instrumentation.ko.md",
+    "_requirements/reviews/2026-06-01-work-timing-instrumentation.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-01-work-timing-instrumentation/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-work-timing-instrumentation/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-work-timing-instrumentation/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-01-work-timing-instrumentation/validation.ko.md",
+    "_specs/workspace-platform/2026-06-01-work-timing-instrumentation/traceability.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-01-work-timing-instrumentation.json"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "After multiple tasks have timing records, tune bottleneck thresholds from observed workspace data.",
+    "Add an automatic start/stop helper later if manual timing updates become repetitive."
+  ]
+}

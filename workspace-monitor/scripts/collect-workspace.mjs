@@ -17,6 +17,7 @@ const HISTORY_CATEGORIES = new Set([
   "request-trace",
   "user-request",
   "web-search",
+  "work-timing",
   "work-summary"
 ]);
 const DOCUMENT_SOURCES = [
@@ -26,6 +27,7 @@ const DOCUMENT_SOURCES = [
   { category: "user-request", root: "_history/user-requests" },
   { category: "request-trace", root: "_history/request-traces" },
   { category: "web-search", root: "_history/web-searches" },
+  { category: "work-timing", root: "_history/work-timings" },
   { category: "plan", root: "_history/plans" },
   { category: "evaluation", root: "_history/evaluations" },
   { category: "daily-history", root: "_history/2026" },
@@ -76,7 +78,8 @@ export function buildSnapshot(repoRoot) {
   const historyDays = buildHistoryDays(documents);
   const folderStructure = buildFolderStructure(repoRoot, projects, documents);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
-  const completedTasks = (coordination.tasks || []).filter((task) => task.status === "completed").length;
+  const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
+  const completedTasks = tasks.filter((task) => task.status === "completed").length;
   const activeAgents = (coordination.agents || []).filter((agent) => agent.status !== "idle").length;
 
   return {
@@ -93,12 +96,13 @@ export function buildSnapshot(repoRoot) {
       requirements: requirements.length,
       evaluations: documents.filter((document) => document.category === "evaluation").length,
       webSearches: documents.filter((document) => document.category === "web-search").length,
+      timingRecords: documents.filter((document) => document.category === "work-timing").length,
       historyDays: historyDays.length,
       rootFolders: folderStructure.rootFolders.length
     },
     projects: projects.map(normalizeProject),
     agents: coordination.agents || [],
-    tasks: coordination.tasks || [],
+    tasks,
     requirements,
     documents,
     historyDays,
@@ -113,6 +117,64 @@ export function buildSnapshot(repoRoot) {
       ]
     }
   };
+}
+
+function attachTaskTiming(repoRoot, task) {
+  if (!task || !task.timing_report) {
+    return task;
+  }
+  const reportPath = path.join(repoRoot, task.timing_report);
+  const timing = readJson(reportPath, null);
+  if (!timing || !Array.isArray(timing.phases)) {
+    return { ...task, timing_summary: { total: "missing", bottleneck: task.timing_report } };
+  }
+  const measured = timing.phases
+    .map((phase) => ({ phase, duration: phaseDurationSeconds(phase) }))
+    .filter((entry) => typeof entry.duration === "number" && Number.isFinite(entry.duration));
+  if (!measured.length) {
+    return { ...task, timing_summary: { total: "unmeasured", bottleneck: "not measured" } };
+  }
+  const totalSeconds = measured.reduce((sum, entry) => sum + entry.duration, 0);
+  const slowest = measured.reduce((max, entry) => (entry.duration > max.duration ? entry : max), measured[0]);
+  const label = slowest.phase.label || slowest.phase.phase_id || "phase";
+  return {
+    ...task,
+    timing_summary: {
+      total: formatDuration(totalSeconds),
+      bottleneck: `${label} (${formatDuration(slowest.duration)})`
+    }
+  };
+}
+
+function phaseDurationSeconds(phase) {
+  if (typeof phase.duration_seconds === "number") {
+    return phase.duration_seconds;
+  }
+  if (typeof phase.duration_seconds === "string" && phase.duration_seconds.trim()) {
+    const parsed = Number(phase.duration_seconds);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  if (phase.started_at && phase.ended_at) {
+    const start = Date.parse(phase.started_at);
+    const end = Date.parse(phase.ended_at);
+    if (Number.isFinite(start) && Number.isFinite(end)) {
+      return Math.max(0, (end - start) / 1000);
+    }
+  }
+  return null;
+}
+
+function formatDuration(seconds) {
+  if (seconds < 60) {
+    return `${Math.round(seconds)}s`;
+  }
+  const minutes = Math.round(seconds / 60);
+  if (minutes < 60) {
+    return `${minutes}m`;
+  }
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+  return `${hours}h ${remainingMinutes}m`;
 }
 
 export function collectDocuments(repoRoot) {

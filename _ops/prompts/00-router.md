@@ -25,6 +25,7 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | 반복 작업을 스킬, 도구, 템플릿으로 승격한다 | [40-promote-capability.md](40-promote-capability.md) |
 | 컨텍스트가 길어졌다 | [50-compress-context.md](50-compress-context.md) |
 | 다음 세션이 문서만 보고 재개하도록 컨텍스트 아카이브를 만든다 | [_ops/workflows/45-context-archive.md](../workflows/45-context-archive.md) |
+| 작업별 소요시간과 병목 후보를 기록한다 | [42-record-work-timing.md](42-record-work-timing.md) |
 | 작업을 마무리한다 | [60-close-work.md](60-close-work.md) |
 | 완료 결과를 초기 지시와 비교 평가한다 | [70-evaluate-work.md](70-evaluate-work.md) |
 | 진행 중인 에이전트와 병렬 작업을 확인하거나 갱신한다 | [80-coordinate-work.md](80-coordinate-work.md) |
@@ -55,6 +56,7 @@ If speed matters or multiple agents/lane-style tasks may run, use parallel-work-
 For research-heavy work, use research-insight-planner-agent with agent-platform/configs/research/research-agent-profile.json and record the answer-engine stages plus citation requirements.
 If the request needs coding research before implementation, use coding-research-agent and answer every post-research question before coding.
 If the request installs, upgrades, removes, or globally configures software, create an installation record and update _ops/installations/registry.json.
+Record phase-level work timing under _history/work-timings/ when the selected mode requires timing_summary_targets.
 If a reusable pattern appears, record it as a documentation, tool, template, skill, prompt, or workflow candidate.
 Ground factual claims with hallucination-guard-agent before publishing final outputs that contain facts.
 After the work, update the targets required by the selected mode, run the evaluator against the initial instruction with work_mode, then verify history, maps, commit, and push status.

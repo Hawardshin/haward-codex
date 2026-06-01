@@ -4,6 +4,7 @@ import argparse
 import html
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -22,9 +23,9 @@ def main(argv: list[str] | None = None) -> int:
     status = load_status(status_path)
 
     outputs = {
-        root / "_ops" / "coordination" / "board.ko.md": render_markdown(status, "ko"),
-        root / "_ops" / "coordination" / "board.en.md": render_markdown(status, "en"),
-        root / "_ops" / "coordination" / "board.html": render_html(status),
+        root / "_ops" / "coordination" / "board.ko.md": render_markdown(status, "ko", root),
+        root / "_ops" / "coordination" / "board.en.md": render_markdown(status, "en", root),
+        root / "_ops" / "coordination" / "board.html": render_html(status, root),
     }
 
     stale = []
@@ -61,7 +62,7 @@ def validate_status(data: JsonMap) -> None:
         raise TypeError("tasks must be a list")
 
 
-def render_markdown(status: JsonMap, language: str) -> str:
+def render_markdown(status: JsonMap, language: str, root: Path) -> str:
     ko = language == "ko"
     labels = {
         "title": "작업 조율 보드" if ko else "Work Coordination Board",
@@ -97,15 +98,26 @@ def render_markdown(status: JsonMap, language: str) -> str:
             )
         )
 
-    lines.extend(["", f"## {labels['tasks']}", "", "| ID | Title | Project | Status | Agent | Next Action |", "| --- | --- | --- | --- | --- | --- |"])
+    lines.extend(
+        [
+            "",
+            f"## {labels['tasks']}",
+            "",
+            "| ID | Title | Project | Status | Agent | Timing | Bottleneck | Next Action |",
+            "| --- | --- | --- | --- | --- | --- | --- | --- |",
+        ]
+    )
     for task in status["tasks"]:
+        timing = timing_summary_for_task(task, root)
         lines.append(
-            "| {id} | {title} | {project} | {status} | {agent} | {next_action} |".format(
+            "| {id} | {title} | {project} | {status} | {agent} | {timing} | {bottleneck} | {next_action} |".format(
                 id=md(task.get("id", "")),
                 title=md(task.get("title", "")),
                 project=md(task.get("project", "")),
                 status=md(task.get("status", "")),
                 agent=md(task.get("agent", "")),
+                timing=md(timing["timing"]),
+                bottleneck=md(timing["bottleneck"]),
                 next_action=md(task.get("next_action", "")),
             )
         )
@@ -121,9 +133,9 @@ def render_markdown(status: JsonMap, language: str) -> str:
     return "\n".join(lines)
 
 
-def render_html(status: JsonMap) -> str:
+def render_html(status: JsonMap, root: Path) -> str:
     agents = "\n".join(render_agent_card(agent) for agent in status["agents"])
-    tasks = "\n".join(render_task_row(task) for task in status["tasks"])
+    tasks = "\n".join(render_task_row(task, root) for task in status["tasks"])
     blockers = [blocker for task in status["tasks"] for blocker in task.get("blockers", [])]
     blocker_text = "None" if not blockers else ", ".join(blockers)
 
@@ -249,6 +261,8 @@ def render_html(status: JsonMap) -> str:
               <th>Title</th>
               <th>Status</th>
               <th>Agent</th>
+              <th>Timing</th>
+              <th>Bottleneck</th>
               <th>Next Action</th>
             </tr>
           </thead>
@@ -272,14 +286,90 @@ def render_agent_card(agent: JsonMap) -> str:
           </article>"""
 
 
-def render_task_row(task: JsonMap) -> str:
+def render_task_row(task: JsonMap, root: Path) -> str:
+    timing = timing_summary_for_task(task, root)
     return f"""<tr>
               <td>{escape(task.get("id", ""))}</td>
               <td>{escape(task.get("title", ""))}</td>
               <td>{escape(task.get("status", ""))}</td>
               <td>{escape(task.get("agent", ""))}</td>
+              <td>{escape(timing["timing"])}</td>
+              <td>{escape(timing["bottleneck"])}</td>
               <td>{escape(task.get("next_action", ""))}</td>
             </tr>"""
+
+
+def timing_summary_for_task(task: JsonMap, root: Path) -> JsonMap:
+    timing_summary = task.get("timing_summary")
+    if isinstance(timing_summary, dict):
+        return {
+            "timing": str(timing_summary.get("total", "")) or "not recorded",
+            "bottleneck": str(timing_summary.get("bottleneck", "")) or "not recorded",
+        }
+
+    timing_report = task.get("timing_report")
+    if not timing_report:
+        return {"timing": "not recorded", "bottleneck": "not recorded"}
+
+    report_path = root / str(timing_report)
+    if not report_path.exists():
+        return {"timing": "missing report", "bottleneck": str(timing_report)}
+
+    try:
+        data = json.loads(report_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {"timing": "invalid report", "bottleneck": str(timing_report)}
+
+    phases = [phase for phase in data.get("phases", []) if isinstance(phase, dict)]
+    durations = [(phase, phase_duration_seconds(phase)) for phase in phases]
+    measured = [(phase, duration) for phase, duration in durations if duration is not None]
+    if not measured:
+        return {"timing": "unmeasured", "bottleneck": "not measured"}
+
+    total = sum(float(duration) for _, duration in measured)
+    slowest_phase, slowest_duration = max(measured, key=lambda item: float(item[1]))
+    return {
+        "timing": format_seconds(total),
+        "bottleneck": f"{slowest_phase.get('label', slowest_phase.get('phase_id', 'phase'))} ({format_seconds(float(slowest_duration))})",
+    }
+
+
+def phase_duration_seconds(phase: JsonMap) -> float | None:
+    explicit = phase.get("duration_seconds")
+    if explicit is not None:
+        try:
+            return float(explicit)
+        except (TypeError, ValueError):
+            return None
+    started = parse_datetime(phase.get("started_at"))
+    ended = parse_datetime(phase.get("ended_at"))
+    if started and ended:
+        return (ended - started).total_seconds()
+    return None
+
+
+def parse_datetime(value: Any) -> datetime | None:
+    if not isinstance(value, str) or not value:
+        return None
+    normalized = value.strip()
+    if normalized.endswith("Z"):
+        normalized = f"{normalized[:-1]}+00:00"
+    if len(normalized) >= 5 and normalized[-5] in {"+", "-"} and normalized[-3] != ":":
+        normalized = f"{normalized[:-2]}:{normalized[-2:]}"
+    try:
+        return datetime.fromisoformat(normalized)
+    except ValueError:
+        return None
+
+
+def format_seconds(seconds: float) -> str:
+    if seconds < 60:
+        return f"{round(seconds)}s"
+    minutes, remaining = divmod(round(seconds), 60)
+    if minutes < 60:
+        return f"{minutes}m {remaining}s"
+    hours, minutes = divmod(minutes, 60)
+    return f"{hours}h {minutes}m"
 
 
 def md(value: str) -> str:

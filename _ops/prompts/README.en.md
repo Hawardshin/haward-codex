@@ -32,3 +32,5 @@ Every prompt in this folder inherits the following common contract.
 If skill work occurred, `work-evaluator-agent` input must include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`. Missing targets are a blocking gap.
 
 `work-evaluator-agent` input must include `request_trace_targets` for meaningful work. Missing targets are a blocking gap.
+
+When required by the selected work mode, `work-evaluator-agent` input must include `timing_summary_targets`. Missing targets are a blocking gap.

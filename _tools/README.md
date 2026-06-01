@@ -31,6 +31,7 @@ _tools/tool-name/
 - `task-board/`: generate coordination boards.
 - `source-collector/`: normalize, score, and report broad web/source research bundles.
 - `coding-project-bootstrap/`: plan and create technology-aware starter structures for new coding projects with dry-run-first safety.
+- `work-timer/`: validate and summarize phase-level work timing records so bottlenecks are visible.
 - `naming-audit/`: validate enforceable naming conventions for projects, tools, docs, specs, Python source, and configs.
 - `structure-audit/`: validate root folders against project registry, reserved operational folders, and local-only folder rules.
 

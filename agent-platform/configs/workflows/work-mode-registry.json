@@ -85,6 +85,17 @@
         "dependency, research fan-in merge gate, and touch-path conflict checks"
       ],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "work_timing_policy",
+      "title": "Work Timing Policy",
+      "path": "_tools/work-timer/configs/work-timing-policy.json",
+      "source_type": "internal",
+      "used_for": [
+        "phase-level timing records",
+        "bottleneck visibility in evaluator input and coordination boards"
+      ],
+      "last_checked": "2026-06-01"
     }
   ],
   "structure_rules": [
@@ -188,6 +199,7 @@
         "spec_targets",
         "request_trace_targets",
         "work_summary_targets",
+        "timing_summary_targets",
         "source_provenance_targets",
         "plan_evidence_targets"
       ]
@@ -215,7 +227,8 @@
         "requirements_targets",
         "spec_targets",
         "request_trace_targets",
-        "work_summary_targets"
+        "work_summary_targets",
+        "timing_summary_targets"
       ],
       "deferred_or_optional": []
     },
@@ -244,6 +257,7 @@
         "spec_targets",
         "request_trace_targets",
         "work_summary_targets",
+        "timing_summary_targets",
         "source_provenance_targets",
         "plan_evidence_targets"
       ]
@@ -266,13 +280,15 @@
         "references_checked",
         "source_provenance_targets",
         "plan_evidence_targets",
-        "web_search_record_targets"
+        "web_search_record_targets",
+        "timing_summary_targets"
       ],
       "deferred_or_optional": [
         "requirements_targets",
         "spec_targets",
         "request_trace_targets",
-        "work_summary_targets"
+        "work_summary_targets",
+        "timing_summary_targets"
       ]
     },
     {
@@ -297,7 +313,8 @@
         "requirements_targets",
         "spec_targets",
         "request_trace_targets",
-        "work_summary_targets"
+        "work_summary_targets",
+        "timing_summary_targets"
       ],
       "deferred_or_optional": []
     }
@@ -321,7 +338,8 @@
         "requirements_targets",
         "spec_targets",
         "request_trace_targets",
-        "work_summary_targets"
+        "work_summary_targets",
+        "timing_summary_targets"
       ]
     },
     "standard": {
@@ -334,7 +352,8 @@
         "requirements_targets",
         "spec_targets",
         "request_trace_targets",
-        "work_summary_targets"
+        "work_summary_targets",
+        "timing_summary_targets"
       ],
       "non_blocking_target_fields": []
     },
@@ -350,7 +369,8 @@
         "requirements_targets",
         "spec_targets",
         "request_trace_targets",
-        "work_summary_targets"
+        "work_summary_targets",
+        "timing_summary_targets"
       ]
     },
     "research": {
@@ -358,7 +378,8 @@
         "references_checked",
         "source_provenance_targets",
         "plan_evidence_targets",
-        "web_search_record_targets"
+        "web_search_record_targets",
+        "timing_summary_targets"
       ],
       "non_blocking_target_fields": [
         "user_request_summary_targets",
@@ -378,7 +399,8 @@
         "requirements_targets",
         "spec_targets",
         "request_trace_targets",
-        "work_summary_targets"
+        "work_summary_targets",
+        "timing_summary_targets"
       ],
       "non_blocking_target_fields": []
     }

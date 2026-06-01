@@ -136,6 +136,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - After web-first intake and before local planning, run or simulate `memory-bootstrap-agent` with `agent-platform/configs/memory/bootstrap-manifest.json` and read the returned hot anchors.
 - After web-first intake and memory bootstrap, select `work_mode` with `_ops/workflows/02-select-work-mode.md` and `agent-platform/configs/workflows/work-mode-registry.json`.
 - Use the lightest sufficient mode: `quick`, `standard`, `ship_first`, `research`, or `governance`; do not force the full requirements/spec/history loop when the selected mode makes those artifacts non-blocking.
+- For meaningful work, record phase-level timing under `_history/work-timings/YYYY/` using `_tools/work-timer/` so slow phases and bottleneck candidates are visible.
 - Use `_ops/projects/registry.json` to see registered root projects and ownership boundaries.
 - Use `_ops/projects/root-structure-policy.json` to classify root folders as registered projects, reserved operational folders, local-only folders, or generated output.
 - Keep durable project top-level folders listed in each registry entry's `project_specific_home`; generated folders should be covered by `generated_output_dirs` and `.gitignore`.
@@ -156,7 +157,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Run `python3 _tools/structure-audit/src/structure_audit.py --check` after changing root folders, project registry, durable project top-level folders, reserved operational folders, runtime adapter folders, local-only folder rules, or generated-output rules.
 - Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
 - Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, assistant runtime adapters, or platform memory anchors.
-- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/research/marketing-evidence-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/integrations/notification-channels.json ../_docs/registry.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json ../_ops/naming/naming-policy.json` from `agent-platform/` after changing core shared settings.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/research/marketing-evidence-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/integrations/notification-channels.json ../_docs/registry.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json ../_ops/naming/naming-policy.json ../_tools/work-timer/configs/work-timing-policy.json` from `agent-platform/` after changing core shared settings.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules
@@ -166,8 +167,9 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Include `work_mode` in evaluation input. Missing target fields are blocking according to the selected mode's policy in `agent-platform/configs/workflows/work-mode-registry.json`.
 - In `quick` mode, missing governance/history/spec targets are non-blocking improvements unless another rule or the user makes them mandatory.
 - In `ship_first` mode, require `references_checked` and `web_search_record_targets`; if improvements are intentionally postponed, include `deferred_improvement_targets` pointing to `_ops/backlog/deferred-improvements.ko.md` or a project equivalent.
-- In `research` mode, require `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, and `web_search_record_targets`.
-- In `standard` and `governance` modes, missing web search records, user request summaries, requirements targets, spec targets, source provenance, plan evidence, request traces, and work summaries are blocking gaps.
+- In `research` mode, require `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, `web_search_record_targets`, and `timing_summary_targets`.
+- In `standard` and `governance` modes, missing web search records, user request summaries, requirements targets, spec targets, source provenance, plan evidence, request traces, work summaries, and timing summaries are blocking gaps.
+- Include `timing_summary_targets` in work-evaluator input when the selected mode requires it.
 - If skill work occurred, include `skill_work_occurred=true`, `skill_targets`, and `skill_validation_targets`; missing skill source or validation targets are blocking gaps.
 - If installation occurred, include `installation_occurred=true` and `installation_record_targets`; missing installation records are blocking gaps.
 - Check repository history, existing project docs, official documentation, mature open-source projects, or other strong references before judging related work.
@@ -216,6 +218,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Context archive packets should link must-read files, remaining work, verification state, related web search records, plans, evaluations, and commits.
 - If context archiving occurred, include `context_archiving_occurred=true` and `context_archive_targets` in evaluation input.
 - When closing meaningful work, update `_history/work-summaries/` with a scan-friendly summary that links to detailed history, plans, evaluations, and key files.
+- When closing meaningful work, update or create `_history/work-timings/YYYY/YYYY-MM-DD-<slug>.json` with measured phase durations or explicit partial/unmeasured notes.
 - When closing installation work, update `_history/installations/` and `_ops/installations/registry.json` before evaluation, commit, and push.
 - Keep the latest project purpose, status, commands, and constraints in that project's `README.md`.
 - Preserve only durable information in docs: decisions, requirements, command results worth reusing, and links to artifacts.

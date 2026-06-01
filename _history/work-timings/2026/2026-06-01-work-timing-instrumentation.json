@@ -1,0 +1,82 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-01-work-timing-instrumentation",
+  "title": "Add phase-level work timing and bottleneck visibility",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": null,
+  "measurement_note": "Timing instrumentation was introduced during this task, so early phases are explicitly marked as not measured. Measured spans start when the work-timing implementation phase was consciously tracked.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before the timing record existed."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before the timing record existed."
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before the timing record existed."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed during the first implementation pass before exact phase timing started."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "started_at": "2026-06-01T18:25:02+0900",
+      "ended_at": "2026-06-01T18:39:03+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Included the work-timer tool, evaluator target, workflow/prompt links, requirements/spec artifacts, memory anchor updates, and monitor display wiring."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "started_at": "2026-06-01T18:39:03+0900",
+      "ended_at": "2026-06-01T18:42:00+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Included work-timer unit tests/check, agent-platform tests, config/memory checks, task-board generation, workspace-monitor tests/typecheck/build, and map regeneration."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "started_at": "2026-06-01T18:42:00+0900",
+      "ended_at": "2026-06-01T18:44:28+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Included grounding, work-evaluator run, and paired evaluation report creation."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured",
+      "bottleneck_notes": ""
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "implementation",
+    "interpretation": "The measured implementation span is currently the only measured phase and therefore the visible bottleneck candidate. Early intake and planning phases were not measured because timing instrumentation did not exist yet.",
+    "improvement_candidates": [
+      "For future tasks, create the timing record immediately after work_mode selection.",
+      "After several records accumulate, compare repeated verification and documentation phases for automation opportunities."
+    ]
+  }
+}

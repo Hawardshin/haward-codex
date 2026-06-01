@@ -54,6 +54,7 @@
 | REQ-WS-036 | 플랫폼 컨셉과 운영 철학은 주기적으로 재검토하고, 인간 최종 권한, scoped autonomy, rollback 가능성, 보안/프라이버시, 운영 비용과 agentic debt가 철학과 메모리 부트스트랩에 반영되어야 한다. | UR-2026-06-01-020 | must | baseline | workspace/_philosophy/agent-platform | philosophy review, memory bootstrap, workspace-health 확인 | `_philosophy/agent-operating-philosophy.ko.md`, `_philosophy/platform-concept-review.ko.md`, `agent-platform/configs/memory/bootstrap-manifest.json` |
 | REQ-WS-037 | 플랫폼은 첫 진입점과 운영 모델 문서에서 목적, 해결하는 문제, 핵심 루프, 축적되는 자산, 프로젝트 경계, 근거 기반 평가 가치를 포함한 상세한 정체성 설명을 제공해야 한다. | UR-2026-06-01-021 | should | baseline | workspace/_docs/agent-platform | README, docs audit, memory bootstrap 확인 | `README.md`, `_docs/operating-models/platform-identity-operating-model.ko.md`, `agent-platform/README.md` |
 | REQ-WS-038 | 새 코딩 프로젝트는 기술별 blueprint로 dry-run 계획을 먼저 확인하고, 적용 시 root project 등록, 프로젝트별 README/docs/specs/configs/tests/tools/artifacts, 기술별 공식 문서 체크리스트, coding research 연결점을 자동 준비할 수 있어야 한다. | UR-2026-06-01-023 | must | baseline | workspace/_tools/_ops/projects | bootstrap tool tests, structure audit, workspace-health, project registry dry-run 확인 | `_tools/coding-project-bootstrap/`, `_ops/workflows/27-bootstrap-coding-project.md`, `_ops/prompts/27-bootstrap-coding-project.md` |
+| REQ-WS-039 | 의미 있는 작업은 phase별 소요시간을 `_history/work-timings/`에 기록하고, coordination board, Workspace Monitor, 평가 입력에서 slowest phase와 병목 후보를 확인할 수 있어야 한다. | UR-2026-06-01-024 | must | baseline | workspace/_tools/_ops/agent-platform/workspace-monitor | work-timer check, task-board, workspace-health, evaluator 확인 | `_tools/work-timer/`, `_history/work-timings/`, `_ops/workflows/42-record-work-timing.md`, `agent-platform/src/agent_platform/evaluation/work_evaluator.py` |
 
 ## 변경 관리
 
@@ -77,6 +78,7 @@
 - 2026-06-01에 REQ-WS-036을 추가해 플랫폼 컨셉/철학 재검토와 인간 권한, 자율성 경계, 되돌림 가능성, 보안/프라이버시, 운영 부채 관점을 공통 철학과 memory anchor로 승격했다.
 - 2026-06-01에 REQ-WS-037을 추가해 플랫폼의 첫 진입점 설명과 상세 identity operating model을 공통 운영 문서로 승격했다.
 - 2026-06-01에 REQ-WS-038을 추가해 새 코딩 프로젝트 생성 시 기술별 blueprint, dry-run, root registry 선택 등록, 프로젝트별 구조와 coding research 연결을 공통 도구로 승격했다.
+- 2026-06-01에 REQ-WS-039를 추가해 작업별 phase timing, 병목 후보, coordination/monitor/evaluator 연결을 공통 운영 구조로 승격했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.

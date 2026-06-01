@@ -38,6 +38,7 @@ Use `agent-platform/configs/evaluation/work-evaluation-template.json` as the sha
 - `skill_validation_targets`: skill validation inputs, reports, or evaluation files when skill work occurred
 - `request_trace_targets`: request-to-outcome trace files under `_history/request-traces/YYYY/`
 - `work_summary_targets`: user-readable work summary files under `_history/work-summaries/YYYY/`
+- `timing_summary_targets`: phase-level work timing records under `_history/work-timings/YYYY/`
 - `context_archiving_occurred`: whether the agent compressed long context into a durable resume packet
 - `context_archive_targets`: context archive packet files under `_history/context-archives/YYYY/`
 - `installation_occurred`: whether the work actually installed, upgraded, removed, or globally configured software
@@ -59,10 +60,10 @@ PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/wo
 - `status=ready_to_close`: continue close-out.
 - `status=rework_required`: convert each gap into a follow-up action, complete that work, then evaluate again.
 - Missing targets are blocking according to the selected `work_mode`, defined in `agent-platform/configs/workflows/work-mode-registry.json`.
-- In `standard` and `governance`, missing reference research, source provenance, plan evidence, web search records, user request summaries, requirements targets, spec targets, request traces, and work summaries are blocking.
+- In `standard` and `governance`, missing reference research, source provenance, plan evidence, web search records, user request summaries, requirements targets, spec targets, request traces, work summaries, and timing summaries are blocking.
 - In `quick`, those governance targets are non-blocking improvements unless the user explicitly requested them or another rule makes them mandatory.
 - In `ship_first`, missing `references_checked` and `web_search_record_targets` are blocking, and missing `deferred_improvement_targets` is blocking when `improvement_ideas` are present.
-- In `research`, missing `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, and `web_search_record_targets` are blocking.
+- In `research`, missing `references_checked`, `source_provenance_targets`, `plan_evidence_targets`, `web_search_record_targets`, and `timing_summary_targets` are blocking.
 - Missing skill targets or skill validation targets are blocking gaps when `skill_work_occurred=true`.
 - If `context_archiving_occurred` is true, missing context archive targets are a blocking gap.
 - If `installation_occurred` is true, missing installation record targets are a blocking gap.

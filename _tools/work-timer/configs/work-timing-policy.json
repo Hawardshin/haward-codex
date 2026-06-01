@@ -1,0 +1,215 @@
+{
+  "schema_version": "2026-06-01",
+  "name": "work-timing-policy",
+  "purpose": "Defines how workspace tasks record phase timings so bottlenecks are visible in history, evaluations, coordination boards, and monitoring views.",
+  "reader_guide": {
+    "summary": "Use this file before and after meaningful work to decide which timing phases to record and how to interpret bottlenecks. Timing is an observability aid, not a productivity score.",
+    "how_to_read": [
+      "Read structure_rules before changing the timing schema.",
+      "Use standard_phases as the default phase vocabulary for new timing records.",
+      "Use bottleneck_thresholds to understand when a phase should be called out.",
+      "Use field_guide when creating or reviewing a _history/work-timings record.",
+      "Run _tools/work-timer/src/work_timer.py check after creating or editing a timing record."
+    ],
+    "owner": "_tools/work-timer",
+    "last_reviewed": "2026-06-01",
+    "update_triggers": [
+      "The user changes how work time or bottlenecks should be recorded.",
+      "Work modes or evaluator target policy changes.",
+      "Coordination board or Workspace Monitor needs a different timing display.",
+      "A new repeated phase appears across many tasks.",
+      "The timing tool starts producing misleading bottleneck summaries."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "opentelemetry-traces",
+      "title": "OpenTelemetry Tracing API",
+      "url": "https://opentelemetry.io/docs/specs/otel/trace/api/",
+      "source_type": "official",
+      "used_for": [
+        "trace/span vocabulary",
+        "recording operation timing as spans"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "google-sre-golden-signals",
+      "title": "Google SRE Book - Monitoring Distributed Systems",
+      "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+      "source_type": "official",
+      "used_for": [
+        "latency as a core observable signal",
+        "separating measurement from diagnosis"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "dora-metrics",
+      "title": "DORA Software Delivery Performance Metrics",
+      "url": "https://dora.dev/guides/dora-metrics/",
+      "source_type": "official",
+      "used_for": [
+        "lead-time style workflow measurement",
+        "process-level performance visibility"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "coordination-board",
+      "title": "Workspace Coordination Board",
+      "path": "_ops/coordination/status.json",
+      "source_type": "internal",
+      "used_for": [
+        "task-level timing report references",
+        "bottleneck visibility for active or recent work"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "work-evaluator",
+      "title": "Work Evaluator Agent",
+      "path": "agent-platform/src/agent_platform/evaluation/work_evaluator.py",
+      "source_type": "internal",
+      "used_for": [
+        "close-out requirement for timing_summary_targets",
+        "preventing timing records from being forgotten"
+      ],
+      "last_checked": "2026-06-01"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "record_spans_not_only_total",
+      "rule": "Record task time as named phase spans, not only as a total duration.",
+      "reason": "A total time value does not reveal where the bottleneck occurred.",
+      "applies_to": [
+        "_history/work-timings",
+        "work-evaluator-agent"
+      ]
+    },
+    {
+      "id": "do_not_fabricate_precision",
+      "rule": "If a phase was not measured from the start, mark measurement_quality as partial or phase measurement as not_measured instead of inventing exact times.",
+      "reason": "Timing data should help decisions without creating false precision.",
+      "applies_to": [
+        "phase.measurement",
+        "measurement_quality"
+      ]
+    },
+    {
+      "id": "bottleneck_is_a_diagnosis_candidate",
+      "rule": "Treat the slowest measured phase as a bottleneck candidate and record bottleneck_notes before using it to change the workflow.",
+      "reason": "Long duration can reflect necessary work, external waiting, or missing tooling; the note prevents shallow optimization.",
+      "applies_to": [
+        "bottleneck_analysis",
+        "coordination_board"
+      ]
+    },
+    {
+      "id": "closeout_requires_timing_target",
+      "rule": "Meaningful standard, research, and governance work should include timing_summary_targets in evaluator input.",
+      "reason": "The user asked to make bottlenecks easy to see for each task.",
+      "applies_to": [
+        "work-evaluator-agent",
+        "work-mode-registry"
+      ]
+    },
+    {
+      "id": "coordination_links_timing",
+      "rule": "Coordination tasks should link their timing_report when a timing record exists.",
+      "reason": "Active and recent work should show elapsed time and bottleneck candidates in one place.",
+      "applies_to": [
+        "_ops/coordination/status.json",
+        "_ops/coordination/board.ko.md",
+        "workspace-monitor"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "task_id",
+      "meaning": "Stable task identifier, normally matching the request trace or coordination task id.",
+      "required": true
+    },
+    {
+      "field": "work_mode",
+      "meaning": "Selected work mode for the task.",
+      "required": true
+    },
+    {
+      "field": "measurement_quality",
+      "meaning": "Overall timing quality: measured, partial, or not_measured.",
+      "required": true
+    },
+    {
+      "field": "phases",
+      "meaning": "List of timing spans. Each phase should include phase_id, label, status, and either duration_seconds or started_at plus ended_at when measured.",
+      "required": true
+    },
+    {
+      "field": "bottleneck_analysis",
+      "meaning": "Human-readable interpretation of the slowest phase, external waits, and improvement candidates.",
+      "required": false
+    },
+    {
+      "field": "evidence",
+      "meaning": "Optional command output, file path, or event that supports the timing entry.",
+      "required": false
+    }
+  ],
+  "measurement_quality_values": [
+    "measured",
+    "partial",
+    "not_measured"
+  ],
+  "phase_status_values": [
+    "pending",
+    "in_progress",
+    "completed",
+    "blocked",
+    "skipped"
+  ],
+  "standard_phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake"
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap"
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan"
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec"
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation"
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification"
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework"
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push"
+    }
+  ],
+  "bottleneck_thresholds": {
+    "phase_seconds_warn": 900,
+    "phase_total_ratio_warn": 0.35,
+    "external_wait_seconds_warn": 300
+  },
+  "default_history_root": "_history/work-timings",
+  "default_check_command": "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/YYYY/YYYY-MM-DD-slug.json",
+  "default_summary_command": "python3 _tools/work-timer/src/work_timer.py summarize _history/work-timings/YYYY/YYYY-MM-DD-slug.json"
+}
