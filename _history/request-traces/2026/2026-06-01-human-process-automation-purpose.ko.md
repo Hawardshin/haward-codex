@@ -28,4 +28,4 @@
 
 - 평가 파일: `_history/evaluations/2026/2026-06-01-human-process-automation-purpose.ko.md`
 - Grounding: `_history/evaluations/2026/2026-06-01-human-process-automation-purpose-grounding.json`
-- 커밋: pending
+- 커밋: `86cc5e9` pushed
