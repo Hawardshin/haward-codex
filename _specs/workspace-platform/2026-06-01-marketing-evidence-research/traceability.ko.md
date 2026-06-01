@@ -12,4 +12,4 @@
 | 웹 검색 기록 | `_history/web-searches/2026/2026-06-01-marketing-evidence-research.ko.md` |
 | 계획 기록 | `_history/plans/2026/2026-06-01-marketing-evidence-research.ko.md` |
 | 평가 | `_history/evaluations/2026/2026-06-01-marketing-evidence-research.ko.md` |
-| 커밋 | pending |
+| 커밋 | `c1bb49d` |

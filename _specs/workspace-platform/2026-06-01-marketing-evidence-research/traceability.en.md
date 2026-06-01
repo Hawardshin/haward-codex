@@ -12,4 +12,4 @@
 | Web search record | `_history/web-searches/2026/2026-06-01-marketing-evidence-research.en.md` |
 | Plan record | `_history/plans/2026/2026-06-01-marketing-evidence-research.en.md` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-marketing-evidence-research.en.md` |
-| Commit | pending |
+| Commit | `c1bb49d` |

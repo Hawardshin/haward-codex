@@ -11,4 +11,4 @@
 - [x] Create marketing evidence source lists
 - [x] Run verification
 - [x] Update evaluation, history, and request traces
-- [ ] Commit and push
+- [x] Commit and push
