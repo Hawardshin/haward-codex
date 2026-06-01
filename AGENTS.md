@@ -105,6 +105,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 ## Platformization Rules
 
 - Treat the repository as a monorepo for a personal agent-building platform.
+- The platform's top-level purpose is to reduce repetitive human work and elapsed work time by modeling real human research, comparison, judgment, execution, and verification processes, then promoting automation-worthy repetition into the smallest durable asset: prompt, workflow, template, tool, skill, agent, or project feature.
+- Automation must preserve human-judgment checkpoints, validation criteria, and rollback boundaries; meaningful automation candidates should be checked against timing records, bottleneck records, and evaluator results.
 - Use `_ops/index.md` as the navigation hub for ongoing work.
 - Use `_philosophy/` for the durable worldview behind agent behavior and operating rules.
 - Keep reusable platform concepts in `agent-platform/` unless they clearly belong to another project.

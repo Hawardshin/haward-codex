@@ -1,0 +1,150 @@
+{
+  "task": "Ground factual claims for the human-process automation platform purpose work.",
+  "output_summary": "Added a durable platform purpose rule that the workspace exists to reduce repetitive human work and elapsed time by modeling real human processes into small reusable automation assets.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-01-human-process-automation-purpose.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked web-first record with queries, checked sources, ignored weak sources, plan impact, and uncertainty."
+    },
+    {
+      "evidence_id": "requirements_specs",
+      "source": "_requirements/baselines/2026-05-31-workspace-platform.ko.md; _specs/workspace-platform/2026-06-01-human-process-automation-purpose/spec.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked requirement baseline and spec artifacts for REQ-WS-045."
+    },
+    {
+      "evidence_id": "operating_docs",
+      "source": "_philosophy/agent-operating-philosophy.ko.md; _docs/operating-models/platform-identity-operating-model.ko.md; _docs/governance/capability-governance.md; README.md; agent-platform/README.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked operating documents that expose the human-process automation purpose."
+    },
+    {
+      "evidence_id": "persistent_and_memory",
+      "source": "AGENTS.md; _docs/instructions/persistent-instructions.ko.md; agent-platform/configs/memory/bootstrap-manifest.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Durable instructions and memory bootstrap anchors updated and validated by config/memory checks."
+    },
+    {
+      "evidence_id": "google_sre_toil",
+      "source": "https://sre.google/sre-book/eliminating-toil/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Google SRE book chapter checked for toil definition and time-allocation rationale."
+    },
+    {
+      "evidence_id": "google_sre_workbook",
+      "source": "https://sre.google/workbook/eliminating-toil/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Google SRE workbook chapter checked for identifying, quantifying, and reducing toil."
+    },
+    {
+      "evidence_id": "ibm_liveaction",
+      "source": "https://research.ibm.com/publications/liveaction-automating-web-task-model-generation",
+      "source_type": "paper",
+      "checked_on": "2026-06-01",
+      "reliability": "IBM Research publication summary checked for human web-task repetition and task-model generation."
+    },
+    {
+      "evidence_id": "ibm_rpa",
+      "source": "https://www.ibm.com/think/topics/rpa",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "IBM official explainer checked for RPA as repetitive task automation that emulates human processes."
+    },
+    {
+      "evidence_id": "microsoft_process_task_mining",
+      "source": "https://learn.microsoft.com/en-us/power-automate/process-advisor-overview",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Microsoft Learn documentation checked for process/task mining, bottleneck discovery, and automation opportunity discovery."
+    },
+    {
+      "evidence_id": "validation_commands",
+      "source": "Local validation commands run on 2026-06-01.",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "JSON syntax, config contract, memory bootstrap, docs audit, naming audit, structure audit, workspace index, task board, workspace health, and work timer checks passed after regenerating stale maps."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now has REQ-WS-045 defining the platform's purpose as reducing repetitive human work and elapsed time through human-process modeling and automation-worthy asset promotion.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["requirements_specs"],
+      "verification_steps": ["Read the requirements baseline and the human-process automation spec."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The philosophy, platform identity, README, and capability governance documents now express that automation is a means to reduce repetition and time, not an end in itself.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["operating_docs"],
+      "verification_steps": ["Read the operating documents listed in evidence."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Persistent instructions, AGENTS, and memory bootstrap now include the human-process automation purpose and boundaries.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["persistent_and_memory", "validation_commands"],
+      "verification_steps": ["Read the instruction files and run memory/config checks."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Google SRE materials define toil as repetitive, automatable manual work and frame toil reduction as a way to preserve time for engineering work.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["google_sre_toil", "google_sre_workbook", "web_search_record"],
+      "verification_steps": ["Checked Google SRE book and workbook pages and captured plan impact in the web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "IBM LiveAction research supports the idea that real user activity can reveal repeated web behaviors that can be modeled for automation.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["ibm_liveaction", "web_search_record"],
+      "verification_steps": ["Checked IBM Research publication summary and captured plan impact in the web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "IBM RPA and Microsoft process/task mining materials support using human process models and task/process observations to identify automation opportunities.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["ibm_rpa", "microsoft_process_task_mining", "web_search_record"],
+      "verification_steps": ["Checked IBM and Microsoft official materials and captured plan impact in the web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Automation should preserve human judgment, validation criteria, and rollback boundaries.",
+      "claim_type": "inference",
+      "support_level": "supported",
+      "evidence_ids": ["requirements_specs", "operating_docs", "persistent_and_memory"],
+      "verification_steps": ["Checked that the boundary is recorded as a repository operating rule and not as an external universal claim."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "The actual time saved by future automation depends on repeated measurements in work timing records and evaluator outcomes.",
+    "Human-process observation must remain bounded by privacy, permission, and the user-provided task context."
+  ],
+  "limitation_notes": [
+    "This change updates platform philosophy, requirements, rules, and memory anchors. It does not implement a new automation runtime.",
+    "The policy intentionally avoids claiming that every repeated task should be automated."
+  ]
+}

@@ -60,6 +60,7 @@
 | REQ-WS-042 | 사용자가 AI를 더 잘 쓰고 싶어 하거나 작업 중 AI 사용 간극이 보이면, 플랫폼은 이를 개인 탓이 아니라 작업 맥락, task-fit, 반복, 검증, 도구화, 자산화 gap으로 진단하고 가장 작은 bridge intervention을 적용해야 한다. | UR-2026-06-01-031 | must | baseline | agent-platform/_ops/_docs | ai-usage-gap profile config contract, workflow/prompt, memory bootstrap, evaluation 확인 | `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`, `_ops/prompts/89-bridge-ai-usage-gap.md`, `_docs/operating-models/ai-usage-gap-operating-model.ko.md` |
 | REQ-WS-043 | 사용자 지시가 모호하거나 편향적이거나 결론을 유도하거나 검증 가능한 출력 계약이 없거나 LLM을 결정론적 진실 기계로 가정하면, 실행 전에 목표, 맥락, 제약, 출력 형식, 성공 기준, 반대 근거, 검증 경로를 포함한 중립적 task brief로 재작성해야 한다. | UR-2026-06-01-032 | must | baseline | agent-platform/_ops/_docs | ai-usage-gap profile, workflow/prompt, persistent instructions, grounding/evaluation 확인 | `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`, `_ops/prompts/89-bridge-ai-usage-gap.md`, `_docs/operating-models/ai-usage-gap-operating-model.ko.md` |
 | REQ-WS-044 | 모델 성능과 유형에 따라 프롬프팅 전략을 달리해야 한다. 약한/비추론/불확실 모델은 비용과 지연이 허용되고 작업 편차가 크면 두 번의 독립 시도 또는 초안-비평-수정 loop를 실행해 비교/병합하고, 추론/강한 모델은 불필요한 중복 호출보다 명확한 목표/맥락/제약/검증을 우선해야 한다. 반복 호출 결과는 사실 증명이 아니므로 출처, 테스트, 도구, evaluator 또는 인간 판단으로 검증해야 한다. | UR-2026-06-01-033 | must | baseline | agent-platform/_ops/_docs | ai-usage-gap profile, workflow/prompt, persistent instructions, grounding/evaluation 확인 | `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_docs/operating-models/ai-usage-gap-operating-model.ko.md`, `_ops/workflows/59-bridge-ai-usage-gap.md`, `_ops/prompts/89-bridge-ai-usage-gap.md` |
+| REQ-WS-045 | 플랫폼의 최종 목적은 사람의 반복적인 작업을 계속 줄이고, 더 효율적인 방법을 만들며, 작업 시간을 줄이는 것이다. 이를 위해 에이전트는 인간이 실제로 수행하는 조사/판단/실행/검증 프로세스를 관찰해 재현 가능한 단계로 모델링하고, 자동화 가치가 있는 반복은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격해야 한다. 자동화는 인간 판단이 필요한 지점과 검증/rollback 경계를 보존해야 한다. | UR-2026-06-01-034 | must | baseline | workspace/agent-platform/_docs/_philosophy | philosophy review, platform identity docs, memory bootstrap, evaluation 확인 | `_philosophy/agent-operating-philosophy.ko.md`, `_docs/operating-models/platform-identity-operating-model.ko.md`, `_docs/governance/capability-governance.md`, `README.md` |
 
 ## 변경 관리
 
@@ -89,6 +90,7 @@
 - 2026-06-01에 REQ-WS-042를 추가해 AI 사용 격차를 작업 구조 gap으로 진단하고 task framing, task-fit, iteration, verification, asset promotion으로 줄이는 구조를 공통 운영 모델로 승격했다.
 - 2026-06-01에 REQ-WS-043을 추가해 모호하거나 편향적이거나 결론 유도형인 지시, 출력 계약이 없는 지시, LLM을 결정론적 진실 기계로 보는 지시를 중립적이고 검증 가능한 task brief로 재작성하는 규칙을 공통 운영 모델로 승격했다.
 - 2026-06-01에 REQ-WS-044를 추가해 모델 capability별 프롬프팅 전략과 약한/비추론 모델의 2-pass 비교/병합/검증 규칙을 공통 운영 모델로 승격했다.
+- 2026-06-01에 REQ-WS-045를 추가해 반복 작업 감소, 시간 절감, 인간 프로세스 모델링, 자동화 가능한 반복의 자산화를 플랫폼의 최상위 목적 원칙으로 승격했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.

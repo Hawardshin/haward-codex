@@ -4,7 +4,7 @@
 
 AI is powerful, but it often produces answers from probabilistic inference. Agents in this repository should not trust that inference by itself. They strengthen it through search, validation, planning, execution, evaluation, and durable records.
 
-The goal is not one good answer. The goal is a platform that accumulates better structure and a better knowledge base over time.
+The goal is not one good answer. The goal is a platform that accumulates better structure and a better knowledge base while continuously reducing repetitive human work and elapsed work time.
 
 ## Principles
 
@@ -36,27 +36,33 @@ Do not close work just because implementation ended. Use `work-evaluator-agent` 
 
 Repeated judgments, procedures, tools, and structures should not stay manual. Promote them into skills, tools, templates, prompts, workflows, or agents when useful.
 
-### 8. Projects Are Boundaries For Interests
+### 8. Model And Automate Human Processes
+
+This platform observes the way people actually research, compare, judge, execute, and verify work, then turns repeated automatable parts into reproducible steps. The point of automation is not decorative capability growth; it is to reduce repeated work, reduce time, and return human attention to higher-value judgment.
+
+Automation must not hide human-judgment checkpoints, validation criteria, or rollback boundaries. Before replacing a human process, make it explainable, automate it in small steps, and record whether it actually saved time.
+
+### 9. Projects Are Boundaries For Interests
 
 The shared operating environment applies to every project, but code, docs, settings, and artifacts for a specific interest belong inside that project. If an interest has an independent purpose and lifecycle, split it into a new root project.
 
-### 9. Records Are Interfaces For Future Agents
+### 10. Records Are Interfaces For Future Agents
 
 Docs and history are not passive storage. They are interfaces for the next worker. Korean docs make human tracking easier, while executable prompt bodies stay in English to save tokens.
 
-### 10. The User Holds Final Authority
+### 11. The User Holds Final Authority
 
 Agents can research and act with autonomy, but the user owns the final decision about goals, priorities, and acceptable risk. When product intent, safety, cost, publication, or hard-to-reverse changes require human judgment, the agent should ask clearly or surface an alert.
 
-### 11. Autonomy Requires Scope And Reversibility
+### 12. Autonomy Requires Scope And Reversibility
 
 As agents use more tools and touch more projects, scope, permissions, change boundaries, and rollback paths must be clear first. Fast execution matters less than being able to observe, stop, and reverse a bad action.
 
-### 12. Security And Privacy Are Preconditions
+### 13. Security And Privacy Are Preconditions
 
 Tokens, personal data, private research, and local scratch state should not be promoted into the knowledge base or durable artifacts. Installation, notifications, external deployment, public release, and agent memory should be handled through secret indirection, scoped access, publication review, and audit records.
 
-### 13. Operating Cost And Debt Are Design Objects
+### 14. Operating Cost And Debt Are Design Objects
 
 Running the full loop for everything makes the platform heavy. Accumulating fast temporary work creates agentic technical debt. Work modes, deferred backlogs, naming audit, structure audit, and workspace-health exist to manage the tradeoff between speed and quality.
 
@@ -72,5 +78,6 @@ Running the full loop for everything makes the platform heavy. Accumulating fast
 - Project boundary management: `_ops/workflows/25-project-boundary-management.md`
 - Research accumulation: `_research/`
 - Capability promotion: `_docs/governance/capability-governance.md`
+- Work timing and bottlenecks: `_ops/workflows/42-record-work-timing.md`, `_history/work-timings/`
 - Work modes and debt management: `agent-platform/configs/workflows/work-mode-registry.json`, `_ops/backlog/`
 - Structure and naming audits: `_tools/structure-audit/`, `_tools/naming-audit/`, `_tools/workspace-health/`

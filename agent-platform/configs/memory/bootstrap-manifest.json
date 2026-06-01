@@ -382,7 +382,8 @@
       "source_type": "internal",
       "used_for": [
         "foundational worldview behind repository operations",
-        "search, validation, planning, evaluation, autonomy, reversibility, privacy, and debt principles"
+        "search, validation, planning, evaluation, autonomy, reversibility, privacy, and debt principles",
+        "repetitive-human-work reduction, elapsed-time reduction, and human-process automation boundaries"
       ],
       "last_checked": "2026-06-01"
     },
@@ -393,7 +394,8 @@
       "source_type": "internal",
       "used_for": [
         "clear first-read explanation of the platform identity",
-        "narrative bridge between philosophy, operating rules, projects, and history"
+        "narrative bridge between philosophy, operating rules, projects, and history",
+        "top-level purpose for modeling real human processes into efficient reusable automation assets"
       ],
       "last_checked": "2026-06-01"
     },
@@ -844,7 +846,7 @@
     },
     {
       "id": "agent_operating_philosophy_must_stay_discoverable",
-      "rule": "The foundational agent operating philosophy must remain a warm memory anchor so future sessions understand why the workspace uses web-first research, skepticism, evaluation, project boundaries, human authority, scoped autonomy, privacy, and debt control.",
+      "rule": "The foundational agent operating philosophy must remain a warm memory anchor so future sessions understand why the workspace uses web-first research, skepticism, evaluation, project boundaries, human authority, scoped autonomy, privacy, debt control, repetitive-work reduction, and human-process automation.",
       "reason": "The user explicitly asked to keep the project concept and philosophy visible and to check for missing parts.",
       "applies_to": [
         "anchors",
@@ -855,8 +857,8 @@
     },
     {
       "id": "platform_identity_must_stay_discoverable",
-      "rule": "The platform identity operating model must remain a warm memory anchor so future sessions can explain what this workspace is before diving into detailed rules.",
-      "reason": "The user explicitly asked for a more detailed and compelling explanation of the platform.",
+      "rule": "The platform identity operating model must remain a warm memory anchor so future sessions can explain that the workspace exists to reduce repetitive human work and elapsed time by modeling real human processes into durable automation assets before diving into detailed rules.",
+      "reason": "The user explicitly asked for a more detailed and compelling explanation of the platform, and later clarified that the platform ultimately exists to reduce repetitive human work and automate human-like processes.",
       "applies_to": [
         "anchors",
         "required_anchor_ids",
@@ -1148,7 +1150,7 @@
       "id": "agent_operating_philosophy",
       "path": "_philosophy/agent-operating-philosophy.ko.md",
       "tier": "warm",
-      "purpose": "Foundational agent operating philosophy for search, skepticism, evaluation, autonomy, reversibility, privacy, and operating debt.",
+      "purpose": "Foundational agent operating philosophy for search, skepticism, evaluation, autonomy, reversibility, privacy, operating debt, repetitive-work reduction, and human-process automation boundaries.",
       "required": true,
       "load_order": 9
     },
@@ -1156,7 +1158,7 @@
       "id": "platform_identity_operating_model",
       "path": "_docs/operating-models/platform-identity-operating-model.ko.md",
       "tier": "warm",
-      "purpose": "Clear first-read platform identity narrative connecting philosophy, operating loop, project structure, evidence, and long-term memory.",
+      "purpose": "Clear first-read platform identity narrative connecting philosophy, operating loop, project structure, evidence, long-term memory, and the platform purpose of turning repeated human process into smaller reusable automation assets.",
       "required": true,
       "load_order": 9
     },

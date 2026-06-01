@@ -2,7 +2,18 @@
 
 ## Purpose
 
-스킬과 도구를 무분별하게 늘리지 않고, 반복 가치가 있는 작업만 재사용 가능한 자산으로 승격한다.
+스킬과 도구를 무분별하게 늘리지 않고, 반복 가치가 있는 작업만 재사용 가능한 자산으로 승격한다. 핵심 기준은 “만들 수 있는가”가 아니라 “사람의 반복 작업과 시간을 실제로 줄이는가”다.
+
+## Automation Philosophy
+
+자동화 후보는 먼저 사람의 실제 프로세스로 설명되어야 한다.
+
+- 어떤 사람이 어떤 순서로 조사, 비교, 판단, 실행, 검증을 하는가?
+- 그 과정 중 반복되는 입력, 판단, 명령, 변환, 검증은 무엇인가?
+- 자동화했을 때 절약되는 시간과 줄어드는 오류는 무엇인가?
+- 자동화가 실패했을 때 사람이 어디서 개입하고 어떻게 되돌릴 수 있는가?
+
+이 질문에 답하지 못하면 새 도구나 스킬보다 문서화, 체크리스트, 프롬프트 개선이 먼저다.
 
 ## When to Create a Skill
 
@@ -12,6 +23,7 @@ Create or update a skill when work repeatedly needs:
 - a multi-step workflow with validation requirements
 - a specialized tool integration pattern
 - project-specific operating knowledge that should guide future agents
+- a human process that has been observed, documented, and proven worth reducing
 
 Skill source should be tracked under `_skills/<skill-name>/`.
 
@@ -30,6 +42,7 @@ Create a tool when work repeatedly needs deterministic execution:
 - checking project health
 - checking claim grounding and hallucination risk
 - normalizing, scoring, and reporting large source bundles
+- reducing a measured bottleneck in `_history/work-timings/`
 
 Shared tools belong under `_tools/<tool-name>/`. Project-specific tools belong under `project-name/tools/`.
 
@@ -76,6 +89,8 @@ Every reusable capability must state:
 - outputs
 - main command or activation path
 - validation and improvement path
+- expected human time or repetition reduced
+- human judgment, verification, and rollback boundaries
 
 ## Avoid
 

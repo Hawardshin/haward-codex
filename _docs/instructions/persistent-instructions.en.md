@@ -5,6 +5,8 @@ This document records durable user instructions in English.
 ## Active Instructions
 
 - Manage this repository as a monorepo for a personal agent-building platform.
+- The platform's top-level purpose is to keep reducing repetitive human work and elapsed work time. Repeated research, comparison, judgment, execution, and verification should first be modeled as the process a human actually performs; when automation value is confirmed, promote the repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.
+- Automation must not hide human-judgment checkpoints, validation criteria, or rollback boundaries. Automation candidates should be checked through work timing records, bottleneck records, and evaluator results to confirm that they actually reduce repetition and time.
 - Keep the workspace operating principles usable from Claude Code, Cursor, Antigravity, Codex, or another AI coding tool the user prefers.
 - Keep `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md` and `_ops/assistant-runtimes/adapter-registry.json` as the source of truth for tool-agnostic runtime decisions.
 - Treat `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, and `.agents/rules/` as runtime adapters. Do not copy common policy into separate divergent sources.

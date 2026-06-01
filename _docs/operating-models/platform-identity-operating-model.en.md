@@ -2,13 +2,13 @@
 
 ## One Sentence
 
-This platform turns the user's intent into evidence-backed plans and verifiable outcomes, then preserves the resulting knowledge and repeated capabilities as assets for future work.
+This platform turns the user's intent into evidence-backed plans and verifiable outcomes, then models repeated human work processes into more efficient methods and durable automation assets.
 
 ## Why It Exists
 
 Working with AI can make projects move quickly, but speed also makes context easy to lose. Decisions made in chat disappear, source quality becomes unclear, specs drift from implementation, and project structure becomes harder to understand as more work accumulates.
 
-This repository is designed to reverse that pattern. User intent becomes requirements. Requirements become specs and plans. Implementation passes validation and evaluation. Results become history, summaries, and commits. The goal is not one impressive answer; the goal is an environment that gets more useful over time.
+This repository is designed to reverse that pattern. User intent becomes requirements. Requirements become specs and plans. Implementation passes validation and evaluation. Results become history, summaries, and commits. The goal is not one impressive answer; the goal is an environment that reduces the time people spend repeating the same work and gets more useful over time.
 
 ## Core Identity
 
@@ -26,6 +26,10 @@ Separate interests such as presentation agents, monitoring UI, research tools, a
 
 Web search records, source lists, requirements, specs, plans, summaries, evaluations, installation audits, and commit hashes are memory for future work. They are not unquestioned truth; they are evidence handles that future agents can inspect and revalidate.
 
+### 4. Repetitive-Work Reduction Engine
+
+The platform does not stop at imitating human process. It looks for repeated actions across research, comparison, judgment, execution, and verification, then turns them into a better sequence, a smaller tool, a better prompt, or a clearer template. The goal is not more automation for its own sake; it is less repeated human work and less elapsed time.
+
 ## Operating Loop
 
 ```text
@@ -42,6 +46,8 @@ capture intent
 ```
 
 The loop is not meant to create paperwork for its own sake. It exists to keep judgment visible. Small work can use a light mode. Work involving durable structure, policy, external facts, or shared capabilities uses a stricter mode.
+
+When the loop repeats, the repetition itself becomes an object of study. Repeated research, file lookup, validation, or report writing should first be documented as a process, then split into the smallest automation-worthy unit.
 
 ## What Good Output Means Here
 
@@ -66,6 +72,7 @@ Over time, it should move toward this shape:
 - Evaluation agents compare the initial intent with the actual result and send gaps back into rework.
 - Monitoring UI shows history, projects, specs, evaluations, and active work in one place.
 - Repeated workflows become skills, tools, prompts, and templates so future work becomes faster and more reliable.
+- Work timing, bottleneck records, and evaluator results show whether repetition is actually being reduced.
 
 ## Important Boundaries
 

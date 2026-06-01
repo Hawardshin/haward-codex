@@ -5,6 +5,8 @@
 ## 활성 지시
 
 - 이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다.
+- 플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다.
+- 자동화는 인간 판단 지점, 검증 기준, rollback 경계를 숨기지 않는다. 자동화 후보는 실제 반복 감소와 시간 절감 효과를 작업 시간 기록, 병목 기록, evaluator 결과로 확인한다.
 - 이 저장소의 운영 원칙은 Codex에만 묶지 않고 Claude Code, Cursor, Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 재사용할 수 있게 유지한다.
 - 도구 독립형 원칙의 원본은 `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`와 `_ops/assistant-runtimes/adapter-registry.json`에 둔다.
 - `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, `.agents/rules/`는 도구별 adapter로 취급하고, 공통 정책을 길게 복사해 서로 다른 원본으로 갈라지게 하지 않는다.
