@@ -1,0 +1,294 @@
+{
+  "schema_version": "2026-06-02",
+  "name": "install-mode-registry",
+  "purpose": "Separates installation profiles for people who only want to use the platform from developer installations for improving the platform itself.",
+  "reader_guide": {
+    "summary": "Use this registry before setting up the workspace. Pick user mode for running or viewing platform outputs; pick developer mode for changing platform code, rules, tools, tests, or configs.",
+    "how_to_read": [
+      "Read mode_boundary first so work_mode and install_mode are not confused.",
+      "Read modes to choose user or developer installation.",
+      "Use commands as planned setup commands, not as proof that installation occurred.",
+      "If a command is actually run and changes dependency or environment state, follow the installation audit workflow."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-06-02",
+    "update_triggers": [
+      "A user-facing install path changes.",
+      "A developer improvement install path changes.",
+      "A package manager, dependency manifest, lock file, or runtime setup changes.",
+      "The platform adds a new root project with installable runtime dependencies."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "pip_local_project_installs",
+      "title": "pip: Local project installs",
+      "url": "https://pip.pypa.io/en/stable/topics/local-project-installs/",
+      "source_type": "official_docs",
+      "used_for": [
+        "regular local install for user-like installs",
+        "editable install for development installations"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "python_pyproject_optional_dependencies",
+      "title": "Python Packaging User Guide: pyproject.toml specification",
+      "url": "https://packaging.python.org/en/latest/specifications/pyproject-toml/",
+      "source_type": "official_docs",
+      "used_for": [
+        "project dependencies and optional dependencies structure"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "npm_ci",
+      "title": "npm Docs: npm ci",
+      "url": "https://docs.npmjs.com/cli/commands/npm-ci/",
+      "source_type": "official_docs",
+      "used_for": [
+        "clean dependency installation from lock files",
+        "omitting dev dependencies when appropriate"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "npm_install_omit_dev",
+      "title": "npm Docs: npm install",
+      "url": "https://docs.npmjs.com/cli/v11/commands/npm-install",
+      "source_type": "official_docs",
+      "used_for": [
+        "dependency versus devDependency installation behavior",
+        "production omit rules"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "vercel_nextjs",
+      "title": "Vercel Docs: Next.js on Vercel",
+      "url": "https://vercel.com/docs/frameworks/full-stack/nextjs",
+      "source_type": "official_docs",
+      "used_for": [
+        "workspace-monitor deployment path",
+        "Vercel-managed Next.js build/deploy context"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "installation_audit_workflow",
+      "title": "Installation Record Workflow",
+      "path": "_ops/workflows/58-installation-record.md",
+      "source_type": "internal",
+      "used_for": [
+        "audit requirements when setup commands are actually run"
+      ],
+      "last_checked": "2026-06-02"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "install_mode_is_not_work_mode",
+      "rule": "install_mode selects the environment setup profile; work_mode still controls planning, evidence, evaluation, and close-out strictness.",
+      "reason": "The repository already has work modes. Installation audience should not weaken governance requirements.",
+      "applies_to": [
+        "mode_boundary",
+        "modes"
+      ]
+    },
+    {
+      "id": "user_install_is_minimal_and_non_editable",
+      "rule": "User installation should prefer regular installs, existing built artifacts, read-only viewing, and minimal runtime dependencies. It should not require editable installs or platform test harnesses.",
+      "reason": "A person using the platform should not need the full improvement toolchain.",
+      "applies_to": [
+        "modes[user]"
+      ]
+    },
+    {
+      "id": "developer_install_is_editable_and_verified",
+      "rule": "Developer installation should use editable/local project setup where applicable and include tests, audits, and generated navigation checks.",
+      "reason": "People improving the platform need fast code iteration and stronger verification.",
+      "applies_to": [
+        "modes[developer]"
+      ]
+    },
+    {
+      "id": "commands_are_plans_until_run",
+      "rule": "Commands in this registry are planned setup commands. If an agent actually runs an install, upgrade, removal, or global configuration, it must create an installation audit record.",
+      "reason": "The registry describes how to set up. The installation registry records what actually changed.",
+      "applies_to": [
+        "modes[].commands",
+        "_ops/installations/registry.json"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "mode_boundary",
+      "meaning": "Explains the difference between install_mode and work_mode.",
+      "required": true
+    },
+    {
+      "field": "default_mode",
+      "meaning": "Fallback install mode when the user does not specify an installation audience.",
+      "required": true
+    },
+    {
+      "field": "modes[].id",
+      "meaning": "Stable install mode identifier, currently user or developer.",
+      "required": true
+    },
+    {
+      "field": "modes[].commands",
+      "meaning": "Concrete setup commands grouped by project and purpose.",
+      "required": true
+    },
+    {
+      "field": "modes[].verification",
+      "meaning": "Checks to run after the installation profile is applied.",
+      "required": true
+    }
+  ],
+  "mode_boundary": {
+    "install_mode": "Environment setup profile for a human or agent preparing to use or improve the platform.",
+    "work_mode": "Task execution and close-out strictness profile such as quick, standard, ship_first, research, or governance.",
+    "rule": "Choose install_mode when setting up dependencies or runtime environment. Choose work_mode for each task after web-first intake and memory bootstrap."
+  },
+  "default_mode": "user",
+  "modes": [
+    {
+      "id": "user",
+      "label": "User Install",
+      "intent": "Use the platform, view generated artifacts, run the monitoring site, or execute stable CLI behavior without changing platform internals.",
+      "audience": [
+        "workspace owner using existing outputs",
+        "reviewer viewing history, docs, dashboards, or generated artifacts",
+        "future public user trying the repository without improving it"
+      ],
+      "dependency_policy": [
+        "Prefer regular Python local installs over editable installs.",
+        "Prefer existing HTML/static artifacts when no runtime is needed.",
+        "For Next.js source builds, install from lock files and run the build; for runtime-only deployment, omit dev dependencies only after the build path is confirmed.",
+        "Do not install browser validation harnesses or governance test toolchains unless the user explicitly switches to developer install."
+      ],
+      "allowed_actions": [
+        "read documentation and history",
+        "run stable CLI commands",
+        "view HTML artifacts",
+        "build or run workspace-monitor for browsing repository state"
+      ],
+      "must_not": [
+        "edit platform source as part of setup",
+        "run editable Python installs by default",
+        "treat user setup as permission to change dependencies",
+        "skip installation audit if setup commands are actually executed"
+      ],
+      "commands": [
+        {
+          "id": "agent-platform-user-install",
+          "project": "agent-platform",
+          "purpose": "Install the Python platform CLI in regular local mode.",
+          "command": "cd agent-platform && python3 -m venv .venv && . .venv/bin/activate && python -m pip install .",
+          "notes": "Regular install mirrors package installation more closely than editable install."
+        },
+        {
+          "id": "workspace-monitor-user-build",
+          "project": "workspace-monitor",
+          "purpose": "Build the repository monitoring site from source for local viewing or Vercel readiness.",
+          "command": "cd workspace-monitor && npm ci && npm run build",
+          "notes": "Next.js source builds may need devDependencies during build; production runtime pruning is separate from build setup."
+        },
+        {
+          "id": "presentation-agent-user-view",
+          "project": "presentation-agent",
+          "purpose": "View generated HTML presentation artifacts without installing the browser test harness.",
+          "command": "open presentation-agent/artifacts/html/",
+          "notes": "Use developer install only when validating or modifying deck-generation/browser-test tooling."
+        }
+      ],
+      "verification": [
+        "agent-platform: agent-platform --help or PYTHONPATH=src python3 -m agent_platform.cli list-agents",
+        "workspace-monitor: npm run build completes or Vercel build succeeds",
+        "presentation-agent: target HTML artifact opens in a browser"
+      ]
+    },
+    {
+      "id": "developer",
+      "label": "Developer Improvement Install",
+      "intent": "Improve the platform itself: edit agent-platform code, shared rules, tools, tests, project dashboards, validation harnesses, or generated navigation.",
+      "audience": [
+        "workspace maintainer",
+        "agent improving platform code or rules",
+        "developer adding tools, skills, validators, integrations, or dashboards"
+      ],
+      "dependency_policy": [
+        "Use editable Python installs for platform code when a virtual environment is used.",
+        "Install Node dependencies from lock files for projects being changed.",
+        "Include devDependencies and browser/test harnesses only for projects that need improvement or verification.",
+        "Run targeted and governance checks before close-out."
+      ],
+      "allowed_actions": [
+        "edit platform source and tests",
+        "run unit, browser, governance, and workspace health checks",
+        "update dependency manifests when installation workflow and audit records are followed",
+        "regenerate maps, boards, and static artifacts"
+      ],
+      "must_not": [
+        "install global dependencies without explicit justification and rollback path",
+        "mix unrelated project installs into one audit record",
+        "use developer install just to view existing artifacts",
+        "commit dependency changes without verification"
+      ],
+      "commands": [
+        {
+          "id": "agent-platform-developer-install",
+          "project": "agent-platform",
+          "purpose": "Install the Python platform CLI in editable mode for source changes.",
+          "command": "cd agent-platform && python3 -m venv .venv && . .venv/bin/activate && python -m pip install -e .",
+          "notes": "Editable install keeps source changes live without reinstalling unless metadata changes."
+        },
+        {
+          "id": "agent-platform-tests",
+          "project": "agent-platform",
+          "purpose": "Run platform unit tests after source or config changes.",
+          "command": "cd agent-platform && PYTHONPATH=src python3 -m unittest discover -s tests",
+          "notes": "The current tests use the Python standard library unittest runner."
+        },
+        {
+          "id": "workspace-monitor-developer-install",
+          "project": "workspace-monitor",
+          "purpose": "Install monitor dependencies for development and verification.",
+          "command": "cd workspace-monitor && npm ci && npm test && npm run check && npm run build",
+          "notes": "Includes devDependencies needed for TypeScript checks and tests."
+        },
+        {
+          "id": "presentation-agent-browser-validation-install",
+          "project": "presentation-agent",
+          "purpose": "Install and run browser validation when improving presentation artifacts or harnesses.",
+          "command": "cd presentation-agent && npm ci && npm run test:browser",
+          "notes": "Requires Playwright browser dependencies already recorded in the installation registry."
+        },
+        {
+          "id": "workspace-governance-checks",
+          "project": "workspace",
+          "purpose": "Run shared governance checks after platform improvements.",
+          "command": "python3 _tools/workspace-health/src/workspace_health.py --category governance --json",
+          "notes": "Use with targeted checks for changed projects."
+        }
+      ],
+      "verification": [
+        "agent-platform unit tests pass for changed Python code",
+        "changed JSON configs pass check-config-contract",
+        "workspace-monitor tests/check/build pass when monitor code changes",
+        "presentation-agent browser tests pass when presentation harness or HTML output changes",
+        "workspace health governance category passes before closing platform-level changes"
+      ]
+    }
+  ],
+  "selection_rules": [
+    "If the user says use, run, view, deploy, browse, or try the platform, start from install_mode=user.",
+    "If the user says improve, develop, refactor, add a tool, add a skill, change platform behavior, or modify validators, use install_mode=developer.",
+    "If both are needed, do developer install in the owning project and document which user-facing install path remains valid.",
+    "If installing dependencies is not actually necessary for the requested task, do not run install commands; document the selected install mode only when it changes decisions.",
+    "If an install command is actually executed, follow _ops/workflows/58-installation-record.md before close-out."
+  ]
+}

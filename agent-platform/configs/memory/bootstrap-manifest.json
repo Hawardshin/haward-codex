@@ -46,7 +46,7 @@
       "The AI assistant runtime adapter registry or tool-specific adapter files change.",
       "The AI usage gap profile, coaching workflow, prompt instruction quality gate, bounded clarification policy, non-blocking clarification policy, human decision inbox, interrupt/resume policy, model-adaptive prompting policy, or AI-use asset promotion rules change.",
       "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
-      "The installation registry or installation audit contract changes.",
+      "The install mode registry, installation registry, or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
     ]
@@ -108,6 +108,17 @@
         "deferred improvement backlog rules"
       ],
       "last_checked": "2026-05-31"
+    },
+    {
+      "id": "install_mode_registry",
+      "title": "Install Mode Registry",
+      "path": "agent-platform/configs/installations/install-mode-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "user versus developer installation setup selection",
+        "separating install_mode from work_mode"
+      ],
+      "last_checked": "2026-06-02"
     },
     {
       "id": "work_timing_policy",
@@ -780,6 +791,17 @@
       ]
     },
     {
+      "id": "install_mode_registry_must_stay_discoverable",
+      "rule": "The install mode registry must remain a warm memory anchor so future sessions can choose user install for using/viewing/deploying the platform and developer install for improving platform source, rules, tools, skills, validators, dashboards, or tests.",
+      "reason": "The user explicitly asked for a user-facing installation and a developer-facing installation for improving the platform.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "check-install-modes"
+      ]
+    },
+    {
       "id": "work_timing_must_stay_discoverable",
       "rule": "The work timing policy and workflow must remain warm memory anchors so future sessions can record phase durations and bottleneck candidates for meaningful work.",
       "reason": "The user explicitly asked to make it easy to see where each task spends time and where bottlenecks occur.",
@@ -933,6 +955,7 @@
     "web_first_workflow",
     "memory_bootstrap_workflow",
     "work_mode_registry",
+    "install_mode_registry",
     "work_timing_policy",
     "work_timing_workflow",
     "parallel_work_workflow",
@@ -978,6 +1001,7 @@
     "web_first_workflow",
     "memory_bootstrap_workflow",
     "work_mode_registry",
+    "install_mode_registry",
     "work_timing_policy",
     "work_timing_workflow",
     "parallel_work_workflow",
@@ -1083,6 +1107,14 @@
       "path": "agent-platform/configs/workflows/work-mode-registry.json",
       "tier": "hot",
       "purpose": "Selectable work modes and evaluator target policy for avoiding unnecessary full-loop overhead.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "install_mode_registry",
+      "path": "agent-platform/configs/installations/install-mode-registry.json",
+      "tier": "warm",
+      "purpose": "User install and developer improvement install setup profiles, kept separate from work_mode.",
       "required": true,
       "load_order": 8
     },

@@ -6,5 +6,5 @@ Examples:
 
 - Research and source collection policies
 - Requirements and spec-driven development policies
-- Installation, validation, and hallucination-prevention policies
+- Installation, install mode, validation, and hallucination-prevention policies
 - Documentation language and context archive policies

@@ -109,6 +109,7 @@
 - 성숙한 오픈소스 도구나 라이브러리가 작업에 맞으면 설치를 피하지 말고 프로젝트/도구 범위에 설치해 사용할 수 있다.
 - 오픈소스 설치 전에는 설치 범위, 정확한 설치 명령, dependency 기록 파일, 보안 검토, 라이선스 검토, 검증 방법, rollback 계획을 남긴다.
 - 실제 설치, 업그레이드, 제거, 전역 환경 변경이 발생하면 `_history/installations/YYYY/`에 설치 감사 기록을 만들고 `_ops/installations/registry.json`에 인덱싱한다.
+- 설정, 실행, 배포, 개발 환경 준비가 필요하면 `agent-platform/configs/installations/install-mode-registry.json`에서 `install_mode`를 선택한다. 플랫폼 사용/보기/배포는 `user`, 플랫폼 소스/규칙/도구/스킬/검증기/대시보드/테스트 개선은 `developer`를 사용한다. `install_mode`는 환경 준비 범위이고 `work_mode`는 작업 평가 강도다.
 - 설치가 실제로 발생한 작업의 평가 입력에는 `installation_occurred=true`와 `installation_record_targets`를 포함한다.
 - 전역 설치는 피하고, 꼭 필요하면 이유와 제거 방법을 문서화하고 필요한 권한 승인을 받는다.
 - 유용한 인터넷 조사 내용은 출처 URL, 접근일, 요약, 신뢰도, 적용 가능성과 함께 문서화한다.

@@ -113,6 +113,7 @@
 - When a mature open-source tool or library fits the task, do not avoid installation by default; install it in the owning project or tool scope when needed.
 - Before installing open source, record installation scope, exact install command, dependency record path, security review, license review, verification method, and rollback plan.
 - For actual installs, upgrades, removals, or global environment changes, create an installation audit record under `_history/installations/YYYY/` and index it in `_ops/installations/registry.json`.
+- When setup, running, deployment, or development environment preparation is needed, select `install_mode` from `agent-platform/configs/installations/install-mode-registry.json`. Use `user` for using/viewing/deploying the platform and `developer` for improving platform source, rules, tools, skills, validators, dashboards, or tests. `install_mode` controls setup scope; `work_mode` controls evaluation strictness.
 - When installation occurred, include `installation_occurred=true` and `installation_record_targets` in the work evaluation input.
 - Avoid global installs; if one is necessary, document the reason and removal path, then request any required permission.
 - Document useful internet research with source URLs, access dates, summaries, reliability, and applicability.

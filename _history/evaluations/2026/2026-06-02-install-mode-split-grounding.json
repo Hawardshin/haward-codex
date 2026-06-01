@@ -1,0 +1,118 @@
+{
+  "task": "Ground factual claims for the install mode split work.",
+  "output_summary": "Added a separate install_mode registry and CLI commands for user versus developer platform setup.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable user request summary for UR-2026-06-02-003."
+    },
+    {
+      "evidence_id": "requirements_specs",
+      "source": "_requirements/baselines/2026-05-31-workspace-platform.ko.md; _specs/workspace-platform/2026-06-02-install-mode-split/spec.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Tracked requirement baseline and spec artifacts for REQ-WS-049."
+    },
+    {
+      "evidence_id": "install_mode_registry",
+      "source": "agent-platform/configs/installations/install-mode-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Self-documenting install mode config created for user/developer setup profiles."
+    },
+    {
+      "evidence_id": "install_mode_cli",
+      "source": "agent-platform/src/agent_platform/install_modes.py; agent-platform/src/agent_platform/cli.py; agent-platform/tests/test_install_modes.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Implementation and tests for install mode validation and lookup."
+    },
+    {
+      "evidence_id": "pip_local_installs",
+      "source": "https://pip.pypa.io/en/stable/topics/local-project-installs/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official pip docs checked for regular and editable local install behavior."
+    },
+    {
+      "evidence_id": "pyproject_spec",
+      "source": "https://packaging.python.org/en/latest/specifications/pyproject-toml/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Python Packaging User Guide spec checked for dependency fields."
+    },
+    {
+      "evidence_id": "npm_docs",
+      "source": "https://docs.npmjs.com/cli/commands/npm-ci/; https://docs.npmjs.com/cli/v11/commands/npm-install",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official npm docs checked for clean install and dev dependency omit behavior."
+    },
+    {
+      "evidence_id": "vercel_nextjs",
+      "source": "https://vercel.com/docs/frameworks/full-stack/nextjs",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Vercel docs checked for Next.js deployment context."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now has REQ-WS-049 requiring user and developer installation modes separate from work_mode.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["requirements_specs"],
+      "verification_steps": ["Read requirements baseline and install mode split spec."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "agent-platform/configs/installations/install-mode-registry.json defines user and developer install modes.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["install_mode_registry"],
+      "verification_steps": ["Read and validate install mode registry."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The agent-platform CLI now supports check-install-modes, list-install-modes, and show-install-mode.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["install_mode_cli"],
+      "verification_steps": ["Run CLI commands and unit tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "pip official docs distinguish regular local installs and editable installs, and describe editable installs as suited for development installation.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["pip_local_installs"],
+      "verification_steps": ["Checked pip local project install docs."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "npm official docs describe omitting dev dependencies from the install tree through omit behavior.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["npm_docs"],
+      "verification_steps": ["Checked npm ci and npm install docs."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Some project-specific builds may still require dev tooling even for user-facing source builds.",
+    "The registry documents setup modes; actual installation execution must still be audited separately."
+  ],
+  "limitation_notes": [
+    "No dependency installation was executed in this change.",
+    "The install mode registry is not a package manager; it is a source-of-truth setup profile."
+  ]
+}

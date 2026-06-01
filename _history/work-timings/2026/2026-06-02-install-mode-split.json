@@ -1,0 +1,67 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-02-install-mode-split",
+  "title": "Split user and developer installation modes",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": null,
+  "measurement_note": "Timing was reconstructed after web-first intake; phase durations are approximate.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Checked official pip, Python packaging, npm, and Vercel docs."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "Added REQ-WS-049 and bilingual spec/change/review records."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Registry and CLI implementation",
+      "status": "completed",
+      "duration_seconds": 720,
+      "measurement": "estimated",
+      "bottleneck_notes": "Added install mode registry, CLI commands, tests, docs, workflow, prompt, and memory bootstrap links."
+    },
+    {
+      "phase_id": "history_evaluation",
+      "label": "History and evaluation records",
+      "status": "completed",
+      "duration_seconds": 480,
+      "measurement": "estimated",
+      "bottleneck_notes": "Included web records, research note, plan, trace, work summary, grounding, evaluator input, and timing."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 360,
+      "measurement": "estimated",
+      "bottleneck_notes": "Reserved for CLI, tests, config contract, memory bootstrap, audits, grounding, evaluator, work timer, and diff checks."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "duration_seconds": 90,
+      "measurement": "estimated",
+      "bottleneck_notes": "Commit and push expected to be short unless remote rejects."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "implementation",
+    "interpretation": "The main cost is wiring a new durable setup concept across config, CLI, docs, memory, and governance records.",
+    "improvement_candidates": [
+      "Generate install mode docs from the registry if the command list grows.",
+      "Add a smoke-test runner for selected install profiles after real setup usage accumulates."
+    ]
+  }
+}

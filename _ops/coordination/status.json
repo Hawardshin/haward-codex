@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-02",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, platform description narrative, platform presentation pack, coding project bootstrap, work timing/bottleneck visibility, deep research agent, PPT reference expansion, non-blocking clarification, and human decision inbox interrupt/resume work tracked. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, platform description narrative, platform presentation pack, coding project bootstrap, work timing/bottleneck visibility, deep research agent, PPT reference expansion, non-blocking clarification, human decision inbox interrupt/resume, and install mode split work tracked. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -13,6 +13,26 @@
     }
   ],
   "tasks": [
+    {
+      "id": "2026-06-02-install-mode-split",
+      "title": "Split user and developer installation modes",
+      "project": "agent-platform",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-02",
+      "updated_at": "2026-06-02",
+      "next_action": "No action. Future setup work should select install_mode=user for using/viewing/deploying and install_mode=developer for improving platform source, tools, validators, dashboards, or tests.",
+      "blockers": [],
+      "references": [
+        "agent-platform/configs/installations/install-mode-registry.json",
+        "_ops/workflows/62-select-install-mode.md",
+        "_ops/prompts/92-select-install-mode.md",
+        "_specs/workspace-platform/2026-06-02-install-mode-split/"
+      ],
+      "timing_report": "_history/work-timings/2026/2026-06-02-install-mode-split.json",
+      "evaluation_report": "_history/evaluations/2026/2026-06-02-install-mode-split.ko.md"
+    },
     {
       "id": "2026-06-02-human-decision-inbox",
       "title": "Add human decision inbox and interrupt resume workflow",

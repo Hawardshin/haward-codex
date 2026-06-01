@@ -18,6 +18,12 @@ from agent_platform.integrations.notifications import (
     dispatch_notification,
     load_notification_config,
 )
+from agent_platform.install_modes import (
+    check_install_mode_registry,
+    list_install_modes,
+    load_install_mode_registry,
+    show_install_mode,
+)
 from agent_platform.memory.bootstrap import MemoryBootstrapManifest, check_memory_bootstrap
 from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidate
 from agent_platform.planning.coding_research import CodingResearchInput, complete_coding_research
@@ -76,6 +82,16 @@ def build_parser() -> argparse.ArgumentParser:
 
     check_config = subparsers.add_parser("check-config-contract", help="Check whether JSON settings files explain references and structure in-place.")
     check_config.add_argument("paths", type=Path, nargs="+")
+
+    check_install_modes = subparsers.add_parser("check-install-modes", help="Validate the user/developer installation mode registry.")
+    check_install_modes.add_argument("path", type=Path)
+
+    list_install_modes_cmd = subparsers.add_parser("list-install-modes", help="List available installation modes.")
+    list_install_modes_cmd.add_argument("path", type=Path)
+
+    show_install_mode_cmd = subparsers.add_parser("show-install-mode", help="Show one installation mode as JSON.")
+    show_install_mode_cmd.add_argument("path", type=Path)
+    show_install_mode_cmd.add_argument("mode_id")
 
     check_notifications = subparsers.add_parser("check-notifications", help="Validate notification channel settings without sending messages.")
     check_notifications.add_argument("path", type=Path)
@@ -193,6 +209,36 @@ def main(argv: list[str] | None = None) -> int:
                 ensure_ascii=False,
             )
         )
+        return 0
+
+    if args.command == "check-install-modes":
+        registry = load_install_mode_registry(args.path)
+        config_contract_report = check_config_contract(registry, str(args.path))
+        install_mode_report = check_install_mode_registry(registry)
+        print(
+            json.dumps(
+                {
+                    "status": "rework_required"
+                    if config_contract_report["requires_rework"] or install_mode_report["requires_rework"]
+                    else "ready",
+                    "requires_rework": config_contract_report["requires_rework"] or install_mode_report["requires_rework"],
+                    "config_contract": config_contract_report,
+                    "install_modes": install_mode_report,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
+        return 0
+
+    if args.command == "list-install-modes":
+        registry = load_install_mode_registry(args.path)
+        print(json.dumps(list_install_modes(registry), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "show-install-mode":
+        registry = load_install_mode_registry(args.path)
+        print(json.dumps(show_install_mode(registry, args.mode_id), indent=2, ensure_ascii=False))
         return 0
 
     if args.command == "check-notifications":

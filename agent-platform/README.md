@@ -47,6 +47,7 @@ Create a separate root project for domain-specific interests that can be run, te
 - Keep prompt-level web search records under `_history/web-searches/`.
 - Keep large-company and high-quality research site seeds in `configs/research/enterprise-source-registry.json`.
 - Keep selectable work modes and evaluator target strictness in `configs/workflows/work-mode-registry.json`.
+- Keep user/developer installation profiles in `configs/installations/install-mode-registry.json`; `install_mode` controls setup audience while `work_mode` controls task close-out strictness.
 - Keep platform notification routing in `configs/integrations/notification-channels.json`; store only environment variable names there, never real webhook URLs or tokens.
 - Keep user request summaries under `_history/user-requests/`.
 - Keep shared requirements baselines, changes, and reviews under `_requirements/`; use project-local `docs/requirements/` for project-specific requirements.
@@ -99,6 +100,9 @@ PYTHONPATH=src python3 -m agent_platform.cli reconcile-spec artifacts/spec-recon
 PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json
 PYTHONPATH=src python3 -m agent_platform.cli check-notifications configs/integrations/notification-channels.json
 PYTHONPATH=src python3 -m agent_platform.cli notify configs/integrations/notification-channels.json --event work_completed --title "Dry run" --message "Notification dry run" --severity info --dry-run
+PYTHONPATH=src python3 -m agent_platform.cli check-install-modes configs/installations/install-mode-registry.json
+PYTHONPATH=src python3 -m agent_platform.cli list-install-modes configs/installations/install-mode-registry.json
+PYTHONPATH=src python3 -m agent_platform.cli show-install-mode configs/installations/install-mode-registry.json developer
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/enterprise-source-registry.json configs/research/source-discovery-registry.json configs/research/research-agent-profile.json configs/research/deep-research-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/planning/spec-reconciliation-template.json configs/planning/deep-research-template.json configs/integrations/notification-channels.json
 ```
 
@@ -114,6 +118,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `src/agent_platform/planning/`: research-backed insight and planning checks
 - `configs/agents/`: declarative agent specs
 - `configs/evaluation/`: structured evaluation inputs
+- `configs/installations/`: user and developer installation mode registry
 - `configs/memory/`: durable memory bootstrap manifest
 - `configs/planning/`: structured planning inputs
 - `configs/research/`: source registry and research profile configs
@@ -121,6 +126,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memor
 - `configs/research/source-discovery-registry.json`: broad search-origin registry for global, Korean, Indian, paper, and Korean local review sources
 - `configs/research/deep-research-profile.json`: source, depth, stage, citation-audit, and report contract for long-form deep research
 - `configs/workflows/work-mode-registry.json`: selectable work modes and evaluator target policy
+- `configs/installations/install-mode-registry.json`: user install and developer improvement install setup profiles
 - `configs/integrations/notification-channels.json`: notification on/off routing, event filters, provider payload options, and environment-variable secret indirection
 - `configs/open-source/`: dependency candidate scoring inputs
 - `research-insight-planner-agent` is the core Perplexity-style research agent for search, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review
