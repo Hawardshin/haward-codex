@@ -2,7 +2,7 @@
 
 ## Purpose
 
-이 저장소는 개인 에이전트 구축 플랫폼과 관련 실험, 도구, 서비스 프로젝트를 한 곳에서 추적하기 위한 monorepo 작업 공간이다.
+이 저장소는 개인 에이전트 구축 플랫폼과 관련 실험, 도구, 서비스 프로젝트를 한 곳에서 추적하기 위한 monorepo 작업 공간이다. 운영 원칙은 Codex에만 묶지 않고 Claude Code, Cursor, Antigravity 등 다른 AI assistant runtime에서도 쓸 수 있게 유지한다.
 
 ## Root Directory Policy
 
@@ -19,6 +19,7 @@
 | `_history/` | 날짜별 작업 로그와 컨텍스트 압축 요약 |
 | `_history/plans/` | 에이전트 계획 과정 기록 |
 | `_ops/` | 운영 허브, 프롬프트 라우터, 워크플로, 저장소 맵 |
+| `_ops/assistant-runtimes/` | AI assistant runtime adapter 레지스트리 |
 | `_ops/backlog/` | 빠른 작업이나 `ship_first` 모드에서 뒤로 뺀 공통 비차단 개선 목록 |
 | `_ops/projects/` | 루트 프로젝트 등록부와 경계 관리 |
 | `_research/` | 인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용 |
@@ -35,6 +36,14 @@ Local-only root folders are not durable repository knowledge:
 | `outputs/` | Transient one-off tool output ignored by git |
 
 Durable artifacts must live under the owning project, usually `project-name/artifacts/`.
+
+Runtime adapter root folders are tracked but are not projects:
+
+| Folder | Purpose |
+| --- | --- |
+| `.claude/` | Claude Code scoped rule adapter |
+| `.cursor/` | Cursor Project Rule adapter |
+| `.agents/` | Google Antigravity Workspace Rule adapter |
 
 ## Project Naming
 
@@ -74,6 +83,7 @@ Project-specific visual or generated outputs should live under `artifacts/`.
 - Classify root folder types in `_ops/projects/root-structure-policy.json`.
 - List durable project top-level folders in each registry entry's `project_specific_home`.
 - Keep generated folders covered by `generated_output_dirs` and `.gitignore`.
+- Keep runtime adapter folders listed in `_ops/projects/root-structure-policy.json` `runtime_adapter_dirs`.
 - Run `python3 _tools/structure-audit/src/structure_audit.py --check` after root or project folder structure changes.
 - If a request introduces a new independent interest, lifecycle, command set, UI, dataset, or artifact stream, create a new root project.
 - Promote project-local assets to shared folders only when cross-project reuse is clear.
@@ -153,6 +163,8 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 ## Operations Hub Policy
 
 - `_ops/index.md` is the first stop for navigation.
+- `_ops/assistant-runtimes/adapter-registry.json` maps shared operating principles to Codex, Claude Code, Cursor, Antigravity, and generic assistant runtimes.
+- `_docs/tool-agnostic-agent-operating-model.ko.md` is the shared policy for keeping runtime adapters thin.
 - `_ops/workflows/02-select-work-mode.md` selects `quick`, `standard`, `ship_first`, `research`, or `governance` mode after web-first intake and memory bootstrap.
 - `agent-platform/configs/workflows/work-mode-registry.json` defines mode criteria, evaluator target policy, and deferred improvement rules.
 - `_ops/backlog/deferred-improvements.ko.md` tracks shared non-blocking improvements intentionally postponed by `ship_first` or quick work.
@@ -162,7 +174,7 @@ HTML artifacts should normally be stored in `project-name/artifacts/`.
 - Reusable workflows live in `_ops/workflows/`.
 - Repository and prompt maps live in `_ops/maps/`.
 - Run `_tools/workspace-index` after navigational structure changes.
-- Run `_tools/structure-audit` after root folder, project registry, durable project top-level folder, reserved folder, local-only folder, or generated-output rule changes.
+- Run `_tools/structure-audit` after root folder, project registry, durable project top-level folder, reserved folder, runtime adapter folder, local-only folder, or generated-output rule changes.
 - Run `_tools/task-board` after coordination status changes.
 
 ## Context Archive Policy

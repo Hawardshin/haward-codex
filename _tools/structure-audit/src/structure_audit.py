@@ -28,6 +28,7 @@ def audit_structure(repo_root: Path, policy_path: Path | None = None) -> JsonMap
     registered_projects.discard("")
     reserved_dirs = {item["name"] for item in policy.get("reserved_operational_dirs", [])}
     local_only_dirs = {item["name"] for item in policy.get("local_only_dirs", [])}
+    runtime_adapter_dirs = {item["name"] for item in policy.get("runtime_adapter_dirs", [])}
     generated_output_patterns = [item["pattern"] for item in policy.get("generated_output_dirs", [])]
 
     root_dirs = sorted(
@@ -42,11 +43,11 @@ def audit_structure(repo_root: Path, policy_path: Path | None = None) -> JsonMap
     project_inventories = []
 
     for name in root_dirs:
-        classification = _classify_root_dir(name, registered_projects, reserved_dirs, local_only_dirs)
+        classification = _classify_root_dir(name, registered_projects, reserved_dirs, local_only_dirs, runtime_adapter_dirs)
         classifications.append({"name": name, "class": classification})
         if classification == "unknown_root":
             gaps.append(
-                f"Root directory '{name}' is neither a registered project, reserved operational folder, nor local-only folder."
+                f"Root directory '{name}' is neither a registered project, reserved operational folder, local-only folder, nor runtime adapter folder."
             )
         if classification == "local_only" and not _gitignore_mentions(gitignore_text, name):
             gaps.append(f"Local-only root directory '{name}' must be ignored in .gitignore.")
@@ -114,6 +115,7 @@ def audit_structure(repo_root: Path, policy_path: Path | None = None) -> JsonMap
             "registered_projects_count": len(registered_projects),
             "reserved_dirs_count": len(reserved_dirs),
             "local_only_dirs_count": len(local_only_dirs),
+            "runtime_adapter_dirs_count": len(runtime_adapter_dirs),
             "generated_output_patterns_count": len(generated_output_patterns),
             "project_inventories_count": len(project_inventories),
         },
@@ -144,6 +146,7 @@ def _classify_root_dir(
     registered_projects: set[str],
     reserved_dirs: set[str],
     local_only_dirs: set[str],
+    runtime_adapter_dirs: set[str],
 ) -> str:
     if name in registered_projects:
         return "registered_project"
@@ -151,6 +154,8 @@ def _classify_root_dir(
         return "reserved_operational"
     if name in local_only_dirs:
         return "local_only"
+    if name in runtime_adapter_dirs:
+        return "runtime_adapter"
     return "unknown_root"
 
 

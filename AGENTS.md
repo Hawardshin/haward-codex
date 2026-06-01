@@ -27,6 +27,8 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Do not move or delete unrelated files unless the user explicitly asks.
 - Prefer creating a project folder for substantial work instead of placing loose files at the repository root.
 - Register root projects and their boundaries in `_ops/projects/registry.json`.
+- Keep durable AI assistant operating principles tool-agnostic. Use `_docs/tool-agnostic-agent-operating-model.ko.md` and `_ops/assistant-runtimes/adapter-registry.json` as the shared source for adapting this workspace to Codex, Claude Code, Cursor, Antigravity, or another assistant runtime.
+- Treat `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, and `.agents/rules/` as runtime adapters or entrypoints. Do not fork durable policy across them; update shared docs/configs first and keep adapters thin.
 
 ## Git Rules
 
@@ -125,6 +127,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/projects/registry.json` to see registered root projects and ownership boundaries.
 - Use `_ops/projects/root-structure-policy.json` to classify root folders as registered projects, reserved operational folders, local-only folders, or generated output.
 - Keep durable project top-level folders listed in each registry entry's `project_specific_home`; generated folders should be covered by `generated_output_dirs` and `.gitignore`.
+- Use `_ops/assistant-runtimes/adapter-registry.json` when adding or changing AI assistant runtime adapters such as Claude Code, Cursor, or Antigravity.
 - Use `_ops/workflows/25-project-boundary-management.md` when a request may create a new project or cross project boundaries.
 - Use `_ops/workflows/35-requirements-lifecycle.md` when a request changes durable behavior, rules, project structure, platform capability, or implementation criteria.
 - Use `_ops/workflows/36-spec-driven-development.md` when meaningful work needs implementation from requirements.
@@ -134,10 +137,10 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Use `_ops/workflows/40-evaluate-and-rework.md` before closing meaningful work.
 - Keep `_ops/maps/repository-map.md` and `_ops/maps/prompt-map.md` current when folders, prompts, workflows, tools, skills, or project structure change.
 - Run `python3 _tools/workspace-index/src/workspace_index.py` after changing navigational structure.
-- Run `python3 _tools/structure-audit/src/structure_audit.py --check` after changing root folders, project registry, durable project top-level folders, reserved operational folders, local-only folder rules, or generated-output rules.
+- Run `python3 _tools/structure-audit/src/structure_audit.py --check` after changing root folders, project registry, durable project top-level folders, reserved operational folders, runtime adapter folders, local-only folder rules, or generated-output rules.
 - Run `python3 _tools/task-board/src/task_board.py` after changing coordination status.
-- Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, or platform memory anchors.
-- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json` from `agent-platform/` after changing core shared settings.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json` from `agent-platform/` after changing durable rules, source configs, prompts, workflows, maps, project registry, assistant runtime adapters, or platform memory anchors.
+- Run `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json` from `agent-platform/` after changing core shared settings.
 - If a repeated prompt or workflow is missing, add it under `_ops/prompts/` or `_ops/workflows/` instead of rediscovering the path next time.
 
 ## Evaluation Rules

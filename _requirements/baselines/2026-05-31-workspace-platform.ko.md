@@ -43,6 +43,7 @@
 | REQ-WS-025 | 플랫폼은 Slack, Discord, Microsoft Teams 알림을 설정 파일로 켜고 끌 수 있어야 하며, 실제 토큰이나 웹훅 URL은 사용자가 환경변수로 주입해야 한다. | UR-2026-06-01-007 | must | baseline | agent-platform | notification config 검증, dry-run, 단위 테스트 확인 | `agent-platform/configs/integrations/notification-channels.json`, `agent-platform/src/agent_platform/integrations/notifications.py` |
 | REQ-WS-026 | 루트 폴더 구조는 등록된 프로젝트, 예약 운영 폴더, 로컬 전용 폴더, 생성 산출물로 분류되어야 하며, 구조 변경 후 deterministic audit를 통과해야 한다. | UR-2026-06-01-009 | must | baseline | workspace/_ops/_tools | `structure-audit` 결과와 root structure policy 확인 | `_ops/projects/root-structure-policy.json`, `_tools/structure-audit/`, `_docs/repository-structure-governance.ko.md` |
 | REQ-WS-027 | 등록된 프로젝트의 durable top-level folder는 프로젝트 등록부에 설명되어야 하며, generated output pattern은 `.gitignore`와 함께 검증되어야 한다. | UR-2026-06-01-010 | must | baseline | workspace/_ops/_tools | `structure-audit` project inventory와 generated output ignore 검증 확인 | `_ops/projects/registry.json`, `_ops/projects/root-structure-policy.json`, `_tools/structure-audit/` |
+| REQ-WS-028 | 이 저장소의 AI assistant 운영 원칙은 Codex 전용으로 고정하지 않고 Claude Code, Cursor, Antigravity, 또는 사용자가 선호하는 도구에서도 사용할 수 있는 tool-agnostic principle과 thin runtime adapter 구조로 관리해야 한다. | UR-2026-06-01-011 | must | baseline | workspace/_docs/_ops/_templates | runtime adapter registry, structure audit, config contract, memory bootstrap 확인 | `_docs/tool-agnostic-agent-operating-model.ko.md`, `_ops/assistant-runtimes/adapter-registry.json`, `_templates/assistant-operating-principles/` |
 
 ## 변경 관리
 
@@ -55,6 +56,7 @@
 - 2026-06-01에 REQ-WS-025를 추가해 플랫폼 공통 알림 on/off와 환경변수 기반 secret 주입을 공통 기능으로 승격했다.
 - 2026-06-01에 REQ-WS-026을 추가해 루트 폴더 분류, local-only 예외, 생성 산출물 위치, deterministic structure audit를 공통 운영 구조로 승격했다.
 - 2026-06-01에 REQ-WS-027을 추가해 프로젝트 내부 top-level folder inventory와 generated output ignore 검증을 structure audit 범위에 포함했다.
+- 2026-06-01에 REQ-WS-028을 추가해 Codex, Claude Code, Cursor, Antigravity, 기타 AI assistant가 공유할 수 있는 tool-agnostic 운영 원칙과 thin runtime adapter 구조를 공통 운영 구조로 승격했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.

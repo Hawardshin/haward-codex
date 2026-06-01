@@ -34,6 +34,7 @@
       "The parallel work planning workflow, planner agent, research merge gate, or coordination lane contract changes.",
       "The notification settings, provider routing, or webhook secret handling contract changes.",
       "The root structure policy, local-only folder rule, or structure audit command changes.",
+      "The AI assistant runtime adapter registry or tool-specific adapter files change.",
       "The installation registry or installation audit contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
@@ -241,8 +242,31 @@
       "source_type": "internal",
       "used_for": [
         "root folder classification",
-        "registered project, reserved operational folder, local-only folder, and generated output rules",
+        "registered project, reserved operational folder, runtime adapter folder, local-only folder, and generated output rules",
         "structure audit command"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "assistant_runtime_adapter_registry",
+      "title": "Assistant Runtime Adapter Registry",
+      "path": "_ops/assistant-runtimes/adapter-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "tool-agnostic operating principle adapters",
+        "Codex, Claude Code, Cursor, Antigravity, and generic assistant runtime mapping",
+        "runtime-specific instruction entrypoints"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "tool_agnostic_agent_operating_model",
+      "title": "Tool-Agnostic Agent Operating Model",
+      "path": "_docs/tool-agnostic-agent-operating-model.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "shared AI assistant operating principles independent of any one tool",
+        "runtime adapter design rules"
       ],
       "last_checked": "2026-06-01"
     },
@@ -535,13 +559,24 @@
     },
     {
       "id": "root_structure_policy_must_stay_discoverable",
-      "rule": "The root structure policy must remain a warm memory anchor because future sessions need a deterministic way to classify root folders, local-only scratch, generated outputs, and registered projects.",
+      "rule": "The root structure policy must remain a warm memory anchor because future sessions need a deterministic way to classify root folders, runtime adapters, local-only scratch, generated outputs, and registered projects.",
       "reason": "The user explicitly asked to improve any folder-structure contradictions or management friction as the workspace grows.",
       "applies_to": [
         "anchors",
         "required_anchor_ids",
         "structure-audit",
         "project-boundary-management"
+      ]
+    },
+    {
+      "id": "assistant_runtime_adapters_must_stay_discoverable",
+      "rule": "The assistant runtime adapter registry and tool-agnostic operating model must remain warm memory anchors so future sessions can use the workspace from Codex, Claude Code, Cursor, Antigravity, or another preferred AI coding assistant without policy drift.",
+      "reason": "The user explicitly asked for the current Codex-based setup to become a principle template usable from other tools.",
+      "applies_to": [
+        "anchors",
+        "required_anchor_ids",
+        "assistant_runtime_adapter_registry",
+        "runtime_adapter_dirs"
       ]
     }
   ],
@@ -602,6 +637,8 @@
     "coordination_board",
     "project_registry",
     "root_structure_policy",
+    "assistant_runtime_adapter_registry",
+    "tool_agnostic_agent_operating_model",
     "platform_readme",
     "source_registry",
     "enterprise_source_registry",
@@ -633,6 +670,8 @@
     "coordination_board",
     "project_registry",
     "root_structure_policy",
+    "assistant_runtime_adapter_registry",
+    "tool_agnostic_agent_operating_model",
     "platform_readme",
     "source_registry",
     "enterprise_source_registry",
@@ -744,7 +783,23 @@
       "id": "root_structure_policy",
       "path": "_ops/projects/root-structure-policy.json",
       "tier": "warm",
-      "purpose": "Root folder classification policy for registered projects, reserved operational folders, local-only folders, and generated outputs.",
+      "purpose": "Root folder classification policy for registered projects, reserved operational folders, runtime adapter folders, local-only folders, and generated outputs.",
+      "required": true,
+      "load_order": 9
+    },
+    {
+      "id": "assistant_runtime_adapter_registry",
+      "path": "_ops/assistant-runtimes/adapter-registry.json",
+      "tier": "warm",
+      "purpose": "Runtime adapter registry for using shared workspace principles from Codex, Claude Code, Cursor, Antigravity, or another AI coding assistant.",
+      "required": true,
+      "load_order": 9
+    },
+    {
+      "id": "tool_agnostic_agent_operating_model",
+      "path": "_docs/tool-agnostic-agent-operating-model.ko.md",
+      "tier": "warm",
+      "purpose": "Shared AI assistant operating model that keeps runtime-specific instruction files as thin adapters.",
       "required": true,
       "load_order": 9
     },

@@ -1,0 +1,299 @@
+{
+  "schema_version": "2026-06-01",
+  "name": "assistant-runtime-adapter-registry",
+  "purpose": "Maps shared workspace operating principles to AI coding assistant runtimes such as Codex, Claude Code, Cursor, Antigravity, and generic tools.",
+  "reader_guide": {
+    "summary": "Open this file when using this repository with an AI coding tool other than Codex, or when adding a new runtime-specific instruction adapter.",
+    "how_to_read": [
+      "Read canonical_policy_paths first to see which files define durable behavior.",
+      "Read structure_rules to understand what must stay shared and what may be runtime-specific.",
+      "Read runtimes to find the instruction files or rule directories each tool should use.",
+      "Add a new runtime only when a real tool needs a different instruction loading mechanism.",
+      "Run config contract and structure audit checks after changing this file or runtime adapter directories."
+    ],
+    "owner": "_ops/assistant-runtimes",
+    "last_reviewed": "2026-06-01",
+    "update_triggers": [
+      "A new AI coding assistant runtime is introduced.",
+      "A runtime changes its project instruction file or rule directory behavior.",
+      "The shared operating model moves or changes scope.",
+      "A runtime-specific adapter directory is added at repository root.",
+      "A runtime-specific rule starts duplicating shared policy instead of linking to it."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "agents_md",
+      "title": "AGENTS.md open format",
+      "url": "https://agents.md/",
+      "source_type": "standard",
+      "used_for": [
+        "cross-agent repository instruction convention",
+        "canonical repository instruction entrypoint"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "claude_code_memory",
+      "title": "Claude Code memory and CLAUDE.md documentation",
+      "url": "https://code.claude.com/docs/en/memory",
+      "source_type": "official",
+      "used_for": [
+        "CLAUDE.md project instruction path",
+        ".claude/rules path-scoped rules",
+        "instruction concision and conflict guidance"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "cursor_rules",
+      "title": "Cursor Rules documentation",
+      "url": "https://docs.cursor.com/context/rules",
+      "source_type": "official",
+      "used_for": [
+        ".cursor/rules project rules",
+        "MDC metadata and scoped rule behavior",
+        "AGENTS.md as a simple alternative"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "antigravity_rules",
+      "title": "Google Antigravity rules and workflows documentation",
+      "url": "https://antigravity.google/docs/ide-rules?hl=sv",
+      "source_type": "official",
+      "used_for": [
+        ".agents/rules workspace rule path",
+        "global and workspace rule activation modes",
+        "Markdown rule file convention"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "antigravity_projects",
+      "title": "Google Antigravity projects documentation",
+      "url": "https://www.antigravity.google/docs/projects",
+      "source_type": "official",
+      "used_for": [
+        "project-scoped folder boundaries",
+        "project settings isolation",
+        "worktree mode for concurrent agents"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "tool_agnostic_operating_model",
+      "title": "Tool-Agnostic Agent Operating Model",
+      "path": "_docs/tool-agnostic-agent-operating-model.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "shared principles independent of any one coding assistant",
+        "runtime adapter design rules"
+      ],
+      "last_checked": "2026-06-01"
+    },
+    {
+      "id": "root_structure_policy",
+      "title": "Root Structure Policy",
+      "path": "_ops/projects/root-structure-policy.json",
+      "source_type": "internal",
+      "used_for": [
+        "runtime adapter root directory classification",
+        "structure audit checks"
+      ],
+      "last_checked": "2026-06-01"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "shared_policy_first",
+      "rule": "Durable behavior belongs in shared policy files first; runtime-specific files should import, reference, or summarize those policies.",
+      "reason": "The same workspace should work from Codex, Claude Code, Cursor, Antigravity, or another tool without policy drift.",
+      "applies_to": [
+        "canonical_policy_paths",
+        "runtimes"
+      ]
+    },
+    {
+      "id": "runtime_adapters_are_thin",
+      "rule": "Runtime adapters should contain only loading instructions, activation hints, and runtime-specific caveats.",
+      "reason": "Duplicating full policy in multiple tool formats creates contradictions and maintenance overhead.",
+      "applies_to": [
+        "runtime_adapter_paths",
+        "runtimes"
+      ]
+    },
+    {
+      "id": "capabilities_are_not_assumed",
+      "rule": "If a runtime cannot enforce a repository rule directly, record the limitation and rely on verification, settings, hooks, approvals, or human review.",
+      "reason": "Prompt instructions shape model behavior but do not guarantee enforcement across tools.",
+      "applies_to": [
+        "capability_boundaries",
+        "verification_commands"
+      ]
+    },
+    {
+      "id": "runtime_paths_are_structure_audited",
+      "rule": "Tracked root runtime adapter directories must be listed in root-structure-policy.json runtime_adapter_dirs.",
+      "reason": "Dot-directories should not bypass root folder ownership and audit rules.",
+      "applies_to": [
+        "runtime_adapter_paths",
+        "structure_audit_command"
+      ]
+    },
+    {
+      "id": "templates_stay_generic",
+      "rule": "Reusable templates must avoid hard-coding one assistant vendor unless the file is explicitly an adapter template.",
+      "reason": "The user wants the workspace principles to remain usable with the tool they prefer.",
+      "applies_to": [
+        "template_paths"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "canonical_policy_paths",
+      "meaning": "Shared files that define durable workspace behavior independently of runtime.",
+      "required": true
+    },
+    {
+      "field": "runtime_adapter_paths",
+      "meaning": "Tracked files and directories used to load shared rules in specific AI coding tools.",
+      "required": true
+    },
+    {
+      "field": "runtimes",
+      "meaning": "Runtime-specific instruction entrypoints, adapter paths, caveats, and setup notes.",
+      "required": true
+    },
+    {
+      "field": "capability_boundaries",
+      "meaning": "Rules explaining that prompts are not hard enforcement and must be backed by verification where needed.",
+      "required": true
+    },
+    {
+      "field": "verification_commands",
+      "meaning": "Commands to run after changing this registry or runtime adapter files.",
+      "required": true
+    }
+  ],
+  "canonical_policy_paths": [
+    "AGENTS.md",
+    "_docs/tool-agnostic-agent-operating-model.ko.md",
+    "_docs/persistent-instructions.md",
+    "_ops/workflows/00-start-here.md",
+    "_ops/workflows/05-web-first-intake.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "agent-platform/configs/workflows/work-mode-registry.json"
+  ],
+  "runtime_adapter_paths": [
+    "CLAUDE.md",
+    ".claude/rules/workspace-operating-principles.md",
+    ".cursor/rules/workspace-operating-principles.mdc",
+    ".agents/rules/workspace-operating-principles.md"
+  ],
+  "runtimes": [
+    {
+      "id": "codex",
+      "name": "OpenAI Codex",
+      "primary_instruction_targets": [
+        "AGENTS.md"
+      ],
+      "adapter_paths": [
+        "AGENTS.md"
+      ],
+      "setup_notes": [
+        "This repository currently uses AGENTS.md as the active top-level instruction file.",
+        "Keep Codex-specific workflow details in AGENTS.md only when they are actual runtime behavior; shared rules should also be reflected in the tool-agnostic operating model."
+      ],
+      "caveats": [
+        "Codex-specific tool names and sandbox behavior should not be copied blindly into other runtime adapters."
+      ]
+    },
+    {
+      "id": "claude_code",
+      "name": "Claude Code",
+      "primary_instruction_targets": [
+        "CLAUDE.md",
+        ".claude/rules/*.md"
+      ],
+      "adapter_paths": [
+        "CLAUDE.md",
+        ".claude/rules/workspace-operating-principles.md"
+      ],
+      "setup_notes": [
+        "CLAUDE.md imports AGENTS.md and adds Claude Code adapter notes.",
+        "Use .claude/rules for scoped Claude Code rules when the common policy becomes too large or path-specific."
+      ],
+      "caveats": [
+        "Claude Code documentation treats CLAUDE.md as context, not a hard enforcement layer; critical rules still need verification commands or settings."
+      ]
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "primary_instruction_targets": [
+        ".cursor/rules/*.mdc",
+        "AGENTS.md"
+      ],
+      "adapter_paths": [
+        ".cursor/rules/workspace-operating-principles.mdc"
+      ],
+      "setup_notes": [
+        "Use .cursor/rules for versioned project rules and AGENTS.md as the simple shared instruction source.",
+        "Use Always or scoped rule activation depending on the rule size and path specificity."
+      ],
+      "caveats": [
+        "Cursor rule application depends on rule metadata, scope, and activation type; keep important repository-wide behavior in an always-applied adapter."
+      ]
+    },
+    {
+      "id": "antigravity",
+      "name": "Google Antigravity",
+      "primary_instruction_targets": [
+        ".agents/rules/*.md"
+      ],
+      "adapter_paths": [
+        ".agents/rules/workspace-operating-principles.md"
+      ],
+      "setup_notes": [
+        "Use .agents/rules for workspace rules and set the operating-principles rule to Always On when configuring Antigravity.",
+        "Prefer New Worktree Mode for isolated concurrent work when a task is complex or parallel."
+      ],
+      "caveats": [
+        "Project settings and permissions are runtime controls; Markdown rules should describe behavior but not replace security settings."
+      ]
+    },
+    {
+      "id": "generic_ai_assistant",
+      "name": "Generic AI coding assistant",
+      "primary_instruction_targets": [
+        "_templates/assistant-operating-principles/principles.en.md",
+        "_templates/assistant-operating-principles/runtime-adapter.en.md"
+      ],
+      "adapter_paths": [
+        "_templates/assistant-operating-principles/"
+      ],
+      "setup_notes": [
+        "Use the shared principles template as the source document.",
+        "Create a thin adapter in the target tool's preferred rule format."
+      ],
+      "caveats": [
+        "Unknown tools must be treated as prompt-only until their file loading, permission, and sandbox behavior are verified."
+      ]
+    }
+  ],
+  "capability_boundaries": [
+    "Instruction files provide persistent context but are not equivalent to sandbox, permission, or policy enforcement.",
+    "Critical rules such as secret handling, destructive command avoidance, and publish/push behavior should be backed by repository checks, tool settings, or explicit human review.",
+    "When a runtime lacks a feature, document the gap and use the nearest available verification mechanism instead of pretending the capability exists."
+  ],
+  "verification_commands": [
+    "python3 _tools/structure-audit/src/structure_audit.py --check",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/assistant-runtimes/adapter-registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json"
+  ],
+  "template_paths": [
+    "_templates/assistant-operating-principles/"
+  ]
+}

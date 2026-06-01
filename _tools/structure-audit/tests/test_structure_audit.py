@@ -46,6 +46,7 @@ class StructureAuditTests(unittest.TestCase):
                     "project_registry_path": "_ops/projects/registry.json",
                     "reserved_operational_dirs": [{"name": "_docs"}, {"name": "_ops"}],
                     "local_only_dirs": [{"name": "_private"}, {"name": "outputs"}],
+                    "runtime_adapter_dirs": [{"name": ".cursor"}, {"name": ".agents"}],
                     "generated_output_dirs": [
                         {"pattern": "**/node_modules/"},
                         {"pattern": "**/tsconfig.tsbuildinfo"},
@@ -107,6 +108,17 @@ class StructureAuditTests(unittest.TestCase):
         report = audit_structure(root)
 
         self.assertFalse(any("node_modules" in warning for warning in report["warnings"]))
+
+    def test_runtime_adapter_root_directory_is_allowed(self):
+        root = self.make_repo()
+        (root / ".cursor").mkdir()
+        (root / ".agents").mkdir()
+
+        report = audit_structure(root)
+
+        self.assertEqual(report["status"], "clean")
+        self.assertTrue(any(item["name"] == ".cursor" and item["class"] == "runtime_adapter" for item in report["classifications"]))
+        self.assertTrue(any(item["name"] == ".agents" and item["class"] == "runtime_adapter" for item in report["classifications"]))
 
 
 if __name__ == "__main__":

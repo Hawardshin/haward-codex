@@ -1,10 +1,12 @@
-# Codex Agent Workspace
+# AI Agent Workspace
 
-이 저장소는 개인 에이전트 구축 플랫폼과 관련 프로젝트를 장기적으로 관리하는 작업 공간이다.
+이 저장소는 개인 에이전트 구축 플랫폼과 관련 프로젝트를 장기적으로 관리하는 작업 공간이다. 현재 Codex에서 운영하지만, 원칙과 템플릿은 Claude Code, Cursor, Google Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 재사용할 수 있게 관리한다.
 
 ## 운영 원칙
 
 - 모든 작업 산출물은 이 저장소의 git 이력으로 추적한다.
+- durable operating principle은 도구 독립형으로 관리하고, 도구별 instruction 파일은 얇은 adapter로 둔다.
+- Codex는 `AGENTS.md`, Claude Code는 `CLAUDE.md`와 `.claude/rules/`, Cursor는 `.cursor/rules/`, Antigravity는 `.agents/rules/`를 사용하되, 정책 원본은 `_docs/tool-agnostic-agent-operating-model.ko.md`와 `_ops/assistant-runtimes/adapter-registry.json`에서 확인한다.
 - 의미 있는 변경 단위가 끝날 때마다 커밋한다.
 - 커밋이 만들어지면 바로 원격 저장소에 push한다.
 - 의미 있는 작업을 닫기 전 초기 지시와 결과를 평가하고, 차이가 있으면 재작업한다.
@@ -113,12 +115,13 @@ codex/
 - `_history/web-searches/`: 프롬프트/작업마다 수행한 웹 검색과 공개 판단 요약
 - `_history/plans/`: 에이전트가 계획을 세운 과정 기록
 - `_ops/`: 운영 허브, 프롬프트, 워크플로, 저장소 맵
+- `_ops/assistant-runtimes/`: Codex, Claude Code, Cursor, Antigravity 등 AI assistant runtime adapter 레지스트리
 - `_ops/backlog/`: `ship_first`나 빠른 작업에서 뒤로 뺀 공통 비차단 개선 목록
 - `_ops/installations/`: 설치 레지스트리와 설치 감사 추적 규칙
 - `_ops/projects/`: 루트 프로젝트 등록부와 경계 관리
 - `_research/`: 인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용
 - `_skills/`: git으로 추적할 커스텀 Codex 스킬 원본과 레지스트리
-- `_templates/`: 새 프로젝트를 만들 때 복사할 기본 구조
+- `_templates/`: 새 프로젝트나 assistant operating principle을 만들 때 복사할 기본 구조
 - `_tools/`: 여러 프로젝트에서 재사용할 로컬 도구와 스크립트
 - `_archive/`: 중단, 폐기, 보류된 프로젝트
 - `_private/`: git에 올리지 않는 로컬 private scratch state
@@ -169,6 +172,8 @@ project-name/
 - 작업 모드 선택은 `_ops/workflows/02-select-work-mode.md`와 `agent-platform/configs/workflows/work-mode-registry.json`에서 확인한다.
 - 지연 개선 백로그는 `_ops/backlog/deferred-improvements.ko.md`에서 확인한다.
 - 프롬프트 공통 계약은 `_ops/prompts/README.ko.md`에서 확인하고, 검색 기록 템플릿은 `_templates/web-search-record/`에서 확인한다.
+- 도구 독립형 AI assistant 운영 원칙은 `_docs/tool-agnostic-agent-operating-model.ko.md`와 `_templates/assistant-operating-principles/`에서 확인한다.
+- AI assistant runtime adapter 목록과 도구별 적용 경로는 `_ops/assistant-runtimes/adapter-registry.json`에서 확인한다.
 - 컨텍스트 아카이브 정책은 `_docs/context-archive-policy.ko.md`, 재개 패킷은 `_history/context-archives/`에서 확인한다.
 - 사용자 요청 요약 정책은 `_docs/user-request-summary-policy.ko.md`, 날짜별 요청 요약은 `_history/user-requests/`에서 확인한다.
 - 요청-결과 추적 정책은 `_docs/request-traceability-policy.ko.md`, 날짜별 추적표는 `_history/request-traces/`에서 확인한다.
@@ -231,7 +236,7 @@ project-name/
 - 반복 실행되는 명령, 변환, 검증, 생성 작업은 도구 후보로 본다.
 - 새 스킬 원본은 `_skills/`에, 재사용 도구는 `_tools/`에 추적한다.
 - 새 스킬이나 수정된 스킬은 `quick_validate.py`와 `agent-platform validate-skill`로 검증하고 개선 아이디어를 남긴다.
-- 실제 Codex 스킬 설치가 필요하면 `$CODEX_HOME/skills`에 반영하되, 원본은 이 저장소에서 관리한다.
+- 실제 Codex 스킬 설치가 필요하면 `$CODEX_HOME/skills`에 반영하되, 원본은 이 저장소에서 관리한다. 다른 도구의 skills/rules/workflows는 `_ops/assistant-runtimes/adapter-registry.json`의 adapter 경로를 먼저 확인한다.
 - 많은 출처를 반복적으로 정리할 때는 `_tools/source-collector/`로 출처 묶음을 정규화하고 점수화한다.
 - 더 넓은 검색 원천은 `agent-platform/configs/research/source-discovery-registry.json`에서 관리한다.
 - 한국 사용자 리뷰/로컬 판단은 `_tools/korean-local-review/`로 Naver/Kakao/Naver Blog/Search 후보를 점수화한다.

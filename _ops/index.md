@@ -5,6 +5,7 @@
 | Path | Role |
 | --- | --- |
 | `_ops/` | 운영 허브, 프롬프트 라우터, 워크플로, 저장소 맵 |
+| `_ops/assistant-runtimes/` | Codex, Claude Code, Cursor, Antigravity 등 runtime adapter 레지스트리 |
 | `_ops/projects/` | 루트 프로젝트 등록부와 경계 관리 |
 | `_research/` | 인터넷 조사와 외부 레퍼런스 중 재사용 가능한 내용 |
 | `_docs/` | 장기 운영 규칙, 의사결정, 컨텍스트 관리 |
@@ -20,7 +21,7 @@
 | `_history/installations/` | 실제 설치/업그레이드/제거 상세 감사 기록 |
 | `_history/plans/` | 에이전트 계획 과정 기록 |
 | `_skills/` | git으로 추적하는 커스텀 Codex 스킬 원본 |
-| `_templates/` | 새 프로젝트, HTML 산출물, Python 에이전트 템플릿 |
+| `_templates/` | 새 프로젝트, HTML 산출물, Python 에이전트, assistant operating principle 템플릿 |
 | `_tools/` | 반복 작업을 줄이는 로컬 도구 |
 | `agent-platform/` | 개인 에이전트 구축 플랫폼 중심 프로젝트 |
 | `_ops/installations/` | 설치 레지스트리와 설치 감사 규칙 |
@@ -35,6 +36,7 @@
 - 작업 모드와 전체 루프 강도를 고를 때: [_ops/workflows/02-select-work-mode.md](workflows/02-select-work-mode.md), [_ops/prompts/02-select-work-mode.md](prompts/02-select-work-mode.md), [work-mode-registry.json](../agent-platform/configs/workflows/work-mode-registry.json)
 - 지연 개선 백로그를 볼 때: [_ops/backlog/deferred-improvements.ko.md](backlog/deferred-improvements.ko.md)
 - 공유 설정 파일 자기 설명 기준: [_docs/self-documenting-config-policy.ko.md](../_docs/self-documenting-config-policy.ko.md), `agent-platform`의 `check-config-contract`
+- 도구 독립형 AI assistant 운영 원칙: [_docs/tool-agnostic-agent-operating-model.ko.md](../_docs/tool-agnostic-agent-operating-model.ko.md), [_ops/assistant-runtimes/adapter-registry.json](assistant-runtimes/adapter-registry.json), [_templates/assistant-operating-principles/README.ko.md](../_templates/assistant-operating-principles/README.ko.md)
 - 출처 수집 기준을 볼 때: [_docs/source-collection-policy.ko.md](../_docs/source-collection-policy.ko.md)
 - 핵심 조사 에이전트 프로필을 볼 때: [agent-platform/configs/research/research-agent-profile.json](../agent-platform/configs/research/research-agent-profile.json)
 - 많은 출처 묶음을 정리할 때: [_tools/source-collector/README.ko.md](../_tools/source-collector/README.ko.md)
@@ -89,7 +91,7 @@
 - spec-driven 산출물이 `_specs/` 또는 해당 프로젝트의 `specs/`에 남았는가
 - 소스코드 작업이면 코딩 조사에 architecture reference, 최소 2개 architecture option, decision notes가 남았는가
 - 병렬 작업이면 `plan-parallel-work` 결과, dependency, touch_paths, merge_gates, conflict controls, coordination targets, merge strategy가 남았는가
-- root folder, project registry, reserved folder, local-only rule이 바뀌면 `python3 _tools/structure-audit/src/structure_audit.py --check`를 통과했는가
+- root folder, project registry, reserved folder, runtime adapter folder, local-only rule이 바뀌면 `python3 _tools/structure-audit/src/structure_audit.py --check`를 통과했는가
 - 중요한 원천값과 계획 단계가 `source_value_provenance`, `plan_evidence`, `source_provenance_targets`, `plan_evidence_targets`로 연결됐는가
 - 스킬 작업이 있었다면 `_skills/` 원본, 검증 결과, 개선 아이디어가 남았는가
 - 요청-결과 추적표가 `_history/request-traces/YYYY/`에 남았는가

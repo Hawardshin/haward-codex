@@ -1,0 +1,141 @@
+{
+  "initial_instruction": "현재 Codex 기반처럼 보이는 구조를 Claude Code, Antigravity, Cursor, 또는 사용자가 편한 기술에서도 사용할 수 있는 원칙 템플릿으로 만들어 달라는 요청.",
+  "result_summary": "Added a tool-agnostic assistant operating model, Codex/Claude Code/Cursor/Antigravity runtime adapters, a self-documenting assistant runtime adapter registry, generic assistant principle templates, structure-audit runtime adapter classification, memory bootstrap anchors, persistent instruction updates, and workspace-monitor discovery for runtime adapter/template documents.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    ".claude/rules/workspace-operating-principles.md",
+    ".cursor/rules/workspace-operating-principles.mdc",
+    ".agents/rules/workspace-operating-principles.md",
+    "README.md",
+    "_docs/tool-agnostic-agent-operating-model.ko.md",
+    "_docs/tool-agnostic-agent-operating-model.en.md",
+    "_docs/persistent-instructions.md",
+    "_docs/persistent-instructions.ko.md",
+    "_docs/persistent-instructions.en.md",
+    "_docs/workspace-rules.md",
+    "_docs/project-boundary-policy.ko.md",
+    "_docs/project-boundary-policy.en.md",
+    "_docs/repository-structure-governance.ko.md",
+    "_docs/repository-structure-governance.en.md",
+    "_ops/assistant-runtimes/adapter-registry.json",
+    "_ops/index.md",
+    "_ops/projects/root-structure-policy.json",
+    "_ops/projects/index.ko.md",
+    "_ops/projects/index.en.md",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md",
+    "_templates/assistant-operating-principles/",
+    "_tools/structure-audit/src/structure_audit.py",
+    "_tools/structure-audit/tests/test_structure_audit.py",
+    "_tools/structure-audit/README.ko.md",
+    "_tools/structure-audit/README.en.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "workspace-monitor/scripts/collect-workspace.mjs",
+    "workspace-monitor/lib/snapshot.ts",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-01-tool-agnostic-agent-principles.ko.md",
+    "_requirements/changes/2026-06-01-tool-agnostic-agent-principles.en.md",
+    "_requirements/reviews/2026-06-01-tool-agnostic-agent-principles.ko.md",
+    "_requirements/reviews/2026-06-01-tool-agnostic-agent-principles.en.md",
+    "_specs/workspace-platform/2026-06-01-tool-agnostic-agent-principles/",
+    "_history/web-searches/2026/2026-06-01-tool-agnostic-agent-principles.ko.md",
+    "_history/web-searches/2026/2026-06-01-tool-agnostic-agent-principles.en.md",
+    "_history/plans/2026/2026-06-01-tool-agnostic-agent-principles.ko.md",
+    "_history/plans/2026/2026-06-01-tool-agnostic-agent-principles.en.md",
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/user-requests/2026/2026-06-01.en.md",
+    "_history/request-traces/2026/2026-06-01.ko.md",
+    "_history/request-traces/2026/2026-06-01.en.md",
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-summaries/2026/2026-06-01.en.md",
+    "_history/2026/2026-06-01.md",
+    "_history/evaluations/2026/2026-06-01-tool-agnostic-agent-principles-grounding.json",
+    "_history/evaluations/2026/2026-06-01-tool-agnostic-agent-principles-evaluation-input.json"
+  ],
+  "verification": [
+    "python3 -m json.tool _ops/assistant-runtimes/adapter-registry.json: passed",
+    "python3 -m json.tool _ops/projects/root-structure-policy.json: passed",
+    "python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json: passed",
+    "python3 -m json.tool _ops/coordination/status.json: passed",
+    "python3 -m unittest discover -s _tools/structure-audit/tests: 7 tests passed",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean, no gaps or warnings, .agents/.claude/.cursor classified as runtime_adapter",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/assistant-runtimes/adapter-registry.json ../_ops/projects/root-structure-policy.json: self_documenting, no gaps",
+    "Core check-config-contract including bootstrap manifest, research/workflow/install configs, and adapter registry: self_documenting, no gaps",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "workspace-monitor npm test: 4 tests passed",
+    "workspace-monitor npm run check: TypeScript check passed",
+    "workspace-monitor npm run build: Next.js static build passed and collected 600 documents",
+    "python3 _tools/workspace-index/src/workspace_index.py: maps regenerated",
+    "python3 _tools/task-board/src/task_board.py: coordination board regenerated",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-tool-agnostic-agent-principles-grounding.json: ready_to_publish",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-01-tool-agnostic-agent-principles-evaluation-input.json: ready_to_close",
+    "git diff --check: passed"
+  ],
+  "references_checked": [
+    "Claude Code memory documentation: https://code.claude.com/docs/en/memory",
+    "Cursor rules documentation: https://docs.cursor.com/context/rules",
+    "Google Antigravity rules documentation: https://antigravity.google/docs/ide-rules?hl=sv",
+    "Google Antigravity projects documentation: https://www.antigravity.google/docs/projects",
+    "AGENTS.md format: https://agents.md/",
+    "_docs/tool-agnostic-agent-operating-model.ko.md",
+    "_ops/assistant-runtimes/adapter-registry.json",
+    "_ops/projects/root-structure-policy.json",
+    "_tools/structure-audit/src/structure_audit.py",
+    "workspace-monitor/scripts/collect-workspace.mjs"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-tool-agnostic-agent-principles-grounding.json",
+    "check-grounding command: ready_to_publish"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-tool-agnostic-agent-principles.ko.md",
+    "_ops/assistant-runtimes/adapter-registry.json",
+    "_docs/tool-agnostic-agent-operating-model.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-01-tool-agnostic-agent-principles.ko.md",
+    "_specs/workspace-platform/2026-06-01-tool-agnostic-agent-principles/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-tool-agnostic-agent-principles/spec.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-tool-agnostic-agent-principles.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-01-tool-agnostic-agent-principles.ko.md",
+    "_requirements/reviews/2026-06-01-tool-agnostic-agent-principles.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-01-tool-agnostic-agent-principles/spec.ko.md",
+    "_specs/workspace-platform/2026-06-01-tool-agnostic-agent-principles/plan.ko.md",
+    "_specs/workspace-platform/2026-06-01-tool-agnostic-agent-principles/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-01-tool-agnostic-agent-principles/validation.ko.md",
+    "_specs/workspace-platform/2026-06-01-tool-agnostic-agent-principles/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "If another assistant runtime becomes primary, recheck its latest official docs and update adapter registry before relying on existing paths.",
+    "Consider adding a small adapter consistency checker later if more runtime-specific files are added."
+  ]
+}

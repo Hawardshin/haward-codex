@@ -2,6 +2,7 @@
 
 Source data: [registry.json](registry.json)
 Root structure policy: [root-structure-policy.json](root-structure-policy.json)
+AI assistant runtime adapters: [../assistant-runtimes/adapter-registry.json](../assistant-runtimes/adapter-registry.json)
 
 | Project | Status | Type | Purpose | Boundary |
 | --- | --- | --- | --- | --- |
@@ -15,6 +16,7 @@ Root structure policy: [root-structure-policy.json](root-structure-policy.json)
 - Keep project-specific files inside the owning project folder.
 - Promote to `_tools/`, `_templates/`, `_docs/`, or `_ops/` only when reuse crosses projects.
 - `_private/` and `outputs/` are local-only ignored folders, not projects or knowledge-base sources.
+- `.claude/`, `.cursor/`, and `.agents/` are runtime adapter folders, not projects.
 - Explain durable project top-level folders in `registry.json` `project_specific_home`.
 - After changing root folders, project registry, project top-level folders, reserved folder rules, or generated-output rules, run `python3 _tools/structure-audit/src/structure_audit.py --check`.
 - Update this index and `registry.json` when projects are created or their status changes.

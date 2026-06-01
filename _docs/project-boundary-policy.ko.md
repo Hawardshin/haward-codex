@@ -17,6 +17,7 @@
 - 프로젝트 상태와 경계는 `_ops/projects/registry.json`에 등록한다.
 - 프로젝트 내부 durable top-level folder는 `_ops/projects/registry.json`의 `project_specific_home`에 설명한다.
 - 루트 폴더 분류 규칙은 `_ops/projects/root-structure-policy.json`에 둔다.
+- `.claude/`, `.cursor/`, `.agents/`는 프로젝트가 아니라 AI assistant runtime adapter folder다. 이 폴더들은 `_ops/assistant-runtimes/adapter-registry.json`과 공유 운영 원칙을 가리키는 얇은 adapter만 담는다.
 
 ## 프로젝트 안에 둘 것
 
@@ -60,6 +61,7 @@
 ## 금지할 것
 
 - 프로젝트 전용 파일을 `_docs/`, `_ops/`, `_tools/`에 바로 넣지 않는다.
+- 공통 운영 정책을 `AGENTS.md`, `CLAUDE.md`, `.cursor/rules`, `.agents/rules`에 각각 복사해 별도 정책으로 갈라지게 하지 않는다.
 - 서로 다른 관심사의 코드를 한 프로젝트에 섞지 않는다.
 - 공통 도구가 프로젝트 내부 상태에 몰래 의존하게 만들지 않는다.
 - 프로젝트 README 없이 루트에 새 프로젝트 폴더를 만들지 않는다.
@@ -69,7 +71,7 @@
 
 ## 구조 검증
 
-루트 폴더, 프로젝트 등록부, 예약 운영 폴더, 로컬 전용 폴더 규칙을 바꾼 뒤에는 다음 명령을 실행한다.
+루트 폴더, 프로젝트 등록부, 예약 운영 폴더, runtime adapter folder, 로컬 전용 폴더 규칙을 바꾼 뒤에는 다음 명령을 실행한다.
 프로젝트 내부 durable top-level folder나 generated output 규칙이 바뀐 뒤에도 같은 명령을 실행한다.
 
 ```bash

@@ -22,12 +22,21 @@ const DOCUMENT_SOURCES = [
   { category: "requirement", root: "_requirements" },
   { category: "shared-spec", root: "_specs" },
   { category: "coordination", root: "_ops/coordination" },
+  { category: "runtime-adapter", root: "_ops/assistant-runtimes" },
+  { category: "runtime-adapter", root: ".claude/rules" },
+  { category: "runtime-adapter", root: ".cursor/rules" },
+  { category: "runtime-adapter", root: ".agents/rules" },
+  { category: "template", root: "_templates/assistant-operating-principles" },
   { category: "project-doc", root: "agent-platform/docs" },
   { category: "project-doc", root: "presentation-agent/docs" },
   { category: "project-doc", root: "workspace-monitor/docs" },
   { category: "project-spec", root: "agent-platform/specs" },
   { category: "project-spec", root: "presentation-agent/specs" },
   { category: "project-spec", root: "workspace-monitor/specs" }
+];
+const DOCUMENT_FILES = [
+  { category: "runtime-adapter", file: "AGENTS.md" },
+  { category: "runtime-adapter", file: "CLAUDE.md" }
 ];
 
 export function main(argv = process.argv.slice(2)) {
@@ -92,29 +101,40 @@ export function buildSnapshot(repoRoot) {
 
 export function collectDocuments(repoRoot) {
   const documents = [];
+  for (const source of DOCUMENT_FILES) {
+    const filePath = path.join(repoRoot, source.file);
+    if (!fs.existsSync(filePath)) {
+      continue;
+    }
+    documents.push(readDocument(repoRoot, filePath, source.category));
+  }
   for (const source of DOCUMENT_SOURCES) {
     const sourceRoot = path.join(repoRoot, source.root);
     for (const filePath of walkFiles(sourceRoot)) {
       if (!/\.(md|json)$/i.test(filePath)) {
         continue;
       }
-      const relativePath = toPosix(path.relative(repoRoot, filePath));
-      const content = fs.readFileSync(filePath, "utf8");
-      const stats = fs.statSync(filePath);
-      const isMarkdown = filePath.endsWith(".md");
-      documents.push({
-        id: slugify(relativePath),
-        path: relativePath,
-        category: source.category,
-        language: detectLanguage(relativePath),
-        title: isMarkdown ? extractTitle(content, relativePath) : titleFromPath(relativePath),
-        excerpt: makeExcerpt(content),
-        html: isMarkdown ? markdownToHtml(content) : jsonPreviewToHtml(content),
-        updatedAt: stats.mtime.toISOString()
-      });
+      documents.push(readDocument(repoRoot, filePath, source.category));
     }
   }
   return documents.sort((left, right) => right.updatedAt.localeCompare(left.updatedAt)).slice(0, 600);
+}
+
+function readDocument(repoRoot, filePath, category) {
+  const relativePath = toPosix(path.relative(repoRoot, filePath));
+  const content = fs.readFileSync(filePath, "utf8");
+  const stats = fs.statSync(filePath);
+  const isMarkdown = filePath.endsWith(".md") || filePath.endsWith(".mdc");
+  return {
+    id: slugify(relativePath),
+    path: relativePath,
+    category,
+    language: detectLanguage(relativePath),
+    title: isMarkdown ? extractTitle(content, relativePath) : titleFromPath(relativePath),
+    excerpt: makeExcerpt(content),
+    html: isMarkdown ? markdownToHtml(content) : jsonPreviewToHtml(content),
+    updatedAt: stats.mtime.toISOString()
+  };
 }
 
 export function collectRequirements(repoRoot) {

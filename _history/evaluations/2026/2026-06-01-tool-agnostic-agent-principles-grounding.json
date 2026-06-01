@@ -1,0 +1,180 @@
+{
+  "task": "Ground factual claims for the tool-agnostic AI assistant operating principles work.",
+  "output_summary": "Added shared AI assistant operating principles, thin runtime adapters for Codex, Claude Code, Cursor, and Antigravity, a runtime adapter registry, generic principle templates, structure-audit support, memory anchors, and workspace-monitor discovery.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "claude_docs",
+      "source": "https://code.claude.com/docs/en/memory",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Claude Code documentation checked for project memory and CLAUDE.md behavior."
+    },
+    {
+      "evidence_id": "cursor_docs",
+      "source": "https://docs.cursor.com/context/rules",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Cursor documentation checked for project rules under .cursor/rules and rule metadata behavior."
+    },
+    {
+      "evidence_id": "antigravity_rules",
+      "source": "https://antigravity.google/docs/ide-rules?hl=sv",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Antigravity documentation checked for workspace/project rule behavior."
+    },
+    {
+      "evidence_id": "antigravity_projects",
+      "source": "https://www.antigravity.google/docs/projects",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Antigravity documentation checked for project/workspace settings and project boundaries."
+    },
+    {
+      "evidence_id": "agents_md",
+      "source": "https://agents.md/",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "Public AGENTS.md format documentation checked for cross-agent repository instruction convention."
+    },
+    {
+      "evidence_id": "operating_model",
+      "source": "_docs/tool-agnostic-agent-operating-model.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked shared operating model added in this repository."
+    },
+    {
+      "evidence_id": "adapter_registry",
+      "source": "_ops/assistant-runtimes/adapter-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked self-documenting runtime adapter registry added in this repository."
+    },
+    {
+      "evidence_id": "runtime_adapters",
+      "source": "CLAUDE.md, .claude/rules/workspace-operating-principles.md, .cursor/rules/workspace-operating-principles.mdc, .agents/rules/workspace-operating-principles.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked adapter files added and pointed to shared repository principles."
+    },
+    {
+      "evidence_id": "structure_audit",
+      "source": "python3 _tools/structure-audit/src/structure_audit.py --check",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Command returned clean status and classified .agents, .claude, and .cursor as runtime_adapter."
+    },
+    {
+      "evidence_id": "structure_tests",
+      "source": "python3 -m unittest discover -s _tools/structure-audit/tests",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Seven structure-audit tests passed, including runtime adapter root handling."
+    },
+    {
+      "evidence_id": "config_contract",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/assistant-runtimes/adapter-registry.json ../_ops/projects/root-structure-policy.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Config contract returned self_documenting with no gaps for adapter registry and root structure policy."
+    },
+    {
+      "evidence_id": "memory_bootstrap",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Memory bootstrap returned ready_to_bootstrap and included assistant runtime adapter anchors."
+    },
+    {
+      "evidence_id": "workspace_monitor",
+      "source": "npm test, npm run check, npm run build in workspace-monitor",
+      "source_type": "test_result",
+      "checked_on": "2026-06-01",
+      "reliability": "Workspace monitor tests, TypeScript check, and Next.js static build passed after adding runtime adapter/template sources."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "Claude Code has a documented CLAUDE.md-based project memory mechanism.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["claude_docs"],
+      "verification_steps": ["Checked the official Claude Code memory documentation."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Cursor has documented project rules under .cursor/rules.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["cursor_docs"],
+      "verification_steps": ["Checked the official Cursor rules documentation."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Antigravity has documented workspace or project rules for agent behavior.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["antigravity_rules", "antigravity_projects"],
+      "verification_steps": ["Checked official Antigravity rules and projects documentation."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "This work added a shared tool-agnostic operating model and runtime adapter registry.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["operating_model", "adapter_registry"],
+      "verification_steps": ["Checked added repository files and config contract output."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "This work added thin runtime adapters for Claude Code, Cursor, and Antigravity.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["runtime_adapters"],
+      "verification_steps": ["Checked added adapter files in the repository."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The structure audit now classifies .agents, .claude, and .cursor as runtime_adapter and the current audit is clean.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["structure_audit", "structure_tests"],
+      "verification_steps": ["Ran structure-audit --check and structure-audit unit tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Memory bootstrap now includes assistant runtime adapter registry and tool-agnostic operating model anchors.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["memory_bootstrap"],
+      "verification_steps": ["Ran check-memory-bootstrap and inspected startup output."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace monitor builds successfully after adding runtime-adapter and assistant principle template document sources.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["workspace_monitor"],
+      "verification_steps": ["Ran npm test, npm run check, and npm run build in workspace-monitor."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Assistant runtime rule loading behavior can change as each product evolves; future work should recheck official docs before editing adapters.",
+    "The actual Claude Code, Cursor, and Antigravity applications were not launched in this workspace; verification is based on official docs and repository-level checks."
+  ],
+  "limitation_notes": [
+    "Instruction files provide context but are not equivalent to hard enforcement.",
+    "Critical rules still need repository checks, config contracts, sandbox or permission settings, and human review."
+  ]
+}

@@ -17,6 +17,7 @@ The philosophical basis lives in [_philosophy/agent-operating-philosophy.en.md](
 - Register project status and boundaries in `_ops/projects/registry.json`.
 - Explain durable project top-level folders in each registry entry's `project_specific_home`.
 - Root folder classification rules live in `_ops/projects/root-structure-policy.json`.
+- `.claude/`, `.cursor/`, and `.agents/` are AI assistant runtime adapter folders, not projects. They should contain only thin adapters that point to `_ops/assistant-runtimes/adapter-registry.json` and shared operating principles.
 
 ## What Belongs Inside A Project
 
@@ -60,6 +61,7 @@ Tools, templates, and rules that start inside a project can move to shared locat
 ## What Not To Do
 
 - Do not put project-specific files directly under `_docs/`, `_ops/`, or `_tools/`.
+- Do not fork common operating policy by copying it separately into `AGENTS.md`, `CLAUDE.md`, `.cursor/rules`, and `.agents/rules`.
 - Do not mix unrelated concerns into one project.
 - Do not make shared tools depend secretly on project-local state.
 - Do not create a root project without a README.
@@ -69,7 +71,7 @@ Tools, templates, and rules that start inside a project can move to shared locat
 
 ## Structure Validation
 
-After changing root folders, the project registry, reserved operational folders, local-only folder rules, durable project top-level folders, or generated-output rules, run:
+After changing root folders, the project registry, reserved operational folders, runtime adapter folders, local-only folder rules, durable project top-level folders, or generated-output rules, run:
 
 ```bash
 python3 _tools/structure-audit/src/structure_audit.py --check

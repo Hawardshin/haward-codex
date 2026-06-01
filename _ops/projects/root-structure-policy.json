@@ -1,12 +1,13 @@
 {
   "schema_version": "2026-06-01",
   "name": "root-structure-policy",
-  "purpose": "Defines root-level directory classes so the workspace can distinguish registered projects, shared operating folders, local-only folders, and generated outputs.",
+  "purpose": "Defines root-level directory classes so the workspace can distinguish registered projects, shared operating folders, AI assistant runtime adapters, local-only folders, and generated outputs.",
   "reader_guide": {
-    "summary": "Open this file when deciding whether a root folder should become a project, a shared operations folder, a private local-only folder, or ignored generated output.",
+    "summary": "Open this file when deciding whether a root folder should become a project, a shared operations folder, an AI assistant runtime adapter, a private local-only folder, or ignored generated output.",
     "how_to_read": [
       "Read directory_classes first to understand the allowed root folder categories.",
       "Use reserved_operational_dirs for tracked shared workspace folders.",
+      "Use runtime_adapter_dirs for tracked dot-directories that exist only to adapt shared rules to a specific AI coding tool.",
       "Use local_only_dirs for folders that may exist on disk but must not become durable knowledge sources.",
       "Use project_registry_path to find tracked root projects and ownership boundaries.",
       "Run the structure audit command before and after root-level structure changes."
@@ -17,6 +18,7 @@
       "A new root-level folder category is introduced.",
       "A root-level project is created, archived, or renamed.",
       "A local-only or generated-output folder appears at repository root.",
+      "An AI assistant runtime-specific instruction directory is introduced.",
       "Project boundary rules or reserved workspace folders change.",
       "The structure-audit tool reports unknown root folders."
     ]
@@ -98,6 +100,17 @@
         "clear boundaries and continuous validation reference"
       ],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "agent_runtime_registry",
+      "title": "Assistant Runtime Adapter Registry",
+      "path": "_ops/assistant-runtimes/adapter-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "tool-specific adapter directory classification",
+        "mapping shared principles to Codex, Claude Code, Cursor, Antigravity, and generic runtimes"
+      ],
+      "last_checked": "2026-06-01"
     }
   ],
   "structure_rules": [
@@ -148,6 +161,15 @@
       ]
     },
     {
+      "id": "runtime_adapters_are_tool_specific_only",
+      "rule": "Runtime adapter directories must contain only thin tool-specific files that point back to shared operating principles, not independent policy forks.",
+      "reason": "The workspace should remain usable from Codex, Claude Code, Cursor, Antigravity, or another tool without duplicating and drifting core rules.",
+      "applies_to": [
+        "runtime_adapter_dirs",
+        "_ops/assistant-runtimes/adapter-registry.json"
+      ]
+    },
+    {
       "id": "audit_before_restructure",
       "rule": "Run the structure audit before and after root-level folder changes, project creation, archive moves, or reserved-folder changes.",
       "reason": "A deterministic check catches ambiguous folders before they become long-lived conventions.",
@@ -178,6 +200,11 @@
       "required": true
     },
     {
+      "field": "runtime_adapter_dirs",
+      "meaning": "Tracked root dot-directories used only to adapt shared workspace rules to specific AI coding tools.",
+      "required": true
+    },
+    {
       "field": "generated_output_dirs",
       "meaning": "Known generated or dependency directories that should stay project-local and ignored.",
       "required": true
@@ -197,6 +224,10 @@
     {
       "class": "reserved_operational",
       "description": "Tracked underscore-prefixed shared workspace folder for cross-project rules, operations, templates, tools, research, or history."
+    },
+    {
+      "class": "runtime_adapter",
+      "description": "Tracked root dot-directory for AI assistant-specific instruction/rule adapters that reference the shared operating model."
     },
     {
       "class": "local_only",
@@ -261,6 +292,20 @@
     {
       "name": "outputs",
       "purpose": "Transient local output from one-off tool runs; durable artifacts must move into the owning project artifacts folder."
+    }
+  ],
+  "runtime_adapter_dirs": [
+    {
+      "name": ".agents",
+      "purpose": "Google Antigravity workspace rule adapters that point to shared operating principles."
+    },
+    {
+      "name": ".claude",
+      "purpose": "Claude Code project rule adapters that point to shared operating principles."
+    },
+    {
+      "name": ".cursor",
+      "purpose": "Cursor project rule adapters that point to shared operating principles."
     }
   ],
   "generated_output_dirs": [

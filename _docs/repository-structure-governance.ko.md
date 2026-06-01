@@ -8,6 +8,7 @@
 
 - `agent-platform/`, `presentation-agent/`, `workspace-monitor/`는 등록된 root project다.
 - `_docs/`, `_ops/`, `_history/`, `_requirements/`, `_specs/`, `_research/`, `_skills/`, `_templates/`, `_tools/`, `_philosophy/`, `_archive/`는 shared operational folder다.
+- `.claude/`, `.cursor/`, `.agents/`는 runtime adapter folder다. 프로젝트가 아니며 tool-specific rule entrypoint만 담는다.
 - `_private/`와 `outputs/`는 로컬 전용 ignored folder다. 이 둘은 durable source of truth가 아니다.
 - 프로젝트별 지속 산출물은 root `outputs/`가 아니라 owning project의 `artifacts/` 아래에 둔다.
 
@@ -28,6 +29,8 @@
 - `workspace-monitor`는 `_docs`와 `_philosophy`를 문서 category로 수집한다.
 - `structure-audit`는 등록된 프로젝트의 top-level folder inventory를 생성하고, `project_specific_home`에 없는 durable folder를 warning으로 보고한다.
 - `generated_output_dirs`에 선언한 pattern은 `.gitignore`에도 반영되어야 하며, 누락되면 gap으로 처리한다.
+- runtime adapter folder는 `_ops/projects/root-structure-policy.json`의 `runtime_adapter_dirs`에 등록되어야 한다.
+- runtime adapter의 실제 도구별 의미는 `_ops/assistant-runtimes/adapter-registry.json`에서 관리한다.
 
 ## 변경 금지 기준
 

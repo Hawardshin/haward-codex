@@ -1,0 +1,18 @@
+---
+description: Tool-agnostic workspace operating principles for this agent platform repository.
+globs:
+alwaysApply: true
+---
+
+# Workspace Operating Principles
+
+- Canonical repository rules live in `AGENTS.md`.
+- Tool-agnostic principles live in `_docs/tool-agnostic-agent-operating-model.ko.md`.
+- Runtime mapping lives in `_ops/assistant-runtimes/adapter-registry.json`.
+- Treat this Cursor rule as a thin adapter. Do not duplicate or fork durable policy here.
+- Follow repository workflow: web-first intake, memory bootstrap, work mode selection, project boundary check, requirements/specs when required, implementation, verification, evaluation, commit, and push.
+- Use `.cursor/rules` for Cursor-specific scoped rules only when a rule cannot remain tool-agnostic.
+
+@AGENTS.md
+@_docs/tool-agnostic-agent-operating-model.ko.md
+

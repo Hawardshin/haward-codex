@@ -5,6 +5,9 @@ This document records durable user instructions in English.
 ## Active Instructions
 
 - Manage this repository as a monorepo for a personal agent-building platform.
+- Keep the workspace operating principles usable from Claude Code, Cursor, Antigravity, Codex, or another AI coding tool the user prefers.
+- Keep `_docs/tool-agnostic-agent-operating-model.ko.md` and `_ops/assistant-runtimes/adapter-registry.json` as the source of truth for tool-agnostic runtime decisions.
+- Treat `AGENTS.md`, `CLAUDE.md`, `.claude/rules/`, `.cursor/rules/`, and `.agents/rules/` as runtime adapters. Do not copy common policy into separate divergent sources.
 - Keep separate projects as root-level `kebab-case` folders.
 - Keep project-specific files inside the owning project folder.
 - When a new interest has an independent lifecycle, create a new root project and register it under `_ops/projects/`.
@@ -39,7 +42,7 @@ This document records durable user instructions in English.
 - When speed matters or work can be split into multiple lanes, use `parallel-work-planner-agent` to check dependencies, `touch_paths`, conflict controls, coordination targets, and merge strategy first.
 - Do not run work that touches the same files, settings, generated maps, git state, or other shared mutable resources in parallel without an explicit dependency, lock, branch/worktree rule, or handoff.
 - When multiple research lanes run in parallel, use a merge gate that waits for every research lane, synthesizes contradictions and accepted evidence, and releases downstream implementation only after the gate passes.
-- When durable rules, source configs, prompts, workflows, project boundaries, or evaluation loops change, update `agent-platform/configs/memory/bootstrap-manifest.json`.
+- When durable rules, source configs, prompts, workflows, project boundaries, AI assistant runtime adapters, or evaluation loops change, update `agent-platform/configs/memory/bootstrap-manifest.json`.
 - For research or planning work, collect broad high-authority sources, including official docs, papers, open-source repos, international tech blogs, analysis articles, community/social signals, and contrary examples.
 - Manage large-company engineering blogs, official research labs, architecture centers, and high-signal independent source lists separately in `agent-platform/configs/research/enterprise-source-registry.json` and `_research/source-lists/`.
 - Manage broad search origins in `agent-platform/configs/research/source-discovery-registry.json`, including global tech blogs, Korean big-tech blogs, India technology sources, paper discovery sources, and Korean local review channels.
