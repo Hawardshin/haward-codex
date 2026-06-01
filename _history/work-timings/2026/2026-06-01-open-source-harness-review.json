@@ -1,0 +1,86 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-01-open-source-harness-review",
+  "title": "Review open-source harnesses for presentation-agent",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": "2026-06-01T19:59:01+0900",
+  "measurement_note": "Timing record started after web-first intake and some local context inspection, so early phases are explicitly marked as not measured.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before the timing record was created; searches covered LLM eval, browser/visual/accessibility, and presentation-specific benchmarks."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Completed before the timing record was created."
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan",
+      "status": "completed",
+      "started_at": "2026-06-01T19:49:04+0900",
+      "ended_at": "2026-06-01T19:50:15+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Selected standard mode because the work changed durable presentation-agent requirements and specs."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "started_at": "2026-06-01T19:50:15+0900",
+      "ended_at": "2026-06-01T19:53:15+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Added REQ-PA-014, harness candidate config, research docs, workflow, web search record, and spec artifacts."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "started_at": "2026-06-01T19:53:15+0900",
+      "ended_at": "2026-06-01T19:54:56+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Updated request summaries, work summaries, and request trace without adding runtime dependencies."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "started_at": "2026-06-01T19:54:56+0900",
+      "ended_at": "2026-06-01T19:58:18+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Ran presentation-agent tests, catalog validation, config contract, workspace index, Workspace Monitor collect/check/test/build, governance health, grounding, and evaluation checks."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "started_at": "2026-06-01T19:58:18+0900",
+      "ended_at": "2026-06-01T19:59:01+0900",
+      "measurement": "measured",
+      "bottleneck_notes": "Grounding initially needed source_type rework, then passed after the evidence schema fix; evaluation report was written."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Will be completed after evaluator passes."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "verification",
+    "interpretation": "The longest measured phase was verification because the task updated project docs, settings, specs, maps, monitoring snapshots, and evaluator artifacts, then reran both project and governance checks.",
+    "improvement_candidates": [
+      "Implement the no-install quality harness next so future harness reviews can be validated with a deterministic command.",
+      "Create an installation audit template for Playwright/axe-core before adding browser dependencies."
+    ]
+  }
+}

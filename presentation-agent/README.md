@@ -10,13 +10,14 @@
 - 발표 스크립트/흐름 생성 에이전트가 참고할 수 있도록 디자인 패턴, 출처, 라이선스, 변환 가능성을 함께 기록한다.
 - 발표 스크립트 에이전트와 협업할 수 있는 `deck-spec` JSON을 HTML 발표 덱으로 렌더링한다.
 - 미리캔버스, Canva, Slidesgo, Pitch, Figma, Genspark 같은 PPT/AI slide 출처를 메타데이터로 수집하고, 사용자가 제공한 PPT는 local-only 분석 후 내부 template profile로 재구성한다.
+- 생성된 `deck-spec`, HTML 덱, PPTX 산출물을 반복 검증하기 위한 품질 하네스 후보와 채택 우선순위를 관리한다.
 
 ## 폴더 구조
 
 ```text
 presentation-agent/
   artifacts/              # 생성된 HTML/PPTX 산출물
-  configs/                # 카탈로그와 수집 정책 설정
+  configs/                # 카탈로그, 수집 정책, 평가 하네스 후보 설정
   data/
     assets/               # 라이선스 확인 후 저장 가능한 에셋만 보관
     conversions/          # PPTX->HTML 변환 결과와 변환 메모
@@ -37,7 +38,10 @@ presentation-agent/
 
 - `data/reference-index/starter-reference-catalog.json`: 50개 이상의 발표 디자인/HTML/에셋 출처 카탈로그.
 - `configs/collection-policy.json`: 출처 수집, 라이선스 게이트, PPTX HTML 변환 정책.
+- `configs/evaluation/harness-candidates.json`: 발표 품질 검증에 적용 가능한 오픈소스 하네스 후보와 채택 순서.
 - `docs/workflows/imported-ppt-reference-workflow.ko.md`: 사용자가 가져온 PPT/PPTX를 디자인 토큰과 레이아웃 archetype으로 전환하는 workflow.
+- `docs/workflows/presentation-quality-harness-workflow.ko.md`: deck spec, HTML, PPTX 품질 하네스 적용 순서.
+- `docs/research/2026-06-01-open-source-harness-review.ko.md`: 오픈소스 평가 하네스 조사와 적용 판단.
 - `data/assets/raw/user-provided/`: 사용자가 제공한 PPT/PPTX를 임시 분석하는 local-only 위치.
 - `src/presentation_agent/catalog.py`: 카탈로그 검증과 요약 CLI.
 - `src/presentation_agent/pptx_to_html.py`: 라이선스가 허용된 PPTX를 기본 HTML 구조로 변환하는 최소 도구.

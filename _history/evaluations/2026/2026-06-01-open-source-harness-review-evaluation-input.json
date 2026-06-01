@@ -1,0 +1,106 @@
+{
+  "initial_instruction": "핫한 오픈소스들 관련한 하네스 등을 보고 여기에 적용할만한게 있는지 찾아봐줘.",
+  "result_summary": "Researched open-source evaluation/browser/accessibility/presentation harnesses, added REQ-PA-014, recorded harness candidates and adoption gates, added presentation-agent research/workflow/spec artifacts, and updated history plus monitoring snapshots without installing new dependencies.",
+  "work_mode": "standard",
+  "changed_files": [
+    "presentation-agent/configs/evaluation/harness-candidates.json",
+    "presentation-agent/docs/requirements/2026-06-01-presentation-agent.ko.md",
+    "presentation-agent/docs/requirements/2026-06-01-presentation-agent.en.md",
+    "presentation-agent/docs/workflows/presentation-quality-harness-workflow.ko.md",
+    "presentation-agent/docs/workflows/presentation-quality-harness-workflow.en.md",
+    "presentation-agent/docs/research/2026-06-01-open-source-harness-review.ko.md",
+    "presentation-agent/docs/research/2026-06-01-open-source-harness-review.en.md",
+    "presentation-agent/specs/2026-06-01-open-source-harness-review/",
+    "presentation-agent/README.md",
+    "_research/topics/presentation/2026-06-01-open-source-harness-review.ko.md",
+    "_research/topics/presentation/2026-06-01-open-source-harness-review.en.md",
+    "_history/web-searches/2026/2026-06-01-open-source-harness-review.ko.md",
+    "_history/plans/2026/2026-06-01-open-source-harness-review.ko.md",
+    "_history/user-requests/2026/2026-06-01.ko.md",
+    "_history/request-traces/2026/2026-06-01-open-source-harness-review.ko.md",
+    "_history/work-summaries/2026/2026-06-01.ko.md",
+    "_history/work-timings/2026/2026-06-01-open-source-harness-review.json",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "_ops/maps/repository-map.md"
+  ],
+  "verification": [
+    "PYTHONPATH=presentation-agent/src python3 -m unittest discover -s presentation-agent/tests: 10 tests passed",
+    "PYTHONPATH=presentation-agent/src python3 -m presentation_agent.catalog presentation-agent/data/reference-index/starter-reference-catalog.json: pass, 82 records",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../presentation-agent/configs/evaluation/harness-candidates.json: self_documenting",
+    "python3 _tools/workspace-index/src/workspace_index.py: repository map regenerated",
+    "npm run collect from workspace-monitor/: wrote 975 documents",
+    "npm run check from workspace-monitor/: passed",
+    "npm run test from workspace-monitor/: 5 tests passed",
+    "npm run build from workspace-monitor/: passed",
+    "python3 _tools/workspace-health/src/workspace_health.py --category governance --json: 7 checks passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-01-open-source-harness-review-grounding.json: ready_to_publish",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-01-open-source-harness-review-evaluation-input.json: ready_to_close",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-01-open-source-harness-review.json: ready"
+  ],
+  "references_checked": [
+    "Inspect AI official docs: https://inspect.aisi.org.uk/",
+    "Inspect AI GitHub: https://github.com/UKGovernmentBEIS/inspect_ai",
+    "OpenAI Evals cookbook: https://developers.openai.com/cookbook/examples/evaluation/getting_started_with_openai_evals",
+    "promptfoo GitHub: https://github.com/promptfoo/promptfoo",
+    "DeepEval GitHub: https://github.com/confident-ai/deepeval",
+    "Playwright visual comparisons: https://playwright.dev/docs/test-snapshots",
+    "Playwright accessibility testing: https://playwright.dev/docs/accessibility-testing",
+    "AgentLab GitHub: https://github.com/ServiceNow/AgentLab",
+    "PPTAgent paper: https://arxiv.org/abs/2501.03936",
+    "SlideAudit paper: https://arxiv.org/abs/2508.03630",
+    "PresentBench paper: https://arxiv.org/abs/2603.07244",
+    "presentation-agent/src/presentation_agent/html_deck.py",
+    "presentation-agent/tests/test_html_deck.py",
+    "presentation-agent/docs/requirements/2026-06-01-presentation-agent.ko.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-01-open-source-harness-review-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-01-open-source-harness-review.ko.md",
+    "_research/topics/presentation/2026-06-01-open-source-harness-review.ko.md",
+    "presentation-agent/docs/research/2026-06-01-open-source-harness-review.ko.md",
+    "presentation-agent/configs/evaluation/harness-candidates.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-01-open-source-harness-review.ko.md",
+    "presentation-agent/specs/2026-06-01-open-source-harness-review/plan.ko.md",
+    "presentation-agent/specs/2026-06-01-open-source-harness-review/spec.ko.md",
+    "presentation-agent/specs/2026-06-01-open-source-harness-review/traceability.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-01-open-source-harness-review.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-01.ko.md"
+  ],
+  "requirements_targets": [
+    "presentation-agent/docs/requirements/2026-06-01-presentation-agent.ko.md"
+  ],
+  "spec_targets": [
+    "presentation-agent/specs/2026-06-01-open-source-harness-review/spec.ko.md",
+    "presentation-agent/specs/2026-06-01-open-source-harness-review/plan.ko.md",
+    "presentation-agent/specs/2026-06-01-open-source-harness-review/tasks.ko.md",
+    "presentation-agent/specs/2026-06-01-open-source-harness-review/validation.ko.md",
+    "presentation-agent/specs/2026-06-01-open-source-harness-review/traceability.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-01-open-source-harness-review.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-01.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-01-open-source-harness-review.json"
+  ],
+  "skill_work_occurred": false,
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Implement a no-install deck-spec quality harness next.",
+    "Prepare a Playwright/axe-core installation audit and browser smoke-test plan before adding dependencies.",
+    "Translate PPTAgent, SlideAudit, and PresentBench ideas into a local presentation quality rubric."
+  ]
+}

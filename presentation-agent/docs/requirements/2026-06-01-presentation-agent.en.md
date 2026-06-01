@@ -81,7 +81,16 @@ The presentation agent researches strong presentation design, PPT/HTML reference
 - Final templates lock color, typography, spacing, grid, component style, and layout family to reduce slide-to-slide drift.
 - New slides assign content to validated layout archetypes instead of using free-form placement.
 
+### REQ-PA-014 Presentation Quality Harness
+
+- The presentation agent manages quality harness candidates and adoption criteria for repeatable validation of generated `deck-spec`, HTML deck, and PPTX outputs.
+- Immediately applicable validation starts with dependency-free `deck-spec` static quality checks, existing unit tests, and catalog validation.
+- Browser rendering, accessibility, and visual regression checks prioritize Playwright and axe-core style tooling, but only after project-local installation audit and stable rendering environment rules are ready.
+- LLM and agent evaluation harnesses such as Inspect AI, OpenAI Evals, promptfoo, and DeepEval are reviewed for later use after presentation script and design-generation prompts become repeatable.
+- Presentation-specific research benchmarks can inform evaluation axes from PPTAgent/PPTEval, SlideAudit, and PresentBench, but papers and benchmark results are not treated as direct quality guarantees.
+
 ## Non-Scope
 
 - This baseline does not bulk-download presentation files.
 - This baseline does not install a pixel-faithful PPTX rendering engine.
+- This baseline does not immediately install new harness dependencies.

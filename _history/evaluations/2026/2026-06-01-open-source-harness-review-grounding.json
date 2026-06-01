@@ -1,0 +1,159 @@
+{
+  "task": "Ground factual claims for open-source harness application review.",
+  "output_summary": "Reviewed open-source evaluation, browser, accessibility, visual, and presentation-specific harness sources; added presentation-agent harness candidates, requirement, workflow, research notes, and specs.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "inspect_docs",
+      "source": "https://inspect.aisi.org.uk/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Inspect documentation used to verify the framework's scope and evaluation concepts."
+    },
+    {
+      "evidence_id": "openai_evals_cookbook",
+      "source": "https://developers.openai.com/cookbook/examples/evaluation/getting_started_with_openai_evals",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official OpenAI cookbook page used to verify dataset and eval-class pattern."
+    },
+    {
+      "evidence_id": "promptfoo_repo",
+      "source": "https://github.com/promptfoo/promptfoo",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "Project repository used to verify prompt/agent/RAG evaluation and CLI/CI fit."
+    },
+    {
+      "evidence_id": "deepeval_repo",
+      "source": "https://github.com/confident-ai/deepeval",
+      "source_type": "web_source",
+      "checked_on": "2026-06-01",
+      "reliability": "Project repository used to verify pytest-style LLM evaluation claims."
+    },
+    {
+      "evidence_id": "playwright_visual",
+      "source": "https://playwright.dev/docs/test-snapshots",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Playwright documentation used to verify visual comparison support and environment caveats."
+    },
+    {
+      "evidence_id": "playwright_accessibility",
+      "source": "https://playwright.dev/docs/accessibility-testing",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-01",
+      "reliability": "Official Playwright documentation used to verify axe-core integration for accessibility testing."
+    },
+    {
+      "evidence_id": "pptagent_paper",
+      "source": "https://arxiv.org/abs/2501.03936",
+      "source_type": "paper",
+      "checked_on": "2026-06-01",
+      "reliability": "Paper abstract used to verify PPTEval dimensions and presentation-generation workflow ideas."
+    },
+    {
+      "evidence_id": "slideaudit_paper",
+      "source": "https://arxiv.org/abs/2508.03630",
+      "source_type": "paper",
+      "checked_on": "2026-06-01",
+      "reliability": "Paper abstract used to verify slide design flaw taxonomy and caution about automated critique."
+    },
+    {
+      "evidence_id": "presentbench_paper",
+      "source": "https://arxiv.org/abs/2603.07244",
+      "source_type": "paper",
+      "checked_on": "2026-06-01",
+      "reliability": "Paper abstract used to verify fine-grained checklist evaluation idea."
+    },
+    {
+      "evidence_id": "harness_config",
+      "source": "presentation-agent/configs/evaluation/harness-candidates.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-01",
+      "reliability": "Tracked project config containing the adopted candidate priorities and gates."
+    },
+    {
+      "evidence_id": "verification_results",
+      "source": "presentation-agent tests, catalog validation, config contract, workspace-monitor checks/build, workspace governance health",
+      "source_type": "command_output",
+      "checked_on": "2026-06-01",
+      "reliability": "Commands were run locally after changes and returned success."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "Inspect AI is an open-source LLM evaluation framework with structured evaluation components and agent support.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["inspect_docs"],
+      "verification_steps": ["Opened the official Inspect documentation and checked the framework overview."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "promptfoo and DeepEval are relevant future candidates for prompt or LLM-app regression, not immediate static deck checks.",
+      "claim_type": "recommendation",
+      "support_level": "supported",
+      "evidence_ids": ["promptfoo_repo", "deepeval_repo", "harness_config"],
+      "verification_steps": ["Checked official repositories and compared their scope against current presentation-agent outputs."],
+      "presented_as_fact": false,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Playwright can support browser render and visual comparison checks, but visual baselines need a stable environment.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["playwright_visual", "harness_config"],
+      "verification_steps": ["Checked official Playwright visual comparison documentation and recorded environment gate."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Playwright can be paired with axe-core for automatically detectable accessibility issues.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["playwright_accessibility"],
+      "verification_steps": ["Checked official Playwright accessibility documentation."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "PPTAgent, SlideAudit, and PresentBench are useful as rubric or taxonomy references rather than immediate dependencies.",
+      "claim_type": "recommendation",
+      "support_level": "supported",
+      "evidence_ids": ["pptagent_paper", "slideaudit_paper", "presentbench_paper", "harness_config"],
+      "verification_steps": ["Checked paper abstracts and mapped their evaluation ideas to local presentation-agent constraints."],
+      "presented_as_fact": false,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "The repository now records presentation quality harness candidates and adoption gates.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["harness_config"],
+      "verification_steps": ["Read the added harness candidate config."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The changed project files passed the verification commands used for this task.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["verification_results"],
+      "verification_steps": ["Ran tests and validation commands after editing."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Recent presentation benchmark papers may change, publish more code, or receive replication results later.",
+    "Community popularity and GitHub activity were treated as discovery signals, not proof of correctness.",
+    "Actual Playwright or axe-core adoption still needs installation audit and environment decisions."
+  ],
+  "limitation_notes": [
+    "No new harness dependency was installed in this task.",
+    "No browser screenshot baseline was created.",
+    "No LLM prompt regression suite was run because repeatable prompt datasets are not yet defined."
+  ]
+}
