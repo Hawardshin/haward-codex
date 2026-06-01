@@ -11,5 +11,4 @@
 | Config | `agent-platform/configs/integrations/notification-channels.json` |
 | Tests | `agent-platform/tests/test_notifications.py` |
 | Evaluation | `_history/evaluations/2026/2026-06-01-notification-settings.en.md` |
-| Commit | `PENDING` |
-
+| Commit | `0070dba` |

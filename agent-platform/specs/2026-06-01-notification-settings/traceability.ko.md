@@ -11,5 +11,4 @@
 | 설정 | `agent-platform/configs/integrations/notification-channels.json` |
 | 테스트 | `agent-platform/tests/test_notifications.py` |
 | 평가 | `_history/evaluations/2026/2026-06-01-notification-settings.ko.md` |
-| 커밋 | `PENDING` |
-
+| 커밋 | `0070dba` |
