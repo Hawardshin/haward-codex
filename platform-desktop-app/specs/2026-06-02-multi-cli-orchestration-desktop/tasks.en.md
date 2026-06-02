@@ -17,6 +17,7 @@
 - [x] Implement Workspace Monitor CLI setup guide, work-mode presets, and decision inbox answer UI
 - [x] Implement linked-session `Answer & Resume` UI in Workspace Monitor
 - [x] Apply reference-app UI patterns in Workspace Monitor: command palette, capability center metadata, run board, process graph, terminal event rail, grouped decision inbox, decision replay, source diff review, and evidence/promotion surface
+- [x] Extend the Workspace Monitor source editor with multi-file draft queue, indexed file browser, direct path open, dirty state, save current, save all, revert, close, and backup result surface
 - [x] Expose the `desktop` section in the view mode registry
 - [x] Create history, omission, resource, grounding, and evaluation records
 - [ ] Interactive PTY-based CLI task supervisor remains follow-up spec work

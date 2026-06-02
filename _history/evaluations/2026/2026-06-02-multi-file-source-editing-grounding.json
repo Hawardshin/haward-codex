@@ -1,0 +1,97 @@
+{
+  "task": "Ground factual claims for multi-file source editing close-out.",
+  "output_summary": "The Desktop tab Source Review was extended into a multi-file scoped editor without adding new dependencies.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "monitor-ui",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary UI implementation for draft queue, direct path open, save all, revert, close, and backup result state."
+    },
+    {
+      "evidence_id": "monitor-css",
+      "source": "workspace-monitor/app/globals.css",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary responsive layout implementation for source browser, draft queue, editor, and save results."
+    },
+    {
+      "evidence_id": "readiness-test",
+      "source": "platform-desktop-app/tests/readiness.test.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Regression test contract for UI strings and implementation tokens."
+    },
+    {
+      "evidence_id": "local-checks",
+      "source": "npm --prefix workspace-monitor run check; npm --prefix platform-desktop-app test",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local TypeScript and readiness test evidence."
+    },
+    {
+      "evidence_id": "web-search-record",
+      "source": "_history/web-searches/2026/2026-06-02-multi-file-source-editing.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Web-first source record listing official docs checked before implementation."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The Desktop tab now includes a multi-file scoped editor with a File Edit Queue.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "readiness-test"
+      ],
+      "verification_steps": [
+        "Read MonitorShell.tsx.",
+        "Ran platform-desktop-app tests/readiness."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The editor supports direct path open, indexed file browser, dirty draft state, Save Current, Save All, Revert Draft, Close Draft, and backup result display.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "monitor-css",
+        "readiness-test"
+      ],
+      "verification_steps": [
+        "Read MonitorShell.tsx and globals.css.",
+        "Ran TypeScript and readiness tests."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "No Monaco, xterm.js, or PTY dependency was installed in this slice.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "web-search-record"
+      ],
+      "verification_steps": [
+        "No install command was run.",
+        "Changed existing React/CSS/docs/tests only."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Actual Tauri WebView file-command smoke remains gated by Rust/Tauri local setup."
+  ],
+  "limitation_notes": [
+    "The editor remains textarea-based until Monaco dependency audit.",
+    "Diff preview is lightweight line comparison, not a full AST-aware or Monaco diff editor."
+  ]
+}

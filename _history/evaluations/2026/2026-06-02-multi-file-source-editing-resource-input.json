@@ -1,0 +1,94 @@
+{
+  "task": "Multi-file source editing resource review",
+  "work_mode": "governance",
+  "runtime_context": [
+    "React stateful editor UI",
+    "Next.js static build",
+    "Playwright visual smoke",
+    "temporary Python HTTP server"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "draft-memory",
+      "category": "memory",
+      "description": "Multiple open drafts can increase renderer memory use.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The indexed file selector is capped, backend read command limits file size, and the user can close drafts.",
+      "evidence": [
+        "editableSourceFiles.slice(0, 240)",
+        "filteredEditableSourceFiles.slice(0, 80)",
+        "Close Draft UI"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "save-all-writes",
+      "category": "file_handle",
+      "description": "Save All can write multiple files.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Writes are serialized through the existing workspace-scoped Tauri command that creates backups and blocks disallowed paths.",
+      "evidence": [
+        "saveAllSourceDrafts",
+        "write_workspace_text_file"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "temporary-static-server",
+      "category": "process",
+      "description": "A temporary HTTP server is needed for static visual smoke.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Used tcp:4174 for static visual smoke, stopped the server, and verified no listener remained.",
+      "evidence": [
+        "python3 -m http.server 4174 -d workspace-monitor/out",
+        "lsof -ti tcp:4174"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "typecheck",
+      "metric": "TypeScript compile",
+      "tool": "npm --prefix workspace-monitor run check",
+      "threshold": "no type errors",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "tsc --noEmit exited 0"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "chunk-budget",
+      "metric": "largest initial JS chunk",
+      "tool": "npm --prefix workspace-monitor run perf:budget",
+      "threshold": "1000000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "largestChunk.bytes = 227537"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "horizontal-overflow",
+      "metric": "document scrollWidth",
+      "tool": "Playwright desktop/mobile smoke",
+      "threshold": "scrollWidth equals viewport width",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "desktop: width 1440 scrollWidth 1440",
+        "mobile: width 390 scrollWidth 390"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No worker, PTY, xterm.js, Monaco, or new long-running process was added by the implementation."
+  ]
+}

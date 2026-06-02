@@ -7,8 +7,8 @@ Define the product contract for an installable desktop app that can configure Cl
 ## Requirements
 
 - `REQ-WS-085`
-- `PDA-REQ-013` - `PDA-REQ-024`
-- `PDA-UX-009` - `PDA-UX-017`
+- `PDA-REQ-013` - `PDA-REQ-025`
+- `PDA-UX-009` - `PDA-UX-018`
 
 ## Scope
 
@@ -25,6 +25,7 @@ Define the product contract for an installable desktop app that can configure Cl
 - Tauri backend workspace-scoped source file read/write with backup
 - Workspace Monitor CLI setup guide, work-mode presets, decision inbox answer UI, CLI session console, and scoped source editor
 - Workspace Monitor command palette, capability center cards, run board, process graph, terminal event rail, grouped decision inbox, decision replay, source diff review, and evidence/promotion surface
+- Workspace Monitor multi-file source editing draft queue, direct path open, indexed file browser, dirty state, save current, save all, revert, close, and backup result surface
 
 ## Non-Scope
 
@@ -44,7 +45,7 @@ Define the product contract for an installable desktop app that can configure Cl
 - Autonomous source-affecting long-running multi-CLI execution will be implemented in the next supervisor stage with process graphs and merge gates.
 - CLI questions route to the decision inbox and pause only dependent lanes.
 - Terminal output separates bounded/redacted raw logs from structured durable records.
-- Source editing starts with a textarea-based scoped editor and backup save; mature open-source editor surfaces such as Monaco Editor are added after dependency audit.
+- Source editing starts with a textarea-based scoped editor, multi-file draft queue, diff preview, and backup save; mature open-source editor surfaces such as Monaco Editor are added after dependency audit.
 - Data accumulation defaults to file-system indexes and structured records; vector DB comes only after measured retrieval bottlenecks.
 
 ## Acceptance Criteria
@@ -56,6 +57,7 @@ Define the product contract for an installable desktop app that can configure Cl
 - The `workspace-monitor` Desktop tab shows CLI setup guides, work-mode presets, and human decision inbox list/answer UI.
 - The `workspace-monitor` Desktop tab distinguishes `Answer` from `Answer & Resume` for decisions linked to an active CLI session and displays the resume result.
 - The `workspace-monitor` Desktop tab includes `Command Palette`, `Capability Center`, `Run Board`, process graph, terminal event, decision replay, `Source Review`, `Evidence / Promotion`, and the related UI state.
+- The `workspace-monitor` Desktop tab includes `Multi-file scoped editor`, `File Edit Queue`, `Open Path`, `Save Current`, `Save All`, and `Revert Draft`, and shows open/dirty draft counts plus backup save results.
 - Tauri file commands block `_private/`, `outputs/`, paths outside the workspace, and symlink escapes, and create backups before writes.
 - Requirements, specs, and traceability link the new capability.
 - Evaluation records distinguish the current bounded health/session/file-edit implementation from later PTY supervisor resource and CLI-pipeline risks.

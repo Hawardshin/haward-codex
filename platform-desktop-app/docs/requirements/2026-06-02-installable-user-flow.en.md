@@ -25,6 +25,7 @@ These requirements define first-run, home, task execution, decision inbox, setti
 | PDA-UX-015 | The Desktop tab shall show CLI setup guides, work-mode presets, deferred decision lists, answer type/text controls, and saved answer state in the same working surface. | must | workspace-monitor Desktop tab, Tauri decision commands |
 | PDA-UX-016 | The Desktop tab shall distinguish answer-only from answer-and-resume actions for decisions linked to an active CLI session, and show the linked session id/status plus resume result. | must | workspace-monitor Desktop tab, Tauri answer-and-resume command |
 | PDA-UX-017 | The Desktop tab shall apply selected VS Code, Raycast, Docker, GitHub Desktop, Warp, and Cursor reference patterns as quick actions, capability cards, run board, process graph, terminal event rail, grouped decisions, replay, diff review, and evidence/promotion information in a dense work surface. | must | workspace-monitor Desktop tab, build, readiness/test |
+| PDA-UX-018 | The Desktop tab source-editing surface shall let users keep multiple files open as drafts and perform search/direct path open, dirty file queue review, diff preview, current save, save all, revert, close, and backup-result inspection in one screen. | must | workspace-monitor Desktop tab, visual QA, readiness/test |
 
 ## Current State
 

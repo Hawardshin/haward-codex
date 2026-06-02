@@ -217,6 +217,17 @@ type WorkspaceWriteReport = {
   status: string;
 };
 
+type SourceDraftEntry = {
+  relativePath: string;
+  baseContent: string;
+  content: string;
+  sizeBytes: number;
+  maxSizeBytes: number;
+  loadedAt: string;
+  lastSavedBackupPath?: string;
+  status?: string;
+};
+
 type HumanDecisionItem = {
   id: string;
   status: string;
@@ -1269,15 +1280,47 @@ function DesktopRuntimePanel({
   const [decisionBusy, setDecisionBusy] = useState(false);
   const [decisionResumeNotice, setDecisionResumeNotice] = useState("");
   const [selectedSourcePath, setSelectedSourcePath] = useState(sourceFiles[0]?.path || "");
+  const [sourcePathInput, setSourcePathInput] = useState(sourceFiles[0]?.path || "");
+  const [sourceFilter, setSourceFilter] = useState("");
   const [sourceFile, setSourceFile] = useState<WorkspaceTextFile | null>(null);
   const [sourceDraft, setSourceDraft] = useState("");
+  const [sourceDrafts, setSourceDrafts] = useState<Record<string, SourceDraftEntry>>({});
+  const [sourceSaveResults, setSourceSaveResults] = useState<WorkspaceWriteReport[]>([]);
   const [writeReport, setWriteReport] = useState<WorkspaceWriteReport | null>(null);
   const [editorBusy, setEditorBusy] = useState(false);
+  const [saveAllBusy, setSaveAllBusy] = useState(false);
 
   const invoke = getTauriInvoke();
   const availableCount = adapters.filter((adapter) => adapter.available).length;
   const sourceFileCount = sourceFiles.length;
   const editableSourceFiles = sourceFiles.filter((file) => !file.truncated).slice(0, 240);
+  const filteredEditableSourceFiles = useMemo(() => {
+    const normalizedFilter = sourceFilter.trim().toLowerCase();
+    if (!normalizedFilter) {
+      return editableSourceFiles.slice(0, 80);
+    }
+    return editableSourceFiles
+      .filter((file) =>
+        [file.path, file.project, file.language, file.extension]
+          .filter(Boolean)
+          .some((value) => value.toLowerCase().includes(normalizedFilter))
+      )
+      .slice(0, 80);
+  }, [editableSourceFiles, sourceFilter]);
+  const openDraftEntries = useMemo(
+    () => Object.values(sourceDrafts).sort((left, right) => left.relativePath.localeCompare(right.relativePath)),
+    [sourceDrafts]
+  );
+  const dirtyDraftEntries = useMemo(
+    () => openDraftEntries.filter((entry) => entry.content !== entry.baseContent),
+    [openDraftEntries]
+  );
+  const currentDraftEntry = sourceFile ? sourceDrafts[sourceFile.relativePath] ?? null : null;
+  const currentSourceDirty = currentDraftEntry
+    ? currentDraftEntry.content !== currentDraftEntry.baseContent
+    : sourceFile
+      ? sourceDraft !== sourceFile.content
+      : false;
   const openInboxDecisions = (inboxReport?.decisions || []).filter((decision) => isOpenDecisionStatus(decision.status));
   const decisionPrompts = [
     ...reports.flatMap((report) => report.decisionPrompts || []),
@@ -1346,6 +1389,16 @@ function DesktopRuntimePanel({
             }
           ]
         : []),
+      ...(dirtyDraftEntries.length
+        ? [
+            {
+              id: "source-draft-queue",
+              label: "drafts",
+              title: "File Edit Queue",
+              detail: `${dirtyDraftEntries.length} dirty / ${openDraftEntries.length} open`
+            }
+          ]
+        : []),
       ...(writeReport
         ? [
             {
@@ -1355,10 +1408,16 @@ function DesktopRuntimePanel({
               detail: `backup ${writeReport.backupPath}`
             }
           ]
-        : [])
+        : []),
+      ...sourceSaveResults.slice(0, 2).map((report) => ({
+        id: `save-${report.relativePath}`,
+        label: report.status,
+        title: report.relativePath,
+        detail: `backup ${report.backupPath}`
+      }))
     ];
     return items.slice(0, 8);
-  }, [outputEvents, selectedDecision, sourceDiff, sourceFile?.relativePath, writeReport]);
+  }, [dirtyDraftEntries.length, openDraftEntries.length, outputEvents, selectedDecision, sourceDiff, sourceFile?.relativePath, sourceSaveResults, writeReport]);
 
   const refreshAdapters = async () => {
     setError("");
@@ -1617,10 +1676,15 @@ function DesktopRuntimePanel({
     }
   };
 
-  const loadSourceFile = async () => {
+  const loadSourceFileByPath = async (relativePath: string) => {
     const tauriInvoke = getTauriInvoke();
-    if (!tauriInvoke || !selectedSourcePath) {
+    const targetPath = relativePath.trim();
+    if (!tauriInvoke) {
       setError("Tauri desktop runtime is not available in this browser view.");
+      return;
+    }
+    if (!targetPath) {
+      setError("Workspace-relative source path is required.");
       return;
     }
 
@@ -1629,15 +1693,88 @@ function DesktopRuntimePanel({
     setWriteReport(null);
     try {
       const nextFile = await tauriInvoke<WorkspaceTextFile>("read_workspace_text_file", {
-        relativePath: selectedSourcePath
+        relativePath: targetPath
       });
+      const nextEntry: SourceDraftEntry = {
+        relativePath: nextFile.relativePath,
+        baseContent: nextFile.content,
+        content: nextFile.content,
+        sizeBytes: nextFile.sizeBytes,
+        maxSizeBytes: nextFile.maxSizeBytes,
+        loadedAt: new Date().toISOString()
+      };
       setSourceFile(nextFile);
       setSourceDraft(nextFile.content);
+      setSelectedSourcePath(nextFile.relativePath);
+      setSourcePathInput(nextFile.relativePath);
+      setSourceDrafts((current) => ({ ...current, [nextFile.relativePath]: nextEntry }));
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
       setEditorBusy(false);
     }
+  };
+
+  const loadSourceFile = async () => {
+    await loadSourceFileByPath(sourcePathInput || selectedSourcePath);
+  };
+
+  const selectDraftEntry = (relativePath: string) => {
+    const entry = sourceDrafts[relativePath];
+    if (!entry) {
+      return;
+    }
+    setSelectedSourcePath(entry.relativePath);
+    setSourcePathInput(entry.relativePath);
+    setSourceFile({
+      relativePath: entry.relativePath,
+      content: entry.baseContent,
+      sizeBytes: entry.sizeBytes,
+      maxSizeBytes: entry.maxSizeBytes
+    });
+    setSourceDraft(entry.content);
+    setWriteReport(
+      entry.lastSavedBackupPath
+        ? {
+            relativePath: entry.relativePath,
+            sizeBytes: entry.sizeBytes,
+            backupPath: entry.lastSavedBackupPath,
+            status: entry.status || "saved"
+          }
+        : null
+    );
+  };
+
+  const openDraftOrLoad = async (relativePath: string) => {
+    if (sourceDrafts[relativePath]) {
+      selectDraftEntry(relativePath);
+      return;
+    }
+    await loadSourceFileByPath(relativePath);
+  };
+
+  const updateSourceDraft = (nextContent: string) => {
+    setSourceDraft(nextContent);
+    if (!sourceFile) {
+      return;
+    }
+    setSourceDrafts((current) => {
+      const existing = current[sourceFile.relativePath] || {
+        relativePath: sourceFile.relativePath,
+        baseContent: sourceFile.content,
+        content: sourceFile.content,
+        sizeBytes: sourceFile.sizeBytes,
+        maxSizeBytes: sourceFile.maxSizeBytes,
+        loadedAt: new Date().toISOString()
+      };
+      return {
+        ...current,
+        [sourceFile.relativePath]: {
+          ...existing,
+          content: nextContent
+        }
+      };
+    });
   };
 
   const saveSourceFile = async () => {
@@ -1655,10 +1792,129 @@ function DesktopRuntimePanel({
       });
       setWriteReport(report);
       setSourceFile({ ...sourceFile, content: sourceDraft, sizeBytes: report.sizeBytes });
+      setSourceDrafts((current) => {
+        const existing = current[sourceFile.relativePath] || {
+          relativePath: sourceFile.relativePath,
+          baseContent: sourceFile.content,
+          content: sourceDraft,
+          sizeBytes: report.sizeBytes,
+          maxSizeBytes: sourceFile.maxSizeBytes,
+          loadedAt: new Date().toISOString()
+        };
+        return {
+          ...current,
+          [sourceFile.relativePath]: {
+            ...existing,
+            baseContent: sourceDraft,
+            content: sourceDraft,
+            sizeBytes: report.sizeBytes,
+            lastSavedBackupPath: report.backupPath,
+            status: report.status
+          }
+        };
+      });
+      setSourceSaveResults((current) => [
+        report,
+        ...current.filter((item) => item.relativePath !== report.relativePath)
+      ].slice(0, 8));
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
       setEditorBusy(false);
+    }
+  };
+
+  const saveAllSourceDrafts = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke || dirtyDraftEntries.length === 0) {
+      return;
+    }
+
+    setSaveAllBusy(true);
+    setError("");
+    try {
+      const reportsToAdd: WorkspaceWriteReport[] = [];
+      const nextDrafts: Record<string, SourceDraftEntry> = { ...sourceDrafts };
+      for (const entry of dirtyDraftEntries) {
+        const report = await tauriInvoke<WorkspaceWriteReport>("write_workspace_text_file", {
+          relativePath: entry.relativePath,
+          content: entry.content
+        });
+        reportsToAdd.push(report);
+        nextDrafts[entry.relativePath] = {
+          ...entry,
+          baseContent: entry.content,
+          content: entry.content,
+          sizeBytes: report.sizeBytes,
+          lastSavedBackupPath: report.backupPath,
+          status: report.status
+        };
+      }
+      setSourceDrafts(nextDrafts);
+      setSourceSaveResults((current) => [
+        ...reportsToAdd,
+        ...current.filter((item) => !reportsToAdd.some((report) => report.relativePath === item.relativePath))
+      ].slice(0, 8));
+      if (sourceFile && nextDrafts[sourceFile.relativePath]) {
+        const currentEntry = nextDrafts[sourceFile.relativePath];
+        setSourceFile({
+          relativePath: currentEntry.relativePath,
+          content: currentEntry.baseContent,
+          sizeBytes: currentEntry.sizeBytes,
+          maxSizeBytes: currentEntry.maxSizeBytes
+        });
+        setSourceDraft(currentEntry.content);
+      }
+      if (reportsToAdd[0]) {
+        setWriteReport(reportsToAdd[0]);
+      }
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setSaveAllBusy(false);
+    }
+  };
+
+  const revertCurrentDraft = () => {
+    if (!sourceFile || !currentDraftEntry) {
+      return;
+    }
+    setSourceDraft(currentDraftEntry.baseContent);
+    setSourceDrafts((current) => ({
+      ...current,
+      [sourceFile.relativePath]: {
+        ...currentDraftEntry,
+        content: currentDraftEntry.baseContent
+      }
+    }));
+    setWriteReport(null);
+  };
+
+  const closeCurrentDraft = () => {
+    if (!sourceFile) {
+      return;
+    }
+    const currentPath = sourceFile.relativePath;
+    const nextEntry = openDraftEntries.find((entry) => entry.relativePath !== currentPath) || null;
+    setSourceDrafts((current) => {
+      const next = { ...current };
+      delete next[currentPath];
+      return next;
+    });
+    if (nextEntry) {
+      setSelectedSourcePath(nextEntry.relativePath);
+      setSourcePathInput(nextEntry.relativePath);
+      setSourceFile({
+        relativePath: nextEntry.relativePath,
+        content: nextEntry.baseContent,
+        sizeBytes: nextEntry.sizeBytes,
+        maxSizeBytes: nextEntry.maxSizeBytes
+      });
+      setSourceDraft(nextEntry.content);
+    } else {
+      setSourceFile(null);
+      setSourceDraft("");
+      setWriteReport(null);
     }
   };
 
@@ -2220,71 +2476,200 @@ function DesktopRuntimePanel({
         )}
       </section>
 
-      <section className="panel desktop-source-panel">
+      <section className="panel wide desktop-source-panel">
         <div className="panel-heading">
           <div>
             <p className="eyebrow">Source Review</p>
-            <h2>Scoped diff editor</h2>
+            <h2>Multi-file scoped editor</h2>
           </div>
-          <Code2 size={18} aria-hidden="true" />
+          <div className="source-panel-stats">
+            <span>{openDraftEntries.length} open</span>
+            <strong>{dirtyDraftEntries.length} dirty</strong>
+          </div>
         </div>
         <div className="source-editor-controls">
-          <select value={selectedSourcePath} onChange={(event) => setSelectedSourcePath(event.target.value)}>
-            {editableSourceFiles.map((file) => (
-              <option key={file.id} value={file.path}>
-                {file.path}
-              </option>
-            ))}
-          </select>
-          <button type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !selectedSourcePath}>
+          <label className="source-path-field">
+            <span>Open Path</span>
+            <input
+              value={sourcePathInput}
+              onChange={(event) => {
+                setSourcePathInput(event.target.value);
+                setSelectedSourcePath(event.target.value);
+              }}
+              placeholder="workspace-relative path"
+            />
+          </label>
+          <label>
+            <span>Indexed File</span>
+            <select
+              value={selectedSourcePath}
+              onChange={(event) => {
+                setSelectedSourcePath(event.target.value);
+                setSourcePathInput(event.target.value);
+              }}
+            >
+              {editableSourceFiles.map((file) => (
+                <option key={file.id} value={file.path}>
+                  {file.path}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !sourcePathInput.trim()}>
             <FileSearch size={15} aria-hidden="true" />
-            <span>{editorBusy ? "Loading" : "Open"}</span>
+            <span>{editorBusy ? "Loading" : "Open Path"}</span>
           </button>
-          <button type="button" onClick={saveSourceFile} disabled={!invoke || editorBusy || !sourceFile || sourceDraft === sourceFile.content}>
+          <button type="button" onClick={saveSourceFile} disabled={!invoke || editorBusy || !sourceFile || !currentSourceDirty}>
             <CheckCircle2 size={15} aria-hidden="true" />
-            <span>Save Backup</span>
+            <span>Save Current</span>
+          </button>
+          <button type="button" onClick={saveAllSourceDrafts} disabled={!invoke || editorBusy || saveAllBusy || dirtyDraftEntries.length === 0}>
+            <CheckCircle2 size={15} aria-hidden="true" />
+            <span>{saveAllBusy ? "Saving" : "Save All"}</span>
+          </button>
+          <button type="button" onClick={revertCurrentDraft} disabled={!sourceFile || !currentSourceDirty}>
+            <History size={15} aria-hidden="true" />
+            <span>Revert Draft</span>
+          </button>
+          <button type="button" onClick={closeCurrentDraft} disabled={!sourceFile}>
+            <ShieldCheck size={15} aria-hidden="true" />
+            <span>Close Draft</span>
           </button>
         </div>
-        {sourceFile ? (
-          <div className="source-editor-frame">
-            <div className="source-editor-meta">
-              <span>{sourceFile.relativePath}</span>
-              <strong>{sourceDraft.length.toLocaleString("ko-KR")} bytes</strong>
+
+        <div className="source-review-grid">
+          <aside className="source-file-browser">
+            <header>
+              <div>
+                <span>Indexed files</span>
+                <strong>{filteredEditableSourceFiles.length} shown</strong>
+              </div>
+              <Code2 size={16} aria-hidden="true" />
+            </header>
+            <input
+              value={sourceFilter}
+              onChange={(event) => setSourceFilter(event.target.value)}
+              placeholder="Filter by path, project, or language"
+            />
+            <div className="source-file-browser-list">
+              {filteredEditableSourceFiles.map((file) => (
+                <button
+                  key={file.id}
+                  type="button"
+                  className={sourceFile?.relativePath === file.path ? "active" : ""}
+                  onClick={() => openDraftOrLoad(file.path)}
+                  disabled={!invoke || editorBusy}
+                >
+                  <strong>{file.path}</strong>
+                  <span>
+                    {file.project} / {file.language || file.extension} / {formatBytes(file.sizeBytes)}
+                  </span>
+                </button>
+              ))}
             </div>
-            {sourceDiff && (
-              <div className={`source-diff-review ${sourceDiff.dirty ? "dirty" : "clean"}`}>
-                <header>
-                  <div>
-                    <span>{sourceDiff.dirty ? "diff pending" : "no changes"}</span>
-                    <strong>
-                      +{sourceDiff.addedLines} / -{sourceDiff.removedLines} / {sourceDiff.changedLines} changed
-                    </strong>
-                  </div>
-                  <small>backup save gate</small>
-                </header>
-                {sourceDiff.preview.length > 0 && (
-                  <div className="source-diff-preview">
-                    {sourceDiff.preview.map((item) => (
-                      <article key={item.line}>
-                        <span>line {item.line}</span>
-                        <code>- {item.before || "<empty>"}</code>
-                        <code>+ {item.after || "<empty>"}</code>
-                      </article>
-                    ))}
+          </aside>
+
+          <div className="source-edit-workbench">
+            <div className="source-draft-queue" aria-label="File Edit Queue">
+              <header>
+                <div>
+                  <span>File Edit Queue</span>
+                  <strong>{dirtyDraftEntries.length} dirty / {openDraftEntries.length} open</strong>
+                </div>
+                <small>workspace-scoped backups on save</small>
+              </header>
+              {openDraftEntries.length === 0 ? (
+                <p className="empty-state">열린 파일 드래프트가 없습니다.</p>
+              ) : (
+                <div className="source-draft-list">
+                  {openDraftEntries.map((entry) => {
+                    const dirty = entry.content !== entry.baseContent;
+                    return (
+                      <button
+                        key={entry.relativePath}
+                        type="button"
+                        className={`${sourceFile?.relativePath === entry.relativePath ? "active" : ""} ${dirty ? "dirty" : "clean"}`}
+                        onClick={() => selectDraftEntry(entry.relativePath)}
+                      >
+                        <span>{dirty ? "dirty" : entry.status || "clean"}</span>
+                        <strong>{entry.relativePath}</strong>
+                        <small>
+                          {formatBytes(entry.content.length)} / loaded {entry.loadedAt.slice(11, 19)}
+                        </small>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {sourceFile ? (
+              <div className="source-editor-frame">
+                <div className="source-editor-meta">
+                  <span>{sourceFile.relativePath}</span>
+                  <strong>
+                    {formatBytes(sourceDraft.length)} / max {formatBytes(sourceFile.maxSizeBytes)}
+                  </strong>
+                </div>
+                {sourceDiff && (
+                  <div className={`source-diff-review ${sourceDiff.dirty ? "dirty" : "clean"}`}>
+                    <header>
+                      <div>
+                        <span>{sourceDiff.dirty ? "diff pending" : "no changes"}</span>
+                        <strong>
+                          +{sourceDiff.addedLines} / -{sourceDiff.removedLines} / {sourceDiff.changedLines} changed
+                        </strong>
+                      </div>
+                      <small>backup save gate</small>
+                    </header>
+                    {sourceDiff.preview.length > 0 && (
+                      <div className="source-diff-preview">
+                        {sourceDiff.preview.map((item) => (
+                          <article key={item.line}>
+                            <span>line {item.line}</span>
+                            <code>- {item.before || "<empty>"}</code>
+                            <code>+ {item.after || "<empty>"}</code>
+                          </article>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
+                <textarea value={sourceDraft} onChange={(event) => updateSourceDraft(event.target.value)} spellCheck={false} />
+                {writeReport && (
+                  <p className="desktop-success">
+                    {writeReport.status} / backup: {writeReport.backupPath}
+                  </p>
+                )}
+              </div>
+            ) : (
+              <p className="empty-state">소스 파일을 선택한 뒤 Tauri runtime에서 열면 scoped editor가 활성화됩니다.</p>
+            )}
+
+            {sourceSaveResults.length > 0 && (
+              <div className="source-save-results">
+                <header>
+                  <div>
+                    <span>Save Results</span>
+                    <strong>{sourceSaveResults.length} recent backups</strong>
+                  </div>
+                  <small>latest first</small>
+                </header>
+                <div>
+                  {sourceSaveResults.map((report) => (
+                    <article key={`${report.relativePath}-${report.backupPath}`}>
+                      <span>{report.status}</span>
+                      <strong>{report.relativePath}</strong>
+                      <small>
+                        {formatBytes(report.sizeBytes)} / {report.backupPath}
+                      </small>
+                    </article>
+                  ))}
+                </div>
               </div>
             )}
-            <textarea value={sourceDraft} onChange={(event) => setSourceDraft(event.target.value)} spellCheck={false} />
-            {writeReport && (
-              <p className="desktop-success">
-                {writeReport.status} / backup: {writeReport.backupPath}
-              </p>
-            )}
           </div>
-        ) : (
-          <p className="empty-state">소스 파일을 선택한 뒤 Tauri runtime에서 열면 scoped editor가 활성화됩니다.</p>
-        )}
+        </div>
       </section>
     </div>
   );

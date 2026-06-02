@@ -1,0 +1,114 @@
+{
+  "task": "Implement multi-file source editing in the installable desktop platform",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Search current sources before local planning or edits.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-multi-file-source-editing.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "requirements",
+      "description": "Add requirements for multi-file source editing.",
+      "source": "requirements lifecycle",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+        "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.ko.md",
+        "_requirements/changes/2026-06-02-multi-file-source-editing.ko.md",
+        "_requirements/reviews/2026-06-02-multi-file-source-editing.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "spec",
+      "description": "Update spec, tasks, validation, and traceability.",
+      "source": "spec-driven development rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md",
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "implementation",
+      "description": "Implement draft queue, direct path open, file browser, save current, save all, revert, close, and backup result UI.",
+      "source": "PDA-REQ-025 and PDA-UX-018",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "readiness",
+      "description": "Update readiness test for new UI strings and implementation tokens.",
+      "source": "regression test requirement",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Multi-file editor implementation.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/app/globals.css",
+      "purpose": "Responsive multi-file editor layout.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/tests/readiness.test.mjs",
+      "purpose": "Regression test coverage.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Type check Workspace Monitor.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-desktop-test",
+      "description": "Run desktop Node readiness tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app test"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Monaco Editor remains deferred until dependency audit.",
+    "Actual Tauri WebView file-command smoke remains gated by Rust/Tauri setup."
+  ],
+  "notes": [
+    "The implementation does not expand filesystem scope beyond the existing Tauri commands."
+  ]
+}

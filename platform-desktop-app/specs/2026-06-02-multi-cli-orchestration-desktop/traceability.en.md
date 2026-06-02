@@ -30,9 +30,19 @@
 - `PDA-REQ-022`: CLI setup guide, work-mode presets, human decision inbox list/answer.
 - `PDA-REQ-023`: answer-and-resume for decisions linked to active CLI sessions.
 - `PDA-REQ-024`: applied reference-app UI surfaces.
+- `PDA-REQ-025`: multi-file source editing draft queue, dirty state, save-all/revert/close, and backup result surface.
 - `PDA-UX-009` - `PDA-UX-012`: UI flow and code editing surface.
 - `PDA-UX-013`: Desktop tab shows runtime, CLI, terminal result, decision prompt, and source-editing readiness.
 - `PDA-UX-014`: Desktop tab shows CLI session console, decision inbox item count, and scoped source editor.
 - `PDA-UX-015`: Desktop tab shows setup guide, mode presets, and decision answer UI.
 - `PDA-UX-016`: Desktop tab shows linked session status and `Answer & Resume` action.
 - `PDA-UX-017`: Desktop tab shows command palette, capability cards, run board, process graph, terminal event rail, grouped decisions, replay, diff review, and evidence/promotion surface.
+- `PDA-UX-018`: Desktop tab source-editing surface shows open draft queue, direct path open, indexed browser, dirty-file save/revert/close flow.
+
+## Multi-File Source Editing Trace
+
+- Requirements: `PDA-REQ-025`, `PDA-UX-018`
+- Implementation: `workspace-monitor/components/MonitorShell.tsx`
+- Styles: `workspace-monitor/app/globals.css`
+- Regression test: `platform-desktop-app/tests/readiness.test.mjs`
+- Validation: `npm --prefix workspace-monitor run check`, `npm --prefix platform-desktop-app test`, visual QA screenshot

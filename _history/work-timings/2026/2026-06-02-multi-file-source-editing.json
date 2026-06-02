@@ -1,0 +1,43 @@
+{
+  "task_id": "2026-06-02-multi-file-source-editing",
+  "title": "Implement multi-file source editing in installable desktop app",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "confirm official editor, filesystem, and diff references",
+      "status": "completed",
+      "duration_seconds": 240,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official sources were needed before local implementation because the change affects desktop file editing."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "extend Source Review to multi-file draft queue",
+      "status": "completed",
+      "duration_seconds": 2100,
+      "measurement": "estimated",
+      "bottleneck_notes": "The largest cost was replacing the single-file JSX surface with a responsive multi-file workbench."
+    },
+    {
+      "phase_id": "documentation",
+      "label": "update requirements, specs, traceability, and history",
+      "status": "completed",
+      "duration_seconds": 1500,
+      "measurement": "estimated",
+      "bottleneck_notes": "Governance mode required bilingual requirements/spec/history/evaluation records."
+    },
+    {
+      "phase_id": "verification",
+      "label": "run checks, build, perf budget, readiness, and visual smoke",
+      "status": "completed",
+      "duration_seconds": 720,
+      "measurement": "estimated",
+      "bottleneck_notes": "Visual smoke required a temporary static server and Playwright desktop/mobile checks."
+    }
+  ],
+  "automation_candidates": [
+    "Generate repetitive bilingual requirement/spec/history record scaffolds from a structured change packet."
+  ]
+}

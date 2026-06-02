@@ -1028,12 +1028,13 @@ h3 {
 }
 
 .session-launcher label,
-.source-editor-controls {
+.source-editor-controls label {
   display: grid;
   gap: 6px;
 }
 
-.session-launcher label span {
+.session-launcher label span,
+.source-editor-controls label span {
   color: var(--muted);
   font-size: 12px;
   font-weight: 800;
@@ -1044,7 +1045,9 @@ h3 {
 .session-launcher select,
 .session-launcher textarea,
 .session-input-row input,
+.source-editor-controls input,
 .source-editor-controls select,
+.source-file-browser input,
 .source-editor-frame textarea {
   width: 100%;
   border: 1px solid var(--line);
@@ -1057,6 +1060,7 @@ h3 {
 .session-launcher input,
 .session-launcher select,
 .session-input-row input,
+.source-editor-controls input,
 .source-editor-controls select {
   min-height: 38px;
   padding: 8px 10px;
@@ -1560,6 +1564,165 @@ h3 {
 .desktop-source-panel p {
   color: var(--muted);
   line-height: 1.6;
+}
+
+.source-panel-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  padding: 4px 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.source-panel-stats strong {
+  color: var(--slate);
+}
+
+.source-editor-controls {
+  display: grid;
+  grid-template-columns: minmax(230px, 1.1fr) minmax(220px, 1fr) repeat(5, auto);
+  gap: 8px;
+  align-items: end;
+  margin-bottom: 12px;
+}
+
+.source-path-field {
+  min-width: 0;
+}
+
+.source-review-grid {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.58fr) minmax(0, 1.42fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.source-file-browser,
+.source-draft-queue,
+.source-save-results {
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.source-file-browser header,
+.source-draft-queue header,
+.source-save-results header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.source-file-browser header span,
+.source-draft-queue header span,
+.source-save-results header span,
+.source-save-results article span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.source-file-browser header strong,
+.source-draft-queue header strong,
+.source-save-results header strong {
+  display: block;
+  margin-top: 3px;
+}
+
+.source-file-browser input {
+  min-height: 36px;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+}
+
+.source-file-browser-list,
+.source-draft-list,
+.source-save-results > div {
+  display: grid;
+  gap: 7px;
+}
+
+.source-file-browser-list {
+  max-height: 520px;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.source-file-browser-list button,
+.source-draft-list button {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  padding: 8px;
+  color: var(--text);
+  text-align: left;
+}
+
+.source-file-browser-list button.active,
+.source-draft-list button.active {
+  border-color: #7aa7c8;
+  background: #f0f9ff;
+}
+
+.source-file-browser-list button:disabled {
+  opacity: 0.6;
+}
+
+.source-file-browser-list strong,
+.source-draft-list strong,
+.source-save-results article strong {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+
+.source-file-browser-list span,
+.source-draft-list span,
+.source-draft-list small,
+.source-save-results article small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+
+.source-edit-workbench {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.source-draft-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.source-draft-list button.dirty {
+  border-color: #f0d394;
+  background: #fff9eb;
+}
+
+.source-draft-list button.clean {
+  border-color: #b9d5c9;
+}
+
+.source-save-results article {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  padding: 8px;
 }
 
 .evidence-grid {
@@ -2581,6 +2744,7 @@ h3 {
   .decision-inbox-layout,
   .session-launcher,
   .session-grid,
+  .source-review-grid,
   .desktop-hero,
   .attention-layout {
     grid-template-columns: 1fr;
@@ -2594,6 +2758,7 @@ h3 {
   .terminal-event-rail article,
   .decision-answer-controls,
   .session-input-row,
+  .source-draft-list,
   .source-editor-controls {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2653,6 +2818,8 @@ h3 {
   .session-launcher,
   .session-grid,
   .session-input-row,
+  .source-review-grid,
+  .source-draft-list,
   .source-editor-controls,
   .task-lanes > div,
   .requirements-table {

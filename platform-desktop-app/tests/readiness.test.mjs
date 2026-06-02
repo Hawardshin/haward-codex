@@ -111,6 +111,12 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "terminal event",
     "decision replay",
     "Source Review",
+    "Multi-file scoped editor",
+    "File Edit Queue",
+    "Open Path",
+    "Save Current",
+    "Save All",
+    "Revert Draft",
     "Evidence / Promotion"
   ]) {
     assert.match(monitorShell, new RegExp(uiString));
@@ -119,11 +125,18 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "detectOutputEvents",
     "groupDecisions",
     "buildSourceDiffSummary",
+    "SourceDraftEntry",
+    "sourceDrafts",
+    "saveAllSourceDrafts",
+    "revertCurrentDraft",
+    "openDraftOrLoad",
     "desktop-command-grid",
     "process-graph",
     "terminal-event-rail",
     "decision-replay-strip",
     "source-diff-review",
+    "source-draft-queue",
+    "source-file-browser",
     "evidence-grid"
   ]) {
     assert.match(monitorShell, new RegExp(implementationToken));

@@ -30,9 +30,19 @@
 - `PDA-REQ-022`: CLI setup guide, 작업 모드 프리셋, human decision inbox 조회/답변.
 - `PDA-REQ-023`: linked active CLI session decision의 answer-and-resume.
 - `PDA-REQ-024`: reference-app UI 적용 surface.
+- `PDA-REQ-025`: multi-file source editing draft queue, dirty state, save-all/revert/close, backup result surface.
 - `PDA-UX-009` - `PDA-UX-012`: UI 흐름과 코드 편집 surface.
 - `PDA-UX-013`: Desktop 탭에 runtime, CLI, terminal result, decision prompt, source editing readiness 표시.
 - `PDA-UX-014`: Desktop 탭에 CLI session console, decision inbox item 수, scoped source editor 표시.
 - `PDA-UX-015`: Desktop 탭에 setup guide, mode preset, decision answer UI 표시.
 - `PDA-UX-016`: Desktop 탭에 linked session 상태와 `Answer & Resume` action 표시.
 - `PDA-UX-017`: Desktop 탭에 command palette, capability card, run board, process graph, terminal event rail, grouped decision, replay, diff review, evidence/promotion 표시.
+- `PDA-UX-018`: Desktop 탭 source editing 화면에 열린 드래프트 큐, direct path open, indexed browser, dirty 파일 저장/되돌리기/닫기 흐름 표시.
+
+## Multi-File Source Editing Trace
+
+- 요구사항: `PDA-REQ-025`, `PDA-UX-018`
+- 구현: `workspace-monitor/components/MonitorShell.tsx`
+- 스타일: `workspace-monitor/app/globals.css`
+- 회귀 테스트: `platform-desktop-app/tests/readiness.test.mjs`
+- 검증: `npm --prefix workspace-monitor run check`, `npm --prefix platform-desktop-app test`, visual QA screenshot

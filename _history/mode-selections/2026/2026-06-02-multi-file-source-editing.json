@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-02",
+  "request_id": "UR-2026-06-02-057",
+  "selected_work_mode": "governance",
+  "rationale": "The request changes installable desktop app behavior, requirements, specs, readiness tests, and history/evaluation artifacts.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "productization_workflow": "_ops/workflows/63-installable-software-productization.md",
+  "user_flow_workflow": "_ops/workflows/74-desktop-user-flow-design.md",
+  "cli_adapter_workflow": "_ops/workflows/66-cli-adapter-integration.md",
+  "resource_risk_occurred": true,
+  "cli_pipeline_occurred": false,
+  "installation_occurred": false
+}

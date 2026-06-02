@@ -80,6 +80,8 @@ Expected results:
 - The readiness check should verify setup guides, work-mode presets, decision inbox list/answer commands, and UI strings.
 - The readiness check should verify the `answer_and_resume_human_decision` command and `Answer & Resume` UI string.
 - The readiness check should verify applied reference-app UI strings: `Command Palette`, `Capability Center`, `Run Board`, process graph, terminal event, decision replay, `Source Review`, and `Evidence / Promotion`.
+- The readiness check should verify multi-file source editing strings: `Multi-file scoped editor`, `File Edit Queue`, `Open Path`, `Save Current`, `Save All`, `Revert Draft`, plus implementation tokens `sourceDrafts`, `saveAllSourceDrafts`, `revertCurrentDraft`, and `openDraftOrLoad`.
+- Visual QA should verify that the Desktop tab source file browser, draft queue, editor, and diff preview do not overlap on desktop or mobile widths.
 - Rust compile and Tauri dev/build are not verified until the Rust toolchain is installed.
 - The source editor contract must block `_private/`, `outputs/`, paths outside the workspace, and symlink escapes, and create a backup before saving.
 - The defer command contract must append detected questions to `_ops/coordination/human-decision-inbox.json` without duplicating the same session prompt.

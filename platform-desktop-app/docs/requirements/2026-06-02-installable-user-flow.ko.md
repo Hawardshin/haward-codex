@@ -25,6 +25,7 @@
 | PDA-UX-015 | Desktop 탭은 CLI setup guide, 작업 모드 프리셋, 보류 decision 목록, answer type/text 입력, 저장된 답변 상태를 같은 작업 표면에서 보여야 한다. | must | workspace-monitor Desktop tab, Tauri decision commands |
 | PDA-UX-016 | Desktop 탭은 linked active CLI session이 있는 decision에 대해 answer-only와 answer-and-resume action을 구분하고, 연결 session id/status와 resume 결과를 보여야 한다. | must | workspace-monitor Desktop tab, Tauri answer-and-resume command |
 | PDA-UX-017 | Desktop 탭은 VS Code/Raycast/Docker/GitHub Desktop/Warp/Cursor 레퍼런스에서 채택한 quick action, capability card, run board, process graph, terminal event rail, grouped decision, replay, diff review, evidence/promotion 정보를 조밀한 작업 화면으로 보여야 한다. | must | workspace-monitor Desktop tab, build, readiness/test |
+| PDA-UX-018 | Desktop 탭의 source editing 화면은 사용자가 여러 파일을 열린 드래프트로 유지하고, 검색/직접 경로 열기, dirty 파일 큐, diff preview, 현재 저장, 전체 저장, 되돌리기, 닫기, backup 결과 확인을 한 화면에서 수행할 수 있어야 한다. | must | workspace-monitor Desktop tab, visual QA, readiness/test |
 
 ## 현재 상태
 
