@@ -40,3 +40,5 @@
 선택한 작업 모드가 요구하면 `work-evaluator-agent` 입력에는 `timing_summary_targets`를 포함한다. 누락되면 blocking gap이다.
 
 딥리서치나 긴 보고서 작업에는 `87-deep-research.md`를 사용하고, 보고서 작성 전 `complete-deep-research`로 조사 패키지 준비 상태를 확인한다.
+
+철학이나 durable operating principle 작업에는 `108-philosophy-alignment.md`를 사용하고, 종료 전 `check-philosophy-trace`로 원칙-구조 연결을 확인한다.

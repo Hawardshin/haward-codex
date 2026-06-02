@@ -45,7 +45,7 @@
       "The notification settings, provider routing, or webhook secret handling contract changes.",
     "The root structure policy, local-only folder rule, or structure audit command changes.",
     "The naming policy, naming governance document, or naming audit command changes.",
-    "The foundational agent operating philosophy or platform concept review changes.",
+    "The foundational agent operating philosophy, platform concept review, philosophy traceability registry, philosophy governance document, or philosophy alignment workflow changes.",
       "The platform identity narrative or top-level platform description changes.",
       "The AI assistant runtime adapter registry or tool-specific adapter files change.",
       "The AI usage gap profile, coaching workflow, prompt instruction quality gate, bounded clarification policy, non-blocking clarification policy, human decision inbox, interrupt/resume policy, model-adaptive prompting policy, or AI-use asset promotion rules change.",
@@ -630,6 +630,17 @@
         "repetitive-human-work reduction, elapsed-time reduction, and human-process automation boundaries"
       ],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "philosophy_traceability",
+      "title": "Philosophy Traceability Registry",
+      "path": "agent-platform/configs/governance/philosophy-traceability.json",
+      "source_type": "internal",
+      "used_for": [
+        "mapping operating philosophy principles to executable structure",
+        "checking that philosophy source text, execution targets, and validation handles stay connected"
+      ],
+      "last_checked": "2026-06-02"
     },
     {
       "id": "platform_identity_operating_model",
@@ -1398,6 +1409,7 @@
     "assistant_runtime_adapter_registry",
     "tool_agnostic_agent_operating_model",
     "agent_operating_philosophy",
+    "philosophy_traceability",
     "platform_identity_operating_model",
     "platform_readme",
     "source_registry",
@@ -1774,6 +1786,14 @@
       "path": "_philosophy/agent-operating-philosophy.ko.md",
       "tier": "warm",
       "purpose": "Foundational agent operating philosophy for search, skepticism, evaluation, autonomy, reversibility, privacy, operating debt, repetitive-work reduction, and human-process automation boundaries.",
+      "required": true,
+      "load_order": 9
+    },
+    {
+      "id": "philosophy_traceability",
+      "path": "agent-platform/configs/governance/philosophy-traceability.json",
+      "tier": "warm",
+      "purpose": "Traceability registry that maps each operating philosophy principle to executable docs, workflows, prompts, configs, tools, and validation handles.",
       "required": true,
       "load_order": 9
     },

@@ -1,0 +1,125 @@
+{
+  "task": "Make philosophical content reflected in platform structure.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web_first",
+      "description": "Run web-first intake and record public search summary.",
+      "source": "AGENTS.md and user durable rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-philosophy-traceability.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "principle_trace_registry",
+      "description": "Create a durable registry that maps philosophy principles to execution and validation targets.",
+      "source": "UR-2026-06-02-036 / REQ-WS-076",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/governance/philosophy-traceability.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "deterministic_checker",
+      "description": "Add a deterministic check for philosophy traceability.",
+      "source": "REQ-WS-076",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/governance/philosophy_trace.py",
+        "agent-platform/tests/test_philosophy_trace.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "operations_connection",
+      "description": "Connect philosophy alignment into docs, workflow, prompt router, memory bootstrap, and workspace-health.",
+      "source": "REQ-WS-076",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_docs/governance/philosophy-governance.ko.md",
+        "_ops/workflows/78-philosophy-alignment.md",
+        "_ops/prompts/108-philosophy-alignment.md",
+        "agent-platform/configs/memory/bootstrap-manifest.json",
+        "_tools/workspace-health/src/workspace_health/checks.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "governance_records",
+      "description": "Record requirements, specs, history, timing, request trace, omission, grounding, and evaluation.",
+      "source": "governance mode",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_specs/workspace-platform/2026-06-02-philosophy-traceability/",
+        "_history/request-traces/2026/2026-06-02-philosophy-traceability.ko.md",
+        "_history/evaluations/2026/2026-06-02-philosophy-traceability.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/governance/philosophy-traceability.json",
+      "purpose": "Source-to-execution-to-validation mapping.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/src/agent_platform/governance/philosophy_trace.py",
+      "purpose": "Deterministic philosophy trace checker.",
+      "required": true
+    },
+    {
+      "path": "_docs/governance/philosophy-governance.ko.md",
+      "purpose": "Human-readable governance rule.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "philosophy_trace",
+      "description": "Philosophy traceability registry is ready.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-philosophy-trace: ready"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "config_contract",
+      "description": "Registry is self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract: self_documenting"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "tests",
+      "description": "Focused philosophy trace tests passed.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "test_philosophy_trace.py: 4 tests passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "The trace checker proves mapping completeness and path existence; it does not prove every execution target fully embodies the philosophy semantically.",
+    "Validation target commands are handles; heavier checks are run through workspace-health and close-out verification."
+  ],
+  "notes": [
+    "_private contents were not inspected."
+  ]
+}

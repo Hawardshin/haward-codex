@@ -44,7 +44,8 @@ Use when: 작업 성격에 맞는 재사용 프롬프트를 빠르게 선택해�
 | 완료 결과를 초기 지시와 비교 평가한다 | [70-evaluate-work.md](70-evaluate-work.md) |
 | 진행 중인 에이전트와 병렬 작업을 확인하거나 갱신한다 | [80-coordinate-work.md](80-coordinate-work.md) |
 | 속도 개선을 위해 작업을 병렬 lane으로 나눌 수 있는지 판단한다 | [82-parallel-work-planning.md](82-parallel-work-planning.md) |
-| 에이전트 운영 철학이나 세계관을 정리한다 | [_philosophy/agent-operating-philosophy.ko.md](../../_philosophy/agent-operating-philosophy.ko.md) |
+| 에이전트 운영 철학이나 세계관을 정리한다 | [_philosophy/agent-operating-philosophy.ko.md](../../_philosophy/agent-operating-philosophy.ko.md), [108-philosophy-alignment.md](108-philosophy-alignment.md) |
+| 철학 원칙이 정책/워크플로/설정/검증으로 반영됐는지 확인하거나 연결한다 | [108-philosophy-alignment.md](108-philosophy-alignment.md) |
 | 웹/문서/저장소 검색에서 인사이트를 도출해 계획한다 | [85-research-insight-plan.md](85-research-insight-plan.md) |
 | 웹 검색을 사람이 실제로 하듯 query ladder, source lane, snowballing, 좋은 출처 요약으로 확장한다 | [84-human-like-source-discovery.md](84-human-like-source-discovery.md) |
 | API, 라이브러리, 버그, 아키텍처, 성능, 보안, 마이그레이션 등 코딩 조사를 완료한다 | [86-coding-research.md](86-coding-research.md) |
@@ -90,6 +91,7 @@ Create or update spec-driven artifacts before meaningful implementation when the
 When active specs are ambiguous or differ from current source/tests/artifacts, run spec-reconciliation-agent, classify update_spec versus update_source versus ask_user, and surface clarification_needed questions before changing ambiguous behavior.
 If custom skill work occurred, run skill-lifecycle-agent, validate the skill, record improvement ideas, and include skill_targets plus skill_validation_targets in close-out evaluation.
 If the request expresses a durable worldview or operating philosophy, update _philosophy/ and link policy docs to it.
+If the request changes philosophy or claims a principle should affect future behavior, use agent-platform/configs/governance/philosophy-traceability.json and _ops/prompts/108-philosophy-alignment.md; run check-philosophy-trace before close-out.
 If the request creates or touches a specific project, decide the owning project folder before editing files.
 If speed matters or multiple agents/lane-style tasks may run, use parallel-work-planner-agent before parallel execution and keep coordination status updated.
 For research-heavy work, use research-insight-planner-agent with agent-platform/configs/research/research-agent-profile.json and record the answer-engine stages plus citation requirements.

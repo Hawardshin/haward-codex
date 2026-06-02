@@ -16,6 +16,7 @@
 | `_docs/operating-models/` | 플랫폼/컨텍스트/assistant 운영 모델 |
 | `_docs/governance/` | 구조와 capability 관리 기준 |
 | `_philosophy/` | 에이전트와 플랫폼 운영의 근본 철학 |
+| `agent-platform/configs/governance/philosophy-traceability.json` | 철학 원칙이 정책/워크플로/설정/검증으로 반영됐는지 추적하는 매핑 |
 | `_requirements/` | 공통 요구사항 기준선, 변경 기록, 검토 기록 |
 | `_specs/` | 공통 spec-driven 산출물, 구현 계획, 작업 목록, 검증, traceability |
 | `_history/` | 날짜별 작업 히스토리와 압축된 맥락 |
@@ -46,6 +47,7 @@
 - 플랫폼을 사용자가 설치하는 desktop/end-user software로 제품화하거나 Tauri/Electron/MSIX/DMG/signing/notarization/update/uninstall을 검토할 때: [_ops/workflows/63-installable-software-productization.md](workflows/63-installable-software-productization.md), [_ops/prompts/93-installable-software-productization.md](prompts/93-installable-software-productization.md), [desktop-distribution-registry.json](../platform-desktop-app/configs/desktop-distribution-registry.json)
 - 설치형 desktop app의 사용자 플로우, 첫 실행 온보딩, workspace chooser, task timeline, decision inbox, 설정/복구 흐름을 설계할 때: [_ops/workflows/74-desktop-user-flow-design.md](workflows/74-desktop-user-flow-design.md), [_ops/prompts/104-desktop-user-flow-design.md](prompts/104-desktop-user-flow-design.md), [user-flow-registry.json](../platform-desktop-app/configs/user-flow-registry.json), [user-flow-map.html](../platform-desktop-app/artifacts/user-flow-map.html)
 - 민감 파일, token, key, credential, private note, browser cookie, user-provided private file을 다루거나 AI가 직접 보지 않아야 하는 파일 경계를 확인할 때: [_ops/security/README.ko.md](security/README.ko.md), [_docs/policies/sensitive-file-boundary-policy.ko.md](../_docs/policies/sensitive-file-boundary-policy.ko.md), [sensitive-file-boundary.json](../agent-platform/configs/security/sensitive-file-boundary.json), [_tools/privacy-audit/README.ko.md](../_tools/privacy-audit/README.ko.md)
+- 철학 원칙이 실제 정책/워크플로/설정/검증으로 반영됐는지 확인할 때: [_ops/workflows/78-philosophy-alignment.md](workflows/78-philosophy-alignment.md), [_ops/prompts/108-philosophy-alignment.md](prompts/108-philosophy-alignment.md), [philosophy-traceability.json](../agent-platform/configs/governance/philosophy-traceability.json), [_docs/governance/philosophy-governance.ko.md](../_docs/governance/philosophy-governance.ko.md)
 - Rust, Go, Tauri, Wails, Electron, Python, TypeScript/Next.js 같은 런타임/언어 선택을 조사하고 설계할 때: [_ops/workflows/64-runtime-language-research-design.md](workflows/64-runtime-language-research-design.md), [_ops/prompts/94-runtime-language-research-design.md](prompts/94-runtime-language-research-design.md), [language-decision-registry.json](../agent-platform/configs/runtime/language-decision-registry.json)
 - 설치형 플랫폼이나 프로젝트가 외부 CLI를 사용하되 특정 CLI에 종속되지 않는 adapter 경계를 설계할 때: [_ops/workflows/66-cli-adapter-integration.md](workflows/66-cli-adapter-integration.md), [_ops/prompts/97-cli-adapter-integration.md](prompts/97-cli-adapter-integration.md), [cli-adapter-registry.json](../agent-platform/configs/integrations/cli-adapter-registry.json)
 - 하나의 동작이 여러 CLI 프로세스를 실행하거나 stdout/stderr/stdin pipe, fan-out/fan-in merge, desktop/monitor/local daemon 기반 CLI orchestration을 설계할 때: [_ops/workflows/71-cli-pipeline-orchestration.md](workflows/71-cli-pipeline-orchestration.md), [_ops/prompts/101-cli-pipeline-orchestration.md](prompts/101-cli-pipeline-orchestration.md), [cli-pipeline-template.json](../agent-platform/configs/integrations/cli-pipeline-template.json), [cli-pipeline-agent](../agent-platform/docs/cli-pipeline-agent.ko.md)
@@ -124,6 +126,7 @@
 - 메모리/리소스 누수 위험이 있는 작업이면 `resource_risk_occurred=true`와 `resource_check_targets`가 남았는가
 - multi-process CLI orchestration 작업이면 `cli_pipeline_occurred=true`와 `cli_pipeline_targets`가 남았는가
 - reusable agent 생성 또는 multi-agent orchestration 계약 변경이면 `check-agent-orchestration`을 통과했는가
+- 철학, 세계관, durable principle, 또는 principle-to-structure mapping이 바뀌면 `check-philosophy-trace`를 통과했는가
 - bounded black-box capability promotion이 발생했다면 관찰 근거, 기존 자산 확인, 기각한 더 가벼운 대안, 위험도, 검증, rollback/disablement, 평가, 커밋/push trace가 남았는가
 - 작업별 timing record가 `_history/work-timings/YYYY/`에 남고 `timing_summary_targets`에 연결됐는가
 - `ship_first`에서 미룬 비차단 개선이 `_ops/backlog/` 또는 프로젝트별 백로그에 남았는가

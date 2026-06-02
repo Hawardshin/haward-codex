@@ -14,6 +14,7 @@ from agent_platform.evaluation.resource_guard import ResourceGuardInput, check_r
 from agent_platform.evaluation.skill_validator import SkillValidationInput, validate_skill_definition
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 from agent_platform.governance.config_contract import check_config_contract
+from agent_platform.governance.philosophy_trace import check_philosophy_traceability, load_philosophy_traceability
 from agent_platform.integrations.cli_pipeline import CliPipelineInput, check_cli_pipeline
 from agent_platform.integrations.notifications import (
     NotificationEvent,
@@ -94,6 +95,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Validate the shared agent creation and orchestration registry.",
     )
     check_agent_orchestration.add_argument("path", type=Path)
+
+    check_philosophy_trace = subparsers.add_parser(
+        "check-philosophy-trace",
+        help="Validate that operating philosophy principles are mapped to executable structure and validation handles.",
+    )
+    check_philosophy_trace.add_argument("path", type=Path)
 
     plan_from_research = subparsers.add_parser("plan-from-research", help="Check whether search-backed insights are ready for planning.")
     plan_from_research.add_argument("path", type=Path)
@@ -244,6 +251,26 @@ def main(argv: list[str] | None = None) -> int:
                     or orchestration_report["requires_rework"],
                     "config_contract": config_contract_report,
                     "agent_orchestration": orchestration_report,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
+        return 0
+
+    if args.command == "check-philosophy-trace":
+        registry = load_philosophy_traceability(args.path)
+        config_contract_report = check_config_contract(registry, str(args.path))
+        philosophy_report = check_philosophy_traceability(registry, _default_repo_root())
+        print(
+            json.dumps(
+                {
+                    "status": "rework_required"
+                    if config_contract_report["requires_rework"] or philosophy_report["requires_rework"]
+                    else "ready",
+                    "requires_rework": config_contract_report["requires_rework"] or philosophy_report["requires_rework"],
+                    "config_contract": config_contract_report,
+                    "philosophy_traceability": philosophy_report,
                 },
                 indent=2,
                 ensure_ascii=False,

@@ -40,3 +40,5 @@ If skill work occurred, `work-evaluator-agent` input must include `skill_work_oc
 When required by the selected work mode, `work-evaluator-agent` input must include `timing_summary_targets`. Missing targets are a blocking gap.
 
 For deep research or long-form report work, use `87-deep-research.md` and run `complete-deep-research` before writing the report.
+
+For philosophy or durable operating-principle work, use `108-philosophy-alignment.md` and run `check-philosophy-trace` before close-out.

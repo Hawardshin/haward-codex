@@ -17,7 +17,7 @@
 9. Read relevant specs under `_specs/` or the owning project's `specs/` when the task changes behavior, rules, structure, capability, implementation criteria, or uses `standard`/`governance` mode.
 10. Check [_ops/coordination/board.ko.md](../coordination/board.ko.md) when parallel work may exist.
 11. Select a prompt from [_ops/prompts/00-router.md](../prompts/00-router.md).
-12. Read relevant philosophy from `_philosophy/` when the task touches durable worldview or operating principles.
+12. Read relevant philosophy from `_philosophy/` when the task touches durable worldview or operating principles. If philosophy must affect future behavior, run [_ops/workflows/78-philosophy-alignment.md](78-philosophy-alignment.md).
 13. Decide the owning project or shared workspace folder; use [_ops/workflows/25-project-boundary-management.md](25-project-boundary-management.md) when unclear.
 14. Read the target project README and relevant docs.
 15. If the request changes behavior, rules, structure, platform capability, or implementation criteria, run [_ops/workflows/35-requirements-lifecycle.md](35-requirements-lifecycle.md) unless `ship_first` explicitly defers the backfill to `_ops/backlog/`.
@@ -37,18 +37,19 @@
 29. If runtime resource risk exists, run [_ops/workflows/69-resource-leak-prevention.md](69-resource-leak-prevention.md), set `resource_risk_occurred=true`, and include `resource_check_targets`.
 30. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).
 31. If the active conversation has become too long to resume safely from chat, run [_ops/workflows/45-context-archive.md](45-context-archive.md).
-32. Update and validate the timing record with [_ops/workflows/42-record-work-timing.md](42-record-work-timing.md).
-33. Evaluate completed work using the selected `work_mode` against the initial instruction and the artifacts required by that mode.
-34. Rework if the evaluator finds blocking gaps, then evaluate again.
-35. Save or update the public web search record under `_history/web-searches/YYYY/` when required by the selected mode or when the search produced reusable insight.
-36. Save or update the user request summary under `_history/user-requests/YYYY/` when required by the selected mode or when the request changes durable state.
-37. Save or update the requirements baseline/change/review under `_requirements/` or the owning project's `docs/requirements/` when required by the selected mode or when durable behavior changes.
-38. Save or update spec-driven artifacts under `_specs/` or the owning project's `specs/` when required by the selected mode or when implementation scope is durable.
-39. If skill work occurred, save or update `_skills/` source, validation, and improvement records.
-40. Save or update the request-to-outcome trace under `_history/request-traces/YYYY/` when required by the selected mode or when the request is meaningful durable work.
-41. Update `_history/work-summaries/`, `_history/work-timings/`, detailed history, and maps when required by the selected mode or when the navigation/history layer changed.
-42. For `ship_first`, update `_ops/backlog/deferred-improvements.ko.md` if non-blocking improvements were intentionally postponed.
-43. Commit and push immediately.
+32. If philosophy changed or a principle-to-structure mapping changed, run `PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-trace configs/governance/philosophy-traceability.json` from `agent-platform/`.
+33. Update and validate the timing record with [_ops/workflows/42-record-work-timing.md](42-record-work-timing.md).
+34. Evaluate completed work using the selected `work_mode` against the initial instruction and the artifacts required by that mode.
+35. Rework if the evaluator finds blocking gaps, then evaluate again.
+36. Save or update the public web search record under `_history/web-searches/YYYY/` when required by the selected mode or when the search produced reusable insight.
+37. Save or update the user request summary under `_history/user-requests/YYYY/` when required by the selected mode or when the request changes durable state.
+38. Save or update the requirements baseline/change/review under `_requirements/` or the owning project's `docs/requirements/` when required by the selected mode or when durable behavior changes.
+39. Save or update spec-driven artifacts under `_specs/` or the owning project's `specs/` when required by the selected mode or when implementation scope is durable.
+40. If skill work occurred, save or update `_skills/` source, validation, and improvement records.
+41. Save or update the request-to-outcome trace under `_history/request-traces/YYYY/` when required by the selected mode or when the request is meaningful durable work.
+42. Update `_history/work-summaries/`, `_history/work-timings/`, detailed history, and maps when required by the selected mode or when the navigation/history layer changed.
+43. For `ship_first`, update `_ops/backlog/deferred-improvements.ko.md` if non-blocking improvements were intentionally postponed.
+44. Commit and push immediately.
 
 ## Rule
 

@@ -9,6 +9,10 @@
 - [에이전트 운영 철학](agent-operating-philosophy.ko.md)
 - [플랫폼 컨셉 재검토](platform-concept-review.ko.md)
 
+## 실행 연결
+
+철학 원칙이 실제 운영 구조에 반영됐는지는 `agent-platform/configs/governance/philosophy-traceability.json`으로 추적한다. 철학을 바꾼 뒤에는 `PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-trace configs/governance/philosophy-traceability.json`을 `agent-platform/`에서 실행한다.
+
 ## 기록 기준
 
 다음 내용은 `_philosophy/`에 둔다.

@@ -39,6 +39,7 @@ class WorkspaceHealthTests(unittest.TestCase):
         self.assertIn("docs audit", names)
         self.assertIn("naming audit", names)
         self.assertIn("privacy audit", names)
+        self.assertIn("philosophy traceability", names)
         self.assertIn("agent-platform tests", names)
         self.assertIn("presentation-agent tests", names)
         self.assertIn("presentation-agent browser validation", names)

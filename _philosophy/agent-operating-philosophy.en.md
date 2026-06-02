@@ -76,6 +76,9 @@ Running the full loop for everything makes the platform heavy. Accumulating fast
 
 ## Execution Structures Connected To This Philosophy
 
+- Philosophy principle traceability: `agent-platform/configs/governance/philosophy-traceability.json`
+- Philosophy alignment validation: `PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-trace configs/governance/philosophy-traceability.json`
+- Philosophy governance: `_docs/governance/philosophy-governance.en.md`
 - Search-backed planning: `_ops/workflows/55-research-insight-planning.md`
 - Web-first intake: `_ops/workflows/05-web-first-intake.md`
 - Memory bootstrap: `agent-platform/configs/memory/bootstrap-manifest.json`

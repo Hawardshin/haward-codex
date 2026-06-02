@@ -5,6 +5,8 @@
 대표 문서:
 
 - `capability-governance.md`
+- `philosophy-governance.ko.md`
+- `philosophy-governance.en.md`
 - `naming-governance.ko.md`
 - `naming-governance.en.md`
 - `repository-structure-governance.ko.md`
