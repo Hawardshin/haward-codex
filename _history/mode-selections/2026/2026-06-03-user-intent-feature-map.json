@@ -1,0 +1,24 @@
+{
+  "record_id": "2026-06-03-user-intent-feature-map",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-015",
+  "selected_mode": "research",
+  "reason": "The task synthesizes a broad set of history records into a feature map and roadmap candidates without changing runtime behavior.",
+  "required_targets": {
+    "web_search_record_targets": [
+      "_history/web-searches/2026/2026-06-03-user-intent-feature-map.ko.md"
+    ],
+    "source_provenance_targets": [
+      "_history/plans/2026/2026-06-03-user-intent-feature-map.ko.md"
+    ],
+    "plan_evidence_targets": [
+      "_history/plans/2026/2026-06-03-user-intent-feature-map.ko.md"
+    ],
+    "omission_check_targets": [
+      "_history/evaluations/2026/2026-06-03-user-intent-feature-map-omission-input.json"
+    ],
+    "timing_summary_targets": [
+      "_history/work-timings/2026/2026-06-03-user-intent-feature-map.json"
+    ]
+  }
+}

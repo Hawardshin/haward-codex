@@ -1,0 +1,92 @@
+{
+  "task": "Review user history intents and organize platform features.",
+  "work_mode": "research",
+  "expected_items": [
+    {
+      "item_id": "UIF-EXP-001",
+      "description": "Run web-first intake before local history review.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-user-intent-feature-map.ko.md"
+      ]
+    },
+    {
+      "item_id": "UIF-EXP-002",
+      "description": "Use large-scope decomposition rather than reading every file.",
+      "source": "_ops/workflows/76-large-scope-decomposition.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/plans/2026/2026-06-03-user-intent-feature-map.ko.md"
+      ]
+    },
+    {
+      "item_id": "UIF-EXP-003",
+      "description": "Review the user's history intents across available dated user-request summaries.",
+      "source": "User request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/user-requests/2026/2026-05-31.ko.md",
+        "_history/user-requests/2026/2026-06-01.ko.md",
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_history/user-requests/2026/2026-06-03.ko.md"
+      ]
+    },
+    {
+      "item_id": "UIF-EXP-004",
+      "description": "Produce a feature organization that separates implemented capabilities from next feature candidates.",
+      "source": "User request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/intent-feature-maps/2026/2026-06-03-user-intent-feature-map.ko.md"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "_history/intent-feature-maps/2026/2026-06-03-user-intent-feature-map.ko.md",
+      "purpose": "Korean user intent feature map",
+      "required": true
+    },
+    {
+      "path": "_history/intent-feature-maps/2026/2026-06-03-user-intent-feature-map.en.md",
+      "purpose": "English companion summary",
+      "required": true
+    },
+    {
+      "path": "_history/plans/2026/2026-06-03-user-intent-feature-map.ko.md",
+      "purpose": "Large-scope decomposition and plan evidence",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "UIF-AC-001",
+      "description": "Feature map names input scope, exclusions, and limits.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "_history/intent-feature-maps/2026/2026-06-03-user-intent-feature-map.ko.md"
+      ]
+    },
+    {
+      "check_id": "UIF-AC-002",
+      "description": "Feature map includes user intent, implemented features, and next candidates.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "_history/intent-feature-maps/2026/2026-06-03-user-intent-feature-map.ko.md"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "This synthesis uses request summaries and representative samples; it does not claim every repository file was opened."
+  ],
+  "notes": [
+    "_private was not inspected."
+  ]
+}

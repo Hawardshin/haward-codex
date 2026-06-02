@@ -1,0 +1,42 @@
+{
+  "record_id": "2026-06-03-user-intent-feature-map",
+  "date": "2026-06-03",
+  "task": "Synthesize user history intents into a feature map.",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "elapsed_minutes_estimate": 5,
+      "notes": "Checked product backlog and roadmap organization references."
+    },
+    {
+      "phase": "memory_and_scope",
+      "elapsed_minutes_estimate": 10,
+      "notes": "Ran memory bootstrap and selected large-scope decomposition."
+    },
+    {
+      "phase": "history_review",
+      "elapsed_minutes_estimate": 25,
+      "notes": "Reviewed user request summaries, work summary headings, and representative registries/specs."
+    },
+    {
+      "phase": "synthesis",
+      "elapsed_minutes_estimate": 20,
+      "notes": "Mapped 155 structured intents into 12 feature themes and Now/Next/Later candidates."
+    },
+    {
+      "phase": "validation_and_closeout",
+      "elapsed_minutes_estimate": 15,
+      "notes": "Prepared omission, grounding, and evaluation records."
+    }
+  ],
+  "bottleneck_notes": [
+    "History is large enough that request summary quality is now a product dependency.",
+    "The next useful improvement is surfacing this intent-feature map in Workspace Monitor."
+  ],
+  "promotion_candidates": [
+    "Intent Feature Map UI",
+    "Capability Candidate Inbox",
+    "Installed Skill Inventory"
+  ]
+}
