@@ -1,0 +1,29 @@
+{
+  "record_id": "2026-06-03-intent-feature-map-ui",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-016",
+  "selected_mode": "standard",
+  "reason": "The task implements a meaningful Workspace Monitor feature from the prior user-intent synthesis, updates shared view-mode configuration, and requires tests, build validation, and customer snapshot redaction checks.",
+  "required_targets": {
+    "web_search_record_targets": [
+      "_history/web-searches/2026/2026-06-03-intent-feature-map-ui.ko.md"
+    ],
+    "requirements_targets": [
+      "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+      "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md"
+    ],
+    "spec_targets": [
+      "workspace-monitor/specs/2026-06-03-intent-feature-map-ui/"
+    ],
+    "omission_check_targets": [
+      "_history/evaluations/2026/2026-06-03-intent-feature-map-ui-omission-input.json"
+    ],
+    "resource_check_targets": [
+      "_history/evaluations/2026/2026-06-03-intent-feature-map-ui-resource-input.json"
+    ],
+    "timing_summary_targets": [
+      "_history/work-timings/2026/2026-06-03-intent-feature-map-ui.json"
+    ]
+  }
+}
+

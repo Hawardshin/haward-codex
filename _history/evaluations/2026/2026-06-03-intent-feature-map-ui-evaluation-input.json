@@ -1,0 +1,58 @@
+{
+  "request_id": "UR-2026-06-03-016",
+  "work_mode": "standard",
+  "result_summary": "Implemented Intent Feature Map UI in Workspace Monitor with snapshot extraction, types, Overview panel, dedicated tab, view-mode integration, customer redaction, requirements/spec/history records, and validation.",
+  "changed_artifact_groups": [
+    "workspace-monitor collector/types/UI/CSS/tests",
+    "workspace-monitor requirements and specs",
+    "agent-platform view-mode registry",
+    "_history operating records"
+  ],
+  "verification": [
+    "npm --prefix workspace-monitor test",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/access/view-mode-registry.json",
+    "npm --prefix workspace-monitor run collect",
+    "npm --prefix workspace-monitor run check",
+    "npm --prefix workspace-monitor run build",
+    "npm --prefix workspace-monitor run build:customer",
+    "npm --prefix workspace-monitor run perf:budget",
+    "curl http://127.0.0.1:3091/",
+    "curl http://127.0.0.1:3091/workspace-snapshot.json"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-03-intent-feature-map-ui.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-intent-feature-map-ui.ko.md"
+  ],
+  "requirements_targets": [
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md"
+  ],
+  "spec_targets": [
+    "workspace-monitor/specs/2026-06-03-intent-feature-map-ui/"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-intent-feature-map-ui-omission-input.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-03-intent-feature-map-ui-resource-input.json"
+  ],
+  "grounding_check_targets": [
+    "_history/evaluations/2026/2026-06-03-intent-feature-map-ui-grounding.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-intent-feature-map-ui.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-intent-feature-map-ui.json"
+  ],
+  "installation_occurred": false,
+  "cli_pipeline_occurred": false
+}
+

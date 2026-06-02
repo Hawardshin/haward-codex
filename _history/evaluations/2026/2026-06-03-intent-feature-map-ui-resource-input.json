@@ -1,0 +1,22 @@
+{
+  "record_id": "2026-06-03-intent-feature-map-ui-resource",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-016",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    {
+      "resource": "next_dev_server",
+      "details": "Started workspace-monitor dev server on 127.0.0.1:3091 for HTTP smoke.",
+      "cleanup": "Sent Ctrl-C to the exec session after curl checks.",
+      "post_check": "The dev server session exited with code 0."
+    },
+    {
+      "resource": "generated_snapshots",
+      "details": "Ran developer collect, customer build, and then developer collect again.",
+      "cleanup": "Restored developer public snapshot after customer snapshot validation.",
+      "post_check": "public snapshot repoRootName=codex, themes=12, now=4."
+    }
+  ],
+  "leaks_detected": false
+}
+

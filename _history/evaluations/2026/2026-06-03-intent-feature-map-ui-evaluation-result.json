@@ -1,0 +1,49 @@
+{
+  "status": "ready_to_close",
+  "requires_rework": false,
+  "work_mode": "standard",
+  "required_target_policy": {
+    "required_targets": [
+      "mode_selection_record_targets",
+      "web_search_record_targets",
+      "requirements_targets",
+      "spec_targets",
+      "omission_check_targets",
+      "resource_check_targets",
+      "grounding_check_targets",
+      "request_trace_targets",
+      "work_summary_targets",
+      "timing_summary_targets"
+    ],
+    "deferred_targets_allowed": []
+  },
+  "alignment_check": {
+    "initial_instruction_present": true,
+    "result_summary_present": true,
+    "work_mode": "standard",
+    "verification_count": 9,
+    "mode_selection_record_targets_count": 1,
+    "web_search_record_targets_count": 1,
+    "requirements_targets_count": 2,
+    "spec_targets_count": 1,
+    "omission_check_targets_count": 1,
+    "resource_risk_occurred": true,
+    "resource_check_targets_count": 1,
+    "grounding_check_targets_count": 1,
+    "request_trace_targets_count": 1,
+    "work_summary_targets_count": 2,
+    "timing_summary_targets_count": 1,
+    "installation_occurred": false,
+    "cli_pipeline_occurred": false
+  },
+  "gaps": [],
+  "improvements": [
+    "Create a single workspace-monitor validation script that runs developer build, customer redaction assertion, perf budget, HTTP smoke, and restores developer snapshot.",
+    "Add screenshot validation when Browser MCP tools are available in the session."
+  ],
+  "follow_up_actions": [
+    "Consider implementing persistent workspace chooser next.",
+    "Consider building the capability candidate inbox from the feature-map Now/Next backlog."
+  ]
+}
+

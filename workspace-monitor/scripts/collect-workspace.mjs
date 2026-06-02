@@ -33,6 +33,7 @@ const SOURCE_EXCLUDED_SEGMENTS = ["/_private/", "/outputs/", "/src/generated/", 
 const HISTORY_CATEGORIES = new Set([
   "daily-history",
   "evaluation",
+  "intent-feature-map",
   "plan",
   "request-trace",
   "user-request",
@@ -45,6 +46,7 @@ const DOCUMENT_SOURCES = [
   { category: "philosophy", root: "_philosophy" },
   { category: "work-summary", root: "_history/work-summaries" },
   { category: "user-request", root: "_history/user-requests" },
+  { category: "intent-feature-map", root: "_history/intent-feature-maps" },
   { category: "request-trace", root: "_history/request-traces" },
   { category: "web-search", root: "_history/web-searches" },
   { category: "work-timing", root: "_history/work-timings" },
@@ -112,6 +114,7 @@ export function buildSnapshot(repoRoot) {
   const modeFunctionCatalog = collectModeFunctionCatalog(repoRoot, viewModeCatalog, languageModeCatalog);
   const claudeCodeDesignTransfer = collectClaudeCodeDesignTransfer(repoRoot);
   const philosophyFeatureExtraction = collectPhilosophyFeatureExtraction(repoRoot);
+  const intentFeatureMap = collectIntentFeatureMap(repoRoot);
   const sourceFiles = collectSourceFiles(repoRoot, projects);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
   const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
@@ -150,6 +153,10 @@ export function buildSnapshot(repoRoot) {
       modeOptions: modeFunctionCatalog.summary.totalOptions,
       claudeCodeDesignPatterns: claudeCodeDesignTransfer.summary.totalPatterns,
       philosophyFeatureCandidates: philosophyFeatureExtraction.summary.totalCandidates,
+      intentFeatureThemes: intentFeatureMap.summary.totalThemes,
+      intentFeatureNow: intentFeatureMap.summary.now,
+      intentFeatureNext: intentFeatureMap.summary.next,
+      intentFeatureLater: intentFeatureMap.summary.later,
       sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
     },
@@ -169,6 +176,7 @@ export function buildSnapshot(repoRoot) {
     modeFunctionCatalog,
     claudeCodeDesignTransfer,
     philosophyFeatureExtraction,
+    intentFeatureMap,
     categories,
     publicReview: {
       status: "review_required_before_public_deploy",
@@ -207,6 +215,10 @@ export function buildCustomerSnapshot(snapshot) {
       modeOptions: 0,
       claudeCodeDesignPatterns: 0,
       philosophyFeatureCandidates: 0,
+      intentFeatureThemes: 0,
+      intentFeatureNow: 0,
+      intentFeatureNext: 0,
+      intentFeatureLater: 0,
       sourceFiles: 0,
       rootFolders: 0
     },
@@ -269,6 +281,7 @@ export function buildCustomerSnapshot(snapshot) {
       qualityGates: [],
       candidates: []
     },
+    intentFeatureMap: emptyIntentFeatureMap(),
     categories: [],
     publicReview: {
       status: "customer_snapshot_sanitized",
@@ -279,6 +292,122 @@ export function buildCustomerSnapshot(snapshot) {
       ]
     }
   };
+}
+
+export function collectIntentFeatureMap(repoRoot) {
+  const sourcePath = "_history/intent-feature-maps/2026/2026-06-03-user-intent-feature-map.ko.md";
+  const absolutePath = path.join(repoRoot, sourcePath);
+  if (!fs.existsSync(absolutePath)) {
+    return emptyIntentFeatureMap(sourcePath);
+  }
+
+  const content = fs.readFileSync(absolutePath, "utf8");
+  const summarySection = extractHeadingSection(content, "## 요약 결론");
+  const themeRows = parseMarkdownTableRows(summarySection);
+  const themes = themeRows
+    .filter((row) => row.length >= 4 && /^\d+\./.test(row[0]))
+    .map((row) => {
+      const axis = stripMarkdown(row[0]);
+      return {
+        id: slugify(axis),
+        label: axis.replace(/^\d+\.\s*/, ""),
+        intent: stripMarkdown(row[1]),
+        implemented: stripMarkdown(row[2]),
+        nextCandidate: stripMarkdown(row[3])
+      };
+    });
+
+  const roadmap = {
+    now: parseRoadmapRows(extractHeadingSection(content, "### Now")),
+    next: parseRoadmapRows(extractHeadingSection(content, "### Next")),
+    later: parseRoadmapRows(extractHeadingSection(content, "### Later"))
+  };
+  const sourceLimits = extractBulletItems(extractHeadingSection(content, "## 출처와 한계"));
+  const totalIntents = Number(content.match(/총 구조화 의도:\s*(\d+)개/)?.[1] || 0);
+
+  return {
+    sourcePath,
+    summary: {
+      totalIntents,
+      totalThemes: themes.length,
+      now: roadmap.now.length,
+      next: roadmap.next.length,
+      later: roadmap.later.length
+    },
+    themes,
+    roadmap,
+    sourceLimits
+  };
+}
+
+function emptyIntentFeatureMap(sourcePath = "") {
+  return {
+    sourcePath,
+    summary: {
+      totalIntents: 0,
+      totalThemes: 0,
+      now: 0,
+      next: 0,
+      later: 0
+    },
+    themes: [],
+    roadmap: {
+      now: [],
+      next: [],
+      later: []
+    },
+    sourceLimits: []
+  };
+}
+
+function parseRoadmapRows(section) {
+  return parseMarkdownTableRows(section)
+    .filter((row) => row.length >= 3 && row[0] !== "기능 후보")
+    .map((row) => ({
+      feature: stripMarkdown(row[0]),
+      reason: stripMarkdown(row[1]),
+      dependency: stripMarkdown(row[2])
+    }))
+    .filter((row) => row.feature);
+}
+
+function parseMarkdownTableRows(section) {
+  const rows = [];
+  for (const line of section.split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!/^\|.+\|\s*$/.test(trimmed)) {
+      continue;
+    }
+    const cells = trimmed
+      .split("|")
+      .slice(1, -1)
+      .map((cell) => cell.trim());
+    if (cells.every((cell) => /^:?-{2,}:?$/.test(cell))) {
+      continue;
+    }
+    rows.push(cells);
+  }
+  return rows.slice(1);
+}
+
+function extractHeadingSection(content, heading) {
+  const start = content.indexOf(heading);
+  if (start === -1) {
+    return "";
+  }
+  const headingLevel = heading.match(/^#+/)?.[0].length || 1;
+  const afterHeading = content.slice(start + heading.length);
+  const nextHeadingPattern = new RegExp(`\\n#{1,${headingLevel}}\\s+`);
+  const nextMatch = afterHeading.search(nextHeadingPattern);
+  return nextMatch === -1 ? afterHeading : afterHeading.slice(0, nextMatch);
+}
+
+function extractBulletItems(section) {
+  return section
+    .split(/\r?\n/)
+    .map((line) => line.trim().match(/^[-*]\s+(.+)$/)?.[1] || "")
+    .filter(Boolean)
+    .map((line) => stripMarkdown(line));
 }
 
 export function collectClaudeCodeDesignTransfer(repoRoot) {
@@ -711,6 +840,7 @@ function historySignalType(category) {
   const map = {
     "daily-history": "history",
     evaluation: "evaluation",
+    "intent-feature-map": "roadmap",
     plan: "plan",
     "request-trace": "trace",
     "user-request": "intake",
@@ -725,6 +855,7 @@ function historySignalLane(category) {
   const map = {
     evaluation: "verification",
     "web-search": "evidence",
+    "intent-feature-map": "planning",
     "work-timing": "monitoring",
     "request-trace": "traceability",
     "user-request": "intake",
@@ -913,6 +1044,12 @@ const MONITOR_SECTION_OPTIONS = [
     label: "History",
     description: "Dated work history, unified ops events, and category density.",
     location: "Top section tabs / History"
+  },
+  {
+    id: "intent",
+    label: "Intent Map",
+    description: "User-intent synthesis, implemented capability themes, and Now/Next/Later product candidates.",
+    location: "Top section tabs / Intent Map"
   },
   {
     id: "structure",

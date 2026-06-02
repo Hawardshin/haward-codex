@@ -34,6 +34,7 @@ type SectionId =
   | "desktop"
   | "projects"
   | "history"
+  | "intent"
   | "structure"
   | "documents"
   | "source"
@@ -51,6 +52,7 @@ const sections: Section[] = [
   { id: "desktop", label: "Desktop", icon: Network },
   { id: "projects", label: "Projects", icon: FolderKanban },
   { id: "history", label: "History", icon: History },
+  { id: "intent", label: "Intent Map", icon: GitBranch },
   { id: "structure", label: "Structure", icon: Layers },
   { id: "documents", label: "Documents", icon: BookOpenText },
   { id: "source", label: "Source", icon: Code2 },
@@ -65,6 +67,7 @@ type UnifiedOps = NonNullable<WorkspaceSnapshot["unifiedOps"]>;
 type ModeFunctionCatalog = NonNullable<WorkspaceSnapshot["modeFunctionCatalog"]>;
 type ClaudeCodeDesignTransfer = NonNullable<WorkspaceSnapshot["claudeCodeDesignTransfer"]>;
 type PhilosophyFeatureExtraction = NonNullable<WorkspaceSnapshot["philosophyFeatureExtraction"]>;
+type IntentFeatureMap = NonNullable<WorkspaceSnapshot["intentFeatureMap"]>;
 
 const fallbackViewModes: MonitorViewMode[] = [
   {
@@ -79,7 +82,18 @@ const fallbackViewModes: MonitorViewMode[] = [
     id: "developer",
     label: "Developer View",
     intent: "Implementation, requirements, specs, agents, and verification surfaces.",
-    allowedSections: ["overview", "desktop", "projects", "history", "structure", "documents", "source", "requirements", "agents"],
+    allowedSections: [
+      "overview",
+      "desktop",
+      "projects",
+      "history",
+      "intent",
+      "structure",
+      "documents",
+      "source",
+      "requirements",
+      "agents"
+    ],
     visibilityRules: {},
     securityNotes: []
   },
@@ -87,7 +101,18 @@ const fallbackViewModes: MonitorViewMode[] = [
     id: "superadmin_developer",
     label: "Super Admin Dev",
     intent: "Full owner/operator view for building the platform itself.",
-    allowedSections: ["overview", "desktop", "projects", "history", "structure", "documents", "source", "requirements", "agents"],
+    allowedSections: [
+      "overview",
+      "desktop",
+      "projects",
+      "history",
+      "intent",
+      "structure",
+      "documents",
+      "source",
+      "requirements",
+      "agents"
+    ],
     visibilityRules: {},
     securityNotes: []
   }
@@ -200,6 +225,24 @@ const emptyPhilosophyFeatureExtraction: PhilosophyFeatureExtraction = {
   flows: [],
   qualityGates: [],
   candidates: []
+};
+
+const emptyIntentFeatureMap: IntentFeatureMap = {
+  sourcePath: "",
+  summary: {
+    totalIntents: 0,
+    totalThemes: 0,
+    now: 0,
+    next: 0,
+    later: 0
+  },
+  themes: [],
+  roadmap: {
+    now: [],
+    next: [],
+    later: []
+  },
+  sourceLimits: []
 };
 
 const sectionIds = new Set<SectionId>(sections.map((section) => section.id));
@@ -689,6 +732,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const modeFunctionCatalog = snapshot.modeFunctionCatalog ?? emptyModeFunctionCatalog;
   const claudeCodeDesignTransfer = snapshot.claudeCodeDesignTransfer ?? emptyClaudeCodeDesignTransfer;
   const philosophyFeatureExtraction = snapshot.philosophyFeatureExtraction ?? emptyPhilosophyFeatureExtraction;
+  const intentFeatureMap = snapshot.intentFeatureMap ?? emptyIntentFeatureMap;
   const [selectedModeFunctionGroupId, setSelectedModeFunctionGroupId] = useState(
     modeFunctionCatalog.groups[0]?.id || "view_mode"
   );
@@ -770,7 +814,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   }, [category, normalizedQuery, viewFilteredDocuments]);
 
   const recentHistory = viewFilteredDocuments
-    .filter((document) => ["work-summary", "request-trace", "user-request", "evaluation"].includes(document.category))
+    .filter((document) =>
+      ["work-summary", "intent-feature-map", "request-trace", "user-request", "evaluation"].includes(document.category)
+    )
     .slice(0, 8);
   const recentDocuments = filteredDocuments.slice(0, section === "documents" ? 30 : 10);
   const visibleHistoryDays = useMemo(() => {
@@ -979,6 +1025,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     desktop: "Runtime",
     projects: snapshot.stats.projects.toLocaleString("ko-KR"),
     history: visibleHistoryDays.length.toLocaleString("ko-KR"),
+    intent: intentFeatureMap.summary.totalThemes.toLocaleString("ko-KR"),
     structure: snapshot.stats.rootFolders.toLocaleString("ko-KR"),
     documents: viewFilteredDocuments.length.toLocaleString("ko-KR"),
     source: visibleSourceFiles.length.toLocaleString("ko-KR"),
@@ -1190,6 +1237,12 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           <PhilosophyFeatureFactoryPanel
             extraction={philosophyFeatureExtraction}
             onOpenAgents={() => setSection("agents")}
+            onOpenDocuments={() => setSection("documents")}
+          />
+
+          <IntentFeatureMapPanel
+            map={intentFeatureMap}
+            onOpenIntent={() => setSection("intent")}
             onOpenDocuments={() => setSection("documents")}
           />
 
@@ -1408,6 +1461,20 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             <HistoryTimeline days={filteredHistoryDays.slice(0, 36)} />
           </section>
         </section>
+      )}
+
+      {section === "intent" && (
+        <div className="content-grid">
+          <IntentFeatureMapPanel
+            map={intentFeatureMap}
+            full
+            onOpenIntent={() => setSection("intent")}
+            onOpenDocuments={() => {
+              setSection("documents");
+              setCategory("intent-feature-map");
+            }}
+          />
+        </div>
       )}
 
       {section === "structure" && (
@@ -1970,6 +2037,127 @@ function PhilosophyFeatureFactoryPanel({
         <div className="philosophy-command-strip">
           <FileSearch size={16} aria-hidden="true" />
           <span>{extraction.defaultCommand}</span>
+        </div>
+      )}
+    </section>
+  );
+}
+
+function IntentFeatureMapPanel({
+  map,
+  full = false,
+  onOpenIntent,
+  onOpenDocuments
+}: {
+  map: IntentFeatureMap;
+  full?: boolean;
+  onOpenIntent: () => void;
+  onOpenDocuments: () => void;
+}) {
+  const visibleThemes = full ? map.themes : map.themes.slice(0, 6);
+  const roadmapStages = [
+    { id: "now", label: "Now", items: map.roadmap.now, tone: "green" },
+    { id: "next", label: "Next", items: map.roadmap.next, tone: "blue" },
+    { id: "later", label: "Later", items: map.roadmap.later, tone: "slate" }
+  ] as const;
+
+  return (
+    <section className="panel wide intent-map-panel">
+      <div className="panel-heading">
+        <div>
+          <p className="eyebrow">Intent Feature Map</p>
+          <h2>사용자 의도에서 기능 우선순위로</h2>
+        </div>
+        <div className="desktop-actions">
+          <button type="button" onClick={onOpenIntent}>
+            <GitBranch size={16} aria-hidden="true" />
+            <span>Map</span>
+          </button>
+          <button type="button" onClick={onOpenDocuments}>
+            <BookOpenText size={16} aria-hidden="true" />
+            <span>Source</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="intent-map-hero">
+        <article>
+          <span>structured intents</span>
+          <strong>{map.summary.totalIntents.toLocaleString("ko-KR")}</strong>
+          <p>{map.sourcePath || "customer snapshot hides internal intent history"}</p>
+        </article>
+        <article>
+          <span>feature themes</span>
+          <strong>{map.summary.totalThemes.toLocaleString("ko-KR")}</strong>
+          <p>히스토리 의도를 제품 기능 축으로 묶습니다.</p>
+        </article>
+        <article>
+          <span>now candidates</span>
+          <strong>{map.summary.now.toLocaleString("ko-KR")}</strong>
+          <p>다음 구현 결정을 바로 돕는 후보입니다.</p>
+        </article>
+        <article>
+          <span>next/later</span>
+          <strong>{(map.summary.next + map.summary.later).toLocaleString("ko-KR")}</strong>
+          <p>
+            {map.summary.next.toLocaleString("ko-KR")} next / {map.summary.later.toLocaleString("ko-KR")} later
+          </p>
+        </article>
+      </div>
+
+      <div className="intent-map-layout">
+        <div className="intent-theme-list" aria-label="Intent-derived feature themes">
+          {visibleThemes.length ? (
+            visibleThemes.map((theme) => (
+              <article key={theme.id}>
+                <header>
+                  <GitBranch size={16} aria-hidden="true" />
+                  <strong>{theme.label}</strong>
+                </header>
+                <p>{theme.intent}</p>
+                <dl>
+                  <dt>Implemented</dt>
+                  <dd>{theme.implemented}</dd>
+                  <dt>Next</dt>
+                  <dd>{theme.nextCandidate}</dd>
+                </dl>
+              </article>
+            ))
+          ) : (
+            <p className="empty-state">사용자 의도 기반 기능 지도가 아직 생성되지 않았습니다.</p>
+          )}
+        </div>
+
+        <div className="intent-roadmap-grid" aria-label="Intent roadmap">
+          {roadmapStages.map((stage) => (
+            <article key={stage.id} className={`intent-roadmap-column roadmap-${stage.tone}`}>
+              <header>
+                <span>{stage.label}</span>
+                <strong>{stage.items.length.toLocaleString("ko-KR")}</strong>
+              </header>
+              <div>
+                {stage.items.length ? (
+                  stage.items.map((item) => (
+                    <section key={`${stage.id}-${item.feature}`}>
+                      <h3>{item.feature}</h3>
+                      <p>{item.reason}</p>
+                      <small>{item.dependency}</small>
+                    </section>
+                  ))
+                ) : (
+                  <p className="empty-state">후보 없음</p>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      {full && map.sourceLimits.length > 0 && (
+        <div className="intent-source-limits">
+          {map.sourceLimits.map((limit) => (
+            <span key={limit}>{limit}</span>
+          ))}
         </div>
       )}
     </section>

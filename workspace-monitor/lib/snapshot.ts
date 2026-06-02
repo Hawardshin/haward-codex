@@ -18,6 +18,10 @@ export type WorkspaceStats = {
   modeOptions?: number;
   claudeCodeDesignPatterns?: number;
   philosophyFeatureCandidates?: number;
+  intentFeatureThemes?: number;
+  intentFeatureNow?: number;
+  intentFeatureNext?: number;
+  intentFeatureLater?: number;
   sourceFiles?: number;
   rootFolders: number;
 };
@@ -400,6 +404,42 @@ export type WorkspacePhilosophyFeatureExtraction = {
   }>;
 };
 
+export type WorkspaceIntentFeatureMap = {
+  sourcePath: string;
+  summary: {
+    totalIntents: number;
+    totalThemes: number;
+    now: number;
+    next: number;
+    later: number;
+  };
+  themes: Array<{
+    id: string;
+    label: string;
+    intent: string;
+    implemented: string;
+    nextCandidate: string;
+  }>;
+  roadmap: {
+    now: Array<{
+      feature: string;
+      reason: string;
+      dependency: string;
+    }>;
+    next: Array<{
+      feature: string;
+      reason: string;
+      dependency: string;
+    }>;
+    later: Array<{
+      feature: string;
+      reason: string;
+      dependency: string;
+    }>;
+  };
+  sourceLimits: string[];
+};
+
 export type WorkspaceSnapshot = {
   schemaVersion: string;
   generatedAt: string;
@@ -427,6 +467,7 @@ export type WorkspaceSnapshot = {
   modeFunctionCatalog?: WorkspaceModeFunctionCatalog;
   claudeCodeDesignTransfer?: WorkspaceClaudeCodeDesignTransfer;
   philosophyFeatureExtraction?: WorkspacePhilosophyFeatureExtraction;
+  intentFeatureMap?: WorkspaceIntentFeatureMap;
   categories: string[];
   publicReview: {
     status: string;
@@ -464,6 +505,7 @@ export function categoryLabel(category: string) {
     coordination: "조율",
     "daily-history": "일일 기록",
     evaluation: "평가",
+    "intent-feature-map": "의도 기능 지도",
     philosophy: "철학",
     plan: "계획",
     "project-doc": "프로젝트 문서",

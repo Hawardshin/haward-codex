@@ -1,0 +1,38 @@
+{
+  "record_id": "2026-06-03-intent-feature-map-ui",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-016",
+  "phases": [
+    {
+      "phase": "web_first_intake_and_memory_bootstrap",
+      "approx_minutes": 3,
+      "notes": "Searched roadmap and dashboard references, then ran memory bootstrap."
+    },
+    {
+      "phase": "source_inspection",
+      "approx_minutes": 8,
+      "notes": "Inspected collector, snapshot types, MonitorShell, CSS, tests, requirements, and prior intent map."
+    },
+    {
+      "phase": "implementation",
+      "approx_minutes": 22,
+      "notes": "Added intentFeatureMap collector/type/UI/CSS, view-mode updates, requirements, specs, and tests."
+    },
+    {
+      "phase": "validation",
+      "approx_minutes": 14,
+      "notes": "Ran tests, config contract, collect, typecheck, build, customer build, perf budget, and HTTP smoke."
+    },
+    {
+      "phase": "history_and_evaluation_records",
+      "approx_minutes": 10,
+      "notes": "Recorded mode selection, web search, plan, trace, omission/resource/evaluation, and work summaries."
+    }
+  ],
+  "summary": {
+    "approx_total_minutes": 57,
+    "bottleneck": "Coordinating generated snapshot state after customer build and restoring developer snapshot.",
+    "automation_candidate": "A validation script that runs developer build, customer snapshot assertions, perf budget, and then restores developer snapshot."
+  }
+}
+

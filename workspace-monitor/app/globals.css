@@ -51,6 +51,9 @@ button,
 .history-latest,
 .adapter-card,
 .terminal-report-list article,
+.intent-map-hero article,
+.intent-theme-list article,
+.intent-roadmap-column,
 .source-list button,
 .timeline-docs article,
 .agent-map article,
@@ -451,6 +454,7 @@ h3 {
 .mode-switchboard-panel,
 .claude-transfer-panel,
 .philosophy-feature-panel,
+.intent-map-panel,
 .action-evidence-panel {
   grid-column: 1 / -1;
 }
@@ -644,6 +648,12 @@ h3 {
 .philosophy-feature-panel {
   background:
     linear-gradient(180deg, rgba(22, 115, 91, 0.06), rgba(132, 84, 180, 0.04)),
+    var(--surface);
+}
+
+.intent-map-panel {
+  background:
+    linear-gradient(180deg, rgba(184, 91, 125, 0.055), rgba(47, 103, 177, 0.045)),
     var(--surface);
 }
 
@@ -882,6 +892,184 @@ h3 {
 .philosophy-command-strip svg {
   flex: 0 0 auto;
   color: var(--blue);
+}
+
+.intent-map-hero {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.intent-map-hero article,
+.intent-theme-list article,
+.intent-roadmap-column,
+.intent-source-limits {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.86);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.intent-map-hero span,
+.intent-theme-list dt,
+.intent-roadmap-column header span,
+.intent-source-limits span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.intent-map-hero strong {
+  display: block;
+  margin: 5px 0;
+  color: var(--text);
+  font-size: 24px;
+  line-height: 1.1;
+}
+
+.intent-map-hero p,
+.intent-theme-list p,
+.intent-theme-list dd,
+.intent-roadmap-column p,
+.intent-roadmap-column small {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.intent-map-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.05fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.intent-theme-list,
+.intent-roadmap-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.intent-theme-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.intent-theme-list article {
+  display: grid;
+  gap: 8px;
+}
+
+.intent-theme-list header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.intent-theme-list header svg {
+  color: var(--rose);
+}
+
+.intent-theme-list header strong,
+.intent-roadmap-column h3 {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.intent-theme-list dl {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 6px 8px;
+  margin: 0;
+}
+
+.intent-theme-list dt,
+.intent-theme-list dd {
+  margin: 0;
+}
+
+.intent-roadmap-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.intent-roadmap-column {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.intent-roadmap-column header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.intent-roadmap-column header strong {
+  display: inline-flex;
+  min-width: 30px;
+  min-height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text);
+  font-size: 14px;
+}
+
+.intent-roadmap-column > div {
+  display: grid;
+  gap: 10px;
+}
+
+.intent-roadmap-column section {
+  display: grid;
+  gap: 5px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.intent-roadmap-column section:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.roadmap-green header strong {
+  background: var(--mint-soft);
+  color: var(--green);
+}
+
+.roadmap-blue header strong {
+  background: #e7effb;
+  color: var(--blue);
+}
+
+.roadmap-slate header strong {
+  background: var(--surface-muted);
+  color: var(--slate);
+}
+
+.intent-source-limits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.intent-source-limits span {
+  display: inline-flex;
+  width: fit-content;
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  padding: 5px 8px;
+  overflow-wrap: anywhere;
 }
 
 .mode-switchboard-summary {
@@ -4010,6 +4198,9 @@ h3 {
   .terminal-report-list article:hover,
   .claude-transfer-summary:hover,
   .transfer-pattern-grid article:hover,
+  .intent-map-hero article:hover,
+  .intent-theme-list article:hover,
+  .intent-roadmap-column:hover,
   .philosophy-feature-hero article:hover,
   .philosophy-flow-list article:hover,
   .philosophy-candidate-grid article:hover,
@@ -4060,7 +4251,10 @@ h3 {
   .evidence-grid,
   .transfer-pattern-grid,
   .philosophy-feature-hero,
-  .philosophy-candidate-grid {
+  .philosophy-candidate-grid,
+  .intent-map-hero,
+  .intent-theme-list,
+  .intent-roadmap-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -4085,6 +4279,7 @@ h3 {
   .attention-layout,
   .claude-transfer-layout,
   .philosophy-feature-layout,
+  .intent-map-layout,
   .mode-switchboard-layout {
     grid-template-columns: 1fr;
   }
@@ -4176,6 +4371,10 @@ h3 {
   .philosophy-feature-hero,
   .philosophy-feature-layout,
   .philosophy-candidate-grid,
+  .intent-map-hero,
+  .intent-map-layout,
+  .intent-theme-list,
+  .intent-roadmap-grid,
   .terminal-report-list,
   .desktop-health-strip,
   .decision-summary-strip,

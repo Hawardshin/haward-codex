@@ -11,6 +11,7 @@ import {
   buildUnifiedOps,
   collectAgentCatalog,
   collectClaudeCodeDesignTransfer,
+  collectIntentFeatureMap,
   collectPhilosophyFeatureExtraction,
   collectLanguageModeCatalog,
   collectModeFunctionCatalog,
@@ -230,6 +231,11 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       modeGroups: 1,
       modeOptions: 1,
       claudeCodeDesignPatterns: 1,
+      philosophyFeatureCandidates: 1,
+      intentFeatureThemes: 1,
+      intentFeatureNow: 1,
+      intentFeatureNext: 1,
+      intentFeatureLater: 1,
       sourceFiles: 1,
       rootFolders: 1
     },
@@ -257,13 +263,68 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.stats.sourceFiles, 0);
   assert.equal(customer.stats.documents, 0);
   assert.equal(customer.stats.philosophyFeatureCandidates, 0);
+  assert.equal(customer.stats.intentFeatureThemes, 0);
   assert.equal(customer.sourceFiles.length, 0);
   assert.equal(customer.documents.length, 0);
   assert.equal(customer.philosophyFeatureExtraction.candidates.length, 0);
+  assert.equal(customer.intentFeatureMap.themes.length, 0);
+  assert.equal(customer.intentFeatureMap.roadmap.now.length, 0);
   assert.equal(customer.historyDays.length, 0);
   assert.equal(customer.projects.length, 0);
   assert.equal(customer.publicReview.status, "customer_snapshot_sanitized");
   assert.equal(customer.viewModeCatalog.defaultMode, "user");
+});
+
+test("collectIntentFeatureMap reads themes and roadmap from history synthesis", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-intent-map-test-"));
+  fs.mkdirSync(path.join(root, "_history", "intent-feature-maps", "2026"), { recursive: true });
+  fs.writeFileSync(
+    path.join(root, "_history", "intent-feature-maps", "2026", "2026-06-03-user-intent-feature-map.ko.md"),
+    [
+      "# 사용자 의도 기반 기능 지도",
+      "",
+      "- 총 구조화 의도: 155개",
+      "",
+      "## 요약 결론",
+      "",
+      "| 축 | 사용자 의도 | 이미 구현된 핵심 기능 | 다음 기능 후보 |",
+      "| --- | --- | --- | --- |",
+      "| 1. 플랫폼 정체성과 운영 루프 | 의도에서 기능을 만든다. | 요구사항과 스펙 | Intent cockpit |",
+      "",
+      "## 제품 관점의 남은 큰 기능",
+      "",
+      "### Now",
+      "",
+      "| 기능 후보 | 이유 | 의존성 |",
+      "| --- | --- | --- |",
+      "| Intent Feature Map UI | 우선순위 판단이 쉬워진다. | Workspace Monitor snapshot 확장 |",
+      "",
+      "### Next",
+      "",
+      "| 기능 후보 | 이유 | 의존성 |",
+      "| --- | --- | --- |",
+      "| Data Quality Dashboard | 축적 품질을 측정한다. | history records |",
+      "",
+      "### Later",
+      "",
+      "| 기능 후보 | 이유 | 의존성 |",
+      "| --- | --- | --- |",
+      "| Signed Updater Channel | 배포 rollback이 필요하다. | signing key policy |",
+      "",
+      "## 출처와 한계",
+      "",
+      "- `_history/user-requests`를 기반으로 한 synthesis다."
+    ].join("\n")
+  );
+
+  const intentMap = collectIntentFeatureMap(root);
+
+  assert.equal(intentMap.summary.totalIntents, 155);
+  assert.equal(intentMap.summary.totalThemes, 1);
+  assert.equal(intentMap.summary.now, 1);
+  assert.equal(intentMap.themes[0].label, "플랫폼 정체성과 운영 루프");
+  assert.equal(intentMap.roadmap.now[0].feature, "Intent Feature Map UI");
+  assert.equal(intentMap.sourceLimits.length, 1);
 });
 
 test("collectPhilosophyFeatureExtraction reads feature flows and candidates", () => {
@@ -364,6 +425,7 @@ test("collectModeFunctionCatalog exposes explicit selectors and desktop mode loc
   assert.equal(catalog.summary.totalGroups, 8);
   assert.equal(catalog.groups.find((group) => group.id === "work_mode").defaultMode, "standard");
   assert.equal(catalog.groups.find((group) => group.id === "cli_adapter").options[0].id, "codex-cli");
+  assert.equal(catalog.groups.find((group) => group.id === "section_location").options.some((option) => option.id === "intent"), true);
   assert.equal(catalog.groups.find((group) => group.id === "desktop_session_mode").selectorLocation, "Desktop / Run Board / Mode");
   assert.equal(catalog.groups.find((group) => group.id === "task_pipe").options.some((option) => option.id === "review_verify_pipe"), true);
 });

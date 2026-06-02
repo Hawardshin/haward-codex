@@ -1,0 +1,39 @@
+{
+  "record_id": "2026-06-03-intent-feature-map-ui-grounding",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-016",
+  "grounding_status": "grounded",
+  "internal_sources": [
+    "_history/intent-feature-maps/2026/2026-06-03-user-intent-feature-map.ko.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/specs/2026-06-03-intent-feature-map-ui/",
+    "workspace-monitor/src/generated/workspace-snapshot.json"
+  ],
+  "external_sources": [
+    "https://www.atlassian.com/agile/product-management/roadmaps",
+    "https://community.atlassian.com/learning/lesson/how-to-create-a-roadmap-in-jira-product-discovery",
+    "https://www.atlassian.com/software/jira/product-discovery/guides/views/overview"
+  ],
+  "claims_checked": [
+    {
+      "claim": "The local intent map contains 12 feature themes and Now/Next/Later candidates.",
+      "status": "verified",
+      "evidence": "_history/intent-feature-maps/2026/2026-06-03-user-intent-feature-map.ko.md and generated snapshot check"
+    },
+    {
+      "claim": "Now/Next/Later is an appropriate roadmap grouping for priority conversation.",
+      "status": "supported",
+      "evidence": "Atlassian roadmap and Jira Product Discovery guidance"
+    },
+    {
+      "claim": "Customer snapshots should not expose internal intent-map history data.",
+      "status": "verified",
+      "evidence": "build:customer plus public snapshot assertion"
+    }
+  ],
+  "unsupported_claims_removed": [],
+  "notes": [
+    "External sources informed roadmap presentation only; product priority came from local user-intent records."
+  ]
+}
+

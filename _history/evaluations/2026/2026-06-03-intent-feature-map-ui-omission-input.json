@@ -1,0 +1,92 @@
+{
+  "task": "Implement the Intent Feature Map UI in Workspace Monitor.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "IFM-EXP-001",
+      "description": "Run web-first intake before planning or edits.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-intent-feature-map-ui.ko.md"
+      ]
+    },
+    {
+      "item_id": "IFM-EXP-002",
+      "description": "Use prior user-intent feature map as the source record.",
+      "source": "UR-2026-06-03-015 outcome",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/intent-feature-maps/2026/2026-06-03-user-intent-feature-map.ko.md"
+      ]
+    },
+    {
+      "item_id": "IFM-EXP-003",
+      "description": "Implement snapshot extraction, types, UI, CSS, and tests.",
+      "source": "REQ-WM-021",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "workspace-monitor/lib/snapshot.ts",
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css",
+        "workspace-monitor/tests/collector.test.mjs"
+      ]
+    },
+    {
+      "item_id": "IFM-EXP-004",
+      "description": "Preserve customer boundary by redacting internal intent-map data from customer snapshots.",
+      "source": "User customer-source boundary instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "workspace-monitor/specs/2026-06-03-intent-feature-map-ui/validation.ko.md"
+      ]
+    },
+    {
+      "item_id": "IFM-EXP-005",
+      "description": "Record requirements, spec, trace, work summary, timing, and evaluation artifacts.",
+      "source": "standard work mode",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+        "workspace-monitor/specs/2026-06-03-intent-feature-map-ui/",
+        "_history/request-traces/2026/2026-06-03-intent-feature-map-ui.ko.md",
+        "_history/work-timings/2026/2026-06-03-intent-feature-map-ui.json"
+      ]
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "IFM-AC-001",
+      "description": "Developer snapshot contains 12 themes and 4 Now candidates.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/src/generated/workspace-snapshot.json"
+      ]
+    },
+    {
+      "check_id": "IFM-AC-002",
+      "description": "Customer snapshot removes documents, source files, and internal intent-map arrays.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/specs/2026-06-03-intent-feature-map-ui/validation.ko.md"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "The in-app Browser MCP tool was not exposed, so screenshot/click verification was replaced with HTTP smoke and build checks."
+  ],
+  "notes": [
+    "_private was not inspected.",
+    "The unrelated untracked folder platform-desktop-app/workspace-monitor/ was not touched."
+  ]
+}
+
