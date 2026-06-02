@@ -1,0 +1,81 @@
+{
+  "task_id": "2026-06-02-external-svg-asset-collection",
+  "title": "External SVG actual collection",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked official GitHub repositories and license paths for Lucide, Heroicons, Bootstrap Icons, and Tabler Icons."
+    },
+    {
+      "phase_id": "source_resolution",
+      "label": "Source and commit resolution",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Resolved default branches and commit hashes with git ls-remote and inspected tarball source paths."
+    },
+    {
+      "phase_id": "collection_tooling",
+      "label": "Collection tooling",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added external-collection-policy.json and collect_external_svg_assets.py."
+    },
+    {
+      "phase_id": "actual_collection",
+      "label": "Actual SVG collection",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Collected 3,048 SVG assets with per-source LICENSE and SOURCE.json files."
+    },
+    {
+      "phase_id": "gallery_tooling",
+      "label": "Gallery and browser support",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Extended asset_browser.py for collected_assets and generated external-gallery.html."
+    },
+    {
+      "phase_id": "documentation_governance",
+      "label": "Documentation and governance",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Updated requirements, specs, source provenance, usage docs, memory anchors, and project boundary rules."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Design asset tests, workspace-health tests, JSON checks, config contract, memory bootstrap, Playwright smoke, workspace index/task board checks, work timing check, workspace health, omission, grounding, and evaluation passed."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured"
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "The largest likely bottleneck is validation and repository indexing across thousands of SVG files, not the download step itself.",
+    "improvement_candidates": [
+      "Add incremental collection by source and variant.",
+      "Add manifest diffing so unchanged source archives do not regenerate every file.",
+      "Add gallery pagination or lazy loading if the single-page gallery becomes slow.",
+      "Add a public-release license checklist before publishing the repository."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-external-svg-asset-collection.ko.md",
+    "_specs/workspace-platform/2026-06-02-external-svg-asset-collection/plan.ko.md",
+    "design-asset-library/configs/external-collection-policy.json",
+    "design-asset-library/data/external-asset-registry.json",
+    "design-asset-library/artifacts/html/external-gallery.html"
+  ]
+}

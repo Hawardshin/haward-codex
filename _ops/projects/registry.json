@@ -169,7 +169,8 @@
       ],
       "boundary_notes": [
         "Use generated SVG assets as the default legal-safe asset source.",
-        "Do not store third-party SVG files unless license, source URL, access date, attribution, and public-use constraints are recorded.",
+        "Actually collected external SVG files belong under design-asset-library/assets/svg/external/ with source-level LICENSE and SOURCE.json files.",
+        "Do not store third-party SVG files unless license, source URL, access date, attribution, public-use constraints, upstream path, and pinned commit are recorded.",
         "External source candidates are research leads until license review is complete.",
         "Project-specific finished deck or UI artifacts stay in the owning project; reusable source SVG assets stay here."
       ]

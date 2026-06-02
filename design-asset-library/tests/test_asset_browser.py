@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_PATH = ROOT / "scripts" / "asset_browser.py"
+EXTERNAL_REGISTRY_PATH = ROOT / "data" / "external-asset-registry.json"
 
 spec = importlib.util.spec_from_file_location("asset_browser", SCRIPT_PATH)
 asset_browser = importlib.util.module_from_spec(spec)
@@ -52,6 +53,15 @@ class AssetBrowserTests(unittest.TestCase):
 
         self.assertIn("Design Asset Gallery", html)
         self.assertIn("../assets/svg/generated/", html)
+
+    def test_external_registry_search_and_snippet(self) -> None:
+        registry = asset_browser.load_registry(EXTERNAL_REGISTRY_PATH)
+        assets = asset_browser.get_assets(registry)
+        results = asset_browser.filter_assets(assets, family="lucide", query="dashboard", limit=3)
+        snippet = asset_browser.build_img_snippet(asset_browser.find_asset(registry, "external-lucide-outline-layout-dashboard"))
+
+        self.assertTrue(results)
+        self.assertIn("assets/svg/external/lucide/outline/layout-dashboard.svg", snippet)
 
 
 if __name__ == "__main__":

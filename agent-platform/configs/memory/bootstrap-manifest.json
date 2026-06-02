@@ -1430,6 +1430,7 @@
     "human_arbitration_agent",
     "project_registry",
     "design_asset_library",
+    "external_design_asset_registry",
     "root_structure_policy",
     "naming_policy",
     "assistant_runtime_adapter_registry",
@@ -1500,6 +1501,7 @@
     "human_arbitration_agent",
     "project_registry",
     "design_asset_library",
+    "external_design_asset_registry",
     "root_structure_policy",
     "naming_policy",
     "assistant_runtime_adapter_registry",
@@ -1784,6 +1786,14 @@
       "path": "design-asset-library/data/asset-registry.json",
       "tier": "warm",
       "purpose": "Reusable legal SVG design asset registry with generated asset paths, source provenance, external candidate rules, license cautions, search/snippet CLI, and static gallery usage path.",
+      "required": true,
+      "load_order": 9
+    },
+    {
+      "id": "external_design_asset_registry",
+      "path": "design-asset-library/data/external-asset-registry.json",
+      "tier": "warm",
+      "purpose": "Actually collected external open-source SVG registry with pinned source commits, local LICENSE/SOURCE records, search/snippet CLI, and external gallery usage path.",
       "required": true,
       "load_order": 9
     },

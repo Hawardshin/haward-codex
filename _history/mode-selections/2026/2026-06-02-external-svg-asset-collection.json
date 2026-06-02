@@ -1,0 +1,31 @@
+{
+  "request_id": "UR-2026-06-02-043",
+  "selected_at": "2026-06-02",
+  "selected_work_mode": "governance",
+  "reason": "The request changes the design asset library inventory, stores third-party open-source files, adds provenance/licensing rules, updates reusable tooling, shared requirements, memory anchors, and project boundary rules.",
+  "alternatives_considered": [
+    {
+      "mode": "quick",
+      "decision": "rejected",
+      "reason": "Too light because actual third-party asset storage requires provenance, license notices, validation, and history."
+    },
+    {
+      "mode": "standard",
+      "decision": "rejected",
+      "reason": "Implementation is required, but governance is more appropriate because shared platform memory and source-control rules are updated."
+    }
+  ],
+  "required_closeout_targets": [
+    "web_search_record_targets",
+    "user_request_summary_targets",
+    "requirements_targets",
+    "spec_targets",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "mode_selection_record_targets",
+    "omission_check_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets"
+  ]
+}

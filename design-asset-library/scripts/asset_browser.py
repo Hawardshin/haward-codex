@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Search generated SVG assets and build a static gallery."""
+"""Search SVG assets and build a static gallery."""
 
 from __future__ import annotations
 
@@ -20,7 +20,10 @@ def load_registry(path: Path = REGISTRY_PATH) -> dict:
 
 
 def get_assets(registry: dict) -> list[dict]:
-    return list(registry.get("generated_assets", []))
+    assets: list[dict] = []
+    for key in ("generated_assets", "collected_assets"):
+        assets.extend(registry.get(key, []))
+    return assets
 
 
 def family_counts(registry: dict) -> Counter:
@@ -46,6 +49,8 @@ def filter_assets(
                 asset.get("id", ""),
                 asset.get("family", ""),
                 asset.get("motif", ""),
+                asset.get("variant", ""),
+                asset.get("source_library", ""),
                 " ".join(asset.get("tags", [])),
             ]
         )
@@ -83,6 +88,7 @@ def write_gallery(registry: dict, output_path: Path, *, limit: int | None = None
     output_path.parent.mkdir(parents=True, exist_ok=True)
     rel_prefix = relative_prefix(output_path)
     family_list = sorted(family_counts(registry).items())
+    gallery_title, gallery_summary = gallery_copy(registry)
     cards = "\n".join(render_card(asset, rel_prefix) for asset in assets)
     family_options = "\n".join(
         f'<button type="button" data-family="{html.escape(family)}">{html.escape(family)} <span>{count}</span></button>'
@@ -94,7 +100,7 @@ def write_gallery(registry: dict, output_path: Path, *, limit: int | None = None
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Design Asset Gallery</title>
+  <title>{html.escape(gallery_title)}</title>
   <style>
     :root {{
       color-scheme: light;
@@ -269,8 +275,8 @@ def write_gallery(registry: dict, output_path: Path, *, limit: int | None = None
     <div class="wrap">
       <div class="hero">
         <div>
-          <h1>Design Asset Gallery</h1>
-          <p>내부 생성 SVG를 검색하고, 계열별로 훑어보고, HTML/PPT 산출물에 바로 연결하기 위한 정적 갤러리입니다.</p>
+          <h1>{html.escape(gallery_title)}</h1>
+          <p>{html.escape(gallery_summary)}</p>
         </div>
         <div class="stat"><strong>{len(assets)}</strong><span>shown assets</span></div>
       </div>
@@ -284,7 +290,7 @@ def write_gallery(registry: dict, output_path: Path, *, limit: int | None = None
     </div>
   </header>
   <main class="wrap">
-    <section id="grid" class="grid" aria-label="Generated SVG assets">
+    <section id="grid" class="grid" aria-label="SVG assets">
       {cards}
     </section>
   </main>
@@ -322,9 +328,30 @@ def relative_prefix(output_path: Path) -> str:
     return "../" * depth
 
 
+def gallery_copy(registry: dict) -> tuple[str, str]:
+    if registry.get("collected_assets"):
+        return (
+            "External SVG Asset Gallery",
+            "실제로 수집한 외부 오픈소스 SVG를 출처별로 검색하고 HTML/PPT 산출물에 바로 연결하기 위한 정적 갤러리입니다.",
+        )
+    return (
+        "Design Asset Gallery",
+        "내부 생성 SVG를 검색하고, 계열별로 훑어보고, HTML/PPT 산출물에 바로 연결하기 위한 정적 갤러리입니다.",
+    )
+
+
 def render_card(asset: dict, rel_prefix: str) -> str:
     src = f"{rel_prefix}{asset['path']}"
-    search_text = " ".join([asset["id"], asset["family"], asset["motif"], " ".join(asset.get("tags", []))]).lower()
+    search_text = " ".join(
+        [
+            asset.get("id", ""),
+            asset.get("family", ""),
+            asset.get("motif", ""),
+            asset.get("variant", ""),
+            asset.get("source_library", ""),
+            " ".join(asset.get("tags", [])),
+        ]
+    ).lower()
     tags = "".join(f'<span class="pill">{html.escape(tag)}</span>' for tag in asset.get("tags", []))
     return f"""<article class="card" data-family="{html.escape(asset['family'])}" data-search="{html.escape(search_text)}">
         <div class="preview"><img src="{html.escape(src)}" alt="{html.escape(asset['id'].replace('-', ' '))}"></div>
@@ -372,11 +399,11 @@ def cmd_gallery(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Browse generated design SVG assets.")
+    parser = argparse.ArgumentParser(description="Browse design SVG assets.")
     parser.add_argument("--registry", type=Path, default=REGISTRY_PATH)
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    families = subparsers.add_parser("families", help="Print generated asset counts by family.")
+    families = subparsers.add_parser("families", help="Print asset counts by family.")
     families.set_defaults(func=cmd_families)
 
     search = subparsers.add_parser("search", help="Search generated assets.")

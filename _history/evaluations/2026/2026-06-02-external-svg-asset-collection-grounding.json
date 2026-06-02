@@ -1,0 +1,134 @@
+{
+  "task": "Ground external SVG actual collection close-out claims.",
+  "output_summary": "The design asset library now stores 3,048 collected open-source SVG files from four official GitHub repositories with local license/source notices, registry provenance, browser gallery, and tests.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "external_registry",
+      "source": "design-asset-library/data/external-asset-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local collected asset registry generated from the collector."
+    },
+    {
+      "evidence_id": "collection_policy",
+      "source": "design-asset-library/configs/external-collection-policy.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Self-documenting policy with source URLs, pinned archive URLs, commits, licenses, and path allowlists."
+    },
+    {
+      "evidence_id": "collector",
+      "source": "design-asset-library/scripts/collect_external_svg_assets.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local collector that downloads pinned archives, parses SVG XML, writes files, notices, and registry."
+    },
+    {
+      "evidence_id": "external_files",
+      "source": "design-asset-library/assets/svg/external/",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Actual collected SVG files and source-level notices in the workspace."
+    },
+    {
+      "evidence_id": "external_tests",
+      "source": "design-asset-library/tests/test_external_asset_registry.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local test covering counts, source notices, unique IDs, local paths, and XML parseability."
+    },
+    {
+      "evidence_id": "asset_browser_smoke",
+      "source": "asset_browser.py external families/search/snippet/gallery command output",
+      "source_type": "tool_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Local CLI smoke checks for the external registry."
+    },
+    {
+      "evidence_id": "browser_smoke",
+      "source": "Playwright smoke output for design-asset-library/artifacts/html/external-gallery.html",
+      "source_type": "tool_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Loaded local static gallery and checked card count, image load, and search filtering."
+    },
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-02-external-svg-asset-collection.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Saved source-check record with official repository URLs and resolved commits."
+    },
+    {
+      "evidence_id": "workspace_health",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Whole-workspace validation command."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The design asset library contains 3,048 collected external SVG files.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["external_registry", "external_files", "external_tests"],
+      "verification_steps": ["Count files under assets/svg/external and inspect collected_assets length."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The collected set contains Lucide 800, Heroicons 648, Bootstrap Icons 800, and Tabler Icons 800 SVG assets.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["external_registry", "external_tests", "asset_browser_smoke"],
+      "verification_steps": ["Run asset_browser.py external families and inspect test expectations."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Each source directory has a local LICENSE and SOURCE.json notice.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["external_files", "external_tests"],
+      "verification_steps": ["Count LICENSE and SOURCE.json files and run external registry tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The collection used official GitHub repositories for Lucide, Heroicons, Bootstrap Icons, and Tabler Icons with pinned commits.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["collection_policy", "external_registry", "web_search_record"],
+      "verification_steps": ["Inspect external-collection-policy.json and web-search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "The external gallery loads 3,048 cards and at least one SVG image in a browser.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["browser_smoke"],
+      "verification_steps": ["Run Playwright smoke over external-gallery.html."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Whole workspace health passed after the external collection.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["workspace_health"],
+      "verification_steps": ["Run workspace-health --json."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "License, attribution, and trademark constraints can change and must be rechecked before public redistribution.",
+    "This is a technical provenance and validation record, not legal advice."
+  ],
+  "limitation_notes": [
+    "The first collection tranche intentionally excludes candidate sources such as Material Symbols, OpenMoji, and Font Awesome Free.",
+    "The gallery is static and currently renders all collected assets in one page."
+  ]
+}

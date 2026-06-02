@@ -4,14 +4,18 @@
 
 - 불법 다운로드나 출처 불명 SVG 저장을 하지 않는다.
 - 기본 사용 자산은 `scripts/generate_svg_assets.py`가 만든 내부 생성 SVG다.
-- 외부 오픈소스 SVG는 후보로만 기록하고, 실제 파일 저장 전에는 현재 라이선스, 출처 URL, 접근일, attribution, 상표/브랜드 제한, public 배포 가능 여부를 기록한다.
+- 외부 오픈소스 SVG를 실제 저장할 때는 현재 라이선스, 출처 URL, 접근일, attribution, 상표/브랜드 제한, public 배포 가능 여부를 기록한다.
+- 실제 저장된 외부 SVG는 source별 `LICENSE`와 `SOURCE.json`을 함께 보존한다.
 
 ## 현재 자산 상태
 
 - `assets/svg/generated/`의 600개 SVG는 외부 SVG 파일을 복사하지 않고 레포 내부 generator로 생성했다.
+- `assets/svg/external/`에는 공식 오픈소스 저장소에서 실제 수집한 SVG 3,048개가 있다.
+- 실제 수집 source는 Lucide, Heroicons, Bootstrap Icons, Tabler Icons이며 각 source 폴더에 `LICENSE`와 `SOURCE.json`이 있다.
 - public 배포 전에는 저장소 소유자가 최종 라이선스를 명시해야 한다.
 - 외부 후보는 `data/asset-registry.json`의 `external_source_candidates`에 기록되어 있으며, `downloaded=false`다.
 - 현재 후보군에는 Lucide, Heroicons, Tabler Icons, Bootstrap Icons, Google Material Symbols, OpenMoji, Font Awesome Free가 포함된다.
+  - 이 중 실제 저장된 source는 `data/external-asset-registry.json`의 `source_manifests`를 기준으로 판단한다.
 
 ## 사용 금지
 
@@ -29,3 +33,10 @@
 - 수정 가능 여부
 - 상표/브랜드 제한
 - 저장한 파일 목록
+
+## 실제 수집분 확인
+
+```bash
+python3 design-asset-library/scripts/asset_browser.py --registry design-asset-library/data/external-asset-registry.json families
+python3 -m json.tool design-asset-library/data/external-asset-registry.json >/dev/null
+```

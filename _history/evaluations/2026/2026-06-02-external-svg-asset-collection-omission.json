@@ -1,0 +1,156 @@
+{
+  "task": "Actually collect many external SVG assets.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web_first",
+      "description": "Run web-first intake before planning or implementation.",
+      "source": "AGENTS.md and user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-external-svg-asset-collection.ko.md",
+        "_history/web-searches/2026/2026-06-02-external-svg-asset-collection.en.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "actual_collection",
+      "description": "Store many actual SVG files, not only candidates or generated variants.",
+      "source": "User asked to actually collect many assets.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "design-asset-library/assets/svg/external/",
+        "find design-asset-library/assets/svg/external -name '*.svg' | wc -l: 3048",
+        "design-asset-library/data/external-asset-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "source_provenance",
+      "description": "Record exact source URL, resolved commit, upstream path, local path, and license for collected files.",
+      "source": "Workspace source provenance and hallucination-prevention rules.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "design-asset-library/data/external-asset-registry.json",
+        "design-asset-library/assets/svg/external/*/SOURCE.json",
+        "design-asset-library/assets/svg/external/*/LICENSE"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "official_sources",
+      "description": "Use official high-authority repositories for first-tranche collection.",
+      "source": "Repository source-quality rules and user preference for strong sources.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "https://github.com/lucide-icons/lucide",
+        "https://github.com/tailwindlabs/heroicons",
+        "https://github.com/twbs/icons",
+        "https://github.com/tabler/tabler-icons",
+        "_history/web-searches/2026/2026-06-02-external-svg-asset-collection.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "easy_use_structure",
+      "description": "Make the collected files easy to browse, search, and embed.",
+      "source": "User's prior design asset usability requirement.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "design-asset-library/scripts/asset_browser.py",
+        "design-asset-library/artifacts/html/external-gallery.html",
+        "design-asset-library/docs/usage/README.ko.md",
+        "presentation-agent/docs/design/svg-asset-library-usage.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "durable_governance",
+      "description": "Update requirements, specs, history, memory, and project boundary records.",
+      "source": "Governance mode close-out rules.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/changes/2026-06-02-external-svg-asset-collection.ko.md",
+        "_requirements/reviews/2026-06-02-external-svg-asset-collection.ko.md",
+        "_specs/workspace-platform/2026-06-02-external-svg-asset-collection/",
+        "_history/request-traces/2026/2026-06-02-external-svg-asset-collection.ko.md",
+        "_history/work-summaries/2026/2026-06-02.ko.md",
+        "agent-platform/configs/memory/bootstrap-manifest.json",
+        "_ops/projects/registry.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {"path": "design-asset-library/scripts/collect_external_svg_assets.py", "purpose": "Pinned-source external SVG collector.", "required": true},
+    {"path": "design-asset-library/configs/external-collection-policy.json", "purpose": "Self-documenting collection policy.", "required": true},
+    {"path": "design-asset-library/data/external-asset-registry.json", "purpose": "Collected asset registry and source provenance.", "required": true},
+    {"path": "design-asset-library/assets/svg/external/", "purpose": "Actual collected SVG assets with notices.", "required": true},
+    {"path": "design-asset-library/artifacts/html/external-gallery.html", "purpose": "Static browser gallery for collected assets.", "required": true},
+    {"path": "design-asset-library/tests/test_external_asset_registry.py", "purpose": "Registry, file, license, source, and XML parse regression tests.", "required": true}
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "collection_count",
+      "description": "At least 3,000 actual external SVG files are collected.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["3,048 SVG files collected under design-asset-library/assets/svg/external/."],
+      "rationale": ""
+    },
+    {
+      "check_id": "source_distribution",
+      "description": "Collected assets are distributed across multiple official sources.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["Lucide 800, Heroicons 648, Bootstrap Icons 800, Tabler Icons 800."],
+      "rationale": ""
+    },
+    {
+      "check_id": "source_notices",
+      "description": "Each collected source has a local LICENSE and SOURCE.json notice.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["find source notices: 4 LICENSE files and 4 SOURCE.json files."],
+      "rationale": ""
+    },
+    {
+      "check_id": "asset_browser",
+      "description": "External registry works with families, search, snippet, and gallery commands.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["families/search/snippet/gallery smoke commands passed."],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser_smoke",
+      "description": "External gallery loads 3,048 cards and representative SVG images in a browser.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["Playwright smoke: cardCount 3048, firstImageLoaded true, visibleAfterSearch 4."],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace_health",
+      "description": "Whole workspace health remains green after adding thousands of files.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["workspace-health --json: passed, 26 checks, 0 failed."],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Public redistribution still needs a fresh license, attribution, and trademark review.",
+    "The gallery currently loads all 3,048 cards in one page; pagination or lazy loading is a documented improvement candidate."
+  ],
+  "notes": [
+    "The collection uses pinned GitHub commit archives and path allowlists.",
+    "No new dependency installation occurred."
+  ]
+}

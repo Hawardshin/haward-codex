@@ -72,6 +72,8 @@ def build_checks(root: Path, include_build: bool = False) -> list[Check]:
                         "../platform-desktop-app/configs/macos-execution-profile.json",
                         "../platform-desktop-app/configs/windows-execution-profile.json",
                         "../design-asset-library/data/asset-registry.json",
+                        "../design-asset-library/data/external-asset-registry.json",
+                        "../design-asset-library/configs/external-collection-policy.json",
                         "../_docs/registry.json",
                         "../_ops/projects/registry.json",
                         "../_ops/coordination/human-decision-inbox.json",

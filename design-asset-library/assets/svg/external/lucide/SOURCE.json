@@ -1,0 +1,22 @@
+{
+  "source_id": "lucide",
+  "source_name": "Lucide",
+  "repository_url": "https://github.com/lucide-icons/lucide",
+  "archive_url": "https://codeload.github.com/lucide-icons/lucide/tar.gz/423afc6d03c1fb1b86090aa14b13f7f2fa6296e4",
+  "branch": "main",
+  "resolved_commit": "423afc6d03c1fb1b86090aa14b13f7f2fa6296e4",
+  "license": "ISC",
+  "license_url": "https://github.com/lucide-icons/lucide/blob/423afc6d03c1fb1b86090aa14b13f7f2fa6296e4/LICENSE",
+  "accessed_on": "2026-06-02",
+  "allowed_svg_roots": [
+    {
+      "root": "icons/",
+      "variant": "outline",
+      "path_note": "Official Lucide icon SVG source files."
+    }
+  ],
+  "max_assets": 800,
+  "selected_assets": 800,
+  "usage_caution": "Lucide explicitly separates brand logos; this collection uses icon files only and still requires public-release license review.",
+  "collection_note": "Only allowlisted SVG files were copied. Recheck license and attribution before public redistribution."
+}
