@@ -4,7 +4,6 @@ dist/
 out/
 src-tauri/target/
 src-tauri/gen/
-src-tauri/Cargo.lock
 artifacts/source-editor-backups/
 artifacts/task-runs/
 *.log

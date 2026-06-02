@@ -43,7 +43,8 @@
     "shortDescription": "Installable shell for a personal agent-building platform.",
     "longDescription": "A local desktop shell for browsing workspace history, documents, agents, requirements, specs, and future optional AI coding CLI capabilities.",
     "macOS": {
-      "minimumSystemVersion": "10.15"
+      "minimumSystemVersion": "10.15",
+      "signingIdentity": "-"
     },
     "windows": {
       "webviewInstallMode": {

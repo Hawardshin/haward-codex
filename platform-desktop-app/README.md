@@ -33,13 +33,14 @@ The selected first scaffold is Tauri v2:
 
 Electron, Wails, and native packaging remain fallback/comparison candidates, but new implementation work should target the Tauri scaffold unless a recorded measurement or release blocker changes the decision.
 
-Current machine state checked on 2026-06-02:
+Current machine state checked on 2026-06-03:
 
 - Node/npm: available.
 - Go: available.
-- Rust: not installed.
+- Rust/rustup/Cargo: available through the user's local Cargo toolchain.
+- Tauri CLI: installed as a project-local npm dev dependency through the recorded installation audit.
 
-This means the source scaffold exists, but `tauri:dev` and `tauri:build` are blocked until Rust and Tauri dependencies are installed with an installation audit record.
+This means the source scaffold can be built locally with Rust/Tauri for developer testing. Public macOS distribution is still blocked until Developer ID signing, hardened runtime, notarization, stapling where applicable, clean-machine smoke tests, update/rollback planning, and privacy/dependency review pass.
 
 ## Structure
 
@@ -78,16 +79,19 @@ platform-desktop-app/
 
 ## Commands
 
-No desktop framework dependency has been installed yet. `package.json` declares the intended local Tauri CLI dependency, but `npm install` has not been run in this project.
-
-Current verification is scaffold, documentation, and config focused:
+Desktop framework dependencies have been installed locally for developer builds. The current local verification path is:
 
 ```bash
+npm --prefix platform-desktop-app ci
+npm --prefix workspace-monitor ci
 npm --prefix platform-desktop-app run check
 npm --prefix platform-desktop-app test
 npm --prefix workspace-monitor run check
 npm --prefix workspace-monitor test
 npm --prefix workspace-monitor run build
+cd platform-desktop-app/src-tauri && cargo test
+cd platform-desktop-app/src-tauri && cargo build
+npm --prefix platform-desktop-app run tauri:build
 python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json
 python3 -m json.tool platform-desktop-app/configs/macos-execution-profile.json
 python3 -m json.tool platform-desktop-app/configs/windows-execution-profile.json
@@ -116,13 +120,11 @@ Implemented desktop bridge commands:
 
 These commands are bounded pipe/session, human decision inbox append, and scoped file-editing MVP commands. Interactive PTY sessions, source-affecting autonomous execution, xterm.js, Monaco Editor, and packaged sidecars still require a dependency and permission audit before implementation.
 
-Planned after installation audit:
+Local Tauri build artifacts are generated under:
 
 ```bash
-cd platform-desktop-app
-npm install
-npm run tauri:dev
-npm run tauri:build
+platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app
+platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg
 ```
 
-Those commands require Rust, Cargo, Tauri dependencies, and OS-specific signing/build prerequisites. When a desktop framework is actually installed later, create an installation audit record under `_history/installations/YYYY/` and update `_ops/installations/registry.json`.
+The macOS build uses Tauri ad-hoc signing (`signingIdentity: "-"`) for local developer and internal test builds only. Do not describe the DMG as public-ready until the public distribution gates above pass.

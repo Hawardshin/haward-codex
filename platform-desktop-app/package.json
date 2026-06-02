@@ -8,11 +8,10 @@
     "check": "node scripts/check-readiness.mjs",
     "test": "node --test tests/*.test.mjs",
     "monitor:build": "npm --prefix ../workspace-monitor run build",
-    "tauri:dev": "npm run monitor:build && tauri dev",
-    "tauri:build": "npm run monitor:build && tauri build"
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.0.0"
   }
 }
-

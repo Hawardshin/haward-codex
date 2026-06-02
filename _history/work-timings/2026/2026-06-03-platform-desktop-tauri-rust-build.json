@@ -1,0 +1,72 @@
+{
+  "task_id": "2026-06-03-platform-desktop-tauri-rust-build",
+  "title": "platform-desktop-app Tauri/Rust local build",
+  "work_mode": "ship_first",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-03",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked official Rustup, Cargo, and Tauri v2 installation/build references."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Memory bootstrap returned ready_to_bootstrap and hot anchors were read."
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Selected work_mode=ship_first, install_mode=developer, owner=platform-desktop-app."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Installation and implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Installed project-local npm dependencies, fetched Cargo dependencies, generated Tauri icons, tracked Cargo.lock, configured ad-hoc signing, removed duplicate build script calls, and fixed dompurify audit with an override."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Ran npm audit/check/test/build, cargo test/build, tauri build, codesign, hdiutil verify, and app open/quit smoke."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Prepared omission, resource, grounding, installation, request trace, and evaluation input records."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured",
+      "notes": "Will update after final git actions."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "Timing started after initial intake, so this record is partial. The main rework was resolving missing Tauri icons, local macOS signing verification, and npm audit cleanup.",
+    "improvement_candidates": [
+      "Add clean-account macOS smoke automation once the internal test app flow exists.",
+      "Add a Windows build lane for msi/nsis on a Windows host.",
+      "Consider lazy-loading Monaco/xterm surfaces if bundle size or audit surface grows."
+    ]
+  },
+  "evidence": [
+    "_history/plans/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md",
+    "_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md",
+    "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-evaluation-input.json"
+  ]
+}

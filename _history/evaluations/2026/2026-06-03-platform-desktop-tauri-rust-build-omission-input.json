@@ -1,0 +1,154 @@
+{
+  "task": "platform-desktop-app Tauri/Rust local build close-out",
+  "work_mode": "ship_first",
+  "expected_items": [
+    {
+      "item_id": "required-installs-completed",
+      "description": "Install the required local dependencies for the Tauri/Rust desktop build path.",
+      "source": "user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md",
+        "platform-desktop-app/package-lock.json",
+        "platform-desktop-app/src-tauri/Cargo.lock"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "rust-build-test",
+      "description": "Build and test locally with Rust.",
+      "source": "user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "cd platform-desktop-app/src-tauri && cargo test: passed",
+        "cd platform-desktop-app/src-tauri && cargo build: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "tauri-local-build",
+      "description": "Run the local Tauri desktop build and verify generated macOS artifacts.",
+      "source": "user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "npm --prefix platform-desktop-app run tauri:build: passed",
+        "codesign --verify --deep --strict: passed",
+        "hdiutil verify: checksum valid"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "fix-build-blockers",
+      "description": "Improve the scaffold where required to make the build pass cleanly.",
+      "source": "build failure evidence",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/icons/",
+        "platform-desktop-app/src-tauri/tauri.conf.json",
+        "platform-desktop-app/package.json",
+        "workspace-monitor/package.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "no-public-readiness-overclaim",
+      "description": "Do not claim public macOS distribution readiness after an ad-hoc local build.",
+      "source": "macOS execution profile",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/README.md",
+        "platform-desktop-app/configs/macos-execution-profile.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/package-lock.json",
+      "purpose": "Project-local Tauri CLI lock file.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/src-tauri/Cargo.lock",
+      "purpose": "Rust dependency lock file for the desktop app.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/src-tauri/icons/icon.icns",
+      "purpose": "macOS app icon used by the Tauri bundle.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/src-tauri/tauri.conf.json",
+      "purpose": "Tauri build config with local ad-hoc signing identity.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "npm-audit-platform-desktop",
+      "description": "platform-desktop-app npm audit has no moderate-or-higher findings.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app audit --audit-level=moderate: found 0 vulnerabilities"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "npm-audit-workspace-monitor",
+      "description": "workspace-monitor npm audit has no moderate-or-higher findings.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor audit --audit-level=moderate: found 0 vulnerabilities"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "rust-checks",
+      "description": "Cargo test and build pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo test: passed",
+        "cargo build: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "tauri-build",
+      "description": "Tauri build produces local macOS artifacts.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Agent Workspace Platform.app",
+        "Agent Workspace Platform_0.1.0_aarch64.dmg"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "app-open-quit-smoke",
+      "description": "The generated app starts and can be quit without a lingering process.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "open -n ...Agent Workspace Platform.app; osascript quit; no second pgrep output"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Public macOS readiness is intentionally out of scope until Developer ID signing and notarization gates pass.",
+    "Windows installer build was not run on this macOS local build task.",
+    "The pre-existing untracked platform-desktop-app/workspace-monitor/package-lock.json was not deleted or committed."
+  ],
+  "notes": [
+    "The first cargo test failed because icons/icon.png was missing; generated Tauri icons fixed the build blocker."
+  ]
+}

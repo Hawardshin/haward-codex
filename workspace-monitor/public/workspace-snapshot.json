@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-02T16:08:57.930Z",
+  "generatedAt": "2026-06-02T16:57:07.563Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -13,8 +13,8 @@
     "completedTasks": 71,
     "documents": 1200,
     "requirements": 198,
-    "evaluations": 235,
-    "webSearches": 94,
+    "evaluations": 240,
+    "webSearches": 93,
     "timingRecords": 48,
     "historyDays": 2,
     "unifiedOpsEvents": 160,
@@ -5815,6 +5815,162 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-evaluation-result-json",
+      "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-evaluation-result.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 03 Platform Desktop Tauri Rust Build Evaluation Result",
+      "excerpt": "{ \"status\": \"ready to close\", \"requires rework\": false, \"work mode\": \"ship first\", \"required target policy\": { \"required targets\": \"mode selection record targets\", \"omission check targets\", \"references checked\", \"web search record targets\" , \"deferred targets allowed\": \"plan evid",
+      "html": "<pre><code>{\n  &quot;status&quot;: &quot;ready_to_close&quot;,\n  &quot;requires_rework&quot;: false,\n  &quot;work_mode&quot;: &quot;ship_first&quot;,\n  &quot;required_target_policy&quot;: {\n    &quot;required_targets&quot;: [\n      &quot;mode_selection_record_targets&quot;,\n      &quot;omission_check_targets&quot;,\n      &quot;references_checked&quot;,\n      &quot;web_search_record_targets&quot;\n    ],\n    &quot;deferred_targets_allowed&quot;: [\n      &quot;plan_evidence_targets&quot;,\n      &quot;request_trace_targets&quot;,\n      &quot;requirements_targets&quot;,\n      &quot;source_provenance_targets&quot;,\n      &quot;spec_targets&quot;,\n      &quot;timing_summary_targets&quot;,\n      &quot;user_request_summary_targets&quot;,\n      &quot;work_summary_targets&quot;\n    ]\n  },\n  &quot;alignment_check&quot;: {\n    &quot;initial_instruction_present&quot;: true,\n    &quot;result_summary_present&quot;: true,\n    &quot;work_mode&quot;: &quot;ship_first&quot;,\n    &quot;changed_files_count&quot;: 25,\n    &quot;verification_count&quot;: 16,\n    &quot;references_checked_count&quot;: 8,\n    &quot;grounding_checks_count&quot;: 1,\n    &quot;source_provenance_targets_count&quot;: 2,\n    &quot;plan_evidence_targets_count&quot;: 1,\n    &quot;mode_selection_record_targets_count&quot;: 1,\n    &quot;omission_check_targets_count&quot;: 1,\n    &quot;web_search_record_targets_count&quot;: 1,\n    &quot;user_request_summary_targets_count&quot;: 1,\n    &quot;requirements_targets_count&quot;: 0,\n    &quot;spec_targets_count&quot;: 0,\n    &quot;skill_work_occurred&quot;: false,\n    &quot;skill_targets_count&quot;: 0,\n    &quot;skill_validation_targets_count&quot;: 0,\n    &quot;request_trace_targets_count&quot;: 1,\n    &quot;work_summary_targets_count&quot;: 1,\n    &quot;timing_summary_targets_count&quot;: 1,\n    &quot;context_archiving_occurred&quot;: false,\n    &quot;context_archive_targets_count&quot;: 0,\n    &quot;installation_occurred&quot;: true,\n    &quot;installation_record_targets_count&quot;: 1,\n    &quot;resource_risk_occurred&quot;: true,\n    &quot;resource_check_targets_count&quot;: 1,\n    &quot;cli_pipeline_occurred&quot;: false,\n    &quot;cli_pipeline_targets_count&quot;: 0,\n    &quot;deferred_improvement_targets_count&quot;: 1\n  },\n  &quot;gaps&quot;: [],\n  &quot;improvements&quot;: [\n    &quot;Add a clean macOS account smoke test once internal test app flow is ready.&quot;,\n    &quot;Add a dedicated Windows build lane on a Windows host for msi/nsis verification.&quot;,\n    &quot;Review whether workspace-monitor&#039;s Monaco/xterm dependencies should be lazy-loaded or split to reduce static bundle risk.&quot;,\n    &quot;requirements_targets omitted under ship_first mode; add or defer it if the work becomes durable.&quot;,\n    &quot;spec_targets omitted under ship_first mode; add or defer it if the work becomes durable.&quot;\n  ],\n  &quot;follow_up_actions&quot;: [\n    &quot;Consider improvement: Add a clean macOS account smoke test once internal test app flow is ready.&quot;,\n    &quot;Consider improvement: Add a dedicated Windows build lane on a Windows host for msi/nsis verification.&quot;,\n    &quot;Consider improvement: Review whether workspace-monitor&#039;s Monaco/xterm dependencies should be lazy-loaded or split to reduce static bundle risk.&quot;,\n    &quot;Consider improvement: requirements_targets omitted under ship_first mode; add or defer it if the work becomes durable.&quot;,\n    &quot;Consider improvement: spec_targets omitted under ship_first mode; add or defer it if the work becomes durable.&quot;\n  ]\n}</code></pre>",
+      "updatedAt": "2026-06-02T16:56:29.752Z",
+      "historyDate": "2026-06-03",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 03 Platform Desktop Tauri Rust Build Evaluation Input",
+      "excerpt": "{ \"initial instruction\": \"필수 설치를 완료하고 Rust로 로컬 빌드/테스트를 실행한 뒤, 필요한 개선을 시작하라는 요청.\", \"result summary\": \"Installed and verified the platform desktop app local Tauri/Rust build path, generated required Tauri icons, tracked Cargo.lock, removed duplicate frontend build calls from Tauri ",
+      "html": "<pre><code>{\n  &quot;initial_instruction&quot;: &quot;필수 설치를 완료하고 Rust로 로컬 빌드/테스트를 실행한 뒤, 필요한 개선을 시작하라는 요청.&quot;,\n  &quot;result_summary&quot;: &quot;Installed and verified the platform-desktop-app local Tauri/Rust build path, generated required Tauri icons, tracked Cargo.lock, removed duplicate frontend build calls from Tauri npm scripts, configured local ad-hoc macOS signing, fixed the workspace-monitor dompurify audit issue through an override, built the Rust crate, produced the macOS .app and DMG, verified codesign and DMG checksum, and ran an app open/quit smoke.&quot;,\n  &quot;work_mode&quot;: &quot;ship_first&quot;,\n  &quot;changed_files&quot;: [\n    &quot;platform-desktop-app/.gitignore&quot;,\n    &quot;platform-desktop-app/README.md&quot;,\n    &quot;platform-desktop-app/package.json&quot;,\n    &quot;platform-desktop-app/package-lock.json&quot;,\n    &quot;platform-desktop-app/src-tauri/Cargo.lock&quot;,\n    &quot;platform-desktop-app/src-tauri/tauri.conf.json&quot;,\n    &quot;platform-desktop-app/src-tauri/icons/&quot;,\n    &quot;workspace-monitor/package.json&quot;,\n    &quot;workspace-monitor/package-lock.json&quot;,\n    &quot;workspace-monitor/public/workspace-snapshot.json&quot;,\n    &quot;workspace-monitor/src/generated/workspace-snapshot.json&quot;,\n    &quot;_ops/installations/registry.json&quot;,\n    &quot;_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md&quot;,\n    &quot;_history/web-searches/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md&quot;,\n    &quot;_history/plans/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md&quot;,\n    &quot;_history/work-timings/2026/2026-06-03-platform-desktop-tauri-rust-build.json&quot;,\n    &quot;_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-omission-input.json&quot;,\n    &quot;_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-resource-input.json&quot;,\n    &quot;_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-grounding.json&quot;,\n    &quot;_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-evaluation-result.json&quot;,\n    &quot;_history/request-traces/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md&quot;,\n    &quot;_history/user-requests/2026/2026-06-03.ko.md&quot;,\n    &quot;_history/work-summaries/2026/2026-06-03.ko.md&quot;,\n    &quot;_history/2026/2026-06-03.md&quot;,\n    &quot;_ops/backlog/deferred-improvements.ko.md&quot;\n  ],\n  &quot;verification&quot;: [\n    &quot;PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap&quot;,\n    &quot;npm --prefix platform-desktop-app ci: installed 2 packages, 0 vulnerabilities&quot;,\n    &quot;npm --prefix workspace-monitor ci: installed 39 packages, 0 vulnerabilities after dompurify override&quot;,\n    &quot;npm --prefix platform-desktop-app audit --audit-level=moderate: found 0 vulnerabilities&quot;,\n    &quot;npm --prefix workspace-monitor audit --audit-level=moderate: found 0 vulnerabilities&quot;,\n    &quot;npm --prefix platform-desktop-app run check: ready_for_dependency_install_audit&quot;,\n    &quot;npm --prefix platform-desktop-app test: 7 tests passed&quot;,\n    &quot;npm --prefix workspace-monitor run check: passed&quot;,\n    &quot;npm --prefix workspace-monitor test: 12 tests passed&quot;,\n    &quot;npm --prefix workspace-monitor run build: passed&quot;,\n    &quot;cd platform-desktop-app/src-tauri &amp;&amp; cargo test: passed&quot;,\n    &quot;cd platform-desktop-app/src-tauri &amp;&amp; cargo build: passed&quot;,\n    &quot;npm --prefix platform-desktop-app run tauri:build: produced .app and .dmg&quot;,\n    &quot;codesign --verify --deep --strict --verbose=2 Agent Workspace Platform.app: valid on disk and satisfies its Designated Requirement&quot;,\n    &quot;hdiutil verify Agent Workspace Platform_0.1.0_aarch64.dmg: checksum valid&quot;,\n    &quot;local app open/quit smoke: process started and no process remained after quit&quot;\n  ],\n  &quot;references_checked&quot;: [\n    &quot;https://rust-lang.github.io/rustup/installation/&quot;,\n    &quot;https://doc.rust-lang.org/cargo/commands/cargo-build.html&quot;,\n    &quot;https://doc.rust-lang.org/stable/cargo/guide/tests.html&quot;,\n    &quot;https://v2.tauri.app/start/prerequisites/&quot;,\n    &quot;https://v2.tauri.app/start/create-project/&quot;,\n    &quot;https://v2.tauri.app/distribute/sign/macos/&quot;,\n    &quot;platform-desktop-app/README.md&quot;,\n    &quot;platform-desktop-app/configs/macos-execution-profile.json&quot;\n  ],\n  &quot;grounding_checks&quot;: [\n    &quot;_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-grounding.json&quot;\n  ],\n  &quot;source_provenance_targets&quot;: [\n    &quot;_history/web-searches/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md&quot;,\n    &quot;_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md&quot;\n  ],\n  &quot;plan_evidence_targets&quot;: [\n    &quot;_history/plans/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md&quot;\n  ],\n  &quot;mode_selection_record_targets&quot;: [\n    &quot;_history/plans/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md&quot;\n  ],\n  &quot;omission_check_targets&quot;: [\n    &quot;_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-omission-input.json&quot;\n  ],\n  &quot;web_search_record_targets&quot;: [\n    &quot;_history/web-searches/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md&quot;\n  ],\n  &quot;user_request_summary_targets&quot;: [\n    &quot;_history/user-requests/2026/2026-06-03.ko.md&quot;\n  ],\n  &quot;requirements_targets&quot;: [],\n  &quot;spec_targets&quot;: [],\n  &quot;skill_work_occurred&quot;: false,\n  &quot;skill_targets&quot;: [],\n  &quot;skill_validation_targets&quot;: [],\n  &quot;request_trace_targets&quot;: [\n    &quot;_history/request-traces/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md&quot;\n  ],\n  &quot;work_summary_targets&quot;: [\n    &quot;_history/work-summaries/2026/2026-06-03.ko.md&quot;\n  ],\n  &quot;timing_summary_targets&quot;: [\n    &quot;_history/work-timings/2026/2026-06-03-platform-desktop-tauri-rust-build.json&quot;\n  ],\n  &quot;context_archiving_occurred&quot;: false,\n  &quot;context_archive_targets&quot;: [],\n  &quot;installation_occurred&quot;: true,\n  &quot;installation_record_targets&quot;: [\n    &quot;_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md&quot;\n  ],\n  &quot;resource_risk_occurred&quot;: true,\n  &quot;resource_check_targets&quot;: [\n    &quot;_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-resource-input.json&quot;\n  ],\n  &quot;cli_pipeline_occurred&quot;: false,\n  &quot;cli_pipeline_targets&quot;: [],\n  &quot;deferred_improvement_targets&quot;: [\n    &quot;_ops/backlog/deferred-improvements.ko.md&quot;\n  ],\n  &quot;known_gaps&quot;: [],\n  &quot;improvement_ideas&quot;: [\n    &quot;Add a clean macOS account smoke test once internal test app flow is ready.&quot;,\n    &quot;Add a dedicated Windows build lane on a Windows host for msi/nsis verification.&quot;,\n    &quot;Review whether workspace-monitor&#039;s Monaco/xterm dependencies should be lazy-loaded or split to reduce static bundle risk.&quot;\n  ]\n}</code></pre>",
+      "updatedAt": "2026-06-02T16:56:18.869Z",
+      "historyDate": "2026-06-03",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-grounding-json",
+      "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-grounding.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 03 Platform Desktop Tauri Rust Build Grounding",
+      "excerpt": "{ \"task\": \"platform desktop app Tauri/Rust local build final response\", \"output summary\": \"Report installed dependencies, Rust/Tauri build results, generated artifacts, and remaining public distribution caveat.\", \"risk level\": \"medium\", \"evidence\": { \"evidence id\": \"install recor",
+      "html": "<pre><code>{\n  &quot;task&quot;: &quot;platform-desktop-app Tauri/Rust local build final response&quot;,\n  &quot;output_summary&quot;: &quot;Report installed dependencies, Rust/Tauri build results, generated artifacts, and remaining public distribution caveat.&quot;,\n  &quot;risk_level&quot;: &quot;medium&quot;,\n  &quot;evidence&quot;: [\n    {\n      &quot;evidence_id&quot;: &quot;install-record&quot;,\n      &quot;source&quot;: &quot;_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md&quot;,\n      &quot;source_type&quot;: &quot;repository_file&quot;,\n      &quot;checked_on&quot;: &quot;2026-06-03&quot;,\n      &quot;reliability&quot;: &quot;Detailed installation record with actual commands, versions, rollback, and verification.&quot;\n    },\n    {\n      &quot;evidence_id&quot;: &quot;tauri-build&quot;,\n      &quot;source&quot;: &quot;npm --prefix platform-desktop-app run tauri:build&quot;,\n      &quot;source_type&quot;: &quot;command_output&quot;,\n      &quot;checked_on&quot;: &quot;2026-06-03&quot;,\n      &quot;reliability&quot;: &quot;Local command produced the .app and .dmg artifacts.&quot;\n    },\n    {\n      &quot;evidence_id&quot;: &quot;codesign&quot;,\n      &quot;source&quot;: &quot;codesign --verify --deep --strict --verbose=2 Agent Workspace Platform.app&quot;,\n      &quot;source_type&quot;: &quot;command_output&quot;,\n      &quot;checked_on&quot;: &quot;2026-06-03&quot;,\n      &quot;reliability&quot;: &quot;macOS signing verification command.&quot;\n    },\n    {\n      &quot;evidence_id&quot;: &quot;dmg&quot;,\n      &quot;source&quot;: &quot;hdiutil verify Agent Workspace Platform_0.1.0_aarch64.dmg&quot;,\n      &quot;source_type&quot;: &quot;command_output&quot;,\n      &quot;checked_on&quot;: &quot;2026-06-03&quot;,\n      &quot;reliability&quot;: &quot;macOS disk image checksum verification command.&quot;\n    },\n    {\n      &quot;evidence_id&quot;: &quot;official-tauri-signing&quot;,\n      &quot;source&quot;: &quot;https://v2.tauri.app/distribute/sign/macos/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;checked_on&quot;: &quot;2026-06-03&quot;,\n      &quot;reliability&quot;: &quot;Official Tauri macOS signing documentation.&quot;\n    }\n  ],\n  &quot;claims&quot;: [\n    {\n      &quot;statement&quot;: &quot;Rust/Cargo local tests and build passed for platform-desktop-app/src-tauri.&quot;,\n      &quot;claim_type&quot;: &quot;repository_state&quot;,\n      &quot;support_level&quot;: &quot;supported&quot;,\n      &quot;evidence_ids&quot;: [\n        &quot;install-record&quot;\n      ],\n      &quot;verification_steps&quot;: [\n        &quot;Ran cargo test and cargo build after icon/signing fixes.&quot;\n      ],\n      &quot;presented_as_fact&quot;: true,\n      &quot;freshness_sensitive&quot;: false\n    },\n    {\n      &quot;statement&quot;: &quot;The Tauri build produced a macOS .app and .dmg.&quot;,\n      &quot;claim_type&quot;: &quot;repository_state&quot;,\n      &quot;support_level&quot;: &quot;supported&quot;,\n      &quot;evidence_ids&quot;: [\n        &quot;tauri-build&quot;\n      ],\n      &quot;verification_steps&quot;: [\n        &quot;Read final Tauri build output.&quot;\n      ],\n      &quot;presented_as_fact&quot;: true,\n      &quot;freshness_sensitive&quot;: false\n    },\n    {\n      &quot;statement&quot;: &quot;The local .app is ad-hoc signed and passed codesign verification.&quot;,\n      &quot;claim_type&quot;: &quot;repository_state&quot;,\n      &quot;support_level&quot;: &quot;supported&quot;,\n      &quot;evidence_ids&quot;: [\n        &quot;codesign&quot;,\n        &quot;official-tauri-signing&quot;\n      ],\n      &quot;verification_steps&quot;: [\n        &quot;Set signingIdentity to &#039;-&#039; and reran Tauri build.&quot;,\n        &quot;Ran codesign verification and inspected signature details.&quot;\n      ],\n      &quot;presented_as_fact&quot;: true,\n      &quot;freshness_sensitive&quot;: false\n    },\n    {\n      &quot;statement&quot;: &quot;The DMG checksum verification passed.&quot;,\n      &quot;claim_type&quot;: &quot;repository_state&quot;,\n      &quot;support_level&quot;: &quot;supported&quot;,\n      &quot;evidence_ids&quot;: [\n        &quot;dmg&quot;\n      ],\n      &quot;verification_steps&quot;: [\n        &quot;Ran hdiutil verify on the generated DMG.&quot;\n      ],\n      &quot;presented_as_fact&quot;: true,\n      &quot;freshness_sensitive&quot;: false\n    },\n    {\n      &quot;statement&quot;: &quot;The build is not public macOS distribution-ready.&quot;,\n      &quot;claim_type&quot;: &quot;recommendation&quot;,\n      &quot;support_level&quot;: &quot;supported&quot;,\n      &quot;evidence_ids&quot;: [\n        &quot;official-tauri-signing&quot;,\n        &quot;install-record&quot;\n      ],\n      &quot;verification_steps&quot;: [\n        &quot;Tauri build warned notarization was skipped because Apple credentials were not configured.&quot;,\n        &quot;README and macOS execution profile keep public readiness gates separate.&quot;\n      ],\n      &quot;presented_as_fact&quot;: true,\n      &quot;freshness_sensitive&quot;: true\n    }\n  ],\n  &quot;uncertainty_notes&quot;: [\n    &quot;Windows installer targets were not built on this macOS run.&quot;,\n    &quot;Public distribution still needs Developer ID signing credentials and notarization.&quot;\n  ],\n  &quot;limitation_notes&quot;: [\n    &quot;No clean-machine or clean-account smoke test was performed.&quot;\n  ]\n}</code></pre>",
+      "updatedAt": "2026-06-02T16:55:21.212Z",
+      "historyDate": "2026-06-03",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-resource-input-json",
+      "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-resource-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 03 Platform Desktop Tauri Rust Build Resource Input",
+      "excerpt": "{ \"task\": \"platform desktop app Tauri/Rust local build resource review\", \"work mode\": \"ship first\", \"runtime context\": \"npm install/build processes\", \"Cargo dependency fetch and Rust compile\", \"Tauri bundle process\", \"short lived macOS app open/quit smoke\" , \"resource risks\": { \"",
+      "html": "<pre><code>{\n  &quot;task&quot;: &quot;platform-desktop-app Tauri/Rust local build resource review&quot;,\n  &quot;work_mode&quot;: &quot;ship_first&quot;,\n  &quot;runtime_context&quot;: [\n    &quot;npm install/build processes&quot;,\n    &quot;Cargo dependency fetch and Rust compile&quot;,\n    &quot;Tauri bundle process&quot;,\n    &quot;short-lived macOS app open/quit smoke&quot;\n  ],\n  &quot;resource_risks&quot;: [\n    {\n      &quot;risk_id&quot;: &quot;long-running-build-processes&quot;,\n      &quot;category&quot;: &quot;process&quot;,\n      &quot;description&quot;: &quot;npm, Cargo, and Tauri build commands can leave child processes or generated build outputs.&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;mitigated&quot;,\n      &quot;mitigation&quot;: &quot;All build commands completed successfully before close-out; target and node_modules outputs are local build/install artifacts.&quot;,\n      &quot;evidence&quot;: [\n        &quot;cargo build: passed&quot;,\n        &quot;npm --prefix platform-desktop-app run tauri:build: passed&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    },\n    {\n      &quot;risk_id&quot;: &quot;app-smoke-process&quot;,\n      &quot;category&quot;: &quot;process&quot;,\n      &quot;description&quot;: &quot;Opening the generated macOS app can leave the app process running.&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;mitigated&quot;,\n      &quot;mitigation&quot;: &quot;The app was opened briefly, quit with osascript, and the final process check produced no remaining process output.&quot;,\n      &quot;evidence&quot;: [\n        &quot;local app open/quit smoke command output&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    },\n    {\n      &quot;risk_id&quot;: &quot;dependency-audit&quot;,\n      &quot;category&quot;: &quot;other&quot;,\n      &quot;description&quot;: &quot;Installed Node dependencies can introduce known vulnerabilities.&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;mitigated&quot;,\n      &quot;mitigation&quot;: &quot;workspace-monitor dompurify was overridden to 3.4.7 and both npm audit checks report 0 vulnerabilities at moderate threshold.&quot;,\n      &quot;evidence&quot;: [\n        &quot;npm --prefix workspace-monitor audit --audit-level=moderate: found 0 vulnerabilities&quot;,\n        &quot;npm --prefix platform-desktop-app audit --audit-level=moderate: found 0 vulnerabilities&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    }\n  ],\n  &quot;lifecycle_checks&quot;: [\n    {\n      &quot;check_id&quot;: &quot;build-command-lifecycle&quot;,\n      &quot;resource&quot;: &quot;npm/cargo/tauri subprocesses&quot;,\n      &quot;create_path&quot;: &quot;npm ci, cargo fetch/test/build, tauri build&quot;,\n      &quot;cleanup_path&quot;: &quot;Commands exit normally; generated artifacts remain under project build directories.&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;passed&quot;,\n      &quot;evidence&quot;: [\n        &quot;All command sessions exited with code 0 after fixes.&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    },\n    {\n      &quot;check_id&quot;: &quot;app-open-quit-lifecycle&quot;,\n      &quot;resource&quot;: &quot;Agent Workspace Platform app process&quot;,\n      &quot;create_path&quot;: &quot;open -n Agent Workspace Platform.app&quot;,\n      &quot;cleanup_path&quot;: &quot;osascript quit and final pgrep check&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;passed&quot;,\n      &quot;evidence&quot;: [\n        &quot;Initial pgrep showed one app process; final pgrep showed no process output.&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    }\n  ],\n  &quot;measurement_checks&quot;: [\n    {\n      &quot;check_id&quot;: &quot;artifact-size-smoke&quot;,\n      &quot;metric&quot;: &quot;Generated bundle size&quot;,\n      &quot;tool&quot;: &quot;du -sh&quot;,\n      &quot;threshold&quot;: &quot;Artifacts are small enough for local smoke review and not unexpectedly huge.&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;passed&quot;,\n      &quot;evidence&quot;: [\n        &quot;.app: 10M&quot;,\n        &quot;.dmg: 3.8M&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    },\n    {\n      &quot;check_id&quot;: &quot;signature-and-dmg-integrity&quot;,\n      &quot;metric&quot;: &quot;macOS signing and DMG checksum&quot;,\n      &quot;tool&quot;: &quot;codesign, hdiutil&quot;,\n      &quot;threshold&quot;: &quot;codesign verify passes and hdiutil checksum is valid.&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;passed&quot;,\n      &quot;evidence&quot;: [\n        &quot;codesign --verify: valid on disk and satisfies its Designated Requirement&quot;,\n        &quot;hdiutil verify: checksum valid&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    }\n  ],\n  &quot;notes&quot;: [\n    &quot;No deep memory profiling was performed because this task was a build/install smoke, not a long-running runtime soak test.&quot;\n  ]\n}</code></pre>",
+      "updatedAt": "2026-06-02T16:55:21.211Z",
+      "historyDate": "2026-06-03",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-03-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-03.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 2026 06 03",
+      "excerpt": "작업 요약: 2026 06 03 모드와 기능 선택 위치 스위치보드 workspace monitor snapshot에 modeFunctionCatalog 를 추가했다. Overview에 Mode & Function Switchboard 패널을 추가해 view/work/install/language/desktop session/task pipe/CLI adapter/monitor section을 그룹별로 보여주도록 했다. view/language 옵션은 직접 선택하도록 연결했고, desktop/sec",
+      "html": "<h1>작업 요약: 2026-06-03</h1>\n<h2>모드와 기능 선택 위치 스위치보드</h2>\n<ul>\n<li><code>workspace-monitor</code> snapshot에 <code>modeFunctionCatalog</code>를 추가했다.</li>\n<li>Overview에 <code>Mode &amp; Function Switchboard</code> 패널을 추가해 view/work/install/language/desktop session/task pipe/CLI adapter/monitor section을 그룹별로 보여주도록 했다.</li>\n<li>view/language 옵션은 직접 선택하도록 연결했고, desktop/section 관련 옵션은 해당 섹션으로 이동하도록 연결했다.</li>\n<li><code>REQ-WM-019</code>, project spec, collector/readiness tests, 운영 기록을 추가했다.</li>\n</ul>\n<h2>검증</h2>\n<ul>\n<li>검증 명령은 작업 완료 전 evaluation record에 최종 상태로 반영한다.</li>\n</ul>\n<h2>CLI 질문 보류 기능</h2>\n<ul>\n<li><code>platform-desktop-app</code> Tauri session에 자동 보류 설정, 보류된 prompt key, capture error, pending/deferred report 필드를 추가했다.</li>\n<li>CLI stdout/stderr 질문 후보를 감지하면 자동 보류가 켜진 lane에 defer 메시지를 보내고, 질문을 <code>_ops/coordination/human-decision-inbox.json</code>에 <code>deferred</code> decision으로 저장하게 했다.</li>\n<li>Workspace Monitor Desktop 탭에 <code>Auto-defer questions</code> 토글, <code>Defer detected questions</code> 전체 액션, active session 2초 polling, auto-deferred 상태 표시를 추가했다.</li>\n<li><code>PDA-UX-021</code>, question deferral spec, readiness/test/check 기록과 운영 평가 입력을 추가했다.</li>\n</ul>\n<h2>CLI 질문 보류 성능</h2>\n<ul>\n<li>질문 감지는 stdout/stderr 전체 누적 output 대신 각각 최근 32KB tail만 scan하도록 제한했다.</li>\n<li>active session polling에 overlap guard를 추가하고, decision inbox refresh를 4초 throttle로 제한했다.</li>\n<li>session report 병합과 idle elapsed 5초 bucket을 추가해 자동 polling 중 불필요한 React state 교체와 rerender를 줄였다.</li>\n<li><code>PDA-UX-022</code>, 성능 스펙, readiness token, performance validation 기록을 추가했다.</li>\n</ul>\n<h2>CLI Task Run 저장소 구현</h2>\n<ul>\n<li><code>platform-desktop-app</code> Tauri 세션에 <code>task_run_id</code>, <code>task_kind</code>, pipeline/lane 메타데이터, prompt preview, record/log path, persistence error를 추가했다.</li>\n<li>CLI 세션과 task pipe lane을 생성하거나 poll할 때 <code>platform-desktop-app/artifacts/task-runs/&lt;task-run-id&gt;/record.json</code>, <code>stdout.log</code>, <code>stderr.log</code>를 저장하게 했다.</li>\n<li>출력/상태/decision 카운터가 바뀔 때만 task-run record를 다시 써서 active polling 중 불필요한 파일 쓰기를 줄였다.</li>\n<li>Workspace Monitor Desktop 탭에 <code>Task Run Store</code> 패널, task-run metric, refresh action, 세션 카드 record/log 경로 표시를 추가했다.</li>\n</ul>\n<h2>CLI Task Run 상세/정리 기능</h2>\n<ul>\n<li>Tauri에 <code>read_cli_task_run_record</code>와 <code>prune_cli_task_run_records</code> 명령을 추가했다.</li>\n<li>저장된 task-run의 <code>record.json</code>, <code>stdout.log</code>, <code>stderr.log</code>를 bounded preview로 읽어 UI에 표시한다.</li>\n<li>prune은 최신 30개를 기본 유지하고, task-run store 내부 canonical path만 삭제하도록 제한했다.</li>\n<li>Workspace Monitor Desktop 탭에 <code>Open Logs</code>, <code>Prune Old</code>, stdout/stderr/record JSON preview 영역을 추가했다.</li>\n</ul>\n<h2>Tauri/Rust 로컬 빌드 설치 및 검증</h2>\n<ul>\n<li><code>platform-desktop-app</code>의 Tauri CLI project-local 설치와 Cargo dependency 해소를 설치 감사 기록으로 남겼다.</li>\n<li><code>Cargo.lock</code>을 추적 대상으로 바꾸고 Tauri icon set을 생성해 Rust macro compile failure를 해결했다.</li>\n<li><code>tauri:dev</code>/<code>tauri:build</code> script의 중복 frontend build 호출을 제거하고, Tauri <code>beforeBuildCommand</code> 단일 경로로 정리했다.</li>\n<li>macOS local/internal build용 <code>signingIdentity: &quot;-&quot;</code>를 설정해 <code>.app</code> ad-hoc signing과 <code>codesign --verify</code>가 통과하게 했다.</li>\n<li><code>workspace-monitor</code>의 <code>monaco-editor -&gt; dompurify</code> moderate audit issue를 <code>dompurify@3.4.7</code> override로 해결했다.</li>\n<li><code>cargo test</code>, <code>cargo build</code>, <code>npm --prefix platform-desktop-app run tauri:build</code>, <code>codesign</code>, <code>hdiutil verify</code>, app open/quit smoke를 통과했다.</li>\n<li>산출물: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code>, <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>",
+      "updatedAt": "2026-06-02T16:54:50.623Z",
+      "historyDate": "2026-06-03",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-03-platform-desktop-tauri-rust-build-json",
+      "path": "_history/work-timings/2026/2026-06-03-platform-desktop-tauri-rust-build.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 03 Platform Desktop Tauri Rust Build",
+      "excerpt": "{ \"task id\": \"2026 06 03 platform desktop tauri rust build\", \"title\": \"platform desktop app Tauri/Rust local build\", \"work mode\": \"ship first\", \"measurement quality\": \"partial\", \"created at\": \"2026 06 03\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"",
+      "html": "<pre><code>{\n  &quot;task_id&quot;: &quot;2026-06-03-platform-desktop-tauri-rust-build&quot;,\n  &quot;title&quot;: &quot;platform-desktop-app Tauri/Rust local build&quot;,\n  &quot;work_mode&quot;: &quot;ship_first&quot;,\n  &quot;measurement_quality&quot;: &quot;partial&quot;,\n  &quot;created_at&quot;: &quot;2026-06-03&quot;,\n  &quot;phases&quot;: [\n    {\n      &quot;phase_id&quot;: &quot;web_first_intake&quot;,\n      &quot;label&quot;: &quot;Web-first intake&quot;,\n      &quot;status&quot;: &quot;completed&quot;,\n      &quot;measurement&quot;: &quot;not_measured&quot;,\n      &quot;notes&quot;: &quot;Checked official Rustup, Cargo, and Tauri v2 installation/build references.&quot;\n    },\n    {\n      &quot;phase_id&quot;: &quot;memory_bootstrap&quot;,\n      &quot;label&quot;: &quot;Memory bootstrap&quot;,\n      &quot;status&quot;: &quot;completed&quot;,\n      &quot;measurement&quot;: &quot;not_measured&quot;,\n      &quot;notes&quot;: &quot;Memory bootstrap returned ready_to_bootstrap and hot anchors were read.&quot;\n    },\n    {\n      &quot;phase_id&quot;: &quot;mode_boundary_planning&quot;,\n      &quot;label&quot;: &quot;Mode, boundary, and plan&quot;,\n      &quot;status&quot;: &quot;completed&quot;,\n      &quot;measurement&quot;: &quot;not_measured&quot;,\n      &quot;notes&quot;: &quot;Selected work_mode=ship_first, install_mode=developer, owner=platform-desktop-app.&quot;\n    },\n    {\n      &quot;phase_id&quot;: &quot;implementation&quot;,\n      &quot;label&quot;: &quot;Installation and implementation&quot;,\n      &quot;status&quot;: &quot;completed&quot;,\n      &quot;measurement&quot;: &quot;not_measured&quot;,\n      &quot;notes&quot;: &quot;Installed project-local npm dependencies, fetched Cargo dependencies, generated Tauri icons, tracked Cargo.lock, configured ad-hoc signing, removed duplicate build script calls, and fixed dompurify audit with an override.&quot;\n    },\n    {\n      &quot;phase_id&quot;: &quot;verification&quot;,\n      &quot;label&quot;: &quot;Verification&quot;,\n      &quot;status&quot;: &quot;completed&quot;,\n      &quot;measurement&quot;: &quot;not_measured&quot;,\n      &quot;notes&quot;: &quot;Ran npm audit/check/test/build, cargo test/build, tauri build, codesign, hdiutil verify, and app open/quit smoke.&quot;\n    },\n    {\n      &quot;phase_id&quot;: &quot;evaluation&quot;,\n      &quot;label&quot;: &quot;Evaluation and rework&quot;,\n      &quot;status&quot;: &quot;completed&quot;,\n      &quot;measurement&quot;: &quot;not_measured&quot;,\n      &quot;notes&quot;: &quot;Prepared omission, resource, grounding, installation, request trace, and evaluation input records.&quot;\n    },\n    {\n      &quot;phase_id&quot;: &quot;commit_push&quot;,\n      &quot;label&quot;: &quot;Commit and push&quot;,\n      &quot;status&quot;: &quot;pending&quot;,\n      &quot;measurement&quot;: &quot;not_measured&quot;,\n      &quot;notes&quot;: &quot;Will update after final git actions.&quot;\n    }\n  ],\n  &quot;bottleneck_analysis&quot;: {\n    &quot;slowest_phase&quot;: &quot;not_measured&quot;,\n    &quot;bottleneck_notes&quot;: &quot;Timing started after initial intake, so this record is partial. The main rework was resolving missing Tauri icons, local macOS signing verification, and npm audit cleanup.&quot;,\n    &quot;improvement_candidates&quot;: [\n      &quot;Add clean-account macOS smoke automation once the internal test app flow exists.&quot;,\n      &quot;Add a Windows build lane for msi/nsis on a Windows host.&quot;,\n      &quot;Consider lazy-loading Monaco/xterm surfaces if bundle size or audit surface grows.&quot;\n    ]\n  },\n  &quot;evidence&quot;: [\n    &quot;_history/plans/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md&quot;,\n    &quot;_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md&quot;,\n    &quot;_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-evaluation-input.json&quot;\n  ]\n}</code></pre>",
+      "updatedAt": "2026-06-02T16:54:50.623Z",
+      "historyDate": "2026-06-03",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-2026-2026-06-03-md",
+      "path": "_history/2026/2026-06-03.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 03",
+      "excerpt": "2026 06 03 Workspace Monitor Added a mode/function switchboard plan and implementation for explicit platform mode selection and location discovery. Added REQ WM 019 and workspace monitor/specs/2026 06 03 mode function switchboard/ . Platform Desktop App Added CLI question deferra",
+      "html": "<h1>2026-06-03</h1>\n<h2>Workspace Monitor</h2>\n<ul>\n<li>Added a mode/function switchboard plan and implementation for explicit platform mode selection and location discovery.</li>\n<li>Added <code>REQ-WM-019</code> and <code>workspace-monitor/specs/2026-06-03-mode-function-switchboard/</code>.</li>\n</ul>\n<h2>Platform Desktop App</h2>\n<ul>\n<li>Added CLI question deferral requirements and <code>platform-desktop-app/specs/2026-06-03-question-deferral/</code>.</li>\n<li>Implemented automatic/manual/bulk question deferral for pipe-based CLI sessions and surfaced it in Workspace Monitor Desktop.</li>\n<li>Added question deferral performance controls for bounded scan, polling overlap prevention, inbox refresh throttling, session report merging, and idle elapsed buckets.</li>\n<li>Implemented a filesystem-backed CLI task-run store with <code>record.json</code>, <code>stdout.log</code>, and <code>stderr.log</code> artifacts plus a Workspace Monitor Desktop <code>Task Run Store</code> surface.</li>\n<li>Added task-run detail reading, bounded stdout/stderr/record JSON previews, and explicit old task-run pruning from the Desktop UI.</li>\n<li>Installed and verified the <code>platform-desktop-app</code> Tauri/Rust local build path with an installation audit.</li>\n<li>Generated the required Tauri icon set, tracked <code>Cargo.lock</code>, removed duplicate frontend build script calls, and configured ad-hoc local macOS signing.</li>\n<li>Fixed the <code>workspace-monitor</code> <code>dompurify</code> npm audit issue with a <code>3.4.7</code> override.</li>\n<li>Built and verified <code>Agent Workspace Platform.app</code> and <code>Agent Workspace Platform_0.1.0_aarch64.dmg</code>; public macOS distribution remains gated by Developer ID signing and notarization.</li>\n</ul>",
+      "updatedAt": "2026-06-02T16:54:50.623Z",
+      "historyDate": "2026-06-03",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-03-ko-md",
+      "path": "_history/user-requests/2026/2026-06-03.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 2026 06 03",
+      "excerpt": "사용자 요청 요약: 2026 06 03 UR 2026 06 03 001 요약: 플랫폼에 기능과 모드가 다양하므로, 사용자가 명시적으로 선택할 수 있는 모드와 각 기능 위치를 찾아 UI에 반영해 달라고 요청했다. 소유 프로젝트: workspace monitor/ 결과 목표: view/work/install/language/desktop session/task pipe/CLI adapter/monitor section 선택지를 한 곳에서 볼 수 있게 한다. 관련 산출물: workspace monito",
+      "html": "<h1>사용자 요청 요약: 2026-06-03</h1>\n<h2>UR-2026-06-03-001</h2>\n<ul>\n<li>요약: 플랫폼에 기능과 모드가 다양하므로, 사용자가 명시적으로 선택할 수 있는 모드와 각 기능 위치를 찾아 UI에 반영해 달라고 요청했다.</li>\n<li>소유 프로젝트: <code>workspace-monitor/</code></li>\n<li>결과 목표: view/work/install/language/desktop session/task pipe/CLI adapter/monitor section 선택지를 한 곳에서 볼 수 있게 한다.</li>\n<li>관련 산출물: <code>workspace-monitor/specs/2026-06-03-mode-function-switchboard/</code></li>\n</ul>\n<h2>UR-2026-06-03-002</h2>\n<ul>\n<li>요약: CLI가 질문을 출력했을 때 사용자가 없으면 해당 lane에 보류 메시지를 보내고, 결정은 decision inbox에 모아 사용자가 돌아왔을 때 처리할 수 있게 해 달라고 요청했다.</li>\n<li>소유 프로젝트: <code>platform-desktop-app/</code>, <code>workspace-monitor/</code></li>\n<li>결과 목표: 자동/수동/전체 질문 보류, decision inbox 저장, answer/resume 연결을 구현한다.</li>\n<li>관련 산출물: <code>platform-desktop-app/specs/2026-06-03-question-deferral/</code></li>\n</ul>\n<h2>UR-2026-06-03-003</h2>\n<ul>\n<li>요약: 질문 보류 기능에 속도적 측면도 모두 고려해 달라고 요청했다.</li>\n<li>소유 프로젝트: <code>platform-desktop-app/</code>, <code>workspace-monitor/</code></li>\n<li>결과 목표: 긴 CLI output과 다중 lane에서 scan, polling, inbox refresh, UI rerender 비용을 제한한다.</li>\n<li>관련 산출물: <code>platform-desktop-app/specs/2026-06-03-question-deferral-performance/</code></li>\n</ul>\n<h2>UR-2026-06-03-004</h2>\n<ul>\n<li>요약: 스펙만 만들지 말고 계획한 설치형 플랫폼 기능을 실제로 구현해 달라고 요청했다.</li>\n<li>소유 프로젝트: <code>platform-desktop-app/</code>, <code>workspace-monitor/</code></li>\n<li>결과 목표: CLI 세션과 task pipe 실행 결과를 파일 시스템 task-run 기록과 stdout/stderr 로그로 축적하고, Desktop UI에서 저장된 실행 기록을 확인하게 한다.</li>\n<li>관련 산출물: <code>platform-desktop-app/src-tauri/src/lib.rs</code>, <code>workspace-monitor/components/MonitorShell.tsx</code></li>\n</ul>\n<h2>UR-2026-06-03-005</h2>\n<ul>\n<li>요약: 플랫폼 소스코드 구현을 계속 진행해 달라고 요청했다.</li>\n<li>소유 프로젝트: <code>platform-desktop-app/</code>, <code>workspace-monitor/</code></li>\n<li>결과 목표: 저장된 task-run record를 열어 stdout/stderr/record JSON을 확인하고 오래된 task-run 저장소를 정리할 수 있게 한다.</li>\n<li>관련 산출물: <code>platform-desktop-app/src-tauri/src/lib.rs</code>, <code>workspace-monitor/components/MonitorShell.tsx</code>, <code>workspace-monitor/app/globals.css</code></li>\n</ul>\n<h2>UR-2026-06-03-006</h2>\n<ul>\n<li>요약: 필수 설치를 완료하고 Rust로 로컬 빌드/테스트를 수행한 뒤, 필요한 개선을 시작해 달라고 요청했다.</li>\n<li>소유 프로젝트: <code>platform-desktop-app/</code>, 공유 의존 <code>workspace-monitor/</code></li>\n<li>결과 목표: Tauri/Rust local build path를 설치 감사와 함께 실제로 통과시키고, <code>.app</code>/DMG 산출물을 검증한다.</li>\n<li>관련 산출물: <code>_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md</code>, <code>platform-desktop-app/src-tauri/Cargo.lock</code>, <code>platform-desktop-app/src-tauri/icons/</code></li>\n</ul>",
+      "updatedAt": "2026-06-02T16:54:50.622Z",
+      "historyDate": "2026-06-03",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-03-platform-desktop-tauri-rust-build-ko-md",
+      "path": "_history/request-traces/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: platform desktop app Tauri/Rust 로컬 빌드",
+      "excerpt": "요청 결과 추적: platform desktop app Tauri/Rust 로컬 빌드 요청 ID: UR 2026 06 03 006 요약: 필수 설치를 완료하고 Rust로 로컬 빌드/테스트를 수행한 뒤, 필요한 개선을 시작하라는 요청. 소유 경계 소유 프로젝트: platform desktop app 공유 의존: workspace monitor , history , ops/installations 제외: private/ , 외부 AI CLI 설치, public macOS 배포 인증서/공증 결과 Rus",
+      "html": "<h1>요청-결과 추적: platform-desktop-app Tauri/Rust 로컬 빌드</h1>\n<h2>요청</h2>\n<ul>\n<li>ID: <code>UR-2026-06-03-006</code></li>\n<li>요약: 필수 설치를 완료하고 Rust로 로컬 빌드/테스트를 수행한 뒤, 필요한 개선을 시작하라는 요청.</li>\n</ul>\n<h2>소유 경계</h2>\n<ul>\n<li>소유 프로젝트: <code>platform-desktop-app</code></li>\n<li>공유 의존: <code>workspace-monitor</code>, <code>_history</code>, <code>_ops/installations</code></li>\n<li>제외: <code>_private/</code>, 외부 AI CLI 설치, public macOS 배포 인증서/공증</li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li>Rust/rustup/Cargo가 이미 설치되어 있음을 확인했다.</li>\n<li><code>platform-desktop-app</code> project-local Tauri CLI 설치 lock을 추가했다.</li>\n<li>Cargo dependency를 해소하고 <code>Cargo.lock</code>을 추적 대상으로 만들었다.</li>\n<li>Tauri icon set을 생성해 missing icon compile failure를 해결했다.</li>\n<li>Tauri npm script의 frontend build 중복을 제거했다.</li>\n<li>local/internal build용 ad-hoc signing identity를 설정했다.</li>\n<li><code>workspace-monitor</code>의 <code>dompurify</code> audit issue를 override로 해결했다.</li>\n<li>macOS <code>.app</code>와 <code>.dmg</code>를 생성하고 검증했다.</li>\n</ul>\n<h2>검증</h2>\n<ul>\n<li><code>cargo test</code>: passed</li>\n<li><code>cargo build</code>: passed</li>\n<li><code>npm --prefix platform-desktop-app run tauri:build</code>: passed</li>\n<li><code>codesign --verify --deep --strict</code>: passed</li>\n<li><code>hdiutil verify</code>: passed</li>\n<li>local app open/quit smoke: passed</li>\n</ul>\n<h2>산출물</h2>\n<ul>\n<li>설치 기록: <code>_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md</code></li>\n<li>웹 검색 기록: <code>_history/web-searches/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md</code></li>\n<li>평가 입력: <code>_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-evaluation-input.json</code></li>\n<li>번들 산출물: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li>DMG 산출물: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>\n<h2>남은 경계</h2>\n<ul>\n<li>public macOS readiness는 아직 아니다.</li>\n<li>Windows installer build는 이번 요청 범위 밖이다.</li>\n<li>기존 untracked <code>platform-desktop-app/workspace-monitor/package-lock.json</code>는 삭제/커밋하지 않았다.</li>\n</ul>",
+      "updatedAt": "2026-06-02T16:54:26.748Z",
+      "historyDate": "2026-06-03",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-03-platform-desktop-tauri-rust-build-ko-md",
+      "path": "_history/web-searches/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: platform desktop app Tauri/Rust 로컬 빌드",
+      "excerpt": "웹 검색 기록: platform desktop app Tauri/Rust 로컬 빌드 사용자 지시 요약 필수 설치를 완료하고 Rust로 platform desktop app 를 로컬 빌드/테스트한 뒤, 필요한 개선을 시작하라는 요청. 검색어 Rust install rustup official cargo build test documentation Rust cargo build test official documentation Tauri v2 macOS prerequisites Rust cargo o",
+      "html": "<h1>웹 검색 기록: platform-desktop-app Tauri/Rust 로컬 빌드</h1>\n<h2>사용자 지시 요약</h2>\n<ul>\n<li>필수 설치를 완료하고 Rust로 <code>platform-desktop-app</code>를 로컬 빌드/테스트한 뒤, 필요한 개선을 시작하라는 요청.</li>\n</ul>\n<h2>검색어</h2>\n<ul>\n<li><code>Rust install rustup official cargo build test documentation</code></li>\n<li><code>Rust cargo build test official documentation</code></li>\n<li><code>Tauri v2 macOS prerequisites Rust cargo official</code></li>\n<li><code>Tauri v2 build command official documentation macOS</code></li>\n<li><code>Tauri v2 macOS code signing ad hoc signingIdentity official</code></li>\n</ul>\n<h2>확인한 출처</h2>\n<table><thead><tr><th>출처</th><th>유형</th><th>확인 내용</th><th>계획 영향</th></tr></thead><tbody><tr><td><code>https://rust-lang.github.io/rustup/installation/</code></td><td>공식 문서</td><td><code>rustup</code>이 Cargo bin 경로에 Rust toolchain을 설치한다는 기준</td><td>이미 설치된 rustup/rustc/cargo는 추가 전역 설치 없이 버전 확인으로 처리</td></tr><tr><td><code>https://doc.rust-lang.org/cargo/commands/cargo-build.html</code></td><td>공식 문서</td><td><code>cargo build</code> 공식 빌드 명령</td><td><code>cargo build</code>를 Rust 개발 빌드 검증으로 사용</td></tr><tr><td><code>https://doc.rust-lang.org/stable/cargo/guide/tests.html</code></td><td>공식 문서</td><td><code>cargo test</code> 공식 테스트 흐름</td><td><code>cargo test</code>를 Rust 테스트 검증으로 사용</td></tr><tr><td><code>https://v2.tauri.app/start/prerequisites/</code></td><td>공식 문서</td><td>Tauri v2 macOS 개발 전제 조건</td><td>Xcode developer path, Node/npm, Rust toolchain을 확인</td></tr><tr><td><code>https://v2.tauri.app/start/create-project/</code></td><td>공식 문서</td><td>Tauri CLI npm 설치/실행 흐름</td><td><code>@tauri-apps/cli</code> project-local install과 <code>tauri build</code>를 사용</td></tr><tr><td><code>https://v2.tauri.app/distribute/sign/macos/</code></td><td>공식 문서</td><td>macOS ad-hoc signing identity 설정</td><td>local/internal build용 <code>signingIdentity: &quot;-&quot;</code> 설정으로 <code>codesign --verify</code> 통과</td></tr><tr><td>npm registry query via <code>npm view</code></td><td>패키지 레지스트리</td><td><code>@tauri-apps/cli@2.11.2</code>, <code>dompurify@3.4.7</code>, license metadata</td><td>설치 감사와 보안 override 기록에 반영</td></tr></tbody></table>\n<h2>약한 출처 제외</h2>\n<ul>\n<li>블로그, Q&amp;A, 비공식 설치 가이드는 사용하지 않았다.</li>\n<li>npm audit의 <code>--force</code> 다운그레이드 제안은 semver major 변경이라 즉시 적용하지 않고, 같은 major의 <code>dompurify</code> override로 해결했다.</li>\n</ul>\n<h2>계획 반영 요약</h2>\n<ul>\n<li>전역 Rust 설치는 하지 않았다. <code>rustup 1.29.0</code>, <code>rustc/cargo 1.96.0</code>이 이미 설치되어 있었다.</li>\n<li><code>platform-desktop-app</code>는 project-local Tauri CLI와 Cargo lock을 남겨 재현 가능한 로컬 빌드 경로로 전환했다.</li>\n<li>Tauri icon 부재로 Rust macro compile이 실패해 Tauri icon set을 생성했다.</li>\n<li><code>.app</code> ad-hoc signing을 Tauri 설정에 명시해 local/internal build 검증에서 <code>codesign --verify</code>가 통과하게 했다.</li>\n<li><code>workspace-monitor</code>의 <code>monaco-editor -&gt; dompurify</code> audit 이슈는 <code>dompurify@3.4.7</code> override로 정리했다.</li>\n</ul>\n<h2>불확실성</h2>\n<ul>\n<li>이 작업은 local developer/internal test build다. public macOS 배포 준비는 Developer ID signing, notarization, stapling, clean-machine smoke, update/rollback 검증이 필요하다.</li>\n<li>Windows <code>msi/nsis</code> 빌드는 이번 macOS 로컬 빌드 범위 밖이다.</li>\n</ul>\n<h2>연결</h2>\n<ul>\n<li>계획: <code>_history/plans/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md</code></li>\n<li>설치 기록: <code>_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md</code></li>\n<li>평가 입력: <code>_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-evaluation-input.json</code></li>\n</ul>",
+      "updatedAt": "2026-06-02T16:54:26.746Z",
+      "historyDate": "2026-06-03",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-omission-input-json",
+      "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-omission-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 03 Platform Desktop Tauri Rust Build Omission Input",
+      "excerpt": "{ \"task\": \"platform desktop app Tauri/Rust local build close out\", \"work mode\": \"ship first\", \"expected items\": { \"item id\": \"required installs completed\", \"description\": \"Install the required local dependencies for the Tauri/Rust desktop build path.\", \"source\": \"user instruction",
+      "html": "<pre><code>{\n  &quot;task&quot;: &quot;platform-desktop-app Tauri/Rust local build close-out&quot;,\n  &quot;work_mode&quot;: &quot;ship_first&quot;,\n  &quot;expected_items&quot;: [\n    {\n      &quot;item_id&quot;: &quot;required-installs-completed&quot;,\n      &quot;description&quot;: &quot;Install the required local dependencies for the Tauri/Rust desktop build path.&quot;,\n      &quot;source&quot;: &quot;user instruction&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;covered&quot;,\n      &quot;evidence&quot;: [\n        &quot;_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md&quot;,\n        &quot;platform-desktop-app/package-lock.json&quot;,\n        &quot;platform-desktop-app/src-tauri/Cargo.lock&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    },\n    {\n      &quot;item_id&quot;: &quot;rust-build-test&quot;,\n      &quot;description&quot;: &quot;Build and test locally with Rust.&quot;,\n      &quot;source&quot;: &quot;user instruction&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;covered&quot;,\n      &quot;evidence&quot;: [\n        &quot;cd platform-desktop-app/src-tauri &amp;&amp; cargo test: passed&quot;,\n        &quot;cd platform-desktop-app/src-tauri &amp;&amp; cargo build: passed&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    },\n    {\n      &quot;item_id&quot;: &quot;tauri-local-build&quot;,\n      &quot;description&quot;: &quot;Run the local Tauri desktop build and verify generated macOS artifacts.&quot;,\n      &quot;source&quot;: &quot;user instruction&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;covered&quot;,\n      &quot;evidence&quot;: [\n        &quot;npm --prefix platform-desktop-app run tauri:build: passed&quot;,\n        &quot;codesign --verify --deep --strict: passed&quot;,\n        &quot;hdiutil verify: checksum valid&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    },\n    {\n      &quot;item_id&quot;: &quot;fix-build-blockers&quot;,\n      &quot;description&quot;: &quot;Improve the scaffold where required to make the build pass cleanly.&quot;,\n      &quot;source&quot;: &quot;build failure evidence&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;covered&quot;,\n      &quot;evidence&quot;: [\n        &quot;platform-desktop-app/src-tauri/icons/&quot;,\n        &quot;platform-desktop-app/src-tauri/tauri.conf.json&quot;,\n        &quot;platform-desktop-app/package.json&quot;,\n        &quot;workspace-monitor/package.json&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    },\n    {\n      &quot;item_id&quot;: &quot;no-public-readiness-overclaim&quot;,\n      &quot;description&quot;: &quot;Do not claim public macOS distribution readiness after an ad-hoc local build.&quot;,\n      &quot;source&quot;: &quot;macOS execution profile&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;covered&quot;,\n      &quot;evidence&quot;: [\n        &quot;platform-desktop-app/README.md&quot;,\n        &quot;platform-desktop-app/configs/macos-execution-profile.json&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    }\n  ],\n  &quot;artifact_checks&quot;: [\n    {\n      &quot;path&quot;: &quot;platform-desktop-app/package-lock.json&quot;,\n      &quot;purpose&quot;: &quot;Project-local Tauri CLI lock file.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;path&quot;: &quot;platform-desktop-app/src-tauri/Cargo.lock&quot;,\n      &quot;purpose&quot;: &quot;Rust dependency lock file for the desktop app.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;path&quot;: &quot;platform-desktop-app/src-tauri/icons/icon.icns&quot;,\n      &quot;purpose&quot;: &quot;macOS app icon used by the Tauri bundle.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;path&quot;: &quot;platform-desktop-app/src-tauri/tauri.conf.json&quot;,\n      &quot;purpose&quot;: &quot;Tauri build config with local ad-hoc signing identity.&quot;,\n      &quot;required&quot;: true\n    }\n  ],\n  &quot;acceptance_checks&quot;: [\n    {\n      &quot;check_id&quot;: &quot;npm-audit-platform-desktop&quot;,\n      &quot;description&quot;: &quot;platform-desktop-app npm audit has no moderate-or-higher findings.&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;passed&quot;,\n      &quot;evidence&quot;: [\n        &quot;npm --prefix platform-desktop-app audit --audit-level=moderate: found 0 vulnerabilities&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    },\n    {\n      &quot;check_id&quot;: &quot;npm-audit-workspace-monitor&quot;,\n      &quot;description&quot;: &quot;workspace-monitor npm audit has no moderate-or-higher findings.&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;passed&quot;,\n      &quot;evidence&quot;: [\n        &quot;npm --prefix workspace-monitor audit --audit-level=moderate: found 0 vulnerabilities&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    },\n    {\n      &quot;check_id&quot;: &quot;rust-checks&quot;,\n      &quot;description&quot;: &quot;Cargo test and build pass.&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;passed&quot;,\n      &quot;evidence&quot;: [\n        &quot;cargo test: passed&quot;,\n        &quot;cargo build: passed&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    },\n    {\n      &quot;check_id&quot;: &quot;tauri-build&quot;,\n      &quot;description&quot;: &quot;Tauri build produces local macOS artifacts.&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;passed&quot;,\n      &quot;evidence&quot;: [\n        &quot;Agent Workspace Platform.app&quot;,\n        &quot;Agent Workspace Platform_0.1.0_aarch64.dmg&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    },\n    {\n      &quot;check_id&quot;: &quot;app-open-quit-smoke&quot;,\n      &quot;description&quot;: &quot;The generated app starts and can be quit without a lingering process.&quot;,\n      &quot;required&quot;: true,\n      &quot;status&quot;: &quot;passed&quot;,\n      &quot;evidence&quot;: [\n        &quot;open -n ...Agent Workspace Platform.app; osascript quit; no second pgrep output&quot;\n      ],\n      &quot;rationale&quot;: &quot;&quot;\n    }\n  ],\n  &quot;known_omission_risks&quot;: [\n    &quot;Public macOS readiness is intentionally out of scope until Developer ID signing and notarization gates pass.&quot;,\n    &quot;Windows installer build was not run on this macOS local build task.&quot;,\n    &quot;The pre-existing untracked platform-desktop-app/workspace-monitor/package-lock.json was not deleted or committed.&quot;\n  ],\n  &quot;notes&quot;: [\n    &quot;The first cargo test failed because icons/icon.png was missing; generated Tauri icons fixed the build blocker.&quot;\n  ]\n}</code></pre>",
+      "updatedAt": "2026-06-02T16:54:26.746Z",
+      "historyDate": "2026-06-03",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-plans-2026-2026-06-03-platform-desktop-tauri-rust-build-ko-md",
+      "path": "_history/plans/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획: platform desktop app Tauri/Rust 로컬 빌드",
+      "excerpt": "계획: platform desktop app Tauri/Rust 로컬 빌드 작업 모드 선택: ship first 이유: 사용자가 설치와 Rust 로컬 빌드/테스트 완료를 우선 요청했다. 동작 검증이 먼저이고, 비차단 요구사항/spec backfill은 이 모드에서 선택 사항이다. 설치 모드: developer 설치 모드 이유: 플랫폼 데스크톱 앱 소스와 테스트/빌드 harness를 개선하고 검증하는 작업이다. 소유 프로젝트: platform desktop app 작업 범위 Rust/rustup/C",
+      "html": "<h1>계획: platform-desktop-app Tauri/Rust 로컬 빌드</h1>\n<h2>작업 모드</h2>\n<ul>\n<li>선택: <code>ship_first</code></li>\n<li>이유: 사용자가 설치와 Rust 로컬 빌드/테스트 완료를 우선 요청했다. 동작 검증이 먼저이고, 비차단 요구사항/spec backfill은 이 모드에서 선택 사항이다.</li>\n<li>설치 모드: <code>developer</code></li>\n<li>설치 모드 이유: 플랫폼 데스크톱 앱 소스와 테스트/빌드 harness를 개선하고 검증하는 작업이다.</li>\n<li>소유 프로젝트: <code>platform-desktop-app</code></li>\n</ul>\n<h2>작업 범위</h2>\n<ul>\n<li>Rust/rustup/Cargo/Xcode/Node/npm 현재 설치 상태 확인</li>\n<li><code>platform-desktop-app</code>와 <code>workspace-monitor</code> 로컬 dependency 설치</li>\n<li>Cargo dependency 해소, Rust test/build 실행</li>\n<li>Tauri 로컬 build 실행</li>\n<li>빌드 실패가 있으면 좁은 범위에서 수정</li>\n<li>설치 감사 기록, web search 기록, 누락/resource/evaluation 기록 업데이트</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>public macOS 배포 readiness 선언</li>\n<li>Developer ID signing, notarization, stapling</li>\n<li>외부 AI CLI 설치 또는 인증 설정</li>\n<li><code>_private/</code> 읽기 또는 민감 파일 접근</li>\n</ul>\n<h2>현재 기준</h2>\n<ul>\n<li>Rust/rustup/Cargo는 이미 사용자 로컬 경로에 설치되어 있다.</li>\n<li>macOS Xcode developer path는 설정되어 있다.</li>\n<li>공식 Tauri v2 문서는 macOS 데스크톱 개발에 Xcode 또는 Command Line Tools, Rust, Node를 요구한다.</li>\n<li>Tauri CLI는 npm devDependency로 설치 가능하다.</li>\n</ul>\n<h2>실행 순서</h2>\n<p>1. 설치 감사 초안을 만든다.</p>\n<p>2. <code>npm --prefix platform-desktop-app ci</code>와 <code>npm --prefix workspace-monitor ci</code>를 실행한다.</p>\n<p>3. <code>cargo fetch</code>, <code>cargo test</code>, <code>cargo build</code>를 실행한다.</p>\n<p>4. <code>npm --prefix platform-desktop-app run tauri:build</code>를 실행한다.</p>\n<p>5. 실패하면 원인별로 설정/소스/asset을 좁게 수정하고 재검증한다.</p>\n<p>6. 설치 감사, 레지스트리, omission/resource/evaluation/history를 업데이트한다.</p>\n<p>7. 변경을 커밋하고 <code>origin/main</code>에 push한다.</p>\n<h2>성공 기준</h2>\n<ul>\n<li>필수 local dependency 설치가 완료된다.</li>\n<li>Rust <code>cargo test</code>와 <code>cargo build</code>가 통과한다.</li>\n<li>Tauri build가 로컬에서 통과하거나, OS signing/public 배포 전제 조건 때문에 막힌 경우 그 경계가 명확히 기록된다.</li>\n<li>README의 이전 &quot;Rust 미설치로 막힘&quot; 상태가 실제 상태와 맞게 갱신된다.</li>\n</ul>",
+      "updatedAt": "2026-06-02T16:41:20.589Z",
+      "historyDate": "2026-06-03",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
       "id": "history-work-timings-2026-2026-06-03-task-run-detail-prune-json",
       "path": "_history/work-timings/2026/2026-06-03-task-run-detail-prune.json",
       "category": "work-timing",
@@ -5893,19 +6049,6 @@
       "workspaceArea": "_history/web-searches"
     },
     {
-      "id": "history-2026-2026-06-03-md",
-      "path": "_history/2026/2026-06-03.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 03",
-      "excerpt": "2026 06 03 Workspace Monitor Added a mode/function switchboard plan and implementation for explicit platform mode selection and location discovery. Added REQ WM 019 and workspace monitor/specs/2026 06 03 mode function switchboard/ . Platform Desktop App Added CLI question deferra",
-      "html": "<h1>2026-06-03</h1>\n<h2>Workspace Monitor</h2>\n<ul>\n<li>Added a mode/function switchboard plan and implementation for explicit platform mode selection and location discovery.</li>\n<li>Added <code>REQ-WM-019</code> and <code>workspace-monitor/specs/2026-06-03-mode-function-switchboard/</code>.</li>\n</ul>\n<h2>Platform Desktop App</h2>\n<ul>\n<li>Added CLI question deferral requirements and <code>platform-desktop-app/specs/2026-06-03-question-deferral/</code>.</li>\n<li>Implemented automatic/manual/bulk question deferral for pipe-based CLI sessions and surfaced it in Workspace Monitor Desktop.</li>\n<li>Added question deferral performance controls for bounded scan, polling overlap prevention, inbox refresh throttling, session report merging, and idle elapsed buckets.</li>\n<li>Implemented a filesystem-backed CLI task-run store with <code>record.json</code>, <code>stdout.log</code>, and <code>stderr.log</code> artifacts plus a Workspace Monitor Desktop <code>Task Run Store</code> surface.</li>\n<li>Added task-run detail reading, bounded stdout/stderr/record JSON previews, and explicit old task-run pruning from the Desktop UI.</li>\n</ul>",
-      "updatedAt": "2026-06-02T16:07:28.482Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
-    },
-    {
       "id": "history-work-summaries-2026-2026-06-03-en-md",
       "path": "_history/work-summaries/2026/2026-06-03.en.md",
       "category": "work-summary",
@@ -5919,19 +6062,6 @@
       "workspaceArea": "_history/work-summaries"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-03-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-03.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: 2026 06 03",
-      "excerpt": "작업 요약: 2026 06 03 모드와 기능 선택 위치 스위치보드 workspace monitor snapshot에 modeFunctionCatalog 를 추가했다. Overview에 Mode & Function Switchboard 패널을 추가해 view/work/install/language/desktop session/task pipe/CLI adapter/monitor section을 그룹별로 보여주도록 했다. view/language 옵션은 직접 선택하도록 연결했고, desktop/sec",
-      "html": "<h1>작업 요약: 2026-06-03</h1>\n<h2>모드와 기능 선택 위치 스위치보드</h2>\n<ul>\n<li><code>workspace-monitor</code> snapshot에 <code>modeFunctionCatalog</code>를 추가했다.</li>\n<li>Overview에 <code>Mode &amp; Function Switchboard</code> 패널을 추가해 view/work/install/language/desktop session/task pipe/CLI adapter/monitor section을 그룹별로 보여주도록 했다.</li>\n<li>view/language 옵션은 직접 선택하도록 연결했고, desktop/section 관련 옵션은 해당 섹션으로 이동하도록 연결했다.</li>\n<li><code>REQ-WM-019</code>, project spec, collector/readiness tests, 운영 기록을 추가했다.</li>\n</ul>\n<h2>검증</h2>\n<ul>\n<li>검증 명령은 작업 완료 전 evaluation record에 최종 상태로 반영한다.</li>\n</ul>\n<h2>CLI 질문 보류 기능</h2>\n<ul>\n<li><code>platform-desktop-app</code> Tauri session에 자동 보류 설정, 보류된 prompt key, capture error, pending/deferred report 필드를 추가했다.</li>\n<li>CLI stdout/stderr 질문 후보를 감지하면 자동 보류가 켜진 lane에 defer 메시지를 보내고, 질문을 <code>_ops/coordination/human-decision-inbox.json</code>에 <code>deferred</code> decision으로 저장하게 했다.</li>\n<li>Workspace Monitor Desktop 탭에 <code>Auto-defer questions</code> 토글, <code>Defer detected questions</code> 전체 액션, active session 2초 polling, auto-deferred 상태 표시를 추가했다.</li>\n<li><code>PDA-UX-021</code>, question deferral spec, readiness/test/check 기록과 운영 평가 입력을 추가했다.</li>\n</ul>\n<h2>CLI 질문 보류 성능</h2>\n<ul>\n<li>질문 감지는 stdout/stderr 전체 누적 output 대신 각각 최근 32KB tail만 scan하도록 제한했다.</li>\n<li>active session polling에 overlap guard를 추가하고, decision inbox refresh를 4초 throttle로 제한했다.</li>\n<li>session report 병합과 idle elapsed 5초 bucket을 추가해 자동 polling 중 불필요한 React state 교체와 rerender를 줄였다.</li>\n<li><code>PDA-UX-022</code>, 성능 스펙, readiness token, performance validation 기록을 추가했다.</li>\n</ul>\n<h2>CLI Task Run 저장소 구현</h2>\n<ul>\n<li><code>platform-desktop-app</code> Tauri 세션에 <code>task_run_id</code>, <code>task_kind</code>, pipeline/lane 메타데이터, prompt preview, record/log path, persistence error를 추가했다.</li>\n<li>CLI 세션과 task pipe lane을 생성하거나 poll할 때 <code>platform-desktop-app/artifacts/task-runs/&lt;task-run-id&gt;/record.json</code>, <code>stdout.log</code>, <code>stderr.log</code>를 저장하게 했다.</li>\n<li>출력/상태/decision 카운터가 바뀔 때만 task-run record를 다시 써서 active polling 중 불필요한 파일 쓰기를 줄였다.</li>\n<li>Workspace Monitor Desktop 탭에 <code>Task Run Store</code> 패널, task-run metric, refresh action, 세션 카드 record/log 경로 표시를 추가했다.</li>\n</ul>\n<h2>CLI Task Run 상세/정리 기능</h2>\n<ul>\n<li>Tauri에 <code>read_cli_task_run_record</code>와 <code>prune_cli_task_run_records</code> 명령을 추가했다.</li>\n<li>저장된 task-run의 <code>record.json</code>, <code>stdout.log</code>, <code>stderr.log</code>를 bounded preview로 읽어 UI에 표시한다.</li>\n<li>prune은 최신 30개를 기본 유지하고, task-run store 내부 canonical path만 삭제하도록 제한했다.</li>\n<li>Workspace Monitor Desktop 탭에 <code>Open Logs</code>, <code>Prune Old</code>, stdout/stderr/record JSON preview 영역을 추가했다.</li>\n</ul>",
-      "updatedAt": "2026-06-02T16:07:17.633Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
       "id": "history-user-requests-2026-2026-06-03-en-md",
       "path": "_history/user-requests/2026/2026-06-03.en.md",
       "category": "user-request",
@@ -5940,19 +6070,6 @@
       "excerpt": "User Request Summary: 2026 06 03 UR 2026 06 03 001 Summary: The user requested an explicit place to choose and locate the platform's many functions and modes. Owning project: workspace monitor/ Outcome target: Show view/work/install/language/desktop session/task pipe/CLI adapter/",
       "html": "<h1>User Request Summary: 2026-06-03</h1>\n<h2>UR-2026-06-03-001</h2>\n<ul>\n<li>Summary: The user requested an explicit place to choose and locate the platform&#039;s many functions and modes.</li>\n<li>Owning project: <code>workspace-monitor/</code></li>\n<li>Outcome target: Show view/work/install/language/desktop session/task pipe/CLI adapter/monitor section choices in one place.</li>\n<li>Related artifacts: <code>workspace-monitor/specs/2026-06-03-mode-function-switchboard/</code></li>\n</ul>\n<h2>UR-2026-06-03-002</h2>\n<ul>\n<li>Summary: The user requested question deferral so a CLI lane receives a defer message when it asks a question while the user is away, and the decision is collected for later handling.</li>\n<li>Owning project: <code>platform-desktop-app/</code>, <code>workspace-monitor/</code></li>\n<li>Outcome target: Implement automatic/manual/bulk question deferral, decision inbox storage, and answer/resume linkage.</li>\n<li>Related artifacts: <code>platform-desktop-app/specs/2026-06-03-question-deferral/</code></li>\n</ul>\n<h2>UR-2026-06-03-003</h2>\n<ul>\n<li>Summary: The user asked to account for speed and performance in the question deferral feature.</li>\n<li>Owning project: <code>platform-desktop-app/</code>, <code>workspace-monitor/</code></li>\n<li>Outcome target: Bound scan, polling, inbox refresh, and UI rerender cost for long CLI output and multiple lanes.</li>\n<li>Related artifacts: <code>platform-desktop-app/specs/2026-06-03-question-deferral-performance/</code></li>\n</ul>\n<h2>UR-2026-06-03-004</h2>\n<ul>\n<li>Summary: The user asked to stop only making specs and actually implement the planned installable platform features.</li>\n<li>Owning project: <code>platform-desktop-app/</code>, <code>workspace-monitor/</code></li>\n<li>Outcome target: Persist CLI session and task pipe execution output as filesystem task-run records plus stdout/stderr logs, and expose saved execution records in the Desktop UI.</li>\n<li>Related artifacts: <code>platform-desktop-app/src-tauri/src/lib.rs</code>, <code>workspace-monitor/components/MonitorShell.tsx</code></li>\n</ul>\n<h2>UR-2026-06-03-005</h2>\n<ul>\n<li>Summary: The user asked to continue implementing platform source code.</li>\n<li>Owning project: <code>platform-desktop-app/</code>, <code>workspace-monitor/</code></li>\n<li>Outcome target: Let users open saved task-run records, inspect stdout/stderr/record JSON previews, and prune old task-run store entries.</li>\n<li>Related artifacts: <code>platform-desktop-app/src-tauri/src/lib.rs</code>, <code>workspace-monitor/components/MonitorShell.tsx</code>, <code>workspace-monitor/app/globals.css</code></li>\n</ul>",
       "updatedAt": "2026-06-02T16:07:10.883Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-03-ko-md",
-      "path": "_history/user-requests/2026/2026-06-03.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 2026 06 03",
-      "excerpt": "사용자 요청 요약: 2026 06 03 UR 2026 06 03 001 요약: 플랫폼에 기능과 모드가 다양하므로, 사용자가 명시적으로 선택할 수 있는 모드와 각 기능 위치를 찾아 UI에 반영해 달라고 요청했다. 소유 프로젝트: workspace monitor/ 결과 목표: view/work/install/language/desktop session/task pipe/CLI adapter/monitor section 선택지를 한 곳에서 볼 수 있게 한다. 관련 산출물: workspace monito",
-      "html": "<h1>사용자 요청 요약: 2026-06-03</h1>\n<h2>UR-2026-06-03-001</h2>\n<ul>\n<li>요약: 플랫폼에 기능과 모드가 다양하므로, 사용자가 명시적으로 선택할 수 있는 모드와 각 기능 위치를 찾아 UI에 반영해 달라고 요청했다.</li>\n<li>소유 프로젝트: <code>workspace-monitor/</code></li>\n<li>결과 목표: view/work/install/language/desktop session/task pipe/CLI adapter/monitor section 선택지를 한 곳에서 볼 수 있게 한다.</li>\n<li>관련 산출물: <code>workspace-monitor/specs/2026-06-03-mode-function-switchboard/</code></li>\n</ul>\n<h2>UR-2026-06-03-002</h2>\n<ul>\n<li>요약: CLI가 질문을 출력했을 때 사용자가 없으면 해당 lane에 보류 메시지를 보내고, 결정은 decision inbox에 모아 사용자가 돌아왔을 때 처리할 수 있게 해 달라고 요청했다.</li>\n<li>소유 프로젝트: <code>platform-desktop-app/</code>, <code>workspace-monitor/</code></li>\n<li>결과 목표: 자동/수동/전체 질문 보류, decision inbox 저장, answer/resume 연결을 구현한다.</li>\n<li>관련 산출물: <code>platform-desktop-app/specs/2026-06-03-question-deferral/</code></li>\n</ul>\n<h2>UR-2026-06-03-003</h2>\n<ul>\n<li>요약: 질문 보류 기능에 속도적 측면도 모두 고려해 달라고 요청했다.</li>\n<li>소유 프로젝트: <code>platform-desktop-app/</code>, <code>workspace-monitor/</code></li>\n<li>결과 목표: 긴 CLI output과 다중 lane에서 scan, polling, inbox refresh, UI rerender 비용을 제한한다.</li>\n<li>관련 산출물: <code>platform-desktop-app/specs/2026-06-03-question-deferral-performance/</code></li>\n</ul>\n<h2>UR-2026-06-03-004</h2>\n<ul>\n<li>요약: 스펙만 만들지 말고 계획한 설치형 플랫폼 기능을 실제로 구현해 달라고 요청했다.</li>\n<li>소유 프로젝트: <code>platform-desktop-app/</code>, <code>workspace-monitor/</code></li>\n<li>결과 목표: CLI 세션과 task pipe 실행 결과를 파일 시스템 task-run 기록과 stdout/stderr 로그로 축적하고, Desktop UI에서 저장된 실행 기록을 확인하게 한다.</li>\n<li>관련 산출물: <code>platform-desktop-app/src-tauri/src/lib.rs</code>, <code>workspace-monitor/components/MonitorShell.tsx</code></li>\n</ul>\n<h2>UR-2026-06-03-005</h2>\n<ul>\n<li>요약: 플랫폼 소스코드 구현을 계속 진행해 달라고 요청했다.</li>\n<li>소유 프로젝트: <code>platform-desktop-app/</code>, <code>workspace-monitor/</code></li>\n<li>결과 목표: 저장된 task-run record를 열어 stdout/stderr/record JSON을 확인하고 오래된 task-run 저장소를 정리할 수 있게 한다.</li>\n<li>관련 산출물: <code>platform-desktop-app/src-tauri/src/lib.rs</code>, <code>workspace-monitor/components/MonitorShell.tsx</code>, <code>workspace-monitor/app/globals.css</code></li>\n</ul>",
-      "updatedAt": "2026-06-02T16:07:05.236Z",
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "_history/user-requests"
@@ -21296,150 +21413,33 @@
       "historyDate": "2026-06-02",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-02-source-code-viewer-json",
-      "path": "_history/work-timings/2026/2026-06-02-source-code-viewer.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 02 Source Code Viewer",
-      "excerpt": "{ \"schema version\": \"2026 06 02\", \"task id\": \"2026 06 02 source code viewer\", \"work mode\": \"governance\", \"status\": \"complete\", \"measurement method\": \"manual phase timestamps estimated from tool execution sequence\", \"phases\": { \"id\": \"web first intake\", \"status\": \"measured\", \"dura",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-02&quot;,\n  &quot;task_id&quot;: &quot;2026-06-02-source-code-viewer&quot;,\n  &quot;work_mode&quot;: &quot;governance&quot;,\n  &quot;status&quot;: &quot;complete&quot;,\n  &quot;measurement_method&quot;: &quot;manual phase timestamps estimated from tool execution sequence&quot;,\n  &quot;phases&quot;: [\n    {\n      &quot;id&quot;: &quot;web_first_intake&quot;,\n      &quot;status&quot;: &quot;measured&quot;,\n      &quot;duration_minutes&quot;: 3,\n      &quot;notes&quot;: &quot;Checked official Node.js, Next.js, Shiki, and Monaco references.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;local_context_review&quot;,\n      &quot;status&quot;: &quot;measured&quot;,\n      &quot;duration_minutes&quot;: 5,\n      &quot;notes&quot;: &quot;Read Workspace Monitor collector, snapshot types, UI, tests, and view mode registry.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;implementation&quot;,\n      &quot;status&quot;: &quot;measured&quot;,\n      &quot;duration_minutes&quot;: 18,\n      &quot;notes&quot;: &quot;Added sourceFiles collector, types, Source tab, CSS, view mode source section, and tests.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;documentation_history&quot;,\n      &quot;status&quot;: &quot;measured&quot;,\n      &quot;duration_minutes&quot;: 12,\n      &quot;notes&quot;: &quot;Updated requirements, README, desktop user flow docs, specs, web search record, request trace, and work summary.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;validation&quot;,\n      &quot;status&quot;: &quot;measured&quot;,\n      &quot;duration_minutes&quot;: 11,\n      &quot;notes&quot;: &quot;Ran Workspace Monitor tests, collection, checks, build, source snapshot smoke checks, view-mode validation, JSON validation, and agent-platform unit tests.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;commit_push&quot;,\n      &quot;status&quot;: &quot;not_measured&quot;,\n      &quot;duration_minutes&quot;: null,\n      &quot;notes&quot;: &quot;Commit and push duration is not measured inside the work timing record.&quot;\n    }\n  ],\n  &quot;bottlenecks&quot;: [\n    {\n      &quot;phase&quot;: &quot;implementation&quot;,\n      &quot;reason&quot;: &quot;The source viewer needed collector, type, UI, CSS, view mode, and public snapshot review changes together.&quot;,\n      &quot;mitigation&quot;: &quot;Kept the viewer read-only and dependency-free.&quot;\n    }\n  ],\n  &quot;summary&quot;: &quot;The work added source-code visibility with a narrow allowlisted snapshot and no new dependency.&quot;\n}</code></pre>",
-      "updatedAt": "2026-06-01T21:05:59.150Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "workspace-monitor-specs-2026-06-02-source-code-viewer-tasks-en-md",
-      "path": "workspace-monitor/specs/2026-06-02-source-code-viewer/tasks.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Tasks",
-      "excerpt": "Tasks | Task | Status | Output | | | | | | Web search record | Complete | history/web searches/2026/2026 06 02 source code viewer.en.md | | Add sourceFiles collector | Complete | workspace monitor/scripts/collect workspace.mjs | | Add sourceFiles type | Complete | workspace monit",
-      "html": "<h1>Tasks</h1>\n<table><thead><tr><th>Task</th><th>Status</th><th>Output</th></tr></thead><tbody><tr><td>Web search record</td><td>Complete</td><td><code>_history/web-searches/2026/2026-06-02-source-code-viewer.en.md</code></td></tr><tr><td>Add sourceFiles collector</td><td>Complete</td><td><code>workspace-monitor/scripts/collect-workspace.mjs</code></td></tr><tr><td>Add sourceFiles type</td><td>Complete</td><td><code>workspace-monitor/lib/snapshot.ts</code></td></tr><tr><td>Add Source tab UI</td><td>Complete</td><td><code>workspace-monitor/components/MonitorShell.tsx</code></td></tr><tr><td>Add Source tab CSS</td><td>Complete</td><td><code>workspace-monitor/app/globals.css</code></td></tr><tr><td>Connect source section to view modes</td><td>Complete</td><td><code>agent-platform/configs/access/view-mode-registry.json</code></td></tr><tr><td>Update requirements/docs</td><td>Complete</td><td><code>workspace-monitor/docs/requirements/</code>, README, desktop user-flow docs</td></tr><tr><td>Verify and evaluate</td><td>Complete</td><td>test/build/evaluator results</td></tr></tbody></table>",
-      "updatedAt": "2026-06-01T21:05:59.149Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "workspace-monitor"
-    },
-    {
-      "id": "workspace-monitor-specs-2026-06-02-source-code-viewer-tasks-ko-md",
-      "path": "workspace-monitor/specs/2026-06-02-source-code-viewer/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 | 작업 | 상태 | 산출물 | | | | | | 웹 검색 기록 | 완료 | history/web searches/2026/2026 06 02 source code viewer.ko.md | | sourceFiles collector 추가 | 완료 | workspace monitor/scripts/collect workspace.mjs | | sourceFiles 타입 추가 | 완료 | workspace monitor/lib/snapshot.ts | | Source 탭 UI 추가 | 완",
-      "html": "<h1>작업 목록</h1>\n<table><thead><tr><th>작업</th><th>상태</th><th>산출물</th></tr></thead><tbody><tr><td>웹 검색 기록</td><td>완료</td><td><code>_history/web-searches/2026/2026-06-02-source-code-viewer.ko.md</code></td></tr><tr><td>sourceFiles collector 추가</td><td>완료</td><td><code>workspace-monitor/scripts/collect-workspace.mjs</code></td></tr><tr><td>sourceFiles 타입 추가</td><td>완료</td><td><code>workspace-monitor/lib/snapshot.ts</code></td></tr><tr><td>Source 탭 UI 추가</td><td>완료</td><td><code>workspace-monitor/components/MonitorShell.tsx</code></td></tr><tr><td>Source 탭 CSS 추가</td><td>완료</td><td><code>workspace-monitor/app/globals.css</code></td></tr><tr><td>view mode source 섹션 연결</td><td>완료</td><td><code>agent-platform/configs/access/view-mode-registry.json</code></td></tr><tr><td>요구사항/문서 갱신</td><td>완료</td><td><code>workspace-monitor/docs/requirements/</code>, README, desktop user-flow docs</td></tr><tr><td>검증과 평가</td><td>완료</td><td>테스트/빌드/evaluator 결과</td></tr></tbody></table>",
-      "updatedAt": "2026-06-01T21:05:59.149Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "workspace-monitor"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-02-source-code-viewer-en-md",
-      "path": "_history/request-traces/2026/2026-06-02-source-code-viewer.en.md",
-      "category": "request-trace",
-      "language": "en",
-      "title": "Request Trace: Source Code Viewer",
-      "excerpt": "Request Trace: Source Code Viewer Request The user asked to make source code viewable in the installable/monitoring program. Result Added a sourceFiles catalog to the Workspace Monitor snapshot. Made the Source tab visible only in Developer/Superadmin view modes. Added project, l",
-      "html": "<h1>Request Trace: Source Code Viewer</h1>\n<h2>Request</h2>\n<ul>\n<li>The user asked to make source code viewable in the installable/monitoring program.</li>\n</ul>\n<h2>Result</h2>\n<ul>\n<li>Added a <code>sourceFiles</code> catalog to the Workspace Monitor snapshot.</li>\n<li>Made the <code>Source</code> tab visible only in Developer/Superadmin view modes.</li>\n<li>Added project, language, and search filters plus a read-only code viewer.</li>\n<li>Added README guidance to review <code>sourceFiles</code> before public deployment.</li>\n</ul>\n<h2>Artifacts</h2>\n<ul>\n<li><code>workspace-monitor/scripts/collect-workspace.mjs</code></li>\n<li><code>workspace-monitor/lib/snapshot.ts</code></li>\n<li><code>workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>workspace-monitor/app/globals.css</code></li>\n<li><code>agent-platform/configs/access/view-mode-registry.json</code></li>\n<li><code>workspace-monitor/specs/2026-06-02-source-code-viewer/</code></li>\n<li><code>_history/web-searches/2026/2026-06-02-source-code-viewer.en.md</code></li>\n</ul>\n<h2>Verification</h2>\n<ul>\n<li>Verification is recorded in <code>_history/evaluations/2026/2026-06-02-source-code-viewer.en.md</code>.</li>\n</ul>\n<h2>Commit</h2>\n<ul>\n<li>Recorded in the final response after close-out.</li>\n</ul>",
-      "updatedAt": "2026-06-01T21:00:38.865Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-02-source-code-viewer-ko-md",
-      "path": "_history/request-traces/2026/2026-06-02-source-code-viewer.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: Source Code Viewer",
-      "excerpt": "요청 결과 추적: Source Code Viewer 요청 설치형/모니터링 프로그램에서 소스 코드도 볼 수 있게 해 달라고 요청했다. 결과 Workspace Monitor snapshot에 sourceFiles catalog를 추가했다. Developer/Superadmin view mode에서만 Source 탭을 볼 수 있게 했다. Source 탭에서 프로젝트, 언어, 검색 필터와 읽기 전용 코드 뷰어를 제공했다. public 배포 전 sourceFiles 를 검토해야 한다는 안내를 README에",
-      "html": "<h1>요청-결과 추적: Source Code Viewer</h1>\n<h2>요청</h2>\n<ul>\n<li>설치형/모니터링 프로그램에서 소스 코드도 볼 수 있게 해 달라고 요청했다.</li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li>Workspace Monitor snapshot에 <code>sourceFiles</code> catalog를 추가했다.</li>\n<li>Developer/Superadmin view mode에서만 <code>Source</code> 탭을 볼 수 있게 했다.</li>\n<li>Source 탭에서 프로젝트, 언어, 검색 필터와 읽기 전용 코드 뷰어를 제공했다.</li>\n<li>public 배포 전 <code>sourceFiles</code>를 검토해야 한다는 안내를 README에 추가했다.</li>\n</ul>\n<h2>산출물</h2>\n<ul>\n<li><code>workspace-monitor/scripts/collect-workspace.mjs</code></li>\n<li><code>workspace-monitor/lib/snapshot.ts</code></li>\n<li><code>workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>workspace-monitor/app/globals.css</code></li>\n<li><code>agent-platform/configs/access/view-mode-registry.json</code></li>\n<li><code>workspace-monitor/specs/2026-06-02-source-code-viewer/</code></li>\n<li><code>_history/web-searches/2026/2026-06-02-source-code-viewer.ko.md</code></li>\n</ul>\n<h2>검증</h2>\n<ul>\n<li>검증 결과는 <code>_history/evaluations/2026/2026-06-02-source-code-viewer.ko.md</code>에 기록한다.</li>\n</ul>\n<h2>커밋</h2>\n<ul>\n<li>close-out 후 final response에 기록한다.</li>\n</ul>",
-      "updatedAt": "2026-06-01T21:00:38.865Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-plans-2026-2026-06-02-source-code-viewer-en-md",
-      "path": "_history/plans/2026/2026-06-02-source-code-viewer.en.md",
-      "category": "plan",
-      "language": "en",
-      "title": "Source Code Viewer Plan",
-      "excerpt": "Source Code Viewer Plan Request Summary The user asked to make source code viewable in the installable/monitoring program. Work Mode governance Evidence Web search record: history/web searches/2026/2026 06 02 source code viewer.en.md Research note: research/topics/workspace monit",
-      "html": "<h1>Source Code Viewer Plan</h1>\n<h2>Request Summary</h2>\n<p>The user asked to make source code viewable in the installable/monitoring program.</p>\n<h2>Work Mode</h2>\n<ul>\n<li><code>governance</code></li>\n</ul>\n<h2>Evidence</h2>\n<ul>\n<li>Web search record: <code>_history/web-searches/2026/2026-06-02-source-code-viewer.en.md</code></li>\n<li>Research note: <code>_research/topics/workspace-monitor/2026-06-02-source-code-viewer.en.md</code></li>\n<li>Internal references:</li>\n<li><code>workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md</code></li>\n<li><code>agent-platform/configs/access/view-mode-registry.json</code></li>\n<li><code>platform-desktop-app/configs/user-flow-registry.json</code></li>\n</ul>\n<h2>Plan</h2>\n<p>1. Compare source viewer implementation options.</p>\n<p>2. Select a dependency-free read-only viewer.</p>\n<p>3. Add a source-root-allowlisted <code>sourceFiles</code> snapshot.</p>\n<p>4. Add the <code>source</code> section to Developer/Superadmin view modes.</p>\n<p>5. Add Source tab filters and code viewer to Workspace Monitor.</p>\n<p>6. Update requirements, specs, history, and evaluation.</p>\n<p>7. Verify with tests, typecheck, build, workspace health, and evaluator.</p>\n<h2>Decisions</h2>\n<ul>\n<li>Source code is displayed read-only.</li>\n<li>Review <code>sourceFiles</code> snapshot scope before public deployment.</li>\n<li>Reconsider Monaco/Shiki later if editing or advanced highlighting becomes necessary.</li>\n</ul>",
-      "updatedAt": "2026-06-01T21:00:38.864Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-plans-2026-2026-06-02-source-code-viewer-ko-md",
-      "path": "_history/plans/2026/2026-06-02-source-code-viewer.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "Source Code Viewer 계획",
-      "excerpt": "Source Code Viewer 계획 요청 요약 설치형/모니터링 프로그램에서 소스 코드도 볼 수 있게 해 달라는 요청. 작업 모드 governance 근거 웹 검색 기록: history/web searches/2026/2026 06 02 source code viewer.ko.md 조사 메모: research/topics/workspace monitor/2026 06 02 source code viewer.ko.md 내부 기준: workspace monitor/docs/requirements/2",
-      "html": "<h1>Source Code Viewer 계획</h1>\n<h2>요청 요약</h2>\n<p>설치형/모니터링 프로그램에서 소스 코드도 볼 수 있게 해 달라는 요청.</p>\n<h2>작업 모드</h2>\n<ul>\n<li><code>governance</code></li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>웹 검색 기록: <code>_history/web-searches/2026/2026-06-02-source-code-viewer.ko.md</code></li>\n<li>조사 메모: <code>_research/topics/workspace-monitor/2026-06-02-source-code-viewer.ko.md</code></li>\n<li>내부 기준:</li>\n<li><code>workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md</code></li>\n<li><code>agent-platform/configs/access/view-mode-registry.json</code></li>\n<li><code>platform-desktop-app/configs/user-flow-registry.json</code></li>\n</ul>\n<h2>계획</h2>\n<p>1. source viewer 구현 옵션을 비교한다.</p>\n<p>2. dependency 없는 읽기 전용 viewer를 선택한다.</p>\n<p>3. source root allowlist 기반 <code>sourceFiles</code> snapshot을 만든다.</p>\n<p>4. Developer/Superadmin view mode에 <code>source</code> 섹션을 추가한다.</p>\n<p>5. Workspace Monitor에 Source 탭과 필터/코드 뷰어를 추가한다.</p>\n<p>6. 요구사항, 스펙, 히스토리, 평가를 갱신한다.</p>\n<p>7. 테스트, 타입 검사, 빌드, workspace health, evaluator로 검증한다.</p>\n<h2>결정</h2>\n<ul>\n<li>소스 코드는 읽기 전용으로만 표시한다.</li>\n<li>public 배포 전 <code>sourceFiles</code> snapshot 범위를 검토해야 한다.</li>\n<li>Monaco/Shiki는 편집/고급 하이라이팅 요구가 생길 때 후속으로 검토한다.</li>\n</ul>",
-      "updatedAt": "2026-06-01T21:00:38.864Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-02-source-code-viewer-en-md",
-      "path": "_history/web-searches/2026/2026-06-02-source-code-viewer.en.md",
-      "category": "web-search",
-      "language": "en",
-      "title": "Source Code Viewer Web Search Record",
-      "excerpt": "Source Code Viewer Web Search Record Request The user asked to make source code viewable in the installable/monitoring program. Search Date 2026 06 02 Queries Next.js official documentation static files read local file system build time Node fs React official documentation render",
-      "html": "<h1>Source Code Viewer Web Search Record</h1>\n<h2>Request</h2>\n<p>The user asked to make source code viewable in the installable/monitoring program.</p>\n<h2>Search Date</h2>\n<ul>\n<li>2026-06-02</li>\n</ul>\n<h2>Queries</h2>\n<ul>\n<li><code>Next.js official documentation static files read local file system build time Node fs</code></li>\n<li><code>React official documentation rendering lists and conditional rendering code blocks</code></li>\n<li><code>Shiki official documentation syntax highlighting code blocks</code></li>\n<li><code>Monaco Editor official documentation browser code editor read only</code></li>\n</ul>\n<h2>Checked Sources</h2>\n<table><thead><tr><th>Source</th><th>Type</th><th>What Was Checked</th><th>Impact</th></tr></thead><tbody><tr><td>Node.js File system docs</td><td>Official docs</td><td>A build-time collector can use <code>fs</code> APIs to read files and file stats.</td><td>Implemented <code>collectSourceFiles</code> in the Node script</td></tr><tr><td>Next.js Static Exports docs</td><td>Official docs</td><td>A static export UI works well with build-time/generated data.</td><td>Added <code>sourceFiles</code> to the generated snapshot</td></tr><tr><td>Shiki install docs</td><td>Official docs</td><td>Checked as a syntax highlighting dependency candidate.</td><td>Deferred; no dependency added now</td></tr><tr><td>Monaco Editor docs</td><td>Official docs</td><td>Checked as a browser code editor/viewer candidate.</td><td>Deferred because the request is viewing, not editing</td></tr></tbody></table>\n<h2>Plan Impact</h2>\n<ul>\n<li>Implement a dependency-free read-only <code>&lt;pre&gt;&lt;code&gt;</code> viewer first.</li>\n<li>Limit source roots to <code>src</code>, <code>tests</code>, <code>app</code>, <code>components</code>, <code>lib</code>, <code>scripts</code>, and <code>_tools/*/src|tests|scripts</code>.</li>\n<li>Exclude generated snapshots, build output, dependency folders, and large files.</li>\n<li>Expose the <code>source</code> section only in developer and superadmin development views.</li>\n<li>Require <code>sourceFiles</code> snapshot review before public deployment.</li>\n</ul>\n<h2>Uncertainty</h2>\n<ul>\n<li>Advanced syntax highlighting, symbol navigation, search index, and diff viewing were not implemented.</li>\n<li>A real desktop shell should separately design file opening/editing and OS permission behavior.</li>\n</ul>",
-      "updatedAt": "2026-06-01T20:59:21.033Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-02-source-code-viewer-ko-md",
-      "path": "_history/web-searches/2026/2026-06-02-source-code-viewer.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Source Code Viewer 웹 검색 기록",
-      "excerpt": "Source Code Viewer 웹 검색 기록 요청 사용자가 설치형/모니터링 프로그램에서 소스 코드도 볼 수 있게 하라고 요청했다. 검색 시각 2026 06 02 검색어 Next.js official documentation static files read local file system build time Node fs React official documentation rendering lists and conditional rendering code blocks Shiki official ",
-      "html": "<h1>Source Code Viewer 웹 검색 기록</h1>\n<h2>요청</h2>\n<p>사용자가 설치형/모니터링 프로그램에서 소스 코드도 볼 수 있게 하라고 요청했다.</p>\n<h2>검색 시각</h2>\n<ul>\n<li>2026-06-02</li>\n</ul>\n<h2>검색어</h2>\n<ul>\n<li><code>Next.js official documentation static files read local file system build time Node fs</code></li>\n<li><code>React official documentation rendering lists and conditional rendering code blocks</code></li>\n<li><code>Shiki official documentation syntax highlighting code blocks</code></li>\n<li><code>Monaco Editor official documentation browser code editor read only</code></li>\n</ul>\n<h2>확인한 출처</h2>\n<table><thead><tr><th>출처</th><th>유형</th><th>확인 내용</th><th>반영</th></tr></thead><tbody><tr><td>Node.js File system docs</td><td>공식 문서</td><td>build-time collector가 파일을 읽고 stat 정보를 얻는 데 <code>fs</code> API를 사용할 수 있다.</td><td><code>collectSourceFiles</code>를 Node script에 구현</td></tr><tr><td>Next.js Static Exports docs</td><td>공식 문서</td><td>정적 export 기반 UI에서는 build-time/generated data를 포함하는 방식이 현재 구조와 맞다.</td><td>snapshot에 <code>sourceFiles</code>를 넣고 정적 UI에서 표시</td></tr><tr><td>Shiki install docs</td><td>공식 문서</td><td>syntax highlighting dependency 후보로 확인했다.</td><td>지금은 dependency를 추가하지 않고 후속 후보로 보류</td></tr><tr><td>Monaco Editor docs</td><td>공식 문서</td><td>브라우저 코드 편집/뷰어 후보로 확인했다.</td><td>현재 요구는 보기이므로 비범위로 보류</td></tr></tbody></table>\n<h2>계획 반영</h2>\n<ul>\n<li>의존성 없는 <code>&lt;pre&gt;&lt;code&gt;</code> 읽기 전용 뷰어를 먼저 구현한다.</li>\n<li>source root를 <code>src</code>, <code>tests</code>, <code>app</code>, <code>components</code>, <code>lib</code>, <code>scripts</code>, <code>_tools/*/src|tests|scripts</code>로 제한한다.</li>\n<li>generated snapshot, build output, dependency 폴더, 큰 파일은 수집하지 않는다.</li>\n<li><code>source</code> 섹션은 developer와 superadmin 개발 보기에만 노출한다.</li>\n<li>public 배포 전에는 <code>sourceFiles</code> snapshot 범위를 검토해야 한다.</li>\n</ul>\n<h2>불확실성</h2>\n<ul>\n<li>고급 syntax highlighting, symbol navigation, search index, diff viewer는 구현하지 않았다.</li>\n<li>실제 desktop shell에서는 파일 열기/편집과 OS 권한 모델을 별도로 설계해야 한다.</li>\n</ul>",
-      "updatedAt": "2026-06-01T20:59:21.032Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-03",
       "year": "2026",
-      "documentsCount": 53,
+      "documentsCount": 62,
       "categories": [
         {
           "category": "evaluation",
-          "count": 19
+          "count": 24
         },
         {
           "category": "request-trace",
-          "count": 10
+          "count": 11
         },
         {
           "category": "web-search",
-          "count": 8
+          "count": 9
         },
         {
           "category": "plan",
-          "count": 6
+          "count": 7
         },
         {
           "category": "work-timing",
-          "count": 5
+          "count": 6
         },
         {
           "category": "user-request",
@@ -21462,7 +21462,7 @@
           "language": "unknown",
           "title": "2026 06 03",
           "excerpt": "2026 06 03 Workspace Monitor Added a mode/function switchboard plan and implementation for explicit platform mode selection and location discovery. Added REQ WM 019 and workspace monitor/specs/2026 06 03 mode function switchboard/ . Platform Desktop App Added CLI question deferra",
-          "updatedAt": "2026-06-02T16:07:28.482Z",
+          "updatedAt": "2026-06-02T16:54:50.623Z",
           "historyDate": "2026-06-03"
         },
         {
@@ -21513,6 +21513,56 @@
           "title": "2026 06 03 Mode Function Switchboard Resource Input",
           "excerpt": "{ \"task\": \"Mode/function switchboard resource review\", \"work mode\": \"standard\", \"runtime context\": \"Workspace Monitor snapshot collection\", \"Next.js static build\", \"temporary Python HTTP server on tcp:4183\", \"static JSON and JavaScript output checks\" , \"resource risks\": { \"risk i",
           "updatedAt": "2026-06-02T15:17:45.553Z",
+          "historyDate": "2026-06-03"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 03 Platform Desktop Tauri Rust Build Evaluation Input",
+          "excerpt": "{ \"initial instruction\": \"필수 설치를 완료하고 Rust로 로컬 빌드/테스트를 실행한 뒤, 필요한 개선을 시작하라는 요청.\", \"result summary\": \"Installed and verified the platform desktop app local Tauri/Rust build path, generated required Tauri icons, tracked Cargo.lock, removed duplicate frontend build calls from Tauri ",
+          "updatedAt": "2026-06-02T16:56:18.869Z",
+          "historyDate": "2026-06-03"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-evaluation-result-json",
+          "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-evaluation-result.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 03 Platform Desktop Tauri Rust Build Evaluation Result",
+          "excerpt": "{ \"status\": \"ready to close\", \"requires rework\": false, \"work mode\": \"ship first\", \"required target policy\": { \"required targets\": \"mode selection record targets\", \"omission check targets\", \"references checked\", \"web search record targets\" , \"deferred targets allowed\": \"plan evid",
+          "updatedAt": "2026-06-02T16:56:29.752Z",
+          "historyDate": "2026-06-03"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-grounding-json",
+          "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-grounding.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 03 Platform Desktop Tauri Rust Build Grounding",
+          "excerpt": "{ \"task\": \"platform desktop app Tauri/Rust local build final response\", \"output summary\": \"Report installed dependencies, Rust/Tauri build results, generated artifacts, and remaining public distribution caveat.\", \"risk level\": \"medium\", \"evidence\": { \"evidence id\": \"install recor",
+          "updatedAt": "2026-06-02T16:55:21.212Z",
+          "historyDate": "2026-06-03"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-omission-input-json",
+          "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-omission-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 03 Platform Desktop Tauri Rust Build Omission Input",
+          "excerpt": "{ \"task\": \"platform desktop app Tauri/Rust local build close out\", \"work mode\": \"ship first\", \"expected items\": { \"item id\": \"required installs completed\", \"description\": \"Install the required local dependencies for the Tauri/Rust desktop build path.\", \"source\": \"user instruction",
+          "updatedAt": "2026-06-02T16:54:26.746Z",
+          "historyDate": "2026-06-03"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-resource-input-json",
+          "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-resource-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 03 Platform Desktop Tauri Rust Build Resource Input",
+          "excerpt": "{ \"task\": \"platform desktop app Tauri/Rust local build resource review\", \"work mode\": \"ship first\", \"runtime context\": \"npm install/build processes\", \"Cargo dependency fetch and Rust compile\", \"Tauri bundle process\", \"short lived macOS app open/quit smoke\" , \"resource risks\": { \"",
+          "updatedAt": "2026-06-02T16:55:21.211Z",
           "historyDate": "2026-06-03"
         },
         {
@@ -21676,6 +21726,16 @@
           "historyDate": "2026-06-03"
         },
         {
+          "id": "history-plans-2026-2026-06-03-platform-desktop-tauri-rust-build-ko-md",
+          "path": "_history/plans/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "계획: platform desktop app Tauri/Rust 로컬 빌드",
+          "excerpt": "계획: platform desktop app Tauri/Rust 로컬 빌드 작업 모드 선택: ship first 이유: 사용자가 설치와 Rust 로컬 빌드/테스트 완료를 우선 요청했다. 동작 검증이 먼저이고, 비차단 요구사항/spec backfill은 이 모드에서 선택 사항이다. 설치 모드: developer 설치 모드 이유: 플랫폼 데스크톱 앱 소스와 테스트/빌드 harness를 개선하고 검증하는 작업이다. 소유 프로젝트: platform desktop app 작업 범위 Rust/rustup/C",
+          "updatedAt": "2026-06-02T16:41:20.589Z",
+          "historyDate": "2026-06-03"
+        },
+        {
           "id": "history-plans-2026-2026-06-03-question-deferral-performance-en-md",
           "path": "_history/plans/2026/2026-06-03-question-deferral-performance.en.md",
           "category": "plan",
@@ -21733,6 +21793,16 @@
           "title": "요청 추적: 모드와 기능 선택 위치 스위치보드",
           "excerpt": "요청 추적: 모드와 기능 선택 위치 스위치보드 요청 기능과 모드가 다양하므로 명시적으로 선택하는 모드와 위치를 찾아 반영한다. 해석 기존 view/language/work/install/desktop session/task pipe/CLI adapter/section 선택지를 한 곳에 모아야 한다. 직접 선택 가능한 항목과 task/setup 절차에 속한 항목을 분리해 표시해야 한다. 산출물 workspace monitor/scripts/collect workspace.mjs workspace m",
           "updatedAt": "2026-06-02T15:15:19.476Z",
+          "historyDate": "2026-06-03"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-03-platform-desktop-tauri-rust-build-ko-md",
+          "path": "_history/request-traces/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: platform desktop app Tauri/Rust 로컬 빌드",
+          "excerpt": "요청 결과 추적: platform desktop app Tauri/Rust 로컬 빌드 요청 ID: UR 2026 06 03 006 요약: 필수 설치를 완료하고 Rust로 로컬 빌드/테스트를 수행한 뒤, 필요한 개선을 시작하라는 요청. 소유 경계 소유 프로젝트: platform desktop app 공유 의존: workspace monitor , history , ops/installations 제외: private/ , 외부 AI CLI 설치, public macOS 배포 인증서/공증 결과 Rus",
+          "updatedAt": "2026-06-02T16:54:26.748Z",
           "historyDate": "2026-06-03"
         },
         {
@@ -21832,7 +21902,7 @@
           "language": "ko",
           "title": "사용자 요청 요약: 2026 06 03",
           "excerpt": "사용자 요청 요약: 2026 06 03 UR 2026 06 03 001 요약: 플랫폼에 기능과 모드가 다양하므로, 사용자가 명시적으로 선택할 수 있는 모드와 각 기능 위치를 찾아 UI에 반영해 달라고 요청했다. 소유 프로젝트: workspace monitor/ 결과 목표: view/work/install/language/desktop session/task pipe/CLI adapter/monitor section 선택지를 한 곳에서 볼 수 있게 한다. 관련 산출물: workspace monito",
-          "updatedAt": "2026-06-02T16:07:05.236Z",
+          "updatedAt": "2026-06-02T16:54:50.622Z",
           "historyDate": "2026-06-03"
         },
         {
@@ -21853,6 +21923,16 @@
           "title": "웹 검색 기록: 모드와 기능 선택 위치 스위치보드",
           "excerpt": "웹 검색 기록: 모드와 기능 선택 위치 스위치보드 요청 다양한 기능과 모드를 명시적으로 선택할 수 있는 위치를 찾아주고 UI에 반영한다. 검색 Apple Human Interface Guidelines sidebars navigation modes segmented controls official Microsoft Fluent 2 navigation command bar tabs modes official design guidelines WAI ARIA tabs pattern navigation ",
           "updatedAt": "2026-06-02T15:15:01.044Z",
+          "historyDate": "2026-06-03"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-03-platform-desktop-tauri-rust-build-ko-md",
+          "path": "_history/web-searches/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: platform desktop app Tauri/Rust 로컬 빌드",
+          "excerpt": "웹 검색 기록: platform desktop app Tauri/Rust 로컬 빌드 사용자 지시 요약 필수 설치를 완료하고 Rust로 platform desktop app 를 로컬 빌드/테스트한 뒤, 필요한 개선을 시작하라는 요청. 검색어 Rust install rustup official cargo build test documentation Rust cargo build test official documentation Tauri v2 macOS prerequisites Rust cargo o",
+          "updatedAt": "2026-06-02T16:54:26.746Z",
           "historyDate": "2026-06-03"
         },
         {
@@ -21932,7 +22012,7 @@
           "language": "ko",
           "title": "작업 요약: 2026 06 03",
           "excerpt": "작업 요약: 2026 06 03 모드와 기능 선택 위치 스위치보드 workspace monitor snapshot에 modeFunctionCatalog 를 추가했다. Overview에 Mode & Function Switchboard 패널을 추가해 view/work/install/language/desktop session/task pipe/CLI adapter/monitor section을 그룹별로 보여주도록 했다. view/language 옵션은 직접 선택하도록 연결했고, desktop/sec",
-          "updatedAt": "2026-06-02T16:07:17.633Z",
+          "updatedAt": "2026-06-02T16:54:50.623Z",
           "historyDate": "2026-06-03"
         },
         {
@@ -21943,6 +22023,16 @@
           "title": "2026 06 03 Mode Function Switchboard",
           "excerpt": "{ \"task id\": \"2026 06 03 mode function switchboard\", \"title\": \"Add explicit mode and function switchboard\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"check navigation and selector references\", \"status\": \"compl",
           "updatedAt": "2026-06-02T15:17:45.552Z",
+          "historyDate": "2026-06-03"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-03-platform-desktop-tauri-rust-build-json",
+          "path": "_history/work-timings/2026/2026-06-03-platform-desktop-tauri-rust-build.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 03 Platform Desktop Tauri Rust Build",
+          "excerpt": "{ \"task id\": \"2026 06 03 platform desktop tauri rust build\", \"title\": \"platform desktop app Tauri/Rust local build\", \"work mode\": \"ship first\", \"measurement quality\": \"partial\", \"created at\": \"2026 06 03\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"",
+          "updatedAt": "2026-06-02T16:54:50.623Z",
           "historyDate": "2026-06-03"
         },
         {
@@ -21990,7 +22080,7 @@
     {
       "date": "2026-06-02",
       "year": "2026",
-      "documentsCount": 519,
+      "documentsCount": 512,
       "categories": [
         {
           "category": "evaluation",
@@ -21998,19 +22088,19 @@
         },
         {
           "category": "web-search",
-          "count": 86
-        },
-        {
-          "category": "request-trace",
-          "count": 85
-        },
-        {
-          "category": "plan",
           "count": 84
         },
         {
+          "category": "request-trace",
+          "count": 83
+        },
+        {
+          "category": "plan",
+          "count": 82
+        },
+        {
           "category": "work-timing",
-          "count": 43
+          "count": 42
         },
         {
           "category": "user-request",
@@ -24817,26 +24907,6 @@
           "historyDate": "2026-06-02"
         },
         {
-          "id": "history-plans-2026-2026-06-02-source-code-viewer-en-md",
-          "path": "_history/plans/2026/2026-06-02-source-code-viewer.en.md",
-          "category": "plan",
-          "language": "en",
-          "title": "Source Code Viewer Plan",
-          "excerpt": "Source Code Viewer Plan Request Summary The user asked to make source code viewable in the installable/monitoring program. Work Mode governance Evidence Web search record: history/web searches/2026/2026 06 02 source code viewer.en.md Research note: research/topics/workspace monit",
-          "updatedAt": "2026-06-01T21:00:38.864Z",
-          "historyDate": "2026-06-02"
-        },
-        {
-          "id": "history-plans-2026-2026-06-02-source-code-viewer-ko-md",
-          "path": "_history/plans/2026/2026-06-02-source-code-viewer.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "Source Code Viewer 계획",
-          "excerpt": "Source Code Viewer 계획 요청 요약 설치형/모니터링 프로그램에서 소스 코드도 볼 수 있게 해 달라는 요청. 작업 모드 governance 근거 웹 검색 기록: history/web searches/2026/2026 06 02 source code viewer.ko.md 조사 메모: research/topics/workspace monitor/2026 06 02 source code viewer.ko.md 내부 기준: workspace monitor/docs/requirements/2",
-          "updatedAt": "2026-06-01T21:00:38.864Z",
-          "historyDate": "2026-06-02"
-        },
-        {
           "id": "history-plans-2026-2026-06-02-structural-guardrail-composition-en-md",
           "path": "_history/plans/2026/2026-06-02-structural-guardrail-composition.en.md",
           "category": "plan",
@@ -25664,26 +25734,6 @@
           "title": "요청 결과 추적: 민감 파일 경계와 최상위 폴더 아키텍처",
           "excerpt": "요청 결과 추적: 민감 파일 경계와 최상위 폴더 아키텍처 요청 민감 파일을 한곳에 모아 처리하되 AI가 직접 보지 않도록 하는 구조가 보이지 않는다고 지적했다. 또한 최상위 폴더가 많아 운영성/프로젝트성 폴더의 아키텍처 추상화가 부족하다고 지적했다. 결과 REQ WS 074 추가 sensitive file boundary.json 추가 private/ AI default deny 정책 추가 ops/security/ 운영 안내 추가 privacy audit 도구 추가 workspace index와 ",
           "updatedAt": "2026-06-02T01:59:26.741Z",
-          "historyDate": "2026-06-02"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-02-source-code-viewer-en-md",
-          "path": "_history/request-traces/2026/2026-06-02-source-code-viewer.en.md",
-          "category": "request-trace",
-          "language": "en",
-          "title": "Request Trace: Source Code Viewer",
-          "excerpt": "Request Trace: Source Code Viewer Request The user asked to make source code viewable in the installable/monitoring program. Result Added a sourceFiles catalog to the Workspace Monitor snapshot. Made the Source tab visible only in Developer/Superadmin view modes. Added project, l",
-          "updatedAt": "2026-06-01T21:00:38.865Z",
-          "historyDate": "2026-06-02"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-02-source-code-viewer-ko-md",
-          "path": "_history/request-traces/2026/2026-06-02-source-code-viewer.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: Source Code Viewer",
-          "excerpt": "요청 결과 추적: Source Code Viewer 요청 설치형/모니터링 프로그램에서 소스 코드도 볼 수 있게 해 달라고 요청했다. 결과 Workspace Monitor snapshot에 sourceFiles catalog를 추가했다. Developer/Superadmin view mode에서만 Source 탭을 볼 수 있게 했다. Source 탭에서 프로젝트, 언어, 검색 필터와 읽기 전용 코드 뷰어를 제공했다. public 배포 전 sourceFiles 를 검토해야 한다는 안내를 README에",
-          "updatedAt": "2026-06-01T21:00:38.865Z",
           "historyDate": "2026-06-02"
         },
         {
@@ -26547,26 +26597,6 @@
           "historyDate": "2026-06-02"
         },
         {
-          "id": "history-web-searches-2026-2026-06-02-source-code-viewer-en-md",
-          "path": "_history/web-searches/2026/2026-06-02-source-code-viewer.en.md",
-          "category": "web-search",
-          "language": "en",
-          "title": "Source Code Viewer Web Search Record",
-          "excerpt": "Source Code Viewer Web Search Record Request The user asked to make source code viewable in the installable/monitoring program. Search Date 2026 06 02 Queries Next.js official documentation static files read local file system build time Node fs React official documentation render",
-          "updatedAt": "2026-06-01T20:59:21.033Z",
-          "historyDate": "2026-06-02"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-02-source-code-viewer-ko-md",
-          "path": "_history/web-searches/2026/2026-06-02-source-code-viewer.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Source Code Viewer 웹 검색 기록",
-          "excerpt": "Source Code Viewer 웹 검색 기록 요청 사용자가 설치형/모니터링 프로그램에서 소스 코드도 볼 수 있게 하라고 요청했다. 검색 시각 2026 06 02 검색어 Next.js official documentation static files read local file system build time Node fs React official documentation rendering lists and conditional rendering code blocks Shiki official ",
-          "updatedAt": "2026-06-01T20:59:21.032Z",
-          "historyDate": "2026-06-02"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-02-structural-guardrail-composition-en-md",
           "path": "_history/web-searches/2026/2026-06-02-structural-guardrail-composition.en.md",
           "category": "web-search",
@@ -27107,16 +27137,6 @@
           "historyDate": "2026-06-02"
         },
         {
-          "id": "history-work-timings-2026-2026-06-02-source-code-viewer-json",
-          "path": "_history/work-timings/2026/2026-06-02-source-code-viewer.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 02 Source Code Viewer",
-          "excerpt": "{ \"schema version\": \"2026 06 02\", \"task id\": \"2026 06 02 source code viewer\", \"work mode\": \"governance\", \"status\": \"complete\", \"measurement method\": \"manual phase timestamps estimated from tool execution sequence\", \"phases\": { \"id\": \"web first intake\", \"status\": \"measured\", \"dura",
-          "updatedAt": "2026-06-01T21:05:59.150Z",
-          "historyDate": "2026-06-02"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-02-structural-guardrail-composition-json",
           "path": "_history/work-timings/2026/2026-06-02-structural-guardrail-composition.json",
           "category": "work-timing",
@@ -27224,33 +27244,33 @@
       "totalEvents": 160,
       "historyEvents": 160,
       "monitorEvents": 0,
-      "evidenceEvents": 84,
+      "evidenceEvents": 86,
       "decisionEvents": 0,
       "openSignals": 25,
       "criticalSignals": 0,
-      "latestEventAt": "2026-06-02T16:08:15.836Z",
+      "latestEventAt": "2026-06-02T16:56:29.752Z",
       "historyDays": 2
     },
     "lanes": [
       {
         "id": "verification",
         "label": "verification",
-        "count": 60
+        "count": 61
       },
       {
         "id": "traceability",
         "label": "traceability",
-        "count": 28
+        "count": 27
       },
       {
         "id": "evidence",
         "label": "evidence",
-        "count": 24
+        "count": 25
       },
       {
         "id": "planning",
         "label": "planning",
-        "count": 24
+        "count": 23
       },
       {
         "id": "monitoring",
@@ -27277,22 +27297,22 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 60
+        "count": 61
       },
       {
         "id": "trace",
         "label": "trace",
-        "count": 28
-      },
-      {
-        "id": "plan",
-        "label": "plan",
-        "count": 24
+        "count": 27
       },
       {
         "id": "web-search",
         "label": "web search",
-        "count": 24
+        "count": 25
+      },
+      {
+        "id": "plan",
+        "label": "plan",
+        "count": 23
       },
       {
         "id": "timing",
@@ -27323,6 +27343,186 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-evaluation-result-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 03 Platform Desktop Tauri Rust Build Evaluation Result",
+        "detail": "{ \"status\": \"ready to close\", \"requires rework\": false, \"work mode\": \"ship first\", \"required target policy\": { \"required targets\": \"mode selection record targets\", \"omission check targets\", \"references checked\", \"web search record targets\" , \"deferred targets allowed\": \"plan evid",
+        "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-evaluation-result.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-03",
+        "timestamp": "2026-06-02T16:56:29.752Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 03 Platform Desktop Tauri Rust Build Evaluation Input",
+        "detail": "{ \"initial instruction\": \"필수 설치를 완료하고 Rust로 로컬 빌드/테스트를 실행한 뒤, 필요한 개선을 시작하라는 요청.\", \"result summary\": \"Installed and verified the platform desktop app local Tauri/Rust build path, generated required Tauri icons, tracked Cargo.lock, removed duplicate frontend build calls from Tauri ",
+        "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-03",
+        "timestamp": "2026-06-02T16:56:18.869Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-grounding-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 03 Platform Desktop Tauri Rust Build Grounding",
+        "detail": "{ \"task\": \"platform desktop app Tauri/Rust local build final response\", \"output summary\": \"Report installed dependencies, Rust/Tauri build results, generated artifacts, and remaining public distribution caveat.\", \"risk level\": \"medium\", \"evidence\": { \"evidence id\": \"install recor",
+        "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-grounding.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-03",
+        "timestamp": "2026-06-02T16:55:21.212Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-resource-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 03 Platform Desktop Tauri Rust Build Resource Input",
+        "detail": "{ \"task\": \"platform desktop app Tauri/Rust local build resource review\", \"work mode\": \"ship first\", \"runtime context\": \"npm install/build processes\", \"Cargo dependency fetch and Rust compile\", \"Tauri bundle process\", \"short lived macOS app open/quit smoke\" , \"resource risks\": { \"",
+        "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-resource-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-03",
+        "timestamp": "2026-06-02T16:55:21.211Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-03-platform-desktop-tauri-rust-build-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 03 Platform Desktop Tauri Rust Build",
+        "detail": "{ \"task id\": \"2026 06 03 platform desktop tauri rust build\", \"title\": \"platform desktop app Tauri/Rust local build\", \"work mode\": \"ship first\", \"measurement quality\": \"partial\", \"created at\": \"2026 06 03\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"",
+        "path": "_history/work-timings/2026/2026-06-03-platform-desktop-tauri-rust-build.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-03",
+        "timestamp": "2026-06-02T16:54:50.623Z"
+      },
+      {
+        "id": "history-history-2026-2026-06-03-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 03",
+        "detail": "2026 06 03 Workspace Monitor Added a mode/function switchboard plan and implementation for explicit platform mode selection and location discovery. Added REQ WM 019 and workspace monitor/specs/2026 06 03 mode function switchboard/ . Platform Desktop App Added CLI question deferra",
+        "path": "_history/2026/2026-06-03.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-03",
+        "timestamp": "2026-06-02T16:54:50.623Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-03-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: 2026 06 03",
+        "detail": "작업 요약: 2026 06 03 모드와 기능 선택 위치 스위치보드 workspace monitor snapshot에 modeFunctionCatalog 를 추가했다. Overview에 Mode & Function Switchboard 패널을 추가해 view/work/install/language/desktop session/task pipe/CLI adapter/monitor section을 그룹별로 보여주도록 했다. view/language 옵션은 직접 선택하도록 연결했고, desktop/sec",
+        "path": "_history/work-summaries/2026/2026-06-03.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-03",
+        "timestamp": "2026-06-02T16:54:50.623Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-03-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: 2026 06 03",
+        "detail": "사용자 요청 요약: 2026 06 03 UR 2026 06 03 001 요약: 플랫폼에 기능과 모드가 다양하므로, 사용자가 명시적으로 선택할 수 있는 모드와 각 기능 위치를 찾아 UI에 반영해 달라고 요청했다. 소유 프로젝트: workspace monitor/ 결과 목표: view/work/install/language/desktop session/task pipe/CLI adapter/monitor section 선택지를 한 곳에서 볼 수 있게 한다. 관련 산출물: workspace monito",
+        "path": "_history/user-requests/2026/2026-06-03.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-03",
+        "timestamp": "2026-06-02T16:54:50.622Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-03-platform-desktop-tauri-rust-build-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 추적: platform desktop app Tauri/Rust 로컬 빌드",
+        "detail": "요청 결과 추적: platform desktop app Tauri/Rust 로컬 빌드 요청 ID: UR 2026 06 03 006 요약: 필수 설치를 완료하고 Rust로 로컬 빌드/테스트를 수행한 뒤, 필요한 개선을 시작하라는 요청. 소유 경계 소유 프로젝트: platform desktop app 공유 의존: workspace monitor , history , ops/installations 제외: private/ , 외부 AI CLI 설치, public macOS 배포 인증서/공증 결과 Rus",
+        "path": "_history/request-traces/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-03",
+        "timestamp": "2026-06-02T16:54:26.748Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-03-platform-desktop-tauri-rust-build-omission-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 03 Platform Desktop Tauri Rust Build Omission Input",
+        "detail": "{ \"task\": \"platform desktop app Tauri/Rust local build close out\", \"work mode\": \"ship first\", \"expected items\": { \"item id\": \"required installs completed\", \"description\": \"Install the required local dependencies for the Tauri/Rust desktop build path.\", \"source\": \"user instruction",
+        "path": "_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-omission-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-03",
+        "timestamp": "2026-06-02T16:54:26.746Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-03-platform-desktop-tauri-rust-build-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "웹 검색 기록: platform desktop app Tauri/Rust 로컬 빌드",
+        "detail": "웹 검색 기록: platform desktop app Tauri/Rust 로컬 빌드 사용자 지시 요약 필수 설치를 완료하고 Rust로 platform desktop app 를 로컬 빌드/테스트한 뒤, 필요한 개선을 시작하라는 요청. 검색어 Rust install rustup official cargo build test documentation Rust cargo build test official documentation Tauri v2 macOS prerequisites Rust cargo o",
+        "path": "_history/web-searches/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-03",
+        "timestamp": "2026-06-02T16:54:26.746Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-03-platform-desktop-tauri-rust-build-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "ready",
+        "title": "계획: platform desktop app Tauri/Rust 로컬 빌드",
+        "detail": "계획: platform desktop app Tauri/Rust 로컬 빌드 작업 모드 선택: ship first 이유: 사용자가 설치와 Rust 로컬 빌드/테스트 완료를 우선 요청했다. 동작 검증이 먼저이고, 비차단 요구사항/spec backfill은 이 모드에서 선택 사항이다. 설치 모드: developer 설치 모드 이유: 플랫폼 데스크톱 앱 소스와 테스트/빌드 harness를 개선하고 검증하는 작업이다. 소유 프로젝트: platform desktop app 작업 범위 Rust/rustup/C",
+        "path": "_history/plans/2026/2026-06-03-platform-desktop-tauri-rust-build.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-03",
+        "timestamp": "2026-06-02T16:41:20.589Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-03-task-run-detail-prune-json",
         "sourceType": "history",
@@ -27414,21 +27614,6 @@
         "timestamp": "2026-06-02T16:07:33.912Z"
       },
       {
-        "id": "history-history-2026-2026-06-03-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 03",
-        "detail": "2026 06 03 Workspace Monitor Added a mode/function switchboard plan and implementation for explicit platform mode selection and location discovery. Added REQ WM 019 and workspace monitor/specs/2026 06 03 mode function switchboard/ . Platform Desktop App Added CLI question deferra",
-        "path": "_history/2026/2026-06-03.md",
-        "category": "daily-history",
-        "language": "unknown",
-        "date": "2026-06-03",
-        "timestamp": "2026-06-02T16:07:28.482Z"
-      },
-      {
         "id": "history-history-work-summaries-2026-2026-06-03-en-md",
         "sourceType": "history",
         "signalType": "summary",
@@ -27444,21 +27629,6 @@
         "timestamp": "2026-06-02T16:07:23.932Z"
       },
       {
-        "id": "history-history-work-summaries-2026-2026-06-03-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: 2026 06 03",
-        "detail": "작업 요약: 2026 06 03 모드와 기능 선택 위치 스위치보드 workspace monitor snapshot에 modeFunctionCatalog 를 추가했다. Overview에 Mode & Function Switchboard 패널을 추가해 view/work/install/language/desktop session/task pipe/CLI adapter/monitor section을 그룹별로 보여주도록 했다. view/language 옵션은 직접 선택하도록 연결했고, desktop/sec",
-        "path": "_history/work-summaries/2026/2026-06-03.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-03",
-        "timestamp": "2026-06-02T16:07:17.633Z"
-      },
-      {
         "id": "history-history-user-requests-2026-2026-06-03-en-md",
         "sourceType": "history",
         "signalType": "intake",
@@ -27472,21 +27642,6 @@
         "language": "en",
         "date": "2026-06-03",
         "timestamp": "2026-06-02T16:07:10.883Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-03-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: 2026 06 03",
-        "detail": "사용자 요청 요약: 2026 06 03 UR 2026 06 03 001 요약: 플랫폼에 기능과 모드가 다양하므로, 사용자가 명시적으로 선택할 수 있는 모드와 각 기능 위치를 찾아 UI에 반영해 달라고 요청했다. 소유 프로젝트: workspace monitor/ 결과 목표: view/work/install/language/desktop session/task pipe/CLI adapter/monitor section 선택지를 한 곳에서 볼 수 있게 한다. 관련 산출물: workspace monito",
-        "path": "_history/user-requests/2026/2026-06-03.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-03",
-        "timestamp": "2026-06-02T16:07:05.236Z"
       },
       {
         "id": "history-history-work-timings-2026-2026-06-03-task-run-store-json",
@@ -29587,141 +29742,6 @@
         "language": "unknown",
         "date": "2026-06-02",
         "timestamp": "2026-06-02T13:14:50.069Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-02-workspace-monitor-performance-budget-grounding-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 02 Workspace Monitor Performance Budget Grounding",
-        "detail": "{ \"task\": \"Ground factual claims for Workspace Monitor performance budget close out.\", \"output summary\": \"Workspace Monitor now keeps the generated snapshot out of client JavaScript, lazy loads the monitor UI, and enforces a JavaScript chunk performance budget.\", \"risk level\": \"m",
-        "path": "_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-grounding.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-02",
-        "timestamp": "2026-06-02T13:14:32.074Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-02-workspace-monitor-performance-budget-resource-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 02 Workspace Monitor Performance Budget Resource Input",
-        "detail": "{ \"task\": \"Improve Workspace Monitor speed and verify static output with browser automation.\", \"work mode\": \"standard\", \"runtime context\": \"nextjs\", \"react\", \"browser fetch\", \"static http server\", \"playwright\", \"node script\" , \"resource risks\": { \"risk id\": \"snapshot fetch\", \"cat",
-        "path": "_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-resource-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-02",
-        "timestamp": "2026-06-02T13:14:32.073Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-02-workspace-monitor-performance-budget-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 02 Workspace Monitor Performance Budget Evaluation Input",
-        "detail": "{ \"initial instruction\": \"속도개선 및 코드를 전체적으로 분석해서 빠른 속도 유지해줘\", \"result summary\": \"Improved Workspace Monitor initial load performance by removing the generated snapshot static import from client JavaScript, adding a fetch based SnapshotLoader with dynamic MonitorShell loading, defe",
-        "path": "_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-02",
-        "timestamp": "2026-06-02T13:14:05.787Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-02-workspace-monitor-performance-budget-omission-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 02 Workspace Monitor Performance Budget Omission Input",
-        "detail": "{ \"task\": \"Improve Workspace Monitor speed and keep it fast through a performance budget.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"web first intake\", \"description\": \"Check current Next.js/React performance references before implementation.\", \"source\": \"AGENTS.md",
-        "path": "_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-omission-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-02",
-        "timestamp": "2026-06-02T13:14:05.786Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-02-workspace-monitor-performance-budget-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 02 Workspace Monitor Performance Budget",
-        "detail": "{ \"task id\": \"2026 06 02 workspace monitor performance budget\", \"title\": \"Improve Workspace Monitor speed and add performance budget\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"web search and memory bootstrap\"",
-        "path": "_history/work-timings/2026/2026-06-02-workspace-monitor-performance-budget.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-02",
-        "timestamp": "2026-06-02T13:12:12.590Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-02-workspace-monitor-performance-budget-en-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "Request Trace: Workspace Monitor Performance Budget",
-        "detail": "Request Trace: Workspace Monitor Performance Budget Request ID: UR 2026 06 02 052 Summary: The user asked to analyze the code broadly, improve speed, and keep it fast. Result Removed the large snapshot static import. Added /workspace snapshot.json fetch based SnapshotLoader . Loa",
-        "path": "_history/request-traces/2026/2026-06-02-workspace-monitor-performance-budget.en.md",
-        "category": "request-trace",
-        "language": "en",
-        "date": "2026-06-02",
-        "timestamp": "2026-06-02T13:12:12.590Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-02-workspace-monitor-performance-budget-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 추적: Workspace Monitor 성능 예산",
-        "detail": "요청 추적: Workspace Monitor 성능 예산 요청 ID: UR 2026 06 02 052 요약: 코드를 전체적으로 분석해 속도를 개선하고 빠른 속도를 유지해 달라는 요청. 결과 대용량 snapshot static import를 제거했다. /workspace snapshot.json fetch 기반 SnapshotLoader 를 추가했다. MonitorShell 을 dynamic import로 로드한다. 검색 입력은 useDeferredValue 를 사용한다. Source 탭이 아닐 때 ",
-        "path": "_history/request-traces/2026/2026-06-02-workspace-monitor-performance-budget.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-02",
-        "timestamp": "2026-06-02T13:12:12.590Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-02-workspace-monitor-performance-budget-en-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "Plan Record: Workspace Monitor Performance Budget",
-        "detail": "Plan Record: Workspace Monitor Performance Budget Request Summary The user asked to analyze the code broadly, improve speed, and keep it fast. Scope Reduction Do not refactor the whole repository. Sample representative bottlenecks through build output and import graph. This slice",
-        "path": "_history/plans/2026/2026-06-02-workspace-monitor-performance-budget.en.md",
-        "category": "plan",
-        "language": "en",
-        "date": "2026-06-02",
-        "timestamp": "2026-06-02T13:12:12.589Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-02-workspace-monitor-performance-budget-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "계획 기록: Workspace Monitor 성능 예산",
-        "detail": "계획 기록: Workspace Monitor 성능 예산 요청 요약 코드를 전체적으로 분석해 속도를 개선하고 빠른 속도를 유지해 달라는 요청. 범위 축소 전체 저장소를 모두 리팩터링하지 않는다. 대표 병목을 build output과 import graph로 샘플링한다. 이번 slice는 Workspace Monitor 초기 JS 크기와 검색 반응성에 집중한다. 실행 계획 1. 웹 first intake와 memory bootstrap을 수행한다. 2. Workspace Monitor build ou",
-        "path": "_history/plans/2026/2026-06-02-workspace-monitor-performance-budget.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-02",
-        "timestamp": "2026-06-02T13:12:12.589Z"
       }
     ]
   },
@@ -31416,12 +31436,12 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 95
+        "documentsCount": 94
       },
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 94
+        "documentsCount": 93
       },
       {
         "category": "work-timing",
@@ -31431,12 +31451,12 @@
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 90
+        "documentsCount": 89
       },
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 235
+        "documentsCount": 240
       },
       {
         "category": "daily-history",

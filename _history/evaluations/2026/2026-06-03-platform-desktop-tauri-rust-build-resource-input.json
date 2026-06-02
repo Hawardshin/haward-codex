@@ -1,0 +1,107 @@
+{
+  "task": "platform-desktop-app Tauri/Rust local build resource review",
+  "work_mode": "ship_first",
+  "runtime_context": [
+    "npm install/build processes",
+    "Cargo dependency fetch and Rust compile",
+    "Tauri bundle process",
+    "short-lived macOS app open/quit smoke"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "long-running-build-processes",
+      "category": "process",
+      "description": "npm, Cargo, and Tauri build commands can leave child processes or generated build outputs.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "All build commands completed successfully before close-out; target and node_modules outputs are local build/install artifacts.",
+      "evidence": [
+        "cargo build: passed",
+        "npm --prefix platform-desktop-app run tauri:build: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "app-smoke-process",
+      "category": "process",
+      "description": "Opening the generated macOS app can leave the app process running.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The app was opened briefly, quit with osascript, and the final process check produced no remaining process output.",
+      "evidence": [
+        "local app open/quit smoke command output"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "dependency-audit",
+      "category": "other",
+      "description": "Installed Node dependencies can introduce known vulnerabilities.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "workspace-monitor dompurify was overridden to 3.4.7 and both npm audit checks report 0 vulnerabilities at moderate threshold.",
+      "evidence": [
+        "npm --prefix workspace-monitor audit --audit-level=moderate: found 0 vulnerabilities",
+        "npm --prefix platform-desktop-app audit --audit-level=moderate: found 0 vulnerabilities"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "build-command-lifecycle",
+      "resource": "npm/cargo/tauri subprocesses",
+      "create_path": "npm ci, cargo fetch/test/build, tauri build",
+      "cleanup_path": "Commands exit normally; generated artifacts remain under project build directories.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "All command sessions exited with code 0 after fixes."
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "app-open-quit-lifecycle",
+      "resource": "Agent Workspace Platform app process",
+      "create_path": "open -n Agent Workspace Platform.app",
+      "cleanup_path": "osascript quit and final pgrep check",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Initial pgrep showed one app process; final pgrep showed no process output."
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "artifact-size-smoke",
+      "metric": "Generated bundle size",
+      "tool": "du -sh",
+      "threshold": "Artifacts are small enough for local smoke review and not unexpectedly huge.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        ".app: 10M",
+        ".dmg: 3.8M"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "signature-and-dmg-integrity",
+      "metric": "macOS signing and DMG checksum",
+      "tool": "codesign, hdiutil",
+      "threshold": "codesign verify passes and hdiutil checksum is valid.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "codesign --verify: valid on disk and satisfies its Designated Requirement",
+        "hdiutil verify: checksum valid"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No deep memory profiling was performed because this task was a build/install smoke, not a long-running runtime soak test."
+  ]
+}

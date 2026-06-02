@@ -1,0 +1,120 @@
+{
+  "task": "platform-desktop-app Tauri/Rust local build final response",
+  "output_summary": "Report installed dependencies, Rust/Tauri build results, generated artifacts, and remaining public distribution caveat.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "install-record",
+      "source": "_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Detailed installation record with actual commands, versions, rollback, and verification."
+    },
+    {
+      "evidence_id": "tauri-build",
+      "source": "npm --prefix platform-desktop-app run tauri:build",
+      "source_type": "command_output",
+      "checked_on": "2026-06-03",
+      "reliability": "Local command produced the .app and .dmg artifacts."
+    },
+    {
+      "evidence_id": "codesign",
+      "source": "codesign --verify --deep --strict --verbose=2 Agent Workspace Platform.app",
+      "source_type": "command_output",
+      "checked_on": "2026-06-03",
+      "reliability": "macOS signing verification command."
+    },
+    {
+      "evidence_id": "dmg",
+      "source": "hdiutil verify Agent Workspace Platform_0.1.0_aarch64.dmg",
+      "source_type": "command_output",
+      "checked_on": "2026-06-03",
+      "reliability": "macOS disk image checksum verification command."
+    },
+    {
+      "evidence_id": "official-tauri-signing",
+      "source": "https://v2.tauri.app/distribute/sign/macos/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official Tauri macOS signing documentation."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "Rust/Cargo local tests and build passed for platform-desktop-app/src-tauri.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "install-record"
+      ],
+      "verification_steps": [
+        "Ran cargo test and cargo build after icon/signing fixes."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The Tauri build produced a macOS .app and .dmg.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-build"
+      ],
+      "verification_steps": [
+        "Read final Tauri build output."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The local .app is ad-hoc signed and passed codesign verification.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "codesign",
+        "official-tauri-signing"
+      ],
+      "verification_steps": [
+        "Set signingIdentity to '-' and reran Tauri build.",
+        "Ran codesign verification and inspected signature details."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The DMG checksum verification passed.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "dmg"
+      ],
+      "verification_steps": [
+        "Ran hdiutil verify on the generated DMG."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The build is not public macOS distribution-ready.",
+      "claim_type": "recommendation",
+      "support_level": "supported",
+      "evidence_ids": [
+        "official-tauri-signing",
+        "install-record"
+      ],
+      "verification_steps": [
+        "Tauri build warned notarization was skipped because Apple credentials were not configured.",
+        "README and macOS execution profile keep public readiness gates separate."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Windows installer targets were not built on this macOS run.",
+    "Public distribution still needs Developer ID signing credentials and notarization."
+  ],
+  "limitation_notes": [
+    "No clean-machine or clean-account smoke test was performed."
+  ]
+}
