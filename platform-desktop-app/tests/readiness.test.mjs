@@ -78,10 +78,24 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   const monitorShell = readFileSync(join(root, "../workspace-monitor/components/MonitorShell.tsx"), "utf8");
   const viewModes = readJson("../agent-platform/configs/access/view-mode-registry.json");
 
-  for (const commandName of ["list_cli_adapters", "run_cli_adapter_health", "run_all_cli_adapter_health"]) {
+  for (const commandName of [
+    "list_cli_adapters",
+    "run_cli_adapter_health",
+    "run_all_cli_adapter_health",
+    "start_cli_adapter_session",
+    "poll_cli_adapter_session",
+    "list_cli_adapter_sessions",
+    "write_cli_adapter_stdin",
+    "send_cli_adapter_defer_message",
+    "cancel_cli_adapter_session",
+    "read_workspace_text_file",
+    "write_workspace_text_file"
+  ]) {
     assert.match(lib, new RegExp(commandName));
     assert.match(monitorShell, new RegExp(commandName));
   }
   assert.match(monitorShell, /DesktopRuntimePanel/);
+  assert.match(lib, /human-decision-inbox\.json/);
+  assert.match(monitorShell, /decisionInboxItems/);
   assert.ok(viewModes.modes.every((mode) => mode.allowed_sections.includes("desktop")));
 });

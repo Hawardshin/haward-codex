@@ -1,0 +1,214 @@
+{
+  "pipeline_id": "desktop-cli-session-editor-mvp",
+  "purpose": "Implemented bounded pipe-session process graph and scoped file-editing artifacts for optional AI CLI adapters in the desktop shell.",
+  "work_mode": "governance",
+  "risk_level": "high",
+  "processes": [
+    {
+      "process_id": "claude_code_session",
+      "adapter_id": "claude-code-cli",
+      "command": "claude",
+      "args": [],
+      "cwd": "workspace-root",
+      "env_keys": [
+        "PATH",
+        "AGENT_WORKSPACE_ROOT"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": false
+    },
+    {
+      "process_id": "gemini_cli_session",
+      "adapter_id": "gemini-cli",
+      "command": "gemini",
+      "args": [],
+      "cwd": "workspace-root",
+      "env_keys": [
+        "PATH",
+        "AGENT_WORKSPACE_ROOT"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": false
+    },
+    {
+      "process_id": "codex_cli_session",
+      "adapter_id": "codex-cli",
+      "command": "codex",
+      "args": [],
+      "cwd": "workspace-root",
+      "env_keys": [
+        "PATH",
+        "AGENT_WORKSPACE_ROOT"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": false
+    },
+    {
+      "process_id": "opencode_cli_session",
+      "adapter_id": "opencode-cli",
+      "command": "opencode",
+      "args": [],
+      "cwd": "workspace-root",
+      "env_keys": [
+        "PATH",
+        "AGENT_WORKSPACE_ROOT"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": false
+    },
+    {
+      "process_id": "desktop_session_console",
+      "adapter_id": "platform-desktop-app",
+      "command": "start_cli_adapter_session",
+      "args": [],
+      "cwd": "platform-desktop-app",
+      "env_keys": [
+        "PATH",
+        "AGENT_WORKSPACE_ROOT"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": true
+    }
+  ],
+  "pipes": [
+    {
+      "pipe_id": "adapter_stdout_to_session_console",
+      "from_process": "claude_code_session",
+      "from_stream": "stdout",
+      "to_process": "desktop_session_console",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "session_terminal_output",
+      "required": false
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "session_terminal_output",
+      "kind": "log",
+      "path": "platform-desktop-app/artifacts/desktop-cli-session/terminal-output.log",
+      "produced_by": "claude_code_session",
+      "consumed_by": [
+        "desktop_session_console"
+      ],
+      "required": false,
+      "max_bytes": 100000,
+      "format": "text",
+      "retention_policy": "Session output is runtime UI state unless explicitly promoted into a task record.",
+      "cleanup_policy": "Truncate in memory and clear when sessions are discarded.",
+      "provenance": [
+        "allowlisted adapter stdout/stderr"
+      ],
+      "validation": [
+        "Output is bounded.",
+        "Session can be canceled.",
+        "Decision prompts are detected before source-affecting release."
+      ]
+    },
+    {
+      "artifact_id": "source_editor_backup",
+      "kind": "output_file",
+      "path": "platform-desktop-app/artifacts/source-editor-backups/example.bak",
+      "produced_by": "desktop_session_console",
+      "consumed_by": [],
+      "required": false,
+      "max_bytes": 1000000,
+      "format": "text",
+      "retention_policy": "Backup files are retained for manual rollback after scoped source edits.",
+      "cleanup_policy": "Backups can be pruned by a future retention policy after review.",
+      "provenance": [
+        "original workspace text file before write"
+      ],
+      "validation": [
+        "Path is workspace-relative.",
+        "Protected local-only directories are blocked.",
+        "Symlink escapes are blocked."
+      ]
+    },
+    {
+      "artifact_id": "human_decision_inbox_item",
+      "kind": "output_file",
+      "path": "_ops/coordination/human-decision-inbox.json",
+      "produced_by": "desktop_session_console",
+      "consumed_by": [],
+      "required": false,
+      "max_bytes": 1000000,
+      "format": "json",
+      "retention_policy": "Open decisions remain until the human answer/resume workflow updates their status.",
+      "cleanup_policy": "Duplicate ids for the same session prompt are skipped; answered decisions are handled by workflow 61.",
+      "provenance": [
+        "question-like allowlisted adapter stdout/stderr"
+      ],
+      "validation": [
+        "Inbox path is workspace-scoped.",
+        "Decisions and decision_history arrays are preserved.",
+        "No source-affecting continuation is authorized by the append."
+      ]
+    }
+  ],
+  "execution_policy": {
+    "shell_allowed": false,
+    "argv_arrays_required": true,
+    "explicit_pipe_graph_required": true,
+    "explicit_cwd_required": true,
+    "adapter_allowlist": [
+      "claude-code-cli",
+      "gemini-cli",
+      "codex-cli",
+      "opencode-cli",
+      "platform-desktop-app"
+    ]
+  },
+  "safety_controls": [
+    "adapter_allowlist",
+    "argv_arguments",
+    "shell_disabled_by_default",
+    "explicit_cwd_boundary",
+    "environment_allowlist",
+    "secret_redaction",
+    "output_redaction",
+    "permission_scope",
+    "fallback_behavior",
+    "audit_logging",
+    "decision_inbox_deduplication"
+  ],
+  "resource_controls": {
+    "timeout_policy": "Sessions use SESSION_TIMEOUT_MS and cancel/timed-out paths kill and wait for child processes.",
+    "max_output_bytes": 500000,
+    "cancellation_policy": "cancel_cli_adapter_session kills and waits for the child process.",
+    "cleanup_policy": "stdin is dropped when sessions finish; reader threads are joined when finished during polling; duplicate decision inbox records for the same session prompt are skipped.",
+    "orphan_process_policy": "This MVP tracks direct child processes only; PTY/process-group cleanup remains follow-up.",
+    "backpressure_policy": "stdout/stderr readers append into bounded buffers and set truncation flags."
+  },
+  "merge_strategy": "The Desktop tab does not release autonomous source-affecting changes from CLI output. Detected questions can be deferred into the human decision inbox; source writes require explicit user interaction in the scoped editor and create backups.",
+  "source_provenance": [
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "_history/web-searches/2026/2026-06-02-desktop-cli-session-editor-mvp.ko.md",
+    "https://v2.tauri.app/security/scope/",
+    "https://v2.tauri.app/plugin/shell/"
+  ],
+  "plan_evidence": [
+    "The user asked to continue implementing missing desktop app functionality.",
+    "The previous MVP already created adapter detection and health checks.",
+    "Pipe sessions and scoped editing are the smallest implementation before PTY/xterm/Monaco dependency audit."
+  ],
+  "verification": [
+    "npm --prefix workspace-monitor run check",
+    "npm --prefix platform-desktop-app test",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-02-desktop-cli-session-editor-mvp-cli-pipeline.json"
+  ],
+  "rollback_plan": [
+    "Remove session/editor commands from Tauri invoke_handler if the desktop bridge regresses.",
+    "Disable the Desktop session console and source editor UI while keeping health checks.",
+    "Use generated source-editor backups to manually roll back edited files."
+  ],
+  "notes": [
+    "This pipeline record models the implemented direct child process/session layer. It is not a full PTY process-group supervisor."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "task_id": "2026-06-02-desktop-cli-session-editor-mvp",
+  "title": "Desktop CLI session and source editor MVP",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked official Tauri scope/shell/sidecar, xterm.js, and Monaco sources."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Memory bootstrap returned ready_to_bootstrap."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added pipe session commands, scoped file commands, Desktop console UI, and scoped editor UI."
+    },
+    {
+      "phase_id": "records",
+      "label": "Records and requirements",
+      "status": "completed",
+      "measurement": "not_measured"
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured"
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "The main risk is implementing real subprocess and file-write behavior without Rust compile verification in the current environment.",
+    "improvement_candidates": [
+      "Install Rust through a documented audit and run cargo/tauri checks.",
+      "Add an installed-CLI smoke suite once at least one AI CLI is present."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-desktop-cli-session-editor-mvp.ko.md",
+    "_history/plans/2026/2026-06-02-desktop-cli-session-editor-mvp.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md"
+  ]
+}

@@ -25,5 +25,8 @@
 - `PDA-REQ-016`: structured promotion of terminal output.
 - `PDA-REQ-018`: allowlisted CLI detection and bounded health/version checks.
 - `PDA-REQ-019`: browser fallback degradation.
+- `PDA-REQ-020`: allowlisted CLI pipe sessions, stdin, defer, cancel, and human decision inbox append.
+- `PDA-REQ-021`: workspace-scoped source file read/write and backup.
 - `PDA-UX-009` - `PDA-UX-012`: UI flow and code editing surface.
 - `PDA-UX-013`: Desktop tab shows runtime, CLI, terminal result, decision prompt, and source-editing readiness.
+- `PDA-UX-014`: Desktop tab shows CLI session console, decision inbox item count, and scoped source editor.

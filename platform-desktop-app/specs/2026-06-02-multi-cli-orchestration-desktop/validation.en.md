@@ -57,3 +57,26 @@ Expected results:
 - The view mode registry must include the `desktop` section for every mode.
 - Omission, resource, grounding, and CLI pipeline checks should each be ready.
 - Rust compile, `tauri:dev`, and `tauri:build` are not verified while the Rust toolchain is missing.
+
+## Pipe Session / Source Editor MVP 2 Additional Validation
+
+```bash
+npm --prefix workspace-monitor run check
+npm --prefix workspace-monitor test
+npm --prefix workspace-monitor run build
+npm --prefix platform-desktop-app test
+npm --prefix platform-desktop-app run check
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-desktop-cli-session-editor-mvp-omission-input.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-02-desktop-cli-session-editor-mvp-resource-input.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-desktop-cli-session-editor-mvp-grounding.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-02-desktop-cli-session-editor-mvp-cli-pipeline.json
+```
+
+Expected results:
+
+- Workspace Monitor check/test/build should pass.
+- `platform-desktop-app` Node tests should verify the new command names.
+- The readiness check should verify session/editor command names, human decision inbox persistence, and Desktop tab inbox item count display.
+- Rust compile and Tauri dev/build are not verified until the Rust toolchain is installed.
+- The source editor contract must block `_private/`, `outputs/`, paths outside the workspace, and symlink escapes, and create a backup before saving.
+- The defer command contract must append detected questions to `_ops/coordination/human-decision-inbox.json` without duplicating the same session prompt.

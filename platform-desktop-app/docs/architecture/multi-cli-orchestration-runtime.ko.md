@@ -102,12 +102,26 @@ Tauri desktop shell
 - stdin은 닫혀 있고, output은 `MAX_HEALTH_OUTPUT_BYTES`로 제한되며, timeout은 `HEALTH_TIMEOUT_MS`로 제한된다.
 - CLI가 없으면 `capability_missing`으로 보고하고 데스크톱 UI는 계속 열린다.
 - `workspace-monitor`의 `Desktop` 탭은 Tauri 런타임에 연결되면 실제 health check를 실행하고, 일반 브라우저에서는 unavailable fallback을 보여준다.
-- health output에서 질문처럼 보이는 라인은 decision prompt 후보로만 표시한다. 실제 pause/resume이나 stdin defer message 전송은 아직 구현하지 않았다.
+- health output에서 질문처럼 보이는 라인은 decision prompt 후보로 표시한다. session MVP에서는 `send_cli_adapter_defer_message`가 stdin defer message를 보내고 감지된 질문을 `_ops/coordination/human-decision-inbox.json`에 저장한다.
+
+## 구현 상태: Pipe Session / Source Editor MVP 2
+
+2026-06-02 후속 구현은 dependency 설치 없이 가능한 pipe 기반 실행과 scoped file editing을 추가한다.
+
+- Tauri backend는 `start_cli_adapter_session`, `poll_cli_adapter_session`, `list_cli_adapter_sessions`, `write_cli_adapter_stdin`, `send_cli_adapter_defer_message`, `cancel_cli_adapter_session`을 제공한다.
+- 실행 대상은 `ADAPTERS` allowlist의 CLI만 가능하다. shell plugin 권한은 추가하지 않았다.
+- 각 session은 stdout/stderr를 bounded buffer에 수집하고, stdin 입력은 크기 제한을 둔다.
+- `send_cli_adapter_defer_message`는 고정 defer message를 stdin으로 보내고, 감지된 질문을 `_ops/coordination/human-decision-inbox.json`에 중복 없이 저장하며, session report에 저장된 inbox item 수를 표시한다.
+- `cancel_cli_adapter_session`은 child process를 kill/wait하고 report를 유지한다.
+- Tauri backend는 `read_workspace_text_file`, `write_workspace_text_file`을 제공한다.
+- 파일 작업은 workspace root 상대 경로만 허용하고 `_private/`, `outputs/`, workspace 밖 경로, symlink escape를 차단한다.
+- 저장 전 `platform-desktop-app/artifacts/source-editor-backups/` 아래 backup을 만든다.
+- Workspace Monitor `Desktop` 탭은 CLI session console과 textarea 기반 scoped editor를 표시한다.
 
 ## 비범위
 
-- 이번 MVP는 long-running CLI task 실행 구현이 아니다.
-- interactive PTY, stdin write, source-affecting command execution은 아직 구현하지 않았다.
+- 이번 MVP는 PTY 기반 terminal implementation이 아니다.
+- autonomous source-affecting CLI execution과 merge gate release는 아직 구현하지 않았다.
 - 실제 Rust/Tauri, xterm.js, Monaco, PTY dependency 설치는 설치 감사 전에는 하지 않는다.
 - provider authentication을 앱이 대신 소유하지 않는다.
 - public installer readiness를 주장하지 않는다.

@@ -27,10 +27,12 @@
 | PDA-REQ-017 | 소스코드 편집은 처음부터 직접 구현하지 않고 Monaco Editor 같은 성숙한 오픈소스 editor surface를 우선 검토해야 하며, 파일 URI/model lifecycle, dispose, worker/runtime 제약을 구현 전에 검증해야 한다. | should | architecture doc, dependency audit, UI prototype test |
 | PDA-REQ-018 | 첫 실제 supervisor 구현은 allowlist된 AI CLI에 대해서만 PATH 탐지와 stdin 없는 bounded health/version check를 제공하고, 누락된 CLI는 `capability_missing`으로 표시해야 한다. | must | Tauri commands, Desktop tab, readiness/test |
 | PDA-REQ-019 | desktop UI는 Tauri runtime이 없을 때도 브라우저에서 안전하게 열려야 하며, CLI 실행 기능은 unavailable fallback으로 degrade해야 한다. | must | workspace-monitor build, TypeScript check |
+| PDA-REQ-020 | CLI supervisor는 dependency 설치 전 slice에서 shell plugin 없이 allowlist된 adapter에 한해 pipe 기반 session start, stdout/stderr polling, bounded stdin write, defer message, cancel을 제공하고, defer 시 감지된 질문을 human decision inbox에 저장해야 한다. | must | Tauri commands, Desktop tab, human decision inbox, resource/CLI pipeline check |
+| PDA-REQ-021 | source editing MVP는 workspace root 안의 상대 경로만 읽고 쓸 수 있어야 하며 `_private/`, `outputs/`, workspace 밖 경로, symlink escape를 차단하고 저장 전 backup을 남겨야 한다. | must | Tauri file commands, TypeScript check, resource/security review |
 
 ## 현재 상태
 
 - 상태: baseline draft
 - 실제 desktop dependency 설치: 없음
 - 현재 선택: Tauri-first scaffold
-- 다음 단계: Rust/Tauri 설치 감사 기록을 만든 뒤 developer-local Tauri 실행 검증
+- 다음 단계: Rust/Tauri 설치 감사 기록을 만든 뒤 developer-local Tauri 실행 검증과 실제 installed CLI smoke test

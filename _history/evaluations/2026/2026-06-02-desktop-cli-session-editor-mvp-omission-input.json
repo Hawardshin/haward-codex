@@ -1,0 +1,138 @@
+{
+  "task": "Desktop CLI session and source editor MVP implementation",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "pipe-session-implementation",
+      "description": "Implement a real but bounded CLI session layer beyond health checks.",
+      "source": "UR-2026-06-02-049",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "stdin-defer-cancel",
+      "description": "Expose stdin write, defer message, and cancel controls for allowlisted CLI sessions.",
+      "source": "PDA-REQ-020",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "decision-inbox-persistence",
+      "description": "Persist detected CLI questions into the human decision inbox when deferring a session.",
+      "source": "PDA-REQ-015, PDA-REQ-020",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "_ops/coordination/human-decision-inbox.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "scoped-source-editor",
+      "description": "Add source file read/write with workspace boundary checks and backup before save.",
+      "source": "PDA-REQ-021",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "desktop-ui-console",
+      "description": "Expose session console and scoped source editor in the Desktop tab.",
+      "source": "PDA-UX-014",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "dependency-boundary",
+      "description": "Do not install shell plugin, xterm.js, Monaco, node-pty, or Rust toolchain in this slice.",
+      "source": "open-source installation policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/README.md",
+        "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/src-tauri/src/lib.rs",
+      "purpose": "Tauri session and file commands",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Desktop session console and scoped editor UI",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/app/globals.css",
+      "purpose": "Desktop session/editor layout",
+      "required": true
+    },
+    {
+      "path": "_ops/coordination/human-decision-inbox.json",
+      "purpose": "Durable target for deferred CLI decision items",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Run Workspace Monitor TypeScript check.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-desktop-tests",
+      "description": "Run platform desktop Node tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app test: 7 tests passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-desktop-readiness",
+      "description": "Run platform desktop readiness check.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app run check: ready_for_dependency_install_audit with Rust warning"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Rust compile and real installed-CLI smoke tests remain deferred because the Rust toolchain and optional CLIs are not installed."
+  ],
+  "notes": [
+    "This record covers pipe sessions and scoped editing, not full PTY or autonomous multi-CLI merge release."
+  ]
+}

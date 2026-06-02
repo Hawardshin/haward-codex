@@ -14,7 +14,7 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 - Keep Codex, Claude Code, Cursor, Antigravity, notifications, browser automation, and advanced validators as optional capability cards that can be configured later instead of blocking initial use.
 - Treat Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode as the first concrete AI CLI adapter targets for multi-CLI orchestration, while keeping the app usable when any of them is missing.
 - Model real multi-CLI execution as supervised process lanes with process graph validation, terminal I/O bounds, decision inbox routing, artifact retention, merge gates, and cleanup before any executable implementation.
-- The first implemented supervisor MVP is intentionally narrow: the Tauri backend exposes allowlisted CLI adapter discovery plus bounded `--version` health checks, and the Workspace Monitor exposes them in the `Desktop` tab. Missing CLIs report `capability_missing` and do not block the UI.
+- The first implemented supervisor MVP is intentionally narrow but executable: the Tauri backend exposes allowlisted CLI adapter discovery, bounded `--version` health checks, pipe-based CLI sessions, stdin/defer/cancel controls, deferred question persistence into the human decision inbox, and scoped source file read/write with backup. The Workspace Monitor exposes these in the `Desktop` tab. Missing CLIs report `capability_missing` and do not block the UI.
 - Keep `agent-platform/` as the Python-first agent/config/evaluation layer.
 - For macOS, treat `configs/macos-execution-profile.json` as the source of truth for local run, internal `.app`, and public signed/notarized distribution structure.
 - For Windows, treat `configs/windows-execution-profile.json` as the source of truth for local run, internal installer testing, public signed distribution, installer format, WebView2, update, uninstall, and smoke-test structure.
@@ -102,8 +102,16 @@ Implemented desktop bridge commands:
 - `list_cli_adapters`
 - `run_cli_adapter_health`
 - `run_all_cli_adapter_health`
+- `start_cli_adapter_session`
+- `poll_cli_adapter_session`
+- `list_cli_adapter_sessions`
+- `write_cli_adapter_stdin`
+- `send_cli_adapter_defer_message`
+- `cancel_cli_adapter_session`
+- `read_workspace_text_file`
+- `write_workspace_text_file`
 
-These commands are bounded health checks only. Interactive PTY sessions, stdin writes, long-running source-affecting CLI execution, xterm.js, Monaco Editor, and packaged sidecars still require a dependency and permission audit before implementation.
+These commands are bounded pipe/session, human decision inbox append, and scoped file-editing MVP commands. Interactive PTY sessions, source-affecting autonomous execution, xterm.js, Monaco Editor, and packaged sidecars still require a dependency and permission audit before implementation.
 
 Planned after installation audit:
 

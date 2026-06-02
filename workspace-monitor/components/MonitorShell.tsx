@@ -21,12 +21,13 @@ import {
   ListFilter,
   Network,
   Search,
-  ShieldCheck
+  ShieldCheck,
+  SquareTerminal
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
-import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot } from "@/lib/snapshot";
+import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot, type WorkspaceSourceFile } from "@/lib/snapshot";
 
 type SectionId =
   | "overview"
@@ -181,6 +182,39 @@ type CliRunReport = {
   decisionPrompts: CliDecisionPrompt[];
   bounded: boolean;
   maxOutputBytes: number;
+};
+
+type CliSessionReport = {
+  sessionId: string;
+  adapterId: string;
+  label: string;
+  command: string;
+  status: string;
+  exitCode?: number | null;
+  elapsedMs: number;
+  stdout: string;
+  stderr: string;
+  decisionPrompts: CliDecisionPrompt[];
+  bounded: boolean;
+  maxOutputBytes: number;
+  outputTruncated: boolean;
+  workingDir: string;
+  deferMessageSent: boolean;
+  decisionInboxItems: number;
+};
+
+type WorkspaceTextFile = {
+  relativePath: string;
+  content: string;
+  sizeBytes: number;
+  maxSizeBytes: number;
+};
+
+type WorkspaceWriteReport = {
+  relativePath: string;
+  sizeBytes: number;
+  backupPath: string;
+  status: string;
 };
 
 const fallbackDesktopAdapters: CliAdapterStatus[] = [
@@ -701,7 +735,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         <DesktopRuntimePanel
           agentCatalogCount={agentCatalog.length}
           blockedTaskCount={collaborationBoard.summary.blockedTasks}
-          sourceFileCount={visibleSourceFiles.length}
+          sourceFiles={visibleSourceFiles}
         />
       )}
 
@@ -1073,22 +1107,38 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
 function DesktopRuntimePanel({
   agentCatalogCount,
   blockedTaskCount,
-  sourceFileCount
+  sourceFiles
 }: {
   agentCatalogCount: number;
   blockedTaskCount: number;
-  sourceFileCount: number;
+  sourceFiles: WorkspaceSourceFile[];
 }) {
   const [runtimeState, setRuntimeState] = useState<"checking" | "available" | "unavailable">("checking");
   const [health, setHealth] = useState<DesktopHealthStatus | null>(null);
   const [adapters, setAdapters] = useState<CliAdapterStatus[]>(fallbackDesktopAdapters);
   const [reports, setReports] = useState<CliRunReport[]>([]);
+  const [sessions, setSessions] = useState<CliSessionReport[]>([]);
   const [error, setError] = useState("");
   const [runningAdapterId, setRunningAdapterId] = useState("");
+  const [selectedSessionAdapterId, setSelectedSessionAdapterId] = useState(fallbackDesktopAdapters[0].adapterId);
+  const [workingDir, setWorkingDir] = useState("");
+  const [sessionPrompt, setSessionPrompt] = useState("현재 작업을 분석하고 다음에 필요한 결정을 짧게 알려줘.");
+  const [sessionInput, setSessionInput] = useState("");
+  const [selectedSourcePath, setSelectedSourcePath] = useState(sourceFiles[0]?.path || "");
+  const [sourceFile, setSourceFile] = useState<WorkspaceTextFile | null>(null);
+  const [sourceDraft, setSourceDraft] = useState("");
+  const [writeReport, setWriteReport] = useState<WorkspaceWriteReport | null>(null);
+  const [editorBusy, setEditorBusy] = useState(false);
 
   const invoke = getTauriInvoke();
   const availableCount = adapters.filter((adapter) => adapter.available).length;
-  const decisionPrompts = reports.flatMap((report) => report.decisionPrompts || []);
+  const sourceFileCount = sourceFiles.length;
+  const editableSourceFiles = sourceFiles.filter((file) => !file.truncated).slice(0, 240);
+  const decisionPrompts = [
+    ...reports.flatMap((report) => report.decisionPrompts || []),
+    ...sessions.flatMap((session) => session.decisionPrompts || [])
+  ];
+  const selectedSession = sessions[0] || null;
 
   const refreshAdapters = async () => {
     setError("");
@@ -1101,17 +1151,23 @@ function DesktopRuntimePanel({
     }
 
     try {
-      const [nextHealth, nextAdapters] = await Promise.all([
+      const [nextHealth, nextAdapters, nextSessions] = await Promise.all([
         tauriInvoke<DesktopHealthStatus>("app_health"),
-        tauriInvoke<CliAdapterStatus[]>("list_cli_adapters")
+        tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
+        tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions")
       ]);
       setRuntimeState("available");
       setHealth(nextHealth);
       setAdapters(nextAdapters);
+      setSessions(nextSessions);
+      if (!nextAdapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId) && nextAdapters[0]) {
+        setSelectedSessionAdapterId(nextAdapters[0].adapterId);
+      }
     } catch (caught) {
       setRuntimeState("unavailable");
       setHealth(null);
       setAdapters(fallbackDesktopAdapters);
+      setSessions([]);
       setError(errorMessage(caught));
     }
   };
@@ -1129,8 +1185,12 @@ function DesktopRuntimePanel({
     try {
       const nextReports = await tauriInvoke<CliRunReport[]>("run_all_cli_adapter_health");
       setReports(nextReports);
-      const nextAdapters = await tauriInvoke<CliAdapterStatus[]>("list_cli_adapters");
+      const [nextAdapters, nextSessions] = await Promise.all([
+        tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
+        tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions")
+      ]);
       setAdapters(nextAdapters);
+      setSessions(nextSessions);
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -1160,9 +1220,154 @@ function DesktopRuntimePanel({
     }
   };
 
+  const upsertSession = (report: CliSessionReport) => {
+    setSessions((current) => [report, ...current.filter((item) => item.sessionId !== report.sessionId)]);
+  };
+
+  const startSession = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeState("unavailable");
+      setError("Tauri desktop runtime is not available in this browser view.");
+      return;
+    }
+
+    setRunningAdapterId("session");
+    setError("");
+    const args: Record<string, unknown> = {
+      adapterId: selectedSessionAdapterId,
+      prompt: sessionPrompt
+    };
+    if (workingDir.trim()) {
+      args.workingDir = workingDir.trim();
+    }
+
+    try {
+      const report = await tauriInvoke<CliSessionReport>("start_cli_adapter_session", args);
+      upsertSession(report);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setRunningAdapterId("");
+    }
+  };
+
+  const pollSession = async (sessionId: string) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeState("unavailable");
+      setError("Tauri desktop runtime is not available in this browser view.");
+      return;
+    }
+
+    try {
+      const report = await tauriInvoke<CliSessionReport>("poll_cli_adapter_session", { sessionId });
+      upsertSession(report);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    }
+  };
+
+  const writeSessionInput = async (sessionId: string) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke || !sessionInput.trim()) {
+      return;
+    }
+
+    try {
+      const report = await tauriInvoke<CliSessionReport>("write_cli_adapter_stdin", {
+        sessionId,
+        input: sessionInput
+      });
+      upsertSession(report);
+      setSessionInput("");
+    } catch (caught) {
+      setError(errorMessage(caught));
+    }
+  };
+
+  const deferSession = async (sessionId: string) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      return;
+    }
+
+    try {
+      const report = await tauriInvoke<CliSessionReport>("send_cli_adapter_defer_message", { sessionId });
+      upsertSession(report);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    }
+  };
+
+  const cancelSession = async (sessionId: string) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      return;
+    }
+
+    try {
+      const report = await tauriInvoke<CliSessionReport>("cancel_cli_adapter_session", { sessionId });
+      upsertSession(report);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    }
+  };
+
+  const loadSourceFile = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke || !selectedSourcePath) {
+      setError("Tauri desktop runtime is not available in this browser view.");
+      return;
+    }
+
+    setEditorBusy(true);
+    setError("");
+    setWriteReport(null);
+    try {
+      const nextFile = await tauriInvoke<WorkspaceTextFile>("read_workspace_text_file", {
+        relativePath: selectedSourcePath
+      });
+      setSourceFile(nextFile);
+      setSourceDraft(nextFile.content);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setEditorBusy(false);
+    }
+  };
+
+  const saveSourceFile = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke || !sourceFile) {
+      return;
+    }
+
+    setEditorBusy(true);
+    setError("");
+    try {
+      const report = await tauriInvoke<WorkspaceWriteReport>("write_workspace_text_file", {
+        relativePath: sourceFile.relativePath,
+        content: sourceDraft
+      });
+      setWriteReport(report);
+      setSourceFile({ ...sourceFile, content: sourceDraft, sizeBytes: report.sizeBytes });
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setEditorBusy(false);
+    }
+  };
+
   useEffect(() => {
     void refreshAdapters();
   }, []);
+
+  useEffect(() => {
+    if (!selectedSourcePath && sourceFiles[0]) {
+      setSelectedSourcePath(sourceFiles[0].path);
+    }
+  }, [selectedSourcePath, sourceFiles]);
 
   return (
     <div className="content-grid desktop-grid">
@@ -1171,8 +1376,8 @@ function DesktopRuntimePanel({
           <p className="eyebrow">Desktop Runtime</p>
           <h2>다중 CLI 오케스트레이션</h2>
           <p>
-            설치형 앱 안에서 선택형 AI CLI를 탐지하고 bounded health check를 실행합니다. 현재 구현은 실제 subprocess를
-            실행하되, stdin 없는 version probe와 출력 크기 제한으로 시작합니다.
+            설치형 앱 안에서 선택형 AI CLI를 탐지하고 bounded health check와 pipe 기반 실행 세션을 관리합니다. PTY는 아직
+            후속이지만 stdout/stderr polling, stdin 입력, defer message, cancel은 Tauri command로 연결되어 있습니다.
           </p>
         </div>
         <div className={`desktop-runtime-state state-${runtimeState}`}>
@@ -1221,7 +1426,7 @@ function DesktopRuntimePanel({
           </article>
           <article>
             <span>Execution Scope</span>
-            <strong>bounded version probes</strong>
+            <strong>bounded pipes and scoped files</strong>
           </article>
         </div>
 
@@ -1262,6 +1467,118 @@ function DesktopRuntimePanel({
             );
           })}
         </div>
+      </section>
+
+      <section className="panel wide cli-session-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">CLI Session</p>
+            <h2>Pipe 기반 실행 콘솔</h2>
+          </div>
+          <span className="result-count">{sessions.length} sessions</span>
+        </div>
+
+        <div className="session-launcher">
+          <label>
+            <span>Adapter</span>
+            <select value={selectedSessionAdapterId} onChange={(event) => setSelectedSessionAdapterId(event.target.value)}>
+              {adapters.map((adapter) => (
+                <option key={adapter.adapterId} value={adapter.adapterId}>
+                  {adapter.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <span>Working dir</span>
+            <input
+              value={workingDir}
+              onChange={(event) => setWorkingDir(event.target.value)}
+              placeholder="workspace root"
+            />
+          </label>
+          <label className="session-prompt-field">
+            <span>Initial input</span>
+            <textarea value={sessionPrompt} onChange={(event) => setSessionPrompt(event.target.value)} rows={4} />
+          </label>
+          <button
+            type="button"
+            onClick={startSession}
+            disabled={!invoke || runningAdapterId !== "" || !adapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId && adapter.available)}
+          >
+            <SquareTerminal size={16} aria-hidden="true" />
+            <span>{runningAdapterId === "session" ? "Starting" : "Start Session"}</span>
+          </button>
+        </div>
+
+        {sessions.length === 0 ? (
+          <p className="empty-state">실행 세션이 없습니다. 설치된 adapter를 선택하고 session을 시작하세요.</p>
+        ) : (
+          <div className="session-grid">
+            <div className="session-list">
+              {sessions.map((session) => (
+                <article key={session.sessionId} className={`session-card status-${session.status}`}>
+                  <header>
+                    <div>
+                      <span>{session.adapterId}</span>
+                      <h3>{session.label}</h3>
+                    </div>
+                    <strong>{session.status}</strong>
+                  </header>
+                  <p>{session.workingDir}</p>
+                  <div className="adapter-report">
+                    <span>{session.elapsedMs}ms</span>
+                    <span>{session.exitCode ?? "no code"}</span>
+                    <span>{session.decisionInboxItems ? `${session.decisionInboxItems} inbox` : session.outputTruncated ? "truncated" : "bounded"}</span>
+                  </div>
+                  <div className="desktop-actions">
+                    <button type="button" onClick={() => pollSession(session.sessionId)} disabled={!invoke}>
+                      <Activity size={15} aria-hidden="true" />
+                      <span>Poll</span>
+                    </button>
+                    <button type="button" onClick={() => deferSession(session.sessionId)} disabled={!invoke || session.status !== "running"}>
+                      <Inbox size={15} aria-hidden="true" />
+                      <span>Defer</span>
+                    </button>
+                    <button type="button" onClick={() => cancelSession(session.sessionId)} disabled={!invoke || !["running", "defer_message_sent"].includes(session.status)}>
+                      <ShieldCheck size={15} aria-hidden="true" />
+                      <span>Cancel</span>
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <article className="session-terminal">
+              <header>
+                <div>
+                  <span>{selectedSession?.sessionId || "no-session"}</span>
+                  <h3>{selectedSession?.label || "Session output"}</h3>
+                </div>
+                <strong>{selectedSession?.status || "idle"}</strong>
+              </header>
+              <pre>
+                <code>{selectedSession ? selectedSession.stdout || selectedSession.stderr || "No output yet" : "No session selected"}</code>
+              </pre>
+              {selectedSession?.stderr && selectedSession.stdout && <small>{selectedSession.stderr}</small>}
+              <div className="session-input-row">
+                <input
+                  value={sessionInput}
+                  onChange={(event) => setSessionInput(event.target.value)}
+                  placeholder="stdin input"
+                  disabled={!selectedSession || !["running", "defer_message_sent"].includes(selectedSession.status)}
+                />
+                <button
+                  type="button"
+                  onClick={() => selectedSession && writeSessionInput(selectedSession.sessionId)}
+                  disabled={!invoke || !selectedSession || !sessionInput.trim() || !["running", "defer_message_sent"].includes(selectedSession.status)}
+                >
+                  <ArrowRight size={15} aria-hidden="true" />
+                  <span>Send</span>
+                </button>
+              </div>
+            </article>
+          </div>
+        )}
       </section>
 
       <section className="panel wide terminal-output-panel">
@@ -1322,14 +1639,43 @@ function DesktopRuntimePanel({
         <div className="panel-heading">
           <div>
             <p className="eyebrow">Source Editing</p>
-            <h2>편집 surface 상태</h2>
+            <h2>Scoped file editor</h2>
           </div>
           <Code2 size={18} aria-hidden="true" />
         </div>
-        <p>
-          현재 구현은 source viewer와 CLI health execution을 연결한 상태입니다. Monaco 기반 편집은 dependency audit와 파일
-          write/rollback 계약 이후 활성화합니다.
-        </p>
+        <div className="source-editor-controls">
+          <select value={selectedSourcePath} onChange={(event) => setSelectedSourcePath(event.target.value)}>
+            {editableSourceFiles.map((file) => (
+              <option key={file.id} value={file.path}>
+                {file.path}
+              </option>
+            ))}
+          </select>
+          <button type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !selectedSourcePath}>
+            <FileSearch size={15} aria-hidden="true" />
+            <span>{editorBusy ? "Loading" : "Open"}</span>
+          </button>
+          <button type="button" onClick={saveSourceFile} disabled={!invoke || editorBusy || !sourceFile || sourceDraft === sourceFile.content}>
+            <CheckCircle2 size={15} aria-hidden="true" />
+            <span>Save Backup</span>
+          </button>
+        </div>
+        {sourceFile ? (
+          <div className="source-editor-frame">
+            <div className="source-editor-meta">
+              <span>{sourceFile.relativePath}</span>
+              <strong>{sourceDraft.length.toLocaleString("ko-KR")} bytes</strong>
+            </div>
+            <textarea value={sourceDraft} onChange={(event) => setSourceDraft(event.target.value)} spellCheck={false} />
+            {writeReport && (
+              <p className="desktop-success">
+                {writeReport.status} / backup: {writeReport.backupPath}
+              </p>
+            )}
+          </div>
+        ) : (
+          <p className="empty-state">소스 파일을 선택한 뒤 Tauri runtime에서 열면 scoped editor가 활성화됩니다.</p>
+        )}
       </section>
     </div>
   );

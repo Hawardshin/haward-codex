@@ -73,10 +73,25 @@ if (!tauriConfig.bundle?.targets?.includes("dmg") || !tauriConfig.bundle?.target
 }
 
 const tauriLib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
-for (const commandName of ["list_cli_adapters", "run_cli_adapter_health", "run_all_cli_adapter_health"]) {
+for (const commandName of [
+  "list_cli_adapters",
+  "run_cli_adapter_health",
+  "run_all_cli_adapter_health",
+  "start_cli_adapter_session",
+  "poll_cli_adapter_session",
+  "list_cli_adapter_sessions",
+  "write_cli_adapter_stdin",
+  "send_cli_adapter_defer_message",
+  "cancel_cli_adapter_session",
+  "read_workspace_text_file",
+  "write_workspace_text_file"
+]) {
   if (!tauriLib.includes(commandName)) {
     failures.push(`src-tauri/src/lib.rs must expose ${commandName}`);
   }
+}
+if (!tauriLib.includes("_ops") || !tauriLib.includes("human-decision-inbox.json")) {
+  failures.push("src-tauri/src/lib.rs must persist deferred CLI questions to the human decision inbox");
 }
 
 const desktopRegistry = readJson("configs/desktop-distribution-registry.json");
@@ -105,7 +120,19 @@ if (!JSON.stringify(viewModeRegistry).includes("desktop")) {
 }
 
 const monitorShell = readFileSync(join(root, "../workspace-monitor/components/MonitorShell.tsx"), "utf8");
-for (const requiredPhrase of ["DesktopRuntimePanel", "list_cli_adapters", "run_all_cli_adapter_health", "run_cli_adapter_health"]) {
+for (const requiredPhrase of [
+  "DesktopRuntimePanel",
+  "list_cli_adapters",
+  "run_all_cli_adapter_health",
+  "run_cli_adapter_health",
+  "start_cli_adapter_session",
+  "write_cli_adapter_stdin",
+  "send_cli_adapter_defer_message",
+  "cancel_cli_adapter_session",
+  "decisionInboxItems",
+  "read_workspace_text_file",
+  "write_workspace_text_file"
+]) {
   if (!monitorShell.includes(requiredPhrase)) {
     failures.push(`workspace-monitor MonitorShell must include ${requiredPhrase}`);
   }

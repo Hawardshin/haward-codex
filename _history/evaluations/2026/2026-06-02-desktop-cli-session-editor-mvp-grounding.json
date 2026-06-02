@@ -1,0 +1,151 @@
+{
+  "task": "Ground desktop CLI session and source editor MVP claims",
+  "output_summary": "The change adds bounded pipe-based CLI sessions, human decision inbox persistence for deferred questions, and scoped source editing to the desktop app without installing shell plugin, PTY, xterm.js, or Monaco dependencies.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "tauri-scope",
+      "source": "https://v2.tauri.app/security/scope/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tauri security scope documentation."
+    },
+    {
+      "evidence_id": "tauri-shell",
+      "source": "https://v2.tauri.app/plugin/shell/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tauri shell plugin documentation."
+    },
+    {
+      "evidence_id": "xterm-docs",
+      "source": "https://xtermjs.org/docs/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official xterm.js documentation."
+    },
+    {
+      "evidence_id": "monaco-repo",
+      "source": "https://github.com/microsoft/monaco-editor",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Monaco Editor repository."
+    },
+    {
+      "evidence_id": "tauri-backend",
+      "source": "platform-desktop-app/src-tauri/src/lib.rs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Updated local Tauri backend source."
+    },
+    {
+      "evidence_id": "monitor-ui",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Updated local Workspace Monitor source."
+    },
+    {
+      "evidence_id": "decision-inbox",
+      "source": "_ops/coordination/human-decision-inbox.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable local human decision inbox contract."
+    },
+    {
+      "evidence_id": "tests",
+      "source": "workspace-monitor and platform-desktop-app checks",
+      "source_type": "test_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Local command verification."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The Tauri backend now exposes allowlisted CLI session commands for start, poll, stdin, defer, and cancel.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-backend",
+        "tests"
+      ],
+      "verification_steps": [
+        "Inspect `platform-desktop-app/src-tauri/src/lib.rs`.",
+        "Run `npm --prefix platform-desktop-app test`."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The Tauri backend now exposes scoped workspace text file read/write commands that create a backup before saving.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-backend",
+        "tests"
+      ],
+      "verification_steps": [
+        "Inspect `read_workspace_text_file`, `write_workspace_text_file`, and backup helpers.",
+        "Run readiness checks."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "When a CLI session is deferred, detected question-like output is appended to the human decision inbox with a blocked-work and resume-action record.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-backend",
+        "decision-inbox",
+        "tests"
+      ],
+      "verification_steps": [
+        "Inspect `append_session_decisions_to_inbox` and `send_cli_adapter_defer_message`.",
+        "Run platform desktop readiness tests."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The Workspace Monitor Desktop tab now includes a CLI session console and scoped source editor UI.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "tests"
+      ],
+      "verification_steps": [
+        "Inspect `workspace-monitor/components/MonitorShell.tsx`.",
+        "Run `npm --prefix workspace-monitor run check` and `npm --prefix workspace-monitor run build`."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "No shell plugin, PTY, xterm.js, Monaco, or Rust toolchain installation was performed in this slice.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-shell",
+        "xterm-docs",
+        "monaco-repo",
+        "tauri-backend"
+      ],
+      "verification_steps": [
+        "Inspect package files and README non-scope notes.",
+        "Confirm no installation audit was created for new dependencies."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Rust compile remains unverified because Rust is not installed.",
+    "Pipe sessions can be limited for CLIs that require a PTY."
+  ],
+  "limitation_notes": [
+    "This is not a full PTY terminal implementation.",
+    "Actual installed CLI smoke tests remain follow-up work."
+  ]
+}

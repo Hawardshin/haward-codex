@@ -102,12 +102,26 @@ As of 2026-06-02, the first real implementation is a constrained version of slic
 - stdin is closed, output is bounded by `MAX_HEALTH_OUTPUT_BYTES`, and runtime is bounded by `HEALTH_TIMEOUT_MS`.
 - Missing CLIs are reported as `capability_missing` and do not block the desktop UI.
 - The Workspace Monitor `Desktop` tab runs the real health checks when connected to Tauri and shows an unavailable fallback in a regular browser.
-- Question-like health output is surfaced only as a decision prompt candidate. Real pause/resume and stdin defer-message sending are not implemented yet.
+- Question-like health output is surfaced as a decision prompt candidate. In the session MVP, `send_cli_adapter_defer_message` sends the stdin defer message and stores detected questions in `_ops/coordination/human-decision-inbox.json`.
+
+## Implementation Status: Pipe Session / Source Editor MVP 2
+
+The 2026-06-02 follow-up implementation adds pipe-based execution and scoped file editing without installing new dependencies.
+
+- The Tauri backend exposes `start_cli_adapter_session`, `poll_cli_adapter_session`, `list_cli_adapter_sessions`, `write_cli_adapter_stdin`, `send_cli_adapter_defer_message`, and `cancel_cli_adapter_session`.
+- Execution is limited to the `ADAPTERS` allowlist. No shell plugin permission was added.
+- Each session captures stdout/stderr into bounded buffers and applies a size limit to stdin input.
+- `send_cli_adapter_defer_message` writes a fixed defer message to stdin, stores detected questions in `_ops/coordination/human-decision-inbox.json` without duplicating the same session prompt, and reflects the stored inbox item count in the session report.
+- `cancel_cli_adapter_session` kills and waits for the child process, then keeps the report visible.
+- The Tauri backend exposes `read_workspace_text_file` and `write_workspace_text_file`.
+- File operations allow only workspace-root-relative paths and block `_private/`, `outputs/`, paths outside the workspace, and symlink escapes.
+- Saves create backups under `platform-desktop-app/artifacts/source-editor-backups/`.
+- The Workspace Monitor `Desktop` tab shows a CLI session console and textarea-based scoped editor.
 
 ## Non-Scope
 
-- This MVP does not implement long-running CLI task execution.
-- Interactive PTY, stdin writes, and source-affecting command execution are not implemented yet.
+- This MVP does not implement a PTY-based terminal.
+- Autonomous source-affecting CLI execution and merge-gate release are not implemented yet.
 - Rust/Tauri, xterm.js, Monaco, and PTY dependencies are not installed before installation audit.
 - The app does not own provider authentication for users.
 - This does not claim public installer readiness.

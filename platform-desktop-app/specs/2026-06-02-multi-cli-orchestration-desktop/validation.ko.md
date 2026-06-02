@@ -57,3 +57,26 @@ git diff --check
 - view mode registry는 `desktop` section을 모든 mode에 포함해야 한다.
 - omission, resource, grounding, cli pipeline check는 각각 ready 상태여야 한다.
 - Rust compile, `tauri:dev`, `tauri:build`는 Rust toolchain 미설치 상태에서 검증하지 않는다.
+
+## Pipe Session / Source Editor MVP 2 추가 검증
+
+```bash
+npm --prefix workspace-monitor run check
+npm --prefix workspace-monitor test
+npm --prefix workspace-monitor run build
+npm --prefix platform-desktop-app test
+npm --prefix platform-desktop-app run check
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-desktop-cli-session-editor-mvp-omission-input.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-02-desktop-cli-session-editor-mvp-resource-input.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-desktop-cli-session-editor-mvp-grounding.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-02-desktop-cli-session-editor-mvp-cli-pipeline.json
+```
+
+예상 결과:
+
+- Workspace Monitor check/test/build가 통과해야 한다.
+- `platform-desktop-app` Node tests는 새 command 이름을 확인해야 한다.
+- readiness check는 session/editor command 이름, human decision inbox persistence, Desktop tab inbox item count 표시를 확인해야 한다.
+- Rust compile과 Tauri dev/build는 Rust toolchain 설치 전에는 검증하지 않는다.
+- source editor는 `_private/`, `outputs/`, workspace 밖 경로, symlink escape를 차단하고 저장 전 backup을 만드는 계약을 가져야 한다.
+- defer command는 감지된 질문을 `_ops/coordination/human-decision-inbox.json`에 중복 없이 append하는 계약을 가져야 한다.

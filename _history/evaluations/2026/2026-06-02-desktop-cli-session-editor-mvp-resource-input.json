@@ -1,0 +1,145 @@
+{
+  "task": "Desktop CLI session and source editor resource review",
+  "work_mode": "governance",
+  "runtime_context": [
+    "Tauri command bridge",
+    "pipe-based child process sessions",
+    "stdout/stderr reader threads",
+    "stdin writer",
+    "workspace file read/write",
+    "human decision inbox append",
+    "Workspace Monitor UI"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "session-child-process",
+      "category": "process",
+      "description": "CLI sessions spawn child processes that can hang or remain running.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Sessions are allowlisted, have a timeout, support cancel, and kill/wait the child on timeout or cancel.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "session-output-growth",
+      "category": "stream",
+      "description": "stdout/stderr output can grow without bound.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Session output is captured into bounded buffers with truncation flags.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "stdin-overwrite-risk",
+      "category": "stream",
+      "description": "stdin writes can send large or unintended input to an adapter.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "stdin and initial prompt inputs are bounded by MAX_SESSION_INPUT_BYTES and limited to allowlisted sessions.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "source-write-boundary",
+      "category": "file_handle",
+      "description": "Source editing can write outside the intended workspace or overwrite files without rollback.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "File commands require workspace-relative paths, deny protected directories and symlink escapes, enforce max file size, and create backups before writing.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "decision-inbox-write-boundary",
+      "category": "file_handle",
+      "description": "Deferred CLI questions write to a durable coordination file.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The inbox path is resolved under the workspace root, checked against protected directories, parsed as JSON, and updated only through the decisions and decision_history arrays.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "_ops/coordination/human-decision-inbox.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "session-cancel-lifecycle",
+      "resource": "CLI child process",
+      "create_path": "start_cli_adapter_session spawns an allowlisted command with piped stdin/stdout/stderr",
+      "cleanup_path": "cancel_cli_adapter_session kills and waits; poll kills on timeout and drops stdin",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "source-write-backup-lifecycle",
+      "resource": "workspace text file",
+      "create_path": "write_workspace_text_file reads the original file and writes a backup path before saving content",
+      "cleanup_path": "backup path is retained under platform-desktop-app/artifacts/source-editor-backups for manual rollback",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "decision-inbox-append-lifecycle",
+      "resource": "human decision inbox JSON",
+      "create_path": "send_cli_adapter_defer_message detects question-like session output and appends open decisions plus decision_history entries",
+      "cleanup_path": "Future answer/resume workflow updates status; duplicate session prompt ids are skipped",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "session-output-bound",
+      "metric": "retained stdout/stderr bytes",
+      "tool": "source inspection and readiness test",
+      "threshold": "MAX_SESSION_OUTPUT_BYTES is 100000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-file-bound",
+      "metric": "editable file bytes",
+      "tool": "source inspection",
+      "threshold": "MAX_WORKSPACE_FILE_BYTES is 1000000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "Reader threads are joined when finished during polling; Rust compile remains deferred until toolchain installation."
+  ]
+}

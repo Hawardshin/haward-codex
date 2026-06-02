@@ -8,8 +8,11 @@
 - [x] Add architecture document
 - [x] Reinforce readiness script and Node tests
 - [x] Implement Tauri backend `list_cli_adapters`, `run_cli_adapter_health`, and `run_all_cli_adapter_health`
+- [x] Implement Tauri backend `start_cli_adapter_session`, `poll_cli_adapter_session`, `write_cli_adapter_stdin`, `send_cli_adapter_defer_message`, `cancel_cli_adapter_session`, and human decision inbox append for deferred questions
+- [x] Implement workspace-scoped `read_workspace_text_file` and `write_workspace_text_file`
 - [x] Implement Workspace Monitor Desktop tab, Tauri invoke bridge, and browser fallback
+- [x] Implement Workspace Monitor CLI session console and scoped source editor
 - [x] Expose the `desktop` section in the view mode registry
 - [x] Create history, omission, resource, grounding, and evaluation records
-- [ ] Interactive PTY/stdin-based CLI task supervisor remains follow-up spec work
+- [ ] Interactive PTY-based CLI task supervisor remains follow-up spec work
 - [ ] Install xterm.js/Monaco/PTY dependencies only after installation audit
