@@ -82,6 +82,14 @@ Therefore, prohibition-heavy instructions should not be trusted as-is. When a pr
 
 For security, privacy, publication, cost, destructive changes, or other risky areas, prompt-level prohibition is not enough. The platform should use structural controls such as allowlists, schemas, permission gates, privacy audits, evaluators, tests, and rollback paths.
 
+### 17. Guardrails Are Execution Boundaries
+
+A guardrail is not a sentence telling the model to be careful. It is a structural boundary placed before or after risky input, output, tool calls, file access, privilege escalation, cost, publication, deployment, or destructive change.
+
+Guardrails are not decorative slowdown. They are the condition that makes autonomy possible. As agents take more action, guardrails must become clearer. The right guardrail can be an input filter, output schema, allowlist, denylist, tool permission, human checkpoint, sandbox, rate limit, evaluator, test, privacy audit, or rollback gate, selected by risk and workflow stage.
+
+Guardrails should not be excessive either. Low-risk reversible work can use light checks. Security, privacy, cost, publication, deletion, and external-call risks should not proceed without structural guardrails. A good guardrail makes clear what it blocks, what it allows, what replacement action happens on failure, and which log or evaluation proves it worked.
+
 ## Execution Structures Connected To This Philosophy
 
 - Philosophy principle traceability: `agent-platform/configs/governance/philosophy-traceability.json`
@@ -102,3 +110,4 @@ For security, privacy, publication, cost, destructive changes, or other risky ar
 - Work modes and debt management: `agent-platform/configs/workflows/work-mode-registry.json`, `_ops/backlog/`
 - Structure and naming audits: `_tools/structure-audit/`, `_tools/naming-audit/`, `_tools/workspace-health/`
 - Prohibition-to-positive instruction conversion: `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`
+- Structural guardrail selection: `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`, `_ops/workflows/70-hallucination-prevention.md`

@@ -23,6 +23,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - `scattered_human_decisions`
    - `bad_or_biased_instruction`
    - `prohibition_only_instruction`
+   - `missing_structural_guardrail`
    - `no_output_contract`
    - `deterministic_truth_machine_assumption`
    - `single_shot_oracle_use`
@@ -40,6 +41,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - decision inbox interrupt/resume
    - bias neutralization
    - prohibition-to-positive contract
+   - structural guardrail selection
    - task-fit check
    - iteration scaffold
    - model-adaptive retry
@@ -59,30 +61,35 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - replacement action when the forbidden case appears;
    - examples when useful;
    - validation, evaluator, allowlist, schema, permission, privacy, test, or rollback gate when the risk is material.
-11. If the user treats the LLM as a deterministic truth machine, add a short probabilistic-model note and attach sources, tests, or uncertainty labels.
-12. If the instruction has no output contract, add the expected format, depth, exclusions, acceptance criteria, and review method.
-13. If missing information would materially change the result, apply the bounded clarification policy:
+11. If material risk exists, select the smallest sufficient structural guardrail before execution:
+   - classify the risk surface: security, privacy, cost, publication, deployment, destructive change, external tool call, file access, permission, or high-stakes claim;
+   - choose input, output, tool, permission, evaluator, test, audit, human checkpoint, sandbox, rate limit, or rollback guardrail;
+   - record allowed actions, blocked actions, fallback or escalation, and verification evidence;
+   - keep the guardrail light for low-risk reversible work and stronger for high-impact or hard-to-reverse work.
+12. If the user treats the LLM as a deterministic truth machine, add a short probabilistic-model note and attach sources, tests, or uncertainty labels.
+13. If the instruction has no output contract, add the expected format, depth, exclusions, acceptance criteria, and review method.
+14. If missing information would materially change the result, apply the bounded clarification policy:
    - ask usually one clarification round and at most two;
    - ask no more than three prioritized questions per round;
    - ask only questions with clear decision impact;
    - include assumptions or recommended defaults when useful.
-14. If the user does not answer or the request remains vague after the budget, converge through one of:
+15. If the user does not answer or the request remains vague after the budget, converge through one of:
    - reasonable assumption with verification path;
    - option-based default;
    - reversible ship-first-then-confirm draft;
    - explicit defer/`clarification_needed` when proceeding would be unsafe.
-15. If a user answer is pending, split the task:
+16. If a user answer is pending, split the task:
    - `blocked_decision`: the exact decision, artifact, or action that depends on the answer;
    - `unblocked_work`: research, source collection, option comparison, drafts, tests, validation, documentation, and risk analysis that can continue safely;
    - `assumptions`: explicit assumptions/defaults used while waiting;
    - `resume_action`: how to merge or correct the work after the answer arrives.
-16. Do not pause the whole task unless every meaningful next step depends on the answer or proceeding would be unsafe.
-17. If there are multiple pending human decisions, or if the answer should trigger a later resume, use `_ops/workflows/61-human-decision-inbox.md` and register the decision in `_ops/coordination/human-decision-inbox.json`.
-18. When a human answer arrives, checkpoint current work before interrupting, then run the recorded `resume_action` or schedule it for the next safe point.
-19. If the lesson is reusable, save it as a prompt, workflow, template, tool, skill, config, operating model, or history note.
-20. If ambiguity is high-risk or user-preference-sensitive, use spec/source reconciliation or `clarification_needed`, but keep the question set short and decision-focused.
-21. Ground factual claims before close-out.
-22. Evaluate whether the intervention actually reduced the gap against the initial request.
+17. Do not pause the whole task unless every meaningful next step depends on the answer or proceeding would be unsafe.
+18. If there are multiple pending human decisions, or if the answer should trigger a later resume, use `_ops/workflows/61-human-decision-inbox.md` and register the decision in `_ops/coordination/human-decision-inbox.json`.
+19. When a human answer arrives, checkpoint current work before interrupting, then run the recorded `resume_action` or schedule it for the next safe point.
+20. If the lesson is reusable, save it as a prompt, workflow, template, tool, skill, config, operating model, or history note.
+21. If ambiguity is high-risk or user-preference-sensitive, use spec/source reconciliation or `clarification_needed`, but keep the question set short and decision-focused.
+22. Ground factual claims before close-out.
+23. Evaluate whether the intervention actually reduced the gap against the initial request.
 
 ## Output Contract
 
@@ -91,6 +98,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
 - Model capability classification and retry strategy when relevant.
 - Rewritten instruction when the original instruction was vague, biased, or missing an output contract.
 - Prohibition rewrite record when the instruction relied on negative constraints: positive target behavior, allowed actions, replacement action, and verification/enforcement gate.
+- Structural guardrail record when material risk exists: risk surface, selected guardrail, allowed actions, blocked actions, fallback/escalation, and verification evidence.
 - Clarification questions asked, budget used, assumptions/defaults selected, or deferral reason when relevant.
 - Pending-answer handling when relevant: `blocked_decision`, `unblocked_work`, `assumptions`, and `resume_action`.
 - Human decision inbox updates when relevant: inbox item IDs, interrupt policy, checkpoint summary, resume action taken or scheduled.

@@ -1,0 +1,30 @@
+{
+  "task": "structural-guardrails",
+  "selected_work_mode": "governance",
+  "selected_at": "2026-06-02",
+  "selection_reason": "The request changes durable platform philosophy, persistent instructions, shared usage config, workflows, prompts, memory bootstrap, requirements, and philosophy traceability.",
+  "non_blocking_overrides": [],
+  "required_targets": [
+    "web_search_record_targets",
+    "user_request_summary_targets",
+    "requirements_targets",
+    "spec_targets",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "mode_selection_record_targets",
+    "omission_check_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets"
+  ],
+  "enforcement_checks": [
+    "check-config-contract",
+    "check-philosophy-trace",
+    "check-memory-bootstrap",
+    "docs-audit",
+    "workspace-health",
+    "check-omissions",
+    "check-grounding",
+    "evaluate-work"
+  ]
+}

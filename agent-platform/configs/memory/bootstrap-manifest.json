@@ -48,7 +48,7 @@
     "The foundational agent operating philosophy, platform concept review, philosophy traceability registry, philosophy governance document, or philosophy alignment workflow changes.",
       "The platform identity narrative or top-level platform description changes.",
       "The AI assistant runtime adapter registry or tool-specific adapter files change.",
-      "The AI usage gap profile, coaching workflow, prompt instruction quality gate, bounded clarification policy, non-blocking clarification policy, human decision inbox, interrupt/resume policy, model-adaptive prompting policy, or AI-use asset promotion rules change.",
+      "The AI usage gap profile, coaching workflow, prompt instruction quality gate, prohibition rewrite contract, structural guardrail contract, bounded clarification policy, non-blocking clarification policy, human decision inbox, interrupt/resume policy, model-adaptive prompting policy, or AI-use asset promotion rules change.",
       "The human arbitration agent, irreducible judgment handoff, or arbitration packet contract changes.",
       "The unstructured data structuring profile, schema/provenance extraction contract, or structured-output validation workflow changes.",
       "The marketing evidence, survey, book/theory, market sizing, or quantitative source profile changes.",
@@ -627,7 +627,7 @@
       "used_for": [
         "foundational worldview behind repository operations",
         "search, validation, planning, evaluation, autonomy, reversibility, privacy, and debt principles",
-        "repetitive-human-work reduction, elapsed-time reduction, human-process automation boundaries, and prohibition-to-positive behavior contracts"
+        "repetitive-human-work reduction, elapsed-time reduction, human-process automation boundaries, prohibition-to-positive behavior contracts, and structural guardrail execution boundaries"
       ],
       "last_checked": "2026-06-02"
     },
@@ -1786,7 +1786,7 @@
       "id": "agent_operating_philosophy",
       "path": "_philosophy/agent-operating-philosophy.ko.md",
       "tier": "warm",
-      "purpose": "Foundational agent operating philosophy for search, skepticism, evaluation, autonomy, reversibility, privacy, operating debt, repetitive-work reduction, human-process automation boundaries, and prohibition-to-positive instruction contracts.",
+      "purpose": "Foundational agent operating philosophy for search, skepticism, evaluation, autonomy, reversibility, privacy, operating debt, repetitive-work reduction, human-process automation boundaries, prohibition-to-positive instruction contracts, and structural guardrail execution boundaries.",
       "required": true,
       "load_order": 9
     },
@@ -1858,7 +1858,7 @@
       "id": "ai_usage_gap_profile",
       "path": "agent-platform/configs/usage/ai-usage-gap-profile.json",
       "tier": "warm",
-      "purpose": "AI usage gap diagnosis, prompt instruction quality, prohibition-only instruction rewriting, bounded clarification, non-blocking clarification, human decision inbox, interrupt/resume, and model-adaptive prompting profile for task framing, neutral instruction rewriting, blocked-decision isolation, unblocked-work continuation, weak/non-reasoning model two-pass compare/merge, task-fit judgment, iteration, verification, and durable asset promotion.",
+      "purpose": "AI usage gap diagnosis, prompt instruction quality, prohibition-only instruction rewriting, structural guardrail selection, bounded clarification, non-blocking clarification, human decision inbox, interrupt/resume, and model-adaptive prompting profile for task framing, neutral instruction rewriting, blocked-decision isolation, unblocked-work continuation, weak/non-reasoning model two-pass compare/merge, task-fit judgment, iteration, verification, and durable asset promotion.",
       "required": true,
       "load_order": 24
     },

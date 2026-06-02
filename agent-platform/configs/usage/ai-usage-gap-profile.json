@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-06-01",
   "name": "ai-usage-gap-profile",
-  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: question and instruction quality, prohibition-only instruction rewriting, bounded clarification, non-blocking clarification, human decision inbox, interrupt/resume, model-adaptive prompting, task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
+  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: question and instruction quality, prohibition-only instruction rewriting, structural guardrail selection, bounded clarification, non-blocking clarification, human decision inbox, interrupt/resume, model-adaptive prompting, task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
   "reader_guide": {
     "summary": "Use this profile when a user asks how to use AI better, when an AI-assisted task is vague, when outputs repeatedly miss intent, or when the platform should coach a user from one-off prompting toward reliable workflows.",
     "how_to_read": [
@@ -10,6 +10,7 @@
       "Use strong_user_behaviors as target behaviors to reinforce.",
       "Use bridge_interventions to choose the smallest useful improvement.",
       "Use prohibition_rewrite_contract when a request relies on 'do not', 'never', 'avoid', or other prohibition-only wording that should become a positive behavior contract.",
+      "Use structural_guardrail_contract when a task creates security, privacy, cost, publication, deployment, destructive-change, external-tool, file, or permission risk.",
       "Use agent_response_contract to shape how the assistant should help in the current task.",
       "Use non_blocking_clarification_policy when a pending answer should block only a specific decision, not the whole task.",
       "Use human_decision_inbox_policy when multiple human decisions should be collected, answered later, and resumed through an interrupt-safe workflow."
@@ -23,7 +24,8 @@
       "The platform's coaching, clarification, or evaluation behavior changes.",
       "The model capability profile or two-pass prompting policy changes.",
       "The clarification question budget, question format, convergence rule, blocked-decision isolation, non-blocking progress rule, human decision inbox, or interrupt/resume rule changes.",
-      "The user states that AI does not understand prohibitions or asks to convert negative constraints into stronger operating structure."
+      "The user states that AI does not understand prohibitions or asks to convert negative constraints into stronger operating structure.",
+      "The user states that guardrails are necessary or asks to strengthen AI safety/control boundaries."
     ]
   },
   "reference_links": [
@@ -122,6 +124,39 @@
         "trustworthy AI governance framing"
       ],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "owasp_llm_top_10",
+      "title": "OWASP Top 10 for LLM Applications",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "source_type": "official",
+      "used_for": [
+        "LLM application risk categories",
+        "guardrail selection for prompt injection, sensitive information disclosure, insecure output handling, excessive agency, and tool misuse risk"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "openai_agents_guardrails",
+      "title": "OpenAI Agents SDK Guardrails",
+      "url": "https://openai.github.io/openai-agents-python/guardrails/",
+      "source_type": "official",
+      "used_for": [
+        "input and output guardrail concepts",
+        "agent execution boundary examples"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "nist_generative_ai_profile",
+      "title": "NIST AI RMF Generative AI Profile",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework/generative-artificial-intelligence",
+      "source_type": "official",
+      "used_for": [
+        "generative AI risk management framing",
+        "risk-based control selection"
+      ],
+      "last_checked": "2026-06-02"
     },
     {
       "id": "ibm_agentic_mental_models",
@@ -477,6 +512,17 @@
       ]
     },
     {
+      "id": "material_risk_requires_structural_guardrails",
+      "rule": "If a task can affect security, privacy, money, publication, deployment, destructive changes, external tool calls, files, or permissions, choose a structural guardrail before execution and record the fallback or escalation path.",
+      "reason": "Prompt wording is advisory; high-impact failures need boundaries that can be checked, enforced, logged, reviewed, or rolled back.",
+      "applies_to": [
+        "structural_guardrail_contract",
+        "bridge_interventions",
+        "agent_response_contract",
+        "risk_controls"
+      ]
+    },
+    {
       "id": "probabilistic_models_need_precise_context",
       "rule": "Treat LLM outputs as probabilistic completions conditioned on the prompt; improve the conditioning with clear goals, context, constraints, examples, output format, and verification path.",
       "reason": "Better questions and instructions shift the model toward more useful output distributions.",
@@ -539,6 +585,11 @@
       "required": true
     },
     {
+      "field": "structural_guardrail_contract",
+      "meaning": "How to select input, output, tool, permission, evaluator, audit, human checkpoint, and rollback guardrails for material risk.",
+      "required": true
+    },
+    {
       "field": "bounded_clarification_policy",
       "meaning": "Question budget, priority rules, and convergence options for ambiguous instructions.",
       "required": true
@@ -568,6 +619,7 @@
     "The user asks why some people use AI well and others do not.",
     "The user says questions or instructions must be improved before AI can answer well.",
     "The user says AI does not understand prohibitions or that prohibition-only instructions should not be trusted.",
+    "The user says guardrails are necessary or that AI autonomy needs stronger boundaries.",
     "The user says vague or poor instructions should cause the AI to ask clarifying counter-questions.",
     "The user says unanswered clarification questions block too much work or create an AI-era bottleneck.",
     "The user wants pending questions collected in one place and resumed when the human returns.",
@@ -639,6 +691,16 @@
         "no deterministic gate or output contract to catch violations"
       ],
       "first_intervention": "Convert the prohibition into positive target behavior, allowed actions, replacement actions, examples, and verification or enforcement checks."
+    },
+    {
+      "id": "missing_structural_guardrail",
+      "symptom": "A task can touch sensitive data, money, publication, deployment, destructive changes, external tool calls, files, or permissions, but only has natural-language caution instead of an enforceable boundary.",
+      "likely_root_causes": [
+        "treating prompt text as a security or safety boundary",
+        "not classifying the risk surface before execution",
+        "missing human checkpoint, tool permission, evaluator, test, audit, or rollback path"
+      ],
+      "first_intervention": "Select the smallest sufficient structural guardrail, define allowed and blocked actions, add a fallback or escalation action, and record evidence that the guardrail was checked."
     },
     {
       "id": "no_output_contract",
@@ -735,6 +797,7 @@
     "Defines task outcome, audience, constraints, input data, and success criteria.",
     "Writes neutral instructions that ask for evidence, alternatives, counterarguments, and uncertainty when the topic is debatable.",
     "Pairs negative constraints with explicit positive target behavior, replacement actions, and verification gates.",
+    "Chooses structural guardrails for material risk instead of relying on the model's caution or prompt prohibitions.",
     "Specifies output contract: format, depth, tone, exclusions, examples, acceptance criteria, and verification path.",
     "Uses AI for exploration, drafting, critique, transformation, automation planning, and verification support instead of only final-answer generation.",
     "Decomposes large work into plan, evidence, implementation, validation, and evaluation steps.",
@@ -845,6 +908,22 @@
       ]
     },
     {
+      "id": "structural_guardrail_selection",
+      "use_when": [
+        "missing_structural_guardrail",
+        "prohibition_only_instruction",
+        "poor_task_fit_judgment",
+        "missing_verification"
+      ],
+      "action": "Choose the smallest sufficient guardrail for the risk surface: input filtering, output schema, allowlist, denylist, tool permission, sandbox, rate limit, human checkpoint, evaluator, test, privacy audit, or rollback gate.",
+      "output_artifacts": [
+        "guardrail selection note",
+        "allowed and blocked action list",
+        "fallback or escalation path",
+        "guardrail verification evidence"
+      ]
+    },
+    {
       "id": "task_fit_check",
       "use_when": [
         "poor_task_fit_judgment",
@@ -927,6 +1006,7 @@
     "When the user seems blocked by low AI literacy, improve the task shape first: goal, context, constraints, examples, criteria, verification.",
     "When the user's instruction is biased or leading, rewrite it neutrally before execution and preserve the user's intent separately from factual claims.",
     "When the user's instruction is prohibition-heavy, do not rely on the prohibition alone; convert it into a positive target behavior, allowed actions, replacement action, examples, and verification gate.",
+    "When material risk exists, choose and record a structural guardrail before execution; use the lightest sufficient guardrail for low-risk reversible work and stronger gates for security, privacy, cost, publication, deployment, deletion, external tools, files, and permissions.",
     "When the user implies the LLM should simply know the truth, briefly apply the probabilistic model framing and add grounding or verification.",
     "When the user or task depends on model capability, classify the model as reasoning, general/non-reasoning, weak, or uncertain; choose a model-adaptive prompting strategy rather than using one universal prompt loop.",
     "When using a weak, non-reasoning, or uncertain model on a high-variance task and cost/latency allow, run two independent attempts or a draft-critique-revise loop, compare conflicts, merge supported parts, and verify claims before treating the result as reliable.",
@@ -971,6 +1051,7 @@
     "A fluent answer is not proof that the claim is true.",
     "Bias in the prompt can amplify biased or one-sided outputs.",
     "Negative constraints and negation can be fragile; a prohibition is more reliable when paired with an affirmative target and a checkable boundary.",
+    "Guardrails are execution boundaries, not mere prompt text; they should be selected by risk surface and verified through logs, schemas, tests, evaluators, audits, checkpoints, or rollback paths.",
     "Prompt quality does not replace verification; it improves the chance that the output is useful and checkable.",
     "Different model families and capability levels can require different prompting strategies.",
     "Two-pass or multi-sample prompting can improve high-variance tasks, but it is a reliability tactic, not evidence by itself."
@@ -1140,6 +1221,53 @@
       "naming the forbidden content repeatedly in long context",
       "treating hidden UI, prompt text, or a natural-language prohibition as a security boundary",
       "using a prohibition to replace source checks, tests, schema validation, permission gates, or privacy audits"
+    ]
+  },
+  "structural_guardrail_contract": {
+    "principle": "Use guardrails as execution boundaries for material risk, not as decorative prompt cautions.",
+    "risk_surfaces": [
+      "security or credential exposure",
+      "personal or sensitive data",
+      "publication or public artifact release",
+      "deployment, install, or environment mutation",
+      "destructive file, data, or infrastructure changes",
+      "external tool calls, webhooks, notifications, or spending",
+      "permission escalation or access to protected local areas",
+      "high-stakes factual, legal, medical, financial, or safety claims"
+    ],
+    "guardrail_types": [
+      "input_filter_or_redaction",
+      "output_schema_or_format_contract",
+      "allowlist_or_denylist",
+      "tool_permission_or_capability_scope",
+      "sandbox_or_dry_run",
+      "rate_limit_or_cost_cap",
+      "human_checkpoint_or_arbitration",
+      "evaluator_or_grounding_check",
+      "test_or_smoke_check",
+      "privacy_or_security_audit",
+      "rollback_or_recovery_gate"
+    ],
+    "selection_steps": [
+      "Classify the risk surface and reversibility.",
+      "Choose the lightest guardrail that can actually prevent, detect, or recover from the failure.",
+      "Define allowed actions, blocked actions, and the replacement or escalation action.",
+      "Record which evidence proves the guardrail ran or was reviewed.",
+      "Escalate to a human checkpoint when the impact is high, irreversible, preference-sensitive, or outside configured authority."
+    ],
+    "minimum_fields": [
+      "risk_surface",
+      "selected_guardrail",
+      "allowed_actions",
+      "blocked_actions",
+      "fallback_or_escalation",
+      "verification_evidence"
+    ],
+    "anti_patterns": [
+      "treating prompt wording as a security boundary",
+      "adding many vague warnings without a runnable check",
+      "using a heavy approval gate for low-risk reversible work",
+      "letting autonomous tool calls touch secrets, money, public release, deployment, deletion, or permissions without scoped controls"
     ]
   },
   "bounded_clarification_policy": {

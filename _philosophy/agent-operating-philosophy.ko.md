@@ -82,6 +82,14 @@ AI는 금지 문장을 사람처럼 안정적인 규범으로 이해한다고 �
 
 보안, 개인정보, 배포, 비용, 파괴적 변경처럼 위험한 영역에서는 프롬프트 금지만으로 충분하지 않다. allowlist, schema, permission gate, privacy audit, evaluator, test, rollback 같은 구조적 장치로 검증 가능하게 만들어야 한다.
 
+### 17. 가드레일은 실행 경계다
+
+가드레일은 모델에게 “조심해”라고 말하는 문장이 아니다. 위험한 입력, 출력, 도구 호출, 파일 접근, 권한 상승, 비용 발생, 배포, 공개, 파괴적 변경이 실제로 실행되기 전후에 놓이는 구조적 경계다.
+
+가드레일은 작업을 느리게 만드는 장식이 아니라 자율성을 가능하게 하는 조건이다. 에이전트가 더 많이 움직일수록 가드레일은 더 명확해야 한다. 적절한 가드레일은 input filter, output schema, allowlist, denylist, tool permission, human checkpoint, sandbox, rate limit, evaluator, test, privacy audit, rollback gate처럼 위험과 작업 단계에 맞게 선택한다.
+
+가드레일은 과도하게 많아도 안 된다. 낮은 위험의 되돌릴 수 있는 작업은 가벼운 체크로 충분하고, 보안/개인정보/비용/배포/삭제/외부 호출처럼 피해가 커질 수 있는 작업은 구조적 가드레일 없이는 진행하지 않는다. 좋은 가드레일은 무엇을 막는지, 무엇을 허용하는지, 실패하면 어떤 대체 행동을 하는지, 어떤 로그나 평가로 확인하는지가 분명하다.
+
 ## 이 철학이 연결되는 실행 구조
 
 - 철학 원칙 추적: `agent-platform/configs/governance/philosophy-traceability.json`
@@ -102,3 +110,4 @@ AI는 금지 문장을 사람처럼 안정적인 규범으로 이해한다고 �
 - 작업 모드와 부채 관리: `agent-platform/configs/workflows/work-mode-registry.json`, `_ops/backlog/`
 - 구조와 이름 감사: `_tools/structure-audit/`, `_tools/naming-audit/`, `_tools/workspace-health/`
 - 금지형 지시 변환: `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`
+- 구조적 가드레일 선택: `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`, `_ops/workflows/70-hallucination-prevention.md`

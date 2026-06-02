@@ -164,7 +164,8 @@
     "P13-autonomy-needs-reversibility",
     "P14-security-privacy-first",
     "P15-operating-cost-and-debt",
-    "P16-prohibition-is-not-goal"
+    "P16-prohibition-is-not-goal",
+    "P17-guardrails-are-execution-boundaries"
   ],
   "principles": [
     {
@@ -762,6 +763,48 @@
         {
           "command": "PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-trace configs/governance/philosophy-traceability.json",
           "validates": "The prohibition principle remains mapped from philosophy to executable structure."
+        }
+      ]
+    },
+    {
+      "id": "P17-guardrails-are-execution-boundaries",
+      "title": "Guardrails are execution boundaries",
+      "philosophy_sources": [
+        {
+          "path": "_philosophy/agent-operating-philosophy.ko.md",
+          "section": "17. 가드레일은 실행 경계다"
+        }
+      ],
+      "execution_targets": [
+        {
+          "path": "agent-platform/configs/usage/ai-usage-gap-profile.json",
+          "target_type": "config",
+          "role": "Defines structural guardrail selection by risk surface and required evidence."
+        },
+        {
+          "path": "_ops/workflows/59-bridge-ai-usage-gap.md",
+          "target_type": "workflow",
+          "role": "Applies guardrail selection when AI-use gaps create material execution risk."
+        },
+        {
+          "path": "_ops/workflows/70-hallucination-prevention.md",
+          "target_type": "workflow",
+          "role": "Provides evaluator-style guardrails for factual claims before publication."
+        },
+        {
+          "path": "agent-platform/configs/security/sensitive-file-boundary.json",
+          "target_type": "config",
+          "role": "Defines default-deny and redaction guardrails for sensitive files."
+        }
+      ],
+      "validation_targets": [
+        {
+          "command": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/ai-usage-gap-profile.json configs/security/sensitive-file-boundary.json",
+          "validates": "Guardrail-related shared configs remain self-documenting."
+        },
+        {
+          "command": "PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-trace configs/governance/philosophy-traceability.json",
+          "validates": "The guardrail principle remains mapped from philosophy to executable structure."
         }
       ]
     }

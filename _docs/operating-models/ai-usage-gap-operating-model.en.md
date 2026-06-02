@@ -80,6 +80,20 @@ For example, `Do not read sensitive files` becomes: “When sensitive informatio
 
 Prohibitions do not disappear. They become boundary notes after the positive execution contract is clear. Security, privacy, cost, publication, and destructive changes should be controlled structurally, not only through prompt wording.
 
+## Structural Guardrail Principle
+
+A guardrail is not a written “do not” instruction. It is an execution boundary. When an agent touches files, tools, external services, cost, deployment, publication, permissions, sensitive information, or high-risk factual claims, it should choose a control that can prevent, detect, or recover from the failure.
+
+Guardrail selection sequence:
+
+1. Classify the risk surface: security, privacy, cost, publication, deployment, deletion or mutation, external call, file access, permission, or high-risk claim.
+2. Check reversibility and possible impact.
+3. Choose the smallest sufficient guardrail: input redaction, output schema, allowlist, tool permission, sandbox/dry-run, rate limit, human checkpoint, evaluator, test, privacy/security audit, or rollback gate.
+4. Record allowed actions, blocked actions, and the replacement or escalation action on failure.
+5. Record which log, test, evaluator, audit, or user approval proves the guardrail was applied.
+
+Low-risk reversible work can use light checks. Security, privacy, cost, publication, deployment, deletion, and permission boundaries should not proceed on prompt wording alone.
+
 ## Clarifying Questions And Question Budget
 
 Vague instructions should not always be guessed through. If the missing goal, context, constraints, output contract, or success criteria would materially change the result, the agent should ask clarifying counter-questions first.
@@ -152,5 +166,6 @@ Operating rules:
 - Collect multiple pending answer items in the human decision inbox, then checkpoint current work and interrupt/resume by priority and risk when the human answers.
 - Rewrite biased or conclusion-seeking instructions by separating the user's intent from factual claims and neutralizing the task.
 - Convert prohibition-heavy instructions into positive behavior, allowed scope, replacement action, and verification or enforcement gates.
+- When material risk exists, choose a structural guardrail instead of relying on prompt wording, and record allowed/blocked actions plus verification evidence.
 - For high-risk or preference-sensitive ambiguity, use `clarification_needed`.
 - Effective AI-use patterns should not remain in chat; they should become repository assets.

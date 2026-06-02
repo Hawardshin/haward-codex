@@ -17,6 +17,7 @@ Classify the user's current AI-use gap, if any:
 - scattered_human_decisions
 - bad_or_biased_instruction
 - prohibition_only_instruction
+- missing_structural_guardrail
 - no_output_contract
 - deterministic_truth_machine_assumption
 - single_shot_oracle_use
@@ -38,35 +39,40 @@ For the current task:
    - replacement action when the forbidden case appears
    - examples when useful
    - validation, evaluator, allowlist, schema, permission, privacy, test, or rollback gate when risk is material
-4. If the prompt lacks an output contract, add output format, depth, tone, examples, exclusions, and acceptance criteria.
-5. If the user treats the LLM as a deterministic truth machine, briefly apply the probabilistic model framing and add verification requirements.
-6. If the instruction is materially ambiguous, apply bounded clarification:
+4. If material risk exists, select a structural guardrail before execution:
+   - classify the risk surface: security, privacy, cost, publication, deployment, destructive change, external tool call, file access, permission, or high-stakes claim
+   - choose the smallest sufficient input, output, tool, permission, evaluator, test, audit, human checkpoint, sandbox, rate limit, or rollback guardrail
+   - record allowed actions, blocked actions, fallback or escalation, and verification evidence
+   - keep guardrails light for low-risk reversible work and stronger for high-impact or hard-to-reverse work
+5. If the prompt lacks an output contract, add output format, depth, tone, examples, exclusions, and acceptance criteria.
+6. If the user treats the LLM as a deterministic truth machine, briefly apply the probabilistic model framing and add verification requirements.
+7. If the instruction is materially ambiguous, apply bounded clarification:
    - Ask only if the missing answer would materially change scope, direction, cost, risk, preference, or acceptance criteria.
    - Ask usually one round and at most two rounds.
    - Ask no more than three prioritized questions per round.
    - Offer 2-3 options and a recommended default when useful.
    - Include the assumption/default you will use if the user does not answer.
    - If the ambiguity remains after the budget, proceed with explicit assumptions, choose an option default, produce a reversible draft for confirmation, or defer the unsafe decision.
-7. Classify the model capability if it matters: reasoning_model, general_or_non_reasoning_model, weak_or_uncertain_model, or unknown.
-8. If a user answer is pending, do not globally pause by default:
+8. Classify the model capability if it matters: reasoning_model, general_or_non_reasoning_model, weak_or_uncertain_model, or unknown.
+9. If a user answer is pending, do not globally pause by default:
    - Create blocked_decision only for the decision, artifact, or action that depends on the answer.
    - Continue safe unblocked_work such as research, source collection, option comparison, drafts, tests, validation, documentation, and risk analysis.
    - Record assumptions, defaults, deferred items, and resume_action for merging or correcting the work after the answer arrives.
    - Pause the whole task only when every meaningful next step depends on the answer or proceeding would be unsafe.
-9. If multiple human decisions are pending, or if a later human answer should resume affected work, use the human decision inbox:
+10. If multiple human decisions are pending, or if a later human answer should resume affected work, use the human decision inbox:
    - Register decisions in _ops/coordination/human-decision-inbox.json.
    - Batch related questions when the human can answer them together.
    - Continue safe unblocked_work while waiting.
    - When the answer arrives, checkpoint current work, then interrupt immediately or schedule resume according to priority and risk.
-10. Use a model-adaptive strategy:
+11. Use a model-adaptive strategy:
    - For weak, non-reasoning, or uncertain models on high-variance tasks, and when cost/latency allow, run two independent attempts or a draft-critique-revise loop.
    - Compare convergence, contradictions, missing requirements, and supported claims before merging.
    - For strong reasoning models, improve goal, context, constraints, success criteria, and verification first; avoid duplicate calls unless variance or evaluator needs justify them.
    - Never treat repeated model agreement as factual proof.
-11. Check task fit: whether AI should draft, search, code, test, critique, automate, or defer to human/source/tool review.
-12. Add an iteration loop: draft, critique, revise, verify.
-13. Add evidence: sources for factual claims, tests for code, and value provenance for numbers.
-14. Promote reusable patterns into the smallest durable asset: prompt, workflow, template, tool, skill, config, operating model, or history note.
+12. Check task fit: whether AI should draft, search, code, test, critique, automate, or defer to human/source/tool review.
+13. Add an iteration loop: draft, critique, revise, verify.
+14. Add evidence: sources for factual claims, tests for code, and value provenance for numbers.
+15. Promote reusable patterns into the smallest durable asset: prompt, workflow, template, tool, skill, config, operating model, or history note.
 
 Minimum rewritten instruction fields:
 - goal
@@ -76,6 +82,7 @@ Minimum rewritten instruction fields:
 - acceptance criteria
 - positive target behavior when the instruction contains prohibitions
 - allowed actions, replacement action, and verification/enforcement gate for negative constraints
+- guardrail risk surface, selected guardrail, allowed/blocked actions, fallback/escalation, and verification evidence when material risk exists
 - counterevidence or alternatives
 - verification path
 - assumptions or questions
@@ -90,6 +97,7 @@ Return:
 - blocked_decision, unblocked_work, assumptions, and resume_action when relevant
 - human decision inbox updates, checkpoint summary, and resume action when relevant
 - bridge intervention
+- structural guardrail record when relevant
 - model capability and retry strategy when relevant
 - changed or proposed durable assets
 - verification path
