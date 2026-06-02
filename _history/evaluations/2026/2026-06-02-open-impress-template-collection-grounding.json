@@ -1,0 +1,118 @@
+{
+  "task": "Ground factual claims for open Impress template collection.",
+  "output_summary": "Collected license-cleared public LibreOffice Impress templates into presentation-agent, packaged them as .otp files, rendered thumbnail/provenance/text HTML reference pages, generated a gallery and registry, and validated the collector and gallery.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "registry_summary",
+      "source": "presentation-agent/data/reference-index/open-impress-template-downloads.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Generated registry records 7 collections and 119 template records with provenance, license, local file, thumbnail, and HTML paths."
+    },
+    {
+      "evidence_id": "file_counts",
+      "source": "find presentation-agent/data/assets/raw/open-impress-templates/files -name '*.otp' | wc -l; find presentation-agent/data/assets/thumbnails/open-impress-templates -type f | wc -l; find presentation-agent/data/conversions/html/open-impress-templates -name '*.html' | wc -l",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Command outputs each reported 119."
+    },
+    {
+      "evidence_id": "collector_source",
+      "source": "presentation-agent/src/presentation_agent/open_template_collector.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Tracked deterministic collector for packaging ODF templates and rendering registry/gallery outputs."
+    },
+    {
+      "evidence_id": "collector_tests",
+      "source": "PYTHONPATH=presentation-agent/src python3 -m unittest discover -s presentation-agent/tests",
+      "source_type": "test_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Command output showed 13 tests passed."
+    },
+    {
+      "evidence_id": "browser_tests",
+      "source": "npm run test:browser from presentation-agent/",
+      "source_type": "test_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Command output showed 22 Playwright tests passed, including the open Impress gallery smoke test on desktop and mobile."
+    },
+    {
+      "evidence_id": "config_contract",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../presentation-agent/data/reference-index/open-impress-template-downloads.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Command output returned self_documenting."
+    },
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-02-open-impress-template-collection.ko.md",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Search record lists queries, checked sources, excluded weak/restricted sources, plan impact, and uncertainty."
+    },
+    {
+      "evidence_id": "conversion_limit_docs",
+      "source": "presentation-agent/docs/research/2026-06-02-open-impress-template-collection.ko.md; presentation-agent/data/conversions/README.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Docs explicitly state the HTML output is reference-only, not high-fidelity PPT rendering."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The task generated 119 .otp files, 119 thumbnails, and 119 HTML reference pages.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["registry_summary", "file_counts"],
+      "verification_steps": ["Checked generated registry summary and file counts."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The collected templates came from seven license-reviewed collections in the dohliam/libreoffice-impress-templates GitHub archive.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["registry_summary", "web_search_record"],
+      "verification_steps": ["Read registry records and web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "LibreTemplates raw files were not stored because the license page restricts redistribution.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": ["web_search_record"],
+      "verification_steps": ["Recorded the license-page exclusion in web search and research notes."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "The generated HTML is reference-only and not high-fidelity PPT rendering.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["conversion_limit_docs", "registry_summary"],
+      "verification_steps": ["Read conversion docs and registry conversion notes."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The collector and generated gallery passed Python unit tests, browser tests, and config self-documenting validation.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": ["collector_tests", "browser_tests", "config_contract"],
+      "verification_steps": ["Ran Python tests, Playwright tests, and config contract check."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "The lo35 collection README says the templates appear to be LGPLv3, so future public/commercial redistribution should still perform item-level review.",
+    "High-fidelity .otp/.pptx conversion remains unverified because LibreOffice/soffice is not installed in the current environment."
+  ],
+  "limitation_notes": [
+    "This task collected LibreOffice Impress .otp files rather than PPTX files.",
+    "Free template galleries with restrictive redistribution terms remain metadata/link references, not stored raw files."
+  ]
+}

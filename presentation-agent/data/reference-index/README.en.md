@@ -12,6 +12,14 @@ This folder stores source metadata for presentation design, PPT/HTML templates, 
 ## Starter Data
 
 - `starter-reference-catalog.json`: initial reference bundle for repeated presentation-agent research.
+- `open-impress-template-downloads.json`: registry for 119 public Impress templates downloaded, packaged, and converted to HTML reference pages on 2026-06-02.
+
+## Actual File Collection Bundle
+
+- The public Impress template bundle came from the `dohliam/libreoffice-impress-templates` GitHub archive.
+- The stored raw files are LibreOffice Impress `.otp` templates, not PPTX files.
+- HTML conversion is a reference page preserving thumbnail, provenance, license, and extracted text, not high-fidelity rendering.
+- Browse the full gallery at `presentation-agent/artifacts/html/open-impress-template-gallery.html`.
 
 ## PPT Reference Expansion Rules
 

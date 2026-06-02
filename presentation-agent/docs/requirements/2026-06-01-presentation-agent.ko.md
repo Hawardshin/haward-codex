@@ -96,8 +96,16 @@
 - 검증은 Chromium desktop/mobile viewport에서 열림, nonblank slide, 키보드 이동, 진행률, 발표자 노트 토글, 자동 접근성 위반을 확인한다.
 - Playwright 설치와 browser binary 다운로드는 `_history/installations/`와 `_ops/installations/registry.json`에 기록한다.
 
+### REQ-PA-016 공개 템플릿 파일 수집과 HTML 참조화
+
+- 발표 에이전트는 라이선스가 확인된 공개/free 발표 템플릿 파일을 실제로 저장하고 반복 참고할 수 있어야 한다.
+- 저장 가능한 원본은 collection-level 또는 item-level 라이선스 검토를 통과해야 하며, 카탈로그에는 source URL, 다운로드 URL, 접근일, 라이선스, 재배포 메모, 로컬 파일, 썸네일, 변환 HTML 경로가 남아야 한다.
+- LibreOffice Impress/ODF 템플릿처럼 PPTX가 아닌 파일도 발표 레퍼런스 파일로 저장할 수 있으나, 산출물에는 포맷과 변환 한계를 명확히 표시한다.
+- LibreOffice 같은 렌더러가 없는 환경에서는 고화질 PPT/PPTX 변환이라고 주장하지 않고, 패키징된 템플릿 파일, 썸네일, 추출 가능한 텍스트, 출처를 담은 HTML 참조 페이지로 전환한다.
+- 제한 약관이 있는 무료 템플릿 사이트는 raw file 저장 없이 메타데이터 또는 링크 참고로 유지한다.
+
 ## 비범위
 
-- 이번 기준선은 실제 발표 PPT 파일을 대량 다운로드하지 않는다.
-- 이번 기준선은 픽셀 단위 PPTX 렌더링 엔진을 설치하지 않는다.
+- 저작권 불명, 계정 제한, 재배포 제한, 유료 템플릿 파일은 대량 다운로드하지 않는다.
+- 이번 기준선은 픽셀 단위 PPTX/ODF 렌더링 엔진을 설치하지 않는다.
 - 시각 회귀 screenshot baseline은 아직 blocking 검증으로 사용하지 않는다.

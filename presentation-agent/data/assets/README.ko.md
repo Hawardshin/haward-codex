@@ -6,9 +6,17 @@
 
 - `raw/`: 원천 파일. 라이선스, 출처, 접근일, 사용 조건이 확인된 경우에만 저장한다.
 - `raw/user-provided/`: 사용자가 제공한 PPT/PPTX를 임시 분석하는 local-only 위치. 원본 파일은 기본적으로 git에 커밋하지 않는다.
+- `raw/open-impress-templates/files/`: 라이선스가 확인된 공개 LibreOffice Impress `.otp` 템플릿 파일.
 - `html/`: HTML 발표로 재구성된 에셋.
 - `pptx/`: 합법적으로 보관 가능한 PPTX 원본 또는 샘플.
 - `thumbnails/`: 카탈로그 탐색용 미리보기. 썸네일도 원본 조건을 따른다.
+- `thumbnails/open-impress-templates/`: 공개 Impress 템플릿 HTML 갤러리용 미리보기 이미지.
+
+## 현재 공개 템플릿 묶음
+
+- `raw/open-impress-templates/files/`: 2026-06-02에 `dohliam/libreoffice-impress-templates` GitHub archive에서 수집한 119개 `.otp` 템플릿.
+- `thumbnails/open-impress-templates/`: 같은 템플릿의 119개 썸네일.
+- 상세 출처, 라이선스, 로컬 파일, HTML 변환 경로는 `data/reference-index/open-impress-template-downloads.json`에서 확인한다.
 
 ## 금지
 

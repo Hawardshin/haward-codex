@@ -1,0 +1,139 @@
+{
+  "initial_instruction": "수많은 PPT 무료 레퍼런스 파일들 ui들 모아서 다운받고 html로 전환해줘",
+  "result_summary": "Collected 119 license-cleared public LibreOffice Impress template files from the dohliam/libreoffice-impress-templates archive, packaged them as .otp files, copied thumbnails, generated per-template HTML reference pages, created a full gallery and registry, and documented the reference-only conversion limitation.",
+  "work_mode": "standard",
+  "changed_files": [
+    "presentation-agent/src/presentation_agent/open_template_collector.py",
+    "presentation-agent/tests/test_open_template_collector.py",
+    "presentation-agent/tests/browser/html-deck.spec.ts",
+    "presentation-agent/data/reference-index/open-impress-template-downloads.json",
+    "presentation-agent/data/assets/raw/open-impress-templates/files/",
+    "presentation-agent/data/assets/thumbnails/open-impress-templates/",
+    "presentation-agent/data/conversions/html/open-impress-templates/",
+    "presentation-agent/artifacts/html/open-impress-template-gallery.html",
+    "presentation-agent/README.md",
+    "presentation-agent/data/assets/README.ko.md",
+    "presentation-agent/data/assets/README.en.md",
+    "presentation-agent/data/conversions/README.ko.md",
+    "presentation-agent/data/conversions/README.en.md",
+    "presentation-agent/data/reference-index/README.ko.md",
+    "presentation-agent/data/reference-index/README.en.md",
+    "presentation-agent/docs/requirements/2026-06-01-presentation-agent.ko.md",
+    "presentation-agent/docs/requirements/2026-06-01-presentation-agent.en.md",
+    "presentation-agent/docs/research/2026-06-02-open-impress-template-collection.ko.md",
+    "presentation-agent/docs/research/2026-06-02-open-impress-template-collection.en.md",
+    "presentation-agent/docs/source-notes/2026-06-02-open-impress-template-collection.ko.md",
+    "presentation-agent/docs/source-notes/2026-06-02-open-impress-template-collection.en.md",
+    "presentation-agent/specs/2026-06-02-open-impress-template-collection/",
+    "_research/topics/presentation/2026-06-02-open-impress-template-collection.ko.md",
+    "_research/topics/presentation/2026-06-02-open-impress-template-collection.en.md",
+    "_history/web-searches/2026/2026-06-02-open-impress-template-collection.ko.md",
+    "_history/web-searches/2026/2026-06-02-open-impress-template-collection.en.md",
+    "_history/source-provenance/2026/2026-06-02-open-impress-template-collection.ko.md",
+    "_history/source-provenance/2026/2026-06-02-open-impress-template-collection.en.md",
+    "_history/plan-evidence/2026/2026-06-02-open-impress-template-collection.ko.md",
+    "_history/plan-evidence/2026/2026-06-02-open-impress-template-collection.en.md",
+    "_history/plans/2026/2026-06-02-open-impress-template-collection.ko.md",
+    "_history/plans/2026/2026-06-02-open-impress-template-collection.en.md",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/request-traces/2026/2026-06-02-open-impress-template-collection.ko.md",
+    "_history/request-traces/2026/2026-06-02-open-impress-template-collection.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/2026/2026-06-02.md",
+    "_history/work-timings/2026/2026-06-02-open-impress-template-collection.json",
+    "_history/evaluations/2026/2026-06-02-open-impress-template-collection-grounding.json",
+    "_history/evaluations/2026/2026-06-02-open-impress-template-collection-omission.json",
+    "_history/evaluations/2026/2026-06-02-open-impress-template-collection.ko.md",
+    "_history/evaluations/2026/2026-06-02-open-impress-template-collection.en.md",
+    "_history/mode-selections/2026/2026-06-02-open-impress-template-collection.json",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md"
+  ],
+  "verification": [
+    "PYTHONPATH=presentation-agent/src python3 -m unittest discover -s presentation-agent/tests: 13 tests passed",
+    "npm run test:browser from presentation-agent/: 22 Playwright tests passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../presentation-agent/data/reference-index/open-impress-template-downloads.json: self_documenting",
+    "jq '.summary' presentation-agent/data/reference-index/open-impress-template-downloads.json: 7 collections, 119 records",
+    "find presentation-agent/data/assets/raw/open-impress-templates/files -name '*.otp' | wc -l: 119",
+    "find presentation-agent/data/assets/thumbnails/open-impress-templates -type f | wc -l: 119",
+    "find presentation-agent/data/conversions/html/open-impress-templates -name '*.html' | wc -l: 119",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "python3 _tools/workspace-index/src/workspace_index.py: maps regenerated",
+    "python3 _tools/workspace-health/src/workspace_health.py --category governance --json: passed, 9 checks",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-open-impress-template-collection.json: ready",
+    "git diff --check: no whitespace errors",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-open-impress-template-collection-grounding.json: ready_to_publish"
+  ],
+  "references_checked": [
+    "dohliam/libreoffice-impress-templates: https://github.com/dohliam/libreoffice-impress-templates",
+    "GitHub source archive: https://github.com/dohliam/libreoffice-impress-templates/archive/refs/heads/master.zip",
+    "lo-cft collection README: https://github.com/dohliam/libreoffice-impress-templates/tree/master/lo-cft",
+    "lo4-design-candidates collection README: https://github.com/dohliam/libreoffice-impress-templates/tree/master/lo4-design-candidates",
+    "lo5-design-candidates collection README: https://github.com/dohliam/libreoffice-impress-templates/tree/master/lo5-design-candidates",
+    "lo51-templates collection README: https://github.com/dohliam/libreoffice-impress-templates/tree/master/lo51-templates",
+    "lo35-templates collection README: https://github.com/dohliam/libreoffice-impress-templates/tree/master/lo35-templates",
+    "fedora-slideshow collection README: https://github.com/dohliam/libreoffice-impress-templates/tree/master/fedora-slideshow",
+    "material-simple collection README: https://github.com/dohliam/libreoffice-impress-templates/tree/master/user-contrib/material-simple",
+    "LibreTemplates license page: https://libretemplates.com/en/licenses"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-open-impress-template-collection-grounding.json"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-open-impress-template-collection.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-open-impress-template-collection-omission.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-02-open-impress-template-collection.ko.md",
+    "_history/web-searches/2026/2026-06-02-open-impress-template-collection.ko.md",
+    "presentation-agent/data/reference-index/open-impress-template-downloads.json",
+    "presentation-agent/docs/source-notes/2026-06-02-open-impress-template-collection.ko.md",
+    "_research/topics/presentation/2026-06-02-open-impress-template-collection.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-02-open-impress-template-collection.ko.md",
+    "_history/plans/2026/2026-06-02-open-impress-template-collection.ko.md",
+    "presentation-agent/specs/2026-06-02-open-impress-template-collection/plan.ko.md",
+    "presentation-agent/specs/2026-06-02-open-impress-template-collection/spec.ko.md",
+    "presentation-agent/specs/2026-06-02-open-impress-template-collection/tasks.ko.md",
+    "presentation-agent/specs/2026-06-02-open-impress-template-collection/traceability.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-open-impress-template-collection.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md"
+  ],
+  "requirements_targets": [
+    "presentation-agent/docs/requirements/2026-06-01-presentation-agent.ko.md"
+  ],
+  "spec_targets": [
+    "presentation-agent/specs/2026-06-02-open-impress-template-collection/spec.ko.md",
+    "presentation-agent/specs/2026-06-02-open-impress-template-collection/plan.ko.md",
+    "presentation-agent/specs/2026-06-02-open-impress-template-collection/tasks.ko.md",
+    "presentation-agent/specs/2026-06-02-open-impress-template-collection/validation.ko.md",
+    "presentation-agent/specs/2026-06-02-open-impress-template-collection/traceability.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-open-impress-template-collection.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-open-impress-template-collection.json"
+  ],
+  "skill_work_occurred": false,
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Add a dedicated open-template registry validator so counts and per-record required fields can be checked without ad hoc jq/find commands.",
+    "Evaluate project-local or CI-controlled LibreOffice headless conversion after installation policy review.",
+    "Keep searching for redistribution-compatible PPTX template sources and add them through the same registry/HTML reference flow."
+  ]
+}

@@ -96,8 +96,16 @@ The presentation agent researches strong presentation design, PPT/HTML reference
 - Validation checks Chromium desktop/mobile rendering, nonblank slides, keyboard navigation, progress, presenter notes toggling, and automated accessibility violations.
 - Playwright package installation and browser binary downloads are recorded under `_history/installations/` and `_ops/installations/registry.json`.
 
+### REQ-PA-016 Open Template File Collection And HTML Referencing
+
+- The presentation agent must be able to store license-cleared open/free presentation template files for repeated reference use.
+- Stored raw files must pass collection-level or item-level license review, and the catalog must record source URL, download URL, access date, license, redistribution note, local file, thumbnail, and converted HTML path.
+- Non-PPTX formats such as LibreOffice Impress/ODF templates may be stored as presentation reference files, but outputs must clearly state the format and conversion limits.
+- When a LibreOffice-style renderer is unavailable, the agent must not claim high-fidelity PPT/PPTX conversion; it should produce packaged template files, thumbnails, extracted text, provenance, and HTML reference pages.
+- Free template sites with restrictive redistribution terms remain metadata-only or link-only sources unless raw storage permission is clear.
+
 ## Non-Scope
 
-- This baseline does not bulk-download presentation files.
-- This baseline does not install a pixel-faithful PPTX rendering engine.
+- Unknown-license, account-gated, redistribution-restricted, and paid template files are not bulk-downloaded.
+- This baseline does not install a pixel-faithful PPTX/ODF rendering engine.
 - Visual regression screenshot baselines are not yet blocking validation.

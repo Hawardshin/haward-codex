@@ -69,6 +69,20 @@ test.describe('generated HTML presentation decks', () => {
   }
 });
 
+test.describe('open Impress template gallery', () => {
+  test('gallery renders collected references and thumbnails', async ({ page }) => {
+    const galleryPath = path.join(artifactsDir, 'open-impress-template-gallery.html');
+    test.skip(!fs.existsSync(galleryPath), 'Open Impress gallery has not been generated.');
+
+    await page.goto(pathToFileURL(galleryPath).href);
+
+    await expect(page.locator('h1')).toHaveText('Open Impress Template Gallery');
+    await expect(page.locator('article')).toHaveCount(119);
+    await expect(page.locator('article').first().locator('img')).toBeVisible();
+    await expect(page.locator('text=LibreOffice Call for Templates').first()).toBeVisible();
+  });
+});
+
 async function currentSlideCount(page: Page): Promise<string> {
   return page.locator('.pa-count').evaluate((element) => {
     if (element instanceof HTMLOutputElement) {

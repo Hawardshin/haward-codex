@@ -11,6 +11,7 @@
 - 발표 스크립트 에이전트와 협업할 수 있는 `deck-spec` JSON을 HTML 발표 덱으로 렌더링한다.
 - 미리캔버스, Canva, Slidesgo, Pitch, Figma, Genspark 같은 PPT/AI slide 출처를 메타데이터로 수집하고, 사용자가 제공한 PPT는 local-only 분석 후 내부 template profile로 재구성한다.
 - 생성된 `deck-spec`, HTML 덱, PPTX 산출물을 반복 검증하기 위한 품질 하네스 후보와 채택 우선순위를 관리한다.
+- 라이선스가 확인된 공개 Impress 템플릿은 실제 `.otp` 파일, 썸네일, HTML 참조 카드로 저장해 반복 참고한다.
 
 ## 폴더 구조
 
@@ -37,6 +38,10 @@ presentation-agent/
 ## 주요 파일
 
 - `data/reference-index/starter-reference-catalog.json`: 50개 이상의 발표 디자인/HTML/에셋 출처 카탈로그.
+- `data/reference-index/open-impress-template-downloads.json`: 공개 Impress 템플릿 119개 다운로드/패키징/HTML 참조 registry.
+- `artifacts/html/open-impress-template-gallery.html`: 119개 템플릿을 훑어보는 HTML 갤러리.
+- `data/assets/raw/open-impress-templates/files/`: 라이선스가 확인된 공개 Impress `.otp` 파일.
+- `data/conversions/html/open-impress-templates/`: 템플릿별 출처/라이선스/썸네일/텍스트 구조 HTML 참조 페이지.
 - `configs/collection-policy.json`: 출처 수집, 라이선스 게이트, PPTX HTML 변환 정책.
 - `configs/evaluation/harness-candidates.json`: 발표 품질 검증에 적용 가능한 오픈소스 하네스 후보와 채택 순서.
 - `docs/workflows/imported-ppt-reference-workflow.ko.md`: 사용자가 가져온 PPT/PPTX를 디자인 토큰과 레이아웃 archetype으로 전환하는 workflow.
@@ -47,6 +52,7 @@ presentation-agent/
 - `data/assets/raw/user-provided/`: 사용자가 제공한 PPT/PPTX를 임시 분석하는 local-only 위치.
 - `src/presentation_agent/catalog.py`: 카탈로그 검증과 요약 CLI.
 - `src/presentation_agent/pptx_to_html.py`: 라이선스가 허용된 PPTX를 기본 HTML 구조로 변환하는 최소 도구.
+- `src/presentation_agent/open_template_collector.py`: 공개 ODF/Impress 템플릿 디렉터리를 `.otp`로 패키징하고 HTML 참조 페이지/갤러리를 생성하는 도구.
 - `src/presentation_agent/html_deck.py`: 발표 스크립트가 포함된 `deck-spec`을 HTML 발표 덱으로 렌더링하는 도구.
 - `src/presentation_agent/artifact_pptx.py`: `deck-spec`을 editable PPTX 생성을 위한 artifact-tool slide workspace로 변환하는 도구.
 - `data/deck-specs/presentation-agent-kickoff.ko.json`: 발표 에이전트 소개용 샘플 deck spec.
@@ -65,6 +71,7 @@ presentation-agent/
 ```bash
 PYTHONPATH=presentation-agent/src python3 -m unittest discover -s presentation-agent/tests
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.catalog presentation-agent/data/reference-index/starter-reference-catalog.json
+PYTHONPATH=presentation-agent/src python3 -m presentation_agent.open_template_collector /private/tmp/presentation-reference-downloads/libreoffice-impress-templates-master --output-root presentation-agent --accessed-on 2026-06-02
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/presentation-agent-kickoff.ko.json presentation-agent/artifacts/html/presentation-agent-kickoff.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.artifact_pptx presentation-agent/data/deck-specs/presentation-agent-kickoff.ko.json outputs/manual-presentation-agent/presentations/presentation-agent-kickoff --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/workspace-platform-overview.ko.json presentation-agent/artifacts/html/workspace-platform-overview.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
@@ -72,3 +79,5 @@ cd presentation-agent && npm run test:browser
 ```
 
 브라우저 검증을 처음 실행하는 환경에서는 먼저 `cd presentation-agent && npm install && npm run install:browsers`를 실행한다.
+
+`open_template_collector.py` 산출물은 고화질 PPT 렌더링이 아니라 공개 Impress 템플릿 파일, 썸네일, 추출 가능한 텍스트, 출처를 보존하는 HTML 참조 변환이다.

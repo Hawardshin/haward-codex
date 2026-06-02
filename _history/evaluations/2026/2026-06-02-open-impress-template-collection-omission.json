@@ -1,0 +1,135 @@
+{
+  "task": "Collect many free presentation reference files and convert them to HTML references.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web_first",
+      "description": "Run web-first intake before planning or implementation.",
+      "source": "AGENTS.md and user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-open-impress-template-collection.ko.md",
+        "_history/web-searches/2026/2026-06-02-open-impress-template-collection.en.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "actual_file_collection",
+      "description": "Collect many actual free/open presentation template files rather than only metadata.",
+      "source": "User asked to download many free PPT reference files.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "presentation-agent/data/assets/raw/open-impress-templates/files/",
+        "find presentation-agent/data/assets/raw/open-impress-templates/files -name '*.otp' | wc -l: 119",
+        "presentation-agent/data/reference-index/open-impress-template-downloads.json"
+      ],
+      "rationale": "The collected raw files are LibreOffice Impress .otp templates, not PPTX files; the format limitation is documented."
+    },
+    {
+      "item_id": "license_gate",
+      "description": "Download only sources with clear raw-storage-compatible license notes.",
+      "source": "Presentation-agent collection policy and repository license rules.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "presentation-agent/docs/source-notes/2026-06-02-open-impress-template-collection.ko.md",
+        "_history/source-provenance/2026/2026-06-02-open-impress-template-collection.ko.md",
+        "presentation-agent/data/reference-index/open-impress-template-downloads.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "html_conversion",
+      "description": "Convert collected references to HTML in a way that can be browsed later.",
+      "source": "User asked for HTML conversion.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "presentation-agent/data/conversions/html/open-impress-templates/",
+        "find presentation-agent/data/conversions/html/open-impress-templates -name '*.html' | wc -l: 119",
+        "presentation-agent/artifacts/html/open-impress-template-gallery.html"
+      ],
+      "rationale": "The conversion is reference-only HTML using thumbnails, provenance, license notes, and extracted text; it is not high-fidelity visual rendering."
+    },
+    {
+      "item_id": "browse_ui",
+      "description": "Provide a UI/gallery for scanning the collected templates.",
+      "source": "User asked to collect files and UIs for reference.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "presentation-agent/artifacts/html/open-impress-template-gallery.html",
+        "presentation-agent/tests/browser/html-deck.spec.ts",
+        "npm run test:browser: 22 passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "durable_records",
+      "description": "Record requirements, spec, provenance, plan evidence, request trace, work summary, timing, grounding, and evaluation.",
+      "source": "Standard mode close-out rules.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "presentation-agent/docs/requirements/2026-06-01-presentation-agent.ko.md",
+        "presentation-agent/specs/2026-06-02-open-impress-template-collection/",
+        "_history/request-traces/2026/2026-06-02-open-impress-template-collection.ko.md",
+        "_history/work-summaries/2026/2026-06-02.ko.md",
+        "_history/work-timings/2026/2026-06-02-open-impress-template-collection.json",
+        "_history/evaluations/2026/2026-06-02-open-impress-template-collection-grounding.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {"path": "presentation-agent/src/presentation_agent/open_template_collector.py", "purpose": "Open Impress collector and HTML reference generator.", "required": true},
+    {"path": "presentation-agent/data/reference-index/open-impress-template-downloads.json", "purpose": "Self-documenting registry for collected templates.", "required": true},
+    {"path": "presentation-agent/artifacts/html/open-impress-template-gallery.html", "purpose": "Browsable generated gallery.", "required": true},
+    {"path": "presentation-agent/tests/test_open_template_collector.py", "purpose": "Collector regression tests.", "required": true},
+    {"path": "presentation-agent/tests/browser/html-deck.spec.ts", "purpose": "Gallery browser smoke test.", "required": true}
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "record_count",
+      "description": "Collect at least 100 raw presentation template files.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["119 .otp files collected and 119 registry records generated."],
+      "rationale": ""
+    },
+    {
+      "check_id": "html_count",
+      "description": "Generate HTML references for each collected template.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["119 HTML reference pages generated."],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser_smoke",
+      "description": "Generated gallery loads in browser on desktop and mobile.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["Playwright gallery tests passed in chromium-desktop and chromium-mobile."],
+      "rationale": ""
+    },
+    {
+      "check_id": "self_documenting_registry",
+      "description": "Registry explains purpose, references, structure rules, and fields.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["check-config-contract returned self_documenting."],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "This pass collected .otp Impress templates, not PPTX files.",
+    "High-fidelity visual conversion is not implemented because LibreOffice/soffice is not installed."
+  ],
+  "notes": [
+    "The format and conversion limitations are documented in README, research, source notes, registry, and grounding records.",
+    "No new dependency installation occurred."
+  ]
+}

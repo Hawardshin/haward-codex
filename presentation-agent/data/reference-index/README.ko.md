@@ -12,6 +12,14 @@
 ## 시작 데이터
 
 - `starter-reference-catalog.json`: 발표 에이전트가 반복 조사할 때 사용할 초기 레퍼런스 묶음.
+- `open-impress-template-downloads.json`: 2026-06-02에 실제 다운로드/패키징/HTML 참조화한 공개 Impress 템플릿 119개 registry.
+
+## 실제 파일 수집 묶음
+
+- 공개 Impress 템플릿 묶음은 `dohliam/libreoffice-impress-templates` GitHub archive에서 가져왔다.
+- 저장된 원본은 PPTX가 아니라 LibreOffice Impress `.otp` 템플릿이다.
+- HTML 변환은 고화질 렌더링이 아니라 썸네일, 출처, 라이선스, 추출 텍스트를 보존하는 참조 페이지다.
+- 전체 갤러리는 `presentation-agent/artifacts/html/open-impress-template-gallery.html`에서 본다.
 
 ## PPT 레퍼런스 확장 규칙
 

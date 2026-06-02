@@ -1,0 +1,34 @@
+{
+  "task_id": "2026-06-02-open-impress-template-collection",
+  "selected_mode": "standard",
+  "selection_reason": "The request required actual file collection, a new project-local tool, generated HTML artifacts, requirements/spec updates, history records, validation, evaluation, commit, and push.",
+  "alternatives_considered": [
+    {
+      "mode": "quick",
+      "decision": "rejected",
+      "reason": "Too light for a raw asset collection task with licensing and generated artifacts."
+    },
+    {
+      "mode": "research",
+      "decision": "rejected",
+      "reason": "The task required implementation and artifact generation, not only a research report."
+    },
+    {
+      "mode": "governance",
+      "decision": "rejected",
+      "reason": "The work changed a project capability and requirements, but not cross-workspace policy or operating rules."
+    }
+  ],
+  "enforcement_checks": [
+    "web_search_record_targets recorded",
+    "requirements_targets recorded",
+    "spec_targets recorded",
+    "source_provenance_targets recorded",
+    "plan_evidence_targets recorded",
+    "request_trace_targets recorded",
+    "work_summary_targets recorded",
+    "timing_summary_targets recorded",
+    "omission_check_targets recorded"
+  ],
+  "selected_on": "2026-06-02"
+}
