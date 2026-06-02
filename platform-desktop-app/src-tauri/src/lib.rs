@@ -47,6 +47,12 @@ struct SessionStore {
 }
 
 struct CliSession {
+    session_id: String,
+    task_run_id: String,
+    task_kind: String,
+    pipeline_id: Option<String>,
+    lane_id: Option<String>,
+    lane_role: Option<String>,
     adapter_id: String,
     label: String,
     command: String,
@@ -59,6 +65,8 @@ struct CliSession {
     timeout: Duration,
     max_output_bytes: usize,
     working_dir: PathBuf,
+    started_at: String,
+    prompt_preview: String,
     status: String,
     exit_code: Option<i32>,
     finished: bool,
@@ -68,6 +76,11 @@ struct CliSession {
     decision_inbox_items: usize,
     deferred_prompt_keys: Vec<String>,
     decision_capture_error: Option<String>,
+    task_record_path: Option<String>,
+    stdout_log_path: Option<String>,
+    stderr_log_path: Option<String>,
+    persistence_error: Option<String>,
+    last_persist_signature: String,
 }
 
 #[derive(Clone, Default)]
@@ -120,6 +133,11 @@ struct CliRunReport {
 #[serde(rename_all = "camelCase")]
 struct CliSessionReport {
     session_id: String,
+    task_run_id: String,
+    task_kind: String,
+    pipeline_id: Option<String>,
+    lane_id: Option<String>,
+    lane_role: Option<String>,
     adapter_id: String,
     label: String,
     command: String,
@@ -140,6 +158,10 @@ struct CliSessionReport {
     pending_decision_prompts: usize,
     deferred_prompt_count: usize,
     decision_capture_error: Option<String>,
+    task_record_path: Option<String>,
+    stdout_log_path: Option<String>,
+    stderr_log_path: Option<String>,
+    persistence_error: Option<String>,
 }
 
 #[derive(Serialize)]
@@ -192,6 +214,38 @@ struct CliTaskPipelineInitReport {
     max_output_bytes: usize,
     lanes: Vec<CliTaskPipelineLaneReport>,
     pipes: Vec<CliPipeEdgeReport>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct CliTaskRunRecordReport {
+    record_id: String,
+    session_id: String,
+    task_run_id: String,
+    task_kind: String,
+    pipeline_id: Option<String>,
+    lane_id: Option<String>,
+    lane_role: Option<String>,
+    adapter_id: String,
+    label: String,
+    command: String,
+    status: String,
+    exit_code: Option<i32>,
+    started_at: String,
+    updated_at: String,
+    elapsed_ms: u128,
+    working_dir: String,
+    stdout_bytes: usize,
+    stderr_bytes: usize,
+    output_truncated: bool,
+    decision_inbox_items: usize,
+    pending_decision_prompts: usize,
+    deferred_prompt_count: usize,
+    auto_defer_questions: bool,
+    auto_defer_triggered: bool,
+    record_path: String,
+    stdout_log_path: String,
+    stderr_log_path: String,
 }
 
 #[derive(Serialize)]
@@ -265,6 +319,12 @@ struct ProcessOutput {
     duration_ms: u128,
 }
 
+struct TaskRunPersistPaths {
+    record_path: String,
+    stdout_log_path: String,
+    stderr_log_path: String,
+}
+
 const MAX_HEALTH_OUTPUT_BYTES: usize = 20_000;
 const HEALTH_TIMEOUT_MS: u64 = 2_500;
 const MAX_SESSION_OUTPUT_BYTES: usize = 100_000;
@@ -273,6 +333,8 @@ const SESSION_TIMEOUT_MS: u64 = 300_000;
 const MAX_SESSION_INPUT_BYTES: usize = 20_000;
 const MAX_WORKSPACE_FILE_BYTES: usize = 1_000_000;
 const MAX_DECISION_ANSWER_BYTES: usize = 20_000;
+const MAX_TASK_RUN_RECORDS: usize = 80;
+const MAX_TASK_PROMPT_PREVIEW_CHARS: usize = 280;
 const DEFER_MESSAGE: &str = "I will pause this lane here and collect the user decision later. Please do not make a source-affecting decision now.";
 
 static ADAPTERS: &[AdapterDefinition] = &[
@@ -430,6 +492,11 @@ fn list_cli_task_pipeline_presets() -> Vec<CliTaskPipelinePresetReport> {
 }
 
 #[tauri::command]
+fn list_cli_task_run_records() -> Result<Vec<CliTaskRunRecordReport>, String> {
+    read_task_run_records()
+}
+
+#[tauri::command]
 fn start_cli_adapter_session(
     store: State<'_, SessionStore>,
     adapter_id: String,
@@ -450,6 +517,10 @@ fn start_cli_adapter_session(
         &prompt,
         working_dir,
         auto_defer_questions.unwrap_or(true),
+        "single_cli_session",
+        None,
+        None,
+        None,
     )?;
     match store.sessions.lock() {
         Ok(mut sessions) => {
@@ -522,6 +593,10 @@ fn start_cli_task_pipeline(
             &lane_prompt,
             resolved_working_dir.clone(),
             auto_defer_questions.unwrap_or(true),
+            preset.task_kind,
+            Some(&pipeline_id),
+            Some(lane.lane_id),
+            Some(lane.role),
         ) {
             Ok((session_id, session, report)) => {
                 let status = report.status.clone();
@@ -602,9 +677,15 @@ fn create_cli_session(
     prompt: &str,
     working_dir: PathBuf,
     auto_defer_questions: bool,
+    task_kind: &str,
+    pipeline_id: Option<&str>,
+    lane_id: Option<&str>,
+    lane_role: Option<&str>,
 ) -> Result<(String, CliSession, CliSessionReport), String> {
     let path = resolve_command(adapter.command)
         .ok_or_else(|| format!("Command '{}' was not found on PATH.", adapter.command))?;
+    let session_id = new_session_id(adapter.adapter_id);
+    let task_run_id = format!("task-run-{session_id}");
     let mut child = Command::new(&path)
         .args(adapter.session_args)
         .current_dir(&working_dir)
@@ -660,8 +741,13 @@ fn create_cli_session(
         read_session_stream(stderr, stderr_output, false, MAX_SESSION_OUTPUT_BYTES);
     });
 
-    let session_id = new_session_id(adapter.adapter_id);
     let mut session = CliSession {
+        session_id: session_id.clone(),
+        task_run_id,
+        task_kind: task_kind.to_string(),
+        pipeline_id: pipeline_id.map(ToOwned::to_owned),
+        lane_id: lane_id.map(ToOwned::to_owned),
+        lane_role: lane_role.map(ToOwned::to_owned),
         adapter_id: adapter.adapter_id.to_string(),
         label: adapter.label.to_string(),
         command: adapter.command.to_string(),
@@ -674,6 +760,8 @@ fn create_cli_session(
         timeout: Duration::from_millis(SESSION_TIMEOUT_MS),
         max_output_bytes: MAX_SESSION_OUTPUT_BYTES,
         working_dir,
+        started_at: current_unix_millis_label(),
+        prompt_preview: prompt_preview(prompt),
         status: "running".to_string(),
         exit_code: None,
         finished: false,
@@ -683,6 +771,11 @@ fn create_cli_session(
         decision_inbox_items: 0,
         deferred_prompt_keys: Vec::new(),
         decision_capture_error: None,
+        task_record_path: None,
+        stdout_log_path: None,
+        stderr_log_path: None,
+        persistence_error: None,
+        last_persist_signature: String::new(),
     };
     let report = poll_session_locked(&session_id, &mut session);
     Ok((session_id, session, report))
@@ -961,6 +1054,7 @@ pub fn run() {
             run_cli_adapter_health,
             run_all_cli_adapter_health,
             list_cli_task_pipeline_presets,
+            list_cli_task_run_records,
             start_cli_adapter_session,
             start_cli_task_pipeline,
             poll_cli_adapter_session,
@@ -1272,6 +1366,22 @@ fn poll_session_locked(session_id: &str, session: &mut CliSession) -> CliSession
     }
     join_finished_reader(&mut session.stdout_handle);
     join_finished_reader(&mut session.stderr_handle);
+    let report = session_report(session_id, session);
+    let persist_signature = task_run_persist_signature(&report);
+    if session.task_record_path.is_none() || session.last_persist_signature != persist_signature {
+        match persist_session_task_run(session_id, session, &report) {
+            Ok(paths) => {
+                session.task_record_path = Some(paths.record_path);
+                session.stdout_log_path = Some(paths.stdout_log_path);
+                session.stderr_log_path = Some(paths.stderr_log_path);
+                session.persistence_error = None;
+                session.last_persist_signature = persist_signature;
+            }
+            Err(error) => {
+                session.persistence_error = Some(error);
+            }
+        }
+    }
     session_report(session_id, session)
 }
 
@@ -1307,6 +1417,11 @@ fn session_report(session_id: &str, session: &CliSession) -> CliSessionReport {
 
     CliSessionReport {
         session_id: session_id.to_string(),
+        task_run_id: session.task_run_id.clone(),
+        task_kind: session.task_kind.clone(),
+        pipeline_id: session.pipeline_id.clone(),
+        lane_id: session.lane_id.clone(),
+        lane_role: session.lane_role.clone(),
         adapter_id: session.adapter_id.clone(),
         label: session.label.clone(),
         command: session.command.clone(),
@@ -1327,6 +1442,10 @@ fn session_report(session_id: &str, session: &CliSession) -> CliSessionReport {
         pending_decision_prompts,
         deferred_prompt_count: session.deferred_prompt_keys.len(),
         decision_capture_error: session.decision_capture_error.clone(),
+        task_record_path: session.task_record_path.clone(),
+        stdout_log_path: session.stdout_log_path.clone(),
+        stderr_log_path: session.stderr_log_path.clone(),
+        persistence_error: session.persistence_error.clone(),
     }
 }
 
@@ -1373,6 +1492,216 @@ fn append_session_output(output: &mut CliSessionOutput, is_stdout: bool, text: &
         target.push_str(&text[..end]);
         *truncated = true;
     }
+}
+
+fn persist_session_task_run(
+    session_id: &str,
+    session: &CliSession,
+    report: &CliSessionReport,
+) -> Result<TaskRunPersistPaths, String> {
+    let root = workspace_root()?;
+    let run_dir = task_run_dir(&root, &session.task_run_id);
+    fs::create_dir_all(&run_dir).map_err(|error| format!("Failed to create task run directory: {error}"))?;
+
+    let record_path = run_dir.join("record.json");
+    let stdout_log_path = run_dir.join("stdout.log");
+    let stderr_log_path = run_dir.join("stderr.log");
+    fs::write(&stdout_log_path, report.stdout.as_bytes())
+        .map_err(|error| format!("Failed to write task run stdout log: {error}"))?;
+    fs::write(&stderr_log_path, report.stderr.as_bytes())
+        .map_err(|error| format!("Failed to write task run stderr log: {error}"))?;
+
+    let relative_record_path = workspace_relative_display_path(&root, &record_path);
+    let relative_stdout_path = workspace_relative_display_path(&root, &stdout_log_path);
+    let relative_stderr_path = workspace_relative_display_path(&root, &stderr_log_path);
+    let updated_at = current_unix_millis_label();
+    let record = json!({
+        "schema_version": 1,
+        "record_id": format!("record-{session_id}"),
+        "session_id": session.session_id.clone(),
+        "task_run_id": session.task_run_id.clone(),
+        "task_kind": session.task_kind.clone(),
+        "pipeline_id": session.pipeline_id.clone(),
+        "lane_id": session.lane_id.clone(),
+        "lane_role": session.lane_role.clone(),
+        "adapter_id": session.adapter_id.clone(),
+        "label": session.label.clone(),
+        "command": session.command.clone(),
+        "status": report.status.clone(),
+        "exit_code": report.exit_code,
+        "started_at": session.started_at.clone(),
+        "updated_at": updated_at,
+        "elapsed_ms": u64::try_from(report.elapsed_ms).unwrap_or(u64::MAX),
+        "working_dir": report.working_dir.clone(),
+        "prompt_preview": session.prompt_preview.clone(),
+        "stdout_bytes": report.stdout.len(),
+        "stderr_bytes": report.stderr.len(),
+        "output_truncated": report.output_truncated,
+        "decision_inbox_items": report.decision_inbox_items,
+        "pending_decision_prompts": report.pending_decision_prompts,
+        "deferred_prompt_count": report.deferred_prompt_count,
+        "auto_defer_questions": report.auto_defer_questions,
+        "auto_defer_triggered": report.auto_defer_triggered,
+        "defer_message_sent": report.defer_message_sent,
+        "bounded": report.bounded,
+        "max_output_bytes": report.max_output_bytes,
+        "decision_prompts": report.decision_prompts.clone(),
+        "paths": {
+            "record": relative_record_path,
+            "stdout_log": relative_stdout_path,
+            "stderr_log": relative_stderr_path
+        }
+    });
+    let formatted =
+        serde_json::to_string_pretty(&record).map_err(|error| format!("Failed to serialize task run record: {error}"))?;
+    fs::write(&record_path, format!("{formatted}\n"))
+        .map_err(|error| format!("Failed to write task run record: {error}"))?;
+
+    Ok(TaskRunPersistPaths {
+        record_path: relative_record_path,
+        stdout_log_path: relative_stdout_path,
+        stderr_log_path: relative_stderr_path,
+    })
+}
+
+fn task_run_persist_signature(report: &CliSessionReport) -> String {
+    [
+        report.status.clone(),
+        report.exit_code.map(|code| code.to_string()).unwrap_or_default(),
+        report.stdout.len().to_string(),
+        report.stderr.len().to_string(),
+        report.output_truncated.to_string(),
+        report.defer_message_sent.to_string(),
+        report.auto_defer_triggered.to_string(),
+        report.decision_inbox_items.to_string(),
+        report.pending_decision_prompts.to_string(),
+        report.deferred_prompt_count.to_string(),
+        report
+            .decision_capture_error
+            .clone()
+            .unwrap_or_default(),
+    ]
+    .join("\u{1f}")
+}
+
+fn read_task_run_records() -> Result<Vec<CliTaskRunRecordReport>, String> {
+    let root = workspace_root()?;
+    let base = task_runs_base_path(&root);
+    if !base.exists() {
+        return Ok(Vec::new());
+    }
+
+    let mut records = Vec::new();
+    for entry in fs::read_dir(&base).map_err(|error| format!("Failed to read task run directory: {error}"))? {
+        let Ok(entry) = entry else {
+            continue;
+        };
+        let path = entry.path();
+        if !path.is_dir() {
+            continue;
+        }
+        let record_path = path.join("record.json");
+        if !record_path.is_file() {
+            continue;
+        }
+        let Ok(content) = fs::read_to_string(&record_path) else {
+            continue;
+        };
+        let Ok(value) = serde_json::from_str::<Value>(&content) else {
+            continue;
+        };
+        records.push(task_run_record_report_from_value(&root, &record_path, &value));
+    }
+
+    records.sort_by(|left, right| right.updated_at.cmp(&left.updated_at));
+    records.truncate(MAX_TASK_RUN_RECORDS);
+    Ok(records)
+}
+
+fn task_run_record_report_from_value(root: &Path, record_path: &Path, value: &Value) -> CliTaskRunRecordReport {
+    let paths = value.get("paths").unwrap_or(&Value::Null);
+    CliTaskRunRecordReport {
+        record_id: value_string(value, "record_id", "unknown-task-run-record"),
+        session_id: value_string(value, "session_id", "unknown-session"),
+        task_run_id: value_string(value, "task_run_id", "unknown-task-run"),
+        task_kind: value_string(value, "task_kind", "unknown"),
+        pipeline_id: value.get("pipeline_id").and_then(Value::as_str).map(ToOwned::to_owned),
+        lane_id: value.get("lane_id").and_then(Value::as_str).map(ToOwned::to_owned),
+        lane_role: value.get("lane_role").and_then(Value::as_str).map(ToOwned::to_owned),
+        adapter_id: value_string(value, "adapter_id", "unknown-adapter"),
+        label: value_string(value, "label", "Unknown CLI"),
+        command: value_string(value, "command", ""),
+        status: value_string(value, "status", "unknown"),
+        exit_code: value.get("exit_code").and_then(Value::as_i64).map(|code| code as i32),
+        started_at: value_string(value, "started_at", ""),
+        updated_at: value_string(value, "updated_at", ""),
+        elapsed_ms: value.get("elapsed_ms").and_then(Value::as_u64).unwrap_or(0) as u128,
+        working_dir: value_string(value, "working_dir", ""),
+        stdout_bytes: value.get("stdout_bytes").and_then(Value::as_u64).unwrap_or(0) as usize,
+        stderr_bytes: value.get("stderr_bytes").and_then(Value::as_u64).unwrap_or(0) as usize,
+        output_truncated: value.get("output_truncated").and_then(Value::as_bool).unwrap_or(false),
+        decision_inbox_items: value
+            .get("decision_inbox_items")
+            .and_then(Value::as_u64)
+            .unwrap_or(0) as usize,
+        pending_decision_prompts: value
+            .get("pending_decision_prompts")
+            .and_then(Value::as_u64)
+            .unwrap_or(0) as usize,
+        deferred_prompt_count: value
+            .get("deferred_prompt_count")
+            .and_then(Value::as_u64)
+            .unwrap_or(0) as usize,
+        auto_defer_questions: value.get("auto_defer_questions").and_then(Value::as_bool).unwrap_or(false),
+        auto_defer_triggered: value.get("auto_defer_triggered").and_then(Value::as_bool).unwrap_or(false),
+        record_path: paths
+            .get("record")
+            .and_then(Value::as_str)
+            .map(ToOwned::to_owned)
+            .unwrap_or_else(|| workspace_relative_display_path(root, record_path)),
+        stdout_log_path: paths
+            .get("stdout_log")
+            .and_then(Value::as_str)
+            .map(ToOwned::to_owned)
+            .unwrap_or_default(),
+        stderr_log_path: paths
+            .get("stderr_log")
+            .and_then(Value::as_str)
+            .map(ToOwned::to_owned)
+            .unwrap_or_default(),
+    }
+}
+
+fn task_runs_base_path(root: &Path) -> PathBuf {
+    platform_artifacts_base_path(root).join("task-runs")
+}
+
+fn task_run_dir(root: &Path, task_run_id: &str) -> PathBuf {
+    task_runs_base_path(root).join(sanitize_file_name(task_run_id))
+}
+
+fn platform_artifacts_base_path(root: &Path) -> PathBuf {
+    if root.join("platform-desktop-app").exists() {
+        root.join("platform-desktop-app").join("artifacts")
+    } else {
+        root.join("artifacts")
+    }
+}
+
+fn workspace_relative_display_path(root: &Path, path: &Path) -> String {
+    path.strip_prefix(root)
+        .unwrap_or(path)
+        .to_string_lossy()
+        .replace('\\', "/")
+}
+
+fn prompt_preview(prompt: &str) -> String {
+    prompt
+        .chars()
+        .take(MAX_TASK_PROMPT_PREVIEW_CHARS)
+        .collect::<String>()
+        .trim()
+        .to_string()
 }
 
 fn new_session_id(adapter_id: &str) -> String {

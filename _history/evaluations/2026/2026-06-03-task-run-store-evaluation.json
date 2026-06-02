@@ -1,0 +1,52 @@
+{
+  "request_id": "UR-2026-06-03-004",
+  "status": "ready_with_known_build_constraint",
+  "implementation_occurred": true,
+  "spec_only": false,
+  "implemented_capabilities": [
+    "filesystem-backed CLI task-run record store",
+    "separate stdout/stderr log artifact persistence",
+    "task-run record listing Tauri command",
+    "Workspace Monitor Task Run Store panel",
+    "polling-aware persist signature to avoid unchanged file rewrites"
+  ],
+  "touched_primary_files": [
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs"
+  ],
+  "validation_commands": [
+    {
+      "command": "npm --prefix workspace-monitor run check",
+      "status": "passed"
+    },
+    {
+      "command": "npm --prefix platform-desktop-app test",
+      "status": "passed"
+    },
+    {
+      "command": "npm --prefix platform-desktop-app run check",
+      "status": "passed_with_warning",
+      "warning": "Rust toolchain is not installed; tauri:dev and tauri:build remain blocked until installation audit."
+    },
+    {
+      "command": "npm --prefix workspace-monitor run collect",
+      "status": "passed"
+    },
+    {
+      "command": "npm --prefix workspace-monitor run build",
+      "status": "passed"
+    },
+    {
+      "command": "npm --prefix workspace-monitor run perf:budget",
+      "status": "passed"
+    }
+  ],
+  "known_constraints": [
+    "Rust toolchain is not installed in the current environment, so actual Tauri compile/build validation was not run.",
+    "No real external AI CLI lane was launched during validation because optional CLI availability depends on local user setup."
+  ],
+  "close_out_assessment": "The request asked for actual implementation rather than more specs. This change adds runtime code and UI surfaces for durable CLI task-run persistence, with static readiness and frontend build validation passing."
+}

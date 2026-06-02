@@ -88,6 +88,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "run_cli_adapter_health",
     "run_all_cli_adapter_health",
     "list_cli_task_pipeline_presets",
+    "list_cli_task_run_records",
     "start_cli_adapter_session",
     "start_cli_task_pipeline",
     "poll_cli_adapter_session",
@@ -127,6 +128,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "process graph",
     "terminal event",
     "Task Pipe Init",
+    "Task Run Store",
+    "저장된 실행 기록과 로그",
+    "Refresh task runs",
     "Init task pipe",
     "Init Pipe",
     "merge gate",
@@ -178,10 +182,15 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "SESSION_POLL_INTERVAL_MS",
     "SESSION_POLL_IDLE_UPDATE_BUCKET_MS",
     "SESSION_OUTPUT_SIGNATURE_CHARS",
+    "TASK_RUN_REFRESH_THROTTLE_MS",
     "INBOX_REFRESH_THROTTLE_MS",
     "deferDetectedQuestions",
     "defer_all_cli_adapter_questions",
     "task-pipe-panel",
+    "task-run-panel",
+    "taskRunRecords",
+    "refreshTaskRunRecords",
+    "list_cli_task_run_records",
     "taskPipePresets",
     "start_cli_task_pipeline",
     "platform_improvement_pipe",
@@ -199,6 +208,19 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "openModeFunctionOption"
   ]) {
     assert.match(monitorShell, new RegExp(implementationToken));
+  }
+  for (const taskRunStoreToken of [
+    "CliTaskRunRecordReport",
+    "persist_session_task_run",
+    "task_run_persist_signature",
+    "task_runs_base_path",
+    "platform_artifacts_base_path",
+    "task-runs",
+    "stdout.log",
+    "stderr.log",
+    "record.json"
+  ]) {
+    assert.match(lib, new RegExp(taskRunStoreToken));
   }
   assert.ok(viewModes.modes.every((mode) => mode.allowed_sections.includes("desktop")));
 });

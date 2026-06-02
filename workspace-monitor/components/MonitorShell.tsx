@@ -219,6 +219,11 @@ type CliRunReport = {
 
 type CliSessionReport = {
   sessionId: string;
+  taskRunId: string;
+  taskKind: string;
+  pipelineId?: string | null;
+  laneId?: string | null;
+  laneRole?: string | null;
   adapterId: string;
   label: string;
   command: string;
@@ -239,6 +244,10 @@ type CliSessionReport = {
   pendingDecisionPrompts: number;
   deferredPromptCount: number;
   decisionCaptureError?: string | null;
+  taskRecordPath?: string | null;
+  stdoutLogPath?: string | null;
+  stderrLogPath?: string | null;
+  persistenceError?: string | null;
 };
 
 type CliTaskPipelinePresetReport = {
@@ -283,6 +292,36 @@ type CliTaskPipelineInitReport = {
   maxOutputBytes: number;
   lanes: CliTaskPipelineLaneReport[];
   pipes: CliPipeEdgeReport[];
+};
+
+type CliTaskRunRecordReport = {
+  recordId: string;
+  sessionId: string;
+  taskRunId: string;
+  taskKind: string;
+  pipelineId?: string | null;
+  laneId?: string | null;
+  laneRole?: string | null;
+  adapterId: string;
+  label: string;
+  command: string;
+  status: string;
+  exitCode?: number | null;
+  startedAt: string;
+  updatedAt: string;
+  elapsedMs: number;
+  workingDir: string;
+  stdoutBytes: number;
+  stderrBytes: number;
+  outputTruncated: boolean;
+  decisionInboxItems: number;
+  pendingDecisionPrompts: number;
+  deferredPromptCount: number;
+  autoDeferQuestions: boolean;
+  autoDeferTriggered: boolean;
+  recordPath: string;
+  stdoutLogPath: string;
+  stderrLogPath: string;
 };
 
 type WorkspaceTextFile = {
@@ -390,6 +429,7 @@ const SESSION_POLL_INTERVAL_MS = 2000;
 const SESSION_POLL_IDLE_UPDATE_BUCKET_MS = 5000;
 const INBOX_REFRESH_THROTTLE_MS = 4000;
 const SESSION_OUTPUT_SIGNATURE_CHARS = 2048;
+const TASK_RUN_REFRESH_THROTTLE_MS = 5000;
 
 const fallbackDesktopAdapters: CliAdapterStatus[] = [
   { adapterId: "claude-code-cli", label: "Claude Code CLI", command: "claude", available: false, lastError: "Desktop runtime unavailable." },
@@ -1713,6 +1753,7 @@ function DesktopRuntimePanel({
     "이 작업을 pipe graph 기준으로 분해해서 각 CLI lane을 init해줘. source-affecting 결정은 merge gate 전까지 보류하고, 질문은 decision inbox로 보내줘."
   );
   const [pipelineReports, setPipelineReports] = useState<CliTaskPipelineInitReport[]>([]);
+  const [taskRunRecords, setTaskRunRecords] = useState<CliTaskRunRecordReport[]>([]);
   const [inboxReport, setInboxReport] = useState<HumanDecisionInboxReport | null>(null);
   const [error, setError] = useState("");
   const [runningAdapterId, setRunningAdapterId] = useState("");
@@ -1740,6 +1781,7 @@ function DesktopRuntimePanel({
   const [saveAllBusy, setSaveAllBusy] = useState(false);
   const activeSessionPollInFlightRef = useRef(false);
   const lastInboxRefreshAtRef = useRef(0);
+  const lastTaskRunRefreshAtRef = useRef(0);
 
   const invoke = getTauriInvoke();
   const availableCount = adapters.filter((adapter) => adapter.available).length;
@@ -1806,6 +1848,13 @@ function DesktopRuntimePanel({
     const edges = pipelineReports.reduce((total, report) => total + report.pipes.length, 0);
     return { latest, started, missing, edges };
   }, [pipelineReports]);
+  const taskRunStats = useMemo(() => {
+    const active = taskRunRecords.filter((record) => isActiveSessionStatus(record.status)).length;
+    const outputBytes = taskRunRecords.reduce((total, record) => total + record.stdoutBytes + record.stderrBytes, 0);
+    const decisions = taskRunRecords.reduce((total, record) => total + record.decisionInboxItems, 0);
+    const truncated = taskRunRecords.filter((record) => record.outputTruncated).length;
+    return { active, outputBytes, decisions, truncated };
+  }, [taskRunRecords]);
   const sessionStats = useMemo(() => {
     const active = sessions.filter((session) => isActiveSessionStatus(session.status)).length;
     const deferred = sessions.filter((session) => session.status === "defer_message_sent").length;
@@ -1888,6 +1937,16 @@ function DesktopRuntimePanel({
             }
           ]
         : []),
+      ...(taskRunRecords[0]
+        ? [
+            {
+              id: `task-run-${taskRunRecords[0].taskRunId}`,
+              label: taskRunRecords[0].status,
+              title: taskRunRecords[0].taskKind,
+              detail: `${taskRunRecords[0].adapterId} / ${formatBytes(taskRunRecords[0].stdoutBytes + taskRunRecords[0].stderrBytes)} / ${taskRunRecords[0].recordPath}`
+            }
+          ]
+        : []),
       ...(writeReport
         ? [
             {
@@ -1906,7 +1965,7 @@ function DesktopRuntimePanel({
       }))
     ];
     return items.slice(0, 8);
-  }, [dirtyDraftEntries.length, openDraftEntries.length, outputEvents, pipelineStats.latest, selectedDecision, sourceDiff, sourceFile?.relativePath, sourceSaveResults, writeReport]);
+  }, [dirtyDraftEntries.length, openDraftEntries.length, outputEvents, pipelineStats.latest, selectedDecision, sourceDiff, sourceFile?.relativePath, sourceSaveResults, taskRunRecords, writeReport]);
 
   const refreshAdapters = async () => {
     setError("");
@@ -1919,12 +1978,13 @@ function DesktopRuntimePanel({
     }
 
     try {
-      const [nextHealth, nextAdapters, nextSessions, nextInbox, nextTaskPipePresets] = await Promise.all([
+      const [nextHealth, nextAdapters, nextSessions, nextInbox, nextTaskPipePresets, nextTaskRunRecords] = await Promise.all([
         tauriInvoke<DesktopHealthStatus>("app_health"),
         tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
         tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions"),
         tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox"),
-        tauriInvoke<CliTaskPipelinePresetReport[]>("list_cli_task_pipeline_presets")
+        tauriInvoke<CliTaskPipelinePresetReport[]>("list_cli_task_pipeline_presets"),
+        tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records")
       ]);
       setRuntimeState("available");
       setHealth(nextHealth);
@@ -1932,6 +1992,7 @@ function DesktopRuntimePanel({
       setSessions((current) => mergeSessionReports(current, nextSessions, { replaceAll: true }));
       setInboxReport(nextInbox);
       setTaskPipePresets(nextTaskPipePresets.length ? nextTaskPipePresets : fallbackTaskPipePresets);
+      setTaskRunRecords(nextTaskRunRecords);
       setDecisionResumeNotice("");
       if (!selectedDecisionId && nextInbox.decisions[0]) {
         setSelectedDecisionId(nextInbox.decisions[0].id);
@@ -1948,6 +2009,7 @@ function DesktopRuntimePanel({
       setAdapters(fallbackDesktopAdapters);
       setSessions((current) => (current.length ? [] : current));
       setTaskPipePresets(fallbackTaskPipePresets);
+      setTaskRunRecords([]);
       setInboxReport(null);
       setDecisionResumeNotice("");
       setError(errorMessage(caught));
@@ -1967,14 +2029,16 @@ function DesktopRuntimePanel({
     try {
       const nextReports = await tauriInvoke<CliRunReport[]>("run_all_cli_adapter_health");
       setReports(nextReports);
-      const [nextAdapters, nextSessions, nextInbox] = await Promise.all([
+      const [nextAdapters, nextSessions, nextInbox, nextTaskRunRecords] = await Promise.all([
         tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
         tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions"),
-        tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox")
+        tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox"),
+        tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records")
       ]);
       setAdapters(nextAdapters);
       setSessions((current) => mergeSessionReports(current, nextSessions, { replaceAll: true }));
       setInboxReport(nextInbox);
+      setTaskRunRecords(nextTaskRunRecords);
       setDecisionResumeNotice("");
     } catch (caught) {
       setError(errorMessage(caught));
@@ -2035,6 +2099,21 @@ function DesktopRuntimePanel({
     }
   };
 
+  const refreshTaskRunRecords = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setTaskRunRecords([]);
+      return;
+    }
+
+    try {
+      const records = await tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records");
+      setTaskRunRecords(records);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    }
+  };
+
   const answerDecision = async (resumeSession = false) => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke || !selectedDecision) {
@@ -2064,6 +2143,7 @@ function DesktopRuntimePanel({
       const resumedSession = resumeSession ? (report as DecisionResumeReport).session : null;
       if (resumedSession) {
         upsertSession(resumedSession);
+        await refreshTaskRunRecords();
       }
       if (resumeSession) {
         const resumeReport = report as DecisionResumeReport;
@@ -2102,6 +2182,7 @@ function DesktopRuntimePanel({
     try {
       const report = await tauriInvoke<CliSessionReport>("start_cli_adapter_session", args);
       upsertSession(report);
+      await refreshTaskRunRecords();
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -2142,6 +2223,7 @@ function DesktopRuntimePanel({
         setSessions((current) => mergeSessionReports(current, laneSessions, { promote: true }));
         setSelectedSessionId(laneSessions[0].sessionId);
       }
+      await refreshTaskRunRecords();
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -2160,6 +2242,7 @@ function DesktopRuntimePanel({
     try {
       const report = await tauriInvoke<CliSessionReport>("poll_cli_adapter_session", { sessionId });
       upsertSession(report);
+      await refreshTaskRunRecords();
     } catch (caught) {
       setError(errorMessage(caught));
     }
@@ -2178,6 +2261,7 @@ function DesktopRuntimePanel({
       });
       upsertSession(report);
       setSessionInput("");
+      await refreshTaskRunRecords();
     } catch (caught) {
       setError(errorMessage(caught));
     }
@@ -2193,6 +2277,7 @@ function DesktopRuntimePanel({
       const report = await tauriInvoke<CliSessionReport>("send_cli_adapter_defer_message", { sessionId });
       upsertSession(report);
       await refreshDecisionInbox();
+      await refreshTaskRunRecords();
     } catch (caught) {
       setError(errorMessage(caught));
     }
@@ -2211,6 +2296,7 @@ function DesktopRuntimePanel({
       setSessions((current) => mergeSessionReports(current, reports, { replaceAll: true }));
       const inbox = await tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox");
       setInboxReport(inbox);
+      await refreshTaskRunRecords();
       const nextOpen = inbox.decisions.find((decision) => isOpenDecisionStatus(decision.status));
       setSelectedDecisionId(nextOpen?.id || inbox.decisions[0]?.id || "");
     } catch (caught) {
@@ -2229,6 +2315,7 @@ function DesktopRuntimePanel({
     try {
       const report = await tauriInvoke<CliSessionReport>("cancel_cli_adapter_session", { sessionId });
       upsertSession(report);
+      await refreshTaskRunRecords();
     } catch (caught) {
       setError(errorMessage(caught));
     }
@@ -2521,6 +2608,14 @@ function DesktopRuntimePanel({
           setInboxReport(inbox);
           setSelectedDecisionId((current) => current || inbox.decisions[0]?.id || "");
         }
+        if (now - lastTaskRunRefreshAtRef.current >= TASK_RUN_REFRESH_THROTTLE_MS) {
+          lastTaskRunRefreshAtRef.current = now;
+          const records = await tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records");
+          if (disposed) {
+            return;
+          }
+          setTaskRunRecords(records);
+        }
       } catch (caught) {
         if (!disposed) {
           setError(errorMessage(caught));
@@ -2568,6 +2663,7 @@ function DesktopRuntimePanel({
         <Metric label="Guest Adapters" value={adapters.length} icon={Network} tone="green" />
         <Metric label="Available" value={availableCount} icon={CheckCircle2} tone="blue" />
         <Metric label="Task Pipes" value={pipelineReports.length} icon={GitBranch} tone="rose" />
+        <Metric label="Task Runs" value={taskRunRecords.length} icon={FileSearch} tone="blue" />
         <Metric label="Decision Items" value={decisionPrompts.length + blockedTaskCount + openInboxDecisions.length} icon={Inbox} tone="amber" />
         <Metric label="Agent Configs" value={agentCatalogCount} icon={Bot} tone="violet" />
         <Metric label="Auto Deferred" value={sessionStats.autoDeferred} icon={ShieldCheck} tone="slate" />
@@ -2606,6 +2702,11 @@ function DesktopRuntimePanel({
             <Inbox size={16} aria-hidden="true" />
             <span>Refresh decisions</span>
             <small>{openInboxDecisions.length} open</small>
+          </button>
+          <button type="button" onClick={refreshTaskRunRecords} disabled={!invoke || runningAdapterId !== ""}>
+            <FileSearch size={16} aria-hidden="true" />
+            <span>Refresh task runs</span>
+            <small>{taskRunRecords.length} records</small>
           </button>
           <button type="button" onClick={deferDetectedQuestions} disabled={!invoke || decisionBusy || pendingQuestionCount === 0}>
             <ShieldCheck size={16} aria-hidden="true" />
@@ -2712,6 +2813,76 @@ function DesktopRuntimePanel({
                       {pipe.fromNode} → {pipe.toNode} / {pipe.mode}
                     </span>
                   ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section className="panel wide task-run-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Task Run Store</p>
+            <h2>저장된 실행 기록과 로그</h2>
+          </div>
+          <div className="desktop-actions">
+            <button type="button" onClick={refreshTaskRunRecords} disabled={!invoke || runningAdapterId !== ""}>
+              <FileSearch size={15} aria-hidden="true" />
+              <span>Refresh Records</span>
+            </button>
+          </div>
+        </div>
+        <div className="task-run-summary-strip">
+          <article>
+            <span>records</span>
+            <strong>{taskRunRecords.length}</strong>
+          </article>
+          <article>
+            <span>active</span>
+            <strong>{taskRunStats.active}</strong>
+          </article>
+          <article>
+            <span>log bytes</span>
+            <strong>{formatBytes(taskRunStats.outputBytes)}</strong>
+          </article>
+          <article>
+            <span>decisions</span>
+            <strong>{taskRunStats.decisions}</strong>
+          </article>
+          <article>
+            <span>truncated</span>
+            <strong>{taskRunStats.truncated}</strong>
+          </article>
+        </div>
+        {taskRunRecords.length === 0 ? (
+          <p className="empty-state">아직 저장된 task-run record가 없습니다. 세션이나 task pipe를 실행하면 record.json과 stdout/stderr 로그가 생성됩니다.</p>
+        ) : (
+          <div className="task-run-grid">
+            {taskRunRecords.slice(0, 8).map((record) => (
+              <article key={record.recordId} className={`task-run-card status-${record.status}`}>
+                <header>
+                  <div>
+                    <span>{record.taskKind}</span>
+                    <h3>{record.label}</h3>
+                  </div>
+                  <strong>{record.status}</strong>
+                </header>
+                <div className="task-run-meta">
+                  <span>{record.adapterId}</span>
+                  <span>{record.laneId || record.pipelineId || "single lane"}</span>
+                  <span>{formatDuration(record.elapsedMs)}</span>
+                  <span>{record.exitCode ?? "no code"}</span>
+                </div>
+                <p>{record.recordPath}</p>
+                <div className="task-run-log-paths">
+                  <code>{record.stdoutLogPath}</code>
+                  <code>{record.stderrLogPath}</code>
+                </div>
+                <div className="adapter-report">
+                  <span>{formatBytes(record.stdoutBytes + record.stderrBytes)}</span>
+                  <span>{record.pendingDecisionPrompts} pending</span>
+                  <span>{record.autoDeferTriggered ? "auto-deferred" : "captured"}</span>
                 </div>
               </article>
             ))}
@@ -2952,6 +3123,12 @@ function DesktopRuntimePanel({
                     <span>{isActiveSessionStatus(session.status) ? "open" : "finished"}</span>
                   </div>
                   {session.decisionCaptureError && <p className="desktop-error">{session.decisionCaptureError}</p>}
+                  {session.persistenceError && <p className="desktop-error">{session.persistenceError}</p>}
+                  <div className="session-record-link">
+                    <span>{session.taskKind}</span>
+                    <strong>{session.taskRecordPath || "record pending"}</strong>
+                    <small>{session.stdoutLogPath || "stdout log pending"}</small>
+                  </div>
                   <div className="desktop-actions">
                     <button type="button" onClick={() => setSelectedSessionId(session.sessionId)}>
                       <ListFilter size={15} aria-hidden="true" />
@@ -3494,6 +3671,10 @@ function areSessionReportsRenderEqual(left: CliSessionReport, right: CliSessionR
 function sessionReportRenderSignature(session: CliSessionReport) {
   return [
     session.sessionId,
+    session.taskRunId,
+    session.taskKind,
+    session.pipelineId || "",
+    session.laneId || "",
     session.status,
     session.exitCode ?? "",
     Math.floor(session.elapsedMs / SESSION_POLL_IDLE_UPDATE_BUCKET_MS),
@@ -3511,7 +3692,11 @@ function sessionReportRenderSignature(session: CliSessionReport) {
     session.decisionInboxItems,
     session.pendingDecisionPrompts,
     session.deferredPromptCount,
-    session.decisionCaptureError || ""
+    session.decisionCaptureError || "",
+    session.taskRecordPath || "",
+    session.stdoutLogPath || "",
+    session.stderrLogPath || "",
+    session.persistenceError || ""
   ].join("\u001f");
 }
 

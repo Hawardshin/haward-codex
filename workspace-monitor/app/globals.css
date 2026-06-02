@@ -961,6 +961,7 @@ h3 {
 .desktop-command-panel,
 .unified-ops-panel,
 .task-pipe-panel,
+.task-run-panel,
 .desktop-control-panel,
 .cli-session-panel,
 .terminal-output-panel,
@@ -1178,7 +1179,10 @@ h3 {
 .task-pipe-report header span,
 .pipe-lane-grid span,
 .pipe-lane-grid small,
-.pipe-edge-list span {
+.pipe-edge-list span,
+.task-run-summary-strip span,
+.task-run-card header span,
+.task-run-meta span {
   color: var(--muted);
   font-size: 12px;
   font-weight: 800;
@@ -1296,6 +1300,97 @@ h3 {
   border-radius: 999px;
   padding: 4px 7px;
   overflow-wrap: anywhere;
+}
+
+.task-run-summary-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.task-run-summary-strip article,
+.task-run-card,
+.session-record-link {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.task-run-summary-strip strong,
+.task-run-card strong,
+.task-run-card p,
+.task-run-card code,
+.session-record-link strong,
+.session-record-link small {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.task-run-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.task-run-card {
+  display: grid;
+  gap: 9px;
+}
+
+.task-run-card header {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.task-run-card header strong {
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  padding: 3px 8px;
+  color: var(--slate);
+  font-size: 12px;
+}
+
+.task-run-meta,
+.task-run-log-paths {
+  display: grid;
+  gap: 5px;
+}
+
+.task-run-meta {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.task-run-log-paths code {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  padding: 6px;
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.session-record-link {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0;
+}
+
+.session-record-link span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.session-record-link small {
+  color: var(--muted);
 }
 
 .desktop-actions {
@@ -3164,6 +3259,8 @@ h3 {
   .ops-event:hover,
   .task-pipe-report:hover,
   .task-pipe-summary article:hover,
+  .task-run-summary-strip article:hover,
+  .task-run-card:hover,
   .process-node:hover,
   .evidence-grid article:hover,
   .terminal-report-list article:hover,
@@ -3203,6 +3300,8 @@ h3 {
   .ops-unified-grid,
   .task-pipe-summary,
   .task-pipe-report-grid,
+  .task-run-summary-strip,
+  .task-run-grid,
   .pipe-lane-grid,
   .run-board-strip,
   .process-graph,
@@ -3292,6 +3391,8 @@ h3 {
   .task-pipe-controls,
   .task-pipe-summary,
   .task-pipe-report-grid,
+  .task-run-summary-strip,
+  .task-run-grid,
   .pipe-lane-grid,
   .run-board-strip,
   .process-graph,

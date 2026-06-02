@@ -1,0 +1,29 @@
+{
+  "work_id": "2026-06-03-task-run-store",
+  "request_id": "UR-2026-06-03-004",
+  "started_at": "2026-06-03T00:20:00+09:00",
+  "finished_at": "2026-06-03T00:59:41+09:00",
+  "timing_source": "manual_summary_after_implementation",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked official Rust process and Tauri capability references before local planning."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Implemented Tauri task-run persistence, record listing, UI panel, and readiness tokens."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Ran TypeScript, readiness tests, production build, collect, and performance budget checks."
+    },
+    {
+      "phase": "known_constraint",
+      "status": "open",
+      "notes": "Rust toolchain is unavailable, so Tauri compile/build remains pending."
+    }
+  ]
+}

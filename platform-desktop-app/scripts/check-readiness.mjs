@@ -78,6 +78,7 @@ for (const commandName of [
   "run_cli_adapter_health",
   "run_all_cli_adapter_health",
   "list_cli_task_pipeline_presets",
+  "list_cli_task_run_records",
   "start_cli_adapter_session",
   "start_cli_task_pipeline",
   "poll_cli_adapter_session",
@@ -102,6 +103,20 @@ if (!tauriLib.includes("_ops") || !tauriLib.includes("human-decision-inbox.json"
 for (const requiredPhrase of ["MAX_DECISION_SCAN_BYTES", "recent_session_output", "tail_by_char_boundary"]) {
   if (!tauriLib.includes(requiredPhrase)) {
     failures.push(`src-tauri/src/lib.rs must include performance token ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of [
+  "CliTaskRunRecordReport",
+  "persist_session_task_run",
+  "task_run_persist_signature",
+  "task_runs_base_path",
+  "platform_artifacts_base_path",
+  "record.json",
+  "stdout.log",
+  "stderr.log"
+]) {
+  if (!tauriLib.includes(requiredPhrase)) {
+    failures.push(`src-tauri/src/lib.rs must include task run store token ${requiredPhrase}`);
   }
 }
 
@@ -137,6 +152,7 @@ for (const requiredPhrase of [
   "run_all_cli_adapter_health",
   "run_cli_adapter_health",
   "list_cli_task_pipeline_presets",
+  "list_cli_task_run_records",
   "start_cli_adapter_session",
   "start_cli_task_pipeline",
   "write_cli_adapter_stdin",
@@ -153,6 +169,9 @@ for (const requiredPhrase of [
   "visibleUnifiedEvents",
   "ops-event-rail",
   "Task Pipe Init",
+  "Task Run Store",
+  "저장된 실행 기록과 로그",
+  "Refresh task runs",
   "Init task pipe",
   "merge gate",
   "Answer & Resume",
@@ -170,7 +189,11 @@ for (const requiredPhrase of [
   "SESSION_POLL_INTERVAL_MS",
   "SESSION_POLL_IDLE_UPDATE_BUCKET_MS",
   "SESSION_OUTPUT_SIGNATURE_CHARS",
+  "TASK_RUN_REFRESH_THROTTLE_MS",
   "INBOX_REFRESH_THROTTLE_MS",
+  "taskRunRecords",
+  "refreshTaskRunRecords",
+  "task-run-panel",
   "Mode & Function Switchboard",
   "모드와 기능 선택 위치",
   "ModeFunctionSwitchboard",
