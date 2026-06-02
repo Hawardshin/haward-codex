@@ -1,0 +1,32 @@
+{
+  "record_id": "2026-06-03-overview-ux-navigation-evaluation-result",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-011",
+  "status": "passed",
+  "summary": "Implemented focused Workspace Monitor UX improvements with section badges and an Overview operator strip, then validated through Next, customer bundle, Playwright static smoke, Rust, Tauri, codesign, DMG, and app open/quit checks.",
+  "acceptance": [
+    {
+      "criterion": "Section tab badges render.",
+      "status": "passed",
+      "evidence": "Playwright static smoke found 5 customer-visible section tab badges."
+    },
+    {
+      "criterion": "Operator strip renders state and shortcuts.",
+      "status": "passed",
+      "evidence": "Playwright static smoke found aria label, 4 operator buttons, and Runtime shortcut on desktop and mobile."
+    },
+    {
+      "criterion": "Build and tests pass.",
+      "status": "passed",
+      "evidence": "Validation commands listed in validation.ko.md passed."
+    },
+    {
+      "criterion": "Runtime resources are cleaned up.",
+      "status": "passed",
+      "evidence": "HTTP server stopped and Tauri app process not left running."
+    }
+  ],
+  "residual_risks": [
+    "Public macOS release readiness still requires Developer ID signing, notarization, and stapling where applicable."
+  ]
+}

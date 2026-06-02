@@ -30,6 +30,7 @@
 | REQ-WM-017 | The static export shall render the main dashboard not only from an HTTP root, but also from desktop shell, file/subpath-like contexts, and repository subpath static serving by loading `_next` assets and `workspace-snapshot.json` through relative paths. | must | Check `npm run build`, `npm run perf:budget`, and Playwright smoke for `/workspace-monitor/out/index.html` from a repository-root static server |
 | REQ-WM-018 | The web UI shall merge separated history records, evaluations, web searches, work timings, request traces, collaboration tasks, blockers, and next actions into a single `unifiedOps` event stream that can be browsed from one screen. | must | Check snapshot `unifiedOps`, Overview/History `Unified Ops` UI, `npm run collect`, `npm test`, `npm run check`, `npm run build`, and `npm run perf:budget` |
 | REQ-WM-019 | The web UI shall explicitly show view/work/install/language/desktop session/task pipe/CLI adapter/monitor section modes and functions in one place, including where each item can be selected or opened. | must | Check snapshot `modeFunctionCatalog`, Overview `Mode & Function Switchboard`, desktop readiness test, `npm run collect`, `npm test`, `npm run check`, and `npm run build` |
+| REQ-WM-020 | The web UI should provide a compact operating surface near the top of Overview that shows current section state, attention level, next action, evidence counts, and a runtime shortcut. | should | Check section tab badges and `operator-strip` rendering, `npm test`, `npm run check`, and `npm run build` |
 
 ## Scope
 
@@ -47,6 +48,7 @@
 - Relative static asset paths and snapshot fetching for packaged/subpath safety
 - A `unifiedOps` operating event stream that combines history and monitoring signals
 - `modeFunctionCatalog` and an Overview switchboard that collect mode and function selection locations
+- An Overview operating surface that groups current state, next action, evidence, and runtime shortcuts
 - Vercel deployment docs
 
 ## Non-Goals

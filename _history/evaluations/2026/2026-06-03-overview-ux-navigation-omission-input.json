@@ -1,0 +1,42 @@
+{
+  "record_id": "2026-06-03-overview-ux-navigation-omission",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-011",
+  "request_summary": "Improve Workspace Monitor UX/UI.",
+  "required_items_checked": [
+    {
+      "item": "web_first_intake",
+      "status": "done",
+      "evidence": "_history/web-searches/2026/2026-06-03-overview-ux-navigation.ko.md"
+    },
+    {
+      "item": "requirements_update",
+      "status": "done",
+      "evidence": "REQ-WM-020 in workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.*.md"
+    },
+    {
+      "item": "spec_artifacts",
+      "status": "done",
+      "evidence": "workspace-monitor/specs/2026-06-03-overview-ux-navigation/"
+    },
+    {
+      "item": "implementation",
+      "status": "done",
+      "evidence": "workspace-monitor/components/MonitorShell.tsx and workspace-monitor/app/globals.css"
+    },
+    {
+      "item": "validation",
+      "status": "done",
+      "evidence": "workspace-monitor/specs/2026-06-03-overview-ux-navigation/validation.ko.md"
+    },
+    {
+      "item": "runtime_resource_cleanup",
+      "status": "done",
+      "evidence": "_history/evaluations/2026/2026-06-03-overview-ux-navigation-resource-input.json"
+    }
+  ],
+  "omissions_found": [],
+  "remaining_risks": [
+    "The local/internal macOS build remains ad-hoc signed and not notarized; public distribution still requires Developer ID signing and notarization credentials."
+  ]
+}

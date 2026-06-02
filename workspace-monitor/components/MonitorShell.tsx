@@ -912,6 +912,19 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       meta: item.agent
     }))
   ].slice(0, 4);
+  const sectionNavMeta: Record<SectionId, string> = {
+    overview: attentionState.label,
+    desktop: "Runtime",
+    projects: snapshot.stats.projects.toLocaleString("ko-KR"),
+    history: visibleHistoryDays.length.toLocaleString("ko-KR"),
+    structure: snapshot.stats.rootFolders.toLocaleString("ko-KR"),
+    documents: viewFilteredDocuments.length.toLocaleString("ko-KR"),
+    source: visibleSourceFiles.length.toLocaleString("ko-KR"),
+    requirements: visibleRequirements.length.toLocaleString("ko-KR"),
+    agents: agentCatalog.length.toLocaleString("ko-KR")
+  };
+  const nextActionLabel = collaborationBoard.nextActions[0]?.nextAction || "No pending handoff";
+  const currentSectionLabel = sections.find((item) => item.id === section)?.label || "Overview";
 
   return (
     <main>
@@ -963,9 +976,38 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           >
             <item.icon size={16} aria-hidden="true" />
             <span>{item.label}</span>
+            <small>{sectionNavMeta[item.id]}</small>
           </button>
         ))}
       </nav>
+
+      <section className={`operator-strip operator-${attentionState.tone}`} aria-label="Workspace status and actions">
+        <div className="operator-strip-state">
+          <attentionState.icon size={17} aria-hidden="true" />
+          <div>
+            <span>{currentSectionLabel}</span>
+            <strong>{attentionState.title}</strong>
+          </div>
+        </div>
+        <div className="operator-strip-actions">
+          <button type="button" onClick={() => setSection(attentionState.section)}>
+            <ArrowRight size={15} aria-hidden="true" />
+            <span>{attentionState.action}</span>
+          </button>
+          <button type="button" onClick={() => setSection("agents")}>
+            <Inbox size={15} aria-hidden="true" />
+            <span>{truncateText(nextActionLabel, 34)}</span>
+          </button>
+          <button type="button" onClick={() => setSection("documents")}>
+            <FileSearch size={15} aria-hidden="true" />
+            <span>{visibleWebSearches.toLocaleString("ko-KR")} / {visibleEvaluations.toLocaleString("ko-KR")}</span>
+          </button>
+          <button type="button" onClick={() => setSection("desktop")}>
+            <SquareTerminal size={15} aria-hidden="true" />
+            <span>Runtime</span>
+          </button>
+        </div>
+      </section>
 
       <section className="toolbar" aria-label="Document filters">
         <label className="search-box">
@@ -4760,6 +4802,14 @@ function summarizeUnifiedOpsEvents(events: UnifiedOps["events"], historyDays: nu
     latestEventAt: events[0]?.timestamp || events[0]?.date || "",
     historyDays
   };
+}
+
+function truncateText(value: string, maxLength: number) {
+  if (value.length <= maxLength) {
+    return value;
+  }
+  const visibleLength = Math.max(0, maxLength - 3);
+  return `${value.slice(0, visibleLength).trimEnd()}...`;
 }
 
 function countBy<T>(items: T[], getKey: (item: T) => string) {

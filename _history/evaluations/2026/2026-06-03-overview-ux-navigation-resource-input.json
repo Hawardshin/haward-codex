@@ -1,0 +1,27 @@
+{
+  "record_id": "2026-06-03-overview-ux-navigation-resource",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-011",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    {
+      "resource": "static_http_server",
+      "details": "python3 -m http.server 4175 --directory workspace-monitor/out",
+      "cleanup": "Stopped by killing the process listening on TCP port 4175.",
+      "post_check": "lsof -ti tcp:4175 returned no process."
+    },
+    {
+      "resource": "playwright_chromium",
+      "details": "Headless desktop and mobile static smoke.",
+      "cleanup": "Browser closed in script finally block.",
+      "post_check": "Script exited successfully after both viewport checks."
+    },
+    {
+      "resource": "tauri_app_smoke",
+      "details": "Opened built Agent Workspace Platform.app and sent quit via osascript.",
+      "cleanup": "Application quit after smoke.",
+      "post_check": "pgrep -fl agent-workspace-platform-desktop returned no process."
+    }
+  ],
+  "leaks_detected": false
+}

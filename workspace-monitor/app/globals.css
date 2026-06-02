@@ -273,10 +273,116 @@ h3 {
   padding: 8px 11px;
 }
 
+.section-tabs button {
+  min-width: 0;
+}
+
 .section-tabs button.active {
   border-color: #a8b5c3;
   background: linear-gradient(135deg, #25313f 0%, #2f3d4e 100%);
   color: #ffffff;
+}
+
+.section-tabs button small {
+  min-width: 24px;
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.section-tabs button.active small {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.operator-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 10px;
+}
+
+.operator-strip-state {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+}
+
+.operator-strip-state svg {
+  flex: 0 0 auto;
+  color: var(--blue);
+}
+
+.operator-strip-state span,
+.operator-strip-state strong {
+  display: block;
+}
+
+.operator-strip-state span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.operator-strip-state strong {
+  margin-top: 2px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.operator-red .operator-strip-state svg {
+  color: var(--red);
+}
+
+.operator-amber .operator-strip-state svg {
+  color: var(--amber);
+}
+
+.operator-green .operator-strip-state svg {
+  color: var(--green);
+}
+
+.operator-strip-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.operator-strip-actions button {
+  display: inline-flex;
+  min-height: 34px;
+  max-width: 220px;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  color: var(--text);
+  border-radius: 7px;
+  padding: 7px 10px;
+  font-size: 13px;
+}
+
+.operator-strip-actions button span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .toolbar {
@@ -3543,6 +3649,7 @@ h3 {
   .section-tabs button:hover,
   .panel-heading button:hover,
   .segmented-control button:hover,
+  .operator-strip-actions button:hover,
   .source-list button:hover,
   .metric:hover,
   .record-card:hover,
@@ -3656,6 +3763,14 @@ h3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .operator-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .operator-strip-actions {
+    justify-content: flex-start;
+  }
+
   .process-node:not(:last-child)::after {
     display: none;
   }
@@ -3751,6 +3866,12 @@ h3 {
 
   .attention-list article {
     grid-template-columns: 1fr;
+  }
+
+  .operator-strip-actions,
+  .operator-strip-actions button {
+    width: 100%;
+    max-width: none;
   }
 
   .section-tabs button span {

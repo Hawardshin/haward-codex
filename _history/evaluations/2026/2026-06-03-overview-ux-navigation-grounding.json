@@ -1,0 +1,34 @@
+{
+  "record_id": "2026-06-03-overview-ux-navigation-grounding",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-011",
+  "claims_checked": [
+    {
+      "claim": "Status visibility and timely feedback are relevant UX criteria for the operator strip.",
+      "support": "Nielsen Norman Group heuristic summary PDF.",
+      "url": "https://media.nngroup.com/media/articles/attachments/Heuristic_Summary1-compressed.pdf",
+      "status": "supported"
+    },
+    {
+      "claim": "A top command surface can improve productivity by reducing time spent finding commands.",
+      "support": "Microsoft Learn modern model-driven apps header/navigation refresh guidance.",
+      "url": "https://learn.microsoft.com/en-us/power-apps/user/modern-fluent-design",
+      "status": "supported"
+    },
+    {
+      "claim": "Fluent 2 supports cohesive color, token, corner, usage, and accessibility guidance.",
+      "support": "Microsoft Fluent 2 What's New.",
+      "url": "https://fluent2.microsoft.design/get-started/whatisnew",
+      "status": "supported"
+    },
+    {
+      "claim": "Apple platform conventions support clear toolbar/sidebar selection and state feedback.",
+      "support": "Apple Human Interface Guidelines search-visible toolbar/sidebar/focus guidance.",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/toolbars",
+      "status": "partially_supported",
+      "notes": "Apple HIG pages require JavaScript for direct full-text open in this environment, so the implementation used search-visible official snippets as secondary guidance."
+    }
+  ],
+  "unsupported_claims_removed": [],
+  "public_summary": "The UX change is grounded in status visibility, recognition over recall, compact command surfaces, and consistent platform-style feedback."
+}

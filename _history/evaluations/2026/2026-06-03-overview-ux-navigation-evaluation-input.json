@@ -1,0 +1,43 @@
+{
+  "record_id": "2026-06-03-overview-ux-navigation-evaluation-input",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-011",
+  "owner_project": "workspace-monitor",
+  "requirements": [
+    "REQ-WM-020"
+  ],
+  "artifacts": [
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/specs/2026-06-03-overview-ux-navigation/",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "_history/web-searches/2026/2026-06-03-overview-ux-navigation.ko.md"
+  ],
+  "validation_commands": [
+    "npm --prefix workspace-monitor run check",
+    "npm --prefix workspace-monitor test",
+    "npm --prefix workspace-monitor run build",
+    "npm --prefix workspace-monitor run perf:budget",
+    "npm --prefix platform-desktop-app test",
+    "npm --prefix platform-desktop-app run check",
+    "npm --prefix platform-desktop-app run monitor:build",
+    "Playwright static smoke on http://127.0.0.1:4175/",
+    "cargo test",
+    "cargo build",
+    "npm --prefix platform-desktop-app run tauri:build",
+    "codesign --verify --deep --strict",
+    "hdiutil verify",
+    "app open/quit smoke"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-03-overview-ux-navigation-resource-input.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-overview-ux-navigation-omission-input.json"
+  ],
+  "grounding_targets": [
+    "_history/evaluations/2026/2026-06-03-overview-ux-navigation-grounding.json"
+  ]
+}

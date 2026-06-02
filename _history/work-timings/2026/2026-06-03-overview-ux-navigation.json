@@ -1,0 +1,32 @@
+{
+  "record_id": "2026-06-03-overview-ux-navigation",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-011",
+  "owner_project": "workspace-monitor",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Searched dashboard UX, Apple HIG, Fluent 2, and NN/g status visibility guidance."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Added section tab badges and Overview operator strip."
+    },
+    {
+      "phase": "documentation",
+      "status": "completed",
+      "notes": "Updated requirements, spec, trace, plan, and web-search records."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Passed Next checks, tests, build, performance budget, customer bundle audit, Playwright static smoke, Rust cargo test/build, Tauri build, codesign, hdiutil, and app open/quit smoke."
+    }
+  ],
+  "bottleneck_notes": [
+    "Broad UX request was narrowed to the highest-leverage operational surface to keep the change shippable."
+  ]
+}
