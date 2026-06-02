@@ -1,0 +1,18 @@
+{
+  "request_id": "UR-2026-06-03-019",
+  "selected_mode": "standard",
+  "selected_at": "2026-06-03T04:35:22+0900",
+  "reason": "The task touches runtime resource risk in subprocesses, reader threads, timers, and async UI effects, so standard mode with resource guard is required.",
+  "work_mode_reference": "agent-platform/configs/workflows/work-mode-registry.json",
+  "resource_risk_occurred": true,
+  "large_scope_handling": "Narrowed the broad leak-review request into Rust CLI supervisor, React monitor lifecycle, and validation/resource guard slices.",
+  "enforcement_checks": [
+    "web_search_first",
+    "memory_bootstrap",
+    "resource_guard",
+    "requirements_update",
+    "spec_traceability",
+    "omission_check",
+    "work_evaluation"
+  ]
+}

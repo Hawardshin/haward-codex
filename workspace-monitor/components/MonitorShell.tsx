@@ -2383,6 +2383,7 @@ function DesktopRuntimePanel({
   const [writeReport, setWriteReport] = useState<WorkspaceWriteReport | null>(null);
   const [editorBusy, setEditorBusy] = useState(false);
   const [saveAllBusy, setSaveAllBusy] = useState(false);
+  const panelMountedRef = useRef(false);
   const activeSessionPollInFlightRef = useRef(false);
   const lastInboxRefreshAtRef = useRef(0);
   const lastTaskRunRefreshAtRef = useRef(0);
@@ -2672,6 +2673,9 @@ function DesktopRuntimePanel({
         tauriInvoke<RuntimeDataBoundaryReport>("list_runtime_data_roots"),
         tauriInvoke<ServiceReadinessReport>("get_service_readiness_report")
       ]);
+      if (!panelMountedRef.current) {
+        return;
+      }
       setRuntimeState("available");
       setHealth(nextHealth);
       setAdapters(nextAdapters);
@@ -2693,6 +2697,9 @@ function DesktopRuntimePanel({
         setSelectedTaskPipeKind(nextTaskPipePresets[0].taskKind);
       }
     } catch (caught) {
+      if (!panelMountedRef.current) {
+        return;
+      }
       setRuntimeState("unavailable");
       setHealth(null);
       setAdapters(fallbackDesktopAdapters);
@@ -3389,6 +3396,13 @@ function DesktopRuntimePanel({
       setWriteReport(null);
     }
   };
+
+  useEffect(() => {
+    panelMountedRef.current = true;
+    return () => {
+      panelMountedRef.current = false;
+    };
+  }, []);
 
   useEffect(() => {
     void refreshAdapters();

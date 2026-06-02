@@ -1,0 +1,35 @@
+{
+  "request_id": "UR-2026-06-03-019",
+  "checked_at": "2026-06-03T04:35:22+0900",
+  "status": "grounded",
+  "claims": [
+    {
+      "claim": "The Rust CLI supervisor now limits finished in-memory session retention.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "cargo build --manifest-path platform-desktop-app/src-tauri/Cargo.toml"
+      ]
+    },
+    {
+      "claim": "Child process cleanup now waits after kill in session cancel/timeout/error paths.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "https://doc.rust-lang.org/std/process/struct.Child.html"
+      ]
+    },
+    {
+      "claim": "React snapshot fetch cleanup now aborts in-flight fetches on unmount.",
+      "evidence": [
+        "workspace-monitor/components/SnapshotLoader.tsx",
+        "https://developer.mozilla.org/en-US/docs/Web/API/AbortController"
+      ]
+    },
+    {
+      "claim": "No full long-running soak profile was run.",
+      "evidence": [
+        "_history/evaluations/2026/2026-06-03-resource-leak-hardening-resource-input.json"
+      ]
+    }
+  ],
+  "unsupported_claims": []
+}

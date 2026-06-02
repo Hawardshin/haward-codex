@@ -1,0 +1,198 @@
+{
+  "task": "Runtime resource leak hardening for desktop CLI supervisor and monitor UI",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Tauri Rust child process supervisor",
+    "stdout/stderr reader threads",
+    "CLI session store and bounded output buffers",
+    "Workspace Monitor polling interval",
+    "Workspace Monitor snapshot fetch and async refresh effects"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "finished-session-retention",
+      "category": "memory",
+      "description": "Finished CLI sessions can retain bounded stdout/stderr output buffers and child/thread metadata in the session store during long app use.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Finished sessions now record finished_at and cleanup_finished_sessions_locked removes old finished sessions after 30 minutes or when retained finished sessions exceed 40.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "child-process-zombie",
+      "category": "process",
+      "description": "Killing a child process without wait can leave process resources unreaped.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "kill_and_wait_child centralizes kill plus wait for session cancel/timeout/error paths; run_bounded_command try_wait error path now waits after kill.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml",
+        "cargo build --manifest-path platform-desktop-app/src-tauri/Cargo.toml"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "reader-thread-handle-retention",
+      "category": "worker",
+      "description": "Reader thread handles can remain attached to completed session metadata if finished sessions are never removed.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Finished session cleanup joins stdout/stderr reader handles when joinable before removing the session from the store.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "snapshot-fetch-after-unmount",
+      "category": "network_connection",
+      "description": "The snapshot fetch can continue after SnapshotLoader unmounts.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "SnapshotLoader now creates an AbortController and aborts the fetch in effect cleanup.",
+      "evidence": [
+        "workspace-monitor/components/SnapshotLoader.tsx",
+        "npm --prefix workspace-monitor run check",
+        "npm --prefix workspace-monitor run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "async-refresh-after-unmount",
+      "category": "subscription",
+      "description": "The Desktop runtime panel initial async refresh can resolve after unmount and attempt state updates.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "DesktopRuntimePanel now tracks mounted state and skips refresh state updates after unmount.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "npm --prefix workspace-monitor run check",
+        "npm --prefix workspace-monitor run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "polling-interval",
+      "category": "timer",
+      "description": "Active session polling can leak timers if effect cleanup does not clear the interval.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Existing active session effect cleanup clears the interval and keeps an overlap guard for in-flight polls.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "cli-session-child-lifecycle",
+      "resource": "CLI child process",
+      "create_path": "create_cli_session spawns allowlisted CLI child process",
+      "cleanup_path": "cancel/timeout/error paths call kill_and_wait_child; bounded command error path kills and waits",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "finished-session-store-lifecycle",
+      "resource": "CLI session output buffers and reader thread handles",
+      "create_path": "SessionStore.sessions stores running CLI sessions",
+      "cleanup_path": "cleanup_finished_sessions_locked removes old/excess finished sessions and joins finished reader handles",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "cargo build --manifest-path platform-desktop-app/src-tauri/Cargo.toml"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "snapshot-fetch-lifecycle",
+      "resource": "workspace snapshot fetch",
+      "create_path": "SnapshotLoader useEffect fetches workspace-snapshot.json",
+      "cleanup_path": "effect cleanup sets canceled and aborts the AbortController",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/components/SnapshotLoader.tsx",
+        "npm --prefix workspace-monitor run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "active-session-poll-lifecycle",
+      "resource": "window.setInterval active session polling",
+      "create_path": "DesktopRuntimePanel activeSessionPollKey effect starts interval",
+      "cleanup_path": "effect cleanup sets disposed and clears interval",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "rust-compile-resource-lifecycle",
+      "metric": "Rust lifecycle code compiles",
+      "tool": "cargo test and cargo build",
+      "threshold": "both commands pass",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml",
+        "cargo build --manifest-path platform-desktop-app/src-tauri/Cargo.toml"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-build",
+      "metric": "React lifecycle code compiles and builds",
+      "tool": "npm --prefix workspace-monitor run check && npm --prefix workspace-monitor run build",
+      "threshold": "both commands pass",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check",
+        "npm --prefix workspace-monitor run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "performance-budget",
+      "metric": "Workspace Monitor initial chunk size",
+      "tool": "npm --prefix workspace-monitor run perf:budget",
+      "threshold": "largest initial chunk below configured budget",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "largest initial chunk 227537 bytes"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "soak-profile",
+      "metric": "long-running RSS/heap profile",
+      "tool": "manual soak test",
+      "threshold": "not required for this scoped source hardening slice",
+      "required": false,
+      "status": "deferred",
+      "evidence": [],
+      "rationale": "This change adds lifecycle cleanup and compile/build validation. A long-running installed-app soak profile should be added when CLI sessions are exercised against real installed adapters."
+    }
+  ],
+  "notes": [
+    "No new external dependency was added.",
+    "The standard platform-desktop-app check initially failed when developer snapshots were present; the intended monitor:build customer bundle path passed and the subsequent platform check passed."
+  ]
+}

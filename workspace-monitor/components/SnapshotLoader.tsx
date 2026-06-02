@@ -20,10 +20,11 @@ export function SnapshotLoader() {
 
   useEffect(() => {
     let canceled = false;
+    const controller = new AbortController();
     async function loadSnapshot() {
       try {
         const snapshotUrl = new URL("workspace-snapshot.json", window.location.href);
-        const response = await fetch(snapshotUrl, { cache: "no-cache" });
+        const response = await fetch(snapshotUrl, { cache: "no-cache", signal: controller.signal });
         if (!response.ok) {
           throw new Error(`Snapshot request failed with ${response.status}`);
         }
@@ -45,6 +46,7 @@ export function SnapshotLoader() {
     void loadSnapshot();
     return () => {
       canceled = true;
+      controller.abort();
     };
   }, []);
 

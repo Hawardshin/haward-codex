@@ -1,0 +1,99 @@
+{
+  "task": "Runtime resource leak hardening",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and implementation.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-resource-leak-hardening.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "runtime-resource-risk",
+      "description": "Use resource leak prevention workflow because the task touches subprocesses, threads, timers, fetch, and effects.",
+      "source": "_ops/workflows/69-resource-leak-prevention.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/evaluations/2026/2026-06-03-resource-leak-hardening-resource-input.json",
+        "_history/evaluations/2026/2026-06-03-resource-leak-hardening-resource-result.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "implementation",
+      "description": "Harden actual runtime cleanup paths rather than only documenting risks.",
+      "source": "UR-2026-06-03-019",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "workspace-monitor/components/SnapshotLoader.tsx",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-resource-leak-hardening/spec.ko.md",
+      "purpose": "Spec for runtime resource hardening.",
+      "required": true
+    },
+    {
+      "path": "_history/evaluations/2026/2026-06-03-resource-leak-hardening-resource-input.json",
+      "purpose": "Resource guard input.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-03-resource-leak-hardening.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "rust-validation",
+      "description": "Rust lifecycle changes compile and test.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml",
+        "cargo build --manifest-path platform-desktop-app/src-tauri/Cargo.toml"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "ui-validation",
+      "description": "React lifecycle changes typecheck and build.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check",
+        "npm --prefix workspace-monitor run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "resource-ready",
+      "description": "Resource guard reports no gaps.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-03-resource-leak-hardening-resource-input.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "No long-running installed-adapter soak profile was run in this slice."
+  ],
+  "notes": [
+    "Soak profiling is recorded as a deferred optional measurement in the resource guard input."
+  ]
+}

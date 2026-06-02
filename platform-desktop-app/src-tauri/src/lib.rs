@@ -1,6 +1,6 @@
 use serde::Serialize;
 use serde_json::{json, Value};
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::env;
 use std::fs;
 use std::io::{Read, Write};
@@ -70,6 +70,7 @@ struct CliSession {
     status: String,
     exit_code: Option<i32>,
     finished: bool,
+    finished_at: Option<Instant>,
     defer_message_sent: bool,
     auto_defer_questions: bool,
     auto_defer_triggered: bool,
@@ -465,6 +466,8 @@ const HEALTH_TIMEOUT_MS: u64 = 2_500;
 const MAX_SESSION_OUTPUT_BYTES: usize = 100_000;
 const MAX_DECISION_SCAN_BYTES: usize = 32_000;
 const SESSION_TIMEOUT_MS: u64 = 300_000;
+const FINISHED_SESSION_RETENTION_MS: u64 = 30 * 60 * 1000;
+const MAX_RETAINED_FINISHED_SESSIONS: usize = 40;
 const MAX_SESSION_INPUT_BYTES: usize = 20_000;
 const MAX_WORKSPACE_FILE_BYTES: usize = 1_000_000;
 const MAX_DECISION_ANSWER_BYTES: usize = 20_000;
@@ -710,6 +713,7 @@ fn start_cli_adapter_session(
     )?;
     match store.sessions.lock() {
         Ok(mut sessions) => {
+            cleanup_finished_sessions_locked(&mut sessions);
             sessions.insert(session_id, session);
         }
         Err(_) => {
@@ -858,6 +862,7 @@ fn start_cli_task_pipeline(
 
     match store.sessions.lock() {
         Ok(mut sessions) => {
+            cleanup_finished_sessions_locked(&mut sessions);
             for (session_id, session) in pending_sessions {
                 sessions.insert(session_id, session);
             }
@@ -983,6 +988,7 @@ fn create_cli_session(
         status: "running".to_string(),
         exit_code: None,
         finished: false,
+        finished_at: None,
         defer_message_sent: false,
         auto_defer_questions,
         auto_defer_triggered: false,
@@ -1009,10 +1015,14 @@ fn poll_cli_adapter_session(
         .sessions
         .lock()
         .map_err(|_| "Failed to lock CLI session store.".to_string())?;
-    let session = sessions
-        .get_mut(&session_id)
-        .ok_or_else(|| format!("Unknown CLI session id: {session_id}"))?;
-    Ok(poll_session_locked(&app, &session_id, session))
+    let report = {
+        let session = sessions
+            .get_mut(&session_id)
+            .ok_or_else(|| format!("Unknown CLI session id: {session_id}"))?;
+        poll_session_locked(&app, &session_id, session)
+    };
+    cleanup_finished_sessions_locked(&mut sessions);
+    Ok(report)
 }
 
 #[tauri::command]
@@ -1024,10 +1034,12 @@ fn list_cli_adapter_sessions(
         .sessions
         .lock()
         .map_err(|_| "Failed to lock CLI session store.".to_string())?;
-    Ok(sessions
+    let reports: Vec<CliSessionReport> = sessions
         .iter_mut()
         .map(|(session_id, session)| poll_session_locked(&app, session_id, session))
-        .collect())
+        .collect();
+    cleanup_finished_sessions_locked(&mut sessions);
+    Ok(reports)
 }
 
 #[tauri::command]
@@ -1118,22 +1130,18 @@ fn cancel_cli_adapter_session(
         .sessions
         .lock()
         .map_err(|_| "Failed to lock CLI session store.".to_string())?;
-    let session = sessions
-        .get_mut(&session_id)
-        .ok_or_else(|| format!("Unknown CLI session id: {session_id}"))?;
-    if !session.finished {
-        let _ = session.child.kill();
-        let status = session
-            .child
-            .wait()
-            .ok()
-            .and_then(|exit_status| exit_status.code());
-        session.exit_code = status;
-        session.status = "canceled".to_string();
-        session.finished = true;
-        session.stdin.take();
-    }
-    Ok(poll_session_locked(&app, &session_id, session))
+    let report = {
+        let session = sessions
+            .get_mut(&session_id)
+            .ok_or_else(|| format!("Unknown CLI session id: {session_id}"))?;
+        if !session.finished {
+            let status = kill_and_wait_child(&mut session.child);
+            mark_session_finished(session, "canceled", status);
+        }
+        poll_session_locked(&app, &session_id, session)
+    };
+    cleanup_finished_sessions_locked(&mut sessions);
+    Ok(report)
 }
 
 #[tauri::command]
@@ -1557,6 +1565,7 @@ fn run_bounded_command(
             }
             Err(_) => {
                 let _ = child.kill();
+                let _ = child.wait();
                 let _ = tx.send((None, false));
                 break;
             }
@@ -1600,33 +1609,22 @@ fn poll_session_locked(
     if !session.finished {
         match session.child.try_wait() {
             Ok(Some(status)) => {
-                session.exit_code = status.code();
-                session.status = if status.success() {
+                let next_status = if status.success() {
                     "exited".to_string()
                 } else {
                     "failed".to_string()
                 };
-                session.finished = true;
-                session.stdin.take();
+                mark_session_finished(session, next_status, status.code());
             }
             Ok(None) => {
                 if session.started.elapsed() >= session.timeout {
-                    let _ = session.child.kill();
-                    session.exit_code = session
-                        .child
-                        .wait()
-                        .ok()
-                        .and_then(|exit_status| exit_status.code());
-                    session.status = "timed_out".to_string();
-                    session.finished = true;
-                    session.stdin.take();
+                    let exit_code = kill_and_wait_child(&mut session.child);
+                    mark_session_finished(session, "timed_out", exit_code);
                 }
             }
             Err(_) => {
-                let _ = session.child.kill();
-                session.status = "error".to_string();
-                session.finished = true;
-                session.stdin.take();
+                let exit_code = kill_and_wait_child(&mut session.child);
+                mark_session_finished(session, "error", exit_code);
             }
         }
     }
@@ -1663,6 +1661,75 @@ fn join_finished_reader(handle: &mut Option<thread::JoinHandle<()>>) {
     if should_join {
         if let Some(value) = handle.take() {
             let _ = value.join();
+        }
+    }
+}
+
+fn mark_session_finished(
+    session: &mut CliSession,
+    status: impl Into<String>,
+    exit_code: Option<i32>,
+) {
+    session.exit_code = exit_code;
+    session.status = status.into();
+    session.finished = true;
+    if session.finished_at.is_none() {
+        session.finished_at = Some(Instant::now());
+    }
+    session.stdin.take();
+}
+
+fn kill_and_wait_child(child: &mut Child) -> Option<i32> {
+    let _ = child.kill();
+    child.wait().ok().and_then(|exit_status| exit_status.code())
+}
+
+fn cleanup_finished_sessions_locked(sessions: &mut HashMap<String, CliSession>) {
+    let now = Instant::now();
+    let retention = Duration::from_millis(FINISHED_SESSION_RETENTION_MS);
+    let mut finished_sessions: Vec<(String, Instant)> = sessions
+        .iter()
+        .filter_map(|(session_id, session)| {
+            if session.finished {
+                Some((
+                    session_id.clone(),
+                    session.finished_at.unwrap_or(session.started),
+                ))
+            } else {
+                None
+            }
+        })
+        .collect();
+
+    if finished_sessions.is_empty() {
+        return;
+    }
+
+    finished_sessions.sort_by_key(|(_, finished_at)| *finished_at);
+    let mut remove_ids = HashSet::new();
+    for (session_id, finished_at) in &finished_sessions {
+        let age = now.checked_duration_since(*finished_at).unwrap_or_default();
+        if age >= retention {
+            remove_ids.insert(session_id.clone());
+        }
+    }
+
+    let retained_finished = finished_sessions.len().saturating_sub(remove_ids.len());
+    if retained_finished > MAX_RETAINED_FINISHED_SESSIONS {
+        let overflow = retained_finished - MAX_RETAINED_FINISHED_SESSIONS;
+        let overflow_ids: Vec<String> = finished_sessions
+            .iter()
+            .filter(|(session_id, _)| !remove_ids.contains(session_id))
+            .take(overflow)
+            .map(|(session_id, _)| session_id.clone())
+            .collect();
+        remove_ids.extend(overflow_ids);
+    }
+
+    for session_id in remove_ids {
+        if let Some(mut session) = sessions.remove(&session_id) {
+            join_finished_reader(&mut session.stdout_handle);
+            join_finished_reader(&mut session.stderr_handle);
         }
     }
 }
