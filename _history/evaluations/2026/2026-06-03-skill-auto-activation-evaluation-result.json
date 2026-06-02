@@ -1,0 +1,63 @@
+{
+  "status": "ready_to_close",
+  "requires_rework": false,
+  "work_mode": "governance",
+  "required_target_policy": {
+    "required_targets": [
+      "mode_selection_record_targets",
+      "omission_check_targets",
+      "plan_evidence_targets",
+      "references_checked",
+      "request_trace_targets",
+      "requirements_targets",
+      "source_provenance_targets",
+      "spec_targets",
+      "timing_summary_targets",
+      "user_request_summary_targets",
+      "web_search_record_targets",
+      "work_summary_targets"
+    ],
+    "deferred_targets_allowed": []
+  },
+  "alignment_check": {
+    "initial_instruction_present": true,
+    "result_summary_present": true,
+    "work_mode": "governance",
+    "changed_files_count": 8,
+    "verification_count": 6,
+    "references_checked_count": 5,
+    "grounding_checks_count": 1,
+    "source_provenance_targets_count": 2,
+    "plan_evidence_targets_count": 2,
+    "mode_selection_record_targets_count": 1,
+    "omission_check_targets_count": 1,
+    "web_search_record_targets_count": 1,
+    "user_request_summary_targets_count": 1,
+    "requirements_targets_count": 1,
+    "spec_targets_count": 1,
+    "skill_work_occurred": true,
+    "skill_targets_count": 2,
+    "skill_validation_targets_count": 2,
+    "request_trace_targets_count": 1,
+    "work_summary_targets_count": 1,
+    "timing_summary_targets_count": 1,
+    "context_archiving_occurred": false,
+    "context_archive_targets_count": 0,
+    "installation_occurred": true,
+    "installation_record_targets_count": 2,
+    "resource_risk_occurred": false,
+    "resource_check_targets_count": 0,
+    "cli_pipeline_occurred": false,
+    "cli_pipeline_targets_count": 0,
+    "deferred_improvement_targets_count": 0
+  },
+  "gaps": [],
+  "improvements": [
+    "Add an installed-skill inventory command that maps every custom installed skill to a repository source entry.",
+    "Add a small forward-test harness that checks whether realistic prompts include expected skill candidates when the runtime exposes such telemetry."
+  ],
+  "follow_up_actions": [
+    "Consider improvement: Add an installed-skill inventory command that maps every custom installed skill to a repository source entry.",
+    "Consider improvement: Add a small forward-test harness that checks whether realistic prompts include expected skill candidates when the runtime exposes such telemetry."
+  ]
+}

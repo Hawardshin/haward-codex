@@ -1,0 +1,21 @@
+{
+  "skill_path": "_skills/presentation-reference-curator",
+  "intended_use": "Curate presentation design references, PPT/PPTX/HTML inspiration, reusable assets, provenance, license status, and conversion options for presentation-agent work.",
+  "trigger_examples": [
+    "발표 에이전트용 예쁜 PPT와 HTML 발표 레퍼런스를 많이 모아줘.",
+    "Collect presentation design references, licensing status, reusable assets, and PPTX-to-HTML conversion options.",
+    "발표 자료를 만들기 전에 좋은 디자인 사례, 에셋 출처, 변환 가능성을 조사해서 카탈로그로 정리해줘."
+  ],
+  "validation_steps": [
+    "python3 /Users/shinjoungeun/.codex/skills/.system/skill-creator/scripts/quick_validate.py _skills/presentation-reference-curator",
+    "PYTHONPATH=src python3 -m agent_platform.cli validate-skill ../_history/skill-validations/2026/2026-06-03-presentation-reference-curator-activation.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-skill-activation configs/skills/skill-activation-registry.json"
+  ],
+  "forward_test_scenarios": [
+    "A user asks for many high-quality PPT and HTML presentation references for a presentation agent; the skill should trigger and produce a source catalog with provenance and licensing boundaries."
+  ],
+  "improvement_ideas": [
+    "Add a small structured catalog template under the owning presentation project when the next real curation task starts."
+  ],
+  "known_gaps": []
+}

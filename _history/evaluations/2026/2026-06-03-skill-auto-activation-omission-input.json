@@ -1,0 +1,107 @@
+{
+  "task": "Improve custom skill auto-activation readiness.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "SKA-EXP-001",
+      "description": "Run web-first intake before planning or edits.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-skill-auto-activation.ko.md"
+      ]
+    },
+    {
+      "item_id": "SKA-EXP-002",
+      "description": "Diagnose repository skill source versus installed Codex skills.",
+      "source": "User report that skills do not auto-apply",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/skills/skill-activation-registry.json",
+        "_history/request-traces/2026/2026-06-03-skill-auto-activation.ko.md"
+      ]
+    },
+    {
+      "item_id": "SKA-EXP-003",
+      "description": "Install or sync skills that should auto-apply and record an installation audit.",
+      "source": "Repository installation rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/installations/2026/2026-06-03-skill-activation-sync.ko.md",
+        "_ops/installations/registry.json"
+      ]
+    },
+    {
+      "item_id": "SKA-EXP-004",
+      "description": "Validate updated skills and activation status before close-out.",
+      "source": "Skill lifecycle rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/skill-validations/2026/2026-06-03-create-validated-skill-activation.json",
+        "_history/skill-validations/2026/2026-06-03-presentation-reference-curator-activation.json"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/src/agent_platform/evaluation/skill_activation.py",
+      "purpose": "Activation checker implementation",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/skills/skill-activation-registry.json",
+      "purpose": "Source/install/trigger/drift registry",
+      "required": true
+    },
+    {
+      "path": "agent-platform/tests/test_skill_activation.py",
+      "purpose": "Regression tests for ready, missing install, and drift cases",
+      "required": true
+    },
+    {
+      "path": "_history/installations/2026/2026-06-03-skill-activation-sync.ko.md",
+      "purpose": "Installation audit record",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "SKA-AC-001",
+      "description": "Activation registry reports ready after installation sync.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-skill-activation configs/skills/skill-activation-registry.json"
+      ]
+    },
+    {
+      "check_id": "SKA-AC-002",
+      "description": "Both skills pass system and repository skill validation.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "quick_validate.py for both skills",
+        "validate-skill for both 2026-06-03 skill validation inputs"
+      ]
+    },
+    {
+      "check_id": "SKA-AC-003",
+      "description": "Agent platform tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m unittest discover -s tests"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Codex internal automatic selection remains outside repository control; this work verifies installed availability and trigger clarity."
+  ],
+  "notes": [
+    "_private was not inspected."
+  ]
+}

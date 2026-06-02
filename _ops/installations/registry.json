@@ -295,6 +295,36 @@
       "rollback_path": "Remove project node_modules and src-tauri/target, then revert platform-desktop-app/package-lock.json, src-tauri/Cargo.lock, icons, tauri.conf.json, package.json, workspace-monitor package changes, and related history records if the build setup should be undone.",
       "installation_record_path": "_history/installations/2026/2026-06-03-platform-desktop-tauri-rust-local-build.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-03-skill-activation-sync",
+      "date": "2026-06-03",
+      "status": "installed",
+      "name": "custom skill activation sync",
+      "scope": "skill",
+      "owning_project": "workspace",
+      "package_manager": "codex-skill",
+      "install_command": "cp _skills/create-validated-skill/SKILL.md /Users/shinjoungeun/.codex/skills/create-validated-skill/SKILL.md; cp -R _skills/presentation-reference-curator /Users/shinjoungeun/.codex/skills/",
+      "environment_path": "/Users/shinjoungeun/.codex/skills/create-validated-skill and /Users/shinjoungeun/.codex/skills/presentation-reference-curator",
+      "dependency_record_paths": [
+        "_skills/create-validated-skill/SKILL.md",
+        "_skills/create-validated-skill/agents/openai.yaml",
+        "_skills/presentation-reference-curator/SKILL.md",
+        "_skills/presentation-reference-curator/agents/openai.yaml",
+        "agent-platform/configs/skills/skill-activation-registry.json"
+      ],
+      "version_or_lock_status": "repository source copy; no lock file",
+      "security_review": "No external package install; copied repository-managed skill source only. _private was not inspected.",
+      "license_review": "Internal personal workspace artifacts; no external code included.",
+      "verification": [
+        "pre-sync check-skill-activation reported create-validated-skill drift and missing presentation-reference-curator install",
+        "post-sync check-skill-activation: ready with installed_ready_count=2 and drift_free_count=2",
+        "quick_validate.py _skills/create-validated-skill: Skill is valid!",
+        "quick_validate.py _skills/presentation-reference-curator: Skill is valid!"
+      ],
+      "rollback_path": "Remove /Users/shinjoungeun/.codex/skills/presentation-reference-curator and restore or remove /Users/shinjoungeun/.codex/skills/create-validated-skill from the desired _skills/ source commit.",
+      "installation_record_path": "_history/installations/2026/2026-06-03-skill-activation-sync.ko.md",
+      "commit": "pending"
     }
   ]
 }

@@ -1,6 +1,6 @@
 ---
 name: presentation-reference-curator
-description: Use when collecting, evaluating, licensing, converting, or applying presentation design references and assets for a presentation-agent project, especially when turning PPT/PPTX/HTML slide inspiration into a grounded source catalog or HTML reconstruction plan.
+description: Use when a user asks for presentation design references, PPT/PPTX/HTML slide inspiration, reusable deck assets, licensing/provenance checks, conversion options, or presentation-agent source catalogs, especially when turning deck inspiration into grounded research or an HTML reconstruction plan.
 ---
 
 # Presentation Reference Curator

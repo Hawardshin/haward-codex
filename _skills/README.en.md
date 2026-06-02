@@ -9,10 +9,11 @@ This folder stores git-tracked source for custom Codex skills.
 - Follow `skill-creator` guidance and `_docs/policies/skill-lifecycle-policy.en.md` when creating or updating a skill.
 - Validate skill work with `validate-skill`, and record forward-test scenarios plus improvement ideas.
 - If active Codex installation is needed, copy the skill to `$CODEX_HOME/skills` or `~/.codex/skills` and record the installation.
+- Register skills that should auto-apply in `agent-platform/configs/skills/skill-activation-registry.json` and run `check-skill-activation` to verify source, install, trigger, and drift status.
 
 ## Current Skills
 
 | Skill | Purpose | Status |
 | --- | --- | --- |
-| `create-validated-skill` | Turns repeated workflows into validated custom Codex skills | source ready |
-
+| `create-validated-skill` | Turns repeated workflows and skill trigger issues into validated custom Codex skills | installed and synced |
+| `presentation-reference-curator` | Curates presentation design references, assets, licensing, and conversion paths | installed and synced |

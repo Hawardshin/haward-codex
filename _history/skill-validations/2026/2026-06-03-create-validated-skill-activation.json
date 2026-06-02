@@ -1,0 +1,21 @@
+{
+  "skill_path": "_skills/create-validated-skill",
+  "intended_use": "Maintain repository-managed Codex skills, including trigger clarity, auto-activation diagnosis, source/install sync checks, validation, forward tests, and installation planning.",
+  "trigger_examples": [
+    "스킬 자동 적용이 잘 안 되는 것 같아. trigger와 설치 상태를 점검해서 개선해줘.",
+    "Create a repository-managed Codex skill for this repeated workflow and validate it.",
+    "이 반복 작업을 검증된 Codex skill로 만들고 설치 준비까지 해줘."
+  ],
+  "validation_steps": [
+    "python3 /Users/shinjoungeun/.codex/skills/.system/skill-creator/scripts/quick_validate.py _skills/create-validated-skill",
+    "PYTHONPATH=src python3 -m agent_platform.cli validate-skill ../_history/skill-validations/2026/2026-06-03-create-validated-skill-activation.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-skill-activation configs/skills/skill-activation-registry.json"
+  ],
+  "forward_test_scenarios": [
+    "A user reports that custom skills are not auto-applying; the skill should guide diagnosis of source, installed copy, trigger examples, drift, validation, and installation audit records."
+  ],
+  "improvement_ideas": [
+    "Add a deterministic smoke test that scans all installed custom skills and reports which source registry entry owns each installed copy."
+  ],
+  "known_gaps": []
+}

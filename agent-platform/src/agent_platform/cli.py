@@ -11,6 +11,7 @@ from agent_platform.evaluation.hallucination_guard import HallucinationGuardInpu
 from agent_platform.evaluation.knowledge_skeptic import KnowledgeValidationInput, validate_knowledge_reference
 from agent_platform.evaluation.omission_guard import OmissionGuardInput, check_omissions
 from agent_platform.evaluation.resource_guard import ResourceGuardInput, check_resource_leaks
+from agent_platform.evaluation.skill_activation import check_skill_activation, load_skill_activation_registry
 from agent_platform.evaluation.skill_validator import SkillValidationInput, validate_skill_definition
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 from agent_platform.governance.config_contract import check_config_contract
@@ -79,6 +80,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     validate_skill = subparsers.add_parser("validate-skill", help="Validate a repository-managed Codex skill source folder.")
     validate_skill.add_argument("path", type=Path)
+
+    check_skill_activation_cmd = subparsers.add_parser(
+        "check-skill-activation",
+        help="Check whether repository-managed skills are installed, trigger-ready, and in sync for automatic activation.",
+    )
+    check_skill_activation_cmd.add_argument("path", type=Path)
 
     check_grounding = subparsers.add_parser("check-grounding", help="Check whether factual claims are grounded before publication.")
     check_grounding.add_argument("path", type=Path)
@@ -228,6 +235,26 @@ def main(argv: list[str] | None = None) -> int:
         with args.path.open("r", encoding="utf-8") as file:
             validation_input = SkillValidationInput.from_dict(json.load(file))
         print(json.dumps(validate_skill_definition(validation_input, _default_repo_root()), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "check-skill-activation":
+        registry = load_skill_activation_registry(args.path)
+        config_contract_report = check_config_contract(registry, str(args.path))
+        activation_report = check_skill_activation(registry, _default_repo_root())
+        print(
+            json.dumps(
+                {
+                    "status": "rework_required"
+                    if config_contract_report["requires_rework"] or activation_report["requires_rework"]
+                    else "ready",
+                    "requires_rework": config_contract_report["requires_rework"] or activation_report["requires_rework"],
+                    "config_contract": config_contract_report,
+                    "skill_activation": activation_report,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
         return 0
 
     if args.command == "check-grounding":

@@ -1,6 +1,6 @@
 ---
 name: create-validated-skill
-description: Create, update, validate, and improve repository-managed Codex skills. Use when Codex must turn a repeated workflow, domain rule, tool pattern, or agent behavior into a tracked skill source folder with validation, forward-test scenarios, improvement notes, and optional installation planning.
+description: Create, update, validate, activate, and improve repository-managed Codex skills. Use when Codex must turn a repeated workflow, domain rule, tool pattern, agent behavior, or skill trigger/auto-activation problem into a tracked skill source folder with validation, forward-test scenarios, sync checks, improvement notes, and optional installation planning.
 ---
 
 # Create Validated Skill

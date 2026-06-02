@@ -1,0 +1,91 @@
+{
+  "task": "Ground final claims for custom skill auto-activation work.",
+  "output_summary": "The work added skill activation checks, fixed a missing installed skill, synced a drifted installed skill, and validated the result.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "EV-SKILL-001",
+      "source": "https://openai.com/academy/skills/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "official OpenAI Academy page"
+    },
+    {
+      "evidence_id": "EV-SKILL-002",
+      "source": "https://openai.com/academy/codex-plugins-and-skills/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "official OpenAI Academy page"
+    },
+    {
+      "evidence_id": "EV-SKILL-003",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-skill-activation configs/skills/skill-activation-registry.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-03",
+      "reliability": "local command output"
+    },
+    {
+      "evidence_id": "EV-SKILL-004",
+      "source": "agent-platform/configs/skills/skill-activation-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "repository file"
+    },
+    {
+      "evidence_id": "EV-SKILL-005",
+      "source": "/Users/shinjoungeun/.codex/skills/",
+      "source_type": "command_output",
+      "checked_on": "2026-06-03",
+      "reliability": "local installed skill directory listing and post-sync hash comparison"
+    }
+  ],
+  "claims": [
+    {
+      "statement": "OpenAI's public skill guidance says skill names and descriptions help the model recognize relevance, and installed skills can be used automatically or explicitly.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "EV-SKILL-001"
+      ],
+      "verification_steps": [
+        "Opened the official OpenAI Academy skills page on 2026-06-03."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "`presentation-reference-curator` was not installed under /Users/shinjoungeun/.codex/skills before sync.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "EV-SKILL-003",
+        "EV-SKILL-005"
+      ],
+      "verification_steps": [
+        "Listed installed skills and ran the pre-sync activation check."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "After sync, both repository-managed custom skills are installed and drift-free according to `check-skill-activation`.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "EV-SKILL-003",
+        "EV-SKILL-004"
+      ],
+      "verification_steps": [
+        "Ran `check-skill-activation` after copying installed skill files."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Codex internal auto-selection ranking is not exposed here; the repository can verify installed availability, trigger clarity, and source/install sync, not guarantee model selection in every future prompt."
+  ],
+  "limitation_notes": [
+    "No `_private/` content was inspected."
+  ]
+}

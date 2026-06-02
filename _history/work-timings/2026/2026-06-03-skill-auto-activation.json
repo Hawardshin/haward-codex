@@ -1,0 +1,34 @@
+{
+  "record_id": "2026-06-03-skill-auto-activation",
+  "date": "2026-06-03",
+  "task": "Diagnose and improve custom skill auto-activation readiness.",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "elapsed_minutes_estimate": 5,
+      "notes": "Checked official OpenAI Academy skill pages and recorded that local install state remains the decisive evidence."
+    },
+    {
+      "phase": "local_diagnosis",
+      "elapsed_minutes_estimate": 10,
+      "notes": "Compared repository _skills source with /Users/shinjoungeun/.codex/skills installed copies."
+    },
+    {
+      "phase": "implementation",
+      "elapsed_minutes_estimate": 25,
+      "notes": "Added activation registry, checker, CLI command, tests, skill description updates, and installed copy sync."
+    },
+    {
+      "phase": "records_and_validation",
+      "elapsed_minutes_estimate": 25,
+      "notes": "Added requirements, specs, installation audit, validation inputs, trace, and close-out guard inputs."
+    }
+  ],
+  "bottleneck_notes": [
+    "The largest recurring risk was source/install drift because repository skill source and Codex installed copies were not checked together before."
+  ],
+  "promotion_candidates": [
+    "Add a future installed-skill inventory report that maps every custom installed skill back to a repository source entry."
+  ]
+}

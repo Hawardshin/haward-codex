@@ -1,0 +1,94 @@
+{
+  "initial_instruction": "지금까지 스킬들 뭔가 자동 적용이 잘 안되는 것 같아",
+  "result_summary": "Added a custom skill activation registry and checker, installed the missing presentation-reference-curator skill, synced create-validated-skill, improved skill trigger descriptions, and recorded validation plus installation audit evidence.",
+  "work_mode": "governance",
+  "changed_files": [
+    "agent-platform/configs/skills/skill-activation-registry.json",
+    "agent-platform/src/agent_platform/evaluation/skill_activation.py",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/tests/test_skill_activation.py",
+    "_skills/create-validated-skill/SKILL.md",
+    "_skills/presentation-reference-curator/SKILL.md",
+    "_skills/registry.md",
+    "_ops/installations/registry.json"
+  ],
+  "verification": [
+    "check-skill-activation passed after install sync",
+    "quick_validate.py passed for both skills",
+    "validate-skill passed for both skills",
+    "agent-platform unittest passed",
+    "check-omissions passed",
+    "check-grounding passed"
+  ],
+  "references_checked": [
+    "https://openai.com/academy/skills/",
+    "https://openai.com/academy/codex-plugins-and-skills/",
+    "_skills/registry.md",
+    "/Users/shinjoungeun/.codex/skills/",
+    "_docs/policies/skill-lifecycle-policy.ko.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-03-skill-auto-activation-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-03-skill-auto-activation.ko.md",
+    "_history/installations/2026/2026-06-03-skill-activation-sync.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-03-skill-auto-activation.ko.md",
+    "_specs/workspace-platform/2026-06-03-skill-auto-activation/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-03-skill-auto-activation.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-skill-auto-activation-omission-input.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-skill-auto-activation.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-03-skill-auto-activation.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-03-skill-auto-activation/spec.ko.md"
+  ],
+  "skill_work_occurred": true,
+  "skill_targets": [
+    "_skills/create-validated-skill",
+    "_skills/presentation-reference-curator"
+  ],
+  "skill_validation_targets": [
+    "_history/skill-validations/2026/2026-06-03-create-validated-skill-activation.json",
+    "_history/skill-validations/2026/2026-06-03-presentation-reference-curator-activation.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-skill-auto-activation.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-skill-auto-activation.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": true,
+  "installation_record_targets": [
+    "_history/installations/2026/2026-06-03-skill-activation-sync.ko.md",
+    "_ops/installations/registry.json"
+  ],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Add an installed-skill inventory command that maps every custom installed skill to a repository source entry.",
+    "Add a small forward-test harness that checks whether realistic prompts include expected skill candidates when the runtime exposes such telemetry."
+  ]
+}
