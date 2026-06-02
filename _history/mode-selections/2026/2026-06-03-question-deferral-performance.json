@@ -1,0 +1,19 @@
+{
+  "task_id": "2026-06-03-question-deferral-performance",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes performance behavior in the desktop CLI orchestration and monitor UI polling path. It touches runtime resources and multi-process CLI pipeline boundaries but does not add dependencies or public installer release work.",
+  "required_records": [
+    "web_search_record",
+    "requirements_change",
+    "project_spec",
+    "request_trace",
+    "work_summary",
+    "omission_check",
+    "resource_check",
+    "cli_pipeline_check",
+    "grounding_check",
+    "work_evaluation"
+  ]
+}

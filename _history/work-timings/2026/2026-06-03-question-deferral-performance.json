@@ -1,0 +1,32 @@
+{
+  "task_id": "2026-06-03-question-deferral-performance",
+  "title": "Optimize CLI question deferral polling and scanning",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "check official performance and process references",
+      "status": "completed",
+      "duration_seconds": 240,
+      "measurement": "estimated",
+      "bottleneck_notes": "React, Rust process, and Next rendering references were checked."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "apply bounded scan polling throttle and state merge",
+      "status": "completed",
+      "duration_seconds": 960,
+      "measurement": "estimated",
+      "bottleneck_notes": "The main implementation touched Rust session scanning and React polling state updates."
+    },
+    {
+      "phase_id": "validation_records",
+      "label": "run validation and write records",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "Standard-mode records and generated monitor snapshot updates were required."
+    }
+  ]
+}

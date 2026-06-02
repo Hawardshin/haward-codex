@@ -268,6 +268,7 @@ struct ProcessOutput {
 const MAX_HEALTH_OUTPUT_BYTES: usize = 20_000;
 const HEALTH_TIMEOUT_MS: u64 = 2_500;
 const MAX_SESSION_OUTPUT_BYTES: usize = 100_000;
+const MAX_DECISION_SCAN_BYTES: usize = 32_000;
 const SESSION_TIMEOUT_MS: u64 = 300_000;
 const MAX_SESSION_INPUT_BYTES: usize = 20_000;
 const MAX_WORKSPACE_FILE_BYTES: usize = 1_000_000;
@@ -1289,8 +1290,8 @@ fn session_report(session_id: &str, session: &CliSession) -> CliSessionReport {
         .lock()
         .map(|value| value.clone())
         .unwrap_or_default();
-    let combined = format!("{}\n{}", output.stdout, output.stderr);
-    let decision_prompts = detect_decision_prompts_for(&session.adapter_id, &session.label, &combined);
+    let decision_output = recent_session_output(&output);
+    let decision_prompts = detect_decision_prompts_for(&session.adapter_id, &session.label, &decision_output);
     let pending_decision_prompts = decision_prompts
         .iter()
         .filter(|prompt| {
@@ -1422,6 +1423,26 @@ fn detect_decision_prompts(adapter: &AdapterDefinition, output: &str) -> Vec<Cli
     detect_decision_prompts_for(adapter.adapter_id, adapter.label, output)
 }
 
+fn recent_session_output(output: &CliSessionOutput) -> String {
+    format!(
+        "{}\n{}",
+        tail_by_char_boundary(&output.stdout, MAX_DECISION_SCAN_BYTES),
+        tail_by_char_boundary(&output.stderr, MAX_DECISION_SCAN_BYTES)
+    )
+}
+
+fn tail_by_char_boundary(value: &str, max_bytes: usize) -> &str {
+    if value.len() <= max_bytes {
+        return value;
+    }
+
+    let mut start = value.len().saturating_sub(max_bytes);
+    while start < value.len() && !value.is_char_boundary(start) {
+        start += 1;
+    }
+    &value[start..]
+}
+
 fn detect_decision_prompts_for(adapter_id: &str, label: &str, output: &str) -> Vec<CliDecisionPrompt> {
     output
         .lines()
@@ -1522,8 +1543,8 @@ fn session_decision_prompts(session: &CliSession) -> Vec<CliDecisionPrompt> {
         .lock()
         .map(|value| value.clone())
         .unwrap_or_default();
-    let combined = format!("{}\n{}", output.stdout, output.stderr);
-    detect_decision_prompts_for(&session.adapter_id, &session.label, &combined)
+    let decision_output = recent_session_output(&output);
+    detect_decision_prompts_for(&session.adapter_id, &session.label, &decision_output)
 }
 
 fn new_session_decision_prompts(session: &CliSession) -> Vec<CliDecisionPrompt> {

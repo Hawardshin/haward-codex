@@ -25,7 +25,7 @@ import {
   SquareTerminal
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot, type WorkspaceSourceFile } from "@/lib/snapshot";
 
@@ -385,6 +385,11 @@ type SessionModePreset = {
   intent: string;
   prompt: string;
 };
+
+const SESSION_POLL_INTERVAL_MS = 2000;
+const SESSION_POLL_IDLE_UPDATE_BUCKET_MS = 5000;
+const INBOX_REFRESH_THROTTLE_MS = 4000;
+const SESSION_OUTPUT_SIGNATURE_CHARS = 2048;
 
 const fallbackDesktopAdapters: CliAdapterStatus[] = [
   { adapterId: "claude-code-cli", label: "Claude Code CLI", command: "claude", available: false, lastError: "Desktop runtime unavailable." },
@@ -1733,11 +1738,13 @@ function DesktopRuntimePanel({
   const [writeReport, setWriteReport] = useState<WorkspaceWriteReport | null>(null);
   const [editorBusy, setEditorBusy] = useState(false);
   const [saveAllBusy, setSaveAllBusy] = useState(false);
+  const activeSessionPollInFlightRef = useRef(false);
+  const lastInboxRefreshAtRef = useRef(0);
 
   const invoke = getTauriInvoke();
   const availableCount = adapters.filter((adapter) => adapter.available).length;
   const sourceFileCount = sourceFiles.length;
-  const editableSourceFiles = sourceFiles.filter((file) => !file.truncated).slice(0, 240);
+  const editableSourceFiles = useMemo(() => sourceFiles.filter((file) => !file.truncated).slice(0, 240), [sourceFiles]);
   const filteredEditableSourceFiles = useMemo(() => {
     const normalizedFilter = sourceFilter.trim().toLowerCase();
     if (!normalizedFilter) {
@@ -1765,12 +1772,21 @@ function DesktopRuntimePanel({
     : sourceFile
       ? sourceDraft !== sourceFile.content
       : false;
-  const openInboxDecisions = (inboxReport?.decisions || []).filter((decision) => isOpenDecisionStatus(decision.status));
-  const decisionPrompts = [
-    ...reports.flatMap((report) => report.decisionPrompts || []),
-    ...sessions.flatMap((session) => session.decisionPrompts || [])
-  ];
-  const pendingQuestionCount = sessions.reduce((total, session) => total + (session.pendingDecisionPrompts || 0), 0);
+  const openInboxDecisions = useMemo(
+    () => (inboxReport?.decisions || []).filter((decision) => isOpenDecisionStatus(decision.status)),
+    [inboxReport]
+  );
+  const decisionPrompts = useMemo(
+    () => [
+      ...reports.flatMap((report) => report.decisionPrompts || []),
+      ...sessions.flatMap((session) => session.decisionPrompts || [])
+    ],
+    [reports, sessions]
+  );
+  const pendingQuestionCount = useMemo(
+    () => sessions.reduce((total, session) => total + (session.pendingDecisionPrompts || 0), 0),
+    [sessions]
+  );
   const selectedSession = sessions.find((session) => session.sessionId === selectedSessionId) || sessions[0] || null;
   const selectedDecision = (inboxReport?.decisions || []).find((decision) => decision.id === selectedDecisionId) || openInboxDecisions[0] || null;
   const selectedDecisionSession = selectedDecision?.sessionId
@@ -1802,7 +1818,7 @@ function DesktopRuntimePanel({
     () =>
       sessions
         .filter((session) => isActiveSessionStatus(session.status))
-        .map((session) => session.sessionId)
+        .map((session) => `${session.sessionId}:${session.status}:${session.autoDeferQuestions ? "1" : "0"}`)
         .sort()
         .join("|"),
     [sessions]
@@ -1913,7 +1929,7 @@ function DesktopRuntimePanel({
       setRuntimeState("available");
       setHealth(nextHealth);
       setAdapters(nextAdapters);
-      setSessions(nextSessions);
+      setSessions((current) => mergeSessionReports(current, nextSessions, { replaceAll: true }));
       setInboxReport(nextInbox);
       setTaskPipePresets(nextTaskPipePresets.length ? nextTaskPipePresets : fallbackTaskPipePresets);
       setDecisionResumeNotice("");
@@ -1930,7 +1946,7 @@ function DesktopRuntimePanel({
       setRuntimeState("unavailable");
       setHealth(null);
       setAdapters(fallbackDesktopAdapters);
-      setSessions([]);
+      setSessions((current) => (current.length ? [] : current));
       setTaskPipePresets(fallbackTaskPipePresets);
       setInboxReport(null);
       setDecisionResumeNotice("");
@@ -1957,7 +1973,7 @@ function DesktopRuntimePanel({
         tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox")
       ]);
       setAdapters(nextAdapters);
-      setSessions(nextSessions);
+      setSessions((current) => mergeSessionReports(current, nextSessions, { replaceAll: true }));
       setInboxReport(nextInbox);
       setDecisionResumeNotice("");
     } catch (caught) {
@@ -1990,7 +2006,7 @@ function DesktopRuntimePanel({
   };
 
   const upsertSession = (report: CliSessionReport) => {
-    setSessions((current) => [report, ...current.filter((item) => item.sessionId !== report.sessionId)]);
+    setSessions((current) => mergeSessionReports(current, [report], { promote: true }));
     setSelectedSessionId(report.sessionId);
   };
 
@@ -2123,10 +2139,7 @@ function DesktopRuntimePanel({
         .map((lane) => lane.session)
         .filter((session): session is CliSessionReport => Boolean(session));
       if (laneSessions.length) {
-        setSessions((current) => [
-          ...laneSessions,
-          ...current.filter((item) => !laneSessions.some((session) => session.sessionId === item.sessionId))
-        ]);
+        setSessions((current) => mergeSessionReports(current, laneSessions, { promote: true }));
         setSelectedSessionId(laneSessions[0].sessionId);
       }
     } catch (caught) {
@@ -2195,7 +2208,7 @@ function DesktopRuntimePanel({
     setError("");
     try {
       const reports = await tauriInvoke<CliSessionReport[]>("defer_all_cli_adapter_questions");
-      setSessions(reports);
+      setSessions((current) => mergeSessionReports(current, reports, { replaceAll: true }));
       const inbox = await tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox");
       setInboxReport(inbox);
       const nextOpen = inbox.decisions.find((decision) => isOpenDecisionStatus(decision.status));
@@ -2469,13 +2482,21 @@ function DesktopRuntimePanel({
 
   useEffect(() => {
     const tauriInvoke = getTauriInvoke();
-    const activeSessionIds = activeSessionPollKey.split("|").filter(Boolean);
+    const activeSessionIds = activeSessionPollKey
+      .split("|")
+      .filter(Boolean)
+      .map((entry) => entry.split(":")[0])
+      .filter(Boolean);
     if (!tauriInvoke || runtimeState !== "available" || activeSessionIds.length === 0) {
       return undefined;
     }
 
     let disposed = false;
     const pollActiveSessions = async () => {
+      if (activeSessionPollInFlightRef.current) {
+        return;
+      }
+      activeSessionPollInFlightRef.current = true;
       try {
         const reports = await Promise.all(
           activeSessionIds.map((sessionId) =>
@@ -2486,9 +2507,13 @@ function DesktopRuntimePanel({
         if (disposed || nextReports.length === 0) {
           return;
         }
-        const reportIds = new Set(nextReports.map((report) => report.sessionId));
-        setSessions((current) => [...nextReports, ...current.filter((session) => !reportIds.has(session.sessionId))]);
-        if (nextReports.some((report) => report.autoDeferTriggered || report.decisionInboxItems > 0)) {
+        setSessions((current) => mergeSessionReports(current, nextReports));
+        const shouldRefreshInbox = nextReports.some(
+          (report) => report.autoDeferTriggered || report.decisionInboxItems > 0 || report.decisionCaptureError
+        );
+        const now = Date.now();
+        if (shouldRefreshInbox && now - lastInboxRefreshAtRef.current >= INBOX_REFRESH_THROTTLE_MS) {
+          lastInboxRefreshAtRef.current = now;
           const inbox = await tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox");
           if (disposed) {
             return;
@@ -2500,13 +2525,15 @@ function DesktopRuntimePanel({
         if (!disposed) {
           setError(errorMessage(caught));
         }
+      } finally {
+        activeSessionPollInFlightRef.current = false;
       }
     };
 
     void pollActiveSessions();
     const interval = window.setInterval(() => {
       void pollActiveSessions();
-    }, 2000);
+    }, SESSION_POLL_INTERVAL_MS);
     return () => {
       disposed = true;
       window.clearInterval(interval);
@@ -3401,6 +3428,91 @@ function DesktopRuntimePanel({
       </section>
     </div>
   );
+}
+
+function mergeSessionReports(
+  current: CliSessionReport[],
+  reports: CliSessionReport[],
+  options: { promote?: boolean; replaceAll?: boolean } = {}
+) {
+  if (reports.length === 0) {
+    return current;
+  }
+
+  const currentById = new Map(current.map((session) => [session.sessionId, session]));
+  const reportsById = new Map(reports.map((report) => [report.sessionId, report]));
+  const reportIds = new Set(reports.map((report) => report.sessionId));
+
+  if (options.replaceAll) {
+    let changed = current.length !== reports.length;
+    const next = reports.map((report) => {
+      const existing = currentById.get(report.sessionId);
+      if (existing && areSessionReportsRenderEqual(existing, report)) {
+        return existing;
+      }
+      changed = true;
+      return report;
+    });
+    return changed ? next : current;
+  }
+
+  let changed = false;
+  const updated = current.map((session) => {
+    const report = reportsById.get(session.sessionId);
+    if (!report) {
+      return session;
+    }
+    if (areSessionReportsRenderEqual(session, report)) {
+      return session;
+    }
+    changed = true;
+    return report;
+  });
+  const newReports = reports.filter((report) => !currentById.has(report.sessionId));
+  if (newReports.length > 0) {
+    changed = true;
+  }
+  if (!changed) {
+    return current;
+  }
+
+  if (options.promote) {
+    const promoted = reports.map((report) => {
+      const existing = currentById.get(report.sessionId);
+      return existing && areSessionReportsRenderEqual(existing, report) ? existing : report;
+    });
+    return [...promoted, ...updated.filter((session) => !reportIds.has(session.sessionId))];
+  }
+
+  return [...updated, ...newReports];
+}
+
+function areSessionReportsRenderEqual(left: CliSessionReport, right: CliSessionReport) {
+  return sessionReportRenderSignature(left) === sessionReportRenderSignature(right);
+}
+
+function sessionReportRenderSignature(session: CliSessionReport) {
+  return [
+    session.sessionId,
+    session.status,
+    session.exitCode ?? "",
+    Math.floor(session.elapsedMs / SESSION_POLL_IDLE_UPDATE_BUCKET_MS),
+    session.stdout.length,
+    session.stdout.slice(-SESSION_OUTPUT_SIGNATURE_CHARS),
+    session.stderr.length,
+    session.stderr.slice(-SESSION_OUTPUT_SIGNATURE_CHARS),
+    session.decisionPrompts
+      .map((prompt) => `${prompt.lane}:${prompt.question}:${prompt.resumeAction}`)
+      .join("\u001e"),
+    session.outputTruncated ? "1" : "0",
+    session.deferMessageSent ? "1" : "0",
+    session.autoDeferQuestions ? "1" : "0",
+    session.autoDeferTriggered ? "1" : "0",
+    session.decisionInboxItems,
+    session.pendingDecisionPrompts,
+    session.deferredPromptCount,
+    session.decisionCaptureError || ""
+  ].join("\u001f");
 }
 
 function getTauriInvoke(): TauriInvoke | null {

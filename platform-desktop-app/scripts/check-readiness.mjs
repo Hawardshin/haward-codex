@@ -99,6 +99,11 @@ for (const commandName of [
 if (!tauriLib.includes("_ops") || !tauriLib.includes("human-decision-inbox.json")) {
   failures.push("src-tauri/src/lib.rs must persist deferred CLI questions to the human decision inbox");
 }
+for (const requiredPhrase of ["MAX_DECISION_SCAN_BYTES", "recent_session_output", "tail_by_char_boundary"]) {
+  if (!tauriLib.includes(requiredPhrase)) {
+    failures.push(`src-tauri/src/lib.rs must include performance token ${requiredPhrase}`);
+  }
+}
 
 const desktopRegistry = readJson("configs/desktop-distribution-registry.json");
 const companionPaths = JSON.stringify(desktopRegistry);
@@ -160,6 +165,12 @@ for (const requiredPhrase of [
   "autoDeferQuestions",
   "autoDeferTriggered",
   "pollActiveSessions",
+  "activeSessionPollInFlightRef",
+  "mergeSessionReports",
+  "SESSION_POLL_INTERVAL_MS",
+  "SESSION_POLL_IDLE_UPDATE_BUCKET_MS",
+  "SESSION_OUTPUT_SIGNATURE_CHARS",
+  "INBOX_REFRESH_THROTTLE_MS",
   "Mode & Function Switchboard",
   "모드와 기능 선택 위치",
   "ModeFunctionSwitchboard",

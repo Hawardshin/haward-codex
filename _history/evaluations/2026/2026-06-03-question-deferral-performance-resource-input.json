@@ -1,0 +1,79 @@
+{
+  "task": "Question deferral performance resource review",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Tauri child process session streams",
+    "bounded stdout/stderr decision scan",
+    "Workspace Monitor active-session polling interval",
+    "decision inbox refresh throttling"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "long-output-scan",
+      "category": "large_data",
+      "description": "Scanning full accumulated terminal output on every poll can grow CPU cost with long sessions.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Decision detection scans only recent stdout/stderr tails bounded by MAX_DECISION_SCAN_BYTES.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "poll-overlap",
+      "category": "timer",
+      "description": "A slow poll could overlap with the next interval tick and stack Tauri calls.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "activeSessionPollInFlightRef skips a poll while the previous one is in flight.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "inbox-refresh-churn",
+      "category": "file_handle",
+      "description": "Refreshing the decision inbox on every poll can create avoidable Tauri/file reads.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Inbox refreshes are throttled with INBOX_REFRESH_THROTTLE_MS.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "polling-cleanup",
+      "resource": "window.setInterval for active CLI sessions",
+      "create_path": "Workspace Monitor activeSessionPollKey effect",
+      "cleanup_path": "effect cleanup with window.clearInterval",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "performance-budget",
+      "metric": "Workspace Monitor static chunk size",
+      "tool": "npm --prefix workspace-monitor run perf:budget",
+      "threshold": "largest initial chunk below configured budget",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "validation run before close-out"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No new process, worker, or dependency was added."
+  ]
+}

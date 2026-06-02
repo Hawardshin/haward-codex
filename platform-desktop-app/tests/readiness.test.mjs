@@ -111,6 +111,13 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(monitorShell, /adapterSetupGuides/);
   assert.match(monitorShell, /sessionModePresets/);
   assert.match(monitorShell, /Answer & Resume/);
+  for (const performanceToken of [
+    "MAX_DECISION_SCAN_BYTES",
+    "recent_session_output",
+    "tail_by_char_boundary"
+  ]) {
+    assert.match(lib, new RegExp(performanceToken));
+  }
   for (const uiString of [
     "Command Palette",
     "Unified Ops",
@@ -166,6 +173,12 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "autoDeferQuestions",
     "autoDeferTriggered",
     "pollActiveSessions",
+    "activeSessionPollInFlightRef",
+    "mergeSessionReports",
+    "SESSION_POLL_INTERVAL_MS",
+    "SESSION_POLL_IDLE_UPDATE_BUCKET_MS",
+    "SESSION_OUTPUT_SIGNATURE_CHARS",
+    "INBOX_REFRESH_THROTTLE_MS",
     "deferDetectedQuestions",
     "defer_all_cli_adapter_questions",
     "task-pipe-panel",

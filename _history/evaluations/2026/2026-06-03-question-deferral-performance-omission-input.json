@@ -1,0 +1,97 @@
+{
+  "task": "Optimize CLI question deferral speed",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Check official performance/process references before implementation.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-question-deferral-performance.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "bounded-backend-scan",
+      "description": "Bound backend question detection scan size.",
+      "source": "PDA-UX-022",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "poll-overlap-throttle",
+      "description": "Prevent overlapping active-session polling and throttle inbox refreshes.",
+      "source": "PDA-UX-022",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "render-merge",
+      "description": "Merge equivalent session reports and bucket idle elapsed updates.",
+      "source": "PDA-UX-022",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "regression-checks",
+      "description": "Readiness tests/checks assert speed controls remain present.",
+      "source": "validation policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/tests/readiness.test.mjs",
+        "platform-desktop-app/scripts/check-readiness.mjs"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/src-tauri/src/lib.rs",
+      "purpose": "Bounded backend scan.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Polling and render optimization.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-question-deferral-performance/spec.ko.md",
+      "purpose": "Performance spec contract.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "validation",
+      "description": "Run tests, check, build, performance budget, readiness, and static token checks.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "validation run before close-out"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Native Rust compile and benchmark validation still require Rust toolchain installation."
+  ],
+  "notes": [
+    "No dependency installation occurred."
+  ]
+}

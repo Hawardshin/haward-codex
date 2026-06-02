@@ -1,0 +1,85 @@
+{
+  "task": "Ground factual claims for question deferral performance.",
+  "output_summary": "Question deferral now bounds backend scanning and reduces frontend polling/render churn.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "backend-source",
+      "source": "platform-desktop-app/src-tauri/src/lib.rs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Primary backend implementation for bounded decision scan."
+    },
+    {
+      "evidence_id": "frontend-source",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Primary frontend implementation for polling guard, throttle, and report merging."
+    },
+    {
+      "evidence_id": "readiness",
+      "source": "platform-desktop-app/tests/readiness.test.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Regression test tokens for performance controls."
+    },
+    {
+      "evidence_id": "web-references",
+      "source": "_history/web-searches/2026/2026-06-03-question-deferral-performance.ko.md",
+      "source_type": "web_source",
+      "checked_on": "2026-06-03",
+      "reliability": "Official references for React effects, Rust process lifecycle, and static rendering."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "Backend question detection is bounded by recent stdout/stderr tails.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "backend-source",
+        "readiness"
+      ],
+      "verification_steps": [
+        "Read source and ran readiness checks."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Frontend active polling prevents overlap, throttles inbox refresh, and merges equivalent session reports.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "frontend-source",
+        "readiness"
+      ],
+      "verification_steps": [
+        "Read source and ran TypeScript checks."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "React effects and Rust child processes require explicit lifecycle management.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "web-references"
+      ],
+      "verification_steps": [
+        "Checked official React and Rust documentation."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Native Rust compile and benchmark validation are blocked until Rust toolchain installation is audited."
+  ],
+  "limitation_notes": [
+    "Static output/performance budget validates bundle size, not real CLI runtime latency.",
+    "Adapter-specific question fixtures remain a follow-up."
+  ]
+}
