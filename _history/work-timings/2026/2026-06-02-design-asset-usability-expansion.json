@@ -48,8 +48,9 @@
     {
       "phase_id": "commit_push",
       "label": "Commit and push",
-      "status": "pending",
-      "measurement": "not_measured"
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Committed and pushed 534a6a9 to origin/main."
     }
   ],
   "bottleneck_analysis": {

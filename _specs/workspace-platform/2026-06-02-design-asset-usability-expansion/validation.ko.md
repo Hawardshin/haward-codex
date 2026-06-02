@@ -32,7 +32,8 @@
 | omission guard | `coverage_ready` |
 | grounding guard | `ready_to_publish` |
 | work evaluator | `ready_to_close` |
+| `git diff --check` | clean |
 
 ## 남은 검증
 
-- 커밋 직전 `git diff --check`
+- 없음.

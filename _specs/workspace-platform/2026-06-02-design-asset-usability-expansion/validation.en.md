@@ -32,7 +32,8 @@
 | Omission guard | `coverage_ready` |
 | Grounding guard | `ready_to_publish` |
 | Work evaluator | `ready_to_close` |
+| `git diff --check` | clean |
 
 ## Remaining Validation
 
-- Pre-commit `git diff --check`
+- None.

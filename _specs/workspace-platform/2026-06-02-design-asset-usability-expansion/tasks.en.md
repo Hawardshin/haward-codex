@@ -8,4 +8,4 @@
 | DAU-004 | Add asset browser CLI and gallery generator | Done |
 | DAU-005 | Add tests and generate 600 SVGs/gallery | Done |
 | DAU-006 | Documentation, history, evaluation, validation | Done |
-| DAU-007 | Commit and push | Pending |
+| DAU-007 | Commit and push | Done |

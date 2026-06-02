@@ -40,4 +40,4 @@
 
 ## 커밋
 
-- 최종 커밋 후 갱신 예정.
+- `534a6a9` pushed: `feat(design-assets): expand svg asset usability`

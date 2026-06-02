@@ -8,4 +8,4 @@
 | DAU-004 | asset browser CLI와 gallery 생성기 추가 | 완료 |
 | DAU-005 | 테스트 추가 및 600개 SVG/gallery 생성 | 완료 |
 | DAU-006 | 문서, history, 평가, 검증 | 완료 |
-| DAU-007 | 커밋 및 push | 대기 |
+| DAU-007 | 커밋 및 push | 완료 |
