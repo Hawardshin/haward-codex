@@ -161,6 +161,7 @@
 - 2026-06-02에 REQ-WS-077을 추가해 디자인/UX 개선을 딥리서치 기반 command center, evidence trail, next action, decision recovery, dashboard hierarchy 요구사항으로 승격했다.
 - 2026-06-02에 REQ-WS-078을 추가해 금지형 지시를 긍정형 행동 계약과 검증/강제 게이트로 변환하는 원칙을 공통 운영 구조로 승격했다.
 - 2026-06-02에 REQ-WS-079를 추가해 실질적 위험이 있는 작업에는 prompt 문구가 아니라 위험 표면별 구조적 가드레일과 검증 증거가 필요하다는 원칙을 공통 운영 구조로 승격했다.
+- 2026-06-02에 REQ-WS-080을 추가해 구조적 가드레일 원칙을 실제 JSON 구성 템플릿과 deterministic CLI 검사기로 실행 가능하게 했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.

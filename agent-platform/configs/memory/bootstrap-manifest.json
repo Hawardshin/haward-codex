@@ -643,6 +643,18 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "structural_guardrail_composition_template",
+      "title": "Structural Guardrail Composition Template",
+      "path": "agent-platform/configs/governance/structural-guardrail-composition-template.json",
+      "source_type": "internal",
+      "used_for": [
+        "authoring material-risk guardrail composition records",
+        "validating risk-surface coverage, allowed and blocked actions, fallback behavior, and verification evidence",
+        "check-guardrail-composition CLI smoke tests"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
       "id": "platform_identity_operating_model",
       "title": "Platform Identity Operating Model",
       "path": "_docs/operating-models/platform-identity-operating-model.ko.md",
@@ -1328,6 +1340,18 @@
         "_docs/operating-models",
         "memory-bootstrap"
       ]
+    },
+    {
+      "id": "structural_guardrail_composition_must_stay_discoverable",
+      "rule": "The structural guardrail composition template must remain a warm memory anchor because material-risk work should produce an auditable guardrail record before execution instead of relying on prompt wording alone.",
+      "reason": "The user explicitly asked for guardrails and then asked to create the structural composition.",
+      "applies_to": [
+        "anchors",
+        "startup_sequence",
+        "required_anchor_ids",
+        "check-guardrail-composition",
+        "evaluation"
+      ]
     }
   ],
   "field_guide": [
@@ -1411,6 +1435,7 @@
     "tool_agnostic_agent_operating_model",
     "agent_operating_philosophy",
     "philosophy_traceability",
+    "structural_guardrail_composition_template",
     "platform_identity_operating_model",
     "platform_readme",
     "source_registry",
@@ -1478,6 +1503,8 @@
     "assistant_runtime_adapter_registry",
     "tool_agnostic_agent_operating_model",
     "agent_operating_philosophy",
+    "philosophy_traceability",
+    "structural_guardrail_composition_template",
     "platform_identity_operating_model",
     "platform_readme",
     "source_registry",
@@ -1795,6 +1822,14 @@
       "path": "agent-platform/configs/governance/philosophy-traceability.json",
       "tier": "warm",
       "purpose": "Traceability registry that maps each operating philosophy principle to executable docs, workflows, prompts, configs, tools, and validation handles.",
+      "required": true,
+      "load_order": 9
+    },
+    {
+      "id": "structural_guardrail_composition_template",
+      "path": "agent-platform/configs/governance/structural-guardrail-composition-template.json",
+      "tier": "warm",
+      "purpose": "Self-documenting template and executable example for composing structural guardrails around material-risk work before execution.",
       "required": true,
       "load_order": 9
     },

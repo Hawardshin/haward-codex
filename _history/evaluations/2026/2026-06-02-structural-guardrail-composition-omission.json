@@ -1,0 +1,148 @@
+{
+  "task": "Create executable structural guardrail composition capability.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web_first",
+      "description": "Run web-first intake and record public search summary.",
+      "source": "AGENTS.md and durable web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-structural-guardrail-composition.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "requirement_and_spec",
+      "description": "Define the structural composition as a requirement and spec-driven artifact.",
+      "source": "UR-2026-06-02-040 / REQ-WS-080",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_requirements/changes/2026-06-02-structural-guardrail-composition.ko.md",
+        "_requirements/reviews/2026-06-02-structural-guardrail-composition.ko.md",
+        "_specs/workspace-platform/2026-06-02-structural-guardrail-composition/"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "checker_module",
+      "description": "Implement a deterministic guardrail composition checker.",
+      "source": "REQ-WS-080",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/governance/guardrail_composition.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "cli_command",
+      "description": "Expose the checker through the agent-platform CLI.",
+      "source": "REQ-WS-080",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/cli.py",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-guardrail-composition configs/governance/structural-guardrail-composition-template.json: guardrails_ready"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "self_documenting_template",
+      "description": "Provide a reusable JSON template that explains its references and fields.",
+      "source": "self-documenting config policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/governance/structural-guardrail-composition-template.json",
+        "check-config-contract: self_documenting"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "tests",
+      "description": "Add tests that prove ready and rework cases.",
+      "source": "REQ-WS-080 acceptance criteria",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/tests/test_guardrail_composition.py",
+        "PYTHONPATH=src python3 -m unittest discover -s tests -p 'test_guardrail_composition.py': 5 tests passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "memory_history_evaluation",
+      "description": "Preserve the new capability in memory bootstrap, history, request trace, work summary, and evaluation records.",
+      "source": "context management and evaluation rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/memory/bootstrap-manifest.json",
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_history/request-traces/2026/2026-06-02-structural-guardrail-composition.ko.md",
+        "_history/work-summaries/2026/2026-06-02.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/src/agent_platform/governance/guardrail_composition.py",
+      "purpose": "Deterministic checker module.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/governance/structural-guardrail-composition-template.json",
+      "purpose": "Reusable guardrail composition template.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/tests/test_guardrail_composition.py",
+      "purpose": "Unit tests for readiness and failure cases.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "composition_cli",
+      "description": "The template returns guardrails_ready.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-guardrail-composition: guardrails_ready"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "unit_tests",
+      "description": "Guardrail composition unit tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "test_guardrail_composition.py: 5 tests passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "memory_bootstrap",
+      "description": "Memory bootstrap remains ready after adding the template anchor.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-memory-bootstrap: ready_to_bootstrap"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "This change creates a composition checker and template, not an OS-level sandbox or external policy engine.",
+    "Project-specific examples can be added later when repeated risk profiles emerge."
+  ],
+  "notes": [
+    "_private contents were not inspected."
+  ]
+}

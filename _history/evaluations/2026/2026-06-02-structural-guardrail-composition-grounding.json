@@ -1,0 +1,153 @@
+{
+  "task": "Ground structural guardrail composition close-out claims.",
+  "output_summary": "The workspace now has a structural guardrail composition template and CLI checker.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request_summary",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable summary of the user's request."
+    },
+    {
+      "evidence_id": "checker_module",
+      "source": "agent-platform/src/agent_platform/governance/guardrail_composition.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local source implementation."
+    },
+    {
+      "evidence_id": "cli_module",
+      "source": "agent-platform/src/agent_platform/cli.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local CLI implementation."
+    },
+    {
+      "evidence_id": "template",
+      "source": "agent-platform/configs/governance/structural-guardrail-composition-template.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local shared config and executable example."
+    },
+    {
+      "evidence_id": "tests",
+      "source": "agent-platform/tests/test_guardrail_composition.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Unit tests for the checker."
+    },
+    {
+      "evidence_id": "openai_guardrails",
+      "source": "https://openai.github.io/openai-agents-python/guardrails/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official OpenAI Agents SDK guardrail documentation."
+    },
+    {
+      "evidence_id": "owasp_llm_top_10",
+      "source": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official OWASP LLM application risk project page."
+    },
+    {
+      "evidence_id": "nist_ai_rmf",
+      "source": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official NIST AI Risk Management Framework page."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The user requested structural composition creation after the guardrail rule.",
+      "claim_type": "user_instruction",
+      "support_level": "supported",
+      "evidence_ids": [
+        "user_request_summary"
+      ],
+      "verification_steps": [
+        "Inspect UR-2026-06-02-040 in the user request summary."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "A deterministic guardrail composition checker now exists in the governance package.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "checker_module"
+      ],
+      "verification_steps": [
+        "Inspect guardrail_composition.py."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The agent-platform CLI now exposes check-guardrail-composition.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "cli_module"
+      ],
+      "verification_steps": [
+        "Inspect cli.py and run the command on the template."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The template is self-documenting and passes the guardrail composition check.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "template"
+      ],
+      "verification_steps": [
+        "Run check-config-contract and check-guardrail-composition on the template."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The implementation is covered by unit tests for ready and rework cases.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tests"
+      ],
+      "verification_steps": [
+        "Run test_guardrail_composition.py."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Official guardrail, LLM security, and AI risk-management references support risk-based structural controls for agent work.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "openai_guardrails",
+        "owasp_llm_top_10",
+        "nist_ai_rmf"
+      ],
+      "verification_steps": [
+        "Inspect the saved web search record and linked sources."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "This does not prove the selected categories are exhaustive for every future domain.",
+    "External references can change and should be rechecked for future major guardrail design changes."
+  ],
+  "limitation_notes": [
+    "_private contents were not inspected.",
+    "This change does not implement an OS-level sandbox or external policy engine."
+  ]
+}

@@ -46,6 +46,7 @@ def build_checks(root: Path, include_build: bool = False) -> list[Check]:
                         "check-config-contract",
                         "configs/memory/bootstrap-manifest.json",
                         "configs/governance/philosophy-traceability.json",
+                        "configs/governance/structural-guardrail-composition-template.json",
                         "configs/security/sensitive-file-boundary.json",
                         "configs/research/source-registry.json",
                         "configs/research/research-agent-profile.json",

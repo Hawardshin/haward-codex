@@ -1,0 +1,35 @@
+{
+  "request_id": "UR-2026-06-02-040",
+  "selected_at": "2026-06-02",
+  "selected_work_mode": "governance",
+  "reason": "The request creates a durable platform governance capability, changes shared CLI behavior, adds shared config, and must update requirements, specs, memory, history, and evaluation records.",
+  "alternatives_considered": [
+    {
+      "mode": "quick",
+      "decision": "rejected",
+      "reason": "Too light for shared platform capability and durable governance behavior."
+    },
+    {
+      "mode": "standard",
+      "decision": "rejected",
+      "reason": "Useful but less appropriate than governance because this work changes platform rules and memory anchors."
+    },
+    {
+      "mode": "research",
+      "decision": "rejected",
+      "reason": "Research is required, but the output is an implementation and governance artifact."
+    }
+  ],
+  "required_closeout_targets": [
+    "web_search_record_targets",
+    "user_request_summary_targets",
+    "requirements_targets",
+    "spec_targets",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "mode_selection_record_targets",
+    "omission_check_targets",
+    "request_trace_targets",
+    "work_summary_targets"
+  ]
+}

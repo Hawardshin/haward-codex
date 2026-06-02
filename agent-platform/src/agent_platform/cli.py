@@ -14,6 +14,7 @@ from agent_platform.evaluation.resource_guard import ResourceGuardInput, check_r
 from agent_platform.evaluation.skill_validator import SkillValidationInput, validate_skill_definition
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 from agent_platform.governance.config_contract import check_config_contract
+from agent_platform.governance.guardrail_composition import GuardrailCompositionInput, check_guardrail_composition
 from agent_platform.governance.philosophy_trace import check_philosophy_traceability, load_philosophy_traceability
 from agent_platform.integrations.cli_pipeline import CliPipelineInput, check_cli_pipeline
 from agent_platform.integrations.notifications import (
@@ -101,6 +102,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Validate that operating philosophy principles are mapped to executable structure and validation handles.",
     )
     check_philosophy_trace.add_argument("path", type=Path)
+
+    check_guardrail_composition_cmd = subparsers.add_parser(
+        "check-guardrail-composition",
+        help="Validate that material-risk work has structural guardrails and evidence.",
+    )
+    check_guardrail_composition_cmd.add_argument("path", type=Path)
 
     plan_from_research = subparsers.add_parser("plan-from-research", help="Check whether search-backed insights are ready for planning.")
     plan_from_research.add_argument("path", type=Path)
@@ -276,6 +283,12 @@ def main(argv: list[str] | None = None) -> int:
                 ensure_ascii=False,
             )
         )
+        return 0
+
+    if args.command == "check-guardrail-composition":
+        with args.path.open("r", encoding="utf-8") as file:
+            composition_input = GuardrailCompositionInput.from_dict(json.load(file))
+        print(json.dumps(check_guardrail_composition(composition_input), indent=2, ensure_ascii=False))
         return 0
 
     if args.command == "plan-from-research":

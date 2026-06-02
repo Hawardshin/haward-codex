@@ -161,6 +161,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 - On 2026-06-02, REQ-WS-077 promoted design/UX improvement into a deep-research-backed command center, evidence trail, next action, decision recovery, and dashboard hierarchy requirement.
 - On 2026-06-02, REQ-WS-078 promoted prohibition-heavy instruction handling into positive behavior contracts plus verification or enforcement gates.
 - On 2026-06-02, REQ-WS-079 promoted structural guardrails for material risk into the shared operating structure, requiring risk-surface classification, selected guardrail, and verification evidence instead of prompt wording alone.
+- On 2026-06-02, REQ-WS-080 turned the structural guardrail principle into an executable JSON composition template and deterministic CLI checker.
 - Before implementation, link relevant spec artifacts under `_specs/` or project `specs/`.
 - Before source-code implementation, link architecture references, architecture options, and decision notes in the coding research record.
 - When enterprise/high-quality sources seed research, update or reference `enterprise-source-registry.json` and `_research/source-lists/`.

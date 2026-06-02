@@ -1,0 +1,130 @@
+{
+  "initial_instruction": "구조적 구성 제작",
+  "result_summary": "Added REQ-WS-080 and implemented an executable structural guardrail composition capability: a deterministic checker module, check-guardrail-composition CLI command, self-documenting JSON template, unit tests, memory bootstrap anchor, requirements, specs, web search record, request trace, timing, omission, grounding, and evaluation records.",
+  "work_mode": "governance",
+  "changed_files": [
+    "_history/evaluations/2026/2026-06-02-structural-guardrail-composition-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-02-structural-guardrail-composition-grounding.json",
+    "_history/evaluations/2026/2026-06-02-structural-guardrail-composition-omission.json",
+    "_history/evaluations/2026/2026-06-02-structural-guardrail-composition.en.md",
+    "_history/evaluations/2026/2026-06-02-structural-guardrail-composition.ko.md",
+    "_history/mode-selections/2026/2026-06-02-structural-guardrail-composition.json",
+    "_history/plans/2026/2026-06-02-structural-guardrail-composition.en.md",
+    "_history/plans/2026/2026-06-02-structural-guardrail-composition.ko.md",
+    "_history/request-traces/2026/2026-06-02-structural-guardrail-composition.en.md",
+    "_history/request-traces/2026/2026-06-02-structural-guardrail-composition.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/web-searches/2026/2026-06-02-structural-guardrail-composition.en.md",
+    "_history/web-searches/2026/2026-06-02-structural-guardrail-composition.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-timings/2026/2026-06-02-structural-guardrail-composition.json",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_ops/coordination/board.ko.md",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-02-structural-guardrail-composition.en.md",
+    "_requirements/changes/2026-06-02-structural-guardrail-composition.ko.md",
+    "_requirements/reviews/2026-06-02-structural-guardrail-composition.en.md",
+    "_requirements/reviews/2026-06-02-structural-guardrail-composition.ko.md",
+    "_specs/workspace-platform/2026-06-02-structural-guardrail-composition/",
+    "_tools/workspace-health/src/workspace_health/checks.py",
+    "agent-platform/configs/governance/structural-guardrail-composition-template.json",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/src/agent_platform/governance/guardrail_composition.py",
+    "agent-platform/tests/test_guardrail_composition.py"
+  ],
+  "verification": [
+    "python3 -m json.tool agent-platform/configs/governance/structural-guardrail-composition-template.json: passed",
+    "python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json: passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/governance/structural-guardrail-composition-template.json configs/memory/bootstrap-manifest.json: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-guardrail-composition configs/governance/structural-guardrail-composition-template.json: guardrails_ready",
+    "PYTHONPATH=src python3 -m unittest discover -s tests -p 'test_guardrail_composition.py': 5 tests passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "PYTHONPATH=src python3 -m unittest discover -s tests: 159 tests passed",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "python3 _tools/workspace-index/src/workspace_index.py --check: passed",
+    "python3 _tools/task-board/src/task_board.py --check: passed",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-structural-guardrail-composition.json: ready with unmeasured-duration warnings",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-structural-guardrail-composition-omission.json: coverage_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-structural-guardrail-composition-grounding.json: ready_to_publish",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-02-structural-guardrail-composition-evaluation-input.json: ready_to_close",
+    "python3 _tools/workspace-health/src/workspace_health.py --json: passed, 25 checks, 0 failed",
+    "git diff --check: clean"
+  ],
+  "references_checked": [
+    "https://openai.github.io/openai-agents-python/guardrails/",
+    "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "https://www.nist.gov/itl/ai-risk-management-framework",
+    "agent-platform/configs/usage/ai-usage-gap-profile.json",
+    "_history/web-searches/2026/2026-06-02-structural-guardrails.ko.md",
+    "_specs/workspace-platform/2026-06-02-structural-guardrails/"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-structural-guardrail-composition-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-structural-guardrail-composition.ko.md",
+    "agent-platform/configs/governance/structural-guardrail-composition-template.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-structural-guardrail-composition.ko.md",
+    "_specs/workspace-platform/2026-06-02-structural-guardrail-composition/plan.ko.md",
+    "_history/web-searches/2026/2026-06-02-structural-guardrail-composition.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-structural-guardrail-composition.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-structural-guardrail-composition-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-structural-guardrail-composition.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-02-structural-guardrail-composition.ko.md",
+    "_requirements/reviews/2026-06-02-structural-guardrail-composition.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-structural-guardrail-composition/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-structural-guardrail-composition/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-structural-guardrail-composition/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-structural-guardrail-composition/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-structural-guardrail-composition/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-structural-guardrail-composition.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-structural-guardrail-composition.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Generate project-local guardrail composition records from spec drafts.",
+    "Add a prompt/workflow linter that flags material-risk steps without a guardrail composition target."
+  ]
+}

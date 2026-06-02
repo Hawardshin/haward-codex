@@ -1,0 +1,70 @@
+{
+  "task_id": "2026-06-02-structural-guardrail-composition",
+  "title": "Structural guardrail composition",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02T12:55:02+0900",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked OpenAI Agents SDK guardrails, OWASP LLM Top 10, and NIST AI RMF."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "check-memory-bootstrap returned ready_to_bootstrap."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added REQ-WS-080 and structural guardrail composition specs."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Checker, CLI, template, and tests",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added guardrail_composition.py, check-guardrail-composition CLI, template JSON, and unit tests."
+    },
+    {
+      "phase_id": "history_evaluation",
+      "label": "History and evaluation records",
+      "status": "completed",
+      "measurement": "not_measured"
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Config checks, guardrail composition CLI, unit tests, memory bootstrap, docs audit, maps, board, omissions, grounding, evaluator, workspace health, and diff check passed."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Completed by the final close-out commit and push."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "The main cost is not code volume but propagating one governance capability through requirements, specs, memory, tests, history, and evaluation records.",
+    "improvement_candidates": [
+      "Generate guardrail composition records from a smaller prompt or spec draft.",
+      "Add project-local guardrail composition examples for common work types."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-structural-guardrail-composition.ko.md",
+    "_history/plans/2026/2026-06-02-structural-guardrail-composition.ko.md",
+    "_specs/workspace-platform/2026-06-02-structural-guardrail-composition/plan.ko.md"
+  ]
+}
