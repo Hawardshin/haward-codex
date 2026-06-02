@@ -11,6 +11,7 @@ import {
   buildUnifiedOps,
   collectAgentCatalog,
   collectClaudeCodeDesignTransfer,
+  collectPhilosophyFeatureExtraction,
   collectLanguageModeCatalog,
   collectModeFunctionCatalog,
   collectSourceFiles,
@@ -59,6 +60,7 @@ test("buildSnapshot reads minimal repository shape", () => {
   fs.mkdirSync(path.join(root, "_requirements", "baselines"), { recursive: true });
   fs.mkdirSync(path.join(root, "agent-platform", "configs", "access"), { recursive: true });
   fs.mkdirSync(path.join(root, "agent-platform", "configs", "agents"), { recursive: true });
+  fs.mkdirSync(path.join(root, "agent-platform", "configs", "orchestration"), { recursive: true });
   fs.mkdirSync(path.join(root, "agent-platform", "docs"), { recursive: true });
   fs.mkdirSync(path.join(root, "demo", "src"), { recursive: true });
 
@@ -87,6 +89,41 @@ test("buildSnapshot reads minimal repository shape", () => {
       tools: ["demo:run"],
       skills: [],
       metadata: { status: "active", trigger: "demo trigger" }
+    })
+  );
+  fs.writeFileSync(
+    path.join(root, "agent-platform", "configs", "orchestration", "philosophy-feature-extraction-registry.json"),
+    JSON.stringify({
+      required_principle_ids: ["P07-repetition-becomes-capability"],
+      feature_intake_stages: [{ id: "philosophy_intake", label: "Intake", input: "in", output: "out", checks: ["ok"] }],
+      principle_feature_flows: [
+        {
+          id: "capability-factory-loop",
+          label: "Capability Factory Loop",
+          principle_ids: ["P07-repetition-becomes-capability"],
+          feature_question: "What repeated work becomes capability?",
+          candidate_rules: ["Choose the smallest asset."],
+          output_targets: ["agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json"]
+        }
+      ],
+      quality_gates: [{ id: "source_principle_gate", rule: "Need source", failure_action: "Stop" }],
+      seed_feature_candidates: [
+        {
+          id: "factory",
+          label: "Factory",
+          source_principle_ids: ["P07-repetition-becomes-capability"],
+          human_process_step: "Review repetition",
+          feature_hypothesis: "Registry exposes feature candidates",
+          smallest_asset_type: "tool",
+          status: "implemented",
+          risk_tier: "medium",
+          evidence_inputs: ["_philosophy/agent-operating-philosophy.ko.md"],
+          target_paths: ["agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json"],
+          validation_targets: [{ command: "echo ok", validates: "Smoke" }],
+          rollback_plan: "Remove registry"
+        }
+      ],
+      default_command: "check"
     })
   );
   fs.writeFileSync(
@@ -163,6 +200,9 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.modeFunctionCatalog.groups.some((group) => group.id === "view_mode"), true);
   assert.equal(snapshot.modeFunctionCatalog.groups.some((group) => group.id === "section_location"), true);
   assert.equal(snapshot.stats.modeOptions, snapshot.modeFunctionCatalog.summary.totalOptions);
+  assert.equal(snapshot.stats.philosophyFeatureCandidates, 1);
+  assert.equal(snapshot.philosophyFeatureExtraction.summary.requiredPrinciples, 1);
+  assert.equal(snapshot.philosophyFeatureExtraction.candidates[0].smallestAssetType, "tool");
   assert.equal(snapshot.documents.some((document) => document.language === "ko"), true);
 });
 
@@ -216,12 +256,62 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.repoRootName, "customer-workspace");
   assert.equal(customer.stats.sourceFiles, 0);
   assert.equal(customer.stats.documents, 0);
+  assert.equal(customer.stats.philosophyFeatureCandidates, 0);
   assert.equal(customer.sourceFiles.length, 0);
   assert.equal(customer.documents.length, 0);
+  assert.equal(customer.philosophyFeatureExtraction.candidates.length, 0);
   assert.equal(customer.historyDays.length, 0);
   assert.equal(customer.projects.length, 0);
   assert.equal(customer.publicReview.status, "customer_snapshot_sanitized");
   assert.equal(customer.viewModeCatalog.defaultMode, "user");
+});
+
+test("collectPhilosophyFeatureExtraction reads feature flows and candidates", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-philosophy-feature-test-"));
+  fs.mkdirSync(path.join(root, "agent-platform", "configs", "orchestration"), { recursive: true });
+  fs.writeFileSync(
+    path.join(root, "agent-platform", "configs", "orchestration", "philosophy-feature-extraction-registry.json"),
+    JSON.stringify({
+      required_principle_ids: ["P08-model-human-process"],
+      feature_intake_stages: [{ id: "human_process_model", label: "Human Process", input: "in", output: "out", checks: ["ok"] }],
+      principle_feature_flows: [
+        {
+          id: "capability-factory-loop",
+          label: "Capability Factory Loop",
+          principle_ids: ["P08-model-human-process"],
+          feature_question: "What human process should be modeled?",
+          candidate_rules: ["Model first."],
+          output_targets: ["_ops/workflows/79-philosophy-feature-extraction.md"]
+        }
+      ],
+      quality_gates: [{ id: "human_process_gate", rule: "Model first", failure_action: "Rework" }],
+      seed_feature_candidates: [
+        {
+          id: "human-process-canvas",
+          label: "Human Process Canvas",
+          source_principle_ids: ["P08-model-human-process"],
+          human_process_step: "Map the direct work",
+          feature_hypothesis: "A canvas makes automation safer",
+          smallest_asset_type: "template",
+          status: "planned",
+          risk_tier: "low",
+          evidence_inputs: ["source"],
+          target_paths: ["_templates/human-process-canvas"],
+          validation_targets: [{ command: "echo ok", validates: "Smoke" }],
+          rollback_plan: "Do not create template"
+        }
+      ],
+      default_command: "check-philosophy-features"
+    })
+  );
+
+  const extraction = collectPhilosophyFeatureExtraction(root);
+
+  assert.equal(extraction.summary.totalFlows, 1);
+  assert.equal(extraction.summary.totalCandidates, 1);
+  assert.equal(extraction.flows[0].principleIds[0], "P08-model-human-process");
+  assert.equal(extraction.candidates[0].smallestAssetType, "template");
+  assert.equal(extraction.qualityGates[0].id, "human_process_gate");
 });
 
 test("collectModeFunctionCatalog exposes explicit selectors and desktop mode locations", () => {

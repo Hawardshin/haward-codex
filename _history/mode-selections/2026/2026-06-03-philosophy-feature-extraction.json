@@ -1,0 +1,27 @@
+{
+  "record_id": "2026-06-03-philosophy-feature-extraction",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-013",
+  "selected_mode": "governance",
+  "reason": "The work changes durable philosophy execution, governance registries, CLI validators, memory bootstrap, prompt routing, agent specs, and monitor surfaces.",
+  "required_targets": {
+    "web_search_record_targets": [
+      "_history/web-searches/2026/2026-06-03-philosophy-feature-extraction.ko.md"
+    ],
+    "requirements_targets": [
+      "_requirements/changes/2026-06-03-philosophy-feature-extraction.ko.md"
+    ],
+    "spec_targets": [
+      "_specs/workspace-platform/2026-06-03-philosophy-feature-extraction/spec.ko.md"
+    ],
+    "omission_check_targets": [
+      "_history/evaluations/2026/2026-06-03-philosophy-feature-extraction-omission-input.json"
+    ],
+    "request_trace_targets": [
+      "_history/request-traces/2026/2026-06-03-philosophy-feature-extraction.ko.md"
+    ],
+    "timing_summary_targets": [
+      "_history/work-timings/2026/2026-06-03-philosophy-feature-extraction.json"
+    ]
+  }
+}

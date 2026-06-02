@@ -102,6 +102,9 @@ AI는 금지 문장을 사람처럼 안정적인 규범으로 이해한다고 �
 
 - 철학 원칙 추적: `agent-platform/configs/governance/philosophy-traceability.json`
 - 철학 alignment 검증: `PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-trace configs/governance/philosophy-traceability.json`
+- 철학 기반 기능 추출: `agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json`
+- 철학 기능 추출 검증: `PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-features configs/orchestration/philosophy-feature-extraction-registry.json`
+- 철학 기능 추출 에이전트: `agent-platform/configs/agents/philosophy-feature-extractor-agent.json`
 - 철학 거버넌스: `_docs/governance/philosophy-governance.ko.md`
 - 검색 기반 계획: `_ops/workflows/55-research-insight-planning.md`
 - 웹 우선 접수: `_ops/workflows/05-web-first-intake.md`

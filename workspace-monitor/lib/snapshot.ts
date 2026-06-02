@@ -17,6 +17,7 @@ export type WorkspaceStats = {
   modeGroups?: number;
   modeOptions?: number;
   claudeCodeDesignPatterns?: number;
+  philosophyFeatureCandidates?: number;
   sourceFiles?: number;
   rootFolders: number;
 };
@@ -346,6 +347,59 @@ export type WorkspaceClaudeCodeDesignTransfer = {
   patterns: WorkspaceClaudeCodeDesignTransferPattern[];
 };
 
+export type WorkspacePhilosophyFeatureExtraction = {
+  sourcePath: string;
+  defaultCommand: string;
+  summary: {
+    requiredPrinciples: number;
+    totalFlows: number;
+    totalStages: number;
+    totalCandidates: number;
+    implemented: number;
+    planned: number;
+    queued: number;
+    mediumRisk: number;
+    highRisk: number;
+  };
+  stages: Array<{
+    id: string;
+    label: string;
+    input: string;
+    output: string;
+    checks: string[];
+  }>;
+  flows: Array<{
+    id: string;
+    label: string;
+    principleIds: string[];
+    featureQuestion: string;
+    candidateRules: string[];
+    outputTargets: string[];
+  }>;
+  qualityGates: Array<{
+    id: string;
+    rule: string;
+    failureAction: string;
+  }>;
+  candidates: Array<{
+    id: string;
+    label: string;
+    sourcePrincipleIds: string[];
+    humanProcessStep: string;
+    featureHypothesis: string;
+    smallestAssetType: string;
+    status: string;
+    riskTier: string;
+    evidenceInputs: string[];
+    targetPaths: string[];
+    validationTargets: Array<{
+      command: string;
+      validates: string;
+    }>;
+    rollbackPlan: string;
+  }>;
+};
+
 export type WorkspaceSnapshot = {
   schemaVersion: string;
   generatedAt: string;
@@ -372,6 +426,7 @@ export type WorkspaceSnapshot = {
   };
   modeFunctionCatalog?: WorkspaceModeFunctionCatalog;
   claudeCodeDesignTransfer?: WorkspaceClaudeCodeDesignTransfer;
+  philosophyFeatureExtraction?: WorkspacePhilosophyFeatureExtraction;
   categories: string[];
   publicReview: {
     status: string;

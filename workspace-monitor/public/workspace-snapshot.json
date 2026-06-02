@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-02T18:28:02.917Z",
+  "generatedAt": "2026-06-02T18:45:21.637Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -21,6 +21,7 @@
     "modeGroups": 0,
     "modeOptions": 0,
     "claudeCodeDesignPatterns": 0,
+    "philosophyFeatureCandidates": 0,
     "sourceFiles": 0,
     "rootFolders": 0
   },
@@ -74,6 +75,25 @@
         "documentRule": "Customer-facing content only."
       }
     ]
+  },
+  "philosophyFeatureExtraction": {
+    "sourcePath": "",
+    "defaultCommand": "",
+    "summary": {
+      "requiredPrinciples": 0,
+      "totalFlows": 0,
+      "totalStages": 0,
+      "totalCandidates": 0,
+      "implemented": 0,
+      "planned": 0,
+      "queued": 0,
+      "mediumRisk": 0,
+      "highRisk": 0
+    },
+    "stages": [],
+    "flows": [],
+    "qualityGates": [],
+    "candidates": []
   },
   "categories": [],
   "publicReview": {

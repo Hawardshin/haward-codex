@@ -1,0 +1,91 @@
+{
+  "task": "Philosophy feature extraction structure grounding check.",
+  "output_summary": "Registry, checker, agent spec, prompt/workflow, memory/trace links, and monitor panel for deriving features from the user's philosophy.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "repo-philosophy",
+      "source": "_philosophy/agent-operating-philosophy.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Canonical local source for the user's operating philosophy."
+    },
+    {
+      "evidence_id": "registry-check",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-features configs/orchestration/philosophy-feature-extraction-registry.json",
+      "source_type": "tool_result",
+      "checked_on": "2026-06-03",
+      "reliability": "Deterministic local checker for this feature extraction contract."
+    },
+    {
+      "evidence_id": "trace-memory-checks",
+      "source": "check-philosophy-trace and check-memory-bootstrap command results",
+      "source_type": "tool_result",
+      "checked_on": "2026-06-03",
+      "reliability": "Local validation for future-session discoverability."
+    },
+    {
+      "evidence_id": "external-risk-governance",
+      "source": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official risk management framework used only for general governance framing."
+    },
+    {
+      "evidence_id": "external-traceability",
+      "source": "https://www.nasa.gov/reference/system-engineering-handbook/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official systems engineering reference used for stakeholder-to-requirement-to-validation framing."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "All 18 philosophy principles are covered by at least one feature flow.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "registry-check"
+      ],
+      "verification_steps": [
+        "Ran check-philosophy-features and confirmed covered_by_flows_count is 18."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The new structure is discoverable by future sessions through memory bootstrap and philosophy traceability.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "trace-memory-checks"
+      ],
+      "verification_steps": [
+        "Ran check-philosophy-trace and check-memory-bootstrap."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "External references support using governance and traceability loops, but the implementation is validated by local repository checks.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "external-risk-governance",
+        "external-traceability",
+        "registry-check"
+      ],
+      "verification_steps": [
+        "Recorded official references and separated external framing from local implementation proof."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Queued candidates are not implemented yet and must not be described as shipped."
+  ],
+  "limitation_notes": [
+    "No user-facing customer workflow was added; the UI panel is a developer/superadmin operating surface."
+  ]
+}

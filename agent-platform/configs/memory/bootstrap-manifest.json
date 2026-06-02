@@ -587,6 +587,18 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "philosophy_feature_extraction_registry",
+      "title": "Philosophy Feature Extraction Registry",
+      "path": "agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "turning durable philosophy principles into feature candidates",
+        "smallest executable asset selection",
+        "validation, rollback, and high-quality data records for philosophy-derived features"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
       "id": "root_structure_policy",
       "title": "Root Structure Policy",
       "path": "_ops/projects/root-structure-policy.json",
@@ -1495,6 +1507,7 @@
     "cli_pipeline_template",
     "agent_orchestration_registry",
     "capability_promotion_registry",
+    "philosophy_feature_extraction_registry",
     "installation_registry"
   ],
   "required_anchor_ids": [
@@ -1567,6 +1580,7 @@
     "cli_pipeline_template",
     "agent_orchestration_registry",
     "capability_promotion_registry",
+    "philosophy_feature_extraction_registry",
     "installation_registry"
   ],
   "anchors": [
@@ -2199,6 +2213,14 @@
       "path": "agent-platform/configs/orchestration/capability-promotion-registry.json",
       "tier": "warm",
       "purpose": "Bounded black-box contract for turning repeated work, bottlenecks, omissions, validation failures, and manual rework into auditable reusable capability candidates.",
+      "required": true,
+      "load_order": 38
+    },
+    {
+      "id": "philosophy_feature_extraction_registry",
+      "path": "agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json",
+      "tier": "warm",
+      "purpose": "Feature factory contract for turning the user's operating philosophy principles into auditable feature candidates, smallest executable assets, validation targets, rollback plans, and high-quality data records.",
       "required": true,
       "load_order": 38
     },

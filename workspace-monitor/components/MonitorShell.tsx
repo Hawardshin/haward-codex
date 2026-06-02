@@ -64,6 +64,7 @@ type CollaborationBoard = NonNullable<WorkspaceSnapshot["collaborationBoard"]>;
 type UnifiedOps = NonNullable<WorkspaceSnapshot["unifiedOps"]>;
 type ModeFunctionCatalog = NonNullable<WorkspaceSnapshot["modeFunctionCatalog"]>;
 type ClaudeCodeDesignTransfer = NonNullable<WorkspaceSnapshot["claudeCodeDesignTransfer"]>;
+type PhilosophyFeatureExtraction = NonNullable<WorkspaceSnapshot["philosophyFeatureExtraction"]>;
 
 const fallbackViewModes: MonitorViewMode[] = [
   {
@@ -179,6 +180,26 @@ const emptyClaudeCodeDesignTransfer: ClaudeCodeDesignTransfer = {
     highPriority: 0
   },
   patterns: []
+};
+
+const emptyPhilosophyFeatureExtraction: PhilosophyFeatureExtraction = {
+  sourcePath: "",
+  defaultCommand: "",
+  summary: {
+    requiredPrinciples: 0,
+    totalFlows: 0,
+    totalStages: 0,
+    totalCandidates: 0,
+    implemented: 0,
+    planned: 0,
+    queued: 0,
+    mediumRisk: 0,
+    highRisk: 0
+  },
+  stages: [],
+  flows: [],
+  qualityGates: [],
+  candidates: []
 };
 
 const sectionIds = new Set<SectionId>(sections.map((section) => section.id));
@@ -667,6 +688,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [languageMode, setLanguageMode] = useState(snapshot.languageModeCatalog?.defaultMode || "all");
   const modeFunctionCatalog = snapshot.modeFunctionCatalog ?? emptyModeFunctionCatalog;
   const claudeCodeDesignTransfer = snapshot.claudeCodeDesignTransfer ?? emptyClaudeCodeDesignTransfer;
+  const philosophyFeatureExtraction = snapshot.philosophyFeatureExtraction ?? emptyPhilosophyFeatureExtraction;
   const [selectedModeFunctionGroupId, setSelectedModeFunctionGroupId] = useState(
     modeFunctionCatalog.groups[0]?.id || "view_mode"
   );
@@ -1162,6 +1184,12 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           <ClaudeCodeTransferPanel
             transfer={claudeCodeDesignTransfer}
             onOpenDesktop={() => setSection("desktop")}
+            onOpenDocuments={() => setSection("documents")}
+          />
+
+          <PhilosophyFeatureFactoryPanel
+            extraction={philosophyFeatureExtraction}
+            onOpenAgents={() => setSection("agents")}
             onOpenDocuments={() => setSection("documents")}
           />
 
@@ -1835,6 +1863,115 @@ function ClaudeCodeTransferPanel({
           )}
         </div>
       </div>
+    </section>
+  );
+}
+
+function PhilosophyFeatureFactoryPanel({
+  extraction,
+  onOpenAgents,
+  onOpenDocuments
+}: {
+  extraction: PhilosophyFeatureExtraction;
+  onOpenAgents: () => void;
+  onOpenDocuments: () => void;
+}) {
+  const visibleFlows = extraction.flows.slice(0, 3);
+  const visibleCandidates = extraction.candidates.slice(0, 6);
+
+  return (
+    <section className="panel wide philosophy-feature-panel">
+      <div className="panel-heading">
+        <div>
+          <p className="eyebrow">Philosophy Feature Factory</p>
+          <h2>철학에서 기능 후보 뽑기</h2>
+        </div>
+        <div className="desktop-actions">
+          <button type="button" onClick={onOpenAgents}>
+            <Bot size={16} aria-hidden="true" />
+            <span>Agent</span>
+          </button>
+          <button type="button" onClick={onOpenDocuments}>
+            <BookOpenText size={16} aria-hidden="true" />
+            <span>Docs</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="philosophy-feature-hero">
+        <article>
+          <span>source principles</span>
+          <strong>{extraction.summary.requiredPrinciples.toLocaleString("ko-KR")}</strong>
+          <p>{extraction.sourcePath || "customer snapshot hides internal registry paths"}</p>
+        </article>
+        <article>
+          <span>feature flows</span>
+          <strong>{extraction.summary.totalFlows.toLocaleString("ko-KR")}</strong>
+          <p>{extraction.summary.totalStages.toLocaleString("ko-KR")} stage extraction loop</p>
+        </article>
+        <article>
+          <span>candidates</span>
+          <strong>{extraction.summary.totalCandidates.toLocaleString("ko-KR")}</strong>
+          <p>
+            {extraction.summary.implemented.toLocaleString("ko-KR")} implemented /{" "}
+            {extraction.summary.queued.toLocaleString("ko-KR")} queued
+          </p>
+        </article>
+        <article>
+          <span>risk watch</span>
+          <strong>{extraction.summary.highRisk.toLocaleString("ko-KR")}</strong>
+          <p>{extraction.summary.mediumRisk.toLocaleString("ko-KR")} medium-risk candidates</p>
+        </article>
+      </div>
+
+      <div className="philosophy-feature-layout">
+        <div className="philosophy-flow-list" aria-label="Philosophy feature flows">
+          {visibleFlows.length ? (
+            visibleFlows.map((flow) => (
+              <article key={flow.id}>
+                <header>
+                  <GitBranch size={16} aria-hidden="true" />
+                  <strong>{flow.label}</strong>
+                  <span>{flow.principleIds.length.toLocaleString("ko-KR")} principles</span>
+                </header>
+                <p>{flow.featureQuestion}</p>
+                <small>{flow.outputTargets.slice(0, 2).join(" / ")}</small>
+              </article>
+            ))
+          ) : (
+            <p className="empty-state">철학 기반 기능 추출 registry가 아직 생성되지 않았습니다.</p>
+          )}
+        </div>
+
+        <div className="philosophy-candidate-grid" aria-label="Philosophy feature candidates">
+          {visibleCandidates.length ? (
+            visibleCandidates.map((candidate) => (
+              <article key={candidate.id}>
+                <div className="philosophy-candidate-top">
+                  <span className={`status-pill ${candidate.status}`}>{candidate.status}</span>
+                  <span className={`risk-pill ${candidate.riskTier}`}>{candidate.riskTier}</span>
+                </div>
+                <h3>{candidate.label}</h3>
+                <p>{candidate.featureHypothesis}</p>
+                <div className="candidate-meta-row">
+                  <span>{candidate.smallestAssetType}</span>
+                  <span>{candidate.sourcePrincipleIds.slice(0, 3).join(" / ")}</span>
+                </div>
+                <small>{candidate.validationTargets[0]?.validates || candidate.rollbackPlan}</small>
+              </article>
+            ))
+          ) : (
+            <p className="empty-state">철학에서 도출된 기능 후보가 아직 없습니다.</p>
+          )}
+        </div>
+      </div>
+
+      {extraction.defaultCommand && (
+        <div className="philosophy-command-strip">
+          <FileSearch size={16} aria-hidden="true" />
+          <span>{extraction.defaultCommand}</span>
+        </div>
+      )}
     </section>
   );
 }

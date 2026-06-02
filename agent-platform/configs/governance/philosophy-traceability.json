@@ -412,15 +412,29 @@
           "role": "Structures bounded black-box capability candidates."
         },
         {
+          "path": "agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json",
+          "target_type": "config",
+          "role": "Turns philosophy principles into feature candidates, smallest executable assets, validation targets, and rollback plans."
+        },
+        {
           "path": "_ops/workflows/75-capability-promotion.md",
           "target_type": "workflow",
           "role": "Guides capability promotion after repeated work or bottlenecks."
+        },
+        {
+          "path": "_ops/workflows/79-philosophy-feature-extraction.md",
+          "target_type": "workflow",
+          "role": "Guides feature extraction from source philosophy principles."
         }
       ],
       "validation_targets": [
         {
           "command": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/orchestration/capability-promotion-registry.json",
           "validates": "Capability promotion registry remains self-documenting."
+        },
+        {
+          "command": "PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-features configs/orchestration/philosophy-feature-extraction-registry.json",
+          "validates": "Philosophy-derived capability candidates remain traceable and mechanically checkable."
         },
         {
           "command": "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json",
@@ -449,15 +463,29 @@
           "role": "Models better AI use as task framing, iteration, verification, and asset promotion."
         },
         {
+          "path": "agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json",
+          "target_type": "config",
+          "role": "Requires a human process model before philosophy-derived feature ideation."
+        },
+        {
           "path": "_ops/workflows/59-bridge-ai-usage-gap.md",
           "target_type": "workflow",
           "role": "Turns weak instructions or AI-use gaps into concrete bridge interventions."
+        },
+        {
+          "path": "_ops/workflows/79-philosophy-feature-extraction.md",
+          "target_type": "workflow",
+          "role": "Models the competent human process before selecting feature candidates."
         }
       ],
       "validation_targets": [
         {
           "command": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/ai-usage-gap-profile.json",
           "validates": "Human-process and AI-use gap profile remains documented."
+        },
+        {
+          "command": "PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-features configs/orchestration/philosophy-feature-extraction-registry.json",
+          "validates": "Feature extraction remains grounded in human process modeling."
         },
         {
           "command": "python3 _tools/docs-audit/src/docs_audit.py --check",
@@ -481,6 +509,11 @@
           "role": "Defines schema, provenance, null handling, and validation for structured records."
         },
         {
+          "path": "agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json",
+          "target_type": "config",
+          "role": "Requires philosophy-derived candidates to preserve evidence inputs, source principles, validation, and rollback data."
+        },
+        {
           "path": "_ops/workflows/67-structure-unstructured-data.md",
           "target_type": "workflow",
           "role": "Guides conversion of messy input into structured artifacts."
@@ -495,6 +528,10 @@
         {
           "command": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/unstructured-data-structuring-profile.json",
           "validates": "Structuring profile remains self-documenting."
+        },
+        {
+          "command": "PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-features configs/orchestration/philosophy-feature-extraction-registry.json",
+          "validates": "Philosophy-derived feature records keep schema-like candidate fields and provenance handles."
         },
         {
           "command": "python3 _tools/docs-audit/src/docs_audit.py --check",
@@ -563,6 +600,11 @@
           "path": "workspace-monitor",
           "target_type": "dashboard",
           "role": "Visualizes history, specs, projects, agents, and documents."
+        },
+        {
+          "path": "agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json",
+          "target_type": "config",
+          "role": "Makes philosophy-derived feature candidates inspectable records for future agents."
         }
       ],
       "validation_targets": [
@@ -825,6 +867,11 @@
           "role": "Defines high-quality data accumulation as part of the platform identity and good-output criteria."
         },
         {
+          "path": "agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json",
+          "target_type": "config",
+          "role": "Defines source, assumption, decision, validation, rollback, and residual-risk records for philosophy-derived feature candidates."
+        },
+        {
           "path": "agent-platform/configs/usage/unstructured-data-structuring-profile.json",
           "target_type": "config",
           "role": "Defines schema, provenance, null handling, and validation rules for turning messy inputs into durable structured records."
@@ -859,6 +906,10 @@
         {
           "command": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/unstructured-data-structuring-profile.json configs/research/research-agent-profile.json configs/research/source-registry.json",
           "validates": "Data accumulation source, structuring, and research configs remain self-documenting."
+        },
+        {
+          "command": "PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-features configs/orchestration/philosophy-feature-extraction-registry.json",
+          "validates": "Philosophy-derived feature candidates preserve high-quality data fields before becoming active."
         },
         {
           "command": "PYTHONPATH=src python3 -m agent_platform.cli check-grounding <grounding-input.json>",

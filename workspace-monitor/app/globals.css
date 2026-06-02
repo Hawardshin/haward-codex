@@ -450,6 +450,7 @@ h3 {
 .ux-spine,
 .mode-switchboard-panel,
 .claude-transfer-panel,
+.philosophy-feature-panel,
 .action-evidence-panel {
   grid-column: 1 / -1;
 }
@@ -640,6 +641,12 @@ h3 {
     var(--surface);
 }
 
+.philosophy-feature-panel {
+  background:
+    linear-gradient(180deg, rgba(22, 115, 91, 0.06), rgba(132, 84, 180, 0.04)),
+    var(--surface);
+}
+
 .claude-transfer-layout {
   display: grid;
   grid-template-columns: minmax(260px, 0.62fr) minmax(0, 1.38fr);
@@ -741,6 +748,140 @@ h3 {
   border-radius: 999px;
   padding: 4px 7px;
   overflow-wrap: anywhere;
+}
+
+.philosophy-feature-hero {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.philosophy-feature-hero article,
+.philosophy-flow-list article,
+.philosophy-candidate-grid article,
+.philosophy-command-strip {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.86);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.philosophy-feature-hero span,
+.philosophy-flow-list header span,
+.candidate-meta-row span,
+.risk-pill {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.philosophy-feature-hero strong {
+  display: block;
+  margin: 5px 0;
+  color: var(--text);
+  font-size: 24px;
+  line-height: 1.1;
+}
+
+.philosophy-feature-hero p,
+.philosophy-flow-list p,
+.philosophy-flow-list small,
+.philosophy-candidate-grid p,
+.philosophy-candidate-grid small,
+.philosophy-command-strip {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.philosophy-feature-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.philosophy-flow-list,
+.philosophy-candidate-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.philosophy-candidate-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.philosophy-flow-list article,
+.philosophy-candidate-grid article {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.philosophy-flow-list header,
+.philosophy-candidate-top,
+.candidate-meta-row,
+.philosophy-command-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+}
+
+.philosophy-flow-list header svg {
+  color: var(--green);
+}
+
+.philosophy-flow-list header strong,
+.philosophy-candidate-grid h3 {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.philosophy-candidate-top {
+  justify-content: space-between;
+}
+
+.risk-pill {
+  display: inline-flex;
+  width: fit-content;
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  padding: 3px 8px;
+}
+
+.risk-pill.high {
+  border-color: rgba(183, 74, 74, 0.45);
+  color: var(--red);
+}
+
+.risk-pill.medium {
+  border-color: rgba(193, 132, 42, 0.45);
+  color: var(--amber);
+}
+
+.risk-pill.low {
+  border-color: rgba(22, 115, 91, 0.38);
+  color: var(--green);
+}
+
+.philosophy-command-strip {
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.philosophy-command-strip svg {
+  flex: 0 0 auto;
+  color: var(--blue);
 }
 
 .mode-switchboard-summary {
@@ -3869,6 +4010,9 @@ h3 {
   .terminal-report-list article:hover,
   .claude-transfer-summary:hover,
   .transfer-pattern-grid article:hover,
+  .philosophy-feature-hero article:hover,
+  .philosophy-flow-list article:hover,
+  .philosophy-candidate-grid article:hover,
   .mode-group-list button:hover,
   .mode-location-card:hover,
   .mode-option-grid article:hover {
@@ -3914,7 +4058,9 @@ h3 {
   .run-board-strip,
   .process-graph,
   .evidence-grid,
-  .transfer-pattern-grid {
+  .transfer-pattern-grid,
+  .philosophy-feature-hero,
+  .philosophy-candidate-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -3938,6 +4084,7 @@ h3 {
   .desktop-hero,
   .attention-layout,
   .claude-transfer-layout,
+  .philosophy-feature-layout,
   .mode-switchboard-layout {
     grid-template-columns: 1fr;
   }
@@ -4026,6 +4173,9 @@ h3 {
   .evidence-grid,
   .claude-transfer-layout,
   .transfer-pattern-grid,
+  .philosophy-feature-hero,
+  .philosophy-feature-layout,
+  .philosophy-candidate-grid,
   .terminal-report-list,
   .desktop-health-strip,
   .decision-summary-strip,

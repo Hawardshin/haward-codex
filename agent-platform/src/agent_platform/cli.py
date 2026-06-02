@@ -15,6 +15,10 @@ from agent_platform.evaluation.skill_validator import SkillValidationInput, vali
 from agent_platform.evaluation.work_evaluator import WorkEvaluationInput, evaluate_work
 from agent_platform.governance.config_contract import check_config_contract
 from agent_platform.governance.guardrail_composition import GuardrailCompositionInput, check_guardrail_composition
+from agent_platform.governance.philosophy_features import (
+    check_philosophy_feature_registry,
+    load_philosophy_feature_registry,
+)
 from agent_platform.governance.philosophy_trace import check_philosophy_traceability, load_philosophy_traceability
 from agent_platform.integrations.cli_pipeline import CliPipelineInput, check_cli_pipeline
 from agent_platform.integrations.notifications import (
@@ -102,6 +106,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Validate that operating philosophy principles are mapped to executable structure and validation handles.",
     )
     check_philosophy_trace.add_argument("path", type=Path)
+
+    check_philosophy_features = subparsers.add_parser(
+        "check-philosophy-features",
+        help="Validate that operating philosophy principles feed auditable feature extraction and promotion structure.",
+    )
+    check_philosophy_features.add_argument("path", type=Path)
 
     check_guardrail_composition_cmd = subparsers.add_parser(
         "check-guardrail-composition",
@@ -278,6 +288,26 @@ def main(argv: list[str] | None = None) -> int:
                     "requires_rework": config_contract_report["requires_rework"] or philosophy_report["requires_rework"],
                     "config_contract": config_contract_report,
                     "philosophy_traceability": philosophy_report,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
+        return 0
+
+    if args.command == "check-philosophy-features":
+        registry = load_philosophy_feature_registry(args.path)
+        config_contract_report = check_config_contract(registry, str(args.path))
+        feature_report = check_philosophy_feature_registry(registry, _default_repo_root())
+        print(
+            json.dumps(
+                {
+                    "status": "rework_required"
+                    if config_contract_report["requires_rework"] or feature_report["requires_rework"]
+                    else "ready",
+                    "requires_rework": config_contract_report["requires_rework"] or feature_report["requires_rework"],
+                    "config_contract": config_contract_report,
+                    "philosophy_features": feature_report,
                 },
                 indent=2,
                 ensure_ascii=False,

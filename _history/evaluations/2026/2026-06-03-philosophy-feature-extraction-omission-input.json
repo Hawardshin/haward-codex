@@ -1,0 +1,101 @@
+{
+  "task": "Philosophy feature extraction structure close-out check.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "philosophy-as-feature-source",
+      "description": "The user's philosophy should be an input to feature extraction, not only prose.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json"
+      ],
+      "rationale": "The registry maps all 18 principles to feature flows."
+    },
+    {
+      "item_id": "mechanical-validation",
+      "description": "The structure should have a deterministic validation command.",
+      "source": "repository governance rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/governance/philosophy_features.py",
+        "agent-platform/tests/test_philosophy_features.py"
+      ],
+      "rationale": "The checker validates stage, flow, candidate, target, and contract coverage."
+    },
+    {
+      "item_id": "future-session-discoverability",
+      "description": "Prompt router, memory bootstrap, and traceability should expose the new structure.",
+      "source": "_ops/workflows/78-philosophy-alignment.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_ops/prompts/00-router.md",
+        "agent-platform/configs/memory/bootstrap-manifest.json",
+        "agent-platform/configs/governance/philosophy-traceability.json"
+      ],
+      "rationale": "Future agents can route and bootstrap into the philosophy feature workflow."
+    },
+    {
+      "item_id": "monitor-visibility",
+      "description": "The platform UI should expose philosophy-derived feature flows and candidates.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "workspace-monitor/tests/collector.test.mjs"
+      ],
+      "rationale": "The Overview panel and snapshot collector show flows and candidate status."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json",
+      "purpose": "Primary registry.",
+      "required": true
+    },
+    {
+      "path": "_ops/workflows/79-philosophy-feature-extraction.md",
+      "purpose": "Operational workflow.",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-03-philosophy-feature-extraction/spec.ko.md",
+      "purpose": "Spec artifact.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "philosophy-feature-check",
+      "description": "Run check-philosophy-features.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "`PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-features configs/orchestration/philosophy-feature-extraction-registry.json` returned ready."
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "monitor-test-typecheck",
+      "description": "Run Workspace Monitor test and type check.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "`npm --prefix workspace-monitor test` passed.",
+        "`npm --prefix workspace-monitor run check` passed."
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Queued candidates are intentionally recorded but not implemented in this change set."
+  ],
+  "notes": [
+    "Final build/customer checks are added to validation before close-out."
+  ]
+}

@@ -111,6 +111,7 @@ export function buildSnapshot(repoRoot) {
   const languageModeCatalog = collectLanguageModeCatalog(repoRoot);
   const modeFunctionCatalog = collectModeFunctionCatalog(repoRoot, viewModeCatalog, languageModeCatalog);
   const claudeCodeDesignTransfer = collectClaudeCodeDesignTransfer(repoRoot);
+  const philosophyFeatureExtraction = collectPhilosophyFeatureExtraction(repoRoot);
   const sourceFiles = collectSourceFiles(repoRoot, projects);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
   const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
@@ -148,6 +149,7 @@ export function buildSnapshot(repoRoot) {
       modeGroups: modeFunctionCatalog.summary.totalGroups,
       modeOptions: modeFunctionCatalog.summary.totalOptions,
       claudeCodeDesignPatterns: claudeCodeDesignTransfer.summary.totalPatterns,
+      philosophyFeatureCandidates: philosophyFeatureExtraction.summary.totalCandidates,
       sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
     },
@@ -166,6 +168,7 @@ export function buildSnapshot(repoRoot) {
     languageModeCatalog,
     modeFunctionCatalog,
     claudeCodeDesignTransfer,
+    philosophyFeatureExtraction,
     categories,
     publicReview: {
       status: "review_required_before_public_deploy",
@@ -203,6 +206,7 @@ export function buildCustomerSnapshot(snapshot) {
       modeGroups: 0,
       modeOptions: 0,
       claudeCodeDesignPatterns: 0,
+      philosophyFeatureCandidates: 0,
       sourceFiles: 0,
       rootFolders: 0
     },
@@ -245,6 +249,25 @@ export function buildCustomerSnapshot(snapshot) {
           documentRule: "Customer-facing content only."
         }
       ]
+    },
+    philosophyFeatureExtraction: {
+      sourcePath: "",
+      defaultCommand: "",
+      summary: {
+        requiredPrinciples: 0,
+        totalFlows: 0,
+        totalStages: 0,
+        totalCandidates: 0,
+        implemented: 0,
+        planned: 0,
+        queued: 0,
+        mediumRisk: 0,
+        highRisk: 0
+      },
+      stages: [],
+      flows: [],
+      qualityGates: [],
+      candidates: []
     },
     categories: [],
     publicReview: {
@@ -301,6 +324,103 @@ export function collectClaudeCodeDesignTransfer(repoRoot) {
       highPriority
     },
     patterns
+  };
+}
+
+export function collectPhilosophyFeatureExtraction(repoRoot) {
+  const sourcePath = "agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json";
+  const registry = readJson(path.join(repoRoot, sourcePath), {
+    required_principle_ids: [],
+    feature_intake_stages: [],
+    principle_feature_flows: [],
+    quality_gates: [],
+    seed_feature_candidates: [],
+    default_command: ""
+  });
+
+  const stages = Array.isArray(registry.feature_intake_stages)
+    ? registry.feature_intake_stages
+        .filter((stage) => stage && typeof stage === "object")
+        .map((stage) => ({
+          id: stage.id || "",
+          label: stage.label || titleFromPath(stage.id || "stage"),
+          input: stage.input || "",
+          output: stage.output || "",
+          checks: Array.isArray(stage.checks) ? stage.checks : []
+        }))
+        .filter((stage) => stage.id)
+    : [];
+
+  const flows = Array.isArray(registry.principle_feature_flows)
+    ? registry.principle_feature_flows
+        .filter((flow) => flow && typeof flow === "object")
+        .map((flow) => ({
+          id: flow.id || "",
+          label: flow.label || titleFromPath(flow.id || "flow"),
+          principleIds: Array.isArray(flow.principle_ids) ? flow.principle_ids : [],
+          featureQuestion: flow.feature_question || "",
+          candidateRules: Array.isArray(flow.candidate_rules) ? flow.candidate_rules : [],
+          outputTargets: Array.isArray(flow.output_targets) ? flow.output_targets : []
+        }))
+        .filter((flow) => flow.id)
+    : [];
+
+  const qualityGates = Array.isArray(registry.quality_gates)
+    ? registry.quality_gates
+        .filter((gate) => gate && typeof gate === "object")
+        .map((gate) => ({
+          id: gate.id || "",
+          rule: gate.rule || "",
+          failureAction: gate.failure_action || ""
+        }))
+        .filter((gate) => gate.id)
+    : [];
+
+  const candidates = Array.isArray(registry.seed_feature_candidates)
+    ? registry.seed_feature_candidates
+        .filter((candidate) => candidate && typeof candidate === "object")
+        .map((candidate) => ({
+          id: candidate.id || "",
+          label: candidate.label || titleFromPath(candidate.id || "candidate"),
+          sourcePrincipleIds: Array.isArray(candidate.source_principle_ids) ? candidate.source_principle_ids : [],
+          humanProcessStep: candidate.human_process_step || "",
+          featureHypothesis: candidate.feature_hypothesis || "",
+          smallestAssetType: candidate.smallest_asset_type || "",
+          status: candidate.status || "planned",
+          riskTier: candidate.risk_tier || "medium",
+          evidenceInputs: Array.isArray(candidate.evidence_inputs) ? candidate.evidence_inputs : [],
+          targetPaths: Array.isArray(candidate.target_paths) ? candidate.target_paths : [],
+          validationTargets: Array.isArray(candidate.validation_targets)
+            ? candidate.validation_targets
+                .filter((target) => target && typeof target === "object")
+                .map((target) => ({
+                  command: Array.isArray(target.command) ? target.command.join(" && ") : target.command || "",
+                  validates: target.validates || ""
+                }))
+            : [],
+          rollbackPlan: candidate.rollback_plan || ""
+        }))
+        .filter((candidate) => candidate.id)
+    : [];
+
+  return {
+    sourcePath,
+    defaultCommand: registry.default_command || "",
+    summary: {
+      requiredPrinciples: Array.isArray(registry.required_principle_ids) ? registry.required_principle_ids.length : 0,
+      totalFlows: flows.length,
+      totalStages: stages.length,
+      totalCandidates: candidates.length,
+      implemented: candidates.filter((candidate) => candidate.status === "implemented" || candidate.status === "active").length,
+      planned: candidates.filter((candidate) => candidate.status === "planned").length,
+      queued: candidates.filter((candidate) => candidate.status === "queued").length,
+      mediumRisk: candidates.filter((candidate) => candidate.riskTier === "medium").length,
+      highRisk: candidates.filter((candidate) => candidate.riskTier === "high").length
+    },
+    stages,
+    flows,
+    qualityGates,
+    candidates
   };
 }
 
