@@ -35,6 +35,7 @@
 | REQ-WM-022 | The repository snapshot collector should keep feature-specific data extraction logic behind clear module boundaries so continuous refactoring preserves behavior and testable ownership boundaries. | should | Check the `intent-feature-map` collector module boundary, existing collector export compatibility, `npm test`, `npm run collect`, `npm run check:intent-map`, and `npm run check` |
 | REQ-WM-023 | The web UI shall show the platform's operating memory, platform core, desktop product, monitor UI, domain projects, and runtime/local data planes at a glance, including ownership boundaries, primary paths, prohibited boundaries, and structural pressure points. | must | Check snapshot `structureOverview`, the Structure tab Architecture Backbone/Boundary Rules/Pressure surfaces, customer snapshot sanitization, `npm test`, `npm run check`, `npm run build`, and `npm run check:intent-map:customer` |
 | REQ-WM-024 | The web UI shall make core function locations visible in the first screen and group monitor section tabs by functional area so users can understand their current location and next navigation path immediately. | must | Check the top `core-feature-rail`, Overview `Core Functions`, grouped `section-tab-groups`, `npm test`, `npm run check`, `npm run build`, and desktop customer bundle |
+| REQ-WM-025 | The web UI should behave more like a real app by letting users run sections, view modes, language modes, document filters, and key actions through a global command palette plus pinned/recent quick controls. | should | Check `app-control-bar`, `command-palette`, pinned/recent controls, keyboard lifecycle cleanup, `npm test`, `npm run check`, `npm run build`, and static export smoke |
 
 ## Scope
 
@@ -57,6 +58,7 @@
 - Feature-specific data extraction module boundaries in the snapshot collector
 - A `structureOverview` snapshot object and Structure tab surfaces for platform planes, ownership boundaries, and structural pressure points
 - Core function shortcuts and grouped tab information architecture
+- Global command palette plus pinned/recent quick controls
 - Vercel deployment docs
 
 ## Non-Goals

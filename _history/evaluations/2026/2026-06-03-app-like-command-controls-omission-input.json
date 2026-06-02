@@ -1,0 +1,126 @@
+{
+  "task": "Workspace Monitor app-like command controls",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and implementation.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-app-like-command-controls.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "real-app-like-controls",
+      "description": "Add varied app-like quick execution capabilities rather than only static navigation.",
+      "source": "UR-2026-06-03-022",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "command-palette",
+      "description": "Provide global command palette for sections, modes, filters, and quick actions.",
+      "source": "REQ-WM-025",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "commandItems in workspace-monitor/components/MonitorShell.tsx",
+        "command-palette CSS and static export smoke"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "pinned-recent-controls",
+      "description": "Provide pinned and recent quick controls while respecting view mode visibility.",
+      "source": "REQ-WM-025",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "pinnedVisibleSections and recentVisibleSections filter currentViewMode.allowedSections",
+        "app-control-bar UI"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "resource-lifecycle",
+      "description": "Check keyboard listener cleanup and bounded localStorage persistence.",
+      "source": "_ops/workflows/69-resource-leak-prevention.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/evaluations/2026/2026-06-03-app-like-command-controls-resource-input.json",
+        "_history/evaluations/2026/2026-06-03-app-like-command-controls-resource-result.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "workspace-monitor/specs/2026-06-03-app-like-command-controls/spec.ko.md",
+      "purpose": "Spec for app-like command controls.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+      "purpose": "Requirement REQ-WM-025.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-03-app-like-command-controls.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-validation",
+      "description": "Workspace Monitor tests, typecheck, build, perf, and intent checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor test",
+        "npm --prefix workspace-monitor run check",
+        "npm --prefix workspace-monitor run build",
+        "npm --prefix workspace-monitor run perf:budget",
+        "npm --prefix workspace-monitor run check:intent-map"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "customer-boundary",
+      "description": "Customer bundle and customer intent-map redaction still pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app run monitor:build",
+        "npm --prefix workspace-monitor run check:intent-map:customer"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "static-export-smoke",
+      "description": "Built static output contains app control bar and command palette assets.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "rg -l \"app-control-bar|command-palette|workspace-monitor:pinned-sections\" workspace-monitor/out/_next/static/chunks workspace-monitor/.next/server"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Browser plugin tools were not exposed and Playwright is not installed; static export smoke confirmed the new navigation assets are present in the built output.",
+    "Full visual screenshot regression remains a follow-up option if app-like controls continue to expand."
+  ],
+  "notes": [
+    "No new package installation occurred."
+  ]
+}

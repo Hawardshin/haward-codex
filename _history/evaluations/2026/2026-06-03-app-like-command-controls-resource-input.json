@@ -1,0 +1,84 @@
+{
+  "task": "Workspace Monitor app-like command controls",
+  "work_mode": "standard",
+  "runtime_context": [
+    "react",
+    "nextjs",
+    "browser"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "global-keyboard-listener",
+      "category": "subscription",
+      "description": "A global keydown listener could remain registered after MonitorShell unmounts.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The keydown listener is registered in a React effect and removed in the cleanup function.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx useEffect returns window.removeEventListener('keydown', handleKeyDown)",
+        "npm --prefix workspace-monitor run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "pinned-section-storage",
+      "category": "cache",
+      "description": "Pinned section persistence could grow or break the UI if localStorage is unavailable or malformed.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Pinned sections are capped at six section IDs, invalid stored values are filtered, and storage failures are caught.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx defaultPinnedSections and togglePinnedSection slice(0, 6)",
+        "workspace-monitor/components/MonitorShell.tsx localStorage get/set wrapped in try/catch"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "keyboard-listener-cleanup",
+      "resource": "window keydown listener",
+      "create_path": "window.addEventListener('keydown', handleKeyDown)",
+      "cleanup_path": "return () => window.removeEventListener('keydown', handleKeyDown)",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx keyboard shortcut effect",
+        "npm --prefix workspace-monitor run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "local-storage-bounded-write",
+      "resource": "localStorage pinned sections",
+      "create_path": "window.localStorage.setItem(PINNED_SECTIONS_STORAGE_KEY, JSON.stringify(pinnedSections))",
+      "cleanup_path": "No open handle is created; value is bounded and overwritten by key.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Pinned section IDs are capped with slice(0, 6)",
+        "Malformed storage values are removed or ignored without throwing into render."
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "bounded-client-state",
+      "metric": "bounded command/pinned/recent state sizes",
+      "tool": "source inspection plus TypeScript check",
+      "threshold": "Pinned sections <= 6, recent sections <= 5, command palette result render <= 18 items.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "togglePinnedSection(...).slice(0, 6)",
+        "recentSections update .slice(0, 5)",
+        "filteredCommandItems.slice(0, 18)"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No subprocess, network connection, timer, stream, browser automation, or server resource was added."
+  ]
+}

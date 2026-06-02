@@ -52,6 +52,20 @@ type Section = {
   purpose: string;
 };
 
+type CommandItem = {
+  id: string;
+  label: string;
+  detail: string;
+  group: string;
+  icon: LucideIcon;
+  badge?: string;
+  keywords: string[];
+  run: () => void;
+};
+
+const PINNED_SECTIONS_STORAGE_KEY = "workspace-monitor:pinned-sections";
+const defaultPinnedSections: SectionId[] = ["overview", "desktop", "intent", "agents"];
+
 const featureGroups: Array<{
   id: FeatureGroupId;
   label: string;
@@ -844,6 +858,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [sourceProject, setSourceProject] = useState("all");
   const [sourceLanguage, setSourceLanguage] = useState("all");
   const [selectedSourceId, setSelectedSourceId] = useState("");
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+  const [commandQuery, setCommandQuery] = useState("");
+  const commandInputRef = useRef<HTMLInputElement>(null);
+  const [pinnedSections, setPinnedSections] = useState<SectionId[]>(defaultPinnedSections);
+  const [recentSections, setRecentSections] = useState<SectionId[]>(["overview"]);
   const viewModes = snapshot.viewModeCatalog?.modes?.length ? snapshot.viewModeCatalog.modes : fallbackViewModes;
   const languageModes = snapshot.languageModeCatalog?.modes?.length ? snapshot.languageModeCatalog.modes : fallbackLanguageModes;
   const [viewMode, setViewMode] = useState(snapshot.viewModeCatalog?.defaultMode || "superadmin_developer");
@@ -856,6 +875,59 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [selectedModeFunctionGroupId, setSelectedModeFunctionGroupId] = useState(
     modeFunctionCatalog.groups[0]?.id || "view_mode"
   );
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(PINNED_SECTIONS_STORAGE_KEY);
+      if (!stored) {
+        return;
+      }
+      const parsed = JSON.parse(stored);
+      if (!Array.isArray(parsed)) {
+        return;
+      }
+      const nextSections = parsed.filter((item): item is SectionId => sectionIds.has(item as SectionId)).slice(0, 6);
+      if (nextSections.length > 0) {
+        setPinnedSections(nextSections);
+      }
+    } catch {
+      try {
+        window.localStorage.removeItem(PINNED_SECTIONS_STORAGE_KEY);
+      } catch {
+        // Local storage can be unavailable in hardened browser contexts.
+      }
+    }
+  }, []);
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(PINNED_SECTIONS_STORAGE_KEY, JSON.stringify(pinnedSections));
+    } catch {
+      // Local storage can be unavailable in hardened browser contexts.
+    }
+  }, [pinnedSections]);
+  useEffect(() => {
+    setRecentSections((previous) => [section, ...previous.filter((item) => item !== section)].slice(0, 5));
+  }, [section]);
+  useEffect(() => {
+    if (!commandPaletteOpen) {
+      return;
+    }
+    commandInputRef.current?.focus();
+  }, [commandPaletteOpen]);
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const key = event.key.toLowerCase();
+      if ((event.metaKey || event.ctrlKey) && key === "k") {
+        event.preventDefault();
+        setCommandPaletteOpen((current) => !current);
+        return;
+      }
+      if (event.key === "Escape") {
+        setCommandPaletteOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
   const currentViewMode = useMemo(() => {
     return viewModes.find((mode) => mode.id === viewMode) || viewModes[0] || fallbackViewModes[2];
   }, [viewMode, viewModes]);
@@ -887,27 +959,18 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     }
 
     if (groupId === "section_location" && sectionIds.has(optionId as SectionId)) {
-      const targetSection = optionId as SectionId;
-      if (!currentViewMode.allowedSections.includes(targetSection)) {
-        const modeWithSection =
-          viewModes.find((mode) => mode.id === "superadmin_developer" && mode.allowedSections.includes(targetSection)) ||
-          viewModes.find((mode) => mode.allowedSections.includes(targetSection));
-        if (modeWithSection) {
-          setViewMode(modeWithSection.id);
-        }
-      }
-      setSection(targetSection);
+      openSection(optionId as SectionId);
       return;
     }
 
     if (["desktop_session_mode", "task_pipe", "cli_adapter"].includes(groupId)) {
-      setSection("desktop");
+      openSection("desktop");
       return;
     }
 
     const group = modeFunctionCatalog.groups.find((item) => item.id === groupId);
     const option = group?.options.find((item) => item.id === optionId);
-    setSection("documents");
+    openSection("documents");
     setCategory("all");
     setQuery(option?.sourcePath || group?.sourcePath || option?.label || group?.label || "");
   };
@@ -1172,8 +1235,136 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         return item ? currentViewMode.allowedSections.includes(item.id) : false;
       });
   }, [currentViewMode.allowedSections, sectionById]);
+  const openSection = (targetSection: SectionId) => {
+    if (!currentViewMode.allowedSections.includes(targetSection)) {
+      const modeWithSection =
+        viewModes.find((mode) => mode.id === "superadmin_developer" && mode.allowedSections.includes(targetSection)) ||
+        viewModes.find((mode) => mode.allowedSections.includes(targetSection));
+      if (modeWithSection) {
+        setViewMode(modeWithSection.id);
+      }
+    }
+    setSection(targetSection);
+  };
+  const togglePinnedSection = (targetSection: SectionId) => {
+    setPinnedSections((previous) => {
+      if (previous.includes(targetSection)) {
+        return previous.filter((item) => item !== targetSection);
+      }
+      return [targetSection, ...previous].slice(0, 6);
+    });
+  };
+  const pinnedVisibleSections = pinnedSections
+    .map((id) => sectionById.get(id))
+    .filter((item): item is Section => {
+      return item ? currentViewMode.allowedSections.includes(item.id) : false;
+    });
+  const recentVisibleSections = recentSections
+    .map((id) => sectionById.get(id))
+    .filter((item): item is Section => {
+      return item ? currentViewMode.allowedSections.includes(item.id) : false;
+    });
   const nextActionLabel = collaborationBoard.nextActions[0]?.nextAction || "No pending handoff";
   const currentSectionLabel = sections.find((item) => item.id === section)?.label || "Overview";
+  const currentSection = sectionById.get(section);
+  const commandItems: CommandItem[] = [
+    ...visibleSections.map((item) => ({
+      id: `section-${item.id}`,
+      label: item.label,
+      detail: item.purpose,
+      group: "Section",
+      icon: item.icon,
+      badge: sectionNavMeta[item.id],
+      keywords: [item.id, item.label, item.shortLabel, item.purpose],
+      run: () => openSection(item.id)
+    })),
+    ...viewModes.map((mode) => ({
+      id: `view-${mode.id}`,
+      label: mode.label,
+      detail: mode.intent,
+      group: "View Mode",
+      icon: ShieldCheck,
+      badge: currentViewMode.id === mode.id ? "active" : undefined,
+      keywords: [mode.id, mode.label, mode.intent],
+      run: () => selectViewMode(mode.id)
+    })),
+    ...languageModes.map((mode) => ({
+      id: `language-${mode.id}`,
+      label: mode.label,
+      detail: mode.intent,
+      group: "Language",
+      icon: Languages,
+      badge: currentLanguageMode.id === mode.id ? "active" : undefined,
+      keywords: [mode.id, mode.label, mode.intent],
+      run: () => {
+        setLanguageMode(mode.id);
+        setCategory("all");
+        setHistoryCategory("all");
+      }
+    })),
+    ...viewCategories.slice(0, 10).map((item) => ({
+      id: `category-${item}`,
+      label: categoryLabel(item),
+      detail: `Documents filter: ${item}`,
+      group: "Document Filter",
+      icon: ListFilter,
+      badge: item === category ? "active" : undefined,
+      keywords: [item, categoryLabel(item), "documents", "filter"],
+      run: () => {
+        openSection("documents");
+        setCategory(item);
+      }
+    })),
+    {
+      id: "action-attention",
+      label: attentionState.action,
+      detail: attentionState.title,
+      group: "Quick Action",
+      icon: attentionState.icon,
+      badge: attentionState.label,
+      keywords: ["attention", "now", attentionState.label, attentionState.title],
+      run: () => openSection(attentionState.section)
+    },
+    {
+      id: "action-evidence",
+      label: "Evidence Trail",
+      detail: `${visibleWebSearches.toLocaleString("ko-KR")} web searches / ${visibleEvaluations.toLocaleString("ko-KR")} evaluations`,
+      group: "Quick Action",
+      icon: FileSearch,
+      badge: `${visibleWebSearches}/${visibleEvaluations}`,
+      keywords: ["evidence", "web search", "evaluation", "documents"],
+      run: () => openSection("documents")
+    },
+    {
+      id: "action-reset-filters",
+      label: "Reset Filters",
+      detail: "검색어, 문서, 히스토리, 소스 필터를 초기화합니다.",
+      group: "Quick Action",
+      icon: ListFilter,
+      keywords: ["reset", "filter", "search", "clear"],
+      run: () => {
+        setQuery("");
+        setCategory("all");
+        setHistoryDate("all");
+        setHistoryCategory("all");
+        setSourceProject("all");
+        setSourceLanguage("all");
+      }
+    }
+  ];
+  const normalizedCommandQuery = commandQuery.trim().toLowerCase();
+  const filteredCommandItems = normalizedCommandQuery
+    ? commandItems.filter((item) =>
+        `${item.group} ${item.label} ${item.detail} ${item.keywords.join(" ")}`
+          .toLowerCase()
+          .includes(normalizedCommandQuery)
+      )
+    : commandItems.slice(0, 18);
+  const runCommandItem = (item: CommandItem) => {
+    item.run();
+    setCommandPaletteOpen(false);
+    setCommandQuery("");
+  };
 
   return (
     <main>
@@ -1214,12 +1405,99 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         </div>
       </section>
 
+      <section className="app-control-bar" aria-label="App quick controls">
+        <button className="command-trigger" type="button" onClick={() => setCommandPaletteOpen(true)}>
+          <Search size={17} aria-hidden="true" />
+          <span>
+            <strong>Command Palette</strong>
+            <small>{commandItems.length.toLocaleString("ko-KR")} actions / sections / filters</small>
+          </span>
+        </button>
+        <div className="app-chip-group" aria-label="Pinned functions">
+          <span>Pinned</span>
+          {pinnedVisibleSections.map((item) => (
+            <button key={item.id} type="button" onClick={() => openSection(item.id)} className={section === item.id ? "active" : ""}>
+              <item.icon size={14} aria-hidden="true" />
+              <strong>{item.shortLabel}</strong>
+            </button>
+          ))}
+          {currentSection && (
+            <button type="button" onClick={() => togglePinnedSection(section)}>
+              <CheckCircle2 size={14} aria-hidden="true" />
+              <strong>{pinnedSections.includes(section) ? "Unpin" : "Pin"}</strong>
+            </button>
+          )}
+        </div>
+        <div className="app-chip-group recent" aria-label="Recent sections">
+          <span>Recent</span>
+          {recentVisibleSections.slice(0, 4).map((item) => (
+            <button key={item.id} type="button" onClick={() => openSection(item.id)} className={section === item.id ? "active" : ""}>
+              <Clock3 size={14} aria-hidden="true" />
+              <strong>{item.shortLabel}</strong>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {commandPaletteOpen && (
+        <div
+          className="command-palette-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setCommandPaletteOpen(false);
+            }
+          }}
+        >
+          <section className="command-palette" role="dialog" aria-modal="true" aria-label="Command palette">
+            <div className="command-palette-search">
+              <Search size={18} aria-hidden="true" />
+              <input
+                ref={commandInputRef}
+                value={commandQuery}
+                onChange={(event) => setCommandQuery(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && filteredCommandItems[0]) {
+                    runCommandItem(filteredCommandItems[0]);
+                  }
+                }}
+                placeholder="섹션, 보기 모드, 문서 필터, 빠른 실행 검색"
+              />
+              <button type="button" onClick={() => setCommandPaletteOpen(false)}>
+                Close
+              </button>
+            </div>
+            <div className="command-palette-meta">
+              <span>{filteredCommandItems.length.toLocaleString("ko-KR")} results</span>
+              <span>{currentViewMode.label}</span>
+            </div>
+            <div className="command-palette-results">
+              {filteredCommandItems.length ? (
+                filteredCommandItems.slice(0, 18).map((item) => (
+                  <button key={item.id} type="button" onClick={() => runCommandItem(item)}>
+                    <item.icon size={17} aria-hidden="true" />
+                    <span>
+                      <small>{item.group}</small>
+                      <strong>{item.label}</strong>
+                      <em>{item.detail}</em>
+                    </span>
+                    {item.badge && <b>{item.badge}</b>}
+                  </button>
+                ))
+              ) : (
+                <p className="empty-state">일치하는 command가 없습니다.</p>
+              )}
+            </div>
+          </section>
+        </div>
+      )}
+
       <section className="core-feature-rail" aria-label="Core platform functions">
         {coreFunctionSections.map((item) => (
           <button
             key={item.id}
             className={section === item.id ? "active" : ""}
-            onClick={() => setSection(item.id)}
+            onClick={() => openSection(item.id)}
             type="button"
             title={item.purpose}
             aria-current={section === item.id ? "page" : undefined}
@@ -1253,7 +1531,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <button
                   key={item.id}
                   className={section === item.id ? "active" : ""}
-                  onClick={() => setSection(item.id)}
+                  onClick={() => openSection(item.id)}
                   type="button"
                   title={item.purpose}
                   aria-current={section === item.id ? "page" : undefined}
@@ -1277,19 +1555,19 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           </div>
         </div>
         <div className="operator-strip-actions">
-          <button type="button" onClick={() => setSection(attentionState.section)}>
+          <button type="button" onClick={() => openSection(attentionState.section)}>
             <ArrowRight size={15} aria-hidden="true" />
             <span>{attentionState.action}</span>
           </button>
-          <button type="button" onClick={() => setSection("agents")}>
+          <button type="button" onClick={() => openSection("agents")}>
             <Inbox size={15} aria-hidden="true" />
             <span>{truncateText(nextActionLabel, 34)}</span>
           </button>
-          <button type="button" onClick={() => setSection("documents")}>
+          <button type="button" onClick={() => openSection("documents")}>
             <FileSearch size={15} aria-hidden="true" />
             <span>{visibleWebSearches.toLocaleString("ko-KR")} / {visibleEvaluations.toLocaleString("ko-KR")}</span>
           </button>
-          <button type="button" onClick={() => setSection("desktop")}>
+          <button type="button" onClick={() => openSection("desktop")}>
             <SquareTerminal size={15} aria-hidden="true" />
             <span>Runtime</span>
           </button>
@@ -1352,7 +1630,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               <h2>{attentionState.title}</h2>
               <p>{attentionState.detail}</p>
               <div className="command-actions">
-                <button type="button" onClick={() => setSection(attentionState.section)}>
+                <button type="button" onClick={() => openSection(attentionState.section)}>
                   <span>{attentionState.action}</span>
                   <ArrowRight size={15} aria-hidden="true" />
                 </button>
@@ -1378,7 +1656,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               <button
                 key={step.label}
                 className={`spine-step spine-${step.tone}`}
-                onClick={() => step.section && setSection(step.section)}
+                onClick={() => step.section && openSection(step.section)}
                 type="button"
                 disabled={!step.section}
               >
@@ -1403,7 +1681,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <button
                   key={item.id}
                   className={section === item.id ? "active" : ""}
-                  onClick={() => setSection(item.id)}
+                  onClick={() => openSection(item.id)}
                   type="button"
                   title={item.purpose}
                 >
@@ -1422,8 +1700,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             lanes={visibleUnifiedLanes.slice(0, 8)}
             signalTypes={visibleUnifiedSignalTypes.slice(0, 8)}
             events={visibleUnifiedEvents.slice(0, 14)}
-            onOpenHistory={() => setSection("history")}
-            onOpenAgents={() => setSection("agents")}
+            onOpenHistory={() => openSection("history")}
+            onOpenAgents={() => openSection("agents")}
           />
 
           <ModeFunctionSwitchboard
@@ -1436,27 +1714,27 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           <StructureBackbonePanel
             overview={structureOverview}
             compact
-            onOpenStructure={() => setSection("structure")}
-            onOpenSource={() => setSection("source")}
+            onOpenStructure={() => openSection("structure")}
+            onOpenSource={() => openSection("source")}
           />
 
           <ClaudeCodeTransferPanel
             transfer={claudeCodeDesignTransfer}
-            onOpenDesktop={() => setSection("desktop")}
-            onOpenDocuments={() => setSection("documents")}
+            onOpenDesktop={() => openSection("desktop")}
+            onOpenDocuments={() => openSection("documents")}
           />
 
           <PhilosophyFeatureFactoryPanel
             extraction={philosophyFeatureExtraction}
-            onOpenAgents={() => setSection("agents")}
-            onOpenDocuments={() => setSection("documents")}
+            onOpenAgents={() => openSection("agents")}
+            onOpenDocuments={() => openSection("documents")}
           />
 
           <IntentFeatureMapPanel
             map={intentFeatureMap}
-            onOpenIntent={() => setSection("intent")}
+            onOpenIntent={() => openSection("intent")}
             onOpenDocuments={() => {
-              setSection("documents");
+              openSection("documents");
               setCategory("intent-feature-map");
             }}
           />
@@ -1467,7 +1745,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <p className="eyebrow">Attention</p>
                 <h2>다음 행동과 근거 trail</h2>
               </div>
-              <button type="button" onClick={() => setSection(attentionItems.length ? "agents" : "documents")}>
+              <button type="button" onClick={() => openSection(attentionItems.length ? "agents" : "documents")}>
                 <Inbox size={16} aria-hidden="true" />
                 <span>{attentionItems.length ? "결정함 보기" : "문서 보기"}</span>
               </button>
@@ -1528,7 +1806,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <p className="eyebrow">Agent Map</p>
                 <h2>에이전트 인벤토리</h2>
               </div>
-              <button type="button" onClick={() => setSection("agents")}>
+              <button type="button" onClick={() => openSection("agents")}>
                 <Bot size={16} aria-hidden="true" />
                 <span>에이전트 보기</span>
               </button>
@@ -1553,7 +1831,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <p className="eyebrow">Recent</p>
                 <h2>최근 히스토리</h2>
               </div>
-              <button type="button" onClick={() => setSection("history")}>
+              <button type="button" onClick={() => openSection("history")}>
                 <History size={16} aria-hidden="true" />
                 <span>히스토리 보기</span>
               </button>
@@ -1683,9 +1961,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           <IntentFeatureMapPanel
             map={intentFeatureMap}
             full
-            onOpenIntent={() => setSection("intent")}
+            onOpenIntent={() => openSection("intent")}
             onOpenDocuments={() => {
-              setSection("documents");
+              openSection("documents");
               setCategory("intent-feature-map");
             }}
           />
@@ -1696,8 +1974,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         <section className="structure-grid">
           <StructureBackbonePanel
             overview={structureOverview}
-            onOpenStructure={() => setSection("structure")}
-            onOpenSource={() => setSection("source")}
+            onOpenStructure={() => openSection("structure")}
+            onOpenSource={() => openSection("source")}
           />
 
           <section className="panel structure-pressure-panel">

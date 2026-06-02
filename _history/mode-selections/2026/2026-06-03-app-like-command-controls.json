@@ -1,0 +1,13 @@
+{
+  "task": "Workspace Monitor app-like command controls",
+  "selected_mode": "standard",
+  "reason": "The request adds meaningful app-like UI interactions and updates project requirements, but does not add a new governance policy, dependency, server store, or cross-workspace runtime contract.",
+  "web_first_completed": true,
+  "memory_bootstrap_completed": true,
+  "large_scope_decomposition_required": false,
+  "view_mode": "superadmin_developer",
+  "install_mode": "not_applicable",
+  "resource_risk_occurred": true,
+  "resource_risk_reason": "The feature adds a global keyboard event listener and localStorage persistence; cleanup and failure handling must be verified.",
+  "selected_at": "2026-06-03"
+}
