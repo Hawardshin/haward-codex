@@ -1,6 +1,6 @@
 # 검증 기록
 
-## 예정 검증
+## 검증 계획
 
 - `PYTHONPATH=src python3 -m unittest tests/test_notifications.py`
 - `PYTHONPATH=src python3 -m unittest discover -s tests`

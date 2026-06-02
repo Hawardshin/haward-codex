@@ -1,0 +1,143 @@
+{
+  "task": "Ground whole-workspace completeness audit claims.",
+  "output_summary": "The workspace health gate was expanded, one structure-audit false positive was fixed, stale unfinished-looking spec signals were cleaned, and the final health report passed.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user-request",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "durable request summary"
+    },
+    {
+      "evidence_id": "health-report",
+      "source": "_history/evaluations/2026/2026-06-02-workspace-completeness-health-report.json",
+      "source_type": "test_result",
+      "checked_on": "2026-06-02",
+      "reliability": "saved local health report"
+    },
+    {
+      "evidence_id": "structure-audit-code",
+      "source": "_tools/structure-audit/src/structure_audit.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "local tool source"
+    },
+    {
+      "evidence_id": "workspace-health-code",
+      "source": "_tools/workspace-health/src/workspace_health/checks.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "local tool source"
+    },
+    {
+      "evidence_id": "stale-scan",
+      "source": "rg stale unfinished marker scan",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "local command output"
+    },
+    {
+      "evidence_id": "github-planning",
+      "source": "https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/planning-and-tracking-work-for-your-team-or-project",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "GitHub official documentation"
+    },
+    {
+      "evidence_id": "nx-folder",
+      "source": "https://nx.dev/docs/concepts/decisions/folder-structure",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Nx official documentation"
+    },
+    {
+      "evidence_id": "opentelemetry-spans",
+      "source": "https://opentelemetry.io/docs/specs/otel/trace/api",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "OpenTelemetry official specification"
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The final workspace-health gate passed with 25 checks and 0 failures.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "health-report"
+      ],
+      "verification_steps": [
+        "Ran python3 _tools/workspace-health/src/workspace_health.py --include-build --json."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The structure-audit false positive for root generated output was fixed.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "structure-audit-code",
+        "health-report"
+      ],
+      "verification_steps": [
+        "Added generated_output classification.",
+        "Ran structure-audit tests and workspace-health."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "workspace-health now includes privacy audit, presentation browser validation, platform desktop readiness, current core config contracts, and workspace-monitor build.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workspace-health-code",
+        "health-report"
+      ],
+      "verification_steps": [
+        "Reviewed workspace-health checks.py.",
+        "Ran workspace-health --include-build."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Stale unfinished-looking spec markers for planned validation headings and unchecked final commit/push tasks were removed.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "stale-scan"
+      ],
+      "verification_steps": [
+        "Ran rg for planned validation heading and unchecked final commit/push patterns."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "External references support explicit work tracking, deliberate monorepo folder structure, and phase/span-style timing as useful project health principles.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "github-planning",
+        "nx-folder",
+        "opentelemetry-spans"
+      ],
+      "verification_steps": [
+        "Recorded web search queries and sources in the web-search record."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "This audit improves deterministic coverage but cannot prove every historical claim is semantically complete."
+  ],
+  "limitation_notes": [
+    "_private contents were not inspected.",
+    "Rust/Tauri build remains blocked by missing Rust toolchain according to platform-desktop readiness output; this is an expected warning, not a failure."
+  ]
+}

@@ -1,6 +1,6 @@
 # 검증: 런타임 조사/설계
 
-## 예정 검증
+## 검증 계획
 
 - `python3 -m json.tool agent-platform/configs/runtime/language-decision-registry.json`
 - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/runtime/language-decision-registry.json`

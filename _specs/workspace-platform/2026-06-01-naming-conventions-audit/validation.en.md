@@ -1,6 +1,6 @@
 # Validation: Naming Rules And Audit
 
-## Planned Checks
+## Verification Plan
 
 - `python3 _tools/naming-audit/src/naming_audit.py --check`
 - `python3 -m unittest discover -s _tools/naming-audit/tests`

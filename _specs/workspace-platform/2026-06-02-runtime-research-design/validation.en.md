@@ -1,6 +1,6 @@
 # Validation: Runtime Research/Design
 
-## Planned Checks
+## Verification Plan
 
 - `python3 -m json.tool agent-platform/configs/runtime/language-decision-registry.json`
 - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/runtime/language-decision-registry.json`

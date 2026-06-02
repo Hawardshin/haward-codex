@@ -1,6 +1,6 @@
 # Validation: CLI Adapter Boundary
 
-## Planned Checks
+## Verification Plan
 
 - `python3 -m json.tool agent-platform/configs/integrations/cli-adapter-registry.json`
 - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json`

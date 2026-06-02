@@ -1,6 +1,6 @@
 # Validation: Workspace Monitor View Mode Selector
 
-## Planned Checks
+## Verification Plan
 
 - `npm run collect`
 - `npm test`

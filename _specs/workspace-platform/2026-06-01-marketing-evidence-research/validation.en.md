@@ -1,6 +1,6 @@
 # Validation Record
 
-## Planned Checks
+## Verification Plan
 
 - `python3 -m json.tool agent-platform/configs/research/marketing-evidence-profile.json`
 - `python3 -m json.tool agent-platform/configs/research/source-registry.json`

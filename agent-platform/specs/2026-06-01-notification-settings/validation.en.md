@@ -1,6 +1,6 @@
 # Validation Record
 
-## Planned Checks
+## Verification Plan
 
 - `PYTHONPATH=src python3 -m unittest tests/test_notifications.py`
 - `PYTHONPATH=src python3 -m unittest discover -s tests`

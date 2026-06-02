@@ -1,6 +1,6 @@
 # Validation: Human Decision Inbox
 
-## Planned Checks
+## Verification Plan
 
 - `python3 -m json.tool _ops/coordination/human-decision-inbox.json`
 - `python3 -m json.tool agent-platform/configs/usage/ai-usage-gap-profile.json`

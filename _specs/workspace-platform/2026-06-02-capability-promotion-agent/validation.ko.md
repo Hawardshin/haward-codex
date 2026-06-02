@@ -1,6 +1,6 @@
 # 검증
 
-## 예정 명령
+## 검증 계획
 
 ```bash
 cd agent-platform

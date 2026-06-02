@@ -1,6 +1,6 @@
 # 검증: 코딩 프로젝트 bootstrap
 
-## 예정 검증
+## 검증 계획
 
 - `python3 -m unittest discover -s _tools/coding-project-bootstrap/tests`
 - `python3 _tools/coding-project-bootstrap/src/coding_project_bootstrap.py list`

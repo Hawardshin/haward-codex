@@ -1,6 +1,6 @@
 # Validation: Work Mode Enforcement
 
-## Planned Checks
+## Verification Plan
 
 - `python3 -m json.tool agent-platform/configs/workflows/work-mode-registry.json`
 - `PYTHONPATH=src python3 -m agent_platform.cli check-work-modes configs/workflows/work-mode-registry.json`

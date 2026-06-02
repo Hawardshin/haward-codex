@@ -1,0 +1,63 @@
+{
+  "task_id": "2026-06-02-workspace-completeness-audit",
+  "title": "Whole-workspace completeness audit",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked GitHub Docs, Nx, OpenTelemetry, and technical-debt research references."
+    },
+    {
+      "phase_id": "audit_execution",
+      "label": "Existing audits and tests",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Ran agent-platform, tools, workspace-monitor, platform desktop, and presentation browser checks."
+    },
+    {
+      "phase_id": "rework",
+      "label": "Rework",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Fixed structure-audit generated-output classification and expanded workspace-health coverage."
+    },
+    {
+      "phase_id": "documentation",
+      "label": "Requirements, specs, and history",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added REQ-WS-075, spec set, web search record, trace, timing, and evaluation records."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Final verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "workspace-health --include-build passed with 25 checks."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured"
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "The broadest work was not code complexity but proving completeness across generated docs, configs, UI checks, tests, and history records.",
+    "improvement_candidates": [
+      "Persist workspace-health reports automatically when --include-build is run for governance work.",
+      "Add a stale-marker audit for unfinished-looking headings and unchecked final tasks."
+    ]
+  },
+  "evidence": [
+    "_history/evaluations/2026/2026-06-02-workspace-completeness-health-report.json",
+    "_history/web-searches/2026/2026-06-02-workspace-completeness-audit.ko.md",
+    "_specs/workspace-platform/2026-06-02-workspace-completeness-audit/validation.ko.md"
+  ]
+}

@@ -1,6 +1,6 @@
 # Validation: Non-Blocking Clarification
 
-## Planned Checks
+## Verification Plan
 
 - `python3 -m json.tool agent-platform/configs/usage/ai-usage-gap-profile.json`
 - `python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json`

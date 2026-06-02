@@ -1,6 +1,6 @@
 # 검증: Workspace Health 소스 구조 리팩터링
 
-## 예정 검증
+## 검증 계획
 
 - `python3 -m unittest discover -s _tools/workspace-health/tests`
 - `python3 _tools/workspace-health/src/workspace_health.py --list`

@@ -1,6 +1,6 @@
 # Validation: CLI Pipeline Orchestration
 
-## 예정 검증
+## 검증 계획
 
 - `cd agent-platform && python3 -m unittest discover -s tests`
 - `cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline configs/integrations/cli-pipeline-template.json`

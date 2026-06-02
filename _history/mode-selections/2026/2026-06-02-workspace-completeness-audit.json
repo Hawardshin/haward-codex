@@ -1,0 +1,23 @@
+{
+  "task_id": "2026-06-02-workspace-completeness-audit",
+  "selected_mode": "governance",
+  "selection_reason": "The request audits and changes repository-wide quality gates, requirements, specs, history, and evaluation records.",
+  "lighter_modes_rejected": {
+    "quick": "Too broad and durable.",
+    "standard": "Insufficient because the work changes shared governance checks.",
+    "research": "External research was used, but implementation and governance updates were also required.",
+    "ship_first": "The user asked for broad quality improvement, not a minimal first shipment."
+  },
+  "required_closeout_targets": [
+    "web_search_record_targets",
+    "requirements_targets",
+    "spec_targets",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "omission_check_targets",
+    "grounding_checks",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets"
+  ]
+}

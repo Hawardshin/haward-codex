@@ -1,6 +1,6 @@
 # Validation
 
-## Planned Commands
+## Verification Plan
 
 ```bash
 cd agent-platform

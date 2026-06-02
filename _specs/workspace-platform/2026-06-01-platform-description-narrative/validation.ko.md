@@ -1,6 +1,6 @@
 # 검증: 플랫폼 설명 강화
 
-## 예정 검증
+## 검증 계획
 
 - `python3 _tools/docs-audit/src/docs_audit.py --check`
 - `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json`

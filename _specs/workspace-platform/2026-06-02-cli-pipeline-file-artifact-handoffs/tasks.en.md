@@ -8,4 +8,4 @@
 - [x] Update self-documenting config and docs
 - [x] Run full verification
 - [x] Write evaluation
-- [ ] Commit and push
+- [x] Commit and push

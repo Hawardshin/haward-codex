@@ -1,6 +1,6 @@
 # Validation: Runtime Language Direction
 
-## Planned Checks
+## Verification Plan
 
 - `python3 -m json.tool agent-platform/configs/runtime/language-decision-registry.json`
 - `python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json`

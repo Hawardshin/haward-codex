@@ -1,6 +1,6 @@
 # 검증: Workspace Monitor Language Mode Selector
 
-## 예정 검증
+## 검증 계획
 
 - `cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/access/language-mode-registry.json`
 - `cd workspace-monitor && npm run collect`

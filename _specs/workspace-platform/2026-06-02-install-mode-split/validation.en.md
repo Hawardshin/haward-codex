@@ -1,6 +1,6 @@
 # Validation: Install Mode Split
 
-## Planned Checks
+## Verification Plan
 
 - `python3 -m json.tool agent-platform/configs/installations/install-mode-registry.json`
 - `python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json`

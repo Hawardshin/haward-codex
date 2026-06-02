@@ -1,6 +1,6 @@
 # Project Folder Inventory Audit Validation
 
-## Planned Checks
+## Verification Plan
 
 - `python3 -m unittest discover -s _tools/structure-audit/tests`
 - `python3 _tools/structure-audit/src/structure_audit.py --check`

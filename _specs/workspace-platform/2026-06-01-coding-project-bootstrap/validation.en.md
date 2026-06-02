@@ -1,6 +1,6 @@
 # Validation: Coding Project Bootstrap
 
-## Planned Checks
+## Verification Plan
 
 - `python3 -m unittest discover -s _tools/coding-project-bootstrap/tests`
 - `python3 _tools/coding-project-bootstrap/src/coding_project_bootstrap.py list`

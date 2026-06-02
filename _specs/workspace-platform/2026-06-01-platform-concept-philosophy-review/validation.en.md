@@ -1,6 +1,6 @@
 # Validation: Platform Concept And Philosophy Review
 
-## Planned Checks
+## Verification Plan
 
 - `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json`
 - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ...`

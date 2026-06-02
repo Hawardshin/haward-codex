@@ -1,6 +1,6 @@
 # 검증: Workspace Monitor View Mode Selector
 
-## 예정 검증
+## 검증 계획
 
 - `npm run collect`
 - `npm test`

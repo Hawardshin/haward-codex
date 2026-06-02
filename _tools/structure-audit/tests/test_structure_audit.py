@@ -19,7 +19,7 @@ class StructureAuditTests(unittest.TestCase):
         (root / "demo").mkdir()
         (root / "demo" / "README.md").write_text("# Demo\n", encoding="utf-8")
         (root / ".gitignore").write_text(
-            "/_private/\n/outputs/\nnode_modules/\n*.tsbuildinfo\n",
+            "/_private/\n/outputs/\nnode_modules/\n.pytest_cache/\n*.tsbuildinfo\n",
             encoding="utf-8",
         )
         (root / "_ops" / "projects" / "registry.json").write_text(
@@ -49,6 +49,7 @@ class StructureAuditTests(unittest.TestCase):
                     "runtime_adapter_dirs": [{"name": ".cursor"}, {"name": ".agents"}],
                     "generated_output_dirs": [
                         {"pattern": "**/node_modules/"},
+                        {"pattern": "**/.pytest_cache/"},
                         {"pattern": "**/tsconfig.tsbuildinfo"},
                     ],
                 }
@@ -108,6 +109,17 @@ class StructureAuditTests(unittest.TestCase):
         report = audit_structure(root)
 
         self.assertFalse(any("node_modules" in warning for warning in report["warnings"]))
+
+    def test_root_generated_output_directory_is_allowed(self):
+        root = self.make_repo()
+        (root / ".pytest_cache").mkdir()
+
+        report = audit_structure(root)
+
+        self.assertEqual(report["status"], "clean")
+        self.assertTrue(
+            any(item["name"] == ".pytest_cache" and item["class"] == "generated_output" for item in report["classifications"])
+        )
 
     def test_runtime_adapter_root_directory_is_allowed(self):
         root = self.make_repo()

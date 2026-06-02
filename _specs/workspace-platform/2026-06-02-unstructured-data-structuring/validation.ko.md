@@ -1,6 +1,6 @@
 # 검증: 비정형 데이터 정형화
 
-## 예정 검증
+## 검증 계획
 
 - `python3 -m json.tool agent-platform/configs/usage/unstructured-data-structuring-profile.json`
 - `python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json`

@@ -8,4 +8,4 @@
 - [x] Connect router/index
 - [x] Create history, research, evaluation, and timing records
 - [x] Run validation
-- [ ] Commit and push
+- [x] Commit and push

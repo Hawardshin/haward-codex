@@ -1,6 +1,6 @@
 # 검증: CLI 어댑터 경계
 
-## 예정 검증
+## 검증 계획
 
 - `python3 -m json.tool agent-platform/configs/integrations/cli-adapter-registry.json`
 - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json`

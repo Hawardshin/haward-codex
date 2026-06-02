@@ -1,6 +1,6 @@
 # Validation: Unstructured Data Structuring
 
-## Planned Checks
+## Verification Plan
 
 - `python3 -m json.tool agent-platform/configs/usage/unstructured-data-structuring-profile.json`
 - `python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json`

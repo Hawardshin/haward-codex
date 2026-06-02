@@ -1,0 +1,131 @@
+{
+  "task": "Audit the whole workspace for unfinished work, contradictions, odd cases, and completeness gaps.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web-first intake and record source impact.",
+      "source": "AGENTS.md / user durable rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-workspace-completeness-audit.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "whole-workspace-tests",
+      "description": "Run broad audits, tests, browser validation, and build checks.",
+      "source": "UR-2026-06-02-035",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/evaluations/2026/2026-06-02-workspace-completeness-health-report.json",
+        "_specs/workspace-platform/2026-06-02-workspace-completeness-audit/validation.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "fix-structure-false-positive",
+      "description": "Fix the structure-audit false positive for root generated outputs.",
+      "source": "workspace-health failure",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_tools/structure-audit/src/structure_audit.py",
+        "_tools/structure-audit/tests/test_structure_audit.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "expand-health-gate",
+      "description": "Expand workspace-health to cover privacy, current config contracts, presentation browser validation, desktop readiness, and build.",
+      "source": "REQ-WS-075",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_tools/workspace-health/src/workspace_health/checks.py",
+        "_tools/workspace-health/tests/test_workspace_health.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "clean-stale-markers",
+      "description": "Clean stale unfinished-looking validation headings and leftover final commit/push checkboxes.",
+      "source": "stale marker scan",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_specs/workspace-platform/2026-06-02-cli-pipeline-file-artifact-handoffs/tasks.ko.md",
+        "_specs/workspace-platform/2026-06-02-runtime-research-design/tasks.ko.md",
+        "_specs/workspace-platform/2026-06-02-workspace-completeness-audit/validation.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "history-and-evaluation",
+      "description": "Record requirements, spec, plan, request trace, work summary, timing, omission, grounding, and evaluation.",
+      "source": "governance mode",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_specs/workspace-platform/2026-06-02-workspace-completeness-audit/",
+        "_history/request-traces/2026/2026-06-02-workspace-completeness-audit.ko.md",
+        "_history/work-summaries/2026/2026-06-02.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "_tools/workspace-health/src/workspace_health/checks.py",
+      "purpose": "Expanded whole-workspace health gate.",
+      "required": true
+    },
+    {
+      "path": "_tools/structure-audit/src/structure_audit.py",
+      "purpose": "Generated root output classification.",
+      "required": true
+    },
+    {
+      "path": "_history/evaluations/2026/2026-06-02-workspace-completeness-health-report.json",
+      "purpose": "Saved health report.",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-02-workspace-completeness-audit/spec.ko.md",
+      "purpose": "Spec-driven record.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-health",
+      "description": "Expanded health gate passes with build included.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/workspace-health/src/workspace_health.py --include-build --json: 25 checks, 0 failed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "stale-marker-scan",
+      "description": "No stale unfinished validation headings or final commit/push unchecked tasks remain in specs.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "rg stale unfinished marker scan returned no matches"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "The audit is broad but not a semantic proof of every document claim.",
+    "The health report is a point-in-time result for 2026-06-02."
+  ],
+  "notes": [
+    "_private contents were intentionally not inspected."
+  ]
+}

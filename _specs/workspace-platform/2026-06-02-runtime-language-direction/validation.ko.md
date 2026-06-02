@@ -1,6 +1,6 @@
 # 검증: 런타임/언어 방향
 
-## 예정 검증
+## 검증 계획
 
 - `python3 -m json.tool agent-platform/configs/runtime/language-decision-registry.json`
 - `python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json`

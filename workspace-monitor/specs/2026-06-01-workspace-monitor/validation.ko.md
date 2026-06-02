@@ -1,6 +1,6 @@
 # 검증 기록
 
-## 예정 검증
+## 검증 계획
 
 - `npm run collect`
 - `npm test`

@@ -8,4 +8,4 @@
 - [x] self-documenting config와 문서 갱신
 - [x] 전체 검증 실행
 - [x] 평가 작성
-- [ ] commit, push
+- [x] commit, push

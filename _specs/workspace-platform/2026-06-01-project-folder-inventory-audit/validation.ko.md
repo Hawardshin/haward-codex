@@ -1,6 +1,6 @@
 # 프로젝트 폴더 인벤토리 감사 검증
 
-## 예정 검증
+## 검증 계획
 
 - `python3 -m unittest discover -s _tools/structure-audit/tests`
 - `python3 _tools/structure-audit/src/structure_audit.py --check`

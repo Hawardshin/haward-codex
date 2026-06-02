@@ -43,11 +43,18 @@ def audit_structure(repo_root: Path, policy_path: Path | None = None) -> JsonMap
     project_inventories = []
 
     for name in root_dirs:
-        classification = _classify_root_dir(name, registered_projects, reserved_dirs, local_only_dirs, runtime_adapter_dirs)
+        classification = _classify_root_dir(
+            name,
+            registered_projects,
+            reserved_dirs,
+            local_only_dirs,
+            runtime_adapter_dirs,
+            generated_output_patterns,
+        )
         classifications.append({"name": name, "class": classification})
         if classification == "unknown_root":
             gaps.append(
-                f"Root directory '{name}' is neither a registered project, reserved operational folder, local-only folder, nor runtime adapter folder."
+                f"Root directory '{name}' is neither a registered project, reserved operational folder, local-only folder, runtime adapter folder, nor generated output folder."
             )
         if classification == "local_only" and not _gitignore_mentions(gitignore_text, name):
             gaps.append(f"Local-only root directory '{name}' must be ignored in .gitignore.")
@@ -147,6 +154,7 @@ def _classify_root_dir(
     reserved_dirs: set[str],
     local_only_dirs: set[str],
     runtime_adapter_dirs: set[str],
+    generated_output_patterns: list[str],
 ) -> str:
     if name in registered_projects:
         return "registered_project"
@@ -156,6 +164,8 @@ def _classify_root_dir(
         return "local_only"
     if name in runtime_adapter_dirs:
         return "runtime_adapter"
+    if _is_generated_output_name(name, generated_output_patterns):
+        return "generated_output"
     return "unknown_root"
 
 

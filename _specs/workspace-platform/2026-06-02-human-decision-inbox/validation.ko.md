@@ -1,6 +1,6 @@
 # 검증: Human Decision Inbox
 
-## 예정 검증
+## 검증 계획
 
 - `python3 -m json.tool _ops/coordination/human-decision-inbox.json`
 - `python3 -m json.tool agent-platform/configs/usage/ai-usage-gap-profile.json`

@@ -1,6 +1,6 @@
 # Validation: CLI Pipeline Orchestration
 
-## Planned Checks
+## Verification Plan
 
 - `cd agent-platform && python3 -m unittest discover -s tests`
 - `cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline configs/integrations/cli-pipeline-template.json`

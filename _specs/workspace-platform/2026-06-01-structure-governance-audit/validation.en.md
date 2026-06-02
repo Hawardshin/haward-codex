@@ -1,6 +1,6 @@
 # Validation Record
 
-## Planned Checks
+## Verification Plan
 
 - `python3 _tools/structure-audit/src/structure_audit.py --check`
 - `python3 -m unittest discover -s _tools/structure-audit/tests`

@@ -1,6 +1,6 @@
 # Validation: Workspace Monitor Language Mode Selector
 
-## Planned Checks
+## Verification Plan
 
 - `cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/access/language-mode-registry.json`
 - `cd workspace-monitor && npm run collect`

@@ -1,6 +1,6 @@
 # 검증: 설치 모드 분리
 
-## 예정 검증
+## 검증 계획
 
 - `python3 -m json.tool agent-platform/configs/installations/install-mode-registry.json`
 - `python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json`

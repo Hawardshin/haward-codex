@@ -18,6 +18,9 @@ class WorkspaceHealthTests(unittest.TestCase):
         (root / "_tools" / "beta" / "src").mkdir(parents=True)
         (root / "agent-platform").mkdir()
         (root / "presentation-agent").mkdir()
+        (root / "presentation-agent" / "package.json").write_text("{}", encoding="utf-8")
+        (root / "platform-desktop-app").mkdir()
+        (root / "platform-desktop-app" / "package.json").write_text("{}", encoding="utf-8")
         (root / "workspace-monitor").mkdir()
         (root / "workspace-monitor" / "package.json").write_text("{}", encoding="utf-8")
         return root
@@ -35,8 +38,12 @@ class WorkspaceHealthTests(unittest.TestCase):
 
         self.assertIn("docs audit", names)
         self.assertIn("naming audit", names)
+        self.assertIn("privacy audit", names)
         self.assertIn("agent-platform tests", names)
         self.assertIn("presentation-agent tests", names)
+        self.assertIn("presentation-agent browser validation", names)
+        self.assertIn("platform-desktop-app tests", names)
+        self.assertIn("platform-desktop-app readiness", names)
         self.assertIn("tool tests: alpha", names)
         self.assertIn("workspace-monitor tests", names)
         self.assertNotIn("workspace-monitor build", names)

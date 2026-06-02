@@ -1,6 +1,6 @@
 # 검증: View Mode Selection
 
-## 예정 검증
+## 검증 계획
 
 - `PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json`
 - `PYTHONPATH=src python3 -m agent_platform.cli list-view-modes configs/access/view-mode-registry.json`

@@ -1,6 +1,6 @@
 # Validation Record
 
-## Planned Checks
+## Verification Plan
 
 - `npm run collect`
 - `npm test`

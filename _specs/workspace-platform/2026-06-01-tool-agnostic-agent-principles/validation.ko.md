@@ -1,6 +1,6 @@
 # 검증 기록
 
-## 예정 검증
+## 검증 계획
 
 - `python3 _tools/structure-audit/src/structure_audit.py --check`
 - `python3 -m unittest discover -s _tools/structure-audit/tests`

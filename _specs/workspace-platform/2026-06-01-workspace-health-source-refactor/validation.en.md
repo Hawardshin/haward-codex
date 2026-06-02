@@ -1,6 +1,6 @@
 # Validation: Workspace Health Source Structure Refactor
 
-## Planned Checks
+## Verification Plan
 
 - `python3 -m unittest discover -s _tools/workspace-health/tests`
 - `python3 _tools/workspace-health/src/workspace_health.py --list`

@@ -1,6 +1,6 @@
 # 검증: 플랫폼 컨셉과 철학 재검토
 
-## 예정 검증
+## 검증 계획
 
 - `PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json`
 - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ...`

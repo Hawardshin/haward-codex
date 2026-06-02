@@ -1,6 +1,6 @@
 # 검증: 비차단 역질문
 
-## 예정 검증
+## 검증 계획
 
 - `python3 -m json.tool agent-platform/configs/usage/ai-usage-gap-profile.json`
 - `python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json`

@@ -1,0 +1,213 @@
+{
+  "status": "passed",
+  "total": 25,
+  "failed": 0,
+  "categories": [
+    "frontend",
+    "governance",
+    "projects",
+    "tools"
+  ],
+  "checks": [
+    {
+      "name": "docs audit",
+      "category": "governance",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 _tools/docs-audit/src/docs_audit.py --check",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "naming audit",
+      "category": "governance",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 _tools/naming-audit/src/naming_audit.py --check",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "privacy audit",
+      "category": "governance",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 _tools/privacy-audit/src/privacy_audit.py --check",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "structure audit",
+      "category": "governance",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 _tools/structure-audit/src/structure_audit.py --check",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "workspace index freshness",
+      "category": "governance",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 _tools/workspace-index/src/workspace_index.py --check",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "task board freshness",
+      "category": "governance",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 _tools/task-board/src/task_board.py --check",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "memory bootstrap contract",
+      "category": "governance",
+      "cwd": "agent-platform",
+      "command": "/opt/anaconda3/bin/python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "core config contracts",
+      "category": "governance",
+      "cwd": "agent-platform",
+      "command": "/opt/anaconda3/bin/python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/security/sensitive-file-boundary.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/deep-research-profile.json configs/research/coding-research-profile.json configs/research/marketing-evidence-profile.json configs/usage/ai-usage-gap-profile.json configs/usage/unstructured-data-structuring-profile.json configs/workflows/work-mode-registry.json configs/access/view-mode-registry.json configs/access/language-mode-registry.json configs/installations/install-mode-registry.json configs/planning/spec-reconciliation-template.json configs/planning/deep-research-template.json configs/planning/large-scope-decomposition-profile.json configs/integrations/notification-channels.json configs/integrations/cli-adapter-registry.json configs/integrations/cli-pipeline-template.json configs/orchestration/agent-orchestration-registry.json configs/orchestration/capability-promotion-registry.json ../platform-desktop-app/configs/desktop-distribution-registry.json ../platform-desktop-app/configs/user-flow-registry.json ../platform-desktop-app/configs/macos-execution-profile.json ../platform-desktop-app/configs/windows-execution-profile.json ../_docs/registry.json ../_ops/coordination/human-decision-inbox.json ../_ops/installations/registry.json ../_ops/assistant-runtimes/adapter-registry.json ../_ops/naming/naming-policy.json ../_tools/coding-project-bootstrap/configs/blueprints.json ../_tools/work-timer/configs/work-timing-policy.json",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "agent-platform tests",
+      "category": "projects",
+      "cwd": "agent-platform",
+      "command": "/opt/anaconda3/bin/python3 -m unittest discover -s tests",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "presentation-agent tests",
+      "category": "projects",
+      "cwd": "presentation-agent",
+      "command": "/opt/anaconda3/bin/python3 -m unittest discover -s tests",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "presentation-agent browser validation",
+      "category": "frontend",
+      "cwd": "presentation-agent",
+      "command": "npm run test:browser",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "platform-desktop-app tests",
+      "category": "projects",
+      "cwd": "platform-desktop-app",
+      "command": "npm run test",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "platform-desktop-app readiness",
+      "category": "projects",
+      "cwd": "platform-desktop-app",
+      "command": "npm run check",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "tool tests: coding-project-bootstrap",
+      "category": "tools",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 -m unittest discover -s _tools/coding-project-bootstrap/tests",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "tool tests: docs-audit",
+      "category": "tools",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 -m unittest discover -s _tools/docs-audit/tests",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "tool tests: korean-local-review",
+      "category": "tools",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 -m unittest discover -s _tools/korean-local-review/tests",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "tool tests: naming-audit",
+      "category": "tools",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 -m unittest discover -s _tools/naming-audit/tests",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "tool tests: source-collector",
+      "category": "tools",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 -m unittest discover -s _tools/source-collector/tests",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "tool tests: structure-audit",
+      "category": "tools",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 -m unittest discover -s _tools/structure-audit/tests",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "tool tests: work-timer",
+      "category": "tools",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 -m unittest discover -s _tools/work-timer/tests",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "tool tests: workspace-health",
+      "category": "tools",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 -m unittest discover -s _tools/workspace-health/tests",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "tool tests: workspace-index",
+      "category": "tools",
+      "cwd": ".",
+      "command": "/opt/anaconda3/bin/python3 -m unittest discover -s _tools/workspace-index/tests",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "workspace-monitor tests",
+      "category": "frontend",
+      "cwd": "workspace-monitor",
+      "command": "npm run test",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "workspace-monitor typecheck",
+      "category": "frontend",
+      "cwd": "workspace-monitor",
+      "command": "npm run check",
+      "status": "ok",
+      "returncode": 0
+    },
+    {
+      "name": "workspace-monitor build",
+      "category": "frontend",
+      "cwd": "workspace-monitor",
+      "command": "npm run build",
+      "status": "ok",
+      "returncode": 0
+    }
+  ]
+}
