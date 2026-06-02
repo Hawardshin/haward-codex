@@ -1,0 +1,100 @@
+# Multi-CLI Orchestration Runtime
+
+## Purpose
+
+This document defines the runtime shape for making `platform-desktop-app` an installable desktop platform that can use Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, and future AI CLIs without depending on any single one.
+
+Core conclusions:
+
+- The desktop app is not a CLI wrapper. It owns workspace context, task state, decisions, artifacts, history, validation, and reusable data.
+- CLIs are adapter-backed execution providers. If one is missing, the result is `capability_missing`, and the app still opens.
+- Multi-CLI work is a supervised process graph with lane state, output bounds, cancellation, cleanup, and merge gates, not several unrelated terminal windows.
+- If a CLI asks a user question while the user is absent, only the dependent lane pauses; the decision goes to the decision inbox and independent lanes continue.
+- Terminal output is visible evidence, but durable platform state is stored as structured records.
+
+## Runtime Layers
+
+```text
+Tauri desktop shell
+  -> workspace-monitor / future desktop UI
+      -> command center
+      -> run timeline
+      -> decision inbox
+      -> terminal lane panels
+      -> source editor
+  -> platform supervisor boundary
+      -> adapter registry
+      -> process graph planner
+      -> PTY/stream supervisor
+      -> decision deferral router
+      -> artifact/log/data retention manager
+      -> validation and evaluation runner
+  -> external AI CLI adapters
+      -> Claude Code CLI
+      -> Gemini CLI
+      -> Codex CLI
+      -> OpenCode
+```
+
+## Candidate Technology
+
+| Area | Preferred Candidate | Reason | Check Before Implementation |
+| --- | --- | --- | --- |
+| Desktop shell | Tauri v2/Rust | The existing scaffold and macOS/Windows profiles are Tauri-first. | Rust/Tauri installation audit, shell permissions, sidecar, signing gates |
+| Terminal UI | xterm.js | Standard web terminal emulator candidate for a browser-based UI. | addons, theme, accessibility, output bounding, mobile non-goal |
+| PTY/process | Tauri shell plugin, sidecar, separate supervisor candidates | Tauri shell provides scoped process execution, and sidecars support packaged local services. | Real interactive PTY needs a separate POC. Node `node-pty` is an Electron/Node-supervisor candidate, not the default Tauri choice. |
+| Code editing | Monaco Editor | Browser-based editor from VS Code; avoids custom editor work first. | file URIs, model lifecycle, disposal, workers, schema/LSP linkage, dependency audit |
+| editor-agent protocol | Agent Client Protocol | Future candidate for decoupling editors and coding agents. | Defer until editor interoperability is a stronger bottleneck than CLI supervision |
+| long-running supervisor | Go or Python sidecar | Go is a future process-supervisor candidate; Python owns current agent-platform policy and validation. | measured bottleneck, lifecycle cleanup, packaging, signing, rollback |
+
+## Multi-CLI Execution Contract
+
+1. The user enters goal, project, and output type.
+2. Preflight checks Claude Code, Gemini CLI, Codex CLI, and OpenCode availability, version, auth/session, and permission scope.
+3. Each selected CLI becomes a process node.
+4. Fan-out/fan-in work declares merge gates.
+5. Each lane has cwd, env allowlist, timeout, output bound, cancellation, and cleanup policy.
+6. Terminal output is visible in lane panels, while meaningful events become structured records.
+7. If a CLI asks a question, the adapter sends a short defer message only when safe, then pauses only the dependent lane.
+8. The decision packet is stored in the decision inbox.
+9. After the user answers, work resumes from a checkpoint.
+10. Merge gates separate accepted, rejected, conflicting, and deferred evidence before releasing downstream results.
+
+## Data Accumulation
+
+| Data | Storage Direction | Durable Promotion Condition |
+| --- | --- | --- |
+| raw terminal scrollback | product-local runtime log, bounded retention | usually not promoted |
+| terminal output summary | task run record | redaction, source lane, timestamp |
+| CLI process event | process event record | adapter, version, cwd, exit, duration |
+| artifact | owning project `artifacts/` or task artifact store | path boundary, provenance, validation |
+| user question | decision inbox | decision impact, blocked/unblocked work, resume action |
+| accepted learning | project docs, `_research/`, requirement/spec, reusable asset | provenance, freshness, validation, ambiguity handling |
+| large historical corpus | packaged archive, index, optional vector DB | after volume, latency, and retrieval measurements |
+
+Vector DB is not the default. File-system indexes and structured JSON/Markdown come first. Packaging, vector DB, or hybrid search should be compared only after retrieval volume and latency become measured bottlenecks.
+
+## Permissions And Security
+
+- Local command execution from the desktop shell requires command allowlists, args policy, workspace path scope, stdin-write scope, timeout, and kill permission.
+- API keys, tokens, browser cookies, and provider session secrets must not enter installers or durable logs.
+- Interactive stdin write is enabled only when the adapter records that it is safe.
+- Public macOS readiness cannot be claimed without Developer ID signing, hardened runtime, notarization, stapling when applicable, and clean Mac smoke tests.
+- Raw CLI output storage is allowed only when size, sensitivity, and retention are explicit.
+
+## MVP Slices
+
+1. Adapter status UI: show availability, version, and setup-later state for the four CLIs.
+2. Run timeline model: model process lanes, artifacts, decisions, and validation records.
+3. Single-CLI supervised prototype: run one CLI with bounded output, cancel, and cleanup.
+4. Decision deferral prototype: route a CLI question to the decision inbox and pause only the dependent lane.
+5. Multi-CLI fan-out/fan-in: add process graph validation and merge gates.
+6. Source editor: implement Monaco-based read/write scope, diff/review, and save policy.
+7. Data quality layer: validate terminal-derived records before promoting them to reusable knowledge candidates.
+
+## Non-Scope
+
+- This document does not implement CLI execution.
+- Rust/Tauri, xterm.js, Monaco, and PTY dependencies are not installed before installation audit.
+- The app does not own provider authentication for users.
+- This does not claim public installer readiness.

@@ -1,0 +1,83 @@
+{
+  "task": "Multi-CLI desktop orchestration resource review",
+  "work_mode": "governance",
+  "runtime_context": [
+    "future Tauri desktop shell",
+    "future CLI adapter supervisor",
+    "future PTY or stream process lanes",
+    "future terminal output retention",
+    "future source editor model lifecycle"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "future-child-process-orphan",
+      "category": "process",
+      "description": "A future multi-CLI supervisor could leave AI CLI processes running after pause, cancel, or app exit.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The architecture and registries require cancellation, orphan cleanup, timeout, and per-lane cleanup before execution implementation.",
+      "evidence": [
+        "agent-platform/configs/integrations/cli-adapter-registry.json",
+        "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "future-output-growth",
+      "category": "stream",
+      "description": "Multiple terminal lanes can generate unbounded output and grow logs or memory.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The terminal I/O contract requires output bounds, redaction, raw-log retention limits, and structured summaries.",
+      "evidence": [
+        "agent-platform/configs/integrations/cli-adapter-registry.json",
+        "platform-desktop-app/configs/user-flow-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "future-editor-disposal",
+      "category": "memory",
+      "description": "A browser editor can leak models, workers, or listeners if lifecycle is not explicit.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The requirements and architecture call out Monaco model URI, dispose, worker, and lifecycle checks before implementation.",
+      "evidence": [
+        "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+        "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "no-runner-added",
+      "resource": "Actual multi-CLI child process runner",
+      "create_path": "No process runner was implemented in this change.",
+      "cleanup_path": "Not applicable; future implementation must add real cleanup tests.",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md"
+      ],
+      "rationale": "This turn adds architecture and contracts only."
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "no-runtime-measurement",
+      "metric": "child process count, stream memory, editor worker lifecycle",
+      "tool": "Not run",
+      "threshold": "Not applicable until executable supervisor/editor code exists.",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md"
+      ],
+      "rationale": "No new runtime path was added."
+    }
+  ],
+  "notes": [
+    "Future execution and editor implementation must replace this with real measurements."
+  ]
+}

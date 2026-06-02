@@ -13,6 +13,13 @@ const requiredFiles = [
   "configs/user-flow-registry.json",
   "docs/architecture/cross-platform-installable-runtime-decision.ko.md",
   "docs/architecture/cross-platform-installable-runtime-decision.en.md",
+  "docs/architecture/multi-cli-orchestration-runtime.ko.md",
+  "docs/architecture/multi-cli-orchestration-runtime.en.md",
+  "specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+  "specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md",
+  "specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
+  "specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md",
+  "specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md",
   "src-tauri/tauri.conf.json",
   "src-tauri/Cargo.toml",
   "src-tauri/build.rs",
@@ -70,6 +77,25 @@ if (!companionPaths.includes("configs/windows-execution-profile.json")) {
 if (desktopRegistry.recommended_initial_path?.id !== "tauri_first_cross_platform_shell") {
   failures.push("desktop-distribution-registry must record the selected Tauri-first cross-platform path");
 }
+if (!JSON.stringify(desktopRegistry.selected_platform_architecture ?? {}).includes("multi_cli_supervisor")) {
+  failures.push("desktop-distribution-registry must record the multi-CLI supervisor contract");
+}
+
+const userFlowRegistry = readJson("configs/user-flow-registry.json");
+const userFlowSerialized = JSON.stringify(userFlowRegistry);
+for (const requiredPhrase of ["ai_cli_orchestration_flow", "Claude Code", "Gemini CLI", "Codex CLI", "OpenCode"]) {
+  if (!userFlowSerialized.includes(requiredPhrase)) {
+    failures.push(`user-flow-registry must include ${requiredPhrase}`);
+  }
+}
+
+const adapterRegistry = readJson("../agent-platform/configs/integrations/cli-adapter-registry.json");
+const adapterSerialized = JSON.stringify(adapterRegistry);
+for (const requiredPhrase of ["supported_ai_cli_adapters", "interactive_cli_contract", "terminal_io_contract", "claude-code-cli", "gemini-cli", "codex-cli", "opencode-cli"]) {
+  if (!adapterSerialized.includes(requiredPhrase)) {
+    failures.push(`cli-adapter-registry must include ${requiredPhrase}`);
+  }
+}
 
 for (const profilePath of ["configs/macos-execution-profile.json", "configs/windows-execution-profile.json"]) {
   const profile = readJson(profilePath);
@@ -103,4 +129,3 @@ console.log(JSON.stringify(result, null, 2));
 if (failures.length > 0) {
   process.exit(1);
 }
-

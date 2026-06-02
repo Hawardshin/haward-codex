@@ -232,6 +232,16 @@
       "required": true
     },
     {
+      "field": "decision_inbox_flow",
+      "meaning": "How user-answerable questions are captured, batched, answered, and resumed.",
+      "required": true
+    },
+    {
+      "field": "ai_cli_orchestration_flow",
+      "meaning": "How Claude Code, Gemini CLI, Codex CLI, OpenCode, and future AI CLIs are selected, run, paused, merged, and observed.",
+      "required": true
+    },
+    {
       "field": "developer_superadmin_flow",
       "meaning": "Advanced flow for platform builders who need internals, configs, traces, and validators.",
       "required": true
@@ -267,6 +277,16 @@
       "id": "local_first_privacy",
       "principle": "Workspace selection, secrets, external CLI use, and network behavior are explicit.",
       "design_implication": "The app explains local indexing and never bundles private data or tokens into installers."
+    },
+    {
+      "id": "multi_cli_supervised_not_scattered",
+      "principle": "Multiple AI CLIs can run in parallel, but the platform owns task state, questions, artifacts, and verification.",
+      "design_implication": "The UI shows CLI sessions as supervised lanes in one timeline instead of unrelated terminal windows."
+    },
+    {
+      "id": "data_gets_better_through_structure",
+      "principle": "Useful CLI output should become structured records with provenance, validation, and retention policy.",
+      "design_implication": "The user sees durable artifacts, summaries, decisions, and reusable knowledge candidates rather than only raw logs."
     }
   ],
   "user_segments": [
@@ -478,8 +498,10 @@
         "contents": [
           "agent registry",
           "CLI adapters",
+          "AI CLI orchestration lanes",
           "notification channels",
           "read-only source code browser",
+          "source editor",
           "validators",
           "install state"
       ]
@@ -532,7 +554,9 @@
         "show current phase",
         "show elapsed time by phase",
         "show active agents and subprocesses",
+        "show selected CLI adapters and lane status",
         "show produced files",
+        "show terminal output summaries with raw-log access only when allowed",
         "send user questions to decision inbox instead of stopping unrelated lanes"
       ]
     },
@@ -560,6 +584,58 @@
     {
       "step": "interrupt_resume",
       "required_behavior": "When the user answers, resume the blocked task from saved context rather than restarting the whole workflow."
+    }
+  ],
+  "ai_cli_orchestration_flow": [
+    {
+      "step": "select_capabilities",
+      "screen": "Task preflight",
+      "required_behavior": [
+        "show Claude Code, Gemini CLI, Codex CLI, OpenCode, and future adapters as optional capability choices",
+        "show availability, version, auth/session status, permission scope, and setup-later action",
+        "disable missing adapters with capability_missing instead of blocking the task"
+      ]
+    },
+    {
+      "step": "plan_process_graph",
+      "screen": "Orchestration preview",
+      "required_behavior": [
+        "show each selected CLI as a process lane",
+        "show fan-out and fan-in merge gates",
+        "show workspace path, timeout, output bound, environment allowlist, and cancellation policy before execution",
+        "reject hidden shell pipelines for multi-CLI work"
+      ]
+    },
+    {
+      "step": "run_supervised_lanes",
+      "screen": "Run timeline",
+      "required_behavior": [
+        "stream terminal output into visible lane panels",
+        "turn meaningful output into task events, artifact records, and verification notes",
+        "keep raw terminal scrollback bounded, redacted, and separate from durable knowledge",
+        "support pause, cancel, retry, and cleanup per lane"
+      ]
+    },
+    {
+      "step": "handle_cli_question",
+      "screen": "Decision inbox handoff",
+      "required_behavior": [
+        "detect user-answerable CLI questions",
+        "send a safe defer message to the CLI only when stdin write is allowed by the adapter",
+        "pause only the dependent lane",
+        "create a decision packet with impact, default assumption, blocked work, unblocked work, and resume action",
+        "continue independent lanes until a merge gate requires the answer"
+      ]
+    },
+    {
+      "step": "merge_and_review",
+      "screen": "Result review",
+      "required_behavior": [
+        "merge CLI outputs through an explicit acceptance gate",
+        "show accepted, rejected, conflicting, or deferred evidence",
+        "link generated artifacts, code changes, validations, and reusable knowledge candidates",
+        "make unresolved decisions visible before close-out"
+      ]
     }
   ],
   "developer_superadmin_flow": [
@@ -607,6 +683,9 @@
       "group": "Capabilities",
       "settings": [
         "optional CLI adapters",
+        "AI CLI orchestration defaults",
+        "terminal output retention",
+        "source editor integration",
         "notification channels",
         "browser automation availability",
         "presentation and document plugins"
@@ -714,6 +793,16 @@
       "purpose": "Show progress, timing, agents, artifacts, decisions, and verification."
     },
     {
+      "id": "ai_cli_orchestration",
+      "priority": "must",
+      "purpose": "Select Claude Code, Gemini CLI, Codex CLI, OpenCode, or future CLI lanes and preview process graph constraints."
+    },
+    {
+      "id": "terminal_and_code_workspace",
+      "priority": "must",
+      "purpose": "Inspect supervised terminal output and edit source files from a governed workspace surface."
+    },
+    {
       "id": "decision_inbox",
       "priority": "must",
       "purpose": "Collect pending user questions without blocking unrelated work."
@@ -751,6 +840,16 @@
       "measurement": "number of independent lanes paused by a single pending decision"
     },
     {
+      "id": "multi_cli_lane_recovery",
+      "target": "A failed or paused CLI lane should not lose the whole task run when independent lanes have produced usable artifacts.",
+      "measurement": "percentage of multi-CLI runs where independent lane outputs remain reviewable after one lane pauses or fails"
+    },
+    {
+      "id": "structured_output_conversion_rate",
+      "target": "Meaningful CLI output should become structured events, artifacts, decisions, or reusable knowledge candidates.",
+      "measurement": "ratio of accepted terminal-derived records to raw retained scrollback"
+    },
+    {
       "id": "optional_setup_non_blocking_rate",
       "target": "Missing optional CLIs or notification channels should not block core dashboard and history viewing.",
       "measurement": "percentage of optional setup failures that remain capability-scoped"
@@ -761,6 +860,10 @@
     "A first-run path exists for Open Workspace, Create Workspace, and Demo Workspace.",
     "Optional CLI and notification setup can be deferred.",
     "Task execution shows active phase, elapsed time, evidence, artifacts, decisions, and verification state.",
+    "AI CLI orchestration can show Claude Code, Gemini CLI, Codex CLI, and OpenCode as optional adapters without making any one CLI mandatory.",
+    "Interactive CLI questions route to decision inbox and pause only dependent lanes.",
+    "Terminal output is visible in lane context, but durable platform state is stored as structured records with retention and redaction policy.",
+    "Source editing has a planned open-source editor surface and does not require writing a custom editor from scratch.",
     "Developer and superadmin developer views expose internal configs and release gates without cluttering user mode.",
     "Failure recovery is defined for unreadable workspace, missing optional CLI, pending user decision, stale snapshot, and update failure.",
     "No real token, private snapshot, or browser session is bundled into installer artifacts."

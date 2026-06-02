@@ -12,6 +12,8 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 - Keep `workspace-monitor/` as the initial UI source instead of duplicating the monitoring interface.
 - Design the first-run user flow before implementing installer code: open/create/demo workspace, confirm workspace boundary, select view mode, run required readiness checks, then reach the dashboard.
 - Keep Codex, Claude Code, Cursor, Antigravity, notifications, browser automation, and advanced validators as optional capability cards that can be configured later instead of blocking initial use.
+- Treat Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode as the first concrete AI CLI adapter targets for multi-CLI orchestration, while keeping the app usable when any of them is missing.
+- Model real multi-CLI execution as supervised process lanes with process graph validation, terminal I/O bounds, decision inbox routing, artifact retention, merge gates, and cleanup before any executable implementation.
 - Keep `agent-platform/` as the Python-first agent/config/evaluation layer.
 - For macOS, treat `configs/macos-execution-profile.json` as the source of truth for local run, internal `.app`, and public signed/notarized distribution structure.
 - For Windows, treat `configs/windows-execution-profile.json` as the source of truth for local run, internal installer testing, public signed distribution, installer format, WebView2, update, uninstall, and smoke-test structure.
@@ -61,6 +63,7 @@ platform-desktop-app/
 - Windows execution profile: `configs/windows-execution-profile.json`
 - User flow registry: `configs/user-flow-registry.json`
 - Cross-platform runtime decision: `docs/architecture/cross-platform-installable-runtime-decision.ko.md`
+- Multi-CLI orchestration runtime: `docs/architecture/multi-cli-orchestration-runtime.ko.md`
 - Product boundary: `docs/product-boundary.ko.md`
 - Packaging strategy: `docs/packaging-strategy.ko.md`
 - macOS execution structure: `docs/macos-execution-structure.ko.md`
@@ -70,6 +73,7 @@ platform-desktop-app/
 - Tauri scaffold: `src-tauri/`
 - First spec: `specs/2026-06-02-installable-desktop/`
 - Cross-platform runtime spec: `specs/2026-06-02-cross-platform-installable-runtime/`
+- Multi-CLI orchestration spec: `specs/2026-06-02-multi-cli-orchestration-desktop/`
 
 ## Commands
 

@@ -1,0 +1,165 @@
+{
+  "initial_instruction": "지금까지의 구조를 보고 macOS 기본 설치형 데스크톱 앱을 만들 방향을 잡아 달라는 요청. 앱은 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode를 쉽게 세팅하고 다중 실행하되 특정 CLI에 종속되지 않아야 하며, 터미널 출력과 입력, 질문 보류와 decision inbox, 에이전트/모드 관리, 데이터 축적, 소스 코드 편집, 오픈소스 활용, 권한과 리소스 경계를 포함해야 한다.",
+  "result_summary": "Defined the multi-CLI desktop orchestration contract for platform-desktop-app and shared CLI adapter governance. Added optional adapter targets for Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode; documented supervised process lanes, interactive question deferral, decision inbox routing, terminal output structuring, source-editor candidates, data accumulation, resource controls, and validation gates. No real CLI execution runner, dependency install, or signed installer build was performed.",
+  "work_mode": "governance",
+  "changed_files": [
+    "agent-platform/configs/integrations/cli-adapter-registry.json",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/configs/desktop-distribution-registry.json",
+    "platform-desktop-app/configs/user-flow-registry.json",
+    "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md",
+    "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "_requirements/changes/2026-06-02-multi-cli-desktop-orchestration.en.md",
+    "_requirements/reviews/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "_requirements/reviews/2026-06-02-multi-cli-desktop-orchestration.en.md",
+    "_research/topics/desktop-app/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "_research/topics/desktop-app/2026-06-02-multi-cli-desktop-orchestration.en.md",
+    "_history/web-searches/2026/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "_history/web-searches/2026/2026-06-02-multi-cli-desktop-orchestration.en.md",
+    "_history/plans/2026/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "_history/plans/2026/2026-06-02-multi-cli-desktop-orchestration.en.md",
+    "_history/request-traces/2026/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "_history/request-traces/2026/2026-06-02-multi-cli-desktop-orchestration.en.md",
+    "_history/work-timings/2026/2026-06-02-multi-cli-desktop-orchestration.json",
+    "_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-omission-input.json",
+    "_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-resource-input.json",
+    "_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-grounding.json",
+    "_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-cli-pipeline.json",
+    "_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-evaluation-input.json",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/2026/2026-06-02.md"
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json ../platform-desktop-app/configs/desktop-distribution-registry.json ../platform-desktop-app/configs/user-flow-registry.json: self_documenting",
+    "npm --prefix platform-desktop-app run check: ready_for_dependency_install_audit with Rust toolchain warning",
+    "npm --prefix platform-desktop-app test: 6 tests passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-resource-input.json: resource_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-grounding.json: ready_to_publish",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-cli-pipeline.json: pipeline_ready with optional-lane warnings",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-omission-input.json: coverage_ready",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-multi-cli-desktop-orchestration.json: ready with unmeasured phase warnings",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean",
+    "git diff --check: no whitespace errors"
+  ],
+  "references_checked": [
+    "https://code.claude.com/docs/en/overview",
+    "https://github.com/google-gemini/gemini-cli",
+    "https://github.com/openai/codex",
+    "https://opencode.ai/docs/",
+    "https://v2.tauri.app/plugin/shell/",
+    "https://v2.tauri.app/develop/sidecar/",
+    "https://xtermjs.org/docs/",
+    "https://github.com/microsoft/node-pty",
+    "https://github.com/microsoft/monaco-editor",
+    "https://agentclientprotocol.com/get-started/introduction",
+    "agent-platform/configs/integrations/cli-adapter-registry.json",
+    "agent-platform/configs/integrations/cli-pipeline-template.json",
+    "platform-desktop-app/configs/desktop-distribution-registry.json",
+    "platform-desktop-app/configs/user-flow-registry.json",
+    "_ops/workflows/63-installable-software-productization.md",
+    "_ops/workflows/66-cli-adapter-integration.md",
+    "_ops/workflows/71-cli-pipeline-orchestration.md",
+    "_ops/workflows/74-desktop-user-flow-design.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "_research/topics/desktop-app/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md",
+    "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-02-multi-cli-desktop-orchestration.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-omission-input.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "_history/web-searches/2026/2026-06-02-multi-cli-desktop-orchestration.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "_requirements/changes/2026-06-02-multi-cli-desktop-orchestration.en.md",
+    "_requirements/reviews/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "_requirements/reviews/2026-06-02-multi-cli-desktop-orchestration.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.en.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "_history/request-traces/2026/2026-06-02-multi-cli-desktop-orchestration.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-multi-cli-desktop-orchestration.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-resource-input.json"
+  ],
+  "cli_pipeline_occurred": true,
+  "cli_pipeline_targets": [
+    "_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-cli-pipeline.json",
+    "agent-platform/configs/integrations/cli-pipeline-template.json"
+  ],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Implement a single installed-CLI supervisor POC before enabling multi-lane source-affecting actions.",
+    "Run a project-local dependency audit before adding xterm.js, Monaco, node-pty, or Tauri PTY dependencies.",
+    "Add adapter smoke tests for actual Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode installation states.",
+    "Replace unmeasured phase timing with start/stop measured phases for future long governance tasks."
+  ]
+}

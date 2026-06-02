@@ -16,6 +16,10 @@
 | PDA-UX-006 | 사용자 질문은 decision inbox에 모으고, 의존성이 없는 작업은 계속 진행할 수 있어야 한다. | must | decision_inbox_flow 검토 |
 | PDA-UX-007 | 실패 복구는 워크스페이스 읽기 실패, 선택 CLI 누락, 사용자 결정 대기, 오래된 스냅샷, 업데이트 실패를 포함해야 한다. | must | failure_recovery_flows 검토 |
 | PDA-UX-008 | 개발자/슈퍼어드민 모드는 raw config, validator, release gate, coordination, source provenance를 볼 수 있어야 한다. | should | developer_superadmin_flow 검토 |
+| PDA-UX-009 | 작업 preflight는 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode를 선택 가능한 CLI lane으로 보여주고, availability/version/auth/permission/setup-later 상태를 표시해야 한다. | must | `ai_cli_orchestration_flow` 검토 |
+| PDA-UX-010 | 실행 화면은 여러 CLI lane의 terminal output을 보여주되, durable state는 task event, artifact, decision, validation record로 구조화해야 한다. | must | run timeline과 data accumulation contract |
+| PDA-UX-011 | CLI가 사용자 질문을 만들면 decision inbox handoff 화면에서 질문, 영향, 기본 가정, 막힌 lane, 계속 가능한 lane, 재개 action을 보여야 한다. | must | decision inbox flow와 human decision inbox |
+| PDA-UX-012 | 소스 편집 화면은 Monaco Editor 같은 검증된 editor surface를 우선 사용하고, 사용자 모드에서는 안전한 파일 범위와 변경 리뷰를 중심으로 보여야 한다. | should | source editor prototype acceptance |
 
 ## 현재 상태
 

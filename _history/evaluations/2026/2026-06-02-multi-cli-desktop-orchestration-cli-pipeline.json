@@ -1,0 +1,280 @@
+{
+  "pipeline_id": "multi-cli-desktop-supervisor-preimplementation",
+  "purpose": "Preimplementation process graph for a desktop supervisor that can launch optional Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode lanes, capture bounded terminal output, and release accepted structured summaries through a merge gate.",
+  "work_mode": "governance",
+  "risk_level": "high",
+  "processes": [
+    {
+      "process_id": "claude_code_lane",
+      "adapter_id": "claude-code-cli",
+      "command": "claude",
+      "args": [],
+      "cwd": "platform-desktop-app",
+      "env_keys": [
+        "PATH",
+        "LANG",
+        "TERM"
+      ],
+      "timeout_seconds": 1800,
+      "max_output_bytes": 5000000,
+      "required": false
+    },
+    {
+      "process_id": "gemini_cli_lane",
+      "adapter_id": "gemini-cli",
+      "command": "gemini",
+      "args": [],
+      "cwd": "platform-desktop-app",
+      "env_keys": [
+        "PATH",
+        "LANG",
+        "TERM"
+      ],
+      "timeout_seconds": 1800,
+      "max_output_bytes": 5000000,
+      "required": false
+    },
+    {
+      "process_id": "codex_cli_lane",
+      "adapter_id": "codex-cli",
+      "command": "codex",
+      "args": [],
+      "cwd": "platform-desktop-app",
+      "env_keys": [
+        "PATH",
+        "LANG",
+        "TERM"
+      ],
+      "timeout_seconds": 1800,
+      "max_output_bytes": 5000000,
+      "required": false
+    },
+    {
+      "process_id": "opencode_lane",
+      "adapter_id": "opencode-cli",
+      "command": "opencode",
+      "args": [],
+      "cwd": "platform-desktop-app",
+      "env_keys": [
+        "PATH",
+        "LANG",
+        "TERM"
+      ],
+      "timeout_seconds": 1800,
+      "max_output_bytes": 5000000,
+      "required": false
+    },
+    {
+      "process_id": "merge_cli_outputs",
+      "adapter_id": "agent-platform",
+      "command": "python3",
+      "args": [
+        "-m",
+        "agent_platform.cli",
+        "check-grounding",
+        "platform-desktop-app/artifacts/multi-cli-supervisor/grounding-input.json"
+      ],
+      "cwd": "agent-platform",
+      "env_keys": [
+        "PATH",
+        "PYTHONPATH",
+        "LANG"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 1000000,
+      "required": true
+    }
+  ],
+  "pipes": [
+    {
+      "pipe_id": "claude_stdout_to_merge_artifact",
+      "from_process": "claude_code_lane",
+      "from_stream": "stdout",
+      "to_process": "merge_cli_outputs",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "claude_terminal_log",
+      "required": false
+    },
+    {
+      "pipe_id": "gemini_stdout_to_merge_artifact",
+      "from_process": "gemini_cli_lane",
+      "from_stream": "stdout",
+      "to_process": "merge_cli_outputs",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "gemini_terminal_log",
+      "required": false
+    },
+    {
+      "pipe_id": "codex_stdout_to_merge_artifact",
+      "from_process": "codex_cli_lane",
+      "from_stream": "stdout",
+      "to_process": "merge_cli_outputs",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "codex_terminal_log",
+      "required": false
+    },
+    {
+      "pipe_id": "opencode_stdout_to_merge_artifact",
+      "from_process": "opencode_lane",
+      "from_stream": "stdout",
+      "to_process": "merge_cli_outputs",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "opencode_terminal_log",
+      "required": false
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "claude_terminal_log",
+      "kind": "log",
+      "path": "platform-desktop-app/artifacts/multi-cli-supervisor/claude-terminal.ndjson",
+      "produced_by": "claude_code_lane",
+      "consumed_by": [
+        "merge_cli_outputs"
+      ],
+      "required": false,
+      "max_bytes": 5000000,
+      "format": "ndjson",
+      "retention_policy": "Retain bounded raw terminal output only under the owning workspace artifact directory; promote only redacted structured summaries into durable history.",
+      "cleanup_policy": "Prune raw logs according to terminal output retention settings.",
+      "provenance": [
+        "claude_code_lane stdout"
+      ],
+      "validation": [
+        "Output stays below max_bytes.",
+        "Secret redaction runs before durable promotion.",
+        "Detected questions are routed to the decision inbox instead of blocking unrelated lanes."
+      ]
+    },
+    {
+      "artifact_id": "gemini_terminal_log",
+      "kind": "log",
+      "path": "platform-desktop-app/artifacts/multi-cli-supervisor/gemini-terminal.ndjson",
+      "produced_by": "gemini_cli_lane",
+      "consumed_by": [
+        "merge_cli_outputs"
+      ],
+      "required": false,
+      "max_bytes": 5000000,
+      "format": "ndjson",
+      "retention_policy": "Retain bounded raw terminal output only under the owning workspace artifact directory; promote only redacted structured summaries into durable history.",
+      "cleanup_policy": "Prune raw logs according to terminal output retention settings.",
+      "provenance": [
+        "gemini_cli_lane stdout"
+      ],
+      "validation": [
+        "Output stays below max_bytes.",
+        "Secret redaction runs before durable promotion.",
+        "Detected questions are routed to the decision inbox instead of blocking unrelated lanes."
+      ]
+    },
+    {
+      "artifact_id": "codex_terminal_log",
+      "kind": "log",
+      "path": "platform-desktop-app/artifacts/multi-cli-supervisor/codex-terminal.ndjson",
+      "produced_by": "codex_cli_lane",
+      "consumed_by": [
+        "merge_cli_outputs"
+      ],
+      "required": false,
+      "max_bytes": 5000000,
+      "format": "ndjson",
+      "retention_policy": "Retain bounded raw terminal output only under the owning workspace artifact directory; promote only redacted structured summaries into durable history.",
+      "cleanup_policy": "Prune raw logs according to terminal output retention settings.",
+      "provenance": [
+        "codex_cli_lane stdout"
+      ],
+      "validation": [
+        "Output stays below max_bytes.",
+        "Secret redaction runs before durable promotion.",
+        "Detected questions are routed to the decision inbox instead of blocking unrelated lanes."
+      ]
+    },
+    {
+      "artifact_id": "opencode_terminal_log",
+      "kind": "log",
+      "path": "platform-desktop-app/artifacts/multi-cli-supervisor/opencode-terminal.ndjson",
+      "produced_by": "opencode_lane",
+      "consumed_by": [
+        "merge_cli_outputs"
+      ],
+      "required": false,
+      "max_bytes": 5000000,
+      "format": "ndjson",
+      "retention_policy": "Retain bounded raw terminal output only under the owning workspace artifact directory; promote only redacted structured summaries into durable history.",
+      "cleanup_policy": "Prune raw logs according to terminal output retention settings.",
+      "provenance": [
+        "opencode_lane stdout"
+      ],
+      "validation": [
+        "Output stays below max_bytes.",
+        "Secret redaction runs before durable promotion.",
+        "Detected questions are routed to the decision inbox instead of blocking unrelated lanes."
+      ]
+    }
+  ],
+  "execution_policy": {
+    "shell_allowed": false,
+    "argv_arrays_required": true,
+    "explicit_pipe_graph_required": true,
+    "explicit_cwd_required": true,
+    "adapter_allowlist": [
+      "claude-code-cli",
+      "gemini-cli",
+      "codex-cli",
+      "opencode-cli",
+      "agent-platform"
+    ]
+  },
+  "safety_controls": [
+    "adapter_allowlist",
+    "argv_arguments",
+    "shell_disabled_by_default",
+    "explicit_cwd_boundary",
+    "environment_allowlist",
+    "secret_redaction",
+    "output_redaction",
+    "permission_scope",
+    "fallback_behavior",
+    "audit_logging"
+  ],
+  "resource_controls": {
+    "timeout_policy": "Each lane has timeout_seconds; timeout pauses the lane and releases unrelated lanes for continued work.",
+    "max_output_bytes": 21000000,
+    "cancellation_policy": "Cancel child processes through the supervisor and close stdin/stdout/stderr handles when a lane is stopped.",
+    "cleanup_policy": "Close PTY or stream handles, prune bounded raw logs, and remove temporary artifacts when a run is cancelled or archived.",
+    "orphan_process_policy": "Track process groups per lane and terminate descendants on app exit, workspace close, or explicit cancellation.",
+    "backpressure_policy": "Stream visible terminal output with bounded buffers and spill large logs to artifact files before durable structuring."
+  },
+  "merge_strategy": "The merge_cli_outputs gate accepts only bounded, redacted, structured summaries and blocks source-affecting actions until pending human decisions are resolved.",
+  "source_provenance": [
+    "agent-platform/configs/integrations/cli-adapter-registry.json",
+    "platform-desktop-app/configs/desktop-distribution-registry.json",
+    "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md",
+    "_history/web-searches/2026/2026-06-02-multi-cli-desktop-orchestration.ko.md",
+    "https://v2.tauri.app/plugin/shell/",
+    "https://v2.tauri.app/develop/sidecar/",
+    "https://xtermjs.org/docs/",
+    "https://github.com/microsoft/node-pty"
+  ],
+  "plan_evidence": [
+    "The user requested a desktop platform that can run multiple AI CLIs above a CLI-neutral orchestration layer.",
+    "Existing shared CLI adapter policy requires optional adapters and capability_missing fallback rather than single-CLI dependence.",
+    "The decision inbox and omission-prevention rules require pausing only affected work when a human decision is needed."
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-cli-pipeline.json"
+  ],
+  "rollback_plan": [
+    "Do not enable the supervisor runtime until adapter smoke tests pass for at least one installed CLI.",
+    "If any lane fails adapter detection, mark that adapter capability_missing and keep the desktop shell usable.",
+    "If merge or question detection is uncertain, route the run to human review and avoid changing source files."
+  ],
+  "notes": [
+    "This record validates the planned process graph only. It does not execute Claude Code, Gemini CLI, Codex CLI, OpenCode, or install dependencies."
+  ]
+}

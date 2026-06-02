@@ -1,0 +1,124 @@
+{
+  "task": "Multi-CLI desktop orchestration contract",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "four-ai-cli-targets",
+      "description": "Capture Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode as optional adapter candidates.",
+      "source": "UR-2026-06-02-047",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/integrations/cli-adapter-registry.json",
+        "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "no-single-cli-dependency",
+      "description": "Keep the installed app usable without requiring any one AI CLI.",
+      "source": "REQ-WS-085",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/integrations/cli-adapter-registry.json",
+        "platform-desktop-app/configs/desktop-distribution-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "question-deferral",
+      "description": "Route interactive CLI questions to decision inbox and pause only dependent lanes.",
+      "source": "PDA-REQ-015",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/integrations/cli-adapter-registry.json",
+        "platform-desktop-app/configs/user-flow-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "terminal-output-data",
+      "description": "Separate raw terminal output from structured durable records and reusable knowledge candidates.",
+      "source": "PDA-REQ-016",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/integrations/cli-adapter-registry.json",
+        "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "source-editor-open-source",
+      "description": "Prefer mature open-source source editor surfaces instead of custom source editing from scratch.",
+      "source": "PDA-REQ-017",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md",
+        "platform-desktop-app/configs/user-flow-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "actual-execution-out-of-scope",
+      "description": "Make clear that actual CLI execution, dependency installation, and signed installer generation were not performed.",
+      "source": "spec non-scope",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+        "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md",
+      "purpose": "Project-local multi-CLI architecture document",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+      "purpose": "Project-local spec package",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/integrations/cli-adapter-registry.json",
+      "purpose": "Shared adapter contract",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "json-and-config-contract",
+      "description": "Run JSON syntax and config contract checks.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json ../platform-desktop-app/configs/desktop-distribution-registry.json ../platform-desktop-app/configs/user-flow-registry.json: self_documenting"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "desktop-readiness",
+      "description": "Run platform-desktop-app readiness and Node tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app run check: ready_for_dependency_install_audit with Rust toolchain warning",
+        "npm --prefix platform-desktop-app test: 6 tests passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Actual CLI execution and dependency installation are intentionally deferred."
+  ],
+  "notes": [
+    "This is the omission input record; checked result is saved separately."
+  ]
+}

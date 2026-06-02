@@ -39,3 +39,35 @@ test("execution profiles keep optional CLI adapters non-blocking", () => {
   }
 });
 
+test("desktop registry records multi-CLI supervisor contract", () => {
+  const registry = readJson("configs/desktop-distribution-registry.json");
+  const serialized = JSON.stringify(registry);
+
+  assert.match(serialized, /multi_cli_supervisor/);
+  assert.match(serialized, /Claude Code CLI/);
+  assert.match(serialized, /Gemini CLI/);
+  assert.match(serialized, /Codex CLI/);
+  assert.match(serialized, /OpenCode/);
+});
+
+test("user flow exposes AI CLI orchestration and source editing surfaces", () => {
+  const registry = readJson("configs/user-flow-registry.json");
+  const serialized = JSON.stringify(registry);
+
+  assert.ok(Array.isArray(registry.ai_cli_orchestration_flow));
+  assert.match(serialized, /decision inbox/);
+  assert.match(serialized, /terminal output/);
+  assert.match(serialized, /source editor/);
+});
+
+test("shared CLI adapter registry defines concrete AI CLI targets", () => {
+  const registry = JSON.parse(readFileSync(join(root, "../agent-platform/configs/integrations/cli-adapter-registry.json"), "utf8"));
+  const ids = registry.supported_ai_cli_adapters.map((adapter) => adapter.adapter_id);
+
+  for (const id of ["claude-code-cli", "gemini-cli", "codex-cli", "opencode-cli"]) {
+    assert.ok(ids.includes(id));
+  }
+  assert.ok(registry.interactive_cli_contract);
+  assert.ok(registry.terminal_io_contract);
+  assert.ok(registry.data_accumulation_contract);
+});

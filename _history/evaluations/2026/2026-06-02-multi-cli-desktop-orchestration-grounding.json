@@ -1,0 +1,147 @@
+{
+  "task": "Ground multi-CLI desktop orchestration claims",
+  "output_summary": "The change defines an installable desktop app contract for optional Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode adapters, supervised multi-CLI execution, decision deferral, source editing, and structured data accumulation.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "claude-code-docs",
+      "source": "https://code.claude.com/docs/en/overview",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Claude Code documentation."
+    },
+    {
+      "evidence_id": "gemini-cli-repo",
+      "source": "https://github.com/google-gemini/gemini-cli",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Gemini CLI repository."
+    },
+    {
+      "evidence_id": "codex-cli-repo",
+      "source": "https://github.com/openai/codex",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Codex CLI repository."
+    },
+    {
+      "evidence_id": "opencode-docs",
+      "source": "https://opencode.ai/docs/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official OpenCode documentation."
+    },
+    {
+      "evidence_id": "tauri-shell",
+      "source": "https://v2.tauri.app/plugin/shell/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tauri shell plugin documentation."
+    },
+    {
+      "evidence_id": "tauri-sidecar",
+      "source": "https://v2.tauri.app/develop/sidecar/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tauri sidecar documentation."
+    },
+    {
+      "evidence_id": "xterm-js",
+      "source": "https://xtermjs.org/docs/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official xterm.js documentation."
+    },
+    {
+      "evidence_id": "node-pty",
+      "source": "https://github.com/microsoft/node-pty",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Official node-pty repository."
+    },
+    {
+      "evidence_id": "monaco",
+      "source": "https://github.com/microsoft/monaco-editor",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Monaco Editor repository."
+    },
+    {
+      "evidence_id": "local-registries",
+      "source": "agent-platform/configs/integrations/cli-adapter-registry.json and platform-desktop-app/configs/*.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Updated local source-of-truth registries."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The four requested AI CLIs are now recorded as optional adapter candidates in the shared CLI adapter registry.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "local-registries"
+      ],
+      "verification_steps": [
+        "Inspect supported_ai_cli_adapters in cli-adapter-registry.json."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The external sources used for the four CLI candidates were official documentation or official repositories.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "claude-code-docs",
+        "gemini-cli-repo",
+        "codex-cli-repo",
+        "opencode-docs"
+      ],
+      "verification_steps": [
+        "Checked official docs and repositories during web-first intake."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "The desktop app contract now requires supervised process lanes and decision inbox routing before real multi-CLI execution.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "local-registries"
+      ],
+      "verification_steps": [
+        "Inspect interactive_cli_contract, terminal_io_contract, user-flow registry, and desktop distribution registry."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "xterm.js, node-pty, Monaco Editor, Tauri shell, and Tauri sidecar are recorded as candidates or references, not installed dependencies.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-shell",
+        "tauri-sidecar",
+        "xterm-js",
+        "node-pty",
+        "monaco",
+        "local-registries"
+      ],
+      "verification_steps": [
+        "Checked package.json and architecture docs; no dependency install was performed."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Concrete CLI output contracts and prompt detection behavior require installed POCs.",
+    "Tauri interactive PTY implementation needs a separate dependency decision."
+  ],
+  "limitation_notes": [
+    "No real CLI execution supervisor was implemented.",
+    "No xterm.js, Monaco, PTY, Rust/Tauri dependency installation was run."
+  ]
+}

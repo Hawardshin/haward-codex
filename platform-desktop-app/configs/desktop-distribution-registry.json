@@ -9,6 +9,7 @@
       "Read selected_platform_architecture first to understand the current Tauri-first productization decision.",
       "Read candidate_frameworks to understand the alternatives kept as fallback or comparison routes.",
       "Read packaging_targets to understand OS-specific installer and signing expectations.",
+      "Read runtime_strategy and assistant_cli_capabilities before implementing multi-CLI orchestration.",
       "Read release_gates before claiming that a build is production-ready.",
       "Treat commands as planned future commands until dependencies are actually installed and audited."
     ],
@@ -228,6 +229,18 @@
         "language/runtime decision"
       ],
       "last_checked": "2026-06-02"
+    },
+    {
+      "id": "multi_cli_orchestration_runtime",
+      "title": "Multi-CLI Orchestration Runtime",
+      "path": "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "desktop multi-CLI supervisor architecture",
+        "terminal/code editing/open-source component decision",
+        "data accumulation and decision inbox runtime contract"
+      ],
+      "last_checked": "2026-06-02"
     }
   ],
   "structure_rules": [
@@ -287,6 +300,16 @@
         "product_boundary",
         "runtime_strategy",
         "security_privacy_rules"
+      ]
+    },
+    {
+      "id": "multi_cli_execution_requires_supervisor",
+      "rule": "Running Claude Code, Gemini CLI, Codex CLI, OpenCode, or future AI CLIs together requires a platform supervisor that owns process graph state, terminal I/O, decision deferral, artifact retention, and cleanup.",
+      "reason": "A desktop shell that only opens several terminals cannot reliably pause questions, resume work, merge results, or build high-quality reusable data.",
+      "applies_to": [
+        "selected_platform_architecture",
+        "runtime_strategy",
+        "release_gates"
       ]
     },
     {
@@ -403,7 +426,7 @@
   "recommended_initial_path": {
     "id": "tauri_first_cross_platform_shell",
     "status": "selected_for_first_scaffold",
-    "summary": "Build a Tauri v2 desktop shell that wraps the existing workspace-monitor static UI, keeps agent-platform as the Python layer, and treats Codex, Claude Code, Cursor, Antigravity, and other CLIs as optional adapters.",
+    "summary": "Build a Tauri v2 desktop shell that wraps the existing workspace-monitor static UI, keeps agent-platform as the Python layer, and treats Claude Code, Gemini CLI, Codex CLI, OpenCode, and other CLIs as optional adapters.",
     "why": [
       "The repository already has web UI output in workspace-monitor.",
       "A smaller desktop shell is preferable while the product boundary is still forming.",
@@ -460,13 +483,27 @@
     "assistant_cli_capabilities": {
       "status": "optional_adapters",
       "known_targets": [
-        "Codex",
-        "Claude Code",
-        "Cursor",
-        "Antigravity"
+        "Claude Code CLI",
+        "Gemini CLI",
+        "Codex CLI",
+        "OpenCode"
       ],
       "registry_path": "agent-platform/configs/integrations/cli-adapter-registry.json",
       "failure_behavior": "capability_missing disables only the related feature and shows setup guidance"
+    },
+    "multi_cli_supervisor": {
+      "status": "required_before_real_multi_cli_execution",
+      "owns": [
+        "process graph state",
+        "PTY or stream lifecycle",
+        "bounded terminal output capture",
+        "stdin write policy",
+        "question detection and decision inbox routing",
+        "fan-out/fan-in merge gates",
+        "artifact retention and cleanup",
+        "orphan-process cleanup"
+      ],
+      "architecture_doc": "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md"
     },
     "current_machine_state": {
       "node_npm": "available when checked on 2026-06-02",
@@ -606,8 +643,8 @@
     "ui_strategy": "Reuse workspace-monitor first, then add desktop-specific UI only when local desktop behavior needs it.",
     "agent_runtime_strategy": "Keep agent-platform as a Python-first platform layer. The desktop shell must not run agent logic in the renderer. Future execution must use a documented sidecar, local service, or explicit command adapter with lifecycle cleanup.",
     "language_runtime_strategy": "Use Rust/Tauri first for the desktop shell, Go first for a separate local daemon or operational CLI, Python for agent logic, and TypeScript/Next.js for the UI. Follow agent-platform/configs/runtime/language-decision-registry.json before changing this split.",
-    "cli_integration_strategy": "Use external CLIs only through explicit adapter contracts from agent-platform/configs/integrations/cli-adapter-registry.json. Missing optional CLIs should disable only that capability and show setup guidance.",
-    "data_strategy": "Read repository documents or generated snapshots through explicit user-selected workspace paths. Do not silently bundle private repository data.",
+    "cli_integration_strategy": "Use external CLIs only through explicit adapter contracts from agent-platform/configs/integrations/cli-adapter-registry.json. Missing optional CLIs should disable only that capability and show setup guidance. Real multi-CLI execution requires a supervisor with process graph validation, resource cleanup, decision inbox routing, and merge gates.",
+    "data_strategy": "Read repository documents or generated snapshots through explicit user-selected workspace paths. Do not silently bundle private repository data. Convert CLI output into structured task runs, process events, artifact records, decision packets, verification records, and reusable knowledge only after provenance, redaction, and validation are recorded.",
     "settings_strategy": "Store user settings separately from bundled defaults. Secrets must be environment variables, OS credential storage, or user-provided runtime input, not checked-in config."
   },
     "security_privacy_rules": [
@@ -615,6 +652,7 @@
     "Prefer explicit user workspace selection over scanning arbitrary folders.",
     "Do not assume one external CLI is installed; use adapter capability checks and missing-CLI fallback guidance.",
     "Before desktop-originated CLI execution, document command allowlists, workspace path allowlists, timeout, and secret redaction behavior.",
+    "Before interactive CLI execution, document PTY or stream scope, stdin-write scope, cancellation, orphan-process cleanup, and user-question deferral behavior.",
     "Document any local server port, sidecar process, file-system permission, or network behavior before release.",
     "Review generated snapshots before public or distributable builds."
   ],
@@ -637,6 +675,8 @@
   "release_gates": [
     "Framework decision record with Tauri/Electron/native packaging comparison",
     "User-flow registry acceptance checks before desktop UI or installer implementation",
+    "Multi-CLI supervisor design and validation before launching several AI CLIs from one action",
+    "Concrete Claude Code, Gemini CLI, Codex CLI, and OpenCode adapter smoke tests before exposing them as executable capabilities",
     "Project-local dependency installation audit if dependencies are installed",
     "License and security review for desktop framework and packager dependencies",
     "macOS execution profile review plus signing, hardened runtime, notarization, stapling, permission, update, and smoke-test plan before macOS public installer",

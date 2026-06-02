@@ -20,6 +20,11 @@
 | PDA-REQ-010 | Codex, Claude Code, Cursor, Antigravity 같은 AI 코딩 도구는 플랫폼 필수 런타임이 아니라 설정 가능한 선택형 capability로 처리해야 한다. | must | CLI adapter registry와 desktop registry 검토 |
 | PDA-REQ-011 | Rust/Tauri dependency 설치 또는 빌드 실행 전에는 설치 감사 기록, license/security 검토, rollback 계획을 남겨야 한다. | must | 설치 기록과 `planned_commands` 검토 |
 | PDA-REQ-012 | public-ready 또는 “설치만 하면 됨” 수준의 표현은 macOS/Windows signing, notarization 또는 code-signing, clean-machine smoke test, update/uninstall/rollback test가 끝나기 전까지 금지해야 한다. | must | release gate와 평가 기록 |
+| PDA-REQ-013 | 설치형 앱은 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode를 첫 AI CLI adapter 후보로 표시하되 어떤 CLI도 앱 실행, 워크스페이스 보기, 히스토리 보기의 필수 런타임으로 만들지 않아야 한다. | must | CLI adapter registry, user-flow registry, readiness test |
+| PDA-REQ-014 | 다중 AI CLI 실행은 여러 터미널을 단순히 여는 방식이 아니라 process graph, lane status, bounded terminal output, stdin policy, cancellation, orphan cleanup, merge gate를 가진 platform supervisor가 관리해야 한다. | must | multi-CLI architecture doc, CLI pipeline validation, resource check |
+| PDA-REQ-015 | CLI가 사용자 질문을 만들고 사용자가 부재 중이면 앱은 안전한 defer message를 보낼 수 있는 경우에만 보내고, dependent lane만 멈추며, 결정 항목을 decision inbox에 저장하고, 독립 작업은 계속해야 한다. | must | `ai_cli_orchestration_flow`, human decision inbox, omission check |
+| PDA-REQ-016 | 터미널 output은 raw scrollback으로만 보존하지 않고, task event, process event, artifact, decision packet, verification, reusable knowledge candidate로 구조화해 provenance, redaction, validation, retention을 기록해야 한다. | must | data accumulation contract, history/evaluation records |
+| PDA-REQ-017 | 소스코드 편집은 처음부터 직접 구현하지 않고 Monaco Editor 같은 성숙한 오픈소스 editor surface를 우선 검토해야 하며, 파일 URI/model lifecycle, dispose, worker/runtime 제약을 구현 전에 검증해야 한다. | should | architecture doc, dependency audit, UI prototype test |
 
 ## 현재 상태
 

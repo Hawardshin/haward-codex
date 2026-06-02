@@ -9,6 +9,8 @@
       "Read integration_layers to understand which layer owns UI, platform logic, adapter contracts, and external CLI execution.",
       "Read structure_rules before adding a CLI so a missing tool degrades gracefully instead of breaking the platform.",
       "Read cli_adapter_contract and execution_contract before designing a concrete adapter.",
+      "Read supported_ai_cli_adapters before exposing Claude Code, Gemini CLI, Codex CLI, or OpenCode in the desktop app.",
+      "Read interactive_cli_contract before routing terminal questions, pauses, and resumes.",
       "Read installation_policy before installing or bundling a CLI dependency."
     ],
     "owner": "agent-platform",
@@ -125,6 +127,116 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "tauri_shell_plugin",
+      "title": "Tauri Shell Plugin",
+      "url": "https://v2.tauri.app/plugin/shell/",
+      "source_type": "official_docs",
+      "used_for": [
+        "desktop child-process spawning",
+        "capability-scoped execute, spawn, kill, and stdin permissions"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "tauri_sidecar",
+      "title": "Tauri: Embedding External Binaries",
+      "url": "https://v2.tauri.app/develop/sidecar/",
+      "source_type": "official_docs",
+      "used_for": [
+        "future local supervisor or Python service sidecar boundary",
+        "bundle versus user-supplied executable decision"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "claude_code_docs",
+      "title": "Claude Code Documentation",
+      "url": "https://code.claude.com/docs/en/overview",
+      "source_type": "official_docs",
+      "used_for": [
+        "Claude Code CLI capability target",
+        "terminal, desktop, IDE, web, MCP, hooks, skills, and multi-agent context"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "gemini_cli_repo",
+      "title": "Google Gemini CLI",
+      "url": "https://github.com/google-gemini/gemini-cli",
+      "source_type": "official_repo",
+      "used_for": [
+        "Gemini CLI capability target",
+        "open-source terminal agent source and installation source"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "codex_cli_repo",
+      "title": "OpenAI Codex CLI",
+      "url": "https://github.com/openai/codex",
+      "source_type": "official_repo",
+      "used_for": [
+        "Codex CLI capability target",
+        "terminal agent install and authentication planning"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "opencode_docs",
+      "title": "OpenCode Documentation",
+      "url": "https://opencode.ai/docs/",
+      "source_type": "official_docs",
+      "used_for": [
+        "OpenCode capability target",
+        "terminal, desktop, IDE, provider-key setup, and open-source agent context"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "agent_client_protocol",
+      "title": "Agent Client Protocol",
+      "url": "https://agentclientprotocol.com/get-started/introduction",
+      "source_type": "official_docs",
+      "used_for": [
+        "future editor-agent interoperability",
+        "local agent subprocess JSON-RPC over stdio comparison"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "node_pty",
+      "title": "microsoft/node-pty",
+      "url": "https://github.com/microsoft/node-pty",
+      "source_type": "official_repo",
+      "used_for": [
+        "pseudo-terminal option comparison",
+        "interactive terminal output and input handling risk model"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "xterm_js",
+      "title": "xterm.js Documentation",
+      "url": "https://xtermjs.org/docs/",
+      "source_type": "official_docs",
+      "used_for": [
+        "terminal emulator UI surface",
+        "terminal sequence and addon documentation"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "monaco_editor",
+      "title": "Monaco Editor",
+      "url": "https://github.com/microsoft/monaco-editor",
+      "source_type": "official_repo",
+      "used_for": [
+        "source-code editing surface",
+        "model, URI, provider, disposable, and browser worker constraints"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
       "id": "github_cli_extensions",
       "title": "GitHub CLI Extensions",
       "url": "https://docs.github.com/github-cli/github-cli/using-github-cli-extensions",
@@ -194,7 +306,7 @@
     {
       "id": "cli_tools_are_attached_capabilities",
       "rule": "Treat each CLI as an attached capability behind an adapter contract with availability checks, version checks, permission scope, output contract, and fallback behavior.",
-      "reason": "Loose coupling keeps the platform usable across Codex, Claude Code, Cursor, Antigravity, package managers, deployment tools, and future CLIs.",
+      "reason": "Loose coupling keeps the platform usable across Claude Code, Gemini CLI, Codex CLI, OpenCode, package managers, deployment tools, and future CLIs.",
       "applies_to": [
         "cli_adapter_contract",
         "capability_classes"
@@ -226,6 +338,26 @@
         "execution_contract",
         "pipeline_orchestration_contract",
         "validation_contract"
+      ]
+    },
+    {
+      "id": "interactive_cli_questions_route_to_decision_inbox",
+      "rule": "When an interactive CLI asks a user-answerable question and the user is absent, the supervisor must pause only the dependent lane, send a defer message when the adapter supports it, and route the decision packet to the human decision inbox.",
+      "reason": "The desktop product should keep useful independent work moving while preserving human authority over unresolved choices.",
+      "applies_to": [
+        "interactive_cli_contract",
+        "failure_behavior",
+        "pipeline_orchestration_contract"
+      ]
+    },
+    {
+      "id": "terminal_ui_is_observability_not_authority",
+      "rule": "Terminal output is visible evidence, but task state, blocked decisions, artifacts, verification, and durable memory must be owned by the platform supervisor and persisted outside raw terminal scrollback.",
+      "reason": "Raw terminal logs are hard to search, summarize, resume, or validate when several CLIs run at once.",
+      "applies_to": [
+        "terminal_io_contract",
+        "data_accumulation_contract",
+        "desktop_runtime_surfaces"
       ]
     },
     {
@@ -285,6 +417,31 @@
     {
       "field": "pipeline_orchestration_contract",
       "meaning": "Rules for launching several CLI processes, connecting pipes, bounding output, cancelling children, and merging results.",
+      "required": true
+    },
+    {
+      "field": "supported_ai_cli_adapters",
+      "meaning": "Concrete AI CLI adapter candidates requested for the desktop app, with dependency posture and implementation gates.",
+      "required": true
+    },
+    {
+      "field": "interactive_cli_contract",
+      "meaning": "Rules for detecting user questions, pausing only dependent lanes, sending defer messages, and resuming from the decision inbox.",
+      "required": true
+    },
+    {
+      "field": "terminal_io_contract",
+      "meaning": "Terminal output/input capture and PTY/display rules for multi-CLI desktop operation.",
+      "required": true
+    },
+    {
+      "field": "desktop_runtime_surfaces",
+      "meaning": "Open-source UI/runtime surfaces to prefer for terminal, source editing, agent management, and orchestration visibility.",
+      "required": true
+    },
+    {
+      "field": "data_accumulation_contract",
+      "meaning": "How CLI outputs become structured durable logs, artifacts, decision records, and future retrieval candidates.",
       "required": true
     },
     {
@@ -471,12 +628,167 @@
     ],
     "closeout_policy": "If multi-process CLI orchestration work occurred, set cli_pipeline_occurred=true and include cli_pipeline_targets in work-evaluator input."
   },
+  "supported_ai_cli_adapters": [
+    {
+      "adapter_id": "claude-code-cli",
+      "display_name": "Claude Code CLI",
+      "capability_class": "ai_assistant_cli",
+      "default_state": "optional_supported",
+      "expected_command_candidates": [
+        "claude"
+      ],
+      "setup_posture": "user_supplied_or_project_documented",
+      "source_reference": "claude_code_docs",
+      "implementation_gate": "availability, version, auth/session posture, permission mode, output parsing, missing-cli fallback, timeout, and redaction tests before execution"
+    },
+    {
+      "adapter_id": "gemini-cli",
+      "display_name": "Gemini CLI",
+      "capability_class": "ai_assistant_cli",
+      "default_state": "optional_supported",
+      "expected_command_candidates": [
+        "gemini"
+      ],
+      "setup_posture": "user_supplied_or_project_documented",
+      "source_reference": "gemini_cli_repo",
+      "implementation_gate": "availability, version, auth/session posture, sandbox/config posture, output parsing, missing-cli fallback, timeout, and redaction tests before execution"
+    },
+    {
+      "adapter_id": "codex-cli",
+      "display_name": "Codex CLI",
+      "capability_class": "ai_assistant_cli",
+      "default_state": "optional_supported",
+      "expected_command_candidates": [
+        "codex"
+      ],
+      "setup_posture": "user_supplied_or_project_documented",
+      "source_reference": "codex_cli_repo",
+      "implementation_gate": "availability, version, auth/session posture, sandbox/approval posture, output parsing, missing-cli fallback, timeout, and redaction tests before execution"
+    },
+    {
+      "adapter_id": "opencode-cli",
+      "display_name": "OpenCode",
+      "capability_class": "ai_assistant_cli",
+      "default_state": "optional_supported",
+      "expected_command_candidates": [
+        "opencode"
+      ],
+      "setup_posture": "user_supplied_or_project_documented",
+      "source_reference": "opencode_docs",
+      "implementation_gate": "availability, version, provider-key posture, output parsing, missing-cli fallback, timeout, and redaction tests before execution"
+    }
+  ],
+  "interactive_cli_contract": {
+    "question_detection_sources": [
+      "structured adapter events when the CLI supports them",
+      "stdin prompt state from PTY or process supervisor",
+      "bounded stdout/stderr classifiers with raw-output redaction",
+      "explicit output-contract failure that requires human decision"
+    ],
+    "decision_packet_fields": [
+      "decision_id",
+      "task_id",
+      "adapter_id",
+      "process_id",
+      "question_text_summary",
+      "answer_format",
+      "decision_impact",
+      "blocked_work",
+      "unblocked_work",
+      "default_assumption",
+      "defer_message_sent",
+      "resume_action",
+      "checkpoint_path"
+    ],
+    "absent_user_behavior": [
+      "pause only the dependent process lane",
+      "send a short defer message to the CLI when the adapter supports safe stdin write",
+      "capture the decision packet in _ops/coordination/human-decision-inbox.json or the product-local equivalent",
+      "continue independent lanes until a merge gate depends on the answer",
+      "resume from checkpoint after the user answers"
+    ],
+    "defer_message_policy": "Use a provider-neutral message such as 'I will defer this decision and continue safe independent work. Resume when the user answers.' only when stdin_write is in scope and the adapter marks the CLI as safe for conversational control.",
+    "must_not": [
+      "invent the user's preference for irreversible, security, privacy, cost, public release, or strategy decisions",
+      "block unrelated CLI lanes because one adapter asked a question",
+      "store full raw terminal output when a redacted summary is enough"
+    ]
+  },
+  "terminal_io_contract": {
+    "supervisor_requirement": "Interactive CLIs need a supervisor that can stream stdout/stderr, write bounded stdin, cancel or pause child processes, preserve terminal state, and persist redacted summaries.",
+    "display_candidates": [
+      {
+        "id": "xterm-js",
+        "role": "terminal emulator surface",
+        "source_reference": "xterm_js",
+        "status": "preferred_for_web_ui_terminal_display_after_dependency_audit"
+      },
+      {
+        "id": "node-pty",
+        "role": "pseudo-terminal process binding candidate",
+        "source_reference": "node_pty",
+        "status": "candidate_for_node_or_electron_supervisor_after_build_and_security_review"
+      },
+      {
+        "id": "tauri-shell-plugin",
+        "role": "Tauri command execution and scoped permission candidate",
+        "source_reference": "tauri_shell_plugin",
+        "status": "candidate_for_scoped_non-pty_process_execution_after_permission_design"
+      },
+      {
+        "id": "tauri-sidecar",
+        "role": "bundled local supervisor or Python platform service candidate",
+        "source_reference": "tauri_sidecar",
+        "status": "candidate_after install audit, platform-triple build plan, and release review"
+      }
+    ],
+    "capture_policy": [
+      "separate raw terminal scrollback from durable task state",
+      "bound captured output by bytes and time",
+      "redact secrets before durable storage",
+      "convert meaningful events into structured task timeline records",
+      "store raw snippets only for debugging when size, sensitivity, and retention policy are explicit"
+    ]
+  },
+  "desktop_runtime_surfaces": {
+    "terminal": "Use a terminal emulator surface for visibility, but keep orchestration state in the platform supervisor.",
+    "source_editor": {
+      "preferred_candidate": "Monaco Editor",
+      "source_reference": "monaco_editor",
+      "notes": "Use Monaco for first source editing support after dependency audit; preserve model URIs, dispose models/editors, and avoid assuming VS Code extensions work unchanged."
+    },
+    "agent_manager": "Expose agents, modes, adapters, queues, decisions, artifacts, and validation as platform-managed records rather than scattered terminal sessions.",
+    "protocol_future": {
+      "candidate": "Agent Client Protocol",
+      "source_reference": "agent_client_protocol",
+      "notes": "Evaluate ACP when editor-agent interoperability becomes a stronger requirement than direct CLI supervision."
+    }
+  },
+  "data_accumulation_contract": {
+    "durable_record_types": [
+      "task run",
+      "process node",
+      "adapter event",
+      "terminal output summary",
+      "artifact",
+      "decision packet",
+      "verification result",
+      "work timing",
+      "capability gap",
+      "capability promotion candidate"
+    ],
+    "storage_posture": "Keep logs and large transient output in product-local runtime storage, keep durable knowledge and project artifacts in the owning workspace/project, and keep secrets out of both.",
+    "retrieval_posture": "Use file-system indexes first. Promote to packaged archives, vector database, or another retrieval layer only after data volume, retrieval latency, and revalidation needs are measured.",
+    "quality_gate": "Before outputs become reusable knowledge, record provenance, freshness, validation, ambiguity, and redaction status."
+  },
   "capability_classes": [
     {
       "id": "ai_assistant_cli",
       "examples": [
-        "Codex CLI",
         "Claude Code CLI",
+        "Gemini CLI",
+        "Codex CLI",
+        "OpenCode",
         "Cursor CLI or command hooks",
         "Antigravity adapter commands"
       ],
@@ -575,8 +887,11 @@
       "dry-run command",
       "permission-denied path",
       "missing-CLI path",
+      "interactive-question path",
+      "decision-inbox deferral path",
       "redaction test",
-      "timeout test"
+      "timeout test",
+      "cancel and orphan-process cleanup test"
     ]
   }
 }
