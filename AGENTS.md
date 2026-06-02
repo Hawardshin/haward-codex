@@ -116,6 +116,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - When a workflow repeats or creates avoidable friction, consider promoting it into a template, tool, or skill.
 - When repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns appear, use `capability-promotion-agent` and `agent-platform/configs/orchestration/capability-promotion-registry.json` to create bounded black-box capability candidates.
 - User-facing capability promotion may feel automatic, but internal observation, candidate, evidence, risk, rejected lighter option, validation, rollback or disablement, documentation, evaluation, commit, and push traces must remain auditable.
+- Capability promotion must generate and evaluate ideas separately: for non-trivial problems, create several improvement ideas, score them against explicit criteria, then record selected, rejected, or queued reasons before promotion.
 - Promote the smallest useful asset first: prompt, workflow, template, tool, skill, agent, then project feature.
 - Do not auto-execute destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes without a human checkpoint and rollback plan.
 - Prefer Python for agent implementations unless the project constraints clearly favor another runtime.

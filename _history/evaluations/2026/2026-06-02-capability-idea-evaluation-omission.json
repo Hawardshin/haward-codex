@@ -1,0 +1,100 @@
+{
+  "task": "Strengthen capability promotion with idea generation and evaluation.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "idea-generation-evaluation-contract",
+      "description": "Capability promotion must generate ideas and evaluate them before promotion.",
+      "source": "UR-2026-06-02-029",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/orchestration/capability-promotion-registry.json",
+        "agent-platform/configs/agents/capability-promotion-agent.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "durable-instructions",
+      "description": "Persist the idea generation/evaluation rule for future sessions.",
+      "source": "persistent instruction rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "AGENTS.md",
+        "_docs/instructions/persistent-instructions.ko.md",
+        "_docs/instructions/persistent-instructions.en.md",
+        "_docs/instructions/persistent-instructions.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "workflow-prompt-policy",
+      "description": "Update reusable policy, workflow, and prompt.",
+      "source": "operations rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_docs/policies/capability-promotion-policy.ko.md",
+        "_ops/workflows/75-capability-promotion.md",
+        "_ops/prompts/105-capability-promotion.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "history",
+      "description": "Record web search, requirements change, request trace, source provenance, plan evidence, user request, and work summary.",
+      "source": "governance close-out",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-capability-idea-evaluation.ko.md",
+        "_requirements/changes/2026-06-02-capability-idea-evaluation.ko.md",
+        "_history/request-traces/2026/2026-06-02-capability-idea-evaluation.ko.md",
+        "_history/source-provenance/2026/2026-06-02-capability-idea-evaluation.ko.md",
+        "_history/plan-evidence/2026/2026-06-02-capability-idea-evaluation.ko.md",
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_history/work-summaries/2026/2026-06-02.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/orchestration/capability-promotion-registry.json",
+      "purpose": "Idea generation and evaluation source of truth",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/agents/capability-promotion-agent.json",
+      "purpose": "Agent policy and output contract",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "Capability promotion registry remains self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract configs/orchestration/capability-promotion-registry.json passed."
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "agent-inspect",
+      "description": "Capability promotion agent remains inspectable.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "inspect-agent configs/agents/capability-promotion-agent.json passed."
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [],
+  "notes": [
+    "This is a scoped governance refinement of REQ-WS-070."
+  ]
+}

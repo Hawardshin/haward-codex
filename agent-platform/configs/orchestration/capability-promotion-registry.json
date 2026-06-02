@@ -1,12 +1,13 @@
 {
   "schema_version": "2026-06-02",
   "name": "capability-promotion-registry",
-  "purpose": "Defines the bounded black-box process for detecting repeated work, bottlenecks, omissions, and manual rework, then promoting them into the smallest reusable platform capability.",
+  "purpose": "Defines the bounded black-box process for detecting repeated work, bottlenecks, omissions, and manual rework, generating improvement ideas, evaluating those ideas, then promoting selected ideas into the smallest reusable platform capability.",
   "reader_guide": {
     "summary": "Open this file when the platform should improve itself while work is happening. User-facing automation may feel black-box-like, but every observation, candidate, risk decision, validation, rollback path, and promotion result must remain auditable.",
     "how_to_read": [
       "Read platform_principle before interpreting this as full autonomy.",
       "Use observation_sources and promotion_triggers to decide whether a recurring pattern is real.",
+      "Use idea_generation and idea_evaluation_rubric to create several candidate ideas and score them before promotion.",
       "Use capability_types to choose the smallest reusable asset.",
       "Use risk_tiers and autonomy_limits before applying changes.",
       "Use promotion_pipeline and required_records to close the loop with validation, evaluation, documentation, commit, and push."
@@ -17,6 +18,7 @@
       "The platform starts creating prompts, workflows, templates, tools, skills, agents, or project features from observed work patterns.",
       "Repeated friction, bottleneck, omission, validation failure, or manual rework rules change.",
       "Automatic capability promotion risk tiers or human checkpoint rules change.",
+      "Capability idea generation, scoring criteria, pass thresholds, or rejection reasons change.",
       "A new reusable capability type is added.",
       "A monitor, desktop app, or orchestration layer starts showing capability candidates or promotion status."
     ]
@@ -108,6 +110,28 @@
         "multi-agent context management and specialized capability boundaries"
       ],
       "last_checked": "2026-06-02"
+    },
+    {
+      "id": "aws_evaluator_reflect_refine",
+      "title": "AWS Prescriptive Guidance: Workflow for Evaluators and Reflect-Refine Loops",
+      "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-patterns/workflow-for-evaluators-and-reflect-refine-loops.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "generation and evaluation separation",
+        "feedback loop and critique before refinement"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "google_cloud_idea_generation",
+      "title": "Google Cloud Gemini Enterprise: Idea Generation Agent",
+      "url": "https://docs.cloud.google.com/gemini/enterprise/docs/idea-generation",
+      "source_type": "official_docs",
+      "used_for": [
+        "idea generation and ranking reference",
+        "competitive/tournament-style idea selection inspiration"
+      ],
+      "last_checked": "2026-06-02"
     }
   ],
   "structure_rules": [
@@ -136,6 +160,17 @@
       "reason": "The platform should not generate features from vague preference alone.",
       "applies_to": [
         "promotion_triggers",
+        "candidate_contract"
+      ]
+    },
+    {
+      "id": "ideas_are_generated_then_evaluated",
+      "rule": "Capability promotion must separate idea generation from idea evaluation; no idea can be promoted until it has explicit scores, evaluator notes, a decision, and rejection or queue reasons for alternatives.",
+      "reason": "Automatic feature creation should produce several options and select through visible criteria instead of treating the first generated idea as the answer.",
+      "applies_to": [
+        "idea_generation",
+        "idea_evaluation_rubric",
+        "promotion_pipeline",
         "candidate_contract"
       ]
     },
@@ -175,6 +210,16 @@
       "required": true
     },
     {
+      "field": "idea_generation",
+      "meaning": "Rules for generating multiple improvement ideas from observed signals before selecting a candidate.",
+      "required": true
+    },
+    {
+      "field": "idea_evaluation_rubric",
+      "meaning": "Scoring dimensions, thresholds, and decision outcomes for evaluating generated ideas before promotion.",
+      "required": true
+    },
+    {
       "field": "capability_types",
       "meaning": "Allowed reusable assets and their target directories and validation requirements.",
       "required": true
@@ -201,6 +246,73 @@
     }
   ],
   "platform_principle": "The platform may automate capability discovery and candidate drafting, but it must remain transparent, testable, reversible, and owner-controlled. It should feel automatic to the user only because the boring discovery and bookkeeping are handled, not because decisions become invisible.",
+  "idea_generation": {
+    "minimum_idea_count": 2,
+    "preferred_idea_count": 3,
+    "idea_id_format": "IDEA-YYYY-MM-DD-slug-nn",
+    "generation_rules": [
+      "Generate more than one way to reduce the observed repetition or bottleneck when the problem is not trivial.",
+      "Include at least one lighter-weight option before proposing a tool, skill, agent, or project feature.",
+      "Include a do-nothing or defer option when the signal may be too weak.",
+      "Do not generate ideas that require high-risk execution without labeling the human checkpoint."
+    ],
+    "idea_fields": [
+      "idea_id",
+      "idea_summary",
+      "observed_problem",
+      "capability_type",
+      "expected_repetition_reduction",
+      "expected_time_reduction",
+      "required_human_judgment",
+      "risk_tier",
+      "validation_hint",
+      "rollback_or_disablement_hint"
+    ]
+  },
+  "idea_evaluation_rubric": {
+    "score_scale": "0-5",
+    "decision_outcomes": [
+      "promote_now",
+      "queue_for_later",
+      "merge_with_existing_asset",
+      "reject",
+      "human_review_required"
+    ],
+    "minimum_promote_now_average_score": 4,
+    "dimensions": [
+      {
+        "id": "repetition_reduction",
+        "meaning": "How much repeated human work this idea removes."
+      },
+      {
+        "id": "time_savings",
+        "meaning": "How much elapsed or active work time this idea can plausibly reduce."
+      },
+      {
+        "id": "maintenance_cost",
+        "meaning": "How small and maintainable the idea remains after implementation; lower maintenance burden scores higher."
+      },
+      {
+        "id": "evidence_strength",
+        "meaning": "How well the idea is supported by observed records, user requests, tests, external references, or evaluator history."
+      },
+      {
+        "id": "risk_fit",
+        "meaning": "Whether the idea's risk tier, human checkpoint, and rollback path match the expected benefit."
+      },
+      {
+        "id": "smallest_asset_fit",
+        "meaning": "Whether the idea uses the smallest suitable capability type rather than overbuilding."
+      }
+    ],
+    "required_evaluator_notes": [
+      "why_selected",
+      "why_not_lighter",
+      "why_rejected_or_queued",
+      "validation_needed",
+      "human_checkpoint_needed"
+    ]
+  },
   "observation_sources": [
     {
       "id": "work_timings",
@@ -392,7 +504,10 @@
   "promotion_pipeline": [
     "observe",
     "cluster_related_signals",
-    "draft_candidate",
+    "generate_ideas",
+    "evaluate_ideas",
+    "rank_or_reject_ideas",
+    "draft_candidate_from_selected_idea",
     "classify_capability_type",
     "check_existing_assets",
     "research_or_verify_if_external_claims_matter",
@@ -407,6 +522,12 @@
   ],
   "required_records": [
     "candidate_id",
+    "idea_ids",
+    "idea_summaries",
+    "idea_evaluation_scores",
+    "idea_evaluator_notes",
+    "selected_idea_id",
+    "rejected_or_queued_idea_reasons",
     "observed_signals",
     "source_records",
     "problem_statement",
@@ -433,6 +554,10 @@
     "minimum_fields": [
       "observed_signals",
       "source_records",
+      "idea_ids",
+      "idea_evaluation_scores",
+      "selected_idea_id",
+      "rejected_or_queued_idea_reasons",
       "proposed_capability_type",
       "rejected_lighter_options",
       "expected_repetition_reduction",

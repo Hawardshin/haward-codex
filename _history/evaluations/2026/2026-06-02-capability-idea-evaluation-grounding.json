@@ -1,0 +1,83 @@
+{
+  "task": "Ground capability idea evaluation refinement.",
+  "output_summary": "Capability promotion now separates idea generation from idea evaluation and records scores, selected ideas, and rejected or queued reasons.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "registry",
+      "source": "agent-platform/configs/orchestration/capability-promotion-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Repository source of truth parsed and passed config contract."
+    },
+    {
+      "evidence_id": "agent",
+      "source": "agent-platform/configs/agents/capability-promotion-agent.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Agent spec parsed and passed inspect-agent."
+    },
+    {
+      "evidence_id": "aws",
+      "source": "https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-patterns/workflow-for-evaluators-and-reflect-refine-loops.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official AWS guidance on evaluator and reflect-refine loops."
+    },
+    {
+      "evidence_id": "google",
+      "source": "https://docs.cloud.google.com/gemini/enterprise/docs/idea-generation",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Google Cloud documentation for an idea generation/ranking agent."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The capability promotion registry now includes idea_generation and idea_evaluation_rubric sections.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "registry"
+      ],
+      "verification_steps": [
+        "Parsed JSON and checked config contract."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The capability promotion agent output contract now includes generated ideas, scores, selected idea, and rejected or queued reasons.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "agent"
+      ],
+      "verification_steps": [
+        "Ran inspect-agent."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "External references support separating generation from evaluation and ranking generated ideas.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "aws",
+        "google"
+      ],
+      "verification_steps": [
+        "Recorded source provenance and web search notes."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "No runtime scoring engine was implemented; this change updates the durable operating contract."
+  ],
+  "limitation_notes": [
+    "The exact numeric scoring UI or automation can be implemented later."
+  ]
+}

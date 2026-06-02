@@ -9,6 +9,7 @@ The platform may create feature and capability candidates while doing work whene
 - Automation exists to reduce repeated human work.
 - The user-facing flow may feel automatic, but the internal record must remain inspectable.
 - Candidate generation can be broad; execution is limited by risk.
+- Separate idea generation from idea evaluation. Do not execute the first idea directly; create several ideas and evaluate them against explicit criteria.
 - New functionality must start with the smallest reusable asset.
 - High-risk changes must not run without a human checkpoint, rollback path, and audit record.
 
@@ -21,6 +22,19 @@ The platform may create feature and capability candidates while doing work whene
 5. `skill`: repeated agent behavior, domain rules, or tool integration knowledge
 6. `agent`: repeated role that needs input/output/tool/policy/validation contracts
 7. `project_feature`: UI, monitor, desktop app, or product feature
+
+## Idea Evaluation
+
+Generated ideas must be evaluated before promotion.
+
+- repetition reduction
+- time savings
+- maintenance cost
+- evidence strength
+- risk and rollback fit
+- smallest suitable asset fit
+
+Each evaluation result must be one of `promote_now`, `queue_for_later`, `merge_with_existing_asset`, `reject`, or `human_review_required`. Rejected or queued ideas must keep their reasons.
 
 ## Human Checkpoints
 

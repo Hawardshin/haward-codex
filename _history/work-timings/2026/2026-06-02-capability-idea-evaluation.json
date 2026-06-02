@@ -1,0 +1,47 @@
+{
+  "task_id": "2026-06-02-capability-idea-evaluation",
+  "request_id": "UR-2026-06-02-029",
+  "work_mode": "governance",
+  "status": "completed",
+  "recorded_on": "2026-06-02",
+  "time_zone": "Asia/Seoul",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes": 4,
+      "status": "completed",
+      "notes": "Searched idea generation/evaluation and evaluator-loop references."
+    },
+    {
+      "phase": "contract_update",
+      "duration_minutes": 18,
+      "status": "completed",
+      "notes": "Updated registry, agent spec, policy, workflow, prompt, requirements, persistent instructions, docs, and specs."
+    },
+    {
+      "phase": "history_and_evaluation",
+      "duration_minutes": 12,
+      "status": "completed",
+      "notes": "Created search, provenance, plan evidence, request trace, omission, grounding, and evaluation records."
+    },
+    {
+      "phase": "validation_commit_push",
+      "duration_minutes": 10,
+      "status": "completed",
+      "notes": "Ran full validation suite, work evaluator, final map refresh, and prepared commit/push close-out."
+    }
+  ],
+  "bottleneck_candidates": [
+    {
+      "phase": "history_and_evaluation",
+      "reason": "Small governance refinements still require several close-out artifacts."
+    }
+  ],
+  "automation_candidates": [
+    {
+      "candidate": "governance refinement pack generator",
+      "reason": "Could generate paired web-search, provenance, plan-evidence, omission, grounding, and evaluation shells for small governance updates."
+    }
+  ]
+}

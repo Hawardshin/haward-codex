@@ -15,6 +15,9 @@
 ## 출력
 
 - capability 후보 ID
+- 생성된 개선 아이디어 목록
+- 아이디어 평가 점수와 evaluator note
+- 선택된 아이디어와 기각/대기 아이디어의 이유
 - 관찰된 신호와 출처 기록
 - 제안 capability type: `prompt`, `workflow`, `template`, `tool`, `skill`, `agent`, `project_feature`
 - 더 가벼운 대안과 기각 이유
@@ -25,10 +28,20 @@
 
 ## 안전 규칙
 
+- 아이디어 생성과 아이디어 평가는 분리한다. 첫 번째 아이디어를 바로 실행하지 않고, 여러 아이디어를 비교한 뒤 선택한다.
 - destructive change, secret, 권한, 설치, 유료 서비스, public 배포, 보안/개인정보, 되돌리기 어려운 migration은 사람 체크포인트 없이 자동 실행하지 않는다.
 - 반복 작업이라고 바로 agent를 만들지 않는다. prompt, workflow, template, tool, skill, agent, project feature 순서로 가장 작은 자산을 먼저 검토한다.
 - 내부 지식이나 LLM 반복 응답만으로 사실을 확정하지 않는다. 중요한 근거는 웹 검색, 테스트, evaluator, human judgment로 확인한다.
 - 적용된 capability는 문서화, 검증, 평가, 커밋, push까지 완료해야 한다.
+
+## 아이디어 평가 기준
+
+- 반복 감소
+- 시간 절감
+- 유지보수 비용
+- 근거 강도
+- 위험도와 rollback 적합성
+- 가장 작은 자산으로 해결하는지
 
 ## 주요 파일
 

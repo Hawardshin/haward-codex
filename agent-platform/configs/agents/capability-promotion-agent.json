@@ -21,9 +21,9 @@
     "orchestration_pattern": "single_agent",
     "trigger": "Use when work patterns, slow phases, repeated prompts, recurring omissions, recurring validation failures, manual rework, or user requests imply that the platform should add or improve a reusable capability automatically.",
     "input_schema": "agent-platform/configs/orchestration/capability-promotion-registry.json",
-    "output_contract": "Capability promotion candidate with observed signals, source records, proposed capability type, rejected lighter options, expected repetition/time reduction, risk tier, human checkpoint requirement, validation plan, rollback or disablement plan, implementation targets, evaluation target, commit and push trace.",
+    "output_contract": "Capability promotion package with observed signals, source records, generated idea options, idea evaluation scores, selected idea, rejected or queued idea reasons, proposed capability type, rejected lighter options, expected repetition/time reduction, risk tier, human checkpoint requirement, validation plan, rollback or disablement plan, implementation targets, evaluation target, commit and push trace.",
     "work_mode_registry": "agent-platform/configs/workflows/work-mode-registry.json",
-    "policy": "Treat autonomous feature addition as bounded black-box automation. The user-facing experience may be automatic, but internal records must remain inspectable. Prefer the smallest useful asset. Draft candidates from evidence, check existing assets first, classify risk, and require human checkpoint before destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible work. Applied promotions must be validated, documented, evaluated, committed, and pushed.",
+    "policy": "Treat autonomous feature addition as bounded black-box automation. The user-facing experience may be automatic, but internal records must remain inspectable. Generate multiple ideas when the problem is not trivial, evaluate ideas against explicit criteria, and promote only the selected idea. Prefer the smallest useful asset. Draft candidates from evidence, check existing assets first, classify risk, and require human checkpoint before destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible work. Applied promotions must be validated, documented, evaluated, committed, and pushed.",
     "promotion_inputs": [
       "_history/work-timings/",
       "_history/evaluations/",
@@ -46,6 +46,14 @@
       "low-risk documentation, prompt, workflow, or template improvements can be drafted and applied when validation is clear.",
       "medium-risk local tools, read-only monitor features, agent specs, or config rules require governance records and validation.",
       "high-risk installs, secrets, permissions, paid services, destructive changes, public deployment, security/privacy-sensitive work, or irreversible migrations require human checkpoint and rollback plan before execution."
+    ],
+    "idea_evaluation_dimensions": [
+      "repetition_reduction",
+      "time_savings",
+      "maintenance_cost",
+      "evidence_strength",
+      "risk_fit",
+      "smallest_asset_fit"
     ],
     "docs_targets": [
       "agent-platform/docs/capability-promotion-agent.ko.md",

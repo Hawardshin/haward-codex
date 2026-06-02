@@ -26,6 +26,9 @@ Discover:
 - project feature candidates that reduce operating work
 
 Before adding anything:
+- generate multiple improvement ideas when the problem is not trivial
+- evaluate ideas against repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit
+- record the selected idea, rejected ideas, queued ideas, scores, and evaluator notes
 - check existing prompts, workflows, templates, tools, skills, agents, and project features
 - choose the smallest useful capability type
 - record rejected lighter options
@@ -34,6 +37,11 @@ Before adding anything:
 
 Return:
 - candidate_id
+- idea_ids
+- idea_summaries
+- idea_evaluation_scores
+- selected_idea_id
+- rejected_or_queued_idea_reasons
 - observed_signals
 - source_records
 - existing_assets_checked
