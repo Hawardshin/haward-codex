@@ -8,3 +8,5 @@
 | TASK-RDF-004 | Implement customer snapshot collector and build script | done |
 | TASK-RDF-005 | Update Workspace Monitor UI and readiness tests | done |
 | TASK-RDF-006 | Run Rust/Node/Tauri validation and evaluation records | done |
+| TASK-RDF-007 | Add Tauri frontendDist customer bundle audit gate | done |
+| TASK-RDF-008 | Add internal/public release preflight blocker reporting | done |

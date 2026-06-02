@@ -96,7 +96,10 @@ npm --prefix platform-desktop-app run check
 npm --prefix platform-desktop-app test
 npm --prefix workspace-monitor run check
 npm --prefix workspace-monitor test
-npm --prefix workspace-monitor run build
+npm --prefix workspace-monitor run build:customer
+npm --prefix platform-desktop-app run customer-bundle:audit
+npm --prefix platform-desktop-app run release:preflight
+npm --prefix platform-desktop-app run release:preflight:public:report
 cd platform-desktop-app/src-tauri && cargo test
 cd platform-desktop-app/src-tauri && cargo build
 npm --prefix platform-desktop-app run tauri:build
@@ -111,6 +114,8 @@ cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-c
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/claude-code-design-transfer-registry.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/runtime-data-boundary-registry.json
 ```
+
+`monitor:build` runs the customer Workspace Monitor build and then audits `workspace-monitor/out` before Tauri embeds it. Public release preflight is report-only unless Developer ID signing and Apple notarization credentials are available.
 
 Implemented desktop bridge commands:
 

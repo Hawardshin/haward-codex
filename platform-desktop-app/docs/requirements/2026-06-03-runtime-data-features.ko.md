@@ -7,3 +7,5 @@
 | REQ-PDA-043 | installer payload audit은 설치 번들 resource 안의 source tree, `_private/`, `outputs/`, source map, developer-only snapshot 흔적을 찾아 고위험 항목으로 보고해야 한다. | must | `run_installer_payload_audit`, payload audit report |
 | REQ-PDA-044 | support diagnostic bundle은 runtime root, payload audit, task-run metadata summary만 포함하고 원본 stdout/stderr, source, private files는 포함하지 않아야 한다. | must | `create_support_diagnostic_bundle`, redacted manifest |
 | REQ-PDA-045 | 고객용 Tauri build는 `workspace-monitor` 공개 snapshot에서 source file contents와 internal documents를 제거해야 한다. | must | `buildCustomerSnapshot`, `build:customer`, snapshot inspection |
+| REQ-PDA-046 | Tauri `frontendDist`는 resource directory scan과 별개로 임베드될 수 있으므로, Tauri build 전에 customer static output을 별도 audit gate로 확인해야 한다. | must | `check-customer-bundle.mjs`, `customer-bundle:audit`, `monitor:build` |
+| REQ-PDA-047 | release readiness는 internal/local build와 public distribution을 구분하고, Developer ID signing, hardened runtime, notarization credential blocker를 기계적으로 보고해야 한다. | must | `check-release-readiness.mjs`, `release:preflight:*` |

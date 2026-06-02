@@ -44,7 +44,8 @@
     "longDescription": "A local desktop shell for browsing workspace history, documents, agents, requirements, specs, and future optional AI coding CLI capabilities.",
     "macOS": {
       "minimumSystemVersion": "10.15",
-      "signingIdentity": "-"
+      "signingIdentity": "-",
+      "hardenedRuntime": true
     },
     "windows": {
       "webviewInstallMode": {

@@ -18,6 +18,7 @@ test("desktop scaffold has the selected Tauri entry points", () => {
   assert.equal(config.identifier, "com.personalagentplatform.desktop");
   assert.equal(config.build.frontendDist, "../../workspace-monitor/out");
   assert.equal(config.app.withGlobalTauri, true);
+  assert.equal(config.bundle.macOS.hardenedRuntime, true);
 });
 
 test("desktop registry points to macOS and Windows execution profiles", () => {
@@ -112,14 +113,26 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
   const monitorShell = readFileSync(join(root, "../workspace-monitor/components/MonitorShell.tsx"), "utf8");
   const monitorCollector = readFileSync(join(root, "../workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
+  const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
+  const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
   const platformPkg = readJson("package.json");
   const monitorPkg = readJson("../workspace-monitor/package.json");
   const viewModes = readJson("../agent-platform/configs/access/view-mode-registry.json");
 
   assert.match(platformPkg.scripts["monitor:build"], /build:customer/);
+  assert.match(platformPkg.scripts["monitor:build"], /customer-bundle:audit/);
+  assert.match(platformPkg.scripts.check, /check-customer-bundle\.mjs/);
+  assert.match(platformPkg.scripts.check, /check-release-readiness\.mjs/);
+  assert.ok(platformPkg.scripts["release:preflight:public"]);
   assert.match(monitorPkg.scripts["build:customer"], /--snapshot-mode customer/);
   for (const collectorToken of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
     assert.match(monitorCollector, new RegExp(collectorToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+  for (const scriptToken of ["auditCustomerSnapshot", "scanCustomerDist", "customer_bundle_ready", "MAX_DIST_SCAN_FILES"]) {
+    assert.match(customerBundleCheck, new RegExp(scriptToken));
+  }
+  for (const scriptToken of ["checkReleaseReadiness", "public_release_blocked", "hardenedRuntime", "notarization"]) {
+    assert.match(releaseReadinessCheck, new RegExp(scriptToken));
   }
 
   for (const commandName of [

@@ -27,9 +27,18 @@
 - Customer public snapshot inspection: `sourceFiles=0`, `documents=0`, `historyDays=0`, `projects=0`, `defaultView=user`.
 - `npm --prefix platform-desktop-app test`: passed, 9 tests.
 - `npm --prefix platform-desktop-app run check`: passed.
+- `npm --prefix platform-desktop-app run customer-bundle:audit`: pending in follow-up improvement slice.
+- `npm --prefix platform-desktop-app run release:preflight`: pending in follow-up improvement slice.
+- `npm --prefix platform-desktop-app run release:preflight:public:report`: pending in follow-up improvement slice.
 - `cd platform-desktop-app/src-tauri && cargo test`: passed.
 - `cd platform-desktop-app/src-tauri && cargo build`: passed.
 - `npm --prefix platform-desktop-app run tauri:build`: passed.
 - `codesign --verify --deep --strict`: passed.
 - `hdiutil verify`: VALID.
 - `git diff --check`: passed.
+
+## Additional Improvement Result
+
+- `npm --prefix platform-desktop-app test`: passed, 12 tests.
+- `npm --prefix platform-desktop-app run check`: passed; readiness, customer bundle audit, and internal release preflight all passed.
+- `npm --prefix platform-desktop-app run release:preflight:public:report`: `public_release_blocked`; remaining blockers are Developer ID signing identity/APPLE_CERTIFICATE and Apple notarization credentials.

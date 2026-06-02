@@ -1,0 +1,49 @@
+{
+  "task": "Resource check for runtime feature gap improvements",
+  "work_mode": "standard",
+  "runtime_context": [
+    "node",
+    "next-build",
+    "tauri-build",
+    "codesign",
+    "hdiutil"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "long-running-build-subprocesses",
+      "category": "process",
+      "description": "Tauri build and DMG verification are long-running subprocesses.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "All command sessions were polled until exit.",
+      "evidence": [
+        "tauri:build exited code 0",
+        "hdiutil verify exited code 0"
+      ]
+    },
+    {
+      "risk_id": "customer-static-output-leakage",
+      "category": "generated_file",
+      "description": "Generated customer static output could regress and include source/docs before embedding.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "customer-bundle:audit scans public/out snapshots and frontendDist paths.",
+      "evidence": [
+        "customer_bundle_ready",
+        "workspace-monitor/public/workspace-snapshot.json sourceFiles=0 documents=0",
+        "workspace-monitor/out/workspace-snapshot.json sourceFiles=0 documents=0"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "exec-session-cleanup",
+      "resource": "build and verification subprocesses",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "No active exec command sessions remain for this task."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "status": "ready_to_publish",
+  "task": "Grounding check for runtime feature gap improvements",
+  "grounded_claims": [
+    {
+      "claim": "Tauri frontendDist assets need a build-time customer bundle audit in addition to runtime resource scanning.",
+      "evidence": [
+        "Tauri config docs describe frontendDist as application assets to embed.",
+        "check-customer-bundle.mjs audits workspace-monitor/out and public snapshots before Tauri build."
+      ]
+    },
+    {
+      "claim": "Public macOS readiness remains blocked by Developer ID signing and notarization credentials.",
+      "evidence": [
+        "Apple Developer ID and notarization docs.",
+        "release:preflight:public:report reported public_release_blocked only for Developer ID/APPLE_CERTIFICATE and notarization credentials after local tooling checks passed."
+      ]
+    },
+    {
+      "claim": "The local/internal macOS build now has hardened runtime enabled.",
+      "evidence": [
+        "src-tauri/tauri.conf.json macOS.hardenedRuntime=true",
+        "codesign -dv --verbose=4 reported Runtime Version=14.4.0"
+      ]
+    }
+  ],
+  "unsupported_claims_removed": [
+    "Public macOS distribution readiness",
+    "Windows installer readiness"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-03-runtime-feature-gap-improvements.ko.md"
+  ]
+}

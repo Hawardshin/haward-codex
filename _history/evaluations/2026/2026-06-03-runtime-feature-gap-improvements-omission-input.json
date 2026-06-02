@@ -1,0 +1,29 @@
+{
+  "status": "coverage_ready",
+  "task": "Omission check for runtime feature gap improvements",
+  "requirements_checked": [
+    "REQ-PDA-046",
+    "REQ-PDA-047"
+  ],
+  "coverage": [
+    {
+      "requirement": "Build-time customer bundle audit before Tauri embeds frontendDist",
+      "status": "covered",
+      "evidence": "check-customer-bundle.mjs plus monitor:build audit chain"
+    },
+    {
+      "requirement": "Internal/public release preflight blocker report",
+      "status": "covered",
+      "evidence": "check-release-readiness.mjs plus release:preflight scripts"
+    },
+    {
+      "requirement": "Hardened runtime parity",
+      "status": "covered",
+      "evidence": "tauri.conf.json hardenedRuntime=true and codesign Runtime Version output"
+    }
+  ],
+  "known_gaps": [
+    "Developer ID signing and notarization submission still require user-provided Apple credentials.",
+    "Windows installer smoke is still a separate Windows-host validation slice."
+  ]
+}

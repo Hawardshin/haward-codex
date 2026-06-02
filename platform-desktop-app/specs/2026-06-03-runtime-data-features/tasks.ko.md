@@ -8,3 +8,5 @@
 | TASK-RDF-004 | customer snapshot collector와 build script 구현 | done |
 | TASK-RDF-005 | Workspace Monitor UI와 readiness tests 갱신 | done |
 | TASK-RDF-006 | Rust/Node/Tauri 검증과 evaluation 기록 | done |
+| TASK-RDF-007 | Tauri frontendDist customer bundle audit gate 추가 | done |
+| TASK-RDF-008 | internal/public release preflight blocker 보고 추가 | done |

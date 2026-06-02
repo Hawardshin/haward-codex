@@ -1,0 +1,40 @@
+{
+  "task_id": "2026-06-03-runtime-feature-gap-improvements",
+  "title": "Improve runtime feature gaps with customer bundle audit and release preflight",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "check Tauri frontendDist and Apple release docs",
+      "status": "completed",
+      "duration_seconds": 180,
+      "measurement": "estimated",
+      "bottleneck_notes": "Checked current official Tauri and Apple release references."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "add audit and preflight scripts",
+      "status": "completed",
+      "duration_seconds": 1200,
+      "measurement": "estimated",
+      "bottleneck_notes": "Implemented two scripts, package wiring, Tauri config, readiness checks, and tests."
+    },
+    {
+      "phase_id": "verification",
+      "label": "run tests checks and Tauri build",
+      "status": "completed",
+      "duration_seconds": 1200,
+      "measurement": "estimated",
+      "bottleneck_notes": "Full Tauri build and DMG verification were the slowest validation steps."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "write history and evaluation records",
+      "status": "completed",
+      "duration_seconds": 600,
+      "measurement": "estimated",
+      "bottleneck_notes": "Standard-mode records were required before commit."
+    }
+  ]
+}

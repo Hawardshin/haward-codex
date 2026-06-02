@@ -31,7 +31,9 @@ const requiredFiles = [
   "src-tauri/build.rs",
   "src-tauri/src/main.rs",
   "src-tauri/src/lib.rs",
-  "src-tauri/capabilities/default.json"
+  "src-tauri/capabilities/default.json",
+  "scripts/check-customer-bundle.mjs",
+  "scripts/check-release-readiness.mjs"
 ];
 
 function readJson(relativePath) {
@@ -60,8 +62,19 @@ const pkg = readJson("package.json");
 if (!pkg.scripts?.check || !pkg.scripts?.test || !pkg.scripts?.["tauri:dev"] || !pkg.scripts?.["tauri:build"]) {
   failures.push("package.json must expose check, test, tauri:dev, and tauri:build scripts");
 }
+for (const scriptName of ["customer-bundle:audit", "release:preflight", "release:preflight:public", "release:preflight:public:report"]) {
+  if (!pkg.scripts?.[scriptName]) {
+    failures.push(`package.json must expose ${scriptName}`);
+  }
+}
 if (!pkg.scripts?.["monitor:build"]?.includes("build:customer")) {
   failures.push("platform-desktop-app monitor:build must use the customer Workspace Monitor build");
+}
+if (!pkg.scripts?.["monitor:build"]?.includes("customer-bundle:audit")) {
+  failures.push("platform-desktop-app monitor:build must audit the customer bundle after building");
+}
+if (!pkg.scripts?.check?.includes("check-customer-bundle.mjs") || !pkg.scripts?.check?.includes("check-release-readiness.mjs")) {
+  failures.push("platform-desktop-app check must run customer bundle and release readiness preflight checks");
 }
 if (!pkg.devDependencies?.["@tauri-apps/cli"]) {
   failures.push("package.json must declare @tauri-apps/cli as a project-local devDependency");
@@ -83,6 +96,9 @@ if (tauriConfig.app?.withGlobalTauri !== true) {
 }
 if (!tauriConfig.bundle?.targets?.includes("dmg") || !tauriConfig.bundle?.targets?.includes("nsis")) {
   failures.push("Tauri bundle targets must include macOS and Windows installer candidates");
+}
+if (tauriConfig.bundle?.macOS?.hardenedRuntime !== true) {
+  failures.push("Tauri macOS bundle must enable hardenedRuntime for release-path parity");
 }
 
 const tauriLib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
@@ -213,9 +229,21 @@ if (!JSON.stringify(viewModeRegistry).includes("desktop")) {
 
 const monitorShell = readFileSync(join(root, "../workspace-monitor/components/MonitorShell.tsx"), "utf8");
 const monitorCollector = readFileSync(join(root, "../workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
+const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
+const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
 for (const requiredPhrase of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
   if (!monitorCollector.includes(requiredPhrase)) {
     failures.push(`workspace-monitor collector must include customer snapshot token ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of ["auditCustomerSnapshot", "scanCustomerDist", "customer_bundle_ready", "MAX_DIST_SCAN_FILES", "frontendDist"]) {
+  if (!customerBundleCheck.includes(requiredPhrase)) {
+    failures.push(`check-customer-bundle.mjs must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of ["checkReleaseReadiness", "public_release_blocked", "hardenedRuntime", "Developer ID", "notarization"]) {
+  if (!releaseReadinessCheck.includes(requiredPhrase)) {
+    failures.push(`check-release-readiness.mjs must include ${requiredPhrase}`);
   }
 }
 for (const requiredPhrase of [
