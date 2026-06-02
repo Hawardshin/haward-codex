@@ -32,7 +32,7 @@ Local-only root folders are not durable repository knowledge:
 
 | Folder | Purpose |
 | --- | --- |
-| `_private/` | Local private scratch state ignored by git |
+| `_private/` | Protected local-only vault for sensitive files and private scratch; ignored by git and AI default-deny |
 | `outputs/` | Transient one-off tool output ignored by git |
 
 Durable artifacts must live under the owning project, usually `project-name/artifacts/`.
@@ -74,6 +74,8 @@ Every project must include a `README.md` with:
 - important decisions or constraints
 
 Project-specific visual or generated outputs should live under `artifacts/`.
+
+Sensitive files, credentials, private notes, browser cookies, user-provided private files, and local-only secret material should live under `_private/sensitive/` or an external secret manager. AI agents must not read, search, summarize, index, snapshot, or use `_private/` contents by default. Use `agent-platform/configs/security/sensitive-file-boundary.json` and `_ops/security/README.ko.md` for the detailed boundary.
 
 ## Project Boundary Policy
 

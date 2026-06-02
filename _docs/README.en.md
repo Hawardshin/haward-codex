@@ -13,6 +13,13 @@
 | `operating-models/` | Platform operating model, context model, and tool-agnostic assistant operating model |
 | `governance/` | Management rules such as capability promotion and repository structure governance |
 
+## Important Security Boundary
+
+- Sensitive files belong under `_private/sensitive/` or an external secret manager.
+- AI agents must not directly read or index `_private/` contents by default.
+- Policy: [_docs/policies/sensitive-file-boundary-policy.en.md](policies/sensitive-file-boundary-policy.en.md)
+- Operations guide: [_ops/security/README.en.md](../_ops/security/README.en.md)
+
 ## Missing-Doc Prevention
 
 - Check `_docs/registry.json` category rules when adding a new document.

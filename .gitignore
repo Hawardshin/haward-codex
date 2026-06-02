@@ -20,6 +20,15 @@
 .env.*
 !.env.example
 
+# Sensitive local files
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.kdbx
+
 # Node
 node_modules/
 dist/

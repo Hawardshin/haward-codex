@@ -1,0 +1,297 @@
+{
+  "schema_version": "2026-06-02",
+  "name": "sensitive-file-boundary",
+  "purpose": "Defines where sensitive local files belong, what agents must not read by default, and which metadata may be tracked without exposing secrets.",
+  "reader_guide": {
+    "summary": "Open this file when a task mentions tokens, keys, credentials, private notes, browser cookies, proprietary documents, user-provided private files, or anything that should not be indexed by AI agents. The real files stay outside git under _private/sensitive/ or in an external secret manager.",
+    "how_to_read": [
+      "Use boundary_model to understand the three layers: tracked policy, ignored local vault, external secret manager.",
+      "Use default_deny_paths before running find, rg, workspace-index, monitor collection, source collection, or browser snapshots.",
+      "Use allowed_tracked_metadata to record references without storing raw secrets.",
+      "Use human_handoff_rules when the agent needs information from a sensitive file.",
+      "Run validation_commands after changing sensitive-file policy, maps, snapshots, or collectors."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-06-02",
+    "update_triggers": [
+      "A new type of sensitive file or secret is introduced.",
+      "A tool starts collecting files, snapshots, embeddings, prompts, browser state, or repository maps.",
+      "The workspace is prepared for public release or external deployment.",
+      "A user asks agents not to see or index a class of files.",
+      "Secret storage, environment variable, or external secret-manager rules change."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "owasp_secrets_management",
+      "title": "OWASP Secrets Management Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+      "source_type": "official_guidance",
+      "used_for": [
+        "centralized storage, access control, audit, rotation, and metadata expectations",
+        "least privilege and minimizing plaintext exposure"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "owasp_devsecops_secrets",
+      "title": "OWASP DevSecOps Secrets Management",
+      "url": "https://owasp.org/www-project-devsecops-guideline/latest/01a-Secrets-Management",
+      "source_type": "official_guidance",
+      "used_for": [
+        "prevent secrets before they enter repositories",
+        "pre-commit and pipeline scanning as control points"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "github_secure_your_secrets",
+      "title": "GitHub Docs - Secure your secrets",
+      "url": "https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets",
+      "source_type": "official_docs",
+      "used_for": [
+        "secret scanning and push protection as repository controls",
+        "leak prevention before public release"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "onepassword_cli_secret_references",
+      "title": "1Password Developer - Load secrets into the environment",
+      "url": "https://www.1password.dev/cli/secrets-environment-variables",
+      "source_type": "official_docs",
+      "used_for": [
+        "secret references instead of plaintext secrets in source control",
+        "least-privilege secret access for subprocesses"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "internal_root_structure_policy",
+      "title": "Root Structure Policy",
+      "path": "_ops/projects/root-structure-policy.json",
+      "source_type": "internal",
+      "used_for": [
+        "local-only root classification",
+        "_private and outputs ownership"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "internal_privacy_audit",
+      "title": "Privacy Audit Tool",
+      "path": "_tools/privacy-audit/README.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "deterministic boundary validation without reading _private",
+        "map and snapshot privacy checks"
+      ],
+      "last_checked": "2026-06-02"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "tracked_policy_untracked_values",
+      "rule": "Track policies, schemas, env var names, secret reference URIs, and redacted metadata; do not track raw secret values or sensitive local documents.",
+      "reason": "The platform must remain inspectable without exposing credentials or private data.",
+      "applies_to": [
+        "allowed_tracked_metadata",
+        "prohibited_tracked_content"
+      ]
+    },
+    {
+      "id": "private_folder_default_deny",
+      "rule": "Agents must not read, list recursively, search, summarize, index, snapshot, embed, or use files under _private/ by default.",
+      "reason": "The user asked for a central sensitive-file area that AI does not directly inspect.",
+      "applies_to": [
+        "default_deny_paths",
+        "agent_access_rules",
+        "tool_exclusion_rules"
+      ]
+    },
+    {
+      "id": "human_extracts_or_grants",
+      "rule": "When sensitive content is needed, the default path is for the human to provide a redacted extract. Explicit one-time permission is required before an agent may inspect a named sensitive file.",
+      "reason": "Least privilege reduces exposure and avoids copying private data into history, prompts, snapshots, or model context.",
+      "applies_to": [
+        "human_handoff_rules",
+        "exception_process"
+      ]
+    },
+    {
+      "id": "generated_outputs_must_exclude_private",
+      "rule": "Repository maps, monitor snapshots, source collectors, search indexes, generated dashboards, and public artifacts must exclude _private/ and raw secret patterns.",
+      "reason": "Generated artifacts can leak private data even when git ignores the original files.",
+      "applies_to": [
+        "tool_exclusion_rules",
+        "validation_commands"
+      ]
+    },
+    {
+      "id": "public_release_requires_privacy_audit",
+      "rule": "Run privacy audit and review monitor snapshots before public release, Vercel deployment, installer packaging, or external sharing.",
+      "reason": "Private repositories can later become public or be packaged into installable software.",
+      "applies_to": [
+        "validation_commands",
+        "release_gates"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "boundary_model",
+      "meaning": "Logical layers for sensitive handling: tracked control plane, ignored local vault, external secret manager.",
+      "required": true
+    },
+    {
+      "field": "default_deny_paths",
+      "meaning": "Paths and patterns agents and collectors must not read or index by default.",
+      "required": true
+    },
+    {
+      "field": "allowed_tracked_metadata",
+      "meaning": "Information that can be committed because it does not contain raw sensitive values.",
+      "required": true
+    },
+    {
+      "field": "agent_access_rules",
+      "meaning": "Rules for AI agent interaction with sensitive material.",
+      "required": true
+    },
+    {
+      "field": "exception_process",
+      "meaning": "Process for explicit one-time user authorization when direct inspection is unavoidable.",
+      "required": true
+    },
+    {
+      "field": "validation_commands",
+      "meaning": "Commands that prove the boundary remains visible and enforceable.",
+      "required": true
+    }
+  ],
+  "boundary_model": {
+    "tracked_control_plane": [
+      "agent-platform/configs/security/sensitive-file-boundary.json",
+      "_docs/policies/sensitive-file-boundary-policy.ko.md",
+      "_ops/security/README.ko.md",
+      "_tools/privacy-audit/"
+    ],
+    "ignored_local_vault": [
+      "_private/sensitive/",
+      "_private/tmp/",
+      "_private/redacted-extracts/"
+    ],
+    "external_secret_managers": [
+      "1Password",
+      "platform keychain",
+      "cloud secret managers",
+      "provider UI secret storage"
+    ],
+    "tracked_examples_only": [
+      "*.example.env",
+      "redacted schema samples",
+      "environment variable names",
+      "secret reference placeholders such as op://vault/item/field"
+    ]
+  },
+  "default_deny_paths": [
+    "_private/",
+    "outputs/",
+    ".env",
+    ".env.*",
+    "*.pem",
+    "*.key",
+    "*.p12",
+    "*.pfx",
+    "*.jks",
+    "*.keystore",
+    "*.kdbx",
+    "browser cookies",
+    "provider webhook URLs",
+    "API tokens",
+    "private customer/user data"
+  ],
+  "allowed_tracked_metadata": [
+    "secret name or purpose",
+    "owning project",
+    "required environment variable name",
+    "external secret-manager reference URI without resolved value",
+    "rotation owner",
+    "last rotation date when not sensitive",
+    "redacted sample values",
+    "access procedure",
+    "validation command that does not print secret values"
+  ],
+  "prohibited_tracked_content": [
+    "raw tokens",
+    "webhook URLs",
+    "private keys",
+    "passwords",
+    "session cookies",
+    "unredacted customer or personal data",
+    "full private documents unless explicitly approved for repository storage"
+  ],
+  "agent_access_rules": {
+    "default": "deny_read",
+    "allowed_without_permission": [
+      "mention that _private/ exists as a protected local-only boundary",
+      "check .gitignore and generated artifacts for exclusion patterns",
+      "read this config and tracked policy documents",
+      "ask the user for a redacted extract or explicit one-time permission"
+    ],
+    "not_allowed_without_permission": [
+      "recursive find, rg, cat, sed, open, summarize, embed, screenshot, or snapshot under _private/",
+      "copying secrets into prompts, history, evaluations, web searches, generated dashboards, or commits",
+      "using _private/ files as source-of-truth evidence"
+    ]
+  },
+  "human_handoff_rules": [
+    "Ask the user to provide the minimum redacted extract needed for the task.",
+    "If exact local file inspection is unavoidable, request explicit one-time permission with path, operation, purpose, and allowed output shape.",
+    "Do not store raw extracted content in _history, _research, _docs, snapshots, or final responses.",
+    "Record only redacted provenance: source path class, extraction date, field names, and what was intentionally omitted."
+  ],
+  "exception_process": {
+    "requires_user_permission": true,
+    "permission_fields": [
+      "specific_path",
+      "operation",
+      "purpose",
+      "allowed_retention",
+      "redaction_rules",
+      "rollback_or_cleanup"
+    ],
+    "default_retention": "none",
+    "default_output": "redacted_summary_only"
+  },
+  "tool_exclusion_rules": [
+    {
+      "tool": "_tools/workspace-index",
+      "rule": "Do not index local_only_dirs from root-structure-policy into the file index."
+    },
+    {
+      "tool": "workspace-monitor/scripts/collect-workspace.mjs",
+      "rule": "Do not traverse _private or outputs; do not include them in document/source snapshots."
+    },
+    {
+      "tool": "_tools/source-collector",
+      "rule": "Do not collect local sensitive files as research sources."
+    },
+    {
+      "tool": "web search",
+      "rule": "Do not place raw sensitive values or private file contents into queries."
+    }
+  ],
+  "release_gates": [
+    "python3 _tools/privacy-audit/src/privacy_audit.py --check",
+    "manual review of workspace-monitor/src/generated/workspace-snapshot.json before public deploy",
+    "secret scanning or provider push protection when available",
+    "confirm no private installer payload before desktop packaging"
+  ],
+  "validation_commands": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/security/sensitive-file-boundary.json",
+    "python3 _tools/privacy-audit/src/privacy_audit.py --check",
+    "python3 _tools/structure-audit/src/structure_audit.py --check",
+    "python3 _tools/workspace-index/src/workspace_index.py --check"
+  ]
+}

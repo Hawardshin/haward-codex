@@ -1,0 +1,72 @@
+{
+  "task_id": "2026-06-02-sensitive-boundary-root-architecture",
+  "title": "Sensitive boundary and root architecture",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked OWASP, GitHub, 1Password, and Nx sources before local planning."
+    },
+    {
+      "phase_id": "memory_and_structure_review",
+      "label": "Memory and root structure review",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Reviewed durable instructions, root folder policy, project registry, existing local-only folders, workspace index, and monitor collector behavior."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added REQ-WS-074, requirement change/review records, and the sensitive boundary/root architecture spec set."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Boundary, docs, tools, and generated maps",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added sensitive boundary config, policy docs, operations guide, workflow, prompt, privacy audit tool, root architecture layers, collector exclusions, and regenerated maps."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Ran config, privacy, structure, docs, naming, memory, workspace index, monitor build, omission, grounding, and evaluation checks."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Found and fixed an important traversal gap so the workspace indexer prunes protected local folders before descending into them."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured"
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "The main overhead was governance propagation across durable instructions, config, docs, maps, specs, history, monitor snapshots, and close-out evaluation.",
+    "improvement_candidates": [
+      "Create a governance change scaffold that generates paired requirement, spec, history, omission, grounding, and evaluation shells.",
+      "Add a CI or pre-push privacy audit hook once the user selects the preferred local/remote enforcement point."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-sensitive-boundary-root-architecture.ko.md",
+    "_history/plans/2026/2026-06-02-sensitive-boundary-root-architecture.ko.md",
+    "_specs/workspace-platform/2026-06-02-sensitive-boundary-root-architecture/validation.ko.md",
+    "_history/evaluations/2026/2026-06-02-sensitive-boundary-root-architecture-omission.json",
+    "_history/evaluations/2026/2026-06-02-sensitive-boundary-root-architecture-grounding.json"
+  ]
+}

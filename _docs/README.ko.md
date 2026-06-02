@@ -13,6 +13,13 @@
 | `operating-models/` | 플랫폼 운영 모델, 컨텍스트 모델, 도구 독립형 assistant 운영 모델 |
 | `governance/` | capability 승격, 저장소 구조 거버넌스 같은 관리 기준 |
 
+## 중요한 보안 경계
+
+- 민감 파일은 `_private/sensitive/` 또는 외부 secret manager에 둔다.
+- AI 에이전트는 `_private/` 내부를 기본적으로 직접 읽거나 색인하지 않는다.
+- 관련 정책: [_docs/policies/sensitive-file-boundary-policy.ko.md](policies/sensitive-file-boundary-policy.ko.md)
+- 운영 안내: [_ops/security/README.ko.md](../_ops/security/README.ko.md)
+
 ## 누락 방지
 
 - 새 문서를 만들 때는 `_docs/registry.json`의 category 규칙을 확인한다.

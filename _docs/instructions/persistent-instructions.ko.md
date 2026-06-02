@@ -12,6 +12,8 @@
 - capability promotion은 아이디어 생성 전에 사람이 직접 수행하는 작업 모델을 먼저 기록한다. 생성된 아이디어는 사용자 문구만이 아니라 구체적인 human process step을 줄이거나 안정화해야 한다.
 - capability promotion은 아이디어 생성과 아이디어 평가를 분리한다. 사소하지 않은 문제는 여러 개선 아이디어를 만들고, 반복 감소, 시간 절감, 유지보수 비용, 근거 강도, 위험 적합성, 가장 작은 자산 적합성으로 평가한 뒤 선택/기각/대기 이유를 남긴다.
 - capability promotion은 `prompt`, `workflow`, `template`, `tool`, `skill`, `agent`, `project_feature` 순서로 가장 작은 자산을 먼저 검토한다. destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, irreversible change는 human checkpoint와 rollback 계획 없이 자동 실행하지 않는다.
+- 민감 파일은 `_private/sensitive/` 또는 외부 secret manager로 중앙 라우팅하되, AI 에이전트는 `_private/` 내부를 기본적으로 직접 읽거나 색인하지 않는다. 필요한 정보는 redacted extract를 먼저 요청하고, 직접 열람은 특정 경로와 작업에 대한 명시적 1회 허가가 있을 때만 허용한다.
+- 민감 파일 경계의 원본은 `agent-platform/configs/security/sensitive-file-boundary.json`, `_docs/policies/sensitive-file-boundary-policy.ko.md`, `_ops/security/README.ko.md`에 둔다. `.gitignore`, map, snapshot, collector, public artifact, installer 규칙을 바꾸면 `python3 _tools/privacy-audit/src/privacy_audit.py --check`를 실행한다.
 - 이 저장소의 운영 원칙은 Codex에만 묶지 않고 Claude Code, Cursor, Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 재사용할 수 있게 유지한다.
 - 도구 독립형 원칙의 원본은 `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`와 `_ops/assistant-runtimes/adapter-registry.json`에 둔다.
 - 모든 에이전트는 영속 원칙을 강하게 고수한다. 원칙은 장식 문구가 아니라 실행 계약과 close-out gate이며, 속도, 돈, 낙관, 편의, 사용자 압박은 필요한 근거, 안전, 개인정보, 법, 품질, provenance, 검증, 평가를 무단 생략하는 이유가 될 수 없다.

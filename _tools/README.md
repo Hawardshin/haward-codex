@@ -34,6 +34,7 @@ _tools/tool-name/
 - `work-timer/`: validate and summarize phase-level work timing records so bottlenecks are visible.
 - `naming-audit/`: validate enforceable naming conventions for projects, tools, docs, specs, Python source, and configs.
 - `structure-audit/`: validate root folders against project registry, reserved operational folders, and local-only folder rules.
+- `privacy-audit/`: validate sensitive-file boundaries, ignored local vault rules, and generated map/snapshot exclusions without reading `_private/`.
 
 Each tool README should document:
 

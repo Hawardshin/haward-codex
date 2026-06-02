@@ -62,6 +62,7 @@
       "The agent orchestration registry, reusable agent blueprint contract, multi-agent orchestration pattern, or agent spec validation command changes.",
       "The capability promotion registry, bounded black-box automation policy, self-improvement candidate contract, or automatic feature promotion risk gate changes.",
       "The large-scope decomposition profile, file-heavy work split policy, context budget gate, or source inventory/sampling contract changes.",
+      "The sensitive-file boundary, _private default-deny policy, privacy audit tool, secret handling policy, or generated snapshot privacy gate changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
     ]
@@ -312,6 +313,18 @@
         "file-heavy and context-heavy work decomposition",
         "source inventory, exclusions, representative samples, slices, merge gates, and verification contracts",
         "pre-step before parallel work planning when scope is too broad"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "sensitive_file_boundary",
+      "title": "Sensitive File Boundary",
+      "path": "agent-platform/configs/security/sensitive-file-boundary.json",
+      "source_type": "internal",
+      "used_for": [
+        "central sensitive-file routing",
+        "_private default-deny AI access",
+        "privacy audit and generated snapshot exclusion rules"
       ],
       "last_checked": "2026-06-02"
     },
@@ -1239,13 +1252,25 @@
     },
     {
       "id": "root_structure_policy_must_stay_discoverable",
-      "rule": "The root structure policy must remain a warm memory anchor because future sessions need a deterministic way to classify root folders, runtime adapters, local-only scratch, generated outputs, and registered projects.",
+      "rule": "The root structure policy must remain a warm memory anchor because future sessions need a deterministic way to classify root folders, logical architecture layers, runtime adapters, local-only scratch, generated outputs, and registered projects.",
       "reason": "The user explicitly asked to improve any folder-structure contradictions or management friction as the workspace grows.",
       "applies_to": [
         "anchors",
         "required_anchor_ids",
         "structure-audit",
         "project-boundary-management"
+      ]
+    },
+    {
+      "id": "sensitive_file_boundary_must_stay_discoverable",
+      "rule": "The sensitive-file boundary must remain a warm memory anchor because future agents must know that _private is a visible protected local vault whose contents are not read, indexed, summarized, or used as evidence by default.",
+      "reason": "The user explicitly asked for sensitive files to be collected in one place and kept out of direct AI inspection.",
+      "applies_to": [
+        "anchors",
+        "required_anchor_ids",
+        "privacy-audit",
+        "workspace-monitor",
+        "workspace-index"
       ]
     },
     {
@@ -1363,6 +1388,7 @@
     "work_timing_workflow",
     "parallel_work_workflow",
     "large_scope_decomposition_profile",
+    "sensitive_file_boundary",
     "coordination_board",
     "human_decision_inbox",
     "human_arbitration_agent",
@@ -1429,6 +1455,7 @@
     "work_timing_workflow",
     "parallel_work_workflow",
     "large_scope_decomposition_profile",
+    "sensitive_file_boundary",
     "coordination_board",
     "human_decision_inbox",
     "human_arbitration_agent",
@@ -1667,6 +1694,14 @@
       "path": "agent-platform/configs/planning/large-scope-decomposition-profile.json",
       "tier": "warm",
       "purpose": "Rules for shrinking broad, file-heavy, context-heavy work into source inventory, exclusions, representative samples, slices, merge gates, and verification before implementation or parallel execution.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "sensitive_file_boundary",
+      "path": "agent-platform/configs/security/sensitive-file-boundary.json",
+      "tier": "warm",
+      "purpose": "Tracked policy and config for routing sensitive local files to _private/sensitive or external secret managers while denying AI default access to _private contents.",
       "required": true,
       "load_order": 8
     },

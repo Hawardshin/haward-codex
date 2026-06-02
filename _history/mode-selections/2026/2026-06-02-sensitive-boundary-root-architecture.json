@@ -1,0 +1,30 @@
+{
+  "task_id": "2026-06-02-sensitive-boundary-root-architecture",
+  "selected_work_mode": "governance",
+  "selection_reason": "The request changes durable security/privacy rules, root folder architecture, persistent instructions, shared configs, generated maps, and monitor collection behavior.",
+  "risk_level": "high",
+  "durability": "durable_workspace_policy",
+  "overrides": [],
+  "required_targets": [
+    "web_search_record_targets",
+    "user_request_summary_targets",
+    "requirements_targets",
+    "spec_targets",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets",
+    "omission_check_targets"
+  ],
+  "enforcement_checks": [
+    "check-config-contract",
+    "privacy-audit",
+    "structure-audit",
+    "docs-audit",
+    "naming-audit",
+    "check-memory-bootstrap",
+    "workspace-monitor build",
+    "evaluate-work"
+  ]
+}

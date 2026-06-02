@@ -70,11 +70,8 @@ def main(argv: list[str] | None = None) -> int:
 
 def render_repository_map(root: Path) -> str:
     ignored_parts = IGNORE_DIRS | load_generated_ignore_parts(root)
-    files = sorted(
-        path.relative_to(root)
-        for path in root.rglob("*")
-        if path.is_file() and not should_ignore_with_parts(path.relative_to(root), ignored_parts)
-    )
+    file_ignored_parts = ignored_parts | load_local_only_dir_names(root)
+    files = sorted(iter_indexable_files(root, file_ignored_parts))
     root_entries = sorted(path for path in root.iterdir() if path.is_dir() and path.name not in ignored_parts)
     root_metadata = load_root_folder_metadata(root)
 
@@ -101,6 +98,15 @@ def render_repository_map(root: Path) -> str:
         lines.append(
             f"| `{entry.name}/` | {metadata['class']} | {metadata['purpose']} | {metadata['source']} |"
         )
+
+    logical_layers = load_logical_architecture_layers(root)
+    if logical_layers:
+        lines.extend(["", "## Logical Architecture Layers", "", "| Layer | Purpose | Folders | Rule |", "| --- | --- | --- | --- |"])
+        for layer in logical_layers:
+            folders = ", ".join(f"`{folder}`" for folder in layer.get("folders", []))
+            lines.append(
+                f"| `{layer.get('id', '')}` | {layer.get('purpose', '')} | {folders} | {layer.get('rule', '')} |"
+            )
 
     lines.extend(
         [
@@ -215,6 +221,24 @@ def should_ignore_with_parts(relative_path: Path, ignored_parts: set[str]) -> bo
     return any(part in ignored_parts for part in relative_path.parts)
 
 
+def iter_indexable_files(root: Path, ignored_parts: set[str]) -> list[Path]:
+    """Return tracked map candidates without descending into ignored folders."""
+
+    files: list[Path] = []
+    stack = [root]
+    while stack:
+        current = stack.pop()
+        for child in sorted(current.iterdir()):
+            relative_path = child.relative_to(root)
+            if should_ignore_with_parts(relative_path, ignored_parts):
+                continue
+            if child.is_dir():
+                stack.append(child)
+            elif child.is_file():
+                files.append(relative_path)
+    return files
+
+
 def load_generated_ignore_parts(root: Path) -> set[str]:
     policy_path = root / "_ops" / "projects" / "root-structure-policy.json"
     policy = read_json(policy_path)
@@ -227,6 +251,23 @@ def load_generated_ignore_parts(root: Path) -> set[str]:
         if leaf and "*" not in leaf:
             parts.add(leaf)
     return parts
+
+
+def load_local_only_dir_names(root: Path) -> set[str]:
+    policy_path = root / "_ops" / "projects" / "root-structure-policy.json"
+    policy = read_json(policy_path)
+    names = set()
+    for item in list_of_dicts(policy.get("local_only_dirs", [])):
+        name = str(item.get("name", "")).strip().strip("/")
+        if name:
+            names.add(name)
+    return names
+
+
+def load_logical_architecture_layers(root: Path) -> list[dict[str, Any]]:
+    policy_path = root / "_ops" / "projects" / "root-structure-policy.json"
+    policy = read_json(policy_path)
+    return list_of_dicts(policy.get("logical_architecture_layers", []))
 
 
 def read_json(path: Path) -> dict[str, Any]:

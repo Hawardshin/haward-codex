@@ -1,0 +1,187 @@
+{
+  "task": "Ground sensitive boundary and root architecture close-out claims.",
+  "output_summary": "The workspace now has an explicit sensitive-file boundary, generated-output privacy audit, and root-folder logical architecture layers.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user-request",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "durable request summary"
+    },
+    {
+      "evidence_id": "sensitive-config",
+      "source": "agent-platform/configs/security/sensitive-file-boundary.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "self-documenting config"
+    },
+    {
+      "evidence_id": "sensitive-policy",
+      "source": "_docs/policies/sensitive-file-boundary-policy.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "workspace policy document"
+    },
+    {
+      "evidence_id": "runtime-rules",
+      "source": "AGENTS.md and _docs/instructions/persistent-instructions.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "runtime operating rules"
+    },
+    {
+      "evidence_id": "privacy-audit",
+      "source": "python3 _tools/privacy-audit/src/privacy_audit.py --check",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "local deterministic audit"
+    },
+    {
+      "evidence_id": "indexer-code",
+      "source": "_tools/workspace-index/src/workspace_index.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "local tool source"
+    },
+    {
+      "evidence_id": "monitor-collector",
+      "source": "workspace-monitor/scripts/collect-workspace.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "monitor collection source"
+    },
+    {
+      "evidence_id": "root-policy",
+      "source": "_ops/projects/root-structure-policy.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "workspace root architecture config"
+    },
+    {
+      "evidence_id": "verification",
+      "source": "config-contract, structure-audit, docs-audit, naming-audit, memory-bootstrap, workspace-index, workspace-monitor build, omission, and grounding command outputs",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "local validation commands"
+    },
+    {
+      "evidence_id": "owasp-secrets",
+      "source": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "OWASP cheat sheet"
+    },
+    {
+      "evidence_id": "github-secrets",
+      "source": "https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "GitHub official documentation"
+    },
+    {
+      "evidence_id": "onepassword-env",
+      "source": "https://www.1password.dev/cli/secrets-environment-variables",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "1Password developer documentation"
+    },
+    {
+      "evidence_id": "nx-folder",
+      "source": "https://nx.dev/docs/concepts/decisions/folder-structure",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Nx official documentation"
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The workspace now has a self-documenting sensitive-file boundary config.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "sensitive-config",
+        "verification"
+      ],
+      "verification_steps": [
+        "Ran check-config-contract on configs/security/sensitive-file-boundary.json.",
+        "Ran the full core shared settings check-config-contract command."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The protected local private folder is now documented as AI default-deny in durable rules and policy docs.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "sensitive-config",
+        "sensitive-policy",
+        "runtime-rules"
+      ],
+      "verification_steps": [
+        "Reviewed AGENTS.md, persistent instructions, and sensitive-file boundary policy references."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The workspace indexer and monitor collector exclude protected local private content from generated maps and snapshots.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "indexer-code",
+        "monitor-collector",
+        "privacy-audit"
+      ],
+      "verification_steps": [
+        "Changed workspace-index to prune ignored directories before traversal.",
+        "Ran workspace-index generation and --check.",
+        "Ran privacy-audit after monitor collection and build."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The root folder policy now groups root folders into logical architecture layers.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "root-policy",
+        "verification"
+      ],
+      "verification_steps": [
+        "Reviewed root-structure-policy.json.",
+        "Ran structure-audit and workspace-index."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "External references support keeping secrets out of repositories, using explicit secret handling, and defining monorepo folder structure deliberately.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "owasp-secrets",
+        "github-secrets",
+        "onepassword-env",
+        "nx-folder"
+      ],
+      "verification_steps": [
+        "Checked official OWASP, GitHub, 1Password, and Nx sources during web-first intake.",
+        "Recorded query and source impact in the web-search history file."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "No actual private secret values were inspected or migrated.",
+    "No specific third-party secret manager was selected in this change set."
+  ],
+  "limitation_notes": [
+    "The boundary is implemented as repository policy, config, and local audits; enforcement inside every possible external AI runtime still depends on that runtime honoring repository rules.",
+    "Public deployment hardening may need additional CI secret scanning once the user selects tooling."
+  ]
+}

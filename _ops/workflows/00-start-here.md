@@ -23,31 +23,32 @@
 15. If the request changes behavior, rules, structure, platform capability, or implementation criteria, run [_ops/workflows/35-requirements-lifecycle.md](35-requirements-lifecycle.md) unless `ship_first` explicitly defers the backfill to `_ops/backlog/`.
 16. If meaningful implementation follows, run [_ops/workflows/36-spec-driven-development.md](36-spec-driven-development.md) unless `quick` mode is sufficient or `ship_first` explicitly defers the spec backfill.
 17. If active specs are ambiguous or differ from current source, tests, generated artifacts, or validation output, run [_ops/workflows/38-spec-source-reconciliation.md](38-spec-source-reconciliation.md) before changing either spec or source.
-18. If the work is too broad, file-heavy, spans many projects, or would exceed useful context, run [_ops/workflows/76-large-scope-decomposition.md](76-large-scope-decomposition.md) before parallel planning or implementation.
-19. If speed matters or work can be split into independent lanes, run [_ops/workflows/52-parallel-work-planning.md](52-parallel-work-planning.md), record dependencies and touch paths, and update coordination status before parallel execution.
-20. If source-code implementation follows, run [_ops/workflows/56-coding-research.md](56-coding-research.md) and record code references plus architecture references, at least two architecture options, and decision notes.
-21. If the work creates, updates, validates, installs, or improves a custom skill, run [_ops/workflows/37-skill-lifecycle.md](37-skill-lifecycle.md).
-22. If planning depends on external facts or current information, run [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md) with `agent-platform/configs/research/research-agent-profile.json`.
-23. If the user asks for deep research, a long-form report, a landscape review, or a literature-style review, run [_ops/workflows/57-deep-research.md](57-deep-research.md) with `agent-platform/configs/research/deep-research-profile.json`.
-24. If the work installs, upgrades, removes, or globally configures software, follow [_ops/workflows/58-installation-record.md](58-installation-record.md).
-25. Implement the smallest useful change inside the owning project or shared folder.
-26. Verify with tests, checks, or rendered artifacts.
-27. For non-`quick` work, run [_ops/workflows/68-omission-prevention.md](68-omission-prevention.md) or produce an equivalent coverage check and include `omission_check_targets`.
-28. If runtime resource risk exists, run [_ops/workflows/69-resource-leak-prevention.md](69-resource-leak-prevention.md), set `resource_risk_occurred=true`, and include `resource_check_targets`.
-29. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).
-30. If the active conversation has become too long to resume safely from chat, run [_ops/workflows/45-context-archive.md](45-context-archive.md).
-31. Update and validate the timing record with [_ops/workflows/42-record-work-timing.md](42-record-work-timing.md).
-32. Evaluate completed work using the selected `work_mode` against the initial instruction and the artifacts required by that mode.
-33. Rework if the evaluator finds blocking gaps, then evaluate again.
-34. Save or update the public web search record under `_history/web-searches/YYYY/` when required by the selected mode or when the search produced reusable insight.
-35. Save or update the user request summary under `_history/user-requests/YYYY/` when required by the selected mode or when the request changes durable state.
-36. Save or update the requirements baseline/change/review under `_requirements/` or the owning project's `docs/requirements/` when required by the selected mode or when durable behavior changes.
-37. Save or update spec-driven artifacts under `_specs/` or the owning project's `specs/` when required by the selected mode or when implementation scope is durable.
-38. If skill work occurred, save or update `_skills/` source, validation, and improvement records.
-39. Save or update the request-to-outcome trace under `_history/request-traces/YYYY/` when required by the selected mode or when the request is meaningful durable work.
-40. Update `_history/work-summaries/`, `_history/work-timings/`, detailed history, and maps when required by the selected mode or when the navigation/history layer changed.
-41. For `ship_first`, update `_ops/backlog/deferred-improvements.ko.md` if non-blocking improvements were intentionally postponed.
-42. Commit and push immediately.
+18. If the work touches tokens, keys, credentials, private notes, browser cookies, user-provided private files, `.env`, `_private/`, secret managers, or files AI should not inspect directly, run [_ops/workflows/77-sensitive-file-handling.md](77-sensitive-file-handling.md) before opening files, collecting sources, generating snapshots, or implementing.
+19. If the work is too broad, file-heavy, spans many projects, or would exceed useful context, run [_ops/workflows/76-large-scope-decomposition.md](76-large-scope-decomposition.md) before parallel planning or implementation.
+20. If speed matters or work can be split into independent lanes, run [_ops/workflows/52-parallel-work-planning.md](52-parallel-work-planning.md), record dependencies and touch paths, and update coordination status before parallel execution.
+21. If source-code implementation follows, run [_ops/workflows/56-coding-research.md](56-coding-research.md) and record code references plus architecture references, at least two architecture options, and decision notes.
+22. If the work creates, updates, validates, installs, or improves a custom skill, run [_ops/workflows/37-skill-lifecycle.md](37-skill-lifecycle.md).
+23. If planning depends on external facts or current information, run [_ops/workflows/55-research-insight-planning.md](55-research-insight-planning.md) with `agent-platform/configs/research/research-agent-profile.json`.
+24. If the user asks for deep research, a long-form report, a landscape review, or a literature-style review, run [_ops/workflows/57-deep-research.md](57-deep-research.md) with `agent-platform/configs/research/deep-research-profile.json`.
+25. If the work installs, upgrades, removes, or globally configures software, follow [_ops/workflows/58-installation-record.md](58-installation-record.md).
+26. Implement the smallest useful change inside the owning project or shared folder.
+27. Verify with tests, checks, or rendered artifacts.
+28. For non-`quick` work, run [_ops/workflows/68-omission-prevention.md](68-omission-prevention.md) or produce an equivalent coverage check and include `omission_check_targets`.
+29. If runtime resource risk exists, run [_ops/workflows/69-resource-leak-prevention.md](69-resource-leak-prevention.md), set `resource_risk_occurred=true`, and include `resource_check_targets`.
+30. If the final output contains factual claims, run [_ops/workflows/70-hallucination-prevention.md](70-hallucination-prevention.md).
+31. If the active conversation has become too long to resume safely from chat, run [_ops/workflows/45-context-archive.md](45-context-archive.md).
+32. Update and validate the timing record with [_ops/workflows/42-record-work-timing.md](42-record-work-timing.md).
+33. Evaluate completed work using the selected `work_mode` against the initial instruction and the artifacts required by that mode.
+34. Rework if the evaluator finds blocking gaps, then evaluate again.
+35. Save or update the public web search record under `_history/web-searches/YYYY/` when required by the selected mode or when the search produced reusable insight.
+36. Save or update the user request summary under `_history/user-requests/YYYY/` when required by the selected mode or when the request changes durable state.
+37. Save or update the requirements baseline/change/review under `_requirements/` or the owning project's `docs/requirements/` when required by the selected mode or when durable behavior changes.
+38. Save or update spec-driven artifacts under `_specs/` or the owning project's `specs/` when required by the selected mode or when implementation scope is durable.
+39. If skill work occurred, save or update `_skills/` source, validation, and improvement records.
+40. Save or update the request-to-outcome trace under `_history/request-traces/YYYY/` when required by the selected mode or when the request is meaningful durable work.
+41. Update `_history/work-summaries/`, `_history/work-timings/`, detailed history, and maps when required by the selected mode or when the navigation/history layer changed.
+42. For `ship_first`, update `_ops/backlog/deferred-improvements.ko.md` if non-blocking improvements were intentionally postponed.
+43. Commit and push immediately.
 
 ## Rule
 

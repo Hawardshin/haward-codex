@@ -111,6 +111,28 @@
         "mapping shared principles to Codex, Claude Code, Cursor, Antigravity, and generic runtimes"
       ],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "nx_folder_structure",
+      "title": "Nx Docs - Folder Structure",
+      "url": "https://nx.dev/docs/concepts/decisions/folder-structure",
+      "source_type": "official",
+      "used_for": [
+        "monorepo folder grouping by scope",
+        "having an explicit folder structure plan before moving projects"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "sensitive_file_boundary",
+      "title": "Sensitive File Boundary",
+      "path": "agent-platform/configs/security/sensitive-file-boundary.json",
+      "source_type": "internal",
+      "used_for": [
+        "local-only sensitive file boundary",
+        "AI default-deny access to _private"
+      ],
+      "last_checked": "2026-06-02"
     }
   ],
   "structure_rules": [
@@ -134,10 +156,11 @@
     },
     {
       "id": "local_only_dirs_are_not_knowledge",
-      "rule": "Local-only directories may exist on disk but must be ignored by git and must not be used as durable source-of-truth for future agents.",
-      "reason": "Private local scratch state can disappear or contain material that should not be committed or indexed.",
+      "rule": "Local-only directories may exist on disk but must be ignored by git, excluded from generated maps/snapshots, and must not be used as durable source-of-truth for future agents.",
+      "reason": "Private local scratch state can disappear or contain material that should not be committed, indexed, summarized, or shown to AI by default.",
       "applies_to": [
         "local_only_dirs",
+        "logical_architecture_layers",
         ".gitignore"
       ]
     },
@@ -190,6 +213,11 @@
       "required": true
     },
     {
+      "field": "logical_architecture_layers",
+      "meaning": "Human-facing grouping of root folders into project plane, operations control plane, knowledge plane, runtime adapter plane, protected local plane, and generated local plane.",
+      "required": true
+    },
+    {
       "field": "reserved_operational_dirs",
       "meaning": "Tracked underscore-prefixed folders for shared workspace operations and knowledge.",
       "required": true
@@ -216,6 +244,70 @@
     }
   ],
   "project_registry_path": "_ops/projects/registry.json",
+  "logical_architecture_layers": [
+    {
+      "id": "project-plane",
+      "purpose": "Independently owned root projects with their own lifecycle, commands, README, docs, tests, and artifacts.",
+      "folders": [
+        "agent-platform/",
+        "presentation-agent/",
+        "platform-desktop-app/",
+        "workspace-monitor/"
+      ],
+      "rule": "Add a new root project only when the concern has independent ownership or lifecycle; register it in _ops/projects/registry.json."
+    },
+    {
+      "id": "operations-control-plane",
+      "purpose": "Shared execution control, policies, requirements, specs, history, coordination, workflows, prompts, maps, and evaluations.",
+      "folders": [
+        "_ops/",
+        "_docs/",
+        "_requirements/",
+        "_specs/",
+        "_history/"
+      ],
+      "rule": "These folders are shared platform control surfaces, not project-specific storage."
+    },
+    {
+      "id": "knowledge-and-reuse-plane",
+      "purpose": "Reusable knowledge, philosophy, templates, tools, skills, research, and archived projects.",
+      "folders": [
+        "_philosophy/",
+        "_research/",
+        "_skills/",
+        "_templates/",
+        "_tools/",
+        "_archive/"
+      ],
+      "rule": "Promote project-local assets here only when they are reusable across projects."
+    },
+    {
+      "id": "runtime-adapter-plane",
+      "purpose": "Thin adapters for specific AI coding tools that point back to shared operating principles.",
+      "folders": [
+        ".claude/",
+        ".cursor/",
+        ".agents/"
+      ],
+      "rule": "Do not fork policy here; keep adapters thin."
+    },
+    {
+      "id": "protected-local-plane",
+      "purpose": "Local-only sensitive or private material that exists on disk but is not durable repository knowledge.",
+      "folders": [
+        "_private/"
+      ],
+      "rule": "Do not read, index, summarize, or use contents by default. Route real sensitive files to _private/sensitive/ or an external secret manager."
+    },
+    {
+      "id": "generated-local-plane",
+      "purpose": "Transient local output that is not a durable artifact until moved into the owning project artifacts folder.",
+      "folders": [
+        "outputs/"
+      ],
+      "rule": "Do not treat root outputs as final deliverables."
+    }
+  ],
   "directory_classes": [
     {
       "class": "registered_project",
@@ -328,6 +420,18 @@
     {
       "pattern": "**/coverage/",
       "purpose": "Project-local test coverage output."
+    },
+    {
+      "pattern": "**/test-results/",
+      "purpose": "Project-local browser/test runner output."
+    },
+    {
+      "pattern": "**/playwright-report/",
+      "purpose": "Project-local Playwright HTML report output."
+    },
+    {
+      "pattern": "**/blob-report/",
+      "purpose": "Project-local Playwright blob report output."
     },
     {
       "pattern": "**/out/",

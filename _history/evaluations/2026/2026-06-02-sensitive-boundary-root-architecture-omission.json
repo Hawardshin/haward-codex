@@ -1,0 +1,219 @@
+{
+  "task": "Make sensitive-file handling and root folder architecture explicit.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "requirement",
+      "description": "Add a durable requirement for central sensitive-file routing, AI default-deny access, privacy audit, and root folder logical layers.",
+      "source": "UR-2026-06-02-034 / REQ-WS-074",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_requirements/changes/2026-06-02-sensitive-boundary-root-architecture.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "sensitive-config",
+      "description": "Create a self-documenting sensitive-file boundary config with tracked policy, untracked values, default-deny access, redacted extract, exception, and tool exclusion rules.",
+      "source": "REQ-WS-074",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/security/sensitive-file-boundary.json",
+        "agent-platform/configs/security/README.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "policy-docs",
+      "description": "Add visible Korean and English policy and operations guides for where sensitive files live and what AI may not inspect.",
+      "source": "REQ-WS-074",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_docs/policies/sensitive-file-boundary-policy.ko.md",
+        "_ops/security/README.ko.md",
+        "_docs/README.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "runtime-rules",
+      "description": "Persist rules in AGENTS and persistent instructions so future agents obey the sensitive boundary.",
+      "source": "durable instruction rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "AGENTS.md",
+        "_docs/instructions/persistent-instructions.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "collector-exclusions",
+      "description": "Prevent generated maps and monitor snapshots from traversing or indexing protected local private contents.",
+      "source": "REQ-WS-074",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_tools/workspace-index/src/workspace_index.py",
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "_tools/privacy-audit/src/privacy_audit.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "root-architecture",
+      "description": "Add top-level logical architecture layers for project, operations, knowledge/reuse, runtime adapter, protected local, and generated local planes.",
+      "source": "user architecture complaint",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_ops/projects/root-structure-policy.json",
+        "_ops/projects/index.ko.md",
+        "README.md",
+        "_ops/maps/repository-map.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "routing",
+      "description": "Add a sensitive-file workflow and prompt route.",
+      "source": "REQ-WS-074",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_ops/workflows/77-sensitive-file-handling.md",
+        "_ops/prompts/107-sensitive-file-handling.md",
+        "_ops/prompts/00-router.md",
+        "_ops/workflows/00-start-here.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "history",
+      "description": "Record web search, plan, mode selection, request summary, trace, work summary, spec artifacts, and timing.",
+      "source": "governance close-out",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-sensitive-boundary-root-architecture.ko.md",
+        "_history/plans/2026/2026-06-02-sensitive-boundary-root-architecture.ko.md",
+        "_history/mode-selections/2026/2026-06-02-sensitive-boundary-root-architecture.json",
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_history/request-traces/2026/2026-06-02-sensitive-boundary-root-architecture.ko.md",
+        "_history/work-summaries/2026/2026-06-02.ko.md",
+        "_specs/workspace-platform/2026-06-02-sensitive-boundary-root-architecture/",
+        "_history/work-timings/2026/2026-06-02-sensitive-boundary-root-architecture.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/security/sensitive-file-boundary.json",
+      "purpose": "Sensitive boundary source of truth.",
+      "required": true
+    },
+    {
+      "path": "_tools/privacy-audit/src/privacy_audit.py",
+      "purpose": "Privacy boundary validator that does not read protected local private content.",
+      "required": true
+    },
+    {
+      "path": "_ops/projects/root-structure-policy.json",
+      "purpose": "Root logical architecture source of truth.",
+      "required": true
+    },
+    {
+      "path": "_ops/security/README.ko.md",
+      "purpose": "Human-visible security operations entrypoint.",
+      "required": true
+    },
+    {
+      "path": "_ops/workflows/77-sensitive-file-handling.md",
+      "purpose": "Reusable sensitive-file handling workflow.",
+      "required": true
+    },
+    {
+      "path": "_ops/prompts/107-sensitive-file-handling.md",
+      "purpose": "Reusable sensitive-file handling prompt.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "Sensitive config validates as self-documenting and passes the full core shared settings contract.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/security/sensitive-file-boundary.json",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract <core shared settings list>"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "privacy-audit",
+      "description": "Sensitive paths are ignored and generated maps/snapshots do not include protected local private content paths.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/privacy-audit/src/privacy_audit.py --check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "structure-audit",
+      "description": "Root structure and generated output patterns are clean.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/structure-audit/src/structure_audit.py --check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "docs-naming",
+      "description": "Docs and naming audits pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/docs-audit/src/docs_audit.py --check",
+        "python3 _tools/naming-audit/src/naming_audit.py --check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "memory-bootstrap",
+      "description": "Memory bootstrap includes the sensitive boundary as a startup anchor.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "monitor-build",
+      "description": "Workspace Monitor snapshots/build include security docs and exclude protected local private content paths.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm run collect",
+        "npm run build",
+        "python3 _tools/privacy-audit/src/privacy_audit.py --check"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "No real secret manager was installed or configured; the contract is vendor-neutral and expects user-selected secret storage.",
+    "Protected local private contents were intentionally not inspected."
+  ],
+  "notes": [
+    "The protected local private folder remains local-only and ignored; tracked docs describe the boundary but do not store sensitive values."
+  ]
+}

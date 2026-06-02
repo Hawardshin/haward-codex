@@ -23,6 +23,7 @@ AI와 오래 일할 때 문제는 답변 하나의 품질만이 아니다. 더 �
 - 반복되는 작업은 매번 새로 고민하지 않고 프롬프트, 워크플로, 도구, 템플릿, 스킬, 에이전트로 승격한다.
 - 인간이 실제로 수행하는 조사, 비교, 판단, 실행, 검증 프로세스를 관찰하고 자동화 가능한 최소 단위로 모델링한다.
 - 프로젝트별 관심사는 루트 프로젝트로 분리하고, 공통 운영 능력은 `_docs`, `_ops`, `_tools`, `_skills`, `_research`, `_history`에 축적한다.
+- 민감 파일은 `_private/sensitive/` 또는 외부 secret manager로 중앙 라우팅하되, AI가 기본적으로 직접 읽거나 색인하지 않는 보호 경계를 둔다.
 - 컨텍스트가 길어져도 채팅 기억에 의존하지 않도록 메모리 부트스트랩과 히스토리 요약으로 이어받는다.
 
 ## 핵심 루프
@@ -53,6 +54,18 @@ AI와 오래 일할 때 문제는 답변 하나의 품질만이 아니다. 더 �
 - `_ops/`: 작업 시작점, 프롬프트, 워크플로, 프로젝트 경계, coordination board
 - `_docs/`: 지속 지시, 정책, 운영 모델, governance 문서
 - `_philosophy/`: 왜 이런 방식으로 에이전트를 운영하는지에 대한 상위 철학
+- `_private/`: git에 올리지 않는 local-only 보호 경계. 실제 민감 파일은 `_private/sensitive/`에 두며 AI 기본 접근은 금지한다.
+
+## 최상위 폴더 논리 계층
+
+| 계층 | 폴더 | 의미 |
+| --- | --- | --- |
+| 프로젝트 계층 | `agent-platform/`, `presentation-agent/`, `platform-desktop-app/`, `workspace-monitor/` | 독립 목적과 라이프사이클을 가진 프로젝트 |
+| 운영 제어 계층 | `_ops/`, `_docs/`, `_requirements/`, `_specs/`, `_history/` | 정책, 워크플로, 요구사항, 스펙, 평가, 기록 |
+| 지식/재사용 계층 | `_philosophy/`, `_research/`, `_skills/`, `_templates/`, `_tools/`, `_archive/` | 재사용 지식, 철학, 템플릿, 도구, 스킬, 보관 |
+| 런타임 어댑터 계층 | `.claude/`, `.cursor/`, `.agents/` | AI 도구별 얇은 adapter |
+| 보호 로컬 계층 | `_private/` | 민감 파일과 private scratch. AI 기본 접근 금지 |
+| 생성 로컬 계층 | `outputs/` | 임시 출력. 지속 산출물은 프로젝트 `artifacts/`로 이동 |
 
 처음 보는 사람은 먼저 [_docs/operating-models/platform-identity-operating-model.ko.md](_docs/operating-models/platform-identity-operating-model.ko.md), [_ops/index.md](_ops/index.md), [_history/work-summaries/2026/2026-06-01.ko.md](_history/work-summaries/2026/2026-06-01.ko.md)를 보면 전체 그림을 빠르게 잡을 수 있다.
 
@@ -73,6 +86,7 @@ AI와 오래 일할 때 문제는 답변 하나의 품질만이 아니다. 더 �
 - 앞으로 모든 새 지시는 웹 검색을 먼저 수행한 뒤 계획, 저장소 탐색, 구현으로 들어간다.
 - 모든 재사용 프롬프트 실행도 `_ops/prompts/README.ko.md`의 공통 계약을 따라 웹 검색으로 시작한다.
 - 의미 있는 작업은 `_history/web-searches/YYYY/`에 공개 검색 판단 요약을 남기고 평가 입력에 `web_search_record_targets`를 포함한다.
+- 민감 파일, token, key, credential, private note, browser cookie, user-provided private file은 `_private/sensitive/` 또는 외부 secret manager에 두고, AI 에이전트는 `_private/` 내부를 기본적으로 직접 열람하지 않는다. 관련 계약은 `agent-platform/configs/security/sensitive-file-boundary.json`과 `_docs/policies/sensitive-file-boundary-policy.ko.md`에서 확인한다.
 - 공개 검색 판단 요약에는 검색어, 확인한 출처, 제외한 약한 출처, 계획 반영 인사이트, 남은 불확실성을 남기며 내부 추론 원문은 저장하지 않는다.
 - 웹 검색 후에는 `memory-bootstrap-agent`로 필수 메모리 anchor를 확인하고 핵심 세팅을 로드한다.
 - 웹 검색과 메모리 부트스트랩 후에는 작업 성격에 맞게 `quick`, `standard`, `ship_first`, `research`, `governance` 중 하나의 작업 모드를 선택한다.

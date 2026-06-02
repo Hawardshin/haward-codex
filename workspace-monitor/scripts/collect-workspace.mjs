@@ -8,7 +8,7 @@ const defaultRepoRoot = path.resolve(projectRoot, "..");
 const snapshotPath = path.join(projectRoot, "src", "generated", "workspace-snapshot.json");
 const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.json");
 
-const IGNORE_DIRS = new Set([".git", ".next", "node_modules", "out", "__pycache__", ".pytest_cache"]);
+const IGNORE_DIRS = new Set([".git", ".next", "node_modules", "out", "__pycache__", ".pytest_cache", "_private", "outputs"]);
 const MAX_DOCUMENTS = 1200;
 const MAX_SOURCE_FILES = 260;
 const MAX_SOURCE_CHARS = 22000;
@@ -29,7 +29,7 @@ const SOURCE_EXTENSIONS = new Set([
   ".yml",
   ".sh"
 ]);
-const SOURCE_EXCLUDED_SEGMENTS = ["/src/generated/", "/public/", "/out/", "/.next/", "/node_modules/"];
+const SOURCE_EXCLUDED_SEGMENTS = ["/_private/", "/outputs/", "/src/generated/", "/public/", "/out/", "/.next/", "/node_modules/"];
 const HISTORY_CATEGORIES = new Set([
   "daily-history",
   "evaluation",
@@ -54,12 +54,14 @@ const DOCUMENT_SOURCES = [
   { category: "requirement", root: "_requirements" },
   { category: "shared-spec", root: "_specs" },
   { category: "coordination", root: "_ops/coordination" },
+  { category: "security", root: "_ops/security" },
   { category: "runtime-adapter", root: "_ops/assistant-runtimes" },
   { category: "runtime-adapter", root: ".claude/rules" },
   { category: "runtime-adapter", root: ".cursor/rules" },
   { category: "runtime-adapter", root: ".agents/rules" },
   { category: "agent-config", root: "agent-platform/configs/agents" },
   { category: "agent-config", root: "agent-platform/configs/access" },
+  { category: "security-config", root: "agent-platform/configs/security" },
   { category: "template", root: "_templates/assistant-operating-principles" },
   { category: "project-doc", root: "agent-platform/docs" },
   { category: "project-doc", root: "presentation-agent/docs" },
@@ -150,6 +152,7 @@ export function buildSnapshot(repoRoot) {
       status: "review_required_before_public_deploy",
       checklist: [
         "Review src/generated/workspace-snapshot.json before making the repository public.",
+        "Run python3 _tools/privacy-audit/src/privacy_audit.py --check before public deploy.",
         "Remove or redact private notes, secrets, raw prompts, or local-only paths that should not be published.",
         "Regenerate the snapshot after any redaction and run npm run build again."
       ]
