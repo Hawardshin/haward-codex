@@ -33,12 +33,13 @@ The first screen should prioritize:
 3. Try demo workspace
 4. Open developer setup
 
-Slack, Discord, Teams, external CLIs, advanced validators, and browser automation must not block initial use. Missing optional capabilities become setup cards and disable only that capability.
+The app starts as the platform-first host runtime. Slack, Discord, Teams, external CLIs, advanced validators, and browser automation attach on top as optional capabilities and must not block initial use. Missing optional capabilities become setup cards and disable only that capability.
 
 ## First-Run Flow
 
 ```text
 Launch app
+  -> start platform host runtime
   -> open / create / demo workspace
   -> confirm path and data boundary
   -> select view mode
@@ -47,7 +48,7 @@ Launch app
   -> arrive at dashboard
 ```
 
-Required readiness checks include workspace readability, core platform files, and snapshot generation. Optional checks include CLI adapters, notification channels, browser automation, and advanced validators.
+Required readiness checks include workspace readability, core platform files, and snapshot generation. Optional checks include guest CLI adapters, notification channels, browser automation, and advanced validators.
 
 ## Home Structure
 

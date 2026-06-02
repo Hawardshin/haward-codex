@@ -60,7 +60,7 @@ Optional checks:
 - Git
 - Python agent layer
 - Node/Next monitor
-- CLI adapters
+- Guest CLI adapters on top of the platform
 - Slack/Discord/Teams notifications
 - Browser automation
 

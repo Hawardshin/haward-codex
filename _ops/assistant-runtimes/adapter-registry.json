@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-06-01",
   "name": "assistant-runtime-adapter-registry",
-  "purpose": "Maps shared workspace operating principles to AI coding assistant runtimes such as Codex, Claude Code, Cursor, Antigravity, and generic tools.",
+  "purpose": "Maps shared workspace operating principles to AI coding assistant runtimes such as Codex, Claude Code, Cursor, Antigravity, and generic tools for repository development, while keeping the installable product runtime platform-first.",
   "reader_guide": {
     "summary": "Open this file when using this repository with an AI coding tool other than Codex, or when adding a new runtime-specific instruction adapter.",
     "how_to_read": [
@@ -112,6 +112,15 @@
       "applies_to": [
         "canonical_policy_paths",
         "runtimes"
+      ]
+    },
+    {
+      "id": "assistant_runtime_is_not_product_host",
+      "rule": "Codex, Claude Code, Cursor, Antigravity, or another assistant runtime may help develop the repository, but the installable product must not depend on one of them as its host runtime.",
+      "reason": "The product direction is platform-first: external AI tools attach on top as guest adapters.",
+      "applies_to": [
+        "runtimes",
+        "runtime_adapter_paths"
       ]
     },
     {

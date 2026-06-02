@@ -86,9 +86,10 @@
       "source_type": "internal",
       "used_for": [
         "durable user preferences",
-        "rules that future sessions must not forget"
+        "rules that future sessions must not forget",
+        "platform-first host runtime rule for external AI CLI guest adapters"
       ],
-      "last_checked": "2026-05-31"
+      "last_checked": "2026-06-02"
     },
     {
       "id": "docs_registry",
@@ -204,7 +205,8 @@
       "used_for": [
         "end-user installable software productization",
         "desktop installer framework and release gate decisions",
-        "separating installer packaging from repository setup install_mode"
+        "separating installer packaging from repository setup install_mode",
+        "platform-first host runtime and guest CLI adapter product boundary"
       ],
       "last_checked": "2026-06-02"
     },
@@ -530,7 +532,7 @@
       "source_type": "internal",
       "used_for": [
         "external CLI adapter boundaries",
-        "installable platform CLI-neutral execution",
+        "installable platform-first host runtime and CLI-neutral guest execution",
         "missing-CLI fallback and dependency posture rules",
         "multi-process CLI pipeline orchestration contract"
       ],
@@ -662,7 +664,8 @@
       "used_for": [
         "clear first-read explanation of the platform identity",
         "narrative bridge between philosophy, operating rules, projects, and history",
-        "top-level purpose for modeling real human processes into efficient reusable automation assets"
+        "top-level purpose for modeling real human processes into efficient reusable automation assets",
+        "platform-first host runtime identity for installable desktop execution"
       ],
       "last_checked": "2026-06-01"
     },

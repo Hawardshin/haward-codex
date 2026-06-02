@@ -36,9 +36,11 @@ AI와 함께 일하면 빠르게 만들 수 있지만, 빠르게 잊기도 쉽�
 
 AI는 흩어진 대화, 긴 문서, 조사 자료, 리뷰, 로그, 메모 같은 비정형 입력에서 구조를 찾는 데 강하다. 플랫폼은 이 능력을 사용해 사용자의 말과 자료를 요구사항, 스펙, 태스크, evidence item, 표, JSON, 평가 입력으로 바꾼다. 단, 구조화된 출력은 출처와 검증이 붙을 때만 신뢰 가능한 자산으로 다룬다.
 
-### 6. 설치형이지만 CLI에 종속되지 않는 실행 레이어
+### 6. 플랫폼-first 실행 레이어
 
-플랫폼은 사용자가 설치해서 쓰는 제품으로 발전할 수 있지만, 특정 CLI wrapper가 되면 안 된다. 설치형 앱은 작업 공간, 히스토리, 문서, 평가, 설정, UI를 제공하고, Codex CLI, Claude Code, GitHub CLI, package manager, 배포 CLI 같은 외부 명령은 교체 가능한 adapter capability로 붙인다. CLI가 없으면 플랫폼 전체가 멈추는 것이 아니라 해당 capability만 unavailable로 표시하고 대체 경로를 안내한다.
+플랫폼은 사용자가 설치해서 쓰는 제품으로 발전할 때 특정 CLI wrapper가 아니라 먼저 실행되는 host runtime이어야 한다. 설치형 앱은 작업 공간, 히스토리, 문서, 평가, 설정, UI, task state, decision inbox, artifact, validation gate를 소유한다. Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, GitHub CLI, package manager, 배포 CLI 같은 외부 명령은 플랫폼 위에 올라오는 guest adapter capability로 붙는다.
+
+즉, 사용자는 먼저 플랫폼을 실행하고, 플랫폼은 필요한 순간에 선택된 CLI lane을 올린다. CLI가 없거나 인증되지 않았거나 실패하면 플랫폼 전체가 멈추는 것이 아니라 해당 capability만 unavailable 또는 `capability_missing`으로 표시하고 setup guidance, 대체 lane, 보류 decision을 제공한다. 외부 AI 도구는 작업 실행 provider일 수는 있지만, 플랫폼의 source of truth, durable memory, human decision authority, validation/release gate를 소유하지 않는다.
 
 ## 작동 원리
 
@@ -82,7 +84,7 @@ AI는 흩어진 대화, 긴 문서, 조사 자료, 리뷰, 로그, 메모 같은
 - 축적되는 문서와 히스토리는 고품질 데이터 기준을 통과한 재사용 자산과 재검토 대상이 구분되어야 한다.
 - 조사 에이전트는 공식 문서, 논문, 기술 블로그, 커뮤니티 신호, 한국 로컬 소스까지 넓게 보고 근거를 정리한다.
 - 구현 에이전트는 언어, 아키텍처, 폴더 구조, 오픈소스 후보를 비교한 뒤 유지보수 가능한 방향으로 만든다.
-- 실행 레이어는 여러 CLI를 활용하되 특정 CLI에 종속되지 않고, adapter contract와 permission boundary로 교체 가능성을 유지한다.
+- 실행 레이어는 플랫폼-first host runtime으로 시작하고, 여러 CLI를 guest adapter로 활용하되 특정 CLI나 상용 assistant host에 종속되지 않는다. adapter contract와 permission boundary로 교체 가능성을 유지한다.
 - 평가 에이전트는 초기 의도와 결과를 비교하고, 부족한 부분은 다시 작업으로 돌린다.
 - 모니터링 UI는 히스토리, 프로젝트, 스펙, 평가, 진행 중인 작업을 한눈에 보여준다.
 - 반복되는 좋은 흐름은 스킬과 도구와 템플릿으로 승격되어 다음 작업을 더 빠르고 정확하게 만든다.

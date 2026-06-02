@@ -81,6 +81,7 @@ cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipe
 - readiness check는 `answer_and_resume_human_decision` command와 `Answer & Resume` UI 문자열을 확인해야 한다.
 - readiness check는 reference-app UI 적용 문자열인 `Command Palette`, `Capability Center`, `Run Board`, process graph, terminal event, decision replay, `Source Review`, `Evidence / Promotion`을 확인해야 한다.
 - readiness check는 multi-file source editing 문자열인 `Multi-file scoped editor`, `File Edit Queue`, `Open Path`, `Save Current`, `Save All`, `Revert Draft`와 구현 토큰 `sourceDrafts`, `saveAllSourceDrafts`, `revertCurrentDraft`, `openDraftOrLoad`를 확인해야 한다.
+- readiness check는 platform-first runtime 문자열인 `Platform-first host`, `Guest adapters`, `Platform state owner`와 registry token `platform_is_primary_host_runtime`, `host_runtime_model`, `guest_adapter_on_platform`을 확인해야 한다.
 - visual QA는 Desktop 탭에서 source file browser, draft queue, editor, diff preview가 데스크톱과 모바일 폭에서 겹치지 않는지 확인해야 한다.
 - Rust compile과 Tauri dev/build는 Rust toolchain 설치 전에는 검증하지 않는다.
 - source editor는 `_private/`, `outputs/`, workspace 밖 경로, symlink escape를 차단하고 저장 전 backup을 만드는 계약을 가져야 한다.

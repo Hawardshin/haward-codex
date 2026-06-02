@@ -67,7 +67,7 @@
 - 같은 파일, 설정, 생성 맵, git 상태 같은 공유 자원을 건드리는 작업은 명시적 dependency, lock, branch/worktree 규칙 없이 병렬 실행하지 않는다.
 - 여러 조사 lane을 병렬 실행할 때는 모든 조사 lane을 기다리는 merge gate를 두고, contradiction과 accepted evidence를 합성한 뒤 downstream 구현을 release한다.
 - durable rule, 출처 설정, 프롬프트, 워크플로, 프로젝트 경계, AI assistant runtime adapter, agent orchestration contract, 평가 루프가 바뀌면 `agent-platform/configs/memory/bootstrap-manifest.json`도 갱신한다.
-- 설치형 플랫폼은 특정 CLI wrapper가 아니다. 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`을 통해 교체 가능한 capability로 붙이고, optional CLI가 없으면 전체 실패가 아니라 `capability_missing`으로 degrade한다.
+- 설치형 플랫폼은 특정 CLI wrapper가 아니다. 플랫폼이 먼저 실행되는 1차 host runtime이며, Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity 같은 상용/외부 AI 도구는 그 위에 올라오는 guest adapter로만 붙인다. 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`을 통해 교체 가능한 capability로 붙이고, optional CLI가 없으면 전체 실패가 아니라 `capability_missing`으로 degrade한다.
 - AI가 잘하는 핵심 작업 중 하나는 비정형 또는 반정형 데이터를 정형화하는 것이다. 긴 대화, 조사 자료, 문서, 리뷰, 로그, 메모, 스크린샷을 요구사항, 스펙, 태스크, evidence item, 표, JSON, 평가 입력으로 바꿀 때는 `agent-platform/configs/usage/unstructured-data-structuring-profile.json`과 `_ops/workflows/67-structure-unstructured-data.md`를 사용한다.
 - 비정형 데이터 정형화 결과는 보기 좋다는 이유로 믿지 말고 schema, source provenance, null/ambiguity handling, validation note를 함께 남긴 뒤 근거나 자동화 입력으로 사용한다.
 - 조사나 계획 작업은 공식 문서, 논문, 책/이론서, 공식 통계, 설문 데이터, 시장/산업 리포트, 오픈소스 repo, 외국 기술 블로그, 조사 아티클, 커뮤니티/소셜 신호, 반대 사례를 폭넓게 수집한다.

@@ -7,8 +7,8 @@ Define the product contract for an installable desktop app that can configure Cl
 ## Requirements
 
 - `REQ-WS-085`
-- `PDA-REQ-013` - `PDA-REQ-025`
-- `PDA-UX-009` - `PDA-UX-018`
+- `PDA-REQ-013` - `PDA-REQ-026`
+- `PDA-UX-009` - `PDA-UX-019`
 
 ## Scope
 
@@ -26,9 +26,11 @@ Define the product contract for an installable desktop app that can configure Cl
 - Workspace Monitor CLI setup guide, work-mode presets, decision inbox answer UI, CLI session console, and scoped source editor
 - Workspace Monitor command palette, capability center cards, run board, process graph, terminal event rail, grouped decision inbox, decision replay, source diff review, and evidence/promotion surface
 - Workspace Monitor multi-file source editing draft queue, direct path open, indexed file browser, dirty state, save current, save all, revert, close, and backup result surface
+- Platform-first host runtime contract: the platform launches first and external AI CLIs attach only as guest adapter lanes
 
 ## Non-Scope
 
+- Treating Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or another external AI tool as the product host runtime
 - Interactive PTY execution and autonomous source-affecting long-running task release
 - Installing Rust/Tauri, xterm.js, Monaco, or PTY dependencies
 - Managing provider authentication
@@ -36,7 +38,8 @@ Define the product contract for an installable desktop app that can configure Cl
 
 ## Functional Contract
 
-- The four CLIs are optional adapters; missing tools return `capability_missing` and disable only that lane.
+- The platform is the host runtime that owns task state, durable memory, decision inbox, artifacts, validation, and UI authority.
+- The four CLIs are optional guest adapter lanes; missing tools return `capability_missing` and disable only that lane.
 - The first supervisor MVP runs allowlisted CLI PATH detection and stdin-free bounded version checks.
 - The second supervisor MVP provides pipe-based session start, poll, stdin, defer, and cancel for allowlisted CLIs without adding the shell plugin, and stores detected questions in `_ops/coordination/human-decision-inbox.json` when deferring.
 - Users can see per-CLI setup hints and verification commands, create session prompts from work-mode presets, and save answers to deferred decision items from the Desktop tab.
@@ -58,6 +61,7 @@ Define the product contract for an installable desktop app that can configure Cl
 - The `workspace-monitor` Desktop tab distinguishes `Answer` from `Answer & Resume` for decisions linked to an active CLI session and displays the resume result.
 - The `workspace-monitor` Desktop tab includes `Command Palette`, `Capability Center`, `Run Board`, process graph, terminal event, decision replay, `Source Review`, `Evidence / Promotion`, and the related UI state.
 - The `workspace-monitor` Desktop tab includes `Multi-file scoped editor`, `File Edit Queue`, `Open Path`, `Save Current`, `Save All`, and `Revert Draft`, and shows open/dirty draft counts plus backup save results.
+- The `workspace-monitor` Desktop tab includes `Platform-first host`, `Guest adapters`, `Platform state owner`, and related UI state to show that external AI CLIs are guest lanes on top of the platform.
 - Tauri file commands block `_private/`, `outputs/`, paths outside the workspace, and symlink escapes, and create backups before writes.
 - Requirements, specs, and traceability link the new capability.
 - Evaluation records distinguish the current bounded health/session/file-edit implementation from later PTY supervisor resource and CLI-pipeline risks.

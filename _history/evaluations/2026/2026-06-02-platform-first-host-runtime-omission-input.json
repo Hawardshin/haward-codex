@@ -1,0 +1,123 @@
+{
+  "task": "Shift desktop product contract to platform-first host runtime",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Search current sources before planning and edits.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-platform-first-host-runtime.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "persistent-instruction",
+      "description": "Persist the platform-first host runtime rule for future work.",
+      "source": "persistent instruction rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_docs/instructions/persistent-instructions.ko.md",
+        "_docs/instructions/persistent-instructions.en.md",
+        "AGENTS.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "adapter-contract",
+      "description": "Update CLI adapter registry so external AI tools are guest adapters.",
+      "source": "PDA-REQ-026",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/integrations/cli-adapter-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "desktop-contract",
+      "description": "Update desktop registry, user flow, requirements, specs, and docs.",
+      "source": "PDA-REQ-026 and PDA-UX-019",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/desktop-distribution-registry.json",
+        "platform-desktop-app/configs/user-flow-registry.json",
+        "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "ui-readiness",
+      "description": "Expose platform-first ownership in Desktop UI and readiness tests.",
+      "source": "PDA-UX-019",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/integrations/cli-adapter-registry.json",
+      "purpose": "Platform-first host and guest adapter contract.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
+      "purpose": "Desktop product runtime strategy.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "User-visible platform-first Desktop UI.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Type check Workspace Monitor.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-desktop-test",
+      "description": "Run desktop readiness tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app test"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "config-contract",
+      "description": "Validate changed shared registries as self-documenting configs.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract cli-adapter-registry desktop-distribution-registry user-flow-registry"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Actual packaged runtime remains gated by Rust/Tauri installation audit.",
+    "External AI CLI install/use was intentionally not performed."
+  ],
+  "notes": [
+    "This work changes product runtime ownership, not provider authentication or CLI installation."
+  ]
+}

@@ -31,6 +31,7 @@
 - `PDA-REQ-023`: answer-and-resume for decisions linked to active CLI sessions.
 - `PDA-REQ-024`: applied reference-app UI surfaces.
 - `PDA-REQ-025`: multi-file source editing draft queue, dirty state, save-all/revert/close, and backup result surface.
+- `PDA-REQ-026`: platform-first host runtime and external AI CLI guest adapter lane contract.
 - `PDA-UX-009` - `PDA-UX-012`: UI flow and code editing surface.
 - `PDA-UX-013`: Desktop tab shows runtime, CLI, terminal result, decision prompt, and source-editing readiness.
 - `PDA-UX-014`: Desktop tab shows CLI session console, decision inbox item count, and scoped source editor.
@@ -38,6 +39,14 @@
 - `PDA-UX-016`: Desktop tab shows linked session status and `Answer & Resume` action.
 - `PDA-UX-017`: Desktop tab shows command palette, capability cards, run board, process graph, terminal event rail, grouped decisions, replay, diff review, and evidence/promotion surface.
 - `PDA-UX-018`: Desktop tab source-editing surface shows open draft queue, direct path open, indexed browser, dirty-file save/revert/close flow.
+- `PDA-UX-019`: First run and Desktop tab show platform-first launch, external AI CLI guest lanes, and missing CLI setup-later/capability_missing flow.
+
+## Platform-First Runtime Trace
+
+- Requirements: `PDA-REQ-026`, `PDA-UX-019`
+- Implementation/config: `agent-platform/configs/integrations/cli-adapter-registry.json`, `platform-desktop-app/configs/desktop-distribution-registry.json`, `platform-desktop-app/configs/user-flow-registry.json`, `workspace-monitor/components/MonitorShell.tsx`
+- Docs: `_docs/operating-models/platform-identity-operating-model.ko.md`, `platform-desktop-app/README.md`, `platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.en.md`, `platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.en.md`
+- Validation: `platform-desktop-app/tests/readiness.test.mjs`, `check-config-contract`, Workspace Monitor TypeScript/build
 
 ## Multi-File Source Editing Trace
 

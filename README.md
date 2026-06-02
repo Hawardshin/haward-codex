@@ -6,7 +6,7 @@
 
 현재는 Codex에서 운영하지만 핵심 원칙은 특정 AI 도구에 묶지 않는다. Claude Code, Cursor, Google Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 같은 방식으로 사용할 수 있도록 공통 원칙과 도구별 adapter를 분리한다.
 
-설치형 제품으로 발전해도 특정 CLI에 묶이지 않는다. 설치형 앱은 플랫폼의 작업 공간, 히스토리, 문서, 평가, 설정, UI를 제공하고, Codex CLI, Claude Code, GitHub CLI, Vercel CLI 같은 외부 명령은 필요할 때 교체 가능한 adapter capability로 붙여 사용한다.
+설치형 제품으로 발전할 때는 플랫폼이 먼저 실행되는 1차 host runtime이 된다. Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, GitHub CLI, Vercel CLI 같은 외부 명령과 상용 AI 도구는 플랫폼 위에 올라오는 교체 가능한 guest adapter capability로 붙는다. 플랫폼은 작업 공간, 히스토리, 문서, 평가, 설정, UI, decision inbox, validation gate를 소유하고, 외부 CLI가 없거나 실패해도 해당 capability만 `capability_missing`으로 degrade한다.
 
 AI가 특히 잘하는 일 중 하나는 비정형 입력을 정형화하는 것이다. 이 플랫폼은 긴 대화, 조사 자료, 문서, 리뷰, 로그, 메모를 요구사항, 스펙, 태스크, evidence item, 표, JSON, 평가 입력처럼 검토 가능한 구조로 바꾸고, 각 값의 출처와 검증 상태를 함께 남긴다.
 
@@ -73,7 +73,7 @@ AI와 오래 일할 때 문제는 답변 하나의 품질만이 아니다. 더 �
 
 - 모든 작업 산출물은 이 저장소의 git 이력으로 추적한다.
 - durable operating principle은 도구 독립형으로 관리하고, 도구별 instruction 파일은 얇은 adapter로 둔다.
-- 설치형 플랫폼은 특정 CLI wrapper가 아니다. 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`의 adapter contract를 통해 optional capability로 붙인다.
+- 설치형 플랫폼은 특정 CLI wrapper가 아니다. 플랫폼이 먼저 실행되는 host runtime이고, 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`의 adapter contract를 통해 guest capability로 붙인다.
 - 비정형 입력을 정형화할 때는 `agent-platform/configs/usage/unstructured-data-structuring-profile.json`과 `_ops/workflows/67-structure-unstructured-data.md`를 사용해 schema, 출처, 모호성, 검증 결과를 남긴다.
 - Codex는 `AGENTS.md`, Claude Code는 `CLAUDE.md`와 `.claude/rules/`, Cursor는 `.cursor/rules/`, Antigravity는 `.agents/rules/`를 사용하되, 정책 원본은 `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`와 `_ops/assistant-runtimes/adapter-registry.json`에서 확인한다.
 - 의미 있는 변경 단위가 끝날 때마다 커밋한다.

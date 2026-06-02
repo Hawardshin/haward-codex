@@ -2,9 +2,9 @@
 
 ## 결론
 
-`platform-desktop-app`의 1차 설치형 제품 구조는 **Tauri v2 + Rust 데스크톱 셸**, **workspace-monitor 정적 UI**, **agent-platform Python 계층**, **선택형 외부 CLI 어댑터**로 고정한다.
+`platform-desktop-app`의 1차 설치형 제품 구조는 **플랫폼-first host runtime**, **Tauri v2 + Rust 데스크톱 셸**, **workspace-monitor 정적 UI**, **agent-platform Python 계층**, **선택형 외부 CLI guest 어댑터**로 고정한다.
 
-이 결정은 현재 코덱스 위에서 개발하더라도 최종 제품이 Codex, Claude Code, Cursor, Antigravity 같은 특정 AI 코딩 도구에 종속되지 않고, 그 도구들을 플랫폼 위의 설정 가능한 기능으로 붙이기 위한 구조다.
+이 결정은 최종 제품이 Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity 같은 특정 AI 코딩 도구 위에서 동작하지 않고, 플랫폼 자체가 먼저 실행된 뒤 그 도구들을 플랫폼 위의 설정 가능한 guest lane으로 붙이기 위한 구조다. 외부 AI 도구는 실행 provider일 수 있지만 task state, durable memory, decision inbox, artifact, validation, UI authority는 플랫폼이 소유한다.
 
 ## 전문가 토론 요약
 
@@ -32,13 +32,14 @@
 
 ```text
 사용자
+  -> platform-first host runtime
   -> Tauri desktop shell (Rust)
       -> workspace-monitor static export (TypeScript/Next.js)
       -> selected workspace snapshot/docs/history
-      -> future local platform boundary
+      -> platform supervisor boundary
           -> agent-platform Python commands/service/sidecar
-          -> optional CLI adapters
-              -> Codex / Claude Code / Cursor / Antigravity / 기타 CLI
+          -> optional guest CLI adapters
+              -> Codex / Gemini CLI / Claude Code CLI / OpenCode / Cursor / Antigravity / 기타 CLI
 ```
 
 ## 현재 현실 상태

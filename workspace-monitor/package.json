@@ -2,7 +2,7 @@
   "name": "workspace-monitor",
   "version": "0.1.0",
   "private": true,
-  "description": "Vercel-ready Next.js monitoring site for the Codex workspace repository.",
+  "description": "Vercel-ready Next.js monitoring site for the platform-first agent workspace.",
   "scripts": {
     "dev": "next dev",
     "collect": "node scripts/collect-workspace.mjs",

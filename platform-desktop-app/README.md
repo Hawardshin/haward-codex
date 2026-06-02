@@ -8,11 +8,11 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 
 ## Current Direction
 
-- Treat the first installable product as a Tauri v2 desktop shell over existing platform capabilities.
+- Treat the first installable product as the platform-first host runtime: the app launches first, owns workspace state, task state, decisions, artifacts, validation, and UI authority, then mounts external AI CLIs as guest adapter lanes.
 - Keep `workspace-monitor/` as the initial UI source instead of duplicating the monitoring interface.
 - Design the first-run user flow before implementing installer code: open/create/demo workspace, confirm workspace boundary, select view mode, run required readiness checks, then reach the dashboard.
-- Keep Codex, Claude Code, Cursor, Antigravity, notifications, browser automation, and advanced validators as optional capability cards that can be configured later instead of blocking initial use.
-- Treat Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode as the first concrete AI CLI adapter targets for multi-CLI orchestration, while keeping the app usable when any of them is missing.
+- Keep Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, notifications, browser automation, and advanced validators as optional capability cards that can be configured later instead of blocking initial use.
+- Treat Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode as the first concrete AI CLI guest adapter targets for multi-CLI orchestration, while keeping the app usable when any of them is missing.
 - Model real multi-CLI execution as supervised process lanes with process graph validation, terminal I/O bounds, decision inbox routing, artifact retention, merge gates, and cleanup before any executable implementation.
 - The first implemented supervisor MVP is intentionally narrow but executable: the Tauri backend exposes allowlisted CLI adapter discovery, bounded `--version` health checks, pipe-based CLI sessions, stdin/defer/cancel controls, deferred question persistence plus answer updates in the human decision inbox, and scoped source file read/write with backup. The Workspace Monitor exposes these in the `Desktop` tab with setup guides and work-mode presets. Missing CLIs report `capability_missing` and do not block the UI.
 - Keep `agent-platform/` as the Python-first agent/config/evaluation layer.
@@ -28,7 +28,7 @@ The selected first scaffold is Tauri v2:
 - Rust/Tauri owns the desktop shell, native window lifecycle, and future scoped native command boundary.
 - `workspace-monitor/` owns the TypeScript/Next.js UI.
 - `agent-platform/` owns Python-first research, planning, evaluation, and config validation.
-- External AI coding CLIs remain optional adapters through `agent-platform/configs/integrations/cli-adapter-registry.json`.
+- External AI coding CLIs remain guest adapters through `agent-platform/configs/integrations/cli-adapter-registry.json`; they execute platform-scoped lanes but do not own durable platform state.
 - Go remains a candidate for a future long-running local service or CLI supervisor if measurement shows that a daemon is needed.
 
 Electron, Wails, and native packaging remain fallback/comparison candidates, but new implementation work should target the Tauri scaffold unless a recorded measurement or release blocker changes the decision.

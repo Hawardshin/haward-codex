@@ -38,4 +38,4 @@ Add desktop-specific UI or native behavior later when requirements are concrete:
 - Do not bundle real tokens, webhook URLs, browser cookies, or private snapshots.
 - A build is not distributable until signing, notarization or OS-specific trust requirements, install/uninstall smoke tests, and privacy review are complete.
 - Before installing Tauri or Electron, record dependency audit and installation-audit plans.
-- The installable app is not a single CLI wrapper. External CLIs attach only as optional adapter capabilities registered in `agent-platform/configs/integrations/cli-adapter-registry.json`.
+- The installable app is not a single CLI wrapper. The platform launches first as the host runtime; external CLIs attach only as guest adapter capabilities registered in `agent-platform/configs/integrations/cli-adapter-registry.json`.

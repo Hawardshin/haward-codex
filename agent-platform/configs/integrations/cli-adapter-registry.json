@@ -304,6 +304,17 @@
       ]
     },
     {
+      "id": "platform_is_primary_host_runtime",
+      "rule": "The installed platform is the primary host runtime. Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or any other commercial assistant tool may attach as guest adapters, but must not own the workspace source of truth, durable memory, task state, decision inbox, validation gates, or UI authority.",
+      "reason": "The target product starts from the platform itself, then mounts external AI CLIs on top as replaceable execution providers.",
+      "applies_to": [
+        "platform_principle",
+        "integration_layers",
+        "execution_contract",
+        "supported_ai_cli_adapters"
+      ]
+    },
+    {
       "id": "cli_tools_are_attached_capabilities",
       "rule": "Treat each CLI as an attached capability behind an adapter contract with availability checks, version checks, permission scope, output contract, and fallback behavior.",
       "reason": "Loose coupling keeps the platform usable across Claude Code, Gemini CLI, Codex CLI, OpenCode, package managers, deployment tools, and future CLIs.",
@@ -391,7 +402,7 @@
   "field_guide": [
     {
       "field": "platform_principle",
-      "meaning": "The core statement that the platform is installable but CLI-neutral.",
+      "meaning": "The core statement that the platform is the primary installable host runtime and remains CLI-neutral.",
       "required": true
     },
     {
@@ -451,10 +462,18 @@
     }
   ],
   "platform_principle": {
-    "summary": "The platform is installable and user-facing, but it is not locked to one CLI. It provides the durable workspace, UI, history, policies, and orchestration layer, then uses external CLIs through replaceable adapters when they are useful.",
-    "short_form": "Installable platform, CLI-neutral execution.",
+    "summary": "The platform is installable and user-facing. It starts first as the host runtime, owns the durable workspace, UI, history, policies, decisions, validation, and orchestration layer, then mounts external CLIs through replaceable adapters when they are useful.",
+    "short_form": "Platform-first host runtime, CLI-neutral execution.",
+    "host_runtime_model": "platform_first",
+    "host_contract": [
+      "platform launches before optional AI CLIs",
+      "platform owns task state, durable memory, decisions, artifacts, validation, and recovery",
+      "external AI CLIs are guest execution providers behind adapters",
+      "commercial assistant hosts are development conveniences only, not product runtime dependencies"
+    ],
     "non_goals": [
       "becoming a thin wrapper around one AI assistant CLI",
+      "requiring Codex, Claude Code, Cursor, Antigravity, or another commercial assistant host to operate the product",
       "requiring every user to install developer CLIs before opening the app",
       "embedding secrets or user-specific tool sessions into distributable builds",
       "hard-coding shell commands in prompts instead of adapter contracts"
@@ -480,11 +499,27 @@
       "owns": [
         "requirements, specs, history, evaluations, and navigation",
         "intent-level workflows",
+        "task state, decision inbox, validation gates, and durable memory",
         "adapter selection policy",
         "capability discovery and degradation behavior"
       ],
       "must_not_own": [
         "vendor-specific command quirks unless isolated in an adapter"
+      ]
+    },
+    {
+      "layer": "assistant_runtime_adapter",
+      "owns": [
+        "optional guest execution through a supported CLI or assistant runtime",
+        "runtime-specific prompt/command translation",
+        "provider-specific session status surfaced through the adapter"
+      ],
+      "must_not_own": [
+        "platform identity",
+        "workspace source of truth",
+        "durable memory",
+        "human decision authority",
+        "validation and release gates"
       ]
     },
     {
@@ -558,7 +593,8 @@
     "structured_output_preferred": true,
     "environment_policy": "Pass only allowlisted environment variables. Never log secret values.",
     "logging_policy": "Record command intent, adapter id, version, duration, exit status, and redacted stderr. Do not store raw secrets or oversized outputs.",
-    "desktop_policy": "Desktop-originated command execution must be scoped by command allowlist, workspace path allowlist, and user-visible permission settings."
+    "desktop_policy": "Desktop-originated command execution must be scoped by command allowlist, workspace path allowlist, and user-visible permission settings.",
+    "host_boundary_policy": "The platform supervisor owns process lifecycle, task state, decision routing, artifact retention, and validation. External CLIs may execute work only through adapter-scoped lanes."
   },
   "pipeline_orchestration_contract": {
     "source_template": "agent-platform/configs/integrations/cli-pipeline-template.json",
@@ -638,6 +674,7 @@
         "claude"
       ],
       "setup_posture": "user_supplied_or_project_documented",
+      "runtime_role": "guest_adapter_on_platform",
       "source_reference": "claude_code_docs",
       "implementation_gate": "availability, version, auth/session posture, permission mode, output parsing, missing-cli fallback, timeout, and redaction tests before execution"
     },
@@ -650,6 +687,7 @@
         "gemini"
       ],
       "setup_posture": "user_supplied_or_project_documented",
+      "runtime_role": "guest_adapter_on_platform",
       "source_reference": "gemini_cli_repo",
       "implementation_gate": "availability, version, auth/session posture, sandbox/config posture, output parsing, missing-cli fallback, timeout, and redaction tests before execution"
     },
@@ -662,6 +700,7 @@
         "codex"
       ],
       "setup_posture": "user_supplied_or_project_documented",
+      "runtime_role": "guest_adapter_on_platform",
       "source_reference": "codex_cli_repo",
       "implementation_gate": "availability, version, auth/session posture, sandbox/approval posture, output parsing, missing-cli fallback, timeout, and redaction tests before execution"
     },
@@ -674,6 +713,7 @@
         "opencode"
       ],
       "setup_posture": "user_supplied_or_project_documented",
+      "runtime_role": "guest_adapter_on_platform",
       "source_reference": "opencode_docs",
       "implementation_gate": "availability, version, provider-key posture, output parsing, missing-cli fallback, timeout, and redaction tests before execution"
     }

@@ -44,7 +44,7 @@ Electron은 mature ecosystem과 풍부한 installer 사례가 강점이다.
 
 ### CLI-neutral adapter layer
 
-설치형 앱은 특정 CLI wrapper가 아니다. 여러 CLI를 쓸 수는 있지만, CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`의 adapter contract를 통해 붙는다.
+설치형 앱은 특정 CLI wrapper가 아니다. 플랫폼이 먼저 실행되는 host runtime이고, 여러 CLI를 쓸 수는 있지만 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`의 guest adapter contract를 통해 붙는다.
 
 - 장점: Codex CLI, Claude Code, GitHub CLI, package manager, deployment CLI를 상황에 맞게 쓸 수 있다.
 - 리스크: desktop shell에서 로컬 명령을 실행하면 command/path allowlist, timeout, output redaction, permission UI가 필요하다.
@@ -56,7 +56,7 @@ Electron은 mature ecosystem과 풍부한 installer 사례가 강점이다.
 - Desktop shell은 현재 Tauri/Rust-first prototype이 가장 맞다.
 - 별도 background service가 필요해지면 Go를 먼저 검토한다.
 - 성능 병목이 안정된 parsing/index/search hot path로 확인되면 Rust native module을 검토한다.
-- 외부 CLI는 런타임 본체가 아니라 optional adapter capability로 다룬다.
+- 외부 CLI는 런타임 본체가 아니라 플랫폼 위의 guest adapter capability로 다룬다.
 - 상세 판단 기준은 `agent-platform/configs/runtime/language-decision-registry.json`과 `_docs/policies/runtime-language-selection-policy.ko.md`를 따른다.
 
 ## Release Gate

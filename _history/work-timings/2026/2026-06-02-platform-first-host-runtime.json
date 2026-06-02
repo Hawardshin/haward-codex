@@ -1,0 +1,43 @@
+{
+  "task_id": "2026-06-02-platform-first-host-runtime",
+  "title": "Shift installable product to platform-first host runtime",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "confirm current CLI and Tauri host references",
+      "status": "completed",
+      "duration_seconds": 240,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official docs were needed because the request changes runtime ownership and local process boundary assumptions."
+    },
+    {
+      "phase_id": "contract_update",
+      "label": "update persistent rules, registries, requirements, and specs",
+      "status": "completed",
+      "duration_seconds": 1800,
+      "measurement": "estimated",
+      "bottleneck_notes": "The change touched multiple durable contracts and bilingual documents."
+    },
+    {
+      "phase_id": "ui_update",
+      "label": "update Workspace Monitor Desktop runtime wording",
+      "status": "completed",
+      "duration_seconds": 360,
+      "measurement": "estimated",
+      "bottleneck_notes": "Small UI change but required readiness and visual validation."
+    },
+    {
+      "phase_id": "verification",
+      "label": "run tests, config checks, build, and visual smoke",
+      "status": "completed",
+      "duration_seconds": 720,
+      "measurement": "estimated",
+      "bottleneck_notes": "Visual smoke requires local static server lifecycle cleanup."
+    }
+  ],
+  "automation_candidates": [
+    "Generate platform-wide bilingual contract pivot records from one structured runtime decision packet."
+  ]
+}

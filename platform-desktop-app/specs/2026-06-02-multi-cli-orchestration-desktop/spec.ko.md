@@ -7,8 +7,8 @@
 ## 요구사항
 
 - `REQ-WS-085`
-- `PDA-REQ-013` - `PDA-REQ-025`
-- `PDA-UX-009` - `PDA-UX-018`
+- `PDA-REQ-013` - `PDA-REQ-026`
+- `PDA-UX-009` - `PDA-UX-019`
 
 ## 범위
 
@@ -26,9 +26,11 @@
 - Workspace Monitor의 CLI setup guide, 작업 모드 프리셋, decision inbox answer UI, CLI session console, scoped source editor
 - Workspace Monitor의 command palette, capability center card, run board, process graph, terminal event rail, grouped decision inbox, decision replay, source diff review, evidence/promotion surface
 - Workspace Monitor의 multi-file source editing draft queue, direct path open, indexed file browser, dirty state, save current, save all, revert, close, backup result surface
+- platform-first host runtime 계약: 플랫폼이 먼저 실행되고 외부 AI CLI는 guest adapter lane으로만 붙는 구조
 
 ## 비범위
 
+- Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity 같은 외부 AI 도구를 제품 host runtime으로 삼는 구조
 - interactive PTY 실행과 autonomous source-affecting long-running task release
 - Rust/Tauri, xterm.js, Monaco, PTY dependency 설치
 - provider 인증 관리
@@ -36,7 +38,8 @@
 
 ## 기능 계약
 
-- 네 CLI는 optional adapter로 표시되고, 누락 시 `capability_missing`으로 해당 lane만 비활성화한다.
+- 플랫폼은 먼저 실행되는 host runtime이며 task state, durable memory, decision inbox, artifact, validation, UI authority를 소유한다.
+- 네 CLI는 optional guest adapter lane으로 표시되고, 누락 시 `capability_missing`으로 해당 lane만 비활성화한다.
 - 첫 supervisor MVP는 allowlist된 CLI의 PATH 탐지와 stdin 없는 bounded version check를 실행한다.
 - 두 번째 supervisor MVP는 shell plugin 없이 allowlist된 CLI에 한해 pipe 기반 session start/poll/stdin/defer/cancel을 제공하고, defer 시 감지된 질문을 `_ops/coordination/human-decision-inbox.json`에 저장한다.
 - 사용자는 Desktop 탭에서 CLI별 설치 힌트와 검증 명령을 확인하고, 작업 모드 프리셋으로 session prompt를 만들며, 보류된 decision item에 답변을 저장할 수 있다.
@@ -58,6 +61,7 @@
 - `workspace-monitor` Desktop 탭은 linked active CLI session이 있는 decision에 대해 `Answer`와 `Answer & Resume`를 구분하고 resume 결과를 표시한다.
 - `workspace-monitor` Desktop 탭은 `Command Palette`, `Capability Center`, `Run Board`, process graph, terminal event, decision replay, `Source Review`, `Evidence / Promotion` 문자열과 관련 UI state를 포함한다.
 - `workspace-monitor` Desktop 탭은 `Multi-file scoped editor`, `File Edit Queue`, `Open Path`, `Save Current`, `Save All`, `Revert Draft`를 포함하고 열린/dirty 드래프트 수와 backup 저장 결과를 표시한다.
+- `workspace-monitor` Desktop 탭은 `Platform-first host`, `Guest adapters`, `Platform state owner` 문자열과 관련 UI state를 포함해 외부 AI CLI가 플랫폼 위의 guest lane임을 보여준다.
 - Tauri file command는 `_private/`, `outputs/`, workspace 밖 경로, symlink escape를 차단하고 backup을 만든다.
 - 요구사항, 스펙, traceability가 새 기능을 연결한다.
 - 평가 기록에 resource risk와 CLI pipeline risk가 현재 bounded health/session/file-edit 구현 범위와 후속 PTY supervisor 리스크를 구분해 기록된다.

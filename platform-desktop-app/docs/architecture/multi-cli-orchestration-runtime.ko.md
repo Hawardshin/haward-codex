@@ -2,12 +2,12 @@
 
 ## 목적
 
-이 문서는 `platform-desktop-app`이 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode 같은 AI CLI를 동시에 활용하되 어느 하나에도 종속되지 않는 설치형 데스크톱 플랫폼이 되기 위한 런타임 구조를 정의한다.
+이 문서는 `platform-desktop-app`이 먼저 실행되는 platform-first host runtime이 되고, Claude Code CLI, Gemini CLI, Codex CLI, OpenCode 같은 AI CLI를 그 위의 guest adapter lane으로 동시에 활용하되 어느 하나에도 종속되지 않는 설치형 데스크톱 플랫폼이 되기 위한 런타임 구조를 정의한다.
 
 핵심 결론은 다음이다.
 
-- 데스크톱 앱의 정체성은 CLI wrapper가 아니라 workspace, task state, decision, artifact, history, validation, reusable data를 소유하는 platform supervisor다.
-- CLI는 adapter-backed execution provider다. 없으면 `capability_missing`이 되고 앱 자체는 계속 열려야 한다.
+- 데스크톱 앱의 정체성은 CLI wrapper가 아니라 workspace, task state, decision, artifact, history, validation, reusable data를 소유하는 platform-first supervisor다.
+- CLI는 플랫폼 위에 올라오는 guest adapter-backed execution provider다. 없으면 `capability_missing`이 되고 앱 자체는 계속 열려야 한다.
 - 여러 CLI 실행은 터미널 창 여러 개가 아니라 process graph, lane status, output bound, cancellation, cleanup, merge gate가 있는 supervised run이다.
 - CLI가 사용자 질문을 만들면 dependent lane만 멈추고, 질문은 decision inbox로 들어가며, 독립 lane은 계속 진행한다.
 - 터미널 output은 관찰 가능한 evidence지만 durable state는 구조화된 record로 저장한다.
@@ -15,7 +15,8 @@
 ## 런타임 레이어
 
 ```text
-Tauri desktop shell
+Platform-first host runtime
+  -> Tauri desktop shell
   -> workspace-monitor / future desktop UI
       -> command center
       -> run timeline
@@ -29,7 +30,7 @@ Tauri desktop shell
       -> decision deferral router
       -> artifact/log/data retention manager
       -> validation and evaluation runner
-  -> external AI CLI adapters
+  -> external AI CLI guest adapters
       -> Claude Code CLI
       -> Gemini CLI
       -> Codex CLI

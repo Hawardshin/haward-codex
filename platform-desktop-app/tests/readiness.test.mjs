@@ -44,6 +44,8 @@ test("desktop registry records multi-CLI supervisor contract", () => {
   const registry = readJson("configs/desktop-distribution-registry.json");
   const serialized = JSON.stringify(registry);
 
+  assert.match(serialized, /platform-first host runtime/);
+  assert.match(serialized, /optional guest adapters/);
   assert.match(serialized, /multi_cli_supervisor/);
   assert.match(serialized, /Claude Code CLI/);
   assert.match(serialized, /Gemini CLI/);
@@ -68,6 +70,9 @@ test("shared CLI adapter registry defines concrete AI CLI targets", () => {
   for (const id of ["claude-code-cli", "gemini-cli", "codex-cli", "opencode-cli"]) {
     assert.ok(ids.includes(id));
   }
+  assert.equal(registry.platform_principle.host_runtime_model, "platform_first");
+  assert.match(JSON.stringify(registry), /platform_is_primary_host_runtime/);
+  assert.ok(registry.supported_ai_cli_adapters.every((adapter) => adapter.runtime_role === "guest_adapter_on_platform"));
   assert.ok(registry.interactive_cli_contract);
   assert.ok(registry.terminal_io_contract);
   assert.ok(registry.data_accumulation_contract);
@@ -117,6 +122,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Save Current",
     "Save All",
     "Revert Draft",
+    "Platform-first host",
+    "Guest adapters",
+    "Platform state owner",
     "Evidence / Promotion"
   ]) {
     assert.match(monitorShell, new RegExp(uiString));
@@ -137,6 +145,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "source-diff-review",
     "source-draft-queue",
     "source-file-browser",
+    "Guest Adapters",
     "evidence-grid"
   ]) {
     assert.match(monitorShell, new RegExp(implementationToken));

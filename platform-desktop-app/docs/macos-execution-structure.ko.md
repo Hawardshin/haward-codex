@@ -24,10 +24,10 @@
 
 초기 추천은 Tauri-first macOS `.app` shell이다.
 
-- Desktop shell: macOS 앱 진입점, native window lifecycle, workspace folder picker를 담당한다.
+- Desktop shell: macOS 앱 진입점, native window lifecycle, workspace folder picker, platform-first host boundary를 담당한다.
 - Workspace Monitor UI: dashboard, history, docs, agents, source viewer, decision inbox 화면을 재사용한다.
 - Agent Platform: Python-first agent, research, planning, evaluation, config check를 담당한다.
-- Optional CLI adapters: Codex, Claude Code, Cursor, GitHub CLI, package manager, deployment CLI 등은 adapter contract를 통해 붙는다.
+- Guest CLI adapters: Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, GitHub CLI, package manager, deployment CLI 등은 플랫폼이 실행된 뒤 adapter contract를 통해 붙는다.
 
 핵심 원칙은 하나다. 사용자는 하나의 앱을 실행하지만, 내부 agent logic과 CLI 실행은 명확한 경계와 검증 가능한 contract 뒤에 있어야 한다.
 

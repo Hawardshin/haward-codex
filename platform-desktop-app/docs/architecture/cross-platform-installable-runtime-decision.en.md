@@ -2,9 +2,9 @@
 
 ## Decision
 
-The first installable product architecture for `platform-desktop-app` is **Tauri v2 + Rust desktop shell**, **workspace-monitor static UI**, **agent-platform Python layer**, and **optional external CLI adapters**.
+The first installable product architecture for `platform-desktop-app` is **platform-first host runtime**, **Tauri v2 + Rust desktop shell**, **workspace-monitor static UI**, **agent-platform Python layer**, and **optional external CLI guest adapters**.
 
-This keeps the platform independent from any one AI coding tool. Codex, Claude Code, Cursor, Antigravity, and future tools become configurable capabilities attached to the platform instead of the platform becoming a wrapper around one CLI.
+This keeps the product from running on top of any one AI coding tool. The platform launches first; Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, and future tools attach as configurable guest lanes on top of it. External AI tools can be execution providers, but task state, durable memory, decision inbox, artifacts, validation, and UI authority remain owned by the platform.
 
 ## Expert Debate Summary
 
@@ -32,13 +32,14 @@ This keeps the platform independent from any one AI coding tool. Codex, Claude C
 
 ```text
 User
+  -> platform-first host runtime
   -> Tauri desktop shell (Rust)
       -> workspace-monitor static export (TypeScript/Next.js)
       -> selected workspace snapshot/docs/history
-      -> future local platform boundary
+      -> platform supervisor boundary
           -> agent-platform Python commands/service/sidecar
-          -> optional CLI adapters
-              -> Codex / Claude Code / Cursor / Antigravity / other CLIs
+          -> optional guest CLI adapters
+              -> Codex / Gemini CLI / Claude Code CLI / OpenCode / Cursor / Antigravity / other CLIs
 ```
 
 ## Current Reality

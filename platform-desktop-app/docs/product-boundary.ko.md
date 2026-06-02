@@ -38,4 +38,4 @@
 - 실제 token, webhook URL, browser cookie, private snapshot은 번들에 넣지 않는다.
 - 배포 가능한 앱이라고 부르려면 signing, notarization 또는 OS별 신뢰 체인, 설치/삭제 smoke test, privacy review가 끝나야 한다.
 - Tauri/Electron 중 하나를 설치하기 전에는 dependency audit와 설치 감사 계획을 먼저 남긴다.
-- 설치형 앱은 특정 CLI wrapper가 아니다. 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`에 등록된 optional adapter capability로만 붙인다.
+- 설치형 앱은 특정 CLI wrapper가 아니다. 플랫폼이 먼저 실행되는 host runtime이며, 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`에 등록된 guest adapter capability로만 붙인다.

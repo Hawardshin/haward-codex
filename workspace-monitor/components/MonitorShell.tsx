@@ -1933,21 +1933,21 @@ function DesktopRuntimePanel({
       <section className="desktop-hero">
         <div>
           <p className="eyebrow">Desktop Runtime</p>
-          <h2>다중 CLI 오케스트레이션</h2>
+          <h2>Platform-first host</h2>
           <p>
-            설치형 앱 안에서 선택형 AI CLI를 탐지하고 bounded health check와 pipe 기반 실행 세션을 관리합니다. PTY는 아직
-            후속이지만 stdout/stderr polling, stdin 입력, defer message, cancel은 Tauri command로 연결되어 있습니다.
+            플랫폼을 먼저 실행하고 그 위에 Codex, Gemini CLI, Claude Code CLI, OpenCode 같은 Guest adapters를 올립니다.
+            플랫폼은 task state, decision inbox, artifacts, validation, source editing을 소유하고 CLI는 선택 lane으로만 실행됩니다.
           </p>
         </div>
         <div className={`desktop-runtime-state state-${runtimeState}`}>
           <span>{runtimeState}</span>
           <strong>{availableCount} / {adapters.length}</strong>
-          <small>available adapters</small>
+          <small>available guest adapters</small>
         </div>
       </section>
 
       <section className="metrics-band">
-        <Metric label="CLI Adapters" value={adapters.length} icon={Network} tone="green" />
+        <Metric label="Guest Adapters" value={adapters.length} icon={Network} tone="green" />
         <Metric label="Available" value={availableCount} icon={CheckCircle2} tone="blue" />
         <Metric label="Decision Items" value={decisionPrompts.length + blockedTaskCount + openInboxDecisions.length} icon={Inbox} tone="amber" />
         <Metric label="Agent Configs" value={agentCatalogCount} icon={Bot} tone="violet" />
@@ -2022,6 +2022,10 @@ function DesktopRuntimePanel({
           <article>
             <span>Execution Scope</span>
             <strong>bounded pipes and scoped files</strong>
+          </article>
+          <article>
+            <span>Platform state owner</span>
+            <strong>tasks, decisions, artifacts, validation</strong>
           </article>
         </div>
 

@@ -31,6 +31,7 @@
 - `PDA-REQ-023`: linked active CLI session decision의 answer-and-resume.
 - `PDA-REQ-024`: reference-app UI 적용 surface.
 - `PDA-REQ-025`: multi-file source editing draft queue, dirty state, save-all/revert/close, backup result surface.
+- `PDA-REQ-026`: platform-first host runtime과 외부 AI CLI guest adapter lane 계약.
 - `PDA-UX-009` - `PDA-UX-012`: UI 흐름과 코드 편집 surface.
 - `PDA-UX-013`: Desktop 탭에 runtime, CLI, terminal result, decision prompt, source editing readiness 표시.
 - `PDA-UX-014`: Desktop 탭에 CLI session console, decision inbox item 수, scoped source editor 표시.
@@ -38,6 +39,14 @@
 - `PDA-UX-016`: Desktop 탭에 linked session 상태와 `Answer & Resume` action 표시.
 - `PDA-UX-017`: Desktop 탭에 command palette, capability card, run board, process graph, terminal event rail, grouped decision, replay, diff review, evidence/promotion 표시.
 - `PDA-UX-018`: Desktop 탭 source editing 화면에 열린 드래프트 큐, direct path open, indexed browser, dirty 파일 저장/되돌리기/닫기 흐름 표시.
+- `PDA-UX-019`: 첫 실행과 Desktop 탭에 플랫폼 먼저 실행, 외부 AI CLI guest lane, missing CLI setup-later/capability_missing 흐름 표시.
+
+## Platform-First Runtime Trace
+
+- 요구사항: `PDA-REQ-026`, `PDA-UX-019`
+- 구현/설정: `agent-platform/configs/integrations/cli-adapter-registry.json`, `platform-desktop-app/configs/desktop-distribution-registry.json`, `platform-desktop-app/configs/user-flow-registry.json`, `workspace-monitor/components/MonitorShell.tsx`
+- 문서: `_docs/operating-models/platform-identity-operating-model.ko.md`, `platform-desktop-app/README.md`, `platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md`, `platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md`
+- 검증: `platform-desktop-app/tests/readiness.test.mjs`, `check-config-contract`, Workspace Monitor TypeScript/build
 
 ## Multi-File Source Editing Trace
 

@@ -1,0 +1,173 @@
+{
+  "initial_instruction": "더이상 현재 작업공간은 코덱스나 다른 에이전트 상용 툴 위에서 동작하지 않을거고 이제 해당 플랫폼을 먼저 실행하고 그 위에 코덱스나 제미나이 CLI CLAUDE CLI 같은걸 올려서 하려는거야. 도와줘.",
+  "result_summary": "Changed the durable product/runtime contract to platform-first host runtime: the platform launches first and owns task state, durable memory, decisions, artifacts, validation, and UI authority; Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, and similar tools attach only as guest adapter lanes. Updated persistent instructions, adapter registries, desktop registries, requirements, specs, architecture docs, product docs, Workspace Monitor UI, readiness tests, and history records.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "README.md",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "_docs/operating-models/platform-identity-operating-model.ko.md",
+    "_docs/operating-models/tool-agnostic-agent-operating-model.ko.md",
+    "_ops/assistant-runtimes/adapter-registry.json",
+    "agent-platform/configs/integrations/cli-adapter-registry.json",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "platform-desktop-app/configs/desktop-distribution-registry.json",
+    "platform-desktop-app/configs/user-flow-registry.json",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md",
+    "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.en.md",
+    "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md",
+    "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.en.md",
+    "platform-desktop-app/docs/product-boundary.ko.md",
+    "platform-desktop-app/docs/product-boundary.en.md",
+    "platform-desktop-app/docs/packaging-strategy.ko.md",
+    "platform-desktop-app/docs/packaging-strategy.en.md",
+    "platform-desktop-app/docs/macos-execution-structure.ko.md",
+    "platform-desktop-app/docs/macos-execution-structure.en.md",
+    "platform-desktop-app/docs/user-flow.ko.md",
+    "platform-desktop-app/docs/user-flow.en.md",
+    "platform-desktop-app/docs/first-run-onboarding.ko.md",
+    "platform-desktop-app/docs/first-run-onboarding.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.en.md",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/package.json",
+    "workspace-monitor/app/layout.tsx",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "_history/web-searches/2026/2026-06-02-platform-first-host-runtime.ko.md",
+    "_history/web-searches/2026/2026-06-02-platform-first-host-runtime.en.md",
+    "_history/plans/2026/2026-06-02-platform-first-host-runtime.ko.md",
+    "_history/plans/2026/2026-06-02-platform-first-host-runtime.en.md",
+    "_history/request-traces/2026/2026-06-02-platform-first-host-runtime.ko.md",
+    "_history/request-traces/2026/2026-06-02-platform-first-host-runtime.en.md",
+    "_history/evaluations/2026/2026-06-02-platform-first-host-runtime-grounding.json",
+    "_history/evaluations/2026/2026-06-02-platform-first-host-runtime-omission-input.json",
+    "_history/evaluations/2026/2026-06-02-platform-first-host-runtime-resource-input.json",
+    "_history/evaluations/2026/2026-06-02-platform-first-host-runtime-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-02-platform-first-host-runtime-evaluation-result.json",
+    "_history/mode-selections/2026/2026-06-02-platform-first-host-runtime.json",
+    "_history/work-timings/2026/2026-06-02-platform-first-host-runtime.json",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/2026/2026-06-02.md",
+    "_requirements/changes/2026-06-02-platform-first-host-runtime.ko.md",
+    "_requirements/changes/2026-06-02-platform-first-host-runtime.en.md",
+    "_requirements/reviews/2026-06-02-platform-first-host-runtime.ko.md",
+    "_requirements/reviews/2026-06-02-platform-first-host-runtime.en.md"
+  ],
+  "verification": [
+    "npm --prefix workspace-monitor run collect",
+    "npm --prefix workspace-monitor run check",
+    "npm --prefix workspace-monitor test",
+    "npm --prefix workspace-monitor run build",
+    "npm --prefix workspace-monitor run perf:budget",
+    "npm --prefix platform-desktop-app test",
+    "npm --prefix platform-desktop-app run check",
+    "check-config-contract for CLI adapter registry, desktop registry, user-flow registry, assistant runtime registry, memory bootstrap manifest",
+    "check-memory-bootstrap for agent-platform/configs/memory/bootstrap-manifest.json",
+    "python3 _tools/docs-audit/src/docs_audit.py --check",
+    "python3 _tools/naming-audit/src/naming_audit.py --check",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-platform-first-host-runtime.json",
+    "git diff --check",
+    "temporary static server served built Workspace Monitor output on tcp:4175 and was stopped; lsof -ti tcp:4175 returned no listener",
+    "curl and rg confirmed built output contains platform-first metadata and UI strings"
+  ],
+  "references_checked": [
+    "Tauri Shell plugin official docs",
+    "Tauri sidecar official docs",
+    "Claude Code CLI official docs",
+    "Google Gemini CLI official repository"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-platform-first-host-runtime-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-platform-first-host-runtime.ko.md",
+    "_history/web-searches/2026/2026-06-02-platform-first-host-runtime.en.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-platform-first-host-runtime.ko.md",
+    "_history/plans/2026/2026-06-02-platform-first-host-runtime.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-platform-first-host-runtime.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-platform-first-host-runtime-omission-input.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-platform-first-host-runtime.ko.md",
+    "_history/web-searches/2026/2026-06-02-platform-first-host-runtime.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.en.md",
+    "_requirements/changes/2026-06-02-platform-first-host-runtime.ko.md",
+    "_requirements/changes/2026-06-02-platform-first-host-runtime.en.md",
+    "_requirements/reviews/2026-06-02-platform-first-host-runtime.ko.md",
+    "_requirements/reviews/2026-06-02-platform-first-host-runtime.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.en.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-platform-first-host-runtime.ko.md",
+    "_history/request-traces/2026/2026-06-02-platform-first-host-runtime.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-platform-first-host-runtime.json"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-02-platform-first-host-runtime-resource-input.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "known_gaps": [],
+  "validation_limitations": [
+    "Desktop/mobile screenshot validation was not completed because Playwright/Puppeteer/browser CLI dependencies were unavailable and Computer Use permissions remained pending. Static build, HTTP response, generated snapshot, and built JavaScript string checks were completed instead."
+  ],
+  "deferred_improvement_targets": [
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md"
+  ],
+  "improvement_ideas": [
+    "Implement a product-local platform supervisor sidecar after Rust/Tauri installation audit.",
+    "Add a first-run capability setup screen that explicitly labels guest CLI lanes.",
+    "Run real Tauri WebView smoke after Rust/Tauri developer setup."
+  ]
+}

@@ -44,7 +44,7 @@ If a desktop shell adds little product value, compare OS installers around a CLI
 
 ### CLI-Neutral Adapter Layer
 
-The installable app is not a single CLI wrapper. It can use multiple CLIs, but they attach through adapter contracts in `agent-platform/configs/integrations/cli-adapter-registry.json`.
+The installable app is not a single CLI wrapper. The platform launches first as the host runtime. It can use multiple CLIs, but they attach through guest adapter contracts in `agent-platform/configs/integrations/cli-adapter-registry.json`.
 
 - Strengths: Codex CLI, Claude Code, GitHub CLI, package managers, and deployment CLIs can be used when they fit the task.
 - Risks: desktop-originated local command execution needs command/path allowlists, timeouts, output redaction, and permission UI.
@@ -56,7 +56,7 @@ The installable app is not a single CLI wrapper. It can use multiple CLIs, but t
 - Keep the current desktop shell prototype direction Tauri/Rust-first.
 - If a separate background service becomes necessary, evaluate Go first.
 - If profiling proves a stable parsing/index/search hot path is the bottleneck, evaluate a Rust native module.
-- Treat external CLIs as optional adapter capabilities, not runtime bodies.
+- Treat external CLIs as guest adapter capabilities on top of the platform, not runtime bodies.
 - Detailed decision criteria live in `agent-platform/configs/runtime/language-decision-registry.json` and `_docs/policies/runtime-language-selection-policy.en.md`.
 
 ## Release Gate

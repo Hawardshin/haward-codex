@@ -1,0 +1,110 @@
+{
+  "task": "Platform-first host runtime resource review",
+  "work_mode": "governance",
+  "runtime_context": [
+    "React Desktop tab UI",
+    "Next.js static build",
+    "temporary Python HTTP server",
+    "static HTML and JavaScript chunk verification"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "temporary-static-server",
+      "category": "process",
+      "description": "A temporary HTTP server is needed to smoke test the static Workspace Monitor UI.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Use a fixed local test port, then stop the server and verify no listener remains.",
+      "evidence": [
+        "python3 -m http.server 4175 -d workspace-monitor/out",
+        "lsof -ti tcp:4175 returned no listener after Ctrl-C shutdown"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "playwright-browser",
+      "category": "browser_context",
+      "description": "Headless Chromium would be launched for desktop/mobile visual smoke if a browser automation dependency were available.",
+      "required": false,
+      "status": "not_applicable",
+      "mitigation": "No Playwright, Puppeteer, Chromium CLI, Firefox CLI, or wkhtmltoimage dependency was available, and Computer Use screen permissions remained pending across three attempts; no browser context was launched.",
+      "evidence": [
+        "node import('playwright') failed with ERR_MODULE_NOT_FOUND",
+        "node_repl checks for playwright, puppeteer, puppeteer-core, and @playwright/test all returned false",
+        "which chromium/google-chrome/playwright/wkhtmltoimage/firefox returned no runnable binary",
+        "Computer Use get_app_state returned pending Accessibility and Screen Recording permissions three times"
+      ],
+      "rationale": "Browser automation was not installed in this project and this slice intentionally avoided new dependency installation or permission changes."
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "static-server-lifecycle",
+      "resource": "temporary Python HTTP server on tcp:4175",
+      "create_path": "python3 -m http.server 4175 -d workspace-monitor/out",
+      "cleanup_path": "Ctrl-C shutdown followed by lsof -ti tcp:4175",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "HTTP server served /, static chunks, and /workspace-snapshot.json",
+        "lsof -ti tcp:4175 returned no process after shutdown"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "typecheck",
+      "metric": "TypeScript compile",
+      "tool": "npm --prefix workspace-monitor run check",
+      "threshold": "no type errors",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "tsc --noEmit exited 0"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "static-build",
+      "metric": "Next.js production static build",
+      "tool": "npm --prefix workspace-monitor run build",
+      "threshold": "build exits 0 and emits workspace-monitor/out",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "next build compiled successfully and generated static route /"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "performance-budget",
+      "metric": "largest initial static chunk",
+      "tool": "npm --prefix workspace-monitor run perf:budget",
+      "threshold": "largest chunk below 1000000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "largest chunk 227537 bytes; chunk count 8"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-first-static-output",
+      "metric": "built output contains platform-first UI strings",
+      "tool": "curl and rg over workspace-monitor/out and workspace-monitor/.next",
+      "threshold": "metadata and built JavaScript contain platform-first host/guest adapter text",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "curl http://127.0.0.1:4175/ returned Workspace Monitor metadata with guest CLI adapter description",
+        "rg found Platform-first host, Guest adapters, and Platform state owner in built output"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No new long-running platform daemon, sidecar, CLI process, PTY, xterm.js, Monaco, Playwright, or dependency was added.",
+    "Desktop/mobile screenshot validation remains deferred until a browser automation dependency is installed through an audit or Computer Use permissions are granted."
+  ]
+}

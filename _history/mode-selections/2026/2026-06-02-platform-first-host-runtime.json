@@ -1,0 +1,13 @@
+{
+  "date": "2026-06-02",
+  "request_id": "UR-2026-06-02-058",
+  "selected_work_mode": "governance",
+  "rationale": "The request changes durable product identity, persistent instructions, runtime adapter boundaries, desktop product requirements, specs, UI, and validation contracts.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "productization_workflow": "_ops/workflows/63-installable-software-productization.md",
+  "cli_adapter_workflow": "_ops/workflows/66-cli-adapter-integration.md",
+  "resource_risk_occurred": true,
+  "cli_pipeline_occurred": false,
+  "installation_occurred": false
+}

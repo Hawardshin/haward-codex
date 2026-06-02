@@ -198,8 +198,8 @@
       "path": "agent-platform/configs/integrations/cli-adapter-registry.json",
       "source_type": "internal",
       "used_for": [
-        "using external CLIs as optional adapter capabilities",
-        "keeping the installable app independent from one CLI provider",
+        "using external CLIs as guest adapter capabilities on top of the platform",
+        "keeping the installable app independent from one CLI provider or commercial assistant host",
         "command execution, permission, fallback, and installation audit rules"
       ],
       "last_checked": "2026-06-02"
@@ -294,7 +294,7 @@
     },
     {
       "id": "external_clis_are_optional_adapters",
-      "rule": "The desktop app may use external CLIs through explicit adapters, but it must not become a hard wrapper around one CLI.",
+      "rule": "The desktop app launches as the platform host first. It may use external CLIs through explicit guest adapters, but it must not become a hard wrapper around one CLI or commercial assistant host.",
       "reason": "The platform should remain usable when optional CLIs are missing and should keep provider-specific command behavior outside the platform core.",
       "applies_to": [
         "product_boundary",
@@ -426,7 +426,7 @@
   "recommended_initial_path": {
     "id": "tauri_first_cross_platform_shell",
     "status": "selected_for_first_scaffold",
-    "summary": "Build a Tauri v2 desktop shell that wraps the existing workspace-monitor static UI, keeps agent-platform as the Python layer, and treats Claude Code, Gemini CLI, Codex CLI, OpenCode, and other CLIs as optional adapters.",
+    "summary": "Build a Tauri v2 desktop shell that starts as the platform-first host runtime, reuses the existing workspace-monitor static UI, keeps agent-platform as the Python layer, and mounts Claude Code, Gemini CLI, Codex CLI, OpenCode, and other CLIs as optional guest adapters.",
     "why": [
       "The repository already has web UI output in workspace-monitor.",
       "A smaller desktop shell is preferable while the product boundary is still forming.",
@@ -641,16 +641,17 @@
   ],
   "runtime_strategy": {
     "ui_strategy": "Reuse workspace-monitor first, then add desktop-specific UI only when local desktop behavior needs it.",
+    "platform_host_strategy": "The installed desktop app is the primary host runtime. It launches before optional AI CLIs, owns workspace/task/decision/artifact/validation state, and mounts Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or future tools only as guest adapter lanes.",
     "agent_runtime_strategy": "Keep agent-platform as a Python-first platform layer. The desktop shell must not run agent logic in the renderer. Future execution must use a documented sidecar, local service, or explicit command adapter with lifecycle cleanup.",
     "language_runtime_strategy": "Use Rust/Tauri first for the desktop shell, Go first for a separate local daemon or operational CLI, Python for agent logic, and TypeScript/Next.js for the UI. Follow agent-platform/configs/runtime/language-decision-registry.json before changing this split.",
-    "cli_integration_strategy": "Use external CLIs only through explicit adapter contracts from agent-platform/configs/integrations/cli-adapter-registry.json. Missing optional CLIs should disable only that capability and show setup guidance. Real multi-CLI execution requires a supervisor with process graph validation, resource cleanup, decision inbox routing, and merge gates.",
+    "cli_integration_strategy": "Use external CLIs only through explicit guest adapter contracts from agent-platform/configs/integrations/cli-adapter-registry.json. Missing optional CLIs should disable only that capability and show setup guidance. Real multi-CLI execution requires a platform-owned supervisor with process graph validation, resource cleanup, decision inbox routing, and merge gates.",
     "data_strategy": "Read repository documents or generated snapshots through explicit user-selected workspace paths. Do not silently bundle private repository data. Convert CLI output into structured task runs, process events, artifact records, decision packets, verification records, and reusable knowledge only after provenance, redaction, and validation are recorded.",
     "settings_strategy": "Store user settings separately from bundled defaults. Secrets must be environment variables, OS credential storage, or user-provided runtime input, not checked-in config."
   },
     "security_privacy_rules": [
     "Do not bundle real webhook URLs, API keys, tokens, browser cookies, or private notes into installers.",
     "Prefer explicit user workspace selection over scanning arbitrary folders.",
-    "Do not assume one external CLI is installed; use adapter capability checks and missing-CLI fallback guidance.",
+    "Do not assume one external CLI or commercial assistant host is installed; use adapter capability checks and missing-CLI fallback guidance.",
     "Before desktop-originated CLI execution, document command allowlists, workspace path allowlists, timeout, and secret redaction behavior.",
     "Before interactive CLI execution, document PTY or stream scope, stdin-write scope, cancellation, orphan-process cleanup, and user-question deferral behavior.",
     "Document any local server port, sidecar process, file-system permission, or network behavior before release.",

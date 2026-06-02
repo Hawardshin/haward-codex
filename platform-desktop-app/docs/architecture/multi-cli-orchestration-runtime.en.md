@@ -2,12 +2,12 @@
 
 ## Purpose
 
-This document defines the runtime shape for making `platform-desktop-app` an installable desktop platform that can use Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, and future AI CLIs without depending on any single one.
+This document defines the runtime shape for making `platform-desktop-app` a platform-first host runtime that launches before Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, and future AI CLIs, then uses those tools as guest adapter lanes without depending on any single one.
 
 Core conclusions:
 
-- The desktop app is not a CLI wrapper. It owns workspace context, task state, decisions, artifacts, history, validation, and reusable data.
-- CLIs are adapter-backed execution providers. If one is missing, the result is `capability_missing`, and the app still opens.
+- The desktop app is not a CLI wrapper. It is the platform-first supervisor that owns workspace context, task state, decisions, artifacts, history, validation, and reusable data.
+- CLIs are guest adapter-backed execution providers on top of the platform. If one is missing, the result is `capability_missing`, and the app still opens.
 - Multi-CLI work is a supervised process graph with lane state, output bounds, cancellation, cleanup, and merge gates, not several unrelated terminal windows.
 - If a CLI asks a user question while the user is absent, only the dependent lane pauses; the decision goes to the decision inbox and independent lanes continue.
 - Terminal output is visible evidence, but durable platform state is stored as structured records.
@@ -15,7 +15,8 @@ Core conclusions:
 ## Runtime Layers
 
 ```text
-Tauri desktop shell
+Platform-first host runtime
+  -> Tauri desktop shell
   -> workspace-monitor / future desktop UI
       -> command center
       -> run timeline
@@ -29,7 +30,7 @@ Tauri desktop shell
       -> decision deferral router
       -> artifact/log/data retention manager
       -> validation and evaluation runner
-  -> external AI CLI adapters
+  -> external AI CLI guest adapters
       -> Claude Code CLI
       -> Gemini CLI
       -> Codex CLI

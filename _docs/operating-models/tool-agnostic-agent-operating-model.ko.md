@@ -4,6 +4,8 @@
 
 이 문서는 이 저장소의 운영 원칙을 Codex 전용 방식이 아니라 Claude Code, Cursor, Google Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 재사용할 수 있게 정의한다.
 
+이 문서는 저장소를 개발할 때 사용할 수 있는 assistant runtime adapter를 다룬다. 설치형 제품의 런타임 주체는 별도다. 제품은 플랫폼이 먼저 실행되는 host runtime이어야 하며, Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity 같은 외부 AI 도구는 제품 위에 붙는 guest adapter일 뿐이다.
+
 ## 핵심 원칙
 
 - 공통 원칙은 `_docs/`, `_ops/`, `_requirements/`, `_specs/`, `_history/`, `agent-platform/configs/`에 둔다.
@@ -45,4 +47,3 @@ python3 _tools/structure-audit/src/structure_audit.py --check
 PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/assistant-runtimes/adapter-registry.json
 PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json
 ```
-

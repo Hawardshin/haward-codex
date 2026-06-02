@@ -24,10 +24,10 @@ This document defines the structure for running the platform as an installable m
 
 The initial recommendation is a Tauri-first macOS `.app` shell.
 
-- Desktop shell: owns the macOS app entry point, native window lifecycle, and workspace folder picker.
+- Desktop shell: owns the macOS app entry point, native window lifecycle, workspace folder picker, and platform-first host boundary.
 - Workspace Monitor UI: reuses dashboard, history, docs, agents, source viewer, and decision inbox screens.
 - Agent Platform: owns Python-first agents, research, planning, evaluation, and config checks.
-- Optional CLI adapters: Codex, Claude Code, Cursor, GitHub CLI, package managers, and deployment CLIs attach through adapter contracts.
+- Guest CLI adapters: Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, GitHub CLI, package managers, and deployment CLIs attach through adapter contracts after the platform is running.
 
 The core rule is simple: the user launches one app, but internal agent logic and CLI execution stay behind explicit, testable boundaries.
 
