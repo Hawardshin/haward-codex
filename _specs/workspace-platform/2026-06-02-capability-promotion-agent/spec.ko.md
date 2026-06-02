@@ -7,6 +7,7 @@
 ## 목표
 
 플랫폼이 다양한 작업 중 반복, 병목, 누락, 수동 재작업을 관찰해 개선 아이디어를 만들고, 그 아이디어를 평가한 뒤 안전한 범위에서는 검증 가능한 자산으로 승격한다.
+아이디어 생성 전에는 유능한 사람이 직접 수행한다면 어떤 목표, 맥락, 근거, 메모, 선택지 비교, 결정, 실행, 검증, 인수인계, 리뷰를 남길지 먼저 모델링한다.
 
 ## 범위
 
@@ -26,6 +27,7 @@
 - 이름은 `blackbox-agent`가 아니라 `capability-promotion-agent`로 둔다. 사용자는 자동처럼 느낄 수 있지만 내부는 투명해야 하기 때문이다.
 - 새 기능은 `prompt -> workflow -> template -> tool -> skill -> agent -> project_feature` 순서로 가장 작은 자산을 우선한다.
 - 아이디어는 생성과 평가를 분리한다. 선택된 아이디어, 기각된 아이디어, 대기열 아이디어와 이유를 남긴다.
+- 아이디어는 human process model의 구체적인 단계에서 나와야 하며 사용자 문구만 보고 바로 생성하지 않는다.
 - 고위험 작업은 human decision inbox로 보낸다.
 
 ## 수용 기준
@@ -34,4 +36,5 @@
 - 에이전트 spec은 `inspect-agent`로 읽힌다.
 - memory bootstrap에서 warm anchor로 발견된다.
 - 생성된 아이디어는 평가 점수와 선택/기각/대기 이유가 있어야 한다.
+- human process model과 작업 흔적 필드가 registry, agent spec, workflow, prompt, docs에 있어야 한다.
 - 관련 요구사항, 계획, 요청 추적, 평가가 남는다.

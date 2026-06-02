@@ -1,0 +1,47 @@
+{
+  "task_id": "2026-06-02-human-process-capability-promotion",
+  "request_id": "UR-2026-06-02-030",
+  "work_mode": "governance",
+  "status": "completed",
+  "recorded_on": "2026-06-02",
+  "time_zone": "Asia/Seoul",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes": 5,
+      "status": "completed",
+      "notes": "Searched and opened human-centered design, AI use taxonomy, design thinking, and human-in-the-loop references."
+    },
+    {
+      "phase": "contract_update",
+      "duration_minutes": 20,
+      "status": "completed",
+      "notes": "Updated registry, agent spec, policy, workflow, prompt, philosophy, persistent instructions, README, requirements, and specs."
+    },
+    {
+      "phase": "history_and_evaluation",
+      "duration_minutes": 12,
+      "status": "completed",
+      "notes": "Created web search, provenance, plan evidence, requirements change/review, omission, grounding, timing, and request trace records."
+    },
+    {
+      "phase": "validation_commit_push",
+      "duration_minutes": 9,
+      "status": "completed",
+      "notes": "Ran full validation suite, evaluator, workspace index refresh, and prepared commit/push close-out."
+    }
+  ],
+  "bottleneck_candidates": [
+    {
+      "phase": "contract_update",
+      "reason": "Small governance changes touch many durable rule surfaces."
+    }
+  ],
+  "automation_candidates": [
+    {
+      "candidate": "capability promotion governance refinement generator",
+      "reason": "Could prefill paired requirements, provenance, plan evidence, omission, grounding, and evaluation shells."
+    }
+  ]
+}

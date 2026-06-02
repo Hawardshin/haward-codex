@@ -20,3 +20,4 @@ PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memo
 - task board refresh
 - omission/grounding/evaluator close-out
 - idea generation/evaluation fields exist in registry, agent docs, workflow, prompt, and requirement baseline
+- human process model fields exist in registry, agent docs, workflow, prompt, and requirement baseline

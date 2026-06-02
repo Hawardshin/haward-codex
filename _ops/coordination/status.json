@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-02",
-  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, platform description narrative, platform presentation pack, coding project bootstrap, work timing/bottleneck visibility, deep research agent, PPT reference expansion, non-blocking clarification, human decision inbox interrupt/resume, install mode split, installable software productization, agent/history visualization, runtime language direction, runtime language research/design workflow, CLI adapter boundary, unstructured-data structuring capability, work mode enforcement, omission prevention gate, resource leak prevention gate, CLI pipeline orchestration gate, CLI pipeline file/artifact handoff contract, reusable agent creation/orchestration registry, view mode selection, installable desktop user-flow design, macOS execution structure, source code viewer, agent collaboration board, subtle cute UI tone, infrastructure expert agent, timekeeper agent, positive vision agent, profit analyst agent, principle guardian agent, human arbitration agent, bounded black-box capability promotion agent, and capability idea evaluation gate work tracked. No separate parallel agent tasks are currently active.",
+  "summary": "Coordination board initialized. Readable work-summary, installation audit, prompt-level web search record, context archive, user request summary, requirements management, spec-driven development, skill lifecycle governance, architecture-first coding research, enterprise/high-quality source registry, source-discovery/provenance/Korean local review research, request-to-outcome trace, daily collected summary, work mode routing, stack-aware coding research, maintainable language/architecture/folder decision rules, parallel work planning rules, parallel research merge gate rules, presentation-agent reference collection foundation, HTML deck/script collaboration, design-to-PPT production loop, platform notification settings, workspace-monitor repository dashboard, root structure governance audit, tool-agnostic assistant runtime adapters, marketing/survey/quantitative evidence research profile, spec/source reconciliation clarification workflow, docs taxonomy/audit structure, workspace-monitor history timeline/folder map, workspace navigation/health checks, workspace-health usability/maintainability improvements, workspace-health source structure refactor, naming rules/audit governance, platform concept/philosophy review, platform description narrative, platform presentation pack, coding project bootstrap, work timing/bottleneck visibility, deep research agent, PPT reference expansion, non-blocking clarification, human decision inbox interrupt/resume, install mode split, installable software productization, agent/history visualization, runtime language direction, runtime language research/design workflow, CLI adapter boundary, unstructured-data structuring capability, work mode enforcement, omission prevention gate, resource leak prevention gate, CLI pipeline orchestration gate, CLI pipeline file/artifact handoff contract, reusable agent creation/orchestration registry, view mode selection, installable desktop user-flow design, macOS execution structure, source code viewer, agent collaboration board, subtle cute UI tone, infrastructure expert agent, timekeeper agent, positive vision agent, profit analyst agent, principle guardian agent, human arbitration agent, bounded black-box capability promotion agent, capability idea evaluation gate, and human-process capability promotion work tracked. No separate parallel agent tasks are currently active.",
   "agents": [
     {
       "id": "codex-primary",
@@ -13,6 +13,29 @@
     }
   ],
   "tasks": [
+    {
+      "id": "2026-06-02-human-process-capability-promotion",
+      "title": "Add human-process-first gate to capability promotion",
+      "project": "agent-platform",
+      "status": "completed",
+      "agent": "codex-primary",
+      "priority": "high",
+      "started_at": "2026-06-02",
+      "updated_at": "2026-06-02",
+      "next_action": "No action. Future capability promotion should model how a competent person would directly perform the work before generating and evaluating improvement ideas.",
+      "blockers": [],
+      "references": [
+        "agent-platform/configs/orchestration/capability-promotion-registry.json",
+        "agent-platform/configs/agents/capability-promotion-agent.json",
+        "_docs/policies/capability-promotion-policy.ko.md",
+        "_docs/governance/capability-governance.md",
+        "_ops/workflows/75-capability-promotion.md",
+        "_ops/prompts/105-capability-promotion.md",
+        "_history/web-searches/2026/2026-06-02-human-process-capability-promotion.ko.md"
+      ],
+      "timing_report": "_history/work-timings/2026/2026-06-02-human-process-capability-promotion.json",
+      "evaluation_report": "_history/evaluations/2026/2026-06-02-human-process-capability-promotion.ko.md"
+    },
     {
       "id": "2026-06-02-capability-idea-evaluation",
       "title": "Add idea generation and evaluation gate to capability promotion",

@@ -7,6 +7,7 @@
     "how_to_read": [
       "Read platform_principle before interpreting this as full autonomy.",
       "Use observation_sources and promotion_triggers to decide whether a recurring pattern is real.",
+      "Use human_process_model to describe how a competent person would directly perform the work before automating it.",
       "Use idea_generation and idea_evaluation_rubric to create several candidate ideas and score them before promotion.",
       "Use capability_types to choose the smallest reusable asset.",
       "Use risk_tiers and autonomy_limits before applying changes.",
@@ -18,6 +19,7 @@
       "The platform starts creating prompts, workflows, templates, tools, skills, agents, or project features from observed work patterns.",
       "Repeated friction, bottleneck, omission, validation failure, or manual rework rules change.",
       "Automatic capability promotion risk tiers or human checkpoint rules change.",
+      "Human-process modeling steps, human work artifacts, or handoff rules change.",
       "Capability idea generation, scoring criteria, pass thresholds, or rejection reasons change.",
       "A new reusable capability type is added.",
       "A monitor, desktop app, or orchestration layer starts showing capability candidates or promotion status."
@@ -132,6 +134,39 @@
         "competitive/tournament-style idea selection inspiration"
       ],
       "last_checked": "2026-06-02"
+    },
+    {
+      "id": "nist_human_centered_design",
+      "title": "NIST Human Centered Design",
+      "url": "https://www.nist.gov/itl/iad/visualization-and-usability-group/human-factors-human-centered-design",
+      "source_type": "official_docs",
+      "used_for": [
+        "user needs and task context before automation",
+        "human-centered process framing"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "nist_ai_use_taxonomy",
+      "title": "NIST AI Use Taxonomy: A Human-Centered Approach",
+      "url": "https://www.nist.gov/publications/ai-use-taxonomy-human-centered-approach",
+      "source_type": "official_docs",
+      "used_for": [
+        "human-AI task decomposition",
+        "outcome-based activity framing"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "ideo_design_thinking_process",
+      "title": "IDEO Design Thinking Process",
+      "url": "https://designthinking.ideo.com/process",
+      "source_type": "web_source",
+      "used_for": [
+        "empathy, challenge definition, idea selection, prototyping, and testing pattern",
+        "human-like divergence before convergence"
+      ],
+      "last_checked": "2026-06-02"
     }
   ],
   "structure_rules": [
@@ -160,6 +195,17 @@
       "reason": "The platform should not generate features from vague preference alone.",
       "applies_to": [
         "promotion_triggers",
+        "candidate_contract"
+      ]
+    },
+    {
+      "id": "human_process_first",
+      "rule": "Before generating capability ideas, model how a competent human would directly do the work: goal framing, context gathering, source checking, option comparison, decision, execution notes, verification, handoff, and review.",
+      "reason": "The platform should automate the real human workflow that reduces work, not a vague prompt-only approximation.",
+      "applies_to": [
+        "human_process_model",
+        "idea_generation",
+        "promotion_pipeline",
         "candidate_contract"
       ]
     },
@@ -210,6 +256,11 @@
       "required": true
     },
     {
+      "field": "human_process_model",
+      "meaning": "Required model of how a competent person would directly perform and record the work before automation is proposed.",
+      "required": true
+    },
+    {
       "field": "idea_generation",
       "meaning": "Rules for generating multiple improvement ideas from observed signals before selecting a candidate.",
       "required": true
@@ -245,7 +296,45 @@
       "required": true
     }
   ],
-  "platform_principle": "The platform may automate capability discovery and candidate drafting, but it must remain transparent, testable, reversible, and owner-controlled. It should feel automatic to the user only because the boring discovery and bookkeeping are handled, not because decisions become invisible.",
+  "platform_principle": "The platform may automate capability discovery and candidate drafting, but it must first model how a competent human would directly perform the work and then automate only the repeated, evidence-backed parts. It must remain transparent, testable, reversible, and owner-controlled. It should feel automatic to the user only because the boring discovery and bookkeeping are handled, not because decisions become invisible.",
+  "human_process_model": {
+    "purpose": "Make the agent behave like a careful human worker before it behaves like an automation engine.",
+    "required_before": [
+      "idea_generation",
+      "candidate_drafting",
+      "implementation"
+    ],
+    "human_like_sequence": [
+      "state_goal_and_success_criteria",
+      "read_existing_context_and_constraints",
+      "collect_or_verify_sources",
+      "write_working_notes_and_assumptions",
+      "compare_options_with_tradeoffs",
+      "choose_or_escalate_decision",
+      "execute_smallest_safe_step",
+      "verify_result_against_goal",
+      "summarize_handoff_and_next_action",
+      "review_for_omissions_and_rework"
+    ],
+    "required_work_artifacts": [
+      "goal_statement",
+      "context_notes",
+      "source_or_local_evidence_notes",
+      "assumptions_and_unknowns",
+      "option_comparison",
+      "decision_reason",
+      "execution_notes",
+      "verification_notes",
+      "handoff_summary",
+      "review_or_rework_notes"
+    ],
+    "automation_boundary_rules": [
+      "Automate repeated steps only after the human process can be described in plain language.",
+      "Do not automate judgment away; move human judgment to a visible checkpoint when preference, risk appetite, authority, accountability, or irreversible trade-off remains.",
+      "If a competent person would inspect the result before acting, keep an equivalent validation or review gate.",
+      "If the work would naturally leave notes, sources, estimates, screenshots, commands, or review comments, record the matching artifact path or explain why it is not applicable."
+    ]
+  },
   "idea_generation": {
     "minimum_idea_count": 2,
     "preferred_idea_count": 3,
@@ -254,11 +343,13 @@
       "Generate more than one way to reduce the observed repetition or bottleneck when the problem is not trivial.",
       "Include at least one lighter-weight option before proposing a tool, skill, agent, or project feature.",
       "Include a do-nothing or defer option when the signal may be too weak.",
+      "Generate ideas from the explicit human_process_model rather than from the user phrase alone.",
       "Do not generate ideas that require high-risk execution without labeling the human checkpoint."
     ],
     "idea_fields": [
       "idea_id",
       "idea_summary",
+      "human_process_step_addressed",
       "observed_problem",
       "capability_type",
       "expected_repetition_reduction",
@@ -504,6 +595,7 @@
   "promotion_pipeline": [
     "observe",
     "cluster_related_signals",
+    "model_human_process",
     "generate_ideas",
     "evaluate_ideas",
     "rank_or_reject_ideas",
@@ -528,6 +620,8 @@
     "idea_evaluator_notes",
     "selected_idea_id",
     "rejected_or_queued_idea_reasons",
+    "human_process_model",
+    "human_process_artifacts",
     "observed_signals",
     "source_records",
     "problem_statement",
@@ -554,6 +648,8 @@
     "minimum_fields": [
       "observed_signals",
       "source_records",
+      "human_process_model",
+      "human_process_artifacts",
       "idea_ids",
       "idea_evaluation_scores",
       "selected_idea_id",

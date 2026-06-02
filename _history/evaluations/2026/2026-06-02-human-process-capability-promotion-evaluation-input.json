@@ -1,0 +1,156 @@
+{
+  "initial_instruction": "직접 사람이 하는 것 처럼",
+  "result_summary": "Strengthened capability promotion so it first models how a competent person would directly perform and record the work, then generates and evaluates ideas from that human process model before promotion.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "_philosophy/agent-operating-philosophy.ko.md",
+    "_philosophy/agent-operating-philosophy.en.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/governance/capability-governance.md",
+    "_docs/policies/capability-promotion-policy.ko.md",
+    "_docs/policies/capability-promotion-policy.en.md",
+    "_ops/workflows/75-capability-promotion.md",
+    "_ops/prompts/105-capability-promotion.md",
+    "agent-platform/README.md",
+    "agent-platform/configs/agents/capability-promotion-agent.json",
+    "agent-platform/configs/orchestration/capability-promotion-registry.json",
+    "agent-platform/docs/capability-promotion-agent.ko.md",
+    "agent-platform/docs/capability-promotion-agent.en.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-human-process-capability-promotion.ko.md",
+    "_requirements/changes/2026-06-02-human-process-capability-promotion.en.md",
+    "_requirements/reviews/2026-06-02-human-process-capability-promotion.ko.md",
+    "_requirements/reviews/2026-06-02-human-process-capability-promotion.en.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/spec.en.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/plan.en.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/validation.en.md",
+    "_history/web-searches/2026/2026-06-02-human-process-capability-promotion.ko.md",
+    "_history/web-searches/2026/2026-06-02-human-process-capability-promotion.en.md",
+    "_history/source-provenance/2026/2026-06-02-human-process-capability-promotion.ko.md",
+    "_history/source-provenance/2026/2026-06-02-human-process-capability-promotion.en.md",
+    "_history/plan-evidence/2026/2026-06-02-human-process-capability-promotion.ko.md",
+    "_history/plan-evidence/2026/2026-06-02-human-process-capability-promotion.en.md",
+    "_history/plans/2026/2026-06-02-human-process-capability-promotion.ko.md",
+    "_history/plans/2026/2026-06-02-human-process-capability-promotion.en.md",
+    "_history/request-traces/2026/2026-06-02-human-process-capability-promotion.ko.md",
+    "_history/request-traces/2026/2026-06-02-human-process-capability-promotion.en.md",
+    "_history/work-timings/2026/2026-06-02-human-process-capability-promotion.json",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/2026/2026-06-02.md",
+    "_ops/coordination/status.json",
+    "_ops/coordination/board.ko.md",
+    "_ops/coordination/board.en.md",
+    "_ops/coordination/board.html",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md"
+  ],
+  "verification": [
+    "python3 -m json.tool passed for changed JSON files.",
+    "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/capability-promotion-agent.json passed.",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/orchestration/capability-promotion-registry.json passed.",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-human-process-capability-promotion-omission.json passed.",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-human-process-capability-promotion-grounding.json passed.",
+    "PYTHONPATH=src python3 -m unittest discover -s tests passed: 150 tests.",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/orchestration/capability-promotion-registry.json configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json passed.",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json passed.",
+    "python3 _tools/docs-audit/src/docs_audit.py --check passed.",
+    "python3 _tools/naming-audit/src/naming_audit.py --check passed.",
+    "python3 _tools/workspace-health/src/workspace_health.py passed: 20 checks.",
+    "git diff --check passed."
+  ],
+  "references_checked": [
+    "agent-platform/configs/orchestration/capability-promotion-registry.json",
+    "agent-platform/configs/agents/capability-promotion-agent.json",
+    "_docs/governance/capability-governance.md",
+    "_philosophy/agent-operating-philosophy.ko.md",
+    "https://www.nist.gov/itl/iad/visualization-and-usability-group/human-factors-human-centered-design",
+    "https://www.nist.gov/publications/ai-use-taxonomy-human-centered-approach",
+    "https://designthinking.ideo.com/process",
+    "https://openpracticelibrary.com/practice/human-in-the-loop/"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-human-process-capability-promotion-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-02-human-process-capability-promotion.ko.md",
+    "_history/source-provenance/2026/2026-06-02-human-process-capability-promotion.en.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-02-human-process-capability-promotion.ko.md",
+    "_history/plan-evidence/2026/2026-06-02-human-process-capability-promotion.en.md",
+    "_history/plans/2026/2026-06-02-human-process-capability-promotion.ko.md",
+    "_history/plans/2026/2026-06-02-human-process-capability-promotion.en.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-human-process-capability-promotion.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-human-process-capability-promotion-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-human-process-capability-promotion.ko.md",
+    "_history/web-searches/2026/2026-06-02-human-process-capability-promotion.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-human-process-capability-promotion.ko.md",
+    "_requirements/changes/2026-06-02-human-process-capability-promotion.en.md",
+    "_requirements/reviews/2026-06-02-human-process-capability-promotion.ko.md",
+    "_requirements/reviews/2026-06-02-human-process-capability-promotion.en.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/spec.en.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/plan.en.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/validation.en.md",
+    "_specs/workspace-platform/2026-06-02-capability-promotion-agent/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-human-process-capability-promotion.ko.md",
+    "_history/request-traces/2026/2026-06-02-human-process-capability-promotion.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-human-process-capability-promotion.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Later add a deterministic form or UI in workspace-monitor that lets users inspect human_process_model and generated idea scores side by side.",
+    "Later add a helper command that validates a capability promotion package includes human_process_model and human_process_artifacts."
+  ]
+}
+

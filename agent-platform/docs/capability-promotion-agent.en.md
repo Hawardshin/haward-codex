@@ -15,6 +15,7 @@ The goal is not a fully opaque black box. The user-facing flow may feel automati
 ## Output
 
 - capability candidate ID
+- human process model and expected work artifacts
 - generated improvement ideas
 - idea evaluation scores and evaluator notes
 - selected idea plus rejected or queued idea reasons
@@ -28,11 +29,23 @@ The goal is not a fully opaque black box. The user-facing flow may feel automati
 
 ## Safety Rules
 
+- Before generating ideas, model how a competent person would directly do the work: goal framing, context review, evidence checks, notes, option comparison, decision, execution, verification, handoff, and review.
 - Separate idea generation from idea evaluation. Do not execute the first idea directly; compare several ideas before selecting one.
 - Do not auto-run destructive changes, secrets, permissions, installs, paid services, public deployments, security/privacy-sensitive work, or irreversible migrations without a human checkpoint.
 - Do not create an agent just because repetition exists. Check the smallest useful asset first: prompt, workflow, template, tool, skill, agent, then project feature.
 - Do not treat internal knowledge or repeated LLM agreement as factual proof. Verify important claims through web search, tests, evaluators, or human judgment.
 - Applied capabilities must be documented, validated, evaluated, committed, and pushed.
+
+## Human Process Model Criteria
+
+- State the goal and success criteria first.
+- Read existing docs, settings, history, and constraints.
+- Verify required web or local evidence.
+- Record assumptions and unknowns.
+- Compare options and trade-offs.
+- Route remaining human judgment to a human checkpoint.
+- Apply the smallest safe execution step.
+- Verify the result and leave a handoff summary for the next worker.
 
 ## Idea Evaluation Criteria
 

@@ -1,0 +1,103 @@
+{
+  "task": "Strengthen capability promotion so it works like a competent person directly doing the work.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "human-process-contract",
+      "description": "Capability promotion must model the direct human work process before idea generation.",
+      "source": "UR-2026-06-02-030",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/orchestration/capability-promotion-registry.json",
+        "agent-platform/configs/agents/capability-promotion-agent.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "durable-instructions",
+      "description": "Persist the human-process-first rule for future sessions.",
+      "source": "persistent instruction rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "AGENTS.md",
+        "_docs/instructions/persistent-instructions.ko.md",
+        "_docs/instructions/persistent-instructions.en.md",
+        "_docs/instructions/persistent-instructions.md",
+        "_philosophy/agent-operating-philosophy.ko.md",
+        "_philosophy/agent-operating-philosophy.en.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "workflow-prompt-policy",
+      "description": "Update reusable policy, governance doc, workflow, and prompt.",
+      "source": "operations rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_docs/policies/capability-promotion-policy.ko.md",
+        "_docs/governance/capability-governance.md",
+        "_ops/workflows/75-capability-promotion.md",
+        "_ops/prompts/105-capability-promotion.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "requirements-spec-history",
+      "description": "Update requirements, specs, and governance history records.",
+      "source": "governance close-out",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_requirements/changes/2026-06-02-human-process-capability-promotion.ko.md",
+        "_requirements/reviews/2026-06-02-human-process-capability-promotion.ko.md",
+        "_specs/workspace-platform/2026-06-02-capability-promotion-agent/spec.ko.md",
+        "_history/web-searches/2026/2026-06-02-human-process-capability-promotion.ko.md",
+        "_history/source-provenance/2026/2026-06-02-human-process-capability-promotion.ko.md",
+        "_history/plan-evidence/2026/2026-06-02-human-process-capability-promotion.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/orchestration/capability-promotion-registry.json",
+      "purpose": "Human process model and idea evaluation source of truth",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/agents/capability-promotion-agent.json",
+      "purpose": "Agent policy and output contract",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "Capability promotion registry remains self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract configs/orchestration/capability-promotion-registry.json passed."
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "agent-inspect",
+      "description": "Capability promotion agent remains inspectable.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "inspect-agent configs/agents/capability-promotion-agent.json passed."
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [],
+  "notes": [
+    "This is a scoped governance refinement of REQ-WS-070."
+  ]
+}

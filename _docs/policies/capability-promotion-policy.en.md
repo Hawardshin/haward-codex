@@ -9,9 +9,27 @@ The platform may create feature and capability candidates while doing work whene
 - Automation exists to reduce repeated human work.
 - The user-facing flow may feel automatic, but the internal record must remain inspectable.
 - Candidate generation can be broad; execution is limited by risk.
+- Before generating ideas, model how a competent person would directly do the work: frame the goal, read context, check evidence, keep notes, compare options, execute, verify, and hand off.
 - Separate idea generation from idea evaluation. Do not execute the first idea directly; create several ideas and evaluate them against explicit criteria.
 - New functionality must start with the smallest reusable asset.
 - High-risk changes must not run without a human checkpoint, rollback path, and audit record.
+
+## Human Process Model
+
+Automation candidates must first be explainable as a direct human work process.
+
+- goal and success criteria
+- existing context and constraints
+- source or local evidence checks
+- assumptions, unknowns, and working notes
+- option and trade-off comparison
+- decision reason or human judgment checkpoint
+- smallest safe execution step
+- result verification
+- handoff summary and next action
+- omission and rework review
+
+If this model cannot be written, do not jump directly to automation. Consider documentation, a checklist, a prompt refinement, or additional research first.
 
 ## Promotion Order
 
@@ -54,6 +72,7 @@ Promoted capabilities must leave:
 
 - observation evidence
 - candidate and rejected lighter options
+- human process model and work artifacts
 - risk tier
 - validation plan and result
 - rollback or disablement path

@@ -1,0 +1,20 @@
+{
+  "request_id": "UR-2026-06-02-030",
+  "selected_work_mode": "governance",
+  "selected_at": "2026-06-02",
+  "reason": "The request changes durable capability promotion behavior, requirement baseline, persistent instructions, philosophy, registry, workflow, prompt, and agent policy.",
+  "required_targets": [
+    "web_search_record_targets",
+    "user_request_summary_targets",
+    "requirements_targets",
+    "spec_targets",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "mode_selection_record_targets",
+    "omission_check_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets"
+  ]
+}
+

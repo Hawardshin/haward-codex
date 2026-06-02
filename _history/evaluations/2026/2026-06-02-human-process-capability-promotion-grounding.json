@@ -1,0 +1,91 @@
+{
+  "task": "Ground human-process-first capability promotion refinement.",
+  "output_summary": "Capability promotion now requires modeling how a competent person would directly perform the work before generating and evaluating improvement ideas.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "registry",
+      "source": "agent-platform/configs/orchestration/capability-promotion-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Repository source of truth parsed and subject to config contract."
+    },
+    {
+      "evidence_id": "agent",
+      "source": "agent-platform/configs/agents/capability-promotion-agent.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Agent spec parsed and subject to inspect-agent."
+    },
+    {
+      "evidence_id": "nist_hcd",
+      "source": "https://www.nist.gov/itl/iad/visualization-and-usability-group/human-factors-human-centered-design",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "NIST page summarizing human-centered design principles and activities."
+    },
+    {
+      "evidence_id": "nist_taxonomy",
+      "source": "https://www.nist.gov/publications/ai-use-taxonomy-human-centered-approach",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "NIST publication page for AI Use Taxonomy."
+    },
+    {
+      "evidence_id": "ideo",
+      "source": "https://designthinking.ideo.com/process",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "IDEO design thinking process reference."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The capability promotion registry now includes a human_process_model section.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "registry"
+      ],
+      "verification_steps": [
+        "Parse JSON and run config contract check."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The capability promotion agent output contract now includes human process model and human work artifacts.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "agent"
+      ],
+      "verification_steps": [
+        "Run inspect-agent."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "External references support modeling user goals, tasks, context, option generation, choice-making, and evaluation before automation.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "nist_hcd",
+        "nist_taxonomy",
+        "ideo"
+      ],
+      "verification_steps": [
+        "Recorded web search and source provenance."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "No runtime background worker or UI was implemented; this change updates durable contracts and documentation."
+  ],
+  "limitation_notes": [
+    "The human process model is currently a required contract, not an automated extractor."
+  ]
+}

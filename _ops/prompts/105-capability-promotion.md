@@ -26,7 +26,16 @@ Discover:
 - project feature candidates that reduce operating work
 
 Before adding anything:
+- model how a competent person would directly perform the work:
+  - goal and success criteria
+  - existing context and constraints
+  - source or local evidence checks
+  - working notes, assumptions, and unknowns
+  - option comparison and tradeoffs
+  - decision reason or human checkpoint
+  - execution, verification, handoff, and review notes
 - generate multiple improvement ideas when the problem is not trivial
+- generate those ideas from the human process model, not from the user phrase alone
 - evaluate ideas against repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit
 - record the selected idea, rejected ideas, queued ideas, scores, and evaluator notes
 - check existing prompts, workflows, templates, tools, skills, agents, and project features
@@ -37,6 +46,8 @@ Before adding anything:
 
 Return:
 - candidate_id
+- human_process_model
+- human_process_artifacts
 - idea_ids
 - idea_summaries
 - idea_evaluation_scores

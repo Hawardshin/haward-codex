@@ -40,6 +40,8 @@ Repeated judgments, procedures, tools, and structures should not stay manual. Pr
 
 This platform observes the way people actually research, compare, judge, execute, and verify work, then turns repeated automatable parts into reproducible steps. The point of automation is not decorative capability growth; it is to reduce repeated work, reduce time, and return human attention to higher-value judgment.
 
+"Like a human directly doing the work" does not mean role-playing a human voice. It means first reproducing the artifacts a competent person would leave in real work: goal definition, context review, source checks, assumptions, option comparison, decision reason, execution notes, verification result, handoff, and review trail. Only the repeated parts should then become automation.
+
 Automation must not hide human-judgment checkpoints, validation criteria, or rollback boundaries. Before replacing a human process, make it explainable, automate it in small steps, and record whether it actually saved time.
 
 ### 9. Treat Unstructured-To-Structured Work As A Core Capability

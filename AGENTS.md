@@ -108,6 +108,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Treat the repository as a monorepo for a personal agent-building platform.
 - The platform's top-level purpose is to reduce repetitive human work and elapsed work time by modeling real human research, comparison, judgment, execution, and verification processes, then promoting automation-worthy repetition into the smallest durable asset: prompt, workflow, template, tool, skill, agent, or project feature.
 - Automation must preserve human-judgment checkpoints, validation criteria, and rollback boundaries; meaningful automation candidates should be checked against timing records, bottleneck records, and evaluator results.
+- "Like a human directly doing the work" means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.
 - Use `_ops/index.md` as the navigation hub for ongoing work.
 - Use `_philosophy/` for the durable worldview behind agent behavior and operating rules.
 - Keep reusable platform concepts in `agent-platform/` unless they clearly belong to another project.
@@ -116,6 +117,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - When a workflow repeats or creates avoidable friction, consider promoting it into a template, tool, or skill.
 - When repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns appear, use `capability-promotion-agent` and `agent-platform/configs/orchestration/capability-promotion-registry.json` to create bounded black-box capability candidates.
 - User-facing capability promotion may feel automatic, but internal observation, candidate, evidence, risk, rejected lighter option, validation, rollback or disablement, documentation, evaluation, commit, and push traces must remain auditable.
+- Capability promotion must model the direct human work process before idea generation; generated ideas should address concrete human process steps rather than only the user's phrasing.
 - Capability promotion must generate and evaluate ideas separately: for non-trivial problems, create several improvement ideas, score them against explicit criteria, then record selected, rejected, or queued reasons before promotion.
 - Promote the smallest useful asset first: prompt, workflow, template, tool, skill, agent, then project feature.
 - Do not auto-execute destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes without a human checkpoint and rollback plan.
