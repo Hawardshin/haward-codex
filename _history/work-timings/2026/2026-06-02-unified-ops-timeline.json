@@ -1,0 +1,48 @@
+{
+  "task_id": "2026-06-02-unified-ops-timeline",
+  "title": "Merge history and monitoring into Unified Ops",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "check unified observability references",
+      "status": "completed",
+      "duration_seconds": 180,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official observability references were checked before local planning."
+    },
+    {
+      "phase_id": "source_inventory",
+      "label": "inspect collector, snapshot types, UI, and tests",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "The implementation needed only representative files, not the entire repository."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "add unifiedOps model and UI",
+      "status": "completed",
+      "duration_seconds": 1200,
+      "measurement": "estimated",
+      "bottleneck_notes": "The implementation touched collector, generated snapshot type, dashboard UI, CSS, and tests."
+    },
+    {
+      "phase_id": "validation",
+      "label": "run test, build, perf, and static smoke",
+      "status": "completed",
+      "duration_seconds": 540,
+      "measurement": "estimated",
+      "bottleneck_notes": "Browser screenshot validation was unavailable; static smoke was used."
+    },
+    {
+      "phase_id": "records",
+      "label": "update requirements, specs, history, and evaluation",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "Governance close-out required bilingual records."
+    }
+  ]
+}

@@ -13,6 +13,7 @@ export type WorkspaceStats = {
   webSearches: number;
   timingRecords?: number;
   historyDays: number;
+  unifiedOpsEvents?: number;
   sourceFiles?: number;
   rootFolders: number;
 };
@@ -184,6 +185,52 @@ export type WorkspaceHistoryDay = {
   documents: WorkspaceHistoryDocument[];
 };
 
+export type WorkspaceUnifiedOpsEvent = {
+  id: string;
+  sourceType: string;
+  signalType: string;
+  lane: string;
+  severity: string;
+  status: string;
+  title: string;
+  detail: string;
+  path: string;
+  category: string;
+  language: string;
+  date: string;
+  timestamp: string;
+};
+
+export type WorkspaceUnifiedOps = {
+  summary: {
+    totalEvents: number;
+    historyEvents: number;
+    monitorEvents: number;
+    evidenceEvents: number;
+    decisionEvents: number;
+    openSignals: number;
+    criticalSignals: number;
+    latestEventAt: string;
+    historyDays: number;
+  };
+  lanes: Array<{
+    id: string;
+    label: string;
+    count: number;
+  }>;
+  signalTypes: Array<{
+    id: string;
+    label: string;
+    count: number;
+  }>;
+  sourceTypes: Array<{
+    id: string;
+    label: string;
+    count: number;
+  }>;
+  events: WorkspaceUnifiedOpsEvent[];
+};
+
 export type WorkspaceFolderStructure = {
   rootFolders: Array<{
     name: string;
@@ -245,6 +292,7 @@ export type WorkspaceSnapshot = {
   requirements: WorkspaceRequirement[];
   documents: WorkspaceDocument[];
   historyDays: WorkspaceHistoryDay[];
+  unifiedOps?: WorkspaceUnifiedOps;
   sourceFiles?: WorkspaceSourceFile[];
   folderStructure: WorkspaceFolderStructure;
   viewModeCatalog?: {
@@ -305,7 +353,10 @@ export function categoryLabel(category: string) {
     "web-search": "웹 검색",
     "work-timing": "작업 시간",
     "workspace-doc": "워크스페이스 문서",
-    "work-summary": "작업 요약"
+    "work-summary": "작업 요약",
+    "task-monitor": "작업 모니터",
+    "blocker-monitor": "차단 모니터",
+    "next-action-monitor": "다음 행동"
   };
   return labels[category] ?? category;
 }

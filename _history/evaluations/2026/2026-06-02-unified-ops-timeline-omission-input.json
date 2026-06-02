@@ -1,0 +1,152 @@
+{
+  "task": "Merge history structures and monitoring surfaces into Unified Ops",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Search current observability references before planning and edits.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-unified-ops-timeline.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "large-scope-decomposition",
+      "description": "Shrink the broad merge-everything request to a bounded source inventory and implementation slice.",
+      "source": "large scope decomposition rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/plans/2026/2026-06-02-unified-ops-timeline.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "unified-snapshot",
+      "description": "Add a single snapshot-level unified operations event stream.",
+      "source": "REQ-WM-018",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "workspace-monitor/lib/snapshot.ts",
+        "workspace-monitor/src/generated/workspace-snapshot.json",
+        "workspace-monitor/public/workspace-snapshot.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "unified-ui",
+      "description": "Expose unified history and monitoring in one dashboard surface.",
+      "source": "REQ-WM-018",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "tests",
+      "description": "Add regression checks for the unified model and UI readiness strings.",
+      "source": "validation policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/tests/collector.test.mjs",
+        "platform-desktop-app/tests/readiness.test.mjs",
+        "platform-desktop-app/scripts/check-readiness.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "requirements-spec-history",
+      "description": "Record requirement, spec, trace, work summary, and evaluation artifacts.",
+      "source": "requirements/spec/history rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+        "workspace-monitor/specs/2026-06-02-unified-ops-timeline/",
+        "_history/request-traces/2026/2026-06-02-unified-ops-timeline.ko.md",
+        "_history/work-summaries/2026/2026-06-02.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "workspace-monitor/scripts/collect-workspace.mjs",
+      "purpose": "Unified Ops snapshot aggregation.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Unified Ops dashboard and history UI.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/specs/2026-06-02-unified-ops-timeline/spec.ko.md",
+      "purpose": "Project spec contract.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "collect",
+      "description": "Regenerate snapshot with unifiedOps.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run collect"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "tests",
+      "description": "Run collector and desktop readiness tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor test",
+        "npm --prefix platform-desktop-app test"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "typecheck-build-perf",
+      "description": "Run UI typecheck, build, and performance budget.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check",
+        "npm --prefix workspace-monitor run build",
+        "npm --prefix workspace-monitor run perf:budget"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "static-smoke",
+      "description": "Serve static output and confirm snapshot plus built UI strings.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "curl http://127.0.0.1:4182/",
+        "curl http://127.0.0.1:4182/workspace-snapshot.json",
+        "rg Unified Ops/unifiedOps in workspace-monitor/out and workspace-monitor/.next"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Browser screenshot validation was not run because Browser MCP tools were not exposed.",
+    "Real-time telemetry backend and OpenTelemetry SDK adoption were intentionally out of scope."
+  ],
+  "notes": [
+    "Existing History, Agents, Desktop, and Documents drill-down views remain available; the new surface is a unifying layer above them."
+  ]
+}

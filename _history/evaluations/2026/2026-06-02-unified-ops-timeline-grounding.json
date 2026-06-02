@@ -1,0 +1,83 @@
+{
+  "task": "Ground factual claims for Unified Ops Timeline.",
+  "output_summary": "Workspace Monitor now has a snapshot-level unifiedOps stream and UI panels that combine history and monitoring signals.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "collector",
+      "source": "workspace-monitor/scripts/collect-workspace.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary collector source now building unifiedOps."
+    },
+    {
+      "evidence_id": "snapshot-types",
+      "source": "workspace-monitor/lib/snapshot.ts",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Type contract for WorkspaceUnifiedOps and events."
+    },
+    {
+      "evidence_id": "monitor-ui",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Overview and History UI now render Unified Ops panels."
+    },
+    {
+      "evidence_id": "tests",
+      "source": "workspace-monitor/tests/collector.test.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Collector tests assert unifiedOps history and monitor events."
+    },
+    {
+      "evidence_id": "static-smoke",
+      "source": "workspace-monitor/specs/2026-06-02-unified-ops-timeline/validation.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Validation record for static response and built output checks."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The generated Workspace Monitor snapshot now contains unifiedOps and unifiedOpsEvents.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "collector",
+        "snapshot-types",
+        "tests",
+        "static-smoke"
+      ],
+      "verification_steps": [
+        "Ran collect/test/check/build/perf.",
+        "Served static output and checked workspace-snapshot.json."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Overview and History show Unified Ops panels combining history and monitoring signals.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "static-smoke"
+      ],
+      "verification_steps": [
+        "Read MonitorShell.tsx.",
+        "Checked built output for Unified Ops strings."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "No visual screenshot was captured because Browser MCP tools were unavailable."
+  ],
+  "limitation_notes": [
+    "This is a repository-local snapshot/UI unification, not a real-time telemetry backend.",
+    "OpenTelemetry SDK and external observability systems were not added."
+  ]
+}

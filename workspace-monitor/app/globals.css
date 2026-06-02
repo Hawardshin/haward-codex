@@ -787,6 +787,7 @@ h3 {
 }
 
 .desktop-command-panel,
+.unified-ops-panel,
 .task-pipe-panel,
 .desktop-control-panel,
 .cli-session-panel,
@@ -834,6 +835,118 @@ h3 {
 
 .desktop-command-grid button:disabled {
   opacity: 0.55;
+}
+
+.ops-summary-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ops-summary-strip article,
+.ops-signal-column > div,
+.ops-event {
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+}
+
+.ops-summary-strip article {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding: 10px;
+}
+
+.ops-summary-strip span,
+.ops-signal-column span,
+.ops-event span,
+.ops-event small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.ops-summary-strip strong,
+.ops-signal-column strong,
+.ops-event strong,
+.ops-event p,
+.ops-event small {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ops-unified-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.33fr) minmax(0, 0.67fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.ops-signal-column {
+  display: grid;
+  gap: 10px;
+}
+
+.ops-signal-column > div {
+  display: grid;
+  gap: 7px;
+  padding: 10px;
+}
+
+.ops-signal-column p {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 7px;
+}
+
+.ops-event-rail {
+  display: grid;
+  gap: 8px;
+  max-height: 520px;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.ops-event {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(140px, 0.24fr);
+  gap: 10px;
+  padding: 10px;
+  border-left: 4px solid #aebbc8;
+}
+
+.ops-event p {
+  margin: 5px 0;
+}
+
+.ops-event aside {
+  display: grid;
+  gap: 5px;
+  justify-items: end;
+  align-content: start;
+}
+
+.ops-event.severity-critical {
+  border-left-color: #dc2626;
+}
+
+.ops-event.severity-warning,
+.ops-event.severity-attention {
+  border-left-color: #d97706;
+}
+
+.ops-event.severity-verified {
+  border-left-color: #059669;
+}
+
+.ops-event.severity-evidence {
+  border-left-color: #7c3aed;
 }
 
 .task-pipe-layout {
@@ -2850,6 +2963,9 @@ h3 {
   .task-lanes article:hover,
   .adapter-card:hover,
   .desktop-command-grid button:hover,
+  .ops-summary-strip article:hover,
+  .ops-signal-column > div:hover,
+  .ops-event:hover,
   .task-pipe-report:hover,
   .task-pipe-summary article:hover,
   .process-node:hover,
@@ -2884,6 +3000,8 @@ h3 {
   .agent-map,
   .agent-workload-strip,
   .desktop-command-grid,
+  .ops-summary-strip,
+  .ops-unified-grid,
   .task-pipe-summary,
   .task-pipe-report-grid,
   .pipe-lane-grid,
@@ -2901,6 +3019,7 @@ h3 {
   .source-layout,
   .command-center,
   .decision-inbox-layout,
+  .ops-event,
   .task-pipe-layout,
   .task-pipe-controls,
   .session-launcher,
@@ -2965,6 +3084,9 @@ h3 {
   .agent-bars,
   .adapter-grid,
   .desktop-command-grid,
+  .ops-summary-strip,
+  .ops-unified-grid,
+  .ops-event,
   .task-pipe-layout,
   .task-pipe-controls,
   .task-pipe-summary,

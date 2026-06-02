@@ -112,6 +112,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(monitorShell, /Answer & Resume/);
   for (const uiString of [
     "Command Palette",
+    "Unified Ops",
+    "히스토리와 모니터링 통합",
     "Capability Center",
     "Run Board",
     "process graph",
@@ -137,6 +139,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   }
   for (const implementationToken of [
     "detectOutputEvents",
+    "visibleUnifiedEvents",
+    "summarizeUnifiedOpsEvents",
+    "ops-event-rail",
     "groupDecisions",
     "buildSourceDiffSummary",
     "SourceDraftEntry",

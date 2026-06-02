@@ -1,0 +1,18 @@
+{
+  "task_id": "2026-06-02-unified-ops-timeline",
+  "selected_mode": "governance",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes durable monitoring behavior, project requirements, specs, and user-facing dashboard structure.",
+  "required_records": [
+    "web_search_record",
+    "requirements_change",
+    "project_spec",
+    "request_trace",
+    "work_summary",
+    "omission_check",
+    "resource_check",
+    "grounding_check",
+    "work_evaluation"
+  ]
+}

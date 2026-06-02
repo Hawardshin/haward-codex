@@ -61,6 +61,7 @@ const sections: Section[] = [
 type MonitorViewMode = NonNullable<WorkspaceSnapshot["viewModeCatalog"]>["modes"][number];
 type MonitorLanguageMode = NonNullable<WorkspaceSnapshot["languageModeCatalog"]>["modes"][number];
 type CollaborationBoard = NonNullable<WorkspaceSnapshot["collaborationBoard"]>;
+type UnifiedOps = NonNullable<WorkspaceSnapshot["unifiedOps"]>;
 
 const fallbackViewModes: MonitorViewMode[] = [
   {
@@ -132,6 +133,24 @@ const emptyCollaborationBoard: CollaborationBoard = {
   flows: [],
   blockers: [],
   nextActions: []
+};
+
+const emptyUnifiedOps: UnifiedOps = {
+  summary: {
+    totalEvents: 0,
+    historyEvents: 0,
+    monitorEvents: 0,
+    evidenceEvents: 0,
+    decisionEvents: 0,
+    openSignals: 0,
+    criticalSignals: 0,
+    latestEventAt: "",
+    historyDays: 0
+  },
+  lanes: [],
+  signalTypes: [],
+  sourceTypes: [],
+  events: []
 };
 
 type TauriInvoke = <T>(command: string, args?: Record<string, unknown>) => Promise<T>;
@@ -536,6 +555,21 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   );
   const taskStatusCounts = useMemo(() => countBy(snapshot.tasks, (task) => task.status || "unknown"), [snapshot.tasks]);
   const collaborationBoard = snapshot.collaborationBoard ?? emptyCollaborationBoard;
+  const unifiedOps = snapshot.unifiedOps ?? emptyUnifiedOps;
+  const visibleUnifiedEvents = useMemo(() => {
+    return unifiedOps.events.filter(
+      (event) => opsEventVisibleForMode(event, currentViewMode.id) && opsEventVisibleForLanguage(event, currentLanguageMode)
+    );
+  }, [currentLanguageMode, currentViewMode, unifiedOps.events]);
+  const visibleUnifiedSummary = useMemo(() => summarizeUnifiedOpsEvents(visibleUnifiedEvents, visibleHistoryDays.length), [
+    visibleHistoryDays.length,
+    visibleUnifiedEvents
+  ]);
+  const visibleUnifiedLanes = useMemo(() => countBy(visibleUnifiedEvents, (event) => event.lane || "unknown"), [visibleUnifiedEvents]);
+  const visibleUnifiedSignalTypes = useMemo(
+    () => countBy(visibleUnifiedEvents, (event) => event.signalType || "unknown"),
+    [visibleUnifiedEvents]
+  );
   const historyCategoryTotals = useMemo(() => {
     const totals = new Map<string, number>();
     for (const day of visibleHistoryDays) {
@@ -831,6 +865,15 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             ))}
           </section>
 
+          <UnifiedOpsPanel
+            summary={visibleUnifiedSummary}
+            lanes={visibleUnifiedLanes.slice(0, 8)}
+            signalTypes={visibleUnifiedSignalTypes.slice(0, 8)}
+            events={visibleUnifiedEvents.slice(0, 14)}
+            onOpenHistory={() => setSection("history")}
+            onOpenAgents={() => setSection("agents")}
+          />
+
           <section className="panel wide action-evidence-panel">
             <div className="panel-heading">
               <div>
@@ -987,6 +1030,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           <div className="history-summary-band">
             <Metric label="History Days" value={visibleHistoryDays.length} icon={CalendarDays} tone="green" />
             <Metric label="History Docs" value={visibleHistoryDays.reduce((total, day) => total + day.documentsCount, 0)} icon={History} tone="blue" />
+            <Metric label="Unified Ops" value={visibleUnifiedSummary.totalEvents} icon={Activity} tone="violet" />
             <Metric label="Root Folders" value={snapshot.stats.rootFolders} icon={FolderKanban} tone="amber" />
             <article className="history-latest">
               <span>Latest History Date</span>
@@ -994,6 +1038,17 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               <p>{latestHistoryDate || "No dated history records"}</p>
             </article>
           </div>
+
+          <section className="panel wide unified-ops-panel">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Unified Ops</p>
+                <h2>히스토리와 모니터링 통합 stream</h2>
+              </div>
+              <Activity size={18} aria-hidden="true" />
+            </div>
+            <OpsEventRail events={visibleUnifiedEvents.slice(0, 24)} />
+          </section>
 
           <section className="panel wide">
             <div className="panel-heading">
@@ -1319,6 +1374,124 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         </div>
       )}
     </main>
+  );
+}
+
+function UnifiedOpsPanel({
+  summary,
+  lanes,
+  signalTypes,
+  events,
+  onOpenHistory,
+  onOpenAgents
+}: {
+  summary: UnifiedOps["summary"];
+  lanes: Array<{ key: string; count: number }>;
+  signalTypes: Array<{ key: string; count: number }>;
+  events: UnifiedOps["events"];
+  onOpenHistory: () => void;
+  onOpenAgents: () => void;
+}) {
+  return (
+    <section className="panel wide unified-ops-panel">
+      <div className="panel-heading">
+        <div>
+          <p className="eyebrow">Unified Ops</p>
+          <h2>히스토리와 모니터링 통합</h2>
+        </div>
+        <div className="desktop-actions">
+          <button type="button" onClick={onOpenHistory}>
+            <History size={16} aria-hidden="true" />
+            <span>History</span>
+          </button>
+          <button type="button" onClick={onOpenAgents}>
+            <Network size={16} aria-hidden="true" />
+            <span>Monitor</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="ops-summary-strip">
+        <article>
+          <span>total events</span>
+          <strong>{summary.totalEvents.toLocaleString("ko-KR")}</strong>
+        </article>
+        <article>
+          <span>history</span>
+          <strong>{summary.historyEvents.toLocaleString("ko-KR")}</strong>
+        </article>
+        <article>
+          <span>monitor</span>
+          <strong>{summary.monitorEvents.toLocaleString("ko-KR")}</strong>
+        </article>
+        <article>
+          <span>open signals</span>
+          <strong>{summary.openSignals.toLocaleString("ko-KR")}</strong>
+        </article>
+        <article>
+          <span>latest</span>
+          <strong>{summary.latestEventAt ? formatDate(summary.latestEventAt) : "기록 없음"}</strong>
+        </article>
+      </div>
+
+      <div className="ops-unified-grid">
+        <div className="ops-signal-column">
+          <div>
+            <span>lanes</span>
+            {lanes.length ? (
+              lanes.map((lane) => (
+                <p key={lane.key}>
+                  <strong>{lane.key}</strong>
+                  <small>{lane.count}</small>
+                </p>
+              ))
+            ) : (
+              <p className="empty-state">lane signal 없음</p>
+            )}
+          </div>
+          <div>
+            <span>signals</span>
+            {signalTypes.length ? (
+              signalTypes.map((signal) => (
+                <p key={signal.key}>
+                  <strong>{signal.key}</strong>
+                  <small>{signal.count}</small>
+                </p>
+              ))
+            ) : (
+              <p className="empty-state">signal 없음</p>
+            )}
+          </div>
+        </div>
+        <OpsEventRail events={events} />
+      </div>
+    </section>
+  );
+}
+
+function OpsEventRail({ events }: { events: UnifiedOps["events"] }) {
+  if (events.length === 0) {
+    return <p className="empty-state">통합 운영 이벤트가 아직 없습니다.</p>;
+  }
+
+  return (
+    <div className="ops-event-rail">
+      {events.map((event) => (
+        <article key={event.id} className={`ops-event severity-${event.severity}`}>
+          <div>
+            <span>{event.sourceType} / {event.signalType}</span>
+            <strong>{event.title}</strong>
+            <p>{event.detail || event.path || "No detail"}</p>
+            {event.path && <small>{event.path}</small>}
+          </div>
+          <aside>
+            <strong>{event.status}</strong>
+            <span>{event.lane}</span>
+            <small>{event.timestamp ? formatDate(event.timestamp) : event.date ? formatDay(event.date) : "no time"}</small>
+          </aside>
+        </article>
+      ))}
+    </div>
   );
 }
 
@@ -3410,6 +3583,41 @@ function documentVisibleForLanguage(
     return mode.includeUnknown;
   }
   return mode.includedLanguages.includes(document.language);
+}
+
+function opsEventVisibleForMode(event: UnifiedOps["events"][number], modeId: string) {
+  if (modeId === "superadmin_developer" || modeId === "developer") {
+    return true;
+  }
+  if (event.sourceType === "monitor") {
+    return true;
+  }
+  const userCategories = new Set(["work-summary", "daily-history"]);
+  return userCategories.has(event.category) && !event.path.startsWith("_ops/");
+}
+
+function opsEventVisibleForLanguage(event: UnifiedOps["events"][number], mode: MonitorLanguageMode) {
+  if (event.sourceType === "monitor") {
+    return true;
+  }
+  if (event.language === "unknown") {
+    return mode.includeUnknown;
+  }
+  return mode.includedLanguages.includes(event.language);
+}
+
+function summarizeUnifiedOpsEvents(events: UnifiedOps["events"], historyDays: number): UnifiedOps["summary"] {
+  return {
+    totalEvents: events.length,
+    historyEvents: events.filter((event) => event.sourceType === "history").length,
+    monitorEvents: events.filter((event) => event.sourceType === "monitor").length,
+    evidenceEvents: events.filter((event) => ["evidence", "evaluation", "web-search"].includes(event.signalType)).length,
+    decisionEvents: events.filter((event) => ["decision", "blocker", "next-action"].includes(event.signalType)).length,
+    openSignals: events.filter((event) => ["critical", "attention", "warning"].includes(event.severity)).length,
+    criticalSignals: events.filter((event) => event.severity === "critical").length,
+    latestEventAt: events[0]?.timestamp || events[0]?.date || "",
+    historyDays
+  };
 }
 
 function countBy<T>(items: T[], getKey: (item: T) => string) {

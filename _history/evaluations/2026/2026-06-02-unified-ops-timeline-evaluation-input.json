@@ -1,0 +1,150 @@
+{
+  "initial_instruction": "Merge the accumulated history structures and monitoring surfaces into one.",
+  "result_summary": "Added a Workspace Monitor Unified Ops layer. The collector now emits a bounded unifiedOps event stream that combines history records, evaluations, web searches, work timings, request traces, collaboration tasks, blockers, and next actions. The Overview and History views now show Unified Ops panels, while existing drill-down tabs remain. Requirements, specs, tests, generated snapshots, validation, history, and evaluation records were updated.",
+  "work_mode": "governance",
+  "changed_files": [
+    "workspace-monitor/scripts/collect-workspace.mjs",
+    "workspace-monitor/lib/snapshot.ts",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/tests/collector.test.mjs",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/spec.ko.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/spec.en.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/plan.ko.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/plan.en.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/tasks.ko.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/tasks.en.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/validation.ko.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/validation.en.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/traceability.ko.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/traceability.en.md",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "_history/web-searches/2026/2026-06-02-unified-ops-timeline.ko.md",
+    "_history/web-searches/2026/2026-06-02-unified-ops-timeline.en.md",
+    "_history/plans/2026/2026-06-02-unified-ops-timeline.ko.md",
+    "_history/plans/2026/2026-06-02-unified-ops-timeline.en.md",
+    "_history/mode-selections/2026/2026-06-02-unified-ops-timeline.json",
+    "_history/request-traces/2026/2026-06-02-unified-ops-timeline.ko.md",
+    "_history/request-traces/2026/2026-06-02-unified-ops-timeline.en.md",
+    "_history/work-timings/2026/2026-06-02-unified-ops-timeline.json",
+    "_history/evaluations/2026/2026-06-02-unified-ops-timeline-omission-input.json",
+    "_history/evaluations/2026/2026-06-02-unified-ops-timeline-resource-input.json",
+    "_history/evaluations/2026/2026-06-02-unified-ops-timeline-grounding.json",
+    "_history/evaluations/2026/2026-06-02-unified-ops-timeline-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-02-unified-ops-timeline-evaluation-result.json",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/2026/2026-06-02.md",
+    "_requirements/changes/2026-06-02-unified-ops-timeline.ko.md",
+    "_requirements/changes/2026-06-02-unified-ops-timeline.en.md",
+    "_requirements/reviews/2026-06-02-unified-ops-timeline.ko.md",
+    "_requirements/reviews/2026-06-02-unified-ops-timeline.en.md"
+  ],
+  "verification": [
+    "npm --prefix workspace-monitor run collect",
+    "npm --prefix workspace-monitor test",
+    "npm --prefix workspace-monitor run check",
+    "npm --prefix workspace-monitor run build",
+    "npm --prefix workspace-monitor run perf:budget",
+    "npm --prefix platform-desktop-app test",
+    "npm --prefix platform-desktop-app run check",
+    "curl http://127.0.0.1:4182/",
+    "curl http://127.0.0.1:4182/workspace-snapshot.json",
+    "rg Unified Ops/unifiedOps in workspace-monitor/out and workspace-monitor/.next",
+    "lsof -ti tcp:4182 || true",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-unified-ops-timeline-omission-input.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-02-unified-ops-timeline-resource-input.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-unified-ops-timeline-grounding.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-02-unified-ops-timeline-evaluation-input.json",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-unified-ops-timeline.json"
+  ],
+  "references_checked": [
+    "OpenTelemetry Documentation",
+    "OpenTelemetry Signals",
+    "OpenTelemetry Logs Specification",
+    "CNCF observability article"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-unified-ops-timeline-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-unified-ops-timeline.ko.md",
+    "_history/web-searches/2026/2026-06-02-unified-ops-timeline.en.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-unified-ops-timeline.ko.md",
+    "_history/plans/2026/2026-06-02-unified-ops-timeline.en.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-unified-ops-timeline.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-unified-ops-timeline-omission-input.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-unified-ops-timeline.ko.md",
+    "_history/web-searches/2026/2026-06-02-unified-ops-timeline.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "_requirements/changes/2026-06-02-unified-ops-timeline.ko.md",
+    "_requirements/changes/2026-06-02-unified-ops-timeline.en.md",
+    "_requirements/reviews/2026-06-02-unified-ops-timeline.ko.md",
+    "_requirements/reviews/2026-06-02-unified-ops-timeline.en.md"
+  ],
+  "spec_targets": [
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/spec.ko.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/spec.en.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/plan.ko.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/plan.en.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/tasks.ko.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/tasks.en.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/validation.ko.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/validation.en.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/traceability.ko.md",
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/traceability.en.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-unified-ops-timeline.ko.md",
+    "_history/request-traces/2026/2026-06-02-unified-ops-timeline.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-unified-ops-timeline.json"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-02-unified-ops-timeline-resource-input.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "known_gaps": [],
+  "validation_limitations": [
+    "Browser screenshot validation was not run because Browser MCP tools were not exposed.",
+    "This implementation does not add real-time telemetry collection, OpenTelemetry SDKs, or external observability backends."
+  ],
+  "deferred_improvement_targets": [
+    "workspace-monitor/specs/2026-06-02-unified-ops-timeline/tasks.ko.md"
+  ],
+  "improvement_ideas": [
+    "Add a persisted run/event schema so live desktop CLI sessions can append to unifiedOps without waiting for snapshot regeneration.",
+    "Add event correlation IDs that connect user request, plan, implementation, validation, and evaluation records.",
+    "Run screenshot validation after Browser MCP tools are exposed or after an audited browser automation dependency is installed."
+  ]
+}

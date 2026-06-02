@@ -7,6 +7,7 @@ import test from "node:test";
 import {
   buildAgentCollaborationBoard,
   buildSnapshot,
+  buildUnifiedOps,
   collectAgentCatalog,
   collectLanguageModeCatalog,
   collectSourceFiles,
@@ -144,6 +145,11 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.agentCatalog[0].tools.length, 1);
   assert.equal(snapshot.agentCatalog[0].docPaths[0], "agent-platform/docs/demo-agent.ko.md");
   assert.equal(snapshot.historyDays[0].date, "2026-06-01");
+  assert.equal(snapshot.stats.unifiedOpsEvents, snapshot.unifiedOps.summary.totalEvents);
+  assert.equal(snapshot.unifiedOps.summary.historyEvents > 0, true);
+  assert.equal(snapshot.unifiedOps.summary.monitorEvents > 0, true);
+  assert.equal(snapshot.unifiedOps.events.some((event) => event.sourceType === "history"), true);
+  assert.equal(snapshot.unifiedOps.events.some((event) => event.sourceType === "monitor"), true);
   assert.equal(snapshot.folderStructure.rootFolders.some((folder) => folder.path === "demo/"), true);
   assert.equal(snapshot.folderStructure.docsCategories[0].path, "_docs/instructions");
   assert.equal(snapshot.requirements[0].id, "REQ-WM-001");
@@ -151,6 +157,52 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.languageModeCatalog.defaultMode, "all");
   assert.equal(snapshot.languageModeCatalog.modes[1].id, "ko");
   assert.equal(snapshot.documents.some((document) => document.language === "ko"), true);
+});
+
+test("buildUnifiedOps merges history records and monitoring tasks", () => {
+  const ops = buildUnifiedOps({
+    documents: [
+      {
+        id: "work-summary",
+        path: "_history/work-summaries/2026/2026-06-01-demo.ko.md",
+        category: "work-summary",
+        language: "ko",
+        title: "작업 요약",
+        excerpt: "완료",
+        updatedAt: "2026-06-01T09:00:00.000Z",
+        historyDate: "2026-06-01"
+      },
+      {
+        id: "eval",
+        path: "_history/evaluations/2026/2026-06-01-demo.json",
+        category: "evaluation",
+        language: "unknown",
+        title: "evaluation",
+        excerpt: "ready_to_close",
+        updatedAt: "2026-06-01T10:00:00.000Z",
+        historyDate: "2026-06-01"
+      }
+    ],
+    historyDays: [{ date: "2026-06-01" }],
+    tasks: [
+      {
+        id: "task-blocked",
+        title: "Blocked task",
+        status: "blocked",
+        next_action: "Ask user"
+      }
+    ],
+    collaborationBoard: {
+      blockers: [{ taskId: "task-blocked", title: "Blocked task", blockers: ["needs decision"] }],
+      nextActions: []
+    }
+  });
+
+  assert.equal(ops.summary.historyEvents, 2);
+  assert.equal(ops.summary.monitorEvents, 2);
+  assert.equal(ops.summary.criticalSignals, 2);
+  assert.equal(ops.events.some((event) => event.signalType === "evaluation"), true);
+  assert.equal(ops.events.some((event) => event.signalType === "blocker"), true);
 });
 
 test("buildAgentCollaborationBoard groups agent work by lane", () => {

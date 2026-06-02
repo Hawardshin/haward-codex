@@ -110,11 +110,17 @@ export function buildSnapshot(repoRoot) {
   const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
   const agentCatalog = collectAgentCatalog(repoRoot, coordination.agents || [], tasks);
   const collaborationBoard = buildAgentCollaborationBoard(coordination.agents || [], agentCatalog, tasks);
+  const unifiedOps = buildUnifiedOps({
+    documents,
+    historyDays,
+    tasks,
+    collaborationBoard
+  });
   const completedTasks = tasks.filter((task) => task.status === "completed").length;
   const activeAgents = (coordination.agents || []).filter((agent) => agent.status !== "idle").length;
 
   return {
-    schemaVersion: "2026-06-02",
+    schemaVersion: "2026-06-03",
     generatedAt: new Date().toISOString(),
     repoRootName: path.basename(repoRoot),
     stats: {
@@ -132,6 +138,7 @@ export function buildSnapshot(repoRoot) {
       webSearches: documents.filter((document) => document.category === "web-search").length,
       timingRecords: documents.filter((document) => document.category === "work-timing").length,
       historyDays: historyDays.length,
+      unifiedOpsEvents: unifiedOps.summary.totalEvents,
       sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
     },
@@ -143,6 +150,7 @@ export function buildSnapshot(repoRoot) {
     requirements,
     documents,
     historyDays,
+    unifiedOps,
     sourceFiles,
     folderStructure,
     viewModeCatalog,
@@ -310,6 +318,216 @@ export function buildAgentCollaborationBoard(runtimeAgents = [], agentCatalog = 
     blockers: blockers.slice(0, 20),
     nextActions: nextActions.slice(0, 20)
   };
+}
+
+export function buildUnifiedOps({ documents = [], historyDays = [], tasks = [], collaborationBoard = emptyCollaborationBoard() } = {}) {
+  const events = [];
+
+  for (const document of documents) {
+    if (!HISTORY_CATEGORIES.has(document.category)) {
+      continue;
+    }
+    const signalType = historySignalType(document.category);
+    events.push({
+      id: `history-${document.id}`,
+      sourceType: "history",
+      signalType,
+      lane: historySignalLane(document.category),
+      severity: historySignalSeverity(document),
+      status: historySignalStatus(document),
+      title: document.title,
+      detail: document.excerpt,
+      path: document.path,
+      category: document.category,
+      language: document.language,
+      date: document.historyDate || document.updatedAt.slice(0, 10),
+      timestamp: document.updatedAt
+    });
+  }
+
+  for (const task of tasks) {
+    const lane = collaborationLaneForTask(task);
+    events.push({
+      id: `monitor-task-${slugify(task.id || task.title || "task")}`,
+      sourceType: "monitor",
+      signalType: "task",
+      lane,
+      severity: taskSeverity(task, lane),
+      status: task.status || "unknown",
+      title: task.title || task.id || "Untitled task",
+      detail: task.next_action || task.timing_summary?.bottleneck || task.evaluation_report || "No next action recorded.",
+      path: task.evaluation_report || task.timing_report || "",
+      category: "task-monitor",
+      language: "unknown",
+      date: "",
+      timestamp: task.updated_at || task.created_at || ""
+    });
+  }
+
+  for (const blocker of collaborationBoard.blockers || []) {
+    events.push({
+      id: `monitor-blocker-${slugify(blocker.taskId || blocker.title)}`,
+      sourceType: "monitor",
+      signalType: "blocker",
+      lane: "blocked",
+      severity: "critical",
+      status: "blocked",
+      title: blocker.title,
+      detail: blocker.blockers.join(" / "),
+      path: "",
+      category: "blocker-monitor",
+      language: "unknown",
+      date: "",
+      timestamp: ""
+    });
+  }
+
+  for (const action of collaborationBoard.nextActions || []) {
+    events.push({
+      id: `monitor-next-${slugify(action.taskId || action.title)}`,
+      sourceType: "monitor",
+      signalType: "next-action",
+      lane: "active",
+      severity: "attention",
+      status: "next",
+      title: action.title,
+      detail: action.nextAction,
+      path: "",
+      category: "next-action-monitor",
+      language: "unknown",
+      date: "",
+      timestamp: ""
+    });
+  }
+
+  const sortedEvents = events
+    .sort((left, right) => {
+      const rightTime = right.timestamp || right.date || "";
+      const leftTime = left.timestamp || left.date || "";
+      return rightTime.localeCompare(leftTime) || severityRank(right.severity) - severityRank(left.severity) || left.title.localeCompare(right.title);
+    })
+    .slice(0, 160);
+  const byLane = summarizeOpsField(sortedEvents, "lane");
+  const bySignalType = summarizeOpsField(sortedEvents, "signalType");
+  const bySourceType = summarizeOpsField(sortedEvents, "sourceType");
+  const openSignals = sortedEvents.filter((event) => ["critical", "attention", "warning"].includes(event.severity)).length;
+  const criticalSignals = sortedEvents.filter((event) => event.severity === "critical").length;
+
+  return {
+    summary: {
+      totalEvents: sortedEvents.length,
+      historyEvents: sortedEvents.filter((event) => event.sourceType === "history").length,
+      monitorEvents: sortedEvents.filter((event) => event.sourceType === "monitor").length,
+      evidenceEvents: sortedEvents.filter((event) => ["evidence", "evaluation", "web-search"].includes(event.signalType)).length,
+      decisionEvents: sortedEvents.filter((event) => ["decision", "blocker", "next-action"].includes(event.signalType)).length,
+      openSignals,
+      criticalSignals,
+      latestEventAt: sortedEvents[0]?.timestamp || sortedEvents[0]?.date || "",
+      historyDays: historyDays.length
+    },
+    lanes: byLane,
+    signalTypes: bySignalType,
+    sourceTypes: bySourceType,
+    events: sortedEvents
+  };
+}
+
+function emptyCollaborationBoard() {
+  return {
+    summary: { activeTasks: 0, blockedTasks: 0, queuedTasks: 0, completedTasks: 0 },
+    blockers: [],
+    nextActions: []
+  };
+}
+
+function summarizeOpsField(events, field) {
+  const counts = new Map();
+  for (const event of events) {
+    const key = event[field] || "unknown";
+    counts.set(key, (counts.get(key) || 0) + 1);
+  }
+  return Array.from(counts.entries())
+    .map(([id, count]) => ({ id, label: id.replaceAll("-", " "), count }))
+    .sort((left, right) => right.count - left.count || left.id.localeCompare(right.id));
+}
+
+function historySignalType(category) {
+  const map = {
+    "daily-history": "history",
+    evaluation: "evaluation",
+    plan: "plan",
+    "request-trace": "trace",
+    "user-request": "intake",
+    "web-search": "web-search",
+    "work-timing": "timing",
+    "work-summary": "summary"
+  };
+  return map[category] || "history";
+}
+
+function historySignalLane(category) {
+  const map = {
+    evaluation: "verification",
+    "web-search": "evidence",
+    "work-timing": "monitoring",
+    "request-trace": "traceability",
+    "user-request": "intake",
+    plan: "planning",
+    "work-summary": "delivery",
+    "daily-history": "history"
+  };
+  return map[category] || "history";
+}
+
+function historySignalSeverity(document) {
+  const text = `${document.title} ${document.excerpt} ${document.path}`.toLowerCase();
+  if (/rework_required|blocked|critical|fail|failed|unresolved|gap|warning|risk/.test(text)) {
+    return "warning";
+  }
+  if (document.category === "evaluation" || document.category === "work-timing") {
+    return "verified";
+  }
+  if (document.category === "web-search" || document.category === "request-trace") {
+    return "evidence";
+  }
+  return "info";
+}
+
+function historySignalStatus(document) {
+  const text = `${document.title} ${document.excerpt}`.toLowerCase();
+  if (/ready_to_close|ready|passed|complete|completed|통과|완료/.test(text)) {
+    return "ready";
+  }
+  if (/rework_required|failed|blocked|차단|실패/.test(text)) {
+    return "needs_attention";
+  }
+  return document.category;
+}
+
+function taskSeverity(task, lane) {
+  const text = `${task.status || ""} ${task.next_action || ""} ${task.evaluation_report || ""}`.toLowerCase();
+  if (lane === "blocked" || /blocked|failed|failure|risk|decision|needs/.test(text)) {
+    return "critical";
+  }
+  if (lane === "active" || lane === "queued") {
+    return "attention";
+  }
+  if (lane === "completed") {
+    return "verified";
+  }
+  return "info";
+}
+
+function severityRank(severity) {
+  const ranks = {
+    critical: 5,
+    warning: 4,
+    attention: 3,
+    verified: 2,
+    evidence: 1,
+    info: 0
+  };
+  return ranks[severity] || 0;
 }
 
 export function collectSourceFiles(repoRoot, projects = []) {

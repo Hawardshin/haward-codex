@@ -1,0 +1,97 @@
+{
+  "task": "Unified Ops Timeline resource review",
+  "work_mode": "governance",
+  "runtime_context": [
+    "Workspace Monitor snapshot collection",
+    "Next.js static build",
+    "temporary Python HTTP server",
+    "static JSON and JavaScript output checks"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "snapshot-growth",
+      "category": "large_data",
+      "description": "Merging history and monitoring signals could grow the generated workspace snapshot.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Cap unifiedOps.events at 160 and preserve the existing MAX_DOCUMENTS and lazy snapshot fetch path.",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs buildUnifiedOps",
+        "npm --prefix workspace-monitor run perf:budget"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "temporary-static-server",
+      "category": "process",
+      "description": "A temporary HTTP server was started to smoke test the static output.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Stop the server after curl/rg checks and verify no listener remains on tcp:4182.",
+      "evidence": [
+        "python3 -m http.server 4182 -d workspace-monitor/out",
+        "lsof -ti tcp:4182 || true returned no listener"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "browser-screenshot-unavailable",
+      "category": "browser_context",
+      "description": "A browser screenshot would normally validate the new UI visually.",
+      "required": false,
+      "status": "not_applicable",
+      "mitigation": "Browser MCP tools were not exposed; static server response, snapshot JSON, built JavaScript, typecheck, tests, build, and perf budget were used instead.",
+      "evidence": [
+        "tool_search for Browser open local localhost screenshot returned no browser-open tool",
+        "static response and built output contained Unified Ops and unifiedOps strings"
+      ],
+      "rationale": "No dependency installation or permission change was requested for this slice."
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "static-server-lifecycle",
+      "resource": "temporary Python HTTP server on tcp:4182",
+      "create_path": "python3 -m http.server 4182 -d workspace-monitor/out",
+      "cleanup_path": "Ctrl-C shutdown followed by lsof -ti tcp:4182",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "curl served / and /workspace-snapshot.json",
+        "server session exited with Keyboard interrupt",
+        "lsof -ti tcp:4182 returned no process"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "snapshot-collect",
+      "metric": "Generated snapshot document count and unifiedOps presence",
+      "tool": "npm --prefix workspace-monitor run collect",
+      "threshold": "collect exits 0 and snapshot contains unifiedOps",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor collect wrote 1200 documents",
+        "curl workspace-snapshot.json found unifiedOpsEvents and unifiedOps"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "performance-budget",
+      "metric": "largest initial static chunk",
+      "tool": "npm --prefix workspace-monitor run perf:budget",
+      "threshold": "largest chunk below 1000000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "largest chunk 227537 bytes; chunk count 8"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No new long-running monitor daemon, external telemetry process, OpenTelemetry collector, or browser automation dependency was added."
+  ]
+}
