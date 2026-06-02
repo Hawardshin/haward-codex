@@ -1,0 +1,40 @@
+{
+  "task_id": "2026-06-02-installable-app-reference-plan",
+  "title": "Find installable app references and derive implementation plan",
+  "work_mode": "research",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "web search across installable app and agent references",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "Broad reference search was needed across desktop apps, agent tools, and implementation libraries."
+    },
+    {
+      "phase_id": "local_context",
+      "label": "memory bootstrap and existing desktop docs sampling",
+      "status": "completed",
+      "duration_seconds": 180,
+      "measurement": "estimated",
+      "bottleneck_notes": "Existing platform-desktop-app architecture already had a Tauri-first and optional CLI adapter direction."
+    },
+    {
+      "phase_id": "synthesis",
+      "label": "reference matrix, ideas, and implementation roadmap",
+      "status": "completed",
+      "duration_seconds": 360,
+      "measurement": "estimated",
+      "bottleneck_notes": "The main synthesis was translating product references into platform-specific implementation slices."
+    },
+    {
+      "phase_id": "documentation",
+      "label": "durable research and history records",
+      "status": "completed",
+      "duration_seconds": 240,
+      "measurement": "estimated",
+      "bottleneck_notes": "Research mode required web search, research summary, plan, trace, and evaluation records."
+    }
+  ]
+}

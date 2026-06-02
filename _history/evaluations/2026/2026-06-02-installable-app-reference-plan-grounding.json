@@ -1,0 +1,28 @@
+{
+  "task_id": "2026-06-02-installable-app-reference-plan",
+  "status": "grounded",
+  "sources_checked": [
+    "https://code.visualstudio.com/docs/terminal/getting-started",
+    "https://code.visualstudio.com/docs/terminal/shell-integration",
+    "https://code.visualstudio.com/api/ux-guidelines/webviews",
+    "https://docs.github.com/desktop",
+    "https://docs.docker.com/desktop/use-desktop/",
+    "https://docs.docker.com/extensions/",
+    "https://docs.warp.dev/agent-platform/",
+    "https://cursor.com/docs",
+    "https://github.com/google-gemini/gemini-cli",
+    "https://opencode.ai/",
+    "https://github.com/openai/codex",
+    "https://v2.tauri.app/distribute/",
+    "https://v2.tauri.app/plugin/updater/",
+    "https://www.electronjs.org/docs/latest/tutorial/code-signing",
+    "https://www.electronjs.org/docs/latest/api/auto-updater",
+    "https://xtermjs.org/docs/",
+    "https://www.npmjs.com/package/monaco-editor"
+  ],
+  "caveats": [
+    "Dynamic product pages such as Cursor can change frequently; screenshots and hands-on UI benchmarking should be repeated before design freeze.",
+    "No new package or runtime was installed in this research slice."
+  ],
+  "unsupported_claims_removed": true
+}

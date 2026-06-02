@@ -1,0 +1,25 @@
+{
+  "task_id": "2026-06-02-installable-app-reference-plan",
+  "selected_work_mode": "research",
+  "selection_reason": "The user asked for implementation planning, new ideas, and references from other installable apps. This is primarily research and synthesis, not source implementation.",
+  "alternatives_considered": [
+    {
+      "work_mode": "quick",
+      "decision": "rejected",
+      "reason": "The request needs current external references and should leave durable research records."
+    },
+    {
+      "work_mode": "governance",
+      "decision": "rejected",
+      "reason": "No durable policy or platform rule is being changed in this slice."
+    }
+  ],
+  "required_targets": [
+    "web_search_record_targets",
+    "research_summary_targets",
+    "plan_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "evaluation_targets"
+  ]
+}
