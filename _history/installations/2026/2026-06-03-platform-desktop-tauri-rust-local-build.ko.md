@@ -147,4 +147,4 @@
 - 설치 레지스트리: `_ops/installations/registry.json`
 - 작업 요약: `_history/work-summaries/2026/2026-06-03.ko.md`
 - 평가 보고서: `_history/evaluations/2026/2026-06-03-platform-desktop-tauri-rust-build-evaluation-result.json`
-- 커밋: pending
+- 커밋: `4ce5d49f`

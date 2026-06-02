@@ -254,7 +254,7 @@
       ],
       "rollback_path": "Run npm uninstall @playwright/test @axe-core/playwright from presentation-agent and npx playwright uninstall chromium, then remove package-lock/package.json/playwright config/test files if no longer needed.",
       "installation_record_path": "_history/installations/2026/2026-06-01-presentation-agent-playwright.ko.md",
-      "commit": "pending"
+      "commit": "4ce5d49f"
     },
     {
       "id": "2026-06-03-platform-desktop-tauri-rust-local-build",
