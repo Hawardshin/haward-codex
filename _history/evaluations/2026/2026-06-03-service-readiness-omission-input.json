@@ -1,0 +1,39 @@
+{
+  "record_id": "2026-06-03-service-readiness-omission",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-012",
+  "required_items_checked": [
+    {
+      "item": "web_first_intake",
+      "status": "done",
+      "evidence": "_history/web-searches/2026/2026-06-03-service-readiness.ko.md"
+    },
+    {
+      "item": "large_scope_decomposition",
+      "status": "done",
+      "evidence": "_history/plans/2026/2026-06-03-service-readiness.ko.md"
+    },
+    {
+      "item": "requirements",
+      "status": "done",
+      "evidence": "platform-desktop-app/docs/requirements/2026-06-03-service-readiness.*.md"
+    },
+    {
+      "item": "spec",
+      "status": "done",
+      "evidence": "platform-desktop-app/specs/2026-06-03-service-readiness/"
+    },
+    {
+      "item": "implementation",
+      "status": "done",
+      "evidence": "registry, script, Rust command, Workspace Monitor UI"
+    }
+  ],
+  "omissions_found": [],
+  "known_deferred_public_blockers": [
+    "Developer ID signing/notarization",
+    "signed updater channel",
+    "clean-machine install/open/update smoke",
+    "runtime-enforced workspace chooser persistence"
+  ]
+}

@@ -413,6 +413,46 @@ type SupportDiagnosticBundleReport = {
   createdAt: string;
 };
 
+type ServiceReadinessCheck = {
+  id: string;
+  label: string;
+  status: string;
+  detail: string;
+  requiredForPublic: boolean;
+  requiredForInternal: boolean;
+};
+
+type ServiceReadinessGroup = {
+  id: string;
+  label: string;
+  status: string;
+  passedChecks: number;
+  totalChecks: number;
+  checks: ServiceReadinessCheck[];
+};
+
+type ServiceReadinessNextAction = {
+  checkId: string;
+  label: string;
+  status: string;
+  action: string;
+};
+
+type ServiceReadinessReport = {
+  status: string;
+  releaseLane: string;
+  score: number;
+  generatedAt: string;
+  groups: ServiceReadinessGroup[];
+  blockers: string[];
+  publicBlockers: string[];
+  warnings: string[];
+  nextActions: ServiceReadinessNextAction[];
+  payloadAuditPath: string;
+  payloadFlaggedCount: number;
+  serviceClaim: string;
+};
+
 type WorkspaceTextFile = {
   relativePath: string;
   content: string;
@@ -1980,6 +2020,9 @@ function DesktopRuntimePanel({
   const [supportBundle, setSupportBundle] = useState<SupportDiagnosticBundleReport | null>(null);
   const [runtimeDataBusy, setRuntimeDataBusy] = useState("");
   const [runtimeDataNotice, setRuntimeDataNotice] = useState("");
+  const [serviceReadiness, setServiceReadiness] = useState<ServiceReadinessReport | null>(null);
+  const [serviceReadinessBusy, setServiceReadinessBusy] = useState(false);
+  const [serviceReadinessNotice, setServiceReadinessNotice] = useState("");
   const [inboxReport, setInboxReport] = useState<HumanDecisionInboxReport | null>(null);
   const [error, setError] = useState("");
   const [runningAdapterId, setRunningAdapterId] = useState("");
@@ -2088,6 +2131,15 @@ function DesktopRuntimePanel({
     const highFindings = (payloadAudit?.findings || []).filter((finding) => finding.severity === "high").length;
     return { roots: roots.length, created, ready, highFindings };
   }, [payloadAudit, runtimeDataBoundary]);
+  const serviceReadinessStats = useMemo(() => {
+    const groups = serviceReadiness?.groups || [];
+    return {
+      groups: groups.length,
+      passedGroups: groups.filter((group) => group.status === "passed").length,
+      warnings: serviceReadiness?.warnings.length || 0,
+      publicBlockers: serviceReadiness?.publicBlockers.length || 0
+    };
+  }, [serviceReadiness]);
   const selectedTaskRunRecord =
     taskRunRecords.find((record) => record.taskRunId === selectedTaskRunId) || taskRunRecords[0] || null;
   const sessionStats = useMemo(() => {
@@ -2212,6 +2264,16 @@ function DesktopRuntimePanel({
             }
           ]
         : []),
+      ...(serviceReadiness
+        ? [
+            {
+              id: "service-readiness",
+              label: serviceReadiness.status,
+              title: "Service Readiness",
+              detail: `${serviceReadiness.score} score / ${serviceReadiness.publicBlockers.length} public blockers / ${serviceReadiness.releaseLane}`
+            }
+          ]
+        : []),
       ...(writeReport
         ? [
             {
@@ -2230,7 +2292,7 @@ function DesktopRuntimePanel({
       }))
     ];
     return items.slice(0, 8);
-  }, [dirtyDraftEntries.length, openDraftEntries.length, outputEvents, payloadAudit, pipelineStats.latest, runtimeDataBoundary, selectedDecision, sourceDiff, sourceFile?.relativePath, sourceSaveResults, supportBundle, taskRunRecords, writeReport]);
+  }, [dirtyDraftEntries.length, openDraftEntries.length, outputEvents, payloadAudit, pipelineStats.latest, runtimeDataBoundary, selectedDecision, serviceReadiness, sourceDiff, sourceFile?.relativePath, sourceSaveResults, supportBundle, taskRunRecords, writeReport]);
 
   const replaceTaskRunRecords = (records: CliTaskRunRecordReport[]) => {
     setTaskRunRecords(records);
@@ -2256,14 +2318,24 @@ function DesktopRuntimePanel({
     }
 
     try {
-      const [nextHealth, nextAdapters, nextSessions, nextInbox, nextTaskPipePresets, nextTaskRunRecords, nextRuntimeDataBoundary] = await Promise.all([
+      const [
+        nextHealth,
+        nextAdapters,
+        nextSessions,
+        nextInbox,
+        nextTaskPipePresets,
+        nextTaskRunRecords,
+        nextRuntimeDataBoundary,
+        nextServiceReadiness
+      ] = await Promise.all([
         tauriInvoke<DesktopHealthStatus>("app_health"),
         tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
         tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions"),
         tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox"),
         tauriInvoke<CliTaskPipelinePresetReport[]>("list_cli_task_pipeline_presets"),
         tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records"),
-        tauriInvoke<RuntimeDataBoundaryReport>("list_runtime_data_roots")
+        tauriInvoke<RuntimeDataBoundaryReport>("list_runtime_data_roots"),
+        tauriInvoke<ServiceReadinessReport>("get_service_readiness_report")
       ]);
       setRuntimeState("available");
       setHealth(nextHealth);
@@ -2273,6 +2345,8 @@ function DesktopRuntimePanel({
       setTaskPipePresets(nextTaskPipePresets.length ? nextTaskPipePresets : fallbackTaskPipePresets);
       replaceTaskRunRecords(nextTaskRunRecords);
       setRuntimeDataBoundary(nextRuntimeDataBoundary);
+      setServiceReadiness(nextServiceReadiness);
+      setServiceReadinessNotice("");
       setDecisionResumeNotice("");
       if (!selectedDecisionId && nextInbox.decisions[0]) {
         setSelectedDecisionId(nextInbox.decisions[0].id);
@@ -2293,6 +2367,8 @@ function DesktopRuntimePanel({
       setRuntimeDataBoundary(null);
       setPayloadAudit(null);
       setSupportBundle(null);
+      setServiceReadiness(null);
+      setServiceReadinessNotice("");
       setInboxReport(null);
       setDecisionResumeNotice("");
       setError(errorMessage(caught));
@@ -2505,6 +2581,28 @@ function DesktopRuntimePanel({
       setError(errorMessage(caught));
     } finally {
       setRuntimeDataBusy("");
+    }
+  };
+
+  const refreshServiceReadiness = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setServiceReadiness(null);
+      return;
+    }
+
+    setServiceReadinessBusy(true);
+    setError("");
+    try {
+      const report = await tauriInvoke<ServiceReadinessReport>("get_service_readiness_report");
+      setServiceReadiness(report);
+      setServiceReadinessNotice(
+        `${report.status}: score ${report.score}, public blockers ${report.publicBlockers.length}`
+      );
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setServiceReadinessBusy(false);
     }
   };
 
@@ -3061,6 +3159,7 @@ function DesktopRuntimePanel({
         <Metric label="Decision Items" value={decisionPrompts.length + blockedTaskCount + openInboxDecisions.length} icon={Inbox} tone="amber" />
         <Metric label="Agent Configs" value={agentCatalogCount} icon={Bot} tone="violet" />
         <Metric label="Auto Deferred" value={sessionStats.autoDeferred} icon={ShieldCheck} tone="slate" />
+        <Metric label="Public Blockers" value={serviceReadinessStats.publicBlockers} icon={AlertTriangle} tone="amber" />
         <Metric label="Source Files" value={sourceFileCount} icon={Code2} tone="green" />
       </section>
 
@@ -3116,6 +3215,11 @@ function DesktopRuntimePanel({
             <FileSearch size={16} aria-hidden="true" />
             <span>Support bundle</span>
             <small>{supportBundle?.status || "redacted export"}</small>
+          </button>
+          <button type="button" onClick={refreshServiceReadiness} disabled={!invoke || serviceReadinessBusy}>
+            <ShieldCheck size={16} aria-hidden="true" />
+            <span>Service readiness</span>
+            <small>{serviceReadiness ? `${serviceReadiness.score} / ${serviceReadiness.publicBlockers.length} blockers` : "not checked"}</small>
           </button>
           <button type="button" onClick={deferDetectedQuestions} disabled={!invoke || decisionBusy || pendingQuestionCount === 0}>
             <ShieldCheck size={16} aria-hidden="true" />
@@ -3340,6 +3444,122 @@ function DesktopRuntimePanel({
               <code>{supportBundle?.taskRunSummaryPath || "No task-run summary"}</code>
               <code>{supportBundle?.recentEventsPath || "No recent events log"}</code>
             </div>
+          </article>
+        </div>
+      </section>
+
+      <section className="panel wide service-readiness-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Service Readiness</p>
+            <h2>서비스 출시 준비도</h2>
+          </div>
+          <div className="desktop-actions">
+            <button type="button" onClick={refreshServiceReadiness} disabled={!invoke || serviceReadinessBusy}>
+              <ShieldCheck size={15} aria-hidden="true" />
+              <span>{serviceReadinessBusy ? "Checking" : "Run Readiness"}</span>
+            </button>
+          </div>
+        </div>
+        {serviceReadinessNotice && <p className="decision-resume-notice">{serviceReadinessNotice}</p>}
+        <div className="service-domain-row" aria-label="Service readiness domains">
+          <span>Runtime Data</span>
+          <span>Customer Payload</span>
+          <span>Support Diagnostics</span>
+          <span>Workspace Onboarding</span>
+          <span>Privacy & Logging</span>
+          <span>Signed Distribution</span>
+          <span>Update & Recovery</span>
+        </div>
+        <div className={`service-readiness-hero status-${serviceReadiness?.status || "unknown"}`}>
+          <div>
+            <span>{serviceReadiness?.releaseLane || "local_internal"}</span>
+            <strong>{serviceReadiness?.status || "not checked"}</strong>
+            <p>{serviceReadiness?.serviceClaim || "서비스 준비도 report를 실행하면 공개 배포 blocker와 다음 조치가 표시됩니다."}</p>
+          </div>
+          <div className="service-score-ring">
+            <span>{serviceReadiness?.score ?? 0}</span>
+            <small>score</small>
+          </div>
+        </div>
+        <div className="task-run-summary-strip">
+          <article>
+            <span>groups</span>
+            <strong>{serviceReadinessStats.passedGroups}/{serviceReadinessStats.groups}</strong>
+          </article>
+          <article>
+            <span>Public blockers</span>
+            <strong>{serviceReadinessStats.publicBlockers}</strong>
+          </article>
+          <article>
+            <span>warnings</span>
+            <strong>{serviceReadinessStats.warnings}</strong>
+          </article>
+          <article>
+            <span>payload findings</span>
+            <strong>{serviceReadiness?.payloadFlaggedCount ?? 0}</strong>
+          </article>
+          <article>
+            <span>generated</span>
+            <strong>{serviceReadiness ? formatTimeLabel(serviceReadiness.generatedAt) : "idle"}</strong>
+          </article>
+        </div>
+
+        <div className="service-readiness-layout">
+          <div className="service-group-grid">
+            {(serviceReadiness?.groups || []).map((group) => (
+              <article key={group.id} className={`service-group-card status-${group.status}`}>
+                <header>
+                  <div>
+                    <span>{group.id}</span>
+                    <h3>{group.label}</h3>
+                  </div>
+                  <strong>{group.status}</strong>
+                </header>
+                <div className="adapter-report">
+                  <span>{group.passedChecks}/{group.totalChecks} checks</span>
+                  <span>{group.checks.filter((check) => check.requiredForPublic).length} public</span>
+                </div>
+                <div className="service-check-list">
+                  {group.checks.map((check) => (
+                    <div key={check.id} className={`status-${check.status}`}>
+                      <strong>{check.status}</strong>
+                      <span>{check.label}</span>
+                      <p>{check.detail}</p>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            ))}
+            {!serviceReadiness && (
+              <p className="empty-state">Run Readiness를 누르면 signed distribution, update/recovery, privacy/logging, onboarding gap을 점검합니다.</p>
+            )}
+          </div>
+
+          <article className="service-next-actions">
+            <header>
+              <div>
+                <span>{serviceReadiness?.publicBlockers.length || 0} blockers</span>
+                <h3>Public blockers / next actions</h3>
+              </div>
+              <AlertTriangle size={18} aria-hidden="true" />
+            </header>
+            <div className="service-blocker-list">
+              {(serviceReadiness?.nextActions || []).map((action) => (
+                <div key={action.checkId} className={`status-${action.status}`}>
+                  <strong>{action.status}</strong>
+                  <span>{action.label}</span>
+                  <p>{action.action}</p>
+                </div>
+              ))}
+              {serviceReadiness && serviceReadiness.nextActions.length === 0 && (
+                <p className="empty-state">No next actions. Public readiness still needs final clean release validation before release language.</p>
+              )}
+              {!serviceReadiness && (
+                <p className="empty-state">공개 서비스 blocker는 readiness report 실행 후 표시됩니다.</p>
+              )}
+            </div>
+            <code>{serviceReadiness?.payloadAuditPath || "payload audit path pending"}</code>
           </article>
         </div>
       </section>
@@ -4810,6 +5030,15 @@ function truncateText(value: string, maxLength: number) {
   }
   const visibleLength = Math.max(0, maxLength - 3);
   return `${value.slice(0, visibleLength).trimEnd()}...`;
+}
+
+function formatTimeLabel(value: string) {
+  const numericValue = Number(value);
+  const date = Number.isFinite(numericValue) && value.trim() !== "" ? new Date(numericValue) : new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+  return date.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
 }
 
 function countBy<T>(items: T[], getKey: (item: T) => string) {

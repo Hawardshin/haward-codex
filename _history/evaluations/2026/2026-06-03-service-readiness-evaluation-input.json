@@ -1,0 +1,31 @@
+{
+  "record_id": "2026-06-03-service-readiness-evaluation-input",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-012",
+  "owner_project": "platform-desktop-app",
+  "requirements": [
+    "REQ-PDA-048",
+    "REQ-PDA-049",
+    "REQ-PDA-050",
+    "REQ-PDA-051",
+    "REQ-PDA-052"
+  ],
+  "artifacts": [
+    "platform-desktop-app/configs/service-readiness-registry.json",
+    "platform-desktop-app/scripts/check-service-readiness.mjs",
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-service-readiness-omission-input.json"
+  ],
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-03-service-readiness-resource-input.json"
+  ],
+  "grounding_targets": [
+    "_history/evaluations/2026/2026-06-03-service-readiness-grounding.json"
+  ]
+}

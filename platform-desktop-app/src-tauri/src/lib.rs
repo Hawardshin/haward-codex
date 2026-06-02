@@ -412,6 +412,54 @@ struct SupportDiagnosticBundleReport {
     created_at: String,
 }
 
+#[derive(Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ServiceReadinessCheck {
+    id: String,
+    label: String,
+    status: String,
+    detail: String,
+    required_for_public: bool,
+    required_for_internal: bool,
+}
+
+#[derive(Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ServiceReadinessGroup {
+    id: String,
+    label: String,
+    status: String,
+    passed_checks: usize,
+    total_checks: usize,
+    checks: Vec<ServiceReadinessCheck>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ServiceReadinessNextAction {
+    check_id: String,
+    label: String,
+    status: String,
+    action: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ServiceReadinessReport {
+    status: String,
+    release_lane: String,
+    score: u8,
+    generated_at: String,
+    groups: Vec<ServiceReadinessGroup>,
+    blockers: Vec<String>,
+    public_blockers: Vec<String>,
+    warnings: Vec<String>,
+    next_actions: Vec<ServiceReadinessNextAction>,
+    payload_audit_path: String,
+    payload_flagged_count: usize,
+    service_claim: String,
+}
+
 const MAX_HEALTH_OUTPUT_BYTES: usize = 20_000;
 const HEALTH_TIMEOUT_MS: u64 = 2_500;
 const MAX_SESSION_OUTPUT_BYTES: usize = 100_000;
@@ -624,6 +672,11 @@ fn create_support_diagnostic_bundle(
     app: AppHandle,
 ) -> Result<SupportDiagnosticBundleReport, String> {
     create_support_diagnostic_bundle_report(&app)
+}
+
+#[tauri::command]
+fn get_service_readiness_report(app: AppHandle) -> Result<ServiceReadinessReport, String> {
+    service_readiness_report(&app)
 }
 
 #[tauri::command]
@@ -1258,6 +1311,7 @@ pub fn run() {
             list_runtime_data_roots,
             run_installer_payload_audit,
             create_support_diagnostic_bundle,
+            get_service_readiness_report,
             start_cli_adapter_session,
             start_cli_task_pipeline,
             poll_cli_adapter_session,
@@ -2241,6 +2295,348 @@ fn runtime_root_report(
         visibility: visibility.to_string(),
         purpose: purpose.to_string(),
     })
+}
+
+fn service_readiness_report(app: &AppHandle) -> Result<ServiceReadinessReport, String> {
+    let generated_at = current_unix_millis_label();
+    let runtime_roots = runtime_data_boundary_report(app)?;
+    let payload_audit = run_installer_payload_audit_report(app)?;
+    let roots_ready = runtime_roots.roots.iter().all(|root| root.exists);
+    let has_payload_high_findings = payload_audit
+        .findings
+        .iter()
+        .any(|finding| finding.severity == "high");
+    let update_channel_configured = service_update_channel_configured(app);
+
+    let groups = vec![
+        service_readiness_group(
+            "runtime_data",
+            "Runtime Data Boundary",
+            vec![
+                service_readiness_check(
+                    "runtime_roots_ready",
+                    "Runtime roots are ready",
+                    roots_ready,
+                    &format!("{} runtime roots checked.", runtime_roots.roots.len()),
+                    "blocked",
+                    true,
+                    true,
+                ),
+                service_readiness_check(
+                    "task_run_store_outside_source",
+                    "Task-run store is outside source",
+                    !runtime_roots.task_run_store_path.is_empty(),
+                    &runtime_roots.task_run_store_path,
+                    "blocked",
+                    true,
+                    true,
+                ),
+                service_readiness_check(
+                    "agent_workspace_plane",
+                    "Agent workspace plane is separated",
+                    runtime_roots
+                        .roots
+                        .iter()
+                        .any(|root| root.id == "agent_workspace" && root.exists),
+                    "Agent runtime work is stored outside reusable agent definitions.",
+                    "blocked",
+                    true,
+                    true,
+                ),
+            ],
+        ),
+        service_readiness_group(
+            "customer_payload",
+            "Customer Payload",
+            vec![
+                service_readiness_check(
+                    "payload_audit_clean",
+                    "Installer payload has no high findings",
+                    !has_payload_high_findings,
+                    &format!(
+                        "{} findings across {} scanned files.",
+                        payload_audit.flagged_count, payload_audit.scanned_files
+                    ),
+                    "blocked",
+                    true,
+                    true,
+                ),
+                service_readiness_check(
+                    "payload_audit_bounded",
+                    "Payload scan is bounded",
+                    payload_audit.scanned_files <= payload_audit.max_scan_files,
+                    &format!("max {} files", payload_audit.max_scan_files),
+                    "blocked",
+                    true,
+                    true,
+                ),
+            ],
+        ),
+        service_readiness_group(
+            "support_diagnostics",
+            "Support Diagnostics",
+            vec![
+                service_readiness_check(
+                    "support_store_ready",
+                    "Support bundle store is ready",
+                    !runtime_roots.support_bundle_store_path.is_empty(),
+                    &runtime_roots.support_bundle_store_path,
+                    "blocked",
+                    true,
+                    true,
+                ),
+                service_readiness_check(
+                    "support_export_redacted",
+                    "Support export policy is redacted",
+                    true,
+                    "Support bundle command exports redacted bounded summaries.",
+                    "blocked",
+                    true,
+                    true,
+                ),
+            ],
+        ),
+        service_readiness_group(
+            "workspace_onboarding",
+            "Workspace Onboarding",
+            vec![
+                service_readiness_check(
+                    "workspace_roots_visible",
+                    "Runtime workspace roots are visible",
+                    runtime_roots
+                        .roots
+                        .iter()
+                        .any(|root| root.id == "agent_workspace" && root.exists),
+                    "Agent workspace root is visible to the operator.",
+                    "blocked",
+                    true,
+                    true,
+                ),
+                service_readiness_check(
+                    "first_run_workspace_chooser_enforced",
+                    "First-run workspace chooser is enforced",
+                    false,
+                    "First-run workspace chooser is documented but not yet persisted as a runtime setting.",
+                    "warning",
+                    true,
+                    false,
+                ),
+            ],
+        ),
+        service_readiness_group(
+            "privacy_logging",
+            "Privacy & Logging",
+            vec![
+                service_readiness_check(
+                    "private_payload_guard",
+                    "Private/source payload guard is active",
+                    !has_payload_high_findings,
+                    "Payload audit blocks private vault and source-tree leakage.",
+                    "blocked",
+                    true,
+                    true,
+                ),
+                service_readiness_check(
+                    "diagnostics_are_bounded",
+                    "Diagnostics are bounded",
+                    true,
+                    &format!(
+                        "Support summaries keep at most {} recent task runs and {} chars per event.",
+                        MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS, MAX_SUPPORT_EVENT_CHARS
+                    ),
+                    "blocked",
+                    true,
+                    true,
+                ),
+            ],
+        ),
+        service_readiness_group(
+            "signed_distribution",
+            "Signed Distribution",
+            vec![
+                service_readiness_check(
+                    "internal_hardened_runtime",
+                    "Internal build uses hardened runtime",
+                    true,
+                    "tauri.conf.json sets macOS hardenedRuntime and the local build verifies codesign.",
+                    "blocked",
+                    true,
+                    true,
+                ),
+                service_readiness_check(
+                    "developer_id_notarization",
+                    "Developer ID signing and notarization are configured",
+                    false,
+                    "Public release still needs Developer ID signing, notarization, and stapling where applicable.",
+                    "warning",
+                    true,
+                    false,
+                ),
+            ],
+        ),
+        service_readiness_group(
+            "update_recovery",
+            "Update & Recovery",
+            vec![
+                service_readiness_check(
+                    "signed_update_channel",
+                    "Signed updater channel is configured",
+                    update_channel_configured,
+                    "No signed updater manifest or endpoint marker is bundled yet.",
+                    "warning",
+                    true,
+                    false,
+                ),
+                service_readiness_check(
+                    "clean_machine_smoke",
+                    "Clean-machine install/update smoke is recorded",
+                    false,
+                    "A separate clean-machine install/open/update smoke record is still required before public release.",
+                    "warning",
+                    true,
+                    false,
+                ),
+            ],
+        ),
+    ];
+
+    let checks: Vec<ServiceReadinessCheck> = groups
+        .iter()
+        .flat_map(|group| group.checks.iter().cloned())
+        .collect();
+    let blockers = checks
+        .iter()
+        .filter(|check| check.required_for_internal && check.status == "blocked")
+        .map(|check| check.label.clone())
+        .collect::<Vec<_>>();
+    let public_blockers = checks
+        .iter()
+        .filter(|check| check.required_for_public && check.status != "passed")
+        .map(|check| check.label.clone())
+        .collect::<Vec<_>>();
+    let warnings = checks
+        .iter()
+        .filter(|check| check.status == "warning")
+        .map(|check| check.label.clone())
+        .collect::<Vec<_>>();
+    let next_actions = service_readiness_next_actions(&checks);
+    let score = service_readiness_score(&checks);
+    let status = if !blockers.is_empty() {
+        "service_internal_blocked"
+    } else if !public_blockers.is_empty() {
+        "service_internal_ready_public_blocked"
+    } else {
+        "service_public_ready_candidate"
+    }
+    .to_string();
+
+    Ok(ServiceReadinessReport {
+        status,
+        release_lane: "local_internal".to_string(),
+        score,
+        generated_at,
+        groups,
+        blockers,
+        public_blockers,
+        warnings,
+        next_actions,
+        payload_audit_path: payload_audit.audit_path,
+        payload_flagged_count: payload_audit.flagged_count,
+        service_claim: "Internal service operation is inspectable in the app. Public service release remains blocked until signing, notarization, updater, clean-machine smoke, and first-run workspace enforcement are complete.".to_string(),
+    })
+}
+
+fn service_readiness_group(
+    id: &str,
+    label: &str,
+    checks: Vec<ServiceReadinessCheck>,
+) -> ServiceReadinessGroup {
+    let has_blocked = checks.iter().any(|check| check.status == "blocked");
+    let has_warning = checks.iter().any(|check| check.status == "warning");
+    let passed_checks = checks
+        .iter()
+        .filter(|check| check.status == "passed")
+        .count();
+    let total_checks = checks.len();
+    ServiceReadinessGroup {
+        id: id.to_string(),
+        label: label.to_string(),
+        status: if has_blocked {
+            "blocked"
+        } else if has_warning {
+            "warning"
+        } else {
+            "passed"
+        }
+        .to_string(),
+        passed_checks,
+        total_checks,
+        checks,
+    }
+}
+
+fn service_readiness_check(
+    id: &str,
+    label: &str,
+    passed: bool,
+    detail: &str,
+    fallback_status: &str,
+    required_for_public: bool,
+    required_for_internal: bool,
+) -> ServiceReadinessCheck {
+    ServiceReadinessCheck {
+        id: id.to_string(),
+        label: label.to_string(),
+        status: if passed { "passed" } else { fallback_status }.to_string(),
+        detail: detail.to_string(),
+        required_for_public,
+        required_for_internal,
+    }
+}
+
+fn service_readiness_next_actions(
+    checks: &[ServiceReadinessCheck],
+) -> Vec<ServiceReadinessNextAction> {
+    checks
+        .iter()
+        .filter(|check| check.status != "passed")
+        .take(8)
+        .map(|check| ServiceReadinessNextAction {
+            check_id: check.id.clone(),
+            label: check.label.clone(),
+            status: check.status.clone(),
+            action: check.detail.clone(),
+        })
+        .collect()
+}
+
+fn service_readiness_score(checks: &[ServiceReadinessCheck]) -> u8 {
+    if checks.is_empty() {
+        return 0;
+    }
+    let total: usize = checks
+        .iter()
+        .map(|check| match check.status.as_str() {
+            "passed" => 100,
+            "warning" => 60,
+            _ => 0,
+        })
+        .sum();
+    (total / checks.len()) as u8
+}
+
+fn service_update_channel_configured(app: &AppHandle) -> bool {
+    let Ok(resource_dir) = app.path().resource_dir() else {
+        return false;
+    };
+    [
+        "update-manifest.json",
+        "latest.json",
+        "updater.json",
+        "service-update-channel.json",
+    ]
+    .iter()
+    .any(|file_name| resource_dir.join(file_name).exists())
 }
 
 fn runtime_data_store_base_path(app: &AppHandle) -> Result<PathBuf, String> {

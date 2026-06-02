@@ -1,0 +1,263 @@
+{
+  "schema_version": "2026-06-03",
+  "name": "service-readiness-registry",
+  "purpose": "Defines production-service readiness gates for the installable desktop platform so internal builds, customer test builds, and public releases are not confused.",
+  "reader_guide": {
+    "summary": "Use this registry when deciding whether the desktop platform is only a local/internal build, a customer-test build, or a public service release candidate.",
+    "how_to_read": [
+      "Read service_levels first to understand which claims are allowed.",
+      "Read readiness_groups to see the grouped service gaps that must be visible in the app.",
+      "Read public_release_blockers before using public release language.",
+      "Read runtime_surface_contract to understand what the installed app must show to operators.",
+      "Treat updater, signing, notarization, privacy, support, and first-run items as release gates rather than optional notes."
+    ],
+    "owner": "platform-desktop-app",
+    "last_reviewed": "2026-06-03",
+    "update_triggers": [
+      "A release channel, updater, signing, notarization, support, privacy, or onboarding behavior changes.",
+      "The app starts collecting additional logs, workspace data, or diagnostics.",
+      "A customer-test or public distribution claim is made.",
+      "A new OS packaging target is added."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "apple_notarization",
+      "title": "Apple Developer: Notarizing macOS software before distribution",
+      "url": "https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution",
+      "source_type": "official_docs",
+      "used_for": [
+        "Developer ID signing",
+        "hardened runtime",
+        "notarization and stapling gates"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "apple_code_signing",
+      "title": "Apple Platform Security: App code signing process in macOS",
+      "url": "https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web",
+      "source_type": "official_docs",
+      "used_for": [
+        "macOS app trust model",
+        "Gatekeeper distribution expectations"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "tauri_updater",
+      "title": "Tauri v2 Updater Plugin",
+      "url": "https://v2.tauri.app/plugin/updater/",
+      "source_type": "official_docs",
+      "used_for": [
+        "signed update channel requirement",
+        "production TLS update endpoint expectation"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "owasp_masvs_storage",
+      "title": "OWASP MASVS Storage",
+      "url": "https://mas.owasp.org/checklists/MASVS-STORAGE/",
+      "source_type": "standard",
+      "used_for": [
+        "sensitive data storage and logging boundary",
+        "privacy-safe diagnostic export"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "runtime_data_boundary",
+      "title": "Runtime Data Boundary Registry",
+      "path": "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "source versus runtime data separation",
+        "support diagnostic redaction"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "desktop_user_flow",
+      "title": "Desktop User Flow Registry",
+      "path": "platform-desktop-app/configs/user-flow-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "first-run onboarding",
+        "workspace chooser",
+        "decision inbox and recovery behavior"
+      ],
+      "last_checked": "2026-06-03"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "internal_build_is_not_public_service",
+      "rule": "A local/internal app bundle may be useful for development, but it must not be described as a public service release until public release blockers are cleared.",
+      "reason": "Developer ID signing, notarization, updater configuration, and clean-machine smoke tests are trust gates for installed software.",
+      "applies_to": [
+        "service_levels",
+        "public_release_blockers"
+      ]
+    },
+    {
+      "id": "service_gaps_must_be_operator_visible",
+      "rule": "Release, updater, privacy, support, onboarding, and workspace-readiness gaps must be visible in the app surface, not only in docs.",
+      "reason": "A real service needs operators to see next actions and blockers without reading repository internals.",
+      "applies_to": [
+        "runtime_surface_contract",
+        "readiness_groups"
+      ]
+    },
+    {
+      "id": "support_exports_are_redacted",
+      "rule": "Support diagnostics must export bounded metadata and redacted summaries, not raw private workspace contents or secrets.",
+      "reason": "Customer support workflows can accidentally become data exfiltration paths if raw logs or source trees are bundled.",
+      "applies_to": [
+        "readiness_groups",
+        "privacy_support_gates"
+      ]
+    },
+    {
+      "id": "updater_is_a_release_gate",
+      "rule": "A public service release requires a documented update and rollback path. Until a signed updater or equivalent release channel is configured, public release remains blocked.",
+      "reason": "Installed customers need a safe path for security fixes and product updates.",
+      "applies_to": [
+        "public_release_blockers",
+        "update_recovery_gates"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "service_levels",
+      "meaning": "Allowed readiness claims and what each level requires.",
+      "required": true
+    },
+    {
+      "field": "readiness_groups",
+      "meaning": "Grouped service-readiness domains shown by the app and checked by scripts.",
+      "required": true
+    },
+    {
+      "field": "public_release_blockers",
+      "meaning": "Items that must block public-release language until resolved.",
+      "required": true
+    },
+    {
+      "field": "runtime_surface_contract",
+      "meaning": "What the installed app must expose to operators without reading source code.",
+      "required": true
+    },
+    {
+      "field": "validation_commands",
+      "meaning": "Commands expected to validate service readiness and report public blockers.",
+      "required": true
+    }
+  ],
+  "service_levels": [
+    {
+      "id": "local_internal",
+      "label": "Local/Internal Build",
+      "allowed_claim": "Useful for development and internal smoke testing.",
+      "minimum_required_groups": [
+        "runtime_data",
+        "customer_payload",
+        "support_diagnostics",
+        "internal_release_preflight"
+      ]
+    },
+    {
+      "id": "customer_test",
+      "label": "Customer Test Build",
+      "allowed_claim": "Installable pilot build for controlled testers with known limitations.",
+      "minimum_required_groups": [
+        "runtime_data",
+        "customer_payload",
+        "support_diagnostics",
+        "workspace_onboarding",
+        "privacy_logging"
+      ]
+    },
+    {
+      "id": "public_service_release",
+      "label": "Public Service Release",
+      "allowed_claim": "Publicly distributable service release.",
+      "minimum_required_groups": [
+        "runtime_data",
+        "customer_payload",
+        "support_diagnostics",
+        "workspace_onboarding",
+        "privacy_logging",
+        "signed_distribution",
+        "update_recovery"
+      ]
+    }
+  ],
+  "readiness_groups": [
+    {
+      "id": "runtime_data",
+      "label": "Runtime Data Boundary",
+      "intent": "Runtime data, logs, task runs, support bundles, and agent workspace must live outside the platform source tree.",
+      "required_for_public": true
+    },
+    {
+      "id": "customer_payload",
+      "label": "Customer Payload",
+      "intent": "The installed app must not bundle platform source trees, private vaults, development outputs, or raw repository snapshots.",
+      "required_for_public": true
+    },
+    {
+      "id": "support_diagnostics",
+      "label": "Support Diagnostics",
+      "intent": "Operators must be able to export redacted diagnostics for support and recovery.",
+      "required_for_public": true
+    },
+    {
+      "id": "workspace_onboarding",
+      "label": "Workspace Onboarding",
+      "intent": "Customers need a first-run workspace chooser and clear setup state before running agents.",
+      "required_for_public": true
+    },
+    {
+      "id": "privacy_logging",
+      "label": "Privacy & Logging",
+      "intent": "Logs and diagnostics must preserve provenance, bounds, redaction, and sensitive-data rules.",
+      "required_for_public": true
+    },
+    {
+      "id": "signed_distribution",
+      "label": "Signed Distribution",
+      "intent": "macOS public distribution requires Developer ID signing, hardened runtime, notarization, and stapling when applicable.",
+      "required_for_public": true
+    },
+    {
+      "id": "update_recovery",
+      "label": "Update & Recovery",
+      "intent": "Public service releases need a signed update channel, rollback notes, and clean-machine smoke tests.",
+      "required_for_public": true
+    }
+  ],
+  "public_release_blockers": [
+    "Developer ID signing identity or APPLE_CERTIFICATE credentials are not configured.",
+    "Apple notarization credentials are not configured.",
+    "Signed updater channel is not configured.",
+    "Clean-machine install/open/update smoke test has not been recorded.",
+    "First-run workspace chooser is not runtime-enforced."
+  ],
+  "runtime_surface_contract": {
+    "desktop_panel": "Workspace Monitor Desktop shall show Service Readiness with grouped status, score, blockers, warnings, and next actions.",
+    "tauri_command": "get_service_readiness_report",
+    "script_command": "npm --prefix platform-desktop-app run service:readiness",
+    "public_report_command": "npm --prefix platform-desktop-app run service:readiness:public:report"
+  },
+  "validation_commands": [
+    "npm --prefix platform-desktop-app run service:readiness",
+    "npm --prefix platform-desktop-app run service:readiness:public:report",
+    "npm --prefix platform-desktop-app run check",
+    "npm --prefix workspace-monitor run check",
+    "npm --prefix workspace-monitor test",
+    "cargo test",
+    "cargo build"
+  ]
+}

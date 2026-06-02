@@ -1,0 +1,32 @@
+{
+  "record_id": "2026-06-03-service-readiness",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-012",
+  "owner_project": "platform-desktop-app",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked Tauri updater/distribution, Apple notarization, and OWASP storage/privacy references."
+    },
+    {
+      "phase": "large_scope_decomposition",
+      "status": "completed",
+      "notes": "Narrowed broad real-service request to release/update/privacy/support/onboarding readiness gates."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Added service readiness registry, script, Tauri command, and Desktop UI panel."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Node, TypeScript, config contract, cargo test/build, Next build/test/perf, customer monitor build, Playwright static smoke, Tauri build, codesign, hdiutil, and app open/quit smoke passed."
+    }
+  ],
+  "bottleneck_notes": [
+    "Public release cannot be honestly marked ready without signed updater, Developer ID signing/notarization, clean-machine smoke, and runtime workspace chooser persistence."
+  ]
+}

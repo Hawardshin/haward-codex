@@ -1,0 +1,21 @@
+{
+  "record_id": "2026-06-03-service-readiness-resource",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-012",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    {
+      "resource": "cargo_build_locks",
+      "details": "cargo test and cargo build used the shared Cargo target/package cache.",
+      "cleanup": "Commands exited normally.",
+      "post_check": "No long-running Rust process was left by cargo commands."
+    },
+    {
+      "resource": "future_static_server_and_app_smoke",
+      "details": "Static HTTP server on TCP 4176 and built app open/quit smoke.",
+      "cleanup": "Killed process listening on TCP 4176 and quit Agent Workspace Platform via osascript.",
+      "post_check": "lsof -ti tcp:4176 returned no process; pgrep -fl agent-workspace-platform-desktop returned no process."
+    }
+  ],
+  "leaks_detected": false
+}

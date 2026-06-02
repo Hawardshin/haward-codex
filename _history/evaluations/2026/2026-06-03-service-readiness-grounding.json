@@ -1,0 +1,27 @@
+{
+  "record_id": "2026-06-03-service-readiness-grounding",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-012",
+  "claims_checked": [
+    {
+      "claim": "Tauri updater requires signed update artifacts and updater configuration before a real update channel can be claimed.",
+      "support": "Tauri v2 Updater Plugin documentation.",
+      "url": "https://v2.tauri.app/plugin/updater/",
+      "status": "supported"
+    },
+    {
+      "claim": "macOS public distribution requires signing/notarization gates beyond local ad-hoc signing.",
+      "support": "Apple Developer notarization documentation.",
+      "url": "https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution",
+      "status": "supported"
+    },
+    {
+      "claim": "Sensitive data storage, logs, and diagnostics need bounded privacy controls.",
+      "support": "OWASP MASVS-STORAGE checklist.",
+      "url": "https://mas.owasp.org/checklists/MASVS-STORAGE/",
+      "status": "supported"
+    }
+  ],
+  "unsupported_claims_removed": [],
+  "public_summary": "The service readiness surface is grounded in updater signing, macOS distribution trust gates, and privacy-safe storage/logging guidance."
+}

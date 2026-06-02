@@ -1784,6 +1784,195 @@ h3 {
   gap: 10px;
 }
 
+.service-readiness-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 12px;
+}
+
+.service-domain-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.service-domain-row span {
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  color: var(--slate);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+
+.service-readiness-hero span,
+.service-group-card header span,
+.service-next-actions header span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.service-readiness-hero strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+
+.service-readiness-hero p {
+  max-width: 900px;
+  margin: 6px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.service-score-ring {
+  display: grid;
+  place-items: center;
+  width: 86px;
+  height: 86px;
+  border: 1px solid rgba(72, 128, 109, 0.35);
+  background: #f3faf7;
+  border-radius: 999px;
+  color: var(--green);
+}
+
+.service-score-ring span {
+  color: inherit;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.service-score-ring small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.service-readiness-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.service-group-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.service-group-card,
+.service-next-actions,
+.service-check-list div,
+.service-blocker-list div {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.service-group-card,
+.service-next-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.service-group-card.status-warning,
+.service-blocker-list .status-warning,
+.service-check-list .status-warning {
+  border-color: rgba(181, 125, 49, 0.35);
+}
+
+.service-group-card.status-blocked,
+.service-blocker-list .status-blocked,
+.service-check-list .status-blocked {
+  border-color: rgba(176, 67, 74, 0.35);
+}
+
+.service-group-card.status-passed,
+.service-check-list .status-passed {
+  border-color: rgba(72, 128, 109, 0.28);
+}
+
+.service-group-card header,
+.service-next-actions header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: start;
+}
+
+.service-group-card h3,
+.service-next-actions h3 {
+  margin: 3px 0 0;
+  font-size: 15px;
+}
+
+.service-group-card header strong,
+.service-check-list strong,
+.service-blocker-list strong {
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  color: var(--slate);
+  font-size: 12px;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.service-check-list,
+.service-blocker-list {
+  display: grid;
+  gap: 7px;
+}
+
+.service-check-list div,
+.service-blocker-list div {
+  display: grid;
+  gap: 4px;
+}
+
+.service-check-list span,
+.service-blocker-list span {
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.service-check-list p,
+.service-blocker-list p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.service-next-actions code {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.35;
+  padding: 6px;
+  overflow-wrap: anywhere;
+}
+
 .session-record-link {
   display: grid;
   gap: 4px;
@@ -3673,6 +3862,8 @@ h3 {
   .runtime-root-grid article:hover,
   .runtime-audit-card:hover,
   .payload-finding-list div:hover,
+  .service-group-card:hover,
+  .service-next-actions:hover,
   .process-node:hover,
   .evidence-grid article:hover,
   .terminal-report-list article:hover,
@@ -3717,6 +3908,7 @@ h3 {
   .task-run-summary-strip,
   .task-run-grid,
   .runtime-root-grid,
+  .service-group-grid,
   .task-run-detail-meta,
   .pipe-lane-grid,
   .run-board-strip,
@@ -3739,6 +3931,7 @@ h3 {
   .task-pipe-controls,
   .task-run-store-layout,
   .runtime-data-layout,
+  .service-readiness-layout,
   .session-launcher,
   .session-grid,
   .source-review-grid,
@@ -3824,6 +4017,8 @@ h3 {
   .task-run-store-layout,
   .runtime-data-layout,
   .runtime-root-grid,
+  .service-readiness-hero,
+  .service-group-grid,
   .task-run-detail-meta,
   .pipe-lane-grid,
   .run-board-strip,
@@ -3849,6 +4044,11 @@ h3 {
   .task-lanes > div,
   .requirements-table {
     grid-template-columns: 1fr;
+  }
+
+  .service-score-ring {
+    width: 72px;
+    height: 72px;
   }
 
   .ux-spine {

@@ -84,6 +84,20 @@ test("runtime data boundary separates customer app from platform source", () => 
   assert.ok(registry.installer_payload_policy.disallowed.some((item) => item.includes("_private/")));
 });
 
+test("service readiness registry records production service blockers", () => {
+  const registry = readJson("configs/service-readiness-registry.json");
+  const serialized = JSON.stringify(registry);
+
+  assert.match(serialized, /service_levels/);
+  assert.match(serialized, /public_release_blockers/);
+  assert.match(serialized, /runtime_surface_contract/);
+  assert.match(serialized, /get_service_readiness_report/);
+  assert.match(serialized, /Signed Distribution/);
+  assert.match(serialized, /Update & Recovery/);
+  assert.match(serialized, /Workspace Onboarding/);
+  assert.match(serialized, /updater_is_a_release_gate/);
+});
+
 test("user flow exposes AI CLI orchestration and source editing surfaces", () => {
   const registry = readJson("configs/user-flow-registry.json");
   const serialized = JSON.stringify(registry);
@@ -124,6 +138,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(platformPkg.scripts.check, /check-customer-bundle\.mjs/);
   assert.match(platformPkg.scripts.check, /check-release-readiness\.mjs/);
   assert.ok(platformPkg.scripts["release:preflight:public"]);
+  assert.ok(platformPkg.scripts["service:readiness"]);
+  assert.ok(platformPkg.scripts["service:readiness:public:report"]);
   assert.match(monitorPkg.scripts["build:customer"], /--snapshot-mode customer/);
   for (const collectorToken of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
     assert.match(monitorCollector, new RegExp(collectorToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
@@ -133,6 +149,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   }
   for (const scriptToken of ["checkReleaseReadiness", "public_release_blocked", "hardenedRuntime", "notarization"]) {
     assert.match(releaseReadinessCheck, new RegExp(scriptToken));
+  }
+  const serviceReadinessCheck = readFileSync(join(root, "scripts/check-service-readiness.mjs"), "utf8");
+  for (const scriptToken of ["checkServiceReadiness", "service_internal_ready_public_blocked", "Signed updater channel", "Workspace Onboarding"]) {
+    assert.match(serviceReadinessCheck, new RegExp(scriptToken));
   }
 
   for (const commandName of [
@@ -146,6 +166,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "list_runtime_data_roots",
     "run_installer_payload_audit",
     "create_support_diagnostic_bundle",
+    "get_service_readiness_report",
     "start_cli_adapter_session",
     "start_cli_task_pipeline",
     "poll_cli_adapter_session",
@@ -188,6 +209,11 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Task Run Store",
     "저장된 실행 기록과 로그",
     "Runtime Data & Support",
+    "Service Readiness",
+    "서비스 출시 준비도",
+    "Public blockers",
+    "Update & Recovery",
+    "Signed Distribution",
     "설치형 데이터 경계",
     "Installer Payload Audit",
     "Support Diagnostic Bundle",

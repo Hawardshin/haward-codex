@@ -10,6 +10,7 @@ const requiredFiles = [
   "configs/desktop-distribution-registry.json",
   "configs/claude-code-design-transfer-registry.json",
   "configs/runtime-data-boundary-registry.json",
+  "configs/service-readiness-registry.json",
   "configs/macos-execution-profile.json",
   "configs/windows-execution-profile.json",
   "configs/user-flow-registry.json",
@@ -33,7 +34,8 @@ const requiredFiles = [
   "src-tauri/src/lib.rs",
   "src-tauri/capabilities/default.json",
   "scripts/check-customer-bundle.mjs",
-  "scripts/check-release-readiness.mjs"
+  "scripts/check-release-readiness.mjs",
+  "scripts/check-service-readiness.mjs"
 ];
 
 function readJson(relativePath) {
@@ -67,6 +69,11 @@ for (const scriptName of ["customer-bundle:audit", "release:preflight", "release
     failures.push(`package.json must expose ${scriptName}`);
   }
 }
+for (const scriptName of ["service:readiness", "service:readiness:public:report"]) {
+  if (!pkg.scripts?.[scriptName]) {
+    failures.push(`package.json must expose ${scriptName}`);
+  }
+}
 if (!pkg.scripts?.["monitor:build"]?.includes("build:customer")) {
   failures.push("platform-desktop-app monitor:build must use the customer Workspace Monitor build");
 }
@@ -75,6 +82,9 @@ if (!pkg.scripts?.["monitor:build"]?.includes("customer-bundle:audit")) {
 }
 if (!pkg.scripts?.check?.includes("check-customer-bundle.mjs") || !pkg.scripts?.check?.includes("check-release-readiness.mjs")) {
   failures.push("platform-desktop-app check must run customer bundle and release readiness preflight checks");
+}
+if (!pkg.scripts?.check?.includes("check-service-readiness.mjs")) {
+  failures.push("platform-desktop-app check must run service readiness checks");
 }
 if (!pkg.devDependencies?.["@tauri-apps/cli"]) {
   failures.push("package.json must declare @tauri-apps/cli as a project-local devDependency");
@@ -222,6 +232,23 @@ for (const requiredPhrase of [
   }
 }
 
+const serviceReadinessRegistry = readJson("configs/service-readiness-registry.json");
+const serviceReadinessSerialized = JSON.stringify(serviceReadinessRegistry);
+for (const requiredPhrase of [
+  "service_levels",
+  "public_release_blockers",
+  "runtime_surface_contract",
+  "get_service_readiness_report",
+  "updater_is_a_release_gate",
+  "Signed Distribution",
+  "Update & Recovery",
+  "Workspace Onboarding"
+]) {
+  if (!serviceReadinessSerialized.includes(requiredPhrase)) {
+    failures.push(`service-readiness-registry must include ${requiredPhrase}`);
+  }
+}
+
 const viewModeRegistry = readJson("../agent-platform/configs/access/view-mode-registry.json");
 if (!JSON.stringify(viewModeRegistry).includes("desktop")) {
   failures.push("view-mode-registry must expose the desktop runtime section");
@@ -231,6 +258,7 @@ const monitorShell = readFileSync(join(root, "../workspace-monitor/components/Mo
 const monitorCollector = readFileSync(join(root, "../workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
 const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
 const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
+const serviceReadinessCheck = readFileSync(join(root, "scripts/check-service-readiness.mjs"), "utf8");
 for (const requiredPhrase of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
   if (!monitorCollector.includes(requiredPhrase)) {
     failures.push(`workspace-monitor collector must include customer snapshot token ${requiredPhrase}`);
@@ -246,6 +274,11 @@ for (const requiredPhrase of ["checkReleaseReadiness", "public_release_blocked",
     failures.push(`check-release-readiness.mjs must include ${requiredPhrase}`);
   }
 }
+for (const requiredPhrase of ["checkServiceReadiness", "service_internal_ready_public_blocked", "Signed updater channel", "Workspace Onboarding"]) {
+  if (!serviceReadinessCheck.includes(requiredPhrase)) {
+    failures.push(`check-service-readiness.mjs must include ${requiredPhrase}`);
+  }
+}
 for (const requiredPhrase of [
   "DesktopRuntimePanel",
   "list_cli_adapters",
@@ -258,6 +291,7 @@ for (const requiredPhrase of [
   "list_runtime_data_roots",
   "run_installer_payload_audit",
   "create_support_diagnostic_bundle",
+  "get_service_readiness_report",
   "start_cli_adapter_session",
   "start_cli_task_pipeline",
   "write_cli_adapter_stdin",

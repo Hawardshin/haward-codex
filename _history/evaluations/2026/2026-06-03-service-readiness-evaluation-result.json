@@ -1,0 +1,37 @@
+{
+  "record_id": "2026-06-03-service-readiness-evaluation-result",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-012",
+  "status": "passed",
+  "summary": "Implemented service readiness registry, script, Rust command, and Desktop UI panel. Validation passed across Node, TypeScript, config contract, Rust, Next, customer bundle, customer leak keyword scan, browser smoke, Tauri bundle, codesign, DMG, and app open/quit checks.",
+  "acceptance": [
+    {
+      "criterion": "Internal readiness reports no internal blockers.",
+      "status": "passed",
+      "evidence": "`npm --prefix platform-desktop-app run service:readiness` returned internal blocker 0."
+    },
+    {
+      "criterion": "Public blockers are explicit.",
+      "status": "passed",
+      "evidence": "Public report lists workspace chooser, signing/notarization, signed updater, and clean-machine smoke blockers."
+    },
+    {
+      "criterion": "Desktop UI exposes Service Readiness.",
+      "status": "passed",
+      "evidence": "Playwright static smoke confirmed Service Readiness panel tokens on desktop and mobile."
+    },
+    {
+      "criterion": "Tauri bundle still builds and verifies.",
+      "status": "passed",
+      "evidence": "`tauri:build`, `codesign`, `hdiutil verify`, and app open/quit smoke passed."
+    },
+    {
+      "criterion": "Customer bundle does not expose internal source path tokens.",
+      "status": "passed",
+      "evidence": "`check-customer-bundle` passed and an `rg` keyword scan found no internal source/spec/evaluation path tokens in `workspace-monitor/out` or the customer snapshot."
+    }
+  ],
+  "residual_risks": [
+    "Public release remains blocked until signed updater, Developer ID signing/notarization, clean-machine smoke, and runtime workspace chooser persistence are implemented."
+  ]
+}
