@@ -1131,7 +1131,7 @@ h3 {
 
 .task-pipe-controls {
   display: grid;
-  grid-template-columns: minmax(190px, 0.65fr) minmax(280px, 1.35fr) auto;
+  grid-template-columns: minmax(190px, 0.62fr) minmax(280px, 1.22fr) minmax(170px, 0.52fr) auto;
   gap: 10px;
   align-items: end;
 }
@@ -1146,6 +1146,30 @@ h3 {
 .task-pipe-controls label {
   display: grid;
   gap: 6px;
+}
+
+.inline-toggle {
+  display: inline-flex !important;
+  min-height: 38px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  padding: 8px 10px;
+}
+
+.inline-toggle input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--green);
+}
+
+.task-pipe-controls .inline-toggle input,
+.session-launcher .inline-toggle input {
+  width: 16px;
+  min-height: 16px;
+  padding: 0;
 }
 
 .task-pipe-controls label span,
@@ -1460,7 +1484,7 @@ h3 {
 
 .session-launcher {
   display: grid;
-  grid-template-columns: minmax(150px, 0.7fr) minmax(150px, 0.75fr) minmax(170px, 0.8fr) minmax(260px, 1.8fr) auto;
+  grid-template-columns: minmax(150px, 0.64fr) minmax(150px, 0.7fr) minmax(170px, 0.72fr) minmax(260px, 1.7fr) minmax(170px, 0.54fr) auto;
   gap: 10px;
   align-items: end;
   margin-bottom: 14px;
@@ -1682,7 +1706,7 @@ h3 {
 
 .lane-mini-timeline {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 5px;
   margin: 8px 0;
 }

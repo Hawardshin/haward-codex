@@ -1,0 +1,133 @@
+{
+  "task": "Add CLI question deferral features",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Search current official references before planning and editing.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-question-deferral.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "automatic-deferral",
+      "description": "Running sessions with auto-defer enabled send a defer message when a new question is detected.",
+      "source": "PDA-UX-021",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "decision-inbox-storage",
+      "description": "Deferred questions are stored as deferred decision inbox items with blocked/unblocked/resume metadata.",
+      "source": "PDA-UX-006/PDA-UX-011/PDA-UX-021",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "manual-and-bulk-actions",
+      "description": "User can manually defer a session and bulk-defer all detected questions.",
+      "source": "User request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "away-user-polling",
+      "description": "Active sessions are periodically polled so auto-deferral can run without direct button clicks.",
+      "source": "User request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "regression-checks",
+      "description": "Readiness tests/checks assert the new commands and UI strings remain present.",
+      "source": "validation policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/tests/readiness.test.mjs",
+        "platform-desktop-app/scripts/check-readiness.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "requirements-spec-history",
+      "description": "Record requirements, spec, plan, trace, timing, and evaluation artifacts.",
+      "source": "repository rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-03-question-deferral/",
+        "_requirements/changes/2026-06-03-question-deferral.ko.md",
+        "_history/request-traces/2026/2026-06-03-question-deferral.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/src-tauri/src/lib.rs",
+      "purpose": "Tauri CLI session deferral implementation.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Desktop UI controls and active-session polling.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-question-deferral/spec.ko.md",
+      "purpose": "Project spec contract.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-validation",
+      "description": "Run collect/test/typecheck/build/perf.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "validation run before close-out"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "desktop-readiness",
+      "description": "Run desktop readiness tests and check script.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "validation run before close-out"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Rust compile validation depends on local Rust toolchain availability.",
+    "Question detection is heuristic and should gain adapter-specific fixtures later."
+  ],
+  "notes": [
+    "No optional CLI was installed or made mandatory."
+  ]
+}

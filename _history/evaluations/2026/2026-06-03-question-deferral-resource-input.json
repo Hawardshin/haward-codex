@@ -1,0 +1,119 @@
+{
+  "task": "Question deferral resource review",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Tauri child process sessions",
+    "stdin/stdout/stderr pipe handling",
+    "Workspace Monitor active-session polling interval",
+    "decision inbox JSON writes",
+    "temporary Python HTTP server on tcp:4184"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "child-process-pipes",
+      "category": "process",
+      "description": "Question deferral writes to stdin and reads bounded stdout/stderr from existing child processes.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The implementation reuses existing session timeouts, bounded output, cancel/kill/wait behavior, stdin drop on finish, and reader handle joining.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "ui-polling-interval",
+      "category": "timer",
+      "description": "The Desktop UI starts a 2s interval for active session polling.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The effect only runs for active sessions, clears the interval on cleanup, and stops when no active session remains.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "decision-inbox-write",
+      "category": "file_handle",
+      "description": "Deferred questions append records to the human decision inbox JSON file.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The inbox path is workspace-scoped, parsed as JSON, deduplicated by decision id, and serialized pretty-printed.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "temporary-static-server",
+      "category": "process",
+      "description": "A temporary HTTP server was started to smoke test built static output.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The server was stopped with keyboard interrupt and tcp:4184 was checked for no remaining listener.",
+      "evidence": [
+        "python3 -m http.server 4184 -d workspace-monitor/out",
+        "lsof -ti tcp:4184 || true"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "polling-cleanup",
+      "resource": "window.setInterval for active CLI sessions",
+      "create_path": "Workspace Monitor activeSessionPollKey effect",
+      "cleanup_path": "effect cleanup with window.clearInterval",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "session-process-cleanup",
+      "resource": "CLI child process and pipe handles",
+      "create_path": "create_cli_session",
+      "cleanup_path": "poll finish, timeout, cancel, reader join",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "static-server-lifecycle",
+      "resource": "temporary Python HTTP server on tcp:4184",
+      "create_path": "python3 -m http.server 4184 -d workspace-monitor/out",
+      "cleanup_path": "Ctrl-C shutdown followed by lsof -ti tcp:4184",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "curl served / and /workspace-snapshot.json",
+        "server exited with Keyboard interrupt",
+        "lsof -ti tcp:4184 returned no process"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "performance-budget",
+      "metric": "Workspace Monitor static chunk size",
+      "tool": "npm --prefix workspace-monitor run perf:budget",
+      "threshold": "largest initial chunk below configured budget",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "validation run before close-out"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "This change adds no new external package installation."
+  ]
+}

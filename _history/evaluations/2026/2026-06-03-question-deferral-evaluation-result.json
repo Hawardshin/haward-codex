@@ -1,0 +1,65 @@
+{
+  "status": "ready_to_close",
+  "requires_rework": false,
+  "work_mode": "standard",
+  "required_target_policy": {
+    "required_targets": [
+      "mode_selection_record_targets",
+      "omission_check_targets",
+      "plan_evidence_targets",
+      "references_checked",
+      "request_trace_targets",
+      "requirements_targets",
+      "source_provenance_targets",
+      "spec_targets",
+      "timing_summary_targets",
+      "user_request_summary_targets",
+      "web_search_record_targets",
+      "work_summary_targets"
+    ],
+    "deferred_targets_allowed": []
+  },
+  "alignment_check": {
+    "initial_instruction_present": true,
+    "result_summary_present": true,
+    "work_mode": "standard",
+    "changed_files_count": 20,
+    "verification_count": 17,
+    "references_checked_count": 4,
+    "grounding_checks_count": 1,
+    "source_provenance_targets_count": 2,
+    "plan_evidence_targets_count": 3,
+    "mode_selection_record_targets_count": 1,
+    "omission_check_targets_count": 1,
+    "web_search_record_targets_count": 2,
+    "user_request_summary_targets_count": 2,
+    "requirements_targets_count": 6,
+    "spec_targets_count": 10,
+    "skill_work_occurred": false,
+    "skill_targets_count": 0,
+    "skill_validation_targets_count": 0,
+    "request_trace_targets_count": 2,
+    "work_summary_targets_count": 2,
+    "timing_summary_targets_count": 1,
+    "context_archiving_occurred": false,
+    "context_archive_targets_count": 0,
+    "installation_occurred": false,
+    "installation_record_targets_count": 0,
+    "resource_risk_occurred": true,
+    "resource_check_targets_count": 1,
+    "cli_pipeline_occurred": true,
+    "cli_pipeline_targets_count": 1,
+    "deferred_improvement_targets_count": 1
+  },
+  "gaps": [],
+  "improvements": [
+    "Add a local fixture CLI that emits known question patterns and validates automatic deferral end-to-end.",
+    "Add adapter-specific question classifiers for Claude Code, Gemini CLI, Codex CLI, and OpenCode.",
+    "Persist per-workspace auto-deferral preference after storage/privacy policy is finalized."
+  ],
+  "follow_up_actions": [
+    "Consider improvement: Add a local fixture CLI that emits known question patterns and validates automatic deferral end-to-end.",
+    "Consider improvement: Add adapter-specific question classifiers for Claude Code, Gemini CLI, Codex CLI, and OpenCode.",
+    "Consider improvement: Persist per-workspace auto-deferral preference after storage/privacy policy is finalized."
+  ]
+}

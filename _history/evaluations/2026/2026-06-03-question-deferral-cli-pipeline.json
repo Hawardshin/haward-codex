@@ -1,0 +1,140 @@
+{
+  "pipeline_id": "question-deferral-session-pipeline",
+  "purpose": "Validate the CLI session question deferral graph used by the desktop supervisor.",
+  "work_mode": "standard",
+  "risk_level": "medium",
+  "processes": [
+    {
+      "process_id": "desktop_supervisor",
+      "adapter_id": "platform-desktop-app",
+      "command": "tauri-command",
+      "args": [
+        "poll_cli_adapter_session"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 2,
+      "max_output_bytes": 100000,
+      "required": true
+    },
+    {
+      "process_id": "guest_cli_lane",
+      "adapter_id": "codex-cli",
+      "command": "optional-cli",
+      "args": [],
+      "cwd": ".",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": false
+    }
+  ],
+  "pipes": [
+    {
+      "pipe_id": "guest_stdout_to_supervisor",
+      "from_process": "guest_cli_lane",
+      "from_stream": "stdout",
+      "to_process": "desktop_supervisor",
+      "to_stream": "stdin",
+      "mode": "pipe",
+      "artifact_id": "",
+      "required": true
+    },
+    {
+      "pipe_id": "supervisor_defer_to_guest_stdin",
+      "from_process": "desktop_supervisor",
+      "from_stream": "stdout",
+      "to_process": "guest_cli_lane",
+      "to_stream": "stdin",
+      "mode": "pipe",
+      "artifact_id": "",
+      "required": true
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "_ops/coordination/human-decision-inbox.json",
+      "kind": "report",
+      "path": "_ops/coordination/human-decision-inbox.json",
+      "produced_by": "desktop_supervisor",
+      "consumed_by": [],
+      "required": true,
+      "max_bytes": 1000000,
+      "format": "json",
+      "retention_policy": "Retained as the workspace human decision inbox until decisions are answered or archived.",
+      "cleanup_policy": "",
+      "provenance": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "validation": [
+        "JSON parse",
+        "decision id dedupe",
+        "workspace-relative path check"
+      ]
+    }
+  ],
+  "execution_policy": {
+    "shell_allowed": false,
+    "argv_arrays_required": true,
+    "explicit_pipe_graph_required": true,
+    "explicit_cwd_required": true,
+    "adapter_allowlist": [
+      "platform-desktop-app",
+      "codex-cli",
+      "claude-code-cli",
+      "gemini-cli",
+      "opencode-cli"
+    ]
+  },
+  "safety_controls": [
+    "adapter_allowlist",
+    "argv_arguments",
+    "shell_disabled_by_default",
+    "explicit_cwd_boundary",
+    "environment_allowlist",
+    "secret_redaction",
+    "output_redaction",
+    "permission_scope",
+    "fallback_behavior",
+    "audit_logging",
+    "bounded_output",
+    "stdin_defer_message",
+    "decision_inbox_dedupe",
+    "manual_resume",
+    "timeout_policy",
+    "cancel_policy"
+  ],
+  "resource_controls": {
+    "timeout_policy": "Each session keeps the existing SESSION_TIMEOUT_MS timeout.",
+    "max_output_bytes": 100000,
+    "cancellation_policy": "The platform can cancel each active session and kill/wait the child process.",
+    "cleanup_policy": "Session stdin is dropped on finish; stdout/stderr reader handles are joined when finished.",
+    "orphan_process_policy": "Cancel calls kill and wait the child process; future PTY/process-group cleanup remains a follow-up.",
+    "backpressure_policy": "stdout/stderr are read on separate threads into bounded buffers."
+  },
+  "merge_strategy": "A CLI question becomes a deferred decision; only the affected lane waits for answer/resume while independent work can continue.",
+  "source_provenance": [
+    "https://v2.tauri.app/plugin/shell/",
+    "https://nodejs.org/api/child_process.html",
+    "_history/web-searches/2026/2026-06-03-question-deferral.ko.md"
+  ],
+  "plan_evidence": [
+    "The user explicitly requested question deferral features.",
+    "The existing desktop backend already controls child stdin/stdout/stderr pipes.",
+    "The existing decision inbox and answer/resume command can store and resume affected lanes."
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-03-question-deferral-cli-pipeline.json"
+  ],
+  "rollback_plan": [
+    "Disable the Auto-defer questions toggle by default.",
+    "Keep manual defer and answer/resume available while adapter-specific detection fixtures are improved."
+  ],
+  "notes": [
+    "Real CLI behavior still depends on user-installed optional adapters."
+  ]
+}

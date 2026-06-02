@@ -1,0 +1,19 @@
+{
+  "task_id": "2026-06-03-question-deferral",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes user-facing desktop orchestration behavior and Tauri CLI session handling, including multi-process pipe lifecycle and decision inbox behavior, but does not require public installer release work.",
+  "required_records": [
+    "web_search_record",
+    "requirements_change",
+    "project_spec",
+    "request_trace",
+    "work_summary",
+    "omission_check",
+    "resource_check",
+    "cli_pipeline_check",
+    "grounding_check",
+    "work_evaluation"
+  ]
+}

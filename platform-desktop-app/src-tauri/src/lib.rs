@@ -63,7 +63,11 @@ struct CliSession {
     exit_code: Option<i32>,
     finished: bool,
     defer_message_sent: bool,
+    auto_defer_questions: bool,
+    auto_defer_triggered: bool,
     decision_inbox_items: usize,
+    deferred_prompt_keys: Vec<String>,
+    decision_capture_error: Option<String>,
 }
 
 #[derive(Clone, Default)]
@@ -130,7 +134,12 @@ struct CliSessionReport {
     output_truncated: bool,
     working_dir: String,
     defer_message_sent: bool,
+    auto_defer_questions: bool,
+    auto_defer_triggered: bool,
     decision_inbox_items: usize,
+    pending_decision_prompts: usize,
+    deferred_prompt_count: usize,
+    decision_capture_error: Option<String>,
 }
 
 #[derive(Serialize)]
@@ -425,6 +434,7 @@ fn start_cli_adapter_session(
     adapter_id: String,
     prompt: String,
     working_dir: Option<String>,
+    auto_defer_questions: Option<bool>,
 ) -> Result<CliSessionReport, String> {
     if prompt.len() > MAX_SESSION_INPUT_BYTES {
         return Err(format!(
@@ -434,7 +444,12 @@ fn start_cli_adapter_session(
 
     let adapter = find_adapter(&adapter_id).ok_or_else(|| format!("Unknown adapter id: {adapter_id}"))?;
     let working_dir = resolve_workspace_dir(working_dir.as_deref())?;
-    let (session_id, mut session, report) = create_cli_session(adapter, &prompt, working_dir)?;
+    let (session_id, mut session, report) = create_cli_session(
+        adapter,
+        &prompt,
+        working_dir,
+        auto_defer_questions.unwrap_or(true),
+    )?;
     match store.sessions.lock() {
         Ok(mut sessions) => {
             sessions.insert(session_id, session);
@@ -454,6 +469,7 @@ fn start_cli_task_pipeline(
     task_kind: String,
     prompt: String,
     working_dir: Option<String>,
+    auto_defer_questions: Option<bool>,
 ) -> Result<CliTaskPipelineInitReport, String> {
     if prompt.len() > MAX_SESSION_INPUT_BYTES {
         return Err(format!(
@@ -500,7 +516,12 @@ fn start_cli_task_pipeline(
             append_pipe_edges(&mut pipe_reports, &pipeline_id, lane.lane_id, preset.merge_gate, &status);
             continue;
         }
-        match create_cli_session(adapter, &lane_prompt, resolved_working_dir.clone()) {
+        match create_cli_session(
+            adapter,
+            &lane_prompt,
+            resolved_working_dir.clone(),
+            auto_defer_questions.unwrap_or(true),
+        ) {
             Ok((session_id, session, report)) => {
                 let status = report.status.clone();
                 lane_reports.push(CliTaskPipelineLaneReport {
@@ -579,6 +600,7 @@ fn create_cli_session(
     adapter: &'static AdapterDefinition,
     prompt: &str,
     working_dir: PathBuf,
+    auto_defer_questions: bool,
 ) -> Result<(String, CliSession, CliSessionReport), String> {
     let path = resolve_command(adapter.command)
         .ok_or_else(|| format!("Command '{}' was not found on PATH.", adapter.command))?;
@@ -655,7 +677,11 @@ fn create_cli_session(
         exit_code: None,
         finished: false,
         defer_message_sent: false,
+        auto_defer_questions,
+        auto_defer_triggered: false,
         decision_inbox_items: 0,
+        deferred_prompt_keys: Vec::new(),
+        decision_capture_error: None,
     };
     let report = poll_session_locked(&session_id, &mut session);
     Ok((session_id, session, report))
@@ -716,6 +742,8 @@ fn write_cli_adapter_stdin(
         .and_then(|_| stdin.write_all(b"\n"))
         .and_then(|_| stdin.flush())
         .map_err(|error| format!("Failed to write stdin: {error}"))?;
+    session.defer_message_sent = false;
+    session.decision_capture_error = None;
     Ok(poll_session_locked(&session_id, session))
 }
 
@@ -734,19 +762,26 @@ fn send_cli_adapter_defer_message(
     if session.finished {
         return Err("Cannot defer a finished CLI session.".to_string());
     }
-    let stdin = session
-        .stdin
-        .as_mut()
-        .ok_or_else(|| "CLI session stdin is not available.".to_string())?;
-    stdin
-        .write_all(DEFER_MESSAGE.as_bytes())
-        .and_then(|_| stdin.write_all(b"\n"))
-        .and_then(|_| stdin.flush())
-        .map_err(|error| format!("Failed to send defer message: {error}"))?;
-    session.defer_message_sent = true;
-    let appended_count = append_session_decisions_to_inbox(&session_id, session)?;
-    session.decision_inbox_items += appended_count;
+    defer_session_questions_locked(&session_id, session, "manual")?;
     Ok(poll_session_locked(&session_id, session))
+}
+
+#[tauri::command]
+fn defer_all_cli_adapter_questions(store: State<'_, SessionStore>) -> Result<Vec<CliSessionReport>, String> {
+    let mut sessions = store
+        .sessions
+        .lock()
+        .map_err(|_| "Failed to lock CLI session store.".to_string())?;
+    let mut reports = Vec::new();
+    for (session_id, session) in sessions.iter_mut() {
+        if !session.finished {
+            if let Err(error) = defer_session_questions_locked(session_id, session, "bulk") {
+                session.decision_capture_error = Some(error);
+            }
+        }
+        reports.push(poll_session_locked(session_id, session));
+    }
+    Ok(reports)
 }
 
 #[tauri::command]
@@ -931,6 +966,7 @@ pub fn run() {
             list_cli_adapter_sessions,
             write_cli_adapter_stdin,
             send_cli_adapter_defer_message,
+            defer_all_cli_adapter_questions,
             cancel_cli_adapter_session,
             read_workspace_text_file,
             write_workspace_text_file,
@@ -1230,6 +1266,9 @@ fn poll_session_locked(session_id: &str, session: &mut CliSession) -> CliSession
         }
     }
 
+    if !session.finished {
+        auto_defer_session_questions_locked(session_id, session);
+    }
     join_finished_reader(&mut session.stdout_handle);
     join_finished_reader(&mut session.stderr_handle);
     session_report(session_id, session)
@@ -1251,6 +1290,14 @@ fn session_report(session_id: &str, session: &CliSession) -> CliSessionReport {
         .map(|value| value.clone())
         .unwrap_or_default();
     let combined = format!("{}\n{}", output.stdout, output.stderr);
+    let decision_prompts = detect_decision_prompts_for(&session.adapter_id, &session.label, &combined);
+    let pending_decision_prompts = decision_prompts
+        .iter()
+        .filter(|prompt| {
+            let key = decision_prompt_key(&prompt.question);
+            !session.deferred_prompt_keys.iter().any(|existing| existing == &key)
+        })
+        .count();
     let status = if !session.finished && session.defer_message_sent {
         "defer_message_sent".to_string()
     } else {
@@ -1267,13 +1314,18 @@ fn session_report(session_id: &str, session: &CliSession) -> CliSessionReport {
         elapsed_ms: session.started.elapsed().as_millis(),
         stdout: output.stdout,
         stderr: output.stderr,
-        decision_prompts: detect_decision_prompts_for(&session.adapter_id, &session.label, &combined),
+        decision_prompts,
         bounded: true,
         max_output_bytes: session.max_output_bytes,
         output_truncated: output.stdout_truncated || output.stderr_truncated,
         working_dir: session.working_dir.to_string_lossy().to_string(),
         defer_message_sent: session.defer_message_sent,
+        auto_defer_questions: session.auto_defer_questions,
+        auto_defer_triggered: session.auto_defer_triggered,
         decision_inbox_items: session.decision_inbox_items,
+        pending_decision_prompts,
+        deferred_prompt_count: session.deferred_prompt_keys.len(),
+        decision_capture_error: session.decision_capture_error.clone(),
     }
 }
 
@@ -1377,10 +1429,23 @@ fn detect_decision_prompts_for(adapter_id: &str, label: &str, output: &str) -> V
         .filter(|line| {
             let lower = line.to_lowercase();
             line.ends_with('?')
+                || line.ends_with('？')
                 || lower.contains("do you want")
+                || lower.contains("would you like")
+                || lower.contains("should i")
                 || lower.contains("continue?")
                 || lower.contains("permission")
                 || lower.contains("approve")
+                || lower.contains("confirm")
+                || lower.contains("proceed")
+                || lower.contains("yes/no")
+                || lower.contains("y/n")
+                || line.contains("선택")
+                || line.contains("승인")
+                || line.contains("계속")
+                || line.contains("진행")
+                || line.contains("확인")
+                || line.contains("질문")
         })
         .take(4)
         .map(|line| CliDecisionPrompt {
@@ -1393,14 +1458,90 @@ fn detect_decision_prompts_for(adapter_id: &str, label: &str, output: &str) -> V
         .collect()
 }
 
-fn append_session_decisions_to_inbox(session_id: &str, session: &CliSession) -> Result<usize, String> {
+fn auto_defer_session_questions_locked(session_id: &str, session: &mut CliSession) {
+    if !session.auto_defer_questions || session.defer_message_sent || session.stdin.is_none() {
+        return;
+    }
+    if let Err(error) = defer_session_questions_locked(session_id, session, "auto") {
+        session.decision_capture_error = Some(error);
+    }
+}
+
+fn defer_session_questions_locked(session_id: &str, session: &mut CliSession, mode: &str) -> Result<usize, String> {
+    if session.finished {
+        return Err("Cannot defer a finished CLI session.".to_string());
+    }
+
+    let prompts = new_session_decision_prompts(session);
+    if prompts.is_empty() {
+        if mode == "manual" && !session.defer_message_sent {
+            let stdin = session
+                .stdin
+                .as_mut()
+                .ok_or_else(|| "CLI session stdin is not available.".to_string())?;
+            stdin
+                .write_all(DEFER_MESSAGE.as_bytes())
+                .and_then(|_| stdin.write_all(b"\n"))
+                .and_then(|_| stdin.flush())
+                .map_err(|error| format!("Failed to send defer message: {error}"))?;
+            session.defer_message_sent = true;
+        }
+        return Ok(0);
+    }
+
+    {
+        let stdin = session
+            .stdin
+            .as_mut()
+            .ok_or_else(|| "CLI session stdin is not available.".to_string())?;
+        stdin
+            .write_all(DEFER_MESSAGE.as_bytes())
+            .and_then(|_| stdin.write_all(b"\n"))
+            .and_then(|_| stdin.flush())
+            .map_err(|error| format!("Failed to send defer message: {error}"))?;
+    }
+
+    session.defer_message_sent = true;
+    if mode == "auto" {
+        session.auto_defer_triggered = true;
+    }
+    let appended_count = append_session_decisions_to_inbox(session_id, session, &prompts, mode)?;
+    for prompt in prompts {
+        let key = decision_prompt_key(&prompt.question);
+        if !session.deferred_prompt_keys.iter().any(|existing| existing == &key) {
+            session.deferred_prompt_keys.push(key);
+        }
+    }
+    session.decision_inbox_items += appended_count;
+    Ok(appended_count)
+}
+
+fn session_decision_prompts(session: &CliSession) -> Vec<CliDecisionPrompt> {
     let output = session
         .output
         .lock()
         .map(|value| value.clone())
         .unwrap_or_default();
     let combined = format!("{}\n{}", output.stdout, output.stderr);
-    let prompts = detect_decision_prompts_for(&session.adapter_id, &session.label, &combined);
+    detect_decision_prompts_for(&session.adapter_id, &session.label, &combined)
+}
+
+fn new_session_decision_prompts(session: &CliSession) -> Vec<CliDecisionPrompt> {
+    session_decision_prompts(session)
+        .into_iter()
+        .filter(|prompt| {
+            let key = decision_prompt_key(&prompt.question);
+            !session.deferred_prompt_keys.iter().any(|existing| existing == &key)
+        })
+        .collect()
+}
+
+fn append_session_decisions_to_inbox(
+    session_id: &str,
+    session: &CliSession,
+    prompts: &[CliDecisionPrompt],
+    mode: &str,
+) -> Result<usize, String> {
     if prompts.is_empty() {
         return Ok(0);
     }
@@ -1427,15 +1568,19 @@ fn append_session_decisions_to_inbox(session_id: &str, session: &CliSession) -> 
     let timestamp = current_unix_millis_label();
     let mut new_decisions = Vec::new();
     let mut new_history = Vec::new();
-    for (index, prompt) in prompts.iter().enumerate() {
-        let decision_id = format!("desktop-cli-session-{}-{}", sanitize_file_name(session_id), index + 1);
+    for prompt in prompts.iter() {
+        let decision_id = format!(
+            "desktop-cli-session-{}-{}",
+            sanitize_file_name(session_id),
+            decision_prompt_key(&prompt.question)
+        );
         if existing_ids.iter().any(|existing| existing == &decision_id) {
             continue;
         }
 
         new_decisions.push(json!({
             "id": decision_id.clone(),
-            "status": "open",
+            "status": "deferred",
             "priority": "normal",
             "source": "platform-desktop-app.cli-session",
             "created_at": timestamp.clone(),
@@ -1459,7 +1604,9 @@ fn append_session_decisions_to_inbox(session_id: &str, session: &CliSession) -> 
                 "adapter_id": session.adapter_id.clone(),
                 "label": session.label.clone(),
                 "working_dir": session.working_dir.to_string_lossy().to_string(),
-                "defer_message_sent": session.defer_message_sent
+                "defer_message_sent": session.defer_message_sent,
+                "defer_mode": mode,
+                "prompt_key": decision_prompt_key(&prompt.question)
             }
         }));
         new_history.push(json!({
@@ -1467,8 +1614,8 @@ fn append_session_decisions_to_inbox(session_id: &str, session: &CliSession) -> 
             "actor": "platform-desktop-app",
             "decision_id": decision_id,
             "from_status": null,
-            "to_status": "open",
-            "reason": "CLI session decision prompt was collected after sending the defer message."
+            "to_status": "deferred",
+            "reason": format!("CLI session decision prompt was collected after sending a {mode} defer message.")
         }));
     }
 
@@ -1493,6 +1640,26 @@ fn append_session_decisions_to_inbox(session_id: &str, session: &CliSession) -> 
     fs::write(&canonical_inbox, format!("{formatted}\n"))
         .map_err(|error| format!("Failed to write human decision inbox: {error}"))?;
     Ok(appended_count)
+}
+
+fn decision_prompt_key(question: &str) -> String {
+    let dashed: String = question
+        .trim()
+        .to_lowercase()
+        .chars()
+        .map(|character| if character.is_ascii_alphanumeric() { character } else { '-' })
+        .collect();
+    let normalized = dashed
+        .split('-')
+        .filter(|part| !part.is_empty())
+        .take(10)
+        .collect::<Vec<_>>()
+        .join("-");
+    if normalized.is_empty() {
+        "question".to_string()
+    } else {
+        normalized.chars().take(80).collect()
+    }
 }
 
 fn read_human_decision_inbox_value() -> Result<(PathBuf, Value), String> {

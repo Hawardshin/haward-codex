@@ -28,6 +28,7 @@ These requirements define first-run, home, task execution, decision inbox, setti
 | PDA-UX-018 | The Desktop tab source-editing surface shall let users keep multiple files open as drafts and perform search/direct path open, dirty file queue review, diff preview, current save, save all, revert, close, and backup-result inspection in one screen. | must | workspace-monitor Desktop tab, visual QA, readiness/test |
 | PDA-UX-019 | First run and the Desktop tab shall make clear that the user starts the platform first, then adds external AI CLIs as guest lanes. A missing CLI shall appear as setup-later/capability_missing for that lane, not as platform failure. | must | user-flow registry, Workspace Monitor Desktop tab, readiness/test |
 | PDA-UX-020 | The Desktop tab shall let users choose a task pipe preset and initialize several CLI lanes from one task intake. The UI shall show lane count, adapter list, stdin/stdout/stderr pipes, decision inbox pipe, merge gate, and missing-lane state in one surface. | must | Workspace Monitor Desktop tab, user-flow registry, readiness/test |
+| PDA-UX-021 | The Desktop tab shall detect user questions in running CLI output, send a defer message to the affected lane while the user is away, store the question as a deferred decision inbox item, and let the user answer/resume later. Manual defer and bulk deferral of detected questions shall also be available. | must | Workspace Monitor Desktop tab, Tauri session commands, readiness/test |
 
 ## Current State
 

@@ -233,7 +233,12 @@ type CliSessionReport = {
   outputTruncated: boolean;
   workingDir: string;
   deferMessageSent: boolean;
+  autoDeferQuestions: boolean;
+  autoDeferTriggered: boolean;
   decisionInboxItems: number;
+  pendingDecisionPrompts: number;
+  deferredPromptCount: number;
+  decisionCaptureError?: string | null;
 };
 
 type CliTaskPipelinePresetReport = {
@@ -1711,6 +1716,7 @@ function DesktopRuntimePanel({
   const [selectedSessionAdapterId, setSelectedSessionAdapterId] = useState(fallbackDesktopAdapters[0].adapterId);
   const [workingDir, setWorkingDir] = useState("");
   const [sessionPrompt, setSessionPrompt] = useState(sessionModePresets[0].prompt);
+  const [autoDeferQuestions, setAutoDeferQuestions] = useState(true);
   const [sessionInput, setSessionInput] = useState("");
   const [selectedDecisionId, setSelectedDecisionId] = useState("");
   const [decisionAnswerType, setDecisionAnswerType] = useState("instruction");
@@ -1764,6 +1770,7 @@ function DesktopRuntimePanel({
     ...reports.flatMap((report) => report.decisionPrompts || []),
     ...sessions.flatMap((session) => session.decisionPrompts || [])
   ];
+  const pendingQuestionCount = sessions.reduce((total, session) => total + (session.pendingDecisionPrompts || 0), 0);
   const selectedSession = sessions.find((session) => session.sessionId === selectedSessionId) || sessions[0] || null;
   const selectedDecision = (inboxReport?.decisions || []).find((decision) => decision.id === selectedDecisionId) || openInboxDecisions[0] || null;
   const selectedDecisionSession = selectedDecision?.sessionId
@@ -1786,10 +1793,20 @@ function DesktopRuntimePanel({
   const sessionStats = useMemo(() => {
     const active = sessions.filter((session) => isActiveSessionStatus(session.status)).length;
     const deferred = sessions.filter((session) => session.status === "defer_message_sent").length;
+    const autoDeferred = sessions.filter((session) => session.autoDeferTriggered).length;
     const outputBytes = sessions.reduce((total, session) => total + session.stdout.length + session.stderr.length, 0);
     const inboxItems = sessions.reduce((total, session) => total + session.decisionInboxItems, 0);
-    return { active, deferred, outputBytes, inboxItems };
+    return { active, deferred, autoDeferred, outputBytes, inboxItems };
   }, [sessions]);
+  const activeSessionPollKey = useMemo(
+    () =>
+      sessions
+        .filter((session) => isActiveSessionStatus(session.status))
+        .map((session) => session.sessionId)
+        .sort()
+        .join("|"),
+    [sessions]
+  );
   const outputEvents = useMemo(() => {
     const sessionEvents = sessions.flatMap((session) =>
       detectOutputEvents(session.sessionId, session.adapterId, `${session.stdout}\n${session.stderr}`)
@@ -2059,7 +2076,8 @@ function DesktopRuntimePanel({
     setError("");
     const args: Record<string, unknown> = {
       adapterId: selectedSessionAdapterId,
-      prompt: sessionPrompt
+      prompt: sessionPrompt,
+      autoDeferQuestions
     };
     if (workingDir.trim()) {
       args.workingDir = workingDir.trim();
@@ -2091,7 +2109,8 @@ function DesktopRuntimePanel({
     setError("");
     const args: Record<string, unknown> = {
       taskKind: selectedTaskPipe.taskKind,
-      prompt: taskPipePrompt
+      prompt: taskPipePrompt,
+      autoDeferQuestions
     };
     if (workingDir.trim()) {
       args.workingDir = workingDir.trim();
@@ -2163,6 +2182,28 @@ function DesktopRuntimePanel({
       await refreshDecisionInbox();
     } catch (caught) {
       setError(errorMessage(caught));
+    }
+  };
+
+  const deferDetectedQuestions = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      return;
+    }
+
+    setDecisionBusy(true);
+    setError("");
+    try {
+      const reports = await tauriInvoke<CliSessionReport[]>("defer_all_cli_adapter_questions");
+      setSessions(reports);
+      const inbox = await tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox");
+      setInboxReport(inbox);
+      const nextOpen = inbox.decisions.find((decision) => isOpenDecisionStatus(decision.status));
+      setSelectedDecisionId(nextOpen?.id || inbox.decisions[0]?.id || "");
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setDecisionBusy(false);
     }
   };
 
@@ -2427,6 +2468,52 @@ function DesktopRuntimePanel({
   }, []);
 
   useEffect(() => {
+    const tauriInvoke = getTauriInvoke();
+    const activeSessionIds = activeSessionPollKey.split("|").filter(Boolean);
+    if (!tauriInvoke || runtimeState !== "available" || activeSessionIds.length === 0) {
+      return undefined;
+    }
+
+    let disposed = false;
+    const pollActiveSessions = async () => {
+      try {
+        const reports = await Promise.all(
+          activeSessionIds.map((sessionId) =>
+            tauriInvoke<CliSessionReport>("poll_cli_adapter_session", { sessionId }).catch(() => null)
+          )
+        );
+        const nextReports = reports.filter((report): report is CliSessionReport => Boolean(report));
+        if (disposed || nextReports.length === 0) {
+          return;
+        }
+        const reportIds = new Set(nextReports.map((report) => report.sessionId));
+        setSessions((current) => [...nextReports, ...current.filter((session) => !reportIds.has(session.sessionId))]);
+        if (nextReports.some((report) => report.autoDeferTriggered || report.decisionInboxItems > 0)) {
+          const inbox = await tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox");
+          if (disposed) {
+            return;
+          }
+          setInboxReport(inbox);
+          setSelectedDecisionId((current) => current || inbox.decisions[0]?.id || "");
+        }
+      } catch (caught) {
+        if (!disposed) {
+          setError(errorMessage(caught));
+        }
+      }
+    };
+
+    void pollActiveSessions();
+    const interval = window.setInterval(() => {
+      void pollActiveSessions();
+    }, 2000);
+    return () => {
+      disposed = true;
+      window.clearInterval(interval);
+    };
+  }, [activeSessionPollKey, runtimeState]);
+
+  useEffect(() => {
     if (!selectedSourcePath && sourceFiles[0]) {
       setSelectedSourcePath(sourceFiles[0].path);
     }
@@ -2456,7 +2543,8 @@ function DesktopRuntimePanel({
         <Metric label="Task Pipes" value={pipelineReports.length} icon={GitBranch} tone="rose" />
         <Metric label="Decision Items" value={decisionPrompts.length + blockedTaskCount + openInboxDecisions.length} icon={Inbox} tone="amber" />
         <Metric label="Agent Configs" value={agentCatalogCount} icon={Bot} tone="violet" />
-        <Metric label="Source Files" value={sourceFileCount} icon={Code2} tone="slate" />
+        <Metric label="Auto Deferred" value={sessionStats.autoDeferred} icon={ShieldCheck} tone="slate" />
+        <Metric label="Source Files" value={sourceFileCount} icon={Code2} tone="green" />
       </section>
 
       <section className="panel wide desktop-command-panel">
@@ -2492,6 +2580,11 @@ function DesktopRuntimePanel({
             <span>Refresh decisions</span>
             <small>{openInboxDecisions.length} open</small>
           </button>
+          <button type="button" onClick={deferDetectedQuestions} disabled={!invoke || decisionBusy || pendingQuestionCount === 0}>
+            <ShieldCheck size={16} aria-hidden="true" />
+            <span>Defer detected questions</span>
+            <small>{pendingQuestionCount} pending</small>
+          </button>
           <button type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !selectedSourcePath}>
             <GitBranch size={16} aria-hidden="true" />
             <span>Open source review</span>
@@ -2524,6 +2617,14 @@ function DesktopRuntimePanel({
             <label className="session-prompt-field">
               <span>Task intake</span>
               <textarea value={taskPipePrompt} onChange={(event) => setTaskPipePrompt(event.target.value)} rows={4} />
+            </label>
+            <label className="inline-toggle">
+              <input
+                type="checkbox"
+                checked={autoDeferQuestions}
+                onChange={(event) => setAutoDeferQuestions(event.target.checked)}
+              />
+              <span>Auto-defer questions</span>
             </label>
             <button type="button" onClick={initTaskPipe} disabled={!invoke || runningAdapterId !== "" || !taskPipePrompt.trim()}>
               <Network size={16} aria-hidden="true" />
@@ -2702,6 +2803,10 @@ function DesktopRuntimePanel({
             <strong>{sessionStats.deferred}</strong>
           </article>
           <article>
+            <span>auto deferred</span>
+            <strong>{sessionStats.autoDeferred}</strong>
+          </article>
+          <article>
             <span>output</span>
             <strong>{formatBytes(sessionStats.outputBytes)}</strong>
           </article>
@@ -2766,6 +2871,14 @@ function DesktopRuntimePanel({
             <span>Initial input</span>
             <textarea value={sessionPrompt} onChange={(event) => setSessionPrompt(event.target.value)} rows={4} />
           </label>
+          <label className="inline-toggle">
+            <input
+              type="checkbox"
+              checked={autoDeferQuestions}
+              onChange={(event) => setAutoDeferQuestions(event.target.checked)}
+            />
+            <span>Auto-defer questions</span>
+          </label>
           <button
             type="button"
             onClick={startSession}
@@ -2795,13 +2908,23 @@ function DesktopRuntimePanel({
                   <div className="adapter-report">
                     <span>{session.elapsedMs}ms</span>
                     <span>{session.exitCode ?? "no code"}</span>
-                    <span>{session.decisionInboxItems ? `${session.decisionInboxItems} inbox` : session.outputTruncated ? "truncated" : "bounded"}</span>
+                    <span>
+                      {session.pendingDecisionPrompts
+                        ? `${session.pendingDecisionPrompts} pending`
+                        : session.decisionInboxItems
+                          ? `${session.decisionInboxItems} inbox`
+                          : session.outputTruncated
+                            ? "truncated"
+                            : "bounded"}
+                    </span>
                   </div>
                   <div className="lane-mini-timeline">
                     <span>started</span>
-                    <span>{session.deferMessageSent ? "deferred" : "streaming"}</span>
+                    <span>{session.deferMessageSent ? (session.autoDeferTriggered ? "auto-deferred" : "deferred") : "streaming"}</span>
+                    <span>{session.autoDeferQuestions ? `${session.deferredPromptCount} held` : "manual hold"}</span>
                     <span>{isActiveSessionStatus(session.status) ? "open" : "finished"}</span>
                   </div>
+                  {session.decisionCaptureError && <p className="desktop-error">{session.decisionCaptureError}</p>}
                   <div className="desktop-actions">
                     <button type="button" onClick={() => setSelectedSessionId(session.sessionId)}>
                       <ListFilter size={15} aria-hidden="true" />

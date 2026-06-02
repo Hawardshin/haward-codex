@@ -28,6 +28,7 @@
 | PDA-UX-018 | Desktop 탭의 source editing 화면은 사용자가 여러 파일을 열린 드래프트로 유지하고, 검색/직접 경로 열기, dirty 파일 큐, diff preview, 현재 저장, 전체 저장, 되돌리기, 닫기, backup 결과 확인을 한 화면에서 수행할 수 있어야 한다. | must | workspace-monitor Desktop tab, visual QA, readiness/test |
 | PDA-UX-019 | 첫 실행과 Desktop 탭은 사용자가 플랫폼을 먼저 실행한 뒤 외부 AI CLI를 guest lane으로 추가한다는 관계를 명확히 보여야 한다. 누락된 CLI는 플랫폼 실패가 아니라 해당 lane의 setup-later/capability_missing 상태로 보여야 한다. | must | user-flow registry, Workspace Monitor Desktop tab, readiness/test |
 | PDA-UX-020 | Desktop 탭은 사용자가 task pipe preset을 선택하고 하나의 task intake로 여러 CLI lane을 초기화하는 흐름을 제공해야 한다. UI는 lane 수, adapter 목록, stdin/stdout/stderr pipe, decision inbox pipe, merge gate, missing lane 상태를 한 화면에서 보여야 한다. | must | Workspace Monitor Desktop tab, user-flow registry, readiness/test |
+| PDA-UX-021 | Desktop 탭은 실행 중인 CLI output에서 사용자 질문을 감지하면 사용자가 자리를 비운 상태에서도 해당 lane에 defer 메시지를 보내고, 질문을 decision inbox에 보류 항목으로 저장하며, 사용자가 돌아오면 answer/resume으로 연결할 수 있어야 한다. 수동 보류와 전체 감지 질문 보류도 제공해야 한다. | must | Workspace Monitor Desktop tab, Tauri session commands, readiness/test |
 
 ## 현재 상태
 

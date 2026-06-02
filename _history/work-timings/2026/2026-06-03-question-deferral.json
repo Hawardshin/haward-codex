@@ -1,0 +1,48 @@
+{
+  "task_id": "2026-06-03-question-deferral",
+  "title": "Add CLI question deferral features",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "check CLI process and decision UI references",
+      "status": "completed",
+      "duration_seconds": 300,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official Tauri, Node.js, and WAI-ARIA references were checked before implementation."
+    },
+    {
+      "phase_id": "local_analysis",
+      "label": "inspect Tauri sessions and Workspace Monitor decision UI",
+      "status": "completed",
+      "duration_seconds": 600,
+      "measurement": "estimated",
+      "bottleneck_notes": "Existing manual defer, decision inbox, and answer/resume paths reduced implementation scope."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "add automatic manual and bulk question deferral",
+      "status": "completed",
+      "duration_seconds": 2100,
+      "measurement": "estimated",
+      "bottleneck_notes": "The longest phase touched Rust session state, React UI, CSS, readiness tests, and active polling behavior."
+    },
+    {
+      "phase_id": "records",
+      "label": "write requirements specs traces and evaluation inputs",
+      "status": "completed",
+      "duration_seconds": 1500,
+      "measurement": "estimated",
+      "bottleneck_notes": "Repository standard-mode gates required bilingual specs, requirement changes, traces, and evaluator inputs."
+    },
+    {
+      "phase_id": "validation",
+      "label": "run tests check build perf static smoke and evaluators",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "Validator input schema needed one correction for resource and CLI pipeline records."
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "task": "Ground factual claims for CLI question deferral.",
+  "output_summary": "The desktop platform can defer detected CLI questions into the decision inbox and later answer/resume the affected lane.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "tauri-session-source",
+      "source": "platform-desktop-app/src-tauri/src/lib.rs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Primary backend implementation for CLI sessions and decision inbox writes."
+    },
+    {
+      "evidence_id": "monitor-ui-source",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Primary UI implementation for auto-deferral controls and active-session polling."
+    },
+    {
+      "evidence_id": "readiness-tests",
+      "source": "platform-desktop-app/tests/readiness.test.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Regression test asserts command and UI tokens are present."
+    },
+    {
+      "evidence_id": "official-references",
+      "source": "_history/web-searches/2026/2026-06-03-question-deferral.ko.md",
+      "source_type": "web_source",
+      "checked_on": "2026-06-03",
+      "reliability": "Public source record for official Tauri, Node.js, and WAI-ARIA references."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The backend exposes automatic/manual/bulk CLI question deferral and stores deferred decisions in the human decision inbox.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-session-source",
+        "readiness-tests"
+      ],
+      "verification_steps": [
+        "Read backend source and ran readiness validation."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The Desktop UI exposes auto-deferral controls and periodically polls active sessions.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui-source",
+        "readiness-tests"
+      ],
+      "verification_steps": [
+        "Read UI source and checked built output tokens."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Child-process stdin/stdout/stderr pipes are an appropriate control boundary for CLI orchestration.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "official-references"
+      ],
+      "verification_steps": [
+        "Checked Tauri shell plugin and Node.js child_process documentation."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Question detection is heuristic and should gain adapter-specific fixture tests.",
+    "Native Rust compile validation depends on local toolchain availability."
+  ],
+  "limitation_notes": [
+    "No optional CLI was installed or made mandatory.",
+    "Public macOS app distribution remains gated by signing/notarization."
+  ]
+}
