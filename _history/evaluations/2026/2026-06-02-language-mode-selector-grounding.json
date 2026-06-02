@@ -1,0 +1,146 @@
+{
+  "task": "Ground final claims for the Workspace Monitor language mode selector.",
+  "output_summary": "The platform now has a language mode registry and Workspace Monitor can select all-language, Korean-only, and English-only document views.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "registry",
+      "source": "agent-platform/configs/access/language-mode-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "new tracked source of truth"
+    },
+    {
+      "evidence_id": "collector",
+      "source": "workspace-monitor/scripts/collect-workspace.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "implementation file"
+    },
+    {
+      "evidence_id": "ui",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "implementation file"
+    },
+    {
+      "evidence_id": "snapshot",
+      "source": "workspace-monitor/src/generated/workspace-snapshot.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "generated after npm run collect/build"
+    },
+    {
+      "evidence_id": "tests",
+      "source": "npm test, npm run check, npm run build, local curl smoke check",
+      "source_type": "test_result",
+      "checked_on": "2026-06-02",
+      "reliability": "commands completed with exit code 0"
+    },
+    {
+      "evidence_id": "next-i18n",
+      "source": "https://nextjs.org/docs/app/building-your-application/routing/internationalization",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "official documentation"
+    },
+    {
+      "evidence_id": "next-static",
+      "source": "https://nextjs.org/docs/pages/guides/static-exports",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "official documentation"
+    },
+    {
+      "evidence_id": "w3c-bcp47",
+      "source": "https://www.w3.org/International/articles/bcp47/index.en",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "standards-oriented W3C internationalization guidance"
+    }
+  ],
+  "claims": [
+    {
+      "statement": "A new language mode registry exists with all-language, Korean-only, and English-only modes.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "registry"
+      ],
+      "verification_steps": [
+        "check-config-contract configs/access/language-mode-registry.json"
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace Monitor snapshots include languageModeCatalog with default mode all.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "collector",
+        "snapshot",
+        "tests"
+      ],
+      "verification_steps": [
+        "npm run collect",
+        "npm test"
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace Monitor renders toolbar options for 전체, 한국어만, and English Only.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "ui",
+        "tests"
+      ],
+      "verification_steps": [
+        "npm run dev -- --port 3100",
+        "curl -s http://localhost:3100 | rg -n \"한국어만|English Only|전체|languageModeCatalog\""
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The current implementation is a data-level display filter rather than route-level i18n or translation.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "next-i18n",
+        "next-static",
+        "collector",
+        "ui"
+      ],
+      "verification_steps": [
+        "reviewed web-search record and implementation scope"
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "The language ids ko and en are standard language tag choices for this simple workspace language lens.",
+      "claim_type": "recommendation",
+      "support_level": "supported",
+      "evidence_ids": [
+        "w3c-bcp47",
+        "registry"
+      ],
+      "verification_steps": [
+        "reviewed W3C BCP 47 guidance and registry supported_languages"
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "The current validation used curl HTML smoke checking instead of an interactive browser screenshot because Browser tools were unavailable and Playwright is not installed in the monitor project."
+  ],
+  "limitation_notes": [
+    "Language mode is not a public snapshot redaction mechanism.",
+    "Route-level i18n, translation, and per-user locale preference are still out of scope."
+  ]
+}

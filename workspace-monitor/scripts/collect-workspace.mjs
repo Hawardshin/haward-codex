@@ -102,6 +102,7 @@ export function buildSnapshot(repoRoot) {
   const historyDays = buildHistoryDays(documents);
   const folderStructure = buildFolderStructure(repoRoot, projects, documents);
   const viewModeCatalog = collectViewModeCatalog(repoRoot);
+  const languageModeCatalog = collectLanguageModeCatalog(repoRoot);
   const sourceFiles = collectSourceFiles(repoRoot, projects);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
   const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
@@ -143,6 +144,7 @@ export function buildSnapshot(repoRoot) {
     sourceFiles,
     folderStructure,
     viewModeCatalog,
+    languageModeCatalog,
     categories,
     publicReview: {
       status: "review_required_before_public_deploy",
@@ -353,6 +355,59 @@ export function collectViewModeCatalog(repoRoot) {
 
   return {
     defaultMode: registry.default_mode || "superadmin_developer",
+    modes
+  };
+}
+
+export function collectLanguageModeCatalog(repoRoot) {
+  const registry = readJson(path.join(repoRoot, "agent-platform", "configs", "access", "language-mode-registry.json"), {
+    default_mode: "all",
+    modes: [
+      {
+        id: "all",
+        label: "All Languages",
+        display_label: "전체",
+        intent: "Show every collected document.",
+        included_languages: ["ko", "en"],
+        include_unknown: true,
+        document_rule: "Show documents tagged ko, en, or unknown."
+      },
+      {
+        id: "ko",
+        label: "Korean Only",
+        display_label: "한국어만",
+        intent: "Show only Korean documents.",
+        included_languages: ["ko"],
+        include_unknown: false,
+        document_rule: "Show only documents tagged ko."
+      },
+      {
+        id: "en",
+        label: "English Only",
+        display_label: "English Only",
+        intent: "Show only English documents.",
+        included_languages: ["en"],
+        include_unknown: false,
+        document_rule: "Show only documents tagged en."
+      }
+    ]
+  });
+  const modes = Array.isArray(registry.modes)
+    ? registry.modes
+        .filter((mode) => mode && typeof mode === "object")
+        .map((mode) => ({
+          id: mode.id || "",
+          label: mode.display_label || mode.label || mode.id || "",
+          intent: mode.intent || "",
+          includedLanguages: Array.isArray(mode.included_languages) ? mode.included_languages : [],
+          includeUnknown: Boolean(mode.include_unknown),
+          documentRule: mode.document_rule || ""
+        }))
+        .filter((mode) => mode.id)
+    : [];
+
+  return {
+    defaultMode: registry.default_mode || "all",
     modes
   };
 }

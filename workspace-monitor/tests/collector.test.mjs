@@ -8,6 +8,7 @@ import {
   buildAgentCollaborationBoard,
   buildSnapshot,
   collectAgentCatalog,
+  collectLanguageModeCatalog,
   collectSourceFiles,
   collectViewModeCatalog,
   extractHistoryDate,
@@ -52,6 +53,7 @@ test("buildSnapshot reads minimal repository shape", () => {
   fs.mkdirSync(path.join(root, "_history", "work-summaries", "2026"), { recursive: true });
   fs.mkdirSync(path.join(root, "_docs"), { recursive: true });
   fs.mkdirSync(path.join(root, "_requirements", "baselines"), { recursive: true });
+  fs.mkdirSync(path.join(root, "agent-platform", "configs", "access"), { recursive: true });
   fs.mkdirSync(path.join(root, "agent-platform", "configs", "agents"), { recursive: true });
   fs.mkdirSync(path.join(root, "agent-platform", "docs"), { recursive: true });
   fs.mkdirSync(path.join(root, "demo", "src"), { recursive: true });
@@ -83,6 +85,32 @@ test("buildSnapshot reads minimal repository shape", () => {
       metadata: { status: "active", trigger: "demo trigger" }
     })
   );
+  fs.writeFileSync(
+    path.join(root, "agent-platform", "configs", "access", "language-mode-registry.json"),
+    JSON.stringify({
+      default_mode: "all",
+      modes: [
+        {
+          id: "all",
+          label: "All Languages",
+          display_label: "전체",
+          intent: "All docs",
+          included_languages: ["ko", "en"],
+          include_unknown: true,
+          document_rule: "All docs"
+        },
+        {
+          id: "ko",
+          label: "Korean Only",
+          display_label: "한국어만",
+          intent: "Korean docs",
+          included_languages: ["ko"],
+          include_unknown: false,
+          document_rule: "Korean docs"
+        }
+      ]
+    })
+  );
   fs.writeFileSync(path.join(root, "agent-platform", "docs", "demo-agent.ko.md"), "# Demo Agent\n\n설명");
   fs.writeFileSync(
     path.join(root, "_docs", "registry.json"),
@@ -108,7 +136,7 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.stats.completedTasks, 1);
   assert.equal(snapshot.collaborationBoard.summary.completedTasks, 1);
   assert.equal(snapshot.collaborationBoard.flows.length, 1);
-  assert.equal(snapshot.documents.length, 6);
+  assert.equal(snapshot.documents.length, 7);
   assert.equal(snapshot.stats.sourceFiles, 1);
   assert.equal(snapshot.sourceFiles[0].language, "python");
   assert.match(snapshot.sourceFiles[0].content, /hello/);
@@ -120,6 +148,9 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.folderStructure.docsCategories[0].path, "_docs/instructions");
   assert.equal(snapshot.requirements[0].id, "REQ-WM-001");
   assert.equal(snapshot.viewModeCatalog.defaultMode, "superadmin_developer");
+  assert.equal(snapshot.languageModeCatalog.defaultMode, "all");
+  assert.equal(snapshot.languageModeCatalog.modes[1].id, "ko");
+  assert.equal(snapshot.documents.some((document) => document.language === "ko"), true);
 });
 
 test("buildAgentCollaborationBoard groups agent work by lane", () => {
@@ -188,6 +219,45 @@ test("collectViewModeCatalog reads platform access modes", () => {
   assert.equal(catalog.defaultMode, "superadmin_developer");
   assert.equal(catalog.modes.length, 1);
   assert.deepEqual(catalog.modes[0].allowedSections, ["overview", "agents"]);
+});
+
+test("collectLanguageModeCatalog reads document language modes", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-language-mode-test-"));
+  fs.mkdirSync(path.join(root, "agent-platform", "configs", "access"), { recursive: true });
+  fs.writeFileSync(
+    path.join(root, "agent-platform", "configs", "access", "language-mode-registry.json"),
+    JSON.stringify({
+      default_mode: "ko",
+      modes: [
+        {
+          id: "ko",
+          label: "Korean Only",
+          display_label: "한국어만",
+          intent: "Korean docs only",
+          included_languages: ["ko"],
+          include_unknown: false,
+          document_rule: "Show ko"
+        },
+        {
+          id: "en",
+          label: "English Only",
+          display_label: "English Only",
+          intent: "English docs only",
+          included_languages: ["en"],
+          include_unknown: false,
+          document_rule: "Show en"
+        }
+      ]
+    })
+  );
+
+  const catalog = collectLanguageModeCatalog(root);
+
+  assert.equal(catalog.defaultMode, "ko");
+  assert.equal(catalog.modes.length, 2);
+  assert.deepEqual(catalog.modes[0].includedLanguages, ["ko"]);
+  assert.equal(catalog.modes[0].includeUnknown, false);
+  assert.equal(catalog.modes[0].label, "한국어만");
 });
 
 test("collectAgentCatalog merges definitions with runtime status", () => {

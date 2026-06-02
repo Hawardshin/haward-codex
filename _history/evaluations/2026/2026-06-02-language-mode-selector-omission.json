@@ -1,0 +1,183 @@
+{
+  "task": "Add Korean-only and English-only language modes to Workspace Monitor and shared platform document display.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "language-mode-registry",
+      "description": "Create a durable source of truth for all-language, Korean-only, and English-only document viewing.",
+      "source": "UR-2026-06-02-032, REQ-WS-072",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/access/language-mode-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "monitor-selector",
+      "description": "Expose the language mode selector in Workspace Monitor.",
+      "source": "REQ-WM-015",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/specs/2026-06-02-language-mode-selector/validation.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "snapshot-catalog",
+      "description": "Include language mode metadata in generated snapshots.",
+      "source": "REQ-WM-015",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "workspace-monitor/src/generated/workspace-snapshot.json",
+        "workspace-monitor/public/workspace-snapshot.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "language-filter-scope",
+      "description": "Apply the same language lens to documents, history, recent history, and metric counts without touching source-code language filters.",
+      "source": "REQ-WM-015",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "mode-boundary",
+      "description": "Keep language_mode separate from view_mode, work_mode, install_mode, and source-code language filters.",
+      "source": "REQ-WS-072",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/access/language-mode-registry.json",
+        "AGENTS.md",
+        "_docs/instructions/persistent-instructions.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "no-translation",
+      "description": "Implement document filtering, not translation.",
+      "source": "scope review",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "workspace-monitor/specs/2026-06-02-language-mode-selector/spec.ko.md"
+      ],
+      "rationale": "The user asked for viewing modes, and translation would add a separate data-quality and review problem."
+    },
+    {
+      "item_id": "route-level-i18n",
+      "description": "Implement route-level locale URLs.",
+      "source": "web search and architecture decision",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-language-mode-selector.ko.md",
+        "_history/plans/2026/2026-06-02-language-mode-selector.ko.md"
+      ],
+      "rationale": "The current static snapshot UI needs document-language filtering, not URL locale routing."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/access/language-mode-registry.json",
+      "purpose": "Source of truth for document language modes.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Language selector UI and filtering logic.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/scripts/collect-workspace.mjs",
+      "purpose": "Snapshot collector support for languageModeCatalog.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/tests/collector.test.mjs",
+      "purpose": "Collector tests for language mode catalog.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/specs/2026-06-02-language-mode-selector/spec.ko.md",
+      "purpose": "Project spec artifact.",
+      "required": true
+    },
+    {
+      "path": "_history/work-timings/2026/2026-06-02-language-mode-selector.json",
+      "purpose": "Timing and bottleneck record.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "Language mode registry validates as self-documenting config.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/access/language-mode-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "memory-bootstrap",
+      "description": "Memory bootstrap validates with language_mode_registry anchor.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-tests",
+      "description": "Workspace Monitor collector tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm test: 10 tests passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-build",
+      "description": "Workspace Monitor collect, type check, and static build pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm run collect",
+        "npm run check",
+        "npm run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "local-render-smoke",
+      "description": "Local dev server renders the language selector options.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm run dev -- --port 3100",
+        "curl found 전체, 한국어만, English Only, and languageModeCatalog"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Browser screenshot verification was not run because the in-app Browser tool was not exposed and Playwright is not installed in workspace-monitor.",
+    "The language selector does not remove documents from a public snapshot; future public deployment must use collector or publication redaction if needed."
+  ],
+  "notes": [
+    "This task intentionally uses data-level filtering instead of route-level i18n."
+  ]
+}

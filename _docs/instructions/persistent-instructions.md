@@ -147,6 +147,7 @@
 - Use Korean for user-facing docs and history by default.
 - Use English for executable prompt bodies.
 - Create paired Korean and English docs for important durable policies, workflows, and project explanations.
+- Document browsers, dashboards, and generated snapshots use `agent-platform/configs/access/language-mode-registry.json` to keep all-language, Korean-only, and English-only viewing separate from `view_mode`, `work_mode`, `install_mode`, and source-code language filters.
 
 ## Maintenance Rule
 

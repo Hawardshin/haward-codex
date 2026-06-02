@@ -1,0 +1,223 @@
+{
+  "schema_version": "2026-06-02",
+  "name": "language-mode-registry",
+  "purpose": "Defines selectable Korean, English, and all-language document viewing modes for repository dashboards, monitor UIs, generated snapshots, and future desktop surfaces.",
+  "reader_guide": {
+    "summary": "Use this registry when a UI or document browser needs to show only Korean documents, only English documents, or every collected document. This is a display lens, not translation or authorization.",
+    "how_to_read": [
+      "Read mode_boundary first so language_mode is not confused with view_mode, work_mode, install_mode, or source-code language filters.",
+      "Use supported_languages to understand the file suffixes and BCP 47 language tags recognized by repository collectors.",
+      "Use modes[].included_languages and modes[].include_unknown to decide which documents remain visible.",
+      "Keep default_mode stable unless the owner changes the repository-wide viewing default.",
+      "Treat unknown documents as mixed or language-neutral records; single-language modes hide them by default to honor 'only Korean' and 'only English' views."
+    ],
+    "owner": "agent-platform",
+    "last_reviewed": "2026-06-02",
+    "update_triggers": [
+      "A new document language becomes a first-class workspace language.",
+      "Workspace Monitor or a desktop UI changes document language filtering behavior.",
+      "File suffix conventions for paired Korean and English docs change.",
+      "The default repository document language view changes.",
+      "Static export, routing, or deployment constraints make route-level internationalization desirable or impossible."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "nextjs_app_i18n",
+      "title": "Next.js App Router Internationalization Guide",
+      "url": "https://nextjs.org/docs/app/building-your-application/routing/internationalization",
+      "source_type": "official_docs",
+      "used_for": [
+        "understanding route-level internationalization options",
+        "checking whether UI locale routing is needed for this monitor"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "nextjs_static_export",
+      "title": "Next.js Static Exports",
+      "url": "https://nextjs.org/docs/pages/guides/static-exports",
+      "source_type": "official_docs",
+      "used_for": [
+        "static export deployment constraints",
+        "choosing client-side data filtering over route-level locale routing for the current monitor"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "w3c_bcp47_language_tags",
+      "title": "W3C Understanding the New Language Tags",
+      "url": "https://www.w3.org/International/articles/bcp47/index.en",
+      "source_type": "standard_reference",
+      "used_for": [
+        "BCP 47 language tag vocabulary",
+        "using stable language ids such as ko and en"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "view_mode_registry",
+      "title": "View Mode Registry",
+      "path": "agent-platform/configs/access/view-mode-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "keeping audience visibility separate from document language filtering"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "workspace_monitor_requirements",
+      "title": "Workspace Monitor Requirements",
+      "path": "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "linking language view behavior to monitor product requirements"
+      ],
+      "last_checked": "2026-06-02"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "language_mode_is_display_lens",
+      "rule": "language_mode controls which collected documents are visible in a UI; it does not translate content and does not remove data from generated snapshots by itself.",
+      "reason": "The user asked for Korean-only and English-only viewing modes, not a translation pipeline or security boundary.",
+      "applies_to": [
+        "modes",
+        "workspace-monitor"
+      ]
+    },
+    {
+      "id": "language_mode_is_independent",
+      "rule": "language_mode must stay independent from view_mode, work_mode, install_mode, and source-code language filters.",
+      "reason": "Audience role, task strictness, setup profile, programming language, and document language answer different questions.",
+      "applies_to": [
+        "mode_boundary",
+        "modes",
+        "selection_rules"
+      ]
+    },
+    {
+      "id": "use_bcp47_primary_tags",
+      "rule": "First-class document language ids should use stable BCP 47 primary language tags such as ko and en unless a more specific tag becomes necessary.",
+      "reason": "Simple, standard language ids are easier to share across collectors, UI filters, and future desktop surfaces.",
+      "applies_to": [
+        "supported_languages",
+        "modes[].included_languages"
+      ]
+    },
+    {
+      "id": "single_language_modes_hide_unknown",
+      "rule": "Korean-only and English-only modes hide unknown-language documents unless a future mode explicitly opts in with include_unknown=true.",
+      "reason": "A single-language view should mean only that language is visible; mixed or unsuffixed records can be reviewed in all-language mode.",
+      "applies_to": [
+        "modes[ko]",
+        "modes[en]"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "mode_boundary",
+      "meaning": "Explains what language_mode controls and how it differs from other workspace modes.",
+      "required": true
+    },
+    {
+      "field": "default_mode",
+      "meaning": "Fallback document language lens when the UI has no explicit language selection.",
+      "required": true
+    },
+    {
+      "field": "supported_languages[].id",
+      "meaning": "Stable document language id used by collectors and UI filters.",
+      "required": true
+    },
+    {
+      "field": "supported_languages[].suffixes",
+      "meaning": "File suffixes that collectors treat as this language.",
+      "required": true
+    },
+    {
+      "field": "modes[].included_languages",
+      "meaning": "Document language ids visible in this mode.",
+      "required": true
+    },
+    {
+      "field": "modes[].include_unknown",
+      "meaning": "Whether unsuffixed or language-neutral documents remain visible.",
+      "required": true
+    }
+  ],
+  "mode_boundary": {
+    "language_mode": "Document-language viewing lens for repository docs, history, requirements, specs, and generated previews.",
+    "view_mode": "Audience and UI surface lens such as user, developer, or superadmin developer.",
+    "work_mode": "Task execution and close-out strictness profile.",
+    "install_mode": "Dependency and environment setup profile.",
+    "source_language_filter": "Programming-language filter for read-only source code browsing.",
+    "rule": "Choose language_mode for Korean/English document visibility. Choose view_mode for role surfaces, work_mode for process strictness, install_mode for setup, and source_language_filter for code files."
+  },
+  "default_mode": "all",
+  "supported_languages": [
+    {
+      "id": "ko",
+      "bcp47": "ko",
+      "label": "Korean",
+      "display_label": "한국어",
+      "suffixes": [
+        ".ko.md",
+        ".ko.json"
+      ]
+    },
+    {
+      "id": "en",
+      "bcp47": "en",
+      "label": "English",
+      "display_label": "English",
+      "suffixes": [
+        ".en.md",
+        ".en.json"
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "id": "all",
+      "label": "All Languages",
+      "display_label": "전체",
+      "intent": "Show Korean, English, and language-neutral documents together for full repository review.",
+      "included_languages": [
+        "ko",
+        "en"
+      ],
+      "include_unknown": true,
+      "document_rule": "Show documents tagged ko, en, or unknown."
+    },
+    {
+      "id": "ko",
+      "label": "Korean Only",
+      "display_label": "한국어만",
+      "intent": "Show only Korean documents for owner-facing reading, history review, and Korean documentation work.",
+      "included_languages": [
+        "ko"
+      ],
+      "include_unknown": false,
+      "document_rule": "Show only documents tagged ko."
+    },
+    {
+      "id": "en",
+      "label": "English Only",
+      "display_label": "English Only",
+      "intent": "Show only English documents for paired English review, external sharing, and prompt/config companion checks.",
+      "included_languages": [
+        "en"
+      ],
+      "include_unknown": false,
+      "document_rule": "Show only documents tagged en."
+    }
+  ],
+  "selection_rules": [
+    "Use all-language mode for governance audits, snapshot publication review, and checking unsuffixed operational records.",
+    "Use Korean-only mode when the owner wants to read history, summaries, requirements, and docs without English companion noise.",
+    "Use English-only mode when reviewing English companion docs, external-facing summaries, or executable prompt companion material.",
+    "Do not use language_mode to hide sensitive documents from a public snapshot; remove or redact those records at collection or publication time."
+  ]
+}

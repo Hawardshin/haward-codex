@@ -225,6 +225,15 @@ export type WorkspaceViewMode = {
   securityNotes: string[];
 };
 
+export type WorkspaceLanguageMode = {
+  id: string;
+  label: string;
+  intent: string;
+  includedLanguages: string[];
+  includeUnknown: boolean;
+  documentRule: string;
+};
+
 export type WorkspaceSnapshot = {
   schemaVersion: string;
   generatedAt: string;
@@ -243,6 +252,10 @@ export type WorkspaceSnapshot = {
   viewModeCatalog?: {
     defaultMode: string;
     modes: WorkspaceViewMode[];
+  };
+  languageModeCatalog?: {
+    defaultMode: string;
+    modes: WorkspaceLanguageMode[];
   };
   categories: string[];
   publicReview: {

@@ -145,6 +145,7 @@
 - 사용자가 읽는 문서와 히스토리는 한국어를 기본으로 작성한다.
 - 실제 실행 프롬프트 본문은 영어로 작성한다.
 - 중요한 지속 정책, 워크플로, 프로젝트 설명은 한국어/영어 병렬 문서를 만든다.
+- 문서 브라우저, 대시보드, 생성 snapshot은 `agent-platform/configs/access/language-mode-registry.json`을 사용해 전체/한국어만/영어만 보기를 `view_mode`, `work_mode`, `install_mode`, 소스코드 언어 필터와 분리해서 관리한다.
 
 ## 유지 규칙
 

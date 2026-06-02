@@ -1,0 +1,70 @@
+{
+  "task_id": "2026-06-02-language-mode-selector",
+  "title": "Workspace Monitor language mode selector",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked Next.js official i18n/static export docs and W3C BCP 47 language tag guidance."
+    },
+    {
+      "phase_id": "memory_and_mode_selection",
+      "label": "Memory bootstrap and work mode selection",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Selected governance mode because the task changes durable platform config, monitor UI behavior, requirements, specs, and memory anchors."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Registry, collector, type, and UI implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added language-mode-registry, languageModeCatalog collection, snapshot types, toolbar selector, and language filters for docs/history/metrics."
+    },
+    {
+      "phase_id": "documentation",
+      "label": "Requirements, specs, and durable instruction updates",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Updated shared/project requirements, specs, README, AGENTS, persistent instructions, and memory bootstrap."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Ran config contract checks, memory bootstrap, npm collect/test/check/build, and local curl smoke check."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and close-out records",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Recorded web search, plan, request trace, omission, grounding, timing, and work evaluation records."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured"
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "The main overhead was propagating a small UI filter through durable platform governance artifacts and generated snapshots.",
+    "improvement_candidates": [
+      "Create a small helper for adding future monitor display lenses with registry, snapshot, UI, and tests.",
+      "Add a snapshot smoke test that can assert client filters without dumping the full HTML response."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-language-mode-selector.ko.md",
+    "_history/plans/2026/2026-06-02-language-mode-selector.ko.md",
+    "workspace-monitor/specs/2026-06-02-language-mode-selector/validation.ko.md"
+  ]
+}

@@ -13,6 +13,7 @@
 - 히스토리 문서의 날짜별 밀도와 유형별 분포를 CSS 기반 차트로 본다.
 - 루트 폴더, `_docs` 카테고리, 프로젝트 홈, 히스토리 수집 위치를 구조 지도에서 확인한다.
 - `agent-platform/configs/access/view-mode-registry.json`을 읽어 사용자 보기, 개발자 보기, 슈퍼어드민 개발 보기를 전환한다. 현재 기본값은 `superadmin_developer`다.
+- `agent-platform/configs/access/language-mode-registry.json`을 읽어 전체, 한국어만, 영어만 문서 보기 모드를 전환한다.
 - 개발자 보기와 슈퍼어드민 개발 보기에서는 주요 프로젝트와 `_tools`의 소스 코드를 읽기 전용으로 탐색한다.
 - 운영 도구의 밀도와 신뢰를 유지하면서도 작은 색상 신호와 micro-interaction으로 은근히 귀여운 톤을 허용한다.
 
@@ -41,7 +42,7 @@ npm run build
 npm run dev
 ```
 
-`npm run collect`는 repository root의 `_history`, `_ops`, `_requirements`, `_specs`, 프로젝트 docs/specs, 에이전트 설정, view mode 설정, source code catalog를 읽어 `src/generated/workspace-snapshot.json`과 `public/workspace-snapshot.json`을 만든다. snapshot에는 문서 목록뿐 아니라 `historyDays` 날짜 index, `agentCatalog`, `collaborationBoard`, `folderStructure`, `viewModeCatalog`, `sourceFiles`도 포함된다.
+`npm run collect`는 repository root의 `_history`, `_ops`, `_requirements`, `_specs`, 프로젝트 docs/specs, 에이전트 설정, view mode 설정, language mode 설정, source code catalog를 읽어 `src/generated/workspace-snapshot.json`과 `public/workspace-snapshot.json`을 만든다. snapshot에는 문서 목록뿐 아니라 `historyDays` 날짜 index, `agentCatalog`, `collaborationBoard`, `folderStructure`, `viewModeCatalog`, `languageModeCatalog`, `sourceFiles`도 포함된다.
 
 ## Vercel 배포
 
@@ -58,4 +59,5 @@ public 배포 전에 반드시 `src/generated/workspace-snapshot.json`을 확인
 - 공개하면 안 되는 문서가 있으면 원천 문서 또는 collector 범위를 조정한다.
 - 소스 코드도 snapshot에 포함되므로 public 배포 전에 `sourceFiles` 범위를 반드시 검토한다.
 - view mode selector는 보안 경계가 아니다. public 사용자용으로 제한해야 하는 정보는 collector 범위나 배포 전 redaction에서 제거한다.
+- language mode selector는 표시 렌즈다. public 배포에서 특정 언어 문서를 제외해야 하면 원천 문서나 collector 범위를 조정한다.
 - 조정 후 `npm run collect`와 `npm run build`를 다시 실행한다.

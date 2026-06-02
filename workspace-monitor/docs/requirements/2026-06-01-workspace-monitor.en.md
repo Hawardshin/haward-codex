@@ -25,6 +25,7 @@
 | REQ-WM-012 | The UI shall let developer and superadmin development views browse source code from key projects and tools as read-only content. | must | Check snapshot `sourceFiles`, the Source tab, and `npm run build` |
 | REQ-WM-013 | The UI shall show which work lane each agent is moving through and which task/project each agent is connected to through a collaboration board and flow map. | must | Check snapshot `collaborationBoard`, Agents UI collaboration lanes/flow, and `npm run build` |
 | REQ-WM-014 | The web UI should allow a subtly cute, quietly delightful visual tone while preserving operational density and trust. | should | Check UI tone policy, `globals.css`, and `npm run build` |
+| REQ-WM-015 | The web UI shall read `agent-platform/configs/access/language-mode-registry.json` and allow selecting all-language, Korean-only, and English-only document views, applying the same language lens to documents, history, and summary counts. | must | Check snapshot `languageModeCatalog`, the language selector, `npm run collect`, `npm test`, `npm run check`, and `npm run build` |
 
 ## Scope
 
@@ -34,6 +35,7 @@
 - Date-indexed history timeline and folder structure map
 - Agent inventory plus history density/type visualization
 - User/developer/superadmin development view mode selector
+- All/Korean-only/English-only document language mode selector
 - Developer/superadmin read-only source-code viewer
 - Agent collaboration lanes, agent-task-project flow map, and blocker/next-action display
 - Small accents and micro-interactions that do not weaken operational readability
@@ -43,6 +45,7 @@
 
 - Authentication, login, or real-time server monitoring
 - Treating client-side view mode as a security boundary
+- Treating client-side language mode as snapshot redaction or a security boundary
 - Editing or saving source code from the browser UI
 - GitHub API integration
 - Remote database storage

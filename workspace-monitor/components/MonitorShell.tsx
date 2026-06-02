@@ -12,6 +12,7 @@ import {
   GitBranch,
   History,
   Layers,
+  Languages,
   ListFilter,
   Network,
   Search,
@@ -42,6 +43,7 @@ const sections: Section[] = [
 ];
 
 type MonitorViewMode = NonNullable<WorkspaceSnapshot["viewModeCatalog"]>["modes"][number];
+type MonitorLanguageMode = NonNullable<WorkspaceSnapshot["languageModeCatalog"]>["modes"][number];
 type CollaborationBoard = NonNullable<WorkspaceSnapshot["collaborationBoard"]>;
 
 const fallbackViewModes: MonitorViewMode[] = [
@@ -68,6 +70,33 @@ const fallbackViewModes: MonitorViewMode[] = [
     allowedSections: ["overview", "projects", "history", "structure", "documents", "source", "requirements", "agents"],
     visibilityRules: {},
     securityNotes: []
+  }
+];
+
+const fallbackLanguageModes: MonitorLanguageMode[] = [
+  {
+    id: "all",
+    label: "전체",
+    intent: "Show Korean, English, and language-neutral documents together.",
+    includedLanguages: ["ko", "en"],
+    includeUnknown: true,
+    documentRule: "Show documents tagged ko, en, or unknown."
+  },
+  {
+    id: "ko",
+    label: "한국어만",
+    intent: "Show only Korean documents.",
+    includedLanguages: ["ko"],
+    includeUnknown: false,
+    documentRule: "Show only documents tagged ko."
+  },
+  {
+    id: "en",
+    label: "English Only",
+    intent: "Show only English documents.",
+    includedLanguages: ["en"],
+    includeUnknown: false,
+    documentRule: "Show only documents tagged en."
   }
 ];
 
@@ -99,10 +128,15 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [sourceLanguage, setSourceLanguage] = useState("all");
   const [selectedSourceId, setSelectedSourceId] = useState("");
   const viewModes = snapshot.viewModeCatalog?.modes?.length ? snapshot.viewModeCatalog.modes : fallbackViewModes;
+  const languageModes = snapshot.languageModeCatalog?.modes?.length ? snapshot.languageModeCatalog.modes : fallbackLanguageModes;
   const [viewMode, setViewMode] = useState(snapshot.viewModeCatalog?.defaultMode || "superadmin_developer");
+  const [languageMode, setLanguageMode] = useState(snapshot.languageModeCatalog?.defaultMode || "all");
   const currentViewMode = useMemo(() => {
     return viewModes.find((mode) => mode.id === viewMode) || viewModes[0] || fallbackViewModes[2];
   }, [viewMode, viewModes]);
+  const currentLanguageMode = useMemo(() => {
+    return languageModes.find((mode) => mode.id === languageMode) || languageModes[0] || fallbackLanguageModes[0];
+  }, [languageMode, languageModes]);
   const visibleSections = useMemo(() => {
     const allowed = new Set(currentViewMode.allowedSections);
     return sections.filter((item) => allowed.has(item.id));
@@ -117,8 +151,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
 
   const normalizedQuery = query.trim().toLowerCase();
   const viewFilteredDocuments = useMemo(() => {
-    return snapshot.documents.filter((document) => documentVisibleForMode(document, currentViewMode.id));
-  }, [currentViewMode, snapshot.documents]);
+    return snapshot.documents.filter(
+      (document) =>
+        documentVisibleForMode(document, currentViewMode.id) && documentVisibleForLanguage(document, currentLanguageMode)
+    );
+  }, [currentLanguageMode, currentViewMode, snapshot.documents]);
   const viewCategories = useMemo(() => {
     return Array.from(new Set(viewFilteredDocuments.map((document) => document.category))).sort();
   }, [viewFilteredDocuments]);
@@ -139,12 +176,15 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const visibleHistoryDays = useMemo(() => {
     return snapshot.historyDays
       .map((day) => {
-        const documents = day.documents.filter((document) => documentVisibleForMode(document, currentViewMode.id));
+        const documents = day.documents.filter(
+          (document) =>
+            documentVisibleForMode(document, currentViewMode.id) && documentVisibleForLanguage(document, currentLanguageMode)
+        );
         const categories = summarizeCategories(documents);
         return { ...day, documents, documentsCount: documents.length, categories };
       })
       .filter((day) => day.documents.length > 0);
-  }, [currentViewMode, snapshot.historyDays]);
+  }, [currentLanguageMode, currentViewMode, snapshot.historyDays]);
   const historyCategories = useMemo(() => {
     return Array.from(new Set(visibleHistoryDays.flatMap((day) => day.categories.map((item) => item.category)))).sort();
   }, [visibleHistoryDays]);
@@ -269,17 +309,37 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           />
         </label>
         {section !== "source" && (
-          <label className="select-box">
-            <ListFilter size={16} aria-hidden="true" />
-            <select value={category} onChange={(event) => setCategory(event.target.value)}>
-              <option value="all">모든 문서</option>
-              {viewCategories.map((item) => (
-                <option key={item} value={item}>
-                  {categoryLabel(item)}
-                </option>
-              ))}
-            </select>
-          </label>
+          <>
+            <label className="select-box">
+              <Languages size={16} aria-hidden="true" />
+              <select
+                value={languageMode}
+                onChange={(event) => {
+                  setLanguageMode(event.target.value);
+                  setCategory("all");
+                  setHistoryCategory("all");
+                }}
+                title={currentLanguageMode.intent}
+              >
+                {languageModes.map((mode) => (
+                  <option key={mode.id} value={mode.id}>
+                    {mode.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="select-box">
+              <ListFilter size={16} aria-hidden="true" />
+              <select value={category} onChange={(event) => setCategory(event.target.value)}>
+                <option value="all">모든 문서</option>
+                {viewCategories.map((item) => (
+                  <option key={item} value={item}>
+                    {categoryLabel(item)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </>
         )}
       </section>
 
@@ -320,7 +380,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               </div>
               <History size={18} aria-hidden="true" />
             </div>
-            <HistoryDensityChart days={snapshot.historyDays.slice(0, 16)} />
+            <HistoryDensityChart days={visibleHistoryDays.slice(0, 16)} />
           </section>
 
           <section className="panel wide">
@@ -1049,6 +1109,16 @@ function documentVisibleForMode(
     "agent-platform/tests/"
   ];
   return !hiddenPrefixes.some((prefix) => document.path.startsWith(prefix));
+}
+
+function documentVisibleForLanguage(
+  document: WorkspaceSnapshot["documents"][number] | WorkspaceSnapshot["historyDays"][number]["documents"][number],
+  mode: MonitorLanguageMode
+) {
+  if (document.language === "unknown") {
+    return mode.includeUnknown;
+  }
+  return mode.includedLanguages.includes(document.language);
 }
 
 function countBy<T>(items: T[], getKey: (item: T) => string) {

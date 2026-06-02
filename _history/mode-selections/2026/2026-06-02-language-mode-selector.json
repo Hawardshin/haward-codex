@@ -1,0 +1,37 @@
+{
+  "schema_version": "2026-06-02",
+  "request_id": "UR-2026-06-02-032",
+  "selected_mode": "governance",
+  "reason": "The request changes durable document language viewing behavior, shared config, memory anchors, persistent instructions, requirements, specs, and Workspace Monitor UI/snapshot behavior.",
+  "considered_modes": [
+    {
+      "mode": "quick",
+      "decision": "rejected",
+      "reason": "The change is not a one-off UI tweak because future sessions and generated snapshots need the same language-mode contract."
+    },
+    {
+      "mode": "standard",
+      "decision": "rejected",
+      "reason": "The work updates durable repository rules and memory bootstrap, which requires governance close-out targets."
+    },
+    {
+      "mode": "governance",
+      "decision": "selected",
+      "reason": "Language-mode selection is a long-lived platform behavior that must be enforced through config, requirements, specs, history, and evaluation."
+    }
+  ],
+  "required_targets": [
+    "web_search_record_targets",
+    "user_request_summary_targets",
+    "requirements_targets",
+    "spec_targets",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "mode_selection_record_targets",
+    "omission_check_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets"
+  ],
+  "overrides": []
+}
