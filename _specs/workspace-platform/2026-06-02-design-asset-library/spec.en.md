@@ -1,5 +1,10 @@
 # Design Asset Library Spec
 
+## Update Note
+
+- This document records the initial 120-SVG implementation scope.
+- The current expanded baseline follows `_specs/workspace-platform/2026-06-02-design-asset-usability-expansion/spec.en.md`: 600 SVG assets plus gallery/search structure.
+
 ## Purpose
 
 Prepare many legal SVG design assets for presentations, HTML artifacts, monitoring UI, and prototypes.

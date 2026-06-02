@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title-status-ready-navy-sky">
+  <title id="title-status-ready-navy-sky">Status Ready Navy Sky</title>
+  <rect width="256" height="256" rx="28" fill="#f7fbff"/>
+  <circle cx="128" cy="128" r="74" fill="#e7f5ff" stroke="#183153" stroke-width="6"/>
+  <path d="M88 132l24 24 58-68" fill="none" stroke="#4dabf7" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="184" cy="53" r="22" fill="#4dabf7"/>
+  <path d="M76 72l16 16M180 176l16 16M72 184l18-12" stroke="#183153" stroke-width="6" stroke-linecap="round" opacity=".5"/>
+</svg>

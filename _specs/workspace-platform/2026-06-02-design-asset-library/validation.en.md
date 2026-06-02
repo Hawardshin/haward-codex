@@ -1,5 +1,10 @@
 # Design Asset Library Validation
 
+## Update Note
+
+- This document records validation from the initial 120-SVG generation.
+- Current 600-SVG plus gallery/search validation follows `_specs/workspace-platform/2026-06-02-design-asset-usability-expansion/validation.en.md`.
+
 ## Validation Plan
 
 - Run SVG generator.

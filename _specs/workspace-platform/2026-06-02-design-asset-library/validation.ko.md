@@ -1,5 +1,10 @@
 # 디자인 에셋 라이브러리 검증
 
+## 최신화 메모
+
+- 이 문서는 초기 120개 SVG 생성 시점의 검증 결과다.
+- 최신 600개 SVG와 gallery/search 검증은 `_specs/workspace-platform/2026-06-02-design-asset-usability-expansion/validation.ko.md`를 따른다.
+
 ## 검증 계획
 
 - SVG generator 실행

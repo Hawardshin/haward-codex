@@ -8,9 +8,10 @@
 
 ## 현재 자산 상태
 
-- `assets/svg/generated/`의 SVG는 외부 SVG 파일을 복사하지 않고 레포 내부 generator로 생성했다.
+- `assets/svg/generated/`의 600개 SVG는 외부 SVG 파일을 복사하지 않고 레포 내부 generator로 생성했다.
 - public 배포 전에는 저장소 소유자가 최종 라이선스를 명시해야 한다.
 - 외부 후보는 `data/asset-registry.json`의 `external_source_candidates`에 기록되어 있으며, `downloaded=false`다.
+- 현재 후보군에는 Lucide, Heroicons, Tabler Icons, Bootstrap Icons, Google Material Symbols, OpenMoji, Font Awesome Free가 포함된다.
 
 ## 사용 금지
 

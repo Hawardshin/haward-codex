@@ -182,20 +182,21 @@ def main() -> int:
 def build_assets() -> list[Asset]:
     assets: list[Asset] = []
     for family, motifs in FAMILIES.items():
-        for index, motif in enumerate(motifs):
-            palette_name = PALETTES[index % len(PALETTES)][0]
-            asset_id = f"{family}-{motif}-{palette_name}"
-            path = ASSET_ROOT / family / f"{motif}-{palette_name}.svg"
-            assets.append(
-                Asset(
-                    asset_id=asset_id,
-                    family=family,
-                    motif=motif,
-                    palette_name=palette_name,
-                    path=path,
-                    tags=(family, motif.replace("-", " "), palette_name),
+        for motif in motifs:
+            for palette_item in PALETTES:
+                palette_name = palette_item[0]
+                asset_id = f"{family}-{motif}-{palette_name}"
+                path = ASSET_ROOT / family / f"{motif}-{palette_name}.svg"
+                assets.append(
+                    Asset(
+                        asset_id=asset_id,
+                        family=family,
+                        motif=motif,
+                        palette_name=palette_name,
+                        path=path,
+                        tags=(family, motif.replace("-", " "), palette_name),
+                    )
                 )
-            )
     return assets
 
 
@@ -350,6 +351,38 @@ def build_registry(assets: list[Asset]) -> dict:
                 "source_type": "official_docs",
                 "used_for": ["Open-source icon source candidate and license comparison."],
                 "last_checked": "2026-06-02"
+            },
+            {
+                "id": "bootstrap-icons",
+                "title": "Bootstrap Icons",
+                "url": "https://icons.getbootstrap.com/",
+                "source_type": "official_docs",
+                "used_for": ["Open-source SVG icon source candidate and license comparison."],
+                "last_checked": "2026-06-02"
+            },
+            {
+                "id": "material-symbols",
+                "title": "Google Material Symbols",
+                "url": "https://fonts.google.com/icons",
+                "source_type": "official_docs",
+                "used_for": ["Icon source candidate and visual language reference."],
+                "last_checked": "2026-06-02"
+            },
+            {
+                "id": "openmoji",
+                "title": "OpenMoji",
+                "url": "https://openmoji.org/",
+                "source_type": "official_docs",
+                "used_for": ["Open-source emoji and pictogram source candidate."],
+                "last_checked": "2026-06-02"
+            },
+            {
+                "id": "font-awesome-free-license",
+                "title": "Font Awesome Free License",
+                "url": "https://fontawesome.com/license/free",
+                "source_type": "official_docs",
+                "used_for": ["Open-source icon source candidate and license comparison."],
+                "last_checked": "2026-06-02"
             }
         ],
         "structure_rules": [
@@ -426,6 +459,42 @@ def build_registry(assets: list[Asset]) -> dict:
                 "downloaded": False,
                 "license_status": "Candidate only; verify current license and attribution before storing files.",
                 "fit": ["large icon sets", "presentation symbols", "product UI"]
+            },
+            {
+                "id": "bootstrap-icons",
+                "name": "Bootstrap Icons",
+                "url": "https://icons.getbootstrap.com/",
+                "source_type": "open_source_icon_library",
+                "downloaded": False,
+                "license_status": "Candidate only; verify current license and attribution before storing files.",
+                "fit": ["interface icons", "presentation symbols", "dashboard UI"]
+            },
+            {
+                "id": "material-symbols",
+                "name": "Google Material Symbols",
+                "url": "https://fonts.google.com/icons",
+                "source_type": "open_source_icon_library",
+                "downloaded": False,
+                "license_status": "Candidate only; verify current license and attribution before storing files.",
+                "fit": ["product UI", "navigation icons", "status symbols"]
+            },
+            {
+                "id": "openmoji",
+                "name": "OpenMoji",
+                "url": "https://openmoji.org/",
+                "source_type": "open_source_emoji_library",
+                "downloaded": False,
+                "license_status": "Candidate only; verify current license, attribution, and share-alike constraints before storing files.",
+                "fit": ["friendly status symbols", "emoji-style pictograms", "playful presentation accents"]
+            },
+            {
+                "id": "font-awesome-free",
+                "name": "Font Awesome Free",
+                "url": "https://fontawesome.com/license/free",
+                "source_type": "open_source_icon_library",
+                "downloaded": False,
+                "license_status": "Candidate only; verify current license and per-pack constraints before storing files.",
+                "fit": ["common interface icons", "brand-adjacent icon needs", "tool symbols"]
             }
         ]
     }

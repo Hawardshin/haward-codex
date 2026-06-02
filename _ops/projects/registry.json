@@ -152,6 +152,7 @@
       "scope": "Internally generated SVG packs, asset registry, source provenance, license guidance, usage guidance, generator scripts, and asset validation tests.",
       "project_specific_home": [
         "design-asset-library/assets/",
+        "design-asset-library/artifacts/",
         "design-asset-library/configs/",
         "design-asset-library/data/",
         "design-asset-library/docs/",

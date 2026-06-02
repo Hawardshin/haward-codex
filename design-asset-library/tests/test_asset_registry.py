@@ -17,7 +17,7 @@ class AssetRegistryTests(unittest.TestCase):
     def test_registry_has_many_generated_assets(self) -> None:
         registry = self.load_registry()
 
-        self.assertGreaterEqual(len(registry["generated_assets"]), 100)
+        self.assertGreaterEqual(len(registry["generated_assets"]), 500)
         self.assertEqual(registry["generation_policy"]["rights_status"], "generated_in_repository")
 
     def test_generated_asset_ids_are_unique(self) -> None:

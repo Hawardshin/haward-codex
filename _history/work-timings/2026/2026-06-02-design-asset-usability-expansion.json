@@ -1,0 +1,70 @@
+{
+  "task_id": "2026-06-02-design-asset-usability-expansion",
+  "title": "Design asset usability expansion",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked official paths for Bootstrap Icons, Google Material Symbols, OpenMoji, and Font Awesome Free."
+    },
+    {
+      "phase_id": "requirements_specs",
+      "label": "Requirements and specs",
+      "status": "completed",
+      "measurement": "not_measured"
+    },
+    {
+      "phase_id": "asset_generation",
+      "label": "SVG generation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Generated 600 SVG assets from 6 families, 20 motifs, and 5 palettes."
+    },
+    {
+      "phase_id": "tooling",
+      "label": "Asset browser tooling",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added families, search, snippet, and gallery commands."
+    },
+    {
+      "phase_id": "documentation",
+      "label": "Usage and integration docs",
+      "status": "completed",
+      "measurement": "not_measured"
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Project tests, config contracts, memory bootstrap, gallery browser smoke, workspace index, task board, workspace health, omission, grounding, and evaluation checks passed."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured"
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "The likely bottleneck is maintaining provenance and easy discovery as the asset count grows, not SVG generation itself.",
+    "improvement_candidates": [
+      "Add richer gallery filters for palette and motif.",
+      "Add a small manifest export for presentation-agent deck builders.",
+      "Add thumbnail caching only if gallery rendering becomes slow."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-design-asset-usability-expansion.ko.md",
+    "_specs/workspace-platform/2026-06-02-design-asset-usability-expansion/plan.ko.md",
+    "design-asset-library/data/asset-registry.json",
+    "design-asset-library/artifacts/html/gallery.html"
+  ]
+}

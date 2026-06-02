@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title-abstract-signal-burst-navy-sky">
+  <title id="title-abstract-signal-burst-navy-sky">Abstract Signal Burst Navy Sky</title>
+  <rect width="256" height="256" rx="28" fill="#f7fbff"/>
+  <circle cx="128" cy="128" r="83" fill="#e7f5ff"/>
+  <circle cx="128" cy="128" r="39" fill="none" stroke="#183153" stroke-width="8"/>
+  <circle cx="89" cy="92" r="22" fill="#4dabf7" opacity=".86"/>
+  <circle cx="149" cy="170" r="18" fill="#183153" opacity=".88"/>
+  <path d="M56 146c34-48 88-58 142-28" fill="none" stroke="#4dabf7" stroke-width="8" stroke-linecap="round"/>
+  <path d="M70 184c42-30 80-34 120-12" fill="none" stroke="#183153" stroke-width="5" stroke-linecap="round" opacity=".65"/>
+</svg>

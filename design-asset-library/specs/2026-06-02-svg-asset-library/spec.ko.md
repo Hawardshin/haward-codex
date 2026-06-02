@@ -1,5 +1,10 @@
 # SVG 에셋 라이브러리 스펙
 
+## 최신화 메모
+
+- 이 문서는 초기 120개 생성 범위를 기록한다.
+- 현재 사용 기준은 `design-asset-library/specs/2026-06-02-asset-usability-expansion/spec.ko.md`의 600개 생성 자산과 탐색 도구 구조를 따른다.
+
 ## 목적
 
 저작권 리스크 없이 발표, HTML, dashboard, prototype에 쓸 수 있는 다수의 SVG 디자인 에셋을 미리 준비한다.

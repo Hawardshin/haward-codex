@@ -1,5 +1,10 @@
 # 디자인 에셋 라이브러리 스펙
 
+## 최신화 메모
+
+- 이 문서는 초기 생성 범위인 120개 SVG 기준을 기록한다.
+- 현재 사용성 확장 후 기준은 `_specs/workspace-platform/2026-06-02-design-asset-usability-expansion/spec.ko.md`의 600개 SVG와 gallery/search 구조를 따른다.
+
 ## 목적
 
 발표, HTML, 모니터링 UI, prototype에서 합법적으로 사용할 수 있는 SVG 디자인 에셋을 미리 많이 준비한다.

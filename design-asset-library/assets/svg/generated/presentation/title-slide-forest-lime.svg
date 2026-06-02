@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title-presentation-title-slide-forest-lime">
+  <title id="title-presentation-title-slide-forest-lime">Presentation Title Slide Forest Lime</title>
+  <rect width="256" height="256" rx="28" fill="#fbfff8"/>
+  <rect x="38" y="42" width="164" height="118" rx="14" fill="#ebfbee" stroke="#163b2b" stroke-width="4"/>
+  <rect x="56" y="66" width="94" height="10" rx="5" fill="#163b2b"/>
+  <rect x="56" y="90" width="128" height="8" rx="4" fill="#51cf66"/>
+  <rect x="56" y="112" width="68" height="8" rx="4" fill="#163b2b" opacity=".35"/>
+  <circle cx="174" cy="124" r="22" fill="#51cf66" opacity=".88"/>
+  <path d="M76 188h96M96 160l-20 28M152 160l20 28" fill="none" stroke="#163b2b" stroke-width="6" stroke-linecap="round"/>
+</svg>

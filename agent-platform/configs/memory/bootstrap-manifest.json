@@ -1783,7 +1783,7 @@
       "id": "design_asset_library",
       "path": "design-asset-library/data/asset-registry.json",
       "tier": "warm",
-      "purpose": "Reusable legal SVG design asset registry with generated asset paths, source provenance, external candidate rules, and license cautions.",
+      "purpose": "Reusable legal SVG design asset registry with generated asset paths, source provenance, external candidate rules, license cautions, search/snippet CLI, and static gallery usage path.",
       "required": true,
       "load_order": 9
     },

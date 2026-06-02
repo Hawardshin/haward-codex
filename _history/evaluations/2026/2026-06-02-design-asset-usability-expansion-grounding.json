@@ -1,0 +1,111 @@
+{
+  "task": "Ground design asset usability expansion close-out claims.",
+  "output_summary": "The design asset library now stores 600 generated SVG assets and provides CLI search, snippets, and a static HTML gallery without downloading external SVG files.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "asset_registry",
+      "source": "design-asset-library/data/asset-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local generated asset registry."
+    },
+    {
+      "evidence_id": "asset_generator",
+      "source": "design-asset-library/scripts/generate_svg_assets.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local deterministic SVG generator."
+    },
+    {
+      "evidence_id": "asset_browser",
+      "source": "design-asset-library/scripts/asset_browser.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local CLI and gallery generation tool."
+    },
+    {
+      "evidence_id": "asset_tests",
+      "source": "design-asset-library/tests/",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local unit tests for registry and browser behavior."
+    },
+    {
+      "evidence_id": "browser_smoke",
+      "source": "Playwright smoke test output",
+      "source_type": "tool_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Loaded local static gallery and checked card count, image load, and search filtering."
+    },
+    {
+      "evidence_id": "web_search_record",
+      "source": "_history/web-searches/2026/2026-06-02-design-asset-usability-expansion.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Saved web search record with official source candidate links."
+    },
+    {
+      "evidence_id": "workspace_health",
+      "source": "python3 _tools/workspace-health/src/workspace_health.py --json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Whole-workspace validation command."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The design asset library contains 600 generated SVG assets.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["asset_registry", "asset_generator", "asset_tests"],
+      "verification_steps": ["Run the generator, count SVG files, and inspect registry count."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The gallery contains 600 cards and a representative SVG image loads.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["browser_smoke"],
+      "verification_steps": ["Open local gallery with Playwright and inspect card count/image load/search count."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "External SVG files were not downloaded; external sources remain candidates.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["asset_registry", "asset_tests"],
+      "verification_steps": ["Inspect external_source_candidates downloaded=false and run tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Bootstrap Icons, Google Material Symbols, OpenMoji, and Font Awesome Free were added as source candidates, not stored asset files.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["asset_registry", "web_search_record"],
+      "verification_steps": ["Inspect external_source_candidates and saved web search record."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Whole workspace health passed after the expansion.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["workspace_health"],
+      "verification_steps": ["Run workspace-health --json."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "External license pages can change; recheck before downloading or public redistribution.",
+    "Generated assets still need repository-owner license terms before a public repository release."
+  ],
+  "limitation_notes": [
+    "The gallery is static HTML, not a full asset management application.",
+    "Advanced palette/motif filters can be added later if usage shows a bottleneck."
+  ]
+}

@@ -1,5 +1,10 @@
 # SVG Asset Library Spec
 
+## Update Note
+
+- This document records the initial 120-asset generation scope.
+- The current working baseline follows `design-asset-library/specs/2026-06-02-asset-usability-expansion/spec.en.md`: 600 generated assets plus discovery tooling.
+
 ## Purpose
 
 Prepare many SVG design assets for presentations, HTML, dashboards, and prototypes without copyright-risky downloads.

@@ -2,10 +2,25 @@
 
 ## Quick Use
 
-1. Search `generated_assets` in `data/asset-registry.json`.
-2. Pick an asset by `family`, `motif`, and `tags`.
-3. Insert the SVG path into HTML, HTML-to-PPT artifacts, dashboards, or prototypes.
-4. Recheck licensing docs before public distribution.
+1. Open `artifacts/html/gallery.html` in a browser to scan the full generated pack.
+2. Narrow candidates with CLI filters for `family`, `query`, and `tag`.
+3. Use the `snippet` command to generate an HTML `<img>` snippet.
+4. Check provenance and license status in `data/asset-registry.json` when needed.
+5. Recheck licensing docs before public distribution.
+
+## Quick Commands
+
+```bash
+python3 design-asset-library/scripts/asset_browser.py families
+python3 design-asset-library/scripts/asset_browser.py search --family presentation --query title --limit 5
+python3 design-asset-library/scripts/asset_browser.py snippet presentation-title-slide-ink-cyan
+python3 design-asset-library/scripts/asset_browser.py gallery --output design-asset-library/artifacts/html/gallery.html --limit 600
+```
+
+## Scale
+
+- Current generated assets: 600
+- Shape: 6 families x 20 motifs x 5 palettes
 
 ## Families
 
@@ -19,7 +34,7 @@
 ## Presentation Agent Use
 
 - The presentation agent first defines an asset query.
-- It selects candidates from `asset-registry.json`.
+- It selects candidates with `asset_browser.py search` or `gallery.html`.
 - HTML decks can reference SVGs as `<img>` assets or inline them.
 - If the design direction is insufficient, add a motif to the generator and regenerate the registry.
 

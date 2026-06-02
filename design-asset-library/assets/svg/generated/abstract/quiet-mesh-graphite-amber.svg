@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title-abstract-quiet-mesh-graphite-amber">
+  <title id="title-abstract-quiet-mesh-graphite-amber">Abstract Quiet Mesh Graphite Amber</title>
+  <rect width="256" height="256" rx="28" fill="#fdfcf7"/>
+  <circle cx="128" cy="128" r="86" fill="#fff4d6"/>
+  <circle cx="128" cy="128" r="42" fill="none" stroke="#262626" stroke-width="8"/>
+  <circle cx="88" cy="92" r="22" fill="#fab005" opacity=".86"/>
+  <circle cx="158" cy="170" r="18" fill="#262626" opacity=".88"/>
+  <path d="M56 146c34-48 88-58 142-28" fill="none" stroke="#fab005" stroke-width="8" stroke-linecap="round"/>
+  <path d="M70 184c42-30 80-34 120-12" fill="none" stroke="#262626" stroke-width="5" stroke-linecap="round" opacity=".65"/>
+</svg>

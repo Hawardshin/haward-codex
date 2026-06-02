@@ -1,0 +1,132 @@
+{
+  "task": "Expand design asset inventory and make it easy to use.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web_first",
+      "description": "Run web-first intake and record source candidates.",
+      "source": "AGENTS.md and user request",
+      "required": true,
+      "status": "covered",
+      "evidence": ["_history/web-searches/2026/2026-06-02-design-asset-usability-expansion.ko.md"],
+      "rationale": ""
+    },
+    {
+      "item_id": "many_useful_assets",
+      "description": "Increase the reusable generated SVG inventory.",
+      "source": "User asked to keep collecting many useful assets.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "design-asset-library/assets/svg/generated/",
+        "find design-asset-library/assets/svg/generated -name '*.svg' | wc -l: 600",
+        "design-asset-library/data/asset-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "easy_use_structure",
+      "description": "Provide search, snippet, and gallery structure for easy use.",
+      "source": "User asked for an easy-to-use structure.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "design-asset-library/scripts/asset_browser.py",
+        "design-asset-library/artifacts/html/gallery.html",
+        "design-asset-library/tests/test_asset_browser.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "legal_boundary",
+      "description": "Do not download external SVGs; keep external libraries as candidates until license review.",
+      "source": "Prior user instruction and asset library policy.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "design-asset-library/data/asset-registry.json",
+        "design-asset-library/docs/licensing/README.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "presentation_integration",
+      "description": "Make the presentation agent use gallery/search/snippet flow.",
+      "source": "Presentation-agent asset workflow.",
+      "required": true,
+      "status": "covered",
+      "evidence": ["presentation-agent/docs/design/svg-asset-library-usage.ko.md"],
+      "rationale": ""
+    },
+    {
+      "item_id": "durable_docs",
+      "description": "Record requirements, specs, history, request trace, and work summary.",
+      "source": "Repository governance rules.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/changes/2026-06-02-design-asset-usability-expansion.ko.md",
+        "_specs/workspace-platform/2026-06-02-design-asset-usability-expansion/",
+        "_history/request-traces/2026/2026-06-02-design-asset-usability-expansion.ko.md",
+        "_history/work-summaries/2026/2026-06-02.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {"path": "design-asset-library/scripts/asset_browser.py", "purpose": "Asset browser CLI.", "required": true},
+    {"path": "design-asset-library/artifacts/html/gallery.html", "purpose": "Static gallery preview.", "required": true},
+    {"path": "design-asset-library/data/asset-registry.json", "purpose": "Asset registry and source provenance.", "required": true},
+    {"path": "design-asset-library/tests/test_asset_browser.py", "purpose": "Asset browser regression tests.", "required": true}
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "asset_count",
+      "description": "At least 600 generated SVG assets exist.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["600 SVG files generated and 600 registry entries present."],
+      "rationale": ""
+    },
+    {
+      "check_id": "family_distribution",
+      "description": "Six asset families each contain 100 assets.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["asset_browser.py families output: abstract/interface/pattern/presentation/status/workflow each 100."],
+      "rationale": ""
+    },
+    {
+      "check_id": "asset_browser",
+      "description": "Search, snippet, and gallery commands work.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["CLI smoke tests and unit tests passed."],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser_smoke",
+      "description": "Gallery loads 600 cards and representative SVG image in a browser.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["Playwright smoke: cardCount 600, firstImageLoaded true, visibleAfterSearch 5."],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace_health",
+      "description": "Whole workspace health remains green after adding many files.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["workspace-health --json: passed, 26 checks, 0 failed."],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "External source licenses must be rechecked before any external file is stored.",
+    "The gallery is static and intentionally does not yet include advanced palette/motif filters beyond text and family filtering."
+  ],
+  "notes": [
+    "No third-party SVG files were copied or downloaded.",
+    "Playwright was reused from the existing presentation-agent dependency; no installation occurred."
+  ]
+}
