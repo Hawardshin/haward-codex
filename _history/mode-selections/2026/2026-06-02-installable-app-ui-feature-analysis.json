@@ -1,0 +1,31 @@
+{
+  "task_id": "2026-06-02-installable-app-ui-feature-analysis",
+  "selected_work_mode": "research",
+  "selection_reason": "The user asked to analyze reference app UI and feature patterns. The work requires current external sources and synthesis, but not source implementation.",
+  "alternatives_considered": [
+    {
+      "work_mode": "quick",
+      "decision": "rejected",
+      "reason": "The request spans many external products and should leave durable search and analysis records."
+    },
+    {
+      "work_mode": "governance",
+      "decision": "rejected",
+      "reason": "No repository policy, operating model, or platform rule is being changed in this slice."
+    },
+    {
+      "work_mode": "standard",
+      "decision": "rejected",
+      "reason": "There is no source implementation or testable code change in this slice."
+    }
+  ],
+  "required_targets": [
+    "web_search_record_targets",
+    "research_summary_targets",
+    "plan_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "omission_check_targets",
+    "evaluation_targets"
+  ]
+}

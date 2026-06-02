@@ -1,0 +1,40 @@
+{
+  "task_id": "2026-06-02-installable-app-ui-feature-analysis",
+  "title": "Analyze reference app UI and feature patterns",
+  "work_mode": "research",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "web search across official reference docs",
+      "status": "completed",
+      "duration_seconds": 300,
+      "measurement": "estimated",
+      "bottleneck_notes": "The analysis needed multiple product and library references, but official docs were sufficient."
+    },
+    {
+      "phase_id": "local_context",
+      "label": "memory bootstrap and local desktop app context review",
+      "status": "completed",
+      "duration_seconds": 120,
+      "measurement": "estimated",
+      "bottleneck_notes": "Existing platform-desktop-app docs already established the optional CLI adapter and Tauri-first direction."
+    },
+    {
+      "phase_id": "synthesis",
+      "label": "reference-by-reference UI and feature synthesis",
+      "status": "completed",
+      "duration_seconds": 360,
+      "measurement": "estimated",
+      "bottleneck_notes": "The main work was translating reference surfaces into run/lane/decision/evidence/capability product objects."
+    },
+    {
+      "phase_id": "history_records",
+      "label": "durable research, plan, trace, and evaluation records",
+      "status": "completed",
+      "duration_seconds": 240,
+      "measurement": "estimated",
+      "bottleneck_notes": "Research mode requires multiple durable records for traceability."
+    }
+  ]
+}

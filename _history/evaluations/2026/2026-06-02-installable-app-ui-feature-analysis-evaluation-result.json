@@ -1,0 +1,28 @@
+{
+  "status": "ready_to_close",
+  "requires_rework": false,
+  "work_mode": "research",
+  "request_summary": "Analyze the UI and feature patterns of installable app references for the multi-CLI desktop platform.",
+  "result_summary": "Created a reference-by-reference UI/feature analysis, screen information architecture, adoption/avoidance decisions, and MVP implementation priority for the installable multi-agent desktop app.",
+  "artifacts": [
+    "_research/topics/platform-desktop-app/2026-06-02-installable-app-ui-feature-analysis.ko.md",
+    "_research/topics/platform-desktop-app/2026-06-02-installable-app-ui-feature-analysis.en.md",
+    "_history/plans/2026/2026-06-02-installable-app-ui-feature-analysis.ko.md",
+    "_history/web-searches/2026/2026-06-02-installable-app-ui-feature-analysis.ko.md"
+  ],
+  "verification": [
+    "Official product and library documentation was used as the source base.",
+    "The analysis maps references to this product's run/lane/decision/artifact/evidence/capability model.",
+    "No dependency installation or implementation changes occurred."
+  ],
+  "gaps": [
+    "Hands-on screenshot benchmarking should run before final visual design."
+  ],
+  "next_actions": [
+    "Upgrade Capability Center cards.",
+    "Build Run Board v1.",
+    "Prototype xterm.js terminal lanes after installation audit.",
+    "Build Decision Inbox v2.",
+    "Build Source Review v1."
+  ]
+}

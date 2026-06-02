@@ -1,0 +1,33 @@
+{
+  "task_id": "2026-06-02-installable-app-ui-feature-analysis",
+  "status": "grounded",
+  "sources_checked": [
+    "https://code.visualstudio.com/docs/getstarted/userinterface",
+    "https://code.visualstudio.com/docs/terminal/getting-started",
+    "https://code.visualstudio.com/docs/sourcecontrol/overview",
+    "https://code.visualstudio.com/api/ux-guidelines/webviews",
+    "https://docs.github.com/desktop",
+    "https://docs.docker.com/desktop/use-desktop/",
+    "https://docs.docker.com/extensions/",
+    "https://manual.raycast.com/",
+    "https://docs.warp.dev/agent-platform/",
+    "https://cursor.com/docs",
+    "https://opencode.ai/",
+    "https://github.com/google-gemini/gemini-cli",
+    "https://github.com/openai/codex",
+    "https://v2.tauri.app/distribute/",
+    "https://www.electronjs.org/docs/latest/",
+    "https://xtermjs.org/docs/",
+    "https://www.npmjs.com/package/monaco-editor"
+  ],
+  "grounding_notes": [
+    "Official docs and official repositories were used as the evidence base.",
+    "Existing local platform-desktop-app architecture and user-flow docs were used to map references into this repository's product direction.",
+    "Community and blog sources were not used as direct evidence."
+  ],
+  "caveats": [
+    "Rapidly changing AI product UI should be re-benchmarked with screenshots before design freeze.",
+    "This slice did not install dependencies or run product UI experiments."
+  ],
+  "unsupported_claims_removed": true
+}

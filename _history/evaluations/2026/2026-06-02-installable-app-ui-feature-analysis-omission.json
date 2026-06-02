@@ -1,0 +1,34 @@
+{
+  "task_id": "2026-06-02-installable-app-ui-feature-analysis",
+  "status": "passed",
+  "checked_items": [
+    {
+      "item": "web_first_intake",
+      "status": "covered",
+      "evidence": "_history/web-searches/2026/2026-06-02-installable-app-ui-feature-analysis.ko.md"
+    },
+    {
+      "item": "reference_ui_feature_matrix",
+      "status": "covered",
+      "evidence": "_research/topics/platform-desktop-app/2026-06-02-installable-app-ui-feature-analysis.ko.md"
+    },
+    {
+      "item": "adopt_and_avoid_decisions",
+      "status": "covered",
+      "evidence": "_history/plans/2026/2026-06-02-installable-app-ui-feature-analysis.ko.md"
+    },
+    {
+      "item": "request_trace",
+      "status": "covered",
+      "evidence": "_history/request-traces/2026/2026-06-02-installable-app-ui-feature-analysis.ko.md"
+    },
+    {
+      "item": "work_summary",
+      "status": "covered",
+      "evidence": "_history/work-summaries/2026/2026-06-02.ko.md"
+    }
+  ],
+  "known_gaps": [
+    "Hands-on screenshot benchmarking was deferred because this slice is source-backed product analysis, not visual QA."
+  ]
+}
