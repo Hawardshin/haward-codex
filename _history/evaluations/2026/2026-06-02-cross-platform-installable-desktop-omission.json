@@ -1,0 +1,139 @@
+{
+  "task": "Create a realistic macOS/Windows installable desktop platform scaffold",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first-research",
+      "description": "Run web search before planning and implementation.",
+      "source": "AGENTS.md, user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-cross-platform-installable-desktop.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "long-design-and-expert-debate",
+      "description": "Record a long design decision with multiple expert viewpoints.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "appropriate-language-selection",
+      "description": "Choose languages/runtimes for shell, UI, platform layer, and possible local service.",
+      "source": "user request, REQ-WS-071",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/desktop-distribution-registry.json",
+        "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "macos-and-windows-installable-structure",
+      "description": "Support realistic macOS and Windows installable product structure.",
+      "source": "user request, REQ-WS-071, PDA-REQ-008",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/macos-execution-profile.json",
+        "platform-desktop-app/configs/windows-execution-profile.json",
+        "platform-desktop-app/src-tauri/tauri.conf.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "tool-neutral-ai-cli-model",
+      "description": "Keep Codex, Claude Code, Cursor, Antigravity configurable above the platform instead of hard dependencies.",
+      "source": "user request, REQ-WS-071",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/desktop-distribution-registry.json",
+        "agent-platform/configs/integrations/cli-adapter-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "actual-signed-installer",
+      "description": "Produce a signed macOS/Windows installer ready for public user installation.",
+      "source": "scope and environment review",
+      "required": false,
+      "status": "deferred",
+      "evidence": [
+        "platform-desktop-app/README.md",
+        "platform-desktop-app/specs/2026-06-02-cross-platform-installable-runtime/validation.ko.md"
+      ],
+      "rationale": "Rust is not installed, and signed installers require Apple Developer ID, Windows code signing certificate, Windows build host or CI, and clean-machine test environments."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/src-tauri/tauri.conf.json",
+      "purpose": "Tauri desktop shell config.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/configs/windows-execution-profile.json",
+      "purpose": "Windows execution and release gate source of truth.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md",
+      "purpose": "Expert debate and runtime decision record.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-02-cross-platform-installable-runtime/spec.ko.md",
+      "purpose": "Spec-driven implementation artifact.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "desktop-readiness",
+      "description": "Run desktop scaffold readiness check.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app run check"
+      ],
+      "rationale": "Passed with intentional Rust-missing warning."
+    },
+    {
+      "check_id": "desktop-node-tests",
+      "description": "Run desktop scaffold tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app test"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "config-contract",
+      "description": "Validate self-documenting shared configs.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract for desktop distribution, macOS profile, Windows profile, memory bootstrap, and core configs"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Actual Tauri compile/build validation is deferred until Rust/Tauri dependencies are installed with audit records.",
+    "Public signed installer validation is deferred until signing credentials and clean-machine test environments exist."
+  ],
+  "notes": [
+    "This work creates the installable product scaffold and governance boundary, not a production-signed installer."
+  ]
+}
+

@@ -8,24 +8,35 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 
 ## Current Direction
 
-- Treat the first installable product as a desktop shell over existing platform capabilities.
-- Keep `workspace-monitor/` as the initial UI candidate instead of duplicating the monitoring interface.
+- Treat the first installable product as a Tauri v2 desktop shell over existing platform capabilities.
+- Keep `workspace-monitor/` as the initial UI source instead of duplicating the monitoring interface.
 - Design the first-run user flow before implementing installer code: open/create/demo workspace, confirm workspace boundary, select view mode, run required readiness checks, then reach the dashboard.
-- Keep optional CLIs, notifications, browser automation, and advanced validators as capability cards that can be configured later instead of blocking initial use.
+- Keep Codex, Claude Code, Cursor, Antigravity, notifications, browser automation, and advanced validators as optional capability cards that can be configured later instead of blocking initial use.
 - Keep `agent-platform/` as the Python-first agent/config/evaluation layer.
 - For macOS, treat `configs/macos-execution-profile.json` as the source of truth for local run, internal `.app`, and public signed/notarized distribution structure.
+- For Windows, treat `configs/windows-execution-profile.json` as the source of truth for local run, internal installer testing, public signed distribution, installer format, WebView2, update, uninstall, and smoke-test structure.
 - Do not bundle user secrets, webhook tokens, browser cookies, or private repository data into installers.
 - Require distribution gates before calling a build production-ready: code signing, notarization where required, installer smoke tests, update policy, uninstall/rollback behavior, privacy review, and dependency/license review.
 
-## Initial Framework Decision
+## Selected Framework Decision
 
-The initial recommendation is a Tauri-first prototype because the platform already has web UI assets and Tauri can wrap web frontends with smaller native bundles. Electron remains a valid fallback when Node/Electron ecosystem maturity, extension-like integrations, or updater/distribution tooling is more important than bundle size.
+The selected first scaffold is Tauri v2:
 
-Final framework selection is not locked. Before implementation, compare at least:
+- Rust/Tauri owns the desktop shell, native window lifecycle, and future scoped native command boundary.
+- `workspace-monitor/` owns the TypeScript/Next.js UI.
+- `agent-platform/` owns Python-first research, planning, evaluation, and config validation.
+- External AI coding CLIs remain optional adapters through `agent-platform/configs/integrations/cli-adapter-registry.json`.
+- Go remains a candidate for a future long-running local service or CLI supervisor if measurement shows that a daemon is needed.
 
-- Tauri desktop shell around `workspace-monitor`
-- Electron desktop shell around `workspace-monitor`
-- Native platform packaging only, if the platform becomes a CLI plus web UI instead of a desktop shell
+Electron, Wails, and native packaging remain fallback/comparison candidates, but new implementation work should target the Tauri scaffold unless a recorded measurement or release blocker changes the decision.
+
+Current machine state checked on 2026-06-02:
+
+- Node/npm: available.
+- Go: available.
+- Rust: not installed.
+
+This means the source scaffold exists, but `tauri:dev` and `tauri:build` are blocked until Rust and Tauri dependencies are installed with an installation audit record.
 
 ## Structure
 
@@ -38,6 +49,8 @@ platform-desktop-app/
   docs/requirements/
   specs/
   src/
+  src-tauri/
+  scripts/
   tests/
 ```
 
@@ -45,26 +58,43 @@ platform-desktop-app/
 
 - Distribution registry: `configs/desktop-distribution-registry.json`
 - macOS execution profile: `configs/macos-execution-profile.json`
+- Windows execution profile: `configs/windows-execution-profile.json`
 - User flow registry: `configs/user-flow-registry.json`
+- Cross-platform runtime decision: `docs/architecture/cross-platform-installable-runtime-decision.ko.md`
 - Product boundary: `docs/product-boundary.ko.md`
 - Packaging strategy: `docs/packaging-strategy.ko.md`
 - macOS execution structure: `docs/macos-execution-structure.ko.md`
 - User flow: `docs/user-flow.ko.md`
 - First-run onboarding: `docs/first-run-onboarding.ko.md`
 - Flow map: `artifacts/user-flow-map.html`
+- Tauri scaffold: `src-tauri/`
 - First spec: `specs/2026-06-02-installable-desktop/`
+- Cross-platform runtime spec: `specs/2026-06-02-cross-platform-installable-runtime/`
 
 ## Commands
 
-No desktop framework dependency has been installed yet.
+No desktop framework dependency has been installed yet. `package.json` declares the intended local Tauri CLI dependency, but `npm install` has not been run in this project.
 
-Current verification is documentation/config focused:
+Current verification is scaffold, documentation, and config focused:
 
 ```bash
+npm --prefix platform-desktop-app run check
+npm --prefix platform-desktop-app test
 python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json
 python3 -m json.tool platform-desktop-app/configs/macos-execution-profile.json
+python3 -m json.tool platform-desktop-app/configs/windows-execution-profile.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/desktop-distribution-registry.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/macos-execution-profile.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/windows-execution-profile.json
 ```
 
-When a desktop framework is actually installed later, create an installation audit record under `_history/installations/YYYY/` and update `_ops/installations/registry.json`.
+Planned after installation audit:
+
+```bash
+cd platform-desktop-app
+npm install
+npm run tauri:dev
+npm run tauri:build
+```
+
+Those commands require Rust, Cargo, Tauri dependencies, and OS-specific signing/build prerequisites. When a desktop framework is actually installed later, create an installation audit record under `_history/installations/YYYY/` and update `_ops/installations/registry.json`.

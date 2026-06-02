@@ -136,6 +136,8 @@
 - 플랫폼을 사용자가 설치하는 소프트웨어, desktop app, OS installer, Tauri, Electron, MSIX, DMG, app signing, notarization, update, uninstall 구조로 만들 때는 `platform-desktop-app/`에서 관리한다. 이것은 레포지토리 setup `install_mode`와 다르다.
 - 설치형 앱의 사용자 플로우, 첫 실행 온보딩, workspace chooser, task timeline, decision inbox, 설정/복구 흐름을 설계하거나 구현할 때는 `platform-desktop-app/configs/user-flow-registry.json`과 `_ops/workflows/74-desktop-user-flow-design.md`를 먼저 확인한다.
 - 설치형 플랫폼을 macOS에서 실행 가능하게 만들 때는 `platform-desktop-app/configs/macos-execution-profile.json`을 사용한다. 개발자 로컬 실행, 내부 테스트 `.app`, public outside-App-Store 배포를 분리하고, Developer ID signing, hardened runtime, notarization, 가능한 경우 stapling, workspace boundary smoke test, update/rollback 계획, privacy/dependency review 없이는 public macOS readiness를 주장하지 않는다.
+- 설치형 플랫폼을 Windows에서 실행 가능하게 만들 때는 `platform-desktop-app/configs/windows-execution-profile.json`을 사용한다. 개발자 로컬 실행, 내부 테스트 installer, public signed distribution을 분리하고, installer target 선택, code signing, SmartScreen/download trust 계획, install/uninstall smoke test, update/rollback 계획, privacy/dependency review 없이는 public Windows readiness를 주장하지 않는다.
+- 첫 설치형 desktop scaffold는 `workspace-monitor`를 감싸는 Tauri v2/Rust shell과 `agent-platform` Python layer 구조를 사용한다. Electron, Wails, native packaging은 측정된 release 또는 유지보수 근거가 결정을 바꾸기 전까지 fallback/comparison option으로 둔다.
 - 설치가 실제로 발생한 작업의 평가 입력에는 `installation_occurred=true`와 `installation_record_targets`를 포함한다.
 - 전역 설치는 피하고, 꼭 필요하면 이유와 제거 방법을 문서화하고 필요한 권한 승인을 받는다.
 - 유용한 인터넷 조사 내용은 출처 URL, 접근일, 요약, 신뢰도, 적용 가능성과 함께 문서화한다.

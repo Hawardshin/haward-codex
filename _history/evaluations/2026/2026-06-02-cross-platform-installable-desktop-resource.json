@@ -1,0 +1,96 @@
+{
+  "task": "Cross-platform installable desktop scaffold resource risk review",
+  "work_mode": "governance",
+  "runtime_context": [
+    "node",
+    "future Tauri desktop shell",
+    "future Python sidecar or local service",
+    "future optional AI coding CLI adapters"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "future-sidecar-process-leak",
+      "category": "process",
+      "description": "A future desktop shell could leave Python sidecar, local service, or CLI child processes running after cancellation or app exit.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "No sidecar or command execution runtime was implemented. The desktop and Windows/macOS profiles require lifecycle cleanup, timeout, update/rollback, and resource checks before adding those paths.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/capabilities/default.json",
+        "platform-desktop-app/configs/macos-execution-profile.json",
+        "platform-desktop-app/configs/windows-execution-profile.json",
+        "agent-platform/configs/integrations/cli-adapter-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "future-renderer-command-execution",
+      "category": "other",
+      "description": "Running AI coding CLIs directly from renderer code could create command injection, path traversal, and resource leak risks.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The Tauri default capability excludes local command execution. CLI tools remain optional adapters behind explicit future contracts.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/capabilities/default.json",
+        "platform-desktop-app/configs/desktop-distribution-registry.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "no-sidecar-started",
+      "resource": "Python sidecar or local service",
+      "create_path": "No sidecar, daemon, watcher, or CLI runner is created by this scaffold.",
+      "cleanup_path": "Not applicable until a real sidecar/local service path exists.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/src-tauri/capabilities/default.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "readiness-process-exits",
+      "resource": "Node readiness script",
+      "create_path": "node scripts/check-readiness.mjs reads JSON files and command availability once.",
+      "cleanup_path": "The script exits after printing JSON and does not start servers or watchers.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app run check"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "node-test-smoke",
+      "metric": "bounded in-process test run",
+      "tool": "node --test",
+      "threshold": "Tests complete without long-running server, watcher, or child-process runtime.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app test: 3 tests passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "tauri-runtime-measurement",
+      "metric": "Tauri process memory and sidecar cleanup",
+      "tool": "Not run",
+      "threshold": "Deferred until Rust/Tauri dependencies are installed and a developer-local run exists.",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "platform-desktop-app/README.md"
+      ],
+      "rationale": "No Tauri process was built or run in this change."
+    }
+  ],
+  "notes": [
+    "Future Tauri dev/build work must add real process lifecycle and memory measurements."
+  ]
+}

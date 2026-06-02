@@ -1,0 +1,119 @@
+{
+  "task": "Ground final claims for the cross-platform installable desktop scaffold",
+  "output_summary": "A Tauri-first macOS/Windows desktop scaffold, Windows execution profile, architecture decision, requirements, specs, and validation records were added.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "tauri-scaffold",
+      "source": "platform-desktop-app/src-tauri/",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "The scaffold files are the repository source of truth for the current desktop shell structure."
+    },
+    {
+      "evidence_id": "windows-profile",
+      "source": "platform-desktop-app/configs/windows-execution-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "The config passed self-documenting config contract validation."
+    },
+    {
+      "evidence_id": "architecture-decision",
+      "source": "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "The decision record links runtime choice, expert debate, and limitations."
+    },
+    {
+      "evidence_id": "web-record",
+      "source": "_history/web-searches/2026/2026-06-02-cross-platform-installable-desktop.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "The search record lists official sources and uncertainty."
+    },
+    {
+      "evidence_id": "validation-output",
+      "source": "local command outputs in this work turn",
+      "source_type": "tool_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Commands returned exit code 0 for JSON checks, readiness check, Node tests, config contracts, memory bootstrap, docs audit, and map generation."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now contains a Tauri-first desktop scaffold under platform-desktop-app.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-scaffold"
+      ],
+      "verification_steps": [
+        "Read src-tauri files.",
+        "Ran platform-desktop-app readiness tests."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The new Windows execution profile records installer, signing, update, uninstall, and smoke-test gates.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "windows-profile"
+      ],
+      "verification_steps": [
+        "Ran check-config-contract on windows-execution-profile.json."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The scaffold is not a signed public installer yet.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "architecture-decision",
+        "validation-output"
+      ],
+      "verification_steps": [
+        "Checked README, validation plan, and readiness output."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The design used official Tauri, Apple, Microsoft, Anthropic, OpenAI, and Google Antigravity sources.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "web-record"
+      ],
+      "verification_steps": [
+        "Checked saved web-search record."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "Rust is not installed on the current machine, so Tauri build execution is deferred.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "validation-output"
+      ],
+      "verification_steps": [
+        "Ran node/npm/rustc/cargo check and platform-desktop-app readiness script."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Actual Tauri compile validation is deferred until Rust and Tauri dependencies are installed.",
+    "Actual public installer validation requires signing credentials and clean-machine test environments."
+  ],
+  "limitation_notes": [
+    "No dependency installation occurred.",
+    "No signed macOS or Windows installer was produced."
+  ]
+}

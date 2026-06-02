@@ -1,0 +1,147 @@
+{
+  "initial_instruction": "지금까지 만든 플랫폼을 적절한 언어 선택과 긴 설계/전문가 토론 과정을 거쳐 현실적인 macOS와 Windows 설치형 구조로 만들고, Codex와 Claude Code 등 도구를 플랫폼 위에서 설정할 수 있게 하며, 오래되거나 모순적인 구조를 정리해 달라는 요청.",
+  "result_summary": "A Tauri-first installable desktop scaffold was added under platform-desktop-app, with Windows execution profile, updated desktop distribution registry, expert runtime decision docs, shared/project requirements, spec artifacts, memory anchors, persistent instructions, readiness tests, and close-out guard records. No Rust/Tauri dependency installation or signed installer build occurred.",
+  "work_mode": "governance",
+  "changed_files": [
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/.gitignore",
+    "platform-desktop-app/package.json",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/src-tauri/Cargo.toml",
+    "platform-desktop-app/src-tauri/build.rs",
+    "platform-desktop-app/src-tauri/src/main.rs",
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "platform-desktop-app/src-tauri/tauri.conf.json",
+    "platform-desktop-app/src-tauri/capabilities/default.json",
+    "platform-desktop-app/src-tauri/icons/.gitkeep",
+    "platform-desktop-app/configs/desktop-distribution-registry.json",
+    "platform-desktop-app/configs/windows-execution-profile.json",
+    "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md",
+    "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/specs/2026-06-02-cross-platform-installable-runtime/",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "_ops/projects/registry.json",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "_history/web-searches/2026/2026-06-02-cross-platform-installable-desktop.ko.md",
+    "_history/web-searches/2026/2026-06-02-cross-platform-installable-desktop.en.md",
+    "_history/plans/2026/2026-06-02-cross-platform-installable-desktop.ko.md",
+    "_history/plans/2026/2026-06-02-cross-platform-installable-desktop.en.md",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/request-traces/2026/2026-06-02-cross-platform-installable-desktop.ko.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-timings/2026/2026-06-02-cross-platform-installable-desktop.json",
+    "_history/evaluations/2026/2026-06-02-cross-platform-installable-desktop-omission.json",
+    "_history/evaluations/2026/2026-06-02-cross-platform-installable-desktop-resource.json",
+    "_history/evaluations/2026/2026-06-02-cross-platform-installable-desktop-cli-pipeline.json",
+    "_history/evaluations/2026/2026-06-02-cross-platform-installable-desktop-grounding.json"
+  ],
+  "verification": [
+    "python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json platform-desktop-app/configs/windows-execution-profile.json platform-desktop-app/src-tauri/tauri.conf.json platform-desktop-app/src-tauri/capabilities/default.json agent-platform/configs/memory/bootstrap-manifest.json: OK",
+    "npm --prefix platform-desktop-app run check: ready_for_dependency_install_audit with Rust missing warning",
+    "npm --prefix platform-desktop-app test: 3 tests passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract desktop distribution, macOS profile, Windows profile: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "python3 _tools/workspace-index/src/workspace_index.py: updated repository and prompt maps",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions: coverage_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources: resource_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline: pipeline_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding: ready_to_publish",
+    "python3 _tools/work-timer/src/work_timer.py check: ready with partial timing warnings"
+  ],
+  "references_checked": [
+    "https://v2.tauri.app/distribute/",
+    "https://v2.tauri.app/distribute/windows-installer/",
+    "https://v2.tauri.app/develop/sidecar/",
+    "https://v2.tauri.app/reference/config/",
+    "https://v2.tauri.app/plugin/updater/",
+    "https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution",
+    "https://learn.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps",
+    "https://learn.microsoft.com/en-us/windows/msix/package/sign-msix-package-guide",
+    "https://wails.io/docs/introduction/",
+    "https://docs.anthropic.com/en/docs/claude-code/getting-started",
+    "https://help.openai.com/en/articles/11096431",
+    "https://www.antigravity.google/product/antigravity-cli",
+    "platform-desktop-app/configs/desktop-distribution-registry.json",
+    "platform-desktop-app/configs/macos-execution-profile.json",
+    "agent-platform/configs/runtime/language-decision-registry.json",
+    "agent-platform/configs/integrations/cli-adapter-registry.json"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-cross-platform-installable-desktop-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-cross-platform-installable-desktop.ko.md",
+    "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md",
+    "platform-desktop-app/specs/2026-06-02-cross-platform-installable-runtime/plan.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-cross-platform-installable-desktop.ko.md",
+    "platform-desktop-app/specs/2026-06-02-cross-platform-installable-runtime/plan.ko.md",
+    "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-02-cross-platform-installable-desktop.ko.md",
+    "platform-desktop-app/specs/2026-06-02-cross-platform-installable-runtime/plan.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-cross-platform-installable-desktop.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-02-cross-platform-installable-runtime/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-02-cross-platform-installable-runtime/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-02-cross-platform-installable-runtime/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-02-cross-platform-installable-runtime/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-02-cross-platform-installable-runtime/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-02-cross-platform-installable-desktop-resource.json"
+  ],
+  "cli_pipeline_occurred": true,
+  "cli_pipeline_targets": [
+    "_history/evaluations/2026/2026-06-02-cross-platform-installable-desktop-cli-pipeline.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-cross-platform-installable-desktop-omission.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-cross-platform-installable-desktop.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-cross-platform-installable-desktop.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Create a project-local Rust/Tauri installation audit and run developer-local Tauri dev verification.",
+    "Add a Windows CI/build-host plan and certificate handling guide.",
+    "Expose installability readiness and missing toolchain state in workspace-monitor."
+  ]
+}

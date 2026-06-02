@@ -1,0 +1,173 @@
+{
+  "pipeline_id": "desktop-optional-ai-cli-capability-checks",
+  "purpose": "Model future optional AI coding CLI capability checks as an explicit process graph before the desktop shell ever invokes external tools.",
+  "work_mode": "governance",
+  "risk_level": "medium",
+  "processes": [
+    {
+      "process_id": "check_codex_cli",
+      "adapter_id": "codex",
+      "command": "codex",
+      "args": [
+        "--version"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 10,
+      "max_output_bytes": 20000,
+      "required": false
+    },
+    {
+      "process_id": "check_claude_cli",
+      "adapter_id": "claude-code",
+      "command": "claude",
+      "args": [
+        "--version"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 10,
+      "max_output_bytes": 20000,
+      "required": false
+    },
+    {
+      "process_id": "merge_capability_status",
+      "adapter_id": "agent-platform",
+      "command": "python3",
+      "args": [
+        "-m",
+        "agent_platform.cli",
+        "check-config-contract",
+        "configs/integrations/cli-adapter-registry.json"
+      ],
+      "cwd": "agent-platform",
+      "env_keys": [
+        "PATH",
+        "PYTHONPATH"
+      ],
+      "timeout_seconds": 30,
+      "max_output_bytes": 100000,
+      "required": true
+    }
+  ],
+  "pipes": [
+    {
+      "pipe_id": "codex_status_to_merge",
+      "from_process": "check_codex_cli",
+      "from_stream": "stdout",
+      "to_process": "merge_capability_status",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "codex-capability-status",
+      "required": false
+    },
+    {
+      "pipe_id": "claude_status_to_merge",
+      "from_process": "check_claude_cli",
+      "from_stream": "stdout",
+      "to_process": "merge_capability_status",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "claude-capability-status",
+      "required": false
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "codex-capability-status",
+      "kind": "temp_file",
+      "path": "_tmp/desktop-cli/codex-status.json",
+      "produced_by": "check_codex_cli",
+      "consumed_by": [
+        "merge_capability_status"
+      ],
+      "required": false,
+      "max_bytes": 20000,
+      "format": "json",
+      "retention_policy": "",
+      "cleanup_policy": "Delete after capability summary is written.",
+      "provenance": [
+        "OpenAI Codex CLI official docs"
+      ],
+      "validation": [
+        "Treat missing command as capability_missing, not app failure."
+      ]
+    },
+    {
+      "artifact_id": "claude-capability-status",
+      "kind": "temp_file",
+      "path": "_tmp/desktop-cli/claude-status.json",
+      "produced_by": "check_claude_cli",
+      "consumed_by": [
+        "merge_capability_status"
+      ],
+      "required": false,
+      "max_bytes": 20000,
+      "format": "json",
+      "retention_policy": "",
+      "cleanup_policy": "Delete after capability summary is written.",
+      "provenance": [
+        "Anthropic Claude Code official docs"
+      ],
+      "validation": [
+        "Treat missing command as capability_missing, not app failure."
+      ]
+    }
+  ],
+  "execution_policy": {
+    "shell_allowed": false,
+    "argv_arrays_required": true,
+    "explicit_pipe_graph_required": true,
+    "explicit_cwd_required": true,
+    "adapter_allowlist": [
+      "codex",
+      "claude-code",
+      "agent-platform"
+    ]
+  },
+  "safety_controls": [
+    "adapter_allowlist",
+    "argv_arguments",
+    "shell_disabled_by_default",
+    "explicit_cwd_boundary",
+    "environment_allowlist",
+    "secret_redaction",
+    "output_redaction",
+    "permission_scope",
+    "fallback_behavior",
+    "audit_logging"
+  ],
+  "resource_controls": {
+    "timeout_policy": "Each optional CLI check has a short timeout and missing tools return capability_missing.",
+    "max_output_bytes": 140000,
+    "cancellation_policy": "Cancel outstanding checks when the desktop capability panel closes or the app exits.",
+    "cleanup_policy": "Delete temporary capability-status files after merge.",
+    "orphan_process_policy": "Terminate process group on cancellation.",
+    "backpressure_policy": "Version checks have bounded output; larger CLI outputs must use bounded artifacts."
+  },
+  "merge_strategy": "Merge optional CLI availability into a capability summary without blocking unrelated desktop app features.",
+  "source_provenance": [
+    "agent-platform/configs/integrations/cli-adapter-registry.json",
+    "_history/web-searches/2026/2026-06-02-cross-platform-installable-desktop.ko.md",
+    "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md"
+  ],
+  "plan_evidence": [
+    "User requested Codex, Claude Code, and similar tools to be configurable on top of the platform.",
+    "CLI adapter registry requires missing optional CLIs to degrade as capability_missing."
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-02-cross-platform-installable-desktop-cli-pipeline.json"
+  ],
+  "rollback_plan": [
+    "Disable desktop-originated CLI checks and show manual setup instructions.",
+    "Keep workspace-monitor browsing available without AI CLI capability checks."
+  ],
+  "notes": [
+    "This is a planned process graph, not an executed runtime path."
+  ]
+}
+

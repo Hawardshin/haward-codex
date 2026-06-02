@@ -69,6 +69,8 @@
         "platform-desktop-app/docs/",
         "platform-desktop-app/docs/requirements/",
         "platform-desktop-app/src/",
+        "platform-desktop-app/src-tauri/",
+        "platform-desktop-app/scripts/",
         "platform-desktop-app/tests/",
         "platform-desktop-app/specs/"
       ],
@@ -81,6 +83,7 @@
       ],
       "boundary_notes": [
         "End-user installer packaging belongs here, not in agent-platform install_mode setup profiles.",
+        "Use the selected Tauri-first scaffold around workspace-monitor unless measured release or maintenance evidence changes the decision.",
         "Reuse workspace-monitor as the initial UI candidate unless desktop-specific research proves a separate UI is easier to maintain.",
         "Do not bundle real secrets, private snapshots, or environment-specific tokens in installers.",
         "Actual Tauri, Electron, or packager dependency installation must follow the installation audit workflow."

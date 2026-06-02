@@ -1,0 +1,417 @@
+{
+  "schema_version": "2026-06-02",
+  "name": "windows-execution-profile",
+  "purpose": "Defines the Windows-specific execution structure for running the agent platform as local installable desktop software, from developer launch through signed installer distribution.",
+  "reader_guide": {
+    "summary": "Use this profile before claiming that the platform can run on Windows, adding Tauri/Electron installer code, launching local agents or CLIs from the desktop shell, or preparing MSI, NSIS, or MSIX releases.",
+    "how_to_read": [
+      "Read execution_levels to distinguish developer launch, internal installer testing, and public signed distribution.",
+      "Read process_model before launching Python agents, local services, or external AI coding CLIs from a desktop app.",
+      "Read bundle_and_distribution_targets before choosing MSI, NSIS setup exe, or MSIX.",
+      "Read signing_requirements before public download, enterprise deployment, or Microsoft Store distribution claims.",
+      "Read smoke_tests before calling a Windows build runnable or release-ready."
+    ],
+    "owner": "platform-desktop-app",
+    "last_reviewed": "2026-06-02",
+    "update_triggers": [
+      "The Windows desktop shell framework changes.",
+      "Tauri, Electron, Wails, or Windows packaging dependencies are installed.",
+      "The app starts launching Python agents, local services, file watchers, or external CLIs.",
+      "Windows installer format, code signing, WebView2, update, uninstall, or smoke-test behavior changes.",
+      "A Windows install, uninstall, SmartScreen, WebView2, or first-run smoke test fails."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "tauri_windows_installer",
+      "title": "Tauri: Windows Installer",
+      "url": "https://v2.tauri.app/distribute/windows-installer/",
+      "source_type": "official_docs",
+      "used_for": [
+        "MSI and NSIS installer options",
+        "Windows build host and WebView2 distribution notes"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "tauri_windows_signing",
+      "title": "Tauri: Windows Code Signing",
+      "url": "https://v2.tauri.app/distribute/sign/windows/",
+      "source_type": "official_docs",
+      "used_for": [
+        "Windows code signing requirements",
+        "SmartScreen warning and Microsoft Store trust notes"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "tauri_updater",
+      "title": "Tauri: Updater",
+      "url": "https://v2.tauri.app/plugin/updater/",
+      "source_type": "official_docs",
+      "used_for": [
+        "signed updater artifacts",
+        "Windows MSI and NSIS update artifact planning"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "microsoft_msix_packaging",
+      "title": "Microsoft Learn: Packaging MSIX apps",
+      "url": "https://learn.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps",
+      "source_type": "official_docs",
+      "used_for": [
+        "MSIX packaging comparison",
+        "Windows packaging signing expectation"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "microsoft_msix_signing",
+      "title": "Microsoft Learn: Sign an MSIX package",
+      "url": "https://learn.microsoft.com/en-us/windows/msix/package/sign-msix-package-guide",
+      "source_type": "official_docs",
+      "used_for": [
+        "MSIX certificate and signing workflow",
+        "public or enterprise deployment trust requirement"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "desktop_distribution_registry",
+      "title": "Desktop Distribution Registry",
+      "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "overall desktop packaging boundary",
+        "selected Tauri-first desktop shell architecture"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "cli_adapter_registry",
+      "title": "CLI Adapter Registry",
+      "path": "agent-platform/configs/integrations/cli-adapter-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "optional external CLI execution boundary",
+        "capability_missing fallback behavior"
+      ],
+      "last_checked": "2026-06-02"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "developer_launch_is_not_public_distribution",
+      "rule": "A developer-local Windows launch may be unsigned, but a public download or enterprise installer must have a documented code-signing strategy and install/uninstall smoke tests.",
+      "reason": "Windows trust, SmartScreen, enterprise deployment, and update expectations differ from local developer runs.",
+      "applies_to": [
+        "execution_levels",
+        "signing_requirements",
+        "release_gates"
+      ]
+    },
+    {
+      "id": "desktop_shell_owns_user_entry",
+      "rule": "The Windows app owns the user entry point, while agent-platform remains the Python-first local platform layer behind a documented service, sidecar, or command boundary.",
+      "reason": "The user should install and open one app, but platform internals must remain maintainable and testable.",
+      "applies_to": [
+        "process_model",
+        "runtime_boundaries"
+      ]
+    },
+    {
+      "id": "workspace_access_requires_user_choice",
+      "rule": "The Windows app must not scan arbitrary folders before the user selects or creates a workspace and sees what will be indexed or executed.",
+      "reason": "Installable software needs a stronger privacy boundary than a repository-local script.",
+      "applies_to": [
+        "process_model",
+        "permissions",
+        "smoke_tests"
+      ]
+    },
+    {
+      "id": "optional_cli_adapters_do_not_block_launch",
+      "rule": "Missing Codex, Claude Code, Cursor, Antigravity, GitHub CLI, package managers, or deployment CLIs must disable only the related capability and show setup guidance.",
+      "reason": "The Windows app should open and show useful history/agents even before every optional CLI is configured.",
+      "applies_to": [
+        "process_model",
+        "runtime_boundaries",
+        "smoke_tests"
+      ]
+    },
+    {
+      "id": "updates_require_signed_channel",
+      "rule": "Auto-update is not enabled until artifacts, manifests, signatures, rollback behavior, and failure recovery are documented and smoke-tested on Windows.",
+      "reason": "A broken update path can make local automation software harder to trust than manual workflows.",
+      "applies_to": [
+        "update_strategy",
+        "release_gates"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "execution_levels",
+      "meaning": "The ladder from development launch to public signed Windows distribution.",
+      "required": true
+    },
+    {
+      "field": "process_model",
+      "meaning": "The runtime process shape for UI, local services, Python agents, repository data, and optional CLIs.",
+      "required": true
+    },
+    {
+      "field": "runtime_boundaries",
+      "meaning": "Ownership boundaries between Tauri/Electron shell, workspace-monitor UI, Python agent layer, and CLI adapters.",
+      "required": true
+    },
+    {
+      "field": "bundle_and_distribution_targets",
+      "meaning": "Windows artifact formats and when to use them.",
+      "required": true
+    },
+    {
+      "field": "signing_requirements",
+      "meaning": "Windows code-signing, MSIX signing, and SmartScreen trust requirements.",
+      "required": true
+    },
+    {
+      "field": "smoke_tests",
+      "meaning": "Minimum checks before a Windows build can be called runnable or release-ready.",
+      "required": true
+    }
+  ],
+  "execution_levels": [
+    {
+      "id": "developer_local_run",
+      "label": "Developer local run",
+      "meaning": "Run the desktop UI and platform from the repository on a developer Windows PC or VM.",
+      "allowed_artifacts": [
+        "workspace-monitor dev server",
+        "workspace-monitor static export preview",
+        "future unsigned Tauri/Electron development app"
+      ],
+      "required_gates": [
+        "no production distribution claim",
+        "workspace path explicitly selected",
+        "no real secrets bundled",
+        "developer-only warning visible in docs"
+      ]
+    },
+    {
+      "id": "internal_test_installer",
+      "label": "Internal test installer",
+      "meaning": "A packaged installer used for local or trusted internal testing.",
+      "allowed_artifacts": [
+        "unsigned or test-signed MSI",
+        "unsigned or test-signed NSIS setup exe",
+        "test-signed MSIX only when MSIX behavior is under review"
+      ],
+      "required_gates": [
+        "framework dependency installation audit",
+        "clean Windows 11 account smoke test",
+        "workspace open/create/demo flow",
+        "optional CLI missing-capability behavior",
+        "uninstall behavior",
+        "crash/log/recovery behavior"
+      ]
+    },
+    {
+      "id": "public_signed_distribution",
+      "label": "Public signed distribution",
+      "meaning": "A normal user can download, install, open, update, and uninstall the app without opaque security workarounds.",
+      "allowed_artifacts": [
+        "signed MSI",
+        "signed NSIS setup exe",
+        "signed MSIX only if Microsoft Store or enterprise deployment is selected"
+      ],
+      "required_gates": [
+        "Windows code-signing certificate strategy",
+        "SmartScreen and download trust plan",
+        "installer and uninstaller smoke test",
+        "update and rollback policy",
+        "privacy and dependency/license review",
+        "fresh Windows install/open smoke test"
+      ]
+    }
+  ],
+  "process_model": {
+    "recommended_initial_shape": "Tauri-first Windows desktop shell wrapping workspace-monitor output, with agent-platform invoked through a documented local service or sidecar only after the service boundary is specified.",
+    "ui_process": "Desktop shell presents workspace-monitor as the first UI and adds native dialogs only where Windows file/workspace selection or permissions need native behavior.",
+    "agent_process": "Python agent-platform remains outside renderer code. It is launched later as a sidecar, local service, or explicit command boundary with lifecycle cleanup and logs.",
+    "data_process": "Repository documents and generated snapshots are read only from user-selected workspace paths.",
+    "cli_process": "External CLIs run only through adapter contracts with allowlisted commands, timeouts, output redaction, and capability_missing fallback.",
+    "background_process_policy": "No file watcher, local daemon, or queue starts silently before the user selects a workspace and the app records lifecycle cleanup."
+  },
+  "runtime_boundaries": [
+    {
+      "component": "desktop_shell",
+      "preferred_runtime": "Rust/Tauri",
+      "owns": [
+        "Windows app entry point",
+        "native window lifecycle",
+        "native workspace selection",
+        "future signed update integration"
+      ],
+      "does_not_own": [
+        "core agent reasoning",
+        "repository governance rules",
+        "external CLI provider behavior"
+      ]
+    },
+    {
+      "component": "workspace_monitor_ui",
+      "preferred_runtime": "TypeScript/Next.js",
+      "owns": [
+        "dashboard, history, docs, agents, source viewer, and decision inbox UI surfaces"
+      ],
+      "does_not_own": [
+        "Windows installer signing",
+        "local command execution policy"
+      ]
+    },
+    {
+      "component": "agent_platform_layer",
+      "preferred_runtime": "Python",
+      "owns": [
+        "research, planning, evaluation, config checks, and governance validators"
+      ],
+      "does_not_own": [
+        "desktop shell packaging",
+        "Windows installer trust"
+      ]
+    },
+    {
+      "component": "optional_cli_adapters",
+      "preferred_runtime": "external process adapters",
+      "owns": [
+        "tool-specific command invocation under explicit adapter contracts"
+      ],
+      "does_not_own": [
+        "core product identity",
+        "app launch availability"
+      ]
+    }
+  ],
+  "bundle_and_distribution_targets": [
+    {
+      "format": "msi",
+      "purpose": "Primary Windows installer candidate when standard enterprise-friendly installer behavior is needed.",
+      "status": "preferred_public_candidate",
+      "notes": "Tauri documents MSI creation through WiX and notes that MSI creation requires Windows."
+    },
+    {
+      "format": "nsis setup exe",
+      "purpose": "Primary Windows setup executable candidate for user-friendly direct downloads and cross-compilation experiments.",
+      "status": "preferred_public_candidate"
+    },
+    {
+      "format": "msix",
+      "purpose": "Use when Microsoft Store, enterprise MSIX deployment, or app-container package semantics are explicitly selected.",
+      "status": "conditional"
+    }
+  ],
+  "signing_requirements": {
+    "code_signing_required_for_public_distribution": true,
+    "msix_requires_certificate": true,
+    "smart_screen_plan_required": true,
+    "secret_policy": "Windows signing certificates, private keys, account credentials, and update private keys must be injected through CI secrets, OS certificate store, hardware token, or user-provided runtime input; they must not be committed.",
+    "test_signing_policy": "Self-signed or test certificates are acceptable only for internal testing and must not be described as public distribution-ready."
+  },
+  "webview2_strategy": {
+    "initial_policy": "Use the Tauri default WebView2 installer behavior until offline installation becomes a real user requirement.",
+    "offline_policy": "Only bundle or pin WebView2 runtime files after installer size, patch cadence, offline-user need, and support burden are reviewed.",
+    "smoke_test": "Confirm Windows 10/11 target machines can open the app with the selected WebView2 mode."
+  },
+  "permissions": [
+    {
+      "capability": "workspace_file_access",
+      "default": "user_selected_path_only",
+      "notes": "Use native folder picker or explicit workspace path. Do not scan home directories by default."
+    },
+    {
+      "capability": "network_access",
+      "default": "disabled_until_needed",
+      "notes": "Needed only for update checks, web research, notifications, or remote services; document endpoint class before release."
+    },
+    {
+      "capability": "local_command_execution",
+      "default": "adapter_allowlist_required",
+      "notes": "All CLI execution must go through adapter contracts and visible user consent."
+    },
+    {
+      "capability": "notifications",
+      "default": "optional_user_enabled",
+      "notes": "Slack, Discord, Teams, and OS notifications remain optional capabilities."
+    }
+  ],
+  "update_strategy": {
+    "initial_status": "disabled_until_release_channel_exists",
+    "tauri_path": "Use Tauri updater only after update server or static manifest hosting, update signing keys, rollback policy, and failure UI are documented.",
+    "manual_update_fallback": "Before auto-update, provide versioned downloads and explicit migration notes.",
+    "windows_specific_warning": "Do not enable update behavior until MSI/NSIS/MSIX replacement, uninstall, and rollback behavior are tested on a clean Windows account."
+  },
+  "smoke_tests": [
+    {
+      "id": "dev_open",
+      "level": "developer_local_run",
+      "check": "Open local UI from a selected workspace and verify history, docs, agent catalog, and source viewer render."
+    },
+    {
+      "id": "clean_account_open",
+      "level": "internal_test_installer",
+      "check": "Install/open the app on a clean Windows 11 account without developer repository state."
+    },
+    {
+      "id": "workspace_boundary",
+      "level": "internal_test_installer",
+      "check": "Confirm the app asks for a workspace before indexing or running commands."
+    },
+    {
+      "id": "missing_cli_degrades",
+      "level": "internal_test_installer",
+      "check": "Remove or hide optional CLIs and verify only related capabilities are disabled."
+    },
+    {
+      "id": "uninstall_preserves_workspace",
+      "level": "internal_test_installer",
+      "check": "Uninstall the app and verify app files are removed while the user-selected workspace is not deleted without explicit consent."
+    },
+    {
+      "id": "signed_distribution",
+      "level": "public_signed_distribution",
+      "check": "Download and install the signed artifact on a separate Windows machine or clean VM and verify launch without opaque trust workarounds."
+    },
+    {
+      "id": "update_failure_recovery",
+      "level": "public_signed_distribution",
+      "check": "Simulate update unavailable, bad manifest, and rollback paths before enabling auto-update."
+    }
+  ],
+  "release_gates": [
+    "Framework decision record comparing Tauri, Electron, Wails, and native packaging remains current.",
+    "Project-local dependency installation audit exists if desktop dependencies are installed.",
+    "Windows app process model and sidecar/local-service lifecycle are documented.",
+    "Code-signing certificate strategy, MSIX signing needs, and SmartScreen plan are complete.",
+    "No secrets or private repository snapshots are bundled.",
+    "Workspace boundary, optional CLI degradation, install, uninstall, and clean-account smoke tests pass.",
+    "Update, rollback, uninstall, and failure recovery are documented and tested before public release."
+  ],
+  "planned_commands": [
+    {
+      "id": "future-tauri-windows-build",
+      "status": "not_run",
+      "scope": "platform-desktop-app",
+      "command": "npm run tauri:build on a Windows build host after Rust, Node, Tauri CLI, and signing prerequisites are installed and audited.",
+      "audit_required_if_run": true
+    },
+    {
+      "id": "future-windows-signed-release",
+      "status": "not_run",
+      "scope": "platform-desktop-app",
+      "command": "To be defined after certificate strategy, CI secrets, and installer target are selected.",
+      "audit_required_if_run": true
+    }
+  ]
+}

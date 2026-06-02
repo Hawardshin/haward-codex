@@ -6,7 +6,8 @@
     "summary": "Use this registry before turning the platform into a desktop app, choosing Electron or Tauri, adding packaging scripts, or preparing an installer release.",
     "how_to_read": [
       "Read product_boundary first so repository setup install_mode is not confused with end-user installers.",
-      "Read candidate_frameworks to compare Tauri, Electron, and native packaging routes.",
+      "Read selected_platform_architecture first to understand the current Tauri-first productization decision.",
+      "Read candidate_frameworks to understand the alternatives kept as fallback or comparison routes.",
       "Read packaging_targets to understand OS-specific installer and signing expectations.",
       "Read release_gates before claiming that a build is production-ready.",
       "Treat commands as planned future commands until dependencies are actually installed and audited."
@@ -46,7 +47,7 @@
     {
       "id": "tauri_distribute",
       "title": "Tauri: Distribute",
-      "url": "https://tauri.app/distribute/",
+      "url": "https://v2.tauri.app/distribute/",
       "source_type": "official_docs",
       "used_for": [
         "Tauri app distribution and bundling entry point"
@@ -56,10 +57,42 @@
     {
       "id": "tauri_windows_installer",
       "title": "Tauri: Windows Installer",
-      "url": "https://tauri.app/distribute/windows-installer/",
+      "url": "https://v2.tauri.app/distribute/windows-installer/",
       "source_type": "official_docs",
       "used_for": [
         "Windows MSI and setup executable packaging options for Tauri"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "tauri_sidecar",
+      "title": "Tauri: Embedding External Binaries",
+      "url": "https://v2.tauri.app/develop/sidecar/",
+      "source_type": "official_docs",
+      "used_for": [
+        "future Python sidecar or local service packaging pattern",
+        "explicit external binary boundary"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "tauri_updater",
+      "title": "Tauri: Updater",
+      "url": "https://v2.tauri.app/plugin/updater/",
+      "source_type": "official_docs",
+      "used_for": [
+        "future signed updater artifact strategy",
+        "macOS and Windows update release gates"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "tauri_windows_signing",
+      "title": "Tauri: Windows Code Signing",
+      "url": "https://v2.tauri.app/distribute/sign/windows/",
+      "source_type": "official_docs",
+      "used_for": [
+        "Windows code-signing and SmartScreen release gate"
       ],
       "last_checked": "2026-06-02"
     },
@@ -128,6 +161,17 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "windows_execution_profile",
+      "title": "Windows Execution Profile",
+      "path": "platform-desktop-app/configs/windows-execution-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "Windows-specific execution levels",
+        "MSI, NSIS, MSIX, WebView2, code-signing, SmartScreen, update, uninstall, and smoke-test gates"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
       "id": "workspace_monitor",
       "title": "Workspace Monitor",
       "path": "workspace-monitor/README.md",
@@ -172,6 +216,18 @@
         "task run timeline and recovery"
       ],
       "last_checked": "2026-06-02"
+    },
+    {
+      "id": "cross_platform_runtime_decision",
+      "title": "Cross-Platform Installable Runtime Decision",
+      "path": "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md",
+      "source_type": "internal",
+      "used_for": [
+        "expert debate record",
+        "selected Tauri-first architecture",
+        "language/runtime decision"
+      ],
+      "last_checked": "2026-06-02"
     }
   ],
   "structure_rules": [
@@ -192,6 +248,17 @@
       "applies_to": [
         "runtime_strategy",
         "recommended_initial_path"
+      ]
+    },
+    {
+      "id": "tauri_first_is_selected_shell_until_measurement_changes_it",
+      "rule": "Use Tauri v2/Rust as the selected first desktop shell architecture around workspace-monitor. Electron and Wails remain fallback candidates, but new implementation work should target the Tauri scaffold unless a recorded measurement or release blocker changes the decision.",
+      "reason": "The long design review favored a smaller native shell with explicit command boundaries while preserving Python and Next.js ownership.",
+      "applies_to": [
+        "selected_platform_architecture",
+        "recommended_initial_path",
+        "candidate_frameworks",
+        "runtime_strategy"
       ]
     },
     {
@@ -268,6 +335,16 @@
       "field": "macos_execution_profile",
       "meaning": "Companion registry defining macOS execution levels, process model, app bundle targets, signing/notarization, permissions, updates, and smoke tests.",
       "required": true
+    },
+    {
+      "field": "windows_execution_profile",
+      "meaning": "Companion registry defining Windows execution levels, installer targets, code signing, WebView2, updates, uninstall, and smoke tests.",
+      "required": true
+    },
+    {
+      "field": "selected_platform_architecture",
+      "meaning": "The accepted architecture and language/runtime placement for the current installable desktop product direction.",
+      "required": true
     }
   ],
   "user_flow_registry": {
@@ -289,6 +366,16 @@
       "macOS process model is documented before launching Python agents or external CLIs from the desktop shell",
       "Developer ID, hardened runtime, notarization, and stapling plan exists before public outside-App-Store distribution",
       "fresh Mac install/open smoke test exists before release-ready claim"
+    ]
+  },
+  "windows_execution_profile": {
+    "path": "platform-desktop-app/configs/windows-execution-profile.json",
+    "status": "required_before_windows_app_or_installer_claim",
+    "required_checks": [
+      "execution level is declared as developer_local_run, internal_test_installer, or public_signed_distribution",
+      "Windows process model is documented before launching Python agents or external CLIs from the desktop shell",
+      "MSI, NSIS, or MSIX installer target is selected before public distribution",
+      "code-signing, SmartScreen/download trust, update, uninstall, and clean Windows smoke-test plan exists before release-ready claim"
     ]
   },
   "product_boundary": {
@@ -314,20 +401,79 @@
     ]
   },
   "recommended_initial_path": {
-    "id": "tauri_first_desktop_shell",
-    "status": "recommended_for_prototype",
-    "summary": "Prototype a Tauri desktop shell that wraps the existing monitor UI and calls a documented platform service boundary only after runtime needs are clearer.",
+    "id": "tauri_first_cross_platform_shell",
+    "status": "selected_for_first_scaffold",
+    "summary": "Build a Tauri v2 desktop shell that wraps the existing workspace-monitor static UI, keeps agent-platform as the Python layer, and treats Codex, Claude Code, Cursor, Antigravity, and other CLIs as optional adapters.",
     "why": [
       "The repository already has web UI output in workspace-monitor.",
       "A smaller desktop shell is preferable while the product boundary is still forming.",
-      "Tauri and Electron should still be compared before any dependency installation."
+      "Tauri gives a clear Rust native boundary for future command scopes, sidecars, and signed updater work.",
+      "The platform goal is to configure multiple AI coding tools above a shared workspace platform, not wrap one CLI."
     ],
-    "decision_not_locked_until": [
-      "native API needs are known",
-      "auto-update requirements are known",
-      "Python sidecar or local service strategy is decided",
-      "macOS, Windows, and optional Linux installer needs are prioritized"
+    "fallback_reconsideration_triggers": [
+      "Tauri build or signing workflow blocks the release after a measured prototype",
+      "Electron ecosystem tooling lowers total maintenance cost despite larger resource footprint",
+      "Wails becomes clearly better because the desktop backend becomes a Go-owned local service",
+      "Native packaging only proves enough because users prefer browser plus CLI instead of a shell"
     ]
+  },
+  "selected_platform_architecture": {
+    "status": "scaffolded_not_public_release_ready",
+    "desktop_shell": {
+      "runtime": "Rust/Tauri v2",
+      "source_paths": [
+        "platform-desktop-app/package.json",
+        "platform-desktop-app/src-tauri/"
+      ],
+      "owns": [
+        "native desktop entry point",
+        "window lifecycle",
+        "future signed updater integration",
+        "future scoped local command boundary"
+      ]
+    },
+    "ui": {
+      "runtime": "TypeScript/Next.js",
+      "source_path": "workspace-monitor/",
+      "build_output": "workspace-monitor/out",
+      "tauri_frontend_dist": "../../workspace-monitor/out"
+    },
+    "agent_layer": {
+      "runtime": "Python",
+      "source_path": "agent-platform/",
+      "current_boundary": "config and CLI validation commands",
+      "future_boundaries": [
+        "sidecar binary",
+        "local service",
+        "explicit command adapter"
+      ]
+    },
+    "local_service_candidate": {
+      "runtime": "Go",
+      "status": "candidate_after_measured_need",
+      "use_when": [
+        "long-running file watcher",
+        "multi-process CLI supervisor",
+        "local daemon with clearer lifecycle than Python subprocesses"
+      ]
+    },
+    "assistant_cli_capabilities": {
+      "status": "optional_adapters",
+      "known_targets": [
+        "Codex",
+        "Claude Code",
+        "Cursor",
+        "Antigravity"
+      ],
+      "registry_path": "agent-platform/configs/integrations/cli-adapter-registry.json",
+      "failure_behavior": "capability_missing disables only the related feature and shows setup guidance"
+    },
+    "current_machine_state": {
+      "node_npm": "available when checked on 2026-06-02",
+      "go": "available when checked on 2026-06-02",
+      "rust": "not available when checked on 2026-06-02",
+      "implication": "Tauri source is scaffolded, but tauri:dev and tauri:build require a documented Rust/Tauri installation audit before execution."
+    }
   },
   "candidate_frameworks": [
     {
@@ -435,8 +581,11 @@
       ],
       "release_requirements": [
         "code signing strategy",
+        "SmartScreen and download trust plan",
         "install and uninstall smoke tests",
-        "user data path and update path verification"
+        "user data path and update path verification",
+        "clean Windows account or VM smoke test",
+        "optional CLI degradation smoke test"
       ]
     },
     {
@@ -455,7 +604,7 @@
   ],
   "runtime_strategy": {
     "ui_strategy": "Reuse workspace-monitor first, then add desktop-specific UI only when local desktop behavior needs it.",
-    "agent_runtime_strategy": "Keep agent-platform as a Python-first platform layer. Decide later whether a desktop app launches a local service, uses a sidecar process, or talks to a separate runtime.",
+    "agent_runtime_strategy": "Keep agent-platform as a Python-first platform layer. The desktop shell must not run agent logic in the renderer. Future execution must use a documented sidecar, local service, or explicit command adapter with lifecycle cleanup.",
     "language_runtime_strategy": "Use Rust/Tauri first for the desktop shell, Go first for a separate local daemon or operational CLI, Python for agent logic, and TypeScript/Next.js for the UI. Follow agent-platform/configs/runtime/language-decision-registry.json before changing this split.",
     "cli_integration_strategy": "Use external CLIs only through explicit adapter contracts from agent-platform/configs/integrations/cli-adapter-registry.json. Missing optional CLIs should disable only that capability and show setup guidance.",
     "data_strategy": "Read repository documents or generated snapshots through explicit user-selected workspace paths. Do not silently bundle private repository data.",
@@ -474,7 +623,7 @@
       "id": "future-tauri-install",
       "status": "not_run",
       "scope": "platform-desktop-app",
-      "command": "To be decided after Tauri/Electron comparison and installation audit planning.",
+      "command": "npm install in platform-desktop-app after Rust/Tauri dependency and license/security audit planning.",
       "audit_required_if_run": true
     },
     {
@@ -491,7 +640,7 @@
     "Project-local dependency installation audit if dependencies are installed",
     "License and security review for desktop framework and packager dependencies",
     "macOS execution profile review plus signing, hardened runtime, notarization, stapling, permission, update, and smoke-test plan before macOS public installer",
-    "Windows signing and installer format decision before Windows public installer",
+    "Windows execution profile review plus signing, SmartScreen/download trust, installer format, update, uninstall, and smoke-test plan before Windows public installer",
     "Install, first-run, update, uninstall, and rollback smoke tests",
     "Privacy review for workspace data, generated snapshots, tokens, and local service behavior",
     "User-facing documentation that distinguishes repository setup from desktop app installation"

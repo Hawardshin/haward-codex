@@ -1,0 +1,19 @@
+[package]
+name = "agent-workspace-platform-desktop"
+version = "0.1.0"
+description = "Desktop shell for the personal agent-building platform"
+authors = ["Personal Agent Platform"]
+edition = "2021"
+
+[lib]
+name = "agent_workspace_platform_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+

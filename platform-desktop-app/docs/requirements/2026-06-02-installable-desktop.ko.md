@@ -15,9 +15,15 @@
 | PDA-REQ-005 | 배포 가능 상태는 signing, notarization/OS trust, install/update/uninstall smoke test, privacy review, dependency/license review가 끝나야 한다. | must | release gate checklist |
 | PDA-REQ-006 | 실제 token, webhook URL, browser cookie, private snapshot을 installer에 번들하지 않아야 한다. | must | privacy/security review |
 | PDA-REQ-007 | macOS 실행 가능 구조는 개발자 로컬 실행, 내부 테스트 `.app`, 외부 배포 앱을 구분하고, `.app` bundle/process model, workspace 선택, optional CLI adapter, Developer ID signing, hardened runtime, notarization, stapling, update, clean Mac smoke test 기준을 명시해야 한다. | must | `macos-execution-profile.json`, macOS 실행 문서, config contract |
+| PDA-REQ-008 | Windows 실행 가능 구조는 개발자 로컬 실행, 내부 테스트 installer, 공개 signed distribution을 구분하고, MSI/NSIS/MSIX, WebView2, code signing, SmartScreen, update, uninstall, clean Windows smoke test 기준을 명시해야 한다. | must | `windows-execution-profile.json`, config contract |
+| PDA-REQ-009 | 첫 구현 스캐폴드는 Tauri v2/Rust 데스크톱 셸, `workspace-monitor` 정적 UI, `agent-platform` Python 계층, optional external CLI adapter 구조를 따라야 한다. | must | `src-tauri/`, `package.json`, desktop distribution registry |
+| PDA-REQ-010 | Codex, Claude Code, Cursor, Antigravity 같은 AI 코딩 도구는 플랫폼 필수 런타임이 아니라 설정 가능한 선택형 capability로 처리해야 한다. | must | CLI adapter registry와 desktop registry 검토 |
+| PDA-REQ-011 | Rust/Tauri dependency 설치 또는 빌드 실행 전에는 설치 감사 기록, license/security 검토, rollback 계획을 남겨야 한다. | must | 설치 기록과 `planned_commands` 검토 |
+| PDA-REQ-012 | public-ready 또는 “설치만 하면 됨” 수준의 표현은 macOS/Windows signing, notarization 또는 code-signing, clean-machine smoke test, update/uninstall/rollback test가 끝나기 전까지 금지해야 한다. | must | release gate와 평가 기록 |
 
 ## 현재 상태
 
 - 상태: baseline draft
 - 실제 desktop dependency 설치: 없음
-- 다음 단계: `macos-execution-profile.json` 기준으로 Tauri/Electron/native packaging 비교를 더 깊게 한 뒤 prototype 구현 여부 결정
+- 현재 선택: Tauri-first scaffold
+- 다음 단계: Rust/Tauri 설치 감사 기록을 만든 뒤 developer-local Tauri 실행 검증
