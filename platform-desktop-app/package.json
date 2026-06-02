@@ -7,7 +7,7 @@
   "scripts": {
     "check": "node scripts/check-readiness.mjs",
     "test": "node --test tests/*.test.mjs",
-    "monitor:build": "npm --prefix ../workspace-monitor run build",
+    "monitor:build": "npm --prefix ../workspace-monitor run build:customer",
     "tauri:dev": "tauri dev",
     "tauri:build": "tauri build"
   },

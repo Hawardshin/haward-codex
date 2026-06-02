@@ -1,0 +1,65 @@
+{
+  "task": "Resource check for runtime data feature implementation",
+  "work_mode": "standard",
+  "runtime_context": [
+    "node",
+    "next-build",
+    "cargo",
+    "tauri-build",
+    "codesign",
+    "hdiutil"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "long-running-build-subprocesses",
+      "category": "process",
+      "description": "Next, Cargo, Tauri, codesign, and hdiutil subprocesses can remain active if not polled.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "All long-running exec sessions were polled until exit.",
+      "evidence": [
+        "workspace-monitor build:customer exited code 0",
+        "cargo test exited code 0",
+        "cargo build exited code 0",
+        "tauri build exited code 0",
+        "hdiutil verify exited code 0"
+      ]
+    },
+    {
+      "risk_id": "generated-snapshot-and-bundle-artifacts",
+      "category": "generated_file",
+      "description": "Customer snapshot and Tauri outputs must not leave source-bearing public bundle data.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Public/out customer snapshot was inspected and source/docs counts were zero; build outputs are under target and existing ignored paths.",
+      "evidence": [
+        "workspace-monitor/public/workspace-snapshot.json sourceFiles=0 documents=0",
+        "workspace-monitor/out/workspace-snapshot.json sourceFiles=0 documents=0",
+        "Tauri .app and DMG generated under src-tauri/target"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "exec-session-cleanup",
+      "resource": "build and verification subprocesses",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "No active command session needed for this task remains running."
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "bounded-support-export-design",
+      "metric": "support diagnostic content",
+      "threshold": "No raw stdout/stderr or source files are included by support bundle implementation.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Support bundle writer serializes metadata summary and redacted recent event lines only."
+      ]
+    }
+  ]
+}

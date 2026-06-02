@@ -92,9 +92,12 @@ export function main(argv = process.argv.slice(2)) {
   }
 
   const snapshot = buildSnapshot(repoRoot);
+  const publicSnapshot = options.snapshotMode === "customer" ? buildCustomerSnapshot(snapshot) : snapshot;
   writeJson(snapshotPath, snapshot);
-  writeJson(publicSnapshotPath, snapshot);
-  console.log(`[workspace-monitor] Wrote ${snapshot.documents.length} documents to ${path.relative(repoRoot, snapshotPath)}`);
+  writeJson(publicSnapshotPath, publicSnapshot);
+  console.log(
+    `[workspace-monitor] Wrote ${snapshot.documents.length} documents to ${path.relative(repoRoot, snapshotPath)} (${options.snapshotMode} public snapshot)`
+  );
 }
 
 export function buildSnapshot(repoRoot) {
@@ -171,6 +174,85 @@ export function buildSnapshot(repoRoot) {
         "Run python3 _tools/privacy-audit/src/privacy_audit.py --check before public deploy.",
         "Remove or redact private notes, secrets, raw prompts, or local-only paths that should not be published.",
         "Regenerate the snapshot after any redaction and run npm run build again."
+      ]
+    }
+  };
+}
+
+export function buildCustomerSnapshot(snapshot) {
+  return {
+    schemaVersion: snapshot.schemaVersion,
+    generatedAt: new Date().toISOString(),
+    repoRootName: "customer-workspace",
+    stats: {
+      projects: 0,
+      agents: 0,
+      agentDefinitions: 0,
+      activeAgents: 0,
+      activeCollaborationTasks: 0,
+      blockedCollaborationTasks: 0,
+      tasks: 0,
+      completedTasks: 0,
+      documents: 0,
+      requirements: 0,
+      evaluations: 0,
+      webSearches: 0,
+      timingRecords: 0,
+      historyDays: 0,
+      unifiedOpsEvents: 0,
+      modeGroups: 0,
+      modeOptions: 0,
+      claudeCodeDesignPatterns: 0,
+      sourceFiles: 0,
+      rootFolders: 0
+    },
+    projects: [],
+    agents: [],
+    agentCatalog: [],
+    tasks: [],
+    requirements: [],
+    documents: [],
+    historyDays: [],
+    sourceFiles: [],
+    folderStructure: {
+      rootFolders: [],
+      docsCategories: [],
+      projectHomes: [],
+      historyRoots: []
+    },
+    viewModeCatalog: {
+      defaultMode: "user",
+      modes: [
+        {
+          id: "user",
+          label: "User View",
+          intent: "Installed customer workspace and runtime status surfaces.",
+          allowedSections: ["overview", "desktop", "projects", "history", "documents"],
+          visibilityRules: {},
+          securityNotes: ["Platform source tree is excluded from the customer bundle snapshot."]
+        }
+      ]
+    },
+    languageModeCatalog: {
+      defaultMode: "all",
+      modes: [
+        {
+          id: "all",
+          label: "All Languages",
+          intent: "Show available customer-facing content.",
+          includedLanguages: ["ko", "en"],
+          includeUnknown: true,
+          documentRule: "Customer-facing content only."
+        }
+      ]
+    },
+    categories: [],
+    publicReview: {
+      status: "customer_snapshot_sanitized",
+      checklist: [
+        "sourceFiles are removed from the installer bundle snapshot.",
+        "Internal documents, history, specs, and requirements are removed from the installer bundle snapshot.",
+        "Runtime data is loaded through Tauri commands after the installed app starts."
       ]
     }
   };
@@ -1633,11 +1715,20 @@ function escapeHtml(value) {
 }
 
 function parseArgs(argv) {
-  const options = { bestEffort: false, repoRoot: "" };
+  const options = { bestEffort: false, repoRoot: "", snapshotMode: "developer" };
   for (let index = 0; index < argv.length; index += 1) {
     const value = argv[index];
     if (value === "--best-effort") {
       options.bestEffort = true;
+    } else if (value === "--customer") {
+      options.snapshotMode = "customer";
+    } else if (value === "--snapshot-mode") {
+      const mode = argv[index + 1] || "developer";
+      if (!["developer", "customer"].includes(mode)) {
+        throw new Error(`Unsupported snapshot mode: ${mode}`);
+      }
+      options.snapshotMode = mode;
+      index += 1;
     } else if (value === "--repo-root") {
       options.repoRoot = argv[index + 1] || "";
       index += 1;

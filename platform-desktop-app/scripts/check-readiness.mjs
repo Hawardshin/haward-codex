@@ -60,8 +60,15 @@ const pkg = readJson("package.json");
 if (!pkg.scripts?.check || !pkg.scripts?.test || !pkg.scripts?.["tauri:dev"] || !pkg.scripts?.["tauri:build"]) {
   failures.push("package.json must expose check, test, tauri:dev, and tauri:build scripts");
 }
+if (!pkg.scripts?.["monitor:build"]?.includes("build:customer")) {
+  failures.push("platform-desktop-app monitor:build must use the customer Workspace Monitor build");
+}
 if (!pkg.devDependencies?.["@tauri-apps/cli"]) {
   failures.push("package.json must declare @tauri-apps/cli as a project-local devDependency");
+}
+const workspaceMonitorPkg = readJson("../workspace-monitor/package.json");
+if (!workspaceMonitorPkg.scripts?.["build:customer"]?.includes("--snapshot-mode customer")) {
+  failures.push("workspace-monitor package.json must expose build:customer with customer snapshot mode");
 }
 
 const tauriConfig = readJson("src-tauri/tauri.conf.json");
@@ -87,6 +94,9 @@ for (const commandName of [
   "list_cli_task_run_records",
   "read_cli_task_run_record",
   "prune_cli_task_run_records",
+  "list_runtime_data_roots",
+  "run_installer_payload_audit",
+  "create_support_diagnostic_bundle",
   "start_cli_adapter_session",
   "start_cli_task_pipeline",
   "poll_cli_adapter_session",
@@ -125,6 +135,14 @@ for (const requiredPhrase of [
   "MAX_TASK_RUN_LOG_PREVIEW_BYTES",
   "task_run_persist_signature",
   "task_runs_base_path",
+  "legacy_task_runs_base_path",
+  "runtime_data_store_base_path",
+  "support_bundles_base_path",
+  "payload_audits_base_path",
+  "InstallerPayloadAuditReport",
+  "SupportDiagnosticBundleReport",
+  "RuntimeDataBoundaryReport",
+  "MAX_PAYLOAD_SCAN_FILES",
   "platform_artifacts_base_path",
   "record.json",
   "stdout.log",
@@ -194,6 +212,12 @@ if (!JSON.stringify(viewModeRegistry).includes("desktop")) {
 }
 
 const monitorShell = readFileSync(join(root, "../workspace-monitor/components/MonitorShell.tsx"), "utf8");
+const monitorCollector = readFileSync(join(root, "../workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
+for (const requiredPhrase of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
+  if (!monitorCollector.includes(requiredPhrase)) {
+    failures.push(`workspace-monitor collector must include customer snapshot token ${requiredPhrase}`);
+  }
+}
 for (const requiredPhrase of [
   "DesktopRuntimePanel",
   "list_cli_adapters",
@@ -203,6 +227,9 @@ for (const requiredPhrase of [
   "list_cli_task_run_records",
   "read_cli_task_run_record",
   "prune_cli_task_run_records",
+  "list_runtime_data_roots",
+  "run_installer_payload_audit",
+  "create_support_diagnostic_bundle",
   "start_cli_adapter_session",
   "start_cli_task_pipeline",
   "write_cli_adapter_stdin",
@@ -250,6 +277,17 @@ for (const requiredPhrase of [
   "pruneTaskRunRecords",
   "refreshTaskRunRecords",
   "task-run-panel",
+  "Runtime Data & Support",
+  "설치형 데이터 경계",
+  "Installer Payload Audit",
+  "Support Diagnostic Bundle",
+  "refreshRuntimeDataBoundary",
+  "runInstallerPayloadAudit",
+  "createSupportDiagnosticBundle",
+  "RuntimeDataBoundaryReport",
+  "InstallerPayloadAuditReport",
+  "SupportDiagnosticBundleReport",
+  "runtime-data-panel",
   "Mode & Function Switchboard",
   "모드와 기능 선택 위치",
   "ModeFunctionSwitchboard",

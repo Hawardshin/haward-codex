@@ -6,6 +6,7 @@ import test from "node:test";
 
 import {
   buildAgentCollaborationBoard,
+  buildCustomerSnapshot,
   buildSnapshot,
   buildUnifiedOps,
   collectAgentCatalog,
@@ -163,6 +164,64 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.modeFunctionCatalog.groups.some((group) => group.id === "section_location"), true);
   assert.equal(snapshot.stats.modeOptions, snapshot.modeFunctionCatalog.summary.totalOptions);
   assert.equal(snapshot.documents.some((document) => document.language === "ko"), true);
+});
+
+test("buildCustomerSnapshot strips internal source and documents", () => {
+  const snapshot = {
+    schemaVersion: "2026-06-03",
+    generatedAt: "2026-06-03T00:00:00.000Z",
+    repoRootName: "codex",
+    stats: {
+      projects: 1,
+      agents: 1,
+      agentDefinitions: 1,
+      activeAgents: 1,
+      activeCollaborationTasks: 1,
+      blockedCollaborationTasks: 0,
+      tasks: 1,
+      completedTasks: 1,
+      documents: 2,
+      requirements: 1,
+      evaluations: 1,
+      webSearches: 1,
+      timingRecords: 1,
+      historyDays: 1,
+      unifiedOpsEvents: 1,
+      modeGroups: 1,
+      modeOptions: 1,
+      claudeCodeDesignPatterns: 1,
+      sourceFiles: 1,
+      rootFolders: 1
+    },
+    projects: [{ name: "platform", path: "platform-desktop-app/", status: "active" }],
+    agents: [{ id: "agent", status: "active" }],
+    agentCatalog: [{ id: "agent" }],
+    tasks: [{ id: "task", status: "completed" }],
+    requirements: [{ id: "REQ", requirement: "internal", sourcePath: "_requirements/x.md" }],
+    documents: [{ id: "doc", path: "_history/x.md", html: "<p>internal</p>" }],
+    historyDays: [{ date: "2026-06-03", documents: [] }],
+    sourceFiles: [{ path: "platform-desktop-app/src-tauri/src/lib.rs", content: "source" }],
+    folderStructure: {
+      rootFolders: [{ path: "platform-desktop-app/" }],
+      docsCategories: [],
+      projectHomes: [],
+      historyRoots: []
+    },
+    categories: ["project-doc"],
+    publicReview: { status: "review_required_before_public_deploy", checklist: [] }
+  };
+
+  const customer = buildCustomerSnapshot(snapshot);
+
+  assert.equal(customer.repoRootName, "customer-workspace");
+  assert.equal(customer.stats.sourceFiles, 0);
+  assert.equal(customer.stats.documents, 0);
+  assert.equal(customer.sourceFiles.length, 0);
+  assert.equal(customer.documents.length, 0);
+  assert.equal(customer.historyDays.length, 0);
+  assert.equal(customer.projects.length, 0);
+  assert.equal(customer.publicReview.status, "customer_snapshot_sanitized");
+  assert.equal(customer.viewModeCatalog.defaultMode, "user");
 });
 
 test("collectModeFunctionCatalog exposes explicit selectors and desktop mode locations", () => {

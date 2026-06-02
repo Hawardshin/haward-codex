@@ -1,0 +1,37 @@
+{
+  "status": "ready_to_publish",
+  "task": "Grounding check for runtime data feature implementation",
+  "grounded_claims": [
+    {
+      "claim": "Tauri AppHandle path resolver can provide app data, local data, cache, log, config, and resource paths.",
+      "evidence": [
+        "Official Tauri resources/path documentation",
+        "Local Cargo source for tauri-2.11.2 path resolver methods",
+        "cargo test passed"
+      ]
+    },
+    {
+      "claim": "Customer build public snapshot excludes source files and internal documents.",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs buildCustomerSnapshot",
+        "node public snapshot inspection: sourceFiles=0, documents=0",
+        "npm --prefix workspace-monitor run build:customer passed"
+      ]
+    },
+    {
+      "claim": "Local macOS app and DMG build outputs were generated and verified.",
+      "evidence": [
+        "npm --prefix platform-desktop-app run tauri:build passed",
+        "codesign --verify --deep --strict passed",
+        "hdiutil verify reported VALID"
+      ]
+    }
+  ],
+  "unsupported_claims_removed": [
+    "Public macOS release readiness",
+    "Windows installer runtime smoke test"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-03-runtime-feature-implementation.ko.md"
+  ]
+}

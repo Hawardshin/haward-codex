@@ -111,7 +111,16 @@ test("shared CLI adapter registry defines concrete AI CLI targets", () => {
 test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () => {
   const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
   const monitorShell = readFileSync(join(root, "../workspace-monitor/components/MonitorShell.tsx"), "utf8");
+  const monitorCollector = readFileSync(join(root, "../workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
+  const platformPkg = readJson("package.json");
+  const monitorPkg = readJson("../workspace-monitor/package.json");
   const viewModes = readJson("../agent-platform/configs/access/view-mode-registry.json");
+
+  assert.match(platformPkg.scripts["monitor:build"], /build:customer/);
+  assert.match(monitorPkg.scripts["build:customer"], /--snapshot-mode customer/);
+  for (const collectorToken of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
+    assert.match(monitorCollector, new RegExp(collectorToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
 
   for (const commandName of [
     "list_cli_adapters",
@@ -121,6 +130,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "list_cli_task_run_records",
     "read_cli_task_run_record",
     "prune_cli_task_run_records",
+    "list_runtime_data_roots",
+    "run_installer_payload_audit",
+    "create_support_diagnostic_bundle",
     "start_cli_adapter_session",
     "start_cli_task_pipeline",
     "poll_cli_adapter_session",
@@ -162,6 +174,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Task Pipe Init",
     "Task Run Store",
     "저장된 실행 기록과 로그",
+    "Runtime Data & Support",
+    "설치형 데이터 경계",
+    "Installer Payload Audit",
+    "Support Diagnostic Bundle",
     "Refresh task runs",
     "Open Logs",
     "Prune Old",
@@ -231,6 +247,13 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "loadTaskRunDetail",
     "pruneTaskRunRecords",
     "refreshTaskRunRecords",
+    "refreshRuntimeDataBoundary",
+    "runInstallerPayloadAudit",
+    "createSupportDiagnosticBundle",
+    "RuntimeDataBoundaryReport",
+    "InstallerPayloadAuditReport",
+    "SupportDiagnosticBundleReport",
+    "runtime-data-panel",
     "list_cli_task_run_records",
     "taskPipePresets",
     "start_cli_task_pipeline",
@@ -265,6 +288,14 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "MAX_TASK_RUN_LOG_PREVIEW_BYTES",
     "task_run_persist_signature",
     "task_runs_base_path",
+    "legacy_task_runs_base_path",
+    "runtime_data_store_base_path",
+    "support_bundles_base_path",
+    "payload_audits_base_path",
+    "InstallerPayloadAuditReport",
+    "SupportDiagnosticBundleReport",
+    "RuntimeDataBoundaryReport",
+    "MAX_PAYLOAD_SCAN_FILES",
     "platform_artifacts_base_path",
     "task-runs",
     "stdout.log",

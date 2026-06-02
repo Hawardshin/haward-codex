@@ -360,6 +360,59 @@ type CliTaskRunPruneReport = {
   errors: string[];
 };
 
+type RuntimeDataRootReport = {
+  id: string;
+  label: string;
+  plane: string;
+  path: string;
+  exists: boolean;
+  created: boolean;
+  visibility: string;
+  purpose: string;
+};
+
+type RuntimeDataBoundaryReport = {
+  status: string;
+  roots: RuntimeDataRootReport[];
+  taskRunStorePath: string;
+  supportBundleStorePath: string;
+  installerPayloadAuditPath: string;
+};
+
+type InstallerPayloadFinding = {
+  ruleId: string;
+  severity: string;
+  path: string;
+  reason: string;
+};
+
+type InstallerPayloadAuditReport = {
+  status: string;
+  scannedPaths: string[];
+  scannedFiles: number;
+  scannedBytes: number;
+  flaggedCount: number;
+  findings: InstallerPayloadFinding[];
+  skippedDirs: string[];
+  maxScanFiles: number;
+  auditPath: string;
+  createdAt: string;
+};
+
+type SupportDiagnosticBundleReport = {
+  status: string;
+  bundleId: string;
+  bundleDir: string;
+  manifestPath: string;
+  runtimeRootsPath: string;
+  installerPayloadAuditPath: string;
+  taskRunSummaryPath: string;
+  recentEventsPath: string;
+  includedFiles: string[];
+  redacted: boolean;
+  createdAt: string;
+};
+
 type WorkspaceTextFile = {
   relativePath: string;
   content: string;
@@ -1880,6 +1933,11 @@ function DesktopRuntimePanel({
   const [taskRunDetail, setTaskRunDetail] = useState<CliTaskRunDetailReport | null>(null);
   const [taskRunBusy, setTaskRunBusy] = useState(false);
   const [taskRunPruneNotice, setTaskRunPruneNotice] = useState("");
+  const [runtimeDataBoundary, setRuntimeDataBoundary] = useState<RuntimeDataBoundaryReport | null>(null);
+  const [payloadAudit, setPayloadAudit] = useState<InstallerPayloadAuditReport | null>(null);
+  const [supportBundle, setSupportBundle] = useState<SupportDiagnosticBundleReport | null>(null);
+  const [runtimeDataBusy, setRuntimeDataBusy] = useState("");
+  const [runtimeDataNotice, setRuntimeDataNotice] = useState("");
   const [inboxReport, setInboxReport] = useState<HumanDecisionInboxReport | null>(null);
   const [error, setError] = useState("");
   const [runningAdapterId, setRunningAdapterId] = useState("");
@@ -1981,6 +2039,13 @@ function DesktopRuntimePanel({
     const truncated = taskRunRecords.filter((record) => record.outputTruncated).length;
     return { active, outputBytes, decisions, truncated };
   }, [taskRunRecords]);
+  const runtimeDataStats = useMemo(() => {
+    const roots = runtimeDataBoundary?.roots || [];
+    const created = roots.filter((root) => root.created).length;
+    const ready = roots.filter((root) => root.exists).length;
+    const highFindings = (payloadAudit?.findings || []).filter((finding) => finding.severity === "high").length;
+    return { roots: roots.length, created, ready, highFindings };
+  }, [payloadAudit, runtimeDataBoundary]);
   const selectedTaskRunRecord =
     taskRunRecords.find((record) => record.taskRunId === selectedTaskRunId) || taskRunRecords[0] || null;
   const sessionStats = useMemo(() => {
@@ -2075,6 +2140,36 @@ function DesktopRuntimePanel({
             }
           ]
         : []),
+      ...(runtimeDataBoundary
+        ? [
+            {
+              id: "runtime-data-boundary",
+              label: runtimeDataBoundary.status,
+              title: "Runtime Data Roots",
+              detail: `${runtimeDataBoundary.roots.length} roots / task runs ${runtimeDataBoundary.taskRunStorePath}`
+            }
+          ]
+        : []),
+      ...(payloadAudit
+        ? [
+            {
+              id: "installer-payload-audit",
+              label: payloadAudit.status,
+              title: "Installer Payload Audit",
+              detail: `${payloadAudit.flaggedCount} findings / ${payloadAudit.scannedFiles} files`
+            }
+          ]
+        : []),
+      ...(supportBundle
+        ? [
+            {
+              id: "support-diagnostic-bundle",
+              label: supportBundle.status,
+              title: "Support Diagnostic Bundle",
+              detail: `${supportBundle.bundleId} / redacted ${supportBundle.redacted ? "yes" : "no"}`
+            }
+          ]
+        : []),
       ...(writeReport
         ? [
             {
@@ -2093,7 +2188,7 @@ function DesktopRuntimePanel({
       }))
     ];
     return items.slice(0, 8);
-  }, [dirtyDraftEntries.length, openDraftEntries.length, outputEvents, pipelineStats.latest, selectedDecision, sourceDiff, sourceFile?.relativePath, sourceSaveResults, taskRunRecords, writeReport]);
+  }, [dirtyDraftEntries.length, openDraftEntries.length, outputEvents, payloadAudit, pipelineStats.latest, runtimeDataBoundary, selectedDecision, sourceDiff, sourceFile?.relativePath, sourceSaveResults, supportBundle, taskRunRecords, writeReport]);
 
   const replaceTaskRunRecords = (records: CliTaskRunRecordReport[]) => {
     setTaskRunRecords(records);
@@ -2119,13 +2214,14 @@ function DesktopRuntimePanel({
     }
 
     try {
-      const [nextHealth, nextAdapters, nextSessions, nextInbox, nextTaskPipePresets, nextTaskRunRecords] = await Promise.all([
+      const [nextHealth, nextAdapters, nextSessions, nextInbox, nextTaskPipePresets, nextTaskRunRecords, nextRuntimeDataBoundary] = await Promise.all([
         tauriInvoke<DesktopHealthStatus>("app_health"),
         tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
         tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions"),
         tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox"),
         tauriInvoke<CliTaskPipelinePresetReport[]>("list_cli_task_pipeline_presets"),
-        tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records")
+        tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records"),
+        tauriInvoke<RuntimeDataBoundaryReport>("list_runtime_data_roots")
       ]);
       setRuntimeState("available");
       setHealth(nextHealth);
@@ -2134,6 +2230,7 @@ function DesktopRuntimePanel({
       setInboxReport(nextInbox);
       setTaskPipePresets(nextTaskPipePresets.length ? nextTaskPipePresets : fallbackTaskPipePresets);
       replaceTaskRunRecords(nextTaskRunRecords);
+      setRuntimeDataBoundary(nextRuntimeDataBoundary);
       setDecisionResumeNotice("");
       if (!selectedDecisionId && nextInbox.decisions[0]) {
         setSelectedDecisionId(nextInbox.decisions[0].id);
@@ -2151,6 +2248,9 @@ function DesktopRuntimePanel({
       setSessions((current) => (current.length ? [] : current));
       setTaskPipePresets(fallbackTaskPipePresets);
       replaceTaskRunRecords([]);
+      setRuntimeDataBoundary(null);
+      setPayloadAudit(null);
+      setSupportBundle(null);
       setInboxReport(null);
       setDecisionResumeNotice("");
       setError(errorMessage(caught));
@@ -2305,6 +2405,64 @@ function DesktopRuntimePanel({
       setError(errorMessage(caught));
     } finally {
       setTaskRunBusy(false);
+    }
+  };
+
+  const refreshRuntimeDataBoundary = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeDataBoundary(null);
+      return;
+    }
+
+    setRuntimeDataBusy("roots");
+    setError("");
+    try {
+      const report = await tauriInvoke<RuntimeDataBoundaryReport>("list_runtime_data_roots");
+      setRuntimeDataBoundary(report);
+      setRuntimeDataNotice(`${report.status}: ${report.roots.length} runtime roots ready`);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setRuntimeDataBusy("");
+    }
+  };
+
+  const runInstallerPayloadAudit = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      return;
+    }
+
+    setRuntimeDataBusy("payload");
+    setError("");
+    try {
+      const report = await tauriInvoke<InstallerPayloadAuditReport>("run_installer_payload_audit");
+      setPayloadAudit(report);
+      setRuntimeDataNotice(`${report.status}: ${report.flaggedCount} findings / ${report.scannedFiles} scanned files`);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setRuntimeDataBusy("");
+    }
+  };
+
+  const createSupportDiagnosticBundle = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      return;
+    }
+
+    setRuntimeDataBusy("support");
+    setError("");
+    try {
+      const report = await tauriInvoke<SupportDiagnosticBundleReport>("create_support_diagnostic_bundle");
+      setSupportBundle(report);
+      setRuntimeDataNotice(`${report.status}: ${report.bundleId}`);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setRuntimeDataBusy("");
     }
   };
 
@@ -2902,6 +3060,21 @@ function DesktopRuntimePanel({
             <span>Refresh task runs</span>
             <small>{taskRunRecords.length} records</small>
           </button>
+          <button type="button" onClick={refreshRuntimeDataBoundary} disabled={!invoke || runtimeDataBusy !== ""}>
+            <Activity size={16} aria-hidden="true" />
+            <span>Runtime roots</span>
+            <small>{runtimeDataStats.ready}/{runtimeDataStats.roots || "?"} ready</small>
+          </button>
+          <button type="button" onClick={runInstallerPayloadAudit} disabled={!invoke || runtimeDataBusy !== ""}>
+            <ShieldCheck size={16} aria-hidden="true" />
+            <span>Audit payload</span>
+            <small>{payloadAudit ? `${payloadAudit.flaggedCount} findings` : "not scanned"}</small>
+          </button>
+          <button type="button" onClick={createSupportDiagnosticBundle} disabled={!invoke || runtimeDataBusy !== ""}>
+            <FileSearch size={16} aria-hidden="true" />
+            <span>Support bundle</span>
+            <small>{supportBundle?.status || "redacted export"}</small>
+          </button>
           <button type="button" onClick={deferDetectedQuestions} disabled={!invoke || decisionBusy || pendingQuestionCount === 0}>
             <ShieldCheck size={16} aria-hidden="true" />
             <span>Defer detected questions</span>
@@ -3012,6 +3185,121 @@ function DesktopRuntimePanel({
             ))}
           </div>
         )}
+      </section>
+
+      <section className="panel wide runtime-data-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Runtime Data & Support</p>
+            <h2>설치형 데이터 경계</h2>
+          </div>
+          <div className="desktop-actions">
+            <button type="button" onClick={refreshRuntimeDataBoundary} disabled={!invoke || runtimeDataBusy !== ""}>
+              <Activity size={15} aria-hidden="true" />
+              <span>{runtimeDataBusy === "roots" ? "Checking" : "Roots"}</span>
+            </button>
+            <button type="button" onClick={runInstallerPayloadAudit} disabled={!invoke || runtimeDataBusy !== ""}>
+              <ShieldCheck size={15} aria-hidden="true" />
+              <span>{runtimeDataBusy === "payload" ? "Auditing" : "Audit Payload"}</span>
+            </button>
+            <button type="button" onClick={createSupportDiagnosticBundle} disabled={!invoke || runtimeDataBusy !== ""}>
+              <FileSearch size={15} aria-hidden="true" />
+              <span>{runtimeDataBusy === "support" ? "Creating" : "Support Bundle"}</span>
+            </button>
+          </div>
+        </div>
+        {runtimeDataNotice && <p className="decision-resume-notice">{runtimeDataNotice}</p>}
+        <div className="task-run-summary-strip">
+          <article>
+            <span>roots</span>
+            <strong>{runtimeDataStats.roots}</strong>
+          </article>
+          <article>
+            <span>ready</span>
+            <strong>{runtimeDataStats.ready}</strong>
+          </article>
+          <article>
+            <span>created</span>
+            <strong>{runtimeDataStats.created}</strong>
+          </article>
+          <article>
+            <span>payload findings</span>
+            <strong>{payloadAudit?.flaggedCount ?? 0}</strong>
+          </article>
+          <article>
+            <span>high</span>
+            <strong>{runtimeDataStats.highFindings}</strong>
+          </article>
+        </div>
+
+        <div className="runtime-data-layout">
+          <div className="runtime-root-grid">
+            {(runtimeDataBoundary?.roots || []).slice(0, 10).map((root) => (
+              <article key={root.id} className={root.exists ? "ready" : "missing"}>
+                <header>
+                  <div>
+                    <span>{root.plane}</span>
+                    <h3>{root.label}</h3>
+                  </div>
+                  <strong>{root.created ? "created" : root.exists ? "ready" : "missing"}</strong>
+                </header>
+                <p>{root.purpose}</p>
+                <code>{root.path}</code>
+                <div className="adapter-report">
+                  <span>{root.id}</span>
+                  <span>{root.visibility}</span>
+                </div>
+              </article>
+            ))}
+            {!runtimeDataBoundary && (
+              <p className="empty-state">Runtime root 상태가 아직 로드되지 않았습니다.</p>
+            )}
+          </div>
+
+          <article className="runtime-audit-card">
+            <header>
+              <div>
+                <span>{payloadAudit?.status || "not-scanned"}</span>
+                <h3>Installer Payload Audit</h3>
+              </div>
+              <strong>{payloadAudit?.flaggedCount ?? 0}</strong>
+            </header>
+            <div className="task-run-detail-meta">
+              <span>{payloadAudit ? `${payloadAudit.scannedFiles} files` : "0 files"}</span>
+              <span>{payloadAudit ? formatBytes(payloadAudit.scannedBytes) : "0 B"}</span>
+              <span>{payloadAudit?.maxScanFiles ?? 0} max</span>
+            </div>
+            <code>{payloadAudit?.auditPath || "No audit report yet"}</code>
+            <div className="payload-finding-list">
+              {(payloadAudit?.findings || []).slice(0, 6).map((finding) => (
+                <div key={`${finding.ruleId}-${finding.path}`}>
+                  <strong>{finding.severity}</strong>
+                  <span>{finding.ruleId}</span>
+                  <p>{finding.reason}</p>
+                  <code>{finding.path}</code>
+                </div>
+              ))}
+              {payloadAudit && payloadAudit.findings.length === 0 && <p className="empty-state">No payload findings.</p>}
+            </div>
+          </article>
+
+          <article className="runtime-audit-card">
+            <header>
+              <div>
+                <span>{supportBundle?.status || "not-created"}</span>
+                <h3>Support Diagnostic Bundle</h3>
+              </div>
+              <strong>{supportBundle?.redacted ? "redacted" : "idle"}</strong>
+            </header>
+            <div className="support-bundle-grid">
+              <code>{supportBundle?.manifestPath || "No manifest yet"}</code>
+              <code>{supportBundle?.runtimeRootsPath || "No runtime roots export"}</code>
+              <code>{supportBundle?.installerPayloadAuditPath || "No payload audit export"}</code>
+              <code>{supportBundle?.taskRunSummaryPath || "No task-run summary"}</code>
+              <code>{supportBundle?.recentEventsPath || "No recent events log"}</code>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section className="panel wide task-run-panel">

@@ -1,0 +1,48 @@
+{
+  "task_id": "2026-06-03-runtime-data-features",
+  "title": "Implement runtime data roots, payload audit, support bundle, and customer snapshot",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "check official Tauri Rust and OS app-data references",
+      "status": "completed",
+      "duration_seconds": 240,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official Tauri, Rust std, and OS app-data references were checked before implementation."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "write runtime data feature requirements and spec records",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "Requirements, spec, plan, tasks, validation, traceability, web search, and request trace records were created."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "implement Rust runtime commands and Workspace Monitor surfaces",
+      "status": "completed",
+      "duration_seconds": 2400,
+      "measurement": "estimated",
+      "bottleneck_notes": "The largest change touched Rust task-run persistence, payload scanning, support bundle export, collector sanitization, UI controls, CSS, and readiness tests."
+    },
+    {
+      "phase_id": "verification",
+      "label": "run Node Rust Tauri and bundle verification",
+      "status": "completed",
+      "duration_seconds": 1500,
+      "measurement": "estimated",
+      "bottleneck_notes": "Full Tauri build and generated snapshot updates dominated verification time."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "write omission resource grounding and evaluation records",
+      "status": "completed",
+      "duration_seconds": 780,
+      "measurement": "estimated",
+      "bottleneck_notes": "Standard-mode close-out required multiple history and evaluation artifacts."
+    }
+  ]
+}

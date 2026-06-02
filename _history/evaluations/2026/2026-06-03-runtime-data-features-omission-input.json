@@ -1,0 +1,42 @@
+{
+  "status": "coverage_ready",
+  "task": "Omission check for runtime data feature implementation",
+  "requirements_checked": [
+    "REQ-PDA-041",
+    "REQ-PDA-042",
+    "REQ-PDA-043",
+    "REQ-PDA-044",
+    "REQ-PDA-045"
+  ],
+  "coverage": [
+    {
+      "requirement": "OS-aware runtime data roots",
+      "status": "covered",
+      "evidence": "list_runtime_data_roots and runtime data root helpers"
+    },
+    {
+      "requirement": "Task-run app-data store with legacy read compatibility",
+      "status": "covered",
+      "evidence": "task_runs_base_path now resolves app data; legacy_task_runs_base_path is read-compatible"
+    },
+    {
+      "requirement": "Installer payload audit",
+      "status": "covered",
+      "evidence": "run_installer_payload_audit and InstallerPayloadAuditReport"
+    },
+    {
+      "requirement": "Redacted support diagnostic bundle",
+      "status": "covered",
+      "evidence": "create_support_diagnostic_bundle and support bundle metadata files"
+    },
+    {
+      "requirement": "Customer snapshot sanitization",
+      "status": "covered",
+      "evidence": "buildCustomerSnapshot, build:customer, Tauri monitor:build"
+    }
+  ],
+  "known_gaps": [
+    "Public macOS notarization and Windows installer smoke remain outside this implementation slice.",
+    "Installer payload audit command is compile/build verified; interactive in-app invocation was not manually clicked in this run."
+  ]
+}

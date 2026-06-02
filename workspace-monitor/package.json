@@ -8,6 +8,7 @@
     "collect": "node scripts/collect-workspace.mjs",
     "prebuild": "node scripts/collect-workspace.mjs --best-effort",
     "build": "next build",
+    "build:customer": "node scripts/collect-workspace.mjs --best-effort --snapshot-mode customer && next build",
     "check": "tsc --noEmit",
     "perf:budget": "node scripts/check-performance-budget.mjs",
     "test": "node --test tests/*.test.mjs"

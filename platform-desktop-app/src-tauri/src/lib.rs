@@ -9,7 +9,7 @@ use std::process::{Child, ChildStdin, Command, Stdio};
 use std::sync::{mpsc, Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
-use tauri::State;
+use tauri::{AppHandle, Manager, State};
 
 #[derive(Serialize)]
 struct HealthStatus {
@@ -349,6 +349,69 @@ struct TaskRunPersistPaths {
     stderr_log_path: String,
 }
 
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct RuntimeDataRootReport {
+    id: String,
+    label: String,
+    plane: String,
+    path: String,
+    exists: bool,
+    created: bool,
+    visibility: String,
+    purpose: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct RuntimeDataBoundaryReport {
+    status: String,
+    roots: Vec<RuntimeDataRootReport>,
+    task_run_store_path: String,
+    support_bundle_store_path: String,
+    installer_payload_audit_path: String,
+}
+
+#[derive(Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct InstallerPayloadFinding {
+    rule_id: String,
+    severity: String,
+    path: String,
+    reason: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct InstallerPayloadAuditReport {
+    status: String,
+    scanned_paths: Vec<String>,
+    scanned_files: usize,
+    scanned_bytes: u64,
+    flagged_count: usize,
+    findings: Vec<InstallerPayloadFinding>,
+    skipped_dirs: Vec<String>,
+    max_scan_files: usize,
+    audit_path: String,
+    created_at: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct SupportDiagnosticBundleReport {
+    status: String,
+    bundle_id: String,
+    bundle_dir: String,
+    manifest_path: String,
+    runtime_roots_path: String,
+    installer_payload_audit_path: String,
+    task_run_summary_path: String,
+    recent_events_path: String,
+    included_files: Vec<String>,
+    redacted: bool,
+    created_at: String,
+}
+
 const MAX_HEALTH_OUTPUT_BYTES: usize = 20_000;
 const HEALTH_TIMEOUT_MS: u64 = 2_500;
 const MAX_SESSION_OUTPUT_BYTES: usize = 100_000;
@@ -361,6 +424,9 @@ const MAX_TASK_RUN_RECORDS: usize = 80;
 const MAX_TASK_PROMPT_PREVIEW_CHARS: usize = 280;
 const MAX_TASK_RUN_LOG_PREVIEW_BYTES: usize = 64_000;
 const DEFAULT_TASK_RUN_PRUNE_KEEP_COUNT: usize = 30;
+const MAX_PAYLOAD_SCAN_FILES: usize = 4_000;
+const MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS: usize = 20;
+const MAX_SUPPORT_EVENT_CHARS: usize = 600;
 const DEFER_MESSAGE: &str = "I will pause this lane here and collect the user decision later. Please do not make a source-affecting decision now.";
 
 static ADAPTERS: &[AdapterDefinition] = &[
@@ -467,7 +533,8 @@ static PIPELINE_PRESETS: &[PipelineTaskPreset] = &[
     PipelineTaskPreset {
         task_kind: "platform_improvement_pipe",
         label: "Platform Improvement Pipe",
-        intent: "Initialize implementation, review, research, and fallback lanes for platform changes.",
+        intent:
+            "Initialize implementation, review, research, and fallback lanes for platform changes.",
         lanes: PLATFORM_IMPROVEMENT_LANES,
         merge_gate: "platform_merge_gate",
     },
@@ -503,7 +570,8 @@ fn list_cli_adapters() -> Vec<CliAdapterStatus> {
 
 #[tauri::command]
 fn run_cli_adapter_health(adapter_id: String) -> Result<CliRunReport, String> {
-    let adapter = find_adapter(&adapter_id).ok_or_else(|| format!("Unknown adapter id: {adapter_id}"))?;
+    let adapter =
+        find_adapter(&adapter_id).ok_or_else(|| format!("Unknown adapter id: {adapter_id}"))?;
     Ok(run_adapter_health(adapter))
 }
 
@@ -514,26 +582,53 @@ fn run_all_cli_adapter_health() -> Vec<CliRunReport> {
 
 #[tauri::command]
 fn list_cli_task_pipeline_presets() -> Vec<CliTaskPipelinePresetReport> {
-    PIPELINE_PRESETS.iter().map(pipeline_preset_report).collect()
+    PIPELINE_PRESETS
+        .iter()
+        .map(pipeline_preset_report)
+        .collect()
 }
 
 #[tauri::command]
-fn list_cli_task_run_records() -> Result<Vec<CliTaskRunRecordReport>, String> {
-    read_task_run_records()
+fn list_cli_task_run_records(app: AppHandle) -> Result<Vec<CliTaskRunRecordReport>, String> {
+    read_task_run_records(&app)
 }
 
 #[tauri::command]
-fn read_cli_task_run_record(task_run_id: String) -> Result<CliTaskRunDetailReport, String> {
-    read_task_run_detail(&task_run_id)
+fn read_cli_task_run_record(
+    app: AppHandle,
+    task_run_id: String,
+) -> Result<CliTaskRunDetailReport, String> {
+    read_task_run_detail(&app, &task_run_id)
 }
 
 #[tauri::command]
-fn prune_cli_task_run_records(keep_count: Option<usize>) -> Result<CliTaskRunPruneReport, String> {
-    prune_task_run_records(keep_count)
+fn prune_cli_task_run_records(
+    app: AppHandle,
+    keep_count: Option<usize>,
+) -> Result<CliTaskRunPruneReport, String> {
+    prune_task_run_records(&app, keep_count)
+}
+
+#[tauri::command]
+fn list_runtime_data_roots(app: AppHandle) -> Result<RuntimeDataBoundaryReport, String> {
+    runtime_data_boundary_report(&app)
+}
+
+#[tauri::command]
+fn run_installer_payload_audit(app: AppHandle) -> Result<InstallerPayloadAuditReport, String> {
+    run_installer_payload_audit_report(&app)
+}
+
+#[tauri::command]
+fn create_support_diagnostic_bundle(
+    app: AppHandle,
+) -> Result<SupportDiagnosticBundleReport, String> {
+    create_support_diagnostic_bundle_report(&app)
 }
 
 #[tauri::command]
 fn start_cli_adapter_session(
+    app: AppHandle,
     store: State<'_, SessionStore>,
     adapter_id: String,
     prompt: String,
@@ -546,9 +641,11 @@ fn start_cli_adapter_session(
         ));
     }
 
-    let adapter = find_adapter(&adapter_id).ok_or_else(|| format!("Unknown adapter id: {adapter_id}"))?;
+    let adapter =
+        find_adapter(&adapter_id).ok_or_else(|| format!("Unknown adapter id: {adapter_id}"))?;
     let working_dir = resolve_workspace_dir(working_dir.as_deref())?;
     let (session_id, mut session, report) = create_cli_session(
+        &app,
         adapter,
         &prompt,
         working_dir,
@@ -573,6 +670,7 @@ fn start_cli_adapter_session(
 
 #[tauri::command]
 fn start_cli_task_pipeline(
+    app: AppHandle,
     store: State<'_, SessionStore>,
     task_kind: String,
     prompt: String,
@@ -585,7 +683,8 @@ fn start_cli_task_pipeline(
         ));
     }
 
-    let preset = find_pipeline_preset(&task_kind).ok_or_else(|| format!("Unknown task pipe kind: {task_kind}"))?;
+    let preset = find_pipeline_preset(&task_kind)
+        .ok_or_else(|| format!("Unknown task pipe kind: {task_kind}"))?;
     let resolved_working_dir = resolve_workspace_dir(working_dir.as_deref())?;
     let pipeline_id = new_session_id(preset.task_kind);
     let mut lane_reports = Vec::new();
@@ -593,7 +692,8 @@ fn start_cli_task_pipeline(
     let mut pending_sessions: Vec<(String, CliSession)> = Vec::new();
 
     for lane in preset.lanes {
-        let adapter = find_adapter(lane.adapter_id).ok_or_else(|| format!("Unknown adapter id in pipe preset: {}", lane.adapter_id))?;
+        let adapter = find_adapter(lane.adapter_id)
+            .ok_or_else(|| format!("Unknown adapter id in pipe preset: {}", lane.adapter_id))?;
         if resolve_command(adapter.command).is_none() {
             let status = "capability_missing".to_string();
             lane_reports.push(CliTaskPipelineLaneReport {
@@ -602,9 +702,18 @@ fn start_cli_task_pipeline(
                 role: lane.role.to_string(),
                 status: status.clone(),
                 session: None,
-                error: Some(format!("Command '{}' was not found on PATH.", adapter.command)),
+                error: Some(format!(
+                    "Command '{}' was not found on PATH.",
+                    adapter.command
+                )),
             });
-            append_pipe_edges(&mut pipe_reports, &pipeline_id, lane.lane_id, preset.merge_gate, &status);
+            append_pipe_edges(
+                &mut pipe_reports,
+                &pipeline_id,
+                lane.lane_id,
+                preset.merge_gate,
+                &status,
+            );
             continue;
         }
 
@@ -621,10 +730,17 @@ fn start_cli_task_pipeline(
                     "Lane prompt is too large after pipe metadata was added. Max input is {MAX_SESSION_INPUT_BYTES} bytes."
                 )),
             });
-            append_pipe_edges(&mut pipe_reports, &pipeline_id, lane.lane_id, preset.merge_gate, &status);
+            append_pipe_edges(
+                &mut pipe_reports,
+                &pipeline_id,
+                lane.lane_id,
+                preset.merge_gate,
+                &status,
+            );
             continue;
         }
         match create_cli_session(
+            &app,
             adapter,
             &lane_prompt,
             resolved_working_dir.clone(),
@@ -644,7 +760,13 @@ fn start_cli_task_pipeline(
                     session: Some(report),
                     error: None,
                 });
-                append_pipe_edges(&mut pipe_reports, &pipeline_id, lane.lane_id, preset.merge_gate, &status);
+                append_pipe_edges(
+                    &mut pipe_reports,
+                    &pipeline_id,
+                    lane.lane_id,
+                    preset.merge_gate,
+                    &status,
+                );
                 pending_sessions.push((session_id, session));
             }
             Err(error) => {
@@ -657,7 +779,13 @@ fn start_cli_task_pipeline(
                     session: None,
                     error: Some(error),
                 });
-                append_pipe_edges(&mut pipe_reports, &pipeline_id, lane.lane_id, preset.merge_gate, &status);
+                append_pipe_edges(
+                    &mut pipe_reports,
+                    &pipeline_id,
+                    lane.lane_id,
+                    preset.merge_gate,
+                    &status,
+                );
             }
         }
     }
@@ -709,6 +837,7 @@ fn start_cli_task_pipeline(
 }
 
 fn create_cli_session(
+    app: &AppHandle,
     adapter: &'static AdapterDefinition,
     prompt: &str,
     working_dir: PathBuf,
@@ -813,12 +942,16 @@ fn create_cli_session(
         persistence_error: None,
         last_persist_signature: String::new(),
     };
-    let report = poll_session_locked(&session_id, &mut session);
+    let report = poll_session_locked(app, &session_id, &mut session);
     Ok((session_id, session, report))
 }
 
 #[tauri::command]
-fn poll_cli_adapter_session(store: State<'_, SessionStore>, session_id: String) -> Result<CliSessionReport, String> {
+fn poll_cli_adapter_session(
+    app: AppHandle,
+    store: State<'_, SessionStore>,
+    session_id: String,
+) -> Result<CliSessionReport, String> {
     let mut sessions = store
         .sessions
         .lock()
@@ -826,23 +959,27 @@ fn poll_cli_adapter_session(store: State<'_, SessionStore>, session_id: String) 
     let session = sessions
         .get_mut(&session_id)
         .ok_or_else(|| format!("Unknown CLI session id: {session_id}"))?;
-    Ok(poll_session_locked(&session_id, session))
+    Ok(poll_session_locked(&app, &session_id, session))
 }
 
 #[tauri::command]
-fn list_cli_adapter_sessions(store: State<'_, SessionStore>) -> Result<Vec<CliSessionReport>, String> {
+fn list_cli_adapter_sessions(
+    app: AppHandle,
+    store: State<'_, SessionStore>,
+) -> Result<Vec<CliSessionReport>, String> {
     let mut sessions = store
         .sessions
         .lock()
         .map_err(|_| "Failed to lock CLI session store.".to_string())?;
     Ok(sessions
         .iter_mut()
-        .map(|(session_id, session)| poll_session_locked(session_id, session))
+        .map(|(session_id, session)| poll_session_locked(&app, session_id, session))
         .collect())
 }
 
 #[tauri::command]
 fn write_cli_adapter_stdin(
+    app: AppHandle,
     store: State<'_, SessionStore>,
     session_id: String,
     input: String,
@@ -874,11 +1011,12 @@ fn write_cli_adapter_stdin(
         .map_err(|error| format!("Failed to write stdin: {error}"))?;
     session.defer_message_sent = false;
     session.decision_capture_error = None;
-    Ok(poll_session_locked(&session_id, session))
+    Ok(poll_session_locked(&app, &session_id, session))
 }
 
 #[tauri::command]
 fn send_cli_adapter_defer_message(
+    app: AppHandle,
     store: State<'_, SessionStore>,
     session_id: String,
 ) -> Result<CliSessionReport, String> {
@@ -893,11 +1031,14 @@ fn send_cli_adapter_defer_message(
         return Err("Cannot defer a finished CLI session.".to_string());
     }
     defer_session_questions_locked(&session_id, session, "manual")?;
-    Ok(poll_session_locked(&session_id, session))
+    Ok(poll_session_locked(&app, &session_id, session))
 }
 
 #[tauri::command]
-fn defer_all_cli_adapter_questions(store: State<'_, SessionStore>) -> Result<Vec<CliSessionReport>, String> {
+fn defer_all_cli_adapter_questions(
+    app: AppHandle,
+    store: State<'_, SessionStore>,
+) -> Result<Vec<CliSessionReport>, String> {
     let mut sessions = store
         .sessions
         .lock()
@@ -909,13 +1050,17 @@ fn defer_all_cli_adapter_questions(store: State<'_, SessionStore>) -> Result<Vec
                 session.decision_capture_error = Some(error);
             }
         }
-        reports.push(poll_session_locked(session_id, session));
+        reports.push(poll_session_locked(&app, session_id, session));
     }
     Ok(reports)
 }
 
 #[tauri::command]
-fn cancel_cli_adapter_session(store: State<'_, SessionStore>, session_id: String) -> Result<CliSessionReport, String> {
+fn cancel_cli_adapter_session(
+    app: AppHandle,
+    store: State<'_, SessionStore>,
+    session_id: String,
+) -> Result<CliSessionReport, String> {
     let mut sessions = store
         .sessions
         .lock()
@@ -935,7 +1080,7 @@ fn cancel_cli_adapter_session(store: State<'_, SessionStore>, session_id: String
         session.finished = true;
         session.stdin.take();
     }
-    Ok(poll_session_locked(&session_id, session))
+    Ok(poll_session_locked(&app, &session_id, session))
 }
 
 #[tauri::command]
@@ -949,7 +1094,8 @@ fn read_workspace_text_file(relative_path: String) -> Result<WorkspaceTextFile, 
             "File is too large for the desktop editor. Max size is {MAX_WORKSPACE_FILE_BYTES} bytes."
         ));
     }
-    let content = fs::read_to_string(&path).map_err(|error| format!("Failed to read text file: {error}"))?;
+    let content =
+        fs::read_to_string(&path).map_err(|error| format!("Failed to read text file: {error}"))?;
     Ok(WorkspaceTextFile {
         relative_path: normalized,
         size_bytes: content.len(),
@@ -959,7 +1105,10 @@ fn read_workspace_text_file(relative_path: String) -> Result<WorkspaceTextFile, 
 }
 
 #[tauri::command]
-fn write_workspace_text_file(relative_path: String, content: String) -> Result<WorkspaceWriteReport, String> {
+fn write_workspace_text_file(
+    relative_path: String,
+    content: String,
+) -> Result<WorkspaceWriteReport, String> {
     if content.len() > MAX_WORKSPACE_FILE_BYTES {
         return Err(format!(
             "Content is too large for the desktop editor. Max size is {MAX_WORKSPACE_FILE_BYTES} bytes."
@@ -967,13 +1116,17 @@ fn write_workspace_text_file(relative_path: String, content: String) -> Result<W
     }
     let root = workspace_root()?;
     let (path, normalized) = resolve_workspace_file(&relative_path, true)?;
-    let original = fs::read(&path).map_err(|error| format!("Failed to read original file for backup: {error}"))?;
+    let original = fs::read(&path)
+        .map_err(|error| format!("Failed to read original file for backup: {error}"))?;
     let backup_path = source_backup_path(&root, &normalized)?;
     if let Some(parent) = backup_path.parent() {
-        fs::create_dir_all(parent).map_err(|error| format!("Failed to create backup directory: {error}"))?;
+        fs::create_dir_all(parent)
+            .map_err(|error| format!("Failed to create backup directory: {error}"))?;
     }
-    fs::write(&backup_path, original).map_err(|error| format!("Failed to write backup file: {error}"))?;
-    fs::write(&path, content.as_bytes()).map_err(|error| format!("Failed to write workspace file: {error}"))?;
+    fs::write(&backup_path, original)
+        .map_err(|error| format!("Failed to write backup file: {error}"))?;
+    fs::write(&path, content.as_bytes())
+        .map_err(|error| format!("Failed to write workspace file: {error}"))?;
     Ok(WorkspaceWriteReport {
         relative_path: normalized,
         size_bytes: content.len(),
@@ -1005,6 +1158,7 @@ fn answer_human_decision(
 
 #[tauri::command]
 fn answer_and_resume_human_decision(
+    app: AppHandle,
     store: State<'_, SessionStore>,
     decision_id: String,
     answer_type: String,
@@ -1021,7 +1175,9 @@ fn answer_and_resume_human_decision(
             inbox: update.report,
             session: None,
             resume_status: "no_session_link".to_string(),
-            resume_detail: "The decision was answered, but it is not linked to an active CLI session.".to_string(),
+            resume_detail:
+                "The decision was answered, but it is not linked to an active CLI session."
+                    .to_string(),
         });
     };
 
@@ -1034,25 +1190,31 @@ fn answer_and_resume_human_decision(
             inbox: update.report,
             session: None,
             resume_status: "session_not_found".to_string(),
-            resume_detail: format!("The decision was answered, but CLI session {session_id} is not currently loaded."),
+            resume_detail: format!(
+                "The decision was answered, but CLI session {session_id} is not currently loaded."
+            ),
         });
     };
     if session.finished {
-        let report = poll_session_locked(&session_id, session);
+        let report = poll_session_locked(&app, &session_id, session);
         return Ok(DecisionResumeReport {
             inbox: update.report,
             session: Some(report),
             resume_status: "session_finished".to_string(),
-            resume_detail: format!("The decision was answered, but CLI session {session_id} has already finished."),
+            resume_detail: format!(
+                "The decision was answered, but CLI session {session_id} has already finished."
+            ),
         });
     }
     let Some(stdin) = session.stdin.as_mut() else {
-        let report = poll_session_locked(&session_id, session);
+        let report = poll_session_locked(&app, &session_id, session);
         return Ok(DecisionResumeReport {
             inbox: update.report,
             session: Some(report),
             resume_status: "stdin_unavailable".to_string(),
-            resume_detail: format!("The decision was answered, but CLI session {session_id} cannot accept stdin."),
+            resume_detail: format!(
+                "The decision was answered, but CLI session {session_id} cannot accept stdin."
+            ),
         });
     };
 
@@ -1061,7 +1223,7 @@ fn answer_and_resume_human_decision(
         .and_then(|_| stdin.write_all(b"\n"))
         .and_then(|_| stdin.flush())
     {
-        let report = poll_session_locked(&session_id, session);
+        let report = poll_session_locked(&app, &session_id, session);
         return Ok(DecisionResumeReport {
             inbox: update.report,
             session: Some(report),
@@ -1071,7 +1233,7 @@ fn answer_and_resume_human_decision(
     }
 
     session.defer_message_sent = false;
-    let report = poll_session_locked(&session_id, session);
+    let report = poll_session_locked(&app, &session_id, session);
     Ok(DecisionResumeReport {
         inbox: update.report,
         session: Some(report),
@@ -1093,6 +1255,9 @@ pub fn run() {
             list_cli_task_run_records,
             read_cli_task_run_record,
             prune_cli_task_run_records,
+            list_runtime_data_roots,
+            run_installer_payload_audit,
+            create_support_diagnostic_bundle,
             start_cli_adapter_session,
             start_cli_task_pipeline,
             poll_cli_adapter_session,
@@ -1112,11 +1277,15 @@ pub fn run() {
 }
 
 fn find_adapter(adapter_id: &str) -> Option<&'static AdapterDefinition> {
-    ADAPTERS.iter().find(|adapter| adapter.adapter_id == adapter_id)
+    ADAPTERS
+        .iter()
+        .find(|adapter| adapter.adapter_id == adapter_id)
 }
 
 fn find_pipeline_preset(task_kind: &str) -> Option<&'static PipelineTaskPreset> {
-    PIPELINE_PRESETS.iter().find(|preset| preset.task_kind == task_kind)
+    PIPELINE_PRESETS
+        .iter()
+        .find(|preset| preset.task_kind == task_kind)
 }
 
 fn pipeline_preset_report(preset: &PipelineTaskPreset) -> CliTaskPipelinePresetReport {
@@ -1130,7 +1299,11 @@ fn pipeline_preset_report(preset: &PipelineTaskPreset) -> CliTaskPipelinePresetR
     }
 }
 
-fn pipeline_lane_prompt(preset: &PipelineTaskPreset, lane: &PipelineLaneDefinition, prompt: &str) -> String {
+fn pipeline_lane_prompt(
+    preset: &PipelineTaskPreset,
+    lane: &PipelineLaneDefinition,
+    prompt: &str,
+) -> String {
     format!(
         "[Platform task pipe init]\nTask kind: {}\nPreset: {}\nLane id: {}\nLane role: {}\nMerge gate: {}\nPipe contract: read task input from stdin, stream stdout/stderr continuously, send questions as explicit decision prompts, and avoid source-affecting decisions until the platform merge gate accepts them.\n\nTask input:\n{}\n\nLane instruction:\n{}",
         preset.task_kind,
@@ -1194,7 +1367,10 @@ fn adapter_status(adapter: &AdapterDefinition) -> CliAdapterStatus {
                 MAX_HEALTH_OUTPUT_BYTES,
             )
             .ok()
-            .and_then(|output| first_non_empty_line(&output.stdout).or_else(|| first_non_empty_line(&output.stderr)));
+            .and_then(|output| {
+                first_non_empty_line(&output.stdout)
+                    .or_else(|| first_non_empty_line(&output.stderr))
+            });
 
             CliAdapterStatus {
                 adapter_id: adapter.adapter_id,
@@ -1310,27 +1486,25 @@ fn run_bounded_command(
     let stderr_handle = thread::spawn(move || read_limited(stderr, max_output_bytes));
     let (tx, rx) = mpsc::channel();
 
-    thread::spawn(move || {
-        loop {
-            match child.try_wait() {
-                Ok(Some(status)) => {
-                    let _ = tx.send((status.code(), false));
-                    break;
-                }
-                Ok(None) => {
-                    if started.elapsed() >= timeout {
-                        let _ = child.kill();
-                        let status = child.wait().ok().and_then(|value| value.code());
-                        let _ = tx.send((status, true));
-                        break;
-                    }
-                    thread::sleep(Duration::from_millis(40));
-                }
-                Err(_) => {
+    thread::spawn(move || loop {
+        match child.try_wait() {
+            Ok(Some(status)) => {
+                let _ = tx.send((status.code(), false));
+                break;
+            }
+            Ok(None) => {
+                if started.elapsed() >= timeout {
                     let _ = child.kill();
-                    let _ = tx.send((None, false));
+                    let status = child.wait().ok().and_then(|value| value.code());
+                    let _ = tx.send((status, true));
                     break;
                 }
+                thread::sleep(Duration::from_millis(40));
+            }
+            Err(_) => {
+                let _ = child.kill();
+                let _ = tx.send((None, false));
+                break;
             }
         }
     });
@@ -1364,7 +1538,11 @@ fn run_bounded_command(
     })
 }
 
-fn poll_session_locked(session_id: &str, session: &mut CliSession) -> CliSessionReport {
+fn poll_session_locked(
+    app: &AppHandle,
+    session_id: &str,
+    session: &mut CliSession,
+) -> CliSessionReport {
     if !session.finished {
         match session.child.try_wait() {
             Ok(Some(status)) => {
@@ -1407,7 +1585,7 @@ fn poll_session_locked(session_id: &str, session: &mut CliSession) -> CliSession
     let report = session_report(session_id, session);
     let persist_signature = task_run_persist_signature(&report);
     if session.task_record_path.is_none() || session.last_persist_signature != persist_signature {
-        match persist_session_task_run(session_id, session, &report) {
+        match persist_session_task_run(app, session_id, session, &report) {
             Ok(paths) => {
                 session.task_record_path = Some(paths.record_path);
                 session.stdout_log_path = Some(paths.stdout_log_path);
@@ -1424,7 +1602,10 @@ fn poll_session_locked(session_id: &str, session: &mut CliSession) -> CliSession
 }
 
 fn join_finished_reader(handle: &mut Option<thread::JoinHandle<()>>) {
-    let should_join = handle.as_ref().map(|value| value.is_finished()).unwrap_or(false);
+    let should_join = handle
+        .as_ref()
+        .map(|value| value.is_finished())
+        .unwrap_or(false);
     if should_join {
         if let Some(value) = handle.take() {
             let _ = value.join();
@@ -1439,12 +1620,16 @@ fn session_report(session_id: &str, session: &CliSession) -> CliSessionReport {
         .map(|value| value.clone())
         .unwrap_or_default();
     let decision_output = recent_session_output(&output);
-    let decision_prompts = detect_decision_prompts_for(&session.adapter_id, &session.label, &decision_output);
+    let decision_prompts =
+        detect_decision_prompts_for(&session.adapter_id, &session.label, &decision_output);
     let pending_decision_prompts = decision_prompts
         .iter()
         .filter(|prompt| {
             let key = decision_prompt_key(&prompt.question);
-            !session.deferred_prompt_keys.iter().any(|existing| existing == &key)
+            !session
+                .deferred_prompt_keys
+                .iter()
+                .any(|existing| existing == &key)
         })
         .count();
     let status = if !session.finished && session.defer_message_sent {
@@ -1509,7 +1694,12 @@ fn read_session_stream<R: Read>(
     }
 }
 
-fn append_session_output(output: &mut CliSessionOutput, is_stdout: bool, text: &str, max_output_bytes: usize) {
+fn append_session_output(
+    output: &mut CliSessionOutput,
+    is_stdout: bool,
+    text: &str,
+    max_output_bytes: usize,
+) {
     let (target, truncated) = if is_stdout {
         (&mut output.stdout, &mut output.stdout_truncated)
     } else {
@@ -1533,13 +1723,15 @@ fn append_session_output(output: &mut CliSessionOutput, is_stdout: bool, text: &
 }
 
 fn persist_session_task_run(
+    app: &AppHandle,
     session_id: &str,
     session: &CliSession,
     report: &CliSessionReport,
 ) -> Result<TaskRunPersistPaths, String> {
     let root = workspace_root()?;
-    let run_dir = task_run_dir(&root, &session.task_run_id);
-    fs::create_dir_all(&run_dir).map_err(|error| format!("Failed to create task run directory: {error}"))?;
+    let run_dir = task_run_dir(app, &session.task_run_id)?;
+    fs::create_dir_all(&run_dir)
+        .map_err(|error| format!("Failed to create task run directory: {error}"))?;
 
     let record_path = run_dir.join("record.json");
     let stdout_log_path = run_dir.join("stdout.log");
@@ -1590,8 +1782,8 @@ fn persist_session_task_run(
             "stderr_log": relative_stderr_path
         }
     });
-    let formatted =
-        serde_json::to_string_pretty(&record).map_err(|error| format!("Failed to serialize task run record: {error}"))?;
+    let formatted = serde_json::to_string_pretty(&record)
+        .map_err(|error| format!("Failed to serialize task run record: {error}"))?;
     fs::write(&record_path, format!("{formatted}\n"))
         .map_err(|error| format!("Failed to write task run record: {error}"))?;
 
@@ -1605,7 +1797,10 @@ fn persist_session_task_run(
 fn task_run_persist_signature(report: &CliSessionReport) -> String {
     [
         report.status.clone(),
-        report.exit_code.map(|code| code.to_string()).unwrap_or_default(),
+        report
+            .exit_code
+            .map(|code| code.to_string())
+            .unwrap_or_default(),
         report.stdout.len().to_string(),
         report.stderr.len().to_string(),
         report.output_truncated.to_string(),
@@ -1614,27 +1809,50 @@ fn task_run_persist_signature(report: &CliSessionReport) -> String {
         report.decision_inbox_items.to_string(),
         report.pending_decision_prompts.to_string(),
         report.deferred_prompt_count.to_string(),
-        report
-            .decision_capture_error
-            .clone()
-            .unwrap_or_default(),
+        report.decision_capture_error.clone().unwrap_or_default(),
     ]
     .join("\u{1f}")
 }
 
-fn read_task_run_records() -> Result<Vec<CliTaskRunRecordReport>, String> {
-    read_task_run_records_with_limit(Some(MAX_TASK_RUN_RECORDS))
+fn read_task_run_records(app: &AppHandle) -> Result<Vec<CliTaskRunRecordReport>, String> {
+    read_task_run_records_with_limit(app, Some(MAX_TASK_RUN_RECORDS))
 }
 
-fn read_task_run_records_with_limit(limit: Option<usize>) -> Result<Vec<CliTaskRunRecordReport>, String> {
+fn read_task_run_records_with_limit(
+    app: &AppHandle,
+    limit: Option<usize>,
+) -> Result<Vec<CliTaskRunRecordReport>, String> {
     let root = workspace_root()?;
-    let base = task_runs_base_path(&root);
-    if !base.exists() {
-        return Ok(Vec::new());
+    let runtime_base = task_runs_base_path(app)?;
+    fs::create_dir_all(&runtime_base)
+        .map_err(|error| format!("Failed to create runtime task run directory: {error}"))?;
+    let legacy_base = legacy_task_runs_base_path(&root);
+    let mut records = Vec::new();
+    read_task_run_records_from_base(&root, &runtime_base, &mut records)?;
+    if legacy_base.exists() && legacy_base != runtime_base {
+        read_task_run_records_from_base(&root, &legacy_base, &mut records)?;
     }
 
-    let mut records = Vec::new();
-    for entry in fs::read_dir(&base).map_err(|error| format!("Failed to read task run directory: {error}"))? {
+    records.sort_by(|left, right| right.updated_at.cmp(&left.updated_at));
+    records.dedup_by(|left, right| left.task_run_id == right.task_run_id);
+    if let Some(limit) = limit {
+        records.truncate(limit);
+    }
+    Ok(records)
+}
+
+fn read_task_run_records_from_base(
+    root: &Path,
+    base: &Path,
+    records: &mut Vec<CliTaskRunRecordReport>,
+) -> Result<(), String> {
+    if !base.exists() {
+        return Ok(());
+    }
+
+    for entry in
+        fs::read_dir(base).map_err(|error| format!("Failed to read task run directory: {error}"))?
+    {
         let Ok(entry) = entry else {
             continue;
         };
@@ -1652,36 +1870,40 @@ fn read_task_run_records_with_limit(limit: Option<usize>) -> Result<Vec<CliTaskR
         let Ok(value) = serde_json::from_str::<Value>(&content) else {
             continue;
         };
-        records.push(task_run_record_report_from_value(&root, &record_path, &value));
+        records.push(task_run_record_report_from_value(
+            root,
+            &record_path,
+            &value,
+        ));
     }
-
-    records.sort_by(|left, right| right.updated_at.cmp(&left.updated_at));
-    if let Some(limit) = limit {
-        records.truncate(limit);
-    }
-    Ok(records)
+    Ok(())
 }
 
-fn read_task_run_detail(task_run_id: &str) -> Result<CliTaskRunDetailReport, String> {
+fn read_task_run_detail(
+    app: &AppHandle,
+    task_run_id: &str,
+) -> Result<CliTaskRunDetailReport, String> {
     let task_run_id = task_run_id.trim();
     if task_run_id.is_empty() {
         return Err("Task run id is required.".to_string());
     }
 
     let root = workspace_root()?;
-    let run_dir = resolve_task_run_dir(&root, task_run_id)?;
+    let run_dir = resolve_task_run_dir(app, &root, task_run_id)?;
     let record_path = run_dir.join("record.json");
     if !record_path.is_file() {
         return Err(format!("Task run record was not found: {task_run_id}"));
     }
 
-    let record_json =
-        fs::read_to_string(&record_path).map_err(|error| format!("Failed to read task run record: {error}"))?;
-    let record_value: Value =
-        serde_json::from_str(&record_json).map_err(|error| format!("Failed to parse task run record: {error}"))?;
+    let record_json = fs::read_to_string(&record_path)
+        .map_err(|error| format!("Failed to read task run record: {error}"))?;
+    let record_value: Value = serde_json::from_str(&record_json)
+        .map_err(|error| format!("Failed to parse task run record: {error}"))?;
     let record = task_run_record_report_from_value(&root, &record_path, &record_value);
-    let (stdout_preview, stdout_truncated) = read_bounded_text_preview(&run_dir.join("stdout.log"), MAX_TASK_RUN_LOG_PREVIEW_BYTES)?;
-    let (stderr_preview, stderr_truncated) = read_bounded_text_preview(&run_dir.join("stderr.log"), MAX_TASK_RUN_LOG_PREVIEW_BYTES)?;
+    let (stdout_preview, stdout_truncated) =
+        read_bounded_text_preview(&run_dir.join("stdout.log"), MAX_TASK_RUN_LOG_PREVIEW_BYTES)?;
+    let (stderr_preview, stderr_truncated) =
+        read_bounded_text_preview(&run_dir.join("stderr.log"), MAX_TASK_RUN_LOG_PREVIEW_BYTES)?;
 
     Ok(CliTaskRunDetailReport {
         record,
@@ -1694,9 +1916,12 @@ fn read_task_run_detail(task_run_id: &str) -> Result<CliTaskRunDetailReport, Str
     })
 }
 
-fn prune_task_run_records(keep_count: Option<usize>) -> Result<CliTaskRunPruneReport, String> {
+fn prune_task_run_records(
+    app: &AppHandle,
+    keep_count: Option<usize>,
+) -> Result<CliTaskRunPruneReport, String> {
     let root = workspace_root()?;
-    let base = task_runs_base_path(&root);
+    let base = task_runs_base_path(app)?;
     if !base.exists() {
         return Ok(CliTaskRunPruneReport {
             status: "no_task_run_store".to_string(),
@@ -1712,13 +1937,15 @@ fn prune_task_run_records(keep_count: Option<usize>) -> Result<CliTaskRunPruneRe
     let keep_count = keep_count
         .unwrap_or(DEFAULT_TASK_RUN_PRUNE_KEEP_COUNT)
         .clamp(1, MAX_TASK_RUN_RECORDS);
-    let records = read_task_run_records_with_limit(None)?;
+    let mut records = Vec::new();
+    read_task_run_records_from_base(&root, &base, &mut records)?;
+    records.sort_by(|left, right| right.updated_at.cmp(&left.updated_at));
     let before_count = records.len();
     let mut removed_task_run_ids = Vec::new();
     let mut errors = Vec::new();
 
     for record in records.iter().skip(keep_count) {
-        match resolve_task_run_dir(&root, &record.task_run_id) {
+        match resolve_task_run_dir_in_base(&root, &base, &record.task_run_id) {
             Ok(run_dir) => {
                 if let Err(error) = fs::remove_dir_all(&run_dir) {
                     errors.push(format!("{}: {error}", record.task_run_id));
@@ -1730,7 +1957,9 @@ fn prune_task_run_records(keep_count: Option<usize>) -> Result<CliTaskRunPruneRe
         }
     }
 
-    let after_count = read_task_run_records_with_limit(None)?.len();
+    let mut after_records = Vec::new();
+    read_task_run_records_from_base(&root, &base, &mut after_records)?;
+    let after_count = after_records.len();
     let status = if errors.is_empty() {
         "pruned".to_string()
     } else if removed_task_run_ids.is_empty() {
@@ -1750,28 +1979,53 @@ fn prune_task_run_records(keep_count: Option<usize>) -> Result<CliTaskRunPruneRe
     })
 }
 
-fn task_run_record_report_from_value(root: &Path, record_path: &Path, value: &Value) -> CliTaskRunRecordReport {
+fn task_run_record_report_from_value(
+    root: &Path,
+    record_path: &Path,
+    value: &Value,
+) -> CliTaskRunRecordReport {
     let paths = value.get("paths").unwrap_or(&Value::Null);
     CliTaskRunRecordReport {
         record_id: value_string(value, "record_id", "unknown-task-run-record"),
         session_id: value_string(value, "session_id", "unknown-session"),
         task_run_id: value_string(value, "task_run_id", "unknown-task-run"),
         task_kind: value_string(value, "task_kind", "unknown"),
-        pipeline_id: value.get("pipeline_id").and_then(Value::as_str).map(ToOwned::to_owned),
-        lane_id: value.get("lane_id").and_then(Value::as_str).map(ToOwned::to_owned),
-        lane_role: value.get("lane_role").and_then(Value::as_str).map(ToOwned::to_owned),
+        pipeline_id: value
+            .get("pipeline_id")
+            .and_then(Value::as_str)
+            .map(ToOwned::to_owned),
+        lane_id: value
+            .get("lane_id")
+            .and_then(Value::as_str)
+            .map(ToOwned::to_owned),
+        lane_role: value
+            .get("lane_role")
+            .and_then(Value::as_str)
+            .map(ToOwned::to_owned),
         adapter_id: value_string(value, "adapter_id", "unknown-adapter"),
         label: value_string(value, "label", "Unknown CLI"),
         command: value_string(value, "command", ""),
         status: value_string(value, "status", "unknown"),
-        exit_code: value.get("exit_code").and_then(Value::as_i64).map(|code| code as i32),
+        exit_code: value
+            .get("exit_code")
+            .and_then(Value::as_i64)
+            .map(|code| code as i32),
         started_at: value_string(value, "started_at", ""),
         updated_at: value_string(value, "updated_at", ""),
         elapsed_ms: value.get("elapsed_ms").and_then(Value::as_u64).unwrap_or(0) as u128,
         working_dir: value_string(value, "working_dir", ""),
-        stdout_bytes: value.get("stdout_bytes").and_then(Value::as_u64).unwrap_or(0) as usize,
-        stderr_bytes: value.get("stderr_bytes").and_then(Value::as_u64).unwrap_or(0) as usize,
-        output_truncated: value.get("output_truncated").and_then(Value::as_bool).unwrap_or(false),
+        stdout_bytes: value
+            .get("stdout_bytes")
+            .and_then(Value::as_u64)
+            .unwrap_or(0) as usize,
+        stderr_bytes: value
+            .get("stderr_bytes")
+            .and_then(Value::as_u64)
+            .unwrap_or(0) as usize,
+        output_truncated: value
+            .get("output_truncated")
+            .and_then(Value::as_bool)
+            .unwrap_or(false),
         decision_inbox_items: value
             .get("decision_inbox_items")
             .and_then(Value::as_u64)
@@ -1784,8 +2038,14 @@ fn task_run_record_report_from_value(root: &Path, record_path: &Path, value: &Va
             .get("deferred_prompt_count")
             .and_then(Value::as_u64)
             .unwrap_or(0) as usize,
-        auto_defer_questions: value.get("auto_defer_questions").and_then(Value::as_bool).unwrap_or(false),
-        auto_defer_triggered: value.get("auto_defer_triggered").and_then(Value::as_bool).unwrap_or(false),
+        auto_defer_questions: value
+            .get("auto_defer_questions")
+            .and_then(Value::as_bool)
+            .unwrap_or(false),
+        auto_defer_triggered: value
+            .get("auto_defer_triggered")
+            .and_then(Value::as_bool)
+            .unwrap_or(false),
         record_path: paths
             .get("record")
             .and_then(Value::as_str)
@@ -1804,24 +2064,51 @@ fn task_run_record_report_from_value(root: &Path, record_path: &Path, value: &Va
     }
 }
 
-fn task_runs_base_path(root: &Path) -> PathBuf {
+fn task_runs_base_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(runtime_data_store_base_path(app)?.join("task-runs"))
+}
+
+fn legacy_task_runs_base_path(root: &Path) -> PathBuf {
     platform_artifacts_base_path(root).join("task-runs")
 }
 
-fn task_run_dir(root: &Path, task_run_id: &str) -> PathBuf {
-    task_runs_base_path(root).join(sanitize_file_name(task_run_id))
+fn task_run_dir(app: &AppHandle, task_run_id: &str) -> Result<PathBuf, String> {
+    Ok(task_runs_base_path(app)?.join(sanitize_file_name(task_run_id)))
 }
 
-fn resolve_task_run_dir(root: &Path, task_run_id: &str) -> Result<PathBuf, String> {
-    let base = task_runs_base_path(root);
-    let run_dir = task_run_dir(root, task_run_id);
+fn resolve_task_run_dir(
+    app: &AppHandle,
+    root: &Path,
+    task_run_id: &str,
+) -> Result<PathBuf, String> {
+    let runtime_base = task_runs_base_path(app)?;
+    let runtime_dir = runtime_base.join(sanitize_file_name(task_run_id));
+    if runtime_dir.exists() {
+        return resolve_task_run_dir_in_base(root, &runtime_base, task_run_id);
+    }
+    let legacy_base = legacy_task_runs_base_path(root);
+    let legacy_dir = legacy_base.join(sanitize_file_name(task_run_id));
+    if legacy_dir.exists() {
+        return resolve_task_run_dir_in_base(root, &legacy_base, task_run_id);
+    }
+    Err(format!("Task run record was not found: {task_run_id}"))
+}
+
+fn resolve_task_run_dir_in_base(
+    root: &Path,
+    base: &Path,
+    task_run_id: &str,
+) -> Result<PathBuf, String> {
+    let run_dir = base.join(sanitize_file_name(task_run_id));
     let canonical_base = base
         .canonicalize()
         .map_err(|error| format!("Failed to resolve task run base directory: {error}"))?;
     let canonical_run_dir = run_dir
         .canonicalize()
         .map_err(|error| format!("Failed to resolve task run directory: {error}"))?;
-    ensure_workspace_path(root, &canonical_run_dir)?;
+    if canonical_run_dir.starts_with(root) {
+        ensure_workspace_path(root, &canonical_run_dir)?;
+    }
     if !canonical_run_dir.starts_with(&canonical_base) {
         return Err("Task run path is outside the task run store.".to_string());
     }
@@ -1829,6 +2116,550 @@ fn resolve_task_run_dir(root: &Path, task_run_id: &str) -> Result<PathBuf, Strin
         return Err("Task run path is not a directory.".to_string());
     }
     Ok(canonical_run_dir)
+}
+
+fn runtime_data_boundary_report(app: &AppHandle) -> Result<RuntimeDataBoundaryReport, String> {
+    let mut roots = Vec::new();
+    roots.push(runtime_root_report(
+        "app_config",
+        "App Config",
+        "platform_config_store",
+        app.path()
+            .app_config_dir()
+            .map_err(|error| format!("Failed to resolve app config directory: {error}"))?,
+        "user_local_app_config",
+        "Installer-safe configuration metadata and user settings.",
+    )?);
+    roots.push(runtime_root_report(
+        "app_data",
+        "App Data",
+        "platform_data_store",
+        app.path()
+            .app_data_dir()
+            .map_err(|error| format!("Failed to resolve app data directory: {error}"))?,
+        "user_local_app_data",
+        "Durable runtime records that must not be bundled into the platform source tree.",
+    )?);
+    roots.push(runtime_root_report(
+        "app_local_data",
+        "App Local Data",
+        "platform_local_data_store",
+        app.path()
+            .app_local_data_dir()
+            .map_err(|error| format!("Failed to resolve app local data directory: {error}"))?,
+        "user_local_machine_data",
+        "Machine-local runtime records and non-roaming state.",
+    )?);
+    roots.push(runtime_root_report(
+        "app_cache",
+        "App Cache",
+        "cache_store",
+        app.path()
+            .app_cache_dir()
+            .map_err(|error| format!("Failed to resolve app cache directory: {error}"))?,
+        "user_local_cache",
+        "Regenerable cache and transient acceleration data.",
+    )?);
+    roots.push(runtime_root_report(
+        "app_log",
+        "App Logs",
+        "log_store",
+        app.path()
+            .app_log_dir()
+            .map_err(|error| format!("Failed to resolve app log directory: {error}"))?,
+        "user_local_logs",
+        "Runtime health and support logs subject to redaction before export.",
+    )?);
+    roots.push(runtime_root_report(
+        "runtime_store",
+        "Runtime Store",
+        "platform_data_store",
+        runtime_data_store_base_path(app)?,
+        "user_local_app_data",
+        "Platform-owned runtime records, task runs, support bundles, and audits.",
+    )?);
+    roots.push(runtime_root_report(
+        "task_run_store",
+        "Task Run Store",
+        "task_execution_store",
+        task_runs_base_path(app)?,
+        "user_local_app_data",
+        "CLI task-run records and stdout/stderr logs outside platform source.",
+    )?);
+    roots.push(runtime_root_report(
+        "agent_workspace",
+        "Agent Workspace",
+        "agent_workspace",
+        agent_workspace_base_path(app)?,
+        "user_local_app_data",
+        "Runtime agent scratch and work artifacts separated from reusable agent definitions.",
+    )?);
+    roots.push(runtime_root_report(
+        "support_bundles",
+        "Support Bundles",
+        "support_diagnostic_store",
+        support_bundles_base_path(app)?,
+        "user_local_app_data",
+        "Redacted support export bundles.",
+    )?);
+    roots.push(runtime_root_report(
+        "payload_audits",
+        "Payload Audits",
+        "installer_payload_audit_store",
+        payload_audits_base_path(app)?,
+        "user_local_app_data",
+        "Installer bundle scan reports.",
+    )?);
+
+    Ok(RuntimeDataBoundaryReport {
+        status: "ready".to_string(),
+        task_run_store_path: path_to_string(&task_runs_base_path(app)?),
+        support_bundle_store_path: path_to_string(&support_bundles_base_path(app)?),
+        installer_payload_audit_path: path_to_string(&payload_audits_base_path(app)?),
+        roots,
+    })
+}
+
+fn runtime_root_report(
+    id: &str,
+    label: &str,
+    plane: &str,
+    path: PathBuf,
+    visibility: &str,
+    purpose: &str,
+) -> Result<RuntimeDataRootReport, String> {
+    let existed_before = path.exists();
+    fs::create_dir_all(&path)
+        .map_err(|error| format!("Failed to create runtime data root {id}: {error}"))?;
+    Ok(RuntimeDataRootReport {
+        id: id.to_string(),
+        label: label.to_string(),
+        plane: plane.to_string(),
+        path: path_to_string(&path),
+        exists: path.exists(),
+        created: !existed_before,
+        visibility: visibility.to_string(),
+        purpose: purpose.to_string(),
+    })
+}
+
+fn runtime_data_store_base_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(app
+        .path()
+        .app_data_dir()
+        .map_err(|error| format!("Failed to resolve app data directory: {error}"))?
+        .join("runtime-data"))
+}
+
+fn agent_workspace_base_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(runtime_data_store_base_path(app)?.join("agent-workspace"))
+}
+
+fn support_bundles_base_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(runtime_data_store_base_path(app)?.join("support-bundles"))
+}
+
+fn payload_audits_base_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(runtime_data_store_base_path(app)?.join("payload-audits"))
+}
+
+fn run_installer_payload_audit_report(
+    app: &AppHandle,
+) -> Result<InstallerPayloadAuditReport, String> {
+    let created_at = current_unix_millis_label();
+    let scan_root = app
+        .path()
+        .resource_dir()
+        .map_err(|error| format!("Failed to resolve Tauri resource directory: {error}"))?;
+    let mut state = PayloadScanState::default();
+    scan_installer_payload_path(&scan_root, &scan_root, &mut state)?;
+    let has_high = state
+        .findings
+        .iter()
+        .any(|finding| finding.severity == "high");
+    let status = if has_high {
+        "attention_required"
+    } else {
+        "passed"
+    }
+    .to_string();
+    let audit_dir = payload_audits_base_path(app)?;
+    fs::create_dir_all(&audit_dir)
+        .map_err(|error| format!("Failed to create payload audit directory: {error}"))?;
+    let audit_path = audit_dir.join(format!(
+        "installer-payload-audit-{}.json",
+        file_safe_timestamp_label()
+    ));
+    let report = InstallerPayloadAuditReport {
+        status,
+        scanned_paths: vec![path_to_string(&scan_root)],
+        scanned_files: state.scanned_files,
+        scanned_bytes: state.scanned_bytes,
+        flagged_count: state.findings.len(),
+        findings: state.findings,
+        skipped_dirs: state.skipped_dirs,
+        max_scan_files: MAX_PAYLOAD_SCAN_FILES,
+        audit_path: path_to_string(&audit_path),
+        created_at,
+    };
+    write_pretty_json(&audit_path, &report)?;
+    Ok(report)
+}
+
+#[derive(Default)]
+struct PayloadScanState {
+    scanned_files: usize,
+    scanned_bytes: u64,
+    findings: Vec<InstallerPayloadFinding>,
+    skipped_dirs: Vec<String>,
+}
+
+fn scan_installer_payload_path(
+    base: &Path,
+    path: &Path,
+    state: &mut PayloadScanState,
+) -> Result<(), String> {
+    if state.scanned_files >= MAX_PAYLOAD_SCAN_FILES {
+        state.skipped_dirs.push(format!(
+            "{}: max scan file limit reached",
+            relative_payload_path(base, path)
+        ));
+        return Ok(());
+    }
+
+    let metadata = match fs::metadata(path) {
+        Ok(metadata) => metadata,
+        Err(error) => {
+            state.findings.push(payload_finding(
+                "payload_metadata_unreadable",
+                "warning",
+                base,
+                path,
+                &format!("Could not read bundled payload metadata: {error}"),
+            ));
+            return Ok(());
+        }
+    };
+
+    if metadata.is_dir() {
+        if let Some(reason) = disallowed_payload_dir_reason(path) {
+            state.findings.push(payload_finding(
+                "disallowed_payload_directory",
+                "high",
+                base,
+                path,
+                reason,
+            ));
+            state.skipped_dirs.push(relative_payload_path(base, path));
+            return Ok(());
+        }
+        for entry in fs::read_dir(path)
+            .map_err(|error| format!("Failed to scan bundled payload directory: {error}"))?
+        {
+            let Ok(entry) = entry else {
+                continue;
+            };
+            scan_installer_payload_path(base, &entry.path(), state)?;
+            if state.scanned_files >= MAX_PAYLOAD_SCAN_FILES {
+                break;
+            }
+        }
+        return Ok(());
+    }
+
+    if !metadata.is_file() {
+        return Ok(());
+    }
+
+    state.scanned_files += 1;
+    state.scanned_bytes = state.scanned_bytes.saturating_add(metadata.len());
+
+    if let Some(reason) = disallowed_payload_file_reason(path) {
+        state.findings.push(payload_finding(
+            "disallowed_payload_file",
+            "high",
+            base,
+            path,
+            reason,
+        ));
+    }
+    if path.file_name().and_then(|value| value.to_str()) == Some("workspace-snapshot.json") {
+        audit_workspace_snapshot_file(base, path, state);
+    }
+    Ok(())
+}
+
+fn disallowed_payload_dir_reason(path: &Path) -> Option<&'static str> {
+    let name = path.file_name()?.to_str()?;
+    match name {
+        "_private" => Some("Private local vault must never be bundled."),
+        "outputs" => Some("Transient local outputs must not be included in installer payload."),
+        ".git" => Some("Repository metadata must not be included in installer payload."),
+        "src-tauri" | "src" | "components" | "scripts" => {
+            Some("Developer source directory appears inside installer payload.")
+        }
+        _ => None,
+    }
+}
+
+fn disallowed_payload_file_reason(path: &Path) -> Option<&'static str> {
+    let relative = path_to_string(path);
+    if relative.contains("/_private/") || relative.contains("\\_private\\") {
+        return Some("Private local vault file path appears inside installer payload.");
+    }
+    if relative.contains("/outputs/") || relative.contains("\\outputs\\") {
+        return Some("Transient output file path appears inside installer payload.");
+    }
+    match path
+        .extension()
+        .and_then(|value| value.to_str())
+        .unwrap_or_default()
+    {
+        "rs" | "ts" | "tsx" | "py" => {
+            Some("Source file extension appears inside installer payload.")
+        }
+        "map" => Some("Source map may reveal original platform source."),
+        _ => None,
+    }
+}
+
+fn audit_workspace_snapshot_file(base: &Path, path: &Path, state: &mut PayloadScanState) {
+    let Ok(content) = fs::read_to_string(path) else {
+        state.findings.push(payload_finding(
+            "workspace_snapshot_unreadable",
+            "warning",
+            base,
+            path,
+            "Bundled workspace snapshot could not be read for source visibility audit.",
+        ));
+        return;
+    };
+    let Ok(value) = serde_json::from_str::<Value>(&content) else {
+        state.findings.push(payload_finding(
+            "workspace_snapshot_invalid",
+            "warning",
+            base,
+            path,
+            "Bundled workspace snapshot is not valid JSON.",
+        ));
+        return;
+    };
+    let source_count = value
+        .get("sourceFiles")
+        .and_then(Value::as_array)
+        .map(Vec::len)
+        .unwrap_or(0);
+    let document_count = value
+        .get("documents")
+        .and_then(Value::as_array)
+        .map(Vec::len)
+        .unwrap_or(0);
+    if source_count > 0 || document_count > 0 {
+        state.findings.push(payload_finding(
+            "customer_snapshot_contains_internal_content",
+            "high",
+            base,
+            path,
+            "Bundled customer snapshot still contains source files or internal documents.",
+        ));
+    }
+}
+
+fn payload_finding(
+    rule_id: &str,
+    severity: &str,
+    base: &Path,
+    path: &Path,
+    reason: &str,
+) -> InstallerPayloadFinding {
+    InstallerPayloadFinding {
+        rule_id: rule_id.to_string(),
+        severity: severity.to_string(),
+        path: relative_payload_path(base, path),
+        reason: reason.to_string(),
+    }
+}
+
+fn create_support_diagnostic_bundle_report(
+    app: &AppHandle,
+) -> Result<SupportDiagnosticBundleReport, String> {
+    let created_at = current_unix_millis_label();
+    let bundle_id = format!("support-bundle-{}", file_safe_timestamp_label());
+    let bundle_dir = support_bundles_base_path(app)?.join(&bundle_id);
+    fs::create_dir_all(&bundle_dir)
+        .map_err(|error| format!("Failed to create support bundle directory: {error}"))?;
+
+    let runtime_roots = runtime_data_boundary_report(app)?;
+    let payload_audit = run_installer_payload_audit_report(app)?;
+    let task_runs =
+        read_task_run_records_with_limit(app, Some(MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS))?;
+    let task_run_summary = task_run_support_summary(&task_runs);
+    let recent_events = task_run_recent_events_text(&task_runs);
+
+    let runtime_roots_path = bundle_dir.join("runtime-roots.json");
+    let installer_payload_audit_path = bundle_dir.join("installer-payload-audit.json");
+    let task_run_summary_path = bundle_dir.join("task-run-summary.redacted.json");
+    let recent_events_path = bundle_dir.join("recent-events.redacted.log");
+    let manifest_path = bundle_dir.join("manifest.json");
+
+    write_pretty_json(&runtime_roots_path, &runtime_roots)?;
+    write_pretty_json(&installer_payload_audit_path, &payload_audit)?;
+    write_pretty_json(&task_run_summary_path, &task_run_summary)?;
+    fs::write(&recent_events_path, recent_events)
+        .map_err(|error| format!("Failed to write support bundle recent events: {error}"))?;
+
+    let included_files = vec![
+        "runtime-roots.json".to_string(),
+        "installer-payload-audit.json".to_string(),
+        "task-run-summary.redacted.json".to_string(),
+        "recent-events.redacted.log".to_string(),
+        "manifest.json".to_string(),
+    ];
+    let manifest = json!({
+        "schema_version": 1,
+        "bundle_id": bundle_id,
+        "created_at": created_at,
+        "app": {
+            "package": env!("CARGO_PKG_NAME"),
+            "version": env!("CARGO_PKG_VERSION")
+        },
+        "redacted": true,
+        "exclusions": [
+            "raw stdout/stderr logs",
+            "platform source files",
+            "_private/ contents",
+            "user secrets and credentials"
+        ],
+        "included_files": included_files,
+        "payload_audit_status": payload_audit.status,
+        "task_run_count": task_runs.len()
+    });
+    write_pretty_json(&manifest_path, &manifest)?;
+
+    Ok(SupportDiagnosticBundleReport {
+        status: "created".to_string(),
+        bundle_id,
+        bundle_dir: path_to_string(&bundle_dir),
+        manifest_path: path_to_string(&manifest_path),
+        runtime_roots_path: path_to_string(&runtime_roots_path),
+        installer_payload_audit_path: path_to_string(&installer_payload_audit_path),
+        task_run_summary_path: path_to_string(&task_run_summary_path),
+        recent_events_path: path_to_string(&recent_events_path),
+        included_files,
+        redacted: true,
+        created_at,
+    })
+}
+
+fn task_run_support_summary(records: &[CliTaskRunRecordReport]) -> Value {
+    let items: Vec<Value> = records
+        .iter()
+        .map(|record| {
+            json!({
+                "task_run_id": record.task_run_id,
+                "task_kind": record.task_kind,
+                "adapter_id": record.adapter_id,
+                "status": record.status,
+                "exit_code": record.exit_code,
+                "started_at": record.started_at,
+                "updated_at": record.updated_at,
+                "elapsed_ms": record.elapsed_ms,
+                "stdout_bytes": record.stdout_bytes,
+                "stderr_bytes": record.stderr_bytes,
+                "output_truncated": record.output_truncated,
+                "decision_inbox_items": record.decision_inbox_items,
+                "pending_decision_prompts": record.pending_decision_prompts,
+                "record_path": redact_sensitive_text(&record.record_path),
+            })
+        })
+        .collect();
+    json!({
+        "schema_version": 1,
+        "redacted": true,
+        "records": items
+    })
+}
+
+fn task_run_recent_events_text(records: &[CliTaskRunRecordReport]) -> String {
+    if records.is_empty() {
+        return "No recent task-run records.\n".to_string();
+    }
+    let mut lines = Vec::new();
+    for record in records.iter().take(MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS) {
+        let line = format!(
+            "{} | {} | {} | {} | {}",
+            record.updated_at,
+            record.status,
+            record.adapter_id,
+            record.task_kind,
+            redact_sensitive_text(&record.record_path)
+        );
+        lines.push(truncate_chars(&line, MAX_SUPPORT_EVENT_CHARS));
+    }
+    format!("{}\n", lines.join("\n"))
+}
+
+fn write_pretty_json<T: Serialize>(path: &Path, value: &T) -> Result<(), String> {
+    if let Some(parent) = path.parent() {
+        fs::create_dir_all(parent)
+            .map_err(|error| format!("Failed to create JSON parent directory: {error}"))?;
+    }
+    let formatted = serde_json::to_string_pretty(value)
+        .map_err(|error| format!("Failed to serialize JSON artifact: {error}"))?;
+    fs::write(path, format!("{formatted}\n"))
+        .map_err(|error| format!("Failed to write JSON artifact: {error}"))
+}
+
+fn relative_payload_path(base: &Path, path: &Path) -> String {
+    path.strip_prefix(base)
+        .unwrap_or(path)
+        .to_string_lossy()
+        .replace('\\', "/")
+}
+
+fn path_to_string(path: &Path) -> String {
+    path.to_string_lossy().replace('\\', "/")
+}
+
+fn redact_sensitive_text(value: &str) -> String {
+    let mut redacted = value.to_string();
+    if let Ok(home) = env::var("HOME") {
+        if !home.is_empty() {
+            redacted = redacted.replace(&home, "$HOME");
+        }
+    }
+    if let Ok(root) = workspace_root() {
+        redacted = redacted.replace(&path_to_string(&root), "$WORKSPACE");
+    }
+    for marker in [
+        "token=",
+        "password=",
+        "secret=",
+        "api_key=",
+        "authorization:",
+    ] {
+        let lower = redacted.to_lowercase();
+        if let Some(index) = lower.find(marker) {
+            let end = redacted[index..]
+                .find(|character: char| character.is_whitespace())
+                .map(|offset| index + offset)
+                .unwrap_or(redacted.len());
+            redacted.replace_range(index..end, &format!("{marker}<redacted>"));
+        }
+    }
+    redacted
+}
+
+fn truncate_chars(value: &str, max_chars: usize) -> String {
+    let mut output: String = value.chars().take(max_chars).collect();
+    if value.chars().count() > max_chars {
+        output.push_str("...");
+    }
+    output
+}
+
+fn file_safe_timestamp_label() -> String {
+    current_unix_millis_label().replace(':', "-")
 }
 
 fn platform_artifacts_base_path(root: &Path) -> PathBuf {
@@ -1945,7 +2776,11 @@ fn tail_by_char_boundary(value: &str, max_bytes: usize) -> &str {
     &value[start..]
 }
 
-fn detect_decision_prompts_for(adapter_id: &str, label: &str, output: &str) -> Vec<CliDecisionPrompt> {
+fn detect_decision_prompts_for(
+    adapter_id: &str,
+    label: &str,
+    output: &str,
+) -> Vec<CliDecisionPrompt> {
     output
         .lines()
         .map(str::trim)
@@ -1990,7 +2825,11 @@ fn auto_defer_session_questions_locked(session_id: &str, session: &mut CliSessio
     }
 }
 
-fn defer_session_questions_locked(session_id: &str, session: &mut CliSession, mode: &str) -> Result<usize, String> {
+fn defer_session_questions_locked(
+    session_id: &str,
+    session: &mut CliSession,
+    mode: &str,
+) -> Result<usize, String> {
     if session.finished {
         return Err("Cannot defer a finished CLI session.".to_string());
     }
@@ -2031,7 +2870,11 @@ fn defer_session_questions_locked(session_id: &str, session: &mut CliSession, mo
     let appended_count = append_session_decisions_to_inbox(session_id, session, &prompts, mode)?;
     for prompt in prompts {
         let key = decision_prompt_key(&prompt.question);
-        if !session.deferred_prompt_keys.iter().any(|existing| existing == &key) {
+        if !session
+            .deferred_prompt_keys
+            .iter()
+            .any(|existing| existing == &key)
+        {
             session.deferred_prompt_keys.push(key);
         }
     }
@@ -2054,7 +2897,10 @@ fn new_session_decision_prompts(session: &CliSession) -> Vec<CliDecisionPrompt> 
         .into_iter()
         .filter(|prompt| {
             let key = decision_prompt_key(&prompt.question);
-            !session.deferred_prompt_keys.iter().any(|existing| existing == &key)
+            !session
+                .deferred_prompt_keys
+                .iter()
+                .any(|existing| existing == &key)
         })
         .collect()
 }
@@ -2070,22 +2916,29 @@ fn append_session_decisions_to_inbox(
     }
 
     let root = workspace_root()?;
-    let inbox_path = root.join("_ops").join("coordination").join("human-decision-inbox.json");
+    let inbox_path = root
+        .join("_ops")
+        .join("coordination")
+        .join("human-decision-inbox.json");
     let canonical_inbox = inbox_path
         .canonicalize()
         .map_err(|error| format!("Failed to resolve human decision inbox: {error}"))?;
     ensure_workspace_path(&root, &canonical_inbox)?;
 
-    let content =
-        fs::read_to_string(&canonical_inbox).map_err(|error| format!("Failed to read human decision inbox: {error}"))?;
-    let mut inbox: Value =
-        serde_json::from_str(&content).map_err(|error| format!("Failed to parse human decision inbox: {error}"))?;
+    let content = fs::read_to_string(&canonical_inbox)
+        .map_err(|error| format!("Failed to read human decision inbox: {error}"))?;
+    let mut inbox: Value = serde_json::from_str(&content)
+        .map_err(|error| format!("Failed to parse human decision inbox: {error}"))?;
     let existing_ids: Vec<String> = inbox
         .get("decisions")
         .and_then(Value::as_array)
         .ok_or_else(|| "Human decision inbox is missing decisions array.".to_string())?
         .iter()
-        .filter_map(|item| item.get("id").and_then(Value::as_str).map(ToOwned::to_owned))
+        .filter_map(|item| {
+            item.get("id")
+                .and_then(Value::as_str)
+                .map(ToOwned::to_owned)
+        })
         .collect();
 
     let timestamp = current_unix_millis_label();
@@ -2158,8 +3011,8 @@ fn append_session_decisions_to_inbox(
         .ok_or_else(|| "Human decision inbox is missing decision_history array.".to_string())?
         .extend(new_history);
 
-    let formatted =
-        serde_json::to_string_pretty(&inbox).map_err(|error| format!("Failed to serialize human decision inbox: {error}"))?;
+    let formatted = serde_json::to_string_pretty(&inbox)
+        .map_err(|error| format!("Failed to serialize human decision inbox: {error}"))?;
     fs::write(&canonical_inbox, format!("{formatted}\n"))
         .map_err(|error| format!("Failed to write human decision inbox: {error}"))?;
     Ok(appended_count)
@@ -2170,7 +3023,13 @@ fn decision_prompt_key(question: &str) -> String {
         .trim()
         .to_lowercase()
         .chars()
-        .map(|character| if character.is_ascii_alphanumeric() { character } else { '-' })
+        .map(|character| {
+            if character.is_ascii_alphanumeric() {
+                character
+            } else {
+                '-'
+            }
+        })
         .collect();
     let normalized = dashed
         .split('-')
@@ -2188,16 +3047,16 @@ fn decision_prompt_key(question: &str) -> String {
 fn read_human_decision_inbox_value() -> Result<(PathBuf, Value), String> {
     let root = workspace_root()?;
     let inbox_path = human_decision_inbox_path(&root)?;
-    let content =
-        fs::read_to_string(&inbox_path).map_err(|error| format!("Failed to read human decision inbox: {error}"))?;
-    let inbox: Value =
-        serde_json::from_str(&content).map_err(|error| format!("Failed to parse human decision inbox: {error}"))?;
+    let content = fs::read_to_string(&inbox_path)
+        .map_err(|error| format!("Failed to read human decision inbox: {error}"))?;
+    let inbox: Value = serde_json::from_str(&content)
+        .map_err(|error| format!("Failed to parse human decision inbox: {error}"))?;
     Ok((inbox_path, inbox))
 }
 
 fn write_human_decision_inbox_value(inbox_path: &Path, inbox: &Value) -> Result<(), String> {
-    let formatted =
-        serde_json::to_string_pretty(inbox).map_err(|error| format!("Failed to serialize human decision inbox: {error}"))?;
+    let formatted = serde_json::to_string_pretty(inbox)
+        .map_err(|error| format!("Failed to serialize human decision inbox: {error}"))?;
     fs::write(inbox_path, format!("{formatted}\n"))
         .map_err(|error| format!("Failed to write human decision inbox: {error}"))
 }
@@ -2273,7 +3132,10 @@ fn update_human_decision_answer(
 }
 
 fn human_decision_inbox_path(root: &Path) -> Result<PathBuf, String> {
-    let inbox_path = root.join("_ops").join("coordination").join("human-decision-inbox.json");
+    let inbox_path = root
+        .join("_ops")
+        .join("coordination")
+        .join("human-decision-inbox.json");
     let canonical_inbox = inbox_path
         .canonicalize()
         .map_err(|error| format!("Failed to resolve human decision inbox: {error}"))?;
@@ -2281,17 +3143,26 @@ fn human_decision_inbox_path(root: &Path) -> Result<PathBuf, String> {
     Ok(canonical_inbox)
 }
 
-fn human_decision_report(inbox: &Value, updated_id: Option<String>) -> Result<HumanDecisionInboxReport, String> {
+fn human_decision_report(
+    inbox: &Value,
+    updated_id: Option<String>,
+) -> Result<HumanDecisionInboxReport, String> {
     let decisions = inbox
         .get("decisions")
         .and_then(Value::as_array)
         .ok_or_else(|| "Human decision inbox is missing decisions array.".to_string())?;
-    let items: Vec<HumanDecisionItem> = decisions.iter().map(human_decision_item_from_value).collect();
+    let items: Vec<HumanDecisionItem> = decisions
+        .iter()
+        .map(human_decision_item_from_value)
+        .collect();
     let open_count = items
         .iter()
         .filter(|item| matches!(item.status.as_str(), "open" | "deferred" | "resuming"))
         .count();
-    let answered_count = items.iter().filter(|item| item.status == "answered").count();
+    let answered_count = items
+        .iter()
+        .filter(|item| item.status == "answered")
+        .count();
     Ok(HumanDecisionInboxReport {
         status: "loaded".to_string(),
         total_count: items.len(),
@@ -2315,15 +3186,34 @@ fn human_decision_item_from_value(value: &Value) -> HumanDecisionItem {
         resume_action: value_string(value, "resume_action", ""),
         session_id: decision_metadata_string(value, "session_id"),
         adapter_id: decision_metadata_string(value, "adapter_id"),
-        answer_type: answer.and_then(|item| item.get("type")).and_then(Value::as_str).map(ToOwned::to_owned),
-        answer_text: answer.and_then(|item| item.get("text")).and_then(Value::as_str).map(ToOwned::to_owned),
+        answer_type: answer
+            .and_then(|item| item.get("type"))
+            .and_then(Value::as_str)
+            .map(ToOwned::to_owned),
+        answer_text: answer
+            .and_then(|item| item.get("text"))
+            .and_then(Value::as_str)
+            .map(ToOwned::to_owned),
         answered_at: value
             .get("answered_at")
             .and_then(Value::as_str)
             .map(ToOwned::to_owned)
-            .or_else(|| answer.and_then(|item| item.get("answered_at")).and_then(Value::as_str).map(ToOwned::to_owned)),
-        blocked_work_count: value.get("blocked_work").and_then(Value::as_array).map(Vec::len).unwrap_or(0),
-        unblocked_work_count: value.get("unblocked_work").and_then(Value::as_array).map(Vec::len).unwrap_or(0),
+            .or_else(|| {
+                answer
+                    .and_then(|item| item.get("answered_at"))
+                    .and_then(Value::as_str)
+                    .map(ToOwned::to_owned)
+            }),
+        blocked_work_count: value
+            .get("blocked_work")
+            .and_then(Value::as_array)
+            .map(Vec::len)
+            .unwrap_or(0),
+        unblocked_work_count: value
+            .get("unblocked_work")
+            .and_then(Value::as_array)
+            .map(Vec::len)
+            .unwrap_or(0),
     }
 }
 
@@ -2354,7 +3244,10 @@ fn normalize_decision_answer_type(answer_type: &str) -> String {
 
 fn resolve_workspace_dir(relative_or_absolute: Option<&str>) -> Result<PathBuf, String> {
     let root = workspace_root()?;
-    let candidate = match relative_or_absolute.map(str::trim).filter(|value| !value.is_empty()) {
+    let candidate = match relative_or_absolute
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+    {
         Some(path) => {
             let value = Path::new(path);
             if value.is_absolute() {
@@ -2375,7 +3268,10 @@ fn resolve_workspace_dir(relative_or_absolute: Option<&str>) -> Result<PathBuf, 
     Ok(canonical)
 }
 
-fn resolve_workspace_file(relative_path: &str, existing_required: bool) -> Result<(PathBuf, String), String> {
+fn resolve_workspace_file(
+    relative_path: &str,
+    existing_required: bool,
+) -> Result<(PathBuf, String), String> {
     let root = workspace_root()?;
     let normalized = normalize_relative_workspace_path(relative_path)?;
     let path = root.join(&normalized);
@@ -2417,12 +3313,17 @@ fn normalize_relative_workspace_path(relative_path: &str) -> Result<String, Stri
             Component::Normal(value) => {
                 let text = value.to_string_lossy();
                 if text == "_private" || text == "outputs" {
-                    return Err("Workspace path points to a protected local-only directory.".to_string());
+                    return Err(
+                        "Workspace path points to a protected local-only directory.".to_string()
+                    );
                 }
                 normalized.push(text.to_string());
             }
             _ => {
-                return Err("Workspace path must not contain '.', '..', root, or prefix components.".to_string());
+                return Err(
+                    "Workspace path must not contain '.', '..', root, or prefix components."
+                        .to_string(),
+                );
             }
         }
     }
@@ -2441,7 +3342,8 @@ fn workspace_root() -> Result<PathBuf, String> {
         return Ok(root);
     }
 
-    let cwd = env::current_dir().map_err(|error| format!("Failed to read current directory: {error}"))?;
+    let cwd =
+        env::current_dir().map_err(|error| format!("Failed to read current directory: {error}"))?;
     if cwd.join("AGENTS.md").exists() {
         return cwd
             .canonicalize()
@@ -2493,7 +3395,10 @@ fn source_backup_path(root: &Path, relative_path: &str) -> Result<PathBuf, Strin
     Ok(base
         .join("artifacts")
         .join("source-editor-backups")
-        .join(format!("{millis}-{}.bak", sanitize_file_name(relative_path))))
+        .join(format!(
+            "{millis}-{}.bak",
+            sanitize_file_name(relative_path)
+        )))
 }
 
 fn sanitize_file_name(value: &str) -> String {
