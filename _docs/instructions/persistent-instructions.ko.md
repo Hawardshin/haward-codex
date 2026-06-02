@@ -8,6 +8,7 @@
 - 플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다.
 - 자동화는 인간 판단 지점, 검증 기준, rollback 경계를 숨기지 않는다. 자동화 후보는 실제 반복 감소와 시간 절감 효과를 작업 시간 기록, 병목 기록, evaluator 결과로 확인한다.
 - “직접 사람이 하는 것처럼”은 사람 말투를 흉내 내는 것이 아니라 유능한 사람이 실제로 일할 때의 목표, 맥락, 출처, 가정, 선택지 비교, 결정, 실행 메모, 검증, 인수인계, 리뷰 순서와 산출물을 먼저 모델링한다는 뜻이다.
+- 소스 구조 품질을 제품 품질 gate로 다룬다. 작업 중 계속 리팩터링하되, 각 리팩터링은 동작 보존, 작은 범위, 테스트, 더 명확한 소유 경계와 연결되어야 한다.
 - 플랫폼이 작업 중 반복, 병목, 누락, 검증 실패, 수동 재작업, 자주 쓰는 조사/프롬프트/도구 패턴을 발견하면 `capability-promotion-agent`와 `agent-platform/configs/orchestration/capability-promotion-registry.json`을 사용해 자동 기능 후보로 만들 수 있다. 이 흐름은 bounded black-box로만 허용한다. 사용자 경험은 자동 개선처럼 보일 수 있지만 내부 observation, candidate, evidence, risk, rejected lighter options, validation, rollback 또는 disablement, documentation, evaluation, commit/push trace는 감사 가능해야 한다.
 - capability promotion은 아이디어 생성 전에 사람이 직접 수행하는 작업 모델을 먼저 기록한다. 생성된 아이디어는 사용자 문구만이 아니라 구체적인 human process step을 줄이거나 안정화해야 한다.
 - capability promotion은 아이디어 생성과 아이디어 평가를 분리한다. 사소하지 않은 문제는 여러 개선 아이디어를 만들고, 반복 감소, 시간 절감, 유지보수 비용, 근거 강도, 위험 적합성, 가장 작은 자산 적합성으로 평가한 뒤 선택/기각/대기 이유를 남긴다.

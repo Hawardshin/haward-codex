@@ -32,6 +32,7 @@
 | REQ-WM-019 | 웹 UI는 view/work/install/language/desktop session/task pipe/CLI adapter/monitor section 모드와 기능을 한 곳에서 명시적으로 보여주고, 각 항목을 어디에서 선택하거나 열 수 있는지 안내해야 한다. | must | snapshot의 `modeFunctionCatalog`, Overview `Mode & Function Switchboard`, desktop readiness test, `npm run collect`, `npm test`, `npm run check`, `npm run build` 확인 |
 | REQ-WM-020 | 웹 UI는 Overview 상단에서 현재 섹션의 상태, 주의 수준, 다음 행동, 근거 카운트, runtime 바로가기를 한 줄 작업면으로 제공해야 한다. | should | section tab badge와 `operator-strip` 렌더링 확인, `npm test`, `npm run check`, `npm run build` 확인 |
 | REQ-WM-021 | 웹 UI는 히스토리의 최신 사용자 의도 기반 기능 지도를 읽어 의도 수, 기능 축, 구현된 기능, 다음 기능 후보, Now/Next/Later 로드맵, source freshness를 developer/superadmin 보기에서 탐색할 수 있어야 한다. | must | snapshot의 `intentFeatureMap`, `Intent Map` 탭, customer snapshot sanitization, `npm run collect`, `npm test`, `npm run check:intent-map`, `npm run check:intent-map:customer`, `npm run check`, `npm run build` 확인 |
+| REQ-WM-022 | repository snapshot collector는 기능별 데이터 추출 로직을 명확한 모듈 경계로 분리해, 지속 리팩터링 중에도 동작 보존과 테스트 가능한 책임 경계를 유지해야 한다. | should | `intent-feature-map` collector 모듈 경계, 기존 collector export 호환성, `npm test`, `npm run collect`, `npm run check:intent-map`, `npm run check` 확인 |
 
 ## 범위
 
@@ -51,6 +52,7 @@
 - 모드와 기능 선택 위치를 한 곳에 모으는 `modeFunctionCatalog`와 Overview switchboard
 - 현재 상태, 다음 행동, evidence/runtime shortcut을 묶는 Overview 운영 작업면
 - 사용자 의도 기반 기능 지도를 노출하는 `intentFeatureMap` snapshot과 `Intent Map` 섹션
+- snapshot collector의 기능별 데이터 추출 모듈 경계
 - Vercel 배포 문서
 
 ## 제외 범위

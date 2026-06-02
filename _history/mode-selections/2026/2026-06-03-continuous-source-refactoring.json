@@ -1,0 +1,25 @@
+{
+  "request_id": "UR-2026-06-03-018",
+  "selected_mode": "standard",
+  "selected_at": "2026-06-03T04:26:33+0900",
+  "reason": "The request changes a durable operating instruction and performs a behavior-preserving source refactor in workspace-monitor, so quick mode is too light but full governance mode is not required.",
+  "work_mode_reference": "agent-platform/configs/workflows/work-mode-registry.json",
+  "scope": [
+    "_docs/instructions/persistent-instructions.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "workspace-monitor/scripts/collect-workspace.mjs",
+    "workspace-monitor/scripts/lib/intent-feature-map.mjs"
+  ],
+  "non_blocking_artifacts": [
+    "Full platform-wide refactor inventory",
+    "UI redesign"
+  ],
+  "enforcement_checks": [
+    "web_search_first",
+    "memory_bootstrap",
+    "requirements_update",
+    "spec_traceability",
+    "omission_check",
+    "work_evaluation"
+  ]
+}

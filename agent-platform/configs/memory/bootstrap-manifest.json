@@ -12,7 +12,7 @@
       "Run default_command after changing durable rules, navigation, source configs, project boundaries, prompts, workflows, or maps."
     ],
     "owner": "agent-platform",
-    "last_reviewed": "2026-06-02",
+    "last_reviewed": "2026-06-03",
     "update_triggers": [
       "A durable user instruction becomes mandatory for future sessions.",
       "A new shared config, prompt, workflow, project registry, or map becomes part of startup context.",
@@ -87,9 +87,10 @@
       "used_for": [
         "durable user preferences",
         "rules that future sessions must not forget",
-        "platform-first host runtime rule for external AI CLI guest adapters"
+        "platform-first host runtime rule for external AI CLI guest adapters",
+        "continuous behavior-preserving source-structure refactoring gate"
       ],
-      "last_checked": "2026-06-02"
+      "last_checked": "2026-06-03"
     },
     {
       "id": "docs_registry",
@@ -1596,7 +1597,7 @@
       "id": "persistent_instructions",
       "path": "_docs/instructions/persistent-instructions.md",
       "tier": "hot",
-      "purpose": "Durable user preferences and long-running operating rules.",
+      "purpose": "Durable user preferences, source-structure quality gate, and long-running operating rules.",
       "required": true,
       "load_order": 2
     },

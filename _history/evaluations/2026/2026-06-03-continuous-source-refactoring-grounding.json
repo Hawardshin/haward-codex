@@ -1,0 +1,29 @@
+{
+  "request_id": "UR-2026-06-03-018",
+  "checked_at": "2026-06-03T04:26:33+0900",
+  "status": "grounded",
+  "claims": [
+    {
+      "claim": "The source refactor is behavior-preserving.",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs re-exports collectIntentFeatureMap",
+        "npm --prefix workspace-monitor test passed"
+      ]
+    },
+    {
+      "claim": "ESM import/export is appropriate for the new module.",
+      "evidence": [
+        "https://nodejs.org/api/esm.html",
+        "workspace-monitor package already uses .mjs scripts"
+      ]
+    },
+    {
+      "claim": "The persistent instruction was recorded for future sessions.",
+      "evidence": [
+        "_docs/instructions/persistent-instructions.md",
+        "agent-platform/configs/memory/bootstrap-manifest.json"
+      ]
+    }
+  ],
+  "unsupported_claims": []
+}

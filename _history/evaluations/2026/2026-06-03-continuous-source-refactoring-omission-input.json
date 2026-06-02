@@ -1,0 +1,39 @@
+{
+  "request_id": "UR-2026-06-03-018",
+  "work_mode": "standard",
+  "checked_at": "2026-06-03T04:26:33+0900",
+  "required_items": [
+    {
+      "item": "web_search_first",
+      "status": "covered",
+      "evidence": "_history/web-searches/2026/2026-06-03-continuous-source-refactoring.ko.md"
+    },
+    {
+      "item": "memory_bootstrap",
+      "status": "covered",
+      "evidence": "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json --root .."
+    },
+    {
+      "item": "durable_instruction_persisted",
+      "status": "covered",
+      "evidence": "_docs/instructions/persistent-instructions.md"
+    },
+    {
+      "item": "behavior_preserving_refactor",
+      "status": "covered",
+      "evidence": "collectIntentFeatureMap re-export preserved and npm --prefix workspace-monitor test passed"
+    },
+    {
+      "item": "requirements_and_spec_trace",
+      "status": "covered",
+      "evidence": "REQ-WM-022 and workspace-monitor/specs/2026-06-03-intent-feature-map-source-refactor/"
+    },
+    {
+      "item": "validation",
+      "status": "covered",
+      "evidence": "Full command suite passed and is recorded in workspace-monitor/specs/2026-06-03-intent-feature-map-source-refactor/validation.ko.md"
+    }
+  ],
+  "missing_items": [],
+  "rework_required": false
+}
