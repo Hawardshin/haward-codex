@@ -1,0 +1,67 @@
+{
+  "status": "ready_to_close",
+  "requires_rework": false,
+  "work_mode": "governance",
+  "required_target_policy": {
+    "required_targets": [
+      "mode_selection_record_targets",
+      "omission_check_targets",
+      "plan_evidence_targets",
+      "references_checked",
+      "request_trace_targets",
+      "requirements_targets",
+      "source_provenance_targets",
+      "spec_targets",
+      "timing_summary_targets",
+      "user_request_summary_targets",
+      "web_search_record_targets",
+      "work_summary_targets"
+    ],
+    "deferred_targets_allowed": []
+  },
+  "alignment_check": {
+    "initial_instruction_present": true,
+    "result_summary_present": true,
+    "work_mode": "governance",
+    "changed_files_count": 47,
+    "verification_count": 14,
+    "references_checked_count": 8,
+    "grounding_checks_count": 1,
+    "source_provenance_targets_count": 4,
+    "plan_evidence_targets_count": 4,
+    "mode_selection_record_targets_count": 1,
+    "omission_check_targets_count": 1,
+    "web_search_record_targets_count": 2,
+    "user_request_summary_targets_count": 2,
+    "requirements_targets_count": 8,
+    "spec_targets_count": 10,
+    "skill_work_occurred": false,
+    "skill_targets_count": 0,
+    "skill_validation_targets_count": 0,
+    "request_trace_targets_count": 2,
+    "work_summary_targets_count": 2,
+    "timing_summary_targets_count": 1,
+    "context_archiving_occurred": false,
+    "context_archive_targets_count": 0,
+    "installation_occurred": false,
+    "installation_record_targets_count": 0,
+    "resource_risk_occurred": true,
+    "resource_check_targets_count": 1,
+    "cli_pipeline_occurred": false,
+    "cli_pipeline_targets_count": 0,
+    "deferred_improvement_targets_count": 0
+  },
+  "gaps": [],
+  "improvements": [
+    "After a documented Rust/Cargo installation audit, run direct Tauri compile/dev/build verification for this desktop command bridge.",
+    "Add a real first-run setup wizard with per-adapter auth checks and install audit records before any automated install.",
+    "Add PTY-backed terminal behavior and automatic decision-based lane resume once process lifecycle tests are in place.",
+    "Replace the scoped textarea editor with a richer editor component only after write permissions, diff review, rollback, and large-file policies are finalized."
+  ],
+  "follow_up_actions": [
+    "Consider improvement: After a documented Rust/Cargo installation audit, run direct Tauri compile/dev/build verification for this desktop command bridge.",
+    "Consider improvement: Add a real first-run setup wizard with per-adapter auth checks and install audit records before any automated install.",
+    "Consider improvement: Add PTY-backed terminal behavior and automatic decision-based lane resume once process lifecycle tests are in place.",
+    "Consider improvement: Replace the scoped textarea editor with a richer editor component only after write permissions, diff review, rollback, and large-file policies are finalized."
+  ]
+}

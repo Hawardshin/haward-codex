@@ -1,0 +1,163 @@
+{
+  "task": "Ground factual claims for the desktop user improvements close-out.",
+  "output_summary": "The desktop platform now includes setup guidance, session mode presets, and a human decision inbox answer flow in the Workspace Monitor/Tauri desktop runtime.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "tauri-commands",
+      "source": "platform-desktop-app/src-tauri/src/lib.rs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary implementation for Tauri command contracts and workspace-scoped decision inbox writes."
+    },
+    {
+      "evidence_id": "monitor-ui",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary Desktop tab implementation for setup guides, mode presets, and decision answer UI."
+    },
+    {
+      "evidence_id": "monitor-css",
+      "source": "workspace-monitor/app/globals.css",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary styling for the added Desktop controls."
+    },
+    {
+      "evidence_id": "readiness-check",
+      "source": "npm --prefix platform-desktop-app run check",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local readiness scan for required Tauri command and UI strings; warns that Rust/Cargo is missing."
+    },
+    {
+      "evidence_id": "monitor-check-build",
+      "source": "npm --prefix workspace-monitor run check; npm --prefix workspace-monitor test; npm --prefix workspace-monitor run build",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local monitor verification commands."
+    },
+    {
+      "evidence_id": "official-tauri",
+      "source": "https://v2.tauri.app/develop/calling-rust/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tauri documentation for command invocation direction."
+    },
+    {
+      "evidence_id": "claude-docs",
+      "source": "https://docs.claude.com/en/docs/claude-code/setup",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Claude Code setup reference checked for setup guidance."
+    },
+    {
+      "evidence_id": "gemini-cli-repo",
+      "source": "https://github.com/google-gemini/gemini-cli",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Project repository/source for Gemini CLI setup guidance."
+    },
+    {
+      "evidence_id": "codex-cli-help",
+      "source": "https://help.openai.com/en/articles/11096431",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "OpenAI help reference for Codex CLI setup guidance."
+    },
+    {
+      "evidence_id": "opencode-source",
+      "source": "https://opencode.ai/docs/cli/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "OpenCode official CLI documentation used as the primary setup/reference link."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The Tauri desktop runtime now exposes commands to list and answer the human decision inbox.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-commands",
+        "readiness-check"
+      ],
+      "verification_steps": [
+        "Read lib.rs command definitions and invoke handler.",
+        "Ran platform-desktop-app readiness check."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The Workspace Monitor Desktop tab now shows CLI setup/verification guidance for Claude Code, Gemini CLI, Codex CLI, and OpenCode.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "claude-docs",
+        "gemini-cli-repo",
+        "codex-cli-help",
+        "opencode-source"
+      ],
+      "verification_steps": [
+        "Read adapterSetupGuides in MonitorShell.tsx.",
+        "Checked current external setup sources and recorded them in web/research notes."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The Workspace Monitor Desktop tab now includes session mode presets for user tasks, platform improvement, knowledge accumulation, and review/verification.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "monitor-check-build"
+      ],
+      "verification_steps": [
+        "Read sessionModePresets in MonitorShell.tsx.",
+        "Ran workspace-monitor check/test/build."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "This change does not auto-install external CLIs; it only renders setup guidance and verification text.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "tauri-commands"
+      ],
+      "verification_steps": [
+        "Inspected Desktop setup guide UI path.",
+        "Checked that no install command or package-manager subprocess was added."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Direct Tauri compilation was not verified because Rust/Cargo is unavailable in this environment.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "readiness-check"
+      ],
+      "verification_steps": [
+        "Ran platform-desktop-app readiness check and retained the Rust toolchain warning."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "CLI package install commands can change over time; the UI stores setup hints and source URLs rather than treating them as guaranteed installation automation.",
+    "Rust/Cargo absence means the Rust code path is covered by readiness string checks and source inspection, not by a compiler in this environment."
+  ],
+  "limitation_notes": [
+    "This slice does not implement a PTY terminal, automatic decision-based lane resume, or a signed/notarized macOS installer.",
+    "The OpenCode source used for setup guidance should be revisited before any public setup wizard or bundled installer flow."
+  ]
+}

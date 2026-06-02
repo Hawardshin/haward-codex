@@ -27,6 +27,8 @@
 - `PDA-REQ-019`: browser fallback degrade.
 - `PDA-REQ-020`: allowlist CLI pipe session, stdin, defer, cancel, human decision inbox append.
 - `PDA-REQ-021`: workspace-scoped source file read/write와 backup.
+- `PDA-REQ-022`: CLI setup guide, 작업 모드 프리셋, human decision inbox 조회/답변.
 - `PDA-UX-009` - `PDA-UX-012`: UI 흐름과 코드 편집 surface.
 - `PDA-UX-013`: Desktop 탭에 runtime, CLI, terminal result, decision prompt, source editing readiness 표시.
 - `PDA-UX-014`: Desktop 탭에 CLI session console, decision inbox item 수, scoped source editor 표시.
+- `PDA-UX-015`: Desktop 탭에 setup guide, mode preset, decision answer UI 표시.

@@ -14,7 +14,7 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 - Keep Codex, Claude Code, Cursor, Antigravity, notifications, browser automation, and advanced validators as optional capability cards that can be configured later instead of blocking initial use.
 - Treat Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode as the first concrete AI CLI adapter targets for multi-CLI orchestration, while keeping the app usable when any of them is missing.
 - Model real multi-CLI execution as supervised process lanes with process graph validation, terminal I/O bounds, decision inbox routing, artifact retention, merge gates, and cleanup before any executable implementation.
-- The first implemented supervisor MVP is intentionally narrow but executable: the Tauri backend exposes allowlisted CLI adapter discovery, bounded `--version` health checks, pipe-based CLI sessions, stdin/defer/cancel controls, deferred question persistence into the human decision inbox, and scoped source file read/write with backup. The Workspace Monitor exposes these in the `Desktop` tab. Missing CLIs report `capability_missing` and do not block the UI.
+- The first implemented supervisor MVP is intentionally narrow but executable: the Tauri backend exposes allowlisted CLI adapter discovery, bounded `--version` health checks, pipe-based CLI sessions, stdin/defer/cancel controls, deferred question persistence plus answer updates in the human decision inbox, and scoped source file read/write with backup. The Workspace Monitor exposes these in the `Desktop` tab with setup guides and work-mode presets. Missing CLIs report `capability_missing` and do not block the UI.
 - Keep `agent-platform/` as the Python-first agent/config/evaluation layer.
 - For macOS, treat `configs/macos-execution-profile.json` as the source of truth for local run, internal `.app`, and public signed/notarized distribution structure.
 - For Windows, treat `configs/windows-execution-profile.json` as the source of truth for local run, internal installer testing, public signed distribution, installer format, WebView2, update, uninstall, and smoke-test structure.
@@ -110,6 +110,8 @@ Implemented desktop bridge commands:
 - `cancel_cli_adapter_session`
 - `read_workspace_text_file`
 - `write_workspace_text_file`
+- `list_human_decision_inbox`
+- `answer_human_decision`
 
 These commands are bounded pipe/session, human decision inbox append, and scoped file-editing MVP commands. Interactive PTY sessions, source-affecting autonomous execution, xterm.js, Monaco Editor, and packaged sidecars still require a dependency and permission audit before implementation.
 

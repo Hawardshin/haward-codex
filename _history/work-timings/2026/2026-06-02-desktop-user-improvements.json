@@ -1,0 +1,66 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-02-desktop-user-improvements",
+  "title": "Add desktop user improvements for multi-CLI orchestration",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "measurement_method": "manual_partial",
+  "recorded_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "web search and intake",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "Current CLI setup and human-in-the-loop references were checked before implementation.",
+      "notes": "Checked current references for Tauri commands/permissions, CLI setup sources, and human-in-the-loop decision inbox patterns."
+    },
+    {
+      "phase_id": "local_context_and_planning",
+      "label": "local context and plan",
+      "status": "completed",
+      "duration_seconds": 600,
+      "measurement": "estimated",
+      "bottleneck_notes": "Existing desktop specs, monitor UI structure, and prior CLI session implementation shaped the slice boundary.",
+      "notes": "Reviewed platform desktop specs, user-flow requirements, previous CLI session implementation, and monitor component structure."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Tauri commands and monitor UI",
+      "status": "completed",
+      "duration_seconds": 2100,
+      "measurement": "estimated",
+      "bottleneck_notes": "Largest phase because Tauri command contracts, React state, CSS, readiness checks, and user flow had to stay aligned.",
+      "notes": "Added human decision inbox list/answer commands, setup guides, session mode presets, and decision answer UI."
+    },
+    {
+      "phase_id": "documentation_and_traceability",
+      "label": "requirements, specs, and history records",
+      "status": "completed",
+      "duration_seconds": 1800,
+      "measurement": "estimated",
+      "bottleneck_notes": "Bilingual requirements/spec/history artifacts add overhead but preserve future implementation context.",
+      "notes": "Updated requirements, specs, architecture docs, README, web records, research notes, user request summaries, and request traces."
+    },
+    {
+      "phase_id": "verification",
+      "label": "verification",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "Verification included UI checks, static build, platform readiness, and governance close-out validators.",
+      "notes": "Ran workspace-monitor and platform-desktop-app checks/tests/build plus governance close-out validators."
+    }
+  ],
+  "summary": {
+    "total_seconds": 5820,
+    "slowest_phase": "implementation",
+    "bottleneck_candidates": [
+      "User-facing Desktop UI changes require keeping Tauri command contracts, monitor UI state, CSS, readiness checks, and bilingual specs aligned.",
+      "Rust/Cargo absence prevents direct Tauri compilation, so readiness checks and source inspection carry more verification weight until the toolchain is installed."
+    ],
+    "confidence": "partial",
+    "next_measurement_improvement": "Start _tools/work-timer at task intake so future multi-slice desktop work uses automatic timestamps."
+  }
+}

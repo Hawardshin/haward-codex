@@ -84,7 +84,9 @@ for (const commandName of [
   "send_cli_adapter_defer_message",
   "cancel_cli_adapter_session",
   "read_workspace_text_file",
-  "write_workspace_text_file"
+  "write_workspace_text_file",
+  "list_human_decision_inbox",
+  "answer_human_decision"
 ]) {
   if (!tauriLib.includes(commandName)) {
     failures.push(`src-tauri/src/lib.rs must expose ${commandName}`);
@@ -130,6 +132,10 @@ for (const requiredPhrase of [
   "send_cli_adapter_defer_message",
   "cancel_cli_adapter_session",
   "decisionInboxItems",
+  "list_human_decision_inbox",
+  "answer_human_decision",
+  "adapterSetupGuides",
+  "sessionModePresets",
   "read_workspace_text_file",
   "write_workspace_text_file"
 ]) {

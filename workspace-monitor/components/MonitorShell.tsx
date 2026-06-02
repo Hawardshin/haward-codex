@@ -217,11 +217,108 @@ type WorkspaceWriteReport = {
   status: string;
 };
 
+type HumanDecisionItem = {
+  id: string;
+  status: string;
+  priority: string;
+  source: string;
+  createdAt: string;
+  question: string;
+  impact: string;
+  resumeAction: string;
+  answerType?: string | null;
+  answerText?: string | null;
+  answeredAt?: string | null;
+  blockedWorkCount: number;
+  unblockedWorkCount: number;
+};
+
+type HumanDecisionInboxReport = {
+  status: string;
+  totalCount: number;
+  openCount: number;
+  answeredCount: number;
+  decisions: HumanDecisionItem[];
+  updatedId?: string | null;
+};
+
+type AdapterSetupGuide = {
+  installHint: string;
+  verifyCommand: string;
+  sourceUrl: string;
+  caution: string;
+};
+
+type SessionModePreset = {
+  id: string;
+  label: string;
+  intent: string;
+  prompt: string;
+};
+
 const fallbackDesktopAdapters: CliAdapterStatus[] = [
   { adapterId: "claude-code-cli", label: "Claude Code CLI", command: "claude", available: false, lastError: "Desktop runtime unavailable." },
   { adapterId: "gemini-cli", label: "Gemini CLI", command: "gemini", available: false, lastError: "Desktop runtime unavailable." },
   { adapterId: "codex-cli", label: "Codex CLI", command: "codex", available: false, lastError: "Desktop runtime unavailable." },
   { adapterId: "opencode-cli", label: "OpenCode", command: "opencode", available: false, lastError: "Desktop runtime unavailable." }
+];
+
+const adapterSetupGuides: Record<string, AdapterSetupGuide> = {
+  "claude-code-cli": {
+    installHint: "npm install -g @anthropic-ai/claude-code",
+    verifyCommand: "claude --version",
+    sourceUrl: "https://docs.claude.com/en/docs/claude-code/setup",
+    caution: "Node.js and account auth are required."
+  },
+  "gemini-cli": {
+    installHint: "npm install -g @google/gemini-cli",
+    verifyCommand: "gemini --version",
+    sourceUrl: "https://github.com/google-gemini/gemini-cli",
+    caution: "Verify the package scope before install."
+  },
+  "codex-cli": {
+    installHint: "npm install -g @openai/codex",
+    verifyCommand: "codex --version",
+    sourceUrl: "https://help.openai.com/en/articles/11096431",
+    caution: "Use the official package and account auth."
+  },
+  "opencode-cli": {
+    installHint: "npm install -g opencode-ai",
+    verifyCommand: "opencode --version",
+    sourceUrl: "https://opencode.ai/docs/cli/",
+    caution: "Confirm PATH resolves the expected binary."
+  }
+};
+
+const sessionModePresets: SessionModePreset[] = [
+  {
+    id: "user_task",
+    label: "User Task",
+    intent: "Deliver the requested task with concise questions only when blocked.",
+    prompt:
+      "현재 사용자의 요청을 기준으로 작업을 진행해줘. 소스에 영향을 주는 결정이 필요하면 질문을 명확히 남기고, 사용자가 없으면 해당 결정만 보류해줘."
+  },
+  {
+    id: "platform_improvement",
+    label: "Platform Improvement",
+    intent: "Improve the platform while preserving requirements, specs, and validation.",
+    prompt:
+      "이 플랫폼 자체를 개선하는 관점으로 살펴보고, 요구사항/스펙/검증/히스토리와 충돌하지 않게 작은 개선 단위로 진행해줘."
+  },
+  {
+    id: "knowledge_accumulation",
+    label: "Knowledge Accumulation",
+    intent: "Turn messy output into durable structured knowledge.",
+    prompt:
+      "이번 작업에서 나온 로그, 질문, 결정, 근거를 구조화해 재사용 가능한 지식으로 정리해줘. 출처와 불확실성을 분리해서 기록해줘."
+  },
+  {
+    id: "review_verify",
+    label: "Review & Verify",
+    intent: "Check risks, missing tests, and unsupported claims before proceeding.",
+    prompt:
+      "현재 변경 또는 계획을 리뷰해줘. 버그, 누락된 검증, 리소스 누수, 사용자 결정이 필요한 지점을 우선순위로 정리해줘."
+  }
 ];
 
 export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
@@ -1118,12 +1215,18 @@ function DesktopRuntimePanel({
   const [adapters, setAdapters] = useState<CliAdapterStatus[]>(fallbackDesktopAdapters);
   const [reports, setReports] = useState<CliRunReport[]>([]);
   const [sessions, setSessions] = useState<CliSessionReport[]>([]);
+  const [inboxReport, setInboxReport] = useState<HumanDecisionInboxReport | null>(null);
   const [error, setError] = useState("");
   const [runningAdapterId, setRunningAdapterId] = useState("");
+  const [selectedSessionModeId, setSelectedSessionModeId] = useState(sessionModePresets[0].id);
   const [selectedSessionAdapterId, setSelectedSessionAdapterId] = useState(fallbackDesktopAdapters[0].adapterId);
   const [workingDir, setWorkingDir] = useState("");
-  const [sessionPrompt, setSessionPrompt] = useState("현재 작업을 분석하고 다음에 필요한 결정을 짧게 알려줘.");
+  const [sessionPrompt, setSessionPrompt] = useState(sessionModePresets[0].prompt);
   const [sessionInput, setSessionInput] = useState("");
+  const [selectedDecisionId, setSelectedDecisionId] = useState("");
+  const [decisionAnswerType, setDecisionAnswerType] = useState("instruction");
+  const [decisionAnswer, setDecisionAnswer] = useState("");
+  const [decisionBusy, setDecisionBusy] = useState(false);
   const [selectedSourcePath, setSelectedSourcePath] = useState(sourceFiles[0]?.path || "");
   const [sourceFile, setSourceFile] = useState<WorkspaceTextFile | null>(null);
   const [sourceDraft, setSourceDraft] = useState("");
@@ -1134,11 +1237,14 @@ function DesktopRuntimePanel({
   const availableCount = adapters.filter((adapter) => adapter.available).length;
   const sourceFileCount = sourceFiles.length;
   const editableSourceFiles = sourceFiles.filter((file) => !file.truncated).slice(0, 240);
+  const openInboxDecisions = (inboxReport?.decisions || []).filter((decision) => isOpenDecisionStatus(decision.status));
   const decisionPrompts = [
     ...reports.flatMap((report) => report.decisionPrompts || []),
     ...sessions.flatMap((session) => session.decisionPrompts || [])
   ];
   const selectedSession = sessions[0] || null;
+  const selectedDecision = (inboxReport?.decisions || []).find((decision) => decision.id === selectedDecisionId) || openInboxDecisions[0] || null;
+  const selectedMode = sessionModePresets.find((mode) => mode.id === selectedSessionModeId) || sessionModePresets[0];
 
   const refreshAdapters = async () => {
     setError("");
@@ -1151,15 +1257,20 @@ function DesktopRuntimePanel({
     }
 
     try {
-      const [nextHealth, nextAdapters, nextSessions] = await Promise.all([
+      const [nextHealth, nextAdapters, nextSessions, nextInbox] = await Promise.all([
         tauriInvoke<DesktopHealthStatus>("app_health"),
         tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
-        tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions")
+        tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions"),
+        tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox")
       ]);
       setRuntimeState("available");
       setHealth(nextHealth);
       setAdapters(nextAdapters);
       setSessions(nextSessions);
+      setInboxReport(nextInbox);
+      if (!selectedDecisionId && nextInbox.decisions[0]) {
+        setSelectedDecisionId(nextInbox.decisions[0].id);
+      }
       if (!nextAdapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId) && nextAdapters[0]) {
         setSelectedSessionAdapterId(nextAdapters[0].adapterId);
       }
@@ -1168,6 +1279,7 @@ function DesktopRuntimePanel({
       setHealth(null);
       setAdapters(fallbackDesktopAdapters);
       setSessions([]);
+      setInboxReport(null);
       setError(errorMessage(caught));
     }
   };
@@ -1185,12 +1297,14 @@ function DesktopRuntimePanel({
     try {
       const nextReports = await tauriInvoke<CliRunReport[]>("run_all_cli_adapter_health");
       setReports(nextReports);
-      const [nextAdapters, nextSessions] = await Promise.all([
+      const [nextAdapters, nextSessions, nextInbox] = await Promise.all([
         tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
-        tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions")
+        tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions"),
+        tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox")
       ]);
       setAdapters(nextAdapters);
       setSessions(nextSessions);
+      setInboxReport(nextInbox);
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -1222,6 +1336,59 @@ function DesktopRuntimePanel({
 
   const upsertSession = (report: CliSessionReport) => {
     setSessions((current) => [report, ...current.filter((item) => item.sessionId !== report.sessionId)]);
+  };
+
+  const applySessionMode = (modeId: string) => {
+    const mode = sessionModePresets.find((item) => item.id === modeId) || sessionModePresets[0];
+    setSelectedSessionModeId(mode.id);
+    setSessionPrompt(mode.prompt);
+  };
+
+  const refreshDecisionInbox = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setInboxReport(null);
+      return;
+    }
+
+    try {
+      const report = await tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox");
+      setInboxReport(report);
+      if (!selectedDecisionId && report.decisions[0]) {
+        setSelectedDecisionId(report.decisions[0].id);
+      }
+    } catch (caught) {
+      setError(errorMessage(caught));
+    }
+  };
+
+  const answerDecision = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke || !selectedDecision) {
+      return;
+    }
+    if (!decisionAnswer.trim()) {
+      setError("Decision answer is required.");
+      return;
+    }
+
+    setDecisionBusy(true);
+    setError("");
+    try {
+      const report = await tauriInvoke<HumanDecisionInboxReport>("answer_human_decision", {
+        decisionId: selectedDecision.id,
+        answerType: decisionAnswerType,
+        answerText: decisionAnswer
+      });
+      setInboxReport(report);
+      setDecisionAnswer("");
+      const nextOpen = report.decisions.find((decision) => isOpenDecisionStatus(decision.status));
+      setSelectedDecisionId(nextOpen?.id || report.updatedId || report.decisions[0]?.id || "");
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setDecisionBusy(false);
+    }
   };
 
   const startSession = async () => {
@@ -1295,6 +1462,7 @@ function DesktopRuntimePanel({
     try {
       const report = await tauriInvoke<CliSessionReport>("send_cli_adapter_defer_message", { sessionId });
       upsertSession(report);
+      await refreshDecisionInbox();
     } catch (caught) {
       setError(errorMessage(caught));
     }
@@ -1390,7 +1558,7 @@ function DesktopRuntimePanel({
       <section className="metrics-band">
         <Metric label="CLI Adapters" value={adapters.length} icon={Network} tone="green" />
         <Metric label="Available" value={availableCount} icon={CheckCircle2} tone="blue" />
-        <Metric label="Decision Items" value={decisionPrompts.length + blockedTaskCount} icon={Inbox} tone="amber" />
+        <Metric label="Decision Items" value={decisionPrompts.length + blockedTaskCount + openInboxDecisions.length} icon={Inbox} tone="amber" />
         <Metric label="Agent Configs" value={agentCatalogCount} icon={Bot} tone="violet" />
         <Metric label="Source Files" value={sourceFileCount} icon={Code2} tone="slate" />
       </section>
@@ -1434,6 +1602,7 @@ function DesktopRuntimePanel({
           {adapters.map((adapter) => {
             const report = reports.find((item) => item.adapterId === adapter.adapterId);
             const running = runningAdapterId === adapter.adapterId;
+            const setupGuide = adapterSetupGuides[adapter.adapterId];
             return (
               <article key={adapter.adapterId} className={adapter.available ? "adapter-card available" : "adapter-card missing"}>
                 <header>
@@ -1448,6 +1617,14 @@ function DesktopRuntimePanel({
                   {adapter.version ? ` / ${adapter.version}` : ""}
                 </p>
                 <small>{adapter.resolvedPath || adapter.lastError || "No status detail"}</small>
+                {setupGuide && (
+                  <div className="adapter-setup-guide">
+                    <span>{adapter.available ? "Verify" : "Setup"}</span>
+                    <code>{adapter.available ? setupGuide.verifyCommand : setupGuide.installHint}</code>
+                    <small>{setupGuide.sourceUrl}</small>
+                    <small>{setupGuide.caution}</small>
+                  </div>
+                )}
                 <button
                   type="button"
                   onClick={() => runSingleHealthCheck(adapter.adapterId)}
@@ -1490,6 +1667,16 @@ function DesktopRuntimePanel({
             </select>
           </label>
           <label>
+            <span>Mode</span>
+            <select value={selectedSessionModeId} onChange={(event) => applySessionMode(event.target.value)}>
+              {sessionModePresets.map((mode) => (
+                <option key={mode.id} value={mode.id}>
+                  {mode.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
             <span>Working dir</span>
             <input
               value={workingDir}
@@ -1510,6 +1697,7 @@ function DesktopRuntimePanel({
             <span>{runningAdapterId === "session" ? "Starting" : "Start Session"}</span>
           </button>
         </div>
+        <p className="session-mode-note">{selectedMode.intent}</p>
 
         {sessions.length === 0 ? (
           <p className="empty-state">실행 세션이 없습니다. 설치된 adapter를 선택하고 session을 시작하세요.</p>
@@ -1612,27 +1800,122 @@ function DesktopRuntimePanel({
         )}
       </section>
 
-      <section className="panel desktop-decision-panel">
+      <section className="panel wide desktop-decision-panel">
         <div className="panel-heading">
           <div>
             <p className="eyebrow">Decision Inbox</p>
-            <h2>CLI 질문 감지</h2>
+            <h2>보류된 사용자 결정</h2>
           </div>
-          <Inbox size={18} aria-hidden="true" />
+          <div className="desktop-actions">
+            <button type="button" onClick={refreshDecisionInbox} disabled={!invoke || decisionBusy}>
+              <Activity size={15} aria-hidden="true" />
+              <span>Refresh</span>
+            </button>
+          </div>
         </div>
-        {decisionPrompts.length === 0 ? (
-          <p className="empty-state">최근 실행에서 사용자 질문으로 보이는 출력은 감지되지 않았습니다.</p>
+
+        <div className="decision-summary-strip">
+          <article>
+            <span>open</span>
+            <strong>{inboxReport?.openCount ?? 0}</strong>
+          </article>
+          <article>
+            <span>answered</span>
+            <strong>{inboxReport?.answeredCount ?? 0}</strong>
+          </article>
+          <article>
+            <span>total</span>
+            <strong>{inboxReport?.totalCount ?? 0}</strong>
+          </article>
+        </div>
+
+        {!inboxReport || inboxReport.decisions.length === 0 ? (
+          <p className="empty-state">보류된 decision inbox 항목이 없습니다.</p>
         ) : (
-          <div className="stack-list">
-            {decisionPrompts.map((prompt) => (
-              <article key={`${prompt.lane}-${prompt.question}`}>
-                <strong>{prompt.question}</strong>
-                <p>{prompt.impact}</p>
-                <small>{prompt.resumeAction}</small>
-              </article>
-            ))}
+          <div className="decision-inbox-layout">
+            <div className="decision-list">
+              {inboxReport.decisions.slice(0, 16).map((decision) => (
+                <button
+                  key={decision.id}
+                  className={selectedDecision?.id === decision.id ? "active" : ""}
+                  type="button"
+                  onClick={() => setSelectedDecisionId(decision.id)}
+                >
+                  <span>{decision.status}</span>
+                  <strong>{decision.question}</strong>
+                  <small>{decision.source}</small>
+                </button>
+              ))}
+            </div>
+
+            <article className="decision-answer-box">
+              {selectedDecision ? (
+                <>
+                  <header>
+                    <div>
+                      <span>{selectedDecision.priority}</span>
+                      <h3>{selectedDecision.question}</h3>
+                    </div>
+                    <strong>{selectedDecision.status}</strong>
+                  </header>
+                  <p>{selectedDecision.impact || "No impact note"}</p>
+                  <small>{selectedDecision.resumeAction || "No resume action recorded"}</small>
+                  {selectedDecision.answerText && (
+                    <div className="decision-existing-answer">
+                      <span>{selectedDecision.answerType || "answer"}</span>
+                      <p>{selectedDecision.answerText}</p>
+                    </div>
+                  )}
+                  <div className="decision-answer-controls">
+                    <select value={decisionAnswerType} onChange={(event) => setDecisionAnswerType(event.target.value)}>
+                      <option value="instruction">Instruction</option>
+                      <option value="approve">Approve</option>
+                      <option value="edit">Edit</option>
+                      <option value="reject">Reject</option>
+                    </select>
+                    <textarea
+                      value={decisionAnswer}
+                      onChange={(event) => setDecisionAnswer(event.target.value)}
+                      rows={4}
+                    />
+                    <button
+                      type="button"
+                      onClick={answerDecision}
+                      disabled={!invoke || decisionBusy || !decisionAnswer.trim()}
+                    >
+                      <CheckCircle2 size={15} aria-hidden="true" />
+                      <span>{decisionBusy ? "Saving" : "Answer"}</span>
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <p className="empty-state">선택된 decision이 없습니다.</p>
+              )}
+            </article>
           </div>
         )}
+
+        <div className="decision-candidate-stack">
+          <div className="panel-heading compact-heading">
+            <div>
+              <p className="eyebrow">Live Candidates</p>
+              <h3>최근 CLI 질문 후보</h3>
+            </div>
+          </div>
+          {decisionPrompts.length === 0 ? (
+            <p className="empty-state">최근 실행에서 사용자 질문으로 보이는 출력은 감지되지 않았습니다.</p>
+          ) : (
+            <div className="stack-list">
+              {decisionPrompts.map((prompt) => (
+                <article key={`${prompt.lane}-${prompt.question}`}>
+                  <strong>{prompt.question}</strong>
+                  <p>{prompt.impact}</p>
+                  <small>{prompt.resumeAction}</small>
+                </article>
+              ))}
+            </div>
+          )}
+          </div>
       </section>
 
       <section className="panel desktop-source-panel">
@@ -1693,6 +1976,10 @@ function errorMessage(caught: unknown) {
     return caught.message;
   }
   return String(caught);
+}
+
+function isOpenDecisionStatus(status: string) {
+  return ["open", "deferred", "resuming"].includes(status);
 }
 
 function Metric({ label, value, icon: Icon, tone }: { label: string; value: number; icon: LucideIcon; tone: string }) {

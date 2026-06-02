@@ -7,8 +7,8 @@ Define the product contract for an installable desktop app that can configure Cl
 ## Requirements
 
 - `REQ-WS-085`
-- `PDA-REQ-013` - `PDA-REQ-021`
-- `PDA-UX-009` - `PDA-UX-014`
+- `PDA-REQ-013` - `PDA-REQ-022`
+- `PDA-UX-009` - `PDA-UX-015`
 
 ## Scope
 
@@ -20,8 +20,9 @@ Define the product contract for an installable desktop app that can configure Cl
 - Tauri backend allowlisted CLI detection and bounded health/version checks
 - Workspace Monitor Desktop tab and browser fallback
 - Tauri backend pipe-based CLI session start/poll/stdin/defer/cancel commands and human decision inbox append on defer
+- Tauri backend human decision inbox list/answer commands
 - Tauri backend workspace-scoped source file read/write with backup
-- Workspace Monitor CLI session console and scoped source editor
+- Workspace Monitor CLI setup guide, work-mode presets, decision inbox answer UI, CLI session console, and scoped source editor
 
 ## Non-Scope
 
@@ -35,6 +36,7 @@ Define the product contract for an installable desktop app that can configure Cl
 - The four CLIs are optional adapters; missing tools return `capability_missing` and disable only that lane.
 - The first supervisor MVP runs allowlisted CLI PATH detection and stdin-free bounded version checks.
 - The second supervisor MVP provides pipe-based session start, poll, stdin, defer, and cancel for allowlisted CLIs without adding the shell plugin, and stores detected questions in `_ops/coordination/human-decision-inbox.json` when deferring.
+- Users can see per-CLI setup hints and verification commands, create session prompts from work-mode presets, and save answers to deferred decision items from the Desktop tab.
 - Autonomous source-affecting long-running multi-CLI execution will be implemented in the next supervisor stage with process graphs and merge gates.
 - CLI questions route to the decision inbox and pause only dependent lanes.
 - Terminal output separates bounded/redacted raw logs from structured durable records.
@@ -47,6 +49,7 @@ Define the product contract for an installable desktop app that can configure Cl
 - Desktop readiness tests check the multi-CLI architecture doc and orchestration registry fields.
 - The `workspace-monitor` Desktop tab shows CLI adapter state and health-check results when Tauri runtime exists, and an unavailable fallback in browser-only environments.
 - The `workspace-monitor` Desktop tab shows a CLI session console and scoped source editor.
+- The `workspace-monitor` Desktop tab shows CLI setup guides, work-mode presets, and human decision inbox list/answer UI.
 - Tauri file commands block `_private/`, `outputs/`, paths outside the workspace, and symlink escapes, and create backups before writes.
 - Requirements, specs, and traceability link the new capability.
 - Evaluation records distinguish the current bounded health/session/file-edit implementation from later PTY supervisor resource and CLI-pipeline risks.

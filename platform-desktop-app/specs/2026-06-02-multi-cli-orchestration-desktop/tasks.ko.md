@@ -10,8 +10,10 @@
 - [x] Tauri backend에 `list_cli_adapters`, `run_cli_adapter_health`, `run_all_cli_adapter_health` 구현
 - [x] Tauri backend에 `start_cli_adapter_session`, `poll_cli_adapter_session`, `write_cli_adapter_stdin`, `send_cli_adapter_defer_message`, `cancel_cli_adapter_session`과 defer 질문의 human decision inbox append 구현
 - [x] Tauri backend에 workspace-scoped `read_workspace_text_file`, `write_workspace_text_file` 구현
+- [x] Tauri backend에 `list_human_decision_inbox`, `answer_human_decision` 구현
 - [x] Workspace Monitor에 Desktop 탭, Tauri invoke bridge, browser fallback 구현
 - [x] Workspace Monitor에 CLI session console과 scoped source editor 구현
+- [x] Workspace Monitor에 CLI setup guide, 작업 모드 프리셋, decision inbox answer UI 구현
 - [x] view mode registry에 `desktop` section 노출
 - [x] history, omission, resource, grounding, evaluation 기록 생성
 - [ ] interactive PTY 기반 CLI task supervisor 구현은 후속 스펙에서 진행

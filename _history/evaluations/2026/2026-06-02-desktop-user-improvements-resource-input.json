@@ -1,0 +1,121 @@
+{
+  "task": "Add desktop user controls for multi-CLI setup, mode presets, and decision inbox answers.",
+  "work_mode": "governance",
+  "runtime_context": [
+    "tauri",
+    "rust",
+    "node",
+    "nextjs",
+    "desktop-runtime",
+    "json-file"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "decision-inbox-write-scope",
+      "category": "file_handle",
+      "description": "The answer command writes to the shared human decision inbox and must stay inside the workspace boundary.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The command resolves `_ops/coordination/human-decision-inbox.json` through the canonical workspace root and runs ensure_workspace_path before reading or writing.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "decision-answer-size",
+      "category": "large_data",
+      "description": "A user answer could be large enough to bloat the decision inbox or UI state.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The Tauri answer command rejects answers larger than MAX_DECISION_ANSWER_BYTES, currently 20,000 bytes.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "cli-setup-auto-install",
+      "category": "process",
+      "description": "Showing CLI setup guidance could accidentally become automatic global installation or unmanaged process execution.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The UI only displays install hints, source URLs, and verification commands. It does not execute install commands.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "_research/topics/desktop-app/2026-06-02-desktop-user-improvements.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "session-reader-lifecycle",
+      "category": "stream",
+      "description": "Existing CLI sessions use stdout/stderr reader threads and bounded buffers; new UI must not weaken that lifecycle.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "This slice did not add new long-running reader threads. Existing session lifecycle still uses bounded output limits, polling, cancel, timeout, and defer controls.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "decision-inbox-read-write",
+      "resource": "human-decision-inbox.json",
+      "create_path": "list_human_decision_inbox reads the JSON file; answer_human_decision reads, mutates one decision, appends decision_history, and writes pretty JSON.",
+      "cleanup_path": "No persistent file handle is retained after command return; no background worker is created.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "setup-guides-no-process",
+      "resource": "external CLI setup guidance",
+      "create_path": "React renders static setup and verify command text for each adapter.",
+      "cleanup_path": "No subprocess, package manager, or installer is started by this UI path.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "bounded-answer-size",
+      "metric": "decision answer max bytes",
+      "tool": "source inspection plus readiness check",
+      "threshold": "MAX_DECISION_ANSWER_BYTES is 20,000 and answer_human_decision is included in readiness checks.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "npm --prefix platform-desktop-app run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "bounded-session-output-unchanged",
+      "metric": "CLI session output max bytes",
+      "tool": "source inspection plus platform tests",
+      "threshold": "MAX_SESSION_OUTPUT_BYTES remains 100,000 and platform desktop tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "npm --prefix platform-desktop-app test"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "The existing static server for workspace-monitor/out remained a simple local preview server; this slice did not add a new persistent server."
+  ]
+}

@@ -15,6 +15,7 @@
   - `slice-2-config`: CLI, user-flow, and desktop registry updates
   - `slice-3-supervisor-mvp`: Tauri bounded CLI health-check commands and Desktop tab
   - `slice-3b-session-editor-mvp`: Tauri pipe session commands, stdin/defer/cancel, human decision inbox append, scoped source editor
+  - `slice-3c-user-controls`: CLI setup guide, work-mode presets, human decision inbox list/answer UI
   - `slice-4-readiness`: readiness and test reinforcement
   - `slice-5-closeout`: history, omission, resource, grounding, evaluation
 - touch paths: only documents and configs in the scope above
@@ -29,9 +30,10 @@
 5. Add project-local requirements and architecture/spec documents.
 6. Add Tauri backend allowlisted CLI detection and bounded health/version check commands.
 7. Add pipe session start/poll/stdin/defer/cancel, human decision inbox append for deferred questions, and workspace-scoped file read/write commands to the Tauri backend.
-8. Add the Workspace Monitor Desktop tab, Tauri/browser fallback bridge, session console, and scoped source editor.
-9. Reinforce readiness script/tests.
-10. Run JSON, config contract, readiness, tests, omission/resource/grounding/evaluation checks.
+8. Add human decision inbox list/answer commands to the Tauri backend.
+9. Add the Workspace Monitor Desktop tab, Tauri/browser fallback bridge, CLI setup guide, work-mode presets, decision inbox answer UI, session console, and scoped source editor.
+10. Reinforce readiness script/tests.
+11. Run JSON, config contract, readiness, tests, omission/resource/grounding/evaluation checks.
 
 ## Risks And Controls
 

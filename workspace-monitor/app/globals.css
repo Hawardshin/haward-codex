@@ -719,8 +719,13 @@ h3 {
 .desktop-runtime-state small,
 .desktop-health-strip span,
 .adapter-card header span,
+.adapter-setup-guide span,
 .adapter-report span,
-.terminal-report-list header span {
+.terminal-report-list header span,
+.decision-summary-strip span,
+.decision-list button span,
+.decision-answer-box header span,
+.decision-existing-answer span {
   color: var(--muted);
   font-size: 12px;
   font-weight: 800;
@@ -837,6 +842,20 @@ h3 {
   font-weight: 700;
 }
 
+.adapter-setup-guide {
+  display: grid;
+  gap: 5px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  padding: 8px;
+}
+
+.adapter-setup-guide code {
+  overflow-wrap: anywhere;
+  color: var(--blue);
+}
+
 .adapter-card button {
   display: inline-flex;
   min-height: 34px;
@@ -901,7 +920,7 @@ h3 {
 
 .session-launcher {
   display: grid;
-  grid-template-columns: minmax(160px, 0.8fr) minmax(180px, 1fr) minmax(260px, 2fr) auto;
+  grid-template-columns: minmax(150px, 0.7fr) minmax(150px, 0.75fr) minmax(170px, 0.8fr) minmax(260px, 1.8fr) auto;
   gap: 10px;
   align-items: end;
   margin-bottom: 14px;
@@ -967,6 +986,13 @@ h3 {
 .session-input-row button:disabled,
 .source-editor-controls button:disabled {
   opacity: 0.55;
+}
+
+.session-mode-note {
+  margin: -6px 0 14px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .session-grid {
@@ -1052,6 +1078,161 @@ h3 {
 .desktop-decision-panel,
 .desktop-source-panel {
   min-height: 260px;
+}
+
+.decision-summary-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.decision-summary-strip article {
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.decision-summary-strip strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 22px;
+}
+
+.decision-inbox-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.2fr);
+  gap: 12px;
+}
+
+.decision-list {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.decision-list button {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  padding: 10px;
+  color: var(--text);
+  text-align: left;
+}
+
+.decision-list button.active {
+  border-color: #9db7cb;
+  background: #eef6ff;
+}
+
+.decision-list strong,
+.decision-list small,
+.decision-answer-box p,
+.decision-answer-box small {
+  overflow-wrap: anywhere;
+}
+
+.decision-list strong {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.decision-list small,
+.decision-answer-box small {
+  color: var(--muted);
+}
+
+.decision-answer-box {
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.decision-answer-box header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: start;
+}
+
+.decision-answer-box header strong {
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  padding: 3px 8px;
+  color: var(--slate);
+  font-size: 12px;
+}
+
+.decision-existing-answer {
+  border: 1px solid #c8d7e6;
+  background: #f4f9ff;
+  border-radius: 7px;
+  margin-top: 10px;
+  padding: 9px;
+}
+
+.decision-existing-answer p {
+  margin-bottom: 0;
+}
+
+.decision-answer-controls {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.35fr) minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: end;
+  margin-top: 12px;
+}
+
+.decision-answer-controls select,
+.decision-answer-controls textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  color: var(--text);
+  font: inherit;
+}
+
+.decision-answer-controls select {
+  min-height: 38px;
+  padding: 8px 10px;
+}
+
+.decision-answer-controls textarea {
+  min-height: 92px;
+  padding: 10px;
+  resize: vertical;
+}
+
+.decision-answer-controls button {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid #aebbc8;
+  background: var(--surface);
+  border-radius: 7px;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+
+.decision-answer-controls button:disabled {
+  opacity: 0.55;
+}
+
+.decision-candidate-stack {
+  margin-top: 16px;
+}
+
+.compact-heading {
+  margin-bottom: 8px;
 }
 
 .desktop-source-panel p {
@@ -1992,6 +2173,7 @@ h3 {
   .agent-flow-map article,
   .source-layout,
   .command-center,
+  .decision-inbox-layout,
   .session-launcher,
   .session-grid,
   .desktop-hero,
@@ -2002,6 +2184,7 @@ h3 {
   .adapter-grid,
   .terminal-report-list,
   .desktop-health-strip,
+  .decision-answer-controls,
   .session-input-row,
   .source-editor-controls {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2045,6 +2228,9 @@ h3 {
   .adapter-grid,
   .terminal-report-list,
   .desktop-health-strip,
+  .decision-summary-strip,
+  .decision-inbox-layout,
+  .decision-answer-controls,
   .session-launcher,
   .session-grid,
   .session-input-row,

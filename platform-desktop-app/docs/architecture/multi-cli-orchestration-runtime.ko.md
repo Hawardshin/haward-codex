@@ -118,6 +118,16 @@ Tauri desktop shell
 - 저장 전 `platform-desktop-app/artifacts/source-editor-backups/` 아래 backup을 만든다.
 - Workspace Monitor `Desktop` 탭은 CLI session console과 textarea 기반 scoped editor를 표시한다.
 
+## 구현 상태: User Controls MVP 3
+
+2026-06-02 추가 개선은 사용자 입장에서 설정, 모드 선택, 보류 결정 처리를 한 화면에서 다루도록 한다.
+
+- Tauri backend는 `list_human_decision_inbox`, `answer_human_decision`을 제공한다.
+- `answer_human_decision`은 선택된 decision의 `status`를 `answered`로 바꾸고 answer payload와 `decision_history` 항목을 저장한다.
+- Workspace Monitor `Desktop` 탭은 각 CLI adapter의 설치 힌트, 검증 명령, 공식 참조 링크를 보여준다. 자동 설치는 하지 않는다.
+- session launcher는 `User Task`, `Platform Improvement`, `Knowledge Accumulation`, `Review & Verify` 모드 프리셋을 제공하고 prompt를 채운다.
+- decision inbox panel은 open/answered/total count, decision 목록, answer type/text 입력, 저장된 답변 상태를 보여준다.
+
 ## 비범위
 
 - 이번 MVP는 PTY 기반 terminal implementation이 아니다.

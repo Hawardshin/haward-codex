@@ -118,6 +118,16 @@ The 2026-06-02 follow-up implementation adds pipe-based execution and scoped fil
 - Saves create backups under `platform-desktop-app/artifacts/source-editor-backups/`.
 - The Workspace Monitor `Desktop` tab shows a CLI session console and textarea-based scoped editor.
 
+## Implementation Status: User Controls MVP 3
+
+The 2026-06-02 additional improvement makes setup, mode selection, and deferred decision handling available from one user-facing surface.
+
+- The Tauri backend exposes `list_human_decision_inbox` and `answer_human_decision`.
+- `answer_human_decision` sets the selected decision `status` to `answered` and persists an answer payload plus a `decision_history` item.
+- The Workspace Monitor `Desktop` tab shows setup hints, verification commands, and official reference links for each CLI adapter. It does not auto-install tools.
+- The session launcher provides `User Task`, `Platform Improvement`, `Knowledge Accumulation`, and `Review & Verify` mode presets that fill the prompt.
+- The decision inbox panel shows open/answered/total counts, decision list, answer type/text controls, and saved answer state.
+
 ## Non-Scope
 
 - This MVP does not implement a PTY-based terminal.

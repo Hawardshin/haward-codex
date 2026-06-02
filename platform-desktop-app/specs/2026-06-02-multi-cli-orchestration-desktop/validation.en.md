@@ -77,6 +77,8 @@ Expected results:
 - Workspace Monitor check/test/build should pass.
 - `platform-desktop-app` Node tests should verify the new command names.
 - The readiness check should verify session/editor command names, human decision inbox persistence, and Desktop tab inbox item count display.
+- The readiness check should verify setup guides, work-mode presets, decision inbox list/answer commands, and UI strings.
 - Rust compile and Tauri dev/build are not verified until the Rust toolchain is installed.
 - The source editor contract must block `_private/`, `outputs/`, paths outside the workspace, and symlink escapes, and create a backup before saving.
 - The defer command contract must append detected questions to `_ops/coordination/human-decision-inbox.json` without duplicating the same session prompt.
+- The decision answer command contract must set the selected decision status to `answered` and persist answer plus decision_history records.

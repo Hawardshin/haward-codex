@@ -1,0 +1,155 @@
+{
+  "task": "Find and implement user-facing improvements for the installable multi-CLI desktop app.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first-improvement-selection",
+      "description": "Use current external references and existing local architecture before deciding what to add.",
+      "source": "AGENTS.md web-first rule, UR-2026-06-02-050",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-desktop-user-improvements.ko.md",
+        "_research/topics/desktop-app/2026-06-02-desktop-user-improvements.ko.md",
+        "_history/plans/2026/2026-06-02-desktop-user-improvements.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "cli-setup-guides",
+      "description": "Give users direct setup and verification guidance for Claude Code, Gemini CLI, Codex CLI, and OpenCode without making one CLI mandatory.",
+      "source": "PDA-REQ-022",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/README.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "session-mode-presets",
+      "description": "Let users start CLI lanes with simple reusable modes instead of writing every prompt from scratch.",
+      "source": "PDA-REQ-022, PDA-UX-015",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "decision-inbox-list-and-answer",
+      "description": "Let the desktop app list deferred human decisions and record user answers so paused CLI lanes can be resumed later.",
+      "source": "PDA-REQ-022, PDA-UX-015",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "no-auto-install",
+      "description": "Do not auto-install external CLIs or make global environment changes as part of this user improvement slice.",
+      "source": "CLI adapter policy and installation audit rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "_research/topics/desktop-app/2026-06-02-desktop-user-improvements.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "full-public-macos-release",
+      "description": "Ship a signed, notarized, auto-updating public macOS installer.",
+      "source": "scope review",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md"
+      ],
+      "rationale": "This slice improves the current desktop runtime and user controls. Public macOS readiness requires Developer ID signing, hardened runtime, notarization, update, rollback, and privacy/dependency review."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/src-tauri/src/lib.rs",
+      "purpose": "Tauri commands for CLI sessions, scoped editing, and human decision inbox list/answer.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Desktop UI for setup guidance, mode presets, session controls, and decision answers.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/app/globals.css",
+      "purpose": "Responsive styling for the new Desktop controls.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+      "purpose": "Implementation contract for the desktop orchestration slice.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-02-desktop-user-improvements.ko.md",
+      "purpose": "Trace request to outcome and verification.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Type and lint check the monitor UI after adding setup, mode, and decision inbox controls.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-test-build",
+      "description": "Run monitor tests and static build so generated snapshot/out artifacts include the new records.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor test",
+        "npm --prefix workspace-monitor run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-desktop-readiness",
+      "description": "Run platform desktop tests and readiness scan for the added command/UI strings.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app test",
+        "npm --prefix platform-desktop-app run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "tauri-compile",
+      "description": "Compile the Tauri app with Rust/Cargo.",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [],
+      "rationale": "Rust/Cargo is not installed in this environment, so direct Tauri compile verification is unavailable."
+    }
+  ],
+  "known_omission_risks": [
+    "Actual CLI authentication and installation flows are still manual guidance, not an in-app setup wizard.",
+    "The decision inbox answer is recorded in JSON, but automatic lane resume is still a future workflow.",
+    "PTY terminal behavior and Monaco-level editor integration remain future implementation slices."
+  ],
+  "notes": [
+    "This slice intentionally improves user controls without performing global installation or requiring any one CLI."
+  ]
+}

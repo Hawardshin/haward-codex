@@ -22,6 +22,7 @@ These requirements define first-run, home, task execution, decision inbox, setti
 | PDA-UX-012 | The source editing screen should prefer a validated editor surface such as Monaco Editor and center user mode on safe file scope plus change review. | should | source editor prototype acceptance |
 | PDA-UX-013 | The Desktop tab must show Tauri runtime connection state, CLI adapter availability/version, bounded health-check results, detected CLI questions, and source-editing readiness in one surface. | must | workspace-monitor Desktop tab |
 | PDA-UX-014 | The Desktop tab shall provide a pipe-based CLI session console and scoped source editor so the user can start, poll, write stdin, defer, cancel, see decision inbox item counts, open files, and see backup save status in one surface. | must | workspace-monitor Desktop tab, TypeScript check |
+| PDA-UX-015 | The Desktop tab shall show CLI setup guides, work-mode presets, deferred decision lists, answer type/text controls, and saved answer state in the same working surface. | must | workspace-monitor Desktop tab, Tauri decision commands |
 
 ## Current State
 

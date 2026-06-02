@@ -1,0 +1,155 @@
+{
+  "initial_instruction": "개선할 부분과 사용자 측면에서 더 넣으면 좋은 기능들 찾아서 만들어줘.",
+  "result_summary": "Added user-facing Desktop improvements for the installable multi-CLI platform: setup/verification guidance for optional CLI adapters, session mode presets, and a Tauri-backed human decision inbox answer flow. Updated requirements, specs, architecture docs, README, history, research, and close-out records.",
+  "work_mode": "governance",
+  "changed_files": [
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md",
+    "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.en.md",
+    "_history/web-searches/2026/2026-06-02-desktop-user-improvements.ko.md",
+    "_history/web-searches/2026/2026-06-02-desktop-user-improvements.en.md",
+    "_research/topics/desktop-app/2026-06-02-desktop-user-improvements.ko.md",
+    "_research/topics/desktop-app/2026-06-02-desktop-user-improvements.en.md",
+    "_requirements/changes/2026-06-02-desktop-user-improvements.ko.md",
+    "_requirements/changes/2026-06-02-desktop-user-improvements.en.md",
+    "_requirements/reviews/2026-06-02-desktop-user-improvements.ko.md",
+    "_requirements/reviews/2026-06-02-desktop-user-improvements.en.md",
+    "_history/plans/2026/2026-06-02-desktop-user-improvements.ko.md",
+    "_history/plans/2026/2026-06-02-desktop-user-improvements.en.md",
+    "_history/request-traces/2026/2026-06-02-desktop-user-improvements.ko.md",
+    "_history/request-traces/2026/2026-06-02-desktop-user-improvements.en.md",
+    "_history/work-timings/2026/2026-06-02-desktop-user-improvements.json",
+    "_history/evaluations/2026/2026-06-02-desktop-user-improvements-omission-input.json",
+    "_history/evaluations/2026/2026-06-02-desktop-user-improvements-resource-input.json",
+    "_history/evaluations/2026/2026-06-02-desktop-user-improvements-grounding.json",
+    "_history/evaluations/2026/2026-06-02-desktop-user-improvements-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-02-desktop-user-improvements-evaluation-result.json",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/2026/2026-06-02.md",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json"
+  ],
+  "verification": [
+    "npm --prefix workspace-monitor run check",
+    "npm --prefix workspace-monitor test",
+    "npm --prefix workspace-monitor run build",
+    "npm --prefix platform-desktop-app test",
+    "npm --prefix platform-desktop-app run check",
+    "rg -l \"adapterSetupGuides|sessionModePresets|answer_human_decision|Decision Inbox\" workspace-monitor/out/_next/static -g '*.js'",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-desktop-user-improvements-omission-input.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-02-desktop-user-improvements-resource-input.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-desktop-user-improvements-grounding.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-02-desktop-user-improvements-evaluation-input.json",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-desktop-user-improvements.json",
+    "python3 _tools/naming-audit/src/naming_audit.py --check",
+    "python3 _tools/structure-audit/src/structure_audit.py --check",
+    "git diff --check"
+  ],
+  "references_checked": [
+    "Tauri v2 command invocation and plugin permission documentation",
+    "Claude Code setup documentation",
+    "Google Gemini CLI repository/setup reference",
+    "OpenAI Codex CLI help reference",
+    "OpenCode setup/reference source",
+    "LangGraph/LangChain human-in-the-loop decision patterns",
+    "Existing platform-desktop-app multi-CLI orchestration specs and previous source editor/CLI session implementation",
+    "Existing Workspace Monitor Desktop panel structure"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-desktop-user-improvements-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-desktop-user-improvements.ko.md",
+    "_history/web-searches/2026/2026-06-02-desktop-user-improvements.en.md",
+    "_research/topics/desktop-app/2026-06-02-desktop-user-improvements.ko.md",
+    "_research/topics/desktop-app/2026-06-02-desktop-user-improvements.en.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-desktop-user-improvements.ko.md",
+    "_history/plans/2026/2026-06-02-desktop-user-improvements.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-02-desktop-user-improvements.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-desktop-user-improvements-omission-input.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-desktop-user-improvements.ko.md",
+    "_history/web-searches/2026/2026-06-02-desktop-user-improvements.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-02-desktop-user-improvements.ko.md",
+    "_requirements/changes/2026-06-02-desktop-user-improvements.en.md",
+    "_requirements/reviews/2026-06-02-desktop-user-improvements.ko.md",
+    "_requirements/reviews/2026-06-02-desktop-user-improvements.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.en.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-desktop-user-improvements.ko.md",
+    "_history/request-traces/2026/2026-06-02-desktop-user-improvements.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-desktop-user-improvements.json"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-02-desktop-user-improvements-resource-input.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "After a documented Rust/Cargo installation audit, run direct Tauri compile/dev/build verification for this desktop command bridge.",
+    "Add a real first-run setup wizard with per-adapter auth checks and install audit records before any automated install.",
+    "Add PTY-backed terminal behavior and automatic decision-based lane resume once process lifecycle tests are in place.",
+    "Replace the scoped textarea editor with a richer editor component only after write permissions, diff review, rollback, and large-file policies are finalized."
+  ]
+}

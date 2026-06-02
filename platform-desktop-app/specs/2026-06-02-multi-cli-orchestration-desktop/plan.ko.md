@@ -15,6 +15,7 @@
   - `slice-2-config`: CLI/user-flow/desktop registry 보강
   - `slice-3-supervisor-mvp`: Tauri bounded CLI health-check command와 Desktop 탭
   - `slice-3b-session-editor-mvp`: Tauri pipe session command, stdin/defer/cancel, human decision inbox append, scoped source editor
+  - `slice-3c-user-controls`: CLI setup guide, 작업 모드 프리셋, human decision inbox 조회/답변 UI
   - `slice-4-readiness`: readiness/test 검증 강화
   - `slice-5-closeout`: history, omission, resource, grounding, evaluation
 - touch paths: 위 범위의 문서와 설정 파일만
@@ -29,9 +30,10 @@
 5. project-local requirements와 architecture/spec 문서를 추가한다.
 6. Tauri backend에 allowlist CLI 탐지와 bounded health/version check command를 추가한다.
 7. Tauri backend에 pipe session start/poll/stdin/defer/cancel, defer 질문의 human decision inbox append, workspace-scoped file read/write command를 추가한다.
-8. Workspace Monitor에 Desktop 탭, Tauri/browser fallback bridge, session console, scoped source editor를 추가한다.
-9. readiness script/test를 보강한다.
-10. JSON, config contract, readiness, tests, omission/resource/grounding/evaluation을 실행한다.
+8. Tauri backend에 human decision inbox 조회/답변 command를 추가한다.
+9. Workspace Monitor에 Desktop 탭, Tauri/browser fallback bridge, CLI setup guide, 작업 모드 프리셋, decision inbox answer UI, session console, scoped source editor를 추가한다.
+10. readiness script/test를 보강한다.
+11. JSON, config contract, readiness, tests, omission/resource/grounding/evaluation을 실행한다.
 
 ## 리스크와 통제
 
