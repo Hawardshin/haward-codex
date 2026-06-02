@@ -211,6 +211,18 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "runtime_data_boundary_registry",
+      "title": "Runtime Data Boundary Registry",
+      "path": "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "separating platform source from installed product runtime data",
+        "customer source-code visibility boundary",
+        "runtime data, log, and agent workspace planes"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
       "id": "macos_execution_profile",
       "title": "macOS Execution Profile",
       "path": "platform-desktop-app/configs/macos-execution-profile.json",
@@ -1278,6 +1290,18 @@
       ]
     },
     {
+      "id": "runtime_data_boundary_must_stay_discoverable",
+      "rule": "The runtime data boundary registry must remain a warm memory anchor so future installable desktop work separates platform source, customer-visible app surfaces, runtime data stores, logs, cache, user workspaces, and agent workspaces.",
+      "reason": "The user clarified that this repository builds the platform but installed customers must not see platform source code; runtime data, logs, accumulated data sources, and agent work should be grouped separately from source.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "platform-desktop-app",
+        "runtime-data-boundary-registry"
+      ]
+    },
+    {
       "id": "root_structure_policy_must_stay_discoverable",
       "rule": "The root structure policy must remain a warm memory anchor because future sessions need a deterministic way to classify root folders, logical architecture layers, runtime adapters, local-only scratch, generated outputs, and registered projects.",
       "reason": "The user explicitly asked to improve any folder-structure contradictions or management friction as the workspace grows.",
@@ -1418,6 +1442,7 @@
     "resource_leak_prevention_workflow",
     "install_mode_registry",
     "desktop_distribution_registry",
+    "runtime_data_boundary_registry",
     "macos_execution_profile",
     "windows_execution_profile",
     "cross_platform_installable_runtime_decision",
@@ -1489,6 +1514,7 @@
     "resource_leak_prevention_workflow",
     "install_mode_registry",
     "desktop_distribution_registry",
+    "runtime_data_boundary_registry",
     "macos_execution_profile",
     "windows_execution_profile",
     "cross_platform_installable_runtime_decision",
@@ -1669,6 +1695,14 @@
       "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
       "tier": "warm",
       "purpose": "End-user installable desktop software productization registry, kept separate from repository setup install_mode.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "runtime_data_boundary_registry",
+      "path": "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+      "tier": "warm",
+      "purpose": "Steering registry for separating platform source code, customer-visible installable app payload, runtime data stores, logs, cache, user workspaces, and agent runtime workspaces.",
       "required": true,
       "load_order": 8
     },

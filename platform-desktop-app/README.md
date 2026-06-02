@@ -9,6 +9,9 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 ## Current Direction
 
 - Treat the first installable product as the platform-first host runtime: the app launches first, owns workspace state, task state, decisions, artifacts, validation, and UI authority, then mounts external AI CLIs as guest adapter lanes.
+- Treat this repository as the development source that builds the platform, not as the customer-visible product payload. Installed customers should use the app, their selected workspaces, app-managed data stores, classified logs, and exports without seeing the platform source tree.
+- Keep user workspace data, platform data stores, log stores, cache stores, and agent runtime workspaces separate from platform source code. Use `configs/runtime-data-boundary-registry.json` as the steering source before adding persistent runtime data or log features.
+- Keep reusable agent definitions under `agent-platform/configs/agents/`; runtime agent input/output/log/handoff/temp work belongs in the installed product's scoped agent workspace plane.
 - Keep `workspace-monitor/` as the initial UI source instead of duplicating the monitoring interface.
 - Design the first-run user flow before implementing installer code: open/create/demo workspace, confirm workspace boundary, select view mode, run required readiness checks, then reach the dashboard.
 - Keep Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, notifications, browser automation, and advanced validators as optional capability cards that can be configured later instead of blocking initial use.
@@ -66,9 +69,11 @@ platform-desktop-app/
 - Windows execution profile: `configs/windows-execution-profile.json`
 - User flow registry: `configs/user-flow-registry.json`
 - Claude Code public design transfer registry: `configs/claude-code-design-transfer-registry.json`
+- Runtime data/code/log/agent workspace boundary registry: `configs/runtime-data-boundary-registry.json`
 - Cross-platform runtime decision: `docs/architecture/cross-platform-installable-runtime-decision.ko.md`
 - Multi-CLI orchestration runtime: `docs/architecture/multi-cli-orchestration-runtime.ko.md`
 - Claude Code public design transfer: `docs/architecture/claude-code-design-transfer.ko.md`
+- Runtime data/code boundary: `docs/architecture/runtime-data-boundary.ko.md`
 - Product boundary: `docs/product-boundary.ko.md`
 - Packaging strategy: `docs/packaging-strategy.ko.md`
 - macOS execution structure: `docs/macos-execution-structure.ko.md`
@@ -99,10 +104,12 @@ python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.
 python3 -m json.tool platform-desktop-app/configs/macos-execution-profile.json
 python3 -m json.tool platform-desktop-app/configs/windows-execution-profile.json
 python3 -m json.tool platform-desktop-app/configs/claude-code-design-transfer-registry.json
+python3 -m json.tool platform-desktop-app/configs/runtime-data-boundary-registry.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/desktop-distribution-registry.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/macos-execution-profile.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/windows-execution-profile.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/claude-code-design-transfer-registry.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/runtime-data-boundary-registry.json
 ```
 
 Implemented desktop bridge commands:

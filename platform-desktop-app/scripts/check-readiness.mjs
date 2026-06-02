@@ -9,6 +9,7 @@ const requiredFiles = [
   "package.json",
   "configs/desktop-distribution-registry.json",
   "configs/claude-code-design-transfer-registry.json",
+  "configs/runtime-data-boundary-registry.json",
   "configs/macos-execution-profile.json",
   "configs/windows-execution-profile.json",
   "configs/user-flow-registry.json",
@@ -18,6 +19,8 @@ const requiredFiles = [
   "docs/architecture/multi-cli-orchestration-runtime.en.md",
   "docs/architecture/claude-code-design-transfer.ko.md",
   "docs/architecture/claude-code-design-transfer.en.md",
+  "docs/architecture/runtime-data-boundary.ko.md",
+  "docs/architecture/runtime-data-boundary.en.md",
   "specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
   "specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md",
   "specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
@@ -165,6 +168,23 @@ for (const requiredPhrase of [
 ]) {
   if (!designTransferSerialized.includes(requiredPhrase)) {
     failures.push(`claude-code-design-transfer-registry must include ${requiredPhrase}`);
+  }
+}
+
+const runtimeBoundaryRegistry = readJson("configs/runtime-data-boundary-registry.json");
+const runtimeBoundarySerialized = JSON.stringify(runtimeBoundaryRegistry);
+for (const requiredPhrase of [
+  "installed_app_only",
+  "hidden_in_installed_product",
+  "platform_data_store",
+  "log_store",
+  "agent_workspace",
+  "support_diagnostic",
+  "installer_payload_policy",
+  "agent-platform/configs/agents/"
+]) {
+  if (!runtimeBoundarySerialized.includes(requiredPhrase)) {
+    failures.push(`runtime-data-boundary-registry must include ${requiredPhrase}`);
   }
 }
 

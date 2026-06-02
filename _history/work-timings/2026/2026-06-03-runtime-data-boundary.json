@@ -1,0 +1,30 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-runtime-data-boundary",
+  "work_mode": "governance",
+  "timezone": "Asia/Seoul",
+  "timing_quality": "partial",
+  "phase_timings": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "measurement": "manual_observation",
+      "notes": "Official Tauri, Apple, and Microsoft app data/package boundary sources were checked before local planning."
+    },
+    {
+      "phase": "registry_and_docs",
+      "status": "completed",
+      "measurement": "manual_observation",
+      "notes": "Runtime data boundary registry, product boundary docs, and persistent instruction updates were added."
+    },
+    {
+      "phase": "verification",
+      "status": "pending",
+      "measurement": "not_measured",
+      "notes": "Validation commands will be recorded in the spec validation and evaluation artifacts."
+    }
+  ],
+  "bottleneck_candidates": [
+    "Tauri build can dominate elapsed time during governance-only changes if re-run for full installer confidence."
+  ]
+}

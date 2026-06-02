@@ -1,0 +1,133 @@
+{
+  "initial_instruction": "이 레포지토리는 플랫폼을 만드는 개발 원천으로 쓰되 설치형 고객은 플랫폼 소스코드를 보지 않게 하고, desktop app source 외 runtime data/log/agent work plane을 분리해 계속 축적할 수 있게 하라는 steering.",
+  "result_summary": "Added a runtime data boundary registry, architecture docs, product-boundary and persistent-instruction updates, memory bootstrap anchor, readiness/test checks, requirements/spec/history records, regenerated Workspace Monitor snapshot, and reverified the local Rust/Tauri build path including .app and DMG verification.",
+  "work_mode": "governance",
+  "changed_files": [
+    "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+    "platform-desktop-app/docs/architecture/runtime-data-boundary.ko.md",
+    "platform-desktop-app/docs/architecture/runtime-data-boundary.en.md",
+    "platform-desktop-app/docs/product-boundary.ko.md",
+    "platform-desktop-app/docs/product-boundary.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-03-runtime-data-boundary.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-03-runtime-data-boundary.en.md",
+    "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "_history/web-searches/2026/2026-06-03-runtime-data-boundary.ko.md",
+    "_history/plans/2026/2026-06-03-runtime-data-boundary.ko.md",
+    "_history/evaluations/2026/2026-06-03-runtime-data-boundary-grounding.json",
+    "_history/evaluations/2026/2026-06-03-runtime-data-boundary-omission-input.json",
+    "_history/evaluations/2026/2026-06-03-runtime-data-boundary-resource-input.json",
+    "_history/work-timings/2026/2026-06-03-runtime-data-boundary.json"
+  ],
+  "verification": [
+    "python3 -m json.tool platform-desktop-app/configs/runtime-data-boundary-registry.json: passed",
+    "check-config-contract ../platform-desktop-app/configs/runtime-data-boundary-registry.json: self_documenting",
+    "check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "npm --prefix platform-desktop-app test: 9 passed",
+    "npm --prefix platform-desktop-app run check: ready_for_dependency_install_audit",
+    "cargo test: passed",
+    "cargo build: passed",
+    "npm --prefix platform-desktop-app run tauri:build: passed",
+    "codesign --verify --deep --strict: passed",
+    "hdiutil verify: VALID",
+    "npm --prefix workspace-monitor run check: passed",
+    "npm --prefix workspace-monitor test: 13 passed",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "check-grounding: ready_to_publish",
+    "check-omissions: coverage_ready",
+    "check-resources: resource_ready",
+    "evaluate-work: ready_to_close",
+    "git diff --check: passed"
+  ],
+  "references_checked": [
+    "https://v2.tauri.app/distribute/",
+    "https://v2.tauri.app/reference/config/",
+    "https://v2.tauri.app/plugin/file-system/",
+    "https://developer.apple.com/documentation/security/protecting-user-data-with-app-sandbox",
+    "https://learn.microsoft.com/en-us/windows/apps/develop/data/store-and-retrieve-app-data",
+    "platform-desktop-app/docs/product-boundary.ko.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-03-runtime-data-boundary-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-03-runtime-data-boundary.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-03-runtime-data-boundary.ko.md",
+    "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-03-runtime-data-boundary.ko.md",
+    "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/plan.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-runtime-data-boundary-omission-input.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-runtime-data-boundary.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/user-requests/2026/2026-06-03.en.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-03-runtime-data-boundary.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-03-runtime-data-boundary.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/spec.en.md",
+    "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/tasks.en.md",
+    "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/validation.en.md",
+    "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/traceability.ko.md",
+    "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/traceability.en.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-runtime-data-boundary.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-runtime-data-boundary.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-03-runtime-data-boundary-resource-input.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [
+    "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/tasks.ko.md"
+  ],
+  "known_gaps": [],
+  "validation_limitations": [
+    "Actual OS-aware runtime storage adapter implementation is deferred.",
+    "Public macOS readiness is not claimed because Developer ID signing, notarization, and stapling were not performed."
+  ],
+  "improvement_ideas": [
+    "Implement OS-aware storage adapter for app_data, app_log, app_cache, and agent_workspace.",
+    "Add installer payload scanner for source/private/log exclusion.",
+    "Add redacted support bundle export flow."
+  ]
+}

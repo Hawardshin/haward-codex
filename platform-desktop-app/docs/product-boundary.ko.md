@@ -35,7 +35,12 @@
 ## 핵심 규칙
 
 - 설치형 앱은 레포지토리 개발 환경이 아니다.
+- 이 레포지토리는 플랫폼을 만드는 개발 원천이며, 고객이 설치해서 쓰는 제품은 플랫폼 source tree를 노출하지 않는 앱/런타임/데이터 경계로 배포한다.
+- 사용자 workspace, platform data store, log store, agent workspace는 플랫폼 source code와 분리된 runtime data plane으로 취급한다.
+- agent definition은 `agent-platform/configs/agents/`에 모으고, 설치 앱에서 agent가 실제 작업하는 input/output/log/handoff/temp 파일은 agent workspace plane에 모은다.
+- 로그는 runtime health, task execution, CLI IO, agent work, support diagnostic처럼 분류한 뒤 retention, redaction, support export 정책을 적용한다.
 - 실제 token, webhook URL, browser cookie, private snapshot은 번들에 넣지 않는다.
 - 배포 가능한 앱이라고 부르려면 signing, notarization 또는 OS별 신뢰 체인, 설치/삭제 smoke test, privacy review가 끝나야 한다.
 - Tauri/Electron 중 하나를 설치하기 전에는 dependency audit와 설치 감사 계획을 먼저 남긴다.
 - 설치형 앱은 특정 CLI wrapper가 아니다. 플랫폼이 먼저 실행되는 host runtime이며, 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`에 등록된 guest adapter capability로만 붙인다.
+- 코드/데이터/로그/에이전트 작업영역의 세부 steering은 `platform-desktop-app/configs/runtime-data-boundary-registry.json`을 따른다.

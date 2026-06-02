@@ -66,6 +66,23 @@ test("Claude Code design transfer registry uses public-source boundary", () => {
   assert.ok(registry.transfer_patterns.length >= 8);
 });
 
+test("runtime data boundary separates customer app from platform source", () => {
+  const registry = readJson("configs/runtime-data-boundary-registry.json");
+  const serialized = JSON.stringify(registry);
+
+  assert.equal(registry.customer_visibility_policy.default_customer_visibility, "installed_app_only");
+  assert.match(serialized, /platform source repository/);
+  assert.match(serialized, /hidden_in_installed_product/);
+  assert.match(serialized, /platform_data_store/);
+  assert.match(serialized, /log_store/);
+  assert.match(serialized, /agent_workspace/);
+  assert.match(serialized, /support_diagnostic/);
+  assert.equal(registry.agent_workspace_policy.definition_home, "agent-platform/configs/agents/");
+  assert.ok(registry.log_taxonomy.length >= 5);
+  assert.ok(registry.installer_payload_policy.disallowed.some((item) => item.includes("development repository source tree")));
+  assert.ok(registry.installer_payload_policy.disallowed.some((item) => item.includes("_private/")));
+});
+
 test("user flow exposes AI CLI orchestration and source editing surfaces", () => {
   const registry = readJson("configs/user-flow-registry.json");
   const serialized = JSON.stringify(registry);

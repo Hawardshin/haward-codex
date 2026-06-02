@@ -35,7 +35,12 @@ Add desktop-specific UI or native behavior later when requirements are concrete:
 ## Core Rules
 
 - An installable app is not the same thing as a repository development environment.
+- This repository is the development source for building the platform; the customer product is distributed as an app/runtime/data boundary that does not expose the platform source tree.
+- User workspaces, platform data stores, log stores, and agent workspaces are runtime data planes separated from platform source code.
+- Agent definitions are grouped in `agent-platform/configs/agents/`; runtime agent input/output/log/handoff/temp files belong in the installed app's agent workspace plane.
+- Logs are classified as runtime health, task execution, CLI IO, agent work, or support diagnostic before retention, redaction, and support export policies apply.
 - Do not bundle real tokens, webhook URLs, browser cookies, or private snapshots.
 - A build is not distributable until signing, notarization or OS-specific trust requirements, install/uninstall smoke tests, and privacy review are complete.
 - Before installing Tauri or Electron, record dependency audit and installation-audit plans.
 - The installable app is not a single CLI wrapper. The platform launches first as the host runtime; external CLIs attach only as guest adapter capabilities registered in `agent-platform/configs/integrations/cli-adapter-registry.json`.
+- Follow `platform-desktop-app/configs/runtime-data-boundary-registry.json` for detailed code/data/log/agent workspace steering.

@@ -1,0 +1,104 @@
+{
+  "task": "Ground factual claims for runtime data boundary steering.",
+  "output_summary": "The platform now records a customer-hidden source boundary and separates runtime data, logs, cache, user workspace, and agent workspace planes for installed desktop products.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "tauri-distribute",
+      "source": "https://v2.tauri.app/distribute/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official Tauri documentation for desktop distribution and packaging boundaries."
+    },
+    {
+      "evidence_id": "tauri-config-fs",
+      "source": "https://v2.tauri.app/reference/config/ and https://v2.tauri.app/plugin/file-system/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official Tauri documentation for frontendDist, bundle resources, filesystem permissions, and app data/cache/log directory classes."
+    },
+    {
+      "evidence_id": "os-app-data",
+      "source": "https://developer.apple.com/documentation/security/protecting-user-data-with-app-sandbox and https://learn.microsoft.com/en-us/windows/apps/develop/data/store-and-retrieve-app-data",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official Apple and Microsoft documentation for app containers and app data storage concepts."
+    },
+    {
+      "evidence_id": "runtime-registry",
+      "source": "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Primary registry added by this work and validated by check-config-contract plus readiness tests."
+    },
+    {
+      "evidence_id": "product-docs",
+      "source": "platform-desktop-app/docs/product-boundary.ko.md and platform-desktop-app/docs/architecture/runtime-data-boundary.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Human-readable product and architecture boundary documents updated in the same change set."
+    },
+    {
+      "evidence_id": "validation-output",
+      "source": "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/validation.ko.md",
+      "source_type": "test_result",
+      "checked_on": "2026-06-03",
+      "reliability": "Validation record listing successful JSON, config, memory bootstrap, npm, Cargo, Tauri, codesign, hdiutil, and diff checks."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "Installed customers should use the app, selected workspaces, and runtime data/log/export surfaces without seeing the platform source tree as a product feature.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "runtime-registry",
+        "product-docs"
+      ],
+      "verification_steps": [
+        "Checked customer_visibility_policy.default_customer_visibility.",
+        "Ran platform-desktop-app readiness test for source-hidden tokens."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The registry defines separate runtime planes for app bundle, user workspace, platform data store, log store, agent workspace, and cache store.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "runtime-registry"
+      ],
+      "verification_steps": [
+        "Ran JSON tool and check-config-contract.",
+        "Ran readiness token checks for platform_data_store, log_store, and agent_workspace."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The local Rust/Tauri build path still passes after the governance change.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "validation-output"
+      ],
+      "verification_steps": [
+        "Ran cargo test.",
+        "Ran cargo build.",
+        "Ran npm --prefix platform-desktop-app run tauri:build.",
+        "Ran codesign and hdiutil verify."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Official Tauri, Apple, or Microsoft docs may change after 2026-06-03.",
+    "Actual runtime storage adapter implementation remains a future slice."
+  ],
+  "limitation_notes": [
+    "Public macOS distribution readiness is not claimed because Developer ID signing, notarization, and stapling were not performed.",
+    "No support bundle exporter or installer payload scanner was implemented in this slice."
+  ]
+}

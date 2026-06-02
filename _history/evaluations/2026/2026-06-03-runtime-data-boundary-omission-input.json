@@ -1,0 +1,145 @@
+{
+  "task": "Runtime data boundary close-out check.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "customer-source-hidden-boundary",
+      "description": "Record that installed customers should not see the platform source tree as a product feature.",
+      "source": "user request and REQ-PDA-036",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+        "platform-desktop-app/docs/product-boundary.ko.md",
+        "_docs/instructions/persistent-instructions.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "runtime-data-plane-split",
+      "description": "Separate user workspace, platform data store, log store, cache store, and agent workspace from source folders.",
+      "source": "REQ-PDA-037",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+        "platform-desktop-app/docs/architecture/runtime-data-boundary.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "log-taxonomy",
+      "description": "Classify logs before retention, export, or model ingestion.",
+      "source": "REQ-PDA-038",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "agent-folder-and-runtime-plane",
+      "description": "Group reusable agent definitions under agent registries and keep installed runtime work in an agent workspace plane.",
+      "source": "REQ-PDA-039",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+        "agent-platform/configs/memory/bootstrap-manifest.json",
+        "agent-platform/configs/agents/"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "installer-payload-exclusions",
+      "description": "Exclude development source tree, _private, outputs, unredacted logs, private snapshots, and developer-only snapshots from public product payloads.",
+      "source": "REQ-PDA-040",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "rust-tauri-build-validation",
+      "description": "Keep the local Rust/Tauri build path passing after the steering change.",
+      "source": "user request to build/test locally with Rust",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "cargo test: passed",
+        "cargo build: passed",
+        "npm --prefix platform-desktop-app run tauri:build: passed",
+        "codesign verify: passed",
+        "hdiutil verify: passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+      "purpose": "self-documenting source/runtime data/log/agent boundary registry",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/architecture/runtime-data-boundary.ko.md",
+      "purpose": "human-readable architecture steering",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-03-runtime-data-boundary.ko.md",
+      "purpose": "requirements baseline",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-runtime-data-boundary/spec.ko.md",
+      "purpose": "spec-driven artifact",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "New registry is self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract: self_documenting"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "memory-bootstrap",
+      "description": "New registry is discoverable as a required warm memory anchor.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-memory-bootstrap: ready_to_bootstrap"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "desktop-validation",
+      "description": "Desktop readiness, tests, and Tauri build pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app test: 9 passed",
+        "npm --prefix platform-desktop-app run check: ready_for_dependency_install_audit",
+        "npm --prefix platform-desktop-app run tauri:build: passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Actual OS-aware storage adapter implementation is deferred to the next implementation slice.",
+    "Installer payload scanner and support bundle export UI are defined as future implementation candidates."
+  ],
+  "notes": [
+    "This is a durable steering and validation-gate slice, not the runtime data adapter implementation."
+  ]
+}
