@@ -1,0 +1,26 @@
+{
+  "task_id": "2026-06-02-workspace-platform-philosophy",
+  "selected_mode": "standard",
+  "selected_on": "2026-06-02",
+  "owner_project": "presentation-agent",
+  "reason": "The task creates meaningful durable presentation artifacts, source notes, history, validation, and evaluation, but it does not change shared governance policy.",
+  "web_first_completed": true,
+  "memory_bootstrap_completed": true,
+  "expected_closeout_targets": [
+    "script",
+    "deck_spec",
+    "html_artifact",
+    "source_notes",
+    "web_search_record",
+    "source_provenance",
+    "plan_evidence",
+    "omission_check",
+    "grounding_check",
+    "work_evaluation",
+    "timing_record",
+    "request_trace",
+    "work_summary",
+    "commit",
+    "push"
+  ]
+}

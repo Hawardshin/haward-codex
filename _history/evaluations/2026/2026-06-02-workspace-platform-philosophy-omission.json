@@ -1,0 +1,142 @@
+{
+  "task": "Create a 30-minute platform philosophy presentation script first, then HTML deck.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web_first",
+      "description": "Run web-first intake before planning and implementation.",
+      "source": "AGENTS.md and durable user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-workspace-platform-philosophy.ko.md",
+        "presentation-agent/docs/source-notes/2026-06-02-workspace-platform-philosophy.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "script_first",
+      "description": "Complete the presentation script before building the HTML slides.",
+      "source": "Latest user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "presentation-agent/docs/scripts/2026-06-02-workspace-platform-philosophy.ko.md",
+        "presentation-agent/data/deck-specs/workspace-platform-philosophy.ko.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "thirty_minute_scope",
+      "description": "Prepare a roughly 30-minute presentation.",
+      "source": "Latest user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "presentation-agent/docs/scripts/2026-06-02-workspace-platform-philosophy.ko.md",
+        "presentation-agent/data/deck-specs/workspace-platform-philosophy.ko.json"
+      ],
+      "rationale": "The script is structured as 24 slides at about 70-80 seconds each; actual live timing should be rehearsed before external use."
+    },
+    {
+      "item_id": "philosophy_origin_core_principles",
+      "description": "Cover the platform philosophy, origin problem, causes, design philosophy, and core principles.",
+      "source": "Latest user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "presentation-agent/docs/scripts/2026-06-02-workspace-platform-philosophy.ko.md",
+        "presentation-agent/artifacts/html/workspace-platform-philosophy.html"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "html_deck",
+      "description": "Create the presentation material as HTML after the script.",
+      "source": "Latest user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "presentation-agent/artifacts/html/workspace-platform-philosophy.html",
+        "PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/workspace-platform-philosophy.ko.json presentation-agent/artifacts/html/workspace-platform-philosophy.html"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "discoverability",
+      "description": "Make the new deck easy to find in the presentation project.",
+      "source": "Project usability expectation",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "presentation-agent/README.md",
+        "presentation-agent/artifacts/html/platform-presentation-pack-index.html"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "validation_history_evaluation",
+      "description": "Save validation, source, history, timing, request trace, and evaluation records.",
+      "source": "standard mode close-out policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/evaluations/2026/2026-06-02-workspace-platform-philosophy-grounding.json",
+        "_history/evaluations/2026/2026-06-02-workspace-platform-philosophy-omission.json",
+        "_history/work-timings/2026/2026-06-02-workspace-platform-philosophy.json",
+        "_history/request-traces/2026/2026-06-02-workspace-platform-philosophy.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {"path": "presentation-agent/docs/scripts/2026-06-02-workspace-platform-philosophy.ko.md", "purpose": "Primary Korean presentation script.", "required": true},
+    {"path": "presentation-agent/docs/scripts/2026-06-02-workspace-platform-philosophy.en.md", "purpose": "English companion outline.", "required": true},
+    {"path": "presentation-agent/data/deck-specs/workspace-platform-philosophy.ko.json", "purpose": "Deck spec used by the HTML renderer.", "required": true},
+    {"path": "presentation-agent/artifacts/html/workspace-platform-philosophy.html", "purpose": "Generated HTML presentation deck.", "required": true},
+    {"path": "presentation-agent/docs/source-notes/2026-06-02-workspace-platform-philosophy.ko.md", "purpose": "Source and provenance notes.", "required": true},
+    {"path": "presentation-agent/specs/2026-06-02-workspace-platform-philosophy/spec.ko.md", "purpose": "Spec-driven artifact.", "required": true}
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "html_render",
+      "description": "HTML deck renders from deck spec without validation errors.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["html_deck command exited successfully."],
+      "rationale": ""
+    },
+    {
+      "check_id": "unit_tests",
+      "description": "Presentation-agent Python tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["13 Python tests passed."],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser_tests",
+      "description": "Generated HTML decks pass browser smoke and accessibility tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["26 Playwright tests passed."],
+      "rationale": ""
+    },
+    {
+      "check_id": "visual_smoke",
+      "description": "First slide is visually nonblank and readable.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["/private/tmp/workspace-platform-philosophy.png screenshot inspected."],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "The script timing is estimated; a real 30-minute rehearsal was not run.",
+    "This pass does not create an editable PPTX."
+  ],
+  "notes": [
+    "The task explicitly requested HTML after script, so PPTX remains out of scope.",
+    "External sources are supporting references; internal docs are the primary evidence for platform philosophy."
+  ]
+}

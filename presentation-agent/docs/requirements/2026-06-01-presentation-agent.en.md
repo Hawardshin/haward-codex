@@ -104,6 +104,13 @@ The presentation agent researches strong presentation design, PPT/HTML reference
 - When a LibreOffice-style renderer is unavailable, the agent must not claim high-fidelity PPT/PPTX conversion; it should produce packaged template files, thumbnails, extracted text, provenance, and HTML reference pages.
 - Free template sites with restrictive redistribution terms remain metadata-only or link-only sources unless raw storage permission is clear.
 
+### REQ-PA-017 Platform Philosophy Presentation
+
+- The presentation agent must be able to create a long-form presentation explaining the platform's origin problem, causes, design philosophy, and core principles based on repository conversation summaries, history, philosophy, and operating-model documents.
+- Production order must be script first, then `deck-spec`, then HTML output.
+- Platform philosophy presentations use internal documents as primary evidence and external sources only as supporting references for agent design, tracing, guardrails, AI risk management, and human-centered AI.
+- Outputs must include a script, deck spec, HTML deck, source notes, validation records, and evaluation records.
+
 ## Non-Scope
 
 - Unknown-license, account-gated, redistribution-restricted, and paid template files are not bulk-downloaded.

@@ -62,9 +62,13 @@ presentation-agent/
 - `data/deck-specs/project-agent-platform.ko.json`: `agent-platform` 프로젝트별 발표 deck spec.
 - `data/deck-specs/project-workspace-monitor.ko.json`: `workspace-monitor` 프로젝트별 발표 deck spec.
 - `data/deck-specs/project-presentation-agent.ko.json`: `presentation-agent` 프로젝트별 발표 deck spec.
+- `data/deck-specs/workspace-platform-philosophy.ko.json`: 플랫폼 시작 문제와 설계 철학을 설명하는 30분 발표 deck spec.
 - `artifacts/html/platform-presentation-pack-index.html`: 플랫폼 발표 팩 HTML 인덱스.
+- `artifacts/html/workspace-platform-philosophy.html`: 플랫폼 철학 30분 발표 HTML 덱.
 - `docs/scripts/2026-06-01-platform-presentation-pack.ko.md`: 발표 순서와 사용 가이드.
 - `docs/source-notes/2026-06-01-platform-presentation-pack.ko.md`: 발표 근거와 출처 노트.
+- `docs/scripts/2026-06-02-workspace-platform-philosophy.ko.md`: 플랫폼 철학 발표 스크립트.
+- `docs/source-notes/2026-06-02-workspace-platform-philosophy.ko.md`: 플랫폼 철학 발표 출처 노트.
 
 ## 검증 명령
 
@@ -75,6 +79,7 @@ PYTHONPATH=presentation-agent/src python3 -m presentation_agent.open_template_co
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/presentation-agent-kickoff.ko.json presentation-agent/artifacts/html/presentation-agent-kickoff.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.artifact_pptx presentation-agent/data/deck-specs/presentation-agent-kickoff.ko.json outputs/manual-presentation-agent/presentations/presentation-agent-kickoff --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/workspace-platform-overview.ko.json presentation-agent/artifacts/html/workspace-platform-overview.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
+PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/workspace-platform-philosophy.ko.json presentation-agent/artifacts/html/workspace-platform-philosophy.html
 cd presentation-agent && npm run test:browser
 ```
 
