@@ -17,6 +17,7 @@ test("desktop scaffold has the selected Tauri entry points", () => {
   assert.equal(config.productName, "Agent Workspace Platform");
   assert.equal(config.identifier, "com.personalagentplatform.desktop");
   assert.equal(config.build.frontendDist, "../../workspace-monitor/out");
+  assert.equal(config.app.withGlobalTauri, true);
 });
 
 test("desktop registry points to macOS and Windows execution profiles", () => {
@@ -70,4 +71,17 @@ test("shared CLI adapter registry defines concrete AI CLI targets", () => {
   assert.ok(registry.interactive_cli_contract);
   assert.ok(registry.terminal_io_contract);
   assert.ok(registry.data_accumulation_contract);
+});
+
+test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () => {
+  const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
+  const monitorShell = readFileSync(join(root, "../workspace-monitor/components/MonitorShell.tsx"), "utf8");
+  const viewModes = readJson("../agent-platform/configs/access/view-mode-registry.json");
+
+  for (const commandName of ["list_cli_adapters", "run_cli_adapter_health", "run_all_cli_adapter_health"]) {
+    assert.match(lib, new RegExp(commandName));
+    assert.match(monitorShell, new RegExp(commandName));
+  }
+  assert.match(monitorShell, /DesktopRuntimePanel/);
+  assert.ok(viewModes.modes.every((mode) => mode.allowed_sections.includes("desktop")));
 });

@@ -92,9 +92,22 @@ Tauri desktop shell
 6. Source editor: Monaco 기반 read/write scope, diff/review, save policy를 구현한다.
 7. Data quality layer: terminal-derived records를 reusable knowledge candidate로 승격하는 validation을 붙인다.
 
+## 구현 상태: Supervisor MVP 1
+
+2026-06-02 기준 첫 실제 구현은 1번 slice의 제한된 버전이다.
+
+- `platform-desktop-app/src-tauri/src/lib.rs`가 `claude`, `gemini`, `codex`, `opencode`를 allowlist로 두고 PATH에서 탐지한다.
+- Tauri command는 `list_cli_adapters`, `run_cli_adapter_health`, `run_all_cli_adapter_health`를 제공한다.
+- health check는 각 CLI의 `--version`만 실행한다.
+- stdin은 닫혀 있고, output은 `MAX_HEALTH_OUTPUT_BYTES`로 제한되며, timeout은 `HEALTH_TIMEOUT_MS`로 제한된다.
+- CLI가 없으면 `capability_missing`으로 보고하고 데스크톱 UI는 계속 열린다.
+- `workspace-monitor`의 `Desktop` 탭은 Tauri 런타임에 연결되면 실제 health check를 실행하고, 일반 브라우저에서는 unavailable fallback을 보여준다.
+- health output에서 질문처럼 보이는 라인은 decision prompt 후보로만 표시한다. 실제 pause/resume이나 stdin defer message 전송은 아직 구현하지 않았다.
+
 ## 비범위
 
-- 이번 문서는 실제 CLI 실행 구현이 아니다.
+- 이번 MVP는 long-running CLI task 실행 구현이 아니다.
+- interactive PTY, stdin write, source-affecting command execution은 아직 구현하지 않았다.
 - 실제 Rust/Tauri, xterm.js, Monaco, PTY dependency 설치는 설치 감사 전에는 하지 않는다.
 - provider authentication을 앱이 대신 소유하지 않는다.
 - public installer readiness를 주장하지 않는다.

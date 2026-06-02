@@ -65,8 +65,18 @@ if (tauriConfig.identifier !== "com.personalagentplatform.desktop") {
 if (tauriConfig.build?.frontendDist !== "../../workspace-monitor/out") {
   failures.push("Tauri frontendDist must point at workspace-monitor static output");
 }
+if (tauriConfig.app?.withGlobalTauri !== true) {
+  failures.push("Tauri must expose window.__TAURI__ for the static workspace-monitor desktop bridge");
+}
 if (!tauriConfig.bundle?.targets?.includes("dmg") || !tauriConfig.bundle?.targets?.includes("nsis")) {
   failures.push("Tauri bundle targets must include macOS and Windows installer candidates");
+}
+
+const tauriLib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
+for (const commandName of ["list_cli_adapters", "run_cli_adapter_health", "run_all_cli_adapter_health"]) {
+  if (!tauriLib.includes(commandName)) {
+    failures.push(`src-tauri/src/lib.rs must expose ${commandName}`);
+  }
 }
 
 const desktopRegistry = readJson("configs/desktop-distribution-registry.json");
@@ -86,6 +96,18 @@ const userFlowSerialized = JSON.stringify(userFlowRegistry);
 for (const requiredPhrase of ["ai_cli_orchestration_flow", "Claude Code", "Gemini CLI", "Codex CLI", "OpenCode"]) {
   if (!userFlowSerialized.includes(requiredPhrase)) {
     failures.push(`user-flow-registry must include ${requiredPhrase}`);
+  }
+}
+
+const viewModeRegistry = readJson("../agent-platform/configs/access/view-mode-registry.json");
+if (!JSON.stringify(viewModeRegistry).includes("desktop")) {
+  failures.push("view-mode-registry must expose the desktop runtime section");
+}
+
+const monitorShell = readFileSync(join(root, "../workspace-monitor/components/MonitorShell.tsx"), "utf8");
+for (const requiredPhrase of ["DesktopRuntimePanel", "list_cli_adapters", "run_all_cli_adapter_health", "run_cli_adapter_health"]) {
+  if (!monitorShell.includes(requiredPhrase)) {
+    failures.push(`workspace-monitor MonitorShell must include ${requiredPhrase}`);
   }
 }
 

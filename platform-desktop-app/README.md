@@ -14,6 +14,7 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 - Keep Codex, Claude Code, Cursor, Antigravity, notifications, browser automation, and advanced validators as optional capability cards that can be configured later instead of blocking initial use.
 - Treat Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode as the first concrete AI CLI adapter targets for multi-CLI orchestration, while keeping the app usable when any of them is missing.
 - Model real multi-CLI execution as supervised process lanes with process graph validation, terminal I/O bounds, decision inbox routing, artifact retention, merge gates, and cleanup before any executable implementation.
+- The first implemented supervisor MVP is intentionally narrow: the Tauri backend exposes allowlisted CLI adapter discovery plus bounded `--version` health checks, and the Workspace Monitor exposes them in the `Desktop` tab. Missing CLIs report `capability_missing` and do not block the UI.
 - Keep `agent-platform/` as the Python-first agent/config/evaluation layer.
 - For macOS, treat `configs/macos-execution-profile.json` as the source of truth for local run, internal `.app`, and public signed/notarized distribution structure.
 - For Windows, treat `configs/windows-execution-profile.json` as the source of truth for local run, internal installer testing, public signed distribution, installer format, WebView2, update, uninstall, and smoke-test structure.
@@ -84,6 +85,9 @@ Current verification is scaffold, documentation, and config focused:
 ```bash
 npm --prefix platform-desktop-app run check
 npm --prefix platform-desktop-app test
+npm --prefix workspace-monitor run check
+npm --prefix workspace-monitor test
+npm --prefix workspace-monitor run build
 python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json
 python3 -m json.tool platform-desktop-app/configs/macos-execution-profile.json
 python3 -m json.tool platform-desktop-app/configs/windows-execution-profile.json
@@ -91,6 +95,15 @@ cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-c
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/macos-execution-profile.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/windows-execution-profile.json
 ```
+
+Implemented desktop bridge commands:
+
+- `app_health`
+- `list_cli_adapters`
+- `run_cli_adapter_health`
+- `run_all_cli_adapter_health`
+
+These commands are bounded health checks only. Interactive PTY sessions, stdin writes, long-running source-affecting CLI execution, xterm.js, Monaco Editor, and packaged sidecars still require a dependency and permission audit before implementation.
 
 Planned after installation audit:
 

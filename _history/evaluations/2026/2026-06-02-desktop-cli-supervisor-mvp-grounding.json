@@ -1,0 +1,135 @@
+{
+  "task": "Ground desktop CLI supervisor MVP claims",
+  "output_summary": "The change implements a bounded Tauri CLI adapter health-check bridge and Workspace Monitor Desktop tab for optional Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode setup visibility.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "tauri-config-docs",
+      "source": "https://v2.tauri.app/reference/config/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tauri v2 configuration reference."
+    },
+    {
+      "evidence_id": "tauri-calling-rust",
+      "source": "https://v2.tauri.app/es/develop/calling-rust/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tauri guide for frontend-to-Rust command calls."
+    },
+    {
+      "evidence_id": "tauri-shell-plugin",
+      "source": "https://v2.tauri.app/plugin/shell/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tauri shell plugin documentation used as a boundary reference for future process execution."
+    },
+    {
+      "evidence_id": "xterm-addon-docs",
+      "source": "https://xtermjs.org/docs/guides/using-addons/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official xterm.js addon guide used as future terminal UI reference."
+    },
+    {
+      "evidence_id": "monaco-repo",
+      "source": "https://github.com/microsoft/monaco-editor",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Monaco Editor repository used as future editor reference."
+    },
+    {
+      "evidence_id": "tauri-backend-source",
+      "source": "platform-desktop-app/src-tauri/src/lib.rs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Updated local Rust source for Tauri backend commands."
+    },
+    {
+      "evidence_id": "monitor-source",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Updated local Workspace Monitor source."
+    },
+    {
+      "evidence_id": "test-results",
+      "source": "workspace-monitor and platform-desktop-app verification commands",
+      "source_type": "test_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Local command verification recorded in the validation and evaluation files."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The Tauri backend now exposes commands for listing CLI adapters and running bounded CLI adapter health checks.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-backend-source",
+        "test-results"
+      ],
+      "verification_steps": [
+        "Inspect `platform-desktop-app/src-tauri/src/lib.rs` for `list_cli_adapters`, `run_cli_adapter_health`, and `run_all_cli_adapter_health`.",
+        "Run `npm --prefix platform-desktop-app test`."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The Workspace Monitor includes a Desktop tab that uses the Tauri invoke bridge when available and falls back safely in a regular browser.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-source",
+        "test-results"
+      ],
+      "verification_steps": [
+        "Inspect `workspace-monitor/components/MonitorShell.tsx` for `DesktopRuntimePanel` and `getTauriInvoke`.",
+        "Run `npm --prefix workspace-monitor run check` and `npm --prefix workspace-monitor run build`."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "This change does not implement interactive PTY sessions, stdin writes, long-running CLI task execution, or public macOS installer readiness.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-backend-source",
+        "monitor-source"
+      ],
+      "verification_steps": [
+        "Inspect the backend command list and documentation non-scope sections.",
+        "Confirm no xterm.js, Monaco, or PTY dependencies were added."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The selected external technical references were official Tauri documentation, official xterm.js documentation, and the official Monaco Editor repository.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-config-docs",
+        "tauri-calling-rust",
+        "tauri-shell-plugin",
+        "xterm-addon-docs",
+        "monaco-repo"
+      ],
+      "verification_steps": [
+        "Review `_history/web-searches/2026/2026-06-02-desktop-cli-supervisor-mvp.ko.md`."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Rust compilation was not verified because Rust is not installed on this machine.",
+    "Installed CLI runtime behavior still needs smoke tests on machines where the four CLIs are present."
+  ],
+  "limitation_notes": [
+    "The MVP is limited to PATH detection and version health checks.",
+    "Browser-level visual verification used static build and type/test checks because no callable in-app browser tool was available in this turn."
+  ]
+}

@@ -166,6 +166,7 @@
       "visibility_rules": {
         "foreground": [
           "projects",
+          "desktop runtime status",
           "work summaries",
           "selected history",
           "published artifacts",
@@ -189,6 +190,7 @@
       },
       "allowed_sections": [
         "overview",
+        "desktop",
         "projects",
         "history",
         "documents"
@@ -215,6 +217,7 @@
       "visibility_rules": {
         "foreground": [
           "projects",
+          "desktop runtime status",
           "requirements",
           "specs",
           "agent inventory",
@@ -239,6 +242,7 @@
       },
       "allowed_sections": [
         "overview",
+        "desktop",
         "projects",
         "history",
         "structure",
@@ -269,6 +273,7 @@
       "visibility_rules": {
         "foreground": [
           "all registered projects",
+          "desktop runtime and CLI adapter controls",
           "history and request traces",
           "requirements and specs",
           "agent inventory and runtime status",
@@ -295,6 +300,7 @@
       },
       "allowed_sections": [
         "overview",
+        "desktop",
         "projects",
         "history",
         "structure",

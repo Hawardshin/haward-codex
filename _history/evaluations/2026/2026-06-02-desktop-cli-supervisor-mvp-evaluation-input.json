@@ -1,0 +1,169 @@
+{
+  "initial_instruction": "앞서 설계한 macOS 기본 설치형 다중 CLI 데스크톱 앱을 실제 구현으로 진행하라는 요청. 앱은 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode를 특정 CLI 종속 없이 쉽게 세팅하고 다중 실행할 수 있어야 하며, 이번 구현은 안전하게 시작 가능한 실제 slice를 만들어야 한다.",
+  "result_summary": "Implemented the first bounded desktop supervisor MVP: Tauri now exposes allowlisted CLI adapter discovery and stdin-free `--version` health checks for Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode; Workspace Monitor now has a Desktop tab that calls the Tauri bridge when available, degrades safely in a browser, shows adapter availability/version, health reports, question candidates, and source-editing readiness. Updated view modes, requirements, spec, validation, research, plan, request trace, and close-out records. Interactive PTY, stdin writes, long-running source-affecting CLI execution, xterm.js/Monaco installation, and Rust/Tauri build remain follow-up work.",
+  "work_mode": "governance",
+  "changed_files": [
+    "agent-platform/configs/access/view-mode-registry.json",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md",
+    "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.en.md",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.en.md",
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "platform-desktop-app/src-tauri/tauri.conf.json",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "_requirements/changes/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "_requirements/changes/2026-06-02-desktop-cli-supervisor-mvp.en.md",
+    "_requirements/reviews/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "_requirements/reviews/2026-06-02-desktop-cli-supervisor-mvp.en.md",
+    "_research/topics/desktop-app/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "_research/topics/desktop-app/2026-06-02-desktop-cli-supervisor-mvp.en.md",
+    "_history/web-searches/2026/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "_history/web-searches/2026/2026-06-02-desktop-cli-supervisor-mvp.en.md",
+    "_history/plans/2026/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "_history/plans/2026/2026-06-02-desktop-cli-supervisor-mvp.en.md",
+    "_history/request-traces/2026/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "_history/request-traces/2026/2026-06-02-desktop-cli-supervisor-mvp.en.md",
+    "_history/work-timings/2026/2026-06-02-desktop-cli-supervisor-mvp.json",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/2026/2026-06-02.md",
+    "_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-omission-input.json",
+    "_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-resource-input.json",
+    "_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-cli-pipeline.json",
+    "_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-grounding.json",
+    "_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-evaluation-result.json"
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "npm --prefix workspace-monitor run check: passed",
+    "npm --prefix workspace-monitor test: 10 tests passed",
+    "npm --prefix workspace-monitor run build: completed successfully",
+    "npm --prefix platform-desktop-app test: 7 tests passed",
+    "npm --prefix platform-desktop-app run check: ready_for_dependency_install_audit with Rust toolchain warning",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json: ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/access/view-mode-registry.json ../platform-desktop-app/configs/desktop-distribution-registry.json ../platform-desktop-app/configs/user-flow-registry.json: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-omission-input.json: coverage_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-resource-input.json: resource_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-grounding.json: ready_to_publish",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-cli-pipeline.json: pipeline_ready",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-desktop-cli-supervisor-mvp.json: ready with unmeasured phase warnings",
+    "python3 _tools/naming-audit/src/naming_audit.py --check: clean",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean",
+    "git diff --check: no whitespace errors",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-evaluation-input.json: ready_to_close"
+  ],
+  "references_checked": [
+    "https://v2.tauri.app/reference/config/",
+    "https://v2.tauri.app/es/develop/calling-rust/",
+    "https://v2.tauri.app/plugin/shell/",
+    "https://xtermjs.org/docs/guides/using-addons/",
+    "https://github.com/microsoft/monaco-editor",
+    "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/",
+    "agent-platform/configs/access/view-mode-registry.json"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "_research/topics/desktop-app/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md",
+    "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-02-desktop-cli-supervisor-mvp.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-omission-input.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "_history/web-searches/2026/2026-06-02-desktop-cli-supervisor-mvp.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "_requirements/changes/2026-06-02-desktop-cli-supervisor-mvp.en.md",
+    "_requirements/reviews/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "_requirements/reviews/2026-06-02-desktop-cli-supervisor-mvp.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/plan.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.en.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.en.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "_history/request-traces/2026/2026-06-02-desktop-cli-supervisor-mvp.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-desktop-cli-supervisor-mvp.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-resource-input.json"
+  ],
+  "cli_pipeline_occurred": true,
+  "cli_pipeline_targets": [
+    "_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-cli-pipeline.json"
+  ],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Install Rust through a documented audit and run a real Tauri compile/dev smoke test.",
+    "Add a single-CLI interactive PTY POC with process-group cleanup before enabling stdin writes.",
+    "Run installed-adapter smoke tests on machines with Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode present.",
+    "Add visual Browser verification when the in-app browser automation tool is callable."
+  ]
+}

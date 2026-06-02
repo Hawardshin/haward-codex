@@ -30,3 +30,30 @@ git diff --check
 - `check-resources`: `resource_ready`
 - `check-grounding`: `ready_to_publish`
 - `check-cli-pipeline`: `pipeline_ready`
+
+## Supervisor MVP 1 Additional Validation
+
+```bash
+npm --prefix workspace-monitor run check
+npm --prefix workspace-monitor test
+npm --prefix workspace-monitor run build
+npm --prefix platform-desktop-app test
+npm --prefix platform-desktop-app run check
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/access/view-mode-registry.json ../platform-desktop-app/configs/desktop-distribution-registry.json ../platform-desktop-app/configs/user-flow-registry.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-omission-input.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-resource-input.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-grounding.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-cli-pipeline.json
+python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-desktop-cli-supervisor-mvp.json
+git diff --check
+```
+
+Expected results:
+
+- Workspace Monitor TypeScript check, unit tests, and static build should pass.
+- `platform-desktop-app` Node tests should report 7 tests passed.
+- `platform-desktop-app run check` should remain `ready_for_dependency_install_audit` and may warn that Rust is missing.
+- The view mode registry must include the `desktop` section for every mode.
+- Omission, resource, grounding, and CLI pipeline checks should each be ready.
+- Rust compile, `tauri:dev`, and `tauri:build` are not verified while the Rust toolchain is missing.

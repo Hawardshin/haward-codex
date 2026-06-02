@@ -1,0 +1,292 @@
+{
+  "pipeline_id": "desktop-cli-supervisor-health-check-mvp",
+  "purpose": "Implemented process graph for bounded, stdin-free version health checks across optional Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode adapters in the Tauri desktop shell.",
+  "work_mode": "governance",
+  "risk_level": "medium",
+  "processes": [
+    {
+      "process_id": "claude_code_health",
+      "adapter_id": "claude-code-cli",
+      "command": "claude",
+      "args": [
+        "--version"
+      ],
+      "cwd": "platform-desktop-app",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 3,
+      "max_output_bytes": 20000,
+      "required": false
+    },
+    {
+      "process_id": "gemini_cli_health",
+      "adapter_id": "gemini-cli",
+      "command": "gemini",
+      "args": [
+        "--version"
+      ],
+      "cwd": "platform-desktop-app",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 3,
+      "max_output_bytes": 20000,
+      "required": false
+    },
+    {
+      "process_id": "codex_cli_health",
+      "adapter_id": "codex-cli",
+      "command": "codex",
+      "args": [
+        "--version"
+      ],
+      "cwd": "platform-desktop-app",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 3,
+      "max_output_bytes": 20000,
+      "required": false
+    },
+    {
+      "process_id": "opencode_cli_health",
+      "adapter_id": "opencode-cli",
+      "command": "opencode",
+      "args": [
+        "--version"
+      ],
+      "cwd": "platform-desktop-app",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 3,
+      "max_output_bytes": 20000,
+      "required": false
+    },
+    {
+      "process_id": "desktop_health_report_aggregate",
+      "adapter_id": "platform-desktop-app",
+      "command": "run_all_cli_adapter_health",
+      "args": [],
+      "cwd": "platform-desktop-app",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 4,
+      "max_output_bytes": 100000,
+      "required": true
+    }
+  ],
+  "pipes": [
+    {
+      "pipe_id": "claude_health_to_desktop_report",
+      "from_process": "claude_code_health",
+      "from_stream": "stdout",
+      "to_process": "desktop_health_report_aggregate",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "claude_health_output",
+      "required": false
+    },
+    {
+      "pipe_id": "gemini_health_to_desktop_report",
+      "from_process": "gemini_cli_health",
+      "from_stream": "stdout",
+      "to_process": "desktop_health_report_aggregate",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "gemini_health_output",
+      "required": false
+    },
+    {
+      "pipe_id": "codex_health_to_desktop_report",
+      "from_process": "codex_cli_health",
+      "from_stream": "stdout",
+      "to_process": "desktop_health_report_aggregate",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "codex_health_output",
+      "required": false
+    },
+    {
+      "pipe_id": "opencode_health_to_desktop_report",
+      "from_process": "opencode_cli_health",
+      "from_stream": "stdout",
+      "to_process": "desktop_health_report_aggregate",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "opencode_health_output",
+      "required": false
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "claude_health_output",
+      "kind": "log",
+      "path": "platform-desktop-app/artifacts/desktop-cli-supervisor/claude-health-output.log",
+      "produced_by": "claude_code_health",
+      "consumed_by": [
+        "desktop_health_report_aggregate"
+      ],
+      "required": false,
+      "max_bytes": 20000,
+      "format": "text",
+      "retention_policy": "Health output is runtime UI state and should only become durable when explicitly promoted into a setup validation record.",
+      "cleanup_policy": "Discard stale health output when refreshing adapter state.",
+      "provenance": [
+        "claude --version stdout/stderr"
+      ],
+      "validation": [
+        "Output is bounded.",
+        "Adapter is optional.",
+        "Missing command produces capability_missing."
+      ]
+    },
+    {
+      "artifact_id": "gemini_health_output",
+      "kind": "log",
+      "path": "platform-desktop-app/artifacts/desktop-cli-supervisor/gemini-health-output.log",
+      "produced_by": "gemini_cli_health",
+      "consumed_by": [
+        "desktop_health_report_aggregate"
+      ],
+      "required": false,
+      "max_bytes": 20000,
+      "format": "text",
+      "retention_policy": "Health output is runtime UI state and should only become durable when explicitly promoted into a setup validation record.",
+      "cleanup_policy": "Discard stale health output when refreshing adapter state.",
+      "provenance": [
+        "gemini --version stdout/stderr"
+      ],
+      "validation": [
+        "Output is bounded.",
+        "Adapter is optional.",
+        "Missing command produces capability_missing."
+      ]
+    },
+    {
+      "artifact_id": "codex_health_output",
+      "kind": "log",
+      "path": "platform-desktop-app/artifacts/desktop-cli-supervisor/codex-health-output.log",
+      "produced_by": "codex_cli_health",
+      "consumed_by": [
+        "desktop_health_report_aggregate"
+      ],
+      "required": false,
+      "max_bytes": 20000,
+      "format": "text",
+      "retention_policy": "Health output is runtime UI state and should only become durable when explicitly promoted into a setup validation record.",
+      "cleanup_policy": "Discard stale health output when refreshing adapter state.",
+      "provenance": [
+        "codex --version stdout/stderr"
+      ],
+      "validation": [
+        "Output is bounded.",
+        "Adapter is optional.",
+        "Missing command produces capability_missing."
+      ]
+    },
+    {
+      "artifact_id": "opencode_health_output",
+      "kind": "log",
+      "path": "platform-desktop-app/artifacts/desktop-cli-supervisor/opencode-health-output.log",
+      "produced_by": "opencode_cli_health",
+      "consumed_by": [
+        "desktop_health_report_aggregate"
+      ],
+      "required": false,
+      "max_bytes": 20000,
+      "format": "text",
+      "retention_policy": "Health output is runtime UI state and should only become durable when explicitly promoted into a setup validation record.",
+      "cleanup_policy": "Discard stale health output when refreshing adapter state.",
+      "provenance": [
+        "opencode --version stdout/stderr"
+      ],
+      "validation": [
+        "Output is bounded.",
+        "Adapter is optional.",
+        "Missing command produces capability_missing."
+      ]
+    },
+    {
+      "artifact_id": "health_check_report",
+      "kind": "report",
+      "path": "platform-desktop-app/artifacts/desktop-cli-supervisor/health-check-report.json",
+      "produced_by": "desktop_health_report_aggregate",
+      "consumed_by": [],
+      "required": false,
+      "max_bytes": 100000,
+      "format": "json",
+      "retention_policy": "Health reports are runtime UI state and should only become durable when a validation or setup record explicitly promotes them.",
+      "cleanup_policy": "Discard stale reports when refreshing adapter state.",
+      "provenance": [
+        "Tauri run_all_cli_adapter_health command output"
+      ],
+      "validation": [
+        "Each adapter is optional.",
+        "Missing adapters produce capability_missing.",
+        "Output is bounded before UI display."
+      ]
+    }
+  ],
+  "execution_policy": {
+    "shell_allowed": false,
+    "argv_arrays_required": true,
+    "explicit_pipe_graph_required": true,
+    "explicit_cwd_required": true,
+      "adapter_allowlist": [
+        "claude-code-cli",
+        "gemini-cli",
+        "codex-cli",
+        "opencode-cli",
+        "platform-desktop-app"
+      ]
+  },
+  "safety_controls": [
+    "adapter_allowlist",
+    "argv_arguments",
+    "shell_disabled_by_default",
+    "explicit_cwd_boundary",
+    "environment_allowlist",
+    "secret_redaction",
+    "output_redaction",
+    "permission_scope",
+    "fallback_behavior",
+    "audit_logging"
+  ],
+  "resource_controls": {
+    "timeout_policy": "Each health check uses HEALTH_TIMEOUT_MS and kills the child process after timeout.",
+    "max_output_bytes": 80000,
+    "cancellation_policy": "Health checks are short-lived; timeout kills the child and joins output readers.",
+    "cleanup_policy": "stdin is null, stdout/stderr handles are drained, and no temp files are retained by this MVP.",
+    "orphan_process_policy": "No long-running process lanes are supported in this MVP; future PTY lanes require process-group cleanup.",
+    "backpressure_policy": "stdout/stderr are drained and retained output is bounded by MAX_HEALTH_OUTPUT_BYTES."
+  },
+  "merge_strategy": "The Desktop tab aggregates independent optional health artifacts into one runtime report. There is no downstream source-affecting merge gate in this MVP.",
+  "source_provenance": [
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "_history/web-searches/2026/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "https://v2.tauri.app/es/develop/calling-rust/",
+    "https://v2.tauri.app/reference/config/"
+  ],
+  "plan_evidence": [
+    "The user asked to move from design into actual implementation.",
+    "The existing architecture requires optional adapters and capability_missing fallback.",
+    "A bounded version health check gives real setup visibility without adding PTY or source-affecting execution risk."
+  ],
+  "verification": [
+    "npm --prefix platform-desktop-app test",
+    "npm --prefix platform-desktop-app run check",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-cli-pipeline.json"
+  ],
+  "rollback_plan": [
+    "Remove the Desktop tab from the view mode registry and Workspace Monitor sections if the Tauri bridge causes UI regressions.",
+    "Remove the three CLI health commands from Tauri invoke_handler if the backend bridge regresses desktop startup.",
+    "Keep adapter execution disabled beyond version checks until a separate PTY/source-affecting supervisor POC passes."
+  ],
+  "notes": [
+    "This implemented MVP executes only bounded version checks. It does not execute real coding tasks or write stdin."
+  ]
+}

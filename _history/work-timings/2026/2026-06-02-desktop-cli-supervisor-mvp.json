@@ -1,0 +1,64 @@
+{
+  "task_id": "2026-06-02-desktop-cli-supervisor-mvp",
+  "title": "Desktop CLI supervisor MVP",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked official Tauri, xterm.js, and Monaco sources for the executable MVP boundary."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Memory bootstrap returned ready_to_bootstrap."
+    },
+    {
+      "phase_id": "scope_selection",
+      "label": "Scope selection",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Selected bounded CLI discovery/version health checks instead of interactive PTY execution."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added Tauri CLI adapter health commands, Workspace Monitor Desktop tab, CSS, view mode registry update, readiness checks, and tests."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Ran Workspace Monitor check/test/build, platform desktop tests/readiness, view mode checks, resource, grounding, CLI pipeline, timing, naming, structure, and diff checks."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Prepared omission, resource, grounding, CLI pipeline, request trace, work summary, and evaluator records."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "The main cost was keeping the first implementation useful while avoiding premature PTY, installer, and source-affecting execution risk.",
+    "improvement_candidates": [
+      "Add a deterministic Rust compile gate once the Rust toolchain is installed through an audit record.",
+      "Create a narrow PTY POC spec before adding xterm.js or stdin write support."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "_history/plans/2026/2026-06-02-desktop-cli-supervisor-mvp.ko.md",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md"
+  ]
+}

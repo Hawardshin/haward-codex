@@ -10,6 +10,7 @@
     "frontendDist": "../../workspace-monitor/out"
   },
   "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "label": "main",
@@ -51,4 +52,3 @@
     }
   }
 }
-

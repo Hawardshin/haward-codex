@@ -24,11 +24,20 @@ import {
   ShieldCheck
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot } from "@/lib/snapshot";
 
-type SectionId = "overview" | "projects" | "history" | "structure" | "documents" | "source" | "requirements" | "agents";
+type SectionId =
+  | "overview"
+  | "desktop"
+  | "projects"
+  | "history"
+  | "structure"
+  | "documents"
+  | "source"
+  | "requirements"
+  | "agents";
 
 type Section = {
   id: SectionId;
@@ -38,6 +47,7 @@ type Section = {
 
 const sections: Section[] = [
   { id: "overview", label: "Overview", icon: Activity },
+  { id: "desktop", label: "Desktop", icon: Network },
   { id: "projects", label: "Projects", icon: FolderKanban },
   { id: "history", label: "History", icon: History },
   { id: "structure", label: "Structure", icon: Layers },
@@ -56,7 +66,7 @@ const fallbackViewModes: MonitorViewMode[] = [
     id: "user",
     label: "User View",
     intent: "Stable project, history, and documentation surfaces.",
-    allowedSections: ["overview", "projects", "history", "documents"],
+    allowedSections: ["overview", "desktop", "projects", "history", "documents"],
     visibilityRules: {},
     securityNotes: []
   },
@@ -64,7 +74,7 @@ const fallbackViewModes: MonitorViewMode[] = [
     id: "developer",
     label: "Developer View",
     intent: "Implementation, requirements, specs, agents, and verification surfaces.",
-    allowedSections: ["overview", "projects", "history", "structure", "documents", "source", "requirements", "agents"],
+    allowedSections: ["overview", "desktop", "projects", "history", "structure", "documents", "source", "requirements", "agents"],
     visibilityRules: {},
     securityNotes: []
   },
@@ -72,7 +82,7 @@ const fallbackViewModes: MonitorViewMode[] = [
     id: "superadmin_developer",
     label: "Super Admin Dev",
     intent: "Full owner/operator view for building the platform itself.",
-    allowedSections: ["overview", "projects", "history", "structure", "documents", "source", "requirements", "agents"],
+    allowedSections: ["overview", "desktop", "projects", "history", "structure", "documents", "source", "requirements", "agents"],
     visibilityRules: {},
     securityNotes: []
   }
@@ -122,6 +132,63 @@ const emptyCollaborationBoard: CollaborationBoard = {
   blockers: [],
   nextActions: []
 };
+
+type TauriInvoke = <T>(command: string, args?: Record<string, unknown>) => Promise<T>;
+
+declare global {
+  interface Window {
+    __TAURI__?: {
+      core?: {
+        invoke?: TauriInvoke;
+      };
+    };
+  }
+}
+
+type DesktopHealthStatus = {
+  status: string;
+  shell: string;
+  uiSource: string;
+};
+
+type CliAdapterStatus = {
+  adapterId: string;
+  label: string;
+  command: string;
+  available: boolean;
+  resolvedPath?: string | null;
+  version?: string | null;
+  lastError?: string | null;
+};
+
+type CliDecisionPrompt = {
+  question: string;
+  lane: string;
+  impact: string;
+  deferMessage: string;
+  resumeAction: string;
+};
+
+type CliRunReport = {
+  adapterId: string;
+  label: string;
+  command: string;
+  status: string;
+  exitCode?: number | null;
+  durationMs: number;
+  output: string;
+  stderr: string;
+  decisionPrompts: CliDecisionPrompt[];
+  bounded: boolean;
+  maxOutputBytes: number;
+};
+
+const fallbackDesktopAdapters: CliAdapterStatus[] = [
+  { adapterId: "claude-code-cli", label: "Claude Code CLI", command: "claude", available: false, lastError: "Desktop runtime unavailable." },
+  { adapterId: "gemini-cli", label: "Gemini CLI", command: "gemini", available: false, lastError: "Desktop runtime unavailable." },
+  { adapterId: "codex-cli", label: "Codex CLI", command: "codex", available: false, lastError: "Desktop runtime unavailable." },
+  { adapterId: "opencode-cli", label: "OpenCode", command: "opencode", available: false, lastError: "Desktop runtime unavailable." }
+];
 
 export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [section, setSection] = useState<SectionId>("overview");
@@ -630,6 +697,14 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         </div>
       )}
 
+      {section === "desktop" && (
+        <DesktopRuntimePanel
+          agentCatalogCount={agentCatalog.length}
+          blockedTaskCount={collaborationBoard.summary.blockedTasks}
+          sourceFileCount={visibleSourceFiles.length}
+        />
+      )}
+
       {section === "projects" && (
         <section className="records-grid">
           {snapshot.projects.map((project) => (
@@ -993,6 +1068,285 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       )}
     </main>
   );
+}
+
+function DesktopRuntimePanel({
+  agentCatalogCount,
+  blockedTaskCount,
+  sourceFileCount
+}: {
+  agentCatalogCount: number;
+  blockedTaskCount: number;
+  sourceFileCount: number;
+}) {
+  const [runtimeState, setRuntimeState] = useState<"checking" | "available" | "unavailable">("checking");
+  const [health, setHealth] = useState<DesktopHealthStatus | null>(null);
+  const [adapters, setAdapters] = useState<CliAdapterStatus[]>(fallbackDesktopAdapters);
+  const [reports, setReports] = useState<CliRunReport[]>([]);
+  const [error, setError] = useState("");
+  const [runningAdapterId, setRunningAdapterId] = useState("");
+
+  const invoke = getTauriInvoke();
+  const availableCount = adapters.filter((adapter) => adapter.available).length;
+  const decisionPrompts = reports.flatMap((report) => report.decisionPrompts || []);
+
+  const refreshAdapters = async () => {
+    setError("");
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeState("unavailable");
+      setHealth(null);
+      setAdapters(fallbackDesktopAdapters);
+      return;
+    }
+
+    try {
+      const [nextHealth, nextAdapters] = await Promise.all([
+        tauriInvoke<DesktopHealthStatus>("app_health"),
+        tauriInvoke<CliAdapterStatus[]>("list_cli_adapters")
+      ]);
+      setRuntimeState("available");
+      setHealth(nextHealth);
+      setAdapters(nextAdapters);
+    } catch (caught) {
+      setRuntimeState("unavailable");
+      setHealth(null);
+      setAdapters(fallbackDesktopAdapters);
+      setError(errorMessage(caught));
+    }
+  };
+
+  const runAllHealthChecks = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeState("unavailable");
+      setError("Tauri desktop runtime is not available in this browser view.");
+      return;
+    }
+
+    setRunningAdapterId("all");
+    setError("");
+    try {
+      const nextReports = await tauriInvoke<CliRunReport[]>("run_all_cli_adapter_health");
+      setReports(nextReports);
+      const nextAdapters = await tauriInvoke<CliAdapterStatus[]>("list_cli_adapters");
+      setAdapters(nextAdapters);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setRunningAdapterId("");
+    }
+  };
+
+  const runSingleHealthCheck = async (adapterId: string) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeState("unavailable");
+      setError("Tauri desktop runtime is not available in this browser view.");
+      return;
+    }
+
+    setRunningAdapterId(adapterId);
+    setError("");
+    try {
+      const report = await tauriInvoke<CliRunReport>("run_cli_adapter_health", { adapterId });
+      setReports((current) => [report, ...current.filter((item) => item.adapterId !== report.adapterId)]);
+      const nextAdapters = await tauriInvoke<CliAdapterStatus[]>("list_cli_adapters");
+      setAdapters(nextAdapters);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setRunningAdapterId("");
+    }
+  };
+
+  useEffect(() => {
+    void refreshAdapters();
+  }, []);
+
+  return (
+    <div className="content-grid desktop-grid">
+      <section className="desktop-hero">
+        <div>
+          <p className="eyebrow">Desktop Runtime</p>
+          <h2>다중 CLI 오케스트레이션</h2>
+          <p>
+            설치형 앱 안에서 선택형 AI CLI를 탐지하고 bounded health check를 실행합니다. 현재 구현은 실제 subprocess를
+            실행하되, stdin 없는 version probe와 출력 크기 제한으로 시작합니다.
+          </p>
+        </div>
+        <div className={`desktop-runtime-state state-${runtimeState}`}>
+          <span>{runtimeState}</span>
+          <strong>{availableCount} / {adapters.length}</strong>
+          <small>available adapters</small>
+        </div>
+      </section>
+
+      <section className="metrics-band">
+        <Metric label="CLI Adapters" value={adapters.length} icon={Network} tone="green" />
+        <Metric label="Available" value={availableCount} icon={CheckCircle2} tone="blue" />
+        <Metric label="Decision Items" value={decisionPrompts.length + blockedTaskCount} icon={Inbox} tone="amber" />
+        <Metric label="Agent Configs" value={agentCatalogCount} icon={Bot} tone="violet" />
+        <Metric label="Source Files" value={sourceFileCount} icon={Code2} tone="slate" />
+      </section>
+
+      <section className="panel wide desktop-control-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Supervisor</p>
+            <h2>CLI lane preflight</h2>
+          </div>
+          <div className="desktop-actions">
+            <button type="button" onClick={refreshAdapters} disabled={runningAdapterId !== ""}>
+              <Activity size={16} aria-hidden="true" />
+              <span>Refresh</span>
+            </button>
+            <button type="button" onClick={runAllHealthChecks} disabled={!invoke || runningAdapterId !== ""}>
+              <CheckCircle2 size={16} aria-hidden="true" />
+              <span>{runningAdapterId === "all" ? "Running" : "Run All Checks"}</span>
+            </button>
+          </div>
+        </div>
+
+        {error && <p className="desktop-error">{error}</p>}
+
+        <div className="desktop-health-strip">
+          <article>
+            <span>Shell</span>
+            <strong>{health?.shell || "not connected"}</strong>
+          </article>
+          <article>
+            <span>UI Source</span>
+            <strong>{health?.uiSource || "workspace-monitor"}</strong>
+          </article>
+          <article>
+            <span>Execution Scope</span>
+            <strong>bounded version probes</strong>
+          </article>
+        </div>
+
+        <div className="adapter-grid">
+          {adapters.map((adapter) => {
+            const report = reports.find((item) => item.adapterId === adapter.adapterId);
+            const running = runningAdapterId === adapter.adapterId;
+            return (
+              <article key={adapter.adapterId} className={adapter.available ? "adapter-card available" : "adapter-card missing"}>
+                <header>
+                  <div>
+                    <span>{adapter.adapterId}</span>
+                    <h3>{adapter.label}</h3>
+                  </div>
+                  <strong>{adapter.available ? "available" : "missing"}</strong>
+                </header>
+                <p>
+                  <code>{adapter.command}</code>
+                  {adapter.version ? ` / ${adapter.version}` : ""}
+                </p>
+                <small>{adapter.resolvedPath || adapter.lastError || "No status detail"}</small>
+                <button
+                  type="button"
+                  onClick={() => runSingleHealthCheck(adapter.adapterId)}
+                  disabled={!invoke || runningAdapterId !== "" || !adapter.available}
+                >
+                  <Activity size={15} aria-hidden="true" />
+                  <span>{running ? "Running" : "Health Check"}</span>
+                </button>
+                {report && (
+                  <div className="adapter-report">
+                    <span>{report.status}</span>
+                    <span>{report.durationMs}ms</span>
+                    <span>{report.exitCode ?? "no code"}</span>
+                  </div>
+                )}
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="panel wide terminal-output-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Terminal Output</p>
+            <h2>최근 bounded 실행 결과</h2>
+          </div>
+          <span className="result-count">{reports.length} reports</span>
+        </div>
+        {reports.length === 0 ? (
+          <p className="empty-state">아직 실행한 CLI health check가 없습니다.</p>
+        ) : (
+          <div className="terminal-report-list">
+            {reports.map((report) => (
+              <article key={`${report.adapterId}-${report.durationMs}`}>
+                <header>
+                  <div>
+                    <span>{report.adapterId}</span>
+                    <h3>{report.label}</h3>
+                  </div>
+                  <strong>{report.status}</strong>
+                </header>
+                <pre>
+                  <code>{report.output || report.stderr || "No output"}</code>
+                </pre>
+                {report.stderr && report.output && <small>{report.stderr}</small>}
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section className="panel desktop-decision-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Decision Inbox</p>
+            <h2>CLI 질문 감지</h2>
+          </div>
+          <Inbox size={18} aria-hidden="true" />
+        </div>
+        {decisionPrompts.length === 0 ? (
+          <p className="empty-state">최근 실행에서 사용자 질문으로 보이는 출력은 감지되지 않았습니다.</p>
+        ) : (
+          <div className="stack-list">
+            {decisionPrompts.map((prompt) => (
+              <article key={`${prompt.lane}-${prompt.question}`}>
+                <strong>{prompt.question}</strong>
+                <p>{prompt.impact}</p>
+                <small>{prompt.resumeAction}</small>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section className="panel desktop-source-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Source Editing</p>
+            <h2>편집 surface 상태</h2>
+          </div>
+          <Code2 size={18} aria-hidden="true" />
+        </div>
+        <p>
+          현재 구현은 source viewer와 CLI health execution을 연결한 상태입니다. Monaco 기반 편집은 dependency audit와 파일
+          write/rollback 계약 이후 활성화합니다.
+        </p>
+      </section>
+    </div>
+  );
+}
+
+function getTauriInvoke(): TauriInvoke | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+  return window.__TAURI__?.core?.invoke ?? null;
+}
+
+function errorMessage(caught: unknown) {
+  if (caught instanceof Error) {
+    return caught.message;
+  }
+  return String(caught);
 }
 
 function Metric({ label, value, icon: Icon, tone }: { label: string; value: number; icon: LucideIcon; tone: string }) {

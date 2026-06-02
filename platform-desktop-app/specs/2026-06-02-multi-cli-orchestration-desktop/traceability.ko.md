@@ -11,6 +11,9 @@
 | CLI registry | `agent-platform/configs/integrations/cli-adapter-registry.json` |
 | Desktop registry | `platform-desktop-app/configs/desktop-distribution-registry.json` |
 | User-flow registry | `platform-desktop-app/configs/user-flow-registry.json` |
+| View mode registry | `agent-platform/configs/access/view-mode-registry.json` |
+| Tauri backend | `platform-desktop-app/src-tauri/src/lib.rs` |
+| Desktop UI | `workspace-monitor/components/MonitorShell.tsx` |
 | 웹 검색 기록 | `_history/web-searches/2026/2026-06-02-multi-cli-desktop-orchestration.ko.md` |
 | 평가 입력 | `_history/evaluations/2026/2026-06-02-multi-cli-desktop-orchestration-evaluation-input.json` |
 
@@ -20,4 +23,7 @@
 - `PDA-REQ-014`: multi-CLI supervisor와 process graph.
 - `PDA-REQ-015`: 질문 보류와 decision inbox.
 - `PDA-REQ-016`: terminal output의 structured data 승격.
+- `PDA-REQ-018`: allowlist CLI 탐지와 bounded health/version check.
+- `PDA-REQ-019`: browser fallback degrade.
 - `PDA-UX-009` - `PDA-UX-012`: UI 흐름과 코드 편집 surface.
+- `PDA-UX-013`: Desktop 탭에 runtime, CLI, terminal result, decision prompt, source editing readiness 표시.

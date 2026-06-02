@@ -1,0 +1,158 @@
+{
+  "task": "Desktop CLI supervisor MVP implementation",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "actual-mvp-implementation",
+      "description": "Move beyond design by adding an executable but bounded desktop CLI supervisor slice.",
+      "source": "UR-2026-06-02-048",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "four-cli-adapters",
+      "description": "Expose Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode as configurable optional adapters.",
+      "source": "PDA-REQ-018",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "no-single-cli-dependency",
+      "description": "Missing optional CLIs must degrade to capability_missing and not block the desktop app.",
+      "source": "PDA-REQ-018",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "browser-fallback",
+      "description": "The Workspace Monitor must not crash in a regular browser without Tauri commands.",
+      "source": "PDA-REQ-019",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "desktop-ui-surface",
+      "description": "Add a desktop runtime surface for runtime connection, CLI availability/version, health reports, decision candidates, and source editing readiness.",
+      "source": "PDA-UX-013",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "agent-platform/configs/access/view-mode-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "scope-boundary",
+      "description": "Do not claim interactive PTY, stdin write, long-running CLI task execution, or public macOS readiness.",
+      "source": "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/README.md",
+        "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/src-tauri/src/lib.rs",
+      "purpose": "Tauri backend commands for bounded CLI adapter health checks",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Desktop runtime tab and Tauri bridge UI",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/app/globals.css",
+      "purpose": "Desktop runtime tab styling",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/access/view-mode-registry.json",
+      "purpose": "View mode access to the desktop section",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Run Workspace Monitor type check.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-tests",
+      "description": "Run Workspace Monitor unit tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor test: 10 tests passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-build",
+      "description": "Build the Workspace Monitor static output used by Tauri.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run build: completed successfully"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-desktop-tests",
+      "description": "Run platform desktop readiness tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app test: 7 tests passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-desktop-readiness",
+      "description": "Run platform desktop readiness script.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app run check: ready_for_dependency_install_audit with Rust warning"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Interactive PTY, stdin writes, and source-affecting execution are intentionally deferred."
+  ],
+  "notes": [
+    "This omission record covers the bounded supervisor MVP, not the full multi-CLI orchestration product."
+  ]
+}

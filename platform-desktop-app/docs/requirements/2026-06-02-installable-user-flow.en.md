@@ -20,6 +20,7 @@ These requirements define first-run, home, task execution, decision inbox, setti
 | PDA-UX-010 | The run screen shall show terminal output for multiple CLI lanes while converting durable state into task events, artifacts, decisions, and validation records. | must | run timeline and data accumulation contract |
 | PDA-UX-011 | When a CLI asks a user question, the decision inbox handoff screen shall show the question, impact, default assumption, blocked lane, lanes that can continue, and resume action. | must | decision inbox flow and human decision inbox |
 | PDA-UX-012 | The source editing screen should prefer a validated editor surface such as Monaco Editor and center user mode on safe file scope plus change review. | should | source editor prototype acceptance |
+| PDA-UX-013 | The Desktop tab must show Tauri runtime connection state, CLI adapter availability/version, bounded health-check results, detected CLI questions, and source-editing readiness in one surface. | must | workspace-monitor Desktop tab |
 
 ## Current State
 

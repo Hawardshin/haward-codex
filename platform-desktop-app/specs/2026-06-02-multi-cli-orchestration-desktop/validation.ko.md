@@ -30,3 +30,30 @@ git diff --check
 - `check-resources`: `resource_ready`
 - `check-grounding`: `ready_to_publish`
 - `check-cli-pipeline`: `pipeline_ready`
+
+## Supervisor MVP 1 추가 검증
+
+```bash
+npm --prefix workspace-monitor run check
+npm --prefix workspace-monitor test
+npm --prefix workspace-monitor run build
+npm --prefix platform-desktop-app test
+npm --prefix platform-desktop-app run check
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/access/view-mode-registry.json ../platform-desktop-app/configs/desktop-distribution-registry.json ../platform-desktop-app/configs/user-flow-registry.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-omission-input.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-resource-input.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-grounding.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-02-desktop-cli-supervisor-mvp-cli-pipeline.json
+python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-desktop-cli-supervisor-mvp.json
+git diff --check
+```
+
+예상 결과:
+
+- Workspace Monitor TypeScript check, unit tests, static build가 통과해야 한다.
+- `platform-desktop-app` Node tests는 7 tests passed여야 한다.
+- `platform-desktop-app run check`는 `ready_for_dependency_install_audit`를 유지하되 Rust toolchain warning을 낼 수 있다.
+- view mode registry는 `desktop` section을 모든 mode에 포함해야 한다.
+- omission, resource, grounding, cli pipeline check는 각각 ready 상태여야 한다.
+- Rust compile, `tauri:dev`, `tauri:build`는 Rust toolchain 미설치 상태에서 검증하지 않는다.

@@ -25,6 +25,8 @@ These are the first requirements for turning the platform into installable softw
 | PDA-REQ-015 | When a CLI asks a user question while the user is absent, the app shall send a safe defer message only when supported, pause only the dependent lane, store the decision in the decision inbox, and continue independent work. | must | `ai_cli_orchestration_flow`, human decision inbox, omission check |
 | PDA-REQ-016 | Terminal output shall not be preserved only as raw scrollback; useful output shall become structured task events, process events, artifacts, decision packets, verification records, or reusable knowledge candidates with provenance, redaction, validation, and retention. | must | data accumulation contract, history/evaluation records |
 | PDA-REQ-017 | Source-code editing shall prefer mature open-source editor surfaces such as Monaco Editor before custom editor work, and implementation shall validate file URI/model lifecycle, disposal, workers, and runtime constraints first. | should | architecture doc, dependency audit, UI prototype test |
+| PDA-REQ-018 | The first real supervisor implementation shall provide PATH detection and stdin-free bounded health/version checks only for allowlisted AI CLIs, and missing CLIs shall report `capability_missing`. | must | Tauri commands, Desktop tab, readiness/test |
+| PDA-REQ-019 | The desktop UI shall remain safe to open in a normal browser without the Tauri runtime; CLI execution controls shall degrade to an unavailable fallback. | must | workspace-monitor build, TypeScript check |
 
 ## Current Status
 

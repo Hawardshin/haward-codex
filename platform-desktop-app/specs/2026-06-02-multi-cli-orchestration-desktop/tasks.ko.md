@@ -7,6 +7,9 @@
 - [x] project-local requirements 보강
 - [x] architecture 문서 추가
 - [x] readiness script와 Node test 보강
+- [x] Tauri backend에 `list_cli_adapters`, `run_cli_adapter_health`, `run_all_cli_adapter_health` 구현
+- [x] Workspace Monitor에 Desktop 탭, Tauri invoke bridge, browser fallback 구현
+- [x] view mode registry에 `desktop` section 노출
 - [x] history, omission, resource, grounding, evaluation 기록 생성
-- [ ] 실제 CLI execution supervisor 구현은 후속 스펙에서 진행
+- [ ] interactive PTY/stdin 기반 CLI task supervisor 구현은 후속 스펙에서 진행
 - [ ] xterm.js/Monaco/PTY dependency 설치는 설치 감사 후 진행

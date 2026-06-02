@@ -1,0 +1,91 @@
+{
+  "task": "Desktop CLI supervisor MVP resource review",
+  "work_mode": "governance",
+  "runtime_context": [
+    "Tauri command bridge",
+    "bounded child process health check",
+    "Workspace Monitor static UI",
+    "future long-running CLI lanes"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "health-check-child-process",
+      "category": "process",
+      "description": "CLI health checks spawn child processes and could hang or remain running.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The backend runs only allowlisted commands with `--version`, closes stdin, applies a 2500 ms timeout, kills the child on timeout, and records missing commands as capability_missing.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "bounded-output-growth",
+      "category": "stream",
+      "description": "Version commands can still emit unexpected stdout or stderr.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "stdout and stderr readers drain the process streams and retain only up to MAX_HEALTH_OUTPUT_BYTES for the report.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "browser-fallback-runtime",
+      "category": "worker",
+      "description": "The Monitor UI can be loaded outside Tauri, where desktop commands are unavailable.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The UI checks for `window.__TAURI__.core.invoke` before calling backend commands and shows an unavailable fallback if no bridge exists.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "bounded-health-command-lifecycle",
+      "resource": "child process for CLI version health check",
+      "create_path": "run_bounded_command spawns an allowlisted executable with version_args and stdin null",
+      "cleanup_path": "child exits normally or is killed after timeout; stdout/stderr reader threads are joined",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "npm --prefix platform-desktop-app test: 7 tests passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "health-output-bound",
+      "metric": "retained stdout/stderr bytes per health check",
+      "tool": "source and readiness test inspection",
+      "threshold": "MAX_HEALTH_OUTPUT_BYTES is 20000 bytes per stream reader retention path",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "rust-runtime-smoke",
+      "metric": "compiled Tauri runtime process lifecycle",
+      "tool": "tauri dev/build",
+      "threshold": "Requires Rust toolchain and documented installation audit",
+      "required": false,
+      "status": "deferred",
+      "evidence": [],
+      "rationale": "Rust is not installed on this machine, and the task did not authorize dependency or toolchain installation."
+    }
+  ],
+  "notes": [
+    "Future interactive PTY and long-running CLI lanes need separate process-group, cancellation, and memory measurements."
+  ]
+}

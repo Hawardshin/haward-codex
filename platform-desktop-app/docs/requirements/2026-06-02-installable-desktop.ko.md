@@ -25,6 +25,8 @@
 | PDA-REQ-015 | CLI가 사용자 질문을 만들고 사용자가 부재 중이면 앱은 안전한 defer message를 보낼 수 있는 경우에만 보내고, dependent lane만 멈추며, 결정 항목을 decision inbox에 저장하고, 독립 작업은 계속해야 한다. | must | `ai_cli_orchestration_flow`, human decision inbox, omission check |
 | PDA-REQ-016 | 터미널 output은 raw scrollback으로만 보존하지 않고, task event, process event, artifact, decision packet, verification, reusable knowledge candidate로 구조화해 provenance, redaction, validation, retention을 기록해야 한다. | must | data accumulation contract, history/evaluation records |
 | PDA-REQ-017 | 소스코드 편집은 처음부터 직접 구현하지 않고 Monaco Editor 같은 성숙한 오픈소스 editor surface를 우선 검토해야 하며, 파일 URI/model lifecycle, dispose, worker/runtime 제약을 구현 전에 검증해야 한다. | should | architecture doc, dependency audit, UI prototype test |
+| PDA-REQ-018 | 첫 실제 supervisor 구현은 allowlist된 AI CLI에 대해서만 PATH 탐지와 stdin 없는 bounded health/version check를 제공하고, 누락된 CLI는 `capability_missing`으로 표시해야 한다. | must | Tauri commands, Desktop tab, readiness/test |
+| PDA-REQ-019 | desktop UI는 Tauri runtime이 없을 때도 브라우저에서 안전하게 열려야 하며, CLI 실행 기능은 unavailable fallback으로 degrade해야 한다. | must | workspace-monitor build, TypeScript check |
 
 ## 현재 상태
 

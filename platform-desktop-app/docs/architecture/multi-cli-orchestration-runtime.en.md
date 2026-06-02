@@ -92,9 +92,22 @@ Vector DB is not the default. File-system indexes and structured JSON/Markdown c
 6. Source editor: implement Monaco-based read/write scope, diff/review, and save policy.
 7. Data quality layer: validate terminal-derived records before promoting them to reusable knowledge candidates.
 
+## Implementation Status: Supervisor MVP 1
+
+As of 2026-06-02, the first real implementation is a constrained version of slice 1.
+
+- `platform-desktop-app/src-tauri/src/lib.rs` allowlists `claude`, `gemini`, `codex`, and `opencode` and detects them on PATH.
+- Tauri exposes `list_cli_adapters`, `run_cli_adapter_health`, and `run_all_cli_adapter_health`.
+- Health checks run only each CLI's `--version`.
+- stdin is closed, output is bounded by `MAX_HEALTH_OUTPUT_BYTES`, and runtime is bounded by `HEALTH_TIMEOUT_MS`.
+- Missing CLIs are reported as `capability_missing` and do not block the desktop UI.
+- The Workspace Monitor `Desktop` tab runs the real health checks when connected to Tauri and shows an unavailable fallback in a regular browser.
+- Question-like health output is surfaced only as a decision prompt candidate. Real pause/resume and stdin defer-message sending are not implemented yet.
+
 ## Non-Scope
 
-- This document does not implement CLI execution.
+- This MVP does not implement long-running CLI task execution.
+- Interactive PTY, stdin writes, and source-affecting command execution are not implemented yet.
 - Rust/Tauri, xterm.js, Monaco, and PTY dependencies are not installed before installation audit.
 - The app does not own provider authentication for users.
 - This does not claim public installer readiness.
