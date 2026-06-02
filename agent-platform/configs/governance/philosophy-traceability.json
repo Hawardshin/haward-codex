@@ -163,7 +163,8 @@
     "P12-human-final-authority",
     "P13-autonomy-needs-reversibility",
     "P14-security-privacy-first",
-    "P15-operating-cost-and-debt"
+    "P15-operating-cost-and-debt",
+    "P16-prohibition-is-not-goal"
   ],
   "principles": [
     {
@@ -719,6 +720,48 @@
         {
           "command": "python3 _tools/work-timer/src/work_timer.py check <timing-record.json>",
           "validates": "Meaningful work can expose slow phases and bottleneck candidates."
+        }
+      ]
+    },
+    {
+      "id": "P16-prohibition-is-not-goal",
+      "title": "Prohibition is not a behavior goal",
+      "philosophy_sources": [
+        {
+          "path": "_philosophy/agent-operating-philosophy.ko.md",
+          "section": "16. 금지는 행동 목표가 아니다"
+        }
+      ],
+      "execution_targets": [
+        {
+          "path": "agent-platform/configs/usage/ai-usage-gap-profile.json",
+          "target_type": "config",
+          "role": "Defines prohibition-only instruction rewriting into positive behavior contracts, allowed actions, replacement actions, and validation gates."
+        },
+        {
+          "path": "_ops/workflows/59-bridge-ai-usage-gap.md",
+          "target_type": "workflow",
+          "role": "Applies prohibition-to-positive conversion when an AI-use gap appears during work."
+        },
+        {
+          "path": "_ops/prompts/89-bridge-ai-usage-gap.md",
+          "target_type": "prompt",
+          "role": "Gives reusable prompt instructions for converting negative constraints into affirmative, checkable task briefs."
+        },
+        {
+          "path": "_docs/operating-models/ai-usage-gap-operating-model.ko.md",
+          "target_type": "docs",
+          "role": "Explains why prohibition-heavy instructions should become explicit target behavior and enforcement paths."
+        }
+      ],
+      "validation_targets": [
+        {
+          "command": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/ai-usage-gap-profile.json",
+          "validates": "The AI usage gap profile keeps the prohibition rewrite contract self-documenting."
+        },
+        {
+          "command": "PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-trace configs/governance/philosophy-traceability.json",
+          "validates": "The prohibition principle remains mapped from philosophy to executable structure."
         }
       ]
     }

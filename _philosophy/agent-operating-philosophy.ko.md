@@ -74,6 +74,14 @@ AI가 잘하는 일 중 하나는 흩어진 말, 긴 문서, 조사 자료, 리�
 
 모든 것을 매번 full loop로 돌리면 플랫폼이 무거워진다. 반대로 빠른 임시 처리만 쌓이면 agentic technical debt가 된다. 작업 모드, deferred backlog, naming audit, structure audit, workspace-health는 속도와 품질 사이의 균형을 운영하기 위한 장치다.
 
+### 16. 금지는 행동 목표가 아니다
+
+AI는 금지 문장을 사람처럼 안정적인 규범으로 이해한다고 가정하면 안 된다. `하지 마라`, `절대 하지 마라`, `피해라`, `no X` 같은 금지형 지시는 모델이 피해야 할 대상을 오히려 문맥 안에 강하게 남기고, 긴 작업 중에는 제약이 약해질 수 있다.
+
+따라서 금지형 지시는 그대로 믿지 않는다. 금지가 필요한 경우에는 먼저 원하는 행동, 허용된 행동, 대체 행동, 출력 계약, 검증 또는 강제 게이트로 바꾼다. 금지는 긍정형 실행 계약이 선명해진 뒤 경계 메모로만 둔다.
+
+보안, 개인정보, 배포, 비용, 파괴적 변경처럼 위험한 영역에서는 프롬프트 금지만으로 충분하지 않다. allowlist, schema, permission gate, privacy audit, evaluator, test, rollback 같은 구조적 장치로 검증 가능하게 만들어야 한다.
+
 ## 이 철학이 연결되는 실행 구조
 
 - 철학 원칙 추적: `agent-platform/configs/governance/philosophy-traceability.json`
@@ -93,3 +101,4 @@ AI가 잘하는 일 중 하나는 흩어진 말, 긴 문서, 조사 자료, 리�
 - 작업 시간과 병목 기록: `_ops/workflows/42-record-work-timing.md`, `_history/work-timings/`
 - 작업 모드와 부채 관리: `agent-platform/configs/workflows/work-mode-registry.json`, `_ops/backlog/`
 - 구조와 이름 감사: `_tools/structure-audit/`, `_tools/naming-audit/`, `_tools/workspace-health/`
+- 금지형 지시 변환: `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`

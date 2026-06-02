@@ -1,0 +1,148 @@
+{
+  "task": "Ground prohibition-to-positive close-out claims.",
+  "output_summary": "The workspace now treats prohibition-heavy instructions as fragile controls and rewrites them into positive behavior contracts with verification gates.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "user_request_summary",
+      "source": "_history/user-requests/2026/2026-06-02.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Durable summary of the user's prohibition-related instruction."
+    },
+    {
+      "evidence_id": "usage_profile",
+      "source": "agent-platform/configs/usage/ai-usage-gap-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local source of truth for AI usage gap contracts."
+    },
+    {
+      "evidence_id": "philosophy_doc",
+      "source": "_philosophy/agent-operating-philosophy.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local source of truth for platform operating philosophy."
+    },
+    {
+      "evidence_id": "trace_registry",
+      "source": "agent-platform/configs/governance/philosophy-traceability.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local philosophy traceability registry."
+    },
+    {
+      "evidence_id": "workflow_prompt",
+      "source": "_ops/workflows/59-bridge-ai-usage-gap.md and _ops/prompts/89-bridge-ai-usage-gap.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local workflow and prompt sources."
+    },
+    {
+      "evidence_id": "openai_prompt_help",
+      "source": "https://help.openai.com/en/articles/6654000-how-to-prompt-chatgpt",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official OpenAI prompt guidance."
+    },
+    {
+      "evidence_id": "openai_cookbook_prompting",
+      "source": "https://cookbook.openai.com/examples/gpt4-1_prompting_guide",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official OpenAI Cookbook guidance."
+    },
+    {
+      "evidence_id": "negation_benchmark",
+      "source": "https://arxiv.org/abs/2310.15941",
+      "source_type": "paper",
+      "checked_on": "2026-06-02",
+      "reliability": "Research paper about negation benchmark challenges for LLMs."
+    },
+    {
+      "evidence_id": "naysayers_paper",
+      "source": "https://aclanthology.org/2023.starsem-1.10/",
+      "source_type": "paper",
+      "checked_on": "2026-06-02",
+      "reliability": "Peer-reviewed ACL Anthology paper about language model behavior on negation benchmarks."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The user asked to account for the idea that AI does not understand prohibitions.",
+      "claim_type": "user_instruction",
+      "support_level": "supported",
+      "evidence_ids": [
+        "user_request_summary"
+      ],
+      "verification_steps": [
+        "Inspect UR-2026-06-02-038 in the user request summary."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The AI usage gap profile now includes a prohibition rewrite contract.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "usage_profile"
+      ],
+      "verification_steps": [
+        "Inspect prohibition_rewrite_contract in ai-usage-gap-profile.json."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The operating philosophy now includes the principle that prohibition is not a behavior goal.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "philosophy_doc",
+        "trace_registry"
+      ],
+      "verification_steps": [
+        "Inspect principle 16 in the philosophy document and P16 in philosophy-traceability.json."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The workflow and prompt now direct agents to rewrite prohibition-heavy instructions into positive target behavior, allowed actions, replacement action, examples, and verification or enforcement gates.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "workflow_prompt"
+      ],
+      "verification_steps": [
+        "Inspect _ops/workflows/59-bridge-ai-usage-gap.md and _ops/prompts/89-bridge-ai-usage-gap.md."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Official prompt guidance and negation research support the cautious rule that prohibition-only prompts should not be relied on as stable behavior control.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "openai_prompt_help",
+        "openai_cookbook_prompting",
+        "negation_benchmark",
+        "naysayers_paper"
+      ],
+      "verification_steps": [
+        "Inspect the saved web search record and linked sources."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "The rule does not claim that models can never process negation. It states that prohibition-only instructions are fragile controls and should be rewritten plus structurally verified."
+  ],
+  "limitation_notes": [
+    "_private contents were not inspected.",
+    "No new prompt linter was added in this change."
+  ]
+}

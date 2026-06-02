@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-06-01",
   "name": "ai-usage-gap-profile",
-  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: question and instruction quality, bounded clarification, non-blocking clarification, human decision inbox, interrupt/resume, model-adaptive prompting, task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
+  "purpose": "Defines how agents should diagnose and reduce the gap between weak and strong AI usage: question and instruction quality, prohibition-only instruction rewriting, bounded clarification, non-blocking clarification, human decision inbox, interrupt/resume, model-adaptive prompting, task-fit judgment, context quality, iteration, verification, reusable workflows, appropriate reliance, and learning loops.",
   "reader_guide": {
     "summary": "Use this profile when a user asks how to use AI better, when an AI-assisted task is vague, when outputs repeatedly miss intent, or when the platform should coach a user from one-off prompting toward reliable workflows.",
     "how_to_read": [
@@ -9,6 +9,7 @@
       "Use observed_gap_patterns to classify the user's current AI-use friction without blame.",
       "Use strong_user_behaviors as target behaviors to reinforce.",
       "Use bridge_interventions to choose the smallest useful improvement.",
+      "Use prohibition_rewrite_contract when a request relies on 'do not', 'never', 'avoid', or other prohibition-only wording that should become a positive behavior contract.",
       "Use agent_response_contract to shape how the assistant should help in the current task.",
       "Use non_blocking_clarification_policy when a pending answer should block only a specific decision, not the whole task.",
       "Use human_decision_inbox_policy when multiple human decisions should be collected, answered later, and resumed through an interrupt-safe workflow."
@@ -21,7 +22,8 @@
       "A new workflow, prompt, tool, or skill is added to help users use AI better.",
       "The platform's coaching, clarification, or evaluation behavior changes.",
       "The model capability profile or two-pass prompting policy changes.",
-      "The clarification question budget, question format, convergence rule, blocked-decision isolation, non-blocking progress rule, human decision inbox, or interrupt/resume rule changes."
+      "The clarification question budget, question format, convergence rule, blocked-decision isolation, non-blocking progress rule, human decision inbox, or interrupt/resume rule changes.",
+      "The user states that AI does not understand prohibitions or asks to convert negative constraints into stronger operating structure."
     ]
   },
   "reference_links": [
@@ -140,9 +142,32 @@
       "used_for": [
         "clear instructions",
         "separating instructions from context",
-        "desired output format examples"
+        "desired output format examples",
+        "saying what to do instead of only saying what not to do"
       ],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "arxiv_negation_benchmark_2023",
+      "title": "This is not a Dataset: A Large Negation Benchmark to Challenge Large Language Models",
+      "url": "https://arxiv.org/abs/2310.15941",
+      "source_type": "paper",
+      "used_for": [
+        "LLM negation understanding limitations",
+        "persistent generalization challenges with negative sentences"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "acl_language_models_not_naysayers",
+      "title": "Language models are not naysayers: an analysis of language models on negation benchmarks",
+      "url": "https://aclanthology.org/2023.starsem-1.10/",
+      "source_type": "paper",
+      "used_for": [
+        "LLM limitations on negation benchmarks",
+        "insensitivity to negation and failure to reason under negation"
+      ],
+      "last_checked": "2026-06-02"
     },
     {
       "id": "anthropic_clear_direct",
@@ -441,6 +466,17 @@
       ]
     },
     {
+      "id": "prohibition_only_instructions_need_positive_contracts",
+      "rule": "If an instruction mainly says what the model must not do, rewrite it into a positive target behavior, allowed actions, replacement action, output contract, and verification or enforcement gate before relying on it.",
+      "reason": "Official prompt guidance recommends saying what to do instead of only saying what not to do, and negation benchmarks show that LLMs can be unreliable with negative constraints.",
+      "applies_to": [
+        "bad_instruction_patterns",
+        "prohibition_rewrite_contract",
+        "instruction_rewrite_contract",
+        "agent_response_contract"
+      ]
+    },
+    {
       "id": "probabilistic_models_need_precise_context",
       "rule": "Treat LLM outputs as probabilistic completions conditioned on the prompt; improve the conditioning with clear goals, context, constraints, examples, output format, and verification path.",
       "reason": "Better questions and instructions shift the model toward more useful output distributions.",
@@ -498,6 +534,11 @@
       "required": true
     },
     {
+      "field": "prohibition_rewrite_contract",
+      "meaning": "How to convert prohibition-only or negative constraints into positive behavior contracts and validation gates.",
+      "required": true
+    },
+    {
       "field": "bounded_clarification_policy",
       "meaning": "Question budget, priority rules, and convergence options for ambiguous instructions.",
       "required": true
@@ -526,6 +567,7 @@
   "trigger_situations": [
     "The user asks why some people use AI well and others do not.",
     "The user says questions or instructions must be improved before AI can answer well.",
+    "The user says AI does not understand prohibitions or that prohibition-only instructions should not be trusted.",
     "The user says vague or poor instructions should cause the AI to ask clarifying counter-questions.",
     "The user says unanswered clarification questions block too much work or create an AI-era bottleneck.",
     "The user wants pending questions collected in one place and resumed when the human returns.",
@@ -587,6 +629,16 @@
         "not asking for alternatives or counterarguments"
       ],
       "first_intervention": "Rewrite the task neutrally, state assumptions, ask for evidence and counterevidence, and separate facts from preferences."
+    },
+    {
+      "id": "prohibition_only_instruction",
+      "symptom": "The request relies on 'do not', 'never', 'avoid', 'no X', or similar negative constraints without saying the desired behavior, replacement behavior, or validation gate.",
+      "likely_root_causes": [
+        "assuming the model treats negative constraints as hard rules",
+        "not providing a target behavior to move toward",
+        "no deterministic gate or output contract to catch violations"
+      ],
+      "first_intervention": "Convert the prohibition into positive target behavior, allowed actions, replacement actions, examples, and verification or enforcement checks."
     },
     {
       "id": "no_output_contract",
@@ -682,6 +734,7 @@
   "strong_user_behaviors": [
     "Defines task outcome, audience, constraints, input data, and success criteria.",
     "Writes neutral instructions that ask for evidence, alternatives, counterarguments, and uncertainty when the topic is debatable.",
+    "Pairs negative constraints with explicit positive target behavior, replacement actions, and verification gates.",
     "Specifies output contract: format, depth, tone, exclusions, examples, acceptance criteria, and verification path.",
     "Uses AI for exploration, drafting, critique, transformation, automation planning, and verification support instead of only final-answer generation.",
     "Decomposes large work into plan, evidence, implementation, validation, and evaluation steps.",
@@ -777,6 +830,21 @@
       ]
     },
     {
+      "id": "prohibition_to_positive_contract",
+      "use_when": [
+        "prohibition_only_instruction",
+        "bad_or_biased_instruction",
+        "no_output_contract"
+      ],
+      "action": "Translate each prohibition into what should happen instead, what actions are allowed, what replacement action to use when the forbidden case appears, and which check catches violations.",
+      "output_artifacts": [
+        "positive behavior contract",
+        "allowed action list",
+        "replacement action map",
+        "validation or enforcement gate"
+      ]
+    },
+    {
       "id": "task_fit_check",
       "use_when": [
         "poor_task_fit_judgment",
@@ -858,6 +926,7 @@
     "Do not merely answer vague AI-use questions; convert them into a reusable operating pattern when the request is durable.",
     "When the user seems blocked by low AI literacy, improve the task shape first: goal, context, constraints, examples, criteria, verification.",
     "When the user's instruction is biased or leading, rewrite it neutrally before execution and preserve the user's intent separately from factual claims.",
+    "When the user's instruction is prohibition-heavy, do not rely on the prohibition alone; convert it into a positive target behavior, allowed actions, replacement action, examples, and verification gate.",
     "When the user implies the LLM should simply know the truth, briefly apply the probabilistic model framing and add grounding or verification.",
     "When the user or task depends on model capability, classify the model as reasoning, general/non-reasoning, weak, or uncertain; choose a model-adaptive prompting strategy rather than using one universal prompt loop.",
     "When using a weak, non-reasoning, or uncertain model on a high-variance task and cost/latency allow, run two independent attempts or a draft-critique-revise loop, compare conflicts, merge supported parts, and verify claims before treating the result as reliable.",
@@ -901,6 +970,7 @@
     "Many LLMs generate by selecting likely next tokens from a probability distribution, so wording, order, examples, and constraints materially affect outputs.",
     "A fluent answer is not proof that the claim is true.",
     "Bias in the prompt can amplify biased or one-sided outputs.",
+    "Negative constraints and negation can be fragile; a prohibition is more reliable when paired with an affirmative target and a checkable boundary.",
     "Prompt quality does not replace verification; it improves the chance that the output is useful and checkable.",
     "Different model families and capability levels can require different prompting strategies.",
     "Two-pass or multi-sample prompting can improve high-variance tasks, but it is a reliability tactic, not evidence by itself."
@@ -995,6 +1065,12 @@
       "rewrite_rule": "Provide examples, style constraints, quality bar, target user, and review checklist."
     },
     {
+      "id": "prohibition_only_constraint",
+      "example": "Do not do the wrong thing.",
+      "problem": "Names what to avoid but does not define the desired behavior, allowed path, replacement action, or validation gate.",
+      "rewrite_rule": "State the desired behavior, allowed actions, fallback/replacement action, examples, and the check that catches violations."
+    },
+    {
       "id": "unsupported_factual_claim",
       "example": "Use the latest numbers and explain the trend.",
       "problem": "Requests factual claims without source, date, region, definition, or citation requirements.",
@@ -1013,6 +1089,7 @@
     "Context: what source material, constraints, and prior decisions matter?",
     "Task role: should AI search, draft, critique, compare, calculate, code, verify, or ask questions?",
     "Output contract: format, length/depth, tone, examples, exclusions, and acceptance criteria.",
+    "Positive behavior: if the instruction contains a prohibition, what should the model do instead and how will compliance be checked?",
     "Neutrality: does the prompt ask for evidence and alternatives instead of confirming a preferred answer?",
     "Verification: what sources, tests, citations, screenshots, calculations, or human review are required?",
     "Uncertainty: what should be marked as assumption, unknown, or needs user decision?"
@@ -1021,6 +1098,7 @@
     "rewrite_sequence": [
       "Preserve the user's real goal.",
       "Remove leading, biased, or unsupported factual framing.",
+      "Convert prohibition-only or negative constraints into positive target behavior, allowed actions, replacement action, and a checkable boundary.",
       "Add missing context, constraints, output contract, and acceptance criteria.",
       "Separate facts, assumptions, preferences, and open questions.",
       "Add verification requirements proportionate to risk.",
@@ -1033,8 +1111,35 @@
       "constraints",
       "output_format",
       "acceptance_criteria",
+      "positive_target_behavior",
       "evidence_or_verification",
       "assumptions_or_questions"
+    ]
+  },
+  "prohibition_rewrite_contract": {
+    "principle": "Treat prohibition-only instructions as weak guidance unless they are paired with affirmative target behavior and a checkable boundary.",
+    "rewrite_steps": [
+      "Extract each negative constraint or forbidden behavior.",
+      "Name the positive behavior the agent should produce instead.",
+      "Define allowed actions and allowed outputs.",
+      "Define the replacement action to take when the forbidden case appears.",
+      "Add examples that show compliant behavior when useful.",
+      "Add a validation, evaluator, allowlist, schema, or tool gate when the risk is material.",
+      "Keep the original prohibition only as a boundary note after the positive behavior is clear."
+    ],
+    "minimum_fields": [
+      "negative_constraint",
+      "positive_target_behavior",
+      "allowed_actions",
+      "replacement_action",
+      "examples_when_useful",
+      "verification_or_enforcement"
+    ],
+    "anti_patterns": [
+      "stacking many 'do not' rules without a target behavior",
+      "naming the forbidden content repeatedly in long context",
+      "treating hidden UI, prompt text, or a natural-language prohibition as a security boundary",
+      "using a prohibition to replace source checks, tests, schema validation, permission gates, or privacy audits"
     ]
   },
   "bounded_clarification_policy": {

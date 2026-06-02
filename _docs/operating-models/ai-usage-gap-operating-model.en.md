@@ -63,6 +63,23 @@ Common bad instructions:
 These instructions should be rewritten into neutral prompts with goal, context, constraints, output format, success criteria, and verification path before execution.
 The rewrite should preserve the user's real goal while separating factual claims from preferences and making alternatives, counterevidence, and uncertainty checkable.
 
+## Prohibition-To-Positive Instruction Principle
+
+The statement “AI does not understand prohibitions” matters operationally. More precisely, agents should not assume an LLM will always process a prohibition as a stable behavior rule. Negative instructions can keep the avoided concept salient in context, and long or complex work can weaken constraints.
+
+Convert prohibition-heavy instructions in this sequence:
+
+1. Extract the forbidden behavior or content.
+2. State the desired positive behavior.
+3. Define allowed actions and allowed outputs.
+4. Define the replacement action when the forbidden case appears.
+5. Add good/bad examples when useful.
+6. For material risk, add a schema, allowlist, evaluator, test, privacy audit, permission gate, or other enforcement mechanism.
+
+For example, `Do not read sensitive files` becomes: “When sensitive information is needed, do not open `_private/` directly; request a redacted extract first. Direct inspection requires one-time permission for the exact path and purpose. Run privacy audit to confirm generated maps and snapshots exclude the content.”
+
+Prohibitions do not disappear. They become boundary notes after the positive execution contract is clear. Security, privacy, cost, publication, and destructive changes should be controlled structurally, not only through prompt wording.
+
 ## Clarifying Questions And Question Budget
 
 Vague instructions should not always be guessed through. If the missing goal, context, constraints, output contract, or success criteria would materially change the result, the agent should ask clarifying counter-questions first.
@@ -134,5 +151,6 @@ Operating rules:
 - Do not stop the whole task while waiting for a clarification answer. Isolate only the dependent decision as `blocked_decision` and continue unaffected work as `unblocked_work`.
 - Collect multiple pending answer items in the human decision inbox, then checkpoint current work and interrupt/resume by priority and risk when the human answers.
 - Rewrite biased or conclusion-seeking instructions by separating the user's intent from factual claims and neutralizing the task.
+- Convert prohibition-heavy instructions into positive behavior, allowed scope, replacement action, and verification or enforcement gates.
 - For high-risk or preference-sensitive ambiguity, use `clarification_needed`.
 - Effective AI-use patterns should not remain in chat; they should become repository assets.

@@ -1,0 +1,148 @@
+{
+  "task": "Convert prohibition-heavy instructions into positive behavior contracts.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web_first",
+      "description": "Run web-first intake and record a public search summary before local planning.",
+      "source": "AGENTS.md and user durable rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-prohibition-to-positive-constraints.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "requirement_baseline",
+      "description": "Capture the durable instruction as a workspace platform requirement.",
+      "source": "UR-2026-06-02-038 / REQ-WS-078",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_requirements/changes/2026-06-02-prohibition-to-positive-constraints.ko.md",
+        "_requirements/reviews/2026-06-02-prohibition-to-positive-constraints.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "positive_contract_config",
+      "description": "Add a self-documenting config contract for rewriting prohibition-only instructions.",
+      "source": "REQ-WS-078",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/usage/ai-usage-gap-profile.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "philosophy_and_traceability",
+      "description": "Reflect the rule in foundational philosophy and philosophy traceability.",
+      "source": "REQ-WS-078",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_philosophy/agent-operating-philosophy.ko.md",
+        "agent-platform/configs/governance/philosophy-traceability.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "workflow_prompt_memory",
+      "description": "Update executable workflow, prompt, persistent instructions, and memory bootstrap so future work does not rely on chat memory.",
+      "source": "persistent instruction rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_ops/workflows/59-bridge-ai-usage-gap.md",
+        "_ops/prompts/89-bridge-ai-usage-gap.md",
+        "_docs/instructions/persistent-instructions.ko.md",
+        "AGENTS.md",
+        "agent-platform/configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "history_and_evaluation",
+      "description": "Record request summary, plan, trace, timing, omission, grounding, evaluation, and work summary.",
+      "source": "governance work mode",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/user-requests/2026/2026-06-02.ko.md",
+        "_history/plans/2026/2026-06-02-prohibition-to-positive-constraints.ko.md",
+        "_history/request-traces/2026/2026-06-02-prohibition-to-positive-constraints.ko.md",
+        "_history/work-timings/2026/2026-06-02-prohibition-to-positive-constraints.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/usage/ai-usage-gap-profile.json",
+      "purpose": "Source of truth for AI usage gap and prohibition rewrite contracts.",
+      "required": true
+    },
+    {
+      "path": "_philosophy/agent-operating-philosophy.ko.md",
+      "purpose": "Foundational Korean philosophy source.",
+      "required": true
+    },
+    {
+      "path": "_philosophy/agent-operating-philosophy.en.md",
+      "purpose": "English companion philosophy source.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/governance/philosophy-traceability.json",
+      "purpose": "Traceability registry for philosophy execution targets.",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-02-prohibition-to-positive-constraints/validation.ko.md",
+      "purpose": "Validation record for this governance change.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config_contract",
+      "description": "Changed shared configs remain self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract: self_documenting"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "philosophy_trace",
+      "description": "Philosophy traceability registry remains valid.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-philosophy-trace: ready"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "memory_bootstrap",
+      "description": "Memory bootstrap remains ready after rule updates.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-memory-bootstrap: ready_to_bootstrap"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "The rule is a governance contract, not a deterministic proof that every future prompt will avoid prohibition-only wording.",
+    "The implementation does not add a new linter for all prompt files; this is recorded as an improvement candidate."
+  ],
+  "notes": [
+    "_private contents were not inspected."
+  ]
+}

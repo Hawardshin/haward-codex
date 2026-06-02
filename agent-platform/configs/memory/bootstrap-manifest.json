@@ -627,9 +627,9 @@
       "used_for": [
         "foundational worldview behind repository operations",
         "search, validation, planning, evaluation, autonomy, reversibility, privacy, and debt principles",
-        "repetitive-human-work reduction, elapsed-time reduction, and human-process automation boundaries"
+        "repetitive-human-work reduction, elapsed-time reduction, human-process automation boundaries, and prohibition-to-positive behavior contracts"
       ],
-      "last_checked": "2026-06-01"
+      "last_checked": "2026-06-02"
     },
     {
       "id": "philosophy_traceability",
@@ -731,10 +731,11 @@
         "diagnosing gaps between weak and strong AI use",
         "task framing, task-fit checks, iteration, verification, and durable asset promotion",
         "rewriting vague, biased, leading, or unverifiable instructions into neutral task briefs",
+        "converting prohibition-only instructions into positive target behavior, allowed actions, replacement action, and verification gates",
         "bounded clarification budget, prioritized counter-questions, and convergence rules for vague instructions",
         "model capability classification and weak/non-reasoning model two-pass compare/merge strategy"
       ],
-      "last_checked": "2026-06-01"
+      "last_checked": "2026-06-02"
     },
     {
       "id": "unstructured_data_structuring_profile",
@@ -1005,8 +1006,8 @@
     },
     {
       "id": "ai_usage_gap_profile_must_stay_discoverable",
-      "rule": "The AI usage gap profile must remain a warm memory anchor so future sessions can diagnose weak AI usage as a workflow/context/verification/iteration/tooling gap, rewrite poor instructions into neutral task briefs, ask bounded clarification questions for materially vague instructions, isolate pending-answer dependencies as blocked_decision, continue safe unblocked_work, collect multiple human decisions in an inbox, choose model-adaptive retry strategies, and promote useful patterns into durable assets.",
-      "reason": "The user asked to understand why some people use AI well and others do not, then reflect gap-closing behavior, prompt quality, bounded clarification, non-blocking clarification, human decision inbox, interrupt/resume, and model-specific retry strategy into the platform.",
+      "rule": "The AI usage gap profile must remain a warm memory anchor so future sessions can diagnose weak AI usage as a workflow/context/verification/iteration/tooling gap, rewrite poor instructions into neutral task briefs, convert prohibition-only instructions into positive behavior contracts and verification gates, ask bounded clarification questions for materially vague instructions, isolate pending-answer dependencies as blocked_decision, continue safe unblocked_work, collect multiple human decisions in an inbox, choose model-adaptive retry strategies, and promote useful patterns into durable assets.",
+      "reason": "The user asked to understand why some people use AI well and others do not, then reflect gap-closing behavior, prompt quality, prohibition handling, bounded clarification, non-blocking clarification, human decision inbox, interrupt/resume, and model-specific retry strategy into the platform.",
       "applies_to": [
         "startup_sequence",
         "required_anchor_ids",
@@ -1785,7 +1786,7 @@
       "id": "agent_operating_philosophy",
       "path": "_philosophy/agent-operating-philosophy.ko.md",
       "tier": "warm",
-      "purpose": "Foundational agent operating philosophy for search, skepticism, evaluation, autonomy, reversibility, privacy, operating debt, repetitive-work reduction, and human-process automation boundaries.",
+      "purpose": "Foundational agent operating philosophy for search, skepticism, evaluation, autonomy, reversibility, privacy, operating debt, repetitive-work reduction, human-process automation boundaries, and prohibition-to-positive instruction contracts.",
       "required": true,
       "load_order": 9
     },
@@ -1857,7 +1858,7 @@
       "id": "ai_usage_gap_profile",
       "path": "agent-platform/configs/usage/ai-usage-gap-profile.json",
       "tier": "warm",
-      "purpose": "AI usage gap diagnosis, prompt instruction quality, bounded clarification, non-blocking clarification, human decision inbox, interrupt/resume, and model-adaptive prompting profile for task framing, neutral instruction rewriting, blocked-decision isolation, unblocked-work continuation, weak/non-reasoning model two-pass compare/merge, task-fit judgment, iteration, verification, and durable asset promotion.",
+      "purpose": "AI usage gap diagnosis, prompt instruction quality, prohibition-only instruction rewriting, bounded clarification, non-blocking clarification, human decision inbox, interrupt/resume, and model-adaptive prompting profile for task framing, neutral instruction rewriting, blocked-decision isolation, unblocked-work continuation, weak/non-reasoning model two-pass compare/merge, task-fit judgment, iteration, verification, and durable asset promotion.",
       "required": true,
       "load_order": 24
     },

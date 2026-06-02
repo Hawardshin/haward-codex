@@ -22,6 +22,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - `global_pause_on_clarification`
    - `scattered_human_decisions`
    - `bad_or_biased_instruction`
+   - `prohibition_only_instruction`
    - `no_output_contract`
    - `deterministic_truth_machine_assumption`
    - `single_shot_oracle_use`
@@ -38,6 +39,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - non-blocking progress
    - decision inbox interrupt/resume
    - bias neutralization
+   - prohibition-to-positive contract
    - task-fit check
    - iteration scaffold
    - model-adaptive retry
@@ -51,30 +53,36 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
    - never treat repeated agreement as proof without source, test, tool, evaluator, or human verification.
 8. Apply the smallest useful intervention to the current task.
 9. If the instruction is biased, leading, or asks to prove a preferred conclusion, rewrite it neutrally before execution and separate user preference from factual claims.
-10. If the user treats the LLM as a deterministic truth machine, add a short probabilistic-model note and attach sources, tests, or uncertainty labels.
-11. If the instruction has no output contract, add the expected format, depth, exclusions, acceptance criteria, and review method.
-12. If missing information would materially change the result, apply the bounded clarification policy:
+10. If the instruction mainly says what not to do, convert the prohibition into:
+   - the positive behavior to produce;
+   - allowed actions and allowed outputs;
+   - replacement action when the forbidden case appears;
+   - examples when useful;
+   - validation, evaluator, allowlist, schema, permission, privacy, test, or rollback gate when the risk is material.
+11. If the user treats the LLM as a deterministic truth machine, add a short probabilistic-model note and attach sources, tests, or uncertainty labels.
+12. If the instruction has no output contract, add the expected format, depth, exclusions, acceptance criteria, and review method.
+13. If missing information would materially change the result, apply the bounded clarification policy:
    - ask usually one clarification round and at most two;
    - ask no more than three prioritized questions per round;
    - ask only questions with clear decision impact;
    - include assumptions or recommended defaults when useful.
-13. If the user does not answer or the request remains vague after the budget, converge through one of:
+14. If the user does not answer or the request remains vague after the budget, converge through one of:
    - reasonable assumption with verification path;
    - option-based default;
    - reversible ship-first-then-confirm draft;
    - explicit defer/`clarification_needed` when proceeding would be unsafe.
-14. If a user answer is pending, split the task:
+15. If a user answer is pending, split the task:
    - `blocked_decision`: the exact decision, artifact, or action that depends on the answer;
    - `unblocked_work`: research, source collection, option comparison, drafts, tests, validation, documentation, and risk analysis that can continue safely;
    - `assumptions`: explicit assumptions/defaults used while waiting;
    - `resume_action`: how to merge or correct the work after the answer arrives.
-15. Do not pause the whole task unless every meaningful next step depends on the answer or proceeding would be unsafe.
-16. If there are multiple pending human decisions, or if the answer should trigger a later resume, use `_ops/workflows/61-human-decision-inbox.md` and register the decision in `_ops/coordination/human-decision-inbox.json`.
-17. When a human answer arrives, checkpoint current work before interrupting, then run the recorded `resume_action` or schedule it for the next safe point.
-18. If the lesson is reusable, save it as a prompt, workflow, template, tool, skill, config, operating model, or history note.
-19. If ambiguity is high-risk or user-preference-sensitive, use spec/source reconciliation or `clarification_needed`, but keep the question set short and decision-focused.
-20. Ground factual claims before close-out.
-21. Evaluate whether the intervention actually reduced the gap against the initial request.
+16. Do not pause the whole task unless every meaningful next step depends on the answer or proceeding would be unsafe.
+17. If there are multiple pending human decisions, or if the answer should trigger a later resume, use `_ops/workflows/61-human-decision-inbox.md` and register the decision in `_ops/coordination/human-decision-inbox.json`.
+18. When a human answer arrives, checkpoint current work before interrupting, then run the recorded `resume_action` or schedule it for the next safe point.
+19. If the lesson is reusable, save it as a prompt, workflow, template, tool, skill, config, operating model, or history note.
+20. If ambiguity is high-risk or user-preference-sensitive, use spec/source reconciliation or `clarification_needed`, but keep the question set short and decision-focused.
+21. Ground factual claims before close-out.
+22. Evaluate whether the intervention actually reduced the gap against the initial request.
 
 ## Output Contract
 
@@ -82,6 +90,7 @@ AI를 잘 쓰는 사람과 잘 못 쓰는 사람의 차이를 진단하고, 현�
 - Bridge intervention chosen and why.
 - Model capability classification and retry strategy when relevant.
 - Rewritten instruction when the original instruction was vague, biased, or missing an output contract.
+- Prohibition rewrite record when the instruction relied on negative constraints: positive target behavior, allowed actions, replacement action, and verification/enforcement gate.
 - Clarification questions asked, budget used, assumptions/defaults selected, or deferral reason when relevant.
 - Pending-answer handling when relevant: `blocked_decision`, `unblocked_work`, `assumptions`, and `resume_action`.
 - Human decision inbox updates when relevant: inbox item IDs, interrupt policy, checkpoint summary, resume action taken or scheduled.

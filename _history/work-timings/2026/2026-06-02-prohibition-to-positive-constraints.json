@@ -1,0 +1,70 @@
+{
+  "task_id": "2026-06-02-prohibition-to-positive-constraints",
+  "title": "Prohibition-to-positive instruction contracts",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked OpenAI prompt guidance and negation research before local planning."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Memory bootstrap returned ready_to_bootstrap before edits."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added REQ-WS-078 and spec artifacts."
+    },
+    {
+      "phase_id": "policy_config_docs",
+      "label": "Policy, config, philosophy, and workflow updates",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added the positive behavior contract rule across AI usage gap profile, philosophy, traceability, persistent instructions, workflow, and prompt."
+    },
+    {
+      "phase_id": "history_evaluation",
+      "label": "History and evaluation records",
+      "status": "completed",
+      "measurement": "not_measured"
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "JSON checks, config contract, philosophy trace, memory bootstrap, docs audit, workspace-index check, task-board check, work-timer check, omissions, grounding, workspace-health, evaluator, and diff check passed."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Completed by the final close-out commit and push."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "The main cost is propagating one durable governance rule through requirements, config, philosophy, workflows, prompts, memory bootstrap, specs, and close-out records.",
+    "improvement_candidates": [
+      "Create a governance-rule propagation scaffold for repeated durable instruction changes.",
+      "Add a small checker that flags prohibition-only prompt examples without a positive replacement action."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-prohibition-to-positive-constraints.ko.md",
+    "_history/plans/2026/2026-06-02-prohibition-to-positive-constraints.ko.md",
+    "_specs/workspace-platform/2026-06-02-prohibition-to-positive-constraints/plan.ko.md"
+  ]
+}

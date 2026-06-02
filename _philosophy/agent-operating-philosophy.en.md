@@ -74,6 +74,14 @@ Tokens, personal data, private research, and local scratch state should not be p
 
 Running the full loop for everything makes the platform heavy. Accumulating fast temporary work creates agentic technical debt. Work modes, deferred backlogs, naming audit, structure audit, and workspace-health exist to manage the tradeoff between speed and quality.
 
+### 16. Prohibition Is Not A Behavior Goal
+
+Do not assume AI understands prohibition statements as stable human norms. Instructions such as `do not`, `never`, `avoid`, or `no X` can keep the avoided concept salient in context, and constraints can weaken during long work.
+
+Therefore, prohibition-heavy instructions should not be trusted as-is. When a prohibition matters, first convert it into desired behavior, allowed behavior, replacement action, output contract, and verification or enforcement gates. Keep the prohibition only as a boundary note after the positive execution contract is clear.
+
+For security, privacy, publication, cost, destructive changes, or other risky areas, prompt-level prohibition is not enough. The platform should use structural controls such as allowlists, schemas, permission gates, privacy audits, evaluators, tests, and rollback paths.
+
 ## Execution Structures Connected To This Philosophy
 
 - Philosophy principle traceability: `agent-platform/configs/governance/philosophy-traceability.json`
@@ -93,3 +101,4 @@ Running the full loop for everything makes the platform heavy. Accumulating fast
 - Work timing and bottlenecks: `_ops/workflows/42-record-work-timing.md`, `_history/work-timings/`
 - Work modes and debt management: `agent-platform/configs/workflows/work-mode-registry.json`, `_ops/backlog/`
 - Structure and naming audits: `_tools/structure-audit/`, `_tools/naming-audit/`, `_tools/workspace-health/`
+- Prohibition-to-positive instruction conversion: `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`
