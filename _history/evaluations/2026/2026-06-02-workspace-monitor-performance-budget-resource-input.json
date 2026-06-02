@@ -1,0 +1,93 @@
+{
+  "task": "Improve Workspace Monitor speed and verify static output with browser automation.",
+  "work_mode": "standard",
+  "runtime_context": [
+    "nextjs",
+    "react",
+    "browser-fetch",
+    "static-http-server",
+    "playwright",
+    "node-script"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "snapshot-fetch",
+      "category": "network_connection",
+      "description": "The UI now fetches the large workspace snapshot as a separate JSON resource.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The fetch is one-shot in SnapshotLoader with cancellation guard on unmount and uses no recurring timers or retained handles.",
+      "evidence": [
+        "workspace-monitor/components/SnapshotLoader.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "static-server-smoke",
+      "category": "process",
+      "description": "Verification started a local static HTTP server.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The server was run in a tracked exec session and stopped with Ctrl-C after Playwright verification.",
+      "evidence": [
+        "python3 -m http.server 3008 --bind 127.0.0.1 --directory workspace-monitor/out"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "playwright-browser",
+      "category": "browser_context",
+      "description": "Verification launched a headless browser.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The Playwright script explicitly closed the browser after the smoke check.",
+      "evidence": [
+        "Playwright smoke output"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "snapshot-loader-lifecycle",
+      "resource": "browser fetch",
+      "create_path": "SnapshotLoader fetches /workspace-snapshot.json during mount.",
+      "cleanup_path": "The effect sets a cancellation flag on unmount and does not retain interval/timer resources.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/components/SnapshotLoader.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "verification-server-stopped",
+      "resource": "local static HTTP server",
+      "create_path": "python3 -m http.server 3008",
+      "cleanup_path": "Sent Ctrl-C to the tracked exec session after smoke completion.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "server session exited after Keyboard interrupt"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "chunk-budget",
+      "metric": "largest built JavaScript chunk",
+      "tool": "npm --prefix workspace-monitor run perf:budget",
+      "threshold": "largest chunk <= 1,000,000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "largestChunk.bytes = 227537"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No new long-running production worker, polling loop, or subprocess was added."
+  ]
+}

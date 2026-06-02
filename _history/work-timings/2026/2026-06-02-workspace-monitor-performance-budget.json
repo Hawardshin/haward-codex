@@ -1,0 +1,58 @@
+{
+  "task_id": "2026-06-02-workspace-monitor-performance-budget",
+  "title": "Improve Workspace Monitor speed and add performance budget",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "web search and memory bootstrap",
+      "status": "completed",
+      "duration_seconds": 240,
+      "measurement": "estimated",
+      "bottleneck_notes": "Checked Next.js and React official performance references before local analysis."
+    },
+    {
+      "phase_id": "analysis",
+      "label": "build output and source sampling",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "Measured a 6,224,897 byte client JS chunk caused by the generated snapshot static import."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "loader, dynamic import, deferred search, performance budget",
+      "status": "completed",
+      "duration_seconds": 600,
+      "measurement": "estimated",
+      "bottleneck_notes": "The main change was separating snapshot data from client code while preserving static export."
+    },
+    {
+      "phase_id": "verification",
+      "label": "check, tests, build, budget, static smoke",
+      "status": "completed",
+      "duration_seconds": 360,
+      "measurement": "estimated",
+      "bottleneck_notes": "Verification included generated snapshot churn and static browser smoke."
+    },
+    {
+      "phase_id": "documentation",
+      "label": "requirements, specs, traces, evaluation",
+      "status": "completed",
+      "duration_seconds": 540,
+      "measurement": "estimated",
+      "bottleneck_notes": "Repository governance records add overhead but make the performance budget durable."
+    }
+  ],
+  "bottleneck_candidates": [
+    {
+      "phase_id": "implementation",
+      "reason": "Static-export compatibility required public JSON fetch while preserving existing MonitorShell behavior."
+    },
+    {
+      "phase_id": "documentation",
+      "reason": "Bilingual traceability and evaluation records are required for meaningful work."
+    }
+  ]
+}

@@ -1,5 +1,3 @@
-import snapshotJson from "@/src/generated/workspace-snapshot.json";
-
 export type WorkspaceStats = {
   projects: number;
   agents: number;
@@ -263,8 +261,6 @@ export type WorkspaceSnapshot = {
     checklist: string[];
   };
 };
-
-export const snapshot = snapshotJson as WorkspaceSnapshot;
 
 export function formatDate(value: string) {
   if (!value || value.startsWith("1970-")) {

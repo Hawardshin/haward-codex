@@ -26,6 +26,7 @@
 | REQ-WM-013 | The UI shall show which work lane each agent is moving through and which task/project each agent is connected to through a collaboration board and flow map. | must | Check snapshot `collaborationBoard`, Agents UI collaboration lanes/flow, and `npm run build` |
 | REQ-WM-014 | The web UI should allow a subtly cute, quietly delightful visual tone while preserving operational density and trust. | should | Check UI tone policy, `globals.css`, and `npm run build` |
 | REQ-WM-015 | The web UI shall read `agent-platform/configs/access/language-mode-registry.json` and allow selecting all-language, Korean-only, and English-only document views, applying the same language lens to documents, history, and summary counts. | must | Check snapshot `languageModeCatalog`, the language selector, `npm run collect`, `npm test`, `npm run check`, and `npm run build` |
+| REQ-WM-016 | The web UI shall not embed the large workspace snapshot directly in the client JavaScript bundle, and shall provide a regression check that keeps initial JavaScript chunks within the performance budget. | must | Check `npm run build`, `npm run perf:budget`, and static Playwright smoke |
 
 ## Scope
 
@@ -39,6 +40,7 @@
 - Developer/superadmin read-only source-code viewer
 - Agent collaboration lanes, agent-task-project flow map, and blocker/next-action display
 - Small accents and micro-interactions that do not weaken operational readability
+- Public JSON fetching for the large snapshot, lazy loading for `MonitorShell`, and JavaScript chunk performance-budget checks
 - Vercel deployment docs
 
 ## Non-Goals

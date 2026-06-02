@@ -1,7 +1,5 @@
-import { MonitorShell } from "@/components/MonitorShell";
-import { snapshot } from "@/lib/snapshot";
+import { SnapshotLoader } from "@/components/SnapshotLoader";
 
 export default function Home() {
-  return <MonitorShell snapshot={snapshot} />;
+  return <SnapshotLoader />;
 }
-

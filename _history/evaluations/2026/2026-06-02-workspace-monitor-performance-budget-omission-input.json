@@ -1,0 +1,123 @@
+{
+  "task": "Improve Workspace Monitor speed and keep it fast through a performance budget.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Check current Next.js/React performance references before implementation.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-workspace-monitor-performance-budget.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "large-scope-decomposition",
+      "description": "Narrow the broad performance request to representative measured bottlenecks.",
+      "source": "large-scope rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/plans/2026/2026-06-02-workspace-monitor-performance-budget.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "snapshot-not-bundled",
+      "description": "Remove the large generated workspace snapshot from the client JavaScript bundle.",
+      "source": "REQ-WM-016",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/lib/snapshot.ts",
+        "workspace-monitor/components/SnapshotLoader.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "search-responsiveness",
+      "description": "Reduce search-triggered render work and avoid source content scanning outside the Source tab.",
+      "source": "performance analysis",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "performance-budget",
+      "description": "Add a repeatable performance budget check for built JavaScript chunks.",
+      "source": "REQ-WM-016",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/check-performance-budget.mjs",
+        "workspace-monitor/package.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "workspace-monitor/components/SnapshotLoader.tsx",
+      "purpose": "Client loader and dynamic MonitorShell import.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/scripts/check-performance-budget.mjs",
+      "purpose": "Performance budget regression check.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/specs/2026-06-02-performance-budget/spec.ko.md",
+      "purpose": "Performance budget spec.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-check-test-build",
+      "description": "Run type check, unit tests, and production build.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check",
+        "npm --prefix workspace-monitor test",
+        "npm --prefix workspace-monitor run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "performance-budget",
+      "description": "Run the new performance budget check after build.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run perf:budget",
+        "largest JS chunk 227,537 bytes under 1,000,000 byte budget"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "static-smoke",
+      "description": "Open the static export and confirm snapshot fetch plus main UI rendering.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 -m http.server 3008 --bind 127.0.0.1 --directory workspace-monitor/out",
+        "Playwright smoke confirmed Workspace Monitor, Desktop, and /workspace-snapshot.json fetch"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Snapshot JSON itself remains about 6MB and can be optimized in a later slice.",
+    "This slice does not perform a full React component decomposition."
+  ],
+  "notes": [
+    "Largest chunk before the change was 6,224,897 bytes; largest chunk after the change is 227,537 bytes."
+  ]
+}

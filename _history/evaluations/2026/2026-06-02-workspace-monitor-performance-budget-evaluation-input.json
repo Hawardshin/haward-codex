@@ -1,0 +1,149 @@
+{
+  "initial_instruction": "속도개선 및 코드를 전체적으로 분석해서 빠른 속도 유지해줘",
+  "result_summary": "Improved Workspace Monitor initial-load performance by removing the generated snapshot static import from client JavaScript, adding a fetch-based SnapshotLoader with dynamic MonitorShell loading, deferring search work, skipping source-content scan outside the Source tab, and adding a performance budget regression check.",
+  "work_mode": "standard",
+  "changed_files": [
+    "workspace-monitor/app/page.tsx",
+    "workspace-monitor/components/SnapshotLoader.tsx",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/lib/snapshot.ts",
+    "workspace-monitor/next.config.mjs",
+    "workspace-monitor/package.json",
+    "workspace-monitor/scripts/check-performance-budget.mjs",
+    "workspace-monitor/README.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/spec.ko.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/spec.en.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/plan.ko.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/plan.en.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/tasks.ko.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/tasks.en.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/validation.ko.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/validation.en.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/traceability.ko.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/traceability.en.md",
+    "_history/web-searches/2026/2026-06-02-workspace-monitor-performance-budget.ko.md",
+    "_history/web-searches/2026/2026-06-02-workspace-monitor-performance-budget.en.md",
+    "_research/topics/workspace-monitor/2026-06-02-performance-budget.ko.md",
+    "_research/topics/workspace-monitor/2026-06-02-performance-budget.en.md",
+    "_requirements/changes/2026-06-02-workspace-monitor-performance-budget.ko.md",
+    "_requirements/changes/2026-06-02-workspace-monitor-performance-budget.en.md",
+    "_requirements/reviews/2026-06-02-workspace-monitor-performance-budget.ko.md",
+    "_requirements/reviews/2026-06-02-workspace-monitor-performance-budget.en.md",
+    "_history/plans/2026/2026-06-02-workspace-monitor-performance-budget.ko.md",
+    "_history/plans/2026/2026-06-02-workspace-monitor-performance-budget.en.md",
+    "_history/request-traces/2026/2026-06-02-workspace-monitor-performance-budget.ko.md",
+    "_history/request-traces/2026/2026-06-02-workspace-monitor-performance-budget.en.md",
+    "_history/work-timings/2026/2026-06-02-workspace-monitor-performance-budget.json",
+    "_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-omission-input.json",
+    "_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-resource-input.json",
+    "_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-grounding.json",
+    "_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-evaluation-result.json",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/2026/2026-06-02.md",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json"
+  ],
+  "verification": [
+    "npm --prefix workspace-monitor run check",
+    "npm --prefix workspace-monitor test",
+    "npm --prefix workspace-monitor run build",
+    "npm --prefix workspace-monitor run perf:budget",
+    "du -h workspace-monitor/out/_next/static/chunks/*.js workspace-monitor/public/workspace-snapshot.json",
+    "wc -c workspace-monitor/out/_next/static/chunks/*.js workspace-monitor/public/workspace-snapshot.json",
+    "python3 -m http.server 3008 --bind 127.0.0.1 --directory workspace-monitor/out + Playwright static smoke",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-omission-input.json",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-resource-input.json",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-grounding.json",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-evaluation-input.json",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-workspace-monitor-performance-budget.json",
+    "python3 _tools/naming-audit/src/naming_audit.py --check",
+    "python3 _tools/structure-audit/src/structure_audit.py --check",
+    "git diff --check"
+  ],
+  "references_checked": [
+    "Next.js lazy loading official docs",
+    "Next.js optimizePackageImports official docs",
+    "React useDeferredValue official docs",
+    "Existing Workspace Monitor snapshot generator and UI source",
+    "Workspace Monitor build output before and after implementation"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-workspace-monitor-performance-budget.ko.md",
+    "_history/web-searches/2026/2026-06-02-workspace-monitor-performance-budget.en.md",
+    "_research/topics/workspace-monitor/2026-06-02-performance-budget.ko.md",
+    "_research/topics/workspace-monitor/2026-06-02-performance-budget.en.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-workspace-monitor-performance-budget.ko.md",
+    "_history/plans/2026/2026-06-02-workspace-monitor-performance-budget.en.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/plan.ko.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/traceability.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-02-workspace-monitor-performance-budget.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-omission-input.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-workspace-monitor-performance-budget.ko.md",
+    "_history/web-searches/2026/2026-06-02-workspace-monitor-performance-budget.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-02-workspace-monitor-performance-budget.ko.md",
+    "_requirements/changes/2026-06-02-workspace-monitor-performance-budget.en.md",
+    "_requirements/reviews/2026-06-02-workspace-monitor-performance-budget.ko.md",
+    "_requirements/reviews/2026-06-02-workspace-monitor-performance-budget.en.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md"
+  ],
+  "spec_targets": [
+    "workspace-monitor/specs/2026-06-02-performance-budget/spec.ko.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/spec.en.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/plan.ko.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/plan.en.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/tasks.ko.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/tasks.en.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/validation.ko.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/validation.en.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/traceability.ko.md",
+    "workspace-monitor/specs/2026-06-02-performance-budget/traceability.en.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-workspace-monitor-performance-budget.ko.md",
+    "_history/request-traces/2026/2026-06-02-workspace-monitor-performance-budget.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-workspace-monitor-performance-budget.json"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-02-workspace-monitor-performance-budget-resource-input.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Shard workspace-snapshot.json by section or category if JSON transfer becomes the next measured bottleneck.",
+    "Add compressed static serving or deployment cache-header guidance after choosing hosting mode.",
+    "Split MonitorShell into section-level lazy components once the next largest client chunk is measured."
+  ]
+}

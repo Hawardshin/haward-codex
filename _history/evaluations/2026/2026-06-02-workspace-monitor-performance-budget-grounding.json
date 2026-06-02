@@ -1,0 +1,101 @@
+{
+  "task": "Ground factual claims for Workspace Monitor performance budget close-out.",
+  "output_summary": "Workspace Monitor now keeps the generated snapshot out of client JavaScript, lazy-loads the monitor UI, and enforces a JavaScript chunk performance budget.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "snapshot-loader",
+      "source": "workspace-monitor/components/SnapshotLoader.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary implementation for public JSON fetch and dynamic MonitorShell loading."
+    },
+    {
+      "evidence_id": "snapshot-types",
+      "source": "workspace-monitor/lib/snapshot.ts",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary evidence that generated snapshot is no longer statically imported."
+    },
+    {
+      "evidence_id": "performance-budget",
+      "source": "workspace-monitor/scripts/check-performance-budget.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary regression check for JavaScript chunk size and static snapshot import."
+    },
+    {
+      "evidence_id": "build-output",
+      "source": "npm --prefix workspace-monitor run build; npm --prefix workspace-monitor run perf:budget",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local build and performance budget output measured largest chunk at 227,537 bytes."
+    },
+    {
+      "evidence_id": "next-docs",
+      "source": "https://nextjs.org/docs/app/guides/lazy-loading",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Next.js lazy loading documentation."
+    },
+    {
+      "evidence_id": "react-docs",
+      "source": "https://react.dev/reference/react/useDeferredValue",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official React documentation for deferred UI updates."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The generated workspace snapshot is no longer statically imported by lib/snapshot.ts.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "snapshot-types",
+        "performance-budget"
+      ],
+      "verification_steps": [
+        "Read lib/snapshot.ts.",
+        "Ran npm --prefix workspace-monitor run perf:budget."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The largest built JavaScript chunk is 227,537 bytes after the change.",
+      "claim_type": "calculation",
+      "support_level": "supported",
+      "evidence_ids": [
+        "build-output"
+      ],
+      "verification_steps": [
+        "Ran npm --prefix workspace-monitor run build.",
+        "Ran npm --prefix workspace-monitor run perf:budget.",
+        "Read wc/du output for workspace-monitor/out/_next/static/chunks."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "The previous largest built JavaScript chunk was 6,224,897 bytes before removing the snapshot static import.",
+      "claim_type": "calculation",
+      "support_level": "supported",
+      "evidence_ids": [
+        "build-output"
+      ],
+      "verification_steps": [
+        "Measured workspace-monitor/out/_next/static/chunks before implementation in this turn."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Snapshot JSON itself remains large and should be optimized separately if network transfer becomes the next measured bottleneck."
+  ],
+  "limitation_notes": [
+    "This does not add runtime compression or snapshot sharding.",
+    "This does not profile every React subtree."
+  ]
+}

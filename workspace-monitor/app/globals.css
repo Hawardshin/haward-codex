@@ -73,6 +73,44 @@ main {
   padding: 28px 0 48px;
 }
 
+.snapshot-loading-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.snapshot-loading-shell div {
+  max-width: 620px;
+}
+
+.snapshot-loading-shell p:last-child {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.snapshot-loading-indicator {
+  width: 42px;
+  height: 42px;
+  border: 3px solid var(--line);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: monitor-spin 900ms linear infinite;
+}
+
+.snapshot-loading-indicator.error {
+  border-color: #f1c4c4;
+  border-top-color: var(--red);
+  animation: none;
+}
+
+@keyframes monitor-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .topbar {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
+  experimental: {
+    optimizePackageImports: ["lucide-react"]
+  },
   images: {
     unoptimized: true
   },
@@ -10,4 +13,3 @@ const nextConfig = {
 };
 
 export default nextConfig;
-

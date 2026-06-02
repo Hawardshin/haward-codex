@@ -24,7 +24,7 @@ workspace-monitor/
   app/                  Next.js App Router 화면
   components/           dashboard UI 컴포넌트
   lib/                  snapshot 타입과 표시 helper
-  scripts/              repository snapshot 생성기
+  scripts/              repository snapshot 생성기와 성능 예산 검사
   src/generated/        commit되는 정적 snapshot
   public/               브라우저에서 직접 확인 가능한 snapshot 복사본
   docs/                 배포와 요구사항 문서
@@ -39,10 +39,13 @@ npm run collect
 npm test
 npm run check
 npm run build
+npm run perf:budget
 npm run dev
 ```
 
 `npm run collect`는 repository root의 `_history`, `_ops`, `_requirements`, `_specs`, 프로젝트 docs/specs, 에이전트 설정, view mode 설정, language mode 설정, source code catalog를 읽어 `src/generated/workspace-snapshot.json`과 `public/workspace-snapshot.json`을 만든다. snapshot에는 문서 목록뿐 아니라 `historyDays` 날짜 index, `agentCatalog`, `collaborationBoard`, `folderStructure`, `viewModeCatalog`, `languageModeCatalog`, `sourceFiles`도 포함된다.
+
+UI는 대용량 snapshot을 client JavaScript bundle에 정적으로 포함하지 않고 `/workspace-snapshot.json`을 fetch한 뒤 `MonitorShell`을 lazy-load한다. `npm run perf:budget`은 build 후 가장 큰 JavaScript chunk가 1MB를 넘지 않는지 확인해 snapshot bundle 회귀를 막는다.
 
 ## Vercel 배포
 

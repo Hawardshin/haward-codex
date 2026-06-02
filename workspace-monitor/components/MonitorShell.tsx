@@ -25,7 +25,7 @@ import {
   SquareTerminal
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot, type WorkspaceSourceFile } from "@/lib/snapshot";
 
@@ -361,7 +361,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     }
   };
 
-  const normalizedQuery = query.trim().toLowerCase();
+  const deferredQuery = useDeferredValue(query);
+  const normalizedQuery = deferredQuery.trim().toLowerCase();
   const viewFilteredDocuments = useMemo(() => {
     return snapshot.documents.filter(
       (document) =>
@@ -444,15 +445,16 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const sourceLanguages = useMemo(() => {
     return Array.from(new Set(visibleSourceFiles.map((file) => file.language))).sort();
   }, [visibleSourceFiles]);
+  const sourceQuery = section === "source" ? normalizedQuery : "";
   const filteredSourceFiles = useMemo(() => {
     return visibleSourceFiles.filter((file) => {
       const projectMatches = sourceProject === "all" || file.project === sourceProject;
       const languageMatches = sourceLanguage === "all" || file.language === sourceLanguage;
       const queryMatches =
-        !normalizedQuery || `${file.path} ${file.project} ${file.language} ${file.content}`.toLowerCase().includes(normalizedQuery);
+        !sourceQuery || `${file.path} ${file.project} ${file.language} ${file.content}`.toLowerCase().includes(sourceQuery);
       return projectMatches && languageMatches && queryMatches;
     });
-  }, [normalizedQuery, sourceLanguage, sourceProject, visibleSourceFiles]);
+  }, [sourceLanguage, sourceProject, sourceQuery, visibleSourceFiles]);
   const selectedSource = filteredSourceFiles.find((file) => file.id === selectedSourceId) || filteredSourceFiles[0];
   const visibleEvaluations = viewFilteredDocuments.filter((document) => document.category === "evaluation").length;
   const visibleWebSearches = viewFilteredDocuments.filter((document) => document.category === "web-search").length;
