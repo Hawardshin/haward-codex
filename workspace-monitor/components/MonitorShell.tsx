@@ -63,6 +63,7 @@ type MonitorLanguageMode = NonNullable<WorkspaceSnapshot["languageModeCatalog"]>
 type CollaborationBoard = NonNullable<WorkspaceSnapshot["collaborationBoard"]>;
 type UnifiedOps = NonNullable<WorkspaceSnapshot["unifiedOps"]>;
 type ModeFunctionCatalog = NonNullable<WorkspaceSnapshot["modeFunctionCatalog"]>;
+type ClaudeCodeDesignTransfer = NonNullable<WorkspaceSnapshot["claudeCodeDesignTransfer"]>;
 
 const fallbackViewModes: MonitorViewMode[] = [
   {
@@ -163,6 +164,21 @@ const emptyModeFunctionCatalog: ModeFunctionCatalog = {
     desktopGroups: 0
   },
   groups: []
+};
+
+const emptyClaudeCodeDesignTransfer: ClaudeCodeDesignTransfer = {
+  sourcePath: "platform-desktop-app/configs/claude-code-design-transfer-registry.json",
+  sourceBoundary: {
+    policy: "public_sources_only",
+    excluded_sources: ["leaked_or_non_public_material"]
+  },
+  summary: {
+    totalPatterns: 0,
+    readyNow: 0,
+    queued: 0,
+    highPriority: 0
+  },
+  patterns: []
 };
 
 const sectionIds = new Set<SectionId>(sections.map((section) => section.id));
@@ -557,6 +573,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [viewMode, setViewMode] = useState(snapshot.viewModeCatalog?.defaultMode || "superadmin_developer");
   const [languageMode, setLanguageMode] = useState(snapshot.languageModeCatalog?.defaultMode || "all");
   const modeFunctionCatalog = snapshot.modeFunctionCatalog ?? emptyModeFunctionCatalog;
+  const claudeCodeDesignTransfer = snapshot.claudeCodeDesignTransfer ?? emptyClaudeCodeDesignTransfer;
   const [selectedModeFunctionGroupId, setSelectedModeFunctionGroupId] = useState(
     modeFunctionCatalog.groups[0]?.id || "view_mode"
   );
@@ -1005,6 +1022,12 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             selectedGroupId={selectedModeFunctionGroupId}
             onSelectGroup={setSelectedModeFunctionGroupId}
             onOpenOption={openModeFunctionOption}
+          />
+
+          <ClaudeCodeTransferPanel
+            transfer={claudeCodeDesignTransfer}
+            onOpenDesktop={() => setSection("desktop")}
+            onOpenDocuments={() => setSection("documents")}
           />
 
           <section className="panel wide action-evidence-panel">
@@ -1598,6 +1621,85 @@ function ModeFunctionSwitchboard({
       ) : (
         <p className="empty-state">modeFunctionCatalog 데이터가 아직 생성되지 않았습니다.</p>
       )}
+    </section>
+  );
+}
+
+function ClaudeCodeTransferPanel({
+  transfer,
+  onOpenDesktop,
+  onOpenDocuments
+}: {
+  transfer: ClaudeCodeDesignTransfer;
+  onOpenDesktop: () => void;
+  onOpenDocuments: () => void;
+}) {
+  const visiblePatterns = transfer.patterns.slice(0, 8);
+  const sourcePolicy = transfer.sourceBoundary.policy || "public_sources_only";
+  const excludedSources = transfer.sourceBoundary.excluded_sources || [];
+
+  return (
+    <section className="panel wide claude-transfer-panel">
+      <div className="panel-heading">
+        <div>
+          <p className="eyebrow">Claude Code Design Transfer</p>
+          <h2>공개 설계 패턴 전이 지도</h2>
+        </div>
+        <div className="desktop-actions">
+          <button type="button" onClick={onOpenDesktop}>
+            <SquareTerminal size={16} aria-hidden="true" />
+            <span>Desktop</span>
+          </button>
+          <button type="button" onClick={onOpenDocuments}>
+            <BookOpenText size={16} aria-hidden="true" />
+            <span>Docs</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="claude-transfer-layout">
+        <article className="claude-transfer-summary">
+          <span>Public sources only</span>
+          <strong>{sourcePolicy}</strong>
+          <p>
+            {excludedSources.length
+              ? `Excluded: ${excludedSources.join(", ")}`
+              : "비공개 또는 검증 불가능한 출처는 설계 근거로 쓰지 않습니다."}
+          </p>
+          <dl>
+            <dt>Patterns</dt>
+            <dd>{transfer.summary.totalPatterns.toLocaleString("ko-KR")}</dd>
+            <dt>Ready</dt>
+            <dd>{transfer.summary.readyNow.toLocaleString("ko-KR")}</dd>
+            <dt>Queued</dt>
+            <dd>{transfer.summary.queued.toLocaleString("ko-KR")}</dd>
+            <dt>High</dt>
+            <dd>{transfer.summary.highPriority.toLocaleString("ko-KR")}</dd>
+          </dl>
+          <small>{transfer.sourcePath}</small>
+        </article>
+
+        <div className="transfer-pattern-grid" aria-label="Claude Code transfer patterns">
+          {visiblePatterns.length ? (
+            visiblePatterns.map((pattern) => (
+              <article key={pattern.id}>
+                <header>
+                  <span>{pattern.priority}</span>
+                  <strong>{pattern.label}</strong>
+                </header>
+                <p>{pattern.transferPrinciple || pattern.claudeCodeSignal}</p>
+                <small>{pattern.platformMapping}</small>
+                <div className="transfer-pattern-meta">
+                  <span>{pattern.status}</span>
+                  <span>{pattern.riskControls.slice(0, 2).join(" / ") || "risk controls pending"}</span>
+                </div>
+              </article>
+            ))
+          ) : (
+            <p className="empty-state">Claude Code public design transfer registry가 아직 생성되지 않았습니다.</p>
+          )}
+        </div>
+      </div>
     </section>
   );
 }

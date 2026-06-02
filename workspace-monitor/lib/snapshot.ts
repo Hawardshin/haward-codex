@@ -16,6 +16,7 @@ export type WorkspaceStats = {
   unifiedOpsEvents?: number;
   modeGroups?: number;
   modeOptions?: number;
+  claudeCodeDesignPatterns?: number;
   sourceFiles?: number;
   rootFolders: number;
 };
@@ -313,6 +314,38 @@ export type WorkspaceModeFunctionCatalog = {
   groups: WorkspaceModeFunctionGroup[];
 };
 
+export type WorkspaceClaudeCodeDesignTransferPattern = {
+  id: string;
+  label: string;
+  claudeCodeSignal: string;
+  transferPrinciple: string;
+  platformMapping: string;
+  currentPlatformAssets: string[];
+  implementationTargets: string[];
+  riskControls: string[];
+  status: string;
+  priority: string;
+  sourceIds: string[];
+  sourcePath: string;
+};
+
+export type WorkspaceClaudeCodeDesignTransfer = {
+  sourcePath: string;
+  sourceBoundary: {
+    policy?: string;
+    excluded_sources?: string[];
+    accepted_source_types?: string[];
+    public_decision?: string;
+  };
+  summary: {
+    totalPatterns: number;
+    readyNow: number;
+    queued: number;
+    highPriority: number;
+  };
+  patterns: WorkspaceClaudeCodeDesignTransferPattern[];
+};
+
 export type WorkspaceSnapshot = {
   schemaVersion: string;
   generatedAt: string;
@@ -338,6 +371,7 @@ export type WorkspaceSnapshot = {
     modes: WorkspaceLanguageMode[];
   };
   modeFunctionCatalog?: WorkspaceModeFunctionCatalog;
+  claudeCodeDesignTransfer?: WorkspaceClaudeCodeDesignTransfer;
   categories: string[];
   publicReview: {
     status: string;
@@ -378,6 +412,7 @@ export function categoryLabel(category: string) {
     philosophy: "철학",
     plan: "계획",
     "project-doc": "프로젝트 문서",
+    "project-config": "프로젝트 설정",
     "project-spec": "프로젝트 스펙",
     requirement: "요구사항",
     "request-trace": "요청 추적",

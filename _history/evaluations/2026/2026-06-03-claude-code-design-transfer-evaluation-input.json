@@ -1,0 +1,131 @@
+{
+  "initial_instruction": "클로드 코드의 설계에서 차용할 수 있는 것들을 이 플랫폼에 반영해 달라는 요청.",
+  "result_summary": "Added a public-source Claude Code design-transfer registry, requirements, architecture docs, specs, Workspace Monitor snapshot/UI panel, readiness/tests, and verified the local Rust/Tauri build path. Leaked or non-public material was explicitly excluded.",
+  "work_mode": "governance",
+  "changed_files": [
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/configs/claude-code-design-transfer-registry.json",
+    "platform-desktop-app/docs/architecture/claude-code-design-transfer.ko.md",
+    "platform-desktop-app/docs/architecture/claude-code-design-transfer.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-03-claude-code-design-transfer.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-03-claude-code-design-transfer.en.md",
+    "platform-desktop-app/specs/2026-06-03-claude-code-design-transfer/",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "workspace-monitor/scripts/collect-workspace.mjs",
+    "workspace-monitor/lib/snapshot.ts",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/tests/collector.test.mjs",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "_history/web-searches/2026/2026-06-03-claude-code-design-transfer.ko.md",
+    "_history/plans/2026/2026-06-03-claude-code-design-transfer.ko.md",
+    "_history/evaluations/2026/2026-06-03-claude-code-design-transfer-grounding.json",
+    "_history/evaluations/2026/2026-06-03-claude-code-design-transfer-omission-input.json",
+    "_history/evaluations/2026/2026-06-03-claude-code-design-transfer-resource-input.json",
+    "_history/work-timings/2026/2026-06-03-claude-code-design-transfer.json"
+  ],
+  "verification": [
+    "python3 -m json.tool platform-desktop-app/configs/claude-code-design-transfer-registry.json: passed",
+    "check-config-contract ../platform-desktop-app/configs/claude-code-design-transfer-registry.json: self_documenting",
+    "npm --prefix workspace-monitor run check: passed",
+    "npm --prefix workspace-monitor test: 13 passed",
+    "npm --prefix workspace-monitor run build: passed",
+    "npm --prefix platform-desktop-app test: 8 passed",
+    "npm --prefix platform-desktop-app run check: ready_for_dependency_install_audit",
+    "cargo test: passed",
+    "cargo build: passed",
+    "npm --prefix platform-desktop-app run tauri:build: passed",
+    "generated snapshot check: totalPatterns=8 and registry document collected",
+    "git diff --check: passed"
+  ],
+  "references_checked": [
+    "https://code.claude.com/docs/en/overview",
+    "https://code.claude.com/docs/en/settings",
+    "https://code.claude.com/docs/en/memory",
+    "https://code.claude.com/docs/en/hooks",
+    "https://code.claude.com/docs/en/slash-commands",
+    "https://code.claude.com/docs/en/sub-agents",
+    "https://code.claude.com/docs/en/mcp",
+    "https://code.claude.com/docs/en/common-workflows",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+    "platform-desktop-app/README.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-03-claude-code-design-transfer-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-03-claude-code-design-transfer.ko.md",
+    "_history/web-searches/2026/2026-06-03-claude-code-design-transfer.en.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-03-claude-code-design-transfer.ko.md",
+    "_history/plans/2026/2026-06-03-claude-code-design-transfer.en.md",
+    "platform-desktop-app/specs/2026-06-03-claude-code-design-transfer/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-03-claude-code-design-transfer.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-claude-code-design-transfer-omission-input.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-claude-code-design-transfer.ko.md",
+    "_history/web-searches/2026/2026-06-03-claude-code-design-transfer.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-03-claude-code-design-transfer.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-03-claude-code-design-transfer.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-03-claude-code-design-transfer/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-03-claude-code-design-transfer/spec.en.md",
+    "platform-desktop-app/specs/2026-06-03-claude-code-design-transfer/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-03-claude-code-design-transfer/tasks.en.md",
+    "platform-desktop-app/specs/2026-06-03-claude-code-design-transfer/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-03-claude-code-design-transfer/validation.en.md",
+    "platform-desktop-app/specs/2026-06-03-claude-code-design-transfer/traceability.ko.md",
+    "platform-desktop-app/specs/2026-06-03-claude-code-design-transfer/traceability.en.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-claude-code-design-transfer.ko.md",
+    "_history/request-traces/2026/2026-06-03-claude-code-design-transfer.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-claude-code-design-transfer.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-03-claude-code-design-transfer-resource-input.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [
+    "platform-desktop-app/specs/2026-06-03-claude-code-design-transfer/tasks.ko.md"
+  ],
+  "known_gaps": [],
+  "validation_limitations": [
+    "Callable Browser tool was unavailable, so screenshot validation was not performed; static build, snapshot checks, readiness token checks, and Tauri bundle build were used instead.",
+    "Runtime MCP connector, hook registry, and worktree-aware parallel lanes are deferred candidates rather than acceptance criteria for this slice."
+  ],
+  "improvement_ideas": [
+    "Add permission summaries to CLI adapter and connector cards.",
+    "Add a Plan Gate indicator to Desktop task pipes.",
+    "Add touch-path conflict warnings before worktree-aware parallel execution."
+  ]
+}

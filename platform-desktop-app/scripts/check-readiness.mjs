@@ -8,6 +8,7 @@ const requiredFiles = [
   "README.md",
   "package.json",
   "configs/desktop-distribution-registry.json",
+  "configs/claude-code-design-transfer-registry.json",
   "configs/macos-execution-profile.json",
   "configs/windows-execution-profile.json",
   "configs/user-flow-registry.json",
@@ -15,6 +16,8 @@ const requiredFiles = [
   "docs/architecture/cross-platform-installable-runtime-decision.en.md",
   "docs/architecture/multi-cli-orchestration-runtime.ko.md",
   "docs/architecture/multi-cli-orchestration-runtime.en.md",
+  "docs/architecture/claude-code-design-transfer.ko.md",
+  "docs/architecture/claude-code-design-transfer.en.md",
   "specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
   "specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md",
   "specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
@@ -149,6 +152,22 @@ for (const requiredPhrase of ["ai_cli_orchestration_flow", "Claude Code", "Gemin
   }
 }
 
+const designTransferRegistry = readJson("configs/claude-code-design-transfer-registry.json");
+const designTransferSerialized = JSON.stringify(designTransferRegistry);
+for (const requiredPhrase of [
+  "public_sources_only",
+  "leaked_or_non_public_material",
+  "permissioned_tool_execution",
+  "plan_before_edit",
+  "subagent_context_isolation",
+  "skill_on_demand_packaging",
+  "Claude Code CLI"
+]) {
+  if (!designTransferSerialized.includes(requiredPhrase)) {
+    failures.push(`claude-code-design-transfer-registry must include ${requiredPhrase}`);
+  }
+}
+
 const viewModeRegistry = readJson("../agent-platform/configs/access/view-mode-registry.json");
 if (!JSON.stringify(viewModeRegistry).includes("desktop")) {
   failures.push("view-mode-registry must expose the desktop runtime section");
@@ -216,7 +235,12 @@ for (const requiredPhrase of [
   "ModeFunctionSwitchboard",
   "modeFunctionCatalog",
   "mode-switchboard-panel",
-  "openModeFunctionOption"
+  "openModeFunctionOption",
+  "ClaudeCodeTransferPanel",
+  "claudeCodeDesignTransfer",
+  "Claude Code Design Transfer",
+  "Public sources only",
+  "transfer-pattern-grid"
 ]) {
   if (!monitorShell.includes(requiredPhrase)) {
     failures.push(`workspace-monitor MonitorShell must include ${requiredPhrase}`);

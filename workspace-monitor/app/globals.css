@@ -343,6 +343,7 @@ h3 {
 .command-center,
 .ux-spine,
 .mode-switchboard-panel,
+.claude-transfer-panel,
 .action-evidence-panel {
   grid-column: 1 / -1;
 }
@@ -525,6 +526,115 @@ h3 {
   background:
     linear-gradient(180deg, rgba(47, 103, 177, 0.05), rgba(22, 115, 91, 0.04)),
     var(--surface);
+}
+
+.claude-transfer-panel {
+  background:
+    linear-gradient(180deg, rgba(154, 101, 23, 0.055), rgba(47, 103, 177, 0.045)),
+    var(--surface);
+}
+
+.claude-transfer-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.62fr) minmax(0, 1.38fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.claude-transfer-summary,
+.transfer-pattern-grid article {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.86);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.claude-transfer-summary span,
+.claude-transfer-summary dt,
+.transfer-pattern-grid header span,
+.transfer-pattern-meta span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.claude-transfer-summary strong {
+  display: block;
+  margin: 6px 0;
+  overflow-wrap: anywhere;
+  font-size: 19px;
+}
+
+.claude-transfer-summary p,
+.claude-transfer-summary small,
+.transfer-pattern-grid p,
+.transfer-pattern-grid small {
+  color: var(--muted);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.claude-transfer-summary dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.claude-transfer-summary dt,
+.claude-transfer-summary dd {
+  margin: 0;
+}
+
+.claude-transfer-summary dd {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.transfer-pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.transfer-pattern-grid article {
+  display: grid;
+  min-height: 168px;
+  gap: 8px;
+  align-content: start;
+}
+
+.transfer-pattern-grid header {
+  display: grid;
+  gap: 4px;
+}
+
+.transfer-pattern-grid header strong {
+  overflow-wrap: anywhere;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.transfer-pattern-grid p,
+.transfer-pattern-grid small {
+  margin-bottom: 0;
+}
+
+.transfer-pattern-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: auto;
+}
+
+.transfer-pattern-meta span {
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  padding: 4px 7px;
+  overflow-wrap: anywhere;
 }
 
 .mode-switchboard-summary {
@@ -3349,6 +3459,8 @@ h3 {
   .process-node:hover,
   .evidence-grid article:hover,
   .terminal-report-list article:hover,
+  .claude-transfer-summary:hover,
+  .transfer-pattern-grid article:hover,
   .mode-group-list button:hover,
   .mode-location-card:hover,
   .mode-option-grid article:hover {
@@ -3391,7 +3503,8 @@ h3 {
   .pipe-lane-grid,
   .run-board-strip,
   .process-graph,
-  .evidence-grid {
+  .evidence-grid,
+  .transfer-pattern-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -3412,6 +3525,7 @@ h3 {
   .source-review-grid,
   .desktop-hero,
   .attention-layout,
+  .claude-transfer-layout,
   .mode-switchboard-layout {
     grid-template-columns: 1fr;
   }
@@ -3486,6 +3600,8 @@ h3 {
   .run-board-strip,
   .process-graph,
   .evidence-grid,
+  .claude-transfer-layout,
+  .transfer-pattern-grid,
   .terminal-report-list,
   .desktop-health-strip,
   .decision-summary-strip,

@@ -1,0 +1,72 @@
+{
+  "task": "Resource check for Claude Code public design-transfer validation runs.",
+  "work_mode": "governance",
+  "runtime_context": [
+    "node",
+    "next-build",
+    "cargo",
+    "tauri-build"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "long-running-build-subprocesses",
+      "category": "process",
+      "description": "npm, Next, Cargo, and Tauri build subprocesses can remain running if not awaited.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "All exec sessions were polled until process exit. No required command session was left running.",
+      "evidence": [
+        "workspace-monitor build exited code 0",
+        "cargo test exited code 0",
+        "cargo build exited code 0",
+        "tauri build exited code 0"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "generated-build-artifacts",
+      "category": "temporary_file",
+      "description": "Tauri and Next builds create generated artifacts that should stay in tracked or ignored locations as appropriate.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Tracked generated snapshots were updated; Rust/Tauri target artifacts remain under ignored target paths.",
+      "evidence": [
+        "workspace-monitor/src/generated/workspace-snapshot.json updated",
+        "workspace-monitor/public/workspace-snapshot.json updated",
+        "platform-desktop-app/src-tauri/target release bundle generated"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "exec-session-cleanup",
+      "resource": "build subprocesses",
+      "create_path": "exec_command for npm/cargo/tauri commands",
+      "cleanup_path": "write_stdin polling until process exit",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "All long-running command sessions returned exited code 0."
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "bounded-output-check",
+      "metric": "command lifecycle and output collection",
+      "tool": "exec_command session status",
+      "threshold": "No active build session remains at close-out.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "No active exec_command session needed for this task remains running."
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No browser automation, local server, watcher, or daemon was left running."
+  ]
+}

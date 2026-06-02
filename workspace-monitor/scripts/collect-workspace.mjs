@@ -67,6 +67,7 @@ const DOCUMENT_SOURCES = [
   { category: "project-doc", root: "presentation-agent/docs" },
   { category: "project-doc", root: "platform-desktop-app/docs" },
   { category: "project-doc", root: "workspace-monitor/docs" },
+  { category: "project-config", root: "platform-desktop-app/configs" },
   { category: "project-spec", root: "agent-platform/specs" },
   { category: "project-spec", root: "presentation-agent/specs" },
   { category: "project-spec", root: "platform-desktop-app/specs" },
@@ -106,6 +107,7 @@ export function buildSnapshot(repoRoot) {
   const viewModeCatalog = collectViewModeCatalog(repoRoot);
   const languageModeCatalog = collectLanguageModeCatalog(repoRoot);
   const modeFunctionCatalog = collectModeFunctionCatalog(repoRoot, viewModeCatalog, languageModeCatalog);
+  const claudeCodeDesignTransfer = collectClaudeCodeDesignTransfer(repoRoot);
   const sourceFiles = collectSourceFiles(repoRoot, projects);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
   const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
@@ -142,6 +144,7 @@ export function buildSnapshot(repoRoot) {
       unifiedOpsEvents: unifiedOps.summary.totalEvents,
       modeGroups: modeFunctionCatalog.summary.totalGroups,
       modeOptions: modeFunctionCatalog.summary.totalOptions,
+      claudeCodeDesignPatterns: claudeCodeDesignTransfer.summary.totalPatterns,
       sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
     },
@@ -159,6 +162,7 @@ export function buildSnapshot(repoRoot) {
     viewModeCatalog,
     languageModeCatalog,
     modeFunctionCatalog,
+    claudeCodeDesignTransfer,
     categories,
     publicReview: {
       status: "review_required_before_public_deploy",
@@ -169,6 +173,52 @@ export function buildSnapshot(repoRoot) {
         "Regenerate the snapshot after any redaction and run npm run build again."
       ]
     }
+  };
+}
+
+export function collectClaudeCodeDesignTransfer(repoRoot) {
+  const sourcePath = "platform-desktop-app/configs/claude-code-design-transfer-registry.json";
+  const registry = readJson(path.join(repoRoot, sourcePath), {
+    source_boundary: {
+      policy: "public_sources_only",
+      excluded_sources: ["leaked_or_non_public_material"]
+    },
+    transfer_patterns: []
+  });
+  const patterns = Array.isArray(registry.transfer_patterns)
+    ? registry.transfer_patterns
+        .filter((pattern) => pattern && typeof pattern === "object")
+        .map((pattern) => ({
+          id: pattern.id || "",
+          label: pattern.label || titleFromPath(pattern.id || "pattern"),
+          claudeCodeSignal: pattern.claude_code_signal || "",
+          transferPrinciple: pattern.transfer_principle || "",
+          platformMapping: pattern.platform_mapping || "",
+          currentPlatformAssets: Array.isArray(pattern.current_platform_assets) ? pattern.current_platform_assets : [],
+          implementationTargets: Array.isArray(pattern.implementation_targets) ? pattern.implementation_targets : [],
+          riskControls: Array.isArray(pattern.risk_controls) ? pattern.risk_controls : [],
+          status: pattern.status || "candidate",
+          priority: pattern.priority || "medium",
+          sourceIds: Array.isArray(pattern.public_source_ids) ? pattern.public_source_ids : [],
+          sourcePath
+        }))
+        .filter((pattern) => pattern.id)
+    : [];
+
+  const readyNow = patterns.filter((pattern) => ["implemented", "active", "ready_now"].includes(pattern.status)).length;
+  const queued = patterns.filter((pattern) => ["queued", "candidate", "planned"].includes(pattern.status)).length;
+  const highPriority = patterns.filter((pattern) => ["high", "must"].includes(pattern.priority)).length;
+
+  return {
+    sourcePath,
+    sourceBoundary: registry.source_boundary || {},
+    summary: {
+      totalPatterns: patterns.length,
+      readyNow,
+      queued,
+      highPriority
+    },
+    patterns
   };
 }
 

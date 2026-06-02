@@ -1,0 +1,37 @@
+{
+  "task_id": "2026-06-03-claude-code-design-transfer",
+  "work_mode": "governance",
+  "started_at": "2026-06-03T00:00:00+09:00",
+  "ended_at": "2026-06-03T00:00:00+09:00",
+  "phases": [
+    {
+      "phase_id": "web_first_and_scope",
+      "label": "Web-first and bounded scope",
+      "duration_seconds": 420,
+      "notes": "Official Claude Code docs checked; leaked/non-public sources excluded."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Registry, docs, collector, UI, tests",
+      "duration_seconds": 1800,
+      "notes": "Added design-transfer registry, Workspace Monitor snapshot/UI, readiness and tests."
+    },
+    {
+      "phase_id": "validation",
+      "label": "Validation and local Rust/Tauri build",
+      "duration_seconds": 900,
+      "notes": "Ran npm checks/tests/build, cargo test/build, and Tauri build."
+    },
+    {
+      "phase_id": "history_and_evaluation",
+      "label": "History and close-out records",
+      "duration_seconds": 600,
+      "notes": "Recorded web-search, plan, validation, omission, grounding, resource, evaluation, trace, and summary."
+    }
+  ],
+  "summary": {
+    "total_seconds": 3720,
+    "bottleneck": "implementation",
+    "notes": "Times are coarse phase estimates for governance traceability."
+  }
+}

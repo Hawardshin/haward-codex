@@ -1,0 +1,120 @@
+{
+  "task": "Claude Code public design-transfer close-out check.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "public-source-boundary",
+      "description": "Exclude leaked or non-public Claude Code material and use official public sources only.",
+      "source": "user request and repository source policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/claude-code-design-transfer-registry.json",
+        "_history/web-searches/2026/2026-06-03-claude-code-design-transfer.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "design-transfer-registry",
+      "description": "Record transferable patterns with mapping, implementation targets, and risk controls.",
+      "source": "REQ-PDA-032",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/claude-code-design-transfer-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "workspace-monitor-surface",
+      "description": "Expose design-transfer state in Workspace Monitor snapshot and Overview UI.",
+      "source": "REQ-PDA-033",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/src/generated/workspace-snapshot.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "rust-local-build",
+      "description": "Keep the Tauri/Rust local build path passing after UI changes.",
+      "source": "previous user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "cargo test: passed",
+        "cargo build: passed",
+        "npm --prefix platform-desktop-app run tauri:build: passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/configs/claude-code-design-transfer-registry.json",
+      "purpose": "self-documenting source-boundary and transfer map",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/architecture/claude-code-design-transfer.ko.md",
+      "purpose": "human-readable architecture note",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-claude-code-design-transfer/spec.ko.md",
+      "purpose": "spec-driven artifact",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Overview UI implementation",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "New registry is self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract: self_documenting"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-validation",
+      "description": "Workspace Monitor passes typecheck, tests, and build.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check: passed",
+        "npm --prefix workspace-monitor test: 13 passed",
+        "npm --prefix workspace-monitor run build: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "desktop-validation",
+      "description": "Desktop readiness and Tauri build pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app test: 8 passed",
+        "npm --prefix platform-desktop-app run check: ready_for_dependency_install_audit",
+        "npm --prefix platform-desktop-app run tauri:build: passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Browser screenshot validation was not performed because the callable Browser tool was unavailable; static build and snapshot/token checks were used instead.",
+    "Runtime hook/MCP/worktree features are recorded as future candidates, not implemented in this slice."
+  ],
+  "notes": [
+    "This is a bounded governance slice, not a full Claude Code compatibility implementation."
+  ]
+}

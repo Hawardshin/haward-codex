@@ -9,6 +9,7 @@ import {
   buildSnapshot,
   buildUnifiedOps,
   collectAgentCatalog,
+  collectClaudeCodeDesignTransfer,
   collectLanguageModeCatalog,
   collectModeFunctionCatalog,
   collectSourceFiles,
@@ -216,6 +217,44 @@ test("collectModeFunctionCatalog exposes explicit selectors and desktop mode loc
   assert.equal(catalog.groups.find((group) => group.id === "cli_adapter").options[0].id, "codex-cli");
   assert.equal(catalog.groups.find((group) => group.id === "desktop_session_mode").selectorLocation, "Desktop / Run Board / Mode");
   assert.equal(catalog.groups.find((group) => group.id === "task_pipe").options.some((option) => option.id === "review_verify_pipe"), true);
+});
+
+test("collectClaudeCodeDesignTransfer reads public-source transfer patterns", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-claude-transfer-test-"));
+  fs.mkdirSync(path.join(root, "platform-desktop-app", "configs"), { recursive: true });
+  fs.writeFileSync(
+    path.join(root, "platform-desktop-app", "configs", "claude-code-design-transfer-registry.json"),
+    JSON.stringify({
+      source_boundary: {
+        policy: "public_sources_only",
+        excluded_sources: ["leaked_or_non_public_material"]
+      },
+      transfer_patterns: [
+        {
+          id: "permissioned_tool_execution",
+          label: "Permissioned Tool Execution",
+          public_source_ids: ["claude_code_settings"],
+          claude_code_signal: "Settings and permissions are scoped.",
+          transfer_principle: "Separate guidance from enforcement.",
+          platform_mapping: "Use decision inbox and allowlisted commands.",
+          current_platform_assets: ["platform-desktop-app/src-tauri/src/lib.rs"],
+          implementation_targets: ["Show permission summary"],
+          risk_controls: ["no secrets"],
+          status: "implemented",
+          priority: "high"
+        }
+      ]
+    })
+  );
+
+  const transfer = collectClaudeCodeDesignTransfer(root);
+
+  assert.equal(transfer.sourceBoundary.policy, "public_sources_only");
+  assert.equal(transfer.summary.totalPatterns, 1);
+  assert.equal(transfer.summary.readyNow, 1);
+  assert.equal(transfer.summary.highPriority, 1);
+  assert.equal(transfer.patterns[0].label, "Permissioned Tool Execution");
+  assert.equal(transfer.patterns[0].platformMapping, "Use decision inbox and allowlisted commands.");
 });
 
 test("buildUnifiedOps merges history records and monitoring tasks", () => {

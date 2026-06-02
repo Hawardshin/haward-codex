@@ -1,0 +1,95 @@
+{
+  "task": "Ground factual claims for Claude Code public design transfer.",
+  "output_summary": "The platform now records and displays public Claude Code design-transfer patterns without using leaked or non-public material.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "official-overview",
+      "source": "https://code.claude.com/docs/en/overview",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official Claude Code documentation for capability inventory."
+    },
+    {
+      "evidence_id": "official-settings-memory",
+      "source": "https://code.claude.com/docs/en/settings and https://code.claude.com/docs/en/memory",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official Claude Code documentation for settings, permissions, and project memory."
+    },
+    {
+      "evidence_id": "official-hooks-subagents-mcp",
+      "source": "https://code.claude.com/docs/en/hooks, https://code.claude.com/docs/en/sub-agents, https://code.claude.com/docs/en/mcp",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official Claude Code documentation for hooks, subagents, and MCP connectors."
+    },
+    {
+      "evidence_id": "registry",
+      "source": "platform-desktop-app/configs/claude-code-design-transfer-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Primary registry added by this work and validated by check-config-contract."
+    },
+    {
+      "evidence_id": "snapshot-ui",
+      "source": "workspace-monitor/scripts/collect-workspace.mjs and workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Collector and UI implementation exposing the registry."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The design transfer uses public official Claude Code documentation and excludes leaked or non-public material.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "registry",
+        "official-overview"
+      ],
+      "verification_steps": [
+        "Read registry source_boundary.",
+        "Recorded official docs in web-search history."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "The platform now has a registry with eight Claude Code-inspired transfer patterns.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "registry"
+      ],
+      "verification_steps": [
+        "Ran JSON tool and check-config-contract.",
+        "Checked generated snapshot summary totalPatterns=8."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace Monitor exposes the transfer map in the snapshot and Overview UI.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "snapshot-ui"
+      ],
+      "verification_steps": [
+        "Ran workspace-monitor check/test/build.",
+        "Ran platform-desktop-app readiness check."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Official Claude Code docs may change after 2026-06-03.",
+    "No leaked or non-public material was inspected or used."
+  ],
+  "limitation_notes": [
+    "Browser screenshot validation was not performed because no callable Browser tool was exposed.",
+    "MCP connector, hook, and worktree runtime implementation remain future candidates."
+  ]
+}

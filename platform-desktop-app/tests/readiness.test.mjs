@@ -53,6 +53,19 @@ test("desktop registry records multi-CLI supervisor contract", () => {
   assert.match(serialized, /OpenCode/);
 });
 
+test("Claude Code design transfer registry uses public-source boundary", () => {
+  const registry = readJson("configs/claude-code-design-transfer-registry.json");
+  const serialized = JSON.stringify(registry);
+
+  assert.equal(registry.source_boundary.policy, "public_sources_only");
+  assert.match(serialized, /leaked_or_non_public_material/);
+  assert.match(serialized, /Permissioned Tool Execution/);
+  assert.match(serialized, /Plan Before Edit/);
+  assert.match(serialized, /Subagent Context Isolation/);
+  assert.match(serialized, /Skill On-Demand Packaging/);
+  assert.ok(registry.transfer_patterns.length >= 8);
+});
+
 test("user flow exposes AI CLI orchestration and source editing surfaces", () => {
   const registry = readJson("configs/user-flow-registry.json");
   const serialized = JSON.stringify(registry);
@@ -158,6 +171,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "모드와 기능 선택 위치",
     "Desktop Session Mode",
     "Task Pipe Preset",
+    "Claude Code Design Transfer",
+    "Public sources only",
+    "공개 설계 패턴 전이 지도",
     "선택/위치 열기"
   ]) {
     assert.match(monitorShell, new RegExp(uiString));
@@ -213,7 +229,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "ModeFunctionSwitchboard",
     "mode-switchboard-panel",
     "mode-option-grid",
-    "openModeFunctionOption"
+    "openModeFunctionOption",
+    "claudeCodeDesignTransfer",
+    "ClaudeCodeTransferPanel",
+    "transfer-pattern-grid"
   ]) {
     assert.match(monitorShell, new RegExp(implementationToken));
   }
