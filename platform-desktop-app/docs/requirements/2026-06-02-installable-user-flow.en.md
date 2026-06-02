@@ -27,6 +27,7 @@ These requirements define first-run, home, task execution, decision inbox, setti
 | PDA-UX-017 | The Desktop tab shall apply selected VS Code, Raycast, Docker, GitHub Desktop, Warp, and Cursor reference patterns as quick actions, capability cards, run board, process graph, terminal event rail, grouped decisions, replay, diff review, and evidence/promotion information in a dense work surface. | must | workspace-monitor Desktop tab, build, readiness/test |
 | PDA-UX-018 | The Desktop tab source-editing surface shall let users keep multiple files open as drafts and perform search/direct path open, dirty file queue review, diff preview, current save, save all, revert, close, and backup-result inspection in one screen. | must | workspace-monitor Desktop tab, visual QA, readiness/test |
 | PDA-UX-019 | First run and the Desktop tab shall make clear that the user starts the platform first, then adds external AI CLIs as guest lanes. A missing CLI shall appear as setup-later/capability_missing for that lane, not as platform failure. | must | user-flow registry, Workspace Monitor Desktop tab, readiness/test |
+| PDA-UX-020 | The Desktop tab shall let users choose a task pipe preset and initialize several CLI lanes from one task intake. The UI shall show lane count, adapter list, stdin/stdout/stderr pipes, decision inbox pipe, merge gate, and missing-lane state in one surface. | must | Workspace Monitor Desktop tab, user-flow registry, readiness/test |
 
 ## Current State
 

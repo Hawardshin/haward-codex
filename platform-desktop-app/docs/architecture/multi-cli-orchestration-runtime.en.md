@@ -53,13 +53,14 @@ Platform-first host runtime
 1. The user enters goal, project, and output type.
 2. Preflight checks Claude Code, Gemini CLI, Codex CLI, and OpenCode availability, version, auth/session, and permission scope.
 3. Each selected CLI becomes a process node.
-4. Fan-out/fan-in work declares merge gates.
-5. Each lane has cwd, env allowlist, timeout, output bound, cancellation, and cleanup policy.
-6. Terminal output is visible in lane panels, while meaningful events become structured records.
-7. If a CLI asks a question, the adapter sends a short defer message only when safe, then pauses only the dependent lane.
-8. The decision packet is stored in the decision inbox.
-9. After the user answers, work resumes from a checkpoint.
-10. Merge gates separate accepted, rejected, conflicting, and deferred evidence before releasing downstream results.
+4. A task pipe preset creates stdin init pipes for several optional CLI lanes from one task intake.
+5. Fan-out/fan-in work declares merge gates.
+6. Each lane has cwd, env allowlist, timeout, output bound, cancellation, and cleanup policy.
+7. Terminal output is visible in lane panels, while meaningful events become structured records.
+8. If a CLI asks a question, the adapter sends a short defer message only when safe, then pauses only the dependent lane.
+9. The decision packet is stored in the decision inbox.
+10. After the user answers, work resumes from a checkpoint.
+11. Merge gates separate accepted, rejected, conflicting, and deferred evidence before releasing downstream results.
 
 ## Data Accumulation
 
@@ -128,6 +129,16 @@ The 2026-06-02 additional improvement makes setup, mode selection, and deferred 
 - The Workspace Monitor `Desktop` tab shows setup hints, verification commands, and official reference links for each CLI adapter. It does not auto-install tools.
 - The session launcher provides `User Task`, `Platform Improvement`, `Knowledge Accumulation`, and `Review & Verify` mode presets that fill the prompt.
 - The decision inbox panel shows open/answered/total counts, decision list, answer type/text controls, and saved answer state.
+
+## Implementation Status: Task Pipe Init MVP 4
+
+The 2026-06-02 additional implementation moves beyond single CLI session start and adds task-intake-based multi-CLI lane initialization.
+
+- The Tauri backend exposes `list_cli_task_pipeline_presets` and `start_cli_task_pipeline`.
+- Presets include `platform_improvement_pipe`, `knowledge_accumulation_pipe`, and `review_verify_pipe`.
+- Each lane uses only allowlisted adapters, and a missing CLI marks only that lane as `capability_missing`.
+- The init report returns pipe edges for `task_intake -> lane stdin`, `lane stdout/stderr -> platform_event_store`, `lane question_events -> human_decision_inbox`, and `lane accepted_summary -> merge_gate`.
+- The Workspace Monitor `Desktop` tab shows presets, task intake, lane state, pipe edges, and merge gate in the `Task Pipe Init` panel.
 
 ## Implementation Status: Decision Resume MVP 4
 

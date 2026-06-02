@@ -1,0 +1,184 @@
+{
+  "task": "Add task pipe based multi-CLI initialization",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Search current official process and pipe references before planning and edits.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-task-pipe-init.ko.md",
+        "_history/web-searches/2026/2026-06-02-task-pipe-init.en.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "task-pipe-runtime-command",
+      "description": "Expose a backend command that initializes several optional CLI lanes from one task intake.",
+      "source": "PDA-REQ-027",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "task-pipe-ui",
+      "description": "Expose task pipe preset selection, task intake, lane status, and pipe edges in the desktop UI.",
+      "source": "PDA-UX-020",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "adapter-contract",
+      "description": "Record the pipe-first init contract in the shared CLI adapter registry.",
+      "source": "CLI adapter integration rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/integrations/cli-adapter-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "requirements-spec-trace",
+      "description": "Update requirements, specs, validation, and traceability for task pipe initialization.",
+      "source": "requirements/spec-driven development rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+        "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.ko.md",
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "cli-pipeline-validation",
+      "description": "Record and validate the task intake to CLI lane pipe graph.",
+      "source": "multi-process CLI orchestration rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/evaluations/2026/2026-06-02-task-pipe-init-cli-pipeline.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/src-tauri/src/lib.rs",
+      "purpose": "Backend task pipe preset and lane initialization commands.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "User-visible Task Pipe Init UI.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/integrations/cli-adapter-registry.json",
+      "purpose": "Shared pipe-first CLI adapter contract.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Type check Workspace Monitor.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-test",
+      "description": "Run Workspace Monitor unit tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor test"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-build",
+      "description": "Build the static Workspace Monitor UI.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-perf-budget",
+      "description": "Keep static UI JavaScript chunk size within the performance budget.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run perf:budget"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-desktop-test",
+      "description": "Run desktop readiness tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app test"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-desktop-check",
+      "description": "Run desktop readiness contract check.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app run check"
+      ],
+      "rationale": "Passed with the existing warning that Rust toolchain is not installed."
+    },
+    {
+      "check_id": "config-contract",
+      "description": "Validate changed shared registries as self-documenting configs.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract cli-adapter-registry desktop-distribution-registry user-flow-registry"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "cli-pipeline",
+      "description": "Validate the task intake to CLI lane pipe graph.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-cli-pipeline task-pipe-init-cli-pipeline.json"
+      ],
+      "rationale": "Optional pipe warnings are expected because missing optional CLI lanes must not block the platform."
+    }
+  ],
+  "known_omission_risks": [
+    "Actual external AI CLI execution was not performed because this slice intentionally did not install or invoke optional CLIs.",
+    "Rust/Tauri compile and packaged app smoke remain gated by a documented Rust toolchain installation audit."
+  ],
+  "notes": [
+    "This slice implements pipe-first task initialization on top of the existing single-lane session scaffold."
+  ]
+}

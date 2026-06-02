@@ -88,3 +88,22 @@ Expected results:
 - The defer command contract must append detected questions to `_ops/coordination/human-decision-inbox.json` without duplicating the same session prompt.
 - The decision answer command contract must set the selected decision status to `answered` and persist answer plus decision_history records.
 - The answer-and-resume command contract must save the answer, send the same answer to the linked active CLI session stdin, and refresh the session report when the decision carries session metadata.
+
+## Task Pipe Init MVP 3 Additional Validation
+
+```bash
+npm --prefix workspace-monitor run check
+npm --prefix workspace-monitor test
+npm --prefix workspace-monitor run build
+npm --prefix platform-desktop-app test
+npm --prefix platform-desktop-app run check
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json ../platform-desktop-app/configs/desktop-distribution-registry.json ../platform-desktop-app/configs/user-flow-registry.json
+git diff --check
+```
+
+Expected results:
+
+- The readiness test should verify `list_cli_task_pipeline_presets`, `start_cli_task_pipeline`, `Task Pipe Init`, `Init task pipe`, `Init Pipe`, `merge gate`, and the three task pipe preset ids.
+- Workspace Monitor check/test/build should pass.
+- `platform-desktop-app run check` should remain `ready_for_dependency_install_audit`.
+- Rust compile and real CLI launches remain unverified until Rust/Tauri setup and installed CLI smoke tests exist.

@@ -32,6 +32,7 @@
 - `PDA-REQ-024`: applied reference-app UI surfaces.
 - `PDA-REQ-025`: multi-file source editing draft queue, dirty state, save-all/revert/close, and backup result surface.
 - `PDA-REQ-026`: platform-first host runtime and external AI CLI guest adapter lane contract.
+- `PDA-REQ-027`: task-intake-based pipe-first multi-CLI lane initialization.
 - `PDA-UX-009` - `PDA-UX-012`: UI flow and code editing surface.
 - `PDA-UX-013`: Desktop tab shows runtime, CLI, terminal result, decision prompt, and source-editing readiness.
 - `PDA-UX-014`: Desktop tab shows CLI session console, decision inbox item count, and scoped source editor.
@@ -40,6 +41,14 @@
 - `PDA-UX-017`: Desktop tab shows command palette, capability cards, run board, process graph, terminal event rail, grouped decisions, replay, diff review, and evidence/promotion surface.
 - `PDA-UX-018`: Desktop tab source-editing surface shows open draft queue, direct path open, indexed browser, dirty-file save/revert/close flow.
 - `PDA-UX-019`: First run and Desktop tab show platform-first launch, external AI CLI guest lanes, and missing CLI setup-later/capability_missing flow.
+- `PDA-UX-020`: Desktop tab shows task pipe preset selection, lane count, adapter list, pipe edges, merge gate, and missing lane state.
+
+## Task Pipe Init Trace
+
+- Requirements: `PDA-REQ-027`, `PDA-UX-020`
+- Implementation/config: `platform-desktop-app/src-tauri/src/lib.rs`, `workspace-monitor/components/MonitorShell.tsx`, `workspace-monitor/app/globals.css`, `agent-platform/configs/integrations/cli-adapter-registry.json`, `platform-desktop-app/configs/desktop-distribution-registry.json`
+- UI tokens: `Task Pipe Init`, `Init task pipe`, `Init Pipe`, `merge gate`
+- Validation: `platform-desktop-app/tests/readiness.test.mjs`, Workspace Monitor TypeScript/build
 
 ## Platform-First Runtime Trace
 

@@ -203,6 +203,50 @@ type CliSessionReport = {
   decisionInboxItems: number;
 };
 
+type CliTaskPipelinePresetReport = {
+  taskKind: string;
+  label: string;
+  intent: string;
+  laneCount: number;
+  adapterIds: string[];
+  mergeGate: string;
+};
+
+type CliTaskPipelineLaneReport = {
+  laneId: string;
+  adapterId: string;
+  role: string;
+  status: string;
+  session?: CliSessionReport | null;
+  error?: string | null;
+};
+
+type CliPipeEdgeReport = {
+  pipeId: string;
+  fromNode: string;
+  toNode: string;
+  stream: string;
+  mode: string;
+  status: string;
+};
+
+type CliTaskPipelineInitReport = {
+  pipelineId: string;
+  taskKind: string;
+  label: string;
+  status: string;
+  intent: string;
+  workingDir: string;
+  promptBytes: number;
+  startedSessions: number;
+  missingLanes: number;
+  mergeGate: string;
+  bounded: boolean;
+  maxOutputBytes: number;
+  lanes: CliTaskPipelineLaneReport[];
+  pipes: CliPipeEdgeReport[];
+};
+
 type WorkspaceTextFile = {
   relativePath: string;
   content: string;
@@ -366,6 +410,33 @@ const sessionModePresets: SessionModePreset[] = [
     intent: "Check risks, missing tests, and unsupported claims before proceeding.",
     prompt:
       "현재 변경 또는 계획을 리뷰해줘. 버그, 누락된 검증, 리소스 누수, 사용자 결정이 필요한 지점을 우선순위로 정리해줘."
+  }
+];
+
+const fallbackTaskPipePresets: CliTaskPipelinePresetReport[] = [
+  {
+    taskKind: "platform_improvement_pipe",
+    label: "Platform Improvement Pipe",
+    intent: "Implementation, review, research, and fallback lanes initialize from one task intake.",
+    laneCount: 4,
+    adapterIds: ["codex-cli", "claude-code-cli", "gemini-cli", "opencode-cli"],
+    mergeGate: "platform_merge_gate"
+  },
+  {
+    taskKind: "knowledge_accumulation_pipe",
+    label: "Knowledge Accumulation Pipe",
+    intent: "Structuring, skeptic, and durable record lanes initialize from messy output.",
+    laneCount: 3,
+    adapterIds: ["gemini-cli", "claude-code-cli", "codex-cli"],
+    mergeGate: "knowledge_merge_gate"
+  },
+  {
+    taskKind: "review_verify_pipe",
+    label: "Review & Verify Pipe",
+    intent: "Bug review, validation, and contrary lanes initialize before release.",
+    laneCount: 3,
+    adapterIds: ["claude-code-cli", "codex-cli", "gemini-cli"],
+    mergeGate: "validation_merge_gate"
   }
 ];
 
@@ -1265,6 +1336,12 @@ function DesktopRuntimePanel({
   const [adapters, setAdapters] = useState<CliAdapterStatus[]>(fallbackDesktopAdapters);
   const [reports, setReports] = useState<CliRunReport[]>([]);
   const [sessions, setSessions] = useState<CliSessionReport[]>([]);
+  const [taskPipePresets, setTaskPipePresets] = useState<CliTaskPipelinePresetReport[]>(fallbackTaskPipePresets);
+  const [selectedTaskPipeKind, setSelectedTaskPipeKind] = useState(fallbackTaskPipePresets[0].taskKind);
+  const [taskPipePrompt, setTaskPipePrompt] = useState(
+    "이 작업을 pipe graph 기준으로 분해해서 각 CLI lane을 init해줘. source-affecting 결정은 merge gate 전까지 보류하고, 질문은 decision inbox로 보내줘."
+  );
+  const [pipelineReports, setPipelineReports] = useState<CliTaskPipelineInitReport[]>([]);
   const [inboxReport, setInboxReport] = useState<HumanDecisionInboxReport | null>(null);
   const [error, setError] = useState("");
   const [runningAdapterId, setRunningAdapterId] = useState("");
@@ -1337,6 +1414,14 @@ function DesktopRuntimePanel({
     ["running", "defer_message_sent"].includes(selectedDecisionSession.status) &&
     Boolean(selectedDecision?.sessionId);
   const selectedMode = sessionModePresets.find((mode) => mode.id === selectedSessionModeId) || sessionModePresets[0];
+  const selectedTaskPipe = taskPipePresets.find((preset) => preset.taskKind === selectedTaskPipeKind) || taskPipePresets[0] || fallbackTaskPipePresets[0];
+  const pipelineStats = useMemo(() => {
+    const latest = pipelineReports[0] || null;
+    const started = pipelineReports.reduce((total, report) => total + report.startedSessions, 0);
+    const missing = pipelineReports.reduce((total, report) => total + report.missingLanes, 0);
+    const edges = pipelineReports.reduce((total, report) => total + report.pipes.length, 0);
+    return { latest, started, missing, edges };
+  }, [pipelineReports]);
   const sessionStats = useMemo(() => {
     const active = sessions.filter((session) => isActiveSessionStatus(session.status)).length;
     const deferred = sessions.filter((session) => session.status === "defer_message_sent").length;
@@ -1399,6 +1484,16 @@ function DesktopRuntimePanel({
             }
           ]
         : []),
+      ...(pipelineStats.latest
+        ? [
+            {
+              id: `pipeline-${pipelineStats.latest.pipelineId}`,
+              label: pipelineStats.latest.status,
+              title: pipelineStats.latest.label,
+              detail: `${pipelineStats.latest.startedSessions} lanes / ${pipelineStats.latest.pipes.length} pipe edges / ${pipelineStats.latest.mergeGate}`
+            }
+          ]
+        : []),
       ...(writeReport
         ? [
             {
@@ -1417,7 +1512,7 @@ function DesktopRuntimePanel({
       }))
     ];
     return items.slice(0, 8);
-  }, [dirtyDraftEntries.length, openDraftEntries.length, outputEvents, selectedDecision, sourceDiff, sourceFile?.relativePath, sourceSaveResults, writeReport]);
+  }, [dirtyDraftEntries.length, openDraftEntries.length, outputEvents, pipelineStats.latest, selectedDecision, sourceDiff, sourceFile?.relativePath, sourceSaveResults, writeReport]);
 
   const refreshAdapters = async () => {
     setError("");
@@ -1430,17 +1525,19 @@ function DesktopRuntimePanel({
     }
 
     try {
-      const [nextHealth, nextAdapters, nextSessions, nextInbox] = await Promise.all([
+      const [nextHealth, nextAdapters, nextSessions, nextInbox, nextTaskPipePresets] = await Promise.all([
         tauriInvoke<DesktopHealthStatus>("app_health"),
         tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
         tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions"),
-        tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox")
+        tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox"),
+        tauriInvoke<CliTaskPipelinePresetReport[]>("list_cli_task_pipeline_presets")
       ]);
       setRuntimeState("available");
       setHealth(nextHealth);
       setAdapters(nextAdapters);
       setSessions(nextSessions);
       setInboxReport(nextInbox);
+      setTaskPipePresets(nextTaskPipePresets.length ? nextTaskPipePresets : fallbackTaskPipePresets);
       setDecisionResumeNotice("");
       if (!selectedDecisionId && nextInbox.decisions[0]) {
         setSelectedDecisionId(nextInbox.decisions[0].id);
@@ -1448,11 +1545,15 @@ function DesktopRuntimePanel({
       if (!nextAdapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId) && nextAdapters[0]) {
         setSelectedSessionAdapterId(nextAdapters[0].adapterId);
       }
+      if (!nextTaskPipePresets.some((preset) => preset.taskKind === selectedTaskPipeKind) && nextTaskPipePresets[0]) {
+        setSelectedTaskPipeKind(nextTaskPipePresets[0].taskKind);
+      }
     } catch (caught) {
       setRuntimeState("unavailable");
       setHealth(null);
       setAdapters(fallbackDesktopAdapters);
       setSessions([]);
+      setTaskPipePresets(fallbackTaskPipePresets);
       setInboxReport(null);
       setDecisionResumeNotice("");
       setError(errorMessage(caught));
@@ -1606,6 +1707,48 @@ function DesktopRuntimePanel({
     try {
       const report = await tauriInvoke<CliSessionReport>("start_cli_adapter_session", args);
       upsertSession(report);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setRunningAdapterId("");
+    }
+  };
+
+  const initTaskPipe = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeState("unavailable");
+      setError("Tauri desktop runtime is not available in this browser view.");
+      return;
+    }
+    if (!taskPipePrompt.trim()) {
+      setError("Task pipe prompt is required.");
+      return;
+    }
+
+    setRunningAdapterId("task-pipe");
+    setError("");
+    const args: Record<string, unknown> = {
+      taskKind: selectedTaskPipe.taskKind,
+      prompt: taskPipePrompt
+    };
+    if (workingDir.trim()) {
+      args.workingDir = workingDir.trim();
+    }
+
+    try {
+      const report = await tauriInvoke<CliTaskPipelineInitReport>("start_cli_task_pipeline", args);
+      setPipelineReports((current) => [report, ...current].slice(0, 8));
+      const laneSessions = report.lanes
+        .map((lane) => lane.session)
+        .filter((session): session is CliSessionReport => Boolean(session));
+      if (laneSessions.length) {
+        setSessions((current) => [
+          ...laneSessions,
+          ...current.filter((item) => !laneSessions.some((session) => session.sessionId === item.sessionId))
+        ]);
+        setSelectedSessionId(laneSessions[0].sessionId);
+      }
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -1949,6 +2092,7 @@ function DesktopRuntimePanel({
       <section className="metrics-band">
         <Metric label="Guest Adapters" value={adapters.length} icon={Network} tone="green" />
         <Metric label="Available" value={availableCount} icon={CheckCircle2} tone="blue" />
+        <Metric label="Task Pipes" value={pipelineReports.length} icon={GitBranch} tone="rose" />
         <Metric label="Decision Items" value={decisionPrompts.length + blockedTaskCount + openInboxDecisions.length} icon={Inbox} tone="amber" />
         <Metric label="Agent Configs" value={agentCatalogCount} icon={Bot} tone="violet" />
         <Metric label="Source Files" value={sourceFileCount} icon={Code2} tone="slate" />
@@ -1977,6 +2121,11 @@ function DesktopRuntimePanel({
             <span>Start selected lane</span>
             <small>{selectedMode.label}</small>
           </button>
+          <button type="button" onClick={initTaskPipe} disabled={!invoke || runningAdapterId !== ""}>
+            <GitBranch size={16} aria-hidden="true" />
+            <span>Init task pipe</span>
+            <small>{selectedTaskPipe.label}</small>
+          </button>
           <button type="button" onClick={refreshDecisionInbox} disabled={!invoke || decisionBusy}>
             <Inbox size={16} aria-hidden="true" />
             <span>Refresh decisions</span>
@@ -1988,6 +2137,97 @@ function DesktopRuntimePanel({
             <small>{sourceDiff?.dirty ? "draft changed" : "ready"}</small>
           </button>
         </div>
+      </section>
+
+      <section className="panel wide task-pipe-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Task Pipe Init</p>
+            <h2>작업 기준 다중 CLI 초기화</h2>
+          </div>
+          <GitBranch size={18} aria-hidden="true" />
+        </div>
+
+        <div className="task-pipe-layout">
+          <div className="task-pipe-controls">
+            <label>
+              <span>Pipe preset</span>
+              <select value={selectedTaskPipeKind} onChange={(event) => setSelectedTaskPipeKind(event.target.value)}>
+                {taskPipePresets.map((preset) => (
+                  <option key={preset.taskKind} value={preset.taskKind}>
+                    {preset.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="session-prompt-field">
+              <span>Task intake</span>
+              <textarea value={taskPipePrompt} onChange={(event) => setTaskPipePrompt(event.target.value)} rows={4} />
+            </label>
+            <button type="button" onClick={initTaskPipe} disabled={!invoke || runningAdapterId !== "" || !taskPipePrompt.trim()}>
+              <Network size={16} aria-hidden="true" />
+              <span>{runningAdapterId === "task-pipe" ? "Initializing" : "Init Pipe"}</span>
+            </button>
+          </div>
+
+          <div className="task-pipe-summary">
+            <article>
+              <span>preset</span>
+              <strong>{selectedTaskPipe.label}</strong>
+              <small>{selectedTaskPipe.intent}</small>
+            </article>
+            <article>
+              <span>lanes</span>
+              <strong>{selectedTaskPipe.laneCount}</strong>
+              <small>{selectedTaskPipe.adapterIds.join(" / ")}</small>
+            </article>
+            <article>
+              <span>merge gate</span>
+              <strong>{selectedTaskPipe.mergeGate}</strong>
+              <small>lane output waits for platform acceptance</small>
+            </article>
+          </div>
+        </div>
+
+        {pipelineReports.length === 0 ? (
+          <p className="empty-state">아직 init된 task pipe가 없습니다. preset을 선택하고 pipe를 시작하세요.</p>
+        ) : (
+          <div className="task-pipe-report-grid">
+            {pipelineReports.slice(0, 3).map((report) => (
+              <article key={report.pipelineId} className={`task-pipe-report status-${report.status}`}>
+                <header>
+                  <div>
+                    <span>{report.taskKind}</span>
+                    <h3>{report.label}</h3>
+                  </div>
+                  <strong>{report.status}</strong>
+                </header>
+                <p>{report.workingDir}</p>
+                <div className="adapter-report">
+                  <span>{report.startedSessions} started</span>
+                  <span>{report.missingLanes} missing</span>
+                  <span>{report.pipes.length} pipes</span>
+                </div>
+                <div className="pipe-lane-grid">
+                  {report.lanes.map((lane) => (
+                    <div key={`${report.pipelineId}-${lane.laneId}`}>
+                      <span>{lane.laneId}</span>
+                      <strong>{lane.status}</strong>
+                      <small>{lane.adapterId} / {lane.role}</small>
+                    </div>
+                  ))}
+                </div>
+                <div className="pipe-edge-list">
+                  {report.pipes.slice(0, 8).map((pipe) => (
+                    <span key={pipe.pipeId}>
+                      {pipe.fromNode} → {pipe.toNode} / {pipe.mode}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="panel wide desktop-control-panel">

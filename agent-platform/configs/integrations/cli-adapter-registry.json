@@ -604,9 +604,22 @@
     "required_when": [
       "one user action launches multiple CLI processes",
       "stdout, stderr, stdin, files, or artifacts connect one CLI to another",
+      "one task intake initializes several CLI lanes through stdin/stdout/stderr pipe contracts",
       "parallel CLI lanes need a fan-in merge gate",
       "a desktop shell, monitor, local daemon, or agent workflow executes several CLIs together"
     ],
+    "pipe_first_init_contract": {
+      "unit": "task_pipe",
+      "description": "A platform task can initialize several optional CLI lanes from one task intake. Each initialized lane must expose stdin init, bounded stdout/stderr capture, decision inbox routing, and merge-gate artifact flow as explicit pipe edges.",
+      "required_edges": [
+        "task_intake_to_lane_stdin",
+        "lane_stdout_stderr_to_platform_event_store",
+        "lane_question_events_to_human_decision_inbox",
+        "lane_accepted_summary_to_merge_gate"
+      ],
+      "missing_cli_behavior": "If a lane adapter is unavailable, mark only that lane capability_missing and still initialize every available independent lane.",
+      "merge_rule": "No source-affecting result from a lane is accepted until the platform merge gate reviews the lane outputs, decisions, artifacts, and validation evidence."
+    },
     "process_node_contract": [
       "process_id",
       "adapter_id",

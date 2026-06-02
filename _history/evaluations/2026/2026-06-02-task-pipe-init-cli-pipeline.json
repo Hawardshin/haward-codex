@@ -1,0 +1,134 @@
+{
+  "pipeline_id": "task-pipe-init-mvp",
+  "purpose": "Validate the task intake to multi-CLI lane initialization graph used by the desktop supervisor.",
+  "work_mode": "governance",
+  "risk_level": "medium",
+  "processes": [
+    {
+      "process_id": "task_intake",
+      "adapter_id": "platform-supervisor",
+      "command": "platform-task-intake",
+      "args": [],
+      "cwd": ".",
+      "env_keys": [],
+      "timeout_seconds": 1,
+      "max_output_bytes": 20000,
+      "required": true
+    },
+    {
+      "process_id": "codex_implementation_lane",
+      "adapter_id": "codex-cli",
+      "command": "codex",
+      "args": [],
+      "cwd": ".",
+      "env_keys": ["PATH"],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": false
+    },
+    {
+      "process_id": "claude_review_lane",
+      "adapter_id": "claude-code-cli",
+      "command": "claude",
+      "args": [],
+      "cwd": ".",
+      "env_keys": ["PATH"],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": false
+    },
+    {
+      "process_id": "gemini_research_lane",
+      "adapter_id": "gemini-cli",
+      "command": "gemini",
+      "args": [],
+      "cwd": ".",
+      "env_keys": ["PATH"],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": false
+    }
+  ],
+  "pipes": [
+    {
+      "pipe_id": "task_intake_to_codex",
+      "from_process": "task_intake",
+      "from_stream": "stdout",
+      "to_process": "codex_implementation_lane",
+      "to_stream": "stdin",
+      "mode": "pipe",
+      "artifact_id": "",
+      "required": false
+    },
+    {
+      "pipe_id": "task_intake_to_claude",
+      "from_process": "task_intake",
+      "from_stream": "stdout",
+      "to_process": "claude_review_lane",
+      "to_stream": "stdin",
+      "mode": "pipe",
+      "artifact_id": "",
+      "required": false
+    },
+    {
+      "pipe_id": "task_intake_to_gemini",
+      "from_process": "task_intake",
+      "from_stream": "stdout",
+      "to_process": "gemini_research_lane",
+      "to_stream": "stdin",
+      "mode": "pipe",
+      "artifact_id": "",
+      "required": false
+    }
+  ],
+  "artifacts": [],
+  "execution_policy": {
+    "shell_allowed": false,
+    "argv_arrays_required": true,
+    "explicit_pipe_graph_required": true,
+    "explicit_cwd_required": true,
+    "adapter_allowlist": ["platform-supervisor", "codex-cli", "claude-code-cli", "gemini-cli", "opencode-cli"]
+  },
+  "safety_controls": [
+    "adapter_allowlist",
+    "argv_arguments",
+    "shell_disabled_by_default",
+    "explicit_cwd_boundary",
+    "environment_allowlist",
+    "secret_redaction",
+    "output_redaction",
+    "permission_scope",
+    "fallback_behavior",
+    "audit_logging"
+  ],
+  "resource_controls": {
+    "timeout_policy": "Each initialized lane inherits SESSION_TIMEOUT_MS and can be cancelled.",
+    "max_output_bytes": 100000,
+    "cancellation_policy": "The platform can cancel each active session and kill/wait the child process.",
+    "cleanup_policy": "Session stdin is dropped on finish; stdout/stderr reader handles are joined when finished.",
+    "orphan_process_policy": "Cancel calls kill and wait the child process; future PTY/process-group cleanup remains a follow-up.",
+    "backpressure_policy": "stdout/stderr are read on separate threads into bounded buffers to avoid pipe buffer blocking."
+  },
+  "merge_strategy": "Available lanes initialize independently and flow to a platform merge gate; missing lanes become capability_missing and do not block independent lanes.",
+  "source_provenance": [
+    "https://nodejs.org/api/child_process.html",
+    "https://doc.rust-lang.org/std/process/struct.Command.html",
+    "https://doc.rust-lang.org/std/process/struct.Stdio.html",
+    "agent-platform/configs/integrations/cli-adapter-registry.json"
+  ],
+  "plan_evidence": [
+    "The user requested a pipe-based structure for initializing diverse CLIs from diverse tasks.",
+    "The existing desktop backend already uses Rust std::process pipes for single CLI sessions.",
+    "The platform-first runtime contract requires external CLIs to remain optional guest adapter lanes."
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-02-task-pipe-init-cli-pipeline.json"
+  ],
+  "rollback_plan": [
+    "Disable the Task Pipe Init UI and keep single CLI session start available.",
+    "Keep the requirements/spec additions but mark the task pipe command as deferred if validation fails."
+  ],
+  "notes": [
+    "This is a contract validation record. Real CLI execution still depends on user-installed optional CLIs."
+  ]
+}

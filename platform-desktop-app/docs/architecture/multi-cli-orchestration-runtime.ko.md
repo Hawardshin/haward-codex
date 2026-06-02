@@ -53,13 +53,14 @@ Platform-first host runtime
 1. 사용자가 작업 목표, 프로젝트, output type을 입력한다.
 2. preflight가 Claude Code, Gemini CLI, Codex CLI, OpenCode의 availability, version, auth/session, permission scope를 확인한다.
 3. 선택된 CLI마다 process node를 만든다.
-4. fan-out/fan-in이 있으면 merge gate를 명시한다.
-5. 각 lane은 cwd, env allowlist, timeout, output bound, cancellation, cleanup policy를 가진다.
-6. 실행 중 terminal output은 lane panel에 보이고, 의미 있는 event는 구조화 record가 된다.
-7. CLI가 질문하면 adapter가 가능한 경우 짧은 defer message를 보내고, dependent lane만 멈춘다.
-8. decision packet은 decision inbox에 저장된다.
-9. 사용자가 답하면 checkpoint에서 resume한다.
-10. merge gate는 accepted, rejected, conflicting, deferred evidence를 분리한 뒤 downstream 결과를 release한다.
+4. task pipe preset은 하나의 task intake에서 여러 optional CLI lane의 stdin init pipe를 만든다.
+5. fan-out/fan-in이 있으면 merge gate를 명시한다.
+6. 각 lane은 cwd, env allowlist, timeout, output bound, cancellation, cleanup policy를 가진다.
+7. 실행 중 terminal output은 lane panel에 보이고, 의미 있는 event는 구조화 record가 된다.
+8. CLI가 질문하면 adapter가 가능한 경우 짧은 defer message를 보내고, dependent lane만 멈춘다.
+9. decision packet은 decision inbox에 저장된다.
+10. 사용자가 답하면 checkpoint에서 resume한다.
+11. merge gate는 accepted, rejected, conflicting, deferred evidence를 분리한 뒤 downstream 결과를 release한다.
 
 ## 데이터 축적 구조
 
@@ -128,6 +129,16 @@ Platform-first host runtime
 - Workspace Monitor `Desktop` 탭은 각 CLI adapter의 설치 힌트, 검증 명령, 공식 참조 링크를 보여준다. 자동 설치는 하지 않는다.
 - session launcher는 `User Task`, `Platform Improvement`, `Knowledge Accumulation`, `Review & Verify` 모드 프리셋을 제공하고 prompt를 채운다.
 - decision inbox panel은 open/answered/total count, decision 목록, answer type/text 입력, 저장된 답변 상태를 보여준다.
+
+## 구현 상태: Task Pipe Init MVP 4
+
+2026-06-02 추가 구현은 단일 CLI session start를 넘어 task intake 기준 multi-CLI lane init을 제공한다.
+
+- Tauri backend는 `list_cli_task_pipeline_presets`, `start_cli_task_pipeline`을 제공한다.
+- preset은 `platform_improvement_pipe`, `knowledge_accumulation_pipe`, `review_verify_pipe`를 포함한다.
+- 각 lane은 allowlist adapter만 사용하고, 누락된 CLI는 해당 lane만 `capability_missing`으로 표시한다.
+- init report는 `task_intake -> lane stdin`, `lane stdout/stderr -> platform_event_store`, `lane question_events -> human_decision_inbox`, `lane accepted_summary -> merge_gate` pipe edge를 반환한다.
+- Workspace Monitor `Desktop` 탭은 `Task Pipe Init` 패널에서 preset, task intake, lane 상태, pipe edge, merge gate를 보여준다.
 
 ## 구현 상태: Decision Resume MVP 4
 

@@ -787,6 +787,7 @@ h3 {
 }
 
 .desktop-command-panel,
+.task-pipe-panel,
 .desktop-control-panel,
 .cli-session-panel,
 .terminal-output-panel,
@@ -833,6 +834,159 @@ h3 {
 
 .desktop-command-grid button:disabled {
   opacity: 0.55;
+}
+
+.task-pipe-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+  gap: 12px;
+  align-items: start;
+  margin-bottom: 14px;
+}
+
+.task-pipe-controls {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.65fr) minmax(280px, 1.35fr) auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.task-pipe-controls label,
+.task-pipe-summary article,
+.task-pipe-report,
+.pipe-lane-grid div {
+  min-width: 0;
+}
+
+.task-pipe-controls label {
+  display: grid;
+  gap: 6px;
+}
+
+.task-pipe-controls label span,
+.task-pipe-summary span,
+.task-pipe-summary small,
+.task-pipe-report header span,
+.pipe-lane-grid span,
+.pipe-lane-grid small,
+.pipe-edge-list span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.task-pipe-controls select,
+.task-pipe-controls textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  color: var(--text);
+  font: inherit;
+}
+
+.task-pipe-controls select {
+  min-height: 38px;
+  padding: 8px 10px;
+}
+
+.task-pipe-controls textarea {
+  padding: 10px;
+  resize: vertical;
+}
+
+.task-pipe-controls button {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid #aebbc8;
+  background: var(--surface);
+  border-radius: 7px;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+
+.task-pipe-controls button:disabled {
+  opacity: 0.55;
+}
+
+.task-pipe-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.task-pipe-summary article,
+.task-pipe-report,
+.pipe-lane-grid div {
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.task-pipe-summary strong,
+.task-pipe-summary small,
+.task-pipe-report p,
+.pipe-lane-grid strong,
+.pipe-lane-grid small {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.task-pipe-summary strong {
+  margin: 4px 0;
+}
+
+.task-pipe-report-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.task-pipe-report {
+  display: grid;
+  gap: 10px;
+}
+
+.task-pipe-report header {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.task-pipe-report header strong {
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  padding: 3px 8px;
+  color: var(--slate);
+  font-size: 12px;
+}
+
+.pipe-lane-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.pipe-edge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pipe-edge-list span {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 4px 7px;
+  overflow-wrap: anywhere;
 }
 
 .desktop-actions {
@@ -2696,6 +2850,8 @@ h3 {
   .task-lanes article:hover,
   .adapter-card:hover,
   .desktop-command-grid button:hover,
+  .task-pipe-report:hover,
+  .task-pipe-summary article:hover,
   .process-node:hover,
   .evidence-grid article:hover,
   .terminal-report-list article:hover {
@@ -2728,6 +2884,9 @@ h3 {
   .agent-map,
   .agent-workload-strip,
   .desktop-command-grid,
+  .task-pipe-summary,
+  .task-pipe-report-grid,
+  .pipe-lane-grid,
   .run-board-strip,
   .process-graph,
   .evidence-grid {
@@ -2742,6 +2901,8 @@ h3 {
   .source-layout,
   .command-center,
   .decision-inbox-layout,
+  .task-pipe-layout,
+  .task-pipe-controls,
   .session-launcher,
   .session-grid,
   .source-review-grid,
@@ -2804,6 +2965,11 @@ h3 {
   .agent-bars,
   .adapter-grid,
   .desktop-command-grid,
+  .task-pipe-layout,
+  .task-pipe-controls,
+  .task-pipe-summary,
+  .task-pipe-report-grid,
+  .pipe-lane-grid,
   .run-board-strip,
   .process-graph,
   .evidence-grid,

@@ -1,0 +1,10 @@
+{
+  "request_id": "UR-2026-06-02-059",
+  "selected_mode": "governance",
+  "reason": "The request changes durable desktop runtime behavior, CLI orchestration contracts, UI, requirements, specs, and validation.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "desktop_productization_context": true,
+  "cli_pipeline_occurred": true,
+  "selected_on": "2026-06-02"
+}

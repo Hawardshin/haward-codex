@@ -34,6 +34,7 @@
 | PDA-REQ-024 | Desktop MVP는 레퍼런스 UI 적용 결과로 command palette, capability center, run board, lane timeline, process graph, grouped decision inbox, decision replay, source diff review, evidence/promotion surface를 같은 supervisor 화면에서 보여야 한다. | must | Workspace Monitor Desktop tab, readiness/test, build |
 | PDA-REQ-025 | Desktop source editing MVP는 여러 workspace-scoped 파일을 동시에 열어 드래프트 큐로 관리하고, dirty 상태, diff preview, 현재 파일 저장, 전체 dirty 파일 저장, 현재 드래프트 되돌리기, 드래프트 닫기, backup 저장 결과를 같은 화면에서 제공해야 한다. | must | Workspace Monitor Desktop tab, readiness/test, TypeScript check |
 | PDA-REQ-026 | 설치형 플랫폼은 Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity 같은 상용/외부 AI 도구 위에서 동작하는 종속 앱이 아니라, 먼저 실행되는 platform-first host runtime이어야 한다. 외부 AI CLI는 플랫폼 위의 guest adapter lane으로만 붙고, task state, durable memory, decision inbox, artifact, validation, UI authority는 플랫폼이 소유해야 한다. | must | CLI adapter registry, desktop registry, architecture docs, readiness/test |
+| PDA-REQ-027 | Desktop supervisor는 단일 CLI session뿐 아니라 task intake를 기준으로 여러 optional CLI lane을 pipe graph로 초기화할 수 있어야 한다. 각 lane은 stdin init, stdout/stderr bounded capture, decision inbox routing, merge gate artifact flow를 명시해야 하며, 누락된 CLI lane은 `capability_missing`으로만 degrade해야 한다. | must | Tauri task pipe command, CLI adapter registry, Workspace Monitor Desktop tab, readiness/test |
 
 ## 현재 상태
 

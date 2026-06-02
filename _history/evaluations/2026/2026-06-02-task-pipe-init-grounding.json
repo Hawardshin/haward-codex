@@ -1,0 +1,105 @@
+{
+  "task": "Ground factual claims for task pipe CLI initialization.",
+  "output_summary": "The repository now includes a task pipe init MVP where one platform task intake can initialize several optional CLI lanes through explicit pipe-oriented session contracts.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "tauri-backend",
+      "source": "platform-desktop-app/src-tauri/src/lib.rs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary backend source containing task pipe preset listing and start commands."
+    },
+    {
+      "evidence_id": "monitor-ui",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Workspace Monitor Desktop UI now exposing Task Pipe Init controls and reports."
+    },
+    {
+      "evidence_id": "cli-registry",
+      "source": "agent-platform/configs/integrations/cli-adapter-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Shared CLI adapter boundary config now containing pipe_first_init_contract."
+    },
+    {
+      "evidence_id": "readiness-test",
+      "source": "platform-desktop-app/tests/readiness.test.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Regression test checks backend command and UI strings for task pipe init."
+    },
+    {
+      "evidence_id": "cli-pipeline",
+      "source": "_history/evaluations/2026/2026-06-02-task-pipe-init-cli-pipeline.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Validated process graph record for task intake to optional CLI lane pipes."
+    },
+    {
+      "evidence_id": "web-search-record",
+      "source": "_history/web-searches/2026/2026-06-02-task-pipe-init.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Web-first source record listing official process and pipe references checked before implementation."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The backend now exposes commands to list task pipeline presets and start a task pipeline.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-backend",
+        "readiness-test"
+      ],
+      "verification_steps": [
+        "Read src-tauri/src/lib.rs.",
+        "Ran platform-desktop-app tests and readiness check."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Task pipeline presets initialize optional CLI lanes and report missing CLI commands as capability_missing.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-backend",
+        "cli-registry",
+        "cli-pipeline"
+      ],
+      "verification_steps": [
+        "Read backend start_cli_task_pipeline implementation.",
+        "Ran check-cli-pipeline."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The Workspace Monitor Desktop UI includes a Task Pipe Init panel with lane and pipe edge reporting.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "readiness-test"
+      ],
+      "verification_steps": [
+        "Read MonitorShell.tsx and globals.css.",
+        "Ran Workspace Monitor check, tests, build, and performance budget."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Actual external CLI behavior remains dependent on user-installed optional CLIs and will need runtime smoke tests after adapter setup."
+  ],
+  "limitation_notes": [
+    "No external AI CLI was installed or launched in this slice.",
+    "Rust/Tauri compile and packaged app smoke remain gated by Rust toolchain installation audit.",
+    "No sidecar, PTY, shell plugin, xterm.js, or Monaco dependency was added."
+  ]
+}

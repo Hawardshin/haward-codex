@@ -1,0 +1,40 @@
+{
+  "task_id": "2026-06-02-task-pipe-init",
+  "title": "Add task pipe based multi-CLI initialization",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "check official pipe/process references",
+      "status": "completed",
+      "duration_seconds": 240,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official docs were checked for pipe behavior and process boundary assumptions."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "add Tauri task pipe command and Workspace Monitor UI",
+      "status": "completed",
+      "duration_seconds": 1500,
+      "measurement": "estimated",
+      "bottleneck_notes": "The implementation touched backend command contracts, UI state, and responsive CSS."
+    },
+    {
+      "phase_id": "contracts",
+      "label": "update requirements, specs, registries, and history",
+      "status": "completed",
+      "duration_seconds": 1200,
+      "measurement": "estimated",
+      "bottleneck_notes": "Durable bilingual contracts required coordinated updates."
+    },
+    {
+      "phase_id": "verification",
+      "label": "run tests, build, and governance checks",
+      "status": "completed",
+      "duration_seconds": 600,
+      "measurement": "estimated",
+      "bottleneck_notes": "Rust compile remains gated by toolchain setup."
+    }
+  ]
+}

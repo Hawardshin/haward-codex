@@ -26,6 +26,21 @@ struct AdapterDefinition {
     session_args: &'static [&'static str],
 }
 
+struct PipelineLaneDefinition {
+    lane_id: &'static str,
+    adapter_id: &'static str,
+    role: &'static str,
+    prompt_suffix: &'static str,
+}
+
+struct PipelineTaskPreset {
+    task_kind: &'static str,
+    label: &'static str,
+    intent: &'static str,
+    lanes: &'static [PipelineLaneDefinition],
+    merge_gate: &'static str,
+}
+
 #[derive(Default)]
 struct SessionStore {
     sessions: Mutex<HashMap<String, CliSession>>,
@@ -116,6 +131,58 @@ struct CliSessionReport {
     working_dir: String,
     defer_message_sent: bool,
     decision_inbox_items: usize,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct CliTaskPipelinePresetReport {
+    task_kind: &'static str,
+    label: &'static str,
+    intent: &'static str,
+    lane_count: usize,
+    adapter_ids: Vec<&'static str>,
+    merge_gate: &'static str,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct CliTaskPipelineLaneReport {
+    lane_id: String,
+    adapter_id: String,
+    role: String,
+    status: String,
+    session: Option<CliSessionReport>,
+    error: Option<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct CliPipeEdgeReport {
+    pipe_id: String,
+    from_node: String,
+    to_node: String,
+    stream: String,
+    mode: String,
+    status: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct CliTaskPipelineInitReport {
+    pipeline_id: String,
+    task_kind: String,
+    label: String,
+    status: String,
+    intent: String,
+    working_dir: String,
+    prompt_bytes: usize,
+    started_sessions: usize,
+    missing_lanes: usize,
+    merge_gate: String,
+    bounded: bool,
+    max_output_bytes: usize,
+    lanes: Vec<CliTaskPipelineLaneReport>,
+    pipes: Vec<CliPipeEdgeReport>,
 }
 
 #[derive(Serialize)]
@@ -229,6 +296,99 @@ static ADAPTERS: &[AdapterDefinition] = &[
     },
 ];
 
+static PLATFORM_IMPROVEMENT_LANES: &[PipelineLaneDefinition] = &[
+    PipelineLaneDefinition {
+        lane_id: "implementation_lane",
+        adapter_id: "codex-cli",
+        role: "implementation and source-edit lane",
+        prompt_suffix: "Focus on scoped implementation. Emit source-affecting decisions as explicit questions.",
+    },
+    PipelineLaneDefinition {
+        lane_id: "review_lane",
+        adapter_id: "claude-code-cli",
+        role: "requirements and review lane",
+        prompt_suffix: "Check requirements, policy, risks, and missing validation before merge.",
+    },
+    PipelineLaneDefinition {
+        lane_id: "research_lane",
+        adapter_id: "gemini-cli",
+        role: "research and alternative-discovery lane",
+        prompt_suffix: "Look for comparable patterns and source-backed alternatives, then summarize uncertainty.",
+    },
+    PipelineLaneDefinition {
+        lane_id: "fallback_build_lane",
+        adapter_id: "opencode-cli",
+        role: "fallback implementation and build lane",
+        prompt_suffix: "Provide a second implementation path and call out conflicts with the primary lane.",
+    },
+];
+
+static KNOWLEDGE_ACCUMULATION_LANES: &[PipelineLaneDefinition] = &[
+    PipelineLaneDefinition {
+        lane_id: "structure_lane",
+        adapter_id: "gemini-cli",
+        role: "unstructured output structuring lane",
+        prompt_suffix: "Turn logs and mixed output into schema, provenance, null handling, and validation notes.",
+    },
+    PipelineLaneDefinition {
+        lane_id: "skeptic_lane",
+        adapter_id: "claude-code-cli",
+        role: "grounding and skeptic lane",
+        prompt_suffix: "Separate supported facts, unsupported claims, assumptions, and required user decisions.",
+    },
+    PipelineLaneDefinition {
+        lane_id: "record_lane",
+        adapter_id: "codex-cli",
+        role: "durable record and validation lane",
+        prompt_suffix: "Map accepted knowledge into requirements, specs, history, and evaluator-ready records.",
+    },
+];
+
+static REVIEW_VERIFY_LANES: &[PipelineLaneDefinition] = &[
+    PipelineLaneDefinition {
+        lane_id: "bug_review_lane",
+        adapter_id: "claude-code-cli",
+        role: "bug, regression, and risk review lane",
+        prompt_suffix: "Prioritize concrete bugs, regressions, missing tests, and source references.",
+    },
+    PipelineLaneDefinition {
+        lane_id: "validation_lane",
+        adapter_id: "codex-cli",
+        role: "validation command and repair lane",
+        prompt_suffix: "Run or propose validation commands, then isolate repairable failures from deferred work.",
+    },
+    PipelineLaneDefinition {
+        lane_id: "contrary_lane",
+        adapter_id: "gemini-cli",
+        role: "contrary evidence and edge-case lane",
+        prompt_suffix: "Find edge cases, contrary examples, and weak assumptions before merge.",
+    },
+];
+
+static PIPELINE_PRESETS: &[PipelineTaskPreset] = &[
+    PipelineTaskPreset {
+        task_kind: "platform_improvement_pipe",
+        label: "Platform Improvement Pipe",
+        intent: "Initialize implementation, review, research, and fallback lanes for platform changes.",
+        lanes: PLATFORM_IMPROVEMENT_LANES,
+        merge_gate: "platform_merge_gate",
+    },
+    PipelineTaskPreset {
+        task_kind: "knowledge_accumulation_pipe",
+        label: "Knowledge Accumulation Pipe",
+        intent: "Initialize structuring, skeptic, and record lanes for durable knowledge capture.",
+        lanes: KNOWLEDGE_ACCUMULATION_LANES,
+        merge_gate: "knowledge_merge_gate",
+    },
+    PipelineTaskPreset {
+        task_kind: "review_verify_pipe",
+        label: "Review & Verify Pipe",
+        intent: "Initialize review, validation, and contrary lanes before release or merge.",
+        lanes: REVIEW_VERIFY_LANES,
+        merge_gate: "validation_merge_gate",
+    },
+];
+
 #[tauri::command]
 fn app_health() -> HealthStatus {
     HealthStatus {
@@ -255,6 +415,11 @@ fn run_all_cli_adapter_health() -> Vec<CliRunReport> {
 }
 
 #[tauri::command]
+fn list_cli_task_pipeline_presets() -> Vec<CliTaskPipelinePresetReport> {
+    PIPELINE_PRESETS.iter().map(pipeline_preset_report).collect()
+}
+
+#[tauri::command]
 fn start_cli_adapter_session(
     store: State<'_, SessionStore>,
     adapter_id: String,
@@ -268,9 +433,155 @@ fn start_cli_adapter_session(
     }
 
     let adapter = find_adapter(&adapter_id).ok_or_else(|| format!("Unknown adapter id: {adapter_id}"))?;
+    let working_dir = resolve_workspace_dir(working_dir.as_deref())?;
+    let (session_id, mut session, report) = create_cli_session(adapter, &prompt, working_dir)?;
+    match store.sessions.lock() {
+        Ok(mut sessions) => {
+            sessions.insert(session_id, session);
+        }
+        Err(_) => {
+            let _ = session.child.kill();
+            let _ = session.child.wait();
+            return Err("Failed to lock CLI session store.".to_string());
+        }
+    }
+    Ok(report)
+}
+
+#[tauri::command]
+fn start_cli_task_pipeline(
+    store: State<'_, SessionStore>,
+    task_kind: String,
+    prompt: String,
+    working_dir: Option<String>,
+) -> Result<CliTaskPipelineInitReport, String> {
+    if prompt.len() > MAX_SESSION_INPUT_BYTES {
+        return Err(format!(
+            "Prompt is too large. Max input is {MAX_SESSION_INPUT_BYTES} bytes."
+        ));
+    }
+
+    let preset = find_pipeline_preset(&task_kind).ok_or_else(|| format!("Unknown task pipe kind: {task_kind}"))?;
+    let resolved_working_dir = resolve_workspace_dir(working_dir.as_deref())?;
+    let pipeline_id = new_session_id(preset.task_kind);
+    let mut lane_reports = Vec::new();
+    let mut pipe_reports = Vec::new();
+    let mut pending_sessions: Vec<(String, CliSession)> = Vec::new();
+
+    for lane in preset.lanes {
+        let adapter = find_adapter(lane.adapter_id).ok_or_else(|| format!("Unknown adapter id in pipe preset: {}", lane.adapter_id))?;
+        if resolve_command(adapter.command).is_none() {
+            let status = "capability_missing".to_string();
+            lane_reports.push(CliTaskPipelineLaneReport {
+                lane_id: lane.lane_id.to_string(),
+                adapter_id: lane.adapter_id.to_string(),
+                role: lane.role.to_string(),
+                status: status.clone(),
+                session: None,
+                error: Some(format!("Command '{}' was not found on PATH.", adapter.command)),
+            });
+            append_pipe_edges(&mut pipe_reports, &pipeline_id, lane.lane_id, preset.merge_gate, &status);
+            continue;
+        }
+
+        let lane_prompt = pipeline_lane_prompt(preset, lane, &prompt);
+        if lane_prompt.len() > MAX_SESSION_INPUT_BYTES {
+            let status = "init_failed".to_string();
+            lane_reports.push(CliTaskPipelineLaneReport {
+                lane_id: lane.lane_id.to_string(),
+                adapter_id: lane.adapter_id.to_string(),
+                role: lane.role.to_string(),
+                status: status.clone(),
+                session: None,
+                error: Some(format!(
+                    "Lane prompt is too large after pipe metadata was added. Max input is {MAX_SESSION_INPUT_BYTES} bytes."
+                )),
+            });
+            append_pipe_edges(&mut pipe_reports, &pipeline_id, lane.lane_id, preset.merge_gate, &status);
+            continue;
+        }
+        match create_cli_session(adapter, &lane_prompt, resolved_working_dir.clone()) {
+            Ok((session_id, session, report)) => {
+                let status = report.status.clone();
+                lane_reports.push(CliTaskPipelineLaneReport {
+                    lane_id: lane.lane_id.to_string(),
+                    adapter_id: lane.adapter_id.to_string(),
+                    role: lane.role.to_string(),
+                    status: status.clone(),
+                    session: Some(report),
+                    error: None,
+                });
+                append_pipe_edges(&mut pipe_reports, &pipeline_id, lane.lane_id, preset.merge_gate, &status);
+                pending_sessions.push((session_id, session));
+            }
+            Err(error) => {
+                let status = "init_failed".to_string();
+                lane_reports.push(CliTaskPipelineLaneReport {
+                    lane_id: lane.lane_id.to_string(),
+                    adapter_id: lane.adapter_id.to_string(),
+                    role: lane.role.to_string(),
+                    status: status.clone(),
+                    session: None,
+                    error: Some(error),
+                });
+                append_pipe_edges(&mut pipe_reports, &pipeline_id, lane.lane_id, preset.merge_gate, &status);
+            }
+        }
+    }
+
+    let started_sessions = pending_sessions.len();
+    let missing_lanes = lane_reports
+        .iter()
+        .filter(|lane| lane.status == "capability_missing")
+        .count();
+    let status = if started_sessions > 0 {
+        "initialized"
+    } else if missing_lanes == lane_reports.len() {
+        "capability_missing"
+    } else {
+        "init_failed"
+    };
+
+    match store.sessions.lock() {
+        Ok(mut sessions) => {
+            for (session_id, session) in pending_sessions {
+                sessions.insert(session_id, session);
+            }
+        }
+        Err(_) => {
+            for (_, mut session) in pending_sessions {
+                let _ = session.child.kill();
+                let _ = session.child.wait();
+            }
+            return Err("Failed to lock CLI session store.".to_string());
+        }
+    }
+
+    Ok(CliTaskPipelineInitReport {
+        pipeline_id,
+        task_kind: preset.task_kind.to_string(),
+        label: preset.label.to_string(),
+        status: status.to_string(),
+        intent: preset.intent.to_string(),
+        working_dir: resolved_working_dir.to_string_lossy().to_string(),
+        prompt_bytes: prompt.len(),
+        started_sessions,
+        missing_lanes,
+        merge_gate: preset.merge_gate.to_string(),
+        bounded: true,
+        max_output_bytes: MAX_SESSION_OUTPUT_BYTES,
+        lanes: lane_reports,
+        pipes: pipe_reports,
+    })
+}
+
+fn create_cli_session(
+    adapter: &'static AdapterDefinition,
+    prompt: &str,
+    working_dir: PathBuf,
+) -> Result<(String, CliSession, CliSessionReport), String> {
     let path = resolve_command(adapter.command)
         .ok_or_else(|| format!("Command '{}' was not found on PATH.", adapter.command))?;
-    let working_dir = resolve_workspace_dir(working_dir.as_deref())?;
     let mut child = Command::new(&path)
         .args(adapter.session_args)
         .current_dir(&working_dir)
@@ -347,12 +658,7 @@ fn start_cli_adapter_session(
         decision_inbox_items: 0,
     };
     let report = poll_session_locked(&session_id, &mut session);
-    store
-        .sessions
-        .lock()
-        .map_err(|_| "Failed to lock CLI session store.".to_string())?
-        .insert(session_id, session);
-    Ok(report)
+    Ok((session_id, session, report))
 }
 
 #[tauri::command]
@@ -618,7 +924,9 @@ pub fn run() {
             list_cli_adapters,
             run_cli_adapter_health,
             run_all_cli_adapter_health,
+            list_cli_task_pipeline_presets,
             start_cli_adapter_session,
+            start_cli_task_pipeline,
             poll_cli_adapter_session,
             list_cli_adapter_sessions,
             write_cli_adapter_stdin,
@@ -636,6 +944,75 @@ pub fn run() {
 
 fn find_adapter(adapter_id: &str) -> Option<&'static AdapterDefinition> {
     ADAPTERS.iter().find(|adapter| adapter.adapter_id == adapter_id)
+}
+
+fn find_pipeline_preset(task_kind: &str) -> Option<&'static PipelineTaskPreset> {
+    PIPELINE_PRESETS.iter().find(|preset| preset.task_kind == task_kind)
+}
+
+fn pipeline_preset_report(preset: &PipelineTaskPreset) -> CliTaskPipelinePresetReport {
+    CliTaskPipelinePresetReport {
+        task_kind: preset.task_kind,
+        label: preset.label,
+        intent: preset.intent,
+        lane_count: preset.lanes.len(),
+        adapter_ids: preset.lanes.iter().map(|lane| lane.adapter_id).collect(),
+        merge_gate: preset.merge_gate,
+    }
+}
+
+fn pipeline_lane_prompt(preset: &PipelineTaskPreset, lane: &PipelineLaneDefinition, prompt: &str) -> String {
+    format!(
+        "[Platform task pipe init]\nTask kind: {}\nPreset: {}\nLane id: {}\nLane role: {}\nMerge gate: {}\nPipe contract: read task input from stdin, stream stdout/stderr continuously, send questions as explicit decision prompts, and avoid source-affecting decisions until the platform merge gate accepts them.\n\nTask input:\n{}\n\nLane instruction:\n{}",
+        preset.task_kind,
+        preset.label,
+        lane.lane_id,
+        lane.role,
+        preset.merge_gate,
+        prompt,
+        lane.prompt_suffix
+    )
+}
+
+fn append_pipe_edges(
+    pipes: &mut Vec<CliPipeEdgeReport>,
+    pipeline_id: &str,
+    lane_id: &str,
+    merge_gate: &str,
+    status: &str,
+) {
+    pipes.push(CliPipeEdgeReport {
+        pipe_id: format!("{pipeline_id}_{lane_id}_stdin_init"),
+        from_node: "task_intake".to_string(),
+        to_node: lane_id.to_string(),
+        stream: "stdin".to_string(),
+        mode: "pipe_init".to_string(),
+        status: status.to_string(),
+    });
+    pipes.push(CliPipeEdgeReport {
+        pipe_id: format!("{pipeline_id}_{lane_id}_stdout_stderr_capture"),
+        from_node: lane_id.to_string(),
+        to_node: "platform_event_store".to_string(),
+        stream: "stdout_stderr".to_string(),
+        mode: "bounded_capture".to_string(),
+        status: status.to_string(),
+    });
+    pipes.push(CliPipeEdgeReport {
+        pipe_id: format!("{pipeline_id}_{lane_id}_decision_inbox"),
+        from_node: lane_id.to_string(),
+        to_node: "human_decision_inbox".to_string(),
+        stream: "question_events".to_string(),
+        mode: "decision_pipe".to_string(),
+        status: status.to_string(),
+    });
+    pipes.push(CliPipeEdgeReport {
+        pipe_id: format!("{pipeline_id}_{lane_id}_merge_gate"),
+        from_node: lane_id.to_string(),
+        to_node: merge_gate.to_string(),
+        stream: "accepted_summary".to_string(),
+        mode: "artifact_pipe".to_string(),
+        status: status.to_string(),
+    });
 }
 
 fn adapter_status(adapter: &AdapterDefinition) -> CliAdapterStatus {

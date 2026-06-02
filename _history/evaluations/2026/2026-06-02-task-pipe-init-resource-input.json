@@ -1,0 +1,110 @@
+{
+  "task": "Task pipe CLI init resource review",
+  "work_mode": "governance",
+  "runtime_context": [
+    "Tauri backend command definitions",
+    "Rust std::process Stdio::piped session lifecycle",
+    "React Desktop tab UI",
+    "Next.js static build"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "future-cli-child-processes",
+      "category": "process",
+      "description": "The new task pipe command can initialize several external CLI child processes when adapters are configured.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Reuse the existing session lifecycle with explicit adapter lookup, bounded prompt/output, timeout, stdin drop, stdout/stderr reader threads, and cancel kill/wait path.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs create_cli_session",
+        "platform-desktop-app/src-tauri/src/lib.rs start_cli_task_pipeline"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "optional-cli-absence",
+      "category": "process",
+      "description": "Codex, Claude, Gemini, or OpenCode CLI may be missing on the user's machine.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Missing adapter commands become capability_missing lane reports and do not block available lanes or the platform shell.",
+      "evidence": [
+        "agent-platform/configs/integrations/cli-adapter-registry.json",
+        "platform-desktop-app/src-tauri/src/lib.rs start_cli_task_pipeline",
+        "_history/evaluations/2026/2026-06-02-task-pipe-init-cli-pipeline.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "static-build-resource",
+      "category": "large_data",
+      "description": "The Workspace Monitor UI build must keep the existing static chunk performance budget.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Run static build and performance budget after UI changes.",
+      "evidence": [
+        "npm --prefix workspace-monitor run build",
+        "npm --prefix workspace-monitor run perf:budget"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "cli-session-lifecycle-contract",
+      "resource": "optional external CLI child process per lane",
+      "create_path": "start_cli_task_pipeline calls create_cli_session for each available lane",
+      "cleanup_path": "cancel_cli_session kills and waits child process; finish path joins stdout/stderr reader handles",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Rust source inspection",
+        "npm --prefix platform-desktop-app test",
+        "npm --prefix platform-desktop-app run check"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "typecheck",
+      "metric": "TypeScript compile",
+      "tool": "npm --prefix workspace-monitor run check",
+      "threshold": "no type errors",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "tsc --noEmit exited 0"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "static-build",
+      "metric": "Next.js production static build",
+      "tool": "npm --prefix workspace-monitor run build",
+      "threshold": "build exits 0 and emits static UI",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "next build compiled successfully"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "performance-budget",
+      "metric": "largest initial static chunk",
+      "tool": "npm --prefix workspace-monitor run perf:budget",
+      "threshold": "largest chunk below 1000000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "largest chunk 227537 bytes; chunk count 8"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No real external CLI child process, long-running daemon, sidecar, PTY, xterm.js, Monaco, or new dependency was launched or installed in this slice.",
+    "Rust/Tauri compile remains deferred until a documented Rust toolchain installation audit."
+  ]
+}

@@ -7,8 +7,8 @@ Define the product contract for an installable desktop app that can configure Cl
 ## Requirements
 
 - `REQ-WS-085`
-- `PDA-REQ-013` - `PDA-REQ-026`
-- `PDA-UX-009` - `PDA-UX-019`
+- `PDA-REQ-013` - `PDA-REQ-027`
+- `PDA-UX-009` - `PDA-UX-020`
 
 ## Scope
 
@@ -18,6 +18,7 @@ Define the product contract for an installable desktop app that can configure Cl
 - Project-local architecture document
 - Readiness/test reinforcement for the new documents
 - Tauri backend allowlisted CLI detection and bounded health/version checks
+- Tauri backend task pipe preset listing and task-intake-based multi-CLI lane init command
 - Workspace Monitor Desktop tab and browser fallback
 - Tauri backend pipe-based CLI session start/poll/stdin/defer/cancel commands and human decision inbox append on defer
 - Tauri backend human decision inbox list/answer commands
@@ -27,6 +28,7 @@ Define the product contract for an installable desktop app that can configure Cl
 - Workspace Monitor command palette, capability center cards, run board, process graph, terminal event rail, grouped decision inbox, decision replay, source diff review, and evidence/promotion surface
 - Workspace Monitor multi-file source editing draft queue, direct path open, indexed file browser, dirty state, save current, save all, revert, close, and backup result surface
 - Platform-first host runtime contract: the platform launches first and external AI CLIs attach only as guest adapter lanes
+- Pipe-first task init contract: one task intake creates stdin init, stdout/stderr capture, decision inbox pipe, and merge gate edges for several optional CLI lanes
 
 ## Non-Scope
 
@@ -42,6 +44,7 @@ Define the product contract for an installable desktop app that can configure Cl
 - The four CLIs are optional guest adapter lanes; missing tools return `capability_missing` and disable only that lane.
 - The first supervisor MVP runs allowlisted CLI PATH detection and stdin-free bounded version checks.
 - The second supervisor MVP provides pipe-based session start, poll, stdin, defer, and cancel for allowlisted CLIs without adding the shell plugin, and stores detected questions in `_ops/coordination/human-decision-inbox.json` when deferring.
+- The third supervisor MVP initializes several optional CLI lanes at once through task pipe presets and returns each lane's pipe edges plus merge gate as a platform-owned report.
 - Users can see per-CLI setup hints and verification commands, create session prompts from work-mode presets, and save answers to deferred decision items from the Desktop tab.
 - A deferred decision with session metadata sends the saved answer to the linked active CLI session stdin and refreshes the session report only after the user explicitly chooses answer-and-resume.
 - The Desktop tab shows quick action commands, capability status, lane timeline, process graph, structured terminal events, grouped decisions, replay metadata, source diffs, and evidence/promotion candidates as the applied reference UI layer.
@@ -62,6 +65,7 @@ Define the product contract for an installable desktop app that can configure Cl
 - The `workspace-monitor` Desktop tab includes `Command Palette`, `Capability Center`, `Run Board`, process graph, terminal event, decision replay, `Source Review`, `Evidence / Promotion`, and the related UI state.
 - The `workspace-monitor` Desktop tab includes `Multi-file scoped editor`, `File Edit Queue`, `Open Path`, `Save Current`, `Save All`, and `Revert Draft`, and shows open/dirty draft counts plus backup save results.
 - The `workspace-monitor` Desktop tab includes `Platform-first host`, `Guest adapters`, `Platform state owner`, and related UI state to show that external AI CLIs are guest lanes on top of the platform.
+- The `workspace-monitor` Desktop tab includes `Task Pipe Init`, `Init task pipe`, `Init Pipe`, `merge gate`, and related UI state to show task-intake-based multi-CLI lane initialization.
 - Tauri file commands block `_private/`, `outputs/`, paths outside the workspace, and symlink escapes, and create backups before writes.
 - Requirements, specs, and traceability link the new capability.
 - Evaluation records distinguish the current bounded health/session/file-edit implementation from later PTY supervisor resource and CLI-pipeline risks.

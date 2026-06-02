@@ -88,3 +88,22 @@ cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipe
 - defer command는 감지된 질문을 `_ops/coordination/human-decision-inbox.json`에 중복 없이 append하는 계약을 가져야 한다.
 - decision answer command는 선택된 decision의 status를 `answered`로 바꾸고 answer와 decision_history를 저장하는 계약을 가져야 한다.
 - answer-and-resume command는 session metadata가 있는 decision에서 answer 저장 후 같은 답변을 linked active CLI session stdin으로 보내고 session report를 갱신하는 계약을 가져야 한다.
+
+## Task Pipe Init MVP 3 추가 검증
+
+```bash
+npm --prefix workspace-monitor run check
+npm --prefix workspace-monitor test
+npm --prefix workspace-monitor run build
+npm --prefix platform-desktop-app test
+npm --prefix platform-desktop-app run check
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integrations/cli-adapter-registry.json ../platform-desktop-app/configs/desktop-distribution-registry.json ../platform-desktop-app/configs/user-flow-registry.json
+git diff --check
+```
+
+예상 결과:
+
+- readiness test는 `list_cli_task_pipeline_presets`, `start_cli_task_pipeline`, `Task Pipe Init`, `Init task pipe`, `Init Pipe`, `merge gate`, 세 task pipe preset id를 확인해야 한다.
+- Workspace Monitor check/test/build가 통과해야 한다.
+- `platform-desktop-app run check`는 `ready_for_dependency_install_audit`를 유지해야 한다.
+- Rust compile과 실제 CLI launch는 Rust/Tauri setup과 installed CLI smoke test가 생기기 전까지 검증하지 않는다.

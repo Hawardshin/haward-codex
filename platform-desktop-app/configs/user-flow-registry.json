@@ -862,6 +862,7 @@
     "Task execution shows active phase, elapsed time, evidence, artifacts, decisions, and verification state.",
     "The platform-first app opens before any AI CLI and owns the durable task state, decision inbox, artifacts, validation, and UI authority.",
     "AI CLI orchestration can show Claude Code, Gemini CLI, Codex CLI, and OpenCode as optional guest adapters without making any one CLI or commercial assistant host mandatory.",
+    "A user can choose a task pipe preset and initialize several optional CLI lanes from one task intake, with stdin init, stdout/stderr capture, decision inbox routing, and merge gate edges visible.",
     "Interactive CLI questions route to decision inbox and pause only dependent lanes.",
     "Terminal output is visible in lane context, but durable platform state is stored as structured records with retention and redaction policy.",
     "Source editing has a planned open-source editor surface and does not require writing a custom editor from scratch.",

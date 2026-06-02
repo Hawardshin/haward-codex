@@ -19,6 +19,7 @@
 - [x] Workspace Monitor에 reference-app UI 적용: command palette, capability center metadata, run board, process graph, terminal event rail, grouped decision inbox, decision replay, source diff review, evidence/promotion surface 구현
 - [x] Workspace Monitor source editor를 multi-file draft queue, indexed file browser, direct path open, dirty state, save current, save all, revert, close, backup result surface로 확장
 - [x] 플랫폼-first host runtime 계약을 CLI adapter registry, desktop registry, Desktop 탭 UI, readiness test에 반영
+- [x] Tauri backend와 Workspace Monitor에 task intake 기준 pipe-first multi-CLI lane init command/UI 추가
 - [x] view mode registry에 `desktop` section 노출
 - [x] history, omission, resource, grounding, evaluation 기록 생성
 - [ ] interactive PTY 기반 CLI task supervisor 구현은 후속 스펙에서 진행
