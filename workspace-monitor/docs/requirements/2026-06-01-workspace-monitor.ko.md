@@ -33,6 +33,7 @@
 | REQ-WM-020 | 웹 UI는 Overview 상단에서 현재 섹션의 상태, 주의 수준, 다음 행동, 근거 카운트, runtime 바로가기를 한 줄 작업면으로 제공해야 한다. | should | section tab badge와 `operator-strip` 렌더링 확인, `npm test`, `npm run check`, `npm run build` 확인 |
 | REQ-WM-021 | 웹 UI는 히스토리의 최신 사용자 의도 기반 기능 지도를 읽어 의도 수, 기능 축, 구현된 기능, 다음 기능 후보, Now/Next/Later 로드맵, source freshness를 developer/superadmin 보기에서 탐색할 수 있어야 한다. | must | snapshot의 `intentFeatureMap`, `Intent Map` 탭, customer snapshot sanitization, `npm run collect`, `npm test`, `npm run check:intent-map`, `npm run check:intent-map:customer`, `npm run check`, `npm run build` 확인 |
 | REQ-WM-022 | repository snapshot collector는 기능별 데이터 추출 로직을 명확한 모듈 경계로 분리해, 지속 리팩터링 중에도 동작 보존과 테스트 가능한 책임 경계를 유지해야 한다. | should | `intent-feature-map` collector 모듈 경계, 기존 collector export 호환성, `npm test`, `npm run collect`, `npm run check:intent-map`, `npm run check` 확인 |
+| REQ-WM-023 | 웹 UI는 플랫폼의 운영 메모리, 플랫폼 코어, 데스크톱 제품, 모니터 UI, 도메인 프로젝트, 런타임/로컬 데이터 계층을 한눈에 보여주고 각 계층의 소유 경계, 주요 경로, 금지 경계, 복잡도 압력점을 표시해야 한다. | must | snapshot의 `structureOverview`, Structure 탭의 Architecture Backbone/Boundary Rules/Pressure, customer snapshot sanitization, `npm test`, `npm run check`, `npm run build`, `npm run check:intent-map:customer` 확인 |
 
 ## 범위
 
@@ -53,6 +54,7 @@
 - 현재 상태, 다음 행동, evidence/runtime shortcut을 묶는 Overview 운영 작업면
 - 사용자 의도 기반 기능 지도를 노출하는 `intentFeatureMap` snapshot과 `Intent Map` 섹션
 - snapshot collector의 기능별 데이터 추출 모듈 경계
+- 플랫폼 계층, 소유 경계, 복잡도 압력점을 보여주는 `structureOverview` snapshot과 Structure 탭
 - Vercel 배포 문서
 
 ## 제외 범위

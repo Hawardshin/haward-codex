@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-02T19:40:32.604Z",
+  "generatedAt": "2026-06-02T19:56:53.917Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -26,6 +26,7 @@
     "intentFeatureNow": 0,
     "intentFeatureNext": 0,
     "intentFeatureLater": 0,
+    "structurePressurePoints": 0,
     "sourceFiles": 0,
     "rootFolders": 0
   },
@@ -42,6 +43,18 @@
     "docsCategories": [],
     "projectHomes": [],
     "historyRoots": []
+  },
+  "structureOverview": {
+    "summary": {
+      "totalPlanes": 0,
+      "totalBoundaryRules": 0,
+      "totalPressurePoints": 0,
+      "topSourceHotspots": 0
+    },
+    "planes": [],
+    "boundaryRules": [],
+    "pressurePoints": [],
+    "sourceHotspots": []
   },
   "viewModeCatalog": {
     "defaultMode": "user",

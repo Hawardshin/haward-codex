@@ -1,0 +1,19 @@
+{
+  "task": "Workspace Monitor structure clarity overview",
+  "selected_mode": "governance",
+  "reason": "The request changes durable platform structure visibility, monitor information architecture, requirements, and snapshot contracts.",
+  "web_first_completed": true,
+  "memory_bootstrap_completed": true,
+  "large_scope_decomposition_required": true,
+  "large_scope_triggers": [
+    "broad_language",
+    "large_file_set",
+    "context_pressure",
+    "unknown_blast_radius"
+  ],
+  "view_mode": "superadmin_developer",
+  "install_mode": "not_applicable",
+  "resource_risk_occurred": true,
+  "resource_risk_reason": "The collector now scans source roots for structure hotspot metadata; generated, target, private, and output paths must remain excluded.",
+  "selected_at": "2026-06-03"
+}

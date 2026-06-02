@@ -204,6 +204,10 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.stats.philosophyFeatureCandidates, 1);
   assert.equal(snapshot.philosophyFeatureExtraction.summary.requiredPrinciples, 1);
   assert.equal(snapshot.philosophyFeatureExtraction.candidates[0].smallestAssetType, "tool");
+  assert.equal(snapshot.structureOverview.summary.totalPlanes, 6);
+  assert.equal(snapshot.structureOverview.planes.some((plane) => plane.id === "monitor-ui"), true);
+  assert.equal(snapshot.structureOverview.boundaryRules.some((rule) => rule.id === "project-boundary-first"), true);
+  assert.equal(snapshot.stats.structurePressurePoints, snapshot.structureOverview.summary.totalPressurePoints);
   assert.equal(snapshot.documents.some((document) => document.language === "ko"), true);
 });
 
@@ -236,6 +240,7 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       intentFeatureNow: 1,
       intentFeatureNext: 1,
       intentFeatureLater: 1,
+      structurePressurePoints: 1,
       sourceFiles: 1,
       rootFolders: 1
     },
@@ -253,6 +258,18 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       projectHomes: [],
       historyRoots: []
     },
+    structureOverview: {
+      summary: {
+        totalPlanes: 1,
+        totalBoundaryRules: 1,
+        totalPressurePoints: 1,
+        topSourceHotspots: 1
+      },
+      planes: [{ id: "desktop-product", label: "Desktop Product" }],
+      boundaryRules: [{ id: "customer-source-separation" }],
+      pressurePoints: [{ id: "large-source" }],
+      sourceHotspots: [{ path: "platform-desktop-app/src-tauri/src/lib.rs" }]
+    },
     categories: ["project-doc"],
     publicReview: { status: "review_required_before_public_deploy", checklist: [] }
   };
@@ -264,8 +281,11 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.stats.documents, 0);
   assert.equal(customer.stats.philosophyFeatureCandidates, 0);
   assert.equal(customer.stats.intentFeatureThemes, 0);
+  assert.equal(customer.stats.structurePressurePoints, 0);
   assert.equal(customer.sourceFiles.length, 0);
   assert.equal(customer.documents.length, 0);
+  assert.equal(customer.structureOverview.summary.totalPlanes, 0);
+  assert.equal(customer.structureOverview.pressurePoints.length, 0);
   assert.equal(customer.philosophyFeatureExtraction.candidates.length, 0);
   assert.equal(customer.intentFeatureMap.themes.length, 0);
   assert.equal(customer.intentFeatureMap.roadmap.now.length, 0);
@@ -568,14 +588,20 @@ test("collectSourceFiles skips generated snapshots and reads source roots", () =
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-source-test-"));
   fs.mkdirSync(path.join(root, "app", "src", "generated"), { recursive: true });
   fs.mkdirSync(path.join(root, "app", "src", "core"), { recursive: true });
+  fs.mkdirSync(path.join(root, "app", "src-tauri", "src"), { recursive: true });
+  fs.mkdirSync(path.join(root, "app", "src-tauri", "target", "debug"), { recursive: true });
   fs.writeFileSync(path.join(root, "app", "src", "core", "index.ts"), "export const value = 1;\n");
   fs.writeFileSync(path.join(root, "app", "src", "generated", "snapshot.json"), "{}\n");
+  fs.writeFileSync(path.join(root, "app", "src-tauri", "src", "lib.rs"), "pub fn run() {}\n");
+  fs.writeFileSync(path.join(root, "app", "src-tauri", "target", "debug", "build.rs"), "fn main() {}\n");
 
   const files = collectSourceFiles(root, [{ name: "app", path: "app/" }]);
+  const tsFile = files.find((file) => file.path === "app/src/core/index.ts");
+  const rustFile = files.find((file) => file.path === "app/src-tauri/src/lib.rs");
 
-  assert.equal(files.length, 1);
-  assert.equal(files[0].path, "app/src/core/index.ts");
-  assert.equal(files[0].language, "typescript");
+  assert.equal(files.length, 2);
+  assert.equal(tsFile?.language, "typescript");
+  assert.equal(rustFile?.language, "rust");
 });
 
 test("collectViewModeCatalog reads platform access modes", () => {

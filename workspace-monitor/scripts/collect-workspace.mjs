@@ -9,12 +9,12 @@ const defaultRepoRoot = path.resolve(projectRoot, "..");
 const snapshotPath = path.join(projectRoot, "src", "generated", "workspace-snapshot.json");
 const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.json");
 
-const IGNORE_DIRS = new Set([".git", ".next", "node_modules", "out", "__pycache__", ".pytest_cache", "_private", "outputs"]);
+const IGNORE_DIRS = new Set([".git", ".next", "node_modules", "out", "target", "__pycache__", ".pytest_cache", "_private", "outputs"]);
 const MAX_DOCUMENTS = 1200;
 const MAX_SOURCE_FILES = 260;
 const MAX_SOURCE_CHARS = 22000;
 const MAX_SOURCE_FILE_BYTES = 180000;
-const SOURCE_DIR_NAMES = ["src", "tests", "app", "components", "lib", "scripts"];
+const SOURCE_DIR_NAMES = ["src", "src-tauri", "tests", "app", "components", "lib", "scripts"];
 const SOURCE_EXTENSIONS = new Set([
   ".py",
   ".js",
@@ -22,6 +22,7 @@ const SOURCE_EXTENSIONS = new Set([
   ".cjs",
   ".ts",
   ".tsx",
+  ".rs",
   ".css",
   ".html",
   ".json",
@@ -30,7 +31,17 @@ const SOURCE_EXTENSIONS = new Set([
   ".yml",
   ".sh"
 ]);
-const SOURCE_EXCLUDED_SEGMENTS = ["/_private/", "/outputs/", "/src/generated/", "/public/", "/out/", "/.next/", "/node_modules/"];
+const SOURCE_EXCLUDED_SEGMENTS = [
+  "/_private/",
+  "/outputs/",
+  "/src/generated/",
+  "/src-tauri/gen/",
+  "/public/",
+  "/out/",
+  "/target/",
+  "/.next/",
+  "/node_modules/"
+];
 const HISTORY_CATEGORIES = new Set([
   "daily-history",
   "evaluation",
@@ -111,7 +122,6 @@ export function buildSnapshot(repoRoot) {
   const documents = collectDocuments(repoRoot);
   const requirements = collectRequirements(repoRoot);
   const historyDays = buildHistoryDays(documents);
-  const folderStructure = buildFolderStructure(repoRoot, projects, documents);
   const viewModeCatalog = collectViewModeCatalog(repoRoot);
   const languageModeCatalog = collectLanguageModeCatalog(repoRoot);
   const modeFunctionCatalog = collectModeFunctionCatalog(repoRoot, viewModeCatalog, languageModeCatalog);
@@ -119,6 +129,8 @@ export function buildSnapshot(repoRoot) {
   const philosophyFeatureExtraction = collectPhilosophyFeatureExtraction(repoRoot);
   const intentFeatureMap = collectIntentFeatureMap(repoRoot);
   const sourceFiles = collectSourceFiles(repoRoot, projects);
+  const folderStructure = buildFolderStructure(repoRoot, projects, documents);
+  const structureOverview = buildStructureOverview(repoRoot, projects, documents, folderStructure, sourceFiles);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
   const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
   const agentCatalog = collectAgentCatalog(repoRoot, coordination.agents || [], tasks);
@@ -160,6 +172,7 @@ export function buildSnapshot(repoRoot) {
       intentFeatureNow: intentFeatureMap.summary.now,
       intentFeatureNext: intentFeatureMap.summary.next,
       intentFeatureLater: intentFeatureMap.summary.later,
+      structurePressurePoints: structureOverview.summary.totalPressurePoints,
       sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
     },
@@ -174,6 +187,7 @@ export function buildSnapshot(repoRoot) {
     unifiedOps,
     sourceFiles,
     folderStructure,
+    structureOverview,
     viewModeCatalog,
     languageModeCatalog,
     modeFunctionCatalog,
@@ -222,6 +236,7 @@ export function buildCustomerSnapshot(snapshot) {
       intentFeatureNow: 0,
       intentFeatureNext: 0,
       intentFeatureLater: 0,
+      structurePressurePoints: 0,
       sourceFiles: 0,
       rootFolders: 0
     },
@@ -238,6 +253,18 @@ export function buildCustomerSnapshot(snapshot) {
       docsCategories: [],
       projectHomes: [],
       historyRoots: []
+    },
+    structureOverview: {
+      summary: {
+        totalPlanes: 0,
+        totalBoundaryRules: 0,
+        totalPressurePoints: 0,
+        topSourceHotspots: 0
+      },
+      planes: [],
+      boundaryRules: [],
+      pressurePoints: [],
+      sourceHotspots: []
     },
     viewModeCatalog: {
       defaultMode: "user",
@@ -1506,6 +1533,216 @@ export function buildFolderStructure(repoRoot, projects, documents) {
   };
 }
 
+export function buildStructureOverview(repoRoot, projects, documents, folderStructure, sourceFiles) {
+  const planes = [
+    {
+      id: "operating-memory",
+      label: "Operating Memory",
+      intent: "Rules, philosophy, requirements, specs, history, plans, and evidence that guide future work.",
+      owner: "workspace-operations",
+      primaryPaths: ["_ops/", "_docs/", "_philosophy/", "_requirements/", "_specs/", "_history/"],
+      contains: ["durable rules", "workflows", "requirements", "specs", "evaluations", "request traces"],
+      mustNotContain: ["project-specific source code", "raw secrets", "transient tool output"],
+      uiEntry: "Overview, History, Documents, Requirements"
+    },
+    {
+      id: "platform-core",
+      label: "Platform Core",
+      intent: "Reusable agent, config, evaluation, planning, and validation layer.",
+      owner: "agent-platform",
+      primaryPaths: ["agent-platform/src/", "agent-platform/configs/", "agent-platform/docs/", "agent-platform/tests/"],
+      contains: ["agent specs", "validators", "research profiles", "workflow configs"],
+      mustNotContain: ["desktop installer payloads", "domain-specific experiments by default"],
+      uiEntry: "Agents, Requirements, Documents"
+    },
+    {
+      id: "desktop-product",
+      label: "Desktop Product",
+      intent: "Installable host runtime, OS packaging boundary, runtime data separation, and CLI adapter bridge.",
+      owner: "platform-desktop-app",
+      primaryPaths: ["platform-desktop-app/src-tauri/", "platform-desktop-app/src/", "platform-desktop-app/configs/", "platform-desktop-app/docs/"],
+      contains: ["Tauri shell", "runtime bridge", "distribution gates", "runtime-data policies"],
+      mustNotContain: ["customer private data", "raw repository source as installed payload"],
+      uiEntry: "Desktop, Structure"
+    },
+    {
+      id: "monitor-ui",
+      label: "Monitor UI",
+      intent: "Generated snapshot, dashboard UI, source/document browser, and customer bundle sanitization.",
+      owner: "workspace-monitor",
+      primaryPaths: ["workspace-monitor/app/", "workspace-monitor/components/", "workspace-monitor/lib/", "workspace-monitor/scripts/"],
+      contains: ["Next.js screens", "snapshot collector", "monitor tests", "generated public snapshot"],
+      mustNotContain: ["runtime task stores", "secret-bearing source data in customer mode"],
+      uiEntry: "Overview, Structure, Source"
+    },
+    {
+      id: "domain-projects",
+      label: "Domain Projects",
+      intent: "Bounded project work that should not be hidden inside the core platform.",
+      owner: "registered root projects",
+      primaryPaths: projects
+        .filter((project) => !["agent-platform", "platform-desktop-app", "workspace-monitor"].includes(project.name))
+        .map((project) => project.path || `${project.name}/`),
+      contains: ["domain assets", "domain docs", "project-local configs", "project-local artifacts"],
+      mustNotContain: ["cross-workspace governance rules unless promoted"],
+      uiEntry: "Projects, Documents"
+    },
+    {
+      id: "runtime-local",
+      label: "Runtime & Local Data",
+      intent: "Local-only scratch, protected private state, generated output, and installed-app runtime stores.",
+      owner: "local runtime boundary",
+      primaryPaths: ["_private/", "outputs/", "app data runtime roots"],
+      contains: ["sensitive local files", "transient output", "runtime task/log/cache stores"],
+      mustNotContain: ["durable repository knowledge", "public bundle payloads"],
+      uiEntry: "Desktop runtime data, support diagnostics"
+    }
+  ].map((plane) => ({
+    ...plane,
+    documentCount: countDocumentsForPrefixes(documents, plane.primaryPaths),
+    sourceFileCount: countSourceFilesForPrefixes(sourceFiles, plane.primaryPaths)
+  }));
+
+  const boundaryRules = [
+    {
+      id: "project-boundary-first",
+      label: "Project boundary first",
+      rule: "Place project-specific code, docs, tests, configs, and artifacts inside the owning root project before promoting shared assets.",
+      sourcePath: "_ops/projects/registry.json",
+      appliesTo: ["agent-platform/", "platform-desktop-app/", "workspace-monitor/", "presentation-agent/", "design-asset-library/"]
+    },
+    {
+      id: "reserved-ops-meaning",
+      label: "Reserved operations folders",
+      rule: "Underscore-prefixed root folders are reserved for shared operations, governance, history, requirements, specs, tools, skills, templates, and research.",
+      sourcePath: "_ops/projects/root-structure-policy.json",
+      appliesTo: folderStructure.rootFolders
+        .filter((folder) => folder.className === "reserved_operational")
+        .map((folder) => folder.path)
+    },
+    {
+      id: "private-and-output-boundary",
+      label: "Private and transient data stay out",
+      rule: "_private/ and outputs/ are local-only boundaries; durable artifacts move to project-owned artifacts/ folders.",
+      sourcePath: "AGENTS.md",
+      appliesTo: ["_private/", "outputs/"]
+    },
+    {
+      id: "customer-source-separation",
+      label: "Installed customer view is not source tree view",
+      rule: "Customer bundles use sanitized snapshots and runtime data stores instead of exposing platform source internals.",
+      sourcePath: "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+      appliesTo: ["platform-desktop-app/", "workspace-monitor/public/", "workspace-monitor/out/"]
+    }
+  ];
+
+  const sourceHotspots = collectSourceHotspots(repoRoot, projects)
+    .filter((file) => file.lineCount >= 800)
+    .sort((left, right) => right.lineCount - left.lineCount || left.path.localeCompare(right.path))
+    .slice(0, 8)
+    .map((file) => ({
+      path: file.path,
+      project: file.project,
+      language: file.language,
+      lineCount: file.lineCount,
+      sizeBytes: file.sizeBytes,
+      recommendation: sourceHotspotRecommendation(file)
+    }));
+
+  const pressurePoints = [
+    ...sourceHotspots.slice(0, 4).map((file) => ({
+      id: `source-hotspot-${slugify(file.path)}`,
+      label: "Large source surface",
+      signal: `${file.lineCount.toLocaleString("ko-KR")} lines in ${file.path}`,
+      reason: "Large files make ownership and local reasoning harder even when behavior is correct.",
+      nextAction: file.recommendation,
+      priority: file.lineCount >= 3000 ? "high" : "medium",
+      sourcePath: file.path
+    })),
+    {
+      id: "many-history-records",
+      label: "History record density",
+      signal: `${documents.filter((document) => document.path.startsWith("_history/")).length.toLocaleString("ko-KR")} history documents`,
+      reason: "History is useful, but without a first-read map it becomes hard to know which record matters now.",
+      nextAction: "Keep Structure and Unified Ops as the first-read map before opening individual history files.",
+      priority: "medium",
+      sourcePath: "_history/"
+    },
+    {
+      id: "generated-snapshot-size",
+      label: "Generated snapshot weight",
+      signal: fs.existsSync(path.join(repoRoot, "workspace-monitor", "src", "generated", "workspace-snapshot.json"))
+        ? "workspace-monitor generated snapshot exists"
+        : "generated snapshot not found",
+      reason: "Generated data must stay downstream of source maps and should not be treated as the design source of truth.",
+      nextAction: "Use collector modules and source registries as the source of truth; regenerate snapshots after source changes.",
+      priority: "medium",
+      sourcePath: "workspace-monitor/src/generated/workspace-snapshot.json"
+    }
+  ];
+
+  return {
+    summary: {
+      totalPlanes: planes.length,
+      totalBoundaryRules: boundaryRules.length,
+      totalPressurePoints: pressurePoints.length,
+      topSourceHotspots: sourceHotspots.length
+    },
+    planes,
+    boundaryRules,
+    pressurePoints,
+    sourceHotspots
+  };
+}
+
+function countDocumentsForPrefixes(documents, prefixes) {
+  return documents.filter((document) => prefixes.some((prefix) => document.path.startsWith(prefix))).length;
+}
+
+function countSourceFilesForPrefixes(sourceFiles, prefixes) {
+  return sourceFiles.filter((file) => prefixes.some((prefix) => file.path.startsWith(prefix))).length;
+}
+
+function sourceHotspotRecommendation(file) {
+  if (file.path === "workspace-monitor/components/MonitorShell.tsx") {
+    return "Split by feature panels and keep shared view state/types in small monitor modules.";
+  }
+  if (file.path === "platform-desktop-app/src-tauri/src/lib.rs") {
+    return "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.";
+  }
+  if (file.path.includes("app/globals.css")) {
+    return "Group CSS by surface and move repeated component patterns behind named UI classes.";
+  }
+  return "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.";
+}
+
+function collectSourceHotspots(repoRoot, projects) {
+  const roots = sourceRoots(repoRoot, projects);
+  const seen = new Set();
+  const files = [];
+
+  for (const root of roots) {
+    for (const filePath of walkFiles(root.path)) {
+      const relativePath = toPosix(path.relative(repoRoot, filePath));
+      if (seen.has(relativePath) || !isSourceFile(relativePath)) {
+        continue;
+      }
+      seen.add(relativePath);
+      const stats = fs.statSync(filePath);
+      const content = fs.readFileSync(filePath, "utf8");
+      files.push({
+        path: relativePath,
+        project: root.project,
+        language: sourceLanguage(relativePath),
+        lineCount: content.split(/\r?\n/).length,
+        sizeBytes: stats.size
+      });
+    }
+  }
+
+  return files;
+}
+
 export function extractHistoryDate(relativePath) {
   const datedFolderMatch = relativePath.match(/(?:^|\/)(20\d{2})\/(20\d{2}-\d{2}-\d{2})(?:[-./]|$)/);
   if (datedFolderMatch) {
@@ -1724,6 +1961,7 @@ function sourceLanguage(relativePath) {
     ".cjs": "javascript",
     ".ts": "typescript",
     ".tsx": "tsx",
+    ".rs": "rust",
     ".css": "css",
     ".html": "html",
     ".json": "json",

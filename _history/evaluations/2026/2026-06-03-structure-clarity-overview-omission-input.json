@@ -1,0 +1,111 @@
+{
+  "task": "Workspace Monitor structure clarity overview",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and implementation.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-structure-clarity-overview.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "large-scope-decomposition",
+      "description": "Use large-scope decomposition because the user described the overall structure as broad, complex, and hard to understand.",
+      "source": "_ops/workflows/76-large-scope-decomposition.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/plans/2026/2026-06-03-structure-clarity-overview.ko.md",
+        "workspace-monitor/specs/2026-06-03-structure-clarity-overview/plan.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "make-structure-understandable",
+      "description": "Improve the actual platform structure visibility, not only write notes.",
+      "source": "UR-2026-06-03-020",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "workspace-monitor/src/generated/workspace-snapshot.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "customer-source-boundary",
+      "description": "Keep internal structure/source details out of customer snapshot.",
+      "source": "Platformization Rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "npm --prefix platform-desktop-app run monitor:build",
+        "npm --prefix workspace-monitor run check:intent-map:customer"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "workspace-monitor/specs/2026-06-03-structure-clarity-overview/spec.ko.md",
+      "purpose": "Spec for structure clarity overview.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+      "purpose": "Requirement REQ-WM-023.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-03-structure-clarity-overview.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "developer-structure-overview",
+      "description": "Developer snapshot contains structure planes and pressure points.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "generatedPlanes=6 generatedPressure=6"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "customer-structure-sanitized",
+      "description": "Customer snapshot strips internal structure overview.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "publicPlanes=0 publicPressure=0 publicDocs=0"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "ui-build",
+      "description": "Workspace Monitor UI typechecks and builds.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check",
+        "npm --prefix workspace-monitor run build"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Full source module split is intentionally deferred to keep this slice reviewable.",
+    "Browser screenshot smoke was not run because the Browser tool was not exposed and Playwright was not installed."
+  ],
+  "notes": [
+    "The source hotspots panel explicitly exposes the deferred refactor candidates."
+  ]
+}

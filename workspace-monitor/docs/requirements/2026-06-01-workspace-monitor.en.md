@@ -33,6 +33,7 @@
 | REQ-WM-020 | The web UI should provide a compact operating surface near the top of Overview that shows current section state, attention level, next action, evidence counts, and a runtime shortcut. | should | Check section tab badges and `operator-strip` rendering, `npm test`, `npm run check`, and `npm run build` |
 | REQ-WM-021 | The web UI shall read the latest user-intent feature map from history and let developer/superadmin views browse intent counts, feature themes, implemented capabilities, next candidates, the Now/Next/Later roadmap, and source freshness. | must | Check snapshot `intentFeatureMap`, the `Intent Map` tab, customer snapshot sanitization, `npm run collect`, `npm test`, `npm run check:intent-map`, `npm run check:intent-map:customer`, `npm run check`, and `npm run build` |
 | REQ-WM-022 | The repository snapshot collector should keep feature-specific data extraction logic behind clear module boundaries so continuous refactoring preserves behavior and testable ownership boundaries. | should | Check the `intent-feature-map` collector module boundary, existing collector export compatibility, `npm test`, `npm run collect`, `npm run check:intent-map`, and `npm run check` |
+| REQ-WM-023 | The web UI shall show the platform's operating memory, platform core, desktop product, monitor UI, domain projects, and runtime/local data planes at a glance, including ownership boundaries, primary paths, prohibited boundaries, and structural pressure points. | must | Check snapshot `structureOverview`, the Structure tab Architecture Backbone/Boundary Rules/Pressure surfaces, customer snapshot sanitization, `npm test`, `npm run check`, `npm run build`, and `npm run check:intent-map:customer` |
 
 ## Scope
 
@@ -53,6 +54,7 @@
 - An Overview operating surface that groups current state, next action, evidence, and runtime shortcuts
 - An `intentFeatureMap` snapshot object and `Intent Map` section for the user-intent-derived roadmap
 - Feature-specific data extraction module boundaries in the snapshot collector
+- A `structureOverview` snapshot object and Structure tab surfaces for platform planes, ownership boundaries, and structural pressure points
 - Vercel deployment docs
 
 ## Non-Goals

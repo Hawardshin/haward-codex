@@ -1,0 +1,97 @@
+{
+  "task": "Workspace Monitor structure clarity overview",
+  "work_mode": "governance",
+  "runtime_context": [
+    "Workspace Monitor snapshot collector source-root scan",
+    "Next.js static build and customer bundle generation",
+    "Generated snapshot sanitization"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "source-hotspot-scan-growth",
+      "category": "large_data",
+      "description": "The new source hotspot metadata scan could accidentally traverse generated, build, private, or vendor output and read too much data.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The collector excludes _private, outputs, node_modules, .next, out, target, src/generated, and src-tauri/gen before reading source metadata.",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "npm --prefix workspace-monitor test",
+        "npm --prefix workspace-monitor run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "customer-snapshot-internal-structure",
+      "category": "large_data",
+      "description": "Internal structure overview and source hotspots could leak into customer/public snapshots.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "buildCustomerSnapshot emits an empty structureOverview and customer bundle audit plus intent-map customer check passed.",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "npm --prefix platform-desktop-app run monitor:build",
+        "npm --prefix workspace-monitor run check:intent-map:customer"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "source-root-scan-boundary",
+      "resource": "source files read for metadata",
+      "create_path": "buildStructureOverview calls collectSourceHotspots over sourceRoots",
+      "cleanup_path": "No persistent handles or workers are created; file reads are synchronous and bounded to source roots with ignored generated/build/private directories.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "npm --prefix workspace-monitor test"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "customer-snapshot-boundary",
+      "resource": "public workspace snapshot",
+      "create_path": "buildCustomerSnapshot generates public/customer snapshot",
+      "cleanup_path": "Internal arrays are replaced with empty arrays and public snapshot documents/sourceFiles remain empty.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "publicPlanes=0 publicPressure=0 publicDocs=0",
+        "npm --prefix platform-desktop-app run monitor:build"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "collector-test",
+      "metric": "collector behavior and exclusions",
+      "tool": "npm --prefix workspace-monitor test",
+      "threshold": "all tests pass",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "16 tests passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "performance-budget",
+      "metric": "largest initial chunk",
+      "tool": "npm --prefix workspace-monitor run perf:budget",
+      "threshold": "below 1000000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "largest initial chunk 227537 bytes"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No dependency installation occurred.",
+    "In-app Browser tool was not exposed in this session and Playwright was not installed; static build and bundle audits were used for verification."
+  ]
+}

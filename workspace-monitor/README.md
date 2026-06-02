@@ -12,6 +12,7 @@
 - Agents 탭에서 에이전트별 작업 lane, agent-task-project 연결 흐름, blocker와 next action을 본다.
 - 히스토리 문서의 날짜별 밀도와 유형별 분포를 CSS 기반 차트로 본다.
 - 루트 폴더, `_docs` 카테고리, 프로젝트 홈, 히스토리 수집 위치를 구조 지도에서 확인한다.
+- Structure 탭에서 운영 메모리, 플랫폼 코어, 데스크톱 제품, 모니터 UI, 도메인 프로젝트, 런타임/로컬 데이터 계층과 각 계층의 소유 경계, 주요 경로, 복잡도 압력점을 먼저 확인한다.
 - `agent-platform/configs/access/view-mode-registry.json`을 읽어 사용자 보기, 개발자 보기, 슈퍼어드민 개발 보기를 전환한다. 현재 기본값은 `superadmin_developer`다.
 - `agent-platform/configs/access/language-mode-registry.json`을 읽어 전체, 한국어만, 영어만 문서 보기 모드를 전환한다.
 - 개발자 보기와 슈퍼어드민 개발 보기에서는 주요 프로젝트와 `_tools`의 소스 코드를 읽기 전용으로 탐색한다.
@@ -43,7 +44,7 @@ npm run perf:budget
 npm run dev
 ```
 
-`npm run collect`는 repository root의 `_history`, `_ops`, `_requirements`, `_specs`, 프로젝트 docs/specs, 에이전트 설정, view mode 설정, language mode 설정, source code catalog를 읽어 `src/generated/workspace-snapshot.json`과 `public/workspace-snapshot.json`을 만든다. snapshot에는 문서 목록뿐 아니라 `historyDays` 날짜 index, `agentCatalog`, `collaborationBoard`, `folderStructure`, `viewModeCatalog`, `languageModeCatalog`, `sourceFiles`도 포함된다.
+`npm run collect`는 repository root의 `_history`, `_ops`, `_requirements`, `_specs`, 프로젝트 docs/specs, 에이전트 설정, view mode 설정, language mode 설정, source code catalog를 읽어 `src/generated/workspace-snapshot.json`과 `public/workspace-snapshot.json`을 만든다. snapshot에는 문서 목록뿐 아니라 `historyDays` 날짜 index, `agentCatalog`, `collaborationBoard`, `folderStructure`, `structureOverview`, `viewModeCatalog`, `languageModeCatalog`, `sourceFiles`도 포함된다.
 
 UI는 대용량 snapshot을 client JavaScript bundle에 정적으로 포함하지 않고 `/workspace-snapshot.json`을 fetch한 뒤 `MonitorShell`을 lazy-load한다. `npm run perf:budget`은 build 후 가장 큰 JavaScript chunk가 1MB를 넘지 않는지 확인해 snapshot bundle 회귀를 막는다.
 

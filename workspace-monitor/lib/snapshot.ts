@@ -22,6 +22,7 @@ export type WorkspaceStats = {
   intentFeatureNow?: number;
   intentFeatureNext?: number;
   intentFeatureLater?: number;
+  structurePressurePoints?: number;
   sourceFiles?: number;
   rootFolders: number;
 };
@@ -269,6 +270,51 @@ export type WorkspaceFolderStructure = {
   }>;
 };
 
+export type WorkspaceStructureOverview = {
+  summary: {
+    totalPlanes: number;
+    totalBoundaryRules: number;
+    totalPressurePoints: number;
+    topSourceHotspots: number;
+  };
+  planes: Array<{
+    id: string;
+    label: string;
+    intent: string;
+    owner: string;
+    primaryPaths: string[];
+    contains: string[];
+    mustNotContain: string[];
+    uiEntry: string;
+    documentCount: number;
+    sourceFileCount: number;
+  }>;
+  boundaryRules: Array<{
+    id: string;
+    label: string;
+    rule: string;
+    sourcePath: string;
+    appliesTo: string[];
+  }>;
+  pressurePoints: Array<{
+    id: string;
+    label: string;
+    signal: string;
+    reason: string;
+    nextAction: string;
+    priority: string;
+    sourcePath: string;
+  }>;
+  sourceHotspots: Array<{
+    path: string;
+    project: string;
+    language: string;
+    lineCount: number;
+    sizeBytes: number;
+    recommendation: string;
+  }>;
+};
+
 export type WorkspaceViewMode = {
   id: string;
   label: string;
@@ -459,6 +505,7 @@ export type WorkspaceSnapshot = {
   unifiedOps?: WorkspaceUnifiedOps;
   sourceFiles?: WorkspaceSourceFile[];
   folderStructure: WorkspaceFolderStructure;
+  structureOverview?: WorkspaceStructureOverview;
   viewModeCatalog?: {
     defaultMode: string;
     modes: WorkspaceViewMode[];

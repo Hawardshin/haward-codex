@@ -68,6 +68,7 @@ type ModeFunctionCatalog = NonNullable<WorkspaceSnapshot["modeFunctionCatalog"]>
 type ClaudeCodeDesignTransfer = NonNullable<WorkspaceSnapshot["claudeCodeDesignTransfer"]>;
 type PhilosophyFeatureExtraction = NonNullable<WorkspaceSnapshot["philosophyFeatureExtraction"]>;
 type IntentFeatureMap = NonNullable<WorkspaceSnapshot["intentFeatureMap"]>;
+type StructureOverview = NonNullable<WorkspaceSnapshot["structureOverview"]>;
 
 const fallbackViewModes: MonitorViewMode[] = [
   {
@@ -246,6 +247,19 @@ const emptyIntentFeatureMap: IntentFeatureMap = {
     later: []
   },
   sourceLimits: []
+};
+
+const emptyStructureOverview: StructureOverview = {
+  summary: {
+    totalPlanes: 0,
+    totalBoundaryRules: 0,
+    totalPressurePoints: 0,
+    topSourceHotspots: 0
+  },
+  planes: [],
+  boundaryRules: [],
+  pressurePoints: [],
+  sourceHotspots: []
 };
 
 const sectionIds = new Set<SectionId>(sections.map((section) => section.id));
@@ -736,6 +750,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const claudeCodeDesignTransfer = snapshot.claudeCodeDesignTransfer ?? emptyClaudeCodeDesignTransfer;
   const philosophyFeatureExtraction = snapshot.philosophyFeatureExtraction ?? emptyPhilosophyFeatureExtraction;
   const intentFeatureMap = snapshot.intentFeatureMap ?? emptyIntentFeatureMap;
+  const structureOverview = snapshot.structureOverview ?? emptyStructureOverview;
   const [selectedModeFunctionGroupId, setSelectedModeFunctionGroupId] = useState(
     modeFunctionCatalog.groups[0]?.id || "view_mode"
   );
@@ -1029,7 +1044,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     projects: snapshot.stats.projects.toLocaleString("ko-KR"),
     history: visibleHistoryDays.length.toLocaleString("ko-KR"),
     intent: intentFeatureMap.summary.totalThemes.toLocaleString("ko-KR"),
-    structure: snapshot.stats.rootFolders.toLocaleString("ko-KR"),
+    structure: structureOverview.summary.totalPlanes
+      ? `${structureOverview.summary.totalPlanes}/${structureOverview.summary.totalPressurePoints}`
+      : snapshot.stats.rootFolders.toLocaleString("ko-KR"),
     documents: viewFilteredDocuments.length.toLocaleString("ko-KR"),
     source: visibleSourceFiles.length.toLocaleString("ko-KR"),
     requirements: visibleRequirements.length.toLocaleString("ko-KR"),
@@ -1229,6 +1246,13 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             selectedGroupId={selectedModeFunctionGroupId}
             onSelectGroup={setSelectedModeFunctionGroupId}
             onOpenOption={openModeFunctionOption}
+          />
+
+          <StructureBackbonePanel
+            overview={structureOverview}
+            compact
+            onOpenStructure={() => setSection("structure")}
+            onOpenSource={() => setSection("source")}
           />
 
           <ClaudeCodeTransferPanel
@@ -1485,10 +1509,60 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
 
       {section === "structure" && (
         <section className="structure-grid">
+          <StructureBackbonePanel
+            overview={structureOverview}
+            onOpenStructure={() => setSection("structure")}
+            onOpenSource={() => setSection("source")}
+          />
+
+          <section className="panel structure-pressure-panel">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Pressure</p>
+                <h2>복잡도 압력점</h2>
+              </div>
+              <AlertTriangle size={18} aria-hidden="true" />
+            </div>
+            <div className="pressure-list">
+              {structureOverview.pressurePoints.map((point) => (
+                <article key={point.id} className={`pressure-${point.priority}`}>
+                  <span>{point.priority}</span>
+                  <strong>{point.signal}</strong>
+                  <p>{point.reason}</p>
+                  <small>{point.nextAction}</small>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="panel wide structure-boundary-panel">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Boundary Rules</p>
+                <h2>어디에 무엇을 둘지</h2>
+              </div>
+              <ShieldCheck size={18} aria-hidden="true" />
+            </div>
+            <div className="boundary-rule-grid">
+              {structureOverview.boundaryRules.map((rule) => (
+                <article key={rule.id}>
+                  <span>{rule.sourcePath}</span>
+                  <strong>{rule.label}</strong>
+                  <p>{rule.rule}</p>
+                  <div className="path-list">
+                    {rule.appliesTo.slice(0, 8).map((item) => (
+                      <span key={item}>{item}</span>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
           <section className="panel wide">
             <div className="panel-heading">
               <div>
-                <p className="eyebrow">Structure</p>
+                <p className="eyebrow">Root Inventory</p>
                 <h2>루트 폴더 구조</h2>
               </div>
               <span className="result-count">{snapshot.folderStructure.rootFolders.length} roots</span>
@@ -1766,6 +1840,91 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         </div>
       )}
     </main>
+  );
+}
+
+function StructureBackbonePanel({
+  overview,
+  compact = false,
+  onOpenStructure,
+  onOpenSource
+}: {
+  overview: StructureOverview;
+  compact?: boolean;
+  onOpenStructure: () => void;
+  onOpenSource: () => void;
+}) {
+  const planes = compact ? overview.planes.slice(0, 4) : overview.planes;
+  const hotspots = overview.sourceHotspots.slice(0, compact ? 3 : 6);
+
+  return (
+    <section className="panel wide structure-backbone-panel">
+      <div className="panel-heading">
+        <div>
+          <p className="eyebrow">Architecture Backbone</p>
+          <h2>플랫폼 계층과 소유 경계</h2>
+        </div>
+        <div className="structure-summary">
+          <span>{overview.summary.totalPlanes.toLocaleString("ko-KR")} planes</span>
+          <span>{overview.summary.totalBoundaryRules.toLocaleString("ko-KR")} rules</span>
+          <span>{overview.summary.totalPressurePoints.toLocaleString("ko-KR")} pressure</span>
+        </div>
+      </div>
+
+      <div className="structure-plane-grid">
+        {planes.map((plane) => (
+          <article key={plane.id}>
+            <div className="plane-head">
+              <Layers size={17} aria-hidden="true" />
+              <span>{plane.owner}</span>
+            </div>
+            <h3>{plane.label}</h3>
+            <p>{plane.intent}</p>
+            <div className="plane-metrics">
+              <span>{plane.documentCount.toLocaleString("ko-KR")} docs</span>
+              <span>{plane.sourceFileCount.toLocaleString("ko-KR")} source</span>
+              <span>{plane.uiEntry}</span>
+            </div>
+            <div className="path-list">
+              {plane.primaryPaths.slice(0, 6).map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+            {!compact && (
+              <dl className="plane-contract">
+                <dt>Contains</dt>
+                <dd>{plane.contains.join(" / ")}</dd>
+                <dt>Not Here</dt>
+                <dd>{plane.mustNotContain.join(" / ")}</dd>
+              </dl>
+            )}
+          </article>
+        ))}
+      </div>
+
+      {hotspots.length > 0 && (
+        <div className="source-hotspot-strip">
+          {hotspots.map((file) => (
+            <button key={file.path} type="button" onClick={onOpenSource} title={file.recommendation}>
+              <Code2 size={15} aria-hidden="true" />
+              <strong>{file.path}</strong>
+              <span>{file.lineCount.toLocaleString("ko-KR")} lines</span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="structure-actions">
+        <button type="button" onClick={onOpenStructure}>
+          <Layers size={15} aria-hidden="true" />
+          <span>Structure</span>
+        </button>
+        <button type="button" onClick={onOpenSource}>
+          <Code2 size={15} aria-hidden="true" />
+          <span>Source Hotspots</span>
+        </button>
+      </div>
+    </section>
   );
 }
 

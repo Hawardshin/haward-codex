@@ -70,6 +70,17 @@ button,
     background 140ms ease;
 }
 
+.structure-plane-grid article,
+.boundary-rule-grid article,
+.pressure-list article,
+.source-hotspot-strip button {
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
 main {
   width: min(1380px, calc(100% - 32px));
   margin: 0 auto;
@@ -3655,6 +3666,176 @@ h3 {
   gap: 14px;
 }
 
+.structure-backbone-panel {
+  grid-column: 1 / -1;
+}
+
+.structure-summary,
+.structure-actions,
+.source-hotspot-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.structure-summary span,
+.plane-metrics span,
+.source-hotspot-strip span,
+.pressure-list span,
+.boundary-rule-grid span {
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  padding: 5px 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.structure-plane-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.structure-plane-grid article,
+.boundary-rule-grid article,
+.pressure-list article {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: #fbfcfe;
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 0;
+}
+
+.structure-plane-grid article:hover,
+.boundary-rule-grid article:hover,
+.source-hotspot-strip button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--soft-shadow);
+}
+
+.plane-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.plane-head span,
+.plane-contract dt {
+  color: var(--muted);
+}
+
+.structure-plane-grid p,
+.boundary-rule-grid p,
+.pressure-list p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.plane-metrics,
+.path-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.plane-contract {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 6px 8px;
+  margin: 2px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.plane-contract dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.source-hotspot-strip {
+  margin-top: 12px;
+}
+
+.source-hotspot-strip button,
+.structure-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--text);
+}
+
+.source-hotspot-strip button {
+  max-width: 100%;
+}
+
+.source-hotspot-strip strong {
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.structure-actions {
+  margin-top: 12px;
+}
+
+.structure-actions button:first-child {
+  border-color: #b7d6c9;
+  background: var(--mint-soft);
+  color: var(--green);
+  font-weight: 700;
+}
+
+.structure-pressure-panel {
+  align-self: start;
+}
+
+.pressure-list {
+  display: grid;
+  gap: 10px;
+}
+
+.pressure-list article {
+  border-left: 4px solid var(--amber);
+}
+
+.pressure-list .pressure-high {
+  border-left-color: var(--red);
+}
+
+.pressure-list small {
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.structure-boundary-panel {
+  grid-column: 1 / -1;
+}
+
+.boundary-rule-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
 .folder-table,
 .stack-list,
 .project-home-grid {
@@ -4254,7 +4435,9 @@ h3 {
   .philosophy-candidate-grid,
   .intent-map-hero,
   .intent-theme-list,
-  .intent-roadmap-grid {
+  .intent-roadmap-grid,
+  .structure-plane-grid,
+  .boundary-rule-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -4375,6 +4558,8 @@ h3 {
   .intent-map-layout,
   .intent-theme-list,
   .intent-roadmap-grid,
+  .structure-plane-grid,
+  .boundary-rule-grid,
   .terminal-report-list,
   .desktop-health-strip,
   .decision-summary-strip,
