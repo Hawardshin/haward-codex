@@ -201,7 +201,7 @@ export function buildSnapshot(repoRoot) {
         "Review src/generated/workspace-snapshot.json before making the repository public.",
         "Run python3 _tools/privacy-audit/src/privacy_audit.py --check before public deploy.",
         "Remove or redact private notes, secrets, raw prompts, or local-only paths that should not be published.",
-        "Regenerate the snapshot after any redaction and run npm run build again."
+        "Regenerate the snapshot after any redaction and run pnpm run build again."
       ]
     }
   };
@@ -1925,7 +1925,7 @@ function isSourceFile(relativePath) {
   if (SOURCE_EXCLUDED_SEGMENTS.some((segment) => normalized.includes(segment))) {
     return false;
   }
-  if (/package-lock\.json$|tsconfig\.tsbuildinfo$/.test(relativePath)) {
+  if (/package-lock\.json$|pnpm-lock\.yaml$|tsconfig\.tsbuildinfo$/.test(relativePath)) {
     return false;
   }
   return SOURCE_EXTENSIONS.has(path.extname(relativePath).toLowerCase());

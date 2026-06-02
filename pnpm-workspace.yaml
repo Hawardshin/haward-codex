@@ -1,0 +1,11 @@
+packages:
+  - "workspace-monitor"
+  - "platform-desktop-app"
+  - "presentation-agent"
+
+overrides:
+  dompurify: "3.4.7"
+  postcss: "8.5.10"
+
+onlyBuiltDependencies:
+  - "sharp"

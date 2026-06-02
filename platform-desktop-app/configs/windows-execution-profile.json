@@ -403,7 +403,7 @@
       "id": "future-tauri-windows-build",
       "status": "not_run",
       "scope": "platform-desktop-app",
-      "command": "npm run tauri:build on a Windows build host after Rust, Node, Tauri CLI, and signing prerequisites are installed and audited.",
+      "command": "corepack pnpm --filter platform-desktop-app run tauri:build on a Windows build host after Rust, Node, Tauri CLI, and signing prerequisites are installed and audited.",
       "audit_required_if_run": true
     },
     {

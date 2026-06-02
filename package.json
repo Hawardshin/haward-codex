@@ -1,0 +1,23 @@
+{
+  "name": "haward-codex-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Workspace root for the personal agent-building platform.",
+  "packageManager": "pnpm@10.34.1",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
+  },
+  "scripts": {
+    "monitor:build": "corepack pnpm --filter workspace-monitor build",
+    "monitor:check": "corepack pnpm --filter workspace-monitor check",
+    "monitor:test": "corepack pnpm --filter workspace-monitor test",
+    "desktop:check": "corepack pnpm --filter platform-desktop-app check",
+    "desktop:test": "corepack pnpm --filter platform-desktop-app test",
+    "presentation:test:browser": "corepack pnpm --filter presentation-agent-browser-validation test:browser"
+  }
+}

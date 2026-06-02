@@ -32,7 +32,7 @@
 6. If the target may be public, confirm whether filtering must happen at snapshot collection or server authorization, not only in the client UI.
 7. Verify the registry with:
    - `PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json`
-8. If workspace-monitor changed, run `npm run collect`, `npm test`, `npm run check`, and `npm run build` from `workspace-monitor/`.
+8. If workspace-monitor changed, run `pnpm run collect`, `pnpm test`, `pnpm run check`, and `pnpm run build` from `workspace-monitor/`.
 
 ## Output Contract
 

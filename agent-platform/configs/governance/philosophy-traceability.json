@@ -613,9 +613,9 @@
           "validates": "Repository maps are fresh for retrieval."
         },
         {
-          "command": "npm run build",
+          "command": "corepack pnpm --filter workspace-monitor build",
           "validates": "Workspace Monitor can render current records.",
-          "cwd": "workspace-monitor"
+          "cwd": "."
         }
       ]
     },

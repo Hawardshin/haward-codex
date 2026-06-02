@@ -129,7 +129,7 @@
         "private note와 secret이 포함되지 않았는지 확인한다.",
         "raw prompt나 로컬 절대 경로가 공개 가능한지 본다.",
         "공개하면 안 되는 문서는 collector 범위를 조정한다.",
-        "`npm run collect`와 `npm run build`를 다시 실행한다."
+        "`pnpm run collect`와 `pnpm run build`를 다시 실행한다."
       ],
       "visual": {
         "type": "statement",
@@ -149,11 +149,11 @@
       "kicker": "Commands",
       "title": "운영 명령은 수집, 테스트, 타입체크, 빌드로 닫힌다",
       "body": [
-        "`npm run collect`",
-        "`npm test`",
-        "`npm run check`",
-        "`npm run build`",
-        "`npm run dev`"
+        "`pnpm run collect`",
+        "`pnpm test`",
+        "`pnpm run check`",
+        "`pnpm run build`",
+        "`pnpm run dev`"
       ],
       "visual": {
         "type": "steps",

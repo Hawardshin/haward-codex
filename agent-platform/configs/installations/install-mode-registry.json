@@ -42,26 +42,26 @@
       "last_checked": "2026-06-02"
     },
     {
-      "id": "npm_ci",
-      "title": "npm Docs: npm ci",
-      "url": "https://docs.npmjs.com/cli/commands/npm-ci/",
+      "id": "pnpm_installation",
+      "title": "pnpm Docs: Installation",
+      "url": "https://pnpm.io/installation",
       "source_type": "official_docs",
       "used_for": [
-        "clean dependency installation from lock files",
-        "omitting dev dependencies when appropriate"
+        "Corepack-based pnpm setup",
+        "project packageManager version pinning"
       ],
-      "last_checked": "2026-06-02"
+      "last_checked": "2026-06-03"
     },
     {
-      "id": "npm_install_omit_dev",
-      "title": "npm Docs: npm install",
-      "url": "https://docs.npmjs.com/cli/v11/commands/npm-install",
+      "id": "pnpm_workspaces",
+      "title": "pnpm Docs: Workspace",
+      "url": "https://pnpm.io/workspaces",
       "source_type": "official_docs",
       "used_for": [
-        "dependency versus devDependency installation behavior",
-        "production omit rules"
+        "workspace root dependency installation",
+        "pnpm-workspace.yaml structure"
       ],
-      "last_checked": "2026-06-02"
+      "last_checked": "2026-06-03"
     },
     {
       "id": "vercel_nextjs",
@@ -167,7 +167,7 @@
       "dependency_policy": [
         "Prefer regular Python local installs over editable installs.",
         "Prefer existing HTML/static artifacts when no runtime is needed.",
-        "For Next.js source builds, install from lock files and run the build; for runtime-only deployment, omit dev dependencies only after the build path is confirmed.",
+        "For Next.js source builds, install from the root pnpm lock file and run the build; for runtime-only deployment, omit dev dependencies only after the build path is confirmed.",
         "Do not install browser validation harnesses or governance test toolchains unless the user explicitly switches to developer install."
       ],
       "allowed_actions": [
@@ -194,7 +194,7 @@
           "id": "workspace-monitor-user-build",
           "project": "workspace-monitor",
           "purpose": "Build the repository monitoring site from source for local viewing or Vercel readiness.",
-          "command": "cd workspace-monitor && npm ci && npm run build",
+          "command": "corepack pnpm install --frozen-lockfile && corepack pnpm --filter workspace-monitor build",
           "notes": "Next.js source builds may need devDependencies during build; production runtime pruning is separate from build setup."
         },
         {
@@ -207,7 +207,7 @@
       ],
       "verification": [
         "agent-platform: agent-platform --help or PYTHONPATH=src python3 -m agent_platform.cli list-agents",
-        "workspace-monitor: npm run build completes or Vercel build succeeds",
+        "workspace-monitor: corepack pnpm --filter workspace-monitor build completes or Vercel build succeeds",
         "presentation-agent: target HTML artifact opens in a browser"
       ]
     },
@@ -222,7 +222,7 @@
       ],
       "dependency_policy": [
         "Use editable Python installs for platform code when a virtual environment is used.",
-        "Install Node dependencies from lock files for projects being changed.",
+        "Install Node dependencies from the root pnpm lock file for projects being changed.",
         "Include devDependencies and browser/test harnesses only for projects that need improvement or verification.",
         "Run targeted and governance checks before close-out."
       ],
@@ -257,14 +257,14 @@
           "id": "workspace-monitor-developer-install",
           "project": "workspace-monitor",
           "purpose": "Install monitor dependencies for development and verification.",
-          "command": "cd workspace-monitor && npm ci && npm test && npm run check && npm run build",
+          "command": "corepack pnpm install --frozen-lockfile && corepack pnpm --filter workspace-monitor test && corepack pnpm --filter workspace-monitor check && corepack pnpm --filter workspace-monitor build",
           "notes": "Includes devDependencies needed for TypeScript checks and tests."
         },
         {
           "id": "presentation-agent-browser-validation-install",
           "project": "presentation-agent",
           "purpose": "Install and run browser validation when improving presentation artifacts or harnesses.",
-          "command": "cd presentation-agent && npm ci && npm run test:browser",
+          "command": "corepack pnpm install --frozen-lockfile && corepack pnpm --filter presentation-agent-browser-validation test:browser",
           "notes": "Requires Playwright browser dependencies already recorded in the installation registry."
         },
         {
@@ -278,8 +278,8 @@
       "verification": [
         "agent-platform unit tests pass for changed Python code",
         "changed JSON configs pass check-config-contract",
-        "workspace-monitor tests/check/build pass when monitor code changes",
-        "presentation-agent browser tests pass when presentation harness or HTML output changes",
+        "workspace-monitor pnpm tests/check/build pass when monitor code changes",
+        "presentation-agent pnpm browser tests pass when presentation harness or HTML output changes",
         "workspace health governance category passes before closing platform-level changes"
       ]
     }

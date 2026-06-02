@@ -90,19 +90,18 @@ platform-desktop-app/
 Desktop framework dependencies have been installed locally for developer builds. The current local verification path is:
 
 ```bash
-npm --prefix platform-desktop-app ci
-npm --prefix workspace-monitor ci
-npm --prefix platform-desktop-app run check
-npm --prefix platform-desktop-app test
-npm --prefix workspace-monitor run check
-npm --prefix workspace-monitor test
-npm --prefix workspace-monitor run build:customer
-npm --prefix platform-desktop-app run customer-bundle:audit
-npm --prefix platform-desktop-app run release:preflight
-npm --prefix platform-desktop-app run release:preflight:public:report
+corepack pnpm install --frozen-lockfile
+corepack pnpm --filter platform-desktop-app run check
+corepack pnpm --filter platform-desktop-app test
+corepack pnpm --filter workspace-monitor run check
+corepack pnpm --filter workspace-monitor test
+corepack pnpm --filter workspace-monitor run build:customer
+corepack pnpm --filter platform-desktop-app run customer-bundle:audit
+corepack pnpm --filter platform-desktop-app run release:preflight
+corepack pnpm --filter platform-desktop-app run release:preflight:public:report
 cd platform-desktop-app/src-tauri && cargo test
 cd platform-desktop-app/src-tauri && cargo build
-npm --prefix platform-desktop-app run tauri:build
+corepack pnpm --filter platform-desktop-app run tauri:build
 python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json
 python3 -m json.tool platform-desktop-app/configs/macos-execution-profile.json
 python3 -m json.tool platform-desktop-app/configs/windows-execution-profile.json

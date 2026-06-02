@@ -19,6 +19,7 @@ IGNORE_DIRS = {
     "build",
     "coverage",
     "out",
+    "target",
 }
 
 ROOT_PURPOSES = {

@@ -1,0 +1,28 @@
+{
+  "task": "pnpm workspace migration",
+  "date": "2026-06-03",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "name": "web_first_and_bootstrap",
+      "summary": "Checked official pnpm, Corepack, workspace, and npm ci docs; selected work/install modes.",
+      "bottleneck": "Needed to select pnpm 10 because local Node is 21 while pnpm 11 expects Node 22+."
+    },
+    {
+      "name": "manifest_and_lock_migration",
+      "summary": "Added pnpm workspace config and generated root pnpm-lock.yaml.",
+      "bottleneck": "npm overrides had to be moved to pnpm workspace overrides to keep audit clean."
+    },
+    {
+      "name": "verification",
+      "summary": "Ran pnpm install, audit, tests, builds, customer checks, browser validation, and governance checks.",
+      "bottleneck": "Corepack-based scripts needed explicit corepack pnpm calls inside package scripts."
+    },
+    {
+      "name": "closeout",
+      "summary": "Updated installation audit, registry, requirements, specs, history, omission, and evaluation records.",
+      "bottleneck": "None."
+    }
+  ]
+}
+

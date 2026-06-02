@@ -36,4 +36,4 @@
 - 버튼, tab, card, chart, code viewer에서 text overlap이 없는지 확인한다.
 - 반복 interaction에 불필요한 대기 animation이 없는지 확인한다.
 - `prefers-reduced-motion` 대응이 있는지 확인한다.
-- `npm run build` 또는 해당 프로젝트의 build/check를 통과한다.
+- `pnpm run build` 또는 해당 프로젝트의 build/check를 통과한다.

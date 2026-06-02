@@ -1,0 +1,63 @@
+{
+  "status": "ready_to_close",
+  "requires_rework": false,
+  "work_mode": "standard",
+  "required_target_policy": {
+    "required_targets": [
+      "mode_selection_record_targets",
+      "omission_check_targets",
+      "plan_evidence_targets",
+      "references_checked",
+      "request_trace_targets",
+      "requirements_targets",
+      "source_provenance_targets",
+      "spec_targets",
+      "timing_summary_targets",
+      "user_request_summary_targets",
+      "web_search_record_targets",
+      "work_summary_targets"
+    ],
+    "deferred_targets_allowed": []
+  },
+  "alignment_check": {
+    "initial_instruction_present": true,
+    "result_summary_present": true,
+    "work_mode": "standard",
+    "changed_files_count": 24,
+    "verification_count": 22,
+    "references_checked_count": 5,
+    "grounding_checks_count": 2,
+    "source_provenance_targets_count": 2,
+    "plan_evidence_targets_count": 2,
+    "mode_selection_record_targets_count": 1,
+    "omission_check_targets_count": 2,
+    "web_search_record_targets_count": 1,
+    "user_request_summary_targets_count": 2,
+    "requirements_targets_count": 2,
+    "spec_targets_count": 1,
+    "skill_work_occurred": false,
+    "skill_targets_count": 0,
+    "skill_validation_targets_count": 0,
+    "request_trace_targets_count": 1,
+    "work_summary_targets_count": 2,
+    "timing_summary_targets_count": 1,
+    "context_archiving_occurred": false,
+    "context_archive_targets_count": 0,
+    "installation_occurred": true,
+    "installation_record_targets_count": 2,
+    "resource_risk_occurred": false,
+    "resource_check_targets_count": 0,
+    "cli_pipeline_occurred": false,
+    "cli_pipeline_targets_count": 0,
+    "deferred_improvement_targets_count": 0
+  },
+  "gaps": [],
+  "improvements": [
+    "When Node is upgraded to 22+, evaluate pnpm 11 and migrate build-script settings from ignoredBuiltDependencies to allowBuilds if needed.",
+    "Add CI commands that use corepack pnpm install --frozen-lockfile as the default Node setup gate."
+  ],
+  "follow_up_actions": [
+    "Consider improvement: When Node is upgraded to 22+, evaluate pnpm 11 and migrate build-script settings from ignoredBuiltDependencies to allowBuilds if needed.",
+    "Consider improvement: Add CI commands that use corepack pnpm install --frozen-lockfile as the default Node setup gate."
+  ]
+}

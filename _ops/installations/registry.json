@@ -325,6 +325,46 @@
       "rollback_path": "Remove /Users/shinjoungeun/.codex/skills/presentation-reference-curator and restore or remove /Users/shinjoungeun/.codex/skills/create-validated-skill from the desired _skills/ source commit.",
       "installation_record_path": "_history/installations/2026/2026-06-03-skill-activation-sync.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-03-pnpm-workspace-migration",
+      "date": "2026-06-03",
+      "status": "installed",
+      "name": "pnpm workspace migration",
+      "scope": "project",
+      "owning_project": "workspace",
+      "package_manager": "pnpm",
+      "install_command": "corepack prepare pnpm@10.34.1 --activate; corepack pnpm install --lockfile-only; corepack pnpm install; corepack pnpm install --frozen-lockfile",
+      "environment_path": "repository root pnpm-lock.yaml, workspace node_modules, /Users/shinjoungeun/Library/pnpm/store/v10",
+      "dependency_record_paths": [
+        "package.json",
+        "pnpm-workspace.yaml",
+        "pnpm-lock.yaml",
+        "workspace-monitor/package.json",
+        "platform-desktop-app/package.json",
+        "presentation-agent/package.json"
+      ],
+      "version_or_lock_status": "pnpm@10.34.1 pinned through packageManager; root pnpm-lock.yaml replaces project package-lock.json files; dompurify and postcss security overrides are recorded in pnpm-workspace.yaml; sharp is the only approved dependency build script.",
+      "security_review": "No new direct dependency was added. Existing dependency graph was resolved through pnpm. dompurify@3.4.7 and postcss@8.5.10 overrides preserve the prior vulnerability fixes. corepack pnpm audit --prod=false reported no known vulnerabilities. sharp@0.34.5 dependency build script is explicitly approved through pnpm onlyBuiltDependencies instead of enabling all dependency build scripts.",
+      "license_review": "Direct dependency set is unchanged except @tauri-apps/cli is exact-pinned to the already locked 2.11.2 version; prior direct dependency license posture remains applicable.",
+      "verification": [
+        "corepack pnpm --version: 10.34.1",
+        "corepack pnpm install --frozen-lockfile: passed with sharp install script completed",
+        "corepack pnpm audit --prod=false: No known vulnerabilities found",
+        "corepack pnpm --filter workspace-monitor test: 16 tests passed",
+        "corepack pnpm --filter workspace-monitor check: passed",
+        "corepack pnpm --filter workspace-monitor build: passed",
+        "corepack pnpm --filter workspace-monitor perf:budget: passed, largest chunk 227542 bytes",
+        "corepack pnpm --filter workspace-monitor check:intent-map: passed",
+        "corepack pnpm --filter workspace-monitor check:intent-map:customer: passed after customer build",
+        "corepack pnpm --filter platform-desktop-app test: 13 tests passed",
+        "corepack pnpm --filter platform-desktop-app check: passed",
+        "corepack pnpm --filter platform-desktop-app monitor:build: passed",
+        "corepack pnpm --filter presentation-agent-browser-validation test:browser: 26 tests passed"
+      ],
+      "rollback_path": "Remove node_modules and pnpm store entries if desired, then revert package.json, pnpm-workspace.yaml, pnpm-lock.yaml, project package.json files, removed package-lock.json files, and pnpm command documentation/config changes.",
+      "installation_record_path": "_history/installations/2026/2026-06-03-pnpm-workspace-migration.ko.md",
+      "commit": "pending"
     }
   ]
 }

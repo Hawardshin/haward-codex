@@ -1,0 +1,127 @@
+{
+  "task": "Publish close-out claims for the pnpm workspace migration.",
+  "output_summary": "The final response will state that the repository's Node projects were migrated to a pnpm workspace, project package-lock files were removed, pnpm/Corepack commands were verified, and official pnpm/Corepack documentation was checked.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "root-workspace-config",
+      "source": "package.json; pnpm-workspace.yaml",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Tracked workspace configuration files created for this migration."
+    },
+    {
+      "evidence_id": "project-manifests",
+      "source": "workspace-monitor/package.json; platform-desktop-app/package.json; presentation-agent/package.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Tracked project manifests updated to declare the pnpm package manager and pnpm-compatible scripts."
+    },
+    {
+      "evidence_id": "lockfile-state",
+      "source": "pnpm-lock.yaml; git status shows workspace-monitor/package-lock.json, platform-desktop-app/package-lock.json, and presentation-agent/package-lock.json deleted",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "The new workspace lockfile is tracked and the deleted package-lock files are visible in repository status."
+    },
+    {
+      "evidence_id": "verification-commands",
+      "source": "corepack pnpm install --frozen-lockfile; corepack pnpm audit --prod=false; corepack pnpm --filter workspace-monitor test/check/build/perf:budget/check:intent-map/check:intent-map:customer; corepack pnpm --filter platform-desktop-app test/check/monitor:build; corepack pnpm --filter presentation-agent-browser-validation test:browser",
+      "source_type": "test_result",
+      "checked_on": "2026-06-03",
+      "reliability": "Local command results recorded during the migration verification pass."
+    },
+    {
+      "evidence_id": "official-pnpm-installation",
+      "source": "https://pnpm.io/installation",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official pnpm installation documentation."
+    },
+    {
+      "evidence_id": "official-pnpm-workspaces",
+      "source": "https://pnpm.io/workspaces",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official pnpm workspace documentation."
+    },
+    {
+      "evidence_id": "official-pnpm-settings",
+      "source": "https://pnpm.io/10.x/settings",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official pnpm 10 settings documentation for workspace overrides and build-script dependency policy."
+    },
+    {
+      "evidence_id": "official-corepack-docs",
+      "source": "https://nodejs.org/download/release/v22.4.0/docs/api/corepack.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-03",
+      "reliability": "Official Node.js Corepack documentation."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The repository now has a root pnpm workspace pinned to pnpm@10.34.1.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "root-workspace-config",
+        "project-manifests"
+      ],
+      "verification_steps": [
+        "Read the root package.json, pnpm-workspace.yaml, and updated project package.json files."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The old project-level package-lock.json files were replaced by a root pnpm-lock.yaml.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "lockfile-state"
+      ],
+      "verification_steps": [
+        "Checked repository status and lockfile presence after migration."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The pnpm migration verification commands passed locally.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "verification-commands"
+      ],
+      "verification_steps": [
+        "Ran the listed Corepack/pnpm install, audit, test, check, build, customer, and browser validation commands."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The migration used official pnpm workspace, pnpm settings, pnpm installation, and Node Corepack documentation as external references.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "official-pnpm-installation",
+        "official-pnpm-workspaces",
+        "official-pnpm-settings",
+        "official-corepack-docs"
+      ],
+      "verification_steps": [
+        "Checked the official documentation pages on 2026-06-03 and recorded them in the web search history."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "Public macOS distribution readiness remains outside this package-manager migration and is still governed by existing signing/notarization blockers."
+  ],
+  "limitation_notes": [
+    "This grounding check covers the close-out claims for the pnpm migration, not historical npm references inside earlier audit or evaluation records."
+  ]
+}

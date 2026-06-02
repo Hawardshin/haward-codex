@@ -67,7 +67,7 @@ User
 ## Next Steps
 
 1. Record an installation audit plan for Rust toolchain and Tauri CLI.
-2. Pass `npm run monitor:build`, `npm run check`, and `npm test` on macOS first.
-3. After Rust installation, verify `npm run tauri:dev` as a developer-local run.
+2. Pass `pnpm run monitor:build`, `pnpm run check`, and `pnpm test` on macOS first.
+3. After Rust installation, verify `pnpm run tauri:dev` as a developer-local run.
 4. Define a Windows build host or CI path.
 5. Do not use public-ready wording until signing, notarization, certificate, and smoke-test gates pass.

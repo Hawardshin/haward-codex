@@ -1,0 +1,125 @@
+{
+  "initial_instruction": "pnpm으로 전환해 달라는 요청",
+  "result_summary": "Migrated the repository's Node projects to a root pnpm workspace pinned to pnpm@10.34.1, replaced package-lock.json files with pnpm-lock.yaml, updated durable npm commands to pnpm/Corepack, preserved security overrides, and verified all affected projects.",
+  "work_mode": "standard",
+  "changed_files": [
+    "package.json",
+    "pnpm-workspace.yaml",
+    "pnpm-lock.yaml",
+    "workspace-monitor/package.json",
+    "platform-desktop-app/package.json",
+    "presentation-agent/package.json",
+    "workspace-monitor/vercel.json",
+    "platform-desktop-app/src-tauri/tauri.conf.json",
+    "workspace-monitor/README.md",
+    "platform-desktop-app/README.md",
+    "presentation-agent/README.md",
+    "agent-platform/configs/installations/install-mode-registry.json",
+    "_ops/installations/registry.json",
+    "_requirements/changes/2026-06-03-pnpm-workspace-migration.ko.md",
+    "_requirements/changes/2026-06-03-pnpm-workspace-migration.en.md",
+    "_specs/workspace-platform/2026-06-03-pnpm-workspace-migration/",
+    "_history/evaluations/2026/2026-06-03-pnpm-workspace-migration-grounding-result.json",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "_ops/maps/repository-map.md",
+    "_tools/workspace-index/src/workspace_index.py",
+    "workspace-monitor/package-lock.json",
+    "platform-desktop-app/package-lock.json",
+    "presentation-agent/package-lock.json"
+  ],
+  "verification": [
+    "corepack pnpm --version",
+    "corepack pnpm install --frozen-lockfile",
+    "corepack pnpm audit --prod=false",
+    "corepack pnpm --filter workspace-monitor collect",
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor check",
+    "corepack pnpm --filter workspace-monitor build",
+    "corepack pnpm --filter workspace-monitor perf:budget",
+    "corepack pnpm --filter workspace-monitor check:intent-map",
+    "corepack pnpm --filter workspace-monitor check:intent-map:customer",
+    "corepack pnpm --filter platform-desktop-app test",
+    "corepack pnpm --filter platform-desktop-app check",
+    "corepack pnpm --filter platform-desktop-app monitor:build",
+    "corepack pnpm --filter presentation-agent-browser-validation test:browser",
+    "python3 _tools/workspace-index/src/workspace_index.py --check",
+    "python3 -m unittest _tools.workspace-index.tests.test_workspace_index",
+    "python3 _tools/docs-audit/src/docs_audit.py --check",
+    "check-grounding",
+    "check-install-modes",
+    "check-config-contract",
+    "check-philosophy-trace",
+    "git diff --check"
+  ],
+  "references_checked": [
+    "https://pnpm.io/installation",
+    "https://pnpm.io/workspaces",
+    "https://pnpm.io/10.x/settings",
+    "https://nodejs.org/download/release/v22.4.0/docs/api/corepack.html",
+    "https://docs.npmjs.com/cli/commands/npm-ci/"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-03-pnpm-workspace-migration-grounding-input.json",
+    "_history/evaluations/2026/2026-06-03-pnpm-workspace-migration-grounding-result.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-03-pnpm-workspace-migration.ko.md",
+    "_history/plans/2026/2026-06-03-pnpm-workspace-migration.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-03-pnpm-workspace-migration.ko.md",
+    "_specs/workspace-platform/2026-06-03-pnpm-workspace-migration/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-03-pnpm-workspace-migration.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-pnpm-workspace-migration-omission-input.json",
+    "_history/evaluations/2026/2026-06-03-pnpm-workspace-migration-omission-result.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-pnpm-workspace-migration.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/user-requests/2026/2026-06-03.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-03-pnpm-workspace-migration.ko.md",
+    "_requirements/changes/2026-06-03-pnpm-workspace-migration.en.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-03-pnpm-workspace-migration/"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-pnpm-workspace-migration.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-pnpm-workspace-migration.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": true,
+  "installation_record_targets": [
+    "_history/installations/2026/2026-06-03-pnpm-workspace-migration.ko.md",
+    "_ops/installations/registry.json"
+  ],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "When Node is upgraded to 22+, evaluate pnpm 11 and migrate build-script settings from ignoredBuiltDependencies to allowBuilds if needed.",
+    "Add CI commands that use corepack pnpm install --frozen-lockfile as the default Node setup gate."
+  ]
+}

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Project-local Playwright validation harness for generated presentation-agent HTML decks.",
+  "packageManager": "pnpm@10.34.1",
   "scripts": {
     "install:browsers": "playwright install chromium",
     "test:browser": "playwright test",

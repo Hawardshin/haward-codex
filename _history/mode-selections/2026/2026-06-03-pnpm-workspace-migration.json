@@ -1,0 +1,22 @@
+{
+  "task": "pnpm workspace migration",
+  "selected_work_mode": "standard",
+  "selected_install_mode": "developer",
+  "reason": "Package manager and lockfile migration changes developer setup, project scripts, and durable dependency records across multiple Node projects.",
+  "web_first_record": "_history/web-searches/2026/2026-06-03-pnpm-workspace-migration.ko.md",
+  "memory_bootstrap": "simulated from agent-platform/configs/memory/bootstrap-manifest.json hot anchors",
+  "target_projects": [
+    "workspace-monitor",
+    "platform-desktop-app",
+    "presentation-agent",
+    "workspace"
+  ],
+  "resource_risk_occurred": false,
+  "installation_occurred": true,
+  "planned_install_commands": [
+    "corepack prepare pnpm@10.34.1 --activate",
+    "corepack pnpm install --lockfile-only",
+    "corepack pnpm install"
+  ]
+}
+

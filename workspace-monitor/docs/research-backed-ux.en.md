@@ -20,7 +20,7 @@
 
 ## Verification
 
-- `npm run test`
-- `npm run check`
-- `npm run build`
+- `pnpm run test`
+- `pnpm run check`
+- `pnpm run build`
 - Playwright screenshot smoke

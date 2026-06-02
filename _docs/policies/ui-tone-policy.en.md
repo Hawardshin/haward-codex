@@ -36,4 +36,4 @@ Platform surfaces should feel fast to scan and trustworthy like operational tool
 - Check that buttons, tabs, cards, charts, and code viewers do not create text overlap.
 - Check that repeated interactions do not add unnecessary waiting animations.
 - Check that `prefers-reduced-motion` handling exists.
-- Run `npm run build` or the owning project's build/check command.
+- Run `pnpm run build` or the owning project's build/check command.

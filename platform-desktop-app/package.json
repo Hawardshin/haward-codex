@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Installable desktop shell for the personal agent-building platform.",
+  "packageManager": "pnpm@10.34.1",
   "scripts": {
     "check": "node scripts/check-readiness.mjs && node scripts/check-customer-bundle.mjs --allow-missing-dist && node scripts/check-release-readiness.mjs --mode internal && node scripts/check-service-readiness.mjs --mode internal",
     "test": "node --test tests/*.test.mjs",
@@ -13,11 +14,11 @@
     "release:preflight:public:report": "node scripts/check-release-readiness.mjs --mode public --report-only",
     "service:readiness": "node scripts/check-service-readiness.mjs --mode internal",
     "service:readiness:public:report": "node scripts/check-service-readiness.mjs --mode public --report-only",
-    "monitor:build": "npm --prefix ../workspace-monitor run build:customer && npm run customer-bundle:audit",
+    "monitor:build": "corepack pnpm --dir ../workspace-monitor run build:customer && corepack pnpm run customer-bundle:audit",
     "tauri:dev": "tauri dev",
     "tauri:build": "tauri build"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^2.0.0"
+    "@tauri-apps/cli": "2.11.2"
   }
 }

@@ -12,7 +12,7 @@ Keep repeatable quality checks for `deck-spec`, HTML deck, and PPTX outputs so p
    - Check slide count, layout distribution, title length, text density, and remote or unknown-license assets.
 2. Run existing Python unit tests and catalog validation.
 3. Regenerate the HTML deck and statically check that it does not depend on remote assets.
-4. Run Playwright validation with `cd presentation-agent && npm run test:browser`.
+4. Run Playwright validation with `corepack pnpm --filter presentation-agent-browser-validation run test:browser`.
    - HTML decks open in Chromium desktop/mobile viewports.
    - Only real decks containing `.pa-slide` are validated; link index HTML is excluded.
    - Keyboard navigation, nonblank slides, progress, and presenter notes toggling are checked.

@@ -457,7 +457,7 @@
           "validates": "Agent platform governance tests remain green."
         },
         {
-          "command": "npm --prefix workspace-monitor run check && npm --prefix workspace-monitor test",
+          "command": "corepack pnpm --filter workspace-monitor run check && corepack pnpm --filter workspace-monitor test",
           "validates": "Monitor snapshot and UI type contracts still expose the philosophy feature factory."
         }
       ],
@@ -573,7 +573,7 @@
       ],
       "validation_targets": [
         {
-          "command": "npm --prefix workspace-monitor run check && npm --prefix workspace-monitor test",
+          "command": "corepack pnpm --filter workspace-monitor run check && corepack pnpm --filter workspace-monitor test",
           "validates": "Dashboard signals remain type-safe and snapshot-backed."
         }
       ],

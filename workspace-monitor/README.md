@@ -36,23 +36,23 @@ workspace-monitor/
 ## 명령
 
 ```bash
-npm run collect
-npm test
-npm run check
-npm run build
-npm run perf:budget
-npm run dev
+pnpm run collect
+pnpm test
+pnpm run check
+pnpm run build
+pnpm run perf:budget
+pnpm run dev
 ```
 
-`npm run collect`는 repository root의 `_history`, `_ops`, `_requirements`, `_specs`, 프로젝트 docs/specs, 에이전트 설정, view mode 설정, language mode 설정, source code catalog를 읽어 `src/generated/workspace-snapshot.json`과 `public/workspace-snapshot.json`을 만든다. snapshot에는 문서 목록뿐 아니라 `historyDays` 날짜 index, `agentCatalog`, `collaborationBoard`, `folderStructure`, `structureOverview`, `viewModeCatalog`, `languageModeCatalog`, `sourceFiles`도 포함된다.
+`pnpm run collect`는 repository root의 `_history`, `_ops`, `_requirements`, `_specs`, 프로젝트 docs/specs, 에이전트 설정, view mode 설정, language mode 설정, source code catalog를 읽어 `src/generated/workspace-snapshot.json`과 `public/workspace-snapshot.json`을 만든다. snapshot에는 문서 목록뿐 아니라 `historyDays` 날짜 index, `agentCatalog`, `collaborationBoard`, `folderStructure`, `structureOverview`, `viewModeCatalog`, `languageModeCatalog`, `sourceFiles`도 포함된다.
 
-UI는 대용량 snapshot을 client JavaScript bundle에 정적으로 포함하지 않고 `/workspace-snapshot.json`을 fetch한 뒤 `MonitorShell`을 lazy-load한다. `npm run perf:budget`은 build 후 가장 큰 JavaScript chunk가 1MB를 넘지 않는지 확인해 snapshot bundle 회귀를 막는다.
+UI는 대용량 snapshot을 client JavaScript bundle에 정적으로 포함하지 않고 `/workspace-snapshot.json`을 fetch한 뒤 `MonitorShell`을 lazy-load한다. `pnpm run perf:budget`은 build 후 가장 큰 JavaScript chunk가 1MB를 넘지 않는지 확인해 snapshot bundle 회귀를 막는다.
 
 ## Vercel 배포
 
 - Vercel에서 프로젝트 root directory를 `workspace-monitor`로 설정한다.
-- Install command: `npm ci`
-- Build command: `npm run build`
+- Install command: `pnpm install --frozen-lockfile`
+- Build command: `pnpm run build`
 - Output은 Next.js가 관리한다. `next.config.mjs`는 `output: "export"`를 사용한다.
 
 ## 공개 전 점검
@@ -64,4 +64,4 @@ public 배포 전에 반드시 `src/generated/workspace-snapshot.json`을 확인
 - 소스 코드도 snapshot에 포함되므로 public 배포 전에 `sourceFiles` 범위를 반드시 검토한다.
 - view mode selector는 보안 경계가 아니다. public 사용자용으로 제한해야 하는 정보는 collector 범위나 배포 전 redaction에서 제거한다.
 - language mode selector는 표시 렌즈다. public 배포에서 특정 언어 문서를 제외해야 하면 원천 문서나 collector 범위를 조정한다.
-- 조정 후 `npm run collect`와 `npm run build`를 다시 실행한다.
+- 조정 후 `pnpm run collect`와 `pnpm run build`를 다시 실행한다.

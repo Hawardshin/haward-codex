@@ -248,15 +248,15 @@
   "runtime_surface_contract": {
     "desktop_panel": "Workspace Monitor Desktop shall show Service Readiness with grouped status, score, blockers, warnings, and next actions.",
     "tauri_command": "get_service_readiness_report",
-    "script_command": "npm --prefix platform-desktop-app run service:readiness",
-    "public_report_command": "npm --prefix platform-desktop-app run service:readiness:public:report"
+    "script_command": "corepack pnpm --filter platform-desktop-app run service:readiness",
+    "public_report_command": "corepack pnpm --filter platform-desktop-app run service:readiness:public:report"
   },
   "validation_commands": [
-    "npm --prefix platform-desktop-app run service:readiness",
-    "npm --prefix platform-desktop-app run service:readiness:public:report",
-    "npm --prefix platform-desktop-app run check",
-    "npm --prefix workspace-monitor run check",
-    "npm --prefix workspace-monitor test",
+    "corepack pnpm --filter platform-desktop-app run service:readiness",
+    "corepack pnpm --filter platform-desktop-app run service:readiness:public:report",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor test",
     "cargo test",
     "cargo build"
   ]

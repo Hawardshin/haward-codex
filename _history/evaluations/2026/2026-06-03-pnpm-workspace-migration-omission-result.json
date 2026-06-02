@@ -1,0 +1,16 @@
+{
+  "status": "coverage_ready",
+  "requires_rework": false,
+  "work_mode": "standard",
+  "coverage_summary": {
+    "expected_items_count": 6,
+    "artifact_checks_count": 3,
+    "acceptance_checks_count": 3,
+    "known_omission_risks_count": 1
+  },
+  "gaps": [],
+  "warnings": [
+    "Known omission risk recorded: Historical installation records still mention npm because they are audit history, not current setup guidance."
+  ],
+  "follow_up_actions": []
+}

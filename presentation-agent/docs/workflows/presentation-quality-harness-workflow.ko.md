@@ -12,7 +12,7 @@
    - 슬라이드 수, 레이아웃 분포, 제목 길이, 본문 밀도, 원격/미확인 에셋 사용 여부를 확인한다.
 2. 기존 Python 단위 테스트와 카탈로그 검증을 실행한다.
 3. HTML 덱을 재생성하고 원격 에셋이 없는지 정적 검사한다.
-4. Playwright 검증은 `cd presentation-agent && npm run test:browser`로 실행한다.
+4. Playwright 검증은 `corepack pnpm --filter presentation-agent-browser-validation run test:browser`로 실행한다.
    - Chromium desktop/mobile viewport에서 HTML 덱이 열린다.
    - `.pa-slide`가 있는 실제 덱만 검증하고, 링크 인덱스 HTML은 제외한다.
    - 키보드 이동, nonblank slide, 진행률, 발표자 노트 토글을 확인한다.

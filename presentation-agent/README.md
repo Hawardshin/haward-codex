@@ -80,9 +80,9 @@ PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presen
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.artifact_pptx presentation-agent/data/deck-specs/presentation-agent-kickoff.ko.json outputs/manual-presentation-agent/presentations/presentation-agent-kickoff --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/workspace-platform-overview.ko.json presentation-agent/artifacts/html/workspace-platform-overview.html --catalog presentation-agent/data/reference-index/starter-reference-catalog.json
 PYTHONPATH=presentation-agent/src python3 -m presentation_agent.html_deck presentation-agent/data/deck-specs/workspace-platform-philosophy.ko.json presentation-agent/artifacts/html/workspace-platform-philosophy.html
-cd presentation-agent && npm run test:browser
+corepack pnpm --filter presentation-agent-browser-validation run test:browser
 ```
 
-브라우저 검증을 처음 실행하는 환경에서는 먼저 `cd presentation-agent && npm install && npm run install:browsers`를 실행한다.
+브라우저 검증을 처음 실행하는 환경에서는 먼저 `corepack pnpm install --frozen-lockfile && corepack pnpm --filter presentation-agent-browser-validation run install:browsers`를 실행한다.
 
 `open_template_collector.py` 산출물은 고화질 PPT 렌더링이 아니라 공개 Impress 템플릿 파일, 썸네일, 추출 가능한 텍스트, 출처를 보존하는 HTML 참조 변환이다.

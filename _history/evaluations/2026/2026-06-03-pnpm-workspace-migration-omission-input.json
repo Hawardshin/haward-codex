@@ -1,0 +1,140 @@
+{
+  "task": "pnpm workspace migration",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and implementation.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-pnpm-workspace-migration.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "pnpm-workspace",
+      "description": "Create a pnpm workspace for all current Node projects.",
+      "source": "UR-2026-06-03-023",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "package.json",
+        "pnpm-workspace.yaml",
+        "pnpm-lock.yaml"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "remove-npm-lockfiles",
+      "description": "Remove project-level npm lockfiles and keep a root pnpm lockfile.",
+      "source": "REQ-WS-088",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "git rm workspace-monitor/package-lock.json platform-desktop-app/package-lock.json presentation-agent/package-lock.json",
+        "find . -maxdepth 2 shows only pnpm-lock.yaml for lockfile"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "corepack-pin",
+      "description": "Pin pnpm version through packageManager for reproducibility.",
+      "source": "REQ-WS-089",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "package.json packageManager pnpm@10.34.1",
+        "project packageManager fields",
+        "corepack pnpm --version: 10.34.1"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "security-overrides",
+      "description": "Preserve prior npm security overrides under pnpm.",
+      "source": "installation audit",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "pnpm-workspace.yaml overrides dompurify/postcss",
+        "corepack pnpm audit --prod=false: No known vulnerabilities found"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "install-audit",
+      "description": "Record actual dependency installation and lockfile migration.",
+      "source": "_ops/workflows/58-installation-record.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/installations/2026/2026-06-03-pnpm-workspace-migration.ko.md",
+        "_ops/installations/registry.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "_requirements/changes/2026-06-03-pnpm-workspace-migration.ko.md",
+      "purpose": "Shared requirements for pnpm migration.",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-03-pnpm-workspace-migration/spec.ko.md",
+      "purpose": "Implementation spec.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-03-pnpm-workspace-migration.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "pnpm-install-audit",
+      "description": "pnpm install and audit pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm install --frozen-lockfile",
+        "corepack pnpm audit --prod=false"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "project-validation",
+      "description": "All affected Node projects pass pnpm-based verification.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor test/check/build/perf/intent-map/customer checks",
+        "platform-desktop-app test/check/monitor:build",
+        "presentation-agent-browser-validation test:browser"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "governance-validation",
+      "description": "Changed shared configs and docs pass governance checks.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-install-modes",
+        "docs-audit",
+        "check-config-contract",
+        "check-philosophy-trace"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Historical installation records still mention npm because they are audit history, not current setup guidance."
+  ],
+  "notes": [
+    "No global npm install was performed."
+  ]
+}

@@ -11,10 +11,10 @@ const maxInitialChunkBytes = 1_000_000;
 
 function main() {
   if (!fs.existsSync(chunkDir)) {
-    throw new Error("Static chunk directory is missing. Run `npm --prefix workspace-monitor run build` first.");
+    throw new Error("Static chunk directory is missing. Run `corepack pnpm --filter workspace-monitor build` first.");
   }
   if (!fs.existsSync(indexHtmlPath)) {
-    throw new Error("Static index.html is missing. Run `npm --prefix workspace-monitor run build` first.");
+    throw new Error("Static index.html is missing. Run `corepack pnpm --filter workspace-monitor build` first.");
   }
 
   const chunks = fs

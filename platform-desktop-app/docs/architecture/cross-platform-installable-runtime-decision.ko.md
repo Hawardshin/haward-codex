@@ -67,7 +67,7 @@
 ## 다음 단계
 
 1. Rust toolchain과 Tauri CLI를 프로젝트 로컬 설치 계획으로 감사 기록한다.
-2. macOS에서 `npm run monitor:build`, `npm run check`, `npm test`를 먼저 통과시킨다.
-3. Rust 설치 후 `npm run tauri:dev`를 developer-local run으로 검증한다.
+2. macOS에서 `pnpm run monitor:build`, `pnpm run check`, `pnpm test`를 먼저 통과시킨다.
+3. Rust 설치 후 `pnpm run tauri:dev`를 developer-local run으로 검증한다.
 4. Windows 빌드 host 또는 CI를 별도로 정의한다.
 5. signing/notarization/certificate가 준비되기 전에는 public-ready 표현을 금지한다.

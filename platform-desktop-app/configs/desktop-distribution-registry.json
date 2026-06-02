@@ -663,7 +663,7 @@
       "id": "future-tauri-install",
       "status": "not_run",
       "scope": "platform-desktop-app",
-      "command": "npm install in platform-desktop-app after Rust/Tauri dependency and license/security audit planning.",
+      "command": "corepack pnpm install --frozen-lockfile after Rust/Tauri dependency and license/security audit planning.",
       "audit_required_if_run": true
     },
     {
