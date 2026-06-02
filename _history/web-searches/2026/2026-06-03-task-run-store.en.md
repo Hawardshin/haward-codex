@@ -6,6 +6,8 @@
   - `Rust std process Command Stdio stdin stdout stderr documentation`
   - `Tauri v2 command invoke state official documentation`
   - `Tauri v2 capabilities permissions documentation`
+  - `Rust std fs read_to_string remove_dir_all official documentation`
+  - `Rust std fs read_dir metadata official documentation`
 
 ## Strong Sources Checked
 
@@ -18,6 +20,8 @@
 - Kept external AI CLIs as guest process lanes using `Command` plus `Stdio::piped` rather than platform-internal logic.
 - Persisted CLI stdout/stderr outside memory as split `record.json`, `stdout.log`, and `stderr.log` artifacts.
 - Added a task-run persist signature so active polling rewrites record/log files only when state, output, or decision counters change.
+- Limited saved record/log inspection to bounded previews.
+- Used `remove_dir_all` for old task-run cleanup only after resolving canonical paths inside the task-run store.
 
 ## Uncertainty
 

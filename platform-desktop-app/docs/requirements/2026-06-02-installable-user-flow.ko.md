@@ -31,6 +31,7 @@
 | PDA-UX-021 | Desktop 탭은 실행 중인 CLI output에서 사용자 질문을 감지하면 사용자가 자리를 비운 상태에서도 해당 lane에 defer 메시지를 보내고, 질문을 decision inbox에 보류 항목으로 저장하며, 사용자가 돌아오면 answer/resume으로 연결할 수 있어야 한다. 수동 보류와 전체 감지 질문 보류도 제공해야 한다. | must | Workspace Monitor Desktop tab, Tauri session commands, readiness/test |
 | PDA-UX-022 | CLI 질문 보류와 active session polling은 긴 terminal output과 다중 lane에서도 빠르게 유지되어야 한다. 질문 scan은 bounded tail 기준으로 제한하고, UI polling은 overlap 방지, inbox refresh throttle, session report 병합, idle elapsed update bucket을 적용해야 한다. | must | Workspace Monitor Desktop tab, Tauri session commands, readiness/test, performance budget |
 | PDA-UX-023 | Desktop 탭과 Tauri runtime은 CLI 세션과 task pipe lane 실행 결과를 filesystem-backed task-run record로 저장해야 한다. 각 record는 metadata `record.json`, `stdout.log`, `stderr.log`, pipeline/lane provenance, decision count, bounded output state를 포함하고 UI에서 최근 저장 기록을 확인할 수 있어야 한다. | must | Tauri task-run commands, Workspace Monitor Desktop tab, readiness/test |
+| PDA-UX-024 | Desktop 탭은 저장된 task-run record를 선택해 bounded `stdout.log`, `stderr.log`, `record.json` preview를 열람하고, 사용자가 오래된 task-run 저장소 항목을 명시적으로 정리할 수 있어야 한다. | must | Tauri task-run detail/prune commands, Workspace Monitor Desktop tab, readiness/test |
 
 ## 현재 상태
 

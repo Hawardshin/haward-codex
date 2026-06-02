@@ -1335,9 +1335,21 @@ h3 {
   gap: 10px;
 }
 
+.task-run-store-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr);
+  gap: 12px;
+  align-items: start;
+}
+
 .task-run-card {
   display: grid;
   gap: 9px;
+}
+
+.task-run-card.active {
+  border-color: #7ca1c7;
+  box-shadow: 0 0 0 2px rgba(124, 161, 199, 0.16);
 }
 
 .task-run-card header {
@@ -1374,6 +1386,79 @@ h3 {
   color: var(--text);
   font-size: 12px;
   line-height: 1.35;
+}
+
+.task-run-detail {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.task-run-detail header {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.task-run-detail header span,
+.task-run-detail-meta span,
+.task-run-preview-tabs span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.task-run-detail header strong {
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  padding: 3px 8px;
+  color: var(--slate);
+  font-size: 12px;
+}
+
+.task-run-detail-meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.task-run-detail-meta span {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 4px 7px;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.task-run-preview-tabs {
+  display: grid;
+  gap: 10px;
+}
+
+.task-run-preview-tabs article {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.task-run-preview-tabs pre {
+  max-height: 220px;
+  overflow: auto;
+  border: 1px solid #263241;
+  background: #111827;
+  color: #f9fafb;
+  border-radius: 7px;
+  margin: 0;
+  padding: 10px;
 }
 
 .session-record-link {
@@ -3302,6 +3387,7 @@ h3 {
   .task-pipe-report-grid,
   .task-run-summary-strip,
   .task-run-grid,
+  .task-run-detail-meta,
   .pipe-lane-grid,
   .run-board-strip,
   .process-graph,
@@ -3320,6 +3406,7 @@ h3 {
   .ops-event,
   .task-pipe-layout,
   .task-pipe-controls,
+  .task-run-store-layout,
   .session-launcher,
   .session-grid,
   .source-review-grid,
@@ -3393,6 +3480,8 @@ h3 {
   .task-pipe-report-grid,
   .task-run-summary-strip,
   .task-run-grid,
+  .task-run-store-layout,
+  .task-run-detail-meta,
   .pipe-lane-grid,
   .run-board-strip,
   .process-graph,

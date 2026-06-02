@@ -6,6 +6,8 @@
   - `Rust std process Command Stdio stdin stdout stderr documentation`
   - `Tauri v2 command invoke state official documentation`
   - `Tauri v2 capabilities permissions documentation`
+  - `Rust std fs read_to_string remove_dir_all official documentation`
+  - `Rust std fs read_dir metadata official documentation`
 
 ## 확인한 강한 출처
 
@@ -18,6 +20,8 @@
 - 외부 AI CLI는 플랫폼 내부 로직이 아니라 `Command` + `Stdio::piped` 기반 guest process lane으로 유지했다.
 - CLI stdout/stderr는 runtime 메모리 상태에만 두지 않고 `record.json`, `stdout.log`, `stderr.log`로 분리 저장하게 했다.
 - active polling 중 파일 쓰기 비용을 줄이기 위해 task-run persist signature가 변할 때만 record/log를 다시 쓰도록 했다.
+- 저장된 record/log 열람은 bounded preview로 제한했다.
+- 오래된 task-run 정리는 `remove_dir_all`을 쓰되 task-run store 내부 canonical path만 대상으로 삼았다.
 
 ## 불확실성
 

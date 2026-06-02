@@ -1,0 +1,29 @@
+{
+  "work_id": "2026-06-03-task-run-detail-prune",
+  "request_id": "UR-2026-06-03-005",
+  "started_at": "2026-06-03T01:00:00+09:00",
+  "finished_at": "2026-06-03T01:08:09+09:00",
+  "timing_source": "manual_summary_after_implementation",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked official Rust filesystem references before implementing log read and prune."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Implemented Tauri detail/prune commands and Desktop UI log preview controls."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Ran TypeScript, readiness tests, production build, collect, and performance budget checks."
+    },
+    {
+      "phase": "known_constraint",
+      "status": "open",
+      "notes": "Rust toolchain is unavailable, so Tauri compile/build remains pending."
+    }
+  ]
+}

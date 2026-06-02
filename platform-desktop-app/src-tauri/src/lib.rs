@@ -250,6 +250,30 @@ struct CliTaskRunRecordReport {
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
+struct CliTaskRunDetailReport {
+    record: CliTaskRunRecordReport,
+    record_json: String,
+    stdout_preview: String,
+    stderr_preview: String,
+    stdout_truncated: bool,
+    stderr_truncated: bool,
+    max_log_preview_bytes: usize,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct CliTaskRunPruneReport {
+    status: String,
+    keep_count: usize,
+    before_count: usize,
+    after_count: usize,
+    removed_count: usize,
+    removed_task_run_ids: Vec<String>,
+    errors: Vec<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 struct WorkspaceTextFile {
     relative_path: String,
     content: String,
@@ -335,6 +359,8 @@ const MAX_WORKSPACE_FILE_BYTES: usize = 1_000_000;
 const MAX_DECISION_ANSWER_BYTES: usize = 20_000;
 const MAX_TASK_RUN_RECORDS: usize = 80;
 const MAX_TASK_PROMPT_PREVIEW_CHARS: usize = 280;
+const MAX_TASK_RUN_LOG_PREVIEW_BYTES: usize = 64_000;
+const DEFAULT_TASK_RUN_PRUNE_KEEP_COUNT: usize = 30;
 const DEFER_MESSAGE: &str = "I will pause this lane here and collect the user decision later. Please do not make a source-affecting decision now.";
 
 static ADAPTERS: &[AdapterDefinition] = &[
@@ -494,6 +520,16 @@ fn list_cli_task_pipeline_presets() -> Vec<CliTaskPipelinePresetReport> {
 #[tauri::command]
 fn list_cli_task_run_records() -> Result<Vec<CliTaskRunRecordReport>, String> {
     read_task_run_records()
+}
+
+#[tauri::command]
+fn read_cli_task_run_record(task_run_id: String) -> Result<CliTaskRunDetailReport, String> {
+    read_task_run_detail(&task_run_id)
+}
+
+#[tauri::command]
+fn prune_cli_task_run_records(keep_count: Option<usize>) -> Result<CliTaskRunPruneReport, String> {
+    prune_task_run_records(keep_count)
 }
 
 #[tauri::command]
@@ -1055,6 +1091,8 @@ pub fn run() {
             run_all_cli_adapter_health,
             list_cli_task_pipeline_presets,
             list_cli_task_run_records,
+            read_cli_task_run_record,
+            prune_cli_task_run_records,
             start_cli_adapter_session,
             start_cli_task_pipeline,
             poll_cli_adapter_session,
@@ -1585,6 +1623,10 @@ fn task_run_persist_signature(report: &CliSessionReport) -> String {
 }
 
 fn read_task_run_records() -> Result<Vec<CliTaskRunRecordReport>, String> {
+    read_task_run_records_with_limit(Some(MAX_TASK_RUN_RECORDS))
+}
+
+fn read_task_run_records_with_limit(limit: Option<usize>) -> Result<Vec<CliTaskRunRecordReport>, String> {
     let root = workspace_root()?;
     let base = task_runs_base_path(&root);
     if !base.exists() {
@@ -1614,8 +1656,98 @@ fn read_task_run_records() -> Result<Vec<CliTaskRunRecordReport>, String> {
     }
 
     records.sort_by(|left, right| right.updated_at.cmp(&left.updated_at));
-    records.truncate(MAX_TASK_RUN_RECORDS);
+    if let Some(limit) = limit {
+        records.truncate(limit);
+    }
     Ok(records)
+}
+
+fn read_task_run_detail(task_run_id: &str) -> Result<CliTaskRunDetailReport, String> {
+    let task_run_id = task_run_id.trim();
+    if task_run_id.is_empty() {
+        return Err("Task run id is required.".to_string());
+    }
+
+    let root = workspace_root()?;
+    let run_dir = resolve_task_run_dir(&root, task_run_id)?;
+    let record_path = run_dir.join("record.json");
+    if !record_path.is_file() {
+        return Err(format!("Task run record was not found: {task_run_id}"));
+    }
+
+    let record_json =
+        fs::read_to_string(&record_path).map_err(|error| format!("Failed to read task run record: {error}"))?;
+    let record_value: Value =
+        serde_json::from_str(&record_json).map_err(|error| format!("Failed to parse task run record: {error}"))?;
+    let record = task_run_record_report_from_value(&root, &record_path, &record_value);
+    let (stdout_preview, stdout_truncated) = read_bounded_text_preview(&run_dir.join("stdout.log"), MAX_TASK_RUN_LOG_PREVIEW_BYTES)?;
+    let (stderr_preview, stderr_truncated) = read_bounded_text_preview(&run_dir.join("stderr.log"), MAX_TASK_RUN_LOG_PREVIEW_BYTES)?;
+
+    Ok(CliTaskRunDetailReport {
+        record,
+        record_json,
+        stdout_preview,
+        stderr_preview,
+        stdout_truncated,
+        stderr_truncated,
+        max_log_preview_bytes: MAX_TASK_RUN_LOG_PREVIEW_BYTES,
+    })
+}
+
+fn prune_task_run_records(keep_count: Option<usize>) -> Result<CliTaskRunPruneReport, String> {
+    let root = workspace_root()?;
+    let base = task_runs_base_path(&root);
+    if !base.exists() {
+        return Ok(CliTaskRunPruneReport {
+            status: "no_task_run_store".to_string(),
+            keep_count: keep_count.unwrap_or(DEFAULT_TASK_RUN_PRUNE_KEEP_COUNT),
+            before_count: 0,
+            after_count: 0,
+            removed_count: 0,
+            removed_task_run_ids: Vec::new(),
+            errors: Vec::new(),
+        });
+    }
+
+    let keep_count = keep_count
+        .unwrap_or(DEFAULT_TASK_RUN_PRUNE_KEEP_COUNT)
+        .clamp(1, MAX_TASK_RUN_RECORDS);
+    let records = read_task_run_records_with_limit(None)?;
+    let before_count = records.len();
+    let mut removed_task_run_ids = Vec::new();
+    let mut errors = Vec::new();
+
+    for record in records.iter().skip(keep_count) {
+        match resolve_task_run_dir(&root, &record.task_run_id) {
+            Ok(run_dir) => {
+                if let Err(error) = fs::remove_dir_all(&run_dir) {
+                    errors.push(format!("{}: {error}", record.task_run_id));
+                } else {
+                    removed_task_run_ids.push(record.task_run_id.clone());
+                }
+            }
+            Err(error) => errors.push(format!("{}: {error}", record.task_run_id)),
+        }
+    }
+
+    let after_count = read_task_run_records_with_limit(None)?.len();
+    let status = if errors.is_empty() {
+        "pruned".to_string()
+    } else if removed_task_run_ids.is_empty() {
+        "prune_failed".to_string()
+    } else {
+        "partially_pruned".to_string()
+    };
+
+    Ok(CliTaskRunPruneReport {
+        status,
+        keep_count,
+        before_count,
+        after_count,
+        removed_count: removed_task_run_ids.len(),
+        removed_task_run_ids,
+        errors,
+    })
 }
 
 fn task_run_record_report_from_value(root: &Path, record_path: &Path, value: &Value) -> CliTaskRunRecordReport {
@@ -1680,6 +1812,25 @@ fn task_run_dir(root: &Path, task_run_id: &str) -> PathBuf {
     task_runs_base_path(root).join(sanitize_file_name(task_run_id))
 }
 
+fn resolve_task_run_dir(root: &Path, task_run_id: &str) -> Result<PathBuf, String> {
+    let base = task_runs_base_path(root);
+    let run_dir = task_run_dir(root, task_run_id);
+    let canonical_base = base
+        .canonicalize()
+        .map_err(|error| format!("Failed to resolve task run base directory: {error}"))?;
+    let canonical_run_dir = run_dir
+        .canonicalize()
+        .map_err(|error| format!("Failed to resolve task run directory: {error}"))?;
+    ensure_workspace_path(root, &canonical_run_dir)?;
+    if !canonical_run_dir.starts_with(&canonical_base) {
+        return Err("Task run path is outside the task run store.".to_string());
+    }
+    if !canonical_run_dir.is_dir() {
+        return Err("Task run path is not a directory.".to_string());
+    }
+    Ok(canonical_run_dir)
+}
+
 fn platform_artifacts_base_path(root: &Path) -> PathBuf {
     if root.join("platform-desktop-app").exists() {
         root.join("platform-desktop-app").join("artifacts")
@@ -1702,6 +1853,28 @@ fn prompt_preview(prompt: &str) -> String {
         .collect::<String>()
         .trim()
         .to_string()
+}
+
+fn read_bounded_text_preview(path: &Path, max_bytes: usize) -> Result<(String, bool), String> {
+    if !path.exists() {
+        return Ok((String::new(), false));
+    }
+    if !path.is_file() {
+        return Err("Task run log path is not a file.".to_string());
+    }
+
+    let bytes = fs::read(path).map_err(|error| format!("Failed to read task run log: {error}"))?;
+    let truncated = bytes.len() > max_bytes;
+    let preview = if truncated {
+        let mut end = max_bytes;
+        while end > 0 && std::str::from_utf8(&bytes[..end]).is_err() {
+            end -= 1;
+        }
+        String::from_utf8_lossy(&bytes[..end]).to_string()
+    } else {
+        String::from_utf8_lossy(&bytes).to_string()
+    };
+    Ok((preview, truncated))
 }
 
 fn new_session_id(adapter_id: &str) -> String {

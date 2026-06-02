@@ -324,6 +324,26 @@ type CliTaskRunRecordReport = {
   stderrLogPath: string;
 };
 
+type CliTaskRunDetailReport = {
+  record: CliTaskRunRecordReport;
+  recordJson: string;
+  stdoutPreview: string;
+  stderrPreview: string;
+  stdoutTruncated: boolean;
+  stderrTruncated: boolean;
+  maxLogPreviewBytes: number;
+};
+
+type CliTaskRunPruneReport = {
+  status: string;
+  keepCount: number;
+  beforeCount: number;
+  afterCount: number;
+  removedCount: number;
+  removedTaskRunIds: string[];
+  errors: string[];
+};
+
 type WorkspaceTextFile = {
   relativePath: string;
   content: string;
@@ -1754,6 +1774,10 @@ function DesktopRuntimePanel({
   );
   const [pipelineReports, setPipelineReports] = useState<CliTaskPipelineInitReport[]>([]);
   const [taskRunRecords, setTaskRunRecords] = useState<CliTaskRunRecordReport[]>([]);
+  const [selectedTaskRunId, setSelectedTaskRunId] = useState("");
+  const [taskRunDetail, setTaskRunDetail] = useState<CliTaskRunDetailReport | null>(null);
+  const [taskRunBusy, setTaskRunBusy] = useState(false);
+  const [taskRunPruneNotice, setTaskRunPruneNotice] = useState("");
   const [inboxReport, setInboxReport] = useState<HumanDecisionInboxReport | null>(null);
   const [error, setError] = useState("");
   const [runningAdapterId, setRunningAdapterId] = useState("");
@@ -1855,6 +1879,8 @@ function DesktopRuntimePanel({
     const truncated = taskRunRecords.filter((record) => record.outputTruncated).length;
     return { active, outputBytes, decisions, truncated };
   }, [taskRunRecords]);
+  const selectedTaskRunRecord =
+    taskRunRecords.find((record) => record.taskRunId === selectedTaskRunId) || taskRunRecords[0] || null;
   const sessionStats = useMemo(() => {
     const active = sessions.filter((session) => isActiveSessionStatus(session.status)).length;
     const deferred = sessions.filter((session) => session.status === "defer_message_sent").length;
@@ -1967,6 +1993,19 @@ function DesktopRuntimePanel({
     return items.slice(0, 8);
   }, [dirtyDraftEntries.length, openDraftEntries.length, outputEvents, pipelineStats.latest, selectedDecision, sourceDiff, sourceFile?.relativePath, sourceSaveResults, taskRunRecords, writeReport]);
 
+  const replaceTaskRunRecords = (records: CliTaskRunRecordReport[]) => {
+    setTaskRunRecords(records);
+    setSelectedTaskRunId((current) => {
+      if (current && records.some((record) => record.taskRunId === current)) {
+        return current;
+      }
+      return records[0]?.taskRunId || "";
+    });
+    if (records.length === 0) {
+      setTaskRunDetail(null);
+    }
+  };
+
   const refreshAdapters = async () => {
     setError("");
     const tauriInvoke = getTauriInvoke();
@@ -1992,7 +2031,7 @@ function DesktopRuntimePanel({
       setSessions((current) => mergeSessionReports(current, nextSessions, { replaceAll: true }));
       setInboxReport(nextInbox);
       setTaskPipePresets(nextTaskPipePresets.length ? nextTaskPipePresets : fallbackTaskPipePresets);
-      setTaskRunRecords(nextTaskRunRecords);
+      replaceTaskRunRecords(nextTaskRunRecords);
       setDecisionResumeNotice("");
       if (!selectedDecisionId && nextInbox.decisions[0]) {
         setSelectedDecisionId(nextInbox.decisions[0].id);
@@ -2009,7 +2048,7 @@ function DesktopRuntimePanel({
       setAdapters(fallbackDesktopAdapters);
       setSessions((current) => (current.length ? [] : current));
       setTaskPipePresets(fallbackTaskPipePresets);
-      setTaskRunRecords([]);
+      replaceTaskRunRecords([]);
       setInboxReport(null);
       setDecisionResumeNotice("");
       setError(errorMessage(caught));
@@ -2038,7 +2077,7 @@ function DesktopRuntimePanel({
       setAdapters(nextAdapters);
       setSessions((current) => mergeSessionReports(current, nextSessions, { replaceAll: true }));
       setInboxReport(nextInbox);
-      setTaskRunRecords(nextTaskRunRecords);
+      replaceTaskRunRecords(nextTaskRunRecords);
       setDecisionResumeNotice("");
     } catch (caught) {
       setError(errorMessage(caught));
@@ -2102,15 +2141,68 @@ function DesktopRuntimePanel({
   const refreshTaskRunRecords = async () => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
-      setTaskRunRecords([]);
+      replaceTaskRunRecords([]);
       return;
     }
 
     try {
       const records = await tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records");
-      setTaskRunRecords(records);
+      replaceTaskRunRecords(records);
     } catch (caught) {
       setError(errorMessage(caught));
+    }
+  };
+
+  const loadTaskRunDetail = async (taskRunId?: string) => {
+    const tauriInvoke = getTauriInvoke();
+    const targetTaskRunId = taskRunId || selectedTaskRunRecord?.taskRunId || "";
+    if (!tauriInvoke || !targetTaskRunId) {
+      return;
+    }
+
+    setTaskRunBusy(true);
+    setError("");
+    try {
+      const detail = await tauriInvoke<CliTaskRunDetailReport>("read_cli_task_run_record", {
+        taskRunId: targetTaskRunId
+      });
+      setSelectedTaskRunId(detail.record.taskRunId);
+      setTaskRunDetail(detail);
+      setTaskRunPruneNotice("");
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setTaskRunBusy(false);
+    }
+  };
+
+  const pruneTaskRunRecords = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      return;
+    }
+
+    setTaskRunBusy(true);
+    setError("");
+    try {
+      const report = await tauriInvoke<CliTaskRunPruneReport>("prune_cli_task_run_records", {
+        keepCount: 30
+      });
+      setTaskRunPruneNotice(
+        `${report.status}: removed ${report.removedCount}, kept ${report.afterCount}/${report.beforeCount}`
+      );
+      const records = await tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records");
+      replaceTaskRunRecords(records);
+      if (taskRunDetail && !records.some((record) => record.taskRunId === taskRunDetail.record.taskRunId)) {
+        setTaskRunDetail(null);
+      }
+      if (report.errors.length) {
+        setError(report.errors.join("\n"));
+      }
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setTaskRunBusy(false);
     }
   };
 
@@ -2614,7 +2706,7 @@ function DesktopRuntimePanel({
           if (disposed) {
             return;
           }
-          setTaskRunRecords(records);
+          replaceTaskRunRecords(records);
         }
       } catch (caught) {
         if (!disposed) {
@@ -2831,8 +2923,13 @@ function DesktopRuntimePanel({
               <FileSearch size={15} aria-hidden="true" />
               <span>Refresh Records</span>
             </button>
+            <button type="button" onClick={pruneTaskRunRecords} disabled={!invoke || taskRunBusy || taskRunRecords.length <= 30}>
+              <ShieldCheck size={15} aria-hidden="true" />
+              <span>Prune Old</span>
+            </button>
           </div>
         </div>
+        {taskRunPruneNotice && <p className="decision-resume-notice">{taskRunPruneNotice}</p>}
         <div className="task-run-summary-strip">
           <article>
             <span>records</span>
@@ -2858,34 +2955,81 @@ function DesktopRuntimePanel({
         {taskRunRecords.length === 0 ? (
           <p className="empty-state">아직 저장된 task-run record가 없습니다. 세션이나 task pipe를 실행하면 record.json과 stdout/stderr 로그가 생성됩니다.</p>
         ) : (
-          <div className="task-run-grid">
-            {taskRunRecords.slice(0, 8).map((record) => (
-              <article key={record.recordId} className={`task-run-card status-${record.status}`}>
-                <header>
-                  <div>
-                    <span>{record.taskKind}</span>
-                    <h3>{record.label}</h3>
+          <div className="task-run-store-layout">
+            <div className="task-run-grid">
+              {taskRunRecords.slice(0, 8).map((record) => (
+                <article
+                  key={record.recordId}
+                  className={`task-run-card status-${record.status} ${selectedTaskRunRecord?.taskRunId === record.taskRunId ? "active" : ""}`}
+                >
+                  <header>
+                    <div>
+                      <span>{record.taskKind}</span>
+                      <h3>{record.label}</h3>
+                    </div>
+                    <strong>{record.status}</strong>
+                  </header>
+                  <div className="task-run-meta">
+                    <span>{record.adapterId}</span>
+                    <span>{record.laneId || record.pipelineId || "single lane"}</span>
+                    <span>{formatDuration(record.elapsedMs)}</span>
+                    <span>{record.exitCode ?? "no code"}</span>
                   </div>
-                  <strong>{record.status}</strong>
-                </header>
-                <div className="task-run-meta">
-                  <span>{record.adapterId}</span>
-                  <span>{record.laneId || record.pipelineId || "single lane"}</span>
-                  <span>{formatDuration(record.elapsedMs)}</span>
-                  <span>{record.exitCode ?? "no code"}</span>
+                  <p>{record.recordPath}</p>
+                  <div className="task-run-log-paths">
+                    <code>{record.stdoutLogPath}</code>
+                    <code>{record.stderrLogPath}</code>
+                  </div>
+                  <div className="adapter-report">
+                    <span>{formatBytes(record.stdoutBytes + record.stderrBytes)}</span>
+                    <span>{record.pendingDecisionPrompts} pending</span>
+                    <span>{record.autoDeferTriggered ? "auto-deferred" : "captured"}</span>
+                  </div>
+                  <div className="desktop-actions">
+                    <button type="button" onClick={() => loadTaskRunDetail(record.taskRunId)} disabled={!invoke || taskRunBusy}>
+                      <FileSearch size={15} aria-hidden="true" />
+                      <span>{taskRunBusy && selectedTaskRunRecord?.taskRunId === record.taskRunId ? "Opening" : "Open Logs"}</span>
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <article className="task-run-detail">
+              <header>
+                <div>
+                  <span>{taskRunDetail?.record.taskRunId || selectedTaskRunRecord?.taskRunId || "no-task-run"}</span>
+                  <h3>{taskRunDetail?.record.taskKind || selectedTaskRunRecord?.taskKind || "Task run detail"}</h3>
                 </div>
-                <p>{record.recordPath}</p>
-                <div className="task-run-log-paths">
-                  <code>{record.stdoutLogPath}</code>
-                  <code>{record.stderrLogPath}</code>
-                </div>
-                <div className="adapter-report">
-                  <span>{formatBytes(record.stdoutBytes + record.stderrBytes)}</span>
-                  <span>{record.pendingDecisionPrompts} pending</span>
-                  <span>{record.autoDeferTriggered ? "auto-deferred" : "captured"}</span>
-                </div>
-              </article>
-            ))}
+                <strong>{taskRunDetail?.record.status || selectedTaskRunRecord?.status || "idle"}</strong>
+              </header>
+              {!taskRunDetail ? (
+                <p className="empty-state">기록을 선택하고 Open Logs를 누르면 bounded stdout/stderr preview와 record JSON이 표시됩니다.</p>
+              ) : (
+                <>
+                  <div className="task-run-detail-meta">
+                    <span>{taskRunDetail.record.adapterId}</span>
+                    <span>{taskRunDetail.record.laneId || taskRunDetail.record.pipelineId || "single lane"}</span>
+                    <span>{formatBytes(taskRunDetail.record.stdoutBytes + taskRunDetail.record.stderrBytes)}</span>
+                    <span>{taskRunDetail.maxLogPreviewBytes.toLocaleString("ko-KR")} byte preview</span>
+                  </div>
+                  <div className="task-run-preview-tabs">
+                    <article>
+                      <span>stdout{taskRunDetail.stdoutTruncated ? " / truncated" : ""}</span>
+                      <pre><code>{taskRunDetail.stdoutPreview || "No stdout log"}</code></pre>
+                    </article>
+                    <article>
+                      <span>stderr{taskRunDetail.stderrTruncated ? " / truncated" : ""}</span>
+                      <pre><code>{taskRunDetail.stderrPreview || "No stderr log"}</code></pre>
+                    </article>
+                    <article>
+                      <span>record JSON</span>
+                      <pre><code>{taskRunDetail.recordJson}</code></pre>
+                    </article>
+                  </div>
+                </>
+              )}
+            </article>
           </div>
         )}
       </section>
