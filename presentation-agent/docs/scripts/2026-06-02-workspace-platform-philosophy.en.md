@@ -7,7 +7,7 @@
 
 ## Core Message
 
-This presentation explains the workspace as a personal AI work operating system: a structure that turns user intent into evidence-backed plans, verified outputs, evaluations, history, commits, and reusable capabilities.
+This presentation explains the workspace as a personal AI work operating system: a structure that turns user intent into high-quality data, evidence-backed plans, verified outputs, evaluations, history, commits, and reusable capabilities.
 
 ## Slide Flow
 
@@ -20,7 +20,7 @@ This presentation explains the workspace as a personal AI work operating system:
 7. Search is raw material for insight, not the answer.
 8. Stored knowledge is useful but fallible.
 9. Planning is an artifact.
-10. Unstructured input becomes structured, verifiable assets.
+10. Unstructured input becomes high-quality structured data.
 11. Records are interfaces for future agents.
 12. The operating loop runs from intent to commit.
 13. Work modes balance speed and rigor.
@@ -30,7 +30,7 @@ This presentation explains the workspace as a personal AI work operating system:
 17. Human work processes are modeled before automation.
 18. Guardrails are execution boundaries, not reminder text.
 19. Evaluation and rework compare outputs against initial intent.
-20. History and monitoring make the workspace improve over time.
+20. History and monitoring turn work into better operating data over time.
 21. The presentation agent itself is an example of the philosophy.
 22. The design aesthetic is clarity, not ornament.
 23. The future direction is installable, multi-agent, observable work infrastructure.

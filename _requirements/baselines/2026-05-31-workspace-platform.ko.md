@@ -165,6 +165,7 @@
 - 2026-06-02에 REQ-WS-081을 추가해 합법적으로 사용할 수 있는 다수의 SVG 디자인 에셋을 내부 생성 asset library, 출처 registry, license review 규칙으로 관리하도록 했다.
 - 2026-06-02에 REQ-WS-082를 추가해 디자인 에셋 라이브러리가 대량 생성 자산뿐 아니라 가족별 집계, 검색, snippet, 정적 HTML gallery를 제공해 사용자가 쉽게 찾고 바로 쓸 수 있도록 했다.
 - 2026-06-02에 REQ-WS-083을 추가해 실제 외부 SVG 수집은 공식 오픈소스 repository, pinned commit, path allowlist, local LICENSE/SOURCE 기록, 별도 external registry, 검증 가능한 수집 스크립트로 관리하도록 했다.
+- 2026-06-02에 REQ-WS-084를 추가해 플랫폼이 단순 문서 저장소가 아니라 provenance, 정확성, 완전성, 일관성, 적시성, 관련성, 재검증 가능성을 갖춘 고품질 데이터 자산을 축적하는 구조여야 한다는 원칙을 공통 철학과 운영 모델로 승격했다.
 - 구현 전에는 관련 스펙 산출물을 `_specs/` 또는 프로젝트 `specs/`에 연결한다.
 - 소스 코드 구현 전에는 관련 아키텍처 reference, architecture options, decision notes를 코딩 조사 기록에 연결한다.
 - 대기업/고신뢰 출처를 조사 시작점으로 쓰면 `enterprise-source-registry.json`과 `_research/source-lists/`를 갱신하거나 참조한다.

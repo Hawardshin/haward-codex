@@ -165,6 +165,7 @@ This baseline defines shared workspace/platform requirements derived from the us
 - On 2026-06-02, REQ-WS-081 added a legal SVG design asset library with internally generated assets, source registry, and license-review rules.
 - On 2026-06-02, REQ-WS-082 added easy discovery and use for the design asset library through generated inventory scale, family counts, search, snippets, and a static HTML gallery.
 - On 2026-06-02, REQ-WS-083 added actual external SVG collection through official open-source repositories, pinned commits, path allowlists, local LICENSE/SOURCE records, a separate external registry, and a verifiable collection script.
+- On 2026-06-02, REQ-WS-084 promoted the principle that the platform is not merely document storage; it must accumulate high-quality data assets with provenance, accuracy, completeness, consistency, timeliness, relevance, and revalidation paths.
 - Before implementation, link relevant spec artifacts under `_specs/` or project `specs/`.
 - Before source-code implementation, link architecture references, architecture options, and decision notes in the coding research record.
 - When enterprise/high-quality sources seed research, update or reference `enterprise-source-registry.json` and `_research/source-lists/`.

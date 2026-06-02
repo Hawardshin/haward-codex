@@ -1,0 +1,87 @@
+{
+  "task": "Reflect high-quality data accumulation as a platform philosophy principle.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web_first",
+      "description": "Run web-first search before local planning and edits.",
+      "source": "AGENTS.md and durable user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": ["_history/web-searches/2026/2026-06-02-high-quality-data-accumulation.ko.md"],
+      "rationale": ""
+    },
+    {
+      "item_id": "philosophy_principle",
+      "description": "Add high-quality data accumulation to operating philosophy.",
+      "source": "Latest user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": ["_philosophy/agent-operating-philosophy.ko.md"],
+      "rationale": ""
+    },
+    {
+      "item_id": "platform_identity",
+      "description": "Reflect the idea in platform identity and good-output criteria.",
+      "source": "Platform identity requirement",
+      "required": true,
+      "status": "covered",
+      "evidence": ["_docs/operating-models/platform-identity-operating-model.ko.md"],
+      "rationale": ""
+    },
+    {
+      "item_id": "traceability",
+      "description": "Map the new principle to execution and validation targets.",
+      "source": "philosophy-governance",
+      "required": true,
+      "status": "covered",
+      "evidence": ["agent-platform/configs/governance/philosophy-traceability.json"],
+      "rationale": ""
+    },
+    {
+      "item_id": "presentation_reflection",
+      "description": "Reflect the new idea in the platform philosophy presentation.",
+      "source": "Recent presentation artifact",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "presentation-agent/docs/scripts/2026-06-02-workspace-platform-philosophy.ko.md",
+        "presentation-agent/data/deck-specs/workspace-platform-philosophy.ko.json",
+        "presentation-agent/artifacts/html/workspace-platform-philosophy.html"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {"path": "_philosophy/agent-operating-philosophy.ko.md", "purpose": "Korean philosophy source.", "required": true},
+    {"path": "_philosophy/agent-operating-philosophy.en.md", "purpose": "English philosophy companion.", "required": true},
+    {"path": "_docs/operating-models/platform-identity-operating-model.ko.md", "purpose": "Korean identity model.", "required": true},
+    {"path": "_docs/operating-models/platform-identity-operating-model.en.md", "purpose": "English identity model.", "required": true},
+    {"path": "agent-platform/configs/governance/philosophy-traceability.json", "purpose": "Philosophy mapping registry.", "required": true},
+    {"path": "presentation-agent/artifacts/html/workspace-platform-philosophy.html", "purpose": "Regenerated HTML deck.", "required": true}
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "philosophy_trace",
+      "description": "Philosophy traceability accepts the new principle.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["check-philosophy-trace returned ready with 18 mapped principles."],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser_tests",
+      "description": "Updated HTML presentation still passes browser validation.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["npm run test:browser: 26 passed."],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "This task defined the philosophy and operating model but did not implement a data-quality scoring subsystem."
+  ],
+  "notes": [
+    "The principle is mapped to existing structuring, research, and grounding mechanisms."
+  ]
+}

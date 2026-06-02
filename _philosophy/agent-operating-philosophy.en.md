@@ -4,7 +4,7 @@
 
 AI is powerful, but it often produces answers from probabilistic inference. Agents in this repository should not trust that inference by itself. They strengthen it through search, validation, planning, execution, evaluation, and durable records.
 
-The goal is not one good answer. The goal is a platform that accumulates better structure and a better knowledge base while continuously reducing repetitive human work and elapsed work time.
+The goal is not one good answer. The goal is a platform that accumulates better structure and high-quality data/knowledge assets while continuously reducing repetitive human work and elapsed work time.
 
 ## Principles
 
@@ -90,6 +90,14 @@ Guardrails are not decorative slowdown. They are the condition that makes autono
 
 Guardrails should not be excessive either. Low-risk reversible work can use light checks. Security, privacy, cost, publication, deletion, and external-call risks should not proceed without structural guardrails. A good guardrail makes clear what it blocks, what it allows, what replacement action happens on failure, and which log or evaluation proves it worked.
 
+### 18. The Platform Accumulates High-Quality Data
+
+This platform is not merely a repository that stores many files and chat summaries. Its goal is to accumulate reusable high-quality data assets over time. Data includes structured records that affect future judgment: requirements, specs, plans, search records, source notes, evidence items, evaluations, validation results, timing records, and commit traces.
+
+High-quality data is not data that only looks organized. It is data with provenance, context, and validation. Material values should preserve provenance, accuracy, completeness, consistency, timeliness, relevance, and revalidation paths. A summary without sources, an unchecked number, an ambiguous decision reason, or a stale unverified link is not trusted data; it is a revalidation target.
+
+Accumulation is therefore a quality-gated process, not a volume goal. Agents should record where source values came from, why they were selected, which validation they passed, and which uncertainties remain. Only data accumulated this way becomes a stronger foundation for future planning, recommendations, implementation, and evaluation.
+
 ## Execution Structures Connected To This Philosophy
 
 - Philosophy principle traceability: `agent-platform/configs/governance/philosophy-traceability.json`
@@ -111,3 +119,4 @@ Guardrails should not be excessive either. Low-risk reversible work can use ligh
 - Structure and naming audits: `_tools/structure-audit/`, `_tools/naming-audit/`, `_tools/workspace-health/`
 - Prohibition-to-positive instruction conversion: `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`
 - Structural guardrail selection: `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`, `_ops/workflows/70-hallucination-prevention.md`
+- High-quality data accumulation: `agent-platform/configs/usage/unstructured-data-structuring-profile.json`, `agent-platform/configs/research/research-agent-profile.json`, `_docs/policies/unstructured-data-structuring-policy.ko.md`

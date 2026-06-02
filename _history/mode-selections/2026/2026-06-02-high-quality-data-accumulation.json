@@ -1,0 +1,22 @@
+{
+  "task_id": "2026-06-02-high-quality-data-accumulation",
+  "selected_mode": "governance",
+  "selected_on": "2026-06-02",
+  "owner_project": "workspace-platform",
+  "reason": "The user instruction changes durable platform philosophy and identity, plus philosophy traceability and a platform presentation artifact.",
+  "web_first_completed": true,
+  "memory_bootstrap_completed": true,
+  "expected_closeout_targets": [
+    "web_search_record",
+    "mode_selection",
+    "requirements_or_spec",
+    "source_provenance",
+    "plan_evidence",
+    "omission_check",
+    "grounding_check",
+    "work_evaluation",
+    "timing_record",
+    "commit",
+    "push"
+  ]
+}

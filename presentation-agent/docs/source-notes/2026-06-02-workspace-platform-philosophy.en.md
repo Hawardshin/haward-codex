@@ -20,5 +20,6 @@
 - OpenAI Agents SDK tracing and guardrails documentation: observability and workflow boundary examples.
 - NIST AI Risk Management Framework: trustworthiness and risk-management framing.
 - Google People + AI Research: human-centered AI framing.
+- NIST AI RMF AIRC and Canada.ca data quality guidance: provenance, documentation, accuracy, completeness, consistency, relevance, reliability, and timeliness as high-quality data criteria.
 
 External sources are used as design support, not as proof of the repository's internal state.

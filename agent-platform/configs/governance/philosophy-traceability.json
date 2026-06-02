@@ -165,7 +165,8 @@
     "P14-security-privacy-first",
     "P15-operating-cost-and-debt",
     "P16-prohibition-is-not-goal",
-    "P17-guardrails-are-execution-boundaries"
+    "P17-guardrails-are-execution-boundaries",
+    "P18-high-quality-data-accumulation"
   ],
   "principles": [
     {
@@ -805,6 +806,67 @@
         {
           "command": "PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-trace configs/governance/philosophy-traceability.json",
           "validates": "The guardrail principle remains mapped from philosophy to executable structure."
+        }
+      ]
+    },
+    {
+      "id": "P18-high-quality-data-accumulation",
+      "title": "The platform accumulates high-quality data",
+      "philosophy_sources": [
+        {
+          "path": "_philosophy/agent-operating-philosophy.ko.md",
+          "section": "18. 플랫폼은 고품질 데이터를 축적한다"
+        }
+      ],
+      "execution_targets": [
+        {
+          "path": "_docs/operating-models/platform-identity-operating-model.ko.md",
+          "target_type": "docs",
+          "role": "Defines high-quality data accumulation as part of the platform identity and good-output criteria."
+        },
+        {
+          "path": "agent-platform/configs/usage/unstructured-data-structuring-profile.json",
+          "target_type": "config",
+          "role": "Defines schema, provenance, null handling, and validation rules for turning messy inputs into durable structured records."
+        },
+        {
+          "path": "_docs/policies/unstructured-data-structuring-policy.ko.md",
+          "target_type": "policy",
+          "role": "Explains how structured data must keep source, ambiguity, and validation evidence."
+        },
+        {
+          "path": "agent-platform/configs/research/research-agent-profile.json",
+          "target_type": "config",
+          "role": "Requires source ranking, evidence extraction, citation grounding, and skeptic review before research becomes reusable evidence."
+        },
+        {
+          "path": "agent-platform/configs/research/source-registry.json",
+          "target_type": "config",
+          "role": "Maintains source types and provenance-oriented source records for reusable research data."
+        },
+        {
+          "path": "_ops/workflows/67-structure-unstructured-data.md",
+          "target_type": "workflow",
+          "role": "Operational workflow for converting unstructured inputs into structured records with provenance and validation."
+        },
+        {
+          "path": "_ops/workflows/70-hallucination-prevention.md",
+          "target_type": "workflow",
+          "role": "Ensures factual claims are grounded before being treated as reusable high-quality data."
+        }
+      ],
+      "validation_targets": [
+        {
+          "command": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/usage/unstructured-data-structuring-profile.json configs/research/research-agent-profile.json configs/research/source-registry.json",
+          "validates": "Data accumulation source, structuring, and research configs remain self-documenting."
+        },
+        {
+          "command": "PYTHONPATH=src python3 -m agent_platform.cli check-grounding <grounding-input.json>",
+          "validates": "Material factual claims are converted into grounded, publishable records before reuse."
+        },
+        {
+          "command": "PYTHONPATH=src python3 -m agent_platform.cli check-philosophy-trace configs/governance/philosophy-traceability.json",
+          "validates": "The high-quality data accumulation principle remains mapped from philosophy to executable structure."
         }
       ]
     }

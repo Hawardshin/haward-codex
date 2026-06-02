@@ -26,6 +26,8 @@
 | OpenAI Agents SDK Guardrails, `https://openai.github.io/openai-agents-python/guardrails/` | input/output/tool guardrail과 workflow boundary | prompt-only warning 대신 구조적 guardrail이 필요한 이유를 보강 |
 | NIST AI Risk Management Framework, `https://www.nist.gov/itl/ai-risk-management-framework` | AI 제품/서비스/시스템의 설계, 개발, 사용, 평가에서 trustworthiness 고려 | 위험관리와 평가 루프의 외부 기준 |
 | Google People + AI Research, `https://pair.withgoogle.com/` | 인간중심 AI, useful and responsible AI applications, participatory framing | 인간 프로세스와 사용자를 중심에 둔 설계 관점 보강 |
+| NIST AI RMF AIRC, `https://airc.nist.gov/airmf-resources/airmf/3-sec-characteristics/` | AI 신뢰성, 정확성 측정 문서화, training data provenance와 transparency/accountability 연결 | 고품질 데이터 축적에서 provenance와 검증 방법이 필요한 이유 보강 |
+| Canada.ca Guidance on Data Quality, `https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/information-management/guidance-data-quality.html` | 데이터 품질 차원으로 accuracy, completeness, consistency, relevance, reliability, timeliness 등을 설명 | 플랫폼의 고품질 데이터 기준을 설명하는 보조 근거 |
 
 ## 약한 근거로 사용하지 않은 것
 
@@ -39,6 +41,7 @@
 - “추정은 출발점이지 결론이 아니다”: `_philosophy/agent-operating-philosophy.ko.md`, 웹 우선 접수 규칙.
 - “검색은 답이 아니라 인사이트의 원료다”: 내부 철학과 source provenance/work search 기록 정책.
 - “기록은 다음 에이전트를 위한 인터페이스다”: 플랫폼 정체성 운영 모델, 히스토리/trace/work-summary 규칙.
+- “고품질 데이터 축적”: 내부 철학 원칙 18, 플랫폼 아이덴티티 운영 모델, NIST/Canada.ca 데이터 품질 보조 출처.
 - “가드레일은 실행 경계다”: 내부 철학의 structural guardrail 원칙과 OpenAI/NIST 보조 출처.
 - “도구 독립형 운영 모델”: `_docs/operating-models/tool-agnostic-agent-operating-model.ko.md`.
 - “발표 에이전트도 사례다”: `presentation-agent/README.md`, 기존 deck spec/HTML/browser test 구조.

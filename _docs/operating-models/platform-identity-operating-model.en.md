@@ -2,7 +2,7 @@
 
 ## One Sentence
 
-This platform turns the user's intent into evidence-backed plans and verifiable outcomes, then models repeated human work processes into more efficient methods and durable automation assets.
+This platform turns the user's intent into evidence-backed plans and verifiable outcomes, then models repeated human work processes into high-quality data, more efficient methods, and durable automation assets.
 
 ## Why It Exists
 
@@ -25,6 +25,8 @@ Separate interests such as presentation agents, monitoring UI, research tools, a
 ### 3. Long-Term Memory And Evidence System
 
 Web search records, source lists, requirements, specs, plans, summaries, evaluations, installation audits, and commit hashes are memory for future work. They are not unquestioned truth; they are evidence handles that future agents can inspect and revalidate.
+
+The platform accumulates this memory as high-quality data. High-quality data is not merely a large amount of stored material; it carries provenance, context, accuracy, completeness, consistency, timeliness, relevance, and a revalidation path. A summary without sources, an unchecked number, or a stale unverified link is a revalidation target, not a trusted asset.
 
 ### 4. Repetitive-Work Reduction Engine
 
@@ -63,6 +65,7 @@ Good output is not only something that works or looks polished. In this platform
 
 - It connects back to the requirement or request that motivated it.
 - It records which sources or prior artifacts shaped the decision.
+- Source values and decisions carry provenance plus checks for accuracy, completeness, consistency, timeliness, and relevance.
 - It shows the plan or trade-offs behind important choices.
 - It includes validation steps and results.
 - It is evaluated against the initial instruction.
@@ -76,6 +79,7 @@ Over time, it should move toward this shape:
 
 - When the user states a goal, the agent asks better questions and builds a research plan first.
 - Agents turn unstructured instructions and source material into structured records with schema, provenance, and validation.
+- Accumulated documents and history should distinguish reusable high-quality data assets from items that need revalidation.
 - Research agents collect evidence from official docs, papers, engineering blogs, community signals, and Korean local sources when relevant.
 - Implementation agents compare language, architecture, folder structure, and open-source options before choosing a maintainable path.
 - The execution layer can use many CLIs while staying independent through adapter contracts and permission boundaries.

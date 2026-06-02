@@ -4,7 +4,7 @@
 
 AI는 강력하지만, 기본적으로 확률적 추정에 기대어 답을 만든다. 이 저장소의 에이전트는 그 추정을 그대로 신뢰하지 않고, 검색, 검증, 계획, 실행, 평가, 기록의 루프로 보강한다.
 
-목표는 한 번의 좋은 답변이 아니라, 시간이 지날수록 더 나은 구조와 지식 베이스를 축적해 사람의 반복 작업과 소요 시간을 계속 줄이는 플랫폼이다.
+목표는 한 번의 좋은 답변이 아니라, 시간이 지날수록 더 나은 구조와 고품질 데이터/지식 베이스를 축적해 사람의 반복 작업과 소요 시간을 계속 줄이는 플랫폼이다.
 
 ## 원칙
 
@@ -90,6 +90,14 @@ AI는 금지 문장을 사람처럼 안정적인 규범으로 이해한다고 �
 
 가드레일은 과도하게 많아도 안 된다. 낮은 위험의 되돌릴 수 있는 작업은 가벼운 체크로 충분하고, 보안/개인정보/비용/배포/삭제/외부 호출처럼 피해가 커질 수 있는 작업은 구조적 가드레일 없이는 진행하지 않는다. 좋은 가드레일은 무엇을 막는지, 무엇을 허용하는지, 실패하면 어떤 대체 행동을 하는지, 어떤 로그나 평가로 확인하는지가 분명하다.
 
+### 18. 플랫폼은 고품질 데이터를 축적한다
+
+이 플랫폼은 단순히 파일과 대화 요약을 많이 쌓는 저장소가 아니다. 목표는 시간이 지날수록 재사용 가능한 고품질 데이터 자산을 축적하는 것이다. 여기서 데이터는 요구사항, 스펙, 계획, 검색 기록, 출처 노트, evidence item, 평가 결과, 검증 결과, 타이밍 기록, 커밋 trace처럼 다음 판단에 영향을 주는 모든 구조화된 기록을 포함한다.
+
+고품질 데이터는 보기 좋게 정리된 데이터가 아니라, 출처와 맥락과 검증이 붙은 데이터다. 중요한 값은 provenance, 정확성, 완전성, 일관성, 적시성, 관련성, 재검증 가능성을 가져야 한다. 출처가 없는 요약, 검증되지 않은 수치, 모호한 결정 이유, 오래되어 확인되지 않은 링크는 데이터가 아니라 재검토 대상이다.
+
+따라서 축적은 양의 문제가 아니라 품질 게이트의 문제다. 에이전트는 작업을 하면서 원천값이 어디서 왔는지, 어떤 기준으로 선택됐는지, 어떤 검증을 통과했는지, 어떤 불확실성이 남았는지 함께 남겨야 한다. 이렇게 축적된 데이터만 다음 에이전트의 계획, 추천, 구현, 평가를 더 좋게 만드는 기반이 된다.
+
 ## 이 철학이 연결되는 실행 구조
 
 - 철학 원칙 추적: `agent-platform/configs/governance/philosophy-traceability.json`
@@ -111,3 +119,4 @@ AI는 금지 문장을 사람처럼 안정적인 규범으로 이해한다고 �
 - 구조와 이름 감사: `_tools/structure-audit/`, `_tools/naming-audit/`, `_tools/workspace-health/`
 - 금지형 지시 변환: `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`
 - 구조적 가드레일 선택: `agent-platform/configs/usage/ai-usage-gap-profile.json`, `_ops/workflows/59-bridge-ai-usage-gap.md`, `_ops/workflows/70-hallucination-prevention.md`
+- 고품질 데이터 축적: `agent-platform/configs/usage/unstructured-data-structuring-profile.json`, `agent-platform/configs/research/research-agent-profile.json`, `_docs/policies/unstructured-data-structuring-policy.ko.md`
