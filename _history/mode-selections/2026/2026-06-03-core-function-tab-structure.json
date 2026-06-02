@@ -1,0 +1,13 @@
+{
+  "task": "Workspace Monitor core function tab structure",
+  "selected_mode": "standard",
+  "reason": "The request changes meaningful Workspace Monitor UI information architecture and requirements, but does not introduce a new governance policy or cross-workspace runtime contract.",
+  "web_first_completed": true,
+  "memory_bootstrap_completed": true,
+  "large_scope_decomposition_required": false,
+  "view_mode": "superadmin_developer",
+  "install_mode": "not_applicable",
+  "resource_risk_occurred": false,
+  "resource_risk_reason": "The slice changes static React UI structure and CSS only, without new subprocesses, timers, streams, caches, file scans, or runtime stores.",
+  "selected_at": "2026-06-03"
+}

@@ -1,0 +1,127 @@
+{
+  "task": "Workspace Monitor core function tab structure",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and implementation.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-core-function-tab-structure.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "core-functions-visible",
+      "description": "Make core function locations visible at a glance.",
+      "source": "UR-2026-06-03-021",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "grouped-tabs",
+      "description": "Separate monitor tabs by functional group instead of one flat list.",
+      "source": "UR-2026-06-03-021",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "view-mode-boundary",
+      "description": "Keep view mode visibility filtering for core rail and grouped tabs.",
+      "source": "REQ-WM-024",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "coreFunctionSections filters currentViewMode.allowedSections",
+        "groupedVisibleSections derives from visibleSections"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "customer-boundary",
+      "description": "Verify customer snapshot still redacts internal intent map data.",
+      "source": "Platformization Rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "npm --prefix platform-desktop-app run monitor:build",
+        "npm --prefix workspace-monitor run check:intent-map:customer"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "workspace-monitor/specs/2026-06-03-core-function-tab-structure/spec.ko.md",
+      "purpose": "Spec for core function tab structure.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+      "purpose": "Requirement REQ-WM-024.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-03-core-function-tab-structure.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-tests",
+      "description": "Workspace Monitor tests, typecheck, build, and performance budget pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor test",
+        "npm --prefix workspace-monitor run check",
+        "npm --prefix workspace-monitor run build",
+        "npm --prefix workspace-monitor run perf:budget"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "desktop-customer-bundle",
+      "description": "Desktop customer bundle and app checks pass after UI navigation changes.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app run monitor:build",
+        "npm --prefix platform-desktop-app run check",
+        "npm --prefix platform-desktop-app test"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "snapshot-restored",
+      "description": "Tracked Workspace Monitor snapshot is restored to developer public snapshot after customer build validation.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run collect",
+        "npm --prefix workspace-monitor run check:intent-map"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Browser plugin tools were not exposed and Playwright is not installed; static export DOM/CSS smoke confirmed the new navigation classes and responsive rules are present in the built bundle.",
+    "Large MonitorShell component split remains deferred; this slice only clarifies navigation information architecture."
+  ],
+  "notes": [
+    "No resource guard record is required because the change adds no subprocesses, streams, timers, caches, or new scans."
+  ]
+}

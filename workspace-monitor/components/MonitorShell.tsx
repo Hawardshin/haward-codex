@@ -41,23 +41,125 @@ type SectionId =
   | "requirements"
   | "agents";
 
+type FeatureGroupId = "core" | "workspace" | "knowledge" | "governance";
+
 type Section = {
   id: SectionId;
   label: string;
+  shortLabel: string;
   icon: LucideIcon;
+  group: FeatureGroupId;
+  purpose: string;
 };
 
+const featureGroups: Array<{
+  id: FeatureGroupId;
+  label: string;
+  purpose: string;
+}> = [
+  {
+    id: "core",
+    label: "핵심 실행",
+    purpose: "상태, 런타임, 의도, 에이전트"
+  },
+  {
+    id: "workspace",
+    label: "작업공간",
+    purpose: "프로젝트, 구조, 소스"
+  },
+  {
+    id: "knowledge",
+    label: "근거와 지식",
+    purpose: "히스토리, 문서, 요구사항"
+  },
+  {
+    id: "governance",
+    label: "운영 관리",
+    purpose: "정책과 실행 상태"
+  }
+];
+
 const sections: Section[] = [
-  { id: "overview", label: "Overview", icon: Activity },
-  { id: "desktop", label: "Desktop", icon: Network },
-  { id: "projects", label: "Projects", icon: FolderKanban },
-  { id: "history", label: "History", icon: History },
-  { id: "intent", label: "Intent Map", icon: GitBranch },
-  { id: "structure", label: "Structure", icon: Layers },
-  { id: "documents", label: "Documents", icon: BookOpenText },
-  { id: "source", label: "Source", icon: Code2 },
-  { id: "requirements", label: "Requirements", icon: ClipboardCheck },
-  { id: "agents", label: "Agents", icon: Bot }
+  {
+    id: "overview",
+    label: "Overview",
+    shortLabel: "Overview",
+    icon: Activity,
+    group: "core",
+    purpose: "현재 상태, 다음 행동, 근거를 한 화면에서 확인합니다."
+  },
+  {
+    id: "desktop",
+    label: "Desktop",
+    shortLabel: "Runtime",
+    icon: Network,
+    group: "core",
+    purpose: "로컬 실행, 세션, 데스크톱 제품화 상태를 봅니다."
+  },
+  {
+    id: "intent",
+    label: "Intent Map",
+    shortLabel: "Intent",
+    icon: GitBranch,
+    group: "core",
+    purpose: "사용자 의도에서 기능 후보와 로드맵을 뽑습니다."
+  },
+  {
+    id: "agents",
+    label: "Agents",
+    shortLabel: "Agents",
+    icon: Bot,
+    group: "core",
+    purpose: "에이전트, 작업 lane, blocker, handoff를 관리합니다."
+  },
+  {
+    id: "projects",
+    label: "Projects",
+    shortLabel: "Projects",
+    icon: FolderKanban,
+    group: "workspace",
+    purpose: "등록된 root project와 소유 경계를 확인합니다."
+  },
+  {
+    id: "structure",
+    label: "Structure",
+    shortLabel: "Structure",
+    icon: Layers,
+    group: "workspace",
+    purpose: "플랫폼 계층, 경계 규칙, 복잡도 압력을 봅니다."
+  },
+  {
+    id: "source",
+    label: "Source",
+    shortLabel: "Source",
+    icon: Code2,
+    group: "workspace",
+    purpose: "개발자/슈퍼어드민용 읽기 전용 소스 탐색입니다."
+  },
+  {
+    id: "history",
+    label: "History",
+    shortLabel: "History",
+    icon: History,
+    group: "knowledge",
+    purpose: "날짜별 작업 기록과 운영 stream을 추적합니다."
+  },
+  {
+    id: "documents",
+    label: "Documents",
+    shortLabel: "Docs",
+    icon: BookOpenText,
+    group: "knowledge",
+    purpose: "문서, 검색 기록, 평가 근거를 탐색합니다."
+  },
+  {
+    id: "requirements",
+    label: "Requirements",
+    shortLabel: "Reqs",
+    icon: ClipboardCheck,
+    group: "knowledge",
+    purpose: "요구사항과 스펙 기준의 이행 상태를 봅니다."
+  }
 ];
 
 type MonitorViewMode = NonNullable<WorkspaceSnapshot["viewModeCatalog"]>["modes"][number];
@@ -1052,6 +1154,24 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     requirements: visibleRequirements.length.toLocaleString("ko-KR"),
     agents: agentCatalog.length.toLocaleString("ko-KR")
   };
+  const sectionById = useMemo(() => {
+    return new Map(sections.map((item) => [item.id, item]));
+  }, []);
+  const groupedVisibleSections = useMemo(() => {
+    return featureGroups
+      .map((group) => ({
+        ...group,
+        sections: visibleSections.filter((item) => item.group === group.id)
+      }))
+      .filter((group) => group.sections.length > 0);
+  }, [visibleSections]);
+  const coreFunctionSections = useMemo(() => {
+    return (["overview", "desktop", "intent", "agents", "structure"] as SectionId[])
+      .map((id) => sectionById.get(id))
+      .filter((item): item is Section => {
+        return item ? currentViewMode.allowedSections.includes(item.id) : false;
+      });
+  }, [currentViewMode.allowedSections, sectionById]);
   const nextActionLabel = collaborationBoard.nextActions[0]?.nextAction || "No pending handoff";
   const currentSectionLabel = sections.find((item) => item.id === section)?.label || "Overview";
 
@@ -1094,19 +1214,57 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         </div>
       </section>
 
-      <nav className="section-tabs" aria-label="Monitor sections">
-        {visibleSections.map((item) => (
+      <section className="core-feature-rail" aria-label="Core platform functions">
+        {coreFunctionSections.map((item) => (
           <button
             key={item.id}
             className={section === item.id ? "active" : ""}
             onClick={() => setSection(item.id)}
             type="button"
-            title={item.label}
+            title={item.purpose}
+            aria-current={section === item.id ? "page" : undefined}
           >
-            <item.icon size={16} aria-hidden="true" />
-            <span>{item.label}</span>
-            <small>{sectionNavMeta[item.id]}</small>
+            <span className="core-feature-icon">
+              <item.icon size={17} aria-hidden="true" />
+            </span>
+            <span className="core-feature-copy">
+              <small>{item.group === "core" ? "Core" : "Map"}</small>
+              <strong>{item.shortLabel}</strong>
+              <span>{truncateText(item.purpose, 42)}</span>
+            </span>
+            <span className="core-feature-metric">{sectionNavMeta[item.id]}</span>
           </button>
+        ))}
+      </section>
+
+      <nav className="section-tab-groups" aria-label="Monitor section groups">
+        {groupedVisibleSections.map((group) => (
+          <section
+            key={group.id}
+            className={`section-tab-group ${group.sections.some((item) => item.id === section) ? "active" : ""}`}
+            aria-label={group.label}
+          >
+            <div className="section-tab-group-heading">
+              <span>{group.label}</span>
+              <small>{group.purpose}</small>
+            </div>
+            <div className="section-tabs">
+              {group.sections.map((item) => (
+                <button
+                  key={item.id}
+                  className={section === item.id ? "active" : ""}
+                  onClick={() => setSection(item.id)}
+                  type="button"
+                  title={item.purpose}
+                  aria-current={section === item.id ? "page" : undefined}
+                >
+                  <item.icon size={16} aria-hidden="true" />
+                  <span>{item.shortLabel}</span>
+                  <small>{sectionNavMeta[item.id]}</small>
+                </button>
+              ))}
+            </div>
+          </section>
         ))}
       </nav>
 
@@ -1230,6 +1388,33 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <small>{step.detail}</small>
               </button>
             ))}
+          </section>
+
+          <section className="panel wide core-function-panel" aria-label="Core function map">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Core Functions</p>
+                <h2>핵심 기능 위치</h2>
+              </div>
+              <Activity size={18} aria-hidden="true" />
+            </div>
+            <div className="core-function-grid">
+              {coreFunctionSections.map((item) => (
+                <button
+                  key={item.id}
+                  className={section === item.id ? "active" : ""}
+                  onClick={() => setSection(item.id)}
+                  type="button"
+                  title={item.purpose}
+                >
+                  <item.icon size={18} aria-hidden="true" />
+                  <span>{item.shortLabel}</span>
+                  <strong>{item.label}</strong>
+                  <small>{item.purpose}</small>
+                  <em>{sectionNavMeta[item.id]}</em>
+                </button>
+              ))}
+            </div>
           </section>
 
           <UnifiedOpsPanel
