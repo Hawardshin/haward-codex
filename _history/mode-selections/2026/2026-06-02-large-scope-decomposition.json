@@ -1,0 +1,33 @@
+{
+  "task_id": "2026-06-02-large-scope-decomposition",
+  "selected_work_mode": "governance",
+  "selected_at": "2026-06-02",
+  "reason": "The request changes durable platform behavior, persistent instructions, requirements, specs, workflows, prompts, memory bootstrap, and agent configuration.",
+  "rejected_modes": [
+    {
+      "mode": "quick",
+      "reason": "Durable rules and memory anchors are changing."
+    },
+    {
+      "mode": "standard",
+      "reason": "The task changes governance-level operating contracts."
+    },
+    {
+      "mode": "ship_first",
+      "reason": "The change is itself an operating rule, so backfilling governance would be the main work."
+    },
+    {
+      "mode": "research",
+      "reason": "External references inform the plan, but the output is a durable governance change."
+    }
+  ],
+  "enforcement_checks": [
+    "web_search_record_targets required",
+    "requirements_targets required",
+    "spec_targets required",
+    "mode_selection_record_targets required",
+    "omission_check_targets required",
+    "timing_summary_targets required",
+    "evaluate-work required"
+  ]
+}

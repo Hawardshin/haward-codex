@@ -1,0 +1,150 @@
+{
+  "initial_instruction": "When the scope is too large, the source tree has too many files, or context pressure becomes a problem, make the platform handle the work wisely by splitting it into manageable pieces.",
+  "result_summary": "Added a durable large-scope decomposition gate that inventories sources, separates exclusions and representative samples, defines task slices, sets merge gates, constrains context budgets, and routes broad/file-heavy work before implementation or parallel execution.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "_docs/policies/README.ko.md",
+    "_docs/policies/README.en.md",
+    "_docs/policies/large-scope-decomposition-policy.ko.md",
+    "_docs/policies/large-scope-decomposition-policy.en.md",
+    "_history/evaluations/2026/2026-06-02-large-scope-decomposition-grounding.json",
+    "_history/evaluations/2026/2026-06-02-large-scope-decomposition-omission.json",
+    "_history/evaluations/2026/2026-06-02-large-scope-decomposition-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-02-large-scope-decomposition.ko.md",
+    "_history/evaluations/2026/2026-06-02-large-scope-decomposition.en.md",
+    "_history/mode-selections/2026/2026-06-02-large-scope-decomposition.json",
+    "_history/plans/2026/2026-06-02-large-scope-decomposition.ko.md",
+    "_history/plans/2026/2026-06-02-large-scope-decomposition.en.md",
+    "_history/request-traces/2026/2026-06-02-large-scope-decomposition.ko.md",
+    "_history/request-traces/2026/2026-06-02-large-scope-decomposition.en.md",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/web-searches/2026/2026-06-02-large-scope-decomposition.ko.md",
+    "_history/web-searches/2026/2026-06-02-large-scope-decomposition.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/work-timings/2026/2026-06-02-large-scope-decomposition.json",
+    "_ops/maps/repository-map.md",
+    "_ops/maps/prompt-map.md",
+    "_ops/prompts/00-router.md",
+    "_ops/prompts/106-large-scope-decomposition.md",
+    "_ops/workflows/00-start-here.md",
+    "_ops/workflows/52-parallel-work-planning.md",
+    "_ops/workflows/76-large-scope-decomposition.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-large-scope-decomposition.ko.md",
+    "_requirements/changes/2026-06-02-large-scope-decomposition.en.md",
+    "_requirements/reviews/2026-06-02-large-scope-decomposition.ko.md",
+    "_requirements/reviews/2026-06-02-large-scope-decomposition.en.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/",
+    "agent-platform/configs/agents/large-scope-decomposer-agent.json",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "agent-platform/configs/planning/large-scope-decomposition-profile.json",
+    "agent-platform/docs/large-scope-decomposer-agent.ko.md",
+    "agent-platform/docs/large-scope-decomposer-agent.en.md",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/public/workspace-snapshot.json"
+  ],
+  "verification": [
+    "python3 -m json.tool _history/evaluations/2026/2026-06-02-large-scope-decomposition-omission.json",
+    "python3 -m json.tool _history/evaluations/2026/2026-06-02-large-scope-decomposition-grounding.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-large-scope-decomposition-omission.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-large-scope-decomposition-grounding.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-02-large-scope-decomposition-evaluation-input.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/planning/large-scope-decomposition-profile.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/large-scope-decomposer-agent.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json configs/planning/large-scope-decomposition-profile.json ../_ops/installations/registry.json",
+    "python3 _tools/docs-audit/src/docs_audit.py --check",
+    "python3 _tools/naming-audit/src/naming_audit.py --check",
+    "python3 _tools/workspace-index/src/workspace_index.py",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-large-scope-decomposition.json",
+    "npm run collect",
+    "npm run build"
+  ],
+  "references_checked": [
+    "https://sourcegraph.com/docs/cody/core-concepts/context",
+    "https://nx.dev/ci/features/affected",
+    "https://bazel.build/query/guide",
+    "https://google.github.io/eng-practices/review/developer/small-cls.html",
+    "_ops/workflows/52-parallel-work-planning.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-large-scope-decomposition-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-large-scope-decomposition.ko.md",
+    "_history/web-searches/2026/2026-06-02-large-scope-decomposition.en.md",
+    "agent-platform/configs/planning/large-scope-decomposition-profile.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-large-scope-decomposition.ko.md",
+    "_history/plans/2026/2026-06-02-large-scope-decomposition.en.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/validation.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-large-scope-decomposition.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-large-scope-decomposition-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-large-scope-decomposition.ko.md",
+    "_history/web-searches/2026/2026-06-02-large-scope-decomposition.en.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-large-scope-decomposition.ko.md",
+    "_requirements/changes/2026-06-02-large-scope-decomposition.en.md",
+    "_requirements/reviews/2026-06-02-large-scope-decomposition.ko.md",
+    "_requirements/reviews/2026-06-02-large-scope-decomposition.en.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/spec.en.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/plan.en.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/tasks.en.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/validation.en.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/traceability.ko.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/traceability.en.md"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-large-scope-decomposition.ko.md",
+    "_history/request-traces/2026/2026-06-02-large-scope-decomposition.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-large-scope-decomposition.json"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "resource_risk_occurred": false,
+  "cli_pipeline_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "If repeated large source-tree work becomes common, add a deterministic dependency-graph collector per project stack.",
+    "Add a generated visual board for decomposition slices after the first real large refactor uses this gate."
+  ]
+}

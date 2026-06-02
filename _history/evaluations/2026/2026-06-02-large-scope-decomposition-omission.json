@@ -1,0 +1,225 @@
+{
+  "task": "Add a large-scope decomposition gate for oversized or file-heavy work.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "requirement",
+      "description": "Add a durable requirement for splitting overly broad or file-heavy work before implementation.",
+      "source": "UR-2026-06-02-033, REQ-WS-073",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_requirements/changes/2026-06-02-large-scope-decomposition.ko.md",
+        "_requirements/reviews/2026-06-02-large-scope-decomposition.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "profile",
+      "description": "Create a self-documenting source of truth for large-scope decomposition.",
+      "source": "REQ-WS-073",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/planning/large-scope-decomposition-profile.json",
+        "check-config-contract configs/planning/large-scope-decomposition-profile.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "agent-spec",
+      "description": "Register a reusable large-scope decomposer agent.",
+      "source": "REQ-WS-073",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/agents/large-scope-decomposer-agent.json",
+        "inspect-agent configs/agents/large-scope-decomposer-agent.json",
+        "list-agents --registry configs/agents"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "workflow-prompt-policy",
+      "description": "Add policy, workflow, and prompt so the behavior is reusable.",
+      "source": "REQ-WS-073",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_docs/policies/large-scope-decomposition-policy.ko.md",
+        "_ops/workflows/76-large-scope-decomposition.md",
+        "_ops/prompts/106-large-scope-decomposition.md",
+        "_ops/prompts/00-router.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "persistent-memory",
+      "description": "Connect the rule to persistent instructions, AGENTS, and memory bootstrap.",
+      "source": "AGENTS.md and persistent instruction rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "AGENTS.md",
+        "_docs/instructions/persistent-instructions.ko.md",
+        "agent-platform/configs/memory/bootstrap-manifest.json",
+        "check-memory-bootstrap configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "spec-history-evaluation",
+      "description": "Record specs, web search, plan, mode selection, request trace, work summary, timing, and evaluation targets.",
+      "source": "governance mode close-out policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_specs/workspace-platform/2026-06-02-large-scope-decomposition/",
+        "_history/web-searches/2026/2026-06-02-large-scope-decomposition.ko.md",
+        "_history/plans/2026/2026-06-02-large-scope-decomposition.ko.md",
+        "_history/mode-selections/2026/2026-06-02-large-scope-decomposition.json",
+        "_history/request-traces/2026/2026-06-02-large-scope-decomposition.ko.md",
+        "_history/work-summaries/2026/2026-06-02.ko.md",
+        "_history/work-timings/2026/2026-06-02-large-scope-decomposition.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "parallel-not-executed",
+      "description": "Decide whether this work itself should run in parallel.",
+      "source": "large scope plan",
+      "required": false,
+      "status": "not_applicable",
+      "evidence": [
+        "_history/plans/2026/2026-06-02-large-scope-decomposition.ko.md"
+      ],
+      "rationale": "This change edited shared governance files, generated maps, and git state, so parallel execution would have increased conflict risk."
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/configs/planning/large-scope-decomposition-profile.json",
+      "purpose": "Large-scope source of truth.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/agents/large-scope-decomposer-agent.json",
+      "purpose": "Agent spec.",
+      "required": true
+    },
+    {
+      "path": "_docs/policies/large-scope-decomposition-policy.ko.md",
+      "purpose": "Korean policy document.",
+      "required": true
+    },
+    {
+      "path": "_docs/policies/large-scope-decomposition-policy.en.md",
+      "purpose": "English policy document.",
+      "required": true
+    },
+    {
+      "path": "_ops/workflows/76-large-scope-decomposition.md",
+      "purpose": "Workflow.",
+      "required": true
+    },
+    {
+      "path": "_ops/prompts/106-large-scope-decomposition.md",
+      "purpose": "Reusable prompt.",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-02-large-scope-decomposition/spec.ko.md",
+      "purpose": "Spec artifact.",
+      "required": true
+    },
+    {
+      "path": "_history/work-timings/2026/2026-06-02-large-scope-decomposition.json",
+      "purpose": "Timing record.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "Large-scope profile validates as a self-documenting config.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/planning/large-scope-decomposition-profile.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "agent-inspect-list",
+      "description": "Large-scope agent can be inspected and listed.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/large-scope-decomposer-agent.json",
+        "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "orchestration",
+      "description": "Agent orchestration registry remains valid.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "memory-bootstrap",
+      "description": "Memory bootstrap exposes the large-scope profile as a warm anchor.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "docs-and-naming",
+      "description": "Docs and naming audits pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/docs-audit/src/docs_audit.py --check",
+        "python3 _tools/naming-audit/src/naming_audit.py --check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor",
+      "description": "Workspace Monitor snapshot and build include the new agent/docs.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm run collect",
+        "npm run build",
+        "rg found large-scope-decomposer-agent in generated snapshot"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "timing",
+      "description": "Timing record validates as partial.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-large-scope-decomposition.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "This adds governance and reusable contracts, not an automated source dependency graph engine.",
+    "Actual large refactors will still need stack-specific tools and project-specific checks."
+  ],
+  "notes": [
+    "The work intentionally precedes and complements parallel-work-planner-agent."
+  ]
+}

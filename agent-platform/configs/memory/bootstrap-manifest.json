@@ -61,6 +61,7 @@
       "The CLI adapter registry, CLI pipeline template, external command execution boundary, optional CLI dependency posture, multi-process pipe orchestration, or missing-CLI fallback policy changes.",
       "The agent orchestration registry, reusable agent blueprint contract, multi-agent orchestration pattern, or agent spec validation command changes.",
       "The capability promotion registry, bounded black-box automation policy, self-improvement candidate contract, or automatic feature promotion risk gate changes.",
+      "The large-scope decomposition profile, file-heavy work split policy, context budget gate, or source inventory/sampling contract changes.",
       "A hot anchor becomes too large or no longer needs to be loaded every time.",
       "A reference source behind this memory approach becomes stale or contradicted."
     ]
@@ -301,6 +302,18 @@
         "coordination, research fan-in merge gates, rollback, and final verification rules for parallel work"
       ],
       "last_checked": "2026-06-01"
+    },
+    {
+      "id": "large_scope_decomposition_profile",
+      "title": "Large Scope Decomposition Profile",
+      "path": "agent-platform/configs/planning/large-scope-decomposition-profile.json",
+      "source_type": "internal",
+      "used_for": [
+        "file-heavy and context-heavy work decomposition",
+        "source inventory, exclusions, representative samples, slices, merge gates, and verification contracts",
+        "pre-step before parallel work planning when scope is too broad"
+      ],
+      "last_checked": "2026-06-02"
     },
     {
       "id": "self_documenting_config_policy",
@@ -1112,6 +1125,19 @@
       ]
     },
     {
+      "id": "large_scope_decomposition_must_precede_execution",
+      "rule": "When a request is too broad, file-heavy, spans many projects, asks to review or improve everything, or creates context pressure, use the large-scope decomposition profile before implementation or parallel work planning.",
+      "reason": "The user explicitly asked for a smarter way to split work when scope is too large or there are too many source files.",
+      "applies_to": [
+        "startup_sequence",
+        "required_anchor_ids",
+        "anchors",
+        "large-scope-decomposer-agent",
+        "parallel-work-planner-agent",
+        "context-archive"
+      ]
+    },
+    {
       "id": "install_registry_must_stay_discoverable",
       "rule": "The installation registry must remain a warm memory anchor because installs change durable dependency or environment state.",
       "reason": "Installation records are more critical than ordinary summaries because missing dependency history can break reproducibility and rollback.",
@@ -1336,6 +1362,7 @@
     "work_timing_policy",
     "work_timing_workflow",
     "parallel_work_workflow",
+    "large_scope_decomposition_profile",
     "coordination_board",
     "human_decision_inbox",
     "human_arbitration_agent",
@@ -1401,6 +1428,7 @@
     "work_timing_policy",
     "work_timing_workflow",
     "parallel_work_workflow",
+    "large_scope_decomposition_profile",
     "coordination_board",
     "human_decision_inbox",
     "human_arbitration_agent",
@@ -1631,6 +1659,14 @@
       "path": "_ops/workflows/52-parallel-work-planning.md",
       "tier": "warm",
       "purpose": "Workflow for deciding safe parallel lanes from dependencies, touch paths, research fan-in merge gates, conflict controls, coordination targets, merge strategy, and final verification.",
+      "required": true,
+      "load_order": 8
+    },
+    {
+      "id": "large_scope_decomposition_profile",
+      "path": "agent-platform/configs/planning/large-scope-decomposition-profile.json",
+      "tier": "warm",
+      "purpose": "Rules for shrinking broad, file-heavy, context-heavy work into source inventory, exclusions, representative samples, slices, merge gates, and verification before implementation or parallel execution.",
       "required": true,
       "load_order": 8
     },

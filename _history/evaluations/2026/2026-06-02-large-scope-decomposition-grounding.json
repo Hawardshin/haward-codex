@@ -1,0 +1,160 @@
+{
+  "task": "Ground final claims for large-scope decomposition work.",
+  "output_summary": "The platform now has a large-scope decomposition profile, agent spec, workflow, prompt, policy, requirements, memory bootstrap anchor, and history records.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "profile",
+      "source": "agent-platform/configs/planning/large-scope-decomposition-profile.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "new tracked source of truth"
+    },
+    {
+      "evidence_id": "agent",
+      "source": "agent-platform/configs/agents/large-scope-decomposer-agent.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "agent spec"
+    },
+    {
+      "evidence_id": "memory",
+      "source": "agent-platform/configs/memory/bootstrap-manifest.json and check-memory-bootstrap output",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "deterministic validation"
+    },
+    {
+      "evidence_id": "workflow_prompt",
+      "source": "_ops/workflows/76-large-scope-decomposition.md and _ops/prompts/106-large-scope-decomposition.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "workflow and prompt source"
+    },
+    {
+      "evidence_id": "requirements_specs",
+      "source": "_requirements/baselines/2026-05-31-workspace-platform.ko.md and _specs/workspace-platform/2026-06-02-large-scope-decomposition/",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "requirements and spec artifacts"
+    },
+    {
+      "evidence_id": "tests",
+      "source": "config contract, inspect-agent, list-agents, check-agent-orchestration, check-memory-bootstrap, docs-audit, naming-audit, workspace monitor collect/build, work-timer",
+      "source_type": "test_result",
+      "checked_on": "2026-06-02",
+      "reliability": "commands completed with exit code 0"
+    },
+    {
+      "evidence_id": "sourcegraph",
+      "source": "https://sourcegraph.com/docs/cody/core-concepts/context",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "official documentation"
+    },
+    {
+      "evidence_id": "nx",
+      "source": "https://nx.dev/ci/features/affected",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "official documentation"
+    },
+    {
+      "evidence_id": "bazel",
+      "source": "https://bazel.build/query/guide",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "official documentation"
+    },
+    {
+      "evidence_id": "google_small_cls",
+      "source": "https://google.github.io/eng-practices/review/developer/small-cls.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "official engineering practice documentation"
+    }
+  ],
+  "claims": [
+    {
+      "statement": "A new self-documenting large-scope decomposition profile exists.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "profile",
+        "tests"
+      ],
+      "verification_steps": [
+        "check-config-contract configs/planning/large-scope-decomposition-profile.json"
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "A new large-scope-decomposer-agent spec is registered and inspectable.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "agent",
+        "tests"
+      ],
+      "verification_steps": [
+        "inspect-agent configs/agents/large-scope-decomposer-agent.json",
+        "list-agents --registry configs/agents"
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Memory bootstrap now exposes the large-scope profile as a warm anchor.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "memory",
+        "tests"
+      ],
+      "verification_steps": [
+        "check-memory-bootstrap configs/memory/bootstrap-manifest.json"
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The new rule is designed as a pre-gate before parallel work planning rather than a replacement for parallel-work-planner-agent.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "profile",
+        "workflow_prompt",
+        "requirements_specs"
+      ],
+      "verification_steps": [
+        "reviewed profile, workflow, prompt, and REQ-WS-073"
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Sourcegraph, Nx, Bazel, and Google engineering practice references support a query/inventory/affected/small-change approach to large codebase work.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": [
+        "sourcegraph",
+        "nx",
+        "bazel",
+        "google_small_cls"
+      ],
+      "verification_steps": [
+        "reviewed official documentation pages and saved web search record"
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "The repository does not yet have a universal dependency graph engine for every project; the profile starts with maps, rg, project registry, generated snapshots, and project-specific tools."
+  ],
+  "limitation_notes": [
+    "This change adds governance and reusable contracts, not a new automated refactoring engine.",
+    "Actual large source-code refactors still need stack-specific official research and validation."
+  ]
+}

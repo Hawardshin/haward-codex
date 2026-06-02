@@ -1,0 +1,70 @@
+{
+  "task_id": "2026-06-02-large-scope-decomposition",
+  "title": "Large scope decomposition gate",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "created_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked Sourcegraph context, Nx affected, Bazel query, and Google Small CLs references."
+    },
+    {
+      "phase_id": "memory_and_local_review",
+      "label": "Memory bootstrap and local structure review",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Confirmed existing parallel work and context archive structures, then identified the missing pre-gate for oversized scope."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Profile, agent, docs, workflow, and prompt",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added large-scope decomposition profile, agent spec, Korean/English docs, policy, workflow, and prompt."
+    },
+    {
+      "phase_id": "governance_linking",
+      "label": "Governance linking",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Updated AGENTS, persistent instructions, start workflow, parallel workflow, prompt router, memory bootstrap, requirements, and specs."
+    },
+    {
+      "phase_id": "history_and_evaluation",
+      "label": "History and evaluation records",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Recorded web search, plan, mode selection, request summary, request trace, timing, omission, grounding, and evaluation records."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Ran config, agent, memory, docs, naming, workspace monitor, omission, grounding, and evaluation checks."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured"
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "not_measured",
+    "bottleneck_notes": "The main overhead was propagating one new operating rule through requirements, specs, memory anchors, prompts, workflows, and history.",
+    "improvement_candidates": [
+      "Create a scaffold helper for new governance agents that generates requirement/spec/history/evaluation shells.",
+      "Consider a deterministic checker that verifies new workflow and prompt entries are routed from the prompt router and memory bootstrap."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-02-large-scope-decomposition.ko.md",
+    "_history/plans/2026/2026-06-02-large-scope-decomposition.ko.md",
+    "_specs/workspace-platform/2026-06-02-large-scope-decomposition/validation.ko.md"
+  ]
+}

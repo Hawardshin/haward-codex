@@ -1,0 +1,62 @@
+{
+  "name": "large-scope-decomposer-agent",
+  "description": "Turns overly broad, file-heavy, or context-heavy work into bounded slices, sampling plans, sequential or parallel execution batches, merge gates, and verification contracts.",
+  "runtime": "python",
+  "skills": [],
+  "tools": [
+    "rg",
+    "_tools/workspace-index",
+    "agent-platform:plan-parallel-work",
+    "agent-platform:complete-coding-research",
+    "agent-platform:check-omissions",
+    "agent-platform:check-grounding",
+    "agent-platform:evaluate-work"
+  ],
+  "metadata": {
+    "status": "active",
+    "owner": "agent-platform",
+    "blueprint": "planning_agent",
+    "orchestration_pattern": "sequential_pipeline",
+    "trigger": "Use when a request is too broad, touches many files, spans multiple projects, creates context pressure, or asks to review/improve everything before implementation.",
+    "input_schema": "agent-platform/configs/planning/large-scope-decomposition-profile.json",
+    "output_contract": {
+      "type": "large_scope_decomposition_packet",
+      "required_fields": [
+        "objective",
+        "source_inventory",
+        "exclusions",
+        "representative_samples",
+        "slices",
+        "execution_strategy",
+        "merge_gates",
+        "verification_plan",
+        "context_budget",
+        "source_value_provenance",
+        "plan_evidence"
+      ],
+      "output_targets": [
+        "_history/plans/YYYY/YYYY-MM-DD-<slug>.ko.md",
+        "_specs/<owner>/<slug>/plan.ko.md",
+        "_ops/coordination/status.json when parallel lanes or handoffs exist"
+      ]
+    },
+    "policy": "Do not read every file by default. Inventory first, exclude generated/vendor/build outputs, sample representative files, create bounded slices, then hand off to parallel-work-planner-agent only when touch paths and merge gates are explicit. Record context pressure and archive targets when the active context may saturate.",
+    "related_config_paths": [
+      "agent-platform/configs/planning/large-scope-decomposition-profile.json",
+      "agent-platform/configs/planning/parallel-work-template.json",
+      "agent-platform/configs/workflows/work-mode-registry.json",
+      "agent-platform/configs/memory/bootstrap-manifest.json"
+    ],
+    "docs_targets": [
+      "agent-platform/docs/large-scope-decomposer-agent.ko.md",
+      "agent-platform/docs/large-scope-decomposer-agent.en.md",
+      "_ops/workflows/76-large-scope-decomposition.md",
+      "_ops/prompts/106-large-scope-decomposition.md"
+    ],
+    "validation_commands": [
+      "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/large-scope-decomposer-agent.json",
+      "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/planning/large-scope-decomposition-profile.json",
+      "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json"
+    ]
+  }
+}
