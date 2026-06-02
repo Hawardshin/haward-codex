@@ -1,0 +1,68 @@
+{
+  "task": "Reference UI application resource review",
+  "work_mode": "governance",
+  "runtime_context": [
+    "Next.js static build",
+    "temporary Python HTTP server",
+    "Playwright headless Chromium",
+    "React derived UI state"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "temporary-static-server",
+      "category": "process",
+      "description": "A temporary HTTP server was started to smoke test the static Workspace Monitor UI.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The server was bound to tcp:4173, killed after verification, and `lsof -ti tcp:4173` returned no process.",
+      "evidence": [
+        "python3 -m http.server 4173 -d workspace-monitor/out",
+        "lsof -ti tcp:4173"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "playwright-browser",
+      "category": "browser_context",
+      "description": "Headless Chromium was launched for desktop and mobile visual smoke tests.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The Playwright script used a finally block with `await browser.close()`.",
+      "evidence": [
+        "workspace-monitor/artifacts/screenshots/desktop-reference-ui-desktop.png",
+        "workspace-monitor/artifacts/screenshots/desktop-reference-ui-mobile.png"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "chunk-budget",
+      "metric": "largest initial JS chunk",
+      "tool": "npm --prefix workspace-monitor run perf:budget",
+      "threshold": "1000000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "largestChunk.bytes = 227537"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "horizontal-overflow",
+      "metric": "document scrollWidth",
+      "tool": "Playwright desktop/mobile smoke",
+      "threshold": "scrollWidth equals viewport width",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "desktop: width 1440 scrollWidth 1440",
+        "mobile: width 390 scrollWidth 390"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No production interval, worker, subprocess, PTY, xterm.js, Monaco, or new dependency was added."
+  ]
+}

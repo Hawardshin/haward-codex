@@ -103,5 +103,30 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(monitorShell, /adapterSetupGuides/);
   assert.match(monitorShell, /sessionModePresets/);
   assert.match(monitorShell, /Answer & Resume/);
+  for (const uiString of [
+    "Command Palette",
+    "Capability Center",
+    "Run Board",
+    "process graph",
+    "terminal event",
+    "decision replay",
+    "Source Review",
+    "Evidence / Promotion"
+  ]) {
+    assert.match(monitorShell, new RegExp(uiString));
+  }
+  for (const implementationToken of [
+    "detectOutputEvents",
+    "groupDecisions",
+    "buildSourceDiffSummary",
+    "desktop-command-grid",
+    "process-graph",
+    "terminal-event-rail",
+    "decision-replay-strip",
+    "source-diff-review",
+    "evidence-grid"
+  ]) {
+    assert.match(monitorShell, new RegExp(implementationToken));
+  }
   assert.ok(viewModes.modes.every((mode) => mode.allowed_sections.includes("desktop")));
 });

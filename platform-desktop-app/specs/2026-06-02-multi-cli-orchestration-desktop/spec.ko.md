@@ -7,8 +7,8 @@
 ## 요구사항
 
 - `REQ-WS-085`
-- `PDA-REQ-013` - `PDA-REQ-023`
-- `PDA-UX-009` - `PDA-UX-016`
+- `PDA-REQ-013` - `PDA-REQ-024`
+- `PDA-UX-009` - `PDA-UX-017`
 
 ## 범위
 
@@ -24,6 +24,7 @@
 - Tauri backend의 linked active CLI session answer-and-resume command
 - Tauri backend의 workspace-scoped source file read/write와 backup
 - Workspace Monitor의 CLI setup guide, 작업 모드 프리셋, decision inbox answer UI, CLI session console, scoped source editor
+- Workspace Monitor의 command palette, capability center card, run board, process graph, terminal event rail, grouped decision inbox, decision replay, source diff review, evidence/promotion surface
 
 ## 비범위
 
@@ -39,6 +40,7 @@
 - 두 번째 supervisor MVP는 shell plugin 없이 allowlist된 CLI에 한해 pipe 기반 session start/poll/stdin/defer/cancel을 제공하고, defer 시 감지된 질문을 `_ops/coordination/human-decision-inbox.json`에 저장한다.
 - 사용자는 Desktop 탭에서 CLI별 설치 힌트와 검증 명령을 확인하고, 작업 모드 프리셋으로 session prompt를 만들며, 보류된 decision item에 답변을 저장할 수 있다.
 - session metadata가 있는 보류 decision은 사용자가 명시적으로 answer-and-resume을 선택했을 때만 answer 저장 후 linked active CLI session stdin으로 같은 답변을 보내고 session report를 갱신한다.
+- Desktop 탭은 레퍼런스 UI 적용 결과로 quick action command, capability status, lane timeline, process graph, structured terminal event, grouped decision, replay metadata, source diff, evidence/promotion 후보를 함께 보여준다.
 - 여러 CLI의 autonomous source-affecting long-running 실행은 process graph와 merge gate를 가진 다음 supervisor 단계에서 구현한다.
 - CLI 질문은 decision inbox로 route하고 dependent lane만 pause한다.
 - 터미널 output은 bounded/redacted raw log와 structured durable records를 분리한다.
@@ -53,6 +55,7 @@
 - `workspace-monitor` Desktop 탭은 CLI session console과 scoped source editor를 표시한다.
 - `workspace-monitor` Desktop 탭은 CLI setup guide, 작업 모드 프리셋, human decision inbox 조회/답변 UI를 표시한다.
 - `workspace-monitor` Desktop 탭은 linked active CLI session이 있는 decision에 대해 `Answer`와 `Answer & Resume`를 구분하고 resume 결과를 표시한다.
+- `workspace-monitor` Desktop 탭은 `Command Palette`, `Capability Center`, `Run Board`, process graph, terminal event, decision replay, `Source Review`, `Evidence / Promotion` 문자열과 관련 UI state를 포함한다.
 - Tauri file command는 `_private/`, `outputs/`, workspace 밖 경로, symlink escape를 차단하고 backup을 만든다.
 - 요구사항, 스펙, traceability가 새 기능을 연결한다.
 - 평가 기록에 resource risk와 CLI pipeline risk가 현재 bounded health/session/file-edit 구현 범위와 후속 PTY supervisor 리스크를 구분해 기록된다.

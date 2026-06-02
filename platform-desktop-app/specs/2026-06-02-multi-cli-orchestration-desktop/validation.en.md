@@ -79,6 +79,7 @@ Expected results:
 - The readiness check should verify session/editor command names, human decision inbox persistence, and Desktop tab inbox item count display.
 - The readiness check should verify setup guides, work-mode presets, decision inbox list/answer commands, and UI strings.
 - The readiness check should verify the `answer_and_resume_human_decision` command and `Answer & Resume` UI string.
+- The readiness check should verify applied reference-app UI strings: `Command Palette`, `Capability Center`, `Run Board`, process graph, terminal event, decision replay, `Source Review`, and `Evidence / Promotion`.
 - Rust compile and Tauri dev/build are not verified until the Rust toolchain is installed.
 - The source editor contract must block `_private/`, `outputs/`, paths outside the workspace, and symlink escapes, and create a backup before saving.
 - The defer command contract must append detected questions to `_ops/coordination/human-decision-inbox.json` without duplicating the same session prompt.

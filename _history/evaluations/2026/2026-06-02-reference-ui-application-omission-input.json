@@ -1,0 +1,148 @@
+{
+  "task": "Apply applicable installable-app UI references to the desktop platform",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Search current official references before implementation.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-reference-ui-application.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "requirements",
+      "description": "Update project requirements for applied reference UI.",
+      "source": "PDA-REQ-024 and PDA-UX-017",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+        "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.ko.md",
+        "_requirements/changes/2026-06-02-reference-ui-application.ko.md",
+        "_requirements/reviews/2026-06-02-reference-ui-application.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "spec",
+      "description": "Update spec, tasks, validation, and traceability.",
+      "source": "spec-driven development rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md",
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "implementation",
+      "description": "Implement command palette, capability center, run board, process graph, terminal events, grouped decisions, replay, source review, and evidence/promotion UI.",
+      "source": "User request and PDA-REQ-024",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "dependency-boundary",
+      "description": "Do not install xterm.js, Monaco, or PTY dependencies before installation audit.",
+      "source": "platform-desktop-app spec non-scope",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Desktop reference UI implementation.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/app/globals.css",
+      "purpose": "Responsive layout for reference UI surfaces.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/tests/readiness.test.mjs",
+      "purpose": "Readiness coverage for new UI strings and implementation tokens.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/artifacts/screenshots/desktop-reference-ui-desktop.png",
+      "purpose": "Desktop viewport visual smoke artifact.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/artifacts/screenshots/desktop-reference-ui-mobile.png",
+      "purpose": "Mobile viewport visual smoke artifact.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Type check Workspace Monitor.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-test-build-perf",
+      "description": "Run Workspace Monitor tests, static build, and performance budget.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor test",
+        "npm --prefix workspace-monitor run build",
+        "npm --prefix workspace-monitor run perf:budget"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-desktop-readiness",
+      "description": "Run desktop readiness and Node tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app test",
+        "npm --prefix platform-desktop-app run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "playwright-visual-smoke",
+      "description": "Verify desktop/mobile UI surfaces and horizontal overflow.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/artifacts/screenshots/desktop-reference-ui-desktop.png",
+        "workspace-monitor/artifacts/screenshots/desktop-reference-ui-mobile.png"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "xterm.js, Monaco, and PTY remain deferred until installation audit.",
+    "Tauri compile remains blocked until Rust toolchain installation audit."
+  ],
+  "notes": [
+    "The implementation applies UI/information-architecture patterns without adding new runtime dependencies."
+  ]
+}

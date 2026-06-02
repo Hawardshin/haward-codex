@@ -258,6 +258,34 @@ type AdapterSetupGuide = {
   caution: string;
 };
 
+type OutputEvent = {
+  id: string;
+  type: "question" | "error" | "warning" | "test" | "file" | "info";
+  lane: string;
+  label: string;
+  detail: string;
+};
+
+type DecisionGroup = {
+  id: string;
+  label: string;
+  openCount: number;
+  answeredCount: number;
+  decisions: HumanDecisionItem[];
+};
+
+type SourceDiffSummary = {
+  dirty: boolean;
+  addedLines: number;
+  removedLines: number;
+  changedLines: number;
+  preview: Array<{
+    line: number;
+    before: string;
+    after: string;
+  }>;
+};
+
 type SessionModePreset = {
   id: string;
   label: string;
@@ -1229,6 +1257,7 @@ function DesktopRuntimePanel({
   const [inboxReport, setInboxReport] = useState<HumanDecisionInboxReport | null>(null);
   const [error, setError] = useState("");
   const [runningAdapterId, setRunningAdapterId] = useState("");
+  const [selectedSessionId, setSelectedSessionId] = useState("");
   const [selectedSessionModeId, setSelectedSessionModeId] = useState(sessionModePresets[0].id);
   const [selectedSessionAdapterId, setSelectedSessionAdapterId] = useState(fallbackDesktopAdapters[0].adapterId);
   const [workingDir, setWorkingDir] = useState("");
@@ -1254,7 +1283,7 @@ function DesktopRuntimePanel({
     ...reports.flatMap((report) => report.decisionPrompts || []),
     ...sessions.flatMap((session) => session.decisionPrompts || [])
   ];
-  const selectedSession = sessions[0] || null;
+  const selectedSession = sessions.find((session) => session.sessionId === selectedSessionId) || sessions[0] || null;
   const selectedDecision = (inboxReport?.decisions || []).find((decision) => decision.id === selectedDecisionId) || openInboxDecisions[0] || null;
   const selectedDecisionSession = selectedDecision?.sessionId
     ? sessions.find((session) => session.sessionId === selectedDecision.sessionId) || null
@@ -1265,6 +1294,71 @@ function DesktopRuntimePanel({
     ["running", "defer_message_sent"].includes(selectedDecisionSession.status) &&
     Boolean(selectedDecision?.sessionId);
   const selectedMode = sessionModePresets.find((mode) => mode.id === selectedSessionModeId) || sessionModePresets[0];
+  const sessionStats = useMemo(() => {
+    const active = sessions.filter((session) => isActiveSessionStatus(session.status)).length;
+    const deferred = sessions.filter((session) => session.status === "defer_message_sent").length;
+    const outputBytes = sessions.reduce((total, session) => total + session.stdout.length + session.stderr.length, 0);
+    const inboxItems = sessions.reduce((total, session) => total + session.decisionInboxItems, 0);
+    return { active, deferred, outputBytes, inboxItems };
+  }, [sessions]);
+  const outputEvents = useMemo(() => {
+    const sessionEvents = sessions.flatMap((session) =>
+      detectOutputEvents(session.sessionId, session.adapterId, `${session.stdout}\n${session.stderr}`)
+    );
+    const reportEvents = reports.flatMap((report) =>
+      detectOutputEvents(`health-${report.adapterId}`, report.adapterId, `${report.output}\n${report.stderr}`)
+    );
+    return [...sessionEvents, ...reportEvents].slice(0, 18);
+  }, [reports, sessions]);
+  const selectedOutputEvents = selectedSession ? outputEvents.filter((event) => event.id.startsWith(selectedSession.sessionId)) : outputEvents;
+  const decisionGroups = useMemo(() => groupDecisions(inboxReport?.decisions || []), [inboxReport]);
+  const sourceDiff = useMemo<SourceDiffSummary | null>(() => {
+    if (!sourceFile) {
+      return null;
+    }
+    return buildSourceDiffSummary(sourceFile.content, sourceDraft);
+  }, [sourceDraft, sourceFile]);
+  const evidenceItems = useMemo(() => {
+    const items = [
+      ...outputEvents.slice(0, 5).map((event) => ({
+        id: `event-${event.id}`,
+        label: event.type,
+        title: event.label,
+        detail: `${event.lane} / ${event.detail}`
+      })),
+      ...(selectedDecision
+        ? [
+            {
+              id: `decision-${selectedDecision.id}`,
+              label: selectedDecision.status,
+              title: selectedDecision.question,
+              detail: selectedDecision.resumeAction || selectedDecision.impact || "decision inbox"
+            }
+          ]
+        : []),
+      ...(sourceDiff?.dirty
+        ? [
+            {
+              id: "source-diff",
+              label: "source",
+              title: sourceFile?.relativePath || "draft change",
+              detail: `${sourceDiff.addedLines} added / ${sourceDiff.removedLines} removed / ${sourceDiff.changedLines} changed`
+            }
+          ]
+        : []),
+      ...(writeReport
+        ? [
+            {
+              id: "write-report",
+              label: "artifact",
+              title: writeReport.relativePath,
+              detail: `backup ${writeReport.backupPath}`
+            }
+          ]
+        : [])
+    ];
+    return items.slice(0, 8);
+  }, [outputEvents, selectedDecision, sourceDiff, sourceFile?.relativePath, writeReport]);
 
   const refreshAdapters = async () => {
     setError("");
@@ -1359,6 +1453,7 @@ function DesktopRuntimePanel({
 
   const upsertSession = (report: CliSessionReport) => {
     setSessions((current) => [report, ...current.filter((item) => item.sessionId !== report.sessionId)]);
+    setSelectedSessionId(report.sessionId);
   };
 
   const applySessionMode = (modeId: string) => {
@@ -1603,11 +1698,47 @@ function DesktopRuntimePanel({
         <Metric label="Source Files" value={sourceFileCount} icon={Code2} tone="slate" />
       </section>
 
+      <section className="panel wide desktop-command-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Command Palette</p>
+            <h2>빠른 실행</h2>
+          </div>
+          <Search size={18} aria-hidden="true" />
+        </div>
+        <div className="desktop-command-grid">
+          <button type="button" onClick={runAllHealthChecks} disabled={!invoke || runningAdapterId !== ""}>
+            <Network size={16} aria-hidden="true" />
+            <span>Check CLI adapters</span>
+            <small>{availableCount} available</small>
+          </button>
+          <button
+            type="button"
+            onClick={startSession}
+            disabled={!invoke || runningAdapterId !== "" || !adapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId && adapter.available)}
+          >
+            <SquareTerminal size={16} aria-hidden="true" />
+            <span>Start selected lane</span>
+            <small>{selectedMode.label}</small>
+          </button>
+          <button type="button" onClick={refreshDecisionInbox} disabled={!invoke || decisionBusy}>
+            <Inbox size={16} aria-hidden="true" />
+            <span>Refresh decisions</span>
+            <small>{openInboxDecisions.length} open</small>
+          </button>
+          <button type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !selectedSourcePath}>
+            <GitBranch size={16} aria-hidden="true" />
+            <span>Open source review</span>
+            <small>{sourceDiff?.dirty ? "draft changed" : "ready"}</small>
+          </button>
+        </div>
+      </section>
+
       <section className="panel wide desktop-control-panel">
         <div className="panel-heading">
           <div>
-            <p className="eyebrow">Supervisor</p>
-            <h2>CLI lane preflight</h2>
+            <p className="eyebrow">Capability Center</p>
+            <h2>CLI adapter 상태</h2>
           </div>
           <div className="desktop-actions">
             <button type="button" onClick={refreshAdapters} disabled={runningAdapterId !== ""}>
@@ -1665,6 +1796,11 @@ function DesktopRuntimePanel({
                     <small>{setupGuide.caution}</small>
                   </div>
                 )}
+                <div className="capability-meta-grid">
+                  <span>{adapter.available ? "ready" : "setup-later"}</span>
+                  <span>{sessions.filter((session) => session.adapterId === adapter.adapterId).length} lanes</span>
+                  <span>{reports.some((item) => item.adapterId === adapter.adapterId) ? "checked" : "unchecked"}</span>
+                </div>
                 <button
                   type="button"
                   onClick={() => runSingleHealthCheck(adapter.adapterId)}
@@ -1689,10 +1825,51 @@ function DesktopRuntimePanel({
       <section className="panel wide cli-session-panel">
         <div className="panel-heading">
           <div>
-            <p className="eyebrow">CLI Session</p>
-            <h2>Pipe 기반 실행 콘솔</h2>
+            <p className="eyebrow">Run Board</p>
+            <h2>Lane / timeline / terminal</h2>
           </div>
           <span className="result-count">{sessions.length} sessions</span>
+        </div>
+
+        <div className="run-board-strip">
+          <article>
+            <span>active lanes</span>
+            <strong>{sessionStats.active}</strong>
+          </article>
+          <article>
+            <span>deferred lanes</span>
+            <strong>{sessionStats.deferred}</strong>
+          </article>
+          <article>
+            <span>output</span>
+            <strong>{formatBytes(sessionStats.outputBytes)}</strong>
+          </article>
+          <article>
+            <span>events</span>
+            <strong>{outputEvents.length}</strong>
+          </article>
+        </div>
+
+        <div className="process-graph" aria-label="CLI process graph">
+          <article className="process-node node-intake">
+            <span>intake</span>
+            <strong>{selectedMode.label}</strong>
+          </article>
+          {sessions.slice(0, 4).map((session) => (
+            <article key={session.sessionId} className={`process-node node-${session.status}`}>
+              <span>{session.adapterId}</span>
+              <strong>{session.status}</strong>
+              <small>{formatDuration(session.elapsedMs)}</small>
+            </article>
+          ))}
+          <article className="process-node node-decision">
+            <span>decision</span>
+            <strong>{openInboxDecisions.length} open</strong>
+          </article>
+          <article className="process-node node-review">
+            <span>review</span>
+            <strong>{sourceDiff?.dirty ? "diff pending" : "clean"}</strong>
+          </article>
         </div>
 
         <div className="session-launcher">
@@ -1759,7 +1936,16 @@ function DesktopRuntimePanel({
                     <span>{session.exitCode ?? "no code"}</span>
                     <span>{session.decisionInboxItems ? `${session.decisionInboxItems} inbox` : session.outputTruncated ? "truncated" : "bounded"}</span>
                   </div>
+                  <div className="lane-mini-timeline">
+                    <span>started</span>
+                    <span>{session.deferMessageSent ? "deferred" : "streaming"}</span>
+                    <span>{isActiveSessionStatus(session.status) ? "open" : "finished"}</span>
+                  </div>
                   <div className="desktop-actions">
+                    <button type="button" onClick={() => setSelectedSessionId(session.sessionId)}>
+                      <ListFilter size={15} aria-hidden="true" />
+                      <span>Inspect</span>
+                    </button>
                     <button type="button" onClick={() => pollSession(session.sessionId)} disabled={!invoke}>
                       <Activity size={15} aria-hidden="true" />
                       <span>Poll</span>
@@ -1788,6 +1974,16 @@ function DesktopRuntimePanel({
                 <code>{selectedSession ? selectedSession.stdout || selectedSession.stderr || "No output yet" : "No session selected"}</code>
               </pre>
               {selectedSession?.stderr && selectedSession.stdout && <small>{selectedSession.stderr}</small>}
+              <div className="terminal-event-rail">
+                {selectedOutputEvents.slice(0, 6).map((event) => (
+                  <article key={event.id} className={`event-${event.type}`}>
+                    <span>{event.type}</span>
+                    <strong>{event.label}</strong>
+                    <small>{event.detail}</small>
+                  </article>
+                ))}
+                {selectedOutputEvents.length === 0 && <p className="empty-state">구조화된 terminal event가 아직 없습니다.</p>}
+              </div>
               <div className="session-input-row">
                 <input
                   value={sessionInput}
@@ -1874,17 +2070,25 @@ function DesktopRuntimePanel({
         ) : (
           <div className="decision-inbox-layout">
             <div className="decision-list">
-              {inboxReport.decisions.slice(0, 16).map((decision) => (
-                <button
-                  key={decision.id}
-                  className={selectedDecision?.id === decision.id ? "active" : ""}
-                  type="button"
-                  onClick={() => setSelectedDecisionId(decision.id)}
-                >
-                  <span>{decision.status}</span>
-                  <strong>{decision.question}</strong>
-                  <small>{decision.sessionId ? `${decision.source} / ${decision.sessionId}` : decision.source}</small>
-                </button>
+              {decisionGroups.slice(0, 8).map((group) => (
+                <div key={group.id} className="decision-group">
+                  <header>
+                    <strong>{group.label}</strong>
+                    <span>{group.openCount} open / {group.answeredCount} answered</span>
+                  </header>
+                  {group.decisions.slice(0, 6).map((decision) => (
+                    <button
+                      key={decision.id}
+                      className={selectedDecision?.id === decision.id ? "active" : ""}
+                      type="button"
+                      onClick={() => setSelectedDecisionId(decision.id)}
+                    >
+                      <span>{decision.status}</span>
+                      <strong>{decision.question}</strong>
+                      <small>{decision.sessionId ? `${decision.source} / ${decision.sessionId}` : decision.source}</small>
+                    </button>
+                  ))}
+                </div>
               ))}
             </div>
 
@@ -1914,6 +2118,24 @@ function DesktopRuntimePanel({
                       <p>{selectedDecision.answerText}</p>
                     </div>
                   )}
+                  <div className="decision-replay-strip" aria-label="decision replay">
+                    <article>
+                      <span>created</span>
+                      <strong>{selectedDecision.createdAt || "unknown"}</strong>
+                    </article>
+                    <article>
+                      <span>blocked</span>
+                      <strong>{selectedDecision.blockedWorkCount}</strong>
+                    </article>
+                    <article>
+                      <span>unblocked</span>
+                      <strong>{selectedDecision.unblockedWorkCount}</strong>
+                    </article>
+                    <article>
+                      <span>answered</span>
+                      <strong>{selectedDecision.answeredAt || "pending"}</strong>
+                    </article>
+                  </div>
                   <div className="decision-answer-controls">
                     <select value={decisionAnswerType} onChange={(event) => setDecisionAnswerType(event.target.value)}>
                       <option value="instruction">Instruction</option>
@@ -1975,11 +2197,34 @@ function DesktopRuntimePanel({
           </div>
       </section>
 
+      <section className="panel wide evidence-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Evidence / Promotion</p>
+            <h2>근거와 재사용 후보</h2>
+          </div>
+          <FileSearch size={18} aria-hidden="true" />
+        </div>
+        {evidenceItems.length === 0 ? (
+          <p className="empty-state">아직 승격할 terminal event, decision, source diff, artifact가 없습니다.</p>
+        ) : (
+          <div className="evidence-grid">
+            {evidenceItems.map((item) => (
+              <article key={item.id}>
+                <span>{item.label}</span>
+                <strong>{item.title}</strong>
+                <p>{item.detail}</p>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
       <section className="panel desktop-source-panel">
         <div className="panel-heading">
           <div>
-            <p className="eyebrow">Source Editing</p>
-            <h2>Scoped file editor</h2>
+            <p className="eyebrow">Source Review</p>
+            <h2>Scoped diff editor</h2>
           </div>
           <Code2 size={18} aria-hidden="true" />
         </div>
@@ -2006,6 +2251,30 @@ function DesktopRuntimePanel({
               <span>{sourceFile.relativePath}</span>
               <strong>{sourceDraft.length.toLocaleString("ko-KR")} bytes</strong>
             </div>
+            {sourceDiff && (
+              <div className={`source-diff-review ${sourceDiff.dirty ? "dirty" : "clean"}`}>
+                <header>
+                  <div>
+                    <span>{sourceDiff.dirty ? "diff pending" : "no changes"}</span>
+                    <strong>
+                      +{sourceDiff.addedLines} / -{sourceDiff.removedLines} / {sourceDiff.changedLines} changed
+                    </strong>
+                  </div>
+                  <small>backup save gate</small>
+                </header>
+                {sourceDiff.preview.length > 0 && (
+                  <div className="source-diff-preview">
+                    {sourceDiff.preview.map((item) => (
+                      <article key={item.line}>
+                        <span>line {item.line}</span>
+                        <code>- {item.before || "<empty>"}</code>
+                        <code>+ {item.after || "<empty>"}</code>
+                      </article>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
             <textarea value={sourceDraft} onChange={(event) => setSourceDraft(event.target.value)} spellCheck={false} />
             {writeReport && (
               <p className="desktop-success">
@@ -2037,6 +2306,140 @@ function errorMessage(caught: unknown) {
 
 function isOpenDecisionStatus(status: string) {
   return ["open", "deferred", "resuming"].includes(status);
+}
+
+function isActiveSessionStatus(status: string) {
+  return ["running", "defer_message_sent"].includes(status);
+}
+
+function formatDuration(ms: number) {
+  if (ms < 1000) {
+    return `${ms}ms`;
+  }
+  if (ms < 60_000) {
+    return `${Math.round(ms / 100) / 10}s`;
+  }
+  return `${Math.round(ms / 60_000)}m`;
+}
+
+function formatBytes(bytes: number) {
+  if (bytes < 1024) {
+    return `${bytes}B`;
+  }
+  if (bytes < 1024 * 1024) {
+    return `${Math.round(bytes / 1024)}KB`;
+  }
+  return `${Math.round((bytes / (1024 * 1024)) * 10) / 10}MB`;
+}
+
+function detectOutputEvents(sourceId: string, lane: string, output: string): OutputEvent[] {
+  const lines = output
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const events: OutputEvent[] = [];
+
+  for (const [index, line] of lines.entries()) {
+    const lower = line.toLowerCase();
+    const id = `${sourceId}-${index}`;
+    if (events.length >= 8) {
+      break;
+    }
+    if (/[?？]|\b(confirm|approve|continue|proceed|choose|select|y\/n|yes\/no)\b|선택|확인|승인|진행|질문/.test(lower)) {
+      events.push({ id, type: "question", lane, label: "question candidate", detail: line.slice(0, 180) });
+      continue;
+    }
+    if (/\b(error|failed|failure|panic|exception)\b|오류|실패/.test(lower)) {
+      events.push({ id, type: "error", lane, label: "error signal", detail: line.slice(0, 180) });
+      continue;
+    }
+    if (/\b(warn|warning|deprecated|caution)\b|경고|주의/.test(lower)) {
+      events.push({ id, type: "warning", lane, label: "warning signal", detail: line.slice(0, 180) });
+      continue;
+    }
+    if (/\b(pass|passed|fail|failed|test|tests|build|lint|typecheck)\b/.test(lower)) {
+      events.push({ id, type: "test", lane, label: "validation signal", detail: line.slice(0, 180) });
+      continue;
+    }
+    if (/[./\w-]+\.(ts|tsx|js|jsx|mjs|json|md|rs|py|css|html)(:\d+)?/.test(line)) {
+      events.push({ id, type: "file", lane, label: "file reference", detail: line.slice(0, 180) });
+    }
+  }
+
+  if (events.length === 0 && lines.length > 0) {
+    events.push({
+      id: `${sourceId}-summary`,
+      type: "info",
+      lane,
+      label: "output captured",
+      detail: lines[0].slice(0, 180)
+    });
+  }
+
+  return events;
+}
+
+function groupDecisions(decisions: HumanDecisionItem[]): DecisionGroup[] {
+  const groups = new Map<string, DecisionGroup>();
+  for (const decision of decisions) {
+    const id = decision.sessionId || decision.source || "unlinked";
+    const group = groups.get(id) || {
+      id,
+      label: decision.sessionId ? `${decision.adapterId || "session"} / ${decision.sessionId}` : decision.source || "unlinked",
+      openCount: 0,
+      answeredCount: 0,
+      decisions: []
+    };
+    if (isOpenDecisionStatus(decision.status)) {
+      group.openCount += 1;
+    }
+    if (decision.status === "answered" || decision.answeredAt) {
+      group.answeredCount += 1;
+    }
+    group.decisions.push(decision);
+    groups.set(id, group);
+  }
+  return Array.from(groups.values()).sort((left, right) => right.openCount - left.openCount || left.label.localeCompare(right.label));
+}
+
+function buildSourceDiffSummary(original: string, draft: string): SourceDiffSummary {
+  const before = original.split(/\r?\n/);
+  const after = draft.split(/\r?\n/);
+  const max = Math.max(before.length, after.length);
+  const preview: SourceDiffSummary["preview"] = [];
+  let addedLines = 0;
+  let removedLines = 0;
+  let changedLines = 0;
+
+  for (let index = 0; index < max; index += 1) {
+    const beforeLine = before[index];
+    const afterLine = after[index];
+    if (beforeLine === afterLine) {
+      continue;
+    }
+    if (beforeLine === undefined) {
+      addedLines += 1;
+    } else if (afterLine === undefined) {
+      removedLines += 1;
+    } else {
+      changedLines += 1;
+    }
+    if (preview.length < 8) {
+      preview.push({
+        line: index + 1,
+        before: beforeLine ?? "",
+        after: afterLine ?? ""
+      });
+    }
+  }
+
+  return {
+    dirty: addedLines + removedLines + changedLines > 0,
+    addedLines,
+    removedLines,
+    changedLines,
+    preview
+  };
 }
 
 function Metric({ label, value, icon: Icon, tone }: { label: string; value: number; icon: LucideIcon; tone: string }) {

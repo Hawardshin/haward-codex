@@ -1,0 +1,32 @@
+{
+  "status": "ready_to_close",
+  "requires_rework": false,
+  "work_mode": "governance",
+  "request_summary": "Apply all applicable reference UI patterns to the installable multi-CLI desktop app.",
+  "result_summary": "Implemented command palette, capability center metadata, run board, process graph, terminal event rail, grouped decision inbox, decision replay, source diff review, and evidence/promotion surfaces in Workspace Monitor Desktop tab, with requirements/spec/readiness updates.",
+  "artifacts": [
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/",
+    "workspace-monitor/artifacts/screenshots/desktop-reference-ui-desktop.png",
+    "workspace-monitor/artifacts/screenshots/desktop-reference-ui-mobile.png"
+  ],
+  "verification": [
+    "npm --prefix workspace-monitor run check",
+    "npm --prefix workspace-monitor test",
+    "npm --prefix workspace-monitor run build",
+    "npm --prefix workspace-monitor run perf:budget",
+    "npm --prefix platform-desktop-app test",
+    "npm --prefix platform-desktop-app run check",
+    "Playwright desktop/mobile smoke"
+  ],
+  "gaps": [
+    "xterm.js, Monaco, and PTY remain deferred until installation audit."
+  ],
+  "next_actions": [
+    "Run dependency audit for xterm.js terminal lane.",
+    "Run dependency audit for Monaco source review.",
+    "Prototype PTY write mode after permission and lifecycle gates."
+  ]
+}

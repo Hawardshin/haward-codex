@@ -31,6 +31,7 @@
 | PDA-REQ-021 | source editing MVP는 workspace root 안의 상대 경로만 읽고 쓸 수 있어야 하며 `_private/`, `outputs/`, workspace 밖 경로, symlink escape를 차단하고 저장 전 backup을 남겨야 한다. | must | Tauri file commands, TypeScript check, resource/security review |
 | PDA-REQ-022 | Desktop MVP는 자동 설치 없이도 사용자가 각 CLI의 설치 힌트, 검증 명령, 공식 참조 링크를 보고, 작업 모드 프리셋으로 session prompt를 만들고, 보류된 human decision inbox 항목을 읽고 답변 상태로 저장할 수 있어야 한다. | must | Tauri decision commands, Desktop tab setup/mode/inbox UI, readiness/test |
 | PDA-REQ-023 | Desktop MVP는 active CLI session에서 생성되어 session metadata가 있는 decision에 대해 사용자가 명시적으로 답변과 재개를 선택하면, decision answer를 저장한 뒤 같은 답변을 해당 session stdin으로 보내고 session report를 갱신해야 한다. | must | Tauri answer-and-resume command, Desktop tab Answer & Resume UI, readiness/test |
+| PDA-REQ-024 | Desktop MVP는 레퍼런스 UI 적용 결과로 command palette, capability center, run board, lane timeline, process graph, grouped decision inbox, decision replay, source diff review, evidence/promotion surface를 같은 supervisor 화면에서 보여야 한다. | must | Workspace Monitor Desktop tab, readiness/test, build |
 
 ## 현재 상태
 

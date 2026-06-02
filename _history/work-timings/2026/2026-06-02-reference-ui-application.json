@@ -1,0 +1,48 @@
+{
+  "task_id": "2026-06-02-reference-ui-application",
+  "title": "Apply reference UI patterns to installable desktop app",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "confirm official reference constraints",
+      "status": "completed",
+      "duration_seconds": 240,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official sources were needed to keep the implementation tied to reference patterns."
+    },
+    {
+      "phase_id": "local_context",
+      "label": "inspect Desktop UI, Tauri backend, specs, and tests",
+      "status": "completed",
+      "duration_seconds": 300,
+      "measurement": "estimated",
+      "bottleneck_notes": "Existing Desktop tab already had pipe sessions, decision inbox, and scoped source editing."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "apply reference UI surfaces",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "Most work was front-end state derivation and responsive layout."
+    },
+    {
+      "phase_id": "verification",
+      "label": "run checks, build, perf budget, readiness, and browser smoke",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "The visual smoke required a temporary static server and Playwright."
+    },
+    {
+      "phase_id": "documentation",
+      "label": "requirements, specs, history, and evaluation records",
+      "status": "completed",
+      "duration_seconds": 360,
+      "measurement": "estimated",
+      "bottleneck_notes": "Governance mode required durable traceability records."
+    }
+  ]
+}

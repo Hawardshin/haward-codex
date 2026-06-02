@@ -1,0 +1,34 @@
+{
+  "task_id": "2026-06-02-reference-ui-application",
+  "selected_work_mode": "governance",
+  "selection_reason": "The user asked to apply all applicable reference patterns to the installable desktop app, requiring requirement/spec/readiness/UI changes.",
+  "alternatives_considered": [
+    {
+      "work_mode": "quick",
+      "decision": "rejected",
+      "reason": "The task changes durable implementation and product requirements."
+    },
+    {
+      "work_mode": "research",
+      "decision": "rejected",
+      "reason": "The prior turn already produced research; this slice requires implementation."
+    },
+    {
+      "work_mode": "standard",
+      "decision": "rejected",
+      "reason": "Project requirements and spec traceability are changed, so governance records are required."
+    }
+  ],
+  "required_targets": [
+    "web_search_record_targets",
+    "requirement_targets",
+    "spec_targets",
+    "implementation_targets",
+    "validation_targets",
+    "omission_check_targets",
+    "resource_check_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "evaluation_targets"
+  ]
+}

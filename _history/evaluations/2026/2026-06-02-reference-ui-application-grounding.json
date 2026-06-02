@@ -1,0 +1,115 @@
+{
+  "task": "Ground factual claims for reference UI application close-out.",
+  "output_summary": "The Desktop tab now applies selected reference UI patterns without adding new dependencies.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "monitor-ui",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary UI implementation for command palette, run board, decision grouping, source diff, and evidence surfaces."
+    },
+    {
+      "evidence_id": "monitor-css",
+      "source": "workspace-monitor/app/globals.css",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary responsive layout implementation for new Desktop surfaces."
+    },
+    {
+      "evidence_id": "desktop-test",
+      "source": "npm --prefix platform-desktop-app test; npm --prefix platform-desktop-app run check",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local readiness and Node test evidence for UI contract strings."
+    },
+    {
+      "evidence_id": "monitor-verification",
+      "source": "npm --prefix workspace-monitor run check; npm --prefix workspace-monitor test; npm --prefix workspace-monitor run build; npm --prefix workspace-monitor run perf:budget",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local TypeScript, unit, build, and performance-budget verification."
+    },
+    {
+      "evidence_id": "visual-smoke",
+      "source": "Playwright desktop/mobile smoke and screenshots under workspace-monitor/artifacts/screenshots/",
+      "source_type": "tool_result",
+      "checked_on": "2026-06-02",
+      "reliability": "Headless Chromium smoke confirmed key sections and no horizontal overflow."
+    },
+    {
+      "evidence_id": "official-sources",
+      "source": "_history/web-searches/2026/2026-06-02-reference-ui-application.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Search record listing official product documentation used as reference basis."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The Desktop tab now includes Command Palette, Capability Center, Run Board, Source Review, and Evidence / Promotion surfaces.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "monitor-css",
+        "desktop-test"
+      ],
+      "verification_steps": [
+        "Read MonitorShell.tsx and globals.css.",
+        "Ran platform-desktop-app tests/readiness."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace Monitor type check, tests, build, and performance budget passed after the UI changes.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-verification"
+      ],
+      "verification_steps": [
+        "Ran the listed npm commands."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The desktop and mobile visual smoke showed the key sections and no horizontal overflow.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "visual-smoke"
+      ],
+      "verification_steps": [
+        "Ran Playwright at 1440x1000 and 390x844 viewports.",
+        "Checked scrollWidth equals viewport width."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "No xterm.js, Monaco, or PTY dependency was installed in this slice.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "desktop-test"
+      ],
+      "verification_steps": [
+        "Changed only existing source/docs/tests and did not run package installation commands."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "Actual Tauri WebView smoke remains gated by Rust/Tauri local runtime setup."
+  ],
+  "limitation_notes": [
+    "The terminal event rail is regex-based event extraction over bounded output, not full PTY/xterm.js rendering.",
+    "Source diff review is a lightweight line-based preview before Monaco adoption."
+  ]
+}

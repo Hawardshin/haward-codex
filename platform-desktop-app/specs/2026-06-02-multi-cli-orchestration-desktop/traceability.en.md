@@ -29,8 +29,10 @@
 - `PDA-REQ-021`: workspace-scoped source file read/write and backup.
 - `PDA-REQ-022`: CLI setup guide, work-mode presets, human decision inbox list/answer.
 - `PDA-REQ-023`: answer-and-resume for decisions linked to active CLI sessions.
+- `PDA-REQ-024`: applied reference-app UI surfaces.
 - `PDA-UX-009` - `PDA-UX-012`: UI flow and code editing surface.
 - `PDA-UX-013`: Desktop tab shows runtime, CLI, terminal result, decision prompt, and source-editing readiness.
 - `PDA-UX-014`: Desktop tab shows CLI session console, decision inbox item count, and scoped source editor.
 - `PDA-UX-015`: Desktop tab shows setup guide, mode presets, and decision answer UI.
 - `PDA-UX-016`: Desktop tab shows linked session status and `Answer & Resume` action.
+- `PDA-UX-017`: Desktop tab shows command palette, capability cards, run board, process graph, terminal event rail, grouped decisions, replay, diff review, and evidence/promotion surface.
