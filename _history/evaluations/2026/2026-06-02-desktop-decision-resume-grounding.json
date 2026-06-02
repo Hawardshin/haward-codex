@@ -1,0 +1,94 @@
+{
+  "task": "Ground factual claims for desktop decision resume close-out.",
+  "output_summary": "The desktop runtime now supports an explicit answer-and-resume action for human decisions linked to active CLI sessions.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "tauri-lib",
+      "source": "platform-desktop-app/src-tauri/src/lib.rs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary implementation for answer-and-resume command and decision answer helper."
+    },
+    {
+      "evidence_id": "monitor-ui",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Primary UI implementation for linked session state and Answer & Resume."
+    },
+    {
+      "evidence_id": "readiness",
+      "source": "npm --prefix platform-desktop-app test; npm --prefix platform-desktop-app run check",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local tests and readiness checks for command/UI contract."
+    },
+    {
+      "evidence_id": "monitor-build",
+      "source": "npm --prefix workspace-monitor run check; npm --prefix workspace-monitor test; npm --prefix workspace-monitor run build",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "Local monitor verification commands."
+    },
+    {
+      "evidence_id": "tauri-state-docs",
+      "source": "https://docs.rs/tauri/latest/tauri/struct.State.html",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Rust docs for Tauri State used by the command store pattern."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The Tauri backend now exposes answer_and_resume_human_decision.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "tauri-lib",
+        "readiness"
+      ],
+      "verification_steps": [
+        "Read lib.rs command definitions and invoke handler.",
+        "Ran platform-desktop-app tests/readiness."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The Desktop UI now distinguishes Answer from Answer & Resume and shows linked session state.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "monitor-build"
+      ],
+      "verification_steps": [
+        "Read MonitorShell.tsx and globals.css.",
+        "Ran Workspace Monitor check/test/build."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Direct Tauri compilation was not verified because Rust/Cargo is unavailable in this environment.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "readiness"
+      ],
+      "verification_steps": [
+        "Ran platform-desktop-app readiness check and retained the Rust toolchain warning."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    }
+  ],
+  "uncertainty_notes": [
+    "CLI-specific approval protocols may require adapter-specific formatting in later slices."
+  ],
+  "limitation_notes": [
+    "This is not a PTY implementation and does not add shell plugin permissions.",
+    "The command sends free-form answer text to stdin only when a linked session is active."
+  ]
+}

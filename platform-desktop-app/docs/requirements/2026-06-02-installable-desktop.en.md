@@ -30,6 +30,7 @@ These are the first requirements for turning the platform into installable softw
 | PDA-REQ-020 | Before dependency installation, the CLI supervisor shall provide pipe-based session start, stdout/stderr polling, bounded stdin write, defer message, and cancel only for allowlisted adapters without adding the shell plugin, and shall store detected questions in the human decision inbox when deferring. | must | Tauri commands, Desktop tab, human decision inbox, resource/CLI pipeline check |
 | PDA-REQ-021 | The source editing MVP shall read and write only relative paths inside the workspace root, block `_private/`, `outputs/`, paths outside the workspace, and symlink escapes, and create a backup before saving. | must | Tauri file commands, TypeScript check, resource/security review |
 | PDA-REQ-022 | The Desktop MVP shall let users see setup hints, verification commands, and official reference links for each CLI without automatic installation, create session prompts from work-mode presets, and read plus answer deferred human decision inbox items. | must | Tauri decision commands, Desktop tab setup/mode/inbox UI, readiness/test |
+| PDA-REQ-023 | For a decision created by an active CLI session and carrying session metadata, the Desktop MVP shall let the user explicitly answer and resume, saving the decision answer and then sending the same answer to the linked session stdin while refreshing the session report. | must | Tauri answer-and-resume command, Desktop tab Answer & Resume UI, readiness/test |
 
 ## Current Status
 

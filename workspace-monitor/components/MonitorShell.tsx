@@ -226,6 +226,8 @@ type HumanDecisionItem = {
   question: string;
   impact: string;
   resumeAction: string;
+  sessionId?: string | null;
+  adapterId?: string | null;
   answerType?: string | null;
   answerText?: string | null;
   answeredAt?: string | null;
@@ -240,6 +242,13 @@ type HumanDecisionInboxReport = {
   answeredCount: number;
   decisions: HumanDecisionItem[];
   updatedId?: string | null;
+};
+
+type DecisionResumeReport = {
+  inbox: HumanDecisionInboxReport;
+  session?: CliSessionReport | null;
+  resumeStatus: string;
+  resumeDetail: string;
 };
 
 type AdapterSetupGuide = {
@@ -1227,6 +1236,7 @@ function DesktopRuntimePanel({
   const [decisionAnswerType, setDecisionAnswerType] = useState("instruction");
   const [decisionAnswer, setDecisionAnswer] = useState("");
   const [decisionBusy, setDecisionBusy] = useState(false);
+  const [decisionResumeNotice, setDecisionResumeNotice] = useState("");
   const [selectedSourcePath, setSelectedSourcePath] = useState(sourceFiles[0]?.path || "");
   const [sourceFile, setSourceFile] = useState<WorkspaceTextFile | null>(null);
   const [sourceDraft, setSourceDraft] = useState("");
@@ -1244,6 +1254,14 @@ function DesktopRuntimePanel({
   ];
   const selectedSession = sessions[0] || null;
   const selectedDecision = (inboxReport?.decisions || []).find((decision) => decision.id === selectedDecisionId) || openInboxDecisions[0] || null;
+  const selectedDecisionSession = selectedDecision?.sessionId
+    ? sessions.find((session) => session.sessionId === selectedDecision.sessionId) || null
+    : null;
+  const canResumeSelectedDecision =
+    Boolean(selectedDecisionSession) &&
+    selectedDecisionSession !== null &&
+    ["running", "defer_message_sent"].includes(selectedDecisionSession.status) &&
+    Boolean(selectedDecision?.sessionId);
   const selectedMode = sessionModePresets.find((mode) => mode.id === selectedSessionModeId) || sessionModePresets[0];
 
   const refreshAdapters = async () => {
@@ -1268,6 +1286,7 @@ function DesktopRuntimePanel({
       setAdapters(nextAdapters);
       setSessions(nextSessions);
       setInboxReport(nextInbox);
+      setDecisionResumeNotice("");
       if (!selectedDecisionId && nextInbox.decisions[0]) {
         setSelectedDecisionId(nextInbox.decisions[0].id);
       }
@@ -1280,6 +1299,7 @@ function DesktopRuntimePanel({
       setAdapters(fallbackDesktopAdapters);
       setSessions([]);
       setInboxReport(null);
+      setDecisionResumeNotice("");
       setError(errorMessage(caught));
     }
   };
@@ -1305,6 +1325,7 @@ function DesktopRuntimePanel({
       setAdapters(nextAdapters);
       setSessions(nextSessions);
       setInboxReport(nextInbox);
+      setDecisionResumeNotice("");
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -1354,6 +1375,7 @@ function DesktopRuntimePanel({
     try {
       const report = await tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox");
       setInboxReport(report);
+      setDecisionResumeNotice("");
       if (!selectedDecisionId && report.decisions[0]) {
         setSelectedDecisionId(report.decisions[0].id);
       }
@@ -1362,7 +1384,7 @@ function DesktopRuntimePanel({
     }
   };
 
-  const answerDecision = async () => {
+  const answerDecision = async (resumeSession = false) => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke || !selectedDecision) {
       return;
@@ -1374,16 +1396,32 @@ function DesktopRuntimePanel({
 
     setDecisionBusy(true);
     setError("");
+    setDecisionResumeNotice("");
     try {
-      const report = await tauriInvoke<HumanDecisionInboxReport>("answer_human_decision", {
-        decisionId: selectedDecision.id,
-        answerType: decisionAnswerType,
-        answerText: decisionAnswer
-      });
-      setInboxReport(report);
+      const report = resumeSession
+        ? await tauriInvoke<DecisionResumeReport>("answer_and_resume_human_decision", {
+            decisionId: selectedDecision.id,
+            answerType: decisionAnswerType,
+            answerText: decisionAnswer
+          })
+        : await tauriInvoke<HumanDecisionInboxReport>("answer_human_decision", {
+            decisionId: selectedDecision.id,
+            answerType: decisionAnswerType,
+            answerText: decisionAnswer
+          });
+      const nextInbox = resumeSession ? (report as DecisionResumeReport).inbox : (report as HumanDecisionInboxReport);
+      const resumedSession = resumeSession ? (report as DecisionResumeReport).session : null;
+      if (resumedSession) {
+        upsertSession(resumedSession);
+      }
+      if (resumeSession) {
+        const resumeReport = report as DecisionResumeReport;
+        setDecisionResumeNotice(`${resumeReport.resumeStatus}: ${resumeReport.resumeDetail}`);
+      }
+      setInboxReport(nextInbox);
       setDecisionAnswer("");
-      const nextOpen = report.decisions.find((decision) => isOpenDecisionStatus(decision.status));
-      setSelectedDecisionId(nextOpen?.id || report.updatedId || report.decisions[0]?.id || "");
+      const nextOpen = nextInbox.decisions.find((decision) => isOpenDecisionStatus(decision.status));
+      setSelectedDecisionId(nextOpen?.id || nextInbox.updatedId || nextInbox.decisions[0]?.id || "");
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -1843,7 +1881,7 @@ function DesktopRuntimePanel({
                 >
                   <span>{decision.status}</span>
                   <strong>{decision.question}</strong>
-                  <small>{decision.source}</small>
+                  <small>{decision.sessionId ? `${decision.source} / ${decision.sessionId}` : decision.source}</small>
                 </button>
               ))}
             </div>
@@ -1860,6 +1898,14 @@ function DesktopRuntimePanel({
                   </header>
                   <p>{selectedDecision.impact || "No impact note"}</p>
                   <small>{selectedDecision.resumeAction || "No resume action recorded"}</small>
+                  {(selectedDecision.sessionId || selectedDecision.adapterId) && (
+                    <div className="decision-resume-strip">
+                      <span>{selectedDecision.adapterId || "linked session"}</span>
+                      <strong>{selectedDecision.sessionId || "no session id"}</strong>
+                      <small>{selectedDecisionSession?.status || "not loaded"}</small>
+                    </div>
+                  )}
+                  {decisionResumeNotice && <p className="decision-resume-notice">{decisionResumeNotice}</p>}
                   {selectedDecision.answerText && (
                     <div className="decision-existing-answer">
                       <span>{selectedDecision.answerType || "answer"}</span>
@@ -1880,11 +1926,20 @@ function DesktopRuntimePanel({
                     />
                     <button
                       type="button"
-                      onClick={answerDecision}
+                      onClick={() => answerDecision(false)}
                       disabled={!invoke || decisionBusy || !decisionAnswer.trim()}
                     >
                       <CheckCircle2 size={15} aria-hidden="true" />
                       <span>{decisionBusy ? "Saving" : "Answer"}</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => answerDecision(true)}
+                      disabled={!invoke || decisionBusy || !decisionAnswer.trim() || !canResumeSelectedDecision}
+                      title={canResumeSelectedDecision ? "Send this answer to the linked CLI session" : "Linked CLI session is not active"}
+                    >
+                      <ArrowRight size={15} aria-hidden="true" />
+                      <span>{decisionBusy ? "Resuming" : "Answer & Resume"}</span>
                     </button>
                   </div>
                 </>

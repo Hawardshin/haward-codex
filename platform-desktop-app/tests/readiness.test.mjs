@@ -91,7 +91,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "read_workspace_text_file",
     "write_workspace_text_file",
     "list_human_decision_inbox",
-    "answer_human_decision"
+    "answer_human_decision",
+    "answer_and_resume_human_decision"
   ]) {
     assert.match(lib, new RegExp(commandName));
     assert.match(monitorShell, new RegExp(commandName));
@@ -101,5 +102,6 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(monitorShell, /decisionInboxItems/);
   assert.match(monitorShell, /adapterSetupGuides/);
   assert.match(monitorShell, /sessionModePresets/);
+  assert.match(monitorShell, /Answer & Resume/);
   assert.ok(viewModes.modes.every((mode) => mode.allowed_sections.includes("desktop")));
 });

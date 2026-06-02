@@ -725,6 +725,8 @@ h3 {
 .decision-summary-strip span,
 .decision-list button span,
 .decision-answer-box header span,
+.decision-resume-strip span,
+.decision-resume-strip small,
 .decision-existing-answer span {
   color: var(--muted);
   font-size: 12px;
@@ -1179,6 +1181,34 @@ h3 {
 
 .decision-existing-answer p {
   margin-bottom: 0;
+}
+
+.decision-resume-strip {
+  display: grid;
+  grid-template-columns: minmax(90px, 0.7fr) minmax(160px, 1.4fr) minmax(80px, 0.6fr);
+  gap: 8px;
+  align-items: center;
+  border: 1px solid #bdddf5;
+  background: #f0f9ff;
+  border-radius: 7px;
+  margin-top: 10px;
+  padding: 9px;
+}
+
+.decision-resume-strip strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+
+.decision-resume-notice {
+  margin: 10px 0 0;
+  border: 1px solid #bfe2cb;
+  background: #f0fdf4;
+  border-radius: 7px;
+  padding: 9px;
+  color: #166534;
+  font-size: 13px;
 }
 
 .decision-answer-controls {
@@ -2184,6 +2214,7 @@ h3 {
   .adapter-grid,
   .terminal-report-list,
   .desktop-health-strip,
+  .decision-resume-strip,
   .decision-answer-controls,
   .session-input-row,
   .source-editor-controls {
@@ -2230,6 +2261,7 @@ h3 {
   .desktop-health-strip,
   .decision-summary-strip,
   .decision-inbox-layout,
+  .decision-resume-strip,
   .decision-answer-controls,
   .session-launcher,
   .session-grid,

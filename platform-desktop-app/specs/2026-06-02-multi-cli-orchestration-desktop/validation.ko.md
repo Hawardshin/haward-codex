@@ -78,7 +78,9 @@ cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipe
 - `platform-desktop-app` Node tests는 새 command 이름을 확인해야 한다.
 - readiness check는 session/editor command 이름, human decision inbox persistence, Desktop tab inbox item count 표시를 확인해야 한다.
 - readiness check는 setup guide, 작업 모드 프리셋, decision inbox 조회/답변 command와 UI 문자열을 확인해야 한다.
+- readiness check는 `answer_and_resume_human_decision` command와 `Answer & Resume` UI 문자열을 확인해야 한다.
 - Rust compile과 Tauri dev/build는 Rust toolchain 설치 전에는 검증하지 않는다.
 - source editor는 `_private/`, `outputs/`, workspace 밖 경로, symlink escape를 차단하고 저장 전 backup을 만드는 계약을 가져야 한다.
 - defer command는 감지된 질문을 `_ops/coordination/human-decision-inbox.json`에 중복 없이 append하는 계약을 가져야 한다.
 - decision answer command는 선택된 decision의 status를 `answered`로 바꾸고 answer와 decision_history를 저장하는 계약을 가져야 한다.
+- answer-and-resume command는 session metadata가 있는 decision에서 answer 저장 후 같은 답변을 linked active CLI session stdin으로 보내고 session report를 갱신하는 계약을 가져야 한다.

@@ -112,6 +112,7 @@ Implemented desktop bridge commands:
 - `write_workspace_text_file`
 - `list_human_decision_inbox`
 - `answer_human_decision`
+- `answer_and_resume_human_decision`
 
 These commands are bounded pipe/session, human decision inbox append, and scoped file-editing MVP commands. Interactive PTY sessions, source-affecting autonomous execution, xterm.js, Monaco Editor, and packaged sidecars still require a dependency and permission audit before implementation.
 

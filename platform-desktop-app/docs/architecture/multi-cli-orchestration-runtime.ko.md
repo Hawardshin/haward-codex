@@ -128,6 +128,16 @@ Tauri desktop shell
 - session launcher는 `User Task`, `Platform Improvement`, `Knowledge Accumulation`, `Review & Verify` 모드 프리셋을 제공하고 prompt를 채운다.
 - decision inbox panel은 open/answered/total count, decision 목록, answer type/text 입력, 저장된 답변 상태를 보여준다.
 
+## 구현 상태: Decision Resume MVP 4
+
+2026-06-02 후속 개선은 저장된 decision answer를 linked active CLI session으로 재주입하는 명시적 resume path를 추가한다.
+
+- Tauri backend는 `answer_and_resume_human_decision`을 제공한다.
+- command는 먼저 decision answer와 `decision_history`를 저장하고, decision metadata의 `session_id`가 현재 active session에 연결되어 있을 때만 같은 answer text를 session stdin으로 보낸다.
+- session이 없거나 이미 끝났거나 stdin이 없으면 answer 저장은 유지하고 resume status/detail로 이유를 돌려준다.
+- Workspace Monitor `Desktop` 탭은 linked session id/status를 표시하고, 일반 `Answer`와 `Answer & Resume` action을 구분한다.
+- resume이 성공하면 session report를 갱신하고 `defer_message_sent` 표시를 해제해 lane이 다시 running 상태로 보이게 한다.
+
 ## 비범위
 
 - 이번 MVP는 PTY 기반 terminal implementation이 아니다.

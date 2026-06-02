@@ -1,0 +1,113 @@
+{
+  "task": "Continue implementing the installable multi-CLI desktop app by adding decision answer-and-resume.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Check current Tauri state/stdin and HITL resume references before implementation.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-desktop-decision-resume.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "answer-and-resume-command",
+      "description": "Add a Tauri command that saves a decision answer and explicitly resumes a linked active CLI session.",
+      "source": "PDA-REQ-023",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "answer-only-preserved",
+      "description": "Keep answer-only behavior for decisions without active linked sessions.",
+      "source": "PDA-REQ-023",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "desktop-ui-action",
+      "description": "Expose linked session state and distinguish Answer from Answer & Resume in the Desktop decision inbox.",
+      "source": "PDA-UX-016",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "no-automatic-resume",
+      "description": "Do not resume a CLI session automatically just because an answer was saved.",
+      "source": "risk review",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "_requirements/reviews/2026-06-02-desktop-decision-resume.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/src-tauri/src/lib.rs",
+      "purpose": "Tauri answer-and-resume command implementation.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Desktop UI action and linked session state.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
+      "purpose": "Updated decision resume contract.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-check-build",
+      "description": "Type check, test, and build the monitor with the new UI.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check",
+        "npm --prefix workspace-monitor test",
+        "npm --prefix workspace-monitor run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-desktop-readiness",
+      "description": "Run desktop tests/readiness and verify the new command/UI strings.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app test",
+        "npm --prefix platform-desktop-app run check"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Direct Tauri compile is not available without Rust/Cargo.",
+    "Actual CLI-specific approval protocols are not normalized yet."
+  ],
+  "notes": [
+    "The new resume action is explicit and scoped to currently active linked sessions."
+  ]
+}

@@ -128,6 +128,16 @@ The 2026-06-02 additional improvement makes setup, mode selection, and deferred 
 - The session launcher provides `User Task`, `Platform Improvement`, `Knowledge Accumulation`, and `Review & Verify` mode presets that fill the prompt.
 - The decision inbox panel shows open/answered/total counts, decision list, answer type/text controls, and saved answer state.
 
+## Implementation Status: Decision Resume MVP 4
+
+The next 2026-06-02 improvement adds an explicit resume path that reinjects a saved decision answer into the linked active CLI session.
+
+- The Tauri backend exposes `answer_and_resume_human_decision`.
+- The command first saves the decision answer and `decision_history`; only when decision metadata points to a currently active session does it send the same answer text to session stdin.
+- If the session is missing, finished, or lacks stdin, the saved answer remains and the command returns resume status/detail explaining why resume did not happen.
+- The Workspace Monitor `Desktop` tab shows linked session id/status and distinguishes plain `Answer` from `Answer & Resume`.
+- On successful resume, the session report is refreshed and the `defer_message_sent` presentation is cleared so the lane appears running again.
+
 ## Non-Scope
 
 - This MVP does not implement a PTY-based terminal.

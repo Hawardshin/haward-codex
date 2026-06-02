@@ -78,7 +78,9 @@ Expected results:
 - `platform-desktop-app` Node tests should verify the new command names.
 - The readiness check should verify session/editor command names, human decision inbox persistence, and Desktop tab inbox item count display.
 - The readiness check should verify setup guides, work-mode presets, decision inbox list/answer commands, and UI strings.
+- The readiness check should verify the `answer_and_resume_human_decision` command and `Answer & Resume` UI string.
 - Rust compile and Tauri dev/build are not verified until the Rust toolchain is installed.
 - The source editor contract must block `_private/`, `outputs/`, paths outside the workspace, and symlink escapes, and create a backup before saving.
 - The defer command contract must append detected questions to `_ops/coordination/human-decision-inbox.json` without duplicating the same session prompt.
 - The decision answer command contract must set the selected decision status to `answered` and persist answer plus decision_history records.
+- The answer-and-resume command contract must save the answer, send the same answer to the linked active CLI session stdin, and refresh the session report when the decision carries session metadata.

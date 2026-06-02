@@ -1,0 +1,83 @@
+{
+  "task": "Add explicit decision answer-and-resume for linked active CLI sessions.",
+  "work_mode": "governance",
+  "runtime_context": [
+    "tauri",
+    "rust",
+    "node",
+    "nextjs",
+    "cli-session",
+    "stdin",
+    "json-file"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "stdin-resume-write",
+      "category": "stream",
+      "description": "Answer-and-resume writes user-provided text to a live CLI session stdin.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The command only writes after saving the decision answer, only for a linked loaded session, rejects oversized answers through the existing MAX_DECISION_ANSWER_BYTES limit, and returns status/detail instead of auto-retrying.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "session-lifecycle",
+      "category": "process",
+      "description": "The linked session may already be finished or unavailable.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The command checks loaded session presence, finished state, and stdin availability before writing; answer persistence remains valid even when resume cannot proceed.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "decision-json-write",
+      "category": "file_handle",
+      "description": "Decision answer persistence writes to the shared human decision inbox JSON.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The existing workspace-scoped human decision inbox path and pretty JSON write helper are reused.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "answer-then-resume",
+      "resource": "decision inbox and CLI session stdin",
+      "create_path": "answer_and_resume_human_decision saves the decision answer, then writes to linked active session stdin if available.",
+      "cleanup_path": "No persistent file handle is retained; no new child process is created; the existing session lifecycle remains managed by poll/cancel/timeout.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "bounded-answer-input",
+      "metric": "decision answer max bytes",
+      "tool": "source inspection plus readiness check",
+      "threshold": "Answer text is bounded by MAX_DECISION_ANSWER_BYTES and readiness checks include answer_and_resume_human_decision.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "npm --prefix platform-desktop-app run check"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "This slice does not create a new process, timer, browser context, cache, or worker."
+  ]
+}

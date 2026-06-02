@@ -147,6 +147,8 @@ struct HumanDecisionItem {
     question: String,
     impact: String,
     resume_action: String,
+    session_id: Option<String>,
+    adapter_id: Option<String>,
     answer_type: Option<String>,
     answer_text: Option<String>,
     answered_at: Option<String>,
@@ -163,6 +165,20 @@ struct HumanDecisionInboxReport {
     answered_count: usize,
     decisions: Vec<HumanDecisionItem>,
     updated_id: Option<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DecisionResumeReport {
+    inbox: HumanDecisionInboxReport,
+    session: Option<CliSessionReport>,
+    resume_status: String,
+    resume_detail: String,
+}
+
+struct DecisionAnswerUpdate {
+    report: HumanDecisionInboxReport,
+    session_id: Option<String>,
 }
 
 struct ProcessOutput {
@@ -507,64 +523,90 @@ fn answer_human_decision(
     answer_type: String,
     answer_text: String,
 ) -> Result<HumanDecisionInboxReport, String> {
-    let decision_id = decision_id.trim();
-    if decision_id.is_empty() {
-        return Err("Decision id is required.".to_string());
-    }
-    if answer_text.len() > MAX_DECISION_ANSWER_BYTES {
-        return Err(format!(
-            "Decision answer is too large. Max input is {MAX_DECISION_ANSWER_BYTES} bytes."
-        ));
-    }
+    update_human_decision_answer(
+        &decision_id,
+        &answer_type,
+        &answer_text,
+        "User answered the decision from the desktop decision inbox.",
+    )
+    .map(|update| update.report)
+}
 
-    let answer_type = normalize_decision_answer_type(&answer_type);
-    let timestamp = current_unix_millis_label();
-    let (inbox_path, mut inbox) = read_human_decision_inbox_value()?;
-    let from_status = {
-        let decisions = inbox
-            .get_mut("decisions")
-            .and_then(Value::as_array_mut)
-            .ok_or_else(|| "Human decision inbox is missing decisions array.".to_string())?;
-        let decision = decisions
-            .iter_mut()
-            .find(|item| item.get("id").and_then(Value::as_str) == Some(decision_id))
-            .ok_or_else(|| format!("Unknown human decision id: {decision_id}"))?;
-        let from_status = decision
-            .get("status")
-            .and_then(Value::as_str)
-            .unwrap_or("open")
-            .to_string();
-        let decision_object = decision
-            .as_object_mut()
-            .ok_or_else(|| "Human decision record must be a JSON object.".to_string())?;
-        decision_object.insert("status".to_string(), Value::String("answered".to_string()));
-        decision_object.insert("answered_at".to_string(), Value::String(timestamp.clone()));
-        decision_object.insert(
-            "answer".to_string(),
-            json!({
-                "type": answer_type,
-                "text": answer_text,
-                "answered_at": timestamp
-            }),
-        );
-        from_status
+#[tauri::command]
+fn answer_and_resume_human_decision(
+    store: State<'_, SessionStore>,
+    decision_id: String,
+    answer_type: String,
+    answer_text: String,
+) -> Result<DecisionResumeReport, String> {
+    let update = update_human_decision_answer(
+        &decision_id,
+        &answer_type,
+        &answer_text,
+        "User answered the decision from the desktop decision inbox and requested CLI session resume.",
+    )?;
+    let Some(session_id) = update.session_id.clone() else {
+        return Ok(DecisionResumeReport {
+            inbox: update.report,
+            session: None,
+            resume_status: "no_session_link".to_string(),
+            resume_detail: "The decision was answered, but it is not linked to an active CLI session.".to_string(),
+        });
     };
 
-    let history = inbox
-        .get_mut("decision_history")
-        .and_then(Value::as_array_mut)
-        .ok_or_else(|| "Human decision inbox is missing decision_history array.".to_string())?;
-    history.push(json!({
-        "timestamp": current_unix_millis_label(),
-        "actor": "platform-desktop-app",
-        "decision_id": decision_id,
-        "from_status": from_status,
-        "to_status": "answered",
-        "reason": "User answered the decision from the desktop decision inbox."
-    }));
+    let mut sessions = store
+        .sessions
+        .lock()
+        .map_err(|_| "Failed to lock CLI session store.".to_string())?;
+    let Some(session) = sessions.get_mut(&session_id) else {
+        return Ok(DecisionResumeReport {
+            inbox: update.report,
+            session: None,
+            resume_status: "session_not_found".to_string(),
+            resume_detail: format!("The decision was answered, but CLI session {session_id} is not currently loaded."),
+        });
+    };
+    if session.finished {
+        let report = poll_session_locked(&session_id, session);
+        return Ok(DecisionResumeReport {
+            inbox: update.report,
+            session: Some(report),
+            resume_status: "session_finished".to_string(),
+            resume_detail: format!("The decision was answered, but CLI session {session_id} has already finished."),
+        });
+    }
+    let Some(stdin) = session.stdin.as_mut() else {
+        let report = poll_session_locked(&session_id, session);
+        return Ok(DecisionResumeReport {
+            inbox: update.report,
+            session: Some(report),
+            resume_status: "stdin_unavailable".to_string(),
+            resume_detail: format!("The decision was answered, but CLI session {session_id} cannot accept stdin."),
+        });
+    };
 
-    write_human_decision_inbox_value(&inbox_path, &inbox)?;
-    human_decision_report(&inbox, Some(decision_id.to_string()))
+    if let Err(error) = stdin
+        .write_all(answer_text.as_bytes())
+        .and_then(|_| stdin.write_all(b"\n"))
+        .and_then(|_| stdin.flush())
+    {
+        let report = poll_session_locked(&session_id, session);
+        return Ok(DecisionResumeReport {
+            inbox: update.report,
+            session: Some(report),
+            resume_status: "resume_failed".to_string(),
+            resume_detail: format!("The decision was answered, but writing to CLI session {session_id} failed: {error}"),
+        });
+    }
+
+    session.defer_message_sent = false;
+    let report = poll_session_locked(&session_id, session);
+    Ok(DecisionResumeReport {
+        inbox: update.report,
+        session: Some(report),
+        resume_status: "resumed".to_string(),
+        resume_detail: format!("Decision answer was sent to CLI session {session_id}."),
+    })
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -585,7 +627,8 @@ pub fn run() {
             read_workspace_text_file,
             write_workspace_text_file,
             list_human_decision_inbox,
-            answer_human_decision
+            answer_human_decision,
+            answer_and_resume_human_decision
         ])
         .run(tauri::generate_context!())
         .expect("error while running Agent Workspace Platform desktop shell");
@@ -1092,6 +1135,76 @@ fn write_human_decision_inbox_value(inbox_path: &Path, inbox: &Value) -> Result<
         .map_err(|error| format!("Failed to write human decision inbox: {error}"))
 }
 
+fn update_human_decision_answer(
+    decision_id: &str,
+    answer_type: &str,
+    answer_text: &str,
+    history_reason: &str,
+) -> Result<DecisionAnswerUpdate, String> {
+    let decision_id = decision_id.trim();
+    if decision_id.is_empty() {
+        return Err("Decision id is required.".to_string());
+    }
+    if answer_text.len() > MAX_DECISION_ANSWER_BYTES {
+        return Err(format!(
+            "Decision answer is too large. Max input is {MAX_DECISION_ANSWER_BYTES} bytes."
+        ));
+    }
+
+    let answer_type = normalize_decision_answer_type(answer_type);
+    let timestamp = current_unix_millis_label();
+    let (inbox_path, mut inbox) = read_human_decision_inbox_value()?;
+    let (from_status, session_id) = {
+        let decisions = inbox
+            .get_mut("decisions")
+            .and_then(Value::as_array_mut)
+            .ok_or_else(|| "Human decision inbox is missing decisions array.".to_string())?;
+        let decision = decisions
+            .iter_mut()
+            .find(|item| item.get("id").and_then(Value::as_str) == Some(decision_id))
+            .ok_or_else(|| format!("Unknown human decision id: {decision_id}"))?;
+        let from_status = decision
+            .get("status")
+            .and_then(Value::as_str)
+            .unwrap_or("open")
+            .to_string();
+        let session_id = decision_metadata_string(decision, "session_id");
+        let decision_object = decision
+            .as_object_mut()
+            .ok_or_else(|| "Human decision record must be a JSON object.".to_string())?;
+        decision_object.insert("status".to_string(), Value::String("answered".to_string()));
+        decision_object.insert("answered_at".to_string(), Value::String(timestamp.clone()));
+        decision_object.insert(
+            "answer".to_string(),
+            json!({
+                "type": answer_type,
+                "text": answer_text,
+                "answered_at": timestamp
+            }),
+        );
+        (from_status, session_id)
+    };
+
+    let history = inbox
+        .get_mut("decision_history")
+        .and_then(Value::as_array_mut)
+        .ok_or_else(|| "Human decision inbox is missing decision_history array.".to_string())?;
+    history.push(json!({
+        "timestamp": current_unix_millis_label(),
+        "actor": "platform-desktop-app",
+        "decision_id": decision_id,
+        "from_status": from_status,
+        "to_status": "answered",
+        "reason": history_reason
+    }));
+
+    write_human_decision_inbox_value(&inbox_path, &inbox)?;
+    Ok(DecisionAnswerUpdate {
+        report: human_decision_report(&inbox, Some(decision_id.to_string()))?,
+        session_id,
+    })
+}
+
 fn human_decision_inbox_path(root: &Path) -> Result<PathBuf, String> {
     let inbox_path = root.join("_ops").join("coordination").join("human-decision-inbox.json");
     let canonical_inbox = inbox_path
@@ -1133,6 +1246,8 @@ fn human_decision_item_from_value(value: &Value) -> HumanDecisionItem {
         question: value_string(value, "question", "Decision needs a human answer."),
         impact: value_string(value, "impact", ""),
         resume_action: value_string(value, "resume_action", ""),
+        session_id: decision_metadata_string(value, "session_id"),
+        adapter_id: decision_metadata_string(value, "adapter_id"),
         answer_type: answer.and_then(|item| item.get("type")).and_then(Value::as_str).map(ToOwned::to_owned),
         answer_text: answer.and_then(|item| item.get("text")).and_then(Value::as_str).map(ToOwned::to_owned),
         answered_at: value
@@ -1143,6 +1258,14 @@ fn human_decision_item_from_value(value: &Value) -> HumanDecisionItem {
         blocked_work_count: value.get("blocked_work").and_then(Value::as_array).map(Vec::len).unwrap_or(0),
         unblocked_work_count: value.get("unblocked_work").and_then(Value::as_array).map(Vec::len).unwrap_or(0),
     }
+}
+
+fn decision_metadata_string(value: &Value, field: &str) -> Option<String> {
+    value
+        .get("metadata")
+        .and_then(|metadata| metadata.get(field))
+        .and_then(Value::as_str)
+        .map(ToOwned::to_owned)
 }
 
 fn value_string(value: &Value, field: &str, fallback: &str) -> String {

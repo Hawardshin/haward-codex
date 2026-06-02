@@ -86,7 +86,8 @@ for (const commandName of [
   "read_workspace_text_file",
   "write_workspace_text_file",
   "list_human_decision_inbox",
-  "answer_human_decision"
+  "answer_human_decision",
+  "answer_and_resume_human_decision"
 ]) {
   if (!tauriLib.includes(commandName)) {
     failures.push(`src-tauri/src/lib.rs must expose ${commandName}`);
@@ -134,8 +135,10 @@ for (const requiredPhrase of [
   "decisionInboxItems",
   "list_human_decision_inbox",
   "answer_human_decision",
+  "answer_and_resume_human_decision",
   "adapterSetupGuides",
   "sessionModePresets",
+  "Answer & Resume",
   "read_workspace_text_file",
   "write_workspace_text_file"
 ]) {

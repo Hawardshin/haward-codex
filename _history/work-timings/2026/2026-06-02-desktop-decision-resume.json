@@ -1,0 +1,57 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-02-desktop-decision-resume",
+  "title": "Add desktop decision answer-and-resume flow",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "measurement_method": "manual_partial",
+  "recorded_at": "2026-06-02",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "web search and intake",
+      "status": "completed",
+      "duration_seconds": 240,
+      "measurement": "estimated",
+      "bottleneck_notes": "Checked Tauri shared state/stdin references and HITL resume patterns.",
+      "notes": "Focused on explicit user approval and resume behavior rather than automatic execution."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Tauri command and Desktop UI",
+      "status": "completed",
+      "duration_seconds": 1500,
+      "measurement": "estimated",
+      "bottleneck_notes": "Coordinating inbox persistence, session stdin lifecycle, UI state, and readiness checks was the largest phase.",
+      "notes": "Added answer-and-resume command, shared answer helper, linked session fields, and UI controls."
+    },
+    {
+      "phase_id": "documentation_and_traceability",
+      "label": "requirements, specs, and history records",
+      "status": "completed",
+      "duration_seconds": 1200,
+      "measurement": "estimated",
+      "bottleneck_notes": "Bilingual requirements/spec/history artifacts add overhead but preserve implementation context.",
+      "notes": "Updated requirements, spec package, architecture docs, web records, research notes, request trace, and work summaries."
+    },
+    {
+      "phase_id": "verification",
+      "label": "verification",
+      "status": "completed",
+      "duration_seconds": 720,
+      "measurement": "estimated",
+      "bottleneck_notes": "Verification includes TypeScript, static build, desktop readiness, and governance validators.",
+      "notes": "Rust/Tauri compile remains unavailable because Rust/Cargo is not installed."
+    }
+  ],
+  "summary": {
+    "total_seconds": 3660,
+    "slowest_phase": "implementation",
+    "bottleneck_candidates": [
+      "Answer-and-resume touches both persistent decision state and live process stdin.",
+      "Rust/Cargo absence prevents direct compile validation, increasing reliance on readiness checks and source review."
+    ],
+    "confidence": "partial",
+    "next_measurement_improvement": "Use _tools/work-timer start/end timestamps at task intake for future runtime slices."
+  }
+}
