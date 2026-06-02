@@ -1,0 +1,81 @@
+{
+  "task": "Find and fix Workspace Monitor functional bugs found during broad validation.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Run web search before local planning and edits.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-workspace-monitor-static-asset-path-bugfix.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "memory-bootstrap",
+      "description": "Run memory bootstrap after web-first intake.",
+      "source": "operations navigation rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "bug-reproduction",
+      "description": "Reproduce the functional bug before fixing it.",
+      "source": "debugging practice",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "file:// Playwright smoke showed `file:///_next/...` ERR_FILE_NOT_FOUND before the fix"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "path-fix",
+      "description": "Make static assets and snapshot JSON load from subpath/desktop contexts.",
+      "source": "REQ-WM-017",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/next.config.mjs",
+        "workspace-monitor/components/SnapshotLoader.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "regression-check",
+      "description": "Add an automated regression check for absolute `/_next` paths.",
+      "source": "REQ-WM-017",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/check-performance-budget.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "verification",
+      "description": "Run command and browser verification after the fix.",
+      "source": "acceptance criteria",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "npm --prefix workspace-monitor run check",
+        "npm --prefix workspace-monitor test",
+        "npm --prefix workspace-monitor run build",
+        "npm --prefix workspace-monitor run perf:budget",
+        "Playwright subpath smoke"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Rust/Tauri toolchain is unavailable, so actual packaged WebView smoke remains pending.",
+    "The broad request could hide other issues; this slice fixes the reproduced functional regression and leaves further broad audits for future slices."
+  ]
+}

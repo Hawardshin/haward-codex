@@ -1,0 +1,54 @@
+{
+  "task_id": "2026-06-02-workspace-monitor-static-asset-path-bugfix",
+  "title": "Fix Workspace Monitor static asset path bug",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "web search and memory bootstrap",
+      "status": "completed",
+      "duration_seconds": 180,
+      "measurement": "estimated",
+      "bottleneck_notes": "Checked Next.js, MDN Fetch, and Tauri asset references before implementation."
+    },
+    {
+      "phase_id": "verification_scan",
+      "label": "existing checks and bug reproduction",
+      "status": "completed",
+      "duration_seconds": 360,
+      "measurement": "estimated",
+      "bottleneck_notes": "Baseline checks passed, but file URL smoke reproduced absolute `_next` path failures."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "relative asset path and snapshot fetch fix",
+      "status": "completed",
+      "duration_seconds": 180,
+      "measurement": "estimated",
+      "bottleneck_notes": "Small code change; main risk was selecting a path strategy that works across root and subpath contexts."
+    },
+    {
+      "phase_id": "validation",
+      "label": "check, tests, build, budget, Playwright smoke",
+      "status": "completed",
+      "duration_seconds": 360,
+      "measurement": "estimated",
+      "bottleneck_notes": "Subpath static smoke required starting and cleaning up a local HTTP server."
+    },
+    {
+      "phase_id": "documentation",
+      "label": "requirements, specs, traces, evaluation",
+      "status": "completed",
+      "duration_seconds": 540,
+      "measurement": "estimated",
+      "bottleneck_notes": "Bilingual traceability and evaluation records are required for standard-mode work."
+    }
+  ],
+  "bottleneck_candidates": [
+    {
+      "phase_id": "validation",
+      "reason": "Actual Tauri packaged smoke remains blocked by missing Rust/Tauri toolchain."
+    }
+  ]
+}

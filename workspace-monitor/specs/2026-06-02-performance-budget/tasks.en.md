@@ -8,3 +8,4 @@
 - [x] Add the `perf:budget` script
 - [x] Measure build output chunk size
 - [x] Run static Playwright smoke
+- [x] Add absolute `/_next` asset path regression check

@@ -22,7 +22,8 @@ export function SnapshotLoader() {
     let canceled = false;
     async function loadSnapshot() {
       try {
-        const response = await fetch("/workspace-snapshot.json", { cache: "no-cache" });
+        const snapshotUrl = new URL("workspace-snapshot.json", window.location.href);
+        const response = await fetch(snapshotUrl, { cache: "no-cache" });
         if (!response.ok) {
           throw new Error(`Snapshot request failed with ${response.status}`);
         }

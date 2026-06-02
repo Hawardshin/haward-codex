@@ -1,0 +1,33 @@
+{
+  "task_id": "2026-06-02-workspace-monitor-static-asset-path-bugfix",
+  "status": "grounded",
+  "claims": [
+    {
+      "claim": "Next.js `assetPrefix` affects JavaScript and CSS files loaded from `/_next/static`.",
+      "source": "https://nextjs.org/docs/app/api-reference/config/next-config-js/assetPrefix",
+      "status": "checked"
+    },
+    {
+      "claim": "Next.js static export generates static HTML/CSS/JS assets that can be hosted by a static web server.",
+      "source": "https://nextjs.org/docs/canary/pages/building-your-application/deploying/static-exports",
+      "status": "checked"
+    },
+    {
+      "claim": "`window.fetch()` accepts a URL object as its resource parameter.",
+      "source": "https://developer.mozilla.org/docs/Web/API/Window/fetch",
+      "status": "checked"
+    },
+    {
+      "claim": "Tauri can serve files from disk through its asset protocol, which differs from plain browser `file://` verification.",
+      "source": "https://v2.tauri.app/security/asset-protocol/",
+      "status": "checked"
+    }
+  ],
+  "unchecked_or_caveated_claims": [
+    {
+      "claim": "The fix is fully ready for packaged Tauri runtime.",
+      "status": "not_claimed",
+      "reason": "Rust/Tauri toolchain smoke is still unavailable."
+    }
+  ]
+}

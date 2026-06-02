@@ -1,0 +1,64 @@
+{
+  "task_id": "2026-06-02-workspace-monitor-static-asset-path-bugfix",
+  "work_mode": "standard",
+  "request_summary": "Find bugs and functional issues, then fix them.",
+  "result_summary": "Fixed a Workspace Monitor static export bug where `_next` assets and the snapshot JSON were root-relative, causing desktop/subpath static contexts to fail. Added a regression check and verified subpath static rendering.",
+  "changed_files_count": 47,
+  "verification": [
+    "npm --prefix workspace-monitor run check",
+    "npm --prefix workspace-monitor test",
+    "npm --prefix workspace-monitor run build",
+    "npm --prefix workspace-monitor run perf:budget",
+    "Playwright subpath smoke from repository-root static server",
+    "Playwright file URL smoke for asset-path risk signal",
+    "python3 _tools/naming-audit/src/naming_audit.py --check",
+    "python3 _tools/structure-audit/src/structure_audit.py --check"
+  ],
+  "references_checked": [
+    "https://nextjs.org/docs/canary/pages/building-your-application/deploying/static-exports",
+    "https://nextjs.org/docs/app/api-reference/config/next-config-js/assetPrefix",
+    "https://developer.mozilla.org/docs/Web/API/Window/fetch",
+    "https://v2.tauri.app/security/asset-protocol/"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-workspace-monitor-static-asset-path-bugfix.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-02-workspace-monitor-static-asset-path-bugfix.ko.md"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-02-workspace-monitor-static-asset-path-bugfix.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-workspace-monitor-static-asset-path-bugfix.ko.md"
+  ],
+  "requirements_targets": [
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "_requirements/reviews/2026-06-02-workspace-monitor-static-asset-path-bugfix.ko.md"
+  ],
+  "spec_targets": [
+    "workspace-monitor/specs/2026-06-02-static-asset-path-bugfix/spec.ko.md",
+    "workspace-monitor/specs/2026-06-02-static-asset-path-bugfix/validation.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-workspace-monitor-static-asset-path-bugfix-omission-input.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-02-workspace-monitor-static-asset-path-bugfix-resource-input.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-workspace-monitor-static-asset-path-bugfix.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-workspace-monitor-static-asset-path-bugfix.json"
+  ],
+  "installation_occurred": false,
+  "cli_pipeline_occurred": false
+}

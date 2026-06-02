@@ -1,0 +1,28 @@
+{
+  "task_id": "2026-06-02-workspace-monitor-static-asset-path-bugfix",
+  "selected_work_mode": "standard",
+  "selection_reason": "The request asked for broad bug and functional issue fixing. The actual implementation slice is a bounded Workspace Monitor functional regression, but it still changes user-visible desktop/static behavior and requires requirements, spec, verification, and evaluation records.",
+  "alternatives_considered": [
+    {
+      "work_mode": "quick",
+      "decision": "rejected",
+      "reason": "The bug affects static packaging/subpath rendering and needs durable regression coverage."
+    },
+    {
+      "work_mode": "governance",
+      "decision": "rejected",
+      "reason": "No workspace-wide policy or operating model changed."
+    }
+  ],
+  "required_targets": [
+    "web_search_record_targets",
+    "requirements_targets",
+    "spec_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets",
+    "omission_check_targets",
+    "resource_check_targets",
+    "evaluation_targets"
+  ]
+}

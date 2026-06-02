@@ -1,0 +1,67 @@
+{
+  "task": "Verify Workspace Monitor static asset path bugfix with local server and headless browser.",
+  "work_mode": "standard",
+  "runtime_context": [
+    "nextjs-static-export",
+    "browser-fetch",
+    "python-http-server",
+    "playwright",
+    "node-script"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "verification-server",
+      "category": "process",
+      "description": "A temporary repository-root HTTP server was started for subpath smoke verification.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The server ran in a tracked TTY exec session, was stopped with `Ctrl-C`, and tcp:3010 was checked again with `lsof -ti tcp:3010`.",
+      "evidence": [
+        "python3 -m http.server 3010 --bind 127.0.0.1 --directory <repo>",
+        "lsof -ti tcp:3010"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "playwright-browser",
+      "category": "browser_context",
+      "description": "Headless Chromium was launched for subpath and file URL smoke checks.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The Playwright scripts explicitly called `await browser.close()`.",
+      "evidence": [
+        "Playwright smoke scripts"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "snapshot-fetch",
+      "category": "network_request",
+      "description": "SnapshotLoader performs a one-shot fetch for `workspace-snapshot.json`.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The effect has a cancellation guard and does not add timers, subscriptions, workers, or long-running processes.",
+      "evidence": [
+        "workspace-monitor/components/SnapshotLoader.tsx"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "static-asset-paths",
+      "metric": "generated index.html absolute _next paths",
+      "tool": "npm --prefix workspace-monitor run perf:budget",
+      "threshold": "no src/href matching `/_next/`",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "staticAssetPaths = relative"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No new production subprocess, polling loop, file watcher, or dependency was added."
+  ]
+}

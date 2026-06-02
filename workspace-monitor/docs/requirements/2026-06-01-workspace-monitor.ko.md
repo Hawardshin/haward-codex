@@ -27,6 +27,7 @@
 | REQ-WM-014 | 웹 UI는 운영 대시보드의 밀도와 신뢰를 유지하면서 은근히 귀엽고 조용히 기분 좋은 visual tone을 허용해야 한다. | should | UI tone policy, `globals.css`, `npm run build` 확인 |
 | REQ-WM-015 | 웹 UI는 `agent-platform/configs/access/language-mode-registry.json`을 읽어 전체, 한국어만, 영어만 문서 보기 모드를 선택할 수 있어야 하며 문서/히스토리/요약 카운트에 동일한 언어 렌즈를 적용해야 한다. | must | snapshot의 `languageModeCatalog`, 언어 selector, `npm run collect`, `npm test`, `npm run check`, `npm run build` 확인 |
 | REQ-WM-016 | 웹 UI는 대용량 workspace snapshot을 client JavaScript bundle에 직접 포함하지 않아야 하며, 초기 JS chunk 크기가 성능 예산을 초과하지 않도록 회귀 검사를 제공해야 한다. | must | `npm run build`, `npm run perf:budget`, 정적 Playwright smoke 확인 |
+| REQ-WM-017 | 정적 export는 HTTP root뿐 아니라 데스크톱 shell, file/subpath 유사 context, repository 서브패스 정적 serving에서도 `_next` asset과 `workspace-snapshot.json`을 상대 경로로 읽어 주요 대시보드를 렌더링해야 한다. | must | `npm run build`, `npm run perf:budget`, repository-root 정적 서버의 `/workspace-monitor/out/index.html` Playwright smoke 확인 |
 
 ## 범위
 
@@ -41,6 +42,7 @@
 - 에이전트 협업 lane, agent-task-project 흐름도, blocker/next-action 표시
 - 운영 가독성을 해치지 않는 작은 accent와 micro-interaction
 - 대용량 snapshot의 public JSON fetch, MonitorShell lazy loading, JS chunk 성능 예산 검사
+- 패키징/서브패스 안전성을 위한 상대 static asset 경로와 snapshot fetch
 - Vercel 배포 문서
 
 ## 제외 범위

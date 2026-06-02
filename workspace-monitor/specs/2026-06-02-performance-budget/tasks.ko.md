@@ -8,3 +8,4 @@
 - [x] `perf:budget` 스크립트 추가
 - [x] build output chunk 크기 측정
 - [x] 정적 Playwright smoke 실행
+- [x] absolute `/_next` asset path 회귀 검사 추가
