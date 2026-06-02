@@ -41,4 +41,4 @@
 
 ## 커밋
 
-- close-out 후 기록한다.
+- `99b6d95` pushed: `feat(design-assets): collect external svg assets`

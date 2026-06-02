@@ -11,4 +11,4 @@
 | ESVG-007 | asset browser external 지원 및 gallery 생성 | 완료 |
 | ESVG-008 | 문서/요구사항/스펙/히스토리/평가 갱신 | 완료 |
 | ESVG-009 | 전체 검증 | 완료 |
-| ESVG-010 | 커밋 및 push | 대기 |
+| ESVG-010 | 커밋 및 push | 완료 |

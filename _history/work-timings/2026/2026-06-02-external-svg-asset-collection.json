@@ -57,8 +57,9 @@
     {
       "phase_id": "commit_push",
       "label": "Commit and push",
-      "status": "pending",
-      "measurement": "not_measured"
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Committed and pushed 99b6d95 to origin/main; this follow-up history commit records the pushed implementation hash."
     }
   ],
   "bottleneck_analysis": {

@@ -41,4 +41,4 @@
 
 ## Commit
 
-- Recorded after close-out.
+- `99b6d95` pushed: `feat(design-assets): collect external svg assets`

@@ -28,5 +28,4 @@
 
 ## 남은 검증
 
-- `git diff --check`
-- commit/push 후 request trace에 commit hash 반영
+- 없음

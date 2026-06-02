@@ -11,4 +11,4 @@
 | ESVG-007 | Add external asset browser support and gallery | Done |
 | ESVG-008 | Update docs/requirements/specs/history/evaluation | Done |
 | ESVG-009 | Full verification | Done |
-| ESVG-010 | Commit and push | Pending |
+| ESVG-010 | Commit and push | Done |

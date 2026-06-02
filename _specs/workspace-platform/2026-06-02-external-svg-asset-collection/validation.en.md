@@ -28,5 +28,4 @@
 
 ## Remaining Validation
 
-- `git diff --check`
-- Record commit hash in request trace after commit/push
+- None
