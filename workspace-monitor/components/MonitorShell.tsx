@@ -2,15 +2,20 @@
 
 import {
   Activity,
+  AlertTriangle,
+  ArrowRight,
   BookOpenText,
   Bot,
   CalendarDays,
+  CheckCircle2,
   ClipboardCheck,
+  Clock3,
   Code2,
   FileSearch,
   FolderKanban,
   GitBranch,
   History,
+  Inbox,
   Layers,
   Languages,
   ListFilter,
@@ -244,6 +249,120 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const selectedSource = filteredSourceFiles.find((file) => file.id === selectedSourceId) || filteredSourceFiles[0];
   const visibleEvaluations = viewFilteredDocuments.filter((document) => document.category === "evaluation").length;
   const visibleWebSearches = viewFilteredDocuments.filter((document) => document.category === "web-search").length;
+  const latestEvaluation = viewFilteredDocuments.find((document) => document.category === "evaluation");
+  const latestWebSearch = viewFilteredDocuments.find((document) => document.category === "web-search");
+  const latestWorkSummary = viewFilteredDocuments.find((document) => document.category === "work-summary");
+  const attentionState = useMemo(() => {
+    const blockedTasks = collaborationBoard.summary.blockedTasks;
+    const activeTasks = collaborationBoard.summary.activeTasks;
+    const publicReviewRequired = snapshot.publicReview.status.includes("review_required");
+
+    if (blockedTasks > 0) {
+      return {
+        tone: "red",
+        icon: AlertTriangle,
+        label: "Needs decision",
+        title: `${blockedTasks.toLocaleString("ko-KR")}개 작업이 막혀 있습니다`,
+        detail: "결정함 또는 blocker lane을 확인해야 합니다.",
+        section: "agents" as SectionId,
+        action: "막힘 보기"
+      };
+    }
+
+    if (publicReviewRequired) {
+      return {
+        tone: "amber",
+        icon: ShieldCheck,
+        label: "Review required",
+        title: "공개 전 점검이 필요합니다",
+        detail: "snapshot, privacy, public readiness를 확인한 뒤 배포해야 합니다.",
+        section: "overview" as SectionId,
+        action: "점검 보기"
+      };
+    }
+
+    if (activeTasks > 0) {
+      return {
+        tone: "green",
+        icon: Activity,
+        label: "In motion",
+        title: `${activeTasks.toLocaleString("ko-KR")}개 작업이 진행 중입니다`,
+        detail: "에이전트 협업판에서 진행 상태와 병목을 볼 수 있습니다.",
+        section: "agents" as SectionId,
+        action: "작업판 보기"
+      };
+    }
+
+    return {
+      tone: "blue",
+      icon: CheckCircle2,
+      label: "Ready",
+      title: "즉시 주의할 막힘은 없습니다",
+      detail: "최근 히스토리와 근거 trail을 확인하고 다음 작업을 시작할 수 있습니다.",
+      section: "history" as SectionId,
+      action: "히스토리 보기"
+    };
+  }, [
+    collaborationBoard.summary.activeTasks,
+    collaborationBoard.summary.blockedTasks,
+    snapshot.publicReview.status
+  ]);
+  const commandSteps: Array<{
+    label: string;
+    title: string;
+    detail: string;
+    icon: LucideIcon;
+    tone: string;
+    section?: SectionId;
+  }> = [
+    {
+      label: "Now",
+      title: attentionState.label,
+      detail: attentionState.title,
+      icon: attentionState.icon,
+      tone: attentionState.tone,
+      section: attentionState.section
+    },
+    {
+      label: "Next",
+      title: collaborationBoard.nextActions[0]?.agent || "No handoff",
+      detail: collaborationBoard.nextActions[0]?.nextAction || "대기 중인 다음 행동이 없습니다.",
+      icon: Clock3,
+      tone: "blue",
+      section: "agents"
+    },
+    {
+      label: "Evidence",
+      title: `${visibleWebSearches.toLocaleString("ko-KR")} searches / ${visibleEvaluations.toLocaleString("ko-KR")} evals`,
+      detail: latestEvaluation?.title || latestWebSearch?.title || "근거 기록을 모아 표시합니다.",
+      icon: FileSearch,
+      tone: "violet",
+      section: "documents"
+    },
+    {
+      label: "Control",
+      title: currentViewMode.label,
+      detail: `${currentLanguageMode.label} / ${visibleSections.length} sections visible`,
+      icon: ShieldCheck,
+      tone: "slate"
+    }
+  ];
+  const attentionItems = [
+    ...collaborationBoard.blockers.slice(0, 3).map((item) => ({
+      id: `blocker-${item.taskId}`,
+      label: "Blocked",
+      title: item.title,
+      detail: item.blockers.join(" / "),
+      meta: item.agent
+    })),
+    ...collaborationBoard.nextActions.slice(0, 3).map((item) => ({
+      id: `next-${item.taskId}`,
+      label: "Next",
+      title: item.title,
+      detail: item.nextAction,
+      meta: item.agent
+    }))
+  ].slice(0, 4);
 
   return (
     <main>
@@ -345,6 +464,102 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
 
       {section === "overview" && (
         <div className="content-grid">
+          <section className="command-center" aria-label="Workspace command center">
+            <article className={`command-card command-${attentionState.tone}`}>
+              <p className="eyebrow">Command Center</p>
+              <div className="command-status">
+                <attentionState.icon size={20} aria-hidden="true" />
+                <span>{attentionState.label}</span>
+              </div>
+              <h2>{attentionState.title}</h2>
+              <p>{attentionState.detail}</p>
+              <div className="command-actions">
+                <button type="button" onClick={() => setSection(attentionState.section)}>
+                  <span>{attentionState.action}</span>
+                  <ArrowRight size={15} aria-hidden="true" />
+                </button>
+              </div>
+            </article>
+
+            <div className="command-side">
+              <article>
+                <span>Workspace Lens</span>
+                <strong>{currentViewMode.label}</strong>
+                <p>{currentViewMode.intent}</p>
+              </article>
+              <article>
+                <span>Latest Signal</span>
+                <strong>{latestWorkSummary?.title || latestHistoryDate || "기록 없음"}</strong>
+                <p>{latestWorkSummary?.path || "최근 작업 요약을 찾지 못했습니다."}</p>
+              </article>
+            </div>
+          </section>
+
+          <section className="ux-spine" aria-label="Operating spine">
+            {commandSteps.map((step) => (
+              <button
+                key={step.label}
+                className={`spine-step spine-${step.tone}`}
+                onClick={() => step.section && setSection(step.section)}
+                type="button"
+                disabled={!step.section}
+              >
+                <step.icon size={17} aria-hidden="true" />
+                <span>{step.label}</span>
+                <strong>{step.title}</strong>
+                <small>{step.detail}</small>
+              </button>
+            ))}
+          </section>
+
+          <section className="panel wide action-evidence-panel">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Attention</p>
+                <h2>다음 행동과 근거 trail</h2>
+              </div>
+              <button type="button" onClick={() => setSection(attentionItems.length ? "agents" : "documents")}>
+                <Inbox size={16} aria-hidden="true" />
+                <span>{attentionItems.length ? "결정함 보기" : "문서 보기"}</span>
+              </button>
+            </div>
+            <div className="attention-layout">
+              <div className="attention-list">
+                {attentionItems.length ? (
+                  attentionItems.map((item) => (
+                    <article key={item.id}>
+                      <span>{item.label}</span>
+                      <div>
+                        <strong>{item.title}</strong>
+                        <p>{item.detail}</p>
+                        <small>{item.meta}</small>
+                      </div>
+                    </article>
+                  ))
+                ) : (
+                  <p className="empty-state">현재 blocker나 handoff가 없습니다.</p>
+                )}
+              </div>
+              <div className="evidence-trail">
+                <article>
+                  <span>Web Search</span>
+                  <strong>{visibleWebSearches.toLocaleString("ko-KR")}</strong>
+                  <p>{latestWebSearch?.title || "웹 검색 기록 없음"}</p>
+                </article>
+                <article>
+                  <span>Evaluation</span>
+                  <strong>{visibleEvaluations.toLocaleString("ko-KR")}</strong>
+                  <p>{latestEvaluation?.title || "평가 기록 없음"}</p>
+                </article>
+                <article>
+                  <span>Requirements</span>
+                  <strong>{visibleRequirements.length.toLocaleString("ko-KR")}</strong>
+                  <p>요구사항과 스펙을 기준으로 결과를 확인합니다.</p>
+                </article>
+              </div>
+            </div>
+          </section>
+
           <section className="metrics-band">
             <Metric label="Projects" value={snapshot.stats.projects} icon={FolderKanban} tone="green" />
             <Metric label="Documents" value={viewFilteredDocuments.length} icon={BookOpenText} tone="blue" />

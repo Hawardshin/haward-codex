@@ -98,6 +98,7 @@
       "scope": "Project-local Next.js UI, repository snapshot generator, generated monitor data, deployment docs, tests, and monitor-specific requirements/specs.",
       "project_specific_home": [
         "workspace-monitor/app/",
+        "workspace-monitor/artifacts/",
         "workspace-monitor/components/",
         "workspace-monitor/lib/",
         "workspace-monitor/scripts/",

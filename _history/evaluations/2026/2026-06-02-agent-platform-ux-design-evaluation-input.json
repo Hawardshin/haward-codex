@@ -1,0 +1,147 @@
+{
+  "initial_instruction": "The user asked to deep-research design and user UX elements, then redesign the platform properly.",
+  "result_summary": "Added REQ-WS-077, UX deep research web search/report artifacts, a Workspace Monitor command-center overview, a redesigned platform desktop user-flow artifact, project UX docs, screenshot smoke artifacts, and close-out history records.",
+  "work_mode": "standard",
+  "changed_files": [
+    "_history/web-searches/2026/2026-06-02-agent-platform-ux-design.ko.md",
+    "_history/web-searches/2026/2026-06-02-agent-platform-ux-design.en.md",
+    "_history/mode-selections/2026/2026-06-02-agent-platform-ux-design.json",
+    "_history/plans/2026/2026-06-02-agent-platform-ux-design.ko.md",
+    "_history/plans/2026/2026-06-02-agent-platform-ux-design.en.md",
+    "_history/request-traces/2026/2026-06-02-agent-platform-ux-design.ko.md",
+    "_history/request-traces/2026/2026-06-02-agent-platform-ux-design.en.md",
+    "_history/user-requests/2026/2026-06-02.ko.md",
+    "_history/user-requests/2026/2026-06-02.en.md",
+    "_history/work-summaries/2026/2026-06-02.ko.md",
+    "_history/work-summaries/2026/2026-06-02.en.md",
+    "_history/work-timings/2026/2026-06-02-agent-platform-ux-design.json",
+    "_history/evaluations/2026/2026-06-02-agent-platform-ux-design-omission.json",
+    "_history/evaluations/2026/2026-06-02-agent-platform-ux-design-grounding.json",
+    "_history/evaluations/2026/2026-06-02-agent-platform-ux-design-resource.json",
+    "_history/evaluations/2026/2026-06-02-agent-platform-ux-design-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-02-agent-platform-ux-design.ko.md",
+    "_history/evaluations/2026/2026-06-02-agent-platform-ux-design.en.md",
+    "_ops/maps/repository-map.md",
+    "_ops/projects/registry.json",
+    "_research/topics/ux/2026-06-02-agent-platform-ux-design-deep-research.ko.md",
+    "_research/topics/ux/2026-06-02-agent-platform-ux-design-deep-research.en.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-02-agent-platform-ux-design.ko.md",
+    "_requirements/changes/2026-06-02-agent-platform-ux-design.en.md",
+    "_requirements/reviews/2026-06-02-agent-platform-ux-design.ko.md",
+    "_requirements/reviews/2026-06-02-agent-platform-ux-design.en.md",
+    "_specs/workspace-platform/2026-06-02-agent-platform-ux-design/",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/docs/research-backed-ux.ko.md",
+    "workspace-monitor/docs/research-backed-ux.en.md",
+    "workspace-monitor/artifacts/screenshots/2026-06-02-ux-desktop.png",
+    "workspace-monitor/artifacts/screenshots/2026-06-02-ux-mobile.png",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "platform-desktop-app/artifacts/user-flow-map.html",
+    "platform-desktop-app/docs/research-backed-ux.ko.md",
+    "platform-desktop-app/docs/research-backed-ux.en.md"
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli complete-deep-research ../_specs/workspace-platform/2026-06-02-agent-platform-ux-design/deep-research-input.json from agent-platform: ready_to_write_report",
+    "npm run test from workspace-monitor: 10 tests passed",
+    "npm run check from workspace-monitor: passed",
+    "npm run build from workspace-monitor: passed",
+    "Playwright screenshot smoke: desktop/mobile Workspace Monitor, Command Center, Evidence visible; overflowX=false",
+    "npm run check from platform-desktop-app: ready_for_dependency_install_audit with Rust toolchain warning only",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-02-agent-platform-ux-design.json: ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-02-agent-platform-ux-design-omission.json from agent-platform: coverage_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-02-agent-platform-ux-design-grounding.json from agent-platform: ready_to_publish",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-02-agent-platform-ux-design-resource.json from agent-platform: resource_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json from agent-platform: ready_to_bootstrap",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json configs/research/source-registry.json configs/research/research-agent-profile.json configs/research/coding-research-profile.json configs/workflows/work-mode-registry.json ../_ops/installations/registry.json from agent-platform: self_documenting",
+    "python3 _tools/workspace-health/src/workspace_health.py --include-build --json: passed",
+    "git diff --check: clean"
+  ],
+  "references_checked": [
+    "AGENTS.md",
+    "agent-platform/configs/research/deep-research-profile.json",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "platform-desktop-app/artifacts/user-flow-map.html",
+    "https://www.microsoft.com/en-us/haxtoolkit/ai-guidelines/",
+    "https://www.microsoft.com/en-us/haxtoolkit/guideline/make-clear-what-the-system-can-do/",
+    "https://www.microsoft.com/en-us/haxtoolkit/guideline/show-contextually-relevant-information/",
+    "https://www.microsoft.com/en-us/haxtoolkit/guideline/make-clear-why-the-system-did-what-it-did/",
+    "https://www.microsoft.com/en-us/haxtoolkit/guideline/provide-global-controls/",
+    "https://pair.withgoogle.com/chapter/People%20%2B%20AI%20Guidebook%20-%20Feedback%20%2B%20Control.pdf",
+    "https://carbondesignsystem.com/data-visualization/dashboards/",
+    "https://m2.material.io/go/design-data-tables/",
+    "https://media.nngroup.com/media/articles/attachments/Heuristic_Summary_compressed.pdf",
+    "https://media.nngroup.com/media/articles/attachments/Visual-Design-Principles-Poster.pdf",
+    "https://designsystem.digital.gov/components/site-alert/",
+    "https://atlassian.design/"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-02-agent-platform-ux-design-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-02-agent-platform-ux-design.ko.md",
+    "_specs/workspace-platform/2026-06-02-agent-platform-ux-design/deep-research-input.json",
+    "_research/topics/ux/2026-06-02-agent-platform-ux-design-deep-research.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-02-agent-platform-ux-design.ko.md",
+    "_specs/workspace-platform/2026-06-02-agent-platform-ux-design/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-02-agent-platform-ux-design.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-02-agent-platform-ux-design-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-02-agent-platform-ux-design.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-02.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/changes/2026-06-02-agent-platform-ux-design.ko.md",
+    "_requirements/reviews/2026-06-02-agent-platform-ux-design.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-02-agent-platform-ux-design/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-agent-platform-ux-design/plan.ko.md",
+    "_specs/workspace-platform/2026-06-02-agent-platform-ux-design/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-02-agent-platform-ux-design/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-agent-platform-ux-design/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-02-agent-platform-ux-design.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-02.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-02-agent-platform-ux-design.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-02-agent-platform-ux-design-resource.json",
+    "_specs/workspace-platform/2026-06-02-agent-platform-ux-design/validation.ko.md"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Add a future UX telemetry or user-observation note format so the first-viewport priorities can be tuned from actual usage.",
+    "Add a dedicated workspace-monitor Playwright smoke test package if visual regression checks become frequent."
+  ]
+}

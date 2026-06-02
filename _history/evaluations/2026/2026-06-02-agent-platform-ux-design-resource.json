@@ -1,0 +1,82 @@
+{
+  "task": "Resource guard for agent platform UX/design screenshot smoke.",
+  "work_mode": "standard",
+  "runtime_context": [
+    "python_http_server",
+    "node",
+    "playwright",
+    "chromium"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "local-http-server",
+      "category": "process",
+      "description": "The static screenshot smoke starts a Python HTTP server that could remain running if not terminated.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The server session was explicitly stopped with Ctrl-C after Playwright completed.",
+      "evidence": [
+        "Server session output ended with Keyboard interrupt received, exiting."
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "playwright-browser",
+      "category": "browser_context",
+      "description": "Playwright Chromium pages and browser could remain open if the script does not close them.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The script closes each page and calls browser.close() after the screenshot loop.",
+      "evidence": [
+        "Playwright script contains await page.close() and await browser.close().",
+        "Playwright command exited with code 0."
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "server-stop",
+      "resource": "python3 -m http.server",
+      "create_path": "python3 -m http.server 4173 --directory workspace-monitor/out",
+      "cleanup_path": "Ctrl-C sent to the exec session after screenshot smoke.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "HTTP server process exited with code 0 after Keyboard interrupt."
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser-close",
+      "resource": "Playwright Chromium",
+      "create_path": "chromium.launch({ headless: true })",
+      "cleanup_path": "await page.close() in each loop; await browser.close() after the loop.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Screenshot smoke script exited successfully."
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "bounded-smoke-run",
+      "metric": "process lifetime",
+      "tool": "exec session exit codes and Playwright command exit",
+      "threshold": "No long-running validation process remains after screenshot smoke.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "HTTP server session exited.",
+        "Playwright command exited with code 0."
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "This task did not introduce a long-running runtime service.",
+    "Resource risk was limited to temporary validation processes."
+  ]
+}

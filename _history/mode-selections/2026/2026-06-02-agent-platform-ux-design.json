@@ -1,0 +1,28 @@
+{
+  "task_id": "2026-06-02-agent-platform-ux-design",
+  "selected_mode": "standard",
+  "selection_reason": "The request includes deep research plus meaningful UI/product UX implementation across workspace-monitor and platform-desktop-app. It changes durable platform behavior and project artifacts, so quick or ship_first would be too weak.",
+  "lighter_modes_considered": [
+    {
+      "mode": "research",
+      "reason_not_selected": "The task also asks to redesign and implement, not only produce a report."
+    },
+    {
+      "mode": "ship_first",
+      "reason_not_selected": "The user explicitly asked for deep research before redesign."
+    }
+  ],
+  "required_records": [
+    "web_search_record_targets",
+    "requirements_targets",
+    "spec_targets",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets",
+    "omission_check_targets",
+    "grounding_checks"
+  ],
+  "created_at": "2026-06-02"
+}

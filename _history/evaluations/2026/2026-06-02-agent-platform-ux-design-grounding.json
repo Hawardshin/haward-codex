@@ -1,0 +1,159 @@
+{
+  "task": "Ground agent platform UX/design redesign close-out claims.",
+  "output_summary": "Added REQ-WS-077, UX deep research records, Workspace Monitor command center redesign, desktop UX flow artifact redesign, project UX docs, screenshot smoke artifacts, and history/evaluation records.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "requirement",
+      "source": "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "local requirements baseline"
+    },
+    {
+      "evidence_id": "deep_research_command",
+      "source": "PYTHONPATH=src python3 -m agent_platform.cli complete-deep-research ../_specs/workspace-platform/2026-06-02-agent-platform-ux-design/deep-research-input.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "local command"
+    },
+    {
+      "evidence_id": "research_report",
+      "source": "_research/topics/ux/2026-06-02-agent-platform-ux-design-deep-research.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "local research artifact"
+    },
+    {
+      "evidence_id": "monitor_source",
+      "source": "workspace-monitor/components/MonitorShell.tsx; workspace-monitor/app/globals.css",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "local source"
+    },
+    {
+      "evidence_id": "desktop_artifact",
+      "source": "platform-desktop-app/artifacts/user-flow-map.html",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "local artifact"
+    },
+    {
+      "evidence_id": "workspace_monitor_verification",
+      "source": "npm run test; npm run check; npm run build; Playwright screenshot smoke",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "local commands and tool result"
+    },
+    {
+      "evidence_id": "desktop_readiness",
+      "source": "npm run check from platform-desktop-app",
+      "source_type": "command_output",
+      "checked_on": "2026-06-02",
+      "reliability": "local command"
+    },
+    {
+      "evidence_id": "microsoft_hax",
+      "source": "https://www.microsoft.com/en-us/haxtoolkit/ai-guidelines/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "official AI UX guidance"
+    },
+    {
+      "evidence_id": "carbon_dashboard",
+      "source": "https://carbondesignsystem.com/data-visualization/dashboards/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "official design system guidance"
+    },
+    {
+      "evidence_id": "nng_heuristics",
+      "source": "https://media.nngroup.com/media/articles/attachments/Heuristic_Summary_compressed.pdf",
+      "source_type": "web_source",
+      "checked_on": "2026-06-02",
+      "reliability": "recognized UX analysis reference"
+    }
+  ],
+  "claims": [
+    {
+      "statement": "REQ-WS-077 was added to require deep-research-backed UX/design improvements for the platform.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "requirement"
+      ],
+      "verification_steps": [
+        "Reviewed the updated requirements baseline."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The UX deep research package passed complete-deep-research and produced a reusable report.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "deep_research_command",
+        "research_report"
+      ],
+      "verification_steps": [
+        "Ran complete-deep-research against the UX deep-research input."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Workspace Monitor overview now includes a command center, operating spine, and attention/evidence panel.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor_source",
+        "workspace_monitor_verification"
+      ],
+      "verification_steps": [
+        "Reviewed source changes.",
+        "Ran tests, typecheck, build, and Playwright screenshot smoke."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The desktop user-flow artifact was redesigned around installable product UX flow, decision inbox, recovery, and evidence review.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "desktop_artifact",
+        "desktop_readiness"
+      ],
+      "verification_steps": [
+        "Reviewed the HTML artifact.",
+        "Ran platform-desktop-app readiness check."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The redesign direction is grounded in checked AI UX and dashboard guidance rather than only aesthetic preference.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "microsoft_hax",
+        "carbon_dashboard",
+        "nng_heuristics"
+      ],
+      "verification_steps": [
+        "Recorded checked sources and plan impact in the web-search record and deep-research input."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "The redesign is research-backed and visually smoke-tested, but it has not yet been validated with live user testing."
+  ],
+  "limitation_notes": [
+    "_private contents were not inspected.",
+    "No new dependency installation occurred.",
+    "Rust toolchain remains missing for full desktop Tauri build readiness; this task did not claim a signed installer."
+  ]
+}

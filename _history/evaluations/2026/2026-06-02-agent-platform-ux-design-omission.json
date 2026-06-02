@@ -1,0 +1,138 @@
+{
+  "task": "Deep-research and redesign agent platform UX/design surfaces.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web_first",
+      "description": "Run web-first intake and record public search summary.",
+      "source": "AGENTS.md and user durable rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-02-agent-platform-ux-design.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "deep_research",
+      "description": "Use the deep-research agent structure before redesigning UX.",
+      "source": "user request / REQ-WS-077",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_specs/workspace-platform/2026-06-02-agent-platform-ux-design/deep-research-input.json",
+        "_research/topics/ux/2026-06-02-agent-platform-ux-design-deep-research.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "requirements_and_specs",
+      "description": "Record requirement and spec-driven artifacts before implementation.",
+      "source": "standard work mode / spec-driven workflow",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+        "_requirements/changes/2026-06-02-agent-platform-ux-design.ko.md",
+        "_specs/workspace-platform/2026-06-02-agent-platform-ux-design/spec.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "workspace_monitor_redesign",
+      "description": "Improve Workspace Monitor overview with status, attention, evidence, and controls.",
+      "source": "REQ-WS-077",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css",
+        "workspace-monitor/docs/research-backed-ux.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "desktop_ux_artifact",
+      "description": "Redesign the desktop user-flow artifact around installable product UX.",
+      "source": "REQ-WS-077",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/artifacts/user-flow-map.html",
+        "platform-desktop-app/docs/research-backed-ux.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "visual_validation",
+      "description": "Validate desktop and mobile render with screenshot smoke.",
+      "source": "REQ-WS-077 acceptance criteria",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/artifacts/screenshots/2026-06-02-ux-desktop.png",
+        "workspace-monitor/artifacts/screenshots/2026-06-02-ux-mobile.png"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "_research/topics/ux/2026-06-02-agent-platform-ux-design-deep-research.ko.md",
+      "purpose": "Reusable UX deep research report.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Workspace Monitor overview UX implementation.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/artifacts/user-flow-map.html",
+      "purpose": "Installable desktop UX visual artifact.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "deep_research_ready",
+      "description": "Deep research package is ready to write report.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "complete-deep-research: ready_to_write_report"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace_monitor_tests",
+      "description": "Workspace Monitor tests, typecheck, and build passed.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm run test: 10 tests passed",
+        "npm run check: passed",
+        "npm run build: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "screenshot_smoke",
+      "description": "Desktop and mobile screenshots render command center and evidence without horizontal overflow.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Playwright smoke: Workspace Monitor, Command Center, Evidence visible; overflowX=false"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "This pass uses expert/design-system research and screenshot smoke; it does not include a live usability study.",
+    "The command center improves first-viewport hierarchy but future telemetry or observation should tune priority."
+  ],
+  "notes": [
+    "_private contents were not inspected.",
+    "No new package installation occurred."
+  ]
+}

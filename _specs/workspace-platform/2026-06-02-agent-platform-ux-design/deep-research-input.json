@@ -1,0 +1,121 @@
+{
+  "research_question": "Which design and UX principles should guide an agent-building and orchestration platform, and what should be reflected in Workspace Monitor and the installable desktop app UX?",
+  "report_goal": "Prepare a source-grounded UX direction and implementation plan for improving the platform's monitoring and desktop user-flow surfaces.",
+  "intended_audience": "Workspace owner, future agents, and maintainers of workspace-monitor and platform-desktop-app",
+  "trigger_situation": "The user explicitly asked to use deep research for design and UX elements and to redesign the platform properly.",
+  "depth_level": "deep",
+  "research_profile_paths": [
+    "agent-platform/configs/research/deep-research-profile.json",
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/research/source-registry.json"
+  ],
+  "search_channels": [
+    "web search",
+    "official AI UX guideline search",
+    "design system documentation search",
+    "UX heuristic/reference search"
+  ],
+  "sources_checked": [
+    "https://www.microsoft.com/en-us/haxtoolkit/ai-guidelines/",
+    "https://www.microsoft.com/en-us/haxtoolkit/guideline/make-clear-what-the-system-can-do/",
+    "https://www.microsoft.com/en-us/haxtoolkit/guideline/show-contextually-relevant-information/",
+    "https://www.microsoft.com/en-us/haxtoolkit/guideline/make-clear-why-the-system-did-what-it-did/",
+    "https://www.microsoft.com/en-us/haxtoolkit/guideline/provide-global-controls/",
+    "https://pair.withgoogle.com/chapter/People%20%2B%20AI%20Guidebook%20-%20Feedback%20%2B%20Control.pdf",
+    "https://carbondesignsystem.com/data-visualization/dashboards/",
+    "https://m2.material.io/go/design-data-tables/",
+    "https://media.nngroup.com/media/articles/attachments/Heuristic_Summary_compressed.pdf",
+    "https://media.nngroup.com/media/articles/attachments/Visual-Design-Principles-Poster.pdf",
+    "https://designsystem.digital.gov/components/site-alert/",
+    "https://atlassian.design/"
+  ],
+  "source_types": [
+    "official",
+    "paper",
+    "standard",
+    "analysis",
+    "open_source"
+  ],
+  "deep_research_stages": [
+    "scope_definition",
+    "query_decomposition",
+    "source_strategy",
+    "iterative_retrieval",
+    "source_quality_review",
+    "evidence_extraction",
+    "contradiction_mapping",
+    "synthesis",
+    "report_outline",
+    "citation_audit",
+    "skeptic_review"
+  ],
+  "research_iterations": [
+    "Iteration 1: searched human-AI interaction guidelines for transparency, control, current task context, and explanation patterns.",
+    "Iteration 2: searched dashboard and design-system guidance for hierarchy, metrics, alerts, data tables, density, visual hierarchy, and operational status design."
+  ],
+  "source_quality_notes": [
+    "Microsoft HAX and Google PAIR are used for human-AI interaction framing.",
+    "Carbon, Material, Atlassian, and USWDS are used for dashboard, data, alert, and product UI patterns.",
+    "NN/g is used for general usability heuristics and visual design principles.",
+    "Design inspiration galleries were not used as factual UX evidence."
+  ],
+  "evidence_items": [
+    "AI UX should make system capabilities clear <- Microsoft HAX Guideline 1.",
+    "AI UX should show contextually relevant information <- Microsoft HAX Guideline 4.",
+    "AI UX should provide explanations of system behavior when needed <- Microsoft HAX Guideline 11.",
+    "AI UX should provide global controls over monitored behavior <- Microsoft HAX Guideline 17.",
+    "Dashboards should prioritize important information and reduce non-essential metrics <- Carbon Design System dashboards.",
+    "Large datasets need query/filter/manipulation-friendly table or list structures <- Material Design data tables.",
+    "Interfaces should keep users informed of system status, preserve user control, and avoid recall burden <- NN/g heuristics.",
+    "Critical status should be prominent but not stacked or alarmist <- USWDS site alert guidance."
+  ],
+  "contradiction_notes": [
+    "Dashboard guidance recommends limiting metrics, while operational users need broad drill-down; the synthesis is to keep a limited first-viewport command center and preserve deeper tabs for exploration.",
+    "Explanation can increase trust, but HAX warns explanation can also cause over-reliance; the synthesis is to provide evidence trails as audit handles, not persuasive decoration."
+  ],
+  "synthesis_notes": [
+    "The platform should expose an operating spine: status, attention needed, evidence, controls, and drill-down.",
+    "Workspace Monitor should become a command-center overview before becoming a document catalog.",
+    "The desktop user flow should emphasize first-run reassurance, non-blocking decisions, recovery, and evidence review."
+  ],
+  "citation_requirements": [
+    "Every external UX claim in the report must cite a checked source URL.",
+    "Implementation choices should point to local files and verification commands.",
+    "Claims about current repository state must be grounded in local source inspection or command output."
+  ],
+  "citation_audit_notes": [
+    "The report separates external UX principles from local implementation decisions.",
+    "The checked sources support the need for status visibility, controls, contextual next actions, and hierarchy; they do not prove the final UI is user-tested."
+  ],
+  "unsupported_or_weak_claims": [
+    "No field-tested usability improvement claim is made; this pass is research-backed redesign, not user-study validation."
+  ],
+  "report_outline": [
+    "Conclusion",
+    "Research question",
+    "Evidence synthesis",
+    "Current structure diagnosis",
+    "Design direction",
+    "Target files",
+    "Limits and follow-up validation"
+  ],
+  "report_targets": [
+    "_research/topics/ux/2026-06-02-agent-platform-ux-design-deep-research.ko.md",
+    "_research/topics/ux/2026-06-02-agent-platform-ux-design-deep-research.en.md"
+  ],
+  "source_value_provenance": [
+    "Human-AI control and explanation principles <- Microsoft HAX and Google PAIR sources checked on 2026-06-02.",
+    "Dashboard hierarchy and exploratory drill-down principles <- Carbon and Material sources checked on 2026-06-02.",
+    "General usability and visual hierarchy principles <- NN/g sources checked on 2026-06-02.",
+    "Alert placement and tone <- USWDS source checked on 2026-06-02."
+  ],
+  "risks_or_unknowns": [
+    "No direct usability test was run with the workspace owner.",
+    "The redesign improves structure and hierarchy but may need later adjustment after real usage."
+  ],
+  "follow_up_questions": [
+    "Which sections does the owner actually visit most often after one week of use?",
+    "Should the desktop app default to user view or superadmin developer view for this specific owner?"
+  ],
+  "knowledge_validation_status": ""
+}

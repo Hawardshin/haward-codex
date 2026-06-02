@@ -40,6 +40,10 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: default;
+}
+
 button,
 .metric,
 .record-card,
@@ -294,6 +298,233 @@ h3 {
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.8fr);
   gap: 16px;
+}
+
+.command-center,
+.ux-spine,
+.action-evidence-panel {
+  grid-column: 1 / -1;
+}
+
+.command-center {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
+  gap: 14px;
+}
+
+.command-card,
+.command-side article,
+.spine-step {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+}
+
+.command-card {
+  min-height: 220px;
+  padding: 20px;
+  background:
+    linear-gradient(135deg, rgba(22, 115, 91, 0.08), rgba(47, 103, 177, 0.08)),
+    var(--surface);
+}
+
+.command-card h2 {
+  max-width: 760px;
+  margin: 14px 0 8px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.command-card p {
+  max-width: 720px;
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.command-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 999px;
+  padding: 6px 10px;
+  color: var(--slate);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.command-status svg {
+  color: var(--green);
+}
+
+.command-red .command-status svg {
+  color: var(--red);
+}
+
+.command-amber .command-status svg {
+  color: var(--amber);
+}
+
+.command-blue .command-status svg {
+  color: var(--blue);
+}
+
+.command-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.command-actions button {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #9fb0c2;
+  background: #25313f;
+  color: #ffffff;
+  border-radius: 7px;
+  padding: 8px 12px;
+}
+
+.command-side {
+  display: grid;
+  gap: 10px;
+}
+
+.command-side article {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-height: 105px;
+  padding: 14px;
+}
+
+.command-side span,
+.spine-step span,
+.evidence-trail span,
+.attention-list span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.command-side p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.ux-spine {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.spine-step {
+  display: grid;
+  min-height: 128px;
+  gap: 6px;
+  align-content: start;
+  padding: 13px;
+  color: var(--text);
+  text-align: left;
+}
+
+.spine-step svg {
+  margin-bottom: 4px;
+}
+
+.spine-step strong {
+  overflow-wrap: anywhere;
+  font-size: 15px;
+}
+
+.spine-step small {
+  color: var(--muted);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.spine-step:disabled {
+  opacity: 1;
+}
+
+.spine-green svg {
+  color: var(--green);
+}
+
+.spine-blue svg {
+  color: var(--blue);
+}
+
+.spine-violet svg {
+  color: var(--violet);
+}
+
+.spine-slate svg {
+  color: var(--slate);
+}
+
+.spine-red svg {
+  color: var(--red);
+}
+
+.spine-amber svg {
+  color: var(--amber);
+}
+
+.attention-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 14px;
+}
+
+.attention-list,
+.evidence-trail {
+  display: grid;
+  gap: 10px;
+}
+
+.attention-list article,
+.evidence-trail article {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.attention-list article:first-child,
+.evidence-trail article:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.attention-list article {
+  grid-template-columns: 86px minmax(0, 1fr);
+}
+
+.attention-list strong,
+.evidence-trail strong {
+  overflow-wrap: anywhere;
+}
+
+.attention-list p,
+.evidence-trail p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.attention-list small {
+  color: var(--muted);
 }
 
 .metrics-band {
@@ -1343,7 +1574,9 @@ h3 {
   .history-visual-grid,
   .agent-visual-grid,
   .agent-flow-map article,
-  .source-layout {
+  .source-layout,
+  .command-center,
+  .attention-layout {
     grid-template-columns: 1fr;
   }
 
@@ -1383,7 +1616,24 @@ h3 {
   .agent-workload-strip,
   .agent-bars,
   .task-lanes > div,
-  .requirements-table {
+    .requirements-table {
+    grid-template-columns: 1fr;
+  }
+
+  .ux-spine {
+    grid-template-columns: 1fr;
+  }
+
+  .command-card {
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .command-card h2 {
+    font-size: 22px;
+  }
+
+  .attention-list article {
     grid-template-columns: 1fr;
   }
 
