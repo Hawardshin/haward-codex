@@ -1429,6 +1429,7 @@
     "human_decision_inbox",
     "human_arbitration_agent",
     "project_registry",
+    "design_asset_library",
     "root_structure_policy",
     "naming_policy",
     "assistant_runtime_adapter_registry",
@@ -1498,6 +1499,7 @@
     "human_decision_inbox",
     "human_arbitration_agent",
     "project_registry",
+    "design_asset_library",
     "root_structure_policy",
     "naming_policy",
     "assistant_runtime_adapter_registry",
@@ -1774,6 +1776,14 @@
       "path": "_ops/projects/registry.json",
       "tier": "hot",
       "purpose": "Root project ownership and boundary registry.",
+      "required": true,
+      "load_order": 9
+    },
+    {
+      "id": "design_asset_library",
+      "path": "design-asset-library/data/asset-registry.json",
+      "tier": "warm",
+      "purpose": "Reusable legal SVG design asset registry with generated asset paths, source provenance, external candidate rules, and license cautions.",
       "required": true,
       "load_order": 9
     },

@@ -21,6 +21,7 @@ class WorkspaceHealthTests(unittest.TestCase):
         (root / "presentation-agent" / "package.json").write_text("{}", encoding="utf-8")
         (root / "platform-desktop-app").mkdir()
         (root / "platform-desktop-app" / "package.json").write_text("{}", encoding="utf-8")
+        (root / "design-asset-library").mkdir()
         (root / "workspace-monitor").mkdir()
         (root / "workspace-monitor" / "package.json").write_text("{}", encoding="utf-8")
         return root
@@ -45,6 +46,7 @@ class WorkspaceHealthTests(unittest.TestCase):
         self.assertIn("presentation-agent browser validation", names)
         self.assertIn("platform-desktop-app tests", names)
         self.assertIn("platform-desktop-app readiness", names)
+        self.assertIn("design-asset-library tests", names)
         self.assertIn("tool tests: alpha", names)
         self.assertIn("workspace-monitor tests", names)
         self.assertNotIn("workspace-monitor build", names)

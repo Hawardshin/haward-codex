@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title-workflow-shipping-path-navy-sky">
+  <title id="title-workflow-shipping-path-navy-sky">Workflow Shipping Path Navy Sky</title>
+  <rect width="256" height="256" rx="28" fill="#f7fbff"/>
+  <path d="M54 80h52c18 0 26 32 42 32h54" fill="none" stroke="#183153" stroke-width="8" stroke-linecap="round"/>
+  <path d="M54 156h52c18 0 26 -32 42 -32h54" fill="none" stroke="#4dabf7" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="54" cy="80" r="18" fill="#e7f5ff" stroke="#183153" stroke-width="5"/>
+  <circle cx="54" cy="156" r="18" fill="#e7f5ff" stroke="#4dabf7" stroke-width="5"/>
+  <rect x="104" y="104" width="52" height="52" rx="12" fill="#183153"/>
+  <path d="M122 130h34" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="202" cy="80" r="18" fill="#4dabf7"/>
+  <circle cx="202" cy="156" r="18" fill="#183153"/>
+</svg>

@@ -1,0 +1,95 @@
+{
+  "task": "Ground design asset library close-out claims.",
+  "output_summary": "A legal-first design asset library now stores 120 generated SVG assets and records open-source candidates without downloading them.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "asset_registry",
+      "source": "design-asset-library/data/asset-registry.json",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local generated asset registry."
+    },
+    {
+      "evidence_id": "generator",
+      "source": "design-asset-library/scripts/generate_svg_assets.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local deterministic SVG generator."
+    },
+    {
+      "evidence_id": "asset_tests",
+      "source": "design-asset-library/tests/test_asset_registry.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-02",
+      "reliability": "Local unit tests for registry and SVG files."
+    },
+    {
+      "evidence_id": "lucide_license",
+      "source": "https://lucide.dev/license",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Lucide license page."
+    },
+    {
+      "evidence_id": "heroicons_home",
+      "source": "https://heroicons.com/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Heroicons site."
+    },
+    {
+      "evidence_id": "tabler_icons",
+      "source": "https://tabler.io/icons",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-02",
+      "reliability": "Official Tabler Icons page."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The design asset library contains 120 generated SVG assets.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["asset_registry", "generator", "asset_tests"],
+      "verification_steps": ["Run the generator and asset registry tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The generated asset pack did not copy third-party SVG files.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["asset_registry", "generator"],
+      "verification_steps": ["Inspect generation_policy and generator output."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "External sources are recorded as candidates and not downloaded.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": ["asset_registry", "asset_tests"],
+      "verification_steps": ["Inspect external_source_candidates and run tests."],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Lucide, Heroicons, and Tabler are useful source candidates because their official pages publish open-source/license information.",
+      "claim_type": "research_summary",
+      "support_level": "supported",
+      "evidence_ids": ["lucide_license", "heroicons_home", "tabler_icons"],
+      "verification_steps": ["Review saved web search record and official source pages."],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "External license pages can change; recheck before downloading or public release.",
+    "Generated assets still need repository-owner license confirmation before public redistribution."
+  ],
+  "limitation_notes": [
+    "No external SVG files were downloaded.",
+    "No visual gallery UI was implemented in this change."
+  ]
+}

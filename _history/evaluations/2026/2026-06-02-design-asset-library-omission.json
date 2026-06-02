@@ -1,0 +1,117 @@
+{
+  "task": "Create a legal reusable SVG design asset library.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web_first",
+      "description": "Run web-first intake and record source/licensing evidence.",
+      "source": "AGENTS.md and user request",
+      "required": true,
+      "status": "covered",
+      "evidence": ["_history/web-searches/2026/2026-06-02-design-asset-library.ko.md"],
+      "rationale": ""
+    },
+    {
+      "item_id": "legal_boundary",
+      "description": "Avoid illegal downloading and separate generated assets from external candidates.",
+      "source": "User explicitly said not to download illegally.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "design-asset-library/docs/licensing/README.ko.md",
+        "design-asset-library/data/asset-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "many_svg_assets",
+      "description": "Prepare many reusable SVG assets.",
+      "source": "User requested many design assets.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "design-asset-library/assets/svg/generated/",
+        "find design-asset-library/assets/svg/generated -name '*.svg' | wc -l: 120"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "regenerable_structure",
+      "description": "Provide a generator so assets can be extended or regenerated.",
+      "source": "Maintainability and reuse rules.",
+      "required": true,
+      "status": "covered",
+      "evidence": ["design-asset-library/scripts/generate_svg_assets.py"],
+      "rationale": ""
+    },
+    {
+      "item_id": "registry_and_tests",
+      "description": "Keep an asset registry and tests proving registry integrity.",
+      "source": "Source provenance and validation rules.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "design-asset-library/data/asset-registry.json",
+        "design-asset-library/tests/test_asset_registry.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "presentation_integration",
+      "description": "Document how presentation-agent uses the shared asset library.",
+      "source": "Presentation-agent design asset need.",
+      "required": true,
+      "status": "covered",
+      "evidence": ["presentation-agent/docs/design/svg-asset-library-usage.ko.md"],
+      "rationale": ""
+    },
+    {
+      "item_id": "platform_navigation",
+      "description": "Register the project and memory anchor so future agents find it.",
+      "source": "Repository operations rules.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_ops/projects/registry.json",
+        "agent-platform/configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {"path": "design-asset-library/data/asset-registry.json", "purpose": "Asset registry and source provenance.", "required": true},
+    {"path": "design-asset-library/assets/svg/generated/", "purpose": "Generated SVG files.", "required": true},
+    {"path": "design-asset-library/scripts/generate_svg_assets.py", "purpose": "Generator.", "required": true}
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "asset_count",
+      "description": "At least 100 generated SVG assets exist.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["120 SVG files generated."],
+      "rationale": ""
+    },
+    {
+      "check_id": "asset_tests",
+      "description": "Generated SVG paths exist, parse, and external candidates are not downloaded.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["python3 -m unittest discover -s design-asset-library/tests: 4 tests passed"],
+      "rationale": ""
+    },
+    {
+      "check_id": "config_contract",
+      "description": "Asset registry is self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["check-config-contract ../design-asset-library/data/asset-registry.json: self_documenting"],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Generated assets need owner-confirmed license terms before public redistribution.",
+    "External candidates were not downloaded; later storage requires license review."
+  ],
+  "notes": ["No third-party SVG files were copied into the generated asset pack."]
+}

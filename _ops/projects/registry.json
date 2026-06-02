@@ -1,4 +1,91 @@
 {
+  "schema_version": "1.0.0",
+  "name": "workspace-root-project-registry",
+  "purpose": "Registry of root-level projects, their ownership boundaries, project-local homes, shared dependencies, and operating notes.",
+  "reader_guide": {
+    "summary": "Use this registry to decide whether work belongs in an existing root project, a reserved underscore operations folder, or a new root project.",
+    "how_to_read": [
+      "Find the project by name or path.",
+      "Read purpose and scope before placing files.",
+      "Use project_specific_home to decide where project-local code, docs, configs, assets, tests, and artifacts belong.",
+      "Use shared_dependencies and boundary_notes to avoid mixing project-specific and shared workspace assets."
+    ],
+    "owner": "workspace-operations",
+    "last_reviewed": "2026-06-02",
+    "update_triggers": [
+      "A root project is created, archived, renamed, or removed.",
+      "A project boundary changes.",
+      "A project starts depending on a shared tool, template, skill, or asset library.",
+      "Structure audit or workspace map output shows an unregistered root project."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "root-structure-policy",
+      "title": "Root Structure Policy",
+      "path": "_ops/projects/root-structure-policy.json",
+      "source_type": "internal",
+      "used_for": [
+        "root folder classification",
+        "reserved operations folder rules",
+        "registered project boundaries"
+      ],
+      "last_checked": "2026-06-02"
+    },
+    {
+      "id": "project-boundary-workflow",
+      "title": "Project Boundary Management Workflow",
+      "path": "_ops/workflows/25-project-boundary-management.md",
+      "source_type": "internal",
+      "used_for": [
+        "deciding project ownership before implementation",
+        "preventing project-specific files from drifting into shared folders"
+      ],
+      "last_checked": "2026-06-02"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "root-projects-only",
+      "rule": "Each projects entry must describe one root-level non-reserved project folder.",
+      "reason": "Root project registration keeps workspace ownership clear as projects multiply.",
+      "applies_to": ["projects"]
+    },
+    {
+      "id": "project-home-required",
+      "rule": "Each active project should list project_specific_home paths for its code, docs, configs, assets, tests, and artifacts.",
+      "reason": "Future agents need to know where to put files without relying on chat history.",
+      "applies_to": ["project_specific_home"]
+    },
+    {
+      "id": "boundary-notes-required",
+      "rule": "Boundary notes should explain what belongs in the project and what must stay in shared operations folders.",
+      "reason": "This prevents domain-specific assets and shared platform assets from being mixed accidentally.",
+      "applies_to": ["boundary_notes"]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "projects",
+      "meaning": "Registered root projects and their boundaries.",
+      "required": true
+    },
+    {
+      "field": "project_specific_home",
+      "meaning": "Project-owned folders where project-specific code, docs, configs, assets, tests, and artifacts should live.",
+      "required": true
+    },
+    {
+      "field": "shared_dependencies",
+      "meaning": "Shared workspace folders or projects this project may reference without owning.",
+      "required": true
+    },
+    {
+      "field": "boundary_notes",
+      "meaning": "Operational notes for avoiding ownership drift.",
+      "required": true
+    }
+  ],
   "version": 1,
   "updated": "2026-06-02",
   "projects": [
@@ -54,6 +141,36 @@
         "Keep presentation-specific data, conversions, and generated artifacts inside presentation-agent/.",
         "Store raw PPT/PPTX/assets only after project-local license review.",
         "Reusable presentation reference curation behavior is tracked as a skill under _skills/."
+      ]
+    },
+    {
+      "name": "design-asset-library",
+      "path": "design-asset-library/",
+      "status": "active",
+      "type": "shared-design-asset-project",
+      "purpose": "Reusable, legally cautious SVG design asset library for presentation decks, HTML artifacts, dashboards, prototypes, and platform visual systems.",
+      "scope": "Internally generated SVG packs, asset registry, source provenance, license guidance, usage guidance, generator scripts, and asset validation tests.",
+      "project_specific_home": [
+        "design-asset-library/assets/",
+        "design-asset-library/configs/",
+        "design-asset-library/data/",
+        "design-asset-library/docs/",
+        "design-asset-library/scripts/",
+        "design-asset-library/specs/",
+        "design-asset-library/tests/"
+      ],
+      "shared_dependencies": [
+        "presentation-agent/",
+        "workspace-monitor/",
+        "platform-desktop-app/",
+        "_history/",
+        "_ops/"
+      ],
+      "boundary_notes": [
+        "Use generated SVG assets as the default legal-safe asset source.",
+        "Do not store third-party SVG files unless license, source URL, access date, attribution, and public-use constraints are recorded.",
+        "External source candidates are research leads until license review is complete.",
+        "Project-specific finished deck or UI artifacts stay in the owning project; reusable source SVG assets stay here."
       ]
     },
     {

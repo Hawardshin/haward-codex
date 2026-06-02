@@ -1,0 +1,31 @@
+{
+  "request_id": "UR-2026-06-02-041",
+  "selected_at": "2026-06-02",
+  "selected_work_mode": "governance",
+  "reason": "The request creates a new reusable root project, changes project registry and memory anchors, introduces license-sensitive asset governance, and requires durable requirements/spec/history records.",
+  "alternatives_considered": [
+    {
+      "mode": "quick",
+      "decision": "rejected",
+      "reason": "Too light for a new reusable project and license-sensitive asset policy."
+    },
+    {
+      "mode": "standard",
+      "decision": "rejected",
+      "reason": "Implementation is required, but governance is more appropriate because project registry, memory anchors, and asset legality rules change."
+    }
+  ],
+  "required_closeout_targets": [
+    "web_search_record_targets",
+    "user_request_summary_targets",
+    "requirements_targets",
+    "spec_targets",
+    "source_provenance_targets",
+    "plan_evidence_targets",
+    "mode_selection_record_targets",
+    "omission_check_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets"
+  ]
+}

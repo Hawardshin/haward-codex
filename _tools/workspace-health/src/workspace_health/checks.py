@@ -71,7 +71,9 @@ def build_checks(root: Path, include_build: bool = False) -> list[Check]:
                         "../platform-desktop-app/configs/user-flow-registry.json",
                         "../platform-desktop-app/configs/macos-execution-profile.json",
                         "../platform-desktop-app/configs/windows-execution-profile.json",
+                        "../design-asset-library/data/asset-registry.json",
                         "../_docs/registry.json",
+                        "../_ops/projects/registry.json",
                         "../_ops/coordination/human-decision-inbox.json",
                         "../_ops/installations/registry.json",
                         "../_ops/assistant-runtimes/adapter-registry.json",
@@ -112,6 +114,17 @@ def build_checks(root: Path, include_build: bool = False) -> list[Check]:
                 Check("platform-desktop-app tests", "projects", platform_desktop_app, ("npm", "run", "test")),
                 Check("platform-desktop-app readiness", "projects", platform_desktop_app, ("npm", "run", "check")),
             ]
+        )
+
+    design_asset_library = root / "design-asset-library"
+    if design_asset_library.exists():
+        checks.append(
+            Check(
+                "design-asset-library tests",
+                "projects",
+                root,
+                (py, "-m", "unittest", "discover", "-s", "design-asset-library/tests"),
+            )
         )
 
     for test_dir in discover_tool_test_dirs(root):
