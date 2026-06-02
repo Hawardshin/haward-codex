@@ -1,0 +1,103 @@
+{
+  "task": "Ground factual claims for Mode and Function Switchboard.",
+  "output_summary": "Workspace Monitor now has a snapshot-level modeFunctionCatalog and an Overview switchboard for choosing or locating platform modes and functions.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "collector",
+      "source": "workspace-monitor/scripts/collect-workspace.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Primary collector source now building modeFunctionCatalog."
+    },
+    {
+      "evidence_id": "snapshot-types",
+      "source": "workspace-monitor/lib/snapshot.ts",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Type contract for WorkspaceModeFunctionCatalog."
+    },
+    {
+      "evidence_id": "monitor-ui",
+      "source": "workspace-monitor/components/MonitorShell.tsx",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Overview UI now renders ModeFunctionSwitchboard and navigation/selection behavior."
+    },
+    {
+      "evidence_id": "tests",
+      "source": "workspace-monitor/tests/collector.test.mjs",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Collector tests assert modeFunctionCatalog groups and desktop mode locations."
+    },
+    {
+      "evidence_id": "static-smoke",
+      "source": "workspace-monitor/specs/2026-06-03-mode-function-switchboard/validation.ko.md",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-03",
+      "reliability": "Validation record for snapshot JSON and built output checks."
+    },
+    {
+      "evidence_id": "ui-references",
+      "source": "_history/web-searches/2026/2026-06-03-mode-function-switchboard.ko.md",
+      "source_type": "web_source",
+      "checked_on": "2026-06-03",
+      "reliability": "Public source record for official UI/navigation references."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "The generated Workspace Monitor snapshot contains modeFunctionCatalog and modeGroups/modeOptions counts.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "collector",
+        "snapshot-types",
+        "tests",
+        "static-smoke"
+      ],
+      "verification_steps": [
+        "Ran collect/test/check/build/perf.",
+        "Served static output and checked workspace-snapshot.json."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Overview includes a Mode & Function Switchboard that shows selector location and source path for mode/function groups.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "monitor-ui",
+        "static-smoke"
+      ],
+      "verification_steps": [
+        "Read MonitorShell.tsx.",
+        "Checked built output for Mode & Function Switchboard strings."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The design direction follows official UI guidance favoring explicit navigation and selection surfaces.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "ui-references"
+      ],
+      "verification_steps": [
+        "Recorded Apple, Microsoft Fluent, and WAI-ARIA sources in the web search record."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "No visual screenshot or keyboard-only pass was captured in this turn."
+  ],
+  "limitation_notes": [
+    "This is a repository-local snapshot/UI locator. It does not persist work/install runtime choices or auto-install optional CLI adapters.",
+    "Public installer readiness is still gated by signing, notarization, and platform-specific smoke tests."
+  ]
+}

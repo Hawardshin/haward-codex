@@ -14,6 +14,8 @@ export type WorkspaceStats = {
   timingRecords?: number;
   historyDays: number;
   unifiedOpsEvents?: number;
+  modeGroups?: number;
+  modeOptions?: number;
   sourceFiles?: number;
   rootFolders: number;
 };
@@ -279,6 +281,38 @@ export type WorkspaceLanguageMode = {
   documentRule: string;
 };
 
+export type WorkspaceModeFunctionOption = {
+  id: string;
+  label: string;
+  description: string;
+  location: string;
+  status: string;
+  sourcePath: string;
+};
+
+export type WorkspaceModeFunctionGroup = {
+  id: string;
+  label: string;
+  purpose: string;
+  selectorLocation: string;
+  defaultMode: string;
+  sourcePath: string;
+  desktopRuntime: boolean;
+  optionCount: number;
+  options: WorkspaceModeFunctionOption[];
+};
+
+export type WorkspaceModeFunctionCatalog = {
+  summary: {
+    totalGroups: number;
+    totalOptions: number;
+    explicitSelectors: number;
+    registryBackedGroups: number;
+    desktopGroups: number;
+  };
+  groups: WorkspaceModeFunctionGroup[];
+};
+
 export type WorkspaceSnapshot = {
   schemaVersion: string;
   generatedAt: string;
@@ -303,6 +337,7 @@ export type WorkspaceSnapshot = {
     defaultMode: string;
     modes: WorkspaceLanguageMode[];
   };
+  modeFunctionCatalog?: WorkspaceModeFunctionCatalog;
   categories: string[];
   publicReview: {
     status: string;

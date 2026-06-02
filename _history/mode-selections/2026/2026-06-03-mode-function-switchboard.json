@@ -1,0 +1,18 @@
+{
+  "task_id": "2026-06-03-mode-function-switchboard",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes the user-facing workspace monitor and makes existing platform modes and function locations explicit, but it does not change durable governance rules or add a new external runtime.",
+  "required_records": [
+    "web_search_record",
+    "requirements_change",
+    "project_spec",
+    "request_trace",
+    "work_summary",
+    "omission_check",
+    "resource_check",
+    "grounding_check",
+    "work_evaluation"
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "task": "Add explicit mode and function switchboard",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Search current UI/navigation selector references before planning and edits.",
+      "source": "AGENTS.md web-first rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-mode-function-switchboard.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "mode-inventory",
+      "description": "Find existing view/language/work/install/CLI/desktop mode sources.",
+      "source": "User request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/workflows/work-mode-registry.json",
+        "agent-platform/configs/installations/install-mode-registry.json",
+        "agent-platform/configs/integrations/cli-adapter-registry.json",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "snapshot-catalog",
+      "description": "Generate a structured mode/function catalog in the monitor snapshot.",
+      "source": "REQ-WM-019",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs",
+        "workspace-monitor/lib/snapshot.ts",
+        "workspace-monitor/src/generated/workspace-snapshot.json",
+        "workspace-monitor/public/workspace-snapshot.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "overview-ui",
+      "description": "Expose a visible switchboard that shows selection locations and opens/selects actionable items.",
+      "source": "REQ-WM-019",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "regression-tests",
+      "description": "Add tests and readiness checks so the catalog and UI surface do not disappear.",
+      "source": "validation policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/tests/collector.test.mjs",
+        "platform-desktop-app/tests/readiness.test.mjs",
+        "platform-desktop-app/scripts/check-readiness.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "requirements-spec-history",
+      "description": "Record requirements, spec, request trace, work summary, timing, and evaluation artifacts.",
+      "source": "requirements/spec/history rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+        "workspace-monitor/specs/2026-06-03-mode-function-switchboard/",
+        "_history/request-traces/2026/2026-06-03-mode-function-switchboard.ko.md",
+        "_history/work-summaries/2026/2026-06-03.ko.md",
+        "_history/work-timings/2026/2026-06-03-mode-function-switchboard.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "workspace-monitor/scripts/collect-workspace.mjs",
+      "purpose": "Mode/function catalog aggregation.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Overview switchboard and mode/location navigation.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/specs/2026-06-03-mode-function-switchboard/spec.ko.md",
+      "purpose": "Project spec contract.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "collect",
+      "description": "Regenerate snapshot with modeFunctionCatalog.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run collect"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "tests",
+      "description": "Run collector and desktop readiness tests.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor test",
+        "npm --prefix platform-desktop-app test"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "typecheck-build-perf",
+      "description": "Run UI typecheck, build, and performance budget.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check",
+        "npm --prefix workspace-monitor run build",
+        "npm --prefix workspace-monitor run perf:budget"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "desktop-check",
+      "description": "Run desktop readiness check.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "npm --prefix platform-desktop-app run check returned no failures; Rust warning only"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "static-smoke",
+      "description": "Serve static output and confirm snapshot plus built UI strings.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "curl http://127.0.0.1:4183/",
+        "curl http://127.0.0.1:4183/workspace-snapshot.json found modeFunctionCatalog, modeGroups, modeOptions",
+        "rg found Mode & Function Switchboard, 모드와 기능 선택 위치, mode-switchboard-panel, modeFunctionCatalog in built output"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Browser screenshot and keyboard validation were not run in this turn.",
+    "Public macOS installer readiness remains out of scope and still needs signing/notarization checks."
+  ],
+  "notes": [
+    "This switchboard is a visible locator and selector surface; it does not make optional CLIs required or auto-installed."
+  ]
+}

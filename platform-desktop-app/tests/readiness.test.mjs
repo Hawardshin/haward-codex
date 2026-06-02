@@ -133,7 +133,12 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Platform-first host",
     "Guest adapters",
     "Platform state owner",
-    "Evidence / Promotion"
+    "Evidence / Promotion",
+    "Mode & Function Switchboard",
+    "모드와 기능 선택 위치",
+    "Desktop Session Mode",
+    "Task Pipe Preset",
+    "선택/위치 열기"
   ]) {
     assert.match(monitorShell, new RegExp(uiString));
   }
@@ -163,7 +168,12 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "source-draft-queue",
     "source-file-browser",
     "Guest Adapters",
-    "evidence-grid"
+    "evidence-grid",
+    "modeFunctionCatalog",
+    "ModeFunctionSwitchboard",
+    "mode-switchboard-panel",
+    "mode-option-grid",
+    "openModeFunctionOption"
   ]) {
     assert.match(monitorShell, new RegExp(implementationToken));
   }

@@ -62,6 +62,7 @@ type MonitorViewMode = NonNullable<WorkspaceSnapshot["viewModeCatalog"]>["modes"
 type MonitorLanguageMode = NonNullable<WorkspaceSnapshot["languageModeCatalog"]>["modes"][number];
 type CollaborationBoard = NonNullable<WorkspaceSnapshot["collaborationBoard"]>;
 type UnifiedOps = NonNullable<WorkspaceSnapshot["unifiedOps"]>;
+type ModeFunctionCatalog = NonNullable<WorkspaceSnapshot["modeFunctionCatalog"]>;
 
 const fallbackViewModes: MonitorViewMode[] = [
   {
@@ -152,6 +153,19 @@ const emptyUnifiedOps: UnifiedOps = {
   sourceTypes: [],
   events: []
 };
+
+const emptyModeFunctionCatalog: ModeFunctionCatalog = {
+  summary: {
+    totalGroups: 0,
+    totalOptions: 0,
+    explicitSelectors: 0,
+    registryBackedGroups: 0,
+    desktopGroups: 0
+  },
+  groups: []
+};
+
+const sectionIds = new Set<SectionId>(sections.map((section) => section.id));
 
 type TauriInvoke = <T>(command: string, args?: Record<string, unknown>) => Promise<T>;
 
@@ -472,6 +486,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const languageModes = snapshot.languageModeCatalog?.modes?.length ? snapshot.languageModeCatalog.modes : fallbackLanguageModes;
   const [viewMode, setViewMode] = useState(snapshot.viewModeCatalog?.defaultMode || "superadmin_developer");
   const [languageMode, setLanguageMode] = useState(snapshot.languageModeCatalog?.defaultMode || "all");
+  const modeFunctionCatalog = snapshot.modeFunctionCatalog ?? emptyModeFunctionCatalog;
+  const [selectedModeFunctionGroupId, setSelectedModeFunctionGroupId] = useState(
+    modeFunctionCatalog.groups[0]?.id || "view_mode"
+  );
   const currentViewMode = useMemo(() => {
     return viewModes.find((mode) => mode.id === viewMode) || viewModes[0] || fallbackViewModes[2];
   }, [viewMode, viewModes]);
@@ -488,6 +506,44 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     if (!nextMode.allowedSections.includes(section)) {
       setSection((nextMode.allowedSections[0] as SectionId | undefined) || "overview");
     }
+  };
+  const openModeFunctionOption = (groupId: string, optionId: string) => {
+    if (groupId === "view_mode") {
+      selectViewMode(optionId);
+      return;
+    }
+
+    if (groupId === "language_mode") {
+      setLanguageMode(optionId);
+      setCategory("all");
+      setHistoryCategory("all");
+      return;
+    }
+
+    if (groupId === "section_location" && sectionIds.has(optionId as SectionId)) {
+      const targetSection = optionId as SectionId;
+      if (!currentViewMode.allowedSections.includes(targetSection)) {
+        const modeWithSection =
+          viewModes.find((mode) => mode.id === "superadmin_developer" && mode.allowedSections.includes(targetSection)) ||
+          viewModes.find((mode) => mode.allowedSections.includes(targetSection));
+        if (modeWithSection) {
+          setViewMode(modeWithSection.id);
+        }
+      }
+      setSection(targetSection);
+      return;
+    }
+
+    if (["desktop_session_mode", "task_pipe", "cli_adapter"].includes(groupId)) {
+      setSection("desktop");
+      return;
+    }
+
+    const group = modeFunctionCatalog.groups.find((item) => item.id === groupId);
+    const option = group?.options.find((item) => item.id === optionId);
+    setSection("documents");
+    setCategory("all");
+    setQuery(option?.sourcePath || group?.sourcePath || option?.label || group?.label || "");
   };
 
   const deferredQuery = useDeferredValue(query);
@@ -872,6 +928,13 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             events={visibleUnifiedEvents.slice(0, 14)}
             onOpenHistory={() => setSection("history")}
             onOpenAgents={() => setSection("agents")}
+          />
+
+          <ModeFunctionSwitchboard
+            catalog={modeFunctionCatalog}
+            selectedGroupId={selectedModeFunctionGroupId}
+            onSelectGroup={setSelectedModeFunctionGroupId}
+            onOpenOption={openModeFunctionOption}
           />
 
           <section className="panel wide action-evidence-panel">
@@ -1375,6 +1438,131 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       )}
     </main>
   );
+}
+
+function ModeFunctionSwitchboard({
+  catalog,
+  selectedGroupId,
+  onSelectGroup,
+  onOpenOption
+}: {
+  catalog: ModeFunctionCatalog;
+  selectedGroupId: string;
+  onSelectGroup: (groupId: string) => void;
+  onOpenOption: (groupId: string, optionId: string) => void;
+}) {
+  const selectedGroup = catalog.groups.find((group) => group.id === selectedGroupId) || catalog.groups[0];
+  const SelectedIcon = modeFunctionIcon(selectedGroup?.id || "section_location");
+
+  return (
+    <section className="panel wide mode-switchboard-panel">
+      <div className="panel-heading">
+        <div>
+          <p className="eyebrow">Mode & Function Switchboard</p>
+          <h2>모드와 기능 선택 위치</h2>
+        </div>
+        <div className="mode-switchboard-summary">
+          <span>{catalog.summary.totalGroups.toLocaleString("ko-KR")} groups</span>
+          <span>{catalog.summary.totalOptions.toLocaleString("ko-KR")} options</span>
+          <span>{catalog.summary.desktopGroups.toLocaleString("ko-KR")} desktop</span>
+        </div>
+      </div>
+
+      {catalog.groups.length ? (
+        <div className="mode-switchboard-layout">
+          <div className="mode-group-list" aria-label="Mode and function groups">
+            {catalog.groups.map((group) => {
+              const Icon = modeFunctionIcon(group.id);
+              return (
+                <button
+                  key={group.id}
+                  type="button"
+                  className={selectedGroup?.id === group.id ? "active" : ""}
+                  onClick={() => onSelectGroup(group.id)}
+                  title={group.selectorLocation}
+                >
+                  <Icon size={16} aria-hidden="true" />
+                  <span>{modeFunctionLabel(group.id, group.label)}</span>
+                  <small>{group.optionCount.toLocaleString("ko-KR")}</small>
+                </button>
+              );
+            })}
+          </div>
+
+          <article className="mode-location-card">
+            <div>
+              <SelectedIcon size={18} aria-hidden="true" />
+              <span>{selectedGroup?.desktopRuntime ? "desktop runtime" : "platform catalog"}</span>
+            </div>
+            <h3>{selectedGroup?.label || "No group selected"}</h3>
+            <p>{selectedGroup?.purpose || "선택 가능한 모드와 기능 위치를 찾지 못했습니다."}</p>
+            {selectedGroup && (
+              <dl>
+                <dt>Selector</dt>
+                <dd>{selectedGroup.selectorLocation}</dd>
+                <dt>Default</dt>
+                <dd>{selectedGroup.defaultMode || "manual choice"}</dd>
+                <dt>Source</dt>
+                <dd>{selectedGroup.sourcePath || "local UI"}</dd>
+              </dl>
+            )}
+          </article>
+
+          <div className="mode-option-grid" aria-label="Mode and function options">
+            {selectedGroup?.options.map((option) => (
+              <article key={`${selectedGroup.id}-${option.id}`}>
+                <div className="mode-option-header">
+                  <span>{option.status}</span>
+                  <strong>{option.label}</strong>
+                </div>
+                <p>{option.description || selectedGroup.purpose}</p>
+                <small>{option.location}</small>
+                <button type="button" onClick={() => onOpenOption(selectedGroup.id, option.id)}>
+                  <span>선택/위치 열기</span>
+                  <ArrowRight size={14} aria-hidden="true" />
+                </button>
+              </article>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <p className="empty-state">modeFunctionCatalog 데이터가 아직 생성되지 않았습니다.</p>
+      )}
+    </section>
+  );
+}
+
+function modeFunctionIcon(groupId: string): LucideIcon {
+  if (groupId === "view_mode" || groupId === "install_mode") {
+    return ShieldCheck;
+  }
+  if (groupId === "language_mode") {
+    return Languages;
+  }
+  if (groupId === "work_mode") {
+    return ClipboardCheck;
+  }
+  if (groupId === "desktop_session_mode" || groupId === "cli_adapter") {
+    return SquareTerminal;
+  }
+  if (groupId === "task_pipe") {
+    return Network;
+  }
+  return Layers;
+}
+
+function modeFunctionLabel(groupId: string, fallback: string) {
+  const labels: Record<string, string> = {
+    desktop_session_mode: "Desktop Session Mode",
+    task_pipe: "Task Pipe Preset",
+    cli_adapter: "CLI Adapter",
+    view_mode: "View Mode",
+    language_mode: "Language Mode",
+    work_mode: "Work Mode",
+    install_mode: "Install Mode",
+    section_location: "Monitor Section"
+  };
+  return labels[groupId] || fallback;
 }
 
 function UnifiedOpsPanel({

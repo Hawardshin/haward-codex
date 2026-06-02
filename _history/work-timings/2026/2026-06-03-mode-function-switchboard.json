@@ -1,0 +1,48 @@
+{
+  "task_id": "2026-06-03-mode-function-switchboard",
+  "title": "Add explicit mode and function switchboard",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "check navigation and selector references",
+      "status": "completed",
+      "duration_seconds": 180,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official UI/navigation references were checked before local implementation."
+    },
+    {
+      "phase_id": "source_inventory",
+      "label": "inspect registries, monitor UI, and collector",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "The change touched a bounded monitor slice and desktop readiness tests."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "add catalog, switchboard UI, tests, and docs",
+      "status": "completed",
+      "duration_seconds": 1320,
+      "measurement": "estimated",
+      "bottleneck_notes": "The collector, types, React UI, CSS, tests, requirements, specs, and records were updated."
+    },
+    {
+      "phase_id": "validation",
+      "label": "run collect, tests, check, build, perf, and static smoke",
+      "status": "completed",
+      "duration_seconds": 540,
+      "measurement": "estimated",
+      "bottleneck_notes": "Static smoke was used for built output and snapshot verification."
+    },
+    {
+      "phase_id": "closeout_records",
+      "label": "write omission, resource, grounding, and evaluation records",
+      "status": "completed",
+      "duration_seconds": 720,
+      "measurement": "estimated",
+      "bottleneck_notes": "Standard close-out records were required because this changed user-facing monitor behavior."
+    }
+  ]
+}

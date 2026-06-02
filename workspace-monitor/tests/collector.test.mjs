@@ -10,6 +10,7 @@ import {
   buildUnifiedOps,
   collectAgentCatalog,
   collectLanguageModeCatalog,
+  collectModeFunctionCatalog,
   collectSourceFiles,
   collectViewModeCatalog,
   extractHistoryDate,
@@ -156,7 +157,65 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.viewModeCatalog.defaultMode, "superadmin_developer");
   assert.equal(snapshot.languageModeCatalog.defaultMode, "all");
   assert.equal(snapshot.languageModeCatalog.modes[1].id, "ko");
+  assert.equal(snapshot.modeFunctionCatalog.summary.totalGroups >= 8, true);
+  assert.equal(snapshot.modeFunctionCatalog.groups.some((group) => group.id === "view_mode"), true);
+  assert.equal(snapshot.modeFunctionCatalog.groups.some((group) => group.id === "section_location"), true);
+  assert.equal(snapshot.stats.modeOptions, snapshot.modeFunctionCatalog.summary.totalOptions);
   assert.equal(snapshot.documents.some((document) => document.language === "ko"), true);
+});
+
+test("collectModeFunctionCatalog exposes explicit selectors and desktop mode locations", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-mode-test-"));
+  fs.mkdirSync(path.join(root, "agent-platform", "configs", "workflows"), { recursive: true });
+  fs.mkdirSync(path.join(root, "agent-platform", "configs", "installations"), { recursive: true });
+  fs.mkdirSync(path.join(root, "agent-platform", "configs", "integrations"), { recursive: true });
+  fs.writeFileSync(
+    path.join(root, "agent-platform", "configs", "workflows", "work-mode-registry.json"),
+    JSON.stringify({
+      default_mode: "standard",
+      modes: [{ id: "standard", label: "Standard", intent: "Default meaningful work", enforcement_level: "blocking" }]
+    })
+  );
+  fs.writeFileSync(
+    path.join(root, "agent-platform", "configs", "installations", "install-mode-registry.json"),
+    JSON.stringify({
+      default_mode: "user",
+      modes: [{ id: "user", label: "User Install", intent: "Use the platform" }]
+    })
+  );
+  fs.writeFileSync(
+    path.join(root, "agent-platform", "configs", "integrations", "cli-adapter-registry.json"),
+    JSON.stringify({
+      supported_ai_cli_adapters: [
+        {
+          adapter_id: "codex-cli",
+          display_name: "Codex CLI",
+          default_state: "optional_supported",
+          expected_command_candidates: ["codex"],
+          capability_class: "ai_assistant_cli",
+          runtime_role: "guest_adapter_on_platform"
+        }
+      ]
+    })
+  );
+
+  const catalog = collectModeFunctionCatalog(
+    root,
+    {
+      defaultMode: "superadmin_developer",
+      modes: [{ id: "superadmin_developer", label: "Super Admin Dev", intent: "Full view", allowedSections: ["overview", "desktop"] }]
+    },
+    {
+      defaultMode: "all",
+      modes: [{ id: "all", label: "전체", intent: "All docs", documentRule: "Show all documents" }]
+    }
+  );
+
+  assert.equal(catalog.summary.totalGroups, 8);
+  assert.equal(catalog.groups.find((group) => group.id === "work_mode").defaultMode, "standard");
+  assert.equal(catalog.groups.find((group) => group.id === "cli_adapter").options[0].id, "codex-cli");
+  assert.equal(catalog.groups.find((group) => group.id === "desktop_session_mode").selectorLocation, "Desktop / Run Board / Mode");
+  assert.equal(catalog.groups.find((group) => group.id === "task_pipe").options.some((option) => option.id === "review_verify_pipe"), true);
 });
 
 test("buildUnifiedOps merges history records and monitoring tasks", () => {

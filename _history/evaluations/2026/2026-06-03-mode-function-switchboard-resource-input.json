@@ -1,0 +1,97 @@
+{
+  "task": "Mode/function switchboard resource review",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Workspace Monitor snapshot collection",
+    "Next.js static build",
+    "temporary Python HTTP server on tcp:4183",
+    "static JSON and JavaScript output checks"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "snapshot-growth",
+      "category": "large_data",
+      "description": "Adding mode/function catalog data could grow the generated workspace snapshot.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The catalog is bounded to 8 groups and 33 options in the generated snapshot.",
+      "evidence": [
+        "curl workspace-snapshot.json found modeGroups 8 and modeOptions 33",
+        "npm --prefix workspace-monitor run perf:budget"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "temporary-static-server",
+      "category": "process",
+      "description": "A temporary HTTP server was started to smoke test the static output.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Stop the server after curl/rg checks and verify no listener remains on tcp:4183.",
+      "evidence": [
+        "python3 -m http.server 4183 -d workspace-monitor/out",
+        "lsof -ti tcp:4183 || true returned no listener"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "browser-screenshot-not-run",
+      "category": "browser_context",
+      "description": "A browser screenshot would normally validate the new UI visually.",
+      "required": false,
+      "status": "not_applicable",
+      "mitigation": "Static server response, snapshot JSON, built JavaScript/CSS, typecheck, tests, build, and perf budget were used for this slice.",
+      "evidence": [
+        "static response and built output contained switchboard strings",
+        "TypeScript and Next build passed"
+      ],
+      "rationale": "No new browser automation dependency or permission change was needed for this bounded change."
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "static-server-lifecycle",
+      "resource": "temporary Python HTTP server on tcp:4183",
+      "create_path": "python3 -m http.server 4183 -d workspace-monitor/out",
+      "cleanup_path": "Ctrl-C shutdown followed by lsof -ti tcp:4183",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "curl served / and /workspace-snapshot.json",
+        "server session exited with Keyboard interrupt",
+        "lsof -ti tcp:4183 returned no process"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "snapshot-collect",
+      "metric": "Generated snapshot document count and modeFunctionCatalog presence",
+      "tool": "npm --prefix workspace-monitor run collect",
+      "threshold": "collect exits 0 and snapshot contains modeFunctionCatalog",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor collect wrote 1200 documents",
+        "curl workspace-snapshot.json found modeFunctionCatalog"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "performance-budget",
+      "metric": "largest initial static chunk",
+      "tool": "npm --prefix workspace-monitor run perf:budget",
+      "threshold": "largest chunk below 1000000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "largest chunk 227537 bytes; chunk count 8"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No new long-running process, worker, cache, CLI subprocess, or installation was added by this change."
+  ]
+}

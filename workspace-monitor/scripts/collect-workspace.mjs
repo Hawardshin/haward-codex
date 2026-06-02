@@ -105,6 +105,7 @@ export function buildSnapshot(repoRoot) {
   const folderStructure = buildFolderStructure(repoRoot, projects, documents);
   const viewModeCatalog = collectViewModeCatalog(repoRoot);
   const languageModeCatalog = collectLanguageModeCatalog(repoRoot);
+  const modeFunctionCatalog = collectModeFunctionCatalog(repoRoot, viewModeCatalog, languageModeCatalog);
   const sourceFiles = collectSourceFiles(repoRoot, projects);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
   const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
@@ -139,6 +140,8 @@ export function buildSnapshot(repoRoot) {
       timingRecords: documents.filter((document) => document.category === "work-timing").length,
       historyDays: historyDays.length,
       unifiedOpsEvents: unifiedOps.summary.totalEvents,
+      modeGroups: modeFunctionCatalog.summary.totalGroups,
+      modeOptions: modeFunctionCatalog.summary.totalOptions,
       sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
     },
@@ -155,6 +158,7 @@ export function buildSnapshot(repoRoot) {
     folderStructure,
     viewModeCatalog,
     languageModeCatalog,
+    modeFunctionCatalog,
     categories,
     publicReview: {
       status: "review_required_before_public_deploy",
@@ -631,6 +635,326 @@ export function collectLanguageModeCatalog(repoRoot) {
     defaultMode: registry.default_mode || "all",
     modes
   };
+}
+
+const MONITOR_SECTION_OPTIONS = [
+  {
+    id: "overview",
+    label: "Overview",
+    description: "Command center, unified operations stream, and the mode/function switchboard.",
+    location: "Top section tabs / Overview"
+  },
+  {
+    id: "desktop",
+    label: "Desktop",
+    description: "Platform-first desktop runtime, CLI adapter health, task pipes, terminal events, decision inbox, and source editor.",
+    location: "Top section tabs / Desktop"
+  },
+  {
+    id: "projects",
+    label: "Projects",
+    description: "Registered project boundaries and project-level purpose.",
+    location: "Top section tabs / Projects"
+  },
+  {
+    id: "history",
+    label: "History",
+    description: "Dated work history, unified ops events, and category density.",
+    location: "Top section tabs / History"
+  },
+  {
+    id: "structure",
+    label: "Structure",
+    description: "Root folder policy, project homes, document categories, and history roots.",
+    location: "Top section tabs / Structure"
+  },
+  {
+    id: "documents",
+    label: "Documents",
+    description: "Collected docs, requirements, specs, plans, traces, evaluations, and rendered markdown previews.",
+    location: "Top section tabs / Documents"
+  },
+  {
+    id: "source",
+    label: "Source",
+    description: "Collected source files and code browsing for developer/superadmin views.",
+    location: "Top section tabs / Source"
+  },
+  {
+    id: "requirements",
+    label: "Requirements",
+    description: "Requirement records extracted from baselines and project requirement docs.",
+    location: "Top section tabs / Requirements"
+  },
+  {
+    id: "agents",
+    label: "Agents",
+    description: "Agent inventory, runtime status, collaboration lanes, blockers, and next actions.",
+    location: "Top section tabs / Agents"
+  }
+];
+
+const DESKTOP_SESSION_MODE_OPTIONS = [
+  {
+    id: "user_task",
+    label: "User Task",
+    description: "Deliver the user's task and defer only blocked decisions when the user is absent.",
+    location: "Desktop / Run Board / Mode"
+  },
+  {
+    id: "platform_improvement",
+    label: "Platform Improvement",
+    description: "Improve the platform while preserving requirements, specs, history, and validation.",
+    location: "Desktop / Run Board / Mode"
+  },
+  {
+    id: "knowledge_accumulation",
+    label: "Knowledge Accumulation",
+    description: "Turn messy output, logs, questions, and evidence into durable structured knowledge.",
+    location: "Desktop / Run Board / Mode"
+  },
+  {
+    id: "review_verify",
+    label: "Review & Verify",
+    description: "Check bugs, missing tests, unsupported claims, resource risks, and release blockers.",
+    location: "Desktop / Run Board / Mode"
+  }
+];
+
+const TASK_PIPE_OPTIONS = [
+  {
+    id: "platform_improvement_pipe",
+    label: "Platform Improvement Pipe",
+    description: "Fan out implementation, review, research, and fallback lanes from one task intake.",
+    location: "Desktop / Task Pipe Init / Pipe preset"
+  },
+  {
+    id: "knowledge_accumulation_pipe",
+    label: "Knowledge Accumulation Pipe",
+    description: "Fan out structuring, skeptic, and durable-record lanes from messy output.",
+    location: "Desktop / Task Pipe Init / Pipe preset"
+  },
+  {
+    id: "review_verify_pipe",
+    label: "Review & Verify Pipe",
+    description: "Fan out bug review, validation, and contrary lanes before release.",
+    location: "Desktop / Task Pipe Init / Pipe preset"
+  }
+];
+
+export function collectModeFunctionCatalog(repoRoot, viewModeCatalog, languageModeCatalog) {
+  const workModePath = path.join(repoRoot, "agent-platform", "configs", "workflows", "work-mode-registry.json");
+  const installModePath = path.join(repoRoot, "agent-platform", "configs", "installations", "install-mode-registry.json");
+  const cliAdapterPath = path.join(repoRoot, "agent-platform", "configs", "integrations", "cli-adapter-registry.json");
+  const workModeRegistry = readJson(workModePath, { default_mode: "standard", modes: [] });
+  const installModeRegistry = readJson(installModePath, { default_mode: "user", modes: [] });
+  const cliAdapterRegistry = readJson(cliAdapterPath, { supported_ai_cli_adapters: [] });
+
+  const groups = [
+    makeModeFunctionGroup({
+      id: "view_mode",
+      label: "View Mode",
+      purpose: "Controls which monitor sections are visible for user, developer, and superadmin contexts.",
+      selectorLocation: "Top bar / View Mode segmented control",
+      defaultMode: viewModeCatalog.defaultMode,
+      sourcePath: "agent-platform/configs/access/view-mode-registry.json",
+      options: (viewModeCatalog.modes || []).map((mode) => ({
+        id: mode.id,
+        label: mode.label,
+        description: mode.intent,
+        location: mode.allowedSections?.length
+          ? `Shows: ${mode.allowedSections.join(", ")}`
+          : "Top bar / View Mode segmented control",
+        status: mode.id === viewModeCatalog.defaultMode ? "default" : "available"
+      }))
+    }),
+    makeModeFunctionGroup({
+      id: "language_mode",
+      label: "Language Mode",
+      purpose: "Filters collected docs by Korean, English, or all language scopes.",
+      selectorLocation: "Toolbar / Document filters / Language select",
+      defaultMode: languageModeCatalog.defaultMode,
+      sourcePath: "agent-platform/configs/access/language-mode-registry.json",
+      options: (languageModeCatalog.modes || []).map((mode) => ({
+        id: mode.id,
+        label: mode.label,
+        description: mode.intent || mode.documentRule,
+        location: mode.documentRule || "Toolbar / Document filters / Language select",
+        status: mode.id === languageModeCatalog.defaultMode ? "default" : "available"
+      }))
+    }),
+    makeModeFunctionGroup({
+      id: "work_mode",
+      label: "Work Mode",
+      purpose: "Selects task execution strictness and close-out gates before implementation or research work.",
+      selectorLocation: "Task intake / _ops/workflows/02-select-work-mode.md / mode selection record",
+      defaultMode: workModeRegistry.default_mode || "standard",
+      sourcePath: "agent-platform/configs/workflows/work-mode-registry.json",
+      options: normalizeRegistryModes(workModeRegistry.modes, workModeRegistry.default_mode, {
+        descriptionFields: ["intent"],
+        locationField: "closeout_gate",
+        statusFields: ["enforcement_level"]
+      })
+    }),
+    makeModeFunctionGroup({
+      id: "install_mode",
+      label: "Install Mode",
+      purpose: "Separates end-user setup from developer improvement setup.",
+      selectorLocation: "Setup flow / _ops/workflows/62-select-install-mode.md / install profile",
+      defaultMode: installModeRegistry.default_mode || "user",
+      sourcePath: "agent-platform/configs/installations/install-mode-registry.json",
+      options: normalizeRegistryModes(installModeRegistry.modes, installModeRegistry.default_mode, {
+        descriptionFields: ["intent"],
+        locationField: "dependency_policy",
+        statusFields: ["setup_posture", "audience"]
+      })
+    }),
+    makeModeFunctionGroup({
+      id: "desktop_session_mode",
+      label: "Desktop Session Mode",
+      purpose: "Changes the prompt posture for a CLI session launched from the platform-first desktop shell.",
+      selectorLocation: "Desktop / Run Board / Mode",
+      defaultMode: "user_task",
+      sourcePath: "workspace-monitor/components/MonitorShell.tsx",
+      desktopRuntime: true,
+      options: DESKTOP_SESSION_MODE_OPTIONS
+    }),
+    makeModeFunctionGroup({
+      id: "task_pipe",
+      label: "Task Pipe Preset",
+      purpose: "Initializes multi-CLI process lanes and merge gates from one task prompt.",
+      selectorLocation: "Desktop / Task Pipe Init / Pipe preset",
+      defaultMode: "platform_improvement_pipe",
+      sourcePath: "platform-desktop-app/src-tauri/src/lib.rs",
+      desktopRuntime: true,
+      options: TASK_PIPE_OPTIONS
+    }),
+    makeModeFunctionGroup({
+      id: "cli_adapter",
+      label: "CLI Adapter",
+      purpose: "Attaches Claude Code, Gemini CLI, Codex CLI, and OpenCode as optional guest capabilities.",
+      selectorLocation: "Desktop / Capability Center and Run Board / Adapter",
+      defaultMode: "",
+      sourcePath: "agent-platform/configs/integrations/cli-adapter-registry.json",
+      desktopRuntime: true,
+      options: normalizeCliAdapters(cliAdapterRegistry.supported_ai_cli_adapters)
+    }),
+    makeModeFunctionGroup({
+      id: "section_location",
+      label: "Monitor Section",
+      purpose: "Shows where core platform functions live inside the installable monitor surface.",
+      selectorLocation: "Top section tabs",
+      defaultMode: "overview",
+      sourcePath: "workspace-monitor/components/MonitorShell.tsx",
+      options: MONITOR_SECTION_OPTIONS
+    })
+  ];
+
+  return {
+    summary: {
+      totalGroups: groups.length,
+      totalOptions: groups.reduce((total, group) => total + group.optionCount, 0),
+      explicitSelectors: groups.filter((group) => group.selectorLocation).length,
+      registryBackedGroups: groups.filter((group) => group.sourcePath.includes("configs/")).length,
+      desktopGroups: groups.filter((group) => group.desktopRuntime).length
+    },
+    groups
+  };
+}
+
+function makeModeFunctionGroup({
+  id,
+  label,
+  purpose,
+  selectorLocation,
+  defaultMode = "",
+  sourcePath = "",
+  desktopRuntime = false,
+  options = []
+}) {
+  const normalizedOptions = options
+    .filter((option) => option && option.id)
+    .map((option) => ({
+      id: option.id,
+      label: option.label || option.id,
+      description: option.description || "",
+      location: option.location || selectorLocation,
+      status: option.status || (option.id === defaultMode ? "default" : "available"),
+      sourcePath: option.sourcePath || sourcePath
+    }));
+  return {
+    id,
+    label,
+    purpose,
+    selectorLocation,
+    defaultMode,
+    sourcePath,
+    desktopRuntime,
+    optionCount: normalizedOptions.length,
+    options: normalizedOptions
+  };
+}
+
+function normalizeRegistryModes(modes, defaultMode, config = {}) {
+  if (!Array.isArray(modes)) {
+    return [];
+  }
+  return modes
+    .filter((mode) => mode && typeof mode === "object")
+    .map((mode) => {
+      const id = mode.id || mode.mode_id || "";
+      const description = firstPresent(mode, config.descriptionFields || ["intent", "purpose", "summary"]);
+      return {
+        id,
+        label: mode.display_label || mode.label || titleFromPath(id),
+        description: normalizeReadableValue(description),
+        location: normalizeReadableValue(mode[config.locationField]) || "",
+        status:
+          normalizeReadableValue(firstPresent(mode, config.statusFields || ["status", "default_state", "enforcement_level"])) ||
+          (id === defaultMode ? "default" : "available")
+      };
+    })
+    .filter((mode) => mode.id);
+}
+
+function normalizeCliAdapters(adapters) {
+  if (!Array.isArray(adapters)) {
+    return [];
+  }
+  return adapters
+    .filter((adapter) => adapter && typeof adapter === "object")
+    .map((adapter) => ({
+      id: adapter.adapter_id || adapter.id || "",
+      label: adapter.display_name || adapter.label || adapter.adapter_id || "",
+      description: `${adapter.capability_class || "cli_adapter"} / ${adapter.runtime_role || "guest_adapter"}`,
+      location: Array.isArray(adapter.expected_command_candidates)
+        ? `Command candidates: ${adapter.expected_command_candidates.join(", ")}`
+        : "Desktop / Capability Center and Run Board / Adapter",
+      status: adapter.default_state || adapter.setup_posture || "optional_supported"
+    }))
+    .filter((adapter) => adapter.id);
+}
+
+function firstPresent(source, fields) {
+  for (const field of fields || []) {
+    if (source?.[field]) {
+      return source[field];
+    }
+  }
+  return "";
+}
+
+function normalizeReadableValue(value) {
+  if (Array.isArray(value)) {
+    return value.filter(Boolean).join(" / ");
+  }
+  if (value && typeof value === "object") {
+    return Object.entries(value)
+      .slice(0, 4)
+      .map(([key, item]) => `${key}: ${normalizeReadableValue(item)}`)
+      .join(" / ");
+  }
+  return value ? String(value) : "";
 }
 
 export function collectAgentCatalog(repoRoot, coordinationAgents = [], tasks = []) {

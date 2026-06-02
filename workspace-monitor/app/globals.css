@@ -342,6 +342,7 @@ h3 {
 
 .command-center,
 .ux-spine,
+.mode-switchboard-panel,
 .action-evidence-panel {
   grid-column: 1 / -1;
 }
@@ -518,6 +519,177 @@ h3 {
 
 .spine-amber svg {
   color: var(--amber);
+}
+
+.mode-switchboard-panel {
+  background:
+    linear-gradient(180deg, rgba(47, 103, 177, 0.05), rgba(22, 115, 91, 0.04)),
+    var(--surface);
+}
+
+.mode-switchboard-summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.mode-switchboard-summary span {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.76);
+  border-radius: 999px;
+  padding: 5px 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.mode-switchboard-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.58fr) minmax(280px, 0.78fr) minmax(0, 1.42fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.mode-group-list {
+  display: grid;
+  gap: 7px;
+}
+
+.mode-group-list button {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  min-height: 40px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.mode-group-list button.active {
+  border-color: #9fb0c2;
+  background: #25313f;
+  color: #ffffff;
+}
+
+.mode-group-list button span,
+.mode-option-header strong,
+.mode-location-card h3 {
+  overflow-wrap: anywhere;
+}
+
+.mode-group-list small {
+  color: inherit;
+  opacity: 0.74;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.mode-location-card,
+.mode-option-grid article {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.86);
+  border-radius: 8px;
+}
+
+.mode-location-card {
+  display: grid;
+  gap: 10px;
+  min-height: 100%;
+  padding: 14px;
+}
+
+.mode-location-card > div:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.mode-location-card h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.mode-location-card p,
+.mode-option-grid p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.mode-location-card dl {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 7px 10px;
+  margin: 4px 0 0;
+}
+
+.mode-location-card dt {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.mode-location-card dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.mode-option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.mode-option-grid article {
+  display: grid;
+  min-height: 176px;
+  gap: 9px;
+  align-content: start;
+  padding: 13px;
+}
+
+.mode-option-header {
+  display: grid;
+  gap: 4px;
+}
+
+.mode-option-header span {
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.mode-option-grid small {
+  color: var(--muted);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.mode-option-grid button {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 34px;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #b7c3cf;
+  background: #ffffff;
+  color: var(--text);
+  border-radius: 7px;
+  padding: 7px 10px;
+  font-size: 13px;
 }
 
 .attention-layout {
@@ -2970,7 +3142,10 @@ h3 {
   .task-pipe-summary article:hover,
   .process-node:hover,
   .evidence-grid article:hover,
-  .terminal-report-list article:hover {
+  .terminal-report-list article:hover,
+  .mode-group-list button:hover,
+  .mode-location-card:hover,
+  .mode-option-grid article:hover {
     transform: translateY(-1px);
     border-color: #c1ccd8;
     box-shadow: var(--soft-shadow);
@@ -3026,7 +3201,8 @@ h3 {
   .session-grid,
   .source-review-grid,
   .desktop-hero,
-  .attention-layout {
+  .attention-layout,
+  .mode-switchboard-layout {
     grid-template-columns: 1fr;
   }
 
@@ -3039,7 +3215,8 @@ h3 {
   .decision-answer-controls,
   .session-input-row,
   .source-draft-list,
-  .source-editor-controls {
+  .source-editor-controls,
+  .mode-option-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -3109,6 +3286,7 @@ h3 {
   .source-review-grid,
   .source-draft-list,
   .source-editor-controls,
+  .mode-option-grid,
   .task-lanes > div,
   .requirements-table {
     grid-template-columns: 1fr;

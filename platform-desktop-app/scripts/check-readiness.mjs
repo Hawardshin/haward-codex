@@ -150,7 +150,13 @@ for (const requiredPhrase of [
   "merge gate",
   "Answer & Resume",
   "read_workspace_text_file",
-  "write_workspace_text_file"
+  "write_workspace_text_file",
+  "Mode & Function Switchboard",
+  "모드와 기능 선택 위치",
+  "ModeFunctionSwitchboard",
+  "modeFunctionCatalog",
+  "mode-switchboard-panel",
+  "openModeFunctionOption"
 ]) {
   if (!monitorShell.includes(requiredPhrase)) {
     failures.push(`workspace-monitor MonitorShell must include ${requiredPhrase}`);
