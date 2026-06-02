@@ -1,0 +1,31 @@
+{
+  "status": "ready_to_close",
+  "requires_rework": false,
+  "work_mode": "standard",
+  "alignment_check": {
+    "initial_instruction_present": true,
+    "result_summary_present": true,
+    "verification_count": 8,
+    "mode_selection_record_targets_count": 1,
+    "web_search_record_targets_count": 1,
+    "requirements_targets_count": 2,
+    "spec_targets_count": 1,
+    "omission_check_targets_count": 1,
+    "resource_check_targets_count": 1,
+    "grounding_check_targets_count": 1,
+    "request_trace_targets_count": 1,
+    "work_summary_targets_count": 2,
+    "timing_summary_targets_count": 1,
+    "installation_occurred": false,
+    "cli_pipeline_occurred": false
+  },
+  "gaps": [],
+  "improvements": [
+    "Combine developer/customer snapshot checks and developer snapshot restoration into one validation command.",
+    "Add Browser screenshot validation when Browser MCP is available."
+  ],
+  "follow_up_actions": [
+    "Consider implementing a Workspace Monitor validation orchestrator script."
+  ]
+}
+

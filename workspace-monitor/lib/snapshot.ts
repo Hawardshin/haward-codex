@@ -412,6 +412,9 @@ export type WorkspaceIntentFeatureMap = {
     now: number;
     next: number;
     later: number;
+    sourceDate: string;
+    updatedAt: string;
+    availableMaps: number;
   };
   themes: Array<{
     id: string;

@@ -295,12 +295,13 @@ export function buildCustomerSnapshot(snapshot) {
 }
 
 export function collectIntentFeatureMap(repoRoot) {
-  const sourcePath = "_history/intent-feature-maps/2026/2026-06-03-user-intent-feature-map.ko.md";
-  const absolutePath = path.join(repoRoot, sourcePath);
-  if (!fs.existsSync(absolutePath)) {
-    return emptyIntentFeatureMap(sourcePath);
+  const sources = collectIntentFeatureMapSources(repoRoot);
+  const selectedSource = sources[0];
+  if (!selectedSource) {
+    return emptyIntentFeatureMap();
   }
 
+  const { sourcePath, absolutePath, sourceDate, updatedAt } = selectedSource;
   const content = fs.readFileSync(absolutePath, "utf8");
   const summarySection = extractHeadingSection(content, "## 요약 결론");
   const themeRows = parseMarkdownTableRows(summarySection);
@@ -332,12 +333,37 @@ export function collectIntentFeatureMap(repoRoot) {
       totalThemes: themes.length,
       now: roadmap.now.length,
       next: roadmap.next.length,
-      later: roadmap.later.length
+      later: roadmap.later.length,
+      sourceDate,
+      updatedAt,
+      availableMaps: sources.length
     },
     themes,
     roadmap,
     sourceLimits
   };
+}
+
+function collectIntentFeatureMapSources(repoRoot) {
+  const sourceRoot = path.join(repoRoot, "_history", "intent-feature-maps");
+  return walkFiles(sourceRoot)
+    .filter((filePath) => /\.ko\.md$/i.test(filePath))
+    .map((filePath) => {
+      const sourcePath = toPosix(path.relative(repoRoot, filePath));
+      const stats = fs.statSync(filePath);
+      return {
+        absolutePath: filePath,
+        sourcePath,
+        sourceDate: extractHistoryDate(sourcePath),
+        updatedAt: stats.mtime.toISOString()
+      };
+    })
+    .sort(
+      (left, right) =>
+        right.sourceDate.localeCompare(left.sourceDate) ||
+        right.updatedAt.localeCompare(left.updatedAt) ||
+        right.sourcePath.localeCompare(left.sourcePath)
+    );
 }
 
 function emptyIntentFeatureMap(sourcePath = "") {
@@ -348,7 +374,10 @@ function emptyIntentFeatureMap(sourcePath = "") {
       totalThemes: 0,
       now: 0,
       next: 0,
-      later: 0
+      later: 0,
+      sourceDate: "",
+      updatedAt: "",
+      availableMaps: 0
     },
     themes: [],
     roadmap: {

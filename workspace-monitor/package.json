@@ -10,6 +10,8 @@
     "build": "next build",
     "build:customer": "node scripts/collect-workspace.mjs --best-effort --snapshot-mode customer && next build",
     "check": "tsc --noEmit",
+    "check:intent-map": "node scripts/check-intent-feature-map.mjs --snapshot generated --expect developer",
+    "check:intent-map:customer": "node scripts/check-intent-feature-map.mjs --snapshot public --expect customer",
     "perf:budget": "node scripts/check-performance-budget.mjs",
     "test": "node --test tests/*.test.mjs"
   },

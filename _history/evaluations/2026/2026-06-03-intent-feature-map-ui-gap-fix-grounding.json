@@ -1,0 +1,36 @@
+{
+  "record_id": "2026-06-03-intent-feature-map-ui-gap-fix-grounding",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-017",
+  "grounding_status": "grounded",
+  "internal_sources": [
+    "workspace-monitor/scripts/collect-workspace.mjs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/scripts/check-intent-feature-map.mjs",
+    "workspace-monitor/tests/collector.test.mjs"
+  ],
+  "external_sources": [
+    "https://www.atlassian.com/software/jira/product-discovery/guides/views/overview",
+    "https://support.atlassian.com/jira-product-discovery/docs/view-permissions/",
+    "https://wac-cdn-a.atlassian.com/software/jira/product-discovery/guides/getting-started/introduction"
+  ],
+  "claims_checked": [
+    {
+      "claim": "The previous implementation could go stale because the intent-map source path was hardcoded.",
+      "status": "verified",
+      "evidence": "Previous collectIntentFeatureMap sourcePath literal"
+    },
+    {
+      "claim": "The new collector selects the latest dated Korean intent map.",
+      "status": "verified",
+      "evidence": "collector test with 2026-06-02 and 2026-06-03 fixtures"
+    },
+    {
+      "claim": "Customer snapshots continue to redact internal intent-map data.",
+      "status": "verified",
+      "evidence": "check:intent-map:customer passed"
+    }
+  ],
+  "unsupported_claims_removed": []
+}
+

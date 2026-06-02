@@ -234,7 +234,10 @@ const emptyIntentFeatureMap: IntentFeatureMap = {
     totalThemes: 0,
     now: 0,
     next: 0,
-    later: 0
+    later: 0,
+    sourceDate: "",
+    updatedAt: "",
+    availableMaps: 0
   },
   themes: [],
   roadmap: {
@@ -1243,7 +1246,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           <IntentFeatureMapPanel
             map={intentFeatureMap}
             onOpenIntent={() => setSection("intent")}
-            onOpenDocuments={() => setSection("documents")}
+            onOpenDocuments={() => {
+              setSection("documents");
+              setCategory("intent-feature-map");
+            }}
           />
 
           <section className="panel wide action-evidence-panel">
@@ -2084,7 +2090,10 @@ function IntentFeatureMapPanel({
         <article>
           <span>structured intents</span>
           <strong>{map.summary.totalIntents.toLocaleString("ko-KR")}</strong>
-          <p>{map.sourcePath || "customer snapshot hides internal intent history"}</p>
+          <p>
+            {map.sourcePath || "customer snapshot hides internal intent history"}
+            {map.summary.sourceDate ? ` / ${map.summary.sourceDate}` : ""}
+          </p>
         </article>
         <article>
           <span>feature themes</span>
@@ -2100,7 +2109,8 @@ function IntentFeatureMapPanel({
           <span>next/later</span>
           <strong>{(map.summary.next + map.summary.later).toLocaleString("ko-KR")}</strong>
           <p>
-            {map.summary.next.toLocaleString("ko-KR")} next / {map.summary.later.toLocaleString("ko-KR")} later
+            {map.summary.next.toLocaleString("ko-KR")} next / {map.summary.later.toLocaleString("ko-KR")} later /{" "}
+            {map.summary.availableMaps.toLocaleString("ko-KR")} maps
           </p>
         </article>
       </div>

@@ -1,0 +1,38 @@
+{
+  "record_id": "2026-06-03-intent-feature-map-ui-gap-fix",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-017",
+  "phases": [
+    {
+      "phase": "web_first_intake_and_memory_bootstrap",
+      "approx_minutes": 3,
+      "notes": "Searched roadmap view/source freshness references and ran memory bootstrap."
+    },
+    {
+      "phase": "gap_identification",
+      "approx_minutes": 5,
+      "notes": "Found hardcoded source path, missing source freshness display, weak source navigation, and no intent-map-specific snapshot check."
+    },
+    {
+      "phase": "implementation",
+      "approx_minutes": 14,
+      "notes": "Updated collector, types, UI, tests, package scripts, and validation script."
+    },
+    {
+      "phase": "validation",
+      "approx_minutes": 12,
+      "notes": "Ran tests, collect, check:intent-map, check, build, build:customer, check:intent-map:customer, collect restore, and perf budget."
+    },
+    {
+      "phase": "records",
+      "approx_minutes": 8,
+      "notes": "Updated requirements/spec/history/evaluation records."
+    }
+  ],
+  "summary": {
+    "approx_total_minutes": 42,
+    "bottleneck": "Customer build changes public snapshot state, requiring a final developer collect restore.",
+    "automation_candidate": "Fold customer check and developer snapshot restore into one safe validation command."
+  }
+}
+

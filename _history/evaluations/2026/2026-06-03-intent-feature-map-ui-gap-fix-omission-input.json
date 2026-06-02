@@ -1,0 +1,71 @@
+{
+  "task": "Fix insufficient parts of Intent Feature Map UI.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "IFM-GAP-001",
+      "description": "Run web-first intake and memory bootstrap before edits.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-intent-feature-map-ui-gap-fix.ko.md"
+      ]
+    },
+    {
+      "item_id": "IFM-GAP-002",
+      "description": "Remove hardcoded intent-map source selection.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/collect-workspace.mjs"
+      ]
+    },
+    {
+      "item_id": "IFM-GAP-003",
+      "description": "Expose source freshness and map count in the snapshot/UI.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/lib/snapshot.ts",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ]
+    },
+    {
+      "item_id": "IFM-GAP-004",
+      "description": "Add focused developer/customer intent-map validation.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/scripts/check-intent-feature-map.mjs",
+        "workspace-monitor/package.json"
+      ]
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "IFM-GAP-AC-001",
+      "description": "Collector test proves latest map selection when multiple dated maps exist.",
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor test"
+      ]
+    },
+    {
+      "check_id": "IFM-GAP-AC-002",
+      "description": "Developer and customer snapshot checks pass.",
+      "status": "passed",
+      "evidence": [
+        "npm --prefix workspace-monitor run check:intent-map",
+        "npm --prefix workspace-monitor run check:intent-map:customer"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "No in-app Browser MCP tool was available, so UI interaction verification remains build/test based."
+  ],
+  "notes": [
+    "_private was not inspected.",
+    "The unrelated untracked folder platform-desktop-app/workspace-monitor/ was not staged."
+  ]
+}
+

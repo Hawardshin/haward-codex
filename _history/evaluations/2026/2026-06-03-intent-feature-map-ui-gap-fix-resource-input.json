@@ -1,0 +1,22 @@
+{
+  "record_id": "2026-06-03-intent-feature-map-ui-gap-fix-resource",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-017",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    {
+      "resource": "generated_snapshots",
+      "details": "Ran developer collect, customer build, customer check, then developer collect restore.",
+      "cleanup": "Restored developer public snapshot after customer redaction validation.",
+      "post_check": "check:intent-map passed on generated developer snapshot."
+    },
+    {
+      "resource": "next_build_cache",
+      "details": "Ran Next production builds for developer and customer snapshot states.",
+      "cleanup": "Build commands exited normally.",
+      "post_check": "No long-running dev server was started in this gap-fix pass."
+    }
+  ],
+  "leaks_detected": false
+}
+

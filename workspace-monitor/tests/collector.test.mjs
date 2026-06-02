@@ -279,6 +279,26 @@ test("collectIntentFeatureMap reads themes and roadmap from history synthesis", 
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-intent-map-test-"));
   fs.mkdirSync(path.join(root, "_history", "intent-feature-maps", "2026"), { recursive: true });
   fs.writeFileSync(
+    path.join(root, "_history", "intent-feature-maps", "2026", "2026-06-02-user-intent-feature-map.ko.md"),
+    [
+      "# 오래된 사용자 의도 기반 기능 지도",
+      "",
+      "- 총 구조화 의도: 1개",
+      "",
+      "## 요약 결론",
+      "",
+      "| 축 | 사용자 의도 | 이미 구현된 핵심 기능 | 다음 기능 후보 |",
+      "| --- | --- | --- | --- |",
+      "| 1. 오래된 축 | 오래된 의도 | 오래된 기능 | 오래된 후보 |",
+      "",
+      "### Now",
+      "",
+      "| 기능 후보 | 이유 | 의존성 |",
+      "| --- | --- | --- |",
+      "| Old UI | 오래된 후보다. | old |"
+    ].join("\n")
+  );
+  fs.writeFileSync(
     path.join(root, "_history", "intent-feature-maps", "2026", "2026-06-03-user-intent-feature-map.ko.md"),
     [
       "# 사용자 의도 기반 기능 지도",
@@ -322,6 +342,9 @@ test("collectIntentFeatureMap reads themes and roadmap from history synthesis", 
   assert.equal(intentMap.summary.totalIntents, 155);
   assert.equal(intentMap.summary.totalThemes, 1);
   assert.equal(intentMap.summary.now, 1);
+  assert.equal(intentMap.summary.availableMaps, 2);
+  assert.equal(intentMap.summary.sourceDate, "2026-06-03");
+  assert.equal(intentMap.sourcePath, "_history/intent-feature-maps/2026/2026-06-03-user-intent-feature-map.ko.md");
   assert.equal(intentMap.themes[0].label, "플랫폼 정체성과 운영 루프");
   assert.equal(intentMap.roadmap.now[0].feature, "Intent Feature Map UI");
   assert.equal(intentMap.sourceLimits.length, 1);

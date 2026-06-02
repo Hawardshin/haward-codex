@@ -1,0 +1,29 @@
+{
+  "record_id": "2026-06-03-intent-feature-map-ui-gap-fix",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-017",
+  "selected_mode": "standard",
+  "reason": "The request asks to fix insufficient parts of a recently implemented Workspace Monitor feature, requiring code changes, tests, build validation, customer redaction checks, and history records.",
+  "required_targets": {
+    "web_search_record_targets": [
+      "_history/web-searches/2026/2026-06-03-intent-feature-map-ui-gap-fix.ko.md"
+    ],
+    "requirements_targets": [
+      "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+      "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md"
+    ],
+    "spec_targets": [
+      "workspace-monitor/specs/2026-06-03-intent-feature-map-ui/"
+    ],
+    "omission_check_targets": [
+      "_history/evaluations/2026/2026-06-03-intent-feature-map-ui-gap-fix-omission-input.json"
+    ],
+    "resource_check_targets": [
+      "_history/evaluations/2026/2026-06-03-intent-feature-map-ui-gap-fix-resource-input.json"
+    ],
+    "timing_summary_targets": [
+      "_history/work-timings/2026/2026-06-03-intent-feature-map-ui-gap-fix.json"
+    ]
+  }
+}
+
