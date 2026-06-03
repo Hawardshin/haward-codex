@@ -1,0 +1,36 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-native-first-renderer-reduction",
+  "request_id": "UR-2026-06-03-049",
+  "status": "passed",
+  "checked_requirements": [
+    {
+      "requirement": "Run web-first intake before implementation.",
+      "status": "passed",
+      "evidence": "_history/web-searches/2026/2026-06-03-native-first-renderer-reduction.ko.md"
+    },
+    {
+      "requirement": "Move preference ownership from frontend storage to native runtime.",
+      "status": "passed",
+      "evidence": "platform-desktop-app/src-tauri/src/lib.rs and platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+    },
+    {
+      "requirement": "Keep the user perspective visible.",
+      "status": "passed",
+      "evidence": "settings data tab includes native preference store status and path"
+    },
+    {
+      "requirement": "Record requirements/spec/trace/history/evaluation.",
+      "status": "passed",
+      "evidence": "platform-desktop-app/docs/requirements/2026-06-03-native-first-renderer-reduction.ko.md and platform-desktop-app/specs/2026-06-03-native-first-renderer-reduction/"
+    },
+    {
+      "requirement": "Validate source and readiness gates.",
+      "status": "passed",
+      "evidence": "cargo fmt/test/build, workspace-monitor check/test/build:customer, platform-desktop-app test/check"
+    }
+  ],
+  "missed_items": [],
+  "blocked_items": [],
+  "resume_action": "Continue with Rust native module split and editor/draft preference migration in the next slice."
+}

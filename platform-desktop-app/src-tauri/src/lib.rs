@@ -346,6 +346,68 @@ struct DesktopWorkspaceState {
     updated_at: String,
 }
 
+#[derive(Clone, Deserialize, Serialize)]
+#[serde(default, rename_all = "camelCase")]
+struct DesktopRuntimeInitDefaults {
+    adapter_id: String,
+    session_mode_id: String,
+    task_pipe_kind: String,
+    auto_defer_questions: bool,
+}
+
+#[derive(Clone, Deserialize, Serialize)]
+#[serde(default, rename_all = "camelCase")]
+struct DesktopPreferences {
+    schema_version: String,
+    ui_language: String,
+    theme_mode: String,
+    sidebar_mode: String,
+    terminal_drawer_open: bool,
+    runtime_init_defaults: DesktopRuntimeInitDefaults,
+    pinned_sections: Vec<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DesktopPreferencesReport {
+    schema_version: String,
+    status: String,
+    source: String,
+    preferences_path: String,
+    preferences: DesktopPreferences,
+}
+
+impl Default for DesktopRuntimeInitDefaults {
+    fn default() -> Self {
+        Self {
+            adapter_id: "codex-cli".to_string(),
+            session_mode_id: "platform-improvement".to_string(),
+            task_pipe_kind: "platform_improvement_pipe".to_string(),
+            auto_defer_questions: true,
+        }
+    }
+}
+
+impl Default for DesktopPreferences {
+    fn default() -> Self {
+        Self {
+            schema_version: DESKTOP_PREFERENCES_SCHEMA_VERSION.to_string(),
+            ui_language: "ko".to_string(),
+            theme_mode: "system".to_string(),
+            sidebar_mode: "collapsed".to_string(),
+            terminal_drawer_open: false,
+            runtime_init_defaults: DesktopRuntimeInitDefaults::default(),
+            pinned_sections: vec![
+                "overview".to_string(),
+                "desktop".to_string(),
+                "agents".to_string(),
+                "source".to_string(),
+                "intent".to_string(),
+            ],
+        }
+    }
+}
+
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 struct DesktopWorkspaceStateReport {
@@ -591,6 +653,7 @@ const MAX_ACCUMULATED_DATA_SCAN_FILES: usize = 1_200;
 const ACCUMULATED_DATA_INDEX_SCHEMA_VERSION: &str = "accumulated-data-overview.v1";
 const ACCUMULATED_DATA_STORAGE_FORMAT_VERSION: &str = "file-record-stores+overview-manifest.v1";
 const DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION: &str = "desktop-workspace-state.v1";
+const DESKTOP_PREFERENCES_SCHEMA_VERSION: &str = "desktop-preferences.v1";
 const GIT_CLONE_TIMEOUT_MS: u64 = 120_000;
 const MAX_GIT_CLONE_OUTPUT_BYTES: usize = 24_000;
 const MAX_GIT_REPOSITORY_URL_BYTES: usize = 2_048;
@@ -883,6 +946,19 @@ fn create_support_diagnostic_bundle(
 #[tauri::command]
 fn get_service_readiness_report(app: AppHandle) -> Result<ServiceReadinessReport, String> {
     service_readiness_report(&app)
+}
+
+#[tauri::command]
+fn get_desktop_preferences(app: AppHandle) -> Result<DesktopPreferencesReport, String> {
+    desktop_preferences_report(&app)
+}
+
+#[tauri::command]
+fn save_desktop_preferences(
+    app: AppHandle,
+    preferences: DesktopPreferences,
+) -> Result<DesktopPreferencesReport, String> {
+    save_desktop_preferences_report(&app, preferences)
 }
 
 #[tauri::command]
@@ -1672,6 +1748,8 @@ pub fn run() {
             run_installer_payload_audit,
             create_support_diagnostic_bundle,
             get_service_readiness_report,
+            get_desktop_preferences,
+            save_desktop_preferences,
             get_desktop_workspace_state,
             set_desktop_workspace_path,
             choose_desktop_workspace_folder,
@@ -3454,6 +3532,14 @@ fn runtime_data_store_base_path(app: &AppHandle) -> Result<PathBuf, String> {
         .join("runtime-data"))
 }
 
+fn desktop_preferences_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(app
+        .path()
+        .app_config_dir()
+        .map_err(|error| format!("Failed to resolve app config directory: {error}"))?
+        .join("desktop-preferences.v1.json"))
+}
+
 fn accumulated_data_index_path(app: &AppHandle) -> Result<PathBuf, String> {
     Ok(runtime_data_store_base_path(app)?
         .join("indexes")
@@ -4538,6 +4624,132 @@ fn normalize_decision_answer_type(answer_type: &str) -> String {
         "edit" => "edit".to_string(),
         "reject" => "reject".to_string(),
         _ => "instruction".to_string(),
+    }
+}
+
+fn desktop_preferences_report(app: &AppHandle) -> Result<DesktopPreferencesReport, String> {
+    let path = desktop_preferences_path(app)?;
+    let (source, preferences) = if path.exists() {
+        let content = fs::read_to_string(&path)
+            .map_err(|error| format!("Failed to read desktop preferences: {error}"))?;
+        let preferences: DesktopPreferences = serde_json::from_str(&content)
+            .map_err(|error| format!("Failed to parse desktop preferences: {error}"))?;
+        (
+            "app_config".to_string(),
+            normalize_desktop_preferences(preferences),
+        )
+    } else {
+        ("default_native".to_string(), DesktopPreferences::default())
+    };
+
+    Ok(DesktopPreferencesReport {
+        schema_version: DESKTOP_PREFERENCES_SCHEMA_VERSION.to_string(),
+        status: "loaded".to_string(),
+        source,
+        preferences_path: path_to_string(&path),
+        preferences,
+    })
+}
+
+fn save_desktop_preferences_report(
+    app: &AppHandle,
+    preferences: DesktopPreferences,
+) -> Result<DesktopPreferencesReport, String> {
+    let path = desktop_preferences_path(app)?;
+    let preferences = normalize_desktop_preferences(preferences);
+    write_pretty_json(&path, &preferences)?;
+    Ok(DesktopPreferencesReport {
+        schema_version: DESKTOP_PREFERENCES_SCHEMA_VERSION.to_string(),
+        status: "saved".to_string(),
+        source: "app_config".to_string(),
+        preferences_path: path_to_string(&path),
+        preferences,
+    })
+}
+
+fn normalize_desktop_preferences(preferences: DesktopPreferences) -> DesktopPreferences {
+    let defaults = DesktopPreferences::default();
+    let runtime_defaults = DesktopRuntimeInitDefaults::default();
+    DesktopPreferences {
+        schema_version: DESKTOP_PREFERENCES_SCHEMA_VERSION.to_string(),
+        ui_language: match preferences.ui_language.as_str() {
+            "ko" | "en" => preferences.ui_language,
+            _ => defaults.ui_language,
+        },
+        theme_mode: match preferences.theme_mode.as_str() {
+            "system" | "light" | "dark" => preferences.theme_mode,
+            _ => defaults.theme_mode,
+        },
+        sidebar_mode: match preferences.sidebar_mode.as_str() {
+            "expanded" | "collapsed" => preferences.sidebar_mode,
+            _ => defaults.sidebar_mode,
+        },
+        terminal_drawer_open: preferences.terminal_drawer_open,
+        runtime_init_defaults: DesktopRuntimeInitDefaults {
+            adapter_id: normalize_one_of(
+                preferences.runtime_init_defaults.adapter_id,
+                &["claude-code-cli", "gemini-cli", "codex-cli", "opencode-cli"],
+                &runtime_defaults.adapter_id,
+            ),
+            session_mode_id: normalize_one_of(
+                preferences.runtime_init_defaults.session_mode_id,
+                &[
+                    "platform-improvement",
+                    "knowledge-accumulation",
+                    "review-verify",
+                ],
+                &runtime_defaults.session_mode_id,
+            ),
+            task_pipe_kind: normalize_one_of(
+                preferences.runtime_init_defaults.task_pipe_kind,
+                &[
+                    "platform_improvement_pipe",
+                    "knowledge_accumulation_pipe",
+                    "review_verify_pipe",
+                ],
+                &runtime_defaults.task_pipe_kind,
+            ),
+            auto_defer_questions: preferences.runtime_init_defaults.auto_defer_questions,
+        },
+        pinned_sections: normalize_pinned_sections(
+            preferences.pinned_sections,
+            defaults.pinned_sections,
+        ),
+    }
+}
+
+fn normalize_one_of(value: String, allowed: &[&str], fallback: &str) -> String {
+    if allowed.iter().any(|item| *item == value.as_str()) {
+        value
+    } else {
+        fallback.to_string()
+    }
+}
+
+fn normalize_pinned_sections(values: Vec<String>, fallback: Vec<String>) -> Vec<String> {
+    let allowed = [
+        "overview",
+        "desktop",
+        "agents",
+        "source",
+        "intent",
+        "projects",
+        "history",
+        "structure",
+        "documents",
+        "requirements",
+    ];
+    let mut seen = HashSet::new();
+    let normalized: Vec<String> = values
+        .into_iter()
+        .filter(|value| allowed.iter().any(|item| *item == value))
+        .filter(|value| seen.insert(value.clone()))
+        .take(6)
+        .collect();
+    if normalized.is_empty() {
+        fallback
+    } else {
+        normalized
     }
 }
 

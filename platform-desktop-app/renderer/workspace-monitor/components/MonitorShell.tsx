@@ -60,6 +60,7 @@ type FeatureGroupId = "core" | "workspace" | "knowledge" | "governance";
 type SidebarMode = "expanded" | "collapsed";
 type SettingsTabId = "appearance" | "navigation" | "execution" | "data";
 type AppThemeMode = "system" | "light" | "dark";
+type UiLanguage = "ko" | "en";
 
 type Section = {
   id: SectionId;
@@ -89,6 +90,24 @@ type RuntimeInitDefaults = {
   sessionModeId: string;
   taskPipeKind: string;
   autoDeferQuestions: boolean;
+};
+
+type DesktopPreferences = {
+  schemaVersion: string;
+  uiLanguage: UiLanguage;
+  themeMode: AppThemeMode;
+  sidebarMode: SidebarMode;
+  terminalDrawerOpen: boolean;
+  runtimeInitDefaults: RuntimeInitDefaults;
+  pinnedSections: SectionId[];
+};
+
+type DesktopPreferencesReport = {
+  schemaVersion: string;
+  status: string;
+  source: string;
+  preferencesPath: string;
+  preferences: DesktopPreferences;
 };
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((module) => module.default), {
@@ -302,15 +321,9 @@ function appendSourceTemplate(content: string, templateBody: string) {
   return `${content}${separator}${templateBody}`;
 }
 
-const PINNED_SECTIONS_STORAGE_KEY = "workspace-monitor:pinned-sections";
-const UI_LANGUAGE_STORAGE_KEY = "workspace-monitor:ui-language";
-const SIDEBAR_MODE_STORAGE_KEY = "workspace-monitor:sidebar-mode";
-const RUNTIME_INIT_STORAGE_KEY = "workspace-monitor:runtime-init";
-const THEME_MODE_STORAGE_KEY = "workspace-monitor:theme-mode";
-const TERMINAL_DRAWER_STORAGE_KEY = "workspace-monitor:terminal-drawer";
+const DESKTOP_PREFERENCES_SCHEMA_VERSION = "desktop-preferences.v1";
 const defaultPinnedSections: SectionId[] = ["overview", "desktop", "agents", "source", "intent"];
 const operatorSectionIds = new Set<SectionId>(["projects", "history", "structure", "documents", "requirements"]);
-type UiLanguage = "ko" | "en";
 
 const featureGroups: Array<{
   id: FeatureGroupId;
@@ -1434,6 +1447,71 @@ const defaultRuntimeInitDefaults: RuntimeInitDefaults = {
   autoDeferQuestions: true
 };
 
+const defaultDesktopPreferences: DesktopPreferences = {
+  schemaVersion: DESKTOP_PREFERENCES_SCHEMA_VERSION,
+  uiLanguage: "ko",
+  themeMode: "system",
+  sidebarMode: "collapsed",
+  terminalDrawerOpen: false,
+  runtimeInitDefaults: defaultRuntimeInitDefaults,
+  pinnedSections: defaultPinnedSections
+};
+
+function desktopPreferencesFromState(input: {
+  uiLanguage: UiLanguage;
+  themeMode: AppThemeMode;
+  sidebarMode: SidebarMode;
+  terminalDrawerOpen: boolean;
+  runtimeInitDefaults: RuntimeInitDefaults;
+  pinnedSections: SectionId[];
+}): DesktopPreferences {
+  return {
+    schemaVersion: DESKTOP_PREFERENCES_SCHEMA_VERSION,
+    uiLanguage: input.uiLanguage,
+    themeMode: input.themeMode,
+    sidebarMode: input.sidebarMode,
+    terminalDrawerOpen: input.terminalDrawerOpen,
+    runtimeInitDefaults: input.runtimeInitDefaults,
+    pinnedSections: input.pinnedSections.filter((item) => sectionIds.has(item)).slice(0, 6)
+  };
+}
+
+function normalizeDesktopPreferences(preferences: Partial<DesktopPreferences> | null | undefined): DesktopPreferences {
+  const runtimeInit = preferences?.runtimeInitDefaults || defaultRuntimeInitDefaults;
+  const pinned = Array.isArray(preferences?.pinnedSections)
+    ? preferences.pinnedSections.filter((item): item is SectionId => sectionIds.has(item as SectionId)).slice(0, 6)
+    : defaultPinnedSections;
+  return {
+    schemaVersion: DESKTOP_PREFERENCES_SCHEMA_VERSION,
+    uiLanguage: preferences?.uiLanguage === "en" ? "en" : "ko",
+    themeMode:
+      preferences?.themeMode === "dark" || preferences?.themeMode === "light" || preferences?.themeMode === "system"
+        ? preferences.themeMode
+        : defaultDesktopPreferences.themeMode,
+    sidebarMode: preferences?.sidebarMode === "expanded" ? "expanded" : "collapsed",
+    terminalDrawerOpen: typeof preferences?.terminalDrawerOpen === "boolean" ? preferences.terminalDrawerOpen : false,
+    runtimeInitDefaults: {
+      adapterId:
+        typeof runtimeInit.adapterId === "string" && fallbackDesktopAdapters.some((adapter) => adapter.adapterId === runtimeInit.adapterId)
+          ? runtimeInit.adapterId
+          : defaultRuntimeInitDefaults.adapterId,
+      sessionModeId:
+        typeof runtimeInit.sessionModeId === "string" && sessionModePresets.some((mode) => mode.id === runtimeInit.sessionModeId)
+          ? runtimeInit.sessionModeId
+          : defaultRuntimeInitDefaults.sessionModeId,
+      taskPipeKind:
+        typeof runtimeInit.taskPipeKind === "string" && fallbackTaskPipePresets.some((preset) => preset.taskKind === runtimeInit.taskPipeKind)
+          ? runtimeInit.taskPipeKind
+          : defaultRuntimeInitDefaults.taskPipeKind,
+      autoDeferQuestions:
+        typeof runtimeInit.autoDeferQuestions === "boolean"
+          ? runtimeInit.autoDeferQuestions
+          : defaultRuntimeInitDefaults.autoDeferQuestions
+    },
+    pinnedSections: pinned.length ? pinned : defaultPinnedSections
+  };
+}
+
 export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [section, setSection] = useState<SectionId>("overview");
   const [uiLanguage, setUiLanguage] = useState<UiLanguage>("ko");
@@ -1458,6 +1536,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const commandInputRef = useRef<HTMLInputElement>(null);
   const [pinnedSections, setPinnedSections] = useState<SectionId[]>(defaultPinnedSections);
   const [recentSections, setRecentSections] = useState<SectionId[]>(["overview"]);
+  const [desktopPreferencesLoaded, setDesktopPreferencesLoaded] = useState(false);
+  const [desktopPreferencesPath, setDesktopPreferencesPath] = useState("");
+  const [desktopPreferencesSource, setDesktopPreferencesSource] = useState("browser-defaults");
+  const [desktopPreferencesStatus, setDesktopPreferencesStatus] = useState("default");
+  const [desktopPreferencesError, setDesktopPreferencesError] = useState("");
   const viewModes = snapshot.viewModeCatalog?.modes?.length ? snapshot.viewModeCatalog.modes : fallbackViewModes;
   const languageModes = useMemo(() => {
     const merged = new Map<string, MonitorLanguageMode>();
@@ -1486,142 +1569,94 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     [uiLanguage]
   );
   useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(UI_LANGUAGE_STORAGE_KEY);
-      if (stored === "ko" || stored === "en") {
-        setUiLanguage(stored);
-      }
-    } catch {
-      // Local storage can be unavailable in hardened browser contexts.
+    let canceled = false;
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setDesktopPreferencesLoaded(true);
+      setDesktopPreferencesStatus("browser_fallback");
+      setDesktopPreferencesSource("browser-defaults");
+      return;
     }
-  }, []);
-  useEffect(() => {
-    try {
-      window.localStorage.setItem(UI_LANGUAGE_STORAGE_KEY, uiLanguage);
-    } catch {
-      // Local storage can be unavailable in hardened browser contexts.
-    }
-  }, [uiLanguage]);
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(THEME_MODE_STORAGE_KEY);
-      if (stored === "system" || stored === "light" || stored === "dark") {
-        setThemeMode(stored);
-      }
-    } catch {
-      // Local storage can be unavailable in hardened browser contexts.
-    }
-  }, []);
-  useEffect(() => {
-    try {
-      window.localStorage.setItem(THEME_MODE_STORAGE_KEY, themeMode);
-    } catch {
-      // Local storage can be unavailable in hardened browser contexts.
-    }
-  }, [themeMode]);
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(SIDEBAR_MODE_STORAGE_KEY);
-      if (stored === "expanded" || stored === "collapsed") {
-        setSidebarMode(stored);
-      }
-    } catch {
-      // Local storage can be unavailable in hardened browser contexts.
-    }
-  }, []);
-  useEffect(() => {
-    try {
-      window.localStorage.setItem(SIDEBAR_MODE_STORAGE_KEY, sidebarMode);
-    } catch {
-      // Local storage can be unavailable in hardened browser contexts.
-    }
-  }, [sidebarMode]);
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(TERMINAL_DRAWER_STORAGE_KEY);
-      if (stored === "open" || stored === "closed") {
-        setTerminalDrawerOpen(stored === "open");
-      }
-    } catch {
-      // Local storage can be unavailable in hardened browser contexts.
-    }
-  }, []);
-  useEffect(() => {
-    try {
-      window.localStorage.setItem(TERMINAL_DRAWER_STORAGE_KEY, terminalDrawerOpen ? "open" : "closed");
-    } catch {
-      // Local storage can be unavailable in hardened browser contexts.
-    }
-  }, [terminalDrawerOpen]);
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(RUNTIME_INIT_STORAGE_KEY);
-      if (!stored) {
-        return;
-      }
-      const parsed = JSON.parse(stored) as Partial<RuntimeInitDefaults>;
-      setRuntimeInitDefaults({
-        adapterId:
-          typeof parsed.adapterId === "string" && fallbackDesktopAdapters.some((adapter) => adapter.adapterId === parsed.adapterId)
-            ? parsed.adapterId
-            : defaultRuntimeInitDefaults.adapterId,
-        sessionModeId:
-          typeof parsed.sessionModeId === "string" && sessionModePresets.some((mode) => mode.id === parsed.sessionModeId)
-            ? parsed.sessionModeId
-            : defaultRuntimeInitDefaults.sessionModeId,
-        taskPipeKind:
-          typeof parsed.taskPipeKind === "string" && fallbackTaskPipePresets.some((preset) => preset.taskKind === parsed.taskPipeKind)
-            ? parsed.taskPipeKind
-            : defaultRuntimeInitDefaults.taskPipeKind,
-        autoDeferQuestions:
-          typeof parsed.autoDeferQuestions === "boolean"
-            ? parsed.autoDeferQuestions
-            : defaultRuntimeInitDefaults.autoDeferQuestions
+
+    tauriInvoke<DesktopPreferencesReport>("get_desktop_preferences")
+      .then((report) => {
+        if (canceled) {
+          return;
+        }
+        const preferences = normalizeDesktopPreferences(report.preferences);
+        setUiLanguage(preferences.uiLanguage);
+        setThemeMode(preferences.themeMode);
+        setSidebarMode(preferences.sidebarMode);
+        setTerminalDrawerOpen(preferences.terminalDrawerOpen);
+        setRuntimeInitDefaults(preferences.runtimeInitDefaults);
+        setPinnedSections(preferences.pinnedSections);
+        setDesktopPreferencesPath(report.preferencesPath);
+        setDesktopPreferencesSource(report.source);
+        setDesktopPreferencesStatus(report.status);
+        setDesktopPreferencesError("");
+        setDesktopPreferencesLoaded(true);
+      })
+      .catch((preferenceError) => {
+        if (canceled) {
+          return;
+        }
+        setDesktopPreferencesLoaded(true);
+        setDesktopPreferencesStatus("load_failed");
+        setDesktopPreferencesError(String(preferenceError));
       });
-    } catch {
-      try {
-        window.localStorage.removeItem(RUNTIME_INIT_STORAGE_KEY);
-      } catch {
-        // Local storage can be unavailable in hardened browser contexts.
-      }
-    }
+
+    return () => {
+      canceled = true;
+    };
   }, []);
   useEffect(() => {
-    try {
-      window.localStorage.setItem(RUNTIME_INIT_STORAGE_KEY, JSON.stringify(runtimeInitDefaults));
-    } catch {
-      // Local storage can be unavailable in hardened browser contexts.
+    if (!desktopPreferencesLoaded) {
+      return;
     }
-  }, [runtimeInitDefaults]);
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(PINNED_SECTIONS_STORAGE_KEY);
-      if (!stored) {
-        return;
-      }
-      const parsed = JSON.parse(stored);
-      if (!Array.isArray(parsed)) {
-        return;
-      }
-      const nextSections = parsed.filter((item): item is SectionId => sectionIds.has(item as SectionId)).slice(0, 6);
-      if (nextSections.length > 0) {
-        setPinnedSections(nextSections);
-      }
-    } catch {
-      try {
-        window.localStorage.removeItem(PINNED_SECTIONS_STORAGE_KEY);
-      } catch {
-        // Local storage can be unavailable in hardened browser contexts.
-      }
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      return;
     }
-  }, []);
-  useEffect(() => {
-    try {
-      window.localStorage.setItem(PINNED_SECTIONS_STORAGE_KEY, JSON.stringify(pinnedSections));
-    } catch {
-      // Local storage can be unavailable in hardened browser contexts.
-    }
-  }, [pinnedSections]);
+
+    let canceled = false;
+    const preferences = desktopPreferencesFromState({
+      uiLanguage,
+      themeMode,
+      sidebarMode,
+      terminalDrawerOpen,
+      runtimeInitDefaults,
+      pinnedSections
+    });
+    tauriInvoke<DesktopPreferencesReport>("save_desktop_preferences", { preferences })
+      .then((report) => {
+        if (canceled) {
+          return;
+        }
+        setDesktopPreferencesPath(report.preferencesPath);
+        setDesktopPreferencesSource(report.source);
+        setDesktopPreferencesStatus(report.status);
+        setDesktopPreferencesError("");
+      })
+      .catch((preferenceError) => {
+        if (canceled) {
+          return;
+        }
+        setDesktopPreferencesStatus("save_failed");
+        setDesktopPreferencesError(String(preferenceError));
+      });
+
+    return () => {
+      canceled = true;
+    };
+  }, [
+    desktopPreferencesLoaded,
+    pinnedSections,
+    runtimeInitDefaults,
+    sidebarMode,
+    terminalDrawerOpen,
+    themeMode,
+    uiLanguage
+  ]);
   useEffect(() => {
     setRecentSections((previous) => [section, ...previous.filter((item) => item !== section)].slice(0, 5));
   }, [section]);
@@ -2806,6 +2841,41 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         {viewFilteredDocuments.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 문서" : "documents"} /{" "}
                         {visibleSections.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 섹션" : "sections"}
                       </p>
+                    </section>
+
+                    <section className="settings-pane wide native-preferences-pane">
+                      <div className="settings-pane-heading">
+                        <Settings size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "앱 설정 저장소" : "App Preferences Store"}</span>
+                          <strong>
+                            {desktopPreferencesLoaded
+                              ? desktopPreferencesStatus
+                              : uiLanguage === "ko" ? "불러오는 중" : "Loading"}
+                          </strong>
+                          <small>
+                            {uiLanguage === "ko"
+                              ? "테마, 언어, 좌측 레일, 터미널, 실행 기본값은 브라우저 캐시가 아니라 native app config에 저장됩니다."
+                              : "Theme, language, rail, terminal, and run defaults are stored in native app config instead of browser cache."}
+                          </small>
+                        </div>
+                      </div>
+                      <dl className="settings-data-list">
+                        <div>
+                          <dt>{uiLanguage === "ko" ? "저장 방식" : "Storage"}</dt>
+                          <dd>{desktopPreferencesSource}</dd>
+                        </div>
+                        <div>
+                          <dt>{uiLanguage === "ko" ? "경로" : "Path"}</dt>
+                          <dd>{desktopPreferencesPath || (uiLanguage === "ko" ? "정적 미리보기 기본값" : "Static preview defaults")}</dd>
+                        </div>
+                        {desktopPreferencesError && (
+                          <div>
+                            <dt>{uiLanguage === "ko" ? "오류" : "Error"}</dt>
+                            <dd>{truncateText(desktopPreferencesError, 180)}</dd>
+                          </div>
+                        )}
+                      </dl>
                     </section>
 
                     <section className="settings-pane">

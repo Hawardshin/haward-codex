@@ -1,0 +1,43 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-native-first-renderer-reduction",
+  "request_id": "UR-2026-06-03-049",
+  "mode": "standard",
+  "timezone": "Asia/Seoul",
+  "phase_timings": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes_estimate": 5,
+      "notes": "Checked Tauri v2 command, capability, menu, path, and repository references."
+    },
+    {
+      "phase": "source_inventory",
+      "duration_minutes_estimate": 8,
+      "notes": "Inspected MonitorShell localStorage state, Tauri command surface, runtime contract, readiness, and tests."
+    },
+    {
+      "phase": "native_implementation",
+      "duration_minutes_estimate": 24,
+      "notes": "Added native desktop preference schema, command handlers, path helper, and normalization."
+    },
+    {
+      "phase": "renderer_reduction",
+      "duration_minutes_estimate": 24,
+      "notes": "Removed localStorage preference persistence and connected native load/save commands."
+    },
+    {
+      "phase": "validation",
+      "duration_minutes_estimate": 25,
+      "notes": "Ran Rust, TypeScript, readiness, tests, and customer build validation."
+    },
+    {
+      "phase": "records",
+      "duration_minutes_estimate": 12,
+      "notes": "Recorded requirements, specs, history, evaluation, omission check, and timing."
+    }
+  ],
+  "bottleneck_notes": [
+    "The large MonitorShell file makes native/frontend boundary changes slower than they should be.",
+    "Next native-heavy slice should split Rust modules and move more state out of MonitorShell."
+  ]
+}

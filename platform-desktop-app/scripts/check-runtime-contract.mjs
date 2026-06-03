@@ -135,7 +135,11 @@ for (const commandName of [
   "resolve_installer_shell_runtime_contract_path",
   "InstallerShellRuntimeContractReport",
   "get_accumulated_data_overview",
-  "AccumulatedDataOverviewReport"
+  "AccumulatedDataOverviewReport",
+  "get_desktop_preferences",
+  "save_desktop_preferences",
+  "DesktopPreferencesReport",
+  "DESKTOP_PREFERENCES_SCHEMA_VERSION"
 ]) {
   failIf(!tauriLib.includes(commandName), `src-tauri/src/lib.rs must include ${commandName}`);
 }
@@ -144,6 +148,13 @@ failIf(
   contract.runtime_command_surface?.accumulated_data_command !== "get_accumulated_data_overview",
   "runtime_command_surface.accumulated_data_command must be get_accumulated_data_overview"
 );
+for (const preferencesCommand of ["get_desktop_preferences", "save_desktop_preferences"]) {
+  failIf(
+    !(contract.runtime_command_surface?.preferences_commands ?? []).includes(preferencesCommand),
+    `runtime_command_surface.preferences_commands must include ${preferencesCommand}`
+  );
+  failIf(!tauriLib.includes(preferencesCommand), `src-tauri/src/lib.rs must include ${preferencesCommand}`);
+}
 for (const workspaceHostCommand of [
   "get_desktop_workspace_state",
   "set_desktop_workspace_path",

@@ -258,6 +258,13 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   assert.match(lib, /get_installer_shell_runtime_contract/);
   assert.match(lib, /get_accumulated_data_overview/);
   assert.equal(contract.runtime_command_surface.accumulated_data_command, "get_accumulated_data_overview");
+  for (const preferencesCommand of ["get_desktop_preferences", "save_desktop_preferences"]) {
+    assert.match(lib, new RegExp(preferencesCommand));
+    assert.ok(contract.runtime_command_surface.preferences_commands.includes(preferencesCommand));
+  }
+  assert.match(lib, /DesktopPreferencesReport/);
+  assert.match(lib, /DESKTOP_PREFERENCES_SCHEMA_VERSION/);
+  assert.match(lib, /desktop-preferences\.v1\.json/);
   for (const workspaceHostCommand of [
     "get_desktop_workspace_state",
     "set_desktop_workspace_path",
@@ -398,6 +405,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "run_installer_payload_audit",
     "create_support_diagnostic_bundle",
     "get_service_readiness_report",
+    "get_desktop_preferences",
+    "save_desktop_preferences",
     "start_cli_adapter_session",
     "start_cli_task_pipeline",
     "poll_cli_adapter_session",
@@ -527,6 +536,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   ]) {
     assert.match(monitorWorkbenchSource, new RegExp(uiString));
   }
+  assert.doesNotMatch(monitorShell, /localStorage/);
   for (const uiString of [
     "Agent Orchestration",
     "Agent Factory",
@@ -599,7 +609,13 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "nativeWorkspaceCopy",
     "native-file-workspace-panel",
     "surface=\"files\"",
-    "UI_LANGUAGE_STORAGE_KEY",
+    "DESKTOP_PREFERENCES_SCHEMA_VERSION",
+    "DesktopPreferencesReport",
+    "get_desktop_preferences",
+    "save_desktop_preferences",
+    "desktopPreferencesPath",
+    "앱 설정 저장소",
+    "native-preferences-pane",
     "화면 언어",
     "파일/코드",
     "폴더 선택",
@@ -624,10 +640,6 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "mode-switchboard-panel",
     "mode-option-grid",
     "openModeFunctionOption",
-    "SIDEBAR_MODE_STORAGE_KEY",
-    "RUNTIME_INIT_STORAGE_KEY",
-    "THEME_MODE_STORAGE_KEY",
-    "TERMINAL_DRAWER_STORAGE_KEY",
     "settings-tab-list",
     "settings-controlled-summary",
     "terminal-drawer",

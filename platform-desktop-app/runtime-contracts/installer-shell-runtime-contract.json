@@ -536,6 +536,10 @@
     "accumulated_data_command": "get_accumulated_data_overview",
     "payload_audit_command": "run_installer_payload_audit",
     "support_bundle_command": "create_support_diagnostic_bundle",
+    "preferences_commands": [
+      "get_desktop_preferences",
+      "save_desktop_preferences"
+    ],
     "workspace_host_commands": [
       "get_desktop_workspace_state",
       "set_desktop_workspace_path",

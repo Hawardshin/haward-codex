@@ -746,6 +746,10 @@ main {
   grid-column: 1 / -1;
 }
 
+.native-preferences-pane {
+  overflow: hidden;
+}
+
 .settings-pane-heading strong {
   display: block;
   margin-top: 2px;
@@ -807,6 +811,36 @@ main {
 
 .settings-primary-action {
   width: max-content;
+}
+
+.settings-data-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.settings-data-list div {
+  display: grid;
+  grid-template-columns: minmax(86px, 0.24fr) minmax(0, 1fr);
+  gap: 10px;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-raised);
+}
+
+.settings-data-list dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.settings-data-list dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-size: 12px;
 }
 
 .settings-controlled-summary {

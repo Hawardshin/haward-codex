@@ -171,6 +171,8 @@ for (const commandName of [
   "get_accumulated_data_overview",
   "run_installer_payload_audit",
   "create_support_diagnostic_bundle",
+  "get_desktop_preferences",
+  "save_desktop_preferences",
   "get_desktop_workspace_state",
   "set_desktop_workspace_path",
   "choose_desktop_workspace_folder",
@@ -685,7 +687,13 @@ for (const requiredPhrase of [
   "nativeWorkspaceCopy",
   "native-file-workspace-panel",
   "surface=\"files\"",
-  "UI_LANGUAGE_STORAGE_KEY",
+  "DESKTOP_PREFERENCES_SCHEMA_VERSION",
+  "DesktopPreferencesReport",
+  "get_desktop_preferences",
+  "save_desktop_preferences",
+  "desktopPreferencesPath",
+  "앱 설정 저장소",
+  "native-preferences-pane",
   "화면 언어",
   "파일/코드",
   "폴더 선택",
@@ -710,10 +718,6 @@ for (const requiredPhrase of [
   "modeFunctionCatalog",
   "mode-switchboard-panel",
   "openModeFunctionOption",
-  "SIDEBAR_MODE_STORAGE_KEY",
-  "RUNTIME_INIT_STORAGE_KEY",
-  "THEME_MODE_STORAGE_KEY",
-  "TERMINAL_DRAWER_STORAGE_KEY",
   "settings-tab-list",
   "settings-controlled-summary",
   "terminal-drawer",
@@ -735,6 +739,9 @@ for (const requiredPhrase of [
   if (!monitorWorkbenchSource.includes(requiredPhrase)) {
     failures.push(`workspace-monitor workbench source must include ${requiredPhrase}`);
   }
+}
+if (monitorShell.includes("localStorage")) {
+  failures.push("workspace-monitor settings must not persist desktop app preferences through browser localStorage");
 }
 for (const requiredPhrase of [
   "ProductFeatureArchitecturePanel",
