@@ -1,0 +1,38 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-user-perspective-gate",
+  "request_id": "UR-2026-06-03-048",
+  "mode": "standard",
+  "timezone": "Asia/Seoul",
+  "phase_timings": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes_estimate": 4,
+      "notes": "Checked official ISO, NN/g, Apple HIG, and Microsoft Fluent sources for user-centred design, usability, and accessibility anchors."
+    },
+    {
+      "phase": "memory_bootstrap_and_scope",
+      "duration_minutes_estimate": 3,
+      "notes": "Inspected persistent instruction docs and bootstrap manifest as hot anchors for durable future behavior."
+    },
+    {
+      "phase": "durable_instruction_update",
+      "duration_minutes_estimate": 5,
+      "notes": "Added the user-point-of-view product quality gate to common, Korean, and English persistent instruction docs and bootstrap manifest."
+    },
+    {
+      "phase": "records",
+      "duration_minutes_estimate": 8,
+      "notes": "Recorded request summary, work summary, request trace, web search, plan, omission check, evaluation, and timing."
+    },
+    {
+      "phase": "validation",
+      "duration_minutes_estimate": 4,
+      "notes": "Run docs audit, config contract check, JSON validation, and diff check before close-out."
+    }
+  ],
+  "bottleneck_notes": [
+    "The durable gate can prevent repeated UX drift only if future implementation slices explicitly evaluate user goal, first action, feedback, confusion points, and success evidence.",
+    "This change intentionally avoids touching desktop UI source so the current work can be committed as a scoped governance update."
+  ]
+}

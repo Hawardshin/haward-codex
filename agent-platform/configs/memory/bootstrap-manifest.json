@@ -88,7 +88,8 @@
         "durable user preferences",
         "rules that future sessions must not forget",
         "platform-first host runtime rule for external AI CLI guest adapters",
-        "continuous behavior-preserving source-structure refactoring gate"
+        "continuous behavior-preserving source-structure refactoring gate",
+        "user-point-of-view product quality gate"
       ],
       "last_checked": "2026-06-03"
     },

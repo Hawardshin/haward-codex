@@ -1,0 +1,36 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-user-perspective-gate",
+  "request_id": "UR-2026-06-03-048",
+  "status": "passed",
+  "checked_requirements": [
+    {
+      "requirement": "Run web search before planning or editing.",
+      "status": "passed",
+      "evidence": "_history/web-searches/2026/2026-06-03-user-perspective-gate.ko.md"
+    },
+    {
+      "requirement": "Persist ongoing user instruction in durable instruction docs.",
+      "status": "passed",
+      "evidence": "_docs/instructions/persistent-instructions.md and bilingual variants"
+    },
+    {
+      "requirement": "Make future sessions discover the new durable rule.",
+      "status": "passed",
+      "evidence": "agent-platform/configs/memory/bootstrap-manifest.json"
+    },
+    {
+      "requirement": "Record request, trace, work summary, evaluation, and timing.",
+      "status": "passed",
+      "evidence": "_history/user-requests/2026/2026-06-03.ko.md, _history/request-traces/2026/2026-06-03-user-perspective-gate.ko.md, _history/work-summaries/2026/2026-06-03.ko.md, _history/evaluations/2026/2026-06-03-user-perspective-gate.ko.md, _history/work-timings/2026/2026-06-03-user-perspective-gate.json"
+    },
+    {
+      "requirement": "Run relevant validation before close-out.",
+      "status": "passed",
+      "evidence": "docs audit, config contract, JSON validation, and git diff check passed"
+    }
+  ],
+  "missed_items": [],
+  "blocked_items": [],
+  "resume_action": "Commit and push the scoped governance update."
+}
