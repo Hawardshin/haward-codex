@@ -1,0 +1,131 @@
+{
+  "task": "Add Codex app and Claude Desktop as official desktop AI app references for the platform UX contract.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "codex_app_reference_recorded",
+      "description": "Codex app must be recorded as an official reference for thread workbench, commands, skills, terminal, Git/diff, and MCP.",
+      "source": "UR-2026-06-04-005 / REQ-PDA-072 / REQ-PDA-073",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/reference-platform-advantage-registry.json",
+        "openai_codex_app_features",
+        "openai_codex_app_commands",
+        "openai_codex_skills"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "claude_desktop_reference_recorded",
+      "description": "Claude Desktop must be recorded as an official reference for local MCP desktop extension and connector-first UX.",
+      "source": "UR-2026-06-04-005 / REQ-PDA-072 / REQ-PDA-074",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/reference-platform-advantage-registry.json",
+        "claude_desktop_local_mcp_extensions",
+        "claude-desktop-connector-first-chat"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "user_flow_updated",
+      "description": "User flow must reflect Codex-style thread workbench and Claude Desktop-style connector chips.",
+      "source": "REQ-PDA-073 / REQ-PDA-074",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/user-flow-registry.json",
+        "Codex app-style thread workbench",
+        "Claude Desktop-style connector chips",
+        "MCP servers",
+        "desktop extensions"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "readiness_enforced",
+      "description": "Readiness and tests must fail if these reference patterns disappear.",
+      "source": "REQ-PDA-075",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/scripts/check-readiness.mjs",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "_history/web-searches/2026/2026-06-04-codex-claude-desktop-reference.ko.md",
+      "purpose": "Web-first source record.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-04-codex-claude-desktop-reference.ko.md",
+      "purpose": "Korean project requirements.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-04-codex-claude-desktop-reference.en.md",
+      "purpose": "English project requirements.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/spec.ko.md",
+      "purpose": "Spec-driven artifact.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-04-codex-claude-desktop-reference.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contracts",
+      "description": "Changed registries parse and remain self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 -m json.tool platform-desktop-app/configs/reference-platform-advantage-registry.json",
+        "python3 -m json.tool platform-desktop-app/configs/user-flow-registry.json",
+        "check-config-contract reference-platform-advantage-registry.json",
+        "check-config-contract user-flow-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "tests-and-readiness",
+      "description": "Platform tests, workspace tests, readiness, and customer build pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter platform-desktop-app test",
+        "corepack pnpm --filter workspace-monitor test",
+        "corepack pnpm --filter platform-desktop-app run check",
+        "corepack pnpm --filter workspace-monitor run build:customer"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "Static UI smoke verifies that the new reference cards are visible.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "outputs/browser-smoke/codex-claude-desktop-reference.png"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Actual connector chip rendering is recorded as the next implementation slice, not completed in this reference-contract slice."
+  ],
+  "notes": [
+    "The new source links use official OpenAI Codex docs and official Claude Desktop support docs only."
+  ]
+}

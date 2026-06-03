@@ -229,6 +229,8 @@ test("reference platform advantage registry transfers researched strengths into 
 
   assert.equal(registry.source_boundary.policy, "public_sources_only");
   assert.match(serialized, /workbench-activity-rail-editor-terminal/);
+  assert.match(serialized, /codex-style-thread-workbench/);
+  assert.match(serialized, /claude-desktop-connector-first-chat/);
   assert.match(serialized, /background-agent-task-lifecycle/);
   assert.match(serialized, /permission-hooks-checkpoints/);
   assert.match(serialized, /native-install-runtime-boundary/);
@@ -237,6 +239,9 @@ test("reference platform advantage registry transfers researched strengths into 
   assert.match(serialized, /manifest-parity-gap-audits/);
   assert.match(serialized, /security-first-agentic-boundaries/);
   assert.match(serialized, /VS Code/);
+  assert.match(serialized, /Codex app/);
+  assert.match(serialized, /Claude Desktop/);
+  assert.match(serialized, /claude_desktop_local_mcp_extensions/);
   assert.match(serialized, /GitHub Copilot cloud agent/);
   assert.match(serialized, /OpenHands/);
   assert.match(serialized, /Claw Code/);
@@ -370,6 +375,10 @@ test("user flow exposes AI CLI orchestration and source editing surfaces", () =>
   assert.match(serialized, /source editor/);
   assert.match(serialized, /research-insight-planner-agent/);
   assert.match(serialized, /existing_search_agent_run/);
+  assert.match(serialized, /Codex app-style thread workbench/);
+  assert.match(serialized, /Claude Desktop-style connector chips/);
+  assert.match(serialized, /MCP servers/);
+  assert.match(serialized, /desktop extensions/);
 });
 
 test("shared CLI adapter registry defines concrete AI CLI targets", () => {

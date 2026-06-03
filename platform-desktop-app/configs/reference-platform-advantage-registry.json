@@ -362,6 +362,58 @@
       "reliability": "high",
       "limitation": "Launcher UX is a support pattern, not the full product shell.",
       "plan_impact": "Use command palette, extension store, tool selection, background updates, and fast keyboard-first actions for capability launch."
+    },
+    {
+      "id": "openai_codex_app_features",
+      "title": "Codex app features",
+      "url": "https://developers.openai.com/codex/app/features",
+      "source_type": "official_docs",
+      "used_for": [
+        "Codex app desktop reference transfer planning"
+      ],
+      "last_checked": "2026-06-04",
+      "reliability": "high",
+      "limitation": "Codex app features are OpenAI-specific; transfer only the desktop workbench pattern, not product identity or proprietary UI.",
+      "plan_impact": "Use thread-level workspaces, Local/Worktree/Cloud mode choices, built-in Git/diff, integrated terminal, in-app browser, artifact preview, automations, skills, MCP, and approval/sandbox controls as desktop-agent reference requirements."
+    },
+    {
+      "id": "openai_codex_app_commands",
+      "title": "Codex app commands",
+      "url": "https://developers.openai.com/codex/app/commands",
+      "source_type": "official_docs",
+      "used_for": [
+        "Codex app desktop reference transfer planning"
+      ],
+      "last_checked": "2026-06-04",
+      "reliability": "high",
+      "limitation": "Keyboard shortcuts and deep links must be adapted to this platform's naming and native shell.",
+      "plan_impact": "Use command menu, settings shortcut, open-folder action, sidebar/diff/terminal toggles, thread search, find-in-thread, slash commands, and deep links as a desktop interaction baseline."
+    },
+    {
+      "id": "openai_codex_skills",
+      "title": "Codex agent skills",
+      "url": "https://developers.openai.com/codex/skills",
+      "source_type": "official_docs",
+      "used_for": [
+        "skill and reusable workflow packaging transfer planning"
+      ],
+      "last_checked": "2026-06-04",
+      "reliability": "high",
+      "limitation": "Skill discovery and metadata should be platform-neutral and should not assume only Codex can run reusable workflows.",
+      "plan_impact": "Use progressive disclosure, explicit invocation, repository/user/admin/system scopes, plugin packaging, UI metadata, and dependency declarations for Agent Factory and capability promotion."
+    },
+    {
+      "id": "claude_desktop_local_mcp_extensions",
+      "title": "Claude Desktop local MCP servers and desktop extensions",
+      "url": "https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop",
+      "source_type": "official_docs",
+      "used_for": [
+        "Claude Desktop connector and extension reference transfer planning"
+      ],
+      "last_checked": "2026-06-04",
+      "reliability": "high",
+      "limitation": "MCP in Claude Desktop is documented as beta and uses Claude-specific extension packaging and settings labels.",
+      "plan_impact": "Use one-click local tool extension installation, Settings > Extensions organization, connector status from the chat composer, manifest-based packaging, sensitive config encryption, debug logs, and enterprise allowlist controls as connector UX requirements."
     }
   ],
   "structure_rules": [
@@ -457,13 +509,15 @@
       "label_ko": "AI 네이티브 IDE",
       "label_en": "AI-native IDEs",
       "platforms": [
+        "Codex app",
+        "Claude Desktop",
         "Cursor",
         "Devin Desktop / Windsurf",
         "Claude Code Desktop"
       ],
       "role": "agentic_workflow_reference",
-      "strongest_advantage": "agent sidepane, diff review, background agents, rules, memories, workflows, skills, checkpoints",
-      "transfer_rule": "에이전트가 어디서 일하는지, 어떤 권한과 규칙으로 움직이는지, 변경을 어떻게 되돌리는지를 항상 사용자가 볼 수 있어야 한다."
+      "strongest_advantage": "chat/thread workbench, agent sidepane, diff review, background agents, rules, memories, workflows, skills, MCP connectors, checkpoints",
+      "transfer_rule": "에이전트가 어디서 일하는지, 어떤 권한과 규칙으로 움직이는지, 어떤 로컬 도구와 연결됐는지, 변경을 어떻게 되돌리는지를 항상 사용자가 볼 수 있어야 한다."
     },
     {
       "id": "open_source_agent_engines",
@@ -531,6 +585,84 @@
         "vscode_ui",
         "intellij_ui",
         "openhands_key_features"
+      ]
+    },
+    {
+      "id": "codex-style-thread-workbench",
+      "label_ko": "Codex식 스레드 작업대",
+      "label_en": "Codex-style thread workbench",
+      "source_platforms": [
+        "Codex app",
+        "VS Code",
+        "GitHub Desktop"
+      ],
+      "observed_strength": "The Codex app treats each task as a desktop thread with project scope, command menu, slash commands, terminal, Git/diff, worktree mode, artifacts, skills, MCP, browser, and approval controls around one work unit.",
+      "platform_decision": "Treat each agent run chat as a first-class workbench thread: the composer starts work, the bottom panel owns terminal output, the side/inspector area shows files, diff, artifacts, decisions, validations, and a mode selector keeps Local/Worktree/Cloud-like execution explicit.",
+      "product_section": "agents",
+      "user_value_ko": "사용자는 검색 에이전트나 다른 에이전트를 실행할 때 채팅, 파일, 터미널, 변경사항, 검증, 기록이 같은 작업 단위로 묶인다는 것을 바로 이해한다.",
+      "current_platform_assets": [
+        "renderer/workspace-monitor/components/MonitorShell.tsx",
+        "renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx",
+        "renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx",
+        "platform-desktop-app/configs/user-flow-registry.json"
+      ],
+      "implementation_targets": [
+        "every runnable agent opens as a work chat thread",
+        "slash-command suggestions in the work chat composer for status, plan, review, terminal, files, and skills",
+        "thread-scoped terminal and validation history",
+        "mode selector for direct workspace, isolated worktree, and future remote execution"
+      ],
+      "risk_controls": [
+        "approval and sandbox scope visible before privileged actions",
+        "customer snapshot strips source content",
+        "worktree mode required before parallel repository edits"
+      ],
+      "status": "integrated_contract",
+      "priority": "p0",
+      "source_ids": [
+        "openai_codex_app_features",
+        "openai_codex_app_commands",
+        "openai_codex_skills",
+        "github_desktop",
+        "vscode_ui"
+      ]
+    },
+    {
+      "id": "claude-desktop-connector-first-chat",
+      "label_ko": "Claude Desktop식 커넥터 우선 채팅",
+      "label_en": "Claude Desktop-style connector-first chat",
+      "source_platforms": [
+        "Claude Desktop",
+        "MCP",
+        "Raycast"
+      ],
+      "observed_strength": "Claude Desktop makes local MCP capabilities easier to use by managing desktop extensions in settings, surfacing connector status from the chat composer, and making installed tools available in conversations.",
+      "platform_decision": "Put local tools, MCP servers, and CLI adapters behind one Settings > Capabilities surface, then expose connected capability chips and tool status directly in agent work chats instead of making users edit JSON or type shell bootstrap commands.",
+      "product_section": "agents",
+      "user_value_ko": "사용자는 설정에서 로컬 도구를 연결하고, 채팅창에서 어떤 도구가 붙어 있는지 확인한 뒤 바로 작업을 시작한다.",
+      "current_platform_assets": [
+        "agent-platform/configs/integrations/cli-adapter-registry.json",
+        "platform-desktop-app/configs/user-flow-registry.json",
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+        "renderer/workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "implementation_targets": [
+        "Settings > Capabilities tab for MCP servers, desktop extensions, and guest CLI adapters",
+        "connector chips beside every agent chat composer",
+        "one-click install or setup guide for optional local tools",
+        "debug log and missing-capability recovery panel"
+      ],
+      "risk_controls": [
+        "sensitive fields use OS secure storage or redacted secret references",
+        "enterprise allowlist and disabled connector states are explicit",
+        "local MCP beta status and untrusted tool risk are visible before use"
+      ],
+      "status": "queued_p0",
+      "priority": "p0",
+      "source_ids": [
+        "claude_desktop_local_mcp_extensions",
+        "mcp_security",
+        "raycast_extensions"
       ]
     },
     {

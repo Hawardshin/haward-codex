@@ -1,0 +1,23 @@
+{
+  "schema_version": "work-mode-selection.v1",
+  "request_id": "UR-2026-06-04-005",
+  "selected_mode": "standard",
+  "reason": "This changes durable desktop UX reference contracts and readiness checks, but does not install dependencies or change release policy.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "owning_project": "platform-desktop-app",
+  "resource_risk_occurred": true,
+  "resource_risk_reason": "Validation used a temporary static HTTP server and headless browser smoke.",
+  "required_closeout_targets": [
+    "web_search_record_targets",
+    "mode_selection_record_targets",
+    "requirements_targets",
+    "spec_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets",
+    "omission_check_targets",
+    "resource_check_targets",
+    "work_evaluation_targets"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "task": "Codex/Claude Desktop reference validation resource check.",
+  "work_mode": "standard",
+  "runtime_context": [
+    "python-http-server",
+    "playwright"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "static-http-server",
+      "category": "process",
+      "description": "Temporary Python static server could remain running after browser smoke.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Started the server in tracked exec session 98190 and stopped it with Ctrl-C after smoke testing.",
+      "evidence": [
+        "exec session 98190 exited with code 0 after Keyboard interrupt"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "playwright-browser",
+      "category": "browser_context",
+      "description": "Headless Chromium context could remain open after smoke testing.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Smoke script closes the browser before returning.",
+      "evidence": [
+        "Browser smoke command exited with code 0"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "server-cleanup",
+      "resource": "python3 -m http.server 4183",
+      "create_path": "exec session 98190",
+      "cleanup_path": "functions.write_stdin Ctrl-C",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "session 98190 process exited with code 0"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser-cleanup",
+      "resource": "Chromium",
+      "create_path": "chromium.launch",
+      "cleanup_path": "browser.close before command exits",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Playwright smoke returned visible checks true"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "bounded-static-smoke",
+      "metric": "process lifetime",
+      "tool": "exec session status and command exit code",
+      "threshold": "No validation server or browser process intentionally left running.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "static server stopped",
+        "Playwright command exited"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "Smoke used bundled Codex runtime Playwright because root Node did not have playwright installed."
+  ]
+}

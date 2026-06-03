@@ -1,0 +1,104 @@
+{
+  "initial_instruction": "Codex 앱이나 Claude Desktop 같은 실제 데스크톱 AI 앱을 참고해 현재 플랫폼 UX에 반영한다.",
+  "result_summary": "Added Codex app and Claude Desktop as official desktop AI app references, created codex-style-thread-workbench and claude-desktop-connector-first-chat transfer patterns, updated user-flow contracts for thread workbench and connector chips, and added readiness/test guards.",
+  "work_mode": "standard",
+  "changed_files": [
+    "platform-desktop-app/configs/reference-platform-advantage-registry.json",
+    "platform-desktop-app/configs/user-flow-registry.json",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/docs/requirements/2026-06-04-codex-claude-desktop-reference.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-04-codex-claude-desktop-reference.en.md",
+    "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/traceability.ko.md"
+  ],
+  "verification": [
+    "JSON parse checks: passed",
+    "check-config-contract reference platform advantage registry: self_documenting",
+    "check-config-contract user flow registry: self_documenting",
+    "corepack pnpm --filter platform-desktop-app test: passed 21 tests",
+    "corepack pnpm --filter workspace-monitor test: passed 17 tests",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check: passed",
+    "corepack pnpm --filter workspace-monitor run build:customer: passed",
+    "corepack pnpm --filter platform-desktop-app run check: passed",
+    "corepack pnpm --filter platform-desktop-app run customer-bundle:audit: passed",
+    "git diff --check: passed",
+    "Browser smoke: passed, screenshot outputs/browser-smoke/codex-claude-desktop-reference.png",
+    "check-omissions: coverage_ready",
+    "check-resources: resource_ready"
+  ],
+  "references_checked": [
+    "https://developers.openai.com/codex/app/features",
+    "https://developers.openai.com/codex/app/commands",
+    "https://developers.openai.com/codex/skills",
+    "https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-04-codex-claude-desktop-reference.ko.md",
+    "_history/evaluations/2026/2026-06-04-codex-claude-desktop-reference-omission-check.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-04-codex-claude-desktop-reference.ko.md",
+    "_history/plan-evidence/2026/2026-06-04-codex-claude-desktop-reference.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-04-codex-claude-desktop-reference.json",
+    "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-04-codex-claude-desktop-reference.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-04-codex-claude-desktop-reference-omission-check.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-04-codex-claude-desktop-reference.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-04.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-04-codex-claude-desktop-reference.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-04-codex-claude-desktop-reference.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-04-codex-claude-desktop-reference.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-04.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-04-codex-claude-desktop-reference.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-04-codex-claude-desktop-reference-resource.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [
+    "Implement real connector chips and settings capability tabs in the agent work chat UI."
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Promote Codex-style slash-command suggestions into the SearchAgentWorkChatPanel composer.",
+    "Add Claude Desktop-style connector status chips beside every agent chat composer."
+  ]
+}

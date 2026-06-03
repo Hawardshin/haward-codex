@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-03T16:07:53.268Z",
+  "generatedAt": "2026-06-03T16:25:17.918Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -30,7 +30,7 @@
     "primaryProductFeatures": 5,
     "supportingProductFeatures": 1,
     "referencePlatforms": 4,
-    "referenceTransferPatterns": 15,
+    "referenceTransferPatterns": 17,
     "structurePressurePoints": 0,
     "sourceFiles": 0,
     "rootFolders": 0
@@ -409,13 +409,13 @@
       "acceptedSourceTypes": []
     },
     "summary": {
-      "totalSources": 25,
+      "totalSources": 29,
       "platformGroups": 4,
-      "totalPatterns": 15,
+      "totalPatterns": 17,
       "implemented": 6,
-      "integratedContract": 7,
-      "queuedP0": 2,
-      "highPriority": 15
+      "integratedContract": 8,
+      "queuedP0": 3,
+      "highPriority": 17
     },
     "referenceLinks": [],
     "platformGroups": [
@@ -436,13 +436,15 @@
         "labelKo": "AI 네이티브 IDE",
         "labelEn": "AI-native IDEs",
         "platforms": [
+          "Codex app",
+          "Claude Desktop",
           "Cursor",
           "Devin Desktop / Windsurf",
           "Claude Code Desktop"
         ],
         "role": "agentic_workflow_reference",
-        "strongestAdvantage": "agent sidepane, diff review, background agents, rules, memories, workflows, skills, checkpoints",
-        "transferRule": "에이전트가 어디서 일하는지, 어떤 권한과 규칙으로 움직이는지, 변경을 어떻게 되돌리는지를 항상 사용자가 볼 수 있어야 한다."
+        "strongestAdvantage": "chat/thread workbench, agent sidepane, diff review, background agents, rules, memories, workflows, skills, MCP connectors, checkpoints",
+        "transferRule": "에이전트가 어디서 일하는지, 어떤 권한과 규칙으로 움직이는지, 어떤 로컬 도구와 연결됐는지, 변경을 어떻게 되돌리는지를 항상 사용자가 볼 수 있어야 한다."
       },
       {
         "id": "open_source_agent_engines",
@@ -500,6 +502,62 @@
           "customer snapshot remains source-free"
         ],
         "status": "implemented",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "codex-style-thread-workbench",
+        "labelKo": "Codex식 스레드 작업대",
+        "labelEn": "Codex-style thread workbench",
+        "sourcePlatforms": [
+          "Codex app",
+          "VS Code",
+          "GitHub Desktop"
+        ],
+        "observedStrength": "The Codex app treats each task as a desktop thread with project scope, command menu, slash commands, terminal, Git/diff, worktree mode, artifacts, skills, MCP, browser, and approval controls around one work unit.",
+        "platformDecision": "Treat each agent run chat as a first-class workbench thread: the composer starts work, the bottom panel owns terminal output, the side/inspector area shows files, diff, artifacts, decisions, validations, and a mode selector keeps Local/Worktree/Cloud-like execution explicit.",
+        "productSection": "agents",
+        "userValueKo": "사용자는 검색 에이전트나 다른 에이전트를 실행할 때 채팅, 파일, 터미널, 변경사항, 검증, 기록이 같은 작업 단위로 묶인다는 것을 바로 이해한다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "every runnable agent opens as a work chat thread",
+          "slash-command suggestions in the work chat composer for status, plan, review, terminal, files, and skills",
+          "thread-scoped terminal and validation history",
+          "mode selector for direct workspace, isolated worktree, and future remote execution"
+        ],
+        "riskControls": [
+          "approval and sandbox scope visible before privileged actions",
+          "customer snapshot strips source content"
+        ],
+        "status": "integrated_contract",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "claude-desktop-connector-first-chat",
+        "labelKo": "Claude Desktop식 커넥터 우선 채팅",
+        "labelEn": "Claude Desktop-style connector-first chat",
+        "sourcePlatforms": [
+          "Claude Desktop",
+          "MCP",
+          "Raycast"
+        ],
+        "observedStrength": "Claude Desktop makes local MCP capabilities easier to use by managing desktop extensions in settings, surfacing connector status from the chat composer, and making installed tools available in conversations.",
+        "platformDecision": "Put local tools, MCP servers, and CLI adapters behind one Settings > Capabilities surface, then expose connected capability chips and tool status directly in agent work chats instead of making users edit JSON or type shell bootstrap commands.",
+        "productSection": "agents",
+        "userValueKo": "사용자는 설정에서 로컬 도구를 연결하고, 채팅창에서 어떤 도구가 붙어 있는지 확인한 뒤 바로 작업을 시작한다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "Settings > Capabilities tab for MCP servers, desktop extensions, and guest CLI adapters",
+          "connector chips beside every agent chat composer",
+          "one-click install or setup guide for optional local tools",
+          "debug log and missing-capability recovery panel"
+        ],
+        "riskControls": [
+          "sensitive fields use OS secure storage or redacted secret references",
+          "enterprise allowlist and disabled connector states are explicit"
+        ],
+        "status": "queued_p0",
         "priority": "p0",
         "sourceIds": []
       },

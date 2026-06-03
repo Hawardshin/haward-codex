@@ -1,0 +1,27 @@
+{
+  "schema_version": "work-timing.v1",
+  "request_id": "UR-2026-06-04-005",
+  "work_slug": "codex-claude-desktop-reference",
+  "started_at": "2026-06-04T00:00:00+09:00",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "elapsed_note": "checked OpenAI Codex app official docs and Claude Desktop official support docs"
+    },
+    {
+      "phase": "local_discovery",
+      "elapsed_note": "inspected reference platform advantage registry, user flow registry, readiness script, and tests"
+    },
+    {
+      "phase": "implementation",
+      "elapsed_note": "added Codex/Claude Desktop source links, transfer patterns, user-flow tokens, and readiness/test guards"
+    },
+    {
+      "phase": "validation_and_closeout",
+      "elapsed_note": "ran JSON/config contract checks, platform/workspace tests, workspace monitor check, customer build, product readiness, customer bundle audit, diff check, browser smoke, and closeout evaluator checks"
+    }
+  ],
+  "bottlenecks": [
+    "This turn records the product contract; actual connector chip UI remains a separate implementation slice."
+  ]
+}

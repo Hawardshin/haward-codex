@@ -146,6 +146,36 @@
         "optional Slack, Discord, Teams, and webhook notification setup"
       ],
       "last_checked": "2026-06-02"
+    },
+    {
+      "id": "openai_codex_app_features",
+      "title": "Codex app features",
+      "url": "https://developers.openai.com/codex/app/features",
+      "source_type": "official_docs",
+      "used_for": [
+        "Codex app-style thread workbench, terminal, Git/diff, worktree, skills, MCP, and artifact flow"
+      ],
+      "last_checked": "2026-06-04"
+    },
+    {
+      "id": "openai_codex_app_commands",
+      "title": "Codex app commands",
+      "url": "https://developers.openai.com/codex/app/commands",
+      "source_type": "official_docs",
+      "used_for": [
+        "command menu, settings, open-folder, sidebar, terminal, diff, thread search, slash-command, and deep-link interaction references"
+      ],
+      "last_checked": "2026-06-04"
+    },
+    {
+      "id": "claude_desktop_local_mcp_extensions",
+      "title": "Claude Desktop local MCP servers and desktop extensions",
+      "url": "https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop",
+      "source_type": "official_docs",
+      "used_for": [
+        "Claude Desktop-style Settings > Extensions, connector status, local tool package installation, sensitive config, and debug log flows"
+      ],
+      "last_checked": "2026-06-04"
     }
   ],
   "structure_rules": [
@@ -497,15 +527,17 @@
         "developer",
         "superadmin_developer"
       ],
-        "contents": [
-          "agent registry",
-          "CLI adapters",
-          "AI CLI orchestration lanes",
-          "notification channels",
-          "read-only source code browser",
-          "source editor",
-          "validators",
-          "install state"
+      "contents": [
+        "agent registry",
+        "CLI adapters",
+        "MCP servers",
+        "desktop extensions",
+        "AI CLI orchestration lanes",
+        "notification channels",
+        "read-only source code browser",
+        "source editor",
+        "validators",
+        "install state"
       ]
     },
     {
@@ -513,11 +545,11 @@
       "visible_in": [
         "superadmin_developer"
       ],
-        "contents": [
-          "raw configs",
-          "source code",
-          "platform policies",
-          "coordination status",
+      "contents": [
+        "raw configs",
+        "source code",
+        "platform policies",
+        "coordination status",
         "validation gaps",
         "desktop release gates"
       ]
@@ -539,6 +571,8 @@
       "required_behavior": [
         "show the existing research-insight-planner-agent before agent creation",
         "start the run from a chat workbench without requiring the user to type a shell command",
+        "treat the chat as a Codex app-style thread workbench with connected terminal, files, diff, artifacts, decisions, and validation",
+        "show Claude Desktop-style connector chips for attached MCP servers, desktop extensions, and guest CLI adapters",
         "keep terminal output, decision prompts, and task-run records connected to the chat request",
         "persist the run as taskKind research_insight_agent"
       ]
@@ -555,6 +589,7 @@
         "deadline or depth",
         "notification channel",
         "work mode override",
+        "execution mode such as direct workspace, isolated worktree, or future remote lane",
         "preferred tools"
       ]
     },
@@ -614,6 +649,8 @@
       "required_behavior": [
         "render the research-insight-planner-agent config and input schema as a work-chat product preset",
         "treat the chat composer as the primary place where the user starts the agent work",
+        "show slash-command suggestions for status, plan, files, terminal, review, and skills inside the composer",
+        "show connector chips for MCP servers, desktop extensions, and guest CLI adapters before launch",
         "inject a structured prompt into the selected guest adapter",
         "open the bottom terminal drawer automatically",
         "store stdout, stderr, decision prompts, and task-run metadata in the runtime data store"
@@ -715,6 +752,9 @@
       "group": "Capabilities",
       "settings": [
         "optional CLI adapters",
+        "MCP servers",
+        "desktop extensions",
+        "connector status and debug logs",
         "AI CLI orchestration defaults",
         "terminal output retention",
         "source editor integration",

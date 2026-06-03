@@ -1,0 +1,41 @@
+{
+  "schema_version": "plan-evidence.v1",
+  "request_id": "UR-2026-06-04-005",
+  "work_slug": "codex-claude-desktop-reference",
+  "research_profile_paths": [
+    "agent-platform/configs/research/research-agent-profile.json"
+  ],
+  "external_sources_checked": [
+    "https://developers.openai.com/codex/app/features",
+    "https://developers.openai.com/codex/app/commands",
+    "https://developers.openai.com/codex/skills",
+    "https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop"
+  ],
+  "local_sources_checked": [
+    "platform-desktop-app/configs/reference-platform-advantage-registry.json",
+    "platform-desktop-app/configs/user-flow-registry.json",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs"
+  ],
+  "language_options": [
+    "JSON product registries plus existing JavaScript readiness tests",
+    "React/TypeScript UI implementation in the current turn"
+  ],
+  "selected_language": "JSON product registries plus existing JavaScript readiness tests",
+  "language_decision_notes": "The user asked to reference Codex/Claude Desktop; the durable decision point is the product contract and readiness guard. React implementation should follow after this contract when connector chips/thread commands are built.",
+  "architecture_reference_sources": [
+    "Codex app features",
+    "Codex app commands",
+    "Claude Desktop local MCP servers and desktop extensions"
+  ],
+  "architecture_options": [
+    "Record Codex/Claude Desktop as reference transfer patterns and enforce via readiness",
+    "Immediately clone or replicate a desktop AI app UI surface"
+  ],
+  "architecture_decision_notes": "Use public-source transfer contracts first so later UI work has enforceable direction without copying proprietary UI. Cloning is unnecessary for official Codex/Claude Desktop patterns and would not solve product ownership.",
+  "folder_structure_options": [
+    "Keep reference contracts in existing platform-desktop-app configs/specs/history structure",
+    "Create a new top-level reference-research project"
+  ],
+  "folder_structure_decision_notes": "The change belongs to the installable desktop app, so project-specific configs, requirements, specs, and history are the maintainable location."
+}

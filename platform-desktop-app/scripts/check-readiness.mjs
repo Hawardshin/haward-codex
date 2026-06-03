@@ -434,7 +434,18 @@ if (!productGapSerialized.includes("monitoring polish") || !productGapSerialized
 
 const userFlowRegistry = readJson("configs/user-flow-registry.json");
 const userFlowSerialized = JSON.stringify(userFlowRegistry);
-for (const requiredPhrase of ["ai_cli_orchestration_flow", "Claude Code", "Gemini CLI", "Codex CLI", "OpenCode", "Claw Code"]) {
+for (const requiredPhrase of [
+  "ai_cli_orchestration_flow",
+  "Claude Code",
+  "Gemini CLI",
+  "Codex CLI",
+  "OpenCode",
+  "Claw Code",
+  "Codex app-style thread workbench",
+  "Claude Desktop-style connector chips",
+  "MCP servers",
+  "desktop extensions"
+]) {
   if (!userFlowSerialized.includes(requiredPhrase)) {
     failures.push(`user-flow-registry must include ${requiredPhrase}`);
   }
@@ -461,11 +472,16 @@ const referenceAdvantageSerialized = JSON.stringify(referenceAdvantageRegistry);
 for (const requiredPhrase of [
   "public_sources_only",
   "workbench-activity-rail-editor-terminal",
+  "codex-style-thread-workbench",
+  "claude-desktop-connector-first-chat",
   "background-agent-task-lifecycle",
   "permission-hooks-checkpoints",
   "native-install-runtime-boundary",
   "command-palette-extension-catalog",
-  "security-first-agentic-boundaries"
+  "security-first-agentic-boundaries",
+  "Codex app",
+  "Claude Desktop",
+  "claude_desktop_local_mcp_extensions"
 ]) {
   if (!referenceAdvantageSerialized.includes(requiredPhrase)) {
     failures.push(`reference platform advantage transfer must include ${requiredPhrase}`);
