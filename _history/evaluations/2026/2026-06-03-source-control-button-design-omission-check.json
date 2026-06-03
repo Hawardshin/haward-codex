@@ -1,0 +1,33 @@
+{
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-062",
+  "work_id": "source-control-button-design",
+  "checked_requirements": [
+    {
+      "item": "Edit-file buttons should not look like default browser buttons.",
+      "status": "covered",
+      "evidence": "Source action buttons now use source-action-button variants with accent, fill, hover, focus, and active states."
+    },
+    {
+      "item": "Design polish should cover the controls shown when editing files, not only global buttons.",
+      "status": "covered",
+      "evidence": "Source action bar, command toolbar, file rows, draft rows, and editor tabs were styled."
+    },
+    {
+      "item": "Responsive breakage should not hide controls.",
+      "status": "covered",
+      "evidence": "Compact 900x620 and mobile 390x844 Source smoke confirmed no horizontal overflow or button viewport escape."
+    },
+    {
+      "item": "Regression should be automated.",
+      "status": "covered",
+      "evidence": "check-source-control-design.mjs is included in workspace-monitor run check."
+    }
+  ],
+  "deferred_items": [
+    {
+      "item": "Typed app-wide button component extraction",
+      "reason": "Out of scope for this small Source-specific polish slice; current guard prevents the reported regression."
+    }
+  ]
+}

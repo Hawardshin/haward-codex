@@ -6572,62 +6572,62 @@ function DesktopRuntimePanel({
               ))}
             </select>
           </label>
-          <button type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !sourcePathInput.trim()}>
+          <button className="source-action-button primary" type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !sourcePathInput.trim()}>
             <FileSearch size={15} aria-hidden="true" />
             <span>{editorBusy ? copy.loading : copy.openSelected}</span>
           </button>
-          <button type="button" onClick={saveSourceFile} disabled={!invoke || editorBusy || !sourceFile || !currentSourceDirty}>
+          <button className="source-action-button save" type="button" onClick={saveSourceFile} disabled={!invoke || editorBusy || !sourceFile || !currentSourceDirty}>
             <CheckCircle2 size={15} aria-hidden="true" />
             <span>{editorBusy ? copy.saving : copy.saveCurrent}</span>
           </button>
-          <button type="button" onClick={saveAllSourceDrafts} disabled={!invoke || editorBusy || saveAllBusy || dirtyDraftEntries.length === 0}>
+          <button className="source-action-button save-all" type="button" onClick={saveAllSourceDrafts} disabled={!invoke || editorBusy || saveAllBusy || dirtyDraftEntries.length === 0}>
             <CheckCircle2 size={15} aria-hidden="true" />
             <span>{saveAllBusy ? copy.saving : copy.saveAll}</span>
           </button>
-          <button type="button" onClick={copyCurrentSourceDraft} disabled={!sourceFile}>
+          <button className="source-action-button secondary" type="button" onClick={copyCurrentSourceDraft} disabled={!sourceFile}>
             <Copy size={15} aria-hidden="true" />
             <span>{copy.copyFile}</span>
           </button>
         </div>
 
         <div className="source-command-toolbar" aria-label={copy.editorSettings}>
-          <button type="button" onClick={() => runSourceEditorCommand("undo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("undo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <History size={15} aria-hidden="true" />
             <span>Undo</span>
           </button>
-          <button type="button" onClick={() => runSourceEditorCommand("redo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("redo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <History size={15} aria-hidden="true" />
             <span>Redo</span>
           </button>
-          <button type="button" onClick={() => runSourceEditorCommand("find")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("find")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <Search size={15} aria-hidden="true" />
             <span>Find</span>
           </button>
-          <button type="button" onClick={() => runSourceEditorCommand("replace")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("replace")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <Search size={15} aria-hidden="true" />
             <span>Replace</span>
           </button>
-          <button type="button" onClick={() => runSourceEditorCommand("format")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("format")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <Code2 size={15} aria-hidden="true" />
             <span>Format</span>
           </button>
-          <button type="button" onClick={() => runSourceEditorCommand("foldAll")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("foldAll")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <Code2 size={15} aria-hidden="true" />
             <span>{copy.foldAll}</span>
           </button>
-          <button type="button" onClick={() => runSourceEditorCommand("unfoldAll")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("unfoldAll")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <Code2 size={15} aria-hidden="true" />
             <span>{copy.unfoldAll}</span>
           </button>
-          <button type="button" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))} disabled={!sourceFile}>
+          <button className="source-tool-button mode" type="button" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))} disabled={!sourceFile}>
             <FileSearch size={15} aria-hidden="true" />
             <span>{sourceEditorViewMode === "edit" ? copy.diffMode : copy.editMode}</span>
           </button>
-          <button type="button" onClick={() => setSourceWordWrap((current) => !current)} className={sourceWordWrap ? "active" : ""}>
+          <button type="button" onClick={() => setSourceWordWrap((current) => !current)} className={`source-tool-button toggle ${sourceWordWrap ? "active" : ""}`}>
             <Code2 size={15} aria-hidden="true" />
             <span>{copy.wordWrap}</span>
           </button>
-          <button type="button" onClick={() => setSourceMinimapEnabled((current) => !current)} className={sourceMinimapEnabled ? "active" : ""}>
+          <button type="button" onClick={() => setSourceMinimapEnabled((current) => !current)} className={`source-tool-button toggle ${sourceMinimapEnabled ? "active" : ""}`}>
             <LayoutDashboard size={15} aria-hidden="true" />
             <span>{copy.minimap}</span>
           </button>

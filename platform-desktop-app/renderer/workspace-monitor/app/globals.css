@@ -6042,6 +6042,13 @@ h3 {
   gap: 8px;
   align-items: end;
   margin-bottom: 12px;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, var(--blue) 10%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-raised) 94%, var(--blue) 4%), var(--surface-raised)),
+    var(--surface-raised);
+  border-radius: 8px;
+  padding: 9px;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #ffffff 48%, transparent);
 }
 
 .source-path-field {
@@ -6049,13 +6056,77 @@ h3 {
   grid-column: span 2;
 }
 
+.source-editor-controls label {
+  min-height: 58px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 92%, var(--surface-muted) 8%);
+  border-radius: 7px;
+  padding: 7px 9px;
+}
+
 .source-editor-controls label:not(.source-path-field) {
   min-width: 0;
   grid-column: span 2;
 }
 
-.source-editor-controls button {
+.source-editor-controls button,
+.source-action-button {
   min-width: 0;
+}
+
+.source-action-button {
+  position: relative;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--line) 58%, var(--slate) 18%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 94%, #ffffff 4%), color-mix(in srgb, var(--surface-muted) 78%, var(--surface) 22%)),
+    var(--surface);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #ffffff 54%, transparent),
+    0 1px 1px rgba(15, 23, 42, 0.08);
+  font-weight: 760;
+}
+
+.source-action-button::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: color-mix(in srgb, var(--slate) 74%, transparent);
+}
+
+.source-action-button.primary {
+  border-color: color-mix(in srgb, var(--blue) 58%, var(--line));
+  background:
+    linear-gradient(180deg, #2f67b1 0%, #23558e 100%),
+    #23558e;
+  color: #ffffff;
+}
+
+.source-action-button.primary::before {
+  background: #9bd5ff;
+}
+
+.source-action-button.save,
+.source-action-button.save-all {
+  border-color: color-mix(in srgb, var(--green) 52%, var(--line));
+}
+
+.source-action-button.save::before,
+.source-action-button.save-all::before {
+  background: var(--green);
+}
+
+.source-action-button.secondary::before {
+  background: var(--violet);
+}
+
+.source-action-button:not(:disabled):hover {
+  border-color: color-mix(in srgb, var(--blue) 48%, var(--line));
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #ffffff 58%, transparent),
+    0 8px 16px rgba(15, 23, 42, 0.12);
 }
 
 .source-customization-bar {
@@ -6130,33 +6201,54 @@ h3 {
 .source-command-toolbar {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 6px;
   align-items: center;
   margin: -4px 0 12px;
-  border: 1px solid var(--line);
-  background: var(--surface-raised);
+  border: 1px solid color-mix(in srgb, var(--line) 80%, var(--slate) 10%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-muted) 72%, var(--surface) 28%), var(--surface-raised)),
+    var(--surface-raised);
   border-radius: 8px;
-  padding: 8px;
+  padding: 6px;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #ffffff 52%, transparent);
 }
 
 .source-command-toolbar button,
 .source-settings-dialog button {
   display: inline-flex;
-  min-height: var(--control-target-size);
+  min-height: 34px;
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
-  border: 1px solid #aebbc8;
-  background: var(--surface);
-  border-radius: var(--control-radius);
-  padding: 7px 9px;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 6px;
+  padding: 6px 9px;
   color: var(--text);
   white-space: normal;
 }
 
+.source-command-toolbar button svg {
+  color: color-mix(in srgb, var(--muted) 72%, var(--blue) 28%);
+}
+
+.source-command-toolbar button:not(:disabled):hover {
+  border-color: color-mix(in srgb, var(--line) 72%, var(--blue) 16%);
+  background: color-mix(in srgb, var(--surface) 82%, var(--blue) 8%);
+}
+
 .source-command-toolbar button.active {
   border-color: #7aa7c8;
-  background: color-mix(in srgb, var(--surface-muted) 68%, var(--blue) 16%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, var(--blue) 14%), color-mix(in srgb, var(--surface-muted) 68%, var(--blue) 16%)),
+    var(--surface-muted);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--blue) 18%, transparent);
+}
+
+.source-command-toolbar button.mode {
+  margin-left: 2px;
+  border-color: color-mix(in srgb, var(--line) 76%, var(--violet) 20%);
+  background: color-mix(in srgb, var(--surface) 84%, var(--violet) 7%);
 }
 
 .source-command-toolbar button:disabled,
@@ -6170,29 +6262,47 @@ h3 {
   gap: 7px;
   align-items: center;
   margin: -4px 0 12px;
-  border: 1px solid var(--line);
-  background: var(--surface-raised);
+  border: 1px solid color-mix(in srgb, var(--line) 84%, var(--blue) 10%);
+  background: color-mix(in srgb, var(--surface-muted) 74%, var(--surface) 26%);
   border-radius: 8px;
-  padding: 8px;
+  padding: 6px;
 }
 
 .source-workbench-switcher button {
+  position: relative;
   display: inline-flex;
   min-height: 34px;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  border: 1px solid #aebbc8;
-  background: var(--surface);
+  border: 1px solid transparent;
+  background: transparent;
   border-radius: 7px;
-  padding: 7px 10px;
+  padding: 7px 10px 8px;
   color: var(--text);
   white-space: nowrap;
 }
 
+.source-workbench-switcher button:not(:disabled):hover {
+  border-color: color-mix(in srgb, var(--line) 72%, var(--blue) 14%);
+  background: color-mix(in srgb, var(--surface) 78%, var(--blue) 7%);
+}
+
 .source-workbench-switcher button.active {
-  border-color: #7aa7c8;
-  background: color-mix(in srgb, var(--surface-muted) 68%, var(--blue) 16%);
+  border-color: color-mix(in srgb, var(--blue) 42%, var(--line));
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+.source-workbench-switcher button.active::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 4px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--blue);
 }
 
 .source-workbench-switcher small {
@@ -6335,19 +6445,54 @@ h3 {
 
 .source-file-browser-list button,
 .source-draft-list button {
+  position: relative;
+  display: grid;
+  gap: 2px;
   min-width: 0;
-  border: 1px solid var(--line);
-  background: var(--surface);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, var(--slate) 8%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 96%, var(--surface-muted) 4%), var(--surface)),
+    var(--surface);
   border-radius: 7px;
-  padding: 8px;
+  padding: 9px 10px 9px 13px;
   color: var(--text);
   text-align: left;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #ffffff 48%, transparent);
+}
+
+.source-file-browser-list button::before,
+.source-draft-list button::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: color-mix(in srgb, var(--line) 92%, var(--slate) 8%);
+}
+
+.source-file-browser-list button:not(:disabled):hover,
+.source-draft-list button:not(:disabled):hover {
+  border-color: color-mix(in srgb, var(--blue) 42%, var(--line));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 90%, var(--blue) 6%), color-mix(in srgb, var(--surface) 94%, var(--blue) 4%)),
+    var(--surface);
+  transform: translateY(-1px);
 }
 
 .source-file-browser-list button.active,
 .source-draft-list button.active {
   border-color: #7aa7c8;
-  background: color-mix(in srgb, var(--surface-raised) 82%, var(--blue) 12%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-raised) 82%, var(--blue) 12%), color-mix(in srgb, var(--surface) 88%, var(--blue) 8%)),
+    var(--surface);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--blue) 18%, transparent),
+    0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+.source-file-browser-list button.active::before,
+.source-draft-list button.active::before {
+  background: var(--blue);
 }
 
 .source-file-browser-list button:disabled {
@@ -6388,10 +6533,13 @@ h3 {
   gap: 6px;
   min-width: 0;
   overflow-x: auto;
-  border: 1px solid var(--line);
-  background: var(--surface-raised);
+  border: 1px solid color-mix(in srgb, var(--line) 84%, var(--blue) 10%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-muted) 72%, var(--surface) 28%), var(--surface-raised)),
+    var(--surface-raised);
   border-radius: 8px;
   padding: 7px;
+  scrollbar-gutter: stable;
 }
 
 .source-editor-tab {
@@ -6399,15 +6547,20 @@ h3 {
   grid-template-columns: minmax(120px, 1fr) auto;
   min-width: min(280px, 80vw);
   max-width: 360px;
-  border: 1px solid var(--line);
-  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--line) 84%, var(--slate) 8%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 94%, var(--surface-muted) 6%), var(--surface)),
+    var(--surface);
   border-radius: 7px;
   overflow: hidden;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #ffffff 48%, transparent);
 }
 
 .source-editor-tab.active {
   border-color: #7aa7c8;
-  background: color-mix(in srgb, var(--surface-raised) 82%, var(--blue) 10%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-raised) 82%, var(--blue) 10%), color-mix(in srgb, var(--surface) 92%, var(--blue) 6%)),
+    var(--surface);
 }
 
 .source-editor-tab.dirty {
@@ -6427,6 +6580,11 @@ h3 {
   gap: 3px;
   padding: 8px 9px;
   text-align: left;
+}
+
+.source-editor-tab-main:hover,
+.source-editor-tab-close:hover {
+  background: color-mix(in srgb, var(--surface-muted) 72%, var(--blue) 8%);
 }
 
 .source-editor-tab-main span {
@@ -6449,6 +6607,11 @@ h3 {
   width: 34px;
   place-items: center;
   border-left: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.source-editor-tab-close:hover {
+  color: var(--text);
 }
 
 .source-draft-list {
@@ -7323,7 +7486,18 @@ h3 {
 }
 
 .filesystem-workbench .native-source-controls {
-  grid-template-columns: minmax(260px, 1fr) repeat(4, minmax(112px, auto));
+  grid-template-columns:
+    minmax(210px, 1.05fr)
+    minmax(180px, 0.95fr)
+    minmax(108px, auto)
+    minmax(112px, auto)
+    minmax(128px, auto)
+    minmax(96px, auto);
+}
+
+.filesystem-workbench .native-source-controls .source-path-field,
+.filesystem-workbench .native-source-controls label:not(.source-path-field) {
+  grid-column: auto;
 }
 
 .source-layout {
@@ -8438,6 +8612,42 @@ h3 {
   .learning-feedback-layout,
   .mode-switchboard-layout {
     grid-template-columns: 1fr;
+  }
+
+  .filesystem-workbench .native-source-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filesystem-workbench-shell {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .workspace-explorer-pane {
+    max-height: 420px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .filesystem-editor-pane,
+  .native-source-workbench,
+  .native-source-grid,
+  .source-edit-workbench {
+    overflow: visible;
+  }
+
+  .filesystem-workbench .native-source-controls .source-path-field,
+  .filesystem-workbench .native-source-controls label:not(.source-path-field),
+  .filesystem-workbench .native-source-controls .source-action-button {
+    grid-column: auto;
+  }
+
+  .source-command-toolbar,
+  .source-workbench-switcher {
+    overflow-x: auto;
+    scrollbar-gutter: stable;
   }
 
   .desktop-titlebar {

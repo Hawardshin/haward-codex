@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-03",
+  "work_id": "source-control-button-design",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "elapsed_minutes": 3,
+      "notes": "Checked Fluent, Carbon, and Atlassian button/toolbar guidance before recording design direction."
+    },
+    {
+      "phase": "source_inspection",
+      "elapsed_minutes": 8,
+      "notes": "Inspected Source workbench JSX, Source control CSS, responsive media rules, and existing validation scripts."
+    },
+    {
+      "phase": "implementation",
+      "elapsed_minutes": 28,
+      "notes": "Restyled Source action buttons, command toolbar, file rows, draft rows, tabs, and compact Source layout."
+    },
+    {
+      "phase": "browser_smoke_iterations",
+      "elapsed_minutes": 14,
+      "notes": "Initial compact smoke exposed Source control clipping; added 1080px stacked workbench behavior and reran."
+    },
+    {
+      "phase": "validation_and_records",
+      "elapsed_minutes": 12,
+      "notes": "Added source-control design guard, updated requirements/spec/history/evaluation records, and reran validation."
+    }
+  ],
+  "total_elapsed_minutes": 65,
+  "bottlenecks": [
+    "Source workbench has nested grids, so compact desktop needs its own smoke viewport instead of relying only on mobile and wide desktop."
+  ]
+}
