@@ -57,10 +57,13 @@ type FeatureGroupId = "core" | "workspace" | "knowledge" | "governance";
 type Section = {
   id: SectionId;
   label: string;
+  labelEn: string;
   shortLabel: string;
+  shortLabelEn: string;
   icon: LucideIcon;
   group: FeatureGroupId;
   purpose: string;
+  purposeEn: string;
 };
 
 type CommandItem = {
@@ -286,118 +289,183 @@ function appendSourceTemplate(content: string, templateBody: string) {
 }
 
 const PINNED_SECTIONS_STORAGE_KEY = "workspace-monitor:pinned-sections";
+const UI_LANGUAGE_STORAGE_KEY = "workspace-monitor:ui-language";
 const defaultPinnedSections: SectionId[] = ["overview", "desktop", "agents", "source", "intent"];
 const operatorSectionIds = new Set<SectionId>(["projects", "history", "structure", "documents", "requirements"]);
+type UiLanguage = "ko" | "en";
 
 const featureGroups: Array<{
   id: FeatureGroupId;
   label: string;
+  labelEn: string;
   purpose: string;
+  purposeEn: string;
 }> = [
   {
     id: "core",
-    label: "Work Console",
-    purpose: "작업 시작, 실행, 결정"
+    label: "작업 콘솔",
+    labelEn: "Work Console",
+    purpose: "작업 시작, 실행, 결정",
+    purposeEn: "Start work, run agents, and handle decisions."
   },
   {
     id: "workspace",
-    label: "Build Workbench",
-    purpose: "코드 편집과 개발 작업"
+    label: "파일과 코드",
+    labelEn: "Files and Code",
+    purpose: "작업공간 파일 보기와 코드 편집",
+    purposeEn: "Browse workspace files and edit code."
   },
   {
     id: "knowledge",
-    label: "Improve",
-    purpose: "에이전트 생성과 학습"
+    label: "에이전트 성장",
+    labelEn: "Agent Growth",
+    purpose: "에이전트 생성과 학습",
+    purposeEn: "Create agents and improve them from evidence."
   },
   {
     id: "governance",
-    label: "Operator Tools",
-    purpose: "모니터링, 문서, readiness"
+    label: "운영 도구",
+    labelEn: "Operator Tools",
+    purpose: "모니터링, 문서, 배포 점검",
+    purposeEn: "Monitoring, documents, and release readiness."
   }
 ];
 
 const sections: Section[] = [
   {
     id: "overview",
-    label: "Platform",
-    shortLabel: "Platform",
+    label: "홈",
+    labelEn: "Platform",
+    shortLabel: "홈",
+    shortLabelEn: "Platform",
     icon: Activity,
     group: "core",
-    purpose: "제품 기능 구조와 다음 실행을 확인합니다."
+    purpose: "지금 할 일과 제품 기능 구조를 봅니다.",
+    purposeEn: "See what to do now and how the product is structured."
   },
   {
     id: "desktop",
-    label: "Orchestration",
-    shortLabel: "Run",
+    label: "작업 실행",
+    labelEn: "Orchestration",
+    shortLabel: "실행",
+    shortLabelEn: "Run",
     icon: Network,
     group: "core",
-    purpose: "에이전트와 optional CLI lane을 조율합니다."
+    purpose: "에이전트와 선택형 CLI lane을 조율합니다.",
+    purposeEn: "Coordinate agents and optional CLI lanes."
   },
   {
     id: "agents",
-    label: "Agent Factory",
-    shortLabel: "Factory",
+    label: "에이전트 만들기",
+    labelEn: "Agent Factory",
+    shortLabel: "생성",
+    shortLabelEn: "Factory",
     icon: Bot,
     group: "knowledge",
-    purpose: "에이전트, 기능 후보, 작업 lane, handoff를 관리합니다."
+    purpose: "에이전트, 기능 후보, 작업 lane, handoff를 관리합니다.",
+    purposeEn: "Manage agents, capability candidates, lanes, and handoffs."
   },
   {
     id: "source",
-    label: "Source",
-    shortLabel: "Source",
+    label: "파일/코드",
+    labelEn: "Files / Code",
+    shortLabel: "파일",
+    shortLabelEn: "Files",
     icon: Code2,
     group: "workspace",
-    purpose: "워크스페이스 파일을 열고 코드 작업을 진행합니다."
+    purpose: "작업공간 폴더를 고르고 파일을 열어 편집합니다.",
+    purposeEn: "Choose a workspace folder, open files, and edit code."
   },
   {
     id: "intent",
-    label: "Learning Map",
-    shortLabel: "Learn",
+    label: "학습/개선",
+    labelEn: "Learning Map",
+    shortLabel: "학습",
+    shortLabelEn: "Learn",
     icon: GitBranch,
     group: "knowledge",
-    purpose: "사용자 의도에서 기능 후보와 개선 루프를 뽑습니다."
+    purpose: "사용자 의도에서 기능 후보와 개선 루프를 뽑습니다.",
+    purposeEn: "Extract feature candidates and improvement loops from user intent."
   },
   {
     id: "projects",
-    label: "Projects",
-    shortLabel: "Projects",
+    label: "프로젝트",
+    labelEn: "Projects",
+    shortLabel: "프로젝트",
+    shortLabelEn: "Projects",
     icon: FolderKanban,
     group: "governance",
-    purpose: "등록된 root project와 소유 경계를 확인합니다."
+    purpose: "등록된 root project와 소유 경계를 확인합니다.",
+    purposeEn: "Inspect registered root projects and ownership boundaries."
   },
   {
     id: "structure",
-    label: "Structure",
-    shortLabel: "Structure",
+    label: "구조",
+    labelEn: "Structure",
+    shortLabel: "구조",
+    shortLabelEn: "Structure",
     icon: Layers,
     group: "governance",
-    purpose: "플랫폼 계층, 경계 규칙, 복잡도 압력을 관측합니다."
+    purpose: "플랫폼 계층, 경계 규칙, 복잡도 압력을 관측합니다.",
+    purposeEn: "Inspect platform layers, boundary rules, and complexity pressure."
   },
   {
     id: "history",
-    label: "Learning History",
-    shortLabel: "History",
+    label: "작업 기록",
+    labelEn: "Learning History",
+    shortLabel: "기록",
+    shortLabelEn: "History",
     icon: History,
     group: "governance",
-    purpose: "날짜별 작업 기록과 개선 evidence를 추적합니다."
+    purpose: "날짜별 작업 기록과 개선 evidence를 추적합니다.",
+    purposeEn: "Track dated work history and improvement evidence."
   },
   {
     id: "documents",
-    label: "Documents",
-    shortLabel: "Docs",
+    label: "문서",
+    labelEn: "Documents",
+    shortLabel: "문서",
+    shortLabelEn: "Docs",
     icon: BookOpenText,
     group: "governance",
-    purpose: "문서, 검색 기록, 평가 근거를 탐색합니다."
+    purpose: "문서, 검색 기록, 평가 근거를 탐색합니다.",
+    purposeEn: "Browse docs, web searches, and evaluation evidence."
   },
   {
     id: "requirements",
-    label: "Requirements",
-    shortLabel: "Reqs",
+    label: "요구사항",
+    labelEn: "Requirements",
+    shortLabel: "요구",
+    shortLabelEn: "Reqs",
     icon: ClipboardCheck,
     group: "governance",
-    purpose: "요구사항과 스펙 기준의 이행 상태를 봅니다."
+    purpose: "요구사항과 스펙 기준의 이행 상태를 봅니다.",
+    purposeEn: "Inspect requirements and spec-driven delivery status."
   }
 ];
+
+function sectionForLanguage(section: Section, uiLanguage: UiLanguage): Section {
+  if (uiLanguage === "ko") {
+    return section;
+  }
+  return {
+    ...section,
+    label: section.labelEn,
+    shortLabel: section.shortLabelEn,
+    purpose: section.purposeEn
+  };
+}
+
+function featureGroupForLanguage(group: (typeof featureGroups)[number], uiLanguage: UiLanguage) {
+  if (uiLanguage === "ko") {
+    return group;
+  }
+  return {
+    ...group,
+    label: group.labelEn,
+    purpose: group.purposeEn
+  };
+}
 
 type MonitorViewMode = NonNullable<WorkspaceSnapshot["viewModeCatalog"]>["modes"][number];
 type MonitorLanguageMode = NonNullable<WorkspaceSnapshot["languageModeCatalog"]>["modes"][number];
@@ -485,6 +553,81 @@ const fallbackLanguageModes: MonitorLanguageMode[] = [
     documentRule: "Show only documents tagged en."
   }
 ];
+
+const nativeWorkspaceCopy = {
+  ko: {
+    eyebrow: "네이티브 파일 작업공간",
+    title: "파일을 보고 바로 고치기",
+    description:
+      "이 화면은 정적 웹 목록이 아니라 Tauri 앱이 선택한 실제 작업공간을 봅니다. 폴더를 고르고 파일을 클릭하면 코드 편집기가 바로 열립니다.",
+    chooseFolder: "폴더 선택",
+    choosingFolder: "폴더 여는 중",
+    refreshWorkspace: "작업공간 새로고침",
+    refreshFiles: "파일 목록 새로고침",
+    openSelected: "선택 파일 열기",
+    saveCurrent: "현재 파일 저장",
+    saveAll: "열린 변경 모두 저장",
+    copyFile: "내용 복사",
+    activeWorkspace: "현재 작업공간",
+    workspaceState: "작업공간 상태",
+    folderSource: "선택 방식",
+    fileSearch: "파일명, 폴더, 언어 검색",
+    fileList: "파일 목록",
+    openedDrafts: "열린 파일",
+    editorSettings: "편집 설정",
+    wordWrap: "줄바꿈",
+    minimap: "미니맵",
+    diffMode: "변경 비교",
+    editMode: "편집",
+    noRuntime: "Tauri 런타임이 없어서 저장은 비활성화됩니다. 지금은 snapshot 파일만 볼 수 있습니다.",
+    noFiles: "표시할 파일이 없습니다. 작업공간 폴더를 선택하거나 검색어를 바꿔보세요.",
+    noFileOpen: "왼쪽 파일 목록에서 파일을 클릭하세요.",
+    savedWithBackup: "저장 완료. 백업 파일을 만들었습니다.",
+    chooseCanceled: "폴더 선택을 취소했습니다.",
+    fallbackSource: "snapshot fallback",
+    runtimeSource: "실제 작업공간",
+    dirty: "수정됨",
+    clean: "변경 없음",
+    loading: "불러오는 중",
+    saving: "저장 중"
+  },
+  en: {
+    eyebrow: "Native File Workspace",
+    title: "Browse files and edit directly",
+    description:
+      "This surface reads the real active workspace through the Tauri app. Pick a folder, click a file, and the code editor opens immediately.",
+    chooseFolder: "Choose Folder",
+    choosingFolder: "Choosing",
+    refreshWorkspace: "Refresh Workspace",
+    refreshFiles: "Refresh Files",
+    openSelected: "Open Selected",
+    saveCurrent: "Save Current",
+    saveAll: "Save All Open Changes",
+    copyFile: "Copy Content",
+    activeWorkspace: "Active Workspace",
+    workspaceState: "Workspace State",
+    folderSource: "Source",
+    fileSearch: "Search file, folder, or language",
+    fileList: "File List",
+    openedDrafts: "Open Files",
+    editorSettings: "Editor Settings",
+    wordWrap: "Word Wrap",
+    minimap: "Minimap",
+    diffMode: "Diff",
+    editMode: "Edit",
+    noRuntime: "Tauri runtime is unavailable. Saving is disabled and snapshot files are shown as fallback.",
+    noFiles: "No files to show. Choose a workspace folder or change the search text.",
+    noFileOpen: "Click a file from the list on the left.",
+    savedWithBackup: "Saved with a backup file.",
+    chooseCanceled: "Folder selection was canceled.",
+    fallbackSource: "snapshot fallback",
+    runtimeSource: "real workspace",
+    dirty: "dirty",
+    clean: "clean",
+    loading: "loading",
+    saving: "saving"
+  }
+} satisfies Record<UiLanguage, Record<string, string>>;
 
 const emptyCollaborationBoard: CollaborationBoard = {
   summary: {
@@ -1252,6 +1395,7 @@ const fallbackTaskPipePresets: CliTaskPipelinePresetReport[] = [
 
 export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [section, setSection] = useState<SectionId>("overview");
+  const [uiLanguage, setUiLanguage] = useState<UiLanguage>("ko");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [historyDate, setHistoryDate] = useState("all");
@@ -1280,6 +1424,28 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [selectedModeFunctionGroupId, setSelectedModeFunctionGroupId] = useState(
     modeFunctionCatalog.groups[0]?.id || "view_mode"
   );
+  const localizedSections = useMemo(() => sections.map((item) => sectionForLanguage(item, uiLanguage)), [uiLanguage]);
+  const localizedFeatureGroups = useMemo(
+    () => featureGroups.map((group) => featureGroupForLanguage(group, uiLanguage)),
+    [uiLanguage]
+  );
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(UI_LANGUAGE_STORAGE_KEY);
+      if (stored === "ko" || stored === "en") {
+        setUiLanguage(stored);
+      }
+    } catch {
+      // Local storage can be unavailable in hardened browser contexts.
+    }
+  }, []);
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(UI_LANGUAGE_STORAGE_KEY, uiLanguage);
+    } catch {
+      // Local storage can be unavailable in hardened browser contexts.
+    }
+  }, [uiLanguage]);
   useEffect(() => {
     try {
       const stored = window.localStorage.getItem(PINNED_SECTIONS_STORAGE_KEY);
@@ -1348,8 +1514,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   }, [languageMode, languageModes]);
   const visibleSections = useMemo(() => {
     const allowed = new Set(currentViewMode.allowedSections);
-    return sections.filter((item) => allowed.has(item.id));
-  }, [currentViewMode]);
+    return localizedSections.filter((item) => allowed.has(item.id));
+  }, [currentViewMode, localizedSections]);
   const workVisibleSections = useMemo(() => {
     return visibleSections.filter((item) => !operatorSectionIds.has(item.id));
   }, [visibleSections]);
@@ -1639,20 +1805,20 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     agents: agentCatalog.length.toLocaleString("ko-KR")
   };
   const operatorCenterSections = sections.filter((item) => operatorSectionIds.has(item.id)).map((item) => ({
-    ...item,
+    ...sectionForLanguage(item, uiLanguage),
     meta: sectionNavMeta[item.id]
   }));
   const sectionById = useMemo(() => {
-    return new Map(sections.map((item) => [item.id, item]));
-  }, []);
+    return new Map(localizedSections.map((item) => [item.id, item]));
+  }, [localizedSections]);
   const groupedVisibleSections = useMemo(() => {
-    return featureGroups
+    return localizedFeatureGroups
       .map((group) => ({
         ...group,
         sections: workVisibleSections.filter((item) => item.group === group.id)
       }))
       .filter((group) => group.sections.length > 0);
-  }, [workVisibleSections]);
+  }, [localizedFeatureGroups, workVisibleSections]);
   const coreFunctionSections = useMemo(() => {
     return (["overview", "desktop", "agents", "source", "intent"] as SectionId[])
       .map((id) => sectionById.get(id))
@@ -1690,7 +1856,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       return item ? currentViewMode.allowedSections.includes(item.id) : false;
     });
   const nextActionLabel = collaborationBoard.nextActions[0]?.nextAction || "No pending handoff";
-  const currentSectionLabel = sections.find((item) => item.id === section)?.label || "Overview";
+  const currentSectionLabel = sectionById.get(section)?.label || "홈";
   const currentSection = sectionById.get(section);
   const commandItems: CommandItem[] = [
     ...workVisibleSections.map((item) => ({
@@ -1705,9 +1871,12 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     })),
     {
       id: "operator-center",
-      label: "Open Operator Center",
-      detail: "Monitoring, documents, requirements, history, and admin surfaces are separated here.",
-      group: "Operator",
+      label: uiLanguage === "ko" ? "운영 센터 열기" : "Open Operator Center",
+      detail:
+        uiLanguage === "ko"
+          ? "모니터링, 문서, 요구사항, 히스토리는 작업 화면과 분리해서 봅니다."
+          : "Monitoring, documents, requirements, history, and admin surfaces are separated here.",
+      group: uiLanguage === "ko" ? "운영" : "Operator",
       icon: ShieldCheck,
       badge: operatorCenterSections.length.toLocaleString("ko-KR"),
       keywords: ["operator", "monitoring", "documents", "history", "requirements", "admin"],
@@ -1717,7 +1886,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       id: `view-${mode.id}`,
       label: mode.label,
       detail: mode.intent,
-      group: "View Mode",
+      group: uiLanguage === "ko" ? "보기 모드" : "View Mode",
       icon: ShieldCheck,
       badge: currentViewMode.id === mode.id ? "active" : undefined,
       keywords: [mode.id, mode.label, mode.intent],
@@ -1727,7 +1896,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       id: `language-${mode.id}`,
       label: mode.label,
       detail: mode.intent,
-      group: "Language",
+      group: uiLanguage === "ko" ? "문서 언어" : "Document Language",
       icon: Languages,
       badge: currentLanguageMode.id === mode.id ? "active" : undefined,
       keywords: [mode.id, mode.label, mode.intent],
@@ -1740,8 +1909,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     ...viewCategories.slice(0, 10).map((item) => ({
       id: `category-${item}`,
       label: categoryLabel(item),
-      detail: `Documents filter: ${item}`,
-      group: "Document Filter",
+      detail: uiLanguage === "ko" ? `문서 필터: ${item}` : `Documents filter: ${item}`,
+      group: uiLanguage === "ko" ? "문서 필터" : "Document Filter",
       icon: ListFilter,
       badge: item === category ? "active" : undefined,
       keywords: [item, categoryLabel(item), "documents", "filter"],
@@ -1752,9 +1921,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     })),
     {
       id: "action-settings",
-      label: "Settings",
-      detail: "보기 모드, 언어, 고정 섹션을 조정합니다.",
-      group: "Quick Action",
+      label: uiLanguage === "ko" ? "설정" : "Settings",
+      detail: uiLanguage === "ko" ? "화면 언어, 보기 모드, 문서 언어, 고정 섹션을 조정합니다." : "Adjust UI language, view mode, document language, and pinned sections.",
+      group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
       icon: Settings,
       badge: currentViewMode.label,
       keywords: ["settings", "preferences", "view", "language", "pinned"],
@@ -1764,7 +1933,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       id: "action-attention",
       label: attentionState.action,
       detail: attentionState.title,
-      group: "Quick Action",
+      group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
       icon: attentionState.icon,
       badge: attentionState.label,
       keywords: ["attention", "now", attentionState.label, attentionState.title],
@@ -1772,9 +1941,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     },
     {
       id: "action-evidence",
-      label: "Evidence Trail",
+      label: uiLanguage === "ko" ? "근거 기록" : "Evidence Trail",
       detail: `${visibleWebSearches.toLocaleString("ko-KR")} web searches / ${visibleEvaluations.toLocaleString("ko-KR")} evaluations`,
-      group: "Quick Action",
+      group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
       icon: FileSearch,
       badge: `${visibleWebSearches}/${visibleEvaluations}`,
       keywords: ["evidence", "web search", "evaluation", "documents"],
@@ -1782,9 +1951,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     },
     {
       id: "action-reset-filters",
-      label: "Reset Filters",
+      label: uiLanguage === "ko" ? "필터 초기화" : "Reset Filters",
       detail: "검색어, 문서, 히스토리, 소스 필터를 초기화합니다.",
-      group: "Quick Action",
+      group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
       icon: ListFilter,
       keywords: ["reset", "filter", "search", "clear"],
       run: () => {
@@ -1814,11 +1983,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   return (
     <main className="desktop-app-root">
       <div className="desktop-app-shell">
-        <aside className="activity-rail" aria-label="Primary activity rail">
-          <button className="activity-brand" type="button" onClick={() => openSection("overview")} title="Workspace Home">
+        <aside className="activity-rail" aria-label={uiLanguage === "ko" ? "주요 기능 레일" : "Primary activity rail"}>
+          <button className="activity-brand" type="button" onClick={() => openSection("overview")} title={uiLanguage === "ko" ? "작업공간 홈" : "Workspace Home"}>
             <Bot size={22} aria-hidden="true" />
           </button>
-          <nav aria-label="Pinned desktop sections">
+          <nav aria-label={uiLanguage === "ko" ? "주요 데스크톱 섹션" : "Pinned desktop sections"}>
             {workVisibleSections.map((item) => (
               <button
                 key={item.id}
@@ -1837,20 +2006,20 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             className="activity-settings"
             type="button"
             onClick={() => setOperatorCenterOpen(true)}
-            title="Open Operator Center"
+            title={uiLanguage === "ko" ? "운영 센터 열기" : "Open Operator Center"}
           >
             <ShieldCheck size={19} aria-hidden="true" />
           </button>
-          <button className="activity-settings" type="button" onClick={() => setSettingsOpen(true)} title="Settings">
+          <button className="activity-settings" type="button" onClick={() => setSettingsOpen(true)} title={uiLanguage === "ko" ? "설정" : "Settings"}>
             <Settings size={19} aria-hidden="true" />
           </button>
         </aside>
 
-        <aside className="desktop-sidebar" aria-label="Workspace navigation">
+        <aside className="desktop-sidebar" aria-label={uiLanguage === "ko" ? "작업공간 탐색" : "Workspace navigation"}>
           <div className="workspace-switcher">
             <div>
-              <p className="eyebrow">Agent Workspace</p>
-              <h1>Platform</h1>
+              <p className="eyebrow">{uiLanguage === "ko" ? "에이전트 작업공간" : "Agent Workspace"}</p>
+              <h1>{uiLanguage === "ko" ? "플랫폼" : "Platform"}</h1>
             </div>
             <span>{formatDate(snapshot.generatedAt)}</span>
           </div>
@@ -1858,8 +2027,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           <button className="command-trigger sidebar-command-trigger" type="button" onClick={() => setCommandPaletteOpen(true)}>
             <Search size={17} aria-hidden="true" />
             <span>
-              <strong>Command Palette</strong>
-              <small>{commandItems.length.toLocaleString("ko-KR")} actions</small>
+              <strong>{uiLanguage === "ko" ? "명령 검색" : "Command Palette"}</strong>
+              <small>{commandItems.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 실행" : "actions"}</small>
             </span>
           </button>
 
@@ -1893,8 +2062,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           <button className="operator-center-trigger" type="button" onClick={() => setOperatorCenterOpen(true)}>
             <ShieldCheck size={17} aria-hidden="true" />
             <span>
-              <strong>Operator Center</strong>
-              <small>Monitoring, docs, governance separated</small>
+              <strong>{uiLanguage === "ko" ? "운영 센터" : "Operator Center"}</strong>
+              <small>{uiLanguage === "ko" ? "기록, 문서, 검증은 따로 보기" : "Monitoring, docs, governance separated"}</small>
             </span>
             <em>{operatorCenterSections.length.toLocaleString("ko-KR")}</em>
           </button>
@@ -1912,7 +2081,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           </div>
         </aside>
 
-        <section className="desktop-viewport" aria-label="Desktop app viewport">
+        <section className="desktop-viewport" aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"}>
           <header className="desktop-titlebar">
             <div className="titlebar-section">
               {currentSection ? <currentSection.icon size={18} aria-hidden="true" /> : <LayoutDashboard size={18} aria-hidden="true" />}
@@ -1927,13 +2096,29 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <input
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
-                  placeholder={section === "source" ? "소스 검색" : "문서 검색"}
+                  placeholder={
+                    section === "source"
+                      ? uiLanguage === "ko"
+                        ? "파일/코드 검색"
+                        : "Search files and code"
+                      : uiLanguage === "ko"
+                        ? "문서 검색"
+                        : "Search documents"
+                  }
                 />
               </label>
               <button type="button" onClick={() => setCommandPaletteOpen(true)} title="Command Palette">
                 <Search size={16} aria-hidden="true" />
               </button>
-              <button type="button" onClick={() => setSettingsOpen(true)} title="Settings">
+              <button
+                type="button"
+                onClick={() => setUiLanguage((current) => (current === "ko" ? "en" : "ko"))}
+                title={uiLanguage === "ko" ? "English UI" : "한국어 화면"}
+              >
+                <Languages size={16} aria-hidden="true" />
+                <span>{uiLanguage === "ko" ? "한국어" : "English"}</span>
+              </button>
+              <button type="button" onClick={() => setSettingsOpen(true)} title={uiLanguage === "ko" ? "설정" : "Settings"}>
                 <Settings size={16} aria-hidden="true" />
               </button>
             </div>
@@ -1949,7 +2134,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             }
           }}
         >
-          <section className="command-palette" role="dialog" aria-modal="true" aria-label="Command palette">
+          <section className="command-palette" role="dialog" aria-modal="true" aria-label={uiLanguage === "ko" ? "명령 검색" : "Command palette"}>
             <div className="command-palette-search">
               <Search size={18} aria-hidden="true" />
               <input
@@ -1964,11 +2149,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 placeholder="섹션, 보기 모드, 문서 필터, 빠른 실행 검색"
               />
               <button type="button" onClick={() => setCommandPaletteOpen(false)}>
-                Close
+                {uiLanguage === "ko" ? "닫기" : "Close"}
               </button>
             </div>
             <div className="command-palette-meta">
-              <span>{filteredCommandItems.length.toLocaleString("ko-KR")} results</span>
+              <span>{filteredCommandItems.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 결과" : "results"}</span>
               <span>{currentViewMode.label}</span>
             </div>
             <div className="command-palette-results">
@@ -1985,7 +2170,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                   </button>
                 ))
               ) : (
-                <p className="empty-state">일치하는 command가 없습니다.</p>
+                <p className="empty-state">{uiLanguage === "ko" ? "일치하는 명령이 없습니다." : "No matching command."}</p>
               )}
             </div>
           </section>
@@ -2002,13 +2187,13 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             }
           }}
         >
-          <section className="settings-dialog" role="dialog" aria-modal="true" aria-label="Settings">
+          <section className="settings-dialog" role="dialog" aria-modal="true" aria-label={uiLanguage === "ko" ? "설정" : "Settings"}>
             <header>
               <div>
-                <p className="eyebrow">Preferences</p>
-                <h2>Settings</h2>
+                <p className="eyebrow">{uiLanguage === "ko" ? "앱 설정" : "Preferences"}</p>
+                <h2>{uiLanguage === "ko" ? "설정" : "Settings"}</h2>
               </div>
-              <button type="button" onClick={() => setSettingsOpen(false)} title="Close settings">
+              <button type="button" onClick={() => setSettingsOpen(false)} title={uiLanguage === "ko" ? "설정 닫기" : "Close settings"}>
                 <X size={17} aria-hidden="true" />
               </button>
             </header>
@@ -2016,9 +2201,37 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             <div className="settings-grid">
               <section className="settings-pane">
                 <div className="settings-pane-heading">
+                  <Languages size={16} aria-hidden="true" />
+                  <div>
+                    <span>{uiLanguage === "ko" ? "화면 언어" : "UI Language"}</span>
+                    <strong>{uiLanguage === "ko" ? "한국어 우선" : "English Mode"}</strong>
+                  </div>
+                </div>
+                <div className="settings-segment-list">
+                  <button
+                    className={uiLanguage === "ko" ? "active" : ""}
+                    onClick={() => setUiLanguage("ko")}
+                    type="button"
+                    title="한국어 화면 문구를 우선 사용합니다."
+                  >
+                    한국어
+                  </button>
+                  <button
+                    className={uiLanguage === "en" ? "active" : ""}
+                    onClick={() => setUiLanguage("en")}
+                    type="button"
+                    title="Use English interface copy."
+                  >
+                    English
+                  </button>
+                </div>
+              </section>
+
+              <section className="settings-pane">
+                <div className="settings-pane-heading">
                   <ShieldCheck size={16} aria-hidden="true" />
                   <div>
-                    <span>View Mode</span>
+                    <span>{uiLanguage === "ko" ? "보기 모드" : "View Mode"}</span>
                     <strong>{currentViewMode.label}</strong>
                   </div>
                 </div>
@@ -2042,7 +2255,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <div className="settings-pane-heading">
                   <Languages size={16} aria-hidden="true" />
                   <div>
-                    <span>Language</span>
+                    <span>{uiLanguage === "ko" ? "문서 언어" : "Document Language"}</span>
                     <strong>{currentLanguageMode.label}</strong>
                   </div>
                 </div>
@@ -2069,8 +2282,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <div className="settings-pane-heading">
                   <LayoutDashboard size={16} aria-hidden="true" />
                   <div>
-                    <span>Pinned Sections</span>
-                    <strong>{pinnedVisibleSections.length.toLocaleString("ko-KR")} pinned</strong>
+                    <span>{uiLanguage === "ko" ? "고정 섹션" : "Pinned Sections"}</span>
+                    <strong>{pinnedVisibleSections.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 고정" : "pinned"}</strong>
                   </div>
                 </div>
                 <div className="settings-pin-grid">
@@ -2093,7 +2306,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <div className="settings-pane-heading">
                   <ListFilter size={16} aria-hidden="true" />
                   <div>
-                    <span>Filters</span>
+                    <span>{uiLanguage === "ko" ? "필터" : "Filters"}</span>
                     <strong>{categoryLabel(category)}</strong>
                   </div>
                 </div>
@@ -2110,7 +2323,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                   }}
                 >
                   <ListFilter size={15} aria-hidden="true" />
-                  <span>Reset Filters</span>
+                  <span>{uiLanguage === "ko" ? "필터 초기화" : "Reset Filters"}</span>
                 </button>
               </section>
 
@@ -2118,11 +2331,14 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <div className="settings-pane-heading">
                   <Clock3 size={16} aria-hidden="true" />
                   <div>
-                    <span>Snapshot</span>
+                    <span>{uiLanguage === "ko" ? "스냅샷" : "Snapshot"}</span>
                     <strong>{formatDate(snapshot.generatedAt)}</strong>
                   </div>
                 </div>
-                <p>{viewFilteredDocuments.length.toLocaleString("ko-KR")} documents / {visibleSections.length.toLocaleString("ko-KR")} sections</p>
+                <p>
+                  {viewFilteredDocuments.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 문서" : "documents"} /{" "}
+                  {visibleSections.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 섹션" : "sections"}
+                </p>
               </section>
             </div>
           </section>
@@ -2200,10 +2416,26 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <button
                   type="button"
                   onClick={() => togglePinnedSection(section)}
-                  title={pinnedSections.includes(section) ? "Unpin section" : "Pin section"}
+                  title={
+                    pinnedSections.includes(section)
+                      ? uiLanguage === "ko"
+                        ? "섹션 고정 해제"
+                        : "Unpin section"
+                      : uiLanguage === "ko"
+                        ? "섹션 고정"
+                        : "Pin section"
+                  }
                 >
                   <CheckCircle2 size={16} aria-hidden="true" />
-                  <span>{pinnedSections.includes(section) ? "Unpin" : "Pin"}</span>
+                  <span>
+                    {pinnedSections.includes(section)
+                      ? uiLanguage === "ko"
+                        ? "고정 해제"
+                        : "Unpin"
+                      : uiLanguage === "ko"
+                        ? "고정"
+                        : "Pin"}
+                  </span>
                 </button>
               </>
             )}
@@ -2351,6 +2583,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           agentCatalogCount={agentCatalog.length}
           blockedTaskCount={collaborationBoard.summary.blockedTasks}
           sourceFiles={visibleSourceFiles}
+          uiLanguage={uiLanguage}
         />
       )}
 
@@ -2616,101 +2849,13 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       )}
 
       {section === "source" && (
-        <section className="source-browser">
-          <section className="panel wide">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Source</p>
-                <h2>소스 코드 보기</h2>
-              </div>
-              <span className="result-count">{filteredSourceFiles.length} files</span>
-            </div>
-            <div className="source-filters">
-              <label className="select-box">
-                <FolderKanban size={16} aria-hidden="true" />
-                <select value={sourceProject} onChange={(event) => setSourceProject(event.target.value)}>
-                  <option value="all">모든 프로젝트</option>
-                  {sourceProjects.map((project) => (
-                    <option key={project} value={project}>
-                      {project}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="select-box">
-                <Code2 size={16} aria-hidden="true" />
-                <select value={sourceLanguage} onChange={(event) => setSourceLanguage(event.target.value)}>
-                  <option value="all">모든 언어</option>
-                  {sourceLanguages.map((language) => (
-                    <option key={language} value={language}>
-                      {language}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            {filteredSourceFiles.length === 0 ? (
-              <p className="empty-state">검색 조건에 맞는 소스 파일이 없습니다.</p>
-            ) : (
-              <div className="source-layout">
-                <div className="source-list" aria-label="Source files">
-                  {filteredSourceFiles.slice(0, 120).map((file) => (
-                    <button
-                      key={file.id}
-                      className={selectedSource?.id === file.id ? "active" : ""}
-                      onClick={() => setSelectedSourceId(file.id)}
-                      type="button"
-                    >
-                      <strong>{file.path}</strong>
-                      <span>
-                        {file.project} / {file.language} / {file.lineCount.toLocaleString("ko-KR")} lines
-                      </span>
-                    </button>
-                  ))}
-                </div>
-                <article className="source-viewer">
-                  {selectedSource ? (
-                    <>
-                      <header>
-                        <div>
-                          <span>{selectedSource.language}</span>
-                          <h3>{selectedSource.path}</h3>
-                          <p>
-                            {selectedSource.project} / {selectedSource.sizeBytes.toLocaleString("ko-KR")} bytes /{" "}
-                            {selectedSource.lineCount.toLocaleString("ko-KR")} lines
-                          </p>
-                        </div>
-                        <div className="source-viewer-actions">
-                          {selectedSource.truncated && <strong>truncated</strong>}
-                          <button type="button" onClick={copySelectedSource}>
-                            <Copy size={15} aria-hidden="true" />
-                            <span>Copy</span>
-                          </button>
-                        </div>
-                      </header>
-                      {sourceCopyNotice && <p className="source-copy-notice">{sourceCopyNotice}</p>}
-                      <div className="source-viewer-monaco">
-                        <MonacoEditor
-                          beforeMount={definePlatformMonacoTheme}
-                          height="100%"
-                          language={monacoLanguageFromPath(selectedSource.path)}
-                          loading={<div className="monaco-editor-loading">Loading Monaco editor</div>}
-                          options={monacoReadOnlyOptions}
-                          path={`file:///${selectedSource.path.replace(/^\/+/, "")}`}
-                          theme={platformMonacoTheme}
-                          value={selectedSource.content}
-                        />
-                      </div>
-                    </>
-                  ) : (
-                    <p className="empty-state">왼쪽에서 소스 파일을 선택하세요.</p>
-                  )}
-                </article>
-              </div>
-            )}
-          </section>
-        </section>
+        <DesktopRuntimePanel
+          agentCatalogCount={agentCatalog.length}
+          blockedTaskCount={collaborationBoard.summary.blockedTasks}
+          sourceFiles={visibleSourceFiles}
+          uiLanguage={uiLanguage}
+          surface="files"
+        />
       )}
 
       {section === "requirements" && (
@@ -3457,12 +3602,18 @@ function OpsEventRail({ events }: { events: UnifiedOps["events"] }) {
 function DesktopRuntimePanel({
   agentCatalogCount,
   blockedTaskCount,
-  sourceFiles
+  sourceFiles,
+  uiLanguage,
+  surface = "runtime"
 }: {
   agentCatalogCount: number;
   blockedTaskCount: number;
   sourceFiles: WorkspaceSourceFile[];
+  uiLanguage: UiLanguage;
+  surface?: "runtime" | "files";
 }) {
+  const copy = nativeWorkspaceCopy[uiLanguage];
+  const isFileWorkspaceSurface = surface === "files";
   const [runtimeState, setRuntimeState] = useState<"checking" | "available" | "unavailable">("checking");
   const [health, setHealth] = useState<DesktopHealthStatus | null>(null);
   const [adapters, setAdapters] = useState<CliAdapterStatus[]>(fallbackDesktopAdapters);
@@ -3883,10 +4034,37 @@ function DesktopRuntimePanel({
     }
   };
 
+  const chooseDesktopWorkspaceFolder = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setError(copy.noRuntime);
+      return;
+    }
+
+    setWorkspaceHostBusy("choose");
+    setError("");
+    try {
+      const report = await tauriInvoke<DesktopWorkspaceStateReport>("choose_desktop_workspace_folder");
+      setDesktopWorkspace(report);
+      if (report.activeWorkspacePath) {
+        setWorkspaceImportPath(report.activeWorkspacePath);
+      }
+      setWorkspaceHostNotice(report.status === "folder_selection_canceled" ? copy.chooseCanceled : report.status);
+      if (report.activeWorkspacePath) {
+        await refreshRuntimeSourceFiles();
+        void refreshServiceReadiness();
+      }
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setWorkspaceHostBusy("");
+    }
+  };
+
   const importDesktopWorkspace = async () => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
-      setError("Tauri desktop runtime is not available in this browser view.");
+      setError(copy.noRuntime);
       return;
     }
     if (!workspaceImportPath.trim()) {
@@ -3914,7 +4092,7 @@ function DesktopRuntimePanel({
   const cloneDesktopWorkspace = async () => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
-      setError("Tauri desktop runtime is not available in this browser view.");
+      setError(copy.noRuntime);
       return;
     }
     if (!workspaceCloneUrl.trim()) {
@@ -4864,8 +5042,13 @@ function DesktopRuntimePanel({
   }, []);
 
   useEffect(() => {
+    if (isFileWorkspaceSurface) {
+      void refreshDesktopWorkspace();
+      void refreshRuntimeSourceFiles();
+      return;
+    }
     void refreshAdapters();
-  }, []);
+  }, [isFileWorkspaceSurface]);
 
   useEffect(() => {
     const tauriInvoke = getTauriInvoke();
@@ -4940,6 +5123,323 @@ function DesktopRuntimePanel({
       setSelectedSourcePath(sourceFiles[0].path);
     }
   }, [selectedSourcePath, sourceFiles]);
+
+  const sourceWorkspacePanel = (
+    <div className={`content-grid native-file-workspace-panel ${invoke ? "runtime-ready" : "runtime-fallback"}`}>
+      <section className="native-file-hero">
+        <div>
+          <p className="eyebrow">{copy.eyebrow}</p>
+          <h2>{copy.title}</h2>
+          <p>{copy.description}</p>
+        </div>
+        <div className="native-workspace-actions">
+          <button type="button" onClick={chooseDesktopWorkspaceFolder} disabled={!invoke || workspaceHostBusy !== ""}>
+            <FolderOpen size={16} aria-hidden="true" />
+            <span>{workspaceHostBusy === "choose" ? copy.choosingFolder : copy.chooseFolder}</span>
+          </button>
+          <button type="button" onClick={refreshDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== ""}>
+            <Activity size={16} aria-hidden="true" />
+            <span>{workspaceHostBusy === "refresh" ? copy.loading : copy.refreshWorkspace}</span>
+          </button>
+          <button type="button" onClick={refreshRuntimeSourceFiles} disabled={!invoke || sourceCatalogBusy}>
+            <Search size={16} aria-hidden="true" />
+            <span>{sourceCatalogBusy ? copy.loading : copy.refreshFiles}</span>
+          </button>
+        </div>
+      </section>
+
+      {!invoke && <p className="desktop-error">{copy.noRuntime}</p>}
+      {workspaceHostNotice && <p className="decision-resume-notice">{workspaceHostNotice}</p>}
+
+      <section className="native-workspace-state-strip" aria-label={copy.workspaceState}>
+        <article>
+          <span>{copy.activeWorkspace}</span>
+          <code>{desktopWorkspace?.activeWorkspacePath || desktopWorkspace?.fallbackWorkspacePath || "workspace pending"}</code>
+        </article>
+        <article>
+          <span>{copy.folderSource}</span>
+          <strong>{desktopWorkspace?.activeWorkspaceSource || (runtimeSourceFiles.length ? copy.runtimeSource : copy.fallbackSource)}</strong>
+        </article>
+        <article>
+          <span>{copy.fileList}</span>
+          <strong>
+            {filteredEditableSourceFiles.length.toLocaleString("ko-KR")} / {sourceCatalogReport?.totalCount ?? sourceCatalogFiles.length}
+          </strong>
+        </article>
+        <article>
+          <span>{copy.openedDrafts}</span>
+          <strong>
+            {dirtyDraftEntries.length.toLocaleString("ko-KR")} {copy.dirty} / {openDraftEntries.length.toLocaleString("ko-KR")} open
+          </strong>
+        </article>
+      </section>
+
+      <section className="panel wide desktop-source-panel native-source-workbench">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">{copy.runtimeSource}</p>
+            <h2>{copy.activeWorkspace}</h2>
+          </div>
+          <div className="source-panel-stats">
+            <span>{openDraftEntries.length} open</span>
+            <strong>{dirtyDraftEntries.length} {copy.dirty}</strong>
+            <span>{sourceCatalogLabel}</span>
+          </div>
+        </div>
+        <div className="source-editor-controls native-source-controls">
+          <label className="source-path-field">
+            <span>{copy.openSelected}</span>
+            <input
+              value={sourcePathInput}
+              onChange={(event) => {
+                setSourcePathInput(event.target.value);
+                setSelectedSourcePath(event.target.value);
+              }}
+              placeholder="workspace-relative/path.ts"
+            />
+          </label>
+          <label>
+            <span>{copy.fileList}</span>
+            <select
+              value={selectedSourcePath}
+              onChange={(event) => {
+                setSelectedSourcePath(event.target.value);
+                setSourcePathInput(event.target.value);
+              }}
+            >
+              {editableSourceFiles.map((file) => (
+                <option key={file.id} value={file.path}>
+                  {file.path}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !sourcePathInput.trim()}>
+            <FileSearch size={15} aria-hidden="true" />
+            <span>{editorBusy ? copy.loading : copy.openSelected}</span>
+          </button>
+          <button type="button" onClick={saveSourceFile} disabled={!invoke || editorBusy || !sourceFile || !currentSourceDirty}>
+            <CheckCircle2 size={15} aria-hidden="true" />
+            <span>{editorBusy ? copy.saving : copy.saveCurrent}</span>
+          </button>
+          <button type="button" onClick={saveAllSourceDrafts} disabled={!invoke || editorBusy || saveAllBusy || dirtyDraftEntries.length === 0}>
+            <CheckCircle2 size={15} aria-hidden="true" />
+            <span>{saveAllBusy ? copy.saving : copy.saveAll}</span>
+          </button>
+          <button type="button" onClick={copyCurrentSourceDraft} disabled={!sourceFile}>
+            <Copy size={15} aria-hidden="true" />
+            <span>{copy.copyFile}</span>
+          </button>
+        </div>
+
+        <div className="source-command-toolbar" aria-label={copy.editorSettings}>
+          <button type="button" onClick={() => runSourceEditorCommand("undo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+            <History size={15} aria-hidden="true" />
+            <span>Undo</span>
+          </button>
+          <button type="button" onClick={() => runSourceEditorCommand("redo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+            <History size={15} aria-hidden="true" />
+            <span>Redo</span>
+          </button>
+          <button type="button" onClick={() => runSourceEditorCommand("find")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+            <Search size={15} aria-hidden="true" />
+            <span>Find</span>
+          </button>
+          <button type="button" onClick={() => runSourceEditorCommand("replace")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+            <Search size={15} aria-hidden="true" />
+            <span>Replace</span>
+          </button>
+          <button type="button" onClick={() => runSourceEditorCommand("format")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+            <Code2 size={15} aria-hidden="true" />
+            <span>Format</span>
+          </button>
+          <button type="button" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))} disabled={!sourceFile}>
+            <FileSearch size={15} aria-hidden="true" />
+            <span>{sourceEditorViewMode === "edit" ? copy.diffMode : copy.editMode}</span>
+          </button>
+          <button type="button" onClick={() => setSourceWordWrap((current) => !current)} className={sourceWordWrap ? "active" : ""}>
+            <Code2 size={15} aria-hidden="true" />
+            <span>{copy.wordWrap}</span>
+          </button>
+          <button type="button" onClick={() => setSourceMinimapEnabled((current) => !current)} className={sourceMinimapEnabled ? "active" : ""}>
+            <LayoutDashboard size={15} aria-hidden="true" />
+            <span>{copy.minimap}</span>
+          </button>
+        </div>
+
+        <div className="source-review-grid native-source-grid">
+          <aside className="source-file-browser">
+            <header>
+              <div>
+                <span>{runtimeSourceFiles.length ? copy.runtimeSource : copy.fallbackSource}</span>
+                <strong>{filteredEditableSourceFiles.length.toLocaleString("ko-KR")} shown</strong>
+              </div>
+              <Code2 size={16} aria-hidden="true" />
+            </header>
+            {sourceCatalogReport && (
+              <p className="source-catalog-note">
+                {sourceCatalogReport.returnedCount}/{sourceCatalogReport.totalCount} files
+                {sourceCatalogReport.truncated ? " / truncated" : ""}
+              </p>
+            )}
+            <input
+              value={sourceFilter}
+              onChange={(event) => setSourceFilter(event.target.value)}
+              placeholder={copy.fileSearch}
+            />
+            <div className="source-file-browser-list">
+              {filteredEditableSourceFiles.length ? (
+                filteredEditableSourceFiles.map((file) => (
+                  <button
+                    key={file.id}
+                    type="button"
+                    className={sourceFile?.relativePath === file.path ? "active" : ""}
+                    onClick={() => openDraftOrLoad(file.path)}
+                    disabled={!invoke || editorBusy}
+                  >
+                    <strong>{file.path}</strong>
+                    <span>
+                      {file.project} / {file.language || file.extension} / {formatBytes(file.sizeBytes)}
+                    </span>
+                  </button>
+                ))
+              ) : (
+                <p className="empty-state">{copy.noFiles}</p>
+              )}
+            </div>
+          </aside>
+
+          <div className="source-edit-workbench">
+            {openDraftEntries.length > 0 && (
+              <div className="source-editor-tabs" aria-label={copy.openedDrafts}>
+                {openDraftEntries.map((entry) => {
+                  const dirty = entry.content !== entry.baseContent;
+                  return (
+                    <div
+                      key={entry.relativePath}
+                      className={`source-editor-tab ${sourceFile?.relativePath === entry.relativePath ? "active" : ""} ${dirty ? "dirty" : "clean"}`}
+                    >
+                      <button type="button" className="source-editor-tab-main" onClick={() => selectDraftEntry(entry.relativePath)}>
+                        <span>{dirty ? copy.dirty : copy.clean}</span>
+                        <strong>{entry.relativePath}</strong>
+                      </button>
+                      <button
+                        type="button"
+                        className="source-editor-tab-close"
+                        onClick={() => closeDraftByPath(entry.relativePath)}
+                        aria-label={`Close ${entry.relativePath}`}
+                      >
+                        <X size={14} aria-hidden="true" />
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {sourceFile ? (
+              <div className="source-editor-frame">
+                <div className="source-editor-meta">
+                  <span>{sourceFile.relativePath}</span>
+                  <strong>
+                    {formatBytes(sourceDraft.length)} / max {formatBytes(sourceFile.maxSizeBytes)}
+                  </strong>
+                </div>
+                {sourceDiff && (
+                  <div className={`source-diff-review ${sourceDiff.dirty ? "dirty" : "clean"}`}>
+                    <header>
+                      <div>
+                        <span>{sourceDiff.dirty ? copy.dirty : copy.clean}</span>
+                        <strong>
+                          +{sourceDiff.addedLines} / -{sourceDiff.removedLines} / {sourceDiff.changedLines} changed
+                        </strong>
+                      </div>
+                      <small>backup save gate</small>
+                    </header>
+                    {sourceDiff.preview.length > 0 && (
+                      <div className="source-diff-preview">
+                        {sourceDiff.preview.map((item) => (
+                          <article key={item.line}>
+                            <span>line {item.line}</span>
+                            <code>- {item.before || "<empty>"}</code>
+                            <code>+ {item.after || "<empty>"}</code>
+                          </article>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+                {sourceEditorViewMode === "diff" ? (
+                  <div className="monaco-editor-shell diff-shell">
+                    <MonacoDiffEditor
+                      beforeMount={definePlatformMonacoTheme}
+                      height="100%"
+                      language={monacoLanguageFromPath(sourceFile.relativePath)}
+                      loading={<div className="monaco-editor-loading">Loading Monaco diff</div>}
+                      modified={sourceDraft}
+                      options={monacoDiffEditorOptions}
+                      original={sourceFile.content}
+                      theme={platformMonacoTheme}
+                    />
+                  </div>
+                ) : (
+                  <div className="monaco-editor-shell">
+                    <MonacoEditor
+                      beforeMount={definePlatformMonacoTheme}
+                      height="100%"
+                      language={monacoLanguageFromPath(sourceFile.relativePath)}
+                      loading={<div className="monaco-editor-loading">Loading Monaco editor</div>}
+                      onMount={handleSourceEditorMount}
+                      onChange={(value) => updateSourceDraft(value ?? "")}
+                      options={activeMonacoEditorOptions}
+                      path={`file:///${sourceFile.relativePath.replace(/^\/+/, "")}`}
+                      theme={platformMonacoTheme}
+                      value={sourceDraft}
+                    />
+                  </div>
+                )}
+                {sourceCopyNotice && <p className="source-copy-notice">{sourceCopyNotice}</p>}
+                {writeReport && (
+                  <p className="desktop-success">
+                    {copy.savedWithBackup}: {writeReport.backupPath}
+                  </p>
+                )}
+              </div>
+            ) : (
+              <p className="empty-state">{copy.noFileOpen}</p>
+            )}
+
+            {sourceSaveResults.length > 0 && (
+              <div className="source-save-results">
+                <header>
+                  <div>
+                    <span>{copy.savedWithBackup}</span>
+                    <strong>{sourceSaveResults.length} recent</strong>
+                  </div>
+                  <small>latest first</small>
+                </header>
+                <div>
+                  {sourceSaveResults.map((report) => (
+                    <article key={`${report.relativePath}-${report.backupPath}`}>
+                      <span>{report.status}</span>
+                      <strong>{report.relativePath}</strong>
+                      <small>
+                        {formatBytes(report.sizeBytes)} / {report.backupPath}
+                      </small>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+
+  if (isFileWorkspaceSurface) {
+    return sourceWorkspacePanel;
+  }
 
   return (
     <div className="content-grid desktop-grid">
@@ -5060,6 +5560,10 @@ function DesktopRuntimePanel({
             <h2>앱 워크스페이스</h2>
           </div>
           <div className="desktop-actions">
+            <button type="button" onClick={chooseDesktopWorkspaceFolder} disabled={!invoke || workspaceHostBusy !== ""}>
+              <FolderOpen size={16} aria-hidden="true" />
+              <span>{workspaceHostBusy === "choose" ? "폴더 여는 중" : "폴더 선택"}</span>
+            </button>
             <button type="button" onClick={refreshDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== ""}>
               <Activity size={16} aria-hidden="true" />
               <span>{workspaceHostBusy === "refresh" ? "Refreshing" : "Refresh"}</span>
@@ -6220,375 +6724,6 @@ function DesktopRuntimePanel({
         )}
       </section>
 
-      <section className="panel wide desktop-source-panel">
-        <div className="panel-heading">
-          <div>
-            <p className="eyebrow">Source Review</p>
-            <h2>Multi-file scoped editor</h2>
-          </div>
-          <div className="source-panel-stats">
-            <span>{openDraftEntries.length} open</span>
-            <strong>{dirtyDraftEntries.length} dirty</strong>
-            <span>{sourceCatalogLabel}</span>
-          </div>
-        </div>
-        <div className="source-editor-controls">
-          <label className="source-path-field">
-            <span>Open Path</span>
-            <input
-              value={sourcePathInput}
-              onChange={(event) => {
-                setSourcePathInput(event.target.value);
-                setSelectedSourcePath(event.target.value);
-              }}
-              placeholder="workspace-relative path"
-            />
-          </label>
-          <label>
-            <span>Indexed File</span>
-            <select
-              value={selectedSourcePath}
-              onChange={(event) => {
-                setSelectedSourcePath(event.target.value);
-                setSourcePathInput(event.target.value);
-              }}
-            >
-              {editableSourceFiles.map((file) => (
-                <option key={file.id} value={file.path}>
-                  {file.path}
-                </option>
-              ))}
-            </select>
-          </label>
-          <button type="button" onClick={refreshRuntimeSourceFiles} disabled={!invoke || sourceCatalogBusy}>
-            <Search size={15} aria-hidden="true" />
-            <span>{sourceCatalogBusy ? "Refreshing" : "Refresh Files"}</span>
-          </button>
-          <button type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !sourcePathInput.trim()}>
-            <FileSearch size={15} aria-hidden="true" />
-            <span>{editorBusy ? "Loading" : "Open Path"}</span>
-          </button>
-          <button type="button" onClick={saveSourceFile} disabled={!invoke || editorBusy || !sourceFile || !currentSourceDirty}>
-            <CheckCircle2 size={15} aria-hidden="true" />
-            <span>Save Current</span>
-          </button>
-          <button type="button" onClick={saveAllSourceDrafts} disabled={!invoke || editorBusy || saveAllBusy || dirtyDraftEntries.length === 0}>
-            <CheckCircle2 size={15} aria-hidden="true" />
-            <span>{saveAllBusy ? "Saving" : "Save All"}</span>
-          </button>
-          <button type="button" onClick={copyCurrentSourceDraft} disabled={!sourceFile}>
-            <Copy size={15} aria-hidden="true" />
-            <span>Copy Current</span>
-          </button>
-          <button type="button" onClick={revertCurrentDraft} disabled={!sourceFile || !currentSourceDirty}>
-            <History size={15} aria-hidden="true" />
-            <span>Revert Draft</span>
-          </button>
-          <button type="button" onClick={closeCurrentDraft} disabled={!sourceFile}>
-            <ShieldCheck size={15} aria-hidden="true" />
-            <span>Close Draft</span>
-          </button>
-        </div>
-
-        <div className="source-customization-bar">
-          <div className={`source-context-pill source-context-${sourceEditorProfile.accent}`}>
-            <span>{sourceEditorProfile.label}</span>
-            <strong>{sourceEditorProfile.detail}</strong>
-          </div>
-          <label>
-            <span>Platform Template</span>
-            <select
-              value={sourceTemplateId}
-              onChange={(event) => setSourceTemplateId(event.target.value as SourceTemplateId)}
-            >
-              {sourceTemplates.map((template) => (
-                <option key={template.id} value={template.id}>
-                  {template.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          <button type="button" onClick={insertSourceTemplate} disabled={!sourceFile}>
-            <Code2 size={15} aria-hidden="true" />
-            <span>Insert Template</span>
-          </button>
-          <button type="button" onClick={copySourcePatchContext} disabled={!sourceFile}>
-            <ClipboardCheck size={15} aria-hidden="true" />
-            <span>Copy Patch Context</span>
-          </button>
-          <div className="source-context-pill compact">
-            <span>Gate</span>
-            <strong>backup before write</strong>
-          </div>
-        </div>
-
-        <div className="source-command-toolbar" aria-label="Source editor commands">
-          <button type="button" onClick={() => runSourceEditorCommand("undo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
-            <History size={15} aria-hidden="true" />
-            <span>Undo</span>
-          </button>
-          <button type="button" onClick={() => runSourceEditorCommand("redo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
-            <History size={15} aria-hidden="true" />
-            <span>Redo</span>
-          </button>
-          <button type="button" onClick={() => runSourceEditorCommand("find")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
-            <Search size={15} aria-hidden="true" />
-            <span>Find</span>
-          </button>
-          <button type="button" onClick={() => runSourceEditorCommand("replace")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
-            <Search size={15} aria-hidden="true" />
-            <span>Replace</span>
-          </button>
-          <button type="button" onClick={() => runSourceEditorCommand("format")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
-            <Code2 size={15} aria-hidden="true" />
-            <span>Format</span>
-          </button>
-          <button type="button" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))} disabled={!sourceFile}>
-            <FileSearch size={15} aria-hidden="true" />
-            <span>{sourceEditorViewMode === "edit" ? "Diff" : "Edit"}</span>
-          </button>
-          <button type="button" onClick={() => setSourceWordWrap((current) => !current)} className={sourceWordWrap ? "active" : ""}>
-            <Code2 size={15} aria-hidden="true" />
-            <span>Wrap</span>
-          </button>
-          <button type="button" onClick={() => setSourceSettingsOpen(true)}>
-            <Settings size={15} aria-hidden="true" />
-            <span>Settings</span>
-          </button>
-        </div>
-
-        {sourceSettingsOpen && (
-          <div className="source-settings-dialog" role="dialog" aria-label="Source Editor Settings">
-            <header>
-              <div>
-                <span>Editor Settings</span>
-                <strong>{sourceEditorProfile.label}</strong>
-              </div>
-              <button type="button" onClick={() => setSourceSettingsOpen(false)} aria-label="Close source editor settings">
-                <X size={15} aria-hidden="true" />
-              </button>
-            </header>
-            <div className="source-settings-grid">
-              <label>
-                <input type="checkbox" checked={sourceWordWrap} onChange={(event) => setSourceWordWrap(event.target.checked)} />
-                <span>Word Wrap</span>
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={sourceMinimapEnabled}
-                  onChange={(event) => setSourceMinimapEnabled(event.target.checked)}
-                />
-                <span>Minimap</span>
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={sourceEditorViewMode === "diff"}
-                  onChange={(event) => setSourceEditorViewMode(event.target.checked ? "diff" : "edit")}
-                />
-                <span>Diff Review</span>
-              </label>
-            </div>
-          </div>
-        )}
-
-        <div className="source-review-grid">
-          <aside className="source-file-browser">
-            <header>
-              <div>
-                <span>{runtimeSourceFiles.length ? "Runtime files" : "Snapshot files"}</span>
-                <strong>{filteredEditableSourceFiles.length} shown</strong>
-              </div>
-              <Code2 size={16} aria-hidden="true" />
-            </header>
-            {sourceCatalogReport && (
-              <p className="source-catalog-note">
-                {sourceCatalogReport.returnedCount}/{sourceCatalogReport.totalCount} runtime files
-                {sourceCatalogReport.truncated ? " / truncated" : ""}
-              </p>
-            )}
-            <input
-              value={sourceFilter}
-              onChange={(event) => setSourceFilter(event.target.value)}
-              placeholder="Filter by path, project, or language"
-            />
-            <div className="source-file-browser-list">
-              {filteredEditableSourceFiles.map((file) => (
-                <button
-                  key={file.id}
-                  type="button"
-                  className={sourceFile?.relativePath === file.path ? "active" : ""}
-                  onClick={() => openDraftOrLoad(file.path)}
-                  disabled={!invoke || editorBusy}
-                >
-                  <strong>{file.path}</strong>
-                  <span>
-                    {file.project} / {file.language || file.extension} / {formatBytes(file.sizeBytes)}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </aside>
-
-          <div className="source-edit-workbench">
-            {openDraftEntries.length > 0 && (
-              <div className="source-editor-tabs" aria-label="Open Editors">
-                {openDraftEntries.map((entry) => {
-                  const dirty = entry.content !== entry.baseContent;
-                  return (
-                    <div
-                      key={entry.relativePath}
-                      className={`source-editor-tab ${sourceFile?.relativePath === entry.relativePath ? "active" : ""} ${dirty ? "dirty" : "clean"}`}
-                    >
-                      <button type="button" className="source-editor-tab-main" onClick={() => selectDraftEntry(entry.relativePath)}>
-                        <span>{dirty ? "dirty" : "open"}</span>
-                        <strong>{entry.relativePath}</strong>
-                      </button>
-                      <button
-                        type="button"
-                        className="source-editor-tab-close"
-                        onClick={() => closeDraftByPath(entry.relativePath)}
-                        aria-label={`Close ${entry.relativePath}`}
-                      >
-                        <X size={14} aria-hidden="true" />
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            <div className="source-draft-queue" aria-label="File Edit Queue">
-              <header>
-                <div>
-                  <span>File Edit Queue</span>
-                  <strong>{dirtyDraftEntries.length} dirty / {openDraftEntries.length} open</strong>
-                </div>
-                <small>workspace-scoped backups on save</small>
-              </header>
-              {openDraftEntries.length === 0 ? (
-                <p className="empty-state">열린 파일 드래프트가 없습니다.</p>
-              ) : (
-                <div className="source-draft-list">
-                  {openDraftEntries.map((entry) => {
-                    const dirty = entry.content !== entry.baseContent;
-                    return (
-                      <button
-                        key={entry.relativePath}
-                        type="button"
-                        className={`${sourceFile?.relativePath === entry.relativePath ? "active" : ""} ${dirty ? "dirty" : "clean"}`}
-                        onClick={() => selectDraftEntry(entry.relativePath)}
-                      >
-                        <span>{dirty ? "dirty" : entry.status || "clean"}</span>
-                        <strong>{entry.relativePath}</strong>
-                        <small>
-                          {formatBytes(entry.content.length)} / loaded {entry.loadedAt.slice(11, 19)}
-                        </small>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-
-            {sourceFile ? (
-              <div className="source-editor-frame">
-                <div className="source-editor-meta">
-                  <span>{sourceFile.relativePath}</span>
-                  <strong>
-                    {formatBytes(sourceDraft.length)} / max {formatBytes(sourceFile.maxSizeBytes)}
-                  </strong>
-                </div>
-                {sourceDiff && (
-                  <div className={`source-diff-review ${sourceDiff.dirty ? "dirty" : "clean"}`}>
-                    <header>
-                      <div>
-                        <span>{sourceDiff.dirty ? "diff pending" : "no changes"}</span>
-                        <strong>
-                          +{sourceDiff.addedLines} / -{sourceDiff.removedLines} / {sourceDiff.changedLines} changed
-                        </strong>
-                      </div>
-                      <small>backup save gate</small>
-                    </header>
-                    {sourceDiff.preview.length > 0 && (
-                      <div className="source-diff-preview">
-                        {sourceDiff.preview.map((item) => (
-                          <article key={item.line}>
-                            <span>line {item.line}</span>
-                            <code>- {item.before || "<empty>"}</code>
-                            <code>+ {item.after || "<empty>"}</code>
-                          </article>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-                {sourceEditorViewMode === "diff" ? (
-                  <div className="monaco-editor-shell diff-shell">
-                    <MonacoDiffEditor
-                      beforeMount={definePlatformMonacoTheme}
-                      height="100%"
-                      language={monacoLanguageFromPath(sourceFile.relativePath)}
-                      loading={<div className="monaco-editor-loading">Loading Monaco diff</div>}
-                      modified={sourceDraft}
-                      options={monacoDiffEditorOptions}
-                      original={sourceFile.content}
-                      theme={platformMonacoTheme}
-                    />
-                  </div>
-                ) : (
-                  <div className="monaco-editor-shell">
-                    <MonacoEditor
-                      beforeMount={definePlatformMonacoTheme}
-                      height="100%"
-                      language={monacoLanguageFromPath(sourceFile.relativePath)}
-                      loading={<div className="monaco-editor-loading">Loading Monaco editor</div>}
-                      onMount={handleSourceEditorMount}
-                      onChange={(value) => updateSourceDraft(value ?? "")}
-                      options={activeMonacoEditorOptions}
-                      path={`file:///${sourceFile.relativePath.replace(/^\/+/, "")}`}
-                      theme={platformMonacoTheme}
-                      value={sourceDraft}
-                    />
-                  </div>
-                )}
-                {sourceCopyNotice && <p className="source-copy-notice">{sourceCopyNotice}</p>}
-                {writeReport && (
-                  <p className="desktop-success">
-                    {writeReport.status} / backup: {writeReport.backupPath}
-                  </p>
-                )}
-              </div>
-            ) : (
-              <p className="empty-state">소스 파일을 선택한 뒤 Tauri runtime에서 열면 scoped editor가 활성화됩니다.</p>
-            )}
-
-            {sourceSaveResults.length > 0 && (
-              <div className="source-save-results">
-                <header>
-                  <div>
-                    <span>Save Results</span>
-                    <strong>{sourceSaveResults.length} recent backups</strong>
-                  </div>
-                  <small>latest first</small>
-                </header>
-                <div>
-                  {sourceSaveResults.map((report) => (
-                    <article key={`${report.relativePath}-${report.backupPath}`}>
-                      <span>{report.status}</span>
-                      <strong>{report.relativePath}</strong>
-                      <small>
-                        {formatBytes(report.sizeBytes)} / {report.backupPath}
-                      </small>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

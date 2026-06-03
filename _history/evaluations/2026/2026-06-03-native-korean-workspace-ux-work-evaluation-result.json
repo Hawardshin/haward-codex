@@ -1,0 +1,42 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-native-korean-workspace-ux",
+  "status": "passed",
+  "summary": "The user request was implemented as Korean-first, click-centered native desktop workspace UX with Tauri native folder selection and a dedicated file/code workbench.",
+  "acceptance": [
+    {
+      "criterion": "Korean-first UI copy",
+      "status": "passed"
+    },
+    {
+      "criterion": "English mode considered",
+      "status": "passed"
+    },
+    {
+      "criterion": "Native folder picker and filesystem workspace visibility",
+      "status": "passed"
+    },
+    {
+      "criterion": "File/code section is no longer a static snapshot viewer",
+      "status": "passed"
+    },
+    {
+      "criterion": "Tests and readiness gates updated",
+      "status": "passed"
+    },
+    {
+      "criterion": "Installation audit recorded",
+      "status": "passed"
+    }
+  ],
+  "validation_summary": [
+    "cargo check/test/build passed",
+    "workspace-monitor check/test/build:customer passed",
+    "platform-desktop-app test/check passed",
+    "browser static-build smoke passed"
+  ],
+  "residual_risks": [
+    "Actual OS dialog interaction should still be smoke-tested in a packaged/internal Tauri app because browser static smoke cannot open native OS dialogs.",
+    "Public distribution remains blocked by existing signing/notarization/updater/clean-machine gates."
+  ]
+}

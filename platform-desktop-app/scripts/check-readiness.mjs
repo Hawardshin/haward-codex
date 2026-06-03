@@ -152,6 +152,8 @@ for (const [source, destination] of [
 }
 
 const tauriLib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
+const tauriCargo = readFileSync(join(root, "src-tauri/Cargo.toml"), "utf8");
+const tauriDefaultCapability = readFileSync(join(root, "src-tauri/capabilities/default.json"), "utf8");
 for (const commandName of [
   "get_installer_shell_runtime_contract",
   "list_cli_adapters",
@@ -167,6 +169,7 @@ for (const commandName of [
   "create_support_diagnostic_bundle",
   "get_desktop_workspace_state",
   "set_desktop_workspace_path",
+  "choose_desktop_workspace_folder",
   "clone_desktop_workspace",
   "start_cli_adapter_session",
   "start_cli_task_pipeline",
@@ -185,6 +188,17 @@ for (const commandName of [
 ]) {
   if (!tauriLib.includes(commandName)) {
     failures.push(`src-tauri/src/lib.rs must expose ${commandName}`);
+  }
+}
+if (!tauriCargo.includes("tauri-plugin-dialog")) {
+  failures.push("src-tauri/Cargo.toml must declare tauri-plugin-dialog for native folder selection");
+}
+if (!tauriDefaultCapability.includes("dialog:default")) {
+  failures.push("src-tauri/capabilities/default.json must allow dialog:default for native folder selection");
+}
+for (const requiredPhrase of ["DialogExt", "tauri_plugin_dialog::init", "blocking_pick_folder"]) {
+  if (!tauriLib.includes(requiredPhrase)) {
+    failures.push(`src-tauri/src/lib.rs must include native dialog token ${requiredPhrase}`);
   }
 }
 if (!tauriLib.includes("_ops") || !tauriLib.includes("human-decision-inbox.json")) {
@@ -440,6 +454,9 @@ const desktopPipeline = readFileSync(join(root, "scripts/desktop-pipeline.mjs"),
 if (!installableRequirementsKo.includes("PDA-REQ-038") || !installableRequirementsEn.includes("PDA-REQ-038")) {
   failures.push("installable desktop requirements must include PDA-REQ-038 for bilingual README and one-command release paths");
 }
+if (!installableRequirementsKo.includes("PDA-REQ-039") || !installableRequirementsEn.includes("PDA-REQ-039")) {
+  failures.push("installable desktop requirements must include PDA-REQ-039 for Korean-first native workspace UX");
+}
 for (const requiredPhrase of [
   "corepack pnpm run desktop:setup:verify",
   "corepack pnpm run desktop:verify",
@@ -577,8 +594,15 @@ for (const requiredPhrase of [
   "read_workspace_text_file",
   "write_workspace_text_file",
   "list_workspace_text_files",
+  "네이티브 파일 작업공간",
+  "파일을 보고 바로 고치기",
+  "현재 작업공간",
+  "파일 목록 새로고침",
+  "선택 파일 열기",
+  "현재 파일 저장",
+  "열린 변경 모두 저장",
+  "내용 복사",
   "Refresh Files",
-  "Open Editors",
   "Editor Settings",
   "Diff Review",
   "MonacoDiffEditor",
@@ -617,7 +641,16 @@ for (const requiredPhrase of [
   "Clone Workspace",
   "get_desktop_workspace_state",
   "set_desktop_workspace_path",
+  "choose_desktop_workspace_folder",
   "clone_desktop_workspace",
+  "nativeWorkspaceCopy",
+  "native-file-workspace-panel",
+  "surface=\"files\"",
+  "UI_LANGUAGE_STORAGE_KEY",
+  "화면 언어",
+  "파일/코드",
+  "폴더 선택",
+  "현재 작업공간",
   "refreshRuntimeDataBoundary",
   "runInstallerPayloadAudit",
   "createSupportDiagnosticBundle",
@@ -644,7 +677,7 @@ for (const requiredPhrase of [
   "Public sources only",
   "transfer-pattern-grid",
   "Work Console",
-  "Build Workbench",
+  "Files and Code",
   "Operator Center",
   "operatorSectionIds",
   "Open Operator Center"

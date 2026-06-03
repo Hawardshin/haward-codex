@@ -1,0 +1,20 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-native-korean-workspace-ux",
+  "status": "passed",
+  "server_cleanup": [
+    {
+      "server": "Next dev server",
+      "port": 3210,
+      "status": "stopped"
+    },
+    {
+      "server": "Python static server",
+      "port": 3211,
+      "status": "stopped"
+    }
+  ],
+  "build_processes": "cargo check/test/build and pnpm checks completed.",
+  "browser_notes": "In-app Browser was used for static build smoke; no continuing automation loop was left.",
+  "artifact_notes": "Browser screenshot was copied to platform-desktop-app/artifacts/2026-06-03-native-korean-workspace-ux/browser-native-file-workspace.png."
+}

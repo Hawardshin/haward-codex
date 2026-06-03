@@ -1,0 +1,18 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-native-korean-workspace-ux",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    "Next dev server on port 3210",
+    "Python static server on port 3211",
+    "In-app Browser tab",
+    "Cargo build cache and target directory",
+    "Generated Next build output"
+  ],
+  "checks_required": [
+    "Long-running local servers stopped",
+    "No browser automation loop left running",
+    "No cargo build/test process left running",
+    "Generated screenshot stored under project artifacts"
+  ]
+}

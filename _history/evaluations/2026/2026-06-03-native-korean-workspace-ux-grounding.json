@@ -1,0 +1,24 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-native-korean-workspace-ux",
+  "status": "passed",
+  "grounded_claims": [
+    {
+      "claim": "Tauri dialog plugin supports native dialog usage and Rust plugin initialization.",
+      "sources": [
+        "https://v2.tauri.app/ko/plugin/dialog/",
+        "https://docs.rs/tauri-plugin-dialog/latest/tauri_plugin_dialog/struct.FileDialogBuilder.html"
+      ],
+      "local_validation": "tauri-plugin-dialog v2.7.1 was added, tauri_plugin_dialog::init compiled, and cargo check/test/build passed."
+    },
+    {
+      "claim": "The desktop app exposes a native folder picker command and Korean-first file workspace UI.",
+      "sources": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "local_validation": "Readiness tests and browser static-build smoke verified command/UI tokens."
+    }
+  ],
+  "unsupported_claims_removed": []
+}

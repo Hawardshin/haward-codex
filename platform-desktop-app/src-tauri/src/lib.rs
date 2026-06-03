@@ -10,6 +10,7 @@ use std::sync::{mpsc, Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 use tauri::{AppHandle, Manager, State};
+use tauri_plugin_dialog::DialogExt;
 
 #[derive(Serialize)]
 struct HealthStatus {
@@ -898,6 +899,28 @@ fn set_desktop_workspace_path(
 }
 
 #[tauri::command]
+async fn choose_desktop_workspace_folder(
+    app: AppHandle,
+) -> Result<DesktopWorkspaceStateReport, String> {
+    let Some(folder_path) = app
+        .dialog()
+        .file()
+        .set_title("작업공간 폴더 선택")
+        .blocking_pick_folder()
+    else {
+        return desktop_workspace_state_report(
+            &app,
+            None,
+            Some("folder_selection_canceled".to_string()),
+        );
+    };
+    let path = folder_path
+        .into_path()
+        .map_err(|error| format!("Failed to resolve selected folder path: {error}"))?;
+    set_desktop_workspace_path_report(&app, &path_to_string(&path))
+}
+
+#[tauri::command]
 fn clone_desktop_workspace(
     app: AppHandle,
     repository_url: String,
@@ -1633,6 +1656,7 @@ fn answer_and_resume_human_decision(
 pub fn run() {
     tauri::Builder::default()
         .manage(SessionStore::default())
+        .plugin(tauri_plugin_dialog::init())
         .invoke_handler(tauri::generate_handler![
             app_health,
             get_installer_shell_runtime_contract,
@@ -1650,6 +1674,7 @@ pub fn run() {
             get_service_readiness_report,
             get_desktop_workspace_state,
             set_desktop_workspace_path,
+            choose_desktop_workspace_folder,
             clone_desktop_workspace,
             start_cli_adapter_session,
             start_cli_task_pipeline,

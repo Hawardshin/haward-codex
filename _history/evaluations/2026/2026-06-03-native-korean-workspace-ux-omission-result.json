@@ -1,0 +1,38 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-native-korean-workspace-ux",
+  "status": "passed",
+  "checked_items": [
+    {
+      "item": "한국어 우선 문구",
+      "status": "covered",
+      "evidence": "MonitorShell labels, settings, titlebar, command palette, file workspace copy."
+    },
+    {
+      "item": "영어 모드 고려",
+      "status": "covered",
+      "evidence": "UiLanguage state, localStorage persistence, English label fields and nativeWorkspaceCopy.en."
+    },
+    {
+      "item": "클릭 중심 UX",
+      "status": "covered",
+      "evidence": "Titlebar language button, settings dialog buttons, activity rail/sidebar navigation, file workspace action buttons."
+    },
+    {
+      "item": "파일시스템/작업공간 활용",
+      "status": "covered",
+      "evidence": "choose_desktop_workspace_folder, get/list/read/write workspace commands, native file workspace panel."
+    },
+    {
+      "item": "검증/기록",
+      "status": "covered",
+      "evidence": "Validation commands passed, screenshot artifact, request trace, installation record, work summary."
+    }
+  ],
+  "deferred_items": [
+    {
+      "item": "Actual OS dialog click in packaged Tauri app",
+      "reason": "Native OS dialog cannot be exercised through static browser smoke; Rust compile/test and Tauri command registration were verified."
+    }
+  ]
+}

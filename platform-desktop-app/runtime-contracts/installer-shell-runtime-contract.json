@@ -539,6 +539,7 @@
     "workspace_host_commands": [
       "get_desktop_workspace_state",
       "set_desktop_workspace_path",
+      "choose_desktop_workspace_folder",
       "clone_desktop_workspace"
     ],
     "cli_adapter_commands": [

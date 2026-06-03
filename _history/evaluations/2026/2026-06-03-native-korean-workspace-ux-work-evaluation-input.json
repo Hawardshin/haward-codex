@@ -1,0 +1,47 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-native-korean-workspace-ux",
+  "request_id": "UR-2026-06-03-039",
+  "work_mode": "standard",
+  "mode_selection_record_targets": [
+    "platform-desktop-app/specs/2026-06-03-native-korean-workspace-ux/plan.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-03-native-korean-workspace-ux/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-03-native-korean-workspace-ux/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-03-native-korean-workspace-ux/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-03-native-korean-workspace-ux/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-03-native-korean-workspace-ux/traceability.ko.md"
+  ],
+  "history_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/user-requests/2026/2026-06-03.en.md",
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.en.md",
+    "_history/request-traces/2026/2026-06-03-native-korean-workspace-ux.ko.md"
+  ],
+  "validation_targets": [
+    "platform-desktop-app/specs/2026-06-03-native-korean-workspace-ux/validation.ko.md",
+    "platform-desktop-app/artifacts/2026-06-03-native-korean-workspace-ux/browser-native-file-workspace.png"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-native-korean-workspace-ux-omission-result.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-03-native-korean-workspace-ux-resource-result.json"
+  ],
+  "installation_occurred": true,
+  "installation_record_targets": [
+    "_history/installations/2026/2026-06-03-tauri-dialog-plugin-native-folder-picker.ko.md",
+    "_ops/installations/registry.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "grounding_targets": [
+    "_history/evaluations/2026/2026-06-03-native-korean-workspace-ux-grounding.json"
+  ]
+}

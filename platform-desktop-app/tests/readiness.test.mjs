@@ -41,6 +41,8 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
 
   assert.match(requirementsKo, /PDA-REQ-038/);
   assert.match(requirementsEn, /PDA-REQ-038/);
+  assert.match(requirementsKo, /PDA-REQ-039/);
+  assert.match(requirementsEn, /PDA-REQ-039/);
   for (const scriptName of ["desktop:setup:verify", "desktop:verify", "desktop:package:internal", "desktop:release:report"]) {
     assert.ok(rootPkg.scripts[scriptName]);
   }
@@ -219,6 +221,8 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   const serialized = JSON.stringify(contract);
   const pkg = readJson("package.json");
   const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
+  const cargoToml = readFileSync(join(root, "src-tauri/Cargo.toml"), "utf8");
+  const defaultCapability = readFileSync(join(root, "src-tauri/capabilities/default.json"), "utf8");
 
   assert.equal(contract.installer_shell_contract.launch_model, "installed_app_owns_shell_runtime");
   assert.equal(contract.installer_shell_contract.shell_role, "primary_platform_host");
@@ -257,11 +261,17 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   for (const workspaceHostCommand of [
     "get_desktop_workspace_state",
     "set_desktop_workspace_path",
+    "choose_desktop_workspace_folder",
     "clone_desktop_workspace"
   ]) {
     assert.match(lib, new RegExp(workspaceHostCommand));
     assert.ok(contract.runtime_command_surface.workspace_host_commands.includes(workspaceHostCommand));
   }
+  assert.match(cargoToml, /tauri-plugin-dialog/);
+  assert.match(defaultCapability, /dialog:default/);
+  assert.match(lib, /DialogExt/);
+  assert.match(lib, /tauri_plugin_dialog::init/);
+  assert.match(lib, /blocking_pick_folder/);
   const accumulatedIndexTarget = contract.data_accumulation_targets.find((target) => target.target_id === "accumulated_data_index");
   assert.equal(accumulatedIndexTarget.record_type, "runtime_data_index_manifest");
   assert.equal(accumulatedIndexTarget.directory, "app_data/runtime-data/indexes");
@@ -382,6 +392,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "list_workspace_text_files",
     "read_workspace_text_file",
     "write_workspace_text_file",
+    "choose_desktop_workspace_folder",
     "list_human_decision_inbox",
     "answer_human_decision",
     "answer_and_resume_human_decision"
@@ -439,18 +450,20 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Auto-defer questions",
     "Defer detected questions",
     "auto-deferred",
-    "Source Review",
-    "Multi-file scoped editor",
-    "Open Editors",
+    "네이티브 파일 작업공간",
+    "파일을 보고 바로 고치기",
+    "현재 작업공간",
+    "파일 목록 새로고침",
+    "선택 파일 열기",
+    "현재 파일 저장",
+    "열린 변경 모두 저장",
+    "내용 복사",
+    "Native File Workspace",
     "Refresh Files",
     "Editor Settings",
     "Diff Review",
-    "Runtime files",
-    "File Edit Queue",
-    "Open Path",
     "Save Current",
     "Save All",
-    "Revert Draft",
     "Platform-first host",
     "Guest adapters",
     "Platform state owner",
@@ -465,7 +478,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "선택/위치 열기",
     "ProductFeatureArchitecturePanel",
     "Work Console",
-    "Build Workbench",
+    "Files and Code",
     "Operator Center",
     "operatorSectionIds",
     "Open Operator Center"
@@ -539,7 +552,16 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "DesktopWorkspaceStateReport",
     "get_desktop_workspace_state",
     "set_desktop_workspace_path",
+    "choose_desktop_workspace_folder",
     "clone_desktop_workspace",
+    "nativeWorkspaceCopy",
+    "native-file-workspace-panel",
+    "surface=\"files\"",
+    "UI_LANGUAGE_STORAGE_KEY",
+    "화면 언어",
+    "파일/코드",
+    "폴더 선택",
+    "현재 작업공간",
     "schemaVersion",
     "storageFormatVersion",
     "indexPath",

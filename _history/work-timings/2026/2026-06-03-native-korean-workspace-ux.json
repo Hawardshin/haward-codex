@@ -1,0 +1,37 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-native-korean-workspace-ux",
+  "request_id": "UR-2026-06-03-039",
+  "timezone": "Asia/Seoul",
+  "phase_timings": [
+    {
+      "phase": "web_first_intake_and_local_context",
+      "duration_minutes_estimate": 8,
+      "notes": "Checked Tauri dialog and command docs, memory bootstrap, current desktop UI/runtime source structure."
+    },
+    {
+      "phase": "requirements_specs_install_audit",
+      "duration_minutes_estimate": 10,
+      "notes": "Added PDA-REQ-039, spec/plan/tasks/validation/traceability, web search record, and installation audit draft."
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes_estimate": 42,
+      "notes": "Added Tauri dialog dependency/command/capability, native file workspace UI, Korean-first copy, UI language state, readiness/tests."
+    },
+    {
+      "phase": "verification",
+      "duration_minutes_estimate": 22,
+      "notes": "Ran Rust, TypeScript, Next, platform checks and browser static-build smoke. Dev server smoke was retried with static server due HMR origin behavior."
+    },
+    {
+      "phase": "history_and_closeout",
+      "duration_minutes_estimate": 14,
+      "notes": "Updated installation registry, request summaries, work summaries, trace, evaluation, omission, resource, and grounding records."
+    }
+  ],
+  "bottlenecks": [
+    "In-app Browser did not hydrate the Next dev server page; static out server smoke was used instead.",
+    "Existing source editor logic was large and had to be isolated as a native file workspace surface without disrupting runtime orchestration."
+  ]
+}

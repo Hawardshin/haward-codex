@@ -1,0 +1,23 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-native-korean-workspace-ux",
+  "request_id": "UR-2026-06-03-039",
+  "required_user_outcomes": [
+    "한국어 우선 문구",
+    "영어 모드 고려",
+    "클릭 중심 UX",
+    "웹처럼 보이지 않는 데스크톱 앱 구조",
+    "파일시스템/작업공간을 직접 볼 수 있는 기능",
+    "기존 소스 편집 기능을 제품 기능으로 노출"
+  ],
+  "coverage_targets": [
+    "PDA-REQ-039",
+    "Tauri native folder picker command",
+    "dialog capability",
+    "파일/코드 native workspace surface",
+    "UI language state and settings",
+    "readiness/test gates",
+    "browser smoke evidence",
+    "installation audit and registry"
+  ]
+}

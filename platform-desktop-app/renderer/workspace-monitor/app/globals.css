@@ -5416,6 +5416,112 @@ h3 {
   gap: 14px;
 }
 
+.native-file-workspace-panel {
+  gap: 12px;
+}
+
+.native-file-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: stretch;
+  border: 1px solid #c9d7e3;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f9fc 100%);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.native-file-hero h2 {
+  margin: 4px 0 6px;
+  font-size: 24px;
+  line-height: 1.18;
+}
+
+.native-file-hero p {
+  max-width: 840px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.native-workspace-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, auto));
+  gap: 8px;
+  align-content: center;
+}
+
+.native-workspace-actions button {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid #aebbc8;
+  background: #ffffff;
+  color: var(--text);
+  border-radius: 7px;
+  padding: 8px 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.native-workspace-actions button:first-child {
+  border-color: #6b879d;
+  background: #172435;
+  color: #f8fafc;
+}
+
+.native-workspace-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.native-workspace-state-strip {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.6fr) repeat(3, minmax(130px, 0.55fr));
+  gap: 8px;
+}
+
+.native-workspace-state-strip article {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.native-workspace-state-strip span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.native-workspace-state-strip strong,
+.native-workspace-state-strip code {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--slate);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.native-source-workbench {
+  overflow: hidden;
+}
+
+.native-source-controls {
+  grid-template-columns: minmax(220px, 1.2fr) minmax(220px, 1.2fr) repeat(4, minmax(120px, auto));
+}
+
+.native-source-grid {
+  grid-template-columns: minmax(260px, 0.52fr) minmax(0, 1.48fr);
+}
+
 .source-layout {
   display: grid;
   grid-template-columns: minmax(280px, 0.7fr) minmax(0, 1.5fr);
@@ -6615,6 +6721,9 @@ h3 {
   .session-launcher,
   .session-grid,
   .session-input-row,
+  .native-file-hero,
+  .native-workspace-actions,
+  .native-workspace-state-strip,
   .source-review-grid,
   .source-draft-list,
   .source-editor-controls,
@@ -6671,7 +6780,8 @@ h3 {
 
   .command-trigger,
   .app-chip-group,
-  .app-chip-group button {
+  .app-chip-group button,
+  .native-workspace-actions button {
     width: 100%;
     max-width: none;
   }

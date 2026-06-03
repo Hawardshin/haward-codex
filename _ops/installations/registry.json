@@ -395,6 +395,39 @@
       "rollback_path": "Move platform-desktop-app/renderer/workspace-monitor back to root workspace-monitor, revert pnpm workspace/lockfile, Tauri config, readiness, registry/docs/map changes, then rerun corepack pnpm install --frozen-lockfile.",
       "installation_record_path": "_history/installations/2026/2026-06-03-desktop-product-folder-restructure.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-03-tauri-dialog-plugin-native-folder-picker",
+      "date": "2026-06-03",
+      "status": "installed",
+      "name": "Tauri dialog plugin native folder picker",
+      "scope": "project",
+      "owning_project": "platform-desktop-app",
+      "package_manager": "cargo",
+      "install_command": "cd platform-desktop-app/src-tauri && cargo add tauri-plugin-dialog@2",
+      "environment_path": "platform-desktop-app/src-tauri/target/",
+      "dependency_record_paths": [
+        "platform-desktop-app/src-tauri/Cargo.toml",
+        "platform-desktop-app/src-tauri/Cargo.lock",
+        "platform-desktop-app/src-tauri/capabilities/default.json"
+      ],
+      "version_or_lock_status": "Cargo.lock records tauri-plugin-dialog v2.7.1 and transitive dialog dependencies; capability dialog:default is allowlisted.",
+      "security_review": "The plugin is scoped to native folder selection. Selected paths are passed into existing workspace host state and existing workspace-scoped read/write path validation remains in force.",
+      "license_review": "tauri-plugin-dialog is licensed MIT OR Apache-2.0.",
+      "verification": [
+        "cargo check: passed",
+        "cargo test: passed",
+        "cargo build: passed",
+        "corepack pnpm --filter workspace-monitor run check: passed",
+        "corepack pnpm --filter workspace-monitor test: 17 tests passed",
+        "corepack pnpm --filter workspace-monitor run build:customer: passed",
+        "corepack pnpm --filter platform-desktop-app test: 17 tests passed",
+        "corepack pnpm --filter platform-desktop-app run check: passed",
+        "Browser static-build smoke: clicked 파일 and confirmed 네이티브 파일 작업공간, 폴더 선택, 현재 작업공간"
+      ],
+      "rollback_path": "cd platform-desktop-app/src-tauri && cargo remove tauri-plugin-dialog; remove dialog:default capability, choose_desktop_workspace_folder command, runtime contract command entry, native folder picker UI, regenerate Cargo.lock, and rerun checks.",
+      "installation_record_path": "_history/installations/2026/2026-06-03-tauri-dialog-plugin-native-folder-picker.ko.md",
+      "commit": "pending"
     }
   ]
 }
