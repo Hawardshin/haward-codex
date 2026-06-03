@@ -76,6 +76,11 @@ const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((module) 
   loading: () => <div className="monaco-editor-loading">Loading Monaco editor</div>
 });
 
+const MonacoDiffEditor = dynamic(() => import("@monaco-editor/react").then((module) => module.DiffEditor), {
+  ssr: false,
+  loading: () => <div className="monaco-editor-loading">Loading Monaco diff</div>
+});
+
 const monacoEditorOptions: editor.IStandaloneEditorConstructionOptions = {
   automaticLayout: true,
   bracketPairColorization: { enabled: true },
@@ -103,6 +108,16 @@ const monacoReadOnlyOptions: editor.IStandaloneEditorConstructionOptions = {
   domReadOnly: true,
   minimap: { enabled: false },
   readOnly: true
+};
+
+const monacoDiffEditorOptions: editor.IStandaloneDiffEditorConstructionOptions = {
+  automaticLayout: true,
+  diffAlgorithm: "advanced",
+  enableSplitViewResizing: true,
+  originalEditable: false,
+  readOnly: true,
+  renderSideBySide: true,
+  scrollBeyondLastLine: false
 };
 
 const platformMonacoTheme = "agent-platform-workbench";
@@ -866,6 +881,15 @@ type WorkspaceWriteReport = {
   sizeBytes: number;
   backupPath: string;
   status: string;
+};
+
+type WorkspaceTextFileListReport = {
+  status: string;
+  source: string;
+  totalCount: number;
+  returnedCount: number;
+  truncated: boolean;
+  files: WorkspaceSourceFile[];
 };
 
 type SourceDraftEntry = {
@@ -3261,12 +3285,19 @@ function DesktopRuntimePanel({
   const [sourceFile, setSourceFile] = useState<WorkspaceTextFile | null>(null);
   const [sourceDraft, setSourceDraft] = useState("");
   const [sourceDrafts, setSourceDrafts] = useState<Record<string, SourceDraftEntry>>({});
+  const [runtimeSourceFiles, setRuntimeSourceFiles] = useState<WorkspaceSourceFile[]>([]);
+  const [sourceCatalogReport, setSourceCatalogReport] = useState<WorkspaceTextFileListReport | null>(null);
   const [sourceSaveResults, setSourceSaveResults] = useState<WorkspaceWriteReport[]>([]);
   const [writeReport, setWriteReport] = useState<WorkspaceWriteReport | null>(null);
   const [sourceCopyNotice, setSourceCopyNotice] = useState("");
   const [sourceTemplateId, setSourceTemplateId] = useState<SourceTemplateId>("spec-section");
+  const [sourceEditorViewMode, setSourceEditorViewMode] = useState<"edit" | "diff">("edit");
+  const [sourceWordWrap, setSourceWordWrap] = useState(false);
+  const [sourceMinimapEnabled, setSourceMinimapEnabled] = useState(true);
+  const [sourceSettingsOpen, setSourceSettingsOpen] = useState(false);
   const [editorBusy, setEditorBusy] = useState(false);
   const [saveAllBusy, setSaveAllBusy] = useState(false);
+  const [sourceCatalogBusy, setSourceCatalogBusy] = useState(false);
   const sourceEditorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const panelMountedRef = useRef(false);
   const activeSessionPollInFlightRef = useRef(false);
@@ -3275,8 +3306,10 @@ function DesktopRuntimePanel({
 
   const invoke = getTauriInvoke();
   const availableCount = adapters.filter((adapter) => adapter.available).length;
-  const sourceFileCount = sourceFiles.length;
-  const editableSourceFiles = useMemo(() => sourceFiles.filter((file) => !file.truncated).slice(0, 240), [sourceFiles]);
+  const sourceCatalogFiles = runtimeSourceFiles.length ? runtimeSourceFiles : sourceFiles;
+  const sourceFileCount = sourceCatalogFiles.length;
+  const sourceCatalogLabel = runtimeSourceFiles.length ? "runtime" : "snapshot";
+  const editableSourceFiles = useMemo(() => sourceCatalogFiles.filter((file) => !file.truncated).slice(0, 240), [sourceCatalogFiles]);
   const filteredEditableSourceFiles = useMemo(() => {
     const normalizedFilter = sourceFilter.trim().toLowerCase();
     if (!normalizedFilter) {
@@ -3402,6 +3435,14 @@ function DesktopRuntimePanel({
     [selectedSourcePath, sourceFile?.relativePath, sourcePathInput]
   );
   const selectedSourceTemplate = sourceTemplateById[sourceTemplateId];
+  const activeMonacoEditorOptions = useMemo<editor.IStandaloneEditorConstructionOptions>(
+    () => ({
+      ...monacoEditorOptions,
+      minimap: { enabled: sourceMinimapEnabled },
+      wordWrap: sourceWordWrap ? "on" : "off"
+    }),
+    [sourceMinimapEnabled, sourceWordWrap]
+  );
   const evidenceItems = useMemo(() => {
     const items = [
       ...outputEvents.slice(0, 5).map((event) => ({
@@ -3533,6 +3574,34 @@ function DesktopRuntimePanel({
     }
   };
 
+  const refreshRuntimeSourceFiles = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setSourceCatalogReport(null);
+      return;
+    }
+
+    setSourceCatalogBusy(true);
+    setError("");
+    try {
+      const report = await tauriInvoke<WorkspaceTextFileListReport>("list_workspace_text_files", {
+        filter: sourceFilter.trim() || null,
+        limit: 240
+      });
+      setRuntimeSourceFiles(report.files);
+      setSourceCatalogReport(report);
+      const firstPath = report.files[0]?.path || "";
+      if (!sourcePathInput && firstPath) {
+        setSelectedSourcePath(firstPath);
+        setSourcePathInput(firstPath);
+      }
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setSourceCatalogBusy(false);
+    }
+  };
+
   const refreshAdapters = async () => {
     setError("");
     const tauriInvoke = getTauriInvoke();
@@ -3586,6 +3655,7 @@ function DesktopRuntimePanel({
       if (!nextTaskPipePresets.some((preset) => preset.taskKind === selectedTaskPipeKind) && nextTaskPipePresets[0]) {
         setSelectedTaskPipeKind(nextTaskPipePresets[0].taskKind);
       }
+      void refreshRuntimeSourceFiles();
     } catch (caught) {
       if (!panelMountedRef.current) {
         return;
@@ -4153,6 +4223,39 @@ function DesktopRuntimePanel({
     sourceEditorRef.current = editorInstance;
   };
 
+  const runSourceEditorCommand = async (command: "undo" | "redo" | "find" | "replace" | "format") => {
+    const editorInstance = sourceEditorRef.current;
+    if (!sourceFile || !editorInstance) {
+      setSourceCopyNotice("Open a source file before running editor commands");
+      return;
+    }
+
+    if (command === "undo" || command === "redo") {
+      editorInstance.trigger("platform-source-toolbar", command, null);
+      updateSourceDraft(editorInstance.getValue());
+      editorInstance.focus();
+      return;
+    }
+
+    const actionId =
+      command === "find"
+        ? "actions.find"
+        : command === "replace"
+          ? "editor.action.startFindReplaceAction"
+          : "editor.action.formatDocument";
+    const action = editorInstance.getAction(actionId);
+    if (!action) {
+      setSourceCopyNotice(`${command} is unavailable for this file`);
+      editorInstance.focus();
+      return;
+    }
+    await action.run();
+    if (command === "format") {
+      updateSourceDraft(editorInstance.getValue());
+    }
+    editorInstance.focus();
+  };
+
   const insertSourceTemplate = () => {
     if (!sourceFile) {
       return;
@@ -4318,17 +4421,21 @@ function DesktopRuntimePanel({
     setWriteReport(null);
   };
 
-  const closeCurrentDraft = () => {
-    if (!sourceFile) {
+  const closeDraftByPath = (relativePath: string) => {
+    const currentPath = relativePath.trim();
+    if (!currentPath) {
       return;
     }
-    const currentPath = sourceFile.relativePath;
+    const closingActiveDraft = sourceFile?.relativePath === currentPath;
     const nextEntry = openDraftEntries.find((entry) => entry.relativePath !== currentPath) || null;
     setSourceDrafts((current) => {
       const next = { ...current };
       delete next[currentPath];
       return next;
     });
+    if (!closingActiveDraft) {
+      return;
+    }
     if (nextEntry) {
       setSelectedSourcePath(nextEntry.relativePath);
       setSourcePathInput(nextEntry.relativePath);
@@ -4345,6 +4452,13 @@ function DesktopRuntimePanel({
       setSourceCopyNotice("");
       setWriteReport(null);
     }
+  };
+
+  const closeCurrentDraft = () => {
+    if (!sourceFile) {
+      return;
+    }
+    closeDraftByPath(sourceFile.relativePath);
   };
 
   const copyCurrentSourceDraft = async () => {
@@ -5524,6 +5638,7 @@ function DesktopRuntimePanel({
           <div className="source-panel-stats">
             <span>{openDraftEntries.length} open</span>
             <strong>{dirtyDraftEntries.length} dirty</strong>
+            <span>{sourceCatalogLabel}</span>
           </div>
         </div>
         <div className="source-editor-controls">
@@ -5554,6 +5669,10 @@ function DesktopRuntimePanel({
               ))}
             </select>
           </label>
+          <button type="button" onClick={refreshRuntimeSourceFiles} disabled={!invoke || sourceCatalogBusy}>
+            <Search size={15} aria-hidden="true" />
+            <span>{sourceCatalogBusy ? "Refreshing" : "Refresh Files"}</span>
+          </button>
           <button type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !sourcePathInput.trim()}>
             <FileSearch size={15} aria-hidden="true" />
             <span>{editorBusy ? "Loading" : "Open Path"}</span>
@@ -5612,15 +5731,92 @@ function DesktopRuntimePanel({
           </div>
         </div>
 
+        <div className="source-command-toolbar" aria-label="Source editor commands">
+          <button type="button" onClick={() => runSourceEditorCommand("undo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+            <History size={15} aria-hidden="true" />
+            <span>Undo</span>
+          </button>
+          <button type="button" onClick={() => runSourceEditorCommand("redo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+            <History size={15} aria-hidden="true" />
+            <span>Redo</span>
+          </button>
+          <button type="button" onClick={() => runSourceEditorCommand("find")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+            <Search size={15} aria-hidden="true" />
+            <span>Find</span>
+          </button>
+          <button type="button" onClick={() => runSourceEditorCommand("replace")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+            <Search size={15} aria-hidden="true" />
+            <span>Replace</span>
+          </button>
+          <button type="button" onClick={() => runSourceEditorCommand("format")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+            <Code2 size={15} aria-hidden="true" />
+            <span>Format</span>
+          </button>
+          <button type="button" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))} disabled={!sourceFile}>
+            <FileSearch size={15} aria-hidden="true" />
+            <span>{sourceEditorViewMode === "edit" ? "Diff" : "Edit"}</span>
+          </button>
+          <button type="button" onClick={() => setSourceWordWrap((current) => !current)} className={sourceWordWrap ? "active" : ""}>
+            <Code2 size={15} aria-hidden="true" />
+            <span>Wrap</span>
+          </button>
+          <button type="button" onClick={() => setSourceSettingsOpen(true)}>
+            <Settings size={15} aria-hidden="true" />
+            <span>Settings</span>
+          </button>
+        </div>
+
+        {sourceSettingsOpen && (
+          <div className="source-settings-dialog" role="dialog" aria-label="Source Editor Settings">
+            <header>
+              <div>
+                <span>Editor Settings</span>
+                <strong>{sourceEditorProfile.label}</strong>
+              </div>
+              <button type="button" onClick={() => setSourceSettingsOpen(false)} aria-label="Close source editor settings">
+                <X size={15} aria-hidden="true" />
+              </button>
+            </header>
+            <div className="source-settings-grid">
+              <label>
+                <input type="checkbox" checked={sourceWordWrap} onChange={(event) => setSourceWordWrap(event.target.checked)} />
+                <span>Word Wrap</span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={sourceMinimapEnabled}
+                  onChange={(event) => setSourceMinimapEnabled(event.target.checked)}
+                />
+                <span>Minimap</span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={sourceEditorViewMode === "diff"}
+                  onChange={(event) => setSourceEditorViewMode(event.target.checked ? "diff" : "edit")}
+                />
+                <span>Diff Review</span>
+              </label>
+            </div>
+          </div>
+        )}
+
         <div className="source-review-grid">
           <aside className="source-file-browser">
             <header>
               <div>
-                <span>Indexed files</span>
+                <span>{runtimeSourceFiles.length ? "Runtime files" : "Snapshot files"}</span>
                 <strong>{filteredEditableSourceFiles.length} shown</strong>
               </div>
               <Code2 size={16} aria-hidden="true" />
             </header>
+            {sourceCatalogReport && (
+              <p className="source-catalog-note">
+                {sourceCatalogReport.returnedCount}/{sourceCatalogReport.totalCount} runtime files
+                {sourceCatalogReport.truncated ? " / truncated" : ""}
+              </p>
+            )}
             <input
               value={sourceFilter}
               onChange={(event) => setSourceFilter(event.target.value)}
@@ -5645,6 +5841,33 @@ function DesktopRuntimePanel({
           </aside>
 
           <div className="source-edit-workbench">
+            {openDraftEntries.length > 0 && (
+              <div className="source-editor-tabs" aria-label="Open Editors">
+                {openDraftEntries.map((entry) => {
+                  const dirty = entry.content !== entry.baseContent;
+                  return (
+                    <div
+                      key={entry.relativePath}
+                      className={`source-editor-tab ${sourceFile?.relativePath === entry.relativePath ? "active" : ""} ${dirty ? "dirty" : "clean"}`}
+                    >
+                      <button type="button" className="source-editor-tab-main" onClick={() => selectDraftEntry(entry.relativePath)}>
+                        <span>{dirty ? "dirty" : "open"}</span>
+                        <strong>{entry.relativePath}</strong>
+                      </button>
+                      <button
+                        type="button"
+                        className="source-editor-tab-close"
+                        onClick={() => closeDraftByPath(entry.relativePath)}
+                        aria-label={`Close ${entry.relativePath}`}
+                      >
+                        <X size={14} aria-hidden="true" />
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
             <div className="source-draft-queue" aria-label="File Edit Queue">
               <header>
                 <div>
@@ -5710,20 +5933,35 @@ function DesktopRuntimePanel({
                     )}
                   </div>
                 )}
-                <div className="monaco-editor-shell">
-                  <MonacoEditor
-                    beforeMount={definePlatformMonacoTheme}
-                    height="100%"
-                    language={monacoLanguageFromPath(sourceFile.relativePath)}
-                    loading={<div className="monaco-editor-loading">Loading Monaco editor</div>}
-                    onMount={handleSourceEditorMount}
-                    onChange={(value) => updateSourceDraft(value ?? "")}
-                    options={monacoEditorOptions}
-                    path={`file:///${sourceFile.relativePath.replace(/^\/+/, "")}`}
-                    theme={platformMonacoTheme}
-                    value={sourceDraft}
-                  />
-                </div>
+                {sourceEditorViewMode === "diff" ? (
+                  <div className="monaco-editor-shell diff-shell">
+                    <MonacoDiffEditor
+                      beforeMount={definePlatformMonacoTheme}
+                      height="100%"
+                      language={monacoLanguageFromPath(sourceFile.relativePath)}
+                      loading={<div className="monaco-editor-loading">Loading Monaco diff</div>}
+                      modified={sourceDraft}
+                      options={monacoDiffEditorOptions}
+                      original={sourceFile.content}
+                      theme={platformMonacoTheme}
+                    />
+                  </div>
+                ) : (
+                  <div className="monaco-editor-shell">
+                    <MonacoEditor
+                      beforeMount={definePlatformMonacoTheme}
+                      height="100%"
+                      language={monacoLanguageFromPath(sourceFile.relativePath)}
+                      loading={<div className="monaco-editor-loading">Loading Monaco editor</div>}
+                      onMount={handleSourceEditorMount}
+                      onChange={(value) => updateSourceDraft(value ?? "")}
+                      options={activeMonacoEditorOptions}
+                      path={`file:///${sourceFile.relativePath.replace(/^\/+/, "")}`}
+                      theme={platformMonacoTheme}
+                      value={sourceDraft}
+                    />
+                  </div>
+                )}
                 {sourceCopyNotice && <p className="source-copy-notice">{sourceCopyNotice}</p>}
                 {writeReport && (
                   <p className="desktop-success">

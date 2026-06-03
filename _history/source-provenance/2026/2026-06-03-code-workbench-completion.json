@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-029",
+  "local_sources": [
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "platform-desktop-app/specs/2026-06-03-code-workbench-completion/spec.ko.md"
+  ],
+  "external_sources": [
+    "https://microsoft.github.io/monaco-editor/typedoc/",
+    "https://github.com/microsoft/monaco-editor",
+    "https://v2.tauri.app/plugin/file-system/",
+    "https://v2.tauri.app/reference/javascript/dialog/"
+  ],
+  "implementation_scope": [
+    "Runtime workspace file listing command with protected path exclusions and scan limits.",
+    "Source Review runtime catalog refresh and snapshot fallback.",
+    "Open editor tabs, command toolbar, Monaco diff mode, and settings popup."
+  ],
+  "unsupported_claims_removed": [
+    "No claim was made that language server, extension host, or Git staging are complete."
+  ]
+}

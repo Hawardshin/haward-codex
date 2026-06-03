@@ -1,0 +1,135 @@
+{
+  "task": "Desktop code workbench completion",
+  "work_mode": "ship_first",
+  "runtime_context": [
+    "rust",
+    "tauri",
+    "react",
+    "nextjs",
+    "browser",
+    "monaco-editor"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "workspace-source-scan",
+      "category": "large_data",
+      "description": "Runtime source catalog refresh could scan too much workspace data or expose local-only/sensitive directories.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The Tauri command skips private, output, VCS, dependency, build, cache, and symlink entries; caps scanned entries and returned results; and only includes known text/code extensions.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs SOURCE_EDITOR_SKIP_DIRS",
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_WORKSPACE_SOURCE_SCAN_ENTRIES",
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_WORKSPACE_SOURCE_LIST_LIMIT",
+        "platform-desktop-app/src-tauri/src/lib.rs should_skip_source_editor_dir",
+        "platform-desktop-app/src-tauri/src/lib.rs is_source_editor_text_path"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "monaco-editor-model-state",
+      "category": "memory",
+      "description": "Multiple open source drafts and Monaco editor/diff models could grow client-side memory if unbounded.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The runtime file browser renders a capped filtered catalog, open draft state is explicit and closable by tab, and large files use the existing maximum file read/write boundary.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx filteredEditableSourceFiles .slice(0, 80)",
+        "workspace-monitor/components/MonitorShell.tsx closeDraftByPath",
+        "workspace-monitor/components/MonitorShell.tsx source-editor-tabs",
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_WORKSPACE_FILE_BYTES"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "save-all-file-handles",
+      "category": "file_handle",
+      "description": "Save All writes multiple files and could leave file handle or backup-state risk if not using bounded Tauri calls.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Save All iterates dirty drafts through the existing workspace-scoped write command, which writes backups and returns a report per file without persistent handles.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx saveAllSourceDrafts",
+        "platform-desktop-app/src-tauri/src/lib.rs write_workspace_text_file",
+        "workspace-monitor/components/MonitorShell.tsx sourceSaveResults"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "runtime-catalog-refresh",
+      "resource": "workspace source file scan",
+      "create_path": "workspace-monitor/components/MonitorShell.tsx refreshRuntimeSourceFiles invokes list_workspace_text_files",
+      "cleanup_path": "No persistent process or handle is created; state is replaced through setRuntimeSourceFiles and setSourceCatalogReport.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs list_workspace_text_files returns a bounded report",
+        "cargo check from platform-desktop-app/src-tauri/: passed",
+        "corepack pnpm --filter workspace-monitor run check: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "editor-tab-close",
+      "resource": "client-side source draft state",
+      "create_path": "workspace-monitor/components/MonitorShell.tsx loadSourceFileByPath adds sourceDrafts entry",
+      "cleanup_path": "workspace-monitor/components/MonitorShell.tsx closeDraftByPath removes the draft entry and clears current editor state when needed.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx source-editor-tabs close button",
+        "corepack pnpm --filter workspace-monitor test: 16 passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser-smoke-server",
+      "resource": "temporary static Browser smoke server",
+      "create_path": "Local static server at http://127.0.0.1:3018 for developer snapshot smoke.",
+      "cleanup_path": "Server session was stopped after Browser smoke; no ongoing exec session is needed for close-out.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Browser smoke completed on http://127.0.0.1:3018/?code-workbench=<timestamp>",
+        "No running exec session is required for final response."
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "source-catalog-bounds",
+      "metric": "runtime source catalog scan and render limits",
+      "tool": "source inspection plus Rust/TypeScript checks",
+      "threshold": "Scan entries <= MAX_WORKSPACE_SOURCE_SCAN_ENTRIES, returned files <= MAX_WORKSPACE_SOURCE_LIST_LIMIT, rendered filtered files <= 80.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_WORKSPACE_SOURCE_SCAN_ENTRIES",
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_WORKSPACE_SOURCE_LIST_LIMIT",
+        "workspace-monitor/components/MonitorShell.tsx filteredEditableSourceFiles .slice(0, 80)",
+        "cargo check from platform-desktop-app/src-tauri/: passed",
+        "corepack pnpm --filter workspace-monitor run check: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "bundle-budget",
+      "metric": "workspace-monitor customer bundle size budget",
+      "tool": "corepack pnpm --filter workspace-monitor run perf:budget",
+      "threshold": "within_budget",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "perf:budget: within_budget, largest initial chunk 227542 bytes"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No global install, long-running worker, subscription, network stream, or daemon was added.",
+    "Monaco DiffEditor is dynamically loaded through the existing @monaco-editor/react dependency."
+  ]
+}

@@ -38,6 +38,7 @@
 | REQ-WM-025 | 웹 UI는 실제 앱처럼 섹션, 보기 모드, 언어 모드, 문서 필터, 주요 action을 전역 command palette와 pinned/recent quick controls로 실행할 수 있어야 한다. | should | `app-control-bar`, `command-palette`, pinned/recent controls, keyboard lifecycle cleanup, `pnpm test`, `pnpm run check`, `pnpm run build`, static export smoke 확인 |
 | REQ-WM-026 | 데스크톱 제품 UI는 런타임, task pipe, service readiness, source editor 같은 운영 패널을 좁은 웹 카드처럼 찌그러뜨리지 않고 full-width workbench surface로 렌더링해야 하며, 대형 workspace snapshot을 JS fallback chunk로 포함하지 않아야 한다. | must | `pnpm run perf:budget`, customer bundle audit, Browser smoke에서 body/viewport overflow 0, runtime/source panel visual check |
 | REQ-WM-027 | 데스크톱 source editor는 범용 웹 에디터가 아니라 플랫폼 작업에 맞춘 편집 워크벤치여야 하며, 요구사항/스펙/검증/Tauri command/agent config/decision item 템플릿, 경로 기반 편집 프로필, 패치 컨텍스트 복사를 제공해야 한다. | must | `source-customization-bar`, Monaco custom theme/options, template insertion, patch context copy, `pnpm run check`, `pnpm run build:customer`, Browser smoke 확인 |
+| REQ-WM-028 | 데스크톱 Source Review는 runtime workspace file index refresh, open editor tab strip, Monaco command toolbar, edit/diff mode, editor settings popup을 제공해 실제 코드 편집 워크벤치로 동작해야 한다. | must | `Refresh Files`, `Open Editors`, `source-command-toolbar`, `MonacoDiffEditor`, `Editor Settings`, `pnpm run check`, `pnpm test`, Browser smoke 확인 |
 
 ## 범위
 
@@ -62,6 +63,7 @@
 - 핵심 기능 바로가기와 기능군별 탭 정보구조
 - 전역 command palette, pinned/recent quick controls
 - Tauri 데스크톱 런타임에서만 활성화되는 platform source editor 템플릿, 프로필, 패치 컨텍스트 복사
+- Tauri 데스크톱 런타임 파일 인덱스, open editor tabs, editor command toolbar, Monaco diff/settings surface
 - Vercel 배포 문서
 
 ## 제외 범위

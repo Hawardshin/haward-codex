@@ -1,0 +1,58 @@
+{
+  "status": "ready_to_close",
+  "requires_rework": false,
+  "work_mode": "ship_first",
+  "required_target_policy": {
+    "required_targets": [
+      "mode_selection_record_targets",
+      "omission_check_targets",
+      "references_checked",
+      "web_search_record_targets"
+    ],
+    "deferred_targets_allowed": [
+      "plan_evidence_targets",
+      "request_trace_targets",
+      "requirements_targets",
+      "source_provenance_targets",
+      "spec_targets",
+      "timing_summary_targets",
+      "user_request_summary_targets",
+      "work_summary_targets"
+    ]
+  },
+  "alignment_check": {
+    "initial_instruction_present": true,
+    "result_summary_present": true,
+    "work_mode": "ship_first",
+    "changed_files_count": 27,
+    "verification_count": 15,
+    "references_checked_count": 8,
+    "grounding_checks_count": 4,
+    "source_provenance_targets_count": 2,
+    "plan_evidence_targets_count": 2,
+    "mode_selection_record_targets_count": 1,
+    "omission_check_targets_count": 1,
+    "web_search_record_targets_count": 1,
+    "user_request_summary_targets_count": 1,
+    "requirements_targets_count": 4,
+    "spec_targets_count": 5,
+    "skill_work_occurred": false,
+    "skill_targets_count": 0,
+    "skill_validation_targets_count": 0,
+    "request_trace_targets_count": 2,
+    "work_summary_targets_count": 1,
+    "timing_summary_targets_count": 1,
+    "context_archiving_occurred": false,
+    "context_archive_targets_count": 0,
+    "installation_occurred": false,
+    "installation_record_targets_count": 0,
+    "resource_risk_occurred": true,
+    "resource_check_targets_count": 1,
+    "cli_pipeline_occurred": false,
+    "cli_pipeline_targets_count": 0,
+    "deferred_improvement_targets_count": 0
+  },
+  "gaps": [],
+  "improvements": [],
+  "follow_up_actions": []
+}

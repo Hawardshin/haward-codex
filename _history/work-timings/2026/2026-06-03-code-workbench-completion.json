@@ -1,0 +1,30 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-029",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_and_scope_reconciliation",
+      "elapsed_minutes_estimate": 8,
+      "notes": "Confirmed that embedding Monaco is not enough and selected a bounded workbench completion slice."
+    },
+    {
+      "phase": "backend_runtime_index",
+      "elapsed_minutes_estimate": 18,
+      "notes": "Added workspace-scoped runtime text file listing with skip dirs, scan limits, and source metadata."
+    },
+    {
+      "phase": "frontend_workbench",
+      "elapsed_minutes_estimate": 28,
+      "notes": "Added runtime catalog refresh, open editor tabs, command toolbar, Monaco diff mode, and settings popup."
+    },
+    {
+      "phase": "validation_and_records",
+      "elapsed_minutes_estimate": 24,
+      "notes": "Ran checks, builds, Browser smoke, and updated requirements/spec/history records."
+    }
+  ],
+  "bottleneck_candidates": [
+    "Installed-app E2E for runtime file refresh/open/save should become an automated Tauri smoke test."
+  ]
+}

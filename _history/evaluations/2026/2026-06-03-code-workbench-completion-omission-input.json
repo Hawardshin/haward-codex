@@ -1,0 +1,174 @@
+{
+  "task": "Desktop code workbench completion",
+  "work_mode": "ship_first",
+  "expected_items": [
+    {
+      "item_id": "not_embed_only",
+      "description": "Move beyond embedding Monaco by adding desktop workbench behavior around the editor.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx source-command-toolbar",
+        "workspace-monitor/components/MonitorShell.tsx source-editor-tabs",
+        "workspace-monitor/components/MonitorShell.tsx MonacoDiffEditor",
+        "workspace-monitor/components/MonitorShell.tsx source-settings-dialog"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "runtime_file_management",
+      "description": "Use runtime workspace files rather than only a static snapshot catalog.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs list_workspace_text_files",
+        "workspace-monitor/components/MonitorShell.tsx refreshRuntimeSourceFiles",
+        "platform-desktop-app/scripts/check-readiness.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "code_copy_and_editing",
+      "description": "Keep code copy and editing as product functionality with save and backup behavior.",
+      "source": "prior_user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx saveSourceFile",
+        "workspace-monitor/components/MonitorShell.tsx saveAllSourceDrafts",
+        "workspace-monitor/components/MonitorShell.tsx copyCurrentSourceDraft",
+        "workspace-monitor/components/MonitorShell.tsx copySourcePatchContext"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "desktop_app_structure",
+      "description": "Use a desktop-style workbench with file browser, open editor tabs, command toolbar, and settings popup instead of forcing everything into one flat web screen.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx Open Editors",
+        "workspace-monitor/components/MonitorShell.tsx Source Editor Settings",
+        "workspace-monitor/app/globals.css source-settings-dialog",
+        "workspace-monitor/app/globals.css source-editor-tabs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "file_managed_progress",
+      "description": "Manage the larger work with durable requirements, specs, tasks, validation, traceability, history, and evaluation files.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-03-code-workbench-completion/",
+        "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+        "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+        "_history/request-traces/2026/2026-06-03-code-workbench-completion.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "sensitive_boundaries",
+      "description": "Do not solve runtime indexing by scanning private/local-only folders or escaping the workspace boundary.",
+      "source": "repository_policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs SOURCE_EDITOR_SKIP_DIRS",
+        "platform-desktop-app/src-tauri/src/lib.rs list_workspace_text_files",
+        "platform-desktop-app/specs/2026-06-03-code-workbench-completion/spec.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/src-tauri/src/lib.rs",
+      "purpose": "Runtime workspace text file catalog command and boundary controls.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Desktop code workbench UI and Monaco command integration.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/app/globals.css",
+      "purpose": "Desktop workbench, tab strip, toolbar, diff shell, and settings popup styling.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-code-workbench-completion/spec.ko.md",
+      "purpose": "Task scope and acceptance criteria.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-code-workbench-completion/validation.ko.md",
+      "purpose": "Build, test, and Browser smoke validation record.",
+      "required": true
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-03-code-workbench-completion.ko.md",
+      "purpose": "Web-first official source record.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "runtime_backend_validation",
+      "description": "Rust formatting and compile checks pass for the new Tauri command.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo fmt: passed",
+        "cargo check from platform-desktop-app/src-tauri/: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace_monitor_validation",
+      "description": "Workspace Monitor check, tests, builds, customer build, perf budget, and intent maps pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter workspace-monitor run check: passed",
+        "corepack pnpm --filter workspace-monitor test: 16 passed",
+        "corepack pnpm --filter workspace-monitor run build: passed",
+        "corepack pnpm --filter workspace-monitor run build:customer: passed",
+        "corepack pnpm --filter workspace-monitor run perf:budget: within_budget, largest initial chunk 227542 bytes",
+        "corepack pnpm --filter workspace-monitor run check:intent-map: passed",
+        "corepack pnpm --filter workspace-monitor run check:intent-map:customer: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform_desktop_validation",
+      "description": "Platform Desktop readiness and test contracts cover the runtime command and UI tokens.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter platform-desktop-app test: 13 passed",
+        "corepack pnpm --filter platform-desktop-app run check: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser_smoke",
+      "description": "In-app Browser smoke confirms the developer Source Review workbench renders with no horizontal overflow.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Browser smoke: Source Review, 8 command toolbar actions, Refresh Files, Diff, Settings, 6 templates, snapshot fallback, settings dialog, body/viewport overflow 0"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [],
+  "notes": [
+    "Customer snapshot intentionally redacts Source Review; developer snapshot was used for Browser smoke, then final customer build and customer intent-map checks were restored."
+  ]
+}

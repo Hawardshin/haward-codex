@@ -284,6 +284,32 @@ struct WorkspaceTextFile {
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
+struct WorkspaceTextFileEntry {
+    id: String,
+    path: String,
+    project: String,
+    language: String,
+    extension: String,
+    size_bytes: usize,
+    line_count: usize,
+    updated_at: String,
+    truncated: bool,
+    content: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct WorkspaceTextFileListReport {
+    status: String,
+    source: String,
+    total_count: usize,
+    returned_count: usize,
+    truncated: bool,
+    files: Vec<WorkspaceTextFileEntry>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 struct WorkspaceWriteReport {
     relative_path: String,
     size_bytes: usize,
@@ -470,6 +496,10 @@ const FINISHED_SESSION_RETENTION_MS: u64 = 30 * 60 * 1000;
 const MAX_RETAINED_FINISHED_SESSIONS: usize = 40;
 const MAX_SESSION_INPUT_BYTES: usize = 20_000;
 const MAX_WORKSPACE_FILE_BYTES: usize = 1_000_000;
+const DEFAULT_WORKSPACE_SOURCE_LIST_LIMIT: usize = 240;
+const MAX_WORKSPACE_SOURCE_LIST_LIMIT: usize = 500;
+const MAX_WORKSPACE_SOURCE_SCAN_ENTRIES: usize = 8_000;
+const MAX_SOURCE_LIST_LINE_COUNT_BYTES: usize = 128_000;
 const MAX_DECISION_ANSWER_BYTES: usize = 20_000;
 const MAX_TASK_RUN_RECORDS: usize = 80;
 const MAX_TASK_PROMPT_PREVIEW_CHARS: usize = 280;
@@ -478,6 +508,27 @@ const DEFAULT_TASK_RUN_PRUNE_KEEP_COUNT: usize = 30;
 const MAX_PAYLOAD_SCAN_FILES: usize = 4_000;
 const MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS: usize = 20;
 const MAX_SUPPORT_EVENT_CHARS: usize = 600;
+
+const SOURCE_EDITOR_SKIP_DIRS: &[&str] = &[
+    "_private",
+    "outputs",
+    ".git",
+    ".next",
+    ".turbo",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+    "out",
+    "coverage",
+    ".venv",
+    "__pycache__",
+];
+
+const SOURCE_EDITOR_TEXT_EXTENSIONS: &[&str] = &[
+    "c", "cc", "cpp", "css", "en.md", "go", "h", "html", "java", "js", "json", "jsx", "ko.md",
+    "md", "mjs", "py", "rs", "sh", "sql", "toml", "ts", "tsx", "txt", "yaml", "yml",
+];
 const DEFER_MESSAGE: &str = "I will pause this lane here and collect the user decision later. Please do not make a source-affecting decision now.";
 
 static ADAPTERS: &[AdapterDefinition] = &[
@@ -1166,6 +1217,103 @@ fn read_workspace_text_file(relative_path: String) -> Result<WorkspaceTextFile, 
 }
 
 #[tauri::command]
+fn list_workspace_text_files(
+    filter: Option<String>,
+    limit: Option<usize>,
+) -> Result<WorkspaceTextFileListReport, String> {
+    let root = workspace_root()?;
+    let normalized_filter = filter.unwrap_or_default().trim().to_lowercase();
+    let limit = limit
+        .unwrap_or(DEFAULT_WORKSPACE_SOURCE_LIST_LIMIT)
+        .clamp(1, MAX_WORKSPACE_SOURCE_LIST_LIMIT);
+    let mut stack = vec![root.clone()];
+    let mut scanned_entries = 0_usize;
+    let mut files = Vec::new();
+    let mut truncated = false;
+
+    while let Some(dir) = stack.pop() {
+        if scanned_entries >= MAX_WORKSPACE_SOURCE_SCAN_ENTRIES {
+            truncated = true;
+            break;
+        }
+
+        let entries = match fs::read_dir(&dir) {
+            Ok(entries) => entries,
+            Err(_) => continue,
+        };
+
+        for entry_result in entries {
+            if scanned_entries >= MAX_WORKSPACE_SOURCE_SCAN_ENTRIES {
+                truncated = true;
+                break;
+            }
+            scanned_entries += 1;
+
+            let entry = match entry_result {
+                Ok(entry) => entry,
+                Err(_) => continue,
+            };
+            let file_name = entry.file_name().to_string_lossy().to_string();
+            let file_type = match entry.file_type() {
+                Ok(file_type) => file_type,
+                Err(_) => continue,
+            };
+
+            if file_type.is_symlink() {
+                continue;
+            }
+            if file_type.is_dir() {
+                if should_skip_source_editor_dir(&file_name) {
+                    continue;
+                }
+                stack.push(entry.path());
+                continue;
+            }
+            if !file_type.is_file() {
+                continue;
+            }
+
+            let path = entry.path();
+            let relative_path = workspace_relative_display_path(&root, &path);
+            if !is_source_editor_text_path(&relative_path) {
+                continue;
+            }
+            if !normalized_filter.is_empty()
+                && !relative_path.to_lowercase().contains(&normalized_filter)
+            {
+                continue;
+            }
+
+            let metadata = match entry.metadata() {
+                Ok(metadata) => metadata,
+                Err(_) => continue,
+            };
+            files.push(workspace_text_file_entry(
+                &root,
+                &path,
+                &relative_path,
+                &metadata,
+            ));
+        }
+    }
+
+    files.sort_by(|left, right| left.path.cmp(&right.path));
+    let total_count = files.len();
+    if total_count > limit {
+        truncated = true;
+    }
+    let files: Vec<WorkspaceTextFileEntry> = files.into_iter().take(limit).collect();
+    Ok(WorkspaceTextFileListReport {
+        status: "listed".to_string(),
+        source: "runtime_workspace_scan".to_string(),
+        total_count,
+        returned_count: files.len(),
+        truncated,
+        files,
+    })
+}
+
+#[tauri::command]
 fn write_workspace_text_file(
     relative_path: String,
     content: String,
@@ -1328,6 +1476,7 @@ pub fn run() {
             send_cli_adapter_defer_message,
             defer_all_cli_adapter_questions,
             cancel_cli_adapter_session,
+            list_workspace_text_files,
             read_workspace_text_file,
             write_workspace_text_file,
             list_human_decision_inbox,
@@ -3138,6 +3287,96 @@ fn workspace_relative_display_path(root: &Path, path: &Path) -> String {
         .unwrap_or(path)
         .to_string_lossy()
         .replace('\\', "/")
+}
+
+fn workspace_text_file_entry(
+    root: &Path,
+    path: &Path,
+    relative_path: &str,
+    metadata: &fs::Metadata,
+) -> WorkspaceTextFileEntry {
+    let extension = source_editor_extension(relative_path);
+    let project = relative_path
+        .split('/')
+        .next()
+        .filter(|value| !value.is_empty())
+        .unwrap_or("workspace")
+        .to_string();
+    let updated_at = metadata
+        .modified()
+        .ok()
+        .and_then(|value| value.duration_since(UNIX_EPOCH).ok())
+        .map(|value| format!("unix_ms:{}", value.as_millis()))
+        .unwrap_or_default();
+    let size_bytes = metadata.len() as usize;
+    let truncated = size_bytes > MAX_WORKSPACE_FILE_BYTES;
+    let line_count = if truncated || size_bytes > MAX_SOURCE_LIST_LINE_COUNT_BYTES {
+        0
+    } else {
+        fs::read_to_string(path)
+            .map(|content| content.lines().count())
+            .unwrap_or(0)
+    };
+    WorkspaceTextFileEntry {
+        id: sanitize_file_name(relative_path),
+        path: workspace_relative_display_path(root, path),
+        project,
+        language: source_editor_language(&extension).to_string(),
+        extension,
+        size_bytes,
+        line_count,
+        updated_at,
+        truncated,
+        content: String::new(),
+    }
+}
+
+fn should_skip_source_editor_dir(file_name: &str) -> bool {
+    SOURCE_EDITOR_SKIP_DIRS
+        .iter()
+        .any(|blocked| file_name.eq_ignore_ascii_case(blocked))
+}
+
+fn is_source_editor_text_path(relative_path: &str) -> bool {
+    let lower = relative_path.to_lowercase();
+    SOURCE_EDITOR_TEXT_EXTENSIONS
+        .iter()
+        .any(|extension| lower.ends_with(&format!(".{extension}")))
+}
+
+fn source_editor_extension(relative_path: &str) -> String {
+    if relative_path.ends_with(".ko.md") {
+        return "ko.md".to_string();
+    }
+    if relative_path.ends_with(".en.md") {
+        return "en.md".to_string();
+    }
+    Path::new(relative_path)
+        .extension()
+        .and_then(|value| value.to_str())
+        .unwrap_or("")
+        .to_lowercase()
+}
+
+fn source_editor_language(extension: &str) -> &'static str {
+    match extension {
+        "c" | "cc" | "cpp" | "h" => "cpp",
+        "css" => "css",
+        "go" => "go",
+        "html" => "html",
+        "java" => "java",
+        "js" | "mjs" | "jsx" => "javascript",
+        "json" => "json",
+        "ko.md" | "en.md" | "md" => "markdown",
+        "py" => "python",
+        "rs" => "rust",
+        "sh" => "shell",
+        "sql" => "sql",
+        "toml" => "toml",
+        "ts" | "tsx" => "typescript",
+        "yaml" | "yml" => "yaml",
+        _ => "text",
+    }
 }
 
 fn prompt_preview(prompt: &str) -> String {

@@ -1,0 +1,21 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-029",
+  "problem_observed": [
+    "The previous implementation embedded Monaco and added platform templates, but did not yet provide a full desktop code workbench.",
+    "The file list came from a static snapshot rather than a runtime workspace scan.",
+    "There was no tab strip, command toolbar, Monaco diff review, or editor settings popup."
+  ],
+  "accepted_decisions": [
+    "Keep Monaco as the editing engine but make workbench behavior platform-owned.",
+    "Add `list_workspace_text_files` in Rust rather than giving the browser arbitrary filesystem access.",
+    "Add open editor tabs, command toolbar, diff mode, and settings popup in Source Review.",
+    "Keep protected path and workspace escape rules in the Tauri backend."
+  ],
+  "rejected_options": [
+    "Clone or embed the whole VS Code app for this slice.",
+    "Continue using only a static source snapshot for the desktop editor.",
+    "Expose direct browser filesystem write access."
+  ],
+  "validation_gate": "Rust check, Workspace Monitor check/test/build/customer/perf, Desktop readiness/test, and Browser smoke must pass."
+}
