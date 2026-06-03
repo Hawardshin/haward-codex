@@ -10,5 +10,5 @@
     "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
   ],
   "evaluation": "_history/evaluations/2026/2026-06-03-desktop-product-layout-hardening-evaluation.json",
-  "commit": "pending"
+  "commit": "b67d76df6703061ba650ca346cb1dc3396ae26ef"
 }
