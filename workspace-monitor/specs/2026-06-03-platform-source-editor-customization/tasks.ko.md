@@ -8,4 +8,4 @@
 | TASK-WM-PSC-004 | 데스크톱 workbench 스타일과 responsive CSS 추가 | done |
 | TASK-WM-PSC-005 | 요구사항, 스펙, 히스토리, 평가 기록 작성 | done |
 | TASK-WM-PSC-006 | 빌드, 테스트, 브라우저 smoke 검증 | done |
-| TASK-WM-PSC-007 | 커밋 및 push | pending |
+| TASK-WM-PSC-007 | 커밋 및 push | in_progress |

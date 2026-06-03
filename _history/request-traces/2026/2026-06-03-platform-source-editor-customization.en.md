@@ -23,4 +23,4 @@
 ## Validation
 
 - Result: `git diff --check`, Workspace Monitor check/test/build/build:customer/perf/intent-map checks, Platform Desktop check/test, and Browser smoke passed. Work evaluator `ready_to_close`.
-- Commit: to be updated after final commit
+- Commit: `5c0e22b0` (`feat(workspace-monitor): customize source editor workflows`)

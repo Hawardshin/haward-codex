@@ -23,4 +23,4 @@
 ## 검증
 
 - 결과: `git diff --check`, Workspace Monitor check/test/build/build:customer/perf/intent-map checks, Platform Desktop check/test, Browser smoke 통과. Work evaluator `ready_to_close`.
-- 커밋: 최종 커밋 후 갱신
+- 커밋: `5c0e22b0` (`feat(workspace-monitor): customize source editor workflows`)
