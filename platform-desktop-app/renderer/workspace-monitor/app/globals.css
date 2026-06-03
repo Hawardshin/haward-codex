@@ -5540,6 +5540,233 @@ h3 {
   line-height: 1.45;
 }
 
+.search-agent-work-chat-panel {
+  background:
+    linear-gradient(180deg, rgba(22, 115, 91, 0.045), rgba(47, 103, 177, 0.035)),
+    var(--surface);
+}
+
+.search-agent-work-chat-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(280px, 0.72fr);
+  gap: 12px;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.agent-chat-workspace {
+  display: grid;
+  grid-template-rows: auto minmax(220px, 1fr) auto;
+  min-width: 0;
+  min-height: min(66vh, 720px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 8px;
+}
+
+.agent-chat-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px;
+}
+
+.agent-chat-toolbar span {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 5px 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.agent-chat-thread {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  gap: 10px;
+  overflow: auto;
+  padding: 12px;
+  scrollbar-gutter: stable;
+}
+
+.agent-chat-message {
+  display: grid;
+  width: min(88%, 720px);
+  gap: 7px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 11px 12px;
+}
+
+.agent-chat-message.user {
+  align-self: flex-end;
+  border-color: color-mix(in srgb, var(--green) 48%, var(--line));
+  background: color-mix(in srgb, var(--surface-raised) 82%, var(--green) 12%);
+}
+
+.agent-chat-message.agent,
+.agent-chat-message.system {
+  align-self: flex-start;
+}
+
+.agent-chat-message.system {
+  background: color-mix(in srgb, var(--surface-raised) 88%, var(--blue) 8%);
+}
+
+.agent-chat-message header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+}
+
+.agent-chat-message strong,
+.agent-chat-message span,
+.agent-chat-message p {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.agent-chat-message span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.agent-chat-message p {
+  margin: 0;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.agent-chat-composer {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  padding: 12px;
+}
+
+.agent-chat-composer label,
+.agent-chat-context-form label {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.agent-chat-composer span,
+.agent-chat-context-form span,
+.agent-chat-details summary,
+.agent-chat-contract-card span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.agent-chat-composer textarea,
+.agent-chat-context-form textarea {
+  width: 100%;
+  min-height: 0;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 9px 10px;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.agent-chat-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.agent-chat-actions button {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  border: 1px solid #aebbc8;
+  background: var(--surface-raised);
+  color: var(--text);
+  border-radius: var(--control-radius);
+  padding: 8px var(--control-padding-x);
+  font-weight: 800;
+  white-space: normal;
+}
+
+.agent-chat-actions .primary-action-button {
+  border-color: color-mix(in srgb, var(--green) 54%, var(--line));
+  background: color-mix(in srgb, var(--surface-raised) 80%, var(--green) 16%);
+}
+
+.agent-chat-context {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.agent-chat-details,
+.agent-chat-contract-card {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.agent-chat-details summary {
+  cursor: pointer;
+  list-style-position: inside;
+}
+
+.agent-chat-context-form {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  margin-top: 9px;
+  max-height: min(50vh, 560px);
+  overflow: auto;
+  padding-right: 2px;
+  scrollbar-gutter: stable;
+}
+
+.agent-chat-contract-card strong,
+.agent-chat-contract-card small {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.agent-chat-contract-card small {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
 .agent-factory-layout,
 .learning-feedback-layout {
   display: grid;
@@ -9357,6 +9584,7 @@ h3 {
   .philosophy-feature-layout,
   .intent-map-layout,
   .search-agent-run-layout,
+  .search-agent-work-chat-layout,
   .agent-factory-layout,
   .learning-feedback-layout,
   .mode-switchboard-layout {
@@ -9431,6 +9659,8 @@ h3 {
   .source-customization-bar,
   .source-settings-grid,
   .search-agent-run-form,
+  .agent-chat-actions,
+  .agent-chat-context-form,
   .agent-factory-form,
   .learning-decision-controls,
   .mode-option-grid {
@@ -9612,6 +9842,8 @@ h3 {
 
   .workspace-home-actions,
   .search-agent-run-form,
+  .agent-chat-actions,
+  .agent-chat-context-form,
   .desktop-run-timeline,
   .home-metrics-strip,
   .main-feature-detail,

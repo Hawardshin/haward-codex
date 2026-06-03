@@ -1,0 +1,106 @@
+{
+  "task": "Convert the existing search agent surface into a work chat where the user starts real work.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "chat_is_work_surface",
+      "description": "The search agent surface must be a work chat, not just a launch form.",
+      "source": "UR-2026-06-04-004 / REQ-PDA-071",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "start_work_from_chat",
+      "description": "The user must start the search agent work from the chat composer.",
+      "source": "UR-2026-06-04-004",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "SearchAgentWorkChatPanel",
+        "작업 시작",
+        "Browser smoke: outputs/browser-smoke/agent-chat-workbench.png"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "runtime_linked",
+      "description": "The chat start must connect to the existing research_insight_agent runtime path.",
+      "source": "REQ-PDA-068 / REQ-PDA-071",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "start_cli_adapter_session",
+        "taskKind=research_insight_agent",
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "_history/web-searches/2026/2026-06-04-agent-chat-workbench.ko.md",
+      "purpose": "Web-first intake record.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-04-agent-chat-workbench.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-04-existing-search-agent-run.ko.md",
+      "purpose": "Updated project requirement REQ-PDA-071.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/spec.ko.md",
+      "purpose": "Updated active spec.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "renderer-check",
+      "description": "TypeScript, scroll, and source-control UI checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "tests-and-readiness",
+      "description": "Platform tests, workspace monitor tests, and product readiness pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter platform-desktop-app test",
+        "corepack pnpm --filter workspace-monitor test",
+        "corepack pnpm --filter platform-desktop-app run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "Static UI smoke verifies the search agent work chat and click behavior.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "outputs/browser-smoke/agent-chat-workbench.png"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Live terminal output is still rendered by DesktopRuntimePanel, so inline streaming inside the Agents chat would require lifting shared runtime state."
+  ],
+  "notes": [
+    "Static browser smoke cannot call native Tauri runtime; preview-mode message verifies the fallback UI while readiness tests cover the command contract."
+  ]
+}

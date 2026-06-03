@@ -101,7 +101,7 @@ test("product feature registry makes agent platform primary", () => {
   assert.equal(registry.feature_layers.find((feature) => feature.id === "observability_monitoring")?.role, "supporting");
   assert.match(serialized, /Agent Orchestration/);
   assert.match(serialized, /Agent Factory/);
-  assert.match(serialized, /Search Agent Quick Run/);
+  assert.match(serialized, /Search Agent Work Chat/);
   assert.match(serialized, /Learning & Evaluation Loop/);
   assert.match(serialized, /supporting observability/);
   assert.match(serialized, /operator_surfaces_are_separate/);
@@ -538,7 +538,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(monitorShell, /decisionInboxItems/);
   assert.match(monitorShell, /adapterSetupGuides/);
   assert.match(monitorShell, /sessionModePresets/);
-  assert.match(monitorShell, /SearchAgentQuickRunPanel/);
+  assert.match(monitorShell, /SearchAgentWorkChatPanel/);
+  assert.match(monitorShell, /SearchAgentChatMessage/);
   assert.match(monitorShell, /renderSearchAgentPrompt/);
   assert.match(monitorShell, /research-insight-planner-agent/);
   assert.match(lib, /research_insight_agent_pipe/);
@@ -584,8 +585,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Init task pipe",
     "Init Pipe",
     "merge gate",
-    "검색 에이전트 바로 실행",
-    "검색 에이전트 실행",
+    "검색 에이전트 작업 채팅",
+    "작업 시작",
+    "agent-chat-thread",
     "Search Agent Pipe",
     "decision replay",
     "Auto-defer questions",

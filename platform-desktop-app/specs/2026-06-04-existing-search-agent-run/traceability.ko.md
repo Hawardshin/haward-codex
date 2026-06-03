@@ -2,11 +2,12 @@
 
 | 요구사항 | 구현 | 검증 |
 | --- | --- | --- |
-| REQ-PDA-066 | `SearchAgentQuickRunPanel`, `run-search-agent` command item | readiness test, browser smoke |
+| REQ-PDA-066 | `SearchAgentWorkChatPanel`, `run-search-agent` command item | readiness test, browser smoke |
 | REQ-PDA-067 | `renderSearchAgentPrompt` | TypeScript check, readiness token |
 | REQ-PDA-068 | `RuntimeLaunchRequest`, `start_cli_adapter_session(taskKind)`, `research_insight_agent` | Rust `cargo check`, task-run readiness assertions |
-| REQ-PDA-069 | Agents 화면에서 quick run panel을 Agent Factory보다 먼저 렌더링 | browser smoke, source review |
+| REQ-PDA-069 | Agents 화면에서 work chat panel을 Agent Factory보다 먼저 렌더링 | browser smoke, source review |
 | REQ-PDA-070 | Desktop quick start, command palette entry | browser smoke, readiness token |
+| REQ-PDA-071 | `SearchAgentChatMessage`, `agent-chat-thread`, `작업 시작` composer | browser smoke, readiness token |
 
 ## 관련 파일
 

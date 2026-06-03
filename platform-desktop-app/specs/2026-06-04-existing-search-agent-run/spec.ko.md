@@ -6,9 +6,9 @@
 
 ## 기능 범위
 
-- Agents 화면 최상단에 `research-insight-planner-agent` 실행 패널을 추가한다.
+- Agents 화면 최상단에 `research-insight-planner-agent` 작업 채팅 패널을 추가한다.
 - 목표, 검색 질문, 검색 채널, 저장 위치, 메모를 받아 구조화된 초기 프롬프트를 만든다.
-- command palette와 Desktop quick start에서도 검색 에이전트를 실행할 수 있게 한다.
+- command palette와 Desktop quick start에서도 검색 에이전트 작업 채팅으로 진입할 수 있게 한다.
 - Tauri `start_cli_adapter_session`은 optional `taskKind`를 받아 task-run store에 `research_insight_agent`를 남긴다.
 - multi-lane 실행용 `research_insight_agent_pipe`를 추가한다.
 - 제품 기능/사용자 흐름/런타임 계약/검증 스크립트에 검색 에이전트 실행을 기록한다.
@@ -21,7 +21,7 @@
 
 ## 수용 기준
 
-- 사용자는 Agents 화면에서 검색 에이전트 실행 버튼을 볼 수 있다.
-- 클릭하면 하단 터미널 drawer가 열리고, 구조화된 프롬프트가 선택 adapter 세션에 주입된다.
+- 사용자는 Agents 화면에서 검색 에이전트 작업 채팅을 볼 수 있다.
+- 사용자가 `작업 시작`을 누르면 채팅 메시지가 남고, 하단 터미널 drawer가 열리며, 구조화된 프롬프트가 선택 adapter 세션에 주입된다.
 - 실행 기록은 `taskKind=research_insight_agent`로 저장된다.
-- readiness 테스트가 `research-insight-planner-agent`, `SearchAgentQuickRunPanel`, `research_insight_agent_pipe`를 확인한다.
+- readiness 테스트가 `research-insight-planner-agent`, `SearchAgentWorkChatPanel`, `SearchAgentChatMessage`, `research_insight_agent_pipe`를 확인한다.

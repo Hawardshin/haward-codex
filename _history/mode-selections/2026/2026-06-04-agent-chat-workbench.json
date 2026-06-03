@@ -1,0 +1,22 @@
+{
+  "schema_version": "work-mode-selection.v1",
+  "request_id": "UR-2026-06-04-004",
+  "selected_mode": "standard",
+  "reason": "This changes durable desktop app UX and runtime entry behavior, but does not change repository governance rules or release policy.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "owning_project": "platform-desktop-app",
+  "resource_risk_occurred": true,
+  "resource_risk_reason": "Validation uses local static server and browser automation.",
+  "required_closeout_targets": [
+    "web_search_record_targets",
+    "mode_selection_record_targets",
+    "omission_check_targets",
+    "resource_check_targets",
+    "requirements_targets",
+    "spec_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets"
+  ]
+}

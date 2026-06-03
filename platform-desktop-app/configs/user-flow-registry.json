@@ -470,7 +470,7 @@
       ],
       "contents": [
         "guided task form",
-        "existing search agent quick run",
+        "existing search agent work chat",
         "work mode selector",
         "research requirement indicator",
         "notification toggle"
@@ -526,7 +526,7 @@
   "task_run_flow": [
     {
       "step": "select_existing_agent",
-      "screen": "Agents / Search Agent Quick Run",
+      "screen": "Agents / Search Agent Work Chat",
       "required_inputs": [
         "objective or question"
       ],
@@ -538,7 +538,8 @@
       ],
       "required_behavior": [
         "show the existing research-insight-planner-agent before agent creation",
-        "start the run through the platform runtime without requiring the user to type a shell command",
+        "start the run from a chat workbench without requiring the user to type a shell command",
+        "keep terminal output, decision prompts, and task-run records connected to the chat request",
         "persist the run as taskKind research_insight_agent"
       ]
     },
@@ -609,9 +610,10 @@
   "ai_cli_orchestration_flow": [
     {
       "step": "run_existing_search_agent",
-      "screen": "Agents / Search Agent Quick Run",
+      "screen": "Agents / Search Agent Work Chat",
       "required_behavior": [
-        "render the research-insight-planner-agent config and input schema as a ready-to-run product preset",
+        "render the research-insight-planner-agent config and input schema as a work-chat product preset",
+        "treat the chat composer as the primary place where the user starts the agent work",
         "inject a structured prompt into the selected guest adapter",
         "open the bottom terminal drawer automatically",
         "store stdout, stderr, decision prompts, and task-run metadata in the runtime data store"

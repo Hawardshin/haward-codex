@@ -23,9 +23,11 @@ import {
   Languages,
   LayoutDashboard,
   ListFilter,
+  MessageSquare,
   Network,
   PlayCircle,
   Search,
+  Send,
   Settings,
   ShieldCheck,
   SquareTerminal,
@@ -166,6 +168,14 @@ type SearchAgentRunForm = {
   searchChannels: string;
   captureTargets: string;
   notes: string;
+};
+
+type SearchAgentChatMessage = {
+  id: string;
+  role: "agent" | "user" | "system";
+  title: string;
+  body: string;
+  meta: string;
 };
 
 type AgentFactoryProposalReport = {
@@ -1536,6 +1546,23 @@ const defaultSearchAgentRunForm: SearchAgentRunForm = {
   notes: "출처, 한계, 계획 영향을 분리하고 약한 근거는 실행 근거로 쓰지 않습니다."
 };
 
+const defaultSearchAgentChatMessages: SearchAgentChatMessage[] = [
+  {
+    id: "research-agent-ready",
+    role: "agent",
+    title: "검색 에이전트",
+    body: "여기에 작업을 입력하면 기존 research-insight-planner-agent가 외부 검색, 저장소 근거 확인, 실행 계획 작성을 맡습니다.",
+    meta: researchInsightAgentId
+  },
+  {
+    id: "research-agent-runtime",
+    role: "system",
+    title: "작업 방식",
+    body: "작업은 이 채팅에서 시작하고, 실제 실행 로그와 장기 출력은 하단 다중 CLI 터미널 및 task-run store에 연결됩니다.",
+    meta: "chat + terminal lane + task-run store"
+  }
+];
+
 const sessionModePresets: SessionModePreset[] = [
   {
     id: "research_insight_agent",
@@ -1723,6 +1750,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [activeHomeTab, setActiveHomeTab] = useState<CoreFeatureTabId>("files");
   const commandInputRef = useRef<HTMLInputElement>(null);
   const [searchAgentRunForm, setSearchAgentRunForm] = useState<SearchAgentRunForm>(defaultSearchAgentRunForm);
+  const [searchAgentChatMessages, setSearchAgentChatMessages] =
+    useState<SearchAgentChatMessage[]>(defaultSearchAgentChatMessages);
   const [runtimeLaunchRequest, setRuntimeLaunchRequest] = useState<RuntimeLaunchRequest | null>(null);
   const [agentFactoryForm, setAgentFactoryForm] = useState<AgentFactoryForm>(defaultAgentFactoryForm);
   const [agentFactoryProposal, setAgentFactoryProposal] = useState<AgentFactoryProposalReport | null>(null);
@@ -2388,24 +2417,99 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     setSettingsOpen(true);
   };
   const openTerminalDrawer = () => {
-    setSection("desktop");
     setTerminalDrawerOpen(true);
+  };
+  const openSearchAgentWorkbench = () => {
+    setSection("agents");
   };
   const updateSearchAgentRunForm = (field: keyof SearchAgentRunForm, value: string) => {
     setSearchAgentRunForm((current) => ({ ...current, [field]: value }));
   };
-  const launchSearchAgent = () => {
-    setRuntimeLaunchRequest({
-      id: `research-insight-agent-${Date.now()}`,
-      label: uiLanguage === "ko" ? "검색 에이전트" : "Search Agent",
-      adapterId: runtimeInitDefaults.adapterId || defaultRuntimeInitDefaults.adapterId,
-      modeId: "research_insight_agent",
-      taskKind: "research_insight_agent",
-      prompt: renderSearchAgentPrompt(searchAgentRunForm, uiLanguage),
-      openTerminal: true,
-      autoStart: true
-    });
-    openTerminalDrawer();
+  const launchSearchAgent = async () => {
+    const requestId = `research-insight-agent-${Date.now()}`;
+    const objective = searchAgentRunForm.objective.trim() || defaultSearchAgentRunForm.objective;
+    const prompt = renderSearchAgentPrompt(searchAgentRunForm, uiLanguage);
+    setSearchAgentChatMessages((current) =>
+      [
+        ...current,
+        {
+          id: `${requestId}-user`,
+          role: "user" as const,
+          title: uiLanguage === "ko" ? "사용자 작업" : "User Task",
+          body: objective,
+          meta: uiLanguage === "ko" ? "작업 채팅에서 시작" : "Started from work chat"
+        },
+        {
+          id: `${requestId}-agent`,
+          role: "agent" as const,
+          title: uiLanguage === "ko" ? "실행 준비" : "Run Ready",
+          body:
+            uiLanguage === "ko"
+              ? "이 요청을 검색 에이전트 런타임 세션으로 연결합니다. 긴 출력, 질문, 검증 로그는 하단 터미널과 task-run store에서 이어집니다."
+              : "This request is being linked to the search agent runtime session. Long output, questions, and validation logs continue in the bottom terminal and task-run store.",
+          meta: "taskKind=research_insight_agent"
+        }
+      ].slice(-12)
+    );
+    setTerminalDrawerOpen(true);
+
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setSearchAgentChatMessages((current) =>
+        [
+          ...current,
+          {
+            id: `${requestId}-preview`,
+            role: "system" as const,
+            title: uiLanguage === "ko" ? "미리보기 모드" : "Preview Mode",
+            body:
+              uiLanguage === "ko"
+                ? "현재 화면은 브라우저 미리보기라 native 런타임을 호출할 수 없습니다. 설치 앱에서는 같은 버튼이 세션을 시작합니다."
+                : "This browser preview cannot call the native runtime. In the installed app, the same button starts the session.",
+            meta: "native runtime unavailable"
+          }
+        ].slice(-12)
+      );
+      return;
+    }
+
+    try {
+      const report = await tauriInvoke<CliSessionReport>("start_cli_adapter_session", {
+        adapterId: runtimeInitDefaults.adapterId || defaultRuntimeInitDefaults.adapterId,
+        prompt,
+        autoDeferQuestions: runtimeInitDefaults.autoDeferQuestions,
+        taskKind: "research_insight_agent"
+      });
+      setSearchAgentChatMessages((current) =>
+        [
+          ...current,
+          {
+            id: `${requestId}-started`,
+            role: "agent" as const,
+            title: uiLanguage === "ko" ? "세션 시작됨" : "Session Started",
+            body:
+              uiLanguage === "ko"
+                ? "검색 에이전트 세션이 시작됐습니다. 하단 터미널 drawer에서 출력과 질문 흐름을 계속 확인할 수 있습니다."
+                : "The search agent session started. Continue watching output and questions in the bottom terminal drawer.",
+            meta: report.sessionId
+          }
+        ].slice(-12)
+      );
+    } catch (caught) {
+      const message = errorMessage(caught);
+      setSearchAgentChatMessages((current) =>
+        [
+          ...current,
+          {
+            id: `${requestId}-failed`,
+            role: "system" as const,
+            title: uiLanguage === "ko" ? "실행 실패" : "Run Failed",
+            body: message,
+            meta: "capability_missing or runtime error"
+          }
+        ].slice(-12)
+      );
+    }
   };
   const updateAgentFactoryForm = (field: keyof AgentFactoryForm, value: string) => {
     setAgentFactoryForm((current) => ({ ...current, [field]: value }));
@@ -2625,16 +2729,16 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     },
     {
       id: "run-search-agent",
-      label: uiLanguage === "ko" ? "검색 에이전트 실행" : "Run Search Agent",
+      label: uiLanguage === "ko" ? "검색 에이전트 작업 채팅" : "Search Agent Work Chat",
       detail:
         uiLanguage === "ko"
-          ? "이미 만들어둔 research-insight-planner-agent를 하단 터미널 lane에서 바로 실행합니다."
-          : "Run the existing research-insight-planner-agent in the bottom terminal lane.",
+          ? "이미 만들어둔 research-insight-planner-agent로 작업을 시작하는 채팅 패널을 엽니다."
+          : "Open the chat workbench for the existing research-insight-planner-agent.",
       group: uiLanguage === "ko" ? "에이전트 실행" : "Agent Run",
       icon: Search,
       badge: researchInsightAgent ? "ready" : "config",
       keywords: ["search", "research", "agent", "planner", researchInsightAgentId],
-      run: launchSearchAgent
+      run: openSearchAgentWorkbench
     },
     {
       id: "settings-appearance",
@@ -3608,6 +3712,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           initDefaults={runtimeInitDefaults}
           launchRequest={runtimeLaunchRequest}
           onLaunchRequestConsumed={() => setRuntimeLaunchRequest(null)}
+          onOpenSearchAgentWorkbench={openSearchAgentWorkbench}
           onOpenSettings={() => openSettingsTab("execution")}
           terminalDrawerOpen={terminalDrawerOpen}
           setTerminalDrawerOpen={setTerminalDrawerOpen}
@@ -3884,6 +3989,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           initDefaults={runtimeInitDefaults}
           launchRequest={runtimeLaunchRequest}
           onLaunchRequestConsumed={() => setRuntimeLaunchRequest(null)}
+          onOpenSearchAgentWorkbench={openSearchAgentWorkbench}
           onOpenSettings={() => openSettingsTab("execution")}
           terminalDrawerOpen={terminalDrawerOpen}
           setTerminalDrawerOpen={setTerminalDrawerOpen}
@@ -3924,8 +4030,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             <Metric label="Blocked" value={collaborationBoard.summary.blockedTasks} icon={ShieldCheck} tone="violet" />
           </section>
 
-          <SearchAgentQuickRunPanel
+          <SearchAgentWorkChatPanel
             form={searchAgentRunForm}
+            messages={searchAgentChatMessages}
             agentAvailable={Boolean(researchInsightAgent)}
             language={uiLanguage}
             runtimeLaunchQueued={runtimeLaunchRequest?.taskKind === "research_insight_agent"}
@@ -4031,8 +4138,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   );
 }
 
-function SearchAgentQuickRunPanel({
+function SearchAgentWorkChatPanel({
   form,
+  messages,
   agentAvailable,
   language,
   runtimeLaunchQueued,
@@ -4041,6 +4149,7 @@ function SearchAgentQuickRunPanel({
   onRun
 }: {
   form: SearchAgentRunForm;
+  messages: SearchAgentChatMessage[];
   agentAvailable: boolean;
   language: UiLanguage;
   runtimeLaunchQueued: boolean;
@@ -4052,92 +4161,128 @@ function SearchAgentQuickRunPanel({
   const statusLabel = agentAvailable ? (ko ? "준비됨" : "Ready") : ko ? "설정 확인" : "Check config";
 
   return (
-    <section className="panel wide search-agent-run-panel">
+    <section className="panel wide search-agent-work-chat-panel">
       <div className="panel-heading">
         <div>
-          <p className="eyebrow">{ko ? "기존 에이전트 실행" : "Existing Agent Run"}</p>
-          <h2>{ko ? "검색 에이전트 바로 실행" : "Run the Search Agent"}</h2>
+          <p className="eyebrow">{ko ? "기존 에이전트 작업대" : "Existing Agent Workbench"}</p>
+          <h2>{ko ? "검색 에이전트 작업 채팅" : "Search Agent Work Chat"}</h2>
           <p>
             {ko
-              ? "이미 등록된 research-insight-planner-agent를 사용해서 외부 검색, 저장소 근거 확인, 실행 계획 생성을 한 번에 시작합니다."
-              : "Start the existing research-insight-planner-agent for external search, repository evidence, and planning."}
+              ? "여기에서 작업을 입력하면 이미 등록된 research-insight-planner-agent가 하단 터미널 lane과 task-run 기록을 붙여서 실제 작업을 시작합니다."
+              : "Type the work here and the existing research-insight-planner-agent starts the real run with a bottom terminal lane and task-run record."}
           </p>
         </div>
         <span className="result-count">{runtimeLaunchQueued ? (ko ? "실행 준비 중" : "Queued") : statusLabel}</span>
       </div>
 
-      <div className="search-agent-run-layout">
-        <div className="search-agent-run-form" aria-label={ko ? "검색 에이전트 실행 입력" : "Search agent run input"}>
-          <label className="wide-field">
-            <span>{ko ? "찾을 내용" : "Objective"}</span>
-            <textarea
-              rows={3}
-              value={form.objective}
-              onChange={(event) => onChange("objective", event.target.value)}
-            />
-          </label>
-          <label>
-            <span>{ko ? "검색 질문" : "Search Questions"}</span>
-            <textarea
-              rows={7}
-              value={form.questions}
-              onChange={(event) => onChange("questions", event.target.value)}
-            />
-          </label>
-          <label>
-            <span>{ko ? "검색 채널" : "Search Channels"}</span>
-            <textarea
-              rows={7}
-              value={form.searchChannels}
-              onChange={(event) => onChange("searchChannels", event.target.value)}
-            />
-          </label>
-          <label>
-            <span>{ko ? "저장 위치" : "Capture Targets"}</span>
-            <textarea
-              rows={5}
-              value={form.captureTargets}
-              onChange={(event) => onChange("captureTargets", event.target.value)}
-            />
-          </label>
-          <label>
-            <span>{ko ? "실행 메모" : "Run Notes"}</span>
-            <textarea
-              rows={5}
-              value={form.notes}
-              onChange={(event) => onChange("notes", event.target.value)}
-            />
-          </label>
-          <div className="search-agent-actions">
-            <button type="button" className="primary-action-button" onClick={onRun}>
-              <PlayCircle size={16} aria-hidden="true" />
-              <span>{ko ? "검색 에이전트 실행" : "Run Search Agent"}</span>
-            </button>
-            <button type="button" onClick={onOpenTerminal}>
-              <SquareTerminal size={16} aria-hidden="true" />
-              <span>{ko ? "터미널 보기" : "Open Terminal"}</span>
-            </button>
+      <div className="search-agent-work-chat-layout">
+        <div className="agent-chat-workspace" aria-label={ko ? "검색 에이전트 작업 채팅" : "Search agent work chat"}>
+          <div className="agent-chat-toolbar" aria-label={ko ? "작업 연결 상태" : "Work connection status"}>
+            <span>
+              <MessageSquare size={14} aria-hidden="true" />
+              {ko ? "채팅에서 작업 시작" : "Start in chat"}
+            </span>
+            <span>
+              <SquareTerminal size={14} aria-hidden="true" />
+              {ko ? "하단 터미널 연결" : "Bottom terminal linked"}
+            </span>
+            <span>
+              <FileSearch size={14} aria-hidden="true" />
+              {ko ? "근거와 파일 컨텍스트 사용" : "Evidence and files"}
+            </span>
+          </div>
+
+          <div className="agent-chat-thread" role="log" aria-label={ko ? "검색 에이전트 대화" : "Search agent conversation"}>
+            {messages.map((message) => (
+              <article key={message.id} className={`agent-chat-message ${message.role}`}>
+                <header>
+                  <strong>{message.title}</strong>
+                  <span>{message.meta}</span>
+                </header>
+                <p>{message.body}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="agent-chat-composer">
+            <label>
+              <span>{ko ? "작업 입력" : "Work Request"}</span>
+              <textarea
+                rows={5}
+                value={form.objective}
+                placeholder={ko ? "검색 에이전트가 처리할 일을 입력하세요." : "Describe the work for the search agent."}
+                onChange={(event) => onChange("objective", event.target.value)}
+              />
+            </label>
+            <div className="agent-chat-actions">
+              <button type="button" className="primary-action-button" onClick={onRun}>
+                <Send size={16} aria-hidden="true" />
+                <span>{ko ? "작업 시작" : "Start Work"}</span>
+              </button>
+              <button type="button" onClick={onOpenTerminal}>
+                <SquareTerminal size={16} aria-hidden="true" />
+                <span>{ko ? "터미널 보기" : "Open Terminal"}</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        <aside className="search-agent-contract">
-          <div>
+        <aside className="agent-chat-context">
+          <details className="agent-chat-details" open>
+            <summary>{ko ? "작업 컨텍스트" : "Work Context"}</summary>
+            <div className="agent-chat-context-form">
+              <label>
+                <span>{ko ? "검색 질문" : "Search Questions"}</span>
+                <textarea
+                  rows={6}
+                  value={form.questions}
+                  onChange={(event) => onChange("questions", event.target.value)}
+                />
+              </label>
+              <label>
+                <span>{ko ? "검색 채널" : "Search Channels"}</span>
+                <textarea
+                  rows={5}
+                  value={form.searchChannels}
+                  onChange={(event) => onChange("searchChannels", event.target.value)}
+                />
+              </label>
+              <label>
+                <span>{ko ? "저장 위치" : "Capture Targets"}</span>
+                <textarea
+                  rows={4}
+                  value={form.captureTargets}
+                  onChange={(event) => onChange("captureTargets", event.target.value)}
+                />
+              </label>
+              <label>
+                <span>{ko ? "실행 메모" : "Run Notes"}</span>
+                <textarea
+                  rows={4}
+                  value={form.notes}
+                  onChange={(event) => onChange("notes", event.target.value)}
+                />
+              </label>
+            </div>
+          </details>
+
+          <div className="agent-chat-contract-card">
             <span>{ko ? "사용 에이전트" : "Agent"}</span>
             <strong>{researchInsightAgentId}</strong>
             <small>{researchInsightAgentConfigPath}</small>
           </div>
-          <div>
+          <div className="agent-chat-contract-card">
             <span>{ko ? "입력 스키마" : "Input Schema"}</span>
             <strong>research-insight-plan-template</strong>
             <small>{researchInsightPlanTemplatePath}</small>
           </div>
-          <div>
+          <div className="agent-chat-contract-card">
             <span>{ko ? "실행 결과" : "Output"}</span>
             <strong>{ko ? "근거, 불확실성, 실행 계획, 검증" : "Evidence, uncertainty, plan, validation"}</strong>
             <small>
               {ko
-                ? "결정이 필요한 질문은 decision inbox로 보류하고, 실행 기록은 task run store에 남습니다."
-                : "Questions go to the decision inbox, and runs are stored in the task run store."}
+                ? "질문은 decision inbox로 보류하고, 실행 기록은 task-run store에 남습니다."
+                : "Questions go to the decision inbox, and runs are stored in the task-run store."}
             </small>
           </div>
         </aside>
@@ -5052,6 +5197,7 @@ function DesktopRuntimePanel({
   initDefaults,
   launchRequest,
   onLaunchRequestConsumed,
+  onOpenSearchAgentWorkbench,
   onOpenSettings,
   terminalDrawerOpen,
   setTerminalDrawerOpen,
@@ -5064,6 +5210,7 @@ function DesktopRuntimePanel({
   initDefaults: RuntimeInitDefaults;
   launchRequest?: RuntimeLaunchRequest | null;
   onLaunchRequestConsumed?: (requestId: string) => void;
+  onOpenSearchAgentWorkbench?: () => void;
   onOpenSettings: () => void;
   terminalDrawerOpen: boolean;
   setTerminalDrawerOpen: (open: boolean) => void;
@@ -7242,9 +7389,13 @@ function DesktopRuntimePanel({
             <span>{uiLanguage === "ko" ? "CLI 자동 확인" : "Check CLIs"}</span>
             <small>{availableCount} / {adapters.length} ready</small>
           </button>
-          <button type="button" onClick={startDefaultSearchAgent} disabled={!invoke || runningAdapterId !== ""}>
+          <button
+            type="button"
+            onClick={onOpenSearchAgentWorkbench || startDefaultSearchAgent}
+            disabled={!onOpenSearchAgentWorkbench && (!invoke || runningAdapterId !== "")}
+          >
             <Search size={16} aria-hidden="true" />
-            <span>{uiLanguage === "ko" ? "검색 에이전트 실행" : "Run search agent"}</span>
+            <span>{uiLanguage === "ko" ? "검색 에이전트 작업 채팅" : "Search agent chat"}</span>
             <small>{researchInsightAgentId}</small>
           </button>
           <button type="button" onClick={() => setTerminalDrawerOpen(true)}>
@@ -7300,9 +7451,13 @@ function DesktopRuntimePanel({
             <span>Start selected lane</span>
             <small>{selectedMode.label}</small>
           </button>
-          <button type="button" onClick={startDefaultSearchAgent} disabled={!invoke || runningAdapterId !== ""}>
+          <button
+            type="button"
+            onClick={onOpenSearchAgentWorkbench || startDefaultSearchAgent}
+            disabled={!onOpenSearchAgentWorkbench && (!invoke || runningAdapterId !== "")}
+          >
             <Search size={16} aria-hidden="true" />
-            <span>{uiLanguage === "ko" ? "검색 에이전트 실행" : "Run search agent"}</span>
+            <span>{uiLanguage === "ko" ? "검색 에이전트 작업 채팅" : "Search agent chat"}</span>
             <small>research_insight_agent</small>
           </button>
           <button type="button" onClick={initTaskPipe} disabled={!invoke || runningAdapterId !== ""}>

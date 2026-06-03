@@ -1,0 +1,36 @@
+{
+  "schema_version": "plan-evidence.v1",
+  "request_id": "UR-2026-06-04-004",
+  "work_slug": "agent-chat-workbench",
+  "research_profile_paths": [
+    "agent-platform/configs/research/research-agent-profile.json"
+  ],
+  "external_sources_checked": [
+    "https://code.visualstudio.com/docs/chat/copilot-chat",
+    "https://code.visualstudio.com/docs/copilot/chat/chat-checkpoints",
+    "https://code.visualstudio.com/docs/copilot/workspace-context",
+    "https://docs.openhands.dev/sdk/guides/agent-interactive-terminal"
+  ],
+  "local_sources_checked": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/configs/user-flow-registry.json",
+    "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json"
+  ],
+  "language_options": [
+    "React/TypeScript renderer state only",
+    "Rust/Tauri runtime model change"
+  ],
+  "selected_language": "React/TypeScript renderer state with existing Rust runtime contract",
+  "language_decision_notes": "The requirement is primarily a user-facing entry surface; the existing Rust runtime session path already supports taskKind and terminal linkage.",
+  "architecture_options": [
+    "Replace quick-run form with a chat workbench that launches existing runtime sessions",
+    "Create a separate full chat runtime service"
+  ],
+  "architecture_decision_notes": "The smallest durable product slice is to make the existing agent preset a work-chat surface and keep terminal/task-run ownership in the current runtime.",
+  "folder_structure_options": [
+    "Keep the panel in MonitorShell because surrounding runtime launch state is already there",
+    "Extract a new SearchAgentWorkChat component file"
+  ],
+  "folder_structure_decision_notes": "Keep in MonitorShell for this slice to avoid moving shared runtime state; extraction is appropriate after more existing-agent presets are added."
+}

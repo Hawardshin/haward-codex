@@ -290,7 +290,7 @@
       "primary_surfaces": [
         "Desktop Runtime",
         "Run Board",
-        "Search Agent Quick Run",
+        "Search Agent Work Chat",
         "Task Pipe",
         "Process Graph",
         "Decision Inbox"
@@ -304,7 +304,7 @@
         "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
       ],
       "automation_targets": [
-        "existing search agent quick-run",
+        "existing search agent work-chat",
         "task intake to multi-lane plan",
         "bounded stdout and stderr capture",
         "human decision defer and resume",
@@ -320,7 +320,7 @@
         "resource cleanup results"
       ],
       "validation_gates": [
-        "search agent quick-run exposes research-insight-planner-agent",
+        "search agent work-chat exposes research-insight-planner-agent",
         "readiness test includes product feature architecture",
         "resource guard covers long-running lanes",
         "customer snapshot preserves feature claims without internal source"
@@ -417,7 +417,7 @@
       "primary_section": "agents",
       "primary_surfaces": [
         "Agents",
-        "Search Agent Quick Run",
+        "Search Agent Work Chat",
         "Capability Center",
         "Philosophy Feature Factory",
         "Mode & Function Switchboard",

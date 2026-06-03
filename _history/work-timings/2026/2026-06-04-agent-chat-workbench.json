@@ -1,0 +1,23 @@
+{
+  "schema_version": "work-timing.v1",
+  "request_id": "UR-2026-06-04-004",
+  "work_slug": "agent-chat-workbench",
+  "started_at": "2026-06-04T00:00:00+09:00",
+  "phases": [
+    {
+      "phase": "web_first_intake_and_local_discovery",
+      "elapsed_note": "checked official agent chat and interactive terminal references, inspected existing search agent quick-run implementation"
+    },
+    {
+      "phase": "implementation",
+      "elapsed_note": "converted quick-run form to search agent work chat, connected command surfaces, and added responsive styling"
+    },
+    {
+      "phase": "validation_and_closeout",
+      "elapsed_note": "run type checks, tests, config checks, build, browser smoke, and closeout guards"
+    }
+  ],
+  "bottlenecks": [
+    "runtime sessions remain owned inside DesktopRuntimePanel, so chat status can queue/link launches but cannot yet stream live output inline without lifting session state"
+  ]
+}

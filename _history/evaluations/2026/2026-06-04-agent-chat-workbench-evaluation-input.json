@@ -1,0 +1,99 @@
+{
+  "initial_instruction": "검색 에이전트 채팅창이 나오면 그곳에서 실제 작업을 해야 한다.",
+  "result_summary": "Converted the existing search agent surface into a work chat. The user starts work with the chat composer, the app calls start_cli_adapter_session with taskKind=research_insight_agent in the installed runtime, and command palette/Desktop quick start now route to the work chat.",
+  "work_mode": "standard",
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/configs/product-feature-registry.json",
+    "platform-desktop-app/configs/user-flow-registry.json",
+    "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/docs/requirements/2026-06-04-existing-search-agent-run.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-04-existing-search-agent-run.en.md",
+    "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/traceability.ko.md",
+    "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/validation.ko.md"
+  ],
+  "verification": [
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check: passed",
+    "JSON parse/config contract checks: passed",
+    "corepack pnpm --filter platform-desktop-app test: passed 21 tests",
+    "corepack pnpm --filter workspace-monitor test: passed 17 tests",
+    "corepack pnpm --filter platform-desktop-app run check: passed",
+    "corepack pnpm --filter workspace-monitor run build:customer: passed",
+    "corepack pnpm --filter platform-desktop-app run customer-bundle:audit: passed",
+    "Browser smoke: passed, screenshot outputs/browser-smoke/agent-chat-workbench.png",
+    "check-omissions: coverage_ready",
+    "check-resources: resource_ready"
+  ],
+  "references_checked": [
+    "https://code.visualstudio.com/docs/chat/copilot-chat",
+    "https://code.visualstudio.com/docs/copilot/chat/chat-checkpoints",
+    "https://code.visualstudio.com/docs/copilot/workspace-context",
+    "https://docs.openhands.dev/sdk/guides/agent-interactive-terminal",
+    "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-04-agent-chat-workbench.ko.md",
+    "_history/evaluations/2026/2026-06-04-agent-chat-workbench.ko.md"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-04-agent-chat-workbench.ko.md",
+    "_history/plan-evidence/2026/2026-06-04-agent-chat-workbench.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-04-agent-chat-workbench.json",
+    "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-04-agent-chat-workbench.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-04-agent-chat-workbench-omission-check.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-04-agent-chat-workbench.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-04.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-04-existing-search-agent-run.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-04-existing-search-agent-run.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/traceability.ko.md",
+    "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/validation.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-04-agent-chat-workbench.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-04.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-04-agent-chat-workbench.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-04-agent-chat-workbench-resource.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": []
+}

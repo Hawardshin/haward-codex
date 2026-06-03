@@ -574,11 +574,13 @@
       {
         "preset_id": "research_insight_agent",
         "label": "Search Agent",
+        "primary_surface": "Agents / Search Agent Work Chat",
         "agent_config": "agent-platform/configs/agents/research-insight-planner-agent.json",
         "input_schema": "agent-platform/configs/planning/research-insight-plan-template.json",
         "session_command": "start_cli_adapter_session",
         "task_kind": "research_insight_agent",
         "task_pipe_kind": "research_insight_agent_pipe",
+        "user_entry_contract": "The user starts work in the chat composer; the app links the request to the bottom terminal lane and task-run store.",
         "runtime_store": "platform_data_store/task-runs"
       }
     ],
