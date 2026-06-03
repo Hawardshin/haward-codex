@@ -330,7 +330,11 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx"),
     "utf8"
   );
-  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${pathDisclosure}`;
+  const workspaceExplorerPane = readFileSync(
+    join(root, "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"),
+    "utf8"
+  );
+  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${pathDisclosure}\n${workspaceExplorerPane}`;
   const productFeaturePanel = readFileSync(
     join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
     "utf8"
@@ -412,7 +416,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(monitorShell, /DesktopRuntimePanel/);
   assert.match(monitorShell, /CoreFeatureTabs/);
   assert.match(monitorShell, /PathDisclosure/);
+  assert.match(monitorShell, /WorkspaceExplorerPane/);
   assert.match(coreFeatureTabs, /CoreFeatureTabId/);
+  assert.match(workspaceExplorerPane, /buildWorkspaceExplorerTree/);
   assert.match(lib, /human-decision-inbox\.json/);
   assert.match(monitorShell, /decisionInboxItems/);
   assert.match(monitorShell, /adapterSetupGuides/);

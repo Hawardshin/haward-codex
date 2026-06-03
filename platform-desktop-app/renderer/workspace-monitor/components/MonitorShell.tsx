@@ -40,6 +40,7 @@ import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFe
 import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
 import { CoreFeatureTabs, type CoreFeatureTab, type CoreFeatureTabId } from "@/components/workbench/CoreFeatureTabs";
 import { PathDisclosure } from "@/components/workbench/PathDisclosure";
+import { WorkspaceExplorerPane } from "@/components/workbench/WorkspaceExplorerPane";
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot, type WorkspaceSourceFile } from "@/lib/snapshot";
 
 type SectionId =
@@ -1249,13 +1250,6 @@ type SourceDraftEntry = {
   loadedAt: string;
   lastSavedBackupPath?: string;
   status?: string;
-};
-
-type WorkspaceExplorerDirectory = {
-  name: string;
-  path: string;
-  files: WorkspaceSourceFile[];
-  children: WorkspaceExplorerDirectory[];
 };
 
 type HumanDecisionItem = {
@@ -4061,70 +4055,6 @@ function OpsEventRail({ events }: { events: UnifiedOps["events"] }) {
   );
 }
 
-function WorkspaceExplorerDirectoryView({
-  directory,
-  level,
-  activePath,
-  dirtyPaths,
-  editorBusy,
-  runtimeAvailable,
-  onOpenFile
-}: {
-  directory: WorkspaceExplorerDirectory;
-  level: number;
-  activePath: string;
-  dirtyPaths: Set<string>;
-  editorBusy: boolean;
-  runtimeAvailable: boolean;
-  onOpenFile: (relativePath: string) => Promise<void>;
-}) {
-  return (
-    <div className="workspace-tree-directory" role="group">
-      <div className="workspace-tree-folder" role="treeitem" aria-expanded="true" style={{ paddingLeft: `${8 + level * 12}px` }}>
-        <FolderOpen size={14} aria-hidden="true" />
-        <strong>{directory.name || "root"}</strong>
-        <span>{directory.children.length + directory.files.length}</span>
-      </div>
-      {directory.children.map((child) => (
-        <WorkspaceExplorerDirectoryView
-          key={child.path}
-          directory={child}
-          level={level + 1}
-          activePath={activePath}
-          dirtyPaths={dirtyPaths}
-          editorBusy={editorBusy}
-          runtimeAvailable={runtimeAvailable}
-          onOpenFile={onOpenFile}
-        />
-      ))}
-      {directory.files.map((file) => {
-        const fileName = file.path.split("/").pop() || file.path;
-        const active = activePath === file.path;
-        const dirty = dirtyPaths.has(file.path);
-        return (
-          <button
-            key={file.id}
-            type="button"
-            className={`workspace-tree-file ${active ? "active" : ""} ${dirty ? "dirty" : "clean"}`}
-            style={{ paddingLeft: `${24 + level * 12}px` }}
-            onClick={() => {
-              void onOpenFile(file.path);
-            }}
-            disabled={!runtimeAvailable || editorBusy}
-            role="treeitem"
-          >
-            <Code2 size={13} aria-hidden="true" />
-            <span>{fileName}</span>
-            <small>
-              {file.extension || file.language || "file"} / {formatBytes(file.sizeBytes)}
-            </small>
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
 function DesktopRuntimePanel({
   agentCatalogCount,
   blockedTaskCount,
@@ -4241,12 +4171,10 @@ function DesktopRuntimePanel({
       )
       .slice(0, 80);
   }, [editableSourceFiles, sourceFilter]);
-  const workspaceExplorerTree = useMemo(() => buildWorkspaceExplorerTree(filteredEditableSourceFiles), [filteredEditableSourceFiles]);
   const workspaceExplorerRootLabel =
     desktopWorkspace?.activeWorkspacePath?.split(/[\\/]/).filter(Boolean).pop() ||
     desktopWorkspace?.fallbackWorkspacePath?.split(/[\\/]/).filter(Boolean).pop() ||
     "workspace";
-  const workspaceExplorerFolderCount = useMemo(() => countWorkspaceExplorerDirectories(workspaceExplorerTree), [workspaceExplorerTree]);
   const openDraftEntries = useMemo(
     () => Object.values(sourceDrafts).sort((left, right) => left.relativePath.localeCompare(right.relativePath)),
     [sourceDrafts]
@@ -5703,95 +5631,28 @@ function DesktopRuntimePanel({
       {workspaceHostNotice && <p className="decision-resume-notice">{workspaceHostNotice}</p>}
 
       <section className="filesystem-workbench-shell" aria-label={copy.eyebrow}>
-        <aside className="workspace-explorer-pane" aria-label={copy.fileTree}>
-          <header className="workspace-explorer-header">
-            <div>
-              <p className="eyebrow">{copy.eyebrow}</p>
-              <h2>{workspaceExplorerRootLabel}</h2>
-            </div>
-            <span>{sourceCatalogLabel}</span>
-          </header>
-
-          <button type="button" className="workspace-dropzone" onClick={chooseDesktopWorkspaceFolder} disabled={!invoke || workspaceHostBusy !== ""}>
-            <FolderOpen size={18} aria-hidden="true" />
-            <strong>{workspaceHostBusy === "choose" ? copy.choosingFolder : copy.uploadDropzone}</strong>
-            <span>{copy.uploadDropzoneDetail}</span>
-          </button>
-
-          <div className="workspace-explorer-actions">
-            <button type="button" onClick={chooseDesktopWorkspaceFolder} disabled={!invoke || workspaceHostBusy !== ""}>
-              <FolderOpen size={15} aria-hidden="true" />
-              <span>{copy.chooseFolder}</span>
-            </button>
-            <button type="button" onClick={refreshDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== ""}>
-              <Activity size={15} aria-hidden="true" />
-              <span>{workspaceHostBusy === "refresh" ? copy.loading : copy.refreshWorkspace}</span>
-            </button>
-            <button type="button" onClick={refreshRuntimeSourceFiles} disabled={!invoke || sourceCatalogBusy}>
-              <Search size={15} aria-hidden="true" />
-              <span>{sourceCatalogBusy ? copy.loading : copy.refreshFiles}</span>
-            </button>
-          </div>
-
-          <div className="workspace-explorer-state" aria-label={copy.workspaceState}>
-            <article>
-              <span>{copy.activeWorkspace}</span>
-              <code>{desktopWorkspace?.activeWorkspacePath || desktopWorkspace?.fallbackWorkspacePath || "workspace pending"}</code>
-            </article>
-            <article>
-              <span>{copy.folderSource}</span>
-              <strong>{desktopWorkspace?.activeWorkspaceSource || (runtimeSourceFiles.length ? copy.runtimeSource : copy.fallbackSource)}</strong>
-            </article>
-          </div>
-
-          <label className="workspace-explorer-search">
-            <span>{copy.fileSearch}</span>
-            <input
-              value={sourceFilter}
-              onChange={(event) => setSourceFilter(event.target.value)}
-              placeholder={copy.fileSearch}
-            />
-          </label>
-
-          <div className="workspace-explorer-meta">
-            <span>{filteredEditableSourceFiles.length.toLocaleString("ko-KR")} files</span>
-            <span>{workspaceExplorerFolderCount.toLocaleString("ko-KR")} folders</span>
-            <span>{dirtyDraftEntries.length.toLocaleString("ko-KR")} {copy.dirty}</span>
-          </div>
-
-          {sourceCatalogReport && (
-            <p className="source-catalog-note">
-              {sourceCatalogReport.returnedCount}/{sourceCatalogReport.totalCount} files
-              {sourceCatalogReport.truncated ? " / truncated" : ""}
-            </p>
-          )}
-
-          <div className="workspace-explorer-tree" role="tree" aria-label={copy.fileTree}>
-            {workspaceExplorerTree.length ? (
-              workspaceExplorerTree.map((directory) => (
-                <WorkspaceExplorerDirectoryView
-                  key={directory.path}
-                  directory={directory}
-                  level={0}
-                  activePath={sourceFile?.relativePath || selectedSourcePath}
-                  dirtyPaths={dirtySourcePathSet}
-                  editorBusy={editorBusy}
-                  runtimeAvailable={Boolean(invoke)}
-                  onOpenFile={openDraftOrLoad}
-                />
-              ))
-            ) : (
-              <div className="workspace-empty-tree">
-                <FolderOpen size={18} aria-hidden="true" />
-                <strong>{copy.chooseFolder}</strong>
-                <span>{copy.noFiles}</span>
-                <small>{copy.explorerHint}</small>
-              </div>
-            )}
-          </div>
-
-          <p className="workspace-explorer-hint">{copy.explorerHint}</p>
-        </aside>
+        <WorkspaceExplorerPane
+          activePath={sourceFile?.relativePath || selectedSourcePath}
+          catalogLabel={sourceCatalogLabel}
+          copy={copy}
+          dirtyCount={dirtyDraftEntries.length}
+          dirtyPaths={dirtySourcePathSet}
+          editorBusy={editorBusy}
+          files={filteredEditableSourceFiles}
+          rootLabel={workspaceExplorerRootLabel}
+          runtimeAvailable={Boolean(invoke)}
+          sourceCatalogBusy={sourceCatalogBusy}
+          sourceCatalogReport={sourceCatalogReport}
+          sourceFilter={sourceFilter}
+          workspaceHostBusy={workspaceHostBusy}
+          workspacePath={desktopWorkspace?.activeWorkspacePath || desktopWorkspace?.fallbackWorkspacePath || "workspace pending"}
+          workspaceSource={desktopWorkspace?.activeWorkspaceSource || (runtimeSourceFiles.length ? copy.runtimeSource : copy.fallbackSource)}
+          onChooseFolder={chooseDesktopWorkspaceFolder}
+          onOpenFile={openDraftOrLoad}
+          onRefreshFiles={refreshRuntimeSourceFiles}
+          onRefreshWorkspace={refreshDesktopWorkspace}
+          onSourceFilterChange={setSourceFilter}
+        />
 
         <div className="filesystem-editor-pane">
 
@@ -7582,67 +7443,6 @@ function monacoLanguageFromPath(relativePath: string) {
     yml: "yaml"
   };
   return languageByExtension[extension] || "plaintext";
-}
-
-function buildWorkspaceExplorerTree(files: WorkspaceSourceFile[]) {
-  const root: WorkspaceExplorerDirectory = {
-    name: "",
-    path: "",
-    files: [],
-    children: []
-  };
-
-  const ensureChild = (parent: WorkspaceExplorerDirectory, name: string, path: string) => {
-    let child = parent.children.find((item) => item.name === name);
-    if (!child) {
-      child = { name, path, files: [], children: [] };
-      parent.children.push(child);
-    }
-    return child;
-  };
-
-  files.forEach((file) => {
-    const parts = file.path.split("/").filter(Boolean);
-    const fileName = parts.pop();
-    if (!fileName || parts.length === 0) {
-      root.files.push(file);
-      return;
-    }
-
-    let current = root;
-    let currentPath = "";
-    parts.forEach((part) => {
-      currentPath = currentPath ? `${currentPath}/${part}` : part;
-      current = ensureChild(current, part, currentPath);
-    });
-    current.files.push(file);
-  });
-
-  sortWorkspaceExplorerDirectory(root);
-
-  if (root.files.length > 0) {
-    return [
-      {
-        name: "root files",
-        path: "__root-files",
-        files: root.files,
-        children: []
-      },
-      ...root.children
-    ];
-  }
-
-  return root.children;
-}
-
-function sortWorkspaceExplorerDirectory(directory: WorkspaceExplorerDirectory) {
-  directory.children.sort((left, right) => left.name.localeCompare(right.name));
-  directory.files.sort((left, right) => left.path.localeCompare(right.path));
-  directory.children.forEach(sortWorkspaceExplorerDirectory);
-}
-
-function countWorkspaceExplorerDirectories(directories: WorkspaceExplorerDirectory[]): number {
-  return directories.reduce((total, directory) => total + 1 + countWorkspaceExplorerDirectories(directory.children), 0);
 }
 
 function errorMessage(caught: unknown) {

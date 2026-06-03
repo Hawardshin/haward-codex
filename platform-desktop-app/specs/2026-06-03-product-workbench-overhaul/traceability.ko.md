@@ -15,9 +15,14 @@
 ## Slice 연결
 
 - `slice-01-home-workbench-shell`
-  - Requirement: 핵심 기능 메인 탭을 사용자 첫 화면의 기준으로 둔다.
-  - Source target: `components/workbench/CoreFeatureTabs.tsx`, `components/workbench/PathDisclosure.tsx`, `MonitorShell.tsx`
-  - Validation: TypeScript/test/customer build/browser smoke.
+- Requirement: 핵심 기능 메인 탭을 사용자 첫 화면의 기준으로 둔다.
+- Source target: `components/workbench/CoreFeatureTabs.tsx`, `components/workbench/PathDisclosure.tsx`, `MonitorShell.tsx`
+- Validation: TypeScript/test/customer build/browser smoke.
+
+- `slice-02-workspace-explorer-module`
+- Requirement: 파일/코드 화면은 파일시스템 Explorer를 독립 workbench component로 보유한다.
+- Source target: `components/workbench/WorkspaceExplorerPane.tsx`, `MonitorShell.tsx`, `globals.css`
+- Validation: TypeScript/test/customer build/browser smoke.
 
 ## 공개 결론
 

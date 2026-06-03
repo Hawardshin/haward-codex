@@ -23,6 +23,7 @@ const requiredFiles = [
   "runtime-contracts/installer-shell-bootstrap.en.md",
   "renderer/workspace-monitor/components/workbench/CoreFeatureTabs.tsx",
   "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx",
+  "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx",
   "docs/architecture/cross-platform-installable-runtime-decision.ko.md",
   "docs/architecture/cross-platform-installable-runtime-decision.en.md",
   "docs/architecture/multi-cli-orchestration-runtime.ko.md",
@@ -522,7 +523,11 @@ const pathDisclosure = readFileSync(
   join(root, "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx"),
   "utf8"
 );
-const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${pathDisclosure}`;
+const workspaceExplorerPane = readFileSync(
+  join(root, "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"),
+  "utf8"
+);
+const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${pathDisclosure}\n${workspaceExplorerPane}`;
 const productFeaturePanel = readFileSync(
   join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
   "utf8"

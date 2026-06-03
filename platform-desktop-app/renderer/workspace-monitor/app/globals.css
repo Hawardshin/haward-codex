@@ -5283,7 +5283,7 @@ h3 {
   align-items: center;
   margin: -4px 0 12px;
   border: 1px solid var(--line);
-  background: #fbfcfd;
+  background: var(--surface-raised);
   border-radius: 8px;
   padding: 8px;
 }
@@ -5305,7 +5305,7 @@ h3 {
 
 .source-command-toolbar button.active {
   border-color: #7aa7c8;
-  background: #eef6ff;
+  background: color-mix(in srgb, var(--surface-muted) 68%, var(--blue) 16%);
 }
 
 .source-command-toolbar button:disabled,
@@ -5905,7 +5905,7 @@ h3 {
 
 .empty-state {
   border: 1px dashed var(--line);
-  background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
+  background: linear-gradient(180deg, var(--surface-raised) 0%, var(--surface) 100%);
   border-radius: 8px;
   padding: 16px;
   color: var(--muted);
@@ -5940,8 +5940,8 @@ h3 {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 14px;
   align-items: stretch;
-  border: 1px solid #c9d7e3;
-  background: linear-gradient(180deg, #ffffff 0%, #f6f9fc 100%);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-raised) 100%);
   border-radius: 8px;
   padding: 16px;
 }
@@ -5977,8 +5977,8 @@ h3 {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  border: 1px solid #aebbc8;
-  background: #ffffff;
+  border: 1px solid var(--line);
+  background: var(--surface);
   color: var(--text);
   border-radius: 7px;
   padding: 8px 11px;
@@ -6006,7 +6006,7 @@ h3 {
 .native-workspace-state-strip article {
   min-width: 0;
   border: 1px solid var(--line);
-  background: #fbfcfd;
+  background: var(--surface-raised);
   border-radius: 8px;
   padding: 10px;
 }
@@ -6025,7 +6025,7 @@ h3 {
   display: block;
   min-width: 0;
   overflow-wrap: anywhere;
-  color: var(--slate);
+  color: var(--text);
   font-size: 13px;
   line-height: 1.4;
 }
@@ -6104,7 +6104,7 @@ h3 {
   align-items: center;
   margin: 10px;
   border: 1px dashed #6b879d;
-  background: #f3f7fb;
+  background: color-mix(in srgb, var(--surface-muted) 78%, var(--surface) 22%);
   color: var(--text);
   border-radius: 8px;
   padding: 12px;

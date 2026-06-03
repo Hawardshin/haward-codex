@@ -35,3 +35,11 @@
 - 다크 테마 첫 화면에서 홈/제품 기능 카드가 고정 흰색으로 보이는 문제를 테마 변수 기반 표면색으로 수정했다.
 - Browser smoke 결과: 메인 탭 4개, `작업 실행` 탭 전환, activity rail 1개, desktop sidebar 0개, 하단 터미널 drawer 진입 확인.
 - Screenshot: `platform-desktop-app/artifacts/2026-06-03-product-workbench-overhaul-slice-01/core-feature-tabs-componentized.png`
+
+## Slice 02 결과
+
+- `WorkspaceExplorerPane.tsx`로 파일/코드 화면의 Explorer pane, tree renderer, tree builder, dropzone, search/meta UI를 이동했다.
+- `MonitorShell.tsx`는 Explorer 상태, Tauri command 호출, editor state만 보유하고 Explorer 렌더링 책임을 component에 위임한다.
+- 다크 테마 `파일/코드` 화면에서 native workspace state, dropzone, command toolbar, empty state가 고정 밝은 표면으로 보이는 문제를 테마 변수 기반 표면색으로 수정했다.
+- Browser smoke 결과: `workspace-explorer-pane` 1개, `workspace-explorer-tree` 1개, `workspace-dropzone` 1개, 내부 `source-file-browser` hidden, activity rail 1개, desktop sidebar 0개 확인.
+- Screenshot: `platform-desktop-app/artifacts/2026-06-03-workspace-explorer-module/workspace-explorer-module.png`
