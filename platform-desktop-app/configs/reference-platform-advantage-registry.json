@@ -1,0 +1,812 @@
+{
+  "name": "reference-platform-advantage-registry",
+  "version": "2026-06-03",
+  "reader_guide": {
+    "purpose": "유사 데스크톱/에이전트 플랫폼의 장점을 조사한 뒤 이 제품에 어떤 기능 패턴으로 반영할지 추적한다.",
+    "how_to_read": "reference_links는 근거, platform_groups는 제품군별 역할, transfer_patterns는 우리 플랫폼에 넣을 기능 단위다.",
+    "product_rule": "모니터링은 운영자 보조면이고, 사용자가 팔 수 있는 가치로 보는 첫 화면은 에이전트 오케스트레이션, 작업 환경, 개발 환경, 에이전트 생성, 학습 개선 루프다."
+  },
+  "source_boundary": {
+    "policy": "public_sources_only",
+    "customer_visibility": "summary_only",
+    "accepted_source_types": [
+      "official_docs",
+      "open_source_docs",
+      "security_standard",
+      "community_signal"
+    ],
+    "excluded_sources": [
+      "leaked_or_non_public_material",
+      "private_repository_source",
+      "license-unclear copied UI assets"
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "vscode_ui",
+      "title": "Visual Studio Code user interface",
+      "url": "https://code.visualstudio.com/docs/editing/userinterface",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "UI structure is documented, not a direct product strategy document.",
+      "plan_impact": "Use one activity rail, a focused side bar, an editor center, and a bottom panel for terminal/output."
+    },
+    {
+      "id": "intellij_ui",
+      "title": "IntelliJ Platform UI overview",
+      "url": "https://plugins.jetbrains.com/docs/intellij/ui-overview.html",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "Plugin SDK docs describe default workbench areas rather than AI workflows.",
+      "plan_impact": "Use tool windows around the editor and avoid duplicate sidebars that compete for navigation."
+    },
+    {
+      "id": "github_copilot_cloud_agent",
+      "title": "GitHub Copilot cloud agent",
+      "url": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "Cloud GitHub-centered flow differs from local desktop ownership.",
+      "plan_impact": "Model task intake as research, plan, branch/workspace changes, validation, diff review, and PR/commit handoff."
+    },
+    {
+      "id": "github_copilot_risks",
+      "title": "GitHub Copilot cloud agent risks and mitigations",
+      "url": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/risks-and-mitigations",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "GitHub-specific controls need local equivalents.",
+      "plan_impact": "Keep tool access, untrusted input, automation approval, and workflow approval visible in the platform."
+    },
+    {
+      "id": "claude_code_overview",
+      "title": "Claude Code overview",
+      "url": "https://code.claude.com/docs/en/overview",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "Product claims should be translated into platform-neutral patterns.",
+      "plan_impact": "Support terminal, desktop, IDE-like diff review, multiple sessions, scheduled tasks, MCP, hooks, skills, and agent teams as replaceable capability lanes."
+    },
+    {
+      "id": "claude_code_subagents",
+      "title": "Claude Code custom subagents",
+      "url": "https://code.claude.com/docs/en/sub-agents",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "Subagent details are Claude-specific.",
+      "plan_impact": "Agent Factory must create specialized workers with separate context, explicit tools, permissions, memory, and resume behavior."
+    },
+    {
+      "id": "claude_code_hooks",
+      "title": "Claude Code hooks",
+      "url": "https://code.claude.com/docs/en/hooks",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "Hook event names differ across tools.",
+      "plan_impact": "Add platform-level pre-tool, permission, post-tool, failure, stop, and elicitation gates."
+    },
+    {
+      "id": "claude_code_mcp",
+      "title": "Claude Code MCP",
+      "url": "https://code.claude.com/docs/en/mcp",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "MCP examples are Claude-specific but the protocol and trust concerns generalize.",
+      "plan_impact": "Surface MCP servers as scoped tool connectors with trust review, auth state, resource references, and elicitation dialogs."
+    },
+    {
+      "id": "openhands_key_features",
+      "title": "OpenHands key features",
+      "url": "https://docs.openhands.dev/openhands/usage/key-features",
+      "source_type": "open_source_docs",
+      "reliability": "high",
+      "limitation": "OpenHands is a full agent system, not only a desktop shell.",
+      "plan_impact": "Expose chat, changes, embedded editor, terminal, app preview, and browser lanes as separate workbench tabs."
+    },
+    {
+      "id": "openhands_sdk",
+      "title": "OpenHands Software Agent SDK",
+      "url": "https://docs.openhands.dev/sdk",
+      "source_type": "open_source_docs",
+      "reliability": "high",
+      "limitation": "SDK adoption would need license, dependency, and sandbox review before bundling.",
+      "plan_impact": "Treat software-agent infrastructure as modular engine candidates instead of hand-rolling every future agent capability."
+    },
+    {
+      "id": "cline_overview",
+      "title": "Cline overview",
+      "url": "https://docs.cline.bot/cline-overview",
+      "source_type": "open_source_docs",
+      "reliability": "high",
+      "limitation": "Cline is editor-extension-first.",
+      "plan_impact": "Keep every file, command, browser, and tool action visible with explicit approval and checkpoint recovery."
+    },
+    {
+      "id": "devin_cascade_memories_rules",
+      "title": "Devin Desktop Cascade memories and rules",
+      "url": "https://docs.devin.ai/desktop/cascade/memories",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "Devin/Windsurf product naming changed; use pattern, not brand-specific file paths.",
+      "plan_impact": "Separate auto memories, explicit rules, manual workflows, and richer skills so users know what each setting does."
+    },
+    {
+      "id": "cursor_agent_overview",
+      "title": "Cursor agent overview",
+      "url": "https://docs.cursor.com/en/agent/overview",
+      "source_type": "official_docs_search_cache",
+      "reliability": "medium",
+      "limitation": "The public page redirected during direct fetch; search cache was used for content confirmation.",
+      "plan_impact": "Use sidepane agent, diff review, chat tabs, checkpoints, terminal integration, history, and rules as feature checks."
+    },
+    {
+      "id": "cursor_background_agents",
+      "title": "Cursor background agents",
+      "url": "https://docs.cursor.com/background-agent",
+      "source_type": "official_docs_search_cache",
+      "reliability": "medium",
+      "limitation": "The public page redirected during direct fetch; search cache was used for content confirmation.",
+      "plan_impact": "Use asynchronous task agents, remote/isolated machine setup, branch handoff, terminal startup commands, and takeover affordances."
+    },
+    {
+      "id": "continue_checks",
+      "title": "Continue AI pull request checks",
+      "url": "https://docs.continue.dev/",
+      "source_type": "open_source_docs",
+      "reliability": "high",
+      "limitation": "Current Continue docs emphasize PR checks rather than a full local workbench.",
+      "plan_impact": "Convert quality rules into markdown checks that can become validation gates and failure-to-fix suggestions."
+    },
+    {
+      "id": "aider_docs",
+      "title": "Aider documentation",
+      "url": "https://aider.chat/docs/",
+      "source_type": "open_source_docs",
+      "reliability": "high",
+      "limitation": "Terminal-first UX needs desktop wrapping for non-CLI users.",
+      "plan_impact": "Keep git-native local editing, repo maps, lint/test loops, and scriptability available through guest CLI lanes."
+    },
+    {
+      "id": "opencode_docs",
+      "title": "OpenCode docs",
+      "url": "https://opencode.ai/docs/",
+      "source_type": "open_source_docs",
+      "reliability": "high",
+      "limitation": "Terminal-first assumptions need native workbench controls.",
+      "plan_impact": "Use project initialization, AGENTS.md generation, @ file search, plan/build mode split, and multi-provider config patterns."
+    },
+    {
+      "id": "tauri_sidecar",
+      "title": "Tauri sidecar binaries",
+      "url": "https://v2.tauri.app/develop/sidecar/",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "Sidecars need platform-specific binaries and explicit capabilities.",
+      "plan_impact": "Bundle local engines as sidecars only with clear permissions, args, runtime contracts, and rollback."
+    },
+    {
+      "id": "tauri_distribution",
+      "title": "Tauri distribution and signing",
+      "url": "https://v2.tauri.app/distribute/",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "Public release still needs signing/notarization credentials.",
+      "plan_impact": "Keep internal test app, customer bundle, public release, signing, notarization, and updater gates distinct."
+    },
+    {
+      "id": "owasp_prompt_injection",
+      "title": "OWASP LLM01 prompt injection",
+      "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+      "source_type": "security_standard",
+      "reliability": "high",
+      "limitation": "Mitigations reduce risk but do not prove safety.",
+      "plan_impact": "Treat external content and connected tools as untrusted, enforce least privilege, structured validation, and human approval for high-risk actions."
+    },
+    {
+      "id": "mcp_security",
+      "title": "MCP security best practices",
+      "url": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices",
+      "source_type": "security_standard",
+      "reliability": "high",
+      "limitation": "MCP security guidance must be combined with local OS and credential boundaries.",
+      "plan_impact": "Use scoped MCP servers, consent boundaries, token handling, local server compromise controls, and tool search to reduce context and risk."
+    },
+    {
+      "id": "docker_desktop",
+      "title": "Docker Desktop docs",
+      "url": "https://docs.docker.com/desktop/",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "Container management differs from AI agent orchestration.",
+      "plan_impact": "Use one-click install, centralized dashboard, settings, troubleshooting, integrated terminal, extensions, notifications, and resource visibility as native-app patterns."
+    },
+    {
+      "id": "github_desktop",
+      "title": "GitHub Desktop docs",
+      "url": "https://docs.github.com/desktop",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "GitHub Desktop does not solve AI orchestration itself.",
+      "plan_impact": "Use visual confirmation of changes, branch workflows, commit attribution, push/pull, clone, and PR creation as the Git workbench baseline."
+    },
+    {
+      "id": "raycast_extensions",
+      "title": "Raycast extensions manual",
+      "url": "https://manual.raycast.com/extensions",
+      "source_type": "official_docs",
+      "reliability": "high",
+      "limitation": "Launcher UX is a support pattern, not the full product shell.",
+      "plan_impact": "Use command palette, extension store, tool selection, background updates, and fast keyboard-first actions for capability launch."
+    }
+  ],
+  "structure_rules": [
+    "Each transfer pattern must name source platforms, the observed strength, the platform decision, current assets, implementation targets, risk controls, status, priority, and source ids.",
+    "Patterns with queued_p0 status must map to a concrete UI/runtime surface, not a vague roadmap item.",
+    "Customer snapshots may show summary and product value, but internal research files and local source paths must not be required for customer use."
+  ],
+  "field_guide": {
+    "status": {
+      "implemented": "이미 화면 또는 실행 흐름에 반영된 기능",
+      "integrated_contract": "런타임/문서/레지스트리 계약에 반영됐지만 네이티브 구현 보강이 남은 기능",
+      "queued_p0": "제품 완성도를 위해 다음 큰 구현 단위로 처리해야 하는 기능",
+      "queued_p1": "핵심 흐름 이후 확장할 기능"
+    },
+    "priority": {
+      "p0": "판매 가능한 데스크톱 플랫폼 구조에 직접 영향",
+      "p1": "사용성/확장성에 큰 영향",
+      "p2": "보조 개선"
+    }
+  },
+  "product_position": {
+    "purpose": "레퍼런스 앱의 장점을 복사하는 것이 아니라, 에이전트 플랫폼의 핵심 작업 루프에 맞춰 재구성한다.",
+    "primary_rule": "작업 시작, 에이전트 오케스트레이션, 파일/코드 조작, 검증, 학습 개선이 첫 화면의 중심이어야 한다.",
+    "customer_promise": "사용자는 앱을 켜고 워크스페이스를 선택한 뒤 파일, 터미널, 에이전트, 검증, 히스토리를 한 데스크톱 워크벤치에서 다룬다.",
+    "monitoring_boundary": "모니터링과 운영자 기능은 상태 확인, 감사, 복구를 돕는 보조면으로 분리한다."
+  },
+  "platform_groups": [
+    {
+      "id": "desktop_workbench_ides",
+      "label_ko": "데스크톱 워크벤치 IDE",
+      "label_en": "Desktop Workbench IDEs",
+      "platforms": [
+        "VS Code",
+        "IntelliJ IDEA"
+      ],
+      "role": "layout_and_navigation_reference",
+      "strongest_advantage": "activity rail, side bar, editor center, tool windows, bottom terminal/output panel, status bar",
+      "transfer_rule": "우리 앱은 웹 대시보드가 아니라 단일 네이티브 워크벤치여야 하며, 중복 사이드바를 제거하고 아래 패널을 터미널/로그/검증에 배정한다."
+    },
+    {
+      "id": "ai_native_ides",
+      "label_ko": "AI 네이티브 IDE",
+      "label_en": "AI-native IDEs",
+      "platforms": [
+        "Cursor",
+        "Devin Desktop / Windsurf",
+        "Claude Code Desktop"
+      ],
+      "role": "agentic_workflow_reference",
+      "strongest_advantage": "agent sidepane, diff review, background agents, rules, memories, workflows, skills, checkpoints",
+      "transfer_rule": "에이전트가 어디서 일하는지, 어떤 권한과 규칙으로 움직이는지, 변경을 어떻게 되돌리는지를 항상 사용자가 볼 수 있어야 한다."
+    },
+    {
+      "id": "open_source_agent_engines",
+      "label_ko": "오픈소스 에이전트 엔진",
+      "label_en": "Open-source agent engines",
+      "platforms": [
+        "OpenHands",
+        "Cline",
+        "Aider",
+        "OpenCode",
+        "Continue"
+      ],
+      "role": "engine_and_capability_reference",
+      "strongest_advantage": "tool approval, CLI/scriptability, SDKs, PR checks, embedded editor/terminal/browser lanes",
+      "transfer_rule": "성숙한 오픈소스 기능은 게스트 어댑터 또는 엔진 후보로 평가하되, 플랫폼의 데이터/권한/검증 경계가 우선한다."
+    },
+    {
+      "id": "native_operator_apps",
+      "label_ko": "네이티브 운영/설치 앱",
+      "label_en": "Native operator apps",
+      "platforms": [
+        "Docker Desktop",
+        "GitHub Desktop",
+        "Raycast",
+        "Discord"
+      ],
+      "role": "native_app_ux_reference",
+      "strongest_advantage": "one-click setup, settings dialogs, troubleshooting, command palette, channels/spaces, visual confirmation",
+      "transfer_rule": "설정과 복구는 팝업/전용 패널에 두고, 반복 작업은 커맨드 팔레트와 확장 카탈로그로 빠르게 실행한다."
+    }
+  ],
+  "transfer_patterns": [
+    {
+      "id": "workbench-activity-rail-editor-terminal",
+      "label_ko": "단일 사이드바 + 중앙 작업대 + 하단 터미널",
+      "label_en": "Single activity rail, workbench center, bottom terminal",
+      "source_platforms": [
+        "VS Code",
+        "IntelliJ IDEA",
+        "OpenHands"
+      ],
+      "observed_strength": "Mature desktop apps separate navigation, editor/work area, terminal/output, and status so users do not scroll through one long web page.",
+      "platform_decision": "Keep one primary sidebar, route feature tabs into the workbench center, and reserve the bottom drawer for multi-CLI terminal, logs, validation, and task runs.",
+      "product_section": "overview",
+      "user_value_ko": "사용자가 어디서 파일을 보고, 어디서 명령을 실행하고, 어디서 결과를 확인하는지 즉시 이해한다.",
+      "current_platform_assets": [
+        "renderer/workspace-monitor/components/MonitorShell.tsx",
+        "renderer/workspace-monitor/components/workbench/CoreFeatureTabs.tsx",
+        "renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx",
+        "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"
+      ],
+      "implementation_targets": [
+        "remove duplicated navigation feel",
+        "keep CLI drawer as bottom/full overlay",
+        "use compact tabbed subpanels instead of long scroll"
+      ],
+      "risk_controls": [
+        "responsive grid tests",
+        "customer snapshot remains source-free"
+      ],
+      "status": "implemented",
+      "priority": "p0",
+      "source_ids": [
+        "vscode_ui",
+        "intellij_ui",
+        "openhands_key_features"
+      ]
+    },
+    {
+      "id": "background-agent-task-lifecycle",
+      "label_ko": "백그라운드 에이전트 작업 생명주기",
+      "label_en": "Background agent task lifecycle",
+      "source_platforms": [
+        "GitHub Copilot cloud agent",
+        "Cursor Background Agents",
+        "Claude Code background agents"
+      ],
+      "observed_strength": "Useful agent products frame work as async tasks with status, follow-up, takeover, validation, branch/workspace isolation, and review.",
+      "platform_decision": "Represent every launched agent task as a platform-owned run record with workspace, lane, command, output, evidence, validation, handoff, and review status.",
+      "product_section": "desktop",
+      "user_value_ko": "사용자는 터미널을 직접 붙잡고 있지 않아도 작업 상태와 결과를 앱에서 이어받는다.",
+      "current_platform_assets": [
+        "runtime-contracts/installer-shell-runtime-contract.json",
+        "docs/architecture/multi-cli-orchestration-runtime.ko.md",
+        "renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx"
+      ],
+      "implementation_targets": [
+        "branch/workspace isolation UI",
+        "takeover action",
+        "follow-up prompt per run",
+        "PR/commit handoff"
+      ],
+      "risk_controls": [
+        "tool permission prompts for destructive commands",
+        "bounded command output",
+        "human approval before public workflow side effects"
+      ],
+      "status": "integrated_contract",
+      "priority": "p0",
+      "source_ids": [
+        "github_copilot_cloud_agent",
+        "cursor_background_agents",
+        "claude_code_overview",
+        "github_copilot_risks"
+      ]
+    },
+    {
+      "id": "rules-memory-workflows-skills",
+      "label_ko": "규칙, 메모리, 워크플로, 스킬 분리",
+      "label_en": "Rules, memory, workflows, and skills are separate",
+      "source_platforms": [
+        "Devin Desktop / Windsurf",
+        "Claude Code",
+        "OpenCode",
+        "Cline"
+      ],
+      "observed_strength": "Users understand configuration better when durable rules, auto memory, manual workflows, reusable skills, and agent definitions are not mixed together.",
+      "platform_decision": "The Settings and Agent Factory surfaces must make this taxonomy explicit and save each asset into the correct durable path.",
+      "product_section": "agents",
+      "user_value_ko": "사용자는 뭘 설정해야 하는지 몰라 헤매지 않고, 반복 작업을 올바른 자산으로 승격한다.",
+      "current_platform_assets": [
+        "agent-platform/configs/agents/",
+        "_skills/",
+        "_ops/workflows/",
+        "_ops/prompts/",
+        "AGENTS.md"
+      ],
+      "implementation_targets": [
+        "one settings button with tabs for provider, workspace, rules, memory, workflows, skills, permissions",
+        "agent init wizard writes AGENTS.md/rules/skills with preview"
+      ],
+      "risk_controls": [
+        "never write private memories into versioned rules without explicit approval",
+        "show activation mode and scope before saving"
+      ],
+      "status": "integrated_contract",
+      "priority": "p0",
+      "source_ids": [
+        "devin_cascade_memories_rules",
+        "claude_code_subagents",
+        "opencode_docs",
+        "cline_overview"
+      ]
+    },
+    {
+      "id": "permission-hooks-checkpoints",
+      "label_ko": "권한, 훅, 체크포인트 게이트",
+      "label_en": "Permissions, hooks, and checkpoints",
+      "source_platforms": [
+        "Claude Code",
+        "OpenHands",
+        "Cline",
+        "Cursor"
+      ],
+      "observed_strength": "Agent tools are safer and easier to trust when pre-tool checks, permission requests, action approval, post-tool logging, and rollback points are visible.",
+      "platform_decision": "Add a platform permission layer before guest CLI actions and store approval, denial, checkpoint, and rollback records in the runtime data plane.",
+      "product_section": "desktop",
+      "user_value_ko": "파일 수정, 명령 실행, 브라우저 사용, 외부 도구 호출이 앱 안에서 승인되고 되돌릴 수 있다.",
+      "current_platform_assets": [
+        "runtime-contracts/installer-shell-runtime-contract.json",
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+        "_ops/coordination/human-decision-inbox.json"
+      ],
+      "implementation_targets": [
+        "native permission dialog",
+        "pre-tool hook registry",
+        "checkpoint list beside diff review",
+        "rollback action"
+      ],
+      "risk_controls": [
+        "least privilege default",
+        "deny/defer/ask/allow state model",
+        "audit record before high-risk action"
+      ],
+      "status": "queued_p0",
+      "priority": "p0",
+      "source_ids": [
+        "claude_code_hooks",
+        "openhands_key_features",
+        "cline_overview",
+        "cursor_agent_overview",
+        "owasp_prompt_injection"
+      ]
+    },
+    {
+      "id": "embedded-editor-diff-review",
+      "label_ko": "파일 탐색과 코드 편집/디프 리뷰 내장",
+      "label_en": "Embedded file explorer, editor, and diff review",
+      "source_platforms": [
+        "VS Code",
+        "GitHub Desktop",
+        "OpenHands",
+        "Cursor",
+        "Claude Code Desktop"
+      ],
+      "observed_strength": "Developer desktop tools make the file system and proposed changes visible before commit or handoff.",
+      "platform_decision": "Use the native file workspace and Monaco/source review panes as first-class product surfaces, not a hidden monitoring detail.",
+      "product_section": "source",
+      "user_value_ko": "사용자는 파일시스템을 끌어와 코드와 설정을 직접 보고, 에이전트가 바꾼 내용을 검토한다.",
+      "current_platform_assets": [
+        "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx",
+        "renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx",
+        "renderer/workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "implementation_targets": [
+        "native open-folder permission",
+        "diff queue by task run",
+        "file tabs with collapseable sections"
+      ],
+      "risk_controls": [
+        "customer snapshot strips source file content",
+        "backup before write",
+        "explicit save command"
+      ],
+      "status": "implemented",
+      "priority": "p0",
+      "source_ids": [
+        "vscode_ui",
+        "github_desktop",
+        "openhands_key_features",
+        "cursor_agent_overview",
+        "claude_code_overview"
+      ]
+    },
+    {
+      "id": "agent-factory-subagents",
+      "label_ko": "전문 에이전트 생성 공장",
+      "label_en": "Specialist agent factory",
+      "source_platforms": [
+        "Claude Code subagents",
+        "Cline agent teams",
+        "OpenHands SDK",
+        "GitHub Copilot custom agents"
+      ],
+      "observed_strength": "Specialized agents work better when they have narrow prompts, scoped tools, separate context, and clear delegation rules.",
+      "platform_decision": "Agent Factory creates named agents, subagents, skills, tools, prompts, validation gates, and promotion records from repeated human work.",
+      "product_section": "agents",
+      "user_value_ko": "사용자는 같은 지시를 반복하지 않고 목적별 에이전트를 쉽게 만들고 개선한다.",
+      "current_platform_assets": [
+        "agent-platform/configs/agents/",
+        "renderer/workspace-monitor/components/MonitorShell.tsx",
+        "_ops/workflows/37-skill-lifecycle.md"
+      ],
+      "implementation_targets": [
+        "agent template chooser",
+        "tool scope selector",
+        "validation gate selector",
+        "subagent context policy"
+      ],
+      "risk_controls": [
+        "capability promotion review",
+        "source-boundary and sensitive-file checks"
+      ],
+      "status": "implemented",
+      "priority": "p0",
+      "source_ids": [
+        "claude_code_subagents",
+        "cline_overview",
+        "openhands_sdk",
+        "github_copilot_cloud_agent"
+      ]
+    },
+    {
+      "id": "validation-checks-as-product",
+      "label_ko": "검증 체크를 제품 기능으로 승격",
+      "label_en": "Validation checks as product features",
+      "source_platforms": [
+        "Continue",
+        "GitHub Copilot metrics",
+        "Aider lint/test loop"
+      ],
+      "observed_strength": "AI coding products gain trust when checks are explicit, repeatable, visible in PR/task lifecycle, and actionable when they fail.",
+      "platform_decision": "Represent lint, test, config contract, release readiness, customer bundle audit, and hallucination/security checks as run gates with evidence.",
+      "product_section": "intent",
+      "user_value_ko": "사용자는 에이전트가 만든 결과가 왜 통과했는지, 어디서 실패했는지, 다음 개선점이 뭔지 본다.",
+      "current_platform_assets": [
+        "platform-desktop-app/scripts/check-readiness.mjs",
+        "platform-desktop-app/scripts/check-release-readiness.mjs",
+        "platform-desktop-app/scripts/check-customer-bundle.mjs",
+        "_history/evaluations/"
+      ],
+      "implementation_targets": [
+        "validation gate catalog",
+        "failure-to-fix suggestion",
+        "per-agent evaluation trend"
+      ],
+      "risk_controls": [
+        "no unsupported factual claim without source",
+        "record command, exit code, and evidence target"
+      ],
+      "status": "implemented",
+      "priority": "p0",
+      "source_ids": [
+        "continue_checks",
+        "github_copilot_cloud_agent",
+        "aider_docs"
+      ]
+    },
+    {
+      "id": "native-install-runtime-boundary",
+      "label_ko": "설치형 네이티브 런타임 경계",
+      "label_en": "Installable native runtime boundary",
+      "source_platforms": [
+        "Tauri",
+        "Docker Desktop",
+        "GitHub Desktop"
+      ],
+      "observed_strength": "Good desktop products own install, settings, diagnostics, update, data location, and local runtime boundaries instead of making users run many commands.",
+      "platform_decision": "The platform launches first, owns runtime data and UI authority, and invokes guest CLIs or sidecars through explicit adapters.",
+      "product_section": "desktop",
+      "user_value_ko": "사용자는 명령어를 하나씩 몰라도 앱 설치, 데이터 경로, 진단, 업데이트, 실행을 한 곳에서 관리한다.",
+      "current_platform_assets": [
+        "platform-desktop-app/configs/desktop-distribution-registry.json",
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+        "platform-desktop-app/scripts/desktop-pipeline.mjs"
+      ],
+      "implementation_targets": [
+        "signed updater channel",
+        "native data path chooser",
+        "sidecar packaging audit",
+        "one-click developer/customer build"
+      ],
+      "risk_controls": [
+        "signing and notarization gates",
+        "Tauri capability scopes",
+        "dependency and install audit"
+      ],
+      "status": "integrated_contract",
+      "priority": "p0",
+      "source_ids": [
+        "tauri_sidecar",
+        "tauri_distribution",
+        "docker_desktop",
+        "github_desktop"
+      ]
+    },
+    {
+      "id": "command-palette-extension-catalog",
+      "label_ko": "커맨드 팔레트와 확장 카탈로그",
+      "label_en": "Command palette and extension catalog",
+      "source_platforms": [
+        "Raycast",
+        "VS Code",
+        "Docker Desktop"
+      ],
+      "observed_strength": "Fast launcher apps reduce friction by making commands searchable, installable, and keyboard-first.",
+      "platform_decision": "Expose actions such as open workspace, start agent, init rules, run validation, install adapter, and show diagnostics through a desktop command palette.",
+      "product_section": "overview",
+      "user_value_ko": "사용자는 메뉴를 찾아다니지 않고 지금 필요한 기능을 검색해서 실행한다.",
+      "current_platform_assets": [
+        "renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/configs/user-flow-registry.json"
+      ],
+      "implementation_targets": [
+        "global command palette",
+        "extension/adapter catalog",
+        "keyboard shortcut registry",
+        "recent commands"
+      ],
+      "risk_controls": [
+        "dangerous commands require permission dialog",
+        "missing adapters show setup guidance instead of blocking the app"
+      ],
+      "status": "queued_p0",
+      "priority": "p0",
+      "source_ids": [
+        "raycast_extensions",
+        "vscode_ui",
+        "docker_desktop"
+      ]
+    },
+    {
+      "id": "workspace-spaces-and-decision-inbox",
+      "label_ko": "워크스페이스 Spaces와 결정함",
+      "label_en": "Workspace spaces and decision inbox",
+      "source_platforms": [
+        "Discord",
+        "Devin Agent Command Center",
+        "GitHub Copilot integrations"
+      ],
+      "observed_strength": "Channel-like organization and decision queues help users separate projects, tasks, handoffs, approvals, and notifications.",
+      "platform_decision": "Use projects/spaces for work boundaries and a decision inbox for blocked agent questions, permission requests, merge gates, and follow-ups.",
+      "product_section": "desktop",
+      "user_value_ko": "사용자는 여러 에이전트 작업을 채널처럼 분리하고, 답해야 할 것만 한 곳에서 처리한다.",
+      "current_platform_assets": [
+        "_ops/coordination/human-decision-inbox.json",
+        "renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/configs/user-flow-registry.json"
+      ],
+      "implementation_targets": [
+        "space selector",
+        "decision inbox filters",
+        "notification center",
+        "handoff timeline"
+      ],
+      "risk_controls": [
+        "decision history retained",
+        "client-side hiding is not treated as security"
+      ],
+      "status": "implemented",
+      "priority": "p1",
+      "source_ids": [
+        "github_copilot_cloud_agent"
+      ]
+    },
+    {
+      "id": "mcp-and-tool-scope-governance",
+      "label_ko": "MCP와 도구 범위 거버넌스",
+      "label_en": "MCP and tool-scope governance",
+      "source_platforms": [
+        "Claude Code",
+        "MCP",
+        "GitHub Copilot",
+        "OpenHands"
+      ],
+      "observed_strength": "Tool ecosystems become safer when scopes, consent, auth, server trust, tool search, and elicitation are visible.",
+      "platform_decision": "The platform must manage MCP servers and CLI adapters as capability records with trust level, scope, auth status, and permission prompts.",
+      "product_section": "agents",
+      "user_value_ko": "사용자는 에이전트가 어떤 외부 도구와 데이터에 접근하는지 보고 제어한다.",
+      "current_platform_assets": [
+        "agent-platform/configs/integrations/cli-adapter-registry.json",
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json"
+      ],
+      "implementation_targets": [
+        "MCP/adapter catalog",
+        "trusted server review",
+        "tool search and lazy loading",
+        "elicitation dialog"
+      ],
+      "risk_controls": [
+        "OAuth consent boundary",
+        "token passthrough avoidance",
+        "local MCP compromise mitigation"
+      ],
+      "status": "integrated_contract",
+      "priority": "p0",
+      "source_ids": [
+        "claude_code_mcp",
+        "mcp_security",
+        "github_copilot_risks",
+        "openhands_sdk"
+      ]
+    },
+    {
+      "id": "security-first-agentic-boundaries",
+      "label_ko": "에이전트 보안 경계 기본 내장",
+      "label_en": "Security-first agentic boundaries",
+      "source_platforms": [
+        "OWASP",
+        "GitHub Copilot",
+        "MCP"
+      ],
+      "observed_strength": "Agentic systems need design-time controls for indirect prompt injection, excessive agency, external content, secrets, and high-risk tools.",
+      "platform_decision": "Treat untrusted files/web/docs/logs as data, keep least privilege defaults, require human approval for high-risk actions, and record every exception.",
+      "product_section": "desktop",
+      "user_value_ko": "사용자는 자동화가 편해져도 권한, 외부 입력, 비밀, 위험 명령이 무방비로 실행되지 않는다고 판단할 수 있다.",
+      "current_platform_assets": [
+        "_docs/policies/sensitive-file-boundary-policy.ko.md",
+        "agent-platform/configs/security/sensitive-file-boundary.json",
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json"
+      ],
+      "implementation_targets": [
+        "untrusted-content labels in file/docs previews",
+        "risk tag in run timeline",
+        "approval before privileged operations",
+        "red-team prompt test set"
+      ],
+      "risk_controls": [
+        "least privilege",
+        "structured output validation",
+        "human approval for high-risk actions",
+        "adversarial testing"
+      ],
+      "status": "integrated_contract",
+      "priority": "p0",
+      "source_ids": [
+        "owasp_prompt_injection",
+        "github_copilot_risks",
+        "mcp_security"
+      ]
+    },
+    {
+      "id": "learning-loop-from-usage-and-evaluation",
+      "label_ko": "사용/평가 데이터 기반 학습 개선 루프",
+      "label_en": "Learning loop from usage and evaluation data",
+      "source_platforms": [
+        "GitHub Copilot metrics",
+        "Aider leaderboards",
+        "Continue checks",
+        "Memory Sandbox research"
+      ],
+      "observed_strength": "Users trust agent platforms more when performance, outcomes, memories, decisions, and repeated failures are inspectable and improve future runs.",
+      "platform_decision": "Persist task runs, decisions, evidence, work timing, evaluations, intent maps, and promotion candidates so the platform can improve agents and capabilities over time.",
+      "product_section": "intent",
+      "user_value_ko": "플랫폼은 작업을 쌓아두기만 하지 않고 반복 병목과 성공 패턴을 기능/에이전트 개선으로 되돌린다.",
+      "current_platform_assets": [
+        "_history/work-timings/",
+        "_history/evaluations/",
+        "_history/intent-feature-maps/",
+        "agent-platform/configs/orchestration/capability-promotion-registry.json"
+      ],
+      "implementation_targets": [
+        "per-agent outcome trends",
+        "memory object viewer",
+        "automatic capability candidate scoring",
+        "evaluation-to-roadmap promotion"
+      ],
+      "risk_controls": [
+        "private data stays out of shared memory",
+        "evidence provenance required before learning"
+      ],
+      "status": "implemented",
+      "priority": "p0",
+      "source_ids": [
+        "github_copilot_cloud_agent",
+        "aider_docs",
+        "continue_checks"
+      ]
+    }
+  ]
+}

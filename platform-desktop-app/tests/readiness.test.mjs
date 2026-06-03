@@ -17,6 +17,7 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(existsSync(join(root, "docs/release-runbook.ko.md")), true);
   assert.equal(existsSync(join(root, "docs/release-runbook.en.md")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline.mjs")), true);
+  assert.equal(existsSync(join(root, "configs/reference-platform-advantage-registry.json")), true);
 
   const config = readJson("src-tauri/tauri.conf.json");
   assert.equal(config.productName, "Agent Workspace Platform");
@@ -217,6 +218,23 @@ test("Claude Code design transfer registry uses public-source boundary", () => {
   assert.match(serialized, /Subagent Context Isolation/);
   assert.match(serialized, /Skill On-Demand Packaging/);
   assert.ok(registry.transfer_patterns.length >= 8);
+});
+
+test("reference platform advantage registry transfers researched strengths into product patterns", () => {
+  const registry = readJson("configs/reference-platform-advantage-registry.json");
+  const serialized = JSON.stringify(registry);
+
+  assert.equal(registry.source_boundary.policy, "public_sources_only");
+  assert.match(serialized, /workbench-activity-rail-editor-terminal/);
+  assert.match(serialized, /background-agent-task-lifecycle/);
+  assert.match(serialized, /permission-hooks-checkpoints/);
+  assert.match(serialized, /native-install-runtime-boundary/);
+  assert.match(serialized, /command-palette-extension-catalog/);
+  assert.match(serialized, /security-first-agentic-boundaries/);
+  assert.match(serialized, /VS Code/);
+  assert.match(serialized, /GitHub Copilot cloud agent/);
+  assert.match(serialized, /OpenHands/);
+  assert.ok(registry.transfer_patterns.length >= 10);
 });
 
 test("runtime data boundary separates customer app from platform source", () => {
@@ -420,10 +438,16 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "collectProductFeatureArchitecture",
     "productFeatureArchitecture",
     "sanitizeProductFeatureArchitectureForCustomer",
+    "collectReferencePlatformAdvantages",
+    "referencePlatformAdvantages",
+    "sanitizeReferencePlatformAdvantagesForCustomer",
     "agent_capability_platform",
     "supporting_observability"
   ]) {
     assert.match(`${monitorCollector}\n${productFeatureCollector}`, new RegExp(collectorToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+  for (const uiToken of ["referenceAdvantages", "reference-advantage-board", "레퍼런스 장점 적용 지도"]) {
+    assert.match(productFeaturePanel, new RegExp(uiToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
   for (const scriptToken of ["auditCustomerSnapshot", "scanCustomerDist", "customer_bundle_ready", "MAX_DIST_SCAN_FILES"]) {
     assert.match(customerBundleCheck, new RegExp(scriptToken));

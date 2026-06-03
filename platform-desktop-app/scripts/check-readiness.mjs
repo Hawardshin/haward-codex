@@ -13,6 +13,7 @@ const requiredFiles = [
   "configs/product-feature-registry.json",
   "configs/product-gap-registry.json",
   "configs/claude-code-design-transfer-registry.json",
+  "configs/reference-platform-advantage-registry.json",
   "configs/runtime-data-boundary-registry.json",
   "configs/service-readiness-registry.json",
   "configs/macos-execution-profile.json",
@@ -454,6 +455,25 @@ for (const requiredPhrase of [
   }
 }
 
+const referenceAdvantageRegistry = readJson("configs/reference-platform-advantage-registry.json");
+const referenceAdvantageSerialized = JSON.stringify(referenceAdvantageRegistry);
+for (const requiredPhrase of [
+  "public_sources_only",
+  "workbench-activity-rail-editor-terminal",
+  "background-agent-task-lifecycle",
+  "permission-hooks-checkpoints",
+  "native-install-runtime-boundary",
+  "command-palette-extension-catalog",
+  "security-first-agentic-boundaries"
+]) {
+  if (!referenceAdvantageSerialized.includes(requiredPhrase)) {
+    failures.push(`reference platform advantage transfer must include ${requiredPhrase}`);
+  }
+}
+if ((referenceAdvantageRegistry.transfer_patterns || []).length < 10) {
+  failures.push("reference-platform-advantage-registry must include at least 10 transfer patterns");
+}
+
 const runtimeBoundaryRegistry = readJson("configs/runtime-data-boundary-registry.json");
 const runtimeBoundarySerialized = JSON.stringify(runtimeBoundaryRegistry);
 for (const requiredPhrase of [
@@ -601,6 +621,11 @@ for (const requiredPhrase of ["buildCustomerSnapshot", "customer_snapshot_saniti
     failures.push(`workspace-monitor collector must include customer snapshot token ${requiredPhrase}`);
   }
 }
+for (const requiredPhrase of ["referenceAdvantages", "reference-advantage-board", "레퍼런스 장점 적용 지도"]) {
+  if (!productFeaturePanel.includes(requiredPhrase)) {
+    failures.push(`product feature panel must include reference advantage UI token ${requiredPhrase}`);
+  }
+}
 for (const requiredPhrase of [
   "collectProductFeatureArchitecture",
   "productFeatureArchitecture",
@@ -608,6 +633,15 @@ for (const requiredPhrase of [
 ]) {
   if (!monitorCollector.includes(requiredPhrase) && !productFeatureCollector.includes(requiredPhrase)) {
     failures.push(`workspace-monitor product feature collector must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of [
+  "collectReferencePlatformAdvantages",
+  "referencePlatformAdvantages",
+  "sanitizeReferencePlatformAdvantagesForCustomer"
+]) {
+  if (!monitorCollector.includes(requiredPhrase)) {
+    failures.push(`workspace-monitor reference advantage collector must include ${requiredPhrase}`);
   }
 }
 for (const requiredPhrase of ["auditCustomerSnapshot", "scanCustomerDist", "customer_bundle_ready", "MAX_DIST_SCAN_FILES", "frontendDist"]) {

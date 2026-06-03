@@ -1,0 +1,31 @@
+{
+  "date": "2026-06-03",
+  "work_id": "reference-platform-advantage-transfer",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_research",
+      "status": "completed",
+      "notes": "Official docs, open-source docs, security standards, and selected community signals checked."
+    },
+    {
+      "phase": "local_context",
+      "status": "completed",
+      "notes": "Read product feature registry, distribution registry, runtime contract, snapshot collector, product panel, readiness tests."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Added reference advantage registry, collector, snapshot types, UI board, styles, readiness and tests."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Typecheck, tests, customer build, platform check, performance budget, intent-map checks, git diff check, and browser smoke passed."
+    }
+  ],
+  "bottleneck_candidates": [
+    "Direct Cursor docs fetch returned empty/redirected content.",
+    "Workspace monitor snapshot generation touches a large document set."
+  ]
+}

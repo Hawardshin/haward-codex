@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-03T13:47:32.952Z",
+  "generatedAt": "2026-06-03T14:09:17.808Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -29,6 +29,8 @@
     "productFeatures": 6,
     "primaryProductFeatures": 5,
     "supportingProductFeatures": 1,
+    "referencePlatforms": 4,
+    "referenceTransferPatterns": 13,
     "structurePressurePoints": 0,
     "sourceFiles": 0,
     "rootFolders": 0
@@ -386,6 +388,455 @@
       "New feature work updates requirements, specs, validation, history, and request traces."
     ],
     "validationGates": []
+  },
+  "referencePlatformAdvantages": {
+    "sourcePath": "",
+    "productPosition": {
+      "purpose": "레퍼런스 앱의 장점을 복사하는 것이 아니라, 에이전트 플랫폼의 핵심 작업 루프에 맞춰 재구성한다.",
+      "primaryRule": "작업 시작, 에이전트 오케스트레이션, 파일/코드 조작, 검증, 학습 개선이 첫 화면의 중심이어야 한다.",
+      "customerPromise": "사용자는 앱을 켜고 워크스페이스를 선택한 뒤 파일, 터미널, 에이전트, 검증, 히스토리를 한 데스크톱 워크벤치에서 다룬다.",
+      "monitoringBoundary": "모니터링과 운영자 기능은 상태 확인, 감사, 복구를 돕는 보조면으로 분리한다."
+    },
+    "sourceBoundary": {
+      "policy": "public_sources_only",
+      "customerVisibility": "summary_only",
+      "excludedSources": [],
+      "acceptedSourceTypes": []
+    },
+    "summary": {
+      "totalSources": 24,
+      "platformGroups": 4,
+      "totalPatterns": 13,
+      "implemented": 6,
+      "integratedContract": 5,
+      "queuedP0": 2,
+      "highPriority": 13
+    },
+    "referenceLinks": [],
+    "platformGroups": [
+      {
+        "id": "desktop_workbench_ides",
+        "labelKo": "데스크톱 워크벤치 IDE",
+        "labelEn": "Desktop Workbench IDEs",
+        "platforms": [
+          "VS Code",
+          "IntelliJ IDEA"
+        ],
+        "role": "layout_and_navigation_reference",
+        "strongestAdvantage": "activity rail, side bar, editor center, tool windows, bottom terminal/output panel, status bar",
+        "transferRule": "우리 앱은 웹 대시보드가 아니라 단일 네이티브 워크벤치여야 하며, 중복 사이드바를 제거하고 아래 패널을 터미널/로그/검증에 배정한다."
+      },
+      {
+        "id": "ai_native_ides",
+        "labelKo": "AI 네이티브 IDE",
+        "labelEn": "AI-native IDEs",
+        "platforms": [
+          "Cursor",
+          "Devin Desktop / Windsurf",
+          "Claude Code Desktop"
+        ],
+        "role": "agentic_workflow_reference",
+        "strongestAdvantage": "agent sidepane, diff review, background agents, rules, memories, workflows, skills, checkpoints",
+        "transferRule": "에이전트가 어디서 일하는지, 어떤 권한과 규칙으로 움직이는지, 변경을 어떻게 되돌리는지를 항상 사용자가 볼 수 있어야 한다."
+      },
+      {
+        "id": "open_source_agent_engines",
+        "labelKo": "오픈소스 에이전트 엔진",
+        "labelEn": "Open-source agent engines",
+        "platforms": [
+          "OpenHands",
+          "Cline",
+          "Aider",
+          "OpenCode",
+          "Continue"
+        ],
+        "role": "engine_and_capability_reference",
+        "strongestAdvantage": "tool approval, CLI/scriptability, SDKs, PR checks, embedded editor/terminal/browser lanes",
+        "transferRule": "성숙한 오픈소스 기능은 게스트 어댑터 또는 엔진 후보로 평가하되, 플랫폼의 데이터/권한/검증 경계가 우선한다."
+      },
+      {
+        "id": "native_operator_apps",
+        "labelKo": "네이티브 운영/설치 앱",
+        "labelEn": "Native operator apps",
+        "platforms": [
+          "Docker Desktop",
+          "GitHub Desktop",
+          "Raycast",
+          "Discord"
+        ],
+        "role": "native_app_ux_reference",
+        "strongestAdvantage": "one-click setup, settings dialogs, troubleshooting, command palette, channels/spaces, visual confirmation",
+        "transferRule": "설정과 복구는 팝업/전용 패널에 두고, 반복 작업은 커맨드 팔레트와 확장 카탈로그로 빠르게 실행한다."
+      }
+    ],
+    "transferPatterns": [
+      {
+        "id": "workbench-activity-rail-editor-terminal",
+        "labelKo": "단일 사이드바 + 중앙 작업대 + 하단 터미널",
+        "labelEn": "Single activity rail, workbench center, bottom terminal",
+        "sourcePlatforms": [
+          "VS Code",
+          "IntelliJ IDEA",
+          "OpenHands"
+        ],
+        "observedStrength": "Mature desktop apps separate navigation, editor/work area, terminal/output, and status so users do not scroll through one long web page.",
+        "platformDecision": "Keep one primary sidebar, route feature tabs into the workbench center, and reserve the bottom drawer for multi-CLI terminal, logs, validation, and task runs.",
+        "productSection": "overview",
+        "userValueKo": "사용자가 어디서 파일을 보고, 어디서 명령을 실행하고, 어디서 결과를 확인하는지 즉시 이해한다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "remove duplicated navigation feel",
+          "keep CLI drawer as bottom/full overlay",
+          "use compact tabbed subpanels instead of long scroll"
+        ],
+        "riskControls": [
+          "responsive grid tests",
+          "customer snapshot remains source-free"
+        ],
+        "status": "implemented",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "background-agent-task-lifecycle",
+        "labelKo": "백그라운드 에이전트 작업 생명주기",
+        "labelEn": "Background agent task lifecycle",
+        "sourcePlatforms": [
+          "GitHub Copilot cloud agent",
+          "Cursor Background Agents",
+          "Claude Code background agents"
+        ],
+        "observedStrength": "Useful agent products frame work as async tasks with status, follow-up, takeover, validation, branch/workspace isolation, and review.",
+        "platformDecision": "Represent every launched agent task as a platform-owned run record with workspace, lane, command, output, evidence, validation, handoff, and review status.",
+        "productSection": "desktop",
+        "userValueKo": "사용자는 터미널을 직접 붙잡고 있지 않아도 작업 상태와 결과를 앱에서 이어받는다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "branch/workspace isolation UI",
+          "takeover action",
+          "follow-up prompt per run",
+          "PR/commit handoff"
+        ],
+        "riskControls": [
+          "tool permission prompts for destructive commands",
+          "bounded command output"
+        ],
+        "status": "integrated_contract",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "rules-memory-workflows-skills",
+        "labelKo": "규칙, 메모리, 워크플로, 스킬 분리",
+        "labelEn": "Rules, memory, workflows, and skills are separate",
+        "sourcePlatforms": [
+          "Devin Desktop / Windsurf",
+          "Claude Code",
+          "OpenCode",
+          "Cline"
+        ],
+        "observedStrength": "Users understand configuration better when durable rules, auto memory, manual workflows, reusable skills, and agent definitions are not mixed together.",
+        "platformDecision": "The Settings and Agent Factory surfaces must make this taxonomy explicit and save each asset into the correct durable path.",
+        "productSection": "agents",
+        "userValueKo": "사용자는 뭘 설정해야 하는지 몰라 헤매지 않고, 반복 작업을 올바른 자산으로 승격한다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "one settings button with tabs for provider, workspace, rules, memory, workflows, skills, permissions",
+          "agent init wizard writes AGENTS.md/rules/skills with preview"
+        ],
+        "riskControls": [
+          "never write private memories into versioned rules without explicit approval",
+          "show activation mode and scope before saving"
+        ],
+        "status": "integrated_contract",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "permission-hooks-checkpoints",
+        "labelKo": "권한, 훅, 체크포인트 게이트",
+        "labelEn": "Permissions, hooks, and checkpoints",
+        "sourcePlatforms": [
+          "Claude Code",
+          "OpenHands",
+          "Cline",
+          "Cursor"
+        ],
+        "observedStrength": "Agent tools are safer and easier to trust when pre-tool checks, permission requests, action approval, post-tool logging, and rollback points are visible.",
+        "platformDecision": "Add a platform permission layer before guest CLI actions and store approval, denial, checkpoint, and rollback records in the runtime data plane.",
+        "productSection": "desktop",
+        "userValueKo": "파일 수정, 명령 실행, 브라우저 사용, 외부 도구 호출이 앱 안에서 승인되고 되돌릴 수 있다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "native permission dialog",
+          "pre-tool hook registry",
+          "checkpoint list beside diff review",
+          "rollback action"
+        ],
+        "riskControls": [
+          "least privilege default",
+          "deny/defer/ask/allow state model"
+        ],
+        "status": "queued_p0",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "embedded-editor-diff-review",
+        "labelKo": "파일 탐색과 코드 편집/디프 리뷰 내장",
+        "labelEn": "Embedded file explorer, editor, and diff review",
+        "sourcePlatforms": [
+          "VS Code",
+          "GitHub Desktop",
+          "OpenHands",
+          "Cursor",
+          "Claude Code Desktop"
+        ],
+        "observedStrength": "Developer desktop tools make the file system and proposed changes visible before commit or handoff.",
+        "platformDecision": "Use the native file workspace and Monaco/source review panes as first-class product surfaces, not a hidden monitoring detail.",
+        "productSection": "source",
+        "userValueKo": "사용자는 파일시스템을 끌어와 코드와 설정을 직접 보고, 에이전트가 바꾼 내용을 검토한다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "native open-folder permission",
+          "diff queue by task run",
+          "file tabs with collapseable sections"
+        ],
+        "riskControls": [
+          "customer snapshot strips source file content",
+          "backup before write"
+        ],
+        "status": "implemented",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "agent-factory-subagents",
+        "labelKo": "전문 에이전트 생성 공장",
+        "labelEn": "Specialist agent factory",
+        "sourcePlatforms": [
+          "Claude Code subagents",
+          "Cline agent teams",
+          "OpenHands SDK",
+          "GitHub Copilot custom agents"
+        ],
+        "observedStrength": "Specialized agents work better when they have narrow prompts, scoped tools, separate context, and clear delegation rules.",
+        "platformDecision": "Agent Factory creates named agents, subagents, skills, tools, prompts, validation gates, and promotion records from repeated human work.",
+        "productSection": "agents",
+        "userValueKo": "사용자는 같은 지시를 반복하지 않고 목적별 에이전트를 쉽게 만들고 개선한다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "agent template chooser",
+          "tool scope selector",
+          "validation gate selector",
+          "subagent context policy"
+        ],
+        "riskControls": [
+          "capability promotion review",
+          "source-boundary and sensitive-file checks"
+        ],
+        "status": "implemented",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "validation-checks-as-product",
+        "labelKo": "검증 체크를 제품 기능으로 승격",
+        "labelEn": "Validation checks as product features",
+        "sourcePlatforms": [
+          "Continue",
+          "GitHub Copilot metrics",
+          "Aider lint/test loop"
+        ],
+        "observedStrength": "AI coding products gain trust when checks are explicit, repeatable, visible in PR/task lifecycle, and actionable when they fail.",
+        "platformDecision": "Represent lint, test, config contract, release readiness, customer bundle audit, and hallucination/security checks as run gates with evidence.",
+        "productSection": "intent",
+        "userValueKo": "사용자는 에이전트가 만든 결과가 왜 통과했는지, 어디서 실패했는지, 다음 개선점이 뭔지 본다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "validation gate catalog",
+          "failure-to-fix suggestion",
+          "per-agent evaluation trend"
+        ],
+        "riskControls": [
+          "no unsupported factual claim without source",
+          "record command, exit code, and evidence target"
+        ],
+        "status": "implemented",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "native-install-runtime-boundary",
+        "labelKo": "설치형 네이티브 런타임 경계",
+        "labelEn": "Installable native runtime boundary",
+        "sourcePlatforms": [
+          "Tauri",
+          "Docker Desktop",
+          "GitHub Desktop"
+        ],
+        "observedStrength": "Good desktop products own install, settings, diagnostics, update, data location, and local runtime boundaries instead of making users run many commands.",
+        "platformDecision": "The platform launches first, owns runtime data and UI authority, and invokes guest CLIs or sidecars through explicit adapters.",
+        "productSection": "desktop",
+        "userValueKo": "사용자는 명령어를 하나씩 몰라도 앱 설치, 데이터 경로, 진단, 업데이트, 실행을 한 곳에서 관리한다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "signed updater channel",
+          "native data path chooser",
+          "sidecar packaging audit",
+          "one-click developer/customer build"
+        ],
+        "riskControls": [
+          "signing and notarization gates",
+          "Tauri capability scopes"
+        ],
+        "status": "integrated_contract",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "command-palette-extension-catalog",
+        "labelKo": "커맨드 팔레트와 확장 카탈로그",
+        "labelEn": "Command palette and extension catalog",
+        "sourcePlatforms": [
+          "Raycast",
+          "VS Code",
+          "Docker Desktop"
+        ],
+        "observedStrength": "Fast launcher apps reduce friction by making commands searchable, installable, and keyboard-first.",
+        "platformDecision": "Expose actions such as open workspace, start agent, init rules, run validation, install adapter, and show diagnostics through a desktop command palette.",
+        "productSection": "overview",
+        "userValueKo": "사용자는 메뉴를 찾아다니지 않고 지금 필요한 기능을 검색해서 실행한다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "global command palette",
+          "extension/adapter catalog",
+          "keyboard shortcut registry",
+          "recent commands"
+        ],
+        "riskControls": [
+          "dangerous commands require permission dialog",
+          "missing adapters show setup guidance instead of blocking the app"
+        ],
+        "status": "queued_p0",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "workspace-spaces-and-decision-inbox",
+        "labelKo": "워크스페이스 Spaces와 결정함",
+        "labelEn": "Workspace spaces and decision inbox",
+        "sourcePlatforms": [
+          "Discord",
+          "Devin Agent Command Center",
+          "GitHub Copilot integrations"
+        ],
+        "observedStrength": "Channel-like organization and decision queues help users separate projects, tasks, handoffs, approvals, and notifications.",
+        "platformDecision": "Use projects/spaces for work boundaries and a decision inbox for blocked agent questions, permission requests, merge gates, and follow-ups.",
+        "productSection": "desktop",
+        "userValueKo": "사용자는 여러 에이전트 작업을 채널처럼 분리하고, 답해야 할 것만 한 곳에서 처리한다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "space selector",
+          "decision inbox filters",
+          "notification center",
+          "handoff timeline"
+        ],
+        "riskControls": [
+          "decision history retained",
+          "client-side hiding is not treated as security"
+        ],
+        "status": "implemented",
+        "priority": "p1",
+        "sourceIds": []
+      },
+      {
+        "id": "mcp-and-tool-scope-governance",
+        "labelKo": "MCP와 도구 범위 거버넌스",
+        "labelEn": "MCP and tool-scope governance",
+        "sourcePlatforms": [
+          "Claude Code",
+          "MCP",
+          "GitHub Copilot",
+          "OpenHands"
+        ],
+        "observedStrength": "Tool ecosystems become safer when scopes, consent, auth, server trust, tool search, and elicitation are visible.",
+        "platformDecision": "The platform must manage MCP servers and CLI adapters as capability records with trust level, scope, auth status, and permission prompts.",
+        "productSection": "agents",
+        "userValueKo": "사용자는 에이전트가 어떤 외부 도구와 데이터에 접근하는지 보고 제어한다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "MCP/adapter catalog",
+          "trusted server review",
+          "tool search and lazy loading",
+          "elicitation dialog"
+        ],
+        "riskControls": [
+          "OAuth consent boundary",
+          "token passthrough avoidance"
+        ],
+        "status": "integrated_contract",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "security-first-agentic-boundaries",
+        "labelKo": "에이전트 보안 경계 기본 내장",
+        "labelEn": "Security-first agentic boundaries",
+        "sourcePlatforms": [
+          "OWASP",
+          "GitHub Copilot",
+          "MCP"
+        ],
+        "observedStrength": "Agentic systems need design-time controls for indirect prompt injection, excessive agency, external content, secrets, and high-risk tools.",
+        "platformDecision": "Treat untrusted files/web/docs/logs as data, keep least privilege defaults, require human approval for high-risk actions, and record every exception.",
+        "productSection": "desktop",
+        "userValueKo": "사용자는 자동화가 편해져도 권한, 외부 입력, 비밀, 위험 명령이 무방비로 실행되지 않는다고 판단할 수 있다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "untrusted-content labels in file/docs previews",
+          "risk tag in run timeline",
+          "approval before privileged operations",
+          "red-team prompt test set"
+        ],
+        "riskControls": [
+          "least privilege",
+          "structured output validation"
+        ],
+        "status": "integrated_contract",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "learning-loop-from-usage-and-evaluation",
+        "labelKo": "사용/평가 데이터 기반 학습 개선 루프",
+        "labelEn": "Learning loop from usage and evaluation data",
+        "sourcePlatforms": [
+          "GitHub Copilot metrics",
+          "Aider leaderboards",
+          "Continue checks",
+          "Memory Sandbox research"
+        ],
+        "observedStrength": "Users trust agent platforms more when performance, outcomes, memories, decisions, and repeated failures are inspectable and improve future runs.",
+        "platformDecision": "Persist task runs, decisions, evidence, work timing, evaluations, intent maps, and promotion candidates so the platform can improve agents and capabilities over time.",
+        "productSection": "intent",
+        "userValueKo": "플랫폼은 작업을 쌓아두기만 하지 않고 반복 병목과 성공 패턴을 기능/에이전트 개선으로 되돌린다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "per-agent outcome trends",
+          "memory object viewer",
+          "automatic capability candidate scoring",
+          "evaluation-to-roadmap promotion"
+        ],
+        "riskControls": [
+          "private data stays out of shared memory",
+          "evidence provenance required before learning"
+        ],
+        "status": "implemented",
+        "priority": "p0",
+        "sourceIds": []
+      }
+    ]
   },
   "categories": [],
   "publicReview": {

@@ -585,6 +585,7 @@ type PhilosophyFeatureExtraction = NonNullable<WorkspaceSnapshot["philosophyFeat
 type IntentFeatureMap = NonNullable<WorkspaceSnapshot["intentFeatureMap"]>;
 type StructureOverview = NonNullable<WorkspaceSnapshot["structureOverview"]>;
 type ProductFeatureArchitecture = NonNullable<WorkspaceSnapshot["productFeatureArchitecture"]>;
+type ReferencePlatformAdvantages = NonNullable<WorkspaceSnapshot["referencePlatformAdvantages"]>;
 
 const fallbackViewModes: MonitorViewMode[] = [
   {
@@ -997,6 +998,34 @@ const emptyProductFeatureArchitecture: ProductFeatureArchitecture = {
   },
   qualitySignals: [],
   validationGates: []
+};
+
+const emptyReferencePlatformAdvantages: ReferencePlatformAdvantages = {
+  sourcePath: "",
+  productPosition: {
+    purpose: "",
+    primaryRule: "레퍼런스 앱의 장점은 에이전트 작업 루프에 맞춰 제품 기능으로 흡수한다.",
+    customerPromise: "앱에서 워크스페이스, 파일, 터미널, 에이전트, 검증, 학습을 바로 다룬다.",
+    monitoringBoundary: "모니터링은 운영자 보조면으로 분리한다."
+  },
+  sourceBoundary: {
+    policy: "public_sources_only",
+    customerVisibility: "summary_only",
+    excludedSources: [],
+    acceptedSourceTypes: []
+  },
+  summary: {
+    totalSources: 0,
+    platformGroups: 0,
+    totalPatterns: 0,
+    implemented: 0,
+    integratedContract: 0,
+    queuedP0: 0,
+    highPriority: 0
+  },
+  referenceLinks: [],
+  platformGroups: [],
+  transferPatterns: []
 };
 
 const sectionIds = new Set<SectionId>(sections.map((section) => section.id));
@@ -1676,6 +1705,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const intentFeatureMap = snapshot.intentFeatureMap ?? emptyIntentFeatureMap;
   const structureOverview = snapshot.structureOverview ?? emptyStructureOverview;
   const productFeatureArchitecture = snapshot.productFeatureArchitecture ?? emptyProductFeatureArchitecture;
+  const referencePlatformAdvantages = snapshot.referencePlatformAdvantages ?? emptyReferencePlatformAdvantages;
   const [selectedModeFunctionGroupId, setSelectedModeFunctionGroupId] = useState(
     modeFunctionCatalog.groups[0]?.id || "view_mode"
   );
@@ -3368,6 +3398,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
 
               <ProductFeatureArchitecturePanel
                 architecture={productFeatureArchitecture}
+                referenceAdvantages={referencePlatformAdvantages}
                 onOpenSection={openSection}
                 onOpenOperatorCenter={() => setOperatorCenterOpen(true)}
               />
@@ -3431,6 +3462,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <Metric label="Task Runs" value={snapshot.stats.tasks} icon={PlayCircle} tone="amber" />
                 <Metric label="Decisions" value={attentionItems.length} icon={Inbox} tone="red" />
                 <Metric label="Learning Themes" value={intentFeatureMap.summary.totalThemes} icon={GitBranch} tone="violet" />
+                <Metric label="Reference Patterns" value={referencePlatformAdvantages.summary.totalPatterns} icon={Layers} tone="blue" />
               </section>
 
               <section className="panel home-recent-panel">

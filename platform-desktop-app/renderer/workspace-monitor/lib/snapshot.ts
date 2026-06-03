@@ -25,6 +25,8 @@ export type WorkspaceStats = {
   productFeatures?: number;
   primaryProductFeatures?: number;
   supportingProductFeatures?: number;
+  referencePlatforms?: number;
+  referenceTransferPatterns?: number;
   structurePressurePoints?: number;
   sourceFiles?: number;
   rootFolders: number;
@@ -539,6 +541,65 @@ export type WorkspaceProductFeatureArchitecture = {
   }>;
 };
 
+export type WorkspaceReferencePlatformAdvantages = {
+  sourcePath: string;
+  productPosition: {
+    purpose: string;
+    primaryRule: string;
+    customerPromise: string;
+    monitoringBoundary: string;
+  };
+  sourceBoundary: {
+    policy?: string;
+    customerVisibility?: string;
+    excludedSources?: string[];
+    acceptedSourceTypes?: string[];
+  };
+  summary: {
+    totalSources: number;
+    platformGroups: number;
+    totalPatterns: number;
+    implemented: number;
+    integratedContract: number;
+    queuedP0: number;
+    highPriority: number;
+  };
+  referenceLinks: Array<{
+    id: string;
+    title: string;
+    url: string;
+    sourceType: string;
+    reliability: string;
+    limitation: string;
+    planImpact: string;
+  }>;
+  platformGroups: Array<{
+    id: string;
+    labelKo: string;
+    labelEn: string;
+    platforms: string[];
+    role: string;
+    strongestAdvantage: string;
+    transferRule: string;
+  }>;
+  transferPatterns: Array<{
+    id: string;
+    labelKo: string;
+    labelEn: string;
+    sourcePlatforms: string[];
+    observedStrength: string;
+    platformDecision: string;
+    productSection: string;
+    userValueKo: string;
+    currentPlatformAssets: string[];
+    implementationTargets: string[];
+    riskControls: string[];
+    status: string;
+    priority: string;
+    sourceIds: string[];
+  }>;
+};
+
 export type WorkspaceSnapshot = {
   schemaVersion: string;
   generatedAt: string;
@@ -569,6 +630,7 @@ export type WorkspaceSnapshot = {
   philosophyFeatureExtraction?: WorkspacePhilosophyFeatureExtraction;
   intentFeatureMap?: WorkspaceIntentFeatureMap;
   productFeatureArchitecture?: WorkspaceProductFeatureArchitecture;
+  referencePlatformAdvantages?: WorkspaceReferencePlatformAdvantages;
   categories: string[];
   publicReview: {
     status: string;

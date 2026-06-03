@@ -1,6 +1,19 @@
-import { ArrowRight, Bot, BrainCircuit, Code2, Eye, GitBranch, Network, SquareTerminal } from "lucide-react";
+import {
+  ArrowRight,
+  Bot,
+  BrainCircuit,
+  CheckCircle2,
+  Clock3,
+  Code2,
+  Eye,
+  GitBranch,
+  Layers3,
+  Network,
+  ShieldCheck,
+  SquareTerminal
+} from "lucide-react";
 
-import type { WorkspaceProductFeatureArchitecture } from "@/lib/snapshot";
+import type { WorkspaceProductFeatureArchitecture, WorkspaceReferencePlatformAdvantages } from "@/lib/snapshot";
 
 type ProductSectionId =
   | "overview"
@@ -16,6 +29,7 @@ type ProductSectionId =
 
 type ProductFeatureArchitecturePanelProps = {
   architecture: WorkspaceProductFeatureArchitecture;
+  referenceAdvantages?: WorkspaceReferencePlatformAdvantages;
   onOpenSection: (section: ProductSectionId) => void;
   onOpenOperatorCenter?: () => void;
 };
@@ -44,11 +58,16 @@ const featureIcons = {
 
 export function ProductFeatureArchitecturePanel({
   architecture,
+  referenceAdvantages,
   onOpenSection,
   onOpenOperatorCenter
 }: ProductFeatureArchitecturePanelProps) {
   const primaryFeatures = architecture.featureLayers.filter((feature) => feature.role === "primary");
   const supportingFeatures = architecture.featureLayers.filter((feature) => feature.role !== "primary");
+  const referencePatterns = referenceAdvantages?.transferPatterns ?? [];
+  const visibleReferencePatterns = referencePatterns
+    .filter((pattern) => pattern.priority === "p0" || pattern.status !== "queued_p1")
+    .slice(0, 6);
 
   return (
     <section className="product-feature-panel" aria-label="Product feature architecture">
@@ -118,6 +137,59 @@ export function ProductFeatureArchitecturePanel({
         })}
       </div>
 
+      {referenceAdvantages && visibleReferencePatterns.length > 0 && (
+        <div className="reference-advantage-board" aria-label="Reference platform advantage transfer">
+          <header>
+            <div>
+              <p className="eyebrow">레퍼런스 장점 적용 지도</p>
+              <h3>{referenceAdvantages.productPosition.customerPromise}</h3>
+              <p>{referenceAdvantages.productPosition.primaryRule}</p>
+            </div>
+            <div className="reference-advantage-summary">
+              <span>
+                <Layers3 size={14} aria-hidden="true" />
+                {referenceAdvantages.summary.platformGroups} groups
+              </span>
+              <span>
+                <CheckCircle2 size={14} aria-hidden="true" />
+                {referenceAdvantages.summary.implemented + referenceAdvantages.summary.integratedContract} applied
+              </span>
+              <span>
+                <Clock3 size={14} aria-hidden="true" />
+                {referenceAdvantages.summary.queuedP0} p0 queued
+              </span>
+            </div>
+          </header>
+          <div className="reference-advantage-grid">
+            {visibleReferencePatterns.map((pattern) => {
+              const section = sectionIds.has(pattern.productSection as ProductSectionId)
+                ? (pattern.productSection as ProductSectionId)
+                : "overview";
+              return (
+                <button
+                  key={pattern.id}
+                  type="button"
+                  className={`reference-advantage-card reference-status-${pattern.status.replaceAll("_", "-")}`}
+                  onClick={() => onOpenSection(section)}
+                >
+                  <span className="reference-advantage-card-top">
+                    <ShieldCheck size={15} aria-hidden="true" />
+                    <small>{statusLabel(pattern.status)}</small>
+                  </span>
+                  <strong>{pattern.labelKo || pattern.labelEn}</strong>
+                  <p>{pattern.userValueKo || pattern.platformDecision}</p>
+                  <span className="reference-source-row">
+                    {pattern.sourcePlatforms.slice(0, 3).map((source) => (
+                      <em key={source}>{source}</em>
+                    ))}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {supportingFeatures.length > 0 && (
         <div className="product-operator-strip" aria-label="Separated operator features">
           <span>Operator tools are separate</span>
@@ -139,4 +211,17 @@ export function ProductFeatureArchitecturePanel({
       </div>
     </section>
   );
+}
+
+function statusLabel(status: string) {
+  if (status === "implemented") {
+    return "applied";
+  }
+  if (status === "integrated_contract") {
+    return "contract";
+  }
+  if (status === "queued_p0") {
+    return "p0 queued";
+  }
+  return status.replaceAll("_", " ");
 }
