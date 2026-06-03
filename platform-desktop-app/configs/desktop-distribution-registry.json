@@ -3,20 +3,20 @@
   "name": "desktop-distribution-registry",
   "purpose": "Defines how the workspace platform should become installable desktop software without confusing repository setup modes with end-user installer packaging.",
   "reader_guide": {
-    "summary": "Use this registry before turning the platform into a desktop app, choosing Electron or Tauri, adding packaging scripts, or preparing an installer release.",
+    "summary": "Use this registry before changing the selected desktop product runtime, adding packaging scripts, or preparing an installer release.",
     "how_to_read": [
       "Read product_boundary first so repository setup install_mode is not confused with end-user installers.",
       "Read selected_platform_architecture first to understand the current Tauri-first productization decision.",
-      "Read candidate_frameworks to understand the alternatives kept as fallback or comparison routes.",
+      "Read candidate_frameworks to understand the fallback or comparison routes kept for recorded release blockers or maintenance evidence.",
       "Read packaging_targets to understand OS-specific installer and signing expectations.",
       "Read runtime_strategy and assistant_cli_capabilities before implementing multi-CLI orchestration.",
       "Read release_gates before claiming that a build is production-ready.",
       "Treat commands as planned future commands until dependencies are actually installed and audited."
     ],
     "owner": "platform-desktop-app",
-    "last_reviewed": "2026-06-02",
+    "last_reviewed": "2026-06-03",
     "update_triggers": [
-      "A desktop app framework is selected or changed.",
+      "The selected desktop product runtime changes.",
       "The installer target OS list changes.",
       "The platform runtime strategy changes between bundled, sidecar, local service, or remote service.",
       "Signing, notarization, update, uninstall, privacy, or dependency release gates change.",
@@ -178,7 +178,7 @@
       "path": "workspace-monitor/README.md",
       "source_type": "internal",
       "used_for": [
-        "initial web UI candidate for the desktop shell"
+        "selected product UI source for the desktop shell"
       ],
       "last_checked": "2026-06-02"
     },
@@ -256,8 +256,8 @@
     },
     {
       "id": "desktop_shell_reuses_existing_ui",
-      "rule": "The first desktop prototype should reuse workspace-monitor as the UI candidate unless research proves a separate UI is cheaper to maintain.",
-      "reason": "The monitor already parses repository history and documents, so duplicating it would add product surface before the installer architecture is proven.",
+      "rule": "The desktop product shell uses workspace-monitor as the selected UI source unless a release-quality migration plan proves a separate UI is cheaper to maintain.",
+      "reason": "The monitor already parses repository history and documents, so duplicating it would add product surface without improving the selected desktop product structure.",
       "applies_to": [
         "runtime_strategy",
         "recommended_initial_path"
@@ -265,7 +265,7 @@
     },
     {
       "id": "tauri_first_is_selected_shell_until_measurement_changes_it",
-      "rule": "Use Tauri v2/Rust as the selected first desktop shell architecture around workspace-monitor. Electron and Wails remain fallback candidates, but new implementation work should target the Tauri scaffold unless a recorded measurement or release blocker changes the decision.",
+      "rule": "Use Tauri v2/Rust as the selected desktop product shell architecture around workspace-monitor. Electron and Wails remain fallback routes, but new implementation work should target the Tauri product shell unless a recorded release blocker or maintenance case changes the decision.",
       "reason": "The long design review favored a smaller native shell with explicit command boundaries while preserving Python and Next.js ownership.",
       "applies_to": [
         "selected_platform_architecture",
@@ -286,7 +286,7 @@
     {
       "id": "release_ready_requires_distribution_gates",
       "rule": "A desktop build is not production-ready until signing, notarization where applicable, installer smoke tests, update policy, uninstall/rollback behavior, privacy review, and dependency/license review are complete.",
-      "reason": "Installable software creates trust and recovery obligations that a local repository prototype does not.",
+      "reason": "Installable software creates trust and recovery obligations that a developer-local repository run does not.",
       "applies_to": [
         "packaging_targets",
         "release_gates"
@@ -417,7 +417,7 @@
       "presentation-agent domain workflows"
     ],
     "integration_points": [
-      "workspace-monitor as the initial UI surface",
+      "workspace-monitor as the selected product UI surface",
       "agent-platform as the Python-first local platform layer",
       "agent-platform CLI adapter registry for optional external command capabilities",
       "_history and _ops documents as repository data sources"
@@ -425,23 +425,23 @@
   },
   "recommended_initial_path": {
     "id": "tauri_first_cross_platform_shell",
-    "status": "selected_for_first_scaffold",
+    "status": "selected_product_runtime",
     "summary": "Build a Tauri v2 desktop shell that starts as the platform-first host runtime, reuses the existing workspace-monitor static UI, keeps agent-platform as the Python layer, and mounts Claude Code, Gemini CLI, Codex CLI, OpenCode, and other CLIs as optional guest adapters.",
     "why": [
       "The repository already has web UI output in workspace-monitor.",
-      "A smaller desktop shell is preferable while the product boundary is still forming.",
+      "A smaller desktop shell is preferable for the current product boundary.",
       "Tauri gives a clear Rust native boundary for future command scopes, sidecars, and signed updater work.",
       "The platform goal is to configure multiple AI coding tools above a shared workspace platform, not wrap one CLI."
     ],
     "fallback_reconsideration_triggers": [
-      "Tauri build or signing workflow blocks the release after a measured prototype",
+      "Tauri build or signing workflow blocks release after release-grade validation",
       "Electron ecosystem tooling lowers total maintenance cost despite larger resource footprint",
       "Wails becomes clearly better because the desktop backend becomes a Go-owned local service",
       "Native packaging only proves enough because users prefer browser plus CLI instead of a shell"
     ]
   },
   "selected_platform_architecture": {
-    "status": "scaffolded_not_public_release_ready",
+    "status": "product_shell_ready_public_release_gated",
     "desktop_shell": {
       "runtime": "Rust/Tauri v2",
       "source_paths": [
@@ -473,7 +473,7 @@
     },
     "local_service_candidate": {
       "runtime": "Go",
-      "status": "candidate_after_measured_need",
+      "status": "deferred_until_measured_need",
       "use_when": [
         "long-running file watcher",
         "multi-process CLI supervisor",
@@ -506,16 +506,16 @@
       "architecture_doc": "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md"
     },
     "current_machine_state": {
-      "node_npm": "available when checked on 2026-06-02",
-      "go": "available when checked on 2026-06-02",
-      "rust": "not available when checked on 2026-06-02",
-      "implication": "Tauri source is scaffolded, but tauri:dev and tauri:build require a documented Rust/Tauri installation audit before execution."
+      "node_pnpm": "available when checked on 2026-06-03",
+      "go": "available when checked on 2026-06-03",
+      "rust_cargo_tauri": "available for local/internal macOS builds when checked on 2026-06-03",
+      "implication": "Tauri product shell source, local build, and internal macOS artifacts are available; public distribution remains gated by signing, notarization, update, smoke-test, privacy, and dependency review."
     }
   },
   "candidate_frameworks": [
     {
       "id": "tauri",
-      "status": "primary_candidate",
+      "status": "selected_product_runtime",
       "best_for": [
         "web UI desktop shell",
         "smaller native bundle goals",
@@ -535,7 +535,7 @@
     },
     {
       "id": "electron",
-      "status": "fallback_candidate",
+      "status": "fallback_comparison_route",
       "best_for": [
         "mature JavaScript desktop ecosystem",
         "wide installer tooling examples",
@@ -555,7 +555,7 @@
     },
     {
       "id": "wails_go",
-      "status": "comparison_candidate",
+      "status": "comparison_route",
       "best_for": [
         "Go-owned local service plus web UI desktop shell",
         "simple cross-platform binary expectations",
@@ -568,14 +568,14 @@
       ],
       "must_check_before_install": [
         "whether the desktop backend is mostly a Go service",
-        "Tauri versus Wails proof-of-concept size and lifecycle comparison",
+        "Tauri versus Wails release-size and lifecycle comparison",
         "license and dependency review",
         "auto-update and installer strategy"
       ]
     },
     {
       "id": "native_packaging_only",
-      "status": "comparison_candidate",
+      "status": "comparison_route",
       "best_for": [
         "CLI plus browser-based UI distribution",
         "cases where a desktop shell adds little user value"

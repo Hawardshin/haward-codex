@@ -41,9 +41,9 @@ Platform-first host runtime
 
 | Area | Preferred Candidate | Reason | Check Before Implementation |
 | --- | --- | --- | --- |
-| Desktop shell | Tauri v2/Rust | The existing scaffold and macOS/Windows profiles are Tauri-first. | Rust/Tauri installation audit, shell permissions, sidecar, signing gates |
+| Desktop shell | Tauri v2/Rust | The current product shell and macOS/Windows profiles are Tauri-first. | Rust/Tauri installation audit, shell permissions, sidecar, signing gates |
 | Terminal UI | xterm.js | Standard web terminal emulator candidate for a browser-based UI. | addons, theme, accessibility, output bounding, mobile non-goal |
-| PTY/process | Tauri shell plugin, sidecar, separate supervisor candidates | Tauri shell provides scoped process execution, and sidecars support packaged local services. | Real interactive PTY needs a separate POC. Node `node-pty` is an Electron/Node-supervisor candidate, not the default Tauri choice. |
+| PTY/process | Tauri shell plugin, sidecar, separate supervisor candidates | Tauri shell provides scoped process execution, and sidecars support packaged local services. | Real interactive PTY needs a separate release-grade spike. Node `node-pty` is an Electron/Node-supervisor candidate, not the default Tauri choice. |
 | Code editing | Monaco Editor | Browser-based editor from VS Code; avoids custom editor work first. | file URIs, model lifecycle, disposal, workers, schema/LSP linkage, dependency audit |
 | editor-agent protocol | Agent Client Protocol | Future candidate for decoupling editors and coding agents. | Defer until editor interoperability is a stronger bottleneck than CLI supervision |
 | long-running supervisor | Go or Python sidecar | Go is a future process-supervisor candidate; Python owns current agent-platform policy and validation. | measured bottleneck, lifecycle cleanup, packaging, signing, rollback |
@@ -84,17 +84,17 @@ Vector DB is not the default. File-system indexes and structured JSON/Markdown c
 - Public macOS readiness cannot be claimed without Developer ID signing, hardened runtime, notarization, stapling when applicable, and clean Mac smoke tests.
 - Raw CLI output storage is allowed only when size, sensitivity, and retention are explicit.
 
-## MVP Slices
+## Product Slices
 
 1. Adapter status UI: show availability, version, and setup-later state for the four CLIs.
 2. Run timeline model: model process lanes, artifacts, decisions, and validation records.
-3. Single-CLI supervised prototype: run one CLI with bounded output, cancel, and cleanup.
-4. Decision deferral prototype: route a CLI question to the decision inbox and pause only the dependent lane.
+3. Single-CLI supervised slice: run one CLI with bounded output, cancel, and cleanup.
+4. Decision deferral slice: route a CLI question to the decision inbox and pause only the dependent lane.
 5. Multi-CLI fan-out/fan-in: add process graph validation and merge gates.
 6. Source editor: implement Monaco-based read/write scope, diff/review, and save policy.
 7. Data quality layer: validate terminal-derived records before promoting them to reusable knowledge candidates.
 
-## Implementation Status: Supervisor MVP 1
+## Implementation Status: Supervisor Product Slice 1
 
 As of 2026-06-02, the first real implementation is a constrained version of slice 1.
 
@@ -104,9 +104,9 @@ As of 2026-06-02, the first real implementation is a constrained version of slic
 - stdin is closed, output is bounded by `MAX_HEALTH_OUTPUT_BYTES`, and runtime is bounded by `HEALTH_TIMEOUT_MS`.
 - Missing CLIs are reported as `capability_missing` and do not block the desktop UI.
 - The Workspace Monitor `Desktop` tab runs the real health checks when connected to Tauri and shows an unavailable fallback in a regular browser.
-- Question-like health output is surfaced as a decision prompt candidate. In the session MVP, `send_cli_adapter_defer_message` sends the stdin defer message and stores detected questions in `_ops/coordination/human-decision-inbox.json`.
+- Question-like health output is surfaced as a decision prompt candidate. In the session product slice, `send_cli_adapter_defer_message` sends the stdin defer message and stores detected questions in `_ops/coordination/human-decision-inbox.json`.
 
-## Implementation Status: Pipe Session / Source Editor MVP 2
+## Implementation Status: Pipe Session / Source Editor Product Slice 2
 
 The 2026-06-02 follow-up implementation adds pipe-based execution and scoped file editing without installing new dependencies.
 
@@ -120,7 +120,7 @@ The 2026-06-02 follow-up implementation adds pipe-based execution and scoped fil
 - Saves create backups under `platform-desktop-app/artifacts/source-editor-backups/`.
 - The Workspace Monitor `Desktop` tab shows a CLI session console and textarea-based scoped editor.
 
-## Implementation Status: User Controls MVP 3
+## Implementation Status: User Controls Product Slice 3
 
 The 2026-06-02 additional improvement makes setup, mode selection, and deferred decision handling available from one user-facing surface.
 
@@ -130,7 +130,7 @@ The 2026-06-02 additional improvement makes setup, mode selection, and deferred 
 - The session launcher provides `User Task`, `Platform Improvement`, `Knowledge Accumulation`, and `Review & Verify` mode presets that fill the prompt.
 - The decision inbox panel shows open/answered/total counts, decision list, answer type/text controls, and saved answer state.
 
-## Implementation Status: Task Pipe Init MVP 4
+## Implementation Status: Task Pipe Init Product Slice 4
 
 The 2026-06-02 additional implementation moves beyond single CLI session start and adds task-intake-based multi-CLI lane initialization.
 
@@ -140,7 +140,7 @@ The 2026-06-02 additional implementation moves beyond single CLI session start a
 - The init report returns pipe edges for `task_intake -> lane stdin`, `lane stdout/stderr -> platform_event_store`, `lane question_events -> human_decision_inbox`, and `lane accepted_summary -> merge_gate`.
 - The Workspace Monitor `Desktop` tab shows presets, task intake, lane state, pipe edges, and merge gate in the `Task Pipe Init` panel.
 
-## Implementation Status: Decision Resume MVP 4
+## Implementation Status: Decision Resume Product Slice 4
 
 The next 2026-06-02 improvement adds an explicit resume path that reinjects a saved decision answer into the linked active CLI session.
 
@@ -152,7 +152,7 @@ The next 2026-06-02 improvement adds an explicit resume path that reinjects a sa
 
 ## Non-Scope
 
-- This MVP does not implement a PTY-based terminal.
+- This product slice does not implement a PTY-based terminal.
 - Autonomous source-affecting CLI execution and merge-gate release are not implemented yet.
 - Rust/Tauri, xterm.js, Monaco, and PTY dependencies are not installed before installation audit.
 - The app does not own provider authentication for users.

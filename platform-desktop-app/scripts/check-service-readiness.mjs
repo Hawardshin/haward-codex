@@ -69,7 +69,7 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
     ? "service_internal_blocked"
     : publicBlockers.length
       ? "service_internal_ready_public_blocked"
-      : "service_public_ready_candidate";
+      : "service_public_release_ready_pending_signoff";
 
   return {
     status,

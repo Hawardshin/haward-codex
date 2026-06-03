@@ -182,7 +182,7 @@
     {
       "id": "explicit_workspace_boundary",
       "rule": "The desktop app must ask the user to open or create a workspace path and explain what will be indexed before scanning or executing commands.",
-      "reason": "Installable software needs a stronger privacy boundary than a local repository prototype.",
+      "reason": "Installable software needs a stronger privacy boundary than a developer-local repository run.",
       "applies_to": [
         "install_flow",
         "first_run_flow",

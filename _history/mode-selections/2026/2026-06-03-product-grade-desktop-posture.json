@@ -1,0 +1,30 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-026",
+  "selected_work_mode": "governance",
+  "reason": "The request changes durable product posture, policies, source-of-truth registries, readiness status language, and future decision gates for the installable desktop platform.",
+  "lighter_modes_rejected": [
+    {
+      "mode": "quick",
+      "reason": "Too durable and cross-document for a direct edit without trace/evaluation."
+    },
+    {
+      "mode": "standard",
+      "reason": "The change affects policy and future operating behavior, not only project-local implementation."
+    }
+  ],
+  "required_targets": [
+    "web_search_record_targets",
+    "requirements_targets",
+    "spec_targets",
+    "mode_selection_record_targets",
+    "omission_check_targets",
+    "work_summary_targets",
+    "request_trace_targets",
+    "evaluation_targets"
+  ],
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "resource_risk_occurred": false,
+  "cli_pipeline_occurred": false
+}

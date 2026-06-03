@@ -41,9 +41,9 @@ Platform-first host runtime
 
 | 영역 | 우선 후보 | 이유 | 구현 전 확인 |
 | --- | --- | --- | --- |
-| 데스크톱 셸 | Tauri v2/Rust | 기존 스캐폴드와 macOS/Windows 배포 프로파일이 Tauri-first다. | Rust/Tauri 설치 감사, shell permission, sidecar, signing gate |
+| 데스크톱 셸 | Tauri v2/Rust | 현재 제품 shell과 macOS/Windows 배포 프로파일이 Tauri-first다. | Rust/Tauri 설치 감사, shell permission, sidecar, signing gate |
 | 터미널 UI | xterm.js | 브라우저 기반 terminal emulator 표준 후보이며 web UI에 붙이기 쉽다. | addon, theme, accessibility, output bounding, mobile 비목표 |
-| PTY/process | Tauri shell plugin, sidecar, 별도 supervisor 후보 | Tauri shell은 scoped process execution을 제공한다. sidecar는 Python/service packaging 후보를 제공한다. | 실제 interactive PTY에는 별도 POC가 필요하다. Node `node-pty`는 Electron/Node supervisor 후보이며 Tauri 기본 선택은 아니다. |
+| PTY/process | Tauri shell plugin, sidecar, 별도 supervisor 후보 | Tauri shell은 scoped process execution을 제공한다. sidecar는 Python/service packaging 후보를 제공한다. | 실제 interactive PTY에는 별도 release-grade spike가 필요하다. Node `node-pty`는 Electron/Node supervisor 후보이며 Tauri 기본 선택은 아니다. |
 | 코드 편집 | Monaco Editor | VS Code에서 나온 browser-based editor이며 source editing을 처음부터 직접 만들지 않아도 된다. | file URI, model lifecycle, dispose, workers, schema/LSP 연결, dependency audit |
 | editor-agent protocol | Agent Client Protocol | editor와 coding agent decoupling의 향후 후보이다. | 지금은 CLI supervisor가 우선이며 ACP는 editor interoperability가 핵심 병목일 때 검토 |
 | 장기 supervisor | Go 또는 Python sidecar | Go는 장기 실행 process supervisor 후보, Python은 기존 agent-platform 정책/검증 계층이다. | 측정된 병목, lifecycle cleanup, packaging, signing, rollback |
@@ -84,17 +84,17 @@ Platform-first host runtime
 - public macOS readiness는 Developer ID signing, hardened runtime, notarization, stapling, clean Mac smoke test 없이는 주장하지 않는다.
 - CLI 출력의 raw 저장은 size, sensitivity, retention이 정해진 경우에만 허용한다.
 
-## MVP 절단 순서
+## 제품 Slice 순서
 
 1. Adapter status UI: 네 CLI의 availability/version/setup-later 상태를 보여준다.
 2. Run timeline model: process lane, artifact, decision, validation record를 UI 데이터 모델로 만든다.
-3. Single-CLI supervised prototype: 한 CLI를 bounded output/cancel/cleanup으로 실행한다.
-4. Decision deferral prototype: CLI 질문을 decision inbox로 보내고 dependent lane만 pause한다.
+3. Single-CLI supervised slice: 한 CLI를 bounded output/cancel/cleanup으로 실행한다.
+4. Decision deferral slice: CLI 질문을 decision inbox로 보내고 dependent lane만 pause한다.
 5. Multi-CLI fan-out/fan-in: process graph validation과 merge gate를 붙인다.
 6. Source editor: Monaco 기반 read/write scope, diff/review, save policy를 구현한다.
 7. Data quality layer: terminal-derived records를 reusable knowledge candidate로 승격하는 validation을 붙인다.
 
-## 구현 상태: Supervisor MVP 1
+## 구현 상태: Supervisor Product Slice 1
 
 2026-06-02 기준 첫 실제 구현은 1번 slice의 제한된 버전이다.
 
@@ -104,9 +104,9 @@ Platform-first host runtime
 - stdin은 닫혀 있고, output은 `MAX_HEALTH_OUTPUT_BYTES`로 제한되며, timeout은 `HEALTH_TIMEOUT_MS`로 제한된다.
 - CLI가 없으면 `capability_missing`으로 보고하고 데스크톱 UI는 계속 열린다.
 - `workspace-monitor`의 `Desktop` 탭은 Tauri 런타임에 연결되면 실제 health check를 실행하고, 일반 브라우저에서는 unavailable fallback을 보여준다.
-- health output에서 질문처럼 보이는 라인은 decision prompt 후보로 표시한다. session MVP에서는 `send_cli_adapter_defer_message`가 stdin defer message를 보내고 감지된 질문을 `_ops/coordination/human-decision-inbox.json`에 저장한다.
+- health output에서 질문처럼 보이는 라인은 decision prompt 후보로 표시한다. session product slice에서는 `send_cli_adapter_defer_message`가 stdin defer message를 보내고 감지된 질문을 `_ops/coordination/human-decision-inbox.json`에 저장한다.
 
-## 구현 상태: Pipe Session / Source Editor MVP 2
+## 구현 상태: Pipe Session / Source Editor Product Slice 2
 
 2026-06-02 후속 구현은 dependency 설치 없이 가능한 pipe 기반 실행과 scoped file editing을 추가한다.
 
@@ -120,7 +120,7 @@ Platform-first host runtime
 - 저장 전 `platform-desktop-app/artifacts/source-editor-backups/` 아래 backup을 만든다.
 - Workspace Monitor `Desktop` 탭은 CLI session console과 textarea 기반 scoped editor를 표시한다.
 
-## 구현 상태: User Controls MVP 3
+## 구현 상태: User Controls Product Slice 3
 
 2026-06-02 추가 개선은 사용자 입장에서 설정, 모드 선택, 보류 결정 처리를 한 화면에서 다루도록 한다.
 
@@ -130,7 +130,7 @@ Platform-first host runtime
 - session launcher는 `User Task`, `Platform Improvement`, `Knowledge Accumulation`, `Review & Verify` 모드 프리셋을 제공하고 prompt를 채운다.
 - decision inbox panel은 open/answered/total count, decision 목록, answer type/text 입력, 저장된 답변 상태를 보여준다.
 
-## 구현 상태: Task Pipe Init MVP 4
+## 구현 상태: Task Pipe Init Product Slice 4
 
 2026-06-02 추가 구현은 단일 CLI session start를 넘어 task intake 기준 multi-CLI lane init을 제공한다.
 
@@ -140,7 +140,7 @@ Platform-first host runtime
 - init report는 `task_intake -> lane stdin`, `lane stdout/stderr -> platform_event_store`, `lane question_events -> human_decision_inbox`, `lane accepted_summary -> merge_gate` pipe edge를 반환한다.
 - Workspace Monitor `Desktop` 탭은 `Task Pipe Init` 패널에서 preset, task intake, lane 상태, pipe edge, merge gate를 보여준다.
 
-## 구현 상태: Decision Resume MVP 4
+## 구현 상태: Decision Resume Product Slice 4
 
 2026-06-02 후속 개선은 저장된 decision answer를 linked active CLI session으로 재주입하는 명시적 resume path를 추가한다.
 
@@ -152,7 +152,7 @@ Platform-first host runtime
 
 ## 비범위
 
-- 이번 MVP는 PTY 기반 terminal implementation이 아니다.
+- 이번 product slice는 PTY 기반 terminal implementation이 아니다.
 - autonomous source-affecting CLI execution과 merge gate release는 아직 구현하지 않았다.
 - 실제 Rust/Tauri, xterm.js, Monaco, PTY dependency 설치는 설치 감사 전에는 하지 않는다.
 - provider authentication을 앱이 대신 소유하지 않는다.

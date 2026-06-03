@@ -13,7 +13,7 @@ This keeps the product from running on top of any one AI coding tool. The platfo
 | Product | Users need an app-like install and launch path, not only a repository setup. | A desktop shell can hide the operating system of docs, history, and evaluation. | The shell owns entry and first-run UX; the existing platform memory, history, and evaluation structure remains the source of truth. |
 | Desktop packaging | macOS and Windows trust depend on signing, notarization, install/uninstall, and update behavior. | Signing credentials and a Windows build host are not available yet. | Separate local/internal/public execution levels and block production-ready claims until release gates pass. |
 | Runtime/language | Tauri/Rust fits a small shell and explicit native boundary better than an Electron-first default. | Rust is not installed on the current machine and adds build cost. | Select Tauri-first for the product architecture, but install dependencies only after an audit record. Keep Go as the local service candidate. |
-| Infrastructure | CLI execution, watchers, update tasks, and background agents create leak and orphan-process risks. | Blocking everything upfront slows product progress. | v1 scaffold focuses on shell/readiness; sidecars, services, and CLI execution require explicit lifecycle contracts. |
+| Infrastructure | CLI execution, watchers, update tasks, and background agents create leak and orphan-process risks. | Blocking everything upfront slows product progress. | The first product slice focuses on shell/readiness; sidecars, services, and CLI execution require explicit lifecycle contracts. |
 | Security/privacy | Installers must not contain tokens, cookies, private snapshots, or signing keys. | Convenience pushes toward automatic setup. | Store secrets through OS credentials, environment variables, or runtime input, never committed defaults. |
 | UX | First run should make workspace, mode, missing capability, and task state visible. | Too many questions block work. | Optional CLIs are deferred capability cards; decision inbox collects blocked choices while unblocked work continues. |
 | Principle guardian | The platform must enforce structure, not rely only on prompts. | Too many gates slow work. | Use work modes for overhead control and release/readiness gates for installable software. |
@@ -46,9 +46,9 @@ User
 
 - Node/npm exists on the current machine.
 - Go exists on the current machine.
-- Rust toolchain does not exist on the current machine.
-- This change does not create a signed installer.
-- It adds a Tauri scaffold, readiness test, macOS/Windows execution profiles, and release gates so the next step can install Rust/Tauri dependencies with an audit record.
+- Rust/Cargo/Tauri local build path is verified on the current machine.
+- Local/internal `.app` and DMG artifacts can be produced, but they must not be described as public signed installers.
+- The current baseline keeps the Tauri product shell, readiness tests, macOS/Windows execution profiles, and release gates while public distribution gates remain closed.
 
 ## Public Release Gates
 
@@ -66,8 +66,7 @@ User
 
 ## Next Steps
 
-1. Record an installation audit plan for Rust toolchain and Tauri CLI.
-2. Pass `pnpm run monitor:build`, `pnpm run check`, and `pnpm test` on macOS first.
-3. After Rust installation, verify `pnpm run tauri:dev` as a developer-local run.
-4. Define a Windows build host or CI path.
-5. Do not use public-ready wording until signing, notarization, certificate, and smoke-test gates pass.
+1. Keep the macOS local/internal build passing with `pnpm`, `cargo`, and Tauri validation.
+2. Define a Windows build host or CI path.
+3. Keep Developer ID signing, notarization, signed updater, and clean-machine smoke tests as public release blockers.
+4. Do not use public-ready wording until signing, notarization, certificate, and smoke-test gates pass.

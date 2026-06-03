@@ -9,7 +9,7 @@ function readJson(relativePath) {
   return JSON.parse(readFileSync(join(root, relativePath), "utf8"));
 }
 
-test("desktop scaffold has the selected Tauri entry points", () => {
+test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(existsSync(join(root, "src-tauri/tauri.conf.json")), true);
   assert.equal(existsSync(join(root, "src-tauri/src/lib.rs")), true);
 

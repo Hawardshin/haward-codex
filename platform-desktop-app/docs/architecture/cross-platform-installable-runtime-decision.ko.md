@@ -13,7 +13,7 @@
 | 제품 책임자 | 사용자는 “레포 설치”가 아니라 앱 설치 후 바로 열리는 경험을 원한다. | 설치형 앱만 만들면 내부 운영 규칙과 히스토리 구조가 흐려질 수 있다. | 데스크톱 셸은 진입점만 맡고, 지식/히스토리/평가 구조는 기존 문서와 플랫폼 계층을 유지한다. |
 | 데스크톱 패키징 전문가 | macOS와 Windows는 서명, 공증, 설치/삭제, 업데이트가 제품 신뢰의 핵심이다. | 초기에는 서명 인증서와 Windows 빌드 환경이 없다. | public-ready를 주장하지 않고, 내부 테스트와 공개 배포 게이트를 분리한다. |
 | 런타임/언어 전문가 | Tauri/Rust는 시스템 WebView를 활용해 Electron보다 작은 셸을 기대할 수 있고, native command boundary를 분명히 만들기 좋다. | Rust toolchain이 현재 머신에 없고 학습/빌드 비용이 있다. | 최종 셸은 Tauri-first로 고정하되, dependency 설치는 감사 기록 후 진행한다. Go는 장기 실행 local service 후보로 남긴다. |
-| 인프라 전문가 | CLI 실행, 파일 감시, 업데이트, 백그라운드 에이전트는 누수와 좀비 프로세스 위험이 있다. | 모든 기능을 처음부터 막으면 제품이 느려진다. | v1 스캐폴드는 UI 셸과 readiness에 집중하고, sidecar/local service/CLI 실행은 명시적 lifecycle 계약 이후에만 붙인다. |
+| 인프라 전문가 | CLI 실행, 파일 감시, 업데이트, 백그라운드 에이전트는 누수와 좀비 프로세스 위험이 있다. | 모든 기능을 처음부터 막으면 제품이 느려진다. | 첫 제품 slice는 UI 셸과 readiness에 집중하고, sidecar/local service/CLI 실행은 명시적 lifecycle 계약 이후에만 붙인다. |
 | 보안/프라이버시 전문가 | 앱 설치물에 토큰, 쿠키, private snapshot, 서명 키를 넣으면 안 된다. | 편의성을 위해 자동 설정 욕구가 생긴다. | 설정은 OS credential/env/runtime input으로 주입하고, installer에는 기본값만 넣는다. |
 | UX 전문가 | 사용자는 첫 실행에서 workspace 선택, 모드 선택, 누락된 기능 상태, 작업 타임라인을 한 번에 이해해야 한다. | 설정 질문이 많으면 흐름이 막힌다. | optional CLI는 나중에 설정 가능한 capability card로 둔다. 질문은 decision inbox로 모으고, 막히지 않는 작업은 계속한다. |
 | 원칙 수호자 | 플랫폼은 프롬프트가 아니라 강제 가능한 구조여야 한다. | 너무 많은 게이트는 느리다. | work_mode로 무게를 조절하고, 설치형 제품은 release gate와 readiness test로 강제한다. |
@@ -46,9 +46,9 @@
 
 - Node/npm은 현재 머신에 존재한다.
 - Go는 현재 머신에 존재한다.
-- Rust toolchain은 현재 머신에 없다.
-- 따라서 이번 변경은 실제 signed installer를 생성하지 않는다.
-- 대신 Tauri 스캐폴드, readiness test, macOS/Windows execution profile, release gate를 추가해서 다음 단계에서 Rust/Tauri dependency 설치와 빌드 감사로 넘어갈 수 있게 한다.
+- Rust/Cargo/Tauri local build path는 현재 머신에서 검증되어 있다.
+- local/internal `.app`과 DMG 산출물은 만들 수 있지만, 공개 signed installer로 주장하지 않는다.
+- 현재 기준은 Tauri 제품 shell, readiness test, macOS/Windows execution profile, release gate를 유지하면서 public distribution gate를 닫아 두는 것이다.
 
 ## 공개 배포 전 필수 게이트
 
@@ -66,8 +66,7 @@
 
 ## 다음 단계
 
-1. Rust toolchain과 Tauri CLI를 프로젝트 로컬 설치 계획으로 감사 기록한다.
-2. macOS에서 `pnpm run monitor:build`, `pnpm run check`, `pnpm test`를 먼저 통과시킨다.
-3. Rust 설치 후 `pnpm run tauri:dev`를 developer-local run으로 검증한다.
-4. Windows 빌드 host 또는 CI를 별도로 정의한다.
-5. signing/notarization/certificate가 준비되기 전에는 public-ready 표현을 금지한다.
+1. macOS local/internal build를 계속 `pnpm`, `cargo`, Tauri 검증으로 유지한다.
+2. Windows 빌드 host 또는 CI를 별도로 정의한다.
+3. Developer ID signing, notarization, signed updater, clean-machine smoke test를 public release blocker로 유지한다.
+4. signing/notarization/certificate가 준비되기 전에는 public-ready 표현을 금지한다.

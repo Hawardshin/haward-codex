@@ -1,0 +1,15 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-026",
+  "summary": "Promote the installable desktop platform posture from initial UI/PoC language to product-grade sellable desktop-app structure.",
+  "outcome": "ready_to_close",
+  "artifacts": [
+    "platform-desktop-app/docs/requirements/2026-06-03-product-grade-desktop-posture.ko.md",
+    "platform-desktop-app/specs/2026-06-03-product-grade-desktop-posture/",
+    "platform-desktop-app/configs/desktop-distribution-registry.json",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/scripts/check-service-readiness.mjs"
+  ],
+  "evaluation": "_history/evaluations/2026/2026-06-03-product-grade-desktop-posture-evaluation.json",
+  "commit": "pending"
+}

@@ -19,7 +19,7 @@
 | PDA-UX-009 | 작업 preflight는 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode를 선택 가능한 CLI lane으로 보여주고, availability/version/auth/permission/setup-later 상태를 표시해야 한다. | must | `ai_cli_orchestration_flow` 검토 |
 | PDA-UX-010 | 실행 화면은 여러 CLI lane의 terminal output을 보여주되, durable state는 task event, artifact, decision, validation record로 구조화해야 한다. | must | run timeline과 data accumulation contract |
 | PDA-UX-011 | CLI가 사용자 질문을 만들면 decision inbox handoff 화면에서 질문, 영향, 기본 가정, 막힌 lane, 계속 가능한 lane, 재개 action을 보여야 한다. | must | decision inbox flow와 human decision inbox |
-| PDA-UX-012 | 소스 편집 화면은 Monaco Editor 같은 검증된 editor surface를 우선 사용하고, 사용자 모드에서는 안전한 파일 범위와 변경 리뷰를 중심으로 보여야 한다. | should | source editor prototype acceptance |
+| PDA-UX-012 | 소스 편집 화면은 Monaco Editor 같은 검증된 editor surface를 우선 사용하고, 사용자 모드에서는 안전한 파일 범위와 변경 리뷰를 중심으로 보여야 한다. | should | source editor product acceptance |
 | PDA-UX-013 | Desktop 탭은 Tauri runtime 연결 상태, CLI adapter availability/version, bounded health check 결과, 감지된 CLI 질문, source editing 준비 상태를 한 화면에서 보여야 한다. | must | workspace-monitor Desktop tab |
 | PDA-UX-014 | Desktop 탭은 pipe 기반 CLI session console과 scoped source editor를 제공해 start/poll/stdin/defer/cancel, decision inbox 저장 수, 파일 열기, backup 저장 상태를 한 화면에서 조작할 수 있어야 한다. | must | workspace-monitor Desktop tab, TypeScript check |
 | PDA-UX-015 | Desktop 탭은 CLI setup guide, 작업 모드 프리셋, 보류 decision 목록, answer type/text 입력, 저장된 답변 상태를 같은 작업 표면에서 보여야 한다. | must | workspace-monitor Desktop tab, Tauri decision commands |

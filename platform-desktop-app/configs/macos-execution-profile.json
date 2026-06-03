@@ -12,7 +12,7 @@
       "Read smoke_tests before calling a macOS build runnable or release-ready."
     ],
     "owner": "platform-desktop-app",
-    "last_reviewed": "2026-06-02",
+    "last_reviewed": "2026-06-03",
     "update_triggers": [
       "The macOS desktop shell framework changes.",
       "Tauri, Electron, Wails, or native packaging dependencies are installed.",
@@ -128,7 +128,7 @@
       "source_type": "internal",
       "used_for": [
         "overall desktop packaging boundary",
-        "Tauri-first candidate direction"
+        "Tauri-first product runtime direction"
       ],
       "last_checked": "2026-06-02"
     },
@@ -148,7 +148,7 @@
     {
       "id": "local_run_is_not_public_distribution",
       "rule": "A developer-local macOS run may be unsigned or ad-hoc signed, but a public outside-App-Store build must be Developer ID signed, hardened-runtime enabled, notarized, and preferably stapled.",
-      "reason": "A local prototype and a Gatekeeper-friendly public app have different trust requirements.",
+      "reason": "A developer-local internal build and a Gatekeeper-friendly public app have different trust requirements.",
       "applies_to": [
         "execution_levels",
         "signing_notarization_requirements",
@@ -347,12 +347,12 @@
     {
       "format": "dmg",
       "purpose": "Primary outside-App-Store installer-like distribution candidate for normal macOS users.",
-      "status": "preferred_public_candidate"
+      "status": "preferred_public_format"
     },
     {
       "format": "zip",
       "purpose": "Useful for update feeds or simple archive distribution when tooling requires it.",
-      "status": "candidate"
+      "status": "available_distribution_format"
     },
     {
       "format": "pkg",
@@ -367,7 +367,7 @@
     "stapling_expected_when_applicable": true,
     "entitlement_policy": "Start with no extra entitlements; add only those required by measured macOS behavior, such as workspace file access or update behavior.",
     "secret_policy": "Apple credentials, signing identities, API keys, and update private keys must be injected through local keychain, CI secrets, or environment variables; they must not be committed.",
-    "ad_hoc_signing_policy": "Ad-hoc signing is acceptable only for developer-local prototypes and must not be described as public distribution-ready."
+    "ad_hoc_signing_policy": "Ad-hoc signing is acceptable only for developer-local or trusted internal builds and must not be described as public distribution-ready."
   },
   "permissions_entitlements": [
     {

@@ -8,10 +8,11 @@ When turning the platform into software that an end user installs, separate repo
 
 - Installable desktop app productization belongs in `platform-desktop-app/`.
 - `agent-platform/configs/installations/install-mode-registry.json` describes repository user/developer setup modes, not DMG/MSIX/MSI/NSIS-style distribution packaging.
-- The first desktop shell should evaluate reuse of `workspace-monitor/`.
+- The desktop shell uses `workspace-monitor/` as the selected product UI source. A separate UI requires a release-quality migration plan, trace update, and validation run first.
 - Before desktop UI or installer implementation, check `platform-desktop-app/configs/user-flow-registry.json` and review first run, workspace chooser, view mode, optional setup deferral, task timeline, decision inbox, and recovery flows.
 - The installable app is not a single CLI wrapper. External CLIs attach as optional capabilities through `agent-platform/configs/integrations/cli-adapter-registry.json`.
-- Compare at least two routes among Tauri, Electron, and native packaging-only before installing framework or packager dependencies.
+- Tauri is the currently selected product runtime. Re-evaluate Electron, Wails, or native-packaging-only only when a new release blocker or maintenance case is recorded.
+- Use PoC, prototype, and initial-candidate language only for bounded experiments on new alternative routes. Do not downgrade the selected `platform-desktop-app/` product structure into a PoC or initial candidate.
 - If dependency installation, upgrade, or removal actually occurs, create an installation audit record.
 - Installers must not include real tokens, webhook URLs, browser cookies, private snapshots, or local-only secrets.
 - macOS distribution requires signing and notarization gates; Windows distribution requires signing and installer format gates; Linux distribution requires format and uninstall behavior gates.
@@ -28,4 +29,4 @@ When turning the platform into software that an end user installs, separate repo
 
 ## Current Baseline
 
-As of 2026-06-02, the recommendation is a Tauri-first prototype, but the final decision is not locked. Electron and native-packaging-only remain comparison candidates.
+As of 2026-06-03, the baseline is the Tauri-first product runtime. `workspace-monitor` is the selected desktop product UI source, while Electron, Wails, and native-packaging-only remain fallback/comparison routes only when a recorded release blocker or maintenance case justifies re-evaluation.

@@ -1,0 +1,30 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-026",
+  "timing_mode": "manual_estimate",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes": 6,
+      "measurement": "estimated"
+    },
+    {
+      "phase": "source_inventory_and_policy_scan",
+      "duration_minutes": 14,
+      "measurement": "estimated"
+    },
+    {
+      "phase": "policy_registry_readiness_edits",
+      "duration_minutes": 32,
+      "measurement": "estimated"
+    },
+    {
+      "phase": "governance_artifacts",
+      "duration_minutes": 12,
+      "measurement": "estimated"
+    }
+  ],
+  "bottleneck_candidates": [
+    "Generated snapshot and broad historical specs contain old terms, so source-of-truth search must distinguish current policy from history."
+  ]
+}

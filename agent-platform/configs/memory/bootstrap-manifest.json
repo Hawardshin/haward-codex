@@ -56,7 +56,7 @@
       "The installable desktop software productization project, desktop distribution registry, or installer release gate policy changes.",
       "The macOS execution profile, macOS runnable structure, signing, hardened runtime, notarization, stapling, update, or clean Mac smoke-test gate changes.",
       "The Windows execution profile, Windows runnable structure, installer target, code signing, SmartScreen/download trust, WebView2, update, uninstall, or clean Windows smoke-test gate changes.",
-      "The installable desktop runtime decision, Tauri-first scaffold, Rust/Tauri shell boundary, or optional AI coding CLI capability model changes.",
+      "The installable desktop runtime decision, Tauri-first product runtime, Rust/Tauri shell boundary, or optional AI coding CLI capability model changes.",
       "The runtime language decision registry, Rust/Go/Tauri/Wails direction, or runtime language selection policy changes.",
       "The CLI adapter registry, CLI pipeline template, external command execution boundary, optional CLI dependency posture, multi-process pipe orchestration, or missing-CLI fallback policy changes.",
       "The agent orchestration registry, reusable agent blueprint contract, multi-agent orchestration pattern, or agent spec validation command changes.",
@@ -1271,7 +1271,7 @@
     },
     {
       "id": "macos_execution_profile_must_stay_discoverable",
-      "rule": "The macOS execution profile must remain a warm memory anchor so future installable desktop work does not confuse local runnable prototypes with signed, hardened, notarized, and smoke-tested public macOS distribution.",
+      "rule": "The macOS execution profile must remain a warm memory anchor so future installable desktop work does not confuse developer-local or internal builds with signed, hardened, notarized, and smoke-tested public macOS distribution.",
       "reason": "The user explicitly asked for a macOS-runnable structure; public macOS readiness has stronger security, signing, notarization, update, and workspace-boundary gates than local development.",
       "applies_to": [
         "startup_sequence",
@@ -1282,7 +1282,7 @@
     },
     {
       "id": "windows_execution_profile_must_stay_discoverable",
-      "rule": "The Windows execution profile must remain a warm memory anchor so future installable desktop work does not confuse local runnable prototypes with signed, installer-tested, update-tested, and clean-Windows-smoke-tested public Windows distribution.",
+      "rule": "The Windows execution profile must remain a warm memory anchor so future installable desktop work does not confuse developer-local or internal builds with signed, installer-tested, update-tested, and clean-Windows-smoke-tested public Windows distribution.",
       "reason": "The user explicitly asked for a realistic macOS and Windows installable platform. Public Windows readiness has stronger installer, code-signing, SmartScreen/download trust, update, uninstall, and workspace-boundary gates than local development.",
       "applies_to": [
         "startup_sequence",
@@ -1293,7 +1293,7 @@
     },
     {
       "id": "desktop_runtime_decision_must_stay_discoverable",
-      "rule": "The cross-platform installable runtime decision must remain a warm memory anchor so future sessions continue the selected Tauri-first scaffold unless measured release or maintenance evidence changes the decision.",
+      "rule": "The cross-platform installable runtime decision must remain a warm memory anchor so future sessions continue the selected Tauri-first product runtime unless measured release blockers or maintenance evidence change the decision.",
       "reason": "The user asked to consolidate stale or contradictory desktop-platform direction into a realistic macOS/Windows installable structure that can configure Codex, Claude Code, Cursor, Antigravity, and similar tools above the platform.",
       "applies_to": [
         "startup_sequence",
@@ -1741,7 +1741,7 @@
       "id": "cross_platform_installable_runtime_decision",
       "path": "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md",
       "tier": "warm",
-      "purpose": "Selected Tauri-first desktop shell architecture, expert debate, language/runtime split, and optional AI coding CLI capability model.",
+      "purpose": "Selected Tauri-first product runtime architecture, expert debate, language/runtime split, and optional AI coding CLI capability model.",
       "required": true,
       "load_order": 8
     },

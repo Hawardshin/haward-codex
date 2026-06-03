@@ -11,7 +11,7 @@
       "Use shared_dependencies and boundary_notes to avoid mixing project-specific and shared workspace assets."
     ],
     "owner": "workspace-operations",
-    "last_reviewed": "2026-06-02",
+    "last_reviewed": "2026-06-03",
     "update_triggers": [
       "A root project is created, archived, renamed, or removed.",
       "A project boundary changes.",
@@ -87,7 +87,7 @@
     }
   ],
   "version": 1,
-  "updated": "2026-06-02",
+  "updated": "2026-06-03",
   "projects": [
     {
       "name": "agent-platform",
@@ -181,7 +181,7 @@
       "status": "active",
       "type": "installable-desktop-product",
       "purpose": "Desktop/installable software productization project for turning the workspace platform into an end-user application with OS-specific installer, release, privacy, and update gates.",
-      "scope": "Desktop product boundary, distribution registry, packaging strategy, installer release gates, project-local requirements/specs, and future desktop shell implementation.",
+      "scope": "Desktop product boundary, selected Tauri product shell, distribution registry, packaging strategy, installer release gates, and project-local requirements/specs.",
       "project_specific_home": [
         "platform-desktop-app/artifacts/",
         "platform-desktop-app/configs/",
@@ -202,10 +202,10 @@
       ],
       "boundary_notes": [
         "End-user installer packaging belongs here, not in agent-platform install_mode setup profiles.",
-        "Use the selected Tauri-first scaffold around workspace-monitor unless measured release or maintenance evidence changes the decision.",
-        "Reuse workspace-monitor as the initial UI candidate unless desktop-specific research proves a separate UI is easier to maintain.",
+        "Use the selected Tauri-first product runtime around workspace-monitor unless measured release blockers or maintenance evidence changes the decision.",
+        "Reuse workspace-monitor as the selected product UI source unless a release-quality migration plan proves a separate UI is easier to maintain.",
         "Do not bundle real secrets, private snapshots, or environment-specific tokens in installers.",
-        "Actual Tauri, Electron, or packager dependency installation must follow the installation audit workflow."
+        "New fallback runtime or packager dependency installation must follow the installation audit workflow."
       ]
     },
     {

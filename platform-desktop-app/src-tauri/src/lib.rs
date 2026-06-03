@@ -2593,7 +2593,7 @@ fn service_readiness_report(app: &AppHandle) -> Result<ServiceReadinessReport, S
     } else if !public_blockers.is_empty() {
         "service_internal_ready_public_blocked"
     } else {
-        "service_public_ready_candidate"
+        "service_public_release_ready_pending_signoff"
     }
     .to_string();
 

@@ -8,7 +8,7 @@
 
 - Python: 에이전트 계획, 조사, 평가, 문서 처리, 설정 검증의 기본값이다.
 - TypeScript/Next.js: `workspace-monitor`, 대시보드, HTML 산출물, Vercel 배포형 UI의 기본값이다.
-- Rust/Tauri: 설치형 데스크톱 shell, 작은 네이티브 command bridge, 보안 민감 native operation, 안정된 성능 hot path의 1차 후보이다.
+- Rust/Tauri: 설치형 데스크톱 shell의 현재 선택 제품 런타임이며, 작은 네이티브 command bridge, 보안 민감 native operation, 안정된 성능 hot path의 1차 경로이다.
 - Go: 장시간 실행되는 local daemon, 파일 watcher, 네트워크/알림 bridge, 운영 CLI, 단순 cross-platform binary의 1차 후보이다.
 - Electron/Node: JavaScript 생태계와 Chromium 일관성이 더 중요하고 번들 크기/메모리 비용을 감수할 때의 fallback이다.
 
@@ -18,7 +18,8 @@
 2. 성능 때문에 언어를 바꾸려면 병목 수치를 먼저 기록한다. 측정 없이 Rust/Go로 옮기지 않는다.
 3. 설치형 데스크톱 제품은 `platform-desktop-app/`의 배포 gate를 따른다.
 4. Rust/Go/Electron 의존성을 실제 설치하면 설치 감사 기록과 rollback 계획을 남긴다.
-5. 커뮤니티 반응, GitHub star, Reddit 의견은 채택/위험 신호로만 보고, 공식 문서와 로컬 prototype 측정으로 결정한다.
+5. 커뮤니티 반응, GitHub star, Reddit 의견은 채택/위험 신호로만 보고, 공식 문서와 release-grade 로컬 측정으로 결정한다.
+6. 선택된 데스크톱 제품 경로를 PoC나 prototype으로 되돌리는 표현은 금지한다. 실험 측정은 새 대체 경로나 좁은 기술 위험에만 붙인다.
 
 ## 조사와 설계 절차
 
@@ -28,7 +29,7 @@
 2. 공식 문서, architecture/ADR 참고, 유지보수되는 오픈소스 구현, 이슈/토론 신호, 반대 사례를 분리해 조사한다.
 3. 의미 있는 blast radius가 있으면 최소 두 후보 설계를 비교한다.
 4. `_templates/runtime-language-decision/` 템플릿으로 ADR-style 결정 기록을 남긴다.
-5. 성능이나 packaging이 선택 이유라면 prototype measurement plan을 작성한 뒤 구현 또는 설치로 넘어간다.
+5. 성능이나 packaging이 선택 이유라면 release-grade measurement plan을 작성한 뒤 구현 또는 설치로 넘어간다.
 6. 실제 dependency 설치가 발생하면 설치 감사 기록을 먼저 만든다.
 
 ## 현재 추천
@@ -37,10 +38,10 @@
 
 - Core platform: Python 유지
 - Monitor/web UI: TypeScript/Next.js 유지
-- Desktop productization: Tauri-first prototype 유지
+- Desktop productization: Tauri-first product runtime 유지
 - Local background service가 필요해지면: Go 우선 검토
 - 안정된 indexing/search/parser hot path가 병목이면: Rust 모듈 우선 검토
 
 ## 검증
 
-새 컴포넌트나 런타임 변경 전에는 `agent-platform/configs/runtime/language-decision-registry.json`의 `decision_gates`와 `prototype_measurements`를 채운다.
+새 컴포넌트나 런타임 변경 전에는 `agent-platform/configs/runtime/language-decision-registry.json`의 `decision_gates`와 measurement 항목을 채운다. 이름이 `prototype_measurements`인 기존 필드는 새 대체 경로의 실험 측정에만 사용하고, 선택된 데스크톱 제품 구조를 PoC로 낮추는 근거로 쓰지 않는다.

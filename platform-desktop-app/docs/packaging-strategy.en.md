@@ -8,11 +8,11 @@
 - Microsoft MSIX documentation explains the Windows application package format and install experience.
 - Apple Developer documentation treats notarization as a trust gate for macOS software distributed outside the App Store.
 
-## Candidate Strategies
+## Product Strategy And Comparison Routes
 
 ### Tauri-First Desktop Shell
 
-The current recommendation is a Tauri-first prototype.
+The current product baseline is a Tauri-first desktop shell.
 
 - Strengths: wraps an existing web UI and aligns with smaller bundle goals.
 - Risks: Rust/toolchain setup and explicit Python sidecar or local service boundary design.
@@ -53,7 +53,7 @@ The installable app is not a single CLI wrapper. The platform launches first as 
 ## Language And Runtime Direction
 
 - Keep the core agent layer Python-first.
-- Keep the current desktop shell prototype direction Tauri/Rust-first.
+- Keep the current desktop shell product runtime Tauri/Rust-first.
 - If a separate background service becomes necessary, evaluate Go first.
 - If profiling proves a stable parsing/index/search hot path is the bottleneck, evaluate a Rust native module.
 - Treat external CLIs as guest adapter capabilities on top of the platform, not runtime bodies.
@@ -73,6 +73,6 @@ Before calling a build distributable installable software, complete:
 - Privacy review
 - User documentation
 
-## Not Done Yet
+## Current State
 
-This work did not install Tauri, Electron, or packager dependencies. It only creates the productization structure and decision criteria.
+The Tauri/Rust dependencies and local macOS internal build path are already set up with installation audit records. Public distribution remains blocked until Developer ID signing, notarization, signed updater, clean-machine smoke tests, and privacy/dependency review are complete.

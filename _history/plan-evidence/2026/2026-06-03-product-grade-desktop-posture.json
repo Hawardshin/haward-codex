@@ -1,0 +1,27 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-026",
+  "plan_steps": [
+    {
+      "step": "Promote selected desktop path to product baseline",
+      "evidence": [
+        "User instruction explicitly rejected initial UI candidate and PoC framing.",
+        "Existing Tauri/Rust local/internal build path is already implemented and audited."
+      ]
+    },
+    {
+      "step": "Keep public distribution gated",
+      "evidence": [
+        "Apple notarization and Microsoft signing docs require signing/trust gates for public distribution.",
+        "Service readiness registry still lists public blockers."
+      ]
+    },
+    {
+      "step": "Change readiness status wording",
+      "evidence": [
+        "The old status strings contained dependency-audit/candidate language that could misdirect decisions."
+      ]
+    }
+  ],
+  "decision": "Use product-grade baseline language for the selected desktop path and keep experimental language only for bounded alternative-route research."
+}

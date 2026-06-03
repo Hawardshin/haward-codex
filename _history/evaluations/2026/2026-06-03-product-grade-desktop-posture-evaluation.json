@@ -1,0 +1,109 @@
+{
+  "initial_instruction": "Promote the installable desktop platform from initial UI candidate or PoC framing to a sellable desktop-app product structure.",
+  "result_summary": "Promoted the selected installable desktop app posture to a product-grade Tauri-first desktop runtime with workspace-monitor as the product UI source. Public distribution remains intentionally gated by signing, notarization, signed updater, clean-machine smoke tests, and privacy/dependency review.",
+  "work_mode": "governance",
+  "changed_files": [
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "_docs/policies/installable-software-policy.ko.md",
+    "_docs/policies/installable-software-policy.en.md",
+    "_docs/policies/runtime-language-selection-policy.ko.md",
+    "_docs/policies/runtime-language-selection-policy.en.md",
+    "_ops/projects/registry.json",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/configs/desktop-distribution-registry.json",
+    "platform-desktop-app/configs/macos-execution-profile.json",
+    "platform-desktop-app/configs/service-readiness-registry.json",
+    "platform-desktop-app/configs/user-flow-registry.json",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/scripts/check-service-readiness.mjs",
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "workspace-monitor/src/generated/workspace-snapshot.json"
+  ],
+  "verification": [
+    "check-config-contract desktop-distribution-registry: self_documenting",
+    "check-config-contract macos-execution-profile: self_documenting",
+    "check-config-contract service-readiness-registry: self_documenting",
+    "check-memory-bootstrap bootstrap-manifest: ready_to_bootstrap",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "corepack pnpm --filter workspace-monitor run build:customer: passed",
+    "corepack pnpm --filter platform-desktop-app run check: desktop_product_structure_ready_public_release_gated; service_internal_ready_public_blocked",
+    "corepack pnpm --filter platform-desktop-app test: 13 tests passed",
+    "cd platform-desktop-app/src-tauri && cargo test: passed",
+    "cd platform-desktop-app/src-tauri && cargo build: passed",
+    "corepack pnpm --filter workspace-monitor run check: passed",
+    "corepack pnpm --filter workspace-monitor run check:intent-map:customer: passed",
+    "python3 -m json.tool _ops/projects/registry.json: passed",
+    "git diff --check: passed"
+  ],
+  "references_checked": [
+    "_history/web-searches/2026/2026-06-03-product-grade-desktop-posture.ko.md",
+    "platform-desktop-app/configs/desktop-distribution-registry.json",
+    "platform-desktop-app/configs/macos-execution-profile.json",
+    "platform-desktop-app/configs/service-readiness-registry.json",
+    "https://v2.tauri.app/distribute/",
+    "https://tauri.app/distribute/sign/windows/",
+    "https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution",
+    "https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web",
+    "https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/code-signing-options"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-03-product-grade-desktop-posture.ko.md",
+    "_history/source-provenance/2026/2026-06-03-product-grade-desktop-posture.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-03-product-grade-desktop-posture.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-03-product-grade-desktop-posture.json"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-03-product-grade-desktop-posture.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-product-grade-desktop-posture-omission-check.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-product-grade-desktop-posture.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-03-product-grade-desktop-posture.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-03-product-grade-desktop-posture.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-03-product-grade-desktop-posture/"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-product-grade-desktop-posture.json"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-product-grade-desktop-posture.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Implement persistent runtime workspace chooser enforcement.",
+    "Configure public signing/notarization and signed updater only after credential, security, and rollback planning."
+  ]
+}

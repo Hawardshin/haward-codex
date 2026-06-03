@@ -3,7 +3,7 @@
   "name": "service-readiness-registry",
   "purpose": "Defines production-service readiness gates for the installable desktop platform so internal builds, customer test builds, and public releases are not confused.",
   "reader_guide": {
-    "summary": "Use this registry when deciding whether the desktop platform is only a local/internal build, a customer-test build, or a public service release candidate.",
+    "summary": "Use this registry when deciding whether the desktop platform is a local/internal build, a controlled customer-test build, or ready for public service release signoff.",
     "how_to_read": [
       "Read service_levels first to understand which claims are allowed.",
       "Read readiness_groups to see the grouped service gaps that must be visible in the app.",

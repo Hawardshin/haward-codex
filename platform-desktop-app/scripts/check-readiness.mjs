@@ -385,21 +385,21 @@ for (const profilePath of ["configs/macos-execution-profile.json", "configs/wind
 }
 
 if (!commandExists("node")) {
-  failures.push("node is required for desktop scaffold checks and workspace-monitor build orchestration");
+  failures.push("node is required for desktop product checks and workspace-monitor build orchestration");
 }
 if (!commandExists("npm")) {
-  failures.push("npm is required for desktop scaffold checks and Tauri CLI scripts");
+  failures.push("npm is required for desktop product checks and Tauri CLI scripts");
 }
 if (!commandExists("rustc") || !commandExists("cargo")) {
   warnings.push("Rust toolchain is not installed; tauri:dev and tauri:build are blocked until a documented installation audit is completed");
 }
 
 const result = {
-  status: failures.length === 0 ? "ready_for_dependency_install_audit" : "rework_required",
+  status: failures.length === 0 ? "desktop_product_structure_ready_public_release_gated" : "rework_required",
   failures,
   warnings,
   checked_files: requiredFiles.length,
-  release_claim: "This scaffold is not a signed public installer. Public readiness requires OS signing, notarization where applicable, Windows signing, and smoke tests."
+  release_claim: "The desktop product structure is ready for local/internal validation. Public release remains gated by OS signing, notarization where applicable, Windows signing, signed update/recovery, and clean-machine smoke tests."
 };
 
 console.log(JSON.stringify(result, null, 2));

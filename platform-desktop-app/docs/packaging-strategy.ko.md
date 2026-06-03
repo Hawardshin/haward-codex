@@ -8,11 +8,11 @@
 - Microsoft MSIX 문서는 Windows 앱 패키징 형식과 설치 경험을 설명한다.
 - Apple Developer 문서는 macOS 외부 배포 시 notarization을 신뢰 게이트로 다룬다.
 
-## 후보 전략
+## 제품 전략과 비교 경로
 
 ### Tauri-first desktop shell
 
-현재 추천은 Tauri-first prototype이다.
+현재 제품 기준은 Tauri-first desktop shell이다.
 
 - 장점: 기존 web UI를 감싸기 쉽고, 작은 번들 목표에 맞다.
 - 리스크: Rust/toolchain, Python sidecar 또는 local service 경계 설계가 필요하다.
@@ -53,7 +53,7 @@ Electron은 mature ecosystem과 풍부한 installer 사례가 강점이다.
 ## 언어/런타임 방향
 
 - Core agent layer는 Python-first를 유지한다.
-- Desktop shell은 현재 Tauri/Rust-first prototype이 가장 맞다.
+- Desktop shell은 현재 Tauri/Rust-first 제품 런타임을 유지한다.
 - 별도 background service가 필요해지면 Go를 먼저 검토한다.
 - 성능 병목이 안정된 parsing/index/search hot path로 확인되면 Rust native module을 검토한다.
 - 외부 CLI는 런타임 본체가 아니라 플랫폼 위의 guest adapter capability로 다룬다.
@@ -73,6 +73,6 @@ Electron은 mature ecosystem과 풍부한 installer 사례가 강점이다.
 - privacy review
 - 사용자 문서
 
-## 아직 하지 않은 것
+## 현재 상태
 
-이번 작업에서는 Tauri, Electron, packager dependency를 설치하지 않았다. 제품화 구조와 판단 기준만 만들었다.
+Tauri/Rust 의존성과 로컬 macOS 내부 빌드 경로는 설치 감사 기록과 함께 구축되어 있다. 공개 배포는 Developer ID signing, notarization, signed updater, clean-machine smoke test, privacy/dependency review가 끝날 때까지 blocked 상태로 둔다.
