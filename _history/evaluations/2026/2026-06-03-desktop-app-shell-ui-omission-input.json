@@ -1,0 +1,137 @@
+{
+  "task": "Desktop app shell UI redesign",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and implementation.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-desktop-app-shell-ui.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "desktop-app-not-web-dashboard",
+      "description": "Replace the web dashboard feel with a desktop app shell.",
+      "source": "UR-2026-06-03-024",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "settings-in-popup",
+      "description": "Move configuration controls into a popup/dialog instead of trying to fit everything into one screen.",
+      "source": "UR-2026-06-03-024",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "settings dialog render in workspace-monitor/components/MonitorShell.tsx",
+        "settings dialog CSS in workspace-monitor/app/globals.css",
+        "Browser verification of settings dialog"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "step-and-surface-design",
+      "description": "Use separate surfaces for workspace, tasks, decisions, artifacts, capabilities, and settings instead of one crowded screen.",
+      "source": "REQ-PDA-UI-001 through REQ-PDA-UI-004",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "desktop home grid in workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/specs/2026-06-03-desktop-app-shell-ui/spec.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "visual-verification",
+      "description": "Verify the frontend with desktop, settings dialog, and mobile views.",
+      "source": "Frontend guidance",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-03-desktop-app-shell-ui/validation.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "customer-public-snapshot-boundary",
+      "description": "Avoid committing an internal full public snapshot as customer/public data.",
+      "source": "Platformization Rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "public snapshot restored with --snapshot-mode customer before staging",
+        "workspace-monitor/public/workspace-snapshot.json excluded from staged UI commit if it remains generated-only noise"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-03-desktop-app-shell-ui.ko.md",
+      "purpose": "Project requirements for desktop app shell UI.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-desktop-app-shell-ui/spec.ko.md",
+      "purpose": "Spec for desktop app shell redesign.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-03-desktop-app-shell-ui.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-validation",
+      "description": "Workspace Monitor typecheck, tests, and build pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter workspace-monitor run check",
+        "corepack pnpm --filter workspace-monitor test",
+        "corepack pnpm --filter workspace-monitor run build"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser-visual-check",
+      "description": "Static preview renders desktop app shell, settings dialog, and mobile layout without loading failure or horizontal overflow.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "http://127.0.0.1:3018/",
+        "Desktop DOM check: loadingIndicatorCount=0 and no body horizontal overflow",
+        "Mobile DOM check: horizontalOverflow=false"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "resource-check",
+      "description": "Runtime resource risks for keyboard listener, fetch fallback, and preview server are recorded.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "_history/evaluations/2026/2026-06-03-desktop-app-shell-ui-resource-input.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "MonitorShell remains large; component splitting is intentionally deferred to avoid broad refactor during visual redesign.",
+    "Public references informed design patterns only; no external app source code was copied."
+  ],
+  "notes": [
+    "Preview server is intentionally left running for user review."
+  ]
+}

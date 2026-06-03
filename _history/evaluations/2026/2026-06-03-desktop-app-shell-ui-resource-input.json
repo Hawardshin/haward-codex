@@ -1,0 +1,109 @@
+{
+  "task": "Desktop app shell UI redesign",
+  "work_mode": "standard",
+  "runtime_context": [
+    "react",
+    "nextjs",
+    "browser",
+    "local-static-preview"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "settings-keyboard-listener",
+      "category": "subscription",
+      "description": "The Ctrl/Cmd+, and Escape shortcuts use a global keydown listener that could remain registered after MonitorShell unmounts.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The listener is registered in a React effect and removed in the cleanup function.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx settings shortcut effect",
+        "corepack pnpm --filter workspace-monitor run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "snapshot-loader-fetch-fallback",
+      "category": "network_connection",
+      "description": "Snapshot loading now races a public snapshot fetch with a timeout and dynamic generated snapshot fallback.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The fetch path uses AbortController when available, clears the timeout, and the generated snapshot fallback is a bounded dynamic import.",
+      "evidence": [
+        "workspace-monitor/components/SnapshotLoader.tsx",
+        "static Browser verification showed loadingIndicatorCount=0"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "local-preview-server",
+      "category": "process",
+      "description": "A local static preview server was started for final UI inspection.",
+      "required": true,
+      "status": "accepted",
+      "mitigation": "The failed Next dev server was stopped; the remaining Python static server is intentionally left running so the user can open the delivered preview URL.",
+      "evidence": [
+        "http://127.0.0.1:3018/",
+        "workspace-monitor/out served by python3 -m http.server"
+      ],
+      "rationale": "The preview server is the user-facing handoff for this frontend task and can be stopped after review."
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "keyboard-listener-cleanup",
+      "resource": "window keydown listener",
+      "create_path": "window.addEventListener('keydown', handleKeyDown)",
+      "cleanup_path": "return () => window.removeEventListener('keydown', handleKeyDown)",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "corepack pnpm --filter workspace-monitor run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "snapshot-fetch-timeout-cleanup",
+      "resource": "snapshot fetch timeout and optional AbortController",
+      "create_path": "Promise.race([fetchPublicSnapshot(controller), timeout])",
+      "cleanup_path": "clearTimeout(timeoutId) and controller?.abort()",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/components/SnapshotLoader.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "preview-server-handoff",
+      "resource": "python static preview server",
+      "create_path": "python3 -m http.server 3018 --bind 127.0.0.1",
+      "cleanup_path": "Manual stop after user review; no background build watcher remains.",
+      "required": true,
+      "status": "deferred",
+      "evidence": [
+        "Preview URL remains available for user review: http://127.0.0.1:3018/"
+      ],
+      "rationale": "The server is intentionally retained as the delivered preview surface."
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "static-preview-render-smoke",
+      "metric": "render/load and horizontal overflow",
+      "tool": "in-app Browser DOM checks",
+      "threshold": "No loading indicator, no body horizontal overflow on desktop or mobile.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Desktop 1280x720: bodyScrollWidth equals clientWidth; loadingIndicatorCount=0",
+        "Mobile 390px: horizontalOverflow=false; loadingIndicatorCount=0"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No package installation occurred.",
+    "No persistent polling loop, worker, or unbounded cache was added."
+  ]
+}

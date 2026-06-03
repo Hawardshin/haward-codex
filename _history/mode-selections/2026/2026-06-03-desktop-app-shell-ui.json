@@ -1,0 +1,13 @@
+{
+  "task": "Desktop app shell UI redesign",
+  "selected_mode": "standard",
+  "reason": "The request changes meaningful product UI and project artifacts, but does not change repository-wide governance, evaluator policy, installation packaging, or a new runtime contract.",
+  "web_first_completed": true,
+  "memory_bootstrap_completed": true,
+  "large_scope_decomposition_required": false,
+  "view_mode": "superadmin_developer",
+  "install_mode": "not_applicable",
+  "resource_risk_occurred": true,
+  "resource_risk_reason": "The work touched a React keyboard shortcut, fetch fallback behavior, Browser verification, and a local preview server.",
+  "selected_at": "2026-06-03"
+}

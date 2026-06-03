@@ -1,0 +1,56 @@
+{
+  "task_id": "2026-06-03-desktop-app-shell-ui",
+  "title": "Desktop app shell UI redesign",
+  "date": "2026-06-03",
+  "timezone": "Asia/Seoul",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Started timing after initial web search."
+    },
+    {
+      "phase_id": "memory_and_local_context",
+      "label": "Memory bootstrap and local context",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Loaded hot anchors and inspected platform-desktop-app plus workspace-monitor."
+    },
+    {
+      "phase_id": "requirements_spec_plan",
+      "label": "Requirements, spec, and plan",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "Created compact standard-mode artifacts before source edits."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "duration_seconds": 3600,
+      "measurement": "estimated",
+      "bottleneck_notes": "Reworked MonitorShell render structure, SnapshotLoader fallback, and desktop/mobile CSS."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 2400,
+      "measurement": "estimated",
+      "bottleneck_notes": "Ran pnpm check/test/build and in-app Browser static visual checks for desktop, settings dialog, and mobile."
+    },
+    {
+      "phase_id": "evaluation_commit_push",
+      "label": "Evaluation, commit, and push",
+      "status": "completed",
+      "duration_seconds": 1200,
+      "measurement": "estimated",
+      "bottleneck_notes": "Recorded close-out artifacts, omission/resource/evaluation checks, commit, and push."
+    }
+  ]
+}

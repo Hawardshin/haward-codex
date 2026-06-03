@@ -12,17 +12,22 @@ import {
   Clock3,
   Code2,
   FileSearch,
+  FolderOpen,
   FolderKanban,
   GitBranch,
   History,
   Inbox,
   Layers,
   Languages,
+  LayoutDashboard,
   ListFilter,
   Network,
+  PlayCircle,
   Search,
+  Settings,
   ShieldCheck,
-  SquareTerminal
+  SquareTerminal,
+  X
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
@@ -859,6 +864,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [sourceLanguage, setSourceLanguage] = useState("all");
   const [selectedSourceId, setSelectedSourceId] = useState("");
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState("");
   const commandInputRef = useRef<HTMLInputElement>(null);
   const [pinnedSections, setPinnedSections] = useState<SectionId[]>(defaultPinnedSections);
@@ -921,8 +927,14 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         setCommandPaletteOpen((current) => !current);
         return;
       }
+      if ((event.metaKey || event.ctrlKey) && event.key === ",") {
+        event.preventDefault();
+        setSettingsOpen(true);
+        return;
+      }
       if (event.key === "Escape") {
         setCommandPaletteOpen(false);
+        setSettingsOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -1316,6 +1328,16 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       }
     })),
     {
+      id: "action-settings",
+      label: "Settings",
+      detail: "보기 모드, 언어, 고정 섹션을 조정합니다.",
+      group: "Quick Action",
+      icon: Settings,
+      badge: currentViewMode.label,
+      keywords: ["settings", "preferences", "view", "language", "pinned"],
+      run: () => setSettingsOpen(true)
+    },
+    {
       id: "action-attention",
       label: attentionState.action,
       detail: attentionState.title,
@@ -1367,77 +1389,115 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   };
 
   return (
-    <main>
-      <header className="topbar">
-        <div>
-          <p className="eyebrow">Codex Repository</p>
-          <h1>Workspace Monitor</h1>
-          <p className="summary">
-            저장소 문서 스냅샷을 기반으로 프로젝트, 히스토리, 에이전트 상태, 요구사항, 평가를 한 곳에서 탐색합니다.
-          </p>
-        </div>
-        <div className="snapshot-meta">
-          <span>Snapshot</span>
-          <strong>{formatDate(snapshot.generatedAt)}</strong>
-        </div>
-      </header>
+    <main className="desktop-app-root">
+      <div className="desktop-app-shell">
+        <aside className="activity-rail" aria-label="Primary activity rail">
+          <button className="activity-brand" type="button" onClick={() => openSection("overview")} title="Workspace Home">
+            <Bot size={22} aria-hidden="true" />
+          </button>
+          <nav aria-label="Pinned desktop sections">
+            {visibleSections.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => openSection(item.id)}
+                className={section === item.id ? "active" : ""}
+                title={item.label}
+                aria-current={section === item.id ? "page" : undefined}
+              >
+                <item.icon size={19} aria-hidden="true" />
+                <span>{item.shortLabel}</span>
+              </button>
+            ))}
+          </nav>
+          <button className="activity-settings" type="button" onClick={() => setSettingsOpen(true)} title="Settings">
+            <Settings size={19} aria-hidden="true" />
+          </button>
+        </aside>
 
-      <section className="view-mode-bar" aria-label="View mode selector">
-        <div className="view-mode-current">
-          <ShieldCheck size={16} aria-hidden="true" />
-          <div>
-            <span>View Mode</span>
-            <strong>{currentViewMode.label}</strong>
+        <aside className="desktop-sidebar" aria-label="Workspace navigation">
+          <div className="workspace-switcher">
+            <div>
+              <p className="eyebrow">Agent Workspace</p>
+              <h1>Platform</h1>
+            </div>
+            <span>{formatDate(snapshot.generatedAt)}</span>
           </div>
-        </div>
-        <div className="segmented-control">
-          {viewModes.map((mode) => (
-            <button
-              key={mode.id}
-              className={currentViewMode.id === mode.id ? "active" : ""}
-              onClick={() => selectViewMode(mode.id)}
-              type="button"
-              title={mode.intent}
-            >
-              {mode.label}
-            </button>
-          ))}
-        </div>
-      </section>
 
-      <section className="app-control-bar" aria-label="App quick controls">
-        <button className="command-trigger" type="button" onClick={() => setCommandPaletteOpen(true)}>
-          <Search size={17} aria-hidden="true" />
-          <span>
-            <strong>Command Palette</strong>
-            <small>{commandItems.length.toLocaleString("ko-KR")} actions / sections / filters</small>
-          </span>
-        </button>
-        <div className="app-chip-group" aria-label="Pinned functions">
-          <span>Pinned</span>
-          {pinnedVisibleSections.map((item) => (
-            <button key={item.id} type="button" onClick={() => openSection(item.id)} className={section === item.id ? "active" : ""}>
-              <item.icon size={14} aria-hidden="true" />
-              <strong>{item.shortLabel}</strong>
+          <button className="command-trigger sidebar-command-trigger" type="button" onClick={() => setCommandPaletteOpen(true)}>
+            <Search size={17} aria-hidden="true" />
+            <span>
+              <strong>Command Palette</strong>
+              <small>{commandItems.length.toLocaleString("ko-KR")} actions</small>
+            </span>
+          </button>
+
+          <div className="sidebar-section-groups">
+            {groupedVisibleSections.map((group) => (
+              <section key={group.id} className="sidebar-section-group" aria-label={group.label}>
+                <div className="sidebar-group-heading">
+                  <span>{group.label}</span>
+                  <small>{group.purpose}</small>
+                </div>
+                <div className="sidebar-section-list">
+                  {group.sections.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      className={section === item.id ? "active" : ""}
+                      onClick={() => openSection(item.id)}
+                      title={item.purpose}
+                      aria-current={section === item.id ? "page" : undefined}
+                    >
+                      <item.icon size={16} aria-hidden="true" />
+                      <span>{item.shortLabel}</span>
+                      <small>{sectionNavMeta[item.id]}</small>
+                    </button>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+
+          <div className={`sidebar-status-card status-${attentionState.tone}`}>
+            <div>
+              <attentionState.icon size={16} aria-hidden="true" />
+              <span>{attentionState.label}</span>
+            </div>
+            <strong>{attentionState.title}</strong>
+            <button type="button" onClick={() => openSection(attentionState.section)}>
+              <ArrowRight size={14} aria-hidden="true" />
+              <span>{attentionState.action}</span>
             </button>
-          ))}
-          {currentSection && (
-            <button type="button" onClick={() => togglePinnedSection(section)}>
-              <CheckCircle2 size={14} aria-hidden="true" />
-              <strong>{pinnedSections.includes(section) ? "Unpin" : "Pin"}</strong>
-            </button>
-          )}
-        </div>
-        <div className="app-chip-group recent" aria-label="Recent sections">
-          <span>Recent</span>
-          {recentVisibleSections.slice(0, 4).map((item) => (
-            <button key={item.id} type="button" onClick={() => openSection(item.id)} className={section === item.id ? "active" : ""}>
-              <Clock3 size={14} aria-hidden="true" />
-              <strong>{item.shortLabel}</strong>
-            </button>
-          ))}
-        </div>
-      </section>
+          </div>
+        </aside>
+
+        <section className="desktop-viewport" aria-label="Desktop app viewport">
+          <header className="desktop-titlebar">
+            <div className="titlebar-section">
+              {currentSection ? <currentSection.icon size={18} aria-hidden="true" /> : <LayoutDashboard size={18} aria-hidden="true" />}
+              <div>
+                <span>{currentViewMode.label}</span>
+                <strong>{currentSectionLabel}</strong>
+              </div>
+            </div>
+            <div className="titlebar-actions">
+              <label className="titlebar-search">
+                <Search size={15} aria-hidden="true" />
+                <input
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder={section === "source" ? "소스 검색" : "문서 검색"}
+                />
+              </label>
+              <button type="button" onClick={() => setCommandPaletteOpen(true)} title="Command Palette">
+                <Search size={16} aria-hidden="true" />
+              </button>
+              <button type="button" onClick={() => setSettingsOpen(true)} title="Settings">
+                <Settings size={16} aria-hidden="true" />
+              </button>
+            </div>
+          </header>
 
       {commandPaletteOpen && (
         <div
@@ -1492,370 +1552,345 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         </div>
       )}
 
-      <section className="core-feature-rail" aria-label="Core platform functions">
-        {coreFunctionSections.map((item) => (
-          <button
-            key={item.id}
-            className={section === item.id ? "active" : ""}
-            onClick={() => openSection(item.id)}
-            type="button"
-            title={item.purpose}
-            aria-current={section === item.id ? "page" : undefined}
-          >
-            <span className="core-feature-icon">
-              <item.icon size={17} aria-hidden="true" />
-            </span>
-            <span className="core-feature-copy">
-              <small>{item.group === "core" ? "Core" : "Map"}</small>
-              <strong>{item.shortLabel}</strong>
-              <span>{truncateText(item.purpose, 42)}</span>
-            </span>
-            <span className="core-feature-metric">{sectionNavMeta[item.id]}</span>
-          </button>
-        ))}
-      </section>
+      {settingsOpen && (
+        <div
+          className="settings-dialog-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setSettingsOpen(false);
+            }
+          }}
+        >
+          <section className="settings-dialog" role="dialog" aria-modal="true" aria-label="Settings">
+            <header>
+              <div>
+                <p className="eyebrow">Preferences</p>
+                <h2>Settings</h2>
+              </div>
+              <button type="button" onClick={() => setSettingsOpen(false)} title="Close settings">
+                <X size={17} aria-hidden="true" />
+              </button>
+            </header>
 
-      <nav className="section-tab-groups" aria-label="Monitor section groups">
-        {groupedVisibleSections.map((group) => (
-          <section
-            key={group.id}
-            className={`section-tab-group ${group.sections.some((item) => item.id === section) ? "active" : ""}`}
-            aria-label={group.label}
-          >
-            <div className="section-tab-group-heading">
-              <span>{group.label}</span>
-              <small>{group.purpose}</small>
-            </div>
-            <div className="section-tabs">
-              {group.sections.map((item) => (
+            <div className="settings-grid">
+              <section className="settings-pane">
+                <div className="settings-pane-heading">
+                  <ShieldCheck size={16} aria-hidden="true" />
+                  <div>
+                    <span>View Mode</span>
+                    <strong>{currentViewMode.label}</strong>
+                  </div>
+                </div>
+                <div className="settings-option-list">
+                  {viewModes.map((mode) => (
+                    <button
+                      key={mode.id}
+                      className={currentViewMode.id === mode.id ? "active" : ""}
+                      onClick={() => selectViewMode(mode.id)}
+                      type="button"
+                      title={mode.intent}
+                    >
+                      <span>{mode.label}</span>
+                      <small>{truncateText(mode.intent, 78)}</small>
+                    </button>
+                  ))}
+                </div>
+              </section>
+
+              <section className="settings-pane">
+                <div className="settings-pane-heading">
+                  <Languages size={16} aria-hidden="true" />
+                  <div>
+                    <span>Language</span>
+                    <strong>{currentLanguageMode.label}</strong>
+                  </div>
+                </div>
+                <div className="settings-segment-list">
+                  {languageModes.map((mode) => (
+                    <button
+                      key={mode.id}
+                      className={currentLanguageMode.id === mode.id ? "active" : ""}
+                      onClick={() => {
+                        setLanguageMode(mode.id);
+                        setCategory("all");
+                        setHistoryCategory("all");
+                      }}
+                      type="button"
+                      title={mode.intent}
+                    >
+                      {mode.label}
+                    </button>
+                  ))}
+                </div>
+              </section>
+
+              <section className="settings-pane wide">
+                <div className="settings-pane-heading">
+                  <LayoutDashboard size={16} aria-hidden="true" />
+                  <div>
+                    <span>Pinned Sections</span>
+                    <strong>{pinnedVisibleSections.length.toLocaleString("ko-KR")} pinned</strong>
+                  </div>
+                </div>
+                <div className="settings-pin-grid">
+                  {visibleSections.map((item) => (
+                    <button
+                      key={item.id}
+                      className={pinnedSections.includes(item.id) ? "active" : ""}
+                      type="button"
+                      onClick={() => togglePinnedSection(item.id)}
+                      title={item.purpose}
+                    >
+                      <item.icon size={15} aria-hidden="true" />
+                      <span>{item.shortLabel}</span>
+                    </button>
+                  ))}
+                </div>
+              </section>
+
+              <section className="settings-pane">
+                <div className="settings-pane-heading">
+                  <ListFilter size={16} aria-hidden="true" />
+                  <div>
+                    <span>Filters</span>
+                    <strong>{categoryLabel(category)}</strong>
+                  </div>
+                </div>
                 <button
-                  key={item.id}
-                  className={section === item.id ? "active" : ""}
-                  onClick={() => openSection(item.id)}
+                  className="settings-primary-action"
                   type="button"
-                  title={item.purpose}
-                  aria-current={section === item.id ? "page" : undefined}
+                  onClick={() => {
+                    setQuery("");
+                    setCategory("all");
+                    setHistoryDate("all");
+                    setHistoryCategory("all");
+                    setSourceProject("all");
+                    setSourceLanguage("all");
+                  }}
                 >
-                  <item.icon size={16} aria-hidden="true" />
-                  <span>{item.shortLabel}</span>
-                  <small>{sectionNavMeta[item.id]}</small>
+                  <ListFilter size={15} aria-hidden="true" />
+                  <span>Reset Filters</span>
                 </button>
-              ))}
+              </section>
+
+              <section className="settings-pane">
+                <div className="settings-pane-heading">
+                  <Clock3 size={16} aria-hidden="true" />
+                  <div>
+                    <span>Snapshot</span>
+                    <strong>{formatDate(snapshot.generatedAt)}</strong>
+                  </div>
+                </div>
+                <p>{viewFilteredDocuments.length.toLocaleString("ko-KR")} documents / {visibleSections.length.toLocaleString("ko-KR")} sections</p>
+              </section>
             </div>
-          </section>
-        ))}
-      </nav>
-
-      <section className={`operator-strip operator-${attentionState.tone}`} aria-label="Workspace status and actions">
-        <div className="operator-strip-state">
-          <attentionState.icon size={17} aria-hidden="true" />
-          <div>
-            <span>{currentSectionLabel}</span>
-            <strong>{attentionState.title}</strong>
-          </div>
-        </div>
-        <div className="operator-strip-actions">
-          <button type="button" onClick={() => openSection(attentionState.section)}>
-            <ArrowRight size={15} aria-hidden="true" />
-            <span>{attentionState.action}</span>
-          </button>
-          <button type="button" onClick={() => openSection("agents")}>
-            <Inbox size={15} aria-hidden="true" />
-            <span>{truncateText(nextActionLabel, 34)}</span>
-          </button>
-          <button type="button" onClick={() => openSection("documents")}>
-            <FileSearch size={15} aria-hidden="true" />
-            <span>{visibleWebSearches.toLocaleString("ko-KR")} / {visibleEvaluations.toLocaleString("ko-KR")}</span>
-          </button>
-          <button type="button" onClick={() => openSection("desktop")}>
-            <SquareTerminal size={15} aria-hidden="true" />
-            <span>Runtime</span>
-          </button>
-        </div>
-      </section>
-
-      <section className="toolbar" aria-label="Document filters">
-        <label className="search-box">
-          <Search size={16} aria-hidden="true" />
-          <input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder={section === "source" ? "소스 경로, 언어, 코드 검색" : "문서, 경로, 요약 검색"}
-          />
-        </label>
-        {section !== "source" && (
-          <>
-            <label className="select-box">
-              <Languages size={16} aria-hidden="true" />
-              <select
-                value={languageMode}
-                onChange={(event) => {
-                  setLanguageMode(event.target.value);
-                  setCategory("all");
-                  setHistoryCategory("all");
-                }}
-                title={currentLanguageMode.intent}
-              >
-                {languageModes.map((mode) => (
-                  <option key={mode.id} value={mode.id}>
-                    {mode.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="select-box">
-              <ListFilter size={16} aria-hidden="true" />
-              <select value={category} onChange={(event) => setCategory(event.target.value)}>
-                <option value="all">모든 문서</option>
-                {viewCategories.map((item) => (
-                  <option key={item} value={item}>
-                    {categoryLabel(item)}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </>
-        )}
-      </section>
-
-      {section === "overview" && (
-        <div className="content-grid">
-          <section className="command-center" aria-label="Workspace command center">
-            <article className={`command-card command-${attentionState.tone}`}>
-              <p className="eyebrow">Command Center</p>
-              <div className="command-status">
-                <attentionState.icon size={20} aria-hidden="true" />
-                <span>{attentionState.label}</span>
-              </div>
-              <h2>{attentionState.title}</h2>
-              <p>{attentionState.detail}</p>
-              <div className="command-actions">
-                <button type="button" onClick={() => openSection(attentionState.section)}>
-                  <span>{attentionState.action}</span>
-                  <ArrowRight size={15} aria-hidden="true" />
-                </button>
-              </div>
-            </article>
-
-            <div className="command-side">
-              <article>
-                <span>Workspace Lens</span>
-                <strong>{currentViewMode.label}</strong>
-                <p>{currentViewMode.intent}</p>
-              </article>
-              <article>
-                <span>Latest Signal</span>
-                <strong>{latestWorkSummary?.title || latestHistoryDate || "기록 없음"}</strong>
-                <p>{latestWorkSummary?.path || "최근 작업 요약을 찾지 못했습니다."}</p>
-              </article>
-            </div>
-          </section>
-
-          <section className="ux-spine" aria-label="Operating spine">
-            {commandSteps.map((step) => (
-              <button
-                key={step.label}
-                className={`spine-step spine-${step.tone}`}
-                onClick={() => step.section && openSection(step.section)}
-                type="button"
-                disabled={!step.section}
-              >
-                <step.icon size={17} aria-hidden="true" />
-                <span>{step.label}</span>
-                <strong>{step.title}</strong>
-                <small>{step.detail}</small>
-              </button>
-            ))}
-          </section>
-
-          <section className="panel wide core-function-panel" aria-label="Core function map">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Core Functions</p>
-                <h2>핵심 기능 위치</h2>
-              </div>
-              <Activity size={18} aria-hidden="true" />
-            </div>
-            <div className="core-function-grid">
-              {coreFunctionSections.map((item) => (
-                <button
-                  key={item.id}
-                  className={section === item.id ? "active" : ""}
-                  onClick={() => openSection(item.id)}
-                  type="button"
-                  title={item.purpose}
-                >
-                  <item.icon size={18} aria-hidden="true" />
-                  <span>{item.shortLabel}</span>
-                  <strong>{item.label}</strong>
-                  <small>{item.purpose}</small>
-                  <em>{sectionNavMeta[item.id]}</em>
-                </button>
-              ))}
-            </div>
-          </section>
-
-          <UnifiedOpsPanel
-            summary={visibleUnifiedSummary}
-            lanes={visibleUnifiedLanes.slice(0, 8)}
-            signalTypes={visibleUnifiedSignalTypes.slice(0, 8)}
-            events={visibleUnifiedEvents.slice(0, 14)}
-            onOpenHistory={() => openSection("history")}
-            onOpenAgents={() => openSection("agents")}
-          />
-
-          <ModeFunctionSwitchboard
-            catalog={modeFunctionCatalog}
-            selectedGroupId={selectedModeFunctionGroupId}
-            onSelectGroup={setSelectedModeFunctionGroupId}
-            onOpenOption={openModeFunctionOption}
-          />
-
-          <StructureBackbonePanel
-            overview={structureOverview}
-            compact
-            onOpenStructure={() => openSection("structure")}
-            onOpenSource={() => openSection("source")}
-          />
-
-          <ClaudeCodeTransferPanel
-            transfer={claudeCodeDesignTransfer}
-            onOpenDesktop={() => openSection("desktop")}
-            onOpenDocuments={() => openSection("documents")}
-          />
-
-          <PhilosophyFeatureFactoryPanel
-            extraction={philosophyFeatureExtraction}
-            onOpenAgents={() => openSection("agents")}
-            onOpenDocuments={() => openSection("documents")}
-          />
-
-          <IntentFeatureMapPanel
-            map={intentFeatureMap}
-            onOpenIntent={() => openSection("intent")}
-            onOpenDocuments={() => {
-              openSection("documents");
-              setCategory("intent-feature-map");
-            }}
-          />
-
-          <section className="panel wide action-evidence-panel">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Attention</p>
-                <h2>다음 행동과 근거 trail</h2>
-              </div>
-              <button type="button" onClick={() => openSection(attentionItems.length ? "agents" : "documents")}>
-                <Inbox size={16} aria-hidden="true" />
-                <span>{attentionItems.length ? "결정함 보기" : "문서 보기"}</span>
-              </button>
-            </div>
-            <div className="attention-layout">
-              <div className="attention-list">
-                {attentionItems.length ? (
-                  attentionItems.map((item) => (
-                    <article key={item.id}>
-                      <span>{item.label}</span>
-                      <div>
-                        <strong>{item.title}</strong>
-                        <p>{item.detail}</p>
-                        <small>{item.meta}</small>
-                      </div>
-                    </article>
-                  ))
-                ) : (
-                  <p className="empty-state">현재 blocker나 handoff가 없습니다.</p>
-                )}
-              </div>
-              <div className="evidence-trail">
-                <article>
-                  <span>Web Search</span>
-                  <strong>{visibleWebSearches.toLocaleString("ko-KR")}</strong>
-                  <p>{latestWebSearch?.title || "웹 검색 기록 없음"}</p>
-                </article>
-                <article>
-                  <span>Evaluation</span>
-                  <strong>{visibleEvaluations.toLocaleString("ko-KR")}</strong>
-                  <p>{latestEvaluation?.title || "평가 기록 없음"}</p>
-                </article>
-                <article>
-                  <span>Requirements</span>
-                  <strong>{visibleRequirements.length.toLocaleString("ko-KR")}</strong>
-                  <p>요구사항과 스펙을 기준으로 결과를 확인합니다.</p>
-                </article>
-              </div>
-            </div>
-          </section>
-
-          <section className="metrics-band">
-            <Metric label="Projects" value={snapshot.stats.projects} icon={FolderKanban} tone="green" />
-            <Metric label="Documents" value={viewFilteredDocuments.length} icon={BookOpenText} tone="blue" />
-            <Metric label="Requirements" value={visibleRequirements.length} icon={ClipboardCheck} tone="amber" />
-            <Metric label="Evaluations" value={visibleEvaluations} icon={ShieldCheck} tone="red" />
-            <Metric label="Web Searches" value={visibleWebSearches} icon={FileSearch} tone="violet" />
-            {currentViewMode.allowedSections.includes("source") ? (
-              <Metric label="Source Files" value={visibleSourceFiles.length} icon={Code2} tone="slate" />
-            ) : (
-              <Metric label="History Days" value={visibleHistoryDays.length} icon={CalendarDays} tone="slate" />
-            )}
-          </section>
-
-          <section className="panel wide">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Agent Map</p>
-                <h2>에이전트 인벤토리</h2>
-              </div>
-              <button type="button" onClick={() => openSection("agents")}>
-                <Bot size={16} aria-hidden="true" />
-                <span>에이전트 보기</span>
-              </button>
-            </div>
-            <AgentRuntimeBars runtimeCounts={agentRuntimeCounts} statusCounts={agentStatusCounts} />
-          </section>
-
-          <section className="panel">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">History Shape</p>
-                <h2>히스토리 밀도</h2>
-              </div>
-              <History size={18} aria-hidden="true" />
-            </div>
-            <HistoryDensityChart days={visibleHistoryDays.slice(0, 16)} />
-          </section>
-
-          <section className="panel wide">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Recent</p>
-                <h2>최근 히스토리</h2>
-              </div>
-              <button type="button" onClick={() => openSection("history")}>
-                <History size={16} aria-hidden="true" />
-                <span>히스토리 보기</span>
-              </button>
-            </div>
-            <DocumentList documents={recentHistory} compact />
-          </section>
-
-          <section className="panel">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Public Readiness</p>
-                <h2>공개 전 점검</h2>
-              </div>
-              <ShieldCheck size={18} aria-hidden="true" />
-            </div>
-            <p className="status-pill">{snapshot.publicReview.status}</p>
-            <ul className="checklist">
-              {snapshot.publicReview.checklist.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
           </section>
         </div>
       )}
+
+          <section className={`operator-strip operator-${attentionState.tone}`} aria-label="Workspace status and actions">
+            <div className="operator-strip-state">
+              <attentionState.icon size={17} aria-hidden="true" />
+              <div>
+                <span>{currentSectionLabel}</span>
+                <strong>{attentionState.title}</strong>
+              </div>
+            </div>
+            <div className="operator-strip-actions">
+              <button type="button" onClick={() => openSection(attentionState.section)}>
+                <ArrowRight size={15} aria-hidden="true" />
+                <span>{attentionState.action}</span>
+              </button>
+              <button type="button" onClick={() => openSection("agents")}>
+                <Inbox size={15} aria-hidden="true" />
+                <span>{truncateText(nextActionLabel, 34)}</span>
+              </button>
+              <button type="button" onClick={() => openSection("documents")}>
+                <FileSearch size={15} aria-hidden="true" />
+                <span>{visibleWebSearches.toLocaleString("ko-KR")} / {visibleEvaluations.toLocaleString("ko-KR")}</span>
+              </button>
+              <button type="button" onClick={() => openSection("desktop")}>
+                <SquareTerminal size={15} aria-hidden="true" />
+                <span>Runtime</span>
+              </button>
+            </div>
+          </section>
+
+          <section className="toolbar desktop-toolbar" aria-label="Document filters">
+            {section !== "source" && (
+              <>
+                <label className="select-box">
+                  <Languages size={16} aria-hidden="true" />
+                  <select
+                    value={languageMode}
+                    onChange={(event) => {
+                      setLanguageMode(event.target.value);
+                      setCategory("all");
+                      setHistoryCategory("all");
+                    }}
+                    title={currentLanguageMode.intent}
+                  >
+                    {languageModes.map((mode) => (
+                      <option key={mode.id} value={mode.id}>
+                        {mode.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="select-box">
+                  <ListFilter size={16} aria-hidden="true" />
+                  <select value={category} onChange={(event) => setCategory(event.target.value)}>
+                    <option value="all">모든 문서</option>
+                    {viewCategories.map((item) => (
+                      <option key={item} value={item}>
+                        {categoryLabel(item)}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <button
+                  type="button"
+                  onClick={() => togglePinnedSection(section)}
+                  title={pinnedSections.includes(section) ? "Unpin section" : "Pin section"}
+                >
+                  <CheckCircle2 size={16} aria-hidden="true" />
+                  <span>{pinnedSections.includes(section) ? "Unpin" : "Pin"}</span>
+                </button>
+              </>
+            )}
+          </section>
+
+          {section === "overview" && (
+            <div className="desktop-home-grid">
+              <section className={`workspace-home-panel home-${attentionState.tone}`} aria-label="Workspace home">
+                <div>
+                  <p className="eyebrow">Workspace</p>
+                  <h2>{attentionState.title}</h2>
+                  <p>{attentionState.detail}</p>
+                </div>
+                <div className="workspace-home-actions">
+                  <button type="button" onClick={() => openSection("desktop")}>
+                    <FolderOpen size={16} aria-hidden="true" />
+                    <span>Open Workspace</span>
+                  </button>
+                  <button type="button" onClick={() => openSection("projects")}>
+                    <FolderKanban size={16} aria-hidden="true" />
+                    <span>Projects</span>
+                  </button>
+                  <button type="button" onClick={() => openSection("desktop")}>
+                    <PlayCircle size={16} aria-hidden="true" />
+                    <span>Start Task</span>
+                  </button>
+                </div>
+              </section>
+
+              <section className="run-timeline-panel" aria-label="Run timeline">
+                <div className="panel-heading">
+                  <div>
+                    <p className="eyebrow">Timeline</p>
+                    <h2>Run Flow</h2>
+                  </div>
+                  <Activity size={18} aria-hidden="true" />
+                </div>
+                <div className="desktop-run-timeline">
+                  {commandSteps.map((step, index) => (
+                    <button
+                      key={step.label}
+                      className={`timeline-step step-${step.tone}`}
+                      onClick={() => step.section && openSection(step.section)}
+                      type="button"
+                      disabled={!step.section}
+                    >
+                      <span>{index + 1}</span>
+                      <step.icon size={16} aria-hidden="true" />
+                      <strong>{step.title}</strong>
+                      <small>{step.detail}</small>
+                    </button>
+                  ))}
+                </div>
+              </section>
+
+              <section className="decision-dock-panel" aria-label="Decision inbox">
+                <div className="panel-heading">
+                  <div>
+                    <p className="eyebrow">Decision Inbox</p>
+                    <h2>{attentionItems.length ? "Pending" : "Clear"}</h2>
+                  </div>
+                  <button type="button" onClick={() => openSection("agents")}>
+                    <Inbox size={16} aria-hidden="true" />
+                    <span>Open</span>
+                  </button>
+                </div>
+                <div className="desktop-decision-list">
+                  {attentionItems.length ? (
+                    attentionItems.map((item) => (
+                      <article key={item.id}>
+                        <span>{item.label}</span>
+                        <strong>{item.title}</strong>
+                        <p>{item.detail}</p>
+                        <small>{item.meta}</small>
+                      </article>
+                    ))
+                  ) : (
+                    <p className="empty-state">현재 blocker나 handoff가 없습니다.</p>
+                  )}
+                </div>
+              </section>
+
+              <section className="home-metrics-strip" aria-label="Workspace metrics">
+                <Metric label="Projects" value={snapshot.stats.projects} icon={FolderKanban} tone="green" />
+                <Metric label="Documents" value={viewFilteredDocuments.length} icon={BookOpenText} tone="blue" />
+                <Metric label="Requirements" value={visibleRequirements.length} icon={ClipboardCheck} tone="amber" />
+                <Metric label="Evaluations" value={visibleEvaluations} icon={ShieldCheck} tone="red" />
+                <Metric label="Web Searches" value={visibleWebSearches} icon={FileSearch} tone="violet" />
+              </section>
+
+              <section className="panel home-recent-panel">
+                <div className="panel-heading">
+                  <div>
+                    <p className="eyebrow">Recent</p>
+                    <h2>Artifacts</h2>
+                  </div>
+                  <button type="button" onClick={() => openSection("history")}>
+                    <History size={16} aria-hidden="true" />
+                    <span>History</span>
+                  </button>
+                </div>
+                <DocumentList documents={recentHistory.slice(0, 6)} compact />
+              </section>
+
+              <section className="panel capability-dock-panel">
+                <div className="panel-heading">
+                  <div>
+                    <p className="eyebrow">Capabilities</p>
+                    <h2>Optional Setup</h2>
+                  </div>
+                  <button type="button" onClick={() => openSection("desktop")}>
+                    <Settings size={16} aria-hidden="true" />
+                    <span>Runtime</span>
+                  </button>
+                </div>
+                <div className="capability-dock-list">
+                  <article>
+                    <SquareTerminal size={16} aria-hidden="true" />
+                    <span>Guest adapters</span>
+                    <strong>{sectionNavMeta.desktop}</strong>
+                  </article>
+                  <article>
+                    <Bot size={16} aria-hidden="true" />
+                    <span>Agents</span>
+                    <strong>{agentCatalog.length.toLocaleString("ko-KR")}</strong>
+                  </article>
+                  <article>
+                    <ShieldCheck size={16} aria-hidden="true" />
+                    <span>Public gate</span>
+                    <strong>{snapshot.publicReview.status}</strong>
+                  </article>
+                </div>
+              </section>
+            </div>
+          )}
 
       {section === "desktop" && (
         <DesktopRuntimePanel
@@ -2301,7 +2336,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             </div>
           </section>
         </div>
-      )}
+          )}
+        </section>
+      </div>
     </main>
   );
 }

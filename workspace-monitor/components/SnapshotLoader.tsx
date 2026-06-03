@@ -20,15 +20,20 @@ export function SnapshotLoader() {
 
   useEffect(() => {
     let canceled = false;
-    const controller = new AbortController();
+    const controller = typeof AbortController === "function" ? new AbortController() : null;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
     async function loadSnapshot() {
       try {
-        const snapshotUrl = new URL("workspace-snapshot.json", window.location.href);
-        const response = await fetch(snapshotUrl, { cache: "no-cache", signal: controller.signal });
-        if (!response.ok) {
-          throw new Error(`Snapshot request failed with ${response.status}`);
-        }
-        const snapshot = (await response.json()) as WorkspaceSnapshot;
+        const snapshot = await Promise.race([
+          fetchPublicSnapshot(controller),
+          new Promise<WorkspaceSnapshot>((_, reject) => {
+            timeoutId = setTimeout(() => {
+              controller?.abort();
+              reject(new Error("Snapshot request timed out."));
+            }, 7000);
+          })
+        ]).catch(() => loadGeneratedSnapshot());
         if (!canceled) {
           setState({ status: "ready", snapshot, error: "" });
         }
@@ -46,7 +51,10 @@ export function SnapshotLoader() {
     void loadSnapshot();
     return () => {
       canceled = true;
-      controller.abort();
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      controller?.abort();
     };
   }, []);
 
@@ -59,6 +67,24 @@ export function SnapshotLoader() {
   }
 
   return <SnapshotLoadingShell detail="Loading workspace snapshot" />;
+}
+
+async function fetchPublicSnapshot(controller: AbortController | null) {
+  const snapshotUrl = new URL("workspace-snapshot.json", window.location.href);
+  const requestOptions: RequestInit = { cache: "no-cache" };
+  if (controller) {
+    requestOptions.signal = controller.signal;
+  }
+  const response = await fetch(snapshotUrl, requestOptions);
+  if (!response.ok) {
+    throw new Error(`Snapshot request failed with ${response.status}`);
+  }
+  return (await response.json()) as WorkspaceSnapshot;
+}
+
+async function loadGeneratedSnapshot() {
+  const module = await import("@/src/generated/workspace-snapshot.json");
+  return module.default as WorkspaceSnapshot;
 }
 
 function SnapshotLoadingShell({ detail, status = "loading" }: { detail: string; status?: "loading" | "error" }) {
