@@ -1,0 +1,70 @@
+{
+  "task": "Accumulated data format",
+  "work_mode": "ship_first",
+  "runtime_context": [
+    "rust",
+    "tauri",
+    "react",
+    "filesystem_metadata",
+    "app_data_json_manifest"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "manifest-write",
+      "category": "file_handle",
+      "description": "The overview command now writes a manifest file under app data.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The manifest is written once per refresh through write_pretty_json, which creates the parent directory and closes the file handle immediately.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs write_pretty_json",
+        "platform-desktop-app/src-tauri/src/lib.rs accumulated_data_index_path"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "unbounded-index-refresh",
+      "category": "large_data",
+      "description": "Refreshing the manifest could still scan too many files as accumulated stores grow.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Existing scan cap remains MAX_ACCUMULATED_DATA_SCAN_FILES per store, and the manifest stores summaries rather than raw content.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_ACCUMULATED_DATA_SCAN_FILES",
+        "platform-desktop-app/src-tauri/src/lib.rs directory_data_stats"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "overview-refresh-write-lifecycle",
+      "resource": "app-data JSON manifest",
+      "create_path": "get_accumulated_data_overview -> accumulated_data_overview_report -> write_pretty_json",
+      "cleanup_path": "No watcher, daemon, persistent connection, or open stream is created.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "source inspection"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "manifest-size-bound",
+      "metric": "manifest content scope",
+      "tool": "source inspection",
+      "threshold": "summary metadata only; no stdout/stderr contents",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "AccumulatedDataOverviewReport stores metadata fields only"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No dependency install, database migration, long-running process, or global filesystem change was added."
+  ]
+}

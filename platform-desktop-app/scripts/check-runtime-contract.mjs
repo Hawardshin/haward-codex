@@ -144,6 +144,28 @@ failIf(
   contract.runtime_command_surface?.accumulated_data_command !== "get_accumulated_data_overview",
   "runtime_command_surface.accumulated_data_command must be get_accumulated_data_overview"
 );
+const accumulatedIndexTarget = (contract.data_accumulation_targets ?? []).find((target) => target.target_id === "accumulated_data_index");
+failIf(
+  accumulatedIndexTarget?.record_type !== "runtime_data_index_manifest",
+  "accumulated_data_index must use runtime_data_index_manifest"
+);
+failIf(
+  accumulatedIndexTarget?.directory !== "app_data/runtime-data/indexes",
+  "accumulated_data_index must live under app_data/runtime-data/indexes"
+);
+failIf(
+  !accumulatedIndexTarget?.runtime_store?.includes("accumulated-data-overview.v1.json"),
+  "accumulated_data_index runtime_store must point to accumulated-data-overview.v1.json"
+);
+for (const accumulatedDataToken of [
+  "ACCUMULATED_DATA_INDEX_SCHEMA_VERSION",
+  "ACCUMULATED_DATA_STORAGE_FORMAT_VERSION",
+  "accumulated_data_index_path",
+  "accumulated-data-overview.v1.json",
+  "format_migration_status"
+]) {
+  failIf(!tauriLib.includes(accumulatedDataToken), `src-tauri/src/lib.rs must include ${accumulatedDataToken}`);
+}
 
 const result = {
   status: failures.length === 0 ? "installer_shell_runtime_contract_ready" : "rework_required",

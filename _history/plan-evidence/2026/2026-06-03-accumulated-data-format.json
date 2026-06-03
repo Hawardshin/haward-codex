@@ -1,0 +1,53 @@
+{
+  "task": "Accumulated data format",
+  "work_mode": "ship_first",
+  "language_options": [
+    {
+      "option": "Rust/Tauri writes a versioned JSON manifest",
+      "decision": "selected",
+      "reason": "Rust already owns app-data path resolution and can atomically refresh the overview before returning the report to the UI."
+    },
+    {
+      "option": "TypeScript-only localStorage or browser IndexedDB",
+      "decision": "rejected",
+      "reason": "Would keep product data inside webview/browser storage instead of the platform runtime data plane."
+    },
+    {
+      "option": "Immediate SQLite migration",
+      "decision": "deferred",
+      "reason": "Useful when concurrent querying and transactional history become primary, but it would require backup, migration, and WAL operational design beyond this slice."
+    }
+  ],
+  "architecture_options": [
+    {
+      "option": "Keep only transient raw directory scans",
+      "decision": "rejected",
+      "reason": "Does not create a durable storage format for installed-shell UI reads."
+    },
+    {
+      "option": "Versioned overview manifest over existing file-record stores",
+      "decision": "selected",
+      "reason": "Adds a stable query artifact without destructive migration or loss of file-level provenance."
+    }
+  ],
+  "folder_structure_options": [
+    {
+      "option": "Store manifest beside each raw record folder",
+      "decision": "rejected",
+      "reason": "Scatters overview state through raw stores and weakens the user-visible index boundary."
+    },
+    {
+      "option": "Store manifest under app_data/runtime-data/indexes",
+      "decision": "selected",
+      "reason": "Makes indexes a clear app-data runtime plane and keeps future index versions discoverable."
+    }
+  ],
+  "validation_targets": [
+    "cargo check",
+    "workspace-monitor TypeScript check",
+    "platform-desktop-app tests",
+    "runtime contract check",
+    "config contract checks",
+    "Browser smoke"
+  ]
+}

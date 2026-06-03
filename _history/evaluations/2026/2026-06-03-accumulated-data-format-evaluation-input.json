@@ -1,0 +1,121 @@
+{
+  "initial_instruction": "The user explicitly allowed changing the data storage format if necessary.",
+  "result_summary": "Promoted the Accumulated Data overview from transient scan-only output to a versioned persisted app-data manifest. The Tauri command now writes app_data/runtime-data/indexes/accumulated-data-overview.v1.json, the report and UI expose schema/storage format/path/migration status, the runtime contract defines the target as a runtime_data_index_manifest, and readiness/runtime contract tests verify the new storage format tokens.",
+  "work_mode": "ship_first",
+  "changed_files": [
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+    "platform-desktop-app/scripts/check-runtime-contract.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/docs/architecture/installer-shell-runtime-contract.ko.md",
+    "platform-desktop-app/docs/architecture/installer-shell-runtime-contract.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/",
+    "_history/web-searches/2026/2026-06-03-accumulated-data-format.ko.md",
+    "_history/mode-selections/2026/2026-06-03-accumulated-data-format.json",
+    "_history/source-provenance/2026/2026-06-03-accumulated-data-format.json",
+    "_history/plan-evidence/2026/2026-06-03-accumulated-data-format.json",
+    "_history/work-timings/2026/2026-06-03-accumulated-data-format.json",
+    "_history/request-traces/2026/2026-06-03-accumulated-data-format.ko.md",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-format-omission-input.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-format-omission-result.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-format-resource-input.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-format-resource-result.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-format-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-format-evaluation-result.json",
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/2026/2026-06-03.md"
+  ],
+  "verification": [
+    "cargo fmt: passed",
+    "cargo check from platform-desktop-app/src-tauri/: passed",
+    "corepack pnpm --filter workspace-monitor run check: passed",
+    "corepack pnpm --filter platform-desktop-app test: 14 passed",
+    "corepack pnpm --filter platform-desktop-app run runtime:contract: passed",
+    "corepack pnpm --filter platform-desktop-app run check: passed",
+    "corepack pnpm --filter workspace-monitor test: 16 passed",
+    "corepack pnpm --filter workspace-monitor run build:customer: passed",
+    "corepack pnpm --filter workspace-monitor run perf:budget: within_budget, largest initial chunk 227542 bytes",
+    "corepack pnpm --filter platform-desktop-app run customer-bundle:audit: passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/runtime-data-boundary-registry.json: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-03-accumulated-data-format-omission-input.json: coverage_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-03-accumulated-data-format-resource-input.json: resource_ready",
+    "Browser smoke: Runtime screen renders 축적 데이터 인덱스 panel, format label, manifest-pending status, Refresh Index button, store grid, horizontalOverflow=false",
+    "git diff --check: passed"
+  ],
+  "references_checked": [
+    "https://v2.tauri.app/plugin/store/",
+    "https://v2.tauri.app/reference/javascript/store/",
+    "https://v2.tauri.app/reference/javascript/api/namespacepath/",
+    "https://www.sqlite.org/wal.html",
+    "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-03-accumulated-data-format.ko.md",
+    "_history/source-provenance/2026/2026-06-03-accumulated-data-format.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-format-omission-result.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-format-resource-result.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-03-accumulated-data-format.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-03-accumulated-data-format.json",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-03-accumulated-data-format.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-accumulated-data-format-omission-result.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-accumulated-data-format.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-accumulated-data-format.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-accumulated-data-format.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-03-accumulated-data-format-resource-result.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": []
+}

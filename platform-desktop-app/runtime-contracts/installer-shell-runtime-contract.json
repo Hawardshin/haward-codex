@@ -57,6 +57,17 @@
       "last_checked": "2026-06-03"
     },
     {
+      "id": "tauri_store",
+      "title": "Tauri Store Plugin",
+      "url": "https://v2.tauri.app/plugin/store/",
+      "source_type": "official_docs",
+      "used_for": [
+        "app-data persisted state model",
+        "versioned local manifest storage posture"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
       "id": "runtime_data_boundary",
       "title": "Runtime Data Boundary Registry",
       "path": "platform-desktop-app/configs/runtime-data-boundary-registry.json",
@@ -119,6 +130,15 @@
         "data_accumulation_targets",
         "runtime_command_surface",
         "enforcement_gates"
+      ]
+    },
+    {
+      "id": "accumulated_data_index_uses_versioned_manifest",
+      "rule": "User-visible accumulated data reads must be backed by a versioned index manifest at `app_data/runtime-data/indexes/accumulated-data-overview.v1.json`; raw store scans may refresh the manifest but must not be the only user-facing storage format.",
+      "reason": "The desktop product needs a stable local data artifact that can be migrated, audited, and read by the installed shell.",
+      "applies_to": [
+        "data_accumulation_targets",
+        "runtime_command_surface"
       ]
     },
     {
@@ -493,9 +513,9 @@
     },
     {
       "target_id": "accumulated_data_index",
-      "record_type": "runtime_data_overview",
-      "directory": "app_data/runtime-data",
-      "runtime_store": "platform_data_store/accumulated-data-overview",
+      "record_type": "runtime_data_index_manifest",
+      "directory": "app_data/runtime-data/indexes",
+      "runtime_store": "platform_data_store/indexes/accumulated-data-overview.v1.json",
       "required_for": "user_visible_data_review",
       "provenance_required": true
     }

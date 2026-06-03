@@ -20,6 +20,8 @@
 
 작업 결과는 shell output으로만 남기지 않는다. 사용자 요청, request trace, decision inbox, task run store, structured evidence, validation/evaluation, work timing, support diagnostic bundle로 구조화해 축적한다. 각 기록은 provenance와 retention/visibility boundary를 가져야 한다.
 
+사용자 화면이 읽는 축적 데이터 overview는 raw store scan만으로 끝나지 않는다. `get_accumulated_data_overview`는 `app_data/runtime-data/indexes/accumulated-data-overview.v1.json` versioned manifest를 저장하고, Desktop UI는 schema version, storage format version, migration status, index path를 표시한다.
+
 ## 배포 경계
 
 계약은 Tauri resource로 번들되지만 `_private/`, `outputs/`, `.git/`, 개발 source tree 전체는 번들 대상이 아니다. public-ready 주장은 signing, updater, clean-machine smoke, privacy/dependency review가 끝난 뒤에만 가능하다.

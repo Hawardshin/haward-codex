@@ -9,3 +9,5 @@
 | TASK-ADS-005 | runtime contract, requirements, readiness/test token 갱신 | done |
 | TASK-ADS-006 | 운영 history, omission/resource/evaluation record 작성 | done |
 | TASK-ADS-007 | 최종 build/test/browser 검증과 commit/push | done |
+| TASK-ADS-008 | `accumulated-data-overview.v1.json` versioned index manifest 저장 포맷 추가 | done |
+| TASK-ADS-009 | manifest schema/version/path/migration status를 UI와 contract/readiness/test에 반영 | done |

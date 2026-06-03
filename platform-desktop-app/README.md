@@ -146,6 +146,8 @@ Implemented desktop bridge commands:
 
 These commands are bounded pipe/session, human decision inbox append, and scoped file-editing product-slice commands. Interactive PTY sessions, source-affecting autonomous execution, xterm.js, and packaged sidecars still require a dependency and permission audit before implementation.
 
+`get_accumulated_data_overview` also persists the user-visible accumulated-data schema as `app_data/runtime-data/indexes/accumulated-data-overview.v1.json`, so the installed shell has a stable local manifest instead of only transient screen state.
+
 Local Tauri build artifacts are generated under:
 
 ```bash

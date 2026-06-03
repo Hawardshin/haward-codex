@@ -132,7 +132,7 @@
     },
     {
       "id": "installer_shell_contract_is_runtime_gate",
-      "rule": "The installed shell must read the bundled installer shell runtime contract before task execution, write task, decision, evidence, validation, and evaluation records to the declared data accumulation targets, and expose a user-visible accumulated data index.",
+      "rule": "The installed shell must read the bundled installer shell runtime contract before task execution, write task, decision, evidence, validation, and evaluation records to the declared data accumulation targets, and expose a user-visible accumulated data index backed by a versioned manifest.",
       "reason": "The desktop product exists to turn repository knowledge into enforced runtime behavior and accumulated operating data.",
       "applies_to": [
         "runtime_data_roots",
@@ -480,7 +480,7 @@
     },
     {
       "step": "add_accumulated_data_index",
-      "description": "Expose a bounded read-only index of accumulated task runs, decisions, audits, support bundles, and agent work so users can inspect what the product is storing."
+      "description": "Expose a bounded read-only index of accumulated task runs, decisions, audits, support bundles, and agent work, and persist it as app_data/runtime-data/indexes/accumulated-data-overview.v1.json so users can inspect what the product is storing."
     },
     {
       "step": "verify_installer_payload",

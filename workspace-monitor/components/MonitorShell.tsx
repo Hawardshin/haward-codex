@@ -812,8 +812,12 @@ type AccumulatedDataStoreReport = {
 };
 
 type AccumulatedDataOverviewReport = {
+  schemaVersion: string;
+  storageFormatVersion: string;
   status: string;
   generatedAt: string;
+  indexPath: string;
+  formatMigrationStatus: string;
   totalRecords: number;
   totalBytes: number;
   boundedScanMaxFiles: number;
@@ -4890,6 +4894,10 @@ function DesktopRuntimePanel({
             <span>scan cap</span>
             <strong>{accumulatedDataStats.boundedScanMaxFiles || "n/a"}</strong>
           </article>
+          <article>
+            <span>format</span>
+            <strong>{accumulatedDataOverview?.schemaVersion || "pending"}</strong>
+          </article>
         </div>
 
         <div className="accumulated-data-layout">
@@ -4940,8 +4948,15 @@ function DesktopRuntimePanel({
             <div className="task-run-detail-meta">
               <span>{accumulatedDataOverview ? formatTimeLabel(accumulatedDataOverview.generatedAt) : "idle"}</span>
               <span>{accumulatedDataOverview?.status || "not-loaded"}</span>
+              <span>{accumulatedDataOverview?.formatMigrationStatus || "manifest-pending"}</span>
             </div>
-            <code>{runtimeDataBoundary?.taskRunStorePath || "runtime data root pending"}</code>
+            <code>{accumulatedDataOverview?.indexPath || runtimeDataBoundary?.taskRunStorePath || "runtime data root pending"}</code>
+            {accumulatedDataOverview && (
+              <div className="adapter-report">
+                <span>{accumulatedDataOverview.schemaVersion}</span>
+                <span>{accumulatedDataOverview.storageFormatVersion}</span>
+              </div>
+            )}
           </article>
         </div>
       </section>

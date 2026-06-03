@@ -434,8 +434,12 @@ struct AccumulatedDataStoreReport {
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 struct AccumulatedDataOverviewReport {
+    schema_version: String,
+    storage_format_version: String,
     status: String,
     generated_at: String,
+    index_path: String,
+    format_migration_status: String,
     total_records: usize,
     total_bytes: u64,
     bounded_scan_max_files: usize,
@@ -551,6 +555,8 @@ const MAX_TASK_RUN_LOG_PREVIEW_BYTES: usize = 64_000;
 const DEFAULT_TASK_RUN_PRUNE_KEEP_COUNT: usize = 30;
 const MAX_PAYLOAD_SCAN_FILES: usize = 4_000;
 const MAX_ACCUMULATED_DATA_SCAN_FILES: usize = 1_200;
+const ACCUMULATED_DATA_INDEX_SCHEMA_VERSION: &str = "accumulated-data-overview.v1";
+const ACCUMULATED_DATA_STORAGE_FORMAT_VERSION: &str = "file-record-stores+overview-manifest.v1";
 const MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS: usize = 20;
 const MAX_SUPPORT_EVENT_CHARS: usize = 600;
 
@@ -2633,6 +2639,7 @@ fn accumulated_data_overview_report(
     let payload_audit_path = payload_audits_base_path(app)?;
     let agent_workspace_path = agent_workspace_base_path(app)?;
     let runtime_store_path = runtime_data_store_base_path(app)?;
+    let index_path = accumulated_data_index_path(app)?;
 
     for path in [
         &runtime_store_path,
@@ -2773,6 +2780,10 @@ fn accumulated_data_overview_report(
             stores_with_data, MAX_ACCUMULATED_DATA_SCAN_FILES
         ),
         "The overview exposes runtime data paths without exposing the platform source tree as the product surface.".to_string(),
+        format!(
+            "A versioned accumulated-data index manifest is written to {} for stable UI reads.",
+            path_to_string(&index_path)
+        ),
     ];
     let status = if total_records == 0 {
         "empty_ready"
@@ -2783,15 +2794,24 @@ fn accumulated_data_overview_report(
     }
     .to_string();
 
-    Ok(AccumulatedDataOverviewReport {
+    let report = AccumulatedDataOverviewReport {
+        schema_version: ACCUMULATED_DATA_INDEX_SCHEMA_VERSION.to_string(),
+        storage_format_version: ACCUMULATED_DATA_STORAGE_FORMAT_VERSION.to_string(),
         status,
         generated_at,
+        index_path: path_to_string(&index_path),
+        format_migration_status: "manifest_v1_active".to_string(),
         total_records,
         total_bytes,
         bounded_scan_max_files: MAX_ACCUMULATED_DATA_SCAN_FILES,
         stores,
         summary,
-    })
+    };
+
+    write_pretty_json(&index_path, &report)
+        .map_err(|error| format!("Failed to write accumulated data index manifest: {error}"))?;
+
+    Ok(report)
 }
 
 fn accumulated_data_store_report(
@@ -3336,6 +3356,12 @@ fn runtime_data_store_base_path(app: &AppHandle) -> Result<PathBuf, String> {
         .app_data_dir()
         .map_err(|error| format!("Failed to resolve app data directory: {error}"))?
         .join("runtime-data"))
+}
+
+fn accumulated_data_index_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(runtime_data_store_base_path(app)?
+        .join("indexes")
+        .join("accumulated-data-overview.v1.json"))
 }
 
 fn agent_workspace_base_path(app: &AppHandle) -> Result<PathBuf, String> {

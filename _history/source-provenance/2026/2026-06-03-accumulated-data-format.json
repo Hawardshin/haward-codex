@@ -1,0 +1,42 @@
+{
+  "task": "Accumulated data format",
+  "source_types": [
+    "official_docs",
+    "internal_contract",
+    "source_code"
+  ],
+  "external_sources": [
+    {
+      "url": "https://v2.tauri.app/plugin/store/",
+      "type": "official_docs",
+      "used_for": "Confirm the official Tauri local persisted-state model in app data.",
+      "accessed": "2026-06-03"
+    },
+    {
+      "url": "https://v2.tauri.app/reference/javascript/store/",
+      "type": "official_docs",
+      "used_for": "Confirm store paths are saved under app_data_dir.",
+      "accessed": "2026-06-03"
+    },
+    {
+      "url": "https://v2.tauri.app/reference/javascript/api/namespacepath/",
+      "type": "official_docs",
+      "used_for": "Confirm app data directory is the correct local desktop runtime data location.",
+      "accessed": "2026-06-03"
+    },
+    {
+      "url": "https://www.sqlite.org/wal.html",
+      "type": "official_docs",
+      "used_for": "Evaluate SQLite WAL as a future option and note why this slice avoids a database migration.",
+      "accessed": "2026-06-03"
+    }
+  ],
+  "internal_sources": [
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/"
+  ],
+  "decision_summary": "Selected a versioned JSON manifest under the Tauri app-data runtime index directory. Existing per-record task/log/audit files remain authoritative raw records, while the manifest becomes the stable user-visible overview storage format."
+}

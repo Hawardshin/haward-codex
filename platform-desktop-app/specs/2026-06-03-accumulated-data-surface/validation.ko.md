@@ -15,7 +15,6 @@
 - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/runtime-data-boundary-registry.json`: 통과.
 - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json`: 통과.
 - Browser smoke: Runtime 화면에서 `축적 데이터 인덱스` 패널, command button, store grid 렌더링 확인. body/doc width 1280/1280, horizontal overflow false.
-
-## 남은 검증
-
-- `git diff --check`
+- Browser smoke: Accumulated Data panel에서 `format`, `manifest-pending`, `Refresh Index`, `.accumulated-store-grid`, `.accumulated-data-panel` 확인. body/doc width 1280/1280, horizontal overflow false.
+- Storage format smoke: readiness/runtime contract checks가 `runtime_data_index_manifest`, `accumulated-data-overview.v1.json`, `schemaVersion`, `storageFormatVersion`, `indexPath`, `formatMigrationStatus`를 검증.
+- `git diff --check`: 통과.

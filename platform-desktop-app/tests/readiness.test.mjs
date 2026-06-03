@@ -126,6 +126,10 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   assert.match(lib, /get_installer_shell_runtime_contract/);
   assert.match(lib, /get_accumulated_data_overview/);
   assert.equal(contract.runtime_command_surface.accumulated_data_command, "get_accumulated_data_overview");
+  const accumulatedIndexTarget = contract.data_accumulation_targets.find((target) => target.target_id === "accumulated_data_index");
+  assert.equal(accumulatedIndexTarget.record_type, "runtime_data_index_manifest");
+  assert.equal(accumulatedIndexTarget.directory, "app_data/runtime-data/indexes");
+  assert.match(accumulatedIndexTarget.runtime_store, /accumulated-data-overview\.v1\.json/);
   assert.match(lib, /resolve_installer_shell_runtime_contract_path/);
   assert.match(lib, /InstallerShellRuntimeContractReport/);
 });
@@ -358,6 +362,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "SupportDiagnosticBundleReport",
     "AccumulatedDataOverviewReport",
     "runtime-data-panel",
+    "schemaVersion",
+    "storageFormatVersion",
+    "indexPath",
+    "formatMigrationStatus",
     "list_cli_task_run_records",
     "taskPipePresets",
     "start_cli_task_pipeline",
@@ -401,6 +409,11 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "RuntimeDataBoundaryReport",
     "AccumulatedDataStoreReport",
     "AccumulatedDataOverviewReport",
+    "ACCUMULATED_DATA_INDEX_SCHEMA_VERSION",
+    "ACCUMULATED_DATA_STORAGE_FORMAT_VERSION",
+    "accumulated_data_index_path",
+    "accumulated-data-overview.v1.json",
+    "format_migration_status",
     "accumulated_data_overview_report",
     "MAX_ACCUMULATED_DATA_SCAN_FILES",
     "MAX_PAYLOAD_SCAN_FILES",

@@ -1,0 +1,21 @@
+{
+  "task": "Accumulated data format",
+  "selected_work_mode": "ship_first",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selected_at": "2026-06-03",
+  "reason": "The user explicitly allowed changing the storage format so the accumulated data surface must become a durable product data artifact, not only a transient UI scan.",
+  "risk_notes": [
+    "Touches Tauri app-data writes, runtime contract, and desktop UI schema.",
+    "No dependency install, global environment change, destructive migration, private-folder scan, or database conversion is performed."
+  ],
+  "closeout_gates": [
+    "web_search_record_targets",
+    "requirements_targets",
+    "spec_targets",
+    "omission_check_targets",
+    "resource_check_targets",
+    "verification",
+    "evaluation"
+  ]
+}

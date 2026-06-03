@@ -1,0 +1,90 @@
+{
+  "task": "Accumulated data format",
+  "work_mode": "ship_first",
+  "expected_items": [
+    {
+      "item_id": "web_first_intake",
+      "description": "Run web-first intake before planning or edits.",
+      "source": "repository_policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-accumulated-data-format.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "persisted_manifest",
+      "description": "Change accumulated-data storage from transient scan-only output to a durable versioned index manifest.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs accumulated_data_index_path",
+        "platform-desktop-app/src-tauri/src/lib.rs write_pretty_json",
+        "platform-desktop-app/src-tauri/src/lib.rs accumulated-data-overview.v1.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "ui_schema_visibility",
+      "description": "Expose storage format details to the user, not only internal code.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx schemaVersion",
+        "workspace-monitor/components/MonitorShell.tsx storageFormatVersion",
+        "workspace-monitor/components/MonitorShell.tsx indexPath",
+        "workspace-monitor/components/MonitorShell.tsx formatMigrationStatus"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "contract_and_tests",
+      "description": "Make the new storage format durable through contract and readiness checks.",
+      "source": "repository_policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json runtime_data_index_manifest",
+        "platform-desktop-app/scripts/check-runtime-contract.mjs accumulated-data-overview.v1.json",
+        "platform-desktop-app/tests/readiness.test.mjs accumulated-data-overview.v1.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/spec.ko.md",
+      "purpose": "Updated acceptance criteria for manifest storage format.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-03-accumulated-data-format.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "verification_completed",
+      "description": "Run Rust, TypeScript, contract, config, and browser checks after implementation.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo check: passed",
+        "corepack pnpm --filter workspace-monitor run check: passed",
+        "corepack pnpm --filter platform-desktop-app test: 14 passed",
+        "corepack pnpm --filter platform-desktop-app run runtime:contract: passed",
+        "corepack pnpm --filter platform-desktop-app run check: passed",
+        "Browser smoke: accumulated-data panel, format label, manifest pending, no horizontal overflow"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [],
+  "notes": [
+    "SQLite migration is intentionally deferred because the immediate need is a stable user-visible overview artifact, not transactional multi-writer history."
+  ]
+}

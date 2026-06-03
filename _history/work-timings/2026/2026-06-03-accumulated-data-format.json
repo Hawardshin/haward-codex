@@ -1,0 +1,25 @@
+{
+  "task": "Accumulated data format",
+  "started_at": "2026-06-03T13:20:00+0900",
+  "updated_at": "2026-06-03T13:36:06+0900",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "elapsed_minutes": 3,
+      "notes": "Checked Tauri Store, Tauri Path, and SQLite WAL sources."
+    },
+    {
+      "phase": "source_and_contract_review",
+      "elapsed_minutes": 5,
+      "notes": "Reviewed accumulated-data backend report, UI panel, runtime contract, readiness checks, and prior spec/history."
+    },
+    {
+      "phase": "implementation",
+      "elapsed_minutes": 8,
+      "notes": "Added manifest schema fields, app-data index path, persisted report write, UI fields, and contract/test tokens."
+    }
+  ],
+  "bottleneck_candidates": [
+    "The accumulated-data surface now has enough contract surface that future storage changes should use migration tasks rather than ad hoc UI edits."
+  ]
+}

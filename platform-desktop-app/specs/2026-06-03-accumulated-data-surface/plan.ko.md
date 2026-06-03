@@ -15,6 +15,8 @@
 
 - 옵션 A: 기존 `Runtime Data & Support`, `Task Run Store`, `Decision Inbox`에 흩어진 정보를 그대로 둔다. 기각. 사용자가 축적 데이터를 한눈에 볼 수 없다.
 - 옵션 B: 새 `get_accumulated_data_overview` command와 `Accumulated Data` 패널을 추가한다. 선택. backend contract와 UI를 동시에 고정할 수 있다.
+- 옵션 C: 모든 누적 기록을 즉시 SQLite로 migration한다. 보류. 동시 write/query가 본격화되면 맞지만, 지금은 task-run JSON/log, decision inbox, support/audit artifact가 이미 파일 provenance를 갖고 있으므로 작은 manifest layer가 더 안전하다.
+- 옵션 D: 기존 file-record stores를 유지하되, UI와 shell이 읽을 versioned `accumulated-data-overview.v1.json` manifest를 저장한다. 선택. 현재 데이터 손상 없이 저장 포맷을 제품 조회 기준으로 승격할 수 있다.
 - 옵션 C: 파일 탐색기형 raw directory browser를 만든다. 기각. platform source 노출과 민감 경계 위험이 커지고 제품 flow가 흐려진다.
 
 ## 폴더 구조 결정

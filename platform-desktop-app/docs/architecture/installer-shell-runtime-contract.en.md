@@ -20,6 +20,8 @@ The shell/runtime launched by the installed app is the platform-first host. Exte
 
 Work results are not kept only as shell output. The platform accumulates user requests, request traces, decision inbox items, task run records, structured evidence, validation/evaluation records, work timing, and support diagnostic bundles. Each record needs provenance plus retention and visibility boundaries.
 
+The user-facing accumulated data overview is not only a raw store scan. `get_accumulated_data_overview` persists a versioned manifest at `app_data/runtime-data/indexes/accumulated-data-overview.v1.json`, and the Desktop UI shows schema version, storage format version, migration status, and index path.
+
 ## Distribution Boundary
 
 The contract is bundled as a Tauri resource, but `_private/`, `outputs/`, `.git/`, and the full development source tree are not product payloads. Public readiness still requires signing, updater, clean-machine smoke, privacy review, and dependency review gates.
