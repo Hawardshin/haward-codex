@@ -1,0 +1,58 @@
+{
+  "schema_version": "plan-evidence.v1",
+  "request_id": "UR-2026-06-04-003",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "language_options": [
+    {
+      "language": "TypeScript/React + Rust/Tauri",
+      "fit": "selected",
+      "notes": "Matches the existing desktop renderer and native runtime bridge."
+    },
+    {
+      "language": "Python agent runtime",
+      "fit": "deferred",
+      "notes": "The existing search agent is a config-defined platform agent; adding a separate Python runtime would duplicate the guest adapter execution path for this slice."
+    }
+  ],
+  "selected_language": "TypeScript/React + Rust/Tauri",
+  "language_decision_notes": "Use the existing renderer for user-facing quick run and the existing Tauri session bridge for durable task-run records.",
+  "architecture_options": [
+    {
+      "option": "Embed a direct search-agent panel that launches the existing CLI session path",
+      "decision": "selected",
+      "reason": "Fastest path to real execution while preserving platform-owned task state, decision inbox, and accumulated data."
+    },
+    {
+      "option": "Create a new standalone agent service",
+      "decision": "rejected_for_now",
+      "reason": "Higher maintenance cost and unnecessary for running the existing agent through current runtime adapters."
+    }
+  ],
+  "architecture_decision_notes": "The desktop app stays the host runtime and optional CLIs remain guest adapters.",
+  "folder_structure_options": [
+    {
+      "option": "Keep UI in MonitorShell for this small cross-panel connection",
+      "decision": "selected",
+      "reason": "The existing runtime state and command palette live there; extracting now would expand the touch surface."
+    },
+    {
+      "option": "Create a new workbench component package",
+      "decision": "defer",
+      "reason": "Useful if more agent run presets are added."
+    }
+  ],
+  "code_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "agent-platform/configs/agents/research-insight-planner-agent.json",
+    "agent-platform/configs/planning/research-insight-plan-template.json"
+  ],
+  "external_reference_sources": [
+    "https://docs.github.com/en/codespaces/codespaces-reference/using-the-vs-code-command-palette-in-codespaces",
+    "https://docs.openhands.dev/usage/runtimes/overview",
+    "https://docs.openhands.dev/sdk/guides/agent-interactive-terminal",
+    "https://docs.openhands.dev/openhands/usage/cli/quick-start"
+  ]
+}

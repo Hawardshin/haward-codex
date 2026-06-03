@@ -1,0 +1,13 @@
+{
+  "schema_version": "omission-check.v1",
+  "request_id": "UR-2026-06-04-003",
+  "status": "passed",
+  "checked_items": [
+    "existing search agent is runnable from Agents screen",
+    "new agent creation is not the first visible agent action",
+    "command palette and Desktop quick start include search agent execution",
+    "task-run records can identify research_insight_agent",
+    "requirements, specs, history, trace, and readiness tests were updated"
+  ],
+  "remaining_gaps": []
+}

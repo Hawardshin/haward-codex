@@ -101,6 +101,7 @@ test("product feature registry makes agent platform primary", () => {
   assert.equal(registry.feature_layers.find((feature) => feature.id === "observability_monitoring")?.role, "supporting");
   assert.match(serialized, /Agent Orchestration/);
   assert.match(serialized, /Agent Factory/);
+  assert.match(serialized, /Search Agent Quick Run/);
   assert.match(serialized, /Learning & Evaluation Loop/);
   assert.match(serialized, /supporting observability/);
   assert.match(serialized, /operator_surfaces_are_separate/);
@@ -304,6 +305,8 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   assert.match(lib, /get_installer_shell_runtime_contract/);
   assert.match(lib, /get_accumulated_data_overview/);
   assert.equal(contract.runtime_command_surface.accumulated_data_command, "get_accumulated_data_overview");
+  assert.ok(contract.runtime_command_surface.agent_run_presets.some((preset) => preset.preset_id === "research_insight_agent"));
+  assert.match(JSON.stringify(contract.runtime_command_surface.agent_run_presets), /research-insight-planner-agent/);
   const agentFactoryTarget = contract.data_accumulation_targets.find((target) => target.target_id === "agent_factory_proposals");
   assert.equal(agentFactoryTarget.record_type, "agent_factory_proposal");
   assert.equal(agentFactoryTarget.directory, "app_data/runtime-data/agent-factory/proposals");
@@ -365,6 +368,8 @@ test("user flow exposes AI CLI orchestration and source editing surfaces", () =>
   assert.match(serialized, /decision inbox/);
   assert.match(serialized, /terminal output/);
   assert.match(serialized, /source editor/);
+  assert.match(serialized, /research-insight-planner-agent/);
+  assert.match(serialized, /existing_search_agent_run/);
 });
 
 test("shared CLI adapter registry defines concrete AI CLI targets", () => {
@@ -533,6 +538,11 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(monitorShell, /decisionInboxItems/);
   assert.match(monitorShell, /adapterSetupGuides/);
   assert.match(monitorShell, /sessionModePresets/);
+  assert.match(monitorShell, /SearchAgentQuickRunPanel/);
+  assert.match(monitorShell, /renderSearchAgentPrompt/);
+  assert.match(monitorShell, /research-insight-planner-agent/);
+  assert.match(lib, /research_insight_agent_pipe/);
+  assert.match(lib, /normalize_task_kind/);
   assert.match(monitorShell, /Answer & Resume/);
   for (const performanceToken of [
     "MAX_DECISION_SCAN_BYTES",
@@ -574,6 +584,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Init task pipe",
     "Init Pipe",
     "merge gate",
+    "검색 에이전트 바로 실행",
+    "검색 에이전트 실행",
+    "Search Agent Pipe",
     "decision replay",
     "Auto-defer questions",
     "하단 다중 CLI 터미널",

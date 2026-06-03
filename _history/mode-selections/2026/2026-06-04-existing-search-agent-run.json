@@ -1,0 +1,22 @@
+{
+  "schema_version": "mode-selection.v1",
+  "request_id": "UR-2026-06-04-003",
+  "work_slug": "existing-search-agent-run",
+  "selected_at": "2026-06-04",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reasons": [
+    "The request changes a desktop app surface and runtime execution bridge.",
+    "The user wants existing agent execution as a product feature, not a quick answer.",
+    "Implementation touches developer-owned source, tests, specs, and runtime contracts."
+  ],
+  "gates": [
+    "web_first_intake",
+    "memory_bootstrap_simulated",
+    "desktop_user_flow_design",
+    "cli_adapter_boundary",
+    "omission_check",
+    "resource_check"
+  ]
+}

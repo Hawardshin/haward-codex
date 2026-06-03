@@ -1,0 +1,23 @@
+{
+  "schema_version": "work-timing.v1",
+  "request_id": "UR-2026-06-04-003",
+  "work_slug": "existing-search-agent-run",
+  "started_at": "2026-06-04T00:00:00+09:00",
+  "phases": [
+    {
+      "phase": "web_first_intake_and_local_discovery",
+      "elapsed_note": "searched external references, inspected existing search agent config and desktop runtime code"
+    },
+    {
+      "phase": "implementation",
+      "elapsed_note": "added quick-run UI, prompt builder, runtime launch request, taskKind bridge, and search agent pipe"
+    },
+    {
+      "phase": "documentation_and_validation",
+      "elapsed_note": "updated requirements, specs, registries, tests, and validation records"
+    }
+  ],
+  "bottlenecks": [
+    "runtime execution state is still concentrated in MonitorShell, so cross-section launch requires a request bridge"
+  ]
+}

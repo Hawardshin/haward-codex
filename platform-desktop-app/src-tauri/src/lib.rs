@@ -1032,7 +1032,35 @@ static REVIEW_VERIFY_LANES: &[PipelineLaneDefinition] = &[
     },
 ];
 
+static SEARCH_AGENT_LANES: &[PipelineLaneDefinition] = &[
+    PipelineLaneDefinition {
+        lane_id: "research_insight_lane",
+        adapter_id: "codex-cli",
+        role: "existing research-insight-planner-agent execution lane",
+        prompt_suffix: "Act as research-insight-planner-agent using agent-platform/configs/agents/research-insight-planner-agent.json and agent-platform/configs/planning/research-insight-plan-template.json. Return grounded evidence, uncertainty, plan steps, validation steps, and capture targets.",
+    },
+    PipelineLaneDefinition {
+        lane_id: "source_ranking_lane",
+        adapter_id: "gemini-cli",
+        role: "source discovery and ranking lane",
+        prompt_suffix: "Broaden the search query ladder, rank high-authority and contrary sources, and separate adoption signals from factual evidence.",
+    },
+    PipelineLaneDefinition {
+        lane_id: "grounding_review_lane",
+        adapter_id: "claude-code-cli",
+        role: "citation grounding and skeptic review lane",
+        prompt_suffix: "Check unsupported claims, missing source methodology, citation coverage, and user decisions that should be deferred.",
+    },
+];
+
 static PIPELINE_PRESETS: &[PipelineTaskPreset] = &[
+    PipelineTaskPreset {
+        task_kind: "research_insight_agent_pipe",
+        label: "Search Agent Pipe",
+        intent: "Initialize the existing research-insight-planner-agent with source ranking and skeptic review lanes.",
+        lanes: SEARCH_AGENT_LANES,
+        merge_gate: "research_insight_merge_gate",
+    },
     PipelineTaskPreset {
         task_kind: "platform_improvement_pipe",
         label: "Platform Improvement Pipe",
@@ -1291,6 +1319,7 @@ fn start_cli_adapter_session(
     prompt: String,
     working_dir: Option<String>,
     auto_defer_questions: Option<bool>,
+    task_kind: Option<String>,
 ) -> Result<CliSessionReport, String> {
     if prompt.len() > MAX_SESSION_INPUT_BYTES {
         return Err(format!(
@@ -1301,13 +1330,14 @@ fn start_cli_adapter_session(
     let adapter =
         find_adapter(&adapter_id).ok_or_else(|| format!("Unknown adapter id: {adapter_id}"))?;
     let working_dir = resolve_workspace_dir(&app, working_dir.as_deref())?;
+    let session_task_kind = normalize_task_kind(task_kind.as_deref(), "single_cli_session")?;
     let (session_id, mut session, report) = create_cli_session(
         &app,
         adapter,
         &prompt,
         working_dir,
         auto_defer_questions.unwrap_or(true),
-        "single_cli_session",
+        &session_task_kind,
         None,
         None,
         None,
@@ -2065,6 +2095,20 @@ fn find_pipeline_preset(task_kind: &str) -> Option<&'static PipelineTaskPreset> 
     PIPELINE_PRESETS
         .iter()
         .find(|preset| preset.task_kind == task_kind)
+}
+
+fn normalize_task_kind(value: Option<&str>, fallback: &str) -> Result<String, String> {
+    let candidate = value.map(str::trim).filter(|item| !item.is_empty()).unwrap_or(fallback);
+    if candidate.len() > 80 {
+        return Err("Task kind is too long. Max length is 80 characters.".to_string());
+    }
+    if !candidate
+        .chars()
+        .all(|character| character.is_ascii_lowercase() || character.is_ascii_digit() || character == '_')
+    {
+        return Err("Task kind may only use lowercase letters, numbers, and underscores.".to_string());
+    }
+    Ok(candidate.to_string())
 }
 
 fn pipeline_preset_report(preset: &PipelineTaskPreset) -> CliTaskPipelinePresetReport {

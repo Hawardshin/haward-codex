@@ -12,7 +12,7 @@
       "Use data_accumulation_targets to decide where structured task records, decisions, logs, evidence, and evaluations must be written."
     ],
     "owner": "platform-desktop-app",
-    "last_reviewed": "2026-06-03",
+      "last_reviewed": "2026-06-04",
     "update_triggers": [
       "The installed shell launches, supervises, or bundles a new runtime.",
       "A runtime command, CLI adapter, sidecar, task pipeline, or shell process is added.",
@@ -569,6 +569,18 @@
       "run_cli_adapter_health",
       "start_cli_adapter_session",
       "start_cli_task_pipeline"
+    ],
+    "agent_run_presets": [
+      {
+        "preset_id": "research_insight_agent",
+        "label": "Search Agent",
+        "agent_config": "agent-platform/configs/agents/research-insight-planner-agent.json",
+        "input_schema": "agent-platform/configs/planning/research-insight-plan-template.json",
+        "session_command": "start_cli_adapter_session",
+        "task_kind": "research_insight_agent",
+        "task_pipe_kind": "research_insight_agent_pipe",
+        "runtime_store": "platform_data_store/task-runs"
+      }
     ],
     "source_editing_commands": [
       "list_workspace_text_files",

@@ -117,6 +117,17 @@ type RuntimeInitDefaults = {
   autoDeferQuestions: boolean;
 };
 
+type RuntimeLaunchRequest = {
+  id: string;
+  label: string;
+  adapterId: string;
+  modeId: string;
+  taskKind: string;
+  prompt: string;
+  openTerminal: boolean;
+  autoStart: boolean;
+};
+
 type DesktopPreferences = {
   schemaVersion: string;
   uiLanguage: UiLanguage;
@@ -147,6 +158,14 @@ type AgentFactoryForm = {
   ownerProject: string;
   targetPath: string;
   rollbackPlan: string;
+};
+
+type SearchAgentRunForm = {
+  objective: string;
+  questions: string;
+  searchChannels: string;
+  captureTargets: string;
+  notes: string;
 };
 
 type AgentFactoryProposalReport = {
@@ -1504,7 +1523,26 @@ const adapterSetupGuides: Record<string, AdapterSetupGuide> = {
   }
 };
 
+const researchInsightAgentId = "research-insight-planner-agent";
+const researchInsightAgentConfigPath = "agent-platform/configs/agents/research-insight-planner-agent.json";
+const researchInsightPlanTemplatePath = "agent-platform/configs/planning/research-insight-plan-template.json";
+
+const defaultSearchAgentRunForm: SearchAgentRunForm = {
+  objective: "사용자 요청을 조사해서 실행 가능한 계획과 검증 기준으로 정리하기",
+  questions:
+    "현재 요청을 처리하려면 어떤 외부 근거가 필요한가?\n기존 저장소 지식 중 무엇을 재사용해야 하는가?\n실행 전에 보류해야 할 사용자 결정은 무엇인가?",
+  searchChannels: "web search\nrepository search",
+  captureTargets: "_history/web-searches/YYYY/\n_research/\n_history/plans/YYYY/",
+  notes: "출처, 한계, 계획 영향을 분리하고 약한 근거는 실행 근거로 쓰지 않습니다."
+};
+
 const sessionModePresets: SessionModePreset[] = [
+  {
+    id: "research_insight_agent",
+    label: "검색 에이전트",
+    intent: "Use the existing research-insight-planner-agent for grounded search, source ranking, and execution planning.",
+    prompt: renderSearchAgentPrompt(defaultSearchAgentRunForm, "ko")
+  },
   {
     id: "user_task",
     label: "User Task",
@@ -1536,6 +1574,14 @@ const sessionModePresets: SessionModePreset[] = [
 ];
 
 const fallbackTaskPipePresets: CliTaskPipelinePresetReport[] = [
+  {
+    taskKind: "research_insight_agent_pipe",
+    label: "Search Agent Pipe",
+    intent: "Existing research-insight-planner-agent, source ranking, and skeptic review lanes initialize from one question.",
+    laneCount: 3,
+    adapterIds: ["codex-cli", "gemini-cli", "claude-code-cli"],
+    mergeGate: "research_insight_merge_gate"
+  },
   {
     taskKind: "platform_improvement_pipe",
     label: "Platform Improvement Pipe",
@@ -1676,6 +1722,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [commandQuery, setCommandQuery] = useState("");
   const [activeHomeTab, setActiveHomeTab] = useState<CoreFeatureTabId>("files");
   const commandInputRef = useRef<HTMLInputElement>(null);
+  const [searchAgentRunForm, setSearchAgentRunForm] = useState<SearchAgentRunForm>(defaultSearchAgentRunForm);
+  const [runtimeLaunchRequest, setRuntimeLaunchRequest] = useState<RuntimeLaunchRequest | null>(null);
   const [agentFactoryForm, setAgentFactoryForm] = useState<AgentFactoryForm>(defaultAgentFactoryForm);
   const [agentFactoryProposal, setAgentFactoryProposal] = useState<AgentFactoryProposalReport | null>(null);
   const [agentFactoryBusy, setAgentFactoryBusy] = useState(false);
@@ -1959,6 +2007,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   }, [historyCategory, historyDate, normalizedQuery, visibleHistoryDays]);
   const latestHistoryDate = visibleHistoryDays[0]?.date || "";
   const agentCatalog = snapshot.agentCatalog ?? [];
+  const researchInsightAgent = agentCatalog.find(
+    (agent) => agent.id === researchInsightAgentId || agent.name === researchInsightAgentId
+  );
   const agentRuntimeCounts = useMemo(() => countBy(agentCatalog, (agent) => agent.runtime || "unknown"), [agentCatalog]);
   const agentStatusCounts = useMemo(
     () => countBy(agentCatalog, (agent) => agent.runtimeStatus || agent.definitionStatus || "unknown"),
@@ -2340,6 +2391,22 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     setSection("desktop");
     setTerminalDrawerOpen(true);
   };
+  const updateSearchAgentRunForm = (field: keyof SearchAgentRunForm, value: string) => {
+    setSearchAgentRunForm((current) => ({ ...current, [field]: value }));
+  };
+  const launchSearchAgent = () => {
+    setRuntimeLaunchRequest({
+      id: `research-insight-agent-${Date.now()}`,
+      label: uiLanguage === "ko" ? "검색 에이전트" : "Search Agent",
+      adapterId: runtimeInitDefaults.adapterId || defaultRuntimeInitDefaults.adapterId,
+      modeId: "research_insight_agent",
+      taskKind: "research_insight_agent",
+      prompt: renderSearchAgentPrompt(searchAgentRunForm, uiLanguage),
+      openTerminal: true,
+      autoStart: true
+    });
+    openTerminalDrawer();
+  };
   const updateAgentFactoryForm = (field: keyof AgentFactoryForm, value: string) => {
     setAgentFactoryForm((current) => ({ ...current, [field]: value }));
     setAgentFactoryNotice("");
@@ -2555,6 +2622,19 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       badge: operatorCenterSections.length.toLocaleString("ko-KR"),
       keywords: ["operator", "monitoring", "documents", "history", "requirements", "admin"],
       run: () => setOperatorCenterOpen(true)
+    },
+    {
+      id: "run-search-agent",
+      label: uiLanguage === "ko" ? "검색 에이전트 실행" : "Run Search Agent",
+      detail:
+        uiLanguage === "ko"
+          ? "이미 만들어둔 research-insight-planner-agent를 하단 터미널 lane에서 바로 실행합니다."
+          : "Run the existing research-insight-planner-agent in the bottom terminal lane.",
+      group: uiLanguage === "ko" ? "에이전트 실행" : "Agent Run",
+      icon: Search,
+      badge: researchInsightAgent ? "ready" : "config",
+      keywords: ["search", "research", "agent", "planner", researchInsightAgentId],
+      run: launchSearchAgent
     },
     {
       id: "settings-appearance",
@@ -3526,6 +3606,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           sourceFiles={visibleSourceFiles}
           uiLanguage={uiLanguage}
           initDefaults={runtimeInitDefaults}
+          launchRequest={runtimeLaunchRequest}
+          onLaunchRequestConsumed={() => setRuntimeLaunchRequest(null)}
           onOpenSettings={() => openSettingsTab("execution")}
           terminalDrawerOpen={terminalDrawerOpen}
           setTerminalDrawerOpen={setTerminalDrawerOpen}
@@ -3800,6 +3882,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           sourceFiles={visibleSourceFiles}
           uiLanguage={uiLanguage}
           initDefaults={runtimeInitDefaults}
+          launchRequest={runtimeLaunchRequest}
+          onLaunchRequestConsumed={() => setRuntimeLaunchRequest(null)}
           onOpenSettings={() => openSettingsTab("execution")}
           terminalDrawerOpen={terminalDrawerOpen}
           setTerminalDrawerOpen={setTerminalDrawerOpen}
@@ -3839,6 +3923,16 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             <Metric label="Handoffs" value={collaborationBoard.summary.handoffs} icon={Layers} tone="slate" />
             <Metric label="Blocked" value={collaborationBoard.summary.blockedTasks} icon={ShieldCheck} tone="violet" />
           </section>
+
+          <SearchAgentQuickRunPanel
+            form={searchAgentRunForm}
+            agentAvailable={Boolean(researchInsightAgent)}
+            language={uiLanguage}
+            runtimeLaunchQueued={runtimeLaunchRequest?.taskKind === "research_insight_agent"}
+            onChange={updateSearchAgentRunForm}
+            onOpenTerminal={openTerminalDrawer}
+            onRun={launchSearchAgent}
+          />
 
           <AgentFactoryWizard
             form={agentFactoryForm}
@@ -3934,6 +4028,121 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         </section>
       </div>
     </main>
+  );
+}
+
+function SearchAgentQuickRunPanel({
+  form,
+  agentAvailable,
+  language,
+  runtimeLaunchQueued,
+  onChange,
+  onOpenTerminal,
+  onRun
+}: {
+  form: SearchAgentRunForm;
+  agentAvailable: boolean;
+  language: UiLanguage;
+  runtimeLaunchQueued: boolean;
+  onChange: (field: keyof SearchAgentRunForm, value: string) => void;
+  onOpenTerminal: () => void;
+  onRun: () => void;
+}) {
+  const ko = language === "ko";
+  const statusLabel = agentAvailable ? (ko ? "준비됨" : "Ready") : ko ? "설정 확인" : "Check config";
+
+  return (
+    <section className="panel wide search-agent-run-panel">
+      <div className="panel-heading">
+        <div>
+          <p className="eyebrow">{ko ? "기존 에이전트 실행" : "Existing Agent Run"}</p>
+          <h2>{ko ? "검색 에이전트 바로 실행" : "Run the Search Agent"}</h2>
+          <p>
+            {ko
+              ? "이미 등록된 research-insight-planner-agent를 사용해서 외부 검색, 저장소 근거 확인, 실행 계획 생성을 한 번에 시작합니다."
+              : "Start the existing research-insight-planner-agent for external search, repository evidence, and planning."}
+          </p>
+        </div>
+        <span className="result-count">{runtimeLaunchQueued ? (ko ? "실행 준비 중" : "Queued") : statusLabel}</span>
+      </div>
+
+      <div className="search-agent-run-layout">
+        <div className="search-agent-run-form" aria-label={ko ? "검색 에이전트 실행 입력" : "Search agent run input"}>
+          <label className="wide-field">
+            <span>{ko ? "찾을 내용" : "Objective"}</span>
+            <textarea
+              rows={3}
+              value={form.objective}
+              onChange={(event) => onChange("objective", event.target.value)}
+            />
+          </label>
+          <label>
+            <span>{ko ? "검색 질문" : "Search Questions"}</span>
+            <textarea
+              rows={7}
+              value={form.questions}
+              onChange={(event) => onChange("questions", event.target.value)}
+            />
+          </label>
+          <label>
+            <span>{ko ? "검색 채널" : "Search Channels"}</span>
+            <textarea
+              rows={7}
+              value={form.searchChannels}
+              onChange={(event) => onChange("searchChannels", event.target.value)}
+            />
+          </label>
+          <label>
+            <span>{ko ? "저장 위치" : "Capture Targets"}</span>
+            <textarea
+              rows={5}
+              value={form.captureTargets}
+              onChange={(event) => onChange("captureTargets", event.target.value)}
+            />
+          </label>
+          <label>
+            <span>{ko ? "실행 메모" : "Run Notes"}</span>
+            <textarea
+              rows={5}
+              value={form.notes}
+              onChange={(event) => onChange("notes", event.target.value)}
+            />
+          </label>
+          <div className="search-agent-actions">
+            <button type="button" className="primary-action-button" onClick={onRun}>
+              <PlayCircle size={16} aria-hidden="true" />
+              <span>{ko ? "검색 에이전트 실행" : "Run Search Agent"}</span>
+            </button>
+            <button type="button" onClick={onOpenTerminal}>
+              <SquareTerminal size={16} aria-hidden="true" />
+              <span>{ko ? "터미널 보기" : "Open Terminal"}</span>
+            </button>
+          </div>
+        </div>
+
+        <aside className="search-agent-contract">
+          <div>
+            <span>{ko ? "사용 에이전트" : "Agent"}</span>
+            <strong>{researchInsightAgentId}</strong>
+            <small>{researchInsightAgentConfigPath}</small>
+          </div>
+          <div>
+            <span>{ko ? "입력 스키마" : "Input Schema"}</span>
+            <strong>research-insight-plan-template</strong>
+            <small>{researchInsightPlanTemplatePath}</small>
+          </div>
+          <div>
+            <span>{ko ? "실행 결과" : "Output"}</span>
+            <strong>{ko ? "근거, 불확실성, 실행 계획, 검증" : "Evidence, uncertainty, plan, validation"}</strong>
+            <small>
+              {ko
+                ? "결정이 필요한 질문은 decision inbox로 보류하고, 실행 기록은 task run store에 남습니다."
+                : "Questions go to the decision inbox, and runs are stored in the task run store."}
+            </small>
+          </div>
+        </aside>
+      </div>
+    </section>
   );
 }
 
@@ -4841,6 +5050,8 @@ function DesktopRuntimePanel({
   sourceFiles,
   uiLanguage,
   initDefaults,
+  launchRequest,
+  onLaunchRequestConsumed,
   onOpenSettings,
   terminalDrawerOpen,
   setTerminalDrawerOpen,
@@ -4851,6 +5062,8 @@ function DesktopRuntimePanel({
   sourceFiles: WorkspaceSourceFile[];
   uiLanguage: UiLanguage;
   initDefaults: RuntimeInitDefaults;
+  launchRequest?: RuntimeLaunchRequest | null;
+  onLaunchRequestConsumed?: (requestId: string) => void;
   onOpenSettings: () => void;
   terminalDrawerOpen: boolean;
   setTerminalDrawerOpen: (open: boolean) => void;
@@ -4935,6 +5148,7 @@ function DesktopRuntimePanel({
   const sourceEditorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const panelMountedRef = useRef(false);
   const activeSessionPollInFlightRef = useRef(false);
+  const consumedLaunchRequestIdsRef = useRef<Set<string>>(new Set());
   const lastInboxRefreshAtRef = useRef(0);
   const lastTaskRunRefreshAtRef = useRef(0);
 
@@ -5876,6 +6090,71 @@ function DesktopRuntimePanel({
     } finally {
       setRunningAdapterId("");
     }
+  };
+
+  const startSessionFromLaunchRequest = async (request: RuntimeLaunchRequest) => {
+    setTerminalDrawerOpen(request.openTerminal);
+    setSelectedSessionModeId(request.modeId);
+    setSessionPrompt(request.prompt);
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeState("unavailable");
+      setError("Tauri desktop runtime is not available in this browser view.");
+      return;
+    }
+
+    const availableRequestedAdapter = adapters.find((adapter) => adapter.adapterId === request.adapterId && adapter.available);
+    const adapterId = availableRequestedAdapter?.adapterId || adapters.find((adapter) => adapter.available)?.adapterId || request.adapterId;
+    setSelectedSessionAdapterId(adapterId);
+    setRunningAdapterId(request.taskKind);
+    setError("");
+    const args: Record<string, unknown> = {
+      adapterId,
+      prompt: request.prompt,
+      autoDeferQuestions,
+      taskKind: request.taskKind
+    };
+    if (workingDir.trim()) {
+      args.workingDir = workingDir.trim();
+    }
+
+    try {
+      const report = await tauriInvoke<CliSessionReport>("start_cli_adapter_session", args);
+      upsertSession(report);
+      await refreshTaskRunRecords();
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setRunningAdapterId("");
+    }
+  };
+
+  useEffect(() => {
+    if (!launchRequest || consumedLaunchRequestIdsRef.current.has(launchRequest.id)) {
+      return;
+    }
+    consumedLaunchRequestIdsRef.current.add(launchRequest.id);
+    setSelectedSessionModeId(launchRequest.modeId);
+    setSelectedSessionAdapterId(launchRequest.adapterId);
+    setSessionPrompt(launchRequest.prompt);
+    setTerminalDrawerOpen(launchRequest.openTerminal);
+    if (launchRequest.autoStart) {
+      void startSessionFromLaunchRequest(launchRequest);
+    }
+    onLaunchRequestConsumed?.(launchRequest.id);
+  }, [launchRequest?.id]);
+
+  const startDefaultSearchAgent = async () => {
+    await startSessionFromLaunchRequest({
+      id: `research-insight-agent-runtime-${Date.now()}`,
+      label: uiLanguage === "ko" ? "검색 에이전트" : "Search Agent",
+      adapterId: selectedSessionAdapterId || initDefaults.adapterId,
+      modeId: "research_insight_agent",
+      taskKind: "research_insight_agent",
+      prompt: renderSearchAgentPrompt(defaultSearchAgentRunForm, uiLanguage),
+      openTerminal: true,
+      autoStart: true
+    });
   };
 
   const initTaskPipe = async () => {
@@ -6963,6 +7242,11 @@ function DesktopRuntimePanel({
             <span>{uiLanguage === "ko" ? "CLI 자동 확인" : "Check CLIs"}</span>
             <small>{availableCount} / {adapters.length} ready</small>
           </button>
+          <button type="button" onClick={startDefaultSearchAgent} disabled={!invoke || runningAdapterId !== ""}>
+            <Search size={16} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "검색 에이전트 실행" : "Run search agent"}</span>
+            <small>{researchInsightAgentId}</small>
+          </button>
           <button type="button" onClick={() => setTerminalDrawerOpen(true)}>
             <SquareTerminal size={16} aria-hidden="true" />
             <span>{uiLanguage === "ko" ? "바로 하단 터미널 열기" : "Open terminal drawer"}</span>
@@ -7015,6 +7299,11 @@ function DesktopRuntimePanel({
             <SquareTerminal size={16} aria-hidden="true" />
             <span>Start selected lane</span>
             <small>{selectedMode.label}</small>
+          </button>
+          <button type="button" onClick={startDefaultSearchAgent} disabled={!invoke || runningAdapterId !== ""}>
+            <Search size={16} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "검색 에이전트 실행" : "Run search agent"}</span>
+            <small>research_insight_agent</small>
           </button>
           <button type="button" onClick={initTaskPipe} disabled={!invoke || runningAdapterId !== ""}>
             <GitBranch size={16} aria-hidden="true" />
@@ -8145,6 +8434,56 @@ function linesFromText(value: string) {
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter(Boolean);
+}
+
+function renderSearchAgentPrompt(form: SearchAgentRunForm, language: UiLanguage) {
+  const objective = form.objective.trim() || defaultSearchAgentRunForm.objective;
+  const questions = linesFromText(form.questions);
+  const channels = linesFromText(form.searchChannels);
+  const captureTargets = linesFromText(form.captureTargets);
+  const notes = form.notes.trim() || defaultSearchAgentRunForm.notes;
+  const dateLabel = new Date().toISOString().slice(0, 10);
+  const outputLanguage = language === "ko" ? "Korean first, with English labels only when useful" : "English";
+
+  return [
+    "[Agent Platform Existing Agent Run]",
+    `Agent: ${researchInsightAgentId}`,
+    `Agent config: ${researchInsightAgentConfigPath}`,
+    `Input schema: ${researchInsightPlanTemplatePath}`,
+    "Runtime role: run the existing search/research agent from the platform, not a new ad hoc chat.",
+    `Output language: ${outputLanguage}`,
+    "",
+    "Objective:",
+    objective,
+    "",
+    "Search questions:",
+    ...(questions.length ? questions.map((item) => `- ${item}`) : ["- Find the evidence needed for this request."]),
+    "",
+    "Search channels:",
+    ...(channels.length ? channels.map((item) => `- ${item}`) : ["- web search", "- repository search"]),
+    "",
+    "Required answer-engine stages:",
+    "- query_understanding",
+    "- search_retrieval",
+    "- source_ranking",
+    "- evidence_extraction",
+    "- synthesis",
+    "- citation_grounding",
+    "- skeptic_review",
+    "",
+    "Output contract:",
+    "- Summarize accepted evidence with citations or local file paths.",
+    "- Separate unsupported claims, uncertainty, and contrary evidence.",
+    "- Produce plan_steps, validation_steps, risks_or_unknowns, and blocked_decisions.",
+    "- Record what should be captured under the targets below.",
+    "- Ask only source-affecting or irreversible questions; otherwise continue with reversible defaults.",
+    "",
+    "Capture targets:",
+    ...(captureTargets.length ? captureTargets.map((item) => `- ${item.replace("YYYY", dateLabel.slice(0, 4))}`) : ["- _research/"]),
+    "",
+    "Notes:",
+    notes
+  ].join("\n");
 }
 
 function agentFactoryPreviewSpec(form: AgentFactoryForm) {

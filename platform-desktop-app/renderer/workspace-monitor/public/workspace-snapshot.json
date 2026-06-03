@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-03T15:30:32.129Z",
+  "generatedAt": "2026-06-03T15:44:55.416Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -176,12 +176,14 @@
         "primarySurfaces": [
           "Desktop Runtime",
           "Run Board",
+          "Search Agent Quick Run",
           "Task Pipe",
           "Process Graph",
           "Decision Inbox"
         ],
         "currentAssets": [],
         "automationTargets": [
+          "existing search agent quick-run",
           "task intake to multi-lane plan",
           "bounded stdout and stderr capture",
           "human decision defer and resume",
@@ -192,6 +194,7 @@
           "blocked lane count",
           "decision replay count",
           "merge gate outcomes",
+          "research_insight_agent task-run records",
           "task-run records",
           "resource cleanup results"
         ],
@@ -271,6 +274,7 @@
         "primarySection": "agents",
         "primarySurfaces": [
           "Agents",
+          "Search Agent Quick Run",
           "Capability Center",
           "Philosophy Feature Factory",
           "Mode & Function Switchboard",
@@ -278,6 +282,7 @@
         ],
         "currentAssets": [],
         "automationTargets": [
+          "existing agent run intake",
           "capability candidate intake",
           "smallest asset selection",
           "skill validation",

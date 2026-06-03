@@ -5430,11 +5430,114 @@ h3 {
   text-transform: uppercase;
 }
 
+.search-agent-run-panel,
 .agent-factory-wizard-panel,
 .learning-feedback-panel {
   background:
     linear-gradient(180deg, rgba(22, 115, 91, 0.045), rgba(47, 103, 177, 0.035)),
     var(--surface);
+}
+
+.search-agent-run-layout {
+  display: grid;
+  grid-template-columns: minmax(340px, 1.1fr) minmax(260px, 0.9fr);
+  gap: 12px;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.search-agent-run-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.search-agent-run-form label {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.search-agent-run-form label.wide-field {
+  grid-column: 1 / -1;
+}
+
+.search-agent-run-form span,
+.search-agent-contract span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.search-agent-run-form textarea {
+  width: 100%;
+  min-height: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 9px 10px;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.search-agent-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.search-agent-actions button {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  border: 1px solid #aebbc8;
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--control-radius);
+  padding: 8px var(--control-padding-x);
+  font-weight: 800;
+  white-space: normal;
+}
+
+.search-agent-actions .primary-action-button {
+  border-color: color-mix(in srgb, var(--green) 54%, var(--line));
+  background: color-mix(in srgb, var(--surface-raised) 80%, var(--green) 16%);
+}
+
+.search-agent-contract {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.search-agent-contract > div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.search-agent-contract strong,
+.search-agent-contract small {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.search-agent-contract small {
+  color: var(--muted);
+  line-height: 1.45;
 }
 
 .agent-factory-layout,
@@ -9253,6 +9356,7 @@ h3 {
   .claude-transfer-layout,
   .philosophy-feature-layout,
   .intent-map-layout,
+  .search-agent-run-layout,
   .agent-factory-layout,
   .learning-feedback-layout,
   .mode-switchboard-layout {
@@ -9326,6 +9430,7 @@ h3 {
   .source-editor-controls,
   .source-customization-bar,
   .source-settings-grid,
+  .search-agent-run-form,
   .agent-factory-form,
   .learning-decision-controls,
   .mode-option-grid {
@@ -9457,6 +9562,7 @@ h3 {
   .source-customization-bar button,
   .source-command-toolbar button,
   .source-workbench-switcher button,
+  .search-agent-actions button,
   .terminal-view-switcher button,
   .workspace-explorer-actions button,
   .native-workspace-actions button {
@@ -9505,6 +9611,7 @@ h3 {
   }
 
   .workspace-home-actions,
+  .search-agent-run-form,
   .desktop-run-timeline,
   .home-metrics-strip,
   .main-feature-detail,

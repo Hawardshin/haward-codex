@@ -470,6 +470,7 @@
       ],
       "contents": [
         "guided task form",
+        "existing search agent quick run",
         "work mode selector",
         "research requirement indicator",
         "notification toggle"
@@ -523,6 +524,24 @@
     }
   ],
   "task_run_flow": [
+    {
+      "step": "select_existing_agent",
+      "screen": "Agents / Search Agent Quick Run",
+      "required_inputs": [
+        "objective or question"
+      ],
+      "optional_inputs": [
+        "search questions",
+        "search channels",
+        "capture targets",
+        "execution notes"
+      ],
+      "required_behavior": [
+        "show the existing research-insight-planner-agent before agent creation",
+        "start the run through the platform runtime without requiring the user to type a shell command",
+        "persist the run as taskKind research_insight_agent"
+      ]
+    },
     {
       "step": "describe_goal",
       "screen": "Guided task form",
@@ -588,6 +607,16 @@
     }
   ],
   "ai_cli_orchestration_flow": [
+    {
+      "step": "run_existing_search_agent",
+      "screen": "Agents / Search Agent Quick Run",
+      "required_behavior": [
+        "render the research-insight-planner-agent config and input schema as a ready-to-run product preset",
+        "inject a structured prompt into the selected guest adapter",
+        "open the bottom terminal drawer automatically",
+        "store stdout, stderr, decision prompts, and task-run metadata in the runtime data store"
+      ]
+    },
     {
       "step": "select_capabilities",
       "screen": "Task preflight",
@@ -782,6 +811,11 @@
       "id": "workspace_home",
       "priority": "must",
       "purpose": "Show projects, recent work, active tasks, and next actions."
+    },
+    {
+      "id": "existing_search_agent_run",
+      "priority": "must",
+      "purpose": "Run the existing research-insight-planner-agent from the Agents screen and command palette without manual shell setup."
     },
     {
       "id": "guided_task_start",

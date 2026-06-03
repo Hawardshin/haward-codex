@@ -1,0 +1,17 @@
+{
+  "schema_version": "resource-check.v1",
+  "request_id": "UR-2026-06-04-003",
+  "resource_risk_occurred": true,
+  "status": "passed",
+  "resources_touched": [
+    "Tauri child process session launcher",
+    "React terminal drawer launch request",
+    "task-run persistence path"
+  ],
+  "controls": [
+    "reused existing bounded output and timeout constants",
+    "preserved optional CLI capability_missing behavior",
+    "did not start long-running sessions during validation",
+    "browser/dev server process is checked before final close-out"
+  ]
+}
