@@ -1,0 +1,115 @@
+{
+  "task": "Installer shell runtime contract restructure",
+  "work_mode": "governance",
+  "runtime_context": [
+    "rust",
+    "tauri",
+    "node",
+    "installer_resources",
+    "app_data"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "bundled-contract-resource-read",
+      "category": "file_handle",
+      "description": "The installed shell reads a bundled JSON contract resource and must not keep persistent file handles or depend only on development paths.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The Rust command reads the contract with fs::read_to_string, first from Tauri resources and then from development source as fallback, returning a bounded JSON report.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs get_installer_shell_runtime_contract",
+        "platform-desktop-app/src-tauri/src/lib.rs resolve_installer_shell_runtime_contract_path",
+        "platform-desktop-app/src-tauri/tauri.conf.json bundle.resources",
+        "cargo check from platform-desktop-app/src-tauri/: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "runtime-data-accumulation-growth",
+      "category": "large_data",
+      "description": "The contract declares multiple data accumulation targets that could grow over time if not classified by runtime plane and close-out gate.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Accumulation targets are classified into platform_data_store, support_diagnostic_store, and history/evaluation records with provenance requirements, and the runtime data boundary registry declares retention/visibility planes.",
+      "evidence": [
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json data_accumulation_targets",
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json runtime_data_roots",
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json log_taxonomy"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "unreviewed-shell-sidecar",
+      "category": "process",
+      "description": "A project-wide shell restructure could accidentally add a new external sidecar or shell plugin permission without install/security review.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "No new sidecar or plugin-shell capability was added; default capability remains core-only and the contract records sidecars as requiring a future scoped audit.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/capabilities/default.json",
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json current_execution_model",
+        "platform-desktop-app/src-tauri/Cargo.toml"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "contract-resource-resolution",
+      "resource": "installer shell runtime contract JSON",
+      "create_path": "Tauri bundle.resources maps runtime-contracts files into the app resource directory.",
+      "cleanup_path": "No persistent handle is created; fs::read_to_string closes the file after reading.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/tauri.conf.json",
+        "platform-desktop-app/src-tauri/src/lib.rs get_installer_shell_runtime_contract",
+        "corepack pnpm --filter platform-desktop-app test: 14 passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "contract-validator",
+      "resource": "Node validation process",
+      "create_path": "node scripts/check-runtime-contract.mjs",
+      "cleanup_path": "One-shot process exits after deterministic checks.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "node scripts/check-runtime-contract.mjs: installer_shell_runtime_contract_ready",
+        "corepack pnpm --filter platform-desktop-app run check: passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "contract-size-and-gates",
+      "metric": "contract gates and accumulation target counts",
+      "tool": "check-runtime-contract.mjs",
+      "threshold": "12 required gates and 8 accumulation targets present.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "checked_gates: 12",
+        "checked_accumulation_targets: 8"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "structure-audit-clean",
+      "metric": "project top-level structure warnings",
+      "tool": "python3 _tools/structure-audit/src/structure_audit.py --check",
+      "threshold": "warnings [] and gaps []",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "structure audit status clean, warnings []"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No new long-running process, watcher, timer, network connection, shell sidecar, or global installation was added."
+  ]
+}

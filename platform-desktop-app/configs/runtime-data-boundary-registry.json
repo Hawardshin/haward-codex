@@ -23,6 +23,18 @@
   },
   "reference_links": [
     {
+      "id": "installer_shell_runtime_contract",
+      "title": "Installer Shell Runtime Contract",
+      "path": "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+      "source_type": "internal",
+      "used_for": [
+        "installed shell boot sequence",
+        "runtime enforcement gates",
+        "structured data accumulation targets"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
       "id": "tauri_distribution",
       "title": "Tauri Distribute",
       "url": "https://v2.tauri.app/distribute/",
@@ -116,6 +128,16 @@
       "applies_to": [
         "agent_workspace_policy",
         "installed_product_planes"
+      ]
+    },
+    {
+      "id": "installer_shell_contract_is_runtime_gate",
+      "rule": "The installed shell must read the bundled installer shell runtime contract before task execution and must write task, decision, evidence, validation, and evaluation records to the declared data accumulation targets.",
+      "reason": "The desktop product exists to turn repository knowledge into enforced runtime behavior and accumulated operating data.",
+      "applies_to": [
+        "runtime_data_roots",
+        "agent_workspace_policy",
+        "installer_payload_policy"
       ]
     }
   ],
@@ -228,6 +250,7 @@
       "contents": [
         "compiled Rust/Tauri executable",
         "static frontend assets",
+        "bundled installer shell runtime contract",
         "required bundled resources",
         "signed helper binaries when explicitly approved"
       ],

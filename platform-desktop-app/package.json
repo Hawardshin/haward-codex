@@ -6,8 +6,9 @@
   "description": "Installable desktop shell for the personal agent-building platform.",
   "packageManager": "pnpm@10.34.1",
   "scripts": {
-    "check": "node scripts/check-readiness.mjs && node scripts/check-customer-bundle.mjs --allow-missing-dist && node scripts/check-release-readiness.mjs --mode internal && node scripts/check-service-readiness.mjs --mode internal",
+    "check": "node scripts/check-runtime-contract.mjs && node scripts/check-readiness.mjs && node scripts/check-customer-bundle.mjs --allow-missing-dist && node scripts/check-release-readiness.mjs --mode internal && node scripts/check-service-readiness.mjs --mode internal",
     "test": "node --test tests/*.test.mjs",
+    "runtime:contract": "node scripts/check-runtime-contract.mjs",
     "customer-bundle:audit": "node scripts/check-customer-bundle.mjs",
     "release:preflight": "node scripts/check-release-readiness.mjs --mode internal",
     "release:preflight:public": "node scripts/check-release-readiness.mjs --mode public",

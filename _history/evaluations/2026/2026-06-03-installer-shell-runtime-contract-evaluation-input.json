@@ -1,0 +1,130 @@
+{
+  "initial_instruction": "The user asked to refactor the overall project structure so this project is explicitly about making the installer, and so the shell launched by the installed app reads the repository's usage/features/rules, enforces them, and accumulates data.",
+  "result_summary": "Added an installer shell runtime contract structure under platform-desktop-app/runtime-contracts, bundled it as Tauri resources, exposed get_installer_shell_runtime_contract in Rust, added a deterministic contract validator to the default check chain, updated requirements/docs/project registry/spec/history, and validated the structure with contract/config/readiness/test/Rust/structure/evaluation gates.",
+  "work_mode": "governance",
+  "changed_files": [
+    "_ops/projects/registry.json",
+    "_history/2026/2026-06-03.md",
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/web-searches/2026/2026-06-03-installer-shell-runtime-contract.ko.md",
+    "_history/mode-selections/2026/2026-06-03-installer-shell-runtime-contract.json",
+    "_history/source-provenance/2026/2026-06-03-installer-shell-runtime-contract.json",
+    "_history/plan-evidence/2026/2026-06-03-installer-shell-runtime-contract.json",
+    "_history/work-timings/2026/2026-06-03-installer-shell-runtime-contract.json",
+    "_history/request-traces/2026/2026-06-03-installer-shell-runtime-contract.ko.md",
+    "_history/request-traces/2026/2026-06-03-installer-shell-runtime-contract.en.md",
+    "_history/evaluations/2026/2026-06-03-installer-shell-runtime-contract-omission-input.json",
+    "_history/evaluations/2026/2026-06-03-installer-shell-runtime-contract-omission-result.json",
+    "_history/evaluations/2026/2026-06-03-installer-shell-runtime-contract-resource-input.json",
+    "_history/evaluations/2026/2026-06-03-installer-shell-runtime-contract-resource-result.json",
+    "_history/evaluations/2026/2026-06-03-installer-shell-runtime-contract-evaluation-input.json",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/package.json",
+    "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+    "platform-desktop-app/runtime-contracts/installer-shell-bootstrap.ko.md",
+    "platform-desktop-app/runtime-contracts/installer-shell-bootstrap.en.md",
+    "platform-desktop-app/scripts/check-runtime-contract.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/src-tauri/tauri.conf.json",
+    "platform-desktop-app/src-tauri/capabilities/default.json",
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+    "platform-desktop-app/docs/architecture/installer-shell-runtime-contract.ko.md",
+    "platform-desktop-app/docs/architecture/installer-shell-runtime-contract.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/specs/2026-06-03-installer-shell-runtime-contract/"
+  ],
+  "verification": [
+    "cargo fmt: passed",
+    "node scripts/check-runtime-contract.mjs: installer_shell_runtime_contract_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json: self_documenting",
+    "python3 -m json.tool platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json: passed",
+    "python3 -m json.tool platform-desktop-app/configs/runtime-data-boundary-registry.json: passed",
+    "python3 -m json.tool _ops/projects/registry.json: passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/runtime-data-boundary-registry.json: self_documenting",
+    "cargo check from platform-desktop-app/src-tauri/: passed",
+    "corepack pnpm --filter platform-desktop-app test: 14 passed",
+    "corepack pnpm --filter platform-desktop-app run check: passed",
+    "python3 _tools/structure-audit/src/structure_audit.py --check: clean, warnings []",
+    "git diff --check: passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-03-installer-shell-runtime-contract-omission-input.json: coverage_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-03-installer-shell-runtime-contract-resource-input.json: resource_ready"
+  ],
+  "references_checked": [
+    "https://v2.tauri.app/reference/javascript/shell/",
+    "https://v2.tauri.app/develop/resources/",
+    "https://v2.tauri.app/plugin/file-system/",
+    "https://v2.tauri.app/plugin/updater/",
+    "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+    "agent-platform/configs/integrations/cli-adapter-registry.json",
+    "_ops/workflows/63-installable-software-productization.md",
+    "_ops/workflows/66-cli-adapter-integration.md",
+    "_ops/workflows/67-structure-unstructured-data.md"
+  ],
+  "grounding_checks": [
+    "_history/source-provenance/2026/2026-06-03-installer-shell-runtime-contract.json",
+    "_history/web-searches/2026/2026-06-03-installer-shell-runtime-contract.ko.md",
+    "_history/evaluations/2026/2026-06-03-installer-shell-runtime-contract-omission-result.json",
+    "_history/evaluations/2026/2026-06-03-installer-shell-runtime-contract-resource-result.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-03-installer-shell-runtime-contract.json",
+    "_history/web-searches/2026/2026-06-03-installer-shell-runtime-contract.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-03-installer-shell-runtime-contract.json",
+    "platform-desktop-app/specs/2026-06-03-installer-shell-runtime-contract/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-03-installer-shell-runtime-contract.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-installer-shell-runtime-contract-omission-result.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-installer-shell-runtime-contract.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-03-installer-shell-runtime-contract/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-03-installer-shell-runtime-contract/spec.en.md",
+    "platform-desktop-app/specs/2026-06-03-installer-shell-runtime-contract/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-03-installer-shell-runtime-contract/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-03-installer-shell-runtime-contract/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-installer-shell-runtime-contract.ko.md",
+    "_history/request-traces/2026/2026-06-03-installer-shell-runtime-contract.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-installer-shell-runtime-contract.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-03-installer-shell-runtime-contract-resource-result.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": []
+}

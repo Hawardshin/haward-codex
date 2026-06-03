@@ -35,6 +35,11 @@
       "msi",
       "nsis"
     ],
+    "resources": {
+      "../runtime-contracts/installer-shell-runtime-contract.json": "runtime-contracts/installer-shell-runtime-contract.json",
+      "../runtime-contracts/installer-shell-bootstrap.ko.md": "runtime-contracts/installer-shell-bootstrap.ko.md",
+      "../runtime-contracts/installer-shell-bootstrap.en.md": "runtime-contracts/installer-shell-bootstrap.en.md"
+    },
     "icon": [
       "icons/icon.icns",
       "icons/icon.ico"

@@ -1,0 +1,14 @@
+{
+  "status": "resource_ready",
+  "requires_rework": false,
+  "work_mode": "governance",
+  "resource_summary": {
+    "runtime_context_count": 5,
+    "resource_risks_count": 3,
+    "lifecycle_checks_count": 2,
+    "measurement_checks_count": 2
+  },
+  "gaps": [],
+  "warnings": [],
+  "follow_up_actions": []
+}

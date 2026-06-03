@@ -1,0 +1,19 @@
+{
+  "task": "Installer shell runtime contract restructure",
+  "selected_mode": "governance",
+  "reason": "The request changes the project structure and durable runtime contract for how the installable app shell reads rules, enforces gates, and accumulates records.",
+  "web_first_completed": true,
+  "memory_bootstrap_completed": true,
+  "large_scope_decomposition_required": true,
+  "large_scope_simulated": true,
+  "large_scope_reason": "The request says to refactor the whole project structure and touches installer productization, shell runtime, data accumulation, validation, requirements, specs, and project registry.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "desktop_productization_relevant": true,
+  "cli_adapter_relevant": true,
+  "unstructured_data_structuring_relevant": true,
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_risk_reason": "The installed shell runtime contract is bundled and read at runtime, and the runtime data accumulation targets affect task/log/evidence lifecycle.",
+  "selected_at": "2026-06-03"
+}

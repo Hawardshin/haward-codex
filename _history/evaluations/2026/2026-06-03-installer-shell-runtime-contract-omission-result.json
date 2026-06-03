@@ -1,0 +1,14 @@
+{
+  "status": "coverage_ready",
+  "requires_rework": false,
+  "work_mode": "governance",
+  "coverage_summary": {
+    "expected_items_count": 6,
+    "artifact_checks_count": 5,
+    "acceptance_checks_count": 4,
+    "known_omission_risks_count": 0
+  },
+  "gaps": [],
+  "warnings": [],
+  "follow_up_actions": []
+}

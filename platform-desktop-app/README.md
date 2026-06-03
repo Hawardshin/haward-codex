@@ -9,6 +9,7 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 ## Current Direction
 
 - Treat the first installable product as the platform-first host runtime: the app launches first, owns workspace state, task state, decisions, artifacts, validation, and UI authority, then mounts external AI CLIs as guest adapter lanes.
+- Treat `runtime-contracts/installer-shell-runtime-contract.json` as the bundled contract the installed shell reads before task execution. This contract fixes required read targets, enforcement gates, and structured data accumulation targets so shell behavior is not driven by chat memory or a one-off UI path.
 - Treat this repository as the development source that builds the platform, not as the customer-visible product payload. Installed customers should use the app, their selected workspaces, app-managed data stores, classified logs, and exports without seeing the platform source tree.
 - Keep user workspace data, platform data stores, log stores, cache stores, and agent runtime workspaces separate from platform source code. Use `configs/runtime-data-boundary-registry.json` as the steering source before adding persistent runtime data or log features.
 - Keep reusable agent definitions under `agent-platform/configs/agents/`; runtime agent input/output/log/handoff/temp work belongs in the installed product's scoped agent workspace plane.
@@ -55,6 +56,7 @@ platform-desktop-app/
   configs/
   docs/
   docs/requirements/
+  runtime-contracts/
   specs/
   src/
   src-tauri/
@@ -70,6 +72,9 @@ platform-desktop-app/
 - User flow registry: `configs/user-flow-registry.json`
 - Claude Code public design transfer registry: `configs/claude-code-design-transfer-registry.json`
 - Runtime data/code/log/agent workspace boundary registry: `configs/runtime-data-boundary-registry.json`
+- Installer shell runtime contract: `runtime-contracts/installer-shell-runtime-contract.json`
+- Installer shell bootstrap guide: `runtime-contracts/installer-shell-bootstrap.ko.md`
+- Installer shell runtime architecture: `docs/architecture/installer-shell-runtime-contract.ko.md`
 - Cross-platform runtime decision: `docs/architecture/cross-platform-installable-runtime-decision.ko.md`
 - Multi-CLI orchestration runtime: `docs/architecture/multi-cli-orchestration-runtime.ko.md`
 - Claude Code public design transfer: `docs/architecture/claude-code-design-transfer.ko.md`
@@ -91,6 +96,7 @@ Desktop framework dependencies have been installed locally for developer builds.
 
 ```bash
 corepack pnpm install --frozen-lockfile
+corepack pnpm --filter platform-desktop-app run runtime:contract
 corepack pnpm --filter platform-desktop-app run check
 corepack pnpm --filter platform-desktop-app test
 corepack pnpm --filter workspace-monitor run check
@@ -107,11 +113,13 @@ python3 -m json.tool platform-desktop-app/configs/macos-execution-profile.json
 python3 -m json.tool platform-desktop-app/configs/windows-execution-profile.json
 python3 -m json.tool platform-desktop-app/configs/claude-code-design-transfer-registry.json
 python3 -m json.tool platform-desktop-app/configs/runtime-data-boundary-registry.json
+python3 -m json.tool platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/desktop-distribution-registry.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/macos-execution-profile.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/windows-execution-profile.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/claude-code-design-transfer-registry.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/runtime-data-boundary-registry.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json
 ```
 
 `monitor:build` runs the customer Workspace Monitor build and then audits `workspace-monitor/out` before Tauri embeds it. Public release preflight is report-only unless Developer ID signing and Apple notarization credentials are available.
@@ -119,6 +127,7 @@ cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-c
 Implemented desktop bridge commands:
 
 - `app_health`
+- `get_installer_shell_runtime_contract`
 - `list_cli_adapters`
 - `run_cli_adapter_health`
 - `run_all_cli_adapter_health`

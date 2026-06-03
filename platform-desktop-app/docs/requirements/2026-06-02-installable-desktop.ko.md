@@ -37,6 +37,7 @@
 | PDA-REQ-027 | Desktop supervisor는 단일 CLI session뿐 아니라 task intake를 기준으로 여러 optional CLI lane을 pipe graph로 초기화할 수 있어야 한다. 각 lane은 stdin init, stdout/stderr bounded capture, decision inbox routing, merge gate artifact flow를 명시해야 하며, 누락된 CLI lane은 `capability_missing`으로만 degrade해야 한다. | must | Tauri task pipe command, CLI adapter registry, Workspace Monitor Desktop tab, readiness/test |
 | PDA-REQ-028 | Desktop supervisor와 monitor UI는 장시간 사용 중 CLI child process, stdout/stderr reader thread, 완료 session output buffer, polling interval, fetch/effect 같은 runtime resource가 누적되지 않도록 cleanup, retention, bounded output, abort/clear lifecycle을 가져야 한다. | must | Rust `cargo test`/`cargo build`, Workspace Monitor build/check, `check-resources` |
 | PDA-REQ-029 | Desktop source editor는 Monaco를 단순 임베드하는 데서 끝나지 않고 runtime workspace file index, open editor tab strip, editor command toolbar, Monaco diff review, editor settings popup, platform template/context actions를 갖춘 코드 워크벤치여야 한다. | must | `list_workspace_text_files`, Workspace Monitor Source Review, readiness/test, Browser smoke |
+| PDA-REQ-030 | 설치 앱이 띄우는 shell/runtime은 작업 전 bundled installer shell runtime contract를 읽어야 하며, 그 계약에 정의된 required read targets, enforcement gates, data accumulation targets를 따라 task, decision, evidence, validation, evaluation 기록을 구조화해 축적해야 한다. | must | `runtime-contracts/installer-shell-runtime-contract.json`, `get_installer_shell_runtime_contract`, `check-runtime-contract.mjs`, readiness/test |
 
 ## 현재 상태
 

@@ -1,0 +1,157 @@
+{
+  "task": "Installer shell runtime contract restructure",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "installer_project_purpose",
+      "description": "Make the project structure reflect that platform-desktop-app exists to build the installer and installed shell/runtime.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/README.md",
+        "platform-desktop-app/docs/architecture/installer-shell-runtime-contract.ko.md",
+        "_ops/projects/registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "shell_reads_contract",
+      "description": "The installed shell/runtime must read a durable contract before task execution.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+        "platform-desktop-app/src-tauri/src/lib.rs get_installer_shell_runtime_contract",
+        "platform-desktop-app/src-tauri/tauri.conf.json bundle.resources"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "enforcement_gates",
+      "description": "The structure must force shell execution through required read targets and enforcement gates.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json enforcement_gates",
+        "platform-desktop-app/scripts/check-runtime-contract.mjs",
+        "platform-desktop-app/package.json check"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "data_accumulation",
+      "description": "The shell/runtime must accumulate structured task, decision, evidence, validation, evaluation, and timing data.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json data_accumulation_targets",
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+        "platform-desktop-app/docs/architecture/installer-shell-runtime-contract.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "do_not_install_sidecar_unreviewed",
+      "description": "Do not introduce a new external shell sidecar or plugin-shell permission without a separate audit and capability boundary.",
+      "source": "repository_policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json current_execution_model",
+        "platform-desktop-app/src-tauri/capabilities/default.json",
+        "_history/source-provenance/2026/2026-06-03-installer-shell-runtime-contract.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "private_boundary",
+      "description": "The shell contract must not treat _private, outputs, or .git as runtime knowledge sources.",
+      "source": "repository_policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json denied_read_targets",
+        "platform-desktop-app/scripts/check-runtime-contract.mjs",
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+      "purpose": "Bundled shell-readable contract.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/runtime-contracts/installer-shell-bootstrap.ko.md",
+      "purpose": "Human-readable Korean shell bootstrap.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/scripts/check-runtime-contract.mjs",
+      "purpose": "Deterministic contract validator.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/architecture/installer-shell-runtime-contract.ko.md",
+      "purpose": "Architecture decision record for the restructure.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-installer-shell-runtime-contract/spec.ko.md",
+      "purpose": "Spec record.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "contract_check",
+      "description": "Runtime contract validator passes.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "node scripts/check-runtime-contract.mjs: installer_shell_runtime_contract_ready"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform_check",
+      "description": "Default platform-desktop-app check chain includes and passes runtime contract validation.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter platform-desktop-app run check: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "rust_check",
+      "description": "Rust command compiles.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo check from platform-desktop-app/src-tauri/: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "structure_audit",
+      "description": "Project structure audit passes with no gaps or warnings.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/structure-audit/src/structure_audit.py --check: clean, warnings []"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [],
+  "notes": [
+    "A previously empty untracked platform-desktop-app/workspace-monitor directory was removed so the structure audit is warning-free."
+  ]
+}

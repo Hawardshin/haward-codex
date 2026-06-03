@@ -1,0 +1,45 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-030",
+  "material_sources": [
+    {
+      "id": "tauri_shell_plugin_reference",
+      "type": "official_docs",
+      "url": "https://v2.tauri.app/reference/javascript/shell/",
+      "used_for": "Sidecar/shell execution permission boundary and why a new sidecar install is not introduced in this slice.",
+      "accessed": "2026-06-03"
+    },
+    {
+      "id": "tauri_resources",
+      "type": "official_docs",
+      "url": "https://v2.tauri.app/develop/resources/",
+      "used_for": "Bundling runtime contract files as Tauri resources.",
+      "accessed": "2026-06-03"
+    },
+    {
+      "id": "tauri_filesystem",
+      "type": "official_docs",
+      "url": "https://v2.tauri.app/plugin/file-system/",
+      "used_for": "App data/log directory and scoped filesystem boundary.",
+      "accessed": "2026-06-03"
+    },
+    {
+      "id": "runtime_data_boundary_registry",
+      "type": "internal_config",
+      "path": "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+      "used_for": "Data/log/agent workspace accumulation planes.",
+      "accessed": "2026-06-03"
+    },
+    {
+      "id": "cli_adapter_registry",
+      "type": "internal_config",
+      "path": "agent-platform/configs/integrations/cli-adapter-registry.json",
+      "used_for": "External AI CLI guest adapter role and capability_missing fallback.",
+      "accessed": "2026-06-03"
+    }
+  ],
+  "unsupported_or_deferred": [
+    "No new plugin-shell sidecar or bundled external binary was installed in this slice.",
+    "Public distribution readiness remains gated by signing, updater, clean-machine smoke, privacy, and dependency review."
+  ]
+}

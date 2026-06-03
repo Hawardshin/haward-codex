@@ -18,6 +18,21 @@ struct HealthStatus {
     ui_source: &'static str,
 }
 
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct InstallerShellRuntimeContractReport {
+    status: String,
+    source: String,
+    contract_path: String,
+    schema_version: String,
+    name: String,
+    purpose: String,
+    boot_sequence_count: usize,
+    enforcement_gate_count: usize,
+    data_accumulation_target_count: usize,
+    contract: Value,
+}
+
 struct AdapterDefinition {
     adapter_id: &'static str,
     label: &'static str,
@@ -663,6 +678,64 @@ fn app_health() -> HealthStatus {
         shell: "tauri",
         ui_source: "workspace-monitor",
     }
+}
+
+#[tauri::command]
+fn get_installer_shell_runtime_contract(
+    app: AppHandle,
+) -> Result<InstallerShellRuntimeContractReport, String> {
+    let (contract_path, source) = resolve_installer_shell_runtime_contract_path(&app)?;
+    let content = fs::read_to_string(&contract_path).map_err(|error| {
+        format!(
+            "Failed to read installer shell runtime contract at {}: {error}",
+            path_to_string(&contract_path)
+        )
+    })?;
+    let contract: Value = serde_json::from_str(&content)
+        .map_err(|error| format!("Installer shell runtime contract is invalid JSON: {error}"))?;
+    let schema_version = contract
+        .get("schema_version")
+        .and_then(Value::as_str)
+        .unwrap_or("unknown")
+        .to_string();
+    let name = contract
+        .get("name")
+        .and_then(Value::as_str)
+        .unwrap_or("installer-shell-runtime-contract")
+        .to_string();
+    let purpose = contract
+        .get("purpose")
+        .and_then(Value::as_str)
+        .unwrap_or("")
+        .to_string();
+    let boot_sequence_count = contract
+        .get("shell_boot_sequence")
+        .and_then(Value::as_array)
+        .map(Vec::len)
+        .unwrap_or(0);
+    let enforcement_gate_count = contract
+        .get("enforcement_gates")
+        .and_then(Value::as_array)
+        .map(Vec::len)
+        .unwrap_or(0);
+    let data_accumulation_target_count = contract
+        .get("data_accumulation_targets")
+        .and_then(Value::as_array)
+        .map(Vec::len)
+        .unwrap_or(0);
+
+    Ok(InstallerShellRuntimeContractReport {
+        status: "ready".to_string(),
+        source,
+        contract_path: path_to_string(&contract_path),
+        schema_version,
+        name,
+        purpose,
+        boot_sequence_count,
+        enforcement_gate_count,
+        data_accumulation_target_count,
+        contract,
+    })
 }
 
 #[tauri::command]
@@ -1457,6 +1530,7 @@ pub fn run() {
         .manage(SessionStore::default())
         .invoke_handler(tauri::generate_handler![
             app_health,
+            get_installer_shell_runtime_contract,
             list_cli_adapters,
             run_cli_adapter_health,
             run_all_cli_adapter_health,
@@ -2853,6 +2927,33 @@ fn service_update_channel_configured(app: &AppHandle) -> bool {
     ]
     .iter()
     .any(|file_name| resource_dir.join(file_name).exists())
+}
+
+fn resolve_installer_shell_runtime_contract_path(
+    app: &AppHandle,
+) -> Result<(PathBuf, String), String> {
+    if let Ok(resource_dir) = app.path().resource_dir() {
+        let candidate = resource_dir
+            .join("runtime-contracts")
+            .join("installer-shell-runtime-contract.json");
+        if candidate.exists() {
+            return Ok((candidate, "bundle_resource".to_string()));
+        }
+    }
+
+    let root = workspace_root()?;
+    let candidate = root
+        .join("platform-desktop-app")
+        .join("runtime-contracts")
+        .join("installer-shell-runtime-contract.json");
+    if candidate.exists() {
+        return Ok((candidate, "workspace_source".to_string()));
+    }
+
+    Err(
+        "Installer shell runtime contract was not found in bundled resources or workspace source."
+            .to_string(),
+    )
 }
 
 fn runtime_data_store_base_path(app: &AppHandle) -> Result<PathBuf, String> {

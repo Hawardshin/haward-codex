@@ -19,6 +19,7 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(config.build.frontendDist, "../../workspace-monitor/out");
   assert.equal(config.app.withGlobalTauri, true);
   assert.equal(config.bundle.macOS.hardenedRuntime, true);
+  assert.equal(config.bundle.resources["../runtime-contracts/installer-shell-runtime-contract.json"], "runtime-contracts/installer-shell-runtime-contract.json");
 });
 
 test("desktop registry points to macOS and Windows execution profiles", () => {
@@ -71,6 +72,7 @@ test("runtime data boundary separates customer app from platform source", () => 
   const registry = readJson("configs/runtime-data-boundary-registry.json");
   const serialized = JSON.stringify(registry);
 
+  assert.match(serialized, /installer_shell_runtime_contract/);
   assert.equal(registry.customer_visibility_policy.default_customer_visibility, "installed_app_only");
   assert.match(serialized, /platform source repository/);
   assert.match(serialized, /hidden_in_installed_product/);
@@ -82,6 +84,47 @@ test("runtime data boundary separates customer app from platform source", () => 
   assert.ok(registry.log_taxonomy.length >= 5);
   assert.ok(registry.installer_payload_policy.disallowed.some((item) => item.includes("development repository source tree")));
   assert.ok(registry.installer_payload_policy.disallowed.some((item) => item.includes("_private/")));
+});
+
+test("installer shell runtime contract is bundled and enforceable", () => {
+  const contract = readJson("runtime-contracts/installer-shell-runtime-contract.json");
+  const serialized = JSON.stringify(contract);
+  const pkg = readJson("package.json");
+  const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
+
+  assert.equal(contract.installer_shell_contract.launch_model, "installed_app_owns_shell_runtime");
+  assert.equal(contract.installer_shell_contract.shell_role, "primary_platform_host");
+  assert.equal(contract.installer_shell_contract.external_cli_role, "optional_guest_adapter_lane");
+  assert.match(pkg.scripts.check, /check-runtime-contract\.mjs/);
+  assert.match(pkg.scripts["runtime:contract"], /check-runtime-contract\.mjs/);
+  for (const requiredGate of [
+    "web_first_intake",
+    "memory_bootstrap",
+    "work_mode_selection",
+    "runtime_data_boundary",
+    "cli_adapter_boundary",
+    "sensitive_file_boundary",
+    "omission_check",
+    "resource_check",
+    "work_evaluation"
+  ]) {
+    assert.match(serialized, new RegExp(requiredGate));
+  }
+  for (const target of [
+    "user_request_summary",
+    "request_trace",
+    "decision_inbox",
+    "task_run_store",
+    "structured_evidence",
+    "validation_and_evaluation",
+    "work_timing",
+    "support_diagnostic"
+  ]) {
+    assert.match(serialized, new RegExp(target));
+  }
+  assert.match(lib, /get_installer_shell_runtime_contract/);
+  assert.match(lib, /resolve_installer_shell_runtime_contract_path/);
+  assert.match(lib, /InstallerShellRuntimeContractReport/);
 });
 
 test("service readiness registry records production service blockers", () => {

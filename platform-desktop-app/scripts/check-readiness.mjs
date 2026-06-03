@@ -14,6 +14,9 @@ const requiredFiles = [
   "configs/macos-execution-profile.json",
   "configs/windows-execution-profile.json",
   "configs/user-flow-registry.json",
+  "runtime-contracts/installer-shell-runtime-contract.json",
+  "runtime-contracts/installer-shell-bootstrap.ko.md",
+  "runtime-contracts/installer-shell-bootstrap.en.md",
   "docs/architecture/cross-platform-installable-runtime-decision.ko.md",
   "docs/architecture/cross-platform-installable-runtime-decision.en.md",
   "docs/architecture/multi-cli-orchestration-runtime.ko.md",
@@ -22,6 +25,8 @@ const requiredFiles = [
   "docs/architecture/claude-code-design-transfer.en.md",
   "docs/architecture/runtime-data-boundary.ko.md",
   "docs/architecture/runtime-data-boundary.en.md",
+  "docs/architecture/installer-shell-runtime-contract.ko.md",
+  "docs/architecture/installer-shell-runtime-contract.en.md",
   "specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
   "specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md",
   "specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
@@ -33,6 +38,7 @@ const requiredFiles = [
   "src-tauri/src/main.rs",
   "src-tauri/src/lib.rs",
   "src-tauri/capabilities/default.json",
+  "scripts/check-runtime-contract.mjs",
   "scripts/check-customer-bundle.mjs",
   "scripts/check-release-readiness.mjs",
   "scripts/check-service-readiness.mjs"
@@ -64,6 +70,9 @@ const pkg = readJson("package.json");
 if (!pkg.scripts?.check || !pkg.scripts?.test || !pkg.scripts?.["tauri:dev"] || !pkg.scripts?.["tauri:build"]) {
   failures.push("package.json must expose check, test, tauri:dev, and tauri:build scripts");
 }
+if (!pkg.scripts?.["runtime:contract"]) {
+  failures.push("package.json must expose runtime:contract");
+}
 for (const scriptName of ["customer-bundle:audit", "release:preflight", "release:preflight:public", "release:preflight:public:report"]) {
   if (!pkg.scripts?.[scriptName]) {
     failures.push(`package.json must expose ${scriptName}`);
@@ -82,6 +91,9 @@ if (!pkg.scripts?.["monitor:build"]?.includes("customer-bundle:audit")) {
 }
 if (!pkg.scripts?.check?.includes("check-customer-bundle.mjs") || !pkg.scripts?.check?.includes("check-release-readiness.mjs")) {
   failures.push("platform-desktop-app check must run customer bundle and release readiness preflight checks");
+}
+if (!pkg.scripts?.check?.includes("check-runtime-contract.mjs")) {
+  failures.push("platform-desktop-app check must run installer shell runtime contract checks");
 }
 if (!pkg.scripts?.check?.includes("check-service-readiness.mjs")) {
   failures.push("platform-desktop-app check must run service readiness checks");
@@ -110,9 +122,20 @@ if (!tauriConfig.bundle?.targets?.includes("dmg") || !tauriConfig.bundle?.target
 if (tauriConfig.bundle?.macOS?.hardenedRuntime !== true) {
   failures.push("Tauri macOS bundle must enable hardenedRuntime for release-path parity");
 }
+const resourceTargets = tauriConfig.bundle?.resources ?? {};
+for (const [source, destination] of [
+  ["../runtime-contracts/installer-shell-runtime-contract.json", "runtime-contracts/installer-shell-runtime-contract.json"],
+  ["../runtime-contracts/installer-shell-bootstrap.ko.md", "runtime-contracts/installer-shell-bootstrap.ko.md"],
+  ["../runtime-contracts/installer-shell-bootstrap.en.md", "runtime-contracts/installer-shell-bootstrap.en.md"]
+]) {
+  if (resourceTargets[source] !== destination) {
+    failures.push(`Tauri bundle resources must map ${source} to ${destination}`);
+  }
+}
 
 const tauriLib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
 for (const commandName of [
+  "get_installer_shell_runtime_contract",
   "list_cli_adapters",
   "run_cli_adapter_health",
   "run_all_cli_adapter_health",
@@ -166,6 +189,8 @@ for (const requiredPhrase of [
   "runtime_data_store_base_path",
   "support_bundles_base_path",
   "payload_audits_base_path",
+  "resolve_installer_shell_runtime_contract_path",
+  "InstallerShellRuntimeContractReport",
   "InstallerPayloadAuditReport",
   "SupportDiagnosticBundleReport",
   "RuntimeDataBoundaryReport",
@@ -220,6 +245,7 @@ const runtimeBoundaryRegistry = readJson("configs/runtime-data-boundary-registry
 const runtimeBoundarySerialized = JSON.stringify(runtimeBoundaryRegistry);
 for (const requiredPhrase of [
   "installed_app_only",
+  "installer_shell_runtime_contract",
   "hidden_in_installed_product",
   "platform_data_store",
   "log_store",

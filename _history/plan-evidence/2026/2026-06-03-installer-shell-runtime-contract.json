@@ -1,0 +1,49 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-030",
+  "problem_observed": [
+    "platform-desktop-app already described itself as the installable product project, but the installed shell runtime did not have a single bundled contract to read before work.",
+    "Runtime data boundary and CLI adapter rules existed in separate configs, but there was no deterministic validator that forced a shell boot sequence, enforcement gates, and data accumulation targets to stay connected.",
+    "The project structure did not explicitly list a shell-readable runtime contract folder."
+  ],
+  "large_scope_decomposition": {
+    "source_inventory": [
+      "platform-desktop-app/README.md",
+      "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+      "platform-desktop-app/src-tauri/tauri.conf.json",
+      "platform-desktop-app/src-tauri/src/lib.rs",
+      "platform-desktop-app/scripts/check-readiness.mjs",
+      "platform-desktop-app/tests/readiness.test.mjs",
+      "_ops/projects/registry.json"
+    ],
+    "touch_paths": [
+      "platform-desktop-app/runtime-contracts/",
+      "platform-desktop-app/scripts/check-runtime-contract.mjs",
+      "platform-desktop-app/src-tauri/",
+      "platform-desktop-app/docs/",
+      "platform-desktop-app/specs/",
+      "_history/",
+      "_ops/projects/registry.json"
+    ],
+    "excluded_paths": [
+      "_private/",
+      "outputs/",
+      "node_modules/",
+      "src-tauri/target/"
+    ],
+    "merge_gate": "runtime contract check, config contract check, readiness/test, Rust check, omission/resource/evaluate-work"
+  },
+  "accepted_decisions": [
+    "Create `platform-desktop-app/runtime-contracts/` as the project-owned shell-readable contract folder.",
+    "Bundle the contract and bootstrap docs as Tauri resources.",
+    "Add `get_installer_shell_runtime_contract` to the Rust command surface.",
+    "Add `scripts/check-runtime-contract.mjs` and include it in the default check chain.",
+    "Keep external AI CLIs as guest adapters and keep missing CLI behavior as `capability_missing`."
+  ],
+  "rejected_options": [
+    "Move shared governance folders into platform-desktop-app.",
+    "Install or bundle a new external shell sidecar in this turn.",
+    "Let the UI infer shell behavior from scattered docs without a contract validator."
+  ],
+  "validation_gate": "Contract check, config contract, platform-desktop-app test/check, Rust check, and close-out evaluators must pass."
+}

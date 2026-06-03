@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Default desktop shell capability. Local command execution and CLI adapters are intentionally excluded until scoped contracts are implemented.",
+  "description": "Default desktop shell capability. Product work is routed through allowlisted Tauri commands and the bundled installer shell runtime contract; plugin shell sidecars remain excluded until a separate scoped capability is approved.",
   "windows": [
     "main"
   ],
@@ -9,4 +9,3 @@
     "core:default"
   ]
 }
-

@@ -187,6 +187,7 @@
         "platform-desktop-app/configs/",
         "platform-desktop-app/docs/",
         "platform-desktop-app/docs/requirements/",
+        "platform-desktop-app/runtime-contracts/",
         "platform-desktop-app/src/",
         "platform-desktop-app/src-tauri/",
         "platform-desktop-app/scripts/",

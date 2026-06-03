@@ -1,0 +1,26 @@
+{
+  "task": "installer-shell-runtime-contract",
+  "date": "2026-06-03",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked Tauri shell, resources, filesystem, and updater official docs."
+    },
+    {
+      "phase": "structure_inventory",
+      "status": "completed",
+      "notes": "Inspected platform-desktop-app registry, README, runtime data boundary, readiness script, tests, and Rust command surface."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Added runtime contract folder, validator, Tauri resource mapping, Rust command, docs, requirements, and registry updates."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Contract/config/test/check/Rust/structure/omission/resource/evaluate-work checks passed."
+    }
+  ]
+}
