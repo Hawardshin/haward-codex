@@ -1,0 +1,47 @@
+{
+  "schema_version": "omission-check.v1",
+  "work_id": "2026-06-03-responsive-text-wrapping",
+  "checked_at": "2026-06-03",
+  "request": "Fix responsive text cases that break differently from the intended design.",
+  "coverage": [
+    {
+      "item": "General UI text should not use broad anywhere wrapping",
+      "status": "covered",
+      "evidence": [
+        "--text-natural-wrap",
+        "global button rule uses var(--text-natural-wrap)",
+        "button label children use var(--text-natural-wrap)"
+      ]
+    },
+    {
+      "item": "Long paths/code/log values should remain overflow-safe",
+      "status": "covered",
+      "evidence": [
+        "--text-long-token-wrap",
+        "long-token exception rule for code/pre/path/log/state selectors"
+      ]
+    },
+    {
+      "item": "Regression guard",
+      "status": "covered",
+      "evidence": [
+        "check-readiness.mjs rejects anywhere on global button rule",
+        "readiness.test.mjs rejects anywhere on generic button label children"
+      ]
+    },
+    {
+      "item": "Responsive browser behavior",
+      "status": "covered",
+      "evidence": [
+        "mobile visible buttons 39, issues 0",
+        "desktop visible buttons 39, issues 0",
+        "mobile terminal drawer issues 0"
+      ]
+    }
+  ],
+  "remaining": [
+    "Screen-specific copy shortening",
+    "Full component design-system extraction"
+  ],
+  "decision": "The responsive text fragmentation regression is fixed for the current desktop shell surfaces and guarded by readiness checks."
+}

@@ -27,6 +27,8 @@
   --control-gap: 7px;
   --control-padding-x: 10px;
   --control-active-shift: 1px;
+  --text-natural-wrap: break-word;
+  --text-long-token-wrap: anywhere;
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "Apple SD Gothic Neo", "Segoe UI", "Malgun Gothic", system-ui, sans-serif;
 }
@@ -170,7 +172,8 @@ button {
   min-width: var(--control-hit-size);
   min-height: var(--control-hit-size);
   line-height: 1.2;
-  overflow-wrap: anywhere;
+  overflow-wrap: var(--text-natural-wrap);
+  word-break: keep-all;
   touch-action: manipulation;
   user-select: none;
   cursor: pointer;
@@ -190,7 +193,8 @@ button:disabled {
 .desktop-app-root button > strong,
 .desktop-app-root button > small {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: var(--text-natural-wrap);
+  word-break: keep-all;
 }
 
 .desktop-app-root button:focus-visible {
@@ -483,7 +487,7 @@ main {
   color: var(--text);
   font-size: 13px;
   line-height: 1.45;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .sidebar-context-meta {
@@ -624,14 +628,14 @@ main {
 
 .titlebar-context-strip button {
   display: inline-flex;
-  min-height: 30px;
+  min-height: var(--control-hit-size);
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: var(--control-gap);
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--text);
-  border-radius: 7px;
+  border-radius: var(--control-radius);
   padding: 6px 8px;
   white-space: nowrap;
 }
@@ -957,7 +961,7 @@ main {
 .settings-data-list dd {
   min-width: 0;
   margin: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   color: var(--text);
   font-size: 12px;
 }
@@ -1071,7 +1075,7 @@ main {
   margin: 0;
   color: var(--muted);
   line-height: 1.48;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .product-feature-actions {
@@ -1217,7 +1221,7 @@ main {
   margin: 0;
   color: var(--muted);
   line-height: 1.45;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .product-operator-strip button {
@@ -1257,7 +1261,7 @@ main {
   color: var(--slate);
   font-size: 12px;
   font-weight: 900;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .workspace-home-panel,
@@ -1359,7 +1363,7 @@ main {
 .timeline-step small {
   grid-column: 1 / -1;
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .timeline-step:disabled {
@@ -1385,7 +1389,7 @@ main {
 .desktop-decision-list small,
 .capability-dock-list strong {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .desktop-decision-list p {
@@ -1771,7 +1775,7 @@ h3 {
 .command-palette-results strong,
 .command-palette-results em {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .command-palette-results em {
@@ -1973,7 +1977,7 @@ h3 {
 
 .main-feature-steps strong {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 13px;
 }
 
@@ -2124,7 +2128,7 @@ h3 {
 .operator-strip-state strong {
   margin-top: 2px;
   font-size: 14px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .operator-red .operator-strip-state svg {
@@ -2437,7 +2441,7 @@ h3 {
   margin-bottom: 0;
   color: var(--muted);
   line-height: 1.5;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .ux-spine {
@@ -2461,14 +2465,14 @@ h3 {
 }
 
 .spine-step strong {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 15px;
 }
 
 .spine-step small {
   color: var(--muted);
   line-height: 1.45;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .spine-step:disabled {
@@ -2545,14 +2549,14 @@ h3 {
 
 .core-function-grid strong {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 16px;
 }
 
 .core-function-grid small {
   color: var(--muted);
   line-height: 1.45;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .core-function-grid em {
@@ -2629,7 +2633,7 @@ h3 {
 .claude-transfer-summary strong {
   display: block;
   margin: 6px 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 19px;
 }
 
@@ -2639,7 +2643,7 @@ h3 {
 .transfer-pattern-grid small {
   color: var(--muted);
   line-height: 1.5;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .claude-transfer-summary dl {
@@ -2678,7 +2682,7 @@ h3 {
 }
 
 .transfer-pattern-grid header strong {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 15px;
   line-height: 1.35;
 }
@@ -2700,7 +2704,7 @@ h3 {
   background: var(--surface-muted);
   border-radius: 999px;
   padding: 4px 7px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .philosophy-feature-hero {
@@ -2748,7 +2752,7 @@ h3 {
   margin-bottom: 0;
   color: var(--muted);
   line-height: 1.5;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .philosophy-feature-layout {
@@ -2793,7 +2797,7 @@ h3 {
 .philosophy-candidate-grid h3 {
   min-width: 0;
   margin: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 15px;
   line-height: 1.35;
 }
@@ -2881,7 +2885,7 @@ h3 {
   margin-bottom: 0;
   color: var(--muted);
   line-height: 1.5;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .intent-map-layout {
@@ -2920,7 +2924,7 @@ h3 {
 .intent-roadmap-column h3 {
   min-width: 0;
   margin: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 15px;
   line-height: 1.35;
 }
@@ -3012,7 +3016,7 @@ h3 {
   background: var(--surface-muted);
   border-radius: 999px;
   padding: 5px 8px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .mode-switchboard-summary {
@@ -3067,7 +3071,7 @@ h3 {
 .mode-group-list button span,
 .mode-option-header strong,
 .mode-location-card h3 {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .mode-group-list small {
@@ -3111,7 +3115,7 @@ h3 {
   margin: 0;
   color: var(--muted);
   line-height: 1.5;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .mode-location-card dl {
@@ -3130,7 +3134,7 @@ h3 {
 
 .mode-location-card dd {
   margin: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .mode-option-grid {
@@ -3157,13 +3161,13 @@ h3 {
   font-size: 11px;
   font-weight: 850;
   text-transform: uppercase;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .mode-option-grid small {
   color: var(--muted);
   line-height: 1.45;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .mode-option-grid button {
@@ -3212,7 +3216,7 @@ h3 {
 
 .attention-list strong,
 .evidence-trail strong {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .attention-list p,
@@ -3220,7 +3224,7 @@ h3 {
   margin-bottom: 0;
   color: var(--muted);
   line-height: 1.5;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .attention-list small {
@@ -3505,14 +3509,14 @@ h3 {
 .settings-action-row span {
   min-width: 0;
   font-weight: 850;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .quick-start-flow small,
 .settings-action-row small {
   min-width: 0;
   color: var(--muted);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .quick-start-flow button:disabled,
@@ -3548,13 +3552,13 @@ h3 {
 .desktop-command-grid button span {
   min-width: 0;
   font-weight: 800;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .desktop-command-grid button small {
   min-width: 0;
   color: var(--muted);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .desktop-command-grid button:disabled {
@@ -3599,7 +3603,7 @@ h3 {
 .ops-event p,
 .ops-event small {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .ops-unified-grid {
@@ -3822,7 +3826,7 @@ h3 {
   border-radius: 999px;
   background: var(--surface-muted);
   padding: 4px 7px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   text-transform: none;
 }
 
@@ -3846,7 +3850,7 @@ h3 {
 
 .native-git-files strong,
 .native-git-files small {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .native-git-files small {
@@ -4017,7 +4021,7 @@ h3 {
   background: var(--surface);
   border-radius: 999px;
   padding: 4px 7px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .task-run-summary-strip {
@@ -4491,7 +4495,7 @@ h3 {
   display: block;
   margin-top: 3px;
   font-size: 18px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .service-readiness-hero p {
@@ -4645,7 +4649,7 @@ h3 {
   font-size: 12px;
   line-height: 1.35;
   padding: 6px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .session-record-link {
@@ -4704,7 +4708,7 @@ h3 {
 .desktop-health-strip strong {
   display: block;
   margin-top: 5px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .adapter-grid {
@@ -4754,7 +4758,7 @@ h3 {
   margin: 0;
   color: var(--muted);
   line-height: 1.45;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .adapter-card code {
@@ -4772,7 +4776,7 @@ h3 {
 }
 
 .adapter-setup-guide code {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   color: var(--blue);
 }
 
@@ -4928,7 +4932,7 @@ h3 {
 .agent-proposal-preview h3,
 .learning-decision-editor h3 {
   margin: 4px 0 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 16px;
 }
 
@@ -4957,7 +4961,7 @@ h3 {
   background: var(--surface);
   border-radius: 999px;
   padding: 4px 8px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   text-transform: none;
 }
 
@@ -5003,7 +5007,7 @@ h3 {
 }
 
 .learning-candidate-list strong {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 13px;
 }
 
@@ -5013,7 +5017,7 @@ h3 {
   margin: 0;
   color: var(--muted);
   line-height: 1.45;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .learning-decision-controls {
@@ -5069,7 +5073,7 @@ h3 {
   display: block;
   margin-top: 8px;
   color: var(--muted);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .session-launcher {
@@ -5357,7 +5361,7 @@ h3 {
 .process-node strong,
 .process-node small {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .terminal-view-switcher {
@@ -5516,7 +5520,7 @@ h3 {
 .session-card p {
   margin: 8px 0;
   color: var(--muted);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .lane-mini-timeline {
@@ -5558,7 +5562,7 @@ h3 {
   display: block;
   margin-bottom: 8px;
   color: var(--muted);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .terminal-event-rail {
@@ -5586,7 +5590,7 @@ h3 {
 .terminal-event-rail strong,
 .terminal-event-rail small {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .event-question {
@@ -5669,7 +5673,7 @@ h3 {
 
 .decision-group header strong {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 13px;
 }
 
@@ -5694,7 +5698,7 @@ h3 {
 .decision-list small,
 .decision-answer-box p,
 .decision-answer-box small {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .decision-list strong {
@@ -5756,7 +5760,7 @@ h3 {
 
 .decision-resume-strip strong {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 13px;
 }
 
@@ -5789,7 +5793,7 @@ h3 {
   min-width: 0;
   margin-top: 4px;
   font-size: 12px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .decision-answer-controls {
@@ -5928,7 +5932,7 @@ h3 {
   color: var(--slate);
   font-size: 13px;
   line-height: 1.35;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .source-context-pill.compact {
@@ -6192,7 +6196,7 @@ h3 {
 .source-save-results article strong {
   display: block;
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 13px;
 }
 
@@ -6203,7 +6207,7 @@ h3 {
   display: block;
   margin-top: 4px;
   color: var(--muted);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 12px;
 }
 
@@ -6335,13 +6339,13 @@ h3 {
   display: block;
   min-width: 0;
   margin: 6px 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .evidence-grid p {
   margin: 0;
   color: var(--muted);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .source-editor-frame {
@@ -6445,7 +6449,7 @@ h3 {
   color: var(--green);
   font-size: 13px;
   font-weight: 800;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .desktop-success {
@@ -6454,7 +6458,7 @@ h3 {
   border-radius: 7px;
   padding: 10px;
   color: var(--green);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .wide {
@@ -6784,7 +6788,7 @@ h3 {
 .native-workspace-state-strip code {
   display: block;
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   color: var(--text);
   font-size: 13px;
   line-height: 1.4;
@@ -6848,7 +6852,7 @@ h3 {
 
 .workspace-explorer-header h2 {
   margin: 3px 0 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 14px;
   line-height: 1.25;
 }
@@ -6887,7 +6891,7 @@ h3 {
 .workspace-dropzone strong,
 .workspace-dropzone span {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .workspace-dropzone strong {
@@ -6964,7 +6968,7 @@ h3 {
 .workspace-explorer-state code {
   display: block;
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   color: var(--text);
   font-size: 11px;
   line-height: 1.35;
@@ -7194,7 +7198,7 @@ h3 {
 }
 
 .source-list strong {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   font-size: 13px;
 }
 
@@ -7235,7 +7239,7 @@ h3 {
 
 .source-viewer h3 {
   margin: 6px 0 3px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   color: #f8fafc;
 }
 
@@ -7393,7 +7397,7 @@ h3 {
 .plane-contract dd {
   margin: 0;
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .source-hotspot-strip {
@@ -7721,7 +7725,7 @@ h3 {
 .task-card-heading strong,
 .flow-node strong,
 .agent-workload-strip strong {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .task-card-heading span,
@@ -7979,6 +7983,11 @@ h3 {
   font-size: 13px;
 }
 
+.desktop-app-root :where(h1, h2, h3, h4, h5, h6, p, li, dt, dd, label, button, span, strong, small, em) {
+  overflow-wrap: var(--text-natural-wrap);
+  word-break: keep-all;
+}
+
 .workspace-switcher h1,
 .command-card h2,
 .desktop-hero h2,
@@ -8042,6 +8051,35 @@ h3 {
 .quick-start-flow button,
 .desktop-command-grid button {
   font-weight: 650;
+}
+
+.desktop-app-root :where(
+  code,
+  pre,
+  kbd,
+  samp,
+  .path-list span,
+  .native-git-remotes span,
+  .native-git-files strong,
+  .native-git-files small,
+  .pipe-edge-list span,
+  .service-next-actions code,
+  .adapter-setup-guide code,
+  .terminal-report-list pre,
+  .session-terminal pre,
+  .source-diff-preview code,
+  .source-file-browser-list span,
+  .source-draft-list span,
+  .source-draft-list small,
+  .source-save-results article small,
+  .native-workspace-state-strip code,
+  .workspace-explorer-state code,
+  .workspace-explorer-meta span,
+  .workspace-dropzone span,
+  .plane-contract dd
+) {
+  overflow-wrap: var(--text-long-token-wrap);
+  word-break: normal;
 }
 
 @media (hover: hover) {

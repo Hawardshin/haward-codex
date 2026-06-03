@@ -897,16 +897,27 @@ for (const requiredScrollToken of [
 for (const requiredButtonToken of [
   "--control-hit-size",
   "--control-target-size",
+  "--text-natural-wrap",
+  "--text-long-token-wrap",
   "touch-action: manipulation",
+  "word-break: keep-all",
   "button:focus-visible",
   "button:not(:disabled):active",
   ".desktop-actions button",
   ".terminal-view-switcher button",
-  ".source-workbench-switcher button"
+  ".source-workbench-switcher button",
+  ".desktop-app-root :where(",
+  "overflow-wrap: var(--text-long-token-wrap)"
 ]) {
   if (!monitorStyles.includes(requiredButtonToken)) {
     failures.push(`workspace-monitor CSS must preserve responsive button token ${requiredButtonToken}`);
   }
+}
+if (/button\s*{[^}]*overflow-wrap:\s*anywhere/s.test(monitorStyles)) {
+  failures.push("workspace-monitor CSS must not use overflow-wrap:anywhere on the global button rule");
+}
+if (/\.desktop-app-root button > span[\s\S]*?{[^}]*overflow-wrap:\s*anywhere/s.test(monitorStyles)) {
+  failures.push("workspace-monitor CSS must not use overflow-wrap:anywhere on generic button label children");
 }
 for (const requiredPhrase of [
   "ProductFeatureArchitecturePanel",

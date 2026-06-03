@@ -1,0 +1,32 @@
+{
+  "schema_version": "work-timing.v1",
+  "date": "2026-06-03",
+  "work_id": "2026-06-03-responsive-text-wrapping",
+  "owner": "platform-desktop-app",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "elapsed_minutes_estimate": 4,
+      "notes": "Checked CSS overflow-wrap/text-wrap and WCAG reflow references."
+    },
+    {
+      "phase": "css_policy_fix",
+      "elapsed_minutes_estimate": 12,
+      "notes": "Separated natural UI text wrapping from long-token wrapping."
+    },
+    {
+      "phase": "readiness_test_guard",
+      "elapsed_minutes_estimate": 7,
+      "notes": "Added guards against reintroducing anywhere on button labels."
+    },
+    {
+      "phase": "validation_and_browser_qa",
+      "elapsed_minutes_estimate": 18,
+      "notes": "Ran type/test/build/check and browser overflow/wrapping inspection."
+    }
+  ],
+  "bottlenecks": [
+    "Previous fix used a broad overflow-wrap:anywhere rule to solve overflow, which traded one responsive issue for text fragmentation."
+  ]
+}
