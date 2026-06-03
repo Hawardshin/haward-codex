@@ -1076,6 +1076,34 @@ main {
   outline: 0;
 }
 
+.provider-local-runtime-note {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--green) 32%, var(--line));
+  background: color-mix(in srgb, var(--surface) 88%, var(--green) 8%);
+  border-radius: 7px;
+  padding: 10px;
+}
+
+.provider-local-runtime-note span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.provider-local-runtime-note strong,
+.provider-local-runtime-note small {
+  min-width: 0;
+  overflow-wrap: var(--text-long-token-wrap);
+}
+
+.provider-local-runtime-note small {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
 .provider-account-actions {
   display: flex;
   flex-wrap: wrap;
@@ -5892,6 +5920,45 @@ h3 {
   padding: 7px 9px;
   font: inherit;
   font-size: 12px;
+}
+
+.agent-model-picker {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 34px;
+  gap: 6px;
+  min-width: 0;
+}
+
+.agent-model-refresh-button {
+  display: inline-flex;
+  width: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 0;
+}
+
+.agent-model-refresh-button:disabled {
+  opacity: 0.55;
+}
+
+.agent-model-status {
+  min-width: 0;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+  text-transform: none;
+}
+
+.agent-model-status.warning {
+  color: var(--amber);
 }
 
 .agent-provider-run-state {

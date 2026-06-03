@@ -216,7 +216,7 @@
     {
       "id": "provider_accounts",
       "label": "Provider Accounts",
-      "intent": "Provider credential status and direct model-task execution readiness must be visible in the app, while credential reports and support exports stay redacted.",
+      "intent": "Provider credential status, local Ollama model catalog readiness, and direct model-task execution readiness must be visible in the app, while credential reports and support exports stay redacted.",
       "required_for_public": false
     },
     {

@@ -307,8 +307,8 @@
       "label": "Agent Orchestration",
       "role": "primary",
       "status": "implemented_slice",
-      "purpose": "Coordinate connected provider model tasks and optional CLI lanes as a supervised task graph with bounded IO, decision routing, merge gates, and cleanup.",
-      "user_outcome": "The user starts one task from chat and the platform runs the connected provider model or specialized lanes, pauses only dependent decisions, and keeps independent work moving.",
+      "purpose": "Coordinate local/provider model tasks and optional CLI lanes as a supervised task graph with bounded IO, decision routing, merge gates, and cleanup.",
+      "user_outcome": "The user starts one task from chat and the platform runs the selected local/provider model or specialized lanes, pauses only dependent decisions, and keeps independent work moving.",
       "primary_section": "desktop",
       "primary_surfaces": [
         "Desktop Runtime",
@@ -333,7 +333,8 @@
         "platform-desktop-app/configs/reference-platform-advantage-registry.json"
       ],
       "automation_targets": [
-        "direct provider API task execution from connected OpenAI, Anthropic, or Gemini accounts",
+        "direct model task execution from local Ollama models or connected OpenAI, Anthropic, or Gemini accounts",
+        "native local model catalog refresh through list_provider_models",
         "provider credential injection into guest CLI sessions",
         "existing search agent work-chat",
         "task intake to multi-lane plan",
@@ -359,7 +360,7 @@
       ],
       "validation_gates": [
         "search agent work-chat exposes research-insight-planner-agent",
-        "connected provider accounts can produce task-run records without requiring a shell command",
+        "local/provider models can produce task-run records without requiring a shell command",
         "readiness test includes product feature architecture",
         "resource guard covers long-running lanes",
         "customer snapshot preserves feature claims without internal source",

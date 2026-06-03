@@ -452,6 +452,28 @@ struct ProviderCredentialReport {
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
+struct ProviderModelSummary {
+    provider_id: String,
+    id: String,
+    label: String,
+    size: Option<u64>,
+    modified_at: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ProviderModelCatalogReport {
+    provider_id: String,
+    provider_label: String,
+    status: String,
+    source: String,
+    default_model: String,
+    models: Vec<ProviderModelSummary>,
+    error: Option<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 struct ProviderAuthUrlOpenReport {
     provider_id: String,
     purpose: String,
@@ -1059,6 +1081,10 @@ const MAX_PROVIDER_ACCOUNT_HINT_CHARS: usize = 160;
 const MAX_PROVIDER_TASK_OUTPUT_BYTES: usize = 100_000;
 const MAX_PROVIDER_TASK_OUTPUT_TOKENS: u64 = 2_048;
 const PROVIDER_TASK_TIMEOUT_MS: u64 = 120_000;
+const LOCAL_HTTP_AUTH_METHOD: &str = "local_http";
+const OLLAMA_PROVIDER_ID: &str = "ollama";
+const OLLAMA_BASE_URL: &str = "http://127.0.0.1:11434";
+const OLLAMA_DEFAULT_MODEL: &str = "llama3.2";
 const MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS: usize = 20;
 const MAX_SUPPORT_EVENT_CHARS: usize = 600;
 const MAX_FACTORY_FIELD_CHARS: usize = 4_000;
@@ -1126,6 +1152,17 @@ static ADAPTERS: &[AdapterDefinition] = &[
 ];
 
 static PROVIDER_CREDENTIALS: &[ProviderCredentialDefinition] = &[
+    ProviderCredentialDefinition {
+        provider_id: OLLAMA_PROVIDER_ID,
+        label: "Ollama / Local",
+        auth_method: LOCAL_HTTP_AUTH_METHOD,
+        env_var: "",
+        default_model: OLLAMA_DEFAULT_MODEL,
+        setup_url: "https://ollama.com/download",
+        login_url: "https://ollama.com/download",
+        docs_url: "https://docs.ollama.com/api",
+        caution: "Runs through the local Ollama HTTP runtime at 127.0.0.1:11434. No API key is stored; install Ollama and pull a model before first use.",
+    },
     ProviderCredentialDefinition {
         provider_id: "openai",
         label: "ChatGPT / OpenAI",
@@ -1469,6 +1506,11 @@ fn open_provider_auth_url(
     purpose: Option<String>,
 ) -> Result<ProviderAuthUrlOpenReport, String> {
     open_provider_auth_url_report(&provider_id, purpose.as_deref())
+}
+
+#[tauri::command]
+async fn list_provider_models(provider_id: String) -> Result<ProviderModelCatalogReport, String> {
+    list_provider_models_report(&provider_id).await
 }
 
 #[tauri::command]
@@ -2309,6 +2351,7 @@ pub fn run() {
             save_provider_credential,
             clear_provider_credential,
             open_provider_auth_url,
+            list_provider_models,
             run_provider_agent_task,
             get_desktop_workspace_state,
             set_desktop_workspace_path,
@@ -2350,15 +2393,19 @@ fn find_pipeline_preset(task_kind: &str) -> Option<&'static PipelineTaskPreset> 
 }
 
 fn normalize_task_kind(value: Option<&str>, fallback: &str) -> Result<String, String> {
-    let candidate = value.map(str::trim).filter(|item| !item.is_empty()).unwrap_or(fallback);
+    let candidate = value
+        .map(str::trim)
+        .filter(|item| !item.is_empty())
+        .unwrap_or(fallback);
     if candidate.len() > 80 {
         return Err("Task kind is too long. Max length is 80 characters.".to_string());
     }
-    if !candidate
-        .chars()
-        .all(|character| character.is_ascii_lowercase() || character.is_ascii_digit() || character == '_')
-    {
-        return Err("Task kind may only use lowercase letters, numbers, and underscores.".to_string());
+    if !candidate.chars().all(|character| {
+        character.is_ascii_lowercase() || character.is_ascii_digit() || character == '_'
+    }) {
+        return Err(
+            "Task kind may only use lowercase letters, numbers, and underscores.".to_string(),
+        );
     }
     Ok(candidate.to_string())
 }
@@ -4309,12 +4356,7 @@ fn create_agent_factory_proposal_report(
             80,
         )
     });
-    let agent_id = normalize_agent_slug(
-        &input.agent_id,
-        &label,
-        &goal,
-        "generated-agent",
-    );
+    let agent_id = normalize_agent_slug(&input.agent_id, &label, &goal, "generated-agent");
     let owner_project = normalize_owner_project(&input.owner_project);
     let target_path = normalize_proposal_target_path(
         &input.target_path,
@@ -4324,15 +4366,17 @@ fn create_agent_factory_proposal_report(
     let validation_commands = normalize_factory_list(input.validation_commands);
     let tools = normalize_factory_list(input.tools);
     let guardrails = normalize_factory_list(input.guardrails);
-    let output_contract = normalize_optional_factory_text(&input.output_contract)
-        .unwrap_or_else(|| "Return a bounded result with evidence, validation status, and rollback notes.".to_string());
-    let rollback_plan = normalize_optional_factory_text(&input.rollback_plan)
-        .unwrap_or_else(|| format!("Remove or disable {target_path} and archive the proposal record."));
+    let output_contract =
+        normalize_optional_factory_text(&input.output_contract).unwrap_or_else(|| {
+            "Return a bounded result with evidence, validation status, and rollback notes."
+                .to_string()
+        });
+    let rollback_plan =
+        normalize_optional_factory_text(&input.rollback_plan).unwrap_or_else(|| {
+            format!("Remove or disable {target_path} and archive the proposal record.")
+        });
     let created_at = current_unix_millis_label();
-    let proposal_id = format!(
-        "agent-proposal-{}-{agent_id}",
-        file_safe_timestamp_label()
-    );
+    let proposal_id = format!("agent-proposal-{}-{agent_id}", file_safe_timestamp_label());
     let proposal_path = agent_factory_proposals_base_path(app)?.join(format!("{proposal_id}.json"));
     let validation_command = validation_commands
         .first()
@@ -4413,7 +4457,15 @@ fn record_learning_improvement_decision_report(
     );
     let asset_type = normalize_one_of(
         input.asset_type,
-        &["prompt", "workflow", "template", "tool", "skill", "agent", "project_feature"],
+        &[
+            "prompt",
+            "workflow",
+            "template",
+            "tool",
+            "skill",
+            "agent",
+            "project_feature",
+        ],
         "prompt",
     );
     let source = normalize_optional_factory_text(&input.source)
@@ -5771,6 +5823,9 @@ fn save_provider_credential_report(
 ) -> Result<ProviderCredentialReport, String> {
     let definition = find_provider_credential(&input.provider_id)
         .ok_or_else(|| format!("Unknown provider id: {}", input.provider_id))?;
+    if provider_is_local_http(definition) {
+        return provider_credentials_report(app);
+    }
     let auth_method = if input.auth_method.trim().is_empty() {
         definition.auth_method
     } else {
@@ -5818,6 +5873,9 @@ fn clear_provider_credential_report(
 ) -> Result<ProviderCredentialReport, String> {
     let definition = find_provider_credential(provider_id)
         .ok_or_else(|| format!("Unknown provider id: {provider_id}"))?;
+    if provider_is_local_http(definition) {
+        return provider_credentials_report(app);
+    }
     let mut store = read_provider_credential_store(app)?;
     store
         .credentials
@@ -5852,6 +5910,129 @@ fn open_provider_auth_url_report(
     })
 }
 
+async fn list_provider_models_report(
+    provider_id: &str,
+) -> Result<ProviderModelCatalogReport, String> {
+    let definition = find_provider_credential(provider_id)
+        .ok_or_else(|| format!("Unknown provider id: {provider_id}"))?;
+    if definition.provider_id == OLLAMA_PROVIDER_ID {
+        return list_ollama_provider_models_report(definition).await;
+    }
+    Ok(default_provider_model_catalog_report(definition))
+}
+
+fn default_provider_model_catalog_report(
+    definition: &ProviderCredentialDefinition,
+) -> ProviderModelCatalogReport {
+    ProviderModelCatalogReport {
+        provider_id: definition.provider_id.to_string(),
+        provider_label: definition.label.to_string(),
+        status: "static_default_model".to_string(),
+        source: "provider_definition".to_string(),
+        default_model: definition.default_model.to_string(),
+        models: vec![ProviderModelSummary {
+            provider_id: definition.provider_id.to_string(),
+            id: definition.default_model.to_string(),
+            label: definition.default_model.to_string(),
+            size: None,
+            modified_at: String::new(),
+        }],
+        error: None,
+    }
+}
+
+async fn list_ollama_provider_models_report(
+    definition: &ProviderCredentialDefinition,
+) -> Result<ProviderModelCatalogReport, String> {
+    let endpoint = format!("{OLLAMA_BASE_URL}/api/tags");
+    let response = match provider_http_client()?.get(&endpoint).send().await {
+        Ok(response) => response,
+        Err(error) => {
+            return Ok(ProviderModelCatalogReport {
+                provider_id: definition.provider_id.to_string(),
+                provider_label: definition.label.to_string(),
+                status: "local_model_runtime_unavailable".to_string(),
+                source: endpoint,
+                default_model: definition.default_model.to_string(),
+                models: Vec::new(),
+                error: Some(format!(
+                    "Ollama runtime is not reachable at {OLLAMA_BASE_URL}. Start Ollama, then refresh models. {error}"
+                )),
+            });
+        }
+    };
+    let http_status = response.status().as_u16();
+    let body = response
+        .text()
+        .await
+        .map_err(|error| format!("Ollama model list response body read failed: {error}"))?;
+    if !(200..300).contains(&http_status) {
+        return Ok(ProviderModelCatalogReport {
+            provider_id: definition.provider_id.to_string(),
+            provider_label: definition.label.to_string(),
+            status: "local_model_catalog_failed".to_string(),
+            source: endpoint,
+            default_model: definition.default_model.to_string(),
+            models: Vec::new(),
+            error: Some(format!(
+                "Ollama /api/tags returned HTTP {http_status}: {}",
+                truncate_chars(&redact_sensitive_text(&body), 900)
+            )),
+        });
+    }
+    let value = serde_json::from_str::<Value>(&body)
+        .map_err(|error| format!("Ollama model list JSON parse failed: {error}"))?;
+    let mut models = extract_ollama_model_catalog(definition, &value);
+    models.sort_by(|left, right| left.id.cmp(&right.id));
+    let status = if models.is_empty() {
+        "local_model_catalog_empty"
+    } else {
+        "local_model_catalog_ready"
+    };
+    Ok(ProviderModelCatalogReport {
+        provider_id: definition.provider_id.to_string(),
+        provider_label: definition.label.to_string(),
+        status: status.to_string(),
+        source: endpoint,
+        default_model: definition.default_model.to_string(),
+        models,
+        error: None,
+    })
+}
+
+fn extract_ollama_model_catalog(
+    definition: &ProviderCredentialDefinition,
+    value: &Value,
+) -> Vec<ProviderModelSummary> {
+    let mut models = Vec::new();
+    let Some(items) = value.get("models").and_then(Value::as_array) else {
+        return models;
+    };
+    for item in items {
+        let id = item
+            .get("name")
+            .or_else(|| item.get("model"))
+            .and_then(Value::as_str)
+            .unwrap_or("")
+            .trim();
+        if id.is_empty() {
+            continue;
+        }
+        models.push(ProviderModelSummary {
+            provider_id: definition.provider_id.to_string(),
+            id: id.to_string(),
+            label: id.to_string(),
+            size: item.get("size").and_then(Value::as_u64),
+            modified_at: item
+                .get("modified_at")
+                .and_then(Value::as_str)
+                .unwrap_or("")
+                .to_string(),
+        });
+    }
+    models
+}
+
 fn read_provider_credential_store(app: &AppHandle) -> Result<ProviderCredentialStore, String> {
     let path = provider_credentials_path(app)?;
     if !path.exists() {
@@ -5873,9 +6054,7 @@ fn write_provider_credential_store(
     restrict_secret_file_permissions(&path)
 }
 
-fn normalize_provider_credential_store(
-    store: ProviderCredentialStore,
-) -> ProviderCredentialStore {
+fn normalize_provider_credential_store(store: ProviderCredentialStore) -> ProviderCredentialStore {
     let mut seen = HashSet::new();
     let mut credentials = Vec::new();
     for credential in store.credentials {
@@ -5910,6 +6089,27 @@ fn provider_credential_summary(
     definition: &ProviderCredentialDefinition,
     record: Option<&ProviderCredentialRecord>,
 ) -> ProviderCredentialSummary {
+    if provider_is_local_http(definition) {
+        return ProviderCredentialSummary {
+            provider_id: definition.provider_id.to_string(),
+            label: definition.label.to_string(),
+            auth_method: definition.auth_method.to_string(),
+            env_var: definition.env_var.to_string(),
+            default_model: definition.default_model.to_string(),
+            configured: true,
+            environment_available: true,
+            status: "local_runtime_configured".to_string(),
+            account_hint: "local runtime".to_string(),
+            secret_preview: "no API key".to_string(),
+            last_updated_at: String::new(),
+            storage: "local_http_runtime".to_string(),
+            credential_source: "local_runtime".to_string(),
+            setup_url: definition.setup_url.to_string(),
+            login_url: definition.login_url.to_string(),
+            docs_url: definition.docs_url.to_string(),
+            caution: definition.caution.to_string(),
+        };
+    }
     let saved_configured = record
         .map(|credential| !credential.secret.trim().is_empty())
         .unwrap_or(false);
@@ -5974,6 +6174,10 @@ fn find_provider_credential(provider_id: &str) -> Option<&'static ProviderCreden
         .find(|definition| definition.provider_id == provider_id)
 }
 
+fn provider_is_local_http(definition: &ProviderCredentialDefinition) -> bool {
+    definition.auth_method == LOCAL_HTTP_AUTH_METHOD
+}
+
 fn normalize_provider_secret(value: &str) -> Result<String, String> {
     let secret = value.trim();
     if secret.is_empty() {
@@ -5987,7 +6191,9 @@ fn normalize_provider_secret(value: &str) -> Result<String, String> {
     if secret.chars().any(|character| {
         character == '\n' || character == '\r' || character == '\0' || character.is_control()
     }) {
-        return Err("Provider API key cannot contain control characters or line breaks.".to_string());
+        return Err(
+            "Provider API key cannot contain control characters or line breaks.".to_string(),
+        );
     }
     Ok(secret.to_string())
 }
@@ -6069,7 +6275,8 @@ async fn run_provider_agent_task_report(
     let started_at = current_unix_millis_label();
     let started = Instant::now();
 
-    let api_result = call_provider_api(definition, &secret, &model, &system_prompt, &input.prompt).await;
+    let api_result =
+        call_provider_api(definition, &secret, &model, &system_prompt, &input.prompt).await;
     let duration_ms = started.elapsed().as_millis();
     let mut http_status = None;
     let mut output = String::new();
@@ -6140,11 +6347,58 @@ async fn call_provider_api(
     prompt: &str,
 ) -> Result<ProviderApiResponse, String> {
     match definition.provider_id {
+        OLLAMA_PROVIDER_ID => call_ollama_provider_api(model, system_prompt, prompt).await,
         "openai" => call_openai_provider_api(secret, model, system_prompt, prompt).await,
         "anthropic" => call_anthropic_provider_api(secret, model, system_prompt, prompt).await,
         "google-gemini" => call_gemini_provider_api(secret, model, system_prompt, prompt).await,
-        _ => Err(format!("Unsupported provider id: {}", definition.provider_id)),
+        _ => Err(format!(
+            "Unsupported provider id: {}",
+            definition.provider_id
+        )),
     }
+}
+
+async fn call_ollama_provider_api(
+    model: &str,
+    system_prompt: &str,
+    prompt: &str,
+) -> Result<ProviderApiResponse, String> {
+    let payload = json!({
+        "model": model,
+        "messages": [
+            {
+                "role": "system",
+                "content": system_prompt
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        "stream": false,
+        "options": {
+            "num_predict": MAX_PROVIDER_TASK_OUTPUT_TOKENS
+        }
+    });
+    let response = provider_http_client()?
+        .post(format!("{OLLAMA_BASE_URL}/api/chat"))
+        .json(&payload)
+        .send()
+        .await
+        .map_err(|error| format!("Ollama request failed: {error}"))?;
+    let http_status = response.status().as_u16();
+    let body = response
+        .text()
+        .await
+        .map_err(|error| format!("Ollama response body read failed: {error}"))?;
+    let output = serde_json::from_str::<Value>(&body)
+        .map(|value| extract_ollama_output_text(&value))
+        .unwrap_or_default();
+    Ok(ProviderApiResponse {
+        http_status,
+        body,
+        output,
+    })
 }
 
 async fn call_openai_provider_api(
@@ -6229,9 +6483,8 @@ async fn call_gemini_provider_api(
     prompt: &str,
 ) -> Result<ProviderApiResponse, String> {
     let model_path = gemini_model_path(model);
-    let endpoint = format!(
-        "https://generativelanguage.googleapis.com/v1beta/{model_path}:generateContent"
-    );
+    let endpoint =
+        format!("https://generativelanguage.googleapis.com/v1beta/{model_path}:generateContent");
     let payload = json!({
         "systemInstruction": {
             "parts": [
@@ -6287,6 +6540,9 @@ fn provider_secret_for_definition(
     app: &AppHandle,
     definition: &ProviderCredentialDefinition,
 ) -> Result<String, String> {
+    if provider_is_local_http(definition) {
+        return Ok(String::new());
+    }
     let store = read_provider_credential_store(app)?;
     if let Some(credential) = store
         .credentials
@@ -6331,10 +6587,9 @@ fn normalize_provider_model(
     if candidate.len() > 120 {
         return Err("Provider model id is too long.".to_string());
     }
-    if !candidate
-        .chars()
-        .all(|character| character.is_ascii_alphanumeric() || matches!(character, '-' | '_' | '.' | ':' | '/'))
-    {
+    if !candidate.chars().all(|character| {
+        character.is_ascii_alphanumeric() || matches!(character, '-' | '_' | '.' | ':' | '/')
+    }) {
         return Err("Provider model id contains unsupported characters.".to_string());
     }
     Ok(candidate.to_string())
@@ -6379,6 +6634,15 @@ fn extract_openai_output_text(value: &Value) -> String {
         }
     }
     chunks.join("\n")
+}
+
+fn extract_ollama_output_text(value: &Value) -> String {
+    value
+        .get("message")
+        .and_then(|message| message.get("content"))
+        .and_then(Value::as_str)
+        .unwrap_or_default()
+        .to_string()
 }
 
 fn extract_anthropic_output_text(value: &Value) -> String {
@@ -6711,7 +6975,10 @@ fn desktop_git_status_report(
             last_command_output: last_command_output.unwrap_or_default(),
             last_command_error: last_command_error.unwrap_or_default(),
             refreshed_at: current_unix_millis_label(),
-            summary: vec!["Git was not found on PATH. Configure Git to use native workspace operations.".to_string()],
+            summary: vec![
+                "Git was not found on PATH. Configure Git to use native workspace operations."
+                    .to_string(),
+            ],
         });
     };
 
@@ -6784,11 +7051,10 @@ fn desktop_git_status_report(
         .iter()
         .filter(|file| git_file_has_unstaged_change(&file.status))
         .count();
-    let untracked_count = files
+    let untracked_count = files.iter().filter(|file| file.status == "??").count();
+    let conflicted = files
         .iter()
-        .filter(|file| file.status == "??")
-        .count();
-    let conflicted = files.iter().any(|file| git_status_is_conflicted(&file.status));
+        .any(|file| git_status_is_conflicted(&file.status));
     let clean = staged_count == 0 && unstaged_count == 0 && untracked_count == 0 && !conflicted;
     let status = if status_output.status != "passed" {
         "status_failed"
@@ -6803,18 +7069,25 @@ fn desktop_git_status_report(
     let remotes = git_remote_reports(&git_path, &repository_root_path);
     let mut summary = vec![format!(
         "Branch {} / {} staged / {} unstaged / {} untracked.",
-        if branch.is_empty() { "detached".to_string() } else { branch.clone() },
+        if branch.is_empty() {
+            "detached".to_string()
+        } else {
+            branch.clone()
+        },
         staged_count,
         unstaged_count,
         untracked_count
     )];
     if !upstream.is_empty() {
-        summary.push(format!("Upstream {upstream}; ahead {ahead}, behind {behind}."));
+        summary.push(format!(
+            "Upstream {upstream}; ahead {ahead}, behind {behind}."
+        ));
     } else {
         summary.push("No upstream is configured for the current branch.".to_string());
     }
     if conflicted {
-        summary.push("Conflict state is visible; resolve files before commit/pull/push.".to_string());
+        summary
+            .push("Conflict state is visible; resolve files before commit/pull/push.".to_string());
     }
     let history = git_history_reports(&git_path, &repository_root_path);
     let stashes = git_stash_reports(&git_path, &repository_root_path);
@@ -6910,7 +7183,12 @@ fn run_desktop_git_action_report(
     )?;
     if root_output.status != "passed" {
         let error = redact_sensitive_text(&root_output.stderr);
-        let git = desktop_git_status_report(app, Some("not_git_repository".to_string()), None, Some(error.clone()))?;
+        let git = desktop_git_status_report(
+            app,
+            Some("not_git_repository".to_string()),
+            None,
+            Some(error.clone()),
+        )?;
         return Ok(DesktopGitActionReport {
             status: "not_git_repository".to_string(),
             action,
@@ -6999,7 +7277,10 @@ fn run_desktop_git_action_report(
                     "git commit -m <message> -- <selected files>".to_string(),
                     run_git_with_owned_args(
                         &git_path,
-                        &git_args_with_paths(&["commit", "-m", message.as_str(), "--"], &selected_paths)?,
+                        &git_args_with_paths(
+                            &["commit", "-m", message.as_str(), "--"],
+                            &selected_paths,
+                        )?,
                         &repository_root_path,
                         Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
                         MAX_GIT_OPERATION_OUTPUT_BYTES,
@@ -7013,7 +7294,13 @@ fn run_desktop_git_action_report(
         ),
         "stash_all" => {
             let message = git_stash_message(&input.commit_message);
-            let args = ["stash", "push", "--include-untracked", "-m", message.as_str()];
+            let args = [
+                "stash",
+                "push",
+                "--include-untracked",
+                "-m",
+                message.as_str(),
+            ];
             (
                 "git stash push --include-untracked -m <message>".to_string(),
                 run_bounded_command_in_dir(
@@ -7031,7 +7318,17 @@ fn run_desktop_git_action_report(
                 "git stash push --include-untracked -m <message> -- <selected files>".to_string(),
                 run_git_with_owned_args(
                     &git_path,
-                    &git_args_with_paths(&["stash", "push", "--include-untracked", "-m", message.as_str(), "--"], &selected_paths)?,
+                    &git_args_with_paths(
+                        &[
+                            "stash",
+                            "push",
+                            "--include-untracked",
+                            "-m",
+                            message.as_str(),
+                            "--",
+                        ],
+                        &selected_paths,
+                    )?,
                     &repository_root_path,
                     Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
                     MAX_GIT_OPERATION_OUTPUT_BYTES,
@@ -7250,7 +7547,12 @@ fn git_ahead_behind(git_path: &PathBuf, repository_root: &Path, upstream: &str) 
     }
     let output = run_bounded_command_in_dir(
         git_path,
-        &["rev-list", "--left-right", "--count", &format!("{upstream}...HEAD")],
+        &[
+            "rev-list",
+            "--left-right",
+            "--count",
+            &format!("{upstream}...HEAD"),
+        ],
         repository_root,
         Duration::from_millis(2_000),
         MAX_GIT_OPERATION_OUTPUT_BYTES,
@@ -7263,8 +7565,14 @@ fn git_ahead_behind(git_path: &PathBuf, repository_root: &Path, upstream: &str) 
         return (0, 0);
     };
     let mut parts = line.split_whitespace();
-    let behind = parts.next().and_then(|value| value.parse::<usize>().ok()).unwrap_or(0);
-    let ahead = parts.next().and_then(|value| value.parse::<usize>().ok()).unwrap_or(0);
+    let behind = parts
+        .next()
+        .and_then(|value| value.parse::<usize>().ok())
+        .unwrap_or(0);
+    let ahead = parts
+        .next()
+        .and_then(|value| value.parse::<usize>().ok())
+        .unwrap_or(0);
     (ahead, behind)
 }
 
@@ -7306,7 +7614,10 @@ fn git_remote_reports(git_path: &PathBuf, repository_root: &Path) -> Vec<Desktop
         .collect()
 }
 
-fn git_history_reports(git_path: &PathBuf, repository_root: &Path) -> Vec<DesktopGitHistoryCommitReport> {
+fn git_history_reports(
+    git_path: &PathBuf,
+    repository_root: &Path,
+) -> Vec<DesktopGitHistoryCommitReport> {
     let count_arg = format!("-n{MAX_GIT_HISTORY_COMMITS}");
     let output = run_bounded_command_in_dir(
         git_path,
@@ -7440,7 +7751,13 @@ fn git_stash_file_count(git_path: &PathBuf, repository_root: &Path, stash_ref: &
     output
         .ok()
         .filter(|value| value.status == "passed")
-        .map(|value| value.stdout.lines().filter(|line| !line.trim().is_empty()).count())
+        .map(|value| {
+            value
+                .stdout
+                .lines()
+                .filter(|line| !line.trim().is_empty())
+                .count()
+        })
         .unwrap_or(0)
 }
 
@@ -7524,7 +7841,14 @@ fn git_file_diff_preview(
         return git_untracked_file_preview(repository_root, relative_path);
     }
 
-    let diff_args = ["diff", "--no-ext-diff", "--unified=3", "HEAD", "--", relative_path];
+    let diff_args = [
+        "diff",
+        "--no-ext-diff",
+        "--unified=3",
+        "HEAD",
+        "--",
+        relative_path,
+    ];
     let primary = run_bounded_command_in_dir(
         git_path,
         &diff_args,
@@ -7571,7 +7895,13 @@ fn git_file_change_counts(
     preview: &[DesktopGitDiffLineReport],
 ) -> (usize, usize) {
     if status == "??" {
-        return (preview.iter().filter(|line| line.kind == "addition").count(), 0);
+        return (
+            preview
+                .iter()
+                .filter(|line| line.kind == "addition")
+                .count(),
+            0,
+        );
     }
 
     let args = ["diff", "--numstat", "HEAD", "--", relative_path];
@@ -7608,8 +7938,14 @@ fn git_file_change_counts(
     }
 
     (
-        preview.iter().filter(|line| line.kind == "addition").count(),
-        preview.iter().filter(|line| line.kind == "deletion").count(),
+        preview
+            .iter()
+            .filter(|line| line.kind == "addition")
+            .count(),
+        preview
+            .iter()
+            .filter(|line| line.kind == "deletion")
+            .count(),
     )
 }
 
@@ -7621,7 +7957,10 @@ fn parse_git_numstat_counts(output: &str) -> Option<(usize, usize)> {
     Some((additions, deletions))
 }
 
-fn git_untracked_file_preview(repository_root: &Path, relative_path: &str) -> Vec<DesktopGitDiffLineReport> {
+fn git_untracked_file_preview(
+    repository_root: &Path,
+    relative_path: &str,
+) -> Vec<DesktopGitDiffLineReport> {
     let Ok(root) = repository_root.canonicalize() else {
         return Vec::new();
     };
@@ -7662,15 +8001,16 @@ fn parse_git_diff_preview(diff_text: &str) -> Vec<DesktopGitDiffLineReport> {
         })
         .take(MAX_GIT_DIFF_PREVIEW_LINES)
         .map(|line| {
-            let kind = if line.starts_with("@@") || line.starts_with("--- ") || line.starts_with("+++ ") {
-                "meta"
-            } else if line.starts_with('+') {
-                "addition"
-            } else if line.starts_with('-') {
-                "deletion"
-            } else {
-                "context"
-            };
+            let kind =
+                if line.starts_with("@@") || line.starts_with("--- ") || line.starts_with("+++ ") {
+                    "meta"
+                } else if line.starts_with('+') {
+                    "addition"
+                } else if line.starts_with('-') {
+                    "deletion"
+                } else {
+                    "context"
+                };
             DesktopGitDiffLineReport {
                 kind: kind.to_string(),
                 text: truncate_chars(line, 240),
@@ -7705,7 +8045,13 @@ fn run_git_with_owned_args(
     max_output_bytes: usize,
 ) -> Result<ProcessOutput, String> {
     let arg_refs = args.iter().map(String::as_str).collect::<Vec<_>>();
-    run_bounded_command_in_dir(git_path, &arg_refs, repository_root, timeout, max_output_bytes)
+    run_bounded_command_in_dir(
+        git_path,
+        &arg_refs,
+        repository_root,
+        timeout,
+        max_output_bytes,
+    )
 }
 
 fn git_args_with_paths(prefix: &[&str], paths: &[String]) -> Result<Vec<String>, String> {
@@ -7717,12 +8063,18 @@ fn git_args_with_paths(prefix: &[&str], paths: &[String]) -> Result<Vec<String>,
             "Too many files selected. Max selection is {MAX_GIT_ACTION_FILE_PATHS} files."
         ));
     }
-    let mut args = prefix.iter().map(|value| value.to_string()).collect::<Vec<_>>();
+    let mut args = prefix
+        .iter()
+        .map(|value| value.to_string())
+        .collect::<Vec<_>>();
     args.extend(paths.iter().cloned());
     Ok(args)
 }
 
-fn validate_git_relative_paths(paths: &[String], repository_root: &Path) -> Result<Vec<String>, String> {
+fn validate_git_relative_paths(
+    paths: &[String],
+    repository_root: &Path,
+) -> Result<Vec<String>, String> {
     let root = repository_root
         .canonicalize()
         .map_err(|error| format!("Failed to resolve repository root: {error}"))?;
@@ -7746,14 +8098,20 @@ fn validate_git_relative_paths(paths: &[String], repository_root: &Path) -> Resu
         let mut component_values = Vec::new();
         for component in path_value.components() {
             match component {
-                Component::Normal(value) => component_values.push(value.to_string_lossy().to_string()),
+                Component::Normal(value) => {
+                    component_values.push(value.to_string_lossy().to_string())
+                }
                 Component::CurDir => {}
                 Component::ParentDir | Component::RootDir | Component::Prefix(_) => {
                     return Err("Selected Git file path cannot leave the repository.".to_string());
                 }
             }
         }
-        if component_values.is_empty() || component_values.first().is_some_and(|value| value == ".git") {
+        if component_values.is_empty()
+            || component_values
+                .first()
+                .is_some_and(|value| value == ".git")
+        {
             return Err("Selected Git file path is not allowed.".to_string());
         }
         let normalized = component_values.join("/");

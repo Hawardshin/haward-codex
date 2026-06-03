@@ -7,10 +7,13 @@
 | REQ-PDA-084 | `persist_provider_agent_task_run`, `task_runs_base_path` | task-run record compatibility, desktop tests |
 | REQ-PDA-085 | `credential_policy: secret_not_persisted`, support bundle exclusion policy | service/readiness checks |
 | REQ-PDA-086 | `launchSearchAgent` provider direct try/catch fallback | renderer `check`, chat fallback messages |
+| REQ-PDA-087 | `list_provider_models`, `ProviderModelCatalogReport`, `OLLAMA_BASE_URL` | `cargo check`, readiness/service-readiness token checks |
+| REQ-PDA-088 | `Ollama / Local`, `agent-model-picker`, `provider-local-runtime-note` | renderer `check`, browser smoke |
 
 ## 출처
 
 - OpenAI API authentication and Responses API docs
 - Anthropic API authentication and Messages API docs
 - Gemini API key and generateContent API docs
+- Ollama API docs: `/api/tags` local model catalog and `/api/chat` local chat execution
 - 기존 `2026-06-04-provider-account-connection` 요구사항/스펙

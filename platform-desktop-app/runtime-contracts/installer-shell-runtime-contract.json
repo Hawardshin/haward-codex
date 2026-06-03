@@ -570,6 +570,7 @@
       "save_provider_credential",
       "clear_provider_credential",
       "open_provider_auth_url",
+      "list_provider_models",
       "run_provider_agent_task"
     ],
     "workspace_host_commands": [

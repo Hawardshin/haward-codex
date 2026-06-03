@@ -46,7 +46,8 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
     group("provider_accounts", "Provider Accounts", [
       check("provider_credentials_redacted", "Provider credential reports are redacted", tauriLib.includes("secret_preview") && tauriLib.includes("credential_secret_preview"), "Credential reports expose only preview/status metadata."),
       check("provider_direct_task_command", "Direct provider task command exposed", tauriLib.includes("run_provider_agent_task") && tauriLib.includes("ProviderAgentTaskReport"), "Connected provider accounts can run model tasks without a shell command."),
-      check("provider_direct_task_ui", "Direct provider task UI visible", monitorShell.includes("agent-provider-run-controls") && monitorShell.includes("run_provider_agent_task"), "Search Agent Work Chat exposes provider account and model controls.")
+      check("local_model_catalog_command", "Local model catalog command exposed", tauriLib.includes("list_provider_models") && tauriLib.includes("ProviderModelCatalogReport") && tauriLib.includes("Ollama / Local"), "The native runtime can list local Ollama models without an API key."),
+      check("provider_direct_task_ui", "Direct provider task UI visible", monitorShell.includes("agent-provider-run-controls") && monitorShell.includes("agent-model-picker") && monitorShell.includes("list_provider_models") && monitorShell.includes("run_provider_agent_task"), "Search Agent Work Chat exposes provider account and model controls.")
     ]),
     group("production_agent_blueprints", "Production Agent Blueprints", [
       check("agentcore_blueprint_ui", "AgentCore-style blueprint UI visible", monitorShell.includes("AgentCoreBlueprintPanel") && monitorShell.includes("agentcore-blueprint-panel"), "Agents screen exposes production blueprints derived from public AgentCore references."),

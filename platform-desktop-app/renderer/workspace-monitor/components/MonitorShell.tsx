@@ -28,6 +28,7 @@ import {
   MessageSquare,
   Network,
   PlayCircle,
+  RefreshCw,
   Search,
   Send,
   Settings,
@@ -180,6 +181,24 @@ type ProviderCredentialReport = {
   storageWarning: string;
   configuredCount: number;
   providers: ProviderCredentialSummary[];
+};
+
+type ProviderModelSummary = {
+  providerId: string;
+  id: string;
+  label: string;
+  size?: number | null;
+  modifiedAt: string;
+};
+
+type ProviderModelCatalogReport = {
+  providerId: string;
+  providerLabel: string;
+  status: string;
+  source: string;
+  defaultModel: string;
+  models: ProviderModelSummary[];
+  error?: string | null;
 };
 
 type ProviderCredentialInputState = {
@@ -1622,12 +1641,31 @@ const adapterSetupGuides: Record<string, AdapterSetupGuide> = {
 
 const fallbackProviderCredentialReport: ProviderCredentialReport = {
   schemaVersion: "provider-credentials.v1",
-  status: "provider_credentials_required",
+  status: "provider_credentials_ready",
   source: "browser_fallback",
   credentialFilePath: "",
   storageWarning: "Provider credentials are stored by the native desktop runtime, not by the static browser preview.",
-  configuredCount: 0,
+  configuredCount: 1,
   providers: [
+    {
+      providerId: "ollama",
+      label: "Ollama / Local",
+      authMethod: "local_http",
+      envVar: "",
+      defaultModel: "llama3.2",
+      configured: true,
+      environmentAvailable: true,
+      status: "local_runtime_configured",
+      accountHint: "local runtime",
+      secretPreview: "no API key",
+      lastUpdatedAt: "",
+      storage: "local_http_runtime",
+      credentialSource: "local_runtime",
+      setupUrl: "https://ollama.com/download",
+      loginUrl: "https://ollama.com/download",
+      docsUrl: "https://docs.ollama.com/api",
+      caution: "127.0.0.1:11434에서 실행되는 로컬 Ollama 런타임을 사용합니다. API key는 저장하지 않습니다."
+    },
     {
       providerId: "openai",
       label: "ChatGPT / OpenAI",
@@ -1689,11 +1727,11 @@ const fallbackProviderCredentialReport: ProviderCredentialReport = {
 };
 
 const providerIdsByAdapter: Record<string, string[]> = {
-  "codex-cli": ["openai"],
+  "codex-cli": ["ollama", "openai"],
   "claude-code-cli": ["anthropic"],
   "gemini-cli": ["google-gemini"],
-  "opencode-cli": ["openai", "anthropic", "google-gemini"],
-  "claw-code-cli": ["openai", "anthropic", "google-gemini"]
+  "opencode-cli": ["ollama", "openai", "anthropic", "google-gemini"],
+  "claw-code-cli": ["ollama", "openai", "anthropic", "google-gemini"]
 };
 
 const researchInsightAgentId = "research-insight-planner-agent";
@@ -1707,8 +1745,8 @@ const defaultSearchAgentRunForm: SearchAgentRunForm = {
   searchChannels: "web search\nrepository search",
   captureTargets: "_history/web-searches/YYYY/\n_research/\n_history/plans/YYYY/",
   notes: "출처, 한계, 계획 영향을 분리하고 약한 근거는 실행 근거로 쓰지 않습니다.",
-  providerId: "openai",
-  model: ""
+  providerId: "ollama",
+  model: "llama3.2"
 };
 
 const defaultSearchAgentChatMessages: SearchAgentChatMessage[] = [
@@ -1723,8 +1761,8 @@ const defaultSearchAgentChatMessages: SearchAgentChatMessage[] = [
     id: "research-agent-runtime",
     role: "system",
     title: "작업 방식",
-    body: "연결된 제공자 계정이 있으면 이 채팅에서 모델 API로 바로 작업하고, 결과는 task-run store에 저장됩니다. CLI lane은 보조 실행 경로입니다.",
-    meta: "provider API + optional CLI lane + task-run store"
+    body: "Ollama 같은 로컬 모델이나 연결된 제공자 계정이 있으면 이 채팅에서 바로 작업하고, 결과는 task-run store에 저장됩니다. CLI lane은 보조 실행 경로입니다.",
+    meta: "local/provider model + optional CLI lane + task-run store"
   }
 ];
 
@@ -2115,6 +2153,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [providerCredentialBusy, setProviderCredentialBusy] = useState("");
   const [providerCredentialNotice, setProviderCredentialNotice] = useState("");
   const [providerCredentialError, setProviderCredentialError] = useState("");
+  const [providerModelCatalog, setProviderModelCatalog] = useState<ProviderModelCatalogReport | null>(null);
+  const [providerModelBusy, setProviderModelBusy] = useState(false);
+  const [providerModelError, setProviderModelError] = useState("");
   const viewModes = snapshot.viewModeCatalog?.modes?.length ? snapshot.viewModeCatalog.modes : fallbackViewModes;
   const languageModes = useMemo(() => {
     const merged = new Map<string, MonitorLanguageMode>();
@@ -2261,6 +2302,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       canceled = true;
     };
   }, []);
+  useEffect(() => {
+    void refreshProviderModels(searchAgentRunForm.providerId);
+  }, [providerCredentials.source, providerCredentials.status, searchAgentRunForm.providerId]);
   useEffect(() => {
     setRecentSections((previous) => [section, ...previous.filter((item) => item !== section)].slice(0, 5));
   }, [section]);
@@ -2795,6 +2839,84 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     }
     setSettingsOpen(true);
   };
+  async function refreshProviderModels(providerId = searchAgentRunForm.providerId) {
+    const provider =
+      providerCredentials.providers.find((item) => item.providerId === providerId) ||
+      fallbackProviderCredentialReport.providers.find((item) => item.providerId === providerId) ||
+      providerCredentials.providers[0] ||
+      fallbackProviderCredentialReport.providers[0];
+    if (!provider) {
+      setProviderModelCatalog(null);
+      setProviderModelError(uiLanguage === "ko" ? "선택할 모델 제공자가 없습니다." : "No model provider is available.");
+      return;
+    }
+
+    const tauriInvoke = getTauriInvoke();
+    setProviderModelBusy(true);
+    setProviderModelError("");
+    if (!tauriInvoke) {
+      const fallbackReport: ProviderModelCatalogReport = {
+        providerId: provider.providerId,
+        providerLabel: provider.label,
+        status: provider.authMethod === "local_http" ? "browser_preview_local_default" : "browser_preview_provider_default",
+        source: "browser_fallback",
+        defaultModel: provider.defaultModel,
+        models: [
+          {
+            providerId: provider.providerId,
+            id: provider.defaultModel,
+            label: provider.defaultModel,
+            size: null,
+            modifiedAt: ""
+          }
+        ],
+        error: provider.authMethod === "local_http"
+          ? (uiLanguage === "ko"
+            ? "설치 앱에서 Ollama 모델 목록을 읽을 수 있습니다. 지금은 기본 모델만 표시합니다."
+            : "The installed app can read the Ollama model list. This preview shows only the default model.")
+          : null
+      };
+      setProviderModelCatalog(fallbackReport);
+      setProviderModelError(fallbackReport.error || "");
+      setProviderModelBusy(false);
+      return;
+    }
+
+    try {
+      const report = await tauriInvoke<ProviderModelCatalogReport>("list_provider_models", { providerId: provider.providerId });
+      setProviderModelCatalog(report);
+      setProviderModelError(report.error || "");
+      const suggestedModel = report.models[0]?.id || report.defaultModel || provider.defaultModel;
+      if (suggestedModel && !searchAgentRunForm.model.trim()) {
+        setSearchAgentRunForm((current) =>
+          current.providerId === provider.providerId && !current.model.trim()
+            ? { ...current, model: suggestedModel }
+            : current
+        );
+      }
+    } catch (modelError) {
+      setProviderModelCatalog({
+        providerId: provider.providerId,
+        providerLabel: provider.label,
+        status: "model_catalog_error",
+        source: "tauri_command",
+        defaultModel: provider.defaultModel,
+        models: [
+          {
+            providerId: provider.providerId,
+            id: provider.defaultModel,
+            label: provider.defaultModel,
+            size: null,
+            modifiedAt: ""
+          }
+        ],
+        error: String(modelError)
+      });
+      setProviderModelError(String(modelError));
+    } finally {
+      setProviderModelBusy(false);
+    }
+  }
   const refreshProviderCredentials = async () => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
@@ -2809,6 +2931,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       setProviderCredentialInputs((current) => providerInputsFromReport(report, current));
       setProviderCredentialError("");
       setProviderCredentialNotice(uiLanguage === "ko" ? "계정 연결 상태를 새로고침했습니다." : "Provider account status refreshed.");
+      void refreshProviderModels(searchAgentRunForm.providerId);
     } catch (credentialError) {
       setProviderCredentialError(String(credentialError));
     } finally {
@@ -2828,6 +2951,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const saveProviderCredential = async (provider: ProviderCredentialSummary) => {
     const tauriInvoke = getTauriInvoke();
     const input = providerCredentialInputs[provider.providerId] || { accountHint: "", secret: "" };
+    if (provider.authMethod === "local_http") {
+      setProviderCredentialNotice(uiLanguage === "ko" ? `${provider.label}는 API key 저장 없이 로컬 런타임으로 사용합니다.` : `${provider.label} uses the local runtime without saving an API key.`);
+      return;
+    }
     if (!tauriInvoke) {
       setProviderCredentialError(uiLanguage === "ko" ? "네이티브 앱에서만 저장할 수 있습니다." : "Save is available only in the native app.");
       return;
@@ -2864,6 +2991,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   };
   const clearProviderCredential = async (provider: ProviderCredentialSummary) => {
     const tauriInvoke = getTauriInvoke();
+    if (provider.authMethod === "local_http") {
+      setProviderCredentialNotice(uiLanguage === "ko" ? `${provider.label}는 삭제할 API key가 없습니다.` : `${provider.label} has no API key to clear.`);
+      return;
+    }
     if (!tauriInvoke) {
       setProviderCredentialError(uiLanguage === "ko" ? "네이티브 앱에서만 삭제할 수 있습니다." : "Clear is available only in the native app.");
       return;
@@ -2914,6 +3045,17 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     setSection("agents");
   };
   const updateSearchAgentRunForm = (field: keyof SearchAgentRunForm, value: string) => {
+    if (field === "providerId") {
+      const provider = providerCredentials.providers.find((item) => item.providerId === value);
+      setProviderModelCatalog(null);
+      setProviderModelError("");
+      setSearchAgentRunForm((current) => ({
+        ...current,
+        providerId: value,
+        model: provider?.defaultModel || ""
+      }));
+      return;
+    }
     setSearchAgentRunForm((current) => ({ ...current, [field]: value }));
   };
   const applyAgentCoreBlueprint = (blueprintId: string, mode: "factory" | "preflight" = "factory") => {
@@ -2962,6 +3104,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       connectedProviders[0] ||
       providerCredentials.providers[0];
     const selectedProviderReady = Boolean(selectedProvider?.configured);
+    const selectedProviderLocal = selectedProvider?.authMethod === "local_http";
     const selectedProviderModel = (searchAgentRunForm.model.trim() || selectedProvider?.defaultModel || "").trim();
     setSearchAgentChatMessages((current) =>
       [
@@ -2980,10 +3123,14 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           body:
             uiLanguage === "ko"
               ? selectedProviderReady
-                ? `${selectedProvider.label} 계정으로 research-insight-planner-agent 작업을 직접 실행합니다. 결과는 채팅과 task-run store에 남깁니다.`
+                ? selectedProviderLocal
+                  ? `${selectedProvider.label} 로컬 모델로 research-insight-planner-agent 작업을 직접 실행합니다. 결과는 채팅과 task-run store에 남깁니다.`
+                  : `${selectedProvider.label} 계정으로 research-insight-planner-agent 작업을 직접 실행합니다. 결과는 채팅과 task-run store에 남깁니다.`
                 : "연결된 제공자 계정이 없어 CLI lane 실행으로 전환합니다. 계정을 연결하면 같은 버튼이 모델 API 작업을 바로 실행합니다."
               : selectedProviderReady
-                ? `Running the research-insight-planner-agent directly with ${selectedProvider.label}. The result is stored in chat and the task-run store.`
+                ? selectedProviderLocal
+                  ? `Running the research-insight-planner-agent directly with the local ${selectedProvider.label} model. The result is stored in chat and the task-run store.`
+                  : `Running the research-insight-planner-agent directly with ${selectedProvider.label}. The result is stored in chat and the task-run store.`
                 : "No connected provider account is ready, so this falls back to the CLI lane. Connect an account to run the model API directly.",
           meta: selectedProviderReady ? `${selectedProvider.providerId}:${selectedProviderModel}` : "fallback=cli_lane"
         }
@@ -4690,11 +4837,15 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             agentAvailable={Boolean(researchInsightAgent)}
             language={uiLanguage}
             providerCredentialReport={providerCredentials}
+            providerModelCatalog={providerModelCatalog}
+            providerModelBusy={providerModelBusy}
+            providerModelError={providerModelError}
             providerTaskBusy={providerTaskBusy}
             runtimeLaunchQueued={runtimeLaunchRequest?.taskKind === "research_insight_agent"}
             onChange={updateSearchAgentRunForm}
             onOpenTerminal={openTerminalDrawer}
             onRun={launchSearchAgent}
+            onRefreshModels={refreshProviderModels}
           />
 
           <AgentCoreBlueprintPanel
@@ -4813,22 +4964,30 @@ function SearchAgentWorkChatPanel({
   agentAvailable,
   language,
   providerCredentialReport,
+  providerModelCatalog,
+  providerModelBusy,
+  providerModelError,
   providerTaskBusy,
   runtimeLaunchQueued,
   onChange,
   onOpenTerminal,
-  onRun
+  onRun,
+  onRefreshModels
 }: {
   form: SearchAgentRunForm;
   messages: SearchAgentChatMessage[];
   agentAvailable: boolean;
   language: UiLanguage;
   providerCredentialReport: ProviderCredentialReport;
+  providerModelCatalog: ProviderModelCatalogReport | null;
+  providerModelBusy: boolean;
+  providerModelError: string;
   providerTaskBusy: boolean;
   runtimeLaunchQueued: boolean;
   onChange: (field: keyof SearchAgentRunForm, value: string) => void;
   onOpenTerminal: () => void;
   onRun: () => void;
+  onRefreshModels: (providerId?: string) => void | Promise<void>;
 }) {
   const ko = language === "ko";
   const statusLabel = agentAvailable ? (ko ? "준비됨" : "Ready") : ko ? "설정 확인" : "Check config";
@@ -4838,7 +4997,30 @@ function SearchAgentWorkChatPanel({
     connectedProviders[0] ||
     providerCredentialReport.providers[0];
   const selectedProviderConnected = Boolean(selectedProvider?.configured);
+  const selectedProviderLocal = selectedProvider?.authMethod === "local_http";
   const selectedProviderModel = form.model.trim() || selectedProvider?.defaultModel || "";
+  const modelOptions = providerModelCatalog?.providerId === selectedProvider?.providerId ? providerModelCatalog.models : [];
+  const modelStatusText = providerModelBusy
+    ? ko
+      ? "모델 읽는 중"
+      : "Loading models"
+    : providerModelError
+      ? providerModelError
+      : providerModelCatalog?.providerId === selectedProvider?.providerId
+        ? `${providerModelCatalog.status} / ${modelOptions.length || 1} ${ko ? "개" : "model(s)"}`
+        : ko
+          ? "모델 목록 대기"
+          : "Model list pending";
+  const selectedProviderRuntimeLabel = selectedProviderLocal
+    ? (ko ? "로컬 실행" : "Local run")
+    : selectedProviderConnected
+      ? (ko ? "직접 실행" : "Direct run")
+      : ko
+        ? "CLI 대체"
+        : "CLI fallback";
+  const selectedProviderRuntimeSource = selectedProviderLocal
+    ? "127.0.0.1:11434"
+    : selectedProvider?.envVar || "provider env";
 
   return (
     <section className="panel wide search-agent-work-chat-panel">
@@ -4864,7 +5046,13 @@ function SearchAgentWorkChatPanel({
             </span>
             <span>
               <KeyRound size={14} aria-hidden="true" />
-              {selectedProviderConnected ? selectedProvider?.label : ko ? "계정 연결 필요" : "Account needed"}
+              {selectedProviderLocal
+                ? `${selectedProvider?.label} ${ko ? "로컬" : "local"}`
+                : selectedProviderConnected
+                  ? selectedProvider?.label
+                  : ko
+                    ? "계정 연결 필요"
+                    : "Account needed"}
             </span>
             <span>
               <FileSearch size={14} aria-hidden="true" />
@@ -4891,22 +5079,45 @@ function SearchAgentWorkChatPanel({
                 <select value={form.providerId} onChange={(event) => onChange("providerId", event.target.value)}>
                   {providerCredentialReport.providers.map((provider) => (
                     <option key={provider.providerId} value={provider.providerId}>
-                      {provider.label} {provider.configured ? (ko ? "연결됨" : "connected") : (ko ? "미연결" : "not connected")}
+                      {provider.label} {provider.authMethod === "local_http" ? (ko ? "로컬" : "local") : provider.configured ? (ko ? "연결됨" : "connected") : (ko ? "미연결" : "not connected")}
                     </option>
                   ))}
                 </select>
               </label>
               <label>
                 <span>{ko ? "모델" : "Model"}</span>
-                <input
-                  value={selectedProviderModel}
-                  placeholder={selectedProvider?.defaultModel || "model"}
-                  onChange={(event) => onChange("model", event.target.value)}
-                />
+                <div className="agent-model-picker">
+                  <input
+                    list="search-agent-model-options"
+                    value={selectedProviderModel}
+                    placeholder={selectedProvider?.defaultModel || "model"}
+                    onChange={(event) => onChange("model", event.target.value)}
+                  />
+                  <datalist id="search-agent-model-options">
+                    {modelOptions.map((model) => (
+                      <option key={`${model.providerId}-${model.id}`} value={model.id}>
+                        {model.label}
+                      </option>
+                    ))}
+                  </datalist>
+                  <button
+                    type="button"
+                    className="agent-model-refresh-button"
+                    onClick={() => onRefreshModels(selectedProvider?.providerId)}
+                    disabled={providerModelBusy || !selectedProvider}
+                    aria-label={ko ? "모델 목록 새로고침" : "Refresh model list"}
+                    title={ko ? "모델 목록 새로고침" : "Refresh model list"}
+                  >
+                    <RefreshCw size={15} aria-hidden="true" />
+                  </button>
+                </div>
+                <small className={providerModelError ? "agent-model-status warning" : "agent-model-status"}>
+                  {modelStatusText}
+                </small>
               </label>
               <div className={`agent-provider-run-state ${selectedProviderConnected ? "connected" : "missing"}`}>
-                <strong>{selectedProviderConnected ? (ko ? "직접 실행" : "Direct run") : ko ? "CLI 대체" : "CLI fallback"}</strong>
-                <span>{selectedProvider?.envVar || "provider env"}</span>
+                <strong>{selectedProviderRuntimeLabel}</strong>
+                <span>{selectedProviderRuntimeSource}</span>
               </div>
             </div>
             <label>
@@ -6123,6 +6334,11 @@ function ProviderAccountsPanel({
         accountPlaceholder: "예: 개인 OpenAI 프로젝트, 회사 Claude Console",
         apiKey: "API key",
         apiKeyPlaceholder: "provider API key 붙여넣기",
+        localRuntime: "로컬 런타임",
+        localRuntimeSummary: "API key 없이 내 컴퓨터에서 실행 중인 모델 서버를 사용합니다.",
+        localEndpoint: "로컬 주소",
+        localNoKey: "API key 없음",
+        installLocal: "Ollama 설치",
         authMethod: "인증 방식",
         envVar: "실행 변수",
         defaultModel: "기본 모델",
@@ -6150,6 +6366,11 @@ function ProviderAccountsPanel({
         accountPlaceholder: "e.g. personal OpenAI project, company Claude Console",
         apiKey: "API key",
         apiKeyPlaceholder: "Paste provider API key",
+        localRuntime: "Local runtime",
+        localRuntimeSummary: "Uses the model server running on this computer without saving an API key.",
+        localEndpoint: "Local endpoint",
+        localNoKey: "No API key",
+        installLocal: "Install Ollama",
         authMethod: "Auth method",
         envVar: "Runtime env",
         defaultModel: "Default model",
@@ -6197,6 +6418,7 @@ function ProviderAccountsPanel({
           const input = inputs[provider.providerId] || { accountHint: provider.accountHint || "", secret: "" };
           const saving = busy === `save:${provider.providerId}`;
           const clearing = busy === `clear:${provider.providerId}`;
+          const localRuntime = provider.authMethod === "local_http";
           return (
             <article key={provider.providerId} className={`provider-account-row ${provider.configured ? "connected" : "missing"}`}>
               <header>
@@ -6213,7 +6435,7 @@ function ProviderAccountsPanel({
                 </div>
                 <div>
                   <dt>{copy.envVar}</dt>
-                  <dd><code>{provider.envVar}</code></dd>
+                  <dd><code>{localRuntime ? "127.0.0.1:11434" : provider.envVar}</code></dd>
                 </div>
                 <div>
                   <dt>{copy.defaultModel}</dt>
@@ -6221,37 +6443,45 @@ function ProviderAccountsPanel({
                 </div>
                 <div>
                   <dt>{copy.key}</dt>
-                  <dd>{provider.secretPreview || copy.notSaved}</dd>
+                  <dd>{localRuntime ? copy.localNoKey : provider.secretPreview || copy.notSaved}</dd>
                 </div>
               </dl>
-              <div className="provider-account-fields">
-                <label>
-                  <span>{copy.accountHint}</span>
-                  <input
-                    value={input.accountHint}
-                    onChange={(event) => onInputChange(provider.providerId, "accountHint", event.target.value)}
-                    placeholder={copy.accountPlaceholder}
-                  />
-                </label>
-                <label>
-                  <span>{copy.apiKey}</span>
-                  <input
-                    type="password"
-                    autoComplete="off"
-                    value={input.secret}
-                    onChange={(event) => onInputChange(provider.providerId, "secret", event.target.value)}
-                    placeholder={copy.apiKeyPlaceholder}
-                  />
-                </label>
-              </div>
+              {localRuntime ? (
+                <div className="provider-local-runtime-note">
+                  <span>{copy.localRuntime}</span>
+                  <strong>{copy.localEndpoint}: 127.0.0.1:11434</strong>
+                  <small>{copy.localRuntimeSummary}</small>
+                </div>
+              ) : (
+                <div className="provider-account-fields">
+                  <label>
+                    <span>{copy.accountHint}</span>
+                    <input
+                      value={input.accountHint}
+                      onChange={(event) => onInputChange(provider.providerId, "accountHint", event.target.value)}
+                      placeholder={copy.accountPlaceholder}
+                    />
+                  </label>
+                  <label>
+                    <span>{copy.apiKey}</span>
+                    <input
+                      type="password"
+                      autoComplete="off"
+                      value={input.secret}
+                      onChange={(event) => onInputChange(provider.providerId, "secret", event.target.value)}
+                      placeholder={copy.apiKeyPlaceholder}
+                    />
+                  </label>
+                </div>
+              )}
               <div className="provider-account-actions">
                 <button type="button" onClick={() => onOpenUrl(provider, "setup")}>
                   <ExternalLink size={15} aria-hidden="true" />
-                  <span>{copy.setup}</span>
+                  <span>{localRuntime ? copy.installLocal : copy.setup}</span>
                 </button>
                 <button type="button" onClick={() => onOpenUrl(provider, "login")}>
                   <ExternalLink size={15} aria-hidden="true" />
-                  <span>{copy.login}</span>
+                  <span>{localRuntime ? copy.installLocal : copy.login}</span>
                 </button>
                 <button type="button" onClick={() => onOpenUrl(provider, "docs")}>
                   <BookOpenText size={15} aria-hidden="true" />
@@ -6260,7 +6490,7 @@ function ProviderAccountsPanel({
                 <button
                   type="button"
                   onClick={() => onSave(provider)}
-                  disabled={!runtimeAvailable || busy !== "" || !input.secret.trim()}
+                  disabled={localRuntime || !runtimeAvailable || busy !== "" || !input.secret.trim()}
                 >
                   <KeyRound size={15} aria-hidden="true" />
                   <span>{saving ? copy.saving : copy.save}</span>
@@ -6268,7 +6498,7 @@ function ProviderAccountsPanel({
                 <button
                   type="button"
                   onClick={() => onClear(provider)}
-                  disabled={!runtimeAvailable || busy !== "" || provider.credentialSource !== "app_config_file"}
+                  disabled={localRuntime || !runtimeAvailable || busy !== "" || provider.credentialSource !== "app_config_file"}
                 >
                   <Trash2 size={15} aria-hidden="true" />
                   <span>{clearing ? copy.clearing : copy.clear}</span>
