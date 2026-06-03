@@ -13,13 +13,13 @@ The user asked to use AgentCore technology so agents can be created easily. The 
 | --- | --- | --- |
 | REQ-PDA-092 | The Agents screen must expose AgentCore-style blueprints as easy agent creation entry points. | `AgentCore Quick Builder` steps are visible and the user can choose a blueprint first. |
 | REQ-PDA-093 | A selected blueprint must lead directly to Agent Factory proposal storage. | The `Create Agent Proposal` button calls the native `create_agent_factory_proposal` command. |
-| REQ-PDA-094 | Blueprint-based proposals must include runtime, memory, gateway/tool, evaluation capabilities, and the local-first runtime boundary. | The proposal form includes blueprint capabilities, local task-run store, provider direct run, and optional AgentCore adapter capabilities. |
+| REQ-PDA-094 | Blueprint-based proposals must include runtime, memory, gateway/tool, evaluation capabilities, and the local-first runtime boundary. | The proposal form includes blueprint capabilities, local Python runtime, local task-run store, provider direct run, and optional AgentCore adapter capabilities. |
 | REQ-PDA-095 | The app must clarify the difference between browser preview and installed-app behavior. | Preview state explains that native save is unavailable, while the installed app writes the proposal to app data. |
 | REQ-PDA-096 | Readiness, tests, and registries must catch regressions that remove the quick builder. | Service readiness and renderer readiness tokens validate `AgentCore Quick Builder`, `createAgentCoreBlueprintProposal`, and `Create Agent Proposal`. |
+| REQ-PDA-097 | AgentCore-style blueprints must not present Lambda or cloud functions as the agent execution host. | UI, proposals, and registries explain that agent/Python execution starts in the local process/runtime, while remote APIs or cloud functions are optional tool connectors. |
 
 ## Non-Goals
 
 - Do not auto-install AgentCore CLI or AWS credentials.
 - Do not make AWS AgentCore deploy a required execution path.
 - Do not copy awslabs sample source code into the product.
-

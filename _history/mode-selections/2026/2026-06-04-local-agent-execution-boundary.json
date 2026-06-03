@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "date": "2026-06-04",
+  "request_id": "UR-2026-06-04-010",
+  "selected_work_mode": "standard",
+  "reason": "The user corrected the execution architecture boundary: agent/Python execution must be local, not Lambda or remote hosted. This changes product behavior contracts and readiness gates.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "owning_project": "platform-desktop-app"
+}
+

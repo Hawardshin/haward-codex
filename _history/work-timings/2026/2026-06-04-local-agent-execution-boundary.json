@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "date": "2026-06-04",
+  "request_id": "UR-2026-06-04-010",
+  "phases": [
+    {
+      "phase": "web_first_and_context",
+      "elapsed_minutes": 5,
+      "notes": "Checked AgentCore official local dev/deploy and gateway docs plus existing AgentCore UI code."
+    },
+    {
+      "phase": "implementation",
+      "elapsed_minutes": 12,
+      "notes": "Updated UI copy, proposal capabilities/guardrails, registries, and readiness scripts."
+    },
+    {
+      "phase": "records",
+      "elapsed_minutes": 8,
+      "notes": "Added requirements, specs, web-search, request trace, summaries, and evaluation records."
+    },
+    {
+      "phase": "validation",
+      "elapsed_minutes": 9,
+      "notes": "Ran renderer/platform checks, customer build, config contracts, and browser smoke."
+    }
+  ],
+  "bottlenecks": [
+    "Initial service readiness check failed because the registry did not contain the exact local Python execution token expected by the new gate."
+  ]
+}
+

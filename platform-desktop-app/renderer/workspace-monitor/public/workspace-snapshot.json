@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-03T17:39:00.161Z",
+  "generatedAt": "2026-06-03T17:45:55.553Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -197,6 +197,7 @@
           "resource cleanup",
           "AgentCore-style create/dev/invoke/evaluate lifecycle blueprint application",
           "AgentCore-style blueprint to native agent proposal creation",
+          "local Python agent execution with remote services treated as tool connectors",
           "production agent blueprint selection for runtime, memory, gateway, and evaluation patterns"
         ],
         "learningSignals": [
@@ -305,6 +306,7 @@
           "feature promotion trace",
           "blueprint-driven agent proposal prefill",
           "one-click AgentCore-style agent proposal creation",
+          "local Python runtime agent creation",
           "runtime/memory/gateway/evaluation agent template selection"
         ],
         "learningSignals": [
@@ -1005,7 +1007,7 @@
         ],
         "riskControls": [
           "AWS AgentCore CLI and credentials remain optional deployment adapters",
-          "No AgentCore sample source code is copied into the shipped app"
+          "Lambda or other cloud functions may be remote tool connectors but are not the agent execution host"
         ],
         "status": "implemented_slice",
         "priority": "p0_user_requested_reference",

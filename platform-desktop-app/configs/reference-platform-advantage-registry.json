@@ -421,12 +421,13 @@
       "url": "https://docs.aws.amazon.com/bedrock-agentcore/",
       "source_type": "official_docs",
       "used_for": [
-        "production agent runtime, memory, gateway, identity, browser/code tools, observability, evaluation, and policy transfer planning"
+        "production agent runtime, memory, gateway, identity, browser/code tools, observability, evaluation, and policy transfer planning",
+        "separating local development/execution from optional managed deployment"
       ],
       "last_checked": "2026-06-04",
       "reliability": "high",
-      "limitation": "AWS managed-service details are optional deployment adapters in this product, not mandatory local runtime dependencies.",
-      "plan_impact": "Expose AgentCore-style lifecycle and capability blueprints in the Agents surface while preserving the desktop app as the primary host runtime."
+      "limitation": "AWS managed-service details are optional deployment adapters in this product, not mandatory local runtime dependencies or the default execution host.",
+      "plan_impact": "Expose AgentCore-style lifecycle and capability blueprints in the Agents surface while preserving the desktop app and local Python runtime as the primary host runtime."
     },
     {
       "id": "awslabs_agentcore_samples",
@@ -439,7 +440,7 @@
       "last_checked": "2026-06-04",
       "reliability": "high",
       "limitation": "Repository is sampled as a public reference; source code is not copied into the product bundle.",
-      "plan_impact": "Transfer create/dev/deploy/invoke, add memory/identity/evaluator/gateway, blueprints, and observability/evaluation as desktop product blueprint controls."
+      "plan_impact": "Transfer create/local-dev/optional-deploy/invoke, add memory/identity/evaluator/gateway, blueprints, and observability/evaluation as desktop product blueprint controls."
     }
   ],
   "structure_rules": [
@@ -1241,7 +1242,7 @@
       ],
       "priority": "p0_user_requested_reference",
       "status": "implemented_slice",
-      "product_translation": "The Agents screen exposes production blueprints for runtime, memory, gateway/tool, and evaluation-guarded agents; applying a blueprint fills the Search Agent Work Chat and Agent Factory inputs, and AgentCore Quick Builder can create a native Agent Factory proposal instead of leaving the reference as documentation.",
+      "product_translation": "The Agents screen exposes production blueprints for locally executed Python agents with runtime, memory, gateway/tool, and evaluation-guarded capabilities; applying a blueprint fills the Search Agent Work Chat and Agent Factory inputs, and AgentCore Quick Builder can create a native Agent Factory proposal instead of leaving the reference as documentation.",
       "implementation_targets": [
         "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
         "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
@@ -1250,8 +1251,9 @@
       ],
       "risk_controls": [
         "AWS AgentCore CLI and credentials remain optional deployment adapters",
+        "Lambda or other cloud functions may be remote tool connectors but are not the agent execution host",
         "No AgentCore sample source code is copied into the shipped app",
-        "The desktop runtime owns task state, records, and UI authority",
+        "The desktop runtime owns local Python execution, task state, records, and UI authority",
         "Agent proposal records are written through the app-owned native Agent Factory command",
         "Provider direct-run and task-run persistence remain the first execution path"
       ],

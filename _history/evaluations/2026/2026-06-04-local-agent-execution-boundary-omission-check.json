@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "date": "2026-06-04",
+  "request_id": "UR-2026-06-04-010",
+  "status": "passed",
+  "checked_user_requirements": [
+    {
+      "requirement": "Agent/Python execution should be local, not Lambda.",
+      "coverage": "AgentCore proposal helper now includes local_python_agent_runtime and local_process_execution capabilities."
+    },
+    {
+      "requirement": "Lambda should not appear as the execution host.",
+      "coverage": "Gateway Tool Agent UI copy removed Lambda as a tool example and registries describe cloud functions only as optional connectors."
+    },
+    {
+      "requirement": "The product should enforce this boundary.",
+      "coverage": "Service readiness now includes local_python_execution_boundary and platform check passes."
+    }
+  ],
+  "gaps": [],
+  "resume_action": "No blocked decision remains."
+}
+

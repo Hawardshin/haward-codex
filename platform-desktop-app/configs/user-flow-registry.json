@@ -603,7 +603,8 @@
         "show AgentCore-style production blueprints for runtime, memory, gateway/tool, and evaluation-guarded agents before asking the user to invent an agent from scratch",
         "applying a production blueprint must fill the search-agent task input and Agent Factory proposal fields",
         "a selected production blueprint must be able to create an Agent Factory proposal record directly in the installed app",
-        "treat AWS AgentCore deploy as an optional adapter readiness step, not as a required local runtime dependency"
+        "make clear that Python agent execution happens in the local desktop runtime",
+        "treat AWS AgentCore deploy as an optional adapter readiness step, not as the agent execution host or a required local runtime dependency"
       ]
     },
     {
@@ -682,6 +683,7 @@
         "show lifecycle, capabilities, stored records, and safety gates in one desktop panel",
         "fill Search Agent Work Chat and Agent Factory inputs from the selected blueprint",
         "create an Agent Factory proposal record from the selected blueprint through the native create_agent_factory_proposal command",
+        "record local Python agent runtime as the execution boundary",
         "preserve local-first runtime ownership and mark AWS AgentCore as an optional deployment adapter"
       ]
     },
@@ -950,7 +952,7 @@
     {
       "id": "production_agent_blueprints",
       "title": "Production Agent Blueprints",
-      "purpose": "Use AgentCore-style runtime, memory, gateway, and evaluation patterns to create and run agents without forcing users to understand AWS setup first.",
+      "purpose": "Use AgentCore-style runtime, memory, gateway, and evaluation patterns to create locally executed Python agents without forcing users to understand AWS setup first.",
       "first_screen_priority": true
     }
   ],

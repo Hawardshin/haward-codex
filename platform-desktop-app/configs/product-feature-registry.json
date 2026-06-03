@@ -133,8 +133,8 @@
       "url": "https://github.com/awslabs/agentcore-samples",
       "source_type": "user_referenced_repo",
       "used_for": [
-        "production agent lifecycle pattern: create, dev, deploy, invoke, add capabilities",
-        "agent runtime, memory, gateway, identity, observability, evaluation, and policy as product blueprint categories",
+        "production agent lifecycle pattern: create, local dev, optional deploy, invoke, add capabilities",
+        "agent runtime, memory, gateway, identity, observability, evaluation, and policy as product blueprint categories for local Python agent execution",
         "Apache-2.0 public-source boundary for reference transfer without copying source"
       ],
       "last_checked": "2026-06-04"
@@ -146,7 +146,7 @@
       "source_type": "official_docs",
       "used_for": [
         "AgentCore runtime, memory, gateway, identity, browser/code tools, observability, evaluation, and policy capability model",
-        "optional AWS deployment adapter boundary for installable desktop product"
+        "optional AWS deployment adapter boundary for installable desktop product while local Python runtime remains the execution host"
       ],
       "last_checked": "2026-06-04"
     }
@@ -343,6 +343,7 @@
         "resource cleanup",
         "AgentCore-style create/dev/invoke/evaluate lifecycle blueprint application",
         "AgentCore-style blueprint to native agent proposal creation",
+        "local Python agent execution with remote services treated as tool connectors",
         "production agent blueprint selection for runtime, memory, gateway, and evaluation patterns"
       ],
       "learning_signals": [
@@ -483,6 +484,7 @@
         "feature promotion trace",
         "blueprint-driven agent proposal prefill",
         "one-click AgentCore-style agent proposal creation",
+        "local Python runtime agent creation",
         "runtime/memory/gateway/evaluation agent template selection"
       ],
       "learning_signals": [

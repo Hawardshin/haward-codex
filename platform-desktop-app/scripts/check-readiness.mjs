@@ -750,6 +750,8 @@ for (const requiredPhrase of [
   "createAgentCoreBlueprintProposal",
   "AgentCore Quick Builder",
   "바로 에이전트 제안 생성",
+  "local_python_agent_runtime",
+  "local_process_execution",
   "agentcore-blueprint-panel",
   "Production 에이전트 블루프린트",
   "에이전트 생성 입력 채우기",

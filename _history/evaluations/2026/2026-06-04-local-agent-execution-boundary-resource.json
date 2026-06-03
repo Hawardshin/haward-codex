@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "date": "2026-06-04",
+  "request_id": "UR-2026-06-04-010",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "kind": "local_static_preview_server",
+      "command": "python3 -m http.server 4177 --bind 127.0.0.1",
+      "purpose": "Browser smoke for local execution boundary UI copy.",
+      "status": "stopped",
+      "cleanup": "Stopped with interrupt after screenshot capture."
+    }
+  ],
+  "checks": [
+    "No preview server remained running after browser smoke.",
+    "Browser smoke did not invoke native proposal writes.",
+    "Static preview verified local Python execution copy and absence of visible Lambda copy in the Agents panel."
+  ],
+  "gaps": []
+}
+

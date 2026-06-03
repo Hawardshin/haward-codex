@@ -1786,8 +1786,8 @@ const agentCoreBlueprints: AgentCoreBlueprint[] = [
     label: "Gateway Tool Agent",
     sourceLabel: "awslabs/agentcore-samples · gateway + MCP",
     sourceUrl: agentCoreSampleSourceUrl,
-    summaryKo: "MCP, HTTP API, Lambda 같은 도구를 한 곳에서 권한/라우팅/관측과 함께 관리하는 도구 연결형 에이전트입니다.",
-    summaryEn: "A tool-connected agent that manages MCP, HTTP APIs, and functions with auth, routing, and observability.",
+    summaryKo: "로컬 Python 에이전트가 MCP, HTTP API, 파일/브라우저/CLI 같은 도구를 권한/라우팅/관측과 함께 호출하는 도구 연결형 에이전트입니다.",
+    summaryEn: "A tool-connected agent where the local Python agent calls MCP, HTTP APIs, files, browser, and CLI tools with auth, routing, and observability.",
     primaryUseKo: "파일 시스템, 브라우저, GitHub, 배포 CLI 같은 외부 도구를 안전하게 붙일 때",
     primaryUseEn: "Use when attaching external tools such as filesystem, browser, GitHub, or deployment CLIs safely.",
     agentId: "gateway-tool-agent",
@@ -1940,14 +1940,18 @@ function buildAgentFactoryFormFromAgentCoreBlueprint(blueprint: AgentCoreBluepri
   const ko = language === "ko";
   const localRuntimeCapabilities = [
     ...blueprint.capabilities,
+    "local_python_agent_runtime",
+    "local_process_execution",
     "local_task_run_store",
     "provider_account_direct_run",
     "optional_agentcore_deployment_adapter"
   ];
   const guardrails = [
     ...blueprint.safetyGates,
+    ko ? "에이전트와 Python 실행은 로컬 process/runtime에서 시작합니다" : "Agent and Python execution start in the local process/runtime",
+    ko ? "원격 API나 cloud function은 도구 connector일 뿐 실행 호스트가 아닙니다" : "Remote APIs or cloud functions are tool connectors, not the execution host",
     ko ? "AWS AgentCore는 선택형 배포 adapter로만 사용합니다" : "Treat AWS AgentCore as an optional deployment adapter",
-    ko ? "앱의 로컬 runtime이 작업 상태와 기록을 소유합니다" : "The local app runtime owns task state and records"
+    ko ? "앱의 로컬 runtime이 실행, 작업 상태, 기록을 소유합니다" : "The local app runtime owns execution, task state, and records"
   ];
 
   return {
@@ -5037,8 +5041,8 @@ function AgentCoreBlueprintPanel({
           <h2>{ko ? "Production 에이전트 블루프린트" : "Production Agent Blueprints"}</h2>
           <p>
             {ko
-              ? "AWS AgentCore 샘플의 runtime, memory, gateway, evaluation 구조를 우리 데스크톱 앱의 에이전트 생성과 실행 흐름으로 바꿉니다."
-              : "Translates AWS AgentCore sample runtime, memory, gateway, and evaluation patterns into this desktop app's agent creation and run flow."}
+              ? "AWS AgentCore 샘플의 runtime, memory, gateway, evaluation 구조를 로컬 Python 실행 중심의 데스크톱 에이전트 생성 흐름으로 바꿉니다."
+              : "Translates AWS AgentCore sample runtime, memory, gateway, and evaluation patterns into a desktop agent creation flow centered on local Python execution."}
           </p>
         </div>
         <a href={selectedBlueprint.sourceUrl} target="_blank" rel="noreferrer" className="panel-link-button">
@@ -5160,11 +5164,11 @@ function AgentCoreBlueprintPanel({
           </div>
 
           <div className="agentcore-blueprint-contract">
-            <span>Apache-2.0 / optional AWS adapter</span>
+            <span>Local Python runtime / Apache-2.0 / optional AWS adapter</span>
             <small>
               {ko
-                ? "원본 코드를 제품에 복사하지 않고 구조만 이전합니다. AgentCore CLI와 AWS 자격증명은 선택형 배포 adapter이며, 앱의 기본 작업 상태는 로컬 runtime이 소유합니다."
-                : "The app transfers structure without copying source code. AgentCore CLI and AWS credentials stay optional deployment adapters; local runtime owns default task state."}
+                ? "원본 코드를 제품에 복사하지 않고 구조만 이전합니다. 실제 에이전트와 Python 실행은 로컬 runtime이 맡고, AgentCore CLI와 AWS 자격증명은 선택형 배포/도구 adapter입니다."
+                : "The app transfers structure without copying source code. Actual agent and Python execution belong to the local runtime; AgentCore CLI and AWS credentials stay optional deployment/tool adapters."}
             </small>
           </div>
         </article>
