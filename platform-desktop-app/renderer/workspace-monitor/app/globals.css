@@ -6400,7 +6400,9 @@ h3 {
 .source-file-browser header span,
 .source-draft-queue header span,
 .source-save-results header span,
-.source-save-results article span {
+.source-save-results article span,
+.source-results-summary span,
+.source-inline-save-receipt span {
   color: var(--muted);
   font-size: 12px;
   font-weight: 800;
@@ -6627,25 +6629,222 @@ h3 {
   border-color: #b9d5c9;
 }
 
-.source-save-results article {
-  border: 1px solid var(--line);
-  background: var(--surface);
-  border-radius: 7px;
-  padding: 8px;
-}
-
 .source-results-panel {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 10px;
   overflow: hidden;
 }
 
-.source-results-panel > div {
+.source-results-hero {
+  position: relative;
+  justify-content: start;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--green) 34%, var(--line));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--surface) 88%, var(--green) 10%), color-mix(in srgb, var(--surface-raised) 88%, var(--blue) 6%)),
+    var(--surface-raised);
+  border-radius: 8px;
+  padding: 13px;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #ffffff 52%, transparent),
+    0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.source-results-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 14px 0 54px;
+  height: 3px;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(90deg, var(--green), var(--blue));
+  opacity: 0.85;
+}
+
+.source-results-hero-icon,
+.source-result-status-mark {
+  display: inline-grid;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--green) 42%, var(--line));
+  background: color-mix(in srgb, var(--surface) 82%, var(--green) 12%);
+  border-radius: 8px;
+  color: var(--green);
+}
+
+.source-result-status-mark.muted {
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.source-results-hero strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.source-results-hero small {
+  display: block;
+  max-width: 100%;
+  margin-top: 5px;
+  color: var(--muted);
+  overflow-wrap: break-word;
+}
+
+.source-results-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(120px, 0.45fr) minmax(120px, 0.45fr);
+  gap: 8px;
+}
+
+.source-results-summary article {
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 86%, var(--blue) 8%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 94%, var(--surface-muted) 6%), var(--surface)),
+    var(--surface);
+  border-radius: 7px;
+  padding: 9px 10px;
+}
+
+.source-results-summary strong {
+  display: block;
+  min-width: 0;
+  margin-top: 4px;
+  overflow: hidden;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.source-results-list {
   min-height: 0;
   overflow: auto;
   overscroll-behavior: contain;
   padding-right: 2px;
   scrollbar-gutter: stable;
+}
+
+.source-save-result-card,
+.source-inline-save-receipt {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, var(--green) 16%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 96%, var(--green) 4%), var(--surface)),
+    var(--surface);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #ffffff 48%, transparent),
+    0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.source-save-result-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.source-save-result-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--green);
+}
+
+.source-result-content,
+.source-inline-save-receipt > div {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+.source-result-titleline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+  min-width: 0;
+}
+
+.source-result-titleline strong,
+.source-inline-save-receipt strong {
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: 13px;
+}
+
+.source-result-lozenge {
+  display: inline-flex;
+  min-height: 22px;
+  align-items: center;
+  border: 1px solid color-mix(in srgb, var(--green) 42%, var(--line));
+  background: color-mix(in srgb, var(--surface-muted) 72%, var(--green) 14%);
+  border-radius: 999px;
+  padding: 2px 8px;
+  color: color-mix(in srgb, var(--green) 78%, var(--text));
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.source-result-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.source-result-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.source-result-backup-path,
+.source-inline-save-receipt code {
+  display: block;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 84%, var(--green) 8%);
+  background: color-mix(in srgb, var(--surface-muted) 78%, var(--surface) 22%);
+  border-radius: 6px;
+  padding: 6px 7px;
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.source-inline-save-receipt {
+  margin-top: 10px;
+}
+
+.source-results-empty {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  min-height: 82px;
+  border: 1px dashed color-mix(in srgb, var(--line) 82%, var(--slate) 12%);
+  background: color-mix(in srgb, var(--surface) 92%, var(--surface-muted) 8%);
+  border-radius: 8px;
+  padding: 13px;
+  color: var(--muted);
+}
+
+.source-results-empty strong {
+  color: var(--text);
+  font-size: 13px;
 }
 
 .evidence-grid {
@@ -8411,6 +8610,8 @@ h3 {
   .source-draft-list span,
   .source-draft-list small,
   .source-save-results article small,
+  .source-result-backup-path,
+  .source-inline-save-receipt code,
   .native-workspace-state-strip code,
   .workspace-explorer-state code,
   .workspace-explorer-meta span,
@@ -8676,6 +8877,7 @@ h3 {
   .terminal-event-rail article,
   .decision-answer-controls,
   .session-input-row,
+  .source-results-summary,
   .source-draft-list,
   .source-editor-controls,
   .source-customization-bar,
@@ -8971,6 +9173,7 @@ h3 {
   .filesystem-workbench-shell,
   .workspace-explorer-actions,
   .source-review-grid,
+  .source-results-summary,
   .source-draft-list,
   .source-editor-controls,
   .source-customization-bar,

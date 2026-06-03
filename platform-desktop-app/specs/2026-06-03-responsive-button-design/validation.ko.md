@@ -21,6 +21,7 @@
 - Source workbench compact `900x620`: filesystem workbench shell stacked 1-column, Source controls 2-column, document horizontal overflow 0, action/tool/tab button viewport escape 0.
 - Source workbench mobile `390x844`: Source controls 1-column, document horizontal overflow 0, action/tool/tab button viewport escape 0.
 - In-app Browser static preview `1280x720`: Source action button 4개, tool button 10개, document horizontal overflow 0, viewport escape 0.
+- In-app Browser Source results static preview `1280x720`: result hero 1개, summary 1개, empty receipt 1개, document horizontal overflow 0, result surface viewport escape 0.
 
 ## QA Screenshots
 
@@ -29,4 +30,4 @@
 
 ## Residual Risk
 
-- This slice improves shared button behavior and Source-specific control styling but does not replace all ad hoc CSS with a typed design-system component.
+- This slice improves shared button behavior, Source-specific control styling, and Source result receipt styling but does not replace all ad hoc CSS with a typed design-system component.

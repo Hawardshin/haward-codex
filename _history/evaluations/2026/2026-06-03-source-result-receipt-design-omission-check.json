@@ -1,0 +1,33 @@
+{
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-063",
+  "work_id": "source-result-receipt-design",
+  "checked_requirements": [
+    {
+      "item": "Modified/save results should look better, not like plain/default output.",
+      "status": "covered",
+      "evidence": "Source results now use source-results-hero, source-results-summary, source-save-result-card, source-result-lozenge, and source-result-backup-path."
+    },
+    {
+      "item": "The inline saved state in the editor should be polished too.",
+      "status": "covered",
+      "evidence": "writeReport now renders through source-inline-save-receipt."
+    },
+    {
+      "item": "Long paths should not break the responsive layout.",
+      "status": "covered",
+      "evidence": "Backup paths are wrapped through source-result-backup-path and included in long-token wrapping rules."
+    },
+    {
+      "item": "Regression should be automated.",
+      "status": "covered",
+      "evidence": "check-source-control-design.mjs checks result receipt design tokens."
+    }
+  ],
+  "deferred_items": [
+    {
+      "item": "App-wide notification/result component system",
+      "reason": "This request targeted modified Source results; broader extraction remains a separate design-system refactor."
+    }
+  ]
+}

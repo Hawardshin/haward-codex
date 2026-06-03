@@ -20,7 +20,9 @@ assertIncludes(monitorShell, "Source action button roles", [
   'className="source-action-button save"',
   'className="source-action-button save-all"',
   'className="source-action-button secondary"',
-  'className="source-tool-button"'
+  'className="source-tool-button"',
+  'className="source-inline-save-receipt"',
+  'className="source-save-result-card"'
 ]);
 
 assertIncludes(css, "Source action bar design", [
@@ -52,11 +54,21 @@ assertIncludes(css, "Source file row design", [
   ".source-editor-tab-main:hover"
 ]);
 
+assertIncludes(css, "Source result receipt design", [
+  ".source-results-hero",
+  ".source-results-summary",
+  ".source-save-result-card::before",
+  ".source-result-lozenge",
+  ".source-result-backup-path",
+  ".source-inline-save-receipt",
+  "  .source-results-summary,"
+]);
+
 console.log(
   JSON.stringify(
     {
       status: "source_control_design_ok",
-      checkedGroups: 4
+      checkedGroups: 5
     },
     null,
     2
