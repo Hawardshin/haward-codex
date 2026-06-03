@@ -1,0 +1,45 @@
+{
+  "schema_version": "omission-check.v1",
+  "request_id": "UR-2026-06-04-002",
+  "status": "completed",
+  "checked_items": [
+    {
+      "item": "web_first_intake",
+      "status": "covered",
+      "evidence": "_history/web-searches/2026/2026-06-04-claw-code-reference-transfer.ko.md"
+    },
+    {
+      "item": "clean_room_source_boundary",
+      "status": "covered",
+      "evidence": "reference registries record clone disabled and no source copy"
+    },
+    {
+      "item": "adapter_registry",
+      "status": "covered",
+      "evidence": "agent-platform/configs/integrations/cli-adapter-registry.json includes claw-code-cli"
+    },
+    {
+      "item": "runtime_bridge",
+      "status": "covered",
+      "evidence": "platform-desktop-app/src-tauri/src/lib.rs includes Claw Code adapter and orchestration lane"
+    },
+    {
+      "item": "desktop_ui_setup_guidance",
+      "status": "covered",
+      "evidence": "MonitorShell fallback adapter and setup guide include Claw Code"
+    },
+    {
+      "item": "requirements_specs_docs",
+      "status": "covered",
+      "evidence": "requirements, multi-cli specs, and architecture docs mention Claw Code as optional adapter"
+    },
+    {
+      "item": "validation_planned",
+      "status": "covered",
+      "evidence": "readiness tests require claw-code-cli and Claw Code reference patterns"
+    }
+  ],
+  "remaining_gaps": [
+    "Actual Claw Code install, license, command behavior, and binary provenance remain unverified because repository clone was disabled."
+  ]
+}

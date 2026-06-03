@@ -14,7 +14,7 @@
       "Treat commands as planned future commands until dependencies are actually installed and audited."
     ],
     "owner": "platform-desktop-app",
-    "last_reviewed": "2026-06-03",
+    "last_reviewed": "2026-06-04",
     "update_triggers": [
       "The selected desktop product runtime changes.",
       "The installer target OS list changes.",
@@ -327,7 +327,7 @@
     },
     {
       "id": "multi_cli_execution_requires_supervisor",
-      "rule": "Running Claude Code, Gemini CLI, Codex CLI, OpenCode, or future AI CLIs together requires a platform supervisor that owns process graph state, terminal I/O, decision deferral, artifact retention, and cleanup.",
+      "rule": "Running Claude Code, Gemini CLI, Codex CLI, OpenCode, Claw Code, or future AI CLIs together requires a platform supervisor that owns process graph state, terminal I/O, decision deferral, artifact retention, and cleanup.",
       "reason": "A desktop shell that only opens several terminals cannot reliably pause questions, resume work, merge results, or build high-quality reusable data.",
       "applies_to": [
         "selected_platform_architecture",
@@ -463,7 +463,7 @@
   "recommended_initial_path": {
     "id": "tauri_first_cross_platform_shell",
     "status": "selected_product_runtime",
-    "summary": "Build a Tauri v2 desktop shell that starts as the platform-first host runtime, owns the workspace-monitor renderer static UI inside platform-desktop-app, keeps agent-platform as the Python layer, and mounts Claude Code, Gemini CLI, Codex CLI, OpenCode, and other CLIs as optional guest adapters.",
+    "summary": "Build a Tauri v2 desktop shell that starts as the platform-first host runtime, owns the workspace-monitor renderer static UI inside platform-desktop-app, keeps agent-platform as the Python layer, and mounts Claude Code, Gemini CLI, Codex CLI, OpenCode, Claw Code, and other CLIs as optional guest adapters.",
     "why": [
       "The desktop product now owns its renderer under platform-desktop-app/renderer/workspace-monitor.",
       "A smaller desktop shell is preferable for the current product boundary.",
@@ -523,7 +523,8 @@
         "Claude Code CLI",
         "Gemini CLI",
         "Codex CLI",
-        "OpenCode"
+        "OpenCode",
+        "Claw Code"
       ],
       "registry_path": "agent-platform/configs/integrations/cli-adapter-registry.json",
       "failure_behavior": "capability_missing disables only the related feature and shows setup guidance"
@@ -678,7 +679,7 @@
   ],
   "runtime_strategy": {
     "ui_strategy": "Own the workspace-monitor renderer inside platform-desktop-app first, then add further desktop-specific UI only when local desktop behavior needs it.",
-    "platform_host_strategy": "The installed desktop app is the primary host runtime. It launches before optional AI CLIs, owns workspace/task/decision/artifact/validation state, and mounts Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or future tools only as guest adapter lanes.",
+    "platform_host_strategy": "The installed desktop app is the primary host runtime. It launches before optional AI CLIs, owns workspace/task/decision/artifact/validation state, and mounts Codex, Gemini CLI, Claude Code CLI, OpenCode, Claw Code, Cursor, Antigravity, or future tools only as guest adapter lanes.",
     "agent_runtime_strategy": "Keep agent-platform as a Python-first platform layer. The desktop shell must not run agent logic in the renderer. Future execution must use a documented sidecar, local service, or explicit command adapter with lifecycle cleanup.",
     "language_runtime_strategy": "Use Rust/Tauri first for the desktop shell, Go first for a separate local daemon or operational CLI, Python for agent logic, and TypeScript/Next.js for the UI. Follow agent-platform/configs/runtime/language-decision-registry.json before changing this split.",
     "cli_integration_strategy": "Use external CLIs only through explicit guest adapter contracts from agent-platform/configs/integrations/cli-adapter-registry.json. Missing optional CLIs should disable only that capability and show setup guidance. Real multi-CLI execution requires a platform-owned supervisor with process graph validation, resource cleanup, decision inbox routing, and merge gates.",
@@ -715,7 +716,7 @@
     "Framework decision record with Tauri/Electron/native packaging comparison",
     "User-flow registry acceptance checks before desktop UI or installer implementation",
     "Multi-CLI supervisor design and validation before launching several AI CLIs from one action",
-    "Concrete Claude Code, Gemini CLI, Codex CLI, and OpenCode adapter smoke tests before exposing them as executable capabilities",
+    "Concrete Claude Code, Gemini CLI, Codex CLI, OpenCode, and Claw Code adapter smoke tests before exposing them as executable capabilities",
     "Project-local dependency installation audit if dependencies are installed",
     "License and security review for desktop framework and packager dependencies",
     "macOS execution profile review plus signing, hardened runtime, notarization, stapling, permission, update, and smoke-test plan before macOS public installer",

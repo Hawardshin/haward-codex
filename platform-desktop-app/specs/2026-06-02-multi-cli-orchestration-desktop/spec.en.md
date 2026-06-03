@@ -2,7 +2,7 @@
 
 ## Goal
 
-Define the product contract for an installable desktop app that can configure Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode as optional capabilities, supervise multiple CLIs, and manage questions, decisions, output, source editing, and data accumulation as platform state.
+Define the product contract for an installable desktop app that can configure Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, and Claw Code as optional capabilities, supervise multiple CLIs, and manage questions, decisions, output, source editing, and data accumulation as platform state.
 
 ## Requirements
 

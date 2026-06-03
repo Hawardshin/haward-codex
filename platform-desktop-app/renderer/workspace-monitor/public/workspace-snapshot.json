@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-03T15:16:32.118Z",
+  "generatedAt": "2026-06-03T15:30:32.129Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -30,7 +30,7 @@
     "primaryProductFeatures": 5,
     "supportingProductFeatures": 1,
     "referencePlatforms": 4,
-    "referenceTransferPatterns": 13,
+    "referenceTransferPatterns": 15,
     "structurePressurePoints": 0,
     "sourceFiles": 0,
     "rootFolders": 0
@@ -404,13 +404,13 @@
       "acceptedSourceTypes": []
     },
     "summary": {
-      "totalSources": 24,
+      "totalSources": 25,
       "platformGroups": 4,
-      "totalPatterns": 13,
+      "totalPatterns": 15,
       "implemented": 6,
-      "integratedContract": 5,
+      "integratedContract": 7,
       "queuedP0": 2,
-      "highPriority": 13
+      "highPriority": 15
     },
     "referenceLinks": [],
     "platformGroups": [
@@ -448,10 +448,11 @@
           "Cline",
           "Aider",
           "OpenCode",
+          "Claw Code",
           "Continue"
         ],
         "role": "engine_and_capability_reference",
-        "strongestAdvantage": "tool approval, CLI/scriptability, SDKs, PR checks, embedded editor/terminal/browser lanes",
+        "strongestAdvantage": "tool approval, CLI/scriptability, SDKs, PR checks, slash-command orchestration, skills/MCP surfaces, embedded editor/terminal/browser lanes",
         "transferRule": "성숙한 오픈소스 기능은 게스트 어댑터 또는 엔진 후보로 평가하되, 플랫폼의 데이터/권한/검증 경계가 우선한다."
       },
       {
@@ -532,6 +533,7 @@
         "sourcePlatforms": [
           "Devin Desktop / Windsurf",
           "Claude Code",
+          "Claw Code",
           "OpenCode",
           "Cline"
         ],
@@ -547,6 +549,62 @@
         "riskControls": [
           "never write private memories into versioned rules without explicit approval",
           "show activation mode and scope before saving"
+        ],
+        "status": "integrated_contract",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "claw-style-command-orchestration",
+        "labelKo": "Claw식 명령/팀 오케스트레이션",
+        "labelEn": "Claw-style command and team orchestration",
+        "sourcePlatforms": [
+          "Claw Code",
+          "OpenCode",
+          "Claude Code"
+        ],
+        "observedStrength": "The public Claw Code docs frame agent work around slash commands, team-style parallel review, persistent execution loops, skills discovery, config inspection, and CLI bootstrap/init flows.",
+        "platformDecision": "Expose agent commands, task pipe presets, team/review lanes, skills, and init/doctor/status actions as platform-managed command palette entries instead of hiding them in ad hoc terminal prompts.",
+        "productSection": "agents",
+        "userValueKo": "사용자는 터미널 명령을 외우지 않고, 에이전트 팀 실행과 검증 루프를 앱의 명령/프리셋으로 시작한다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "Claw Code optional adapter",
+          "command palette entries for init, status, doctor, skills, and team review",
+          "task pipe lane for orchestration critique",
+          "setup guidance when claw is missing"
+        ],
+        "riskControls": [
+          "public-source-only transfer",
+          "no copied source or assets"
+        ],
+        "status": "integrated_contract",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "manifest-parity-gap-audits",
+        "labelKo": "매니페스트와 parity gap 감사",
+        "labelEn": "Manifest and parity-gap audits",
+        "sourcePlatforms": [
+          "Claw Code",
+          "Continue",
+          "Aider"
+        ],
+        "observedStrength": "The Claw Code public docs keep implementation surfaces, command/tool inventories, verification commands, and parity gaps explicit so incomplete ports do not look complete.",
+        "platformDecision": "Keep every adapter, runtime surface, source editor capability, and generated command family tied to a manifest, parity gap, readiness test, and user-visible capability state.",
+        "productSection": "intent",
+        "userValueKo": "사용자는 실제 구현된 것과 아직 계약/대기 상태인 것을 구분하고, 불완전한 기능을 완성품으로 오해하지 않는다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "capability parity matrix for each CLI adapter",
+          "adapter command inventory in accumulated data",
+          "readiness guard for supported adapter list",
+          "customer-visible status labels for implemented versus integrated_contract"
+        ],
+        "riskControls": [
+          "do not mark source-unverified references as copied implementation",
+          "record clone/license limitation"
         ],
         "status": "integrated_contract",
         "priority": "p0",

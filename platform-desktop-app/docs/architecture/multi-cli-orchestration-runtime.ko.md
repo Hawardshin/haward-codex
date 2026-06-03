@@ -2,7 +2,7 @@
 
 ## 목적
 
-이 문서는 `platform-desktop-app`이 먼저 실행되는 platform-first host runtime이 되고, Claude Code CLI, Gemini CLI, Codex CLI, OpenCode 같은 AI CLI를 그 위의 guest adapter lane으로 동시에 활용하되 어느 하나에도 종속되지 않는 설치형 데스크톱 플랫폼이 되기 위한 런타임 구조를 정의한다.
+이 문서는 `platform-desktop-app`이 먼저 실행되는 platform-first host runtime이 되고, Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, Claw Code 같은 AI CLI를 그 위의 guest adapter lane으로 동시에 활용하되 어느 하나에도 종속되지 않는 설치형 데스크톱 플랫폼이 되기 위한 런타임 구조를 정의한다.
 
 핵심 결론은 다음이다.
 

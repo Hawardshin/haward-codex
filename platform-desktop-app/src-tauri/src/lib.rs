@@ -948,6 +948,13 @@ static ADAPTERS: &[AdapterDefinition] = &[
         version_args: &["--version"],
         session_args: &[],
     },
+    AdapterDefinition {
+        adapter_id: "claw-code-cli",
+        label: "Claw Code",
+        command: "claw",
+        version_args: &["--version"],
+        session_args: &[],
+    },
 ];
 
 static PLATFORM_IMPROVEMENT_LANES: &[PipelineLaneDefinition] = &[
@@ -968,6 +975,12 @@ static PLATFORM_IMPROVEMENT_LANES: &[PipelineLaneDefinition] = &[
         adapter_id: "gemini-cli",
         role: "research and alternative-discovery lane",
         prompt_suffix: "Look for comparable patterns and source-backed alternatives, then summarize uncertainty.",
+    },
+    PipelineLaneDefinition {
+        lane_id: "orchestration_lane",
+        adapter_id: "claw-code-cli",
+        role: "slash-command and team-orchestration critique lane",
+        prompt_suffix: "Review whether this task should become a slash command, team lane, skill, hook, plugin, or parity-gap record before merge.",
     },
     PipelineLaneDefinition {
         lane_id: "fallback_build_lane",
@@ -1024,7 +1037,7 @@ static PIPELINE_PRESETS: &[PipelineTaskPreset] = &[
         task_kind: "platform_improvement_pipe",
         label: "Platform Improvement Pipe",
         intent:
-            "Initialize implementation, review, research, and fallback lanes for platform changes.",
+            "Initialize implementation, review, research, orchestration, and fallback lanes for platform changes.",
         lanes: PLATFORM_IMPROVEMENT_LANES,
         merge_gate: "platform_merge_gate",
     },
@@ -5244,7 +5257,13 @@ fn normalize_desktop_preferences(preferences: DesktopPreferences) -> DesktopPref
         runtime_init_defaults: DesktopRuntimeInitDefaults {
             adapter_id: normalize_one_of(
                 preferences.runtime_init_defaults.adapter_id,
-                &["claude-code-cli", "gemini-cli", "codex-cli", "opencode-cli"],
+                &[
+                    "claude-code-cli",
+                    "gemini-cli",
+                    "codex-cli",
+                    "opencode-cli",
+                    "claw-code-cli",
+                ],
                 &runtime_defaults.adapter_id,
             ),
             session_mode_id: normalize_one_of(

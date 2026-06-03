@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the runtime shape for making `platform-desktop-app` a platform-first host runtime that launches before Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, and future AI CLIs, then uses those tools as guest adapter lanes without depending on any single one.
+This document defines the runtime shape for making `platform-desktop-app` a platform-first host runtime that launches before Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, Claw Code, and future AI CLIs, then uses those tools as guest adapter lanes without depending on any single one.
 
 Core conclusions:
 

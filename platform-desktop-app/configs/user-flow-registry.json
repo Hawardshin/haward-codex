@@ -12,7 +12,7 @@
       "Read failure_recovery_flows before adding background processes, CLI adapters, local services, or updates."
     ],
     "owner": "platform-desktop-app",
-    "last_reviewed": "2026-06-02",
+    "last_reviewed": "2026-06-04",
     "update_triggers": [
       "The desktop shell framework changes.",
       "The app adds real installer, updater, sidecar, local service, or CLI execution.",
@@ -238,7 +238,7 @@
     },
     {
       "field": "ai_cli_orchestration_flow",
-      "meaning": "How Claude Code, Gemini CLI, Codex CLI, OpenCode, and future AI CLIs are selected, run, paused, merged, and observed.",
+      "meaning": "How Claude Code, Gemini CLI, Codex CLI, OpenCode, Claw Code, and future AI CLIs are selected, run, paused, merged, and observed.",
       "required": true
     },
     {
@@ -592,7 +592,7 @@
       "step": "select_capabilities",
       "screen": "Task preflight",
       "required_behavior": [
-        "show Claude Code, Gemini CLI, Codex CLI, OpenCode, and future adapters as optional capability choices",
+        "show Claude Code, Gemini CLI, Codex CLI, OpenCode, Claw Code, and future adapters as optional capability choices",
         "show availability, version, auth/session status, permission scope, and setup-later action",
         "disable missing adapters with capability_missing instead of blocking the task"
       ]
@@ -796,7 +796,7 @@
     {
       "id": "ai_cli_orchestration",
       "priority": "must",
-      "purpose": "After the platform is already open, select Claude Code, Gemini CLI, Codex CLI, OpenCode, or future CLI guest lanes and preview process graph constraints."
+      "purpose": "After the platform is already open, select Claude Code, Gemini CLI, Codex CLI, OpenCode, Claw Code, or future CLI guest lanes and preview process graph constraints."
     },
     {
       "id": "terminal_and_code_workspace",
@@ -862,7 +862,7 @@
     "Optional CLI and notification setup can be deferred.",
     "Task execution shows active phase, elapsed time, evidence, artifacts, decisions, and verification state.",
     "The platform-first app opens before any AI CLI and owns the durable task state, decision inbox, artifacts, validation, and UI authority.",
-    "AI CLI orchestration can show Claude Code, Gemini CLI, Codex CLI, and OpenCode as optional guest adapters without making any one CLI or commercial assistant host mandatory.",
+    "AI CLI orchestration can show Claude Code, Gemini CLI, Codex CLI, OpenCode, and Claw Code as optional guest adapters without making any one CLI or commercial assistant host mandatory.",
     "A user can choose a task pipe preset and initialize several optional CLI lanes from one task intake, with stdin init, stdout/stderr capture, decision inbox routing, and merge gate edges visible.",
     "Interactive CLI questions route to decision inbox and pause only dependent lanes.",
     "Terminal output is visible in lane context, but durable platform state is stored as structured records with retention and redaction policy.",

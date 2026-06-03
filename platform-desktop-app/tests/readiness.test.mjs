@@ -206,6 +206,7 @@ test("desktop registry records multi-CLI supervisor contract", () => {
   assert.match(serialized, /Gemini CLI/);
   assert.match(serialized, /Codex CLI/);
   assert.match(serialized, /OpenCode/);
+  assert.match(serialized, /Claw Code/);
 });
 
 test("Claude Code design transfer registry uses public-source boundary", () => {
@@ -231,10 +232,13 @@ test("reference platform advantage registry transfers researched strengths into 
   assert.match(serialized, /permission-hooks-checkpoints/);
   assert.match(serialized, /native-install-runtime-boundary/);
   assert.match(serialized, /command-palette-extension-catalog/);
+  assert.match(serialized, /claw-style-command-orchestration/);
+  assert.match(serialized, /manifest-parity-gap-audits/);
   assert.match(serialized, /security-first-agentic-boundaries/);
   assert.match(serialized, /VS Code/);
   assert.match(serialized, /GitHub Copilot cloud agent/);
   assert.match(serialized, /OpenHands/);
+  assert.match(serialized, /Claw Code/);
   assert.ok(registry.transfer_patterns.length >= 10);
 });
 
@@ -367,7 +371,7 @@ test("shared CLI adapter registry defines concrete AI CLI targets", () => {
   const registry = JSON.parse(readFileSync(join(root, "../agent-platform/configs/integrations/cli-adapter-registry.json"), "utf8"));
   const ids = registry.supported_ai_cli_adapters.map((adapter) => adapter.adapter_id);
 
-  for (const id of ["claude-code-cli", "gemini-cli", "codex-cli", "opencode-cli"]) {
+  for (const id of ["claude-code-cli", "gemini-cli", "codex-cli", "opencode-cli", "claw-code-cli"]) {
     assert.ok(ids.includes(id));
   }
   assert.equal(registry.platform_principle.host_runtime_model, "platform_first");

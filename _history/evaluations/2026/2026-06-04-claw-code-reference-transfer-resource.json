@@ -1,0 +1,22 @@
+{
+  "schema_version": "resource-check.v1",
+  "request_id": "UR-2026-06-04-002",
+  "resource_risk_occurred": true,
+  "status": "completed",
+  "runtime_resources_touched": [
+    "Tauri CLI adapter process definition",
+    "platform improvement task pipe lane definition",
+    "Workspace Monitor polling/display fallback state"
+  ],
+  "controls": [
+    "Claw Code remains optional and missing binary returns capability_missing",
+    "No install, bundled binary, sidecar, daemon, or long-running process was added",
+    "Existing bounded stdout/stderr, timeout, cancellation, and task-run persistence contracts remain in place",
+    "No new dependency or global environment change occurred"
+  ],
+  "verification_targets": [
+    "cargo check through platform-desktop-app check",
+    "platform-desktop-app readiness test",
+    "workspace-monitor build/test/perf"
+  ]
+}

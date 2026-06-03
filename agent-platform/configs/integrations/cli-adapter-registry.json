@@ -9,12 +9,12 @@
       "Read integration_layers to understand which layer owns UI, platform logic, adapter contracts, and external CLI execution.",
       "Read structure_rules before adding a CLI so a missing tool degrades gracefully instead of breaking the platform.",
       "Read cli_adapter_contract and execution_contract before designing a concrete adapter.",
-      "Read supported_ai_cli_adapters before exposing Claude Code, Gemini CLI, Codex CLI, or OpenCode in the desktop app.",
+      "Read supported_ai_cli_adapters before exposing Claude Code, Gemini CLI, Codex CLI, OpenCode, or Claw Code in the desktop app.",
       "Read interactive_cli_contract before routing terminal questions, pauses, and resumes.",
       "Read installation_policy before installing or bundling a CLI dependency."
     ],
     "owner": "agent-platform",
-    "last_reviewed": "2026-06-02",
+    "last_reviewed": "2026-06-04",
     "update_triggers": [
       "A new CLI capability is added to the platform or desktop app.",
       "A CLI is promoted from optional local tool to required dependency.",
@@ -193,6 +193,19 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "claw_code_repo",
+      "title": "Hawardshin/claw-code",
+      "url": "https://github.com/Hawardshin/claw-code",
+      "source_type": "user_referenced_repo",
+      "used_for": [
+        "Claw Code optional guest adapter target",
+        "slash command, skill, MCP, plugin, hook, runtime manifest, and parity-gap reference patterns",
+        "clean-room architecture transfer boundary without copying source"
+      ],
+      "last_checked": "2026-06-04",
+      "limitations": "Repository clone returned 403 disabled during this work. Public GitHub page plus raw README/CLAW/PARITY documents were reachable; no source or license file was copied into this repository."
+    },
+    {
       "id": "agent_client_protocol",
       "title": "Agent Client Protocol",
       "url": "https://agentclientprotocol.com/get-started/introduction",
@@ -305,7 +318,7 @@
     },
     {
       "id": "platform_is_primary_host_runtime",
-      "rule": "The installed platform is the primary host runtime. Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or any other commercial assistant tool may attach as guest adapters, but must not own the workspace source of truth, durable memory, task state, decision inbox, validation gates, or UI authority.",
+      "rule": "The installed platform is the primary host runtime. Codex, Gemini CLI, Claude Code CLI, OpenCode, Claw Code, Cursor, Antigravity, or any other commercial assistant tool may attach as guest adapters, but must not own the workspace source of truth, durable memory, task state, decision inbox, validation gates, or UI authority.",
       "reason": "The target product starts from the platform itself, then mounts external AI CLIs on top as replaceable execution providers.",
       "applies_to": [
         "platform_principle",
@@ -317,7 +330,7 @@
     {
       "id": "cli_tools_are_attached_capabilities",
       "rule": "Treat each CLI as an attached capability behind an adapter contract with availability checks, version checks, permission scope, output contract, and fallback behavior.",
-      "reason": "Loose coupling keeps the platform usable across Claude Code, Gemini CLI, Codex CLI, OpenCode, package managers, deployment tools, and future CLIs.",
+      "reason": "Loose coupling keeps the platform usable across Claude Code, Gemini CLI, Codex CLI, OpenCode, Claw Code, package managers, deployment tools, and future CLIs.",
       "applies_to": [
         "cli_adapter_contract",
         "capability_classes"
@@ -729,6 +742,20 @@
       "runtime_role": "guest_adapter_on_platform",
       "source_reference": "opencode_docs",
       "implementation_gate": "availability, version, provider-key posture, output parsing, missing-cli fallback, timeout, and redaction tests before execution"
+    },
+    {
+      "adapter_id": "claw-code-cli",
+      "display_name": "Claw Code",
+      "capability_class": "ai_assistant_cli",
+      "default_state": "optional_supported",
+      "expected_command_candidates": [
+        "claw",
+        "claw-code"
+      ],
+      "setup_posture": "user_supplied_or_project_documented",
+      "runtime_role": "guest_adapter_on_platform",
+      "source_reference": "claw_code_repo",
+      "implementation_gate": "availability, version, auth/session posture, slash-command and team-mode surface, skills/MCP/sandbox posture, output parsing, missing-cli fallback, timeout, and redaction tests before execution"
     }
   ],
   "interactive_cli_contract": {
@@ -842,6 +869,7 @@
         "Gemini CLI",
         "Codex CLI",
         "OpenCode",
+        "Claw Code",
         "Cursor CLI or command hooks",
         "Antigravity adapter commands"
       ],

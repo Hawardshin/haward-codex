@@ -434,7 +434,7 @@ if (!productGapSerialized.includes("monitoring polish") || !productGapSerialized
 
 const userFlowRegistry = readJson("configs/user-flow-registry.json");
 const userFlowSerialized = JSON.stringify(userFlowRegistry);
-for (const requiredPhrase of ["ai_cli_orchestration_flow", "Claude Code", "Gemini CLI", "Codex CLI", "OpenCode"]) {
+for (const requiredPhrase of ["ai_cli_orchestration_flow", "Claude Code", "Gemini CLI", "Codex CLI", "OpenCode", "Claw Code"]) {
   if (!userFlowSerialized.includes(requiredPhrase)) {
     failures.push(`user-flow-registry must include ${requiredPhrase}`);
   }
@@ -987,7 +987,7 @@ for (const requiredPhrase of [
 
 const adapterRegistry = readJson("../agent-platform/configs/integrations/cli-adapter-registry.json");
 const adapterSerialized = JSON.stringify(adapterRegistry);
-for (const requiredPhrase of ["supported_ai_cli_adapters", "interactive_cli_contract", "terminal_io_contract", "claude-code-cli", "gemini-cli", "codex-cli", "opencode-cli"]) {
+for (const requiredPhrase of ["supported_ai_cli_adapters", "interactive_cli_contract", "terminal_io_contract", "claude-code-cli", "gemini-cli", "codex-cli", "opencode-cli", "claw-code-cli"]) {
   if (!adapterSerialized.includes(requiredPhrase)) {
     failures.push(`cli-adapter-registry must include ${requiredPhrase}`);
   }

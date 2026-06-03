@@ -1467,7 +1467,8 @@ const fallbackDesktopAdapters: CliAdapterStatus[] = [
   { adapterId: "claude-code-cli", label: "Claude Code CLI", command: "claude", available: false, lastError: "Desktop runtime unavailable." },
   { adapterId: "gemini-cli", label: "Gemini CLI", command: "gemini", available: false, lastError: "Desktop runtime unavailable." },
   { adapterId: "codex-cli", label: "Codex CLI", command: "codex", available: false, lastError: "Desktop runtime unavailable." },
-  { adapterId: "opencode-cli", label: "OpenCode", command: "opencode", available: false, lastError: "Desktop runtime unavailable." }
+  { adapterId: "opencode-cli", label: "OpenCode", command: "opencode", available: false, lastError: "Desktop runtime unavailable." },
+  { adapterId: "claw-code-cli", label: "Claw Code", command: "claw", available: false, lastError: "Desktop runtime unavailable." }
 ];
 
 const adapterSetupGuides: Record<string, AdapterSetupGuide> = {
@@ -1494,6 +1495,12 @@ const adapterSetupGuides: Record<string, AdapterSetupGuide> = {
     verifyCommand: "opencode --version",
     sourceUrl: "https://opencode.ai/docs/cli/",
     caution: "Confirm PATH resolves the expected binary."
+  },
+  "claw-code-cli": {
+    installHint: "Use the project-documented Claw Code install path, then ensure `claw` is on PATH.",
+    verifyCommand: "claw --version",
+    sourceUrl: "https://github.com/Hawardshin/claw-code",
+    caution: "The referenced repository was disabled for clone during review; verify source, license, and binary provenance before installing or bundling."
   }
 };
 
@@ -1532,9 +1539,9 @@ const fallbackTaskPipePresets: CliTaskPipelinePresetReport[] = [
   {
     taskKind: "platform_improvement_pipe",
     label: "Platform Improvement Pipe",
-    intent: "Implementation, review, research, and fallback lanes initialize from one task intake.",
-    laneCount: 4,
-    adapterIds: ["codex-cli", "claude-code-cli", "gemini-cli", "opencode-cli"],
+    intent: "Implementation, review, research, orchestration, and fallback lanes initialize from one task intake.",
+    laneCount: 5,
+    adapterIds: ["codex-cli", "claude-code-cli", "gemini-cli", "claw-code-cli", "opencode-cli"],
     mergeGate: "platform_merge_gate"
   },
   {
@@ -6926,7 +6933,7 @@ function DesktopRuntimePanel({
           <p className="eyebrow">Desktop Runtime</p>
           <h2>Platform-first host</h2>
           <p>
-            플랫폼을 먼저 실행하고 그 위에 Codex, Gemini CLI, Claude Code CLI, OpenCode 같은 Guest adapters를 올립니다.
+            플랫폼을 먼저 실행하고 그 위에 Codex, Gemini CLI, Claude Code CLI, OpenCode, Claw Code 같은 Guest adapters를 올립니다.
             플랫폼은 task state, decision inbox, artifacts, validation, source editing을 소유하고 CLI는 선택 lane으로만 실행됩니다.
           </p>
         </div>

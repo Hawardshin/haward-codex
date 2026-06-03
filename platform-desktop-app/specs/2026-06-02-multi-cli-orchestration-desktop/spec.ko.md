@@ -2,7 +2,7 @@
 
 ## 목표
 
-설치형 데스크톱 앱이 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode를 선택형 capability로 설정하고, 여러 CLI를 동시에 감독하며, 질문/결정/출력/코드 편집/데이터 축적을 플랫폼 상태로 관리할 수 있는 제품 계약을 만든다.
+설치형 데스크톱 앱이 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, Claw Code를 선택형 capability로 설정하고, 여러 CLI를 동시에 감독하며, 질문/결정/출력/코드 편집/데이터 축적을 플랫폼 상태로 관리할 수 있는 제품 계약을 만든다.
 
 ## 요구사항
 

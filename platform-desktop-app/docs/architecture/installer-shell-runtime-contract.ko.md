@@ -14,7 +14,7 @@
 
 ## 실행 원칙
 
-설치 앱이 직접 띄우는 shell/runtime은 platform-first host다. Codex CLI, Claude Code CLI, Gemini CLI, OpenCode 같은 외부 도구는 guest adapter lane이며, 누락되면 `capability_missing`으로 degrade한다. task state, decision inbox, evidence, validation, evaluation, UI authority는 플랫폼이 소유한다.
+설치 앱이 직접 띄우는 shell/runtime은 platform-first host다. Codex CLI, Claude Code CLI, Gemini CLI, OpenCode, Claw Code 같은 외부 도구는 guest adapter lane이며, 누락되면 `capability_missing`으로 degrade한다. task state, decision inbox, evidence, validation, evaluation, UI authority는 플랫폼이 소유한다.
 
 ## 데이터 축적
 

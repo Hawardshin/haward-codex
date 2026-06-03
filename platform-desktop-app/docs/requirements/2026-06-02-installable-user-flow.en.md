@@ -16,7 +16,7 @@ These requirements define first-run, home, task execution, decision inbox, setti
 | PDA-UX-006 | User questions must be collected in a decision inbox, while independent work can continue. | must | decision_inbox_flow review |
 | PDA-UX-007 | Recovery flows must cover unreadable workspace, missing optional CLI, pending user decision, stale snapshot, and update failure. | must | failure_recovery_flows review |
 | PDA-UX-008 | Developer and superadmin modes should expose raw configs, validators, release gates, coordination, and source provenance. | should | developer_superadmin_flow review |
-| PDA-UX-009 | Task preflight shall show Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode as selectable CLI lanes with availability, version, auth, permission, and setup-later status. | must | `ai_cli_orchestration_flow` review |
+| PDA-UX-009 | Task preflight shall show Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, and Claw Code as selectable CLI lanes with availability, version, auth, permission, and setup-later status. | must | `ai_cli_orchestration_flow` review |
 | PDA-UX-010 | The run screen shall show terminal output for multiple CLI lanes while converting durable state into task events, artifacts, decisions, and validation records. | must | run timeline and data accumulation contract |
 | PDA-UX-011 | When a CLI asks a user question, the decision inbox handoff screen shall show the question, impact, default assumption, blocked lane, lanes that can continue, and resume action. | must | decision inbox flow and human decision inbox |
 | PDA-UX-012 | The source editing screen should prefer a validated editor surface such as Monaco Editor and center user mode on safe file scope plus change review. | should | source editor product acceptance |

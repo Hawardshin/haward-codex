@@ -1,9 +1,24 @@
 {
+  "schema_version": "2026-06-04",
   "name": "reference-platform-advantage-registry",
-  "version": "2026-06-03",
+  "version": "2026-06-04",
+  "purpose": "Tracks public desktop, AI IDE, agent engine, and native operator app references and records which product-strength patterns should be transferred into the installable agent workspace platform.",
   "reader_guide": {
-    "purpose": "유사 데스크톱/에이전트 플랫폼의 장점을 조사한 뒤 이 제품에 어떤 기능 패턴으로 반영할지 추적한다.",
-    "how_to_read": "reference_links는 근거, platform_groups는 제품군별 역할, transfer_patterns는 우리 플랫폼에 넣을 기능 단위다.",
+    "summary": "Use this registry to connect researched reference-platform strengths to concrete desktop-app product patterns, implementation targets, and safety boundaries.",
+    "how_to_read": [
+      "Read source_boundary first to understand which public sources are allowed and which copied assets are excluded.",
+      "Read reference_links as the evidence handle list; each item has the same planning use so source ids can be traced from transfer_patterns.",
+      "Read platform_groups to understand the reference categories and their role in this product.",
+      "Read transfer_patterns as the actual product backlog and contract transfer list."
+    ],
+    "owner": "platform-desktop-app",
+    "last_reviewed": "2026-06-04",
+    "update_triggers": [
+      "A new reference app, agent CLI, IDE, or native operator tool is used to justify product behavior.",
+      "A transfer pattern changes status, priority, implementation target, or risk control.",
+      "A source becomes unavailable, clone-disabled, license-unclear, or contradicted by a stronger source.",
+      "Customer snapshot or product navigation changes rely on this reference map."
+    ],
     "product_rule": "모니터링은 운영자 보조면이고, 사용자가 팔 수 있는 가치로 보는 첫 화면은 에이전트 오케스트레이션, 작업 환경, 개발 환경, 에이전트 생성, 학습 개선 루프다."
   },
   "source_boundary": {
@@ -12,6 +27,7 @@
     "accepted_source_types": [
       "official_docs",
       "open_source_docs",
+      "user_referenced_repo",
       "security_standard",
       "community_signal"
     ],
@@ -27,6 +43,10 @@
       "title": "Visual Studio Code user interface",
       "url": "https://code.visualstudio.com/docs/editing/userinterface",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "UI structure is documented, not a direct product strategy document.",
       "plan_impact": "Use one activity rail, a focused side bar, an editor center, and a bottom panel for terminal/output."
@@ -36,6 +56,10 @@
       "title": "IntelliJ Platform UI overview",
       "url": "https://plugins.jetbrains.com/docs/intellij/ui-overview.html",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Plugin SDK docs describe default workbench areas rather than AI workflows.",
       "plan_impact": "Use tool windows around the editor and avoid duplicate sidebars that compete for navigation."
@@ -45,6 +69,10 @@
       "title": "GitHub Copilot cloud agent",
       "url": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Cloud GitHub-centered flow differs from local desktop ownership.",
       "plan_impact": "Model task intake as research, plan, branch/workspace changes, validation, diff review, and PR/commit handoff."
@@ -54,6 +82,10 @@
       "title": "GitHub Copilot cloud agent risks and mitigations",
       "url": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/risks-and-mitigations",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "GitHub-specific controls need local equivalents.",
       "plan_impact": "Keep tool access, untrusted input, automation approval, and workflow approval visible in the platform."
@@ -63,6 +95,10 @@
       "title": "Claude Code overview",
       "url": "https://code.claude.com/docs/en/overview",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Product claims should be translated into platform-neutral patterns.",
       "plan_impact": "Support terminal, desktop, IDE-like diff review, multiple sessions, scheduled tasks, MCP, hooks, skills, and agent teams as replaceable capability lanes."
@@ -72,6 +108,10 @@
       "title": "Claude Code custom subagents",
       "url": "https://code.claude.com/docs/en/sub-agents",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Subagent details are Claude-specific.",
       "plan_impact": "Agent Factory must create specialized workers with separate context, explicit tools, permissions, memory, and resume behavior."
@@ -81,6 +121,10 @@
       "title": "Claude Code hooks",
       "url": "https://code.claude.com/docs/en/hooks",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Hook event names differ across tools.",
       "plan_impact": "Add platform-level pre-tool, permission, post-tool, failure, stop, and elicitation gates."
@@ -90,6 +134,10 @@
       "title": "Claude Code MCP",
       "url": "https://code.claude.com/docs/en/mcp",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "MCP examples are Claude-specific but the protocol and trust concerns generalize.",
       "plan_impact": "Surface MCP servers as scoped tool connectors with trust review, auth state, resource references, and elicitation dialogs."
@@ -99,6 +147,10 @@
       "title": "OpenHands key features",
       "url": "https://docs.openhands.dev/openhands/usage/key-features",
       "source_type": "open_source_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "OpenHands is a full agent system, not only a desktop shell.",
       "plan_impact": "Expose chat, changes, embedded editor, terminal, app preview, and browser lanes as separate workbench tabs."
@@ -108,6 +160,10 @@
       "title": "OpenHands Software Agent SDK",
       "url": "https://docs.openhands.dev/sdk",
       "source_type": "open_source_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "SDK adoption would need license, dependency, and sandbox review before bundling.",
       "plan_impact": "Treat software-agent infrastructure as modular engine candidates instead of hand-rolling every future agent capability."
@@ -117,6 +173,10 @@
       "title": "Cline overview",
       "url": "https://docs.cline.bot/cline-overview",
       "source_type": "open_source_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Cline is editor-extension-first.",
       "plan_impact": "Keep every file, command, browser, and tool action visible with explicit approval and checkpoint recovery."
@@ -126,6 +186,10 @@
       "title": "Devin Desktop Cascade memories and rules",
       "url": "https://docs.devin.ai/desktop/cascade/memories",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Devin/Windsurf product naming changed; use pattern, not brand-specific file paths.",
       "plan_impact": "Separate auto memories, explicit rules, manual workflows, and richer skills so users know what each setting does."
@@ -135,6 +199,10 @@
       "title": "Cursor agent overview",
       "url": "https://docs.cursor.com/en/agent/overview",
       "source_type": "official_docs_search_cache",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "medium",
       "limitation": "The public page redirected during direct fetch; search cache was used for content confirmation.",
       "plan_impact": "Use sidepane agent, diff review, chat tabs, checkpoints, terminal integration, history, and rules as feature checks."
@@ -144,6 +212,10 @@
       "title": "Cursor background agents",
       "url": "https://docs.cursor.com/background-agent",
       "source_type": "official_docs_search_cache",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "medium",
       "limitation": "The public page redirected during direct fetch; search cache was used for content confirmation.",
       "plan_impact": "Use asynchronous task agents, remote/isolated machine setup, branch handoff, terminal startup commands, and takeover affordances."
@@ -153,6 +225,10 @@
       "title": "Continue AI pull request checks",
       "url": "https://docs.continue.dev/",
       "source_type": "open_source_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Current Continue docs emphasize PR checks rather than a full local workbench.",
       "plan_impact": "Convert quality rules into markdown checks that can become validation gates and failure-to-fix suggestions."
@@ -162,6 +238,10 @@
       "title": "Aider documentation",
       "url": "https://aider.chat/docs/",
       "source_type": "open_source_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Terminal-first UX needs desktop wrapping for non-CLI users.",
       "plan_impact": "Keep git-native local editing, repo maps, lint/test loops, and scriptability available through guest CLI lanes."
@@ -171,15 +251,36 @@
       "title": "OpenCode docs",
       "url": "https://opencode.ai/docs/",
       "source_type": "open_source_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Terminal-first assumptions need native workbench controls.",
       "plan_impact": "Use project initialization, AGENTS.md generation, @ file search, plan/build mode split, and multi-provider config patterns."
+    },
+    {
+      "id": "claw_code_repo",
+      "title": "Hawardshin/claw-code",
+      "url": "https://github.com/Hawardshin/claw-code",
+      "source_type": "user_referenced_repo",
+      "used_for": [
+        "Claw Code optional adapter and clean-room reference transfer planning"
+      ],
+      "last_checked": "2026-06-04",
+      "reliability": "medium",
+      "limitation": "Direct clone returned 403 disabled during this work, and no license file was verified. Public GitHub page plus raw README/CLAW/PARITY documents were reachable, so only architecture and product patterns are transferred.",
+      "plan_impact": "Add Claw Code as an optional CLI guest adapter and transfer slash-command orchestration, skills/MCP/runtime manifest, hook/plugin gap tracking, and parity-audit patterns without copying source."
     },
     {
       "id": "tauri_sidecar",
       "title": "Tauri sidecar binaries",
       "url": "https://v2.tauri.app/develop/sidecar/",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Sidecars need platform-specific binaries and explicit capabilities.",
       "plan_impact": "Bundle local engines as sidecars only with clear permissions, args, runtime contracts, and rollback."
@@ -189,6 +290,10 @@
       "title": "Tauri distribution and signing",
       "url": "https://v2.tauri.app/distribute/",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Public release still needs signing/notarization credentials.",
       "plan_impact": "Keep internal test app, customer bundle, public release, signing, notarization, and updater gates distinct."
@@ -198,6 +303,10 @@
       "title": "OWASP LLM01 prompt injection",
       "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
       "source_type": "security_standard",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Mitigations reduce risk but do not prove safety.",
       "plan_impact": "Treat external content and connected tools as untrusted, enforce least privilege, structured validation, and human approval for high-risk actions."
@@ -207,6 +316,10 @@
       "title": "MCP security best practices",
       "url": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices",
       "source_type": "security_standard",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "MCP security guidance must be combined with local OS and credential boundaries.",
       "plan_impact": "Use scoped MCP servers, consent boundaries, token handling, local server compromise controls, and tool search to reduce context and risk."
@@ -216,6 +329,10 @@
       "title": "Docker Desktop docs",
       "url": "https://docs.docker.com/desktop/",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Container management differs from AI agent orchestration.",
       "plan_impact": "Use one-click install, centralized dashboard, settings, troubleshooting, integrated terminal, extensions, notifications, and resource visibility as native-app patterns."
@@ -225,6 +342,10 @@
       "title": "GitHub Desktop docs",
       "url": "https://docs.github.com/desktop",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-04",
       "reliability": "high",
       "limitation": "GitHub Desktop does not solve AI orchestration itself.",
       "plan_impact": "Use visual confirmation of changes, branch workflows, commit attribution, push/pull, clone, and PR creation as the Git workbench baseline."
@@ -234,17 +355,45 @@
       "title": "Raycast extensions manual",
       "url": "https://manual.raycast.com/extensions",
       "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Launcher UX is a support pattern, not the full product shell.",
       "plan_impact": "Use command palette, extension store, tool selection, background updates, and fast keyboard-first actions for capability launch."
     }
   ],
   "structure_rules": [
-    "Each transfer pattern must name source platforms, the observed strength, the platform decision, current assets, implementation targets, risk controls, status, priority, and source ids.",
-    "Patterns with queued_p0 status must map to a concrete UI/runtime surface, not a vague roadmap item.",
-    "Customer snapshots may show summary and product value, but internal research files and local source paths must not be required for customer use."
+    {
+      "id": "transfer_patterns_are_traceable",
+      "rule": "Each transfer pattern must name source platforms, observed strength, platform decision, current assets, implementation targets, risk controls, status, priority, and source ids.",
+      "reason": "Reference inspiration must become a concrete product contract rather than vague imitation.",
+      "applies_to": [
+        "transfer_patterns"
+      ]
+    },
+    {
+      "id": "queued_p0_maps_to_surface",
+      "rule": "Patterns with queued_p0 status must map to a concrete UI or runtime surface.",
+      "reason": "High-priority product gaps should not remain abstract roadmap language.",
+      "applies_to": [
+        "transfer_patterns",
+        "product_position"
+      ]
+    },
+    {
+      "id": "customer_snapshot_is_summary_only",
+      "rule": "Customer snapshots may show summary and product value, but internal research files and local source paths must not be required for customer use.",
+      "reason": "The installed product should not expose development repository internals as required user knowledge.",
+      "applies_to": [
+        "source_boundary",
+        "reference_links",
+        "transfer_patterns"
+      ]
+    }
   ],
-  "field_guide": {
+  "value_guide": {
     "status": {
       "implemented": "이미 화면 또는 실행 흐름에 반영된 기능",
       "integrated_contract": "런타임/문서/레지스트리 계약에 반영됐지만 네이티브 구현 보강이 남은 기능",
@@ -257,6 +406,33 @@
       "p2": "보조 개선"
     }
   },
+  "field_guide": [
+    {
+      "field": "source_boundary",
+      "meaning": "Allowed and excluded evidence boundaries for using reference platforms.",
+      "required": true
+    },
+    {
+      "field": "reference_links",
+      "meaning": "Public source handles used to ground transfer patterns.",
+      "required": true
+    },
+    {
+      "field": "platform_groups",
+      "meaning": "Reference platform categories and the role each category plays in this product.",
+      "required": true
+    },
+    {
+      "field": "transfer_patterns",
+      "meaning": "Concrete feature and architecture patterns transferred into the desktop product contract.",
+      "required": true
+    },
+    {
+      "field": "value_guide",
+      "meaning": "Allowed status and priority values for transfer pattern triage.",
+      "required": true
+    }
+  ],
   "product_position": {
     "purpose": "레퍼런스 앱의 장점을 복사하는 것이 아니라, 에이전트 플랫폼의 핵심 작업 루프에 맞춰 재구성한다.",
     "primary_rule": "작업 시작, 에이전트 오케스트레이션, 파일/코드 조작, 검증, 학습 개선이 첫 화면의 중심이어야 한다.",
@@ -298,10 +474,11 @@
         "Cline",
         "Aider",
         "OpenCode",
+        "Claw Code",
         "Continue"
       ],
       "role": "engine_and_capability_reference",
-      "strongest_advantage": "tool approval, CLI/scriptability, SDKs, PR checks, embedded editor/terminal/browser lanes",
+      "strongest_advantage": "tool approval, CLI/scriptability, SDKs, PR checks, slash-command orchestration, skills/MCP surfaces, embedded editor/terminal/browser lanes",
       "transfer_rule": "성숙한 오픈소스 기능은 게스트 어댑터 또는 엔진 후보로 평가하되, 플랫폼의 데이터/권한/검증 경계가 우선한다."
     },
     {
@@ -401,6 +578,7 @@
       "source_platforms": [
         "Devin Desktop / Windsurf",
         "Claude Code",
+        "Claw Code",
         "OpenCode",
         "Cline"
       ],
@@ -428,8 +606,87 @@
       "source_ids": [
         "devin_cascade_memories_rules",
         "claude_code_subagents",
+        "claw_code_repo",
         "opencode_docs",
         "cline_overview"
+      ]
+    },
+    {
+      "id": "claw-style-command-orchestration",
+      "label_ko": "Claw식 명령/팀 오케스트레이션",
+      "label_en": "Claw-style command and team orchestration",
+      "source_platforms": [
+        "Claw Code",
+        "OpenCode",
+        "Claude Code"
+      ],
+      "observed_strength": "The public Claw Code docs frame agent work around slash commands, team-style parallel review, persistent execution loops, skills discovery, config inspection, and CLI bootstrap/init flows.",
+      "platform_decision": "Expose agent commands, task pipe presets, team/review lanes, skills, and init/doctor/status actions as platform-managed command palette entries instead of hiding them in ad hoc terminal prompts.",
+      "product_section": "agents",
+      "user_value_ko": "사용자는 터미널 명령을 외우지 않고, 에이전트 팀 실행과 검증 루프를 앱의 명령/프리셋으로 시작한다.",
+      "current_platform_assets": [
+        "agent-platform/configs/integrations/cli-adapter-registry.json",
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/configs/user-flow-registry.json"
+      ],
+      "implementation_targets": [
+        "Claw Code optional adapter",
+        "command palette entries for init, status, doctor, skills, and team review",
+        "task pipe lane for orchestration critique",
+        "setup guidance when claw is missing"
+      ],
+      "risk_controls": [
+        "public-source-only transfer",
+        "no copied source or assets",
+        "missing adapter becomes capability_missing",
+        "license review required before any bundling"
+      ],
+      "status": "integrated_contract",
+      "priority": "p0",
+      "source_ids": [
+        "claw_code_repo",
+        "opencode_docs",
+        "claude_code_subagents",
+        "claude_code_hooks"
+      ]
+    },
+    {
+      "id": "manifest-parity-gap-audits",
+      "label_ko": "매니페스트와 parity gap 감사",
+      "label_en": "Manifest and parity-gap audits",
+      "source_platforms": [
+        "Claw Code",
+        "Continue",
+        "Aider"
+      ],
+      "observed_strength": "The Claw Code public docs keep implementation surfaces, command/tool inventories, verification commands, and parity gaps explicit so incomplete ports do not look complete.",
+      "platform_decision": "Keep every adapter, runtime surface, source editor capability, and generated command family tied to a manifest, parity gap, readiness test, and user-visible capability state.",
+      "product_section": "intent",
+      "user_value_ko": "사용자는 실제 구현된 것과 아직 계약/대기 상태인 것을 구분하고, 불완전한 기능을 완성품으로 오해하지 않는다.",
+      "current_platform_assets": [
+        "platform-desktop-app/configs/product-gap-registry.json",
+        "platform-desktop-app/scripts/check-readiness.mjs",
+        "platform-desktop-app/tests/readiness.test.mjs",
+        "_history/request-traces/"
+      ],
+      "implementation_targets": [
+        "capability parity matrix for each CLI adapter",
+        "adapter command inventory in accumulated data",
+        "readiness guard for supported adapter list",
+        "customer-visible status labels for implemented versus integrated_contract"
+      ],
+      "risk_controls": [
+        "do not mark source-unverified references as copied implementation",
+        "record clone/license limitation",
+        "validation must prove registry and runtime bridge agree"
+      ],
+      "status": "integrated_contract",
+      "priority": "p0",
+      "source_ids": [
+        "claw_code_repo",
+        "continue_checks",
+        "aider_docs"
       ]
     },
     {

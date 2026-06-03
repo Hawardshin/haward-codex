@@ -1165,7 +1165,7 @@ export function collectModeFunctionCatalog(repoRoot, viewModeCatalog, languageMo
     makeModeFunctionGroup({
       id: "cli_adapter",
       label: "CLI Adapter",
-      purpose: "Attaches Claude Code, Gemini CLI, Codex CLI, and OpenCode as optional guest capabilities.",
+      purpose: "Attaches Claude Code, Gemini CLI, Codex CLI, OpenCode, and Claw Code as optional guest capabilities.",
       selectorLocation: "Desktop / Capability Center and Run Board / Adapter",
       defaultMode: "",
       sourcePath: "agent-platform/configs/integrations/cli-adapter-registry.json",

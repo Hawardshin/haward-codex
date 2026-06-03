@@ -1,0 +1,26 @@
+{
+  "schema_version": "cli-pipeline-check.v1",
+  "request_id": "UR-2026-06-04-002",
+  "cli_pipeline_occurred": true,
+  "status": "completed",
+  "pipeline_changed": "platform_improvement_pipe",
+  "new_lane": {
+    "lane_id": "orchestration_lane",
+    "adapter_id": "claw-code-cli",
+    "role": "slash-command and team-orchestration critique lane",
+    "required": false,
+    "missing_behavior": "capability_missing"
+  },
+  "process_graph_controls": [
+    "task_intake_to_lane_stdin",
+    "lane_stdout_stderr_to_platform_event_store",
+    "lane_question_events_to_human_decision_inbox",
+    "lane_accepted_summary_to_merge_gate"
+  ],
+  "merge_gate": "platform_merge_gate",
+  "validation_targets": [
+    "Tauri task pipe preset lane count",
+    "Workspace Monitor fallback task pipe preset lane count",
+    "CLI adapter registry and readiness token alignment"
+  ]
+}

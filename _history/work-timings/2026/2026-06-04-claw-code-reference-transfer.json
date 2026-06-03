@@ -1,0 +1,27 @@
+{
+  "schema_version": "work-timing.v1",
+  "request_id": "UR-2026-06-04-002",
+  "started_at": "2026-06-04",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed"
+    },
+    {
+      "phase": "source_and_contract_review",
+      "status": "completed"
+    },
+    {
+      "phase": "implementation",
+      "status": "completed"
+    },
+    {
+      "phase": "documentation_and_trace",
+      "status": "completed"
+    },
+    {
+      "phase": "validation",
+      "status": "completed"
+    }
+  ]
+}
