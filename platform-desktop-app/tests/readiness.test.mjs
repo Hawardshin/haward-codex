@@ -142,20 +142,20 @@ test("product gap registry keeps unresolved user-request gaps visible", () => {
   }
 
   const agentFactoryGap = registry.gap_items.find((item) => item.gap_id === "agent_factory_creation_wizard");
-  assert.equal(agentFactoryGap.status, "missing_product_slice");
+  assert.equal(agentFactoryGap.status, "implemented_product_slice");
   assert.equal(agentFactoryGap.priority, "p0_product_gap");
   assert.match(JSON.stringify(agentFactoryGap.acceptance_to_close), /Desktop Agent Factory view/);
+  assert.match(JSON.stringify(agentFactoryGap.current_evidence), /create_agent_factory_proposal/);
 
   const learningGap = registry.gap_items.find((item) => item.gap_id === "learning_feedback_automation_loop");
-  assert.equal(learningGap.status, "partial_product_slice");
+  assert.equal(learningGap.status, "implemented_product_slice");
   assert.equal(learningGap.priority, "p0_product_gap");
   assert.match(JSON.stringify(learningGap.acceptance_to_close), /improvement candidates/);
+  assert.match(JSON.stringify(learningGap.current_evidence), /record_learning_improvement_decision/);
 
   const request35 = registry.request_coverage.find((item) => item.request_id === "UR-2026-06-03-035");
-  assert.deepEqual(request35.remaining_gap_ids, [
-    "agent_factory_creation_wizard",
-    "learning_feedback_automation_loop"
-  ]);
+  assert.equal(request35.coverage, "covered");
+  assert.deepEqual(request35.remaining_gap_ids, []);
   assert.match(serialized, /componentized_desktop_ui_architecture/);
   assert.match(serialized, /public_distribution_gates/);
   assert.match(serialized, /monitoring polish/);
@@ -251,6 +251,8 @@ test("installer shell runtime contract is bundled and enforceable", () => {
     "validation_and_evaluation",
     "work_timing",
     "support_diagnostic",
+    "agent_factory_proposals",
+    "learning_feedback_decisions",
     "accumulated_data_index"
   ]) {
     assert.match(serialized, new RegExp(target));
@@ -258,6 +260,14 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   assert.match(lib, /get_installer_shell_runtime_contract/);
   assert.match(lib, /get_accumulated_data_overview/);
   assert.equal(contract.runtime_command_surface.accumulated_data_command, "get_accumulated_data_overview");
+  const agentFactoryTarget = contract.data_accumulation_targets.find((target) => target.target_id === "agent_factory_proposals");
+  assert.equal(agentFactoryTarget.record_type, "agent_factory_proposal");
+  assert.equal(agentFactoryTarget.directory, "app_data/runtime-data/agent-factory/proposals");
+  const learningFeedbackTarget = contract.data_accumulation_targets.find((target) => target.target_id === "learning_feedback_decisions");
+  assert.equal(learningFeedbackTarget.record_type, "learning_feedback_decision");
+  assert.equal(learningFeedbackTarget.directory, "app_data/runtime-data/learning-feedback/decisions");
+  assert.ok(contract.runtime_command_surface.agent_factory_commands.includes("create_agent_factory_proposal"));
+  assert.ok(contract.runtime_command_surface.learning_feedback_commands.includes("record_learning_improvement_decision"));
   for (const preferencesCommand of ["get_desktop_preferences", "save_desktop_preferences"]) {
     assert.match(lib, new RegExp(preferencesCommand));
     assert.ok(contract.runtime_command_surface.preferences_commands.includes(preferencesCommand));
@@ -420,6 +430,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "read_workspace_text_file",
     "write_workspace_text_file",
     "choose_desktop_workspace_folder",
+    "create_agent_factory_proposal",
+    "record_learning_improvement_decision",
     "list_human_decision_inbox",
     "answer_human_decision",
     "answer_and_resume_human_decision"
@@ -628,6 +640,20 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "storageFormatVersion",
     "indexPath",
     "formatMigrationStatus",
+    "AgentFactoryWizard",
+    "Agent proposal 저장",
+    "create_agent_factory_proposal",
+    "agentFactoryPreviewSpec",
+    "agent-factory-wizard-panel",
+    "agent-factory-layout",
+    "agent_factory_proposals",
+    "LearningFeedbackLoopPanel",
+    "Decision 저장",
+    "record_learning_improvement_decision",
+    "buildLearningImprovementCandidates",
+    "learning-feedback-panel",
+    "learning-feedback-layout",
+    "learning_feedback_decisions",
     "list_cli_task_run_records",
     "taskPipePresets",
     "start_cli_task_pipeline",

@@ -113,6 +113,8 @@ for (const requiredTarget of [
   "validation_and_evaluation",
   "work_timing",
   "support_diagnostic",
+  "agent_factory_proposals",
+  "learning_feedback_decisions",
   "accumulated_data_index"
 ]) {
   failIf(!accumulationIds.has(requiredTarget), `data_accumulation_targets must include ${requiredTarget}`);
@@ -154,6 +156,20 @@ for (const preferencesCommand of ["get_desktop_preferences", "save_desktop_prefe
     `runtime_command_surface.preferences_commands must include ${preferencesCommand}`
   );
   failIf(!tauriLib.includes(preferencesCommand), `src-tauri/src/lib.rs must include ${preferencesCommand}`);
+}
+for (const agentFactoryCommand of ["create_agent_factory_proposal"]) {
+  failIf(
+    !(contract.runtime_command_surface?.agent_factory_commands ?? []).includes(agentFactoryCommand),
+    `runtime_command_surface.agent_factory_commands must include ${agentFactoryCommand}`
+  );
+  failIf(!tauriLib.includes(agentFactoryCommand), `src-tauri/src/lib.rs must include ${agentFactoryCommand}`);
+}
+for (const learningFeedbackCommand of ["record_learning_improvement_decision"]) {
+  failIf(
+    !(contract.runtime_command_surface?.learning_feedback_commands ?? []).includes(learningFeedbackCommand),
+    `runtime_command_surface.learning_feedback_commands must include ${learningFeedbackCommand}`
+  );
+  failIf(!tauriLib.includes(learningFeedbackCommand), `src-tauri/src/lib.rs must include ${learningFeedbackCommand}`);
 }
 for (const workspaceHostCommand of [
   "get_desktop_workspace_state",

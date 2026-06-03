@@ -188,6 +188,8 @@ for (const commandName of [
   "list_workspace_text_files",
   "read_workspace_text_file",
   "write_workspace_text_file",
+  "create_agent_factory_proposal",
+  "record_learning_improvement_decision",
   "list_human_decision_inbox",
   "answer_human_decision",
   "answer_and_resume_human_decision"
@@ -374,19 +376,22 @@ for (const requiredGapId of [
   }
 }
 const agentFactoryGap = productGapRegistry.gap_items?.find((item) => item.gap_id === "agent_factory_creation_wizard");
-if (agentFactoryGap?.status !== "missing_product_slice" || agentFactoryGap?.priority !== "p0_product_gap") {
-  failures.push("product-gap-registry must keep agent_factory_creation_wizard as a p0 missing product slice until implemented");
+if (agentFactoryGap?.status !== "implemented_product_slice" || agentFactoryGap?.priority !== "p0_product_gap") {
+  failures.push("product-gap-registry must mark agent_factory_creation_wizard as an implemented p0 product slice");
 }
 const learningLoopGap = productGapRegistry.gap_items?.find((item) => item.gap_id === "learning_feedback_automation_loop");
-if (learningLoopGap?.status !== "partial_product_slice" || learningLoopGap?.priority !== "p0_product_gap") {
-  failures.push("product-gap-registry must keep learning_feedback_automation_loop as a p0 partial product slice until implemented");
+if (learningLoopGap?.status !== "implemented_product_slice" || learningLoopGap?.priority !== "p0_product_gap") {
+  failures.push("product-gap-registry must mark learning_feedback_automation_loop as an implemented p0 product slice");
 }
 const agentFeatureCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === "UR-2026-06-03-035");
-if (!agentFeatureCoverage?.remaining_gap_ids?.includes("agent_factory_creation_wizard")) {
-  failures.push("UR-2026-06-03-035 coverage must keep the Agent Factory creation wizard gap visible");
+if (agentFeatureCoverage?.coverage !== "covered") {
+  failures.push("UR-2026-06-03-035 coverage must be covered after Agent Factory and learning loop implementation");
 }
-if (!agentFeatureCoverage?.remaining_gap_ids?.includes("learning_feedback_automation_loop")) {
-  failures.push("UR-2026-06-03-035 coverage must keep the learning feedback automation gap visible");
+if (agentFeatureCoverage?.remaining_gap_ids?.includes("agent_factory_creation_wizard")) {
+  failures.push("UR-2026-06-03-035 coverage must not keep the Agent Factory creation wizard gap after implementation");
+}
+if (agentFeatureCoverage?.remaining_gap_ids?.includes("learning_feedback_automation_loop")) {
+  failures.push("UR-2026-06-03-035 coverage must not keep the learning feedback automation gap after implementation");
 }
 if (!productGapSerialized.includes("monitoring polish") || !productGapSerialized.includes("p0_product_gap")) {
   failures.push("product-gap-registry must explicitly prioritize p0 product gaps over monitoring or cosmetic work");
@@ -714,6 +719,20 @@ for (const requiredPhrase of [
   "storageFormatVersion",
   "indexPath",
   "formatMigrationStatus",
+  "AgentFactoryWizard",
+  "Agent proposal 저장",
+  "create_agent_factory_proposal",
+  "agentFactoryPreviewSpec",
+  "agent-factory-wizard-panel",
+  "agent-factory-layout",
+  "agent_factory_proposals",
+  "LearningFeedbackLoopPanel",
+  "Decision 저장",
+  "record_learning_improvement_decision",
+  "buildLearningImprovementCandidates",
+  "learning-feedback-panel",
+  "learning-feedback-layout",
+  "learning_feedback_decisions",
   "runtime-data-panel",
   "Mode & Function Switchboard",
   "모드와 기능 선택 위치",

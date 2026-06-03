@@ -630,6 +630,103 @@ struct ServiceReadinessReport {
     service_claim: String,
 }
 
+#[derive(Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+struct AgentFactoryProposalInput {
+    agent_id: String,
+    label: String,
+    goal: String,
+    role: String,
+    tools: Vec<String>,
+    guardrails: Vec<String>,
+    validation_commands: Vec<String>,
+    output_contract: String,
+    owner_project: String,
+    target_path: String,
+    rollback_plan: String,
+}
+
+impl Default for AgentFactoryProposalInput {
+    fn default() -> Self {
+        Self {
+            agent_id: String::new(),
+            label: String::new(),
+            goal: String::new(),
+            role: String::new(),
+            tools: Vec::new(),
+            guardrails: Vec::new(),
+            validation_commands: Vec::new(),
+            output_contract: String::new(),
+            owner_project: "agent-platform".to_string(),
+            target_path: String::new(),
+            rollback_plan: String::new(),
+        }
+    }
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct AgentFactoryProposalReport {
+    status: String,
+    proposal_id: String,
+    proposal_path: String,
+    target_path: String,
+    created_at: String,
+    agent_id: String,
+    label: String,
+    validation_command: String,
+    rollback_plan: String,
+    spec: Value,
+}
+
+#[derive(Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+struct LearningImprovementDecisionInput {
+    candidate_id: String,
+    label: String,
+    source: String,
+    evidence: Vec<String>,
+    action: String,
+    asset_type: String,
+    target_path: String,
+    validation_command: String,
+    rollback_plan: String,
+    notes: String,
+}
+
+impl Default for LearningImprovementDecisionInput {
+    fn default() -> Self {
+        Self {
+            candidate_id: String::new(),
+            label: String::new(),
+            source: String::new(),
+            evidence: Vec::new(),
+            action: "defer".to_string(),
+            asset_type: "prompt".to_string(),
+            target_path: String::new(),
+            validation_command: String::new(),
+            rollback_plan: String::new(),
+            notes: String::new(),
+        }
+    }
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct LearningImprovementDecisionReport {
+    status: String,
+    decision_id: String,
+    decision_path: String,
+    created_at: String,
+    candidate_id: String,
+    action: String,
+    asset_type: String,
+    target_path: String,
+    validation_command: String,
+    rollback_plan: String,
+    record: Value,
+}
+
 const MAX_HEALTH_OUTPUT_BYTES: usize = 20_000;
 const HEALTH_TIMEOUT_MS: u64 = 2_500;
 const MAX_SESSION_OUTPUT_BYTES: usize = 100_000;
@@ -660,6 +757,9 @@ const MAX_GIT_REPOSITORY_URL_BYTES: usize = 2_048;
 const MAX_WORKSPACE_FOLDER_NAME_BYTES: usize = 120;
 const MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS: usize = 20;
 const MAX_SUPPORT_EVENT_CHARS: usize = 600;
+const MAX_FACTORY_FIELD_CHARS: usize = 4_000;
+const MAX_FACTORY_LIST_ITEMS: usize = 24;
+const MAX_FACTORY_LIST_ITEM_CHARS: usize = 500;
 
 const SOURCE_EDITOR_SKIP_DIRS: &[&str] = &[
     "_private",
@@ -1003,6 +1103,22 @@ fn clone_desktop_workspace(
     folder_name: Option<String>,
 ) -> Result<DesktopWorkspaceStateReport, String> {
     clone_desktop_workspace_report(&app, &repository_url, folder_name.as_deref())
+}
+
+#[tauri::command]
+fn create_agent_factory_proposal(
+    app: AppHandle,
+    input: AgentFactoryProposalInput,
+) -> Result<AgentFactoryProposalReport, String> {
+    create_agent_factory_proposal_report(&app, input)
+}
+
+#[tauri::command]
+fn record_learning_improvement_decision(
+    app: AppHandle,
+    input: LearningImprovementDecisionInput,
+) -> Result<LearningImprovementDecisionReport, String> {
+    record_learning_improvement_decision_report(&app, input)
 }
 
 #[tauri::command]
@@ -1754,6 +1870,8 @@ pub fn run() {
             set_desktop_workspace_path,
             choose_desktop_workspace_folder,
             clone_desktop_workspace,
+            create_agent_factory_proposal,
+            record_learning_improvement_decision,
             start_cli_adapter_session,
             start_cli_task_pipeline,
             poll_cli_adapter_session,
@@ -2751,6 +2869,22 @@ fn runtime_data_boundary_report(app: &AppHandle) -> Result<RuntimeDataBoundaryRe
         "Runtime agent scratch and work artifacts separated from reusable agent definitions.",
     )?);
     roots.push(runtime_root_report(
+        "agent_factory_proposals",
+        "Agent Factory Proposals",
+        "agent_factory_store",
+        agent_factory_proposals_base_path(app)?,
+        "user_visible_runtime_data",
+        "Drafted agent specs and proposal records created by the desktop Agent Factory wizard.",
+    )?);
+    roots.push(runtime_root_report(
+        "learning_feedback_decisions",
+        "Learning Feedback Decisions",
+        "learning_feedback_store",
+        learning_feedback_decisions_base_path(app)?,
+        "user_visible_runtime_data",
+        "Approved, rejected, deferred, or promoted improvement decisions from accumulated work evidence.",
+    )?);
+    roots.push(runtime_root_report(
         "support_bundles",
         "Support Bundles",
         "support_diagnostic_store",
@@ -2808,6 +2942,8 @@ fn accumulated_data_overview_report(
     let support_path = support_bundles_base_path(app)?;
     let payload_audit_path = payload_audits_base_path(app)?;
     let agent_workspace_path = agent_workspace_base_path(app)?;
+    let agent_factory_path = agent_factory_proposals_base_path(app)?;
+    let learning_feedback_path = learning_feedback_decisions_base_path(app)?;
     let runtime_store_path = runtime_data_store_base_path(app)?;
     let index_path = accumulated_data_index_path(app)?;
 
@@ -2817,6 +2953,8 @@ fn accumulated_data_overview_report(
         &support_path,
         &payload_audit_path,
         &agent_workspace_path,
+        &agent_factory_path,
+        &learning_feedback_path,
     ] {
         fs::create_dir_all(path)
             .map_err(|error| format!("Failed to create accumulated data store: {error}"))?;
@@ -2935,6 +3073,48 @@ fn accumulated_data_overview_report(
         "Runtime agent scratch, generated work artifacts, and task work folders.",
         "Inspect workspace",
         agent_workspace_stats.scan_truncated,
+    ));
+
+    let agent_factory_stats =
+        directory_data_stats(&agent_factory_path, MAX_ACCUMULATED_DATA_SCAN_FILES);
+    stores.push(accumulated_data_store_report(
+        "agent_factory_proposals",
+        "Agent Factory Proposals",
+        "agent proposal records",
+        "agent_factory_store",
+        &agent_factory_path,
+        count_immediate_files_with_extension(
+            &agent_factory_path,
+            "json",
+            MAX_ACCUMULATED_DATA_SCAN_FILES,
+        ),
+        agent_factory_stats.size_bytes,
+        directory_latest_modified_label(&agent_factory_stats),
+        "user_visible_runtime_data",
+        "Drafted agent specifications, target paths, validation commands, and rollback metadata.",
+        "Review proposal",
+        agent_factory_stats.scan_truncated,
+    ));
+
+    let learning_feedback_stats =
+        directory_data_stats(&learning_feedback_path, MAX_ACCUMULATED_DATA_SCAN_FILES);
+    stores.push(accumulated_data_store_report(
+        "learning_feedback_decisions",
+        "Learning Feedback Decisions",
+        "improvement decision records",
+        "learning_feedback_store",
+        &learning_feedback_path,
+        count_immediate_files_with_extension(
+            &learning_feedback_path,
+            "json",
+            MAX_ACCUMULATED_DATA_SCAN_FILES,
+        ),
+        learning_feedback_stats.size_bytes,
+        directory_latest_modified_label(&learning_feedback_stats),
+        "user_visible_runtime_data",
+        "Approval, rejection, deferral, or promotion records for improvement candidates.",
+        "Review decisions",
+        learning_feedback_stats.scan_truncated,
     ));
 
     let total_records = stores.iter().map(|store| store.count).sum();
@@ -3556,6 +3736,206 @@ fn support_bundles_base_path(app: &AppHandle) -> Result<PathBuf, String> {
 
 fn payload_audits_base_path(app: &AppHandle) -> Result<PathBuf, String> {
     Ok(runtime_data_store_base_path(app)?.join("payload-audits"))
+}
+
+fn agent_factory_proposals_base_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(runtime_data_store_base_path(app)?
+        .join("agent-factory")
+        .join("proposals"))
+}
+
+fn learning_feedback_decisions_base_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(runtime_data_store_base_path(app)?
+        .join("learning-feedback")
+        .join("decisions"))
+}
+
+fn create_agent_factory_proposal_report(
+    app: &AppHandle,
+    input: AgentFactoryProposalInput,
+) -> Result<AgentFactoryProposalReport, String> {
+    let goal = normalize_factory_text(&input.goal, "Goal")?;
+    let role = normalize_factory_text(&input.role, "Role")?;
+    let label = normalize_optional_factory_text(&input.label).unwrap_or_else(|| {
+        truncate_chars(
+            goal.split('.').next().unwrap_or("Generated Agent").trim(),
+            80,
+        )
+    });
+    let agent_id = normalize_agent_slug(
+        &input.agent_id,
+        &label,
+        &goal,
+        "generated-agent",
+    );
+    let owner_project = normalize_owner_project(&input.owner_project);
+    let target_path = normalize_proposal_target_path(
+        &input.target_path,
+        &owner_project,
+        &format!("{agent_id}.json"),
+    );
+    let validation_commands = normalize_factory_list(input.validation_commands);
+    let tools = normalize_factory_list(input.tools);
+    let guardrails = normalize_factory_list(input.guardrails);
+    let output_contract = normalize_optional_factory_text(&input.output_contract)
+        .unwrap_or_else(|| "Return a bounded result with evidence, validation status, and rollback notes.".to_string());
+    let rollback_plan = normalize_optional_factory_text(&input.rollback_plan)
+        .unwrap_or_else(|| format!("Remove or disable {target_path} and archive the proposal record."));
+    let created_at = current_unix_millis_label();
+    let proposal_id = format!(
+        "agent-proposal-{}-{agent_id}",
+        file_safe_timestamp_label()
+    );
+    let proposal_path = agent_factory_proposals_base_path(app)?.join(format!("{proposal_id}.json"));
+    let validation_command = validation_commands
+        .first()
+        .cloned()
+        .unwrap_or_else(|| {
+            format!(
+                "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/{agent_id}.json"
+            )
+        });
+
+    let spec = json!({
+        "schema_version": "agent-factory-proposal.v1",
+        "proposal_id": proposal_id,
+        "status": "drafted",
+        "created_at": created_at,
+        "target_path": target_path,
+        "agent": {
+            "id": agent_id,
+            "label": label,
+            "goal": goal,
+            "role": role,
+            "owner_project": owner_project,
+            "runtime_role": "bounded_capability",
+            "recommended_session_mode": "platform_improvement",
+            "recommended_task_pipe": "platform_improvement_pipe"
+        },
+        "tools": tools,
+        "guardrails": guardrails,
+        "output_contract": output_contract,
+        "validation": {
+            "commands": validation_commands,
+            "primary_command": validation_command,
+            "required_evidence": [
+                "agent spec inspection passes",
+                "request trace links source evidence",
+                "rollback plan remains actionable"
+            ]
+        },
+        "traceability": {
+            "source": "desktop_agent_factory_wizard",
+            "app_data_store": "agent_factory_proposals",
+            "rollback_plan": rollback_plan,
+            "privacy_boundary": "proposal stored in app-data runtime store, not bundled customer payload"
+        }
+    });
+
+    write_pretty_json(&proposal_path, &spec)?;
+
+    Ok(AgentFactoryProposalReport {
+        status: "proposal_created".to_string(),
+        proposal_id,
+        proposal_path: path_to_string(&proposal_path),
+        target_path,
+        created_at,
+        agent_id,
+        label,
+        validation_command,
+        rollback_plan,
+        spec,
+    })
+}
+
+fn record_learning_improvement_decision_report(
+    app: &AppHandle,
+    input: LearningImprovementDecisionInput,
+) -> Result<LearningImprovementDecisionReport, String> {
+    let label = normalize_factory_text(&input.label, "Candidate label")?;
+    let candidate_id = normalize_factory_slug(
+        &input.candidate_id,
+        &label,
+        &input.source,
+        "improvement-candidate",
+    );
+    let action = normalize_one_of(
+        input.action,
+        &["approve", "reject", "defer", "promote"],
+        "defer",
+    );
+    let asset_type = normalize_one_of(
+        input.asset_type,
+        &["prompt", "workflow", "template", "tool", "skill", "agent", "project_feature"],
+        "prompt",
+    );
+    let source = normalize_optional_factory_text(&input.source)
+        .unwrap_or_else(|| "desktop_learning_feedback_loop".to_string());
+    let evidence = normalize_factory_list(input.evidence);
+    let target_path = normalize_proposal_target_path(
+        &input.target_path,
+        "agent-platform",
+        &format!("{candidate_id}.json"),
+    );
+    let validation_command = normalize_optional_factory_text(&input.validation_command)
+        .unwrap_or_else(|| "record validation command before promotion".to_string());
+    let rollback_plan = normalize_optional_factory_text(&input.rollback_plan)
+        .unwrap_or_else(|| "Mark this improvement decision rejected or disabled and keep the source evidence for audit.".to_string());
+    let notes = normalize_optional_factory_text(&input.notes).unwrap_or_default();
+    let created_at = current_unix_millis_label();
+    let decision_id = format!(
+        "learning-decision-{}-{candidate_id}",
+        file_safe_timestamp_label()
+    );
+    let decision_path =
+        learning_feedback_decisions_base_path(app)?.join(format!("{decision_id}.json"));
+    let status = match action.as_str() {
+        "approve" | "promote" => "promotion_recorded",
+        "reject" => "rejection_recorded",
+        _ => "deferred_recorded",
+    }
+    .to_string();
+    let record = json!({
+        "schema_version": "learning-improvement-decision.v1",
+        "decision_id": decision_id,
+        "status": status,
+        "created_at": created_at,
+        "candidate": {
+            "id": candidate_id,
+            "label": label,
+            "source": source,
+            "evidence": evidence
+        },
+        "decision": {
+            "action": action,
+            "asset_type": asset_type,
+            "target_path": target_path,
+            "validation_command": validation_command,
+            "rollback_plan": rollback_plan,
+            "notes": notes
+        },
+        "traceability": {
+            "source": "desktop_learning_feedback_loop",
+            "app_data_store": "learning_feedback_decisions",
+            "privacy_boundary": "decision record stored in app-data runtime store, not bundled customer payload"
+        }
+    });
+
+    write_pretty_json(&decision_path, &record)?;
+
+    Ok(LearningImprovementDecisionReport {
+        status,
+        decision_id,
+        decision_path: path_to_string(&decision_path),
+        created_at,
+        candidate_id,
+        action,
+        asset_type,
+        target_path,
+        validation_command,
+        rollback_plan,
+        record,
+    })
 }
 
 fn run_installer_payload_audit_report(
@@ -5312,6 +5692,115 @@ fn sanitize_file_name(value: &str) -> String {
             }
         })
         .collect()
+}
+
+fn sanitize_slug(value: &str, fallback: &str) -> String {
+    let mut output = String::new();
+    let mut last_dash = false;
+    for character in value.to_lowercase().chars() {
+        if character.is_ascii_alphanumeric() {
+            output.push(character);
+            last_dash = false;
+        } else if !last_dash {
+            output.push('-');
+            last_dash = true;
+        }
+        if output.len() >= 80 {
+            break;
+        }
+    }
+    let trimmed = output.trim_matches('-').to_string();
+    if trimmed.is_empty() {
+        fallback.to_string()
+    } else {
+        trimmed
+    }
+}
+
+fn normalize_agent_slug(value: &str, label: &str, goal: &str, fallback: &str) -> String {
+    let source = if !value.trim().is_empty() {
+        value
+    } else if !label.trim().is_empty() {
+        label
+    } else {
+        goal
+    };
+    let slug = sanitize_slug(source, fallback);
+    if slug.ends_with("-agent") {
+        slug
+    } else {
+        format!("{slug}-agent")
+    }
+}
+
+fn normalize_factory_slug(value: &str, label: &str, source: &str, fallback: &str) -> String {
+    if !value.trim().is_empty() {
+        sanitize_slug(value, fallback)
+    } else if !label.trim().is_empty() {
+        sanitize_slug(label, fallback)
+    } else {
+        sanitize_slug(source, fallback)
+    }
+}
+
+fn normalize_factory_text(value: &str, label: &str) -> Result<String, String> {
+    let trimmed = value.trim();
+    if trimmed.is_empty() {
+        return Err(format!("{label} is required."));
+    }
+    if trimmed.chars().count() > MAX_FACTORY_FIELD_CHARS {
+        return Err(format!(
+            "{label} is too long. Max size is {MAX_FACTORY_FIELD_CHARS} chars."
+        ));
+    }
+    Ok(trimmed.to_string())
+}
+
+fn normalize_optional_factory_text(value: &str) -> Option<String> {
+    let trimmed = value.trim();
+    if trimmed.is_empty() {
+        return None;
+    }
+    Some(truncate_chars(trimmed, MAX_FACTORY_FIELD_CHARS))
+}
+
+fn normalize_factory_list(values: Vec<String>) -> Vec<String> {
+    let mut seen = HashSet::new();
+    values
+        .into_iter()
+        .flat_map(|value| {
+            value
+                .lines()
+                .map(str::trim)
+                .filter(|line| !line.is_empty())
+                .map(|line| truncate_chars(line, MAX_FACTORY_LIST_ITEM_CHARS))
+                .collect::<Vec<_>>()
+        })
+        .filter(|value| seen.insert(value.clone()))
+        .take(MAX_FACTORY_LIST_ITEMS)
+        .collect()
+}
+
+fn normalize_owner_project(value: &str) -> String {
+    sanitize_slug(value.trim(), "agent-platform")
+}
+
+fn normalize_proposal_target_path(value: &str, owner_project: &str, file_name: &str) -> String {
+    let trimmed = value.trim();
+    if trimmed.is_empty() {
+        return format!("{owner_project}/configs/agents/{file_name}");
+    }
+    let sanitized = trimmed
+        .split('/')
+        .filter(|part| !part.trim().is_empty() && *part != "." && *part != "..")
+        .map(|part| sanitize_file_name(part))
+        .filter(|part| !part.is_empty())
+        .collect::<Vec<_>>();
+    if sanitized.is_empty() {
+        format!("{owner_project}/configs/agents/{file_name}")
+    } else {
+        sanitized.join("/")
+    }
 }
 
 fn resolve_command(command: &str) -> Option<PathBuf> {

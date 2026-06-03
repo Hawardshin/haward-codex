@@ -1,0 +1,32 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-p0-agent-factory-learning-loop",
+  "request_id": "UR-2026-06-03-055",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "duration_seconds": 45,
+      "notes": "Checked current official references for Tauri command/filesystem/dialog/shell and PTY direction."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Native command and UI implementation",
+      "duration_seconds": 1320,
+      "notes": "Added Tauri app-data commands, Agents UI panels, CSS, runtime stores, contract and gap registry changes."
+    },
+    {
+      "phase_id": "validation",
+      "label": "Validation and build",
+      "duration_seconds": 420,
+      "notes": "Ran Rust, TypeScript, platform tests, customer build, and platform readiness checks."
+    },
+    {
+      "phase_id": "history",
+      "label": "Trace and evaluation records",
+      "duration_seconds": 360,
+      "notes": "Recorded requirement, spec, trace, omission check, and evaluation artifacts."
+    }
+  ],
+  "bottleneck": "Keeping product gap, runtime contract, readiness, and UI implementation aligned."
+}

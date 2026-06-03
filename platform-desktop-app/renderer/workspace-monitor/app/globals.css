@@ -4627,6 +4627,218 @@ h3 {
   text-transform: uppercase;
 }
 
+.agent-factory-wizard-panel,
+.learning-feedback-panel {
+  background:
+    linear-gradient(180deg, rgba(22, 115, 91, 0.045), rgba(47, 103, 177, 0.035)),
+    var(--surface);
+}
+
+.agent-factory-layout,
+.learning-feedback-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+  gap: 12px;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.agent-factory-form,
+.learning-candidate-list {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  max-height: min(62vh, 720px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding-right: 2px;
+  scrollbar-gutter: stable;
+}
+
+.agent-factory-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.agent-factory-form label,
+.learning-decision-controls label {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.agent-factory-form label.wide-field,
+.learning-decision-controls label.wide-field {
+  grid-column: 1 / -1;
+}
+
+.agent-factory-form span,
+.learning-decision-controls span,
+.agent-proposal-preview header span,
+.learning-decision-editor header span,
+.agent-proposal-meta span,
+.learning-evidence-list span,
+.learning-decision-contract dt {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.agent-factory-form input,
+.agent-factory-form textarea,
+.learning-decision-controls select,
+.learning-decision-controls textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 8px 9px;
+  font: inherit;
+  font-size: 12px;
+}
+
+.agent-factory-form textarea,
+.learning-decision-controls textarea {
+  resize: vertical;
+}
+
+.agent-proposal-preview,
+.learning-decision-editor {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  align-content: start;
+  gap: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.agent-proposal-preview header,
+.learning-decision-editor header {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.agent-proposal-preview h3,
+.learning-decision-editor h3 {
+  margin: 4px 0 0;
+  overflow-wrap: anywhere;
+  font-size: 16px;
+}
+
+.agent-proposal-preview header strong,
+.learning-decision-editor header strong {
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--slate);
+  font-size: 12px;
+}
+
+.agent-proposal-meta,
+.learning-evidence-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+
+.agent-proposal-meta span,
+.learning-evidence-list span {
+  max-width: 100%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 4px 8px;
+  overflow-wrap: anywhere;
+  text-transform: none;
+}
+
+.agent-proposal-preview pre,
+.learning-decision-editor pre {
+  max-height: min(44vh, 520px);
+  min-height: 220px;
+  margin: 0;
+  overflow: auto;
+  border: 1px solid var(--line);
+  background: #101923;
+  border-radius: 8px;
+  color: #d7e0ea;
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  scrollbar-gutter: stable;
+}
+
+.learning-candidate-list button {
+  display: grid;
+  gap: 5px;
+  width: 100%;
+  min-height: 72px;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: left;
+}
+
+.learning-candidate-list button.active {
+  border-color: #7aa7c8;
+  background: color-mix(in srgb, var(--surface-muted) 70%, var(--blue) 12%);
+}
+
+.learning-candidate-list span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.learning-candidate-list strong {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+
+.learning-candidate-list small,
+.learning-decision-editor p,
+.learning-decision-contract dd {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.learning-decision-controls {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.4fr) minmax(150px, 0.4fr) minmax(0, 1fr);
+  gap: 8px;
+  align-items: end;
+}
+
+.learning-decision-contract {
+  display: grid;
+  grid-template-columns: minmax(90px, auto) minmax(0, 1fr);
+  gap: 6px 10px;
+  margin: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.learning-decision-contract dt,
+.learning-decision-contract dd {
+  min-width: 0;
+}
+
 .terminal-report-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -7813,6 +8025,8 @@ h3 {
   .claude-transfer-layout,
   .philosophy-feature-layout,
   .intent-map-layout,
+  .agent-factory-layout,
+  .learning-feedback-layout,
   .mode-switchboard-layout {
     grid-template-columns: 1fr;
   }
@@ -7847,6 +8061,8 @@ h3 {
   .source-editor-controls,
   .source-customization-bar,
   .source-settings-grid,
+  .agent-factory-form,
+  .learning-decision-controls,
   .mode-option-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -8056,6 +8272,8 @@ h3 {
   .source-editor-controls,
   .source-customization-bar,
   .source-settings-grid,
+  .agent-factory-form,
+  .learning-decision-controls,
   .mode-option-grid,
   .task-lanes > div,
   .requirements-table {

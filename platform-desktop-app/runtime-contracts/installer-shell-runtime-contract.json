@@ -522,6 +522,22 @@
       "provenance_required": true
     },
     {
+      "target_id": "agent_factory_proposals",
+      "record_type": "agent_factory_proposal",
+      "directory": "app_data/runtime-data/agent-factory/proposals",
+      "runtime_store": "platform_data_store/agent-factory/proposals",
+      "required_for": "agent_creation_or_capability_design",
+      "provenance_required": true
+    },
+    {
+      "target_id": "learning_feedback_decisions",
+      "record_type": "learning_feedback_decision",
+      "directory": "app_data/runtime-data/learning-feedback/decisions",
+      "runtime_store": "platform_data_store/learning-feedback/decisions",
+      "required_for": "learning_loop_improvement_decision",
+      "provenance_required": true
+    },
+    {
       "target_id": "accumulated_data_index",
       "record_type": "runtime_data_index_manifest",
       "directory": "app_data/runtime-data/indexes",
@@ -556,6 +572,12 @@
       "list_workspace_text_files",
       "read_workspace_text_file",
       "write_workspace_text_file"
+    ],
+    "agent_factory_commands": [
+      "create_agent_factory_proposal"
+    ],
+    "learning_feedback_commands": [
+      "record_learning_improvement_decision"
     ]
   },
   "validation": {

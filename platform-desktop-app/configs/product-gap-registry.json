@@ -178,14 +178,14 @@
   },
   "coverage_summary": {
     "audited_request_count": 13,
-    "covered_request_count": 8,
-    "partial_request_count": 5,
-    "missing_product_slice_count": 2,
+    "covered_request_count": 9,
+    "partial_request_count": 4,
+    "missing_product_slice_count": 0,
     "structural_debt_count": 1,
     "test_gap_count": 1,
     "external_blocker_count": 1,
-    "current_product_readiness": "internal_product_slices_validated_with_known_p0_gaps",
-    "headline": "The desktop shell, source workbench, installer runtime contract, data accumulation, workspace host, folder restructure, feature registry, and operator separation are implemented slices. The real Agent Factory creation wizard and automated learning feedback loop are still not closed as product features."
+    "current_product_readiness": "internal_product_slices_validated_with_p0_agent_factory_and_learning_loop_closed",
+    "headline": "The desktop shell, source workbench, installer runtime contract, data accumulation, workspace host, folder restructure, feature registry, operator separation, Agent Factory proposal wizard, and learning feedback decision loop are implemented internal product slices. Remaining gaps are structural debt, native Git depth, clipboard QA, optional PTY UX, and external public distribution gates."
   },
   "request_coverage": [
     {
@@ -316,56 +316,59 @@
     },
     {
       "request_id": "UR-2026-06-03-035",
-      "coverage": "partial",
+      "coverage": "covered",
       "covered_evidence": [
         "Product feature registry",
         "Snapshot productFeatureArchitecture",
         "Overview product feature panel",
-        "Monitoring marked supporting_observability"
+        "Monitoring marked supporting_observability",
+        "AgentFactoryWizard creates app-data-backed agent proposals from goal, role, tools, guardrails, validation, and output contract fields",
+        "LearningFeedbackLoopPanel derives improvement candidates from accumulated evidence and records approve/reject/defer/promote decisions"
       ],
-      "remaining_gap_ids": [
-        "agent_factory_creation_wizard",
-        "learning_feedback_automation_loop"
-      ],
-      "notes": "The feature architecture is fixed, but the user's core goal still needs actual Agent Factory creation and automated improvement workflows."
+      "remaining_gap_ids": [],
+      "notes": "The primary product direction is no longer only architecture: the Agents surface now has concrete proposal creation and learning-loop decision workflows backed by runtime data stores."
     },
     {
       "request_id": "UR-2026-06-03-036",
       "coverage": "partial",
       "covered_evidence": [
         "Default navigation foregrounds overview, desktop, agents, source, and intent",
-        "Projects, history, structure, documents, and requirements moved to Operator Center"
+        "Projects, history, structure, documents, and requirements moved to Operator Center",
+        "Agent Factory wizard is now part of the primary Agents surface"
       ],
       "remaining_gap_ids": [
-        "agent_factory_creation_wizard",
         "componentized_desktop_ui_architecture"
       ],
-      "notes": "The operator split is implemented and validated, but the primary work surface still needs the Agent Factory product flow to fully match the stated product purpose."
+      "notes": "The operator split and primary Agent Factory product flow are implemented. The remaining concern is structural: MonitorShell still needs component ownership split for long-term maintainability."
     }
   ],
   "gap_items": [
     {
       "gap_id": "agent_factory_creation_wizard",
-      "status": "missing_product_slice",
+      "status": "implemented_product_slice",
       "priority": "p0_product_gap",
       "source_requests": [
         "UR-2026-06-03-035",
         "UR-2026-06-03-036"
       ],
       "feature_layer": "agent_factory",
-      "why_it_matters": "The user asked for easy agent creation and automatic agent generation as a primary product capability. Current UI exposes architecture and evidence/promotion signals, but it does not yet guide a user through creating, validating, and registering a new agent.",
+      "why_it_matters": "The user asked for easy agent creation and automatic agent generation as a primary product capability. The Agents surface now guides a user through creating a bounded proposal before promotion into durable agent assets.",
       "current_evidence": [
         "platform-desktop-app/configs/product-feature-registry.json includes agent_factory as a primary layer",
         "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx includes Agent Factory cards",
-        "agent-platform/configs/orchestration/capability-promotion-registry.json exists as a backend/config foundation"
+        "agent-platform/configs/orchestration/capability-promotion-registry.json exists as a backend/config foundation",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx includes AgentFactoryWizard and create_agent_factory_proposal invocation",
+        "platform-desktop-app/src-tauri/src/lib.rs implements create_agent_factory_proposal and writes app_data/runtime-data/agent-factory/proposals records",
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json declares agent_factory_proposals and agent_factory_commands",
+        "Readiness tests verify the wizard UI, command surface, and accumulated data store tokens"
       ],
       "acceptance_to_close": [
         "Desktop Agent Factory view creates or drafts an agent from goal, role, tools, guardrails, validation, and output contract inputs.",
-        "Wizard writes a bounded agent spec or proposal into the owning project path with traceability and rollback metadata.",
+        "Wizard writes a bounded agent proposal into the app-data runtime store with target project path, traceability, and rollback metadata.",
         "Readiness/test verifies the wizard route, generated schema fields, validation command, and customer-safe UI behavior.",
         "Request trace for UR-2026-06-03-035 marks this gap closed with verification evidence."
       ],
-      "recommended_next_slice": "2026-06-03-agent-factory-creation-wizard",
+      "recommended_next_slice": "closed_by_2026-06-03-p0-agent-factory-learning-loop",
       "blocked_by": [],
       "not_blocked_by": [
         "public code signing",
@@ -374,17 +377,21 @@
     },
     {
       "gap_id": "learning_feedback_automation_loop",
-      "status": "partial_product_slice",
+      "status": "implemented_product_slice",
       "priority": "p0_product_gap",
       "source_requests": [
         "UR-2026-06-03-035"
       ],
       "feature_layer": "learning_improvement_loop",
-      "why_it_matters": "The user asked for a platform that continuously learns and improves performance. Data accumulation and evaluation surfaces exist, but automatic feedback from completed work into improvement candidates is not yet a closed product workflow.",
+      "why_it_matters": "The user asked for a platform that continuously learns and improves performance. The Agents surface now derives improvement candidates from accumulated data and records human-governed decisions into the runtime store.",
       "current_evidence": [
         "Accumulated Data surface and versioned runtime data index exist",
         "Product feature registry marks Learning & Evaluation Loop as primary",
-        "Capability promotion registry and evaluation records exist as foundations"
+        "Capability promotion registry and evaluation records exist as foundations",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx includes LearningFeedbackLoopPanel and record_learning_improvement_decision invocation",
+        "platform-desktop-app/src-tauri/src/lib.rs implements record_learning_improvement_decision and writes app_data/runtime-data/learning-feedback/decisions records",
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json declares learning_feedback_decisions and learning_feedback_commands",
+        "Readiness tests verify candidate and decision-recording UI, command surface, and accumulated data store tokens"
       ],
       "acceptance_to_close": [
         "Desktop UI shows improvement candidates generated from task run outcomes, omissions, evaluations, and timing records.",
@@ -392,7 +399,7 @@
         "Approved improvement records link to source evidence, validation, rollback or disablement plan, and post-change evaluation.",
         "Readiness/test verifies candidate ingestion and decision recording."
       ],
-      "recommended_next_slice": "2026-06-03-learning-feedback-automation-loop",
+      "recommended_next_slice": "closed_by_2026-06-03-p0-agent-factory-learning-loop",
       "blocked_by": [],
       "not_blocked_by": [
         "public distribution packaging"

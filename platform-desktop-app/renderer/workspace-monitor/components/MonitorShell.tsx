@@ -127,6 +127,59 @@ type DesktopPreferencesReport = {
   preferences: DesktopPreferences;
 };
 
+type AgentFactoryForm = {
+  agentId: string;
+  label: string;
+  goal: string;
+  role: string;
+  tools: string;
+  guardrails: string;
+  validationCommands: string;
+  outputContract: string;
+  ownerProject: string;
+  targetPath: string;
+  rollbackPlan: string;
+};
+
+type AgentFactoryProposalReport = {
+  status: string;
+  proposalId: string;
+  proposalPath: string;
+  targetPath: string;
+  createdAt: string;
+  agentId: string;
+  label: string;
+  validationCommand: string;
+  rollbackPlan: string;
+  spec: unknown;
+};
+
+type LearningImprovementCandidate = {
+  id: string;
+  label: string;
+  source: string;
+  impact: string;
+  evidence: string[];
+  assetType: string;
+  targetPath: string;
+  validationCommand: string;
+  rollbackPlan: string;
+};
+
+type LearningImprovementDecisionReport = {
+  status: string;
+  decisionId: string;
+  decisionPath: string;
+  createdAt: string;
+  candidateId: string;
+  action: string;
+  assetType: string;
+  targetPath: string;
+  validationCommand: string;
+  rollbackPlan: string;
+  record: unknown;
+};
+
 const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((module) => module.default), {
   ssr: false,
   loading: () => <div className="monaco-editor-loading">Loading Monaco editor</div>
@@ -1482,6 +1535,20 @@ const defaultDesktopPreferences: DesktopPreferences = {
   pinnedSections: defaultPinnedSections
 };
 
+const defaultAgentFactoryForm: AgentFactoryForm = {
+  agentId: "workspace-improvement-agent",
+  label: "Workspace Improvement Agent",
+  goal: "반복되는 작업 기록, 검증 결과, 사용자 피드백을 보고 다음 개선 후보를 제안합니다.",
+  role: "bounded capability agent that turns accumulated evidence into small actionable improvements",
+  tools: "workspace files\nrequirements/spec records\nvalidation logs\nhuman decision inbox",
+  guardrails: "민감한 파일을 읽지 않습니다\n근거 없는 주장을 사실로 쓰지 않습니다\n승격 전 validation command와 rollback plan을 남깁니다",
+  validationCommands: "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/workspace-improvement-agent.json\nPYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents",
+  outputContract: "JSON 또는 Markdown으로 goal, source evidence, selected smallest asset, validation, rollback을 반환합니다.",
+  ownerProject: "agent-platform",
+  targetPath: "agent-platform/configs/agents/workspace-improvement-agent.json",
+  rollbackPlan: "생성된 agent spec을 비활성화하거나 삭제하고 proposal record를 archived로 표시합니다."
+};
+
 function desktopPreferencesFromState(input: {
   uiLanguage: UiLanguage;
   themeMode: AppThemeMode;
@@ -1565,6 +1632,17 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [commandQuery, setCommandQuery] = useState("");
   const [activeHomeTab, setActiveHomeTab] = useState<CoreFeatureTabId>("files");
   const commandInputRef = useRef<HTMLInputElement>(null);
+  const [agentFactoryForm, setAgentFactoryForm] = useState<AgentFactoryForm>(defaultAgentFactoryForm);
+  const [agentFactoryProposal, setAgentFactoryProposal] = useState<AgentFactoryProposalReport | null>(null);
+  const [agentFactoryBusy, setAgentFactoryBusy] = useState(false);
+  const [agentFactoryNotice, setAgentFactoryNotice] = useState("");
+  const [selectedLearningCandidateId, setSelectedLearningCandidateId] = useState("");
+  const [learningDecisionAction, setLearningDecisionAction] = useState("promote");
+  const [learningAssetType, setLearningAssetType] = useState("agent");
+  const [learningDecisionNotes, setLearningDecisionNotes] = useState("");
+  const [learningDecisionReport, setLearningDecisionReport] = useState<LearningImprovementDecisionReport | null>(null);
+  const [learningDecisionBusy, setLearningDecisionBusy] = useState(false);
+  const [learningDecisionNotice, setLearningDecisionNotice] = useState("");
   const [pinnedSections, setPinnedSections] = useState<SectionId[]>(defaultPinnedSections);
   const [recentSections, setRecentSections] = useState<SectionId[]>(["overview"]);
   const [desktopPreferencesLoaded, setDesktopPreferencesLoaded] = useState(false);
@@ -1900,6 +1978,22 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const latestEvaluation = viewFilteredDocuments.find((document) => document.category === "evaluation");
   const latestWebSearch = viewFilteredDocuments.find((document) => document.category === "web-search");
   const latestWorkSummary = viewFilteredDocuments.find((document) => document.category === "work-summary");
+  const learningImprovementCandidates = useMemo(
+    () =>
+      buildLearningImprovementCandidates({
+        blockers: collaborationBoard.blockers,
+        evaluations: viewFilteredDocuments.filter((document) => document.category === "evaluation").slice(0, 4),
+        workSummaries: viewFilteredDocuments.filter((document) => document.category === "work-summary").slice(0, 3),
+        requestTraces: viewFilteredDocuments.filter((document) => document.category === "request-trace").slice(0, 3),
+        intentMap: intentFeatureMap,
+        nextActions: collaborationBoard.nextActions
+      }),
+    [collaborationBoard.blockers, collaborationBoard.nextActions, intentFeatureMap, viewFilteredDocuments]
+  );
+  const selectedLearningCandidate =
+    learningImprovementCandidates.find((candidate) => candidate.id === selectedLearningCandidateId) ||
+    learningImprovementCandidates[0] ||
+    null;
   const attentionState = useMemo(() => {
     const blockedTasks = collaborationBoard.summary.blockedTasks;
     const activeTasks = collaborationBoard.summary.activeTasks;
@@ -2200,6 +2294,85 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const openTerminalDrawer = () => {
     setSection("desktop");
     setTerminalDrawerOpen(true);
+  };
+  const updateAgentFactoryForm = (field: keyof AgentFactoryForm, value: string) => {
+    setAgentFactoryForm((current) => ({ ...current, [field]: value }));
+    setAgentFactoryNotice("");
+  };
+  const createAgentFactoryProposal = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setAgentFactoryNotice(uiLanguage === "ko" ? "Tauri runtime이 없어 proposal 저장을 할 수 없습니다." : "Tauri runtime is unavailable.");
+      return;
+    }
+    setAgentFactoryBusy(true);
+    setAgentFactoryNotice("");
+    try {
+      const report = await tauriInvoke<AgentFactoryProposalReport>("create_agent_factory_proposal", {
+        input: {
+          agentId: agentFactoryForm.agentId,
+          label: agentFactoryForm.label,
+          goal: agentFactoryForm.goal,
+          role: agentFactoryForm.role,
+          tools: linesFromText(agentFactoryForm.tools),
+          guardrails: linesFromText(agentFactoryForm.guardrails),
+          validationCommands: linesFromText(agentFactoryForm.validationCommands),
+          outputContract: agentFactoryForm.outputContract,
+          ownerProject: agentFactoryForm.ownerProject,
+          targetPath: agentFactoryForm.targetPath,
+          rollbackPlan: agentFactoryForm.rollbackPlan
+        }
+      });
+      setAgentFactoryProposal(report);
+      setAgentFactoryNotice(
+        uiLanguage === "ko"
+          ? `Agent proposal 저장됨: ${report.proposalPath}`
+          : `Agent proposal saved: ${report.proposalPath}`
+      );
+    } catch (caught) {
+      setAgentFactoryNotice(errorMessage(caught));
+    } finally {
+      setAgentFactoryBusy(false);
+    }
+  };
+  const recordLearningDecision = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!selectedLearningCandidate) {
+      setLearningDecisionNotice(uiLanguage === "ko" ? "선택된 개선 후보가 없습니다." : "No improvement candidate selected.");
+      return;
+    }
+    if (!tauriInvoke) {
+      setLearningDecisionNotice(uiLanguage === "ko" ? "Tauri runtime이 없어 decision 저장을 할 수 없습니다." : "Tauri runtime is unavailable.");
+      return;
+    }
+    setLearningDecisionBusy(true);
+    setLearningDecisionNotice("");
+    try {
+      const report = await tauriInvoke<LearningImprovementDecisionReport>("record_learning_improvement_decision", {
+        input: {
+          candidateId: selectedLearningCandidate.id,
+          label: selectedLearningCandidate.label,
+          source: selectedLearningCandidate.source,
+          evidence: selectedLearningCandidate.evidence,
+          action: learningDecisionAction,
+          assetType: learningAssetType,
+          targetPath: selectedLearningCandidate.targetPath,
+          validationCommand: selectedLearningCandidate.validationCommand,
+          rollbackPlan: selectedLearningCandidate.rollbackPlan,
+          notes: learningDecisionNotes
+        }
+      });
+      setLearningDecisionReport(report);
+      setLearningDecisionNotice(
+        uiLanguage === "ko"
+          ? `Learning decision 저장됨: ${report.decisionPath}`
+          : `Learning decision saved: ${report.decisionPath}`
+      );
+    } catch (caught) {
+      setLearningDecisionNotice(errorMessage(caught));
+    } finally {
+      setLearningDecisionBusy(false);
+    }
   };
   const homeMainTabs: CoreFeatureTab[] = [
     {
@@ -3620,6 +3793,36 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             <Metric label="Blocked" value={collaborationBoard.summary.blockedTasks} icon={ShieldCheck} tone="violet" />
           </section>
 
+          <AgentFactoryWizard
+            form={agentFactoryForm}
+            proposal={agentFactoryProposal}
+            busy={agentFactoryBusy}
+            notice={agentFactoryNotice}
+            runtimeAvailable={Boolean(getTauriInvoke())}
+            language={uiLanguage}
+            onChange={updateAgentFactoryForm}
+            onCreateProposal={createAgentFactoryProposal}
+          />
+
+          <LearningFeedbackLoopPanel
+            candidates={learningImprovementCandidates}
+            selectedCandidate={selectedLearningCandidate}
+            selectedCandidateId={selectedLearningCandidate?.id || ""}
+            action={learningDecisionAction}
+            assetType={learningAssetType}
+            notes={learningDecisionNotes}
+            report={learningDecisionReport}
+            busy={learningDecisionBusy}
+            notice={learningDecisionNotice}
+            runtimeAvailable={Boolean(getTauriInvoke())}
+            language={uiLanguage}
+            onSelectCandidate={setSelectedLearningCandidateId}
+            onActionChange={setLearningDecisionAction}
+            onAssetTypeChange={setLearningAssetType}
+            onNotesChange={setLearningDecisionNotes}
+            onRecordDecision={recordLearningDecision}
+          />
+
           <section className="panel wide">
             <div className="panel-heading">
               <div>
@@ -3684,6 +3887,263 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         </section>
       </div>
     </main>
+  );
+}
+
+function AgentFactoryWizard({
+  form,
+  proposal,
+  busy,
+  notice,
+  runtimeAvailable,
+  language,
+  onChange,
+  onCreateProposal
+}: {
+  form: AgentFactoryForm;
+  proposal: AgentFactoryProposalReport | null;
+  busy: boolean;
+  notice: string;
+  runtimeAvailable: boolean;
+  language: UiLanguage;
+  onChange: (field: keyof AgentFactoryForm, value: string) => void;
+  onCreateProposal: () => void;
+}) {
+  const ko = language === "ko";
+  return (
+    <section className="panel wide agent-factory-wizard-panel">
+      <div className="panel-heading">
+        <div>
+          <p className="eyebrow">{ko ? "Agent Factory" : "Agent Factory"}</p>
+          <h2>{ko ? "새 에이전트 만들기" : "Create an Agent"}</h2>
+          <p>
+            {ko
+              ? "목표, 역할, 도구, 안전장치, 검증 기준을 입력하면 앱 데이터 저장소에 agent proposal을 남깁니다."
+              : "Enter goal, role, tools, guardrails, and validation to write an agent proposal into app data."}
+          </p>
+        </div>
+        <div className="desktop-actions">
+          <button type="button" onClick={onCreateProposal} disabled={!runtimeAvailable || busy}>
+            <Bot size={16} aria-hidden="true" />
+            <span>{busy ? (ko ? "저장 중" : "Saving") : ko ? "Agent proposal 저장" : "Save proposal"}</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="agent-factory-layout">
+        <div className="agent-factory-form" aria-label={ko ? "에이전트 생성 입력" : "Agent factory input"}>
+          <label>
+            <span>{ko ? "Agent ID" : "Agent ID"}</span>
+            <input value={form.agentId} onChange={(event) => onChange("agentId", event.target.value)} />
+          </label>
+          <label>
+            <span>{ko ? "이름" : "Label"}</span>
+            <input value={form.label} onChange={(event) => onChange("label", event.target.value)} />
+          </label>
+          <label className="wide-field">
+            <span>{ko ? "목표" : "Goal"}</span>
+            <textarea value={form.goal} onChange={(event) => onChange("goal", event.target.value)} rows={3} />
+          </label>
+          <label className="wide-field">
+            <span>{ko ? "역할" : "Role"}</span>
+            <textarea value={form.role} onChange={(event) => onChange("role", event.target.value)} rows={2} />
+          </label>
+          <label>
+            <span>{ko ? "도구/입력" : "Tools / Inputs"}</span>
+            <textarea value={form.tools} onChange={(event) => onChange("tools", event.target.value)} rows={5} />
+          </label>
+          <label>
+            <span>{ko ? "가드레일" : "Guardrails"}</span>
+            <textarea value={form.guardrails} onChange={(event) => onChange("guardrails", event.target.value)} rows={5} />
+          </label>
+          <label>
+            <span>{ko ? "검증 명령" : "Validation Commands"}</span>
+            <textarea value={form.validationCommands} onChange={(event) => onChange("validationCommands", event.target.value)} rows={5} />
+          </label>
+          <label>
+            <span>{ko ? "출력 계약" : "Output Contract"}</span>
+            <textarea value={form.outputContract} onChange={(event) => onChange("outputContract", event.target.value)} rows={5} />
+          </label>
+          <label>
+            <span>{ko ? "소유 프로젝트" : "Owner Project"}</span>
+            <input value={form.ownerProject} onChange={(event) => onChange("ownerProject", event.target.value)} />
+          </label>
+          <label>
+            <span>{ko ? "대상 경로" : "Target Path"}</span>
+            <input value={form.targetPath} onChange={(event) => onChange("targetPath", event.target.value)} />
+          </label>
+          <label className="wide-field">
+            <span>{ko ? "Rollback" : "Rollback"}</span>
+            <textarea value={form.rollbackPlan} onChange={(event) => onChange("rollbackPlan", event.target.value)} rows={2} />
+          </label>
+        </div>
+
+        <article className="agent-proposal-preview">
+          <header>
+            <div>
+              <span>{proposal?.status || (runtimeAvailable ? "ready" : "runtime missing")}</span>
+              <h3>{proposal?.label || form.label}</h3>
+            </div>
+            <strong>{proposal?.agentId || form.agentId}</strong>
+          </header>
+          <div className="agent-proposal-meta">
+            <span>agent_factory_proposals</span>
+            <span>{proposal?.targetPath || form.targetPath}</span>
+            <span>{proposal?.validationCommand || linesFromText(form.validationCommands)[0] || "validation pending"}</span>
+            <span>{proposal?.rollbackPlan || form.rollbackPlan}</span>
+          </div>
+          {notice && <p className="decision-resume-notice">{notice}</p>}
+          <pre tabIndex={0} aria-label={ko ? "Agent proposal JSON preview" : "Agent proposal JSON preview"}>
+            <code>{JSON.stringify(proposal?.spec || agentFactoryPreviewSpec(form), null, 2)}</code>
+          </pre>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+function LearningFeedbackLoopPanel({
+  candidates,
+  selectedCandidate,
+  selectedCandidateId,
+  action,
+  assetType,
+  notes,
+  report,
+  busy,
+  notice,
+  runtimeAvailable,
+  language,
+  onSelectCandidate,
+  onActionChange,
+  onAssetTypeChange,
+  onNotesChange,
+  onRecordDecision
+}: {
+  candidates: LearningImprovementCandidate[];
+  selectedCandidate: LearningImprovementCandidate | null;
+  selectedCandidateId: string;
+  action: string;
+  assetType: string;
+  notes: string;
+  report: LearningImprovementDecisionReport | null;
+  busy: boolean;
+  notice: string;
+  runtimeAvailable: boolean;
+  language: UiLanguage;
+  onSelectCandidate: (candidateId: string) => void;
+  onActionChange: (action: string) => void;
+  onAssetTypeChange: (assetType: string) => void;
+  onNotesChange: (notes: string) => void;
+  onRecordDecision: () => void;
+}) {
+  const ko = language === "ko";
+  return (
+    <section className="panel wide learning-feedback-panel">
+      <div className="panel-heading">
+        <div>
+          <p className="eyebrow">{ko ? "Learning Loop" : "Learning Loop"}</p>
+          <h2>{ko ? "누적 근거에서 개선 후보 만들기" : "Create Improvement Candidates from Evidence"}</h2>
+          <p>
+            {ko
+              ? "평가, 작업 요약, request trace, blocker, intent map을 후보로 묶고 승인/보류/거절/승격 기록을 앱 데이터에 저장합니다."
+              : "Group evaluations, summaries, traces, blockers, and intent maps into decisions stored in app data."}
+          </p>
+        </div>
+        <div className="desktop-actions">
+          <button type="button" onClick={onRecordDecision} disabled={!runtimeAvailable || busy || !selectedCandidate}>
+            <GitBranch size={16} aria-hidden="true" />
+            <span>{busy ? (ko ? "기록 중" : "Recording") : ko ? "Decision 저장" : "Save decision"}</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="learning-feedback-layout">
+        <div className="learning-candidate-list" aria-label={ko ? "개선 후보 목록" : "Improvement candidates"}>
+          {candidates.length ? (
+            candidates.map((candidate) => (
+              <button
+                key={candidate.id}
+                type="button"
+                className={selectedCandidateId === candidate.id ? "active" : ""}
+                onClick={() => onSelectCandidate(candidate.id)}
+              >
+                <span>{candidate.source}</span>
+                <strong>{candidate.label}</strong>
+                <small>{candidate.impact}</small>
+              </button>
+            ))
+          ) : (
+            <p className="empty-state">{ko ? "아직 개선 후보가 없습니다." : "No improvement candidates yet."}</p>
+          )}
+        </div>
+
+        <article className="learning-decision-editor">
+          {selectedCandidate ? (
+            <>
+              <header>
+                <div>
+                  <span>{selectedCandidate.source}</span>
+                  <h3>{selectedCandidate.label}</h3>
+                </div>
+                <strong>{selectedCandidate.assetType}</strong>
+              </header>
+              <p>{selectedCandidate.impact}</p>
+              <div className="learning-evidence-list">
+                {selectedCandidate.evidence.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
+              <div className="learning-decision-controls">
+                <label>
+                  <span>{ko ? "처리" : "Action"}</span>
+                  <select value={action} onChange={(event) => onActionChange(event.target.value)}>
+                    <option value="promote">{ko ? "승격" : "Promote"}</option>
+                    <option value="approve">{ko ? "승인" : "Approve"}</option>
+                    <option value="defer">{ko ? "보류" : "Defer"}</option>
+                    <option value="reject">{ko ? "거절" : "Reject"}</option>
+                  </select>
+                </label>
+                <label>
+                  <span>{ko ? "자산 유형" : "Asset Type"}</span>
+                  <select value={assetType} onChange={(event) => onAssetTypeChange(event.target.value)}>
+                    <option value="prompt">prompt</option>
+                    <option value="workflow">workflow</option>
+                    <option value="template">template</option>
+                    <option value="tool">tool</option>
+                    <option value="skill">skill</option>
+                    <option value="agent">agent</option>
+                    <option value="project_feature">project feature</option>
+                  </select>
+                </label>
+                <label className="wide-field">
+                  <span>{ko ? "메모" : "Notes"}</span>
+                  <textarea value={notes} onChange={(event) => onNotesChange(event.target.value)} rows={3} />
+                </label>
+              </div>
+              <dl className="learning-decision-contract">
+                <dt>{ko ? "저장소" : "Store"}</dt>
+                <dd>learning_feedback_decisions</dd>
+                <dt>{ko ? "대상 경로" : "Target"}</dt>
+                <dd>{selectedCandidate.targetPath}</dd>
+                <dt>{ko ? "검증" : "Validation"}</dt>
+                <dd>{selectedCandidate.validationCommand}</dd>
+                <dt>Rollback</dt>
+                <dd>{selectedCandidate.rollbackPlan}</dd>
+              </dl>
+              {notice && <p className="decision-resume-notice">{notice}</p>}
+              {report && (
+                <pre tabIndex={0} aria-label="Learning decision JSON">
+                  <code>{JSON.stringify(report.record, null, 2)}</code>
+                </pre>
+              )}
+            </>
+          ) : (
+            <p className="empty-state">{ko ? "선택된 개선 후보가 없습니다." : "No selected candidate."}</p>
+          )}
+        </article>
+      </div>
+    </section>
   );
 }
 
@@ -7495,6 +7955,170 @@ function mergeSessionReports(
   }
 
   return [...updated, ...newReports];
+}
+
+function linesFromText(value: string) {
+  return value
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+}
+
+function agentFactoryPreviewSpec(form: AgentFactoryForm) {
+  return {
+    schema_version: "agent-factory-proposal.v1",
+    status: "preview",
+    target_path: form.targetPath,
+    agent: {
+      id: form.agentId,
+      label: form.label,
+      goal: form.goal,
+      role: form.role,
+      owner_project: form.ownerProject
+    },
+    tools: linesFromText(form.tools),
+    guardrails: linesFromText(form.guardrails),
+    output_contract: form.outputContract,
+    validation: {
+      commands: linesFromText(form.validationCommands),
+      rollback_plan: form.rollbackPlan
+    },
+    traceability: {
+      source: "desktop_agent_factory_wizard",
+      app_data_store: "agent_factory_proposals"
+    }
+  };
+}
+
+function buildLearningImprovementCandidates(input: {
+  blockers: CollaborationBoard["blockers"];
+  evaluations: WorkspaceSnapshot["documents"];
+  workSummaries: WorkspaceSnapshot["documents"];
+  requestTraces: WorkspaceSnapshot["documents"];
+  intentMap: IntentFeatureMap;
+  nextActions: CollaborationBoard["nextActions"];
+}): LearningImprovementCandidate[] {
+  const candidates: LearningImprovementCandidate[] = [];
+  const pushCandidate = (candidate: LearningImprovementCandidate) => {
+    if (!candidates.some((item) => item.id === candidate.id)) {
+      candidates.push(candidate);
+    }
+  };
+
+  input.blockers.slice(0, 3).forEach((blocker) => {
+    const id = safeUiSlug(`blocker-${blocker.taskId || blocker.title}`);
+    pushCandidate({
+      id,
+      label: `Blocker to agent guardrail: ${blocker.title}`,
+      source: "blocker",
+      impact: blocker.blockers.join(" / ") || "Blocked work should become a reusable guardrail or routing rule.",
+      evidence: [blocker.agent, blocker.taskId, ...blocker.blockers].filter(Boolean),
+      assetType: "agent",
+      targetPath: `agent-platform/configs/agents/${id}.json`,
+      validationCommand: "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents",
+      rollbackPlan: "Remove the generated guardrail agent proposal and keep the blocker evidence as deferred."
+    });
+  });
+
+  input.nextActions.slice(0, 3).forEach((action) => {
+    const id = safeUiSlug(`next-${action.taskId || action.title}`);
+    pushCandidate({
+      id,
+      label: `Handoff automation: ${action.title}`,
+      source: "handoff",
+      impact: action.nextAction || "Repeated handoff can become a workflow or agent routing rule.",
+      evidence: [action.agent, action.taskId, action.nextAction].filter(Boolean),
+      assetType: "workflow",
+      targetPath: `_ops/workflows/${id}.md`,
+      validationCommand: "python3 _tools/docs-audit/src/docs_audit.py --check",
+      rollbackPlan: "Archive or disable the workflow candidate and keep the handoff evidence."
+    });
+  });
+
+  input.evaluations.slice(0, 3).forEach((document) => {
+    const id = safeUiSlug(`evaluation-${document.title}`);
+    pushCandidate({
+      id,
+      label: `Evaluation follow-up: ${document.title}`,
+      source: "evaluation",
+      impact: truncateText(document.excerpt || "Evaluation record can seed a stronger validation or omission guard.", 180),
+      evidence: [document.path, document.category, document.language],
+      assetType: "tool",
+      targetPath: `_tools/${id}/`,
+      validationCommand: "corepack pnpm --filter platform-desktop-app run check",
+      rollbackPlan: "Disable the promoted tool and retain the evaluation record as source evidence."
+    });
+  });
+
+  input.workSummaries.slice(0, 2).forEach((document) => {
+    const id = safeUiSlug(`summary-${document.title}`);
+    pushCandidate({
+      id,
+      label: `Repeated work pattern: ${document.title}`,
+      source: "work-summary",
+      impact: truncateText(document.excerpt || "Work summary can reveal a repeated manual process.", 180),
+      evidence: [document.path, document.category],
+      assetType: "workflow",
+      targetPath: `_ops/workflows/${id}.md`,
+      validationCommand: "python3 _tools/docs-audit/src/docs_audit.py --check",
+      rollbackPlan: "Move the workflow candidate to _archive or mark it disabled."
+    });
+  });
+
+  input.requestTraces.slice(0, 2).forEach((document) => {
+    const id = safeUiSlug(`trace-${document.title}`);
+    pushCandidate({
+      id,
+      label: `Trace to reusable prompt: ${document.title}`,
+      source: "request-trace",
+      impact: truncateText(document.excerpt || "Trace record can become a reusable prompt or checklist.", 180),
+      evidence: [document.path, document.category],
+      assetType: "prompt",
+      targetPath: `_ops/prompts/${id}.md`,
+      validationCommand: "python3 _tools/docs-audit/src/docs_audit.py --check",
+      rollbackPlan: "Delete or archive the prompt candidate and preserve the trace."
+    });
+  });
+
+  input.intentMap.roadmap.now.slice(0, 3).forEach((item) => {
+    const id = safeUiSlug(`intent-${item.feature}`);
+    pushCandidate({
+      id,
+      label: `Intent roadmap candidate: ${item.feature}`,
+      source: "intent-map",
+      impact: item.reason || "User intent map marks this as a current improvement candidate.",
+      evidence: [item.dependency, input.intentMap.sourcePath].filter(Boolean),
+      assetType: "project_feature",
+      targetPath: `platform-desktop-app/specs/${id}/`,
+      validationCommand: "corepack pnpm --filter platform-desktop-app run check",
+      rollbackPlan: "Mark the feature candidate deferred in the intent map and keep the source reason."
+    });
+  });
+
+  if (candidates.length === 0) {
+    pushCandidate({
+      id: "seed-learning-loop-agent",
+      label: "Seed learning loop agent",
+      source: "fallback",
+      impact: "No live candidates were found, so seed the platform with a learning loop agent proposal.",
+      evidence: ["product gap registry", "learning_feedback_automation_loop"],
+      assetType: "agent",
+      targetPath: "agent-platform/configs/agents/workspace-improvement-agent.json",
+      validationCommand: "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents",
+      rollbackPlan: "Reject the seed candidate and keep the gap registry item open."
+    });
+  }
+
+  return candidates.slice(0, 10);
+}
+
+function safeUiSlug(value: string) {
+  const slug = value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+  return slug || "candidate";
 }
 
 function areSessionReportsRenderEqual(left: CliSessionReport, right: CliSessionReport) {

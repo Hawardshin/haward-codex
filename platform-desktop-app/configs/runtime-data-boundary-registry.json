@@ -279,6 +279,8 @@
         "decision inbox state",
         "structured evidence items",
         "capability candidates",
+        "agent factory proposals",
+        "learning feedback decisions",
         "settings metadata"
       ],
       "write_policy": "app_data_directory_or_configured_workspace_profile",
