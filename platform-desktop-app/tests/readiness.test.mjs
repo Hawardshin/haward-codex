@@ -322,6 +322,15 @@ test("shared CLI adapter registry defines concrete AI CLI targets", () => {
 test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () => {
   const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
   const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
+  const coreFeatureTabs = readFileSync(
+    join(root, "renderer/workspace-monitor/components/workbench/CoreFeatureTabs.tsx"),
+    "utf8"
+  );
+  const pathDisclosure = readFileSync(
+    join(root, "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx"),
+    "utf8"
+  );
+  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${pathDisclosure}`;
   const productFeaturePanel = readFileSync(
     join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
     "utf8"
@@ -401,6 +410,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     assert.match(monitorShell, new RegExp(commandName));
   }
   assert.match(monitorShell, /DesktopRuntimePanel/);
+  assert.match(monitorShell, /CoreFeatureTabs/);
+  assert.match(monitorShell, /PathDisclosure/);
+  assert.match(coreFeatureTabs, /CoreFeatureTabId/);
   assert.match(lib, /human-decision-inbox\.json/);
   assert.match(monitorShell, /decisionInboxItems/);
   assert.match(monitorShell, /adapterSetupGuides/);
@@ -501,7 +513,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "operatorSectionIds",
     "Open Operator Center"
   ]) {
-    assert.match(monitorShell, new RegExp(uiString));
+    assert.match(monitorWorkbenchSource, new RegExp(uiString));
   }
   for (const uiString of [
     "Agent Orchestration",

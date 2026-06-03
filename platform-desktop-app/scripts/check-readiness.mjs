@@ -21,6 +21,8 @@ const requiredFiles = [
   "runtime-contracts/installer-shell-runtime-contract.json",
   "runtime-contracts/installer-shell-bootstrap.ko.md",
   "runtime-contracts/installer-shell-bootstrap.en.md",
+  "renderer/workspace-monitor/components/workbench/CoreFeatureTabs.tsx",
+  "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx",
   "docs/architecture/cross-platform-installable-runtime-decision.ko.md",
   "docs/architecture/cross-platform-installable-runtime-decision.en.md",
   "docs/architecture/multi-cli-orchestration-runtime.ko.md",
@@ -512,6 +514,15 @@ for (const operatorSection of expectedOperatorCenterSections) {
 }
 
 const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
+const coreFeatureTabs = readFileSync(
+  join(root, "renderer/workspace-monitor/components/workbench/CoreFeatureTabs.tsx"),
+  "utf8"
+);
+const pathDisclosure = readFileSync(
+  join(root, "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx"),
+  "utf8"
+);
+const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${pathDisclosure}`;
 const productFeaturePanel = readFileSync(
   join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
   "utf8"
@@ -711,8 +722,8 @@ for (const requiredPhrase of [
   "operatorSectionIds",
   "Open Operator Center"
 ]) {
-  if (!monitorShell.includes(requiredPhrase)) {
-    failures.push(`workspace-monitor MonitorShell must include ${requiredPhrase}`);
+  if (!monitorWorkbenchSource.includes(requiredPhrase)) {
+    failures.push(`workspace-monitor workbench source must include ${requiredPhrase}`);
   }
 }
 for (const requiredPhrase of [

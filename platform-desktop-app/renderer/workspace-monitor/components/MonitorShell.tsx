@@ -38,6 +38,8 @@ import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 
 import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFeatureArchitecturePanel";
 import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
+import { CoreFeatureTabs, type CoreFeatureTab, type CoreFeatureTabId } from "@/components/workbench/CoreFeatureTabs";
+import { PathDisclosure } from "@/components/workbench/PathDisclosure";
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot, type WorkspaceSourceFile } from "@/lib/snapshot";
 
 type SectionId =
@@ -56,7 +58,6 @@ type FeatureGroupId = "core" | "workspace" | "knowledge" | "governance";
 type SidebarMode = "expanded" | "collapsed";
 type SettingsTabId = "appearance" | "navigation" | "execution" | "data";
 type AppThemeMode = "system" | "light" | "dark";
-type HomeMainTabId = "files" | "agents" | "run" | "learn";
 
 type Section = {
   id: SectionId;
@@ -1458,7 +1459,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [runtimeInitDefaults, setRuntimeInitDefaults] = useState<RuntimeInitDefaults>(defaultRuntimeInitDefaults);
   const [operatorCenterOpen, setOperatorCenterOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState("");
-  const [activeHomeTab, setActiveHomeTab] = useState<HomeMainTabId>("files");
+  const [activeHomeTab, setActiveHomeTab] = useState<CoreFeatureTabId>("files");
   const commandInputRef = useRef<HTMLInputElement>(null);
   const [pinnedSections, setPinnedSections] = useState<SectionId[]>(defaultPinnedSections);
   const [recentSections, setRecentSections] = useState<SectionId[]>(["overview"]);
@@ -2018,20 +2019,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     setSection("desktop");
     setTerminalDrawerOpen(true);
   };
-  const homeMainTabs: Array<{
-    id: HomeMainTabId;
-    label: string;
-    kicker: string;
-    title: string;
-    detail: string;
-    icon: LucideIcon;
-    metric: string;
-    cta: string;
-    secondaryCta: string;
-    run: () => void;
-    secondaryRun: () => void;
-    steps: string[];
-  }> = [
+  const homeMainTabs: CoreFeatureTab[] = [
     {
       id: "files",
       label: uiLanguage === "ko" ? "파일 가져오기" : "Files",
@@ -2113,7 +2101,6 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           : ["Review run records", "Find repeated patterns", "Promote automation candidates"]
     }
   ];
-  const activeHomeFeature = homeMainTabs.find((item) => item.id === activeHomeTab) || homeMainTabs[0];
   const settingsTabs: Array<{
     id: SettingsTabId;
     label: string;
@@ -2925,64 +2912,12 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 </div>
               </section>
 
-              <section className="panel wide quick-start-panel main-workbench-panel" aria-label={uiLanguage === "ko" ? "핵심 기능 탭" : "Core feature tabs"}>
-                <div className="panel-heading">
-                  <div>
-                    <p className="eyebrow">{uiLanguage === "ko" ? "핵심 기능" : "Core Work"}</p>
-                    <h2>{uiLanguage === "ko" ? "먼저 무엇을 할지 고르세요" : "Choose what you want to do first"}</h2>
-                  </div>
-                  <span className="result-count">{activeHomeFeature.label}</span>
-                </div>
-                <div className="core-feature-rail main-feature-tabs" role="tablist" aria-label={uiLanguage === "ko" ? "핵심 기능" : "Core features"}>
-                  {homeMainTabs.map((tab) => (
-                    <button
-                      key={tab.id}
-                      type="button"
-                      className={activeHomeTab === tab.id ? "active" : ""}
-                      onClick={() => setActiveHomeTab(tab.id)}
-                      role="tab"
-                      aria-selected={activeHomeTab === tab.id}
-                    >
-                      <span className="core-feature-icon">
-                        <tab.icon size={17} aria-hidden="true" />
-                      </span>
-                      <span className="core-feature-copy">
-                        <small>{tab.kicker}</small>
-                        <strong>{tab.label}</strong>
-                        <span>{tab.title}</span>
-                      </span>
-                      <span className="core-feature-metric">{tab.metric}</span>
-                    </button>
-                  ))}
-                </div>
-                <div className="main-feature-detail" role="tabpanel">
-                  <div>
-                    <p className="eyebrow">{activeHomeFeature.kicker}</p>
-                    <h3>{activeHomeFeature.title}</h3>
-                    <p>{activeHomeFeature.detail}</p>
-                  </div>
-                  <ol className="main-feature-steps">
-                    {activeHomeFeature.steps.map((step, index) => (
-                      <li key={step}>
-                        <span>{index + 1}</span>
-                        <strong>{step}</strong>
-                      </li>
-                    ))}
-                  </ol>
-                  <div className="main-feature-actions quick-start-flow">
-                    <button type="button" onClick={activeHomeFeature.run}>
-                      <ArrowRight size={16} aria-hidden="true" />
-                      <span>{activeHomeFeature.cta}</span>
-                      <small>{activeHomeFeature.label}</small>
-                    </button>
-                    <button type="button" onClick={activeHomeFeature.secondaryRun}>
-                      <Settings size={16} aria-hidden="true" />
-                      <span>{activeHomeFeature.secondaryCta}</span>
-                      <small>{activeHomeFeature.metric}</small>
-                    </button>
-                  </div>
-                </div>
-              </section>
+              <CoreFeatureTabs
+                activeTab={activeHomeTab}
+                language={uiLanguage}
+                tabs={homeMainTabs}
+                onSelectTab={setActiveHomeTab}
+              />
 
               <ProductFeatureArchitecturePanel
                 architecture={productFeatureArchitecture}
@@ -6553,10 +6488,7 @@ function DesktopRuntimePanel({
                   <span>{store.latestUpdatedAt ? formatTimeLabel(store.latestUpdatedAt) : "idle"}</span>
                 </div>
                 <p>{store.purpose}</p>
-                <details className="path-disclosure">
-                  <summary>세부 경로</summary>
-                  <code>{store.path}</code>
-                </details>
+                <PathDisclosure label="세부 경로" value={store.path} />
                 <div className="adapter-report">
                   <span>{store.plane}</span>
                   <span>{store.visibility}</span>
@@ -6589,10 +6521,10 @@ function DesktopRuntimePanel({
               <span>{accumulatedDataOverview?.status || "not-loaded"}</span>
               <span>{accumulatedDataOverview?.formatMigrationStatus || "manifest-pending"}</span>
             </div>
-            <details className="path-disclosure">
-              <summary>인덱스 저장 위치</summary>
-              <code>{accumulatedDataOverview?.indexPath || runtimeDataBoundary?.taskRunStorePath || "runtime data root pending"}</code>
-            </details>
+            <PathDisclosure
+              label="인덱스 저장 위치"
+              value={accumulatedDataOverview?.indexPath || runtimeDataBoundary?.taskRunStorePath || "runtime data root pending"}
+            />
             {accumulatedDataOverview && (
               <div className="adapter-report">
                 <span>{accumulatedDataOverview.schemaVersion}</span>
@@ -6660,10 +6592,7 @@ function DesktopRuntimePanel({
                   <strong>{root.created ? "created" : root.exists ? "ready" : "missing"}</strong>
                 </header>
                 <p>{root.purpose}</p>
-                <details className="path-disclosure">
-                  <summary>세부 경로</summary>
-                  <code>{root.path}</code>
-                </details>
+                <PathDisclosure label="세부 경로" value={root.path} />
                 <div className="adapter-report">
                   <span>{root.id}</span>
                   <span>{root.visibility}</span>
@@ -6688,10 +6617,7 @@ function DesktopRuntimePanel({
               <span>{payloadAudit ? formatBytes(payloadAudit.scannedBytes) : "0 B"}</span>
               <span>{payloadAudit?.maxScanFiles ?? 0} max</span>
             </div>
-            <details className="path-disclosure">
-              <summary>감사 리포트 경로</summary>
-              <code>{payloadAudit?.auditPath || "No audit report yet"}</code>
-            </details>
+            <PathDisclosure label="감사 리포트 경로" value={payloadAudit?.auditPath || "No audit report yet"} />
             <div className="payload-finding-list">
               {(payloadAudit?.findings || []).slice(0, 6).map((finding) => (
                 <div key={`${finding.ruleId}-${finding.path}`}>
@@ -6714,26 +6640,11 @@ function DesktopRuntimePanel({
               <strong>{supportBundle?.redacted ? "redacted" : "idle"}</strong>
             </header>
             <div className="support-bundle-grid">
-              <details className="path-disclosure">
-                <summary>Manifest</summary>
-                <code>{supportBundle?.manifestPath || "No manifest yet"}</code>
-              </details>
-              <details className="path-disclosure">
-                <summary>Runtime roots</summary>
-                <code>{supportBundle?.runtimeRootsPath || "No runtime roots export"}</code>
-              </details>
-              <details className="path-disclosure">
-                <summary>Payload audit</summary>
-                <code>{supportBundle?.installerPayloadAuditPath || "No payload audit export"}</code>
-              </details>
-              <details className="path-disclosure">
-                <summary>Task run summary</summary>
-                <code>{supportBundle?.taskRunSummaryPath || "No task-run summary"}</code>
-              </details>
-              <details className="path-disclosure">
-                <summary>Recent events</summary>
-                <code>{supportBundle?.recentEventsPath || "No recent events log"}</code>
-              </details>
+              <PathDisclosure label="Manifest" value={supportBundle?.manifestPath || "No manifest yet"} />
+              <PathDisclosure label="Runtime roots" value={supportBundle?.runtimeRootsPath || "No runtime roots export"} />
+              <PathDisclosure label="Payload audit" value={supportBundle?.installerPayloadAuditPath || "No payload audit export"} />
+              <PathDisclosure label="Task run summary" value={supportBundle?.taskRunSummaryPath || "No task-run summary"} />
+              <PathDisclosure label="Recent events" value={supportBundle?.recentEventsPath || "No recent events log"} />
             </div>
           </article>
         </div>
