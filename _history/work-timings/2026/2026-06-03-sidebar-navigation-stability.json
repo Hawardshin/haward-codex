@@ -1,0 +1,37 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-sidebar-navigation-stability",
+  "request_id": "UR-2026-06-03-040",
+  "mode": "quick",
+  "timezone": "Asia/Seoul",
+  "phase_timings": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes_estimate": 3,
+      "notes": "Checked official desktop/workbench navigation references."
+    },
+    {
+      "phase": "local_inspection",
+      "duration_minutes_estimate": 6,
+      "notes": "Found duplicate activity rail and sidebar section navigation."
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes_estimate": 12,
+      "notes": "Replaced sidebar section list with context panel and stabilized CSS."
+    },
+    {
+      "phase": "validation",
+      "duration_minutes_estimate": 10,
+      "notes": "Ran TypeScript/tests/readiness/build and Browser smoke."
+    },
+    {
+      "phase": "records",
+      "duration_minutes_estimate": 5,
+      "notes": "Recorded request trace, web search, evaluation, and resource cleanup target."
+    }
+  ],
+  "bottleneck_notes": [
+    "Static build regeneration touches tracked snapshot files, increasing diff review cost."
+  ]
+}

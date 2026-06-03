@@ -125,7 +125,7 @@ main {
 
 .activity-rail {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
   gap: 12px;
   height: 100vh;
   max-height: 100vh;
@@ -186,7 +186,7 @@ main {
 
 .desktop-sidebar {
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   gap: 12px;
   min-width: 0;
   height: 100vh;
@@ -213,8 +213,9 @@ main {
 }
 
 .workspace-switcher > span,
-.sidebar-group-heading small,
-.sidebar-section-list button small,
+.sidebar-context-heading small,
+.sidebar-context-panel p,
+.sidebar-context-meta small,
 .sidebar-status-card div span,
 .desktop-titlebar span,
 .settings-pane-heading span,
@@ -231,29 +232,45 @@ main {
   width: 100%;
 }
 
-.sidebar-section-groups {
+.sidebar-context-panel {
   display: grid;
   align-content: start;
-  gap: 13px;
+  gap: 12px;
   min-height: 0;
   overflow: auto;
-  padding-right: 2px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  scrollbar-width: thin;
 }
 
-.sidebar-section-group,
-.sidebar-section-list {
+.sidebar-context-heading {
   display: grid;
-  gap: 7px;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
 }
 
-.sidebar-group-heading {
+.sidebar-context-heading > svg {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--mint-soft);
+  color: var(--green);
+  padding: 7px;
+}
+
+.sidebar-context-heading span,
+.sidebar-context-meta span {
   display: grid;
   min-width: 0;
   gap: 2px;
 }
 
-.sidebar-group-heading span,
-.sidebar-section-list button span,
+.sidebar-context-heading strong,
+.sidebar-context-meta strong,
 .sidebar-status-card strong {
   min-width: 0;
   overflow: hidden;
@@ -261,7 +278,7 @@ main {
   white-space: nowrap;
 }
 
-.sidebar-group-heading span,
+.sidebar-context-heading small,
 .desktop-titlebar span,
 .settings-pane-heading span,
 .desktop-decision-list span,
@@ -270,27 +287,42 @@ main {
   text-transform: uppercase;
 }
 
-.sidebar-section-list button {
+.sidebar-context-panel p {
+  margin: 0;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.sidebar-context-meta {
   display: grid;
-  grid-template-columns: 22px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
   align-items: center;
-  min-height: 38px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: var(--text);
-  border-radius: 8px;
-  padding: 8px;
-  text-align: left;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
 }
 
-.sidebar-section-list button.active {
-  border-color: #b8c5d2;
-  background: #ffffff;
-  box-shadow: 0 6px 16px rgba(31, 41, 51, 0.07);
+.sidebar-context-meta strong {
+  font-size: 13px;
 }
 
-.sidebar-section-list button svg,
+.sidebar-context-meta em {
+  display: inline-grid;
+  min-width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #e9eef3;
+  color: var(--slate);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+  padding: 0 8px;
+}
+
 .titlebar-section svg,
 .settings-pane-heading svg {
   color: var(--blue);
@@ -1594,54 +1626,6 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.operator-center-trigger {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 8px;
-  align-items: center;
-  border: 1px solid #d5dde6;
-  background: #fbfcfd;
-  color: var(--text);
-  border-radius: 8px;
-  padding: 10px;
-  text-align: left;
-}
-
-.operator-center-trigger svg {
-  color: var(--slate);
-}
-
-.operator-center-trigger span {
-  display: grid;
-  min-width: 0;
-  gap: 2px;
-}
-
-.operator-center-trigger strong {
-  font-size: 13px;
-}
-
-.operator-center-trigger small {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.35;
-  overflow-wrap: anywhere;
-}
-
-.operator-center-trigger em {
-  display: inline-grid;
-  min-width: 24px;
-  height: 24px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  background: #e9eef3;
-  color: var(--slate);
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 900;
 }
 
 .operator-center-dialog {
@@ -5418,6 +5402,7 @@ h3 {
 
 .native-file-workspace-panel {
   gap: 12px;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .native-file-hero {
@@ -5431,10 +5416,15 @@ h3 {
   padding: 16px;
 }
 
+.native-file-hero > div:first-child {
+  min-width: 0;
+}
+
 .native-file-hero h2 {
   margin: 4px 0 6px;
   font-size: 24px;
   line-height: 1.18;
+  word-break: keep-all;
 }
 
 .native-file-hero p {
@@ -6390,8 +6380,6 @@ h3 {
   .mode-group-list button:hover,
   .mode-location-card:hover,
   .mode-option-grid article:hover,
-  .activity-rail button:hover,
-  .sidebar-section-list button:hover,
   .settings-option-list button:hover,
   .settings-segment-list button:hover,
   .settings-pin-grid button:hover,
@@ -6597,16 +6585,12 @@ h3 {
   }
 
   .desktop-sidebar {
-    grid-template-rows: auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto;
     height: auto;
     max-height: none;
     overflow: visible;
     border-right: 0;
     border-bottom: 1px solid var(--line);
-  }
-
-  .sidebar-section-groups {
-    display: none;
   }
 
   .desktop-viewport {

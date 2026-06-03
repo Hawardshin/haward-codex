@@ -1811,14 +1811,6 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const sectionById = useMemo(() => {
     return new Map(localizedSections.map((item) => [item.id, item]));
   }, [localizedSections]);
-  const groupedVisibleSections = useMemo(() => {
-    return localizedFeatureGroups
-      .map((group) => ({
-        ...group,
-        sections: workVisibleSections.filter((item) => item.group === group.id)
-      }))
-      .filter((group) => group.sections.length > 0);
-  }, [localizedFeatureGroups, workVisibleSections]);
   const coreFunctionSections = useMemo(() => {
     return (["overview", "desktop", "agents", "source", "intent"] as SectionId[])
       .map((id) => sectionById.get(id))
@@ -1858,6 +1850,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const nextActionLabel = collaborationBoard.nextActions[0]?.nextAction || "No pending handoff";
   const currentSectionLabel = sectionById.get(section)?.label || "홈";
   const currentSection = sectionById.get(section);
+  const currentFeatureGroup =
+    localizedFeatureGroups.find((group) => group.id === currentSection?.group) || localizedFeatureGroups[0];
   const commandItems: CommandItem[] = [
     ...workVisibleSections.map((item) => ({
       id: `section-${item.id}`,
@@ -2015,7 +2009,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           </button>
         </aside>
 
-        <aside className="desktop-sidebar" aria-label={uiLanguage === "ko" ? "작업공간 탐색" : "Workspace navigation"}>
+        <aside className="desktop-sidebar" aria-label={uiLanguage === "ko" ? "작업공간 맥락" : "Workspace context"}>
           <div className="workspace-switcher">
             <div>
               <p className="eyebrow">{uiLanguage === "ko" ? "에이전트 작업공간" : "Agent Workspace"}</p>
@@ -2032,41 +2026,23 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             </span>
           </button>
 
-          <div className="sidebar-section-groups">
-            {groupedVisibleSections.map((group) => (
-              <section key={group.id} className="sidebar-section-group" aria-label={group.label}>
-                <div className="sidebar-group-heading">
-                  <span>{group.label}</span>
-                  <small>{group.purpose}</small>
-                </div>
-                <div className="sidebar-section-list">
-                  {group.sections.map((item) => (
-                    <button
-                      key={item.id}
-                      type="button"
-                      className={section === item.id ? "active" : ""}
-                      onClick={() => openSection(item.id)}
-                      title={item.purpose}
-                      aria-current={section === item.id ? "page" : undefined}
-                    >
-                      <item.icon size={16} aria-hidden="true" />
-                      <span>{item.shortLabel}</span>
-                      <small>{sectionNavMeta[item.id]}</small>
-                    </button>
-                  ))}
-                </div>
-              </section>
-            ))}
-          </div>
-
-          <button className="operator-center-trigger" type="button" onClick={() => setOperatorCenterOpen(true)}>
-            <ShieldCheck size={17} aria-hidden="true" />
-            <span>
-              <strong>{uiLanguage === "ko" ? "운영 센터" : "Operator Center"}</strong>
-              <small>{uiLanguage === "ko" ? "기록, 문서, 검증은 따로 보기" : "Monitoring, docs, governance separated"}</small>
-            </span>
-            <em>{operatorCenterSections.length.toLocaleString("ko-KR")}</em>
-          </button>
+          <section className="sidebar-context-panel" aria-label={uiLanguage === "ko" ? "현재 화면 설명" : "Current surface context"}>
+            <div className="sidebar-context-heading">
+              {currentSection ? <currentSection.icon size={18} aria-hidden="true" /> : <LayoutDashboard size={18} aria-hidden="true" />}
+              <span>
+                <small>{uiLanguage === "ko" ? "현재 작업 화면" : "Current Surface"}</small>
+                <strong>{currentSectionLabel}</strong>
+              </span>
+            </div>
+            <p>{currentSection?.purpose || (uiLanguage === "ko" ? "선택한 화면의 역할을 보여줍니다." : "Shows the role of the selected surface.")}</p>
+            <div className="sidebar-context-meta">
+              <span>
+                <strong>{currentFeatureGroup?.label || (uiLanguage === "ko" ? "작업" : "Work")}</strong>
+                <small>{currentFeatureGroup?.purpose || (uiLanguage === "ko" ? "현재 화면 묶음" : "Current surface group")}</small>
+              </span>
+              <em>{sectionNavMeta[section]}</em>
+            </div>
+          </section>
 
           <div className={`sidebar-status-card status-${attentionState.tone}`}>
             <div>
