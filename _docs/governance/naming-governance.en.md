@@ -17,7 +17,7 @@ This document defines shared naming rules for projects, tools, skills, docs, spe
 
 | Target | Rule | Example |
 | --- | --- | --- |
-| root project | `kebab-case` | `agent-platform/`, `workspace-monitor/` |
+| root project | `kebab-case` | `agent-platform/`, `platform-desktop-app/` |
 | reserved operations folder | `_` + lower-kebab | `_docs/`, `_history/` |
 | runtime adapter | `.` + lower-kebab | `.claude/`, `.cursor/` |
 | tool folder | `kebab-case` | `_tools/workspace-health/` |

@@ -101,7 +101,7 @@ if (!pkg.scripts?.check?.includes("check-service-readiness.mjs")) {
 if (!pkg.devDependencies?.["@tauri-apps/cli"]) {
   failures.push("package.json must declare @tauri-apps/cli as a project-local devDependency");
 }
-const workspaceMonitorPkg = readJson("../workspace-monitor/package.json");
+const workspaceMonitorPkg = readJson("renderer/workspace-monitor/package.json");
 if (!workspaceMonitorPkg.scripts?.["build:customer"]?.includes("--snapshot-mode customer")) {
   failures.push("workspace-monitor package.json must expose build:customer with customer snapshot mode");
 }
@@ -110,8 +110,8 @@ const tauriConfig = readJson("src-tauri/tauri.conf.json");
 if (tauriConfig.identifier !== "com.personalagentplatform.desktop") {
   failures.push("src-tauri/tauri.conf.json must use the selected product identifier");
 }
-if (tauriConfig.build?.frontendDist !== "../../workspace-monitor/out") {
-  failures.push("Tauri frontendDist must point at workspace-monitor static output");
+if (tauriConfig.build?.frontendDist !== "../renderer/workspace-monitor/out") {
+  failures.push("Tauri frontendDist must point at renderer/workspace-monitor static output");
 }
 if (tauriConfig.app?.withGlobalTauri !== true) {
   failures.push("Tauri must expose window.__TAURI__ for the static workspace-monitor desktop bridge");
@@ -301,8 +301,8 @@ if (!JSON.stringify(viewModeRegistry).includes("desktop")) {
   failures.push("view-mode-registry must expose the desktop runtime section");
 }
 
-const monitorShell = readFileSync(join(root, "../workspace-monitor/components/MonitorShell.tsx"), "utf8");
-const monitorCollector = readFileSync(join(root, "../workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
+const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
+const monitorCollector = readFileSync(join(root, "renderer/workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
 const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
 const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
 const serviceReadinessCheck = readFileSync(join(root, "scripts/check-service-readiness.mjs"), "utf8");

@@ -15,7 +15,7 @@ export function checkReleaseReadiness({ mode = "internal", reportOnly = false } 
 
   requireCheck(checks, targets.includes("app"), "bundle target includes app", blockers);
   requireCheck(checks, targets.includes("dmg"), "bundle target includes dmg", blockers);
-  requireCheck(checks, tauriConfig.build?.frontendDist === "../../workspace-monitor/out", "frontendDist points to customer audited workspace-monitor/out", blockers);
+  requireCheck(checks, tauriConfig.build?.frontendDist === "../renderer/workspace-monitor/out", "frontendDist points to customer audited renderer/workspace-monitor/out", blockers);
 
   if (mode === "internal") {
     requireCheck(checks, macos.signingIdentity === "-", "internal build uses explicit ad-hoc signing identity", blockers);

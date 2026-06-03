@@ -207,13 +207,13 @@
       "status": "installed",
       "name": "workspace-monitor Next.js dependencies",
       "scope": "project",
-      "owning_project": "workspace-monitor",
+      "owning_project": "platform-desktop-app",
       "package_manager": "npm",
       "install_command": "npm install --save-exact next@16.2.2 react@latest react-dom@latest lucide-react@latest; npm install --save-exact next@16.2.6; npm install --save-dev --save-exact typescript@latest @types/node@latest @types/react@latest @types/react-dom@latest; npm install",
-      "environment_path": "workspace-monitor/node_modules/",
+      "environment_path": "platform-desktop-app/renderer/workspace-monitor/node_modules/",
       "dependency_record_paths": [
-        "workspace-monitor/package.json",
-        "workspace-monitor/package-lock.json"
+        "platform-desktop-app/renderer/workspace-monitor/package.json",
+        "platform-desktop-app/renderer/workspace-monitor/package-lock.json"
       ],
       "version_or_lock_status": "Exact versions recorded in package.json and package-lock.json; postcss override pinned to 8.5.10.",
       "security_review": "Initial audit found Next/PostCSS vulnerabilities; Next was updated to 16.2.6 and postcss overridden to 8.5.10. Final npm audit reported 0 vulnerabilities.",
@@ -225,7 +225,7 @@
         "npm run check: passed",
         "npm run build: passed"
       ],
-      "rollback_path": "Remove workspace-monitor/node_modules and package-lock.json, then remove dependencies from workspace-monitor/package.json or revert the commit.",
+      "rollback_path": "Remove platform-desktop-app/renderer/workspace-monitor/node_modules and package-lock.json, then remove dependencies from platform-desktop-app/renderer/workspace-monitor/package.json or revert the commit.",
       "installation_record_path": "_history/installations/2026/2026-06-01-workspace-monitor-nextjs.ko.md",
       "commit": "a8c085e"
     },
@@ -264,25 +264,25 @@
       "scope": "project",
       "owning_project": "platform-desktop-app",
       "package_manager": "npm+cargo",
-      "install_command": "npm --prefix platform-desktop-app ci; npm --prefix workspace-monitor ci; cd platform-desktop-app/src-tauri && cargo fetch; cd platform-desktop-app/src-tauri && cargo test; cd platform-desktop-app/src-tauri && cargo build; npm --prefix platform-desktop-app run tauri:build",
-      "environment_path": "platform-desktop-app/node_modules/, workspace-monitor/node_modules/, platform-desktop-app/src-tauri/target/, user-local Cargo registry/cache",
+      "install_command": "npm --prefix platform-desktop-app ci; npm --prefix platform-desktop-app/renderer/workspace-monitor ci; cd platform-desktop-app/src-tauri && cargo fetch; cd platform-desktop-app/src-tauri && cargo test; cd platform-desktop-app/src-tauri && cargo build; npm --prefix platform-desktop-app run tauri:build",
+      "environment_path": "platform-desktop-app/node_modules/, platform-desktop-app/renderer/workspace-monitor/node_modules/, platform-desktop-app/src-tauri/target/, user-local Cargo registry/cache",
       "dependency_record_paths": [
         "platform-desktop-app/package.json",
         "platform-desktop-app/package-lock.json",
         "platform-desktop-app/src-tauri/Cargo.toml",
         "platform-desktop-app/src-tauri/Cargo.lock",
-        "workspace-monitor/package.json",
-        "workspace-monitor/package-lock.json"
+        "platform-desktop-app/renderer/workspace-monitor/package.json",
+        "platform-desktop-app/renderer/workspace-monitor/package-lock.json"
       ],
       "version_or_lock_status": "@tauri-apps/cli locked to 2.11.2 in package-lock; Tauri Rust crates locked in Cargo.lock; workspace-monitor dompurify overridden to 3.4.7 to clear npm audit.",
-      "security_review": "Project-local npm install and Cargo dependency resolution only. npm audit reports 0 vulnerabilities for platform-desktop-app and workspace-monitor after dompurify override. Local macOS build uses ad-hoc signing only and is not public distribution-ready.",
+      "security_review": "Project-local npm install and Cargo dependency resolution only. npm audit reports 0 vulnerabilities for platform-desktop-app and renderer/workspace-monitor after dompurify override. Local macOS build uses ad-hoc signing only and is not public distribution-ready.",
       "license_review": "@tauri-apps/cli is Apache-2.0 OR MIT; monaco/xterm direct dependencies are MIT; dompurify is MPL-2.0 OR Apache-2.0.",
       "verification": [
         "npm --prefix platform-desktop-app audit --audit-level=moderate: 0 vulnerabilities",
-        "npm --prefix workspace-monitor audit --audit-level=moderate: 0 vulnerabilities",
+        "npm --prefix platform-desktop-app/renderer/workspace-monitor audit --audit-level=moderate: 0 vulnerabilities",
         "npm --prefix platform-desktop-app run check: ready_for_dependency_install_audit",
         "npm --prefix platform-desktop-app test: 7 tests passed",
-        "npm --prefix workspace-monitor run check: passed",
+        "npm --prefix platform-desktop-app/renderer/workspace-monitor run check: passed",
         "npm --prefix workspace-monitor test: 12 tests passed",
         "npm --prefix workspace-monitor run build: passed",
         "cd platform-desktop-app/src-tauri && cargo test: passed",
@@ -340,7 +340,7 @@
         "package.json",
         "pnpm-workspace.yaml",
         "pnpm-lock.yaml",
-        "workspace-monitor/package.json",
+        "platform-desktop-app/renderer/workspace-monitor/package.json",
         "platform-desktop-app/package.json",
         "presentation-agent/package.json"
       ],
@@ -364,6 +364,36 @@
       ],
       "rollback_path": "Remove node_modules and pnpm store entries if desired, then revert package.json, pnpm-workspace.yaml, pnpm-lock.yaml, project package.json files, removed package-lock.json files, and pnpm command documentation/config changes.",
       "installation_record_path": "_history/installations/2026/2026-06-03-pnpm-workspace-migration.ko.md",
+      "commit": "pending"
+    },
+    {
+      "id": "2026-06-03-desktop-product-folder-restructure",
+      "date": "2026-06-03",
+      "status": "installed",
+      "name": "desktop product renderer workspace relink",
+      "scope": "project",
+      "owning_project": "platform-desktop-app",
+      "package_manager": "pnpm",
+      "install_command": "corepack pnpm install --lockfile-only; corepack pnpm install --frozen-lockfile",
+      "environment_path": "platform-desktop-app/renderer/workspace-monitor/node_modules, workspace node_modules, pnpm-lock.yaml",
+      "dependency_record_paths": [
+        "pnpm-workspace.yaml",
+        "pnpm-lock.yaml",
+        "platform-desktop-app/renderer/workspace-monitor/package.json",
+        "platform-desktop-app/package.json"
+      ],
+      "version_or_lock_status": "No new dependency version added; pnpm importer path moved from root workspace-monitor to platform-desktop-app/renderer/workspace-monitor.",
+      "security_review": "Workspace-local relink only after moving the renderer package. No private files were read or bundled.",
+      "license_review": "No new external dependency; license surface unchanged from the pnpm workspace migration.",
+      "verification": [
+        "corepack pnpm --filter workspace-monitor run check: passed",
+        "corepack pnpm --filter workspace-monitor run build:customer: passed",
+        "corepack pnpm --filter workspace-monitor test: 16 tests passed",
+        "corepack pnpm --filter workspace-monitor run perf:budget: passed",
+        "corepack pnpm --filter platform-desktop-app run check: passed"
+      ],
+      "rollback_path": "Move platform-desktop-app/renderer/workspace-monitor back to root workspace-monitor, revert pnpm workspace/lockfile, Tauri config, readiness, registry/docs/map changes, then rerun corepack pnpm install --frozen-lockfile.",
+      "installation_record_path": "_history/installations/2026/2026-06-03-desktop-product-folder-restructure.ko.md",
       "commit": "pending"
     }
   ]

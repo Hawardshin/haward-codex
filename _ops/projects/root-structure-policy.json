@@ -251,8 +251,7 @@
       "folders": [
         "agent-platform/",
         "presentation-agent/",
-        "platform-desktop-app/",
-        "workspace-monitor/"
+        "platform-desktop-app/"
       ],
       "rule": "Add a new root project only when the concern has independent ownership or lifecycle; register it in _ops/projects/registry.json."
     },

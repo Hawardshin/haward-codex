@@ -41,8 +41,8 @@
   - `PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json`
   - `PYTHONPATH=src python3 -m agent_platform.cli list-view-modes configs/access/view-mode-registry.json`
   - `PYTHONPATH=src python3 -m agent_platform.cli show-view-mode configs/access/view-mode-registry.json superadmin_developer`
-- 모니터 UI: `workspace-monitor/components/MonitorShell.tsx`
-- snapshot 생성기: `workspace-monitor/scripts/collect-workspace.mjs`
+- 모니터 UI: `platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx`
+- snapshot 생성기: `platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs`
 
 ## 보안 해석
 

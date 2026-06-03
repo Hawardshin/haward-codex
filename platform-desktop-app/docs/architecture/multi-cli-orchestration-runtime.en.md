@@ -17,7 +17,7 @@ Core conclusions:
 ```text
 Platform-first host runtime
   -> Tauri desktop shell
-  -> workspace-monitor / future desktop UI
+  -> platform-desktop-app/renderer/workspace-monitor / future desktop UI
       -> command center
       -> run timeline
       -> decision inbox

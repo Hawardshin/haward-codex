@@ -7,7 +7,7 @@ This document defines the structure for running the platform as an installable m
 ### 1. Developer Local Run
 
 - Purpose: quick validation on a developer Mac with the repository available.
-- Allowed: `workspace-monitor` dev server, static export preview, future unsigned or ad-hoc signed desktop app.
+- Allowed: `platform-desktop-app/renderer/workspace-monitor` dev server, static export preview, future unsigned or ad-hoc signed desktop app.
 - Not allowed: calling it public distribution-ready.
 
 ### 2. Internal Test App

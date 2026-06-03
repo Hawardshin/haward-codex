@@ -1,0 +1,20 @@
+{
+  "task": "Desktop product folder restructure",
+  "status": "grounded",
+  "claims_checked": [
+    {
+      "claim": "Tauri embeds frontend assets from frontendDist for production builds.",
+      "grounding": "_history/web-searches/2026/2026-06-03-desktop-product-folder-restructure.ko.md"
+    },
+    {
+      "claim": "The root workspace-monitor project was removed from registered root projects.",
+      "grounding": "python3 _tools/structure-audit/src/structure_audit.py --check"
+    },
+    {
+      "claim": "The desktop app customer bundle points to platform-desktop-app/renderer/workspace-monitor/out.",
+      "grounding": "corepack pnpm --filter platform-desktop-app run check"
+    }
+  ],
+  "unsupported_claims_removed": [],
+  "public_release_caveat": "Public release readiness is not claimed."
+}

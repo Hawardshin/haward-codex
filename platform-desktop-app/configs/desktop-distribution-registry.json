@@ -174,11 +174,11 @@
     },
     {
       "id": "workspace_monitor",
-      "title": "Workspace Monitor",
-      "path": "workspace-monitor/README.md",
+      "title": "Workspace Monitor Renderer",
+      "path": "platform-desktop-app/renderer/workspace-monitor/README.md",
       "source_type": "internal",
       "used_for": [
-        "selected product UI source for the desktop shell"
+        "project-owned renderer UI source for the desktop shell"
       ],
       "last_checked": "2026-06-02"
     },
@@ -256,7 +256,7 @@
     },
     {
       "id": "desktop_shell_reuses_existing_ui",
-      "rule": "The desktop product shell uses workspace-monitor as the selected UI source unless a release-quality migration plan proves a separate UI is cheaper to maintain.",
+      "rule": "The desktop product shell owns the workspace-monitor renderer under platform-desktop-app/renderer/workspace-monitor/ unless a release-quality migration plan proves a separate UI is cheaper to maintain.",
       "reason": "The monitor already parses repository history and documents, so duplicating it would add product surface without improving the selected desktop product structure.",
       "applies_to": [
         "runtime_strategy",
@@ -265,7 +265,7 @@
     },
     {
       "id": "tauri_first_is_selected_shell_until_measurement_changes_it",
-      "rule": "Use Tauri v2/Rust as the selected desktop product shell architecture around workspace-monitor. Electron and Wails remain fallback routes, but new implementation work should target the Tauri product shell unless a recorded release blocker or maintenance case changes the decision.",
+      "rule": "Use Tauri v2/Rust as the selected desktop product shell architecture around the project-owned workspace-monitor renderer. Electron and Wails remain fallback routes, but new implementation work should target the Tauri product shell unless a recorded release blocker or maintenance case changes the decision.",
       "reason": "The long design review favored a smaller native shell with explicit command boundaries while preserving Python and Next.js ownership.",
       "applies_to": [
         "selected_platform_architecture",
@@ -326,7 +326,7 @@
   "field_guide": [
     {
       "field": "product_boundary",
-      "meaning": "Defines what the desktop app project owns and what remains in agent-platform or workspace-monitor.",
+      "meaning": "Defines what the desktop app project owns and what remains in agent-platform or other root projects.",
       "required": true
     },
     {
@@ -412,12 +412,11 @@
     "does_not_own": [
       "core agent planning and evaluation implementation in agent-platform",
       "repository setup install_mode profiles",
-      "workspace-monitor web UI source unless a desktop-specific adapter is required",
       "external CLI behavior or authenticated provider sessions",
       "presentation-agent domain workflows"
     ],
     "integration_points": [
-      "workspace-monitor as the selected product UI surface",
+      "platform-desktop-app/renderer/workspace-monitor as the selected product UI surface",
       "agent-platform as the Python-first local platform layer",
       "agent-platform CLI adapter registry for optional external command capabilities",
       "_history and _ops documents as repository data sources"
@@ -426,9 +425,9 @@
   "recommended_initial_path": {
     "id": "tauri_first_cross_platform_shell",
     "status": "selected_product_runtime",
-    "summary": "Build a Tauri v2 desktop shell that starts as the platform-first host runtime, reuses the existing workspace-monitor static UI, keeps agent-platform as the Python layer, and mounts Claude Code, Gemini CLI, Codex CLI, OpenCode, and other CLIs as optional guest adapters.",
+    "summary": "Build a Tauri v2 desktop shell that starts as the platform-first host runtime, owns the workspace-monitor renderer static UI inside platform-desktop-app, keeps agent-platform as the Python layer, and mounts Claude Code, Gemini CLI, Codex CLI, OpenCode, and other CLIs as optional guest adapters.",
     "why": [
-      "The repository already has web UI output in workspace-monitor.",
+      "The desktop product now owns its renderer under platform-desktop-app/renderer/workspace-monitor.",
       "A smaller desktop shell is preferable for the current product boundary.",
       "Tauri gives a clear Rust native boundary for future command scopes, sidecars, and signed updater work.",
       "The platform goal is to configure multiple AI coding tools above a shared workspace platform, not wrap one CLI."
@@ -457,9 +456,9 @@
     },
     "ui": {
       "runtime": "TypeScript/Next.js",
-      "source_path": "workspace-monitor/",
-      "build_output": "workspace-monitor/out",
-      "tauri_frontend_dist": "../../workspace-monitor/out"
+      "source_path": "platform-desktop-app/renderer/workspace-monitor/",
+      "build_output": "platform-desktop-app/renderer/workspace-monitor/out",
+      "tauri_frontend_dist": "../renderer/workspace-monitor/out"
     },
     "agent_layer": {
       "runtime": "Python",
@@ -528,7 +527,7 @@
       ],
       "must_check_before_install": [
         "license and dependency review",
-        "workspace-monitor static export compatibility",
+        "renderer/workspace-monitor static export compatibility",
         "Python sidecar or local service pattern",
         "auto-update requirements"
       ]
@@ -587,7 +586,7 @@
       ],
       "must_check_before_install": [
         "whether a desktop shell is actually needed",
-        "whether workspace-monitor can be hosted or opened locally",
+        "whether renderer/workspace-monitor can be hosted or opened locally",
         "Windows MSIX and macOS package/notarization paths"
       ]
     }
@@ -640,7 +639,7 @@
     }
   ],
   "runtime_strategy": {
-    "ui_strategy": "Reuse workspace-monitor first, then add desktop-specific UI only when local desktop behavior needs it.",
+    "ui_strategy": "Own the workspace-monitor renderer inside platform-desktop-app first, then add further desktop-specific UI only when local desktop behavior needs it.",
     "platform_host_strategy": "The installed desktop app is the primary host runtime. It launches before optional AI CLIs, owns workspace/task/decision/artifact/validation state, and mounts Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or future tools only as guest adapter lanes.",
     "agent_runtime_strategy": "Keep agent-platform as a Python-first platform layer. The desktop shell must not run agent logic in the renderer. Future execution must use a documented sidecar, local service, or explicit command adapter with lifecycle cleanup.",
     "language_runtime_strategy": "Use Rust/Tauri first for the desktop shell, Go first for a separate local daemon or operational CLI, Python for agent logic, and TypeScript/Next.js for the UI. Follow agent-platform/configs/runtime/language-decision-registry.json before changing this split.",

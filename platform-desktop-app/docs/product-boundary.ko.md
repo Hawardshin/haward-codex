@@ -16,14 +16,14 @@
 ## 소유하지 않는 범위
 
 - `agent-platform/`의 핵심 에이전트/평가/조사 구현
-- `workspace-monitor/`의 일반 웹 대시보드 구현
+- `platform-desktop-app/renderer/workspace-monitor/`의 renderer UI 구현
 - 레포지토리 세팅용 사용자/개발자 `install_mode`
 - Codex CLI, Claude Code, GitHub CLI, package manager, 배포 CLI 같은 외부 CLI 자체의 동작이나 인증 세션
 - 발표 에이전트 같은 도메인 프로젝트 기능
 
 ## 첫 제품 가정
 
-첫 버전은 새 UI를 만들기보다 `workspace-monitor/`를 데스크톱 shell에서 재사용한다. 이유는 현재 플랫폼의 사용자 경험이 히스토리, 문서, 프로젝트 구조, 평가를 보는 것에서 시작하기 때문이다.
+첫 버전은 새 UI를 따로 만들기보다 `platform-desktop-app/renderer/workspace-monitor/`를 데스크톱 shell의 project-owned renderer로 사용한다. 이유는 현재 플랫폼의 사용자 경험이 히스토리, 문서, 프로젝트 구조, 평가를 보는 것에서 시작하기 때문이다.
 
 이후 다음 요구가 확실해지면 별도 데스크톱 UI 또는 native 기능을 추가한다.
 

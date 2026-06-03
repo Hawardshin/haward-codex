@@ -16,7 +16,7 @@ test("desktop product shell has the selected Tauri entry points", () => {
   const config = readJson("src-tauri/tauri.conf.json");
   assert.equal(config.productName, "Agent Workspace Platform");
   assert.equal(config.identifier, "com.personalagentplatform.desktop");
-  assert.equal(config.build.frontendDist, "../../workspace-monitor/out");
+  assert.equal(config.build.frontendDist, "../renderer/workspace-monitor/out");
   assert.equal(config.app.withGlobalTauri, true);
   assert.equal(config.bundle.macOS.hardenedRuntime, true);
   assert.equal(config.bundle.resources["../runtime-contracts/installer-shell-runtime-contract.json"], "runtime-contracts/installer-shell-runtime-contract.json");
@@ -183,12 +183,12 @@ test("shared CLI adapter registry defines concrete AI CLI targets", () => {
 
 test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () => {
   const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
-  const monitorShell = readFileSync(join(root, "../workspace-monitor/components/MonitorShell.tsx"), "utf8");
-  const monitorCollector = readFileSync(join(root, "../workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
+  const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
+  const monitorCollector = readFileSync(join(root, "renderer/workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
   const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
   const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
   const platformPkg = readJson("package.json");
-  const monitorPkg = readJson("../workspace-monitor/package.json");
+  const monitorPkg = readJson("renderer/workspace-monitor/package.json");
   const viewModes = readJson("../agent-platform/configs/access/view-mode-registry.json");
 
   assert.match(platformPkg.scripts["monitor:build"], /build:customer/);

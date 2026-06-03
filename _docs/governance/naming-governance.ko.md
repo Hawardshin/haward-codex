@@ -17,7 +17,7 @@
 
 | 대상 | 규칙 | 예시 |
 | --- | --- | --- |
-| root project | `kebab-case` | `agent-platform/`, `workspace-monitor/` |
+| root project | `kebab-case` | `agent-platform/`, `platform-desktop-app/` |
 | reserved 운영 폴더 | `_` + lower-kebab | `_docs/`, `_history/` |
 | runtime adapter | `.` + lower-kebab | `.claude/`, `.cursor/` |
 | tool folder | `kebab-case` | `_tools/workspace-health/` |

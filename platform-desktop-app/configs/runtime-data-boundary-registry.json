@@ -200,7 +200,7 @@
       "label": "Platform Source",
       "paths": [
         "platform-desktop-app/src-tauri/",
-        "workspace-monitor/",
+        "platform-desktop-app/renderer/workspace-monitor/",
         "agent-platform/src/",
         "agent-platform/configs/"
       ],
@@ -227,8 +227,8 @@
       "label": "Developer Artifacts",
       "paths": [
         "platform-desktop-app/artifacts/",
-        "workspace-monitor/src/generated/",
-        "workspace-monitor/public/workspace-snapshot.json"
+        "platform-desktop-app/renderer/workspace-monitor/src/generated/",
+        "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json"
       ],
       "purpose": "Build-time or developer-visible artifacts. Public deployment requires privacy review before exposing generated snapshots.",
       "customer_visibility": "review_before_public"

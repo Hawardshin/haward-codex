@@ -6,7 +6,7 @@ This document defines how root folders should stay separated as projects, shared
 
 ## Current Classification
 
-- `agent-platform/`, `presentation-agent/`, and `workspace-monitor/` are registered root projects.
+- `agent-platform/`, `presentation-agent/`, and `platform-desktop-app/` are registered root projects.
 - `_docs/`, `_ops/`, `_history/`, `_requirements/`, `_specs/`, `_research/`, `_skills/`, `_templates/`, `_tools/`, `_philosophy/`, and `_archive/` are shared operational folders.
 - `.claude/`, `.cursor/`, and `.agents/` are runtime adapter folders. They are not projects and should contain only tool-specific rule entrypoints.
 - `_private/` and `outputs/` are local-only ignored folders. They are not durable sources of truth.
@@ -17,7 +17,7 @@ This document defines how root folders should stay separated as projects, shared
 1. Existing rules generally treated underscore folders as reserved folders but did not explain local-only exceptions such as `_private/`.
 2. A root `outputs/` folder was ambiguous by name, even when empty, because it could be mistaken for a durable artifact location.
 3. Project boundary review was document-based and did not include a deterministic root-folder check.
-4. `workspace-monitor` showed history and project docs but did not include `_docs` and `_philosophy`, making structural rules less directly visible.
+4. The desktop renderer showed history and project docs but did not include `_docs` and `_philosophy`, making structural rules less directly visible.
 5. The first audit pass focused on root folders and did not verify whether project-internal top-level folders were explained in the registry.
 
 ## Applied Structure
@@ -26,7 +26,7 @@ This document defines how root folders should stay separated as projects, shared
 - Root folder audit is handled by `_tools/structure-audit/`.
 - `.gitignore` explicitly excludes `_private/`, `outputs/`, build outputs, and TypeScript build metadata.
 - The project boundary workflow treats local-only scratch and generated output as separate classifications.
-- `workspace-monitor` collects `_docs` and `_philosophy` as document categories.
+- `platform-desktop-app/renderer/workspace-monitor` collects `_docs` and `_philosophy` as document categories.
 - `structure-audit` now produces registered project top-level folder inventories and warns when durable folders are missing from `project_specific_home`.
 - Patterns declared in `generated_output_dirs` must also be covered by `.gitignore`; missing coverage is treated as a gap.
 - Runtime adapter folders must be registered in `_ops/projects/root-structure-policy.json` `runtime_adapter_dirs`.

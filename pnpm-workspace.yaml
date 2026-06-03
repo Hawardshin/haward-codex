@@ -1,5 +1,5 @@
 packages:
-  - "workspace-monitor"
+  - "platform-desktop-app/renderer/workspace-monitor"
   - "platform-desktop-app"
   - "presentation-agent"
 

@@ -8,14 +8,13 @@ AI assistant runtime adapters: [../assistant-runtimes/adapter-registry.json](../
 | --- | --- | --- | --- | --- |
 | `agent-platform/` | active | core-platform | Central agent-building platform project | Shared platform capabilities live here; domain experiments should become separate root projects |
 | `presentation-agent/` | active | domain-agent-project | Dedicated project for presentation assets, references, and skills | Presentation references, assets, conversion tools, and artifacts stay in this project |
-| `platform-desktop-app/` | active | installable-desktop-product | Installable desktop productization project | OS-specific install, distribution, update, privacy, and secret review stay in this project |
-| `workspace-monitor/` | active | repository-monitoring-site | Next.js monitoring site for visualizing repository history, projects, agents, requirements, and documents | UI, snapshot generation, and deployment settings stay in this project while source documents are read from shared folders |
+| `platform-desktop-app/` | active | installable-desktop-product | Installable desktop productization project | OS-specific install, distribution, update, privacy, secret review, and the Next.js renderer UI stay in this project |
 
 ## Root Folder Logical Layers
 
 | Layer | Folders | Meaning |
 | --- | --- | --- |
-| Project plane | `agent-platform/`, `presentation-agent/`, `platform-desktop-app/`, `workspace-monitor/` | Root projects with independent purpose and lifecycle |
+| Project plane | `agent-platform/`, `presentation-agent/`, `platform-desktop-app/` | Root projects with independent purpose and lifecycle |
 | Operations control plane | `_ops/`, `_docs/`, `_requirements/`, `_specs/`, `_history/` | Workflows, policies, requirements, specs, evaluations, and history |
 | Knowledge and reuse plane | `_philosophy/`, `_research/`, `_skills/`, `_templates/`, `_tools/`, `_archive/` | Reusable knowledge, tools, templates, skills, philosophy, and archived projects |
 | Runtime adapter plane | `.claude/`, `.cursor/`, `.agents/` | Thin adapters for AI coding tools |

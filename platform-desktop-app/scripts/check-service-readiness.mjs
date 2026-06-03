@@ -18,7 +18,7 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
   const serializedUserFlow = JSON.stringify(userFlow);
   const serializedRegistry = JSON.stringify(registry);
   const tauriLib = readText("src-tauri/src/lib.rs");
-  const monitorShell = readText("../workspace-monitor/components/MonitorShell.tsx");
+  const monitorShell = readText("renderer/workspace-monitor/components/MonitorShell.tsx");
   const workspacePersistenceReady = [
     "get_desktop_workspace_state",
     "set_desktop_workspace_path",

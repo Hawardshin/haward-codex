@@ -15,7 +15,7 @@
     "release:preflight:public:report": "node scripts/check-release-readiness.mjs --mode public --report-only",
     "service:readiness": "node scripts/check-service-readiness.mjs --mode internal",
     "service:readiness:public:report": "node scripts/check-service-readiness.mjs --mode public --report-only",
-    "monitor:build": "corepack pnpm --dir ../workspace-monitor run build:customer && corepack pnpm run customer-bundle:audit",
+    "monitor:build": "corepack pnpm --dir renderer/workspace-monitor run build:customer && corepack pnpm run customer-bundle:audit",
     "tauri:dev": "tauri dev",
     "tauri:build": "tauri build"
   },

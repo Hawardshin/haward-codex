@@ -8,7 +8,7 @@ When turning the platform into software that an end user installs, separate repo
 
 - Installable desktop app productization belongs in `platform-desktop-app/`.
 - `agent-platform/configs/installations/install-mode-registry.json` describes repository user/developer setup modes, not DMG/MSIX/MSI/NSIS-style distribution packaging.
-- The desktop shell uses `workspace-monitor/` as the selected product UI source. A separate UI requires a release-quality migration plan, trace update, and validation run first.
+- The desktop shell owns `platform-desktop-app/renderer/workspace-monitor/` as the selected product UI source. A separate UI requires a release-quality migration plan, trace update, and validation run first.
 - Before desktop UI or installer implementation, check `platform-desktop-app/configs/user-flow-registry.json` and review first run, workspace chooser, view mode, optional setup deferral, task timeline, decision inbox, and recovery flows.
 - The installable app is not a single CLI wrapper. External CLIs attach as optional capabilities through `agent-platform/configs/integrations/cli-adapter-registry.json`.
 - Tauri is the currently selected product runtime. Re-evaluate Electron, Wails, or native-packaging-only only when a new release blocker or maintenance case is recorded.
@@ -29,4 +29,4 @@ When turning the platform into software that an end user installs, separate repo
 
 ## Current Baseline
 
-As of 2026-06-03, the baseline is the Tauri-first product runtime. `workspace-monitor` is the selected desktop product UI source, while Electron, Wails, and native-packaging-only remain fallback/comparison routes only when a recorded release blocker or maintenance case justifies re-evaluation.
+As of 2026-06-03, the baseline is the Tauri-first product runtime. `platform-desktop-app/renderer/workspace-monitor` is the desktop product-owned renderer UI source, while Electron, Wails, and native-packaging-only remain fallback/comparison routes only when a recorded release blocker or maintenance case justifies re-evaluation.

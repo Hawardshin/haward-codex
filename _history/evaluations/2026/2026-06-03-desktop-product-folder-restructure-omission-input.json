@@ -1,0 +1,137 @@
+{
+  "task": "Desktop product folder restructure",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and implementation.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-desktop-product-folder-restructure.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "desktop-product-boundary",
+      "description": "Use platform-desktop-app and installable desktop productization workflow for installer/desktop app structure.",
+      "source": "AGENTS.md Platformization Rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/spec.ko.md",
+        "_ops/projects/registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "folder-structure-change",
+      "description": "Actually change the folder structure rather than only documenting it.",
+      "source": "UR-2026-06-03-034",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/",
+        "git diff --name-status"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "runtime-paths-rewired",
+      "description": "Tauri, pnpm, build, customer bundle, readiness, and tests use the product-owned renderer path.",
+      "source": "PDA-REQ-034",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/tauri.conf.json",
+        "pnpm-workspace.yaml",
+        "platform-desktop-app/scripts/check-customer-bundle.mjs",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "operational-boundary",
+      "description": "Update registries, root policy, docs, and generated maps to remove root workspace-monitor ownership.",
+      "source": "Workspace Rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_ops/projects/registry.json",
+        "_ops/projects/root-structure-policy.json",
+        "_ops/maps/repository-map.md",
+        "python3 _tools/structure-audit/src/structure_audit.py --check"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "installation-audit",
+      "description": "Record the pnpm install/relink command that followed the package move.",
+      "source": "AGENTS.md installation rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/installations/2026/2026-06-03-desktop-product-folder-restructure.ko.md",
+        "_ops/installations/registry.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/spec.ko.md",
+      "purpose": "Spec for the folder restructure.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+      "purpose": "Requirement PDA-REQ-034.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-03-desktop-product-folder-restructure.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "customer-build",
+      "description": "Renderer customer build creates sanitized public snapshot and static export.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter workspace-monitor run build:customer"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "desktop-check",
+      "description": "Desktop readiness/check scripts accept the new renderer path.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter platform-desktop-app run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "structure-audit",
+      "description": "Root workspace-monitor is no longer a registered project.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/structure-audit/src/structure_audit.py --check"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Historical specs still mention old root workspace-monitor paths as prior records; this is intentionally not rewritten wholesale.",
+    "Public signing/notarization/updater/clean-machine smoke remain outside this folder restructure."
+  ],
+  "notes": [
+    "The workspace package name remains workspace-monitor for filter compatibility; durable path ownership changed to platform-desktop-app/renderer/workspace-monitor."
+  ]
+}

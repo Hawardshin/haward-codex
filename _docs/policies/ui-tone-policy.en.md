@@ -15,7 +15,7 @@ Platform surfaces should feel fast to scan and trustworthy like operational tool
 
 ## Applies To
 
-- `workspace-monitor/` dashboards, history, source viewer, and agent board
+- `platform-desktop-app/renderer/workspace-monitor/` dashboards, history, source viewer, and agent board
 - `platform-desktop-app/` installable app UI
 - Future admin, monitor, coordination board, and generated report HTML
 

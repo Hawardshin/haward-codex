@@ -162,7 +162,6 @@
       ],
       "shared_dependencies": [
         "presentation-agent/",
-        "workspace-monitor/",
         "platform-desktop-app/",
         "_history/",
         "_ops/"
@@ -187,6 +186,17 @@
         "platform-desktop-app/configs/",
         "platform-desktop-app/docs/",
         "platform-desktop-app/docs/requirements/",
+        "platform-desktop-app/renderer/",
+        "platform-desktop-app/renderer/workspace-monitor/app/",
+        "platform-desktop-app/renderer/workspace-monitor/artifacts/",
+        "platform-desktop-app/renderer/workspace-monitor/components/",
+        "platform-desktop-app/renderer/workspace-monitor/docs/",
+        "platform-desktop-app/renderer/workspace-monitor/lib/",
+        "platform-desktop-app/renderer/workspace-monitor/public/",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/",
+        "platform-desktop-app/renderer/workspace-monitor/specs/",
+        "platform-desktop-app/renderer/workspace-monitor/src/generated/",
+        "platform-desktop-app/renderer/workspace-monitor/tests/",
         "platform-desktop-app/runtime-contracts/",
         "platform-desktop-app/src/",
         "platform-desktop-app/src-tauri/",
@@ -196,50 +206,16 @@
       ],
       "shared_dependencies": [
         "agent-platform/",
-        "workspace-monitor/",
         "_docs/",
         "_ops/",
         "_history/"
       ],
       "boundary_notes": [
         "End-user installer packaging belongs here, not in agent-platform install_mode setup profiles.",
-        "Use the selected Tauri-first product runtime around workspace-monitor unless measured release blockers or maintenance evidence changes the decision.",
-        "Reuse workspace-monitor as the selected product UI source unless a release-quality migration plan proves a separate UI is easier to maintain.",
+        "Use the selected Tauri-first product runtime around the project-owned renderer workspace-monitor unless measured release blockers or maintenance evidence changes the decision.",
+        "Keep the Next.js renderer under platform-desktop-app/renderer/workspace-monitor/ so the desktop product owns UI, runtime bridge, customer bundle, and installer boundaries together.",
         "Do not bundle real secrets, private snapshots, or environment-specific tokens in installers.",
         "New fallback runtime or packager dependency installation must follow the installation audit workflow."
-      ]
-    },
-    {
-      "name": "workspace-monitor",
-      "path": "workspace-monitor/",
-      "status": "active",
-      "type": "repository-monitoring-site",
-      "purpose": "Vercel-deployable Next.js monitoring site that visualizes repository history, projects, agents, requirements, specs, evaluations, and Markdown documents from a generated workspace snapshot.",
-      "scope": "Project-local Next.js UI, repository snapshot generator, generated monitor data, deployment docs, tests, and monitor-specific requirements/specs.",
-      "project_specific_home": [
-        "workspace-monitor/app/",
-        "workspace-monitor/artifacts/",
-        "workspace-monitor/components/",
-        "workspace-monitor/lib/",
-        "workspace-monitor/scripts/",
-        "workspace-monitor/public/",
-        "workspace-monitor/src/generated/",
-        "workspace-monitor/docs/",
-        "workspace-monitor/tests/",
-        "workspace-monitor/specs/"
-      ],
-      "shared_dependencies": [
-        "_history/",
-        "_ops/",
-        "_requirements/",
-        "_specs/",
-        "agent-platform/",
-        "presentation-agent/"
-      ],
-      "boundary_notes": [
-        "Keep monitor UI code, data collection scripts, generated snapshots, and deployment settings inside workspace-monitor/.",
-        "Read shared repository documents as data sources; do not move source histories or project docs into the monitor project.",
-        "Before deploying publicly, review generated snapshots for private data and regenerate only the documents intended for public visibility."
       ]
     }
   ]

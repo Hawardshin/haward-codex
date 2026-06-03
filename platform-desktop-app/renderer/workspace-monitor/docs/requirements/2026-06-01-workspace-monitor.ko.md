@@ -4,7 +4,7 @@
 
 - 상태: `baseline`
 - 기준일: 2026-06-01
-- 소유 프로젝트: `workspace-monitor/`
+- 소유 프로젝트: `platform-desktop-app/renderer/workspace-monitor/`
 - 출처 요청: `UR-2026-06-01-008`
 
 ## 요구사항

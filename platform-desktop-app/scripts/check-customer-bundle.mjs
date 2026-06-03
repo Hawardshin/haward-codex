@@ -165,7 +165,7 @@ export function runCustomerBundleAudit({ allowMissingDist = false } = {}) {
   const warnings = [];
   const tauriConfig = readJson(path.join(root, "src-tauri", "tauri.conf.json"));
   const frontendDist = path.resolve(root, "src-tauri", tauriConfig.build?.frontendDist || "");
-  const publicSnapshotPath = path.join(workspaceRoot, "workspace-monitor", "public", "workspace-snapshot.json");
+  const publicSnapshotPath = path.join(root, "renderer", "workspace-monitor", "public", "workspace-snapshot.json");
   const distSnapshotPath = path.join(frontendDist, "workspace-snapshot.json");
   const checkedSnapshots = [];
 

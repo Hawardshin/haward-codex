@@ -4,7 +4,7 @@
 
 - Status: `baseline`
 - Baseline date: 2026-06-01
-- Owning project: `workspace-monitor/`
+- Owning project: `platform-desktop-app/renderer/workspace-monitor/`
 - Source request: `UR-2026-06-01-008`
 
 ## Requirements

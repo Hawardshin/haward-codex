@@ -1,0 +1,113 @@
+{
+  "initial_instruction": "git clone/workspace host 기능을 데스크톱 앱에 녹였으면 현재 폴더 구조도 그에 맞게 바뀌어야 한다는 요청",
+  "result_summary": "Moved the root workspace-monitor project into platform-desktop-app/renderer/workspace-monitor and rewired pnpm, Tauri, readiness, registry, docs, generated maps, snapshots, and validation gates to enforce desktop product ownership.",
+  "work_mode": "governance",
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/",
+    "pnpm-workspace.yaml",
+    "pnpm-lock.yaml",
+    "platform-desktop-app/src-tauri/tauri.conf.json",
+    "platform-desktop-app/scripts/",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "_ops/projects/registry.json",
+    "_ops/projects/root-structure-policy.json",
+    "_ops/maps/repository-map.md",
+    "_docs/",
+    "platform-desktop-app/configs/",
+    "platform-desktop-app/docs/",
+    "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/"
+  ],
+  "verification": [
+    "corepack pnpm install --lockfile-only",
+    "corepack pnpm install --frozen-lockfile",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "corepack pnpm --filter platform-desktop-app test",
+    "corepack pnpm --filter platform-desktop-app run runtime:contract",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "python3 _tools/docs-audit/src/docs_audit.py --check",
+    "python3 _tools/structure-audit/src/structure_audit.py --check",
+    "python3 _tools/workspace-index/src/workspace_index.py --check",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/desktop-distribution-registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/runtime-data-boundary-registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/macos-execution-profile.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/windows-execution-profile.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/claude-code-design-transfer-registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/projects/registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/projects/root-structure-policy.json"
+  ],
+  "references_checked": [
+    "Tauri official Configuration Files",
+    "Tauri official Configuration Reference",
+    "Electron official Application Packaging",
+    "Electron official Distribution Overview",
+    "Electron official app API",
+    "_ops/projects/registry.json",
+    "platform-desktop-app/configs/desktop-distribution-registry.json"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-03-desktop-product-folder-restructure-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-03-desktop-product-folder-restructure.ko.md",
+    "_history/source-provenance/2026/2026-06-03-desktop-product-folder-restructure.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-03-desktop-product-folder-restructure.ko.md",
+    "_history/plan-evidence/2026/2026-06-03-desktop-product-folder-restructure.json",
+    "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-03-desktop-product-folder-restructure.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-desktop-product-folder-restructure-omission-input.json",
+    "_history/evaluations/2026/2026-06-03-desktop-product-folder-restructure-omission-result.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-desktop-product-folder-restructure.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/user-requests/2026/2026-06-03.en.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-desktop-product-folder-restructure.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-desktop-product-folder-restructure.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": true,
+  "installation_record_targets": [
+    "_history/installations/2026/2026-06-03-desktop-product-folder-restructure.ko.md",
+    "_ops/installations/registry.json"
+  ],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Add a small path-ownership checker that fails if root workspace-monitor returns as a durable project.",
+    "Gradually normalize old non-historical docs that still mention root workspace-monitor if they become active references."
+  ]
+}

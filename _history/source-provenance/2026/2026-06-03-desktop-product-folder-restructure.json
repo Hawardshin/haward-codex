@@ -1,0 +1,51 @@
+{
+  "task": "Desktop product folder restructure",
+  "sources": [
+    {
+      "type": "official_docs",
+      "title": "Tauri Configuration Files",
+      "url": "https://v2.tauri.app/develop/configuration-files/",
+      "accessed_at": "2026-06-03",
+      "used_for": "Confirmed that Tauri build configuration points production frontend assets into the desktop app."
+    },
+    {
+      "type": "official_docs",
+      "title": "Tauri Configuration Reference",
+      "url": "https://v2.tauri.app/reference/config/",
+      "accessed_at": "2026-06-03",
+      "used_for": "Checked build frontendDist and development command concepts."
+    },
+    {
+      "type": "official_docs",
+      "title": "Electron Application Packaging",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/application-distribution",
+      "accessed_at": "2026-06-03",
+      "used_for": "Compared app resource packaging boundaries for desktop products."
+    },
+    {
+      "type": "official_docs",
+      "title": "Electron app API",
+      "url": "https://www.electronjs.org/docs/latest/api/app",
+      "accessed_at": "2026-06-03",
+      "used_for": "Compared app/user data boundary concepts."
+    },
+    {
+      "type": "local_source",
+      "title": "Project registry",
+      "path": "_ops/projects/registry.json",
+      "used_for": "Root project ownership source of truth."
+    },
+    {
+      "type": "local_source",
+      "title": "Desktop distribution registry",
+      "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
+      "used_for": "Desktop renderer source and build path source of truth."
+    }
+  ],
+  "weak_sources_ignored": [
+    "Reddit search results",
+    "Stack Overflow search results",
+    "Unofficial generated PDFs"
+  ],
+  "private_paths_inspected": false
+}

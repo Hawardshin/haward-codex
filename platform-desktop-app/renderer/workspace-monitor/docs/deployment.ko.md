@@ -2,7 +2,8 @@
 
 ## 전제
 
-- 이 프로젝트는 `workspace-monitor/`를 Vercel root directory로 설정하는 것을 기준으로 한다.
+- 이 renderer는 설치형 데스크톱 제품에 포함되는 것이 1차 경로다.
+- 별도 웹 배포가 필요할 때만 `platform-desktop-app/renderer/workspace-monitor/`를 Vercel root directory로 설정한다.
 - 현재 repository가 private이면 로컬 사용을 우선한다.
 - repository를 public으로 바꾼 뒤 배포할 때는 generated snapshot을 먼저 검토한다.
 
@@ -10,7 +11,7 @@
 
 | 항목 | 값 |
 | --- | --- |
-| Root Directory | `workspace-monitor` |
+| Root Directory | `platform-desktop-app/renderer/workspace-monitor` |
 | Framework Preset | Next.js |
 | Install Command | `pnpm install --frozen-lockfile` |
 | Build Command | `pnpm run build` |
@@ -22,7 +23,7 @@
 2. `src/generated/workspace-snapshot.json`에 공개하면 안 되는 정보가 들어있는지 확인한다.
 3. `pnpm test`, `pnpm run check`, `pnpm run build`를 실행한다.
 4. repository를 public으로 전환하거나 Vercel에 private repository 접근 권한을 부여한다.
-5. Vercel에서 root directory를 `workspace-monitor`로 설정하고 배포한다.
+5. Vercel에서 root directory를 `platform-desktop-app/renderer/workspace-monitor`로 설정하고 배포한다.
 
 ## 운영 방식
 

@@ -7,7 +7,7 @@
 ### 1. 개발자 로컬 실행
 
 - 목적: 저장소를 가진 개발자의 Mac에서 빠르게 확인한다.
-- 허용: `workspace-monitor` dev server, static export preview, future unsigned/ad-hoc signed desktop app.
+- 허용: `platform-desktop-app/renderer/workspace-monitor` dev server, static export preview, future unsigned/ad-hoc signed desktop app.
 - 금지: public distribution-ready라고 표현하는 것.
 
 ### 2. 내부 테스트 앱

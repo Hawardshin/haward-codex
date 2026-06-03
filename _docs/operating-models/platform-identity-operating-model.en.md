@@ -100,4 +100,4 @@ The platform increases agent autonomy, but the user keeps final authority. Secur
 - Concept review: `_philosophy/platform-concept-review.ko.md`
 - Core project: `agent-platform/README.md`
 - Recent work summaries: `_history/work-summaries/`
-- Monitoring UI project: `workspace-monitor/`
+- Desktop renderer UI: `platform-desktop-app/renderer/workspace-monitor/`

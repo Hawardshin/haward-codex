@@ -207,7 +207,7 @@
     },
     {
       "field": "runtime_boundaries",
-      "meaning": "Ownership boundaries between Tauri/Electron shell, workspace-monitor UI, Python agent layer, and CLI adapters.",
+      "meaning": "Ownership boundaries between Tauri/Electron shell, project-owned workspace-monitor renderer UI, Python agent layer, and CLI adapters.",
       "required": true
     },
     {
@@ -232,8 +232,8 @@
       "label": "Developer local run",
       "meaning": "Run the UI and platform from the repository on the developer's Mac.",
       "allowed_artifacts": [
-        "workspace-monitor dev server",
-        "workspace-monitor static export preview",
+        "renderer/workspace-monitor dev server",
+        "renderer/workspace-monitor static export preview",
         "future unsigned or ad-hoc signed Tauri/Electron app"
       ],
       "required_gates": [
@@ -281,8 +281,8 @@
     }
   ],
   "process_model": {
-    "recommended_initial_shape": "Tauri-first macOS .app shell wrapping workspace-monitor output, with agent-platform invoked through a documented local service or sidecar only after the service boundary is specified.",
-    "ui_process": "Desktop shell presents workspace-monitor as the first UI and adds native dialogs only where macOS file/workspace selection or permissions need native behavior.",
+    "recommended_initial_shape": "Tauri-first macOS .app shell wrapping platform-desktop-app/renderer/workspace-monitor output, with agent-platform invoked through a documented local service or sidecar only after the service boundary is specified.",
+    "ui_process": "Desktop shell presents the project-owned workspace-monitor renderer as the first UI and adds native dialogs only where macOS file/workspace selection or permissions need native behavior.",
     "agent_process": "Python agent-platform remains outside renderer code. It is launched later as a sidecar, local service, or explicit command boundary with lifecycle cleanup and logs.",
     "data_process": "Repository documents and generated snapshots are read only from user-selected workspace paths.",
     "cli_process": "External CLIs run only through adapter contracts with allowlisted commands, timeouts, output redaction, and capability_missing fallback.",
@@ -444,7 +444,7 @@
       "id": "future-tauri-macos-dev",
       "status": "not_run",
       "scope": "platform-desktop-app",
-      "command": "To be decided after Tauri dependency installation audit; likely a project-local Tauri dev command wrapping workspace-monitor output.",
+      "command": "To be decided after Tauri dependency installation audit; likely a project-local Tauri dev command wrapping renderer/workspace-monitor output.",
       "audit_required_if_run": true
     },
     {

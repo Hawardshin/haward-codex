@@ -17,7 +17,7 @@
 ```text
 Platform-first host runtime
   -> Tauri desktop shell
-  -> workspace-monitor / future desktop UI
+  -> platform-desktop-app/renderer/workspace-monitor / future desktop UI
       -> command center
       -> run timeline
       -> decision inbox
@@ -103,7 +103,7 @@ Platform-first host runtime
 - health check는 각 CLI의 `--version`만 실행한다.
 - stdin은 닫혀 있고, output은 `MAX_HEALTH_OUTPUT_BYTES`로 제한되며, timeout은 `HEALTH_TIMEOUT_MS`로 제한된다.
 - CLI가 없으면 `capability_missing`으로 보고하고 데스크톱 UI는 계속 열린다.
-- `workspace-monitor`의 `Desktop` 탭은 Tauri 런타임에 연결되면 실제 health check를 실행하고, 일반 브라우저에서는 unavailable fallback을 보여준다.
+- `platform-desktop-app/renderer/workspace-monitor`의 `Desktop` 탭은 Tauri 런타임에 연결되면 실제 health check를 실행하고, 일반 브라우저에서는 unavailable fallback을 보여준다.
 - health output에서 질문처럼 보이는 라인은 decision prompt 후보로 표시한다. session product slice에서는 `send_cli_adapter_defer_message`가 stdin defer message를 보내고 감지된 질문을 `_ops/coordination/human-decision-inbox.json`에 저장한다.
 
 ## 구현 상태: Pipe Session / Source Editor Product Slice 2

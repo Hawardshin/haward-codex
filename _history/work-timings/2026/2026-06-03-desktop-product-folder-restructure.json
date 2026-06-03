@@ -1,0 +1,31 @@
+{
+  "task": "Desktop product folder restructure",
+  "date": "2026-06-03",
+  "timezone": "Asia/Seoul",
+  "timings": [
+    {
+      "phase": "web_first_and_local_boundary_review",
+      "elapsed_minutes_estimate": 6
+    },
+    {
+      "phase": "renderer_move_and_path_rewire",
+      "elapsed_minutes_estimate": 22
+    },
+    {
+      "phase": "docs_registry_map_updates",
+      "elapsed_minutes_estimate": 18
+    },
+    {
+      "phase": "build_test_validation",
+      "elapsed_minutes_estimate": 14
+    },
+    {
+      "phase": "records_evaluation_commit",
+      "elapsed_minutes_estimate": 12
+    }
+  ],
+  "bottleneck_notes": [
+    "Moving the workspace package invalidated local pnpm symlinks and required a frozen-lockfile relink.",
+    "Generated public snapshot had to be rebuilt in customer mode before the desktop customer bundle audit could pass."
+  ]
+}

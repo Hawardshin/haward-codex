@@ -39,5 +39,5 @@ Do not claim that client-side hiding is a security boundary. If the surface may 
 - `_docs/policies/view-mode-policy.ko.md`
 - `_ops/workflows/73-view-mode-selection.md`
 - `PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json`
-- `workspace-monitor/scripts/collect-workspace.mjs` when monitor snapshot surfaces change
-- `workspace-monitor/components/MonitorShell.tsx` when UI selection behavior changes
+- `platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs` when monitor snapshot surfaces change
+- `platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx` when UI selection behavior changes

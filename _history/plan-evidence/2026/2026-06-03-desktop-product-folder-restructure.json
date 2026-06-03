@@ -1,0 +1,50 @@
+{
+  "task": "Desktop product folder restructure",
+  "research_profile_paths": [
+    "local_web_first_intake",
+    "platform-desktop-app/configs/user-flow-registry.json",
+    "platform-desktop-app/configs/macos-execution-profile.json"
+  ],
+  "source_inventory": [
+    "workspace-monitor tracked source",
+    "platform-desktop-app Tauri config/scripts/tests",
+    "pnpm workspace and lockfile",
+    "_ops project registry/root policy/maps",
+    "_docs governance/policies/operating models",
+    "platform-desktop-app docs/configs/requirements/specs"
+  ],
+  "exclusions": [
+    "_private content",
+    "node_modules generated dependency trees",
+    "Tauri target build output",
+    "historical specs not acting as current source of truth"
+  ],
+  "slice_ids": [
+    "S1-renderer-move",
+    "S2-runtime-build-paths",
+    "S3-operational-boundary",
+    "S4-validation",
+    "S5-records"
+  ],
+  "touch_paths": [
+    "platform-desktop-app/renderer/workspace-monitor/",
+    "platform-desktop-app/src-tauri/tauri.conf.json",
+    "platform-desktop-app/scripts/",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "pnpm-workspace.yaml",
+    "pnpm-lock.yaml",
+    "_ops/projects/",
+    "_ops/maps/",
+    "_docs/",
+    "_history/"
+  ],
+  "merge_gates": [
+    "customer renderer build must pass before desktop check",
+    "structure audit must show no root workspace-monitor project",
+    "workspace index must be fresh after generated map update",
+    "config contracts must pass after registry/config edits"
+  ],
+  "validation_targets": [
+    "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/validation.ko.md"
+  ]
+}

@@ -41,8 +41,8 @@ Superadmin development view is the current default.
   - `PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json`
   - `PYTHONPATH=src python3 -m agent_platform.cli list-view-modes configs/access/view-mode-registry.json`
   - `PYTHONPATH=src python3 -m agent_platform.cli show-view-mode configs/access/view-mode-registry.json superadmin_developer`
-- Monitor UI: `workspace-monitor/components/MonitorShell.tsx`
-- Snapshot collector: `workspace-monitor/scripts/collect-workspace.mjs`
+- Monitor UI: `platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx`
+- Snapshot collector: `platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs`
 
 ## Security Interpretation
 

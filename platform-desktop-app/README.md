@@ -13,13 +13,13 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 - Treat this repository as the development source that builds the platform, not as the customer-visible product payload. Installed customers should use the app, their selected workspaces, app-managed data stores, classified logs, and exports without seeing the platform source tree.
 - Keep user workspace data, platform data stores, log stores, cache stores, and agent runtime workspaces separate from platform source code. Use `configs/runtime-data-boundary-registry.json` as the steering source before adding persistent runtime data or log features.
 - Keep reusable agent definitions under `agent-platform/configs/agents/`; runtime agent input/output/log/handoff/temp work belongs in the installed product's scoped agent workspace plane.
-- Keep `workspace-monitor/` as the selected product UI source instead of duplicating the monitoring interface.
+- Keep the Next.js renderer under `platform-desktop-app/renderer/workspace-monitor/` as the selected product UI source instead of duplicating the monitoring interface in a separate root project.
 - Design the first-run user flow before implementing installer code: open/create/demo workspace, confirm workspace boundary, select view mode, run required readiness checks, then reach the dashboard.
 - Keep Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, notifications, browser automation, and advanced validators as optional capability cards that can be configured later instead of blocking initial use.
 - Treat Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode as the first concrete AI CLI guest adapter targets for multi-CLI orchestration, while keeping the app usable when any of them is missing.
 - Borrow Claude Code design patterns only from public, verifiable sources. Keep the transfer map in `configs/claude-code-design-transfer-registry.json`; never use leaked or non-public material as design evidence.
 - Model real multi-CLI execution as supervised process lanes with process graph validation, terminal I/O bounds, decision inbox routing, artifact retention, merge gates, and cleanup before any executable implementation.
-- The first implemented supervisor surface is intentionally narrow but executable: the Tauri backend exposes allowlisted CLI adapter discovery, bounded `--version` health checks, pipe-based CLI sessions, stdin/defer/cancel controls, deferred question persistence plus answer updates in the human decision inbox, and scoped source file read/write with backup. The Workspace Monitor exposes these in the `Desktop` tab with setup guides and work-mode presets. Missing CLIs report `capability_missing` and do not block the UI.
+- The first implemented supervisor surface is intentionally narrow but executable: the Tauri backend exposes allowlisted CLI adapter discovery, bounded `--version` health checks, pipe-based CLI sessions, stdin/defer/cancel controls, deferred question persistence plus answer updates in the human decision inbox, and scoped source file read/write with backup. The project-owned renderer exposes these in the `Desktop` tab with setup guides and work-mode presets. Missing CLIs report `capability_missing` and do not block the UI.
 - Keep `agent-platform/` as the Python-first agent/config/evaluation layer.
 - For macOS, treat `configs/macos-execution-profile.json` as the source of truth for local run, internal `.app`, and public signed/notarized distribution structure.
 - For Windows, treat `configs/windows-execution-profile.json` as the source of truth for local run, internal installer testing, public signed distribution, installer format, WebView2, update, uninstall, and smoke-test structure.
@@ -31,7 +31,7 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 The selected product runtime is Tauri v2:
 
 - Rust/Tauri owns the desktop shell, native window lifecycle, and future scoped native command boundary.
-- `workspace-monitor/` owns the TypeScript/Next.js UI.
+- `platform-desktop-app/renderer/workspace-monitor/` owns the TypeScript/Next.js renderer UI.
 - `agent-platform/` owns Python-first research, planning, evaluation, and config validation.
 - External AI coding CLIs remain guest adapters through `agent-platform/configs/integrations/cli-adapter-registry.json`; they execute platform-scoped lanes but do not own durable platform state.
 - Go remains a candidate for a future long-running local service or CLI supervisor if measurement shows that a daemon is needed.
@@ -56,6 +56,8 @@ platform-desktop-app/
   configs/
   docs/
   docs/requirements/
+  renderer/
+    workspace-monitor/
   runtime-contracts/
   specs/
   src/
@@ -122,7 +124,7 @@ cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-c
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json
 ```
 
-`monitor:build` runs the customer Workspace Monitor build and then audits `workspace-monitor/out` before Tauri embeds it. Public release preflight is report-only unless Developer ID signing and Apple notarization credentials are available.
+`monitor:build` runs the customer renderer build and then audits `platform-desktop-app/renderer/workspace-monitor/out` before Tauri embeds it. Public release preflight is report-only unless Developer ID signing and Apple notarization credentials are available.
 
 Implemented desktop bridge commands:
 

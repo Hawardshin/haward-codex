@@ -2,7 +2,7 @@
 
 ## 결론
 
-`platform-desktop-app`의 1차 설치형 제품 구조는 **플랫폼-first host runtime**, **Tauri v2 + Rust 데스크톱 셸**, **workspace-monitor 정적 UI**, **agent-platform Python 계층**, **선택형 외부 CLI guest 어댑터**로 고정한다.
+`platform-desktop-app`의 1차 설치형 제품 구조는 **플랫폼-first host runtime**, **Tauri v2 + Rust 데스크톱 셸**, **project-owned workspace-monitor renderer**, **agent-platform Python 계층**, **선택형 외부 CLI guest 어댑터**로 고정한다.
 
 이 결정은 최종 제품이 Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity 같은 특정 AI 코딩 도구 위에서 동작하지 않고, 플랫폼 자체가 먼저 실행된 뒤 그 도구들을 플랫폼 위의 설정 가능한 guest lane으로 붙이기 위한 구조다. 외부 AI 도구는 실행 provider일 수 있지만 task state, durable memory, decision inbox, artifact, validation, UI authority는 플랫폼이 소유한다.
 
@@ -17,7 +17,7 @@
 | 보안/프라이버시 전문가 | 앱 설치물에 토큰, 쿠키, private snapshot, 서명 키를 넣으면 안 된다. | 편의성을 위해 자동 설정 욕구가 생긴다. | 설정은 OS credential/env/runtime input으로 주입하고, installer에는 기본값만 넣는다. |
 | UX 전문가 | 사용자는 첫 실행에서 workspace 선택, 모드 선택, 누락된 기능 상태, 작업 타임라인을 한 번에 이해해야 한다. | 설정 질문이 많으면 흐름이 막힌다. | optional CLI는 나중에 설정 가능한 capability card로 둔다. 질문은 decision inbox로 모으고, 막히지 않는 작업은 계속한다. |
 | 원칙 수호자 | 플랫폼은 프롬프트가 아니라 강제 가능한 구조여야 한다. | 너무 많은 게이트는 느리다. | work_mode로 무게를 조절하고, 설치형 제품은 release gate와 readiness test로 강제한다. |
-| 비용/효율 전문가 | 사람의 반복 업무 시간을 줄이는 것이 목적이므로 중복 UI나 중복 런타임을 피해야 한다. | 기존 monitor UI가 데스크톱 UX에 부족할 수 있다. | 첫 버전은 workspace-monitor를 재사용하고, 데스크톱 전용 UI는 실제 필요가 확인될 때만 추가한다. |
+| 비용/효율 전문가 | 사람의 반복 업무 시간을 줄이는 것이 목적이므로 중복 UI나 중복 런타임을 피해야 한다. | 기존 monitor UI가 데스크톱 UX에 부족할 수 있다. | 첫 버전은 `platform-desktop-app/renderer/workspace-monitor`를 제품 renderer로 소유하고, 추가 UI는 실제 필요가 확인될 때만 만든다. |
 
 ## 후보 비교
 
@@ -34,7 +34,7 @@
 사용자
   -> platform-first host runtime
   -> Tauri desktop shell (Rust)
-      -> workspace-monitor static export (TypeScript/Next.js)
+      -> platform-desktop-app/renderer/workspace-monitor static export (TypeScript/Next.js)
       -> selected workspace snapshot/docs/history
       -> platform supervisor boundary
           -> agent-platform Python commands/service/sidecar

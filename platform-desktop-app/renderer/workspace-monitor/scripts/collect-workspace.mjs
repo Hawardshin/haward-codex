@@ -5,7 +5,7 @@ import { collectIntentFeatureMap, emptyIntentFeatureMap } from "./lib/intent-fea
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
-const defaultRepoRoot = path.resolve(projectRoot, "..");
+const defaultRepoRoot = path.resolve(projectRoot, "..", "..", "..");
 const snapshotPath = path.join(projectRoot, "src", "generated", "workspace-snapshot.json");
 const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.json");
 
@@ -80,12 +80,12 @@ const DOCUMENT_SOURCES = [
   { category: "project-doc", root: "agent-platform/docs" },
   { category: "project-doc", root: "presentation-agent/docs" },
   { category: "project-doc", root: "platform-desktop-app/docs" },
-  { category: "project-doc", root: "workspace-monitor/docs" },
+  { category: "project-doc", root: "platform-desktop-app/renderer/workspace-monitor/docs" },
   { category: "project-config", root: "platform-desktop-app/configs" },
   { category: "project-spec", root: "agent-platform/specs" },
   { category: "project-spec", root: "presentation-agent/specs" },
   { category: "project-spec", root: "platform-desktop-app/specs" },
-  { category: "project-spec", root: "workspace-monitor/specs" }
+  { category: "project-spec", root: "platform-desktop-app/renderer/workspace-monitor/specs" }
 ];
 const DOCUMENT_FILES = [
   { category: "runtime-adapter", file: "AGENTS.md" },
@@ -1118,7 +1118,7 @@ export function collectModeFunctionCatalog(repoRoot, viewModeCatalog, languageMo
       purpose: "Changes the prompt posture for a CLI session launched from the platform-first desktop shell.",
       selectorLocation: "Desktop / Run Board / Mode",
       defaultMode: "user_task",
-      sourcePath: "workspace-monitor/components/MonitorShell.tsx",
+      sourcePath: "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
       desktopRuntime: true,
       options: DESKTOP_SESSION_MODE_OPTIONS
     }),
@@ -1148,7 +1148,7 @@ export function collectModeFunctionCatalog(repoRoot, viewModeCatalog, languageMo
       purpose: "Shows where core platform functions live inside the installable monitor surface.",
       selectorLocation: "Top section tabs",
       defaultMode: "overview",
-      sourcePath: "workspace-monitor/components/MonitorShell.tsx",
+      sourcePath: "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
       options: MONITOR_SECTION_OPTIONS
     })
   ];
@@ -1569,8 +1569,13 @@ export function buildStructureOverview(repoRoot, projects, documents, folderStru
       id: "monitor-ui",
       label: "Monitor UI",
       intent: "Generated snapshot, dashboard UI, source/document browser, and customer bundle sanitization.",
-      owner: "workspace-monitor",
-      primaryPaths: ["workspace-monitor/app/", "workspace-monitor/components/", "workspace-monitor/lib/", "workspace-monitor/scripts/"],
+      owner: "platform-desktop-app",
+      primaryPaths: [
+        "platform-desktop-app/renderer/workspace-monitor/app/",
+        "platform-desktop-app/renderer/workspace-monitor/components/",
+        "platform-desktop-app/renderer/workspace-monitor/lib/",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/"
+      ],
       contains: ["Next.js screens", "snapshot collector", "monitor tests", "generated public snapshot"],
       mustNotContain: ["runtime task stores", "secret-bearing source data in customer mode"],
       uiEntry: "Overview, Structure, Source"
@@ -1581,7 +1586,7 @@ export function buildStructureOverview(repoRoot, projects, documents, folderStru
       intent: "Bounded project work that should not be hidden inside the core platform.",
       owner: "registered root projects",
       primaryPaths: projects
-        .filter((project) => !["agent-platform", "platform-desktop-app", "workspace-monitor"].includes(project.name))
+        .filter((project) => !["agent-platform", "platform-desktop-app"].includes(project.name))
         .map((project) => project.path || `${project.name}/`),
       contains: ["domain assets", "domain docs", "project-local configs", "project-local artifacts"],
       mustNotContain: ["cross-workspace governance rules unless promoted"],
@@ -1609,7 +1614,7 @@ export function buildStructureOverview(repoRoot, projects, documents, folderStru
       label: "Project boundary first",
       rule: "Place project-specific code, docs, tests, configs, and artifacts inside the owning root project before promoting shared assets.",
       sourcePath: "_ops/projects/registry.json",
-      appliesTo: ["agent-platform/", "platform-desktop-app/", "workspace-monitor/", "presentation-agent/", "design-asset-library/"]
+      appliesTo: ["agent-platform/", "platform-desktop-app/", "presentation-agent/", "design-asset-library/"]
     },
     {
       id: "reserved-ops-meaning",
@@ -1632,7 +1637,11 @@ export function buildStructureOverview(repoRoot, projects, documents, folderStru
       label: "Installed customer view is not source tree view",
       rule: "Customer bundles use sanitized snapshots and runtime data stores instead of exposing platform source internals.",
       sourcePath: "platform-desktop-app/configs/runtime-data-boundary-registry.json",
-      appliesTo: ["platform-desktop-app/", "workspace-monitor/public/", "workspace-monitor/out/"]
+      appliesTo: [
+        "platform-desktop-app/",
+        "platform-desktop-app/renderer/workspace-monitor/public/",
+        "platform-desktop-app/renderer/workspace-monitor/out/"
+      ]
     }
   ];
 
@@ -1671,13 +1680,13 @@ export function buildStructureOverview(repoRoot, projects, documents, folderStru
     {
       id: "generated-snapshot-size",
       label: "Generated snapshot weight",
-      signal: fs.existsSync(path.join(repoRoot, "workspace-monitor", "src", "generated", "workspace-snapshot.json"))
-        ? "workspace-monitor generated snapshot exists"
+      signal: fs.existsSync(path.join(repoRoot, "platform-desktop-app", "renderer", "workspace-monitor", "src", "generated", "workspace-snapshot.json"))
+        ? "renderer/workspace-monitor generated snapshot exists"
         : "generated snapshot not found",
       reason: "Generated data must stay downstream of source maps and should not be treated as the design source of truth.",
       nextAction: "Use collector modules and source registries as the source of truth; regenerate snapshots after source changes.",
       priority: "medium",
-      sourcePath: "workspace-monitor/src/generated/workspace-snapshot.json"
+      sourcePath: "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json"
     }
   ];
 
@@ -1704,7 +1713,7 @@ function countSourceFilesForPrefixes(sourceFiles, prefixes) {
 }
 
 function sourceHotspotRecommendation(file) {
-  if (file.path === "workspace-monitor/components/MonitorShell.tsx") {
+  if (file.path === "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx") {
     return "Split by feature panels and keep shared view state/types in small monitor modules.";
   }
   if (file.path === "platform-desktop-app/src-tauri/src/lib.rs") {
@@ -1755,7 +1764,7 @@ export function extractHistoryDate(relativePath) {
 export function collectRequirements(repoRoot) {
   const roots = [
     path.join(repoRoot, "_requirements"),
-    path.join(repoRoot, "workspace-monitor", "docs", "requirements"),
+    path.join(repoRoot, "platform-desktop-app", "renderer", "workspace-monitor", "docs", "requirements"),
     path.join(repoRoot, "presentation-agent", "docs", "requirements"),
     path.join(repoRoot, "platform-desktop-app", "docs", "requirements")
   ];

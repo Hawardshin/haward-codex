@@ -102,4 +102,4 @@ AI는 흩어진 대화, 긴 문서, 조사 자료, 리뷰, 로그, 메모 같은
 - 컨셉 재검토: `_philosophy/platform-concept-review.ko.md`
 - 중심 프로젝트: `agent-platform/README.md`
 - 최근 작업 요약: `_history/work-summaries/`
-- 전체 모니터링 프로젝트: `workspace-monitor/`
+- 데스크톱 renderer UI: `platform-desktop-app/renderer/workspace-monitor/`

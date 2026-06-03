@@ -10,13 +10,13 @@
 | --- | --- | --- | --- |
 | PDA-REQ-001 | 설치형 앱 제품화는 `platform-desktop-app/` 루트 프로젝트가 소유해야 한다. | must | 프로젝트 등록부와 구조 감사 |
 | PDA-REQ-002 | 레포지토리 setup `install_mode`와 end-user installer packaging을 문서와 설정에서 구분해야 한다. | must | product boundary 문서와 registry 검토 |
-| PDA-REQ-003 | 현재 desktop product shell은 `workspace-monitor`를 선택된 제품 UI 원천으로 재사용해야 한다. | should | desktop distribution registry 확인 |
+| PDA-REQ-003 | 현재 desktop product shell은 `platform-desktop-app/renderer/workspace-monitor/`를 선택된 제품 UI 원천으로 소유해야 한다. | should | desktop distribution registry 확인 |
 | PDA-REQ-004 | Tauri, Electron, native packaging 후보를 비교한 뒤 dependency 설치나 구현을 시작해야 한다. | must | packaging strategy와 spec traceability |
 | PDA-REQ-005 | 배포 가능 상태는 signing, notarization/OS trust, install/update/uninstall smoke test, privacy review, dependency/license review가 끝나야 한다. | must | release gate checklist |
 | PDA-REQ-006 | 실제 token, webhook URL, browser cookie, private snapshot을 installer에 번들하지 않아야 한다. | must | privacy/security review |
 | PDA-REQ-007 | macOS 실행 가능 구조는 개발자 로컬 실행, 내부 테스트 `.app`, 외부 배포 앱을 구분하고, `.app` bundle/process model, workspace 선택, optional CLI adapter, Developer ID signing, hardened runtime, notarization, stapling, update, clean Mac smoke test 기준을 명시해야 한다. | must | `macos-execution-profile.json`, macOS 실행 문서, config contract |
 | PDA-REQ-008 | Windows 실행 가능 구조는 개발자 로컬 실행, 내부 테스트 installer, 공개 signed distribution을 구분하고, MSI/NSIS/MSIX, WebView2, code signing, SmartScreen, update, uninstall, clean Windows smoke test 기준을 명시해야 한다. | must | `windows-execution-profile.json`, config contract |
-| PDA-REQ-009 | 현재 구현 제품 shell은 Tauri v2/Rust 데스크톱 셸, `workspace-monitor` 정적 UI, `agent-platform` Python 계층, optional external CLI adapter 구조를 따라야 한다. | must | `src-tauri/`, `package.json`, desktop distribution registry |
+| PDA-REQ-009 | 현재 구현 제품 shell은 Tauri v2/Rust 데스크톱 셸, project-owned `renderer/workspace-monitor` 정적 UI, `agent-platform` Python 계층, optional external CLI adapter 구조를 따라야 한다. | must | `src-tauri/`, `package.json`, desktop distribution registry |
 | PDA-REQ-010 | Codex, Claude Code, Cursor, Antigravity 같은 AI 코딩 도구는 플랫폼 필수 런타임이 아니라 설정 가능한 선택형 capability로 처리해야 한다. | must | CLI adapter registry와 desktop registry 검토 |
 | PDA-REQ-011 | Rust/Tauri dependency 설치 또는 빌드 실행 전에는 설치 감사 기록, license/security 검토, rollback 계획을 남겨야 한다. | must | 설치 기록과 `planned_commands` 검토 |
 | PDA-REQ-012 | public-ready 또는 “설치만 하면 됨” 수준의 표현은 macOS/Windows signing, notarization 또는 code-signing, clean-machine smoke test, update/uninstall/rollback test가 끝나기 전까지 금지해야 한다. | must | release gate와 평가 기록 |
@@ -41,6 +41,7 @@
 | PDA-REQ-031 | 사용자는 설치형 데스크톱 앱 안에서 축적된 task run, decision inbox, payload audit, support bundle, agent workspace 데이터를 전용 Accumulated Data surface로 쉽게 볼 수 있어야 하며, 각 store의 record count, size, latest update, path, visibility, action label이 표시되어야 한다. | must | `get_accumulated_data_overview`, Workspace Monitor Accumulated Data panel, readiness/test |
 | PDA-REQ-032 | Accumulated Data surface는 raw directory scan 결과만 화면에 반환하지 않고 `app_data/runtime-data/indexes/accumulated-data-overview.v1.json` versioned manifest를 저장해야 하며, UI는 schema version, storage format version, manifest path, migration status를 표시해야 한다. | must | `accumulated_data_index_path`, `AccumulatedDataOverviewReport.schemaVersion`, runtime contract target, readiness/test |
 | PDA-REQ-033 | 설치형 데스크톱 앱은 사용자가 별도 터미널에서 git clone 후 그 폴더에서 작업해야 하는 구조에 의존하지 않고, 앱 안에서 기존 workspace import, repository clone, active workspace 선택, workspace state persistence를 제공해야 하며 source editor와 CLI working directory는 app-selected workspace를 우선 사용해야 한다. | must | `get_desktop_workspace_state`, `set_desktop_workspace_path`, `clone_desktop_workspace`, Workspace Host panel, readiness/test |
+| PDA-REQ-034 | 설치형 데스크톱 앱의 제품 UI는 루트 `workspace-monitor/` 독립 프로젝트가 아니라 `platform-desktop-app/renderer/workspace-monitor/` 아래의 renderer package로 관리되어야 하며, pnpm workspace, Tauri `frontendDist`, readiness checks, registry, docs, generated maps는 이 소유권을 강제해야 한다. | must | pnpm workspace, Tauri config, project registry, structure audit, workspace index, readiness/test |
 
 ## 현재 상태
 

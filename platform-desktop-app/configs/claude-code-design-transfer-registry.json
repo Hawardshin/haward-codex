@@ -241,7 +241,7 @@
       "current_platform_assets": [
         "agent-platform/configs/workflows/work-mode-registry.json",
         "_ops/workflows/36-spec-driven-development.md",
-        "workspace-monitor/components/MonitorShell.tsx"
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
       ],
       "implementation_targets": [
         "Add a first-class Plan Gate indicator to Desktop task pipes",
@@ -291,7 +291,7 @@
       "transfer_principle": "Treat exploration, research, validation, implementation, and merge gates as separate lanes with explicit summaries.",
       "platform_mapping": "Expose agent collaboration lanes, task pipe presets, blockers, and merge gates rather than dumping every log into the main task view.",
       "current_platform_assets": [
-        "workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
         "agent-platform/configs/agents/",
         "_ops/coordination/status.json"
       ],

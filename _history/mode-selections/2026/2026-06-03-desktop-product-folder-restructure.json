@@ -1,0 +1,22 @@
+{
+  "task": "Desktop product folder restructure",
+  "selected_mode": "governance",
+  "reason": "The request changes durable project ownership boundaries, installable desktop product structure, package workspace paths, docs, registry, generated maps, and validation gates.",
+  "web_first_completed": true,
+  "memory_bootstrap_completed": true,
+  "memory_bootstrap_notes": "Simulated through hot anchors already used in this thread: _ops/projects/registry.json, root-structure policy, platform-desktop-app product docs/configs, installable desktop workflows, and previous desktop workspace host records.",
+  "large_scope_decomposition_required": true,
+  "large_scope_triggers": [
+    "root_folder_restructure",
+    "cross_project_boundary_change",
+    "generated_map_change",
+    "package_workspace_change"
+  ],
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "resource_risk_occurred": false,
+  "resource_risk_reason": "No new long-running server, worker, CLI supervisor, pipe graph, or runtime resource lifecycle was introduced. Build/test subprocesses completed before close-out.",
+  "installation_occurred": true,
+  "installation_reason": "pnpm install was run to relink the moved renderer package without adding new dependencies.",
+  "selected_at": "2026-06-03"
+}

@@ -2,7 +2,7 @@
 
 ## Decision
 
-The first installable product architecture for `platform-desktop-app` is **platform-first host runtime**, **Tauri v2 + Rust desktop shell**, **workspace-monitor static UI**, **agent-platform Python layer**, and **optional external CLI guest adapters**.
+The first installable product architecture for `platform-desktop-app` is **platform-first host runtime**, **Tauri v2 + Rust desktop shell**, **project-owned workspace-monitor renderer**, **agent-platform Python layer**, and **optional external CLI guest adapters**.
 
 This keeps the product from running on top of any one AI coding tool. The platform launches first; Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, and future tools attach as configurable guest lanes on top of it. External AI tools can be execution providers, but task state, durable memory, decision inbox, artifacts, validation, and UI authority remain owned by the platform.
 
@@ -17,7 +17,7 @@ This keeps the product from running on top of any one AI coding tool. The platfo
 | Security/privacy | Installers must not contain tokens, cookies, private snapshots, or signing keys. | Convenience pushes toward automatic setup. | Store secrets through OS credentials, environment variables, or runtime input, never committed defaults. |
 | UX | First run should make workspace, mode, missing capability, and task state visible. | Too many questions block work. | Optional CLIs are deferred capability cards; decision inbox collects blocked choices while unblocked work continues. |
 | Principle guardian | The platform must enforce structure, not rely only on prompts. | Too many gates slow work. | Use work modes for overhead control and release/readiness gates for installable software. |
-| Cost/efficiency | Avoid duplicated UI and runtimes because the platform exists to reduce repeated human work. | The existing monitor may need desktop-specific UX later. | Reuse workspace-monitor first and add desktop-only UI only after real need is proven. |
+| Cost/efficiency | Avoid duplicated UI and runtimes because the platform exists to reduce repeated human work. | The existing monitor may need desktop-specific UX later. | Own `platform-desktop-app/renderer/workspace-monitor` as the product renderer first and add more desktop-only UI only after real need is proven. |
 
 ## Candidate Comparison
 
@@ -34,7 +34,7 @@ This keeps the product from running on top of any one AI coding tool. The platfo
 User
   -> platform-first host runtime
   -> Tauri desktop shell (Rust)
-      -> workspace-monitor static export (TypeScript/Next.js)
+      -> platform-desktop-app/renderer/workspace-monitor static export (TypeScript/Next.js)
       -> selected workspace snapshot/docs/history
       -> platform supervisor boundary
           -> agent-platform Python commands/service/sidecar

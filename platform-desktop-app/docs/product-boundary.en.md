@@ -16,14 +16,14 @@
 ## Out Of Scope
 
 - Core agent, evaluation, and research implementation in `agent-platform/`
-- General web dashboard implementation in `workspace-monitor/`
+- Renderer UI implementation in `platform-desktop-app/renderer/workspace-monitor/`
 - Repository setup `install_mode`
 - Behavior or authenticated sessions of external CLIs such as Codex CLI, Claude Code, GitHub CLI, package managers, or deployment CLIs
 - Domain projects such as `presentation-agent/`
 
 ## First Product Assumption
 
-The first version should reuse `workspace-monitor/` inside a desktop shell instead of creating a separate UI. The platform's first user-facing value is browsing history, documents, project structure, and evaluations.
+The first version should use `platform-desktop-app/renderer/workspace-monitor/` as the desktop shell's project-owned renderer instead of creating a separate UI. The platform's first user-facing value is browsing history, documents, project structure, and evaluations.
 
 Add desktop-specific UI or native behavior later when requirements are concrete:
 

@@ -15,7 +15,7 @@
 
 ## 적용 대상
 
-- `workspace-monitor/`의 dashboard, history, source viewer, agent board
+- `platform-desktop-app/renderer/workspace-monitor/`의 dashboard, history, source viewer, agent board
 - `platform-desktop-app/`의 설치형 프로그램 UI
 - 미래의 admin, monitor, coordination board, generated report HTML
 
