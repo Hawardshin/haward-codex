@@ -78,6 +78,8 @@
 .desktop-app-root.theme-dark .run-board-strip article,
 .desktop-app-root.theme-dark .process-node,
 .desktop-app-root.theme-dark .session-launcher button,
+.desktop-app-root.theme-dark .settings-controlled-summary article,
+.desktop-app-root.theme-dark .settings-controlled-summary button,
 .desktop-app-root.theme-dark .task-pipe-controls button,
 .desktop-app-root.theme-dark .workspace-dropzone,
 .desktop-app-root.theme-dark .workspace-explorer-actions button,
@@ -115,6 +117,8 @@
   .desktop-app-root.theme-system .run-board-strip article,
   .desktop-app-root.theme-system .process-node,
   .desktop-app-root.theme-system .session-launcher button,
+  .desktop-app-root.theme-system .settings-controlled-summary article,
+  .desktop-app-root.theme-system .settings-controlled-summary button,
   .desktop-app-root.theme-system .task-pipe-controls button,
   .desktop-app-root.theme-system .workspace-dropzone,
   .desktop-app-root.theme-system .workspace-explorer-actions button,
@@ -820,7 +824,7 @@ main {
   min-width: 0;
   min-height: 42px;
   border: 1px solid var(--line);
-  background: #fbfcfd;
+  background: var(--surface-raised);
   color: var(--text);
   border-radius: 8px;
   padding: 8px 10px;

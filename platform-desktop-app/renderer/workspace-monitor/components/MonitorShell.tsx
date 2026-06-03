@@ -40,6 +40,7 @@ import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFe
 import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
 import { CoreFeatureTabs, type CoreFeatureTab, type CoreFeatureTabId } from "@/components/workbench/CoreFeatureTabs";
 import { PathDisclosure } from "@/components/workbench/PathDisclosure";
+import { RuntimeTerminalDrawer } from "@/components/workbench/RuntimeTerminalDrawer";
 import { WorkspaceExplorerPane } from "@/components/workbench/WorkspaceExplorerPane";
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot, type WorkspaceSourceFile } from "@/lib/snapshot";
 
@@ -6841,220 +6842,38 @@ function DesktopRuntimePanel({
         </div>
       </section>
 
-      {!terminalDrawerOpen && (
-        <button type="button" className="terminal-drawer-launcher" onClick={() => setTerminalDrawerOpen(true)}>
-          <SquareTerminal size={16} aria-hidden="true" />
-          <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
-          <strong>{sessions.length}</strong>
-        </button>
-      )}
-
-      <section className={`panel wide cli-session-panel terminal-drawer ${terminalDrawerOpen ? "open" : "closed"}`} aria-label={uiLanguage === "ko" ? "하단 다중 CLI 터미널" : "Bottom multi-CLI terminal"}>
-        <div className="panel-heading">
-          <div>
-            <p className="eyebrow">Run Board</p>
-            <h2>{uiLanguage === "ko" ? "하단 다중 CLI 터미널" : "Bottom multi-CLI terminal"}</h2>
-          </div>
-          <div className="desktop-actions">
-            <span className="result-count">{sessions.length} sessions</span>
-            <button type="button" onClick={() => setTerminalDrawerOpen(false)} title={uiLanguage === "ko" ? "터미널 접기" : "Collapse terminal"}>
-              <X size={15} aria-hidden="true" />
-              <span>{uiLanguage === "ko" ? "접기" : "Collapse"}</span>
-            </button>
-          </div>
-        </div>
-
-        <div className="run-board-strip">
-          <article>
-            <span>active lanes</span>
-            <strong>{sessionStats.active}</strong>
-          </article>
-          <article>
-            <span>deferred lanes</span>
-            <strong>{sessionStats.deferred}</strong>
-          </article>
-          <article>
-            <span>auto deferred</span>
-            <strong>{sessionStats.autoDeferred}</strong>
-          </article>
-          <article>
-            <span>output</span>
-            <strong>{formatBytes(sessionStats.outputBytes)}</strong>
-          </article>
-          <article>
-            <span>events</span>
-            <strong>{outputEvents.length}</strong>
-          </article>
-        </div>
-
-        <div className="process-graph" aria-label="CLI process graph">
-          <article className="process-node node-intake">
-            <span>intake</span>
-            <strong>{selectedMode.label}</strong>
-          </article>
-          {sessions.slice(0, 4).map((session) => (
-            <article key={session.sessionId} className={`process-node node-${session.status}`}>
-              <span>{session.adapterId}</span>
-              <strong>{session.status}</strong>
-              <small>{formatDuration(session.elapsedMs)}</small>
-            </article>
-          ))}
-          <article className="process-node node-decision">
-            <span>decision</span>
-            <strong>{openInboxDecisions.length} open</strong>
-          </article>
-          <article className="process-node node-review">
-            <span>review</span>
-            <strong>{sourceDiff?.dirty ? "diff pending" : "clean"}</strong>
-          </article>
-        </div>
-
-        <div className="session-launcher">
-          <div className="settings-controlled-summary session-init-summary">
-            <article>
-              <span>Adapter</span>
-              <strong>{adapters.find((adapter) => adapter.adapterId === selectedSessionAdapterId)?.label || selectedSessionAdapterId}</strong>
-            </article>
-            <article>
-              <span>Mode</span>
-              <strong>{selectedMode.label}</strong>
-            </article>
-            <article>
-              <span>Questions</span>
-              <strong>{autoDeferQuestions ? "auto-defer" : "manual"}</strong>
-            </article>
-            <button type="button" onClick={onOpenSettings}>
-              <Settings size={15} aria-hidden="true" />
-              <span>초기화 설정 변경</span>
-            </button>
-          </div>
-          <label>
-            <span>Working dir</span>
-            <input
-              value={workingDir}
-              onChange={(event) => setWorkingDir(event.target.value)}
-              placeholder="workspace root"
-            />
-          </label>
-          <label className="session-prompt-field">
-            <span>Initial input</span>
-            <textarea value={sessionPrompt} onChange={(event) => setSessionPrompt(event.target.value)} rows={4} />
-          </label>
-          <button
-            type="button"
-            onClick={startSession}
-            disabled={!invoke || runningAdapterId !== "" || !adapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId && adapter.available)}
-          >
-            <SquareTerminal size={16} aria-hidden="true" />
-            <span>{runningAdapterId === "session" ? "Starting" : "Start Session"}</span>
-          </button>
-        </div>
-        <p className="session-mode-note">{selectedMode.intent}</p>
-
-        {sessions.length === 0 ? (
-          <p className="empty-state">실행 세션이 없습니다. 설치된 adapter를 선택하고 session을 시작하세요.</p>
-        ) : (
-          <div className="session-grid">
-            <div className="session-list">
-              {sessions.map((session) => (
-                <article key={session.sessionId} className={`session-card status-${session.status}`}>
-                  <header>
-                    <div>
-                      <span>{session.adapterId}</span>
-                      <h3>{session.label}</h3>
-                    </div>
-                    <strong>{session.status}</strong>
-                  </header>
-                  <p>{session.workingDir}</p>
-                  <div className="adapter-report">
-                    <span>{session.elapsedMs}ms</span>
-                    <span>{session.exitCode ?? "no code"}</span>
-                    <span>
-                      {session.pendingDecisionPrompts
-                        ? `${session.pendingDecisionPrompts} pending`
-                        : session.decisionInboxItems
-                          ? `${session.decisionInboxItems} inbox`
-                          : session.outputTruncated
-                            ? "truncated"
-                            : "bounded"}
-                    </span>
-                  </div>
-                  <div className="lane-mini-timeline">
-                    <span>started</span>
-                    <span>{session.deferMessageSent ? (session.autoDeferTriggered ? "auto-deferred" : "deferred") : "streaming"}</span>
-                    <span>{session.autoDeferQuestions ? `${session.deferredPromptCount} held` : "manual hold"}</span>
-                    <span>{isActiveSessionStatus(session.status) ? "open" : "finished"}</span>
-                  </div>
-                  {session.decisionCaptureError && <p className="desktop-error">{session.decisionCaptureError}</p>}
-                  {session.persistenceError && <p className="desktop-error">{session.persistenceError}</p>}
-                  <div className="session-record-link">
-                    <span>{session.taskKind}</span>
-                    <strong>{session.taskRecordPath || "record pending"}</strong>
-                    <small>{session.stdoutLogPath || "stdout log pending"}</small>
-                  </div>
-                  <div className="desktop-actions">
-                    <button type="button" onClick={() => setSelectedSessionId(session.sessionId)}>
-                      <ListFilter size={15} aria-hidden="true" />
-                      <span>Inspect</span>
-                    </button>
-                    <button type="button" onClick={() => pollSession(session.sessionId)} disabled={!invoke}>
-                      <Activity size={15} aria-hidden="true" />
-                      <span>Poll</span>
-                    </button>
-                    <button type="button" onClick={() => deferSession(session.sessionId)} disabled={!invoke || session.status !== "running"}>
-                      <Inbox size={15} aria-hidden="true" />
-                      <span>Defer</span>
-                    </button>
-                    <button type="button" onClick={() => cancelSession(session.sessionId)} disabled={!invoke || !["running", "defer_message_sent"].includes(session.status)}>
-                      <ShieldCheck size={15} aria-hidden="true" />
-                      <span>Cancel</span>
-                    </button>
-                  </div>
-                </article>
-              ))}
-            </div>
-            <article className="session-terminal">
-              <header>
-                <div>
-                  <span>{selectedSession?.sessionId || "no-session"}</span>
-                  <h3>{selectedSession?.label || "Session output"}</h3>
-                </div>
-                <strong>{selectedSession?.status || "idle"}</strong>
-              </header>
-              <pre>
-                <code>{selectedSession ? selectedSession.stdout || selectedSession.stderr || "No output yet" : "No session selected"}</code>
-              </pre>
-              {selectedSession?.stderr && selectedSession.stdout && <small>{selectedSession.stderr}</small>}
-              <div className="terminal-event-rail">
-                {selectedOutputEvents.slice(0, 6).map((event) => (
-                  <article key={event.id} className={`event-${event.type}`}>
-                    <span>{event.type}</span>
-                    <strong>{event.label}</strong>
-                    <small>{event.detail}</small>
-                  </article>
-                ))}
-                {selectedOutputEvents.length === 0 && <p className="empty-state">구조화된 terminal event가 아직 없습니다.</p>}
-              </div>
-              <div className="session-input-row">
-                <input
-                  value={sessionInput}
-                  onChange={(event) => setSessionInput(event.target.value)}
-                  placeholder="stdin input"
-                  disabled={!selectedSession || !["running", "defer_message_sent"].includes(selectedSession.status)}
-                />
-                <button
-                  type="button"
-                  onClick={() => selectedSession && writeSessionInput(selectedSession.sessionId)}
-                  disabled={!invoke || !selectedSession || !sessionInput.trim() || !["running", "defer_message_sent"].includes(selectedSession.status)}
-                >
-                  <ArrowRight size={15} aria-hidden="true" />
-                  <span>Send</span>
-                </button>
-              </div>
-            </article>
-          </div>
-        )}
-      </section>
+      <RuntimeTerminalDrawer
+        adapters={adapters}
+        autoDeferQuestions={autoDeferQuestions}
+        open={terminalDrawerOpen}
+        openDecisionCount={openInboxDecisions.length}
+        outputEvents={outputEvents}
+        runningAdapterId={runningAdapterId}
+        runtimeAvailable={Boolean(invoke)}
+        selectedMode={selectedMode}
+        selectedOutputEvents={selectedOutputEvents}
+        selectedSession={selectedSession}
+        selectedSessionAdapterId={selectedSessionAdapterId}
+        sessionInput={sessionInput}
+        sessionPrompt={sessionPrompt}
+        sessions={sessions}
+        sessionStats={sessionStats}
+        sourceDirty={Boolean(sourceDiff?.dirty)}
+        uiLanguage={uiLanguage}
+        workingDir={workingDir}
+        onCancelSession={cancelSession}
+        onCollapse={() => setTerminalDrawerOpen(false)}
+        onDeferSession={deferSession}
+        onOpen={() => setTerminalDrawerOpen(true)}
+        onOpenSettings={onOpenSettings}
+        onPollSession={pollSession}
+        onSelectSession={setSelectedSessionId}
+        onSessionInputChange={setSessionInput}
+        onSessionPromptChange={setSessionPrompt}
+        onStartSession={startSession}
+        onWorkingDirChange={setWorkingDir}
+        onWriteSessionInput={writeSessionInput}
+      />
 
       <section className="panel wide terminal-output-panel">
         <div className="panel-heading">

@@ -24,7 +24,12 @@
 - Source target: `components/workbench/WorkspaceExplorerPane.tsx`, `MonitorShell.tsx`, `globals.css`
 - Validation: TypeScript/test/customer build/browser smoke.
 
+- `slice-03-runtime-terminal-module`
+- Requirement: 하단 다중 CLI 터미널은 독립 runtime workbench component로 보유하고, titlebar action에서 아래 panel처럼 열린다.
+- Source target: `components/workbench/RuntimeTerminalDrawer.tsx`, `MonitorShell.tsx`, `globals.css`
+- Validation: TypeScript/test/customer build/browser smoke.
+
 ## 공개 결론
 
 - 대공사는 한 번에 전부 갈아엎는 작업이 아니라, 사용자-facing surface를 기능 모듈로 이동하는 연속 slice로 진행한다.
-- 이번 작업은 그 첫 slice를 실제 코드 변경으로 시작한다.
+- 이번 작업은 핵심 workbench surface를 단계적으로 component module로 이동하는 방식으로 계속 진행한다.

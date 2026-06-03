@@ -1,0 +1,38 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-runtime-terminal-module",
+  "request_id": "UR-2026-06-03-047",
+  "mode": "standard",
+  "timezone": "Asia/Seoul",
+  "phase_timings": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes_estimate": 4,
+      "notes": "Checked official VS Code terminal, xterm.js, Tauri shell, and Theia terminal references for bottom panel and terminal boundaries."
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes_estimate": 24,
+      "notes": "Extracted RuntimeTerminalDrawer and moved terminal drawer rendering out of MonitorShell."
+    },
+    {
+      "phase": "visual_improvement",
+      "duration_minutes_estimate": 7,
+      "notes": "Fixed bright fixed-color settings-controlled summary cards found in Browser smoke."
+    },
+    {
+      "phase": "validation",
+      "duration_minutes_estimate": 16,
+      "notes": "Ran TypeScript, tests, customer build, Browser smoke, screenshot capture, and resource cleanup."
+    },
+    {
+      "phase": "records",
+      "duration_minutes_estimate": 8,
+      "notes": "Recorded request summary, work summary, request trace, web search, evaluation, resource cleanup, and timing."
+    }
+  ],
+  "bottleneck_notes": [
+    "Runtime session logic remains in DesktopRuntimePanel, so only rendering responsibility moved in this slice.",
+    "Static customer smoke validates terminal layout and drawer interaction but not actual CLI subprocess execution."
+  ]
+}

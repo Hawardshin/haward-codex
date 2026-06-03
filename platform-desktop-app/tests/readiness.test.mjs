@@ -330,11 +330,15 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx"),
     "utf8"
   );
+  const runtimeTerminalDrawer = readFileSync(
+    join(root, "renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx"),
+    "utf8"
+  );
   const workspaceExplorerPane = readFileSync(
     join(root, "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"),
     "utf8"
   );
-  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${pathDisclosure}\n${workspaceExplorerPane}`;
+  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
   const productFeaturePanel = readFileSync(
     join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
     "utf8"
@@ -416,8 +420,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(monitorShell, /DesktopRuntimePanel/);
   assert.match(monitorShell, /CoreFeatureTabs/);
   assert.match(monitorShell, /PathDisclosure/);
+  assert.match(monitorShell, /RuntimeTerminalDrawer/);
   assert.match(monitorShell, /WorkspaceExplorerPane/);
   assert.match(coreFeatureTabs, /CoreFeatureTabId/);
+  assert.match(runtimeTerminalDrawer, /RuntimeTerminalDrawer/);
   assert.match(workspaceExplorerPane, /buildWorkspaceExplorerTree/);
   assert.match(lib, /human-decision-inbox\.json/);
   assert.match(monitorShell, /decisionInboxItems/);
@@ -635,7 +641,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "productFeatureArchitecture",
     "emptyProductFeatureArchitecture"
   ]) {
-    assert.match(monitorShell, new RegExp(implementationToken));
+    assert.match(monitorWorkbenchSource, new RegExp(implementationToken));
   }
   for (const taskRunStoreToken of [
     "CliTaskRunRecordReport",
