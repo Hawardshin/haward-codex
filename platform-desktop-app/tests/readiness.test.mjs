@@ -798,6 +798,18 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   ]) {
     assert.match(monitorStyles, new RegExp(requiredScrollToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
+  for (const requiredButtonToken of [
+    "--control-hit-size",
+    "--control-target-size",
+    "touch-action: manipulation",
+    "button:focus-visible",
+    "button:not(:disabled):active",
+    ".desktop-actions button",
+    ".terminal-view-switcher button",
+    ".source-workbench-switcher button"
+  ]) {
+    assert.match(monitorStyles, new RegExp(requiredButtonToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
   for (const taskRunStoreToken of [
     "CliTaskRunRecordReport",
     "CliTaskRunDetailReport",

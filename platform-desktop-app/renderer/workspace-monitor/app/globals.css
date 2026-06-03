@@ -21,6 +21,12 @@
   --mint-soft: #e8f6ef;
   --peach-soft: #fff1e7;
   --soft-shadow: 0 4px 12px rgba(31, 41, 51, 0.06);
+  --control-hit-size: 32px;
+  --control-target-size: 36px;
+  --control-radius: 7px;
+  --control-gap: 7px;
+  --control-padding-x: 10px;
+  --control-active-shift: 1px;
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "Apple SD Gothic Neo", "Segoe UI", "Malgun Gothic", system-ui, sans-serif;
 }
@@ -160,11 +166,40 @@ select {
 }
 
 button {
+  max-width: 100%;
+  min-width: var(--control-hit-size);
+  min-height: var(--control-hit-size);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  touch-action: manipulation;
+  user-select: none;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button:disabled {
   cursor: default;
+  opacity: 0.58;
+}
+
+.desktop-app-root button > svg {
+  flex: 0 0 auto;
+}
+
+.desktop-app-root button > span,
+.desktop-app-root button > strong,
+.desktop-app-root button > small {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.desktop-app-root button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--blue) 72%, #ffffff 12%);
+  outline-offset: 2px;
+}
+
+.desktop-app-root button:not(:disabled):active {
+  transform: translateY(var(--control-active-shift));
 }
 
 .settings-tab-panel:focus-visible,
@@ -613,15 +648,15 @@ main {
 .settings-dialog header button,
 .workspace-home-actions button {
   display: inline-flex;
-  min-height: 36px;
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: var(--control-gap);
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--text);
-  border-radius: 7px;
-  padding: 8px 10px;
+  border-radius: var(--control-radius);
+  padding: 8px var(--control-padding-x);
 }
 
 .titlebar-search {
@@ -763,12 +798,13 @@ main {
   display: inline-flex;
   min-width: 148px;
   max-width: 220px;
+  min-height: var(--control-target-size);
   align-items: center;
-  gap: 8px;
+  gap: var(--control-gap);
   border: 1px solid var(--line);
   background: var(--surface-raised);
-  border-radius: 7px;
-  padding: 8px 10px;
+  border-radius: var(--control-radius);
+  padding: 8px var(--control-padding-x);
   color: var(--text);
   text-align: left;
 }
@@ -2001,14 +2037,14 @@ h3 {
 .section-tabs button,
 .panel-heading button {
   display: inline-flex;
-  min-height: 36px;
+  min-height: var(--control-target-size);
   align-items: center;
-  gap: 7px;
+  gap: var(--control-gap);
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--text);
-  border-radius: 7px;
-  padding: 8px 11px;
+  border-radius: var(--control-radius);
+  padding: 8px calc(var(--control-padding-x) + 1px);
 }
 
 .section-tabs button {
@@ -4634,6 +4670,13 @@ h3 {
   flex-wrap: wrap;
   gap: 8px;
   justify-content: flex-end;
+  min-width: 0;
+}
+
+.desktop-actions button {
+  min-height: var(--control-target-size);
+  min-width: max-content;
+  white-space: normal;
 }
 
 .desktop-error {
@@ -4735,14 +4778,14 @@ h3 {
 
 .adapter-card button {
   display: inline-flex;
-  min-height: 34px;
+  min-height: var(--control-target-size);
   width: fit-content;
   align-items: center;
-  gap: 6px;
+  gap: var(--control-gap);
   border: 1px solid #aebbc8;
   background: var(--surface);
-  border-radius: 7px;
-  padding: 7px 10px;
+  border-radius: var(--control-radius);
+  padding: 8px var(--control-padding-x);
 }
 
 .adapter-card button:disabled {
@@ -5222,12 +5265,12 @@ h3 {
   min-height: 38px;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: var(--control-gap);
   border: 1px solid #aebbc8;
   background: var(--surface);
-  border-radius: 7px;
-  padding: 8px 10px;
-  white-space: nowrap;
+  border-radius: var(--control-radius);
+  padding: 8px var(--control-padding-x);
+  white-space: normal;
 }
 
 .session-launcher button:disabled,
@@ -5331,16 +5374,16 @@ h3 {
 
 .terminal-view-switcher button {
   display: inline-flex;
-  min-height: 34px;
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: flex-start;
-  gap: 6px;
+  gap: var(--control-gap);
   border: 1px solid #aebbc8;
   background: var(--surface);
-  border-radius: 7px;
+  border-radius: var(--control-radius);
   padding: 7px 8px;
   color: var(--text);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .terminal-view-switcher button.active {
@@ -5932,16 +5975,16 @@ h3 {
 .source-command-toolbar button,
 .source-settings-dialog button {
   display: inline-flex;
-  min-height: 34px;
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: var(--control-gap);
   border: 1px solid #aebbc8;
   background: var(--surface);
-  border-radius: 7px;
+  border-radius: var(--control-radius);
   padding: 7px 9px;
   color: var(--text);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .source-command-toolbar button.active {
@@ -6693,14 +6736,14 @@ h3 {
   min-height: 38px;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: var(--control-gap);
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--text);
-  border-radius: 7px;
-  padding: 8px 11px;
+  border-radius: var(--control-radius);
+  padding: 8px calc(var(--control-padding-x) + 1px);
   font-weight: 800;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .native-workspace-actions button:first-child {
@@ -6885,7 +6928,7 @@ h3 {
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--text);
-  border-radius: 7px;
+  border-radius: var(--control-radius);
   padding: 6px;
   font-size: 11px;
   font-weight: 800;
@@ -8002,6 +8045,10 @@ h3 {
 }
 
 @media (hover: hover) {
+  .desktop-app-root button:not(:disabled):hover {
+    border-color: color-mix(in srgb, var(--blue) 28%, var(--line));
+  }
+
   .command-trigger:hover,
   .app-chip-group button:hover,
   .command-palette-results button:hover,
@@ -8318,6 +8365,45 @@ h3 {
     flex-wrap: wrap;
   }
 
+  .desktop-actions,
+  .titlebar-actions,
+  .desktop-toolbar,
+  .section-tabs,
+  .product-feature-actions,
+  .operator-strip-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+    width: 100%;
+  }
+
+  .desktop-actions button,
+  .titlebar-actions > button,
+  .desktop-toolbar button,
+  .section-tabs button,
+  .panel-heading button,
+  .product-feature-actions button,
+  .operator-strip-actions button,
+  .settings-action-row button,
+  .quick-start-flow button,
+  .desktop-command-grid button,
+  .adapter-card button,
+  .native-git-actions button,
+  .task-pipe-controls button,
+  .session-launcher button,
+  .session-input-row button,
+  .source-editor-controls button,
+  .source-customization-bar button,
+  .source-command-toolbar button,
+  .source-workbench-switcher button,
+  .terminal-view-switcher button,
+  .workspace-explorer-actions button,
+  .native-workspace-actions button {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
   .titlebar-search {
     width: 100%;
   }
@@ -8328,6 +8414,22 @@ h3 {
     right: 0;
     top: 0;
     max-height: none;
+  }
+
+  .terminal-drawer-workbench {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    overflow: auto;
+  }
+
+  .terminal-drawer-sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    overflow: visible;
+  }
+
+  .terminal-drawer-main {
+    min-width: 0;
   }
 
   .workspace-home-panel {
@@ -8346,6 +8448,24 @@ h3 {
   .settings-segment-list,
   .settings-pin-grid {
     grid-template-columns: 1fr;
+  }
+
+  .settings-subsection-rail,
+  .terminal-view-switcher,
+  .source-workbench-switcher {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+
+  .settings-subsection-rail {
+    position: static;
+  }
+
+  .settings-subsection-rail button {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
   }
 
   .topbar {

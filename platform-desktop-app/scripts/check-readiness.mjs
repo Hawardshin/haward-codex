@@ -894,6 +894,20 @@ for (const requiredScrollToken of [
     failures.push(`workspace-monitor CSS must preserve split scroll token ${requiredScrollToken}`);
   }
 }
+for (const requiredButtonToken of [
+  "--control-hit-size",
+  "--control-target-size",
+  "touch-action: manipulation",
+  "button:focus-visible",
+  "button:not(:disabled):active",
+  ".desktop-actions button",
+  ".terminal-view-switcher button",
+  ".source-workbench-switcher button"
+]) {
+  if (!monitorStyles.includes(requiredButtonToken)) {
+    failures.push(`workspace-monitor CSS must preserve responsive button token ${requiredButtonToken}`);
+  }
+}
 for (const requiredPhrase of [
   "ProductFeatureArchitecturePanel",
   "Agent Orchestration",

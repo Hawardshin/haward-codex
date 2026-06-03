@@ -1,0 +1,44 @@
+{
+  "schema_version": "omission-check.v1",
+  "work_id": "2026-06-03-responsive-button-design",
+  "checked_at": "2026-06-03",
+  "request": "Improve design-level button responsiveness overall.",
+  "coverage": [
+    {
+      "item": "Button target size",
+      "status": "covered",
+      "evidence": [
+        "--control-hit-size",
+        "desktop/mobile browser smoke small target count 0"
+      ]
+    },
+    {
+      "item": "Button interaction feedback",
+      "status": "covered",
+      "evidence": [
+        "button:focus-visible",
+        "button:not(:disabled):active",
+        "hover border feedback"
+      ]
+    },
+    {
+      "item": "Responsive button layout",
+      "status": "covered",
+      "evidence": [
+        "720px full-width action group rules",
+        "mobile terminal drawer issue 0 after rework"
+      ]
+    },
+    {
+      "item": "Validation guard",
+      "status": "covered",
+      "evidence": [
+        "check-readiness.mjs responsive button tokens",
+        "readiness.test.mjs responsive button tokens"
+      ]
+    }
+  ],
+  "remaining": [
+    "A future design-system extraction could replace repeated ad hoc button selectors with component-level tokens."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "work-timing.v1",
+  "date": "2026-06-03",
+  "work_id": "2026-06-03-responsive-button-design",
+  "owner": "platform-desktop-app",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "elapsed_minutes_estimate": 4,
+      "notes": "Checked official Apple, Microsoft, and W3C references for button and responsive target guidance."
+    },
+    {
+      "phase": "css_contract_implementation",
+      "elapsed_minutes_estimate": 22,
+      "notes": "Added shared control tokens, button target, focus, active, hover, and responsive width rules."
+    },
+    {
+      "phase": "browser_smoke_rework",
+      "elapsed_minutes_estimate": 18,
+      "notes": "Found and fixed mobile terminal drawer two-column overflow."
+    },
+    {
+      "phase": "validation_history_commit",
+      "elapsed_minutes_estimate": 14,
+      "notes": "Ran tests/checks, recorded history, and prepared commit."
+    }
+  ],
+  "bottlenecks": [
+    "Terminal drawer kept desktop two-column grid at mobile width until browser smoke exposed the issue."
+  ]
+}
