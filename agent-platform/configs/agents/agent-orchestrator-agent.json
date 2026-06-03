@@ -5,6 +5,7 @@
   "skills": [],
   "tools": [
     "agent-platform:check-agent-orchestration",
+    "agent-platform:plan-agent-orchestration",
     "agent-platform:list-agents",
     "agent-platform:inspect-agent"
   ],
@@ -21,6 +22,7 @@
     ],
     "validation_commands": [
       "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json",
+      "PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json",
       "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/agent-orchestrator-agent.json"
     ]
   }

@@ -33,11 +33,29 @@
 - `parallel_fanout_merge`: 독립 lane을 병렬로 처리하고 merge gate에서 합칠 때.
 - `handoff_network`: 전문 agent 사이에서 동적으로 제어를 넘겨야 할 때.
 
+## Manager-As-Tools 계획 도구
+
+`plan-agent-orchestration`은 실제 LLM runtime을 실행하지 않고, 등록된 agent spec을 읽어 중앙 manager가 subagent를 도구처럼 호출하는 계획 JSON을 만든다. 기본 manager는 `agent-orchestrator-agent`이고, 기본 패턴은 `supervisor_router`다.
+
+이 도구의 역할은 세 가지다.
+
+- manager가 route, subagent tool 호출, merge, evaluation을 계속 소유하게 만든다.
+- subagent마다 `run_<agent_name>` 형태의 tool name, input/output contract, 허용/차단 도구, policy, docs target을 명시한다.
+- 실제 LangGraph, CrewAI, OpenAI Agents SDK 같은 runtime adapter를 붙이기 전에 agent roster, handoff/state/control, validation command를 검증 가능한 구조로 만든다.
+
+예시:
+
+```bash
+cd agent-platform
+PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json
+```
+
 ## 검증 명령
 
 ```bash
 cd agent-platform
 PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json
+PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/agent-orchestrator-agent.json
 ```

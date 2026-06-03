@@ -1,0 +1,127 @@
+{
+  "task": "Ground manager tool orchestration planner close-out claims",
+  "output_summary": "The work added a framework-neutral plan-agent-orchestration CLI and manager_tool planner, updated agent orchestration configs/docs/specs/history, and verified the relevant checks while documenting unrelated full-suite failures.",
+  "risk_level": "medium",
+  "evidence": [
+    {
+      "evidence_id": "planner-source",
+      "source": "agent-platform/src/agent_platform/orchestration/manager_tool.py",
+      "source_type": "repository_file",
+      "checked_on": "2026-06-04",
+      "reliability": "Implementation file added in this change."
+    },
+    {
+      "evidence_id": "planner-cli-output",
+      "source": "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json",
+      "source_type": "command_output",
+      "checked_on": "2026-06-04",
+      "reliability": "Command returned status ready_to_orchestrate."
+    },
+    {
+      "evidence_id": "targeted-tests",
+      "source": "cd agent-platform && PYTHONPATH=src python3 -m unittest tests.test_agent_orchestration tests.test_manager_tool_orchestration",
+      "source_type": "test_result",
+      "checked_on": "2026-06-04",
+      "reliability": "Relevant tests returned 9 tests OK."
+    },
+    {
+      "evidence_id": "full-suite-output",
+      "source": "cd agent-platform && PYTHONPATH=src python3 -m unittest discover -s tests",
+      "source_type": "test_result",
+      "checked_on": "2026-06-04",
+      "reliability": "Full suite command output showed 172 tests with 3 existing registry readiness failures."
+    },
+    {
+      "evidence_id": "orchestration-check",
+      "source": "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json",
+      "source_type": "tool_result",
+      "checked_on": "2026-06-04",
+      "reliability": "Registry check returned ready."
+    },
+    {
+      "evidence_id": "config-check",
+      "source": "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/orchestration/agent-orchestration-registry.json configs/orchestration/manager-tool-plan-template.json",
+      "source_type": "tool_result",
+      "checked_on": "2026-06-04",
+      "reliability": "Config contract returned self_documenting."
+    },
+    {
+      "evidence_id": "openai-docs",
+      "source": "https://openai.github.io/openai-agents-python/multi_agent/",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-04",
+      "reliability": "Official OpenAI Agents SDK documentation."
+    },
+    {
+      "evidence_id": "langchain-docs",
+      "source": "https://docs.langchain.com/oss/python/langchain/multi-agent",
+      "source_type": "official_docs",
+      "checked_on": "2026-06-04",
+      "reliability": "Official LangChain documentation."
+    }
+  ],
+  "claims": [
+    {
+      "statement": "A new plan-agent-orchestration CLI was added and can emit a ready manager-as-tools plan from the template.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "planner-source",
+        "planner-cli-output"
+      ],
+      "verification_steps": [
+        "Inspected manager_tool.py.",
+        "Ran plan-agent-orchestration with manager-tool-plan-template.json."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "Relevant orchestration tests passed.",
+      "claim_type": "code_behavior",
+      "support_level": "supported",
+      "evidence_ids": [
+        "targeted-tests"
+      ],
+      "verification_steps": [
+        "Ran targeted unittest command for agent orchestration and manager tool orchestration tests."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": false
+    },
+    {
+      "statement": "The full test suite currently has 3 unrelated registry/view-mode readiness failures.",
+      "claim_type": "repository_state",
+      "support_level": "supported",
+      "evidence_ids": [
+        "full-suite-output"
+      ],
+      "verification_steps": [
+        "Ran full unittest discovery and inspected failing checks."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    },
+    {
+      "statement": "OpenAI and LangChain official docs support manager/subagent or agents-as-tools style orchestration patterns.",
+      "claim_type": "external_fact",
+      "support_level": "supported",
+      "evidence_ids": [
+        "openai-docs",
+        "langchain-docs"
+      ],
+      "verification_steps": [
+        "Opened official docs and used them as architecture references."
+      ],
+      "presented_as_fact": true,
+      "freshness_sensitive": true
+    }
+  ],
+  "uncertainty_notes": [
+    "The planner does not execute LLM calls or subagent runtimes; it only creates a deterministic plan."
+  ],
+  "limitation_notes": [
+    "No external runtime framework was installed.",
+    "No browser, server, worker, or long-running process was started."
+  ]
+}

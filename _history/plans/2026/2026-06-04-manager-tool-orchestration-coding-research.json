@@ -1,0 +1,177 @@
+{
+  "research_goal": "Implement a small manager-as-tools orchestration planning CLI for the existing agent-platform project.",
+  "coding_context": "agent-platform Python CLI, agent specs under configs/agents, and framework-neutral agent orchestration registry.",
+  "research_types": [
+    "architecture",
+    "implementation_pattern",
+    "api_docs"
+  ],
+  "search_channels": [
+    "web search",
+    "official documentation search",
+    "repository search",
+    "open-source repository search"
+  ],
+  "sources_checked": [
+    "https://openai.github.io/openai-agents-python/multi_agent/",
+    "https://docs.langchain.com/oss/python/langchain/multi-agent",
+    "https://docs.crewai.com/en/introduction",
+    "https://github.com/openai/openai-agents-python/blob/main/examples/agent_patterns/agents_as_tools.py",
+    "https://github.com/langchain-ai/langgraph-supervisor-py",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/src/agent_platform/orchestration/agent_orchestration.py"
+  ],
+  "source_types": [
+    "official",
+    "open_source",
+    "reference_implementation",
+    "community",
+    "internal"
+  ],
+  "reference_config_paths": [
+    "agent-platform/configs/research/coding-research-profile.json",
+    "agent-platform/configs/research/source-registry.json"
+  ],
+  "source_value_provenance": [
+    "manager-as-tools pattern and handoff trade-off <- OpenAI Agents SDK orchestration docs checked on 2026-06-04",
+    "subagents/router/handoff/custom workflow pattern list <- LangChain multi-agent docs checked on 2026-06-04",
+    "Flow manages state/control and Crew handles agent collaboration <- CrewAI introduction checked on 2026-06-04",
+    "existing CLI and registry loading patterns <- agent-platform/src/agent_platform/cli.py and core registry source",
+    "existing orchestration contract fields <- agent-platform/configs/orchestration/agent-orchestration-registry.json"
+  ],
+  "plan_evidence": [
+    "Use a deterministic planner first <- existing review noted runtime orchestrator was missing, but installing a framework requires separate audit",
+    "Keep Python implementation <- agent-platform README and existing CLI modules are Python-first",
+    "Expose subagents as generated tool records <- OpenAI agents-as-tools example and LangChain subagents pattern",
+    "Validate with unit tests and CLI checks <- existing agent_orchestration.py test style"
+  ],
+  "technology_stack": [
+    "Python 3.11",
+    "agent-platform CLI"
+  ],
+  "technology_official_docs": [
+    "https://docs.python.org/3/"
+  ],
+  "stack_version_constraints": [
+    "Python 3.11+ because agent-platform pyproject.toml requires >=3.11.",
+    "No external runtime framework dependency is installed in this change."
+  ],
+  "issue_discussion_sources": [
+    "https://github.com/openai/openai-agents-python/issues",
+    "https://github.com/langchain-ai/langgraph-supervisor-py/issues",
+    "https://github.com/langchain-ai/langgraph-supervisor-py/discussions"
+  ],
+  "issue_discussion_notes": [
+    "Checked issue/discussion surfaces as risk and adoption signals for manager/supervisor patterns; they do not override official docs or local validation.",
+    "Open-source issue counts and discussions indicate these patterns need observability and bounded handoff contracts, which the local planner records explicitly."
+  ],
+  "community_signal_notes": [
+    "GitHub stars, issue counts, and discussions were treated as adoption and discovery signals only; implementation decisions use official docs and local repository contracts."
+  ],
+  "language_options": [
+    "Python 3.11 for deterministic local CLI, dataclass parsing, unit tests, and existing platform code.",
+    "TypeScript for a future UI-facing orchestration editor or OpenAI Agents JS adapter."
+  ],
+  "selected_language": "Python 3.11",
+  "language_decision_notes": [
+    "Selected Python because agent-platform already uses Python modules, unittest, argparse, and JSON configs.",
+    "Rejected TypeScript for this change because no UI/runtime adapter is being implemented and a Python CLI is faster to validate against existing tests."
+  ],
+  "code_reference_sources": [
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/src/agent_platform/orchestration/agent_orchestration.py",
+    "agent-platform/tests/test_agent_orchestration.py",
+    "https://github.com/openai/openai-agents-python/blob/main/examples/agent_patterns/agents_as_tools.py"
+  ],
+  "code_reference_notes": [
+    "Existing CLI handlers parse JSON inputs, call pure functions, and print JSON reports; the new command follows that pattern.",
+    "Existing orchestration checker returns status, requires_rework, checks, gaps, warnings, and follow_up_actions; the planner follows the same report style.",
+    "OpenAI example shows a manager exposing specialist agents as tools, so the local planner emits tool_name and tool_description records for each subagent."
+  ],
+  "architecture_reference_sources": [
+    "https://openai.github.io/openai-agents-python/multi_agent/",
+    "https://docs.langchain.com/oss/python/langchain/multi-agent",
+    "https://c4model.com/",
+    "agent-platform/docs/agent-orchestration-platform.ko.md"
+  ],
+  "architecture_theory_sources": [
+    "https://c4model.com/",
+    "https://openai.github.io/openai-agents-python/multi_agent/",
+    "https://docs.langchain.com/oss/python/langchain/multi-agent"
+  ],
+  "architecture_practitioner_sources": [
+    "https://github.com/openai/openai-agents-python/blob/main/examples/agent_patterns/agents_as_tools.py",
+    "https://github.com/langchain-ai/langgraph-supervisor-py",
+    "https://github.com/langchain-ai/langgraph-supervisor-py/issues"
+  ],
+  "architecture_options": [
+    "Framework-neutral deterministic planner that emits manager/subagent tool plans without running a model.",
+    "Install and integrate an external runtime framework such as OpenAI Agents SDK, LangGraph, or CrewAI immediately."
+  ],
+  "architecture_decision_notes": [
+    "Selected framework-neutral deterministic planner because it fills the existing tool gap while preserving the repository's adapter-neutral boundary.",
+    "Rejected immediate runtime framework integration because installation audit, provider configuration, runtime resource guard, and adapter design are separate larger tasks."
+  ],
+  "architecture_tradeoff_notes": [
+    "Official docs support both code-driven and LLM-driven orchestration; this implementation chooses code-driven planning for deterministic validation.",
+    "Practitioner/reference implementations show real manager tool execution, but local readiness first needs a stable agent roster and tool access contract."
+  ],
+  "folder_structure_options": [
+    "Add planner under agent_platform/orchestration beside the registry checker.",
+    "Create a new agent_platform/tools package for orchestration planning tools."
+  ],
+  "folder_structure_decision_notes": [
+    "Selected agent_platform/orchestration because the planner consumes the orchestration registry and belongs to the same capability boundary.",
+    "Rejected a new tools package because this is not a generic utility; it is an orchestration contract helper."
+  ],
+  "folder_semantics_notes": [
+    "agent_platform/orchestration contains reusable agent creation and orchestration contract logic.",
+    "configs/orchestration contains registry and plan input templates.",
+    "tests/test_manager_tool_orchestration.py covers deterministic manager/subagent planning behavior."
+  ],
+  "maintainability_notes": [
+    "The pure-function planner is easy to unit test and does not require network calls, provider credentials, or process lifecycle cleanup.",
+    "The generated plan remains framework-neutral, so future runtime adapters can consume it without changing requirements or agent specs."
+  ],
+  "findings": [
+    "OpenAI and LangChain both describe manager/subagent-as-tool patterns where the manager keeps routing and final response control.",
+    "CrewAI separates stateful process flow from agent teams, reinforcing the need for explicit state/control planning before runtime execution.",
+    "The local repository already has agent specs and orchestration pattern contracts, so a deterministic planner is the smallest missing implementation asset."
+  ],
+  "options": [
+    "Implement deterministic planner now and defer runtime adapter.",
+    "Install a full multi-agent framework now.",
+    "Only update documentation and leave runtime/tool gap open."
+  ],
+  "recommendation": "Implement deterministic Python manager-as-tools planner and CLI, then validate with unit tests and existing config/orchestration checks.",
+  "post_research_answers": {
+    "what_was_verified": "Verified official manager/subagent/tool patterns, existing repository CLI shape, and the prior gap that no runtime/planner existed.",
+    "best_option": "Add a deterministic Python planner that emits manager/subagent tool plans.",
+    "why_this_option": "It is the smallest implementation that satisfies the user's structure request without prematurely installing a runtime framework.",
+    "alternatives_rejected": "Prompt-only documentation was rejected because it is not a tool; immediate framework installation was rejected because it needs a separate installation and adapter audit.",
+    "implementation_impact": "Add manager_tool.py, CLI command, template config, tests, agent spec/tool docs, requirements/spec/history/evaluation records.",
+    "risks_and_unknowns": "The planner does not execute subagents yet; future runtime adapters need resource, observability, installation, and provider configuration work.",
+    "validation_plan": "Run unit tests, plan-agent-orchestration, check-agent-orchestration, inspect-agent, check-config-contract, omission, grounding, and evaluate-work.",
+    "reusable_knowledge": "Capture manager-as-tools planner rules in agent-platform docs and history so future runtime adapter work can consume the plan contract.",
+    "next_action": "Implement and verify the planner."
+  },
+  "validation_steps": [
+    "PYTHONPATH=src python3 -m unittest discover -s tests",
+    "PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/orchestration/agent-orchestration-registry.json configs/orchestration/manager-tool-plan-template.json"
+  ],
+  "risks_or_unknowns": [
+    "No actual LLM execution is included.",
+    "Auto-selection uses deterministic keyword matching and may need a smarter scorer after real usage.",
+    "Future runtime execution must add resource lifecycle and trace storage checks."
+  ],
+  "capture_targets": [
+    "_research/topics/agent-operations/2026-06-04-manager-tool-orchestration-planner.ko.md",
+    "agent-platform/docs/agent-orchestration-platform.ko.md"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-04-manager-tool-orchestration-coding-research.json"
+  ],
+  "knowledge_validation_status": "ready_to_reference"
+}

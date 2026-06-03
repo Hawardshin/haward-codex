@@ -118,6 +118,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-omissions configs/evaluation/
 PYTHONPATH=src python3 -m agent_platform.cli check-resources configs/evaluation/resource-guard-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline configs/integrations/cli-pipeline-template.json
 PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json
+PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-from-research configs/planning/research-insight-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli complete-deep-research configs/planning/deep-research-template.json
 PYTHONPATH=src python3 -m agent_platform.cli plan-parallel-work configs/planning/parallel-work-template.json
@@ -177,6 +178,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `resource-guard-agent` checks memory and resource leak risks for long-running runtimes, browser automation, workers, caches, streams, large-data processing, subprocesses, file handles, network connections, timers, and subscriptions
 - `cli-pipeline-agent` checks multi-process CLI process graphs, pipes, file/artifact handoffs, adapter allowlists, safety controls, resource controls, provenance, merge strategy, and verification before several CLIs run together
 - `agent-orchestrator-agent` checks agent creation blueprints, agent specs, orchestration patterns, state and handoff contracts, controls, lifecycle gates, and validation commands before reusable agents are created or connected
+- `plan-agent-orchestration` creates a deterministic manager-as-tools plan where `agent-orchestrator-agent` keeps control and registered specialist agents are exposed as bounded subagent tools
 - `capability-promotion-agent` models how a competent person would directly perform repeated work, turns that model into generated and evaluated improvement ideas, then promotes selected ideas into auditable capability candidates while preserving human checkpoints for high-risk changes
 - `infrastructure-expert-agent` plans and reviews infrastructure, deployment, cloud, SRE, IaC, Kubernetes, networking, security, cost, observability, backup/DR, and production-readiness decisions with official-source grounding, human checkpoints, rollback, and resource/CLI safety gates
 - `timekeeper-agent` keeps deadlines, duration, timeboxes, critical path, schedule risk, bottlenecks, next checkpoints, and hurry-up trade-offs visible while preserving quality and safety gates

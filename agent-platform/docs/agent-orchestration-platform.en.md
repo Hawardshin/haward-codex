@@ -33,11 +33,29 @@ The source setting is `agent-platform/configs/orchestration/agent-orchestration-
 - `parallel_fanout_merge`: independent lanes run in parallel and a merge gate reconciles outputs.
 - `handoff_network`: specialized agents dynamically transfer control through explicit handoff payloads.
 
+## Manager-As-Tools Planner
+
+`plan-agent-orchestration` does not run an LLM runtime. It reads registered agent specs and creates a JSON plan where one manager calls subagents as bounded tools. The default manager is `agent-orchestrator-agent`, and the default pattern is `supervisor_router`.
+
+The planner has three jobs.
+
+- Keep route, subagent tool calls, merge, and evaluation owned by the manager.
+- Expose each subagent as a `run_<agent_name>` tool with input/output contracts, allowed and blocked tools, policy, and docs targets.
+- Make the agent roster, handoff/state/control model, and validation commands inspectable before a runtime adapter such as LangGraph, CrewAI, or the OpenAI Agents SDK is attached.
+
+Example:
+
+```bash
+cd agent-platform
+PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json
+```
+
 ## Validation Commands
 
 ```bash
 cd agent-platform
 PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json
+PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json
 PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/agent-orchestrator-agent.json
 ```

@@ -36,6 +36,17 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "internal_manager_tool_plan_template",
+      "title": "Manager Tool Plan Template",
+      "path": "agent-platform/configs/orchestration/manager-tool-plan-template.json",
+      "source_type": "internal",
+      "used_for": [
+        "manager-as-tools orchestration plan input",
+        "subagent tool roster and tool access controls"
+      ],
+      "last_checked": "2026-06-04"
+    },
+    {
       "id": "internal_cli_pipeline_template",
       "title": "CLI Pipeline Template",
       "path": "agent-platform/configs/integrations/cli-pipeline-template.json",
@@ -757,6 +768,7 @@
   ],
   "validation_commands": [
     "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json",
     "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents",
     "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/example-python-agent.json"
   ]

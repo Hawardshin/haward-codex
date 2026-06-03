@@ -1,0 +1,65 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-04-manager-tool-orchestration-planner",
+  "title": "Add manager-as-tools orchestration planner",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "started_at": "2026-06-04T00:00:00+09:00",
+  "completed_at": "2026-06-04T00:00:00+09:00",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "duration_seconds": 480,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official OpenAI, LangChain, CrewAI, and GitHub reference sources checked."
+    },
+    {
+      "phase_id": "memory_and_existing_context",
+      "label": "Memory and existing context",
+      "status": "completed",
+      "duration_seconds": 840,
+      "measurement": "estimated",
+      "bottleneck_notes": "Memory bootstrap, orchestration registry, specs, requirements, and existing tests checked."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "duration_seconds": 1080,
+      "measurement": "estimated",
+      "bottleneck_notes": "Requirement extension, review, spec, plan, tasks, validation, and traceability records created."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "duration_seconds": 1320,
+      "measurement": "estimated",
+      "bottleneck_notes": "manager_tool module, CLI command, template config, agent spec, docs, and tests added."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 720,
+      "measurement": "estimated",
+      "bottleneck_notes": "Planner tests, CLI, coding-research, registry, config, agent inspect, and memory bootstrap checks run."
+    },
+    {
+      "phase_id": "evaluation_history",
+      "label": "Evaluation and history",
+      "status": "completed",
+      "duration_seconds": 1080,
+      "measurement": "estimated",
+      "bottleneck_notes": "History, web search, research, omission, grounding, evaluation, summary, and trace records prepared."
+    }
+  ],
+  "slowest_phase": "implementation",
+  "bottleneck_candidates": [
+    "Requirements/spec/history overhead for governance mode",
+    "Full test suite has unrelated pre-existing registry failures that require separate cleanup"
+  ],
+  "timing_summary": "Partial timing record. Implementation was the longest measured phase; full precision was not captured from the start."
+}

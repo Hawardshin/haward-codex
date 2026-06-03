@@ -39,6 +39,7 @@ from agent_platform.orchestration.agent_orchestration import (
     check_agent_orchestration_registry,
     load_agent_orchestration_registry,
 )
+from agent_platform.orchestration.manager_tool import ManagerToolPlanInput, plan_manager_tool_orchestration
 from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidate
 from agent_platform.planning.coding_research import CodingResearchInput, complete_coding_research
 from agent_platform.planning.deep_research import DeepResearchInput, complete_deep_research
@@ -107,6 +108,18 @@ def build_parser() -> argparse.ArgumentParser:
         help="Validate the shared agent creation and orchestration registry.",
     )
     check_agent_orchestration.add_argument("path", type=Path)
+
+    plan_agent_orchestration_cmd = subparsers.add_parser(
+        "plan-agent-orchestration",
+        help="Plan manager-as-tools orchestration from registered agent specs.",
+    )
+    plan_agent_orchestration_cmd.add_argument("path", type=Path)
+    plan_agent_orchestration_cmd.add_argument("--agents", type=Path, default=Path("configs/agents"))
+    plan_agent_orchestration_cmd.add_argument(
+        "--orchestration-registry",
+        type=Path,
+        default=Path("configs/orchestration/agent-orchestration-registry.json"),
+    )
 
     check_philosophy_trace = subparsers.add_parser(
         "check-philosophy-trace",
@@ -296,6 +309,20 @@ def main(argv: list[str] | None = None) -> int:
                     "config_contract": config_contract_report,
                     "agent_orchestration": orchestration_report,
                 },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
+        return 0
+
+    if args.command == "plan-agent-orchestration":
+        with args.path.open("r", encoding="utf-8") as file:
+            plan_input = ManagerToolPlanInput.from_dict(json.load(file))
+        agent_registry = load_registry_dir(args.agents)
+        orchestration_registry = load_agent_orchestration_registry(args.orchestration_registry)
+        print(
+            json.dumps(
+                plan_manager_tool_orchestration(plan_input, agent_registry, orchestration_registry),
                 indent=2,
                 ensure_ascii=False,
             )
