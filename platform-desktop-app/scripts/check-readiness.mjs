@@ -271,6 +271,17 @@ const observabilityFeature = productFeatureRegistry.feature_layers?.find((item) 
 if (observabilityFeature?.role !== "supporting") {
   failures.push("observability_monitoring must be a supporting feature");
 }
+if (!productFeatureSerialized.includes("operator_surfaces_are_separate")) {
+  failures.push("product-feature-registry must require operator surfaces to stay separate");
+}
+const expectedPrimaryNavigationSections = ["overview", "desktop", "agents", "source", "intent"];
+const expectedOperatorCenterSections = ["projects", "history", "structure", "documents", "requirements"];
+if (JSON.stringify(productFeatureRegistry.desktop_home_surface?.primary_navigation_sections) !== JSON.stringify(expectedPrimaryNavigationSections)) {
+  failures.push("product-feature-registry desktop_home_surface must keep work-first primary navigation sections");
+}
+if (JSON.stringify(productFeatureRegistry.desktop_home_surface?.operator_center_sections) !== JSON.stringify(expectedOperatorCenterSections)) {
+  failures.push("product-feature-registry desktop_home_surface must keep operator center sections separated");
+}
 
 const userFlowRegistry = readJson("configs/user-flow-registry.json");
 const userFlowSerialized = JSON.stringify(userFlowRegistry);
@@ -334,6 +345,15 @@ for (const requiredPhrase of [
 const viewModeRegistry = readJson("../agent-platform/configs/access/view-mode-registry.json");
 if (!JSON.stringify(viewModeRegistry).includes("desktop")) {
   failures.push("view-mode-registry must expose the desktop runtime section");
+}
+const userViewMode = viewModeRegistry.modes?.find((mode) => mode.id === "user");
+if (JSON.stringify(userViewMode?.allowed_sections) !== JSON.stringify(expectedPrimaryNavigationSections)) {
+  failures.push("user view mode must expose work-first sections only");
+}
+for (const operatorSection of expectedOperatorCenterSections) {
+  if (userViewMode?.allowed_sections?.includes(operatorSection)) {
+    failures.push(`user view mode must not foreground operator section ${operatorSection}`);
+  }
 }
 
 const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
@@ -484,7 +504,12 @@ for (const requiredPhrase of [
   "claudeCodeDesignTransfer",
   "Claude Code Design Transfer",
   "Public sources only",
-  "transfer-pattern-grid"
+  "transfer-pattern-grid",
+  "Work Console",
+  "Build Workbench",
+  "Operator Center",
+  "operatorSectionIds",
+  "Open Operator Center"
 ]) {
   if (!monitorShell.includes(requiredPhrase)) {
     failures.push(`workspace-monitor MonitorShell must include ${requiredPhrase}`);
@@ -496,7 +521,9 @@ for (const requiredPhrase of [
   "Agent Factory",
   "Learning & Evaluation Loop",
   "Observability is support",
-  "Agent Capability Platform"
+  "Agent Capability Platform",
+  "Operator tools are separate",
+  "Open Operator Center"
 ]) {
   if (!monitorShell.includes(requiredPhrase) && !productFeaturePanel.includes(requiredPhrase)) {
     failures.push(`workspace-monitor product feature panel must include ${requiredPhrase}`);

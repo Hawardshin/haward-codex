@@ -13,4 +13,6 @@
 ## Manual/Visual Check
 
 - Verify in the in-app Browser that Overview shows `Agent Orchestration`, `Agent Factory`, `Learning & Evaluation Loop`, and `Observability is support`.
+- Verify in the in-app Browser that the default activity rail/sidebar foregrounds `Platform`, `Run`, `Factory`, `Source`, and `Learn`, while `Projects`, `History`, `Structure`, `Docs`, and `Reqs` open through Operator Center.
 - Verify the customer snapshot keeps feature layers while removing `currentAssets`, `validationGates`, and internal record targets.
+- Verify the customer snapshot user view `allowedSections` is `overview`, `desktop`, `agents`, `source`, and `intent`.

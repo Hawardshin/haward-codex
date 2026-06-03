@@ -5,6 +5,7 @@
 - Lock the installable desktop app identity as an agent capability platform, not a monitoring dashboard.
 - Reframe the current shell, source review, runtime data, decision inbox, history, requirements, and monitoring pieces as named product feature layers.
 - Preserve product feature architecture in customer snapshots while stripping internal source paths and validation internals.
+- Keep default navigation focused on work, creation, development, and learning while moving operator, monitoring, document, and governance surfaces into Operator Center.
 
 ## Feature Layers
 
@@ -22,6 +23,8 @@
 - `platform-desktop-app/configs/product-feature-registry.json` is the primary/supporting feature source of truth.
 - Workspace snapshots include `productFeatureArchitecture`.
 - The Overview home screen shows feature architecture before monitoring details.
+- User view and customer snapshots use `overview`, `desktop`, `agents`, `source`, and `intent` as the default work sections.
+- `projects`, `history`, `structure`, `documents`, and `requirements` open from Operator Center instead of the primary work navigation.
 - Readiness checks fail if monitoring becomes the primary product again.
 
 ## Out Of Scope

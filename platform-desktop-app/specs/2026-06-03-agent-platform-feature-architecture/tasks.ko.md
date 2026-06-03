@@ -8,3 +8,4 @@
 | TASK-APFA-004 | readiness/test/check script 보강 | done |
 | TASK-APFA-005 | customer snapshot/build/browser 검증 | done |
 | TASK-APFA-006 | history/evaluation/request trace 기록 | done |
+| TASK-APFA-007 | 기본 작업 네비게이션과 Operator Center 분리 | done |

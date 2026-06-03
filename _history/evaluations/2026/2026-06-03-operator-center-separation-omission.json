@@ -1,0 +1,33 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-036",
+  "check_type": "omission_guard_equivalent",
+  "required_items": [
+    {
+      "item": "Make agent work, creation, development, and learning the primary desktop surface.",
+      "status": "covered",
+      "evidence": "MonitorShell primary navigation uses overview, desktop, agents, source, and intent."
+    },
+    {
+      "item": "Separate monitoring/operator/admin surfaces.",
+      "status": "covered",
+      "evidence": "OperatorCenterDialog owns projects, history, structure, documents, and requirements."
+    },
+    {
+      "item": "Update durable product rules.",
+      "status": "covered",
+      "evidence": "product-feature-registry and PDA-REQ-036 record the rule."
+    },
+    {
+      "item": "Update user/customer visibility policy.",
+      "status": "covered",
+      "evidence": "view-mode-registry and buildCustomerSnapshot use work-first allowed sections."
+    },
+    {
+      "item": "Add regression tests/checks.",
+      "status": "covered",
+      "evidence": "readiness.test.mjs, collector.test.mjs, and check-readiness.mjs validate the separation."
+    }
+  ],
+  "open_items": []
+}

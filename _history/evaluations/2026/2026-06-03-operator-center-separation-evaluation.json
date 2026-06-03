@@ -1,0 +1,38 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-036",
+  "status": "passed",
+  "summary": "Separate the desktop app's primary work navigation from operator, monitoring, document, and governance surfaces.",
+  "initial_instruction_alignment": {
+    "agent_work_is_primary": true,
+    "monitoring_is_separated": true,
+    "desktop_app_structure": true,
+    "customer_user_view_updated": true
+  },
+  "artifacts": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/OperatorCenterDialog.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx",
+    "agent-platform/configs/access/view-mode-registry.json",
+    "platform-desktop-app/configs/product-feature-registry.json"
+  ],
+  "validation_commands": [
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "corepack pnpm --filter platform-desktop-app test",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/access/view-mode-registry.json",
+    "Playwright browser smoke against http://127.0.0.1:4174/"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-operator-center-separation-omission.json"
+  ],
+  "resource_risk_occurred": false,
+  "installation_occurred": false,
+  "notes": [
+    "Desktop and mobile Browser smoke confirmed work-first navigation, Operator Center separation, primary-only product feature cards, and no horizontal overflow."
+  ]
+}

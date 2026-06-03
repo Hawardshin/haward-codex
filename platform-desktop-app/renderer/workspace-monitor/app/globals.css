@@ -186,7 +186,7 @@ main {
 
 .desktop-sidebar {
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
   gap: 12px;
   min-width: 0;
   height: 100vh;
@@ -709,6 +709,46 @@ main {
 .feature-card-signal {
   margin-top: auto;
   text-transform: none;
+}
+
+.product-operator-strip {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #d6dee6;
+  background: #f6f8fa;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.product-operator-strip span {
+  color: var(--slate);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.product-operator-strip p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.product-operator-strip button {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #a9b6c3;
+  background: #ffffff;
+  color: var(--text);
+  border-radius: 7px;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
 }
 
 .product-loop-strip {
@@ -1554,6 +1594,140 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.operator-center-trigger {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid #d5dde6;
+  background: #fbfcfd;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: left;
+}
+
+.operator-center-trigger svg {
+  color: var(--slate);
+}
+
+.operator-center-trigger span {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.operator-center-trigger strong {
+  font-size: 13px;
+}
+
+.operator-center-trigger small {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.operator-center-trigger em {
+  display: inline-grid;
+  min-width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #e9eef3;
+  color: var(--slate);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.operator-center-dialog {
+  max-width: 880px;
+}
+
+.operator-center-note {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  border: 1px solid #d5dde6;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.operator-center-note svg {
+  color: var(--slate);
+}
+
+.operator-center-note strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.operator-center-note p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.operator-section-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.operator-section-card {
+  display: grid;
+  min-height: 142px;
+  align-content: start;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: left;
+}
+
+.operator-section-card span,
+.operator-section-card em {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 7px;
+}
+
+.operator-section-card span {
+  justify-content: space-between;
+  color: var(--slate);
+}
+
+.operator-section-card small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.operator-section-card strong {
+  font-size: 15px;
+}
+
+.operator-section-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.operator-section-card em {
+  margin-top: auto;
+  color: var(--blue);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 900;
 }
 
 .toolbar {
@@ -6156,7 +6330,8 @@ h3 {
   .desktop-run-timeline,
   .home-metrics-strip,
   .product-feature-summary,
-  .product-feature-grid {
+  .product-feature-grid,
+  .operator-section-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -6255,6 +6430,10 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .product-operator-strip {
+    grid-template-columns: 1fr;
+  }
+
   .operator-strip-actions {
     justify-content: flex-start;
   }
@@ -6292,7 +6471,7 @@ h3 {
   }
 
   .activity-rail {
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
     grid-template-rows: 1fr;
     height: auto;
     max-height: none;
@@ -6312,7 +6491,7 @@ h3 {
   }
 
   .desktop-sidebar {
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto;
     height: auto;
     max-height: none;
     overflow: visible;
@@ -6356,7 +6535,9 @@ h3 {
   .home-metrics-strip,
   .product-feature-summary,
   .product-feature-grid,
+  .product-operator-strip,
   .product-loop-strip,
+  .operator-section-grid,
   .settings-segment-list,
   .settings-pin-grid {
     grid-template-columns: 1fr;

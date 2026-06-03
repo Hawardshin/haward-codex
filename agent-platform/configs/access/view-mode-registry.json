@@ -157,26 +157,33 @@
     {
       "id": "user",
       "label": "User View",
-      "intent": "Show stable project, history, documentation, and generated artifact summaries for someone using or reviewing the platform without improving internals.",
+      "intent": "Show the work-first desktop surfaces for someone running, editing, creating, and improving agents without foregrounding operator or repository-monitoring internals.",
       "audience": [
-        "workspace owner using outputs",
+        "workspace owner running agent work",
+        "user creating or improving agents",
         "future public repository visitor",
         "reviewer who should not need implementation or governance internals"
       ],
       "visibility_rules": {
         "foreground": [
-          "projects",
+          "agent orchestration",
           "desktop runtime status",
-          "work summaries",
-          "selected history",
-          "published artifacts",
-          "high-level documentation"
+          "agent factory",
+          "source workbench",
+          "learning map",
+          "decision inbox"
         ],
         "collapse": [
+          "projects",
+          "selected history",
+          "published artifacts",
+          "high-level documentation",
           "requirements",
-          "agent inventory"
+          "operator observability"
         ],
         "hide_by_default": [
+          "operator monitoring",
+          "repository structure browser",
           "raw configs",
           "internal governance records",
           "implementation tests",
@@ -191,9 +198,9 @@
       "allowed_sections": [
         "overview",
         "desktop",
-        "projects",
-        "history",
-        "documents"
+        "agents",
+        "source",
+        "intent"
       ],
       "must_not": [
         "Treat a simplified UI lens as security enforcement.",

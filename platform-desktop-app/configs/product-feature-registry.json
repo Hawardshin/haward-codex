@@ -74,6 +74,36 @@
       "last_checked": "2026-06-03"
     },
     {
+      "id": "apple_hig_settings",
+      "title": "Apple Human Interface Guidelines: Settings",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/settings",
+      "source_type": "official_docs",
+      "used_for": [
+        "keeping broad configuration in a dedicated settings area instead of mixing it into the core work surface"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "microsoft_navigation_view",
+      "title": "Microsoft Learn: NavigationView",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview",
+      "source_type": "official_docs",
+      "used_for": [
+        "desktop-style navigation with main items and a separated settings item"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "intellij_platform_ui_overview",
+      "title": "IntelliJ Platform UI Overview",
+      "url": "https://plugins.jetbrains.com/docs/intellij/ui-overview.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "IDE-style separation of main editor/work surfaces, tool windows, settings, and modal dialogs"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
       "id": "installer_shell_runtime_contract",
       "title": "Installer Shell Runtime Contract",
       "path": "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
@@ -122,12 +152,23 @@
     },
     {
       "id": "monitoring_is_supporting_observability",
-      "rule": "Monitoring, history browsing, structure browsing, source browsing, and diagnostic views shall support orchestration, workbench, development, factory, and learning features; they shall not become the product's main promise.",
+      "rule": "Monitoring, history browsing, structure browsing, document browsing, requirements browsing, and diagnostic views shall support orchestration, workbench, development, factory, and learning features; they shall not become the product's main promise.",
       "reason": "The user said monitoring is not the main function and current UI choices were blocking correct product decisions.",
       "applies_to": [
         "product_position",
         "observability_monitoring",
         "desktop_home_surface"
+      ]
+    },
+    {
+      "id": "operator_surfaces_are_separate",
+      "rule": "Operator, monitoring, document, requirement, project registry, and structure surfaces shall live behind a dedicated Operator Center or settings-style surface instead of the primary work navigation.",
+      "reason": "A sellable desktop app should foreground agent work and keep admin/review surfaces available without making them feel like the product.",
+      "applies_to": [
+        "desktop_home_surface",
+        "customer_snapshot",
+        "view_mode_registry",
+        "workspace_navigation"
       ]
     },
     {
@@ -209,6 +250,20 @@
     ],
     "supporting_surfaces": [
       "observability_monitoring"
+    ],
+    "primary_navigation_sections": [
+      "overview",
+      "desktop",
+      "agents",
+      "source",
+      "intent"
+    ],
+    "operator_center_sections": [
+      "projects",
+      "history",
+      "structure",
+      "documents",
+      "requirements"
     ],
     "home_copy_rule": "The first screen should explain what the user can make agents do, create, and improve; observability appears as a support signal, not the headline.",
     "configuration_rule": "Settings, setup, optional CLI configuration, and editor preferences belong to dedicated settings or capability surfaces rather than the top of the home view."

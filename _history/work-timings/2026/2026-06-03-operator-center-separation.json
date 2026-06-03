@@ -1,0 +1,29 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-036",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "elapsed_minutes_estimate": 2
+    },
+    {
+      "phase": "local_context_and_design",
+      "status": "completed",
+      "elapsed_minutes_estimate": 8
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "elapsed_minutes_estimate": 22
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "elapsed_minutes_estimate": 12
+    }
+  ],
+  "bottleneck_candidates": [
+    "Large MonitorShell component makes feature-surface separation slower than a smaller routed UI architecture."
+  ]
+}

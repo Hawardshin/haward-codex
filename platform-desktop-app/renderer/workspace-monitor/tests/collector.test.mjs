@@ -369,6 +369,7 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.projects.length, 0);
   assert.equal(customer.publicReview.status, "customer_snapshot_sanitized");
   assert.equal(customer.viewModeCatalog.defaultMode, "user");
+  assert.deepEqual(customer.viewModeCatalog.modes[0].allowedSections, ["overview", "desktop", "agents", "source", "intent"]);
 });
 
 test("collectProductFeatureArchitecture reads primary features and supporting observability", () => {

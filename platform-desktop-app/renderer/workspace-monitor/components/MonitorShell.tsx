@@ -37,6 +37,7 @@ import type { editor } from "monaco-editor";
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 
 import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFeatureArchitecturePanel";
+import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot, type WorkspaceSourceFile } from "@/lib/snapshot";
 
 type SectionId =
@@ -285,7 +286,8 @@ function appendSourceTemplate(content: string, templateBody: string) {
 }
 
 const PINNED_SECTIONS_STORAGE_KEY = "workspace-monitor:pinned-sections";
-const defaultPinnedSections: SectionId[] = ["overview", "desktop", "intent", "agents"];
+const defaultPinnedSections: SectionId[] = ["overview", "desktop", "agents", "source", "intent"];
+const operatorSectionIds = new Set<SectionId>(["projects", "history", "structure", "documents", "requirements"]);
 
 const featureGroups: Array<{
   id: FeatureGroupId;
@@ -294,23 +296,23 @@ const featureGroups: Array<{
 }> = [
   {
     id: "core",
-    label: "Agent Platform",
-    purpose: "오케스트레이션, 작업환경, 개발환경, 에이전트 생성"
+    label: "Work Console",
+    purpose: "작업 시작, 실행, 결정"
   },
   {
     id: "workspace",
-    label: "Agent Workbench",
-    purpose: "워크스페이스, 코드, 요구사항"
+    label: "Build Workbench",
+    purpose: "코드 편집과 개발 작업"
   },
   {
     id: "knowledge",
-    label: "Learning Loop",
-    purpose: "의도, 히스토리, 평가, 근거"
+    label: "Improve",
+    purpose: "에이전트 생성과 학습"
   },
   {
     id: "governance",
-    label: "Observability",
-    purpose: "구조, 문서, readiness"
+    label: "Operator Tools",
+    purpose: "모니터링, 문서, readiness"
   }
 ];
 
@@ -332,6 +334,22 @@ const sections: Section[] = [
     purpose: "에이전트와 optional CLI lane을 조율합니다."
   },
   {
+    id: "agents",
+    label: "Agent Factory",
+    shortLabel: "Factory",
+    icon: Bot,
+    group: "knowledge",
+    purpose: "에이전트, 기능 후보, 작업 lane, handoff를 관리합니다."
+  },
+  {
+    id: "source",
+    label: "Source",
+    shortLabel: "Source",
+    icon: Code2,
+    group: "workspace",
+    purpose: "워크스페이스 파일을 열고 코드 작업을 진행합니다."
+  },
+  {
     id: "intent",
     label: "Learning Map",
     shortLabel: "Learn",
@@ -340,19 +358,11 @@ const sections: Section[] = [
     purpose: "사용자 의도에서 기능 후보와 개선 루프를 뽑습니다."
   },
   {
-    id: "agents",
-    label: "Agent Factory",
-    shortLabel: "Factory",
-    icon: Bot,
-    group: "core",
-    purpose: "에이전트, 기능 후보, 작업 lane, handoff를 관리합니다."
-  },
-  {
     id: "projects",
     label: "Projects",
     shortLabel: "Projects",
     icon: FolderKanban,
-    group: "workspace",
+    group: "governance",
     purpose: "등록된 root project와 소유 경계를 확인합니다."
   },
   {
@@ -364,19 +374,11 @@ const sections: Section[] = [
     purpose: "플랫폼 계층, 경계 규칙, 복잡도 압력을 관측합니다."
   },
   {
-    id: "source",
-    label: "Source",
-    shortLabel: "Source",
-    icon: Code2,
-    group: "workspace",
-    purpose: "개발자/슈퍼어드민용 읽기 전용 소스 탐색입니다."
-  },
-  {
     id: "history",
     label: "Learning History",
     shortLabel: "History",
     icon: History,
-    group: "knowledge",
+    group: "governance",
     purpose: "날짜별 작업 기록과 개선 evidence를 추적합니다."
   },
   {
@@ -392,7 +394,7 @@ const sections: Section[] = [
     label: "Requirements",
     shortLabel: "Reqs",
     icon: ClipboardCheck,
-    group: "knowledge",
+    group: "governance",
     purpose: "요구사항과 스펙 기준의 이행 상태를 봅니다."
   }
 ];
@@ -412,8 +414,8 @@ const fallbackViewModes: MonitorViewMode[] = [
   {
     id: "user",
     label: "User View",
-    intent: "Stable project, history, and documentation surfaces.",
-    allowedSections: ["overview", "desktop", "projects", "history", "documents"],
+    intent: "Work-first desktop view for running, editing, creating, and improving agents.",
+    allowedSections: ["overview", "desktop", "agents", "source", "intent"],
     visibilityRules: {},
     securityNotes: []
   },
@@ -1260,6 +1262,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [sourceCopyNotice, setSourceCopyNotice] = useState("");
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [operatorCenterOpen, setOperatorCenterOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState("");
   const commandInputRef = useRef<HTMLInputElement>(null);
   const [pinnedSections, setPinnedSections] = useState<SectionId[]>(defaultPinnedSections);
@@ -1331,6 +1334,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       if (event.key === "Escape") {
         setCommandPaletteOpen(false);
         setSettingsOpen(false);
+        setOperatorCenterOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -1346,6 +1350,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     const allowed = new Set(currentViewMode.allowedSections);
     return sections.filter((item) => allowed.has(item.id));
   }, [currentViewMode]);
+  const workVisibleSections = useMemo(() => {
+    return visibleSections.filter((item) => !operatorSectionIds.has(item.id));
+  }, [visibleSections]);
   const selectViewMode = (modeId: string) => {
     const nextMode = viewModes.find((mode) => mode.id === modeId) || currentViewMode;
     setViewMode(nextMode.id);
@@ -1553,9 +1560,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       icon: CheckCircle2,
       label: "Ready",
       title: "즉시 주의할 막힘은 없습니다",
-      detail: "최근 히스토리와 근거 trail을 확인하고 다음 작업을 시작할 수 있습니다.",
-      section: "history" as SectionId,
-      action: "히스토리 보기"
+      detail: "에이전트 작업 환경에서 다음 실행을 시작할 수 있습니다.",
+      section: "desktop" as SectionId,
+      action: "작업 시작"
     };
   }, [
     collaborationBoard.summary.activeTasks,
@@ -1591,8 +1598,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       title: `${visibleWebSearches.toLocaleString("ko-KR")} searches / ${visibleEvaluations.toLocaleString("ko-KR")} evals`,
       detail: latestEvaluation?.title || latestWebSearch?.title || "근거 기록을 모아 표시합니다.",
       icon: FileSearch,
-      tone: "violet",
-      section: "documents"
+      tone: "violet"
     },
     {
       label: "Control",
@@ -1632,6 +1638,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     requirements: visibleRequirements.length.toLocaleString("ko-KR"),
     agents: agentCatalog.length.toLocaleString("ko-KR")
   };
+  const operatorCenterSections = sections.filter((item) => operatorSectionIds.has(item.id)).map((item) => ({
+    ...item,
+    meta: sectionNavMeta[item.id]
+  }));
   const sectionById = useMemo(() => {
     return new Map(sections.map((item) => [item.id, item]));
   }, []);
@@ -1639,12 +1649,12 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     return featureGroups
       .map((group) => ({
         ...group,
-        sections: visibleSections.filter((item) => item.group === group.id)
+        sections: workVisibleSections.filter((item) => item.group === group.id)
       }))
       .filter((group) => group.sections.length > 0);
-  }, [visibleSections]);
+  }, [workVisibleSections]);
   const coreFunctionSections = useMemo(() => {
-    return (["overview", "desktop", "intent", "agents", "structure"] as SectionId[])
+    return (["overview", "desktop", "agents", "source", "intent"] as SectionId[])
       .map((id) => sectionById.get(id))
       .filter((item): item is Section => {
         return item ? currentViewMode.allowedSections.includes(item.id) : false;
@@ -1672,7 +1682,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const pinnedVisibleSections = pinnedSections
     .map((id) => sectionById.get(id))
     .filter((item): item is Section => {
-      return item ? currentViewMode.allowedSections.includes(item.id) : false;
+      return item ? currentViewMode.allowedSections.includes(item.id) && !operatorSectionIds.has(item.id) : false;
     });
   const recentVisibleSections = recentSections
     .map((id) => sectionById.get(id))
@@ -1683,7 +1693,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const currentSectionLabel = sections.find((item) => item.id === section)?.label || "Overview";
   const currentSection = sectionById.get(section);
   const commandItems: CommandItem[] = [
-    ...visibleSections.map((item) => ({
+    ...workVisibleSections.map((item) => ({
       id: `section-${item.id}`,
       label: item.label,
       detail: item.purpose,
@@ -1693,6 +1703,16 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       keywords: [item.id, item.label, item.shortLabel, item.purpose],
       run: () => openSection(item.id)
     })),
+    {
+      id: "operator-center",
+      label: "Open Operator Center",
+      detail: "Monitoring, documents, requirements, history, and admin surfaces are separated here.",
+      group: "Operator",
+      icon: ShieldCheck,
+      badge: operatorCenterSections.length.toLocaleString("ko-KR"),
+      keywords: ["operator", "monitoring", "documents", "history", "requirements", "admin"],
+      run: () => setOperatorCenterOpen(true)
+    },
     ...viewModes.map((mode) => ({
       id: `view-${mode.id}`,
       label: mode.label,
@@ -1799,7 +1819,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             <Bot size={22} aria-hidden="true" />
           </button>
           <nav aria-label="Pinned desktop sections">
-            {visibleSections.map((item) => (
+            {workVisibleSections.map((item) => (
               <button
                 key={item.id}
                 type="button"
@@ -1813,6 +1833,14 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               </button>
             ))}
           </nav>
+          <button
+            className="activity-settings"
+            type="button"
+            onClick={() => setOperatorCenterOpen(true)}
+            title="Open Operator Center"
+          >
+            <ShieldCheck size={19} aria-hidden="true" />
+          </button>
           <button className="activity-settings" type="button" onClick={() => setSettingsOpen(true)} title="Settings">
             <Settings size={19} aria-hidden="true" />
           </button>
@@ -1861,6 +1889,15 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               </section>
             ))}
           </div>
+
+          <button className="operator-center-trigger" type="button" onClick={() => setOperatorCenterOpen(true)}>
+            <ShieldCheck size={17} aria-hidden="true" />
+            <span>
+              <strong>Operator Center</strong>
+              <small>Monitoring, docs, governance separated</small>
+            </span>
+            <em>{operatorCenterSections.length.toLocaleString("ko-KR")}</em>
+          </button>
 
           <div className={`sidebar-status-card status-${attentionState.tone}`}>
             <div>
@@ -2037,7 +2074,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                   </div>
                 </div>
                 <div className="settings-pin-grid">
-                  {visibleSections.map((item) => (
+                  {workVisibleSections.map((item) => (
                     <button
                       key={item.id}
                       className={pinnedSections.includes(item.id) ? "active" : ""}
@@ -2092,6 +2129,14 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         </div>
       )}
 
+      {operatorCenterOpen && (
+        <OperatorCenterDialog
+          sections={operatorCenterSections}
+          onClose={() => setOperatorCenterOpen(false)}
+          onOpenSection={openSection}
+        />
+      )}
+
           <section className={`operator-strip operator-${attentionState.tone}`} aria-label="Workspace status and actions">
             <div className="operator-strip-state">
               <attentionState.icon size={17} aria-hidden="true" />
@@ -2109,7 +2154,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <Inbox size={15} aria-hidden="true" />
                 <span>{truncateText(nextActionLabel, 34)}</span>
               </button>
-              <button type="button" onClick={() => openSection("documents")}>
+              <button type="button" onClick={() => setOperatorCenterOpen(true)}>
                 <FileSearch size={15} aria-hidden="true" />
                 <span>{visibleWebSearches.toLocaleString("ko-KR")} / {visibleEvaluations.toLocaleString("ko-KR")}</span>
               </button>
@@ -2177,9 +2222,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                     <FolderOpen size={16} aria-hidden="true" />
                     <span>Open Workspace</span>
                   </button>
-                  <button type="button" onClick={() => openSection("projects")}>
-                    <FolderKanban size={16} aria-hidden="true" />
-                    <span>Projects</span>
+                  <button type="button" onClick={() => openSection("agents")}>
+                    <Bot size={16} aria-hidden="true" />
+                    <span>Agent Factory</span>
                   </button>
                   <button type="button" onClick={() => openSection("desktop")}>
                     <PlayCircle size={16} aria-hidden="true" />
@@ -2191,6 +2236,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               <ProductFeatureArchitecturePanel
                 architecture={productFeatureArchitecture}
                 onOpenSection={openSection}
+                onOpenOperatorCenter={() => setOperatorCenterOpen(true)}
               />
 
               <section className="run-timeline-panel" aria-label="Run timeline">
@@ -2247,22 +2293,22 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               </section>
 
               <section className="home-metrics-strip" aria-label="Workspace metrics">
-                <Metric label="Projects" value={snapshot.stats.projects} icon={FolderKanban} tone="green" />
-                <Metric label="Documents" value={viewFilteredDocuments.length} icon={BookOpenText} tone="blue" />
-                <Metric label="Requirements" value={visibleRequirements.length} icon={ClipboardCheck} tone="amber" />
-                <Metric label="Evaluations" value={visibleEvaluations} icon={ShieldCheck} tone="red" />
-                <Metric label="Web Searches" value={visibleWebSearches} icon={FileSearch} tone="violet" />
+                <Metric label="Primary Features" value={productFeatureArchitecture.summary.primaryFeatures} icon={Network} tone="green" />
+                <Metric label="Agents" value={agentCatalog.length} icon={Bot} tone="blue" />
+                <Metric label="Task Runs" value={snapshot.stats.tasks} icon={PlayCircle} tone="amber" />
+                <Metric label="Decisions" value={attentionItems.length} icon={Inbox} tone="red" />
+                <Metric label="Learning Themes" value={intentFeatureMap.summary.totalThemes} icon={GitBranch} tone="violet" />
               </section>
 
               <section className="panel home-recent-panel">
                 <div className="panel-heading">
                   <div>
-                    <p className="eyebrow">Recent</p>
-                    <h2>Artifacts</h2>
+                    <p className="eyebrow">Work Trail</p>
+                    <h2>Recent Signals</h2>
                   </div>
-                  <button type="button" onClick={() => openSection("history")}>
-                    <History size={16} aria-hidden="true" />
-                    <span>History</span>
+                  <button type="button" onClick={() => setOperatorCenterOpen(true)}>
+                    <ShieldCheck size={16} aria-hidden="true" />
+                    <span>Operator</span>
                   </button>
                 </div>
                 <DocumentList documents={recentHistory.slice(0, 6)} compact />

@@ -17,6 +17,7 @@ type ProductSectionId =
 type ProductFeatureArchitecturePanelProps = {
   architecture: WorkspaceProductFeatureArchitecture;
   onOpenSection: (section: ProductSectionId) => void;
+  onOpenOperatorCenter?: () => void;
 };
 
 const sectionIds = new Set<ProductSectionId>([
@@ -41,10 +42,13 @@ const featureIcons = {
   observability_monitoring: Eye
 };
 
-export function ProductFeatureArchitecturePanel({ architecture, onOpenSection }: ProductFeatureArchitecturePanelProps) {
+export function ProductFeatureArchitecturePanel({
+  architecture,
+  onOpenSection,
+  onOpenOperatorCenter
+}: ProductFeatureArchitecturePanelProps) {
   const primaryFeatures = architecture.featureLayers.filter((feature) => feature.role === "primary");
   const supportingFeatures = architecture.featureLayers.filter((feature) => feature.role !== "primary");
-  const visibleFeatures = [...primaryFeatures, ...supportingFeatures];
 
   return (
     <section className="product-feature-panel" aria-label="Product feature architecture">
@@ -72,7 +76,7 @@ export function ProductFeatureArchitecturePanel({ architecture, onOpenSection }:
         <article>
           <span>Supporting</span>
           <strong>{architecture.summary.supportingFeatures}</strong>
-          <p>observability layers</p>
+          <p>moved to Operator Center</p>
         </article>
         <article>
           <span>Rule</span>
@@ -82,7 +86,7 @@ export function ProductFeatureArchitecturePanel({ architecture, onOpenSection }:
       </div>
 
       <div className="product-feature-grid">
-        {visibleFeatures.map((feature) => {
+        {primaryFeatures.map((feature) => {
           const Icon = featureIcons[feature.id as keyof typeof featureIcons] ?? GitBranch;
           const section = sectionIds.has(feature.primarySection as ProductSectionId)
             ? (feature.primarySection as ProductSectionId)
@@ -113,6 +117,20 @@ export function ProductFeatureArchitecturePanel({ architecture, onOpenSection }:
           );
         })}
       </div>
+
+      {supportingFeatures.length > 0 && (
+        <div className="product-operator-strip" aria-label="Separated operator features">
+          <span>Operator tools are separate</span>
+          <p>
+            {supportingFeatures.map((feature) => feature.label).join(", ")} support the workbench without becoming the
+            main product surface.
+          </p>
+          <button type="button" onClick={onOpenOperatorCenter ?? (() => onOpenSection("documents"))}>
+            <Eye size={15} aria-hidden="true" />
+            <strong>Open Operator Center</strong>
+          </button>
+        </div>
+      )}
 
       <div className="product-loop-strip" aria-label="Capability promotion loop">
         <span>Continuous improvement</span>

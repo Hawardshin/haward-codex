@@ -53,6 +53,15 @@ test("product feature registry makes agent platform primary", () => {
   assert.match(serialized, /Agent Factory/);
   assert.match(serialized, /Learning & Evaluation Loop/);
   assert.match(serialized, /supporting observability/);
+  assert.match(serialized, /operator_surfaces_are_separate/);
+  assert.deepEqual(registry.desktop_home_surface.primary_navigation_sections, ["overview", "desktop", "agents", "source", "intent"]);
+  assert.deepEqual(registry.desktop_home_surface.operator_center_sections, [
+    "projects",
+    "history",
+    "structure",
+    "documents",
+    "requirements"
+  ]);
 });
 
 test("execution profiles keep optional CLI adapters non-blocking", () => {
@@ -360,10 +369,11 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "공개 설계 패턴 전이 지도",
     "선택/위치 열기",
     "ProductFeatureArchitecturePanel",
-    "Agent Platform",
-    "Agent Workbench",
-    "Learning Loop",
-    "Observability"
+    "Work Console",
+    "Build Workbench",
+    "Operator Center",
+    "operatorSectionIds",
+    "Open Operator Center"
   ]) {
     assert.match(monitorShell, new RegExp(uiString));
   }
@@ -372,7 +382,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Agent Factory",
     "Learning & Evaluation Loop",
     "Observability is support",
-    "Agent Capability Platform"
+    "Agent Capability Platform",
+    "Operator tools are separate",
+    "Open Operator Center"
   ]) {
     assert.match(productFeaturePanel, new RegExp(uiString));
   }
@@ -504,4 +516,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     assert.match(lib, new RegExp(taskRunStoreToken));
   }
   assert.ok(viewModes.modes.every((mode) => mode.allowed_sections.includes("desktop")));
+  const userMode = viewModes.modes.find((mode) => mode.id === "user");
+  assert.deepEqual(userMode.allowed_sections, ["overview", "desktop", "agents", "source", "intent"]);
+  for (const operatorSection of ["projects", "history", "structure", "documents", "requirements"]) {
+    assert.ok(!userMode.allowed_sections.includes(operatorSection));
+  }
 });
