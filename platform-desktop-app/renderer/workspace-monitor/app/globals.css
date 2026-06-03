@@ -3,9 +3,14 @@
   --bg: #f7f8fb;
   --surface: #ffffff;
   --surface-muted: #eef2f6;
+  --surface-raised: #fbfcfd;
   --line: #d9e0ea;
   --text: #1f2933;
   --muted: #667085;
+  --rail-bg: #26313d;
+  --rail-active: rgba(255, 255, 255, 0.1);
+  --titlebar-bg: rgba(248, 250, 252, 0.94);
+  --overlay: rgba(17, 24, 39, 0.38);
   --green: #16735b;
   --blue: #2f67b1;
   --amber: #9a6517;
@@ -18,6 +23,108 @@
   --soft-shadow: 0 10px 24px rgba(31, 41, 51, 0.08);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.desktop-app-root.theme-dark {
+  color-scheme: dark;
+  --bg: #101419;
+  --surface: #171d24;
+  --surface-muted: #222a33;
+  --surface-raised: #1c232c;
+  --line: #313b48;
+  --text: #e6edf3;
+  --muted: #9aa8b7;
+  --rail-bg: #111820;
+  --rail-active: rgba(125, 211, 252, 0.14);
+  --titlebar-bg: rgba(16, 20, 25, 0.94);
+  --overlay: rgba(0, 0, 0, 0.54);
+  --soft-shadow: 0 16px 42px rgba(0, 0, 0, 0.34);
+}
+
+@media (prefers-color-scheme: dark) {
+  .desktop-app-root.theme-system {
+    color-scheme: dark;
+    --bg: #101419;
+    --surface: #171d24;
+    --surface-muted: #222a33;
+    --surface-raised: #1c232c;
+    --line: #313b48;
+    --text: #e6edf3;
+    --muted: #9aa8b7;
+    --rail-bg: #111820;
+    --rail-active: rgba(125, 211, 252, 0.14);
+    --titlebar-bg: rgba(16, 20, 25, 0.94);
+    --overlay: rgba(0, 0, 0, 0.54);
+    --soft-shadow: 0 16px 42px rgba(0, 0, 0, 0.34);
+  }
+}
+
+.desktop-app-root.theme-dark .settings-dialog,
+.desktop-app-root.theme-dark .settings-tab-list button.active,
+.desktop-app-root.theme-dark .settings-pane,
+.desktop-app-root.theme-dark .workspace-switcher,
+.desktop-app-root.theme-dark .sidebar-context-panel,
+.desktop-app-root.theme-dark .sidebar-status-card,
+.desktop-app-root.theme-dark .desktop-runtime-state,
+.desktop-app-root.theme-dark .titlebar-actions > button,
+.desktop-app-root.theme-dark .titlebar-search,
+.desktop-app-root.theme-dark .desktop-toolbar button,
+.desktop-app-root.theme-dark .workspace-home-actions button,
+.desktop-app-root.theme-dark .quick-start-flow button,
+.desktop-app-root.theme-dark .desktop-command-grid button,
+.desktop-app-root.theme-dark .task-pipe-summary article,
+.desktop-app-root.theme-dark .task-pipe-report,
+.desktop-app-root.theme-dark .task-run-summary-strip article,
+.desktop-app-root.theme-dark .run-board-strip article,
+.desktop-app-root.theme-dark .process-node,
+.desktop-app-root.theme-dark .session-launcher button,
+.desktop-app-root.theme-dark .task-pipe-controls button,
+.desktop-app-root.theme-dark .settings-action-row button {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.desktop-app-root.theme-dark input,
+.desktop-app-root.theme-dark select,
+.desktop-app-root.theme-dark textarea {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--line);
+}
+
+@media (prefers-color-scheme: dark) {
+  .desktop-app-root.theme-system .settings-dialog,
+  .desktop-app-root.theme-system .settings-tab-list button.active,
+  .desktop-app-root.theme-system .settings-pane,
+  .desktop-app-root.theme-system .workspace-switcher,
+  .desktop-app-root.theme-system .sidebar-context-panel,
+  .desktop-app-root.theme-system .sidebar-status-card,
+  .desktop-app-root.theme-system .desktop-runtime-state,
+  .desktop-app-root.theme-system .titlebar-actions > button,
+  .desktop-app-root.theme-system .titlebar-search,
+  .desktop-app-root.theme-system .desktop-toolbar button,
+  .desktop-app-root.theme-system .workspace-home-actions button,
+  .desktop-app-root.theme-system .quick-start-flow button,
+  .desktop-app-root.theme-system .desktop-command-grid button,
+  .desktop-app-root.theme-system .task-pipe-summary article,
+  .desktop-app-root.theme-system .task-pipe-report,
+  .desktop-app-root.theme-system .task-run-summary-strip article,
+  .desktop-app-root.theme-system .run-board-strip article,
+  .desktop-app-root.theme-system .process-node,
+  .desktop-app-root.theme-system .session-launcher button,
+  .desktop-app-root.theme-system .task-pipe-controls button,
+  .desktop-app-root.theme-system .settings-action-row button {
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .desktop-app-root.theme-system input,
+  .desktop-app-root.theme-system select,
+  .desktop-app-root.theme-system textarea {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--line);
+  }
 }
 
 * {
@@ -97,29 +204,22 @@ main {
 }
 
 .desktop-app-root {
+  color: var(--text);
   background:
-    linear-gradient(180deg, #eef3f7 0%, #f8fafc 34%, #f4f6f8 100%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-muted) 82%, var(--bg)) 0%, var(--bg) 38%, var(--bg) 100%),
     var(--bg);
 }
 
 .desktop-app-shell {
   display: grid;
-  grid-template-columns: 62px 292px minmax(0, 1fr);
+  grid-template-columns: 62px minmax(0, 1fr);
   height: 100vh;
   min-height: 720px;
   overflow: hidden;
 }
 
-.desktop-app-shell.sidebar-collapsed {
-  grid-template-columns: 62px 0 minmax(0, 1fr);
-}
-
-.desktop-app-shell.sidebar-collapsed .desktop-sidebar {
-  visibility: hidden;
-  overflow: hidden;
-  border-right: 0;
-  padding: 0;
-  pointer-events: none;
+.desktop-app-shell.sidebar-expanded {
+  grid-template-columns: 112px minmax(0, 1fr);
 }
 
 .activity-rail,
@@ -142,7 +242,7 @@ main {
   height: 100vh;
   max-height: 100vh;
   border-right: 1px solid #cfd8e3;
-  background: #26313d;
+  background: var(--rail-bg);
   padding: 12px 8px;
 }
 
@@ -171,6 +271,13 @@ main {
   border-radius: 8px;
 }
 
+.desktop-app-shell.sidebar-expanded .activity-rail button {
+  width: 96px;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 0 10px;
+}
+
 .activity-rail button span {
   position: absolute;
   width: 1px;
@@ -180,11 +287,22 @@ main {
   white-space: nowrap;
 }
 
+.desktop-app-shell.sidebar-expanded .activity-rail button span {
+  position: static;
+  width: auto;
+  height: auto;
+  clip: auto;
+  color: currentColor;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: normal;
+}
+
 .activity-rail button:hover,
 .activity-rail button.active,
 .activity-rail .activity-brand {
   border-color: rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--rail-active);
   color: #ffffff;
 }
 
@@ -397,12 +515,12 @@ main {
   top: 0;
   z-index: 20;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(180px, 0.28fr) minmax(240px, 1fr) auto;
   gap: 14px;
   align-items: center;
   min-height: 64px;
   border-bottom: 1px solid var(--line);
-  background: rgba(248, 250, 252, 0.94);
+  background: var(--titlebar-bg);
   backdrop-filter: blur(12px);
 }
 
@@ -410,6 +528,51 @@ main {
   display: block;
   margin-top: 2px;
   font-size: 17px;
+}
+
+.titlebar-context-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.titlebar-context-strip > span {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.titlebar-context-strip strong,
+.titlebar-context-strip small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.titlebar-context-strip small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.titlebar-context-strip button {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 6px 8px;
+  white-space: nowrap;
 }
 
 .titlebar-actions {
@@ -464,7 +627,7 @@ main {
   align-items: center;
   justify-items: center;
   overflow: auto;
-  background: rgba(17, 24, 39, 0.38);
+  background: var(--overlay);
   padding: 18px;
 }
 
@@ -473,7 +636,7 @@ main {
   max-height: min(760px, calc(100vh - 36px));
   overflow: auto;
   border: 1px solid rgba(148, 163, 184, 0.72);
-  background: #ffffff;
+  background: var(--surface);
   border-radius: 8px;
   box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
   padding: 14px;
@@ -481,20 +644,20 @@ main {
 
 .settings-dialog-body {
   display: grid;
-  grid-template-columns: minmax(190px, 0.32fr) minmax(0, 1fr);
+  grid-template-columns: 1fr;
   gap: 12px;
   min-height: 440px;
 }
 
 .settings-tab-list {
-  display: grid;
-  align-content: start;
+  display: flex;
   gap: 7px;
   min-width: 0;
   border: 1px solid var(--line);
-  background: #f4f7fa;
+  background: var(--surface-muted);
   border-radius: 8px;
   padding: 8px;
+  overflow-x: auto;
 }
 
 .settings-tab-list button {
@@ -502,7 +665,7 @@ main {
   grid-template-columns: 22px minmax(0, 1fr);
   gap: 8px;
   align-items: center;
-  min-width: 0;
+  min-width: 180px;
   min-height: 44px;
   border: 1px solid transparent;
   background: transparent;
@@ -514,7 +677,7 @@ main {
 
 .settings-tab-list button.active {
   border-color: #91a7bb;
-  background: #ffffff;
+  background: var(--surface);
   box-shadow: 0 6px 16px rgba(31, 41, 51, 0.07);
 }
 
@@ -2959,6 +3122,9 @@ h3 {
 
 .panel {
   min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
   padding: 18px;
 }
 
@@ -3035,6 +3201,7 @@ h3 {
 
 .desktop-command-panel,
 .unified-ops-panel,
+.quick-start-panel,
 .task-pipe-panel,
 .accumulated-data-panel,
 .runtime-data-panel,
@@ -3045,6 +3212,61 @@ h3 {
 .terminal-output-panel,
 .evidence-panel {
   grid-column: 1 / -1;
+}
+
+.quick-start-flow,
+.settings-action-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.settings-action-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.quick-start-flow button,
+.settings-action-row button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 8px;
+  align-items: center;
+  min-height: 72px;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 11px;
+  text-align: left;
+}
+
+.settings-action-row button {
+  min-height: 50px;
+}
+
+.quick-start-flow button svg,
+.settings-action-row button svg {
+  grid-row: span 2;
+  color: var(--green);
+}
+
+.quick-start-flow span,
+.settings-action-row span {
+  min-width: 0;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+.quick-start-flow small,
+.settings-action-row small {
+  min-width: 0;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.quick-start-flow button:disabled,
+.settings-action-row button:disabled {
+  opacity: 0.55;
 }
 
 .desktop-command-grid {
@@ -4208,6 +4430,77 @@ h3 {
   gap: 10px;
   align-items: end;
   margin-bottom: 14px;
+}
+
+.terminal-drawer-launcher {
+  position: fixed;
+  right: 22px;
+  bottom: 18px;
+  z-index: 52;
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #5f7488;
+  background: #17212d;
+  color: #f8fafc;
+  border-radius: 999px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.28);
+  padding: 9px 13px;
+}
+
+.terminal-drawer-launcher strong {
+  display: inline-grid;
+  min-width: 22px;
+  height: 22px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #2f67b1;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.terminal-drawer {
+  position: fixed;
+  left: 80px;
+  right: 18px;
+  bottom: 0;
+  z-index: 50;
+  max-height: min(66vh, 680px);
+  overflow: auto;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, #000000);
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -18px 54px rgba(15, 23, 42, 0.26);
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.desktop-app-shell.sidebar-expanded .terminal-drawer {
+  left: 130px;
+}
+
+.terminal-drawer.closed {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(calc(100% + 16px));
+}
+
+.terminal-drawer.open {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.terminal-drawer .panel-heading {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  margin: -12px -12px 12px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  padding: 12px;
 }
 
 .session-launcher .session-prompt-field {
@@ -6531,11 +6824,11 @@ h3 {
 
 @media (max-width: 1080px) {
   .desktop-app-shell {
-    grid-template-columns: 58px 250px minmax(0, 1fr);
+    grid-template-columns: 58px minmax(0, 1fr);
   }
 
-  .desktop-app-shell.sidebar-collapsed {
-    grid-template-columns: 58px 0 minmax(0, 1fr);
+  .desktop-app-shell.sidebar-expanded {
+    grid-template-columns: 104px minmax(0, 1fr);
   }
 
   .desktop-home-grid {
@@ -6566,10 +6859,6 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .settings-dialog-body {
-    grid-template-columns: minmax(160px, 0.36fr) minmax(0, 1fr);
-  }
-
   .settings-controlled-summary,
   .session-init-summary {
     grid-template-columns: 1fr;
@@ -6589,6 +6878,7 @@ h3 {
   .agent-map,
   .agent-workload-strip,
   .desktop-command-grid,
+  .quick-start-flow,
   .ops-summary-strip,
   .ops-unified-grid,
   .task-pipe-summary,
@@ -6640,6 +6930,23 @@ h3 {
   .intent-map-layout,
   .mode-switchboard-layout {
     grid-template-columns: 1fr;
+  }
+
+  .desktop-titlebar {
+    grid-template-columns: minmax(160px, 0.34fr) minmax(0, 1fr);
+  }
+
+  .titlebar-actions {
+    grid-column: 1 / -1;
+  }
+
+  .terminal-drawer {
+    left: 68px;
+    right: 10px;
+  }
+
+  .desktop-app-shell.sidebar-expanded .terminal-drawer {
+    left: 114px;
   }
 
   .adapter-grid,
@@ -6696,7 +7003,7 @@ h3 {
 
   .desktop-app-shell {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
     height: auto;
     min-height: 100vh;
     overflow: visible;
@@ -6722,26 +7029,14 @@ h3 {
     flex: 0 0 42px;
   }
 
-  .desktop-sidebar {
-    grid-template-rows: auto auto auto auto;
-    height: auto;
-    max-height: none;
-    overflow: visible;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .desktop-app-shell.sidebar-collapsed .desktop-sidebar {
-    display: none;
-  }
-
   .settings-dialog-body {
     grid-template-columns: 1fr;
     min-height: 0;
   }
 
   .settings-tab-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: grid;
+    grid-template-columns: 1fr;
   }
 
   .desktop-viewport {
@@ -6765,6 +7060,13 @@ h3 {
 
   .titlebar-search {
     width: 100%;
+  }
+
+  .terminal-drawer,
+  .desktop-app-shell.sidebar-expanded .terminal-drawer {
+    left: 10px;
+    right: 10px;
+    max-height: 74vh;
   }
 
   .workspace-home-panel {

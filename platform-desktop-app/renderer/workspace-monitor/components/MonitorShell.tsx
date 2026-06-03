@@ -55,6 +55,7 @@ type SectionId =
 type FeatureGroupId = "core" | "workspace" | "knowledge" | "governance";
 type SidebarMode = "expanded" | "collapsed";
 type SettingsTabId = "appearance" | "navigation" | "execution" | "data";
+type AppThemeMode = "system" | "light" | "dark";
 
 type Section = {
   id: SectionId;
@@ -301,6 +302,8 @@ const PINNED_SECTIONS_STORAGE_KEY = "workspace-monitor:pinned-sections";
 const UI_LANGUAGE_STORAGE_KEY = "workspace-monitor:ui-language";
 const SIDEBAR_MODE_STORAGE_KEY = "workspace-monitor:sidebar-mode";
 const RUNTIME_INIT_STORAGE_KEY = "workspace-monitor:runtime-init";
+const THEME_MODE_STORAGE_KEY = "workspace-monitor:theme-mode";
+const TERMINAL_DRAWER_STORAGE_KEY = "workspace-monitor:terminal-drawer";
 const defaultPinnedSections: SectionId[] = ["overview", "desktop", "agents", "source", "intent"];
 const operatorSectionIds = new Set<SectionId>(["projects", "history", "structure", "documents", "requirements"]);
 type UiLanguage = "ko" | "en";
@@ -562,6 +565,14 @@ const fallbackLanguageModes: MonitorLanguageMode[] = [
     includedLanguages: ["en"],
     includeUnknown: false,
     documentRule: "Show only documents tagged en."
+  },
+  {
+    id: "unknown",
+    label: "미분류",
+    intent: "Show language-neutral or not-yet-tagged records.",
+    includedLanguages: [],
+    includeUnknown: true,
+    documentRule: "Show documents tagged unknown."
   }
 ];
 
@@ -1405,7 +1416,7 @@ const fallbackTaskPipePresets: CliTaskPipelinePresetReport[] = [
 ];
 
 const defaultRuntimeInitDefaults: RuntimeInitDefaults = {
-  adapterId: fallbackDesktopAdapters[0].adapterId,
+  adapterId: "codex-cli",
   sessionModeId: sessionModePresets[0].id,
   taskPipeKind: fallbackTaskPipePresets[0].taskKind,
   autoDeferQuestions: true
@@ -1425,7 +1436,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [settingsTab, setSettingsTab] = useState<SettingsTabId>("appearance");
-  const [sidebarMode, setSidebarMode] = useState<SidebarMode>("expanded");
+  const [themeMode, setThemeMode] = useState<AppThemeMode>("system");
+  const [sidebarMode, setSidebarMode] = useState<SidebarMode>("collapsed");
+  const [terminalDrawerOpen, setTerminalDrawerOpen] = useState(false);
   const [runtimeInitDefaults, setRuntimeInitDefaults] = useState<RuntimeInitDefaults>(defaultRuntimeInitDefaults);
   const [operatorCenterOpen, setOperatorCenterOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState("");
@@ -1433,7 +1446,16 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [pinnedSections, setPinnedSections] = useState<SectionId[]>(defaultPinnedSections);
   const [recentSections, setRecentSections] = useState<SectionId[]>(["overview"]);
   const viewModes = snapshot.viewModeCatalog?.modes?.length ? snapshot.viewModeCatalog.modes : fallbackViewModes;
-  const languageModes = snapshot.languageModeCatalog?.modes?.length ? snapshot.languageModeCatalog.modes : fallbackLanguageModes;
+  const languageModes = useMemo(() => {
+    const merged = new Map<string, MonitorLanguageMode>();
+    for (const mode of fallbackLanguageModes) {
+      merged.set(mode.id, mode);
+    }
+    for (const mode of snapshot.languageModeCatalog?.modes || []) {
+      merged.set(mode.id, mode);
+    }
+    return Array.from(merged.values());
+  }, [snapshot.languageModeCatalog?.modes]);
   const [viewMode, setViewMode] = useState(snapshot.viewModeCatalog?.defaultMode || "superadmin_developer");
   const [languageMode, setLanguageMode] = useState(snapshot.languageModeCatalog?.defaultMode || "all");
   const modeFunctionCatalog = snapshot.modeFunctionCatalog ?? emptyModeFunctionCatalog;
@@ -1469,6 +1491,23 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   }, [uiLanguage]);
   useEffect(() => {
     try {
+      const stored = window.localStorage.getItem(THEME_MODE_STORAGE_KEY);
+      if (stored === "system" || stored === "light" || stored === "dark") {
+        setThemeMode(stored);
+      }
+    } catch {
+      // Local storage can be unavailable in hardened browser contexts.
+    }
+  }, []);
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(THEME_MODE_STORAGE_KEY, themeMode);
+    } catch {
+      // Local storage can be unavailable in hardened browser contexts.
+    }
+  }, [themeMode]);
+  useEffect(() => {
+    try {
       const stored = window.localStorage.getItem(SIDEBAR_MODE_STORAGE_KEY);
       if (stored === "expanded" || stored === "collapsed") {
         setSidebarMode(stored);
@@ -1484,6 +1523,23 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       // Local storage can be unavailable in hardened browser contexts.
     }
   }, [sidebarMode]);
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(TERMINAL_DRAWER_STORAGE_KEY);
+      if (stored === "open" || stored === "closed") {
+        setTerminalDrawerOpen(stored === "open");
+      }
+    } catch {
+      // Local storage can be unavailable in hardened browser contexts.
+    }
+  }, []);
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(TERMINAL_DRAWER_STORAGE_KEY, terminalDrawerOpen ? "open" : "closed");
+    } catch {
+      // Local storage can be unavailable in hardened browser contexts.
+    }
+  }, [terminalDrawerOpen]);
   useEffect(() => {
     try {
       const stored = window.localStorage.getItem(RUNTIME_INIT_STORAGE_KEY);
@@ -1931,9 +1987,19 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const currentSection = sectionById.get(section);
   const currentFeatureGroup =
     localizedFeatureGroups.find((group) => group.id === currentSection?.group) || localizedFeatureGroups[0];
+  const currentThemeLabel =
+    themeMode === "system"
+      ? uiLanguage === "ko" ? "시스템" : "System"
+      : themeMode === "dark"
+        ? uiLanguage === "ko" ? "다크" : "Dark"
+        : uiLanguage === "ko" ? "라이트" : "Light";
   const openSettingsTab = (tabId: SettingsTabId = "appearance") => {
     setSettingsTab(tabId);
     setSettingsOpen(true);
+  };
+  const openTerminalDrawer = () => {
+    setSection("desktop");
+    setTerminalDrawerOpen(true);
   };
   const settingsTabs: Array<{
     id: SettingsTabId;
@@ -1949,8 +2015,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     },
     {
       id: "navigation",
-      label: uiLanguage === "ko" ? "좌측 영역" : "Sidebar",
-      detail: uiLanguage === "ko" ? "접기/고정 섹션" : "Collapse and pins",
+      label: uiLanguage === "ko" ? "레이아웃" : "Layout",
+      detail: uiLanguage === "ko" ? "왼쪽 레일과 하단 터미널" : "Left rail and bottom terminal",
       icon: LayoutDashboard
     },
     {
@@ -2003,12 +2069,25 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     {
       id: "settings-execution",
       label: uiLanguage === "ko" ? "초기화 설정" : "Initialization Settings",
-      detail: uiLanguage === "ko" ? "Adapter, session mode, pipe 기본값을 한 곳에서 정합니다." : "Set adapter, session mode, and pipe defaults in one place.",
+      detail: uiLanguage === "ko" ? "어댑터, session mode, pipe 기본값을 한 곳에서 정합니다." : "Set adapter, session mode, and pipe defaults in one place.",
       group: uiLanguage === "ko" ? "설정" : "Settings",
       icon: Network,
       badge: runtimeInitDefaults.adapterId,
       keywords: ["settings", "initialize", "adapter", "session", "task pipe", "auto defer"],
       run: () => openSettingsTab("execution")
+    },
+    {
+      id: "terminal-drawer-open",
+      label: uiLanguage === "ko" ? "하단 터미널 열기" : "Open Bottom Terminal",
+      detail:
+        uiLanguage === "ko"
+          ? "다중 CLI lane, stdout/stderr, decision event를 아래에서 올라오는 패널로 봅니다."
+          : "Open multi-CLI lanes, stdout/stderr, and decision events in the bottom drawer.",
+      group: uiLanguage === "ko" ? "실행" : "Run",
+      icon: SquareTerminal,
+      badge: terminalDrawerOpen ? "open" : "closed",
+      keywords: ["terminal", "drawer", "panel", "cli", "run board", "bottom"],
+      run: openTerminalDrawer
     },
     ...viewCategories.slice(0, 10).map((item) => ({
       id: `category-${item}`,
@@ -2026,7 +2105,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     {
       id: "action-settings",
       label: uiLanguage === "ko" ? "설정" : "Settings",
-      detail: uiLanguage === "ko" ? "화면 언어, 보기 모드, 문서 언어, 고정 섹션을 조정합니다." : "Adjust UI language, view mode, document language, and pinned sections.",
+      detail: uiLanguage === "ko" ? "테마, 언어, 레이아웃, 초기화 기본값을 조정합니다." : "Adjust theme, language, layout, and initialization defaults.",
       group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
       icon: Settings,
       badge: currentViewMode.label,
@@ -2085,7 +2164,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   };
 
   return (
-    <main className="desktop-app-root">
+    <main className={`desktop-app-root theme-${themeMode}`}>
       <div className={`desktop-app-shell sidebar-${sidebarMode}`}>
         <aside className="activity-rail" aria-label={uiLanguage === "ko" ? "주요 기능 레일" : "Primary activity rail"}>
           <button className="activity-brand" type="button" onClick={() => openSection("overview")} title={uiLanguage === "ko" ? "작업공간 홈" : "Workspace Home"}>
@@ -2119,54 +2198,6 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           </button>
         </aside>
 
-        <aside className="desktop-sidebar" aria-label={uiLanguage === "ko" ? "작업공간 맥락" : "Workspace context"}>
-          <div className="workspace-switcher">
-            <div>
-              <p className="eyebrow">{uiLanguage === "ko" ? "에이전트 작업공간" : "Agent Workspace"}</p>
-              <h1>{uiLanguage === "ko" ? "플랫폼" : "Platform"}</h1>
-            </div>
-            <span>{formatDate(snapshot.generatedAt)}</span>
-          </div>
-
-          <button className="command-trigger sidebar-command-trigger" type="button" onClick={() => setCommandPaletteOpen(true)}>
-            <Search size={17} aria-hidden="true" />
-            <span>
-              <strong>{uiLanguage === "ko" ? "명령 검색" : "Command Palette"}</strong>
-              <small>{commandItems.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 실행" : "actions"}</small>
-            </span>
-          </button>
-
-          <section className="sidebar-context-panel" aria-label={uiLanguage === "ko" ? "현재 화면 설명" : "Current surface context"}>
-            <div className="sidebar-context-heading">
-              {currentSection ? <currentSection.icon size={18} aria-hidden="true" /> : <LayoutDashboard size={18} aria-hidden="true" />}
-              <span>
-                <small>{uiLanguage === "ko" ? "현재 작업 화면" : "Current Surface"}</small>
-                <strong>{currentSectionLabel}</strong>
-              </span>
-            </div>
-            <p>{currentSection?.purpose || (uiLanguage === "ko" ? "선택한 화면의 역할을 보여줍니다." : "Shows the role of the selected surface.")}</p>
-            <div className="sidebar-context-meta">
-              <span>
-                <strong>{currentFeatureGroup?.label || (uiLanguage === "ko" ? "작업" : "Work")}</strong>
-                <small>{currentFeatureGroup?.purpose || (uiLanguage === "ko" ? "현재 화면 묶음" : "Current surface group")}</small>
-              </span>
-              <em>{sectionNavMeta[section]}</em>
-            </div>
-          </section>
-
-          <div className={`sidebar-status-card status-${attentionState.tone}`}>
-            <div>
-              <attentionState.icon size={16} aria-hidden="true" />
-              <span>{attentionState.label}</span>
-            </div>
-            <strong>{attentionState.title}</strong>
-            <button type="button" onClick={() => openSection(attentionState.section)}>
-              <ArrowRight size={14} aria-hidden="true" />
-              <span>{attentionState.action}</span>
-            </button>
-          </div>
-        </aside>
-
         <section className="desktop-viewport" aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"}>
           <header className="desktop-titlebar">
             <div className="titlebar-section">
@@ -2176,7 +2207,21 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <strong>{currentSectionLabel}</strong>
               </div>
             </div>
+            <div className={`titlebar-context-strip status-${attentionState.tone}`}>
+              <span>
+                <strong>{currentFeatureGroup?.label || (uiLanguage === "ko" ? "작업" : "Work")}</strong>
+                <small>{currentSection?.purpose || (uiLanguage === "ko" ? "선택한 화면의 역할을 보여줍니다." : "Shows the role of the selected surface.")}</small>
+              </span>
+              <button type="button" onClick={() => openSection(attentionState.section)} title={attentionState.title}>
+                <attentionState.icon size={14} aria-hidden="true" />
+                <span>{attentionState.action}</span>
+              </button>
+            </div>
             <div className="titlebar-actions">
+              <button type="button" onClick={openTerminalDrawer} title={uiLanguage === "ko" ? "하단 터미널 열기" : "Open bottom terminal"}>
+                <SquareTerminal size={15} aria-hidden="true" />
+                <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
+              </button>
               <label className="titlebar-search">
                 <Search size={15} aria-hidden="true" />
                 <input
@@ -2296,6 +2341,32 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                   <div className="settings-grid">
                     <section className="settings-pane">
                       <div className="settings-pane-heading">
+                        <LayoutDashboard size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "테마" : "Theme"}</span>
+                          <strong>{currentThemeLabel}</strong>
+                        </div>
+                      </div>
+                      <div className="settings-segment-list">
+                        {(["system", "light", "dark"] as AppThemeMode[]).map((mode) => (
+                          <button
+                            key={mode}
+                            className={themeMode === mode ? "active" : ""}
+                            onClick={() => setThemeMode(mode)}
+                            type="button"
+                          >
+                            {mode === "system"
+                              ? uiLanguage === "ko" ? "시스템" : "System"
+                              : mode === "dark"
+                                ? uiLanguage === "ko" ? "다크" : "Dark"
+                                : uiLanguage === "ko" ? "라이트" : "Light"}
+                          </button>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
                         <Languages size={16} aria-hidden="true" />
                         <div>
                           <span>{uiLanguage === "ko" ? "화면 언어" : "UI Language"}</span>
@@ -2381,8 +2452,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                       <div className="settings-pane-heading">
                         <LayoutDashboard size={16} aria-hidden="true" />
                         <div>
-                          <span>{uiLanguage === "ko" ? "좌측 사이드바" : "Left Sidebar"}</span>
-                          <strong>{sidebarMode === "expanded" ? (uiLanguage === "ko" ? "펼침" : "Expanded") : uiLanguage === "ko" ? "접힘" : "Collapsed"}</strong>
+                          <span>{uiLanguage === "ko" ? "좌측 레일" : "Left Rail"}</span>
+                          <strong>{sidebarMode === "expanded" ? (uiLanguage === "ko" ? "짧은 라벨 표시" : "Labels visible") : uiLanguage === "ko" ? "아이콘만" : "Icons only"}</strong>
                         </div>
                       </div>
                       <div className="settings-segment-list">
@@ -2391,14 +2462,43 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                           onClick={() => setSidebarMode("expanded")}
                           type="button"
                         >
-                          {uiLanguage === "ko" ? "펼치기" : "Expanded"}
+                          {uiLanguage === "ko" ? "라벨 표시" : "Labels"}
                         </button>
                         <button
                           className={sidebarMode === "collapsed" ? "active" : ""}
                           onClick={() => setSidebarMode("collapsed")}
                           type="button"
                         >
-                          {uiLanguage === "ko" ? "접기" : "Collapsed"}
+                          {uiLanguage === "ko" ? "아이콘만" : "Icons"}
+                        </button>
+                      </div>
+                    </section>
+
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
+                        <SquareTerminal size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "하단 터미널" : "Bottom Terminal"}</span>
+                          <strong>{terminalDrawerOpen ? (uiLanguage === "ko" ? "열림" : "Open") : uiLanguage === "ko" ? "닫힘" : "Closed"}</strong>
+                        </div>
+                      </div>
+                      <div className="settings-segment-list">
+                        <button
+                          className={terminalDrawerOpen ? "active" : ""}
+                          onClick={() => {
+                            setSection("desktop");
+                            setTerminalDrawerOpen(true);
+                          }}
+                          type="button"
+                        >
+                          {uiLanguage === "ko" ? "열기" : "Open"}
+                        </button>
+                        <button
+                          className={!terminalDrawerOpen ? "active" : ""}
+                          onClick={() => setTerminalDrawerOpen(false)}
+                          type="button"
+                        >
+                          {uiLanguage === "ko" ? "닫기" : "Close"}
                         </button>
                       </div>
                     </section>
@@ -2431,6 +2531,39 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
 
                 {settingsTab === "execution" && (
                   <div className="settings-grid">
+                    <section className="settings-pane wide quick-setup-pane">
+                      <div className="settings-pane-heading">
+                        <PlayCircle size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "바로 시작 기본값" : "Ready-to-run defaults"}</span>
+                          <strong>{uiLanguage === "ko" ? "Codex 기준으로 단순화" : "Simplified for Codex"}</strong>
+                          <small>
+                            {uiLanguage === "ko"
+                              ? "처음에는 이 값으로 시작하고, 필요할 때만 세부 lane을 바꿉니다."
+                              : "Start with these defaults, then change lanes only when needed."}
+                          </small>
+                        </div>
+                      </div>
+                      <div className="settings-action-row">
+                        <button type="button" onClick={() => setRuntimeInitDefaults(defaultRuntimeInitDefaults)}>
+                          <CheckCircle2 size={15} aria-hidden="true" />
+                          <span>{uiLanguage === "ko" ? "추천 기본값 적용" : "Apply recommended defaults"}</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setRuntimeInitDefaults(defaultRuntimeInitDefaults);
+                            setSection("desktop");
+                            setTerminalDrawerOpen(true);
+                            setSettingsOpen(false);
+                          }}
+                        >
+                          <SquareTerminal size={15} aria-hidden="true" />
+                          <span>{uiLanguage === "ko" ? "터미널로 바로 가기" : "Go to terminal"}</span>
+                        </button>
+                      </div>
+                    </section>
+
                     <section className="settings-pane">
                       <div className="settings-pane-heading">
                         <SquareTerminal size={16} aria-hidden="true" />
@@ -2672,9 +2805,41 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                     <Bot size={16} aria-hidden="true" />
                     <span>Agent Factory</span>
                   </button>
-                  <button type="button" onClick={() => openSection("desktop")}>
+                  <button type="button" onClick={openTerminalDrawer}>
                     <PlayCircle size={16} aria-hidden="true" />
                     <span>Start Task</span>
+                  </button>
+                </div>
+              </section>
+
+              <section className="panel wide quick-start-panel">
+                <div className="panel-heading">
+                  <div>
+                    <p className="eyebrow">Quick Start</p>
+                    <h2>{uiLanguage === "ko" ? "바로 쓰기" : "Start now"}</h2>
+                  </div>
+                  <span className="result-count">{runtimeInitDefaults.adapterId}</span>
+                </div>
+                <div className="quick-start-flow">
+                  <button type="button" onClick={() => openSection("source")}>
+                    <FolderOpen size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "파일/코드 열기" : "Open files/code"}</span>
+                    <small>{uiLanguage === "ko" ? "실제 작업공간 파일" : "workspace files"}</small>
+                  </button>
+                  <button type="button" onClick={openTerminalDrawer}>
+                    <SquareTerminal size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "바로 하단 터미널 열기" : "Open terminal drawer"}</span>
+                    <small>{uiLanguage === "ko" ? "다중 CLI lane" : "multi-CLI lanes"}</small>
+                  </button>
+                  <button type="button" onClick={() => openSettingsTab("execution")}>
+                    <CheckCircle2 size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "초기화 단순 설정" : "Simple init setup"}</span>
+                    <small>{runtimeInitDefaults.taskPipeKind}</small>
+                  </button>
+                  <button type="button" onClick={() => openSettingsTab("appearance")}>
+                    <Settings size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "테마/언어 설정" : "Theme/language"}</span>
+                    <small>{currentThemeLabel}</small>
                   </button>
                 </div>
               </section>
@@ -2800,6 +2965,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           uiLanguage={uiLanguage}
           initDefaults={runtimeInitDefaults}
           onOpenSettings={() => openSettingsTab("execution")}
+          terminalDrawerOpen={terminalDrawerOpen}
+          setTerminalDrawerOpen={setTerminalDrawerOpen}
         />
       )}
 
@@ -3072,6 +3239,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           uiLanguage={uiLanguage}
           initDefaults={runtimeInitDefaults}
           onOpenSettings={() => openSettingsTab("execution")}
+          terminalDrawerOpen={terminalDrawerOpen}
+          setTerminalDrawerOpen={setTerminalDrawerOpen}
           surface="files"
         />
       )}
@@ -3824,6 +3993,8 @@ function DesktopRuntimePanel({
   uiLanguage,
   initDefaults,
   onOpenSettings,
+  terminalDrawerOpen,
+  setTerminalDrawerOpen,
   surface = "runtime"
 }: {
   agentCatalogCount: number;
@@ -3832,6 +4003,8 @@ function DesktopRuntimePanel({
   uiLanguage: UiLanguage;
   initDefaults: RuntimeInitDefaults;
   onOpenSettings: () => void;
+  terminalDrawerOpen: boolean;
+  setTerminalDrawerOpen: (open: boolean) => void;
   surface?: "runtime" | "files";
 }) {
   const copy = nativeWorkspaceCopy[uiLanguage];
@@ -4746,6 +4919,7 @@ function DesktopRuntimePanel({
   };
 
   const startSession = async () => {
+    setTerminalDrawerOpen(true);
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setRuntimeState("unavailable");
@@ -4776,6 +4950,7 @@ function DesktopRuntimePanel({
   };
 
   const initTaskPipe = async () => {
+    setTerminalDrawerOpen(true);
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setRuntimeState("unavailable");
@@ -5689,6 +5864,42 @@ function DesktopRuntimePanel({
         </div>
       </section>
 
+      <section className="panel wide quick-start-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Quick Start</p>
+            <h2>{uiLanguage === "ko" ? "바로 쓰기" : "Start now"}</h2>
+          </div>
+          <span className="result-count">{selectedMode.label}</span>
+        </div>
+        <div className="quick-start-flow">
+          <button type="button" onClick={chooseDesktopWorkspaceFolder} disabled={!invoke || workspaceHostBusy !== ""}>
+            <FolderOpen size={16} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "작업 폴더 선택" : "Choose workspace"}</span>
+            <small>{desktopWorkspace?.activeWorkspacePath || "native folder picker"}</small>
+          </button>
+          <button type="button" onClick={runAllHealthChecks} disabled={!invoke || runningAdapterId !== ""}>
+            <CheckCircle2 size={16} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "CLI 자동 확인" : "Check CLIs"}</span>
+            <small>{availableCount} / {adapters.length} ready</small>
+          </button>
+          <button type="button" onClick={() => setTerminalDrawerOpen(true)}>
+            <SquareTerminal size={16} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "바로 하단 터미널 열기" : "Open terminal drawer"}</span>
+            <small>{terminalDrawerOpen ? "open" : "bottom panel"}</small>
+          </button>
+          <button
+            type="button"
+            onClick={startSession}
+            disabled={!invoke || runningAdapterId !== "" || !adapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId && adapter.available)}
+          >
+            <PlayCircle size={16} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "선택 lane 시작" : "Start selected lane"}</span>
+            <small>{adapters.find((adapter) => adapter.adapterId === selectedSessionAdapterId)?.label || selectedSessionAdapterId}</small>
+          </button>
+        </div>
+      </section>
+
       <section className="metrics-band">
         <Metric label="Guest Adapters" value={adapters.length} icon={Network} tone="green" />
         <Metric label="Available" value={availableCount} icon={CheckCircle2} tone="blue" />
@@ -6524,13 +6735,27 @@ function DesktopRuntimePanel({
         </div>
       </section>
 
-      <section className="panel wide cli-session-panel">
+      {!terminalDrawerOpen && (
+        <button type="button" className="terminal-drawer-launcher" onClick={() => setTerminalDrawerOpen(true)}>
+          <SquareTerminal size={16} aria-hidden="true" />
+          <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
+          <strong>{sessions.length}</strong>
+        </button>
+      )}
+
+      <section className={`panel wide cli-session-panel terminal-drawer ${terminalDrawerOpen ? "open" : "closed"}`} aria-label={uiLanguage === "ko" ? "하단 다중 CLI 터미널" : "Bottom multi-CLI terminal"}>
         <div className="panel-heading">
           <div>
             <p className="eyebrow">Run Board</p>
-            <h2>Lane / timeline / terminal</h2>
+            <h2>{uiLanguage === "ko" ? "하단 다중 CLI 터미널" : "Bottom multi-CLI terminal"}</h2>
           </div>
-          <span className="result-count">{sessions.length} sessions</span>
+          <div className="desktop-actions">
+            <span className="result-count">{sessions.length} sessions</span>
+            <button type="button" onClick={() => setTerminalDrawerOpen(false)} title={uiLanguage === "ko" ? "터미널 접기" : "Collapse terminal"}>
+              <X size={15} aria-hidden="true" />
+              <span>{uiLanguage === "ko" ? "접기" : "Collapse"}</span>
+            </button>
+          </div>
         </div>
 
         <div className="run-board-strip">

@@ -1,0 +1,38 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-workbench-ux-reference-implementation",
+  "request_id": "UR-2026-06-03-042",
+  "mode": "quick",
+  "timezone": "Asia/Seoul",
+  "phase_timings": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes_estimate": 8,
+      "notes": "Checked official VS Code, IntelliJ IDEA, and Discord references for workbench navigation, bottom terminal, settings, and appearance controls."
+    },
+    {
+      "phase": "local_inspection",
+      "duration_minutes_estimate": 10,
+      "notes": "Inspected MonitorShell navigation, settings dialog, runtime session, language mode, and readiness token checks."
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes_estimate": 42,
+      "notes": "Removed the second sidebar DOM, added titlebar context, bottom terminal drawer, theme persistence, expanded language modes, quick start flow, and settings tab restructuring."
+    },
+    {
+      "phase": "validation",
+      "duration_minutes_estimate": 28,
+      "notes": "Ran TypeScript checks, tests, customer build, platform readiness, git diff check, and in-app Browser static smoke with screenshot capture."
+    },
+    {
+      "phase": "records",
+      "duration_minutes_estimate": 8,
+      "notes": "Recorded request summary, work summary, request trace, web search, evaluation, resource cleanup, and timing."
+    }
+  ],
+  "bottleneck_notes": [
+    "MonitorShell remains a large component, so even UI-local changes require careful token and DOM regression checks.",
+    "Static customer build regenerates snapshot files that must be reviewed and committed with renderer behavior changes."
+  ]
+}
