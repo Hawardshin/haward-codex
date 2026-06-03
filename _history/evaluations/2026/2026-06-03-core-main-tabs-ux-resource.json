@@ -1,0 +1,43 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-core-main-tabs-ux",
+  "request_id": "UR-2026-06-03-044",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    "Python static server on port 3217",
+    "In-app Browser tab",
+    "Next static customer build output",
+    "Generated workspace snapshot files",
+    "Screenshot artifact"
+  ],
+  "checks_required": [
+    "Static server stopped before close-out",
+    "No continuing browser automation loop",
+    "Build commands completed",
+    "Screenshot stored under project artifacts",
+    "Generated snapshots intentionally included"
+  ],
+  "cleanup_results": [
+    {
+      "resource": "Python static server on port 3217",
+      "status": "stopped"
+    },
+    {
+      "resource": "In-app Browser automation",
+      "status": "no_continuing_loop"
+    },
+    {
+      "resource": "Build commands",
+      "status": "completed"
+    },
+    {
+      "resource": "Screenshot artifact",
+      "status": "stored"
+    },
+    {
+      "resource": "Generated workspace snapshots",
+      "status": "included_in_change_set"
+    }
+  ],
+  "status": "passed"
+}

@@ -1741,6 +1741,89 @@ h3 {
   color: rgba(255, 255, 255, 0.74);
 }
 
+.main-workbench-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.main-feature-tabs {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 0;
+}
+
+.main-feature-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.78fr) minmax(220px, 0.58fr);
+  gap: 12px;
+  align-items: stretch;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.main-feature-detail h3 {
+  margin: 4px 0 6px;
+  font-size: 22px;
+  line-height: 1.18;
+  word-break: keep-all;
+}
+
+.main-feature-detail p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.main-feature-steps {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-feature-steps li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.main-feature-steps span {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  color: var(--slate);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.main-feature-steps strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+
+.main-feature-actions.quick-start-flow {
+  grid-template-columns: 1fr;
+  align-content: start;
+}
+
+.main-feature-actions.quick-start-flow button {
+  min-height: 62px;
+}
+
 .section-tab-groups {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3896,6 +3979,27 @@ h3 {
   font-size: 12px;
   line-height: 1.35;
   padding: 6px;
+}
+
+.path-disclosure {
+  display: grid;
+  gap: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 7px;
+  padding: 8px;
+}
+
+.path-disclosure summary {
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.path-disclosure code {
+  margin-top: 4px;
+  color: var(--text);
 }
 
 .accumulated-summary-list {
@@ -7170,6 +7274,7 @@ h3 {
   .workspace-home-panel,
   .desktop-run-timeline,
   .home-metrics-strip,
+  .main-feature-detail,
   .product-feature-summary,
   .product-feature-grid,
   .operator-section-grid {
@@ -7401,6 +7506,7 @@ h3 {
   .workspace-home-actions,
   .desktop-run-timeline,
   .home-metrics-strip,
+  .main-feature-detail,
   .product-feature-summary,
   .product-feature-grid,
   .product-operator-strip,

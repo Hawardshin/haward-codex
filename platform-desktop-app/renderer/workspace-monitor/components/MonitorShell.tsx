@@ -56,6 +56,7 @@ type FeatureGroupId = "core" | "workspace" | "knowledge" | "governance";
 type SidebarMode = "expanded" | "collapsed";
 type SettingsTabId = "appearance" | "navigation" | "execution" | "data";
 type AppThemeMode = "system" | "light" | "dark";
+type HomeMainTabId = "files" | "agents" | "run" | "learn";
 
 type Section = {
   id: SectionId;
@@ -1457,6 +1458,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [runtimeInitDefaults, setRuntimeInitDefaults] = useState<RuntimeInitDefaults>(defaultRuntimeInitDefaults);
   const [operatorCenterOpen, setOperatorCenterOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState("");
+  const [activeHomeTab, setActiveHomeTab] = useState<HomeMainTabId>("files");
   const commandInputRef = useRef<HTMLInputElement>(null);
   const [pinnedSections, setPinnedSections] = useState<SectionId[]>(defaultPinnedSections);
   const [recentSections, setRecentSections] = useState<SectionId[]>(["overview"]);
@@ -2016,6 +2018,102 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     setSection("desktop");
     setTerminalDrawerOpen(true);
   };
+  const homeMainTabs: Array<{
+    id: HomeMainTabId;
+    label: string;
+    kicker: string;
+    title: string;
+    detail: string;
+    icon: LucideIcon;
+    metric: string;
+    cta: string;
+    secondaryCta: string;
+    run: () => void;
+    secondaryRun: () => void;
+    steps: string[];
+  }> = [
+    {
+      id: "files",
+      label: uiLanguage === "ko" ? "파일 가져오기" : "Files",
+      kicker: uiLanguage === "ko" ? "작업공간" : "Workspace",
+      title: uiLanguage === "ko" ? "먼저 폴더를 가져오고 파일을 올립니다" : "Bring in a folder first",
+      detail:
+        uiLanguage === "ko"
+          ? "왼쪽 Explorer에서 실제 작업공간을 잡고, 파일을 열어 에이전트 작업 입력으로 씁니다."
+          : "Use the left Explorer to own the real workspace, open files, and feed agent work.",
+      icon: FolderOpen,
+      metric: `${visibleSourceFiles.length.toLocaleString("ko-KR")} files`,
+      cta: uiLanguage === "ko" ? "Explorer 열기" : "Open Explorer",
+      secondaryCta: uiLanguage === "ko" ? "작업 폴더 선택" : "Choose folder",
+      run: () => openSection("source"),
+      secondaryRun: () => openSection("source"),
+      steps:
+        uiLanguage === "ko"
+          ? ["작업 폴더 선택", "Explorer에서 파일 열기", "수정/저장 후 에이전트 작업에 연결"]
+          : ["Choose a workspace folder", "Open files from Explorer", "Edit/save and connect work to agents"]
+    },
+    {
+      id: "agents",
+      label: uiLanguage === "ko" ? "에이전트 만들기" : "Agents",
+      kicker: uiLanguage === "ko" ? "생성" : "Factory",
+      title: uiLanguage === "ko" ? "작업 목적에 맞는 에이전트를 만듭니다" : "Create agents for the work",
+      detail:
+        uiLanguage === "ko"
+          ? "정의, 역할, 실행 환경을 한곳에서 보고 새 에이전트 작업으로 연결합니다."
+          : "Review definitions, roles, and runtime readiness from one place.",
+      icon: Bot,
+      metric: `${agentCatalog.length.toLocaleString("ko-KR")} agents`,
+      cta: uiLanguage === "ko" ? "에이전트 화면 열기" : "Open agents",
+      secondaryCta: uiLanguage === "ko" ? "생성 후보 보기" : "View candidates",
+      run: () => openSection("agents"),
+      secondaryRun: () => openSection("intent"),
+      steps:
+        uiLanguage === "ko"
+          ? ["목표/역할 선택", "필요 도구와 skill 연결", "실행 lane으로 넘기기"]
+          : ["Pick goal and role", "Attach tools and skills", "Send to a run lane"]
+    },
+    {
+      id: "run",
+      label: uiLanguage === "ko" ? "작업 실행" : "Run",
+      kicker: uiLanguage === "ko" ? "다중 CLI" : "Multi-CLI",
+      title: uiLanguage === "ko" ? "하단 터미널에서 작업을 실행합니다" : "Run work in the bottom terminal",
+      detail:
+        uiLanguage === "ko"
+          ? "Codex CLI 같은 guest adapter를 하단 terminal lane으로 띄우고 질문은 결정함으로 보냅니다."
+          : "Launch guest adapters in bottom terminal lanes and route questions to the decision inbox.",
+      icon: SquareTerminal,
+      metric: runtimeInitDefaults.adapterId,
+      cta: uiLanguage === "ko" ? "하단 터미널 열기" : "Open terminal",
+      secondaryCta: uiLanguage === "ko" ? "실행 설정" : "Run settings",
+      run: openTerminalDrawer,
+      secondaryRun: () => openSettingsTab("execution"),
+      steps:
+        uiLanguage === "ko"
+          ? ["CLI lane 선택", "작업 prompt 입력", "결정/결과를 데이터로 축적"]
+          : ["Pick a CLI lane", "Enter the task prompt", "Accumulate decisions and results"]
+    },
+    {
+      id: "learn",
+      label: uiLanguage === "ko" ? "학습/개선" : "Learn",
+      kicker: uiLanguage === "ko" ? "루프" : "Loop",
+      title: uiLanguage === "ko" ? "작업 결과를 다음 자동화로 바꿉니다" : "Turn results into the next automation",
+      detail:
+        uiLanguage === "ko"
+          ? "누적된 실행 기록, 결정, 평가를 보고 반복되는 작업을 prompt, workflow, tool, skill 후보로 승격합니다."
+          : "Review accumulated runs, decisions, and evaluations to promote repeatable work.",
+      icon: Database,
+      metric: `${visibleEvaluations.toLocaleString("ko-KR")} evals`,
+      cta: uiLanguage === "ko" ? "학습 지도 열기" : "Open learning map",
+      secondaryCta: uiLanguage === "ko" ? "축적 데이터 보기" : "View accumulated data",
+      run: () => openSection("intent"),
+      secondaryRun: () => openSection("desktop"),
+      steps:
+        uiLanguage === "ko"
+          ? ["실행 기록 확인", "반복 패턴 찾기", "자동화 후보로 승격"]
+          : ["Review run records", "Find repeated patterns", "Promote automation candidates"]
+    }
+  ];
+  const activeHomeFeature = homeMainTabs.find((item) => item.id === activeHomeTab) || homeMainTabs[0];
   const settingsTabs: Array<{
     id: SettingsTabId;
     label: string;
@@ -2827,35 +2925,62 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 </div>
               </section>
 
-              <section className="panel wide quick-start-panel">
+              <section className="panel wide quick-start-panel main-workbench-panel" aria-label={uiLanguage === "ko" ? "핵심 기능 탭" : "Core feature tabs"}>
                 <div className="panel-heading">
                   <div>
-                    <p className="eyebrow">Quick Start</p>
-                    <h2>{uiLanguage === "ko" ? "바로 쓰기" : "Start now"}</h2>
+                    <p className="eyebrow">{uiLanguage === "ko" ? "핵심 기능" : "Core Work"}</p>
+                    <h2>{uiLanguage === "ko" ? "먼저 무엇을 할지 고르세요" : "Choose what you want to do first"}</h2>
                   </div>
-                  <span className="result-count">{runtimeInitDefaults.adapterId}</span>
+                  <span className="result-count">{activeHomeFeature.label}</span>
                 </div>
-                <div className="quick-start-flow">
-                  <button type="button" onClick={() => openSection("source")}>
-                    <FolderOpen size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "파일/코드 열기" : "Open files/code"}</span>
-                    <small>{uiLanguage === "ko" ? "실제 작업공간 파일" : "workspace files"}</small>
-                  </button>
-                  <button type="button" onClick={openTerminalDrawer}>
-                    <SquareTerminal size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "바로 하단 터미널 열기" : "Open terminal drawer"}</span>
-                    <small>{uiLanguage === "ko" ? "다중 CLI lane" : "multi-CLI lanes"}</small>
-                  </button>
-                  <button type="button" onClick={() => openSettingsTab("execution")}>
-                    <CheckCircle2 size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "초기화 단순 설정" : "Simple init setup"}</span>
-                    <small>{runtimeInitDefaults.taskPipeKind}</small>
-                  </button>
-                  <button type="button" onClick={() => openSettingsTab("appearance")}>
-                    <Settings size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "테마/언어 설정" : "Theme/language"}</span>
-                    <small>{currentThemeLabel}</small>
-                  </button>
+                <div className="core-feature-rail main-feature-tabs" role="tablist" aria-label={uiLanguage === "ko" ? "핵심 기능" : "Core features"}>
+                  {homeMainTabs.map((tab) => (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      className={activeHomeTab === tab.id ? "active" : ""}
+                      onClick={() => setActiveHomeTab(tab.id)}
+                      role="tab"
+                      aria-selected={activeHomeTab === tab.id}
+                    >
+                      <span className="core-feature-icon">
+                        <tab.icon size={17} aria-hidden="true" />
+                      </span>
+                      <span className="core-feature-copy">
+                        <small>{tab.kicker}</small>
+                        <strong>{tab.label}</strong>
+                        <span>{tab.title}</span>
+                      </span>
+                      <span className="core-feature-metric">{tab.metric}</span>
+                    </button>
+                  ))}
+                </div>
+                <div className="main-feature-detail" role="tabpanel">
+                  <div>
+                    <p className="eyebrow">{activeHomeFeature.kicker}</p>
+                    <h3>{activeHomeFeature.title}</h3>
+                    <p>{activeHomeFeature.detail}</p>
+                  </div>
+                  <ol className="main-feature-steps">
+                    {activeHomeFeature.steps.map((step, index) => (
+                      <li key={step}>
+                        <span>{index + 1}</span>
+                        <strong>{step}</strong>
+                      </li>
+                    ))}
+                  </ol>
+                  <div className="main-feature-actions quick-start-flow">
+                    <button type="button" onClick={activeHomeFeature.run}>
+                      <ArrowRight size={16} aria-hidden="true" />
+                      <span>{activeHomeFeature.cta}</span>
+                      <small>{activeHomeFeature.label}</small>
+                    </button>
+                    <button type="button" onClick={activeHomeFeature.secondaryRun}>
+                      <Settings size={16} aria-hidden="true" />
+                      <span>{activeHomeFeature.secondaryCta}</span>
+                      <small>{activeHomeFeature.metric}</small>
+                    </button>
+                  </div>
                 </div>
               </section>
 
@@ -6428,7 +6553,10 @@ function DesktopRuntimePanel({
                   <span>{store.latestUpdatedAt ? formatTimeLabel(store.latestUpdatedAt) : "idle"}</span>
                 </div>
                 <p>{store.purpose}</p>
-                <code>{store.path}</code>
+                <details className="path-disclosure">
+                  <summary>세부 경로</summary>
+                  <code>{store.path}</code>
+                </details>
                 <div className="adapter-report">
                   <span>{store.plane}</span>
                   <span>{store.visibility}</span>
@@ -6461,7 +6589,10 @@ function DesktopRuntimePanel({
               <span>{accumulatedDataOverview?.status || "not-loaded"}</span>
               <span>{accumulatedDataOverview?.formatMigrationStatus || "manifest-pending"}</span>
             </div>
-            <code>{accumulatedDataOverview?.indexPath || runtimeDataBoundary?.taskRunStorePath || "runtime data root pending"}</code>
+            <details className="path-disclosure">
+              <summary>인덱스 저장 위치</summary>
+              <code>{accumulatedDataOverview?.indexPath || runtimeDataBoundary?.taskRunStorePath || "runtime data root pending"}</code>
+            </details>
             {accumulatedDataOverview && (
               <div className="adapter-report">
                 <span>{accumulatedDataOverview.schemaVersion}</span>
@@ -6529,7 +6660,10 @@ function DesktopRuntimePanel({
                   <strong>{root.created ? "created" : root.exists ? "ready" : "missing"}</strong>
                 </header>
                 <p>{root.purpose}</p>
-                <code>{root.path}</code>
+                <details className="path-disclosure">
+                  <summary>세부 경로</summary>
+                  <code>{root.path}</code>
+                </details>
                 <div className="adapter-report">
                   <span>{root.id}</span>
                   <span>{root.visibility}</span>
@@ -6554,7 +6688,10 @@ function DesktopRuntimePanel({
               <span>{payloadAudit ? formatBytes(payloadAudit.scannedBytes) : "0 B"}</span>
               <span>{payloadAudit?.maxScanFiles ?? 0} max</span>
             </div>
-            <code>{payloadAudit?.auditPath || "No audit report yet"}</code>
+            <details className="path-disclosure">
+              <summary>감사 리포트 경로</summary>
+              <code>{payloadAudit?.auditPath || "No audit report yet"}</code>
+            </details>
             <div className="payload-finding-list">
               {(payloadAudit?.findings || []).slice(0, 6).map((finding) => (
                 <div key={`${finding.ruleId}-${finding.path}`}>
@@ -6577,11 +6714,26 @@ function DesktopRuntimePanel({
               <strong>{supportBundle?.redacted ? "redacted" : "idle"}</strong>
             </header>
             <div className="support-bundle-grid">
-              <code>{supportBundle?.manifestPath || "No manifest yet"}</code>
-              <code>{supportBundle?.runtimeRootsPath || "No runtime roots export"}</code>
-              <code>{supportBundle?.installerPayloadAuditPath || "No payload audit export"}</code>
-              <code>{supportBundle?.taskRunSummaryPath || "No task-run summary"}</code>
-              <code>{supportBundle?.recentEventsPath || "No recent events log"}</code>
+              <details className="path-disclosure">
+                <summary>Manifest</summary>
+                <code>{supportBundle?.manifestPath || "No manifest yet"}</code>
+              </details>
+              <details className="path-disclosure">
+                <summary>Runtime roots</summary>
+                <code>{supportBundle?.runtimeRootsPath || "No runtime roots export"}</code>
+              </details>
+              <details className="path-disclosure">
+                <summary>Payload audit</summary>
+                <code>{supportBundle?.installerPayloadAuditPath || "No payload audit export"}</code>
+              </details>
+              <details className="path-disclosure">
+                <summary>Task run summary</summary>
+                <code>{supportBundle?.taskRunSummaryPath || "No task-run summary"}</code>
+              </details>
+              <details className="path-disclosure">
+                <summary>Recent events</summary>
+                <code>{supportBundle?.recentEventsPath || "No recent events log"}</code>
+              </details>
             </div>
           </article>
         </div>

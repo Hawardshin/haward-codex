@@ -1,0 +1,38 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-core-main-tabs-ux",
+  "request_id": "UR-2026-06-03-044",
+  "mode": "quick",
+  "timezone": "Asia/Seoul",
+  "phase_timings": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes_estimate": 5,
+      "notes": "Checked Apple HIG onboarding, Microsoft Fluent navigation, VS Code getting started, and IntelliJ settings references."
+    },
+    {
+      "phase": "local_inspection",
+      "duration_minutes_estimate": 7,
+      "notes": "Inspected Overview quick start, runtime data path display, accumulated data path display, and readiness tokens."
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes_estimate": 24,
+      "notes": "Added active home feature tabs, main feature detail flow, path disclosure details, CSS layout, and readiness tokens."
+    },
+    {
+      "phase": "validation",
+      "duration_minutes_estimate": 18,
+      "notes": "Ran TypeScript, tests, customer build, platform check, diff check, and Browser static smoke with screenshot capture."
+    },
+    {
+      "phase": "records",
+      "duration_minutes_estimate": 7,
+      "notes": "Recorded request summary, work summary, request trace, web search, evaluation, resource cleanup, and timing."
+    }
+  ],
+  "bottleneck_notes": [
+    "Overview still contains multiple supporting panels, so the main tab workbench must stay visually dominant.",
+    "Path disclosure improves first-read usability but a full terminology pass is still a separate product copy task."
+  ]
+}
