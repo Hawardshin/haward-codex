@@ -535,6 +535,7 @@ const workspaceExplorerPane = readFileSync(
   "utf8"
 );
 const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
+const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
 const productFeaturePanel = readFileSync(
   join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
   "utf8"
@@ -722,6 +723,14 @@ for (const requiredPhrase of [
   "settings-controlled-summary",
   "terminal-drawer",
   "terminal-drawer-launcher",
+  "terminal-drawer-backdrop",
+  "foldAll",
+  "unfoldAll",
+  "코드 접기",
+  "코드 펼치기",
+  "aria-expanded={expanded}",
+  "workspace-tree-folder",
+  "collapsed",
   "quick-start-flow",
   "desktop-app-root theme-",
   "desktop-app-shell sidebar-",
@@ -742,6 +751,11 @@ for (const requiredPhrase of [
 }
 if (monitorShell.includes("localStorage")) {
   failures.push("workspace-monitor settings must not persist desktop app preferences through browser localStorage");
+}
+for (const forbiddenBackground of ["background: #ffffff", "background: #fbfcfd", "background: white", "background: #fff9eb", "background: #fff4f4", "background: #f4f9ff"]) {
+  if (monitorStyles.includes(forbiddenBackground)) {
+    failures.push(`workspace-monitor CSS must not use light-only background token ${forbiddenBackground}`);
+  }
 }
 for (const requiredPhrase of [
   "ProductFeatureArchitecturePanel",

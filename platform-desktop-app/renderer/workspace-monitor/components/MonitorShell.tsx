@@ -620,6 +620,8 @@ const nativeWorkspaceCopy = {
     editorSettings: "편집 설정",
     wordWrap: "줄바꿈",
     minimap: "미니맵",
+    foldAll: "코드 접기",
+    unfoldAll: "코드 펼치기",
     diffMode: "변경 비교",
     editMode: "편집",
     noRuntime: "Tauri 런타임이 없어서 저장은 비활성화됩니다. 지금은 snapshot 파일만 볼 수 있습니다.",
@@ -660,6 +662,8 @@ const nativeWorkspaceCopy = {
     editorSettings: "Editor Settings",
     wordWrap: "Word Wrap",
     minimap: "Minimap",
+    foldAll: "Fold Code",
+    unfoldAll: "Unfold Code",
     diffMode: "Diff",
     editMode: "Edit",
     noRuntime: "Tauri runtime is unavailable. Saving is disabled and snapshot files are shown as fallback.",
@@ -5334,7 +5338,7 @@ function DesktopRuntimePanel({
     sourceEditorRef.current = editorInstance;
   };
 
-  const runSourceEditorCommand = async (command: "undo" | "redo" | "find" | "replace" | "format") => {
+  const runSourceEditorCommand = async (command: "undo" | "redo" | "find" | "replace" | "format" | "foldAll" | "unfoldAll") => {
     const editorInstance = sourceEditorRef.current;
     if (!sourceFile || !editorInstance) {
       setSourceCopyNotice("Open a source file before running editor commands");
@@ -5353,7 +5357,11 @@ function DesktopRuntimePanel({
         ? "actions.find"
         : command === "replace"
           ? "editor.action.startFindReplaceAction"
-          : "editor.action.formatDocument";
+          : command === "foldAll"
+            ? "editor.foldAll"
+            : command === "unfoldAll"
+              ? "editor.unfoldAll"
+              : "editor.action.formatDocument";
     const action = editorInstance.getAction(actionId);
     if (!action) {
       setSourceCopyNotice(`${command} is unavailable for this file`);
@@ -5829,6 +5837,14 @@ function DesktopRuntimePanel({
           <button type="button" onClick={() => runSourceEditorCommand("format")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <Code2 size={15} aria-hidden="true" />
             <span>Format</span>
+          </button>
+          <button type="button" onClick={() => runSourceEditorCommand("foldAll")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+            <Code2 size={15} aria-hidden="true" />
+            <span>{copy.foldAll}</span>
+          </button>
+          <button type="button" onClick={() => runSourceEditorCommand("unfoldAll")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+            <Code2 size={15} aria-hidden="true" />
+            <span>{copy.unfoldAll}</span>
           </button>
           <button type="button" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))} disabled={!sourceFile}>
             <FileSearch size={15} aria-hidden="true" />

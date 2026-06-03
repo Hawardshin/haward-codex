@@ -346,6 +346,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "utf8"
   );
   const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
+  const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
   const productFeaturePanel = readFileSync(
     join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
     "utf8"
@@ -644,6 +645,14 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "settings-controlled-summary",
     "terminal-drawer",
     "terminal-drawer-launcher",
+    "terminal-drawer-backdrop",
+    "foldAll",
+    "unfoldAll",
+    "코드 접기",
+    "코드 펼치기",
+    "aria-expanded={expanded}",
+    "workspace-tree-folder",
+    "collapsed",
     "quick-start-flow",
     "desktop-app-root theme-",
     "desktop-app-shell sidebar-",
@@ -654,6 +663,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "emptyProductFeatureArchitecture"
   ]) {
     assert.match(monitorWorkbenchSource, new RegExp(implementationToken));
+  }
+  for (const forbiddenBackground of [/background:\s*#ffffff/, /background:\s*#fbfcfd/, /background:\s*white/, /background:\s*#fff9eb/, /background:\s*#fff4f4/, /background:\s*#f4f9ff/]) {
+    assert.doesNotMatch(monitorStyles, forbiddenBackground);
   }
   for (const taskRunStoreToken of [
     "CliTaskRunRecordReport",

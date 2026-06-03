@@ -1,7 +1,7 @@
 "use client";
 
-import { Activity, Code2, FolderOpen, Search } from "lucide-react";
-import { useMemo } from "react";
+import { Activity, ChevronRight, Code2, Folder, FolderOpen, Search } from "lucide-react";
+import { useMemo, useState } from "react";
 
 import type { WorkspaceSourceFile } from "@/lib/snapshot";
 
@@ -195,49 +195,64 @@ function WorkspaceExplorerDirectoryView({
   runtimeAvailable: boolean;
   onOpenFile: (relativePath: string) => Promise<void>;
 }) {
+  const [expanded, setExpanded] = useState(true);
+  const itemCount = directory.children.length + directory.files.length;
+
   return (
     <div className="workspace-tree-directory" role="group">
-      <div className="workspace-tree-folder" role="treeitem" aria-expanded="true" style={{ paddingLeft: `${8 + level * 12}px` }}>
-        <FolderOpen size={14} aria-hidden="true" />
+      <button
+        type="button"
+        className={`workspace-tree-folder ${expanded ? "expanded" : "collapsed"}`}
+        role="treeitem"
+        aria-expanded={expanded}
+        style={{ paddingLeft: `${8 + level * 12}px` }}
+        onClick={() => setExpanded((current) => !current)}
+      >
+        <ChevronRight size={13} aria-hidden="true" />
+        {expanded ? <FolderOpen size={14} aria-hidden="true" /> : <Folder size={14} aria-hidden="true" />}
         <strong>{directory.name || "root"}</strong>
-        <span>{directory.children.length + directory.files.length}</span>
-      </div>
-      {directory.children.map((child) => (
-        <WorkspaceExplorerDirectoryView
-          key={child.path}
-          directory={child}
-          level={level + 1}
-          activePath={activePath}
-          dirtyPaths={dirtyPaths}
-          editorBusy={editorBusy}
-          runtimeAvailable={runtimeAvailable}
-          onOpenFile={onOpenFile}
-        />
-      ))}
-      {directory.files.map((file) => {
-        const fileName = file.path.split("/").pop() || file.path;
-        const active = activePath === file.path;
-        const dirty = dirtyPaths.has(file.path);
-        return (
-          <button
-            key={file.id}
-            type="button"
-            className={`workspace-tree-file ${active ? "active" : ""} ${dirty ? "dirty" : "clean"}`}
-            style={{ paddingLeft: `${24 + level * 12}px` }}
-            onClick={() => {
-              void onOpenFile(file.path);
-            }}
-            disabled={!runtimeAvailable || editorBusy}
-            role="treeitem"
-          >
-            <Code2 size={13} aria-hidden="true" />
-            <span>{fileName}</span>
-            <small>
-              {file.extension || file.language || "file"} / {formatBytes(file.sizeBytes)}
-            </small>
-          </button>
-        );
-      })}
+        <span>{itemCount}</span>
+      </button>
+      {expanded && (
+        <>
+          {directory.children.map((child) => (
+            <WorkspaceExplorerDirectoryView
+              key={child.path}
+              directory={child}
+              level={level + 1}
+              activePath={activePath}
+              dirtyPaths={dirtyPaths}
+              editorBusy={editorBusy}
+              runtimeAvailable={runtimeAvailable}
+              onOpenFile={onOpenFile}
+            />
+          ))}
+          {directory.files.map((file) => {
+            const fileName = file.path.split("/").pop() || file.path;
+            const active = activePath === file.path;
+            const dirty = dirtyPaths.has(file.path);
+            return (
+              <button
+                key={file.id}
+                type="button"
+                className={`workspace-tree-file ${active ? "active" : ""} ${dirty ? "dirty" : "clean"}`}
+                style={{ paddingLeft: `${24 + level * 12}px` }}
+                onClick={() => {
+                  void onOpenFile(file.path);
+                }}
+                disabled={!runtimeAvailable || editorBusy}
+                role="treeitem"
+              >
+                <Code2 size={13} aria-hidden="true" />
+                <span>{fileName}</span>
+                <small>
+                  {file.extension || file.language || "file"} / {formatBytes(file.sizeBytes)}
+                </small>
+              </button>
+            );
+          })}
+        </>
+      )}
     </div>
   );
 }

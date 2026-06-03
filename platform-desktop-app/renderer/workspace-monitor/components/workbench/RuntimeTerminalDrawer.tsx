@@ -135,6 +135,15 @@ export function RuntimeTerminalDrawer({
         </button>
       )}
 
+      {open && (
+        <button
+          type="button"
+          className="terminal-drawer-backdrop"
+          aria-label={uiLanguage === "ko" ? "터미널 닫기" : "Close terminal"}
+          onClick={onCollapse}
+        />
+      )}
+
       <section className={`panel wide cli-session-panel terminal-drawer ${open ? "open" : "closed"}`} aria-label={uiLanguage === "ko" ? "하단 다중 CLI 터미널" : "Bottom multi-CLI terminal"}>
         <div className="panel-heading">
           <div>
