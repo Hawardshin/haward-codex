@@ -51,6 +51,7 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
     group("production_agent_blueprints", "Production Agent Blueprints", [
       check("agentcore_blueprint_ui", "AgentCore-style blueprint UI visible", monitorShell.includes("AgentCoreBlueprintPanel") && monitorShell.includes("agentcore-blueprint-panel"), "Agents screen exposes production blueprints derived from public AgentCore references."),
       check("agentcore_blueprint_prefill", "Blueprints fill runnable inputs", monitorShell.includes("applyAgentCoreBlueprint") && monitorShell.includes("setAgentFactoryForm") && monitorShell.includes("setSearchAgentRunForm"), "Blueprint application fills Search Agent Work Chat and Agent Factory inputs."),
+      check("agentcore_quick_builder_proposal", "Blueprints create proposals directly", monitorShell.includes("AgentCore Quick Builder") && monitorShell.includes("createAgentCoreBlueprintProposal") && monitorShell.includes("create_agent_factory_proposal"), "AgentCore-style blueprint selection can call the native Agent Factory proposal writer."),
       check("agentcore_reference_recorded", "AgentCore reference recorded", serializedRegistry.includes("production_agent_blueprints") && serializedUserFlow.includes("awslabs_agentcore_samples"), "Service and user-flow registries record AgentCore-style production blueprint behavior.")
     ]),
     group("workspace_onboarding", "Workspace Onboarding", [

@@ -602,6 +602,7 @@
         "persist the run as taskKind research_insight_agent",
         "show AgentCore-style production blueprints for runtime, memory, gateway/tool, and evaluation-guarded agents before asking the user to invent an agent from scratch",
         "applying a production blueprint must fill the search-agent task input and Agent Factory proposal fields",
+        "a selected production blueprint must be able to create an Agent Factory proposal record directly in the installed app",
         "treat AWS AgentCore deploy as an optional adapter readiness step, not as a required local runtime dependency"
       ]
     },
@@ -680,6 +681,7 @@
         "select a public-source AgentCore-style blueprint from the Agents screen",
         "show lifecycle, capabilities, stored records, and safety gates in one desktop panel",
         "fill Search Agent Work Chat and Agent Factory inputs from the selected blueprint",
+        "create an Agent Factory proposal record from the selected blueprint through the native create_agent_factory_proposal command",
         "preserve local-first runtime ownership and mark AWS AgentCore as an optional deployment adapter"
       ]
     },
@@ -999,6 +1001,7 @@
     "Failure recovery is defined for unreadable workspace, missing optional CLI, pending user decision, stale snapshot, and update failure.",
     "No real token, private snapshot, or browser session is bundled into installer artifacts.",
     "The Agents screen includes AgentCore-style production blueprints backed by public AWS sources.",
-    "A blueprint application changes runnable task input and agent factory input, not only documentation text."
+    "A blueprint application changes runnable task input and agent factory input, not only documentation text.",
+    "A user can create an agent proposal from a selected AgentCore-style blueprint without manually filling every Agent Factory field."
   ]
 }

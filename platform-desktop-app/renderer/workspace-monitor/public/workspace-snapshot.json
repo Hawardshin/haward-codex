@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-03T17:28:04.948Z",
+  "generatedAt": "2026-06-03T17:39:00.161Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -182,6 +182,7 @@
           "Process Graph",
           "Decision Inbox",
           "Production Agent Blueprints",
+          "AgentCore Quick Builder",
           "AgentCore-style Lifecycle"
         ],
         "currentAssets": [],
@@ -195,6 +196,7 @@
           "merge gate artifact synthesis",
           "resource cleanup",
           "AgentCore-style create/dev/invoke/evaluate lifecycle blueprint application",
+          "AgentCore-style blueprint to native agent proposal creation",
           "production agent blueprint selection for runtime, memory, gateway, and evaluation patterns"
         ],
         "learningSignals": [
@@ -205,6 +207,7 @@
           "task-run records",
           "resource cleanup results",
           "selected AgentCore-style blueprint",
+          "created AgentCore-style agent proposal",
           "production lifecycle gate coverage"
         ],
         "validationGates": []
@@ -289,7 +292,8 @@
           "Mode & Function Switchboard",
           "Evidence / Promotion",
           "Production Agent Blueprints",
-          "AgentCore Blueprint Detail"
+          "AgentCore Blueprint Detail",
+          "AgentCore Quick Builder"
         ],
         "currentAssets": [],
         "automationTargets": [
@@ -300,6 +304,7 @@
           "agent definition creation",
           "feature promotion trace",
           "blueprint-driven agent proposal prefill",
+          "one-click AgentCore-style agent proposal creation",
           "runtime/memory/gateway/evaluation agent template selection"
         ],
         "learningSignals": [
@@ -307,7 +312,8 @@
           "implemented candidates",
           "skill activation readiness",
           "agent definition count",
-          "promotion evaluation"
+          "promotion evaluation",
+          "agent proposal saved from AgentCore-style blueprint"
         ],
         "validationGates": []
       },

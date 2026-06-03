@@ -6065,6 +6065,29 @@ h3 {
   min-width: 0;
 }
 
+.agentcore-builder-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.agentcore-builder-steps span {
+  display: inline-flex;
+  min-width: 0;
+  min-height: 36px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface-raised) 88%, var(--green) 8%);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  overflow-wrap: var(--text-natural-wrap);
+}
+
 .agentcore-blueprint-list {
   display: grid;
   align-content: start;
@@ -6223,6 +6246,43 @@ h3 {
 .agentcore-blueprint-actions .primary-action-button {
   border-color: color-mix(in srgb, var(--green) 54%, var(--line));
   background: color-mix(in srgb, var(--surface-raised) 80%, var(--green) 16%);
+}
+
+.agentcore-builder-status {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.24fr) minmax(0, 0.76fr);
+  gap: 8px;
+  min-width: 0;
+  align-items: start;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.agentcore-builder-status strong,
+.agentcore-builder-status span {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.agentcore-builder-status strong {
+  color: var(--text);
+  font-size: 12px;
+}
+
+.agentcore-builder-status span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.agentcore-builder-status.ready {
+  border-color: color-mix(in srgb, var(--green) 46%, var(--line));
+}
+
+.agentcore-builder-status.preview {
+  border-color: color-mix(in srgb, var(--amber) 42%, var(--line));
 }
 
 .agentcore-blueprint-contract {
@@ -10033,6 +10093,7 @@ h3 {
   .intent-theme-list,
   .intent-roadmap-grid,
   .structure-plane-grid,
+  .agentcore-builder-steps,
   .agentcore-blueprint-matrix,
   .boundary-rule-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -10140,6 +10201,7 @@ h3 {
   .source-editor-controls,
   .source-customization-bar,
   .source-settings-grid,
+  .agentcore-builder-status,
   .search-agent-run-form,
   .agent-chat-actions,
   .agent-chat-context-form,
@@ -10459,6 +10521,8 @@ h3 {
   .source-editor-controls,
   .source-customization-bar,
   .source-settings-grid,
+  .agentcore-builder-steps,
+  .agentcore-builder-status,
   .agent-factory-form,
   .learning-decision-controls,
   .mode-option-grid,

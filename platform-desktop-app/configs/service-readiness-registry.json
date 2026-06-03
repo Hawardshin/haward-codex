@@ -253,6 +253,7 @@
       "checks": [
         "AgentCore blueprint UI exists in the Agents screen",
         "Blueprint application fills runnable search-agent and Agent Factory inputs",
+        "AgentCore Quick Builder can create an Agent Factory proposal record through the native proposal writer",
         "Reference registry records AWS AgentCore docs and awslabs/agentcore-samples public-source boundary",
         "AWS AgentCore CLI and AWS credentials are treated as optional deployment adapter readiness, not required local runtime setup"
       ]

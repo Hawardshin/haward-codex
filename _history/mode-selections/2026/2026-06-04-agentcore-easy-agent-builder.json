@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "date": "2026-06-04",
+  "request_id": "UR-2026-06-04-009",
+  "selected_work_mode": "standard",
+  "reason": "User asked for AgentCore technology to become an actual easy agent creation capability in the desktop app, which changes product behavior and readiness contracts.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "owning_project": "platform-desktop-app"
+}
+

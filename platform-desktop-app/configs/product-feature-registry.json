@@ -319,6 +319,7 @@
         "Process Graph",
         "Decision Inbox",
         "Production Agent Blueprints",
+        "AgentCore Quick Builder",
         "AgentCore-style Lifecycle"
       ],
       "current_assets": [
@@ -341,6 +342,7 @@
         "merge gate artifact synthesis",
         "resource cleanup",
         "AgentCore-style create/dev/invoke/evaluate lifecycle blueprint application",
+        "AgentCore-style blueprint to native agent proposal creation",
         "production agent blueprint selection for runtime, memory, gateway, and evaluation patterns"
       ],
       "learning_signals": [
@@ -351,6 +353,7 @@
         "task-run records",
         "resource cleanup results",
         "selected AgentCore-style blueprint",
+        "created AgentCore-style agent proposal",
         "production lifecycle gate coverage"
       ],
       "validation_gates": [
@@ -360,7 +363,8 @@
         "resource guard covers long-running lanes",
         "customer snapshot preserves feature claims without internal source",
         "Agents screen exposes AgentCore-style production blueprint controls",
-        "Applying a production blueprint fills Search Agent Work Chat and Agent Factory inputs"
+        "Applying a production blueprint fills Search Agent Work Chat and Agent Factory inputs",
+        "Creating an AgentCore-style proposal uses the native Agent Factory proposal writer"
       ]
     },
     {
@@ -460,7 +464,8 @@
         "Mode & Function Switchboard",
         "Evidence / Promotion",
         "Production Agent Blueprints",
-        "AgentCore Blueprint Detail"
+        "AgentCore Blueprint Detail",
+        "AgentCore Quick Builder"
       ],
       "current_assets": [
         "agent-platform/configs/orchestration/capability-promotion-registry.json",
@@ -477,6 +482,7 @@
         "agent definition creation",
         "feature promotion trace",
         "blueprint-driven agent proposal prefill",
+        "one-click AgentCore-style agent proposal creation",
         "runtime/memory/gateway/evaluation agent template selection"
       ],
       "learning_signals": [
@@ -484,13 +490,15 @@
         "implemented candidates",
         "skill activation readiness",
         "agent definition count",
-        "promotion evaluation"
+        "promotion evaluation",
+        "agent proposal saved from AgentCore-style blueprint"
       ],
       "validation_gates": [
         "candidate has source evidence and rollback plan",
         "skill or agent validation passes",
         "promotion selects the smallest useful asset first",
-        "Agent Factory can be prefilled from a selected production blueprint"
+        "Agent Factory can be prefilled from a selected production blueprint",
+        "AgentCore Quick Builder can call the native agent proposal writer from the selected blueprint"
       ]
     },
     {
@@ -639,7 +647,7 @@
     {
       "id": "agentcore_blueprint_gate",
       "command": "corepack pnpm --filter platform-desktop-app test",
-      "validates": "Agents UI and product registries expose AgentCore-style production blueprints without making AWS mandatory."
+      "validates": "Agents UI and product registries expose AgentCore-style production blueprints and quick proposal creation without making AWS mandatory."
     }
   ]
 }

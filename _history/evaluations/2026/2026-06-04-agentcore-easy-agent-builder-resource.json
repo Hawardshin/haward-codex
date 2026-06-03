@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "date": "2026-06-04",
+  "request_id": "UR-2026-06-04-009",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "kind": "local_static_preview_server",
+      "command": "python3 -m http.server 4176 --bind 127.0.0.1",
+      "purpose": "Browser smoke test for the rebuilt static app.",
+      "status": "stopped",
+      "cleanup": "Stopped with interrupt after screenshot capture."
+    }
+  ],
+  "checks": [
+    "No required dev server session remained running after browser smoke.",
+    "Browser preview was used only for local static verification.",
+    "Native proposal write was not invoked from browser preview because Tauri runtime is unavailable there."
+  ],
+  "gaps": []
+}
+

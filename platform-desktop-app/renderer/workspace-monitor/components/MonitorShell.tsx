@@ -1936,6 +1936,38 @@ const defaultAgentFactoryForm: AgentFactoryForm = {
   rollbackPlan: "생성된 agent spec을 비활성화하거나 삭제하고 proposal record를 archived로 표시합니다."
 };
 
+function buildAgentFactoryFormFromAgentCoreBlueprint(blueprint: AgentCoreBlueprint, language: UiLanguage): AgentFactoryForm {
+  const ko = language === "ko";
+  const localRuntimeCapabilities = [
+    ...blueprint.capabilities,
+    "local_task_run_store",
+    "provider_account_direct_run",
+    "optional_agentcore_deployment_adapter"
+  ];
+  const guardrails = [
+    ...blueprint.safetyGates,
+    ko ? "AWS AgentCore는 선택형 배포 adapter로만 사용합니다" : "Treat AWS AgentCore as an optional deployment adapter",
+    ko ? "앱의 로컬 runtime이 작업 상태와 기록을 소유합니다" : "The local app runtime owns task state and records"
+  ];
+
+  return {
+    agentId: blueprint.agentId,
+    label: blueprint.factoryLabel,
+    goal: ko ? blueprint.factoryGoalKo : blueprint.factoryGoalEn,
+    role: blueprint.role,
+    tools: localRuntimeCapabilities.join("\n"),
+    guardrails: guardrails.join("\n"),
+    validationCommands:
+      "corepack pnpm --filter platform-desktop-app test\ncorepack pnpm --filter workspace-monitor test\ncorepack pnpm --filter workspace-monitor run check",
+    outputContract: `${blueprint.outputRecords.join(", ")} / lifecycle=${blueprint.lifecycle.join(" -> ")}`,
+    ownerProject: "agent-platform",
+    targetPath: `agent-platform/configs/agents/${blueprint.agentId}.json`,
+    rollbackPlan: ko
+      ? "생성된 agent proposal을 비활성화하거나 archived로 표시하고, 근거/검증/task-run 기록은 검토용으로 보존합니다."
+      : "Disable or archive the generated agent proposal, keeping evidence, validation, and task-run records for review."
+  };
+}
+
 function desktopPreferencesFromState(input: {
   uiLanguage: UiLanguage;
   themeMode: AppThemeMode;
@@ -2883,6 +2915,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const applyAgentCoreBlueprint = (blueprintId: string, mode: "factory" | "preflight" = "factory") => {
     const blueprint = agentCoreBlueprints.find((item) => item.id === blueprintId) || agentCoreBlueprints[0];
     const ko = uiLanguage === "ko";
+    const proposalForm = buildAgentFactoryFormFromAgentCoreBlueprint(blueprint, uiLanguage);
     setSelectedAgentCoreBlueprintId(blueprint.id);
     setSection("agents");
     setSearchAgentRunForm((current) => ({
@@ -2899,21 +2932,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       captureTargets: "_history/web-searches/YYYY/\n_research/\nplatform-desktop-app/specs/\n_history/request-traces/YYYY/",
       notes: ko ? blueprint.defaultNotesKo : blueprint.defaultNotesEn
     }));
-    setAgentFactoryForm((current) => ({
-      ...current,
-      agentId: blueprint.agentId,
-      label: blueprint.factoryLabel,
-      goal: ko ? blueprint.factoryGoalKo : blueprint.factoryGoalEn,
-      role: blueprint.role,
-      tools: blueprint.capabilities.join("\n"),
-      guardrails: blueprint.safetyGates.join("\n"),
-      validationCommands:
-        "corepack pnpm --filter platform-desktop-app test\ncorepack pnpm --filter workspace-monitor test\ncorepack pnpm --filter workspace-monitor run check",
-      outputContract: `${blueprint.outputRecords.join(", ")} / lifecycle=${blueprint.lifecycle.join(" -> ")}`,
-      ownerProject: "agent-platform",
-      targetPath: `agent-platform/configs/agents/${blueprint.agentId}.json`,
-      rollbackPlan: "Disable or archive the generated agent proposal, keep the source evidence, and preserve task-run/evaluation records for review."
-    }));
+    setAgentFactoryForm(proposalForm);
     setSearchAgentChatMessages((current) =>
       [
         ...current,
@@ -3089,7 +3108,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     setAgentFactoryForm((current) => ({ ...current, [field]: value }));
     setAgentFactoryNotice("");
   };
-  const createAgentFactoryProposal = async () => {
+  const createAgentFactoryProposal = async (formOverride?: AgentFactoryForm) => {
+    const proposalForm = formOverride || agentFactoryForm;
+    if (formOverride) {
+      setAgentFactoryForm(proposalForm);
+    }
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setAgentFactoryNotice(uiLanguage === "ko" ? "Tauri runtime이 없어 proposal 저장을 할 수 없습니다." : "Tauri runtime is unavailable.");
@@ -3100,17 +3123,17 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     try {
       const report = await tauriInvoke<AgentFactoryProposalReport>("create_agent_factory_proposal", {
         input: {
-          agentId: agentFactoryForm.agentId,
-          label: agentFactoryForm.label,
-          goal: agentFactoryForm.goal,
-          role: agentFactoryForm.role,
-          tools: linesFromText(agentFactoryForm.tools),
-          guardrails: linesFromText(agentFactoryForm.guardrails),
-          validationCommands: linesFromText(agentFactoryForm.validationCommands),
-          outputContract: agentFactoryForm.outputContract,
-          ownerProject: agentFactoryForm.ownerProject,
-          targetPath: agentFactoryForm.targetPath,
-          rollbackPlan: agentFactoryForm.rollbackPlan
+          agentId: proposalForm.agentId,
+          label: proposalForm.label,
+          goal: proposalForm.goal,
+          role: proposalForm.role,
+          tools: linesFromText(proposalForm.tools),
+          guardrails: linesFromText(proposalForm.guardrails),
+          validationCommands: linesFromText(proposalForm.validationCommands),
+          outputContract: proposalForm.outputContract,
+          ownerProject: proposalForm.ownerProject,
+          targetPath: proposalForm.targetPath,
+          rollbackPlan: proposalForm.rollbackPlan
         }
       });
       setAgentFactoryProposal(report);
@@ -3124,6 +3147,27 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     } finally {
       setAgentFactoryBusy(false);
     }
+  };
+  const createAgentCoreBlueprintProposal = async (blueprintId: string) => {
+    const blueprint = agentCoreBlueprints.find((item) => item.id === blueprintId) || agentCoreBlueprints[0];
+    const ko = uiLanguage === "ko";
+    const proposalForm = buildAgentFactoryFormFromAgentCoreBlueprint(blueprint, uiLanguage);
+    applyAgentCoreBlueprint(blueprint.id, "factory");
+    setSearchAgentChatMessages((current) =>
+      [
+        ...current,
+        {
+          id: `agentcore-builder-${blueprint.id}-${Date.now()}`,
+          role: "system" as const,
+          title: ko ? "AgentCore Quick Builder" : "AgentCore Quick Builder",
+          body: ko
+            ? `${blueprint.label}를 기반으로 Agent Factory proposal 저장을 시작합니다. 설치 앱에서는 proposal이 앱 데이터 저장소에 바로 남습니다.`
+            : `Starting an Agent Factory proposal from ${blueprint.label}. In the installed app, the proposal is written directly to app data.`,
+          meta: "create_agent_factory_proposal"
+        }
+      ].slice(-12)
+    );
+    await createAgentFactoryProposal(proposalForm);
   };
   const recordLearningDecision = async () => {
     const tauriInvoke = getTauriInvoke();
@@ -4657,6 +4701,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             onSelectBlueprint={setSelectedAgentCoreBlueprintId}
             onApplyBlueprint={(blueprintId) => applyAgentCoreBlueprint(blueprintId, "factory")}
             onStartPreflight={(blueprintId) => applyAgentCoreBlueprint(blueprintId, "preflight")}
+            onCreateProposal={createAgentCoreBlueprintProposal}
+            proposalBusy={agentFactoryBusy}
+            runtimeAvailable={Boolean(getTauriInvoke())}
           />
 
           <AgentFactoryWizard
@@ -4962,7 +5009,10 @@ function AgentCoreBlueprintPanel({
   language,
   onSelectBlueprint,
   onApplyBlueprint,
-  onStartPreflight
+  onStartPreflight,
+  onCreateProposal,
+  proposalBusy,
+  runtimeAvailable
 }: {
   blueprints: AgentCoreBlueprint[];
   selectedBlueprintId: string;
@@ -4971,6 +5021,9 @@ function AgentCoreBlueprintPanel({
   onSelectBlueprint: (blueprintId: string) => void;
   onApplyBlueprint: (blueprintId: string) => void;
   onStartPreflight: (blueprintId: string) => void;
+  onCreateProposal: (blueprintId: string) => void | Promise<void>;
+  proposalBusy: boolean;
+  runtimeAvailable: boolean;
 }) {
   const ko = language === "ko";
   const selectedBlueprint = blueprints.find((blueprint) => blueprint.id === selectedBlueprintId) || blueprints[0];
@@ -4980,7 +5033,7 @@ function AgentCoreBlueprintPanel({
     <section className="panel wide agentcore-blueprint-panel">
       <div className="panel-heading">
         <div>
-          <p className="eyebrow">AgentCore Reference Transfer</p>
+          <p className="eyebrow">AgentCore Quick Builder</p>
           <h2>{ko ? "Production 에이전트 블루프린트" : "Production Agent Blueprints"}</h2>
           <p>
             {ko
@@ -4992,6 +5045,25 @@ function AgentCoreBlueprintPanel({
           <ExternalLink size={15} aria-hidden="true" />
           <span>{ko ? "원본 보기" : "Open Source"}</span>
         </a>
+      </div>
+
+      <div className="agentcore-builder-steps" aria-label={ko ? "AgentCore 빠른 생성 단계" : "AgentCore quick builder steps"}>
+        <span>
+          <CheckCircle2 size={14} aria-hidden="true" />
+          {ko ? "1 목적 선택" : "1 Choose purpose"}
+        </span>
+        <span>
+          <Layers size={14} aria-hidden="true" />
+          {ko ? "2 능력 추가" : "2 Add capabilities"}
+        </span>
+        <span>
+          <Bot size={14} aria-hidden="true" />
+          {ko ? "3 제안 생성" : "3 Create proposal"}
+        </span>
+        <span>
+          <ClipboardCheck size={14} aria-hidden="true" />
+          {ko ? "4 검증 준비" : "4 Prepare validation"}
+        </span>
       </div>
 
       <div className="agentcore-blueprint-layout">
@@ -5055,6 +5127,15 @@ function AgentCoreBlueprintPanel({
           </div>
 
           <div className="agentcore-blueprint-actions">
+            <button
+              type="button"
+              className="primary-action-button"
+              onClick={() => onCreateProposal(selectedBlueprint.id)}
+              disabled={!runtimeAvailable || proposalBusy}
+            >
+              <PlayCircle size={16} aria-hidden="true" />
+              <span>{proposalBusy ? (ko ? "제안 저장 중" : "Saving proposal") : ko ? "바로 에이전트 제안 생성" : "Create Agent Proposal"}</span>
+            </button>
             <button type="button" className="primary-action-button" onClick={() => onApplyBlueprint(selectedBlueprint.id)}>
               <Bot size={16} aria-hidden="true" />
               <span>{ko ? "에이전트 생성 입력 채우기" : "Fill Agent Factory"}</span>
@@ -5063,6 +5144,19 @@ function AgentCoreBlueprintPanel({
               <ClipboardCheck size={16} aria-hidden="true" />
               <span>{ko ? "배포 사전점검 작업 만들기" : "Create Deployment Preflight"}</span>
             </button>
+          </div>
+
+          <div className={`agentcore-builder-status ${runtimeAvailable ? "ready" : "preview"}`}>
+            <strong>{runtimeAvailable ? (ko ? "native 저장 준비됨" : "Native save ready") : ko ? "브라우저 미리보기" : "Browser preview"}</strong>
+            <span>
+              {runtimeAvailable
+                ? ko
+                  ? "선택한 블루프린트는 agent proposal record로 저장되고, 이후 설정/검증/실행 단계에서 다시 열 수 있습니다."
+                  : "The selected blueprint is saved as an agent proposal record and can be reopened for setup, validation, and execution."
+                : ko
+                  ? "설치 앱에서는 같은 버튼이 create_agent_factory_proposal을 호출해 앱 데이터 저장소에 바로 기록합니다."
+                  : "In the installed app, the same button calls create_agent_factory_proposal and writes to app data."}
+            </span>
           </div>
 
           <div className="agentcore-blueprint-contract">
@@ -5096,7 +5190,7 @@ function AgentFactoryWizard({
   runtimeAvailable: boolean;
   language: UiLanguage;
   onChange: (field: keyof AgentFactoryForm, value: string) => void;
-  onCreateProposal: () => void;
+  onCreateProposal: () => void | Promise<void>;
 }) {
   const ko = language === "ko";
   return (
