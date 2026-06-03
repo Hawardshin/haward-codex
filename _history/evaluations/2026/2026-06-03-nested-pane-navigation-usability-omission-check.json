@@ -1,0 +1,14 @@
+{
+  "request_id": "UR-2026-06-03-052",
+  "status": "passed",
+  "checked_items": [
+    "web search first",
+    "settings nested subsections",
+    "source workbench view switcher",
+    "terminal drawer view switcher",
+    "readiness regression tokens",
+    "requirements/spec/history records"
+  ],
+  "omissions_found": [],
+  "next_validation": []
+}

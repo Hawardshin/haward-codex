@@ -1,8 +1,10 @@
 "use client";
 
 import { Activity, ArrowRight, Inbox, ListFilter, Settings, ShieldCheck, SquareTerminal, X } from "lucide-react";
+import { useState } from "react";
 
 type RuntimeTerminalLanguage = "ko" | "en";
+type TerminalDrawerView = "start" | "sessions" | "output" | "events";
 
 type RuntimeTerminalAdapter = {
   adapterId: string;
@@ -118,6 +120,7 @@ export function RuntimeTerminalDrawer({
   onWorkingDirChange,
   onWriteSessionInput
 }: RuntimeTerminalDrawerProps) {
+  const [terminalDrawerView, setTerminalDrawerView] = useState<TerminalDrawerView>("start");
   const canStartSession =
     runtimeAvailable &&
     runningAdapterId === "" &&
@@ -204,6 +207,55 @@ export function RuntimeTerminalDrawer({
           </article>
         </div>
 
+        <div className="terminal-view-switcher" role="tablist" aria-label={uiLanguage === "ko" ? "터미널 보기" : "Terminal views"}>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={terminalDrawerView === "start"}
+            className={terminalDrawerView === "start" ? "active" : ""}
+            onClick={() => setTerminalDrawerView("start")}
+          >
+            <SquareTerminal size={15} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "시작" : "Start"}</span>
+            <small>{canStartSession ? "ready" : "blocked"}</small>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={terminalDrawerView === "sessions"}
+            className={terminalDrawerView === "sessions" ? "active" : ""}
+            onClick={() => setTerminalDrawerView("sessions")}
+          >
+            <ListFilter size={15} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "세션" : "Sessions"}</span>
+            <small>{sessions.length}</small>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={terminalDrawerView === "output"}
+            className={terminalDrawerView === "output" ? "active" : ""}
+            onClick={() => setTerminalDrawerView("output")}
+          >
+            <Activity size={15} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "출력" : "Output"}</span>
+            <small>{selectedSession?.status || "idle"}</small>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={terminalDrawerView === "events"}
+            className={terminalDrawerView === "events" ? "active" : ""}
+            onClick={() => setTerminalDrawerView("events")}
+          >
+            <Inbox size={15} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "이벤트" : "Events"}</span>
+            <small>{selectedOutputEvents.length}</small>
+          </button>
+        </div>
+
+        {terminalDrawerView === "start" && (
+        <div className="terminal-view-panel terminal-start-panel">
         <div className="session-launcher">
           <div className="settings-controlled-summary session-init-summary">
             <article>
@@ -231,17 +283,28 @@ export function RuntimeTerminalDrawer({
             <span>Initial input</span>
             <textarea value={sessionPrompt} onChange={(event) => onSessionPromptChange(event.target.value)} rows={4} />
           </label>
-          <button type="button" onClick={onStartSession} disabled={!canStartSession}>
+          <button
+            type="button"
+            onClick={() => {
+              setTerminalDrawerView("output");
+              void onStartSession();
+            }}
+            disabled={!canStartSession}
+          >
             <SquareTerminal size={16} aria-hidden="true" />
             <span>{runningAdapterId === "session" ? "Starting" : "Start Session"}</span>
           </button>
         </div>
         <p className="session-mode-note">{selectedMode.intent}</p>
+        </div>
+        )}
 
-        {sessions.length === 0 ? (
+        {terminalDrawerView !== "start" && sessions.length === 0 ? (
           <p className="empty-state">실행 세션이 없습니다. 설치된 adapter를 선택하고 session을 시작하세요.</p>
         ) : (
-          <div className="session-grid">
+          terminalDrawerView !== "start" && (
+          <div className={`session-grid terminal-view-${terminalDrawerView}`}>
+            {terminalDrawerView === "sessions" && (
             <div className="session-list" tabIndex={0} aria-label={uiLanguage === "ko" ? "CLI 세션 목록" : "CLI session list"}>
               {sessions.map((session) => (
                 <article key={session.sessionId} className={`session-card status-${session.status}`}>
@@ -272,7 +335,13 @@ export function RuntimeTerminalDrawer({
                     <small>{session.stdoutLogPath || "stdout log pending"}</small>
                   </div>
                   <div className="desktop-actions">
-                    <button type="button" onClick={() => onSelectSession(session.sessionId)}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onSelectSession(session.sessionId);
+                        setTerminalDrawerView("output");
+                      }}
+                    >
                       <ListFilter size={15} aria-hidden="true" />
                       <span>Inspect</span>
                     </button>
@@ -292,6 +361,8 @@ export function RuntimeTerminalDrawer({
                 </article>
               ))}
             </div>
+            )}
+            {terminalDrawerView === "output" && (
             <article className="session-terminal">
               <header>
                 <div>
@@ -304,16 +375,6 @@ export function RuntimeTerminalDrawer({
                 <code>{selectedSession ? selectedSession.stdout || selectedSession.stderr || "No output yet" : "No session selected"}</code>
               </pre>
               {selectedSession?.stderr && selectedSession.stdout && <small>{selectedSession.stderr}</small>}
-              <div className="terminal-event-rail" tabIndex={0} aria-label={uiLanguage === "ko" ? "터미널 이벤트 목록" : "Terminal event list"}>
-                {selectedOutputEvents.slice(0, 6).map((event) => (
-                  <article key={event.id} className={`event-${event.type}`}>
-                    <span>{event.type}</span>
-                    <strong>{event.label}</strong>
-                    <small>{event.detail}</small>
-                  </article>
-                ))}
-                {selectedOutputEvents.length === 0 && <p className="empty-state">구조화된 terminal event가 아직 없습니다.</p>}
-              </div>
               <div className="session-input-row">
                 <input
                   value={sessionInput}
@@ -331,7 +392,30 @@ export function RuntimeTerminalDrawer({
                 </button>
               </div>
             </article>
+            )}
+            {terminalDrawerView === "events" && (
+            <article className="session-terminal terminal-events-panel">
+              <header>
+                <div>
+                  <span>{selectedSession?.sessionId || "no-session"}</span>
+                  <h3>{uiLanguage === "ko" ? "터미널 이벤트" : "Terminal events"}</h3>
+                </div>
+                <strong>{selectedOutputEvents.length}</strong>
+              </header>
+              <div className="terminal-event-rail" tabIndex={0} aria-label={uiLanguage === "ko" ? "터미널 이벤트 목록" : "Terminal event list"}>
+                {selectedOutputEvents.slice(0, 24).map((event) => (
+                  <article key={event.id} className={`event-${event.type}`}>
+                    <span>{event.type}</span>
+                    <strong>{event.label}</strong>
+                    <small>{event.detail}</small>
+                  </article>
+                ))}
+                {selectedOutputEvents.length === 0 && <p className="empty-state">구조화된 terminal event가 아직 없습니다.</p>}
+              </div>
+            </article>
+            )}
           </div>
+          )
         )}
       </section>
     </>

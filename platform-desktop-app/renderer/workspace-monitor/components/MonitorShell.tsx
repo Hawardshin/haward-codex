@@ -59,8 +59,25 @@ type SectionId =
 type FeatureGroupId = "core" | "workspace" | "knowledge" | "governance";
 type SidebarMode = "expanded" | "collapsed";
 type SettingsTabId = "appearance" | "navigation" | "execution" | "data";
+type SettingsSubsectionId =
+  | "display"
+  | "language"
+  | "view"
+  | "rail"
+  | "terminal"
+  | "pinned"
+  | "quick"
+  | "adapter"
+  | "session"
+  | "pipe"
+  | "questions"
+  | "filters"
+  | "snapshot"
+  | "store"
+  | "operator";
 type AppThemeMode = "system" | "light" | "dark";
 type UiLanguage = "ko" | "en";
+type SourceWorkbenchView = "files" | "editor" | "results";
 
 type Section = {
   id: SectionId;
@@ -1530,6 +1547,12 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [settingsTab, setSettingsTab] = useState<SettingsTabId>("appearance");
+  const [settingsSubsectionByTab, setSettingsSubsectionByTab] = useState<Record<SettingsTabId, SettingsSubsectionId>>({
+    appearance: "display",
+    navigation: "rail",
+    execution: "quick",
+    data: "filters"
+  });
   const [themeMode, setThemeMode] = useState<AppThemeMode>("system");
   const [sidebarMode, setSidebarMode] = useState<SidebarMode>("collapsed");
   const [terminalDrawerOpen, setTerminalDrawerOpen] = useState(false);
@@ -1715,12 +1738,14 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const openModeFunctionOption = (groupId: string, optionId: string) => {
     if (groupId === "view_mode") {
       setSettingsTab("appearance");
+      setSettingsSubsectionByTab((current) => ({ ...current, appearance: "view" }));
       setSettingsOpen(true);
       return;
     }
 
     if (groupId === "language_mode") {
       setSettingsTab("appearance");
+      setSettingsSubsectionByTab((current) => ({ ...current, appearance: "language" }));
       setSettingsOpen(true);
       return;
     }
@@ -1732,6 +1757,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
 
     if (["desktop_session_mode", "task_pipe", "cli_adapter"].includes(groupId)) {
       setSettingsTab("execution");
+      setSettingsSubsectionByTab((current) => ({
+        ...current,
+        execution: groupId === "cli_adapter" ? "adapter" : groupId === "task_pipe" ? "pipe" : "session"
+      }));
       setSettingsOpen(true);
       return;
     }
@@ -2045,8 +2074,123 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       : themeMode === "dark"
         ? uiLanguage === "ko" ? "다크" : "Dark"
         : uiLanguage === "ko" ? "라이트" : "Light";
-  const openSettingsTab = (tabId: SettingsTabId = "appearance") => {
+  const settingsSubsections: Record<SettingsTabId, Array<{
+    id: SettingsSubsectionId;
+    label: string;
+    detail: string;
+    icon: LucideIcon;
+  }>> = {
+    appearance: [
+      {
+        id: "display",
+        label: uiLanguage === "ko" ? "테마" : "Theme",
+        detail: currentThemeLabel,
+        icon: LayoutDashboard
+      },
+      {
+        id: "language",
+        label: uiLanguage === "ko" ? "언어" : "Language",
+        detail: currentLanguageMode.label,
+        icon: Languages
+      },
+      {
+        id: "view",
+        label: uiLanguage === "ko" ? "보기 권한" : "View mode",
+        detail: currentViewMode.label,
+        icon: ShieldCheck
+      }
+    ],
+    navigation: [
+      {
+        id: "rail",
+        label: uiLanguage === "ko" ? "좌측 레일" : "Left rail",
+        detail: sidebarMode === "expanded" ? (uiLanguage === "ko" ? "라벨 표시" : "Labels") : uiLanguage === "ko" ? "아이콘만" : "Icons",
+        icon: LayoutDashboard
+      },
+      {
+        id: "terminal",
+        label: uiLanguage === "ko" ? "하단 터미널" : "Bottom terminal",
+        detail: terminalDrawerOpen ? (uiLanguage === "ko" ? "열림" : "Open") : uiLanguage === "ko" ? "닫힘" : "Closed",
+        icon: SquareTerminal
+      },
+      {
+        id: "pinned",
+        label: uiLanguage === "ko" ? "고정 섹션" : "Pinned sections",
+        detail: `${pinnedVisibleSections.length.toLocaleString("ko-KR")}`,
+        icon: LayoutDashboard
+      }
+    ],
+    execution: [
+      {
+        id: "quick",
+        label: uiLanguage === "ko" ? "바로 시작" : "Quick start",
+        detail: uiLanguage === "ko" ? "추천 기본값" : "Recommended",
+        icon: PlayCircle
+      },
+      {
+        id: "adapter",
+        label: uiLanguage === "ko" ? "CLI 어댑터" : "CLI adapter",
+        detail: runtimeInitDefaults.adapterId,
+        icon: SquareTerminal
+      },
+      {
+        id: "session",
+        label: uiLanguage === "ko" ? "세션 모드" : "Session mode",
+        detail: sessionModePresets.find((mode) => mode.id === runtimeInitDefaults.sessionModeId)?.label || sessionModePresets[0].label,
+        icon: Bot
+      },
+      {
+        id: "pipe",
+        label: uiLanguage === "ko" ? "작업 파이프" : "Task pipe",
+        detail: fallbackTaskPipePresets.find((preset) => preset.taskKind === runtimeInitDefaults.taskPipeKind)?.label || fallbackTaskPipePresets[0].label,
+        icon: Network
+      },
+      {
+        id: "questions",
+        label: uiLanguage === "ko" ? "질문 처리" : "Questions",
+        detail: runtimeInitDefaults.autoDeferQuestions ? (uiLanguage === "ko" ? "자동 보류" : "Auto defer") : uiLanguage === "ko" ? "수동" : "Manual",
+        icon: Inbox
+      }
+    ],
+    data: [
+      {
+        id: "filters",
+        label: uiLanguage === "ko" ? "필터" : "Filters",
+        detail: categoryLabel(category),
+        icon: ListFilter
+      },
+      {
+        id: "snapshot",
+        label: uiLanguage === "ko" ? "스냅샷" : "Snapshot",
+        detail: formatDate(snapshot.generatedAt),
+        icon: Clock3
+      },
+      {
+        id: "store",
+        label: uiLanguage === "ko" ? "설정 저장소" : "Preferences store",
+        detail: desktopPreferencesLoaded ? desktopPreferencesStatus : uiLanguage === "ko" ? "불러오는 중" : "Loading",
+        icon: Settings
+      },
+      {
+        id: "operator",
+        label: uiLanguage === "ko" ? "운영 센터" : "Operator center",
+        detail: operatorCenterSections.length.toLocaleString("ko-KR"),
+        icon: ShieldCheck
+      }
+    ]
+  };
+  const settingsSubsectionItems = settingsSubsections[settingsTab];
+  const activeSettingsSubsection = settingsSubsectionItems.some((item) => item.id === settingsSubsectionByTab[settingsTab])
+    ? settingsSubsectionByTab[settingsTab]
+    : settingsSubsectionItems[0].id;
+  const selectSettingsSubsection = (subsectionId: SettingsSubsectionId) => {
+    setSettingsSubsectionByTab((current) => ({ ...current, [settingsTab]: subsectionId }));
+  };
+  const openSettingsTab = (tabId: SettingsTabId = "appearance", subsectionId?: SettingsSubsectionId) => {
     setSettingsTab(tabId);
+    if (subsectionId) {
+      setSettingsSubsectionByTab((current) => ({ ...current, [tabId]: subsectionId }));
+    }
     setSettingsOpen(true);
   };
   const openTerminalDrawer = () => {
@@ -2471,9 +2615,28 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               </nav>
 
               <div className="settings-tab-panel" tabIndex={0} aria-label={uiLanguage === "ko" ? "설정 본문" : "Settings content"}>
+                <div className="settings-subsection-rail" role="tablist" aria-label={uiLanguage === "ko" ? "설정 세부 섹션" : "Settings subsections"}>
+                  {settingsSubsectionItems.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={activeSettingsSubsection === item.id}
+                      className={activeSettingsSubsection === item.id ? "active" : ""}
+                      onClick={() => selectSettingsSubsection(item.id)}
+                    >
+                      <item.icon size={15} aria-hidden="true" />
+                      <span>
+                        <strong>{item.label}</strong>
+                        <small>{item.detail}</small>
+                      </span>
+                    </button>
+                  ))}
+                </div>
                 {settingsTab === "appearance" && (
                   <div className="settings-grid">
-                    <section className="settings-pane">
+                    {activeSettingsSubsection === "display" && (
+                    <section className="settings-pane wide">
                       <div className="settings-pane-heading">
                         <LayoutDashboard size={16} aria-hidden="true" />
                         <div>
@@ -2498,7 +2661,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         ))}
                       </div>
                     </section>
+                    )}
 
+                    {activeSettingsSubsection === "language" && (
                     <section className="settings-pane">
                       <div className="settings-pane-heading">
                         <Languages size={16} aria-hidden="true" />
@@ -2526,8 +2691,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         </button>
                       </div>
                     </section>
+                    )}
 
-                    <section className="settings-pane">
+                    {activeSettingsSubsection === "view" && (
+                    <section className="settings-pane wide">
                       <div className="settings-pane-heading">
                         <ShieldCheck size={16} aria-hidden="true" />
                         <div>
@@ -2550,7 +2717,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         ))}
                       </div>
                     </section>
+                    )}
 
+                    {activeSettingsSubsection === "language" && (
                     <section className="settings-pane">
                       <div className="settings-pane-heading">
                         <Languages size={16} aria-hidden="true" />
@@ -2577,12 +2746,14 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         ))}
                       </div>
                     </section>
+                    )}
                   </div>
                 )}
 
                 {settingsTab === "navigation" && (
                   <div className="settings-grid">
-                    <section className="settings-pane">
+                    {activeSettingsSubsection === "rail" && (
+                    <section className="settings-pane wide">
                       <div className="settings-pane-heading">
                         <LayoutDashboard size={16} aria-hidden="true" />
                         <div>
@@ -2607,8 +2778,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         </button>
                       </div>
                     </section>
+                    )}
 
-                    <section className="settings-pane">
+                    {activeSettingsSubsection === "terminal" && (
+                    <section className="settings-pane wide">
                       <div className="settings-pane-heading">
                         <SquareTerminal size={16} aria-hidden="true" />
                         <div>
@@ -2636,7 +2809,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         </button>
                       </div>
                     </section>
+                    )}
 
+                    {activeSettingsSubsection === "pinned" && (
                     <section className="settings-pane wide">
                       <div className="settings-pane-heading">
                         <LayoutDashboard size={16} aria-hidden="true" />
@@ -2660,11 +2835,13 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         ))}
                       </div>
                     </section>
+                    )}
                   </div>
                 )}
 
                 {settingsTab === "execution" && (
                   <div className="settings-grid">
+                    {activeSettingsSubsection === "quick" && (
                     <section className="settings-pane wide quick-setup-pane">
                       <div className="settings-pane-heading">
                         <PlayCircle size={16} aria-hidden="true" />
@@ -2697,8 +2874,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         </button>
                       </div>
                     </section>
+                    )}
 
-                    <section className="settings-pane">
+                    {activeSettingsSubsection === "adapter" && (
+                    <section className="settings-pane wide">
                       <div className="settings-pane-heading">
                         <SquareTerminal size={16} aria-hidden="true" />
                         <div>
@@ -2724,8 +2903,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         })}
                       </div>
                     </section>
+                    )}
 
-                    <section className="settings-pane">
+                    {activeSettingsSubsection === "session" && (
+                    <section className="settings-pane wide">
                       <div className="settings-pane-heading">
                         <Bot size={16} aria-hidden="true" />
                         <div>
@@ -2748,8 +2929,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         ))}
                       </div>
                     </section>
+                    )}
 
-                    <section className="settings-pane">
+                    {activeSettingsSubsection === "pipe" && (
+                    <section className="settings-pane wide">
                       <div className="settings-pane-heading">
                         <Network size={16} aria-hidden="true" />
                         <div>
@@ -2772,8 +2955,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         ))}
                       </div>
                     </section>
+                    )}
 
-                    <section className="settings-pane">
+                    {activeSettingsSubsection === "questions" && (
+                    <section className="settings-pane wide">
                       <div className="settings-pane-heading">
                         <Inbox size={16} aria-hidden="true" />
                         <div>
@@ -2803,12 +2988,14 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         </button>
                       </div>
                     </section>
+                    )}
                   </div>
                 )}
 
                 {settingsTab === "data" && (
                   <div className="settings-grid">
-                    <section className="settings-pane">
+                    {activeSettingsSubsection === "filters" && (
+                    <section className="settings-pane wide">
                       <div className="settings-pane-heading">
                         <ListFilter size={16} aria-hidden="true" />
                         <div>
@@ -2832,8 +3019,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         <span>{uiLanguage === "ko" ? "필터 초기화" : "Reset Filters"}</span>
                       </button>
                     </section>
+                    )}
 
-                    <section className="settings-pane">
+                    {activeSettingsSubsection === "snapshot" && (
+                    <section className="settings-pane wide">
                       <div className="settings-pane-heading">
                         <Clock3 size={16} aria-hidden="true" />
                         <div>
@@ -2846,7 +3035,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         {visibleSections.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 섹션" : "sections"}
                       </p>
                     </section>
+                    )}
 
+                    {activeSettingsSubsection === "store" && (
                     <section className="settings-pane wide native-preferences-pane">
                       <div className="settings-pane-heading">
                         <Settings size={16} aria-hidden="true" />
@@ -2881,8 +3072,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         )}
                       </dl>
                     </section>
+                    )}
 
-                    <section className="settings-pane">
+                    {activeSettingsSubsection === "operator" && (
+                    <section className="settings-pane wide">
                       <div className="settings-pane-heading">
                         <ShieldCheck size={16} aria-hidden="true" />
                         <div>
@@ -2895,6 +3088,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         <span>{uiLanguage === "ko" ? "운영 센터 열기" : "Open Operator Center"}</span>
                       </button>
                     </section>
+                    )}
                   </div>
                 )}
               </div>
@@ -4215,6 +4409,7 @@ function DesktopRuntimePanel({
   const [sourceCopyNotice, setSourceCopyNotice] = useState("");
   const [sourceTemplateId, setSourceTemplateId] = useState<SourceTemplateId>("spec-section");
   const [sourceEditorViewMode, setSourceEditorViewMode] = useState<"edit" | "diff">("edit");
+  const [sourceWorkbenchView, setSourceWorkbenchView] = useState<SourceWorkbenchView>("files");
   const [sourceWordWrap, setSourceWordWrap] = useState(false);
   const [sourceMinimapEnabled, setSourceMinimapEnabled] = useState(true);
   const [sourceSettingsOpen, setSourceSettingsOpen] = useState(false);
@@ -5263,6 +5458,7 @@ function DesktopRuntimePanel({
       setSourcePathInput(nextFile.relativePath);
       setSourceCopyNotice("");
       setSourceDrafts((current) => ({ ...current, [nextFile.relativePath]: nextEntry }));
+      setSourceWorkbenchView("editor");
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -5289,6 +5485,7 @@ function DesktopRuntimePanel({
     });
     setSourceDraft(entry.content);
     setSourceCopyNotice("");
+    setSourceWorkbenchView("editor");
     setWriteReport(
       entry.lastSavedBackupPath
         ? {
@@ -5466,6 +5663,7 @@ function DesktopRuntimePanel({
         ...current.filter((item) => item.relativePath !== report.relativePath)
       ].slice(0, 8));
       setSourceCopyNotice("");
+      setSourceWorkbenchView("results");
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -5517,6 +5715,7 @@ function DesktopRuntimePanel({
       }
       if (reportsToAdd[0]) {
         setWriteReport(reportsToAdd[0]);
+        setSourceWorkbenchView("results");
       }
     } catch (caught) {
       setError(errorMessage(caught));
@@ -5570,6 +5769,7 @@ function DesktopRuntimePanel({
       setSourceDraft("");
       setSourceCopyNotice("");
       setWriteReport(null);
+      setSourceWorkbenchView("files");
     }
   };
 
@@ -5860,7 +6060,44 @@ function DesktopRuntimePanel({
           </button>
         </div>
 
-        <div className="source-review-grid native-source-grid">
+        <div className="source-workbench-switcher" role="tablist" aria-label={uiLanguage === "ko" ? "소스 작업 보기" : "Source workbench views"}>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={sourceWorkbenchView === "files"}
+            className={sourceWorkbenchView === "files" ? "active" : ""}
+            onClick={() => setSourceWorkbenchView("files")}
+          >
+            <FolderOpen size={15} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "파일" : "Files"}</span>
+            <small>{filteredEditableSourceFiles.length.toLocaleString("ko-KR")}</small>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={sourceWorkbenchView === "editor"}
+            className={sourceWorkbenchView === "editor" ? "active" : ""}
+            onClick={() => setSourceWorkbenchView("editor")}
+          >
+            <Code2 size={15} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "편집" : "Editor"}</span>
+            <small>{openDraftEntries.length.toLocaleString("ko-KR")}</small>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={sourceWorkbenchView === "results"}
+            className={sourceWorkbenchView === "results" ? "active" : ""}
+            onClick={() => setSourceWorkbenchView("results")}
+          >
+            <CheckCircle2 size={15} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "저장 결과" : "Save results"}</span>
+            <small>{sourceSaveResults.length.toLocaleString("ko-KR")}</small>
+          </button>
+        </div>
+
+        <div className={`source-review-grid native-source-grid source-workbench-view-${sourceWorkbenchView}`}>
+          {(sourceWorkbenchView === "files" || sourceWorkbenchView === "editor") && (
           <aside className="source-file-browser">
             <header>
               <div>
@@ -5901,7 +6138,9 @@ function DesktopRuntimePanel({
               )}
             </div>
           </aside>
+          )}
 
+          {sourceWorkbenchView === "editor" && (
           <div className="source-edit-workbench">
             {openDraftEntries.length > 0 && (
               <div className="source-editor-tabs" aria-label={copy.openedDrafts}>
@@ -6001,18 +6240,21 @@ function DesktopRuntimePanel({
             ) : (
               <p className="empty-state">{copy.noFileOpen}</p>
             )}
+          </div>
+          )}
 
-            {sourceSaveResults.length > 0 && (
-              <div className="source-save-results">
-                <header>
-                  <div>
-                    <span>{copy.savedWithBackup}</span>
-                    <strong>{sourceSaveResults.length} recent</strong>
-                  </div>
-                  <small>latest first</small>
-                </header>
+          {sourceWorkbenchView === "results" && (
+            <div className="source-save-results source-results-panel">
+              <header>
                 <div>
-                  {sourceSaveResults.map((report) => (
+                  <span>{copy.savedWithBackup}</span>
+                  <strong>{sourceSaveResults.length} recent</strong>
+                </div>
+                <small>latest first</small>
+              </header>
+              <div>
+                {sourceSaveResults.length > 0 ? (
+                  sourceSaveResults.map((report) => (
                     <article key={`${report.relativePath}-${report.backupPath}`}>
                       <span>{report.status}</span>
                       <strong>{report.relativePath}</strong>
@@ -6020,11 +6262,13 @@ function DesktopRuntimePanel({
                         {formatBytes(report.sizeBytes)} / {report.backupPath}
                       </small>
                     </article>
-                  ))}
-                </div>
+                  ))
+                ) : (
+                  <p className="empty-state">{uiLanguage === "ko" ? "아직 저장 결과가 없습니다." : "No save results yet."}</p>
+                )}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </section>
         </div>
