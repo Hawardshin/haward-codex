@@ -1,0 +1,124 @@
+{
+  "initial_instruction": "The user added that, from a user's point of view, the data being accumulated by the desktop platform must be easy to view.",
+  "result_summary": "Implemented a user-visible Accumulated Data surface for the desktop product: a Tauri get_accumulated_data_overview command with bounded metadata scans, Workspace Monitor metric/command/panel UI, runtime contract command and accumulation target updates, readiness/test coverage, requirements/spec/history records, omission/resource checks, and browser smoke validation.",
+  "work_mode": "ship_first",
+  "changed_files": [
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+    "platform-desktop-app/scripts/check-runtime-contract.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "_history/web-searches/2026/2026-06-03-accumulated-data-surface.ko.md",
+    "_history/mode-selections/2026/2026-06-03-accumulated-data-surface.json",
+    "_history/source-provenance/2026/2026-06-03-accumulated-data-surface.json",
+    "_history/plan-evidence/2026/2026-06-03-accumulated-data-surface.json",
+    "_history/work-timings/2026/2026-06-03-accumulated-data-surface.json",
+    "_history/request-traces/2026/2026-06-03-accumulated-data-surface.ko.md",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-surface-omission-input.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-surface-omission-result.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-surface-resource-input.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-surface-resource-result.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-surface-evaluation-input.json",
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/2026/2026-06-03.md"
+  ],
+  "verification": [
+    "cargo fmt: passed",
+    "cargo check from platform-desktop-app/src-tauri/: passed",
+    "corepack pnpm --filter workspace-monitor run check: passed",
+    "corepack pnpm --filter platform-desktop-app test: 14 passed",
+    "corepack pnpm --filter platform-desktop-app run runtime:contract: passed, 9 accumulation targets",
+    "corepack pnpm --filter platform-desktop-app run check: passed",
+    "corepack pnpm --filter workspace-monitor test: 16 passed",
+    "corepack pnpm --filter workspace-monitor run build:customer: passed",
+    "corepack pnpm --filter workspace-monitor run perf:budget: within_budget, largest initial chunk 227542 bytes",
+    "corepack pnpm --filter platform-desktop-app run customer-bundle:audit: passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/runtime-data-boundary-registry.json: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-03-accumulated-data-surface-omission-input.json: coverage_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-03-accumulated-data-surface-resource-input.json: resource_ready",
+    "Browser smoke: Runtime screen renders 축적 데이터 인덱스 panel, command button, store grid, horizontalOverflow=false",
+    "git diff --check: passed"
+  ],
+  "references_checked": [
+    "https://v2.tauri.app/reference/javascript/api/namespacepath/",
+    "https://v2.tauri.app/plugin/file-system/",
+    "https://v2.tauri.app/develop/resources/",
+    "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+    "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-03-accumulated-data-surface.ko.md",
+    "_history/source-provenance/2026/2026-06-03-accumulated-data-surface.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-surface-omission-result.json",
+    "_history/evaluations/2026/2026-06-03-accumulated-data-surface-resource-result.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-03-accumulated-data-surface.json",
+    "_history/web-searches/2026/2026-06-03-accumulated-data-surface.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-03-accumulated-data-surface.json",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-03-accumulated-data-surface.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-accumulated-data-surface-omission-result.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-accumulated-data-surface.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-accumulated-data-surface.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-accumulated-data-surface.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-03-accumulated-data-surface-resource-result.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": []
+}

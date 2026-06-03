@@ -1,0 +1,36 @@
+{
+  "task": "Accumulated data surface",
+  "source_types": [
+    "official_docs",
+    "internal_contract",
+    "source_code"
+  ],
+  "external_sources": [
+    {
+      "url": "https://v2.tauri.app/reference/javascript/api/namespacepath/",
+      "type": "official_docs",
+      "used_for": "Confirm app data/log path APIs and Tauri path model.",
+      "accessed": "2026-06-03"
+    },
+    {
+      "url": "https://v2.tauri.app/plugin/file-system/",
+      "type": "official_docs",
+      "used_for": "Confirm app-specific directory permissions, metadata behavior, and symlink-aware stat/lstat distinction.",
+      "accessed": "2026-06-03"
+    },
+    {
+      "url": "https://v2.tauri.app/develop/resources/",
+      "type": "official_docs",
+      "used_for": "Confirm bundled resource path model for the installer shell runtime contract.",
+      "accessed": "2026-06-03"
+    }
+  ],
+  "internal_sources": [
+    "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+    "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx"
+  ],
+  "decision_summary": "Selected a Rust/Tauri accumulated data overview command plus Workspace Monitor desktop panel instead of a raw directory browser. The selected design keeps source visibility boundaries intact and exposes bounded runtime data store summaries."
+}

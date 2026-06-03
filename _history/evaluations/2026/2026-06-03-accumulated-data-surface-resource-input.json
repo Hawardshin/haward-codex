@@ -1,0 +1,73 @@
+{
+  "task": "Accumulated data surface",
+  "work_mode": "ship_first",
+  "runtime_context": [
+    "rust",
+    "tauri",
+    "react",
+    "nextjs",
+    "filesystem_metadata"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "runtime-data-directory-scan",
+      "category": "large_data",
+      "description": "Accumulated data overview could scan too many runtime files if stores grow.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Directory metadata scan is capped by MAX_ACCUMULATED_DATA_SCAN_FILES per store and returns summaries, not full file contents.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_ACCUMULATED_DATA_SCAN_FILES",
+        "platform-desktop-app/src-tauri/src/lib.rs directory_data_stats"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "symlink-or-source-boundary",
+      "category": "file_handle",
+      "description": "A runtime data scan could follow symlinks or behave like a source tree browser.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The scan uses symlink_metadata and skips symlink entries; the UI exposes runtime store paths and summaries rather than recursive source browsing.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs fs::symlink_metadata",
+        "platform-desktop-app/src-tauri/src/lib.rs metadata.file_type().is_symlink()",
+        "workspace-monitor/components/MonitorShell.tsx accumulated-store-card"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "overview-command",
+      "resource": "filesystem metadata scan",
+      "create_path": "workspace-monitor/components/MonitorShell.tsx refreshAccumulatedDataOverview invokes get_accumulated_data_overview",
+      "cleanup_path": "No persistent process, watcher, timer, or open handle is created; fs metadata calls return before command completion.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo check: passed",
+        "corepack pnpm --filter workspace-monitor run check: passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "scan-bound",
+      "metric": "files scanned per accumulated data store",
+      "tool": "source inspection plus Rust compile check",
+      "threshold": "<= MAX_ACCUMULATED_DATA_SCAN_FILES",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_ACCUMULATED_DATA_SCAN_FILES",
+        "cargo check: passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No global install, daemon, long-running server, watcher, polling interval, or destructive cleanup was added."
+  ]
+}

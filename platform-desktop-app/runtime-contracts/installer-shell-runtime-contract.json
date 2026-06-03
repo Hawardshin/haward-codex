@@ -113,10 +113,11 @@
     },
     {
       "id": "runtime_data_accumulates_structured_records",
-      "rule": "Task output, decisions, logs, validation, and evidence must be accumulated as structured records with provenance, retention posture, and review gates.",
+      "rule": "Task output, decisions, logs, validation, and evidence must be accumulated as structured records with provenance, retention posture, review gates, and a user-visible accumulated data index.",
       "reason": "The platform value is durable accumulated operating data, not only temporary shell output.",
       "applies_to": [
         "data_accumulation_targets",
+        "runtime_command_surface",
         "enforcement_gates"
       ]
     },
@@ -489,11 +490,20 @@
       "runtime_store": "support_diagnostic_store",
       "required_for": "explicit_support_export",
       "provenance_required": true
+    },
+    {
+      "target_id": "accumulated_data_index",
+      "record_type": "runtime_data_overview",
+      "directory": "app_data/runtime-data",
+      "runtime_store": "platform_data_store/accumulated-data-overview",
+      "required_for": "user_visible_data_review",
+      "provenance_required": true
     }
   ],
   "runtime_command_surface": {
     "contract_read_command": "get_installer_shell_runtime_contract",
     "runtime_roots_command": "list_runtime_data_roots",
+    "accumulated_data_command": "get_accumulated_data_overview",
     "payload_audit_command": "run_installer_payload_audit",
     "support_bundle_command": "create_support_diagnostic_bundle",
     "cli_adapter_commands": [

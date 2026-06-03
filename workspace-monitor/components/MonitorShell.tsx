@@ -12,6 +12,7 @@ import {
   Clock3,
   Code2,
   Copy,
+  Database,
   FileSearch,
   FolderOpen,
   FolderKanban,
@@ -793,6 +794,31 @@ type RuntimeDataBoundaryReport = {
   taskRunStorePath: string;
   supportBundleStorePath: string;
   installerPayloadAuditPath: string;
+};
+
+type AccumulatedDataStoreReport = {
+  id: string;
+  label: string;
+  recordType: string;
+  plane: string;
+  path: string;
+  status: string;
+  count: number;
+  sizeBytes: number;
+  latestUpdatedAt: string;
+  visibility: string;
+  purpose: string;
+  actionLabel: string;
+};
+
+type AccumulatedDataOverviewReport = {
+  status: string;
+  generatedAt: string;
+  totalRecords: number;
+  totalBytes: number;
+  boundedScanMaxFiles: number;
+  stores: AccumulatedDataStoreReport[];
+  summary: string[];
 };
 
 type InstallerPayloadFinding = {
@@ -3261,6 +3287,9 @@ function DesktopRuntimePanel({
   const [supportBundle, setSupportBundle] = useState<SupportDiagnosticBundleReport | null>(null);
   const [runtimeDataBusy, setRuntimeDataBusy] = useState("");
   const [runtimeDataNotice, setRuntimeDataNotice] = useState("");
+  const [accumulatedDataOverview, setAccumulatedDataOverview] = useState<AccumulatedDataOverviewReport | null>(null);
+  const [accumulatedDataBusy, setAccumulatedDataBusy] = useState(false);
+  const [accumulatedDataNotice, setAccumulatedDataNotice] = useState("");
   const [serviceReadiness, setServiceReadiness] = useState<ServiceReadinessReport | null>(null);
   const [serviceReadinessBusy, setServiceReadinessBusy] = useState(false);
   const [serviceReadinessNotice, setServiceReadinessNotice] = useState("");
@@ -3385,6 +3414,22 @@ function DesktopRuntimePanel({
     const highFindings = (payloadAudit?.findings || []).filter((finding) => finding.severity === "high").length;
     return { roots: roots.length, created, ready, highFindings };
   }, [payloadAudit, runtimeDataBoundary]);
+  const accumulatedDataStats = useMemo(() => {
+    const stores = accumulatedDataOverview?.stores || [];
+    const visibleStores = stores.filter((store) => store.count > 0).length;
+    const latestStore =
+      stores
+        .filter((store) => store.latestUpdatedAt)
+        .sort((left, right) => Number(right.latestUpdatedAt) - Number(left.latestUpdatedAt))[0] || null;
+    return {
+      stores: stores.length,
+      visibleStores,
+      records: accumulatedDataOverview?.totalRecords || 0,
+      bytes: accumulatedDataOverview?.totalBytes || 0,
+      latestUpdatedAt: latestStore?.latestUpdatedAt || "",
+      boundedScanMaxFiles: accumulatedDataOverview?.boundedScanMaxFiles || 0
+    };
+  }, [accumulatedDataOverview]);
   const serviceReadinessStats = useMemo(() => {
     const groups = serviceReadiness?.groups || [];
     return {
@@ -3511,6 +3556,16 @@ function DesktopRuntimePanel({
             }
           ]
         : []),
+      ...(accumulatedDataOverview
+        ? [
+            {
+              id: "accumulated-data-overview",
+              label: accumulatedDataOverview.status,
+              title: "Accumulated Data",
+              detail: `${accumulatedDataOverview.stores.length} stores / ${accumulatedDataOverview.totalRecords} records / ${formatBytes(accumulatedDataOverview.totalBytes)}`
+            }
+          ]
+        : []),
       ...(payloadAudit
         ? [
             {
@@ -3559,7 +3614,7 @@ function DesktopRuntimePanel({
       }))
     ];
     return items.slice(0, 8);
-  }, [dirtyDraftEntries.length, openDraftEntries.length, outputEvents, payloadAudit, pipelineStats.latest, runtimeDataBoundary, selectedDecision, serviceReadiness, sourceDiff, sourceFile?.relativePath, sourceSaveResults, supportBundle, taskRunRecords, writeReport]);
+  }, [accumulatedDataOverview, dirtyDraftEntries.length, openDraftEntries.length, outputEvents, payloadAudit, pipelineStats.latest, runtimeDataBoundary, selectedDecision, serviceReadiness, sourceDiff, sourceFile?.relativePath, sourceSaveResults, supportBundle, taskRunRecords, writeReport]);
 
   const replaceTaskRunRecords = (records: CliTaskRunRecordReport[]) => {
     setTaskRunRecords(records);
@@ -3602,6 +3657,28 @@ function DesktopRuntimePanel({
     }
   };
 
+  const refreshAccumulatedDataOverview = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setAccumulatedDataOverview(null);
+      return;
+    }
+
+    setAccumulatedDataBusy(true);
+    setError("");
+    try {
+      const report = await tauriInvoke<AccumulatedDataOverviewReport>("get_accumulated_data_overview");
+      setAccumulatedDataOverview(report);
+      setAccumulatedDataNotice(
+        `${report.status}: ${report.totalRecords} records / ${formatBytes(report.totalBytes)}`
+      );
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setAccumulatedDataBusy(false);
+    }
+  };
+
   const refreshAdapters = async () => {
     setError("");
     const tauriInvoke = getTauriInvoke();
@@ -3621,6 +3698,7 @@ function DesktopRuntimePanel({
         nextTaskPipePresets,
         nextTaskRunRecords,
         nextRuntimeDataBoundary,
+        nextAccumulatedDataOverview,
         nextServiceReadiness
       ] = await Promise.all([
         tauriInvoke<DesktopHealthStatus>("app_health"),
@@ -3630,6 +3708,7 @@ function DesktopRuntimePanel({
         tauriInvoke<CliTaskPipelinePresetReport[]>("list_cli_task_pipeline_presets"),
         tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records"),
         tauriInvoke<RuntimeDataBoundaryReport>("list_runtime_data_roots"),
+        tauriInvoke<AccumulatedDataOverviewReport>("get_accumulated_data_overview"),
         tauriInvoke<ServiceReadinessReport>("get_service_readiness_report")
       ]);
       if (!panelMountedRef.current) {
@@ -3643,6 +3722,8 @@ function DesktopRuntimePanel({
       setTaskPipePresets(nextTaskPipePresets.length ? nextTaskPipePresets : fallbackTaskPipePresets);
       replaceTaskRunRecords(nextTaskRunRecords);
       setRuntimeDataBoundary(nextRuntimeDataBoundary);
+      setAccumulatedDataOverview(nextAccumulatedDataOverview);
+      setAccumulatedDataNotice("");
       setServiceReadiness(nextServiceReadiness);
       setServiceReadinessNotice("");
       setDecisionResumeNotice("");
@@ -3667,6 +3748,8 @@ function DesktopRuntimePanel({
       setTaskPipePresets(fallbackTaskPipePresets);
       replaceTaskRunRecords([]);
       setRuntimeDataBoundary(null);
+      setAccumulatedDataOverview(null);
+      setAccumulatedDataNotice("");
       setPayloadAudit(null);
       setSupportBundle(null);
       setServiceReadiness(null);
@@ -3690,16 +3773,18 @@ function DesktopRuntimePanel({
     try {
       const nextReports = await tauriInvoke<CliRunReport[]>("run_all_cli_adapter_health");
       setReports(nextReports);
-      const [nextAdapters, nextSessions, nextInbox, nextTaskRunRecords] = await Promise.all([
+      const [nextAdapters, nextSessions, nextInbox, nextTaskRunRecords, nextAccumulatedDataOverview] = await Promise.all([
         tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
         tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions"),
         tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox"),
-        tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records")
+        tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records"),
+        tauriInvoke<AccumulatedDataOverviewReport>("get_accumulated_data_overview")
       ]);
       setAdapters(nextAdapters);
       setSessions((current) => mergeSessionReports(current, nextSessions, { replaceAll: true }));
       setInboxReport(nextInbox);
       replaceTaskRunRecords(nextTaskRunRecords);
+      setAccumulatedDataOverview(nextAccumulatedDataOverview);
       setDecisionResumeNotice("");
     } catch (caught) {
       setError(errorMessage(caught));
@@ -3751,6 +3836,7 @@ function DesktopRuntimePanel({
     try {
       const report = await tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox");
       setInboxReport(report);
+      void refreshAccumulatedDataOverview();
       setDecisionResumeNotice("");
       if (!selectedDecisionId && report.decisions[0]) {
         setSelectedDecisionId(report.decisions[0].id);
@@ -3770,6 +3856,7 @@ function DesktopRuntimePanel({
     try {
       const records = await tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records");
       replaceTaskRunRecords(records);
+      void refreshAccumulatedDataOverview();
     } catch (caught) {
       setError(errorMessage(caught));
     }
@@ -3815,6 +3902,7 @@ function DesktopRuntimePanel({
       );
       const records = await tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records");
       replaceTaskRunRecords(records);
+      void refreshAccumulatedDataOverview();
       if (taskRunDetail && !records.some((record) => record.taskRunId === taskRunDetail.record.taskRunId)) {
         setTaskRunDetail(null);
       }
@@ -3841,6 +3929,7 @@ function DesktopRuntimePanel({
       const report = await tauriInvoke<RuntimeDataBoundaryReport>("list_runtime_data_roots");
       setRuntimeDataBoundary(report);
       setRuntimeDataNotice(`${report.status}: ${report.roots.length} runtime roots ready`);
+      void refreshAccumulatedDataOverview();
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -3860,6 +3949,7 @@ function DesktopRuntimePanel({
       const report = await tauriInvoke<InstallerPayloadAuditReport>("run_installer_payload_audit");
       setPayloadAudit(report);
       setRuntimeDataNotice(`${report.status}: ${report.flaggedCount} findings / ${report.scannedFiles} scanned files`);
+      void refreshAccumulatedDataOverview();
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -3879,6 +3969,7 @@ function DesktopRuntimePanel({
       const report = await tauriInvoke<SupportDiagnosticBundleReport>("create_support_diagnostic_bundle");
       setSupportBundle(report);
       setRuntimeDataNotice(`${report.status}: ${report.bundleId}`);
+      void refreshAccumulatedDataOverview();
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -4581,6 +4672,7 @@ function DesktopRuntimePanel({
         <Metric label="Available" value={availableCount} icon={CheckCircle2} tone="blue" />
         <Metric label="Task Pipes" value={pipelineReports.length} icon={GitBranch} tone="rose" />
         <Metric label="Task Runs" value={taskRunRecords.length} icon={FileSearch} tone="blue" />
+        <Metric label="Accumulated" value={accumulatedDataStats.records} icon={Database} tone="slate" />
         <Metric label="Decision Items" value={decisionPrompts.length + blockedTaskCount + openInboxDecisions.length} icon={Inbox} tone="amber" />
         <Metric label="Agent Configs" value={agentCatalogCount} icon={Bot} tone="violet" />
         <Metric label="Auto Deferred" value={sessionStats.autoDeferred} icon={ShieldCheck} tone="slate" />
@@ -4625,6 +4717,11 @@ function DesktopRuntimePanel({
             <FileSearch size={16} aria-hidden="true" />
             <span>Refresh task runs</span>
             <small>{taskRunRecords.length} records</small>
+          </button>
+          <button type="button" onClick={refreshAccumulatedDataOverview} disabled={!invoke || accumulatedDataBusy}>
+            <Database size={16} aria-hidden="true" />
+            <span>Accumulated data</span>
+            <small>{accumulatedDataStats.records} records</small>
           </button>
           <button type="button" onClick={refreshRuntimeDataBoundary} disabled={!invoke || runtimeDataBusy !== ""}>
             <Activity size={16} aria-hidden="true" />
@@ -4756,6 +4853,97 @@ function DesktopRuntimePanel({
             ))}
           </div>
         )}
+      </section>
+
+      <section className="panel wide accumulated-data-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Accumulated Data</p>
+            <h2>축적 데이터 인덱스</h2>
+          </div>
+          <div className="desktop-actions">
+            <button type="button" onClick={refreshAccumulatedDataOverview} disabled={!invoke || accumulatedDataBusy}>
+              <Database size={15} aria-hidden="true" />
+              <span>{accumulatedDataBusy ? "Refreshing" : "Refresh Index"}</span>
+            </button>
+          </div>
+        </div>
+        {accumulatedDataNotice && <p className="decision-resume-notice">{accumulatedDataNotice}</p>}
+        <div className="task-run-summary-strip">
+          <article>
+            <span>stores</span>
+            <strong>{accumulatedDataStats.visibleStores}/{accumulatedDataStats.stores}</strong>
+          </article>
+          <article>
+            <span>records</span>
+            <strong>{accumulatedDataStats.records}</strong>
+          </article>
+          <article>
+            <span>total size</span>
+            <strong>{formatBytes(accumulatedDataStats.bytes)}</strong>
+          </article>
+          <article>
+            <span>latest</span>
+            <strong>{accumulatedDataStats.latestUpdatedAt ? formatTimeLabel(accumulatedDataStats.latestUpdatedAt) : "idle"}</strong>
+          </article>
+          <article>
+            <span>scan cap</span>
+            <strong>{accumulatedDataStats.boundedScanMaxFiles || "n/a"}</strong>
+          </article>
+        </div>
+
+        <div className="accumulated-data-layout">
+          <div className="accumulated-store-grid">
+            {(accumulatedDataOverview?.stores || []).map((store) => (
+              <article key={store.id} className={`accumulated-store-card status-${store.status}`}>
+                <header>
+                  <div>
+                    <span>{store.recordType}</span>
+                    <h3>{store.label}</h3>
+                  </div>
+                  <strong>{store.status}</strong>
+                </header>
+                <div className="accumulated-store-stats">
+                  <span>{store.count} records</span>
+                  <span>{formatBytes(store.sizeBytes)}</span>
+                  <span>{store.latestUpdatedAt ? formatTimeLabel(store.latestUpdatedAt) : "idle"}</span>
+                </div>
+                <p>{store.purpose}</p>
+                <code>{store.path}</code>
+                <div className="adapter-report">
+                  <span>{store.plane}</span>
+                  <span>{store.visibility}</span>
+                  <span>{store.actionLabel}</span>
+                </div>
+              </article>
+            ))}
+            {!accumulatedDataOverview && (
+              <p className="empty-state">누적 데이터 인덱스가 아직 로드되지 않았습니다.</p>
+            )}
+          </div>
+
+          <article className="accumulated-data-map">
+            <header>
+              <div>
+                <span>{accumulatedDataOverview?.status || "not loaded"}</span>
+                <h3>User-visible data map</h3>
+              </div>
+              <Database size={18} aria-hidden="true" />
+            </header>
+            <div className="accumulated-summary-list">
+              {(accumulatedDataOverview?.summary || [
+                "Run the index to load task runs, decisions, audits, support bundles, and agent workspace records."
+              ]).map((item) => (
+                <p key={item}>{item}</p>
+              ))}
+            </div>
+            <div className="task-run-detail-meta">
+              <span>{accumulatedDataOverview ? formatTimeLabel(accumulatedDataOverview.generatedAt) : "idle"}</span>
+              <span>{accumulatedDataOverview?.status || "not-loaded"}</span>
+            </div>
+            <code>{runtimeDataBoundary?.taskRunStorePath || "runtime data root pending"}</code>
+          </article>
+        </div>
       </section>
 
       <section className="panel wide runtime-data-panel">

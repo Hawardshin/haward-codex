@@ -38,6 +38,7 @@
 | PDA-REQ-028 | Desktop supervisor와 monitor UI는 장시간 사용 중 CLI child process, stdout/stderr reader thread, 완료 session output buffer, polling interval, fetch/effect 같은 runtime resource가 누적되지 않도록 cleanup, retention, bounded output, abort/clear lifecycle을 가져야 한다. | must | Rust `cargo test`/`cargo build`, Workspace Monitor build/check, `check-resources` |
 | PDA-REQ-029 | Desktop source editor는 Monaco를 단순 임베드하는 데서 끝나지 않고 runtime workspace file index, open editor tab strip, editor command toolbar, Monaco diff review, editor settings popup, platform template/context actions를 갖춘 코드 워크벤치여야 한다. | must | `list_workspace_text_files`, Workspace Monitor Source Review, readiness/test, Browser smoke |
 | PDA-REQ-030 | 설치 앱이 띄우는 shell/runtime은 작업 전 bundled installer shell runtime contract를 읽어야 하며, 그 계약에 정의된 required read targets, enforcement gates, data accumulation targets를 따라 task, decision, evidence, validation, evaluation 기록을 구조화해 축적해야 한다. | must | `runtime-contracts/installer-shell-runtime-contract.json`, `get_installer_shell_runtime_contract`, `check-runtime-contract.mjs`, readiness/test |
+| PDA-REQ-031 | 사용자는 설치형 데스크톱 앱 안에서 축적된 task run, decision inbox, payload audit, support bundle, agent workspace 데이터를 전용 Accumulated Data surface로 쉽게 볼 수 있어야 하며, 각 store의 record count, size, latest update, path, visibility, action label이 표시되어야 한다. | must | `get_accumulated_data_overview`, Workspace Monitor Accumulated Data panel, readiness/test |
 
 ## 현재 상태
 

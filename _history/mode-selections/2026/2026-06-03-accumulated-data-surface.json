@@ -1,0 +1,19 @@
+{
+  "task": "Accumulated data surface",
+  "selected_work_mode": "ship_first",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selected_at": "2026-06-03",
+  "reason": "The user requested an immediate product feature so accumulated runtime data is easy to view inside the desktop app. Implement first, then keep retention/export refinements as future slices.",
+  "risk_notes": [
+    "Touches desktop runtime UI and filesystem metadata scan.",
+    "No dependency install, global environment change, destructive operation, or raw private folder scan."
+  ],
+  "closeout_gates": [
+    "web_search_record_targets",
+    "omission_check_targets",
+    "resource_check_targets",
+    "verification",
+    "evaluation"
+  ]
+}

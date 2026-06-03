@@ -1,0 +1,104 @@
+{
+  "task": "Accumulated data surface",
+  "work_mode": "ship_first",
+  "expected_items": [
+    {
+      "item_id": "user_visible_accumulated_data",
+      "description": "Expose accumulated data in a dedicated desktop app surface.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx Accumulated Data",
+        "workspace-monitor/components/MonitorShell.tsx 축적 데이터 인덱스",
+        "workspace-monitor/app/globals.css accumulated-data-panel"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "backend_overview_command",
+      "description": "Provide a real runtime command instead of frontend-only mock data.",
+      "source": "implementation_requirement",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs get_accumulated_data_overview",
+        "platform-desktop-app/src-tauri/src/lib.rs AccumulatedDataOverviewReport",
+        "platform-desktop-app/src-tauri/src/lib.rs accumulated_data_overview_report"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "bounded_scan",
+      "description": "Keep accumulated data indexing bounded and avoid symlink traversal.",
+      "source": "resource_policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_ACCUMULATED_DATA_SCAN_FILES",
+        "platform-desktop-app/src-tauri/src/lib.rs fs::symlink_metadata",
+        "platform-desktop-app/src-tauri/src/lib.rs scan_directory_data_stats"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "contract_and_tests",
+      "description": "Make the surface durable through runtime contract, readiness, and tests.",
+      "source": "repository_policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json accumulated_data_command",
+        "platform-desktop-app/scripts/check-runtime-contract.mjs",
+        "platform-desktop-app/scripts/check-readiness.mjs",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/spec.ko.md",
+      "purpose": "Feature scope and acceptance criteria.",
+      "required": true
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-03-accumulated-data-surface.ko.md",
+      "purpose": "Web-first record.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-03-accumulated-data-surface.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "rust_and_ts",
+      "description": "Rust and TypeScript compile/check paths pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo check: passed",
+        "corepack pnpm --filter workspace-monitor run check: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "contract_and_readiness",
+      "description": "Runtime contract and readiness tests include the new command and UI surface.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter platform-desktop-app test: 14 passed",
+        "corepack pnpm --filter platform-desktop-app run runtime:contract: passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [],
+  "notes": [
+    "Retention policy editing is intentionally out of scope for this slice."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "task": "Accumulated data surface",
+  "work_mode": "ship_first",
+  "language_options": [
+    {
+      "option": "Rust/Tauri backend plus TypeScript UI",
+      "decision": "selected",
+      "reason": "Rust already owns Tauri app data paths and can safely read metadata without exposing broad filesystem access to the frontend."
+    },
+    {
+      "option": "TypeScript-only frontend indexing",
+      "decision": "rejected",
+      "reason": "Would require broader frontend filesystem permissions or static snapshot dependence and would not own app data metadata cleanly."
+    }
+  ],
+  "architecture_options": [
+    {
+      "option": "Leave data in existing separate panels",
+      "decision": "rejected",
+      "reason": "Does not satisfy the user's need to easily view accumulated data."
+    },
+    {
+      "option": "Dedicated overview command and panel",
+      "decision": "selected",
+      "reason": "Creates a stable shell command surface and user-facing index without turning the app into a raw source browser."
+    },
+    {
+      "option": "Raw file explorer",
+      "decision": "rejected",
+      "reason": "Higher privacy/source-boundary risk and weaker product information architecture."
+    }
+  ],
+  "folder_structure_options": [
+    {
+      "option": "Extend runtime-data-features spec",
+      "decision": "rejected",
+      "reason": "That spec owns storage roots, audit, support bundle, and customer snapshot features."
+    },
+    {
+      "option": "Create accumulated-data-surface spec",
+      "decision": "selected",
+      "reason": "This slice owns user visibility and shell command surface for accumulated data."
+    }
+  ],
+  "validation_targets": [
+    "cargo check",
+    "workspace-monitor TypeScript check",
+    "platform-desktop-app tests",
+    "runtime contract check",
+    "Browser smoke"
+  ]
+}

@@ -414,6 +414,35 @@ struct RuntimeDataBoundaryReport {
     installer_payload_audit_path: String,
 }
 
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct AccumulatedDataStoreReport {
+    id: String,
+    label: String,
+    record_type: String,
+    plane: String,
+    path: String,
+    status: String,
+    count: usize,
+    size_bytes: u64,
+    latest_updated_at: String,
+    visibility: String,
+    purpose: String,
+    action_label: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct AccumulatedDataOverviewReport {
+    status: String,
+    generated_at: String,
+    total_records: usize,
+    total_bytes: u64,
+    bounded_scan_max_files: usize,
+    stores: Vec<AccumulatedDataStoreReport>,
+    summary: Vec<String>,
+}
+
 #[derive(Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 struct InstallerPayloadFinding {
@@ -521,6 +550,7 @@ const MAX_TASK_PROMPT_PREVIEW_CHARS: usize = 280;
 const MAX_TASK_RUN_LOG_PREVIEW_BYTES: usize = 64_000;
 const DEFAULT_TASK_RUN_PRUNE_KEEP_COUNT: usize = 30;
 const MAX_PAYLOAD_SCAN_FILES: usize = 4_000;
+const MAX_ACCUMULATED_DATA_SCAN_FILES: usize = 1_200;
 const MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS: usize = 20;
 const MAX_SUPPORT_EVENT_CHARS: usize = 600;
 
@@ -787,6 +817,11 @@ fn prune_cli_task_run_records(
 #[tauri::command]
 fn list_runtime_data_roots(app: AppHandle) -> Result<RuntimeDataBoundaryReport, String> {
     runtime_data_boundary_report(&app)
+}
+
+#[tauri::command]
+fn get_accumulated_data_overview(app: AppHandle) -> Result<AccumulatedDataOverviewReport, String> {
+    accumulated_data_overview_report(&app)
 }
 
 #[tauri::command]
@@ -1539,6 +1574,7 @@ pub fn run() {
             read_cli_task_run_record,
             prune_cli_task_run_records,
             list_runtime_data_roots,
+            get_accumulated_data_overview,
             run_installer_payload_audit,
             create_support_diagnostic_bundle,
             get_service_readiness_report,
@@ -2585,6 +2621,344 @@ fn runtime_root_report(
         visibility: visibility.to_string(),
         purpose: purpose.to_string(),
     })
+}
+
+fn accumulated_data_overview_report(
+    app: &AppHandle,
+) -> Result<AccumulatedDataOverviewReport, String> {
+    let generated_at = current_unix_millis_label();
+    let task_runs = read_task_run_records_with_limit(app, Some(MAX_TASK_RUN_RECORDS))?;
+    let task_run_path = task_runs_base_path(app)?;
+    let support_path = support_bundles_base_path(app)?;
+    let payload_audit_path = payload_audits_base_path(app)?;
+    let agent_workspace_path = agent_workspace_base_path(app)?;
+    let runtime_store_path = runtime_data_store_base_path(app)?;
+
+    for path in [
+        &runtime_store_path,
+        &task_run_path,
+        &support_path,
+        &payload_audit_path,
+        &agent_workspace_path,
+    ] {
+        fs::create_dir_all(path)
+            .map_err(|error| format!("Failed to create accumulated data store: {error}"))?;
+    }
+
+    let mut stores = Vec::new();
+    let task_run_stats = directory_data_stats(&task_run_path, MAX_ACCUMULATED_DATA_SCAN_FILES);
+    stores.push(accumulated_data_store_report(
+        "task_run_store",
+        "Task Runs",
+        "task-run records",
+        "task_execution_store",
+        &task_run_path,
+        task_runs.len(),
+        task_run_stats.size_bytes,
+        task_runs
+            .first()
+            .map(|record| record.updated_at.clone())
+            .unwrap_or_else(|| directory_latest_modified_label(&task_run_stats)),
+        "user_visible_runtime_data",
+        "CLI task execution records, record JSON, stdout logs, and stderr logs.",
+        "Open Logs",
+        task_run_stats.scan_truncated,
+    ));
+
+    let decision_path = workspace_root()?
+        .join("_ops")
+        .join("coordination")
+        .join("human-decision-inbox.json");
+    let decision_store = match read_human_decision_inbox_value() {
+        Ok((inbox_path, inbox)) => {
+            let report = human_decision_report(&inbox, None)?;
+            let stats = single_file_data_stats(&inbox_path);
+            accumulated_data_store_report(
+                "decision_inbox",
+                "Decision Inbox",
+                "human decisions",
+                "decision_store",
+                &inbox_path,
+                report.total_count,
+                stats.size_bytes,
+                directory_latest_modified_label(&stats),
+                "user_visible_workspace_data",
+                "Human-answerable questions, answers, blocked work, and resume actions.",
+                "Answer & Resume",
+                false,
+            )
+        }
+        Err(_) => accumulated_data_store_report(
+            "decision_inbox",
+            "Decision Inbox",
+            "human decisions",
+            "decision_store",
+            &decision_path,
+            0,
+            0,
+            String::new(),
+            "user_visible_workspace_data",
+            "Human-answerable questions, answers, blocked work, and resume actions.",
+            "Create inbox",
+            false,
+        ),
+    };
+    stores.push(decision_store);
+
+    let support_stats = directory_data_stats(&support_path, MAX_ACCUMULATED_DATA_SCAN_FILES);
+    stores.push(accumulated_data_store_report(
+        "support_bundles",
+        "Support Bundles",
+        "diagnostic bundles",
+        "support_diagnostic_store",
+        &support_path,
+        count_immediate_dirs(&support_path, MAX_ACCUMULATED_DATA_SCAN_FILES),
+        support_stats.size_bytes,
+        directory_latest_modified_label(&support_stats),
+        "user_exported_on_demand",
+        "Redacted support diagnostic exports created by explicit user action.",
+        "Export bundle",
+        support_stats.scan_truncated,
+    ));
+
+    let payload_stats = directory_data_stats(&payload_audit_path, MAX_ACCUMULATED_DATA_SCAN_FILES);
+    stores.push(accumulated_data_store_report(
+        "payload_audits",
+        "Payload Audits",
+        "installer audit reports",
+        "installer_payload_audit_store",
+        &payload_audit_path,
+        count_immediate_files_with_extension(
+            &payload_audit_path,
+            "json",
+            MAX_ACCUMULATED_DATA_SCAN_FILES,
+        ),
+        payload_stats.size_bytes,
+        directory_latest_modified_label(&payload_stats),
+        "developer_visible_user_safe_summary",
+        "Installer payload scan reports that protect customers from source or private-file leakage.",
+        "Review audit",
+        payload_stats.scan_truncated,
+    ));
+
+    let agent_workspace_stats =
+        directory_data_stats(&agent_workspace_path, MAX_ACCUMULATED_DATA_SCAN_FILES);
+    stores.push(accumulated_data_store_report(
+        "agent_workspace",
+        "Agent Workspace",
+        "agent work artifacts",
+        "agent_workspace",
+        &agent_workspace_path,
+        agent_workspace_stats
+            .file_count
+            .saturating_add(agent_workspace_stats.dir_count),
+        agent_workspace_stats.size_bytes,
+        directory_latest_modified_label(&agent_workspace_stats),
+        "advanced_visible_runtime_data",
+        "Runtime agent scratch, generated work artifacts, and task work folders.",
+        "Inspect workspace",
+        agent_workspace_stats.scan_truncated,
+    ));
+
+    let total_records = stores.iter().map(|store| store.count).sum();
+    let total_bytes = stores
+        .iter()
+        .fold(0_u64, |total, store| total.saturating_add(store.size_bytes));
+    let stores_with_data = stores.iter().filter(|store| store.count > 0).count();
+    let summary = vec![
+        format!("{} data stores indexed.", stores.len()),
+        format!("{total_records} accumulated records are visible from the desktop shell."),
+        format!(
+            "{} stores currently contain data; scans are bounded to {} files per store.",
+            stores_with_data, MAX_ACCUMULATED_DATA_SCAN_FILES
+        ),
+        "The overview exposes runtime data paths without exposing the platform source tree as the product surface.".to_string(),
+    ];
+    let status = if total_records == 0 {
+        "empty_ready"
+    } else if stores.iter().any(|store| store.status == "bounded") {
+        "indexed_bounded"
+    } else {
+        "indexed"
+    }
+    .to_string();
+
+    Ok(AccumulatedDataOverviewReport {
+        status,
+        generated_at,
+        total_records,
+        total_bytes,
+        bounded_scan_max_files: MAX_ACCUMULATED_DATA_SCAN_FILES,
+        stores,
+        summary,
+    })
+}
+
+fn accumulated_data_store_report(
+    id: &str,
+    label: &str,
+    record_type: &str,
+    plane: &str,
+    path: &Path,
+    count: usize,
+    size_bytes: u64,
+    latest_updated_at: String,
+    visibility: &str,
+    purpose: &str,
+    action_label: &str,
+    scan_truncated: bool,
+) -> AccumulatedDataStoreReport {
+    let status = if !path.exists() {
+        "missing"
+    } else if scan_truncated {
+        "bounded"
+    } else if count == 0 {
+        "empty"
+    } else {
+        "available"
+    };
+
+    AccumulatedDataStoreReport {
+        id: id.to_string(),
+        label: label.to_string(),
+        record_type: record_type.to_string(),
+        plane: plane.to_string(),
+        path: path_to_string(path),
+        status: status.to_string(),
+        count,
+        size_bytes,
+        latest_updated_at,
+        visibility: visibility.to_string(),
+        purpose: purpose.to_string(),
+        action_label: action_label.to_string(),
+    }
+}
+
+#[derive(Default)]
+struct DirectoryDataStats {
+    file_count: usize,
+    dir_count: usize,
+    size_bytes: u64,
+    latest_modified_ms: Option<u128>,
+    scan_truncated: bool,
+}
+
+fn directory_data_stats(path: &Path, max_files: usize) -> DirectoryDataStats {
+    let mut stats = DirectoryDataStats::default();
+    scan_directory_data_stats(path, &mut stats, max_files);
+    stats
+}
+
+fn single_file_data_stats(path: &Path) -> DirectoryDataStats {
+    let mut stats = DirectoryDataStats::default();
+    if let Ok(metadata) = fs::symlink_metadata(path) {
+        stats.file_count = 1;
+        stats.size_bytes = metadata.len();
+        merge_latest_modified(&mut stats, &metadata);
+    }
+    stats
+}
+
+fn scan_directory_data_stats(path: &Path, stats: &mut DirectoryDataStats, max_files: usize) {
+    if stats.file_count >= max_files {
+        stats.scan_truncated = true;
+        return;
+    }
+
+    let Ok(entries) = fs::read_dir(path) else {
+        return;
+    };
+    for entry in entries.flatten() {
+        let entry_path = entry.path();
+        let Ok(metadata) = fs::symlink_metadata(&entry_path) else {
+            continue;
+        };
+        if metadata.file_type().is_symlink() {
+            continue;
+        }
+        merge_latest_modified(stats, &metadata);
+        if metadata.is_dir() {
+            stats.dir_count = stats.dir_count.saturating_add(1);
+            scan_directory_data_stats(&entry_path, stats, max_files);
+        } else if metadata.is_file() {
+            stats.file_count = stats.file_count.saturating_add(1);
+            stats.size_bytes = stats.size_bytes.saturating_add(metadata.len());
+        }
+
+        if stats.file_count >= max_files {
+            stats.scan_truncated = true;
+            break;
+        }
+    }
+}
+
+fn merge_latest_modified(stats: &mut DirectoryDataStats, metadata: &fs::Metadata) {
+    let Ok(modified) = metadata.modified() else {
+        return;
+    };
+    let Ok(duration) = modified.duration_since(UNIX_EPOCH) else {
+        return;
+    };
+    let modified_ms = duration.as_millis();
+    if stats
+        .latest_modified_ms
+        .map(|current| modified_ms > current)
+        .unwrap_or(true)
+    {
+        stats.latest_modified_ms = Some(modified_ms);
+    }
+}
+
+fn directory_latest_modified_label(stats: &DirectoryDataStats) -> String {
+    stats
+        .latest_modified_ms
+        .map(|value| value.to_string())
+        .unwrap_or_default()
+}
+
+fn count_immediate_dirs(path: &Path, max_entries: usize) -> usize {
+    count_immediate_entries(path, max_entries, |metadata| metadata.is_dir())
+}
+
+fn count_immediate_files_with_extension(path: &Path, extension: &str, max_entries: usize) -> usize {
+    let extension = extension.to_ascii_lowercase();
+    let Ok(entries) = fs::read_dir(path) else {
+        return 0;
+    };
+    entries
+        .flatten()
+        .take(max_entries)
+        .filter(|entry| {
+            let entry_path = entry.path();
+            let has_extension = entry_path
+                .extension()
+                .and_then(|value| value.to_str())
+                .map(|value| value.eq_ignore_ascii_case(&extension))
+                .unwrap_or(false);
+            has_extension
+                && fs::symlink_metadata(&entry_path)
+                    .map(|metadata| !metadata.file_type().is_symlink() && metadata.is_file())
+                    .unwrap_or(false)
+        })
+        .count()
+}
+
+fn count_immediate_entries<F>(path: &Path, max_entries: usize, predicate: F) -> usize
+where
+    F: Fn(&fs::Metadata) -> bool,
+{
+    let Ok(entries) = fs::read_dir(path) else {
+        return 0;
+    };
+    entries
+        .flatten()
+        .take(max_entries)
+        .filter(|entry| {
+            fs::symlink_metadata(entry.path())
+                .map(|metadata| !metadata.file_type().is_symlink() && predicate(&metadata))
+                .unwrap_or(false)
+        })
+        .count()
 }
 
 fn service_readiness_report(app: &AppHandle) -> Result<ServiceReadinessReport, String> {

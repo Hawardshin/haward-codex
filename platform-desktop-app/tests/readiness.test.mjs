@@ -118,11 +118,14 @@ test("installer shell runtime contract is bundled and enforceable", () => {
     "structured_evidence",
     "validation_and_evaluation",
     "work_timing",
-    "support_diagnostic"
+    "support_diagnostic",
+    "accumulated_data_index"
   ]) {
     assert.match(serialized, new RegExp(target));
   }
   assert.match(lib, /get_installer_shell_runtime_contract/);
+  assert.match(lib, /get_accumulated_data_overview/);
+  assert.equal(contract.runtime_command_surface.accumulated_data_command, "get_accumulated_data_overview");
   assert.match(lib, /resolve_installer_shell_runtime_contract_path/);
   assert.match(lib, /InstallerShellRuntimeContractReport/);
 });
@@ -207,6 +210,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "read_cli_task_run_record",
     "prune_cli_task_run_records",
     "list_runtime_data_roots",
+    "get_accumulated_data_overview",
     "run_installer_payload_audit",
     "create_support_diagnostic_bundle",
     "get_service_readiness_report",
@@ -253,6 +257,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Task Run Store",
     "저장된 실행 기록과 로그",
     "Runtime Data & Support",
+    "Accumulated Data",
+    "축적 데이터 인덱스",
     "Service Readiness",
     "서비스 출시 준비도",
     "Public blockers",
@@ -341,11 +347,16 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "pruneTaskRunRecords",
     "refreshTaskRunRecords",
     "refreshRuntimeDataBoundary",
+    "refreshAccumulatedDataOverview",
+    "accumulatedDataOverview",
+    "accumulated-data-panel",
+    "accumulated-store-grid",
     "runInstallerPayloadAudit",
     "createSupportDiagnosticBundle",
     "RuntimeDataBoundaryReport",
     "InstallerPayloadAuditReport",
     "SupportDiagnosticBundleReport",
+    "AccumulatedDataOverviewReport",
     "runtime-data-panel",
     "list_cli_task_run_records",
     "taskPipePresets",
@@ -388,6 +399,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "InstallerPayloadAuditReport",
     "SupportDiagnosticBundleReport",
     "RuntimeDataBoundaryReport",
+    "AccumulatedDataStoreReport",
+    "AccumulatedDataOverviewReport",
+    "accumulated_data_overview_report",
+    "MAX_ACCUMULATED_DATA_SCAN_FILES",
     "MAX_PAYLOAD_SCAN_FILES",
     "platform_artifacts_base_path",
     "task-runs",

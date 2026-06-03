@@ -112,7 +112,8 @@ for (const requiredTarget of [
   "structured_evidence",
   "validation_and_evaluation",
   "work_timing",
-  "support_diagnostic"
+  "support_diagnostic",
+  "accumulated_data_index"
 ]) {
   failIf(!accumulationIds.has(requiredTarget), `data_accumulation_targets must include ${requiredTarget}`);
 }
@@ -132,10 +133,17 @@ const tauriLib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
 for (const commandName of [
   "get_installer_shell_runtime_contract",
   "resolve_installer_shell_runtime_contract_path",
-  "InstallerShellRuntimeContractReport"
+  "InstallerShellRuntimeContractReport",
+  "get_accumulated_data_overview",
+  "AccumulatedDataOverviewReport"
 ]) {
   failIf(!tauriLib.includes(commandName), `src-tauri/src/lib.rs must include ${commandName}`);
 }
+
+failIf(
+  contract.runtime_command_surface?.accumulated_data_command !== "get_accumulated_data_overview",
+  "runtime_command_surface.accumulated_data_command must be get_accumulated_data_overview"
+);
 
 const result = {
   status: failures.length === 0 ? "installer_shell_runtime_contract_ready" : "rework_required",

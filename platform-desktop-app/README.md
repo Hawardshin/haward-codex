@@ -128,6 +128,7 @@ Implemented desktop bridge commands:
 
 - `app_health`
 - `get_installer_shell_runtime_contract`
+- `get_accumulated_data_overview`
 - `list_cli_adapters`
 - `run_cli_adapter_health`
 - `run_all_cli_adapter_health`

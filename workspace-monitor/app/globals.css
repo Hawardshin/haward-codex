@@ -2547,6 +2547,7 @@ h3 {
 .desktop-command-panel,
 .unified-ops-panel,
 .task-pipe-panel,
+.accumulated-data-panel,
 .runtime-data-panel,
 .service-readiness-panel,
 .task-run-panel,
@@ -3061,6 +3062,133 @@ h3 {
   border-radius: 7px;
   margin: 0;
   padding: 10px;
+}
+
+.accumulated-data-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.42fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.accumulated-store-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  min-width: 0;
+}
+
+.accumulated-store-card,
+.accumulated-data-map {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.accumulated-store-card.status-available {
+  border-color: rgba(72, 128, 109, 0.34);
+}
+
+.accumulated-store-card.status-bounded {
+  border-color: rgba(217, 119, 6, 0.34);
+}
+
+.accumulated-store-card.status-missing {
+  border-color: rgba(176, 67, 74, 0.3);
+}
+
+.accumulated-store-card header,
+.accumulated-data-map header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: start;
+}
+
+.accumulated-store-card header > div,
+.accumulated-data-map header > div {
+  min-width: 0;
+}
+
+.accumulated-store-card header span,
+.accumulated-data-map header span,
+.accumulated-store-stats span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.accumulated-store-card h3,
+.accumulated-data-map h3 {
+  margin: 3px 0 0;
+  font-size: 15px;
+}
+
+.accumulated-store-card strong {
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  border-radius: 999px;
+  color: var(--slate);
+  font-size: 12px;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.accumulated-store-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.accumulated-store-stats span {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 4px 7px;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+.accumulated-store-card p,
+.accumulated-store-card code,
+.accumulated-data-map code,
+.accumulated-summary-list p {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.accumulated-store-card p,
+.accumulated-summary-list p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.accumulated-store-card code,
+.accumulated-data-map code {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.35;
+  padding: 6px;
+}
+
+.accumulated-summary-list {
+  display: grid;
+  gap: 8px;
+}
+
+.accumulated-summary-list p {
+  border-left: 3px solid #7ca1c7;
+  padding-left: 8px;
 }
 
 .runtime-data-layout {
@@ -5852,6 +5980,7 @@ h3 {
   .task-pipe-report-grid,
   .task-run-summary-strip,
   .task-run-grid,
+  .accumulated-store-grid,
   .runtime-root-grid,
   .service-group-grid,
   .task-run-detail-meta,
@@ -5883,6 +6012,7 @@ h3 {
   .task-pipe-layout,
   .task-pipe-controls,
   .task-run-store-layout,
+  .accumulated-data-layout,
   .runtime-data-layout,
   .service-readiness-layout,
   .session-launcher,
@@ -6059,6 +6189,8 @@ h3 {
   .task-run-summary-strip,
   .task-run-grid,
   .task-run-store-layout,
+  .accumulated-data-layout,
+  .accumulated-store-grid,
   .runtime-data-layout,
   .runtime-root-grid,
   .service-readiness-hero,
