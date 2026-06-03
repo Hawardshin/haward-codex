@@ -365,7 +365,7 @@
       "user_goal": "Open the app and understand what to do next.",
       "screen": "Welcome and workspace chooser",
       "required_behavior": [
-        "prioritize Open Workspace, Create Workspace, and Demo Workspace",
+        "prioritize Open Workspace, Clone Workspace, Create Workspace, and Demo Workspace",
         "postpone optional integrations",
         "offer view mode selection with user mode as the simple path and superadmin as the builder path"
       ]
@@ -376,6 +376,7 @@
       "step": "welcome",
       "primary_action": "Open Workspace",
       "secondary_actions": [
+        "Clone Workspace",
         "Create Workspace",
         "Use Demo Workspace",
         "Developer Setup"

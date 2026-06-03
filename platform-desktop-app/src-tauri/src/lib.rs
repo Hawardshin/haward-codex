@@ -1,4 +1,4 @@
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::collections::{HashMap, HashSet};
 use std::env;
@@ -332,6 +332,38 @@ struct WorkspaceWriteReport {
     status: String,
 }
 
+#[derive(Clone, Default, Deserialize, Serialize)]
+#[serde(default, rename_all = "camelCase")]
+struct DesktopWorkspaceState {
+    schema_version: String,
+    active_workspace_path: String,
+    active_workspace_source: String,
+    repository_url: String,
+    last_operation: String,
+    last_status: String,
+    created_at: String,
+    updated_at: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DesktopWorkspaceStateReport {
+    schema_version: String,
+    status: String,
+    active_workspace_path: String,
+    active_workspace_source: String,
+    state_path: String,
+    managed_workspace_root: String,
+    fallback_workspace_path: String,
+    git_available: bool,
+    git_version: String,
+    repository_url: String,
+    last_operation: String,
+    last_status: String,
+    updated_at: String,
+    summary: Vec<String>,
+}
+
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 struct HumanDecisionItem {
@@ -557,6 +589,11 @@ const MAX_PAYLOAD_SCAN_FILES: usize = 4_000;
 const MAX_ACCUMULATED_DATA_SCAN_FILES: usize = 1_200;
 const ACCUMULATED_DATA_INDEX_SCHEMA_VERSION: &str = "accumulated-data-overview.v1";
 const ACCUMULATED_DATA_STORAGE_FORMAT_VERSION: &str = "file-record-stores+overview-manifest.v1";
+const DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION: &str = "desktop-workspace-state.v1";
+const GIT_CLONE_TIMEOUT_MS: u64 = 120_000;
+const MAX_GIT_CLONE_OUTPUT_BYTES: usize = 24_000;
+const MAX_GIT_REPOSITORY_URL_BYTES: usize = 2_048;
+const MAX_WORKSPACE_FOLDER_NAME_BYTES: usize = 120;
 const MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS: usize = 20;
 const MAX_SUPPORT_EVENT_CHARS: usize = 600;
 
@@ -848,6 +885,28 @@ fn get_service_readiness_report(app: AppHandle) -> Result<ServiceReadinessReport
 }
 
 #[tauri::command]
+fn get_desktop_workspace_state(app: AppHandle) -> Result<DesktopWorkspaceStateReport, String> {
+    desktop_workspace_state_report(&app, None, None)
+}
+
+#[tauri::command]
+fn set_desktop_workspace_path(
+    app: AppHandle,
+    path: String,
+) -> Result<DesktopWorkspaceStateReport, String> {
+    set_desktop_workspace_path_report(&app, &path)
+}
+
+#[tauri::command]
+fn clone_desktop_workspace(
+    app: AppHandle,
+    repository_url: String,
+    folder_name: Option<String>,
+) -> Result<DesktopWorkspaceStateReport, String> {
+    clone_desktop_workspace_report(&app, &repository_url, folder_name.as_deref())
+}
+
+#[tauri::command]
 fn start_cli_adapter_session(
     app: AppHandle,
     store: State<'_, SessionStore>,
@@ -864,7 +923,7 @@ fn start_cli_adapter_session(
 
     let adapter =
         find_adapter(&adapter_id).ok_or_else(|| format!("Unknown adapter id: {adapter_id}"))?;
-    let working_dir = resolve_workspace_dir(working_dir.as_deref())?;
+    let working_dir = resolve_workspace_dir(&app, working_dir.as_deref())?;
     let (session_id, mut session, report) = create_cli_session(
         &app,
         adapter,
@@ -907,7 +966,7 @@ fn start_cli_task_pipeline(
 
     let preset = find_pipeline_preset(&task_kind)
         .ok_or_else(|| format!("Unknown task pipe kind: {task_kind}"))?;
-    let resolved_working_dir = resolve_workspace_dir(working_dir.as_deref())?;
+    let resolved_working_dir = resolve_workspace_dir(&app, working_dir.as_deref())?;
     let pipeline_id = new_session_id(preset.task_kind);
     let mut lane_reports = Vec::new();
     let mut pipe_reports = Vec::new();
@@ -1310,8 +1369,11 @@ fn cancel_cli_adapter_session(
 }
 
 #[tauri::command]
-fn read_workspace_text_file(relative_path: String) -> Result<WorkspaceTextFile, String> {
-    let (path, normalized) = resolve_workspace_file(&relative_path, true)?;
+fn read_workspace_text_file(
+    app: AppHandle,
+    relative_path: String,
+) -> Result<WorkspaceTextFile, String> {
+    let (path, normalized) = resolve_workspace_file(Some(&app), &relative_path, true)?;
     let metadata = path
         .metadata()
         .map_err(|error| format!("Failed to read file metadata: {error}"))?;
@@ -1332,10 +1394,11 @@ fn read_workspace_text_file(relative_path: String) -> Result<WorkspaceTextFile, 
 
 #[tauri::command]
 fn list_workspace_text_files(
+    app: AppHandle,
     filter: Option<String>,
     limit: Option<usize>,
 ) -> Result<WorkspaceTextFileListReport, String> {
-    let root = workspace_root()?;
+    let root = workspace_root_for_app(Some(&app))?;
     let normalized_filter = filter.unwrap_or_default().trim().to_lowercase();
     let limit = limit
         .unwrap_or(DEFAULT_WORKSPACE_SOURCE_LIST_LIMIT)
@@ -1429,6 +1492,7 @@ fn list_workspace_text_files(
 
 #[tauri::command]
 fn write_workspace_text_file(
+    app: AppHandle,
     relative_path: String,
     content: String,
 ) -> Result<WorkspaceWriteReport, String> {
@@ -1437,8 +1501,8 @@ fn write_workspace_text_file(
             "Content is too large for the desktop editor. Max size is {MAX_WORKSPACE_FILE_BYTES} bytes."
         ));
     }
-    let root = workspace_root()?;
-    let (path, normalized) = resolve_workspace_file(&relative_path, true)?;
+    let root = workspace_root_for_app(Some(&app))?;
+    let (path, normalized) = resolve_workspace_file(Some(&app), &relative_path, true)?;
     let original = fs::read(&path)
         .map_err(|error| format!("Failed to read original file for backup: {error}"))?;
     let backup_path = source_backup_path(&root, &normalized)?;
@@ -1584,6 +1648,9 @@ pub fn run() {
             run_installer_payload_audit,
             create_support_diagnostic_bundle,
             get_service_readiness_report,
+            get_desktop_workspace_state,
+            set_desktop_workspace_path,
+            clone_desktop_workspace,
             start_cli_adapter_session,
             start_cli_task_pipeline,
             poll_cli_adapter_session,
@@ -2114,7 +2181,7 @@ fn persist_session_task_run(
     session: &CliSession,
     report: &CliSessionReport,
 ) -> Result<TaskRunPersistPaths, String> {
-    let root = workspace_root()?;
+    let root = workspace_root_for_app(Some(app))?;
     let run_dir = task_run_dir(app, &session.task_run_id)?;
     fs::create_dir_all(&run_dir)
         .map_err(|error| format!("Failed to create task run directory: {error}"))?;
@@ -2208,7 +2275,7 @@ fn read_task_run_records_with_limit(
     app: &AppHandle,
     limit: Option<usize>,
 ) -> Result<Vec<CliTaskRunRecordReport>, String> {
-    let root = workspace_root()?;
+    let root = workspace_root_for_app(Some(app))?;
     let runtime_base = task_runs_base_path(app)?;
     fs::create_dir_all(&runtime_base)
         .map_err(|error| format!("Failed to create runtime task run directory: {error}"))?;
@@ -2274,7 +2341,7 @@ fn read_task_run_detail(
         return Err("Task run id is required.".to_string());
     }
 
-    let root = workspace_root()?;
+    let root = workspace_root_for_app(Some(app))?;
     let run_dir = resolve_task_run_dir(app, &root, task_run_id)?;
     let record_path = run_dir.join("record.json");
     if !record_path.is_file() {
@@ -2306,7 +2373,7 @@ fn prune_task_run_records(
     app: &AppHandle,
     keep_count: Option<usize>,
 ) -> Result<CliTaskRunPruneReport, String> {
-    let root = workspace_root()?;
+    let root = workspace_root_for_app(Some(app))?;
     let base = task_runs_base_path(app)?;
     if !base.exists() {
         return Ok(CliTaskRunPruneReport {
@@ -2985,6 +3052,7 @@ fn service_readiness_report(app: &AppHandle) -> Result<ServiceReadinessReport, S
     let generated_at = current_unix_millis_label();
     let runtime_roots = runtime_data_boundary_report(app)?;
     let payload_audit = run_installer_payload_audit_report(app)?;
+    let workspace_state = desktop_workspace_state_report(app, None, None)?;
     let roots_ready = runtime_roots.roots.iter().all(|root| root.exists);
     let has_payload_high_findings = payload_audit
         .findings
@@ -3099,8 +3167,11 @@ fn service_readiness_report(app: &AppHandle) -> Result<ServiceReadinessReport, S
                 service_readiness_check(
                     "first_run_workspace_chooser_enforced",
                     "First-run workspace chooser is enforced",
-                    false,
-                    "First-run workspace chooser is documented but not yet persisted as a runtime setting.",
+                    workspace_state.status == "workspace_selected",
+                    &format!(
+                        "{} / {}",
+                        workspace_state.active_workspace_source, workspace_state.active_workspace_path
+                    ),
                     "warning",
                     true,
                     false,
@@ -3226,7 +3297,7 @@ fn service_readiness_report(app: &AppHandle) -> Result<ServiceReadinessReport, S
         next_actions,
         payload_audit_path: payload_audit.audit_path,
         payload_flagged_count: payload_audit.flagged_count,
-        service_claim: "Internal service operation is inspectable in the app. Public service release remains blocked until signing, notarization, updater, clean-machine smoke, and first-run workspace enforcement are complete.".to_string(),
+        service_claim: "Internal service operation is inspectable in the app. Public service release remains blocked until signing, notarization, updater, and clean-machine smoke are complete.".to_string(),
     })
 }
 
@@ -4445,8 +4516,387 @@ fn normalize_decision_answer_type(answer_type: &str) -> String {
     }
 }
 
-fn resolve_workspace_dir(relative_or_absolute: Option<&str>) -> Result<PathBuf, String> {
-    let root = workspace_root()?;
+fn desktop_workspace_state_report(
+    app: &AppHandle,
+    status_override: Option<&str>,
+    extra_summary: Option<String>,
+) -> Result<DesktopWorkspaceStateReport, String> {
+    let state = read_desktop_workspace_state(app)?;
+    let fallback_root = workspace_root()?;
+    let selected_path = active_desktop_workspace_root(app)?;
+    let active_path = selected_path
+        .as_ref()
+        .unwrap_or(&fallback_root)
+        .to_string_lossy()
+        .to_string();
+    let active_source = if selected_path.is_some() {
+        state
+            .active_workspace_source
+            .trim()
+            .to_string()
+            .if_empty("imported_or_cloned")
+    } else {
+        "fallback_development_repo".to_string()
+    };
+    let git_status = git_capability_status();
+    let status = status_override.map(ToOwned::to_owned).unwrap_or_else(|| {
+        if selected_path.is_some() {
+            "workspace_selected".to_string()
+        } else {
+            "fallback_ready".to_string()
+        }
+    });
+    let mut summary = vec![
+        "Desktop app workspace host is active.".to_string(),
+        "Source editing and CLI working directories resolve from the app-selected workspace before falling back to the development repository.".to_string(),
+    ];
+    if selected_path.is_none() {
+        summary.push(
+            "No app-owned workspace has been selected yet; using the development repository fallback for local validation."
+                .to_string(),
+        );
+    }
+    if let Some(extra) = extra_summary {
+        summary.push(extra);
+    }
+
+    Ok(DesktopWorkspaceStateReport {
+        schema_version: DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION.to_string(),
+        status,
+        active_workspace_path: active_path,
+        active_workspace_source: active_source,
+        state_path: path_to_string(&desktop_workspace_state_path(app)?),
+        managed_workspace_root: path_to_string(&managed_desktop_workspaces_base_path(app)?),
+        fallback_workspace_path: path_to_string(&fallback_root),
+        git_available: git_status.0,
+        git_version: git_status.1,
+        repository_url: state.repository_url,
+        last_operation: state.last_operation,
+        last_status: state.last_status,
+        updated_at: state.updated_at,
+        summary,
+    })
+}
+
+fn set_desktop_workspace_path_report(
+    app: &AppHandle,
+    workspace_path: &str,
+) -> Result<DesktopWorkspaceStateReport, String> {
+    let canonical = canonical_user_workspace_path(workspace_path)?;
+    let now = current_unix_millis_label();
+    let mut state = read_desktop_workspace_state(app)?;
+    if state.created_at.trim().is_empty() {
+        state.created_at = now.clone();
+    }
+    state.schema_version = DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION.to_string();
+    state.active_workspace_path = path_to_string(&canonical);
+    state.active_workspace_source = "imported_existing_workspace".to_string();
+    state.last_operation = "import_workspace".to_string();
+    state.last_status = "workspace_selected".to_string();
+    state.updated_at = now;
+    write_desktop_workspace_state(app, &state)?;
+    desktop_workspace_state_report(
+        app,
+        Some("workspace_selected"),
+        Some("Existing workspace path is now owned by the desktop app profile.".to_string()),
+    )
+}
+
+fn clone_desktop_workspace_report(
+    app: &AppHandle,
+    repository_url: &str,
+    folder_name: Option<&str>,
+) -> Result<DesktopWorkspaceStateReport, String> {
+    let repository_url = validate_git_repository_url(repository_url)?;
+    let redacted_repository_url = redact_repository_url(&repository_url);
+    let mut state = read_desktop_workspace_state(app)?;
+    let now = current_unix_millis_label();
+    if state.created_at.trim().is_empty() {
+        state.created_at = now.clone();
+    }
+    state.schema_version = DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION.to_string();
+    state.repository_url = redacted_repository_url.clone();
+    state.last_operation = "clone_workspace".to_string();
+    state.updated_at = now;
+
+    let Some(git_path) = resolve_command("git") else {
+        state.last_status = "capability_missing".to_string();
+        write_desktop_workspace_state(app, &state)?;
+        return desktop_workspace_state_report(
+            app,
+            Some("capability_missing"),
+            Some(
+                "Git was not found on PATH, so the app kept the existing workspace selection."
+                    .to_string(),
+            ),
+        );
+    };
+
+    let target_root = managed_desktop_workspaces_base_path(app)?;
+    fs::create_dir_all(&target_root)
+        .map_err(|error| format!("Failed to create managed workspace root: {error}"))?;
+    let folder = workspace_folder_name(folder_name, &repository_url)?;
+    let target = target_root.join(folder);
+    if target.exists() {
+        state.last_status = "target_exists".to_string();
+        write_desktop_workspace_state(app, &state)?;
+        return desktop_workspace_state_report(
+            app,
+            Some("target_exists"),
+            Some(format!(
+                "Managed workspace target already exists: {}",
+                path_to_string(&target)
+            )),
+        );
+    }
+
+    let target_text = path_to_string(&target);
+    let args = [
+        "clone".to_string(),
+        "--depth=1".to_string(),
+        "--".to_string(),
+        repository_url.clone(),
+        target_text.clone(),
+    ];
+    let arg_refs: Vec<&str> = args.iter().map(String::as_str).collect();
+    let output = run_bounded_command(
+        &git_path,
+        &arg_refs,
+        Duration::from_millis(GIT_CLONE_TIMEOUT_MS),
+        MAX_GIT_CLONE_OUTPUT_BYTES,
+    )?;
+
+    if output.status == "passed" {
+        let canonical = target
+            .canonicalize()
+            .map_err(|error| format!("Failed to resolve cloned workspace: {error}"))?;
+        state.active_workspace_path = path_to_string(&canonical);
+        state.active_workspace_source = "cloned_by_desktop_app".to_string();
+        state.last_status = "workspace_cloned".to_string();
+        state.updated_at = current_unix_millis_label();
+        write_desktop_workspace_state(app, &state)?;
+        return desktop_workspace_state_report(
+            app,
+            Some("workspace_cloned"),
+            Some("Repository was cloned into the desktop app managed workspace root.".to_string()),
+        );
+    }
+
+    state.last_status = output.status.clone();
+    write_desktop_workspace_state(app, &state)?;
+    let clone_output = redact_clone_output(
+        &format!(
+            "git clone did not complete: {} {}",
+            output.stdout, output.stderr
+        ),
+        &repository_url,
+        &redacted_repository_url,
+    );
+    desktop_workspace_state_report(
+        app,
+        Some("clone_failed"),
+        Some(truncate_chars(&clone_output, 600)),
+    )
+}
+
+fn read_desktop_workspace_state(app: &AppHandle) -> Result<DesktopWorkspaceState, String> {
+    let path = desktop_workspace_state_path(app)?;
+    if !path.exists() {
+        return Ok(default_desktop_workspace_state());
+    }
+    let content = fs::read_to_string(&path)
+        .map_err(|error| format!("Failed to read desktop workspace state: {error}"))?;
+    let mut state: DesktopWorkspaceState = serde_json::from_str(&content)
+        .map_err(|error| format!("Failed to parse desktop workspace state: {error}"))?;
+    if state.schema_version.trim().is_empty() {
+        state.schema_version = DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION.to_string();
+    }
+    Ok(state)
+}
+
+fn write_desktop_workspace_state(
+    app: &AppHandle,
+    state: &DesktopWorkspaceState,
+) -> Result<(), String> {
+    write_pretty_json(&desktop_workspace_state_path(app)?, state)
+        .map_err(|error| format!("Failed to write desktop workspace state: {error}"))
+}
+
+fn default_desktop_workspace_state() -> DesktopWorkspaceState {
+    DesktopWorkspaceState {
+        schema_version: DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION.to_string(),
+        active_workspace_path: String::new(),
+        active_workspace_source: "unset".to_string(),
+        repository_url: String::new(),
+        last_operation: "none".to_string(),
+        last_status: "unset".to_string(),
+        created_at: String::new(),
+        updated_at: String::new(),
+    }
+}
+
+fn active_desktop_workspace_root(app: &AppHandle) -> Result<Option<PathBuf>, String> {
+    let state = read_desktop_workspace_state(app)?;
+    if state.active_workspace_path.trim().is_empty() {
+        return Ok(None);
+    }
+    let canonical = canonical_user_workspace_path(&state.active_workspace_path)?;
+    Ok(Some(canonical))
+}
+
+fn canonical_user_workspace_path(path: &str) -> Result<PathBuf, String> {
+    let trimmed = path.trim();
+    if trimmed.is_empty() {
+        return Err("Workspace path is required.".to_string());
+    }
+    let value = Path::new(trimmed);
+    if !value.is_absolute() {
+        return Err(
+            "Workspace path must be an absolute path for the desktop app profile.".to_string(),
+        );
+    }
+    let canonical = value
+        .canonicalize()
+        .map_err(|error| format!("Failed to resolve workspace path: {error}"))?;
+    ensure_not_private_root(&canonical)?;
+    if !canonical.is_dir() {
+        return Err("Workspace path must be a directory.".to_string());
+    }
+    Ok(canonical)
+}
+
+fn desktop_workspace_state_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(runtime_data_store_base_path(app)?
+        .join("workspace-host")
+        .join("desktop-workspace-state.v1.json"))
+}
+
+fn managed_desktop_workspaces_base_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(runtime_data_store_base_path(app)?.join("managed-workspaces"))
+}
+
+fn git_capability_status() -> (bool, String) {
+    let Some(git_path) = resolve_command("git") else {
+        return (false, "capability_missing".to_string());
+    };
+    let output = run_bounded_command(
+        &git_path,
+        &["--version"],
+        Duration::from_millis(2_000),
+        MAX_HEALTH_OUTPUT_BYTES,
+    );
+    match output {
+        Ok(output) => (
+            output.status == "passed",
+            first_non_empty_line(&output.stdout)
+                .or_else(|| first_non_empty_line(&output.stderr))
+                .unwrap_or_else(|| "git available".to_string()),
+        ),
+        Err(error) => (false, error),
+    }
+}
+
+fn validate_git_repository_url(repository_url: &str) -> Result<String, String> {
+    let trimmed = repository_url.trim();
+    if trimmed.is_empty() {
+        return Err("Repository URL is required.".to_string());
+    }
+    if trimmed.len() > MAX_GIT_REPOSITORY_URL_BYTES {
+        return Err(format!(
+            "Repository URL is too long. Max size is {MAX_GIT_REPOSITORY_URL_BYTES} bytes."
+        ));
+    }
+    if trimmed.chars().any(char::is_whitespace) {
+        return Err("Repository URL must not contain whitespace.".to_string());
+    }
+    if trimmed.starts_with("https://")
+        || trimmed.starts_with("http://")
+        || trimmed.starts_with("ssh://")
+        || trimmed.starts_with("git@")
+    {
+        return Ok(trimmed.to_string());
+    }
+    Err("Repository URL must be an https, http, ssh, or git@ URL.".to_string())
+}
+
+fn workspace_folder_name(
+    folder_name: Option<&str>,
+    repository_url: &str,
+) -> Result<String, String> {
+    let candidate = folder_name
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+        .map(ToOwned::to_owned)
+        .unwrap_or_else(|| {
+            repository_url
+                .trim_end_matches('/')
+                .rsplit(['/', ':'])
+                .next()
+                .unwrap_or("workspace")
+                .trim_end_matches(".git")
+                .to_string()
+        });
+    if candidate.len() > MAX_WORKSPACE_FOLDER_NAME_BYTES {
+        return Err(format!(
+            "Workspace folder name is too long. Max size is {MAX_WORKSPACE_FOLDER_NAME_BYTES} bytes."
+        ));
+    }
+    let sanitized = sanitize_file_name(&candidate)
+        .trim_matches('-')
+        .trim_matches('.')
+        .to_string();
+    if sanitized.is_empty() {
+        return Err("Workspace folder name is empty after sanitization.".to_string());
+    }
+    Ok(sanitized)
+}
+
+fn redact_repository_url(repository_url: &str) -> String {
+    let Some(scheme_index) = repository_url.find("://") else {
+        return repository_url.to_string();
+    };
+    let credential_start = scheme_index + 3;
+    let Some(at_offset) = repository_url[credential_start..].find('@') else {
+        return repository_url.to_string();
+    };
+    let at_index = credential_start + at_offset;
+    format!(
+        "{}://<credentials>@{}",
+        &repository_url[..scheme_index],
+        &repository_url[at_index + 1..]
+    )
+}
+
+fn redact_clone_output(
+    output: &str,
+    repository_url: &str,
+    redacted_repository_url: &str,
+) -> String {
+    if repository_url == redacted_repository_url {
+        return output.to_string();
+    }
+    output.replace(repository_url, redacted_repository_url)
+}
+
+trait EmptyStringFallback {
+    fn if_empty(self, fallback: &str) -> String;
+}
+
+impl EmptyStringFallback for String {
+    fn if_empty(self, fallback: &str) -> String {
+        if self.trim().is_empty() {
+            fallback.to_string()
+        } else {
+            self
+        }
+    }
+}
+
+fn resolve_workspace_dir(
+    app: &AppHandle,
+    relative_or_absolute: Option<&str>,
+) -> Result<PathBuf, String> {
+    let root = workspace_root_for_app(Some(app))?;
     let candidate = match relative_or_absolute
         .map(str::trim)
         .filter(|value| !value.is_empty())
@@ -4472,10 +4922,11 @@ fn resolve_workspace_dir(relative_or_absolute: Option<&str>) -> Result<PathBuf, 
 }
 
 fn resolve_workspace_file(
+    app: Option<&AppHandle>,
     relative_path: &str,
     existing_required: bool,
 ) -> Result<(PathBuf, String), String> {
-    let root = workspace_root()?;
+    let root = workspace_root_for_app(app)?;
     let normalized = normalize_relative_workspace_path(relative_path)?;
     let path = root.join(&normalized);
     let parent = path
@@ -4534,6 +4985,15 @@ fn normalize_relative_workspace_path(relative_path: &str) -> Result<String, Stri
         return Err("Workspace path is empty.".to_string());
     }
     Ok(normalized.join("/"))
+}
+
+fn workspace_root_for_app(app: Option<&AppHandle>) -> Result<PathBuf, String> {
+    if let Some(app) = app {
+        if let Some(root) = active_desktop_workspace_root(app)? {
+            return Ok(root);
+        }
+    }
+    workspace_root()
 }
 
 fn workspace_root() -> Result<PathBuf, String> {

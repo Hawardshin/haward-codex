@@ -126,6 +126,14 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   assert.match(lib, /get_installer_shell_runtime_contract/);
   assert.match(lib, /get_accumulated_data_overview/);
   assert.equal(contract.runtime_command_surface.accumulated_data_command, "get_accumulated_data_overview");
+  for (const workspaceHostCommand of [
+    "get_desktop_workspace_state",
+    "set_desktop_workspace_path",
+    "clone_desktop_workspace"
+  ]) {
+    assert.match(lib, new RegExp(workspaceHostCommand));
+    assert.ok(contract.runtime_command_surface.workspace_host_commands.includes(workspaceHostCommand));
+  }
   const accumulatedIndexTarget = contract.data_accumulation_targets.find((target) => target.target_id === "accumulated_data_index");
   assert.equal(accumulatedIndexTarget.record_type, "runtime_data_index_manifest");
   assert.equal(accumulatedIndexTarget.directory, "app_data/runtime-data/indexes");
@@ -271,6 +279,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "설치형 데이터 경계",
     "Installer Payload Audit",
     "Support Diagnostic Bundle",
+    "Workspace Host",
+    "앱 워크스페이스",
+    "Import Workspace",
+    "Clone Workspace",
     "Refresh task runs",
     "Open Logs",
     "Prune Old",
@@ -362,6 +374,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "SupportDiagnosticBundleReport",
     "AccumulatedDataOverviewReport",
     "runtime-data-panel",
+    "DesktopWorkspaceStateReport",
+    "get_desktop_workspace_state",
+    "set_desktop_workspace_path",
+    "clone_desktop_workspace",
     "schemaVersion",
     "storageFormatVersion",
     "indexPath",
@@ -409,6 +425,11 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "RuntimeDataBoundaryReport",
     "AccumulatedDataStoreReport",
     "AccumulatedDataOverviewReport",
+    "DesktopWorkspaceStateReport",
+    "DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION",
+    "desktop_workspace_state_path",
+    "managed_desktop_workspaces_base_path",
+    "workspace_root_for_app",
     "ACCUMULATED_DATA_INDEX_SCHEMA_VERSION",
     "ACCUMULATED_DATA_STORAGE_FORMAT_VERSION",
     "accumulated_data_index_path",

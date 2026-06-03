@@ -242,8 +242,7 @@
     "Developer ID signing identity or APPLE_CERTIFICATE credentials are not configured.",
     "Apple notarization credentials are not configured.",
     "Signed updater channel is not configured.",
-    "Clean-machine install/open/update smoke test has not been recorded.",
-    "First-run workspace chooser is not runtime-enforced."
+    "Clean-machine install/open/update smoke test has not been recorded."
   ],
   "runtime_surface_contract": {
     "desktop_panel": "Workspace Monitor Desktop shall show Service Readiness with grouped status, score, blockers, warnings, and next actions.",

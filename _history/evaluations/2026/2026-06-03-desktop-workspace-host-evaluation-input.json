@@ -1,0 +1,135 @@
+{
+  "initial_instruction": "The user said the current workflow is too specialized around cloning a Git repository externally and working in that folder, and directed that this capability should be embedded into the desktop app.",
+  "result_summary": "Implemented a desktop-owned Workspace Host slice: app-data workspace state, import existing workspace, bounded Git clone into a managed app data root, selected-workspace-first source editor and CLI working directory resolution, Workspace Host UI, runtime/readiness/service contracts, requirements/spec/history/evaluation records, and validation.",
+  "work_mode": "ship_first",
+  "changed_files": [
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+    "platform-desktop-app/scripts/check-runtime-contract.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/scripts/check-service-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+    "platform-desktop-app/configs/service-readiness-registry.json",
+    "platform-desktop-app/configs/user-flow-registry.json",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-03-service-readiness.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-03-service-readiness.en.md",
+    "platform-desktop-app/docs/product-boundary.ko.md",
+    "platform-desktop-app/docs/product-boundary.en.md",
+    "platform-desktop-app/docs/first-run-onboarding.ko.md",
+    "platform-desktop-app/docs/first-run-onboarding.en.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/",
+    "platform-desktop-app/specs/2026-06-03-service-readiness/",
+    "platform-desktop-app/README.md",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "_history/web-searches/2026/2026-06-03-desktop-workspace-host.ko.md",
+    "_history/mode-selections/2026/2026-06-03-desktop-workspace-host.json",
+    "_history/source-provenance/2026/2026-06-03-desktop-workspace-host.json",
+    "_history/plan-evidence/2026/2026-06-03-desktop-workspace-host.json",
+    "_history/work-timings/2026/2026-06-03-desktop-workspace-host.json",
+    "_history/request-traces/2026/2026-06-03-desktop-workspace-host.ko.md",
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/2026/2026-06-03.md"
+  ],
+  "verification": [
+    "cargo fmt && cargo check from platform-desktop-app/src-tauri/: passed",
+    "corepack pnpm --filter workspace-monitor run check: passed",
+    "corepack pnpm --filter platform-desktop-app test: passed, 14 tests",
+    "corepack pnpm --filter platform-desktop-app run runtime:contract: passed",
+    "corepack pnpm --filter platform-desktop-app run service:readiness: passed, score 94, workspace onboarding passed, public blockers 3",
+    "corepack pnpm --filter platform-desktop-app run check: passed",
+    "corepack pnpm --filter workspace-monitor test: passed, 16 tests",
+    "corepack pnpm --filter workspace-monitor run build:customer: passed",
+    "corepack pnpm --filter workspace-monitor run perf:budget: within_budget, largest initial chunk 227542 bytes",
+    "corepack pnpm --filter platform-desktop-app run customer-bundle:audit: passed",
+    "corepack pnpm --filter platform-desktop-app run service:readiness:public:report: passed report-only, public blockers 3",
+    "check-config-contract for installer-shell-runtime-contract.json: self_documenting",
+    "check-config-contract for runtime-data-boundary-registry.json: self_documenting",
+    "check-config-contract for user-flow-registry.json: self_documenting",
+    "check-config-contract for service-readiness-registry.json: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-03-desktop-workspace-host-omission-input.json: coverage_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-03-desktop-workspace-host-resource-input.json: resource_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-03-desktop-workspace-host-evaluation-input.json: ready_to_close",
+    "Browser smoke on http://localhost:4177: Workspace Host controls rendered with no horizontal overflow",
+    "git diff --check: passed"
+  ],
+  "references_checked": [
+    "https://v2.tauri.app/reference/javascript/api/namespacepath/",
+    "https://v2.tauri.app/plugin/opener/",
+    "https://git-scm.com/docs/git-clone",
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+    "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+    "platform-desktop-app/configs/user-flow-registry.json"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-03-desktop-workspace-host.ko.md",
+    "_history/source-provenance/2026/2026-06-03-desktop-workspace-host.json",
+    "_history/evaluations/2026/2026-06-03-desktop-workspace-host-omission-result.json",
+    "_history/evaluations/2026/2026-06-03-desktop-workspace-host-resource-result.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-03-desktop-workspace-host.json",
+    "_history/web-searches/2026/2026-06-03-desktop-workspace-host.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-03-desktop-workspace-host.json",
+    "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-03-desktop-workspace-host.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-desktop-workspace-host-omission-result.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-desktop-workspace-host.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-03-service-readiness.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-03-service-readiness.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-desktop-workspace-host.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-desktop-workspace-host.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-03-desktop-workspace-host-resource-result.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": []
+}

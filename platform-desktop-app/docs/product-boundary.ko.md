@@ -38,6 +38,7 @@
 - 이 레포지토리는 플랫폼을 만드는 개발 원천이며, 고객이 설치해서 쓰는 제품은 플랫폼 source tree를 노출하지 않는 앱/런타임/데이터 경계로 배포한다.
 - 사용자 workspace, platform data store, log store, agent workspace는 플랫폼 source code와 분리된 runtime data plane으로 취급한다.
 - agent definition은 `agent-platform/configs/agents/`에 모으고, 설치 앱에서 agent가 실제 작업하는 input/output/log/handoff/temp 파일은 agent workspace plane에 모은다.
+- 사용자가 별도 터미널에서 `git clone` 후 그 폴더에서 앱을 실행하는 흐름은 제품 표면이 아니다. 설치 앱은 Workspace Host에서 기존 workspace import, repository clone, active workspace 선택, workspace state 저장을 직접 제공해야 한다.
 - 로그는 runtime health, task execution, CLI IO, agent work, support diagnostic처럼 분류한 뒤 retention, redaction, support export 정책을 적용한다.
 - 실제 token, webhook URL, browser cookie, private snapshot은 번들에 넣지 않는다.
 - 배포 가능한 앱이라고 부르려면 signing, notarization 또는 OS별 신뢰 체인, 설치/삭제 smoke test, privacy review가 끝나야 한다.

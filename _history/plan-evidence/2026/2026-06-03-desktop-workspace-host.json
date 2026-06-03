@@ -1,0 +1,53 @@
+{
+  "task": "Desktop workspace host",
+  "work_mode": "ship_first",
+  "language_options": [
+    {
+      "option": "Rust/Tauri backend plus TypeScript UI",
+      "decision": "selected",
+      "reason": "Rust already owns app-data paths, process execution bounds, and workspace filesystem checks."
+    },
+    {
+      "option": "Frontend-only workspace selection",
+      "decision": "rejected",
+      "reason": "Would not govern CLI working directories or app-data state persistence."
+    }
+  ],
+  "architecture_options": [
+    {
+      "option": "Manual git clone outside the app",
+      "decision": "rejected",
+      "reason": "Keeps the product dependent on a developer workflow."
+    },
+    {
+      "option": "App-owned workspace host with import and bounded clone",
+      "decision": "selected",
+      "reason": "Moves workspace ownership into the desktop app without adding a new Git library dependency."
+    },
+    {
+      "option": "Add libgit2 or a full Git UI library",
+      "decision": "deferred",
+      "reason": "Branch/commit/pull/push UI needs a broader credential, license, and operational design."
+    }
+  ],
+  "folder_structure_options": [
+    {
+      "option": "Store cloned workspaces under the development repository",
+      "decision": "rejected",
+      "reason": "Would continue coupling customer work to platform source."
+    },
+    {
+      "option": "Store managed workspaces under app_data/runtime-data/managed-workspaces",
+      "decision": "selected",
+      "reason": "Keeps app-managed workspaces in the runtime data plane and outside source payloads."
+    }
+  ],
+  "validation_targets": [
+    "cargo check",
+    "workspace-monitor TypeScript check",
+    "platform-desktop-app tests",
+    "runtime contract check",
+    "service readiness check",
+    "Browser smoke"
+  ]
+}

@@ -129,6 +129,9 @@ Implemented desktop bridge commands:
 - `app_health`
 - `get_installer_shell_runtime_contract`
 - `get_accumulated_data_overview`
+- `get_desktop_workspace_state`
+- `set_desktop_workspace_path`
+- `clone_desktop_workspace`
 - `list_cli_adapters`
 - `run_cli_adapter_health`
 - `run_all_cli_adapter_health`
@@ -144,9 +147,11 @@ Implemented desktop bridge commands:
 - `answer_human_decision`
 - `answer_and_resume_human_decision`
 
-These commands are bounded pipe/session, human decision inbox append, and scoped file-editing product-slice commands. Interactive PTY sessions, source-affecting autonomous execution, xterm.js, and packaged sidecars still require a dependency and permission audit before implementation.
+These commands are bounded workspace-host, pipe/session, human decision inbox append, and scoped file-editing product-slice commands. Interactive PTY sessions, full Git branch/push/pull UI, source-affecting autonomous execution, xterm.js, and packaged sidecars still require a dependency and permission audit before implementation.
 
 `get_accumulated_data_overview` also persists the user-visible accumulated-data schema as `app_data/runtime-data/indexes/accumulated-data-overview.v1.json`, so the installed shell has a stable local manifest instead of only transient screen state.
+
+`clone_desktop_workspace` treats Git as an optional bounded capability. If `git` is unavailable, the app reports `capability_missing` rather than blocking the desktop shell. Repository URL metadata and clone failure output are redacted before state/report exposure when credentials are present in the URL.
 
 Local Tauri build artifacts are generated under:
 

@@ -16,11 +16,11 @@ Feature breadth is not enough for a real service. Operators must be able to see 
 
 - Do not issue Developer ID certificates, store notarization secrets, or operate updater endpoints in this slice.
 - Do not claim public release readiness.
-- Do not yet persist the customer workspace chooser; expose it as a public blocker.
+- Do not claim clean-machine workspace smoke or native OS folder picker completion yet.
 
 ## Acceptance Criteria
 
 - Internal readiness passes without internal blockers while reporting public blockers.
-- Public readiness report shows signing/notarization, signed updater, clean-machine smoke, and runtime workspace chooser blockers.
+- Public readiness report shows signing/notarization, signed updater, and clean-machine smoke blockers.
 - Desktop UI shows Service Readiness, Public blockers, Signed Distribution, and Update & Recovery.
 - Node, TypeScript, Rust, and Tauri validation pass.

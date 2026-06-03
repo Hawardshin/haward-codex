@@ -142,6 +142,16 @@
       ]
     },
     {
+      "id": "workspace_host_owns_clone_and_selection",
+      "rule": "The desktop app must own workspace import, repository clone, active workspace selection, and workspace state persistence through app-data workspace host commands instead of requiring users to manually clone a repository and run tools from that clone.",
+      "reason": "End users should operate through the installed app, while Git remains an optional capability invoked behind bounded app commands.",
+      "applies_to": [
+        "runtime_command_surface",
+        "shell_boot_sequence",
+        "enforcement_gates"
+      ]
+    },
+    {
       "id": "private_and_output_dirs_are_not_runtime_knowledge",
       "rule": "The shell must not recursively read, index, summarize, or bundle `_private/` or `outputs/` by default.",
       "reason": "Local-only private and transient folders are not durable product knowledge sources.",
@@ -526,6 +536,11 @@
     "accumulated_data_command": "get_accumulated_data_overview",
     "payload_audit_command": "run_installer_payload_audit",
     "support_bundle_command": "create_support_diagnostic_bundle",
+    "workspace_host_commands": [
+      "get_desktop_workspace_state",
+      "set_desktop_workspace_path",
+      "clone_desktop_workspace"
+    ],
     "cli_adapter_commands": [
       "list_cli_adapters",
       "run_cli_adapter_health",

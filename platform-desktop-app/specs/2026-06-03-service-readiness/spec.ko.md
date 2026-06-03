@@ -16,11 +16,11 @@
 
 - Developer ID 인증서 발급, notarization secret 저장, updater endpoint 운영은 이번 slice에서 수행하지 않는다.
 - public release ready라고 주장하지 않는다.
-- 고객 workspace chooser의 영구 저장까지 구현하지 않는다. 해당 항목은 public blocker로 노출한다.
+- clean-machine workspace smoke와 OS별 native folder picker까지 완료했다고 주장하지 않는다.
 
 ## 수용 기준
 
 - internal readiness는 blocker 없이 통과하되 public blockers를 보고한다.
-- public readiness report는 signing/notarization, signed updater, clean-machine smoke, runtime workspace chooser blocker를 표시한다.
+- public readiness report는 signing/notarization, signed updater, clean-machine smoke blocker를 표시한다.
 - Desktop UI는 Service Readiness, Public blockers, Signed Distribution, Update & Recovery를 표시한다.
 - Node/TypeScript/Rust/Tauri 검증이 통과한다.

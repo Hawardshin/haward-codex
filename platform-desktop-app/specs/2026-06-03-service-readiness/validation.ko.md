@@ -29,4 +29,15 @@
 - Developer ID signing/notarization credentials
 - signed updater channel and endpoint
 - clean-machine install/open/update smoke
-- runtime-enforced workspace chooser persistence
+
+## 2026-06-03 Desktop Workspace Host 갱신 검증
+
+- `corepack pnpm --filter platform-desktop-app run service:readiness`: passed, `service_internal_ready_public_blocked`, score 94, workspace onboarding passed, public blockers 3
+- `corepack pnpm --filter platform-desktop-app run service:readiness:public:report`: passed report-only, public blockers 3
+- Workspace onboarding은 app-owned `get_desktop_workspace_state`, `set_desktop_workspace_path`, `clone_desktop_workspace` command와 Workspace Host UI로 구현되었다.
+
+## 현재 남은 공개 서비스 blocker
+
+- Developer ID signing/notarization credentials
+- signed updater channel and endpoint
+- clean-machine install/open/update smoke

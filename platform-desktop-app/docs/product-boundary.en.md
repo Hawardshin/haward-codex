@@ -38,6 +38,7 @@ Add desktop-specific UI or native behavior later when requirements are concrete:
 - This repository is the development source for building the platform; the customer product is distributed as an app/runtime/data boundary that does not expose the platform source tree.
 - User workspaces, platform data stores, log stores, and agent workspaces are runtime data planes separated from platform source code.
 - Agent definitions are grouped in `agent-platform/configs/agents/`; runtime agent input/output/log/handoff/temp files belong in the installed app's agent workspace plane.
+- A manual terminal `git clone` followed by running the app from that folder is not the product surface. The installed app must provide existing-workspace import, repository clone, active workspace selection, and workspace state persistence through Workspace Host.
 - Logs are classified as runtime health, task execution, CLI IO, agent work, or support diagnostic before retention, redaction, and support export policies apply.
 - Do not bundle real tokens, webhook URLs, browser cookies, or private snapshots.
 - A build is not distributable until signing, notarization or OS-specific trust requirements, install/uninstall smoke tests, and privacy review are complete.

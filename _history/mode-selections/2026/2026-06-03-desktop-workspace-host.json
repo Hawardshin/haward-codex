@@ -1,0 +1,21 @@
+{
+  "task": "Desktop workspace host",
+  "selected_work_mode": "ship_first",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selected_at": "2026-06-03",
+  "reason": "The user directed that git clone and workspace work should be embedded into the desktop app rather than remain an external developer workflow.",
+  "risk_notes": [
+    "Touches workspace path resolution, source editor scope, CLI working directory scope, optional git clone execution, runtime contract, and service readiness.",
+    "No dependency install, global Git configuration, credential storage, destructive Git operation, or private-folder scan is performed."
+  ],
+  "closeout_gates": [
+    "web_search_record_targets",
+    "requirements_targets",
+    "spec_targets",
+    "omission_check_targets",
+    "resource_check_targets",
+    "verification",
+    "evaluation"
+  ]
+}

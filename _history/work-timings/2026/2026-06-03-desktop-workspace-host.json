@@ -1,0 +1,25 @@
+{
+  "task": "Desktop workspace host",
+  "started_at": "2026-06-03T13:48:00+0900",
+  "updated_at": "2026-06-03T14:03:07+0900",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "elapsed_minutes": 3,
+      "notes": "Checked Tauri app data/opener docs and Git clone manual."
+    },
+    {
+      "phase": "source_review",
+      "elapsed_minutes": 5,
+      "notes": "Reviewed workspace_root, source editor, CLI working dir, runtime contract, and service readiness."
+    },
+    {
+      "phase": "implementation",
+      "elapsed_minutes": 10,
+      "notes": "Added desktop workspace state commands, import/clone UI, app-selected workspace resolution, and readiness tokens."
+    }
+  ],
+  "bottleneck_candidates": [
+    "A fuller Git UI now needs a dedicated credential and branch/push/pull design slice."
+  ]
+}

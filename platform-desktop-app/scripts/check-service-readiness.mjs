@@ -19,6 +19,13 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
   const serializedRegistry = JSON.stringify(registry);
   const tauriLib = readText("src-tauri/src/lib.rs");
   const monitorShell = readText("../workspace-monitor/components/MonitorShell.tsx");
+  const workspacePersistenceReady = [
+    "get_desktop_workspace_state",
+    "set_desktop_workspace_path",
+    "clone_desktop_workspace",
+    "DesktopWorkspaceStateReport",
+    "desktop_workspace_state_path"
+  ].every((token) => tauriLib.includes(token)) && monitorShell.includes("Workspace Host");
 
   const groups = [
     group("runtime_data", "Runtime Data Boundary", [
@@ -39,7 +46,7 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
     group("workspace_onboarding", "Workspace Onboarding", [
       check("first_run_docs", "First-run onboarding documented", existsSync(path.join(root, "docs/first-run-onboarding.ko.md")), "First-run onboarding document exists."),
       check("workspace_flow_registry", "Workspace flow registered", serializedUserFlow.includes("workspace") && serializedUserFlow.includes("first-run"), "User flow registry includes workspace and first-run language."),
-      check("runtime_workspace_persistence", "Runtime workspace chooser enforced", false, "Workspace chooser is documented but not yet runtime-enforced in app settings.", "warning")
+      check("runtime_workspace_persistence", "Runtime workspace chooser enforced", workspacePersistenceReady, "Workspace host commands persist app-owned import/clone/active workspace state.", "warning")
     ]),
     group("privacy_logging", "Privacy & Logging", [
       check("privacy_controls_declared", "Privacy controls declared", serializedRuntimeBoundary.includes("privacy_controls"), "Runtime boundary registry declares privacy controls."),
@@ -85,7 +92,7 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
     releaseInternal,
     releasePublic,
     serviceClaim: publicBlockers.length
-      ? "Internal service readiness is visible, but public service release remains blocked until signing, notarization, updater, clean-machine smoke, and onboarding enforcement are complete."
+      ? "Internal service readiness is visible, but public service release remains blocked until signing, notarization, updater, and clean-machine smoke are complete."
       : "Public service readiness checks have no known blockers; still run clean release validation before final release language."
   };
 }

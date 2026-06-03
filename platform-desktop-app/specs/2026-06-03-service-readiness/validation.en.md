@@ -29,4 +29,15 @@
 - Developer ID signing/notarization credentials
 - signed updater channel and endpoint
 - clean-machine install/open/update smoke
-- runtime-enforced workspace chooser persistence
+
+## 2026-06-03 Desktop Workspace Host Refresh Validation
+
+- `corepack pnpm --filter platform-desktop-app run service:readiness`: passed, `service_internal_ready_public_blocked`, score 94, workspace onboarding passed, 3 public blockers
+- `corepack pnpm --filter platform-desktop-app run service:readiness:public:report`: passed report-only, 3 public blockers
+- Workspace onboarding is now implemented through app-owned `get_desktop_workspace_state`, `set_desktop_workspace_path`, `clone_desktop_workspace` commands and the Workspace Host UI.
+
+## Current Remaining Public Service Blockers
+
+- Developer ID signing/notarization credentials
+- signed updater channel and endpoint
+- clean-machine install/open/update smoke

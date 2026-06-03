@@ -1,0 +1,159 @@
+{
+  "task": "Desktop Workspace Host",
+  "work_mode": "ship_first",
+  "runtime_context": [
+    "rust",
+    "tauri",
+    "git",
+    "subprocess",
+    "react",
+    "nextjs",
+    "browser"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "git-clone-subprocess",
+      "category": "process",
+      "description": "Repository clone launches a Git subprocess that could run too long or produce too much output.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "clone_desktop_workspace uses the existing bounded command runner with a 120 second timeout and 24 KB output cap, records capability_missing if Git is absent, and redacts credential-bearing repository URLs before state/report exposure.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs GIT_CLONE_TIMEOUT_MS",
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_GIT_CLONE_OUTPUT_BYTES",
+        "platform-desktop-app/src-tauri/src/lib.rs run_bounded_command",
+        "platform-desktop-app/src-tauri/src/lib.rs capability_missing",
+        "platform-desktop-app/src-tauri/src/lib.rs redact_repository_url",
+        "platform-desktop-app/src-tauri/src/lib.rs redact_clone_output"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "managed-workspace-storage",
+      "category": "large_data",
+      "description": "Managed cloned workspaces can grow in app data and should remain scoped to an explicit managed root.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Cloned repositories are placed under the app runtime data managed-workspaces root, and workspace folder names are validated and length-capped.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs managed_desktop_workspaces_base_path",
+        "platform-desktop-app/src-tauri/src/lib.rs workspace_folder_name",
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_WORKSPACE_FOLDER_NAME_BYTES"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "workspace-state-file",
+      "category": "file_handle",
+      "description": "Workspace state persistence should not leave persistent handles or write outside the app data boundary.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "State reads and writes use bounded JSON files under runtime-data/workspace-host and create parent directories explicitly.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs desktop_workspace_state_path",
+        "platform-desktop-app/src-tauri/src/lib.rs read_desktop_workspace_state",
+        "platform-desktop-app/src-tauri/src/lib.rs write_desktop_workspace_state"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "workspace-source-scan-after-selection",
+      "category": "large_data",
+      "description": "Selecting or cloning a workspace triggers source file refresh, which must remain bounded.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The existing source catalog scan caps entries and returned results while skipping private, output, VCS, dependency, build, cache, and symlink entries.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_WORKSPACE_SOURCE_SCAN_ENTRIES",
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_WORKSPACE_SOURCE_LIST_LIMIT",
+        "platform-desktop-app/src-tauri/src/lib.rs SOURCE_EDITOR_SKIP_DIRS",
+        "workspace-monitor/components/MonitorShell.tsx refreshRuntimeSourceFiles"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "temporary-smoke-server",
+      "category": "process",
+      "description": "Browser smoke used a temporary local static server.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The static server was stopped after the Browser smoke and no long-running server remains for close-out.",
+      "evidence": [
+        "Browser smoke server at http://localhost:4177 was stopped with Ctrl-C after validation."
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "clone-command-lifecycle",
+      "resource": "git clone subprocess",
+      "create_path": "platform-desktop-app/src-tauri/src/lib.rs clone_desktop_workspace_report invokes run_bounded_command",
+      "cleanup_path": "run_bounded_command terminates on process completion or timeout and returns a bounded report.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo check from platform-desktop-app/src-tauri/: passed",
+        "corepack pnpm --filter platform-desktop-app run runtime:contract: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-state-lifecycle",
+      "resource": "desktop workspace state file",
+      "create_path": "set_desktop_workspace_path_report and clone_desktop_workspace_report write desktop-workspace-state.v1.json",
+      "cleanup_path": "No persistent handle is kept after read/write; app-selected workspace can be replaced by a later import or clone.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs write_desktop_workspace_state",
+        "cargo check from platform-desktop-app/src-tauri/: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser-smoke-server",
+      "resource": "temporary static server",
+      "create_path": "Local static server at http://localhost:4177 for Browser smoke.",
+      "cleanup_path": "Server session was stopped after smoke validation.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Browser smoke completed and server session was stopped."
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "clone-output-bound",
+      "metric": "Git clone timeout and stdout/stderr output bound",
+      "tool": "source inspection plus Rust compile",
+      "threshold": "timeout <= 120000 ms and captured output <= 24000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs GIT_CLONE_TIMEOUT_MS = 120000",
+        "platform-desktop-app/src-tauri/src/lib.rs MAX_GIT_CLONE_OUTPUT_BYTES = 24000",
+        "cargo check from platform-desktop-app/src-tauri/: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "bundle-budget",
+      "metric": "workspace-monitor customer bundle size budget",
+      "tool": "corepack pnpm --filter workspace-monitor run perf:budget",
+      "threshold": "within_budget",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "perf:budget: within_budget, largest initial chunk 227542 bytes"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No global dependency install, daemon, watcher, update channel, or credential storage was added.",
+    "The clone path was implemented with redacted persisted repository URL metadata and redacted clone failure summaries; full private credential handling remains out of scope."
+  ]
+}

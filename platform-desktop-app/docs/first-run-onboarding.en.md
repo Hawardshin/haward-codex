@@ -16,6 +16,7 @@ The onboarding flow should:
 Primary buttons:
 
 - Open existing workspace
+- Clone workspace from Git
 - Create new workspace
 - Try demo
 

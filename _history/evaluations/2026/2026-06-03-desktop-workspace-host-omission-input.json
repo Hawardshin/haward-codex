@@ -1,0 +1,172 @@
+{
+  "task": "Desktop Workspace Host",
+  "work_mode": "ship_first",
+  "expected_items": [
+    {
+      "item_id": "app_owns_git_clone_flow",
+      "description": "Move the git clone and workspace selection flow into the desktop app rather than requiring a pre-cloned external folder.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs clone_desktop_workspace",
+        "platform-desktop-app/src-tauri/src/lib.rs set_desktop_workspace_path",
+        "workspace-monitor/components/MonitorShell.tsx Workspace Host"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "persistent_active_workspace",
+      "description": "Persist the active workspace profile in app data so shell/editor features use the app-selected workspace.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs desktop_workspace_state_path",
+        "platform-desktop-app/src-tauri/src/lib.rs DesktopWorkspaceStateReport",
+        "platform-desktop-app/src-tauri/src/lib.rs workspace_root_for_app"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "cli_and_editor_use_selected_workspace",
+      "description": "Source editor file operations and CLI session/task working directories should prefer the app-selected workspace.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs start_cli_adapter_session",
+        "platform-desktop-app/src-tauri/src/lib.rs start_cli_task_pipeline",
+        "platform-desktop-app/src-tauri/src/lib.rs list_workspace_text_files",
+        "platform-desktop-app/src-tauri/src/lib.rs write_workspace_text_file"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "desktop_app_not_single_web_screen",
+      "description": "Expose workspace host behavior as a desktop runtime panel rather than hiding it behind manual developer setup.",
+      "source": "prior_user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx desktop-workspace-panel",
+        "workspace-monitor/components/MonitorShell.tsx Import Workspace",
+        "workspace-monitor/components/MonitorShell.tsx Clone Workspace"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "capability_missing_degrade",
+      "description": "If Git is unavailable, clone should degrade as capability_missing without blocking the whole app.",
+      "source": "repository_policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs git_capability_status",
+        "platform-desktop-app/src-tauri/src/lib.rs capability_missing",
+        "platform-desktop-app/README.md clone_desktop_workspace"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "durable_records",
+      "description": "Manage the change through requirements, specs, tasks, validation, traceability, web-first record, and history files.",
+      "source": "repository_policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/",
+        "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+        "platform-desktop-app/docs/requirements/2026-06-03-service-readiness.ko.md",
+        "_history/web-searches/2026/2026-06-03-desktop-workspace-host.ko.md",
+        "_history/request-traces/2026/2026-06-03-desktop-workspace-host.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/src-tauri/src/lib.rs",
+      "purpose": "Runtime desktop workspace host commands and workspace root resolution.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Workspace Host panel and command invocation UI.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+      "purpose": "Runtime command contract for app-owned workspace host behavior.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/spec.ko.md",
+      "purpose": "Task scope and acceptance criteria.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/validation.ko.md",
+      "purpose": "Build, readiness, contract, and Browser smoke validation record.",
+      "required": true
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-03-desktop-workspace-host.ko.md",
+      "purpose": "Web-first official source record.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "runtime_backend_validation",
+      "description": "Rust formatting and compile checks pass for workspace host commands.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo fmt && cargo check from platform-desktop-app/src-tauri/: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace_monitor_validation",
+      "description": "Workspace Monitor type checks, tests, customer build, and bundle budget pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter workspace-monitor run check: passed",
+        "corepack pnpm --filter workspace-monitor test: 16 passed",
+        "corepack pnpm --filter workspace-monitor run build:customer: passed",
+        "corepack pnpm --filter workspace-monitor run perf:budget: within_budget, largest initial chunk 227542 bytes"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform_desktop_validation",
+      "description": "Platform desktop tests, readiness, service readiness, runtime contract, and customer bundle audit pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter platform-desktop-app test: 14 passed",
+        "corepack pnpm --filter platform-desktop-app run check: passed",
+        "corepack pnpm --filter platform-desktop-app run runtime:contract: passed",
+        "corepack pnpm --filter platform-desktop-app run service:readiness: passed",
+        "corepack pnpm --filter platform-desktop-app run customer-bundle:audit: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser_smoke",
+      "description": "In-app Browser smoke confirms the Runtime tab renders Workspace Host controls without horizontal overflow.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Browser smoke on http://localhost:4177: Workspace Host, 앱 워크스페이스, Import Workspace, Clone Workspace, managed root, state file, .desktop-workspace-panel, body/doc width 1280/1280"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [],
+  "notes": [
+    "No actual remote repository was cloned during validation to avoid unnecessary network side effects; the clone command path is bounded and covered by compile, contract, readiness, and UI smoke checks."
+  ]
+}

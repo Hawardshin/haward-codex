@@ -144,6 +144,28 @@ failIf(
   contract.runtime_command_surface?.accumulated_data_command !== "get_accumulated_data_overview",
   "runtime_command_surface.accumulated_data_command must be get_accumulated_data_overview"
 );
+for (const workspaceHostCommand of [
+  "get_desktop_workspace_state",
+  "set_desktop_workspace_path",
+  "clone_desktop_workspace"
+]) {
+  failIf(
+    !(contract.runtime_command_surface?.workspace_host_commands ?? []).includes(workspaceHostCommand),
+    `runtime_command_surface.workspace_host_commands must include ${workspaceHostCommand}`
+  );
+  failIf(!tauriLib.includes(workspaceHostCommand), `src-tauri/src/lib.rs must include ${workspaceHostCommand}`);
+}
+for (const workspaceHostToken of [
+  "DesktopWorkspaceStateReport",
+  "DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION",
+  "desktop_workspace_state_path",
+  "managed_desktop_workspaces_base_path",
+  "workspace_root_for_app",
+  "redact_repository_url",
+  "redact_clone_output"
+]) {
+  failIf(!tauriLib.includes(workspaceHostToken), `src-tauri/src/lib.rs must include ${workspaceHostToken}`);
+}
 const accumulatedIndexTarget = (contract.data_accumulation_targets ?? []).find((target) => target.target_id === "accumulated_data_index");
 failIf(
   accumulatedIndexTarget?.record_type !== "runtime_data_index_manifest",

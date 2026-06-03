@@ -40,10 +40,11 @@
 | PDA-REQ-030 | 설치 앱이 띄우는 shell/runtime은 작업 전 bundled installer shell runtime contract를 읽어야 하며, 그 계약에 정의된 required read targets, enforcement gates, data accumulation targets를 따라 task, decision, evidence, validation, evaluation 기록을 구조화해 축적해야 한다. | must | `runtime-contracts/installer-shell-runtime-contract.json`, `get_installer_shell_runtime_contract`, `check-runtime-contract.mjs`, readiness/test |
 | PDA-REQ-031 | 사용자는 설치형 데스크톱 앱 안에서 축적된 task run, decision inbox, payload audit, support bundle, agent workspace 데이터를 전용 Accumulated Data surface로 쉽게 볼 수 있어야 하며, 각 store의 record count, size, latest update, path, visibility, action label이 표시되어야 한다. | must | `get_accumulated_data_overview`, Workspace Monitor Accumulated Data panel, readiness/test |
 | PDA-REQ-032 | Accumulated Data surface는 raw directory scan 결과만 화면에 반환하지 않고 `app_data/runtime-data/indexes/accumulated-data-overview.v1.json` versioned manifest를 저장해야 하며, UI는 schema version, storage format version, manifest path, migration status를 표시해야 한다. | must | `accumulated_data_index_path`, `AccumulatedDataOverviewReport.schemaVersion`, runtime contract target, readiness/test |
+| PDA-REQ-033 | 설치형 데스크톱 앱은 사용자가 별도 터미널에서 git clone 후 그 폴더에서 작업해야 하는 구조에 의존하지 않고, 앱 안에서 기존 workspace import, repository clone, active workspace 선택, workspace state persistence를 제공해야 하며 source editor와 CLI working directory는 app-selected workspace를 우선 사용해야 한다. | must | `get_desktop_workspace_state`, `set_desktop_workspace_path`, `clone_desktop_workspace`, Workspace Host panel, readiness/test |
 
 ## 현재 상태
 
 - 상태: 제품 shell baseline
 - 실제 desktop dependency 설치: Tauri/Rust local build path 설치 감사 완료
 - 현재 선택: Tauri-first product shell
-- 다음 단계: public signing/notarization, signed updater, clean-machine smoke test, persistent workspace chooser enforcement
+- 다음 단계: public signing/notarization, signed updater, clean-machine smoke test

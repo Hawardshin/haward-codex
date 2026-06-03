@@ -263,6 +263,8 @@
       "label": "User Workspace",
       "contents": [
         "customer-selected project folders",
+        "repositories cloned through the desktop Workspace Host",
+        "app-selected active workspace profile",
         "customer task files",
         "customer-visible exports and artifacts"
       ],
@@ -481,6 +483,10 @@
     {
       "step": "add_accumulated_data_index",
       "description": "Expose a bounded read-only index of accumulated task runs, decisions, audits, support bundles, and agent work, and persist it as app_data/runtime-data/indexes/accumulated-data-overview.v1.json so users can inspect what the product is storing."
+    },
+    {
+      "step": "add_desktop_workspace_host",
+      "description": "Persist app-owned workspace state and expose existing-workspace import plus bounded Git clone so users do not need to manually clone and run tools from a development repository."
     },
     {
       "step": "verify_installer_payload",

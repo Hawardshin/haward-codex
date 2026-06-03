@@ -40,10 +40,11 @@ These are the first requirements for turning the platform into installable softw
 | PDA-REQ-030 | The shell/runtime launched by the installed app shall read the bundled installer shell runtime contract before work and follow its required read targets, enforcement gates, and data accumulation targets to accumulate structured task, decision, evidence, validation, and evaluation records. | must | `runtime-contracts/installer-shell-runtime-contract.json`, `get_installer_shell_runtime_contract`, `check-runtime-contract.mjs`, readiness/test |
 | PDA-REQ-031 | Users shall be able to view accumulated task run, decision inbox, payload audit, support bundle, and agent workspace data inside the installable desktop app through a dedicated Accumulated Data surface that shows each store's record count, size, latest update, path, visibility, and action label. | must | `get_accumulated_data_overview`, Workspace Monitor Accumulated Data panel, readiness/test |
 | PDA-REQ-032 | The Accumulated Data surface shall not only return raw directory scan results to the screen; it shall persist a versioned manifest at `app_data/runtime-data/indexes/accumulated-data-overview.v1.json`, and the UI shall show schema version, storage format version, manifest path, and migration status. | must | `accumulated_data_index_path`, `AccumulatedDataOverviewReport.schemaVersion`, runtime contract target, readiness/test |
+| PDA-REQ-033 | The installable desktop app shall not rely on users manually running git clone in a terminal and then working from that clone; it shall provide existing-workspace import, repository clone, active workspace selection, and workspace state persistence inside the app, and source editing plus CLI working directories shall prefer the app-selected workspace. | must | `get_desktop_workspace_state`, `set_desktop_workspace_path`, `clone_desktop_workspace`, Workspace Host panel, readiness/test |
 
 ## Current Status
 
 - Status: product shell baseline
 - Actual desktop dependency installation: Tauri/Rust local build path installation audit completed
 - Current selection: Tauri-first product shell
-- Next step: public signing/notarization, signed updater, clean-machine smoke tests, and persistent workspace chooser enforcement
+- Next step: public signing/notarization, signed updater, and clean-machine smoke tests

@@ -922,6 +922,23 @@ type WorkspaceTextFileListReport = {
   files: WorkspaceSourceFile[];
 };
 
+type DesktopWorkspaceStateReport = {
+  schemaVersion: string;
+  status: string;
+  activeWorkspacePath: string;
+  activeWorkspaceSource: string;
+  statePath: string;
+  managedWorkspaceRoot: string;
+  fallbackWorkspacePath: string;
+  gitAvailable: boolean;
+  gitVersion: string;
+  repositoryUrl: string;
+  lastOperation: string;
+  lastStatus: string;
+  updatedAt: string;
+  summary: string[];
+};
+
 type SourceDraftEntry = {
   relativePath: string;
   baseContent: string;
@@ -3297,6 +3314,12 @@ function DesktopRuntimePanel({
   const [serviceReadiness, setServiceReadiness] = useState<ServiceReadinessReport | null>(null);
   const [serviceReadinessBusy, setServiceReadinessBusy] = useState(false);
   const [serviceReadinessNotice, setServiceReadinessNotice] = useState("");
+  const [desktopWorkspace, setDesktopWorkspace] = useState<DesktopWorkspaceStateReport | null>(null);
+  const [workspaceHostBusy, setWorkspaceHostBusy] = useState("");
+  const [workspaceHostNotice, setWorkspaceHostNotice] = useState("");
+  const [workspaceImportPath, setWorkspaceImportPath] = useState("");
+  const [workspaceCloneUrl, setWorkspaceCloneUrl] = useState("");
+  const [workspaceCloneFolder, setWorkspaceCloneFolder] = useState("");
   const [inboxReport, setInboxReport] = useState<HumanDecisionInboxReport | null>(null);
   const [error, setError] = useState("");
   const [runningAdapterId, setRunningAdapterId] = useState("");
@@ -3661,6 +3684,87 @@ function DesktopRuntimePanel({
     }
   };
 
+  const refreshDesktopWorkspace = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setDesktopWorkspace(null);
+      return;
+    }
+
+    setWorkspaceHostBusy("refresh");
+    setError("");
+    try {
+      const report = await tauriInvoke<DesktopWorkspaceStateReport>("get_desktop_workspace_state");
+      setDesktopWorkspace(report);
+      if (!workspaceImportPath && report.activeWorkspacePath) {
+        setWorkspaceImportPath(report.activeWorkspacePath);
+      }
+      setWorkspaceHostNotice("");
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setWorkspaceHostBusy("");
+    }
+  };
+
+  const importDesktopWorkspace = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setError("Tauri desktop runtime is not available in this browser view.");
+      return;
+    }
+    if (!workspaceImportPath.trim()) {
+      setWorkspaceHostNotice("Workspace path is required");
+      return;
+    }
+
+    setWorkspaceHostBusy("import");
+    setError("");
+    try {
+      const report = await tauriInvoke<DesktopWorkspaceStateReport>("set_desktop_workspace_path", {
+        path: workspaceImportPath.trim()
+      });
+      setDesktopWorkspace(report);
+      setWorkspaceHostNotice(report.status);
+      await refreshRuntimeSourceFiles();
+      void refreshServiceReadiness();
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setWorkspaceHostBusy("");
+    }
+  };
+
+  const cloneDesktopWorkspace = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setError("Tauri desktop runtime is not available in this browser view.");
+      return;
+    }
+    if (!workspaceCloneUrl.trim()) {
+      setWorkspaceHostNotice("Repository URL is required");
+      return;
+    }
+
+    setWorkspaceHostBusy("clone");
+    setError("");
+    try {
+      const report = await tauriInvoke<DesktopWorkspaceStateReport>("clone_desktop_workspace", {
+        repositoryUrl: workspaceCloneUrl.trim(),
+        folderName: workspaceCloneFolder.trim() || null
+      });
+      setDesktopWorkspace(report);
+      setWorkspaceImportPath(report.activeWorkspacePath);
+      setWorkspaceHostNotice(report.status);
+      await refreshRuntimeSourceFiles();
+      void refreshServiceReadiness();
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setWorkspaceHostBusy("");
+    }
+  };
+
   const refreshAccumulatedDataOverview = async () => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
@@ -3690,6 +3794,7 @@ function DesktopRuntimePanel({
       setRuntimeState("unavailable");
       setHealth(null);
       setAdapters(fallbackDesktopAdapters);
+      setDesktopWorkspace(null);
       return;
     }
 
@@ -3703,7 +3808,8 @@ function DesktopRuntimePanel({
         nextTaskRunRecords,
         nextRuntimeDataBoundary,
         nextAccumulatedDataOverview,
-        nextServiceReadiness
+        nextServiceReadiness,
+        nextDesktopWorkspace
       ] = await Promise.all([
         tauriInvoke<DesktopHealthStatus>("app_health"),
         tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
@@ -3713,7 +3819,8 @@ function DesktopRuntimePanel({
         tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records"),
         tauriInvoke<RuntimeDataBoundaryReport>("list_runtime_data_roots"),
         tauriInvoke<AccumulatedDataOverviewReport>("get_accumulated_data_overview"),
-        tauriInvoke<ServiceReadinessReport>("get_service_readiness_report")
+        tauriInvoke<ServiceReadinessReport>("get_service_readiness_report"),
+        tauriInvoke<DesktopWorkspaceStateReport>("get_desktop_workspace_state")
       ]);
       if (!panelMountedRef.current) {
         return;
@@ -3730,6 +3837,9 @@ function DesktopRuntimePanel({
       setAccumulatedDataNotice("");
       setServiceReadiness(nextServiceReadiness);
       setServiceReadinessNotice("");
+      setDesktopWorkspace(nextDesktopWorkspace);
+      setWorkspaceImportPath(nextDesktopWorkspace.activeWorkspacePath);
+      setWorkspaceHostNotice("");
       setDecisionResumeNotice("");
       if (!selectedDecisionId && nextInbox.decisions[0]) {
         setSelectedDecisionId(nextInbox.decisions[0].id);
@@ -3758,6 +3868,8 @@ function DesktopRuntimePanel({
       setSupportBundle(null);
       setServiceReadiness(null);
       setServiceReadinessNotice("");
+      setDesktopWorkspace(null);
+      setWorkspaceHostNotice("");
       setInboxReport(null);
       setDecisionResumeNotice("");
       setError(errorMessage(caught));
@@ -4747,6 +4859,11 @@ function DesktopRuntimePanel({
             <span>Service readiness</span>
             <small>{serviceReadiness ? `${serviceReadiness.score} / ${serviceReadiness.publicBlockers.length} blockers` : "not checked"}</small>
           </button>
+          <button type="button" onClick={refreshDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== ""}>
+            <FolderKanban size={16} aria-hidden="true" />
+            <span>Workspace host</span>
+            <small>{desktopWorkspace?.status || "not loaded"}</small>
+          </button>
           <button type="button" onClick={deferDetectedQuestions} disabled={!invoke || decisionBusy || pendingQuestionCount === 0}>
             <ShieldCheck size={16} aria-hidden="true" />
             <span>Defer detected questions</span>
@@ -4757,6 +4874,101 @@ function DesktopRuntimePanel({
             <span>Open source review</span>
             <small>{sourceDiff?.dirty ? "draft changed" : "ready"}</small>
           </button>
+        </div>
+      </section>
+
+      <section className="panel wide desktop-workspace-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Workspace Host</p>
+            <h2>앱 워크스페이스</h2>
+          </div>
+          <div className="desktop-actions">
+            <button type="button" onClick={refreshDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== ""}>
+              <Activity size={16} aria-hidden="true" />
+              <span>{workspaceHostBusy === "refresh" ? "Refreshing" : "Refresh"}</span>
+            </button>
+          </div>
+        </div>
+        {workspaceHostNotice && <p className="decision-resume-notice">{workspaceHostNotice}</p>}
+
+        <div className="task-run-summary-strip">
+          <article>
+            <span>status</span>
+            <strong>{desktopWorkspace?.status || "not-loaded"}</strong>
+          </article>
+          <article>
+            <span>source</span>
+            <strong>{desktopWorkspace?.activeWorkspaceSource || "pending"}</strong>
+          </article>
+          <article>
+            <span>git</span>
+            <strong>{desktopWorkspace?.gitAvailable ? "available" : "missing"}</strong>
+          </article>
+          <article>
+            <span>operation</span>
+            <strong>{desktopWorkspace?.lastOperation || "none"}</strong>
+          </article>
+          <article>
+            <span>last status</span>
+            <strong>{desktopWorkspace?.lastStatus || "unset"}</strong>
+          </article>
+        </div>
+
+        <div className="task-pipe-layout">
+          <div className="task-pipe-controls">
+            <label>
+              <span>Import path</span>
+              <input
+                value={workspaceImportPath}
+                onChange={(event) => setWorkspaceImportPath(event.target.value)}
+                placeholder="/absolute/workspace/path"
+              />
+            </label>
+            <button type="button" onClick={importDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== "" || !workspaceImportPath.trim()}>
+              <FolderOpen size={16} aria-hidden="true" />
+              <span>{workspaceHostBusy === "import" ? "Importing" : "Import Workspace"}</span>
+            </button>
+            <label>
+              <span>Repository URL</span>
+              <input
+                value={workspaceCloneUrl}
+                onChange={(event) => setWorkspaceCloneUrl(event.target.value)}
+                placeholder="https://github.com/org/repo.git"
+              />
+            </label>
+            <label>
+              <span>Folder name</span>
+              <input
+                value={workspaceCloneFolder}
+                onChange={(event) => setWorkspaceCloneFolder(event.target.value)}
+                placeholder="managed-workspace"
+              />
+            </label>
+            <button type="button" onClick={cloneDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== "" || !workspaceCloneUrl.trim()}>
+              <GitBranch size={16} aria-hidden="true" />
+              <span>{workspaceHostBusy === "clone" ? "Cloning" : "Clone Workspace"}</span>
+            </button>
+          </div>
+
+          <div className="task-pipe-summary">
+            <article>
+              <span>active workspace</span>
+              <code>{desktopWorkspace?.activeWorkspacePath || "runtime workspace pending"}</code>
+            </article>
+            <article>
+              <span>managed root</span>
+              <code>{desktopWorkspace?.managedWorkspaceRoot || "app data workspace root pending"}</code>
+            </article>
+            <article>
+              <span>state file</span>
+              <code>{desktopWorkspace?.statePath || "workspace state pending"}</code>
+            </article>
+            <article>
+              <span>git version</span>
+              <strong>{desktopWorkspace?.gitVersion || "not checked"}</strong>
+            </article>
+          </div>
         </div>
       </section>
 

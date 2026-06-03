@@ -1,0 +1,36 @@
+{
+  "task": "Desktop workspace host",
+  "source_types": [
+    "official_docs",
+    "internal_contract",
+    "source_code"
+  ],
+  "external_sources": [
+    {
+      "url": "https://v2.tauri.app/reference/javascript/api/namespacepath/",
+      "type": "official_docs",
+      "used_for": "Confirm app data directory as the local runtime state location.",
+      "accessed": "2026-06-03"
+    },
+    {
+      "url": "https://v2.tauri.app/plugin/opener/",
+      "type": "official_docs",
+      "used_for": "Review future OS file/folder opening integration boundary.",
+      "accessed": "2026-06-03"
+    },
+    {
+      "url": "https://git-scm.com/docs/git-clone",
+      "type": "official_docs",
+      "used_for": "Confirm git clone command semantics for repository-to-working-tree creation.",
+      "accessed": "2026-06-03"
+    }
+  ],
+  "internal_sources": [
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+    "platform-desktop-app/configs/service-readiness-registry.json",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md"
+  ],
+  "decision_summary": "Implemented an app-owned desktop workspace host. Git clone is a bounded optional capability, while active workspace state is persisted under app data and used by source editing plus CLI working directory resolution."
+}
