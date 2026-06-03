@@ -43,6 +43,7 @@ import {
   NativeGitWorkbench,
   type DesktopGitActionReport,
   type DesktopGitStatusReport,
+  type DesktopGitWorkbenchActionPayload,
   type DesktopGitWorkbenchAction
 } from "@/components/workbench/NativeGitWorkbench";
 import { PathDisclosure } from "@/components/workbench/PathDisclosure";
@@ -5322,7 +5323,7 @@ function DesktopRuntimePanel({
     }
   };
 
-  const runDesktopGitAction = async (action: DesktopGitWorkbenchAction) => {
+  const runDesktopGitAction = async (action: DesktopGitWorkbenchAction, payload?: DesktopGitWorkbenchActionPayload) => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setError(copy.noRuntime);
@@ -5335,7 +5336,9 @@ function DesktopRuntimePanel({
         input: {
           action,
           commitMessage: desktopGitCommitMessage,
-          branchName: desktopGitBranchName
+          branchName: desktopGitBranchName,
+          filePaths: payload?.filePaths || [],
+          stashRef: payload?.stashRef || ""
         }
       });
       setDesktopGitStatus(report.git);
@@ -7173,7 +7176,7 @@ function DesktopRuntimePanel({
         workspacePathFallback={desktopWorkspace?.activeWorkspacePath || ""}
         onBranchNameChange={setDesktopGitBranchName}
         onCommitMessageChange={setDesktopGitCommitMessage}
-        onRunAction={(action) => void runDesktopGitAction(action)}
+        onRunAction={(action, payload) => void runDesktopGitAction(action, payload)}
       />
 
       <section className="panel wide task-pipe-panel">

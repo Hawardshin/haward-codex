@@ -1,0 +1,17 @@
+{
+  "schema_version": "resource-check.v1",
+  "request_id": "UR-2026-06-04-001",
+  "checked_at": "2026-06-04",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    "bounded git subprocesses",
+    "browser smoke static server",
+    "renderer scroll containers"
+  ],
+  "controls": [
+    "Git subprocess output and timeout bounds remain enforced",
+    "History and stash list sizes are bounded",
+    "Browser smoke server was stopped before close-out"
+  ],
+  "status": "passed_with_browser_plugin_limit"
+}

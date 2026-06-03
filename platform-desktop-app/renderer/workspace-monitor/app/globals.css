@@ -3889,17 +3889,19 @@ h3 {
 
 .native-git-actions {
   display: grid;
-  grid-template-rows: auto auto auto auto auto auto minmax(0, auto);
   gap: 10px;
   align-content: start;
   min-width: 0;
   min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
   border: 1px solid color-mix(in srgb, var(--line) 82%, var(--green) 12%);
   border-radius: 8px;
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--surface-muted) 86%, var(--green) 5%), var(--surface-muted)),
     var(--surface-muted);
   padding: 12px;
+  scrollbar-gutter: stable;
 }
 
 .native-git-sync-card {
@@ -3920,7 +3922,7 @@ h3 {
 
 .native-git-sync-card div {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 7px;
 }
 
@@ -3985,7 +3987,7 @@ h3 {
 
 .native-git-file-list {
   display: grid;
-  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto auto minmax(0, 1fr) auto;
   gap: 10px;
   min-width: 0;
   min-height: 0;
@@ -4058,6 +4060,62 @@ h3 {
   text-transform: none;
 }
 
+.native-git-view-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  min-width: 0;
+}
+
+.native-git-view-tabs button {
+  min-width: 0;
+  min-height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.native-git-view-tabs button.active {
+  border-color: color-mix(in srgb, var(--blue) 48%, var(--line));
+  background: color-mix(in srgb, var(--surface) 82%, var(--blue) 10%);
+  color: var(--text);
+}
+
+.native-git-select-all {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  padding: 7px 8px;
+}
+
+.native-git-select-all input,
+.native-git-files input {
+  accent-color: var(--blue);
+}
+
+.native-git-select-all span {
+  min-width: 0;
+  overflow-wrap: break-word;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.native-git-changes-list {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 8px;
+  min-width: 0;
+  min-height: 0;
+}
+
 .native-git-files {
   display: grid;
   gap: 6px;
@@ -4072,9 +4130,9 @@ h3 {
 .native-git-files button {
   position: relative;
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-columns: auto 34px minmax(0, 1fr);
   gap: 7px;
-  align-items: start;
+  align-items: center;
   min-width: 0;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--line) 82%, var(--slate) 8%);
@@ -4085,6 +4143,11 @@ h3 {
   padding: 8px 9px 8px 12px;
   color: var(--text);
   text-align: left;
+}
+
+.native-git-files input {
+  position: relative;
+  z-index: 1;
 }
 
 .native-git-files button::before {
@@ -4133,6 +4196,61 @@ h3 {
 .native-git-files small {
   display: block;
   margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.native-git-history-list,
+.native-git-stash-list {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding-right: 2px;
+  scrollbar-gutter: stable;
+}
+
+.native-git-history-list button,
+.native-git-stash-list button {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 84%, var(--slate) 8%);
+  border-radius: 7px;
+  background: var(--surface);
+  padding: 9px;
+  color: var(--text);
+  text-align: left;
+}
+
+.native-git-history-list button:not(:disabled):hover,
+.native-git-history-list button.active,
+.native-git-stash-list button:not(:disabled):hover,
+.native-git-stash-list button.active {
+  border-color: color-mix(in srgb, var(--blue) 46%, var(--line));
+  background: color-mix(in srgb, var(--surface) 86%, var(--blue) 8%);
+}
+
+.native-git-history-list span,
+.native-git-stash-list span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.native-git-history-list strong,
+.native-git-history-list small,
+.native-git-stash-list strong,
+.native-git-stash-list small {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.native-git-history-list small,
+.native-git-stash-list small {
   color: var(--muted);
   font-size: 12px;
 }
@@ -4279,6 +4397,64 @@ h3 {
   max-width: 420px;
   color: #9cadbd;
   font-size: 12px;
+}
+
+.native-git-history-detail {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-height: 0;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 10px;
+  scrollbar-gutter: stable;
+}
+
+.native-git-history-detail article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-muted);
+  padding: 8px 9px;
+}
+
+.native-git-history-detail strong {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.native-git-history-detail span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.native-git-stash-detail,
+.native-git-danger-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.native-git-stash-detail {
+  align-content: start;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 10px;
+}
+
+.native-git-danger-actions button:last-child {
+  border-color: color-mix(in srgb, #d45d5d 46%, var(--line));
+  color: color-mix(in srgb, #d45d5d 80%, var(--text));
 }
 
 .native-git-actions pre {

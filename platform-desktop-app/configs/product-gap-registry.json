@@ -177,8 +177,8 @@
     ]
   },
   "coverage_summary": {
-    "audited_request_count": 13,
-    "covered_request_count": 12,
+    "audited_request_count": 14,
+    "covered_request_count": 13,
     "partial_request_count": 2,
     "missing_product_slice_count": 0,
     "structural_debt_count": 1,
@@ -194,12 +194,23 @@
       "covered_evidence": [
         "Desktop shell with titlebar, activity rail, sidebar, content viewport, settings dialog, task timeline, and decision inbox",
         "Operator Center separation and user/customer view sections",
-        "Native Git Workbench exposes a GitHub Desktop-like changed-file list, selected-file diff preview, commit box, and pull/push actions inside the desktop workspace host"
+        "Native Git Workbench exposes GitHub Desktop-like Changes/History/Stash tabs, changed-file include checkboxes, selected-file diff preview, selected/all commit, discard, stash, and pull/push actions inside the desktop workspace host"
       ],
       "remaining_gap_ids": [
         "componentized_desktop_ui_architecture"
       ],
       "notes": "The app is no longer a one-screen web dashboard and the workspace Git flow is now native to the desktop shell. The remaining concern is MonitorShell component ownership."
+    },
+    {
+      "request_id": "UR-2026-06-04-001",
+      "coverage": "covered",
+      "covered_evidence": [
+        "Native Git Workbench now has GitHub Desktop-like Changes, History, and Stash views inside the desktop runtime",
+        "Changes supports include checkboxes, selected-file diff preview, selected-file commit, all-change commit, selected discard, selected stash, and all stash",
+        "Git status payload includes recent commit history, stash list, file-level additions/deletions, state flags, and bounded diff preview"
+      ],
+      "remaining_gap_ids": [],
+      "notes": "The workbench now implements the core GitHub Desktop-style local Git workflow. Advanced GitHub service integrations such as PR creation/review are future product surfaces rather than blockers for local Git workbench parity."
     },
     {
       "request_id": "UR-2026-06-03-025",
@@ -417,14 +428,14 @@
       "current_evidence": [
         "get_desktop_workspace_state, set_desktop_workspace_path, choose_desktop_workspace_folder, and clone_desktop_workspace are implemented",
         "get_desktop_git_status and run_desktop_git_action are implemented as Tauri commands",
-        "NativeGitWorkbench component exposes status refresh, branch creation, commit all, pull --ff-only, push, file status, selected-file diff preview, line counts, remotes, and command output",
+        "NativeGitWorkbench component exposes Changes/History/Stash views, status refresh, fetch, branch creation, selected/all commit, selected discard, selected/all stash, stash apply/pop/drop, pull, push, file status, selected-file diff preview, line counts, remotes, and command output",
         "Installer shell runtime contract declares the Git workspace host commands",
         "Native Git Workbench architecture docs record the credential/SSH sensitive-file boundary",
         "Readiness tests verify the runtime command surface and UI tokens"
       ],
       "acceptance_to_close": [
         "Native folder picker is available for workspace import.",
-        "Git branch, status, changed-file list, selected-file diff preview, commit, pull, push, and conflict state are visible as desktop workbench actions.",
+        "Git branch, status, changed-file list, include checkbox, selected-file diff preview, history, stash, selected/all commit, discard, pull, push, and conflict state are visible as desktop workbench actions.",
         "Credential and SSH key behavior is documented and guarded by the sensitive-file boundary policy.",
         "Clean workspace smoke test proves import/clone/source/CLI handoff."
       ],

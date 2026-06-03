@@ -460,6 +460,37 @@ struct DesktopGitRemoteReport {
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
+struct DesktopGitHistoryFileReport {
+    path: String,
+    additions: usize,
+    deletions: usize,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DesktopGitHistoryCommitReport {
+    hash: String,
+    short_hash: String,
+    subject: String,
+    author: String,
+    authored_at: String,
+    files_changed: usize,
+    additions: usize,
+    deletions: usize,
+    files: Vec<DesktopGitHistoryFileReport>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DesktopGitStashReport {
+    reference: String,
+    branch: String,
+    message: String,
+    files_changed: usize,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 struct DesktopGitStatusReport {
     schema_version: String,
     status: String,
@@ -478,6 +509,8 @@ struct DesktopGitStatusReport {
     untracked_count: usize,
     files: Vec<DesktopGitFileReport>,
     remotes: Vec<DesktopGitRemoteReport>,
+    history: Vec<DesktopGitHistoryCommitReport>,
+    stashes: Vec<DesktopGitStashReport>,
     last_command_status: String,
     last_command_output: String,
     last_command_error: String,
@@ -491,6 +524,8 @@ struct DesktopGitActionInput {
     action: String,
     commit_message: String,
     branch_name: String,
+    file_paths: Vec<String>,
+    stash_ref: String,
 }
 
 impl Default for DesktopGitActionInput {
@@ -499,6 +534,8 @@ impl Default for DesktopGitActionInput {
             action: "refresh".to_string(),
             commit_message: String::new(),
             branch_name: String::new(),
+            file_paths: Vec::new(),
+            stash_ref: String::new(),
         }
     }
 }
@@ -849,6 +886,9 @@ const MAX_GIT_DIFF_PREVIEW_FILES: usize = 32;
 const MAX_GIT_DIFF_PREVIEW_LINES: usize = 80;
 const MAX_GIT_DIFF_PREVIEW_OUTPUT_BYTES: usize = 24_000;
 const MAX_GIT_COMMIT_MESSAGE_CHARS: usize = 500;
+const MAX_GIT_ACTION_FILE_PATHS: usize = 120;
+const MAX_GIT_HISTORY_COMMITS: usize = 40;
+const MAX_GIT_STASHES: usize = 20;
 const DESKTOP_GIT_STATUS_SCHEMA_VERSION: &str = "desktop-git-status.v1";
 const MAX_WORKSPACE_FOLDER_NAME_BYTES: usize = 120;
 const MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS: usize = 20;
@@ -5480,6 +5520,8 @@ fn desktop_git_status_report(
             untracked_count: 0,
             files: Vec::new(),
             remotes: Vec::new(),
+            history: Vec::new(),
+            stashes: Vec::new(),
             last_command_status: last_command_status.unwrap_or_else(|| "not_run".to_string()),
             last_command_output: last_command_output.unwrap_or_default(),
             last_command_error: last_command_error.unwrap_or_default(),
@@ -5514,6 +5556,8 @@ fn desktop_git_status_report(
             untracked_count: 0,
             files: Vec::new(),
             remotes: Vec::new(),
+            history: Vec::new(),
+            stashes: Vec::new(),
             last_command_status: last_command_status.unwrap_or_else(|| "not_run".to_string()),
             last_command_output: last_command_output.unwrap_or_default(),
             last_command_error: last_command_error
@@ -5587,6 +5631,8 @@ fn desktop_git_status_report(
     if conflicted {
         summary.push("Conflict state is visible; resolve files before commit/pull/push.".to_string());
     }
+    let history = git_history_reports(&git_path, &repository_root_path);
+    let stashes = git_stash_reports(&git_path, &repository_root_path);
 
     Ok(DesktopGitStatusReport {
         schema_version: DESKTOP_GIT_STATUS_SCHEMA_VERSION.to_string(),
@@ -5606,6 +5652,8 @@ fn desktop_git_status_report(
         untracked_count,
         files,
         remotes,
+        history,
+        stashes,
         last_command_status: last_command_status.unwrap_or_else(|| "not_run".to_string()),
         last_command_output: last_command_output.unwrap_or_default(),
         last_command_error: last_command_error.unwrap_or_default(),
@@ -5620,7 +5668,21 @@ fn run_desktop_git_action_report(
 ) -> Result<DesktopGitActionReport, String> {
     let action = normalize_one_of(
         input.action,
-        &["refresh", "create_branch", "commit_all", "pull_ff", "push"],
+        &[
+            "refresh",
+            "fetch",
+            "create_branch",
+            "commit_all",
+            "commit_selected",
+            "discard_selected",
+            "stash_all",
+            "stash_selected",
+            "apply_stash",
+            "pop_stash",
+            "drop_stash",
+            "pull_ff",
+            "push",
+        ],
         "refresh",
     );
     if action == "refresh" {
@@ -5683,8 +5745,20 @@ fn run_desktop_git_action_report(
         .map(ToOwned::to_owned)
         .unwrap_or_else(|| path_to_string(&workspace));
     let repository_root_path = PathBuf::from(repository_root_text);
+    let selected_paths = validate_git_relative_paths(&input.file_paths, &repository_root_path)?;
+    let stash_ref = validate_git_stash_ref(&input.stash_ref)?;
 
     let (command_label, output) = match action.as_str() {
+        "fetch" => (
+            "git fetch --prune".to_string(),
+            run_bounded_command_in_dir(
+                &git_path,
+                &["fetch", "--prune"],
+                &repository_root_path,
+                Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                MAX_GIT_OPERATION_OUTPUT_BYTES,
+            )?,
+        ),
         "create_branch" => {
             let branch = validate_git_branch_name(&input.branch_name)?;
             let args = ["switch", "-c", branch.as_str()];
@@ -5723,6 +5797,100 @@ fn run_desktop_git_action_report(
                     )?,
                 )
             }
+        }
+        "commit_selected" => {
+            let message = validate_git_commit_message(&input.commit_message)?;
+            let add_output = run_git_with_owned_args(
+                &git_path,
+                &git_args_with_paths(&["add", "--"], &selected_paths)?,
+                &repository_root_path,
+                Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                MAX_GIT_OPERATION_OUTPUT_BYTES,
+            )?;
+            if add_output.status != "passed" {
+                ("git add -- <selected files>".to_string(), add_output)
+            } else {
+                (
+                    "git commit -m <message> -- <selected files>".to_string(),
+                    run_git_with_owned_args(
+                        &git_path,
+                        &git_args_with_paths(&["commit", "-m", message.as_str(), "--"], &selected_paths)?,
+                        &repository_root_path,
+                        Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                        MAX_GIT_OPERATION_OUTPUT_BYTES,
+                    )?,
+                )
+            }
+        }
+        "discard_selected" => (
+            "git restore --staged --worktree && git clean -f -- <selected files>".to_string(),
+            git_discard_selected_changes(&git_path, &repository_root_path, &selected_paths)?,
+        ),
+        "stash_all" => {
+            let message = git_stash_message(&input.commit_message);
+            let args = ["stash", "push", "--include-untracked", "-m", message.as_str()];
+            (
+                "git stash push --include-untracked -m <message>".to_string(),
+                run_bounded_command_in_dir(
+                    &git_path,
+                    &args,
+                    &repository_root_path,
+                    Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                    MAX_GIT_OPERATION_OUTPUT_BYTES,
+                )?,
+            )
+        }
+        "stash_selected" => {
+            let message = git_stash_message(&input.commit_message);
+            (
+                "git stash push --include-untracked -m <message> -- <selected files>".to_string(),
+                run_git_with_owned_args(
+                    &git_path,
+                    &git_args_with_paths(&["stash", "push", "--include-untracked", "-m", message.as_str(), "--"], &selected_paths)?,
+                    &repository_root_path,
+                    Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                    MAX_GIT_OPERATION_OUTPUT_BYTES,
+                )?,
+            )
+        }
+        "apply_stash" => {
+            let stash_ref = require_git_stash_ref(&stash_ref)?;
+            (
+                format!("git stash apply {stash_ref}"),
+                run_bounded_command_in_dir(
+                    &git_path,
+                    &["stash", "apply", stash_ref.as_str()],
+                    &repository_root_path,
+                    Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                    MAX_GIT_OPERATION_OUTPUT_BYTES,
+                )?,
+            )
+        }
+        "pop_stash" => {
+            let stash_ref = require_git_stash_ref(&stash_ref)?;
+            (
+                format!("git stash pop {stash_ref}"),
+                run_bounded_command_in_dir(
+                    &git_path,
+                    &["stash", "pop", stash_ref.as_str()],
+                    &repository_root_path,
+                    Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                    MAX_GIT_OPERATION_OUTPUT_BYTES,
+                )?,
+            )
+        }
+        "drop_stash" => {
+            let stash_ref = require_git_stash_ref(&stash_ref)?;
+            (
+                format!("git stash drop {stash_ref}"),
+                run_bounded_command_in_dir(
+                    &git_path,
+                    &["stash", "drop", stash_ref.as_str()],
+                    &repository_root_path,
+                    Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                    MAX_GIT_OPERATION_OUTPUT_BYTES,
+                )?,
+            )
         }
         "pull_ff" => (
             "git pull --ff-only".to_string(),
@@ -5951,6 +6119,144 @@ fn git_remote_reports(git_path: &PathBuf, repository_root: &Path) -> Vec<Desktop
         })
         .take(12)
         .collect()
+}
+
+fn git_history_reports(git_path: &PathBuf, repository_root: &Path) -> Vec<DesktopGitHistoryCommitReport> {
+    let count_arg = format!("-n{MAX_GIT_HISTORY_COMMITS}");
+    let output = run_bounded_command_in_dir(
+        git_path,
+        &[
+            "log",
+            count_arg.as_str(),
+            "--date=iso-strict",
+            "--numstat",
+            "--format=format:%H%x1f%h%x1f%s%x1f%an%x1f%ad",
+        ],
+        repository_root,
+        Duration::from_millis(4_000),
+        MAX_GIT_OPERATION_OUTPUT_BYTES,
+    );
+    let Some(output) = output.ok().filter(|value| value.status == "passed") else {
+        return Vec::new();
+    };
+    parse_git_history_reports(&redact_sensitive_text(&output.stdout))
+}
+
+fn parse_git_history_reports(output: &str) -> Vec<DesktopGitHistoryCommitReport> {
+    let mut commits = Vec::new();
+    let mut current: Option<DesktopGitHistoryCommitReport> = None;
+    for line in output.lines() {
+        if line.contains('\u{1f}') {
+            if let Some(commit) = current.take() {
+                commits.push(commit);
+            }
+            let mut parts = line.split('\u{1f}');
+            let hash = parts.next().unwrap_or_default().to_string();
+            let short_hash = parts.next().unwrap_or_default().to_string();
+            let subject = parts.next().unwrap_or_default().to_string();
+            let author = parts.next().unwrap_or_default().to_string();
+            let authored_at = parts.next().unwrap_or_default().to_string();
+            current = Some(DesktopGitHistoryCommitReport {
+                hash,
+                short_hash,
+                subject: truncate_chars(subject.trim(), 180),
+                author: truncate_chars(author.trim(), 80),
+                authored_at: truncate_chars(authored_at.trim(), 80),
+                files_changed: 0,
+                additions: 0,
+                deletions: 0,
+                files: Vec::new(),
+            });
+            continue;
+        }
+        let Some(commit) = current.as_mut() else {
+            continue;
+        };
+        let mut parts = line.split('\t');
+        let additions = parts.next().unwrap_or_default();
+        let deletions = parts.next().unwrap_or_default();
+        if additions.is_empty() || deletions.is_empty() {
+            continue;
+        }
+        let path = parts.next().unwrap_or_default();
+        commit.files_changed += 1;
+        let parsed_additions = additions.parse::<usize>().unwrap_or(0);
+        let parsed_deletions = deletions.parse::<usize>().unwrap_or(0);
+        commit.additions += parsed_additions;
+        commit.deletions += parsed_deletions;
+        if commit.files.len() < 12 {
+            commit.files.push(DesktopGitHistoryFileReport {
+                path: truncate_chars(redact_sensitive_text(path).trim(), 180),
+                additions: parsed_additions,
+                deletions: parsed_deletions,
+            });
+        }
+    }
+    if let Some(commit) = current {
+        commits.push(commit);
+    }
+    commits.truncate(MAX_GIT_HISTORY_COMMITS);
+    commits
+}
+
+fn git_stash_reports(git_path: &PathBuf, repository_root: &Path) -> Vec<DesktopGitStashReport> {
+    let output = run_bounded_command_in_dir(
+        git_path,
+        &["stash", "list", "--format=%gd%x1f%gs"],
+        repository_root,
+        Duration::from_millis(3_000),
+        MAX_GIT_OPERATION_OUTPUT_BYTES,
+    );
+    let Some(output) = output.ok().filter(|value| value.status == "passed") else {
+        return Vec::new();
+    };
+    output
+        .stdout
+        .lines()
+        .take(MAX_GIT_STASHES)
+        .filter_map(|line| {
+            let mut parts = line.split('\u{1f}');
+            let reference = parts.next()?.trim().to_string();
+            if reference.is_empty() {
+                return None;
+            }
+            let raw_message = parts.next().unwrap_or_default().trim();
+            let (branch, message) = parse_git_stash_subject(raw_message);
+            let files_changed = git_stash_file_count(git_path, repository_root, &reference);
+            Some(DesktopGitStashReport {
+                reference,
+                branch,
+                message,
+                files_changed,
+            })
+        })
+        .collect()
+}
+
+fn parse_git_stash_subject(raw_message: &str) -> (String, String) {
+    let sanitized = truncate_chars(redact_sensitive_text(raw_message).trim(), 220);
+    let prefix = "WIP on ";
+    if let Some(rest) = sanitized.strip_prefix(prefix) {
+        if let Some((branch, message)) = rest.split_once(": ") {
+            return (branch.to_string(), message.to_string());
+        }
+    }
+    (String::new(), sanitized)
+}
+
+fn git_stash_file_count(git_path: &PathBuf, repository_root: &Path, stash_ref: &str) -> usize {
+    let output = run_bounded_command_in_dir(
+        git_path,
+        &["stash", "show", "--name-only", stash_ref],
+        repository_root,
+        Duration::from_millis(2_000),
+        MAX_GIT_OPERATION_OUTPUT_BYTES,
+    );
+    output
+        .ok()
+        .filter(|value| value.status == "passed")
+        .map(|value| value.stdout.lines().filter(|line| !line.trim().is_empty()).count())
+        .unwrap_or(0)
 }
 
 fn parse_git_status_files(
@@ -6204,6 +6510,229 @@ fn git_file_has_unstaged_change(status: &str) -> bool {
 fn git_status_is_conflicted(status: &str) -> bool {
     matches!(status, "DD" | "AU" | "UD" | "UA" | "DU" | "AA" | "UU")
         || status.chars().any(|character| character == 'U')
+}
+
+fn run_git_with_owned_args(
+    git_path: &PathBuf,
+    args: &[String],
+    repository_root: &Path,
+    timeout: Duration,
+    max_output_bytes: usize,
+) -> Result<ProcessOutput, String> {
+    let arg_refs = args.iter().map(String::as_str).collect::<Vec<_>>();
+    run_bounded_command_in_dir(git_path, &arg_refs, repository_root, timeout, max_output_bytes)
+}
+
+fn git_args_with_paths(prefix: &[&str], paths: &[String]) -> Result<Vec<String>, String> {
+    if paths.is_empty() {
+        return Err("Select at least one changed file first.".to_string());
+    }
+    if paths.len() > MAX_GIT_ACTION_FILE_PATHS {
+        return Err(format!(
+            "Too many files selected. Max selection is {MAX_GIT_ACTION_FILE_PATHS} files."
+        ));
+    }
+    let mut args = prefix.iter().map(|value| value.to_string()).collect::<Vec<_>>();
+    args.extend(paths.iter().cloned());
+    Ok(args)
+}
+
+fn validate_git_relative_paths(paths: &[String], repository_root: &Path) -> Result<Vec<String>, String> {
+    let root = repository_root
+        .canonicalize()
+        .map_err(|error| format!("Failed to resolve repository root: {error}"))?;
+    let mut seen = HashSet::new();
+    let mut safe_paths = Vec::new();
+    for raw_path in paths.iter().take(MAX_GIT_ACTION_FILE_PATHS + 1) {
+        let path = raw_path.trim();
+        if path.is_empty() {
+            continue;
+        }
+        if path.len() > MAX_WORKSPACE_FOLDER_NAME_BYTES * 8 {
+            return Err("Selected file path is too long for desktop Git operations.".to_string());
+        }
+        if path.chars().any(|character| character.is_control()) {
+            return Err("Selected file path contains control characters.".to_string());
+        }
+        let path_value = Path::new(path);
+        if path_value.is_absolute() {
+            return Err("Selected Git file path must be repository-relative.".to_string());
+        }
+        let mut component_values = Vec::new();
+        for component in path_value.components() {
+            match component {
+                Component::Normal(value) => component_values.push(value.to_string_lossy().to_string()),
+                Component::CurDir => {}
+                Component::ParentDir | Component::RootDir | Component::Prefix(_) => {
+                    return Err("Selected Git file path cannot leave the repository.".to_string());
+                }
+            }
+        }
+        if component_values.is_empty() || component_values.first().is_some_and(|value| value == ".git") {
+            return Err("Selected Git file path is not allowed.".to_string());
+        }
+        let normalized = component_values.join("/");
+        let candidate = root.join(&normalized);
+        if let Ok(canonical) = candidate.canonicalize() {
+            if !canonical.starts_with(&root) {
+                return Err("Selected Git file path resolved outside the repository.".to_string());
+            }
+        }
+        if seen.insert(normalized.clone()) {
+            safe_paths.push(normalized);
+        }
+    }
+    if paths.len() > MAX_GIT_ACTION_FILE_PATHS {
+        return Err(format!(
+            "Too many files selected. Max selection is {MAX_GIT_ACTION_FILE_PATHS} files."
+        ));
+    }
+    Ok(safe_paths)
+}
+
+fn git_discard_selected_changes(
+    git_path: &PathBuf,
+    repository_root: &Path,
+    selected_paths: &[String],
+) -> Result<ProcessOutput, String> {
+    let tracked_paths = git_filter_paths(
+        git_path,
+        repository_root,
+        &["ls-files", "--cached", "--"],
+        selected_paths,
+    )?;
+    let untracked_paths = git_filter_paths(
+        git_path,
+        repository_root,
+        &["ls-files", "--others", "--exclude-standard", "--"],
+        selected_paths,
+    )?;
+    if tracked_paths.is_empty() && untracked_paths.is_empty() {
+        return Ok(ProcessOutput {
+            status: "failed".to_string(),
+            exit_code: Some(1),
+            stdout: String::new(),
+            stderr: "No selected changed files matched Git status.".to_string(),
+            duration_ms: 0,
+        });
+    }
+
+    let mut combined = ProcessOutput {
+        status: "passed".to_string(),
+        exit_code: Some(0),
+        stdout: String::new(),
+        stderr: String::new(),
+        duration_ms: 0,
+    };
+
+    if !tracked_paths.is_empty() {
+        let output = run_git_with_owned_args(
+            git_path,
+            &git_args_with_paths(&["restore", "--staged", "--worktree", "--"], &tracked_paths)?,
+            repository_root,
+            Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+            MAX_GIT_OPERATION_OUTPUT_BYTES,
+        )?;
+        append_git_process_output(&mut combined, &output);
+        if output.status != "passed" {
+            return Ok(combined);
+        }
+    }
+
+    if !untracked_paths.is_empty() {
+        let output = run_git_with_owned_args(
+            git_path,
+            &git_args_with_paths(&["clean", "-f", "-d", "--"], &untracked_paths)?,
+            repository_root,
+            Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+            MAX_GIT_OPERATION_OUTPUT_BYTES,
+        )?;
+        append_git_process_output(&mut combined, &output);
+    }
+
+    Ok(combined)
+}
+
+fn git_filter_paths(
+    git_path: &PathBuf,
+    repository_root: &Path,
+    prefix: &[&str],
+    selected_paths: &[String],
+) -> Result<Vec<String>, String> {
+    if selected_paths.is_empty() {
+        return Ok(Vec::new());
+    }
+    let output = run_git_with_owned_args(
+        git_path,
+        &git_args_with_paths(prefix, selected_paths)?,
+        repository_root,
+        Duration::from_millis(3_000),
+        MAX_GIT_OPERATION_OUTPUT_BYTES,
+    )?;
+    if output.status != "passed" {
+        return Ok(Vec::new());
+    }
+    let allowed = selected_paths.iter().cloned().collect::<HashSet<_>>();
+    Ok(output
+        .stdout
+        .lines()
+        .map(str::trim)
+        .filter(|line| !line.is_empty())
+        .filter(|line| allowed.contains(*line))
+        .map(ToOwned::to_owned)
+        .collect())
+}
+
+fn append_git_process_output(target: &mut ProcessOutput, output: &ProcessOutput) {
+    if output.status != "passed" {
+        target.status = output.status.clone();
+        target.exit_code = output.exit_code;
+    }
+    target.duration_ms += output.duration_ms;
+    if !output.stdout.trim().is_empty() {
+        if !target.stdout.is_empty() {
+            target.stdout.push('\n');
+        }
+        target.stdout.push_str(&output.stdout);
+    }
+    if !output.stderr.trim().is_empty() {
+        if !target.stderr.is_empty() {
+            target.stderr.push('\n');
+        }
+        target.stderr.push_str(&output.stderr);
+    }
+}
+
+fn git_stash_message(value: &str) -> String {
+    let message = truncate_chars(value.trim(), MAX_GIT_COMMIT_MESSAGE_CHARS);
+    if message.is_empty() {
+        "Desktop workbench stash".to_string()
+    } else {
+        message
+    }
+}
+
+fn validate_git_stash_ref(value: &str) -> Result<String, String> {
+    let stash_ref = value.trim();
+    if stash_ref.is_empty() {
+        return Ok(String::new());
+    }
+    if !stash_ref.starts_with("stash@{") || !stash_ref.ends_with('}') {
+        return Err("Stash reference must look like stash@{0}.".to_string());
+    }
+    let index = &stash_ref[7..stash_ref.len().saturating_sub(1)];
+    if index.is_empty() || !index.chars().all(|character| character.is_ascii_digit()) {
+        return Err("Stash reference must use a numeric index.".to_string());
+    }
+    Ok(stash_ref.to_string())
+}
+
+fn require_git_stash_ref(stash_ref: &str) -> Result<String, String> {
+    if stash_ref.trim().is_empty() {
+        Err("Select a stash first.".to_string())
+    } else {
+        Ok(stash_ref.to_string())
+    }
 }
 
 fn validate_git_commit_message(value: &str) -> Result<String, String> {

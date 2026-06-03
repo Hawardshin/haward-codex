@@ -123,7 +123,7 @@ test("product gap registry keeps unresolved user-request gaps visible", () => {
   assert.equal(registry.name, "product-gap-registry");
   assert.match(requirementsKo, /PDA-REQ-037/);
   assert.match(requirementsEn, /PDA-REQ-037/);
-  assert.equal(registry.coverage_summary.audited_request_count, 13);
+  assert.equal(registry.coverage_summary.audited_request_count, 14);
   for (const requestId of [
     "UR-2026-06-03-024",
     "UR-2026-06-03-025",
@@ -137,7 +137,8 @@ test("product gap registry keeps unresolved user-request gaps visible", () => {
     "UR-2026-06-03-033",
     "UR-2026-06-03-034",
     "UR-2026-06-03-035",
-    "UR-2026-06-03-036"
+    "UR-2026-06-03-036",
+    "UR-2026-06-04-001"
   ]) {
     assert.ok(registry.request_coverage.some((item) => item.request_id === requestId));
   }
@@ -724,13 +725,22 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "native-git-diff-pane",
     "native-git-diff-preview",
     "native-git-change-meter",
+    "native-git-view-tabs",
+    "native-git-select-all",
+    "native-git-history-list",
+    "native-git-stash-list",
     "diffPreview",
     "changeKind",
     "additions",
     "deletions",
-    "Git 상태 새로고침",
-    "변경사항과 커밋",
-    "Pull --ff-only",
+    "commit_selected",
+    "discard_selected",
+    "stash_selected",
+    "apply_stash",
+    "새로고침",
+    "Git 작업대",
+    "선택 커밋",
+    "Pull",
     "writeClipboardText",
     "AgentFactoryWizard",
     "Agent proposal 저장",

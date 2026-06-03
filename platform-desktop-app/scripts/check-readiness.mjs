@@ -366,7 +366,8 @@ for (const requiredRequestId of [
   "UR-2026-06-03-033",
   "UR-2026-06-03-034",
   "UR-2026-06-03-035",
-  "UR-2026-06-03-036"
+  "UR-2026-06-03-036",
+  "UR-2026-06-04-001"
 ]) {
   if (!productGapRegistry.request_coverage?.some((item) => item.request_id === requiredRequestId)) {
     failures.push(`product-gap-registry must include request coverage for ${requiredRequestId}`);
@@ -799,13 +800,22 @@ for (const requiredPhrase of [
   "native-git-diff-pane",
   "native-git-diff-preview",
   "native-git-change-meter",
+  "native-git-view-tabs",
+  "native-git-select-all",
+  "native-git-history-list",
+  "native-git-stash-list",
   "diffPreview",
   "changeKind",
   "additions",
   "deletions",
-  "Git 상태 새로고침",
-  "변경사항과 커밋",
-  "Pull --ff-only",
+  "commit_selected",
+  "discard_selected",
+  "stash_selected",
+  "apply_stash",
+  "새로고침",
+  "Git 작업대",
+  "선택 커밋",
+  "Pull",
   "writeClipboardText",
   "nativeWorkspaceCopy",
   "native-file-workspace-panel",

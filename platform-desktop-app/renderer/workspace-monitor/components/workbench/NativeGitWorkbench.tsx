@@ -1,4 +1,4 @@
-import { Activity, ArrowRight, CheckCircle2, ClipboardCheck, FileSearch, GitBranch, ShieldCheck } from "lucide-react";
+import { Activity, Archive, ArrowRight, ClipboardCheck, Clock3, FileSearch, GitBranch, RotateCcw, ShieldCheck, Trash2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 export type DesktopGitFileReport = {
@@ -26,6 +26,31 @@ export type DesktopGitRemoteReport = {
   direction: string;
 };
 
+export type DesktopGitHistoryFileReport = {
+  path: string;
+  additions: number;
+  deletions: number;
+};
+
+export type DesktopGitHistoryCommitReport = {
+  hash: string;
+  shortHash: string;
+  subject: string;
+  author: string;
+  authoredAt: string;
+  filesChanged: number;
+  additions: number;
+  deletions: number;
+  files: DesktopGitHistoryFileReport[];
+};
+
+export type DesktopGitStashReport = {
+  reference: string;
+  branch: string;
+  message: string;
+  filesChanged: number;
+};
+
 export type DesktopGitStatusReport = {
   schemaVersion: string;
   status: string;
@@ -44,6 +69,8 @@ export type DesktopGitStatusReport = {
   untrackedCount: number;
   files: DesktopGitFileReport[];
   remotes: DesktopGitRemoteReport[];
+  history: DesktopGitHistoryCommitReport[];
+  stashes: DesktopGitStashReport[];
   lastCommandStatus: string;
   lastCommandOutput: string;
   lastCommandError: string;
@@ -61,7 +88,27 @@ export type DesktopGitActionReport = {
   git: DesktopGitStatusReport;
 };
 
-export type DesktopGitWorkbenchAction = "refresh" | "create_branch" | "commit_all" | "pull_ff" | "push";
+export type DesktopGitWorkbenchAction =
+  | "refresh"
+  | "fetch"
+  | "create_branch"
+  | "commit_all"
+  | "commit_selected"
+  | "discard_selected"
+  | "stash_all"
+  | "stash_selected"
+  | "apply_stash"
+  | "pop_stash"
+  | "drop_stash"
+  | "pull_ff"
+  | "push";
+
+export type DesktopGitWorkbenchActionPayload = {
+  filePaths?: string[];
+  stashRef?: string;
+};
+
+type NativeGitView = "changes" | "history" | "stashes";
 
 type NativeGitWorkbenchProps = {
   status: DesktopGitStatusReport | null;
@@ -73,7 +120,7 @@ type NativeGitWorkbenchProps = {
   workspacePathFallback: string;
   onBranchNameChange: (value: string) => void;
   onCommitMessageChange: (value: string) => void;
-  onRunAction: (action: DesktopGitWorkbenchAction) => void;
+  onRunAction: (action: DesktopGitWorkbenchAction, payload?: DesktopGitWorkbenchActionPayload) => void;
 };
 
 export function NativeGitWorkbench({
@@ -89,16 +136,29 @@ export function NativeGitWorkbench({
   onRunAction
 }: NativeGitWorkbenchProps) {
   const files = useMemo(() => status?.files || [], [status?.files]);
+  const history = useMemo(() => status?.history || [], [status?.history]);
+  const stashes = useMemo(() => status?.stashes || [], [status?.stashes]);
   const dirtyCount = status ? status.stagedCount + status.unstagedCount + status.untrackedCount : 0;
+  const [activeView, setActiveView] = useState<NativeGitView>("changes");
   const [selectedPath, setSelectedPath] = useState("");
+  const [includedPaths, setIncludedPaths] = useState<Set<string>>(new Set());
+  const [selectedHistoryHash, setSelectedHistoryHash] = useState("");
+  const [selectedStashRef, setSelectedStashRef] = useState("");
   const selectedFile = files.find((file) => file.path === selectedPath) || files[0] || null;
+  const selectedHistory = history.find((commit) => commit.hash === selectedHistoryHash) || history[0] || null;
+  const selectedStash = stashes.find((stash) => stash.reference === selectedStashRef) || stashes[0] || null;
+  const includedFiles = files.filter((file) => includedPaths.has(file.path));
+  const includedFilePaths = includedFiles.map((file) => file.path);
   const totalAdditions = files.reduce((total, file) => total + file.additions, 0);
   const totalDeletions = files.reduce((total, file) => total + file.deletions, 0);
+  const includedAdditions = includedFiles.reduce((total, file) => total + file.additions, 0);
+  const includedDeletions = includedFiles.reduce((total, file) => total + file.deletions, 0);
+  const allFilesIncluded = files.length > 0 && includedFiles.length === files.length;
   const reviewState = status?.conflicted
     ? "충돌 해결 필요"
     : status?.clean
       ? "커밋할 변경 없음"
-      : `${dirtyCount}개 변경 검토`;
+      : `${includedFiles.length}/${dirtyCount}개 포함`;
   const syncState = status?.behind
     ? `${status.behind} behind`
     : status?.ahead
@@ -110,23 +170,79 @@ export function NativeGitWorkbench({
   useEffect(() => {
     if (!files.length) {
       setSelectedPath("");
+      setIncludedPaths(new Set());
       return;
     }
     setSelectedPath((current) => (files.some((file) => file.path === current) ? current : files[0].path));
+    setIncludedPaths(new Set(files.map((file) => file.path)));
   }, [files]);
+
+  useEffect(() => {
+    if (!history.length) {
+      setSelectedHistoryHash("");
+      return;
+    }
+    setSelectedHistoryHash((current) => (history.some((commit) => commit.hash === current) ? current : history[0].hash));
+  }, [history]);
+
+  useEffect(() => {
+    if (!stashes.length) {
+      setSelectedStashRef("");
+      return;
+    }
+    setSelectedStashRef((current) => (stashes.some((stash) => stash.reference === current) ? current : stashes[0].reference));
+  }, [stashes]);
+
+  const toggleIncludedPath = (path: string) => {
+    setIncludedPaths((current) => {
+      const next = new Set(current);
+      if (next.has(path)) {
+        next.delete(path);
+      } else {
+        next.add(path);
+      }
+      return next;
+    });
+  };
+
+  const toggleAllIncluded = () => {
+    setIncludedPaths(allFilesIncluded ? new Set() : new Set(files.map((file) => file.path)));
+  };
+
+  const runAction = (action: DesktopGitWorkbenchAction, payload?: DesktopGitWorkbenchActionPayload) => {
+    onRunAction(action, payload);
+  };
+
+  const discardSelected = () => {
+    if (!includedFilePaths.length) {
+      return;
+    }
+    if (window.confirm(`${includedFilePaths.length}개 선택 파일의 작업 트리 변경을 버릴까요? 이 작업은 되돌릴 수 없습니다.`)) {
+      runAction("discard_selected", { filePaths: includedFilePaths });
+    }
+  };
+
+  const dropSelectedStash = () => {
+    if (!selectedStash) {
+      return;
+    }
+    if (window.confirm(`${selectedStash.reference} stash를 삭제할까요?`)) {
+      runAction("drop_stash", { stashRef: selectedStash.reference });
+    }
+  };
 
   return (
     <section className="panel wide native-git-panel">
       <div className="panel-heading">
         <div>
           <p className="eyebrow">Native Git Workbench</p>
-          <h2>변경사항과 커밋</h2>
-          <p>변경 파일을 고르고 diff preview를 검토한 뒤 같은 화면에서 커밋, pull, push를 처리합니다.</p>
+          <h2>Git 작업대</h2>
+          <p>변경 선택, diff 검토, 커밋, stash, history, fetch/pull/push를 한 작업대에서 처리합니다.</p>
         </div>
         <div className="desktop-actions">
-          <button type="button" onClick={() => onRunAction("refresh")} disabled={!runtimeAvailable || busy !== ""}>
+          <button type="button" onClick={() => runAction("refresh")} disabled={!runtimeAvailable || busy !== ""}>
             <Activity size={16} aria-hidden="true" />
-            <span>{busy === "refresh" ? "Refreshing" : "Git 상태 새로고침"}</span>
+            <span>{busy === "refresh" ? "Refreshing" : "새로고침"}</span>
           </button>
         </div>
       </div>
@@ -151,19 +267,31 @@ export function NativeGitWorkbench({
         </article>
         <article>
           <span>lines</span>
-          <strong>+{totalAdditions} / -{totalDeletions}</strong>
+          <strong>+{includedFiles.length ? includedAdditions : totalAdditions} / -{includedFiles.length ? includedDeletions : totalDeletions}</strong>
         </article>
       </div>
 
       <div className="native-git-layout">
-        <aside className="native-git-file-list" tabIndex={0} aria-label="Git changed files">
+        <aside className="native-git-file-list" tabIndex={0} aria-label="Git workbench navigation">
           <header>
             <div>
               <span>{status?.repositoryRoot || workspacePathFallback || "repository pending"}</span>
-              <h3>변경 파일</h3>
+              <h3>{activeView === "changes" ? "변경 파일" : activeView === "history" ? "커밋 히스토리" : "Stash"}</h3>
             </div>
             <strong>{status?.clean ? "clean" : status?.conflicted ? "conflict" : "dirty"}</strong>
           </header>
+
+          <div className="native-git-view-tabs" role="tablist" aria-label="Git workbench views">
+            <button type="button" className={activeView === "changes" ? "active" : ""} onClick={() => setActiveView("changes")}>
+              Changes
+            </button>
+            <button type="button" className={activeView === "history" ? "active" : ""} onClick={() => setActiveView("history")}>
+              History
+            </button>
+            <button type="button" className={activeView === "stashes" ? "active" : ""} onClick={() => setActiveView("stashes")}>
+              Stash
+            </button>
+          </div>
 
           <div className="native-git-change-meter" aria-label="Git line change summary">
             <span style={{ flexGrow: Math.max(totalAdditions, 1) }} />
@@ -177,26 +305,82 @@ export function NativeGitWorkbench({
               </span>
             ))}
           </div>
-          <div className="native-git-files">
-            {files.slice(0, 120).map((file) => (
-              <button
-                key={`${file.status}-${file.path}`}
-                type="button"
-                className={selectedFile?.path === file.path ? "active" : ""}
-                onClick={() => setSelectedPath(file.path)}
-              >
-                <span>{file.status}</span>
-                <div>
-                  <strong>{file.path}</strong>
+
+          {activeView === "changes" && (
+            <div className="native-git-changes-list">
+              <label className="native-git-select-all">
+                <input type="checkbox" checked={allFilesIncluded} onChange={toggleAllIncluded} disabled={!files.length} />
+                <span>{includedFiles.length}개 파일 커밋 포함</span>
+              </label>
+              <div className="native-git-files">
+                {files.slice(0, 120).map((file) => (
+                  <button
+                    key={`${file.status}-${file.path}`}
+                    type="button"
+                    className={selectedFile?.path === file.path ? "active" : ""}
+                    onClick={() => setSelectedPath(file.path)}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={includedPaths.has(file.path)}
+                      onChange={() => toggleIncludedPath(file.path)}
+                      onClick={(event) => event.stopPropagation()}
+                      aria-label={`${file.path} include in commit`}
+                    />
+                    <span>{file.status}</span>
+                    <div>
+                      <strong>{file.path}</strong>
+                      <small>
+                        {file.changeKind} / +{file.additions} / -{file.deletions}
+                      </small>
+                    </div>
+                  </button>
+                ))}
+                {status && status.files.length === 0 && <p className="empty-state">변경 파일이 없습니다.</p>}
+                {!status && <p className="empty-state">Git 상태를 아직 읽지 않았습니다.</p>}
+              </div>
+            </div>
+          )}
+
+          {activeView === "history" && (
+            <div className="native-git-history-list">
+              {history.map((commit) => (
+                <button
+                  key={commit.hash}
+                  type="button"
+                  className={selectedHistory?.hash === commit.hash ? "active" : ""}
+                  onClick={() => setSelectedHistoryHash(commit.hash)}
+                >
+                  <span>{commit.shortHash}</span>
+                  <strong>{commit.subject || "(no subject)"}</strong>
                   <small>
-                    {file.changeKind} / +{file.additions} / -{file.deletions}
+                    {commit.author} / {commit.filesChanged} files / +{commit.additions} -{commit.deletions}
                   </small>
-                </div>
-              </button>
-            ))}
-            {status && status.files.length === 0 && <p className="empty-state">변경 파일이 없습니다.</p>}
-            {!status && <p className="empty-state">Git 상태를 아직 읽지 않았습니다.</p>}
-          </div>
+                </button>
+              ))}
+              {status && history.length === 0 && <p className="empty-state">커밋 히스토리가 없습니다.</p>}
+            </div>
+          )}
+
+          {activeView === "stashes" && (
+            <div className="native-git-stash-list">
+              {stashes.map((stash) => (
+                <button
+                  key={stash.reference}
+                  type="button"
+                  className={selectedStash?.reference === stash.reference ? "active" : ""}
+                  onClick={() => setSelectedStashRef(stash.reference)}
+                >
+                  <span>{stash.reference}</span>
+                  <strong>{stash.message || "stash"}</strong>
+                  <small>
+                    {stash.branch || "branch unknown"} / {stash.filesChanged} files
+                  </small>
+                </button>
+              ))}
+              {status && stashes.length === 0 && <p className="empty-state">저장된 stash가 없습니다.</p>}
+            </div>
+          )}
 
           <div className="native-git-summary-notes">
             {(status?.summary || []).map((item) => (
@@ -205,49 +389,113 @@ export function NativeGitWorkbench({
           </div>
         </aside>
 
-        <main className="native-git-diff-pane" tabIndex={0} aria-label="Selected file diff preview">
-          <header>
-            <div>
-              <span>{selectedFile?.changeKind || "no file selected"}</span>
-              <h3>{selectedFile?.path || "변경 파일을 선택하세요"}</h3>
-              {selectedFile?.originalPath && <small>{selectedFile.originalPath}</small>}
-            </div>
-            <div className="native-git-diff-stats">
-              <span>+{selectedFile?.additions || 0}</span>
-              <span>-{selectedFile?.deletions || 0}</span>
-            </div>
-          </header>
+        <main className="native-git-diff-pane" tabIndex={0} aria-label="Selected Git detail">
+          {activeView === "changes" && (
+            <>
+              <header>
+                <div>
+                  <span>{selectedFile?.changeKind || "no file selected"}</span>
+                  <h3>{selectedFile?.path || "변경 파일을 선택하세요"}</h3>
+                  {selectedFile?.originalPath && <small>{selectedFile.originalPath}</small>}
+                </div>
+                <div className="native-git-diff-stats">
+                  <span>+{selectedFile?.additions || 0}</span>
+                  <span>-{selectedFile?.deletions || 0}</span>
+                </div>
+              </header>
 
-          {selectedFile && (
-            <div className="native-git-file-state-strip">
-              <span className={selectedFile.staged ? "active" : ""}>staged</span>
-              <span className={selectedFile.unstaged ? "active" : ""}>unstaged</span>
-              <span className={selectedFile.untracked ? "active" : ""}>untracked</span>
-              <span className={selectedFile.conflicted ? "danger active" : ""}>conflict</span>
-            </div>
+              {selectedFile && (
+                <div className="native-git-file-state-strip">
+                  <span className={selectedFile.staged ? "active" : ""}>staged</span>
+                  <span className={selectedFile.unstaged ? "active" : ""}>unstaged</span>
+                  <span className={selectedFile.untracked ? "active" : ""}>untracked</span>
+                  <span className={selectedFile.conflicted ? "danger active" : ""}>conflict</span>
+                  <span className={selectedFile && includedPaths.has(selectedFile.path) ? "active" : ""}>included</span>
+                </div>
+              )}
+
+              <div className="native-git-diff-preview">
+                {selectedFile?.diffPreview.length ? (
+                  selectedFile.diffPreview.map((line, index) => (
+                    <code className={`native-git-diff-line ${line.kind}`} key={`${selectedFile.path}-${index}`}>
+                      {line.text || " "}
+                    </code>
+                  ))
+                ) : selectedFile ? (
+                  <div className="native-git-diff-empty">
+                    <FileSearch size={18} aria-hidden="true" />
+                    <strong>diff preview 없음</strong>
+                    <span>대형/바이너리/미리보기 제한 파일이거나 Git diff 출력이 비어 있습니다.</span>
+                  </div>
+                ) : (
+                  <div className="native-git-diff-empty">
+                    <FileSearch size={18} aria-hidden="true" />
+                    <strong>변경 파일을 선택하세요</strong>
+                    <span>왼쪽 변경 파일을 선택하면 이 영역에서 검토합니다.</span>
+                  </div>
+                )}
+              </div>
+            </>
           )}
 
-          <div className="native-git-diff-preview">
-            {selectedFile?.diffPreview.length ? (
-              selectedFile.diffPreview.map((line, index) => (
-                <code className={`native-git-diff-line ${line.kind}`} key={`${selectedFile.path}-${index}`}>
-                  {line.text || " "}
-                </code>
-              ))
-            ) : selectedFile ? (
-              <div className="native-git-diff-empty">
-                <FileSearch size={18} aria-hidden="true" />
-                <strong>diff preview 없음</strong>
-                <span>대형/바이너리/미리보기 제한 파일이거나 Git diff 출력이 비어 있습니다.</span>
+          {activeView === "history" && (
+            <>
+              <header>
+                <div>
+                  <span>{selectedHistory?.shortHash || "history"}</span>
+                  <h3>{selectedHistory?.subject || "커밋을 선택하세요"}</h3>
+                  {selectedHistory && <small>{selectedHistory.author} / {selectedHistory.authoredAt}</small>}
+                </div>
+                <div className="native-git-diff-stats">
+                  <span>+{selectedHistory?.additions || 0}</span>
+                  <span>-{selectedHistory?.deletions || 0}</span>
+                </div>
+              </header>
+              <div className="native-git-history-detail">
+                {selectedHistory?.files.length ? (
+                  selectedHistory.files.map((file) => (
+                    <article key={`${selectedHistory.hash}-${file.path}`}>
+                      <strong>{file.path}</strong>
+                      <span>+{file.additions} / -{file.deletions}</span>
+                    </article>
+                  ))
+                ) : (
+                  <div className="native-git-diff-empty">
+                    <Clock3 size={18} aria-hidden="true" />
+                    <strong>커밋 파일 요약 없음</strong>
+                    <span>아직 표시할 history 데이터가 없습니다.</span>
+                  </div>
+                )}
               </div>
-            ) : (
-              <div className="native-git-diff-empty">
-                <FileSearch size={18} aria-hidden="true" />
-                <strong>변경 파일을 선택하세요</strong>
-                <span>왼쪽 변경 파일을 선택하면 이 영역에서 검토합니다.</span>
+            </>
+          )}
+
+          {activeView === "stashes" && (
+            <>
+              <header>
+                <div>
+                  <span>{selectedStash?.reference || "stash"}</span>
+                  <h3>{selectedStash?.message || "Stash를 선택하세요"}</h3>
+                  {selectedStash && <small>{selectedStash.branch || "branch unknown"} / {selectedStash.filesChanged} files</small>}
+                </div>
+                <Archive size={18} aria-hidden="true" />
+              </header>
+              <div className="native-git-stash-detail">
+                <button type="button" onClick={() => selectedStash && runAction("apply_stash", { stashRef: selectedStash.reference })} disabled={!runtimeAvailable || busy !== "" || !selectedStash}>
+                  <Archive size={16} aria-hidden="true" />
+                  <span>Apply</span>
+                </button>
+                <button type="button" onClick={() => selectedStash && runAction("pop_stash", { stashRef: selectedStash.reference })} disabled={!runtimeAvailable || busy !== "" || !selectedStash}>
+                  <RotateCcw size={16} aria-hidden="true" />
+                  <span>Pop</span>
+                </button>
+                <button type="button" onClick={dropSelectedStash} disabled={!runtimeAvailable || busy !== "" || !selectedStash}>
+                  <Trash2 size={16} aria-hidden="true" />
+                  <span>Drop</span>
+                </button>
               </div>
-            )}
-          </div>
+            </>
+          )}
         </main>
 
         <aside className="native-git-actions" aria-label="Git commit and sync actions">
@@ -255,11 +503,15 @@ export function NativeGitWorkbench({
             <span>repository action</span>
             <strong>{status?.lastCommandStatus || "not_run"}</strong>
             <div>
-              <button type="button" onClick={() => onRunAction("pull_ff")} disabled={!runtimeAvailable || busy !== "" || Boolean(status?.conflicted)}>
-                <ArrowRight size={16} aria-hidden="true" />
-                <span>{busy === "pull_ff" ? "Pulling" : "Pull --ff-only"}</span>
+              <button type="button" onClick={() => runAction("fetch")} disabled={!runtimeAvailable || busy !== ""}>
+                <Activity size={16} aria-hidden="true" />
+                <span>{busy === "fetch" ? "Fetching" : "Fetch"}</span>
               </button>
-              <button type="button" onClick={() => onRunAction("push")} disabled={!runtimeAvailable || busy !== "" || Boolean(status?.conflicted)}>
+              <button type="button" onClick={() => runAction("pull_ff")} disabled={!runtimeAvailable || busy !== "" || Boolean(status?.conflicted)}>
+                <ArrowRight size={16} aria-hidden="true" />
+                <span>{busy === "pull_ff" ? "Pulling" : "Pull"}</span>
+              </button>
+              <button type="button" onClick={() => runAction("push")} disabled={!runtimeAvailable || busy !== "" || Boolean(status?.conflicted)}>
                 <GitBranch size={16} aria-hidden="true" />
                 <span>{busy === "push" ? "Pushing" : "Push"}</span>
               </button>
@@ -270,23 +522,42 @@ export function NativeGitWorkbench({
             <span>새 브랜치</span>
             <input value={branchName} onChange={(event) => onBranchNameChange(event.target.value)} />
           </label>
-          <button type="button" onClick={() => onRunAction("create_branch")} disabled={!runtimeAvailable || busy !== "" || !branchName.trim()}>
+          <button type="button" onClick={() => runAction("create_branch")} disabled={!runtimeAvailable || busy !== "" || !branchName.trim()}>
             <GitBranch size={16} aria-hidden="true" />
             <span>{busy === "create_branch" ? "Creating" : "브랜치 만들기"}</span>
           </button>
 
           <label className="wide-field">
-            <span>커밋 요약</span>
+            <span>커밋 요약 / stash 이름</span>
             <input value={commitMessage} onChange={(event) => onCommitMessageChange(event.target.value)} />
           </label>
-          <button className="native-git-commit-button" type="button" onClick={() => onRunAction("commit_all")} disabled={!runtimeAvailable || busy !== "" || !commitMessage.trim() || dirtyCount === 0}>
+          <button className="native-git-commit-button" type="button" onClick={() => runAction("commit_selected", { filePaths: includedFilePaths })} disabled={!runtimeAvailable || busy !== "" || !commitMessage.trim() || includedFilePaths.length === 0}>
             <ClipboardCheck size={16} aria-hidden="true" />
-            <span>{busy === "commit_all" ? "Committing" : `${dirtyCount}개 변경 커밋`}</span>
+            <span>{busy === "commit_selected" ? "Committing" : `${includedFilePaths.length}개 선택 커밋`}</span>
           </button>
+          <button type="button" onClick={() => runAction("commit_all")} disabled={!runtimeAvailable || busy !== "" || !commitMessage.trim() || dirtyCount === 0}>
+            <ClipboardCheck size={16} aria-hidden="true" />
+            <span>{busy === "commit_all" ? "Committing" : "전체 변경 커밋"}</span>
+          </button>
+
+          <div className="native-git-danger-actions">
+            <button type="button" onClick={() => runAction("stash_selected", { filePaths: includedFilePaths })} disabled={!runtimeAvailable || busy !== "" || includedFilePaths.length === 0}>
+              <Archive size={16} aria-hidden="true" />
+              <span>선택 Stash</span>
+            </button>
+            <button type="button" onClick={() => runAction("stash_all")} disabled={!runtimeAvailable || busy !== "" || dirtyCount === 0}>
+              <Archive size={16} aria-hidden="true" />
+              <span>전체 Stash</span>
+            </button>
+            <button type="button" onClick={discardSelected} disabled={!runtimeAvailable || busy !== "" || includedFilePaths.length === 0}>
+              <Trash2 size={16} aria-hidden="true" />
+              <span>선택 버리기</span>
+            </button>
+          </div>
 
           <div className="native-git-commit-guard">
             <ShieldCheck size={16} aria-hidden="true" />
-            <span>커밋은 `git add -A` 후 실행되며, credential/SSH secret은 앱이 직접 보관하지 않습니다.</span>
+            <span>선택 커밋은 체크된 파일 pathspec만 커밋합니다. Stash/Discard는 선택 파일 목록을 검증한 뒤 실행합니다.</span>
           </div>
 
           {(status?.lastCommandOutput || status?.lastCommandError) && (

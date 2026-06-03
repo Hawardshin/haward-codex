@@ -2,6 +2,21 @@
 
 ## 실행한 검증
 
+- 2026-06-04 추가 검증:
+  - `cargo check` in `platform-desktop-app/src-tauri`: 통과
+  - `corepack pnpm --filter workspace-monitor run check`: 통과
+  - `corepack pnpm --filter workspace-monitor run test`: 통과, 17 tests
+  - `corepack pnpm --filter workspace-monitor run build:customer`: 통과
+  - `corepack pnpm --filter workspace-monitor run perf:budget`: 통과, largest chunk `242563` bytes
+  - `corepack pnpm --filter platform-desktop-app test`: 통과, 21 tests
+  - `corepack pnpm --filter platform-desktop-app run check`: 통과
+  - `corepack pnpm --filter platform-desktop-app run customer-bundle:audit`: 통과
+  - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-gap-registry.json`: 통과
+  - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json`: 통과
+  - `git diff --check`: 통과
+  - 로컬 정적 서버 `http://127.0.0.1:4187/`: HTML 응답 확인 후 종료 확인
+  - 빌드 산출물 token smoke: `Git 작업대`, `native-git-view-tabs`, `native-git-history-list`, `native-git-stash-list`, `선택 커밋` 포함 확인
+  - in-app Browser smoke 시도: Browser plugin 연결이 usable tab을 만들지 못해 실제 클릭 스모크는 수행하지 못했다. 기존 `check-scroll-containers.mjs`, `check-source-control-design.mjs`, customer build/audit, 정적 산출물 token smoke로 대체 검증했다.
 - `cargo check` in `platform-desktop-app/src-tauri`: 통과
 - `corepack pnpm --filter workspace-monitor run check`: 통과
 - `corepack pnpm --filter workspace-monitor run test`: 통과, 17 tests

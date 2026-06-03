@@ -1,0 +1,27 @@
+{
+  "schema_version": "omission-check.v1",
+  "request_id": "UR-2026-06-04-001",
+  "checked_at": "2026-06-04",
+  "required_items": [
+    "web_first_intake",
+    "requirements_update",
+    "spec_update",
+    "backend_git_actions",
+    "renderer_git_workbench_ui",
+    "readiness_tests",
+    "validation",
+    "history_trace"
+  ],
+  "covered_items": [
+    "web_first_intake",
+    "requirements_update",
+    "spec_update",
+    "backend_git_actions",
+    "renderer_git_workbench_ui",
+    "readiness_tests",
+    "history_trace",
+    "final_validation"
+  ],
+  "pending_items": [],
+  "notes": "Final validation passed. In-app Browser clickable smoke was unavailable because the Browser plugin returned a closed connection; static server response, build output token smoke, scroll contract, source-control design check, tests, build, perf, and bundle audit passed."
+}

@@ -20,6 +20,14 @@
 - Renderer는 왼쪽 변경 파일 목록, 중앙 diff preview, 오른쪽 commit/sync panel의 3-pane 작업대를 제공해야 한다.
 - 큰 diff, binary, preview 제한 파일은 앱 전체를 막지 않고 preview unavailable 상태로 degrade해야 한다.
 
+### PDA-REQ-065 GitHub Desktop Parity Layer
+
+- Native Git Workbench는 Changes, History, Stash를 같은 Git 작업대 안에서 전환할 수 있어야 한다.
+- Changes는 GitHub Desktop처럼 파일별 include checkbox를 제공하고, 선택 파일만 커밋하거나 stash할 수 있어야 한다.
+- Discard는 선택 파일에 대해서만 실행되어야 하며, tracked 변경 복원과 untracked 삭제를 구분해서 처리해야 한다.
+- Status payload는 최근 commit history와 stash 목록을 bounded payload로 제공해야 한다.
+- Stash는 apply, pop, drop을 명시적으로 선택한 stash ref에 대해서만 실행해야 한다.
+
 ### PDA-REQ-041 Clipboard QA
 
 - code editing copy action은 브라우저 permission 상태에만 의존하지 않는 clipboard abstraction을 사용해야 한다.
@@ -40,7 +48,7 @@
 ## Acceptance
 
 - Rust/Tauri command, renderer UI, runtime contract, readiness script/test가 Native Git Workbench를 검증한다.
-- Native Git Workbench는 changed-file list, selected-file diff preview, commit/sync panel token을 readiness test에서 검증한다.
+- Native Git Workbench는 changed-file list, include checkbox, selected-file diff preview, history list, stash list, commit/sync panel token을 readiness test에서 검증한다.
 - clipboard unit tests가 추가되고 `platform-desktop-app test`에서 통과한다.
 - PTY decision bilingual docs가 추가되고 readiness가 optional extension boundary를 확인한다.
 - Browser smoke에서 실행 화면의 Git panel과 terminal drawer가 다크 테마로 정상 렌더링된다.

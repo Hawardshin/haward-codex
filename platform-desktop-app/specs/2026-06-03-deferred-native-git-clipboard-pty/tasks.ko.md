@@ -7,6 +7,11 @@
 - [x] Git action validation과 bounded command output 추가
 - [x] `NativeGitWorkbench.tsx` component 추가
 - [x] Desktop Runtime 화면에 GitHub Desktop-like changed-file list, selected diff preview, commit/sync UI 연결
+- [x] Changes/History/Stash 탭 구조 추가
+- [x] 파일별 include checkbox와 `commit_selected` action 추가
+- [x] 선택 파일 `discard_selected`, `stash_selected`, 전체 stash action 추가
+- [x] stash apply/pop/drop action과 stash ref 검증 추가
+- [x] 최근 commit history와 stash 목록 bounded status payload 추가
 - [x] `clipboard.mjs` abstraction 추가
 - [x] `clipboard.test.mjs` deterministic test 추가
 - [x] Native Git Workbench credential/SSH boundary docs 추가
