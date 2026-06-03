@@ -6,7 +6,7 @@ The installable desktop app provides a Native Git Workbench that runs the system
 
 ## Scope
 
-- `get_desktop_git_status`: reads the Git root, branch, upstream, ahead/behind counts, changed files, and remotes for the selected workspace.
+- `get_desktop_git_status`: reads the Git root, branch, upstream, ahead/behind counts, changed files, remotes, per-file additions/deletions, and bounded diff previews for the selected workspace.
 - `run_desktop_git_action`: allows `refresh`, `create_branch`, `commit_all`, `pull_ff`, and `push`.
 - Commands run from the Git root under the selected workspace and return redacted bounded command output.
 - Commit messages and branch names are length-limited and reject risky control characters.
@@ -24,4 +24,6 @@ These future steps require a separate installation and security audit:
 
 ## User Experience
 
-Native Git Workbench is a support panel for code work. Users can still run direct `git` commands in the bottom Work Console, while the Git buttons shorten common, repeatable actions safely.
+Native Git Workbench should behave like a GitHub Desktop-style workbench: changed-file list, selected-file diff preview, commit box, and pull/push sync actions stay on one screen. Users can still run direct `git` commands in the bottom Work Console, while the Git buttons shorten common, repeatable actions safely.
+
+Diff previews are bounded per file. Large diffs, binaries, and preview-limited files degrade to a preview-unavailable state without blocking overall Git status reading or commit actions.

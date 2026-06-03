@@ -1,0 +1,37 @@
+{
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-064",
+  "work_id": "github-desktop-like-git-workbench",
+  "checked_requirements": [
+    {
+      "item": "Git UI should feel closer to GitHub Desktop, not only a basic action panel.",
+      "status": "covered",
+      "evidence": "NativeGitWorkbench now has changed-file list, selected-file diff preview, and commit/sync panel."
+    },
+    {
+      "item": "Users should be able to inspect changes before committing.",
+      "status": "covered",
+      "evidence": "Tauri status payload includes bounded diffPreview, additions, deletions, and file state flags."
+    },
+    {
+      "item": "Git operations must remain native desktop workflow, not terminal input fields.",
+      "status": "covered",
+      "evidence": "Branch, commit, pull, push remain desktop action buttons; Work Console direct git remains optional."
+    },
+    {
+      "item": "Sensitive credential boundary must not regress.",
+      "status": "covered",
+      "evidence": "Docs keep SSH/token/credential helper outside app storage; bounded command output remains redacted."
+    }
+  ],
+  "deferred_items": [
+    {
+      "item": "Line-level partial staging",
+      "reason": "Requires additional backend staging API and diff interaction model."
+    },
+    {
+      "item": "Stash, history graph, PR preview, conflict editor",
+      "reason": "Outside this targeted workbench upgrade slice."
+    }
+  ]
+}

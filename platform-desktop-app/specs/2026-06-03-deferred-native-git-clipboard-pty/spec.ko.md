@@ -4,6 +4,7 @@
 
 - Native runtime: selected workspace 기반 Git status/action command.
 - Renderer: desktop runtime 화면의 Native Git Workbench UI.
+- Native Git Workbench: GitHub Desktop-like changed-file list, selected-file diff preview, commit/sync panel.
 - Source editing QA: clipboard abstraction과 deterministic unit test.
 - Architecture docs: PTY/xterm decision, Native Git credential/SSH boundary.
 - Registry/readiness: product gap closure와 remaining gate 검증.
@@ -17,7 +18,7 @@
 
 ## 설계
 
-Native Git은 Tauri command가 selected workspace의 Git root를 찾고 시스템 `git`을 bounded subprocess로 실행한다. Renderer는 `NativeGitWorkbench` 컴포넌트로 status/action UI를 제공하며, parent shell은 Tauri invocation state만 소유한다.
+Native Git은 Tauri command가 selected workspace의 Git root를 찾고 시스템 `git`을 bounded subprocess로 실행한다. Status payload는 파일별 staged/unstaged/untracked/conflicted 상태, additions/deletions, bounded diff preview를 포함한다. Renderer는 `NativeGitWorkbench` 컴포넌트로 changed-file list, selected-file diff preview, commit/sync panel을 제공하며, parent shell은 Tauri invocation state만 소유한다.
 
 Clipboard는 `writeClipboardText` module로 분리한다. navigator clipboard가 가능하면 먼저 사용하고, 실패하면 readonly textarea fallback으로 copy를 시도한다.
 

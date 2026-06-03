@@ -433,6 +433,21 @@ struct DesktopGitFileReport {
     status: String,
     path: String,
     original_path: Option<String>,
+    change_kind: String,
+    staged: bool,
+    unstaged: bool,
+    untracked: bool,
+    conflicted: bool,
+    additions: usize,
+    deletions: usize,
+    diff_preview: Vec<DesktopGitDiffLineReport>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DesktopGitDiffLineReport {
+    kind: String,
+    text: String,
 }
 
 #[derive(Serialize)]
@@ -830,6 +845,9 @@ const MAX_GIT_REPOSITORY_URL_BYTES: usize = 2_048;
 const GIT_OPERATION_TIMEOUT_MS: u64 = 90_000;
 const MAX_GIT_OPERATION_OUTPUT_BYTES: usize = 32_000;
 const MAX_GIT_STATUS_FILES: usize = 160;
+const MAX_GIT_DIFF_PREVIEW_FILES: usize = 32;
+const MAX_GIT_DIFF_PREVIEW_LINES: usize = 80;
+const MAX_GIT_DIFF_PREVIEW_OUTPUT_BYTES: usize = 24_000;
 const MAX_GIT_COMMIT_MESSAGE_CHARS: usize = 500;
 const DESKTOP_GIT_STATUS_SCHEMA_VERSION: &str = "desktop-git-status.v1";
 const MAX_WORKSPACE_FOLDER_NAME_BYTES: usize = 120;
@@ -5528,7 +5546,7 @@ fn desktop_git_status_report(
     let branch = git_branch_name(&git_path, &repository_root_path);
     let upstream = git_upstream_name(&git_path, &repository_root_path);
     let (ahead, behind) = git_ahead_behind(&git_path, &repository_root_path, &upstream);
-    let files = parse_git_status_files(&status_text);
+    let files = parse_git_status_files(&status_text, &git_path, &repository_root_path);
     let staged_count = files
         .iter()
         .filter(|file| git_file_has_staged_change(&file.status))
@@ -5935,13 +5953,18 @@ fn git_remote_reports(git_path: &PathBuf, repository_root: &Path) -> Vec<Desktop
         .collect()
 }
 
-fn parse_git_status_files(status_text: &str) -> Vec<DesktopGitFileReport> {
+fn parse_git_status_files(
+    status_text: &str,
+    git_path: &PathBuf,
+    repository_root: &Path,
+) -> Vec<DesktopGitFileReport> {
     status_text
         .lines()
         .filter(|line| !line.starts_with("## "))
         .filter(|line| line.len() >= 3)
         .take(MAX_GIT_STATUS_FILES)
-        .map(|line| {
+        .enumerate()
+        .map(|(index, line)| {
             let status = line.chars().take(2).collect::<String>();
             let path_text = line.chars().skip(3).collect::<String>();
             let (path, original_path) = if let Some((left, right)) = path_text.split_once(" -> ") {
@@ -5949,10 +5972,217 @@ fn parse_git_status_files(status_text: &str) -> Vec<DesktopGitFileReport> {
             } else {
                 (path_text, None)
             };
+            let staged = git_file_has_staged_change(&status);
+            let unstaged = git_file_has_unstaged_change(&status);
+            let untracked = status == "??";
+            let conflicted = git_status_is_conflicted(&status);
+            let diff_preview = if index < MAX_GIT_DIFF_PREVIEW_FILES {
+                git_file_diff_preview(git_path, repository_root, &path, &status)
+            } else {
+                Vec::new()
+            };
+            let (additions, deletions) =
+                git_file_change_counts(git_path, repository_root, &path, &status, &diff_preview);
+            let change_kind = git_status_change_kind(&status);
             DesktopGitFileReport {
                 status,
                 path,
                 original_path,
+                change_kind,
+                staged,
+                unstaged,
+                untracked,
+                conflicted,
+                additions,
+                deletions,
+                diff_preview,
+            }
+        })
+        .collect()
+}
+
+fn git_status_change_kind(status: &str) -> String {
+    if git_status_is_conflicted(status) {
+        return "conflict".to_string();
+    }
+    if status == "??" {
+        return "untracked".to_string();
+    }
+    if status.contains('R') {
+        return "renamed".to_string();
+    }
+    if status.contains('D') {
+        return "deleted".to_string();
+    }
+    if status.contains('A') {
+        return "added".to_string();
+    }
+    if status.contains('M') {
+        return "modified".to_string();
+    }
+    "changed".to_string()
+}
+
+fn git_file_diff_preview(
+    git_path: &PathBuf,
+    repository_root: &Path,
+    relative_path: &str,
+    status: &str,
+) -> Vec<DesktopGitDiffLineReport> {
+    if status == "??" {
+        return git_untracked_file_preview(repository_root, relative_path);
+    }
+
+    let diff_args = ["diff", "--no-ext-diff", "--unified=3", "HEAD", "--", relative_path];
+    let primary = run_bounded_command_in_dir(
+        git_path,
+        &diff_args,
+        repository_root,
+        Duration::from_millis(2_500),
+        MAX_GIT_DIFF_PREVIEW_OUTPUT_BYTES,
+    );
+    let mut preview = primary
+        .ok()
+        .filter(|output| output.status == "passed")
+        .map(|output| parse_git_diff_preview(&redact_sensitive_text(&output.stdout)))
+        .unwrap_or_default();
+
+    if preview.is_empty() && git_file_has_staged_change(status) {
+        let cached_args = [
+            "diff",
+            "--cached",
+            "--no-ext-diff",
+            "--unified=3",
+            "--",
+            relative_path,
+        ];
+        preview = run_bounded_command_in_dir(
+            git_path,
+            &cached_args,
+            repository_root,
+            Duration::from_millis(2_500),
+            MAX_GIT_DIFF_PREVIEW_OUTPUT_BYTES,
+        )
+        .ok()
+        .filter(|output| output.status == "passed")
+        .map(|output| parse_git_diff_preview(&redact_sensitive_text(&output.stdout)))
+        .unwrap_or_default();
+    }
+
+    preview
+}
+
+fn git_file_change_counts(
+    git_path: &PathBuf,
+    repository_root: &Path,
+    relative_path: &str,
+    status: &str,
+    preview: &[DesktopGitDiffLineReport],
+) -> (usize, usize) {
+    if status == "??" {
+        return (preview.iter().filter(|line| line.kind == "addition").count(), 0);
+    }
+
+    let args = ["diff", "--numstat", "HEAD", "--", relative_path];
+    let primary = run_bounded_command_in_dir(
+        git_path,
+        &args,
+        repository_root,
+        Duration::from_millis(2_500),
+        MAX_GIT_DIFF_PREVIEW_OUTPUT_BYTES,
+    );
+    let counts = primary
+        .ok()
+        .filter(|output| output.status == "passed")
+        .and_then(|output| parse_git_numstat_counts(&output.stdout));
+    if let Some(counts) = counts {
+        return counts;
+    }
+
+    if git_file_has_staged_change(status) {
+        let cached_args = ["diff", "--cached", "--numstat", "--", relative_path];
+        if let Some(counts) = run_bounded_command_in_dir(
+            git_path,
+            &cached_args,
+            repository_root,
+            Duration::from_millis(2_500),
+            MAX_GIT_DIFF_PREVIEW_OUTPUT_BYTES,
+        )
+        .ok()
+        .filter(|output| output.status == "passed")
+        .and_then(|output| parse_git_numstat_counts(&output.stdout))
+        {
+            return counts;
+        }
+    }
+
+    (
+        preview.iter().filter(|line| line.kind == "addition").count(),
+        preview.iter().filter(|line| line.kind == "deletion").count(),
+    )
+}
+
+fn parse_git_numstat_counts(output: &str) -> Option<(usize, usize)> {
+    let line = output.lines().find(|line| !line.trim().is_empty())?;
+    let mut parts = line.split('\t');
+    let additions = parts.next()?.parse::<usize>().unwrap_or(0);
+    let deletions = parts.next()?.parse::<usize>().unwrap_or(0);
+    Some((additions, deletions))
+}
+
+fn git_untracked_file_preview(repository_root: &Path, relative_path: &str) -> Vec<DesktopGitDiffLineReport> {
+    let Ok(root) = repository_root.canonicalize() else {
+        return Vec::new();
+    };
+    let candidate = root.join(relative_path);
+    let Ok(canonical) = candidate.canonicalize() else {
+        return Vec::new();
+    };
+    if !canonical.starts_with(&root) {
+        return Vec::new();
+    }
+    let Ok(metadata) = fs::metadata(&canonical) else {
+        return Vec::new();
+    };
+    if !metadata.is_file() || metadata.len() > MAX_WORKSPACE_FILE_BYTES as u64 {
+        return Vec::new();
+    }
+    let Ok(content) = fs::read_to_string(&canonical) else {
+        return Vec::new();
+    };
+    content
+        .lines()
+        .take(MAX_GIT_DIFF_PREVIEW_LINES)
+        .map(|line| DesktopGitDiffLineReport {
+            kind: "addition".to_string(),
+            text: truncate_chars(line, 240),
+        })
+        .collect()
+}
+
+fn parse_git_diff_preview(diff_text: &str) -> Vec<DesktopGitDiffLineReport> {
+    diff_text
+        .lines()
+        .filter(|line| {
+            !line.starts_with("diff --git ")
+                && !line.starts_with("index ")
+                && !line.starts_with("new file mode ")
+                && !line.starts_with("deleted file mode ")
+        })
+        .take(MAX_GIT_DIFF_PREVIEW_LINES)
+        .map(|line| {
+            let kind = if line.starts_with("@@") || line.starts_with("--- ") || line.starts_with("+++ ") {
+                "meta"
+            } else if line.starts_with('+') {
+                "addition"
+            } else if line.starts_with('-') {
+                "deletion"
+            } else {
+                "context"
+            };
+            DesktopGitDiffLineReport {
+                kind: kind.to_string(),
+                text: truncate_chars(line, 240),
             }
         })
         .collect()

@@ -13,6 +13,13 @@
 - 모든 Git 명령은 선택된 workspace 아래 Git root에서 실행되어야 하며, 출력은 redaction과 길이 제한을 거친 bounded command output이어야 한다.
 - 앱은 SSH private key, 토큰, credential helper 저장소를 직접 읽거나 저장하지 않아야 한다.
 
+### PDA-REQ-064 GitHub Desktop 수준 Git 작업대
+
+- Native Git Workbench는 단순 status/action 패널이 아니라 GitHub Desktop처럼 변경 파일 선택, 선택 파일 diff preview, commit box, pull/push 동기화가 한 화면에서 이어져야 한다.
+- Git status payload는 파일별 staged/unstaged/untracked/conflicted 상태, additions/deletions, bounded diff preview를 제공해야 한다.
+- Renderer는 왼쪽 변경 파일 목록, 중앙 diff preview, 오른쪽 commit/sync panel의 3-pane 작업대를 제공해야 한다.
+- 큰 diff, binary, preview 제한 파일은 앱 전체를 막지 않고 preview unavailable 상태로 degrade해야 한다.
+
 ### PDA-REQ-041 Clipboard QA
 
 - code editing copy action은 브라우저 permission 상태에만 의존하지 않는 clipboard abstraction을 사용해야 한다.
@@ -33,6 +40,7 @@
 ## Acceptance
 
 - Rust/Tauri command, renderer UI, runtime contract, readiness script/test가 Native Git Workbench를 검증한다.
+- Native Git Workbench는 changed-file list, selected-file diff preview, commit/sync panel token을 readiness test에서 검증한다.
 - clipboard unit tests가 추가되고 `platform-desktop-app test`에서 통과한다.
 - PTY decision bilingual docs가 추가되고 readiness가 optional extension boundary를 확인한다.
 - Browser smoke에서 실행 화면의 Git panel과 terminal drawer가 다크 테마로 정상 렌더링된다.

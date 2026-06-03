@@ -6,7 +6,7 @@
 
 ## 범위
 
-- `get_desktop_git_status`: 현재 작업공간의 Git 루트, 브랜치, upstream, ahead/behind, 변경 파일, remote를 읽는다.
+- `get_desktop_git_status`: 현재 작업공간의 Git 루트, 브랜치, upstream, ahead/behind, 변경 파일, remote, 파일별 additions/deletions, bounded diff preview를 읽는다.
 - `run_desktop_git_action`: `refresh`, `create_branch`, `commit_all`, `pull_ff`, `push`를 허용한다.
 - 모든 명령은 선택된 작업공간 아래 Git 루트에서 실행하며, 출력은 redaction과 길이 제한을 거친 bounded command output으로만 반환한다.
 - 커밋 메시지와 브랜치 이름은 길이와 위험 문자를 제한한다.
@@ -24,4 +24,6 @@
 
 ## 사용자 경험
 
-Native Git Workbench는 코드 작업 흐름의 보조 패널이다. 사용자는 여전히 하단 Work Console에서 직접 `git` 명령을 실행할 수 있고, 앱의 Git 버튼은 반복 작업을 안전하게 단축하는 역할을 한다.
+Native Git Workbench는 GitHub Desktop처럼 변경 파일 목록, 선택 파일 diff preview, commit box, pull/push sync action이 한 화면에서 이어지는 작업대여야 한다. 사용자는 여전히 하단 Work Console에서 직접 `git` 명령을 실행할 수 있고, 앱의 Git 버튼은 반복 작업을 안전하게 단축하는 역할을 한다.
+
+Diff preview는 파일별 bounded preview로 제한한다. 대형 diff, binary, preview 제한 파일은 `diff preview 없음` 상태로 degrade하며 앱 전체 Git 상태 읽기나 커밋 작업을 막지 않는다.

@@ -194,7 +194,7 @@
       "covered_evidence": [
         "Desktop shell with titlebar, activity rail, sidebar, content viewport, settings dialog, task timeline, and decision inbox",
         "Operator Center separation and user/customer view sections",
-        "Native Git Workbench exposes branch, changed files, commit, pull, and push actions inside the desktop workspace host"
+        "Native Git Workbench exposes a GitHub Desktop-like changed-file list, selected-file diff preview, commit box, and pull/push actions inside the desktop workspace host"
       ],
       "remaining_gap_ids": [
         "componentized_desktop_ui_architecture"
@@ -297,8 +297,8 @@
         "Native folder picker",
         "Clone repository command",
         "Source editor and CLI working directory use app-selected workspace first",
-        "get_desktop_git_status and run_desktop_git_action expose branch, status, commit, pull, and push operations",
-        "Native Git Workbench displays changed files, remotes, ahead/behind state, and bounded command output"
+        "get_desktop_git_status and run_desktop_git_action expose branch, status, commit, pull, push, additions/deletions, and bounded diff preview data",
+        "Native Git Workbench displays changed files, selected-file diff preview, remotes, ahead/behind state, commit controls, sync controls, and bounded command output"
       ],
       "remaining_gap_ids": [],
       "notes": "Workspace host and Git operations are now inside the app. Private remote credentials remain outside the app boundary and are surfaced through bounded Git command results rather than secret inspection."
@@ -417,14 +417,14 @@
       "current_evidence": [
         "get_desktop_workspace_state, set_desktop_workspace_path, choose_desktop_workspace_folder, and clone_desktop_workspace are implemented",
         "get_desktop_git_status and run_desktop_git_action are implemented as Tauri commands",
-        "NativeGitWorkbench component exposes status refresh, branch creation, commit all, pull --ff-only, push, file status, remotes, and command output",
+        "NativeGitWorkbench component exposes status refresh, branch creation, commit all, pull --ff-only, push, file status, selected-file diff preview, line counts, remotes, and command output",
         "Installer shell runtime contract declares the Git workspace host commands",
         "Native Git Workbench architecture docs record the credential/SSH sensitive-file boundary",
         "Readiness tests verify the runtime command surface and UI tokens"
       ],
       "acceptance_to_close": [
         "Native folder picker is available for workspace import.",
-        "Git branch, status, commit, pull, push, and conflict state are visible as desktop workbench actions.",
+        "Git branch, status, changed-file list, selected-file diff preview, commit, pull, push, and conflict state are visible as desktop workbench actions.",
         "Credential and SSH key behavior is documented and guarded by the sensitive-file boundary policy.",
         "Clean workspace smoke test proves import/clone/source/CLI handoff."
       ],

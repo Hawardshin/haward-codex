@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-03",
+  "work_id": "github-desktop-like-git-workbench",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "bounded git diff subprocesses",
+      "scope": "get_desktop_git_status per-file diff preview",
+      "lifecycle": "spawned by Tauri command only when status is requested; bounded by timeout and output limits",
+      "status": "bounded"
+    },
+    {
+      "resource": "local static preview server",
+      "scope": "Browser Git workbench smoke",
+      "lifecycle": "started for smoke validation and stopped after validation",
+      "status": "closed"
+    },
+    {
+      "resource": "in-app browser tab",
+      "scope": "Git workbench viewport checks",
+      "lifecycle": "opened for smoke validation and closed after validation",
+      "status": "closed"
+    }
+  ],
+  "leak_check": {
+    "status": "passed",
+    "notes": "No validation server session was left intentionally running for the user."
+  }
+}
