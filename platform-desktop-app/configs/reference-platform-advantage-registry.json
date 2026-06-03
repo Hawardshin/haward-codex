@@ -414,6 +414,32 @@
       "reliability": "high",
       "limitation": "MCP in Claude Desktop is documented as beta and uses Claude-specific extension packaging and settings labels.",
       "plan_impact": "Use one-click local tool extension installation, Settings > Extensions organization, connector status from the chat composer, manifest-based packaging, sensitive config encryption, debug logs, and enterprise allowlist controls as connector UX requirements."
+    },
+    {
+      "id": "aws_bedrock_agentcore_docs",
+      "title": "Amazon Bedrock AgentCore Documentation",
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/",
+      "source_type": "official_docs",
+      "used_for": [
+        "production agent runtime, memory, gateway, identity, browser/code tools, observability, evaluation, and policy transfer planning"
+      ],
+      "last_checked": "2026-06-04",
+      "reliability": "high",
+      "limitation": "AWS managed-service details are optional deployment adapters in this product, not mandatory local runtime dependencies.",
+      "plan_impact": "Expose AgentCore-style lifecycle and capability blueprints in the Agents surface while preserving the desktop app as the primary host runtime."
+    },
+    {
+      "id": "awslabs_agentcore_samples",
+      "title": "awslabs/agentcore-samples",
+      "url": "https://github.com/awslabs/agentcore-samples",
+      "source_type": "user_referenced_repo",
+      "used_for": [
+        "AgentCore sample repository structure, quickstart lifecycle, blueprint categories, and Apache-2.0 source boundary"
+      ],
+      "last_checked": "2026-06-04",
+      "reliability": "high",
+      "limitation": "Repository is sampled as a public reference; source code is not copied into the product bundle.",
+      "plan_impact": "Transfer create/dev/deploy/invoke, add memory/identity/evaluator/gateway, blueprints, and observability/evaluation as desktop product blueprint controls."
     }
   ],
   "structure_rules": [
@@ -548,6 +574,15 @@
       "role": "native_app_ux_reference",
       "strongest_advantage": "one-click setup, settings dialogs, troubleshooting, command palette, channels/spaces, visual confirmation",
       "transfer_rule": "설정과 복구는 팝업/전용 패널에 두고, 반복 작업은 커맨드 팔레트와 확장 카탈로그로 빠르게 실행한다."
+    },
+    {
+      "id": "production_agent_platforms",
+      "label": "Production Agent Platforms",
+      "sources": [
+        "aws_bedrock_agentcore_docs",
+        "awslabs_agentcore_samples"
+      ],
+      "role_in_product": "Translate mature agent production lifecycle patterns into local-first desktop surfaces without making AWS mandatory."
     }
   ],
   "transfer_patterns": [
@@ -1195,6 +1230,34 @@
         "github_copilot_cloud_agent",
         "aider_docs",
         "continue_checks"
+      ]
+    },
+    {
+      "id": "agentcore-style-production-agent-blueprints",
+      "title": "AgentCore-style production agent blueprints",
+      "source_ids": [
+        "aws_bedrock_agentcore_docs",
+        "awslabs_agentcore_samples"
+      ],
+      "priority": "p0_user_requested_reference",
+      "status": "implemented_slice",
+      "product_translation": "The Agents screen exposes production blueprints for runtime, memory, gateway/tool, and evaluation-guarded agents; applying a blueprint fills the Search Agent Work Chat and Agent Factory inputs rather than leaving the reference as documentation.",
+      "implementation_targets": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+        "platform-desktop-app/configs/product-feature-registry.json",
+        "platform-desktop-app/configs/user-flow-registry.json"
+      ],
+      "risk_controls": [
+        "AWS AgentCore CLI and credentials remain optional deployment adapters",
+        "No AgentCore sample source code is copied into the shipped app",
+        "The desktop runtime owns task state, records, and UI authority",
+        "Provider direct-run and task-run persistence remain the first execution path"
+      ],
+      "validation": [
+        "workspace-monitor type check passes",
+        "readiness tests assert AgentCore blueprint UI tokens",
+        "service readiness checks include production blueprint surface"
       ]
     }
   ]

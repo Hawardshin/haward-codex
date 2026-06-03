@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "request_id": "UR-2026-06-04-008",
+  "checked_items": [
+    "web-first search",
+    "official AWS documentation",
+    "user-provided repo inspection",
+    "license boundary",
+    "actual UI implementation",
+    "blueprint to runnable input behavior",
+    "registry contract update",
+    "readiness and tests",
+    "requirements/spec/history"
+  ],
+  "omissions_found": [],
+  "status": "passed"
+}
+

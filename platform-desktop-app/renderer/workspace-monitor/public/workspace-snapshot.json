@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-03T17:13:34.925Z",
+  "generatedAt": "2026-06-03T17:28:04.948Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -29,8 +29,8 @@
     "productFeatures": 6,
     "primaryProductFeatures": 5,
     "supportingProductFeatures": 1,
-    "referencePlatforms": 4,
-    "referenceTransferPatterns": 17,
+    "referencePlatforms": 5,
+    "referenceTransferPatterns": 18,
     "structurePressurePoints": 0,
     "sourceFiles": 0,
     "rootFolders": 0
@@ -180,7 +180,9 @@
           "Provider Accounts",
           "Task Pipe",
           "Process Graph",
-          "Decision Inbox"
+          "Decision Inbox",
+          "Production Agent Blueprints",
+          "AgentCore-style Lifecycle"
         ],
         "currentAssets": [],
         "automationTargets": [
@@ -191,7 +193,9 @@
           "bounded stdout and stderr capture",
           "human decision defer and resume",
           "merge gate artifact synthesis",
-          "resource cleanup"
+          "resource cleanup",
+          "AgentCore-style create/dev/invoke/evaluate lifecycle blueprint application",
+          "production agent blueprint selection for runtime, memory, gateway, and evaluation patterns"
         ],
         "learningSignals": [
           "blocked lane count",
@@ -199,7 +203,9 @@
           "merge gate outcomes",
           "research_insight_agent task-run records",
           "task-run records",
-          "resource cleanup results"
+          "resource cleanup results",
+          "selected AgentCore-style blueprint",
+          "production lifecycle gate coverage"
         ],
         "validationGates": []
       },
@@ -271,7 +277,7 @@
         "id": "agent_factory",
         "label": "Agent Factory",
         "role": "primary",
-        "status": "planned_surface_with_existing_sources",
+        "status": "implemented_slice",
         "purpose": "Turn repeated work into prompts, workflows, templates, tools, skills, agents, and finally platform features with traceable decisions.",
         "userOutcome": "The user can create agents and reusable capabilities without repeatedly telling the assistant the same process.",
         "primarySection": "agents",
@@ -281,7 +287,9 @@
           "Capability Center",
           "Philosophy Feature Factory",
           "Mode & Function Switchboard",
-          "Evidence / Promotion"
+          "Evidence / Promotion",
+          "Production Agent Blueprints",
+          "AgentCore Blueprint Detail"
         ],
         "currentAssets": [],
         "automationTargets": [
@@ -290,7 +298,9 @@
           "smallest asset selection",
           "skill validation",
           "agent definition creation",
-          "feature promotion trace"
+          "feature promotion trace",
+          "blueprint-driven agent proposal prefill",
+          "runtime/memory/gateway/evaluation agent template selection"
         ],
         "learningSignals": [
           "candidate backlog",
@@ -393,7 +403,9 @@
       "Snapshot data includes product feature architecture for developer and customer builds.",
       "Customer snapshot preserves sellable feature structure but removes internal source paths and validation internals.",
       "Readiness tests fail if monitoring is positioned as the primary product.",
-      "New feature work updates requirements, specs, validation, history, and request traces."
+      "New feature work updates requirements, specs, validation, history, and request traces.",
+      "AgentCore-style blueprint choices map reference samples to runnable local product flows.",
+      "AWS deployment remains optional; the installed desktop app owns task state and accumulated records."
     ],
     "validationGates": []
   },
@@ -412,9 +424,9 @@
       "acceptedSourceTypes": []
     },
     "summary": {
-      "totalSources": 29,
-      "platformGroups": 4,
-      "totalPatterns": 17,
+      "totalSources": 31,
+      "platformGroups": 5,
+      "totalPatterns": 18,
       "implemented": 6,
       "integratedContract": 8,
       "queuedP0": 3,
@@ -478,6 +490,15 @@
         "role": "native_app_ux_reference",
         "strongestAdvantage": "one-click setup, settings dialogs, troubleshooting, command palette, channels/spaces, visual confirmation",
         "transferRule": "설정과 복구는 팝업/전용 패널에 두고, 반복 작업은 커맨드 팔레트와 확장 카탈로그로 빠르게 실행한다."
+      },
+      {
+        "id": "production_agent_platforms",
+        "labelKo": "",
+        "labelEn": "",
+        "platforms": [],
+        "role": "",
+        "strongestAdvantage": "",
+        "transferRule": ""
       }
     ],
     "transferPatterns": [
@@ -958,6 +979,30 @@
         ],
         "status": "implemented",
         "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "agentcore-style-production-agent-blueprints",
+        "labelKo": "",
+        "labelEn": "",
+        "sourcePlatforms": [],
+        "observedStrength": "",
+        "platformDecision": "",
+        "productSection": "overview",
+        "userValueKo": "",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+          "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+          "platform-desktop-app/configs/product-feature-registry.json",
+          "platform-desktop-app/configs/user-flow-registry.json"
+        ],
+        "riskControls": [
+          "AWS AgentCore CLI and credentials remain optional deployment adapters",
+          "No AgentCore sample source code is copied into the shipped app"
+        ],
+        "status": "implemented_slice",
+        "priority": "p0_user_requested_reference",
         "sourceIds": []
       }
     ]

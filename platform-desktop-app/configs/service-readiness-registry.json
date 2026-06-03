@@ -242,6 +242,20 @@
       "label": "Update & Recovery",
       "intent": "Public service releases need a signed update channel, rollback notes, and clean-machine smoke tests.",
       "required_for_public": true
+    },
+    {
+      "id": "production_agent_blueprints",
+      "label": "Production Agent Blueprints",
+      "status": "internal_ready_public_adapter_optional",
+      "intent": "Expose AgentCore-style runtime, memory, gateway, and evaluation blueprints as local-first desktop agent creation and task-run controls while keeping AWS deployment optional.",
+      "required_for_internal": true,
+      "required_for_public": true,
+      "checks": [
+        "AgentCore blueprint UI exists in the Agents screen",
+        "Blueprint application fills runnable search-agent and Agent Factory inputs",
+        "Reference registry records AWS AgentCore docs and awslabs/agentcore-samples public-source boundary",
+        "AWS AgentCore CLI and AWS credentials are treated as optional deployment adapter readiness, not required local runtime setup"
+      ]
     }
   ],
   "public_release_blockers": [

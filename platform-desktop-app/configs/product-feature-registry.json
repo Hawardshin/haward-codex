@@ -126,6 +126,29 @@
         "capability_missing fallback behavior"
       ],
       "last_checked": "2026-06-03"
+    },
+    {
+      "id": "awslabs_agentcore_samples",
+      "title": "awslabs/agentcore-samples",
+      "url": "https://github.com/awslabs/agentcore-samples",
+      "source_type": "user_referenced_repo",
+      "used_for": [
+        "production agent lifecycle pattern: create, dev, deploy, invoke, add capabilities",
+        "agent runtime, memory, gateway, identity, observability, evaluation, and policy as product blueprint categories",
+        "Apache-2.0 public-source boundary for reference transfer without copying source"
+      ],
+      "last_checked": "2026-06-04"
+    },
+    {
+      "id": "aws_bedrock_agentcore_docs",
+      "title": "Amazon Bedrock AgentCore Documentation",
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/",
+      "source_type": "official_docs",
+      "used_for": [
+        "AgentCore runtime, memory, gateway, identity, browser/code tools, observability, evaluation, and policy capability model",
+        "optional AWS deployment adapter boundary for installable desktop product"
+      ],
+      "last_checked": "2026-06-04"
     }
   ],
   "structure_rules": [
@@ -294,7 +317,9 @@
         "Provider Accounts",
         "Task Pipe",
         "Process Graph",
-        "Decision Inbox"
+        "Decision Inbox",
+        "Production Agent Blueprints",
+        "AgentCore-style Lifecycle"
       ],
       "current_assets": [
         "platform-desktop-app/src-tauri/src/lib.rs",
@@ -303,7 +328,8 @@
         "agent-platform/configs/planning/research-insight-plan-template.json",
         "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
         "platform-desktop-app/configs/user-flow-registry.json",
-        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/configs/reference-platform-advantage-registry.json"
       ],
       "automation_targets": [
         "direct provider API task execution from connected OpenAI, Anthropic, or Gemini accounts",
@@ -313,7 +339,9 @@
         "bounded stdout and stderr capture",
         "human decision defer and resume",
         "merge gate artifact synthesis",
-        "resource cleanup"
+        "resource cleanup",
+        "AgentCore-style create/dev/invoke/evaluate lifecycle blueprint application",
+        "production agent blueprint selection for runtime, memory, gateway, and evaluation patterns"
       ],
       "learning_signals": [
         "blocked lane count",
@@ -321,14 +349,18 @@
         "merge gate outcomes",
         "research_insight_agent task-run records",
         "task-run records",
-        "resource cleanup results"
+        "resource cleanup results",
+        "selected AgentCore-style blueprint",
+        "production lifecycle gate coverage"
       ],
       "validation_gates": [
         "search agent work-chat exposes research-insight-planner-agent",
         "connected provider accounts can produce task-run records without requiring a shell command",
         "readiness test includes product feature architecture",
         "resource guard covers long-running lanes",
-        "customer snapshot preserves feature claims without internal source"
+        "customer snapshot preserves feature claims without internal source",
+        "Agents screen exposes AgentCore-style production blueprint controls",
+        "Applying a production blueprint fills Search Agent Work Chat and Agent Factory inputs"
       ]
     },
     {
@@ -416,7 +448,7 @@
       "id": "agent_factory",
       "label": "Agent Factory",
       "role": "primary",
-      "status": "planned_surface_with_existing_sources",
+      "status": "implemented_slice",
       "purpose": "Turn repeated work into prompts, workflows, templates, tools, skills, agents, and finally platform features with traceable decisions.",
       "user_outcome": "The user can create agents and reusable capabilities without repeatedly telling the assistant the same process.",
       "primary_section": "agents",
@@ -426,7 +458,9 @@
         "Capability Center",
         "Philosophy Feature Factory",
         "Mode & Function Switchboard",
-        "Evidence / Promotion"
+        "Evidence / Promotion",
+        "Production Agent Blueprints",
+        "AgentCore Blueprint Detail"
       ],
       "current_assets": [
         "agent-platform/configs/orchestration/capability-promotion-registry.json",
@@ -441,7 +475,9 @@
         "smallest asset selection",
         "skill validation",
         "agent definition creation",
-        "feature promotion trace"
+        "feature promotion trace",
+        "blueprint-driven agent proposal prefill",
+        "runtime/memory/gateway/evaluation agent template selection"
       ],
       "learning_signals": [
         "candidate backlog",
@@ -453,7 +489,8 @@
       "validation_gates": [
         "candidate has source evidence and rollback plan",
         "skill or agent validation passes",
-        "promotion selects the smallest useful asset first"
+        "promotion selects the smallest useful asset first",
+        "Agent Factory can be prefilled from a selected production blueprint"
       ]
     },
     {
@@ -574,7 +611,9 @@
     "Snapshot data includes product feature architecture for developer and customer builds.",
     "Customer snapshot preserves sellable feature structure but removes internal source paths and validation internals.",
     "Readiness tests fail if monitoring is positioned as the primary product.",
-    "New feature work updates requirements, specs, validation, history, and request traces."
+    "New feature work updates requirements, specs, validation, history, and request traces.",
+    "AgentCore-style blueprint choices map reference samples to runnable local product flows.",
+    "AWS deployment remains optional; the installed desktop app owns task state and accumulated records."
   ],
   "validation_gates": [
     {
@@ -596,6 +635,11 @@
       "id": "config_contract_gate",
       "command": "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json",
       "validates": "Registry remains self-documenting and machine-checkable."
+    },
+    {
+      "id": "agentcore_blueprint_gate",
+      "command": "corepack pnpm --filter platform-desktop-app test",
+      "validates": "Agents UI and product registries expose AgentCore-style production blueprints without making AWS mandatory."
     }
   ]
 }

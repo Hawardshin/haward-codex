@@ -6035,6 +6035,214 @@ h3 {
   line-height: 1.45;
 }
 
+.agentcore-blueprint-panel {
+  background:
+    linear-gradient(180deg, rgba(84, 122, 168, 0.045), rgba(22, 115, 91, 0.04)),
+    var(--surface);
+}
+
+.panel-link-button {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--text);
+  border-radius: var(--control-radius);
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: normal;
+}
+
+.agentcore-blueprint-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.36fr) minmax(0, 0.64fr);
+  gap: 12px;
+  min-width: 0;
+}
+
+.agentcore-blueprint-list {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.agentcore-blueprint-list button {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 11px 12px;
+  text-align: left;
+}
+
+.agentcore-blueprint-list button.active {
+  border-color: color-mix(in srgb, var(--green) 54%, var(--line));
+  background: color-mix(in srgb, var(--surface-raised) 86%, var(--green) 10%);
+}
+
+.agentcore-blueprint-list strong,
+.agentcore-blueprint-list span {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.agentcore-blueprint-list strong {
+  font-size: 13px;
+}
+
+.agentcore-blueprint-list span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.agentcore-blueprint-detail {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 8px;
+  padding: 13px;
+}
+
+.agentcore-blueprint-detail header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.agentcore-blueprint-detail header div,
+.agentcore-blueprint-detail header h3,
+.agentcore-blueprint-detail header span,
+.agentcore-blueprint-detail header strong,
+.agentcore-blueprint-detail p {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.agentcore-blueprint-detail header span,
+.agentcore-blueprint-matrix span,
+.agentcore-blueprint-contract span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.agentcore-blueprint-detail header h3 {
+  margin: 4px 0 0;
+  font-size: 18px;
+}
+
+.agentcore-blueprint-detail header strong {
+  border: 1px solid color-mix(in srgb, var(--green) 50%, var(--line));
+  background: color-mix(in srgb, var(--surface) 85%, var(--green) 10%);
+  border-radius: 999px;
+  padding: 5px 8px;
+  color: var(--text);
+  font-size: 11px;
+}
+
+.agentcore-blueprint-detail p {
+  margin: 0;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.agentcore-blueprint-matrix {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+  min-width: 0;
+}
+
+.agentcore-blueprint-matrix div {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.agentcore-blueprint-matrix ol,
+.agentcore-blueprint-matrix ul {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  margin: 0;
+  padding-left: 17px;
+}
+
+.agentcore-blueprint-matrix li {
+  min-width: 0;
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.38;
+  overflow-wrap: break-word;
+}
+
+.agentcore-blueprint-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.agentcore-blueprint-actions button {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  border: 1px solid #aebbc8;
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--control-radius);
+  padding: 8px var(--control-padding-x);
+  font-weight: 800;
+  white-space: normal;
+}
+
+.agentcore-blueprint-actions .primary-action-button {
+  border-color: color-mix(in srgb, var(--green) 54%, var(--line));
+  background: color-mix(in srgb, var(--surface-raised) 80%, var(--green) 16%);
+}
+
+.agentcore-blueprint-contract {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  border: 1px dashed var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.agentcore-blueprint-contract small {
+  min-width: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+}
+
 .agent-factory-layout,
 .learning-feedback-layout {
   display: grid;
@@ -9825,6 +10033,7 @@ h3 {
   .intent-theme-list,
   .intent-roadmap-grid,
   .structure-plane-grid,
+  .agentcore-blueprint-matrix,
   .boundary-rule-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -9855,6 +10064,7 @@ h3 {
   .intent-map-layout,
   .search-agent-run-layout,
   .search-agent-work-chat-layout,
+  .agentcore-blueprint-layout,
   .agent-provider-run-controls,
   .agent-factory-layout,
   .learning-feedback-layout,
@@ -10068,6 +10278,22 @@ h3 {
   .terminal-view-switcher button,
   .workspace-explorer-actions button,
   .native-workspace-actions button {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .agentcore-blueprint-matrix {
+    grid-template-columns: 1fr;
+  }
+
+  .agentcore-blueprint-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .agentcore-blueprint-actions button,
+  .panel-link-button {
     width: 100%;
     min-width: 0;
     max-width: none;

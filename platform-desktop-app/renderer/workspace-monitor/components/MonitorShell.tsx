@@ -211,6 +211,32 @@ type SearchAgentRunForm = {
   model: string;
 };
 
+type AgentCoreBlueprint = {
+  id: string;
+  label: string;
+  sourceLabel: string;
+  sourceUrl: string;
+  summaryKo: string;
+  summaryEn: string;
+  primaryUseKo: string;
+  primaryUseEn: string;
+  agentId: string;
+  factoryLabel: string;
+  factoryGoalKo: string;
+  factoryGoalEn: string;
+  role: string;
+  capabilities: string[];
+  lifecycle: string[];
+  outputRecords: string[];
+  safetyGates: string[];
+  defaultObjectiveKo: string;
+  defaultObjectiveEn: string;
+  defaultQuestionsKo: string;
+  defaultQuestionsEn: string;
+  defaultNotesKo: string;
+  defaultNotesEn: string;
+};
+
 type SearchAgentChatMessage = {
   id: string;
   role: "agent" | "user" | "system";
@@ -1702,6 +1728,111 @@ const defaultSearchAgentChatMessages: SearchAgentChatMessage[] = [
   }
 ];
 
+const agentCoreSampleSourceUrl = "https://github.com/awslabs/agentcore-samples";
+
+const agentCoreBlueprints: AgentCoreBlueprint[] = [
+  {
+    id: "agentcore_production_research_agent",
+    label: "Production Research Agent",
+    sourceLabel: "awslabs/agentcore-samples · getting-started + runtime",
+    sourceUrl: agentCoreSampleSourceUrl,
+    summaryKo: "검색/조사 에이전트를 로컬 실행, 결과 기록, 배포 사전점검, 평가까지 이어지는 제품 흐름으로 만듭니다.",
+    summaryEn: "Turns a research agent into a product flow with local run, records, deployment preflight, and evaluation.",
+    primaryUseKo: "이미 만든 검색 에이전트를 팔 수 있는 기본 작업 에이전트로 다듬을 때",
+    primaryUseEn: "Use when turning the existing search agent into the default sellable work agent.",
+    agentId: "production-research-agent",
+    factoryLabel: "Production Research Agent",
+    factoryGoalKo: "외부 검색, 저장소 근거, 실행 계획, 검증 기준을 task-run record와 평가 기록으로 남기는 검색 에이전트를 만듭니다.",
+    factoryGoalEn: "Create a research agent that stores external evidence, repository context, execution plans, and validation criteria as task-run and evaluation records.",
+    role: "production research and planning agent with runtime records, validation, and evaluation gates",
+    capabilities: ["runtime", "direct_provider_task", "task_run_store", "evaluation", "observability"],
+    lifecycle: ["create", "dev", "invoke", "evaluate", "package"],
+    outputRecords: ["task-run record", "web-search record", "plan", "validation", "request trace"],
+    safetyGates: ["web-first evidence", "source ranking", "secret redaction", "validation before close-out"],
+    defaultObjectiveKo: "AgentCore 샘플 구조를 참고해 기존 검색 에이전트를 production research agent로 제품화하는 실행 계획과 검증 기준을 작성하기",
+    defaultObjectiveEn: "Use AgentCore sample structure to productize the existing search agent as a production research agent with an execution plan and validation criteria.",
+    defaultQuestionsKo: "이 에이전트가 create/dev/invoke/evaluate 흐름에서 어떤 데이터를 남겨야 하는가?\n로컬 provider API 실행과 optional CLI lane의 책임은 어떻게 나눌 것인가?\n배포 전 어떤 검증과 사용자 결정이 필요한가?",
+    defaultQuestionsEn: "What data should this agent leave across create/dev/invoke/evaluate?\nHow should direct provider API work and optional CLI lanes divide responsibility?\nWhat validation and user decisions are required before deployment?",
+    defaultNotesKo: "AgentCore는 AWS 선택형 배포 adapter로 취급하고, 기본 작업 상태와 기록은 데스크톱 앱이 소유합니다.",
+    defaultNotesEn: "Treat AgentCore as an optional AWS deployment adapter while the desktop app owns default task state and records."
+  },
+  {
+    id: "agentcore_memory_agent",
+    label: "Memory-Enabled Work Agent",
+    sourceLabel: "awslabs/agentcore-samples · memory",
+    sourceUrl: agentCoreSampleSourceUrl,
+    summaryKo: "작업 기록, 사용자 선호, 반복 결정, 검증 결과를 다음 실행에 재사용하는 memory 중심 에이전트입니다.",
+    summaryEn: "A memory-centered agent that reuses task history, preferences, repeated decisions, and validation outcomes.",
+    primaryUseKo: "반복 작업을 줄이고 누적 데이터로 성능이 좋아지는 구조가 필요할 때",
+    primaryUseEn: "Use when accumulated data should reduce repeated work and improve future runs.",
+    agentId: "memory-enabled-work-agent",
+    factoryLabel: "Memory Enabled Work Agent",
+    factoryGoalKo: "task-run store, decision inbox, evaluation history에서 재사용 가능한 메모리를 선별해 다음 작업에 주입하는 에이전트를 만듭니다.",
+    factoryGoalEn: "Create an agent that selects reusable memory from task runs, decisions, and evaluation history for future work.",
+    role: "memory curator and context injection agent for repeated workspace tasks",
+    capabilities: ["memory", "task_run_store", "decision_inbox", "preference_reuse", "evaluation"],
+    lifecycle: ["create", "attach memory", "invoke", "summarize", "evaluate"],
+    outputRecords: ["memory candidate", "decision reuse note", "evaluation signal", "improvement candidate"],
+    safetyGates: ["private path exclusion", "provenance", "stale memory review", "user-visible memory source"],
+    defaultObjectiveKo: "작업 기록과 결정 기록에서 재사용 가능한 memory 후보를 찾아 다음 에이전트 실행에 안전하게 주입하는 구조 설계하기",
+    defaultObjectiveEn: "Design how reusable memory candidates from task and decision history can be safely injected into future agent runs.",
+    defaultQuestionsKo: "어떤 기록을 장기 memory로 승격할 수 있는가?\n낡거나 틀린 memory를 어떻게 표시하고 회수할 것인가?\n사용자가 memory 근거를 어디에서 확인해야 하는가?",
+    defaultQuestionsEn: "Which records can become long-term memory?\nHow should stale or wrong memory be marked and retired?\nWhere should users inspect memory provenance?",
+    defaultNotesKo: "민감 파일과 raw private content는 memory 후보에서 제외하고, 근거와 만료 정책을 함께 남깁니다.",
+    defaultNotesEn: "Exclude sensitive files and raw private content from memory candidates, and store provenance plus expiry policy."
+  },
+  {
+    id: "agentcore_gateway_tool_agent",
+    label: "Gateway Tool Agent",
+    sourceLabel: "awslabs/agentcore-samples · gateway + MCP",
+    sourceUrl: agentCoreSampleSourceUrl,
+    summaryKo: "MCP, HTTP API, Lambda 같은 도구를 한 곳에서 권한/라우팅/관측과 함께 관리하는 도구 연결형 에이전트입니다.",
+    summaryEn: "A tool-connected agent that manages MCP, HTTP APIs, and functions with auth, routing, and observability.",
+    primaryUseKo: "파일 시스템, 브라우저, GitHub, 배포 CLI 같은 외부 도구를 안전하게 붙일 때",
+    primaryUseEn: "Use when attaching external tools such as filesystem, browser, GitHub, or deployment CLIs safely.",
+    agentId: "gateway-tool-agent",
+    factoryLabel: "Gateway Tool Agent",
+    factoryGoalKo: "외부 도구를 직접 흩뿌리지 않고 connector/gateway 목록, 권한 범위, 호출 기록으로 관리하는 에이전트를 만듭니다.",
+    factoryGoalEn: "Create an agent that manages external tools through connector/gateway inventories, permission scopes, and invocation records.",
+    role: "tool gateway agent that routes approved connectors and records tool calls",
+    capabilities: ["gateway", "mcp", "identity", "tool_catalog", "observability"],
+    lifecycle: ["register target", "authorize", "invoke tool", "record trace", "review"],
+    outputRecords: ["tool catalog", "auth state", "tool call trace", "policy note"],
+    safetyGates: ["connector trust review", "auth state visibility", "least privilege", "tool output provenance"],
+    defaultObjectiveKo: "데스크톱 앱의 파일/터미널/브라우저/외부 API 연결을 AgentCore gateway 패턴처럼 connector catalog와 권한 검토 흐름으로 재구성하기",
+    defaultObjectiveEn: "Reshape desktop file, terminal, browser, and API integrations into a connector catalog with permission review, following AgentCore gateway patterns.",
+    defaultQuestionsKo: "어떤 도구가 기본 제공이고 어떤 도구가 optional connector인가?\n권한 요청과 회수는 어디에서 일어나야 하는가?\n도구 호출 기록은 어떤 task-run record에 연결해야 하는가?",
+    defaultQuestionsEn: "Which tools are built-in and which are optional connectors?\nWhere should permission grant and revocation happen?\nWhich task-run record should tool calls attach to?",
+    defaultNotesKo: "MCP/외부 도구는 설정의 connector catalog와 작업 실행 전 preflight에서 드러나야 합니다.",
+    defaultNotesEn: "MCP and external tools should be visible in settings connector catalog and task preflight."
+  },
+  {
+    id: "agentcore_evaluation_guarded_agent",
+    label: "Evaluation-Guarded Agent",
+    sourceLabel: "awslabs/agentcore-samples · evaluations + observability",
+    sourceUrl: agentCoreSampleSourceUrl,
+    summaryKo: "LLM-as-judge, trace, 검증 명령, 사용자 리뷰를 작업 결과의 품질 게이트로 묶는 에이전트입니다.",
+    summaryEn: "An agent that binds LLM-as-judge, traces, validation commands, and user review into quality gates.",
+    primaryUseKo: "에이전트가 결과만 내는 게 아니라 합격/재작업 판단까지 남겨야 할 때",
+    primaryUseEn: "Use when the agent must leave pass/rework decisions, not just output.",
+    agentId: "evaluation-guarded-agent",
+    factoryLabel: "Evaluation Guarded Agent",
+    factoryGoalKo: "작업 결과마다 평가 기준, 검증 명령, 재작업 조건, 근거 부족 항목을 남기는 품질 게이트 에이전트를 만듭니다.",
+    factoryGoalEn: "Create a quality-gate agent that records evaluation criteria, validation commands, rework conditions, and grounding gaps per task.",
+    role: "evaluation and quality gate agent for production task outputs",
+    capabilities: ["evaluation", "observability", "validation", "trace", "rollback"],
+    lifecycle: ["invoke", "trace", "evaluate", "rework", "accept"],
+    outputRecords: ["evaluation report", "trace summary", "validation log", "rollback note"],
+    safetyGates: ["unsupported claim check", "validation command required", "rollback plan", "human accept gate"],
+    defaultObjectiveKo: "현재 에이전트 작업 결과가 production 품질 게이트를 통과하려면 어떤 evaluation, trace, validation, rollback 기록이 필요한지 정리하기",
+    defaultObjectiveEn: "Define which evaluation, trace, validation, and rollback records are needed for current agent work to pass production quality gates.",
+    defaultQuestionsKo: "어떤 실패가 자동 재작업이고 어떤 실패가 사용자 결정인가?\n검증 명령은 어디에 저장되고 누가 실행하는가?\n평가 결과를 다음 agent improvement로 어떻게 연결하는가?",
+    defaultQuestionsEn: "Which failures trigger automatic rework and which require user decisions?\nWhere are validation commands stored and who runs them?\nHow should evaluation results feed future agent improvement?",
+    defaultNotesKo: "관측은 메인 기능이 아니라 품질 판단과 개선 루프를 돕는 support layer로 둡니다.",
+    defaultNotesEn: "Keep observability as a support layer for quality judgment and improvement, not the main feature."
+  }
+];
+
 const sessionModePresets: SessionModePreset[] = [
   {
     id: "research_insight_agent",
@@ -1923,6 +2054,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [searchAgentChatMessages, setSearchAgentChatMessages] =
     useState<SearchAgentChatMessage[]>(defaultSearchAgentChatMessages);
   const [providerTaskBusy, setProviderTaskBusy] = useState(false);
+  const [selectedAgentCoreBlueprintId, setSelectedAgentCoreBlueprintId] = useState(agentCoreBlueprints[0].id);
   const [runtimeLaunchRequest, setRuntimeLaunchRequest] = useState<RuntimeLaunchRequest | null>(null);
   const [agentFactoryForm, setAgentFactoryForm] = useState<AgentFactoryForm>(defaultAgentFactoryForm);
   const [agentFactoryProposal, setAgentFactoryProposal] = useState<AgentFactoryProposalReport | null>(null);
@@ -2747,6 +2879,55 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   };
   const updateSearchAgentRunForm = (field: keyof SearchAgentRunForm, value: string) => {
     setSearchAgentRunForm((current) => ({ ...current, [field]: value }));
+  };
+  const applyAgentCoreBlueprint = (blueprintId: string, mode: "factory" | "preflight" = "factory") => {
+    const blueprint = agentCoreBlueprints.find((item) => item.id === blueprintId) || agentCoreBlueprints[0];
+    const ko = uiLanguage === "ko";
+    setSelectedAgentCoreBlueprintId(blueprint.id);
+    setSection("agents");
+    setSearchAgentRunForm((current) => ({
+      ...current,
+      objective: mode === "preflight"
+        ? ko
+          ? `${blueprint.label}를 AgentCore-style production lifecycle로 배포하기 전 readiness와 실행 계획을 점검하기`
+          : `Check readiness and execution plan before deploying ${blueprint.label} through an AgentCore-style production lifecycle.`
+        : ko
+          ? blueprint.defaultObjectiveKo
+          : blueprint.defaultObjectiveEn,
+      questions: ko ? blueprint.defaultQuestionsKo : blueprint.defaultQuestionsEn,
+      searchChannels: "web search\nrepository search\nAgentCore sample source\nAWS official docs",
+      captureTargets: "_history/web-searches/YYYY/\n_research/\nplatform-desktop-app/specs/\n_history/request-traces/YYYY/",
+      notes: ko ? blueprint.defaultNotesKo : blueprint.defaultNotesEn
+    }));
+    setAgentFactoryForm((current) => ({
+      ...current,
+      agentId: blueprint.agentId,
+      label: blueprint.factoryLabel,
+      goal: ko ? blueprint.factoryGoalKo : blueprint.factoryGoalEn,
+      role: blueprint.role,
+      tools: blueprint.capabilities.join("\n"),
+      guardrails: blueprint.safetyGates.join("\n"),
+      validationCommands:
+        "corepack pnpm --filter platform-desktop-app test\ncorepack pnpm --filter workspace-monitor test\ncorepack pnpm --filter workspace-monitor run check",
+      outputContract: `${blueprint.outputRecords.join(", ")} / lifecycle=${blueprint.lifecycle.join(" -> ")}`,
+      ownerProject: "agent-platform",
+      targetPath: `agent-platform/configs/agents/${blueprint.agentId}.json`,
+      rollbackPlan: "Disable or archive the generated agent proposal, keep the source evidence, and preserve task-run/evaluation records for review."
+    }));
+    setSearchAgentChatMessages((current) =>
+      [
+        ...current,
+        {
+          id: `agentcore-blueprint-${blueprint.id}-${Date.now()}`,
+          role: "system" as const,
+          title: ko ? "AgentCore 블루프린트 적용" : "AgentCore Blueprint Applied",
+          body: ko
+            ? `${blueprint.label} 입력을 검색 에이전트와 Agent Factory에 채웠습니다. 바로 작업 시작을 누르면 연결된 제공자 계정으로 사전조사/계획을 실행합니다.`
+            : `${blueprint.label} filled the Search Agent and Agent Factory inputs. Press Start Work to run preflight research and planning through the connected provider account.`,
+          meta: `${blueprint.sourceLabel} / ${mode}`
+        }
+      ].slice(-12)
+    );
   };
   const launchSearchAgent = async () => {
     const requestId = `research-insight-agent-${Date.now()}`;
@@ -4468,6 +4649,16 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             onRun={launchSearchAgent}
           />
 
+          <AgentCoreBlueprintPanel
+            blueprints={agentCoreBlueprints}
+            selectedBlueprintId={selectedAgentCoreBlueprintId}
+            providerCredentialReport={providerCredentials}
+            language={uiLanguage}
+            onSelectBlueprint={setSelectedAgentCoreBlueprintId}
+            onApplyBlueprint={(blueprintId) => applyAgentCoreBlueprint(blueprintId, "factory")}
+            onStartPreflight={(blueprintId) => applyAgentCoreBlueprint(blueprintId, "preflight")}
+          />
+
           <AgentFactoryWizard
             form={agentFactoryForm}
             proposal={agentFactoryProposal}
@@ -4759,6 +4950,130 @@ function SearchAgentWorkChatPanel({
             </small>
           </div>
         </aside>
+      </div>
+    </section>
+  );
+}
+
+function AgentCoreBlueprintPanel({
+  blueprints,
+  selectedBlueprintId,
+  providerCredentialReport,
+  language,
+  onSelectBlueprint,
+  onApplyBlueprint,
+  onStartPreflight
+}: {
+  blueprints: AgentCoreBlueprint[];
+  selectedBlueprintId: string;
+  providerCredentialReport: ProviderCredentialReport;
+  language: UiLanguage;
+  onSelectBlueprint: (blueprintId: string) => void;
+  onApplyBlueprint: (blueprintId: string) => void;
+  onStartPreflight: (blueprintId: string) => void;
+}) {
+  const ko = language === "ko";
+  const selectedBlueprint = blueprints.find((blueprint) => blueprint.id === selectedBlueprintId) || blueprints[0];
+  const connectedProviderCount = providerCredentialReport.providers.filter((provider) => provider.configured).length;
+
+  return (
+    <section className="panel wide agentcore-blueprint-panel">
+      <div className="panel-heading">
+        <div>
+          <p className="eyebrow">AgentCore Reference Transfer</p>
+          <h2>{ko ? "Production 에이전트 블루프린트" : "Production Agent Blueprints"}</h2>
+          <p>
+            {ko
+              ? "AWS AgentCore 샘플의 runtime, memory, gateway, evaluation 구조를 우리 데스크톱 앱의 에이전트 생성과 실행 흐름으로 바꿉니다."
+              : "Translates AWS AgentCore sample runtime, memory, gateway, and evaluation patterns into this desktop app's agent creation and run flow."}
+          </p>
+        </div>
+        <a href={selectedBlueprint.sourceUrl} target="_blank" rel="noreferrer" className="panel-link-button">
+          <ExternalLink size={15} aria-hidden="true" />
+          <span>{ko ? "원본 보기" : "Open Source"}</span>
+        </a>
+      </div>
+
+      <div className="agentcore-blueprint-layout">
+        <div className="agentcore-blueprint-list" role="tablist" aria-label={ko ? "AgentCore 블루프린트" : "AgentCore blueprints"}>
+          {blueprints.map((blueprint) => (
+            <button
+              key={blueprint.id}
+              type="button"
+              className={blueprint.id === selectedBlueprint.id ? "active" : ""}
+              onClick={() => onSelectBlueprint(blueprint.id)}
+            >
+              <strong>{blueprint.label}</strong>
+              <span>{ko ? blueprint.primaryUseKo : blueprint.primaryUseEn}</span>
+            </button>
+          ))}
+        </div>
+
+        <article className="agentcore-blueprint-detail">
+          <header>
+            <div>
+              <span>{selectedBlueprint.sourceLabel}</span>
+              <h3>{selectedBlueprint.label}</h3>
+            </div>
+            <strong>{connectedProviderCount > 0 ? (ko ? "직접 실행 가능" : "Direct run ready") : ko ? "계정 연결 필요" : "Account needed"}</strong>
+          </header>
+          <p>{ko ? selectedBlueprint.summaryKo : selectedBlueprint.summaryEn}</p>
+
+          <div className="agentcore-blueprint-matrix">
+            <div>
+              <span>{ko ? "라이프사이클" : "Lifecycle"}</span>
+              <ol>
+                {selectedBlueprint.lifecycle.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ol>
+            </div>
+            <div>
+              <span>{ko ? "능력" : "Capabilities"}</span>
+              <ul>
+                {selectedBlueprint.capabilities.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <span>{ko ? "저장 기록" : "Stored Records"}</span>
+              <ul>
+                {selectedBlueprint.outputRecords.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <span>{ko ? "게이트" : "Gates"}</span>
+              <ul>
+                {selectedBlueprint.safetyGates.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="agentcore-blueprint-actions">
+            <button type="button" className="primary-action-button" onClick={() => onApplyBlueprint(selectedBlueprint.id)}>
+              <Bot size={16} aria-hidden="true" />
+              <span>{ko ? "에이전트 생성 입력 채우기" : "Fill Agent Factory"}</span>
+            </button>
+            <button type="button" onClick={() => onStartPreflight(selectedBlueprint.id)}>
+              <ClipboardCheck size={16} aria-hidden="true" />
+              <span>{ko ? "배포 사전점검 작업 만들기" : "Create Deployment Preflight"}</span>
+            </button>
+          </div>
+
+          <div className="agentcore-blueprint-contract">
+            <span>Apache-2.0 / optional AWS adapter</span>
+            <small>
+              {ko
+                ? "원본 코드를 제품에 복사하지 않고 구조만 이전합니다. AgentCore CLI와 AWS 자격증명은 선택형 배포 adapter이며, 앱의 기본 작업 상태는 로컬 runtime이 소유합니다."
+                : "The app transfers structure without copying source code. AgentCore CLI and AWS credentials stay optional deployment adapters; local runtime owns default task state."}
+            </small>
+          </div>
+        </article>
       </div>
     </section>
   );

@@ -103,6 +103,9 @@ test("product feature registry makes agent platform primary", () => {
   assert.match(serialized, /Agent Factory/);
   assert.match(serialized, /Search Agent Work Chat/);
   assert.match(serialized, /Learning & Evaluation Loop/);
+  assert.match(serialized, /Production Agent Blueprints/);
+  assert.match(serialized, /awslabs_agentcore_samples/);
+  assert.match(serialized, /agentcore_blueprint_gate/);
   assert.match(serialized, /supporting observability/);
   assert.match(serialized, /operator_surfaces_are_separate/);
   assert.deepEqual(registry.desktop_home_surface.primary_navigation_sections, ["overview", "desktop", "agents", "source", "intent"]);
@@ -235,6 +238,7 @@ test("reference platform advantage registry transfers researched strengths into 
   assert.match(serialized, /permission-hooks-checkpoints/);
   assert.match(serialized, /native-install-runtime-boundary/);
   assert.match(serialized, /command-palette-extension-catalog/);
+  assert.match(serialized, /agentcore-style-production-agent-blueprints/);
   assert.match(serialized, /claw-style-command-orchestration/);
   assert.match(serialized, /manifest-parity-gap-audits/);
   assert.match(serialized, /security-first-agentic-boundaries/);
@@ -378,6 +382,8 @@ test("service readiness registry records production service blockers", () => {
   assert.match(serialized, /Update & Recovery/);
   assert.match(serialized, /Workspace Onboarding/);
   assert.match(serialized, /Provider Accounts/);
+  assert.match(serialized, /Production Agent Blueprints/);
+  assert.match(serialized, /production_agent_blueprints/);
   assert.match(serialized, /direct model-task execution readiness/);
   assert.match(serialized, /updater_is_a_release_gate/);
 });
@@ -394,6 +400,8 @@ test("user flow exposes AI CLI orchestration and source editing surfaces", () =>
   assert.match(serialized, /existing_search_agent_run/);
   assert.match(serialized, /Codex app-style thread workbench/);
   assert.match(serialized, /Claude Desktop-style connector chips/);
+  assert.match(serialized, /production_agent_blueprints/);
+  assert.match(serialized, /AgentCore-style production blueprints/);
   assert.match(serialized, /MCP servers/);
   assert.match(serialized, /desktop extensions/);
 });

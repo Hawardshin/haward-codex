@@ -339,6 +339,11 @@ if (observabilityFeature?.role !== "supporting") {
 if (!productFeatureSerialized.includes("operator_surfaces_are_separate")) {
   failures.push("product-feature-registry must require operator surfaces to stay separate");
 }
+for (const requiredPhrase of ["awslabs_agentcore_samples", "Production Agent Blueprints", "agentcore_blueprint_gate"]) {
+  if (!productFeatureSerialized.includes(requiredPhrase)) {
+    failures.push(`product-feature-registry must include AgentCore production blueprint token ${requiredPhrase}`);
+  }
+}
 const expectedPrimaryNavigationSections = ["overview", "desktop", "agents", "source", "intent"];
 const expectedOperatorCenterSections = ["projects", "history", "structure", "documents", "requirements"];
 if (JSON.stringify(productFeatureRegistry.desktop_home_surface?.primary_navigation_sections) !== JSON.stringify(expectedPrimaryNavigationSections)) {
@@ -494,6 +499,7 @@ for (const requiredPhrase of [
   "permission-hooks-checkpoints",
   "native-install-runtime-boundary",
   "command-palette-extension-catalog",
+  "agentcore-style-production-agent-blueprints",
   "security-first-agentic-boundaries",
   "Codex app",
   "Claude Desktop",
@@ -687,7 +693,7 @@ for (const requiredPhrase of ["checkReleaseReadiness", "public_release_blocked",
     failures.push(`check-release-readiness.mjs must include ${requiredPhrase}`);
   }
 }
-for (const requiredPhrase of ["checkServiceReadiness", "service_internal_ready_public_blocked", "Signed updater channel", "Workspace Onboarding"]) {
+for (const requiredPhrase of ["checkServiceReadiness", "service_internal_ready_public_blocked", "Signed updater channel", "Workspace Onboarding", "Production Agent Blueprints"]) {
   if (!serviceReadinessCheck.includes(requiredPhrase)) {
     failures.push(`check-service-readiness.mjs must include ${requiredPhrase}`);
   }
@@ -738,6 +744,13 @@ for (const requiredPhrase of [
   "adapterSetupGuides",
   "sessionModePresets",
   "SearchAgentWorkChatPanel",
+  "AgentCoreBlueprintPanel",
+  "agentCoreBlueprints",
+  "applyAgentCoreBlueprint",
+  "agentcore-blueprint-panel",
+  "Production 에이전트 블루프린트",
+  "에이전트 생성 입력 채우기",
+  "배포 사전점검 작업 만들기",
   "SearchAgentChatMessage",
   "renderSearchAgentPrompt",
   "research-insight-planner-agent",

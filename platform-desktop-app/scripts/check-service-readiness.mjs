@@ -48,6 +48,11 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
       check("provider_direct_task_command", "Direct provider task command exposed", tauriLib.includes("run_provider_agent_task") && tauriLib.includes("ProviderAgentTaskReport"), "Connected provider accounts can run model tasks without a shell command."),
       check("provider_direct_task_ui", "Direct provider task UI visible", monitorShell.includes("agent-provider-run-controls") && monitorShell.includes("run_provider_agent_task"), "Search Agent Work Chat exposes provider account and model controls.")
     ]),
+    group("production_agent_blueprints", "Production Agent Blueprints", [
+      check("agentcore_blueprint_ui", "AgentCore-style blueprint UI visible", monitorShell.includes("AgentCoreBlueprintPanel") && monitorShell.includes("agentcore-blueprint-panel"), "Agents screen exposes production blueprints derived from public AgentCore references."),
+      check("agentcore_blueprint_prefill", "Blueprints fill runnable inputs", monitorShell.includes("applyAgentCoreBlueprint") && monitorShell.includes("setAgentFactoryForm") && monitorShell.includes("setSearchAgentRunForm"), "Blueprint application fills Search Agent Work Chat and Agent Factory inputs."),
+      check("agentcore_reference_recorded", "AgentCore reference recorded", serializedRegistry.includes("production_agent_blueprints") && serializedUserFlow.includes("awslabs_agentcore_samples"), "Service and user-flow registries record AgentCore-style production blueprint behavior.")
+    ]),
     group("workspace_onboarding", "Workspace Onboarding", [
       check("first_run_docs", "First-run onboarding documented", existsSync(path.join(root, "docs/first-run-onboarding.ko.md")), "First-run onboarding document exists."),
       check("workspace_flow_registry", "Workspace flow registered", serializedUserFlow.includes("workspace") && serializedUserFlow.includes("first-run"), "User flow registry includes workspace and first-run language."),
