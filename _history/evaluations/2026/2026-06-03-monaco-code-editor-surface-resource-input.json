@@ -1,0 +1,107 @@
+{
+  "task": "Monaco code editor surface",
+  "work_mode": "standard",
+  "runtime_context": [
+    "react",
+    "nextjs",
+    "browser",
+    "tauri",
+    "monaco-editor"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "monaco-editor-models",
+      "category": "browser_context",
+      "description": "Monaco creates editor and model resources for source preview and runtime editing.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "@monaco-editor/react owns editor lifecycle and the implementation avoids manual model creation or retained global editor references.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx uses MonacoEditor without manual createModel calls",
+        "Browser verification showed one mounted .monaco-editor in Source viewer"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "clipboard-copy",
+      "category": "subscription",
+      "description": "Clipboard access can fail in restricted browser contexts.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Copy action tries navigator.clipboard.writeText first and then a temporary textarea fallback; failures show a bounded notice instead of throwing.",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx writeClipboardText",
+        "Browser verification showed bounded Clipboard unavailable notice under automation permissions"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "preview-server",
+      "category": "process",
+      "description": "The existing static preview server remains available for user review.",
+      "required": true,
+      "status": "accepted",
+      "mitigation": "No new preview server was started; the existing 127.0.0.1:3018 server serves the latest static build.",
+      "evidence": [
+        "curl -I http://127.0.0.1:3018/ returned HTTP 200"
+      ],
+      "rationale": "The server is intentionally retained as the user-facing preview surface."
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "monaco-no-manual-model-retention",
+      "resource": "Monaco editor/model",
+      "create_path": "MonacoEditor React component mount",
+      "cleanup_path": "@monaco-editor/react component unmount lifecycle",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "No manual monaco.editor.createModel or global editor storage added"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "clipboard-fallback-cleanup",
+      "resource": "temporary textarea clipboard fallback",
+      "create_path": "document.createElement('textarea')",
+      "cleanup_path": "document.body.removeChild(field)",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx writeClipboardText"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "preview-server-handoff",
+      "resource": "python static preview server",
+      "create_path": "existing python3 -m http.server 3018",
+      "cleanup_path": "Manual stop after user review",
+      "required": true,
+      "status": "deferred",
+      "evidence": [
+        "Preview URL remains available for user review: http://127.0.0.1:3018/"
+      ],
+      "rationale": "The server is intentionally retained for the delivered preview URL."
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "monaco-static-preview-render",
+      "metric": "Monaco mount and layout",
+      "tool": "in-app Browser DOM checks",
+      "threshold": "At least one .monaco-editor, nonzero shell size, no horizontal overflow.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Source tab: monacoEditors=1, shellRect height=440 width=541, horizontalOverflow=false"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No package installation occurred.",
+    "Browser automation did not grant clipboard permission, so copy success could not be proven in Browser; graceful fallback notice was verified."
+  ]
+}

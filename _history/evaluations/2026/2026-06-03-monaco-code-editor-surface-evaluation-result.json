@@ -1,0 +1,67 @@
+{
+  "status": "ready_to_close",
+  "requires_rework": false,
+  "work_mode": "standard",
+  "required_target_policy": {
+    "required_targets": [
+      "mode_selection_record_targets",
+      "omission_check_targets",
+      "plan_evidence_targets",
+      "references_checked",
+      "request_trace_targets",
+      "requirements_targets",
+      "source_provenance_targets",
+      "spec_targets",
+      "timing_summary_targets",
+      "user_request_summary_targets",
+      "web_search_record_targets",
+      "work_summary_targets"
+    ],
+    "deferred_targets_allowed": []
+  },
+  "alignment_check": {
+    "initial_instruction_present": true,
+    "result_summary_present": true,
+    "work_mode": "standard",
+    "changed_files_count": 8,
+    "verification_count": 14,
+    "references_checked_count": 5,
+    "grounding_checks_count": 0,
+    "source_provenance_targets_count": 2,
+    "plan_evidence_targets_count": 2,
+    "mode_selection_record_targets_count": 1,
+    "omission_check_targets_count": 2,
+    "web_search_record_targets_count": 1,
+    "user_request_summary_targets_count": 1,
+    "requirements_targets_count": 1,
+    "spec_targets_count": 1,
+    "skill_work_occurred": false,
+    "skill_targets_count": 0,
+    "skill_validation_targets_count": 0,
+    "request_trace_targets_count": 1,
+    "work_summary_targets_count": 1,
+    "timing_summary_targets_count": 1,
+    "context_archiving_occurred": false,
+    "context_archive_targets_count": 0,
+    "installation_occurred": false,
+    "installation_record_targets_count": 0,
+    "resource_risk_occurred": true,
+    "resource_check_targets_count": 2,
+    "cli_pipeline_occurred": false,
+    "cli_pipeline_targets_count": 0,
+    "deferred_improvement_targets_count": 0
+  },
+  "gaps": [],
+  "improvements": [
+    "Add repeatable Browser clipboard permission test or manual QA checklist for copy success.",
+    "Split the Monaco editor workbench out of MonitorShell once the desktop shell component split starts.",
+    "Add language-server-backed completion later if scoped editing becomes a primary daily workflow.",
+    "Run hallucination-guard-agent when the final output contains factual claims."
+  ],
+  "follow_up_actions": [
+    "Consider improvement: Add repeatable Browser clipboard permission test or manual QA checklist for copy success.",
+    "Consider improvement: Split the Monaco editor workbench out of MonitorShell once the desktop shell component split starts.",
+    "Consider improvement: Add language-server-backed completion later if scoped editing becomes a primary daily workflow.",
+    "Consider improvement: Run hallucination-guard-agent when the final output contains factual claims."
+  ]
+}

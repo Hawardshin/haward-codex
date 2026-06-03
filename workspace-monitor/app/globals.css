@@ -3570,8 +3570,7 @@ h3 {
 .session-input-row input,
 .source-editor-controls input,
 .source-editor-controls select,
-.source-file-browser input,
-.source-editor-frame textarea {
+.source-file-browser input {
   width: 100%;
   border: 1px solid var(--line);
   background: var(--surface);
@@ -3589,8 +3588,7 @@ h3 {
   padding: 8px 10px;
 }
 
-.session-launcher textarea,
-.source-editor-frame textarea {
+.session-launcher textarea {
   padding: 10px;
   resize: vertical;
 }
@@ -4335,14 +4333,37 @@ h3 {
   font-size: 12px;
 }
 
-.source-editor-frame textarea {
-  min-height: 340px;
-  max-height: 620px;
-  overflow: auto;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  font-size: 12px;
-  line-height: 1.55;
-  white-space: pre;
+.monaco-editor-shell {
+  min-width: 0;
+  height: min(58vh, 620px);
+  min-height: 420px;
+  overflow: hidden;
+  border: 1px solid #263241;
+  background: #111827;
+  border-radius: 8px;
+}
+
+.monaco-editor-loading {
+  display: grid;
+  min-height: 220px;
+  place-items: center;
+  background: #111827;
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.source-copy-notice {
+  margin: 0;
+  border: 1px solid #b9d5c9;
+  background: #f2faf6;
+  border-radius: 7px;
+  padding: 8px 10px;
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
 }
 
 .desktop-success {
@@ -4671,6 +4692,28 @@ h3 {
   font-size: 13px;
 }
 
+.source-viewer-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
+.source-viewer-actions button {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  border-radius: 7px;
+  padding: 6px 9px;
+  font-weight: 800;
+}
+
 .source-viewer pre {
   max-height: 720px;
   margin: 0;
@@ -4686,6 +4729,13 @@ h3 {
   font-family:
     "SFMono-Regular", Consolas, "Liberation Mono", Menlo, ui-monospace, monospace;
   white-space: pre;
+}
+
+.source-viewer-monaco {
+  height: min(58vh, 720px);
+  min-height: 440px;
+  overflow: hidden;
+  background: #111827;
 }
 
 .structure-grid {
@@ -5739,6 +5789,16 @@ h3 {
   .service-score-ring {
     width: 72px;
     height: 72px;
+  }
+
+  .monaco-editor-shell {
+    height: 420px;
+    min-height: 360px;
+  }
+
+  .source-viewer-monaco {
+    height: 420px;
+    min-height: 360px;
   }
 
   .ux-spine {

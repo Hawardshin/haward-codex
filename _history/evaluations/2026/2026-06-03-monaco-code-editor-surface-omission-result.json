@@ -1,0 +1,17 @@
+{
+  "status": "coverage_ready",
+  "requires_rework": false,
+  "work_mode": "standard",
+  "coverage_summary": {
+    "expected_items_count": 5,
+    "artifact_checks_count": 3,
+    "acceptance_checks_count": 3,
+    "known_omission_risks_count": 2
+  },
+  "gaps": [],
+  "warnings": [
+    "Known omission risk recorded: Browser automation did not grant clipboard permission; implementation fallback and bounded failure notice were verified.",
+    "Known omission risk recorded: Full language server, extension marketplace, and debugger support remain out of scope."
+  ],
+  "follow_up_actions": []
+}

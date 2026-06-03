@@ -1,0 +1,126 @@
+{
+  "task": "Monaco code editor surface",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and implementation.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-monaco-code-editor-surface.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "open-source-code-editor",
+      "description": "Use an open-source VS Code-related or suitable code editor capability.",
+      "source": "UR-2026-06-03-025",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/package.json already includes @monaco-editor/react and monaco-editor",
+        "workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "code-copy",
+      "description": "Add source code copy capability.",
+      "source": "REQ-PDA-CODE-003",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "Source viewer Copy button",
+        "Desktop editor Copy Current button",
+        "writeClipboardText helper"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "code-editing",
+      "description": "Add VS Code-like code editing surface while preserving scoped write gate.",
+      "source": "REQ-PDA-CODE-001 and REQ-PDA-CODE-002",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "MonacoEditor in source viewer and runtime source editor",
+        "write_workspace_text_file Tauri command path unchanged"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "install-boundary",
+      "description": "Record install decision, license/security review, and rollback.",
+      "source": "Open-source installation policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/plans/2026/2026-06-03-monaco-code-editor-surface-plan.ko.md",
+        "corepack pnpm audit --prod=false"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-03-code-editor-surface.ko.md",
+      "purpose": "Project requirements for code editor surface.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-code-editor-surface/spec.ko.md",
+      "purpose": "Spec for Monaco code editor surface.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-03-monaco-code-editor-surface.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-validation",
+      "description": "Workspace Monitor check, tests, build, audit, and customer boundary checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter workspace-monitor run check",
+        "corepack pnpm --filter workspace-monitor test",
+        "corepack pnpm --filter workspace-monitor run build",
+        "corepack pnpm audit --prod=false",
+        "corepack pnpm --filter workspace-monitor run check:intent-map:customer"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser-monaco-render",
+      "description": "Browser static preview shows Monaco source viewer without layout overflow.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Source tab: monacoEditors=1, shellRect height=440 width=541, horizontalOverflow=false"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "resource-check",
+      "description": "Resource lifecycle risks for Monaco and clipboard fallback are recorded.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "_history/evaluations/2026/2026-06-03-monaco-code-editor-surface-resource-input.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Browser automation did not grant clipboard permission; implementation fallback and bounded failure notice were verified.",
+    "Full language server, extension marketplace, and debugger support remain out of scope."
+  ],
+  "notes": [
+    "No new package installation occurred because Monaco dependencies already existed in the workspace."
+  ]
+}

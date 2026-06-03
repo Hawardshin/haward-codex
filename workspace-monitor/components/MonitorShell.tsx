@@ -11,6 +11,7 @@ import {
   ClipboardCheck,
   Clock3,
   Code2,
+  Copy,
   FileSearch,
   FolderOpen,
   FolderKanban,
@@ -30,6 +31,8 @@ import {
   X
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import dynamic from "next/dynamic";
+import type { editor } from "monaco-editor";
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot, type WorkspaceSourceFile } from "@/lib/snapshot";
@@ -66,6 +69,33 @@ type CommandItem = {
   badge?: string;
   keywords: string[];
   run: () => void;
+};
+
+const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((module) => module.default), {
+  ssr: false,
+  loading: () => <div className="monaco-editor-loading">Loading Monaco editor</div>
+});
+
+const monacoEditorOptions: editor.IStandaloneEditorConstructionOptions = {
+  automaticLayout: true,
+  cursorBlinking: "smooth",
+  fontFamily: "\"SFMono-Regular\", Consolas, \"Liberation Mono\", monospace",
+  fontSize: 12,
+  lineHeight: 20,
+  minimap: { enabled: true },
+  renderLineHighlight: "all",
+  renderWhitespace: "selection",
+  scrollBeyondLastLine: false,
+  smoothScrolling: true,
+  tabSize: 2,
+  wordWrap: "off"
+};
+
+const monacoReadOnlyOptions: editor.IStandaloneEditorConstructionOptions = {
+  ...monacoEditorOptions,
+  domReadOnly: true,
+  minimap: { enabled: false },
+  readOnly: true
 };
 
 const PINNED_SECTIONS_STORAGE_KEY = "workspace-monitor:pinned-sections";
@@ -863,6 +893,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [sourceProject, setSourceProject] = useState("all");
   const [sourceLanguage, setSourceLanguage] = useState("all");
   const [selectedSourceId, setSelectedSourceId] = useState("");
+  const [sourceCopyNotice, setSourceCopyNotice] = useState("");
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState("");
@@ -1099,6 +1130,13 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     });
   }, [sourceLanguage, sourceProject, sourceQuery, visibleSourceFiles]);
   const selectedSource = filteredSourceFiles.find((file) => file.id === selectedSourceId) || filteredSourceFiles[0];
+  const copySelectedSource = async () => {
+    if (!selectedSource) {
+      return;
+    }
+    const copied = await writeClipboardText(selectedSource.content);
+    setSourceCopyNotice(copied ? `${selectedSource.path} copied` : "Clipboard unavailable");
+  };
   const visibleEvaluations = viewFilteredDocuments.filter((document) => document.category === "evaluation").length;
   const visibleWebSearches = viewFilteredDocuments.filter((document) => document.category === "web-search").length;
   const latestEvaluation = viewFilteredDocuments.find((document) => document.category === "evaluation");
@@ -2227,11 +2265,26 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                             {selectedSource.lineCount.toLocaleString("ko-KR")} lines
                           </p>
                         </div>
-                        {selectedSource.truncated && <strong>truncated</strong>}
+                        <div className="source-viewer-actions">
+                          {selectedSource.truncated && <strong>truncated</strong>}
+                          <button type="button" onClick={copySelectedSource}>
+                            <Copy size={15} aria-hidden="true" />
+                            <span>Copy</span>
+                          </button>
+                        </div>
                       </header>
-                      <pre>
-                        <code>{selectedSource.content}</code>
-                      </pre>
+                      {sourceCopyNotice && <p className="source-copy-notice">{sourceCopyNotice}</p>}
+                      <div className="source-viewer-monaco">
+                        <MonacoEditor
+                          height="100%"
+                          language={monacoLanguageFromPath(selectedSource.path)}
+                          loading={<div className="monaco-editor-loading">Loading Monaco editor</div>}
+                          options={monacoReadOnlyOptions}
+                          path={`file:///${selectedSource.path.replace(/^\/+/, "")}`}
+                          theme="vs-dark"
+                          value={selectedSource.content}
+                        />
+                      </div>
                     </>
                   ) : (
                     <p className="empty-state">왼쪽에서 소스 파일을 선택하세요.</p>
@@ -3040,6 +3093,7 @@ function DesktopRuntimePanel({
   const [sourceDrafts, setSourceDrafts] = useState<Record<string, SourceDraftEntry>>({});
   const [sourceSaveResults, setSourceSaveResults] = useState<WorkspaceWriteReport[]>([]);
   const [writeReport, setWriteReport] = useState<WorkspaceWriteReport | null>(null);
+  const [sourceCopyNotice, setSourceCopyNotice] = useState("");
   const [editorBusy, setEditorBusy] = useState(false);
   const [saveAllBusy, setSaveAllBusy] = useState(false);
   const panelMountedRef = useRef(false);
@@ -3845,6 +3899,7 @@ function DesktopRuntimePanel({
       setSourceDraft(nextFile.content);
       setSelectedSourcePath(nextFile.relativePath);
       setSourcePathInput(nextFile.relativePath);
+      setSourceCopyNotice("");
       setSourceDrafts((current) => ({ ...current, [nextFile.relativePath]: nextEntry }));
     } catch (caught) {
       setError(errorMessage(caught));
@@ -3871,6 +3926,7 @@ function DesktopRuntimePanel({
       maxSizeBytes: entry.maxSizeBytes
     });
     setSourceDraft(entry.content);
+    setSourceCopyNotice("");
     setWriteReport(
       entry.lastSavedBackupPath
         ? {
@@ -3893,6 +3949,7 @@ function DesktopRuntimePanel({
 
   const updateSourceDraft = (nextContent: string) => {
     setSourceDraft(nextContent);
+    setSourceCopyNotice("");
     if (!sourceFile) {
       return;
     }
@@ -3955,6 +4012,7 @@ function DesktopRuntimePanel({
         report,
         ...current.filter((item) => item.relativePath !== report.relativePath)
       ].slice(0, 8));
+      setSourceCopyNotice("");
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -4002,6 +4060,7 @@ function DesktopRuntimePanel({
           maxSizeBytes: currentEntry.maxSizeBytes
         });
         setSourceDraft(currentEntry.content);
+        setSourceCopyNotice("");
       }
       if (reportsToAdd[0]) {
         setWriteReport(reportsToAdd[0]);
@@ -4052,8 +4111,17 @@ function DesktopRuntimePanel({
     } else {
       setSourceFile(null);
       setSourceDraft("");
+      setSourceCopyNotice("");
       setWriteReport(null);
     }
+  };
+
+  const copyCurrentSourceDraft = async () => {
+    if (!sourceFile) {
+      return;
+    }
+    const copied = await writeClipboardText(sourceDraft);
+    setSourceCopyNotice(copied ? `${sourceFile.relativePath} copied` : "Clipboard unavailable");
   };
 
   useEffect(() => {
@@ -5263,6 +5331,10 @@ function DesktopRuntimePanel({
             <CheckCircle2 size={15} aria-hidden="true" />
             <span>{saveAllBusy ? "Saving" : "Save All"}</span>
           </button>
+          <button type="button" onClick={copyCurrentSourceDraft} disabled={!sourceFile}>
+            <Copy size={15} aria-hidden="true" />
+            <span>Copy Current</span>
+          </button>
           <button type="button" onClick={revertCurrentDraft} disabled={!sourceFile || !currentSourceDirty}>
             <History size={15} aria-hidden="true" />
             <span>Revert Draft</span>
@@ -5371,7 +5443,19 @@ function DesktopRuntimePanel({
                     )}
                   </div>
                 )}
-                <textarea value={sourceDraft} onChange={(event) => updateSourceDraft(event.target.value)} spellCheck={false} />
+                <div className="monaco-editor-shell">
+                  <MonacoEditor
+                    height="100%"
+                    language={monacoLanguageFromPath(sourceFile.relativePath)}
+                    loading={<div className="monaco-editor-loading">Loading Monaco editor</div>}
+                    onChange={(value) => updateSourceDraft(value ?? "")}
+                    options={monacoEditorOptions}
+                    path={`file:///${sourceFile.relativePath.replace(/^\/+/, "")}`}
+                    theme="vs-dark"
+                    value={sourceDraft}
+                  />
+                </div>
+                {sourceCopyNotice && <p className="source-copy-notice">{sourceCopyNotice}</p>}
                 {writeReport && (
                   <p className="desktop-success">
                     {writeReport.status} / backup: {writeReport.backupPath}
@@ -5509,6 +5593,76 @@ function getTauriInvoke(): TauriInvoke | null {
     return null;
   }
   return window.__TAURI__?.core?.invoke ?? null;
+}
+
+async function writeClipboardText(value: string) {
+  if (!value) {
+    return false;
+  }
+  try {
+    if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(value);
+      return true;
+    }
+  } catch {
+    // Fall back to a temporary textarea when browser clipboard permissions are unavailable.
+  }
+
+  try {
+    if (typeof document === "undefined") {
+      return false;
+    }
+    const field = document.createElement("textarea");
+    field.value = value;
+    field.setAttribute("readonly", "true");
+    field.style.position = "fixed";
+    field.style.left = "-9999px";
+    field.style.top = "0";
+    document.body.appendChild(field);
+    field.focus();
+    field.select();
+    field.setSelectionRange(0, value.length);
+    const copied = document.execCommand("copy");
+    document.body.removeChild(field);
+    return copied;
+  } catch {
+    return false;
+  }
+}
+
+function monacoLanguageFromPath(relativePath: string) {
+  const extension = relativePath.split(".").pop()?.toLowerCase() || "";
+  const languageByExtension: Record<string, string> = {
+    c: "c",
+    cc: "cpp",
+    cpp: "cpp",
+    cs: "csharp",
+    css: "css",
+    go: "go",
+    h: "cpp",
+    hpp: "cpp",
+    html: "html",
+    java: "java",
+    js: "javascript",
+    jsx: "javascript",
+    json: "json",
+    jsonc: "json",
+    kt: "kotlin",
+    md: "markdown",
+    mjs: "javascript",
+    py: "python",
+    rs: "rust",
+    scss: "scss",
+    sh: "shell",
+    sql: "sql",
+    ts: "typescript",
+    tsx: "typescript",
+    toml: "toml",
+    txt: "plaintext",
+    yaml: "yaml",
+    yml: "yaml"
+  };
+  return languageByExtension[extension] || "plaintext";
 }
 
 function errorMessage(caught: unknown) {

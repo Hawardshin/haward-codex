@@ -1,0 +1,49 @@
+{
+  "task_id": "2026-06-03-monaco-code-editor-surface",
+  "title": "Monaco code editor surface",
+  "date": "2026-06-03",
+  "timezone": "Asia/Seoul",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Started timing after web search and source inspection."
+    },
+    {
+      "phase_id": "research_and_plan",
+      "label": "Research, requirements, and plan",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "Compared Code OSS, Monaco, and CodeMirror; recorded no-install dependency decision."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "duration_seconds": 1800,
+      "measurement": "estimated",
+      "bottleneck_notes": "Connected Monaco to source viewer and scoped runtime editor while preserving Tauri save gates."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 1200,
+      "measurement": "estimated",
+      "bottleneck_notes": "Ran check/test/build/audit/customer check and Browser visual verification."
+    },
+    {
+      "phase_id": "evaluation_commit_push",
+      "label": "Evaluation, commit, and push",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "Recorded close-out artifacts, evaluator inputs, commit, and push."
+    }
+  ]
+}

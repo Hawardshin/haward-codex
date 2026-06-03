@@ -1,0 +1,96 @@
+{
+  "initial_instruction": "코드 복사와 코드 편집 기능이 필요하므로 VS Code 오픈소스 또는 다른 오픈소스 코드 편집 기능을 설치/적용해 달라는 요청",
+  "result_summary": "Connected the existing MIT-licensed Monaco Editor dependencies to the desktop app: Source now renders a Monaco read-only viewer with copy, Desktop Runtime uses Monaco for scoped multi-file editing, and Tauri read/write backup gates remain unchanged.",
+  "work_mode": "standard",
+  "changed_files": [
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/public/workspace-snapshot.json",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "platform-desktop-app/docs/requirements/2026-06-03-code-editor-surface.ko.md",
+    "platform-desktop-app/specs/2026-06-03-code-editor-surface/",
+    "_history/web-searches/2026/2026-06-03-monaco-code-editor-surface.ko.md",
+    "_history/plans/2026/2026-06-03-monaco-code-editor-surface-plan.ko.md"
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json",
+    "corepack pnpm --filter workspace-monitor why @monaco-editor/react monaco-editor",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run build",
+    "corepack pnpm audit --prod=false",
+    "in-app Browser static Source tab Monaco render check",
+    "corepack pnpm --filter workspace-monitor run collect -- --snapshot-mode customer",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run check:intent-map:customer",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "git diff --check",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-03-monaco-code-editor-surface-resource-input.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-03-monaco-code-editor-surface-omission-input.json"
+  ],
+  "references_checked": [
+    "https://github.com/microsoft/vscode",
+    "https://code.visualstudio.com/license?lang=en",
+    "https://github.com/microsoft/vscode/wiki/Differences-between-the-repository-and-Visual-Studio-Code",
+    "https://github.com/microsoft/monaco-editor",
+    "https://github.com/suren-atoyan/monaco-react"
+  ],
+  "grounding_checks": [],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-03-monaco-code-editor-surface.ko.md",
+    "_history/plans/2026/2026-06-03-monaco-code-editor-surface-plan.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-03-monaco-code-editor-surface-plan.ko.md",
+    "platform-desktop-app/specs/2026-06-03-code-editor-surface/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-03-monaco-code-editor-surface.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-monaco-code-editor-surface-omission-input.json",
+    "_history/evaluations/2026/2026-06-03-monaco-code-editor-surface-omission-result.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-monaco-code-editor-surface.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-03-code-editor-surface.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-03-code-editor-surface/"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-monaco-code-editor-surface.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-monaco-code-editor-surface.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-03-monaco-code-editor-surface-resource-input.json",
+    "_history/evaluations/2026/2026-06-03-monaco-code-editor-surface-resource-result.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Add repeatable Browser clipboard permission test or manual QA checklist for copy success.",
+    "Split the Monaco editor workbench out of MonitorShell once the desktop shell component split starts.",
+    "Add language-server-backed completion later if scoped editing becomes a primary daily workflow."
+  ]
+}
