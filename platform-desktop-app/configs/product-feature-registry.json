@@ -104,6 +104,16 @@
       "last_checked": "2026-06-03"
     },
     {
+      "id": "intellij_tool_windows",
+      "title": "IntelliJ IDEA Tool Windows",
+      "url": "https://www.jetbrains.com/help/idea/tool-windows.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "Run, Services, Problems, and status-oriented tool-window model for the desktop execution workbench"
+      ],
+      "last_checked": "2026-06-04"
+    },
+    {
       "id": "installer_shell_runtime_contract",
       "title": "Installer Shell Runtime Contract",
       "path": "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
@@ -312,6 +322,10 @@
       "primary_section": "desktop",
       "primary_surfaces": [
         "Desktop Runtime",
+        "IntelliJ-style Run Configurations",
+        "Services Tool Window",
+        "Problems Tool Window",
+        "Run Status Bar",
         "Run Board",
         "Search Agent Work Chat",
         "Provider Accounts",
@@ -338,6 +352,9 @@
         "provider credential injection into guest CLI sessions",
         "existing search agent work-chat",
         "task intake to multi-lane plan",
+        "top-level run configuration selection for search agent, CLI session, task pipe, and workspace readiness",
+        "Services-style inspection of runtime, workspace, adapters, providers, and active sessions",
+        "Problems-style surfacing of missing runtime, missing adapters, missing model accounts, pending decisions, dirty drafts, and release blockers",
         "bounded stdout and stderr capture",
         "human decision defer and resume",
         "merge gate artifact synthesis",
@@ -360,6 +377,7 @@
       ],
       "validation_gates": [
         "search agent work-chat exposes research-insight-planner-agent",
+        "Desktop Runtime exposes IntelliJ-style Run Configuration, Services, Problems, and status bar controls before long scrolling panels",
         "local/provider models can produce task-run records without requiring a shell command",
         "readiness test includes product feature architecture",
         "resource guard covers long-running lanes",
@@ -624,6 +642,7 @@
     "Readiness tests fail if monitoring is positioned as the primary product.",
     "New feature work updates requirements, specs, validation, history, and request traces.",
     "AgentCore-style blueprint choices map reference samples to runnable local product flows.",
+    "Desktop Runtime starts from run configurations and tool-window status instead of making the user scan a web dashboard.",
     "AWS deployment remains optional; the installed desktop app owns task state and accumulated records."
   ],
   "validation_gates": [
@@ -651,6 +670,11 @@
       "id": "agentcore_blueprint_gate",
       "command": "corepack pnpm --filter platform-desktop-app test",
       "validates": "Agents UI and product registries expose AgentCore-style production blueprints and quick proposal creation without making AWS mandatory."
+    },
+    {
+      "id": "intellij_run_workbench_gate",
+      "command": "corepack pnpm --filter platform-desktop-app test",
+      "validates": "Desktop Runtime keeps the IntelliJ-style run configuration, Services, Problems, and status bar surface wired into real actions."
     }
   ]
 }

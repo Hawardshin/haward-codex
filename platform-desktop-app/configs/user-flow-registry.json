@@ -168,6 +168,16 @@
       "last_checked": "2026-06-04"
     },
     {
+      "id": "intellij_tool_windows",
+      "title": "IntelliJ IDEA Tool Windows",
+      "url": "https://www.jetbrains.com/help/idea/tool-windows.html",
+      "source_type": "official_design_guidance",
+      "used_for": [
+        "Run Configuration, Services, Problems, and status-bar oriented desktop task execution layout"
+      ],
+      "last_checked": "2026-06-04"
+    },
+    {
       "id": "claude_desktop_local_mcp_extensions",
       "title": "Claude Desktop local MCP servers and desktop extensions",
       "url": "https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop",
@@ -335,6 +345,11 @@
       "id": "multi_cli_supervised_not_scattered",
       "principle": "Multiple AI CLIs can run in parallel, but the platform owns task state, questions, artifacts, and verification.",
       "design_implication": "The UI shows CLI sessions as supervised lanes in one timeline instead of unrelated terminal windows."
+    },
+    {
+      "id": "ide_style_execution_surface",
+      "principle": "Starting work should feel like a native IDE run surface, not a long web settings page.",
+      "design_implication": "The Run tab begins with Run Configuration, Services, Problems, and status-bar controls before deeper panels."
     },
     {
       "id": "data_gets_better_through_structure",
@@ -522,6 +537,10 @@
         "superadmin_developer"
       ],
       "contents": [
+        "IntelliJ-style run configuration toolbar",
+        "Services tool window for runtime, workspace, adapters, providers, and sessions",
+        "Problems strip for blockers, missing setup, decisions, dirty drafts, and release gates",
+        "run status bar",
         "guided task form",
         "existing search agent work chat",
         "work mode selector",
@@ -593,6 +612,7 @@
       ],
       "required_behavior": [
         "show the existing research-insight-planner-agent before agent creation",
+        "show the existing search agent as a Run Configuration from the Desktop Run tab, not only inside a deep form",
         "start the run from a chat workbench without requiring the user to type a shell command",
         "let the user choose a local/provider model, including Ollama models served from the local desktop runtime",
         "when a local model runtime is available or a provider account is connected, run the selected Ollama, OpenAI, Anthropic, or Gemini model directly from the chat before falling back to optional CLI lanes",
@@ -628,6 +648,7 @@
       "step": "preflight",
       "screen": "Readiness and evidence panel",
       "required_behavior": [
+        "surface readiness in a Services and Problems layout before any long scroll region",
         "show web-first requirement status",
         "show missing required capabilities",
         "show optional capability gaps",
@@ -640,6 +661,7 @@
       "step": "run",
       "screen": "Run timeline",
       "required_behavior": [
+        "keep run configuration, active services, problems, and status bar visible near the top-level run surface",
         "show current phase",
         "show elapsed time by phase",
         "show active agents and subprocesses",
@@ -706,6 +728,7 @@
       "screen": "Task preflight",
       "required_behavior": [
         "show Claude Code, Gemini CLI, Codex CLI, OpenCode, Claw Code, and future adapters as optional capability choices",
+        "show selected adapters and provider accounts in a Services-style list before launch",
         "show availability, version, auth/session status, permission scope, and setup-later action",
         "disable missing adapters with capability_missing instead of blocking the task"
       ]
@@ -904,6 +927,11 @@
       "id": "existing_search_agent_run",
       "priority": "must",
       "purpose": "Run the existing research-insight-planner-agent from the Agents screen and command palette without manual shell setup."
+    },
+    {
+      "id": "desktop_run_workbench",
+      "priority": "must",
+      "purpose": "Start search agent, selected CLI session, multi-CLI pipe, and readiness checks from an IntelliJ-style Run Configuration surface with Services, Problems, and status bar."
     },
     {
       "id": "provider_account_connection",

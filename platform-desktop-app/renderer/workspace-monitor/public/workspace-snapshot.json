@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-03T18:03:07.724Z",
+  "generatedAt": "2026-06-03T18:13:58.897Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -30,7 +30,7 @@
     "primaryProductFeatures": 5,
     "supportingProductFeatures": 1,
     "referencePlatforms": 5,
-    "referenceTransferPatterns": 18,
+    "referenceTransferPatterns": 19,
     "structurePressurePoints": 0,
     "sourceFiles": 0,
     "rootFolders": 0
@@ -175,6 +175,10 @@
         "primarySection": "desktop",
         "primarySurfaces": [
           "Desktop Runtime",
+          "IntelliJ-style Run Configurations",
+          "Services Tool Window",
+          "Problems Tool Window",
+          "Run Status Bar",
           "Run Board",
           "Search Agent Work Chat",
           "Provider Accounts",
@@ -192,6 +196,9 @@
           "provider credential injection into guest CLI sessions",
           "existing search agent work-chat",
           "task intake to multi-lane plan",
+          "top-level run configuration selection for search agent, CLI session, task pipe, and workspace readiness",
+          "Services-style inspection of runtime, workspace, adapters, providers, and active sessions",
+          "Problems-style surfacing of missing runtime, missing adapters, missing model accounts, pending decisions, dirty drafts, and release blockers",
           "bounded stdout and stderr capture",
           "human decision defer and resume",
           "merge gate artifact synthesis",
@@ -414,6 +421,7 @@
       "Readiness tests fail if monitoring is positioned as the primary product.",
       "New feature work updates requirements, specs, validation, history, and request traces.",
       "AgentCore-style blueprint choices map reference samples to runnable local product flows.",
+      "Desktop Runtime starts from run configurations and tool-window status instead of making the user scan a web dashboard.",
       "AWS deployment remains optional; the installed desktop app owns task state and accumulated records."
     ],
     "validationGates": []
@@ -433,13 +441,13 @@
       "acceptedSourceTypes": []
     },
     "summary": {
-      "totalSources": 31,
+      "totalSources": 32,
       "platformGroups": 5,
-      "totalPatterns": 18,
-      "implemented": 6,
+      "totalPatterns": 19,
+      "implemented": 7,
       "integratedContract": 8,
       "queuedP0": 3,
-      "highPriority": 17
+      "highPriority": 18
     },
     "referenceLinks": [],
     "platformGroups": [
@@ -533,6 +541,33 @@
         "riskControls": [
           "responsive grid tests",
           "customer snapshot remains source-free"
+        ],
+        "status": "implemented",
+        "priority": "p0",
+        "sourceIds": []
+      },
+      {
+        "id": "intellij-style-run-services-problems",
+        "labelKo": "실행 구성 + Services + Problems 작업대",
+        "labelEn": "Run Configurations, Services, and Problems workbench",
+        "sourcePlatforms": [
+          "IntelliJ IDEA",
+          "JetBrains IDEs"
+        ],
+        "observedStrength": "IntelliJ puts runnable configurations, tool windows, service state, and problem inspection close to the work surface so the user can start, inspect, and fix work without hunting through a dashboard.",
+        "platformDecision": "Desktop Runtime starts with an IDE-style Run Configuration toolbar and connected Services, Problems, and status-bar regions for search agent, CLI session, task pipe, workspace readiness, providers, adapters, sessions, decisions, and blockers.",
+        "productSection": "desktop",
+        "userValueKo": "사용자는 검색 에이전트 실행, CLI 세션, 다중 파이프, 준비 점검을 한 화면의 IDE식 실행 영역에서 바로 시작하고 막힌 이유를 즉시 본다.",
+        "currentPlatformAssets": [],
+        "implementationTargets": [
+          "Run Configuration cards call real search agent, CLI session, task pipe, and readiness actions",
+          "Services list shows runtime, workspace, adapters, providers, and active sessions",
+          "Problems strip links blockers to terminal, settings, questions, or readiness checks",
+          "status bar summarizes runtime, CLI, model, sessions, inbox, and terminal state"
+        ],
+        "riskControls": [
+          "readiness script requires the new workbench tokens",
+          "responsive CSS keeps the tool-window layout usable on smaller screens"
         ],
         "status": "implemented",
         "priority": "p0",

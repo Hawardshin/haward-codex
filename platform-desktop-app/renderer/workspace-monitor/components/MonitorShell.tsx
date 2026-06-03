@@ -8224,6 +8224,265 @@ function DesktopRuntimePanel({
     }
   }, [selectedSourcePath, sourceFiles]);
 
+  type IdeWorkbenchStatus = "ready" | "running" | "setup" | "blocked" | "idle";
+  type IdeRunConfiguration = {
+    id: string;
+    icon: LucideIcon;
+    title: string;
+    subtitle: string;
+    detail: string;
+    status: IdeWorkbenchStatus;
+    statusLabel: string;
+    primaryLabel: string;
+    primaryDisabled?: boolean;
+    secondaryLabel?: string;
+    secondaryDisabled?: boolean;
+    onPrimary: () => void | Promise<void>;
+    onSecondary?: () => void | Promise<void>;
+  };
+
+  const runtimeReady = runtimeState === "available";
+  const providerSummaries = providerCredentialReport?.providers ?? [];
+  const providerConfiguredCount = providerCredentialReport?.configuredCount ?? 0;
+  const providerTotalCount = providerSummaries.length;
+  const primaryProvider = providerSummaries.find((provider) => provider.configured) || providerSummaries[0] || null;
+  const selectedAdapter = adapters.find((adapter) => adapter.adapterId === selectedSessionAdapterId) || adapters[0] || null;
+  const workspacePathLabel =
+    desktopWorkspace?.activeWorkspacePath ||
+    desktopWorkspace?.fallbackWorkspacePath ||
+    (uiLanguage === "ko" ? "작업공간 선택 필요" : "Workspace needed");
+  const ideRunConfigurations: IdeRunConfiguration[] = [
+    {
+      id: "search-agent-chat",
+      icon: Search,
+      title: uiLanguage === "ko" ? "검색 에이전트로 대화 시작" : "Start Search Agent chat",
+      subtitle: uiLanguage === "ko" ? "이미 만든 검색 에이전트를 바로 엽니다." : "Open the existing search agent immediately.",
+      detail: primaryProvider
+        ? `${primaryProvider.label} · ${primaryProvider.defaultModel || primaryProvider.status}`
+        : uiLanguage === "ko"
+          ? "제공자 설정에서 모델 계정을 연결하세요."
+          : "Connect a model account in provider settings.",
+      status:
+        runningAdapterId === "research_insight_agent"
+          ? "running"
+          : primaryProvider?.configured || primaryProvider?.authMethod === "local_http"
+            ? "ready"
+            : "setup",
+      statusLabel:
+        runningAdapterId === "research_insight_agent"
+          ? uiLanguage === "ko" ? "실행 중" : "Running"
+          : primaryProvider?.configured || primaryProvider?.authMethod === "local_http"
+            ? uiLanguage === "ko" ? "준비됨" : "Ready"
+            : uiLanguage === "ko" ? "계정 필요" : "Needs account",
+      primaryLabel: uiLanguage === "ko" ? "채팅 열기" : "Open chat",
+      secondaryLabel: uiLanguage === "ko" ? "터미널 실행" : "Run in terminal",
+      primaryDisabled: !onOpenSearchAgentWorkbench && (!runtimeReady || runningAdapterId !== ""),
+      secondaryDisabled: !runtimeReady || runningAdapterId !== "",
+      onPrimary: onOpenSearchAgentWorkbench || startDefaultSearchAgent,
+      onSecondary: startDefaultSearchAgent
+    },
+    {
+      id: "cli-session",
+      icon: SquareTerminal,
+      title: uiLanguage === "ko" ? "선택한 CLI 세션 시작" : "Start selected CLI session",
+      subtitle: uiLanguage === "ko" ? "선택된 adapter와 모드로 하단 터미널을 올립니다." : "Open the bottom terminal with the selected adapter and mode.",
+      detail: `${selectedAdapter?.label || selectedSessionAdapterId} · ${selectedMode.label}`,
+      status: runningAdapterId === "session" ? "running" : selectedAdapter?.available ? "ready" : "setup",
+      statusLabel:
+        runningAdapterId === "session"
+          ? uiLanguage === "ko" ? "실행 중" : "Running"
+          : selectedAdapter?.available
+            ? uiLanguage === "ko" ? "준비됨" : "Ready"
+            : uiLanguage === "ko" ? "설치 확인" : "Check install",
+      primaryLabel: uiLanguage === "ko" ? "세션 시작" : "Start session",
+      secondaryLabel: uiLanguage === "ko" ? "실행 설정" : "Run settings",
+      primaryDisabled: !runtimeReady || runningAdapterId !== "",
+      onPrimary: startSession,
+      onSecondary: () => onOpenSettings("session")
+    },
+    {
+      id: "task-pipe",
+      icon: Network,
+      title: uiLanguage === "ko" ? "다중 CLI 파이프라인" : "Multi-CLI pipeline",
+      subtitle: uiLanguage === "ko" ? "여러 lane을 fan-out/fan-in 구조로 초기화합니다." : "Initialize multiple lanes with fan-out/fan-in control.",
+      detail: `${selectedTaskPipe.label} · ${selectedTaskPipe.laneCount} lanes · ${selectedTaskPipe.mergeGate}`,
+      status:
+        runningAdapterId === "task-pipe"
+          ? "running"
+          : pipelineStats.missing > 0
+            ? "setup"
+            : "ready",
+      statusLabel:
+        runningAdapterId === "task-pipe"
+          ? uiLanguage === "ko" ? "실행 중" : "Running"
+          : pipelineStats.missing > 0
+            ? uiLanguage === "ko" ? `${pipelineStats.missing} lane 누락` : `${pipelineStats.missing} lanes missing`
+            : uiLanguage === "ko" ? "준비됨" : "Ready",
+      primaryLabel: uiLanguage === "ko" ? "Pipe 시작" : "Start pipe",
+      secondaryLabel: uiLanguage === "ko" ? "Pipe 설정" : "Pipe settings",
+      primaryDisabled: !runtimeReady || runningAdapterId !== "",
+      onPrimary: initTaskPipe,
+      onSecondary: () => onOpenSettings("pipe")
+    },
+    {
+      id: "workspace-readiness",
+      icon: CheckCircle2,
+      title: uiLanguage === "ko" ? "작업공간 준비 상태 점검" : "Check workspace readiness",
+      subtitle: uiLanguage === "ko" ? "CLI, 데이터 경로, 공개 배포 blocker를 한 번에 확인합니다." : "Check CLIs, data paths, and public blockers together.",
+      detail: `${availableCount}/${adapters.length} CLI · ${serviceReadinessStats.publicBlockers} blockers · ${workspacePathLabel}`,
+      status:
+        serviceReadinessStats.publicBlockers > 0
+          ? "blocked"
+          : runtimeReady
+            ? "ready"
+            : "setup",
+      statusLabel:
+        serviceReadinessStats.publicBlockers > 0
+          ? uiLanguage === "ko" ? "해결 필요" : "Needs fix"
+          : runtimeReady
+            ? uiLanguage === "ko" ? "확인 가능" : "Checkable"
+            : uiLanguage === "ko" ? "런타임 필요" : "Needs runtime",
+      primaryLabel: uiLanguage === "ko" ? "전체 점검" : "Run checks",
+      secondaryLabel: uiLanguage === "ko" ? "폴더 선택" : "Choose folder",
+      primaryDisabled: !runtimeReady || runningAdapterId !== "",
+      secondaryDisabled: !runtimeReady || workspaceHostBusy !== "",
+      onPrimary: runAllHealthChecks,
+      onSecondary: chooseDesktopWorkspaceFolder
+    }
+  ];
+  const ideServiceRows = [
+    {
+      id: "runtime",
+      icon: Activity,
+      label: "Desktop Runtime",
+      status: runtimeState,
+      statusClass: runtimeReady ? "ready" : runtimeState === "checking" ? "idle" : "setup",
+      detail: health?.shell || (runtimeReady ? "Tauri bridge ready" : "Tauri bridge pending")
+    },
+    {
+      id: "workspace",
+      icon: FolderOpen,
+      label: uiLanguage === "ko" ? "작업공간" : "Workspace",
+      status: desktopWorkspace?.status || "pending",
+      statusClass: desktopWorkspace?.activeWorkspacePath ? "ready" : "setup",
+      detail: workspacePathLabel
+    },
+    ...adapters.slice(0, 4).map((adapter) => ({
+      id: `adapter-${adapter.adapterId}`,
+      icon: SquareTerminal,
+      label: adapter.label,
+      status: adapter.available ? "available" : "missing",
+      statusClass: adapter.available ? "ready" : "setup",
+      detail: adapter.version || adapter.resolvedPath || adapter.lastError || adapter.command
+    })),
+    ...providerSummaries.slice(0, 4).map((provider) => ({
+      id: `provider-${provider.providerId}`,
+      icon: KeyRound,
+      label: provider.label,
+      status: provider.configured || provider.authMethod === "local_http" ? "connected" : "missing",
+      statusClass: provider.configured || provider.authMethod === "local_http" ? "ready" : "setup",
+      detail: provider.authMethod === "local_http" ? "127.0.0.1:11434" : provider.envVar
+    })),
+    ...sessions.slice(0, 2).map((session) => ({
+      id: `session-${session.sessionId}`,
+      icon: PlayCircle,
+      label: session.label,
+      status: session.status,
+      statusClass: isActiveSessionStatus(session.status) ? "running" : "idle",
+      detail: `${session.adapterId} · ${formatDuration(session.elapsedMs)}`
+    }))
+  ].slice(0, 11);
+  const ideProblemItems: Array<{
+    id: string;
+    severity: "error" | "warning" | "info";
+    title: string;
+    detail: string;
+    actionLabel?: string;
+    onAction?: () => void | Promise<void>;
+  }> = [];
+  if (error) {
+    ideProblemItems.push({
+      id: "runtime-error",
+      severity: "error",
+      title: uiLanguage === "ko" ? "최근 실행 오류" : "Latest run error",
+      detail: error,
+      actionLabel: uiLanguage === "ko" ? "터미널" : "Terminal",
+      onAction: () => setTerminalDrawerOpen(true)
+    });
+  }
+  if (!runtimeReady) {
+    ideProblemItems.push({
+      id: "runtime-unavailable",
+      severity: "warning",
+      title: uiLanguage === "ko" ? "네이티브 런타임 연결 필요" : "Native runtime needed",
+      detail: uiLanguage === "ko" ? "브라우저 미리보기에서는 일부 실행 기능이 비활성화됩니다." : "Some execution features are disabled in browser preview.",
+      actionLabel: uiLanguage === "ko" ? "설정" : "Settings",
+      onAction: () => onOpenSettings("quick")
+    });
+  }
+  adapters
+    .filter((adapter) => !adapter.available)
+    .slice(0, 2)
+    .forEach((adapter) => {
+      ideProblemItems.push({
+        id: `missing-adapter-${adapter.adapterId}`,
+        severity: "warning",
+        title: `${adapter.label} ${uiLanguage === "ko" ? "CLI 확인 필요" : "CLI check needed"}`,
+        detail: adapter.lastError || adapter.command,
+        actionLabel: uiLanguage === "ko" ? "설정" : "Settings",
+        onAction: () => onOpenSettings("adapter")
+      });
+    });
+  if (providerTotalCount > 0 && providerConfiguredCount === 0) {
+    ideProblemItems.push({
+      id: "provider-missing",
+      severity: "warning",
+      title: uiLanguage === "ko" ? "모델 계정 또는 로컬 모델 선택 필요" : "Model account or local model needed",
+      detail: uiLanguage === "ko" ? "OpenAI, Claude, Gemini, Ollama 중 하나를 연결하면 에이전트 실행이 바로 됩니다." : "Connect OpenAI, Claude, Gemini, or Ollama to run agents directly.",
+      actionLabel: uiLanguage === "ko" ? "제공자" : "Providers",
+      onAction: () => onOpenSettings("providers")
+    });
+  }
+  if (openInboxDecisions.length > 0) {
+    ideProblemItems.push({
+      id: "decision-inbox",
+      severity: "info",
+      title: uiLanguage === "ko" ? "답변 대기 결정 있음" : "Decisions waiting for answers",
+      detail: `${openInboxDecisions.length} ${uiLanguage === "ko" ? "개 항목이 작업 재개를 기다립니다." : "items are waiting before resume."}`,
+      actionLabel: uiLanguage === "ko" ? "질문 보기" : "View questions",
+      onAction: () => onOpenSettings("questions")
+    });
+  }
+  if (dirtyDraftEntries.length > 0) {
+    ideProblemItems.push({
+      id: "dirty-drafts",
+      severity: "info",
+      title: uiLanguage === "ko" ? "저장 안 된 코드 초안" : "Unsaved code drafts",
+      detail: `${dirtyDraftEntries.length} ${uiLanguage === "ko" ? "개 파일에 변경사항이 있습니다." : "files have edits."}`,
+      actionLabel: uiLanguage === "ko" ? "파일 열기" : "Open files",
+      onAction: () => setTerminalDrawerOpen(false)
+    });
+  }
+  serviceReadiness?.publicBlockers.slice(0, 2).forEach((blocker, index) => {
+    ideProblemItems.push({
+      id: `public-blocker-${index}`,
+      severity: "warning",
+      title: uiLanguage === "ko" ? "배포 blocker" : "Release blocker",
+      detail: blocker,
+      actionLabel: uiLanguage === "ko" ? "점검" : "Check",
+      onAction: runAllHealthChecks
+    });
+  });
+  const visibleIdeProblems = ideProblemItems.slice(0, 7);
+  const ideStatusItems = [
+    { label: "Runtime", value: runtimeState },
+    { label: "CLI", value: `${availableCount}/${adapters.length}` },
+    { label: "Model", value: providerTotalCount ? `${providerConfiguredCount}/${providerTotalCount}` : "0" },
+    { label: "Sessions", value: `${sessionStats.active} active` },
+    { label: "Inbox", value: `${openInboxDecisions.length}` },
+    { label: "Terminal", value: terminalDrawerOpen ? "open" : "docked" }
+  ];
+
   const sourceWorkspacePanel = (
     <div className={`content-grid native-file-workspace-panel filesystem-workbench ${invoke ? "runtime-ready" : "runtime-fallback"}`}>
       <section className="native-file-hero">
@@ -8695,6 +8954,170 @@ function DesktopRuntimePanel({
           <span>{runtimeState}</span>
           <strong>{availableCount} / {adapters.length}</strong>
           <small>available guest adapters</small>
+        </div>
+      </section>
+
+      <section className="panel wide intellij-run-workbench-panel" aria-label={uiLanguage === "ko" ? "IDE식 실행 작업대" : "IDE-style run workbench"}>
+        <div className="ide-run-toolbar">
+          <div className="ide-run-selector">
+            <span>
+              <PlayCircle size={15} aria-hidden="true" />
+              {uiLanguage === "ko" ? "Run Configuration" : "Run Configuration"}
+            </span>
+            <strong>{uiLanguage === "ko" ? "작업 실행 구성" : "Task run configurations"}</strong>
+            <small>{selectedAdapter?.label || selectedSessionAdapterId} / {selectedMode.label} / {workspaceExplorerRootLabel}</small>
+          </div>
+          <div className="ide-run-actions">
+            <button className="ide-toolbar-button primary" type="button" onClick={() => void startSession()} disabled={!runtimeReady || runningAdapterId !== ""}>
+              <PlayCircle size={15} aria-hidden="true" />
+              <span>{uiLanguage === "ko" ? "실행" : "Run"}</span>
+            </button>
+            <button className="ide-toolbar-button" type="button" onClick={() => setTerminalDrawerOpen(true)}>
+              <SquareTerminal size={15} aria-hidden="true" />
+              <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
+            </button>
+            <button className="ide-toolbar-button" type="button" onClick={() => onOpenSettings("quick")}>
+              <Settings size={15} aria-hidden="true" />
+              <span>{uiLanguage === "ko" ? "설정" : "Settings"}</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="ide-tool-window-layout">
+          <nav className="ide-tool-window-rail" aria-label={uiLanguage === "ko" ? "도구 창" : "Tool windows"}>
+            <button type="button" className="active" onClick={() => void startSession()} disabled={!runtimeReady || runningAdapterId !== ""}>
+              <PlayCircle size={15} aria-hidden="true" />
+              <span>Run</span>
+            </button>
+            <button type="button" onClick={() => void refreshAdapters()}>
+              <Activity size={15} aria-hidden="true" />
+              <span>Services</span>
+            </button>
+            <button type="button" onClick={() => onOpenSettings("questions")}>
+              <AlertTriangle size={15} aria-hidden="true" />
+              <span>Problems</span>
+            </button>
+            <button type="button" onClick={() => setTerminalDrawerOpen(true)}>
+              <SquareTerminal size={15} aria-hidden="true" />
+              <span>Terminal</span>
+            </button>
+          </nav>
+
+          <div className="ide-run-config-list">
+            <div className="ide-window-header">
+              <div>
+                <span>{uiLanguage === "ko" ? "실행 구성" : "Run Configurations"}</span>
+                <strong>{uiLanguage === "ko" ? "에이전트 작업을 여기서 시작" : "Start agent work here"}</strong>
+              </div>
+              <small>{ideRunConfigurations.length} configs</small>
+            </div>
+            {ideRunConfigurations.map((configuration) => {
+              const Icon = configuration.icon;
+              return (
+                <article key={configuration.id} className={`ide-run-config-card status-${configuration.status}`}>
+                  <div className="ide-config-icon">
+                    <Icon size={17} aria-hidden="true" />
+                  </div>
+                  <div className="ide-config-body">
+                    <header>
+                      <div>
+                        <span>{configuration.statusLabel}</span>
+                        <strong>{configuration.title}</strong>
+                      </div>
+                      <em>{configuration.status}</em>
+                    </header>
+                    <p>{configuration.subtitle}</p>
+                    <small>{configuration.detail}</small>
+                    <div className="ide-config-actions">
+                      <button type="button" onClick={() => void configuration.onPrimary()} disabled={configuration.primaryDisabled}>
+                        <PlayCircle size={14} aria-hidden="true" />
+                        <span>{configuration.primaryLabel}</span>
+                      </button>
+                      {configuration.onSecondary && configuration.secondaryLabel && (
+                        <button type="button" onClick={() => void configuration.onSecondary?.()} disabled={configuration.secondaryDisabled}>
+                          <Settings size={14} aria-hidden="true" />
+                          <span>{configuration.secondaryLabel}</span>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          <aside className="ide-services-window">
+            <div className="ide-window-header">
+              <div>
+                <span>Services</span>
+                <strong>{uiLanguage === "ko" ? "실행 가능한 연결" : "Runnable connections"}</strong>
+              </div>
+              <button type="button" onClick={() => void refreshAdapters()} disabled={!runtimeReady}>
+                <RefreshCw size={14} aria-hidden="true" />
+                <span>{uiLanguage === "ko" ? "새로고침" : "Refresh"}</span>
+              </button>
+            </div>
+            <div className="ide-service-list">
+              {ideServiceRows.map((service) => {
+                const Icon = service.icon;
+                return (
+                  <article key={service.id} className={`ide-service-row status-${service.statusClass}`}>
+                    <Icon size={15} aria-hidden="true" />
+                    <div>
+                      <strong>{service.label}</strong>
+                      <span>{service.detail}</span>
+                    </div>
+                    <em>{service.status}</em>
+                  </article>
+                );
+              })}
+            </div>
+          </aside>
+        </div>
+
+        <div className="ide-problems-strip" aria-label={uiLanguage === "ko" ? "문제 목록" : "Problems"}>
+          <div className="ide-window-header">
+            <div>
+              <span>Problems</span>
+              <strong>{visibleIdeProblems.length ? uiLanguage === "ko" ? "지금 막는 항목" : "Current blockers" : uiLanguage === "ko" ? "막힌 항목 없음" : "No blocking items"}</strong>
+            </div>
+            <small>{visibleIdeProblems.length} items</small>
+          </div>
+          <div className="ide-problem-list">
+            {visibleIdeProblems.length > 0 ? (
+              visibleIdeProblems.map((problem) => (
+                <article key={problem.id} className={`ide-problem-row severity-${problem.severity}`}>
+                  <AlertTriangle size={15} aria-hidden="true" />
+                  <div>
+                    <strong>{problem.title}</strong>
+                    <span>{problem.detail}</span>
+                  </div>
+                  {problem.onAction && problem.actionLabel && (
+                    <button type="button" onClick={() => void problem.onAction?.()}>
+                      <span>{problem.actionLabel}</span>
+                    </button>
+                  )}
+                </article>
+              ))
+            ) : (
+              <article className="ide-problem-row severity-info">
+                <CheckCircle2 size={15} aria-hidden="true" />
+                <div>
+                  <strong>{uiLanguage === "ko" ? "실행 전 확인된 주요 문제 없음" : "No major pre-run issues"}</strong>
+                  <span>{uiLanguage === "ko" ? "필요하면 Services에서 CLI와 모델 상태를 다시 점검하세요." : "Refresh Services if you need to recheck CLI and model status."}</span>
+                </div>
+              </article>
+            )}
+          </div>
+        </div>
+
+        <div className="ide-status-bar" aria-label={uiLanguage === "ko" ? "실행 상태바" : "Run status bar"}>
+          {ideStatusItems.map((item) => (
+            <span key={item.label}>
+              <strong>{item.label}</strong>
+              {item.value}
+            </span>
+          ))}
         </div>
       </section>
 

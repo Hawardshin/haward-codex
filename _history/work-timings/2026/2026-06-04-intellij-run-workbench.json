@@ -1,0 +1,21 @@
+{
+  "schema_version": "2026-06-04",
+  "request_id": "2026-06-04-intellij-run-workbench",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked JetBrains IntelliJ Tool Windows and existing IntelliJ UI registry references."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Added run workbench UI, CSS, readiness token gates, and registry updates."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Renderer check, platform tests/check, workspace-monitor tests, customer build/audit, config contracts, git diff check, and Playwright desktop/mobile smoke passed."
+    }
+  ]
+}

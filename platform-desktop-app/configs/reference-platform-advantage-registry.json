@@ -65,6 +65,19 @@
       "plan_impact": "Use tool windows around the editor and avoid duplicate sidebars that compete for navigation."
     },
     {
+      "id": "intellij_tool_windows",
+      "title": "IntelliJ IDEA tool windows",
+      "url": "https://www.jetbrains.com/help/idea/tool-windows.html",
+      "source_type": "official_docs",
+      "used_for": [
+        "reference platform advantage transfer planning"
+      ],
+      "last_checked": "2026-06-04",
+      "reliability": "high",
+      "limitation": "Tool-window documentation is IDE-general and must be translated into agent run semantics.",
+      "plan_impact": "Put Run Configuration, Services, Problems, and status context at the top of the Desktop Runtime surface so execution, setup gaps, and blockers are visible before long panels."
+    },
+    {
       "id": "github_copilot_cloud_agent",
       "title": "GitHub Copilot cloud agent",
       "url": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent",
@@ -621,6 +634,42 @@
         "vscode_ui",
         "intellij_ui",
         "openhands_key_features"
+      ]
+    },
+    {
+      "id": "intellij-style-run-services-problems",
+      "label_ko": "실행 구성 + Services + Problems 작업대",
+      "label_en": "Run Configurations, Services, and Problems workbench",
+      "source_platforms": [
+        "IntelliJ IDEA",
+        "JetBrains IDEs"
+      ],
+      "observed_strength": "IntelliJ puts runnable configurations, tool windows, service state, and problem inspection close to the work surface so the user can start, inspect, and fix work without hunting through a dashboard.",
+      "platform_decision": "Desktop Runtime starts with an IDE-style Run Configuration toolbar and connected Services, Problems, and status-bar regions for search agent, CLI session, task pipe, workspace readiness, providers, adapters, sessions, decisions, and blockers.",
+      "product_section": "desktop",
+      "user_value_ko": "사용자는 검색 에이전트 실행, CLI 세션, 다중 파이프, 준비 점검을 한 화면의 IDE식 실행 영역에서 바로 시작하고 막힌 이유를 즉시 본다.",
+      "current_platform_assets": [
+        "renderer/workspace-monitor/components/MonitorShell.tsx",
+        "renderer/workspace-monitor/app/globals.css",
+        "platform-desktop-app/configs/user-flow-registry.json",
+        "platform-desktop-app/configs/product-feature-registry.json"
+      ],
+      "implementation_targets": [
+        "Run Configuration cards call real search agent, CLI session, task pipe, and readiness actions",
+        "Services list shows runtime, workspace, adapters, providers, and active sessions",
+        "Problems strip links blockers to terminal, settings, questions, or readiness checks",
+        "status bar summarizes runtime, CLI, model, sessions, inbox, and terminal state"
+      ],
+      "risk_controls": [
+        "readiness script requires the new workbench tokens",
+        "responsive CSS keeps the tool-window layout usable on smaller screens",
+        "button actions reuse existing runtime functions instead of mock interactions"
+      ],
+      "status": "implemented",
+      "priority": "p0",
+      "source_ids": [
+        "intellij_ui",
+        "intellij_tool_windows"
       ]
     },
     {
