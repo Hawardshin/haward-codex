@@ -1,0 +1,38 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-settings-navigation-init",
+  "request_id": "UR-2026-06-03-041",
+  "mode": "quick",
+  "timezone": "Asia/Seoul",
+  "phase_timings": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes_estimate": 4,
+      "notes": "Checked official VS Code, Apple HIG, and Windows Settings references for sidebar and settings organization."
+    },
+    {
+      "phase": "local_inspection",
+      "duration_minutes_estimate": 6,
+      "notes": "Inspected MonitorShell settings/runtime/sidebar structure and existing readiness checks."
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes_estimate": 22,
+      "notes": "Added settings tabs, sidebar mode persistence, runtime init defaults, and settings-only runtime init summaries."
+    },
+    {
+      "phase": "validation",
+      "duration_minutes_estimate": 14,
+      "notes": "Ran TypeScript/tests/readiness/customer build and Browser static smoke."
+    },
+    {
+      "phase": "records",
+      "duration_minutes_estimate": 6,
+      "notes": "Recorded request trace, web search, evaluation, timing, resource cleanup, and screenshot artifact."
+    }
+  ],
+  "bottleneck_notes": [
+    "Settings centralization touched a large MonitorShell component, making targeted diff review slower.",
+    "Customer build regeneration touched tracked snapshot files."
+  ]
+}

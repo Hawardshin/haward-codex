@@ -110,6 +110,18 @@ main {
   overflow: hidden;
 }
 
+.desktop-app-shell.sidebar-collapsed {
+  grid-template-columns: 62px 0 minmax(0, 1fr);
+}
+
+.desktop-app-shell.sidebar-collapsed .desktop-sidebar {
+  visibility: hidden;
+  overflow: hidden;
+  border-right: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
 .activity-rail,
 .desktop-sidebar,
 .desktop-titlebar,
@@ -457,7 +469,7 @@ main {
 }
 
 .settings-dialog {
-  width: min(920px, 100%);
+  width: min(980px, 100%);
   max-height: min(760px, calc(100vh - 36px));
   overflow: auto;
   border: 1px solid rgba(148, 163, 184, 0.72);
@@ -465,6 +477,71 @@ main {
   border-radius: 8px;
   box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
   padding: 14px;
+}
+
+.settings-dialog-body {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.32fr) minmax(0, 1fr);
+  gap: 12px;
+  min-height: 440px;
+}
+
+.settings-tab-list {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: #f4f7fa;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.settings-tab-list button {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  border-radius: 7px;
+  padding: 8px;
+  text-align: left;
+}
+
+.settings-tab-list button.active {
+  border-color: #91a7bb;
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(31, 41, 51, 0.07);
+}
+
+.settings-tab-list svg {
+  color: var(--blue);
+}
+
+.settings-tab-list span {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.settings-tab-list strong,
+.settings-tab-list small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.settings-tab-list small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.settings-tab-panel {
+  min-width: 0;
 }
 
 .settings-dialog header {
@@ -557,6 +634,54 @@ main {
 
 .settings-primary-action {
   width: max-content;
+}
+
+.settings-controlled-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+  gap: 8px;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.settings-controlled-summary article,
+.settings-controlled-summary button {
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.settings-controlled-summary button {
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: center;
+  gap: 7px;
+}
+
+.settings-controlled-summary span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.settings-controlled-summary strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.session-init-summary {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
 }
 
 .desktop-toolbar {
@@ -6409,6 +6534,10 @@ h3 {
     grid-template-columns: 58px 250px minmax(0, 1fr);
   }
 
+  .desktop-app-shell.sidebar-collapsed {
+    grid-template-columns: 58px 0 minmax(0, 1fr);
+  }
+
   .desktop-home-grid {
     grid-template-columns: 1fr;
   }
@@ -6434,6 +6563,15 @@ h3 {
   }
 
   .settings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-dialog-body {
+    grid-template-columns: minmax(160px, 0.36fr) minmax(0, 1fr);
+  }
+
+  .settings-controlled-summary,
+  .session-init-summary {
     grid-template-columns: 1fr;
   }
 
@@ -6591,6 +6729,19 @@ h3 {
     overflow: visible;
     border-right: 0;
     border-bottom: 1px solid var(--line);
+  }
+
+  .desktop-app-shell.sidebar-collapsed .desktop-sidebar {
+    display: none;
+  }
+
+  .settings-dialog-body {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .settings-tab-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .desktop-viewport {

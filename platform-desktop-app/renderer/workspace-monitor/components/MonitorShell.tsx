@@ -53,6 +53,8 @@ type SectionId =
   | "agents";
 
 type FeatureGroupId = "core" | "workspace" | "knowledge" | "governance";
+type SidebarMode = "expanded" | "collapsed";
+type SettingsTabId = "appearance" | "navigation" | "execution" | "data";
 
 type Section = {
   id: SectionId;
@@ -75,6 +77,13 @@ type CommandItem = {
   badge?: string;
   keywords: string[];
   run: () => void;
+};
+
+type RuntimeInitDefaults = {
+  adapterId: string;
+  sessionModeId: string;
+  taskPipeKind: string;
+  autoDeferQuestions: boolean;
 };
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((module) => module.default), {
@@ -290,6 +299,8 @@ function appendSourceTemplate(content: string, templateBody: string) {
 
 const PINNED_SECTIONS_STORAGE_KEY = "workspace-monitor:pinned-sections";
 const UI_LANGUAGE_STORAGE_KEY = "workspace-monitor:ui-language";
+const SIDEBAR_MODE_STORAGE_KEY = "workspace-monitor:sidebar-mode";
+const RUNTIME_INIT_STORAGE_KEY = "workspace-monitor:runtime-init";
 const defaultPinnedSections: SectionId[] = ["overview", "desktop", "agents", "source", "intent"];
 const operatorSectionIds = new Set<SectionId>(["projects", "history", "structure", "documents", "requirements"]);
 type UiLanguage = "ko" | "en";
@@ -1393,6 +1404,13 @@ const fallbackTaskPipePresets: CliTaskPipelinePresetReport[] = [
   }
 ];
 
+const defaultRuntimeInitDefaults: RuntimeInitDefaults = {
+  adapterId: fallbackDesktopAdapters[0].adapterId,
+  sessionModeId: sessionModePresets[0].id,
+  taskPipeKind: fallbackTaskPipePresets[0].taskKind,
+  autoDeferQuestions: true
+};
+
 export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [section, setSection] = useState<SectionId>("overview");
   const [uiLanguage, setUiLanguage] = useState<UiLanguage>("ko");
@@ -1406,6 +1424,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [sourceCopyNotice, setSourceCopyNotice] = useState("");
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [settingsTab, setSettingsTab] = useState<SettingsTabId>("appearance");
+  const [sidebarMode, setSidebarMode] = useState<SidebarMode>("expanded");
+  const [runtimeInitDefaults, setRuntimeInitDefaults] = useState<RuntimeInitDefaults>(defaultRuntimeInitDefaults);
   const [operatorCenterOpen, setOperatorCenterOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState("");
   const commandInputRef = useRef<HTMLInputElement>(null);
@@ -1446,6 +1467,63 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       // Local storage can be unavailable in hardened browser contexts.
     }
   }, [uiLanguage]);
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(SIDEBAR_MODE_STORAGE_KEY);
+      if (stored === "expanded" || stored === "collapsed") {
+        setSidebarMode(stored);
+      }
+    } catch {
+      // Local storage can be unavailable in hardened browser contexts.
+    }
+  }, []);
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(SIDEBAR_MODE_STORAGE_KEY, sidebarMode);
+    } catch {
+      // Local storage can be unavailable in hardened browser contexts.
+    }
+  }, [sidebarMode]);
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(RUNTIME_INIT_STORAGE_KEY);
+      if (!stored) {
+        return;
+      }
+      const parsed = JSON.parse(stored) as Partial<RuntimeInitDefaults>;
+      setRuntimeInitDefaults({
+        adapterId:
+          typeof parsed.adapterId === "string" && fallbackDesktopAdapters.some((adapter) => adapter.adapterId === parsed.adapterId)
+            ? parsed.adapterId
+            : defaultRuntimeInitDefaults.adapterId,
+        sessionModeId:
+          typeof parsed.sessionModeId === "string" && sessionModePresets.some((mode) => mode.id === parsed.sessionModeId)
+            ? parsed.sessionModeId
+            : defaultRuntimeInitDefaults.sessionModeId,
+        taskPipeKind:
+          typeof parsed.taskPipeKind === "string" && fallbackTaskPipePresets.some((preset) => preset.taskKind === parsed.taskPipeKind)
+            ? parsed.taskPipeKind
+            : defaultRuntimeInitDefaults.taskPipeKind,
+        autoDeferQuestions:
+          typeof parsed.autoDeferQuestions === "boolean"
+            ? parsed.autoDeferQuestions
+            : defaultRuntimeInitDefaults.autoDeferQuestions
+      });
+    } catch {
+      try {
+        window.localStorage.removeItem(RUNTIME_INIT_STORAGE_KEY);
+      } catch {
+        // Local storage can be unavailable in hardened browser contexts.
+      }
+    }
+  }, []);
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(RUNTIME_INIT_STORAGE_KEY, JSON.stringify(runtimeInitDefaults));
+    } catch {
+      // Local storage can be unavailable in hardened browser contexts.
+    }
+  }, [runtimeInitDefaults]);
   useEffect(() => {
     try {
       const stored = window.localStorage.getItem(PINNED_SECTIONS_STORAGE_KEY);
@@ -1528,14 +1606,14 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   };
   const openModeFunctionOption = (groupId: string, optionId: string) => {
     if (groupId === "view_mode") {
-      selectViewMode(optionId);
+      setSettingsTab("appearance");
+      setSettingsOpen(true);
       return;
     }
 
     if (groupId === "language_mode") {
-      setLanguageMode(optionId);
-      setCategory("all");
-      setHistoryCategory("all");
+      setSettingsTab("appearance");
+      setSettingsOpen(true);
       return;
     }
 
@@ -1545,7 +1623,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     }
 
     if (["desktop_session_mode", "task_pipe", "cli_adapter"].includes(groupId)) {
-      openSection("desktop");
+      setSettingsTab("execution");
+      setSettingsOpen(true);
       return;
     }
 
@@ -1852,6 +1931,41 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const currentSection = sectionById.get(section);
   const currentFeatureGroup =
     localizedFeatureGroups.find((group) => group.id === currentSection?.group) || localizedFeatureGroups[0];
+  const openSettingsTab = (tabId: SettingsTabId = "appearance") => {
+    setSettingsTab(tabId);
+    setSettingsOpen(true);
+  };
+  const settingsTabs: Array<{
+    id: SettingsTabId;
+    label: string;
+    detail: string;
+    icon: LucideIcon;
+  }> = [
+    {
+      id: "appearance",
+      label: uiLanguage === "ko" ? "화면" : "Display",
+      detail: uiLanguage === "ko" ? "언어와 보기 권한" : "Language and view mode",
+      icon: Languages
+    },
+    {
+      id: "navigation",
+      label: uiLanguage === "ko" ? "좌측 영역" : "Sidebar",
+      detail: uiLanguage === "ko" ? "접기/고정 섹션" : "Collapse and pins",
+      icon: LayoutDashboard
+    },
+    {
+      id: "execution",
+      label: uiLanguage === "ko" ? "초기화" : "Initialize",
+      detail: uiLanguage === "ko" ? "어댑터와 작업 파이프 기본값" : "Adapter and pipe defaults",
+      icon: Network
+    },
+    {
+      id: "data",
+      label: uiLanguage === "ko" ? "데이터/운영" : "Data",
+      detail: uiLanguage === "ko" ? "필터와 snapshot" : "Filters and snapshot",
+      icon: Database
+    }
+  ];
   const commandItems: CommandItem[] = [
     ...workVisibleSections.map((item) => ({
       id: `section-${item.id}`,
@@ -1876,30 +1990,26 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       keywords: ["operator", "monitoring", "documents", "history", "requirements", "admin"],
       run: () => setOperatorCenterOpen(true)
     },
-    ...viewModes.map((mode) => ({
-      id: `view-${mode.id}`,
-      label: mode.label,
-      detail: mode.intent,
-      group: uiLanguage === "ko" ? "보기 모드" : "View Mode",
-      icon: ShieldCheck,
-      badge: currentViewMode.id === mode.id ? "active" : undefined,
-      keywords: [mode.id, mode.label, mode.intent],
-      run: () => selectViewMode(mode.id)
-    })),
-    ...languageModes.map((mode) => ({
-      id: `language-${mode.id}`,
-      label: mode.label,
-      detail: mode.intent,
-      group: uiLanguage === "ko" ? "문서 언어" : "Document Language",
+    {
+      id: "settings-appearance",
+      label: uiLanguage === "ko" ? "화면 설정" : "Display Settings",
+      detail: uiLanguage === "ko" ? "화면 언어, 보기 모드, 문서 언어는 설정에서만 바꿉니다." : "Change UI language, view mode, and document language in Settings.",
+      group: uiLanguage === "ko" ? "설정" : "Settings",
       icon: Languages,
-      badge: currentLanguageMode.id === mode.id ? "active" : undefined,
-      keywords: [mode.id, mode.label, mode.intent],
-      run: () => {
-        setLanguageMode(mode.id);
-        setCategory("all");
-        setHistoryCategory("all");
-      }
-    })),
+      badge: currentViewMode.label,
+      keywords: ["settings", "preferences", "view", "language", "display"],
+      run: () => openSettingsTab("appearance")
+    },
+    {
+      id: "settings-execution",
+      label: uiLanguage === "ko" ? "초기화 설정" : "Initialization Settings",
+      detail: uiLanguage === "ko" ? "Adapter, session mode, pipe 기본값을 한 곳에서 정합니다." : "Set adapter, session mode, and pipe defaults in one place.",
+      group: uiLanguage === "ko" ? "설정" : "Settings",
+      icon: Network,
+      badge: runtimeInitDefaults.adapterId,
+      keywords: ["settings", "initialize", "adapter", "session", "task pipe", "auto defer"],
+      run: () => openSettingsTab("execution")
+    },
     ...viewCategories.slice(0, 10).map((item) => ({
       id: `category-${item}`,
       label: categoryLabel(item),
@@ -1921,7 +2031,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       icon: Settings,
       badge: currentViewMode.label,
       keywords: ["settings", "preferences", "view", "language", "pinned"],
-      run: () => setSettingsOpen(true)
+      run: () => openSettingsTab("appearance")
     },
     {
       id: "action-attention",
@@ -1976,7 +2086,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
 
   return (
     <main className="desktop-app-root">
-      <div className="desktop-app-shell">
+      <div className={`desktop-app-shell sidebar-${sidebarMode}`}>
         <aside className="activity-rail" aria-label={uiLanguage === "ko" ? "주요 기능 레일" : "Primary activity rail"}>
           <button className="activity-brand" type="button" onClick={() => openSection("overview")} title={uiLanguage === "ko" ? "작업공간 홈" : "Workspace Home"}>
             <Bot size={22} aria-hidden="true" />
@@ -2004,7 +2114,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           >
             <ShieldCheck size={19} aria-hidden="true" />
           </button>
-          <button className="activity-settings" type="button" onClick={() => setSettingsOpen(true)} title={uiLanguage === "ko" ? "설정" : "Settings"}>
+          <button className="activity-settings" type="button" onClick={() => openSettingsTab("appearance")} title={uiLanguage === "ko" ? "설정" : "Settings"}>
             <Settings size={19} aria-hidden="true" />
           </button>
         </aside>
@@ -2086,17 +2196,6 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               <button type="button" onClick={() => setCommandPaletteOpen(true)} title="Command Palette">
                 <Search size={16} aria-hidden="true" />
               </button>
-              <button
-                type="button"
-                onClick={() => setUiLanguage((current) => (current === "ko" ? "en" : "ko"))}
-                title={uiLanguage === "ko" ? "English UI" : "한국어 화면"}
-              >
-                <Languages size={16} aria-hidden="true" />
-                <span>{uiLanguage === "ko" ? "한국어" : "English"}</span>
-              </button>
-              <button type="button" onClick={() => setSettingsOpen(true)} title={uiLanguage === "ko" ? "설정" : "Settings"}>
-                <Settings size={16} aria-hidden="true" />
-              </button>
             </div>
           </header>
 
@@ -2122,7 +2221,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                     runCommandItem(filteredCommandItems[0]);
                   }
                 }}
-                placeholder="섹션, 보기 모드, 문서 필터, 빠른 실행 검색"
+                placeholder="섹션, 설정, 문서 필터, 빠른 실행 검색"
               />
               <button type="button" onClick={() => setCommandPaletteOpen(false)}>
                 {uiLanguage === "ko" ? "닫기" : "Close"}
@@ -2174,148 +2273,329 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               </button>
             </header>
 
-            <div className="settings-grid">
-              <section className="settings-pane">
-                <div className="settings-pane-heading">
-                  <Languages size={16} aria-hidden="true" />
-                  <div>
-                    <span>{uiLanguage === "ko" ? "화면 언어" : "UI Language"}</span>
-                    <strong>{uiLanguage === "ko" ? "한국어 우선" : "English Mode"}</strong>
-                  </div>
-                </div>
-                <div className="settings-segment-list">
+            <div className="settings-dialog-body">
+              <nav className="settings-tab-list" aria-label={uiLanguage === "ko" ? "설정 대분류" : "Settings categories"}>
+                {settingsTabs.map((item) => (
                   <button
-                    className={uiLanguage === "ko" ? "active" : ""}
-                    onClick={() => setUiLanguage("ko")}
+                    key={item.id}
                     type="button"
-                    title="한국어 화면 문구를 우선 사용합니다."
+                    className={settingsTab === item.id ? "active" : ""}
+                    onClick={() => setSettingsTab(item.id)}
                   >
-                    한국어
+                    <item.icon size={16} aria-hidden="true" />
+                    <span>
+                      <strong>{item.label}</strong>
+                      <small>{item.detail}</small>
+                    </span>
                   </button>
-                  <button
-                    className={uiLanguage === "en" ? "active" : ""}
-                    onClick={() => setUiLanguage("en")}
-                    type="button"
-                    title="Use English interface copy."
-                  >
-                    English
-                  </button>
-                </div>
-              </section>
+                ))}
+              </nav>
 
-              <section className="settings-pane">
-                <div className="settings-pane-heading">
-                  <ShieldCheck size={16} aria-hidden="true" />
-                  <div>
-                    <span>{uiLanguage === "ko" ? "보기 모드" : "View Mode"}</span>
-                    <strong>{currentViewMode.label}</strong>
-                  </div>
-                </div>
-                <div className="settings-option-list">
-                  {viewModes.map((mode) => (
-                    <button
-                      key={mode.id}
-                      className={currentViewMode.id === mode.id ? "active" : ""}
-                      onClick={() => selectViewMode(mode.id)}
-                      type="button"
-                      title={mode.intent}
-                    >
-                      <span>{mode.label}</span>
-                      <small>{truncateText(mode.intent, 78)}</small>
-                    </button>
-                  ))}
-                </div>
-              </section>
+              <div className="settings-tab-panel">
+                {settingsTab === "appearance" && (
+                  <div className="settings-grid">
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
+                        <Languages size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "화면 언어" : "UI Language"}</span>
+                          <strong>{uiLanguage === "ko" ? "한국어 우선" : "English Mode"}</strong>
+                        </div>
+                      </div>
+                      <div className="settings-segment-list">
+                        <button
+                          className={uiLanguage === "ko" ? "active" : ""}
+                          onClick={() => setUiLanguage("ko")}
+                          type="button"
+                          title="한국어 화면 문구를 우선 사용합니다."
+                        >
+                          한국어
+                        </button>
+                        <button
+                          className={uiLanguage === "en" ? "active" : ""}
+                          onClick={() => setUiLanguage("en")}
+                          type="button"
+                          title="Use English interface copy."
+                        >
+                          English
+                        </button>
+                      </div>
+                    </section>
 
-              <section className="settings-pane">
-                <div className="settings-pane-heading">
-                  <Languages size={16} aria-hidden="true" />
-                  <div>
-                    <span>{uiLanguage === "ko" ? "문서 언어" : "Document Language"}</span>
-                    <strong>{currentLanguageMode.label}</strong>
-                  </div>
-                </div>
-                <div className="settings-segment-list">
-                  {languageModes.map((mode) => (
-                    <button
-                      key={mode.id}
-                      className={currentLanguageMode.id === mode.id ? "active" : ""}
-                      onClick={() => {
-                        setLanguageMode(mode.id);
-                        setCategory("all");
-                        setHistoryCategory("all");
-                      }}
-                      type="button"
-                      title={mode.intent}
-                    >
-                      {mode.label}
-                    </button>
-                  ))}
-                </div>
-              </section>
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
+                        <ShieldCheck size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "보기 모드" : "View Mode"}</span>
+                          <strong>{currentViewMode.label}</strong>
+                        </div>
+                      </div>
+                      <div className="settings-option-list">
+                        {viewModes.map((mode) => (
+                          <button
+                            key={mode.id}
+                            className={currentViewMode.id === mode.id ? "active" : ""}
+                            onClick={() => selectViewMode(mode.id)}
+                            type="button"
+                            title={mode.intent}
+                          >
+                            <span>{mode.label}</span>
+                            <small>{truncateText(mode.intent, 78)}</small>
+                          </button>
+                        ))}
+                      </div>
+                    </section>
 
-              <section className="settings-pane wide">
-                <div className="settings-pane-heading">
-                  <LayoutDashboard size={16} aria-hidden="true" />
-                  <div>
-                    <span>{uiLanguage === "ko" ? "고정 섹션" : "Pinned Sections"}</span>
-                    <strong>{pinnedVisibleSections.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 고정" : "pinned"}</strong>
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
+                        <Languages size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "문서 언어" : "Document Language"}</span>
+                          <strong>{currentLanguageMode.label}</strong>
+                        </div>
+                      </div>
+                      <div className="settings-segment-list">
+                        {languageModes.map((mode) => (
+                          <button
+                            key={mode.id}
+                            className={currentLanguageMode.id === mode.id ? "active" : ""}
+                            onClick={() => {
+                              setLanguageMode(mode.id);
+                              setCategory("all");
+                              setHistoryCategory("all");
+                            }}
+                            type="button"
+                            title={mode.intent}
+                          >
+                            {mode.label}
+                          </button>
+                        ))}
+                      </div>
+                    </section>
                   </div>
-                </div>
-                <div className="settings-pin-grid">
-                  {workVisibleSections.map((item) => (
-                    <button
-                      key={item.id}
-                      className={pinnedSections.includes(item.id) ? "active" : ""}
-                      type="button"
-                      onClick={() => togglePinnedSection(item.id)}
-                      title={item.purpose}
-                    >
-                      <item.icon size={15} aria-hidden="true" />
-                      <span>{item.shortLabel}</span>
-                    </button>
-                  ))}
-                </div>
-              </section>
+                )}
 
-              <section className="settings-pane">
-                <div className="settings-pane-heading">
-                  <ListFilter size={16} aria-hidden="true" />
-                  <div>
-                    <span>{uiLanguage === "ko" ? "필터" : "Filters"}</span>
-                    <strong>{categoryLabel(category)}</strong>
-                  </div>
-                </div>
-                <button
-                  className="settings-primary-action"
-                  type="button"
-                  onClick={() => {
-                    setQuery("");
-                    setCategory("all");
-                    setHistoryDate("all");
-                    setHistoryCategory("all");
-                    setSourceProject("all");
-                    setSourceLanguage("all");
-                  }}
-                >
-                  <ListFilter size={15} aria-hidden="true" />
-                  <span>{uiLanguage === "ko" ? "필터 초기화" : "Reset Filters"}</span>
-                </button>
-              </section>
+                {settingsTab === "navigation" && (
+                  <div className="settings-grid">
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
+                        <LayoutDashboard size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "좌측 사이드바" : "Left Sidebar"}</span>
+                          <strong>{sidebarMode === "expanded" ? (uiLanguage === "ko" ? "펼침" : "Expanded") : uiLanguage === "ko" ? "접힘" : "Collapsed"}</strong>
+                        </div>
+                      </div>
+                      <div className="settings-segment-list">
+                        <button
+                          className={sidebarMode === "expanded" ? "active" : ""}
+                          onClick={() => setSidebarMode("expanded")}
+                          type="button"
+                        >
+                          {uiLanguage === "ko" ? "펼치기" : "Expanded"}
+                        </button>
+                        <button
+                          className={sidebarMode === "collapsed" ? "active" : ""}
+                          onClick={() => setSidebarMode("collapsed")}
+                          type="button"
+                        >
+                          {uiLanguage === "ko" ? "접기" : "Collapsed"}
+                        </button>
+                      </div>
+                    </section>
 
-              <section className="settings-pane">
-                <div className="settings-pane-heading">
-                  <Clock3 size={16} aria-hidden="true" />
-                  <div>
-                    <span>{uiLanguage === "ko" ? "스냅샷" : "Snapshot"}</span>
-                    <strong>{formatDate(snapshot.generatedAt)}</strong>
+                    <section className="settings-pane wide">
+                      <div className="settings-pane-heading">
+                        <LayoutDashboard size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "고정 섹션" : "Pinned Sections"}</span>
+                          <strong>{pinnedVisibleSections.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 고정" : "pinned"}</strong>
+                        </div>
+                      </div>
+                      <div className="settings-pin-grid">
+                        {workVisibleSections.map((item) => (
+                          <button
+                            key={item.id}
+                            className={pinnedSections.includes(item.id) ? "active" : ""}
+                            type="button"
+                            onClick={() => togglePinnedSection(item.id)}
+                            title={item.purpose}
+                          >
+                            <item.icon size={15} aria-hidden="true" />
+                            <span>{item.shortLabel}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </section>
                   </div>
-                </div>
-                <p>
-                  {viewFilteredDocuments.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 문서" : "documents"} /{" "}
-                  {visibleSections.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 섹션" : "sections"}
-                </p>
-              </section>
+                )}
+
+                {settingsTab === "execution" && (
+                  <div className="settings-grid">
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
+                        <SquareTerminal size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "기본 CLI 어댑터" : "Default CLI Adapter"}</span>
+                          <strong>{runtimeInitDefaults.adapterId}</strong>
+                        </div>
+                      </div>
+                      <div className="settings-option-list">
+                        {fallbackDesktopAdapters.map((adapter) => {
+                          const setupGuide = adapterSetupGuides[adapter.adapterId];
+                          return (
+                            <button
+                              key={adapter.adapterId}
+                              className={runtimeInitDefaults.adapterId === adapter.adapterId ? "active" : ""}
+                              onClick={() => setRuntimeInitDefaults((current) => ({ ...current, adapterId: adapter.adapterId }))}
+                              type="button"
+                              title={setupGuide?.installHint || adapter.command}
+                            >
+                              <span>{adapter.label}</span>
+                              <small>{setupGuide?.verifyCommand || adapter.command}</small>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </section>
+
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
+                        <Bot size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "Session Mode" : "Session Mode"}</span>
+                          <strong>{sessionModePresets.find((mode) => mode.id === runtimeInitDefaults.sessionModeId)?.label || sessionModePresets[0].label}</strong>
+                        </div>
+                      </div>
+                      <div className="settings-option-list">
+                        {sessionModePresets.map((mode) => (
+                          <button
+                            key={mode.id}
+                            className={runtimeInitDefaults.sessionModeId === mode.id ? "active" : ""}
+                            onClick={() => setRuntimeInitDefaults((current) => ({ ...current, sessionModeId: mode.id }))}
+                            type="button"
+                            title={mode.intent}
+                          >
+                            <span>{mode.label}</span>
+                            <small>{truncateText(mode.intent, 82)}</small>
+                          </button>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
+                        <Network size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "Task Pipe" : "Task Pipe"}</span>
+                          <strong>{fallbackTaskPipePresets.find((preset) => preset.taskKind === runtimeInitDefaults.taskPipeKind)?.label || fallbackTaskPipePresets[0].label}</strong>
+                        </div>
+                      </div>
+                      <div className="settings-option-list">
+                        {fallbackTaskPipePresets.map((preset) => (
+                          <button
+                            key={preset.taskKind}
+                            className={runtimeInitDefaults.taskPipeKind === preset.taskKind ? "active" : ""}
+                            onClick={() => setRuntimeInitDefaults((current) => ({ ...current, taskPipeKind: preset.taskKind }))}
+                            type="button"
+                            title={preset.intent}
+                          >
+                            <span>{preset.label}</span>
+                            <small>{preset.laneCount} lanes / {truncateText(preset.intent, 68)}</small>
+                          </button>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
+                        <Inbox size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "질문 처리" : "Question Handling"}</span>
+                          <strong>{runtimeInitDefaults.autoDeferQuestions ? (uiLanguage === "ko" ? "자동 보류" : "Auto defer") : uiLanguage === "ko" ? "수동 처리" : "Manual"}</strong>
+                          <small>
+                            {uiLanguage === "ko"
+                              ? "Auto-defer questions는 초기화 설정에서만 바꿉니다."
+                              : "Auto-defer questions is configured here only."}
+                          </small>
+                        </div>
+                      </div>
+                      <div className="settings-segment-list">
+                        <button
+                          className={runtimeInitDefaults.autoDeferQuestions ? "active" : ""}
+                          onClick={() => setRuntimeInitDefaults((current) => ({ ...current, autoDeferQuestions: true }))}
+                          type="button"
+                        >
+                          {uiLanguage === "ko" ? "자동 보류" : "Auto defer"}
+                        </button>
+                        <button
+                          className={!runtimeInitDefaults.autoDeferQuestions ? "active" : ""}
+                          onClick={() => setRuntimeInitDefaults((current) => ({ ...current, autoDeferQuestions: false }))}
+                          type="button"
+                        >
+                          {uiLanguage === "ko" ? "수동 처리" : "Manual"}
+                        </button>
+                      </div>
+                    </section>
+                  </div>
+                )}
+
+                {settingsTab === "data" && (
+                  <div className="settings-grid">
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
+                        <ListFilter size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "필터" : "Filters"}</span>
+                          <strong>{categoryLabel(category)}</strong>
+                        </div>
+                      </div>
+                      <button
+                        className="settings-primary-action"
+                        type="button"
+                        onClick={() => {
+                          setQuery("");
+                          setCategory("all");
+                          setHistoryDate("all");
+                          setHistoryCategory("all");
+                          setSourceProject("all");
+                          setSourceLanguage("all");
+                        }}
+                      >
+                        <ListFilter size={15} aria-hidden="true" />
+                        <span>{uiLanguage === "ko" ? "필터 초기화" : "Reset Filters"}</span>
+                      </button>
+                    </section>
+
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
+                        <Clock3 size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "스냅샷" : "Snapshot"}</span>
+                          <strong>{formatDate(snapshot.generatedAt)}</strong>
+                        </div>
+                      </div>
+                      <p>
+                        {viewFilteredDocuments.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 문서" : "documents"} /{" "}
+                        {visibleSections.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 섹션" : "sections"}
+                      </p>
+                    </section>
+
+                    <section className="settings-pane">
+                      <div className="settings-pane-heading">
+                        <ShieldCheck size={16} aria-hidden="true" />
+                        <div>
+                          <span>{uiLanguage === "ko" ? "운영 센터" : "Operator Center"}</span>
+                          <strong>{operatorCenterSections.length.toLocaleString("ko-KR")}</strong>
+                        </div>
+                      </div>
+                      <button className="settings-primary-action" type="button" onClick={() => setOperatorCenterOpen(true)}>
+                        <ShieldCheck size={15} aria-hidden="true" />
+                        <span>{uiLanguage === "ko" ? "운영 센터 열기" : "Open Operator Center"}</span>
+                      </button>
+                    </section>
+                  </div>
+                )}
+              </div>
             </div>
           </section>
         </div>
@@ -2361,24 +2641,6 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             {section !== "source" && (
               <>
                 <label className="select-box">
-                  <Languages size={16} aria-hidden="true" />
-                  <select
-                    value={languageMode}
-                    onChange={(event) => {
-                      setLanguageMode(event.target.value);
-                      setCategory("all");
-                      setHistoryCategory("all");
-                    }}
-                    title={currentLanguageMode.intent}
-                  >
-                    {languageModes.map((mode) => (
-                      <option key={mode.id} value={mode.id}>
-                        {mode.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label className="select-box">
                   <ListFilter size={16} aria-hidden="true" />
                   <select value={category} onChange={(event) => setCategory(event.target.value)}>
                     <option value="all">모든 문서</option>
@@ -2389,30 +2651,6 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                     ))}
                   </select>
                 </label>
-                <button
-                  type="button"
-                  onClick={() => togglePinnedSection(section)}
-                  title={
-                    pinnedSections.includes(section)
-                      ? uiLanguage === "ko"
-                        ? "섹션 고정 해제"
-                        : "Unpin section"
-                      : uiLanguage === "ko"
-                        ? "섹션 고정"
-                        : "Pin section"
-                  }
-                >
-                  <CheckCircle2 size={16} aria-hidden="true" />
-                  <span>
-                    {pinnedSections.includes(section)
-                      ? uiLanguage === "ko"
-                        ? "고정 해제"
-                        : "Unpin"
-                      : uiLanguage === "ko"
-                        ? "고정"
-                        : "Pin"}
-                  </span>
-                </button>
               </>
             )}
           </section>
@@ -2560,6 +2798,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           blockedTaskCount={collaborationBoard.summary.blockedTasks}
           sourceFiles={visibleSourceFiles}
           uiLanguage={uiLanguage}
+          initDefaults={runtimeInitDefaults}
+          onOpenSettings={() => openSettingsTab("execution")}
         />
       )}
 
@@ -2830,6 +3070,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           blockedTaskCount={collaborationBoard.summary.blockedTasks}
           sourceFiles={visibleSourceFiles}
           uiLanguage={uiLanguage}
+          initDefaults={runtimeInitDefaults}
+          onOpenSettings={() => openSettingsTab("execution")}
           surface="files"
         />
       )}
@@ -3580,23 +3822,28 @@ function DesktopRuntimePanel({
   blockedTaskCount,
   sourceFiles,
   uiLanguage,
+  initDefaults,
+  onOpenSettings,
   surface = "runtime"
 }: {
   agentCatalogCount: number;
   blockedTaskCount: number;
   sourceFiles: WorkspaceSourceFile[];
   uiLanguage: UiLanguage;
+  initDefaults: RuntimeInitDefaults;
+  onOpenSettings: () => void;
   surface?: "runtime" | "files";
 }) {
   const copy = nativeWorkspaceCopy[uiLanguage];
   const isFileWorkspaceSurface = surface === "files";
+  const initialSessionMode = sessionModePresets.find((mode) => mode.id === initDefaults.sessionModeId) || sessionModePresets[0];
   const [runtimeState, setRuntimeState] = useState<"checking" | "available" | "unavailable">("checking");
   const [health, setHealth] = useState<DesktopHealthStatus | null>(null);
   const [adapters, setAdapters] = useState<CliAdapterStatus[]>(fallbackDesktopAdapters);
   const [reports, setReports] = useState<CliRunReport[]>([]);
   const [sessions, setSessions] = useState<CliSessionReport[]>([]);
   const [taskPipePresets, setTaskPipePresets] = useState<CliTaskPipelinePresetReport[]>(fallbackTaskPipePresets);
-  const [selectedTaskPipeKind, setSelectedTaskPipeKind] = useState(fallbackTaskPipePresets[0].taskKind);
+  const [selectedTaskPipeKind, setSelectedTaskPipeKind] = useState(initDefaults.taskPipeKind);
   const [taskPipePrompt, setTaskPipePrompt] = useState(
     "이 작업을 pipe graph 기준으로 분해해서 각 CLI lane을 init해줘. source-affecting 결정은 merge gate 전까지 보류하고, 질문은 decision inbox로 보내줘."
   );
@@ -3627,11 +3874,11 @@ function DesktopRuntimePanel({
   const [error, setError] = useState("");
   const [runningAdapterId, setRunningAdapterId] = useState("");
   const [selectedSessionId, setSelectedSessionId] = useState("");
-  const [selectedSessionModeId, setSelectedSessionModeId] = useState(sessionModePresets[0].id);
-  const [selectedSessionAdapterId, setSelectedSessionAdapterId] = useState(fallbackDesktopAdapters[0].adapterId);
+  const [selectedSessionModeId, setSelectedSessionModeId] = useState(initialSessionMode.id);
+  const [selectedSessionAdapterId, setSelectedSessionAdapterId] = useState(initDefaults.adapterId);
   const [workingDir, setWorkingDir] = useState("");
-  const [sessionPrompt, setSessionPrompt] = useState(sessionModePresets[0].prompt);
-  const [autoDeferQuestions, setAutoDeferQuestions] = useState(true);
+  const [sessionPrompt, setSessionPrompt] = useState(initialSessionMode.prompt);
+  const [autoDeferQuestions, setAutoDeferQuestions] = useState(initDefaults.autoDeferQuestions);
   const [sessionInput, setSessionInput] = useState("");
   const [selectedDecisionId, setSelectedDecisionId] = useState("");
   const [decisionAnswerType, setDecisionAnswerType] = useState("instruction");
@@ -3723,6 +3970,19 @@ function DesktopRuntimePanel({
     Boolean(selectedDecision?.sessionId);
   const selectedMode = sessionModePresets.find((mode) => mode.id === selectedSessionModeId) || sessionModePresets[0];
   const selectedTaskPipe = taskPipePresets.find((preset) => preset.taskKind === selectedTaskPipeKind) || taskPipePresets[0] || fallbackTaskPipePresets[0];
+  useEffect(() => {
+    const mode = sessionModePresets.find((item) => item.id === initDefaults.sessionModeId) || sessionModePresets[0];
+    setSelectedSessionAdapterId(initDefaults.adapterId);
+    setSelectedSessionModeId(mode.id);
+    setSessionPrompt(mode.prompt);
+    setSelectedTaskPipeKind(initDefaults.taskPipeKind);
+    setAutoDeferQuestions(initDefaults.autoDeferQuestions);
+  }, [
+    initDefaults.adapterId,
+    initDefaults.autoDeferQuestions,
+    initDefaults.sessionModeId,
+    initDefaults.taskPipeKind
+  ]);
   const pipelineStats = useMemo(() => {
     const latest = pipelineReports[0] || null;
     const started = pipelineReports.reduce((total, report) => total + report.startedSessions, 0);
@@ -4264,12 +4524,6 @@ function DesktopRuntimePanel({
   const upsertSession = (report: CliSessionReport) => {
     setSessions((current) => mergeSessionReports(current, [report], { promote: true }));
     setSelectedSessionId(report.sessionId);
-  };
-
-  const applySessionMode = (modeId: string) => {
-    const mode = sessionModePresets.find((item) => item.id === modeId) || sessionModePresets[0];
-    setSelectedSessionModeId(mode.id);
-    setSessionPrompt(mode.prompt);
   };
 
   const refreshDecisionInbox = async () => {
@@ -5639,27 +5893,23 @@ function DesktopRuntimePanel({
 
         <div className="task-pipe-layout">
           <div className="task-pipe-controls">
-            <label>
-              <span>Pipe preset</span>
-              <select value={selectedTaskPipeKind} onChange={(event) => setSelectedTaskPipeKind(event.target.value)}>
-                {taskPipePresets.map((preset) => (
-                  <option key={preset.taskKind} value={preset.taskKind}>
-                    {preset.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <div className="settings-controlled-summary">
+              <article>
+                <span>Pipe preset</span>
+                <strong>{selectedTaskPipe.label}</strong>
+              </article>
+              <article>
+                <span>Question handling</span>
+                <strong>{autoDeferQuestions ? "auto-defer" : "manual"}</strong>
+              </article>
+              <button type="button" onClick={onOpenSettings}>
+                <Settings size={15} aria-hidden="true" />
+                <span>초기화 설정 변경</span>
+              </button>
+            </div>
             <label className="session-prompt-field">
               <span>Task intake</span>
               <textarea value={taskPipePrompt} onChange={(event) => setTaskPipePrompt(event.target.value)} rows={4} />
-            </label>
-            <label className="inline-toggle">
-              <input
-                type="checkbox"
-                checked={autoDeferQuestions}
-                onChange={(event) => setAutoDeferQuestions(event.target.checked)}
-              />
-              <span>Auto-defer questions</span>
             </label>
             <button type="button" onClick={initTaskPipe} disabled={!invoke || runningAdapterId !== "" || !taskPipePrompt.trim()}>
               <Network size={16} aria-hidden="true" />
@@ -6329,26 +6579,24 @@ function DesktopRuntimePanel({
         </div>
 
         <div className="session-launcher">
-          <label>
-            <span>Adapter</span>
-            <select value={selectedSessionAdapterId} onChange={(event) => setSelectedSessionAdapterId(event.target.value)}>
-              {adapters.map((adapter) => (
-                <option key={adapter.adapterId} value={adapter.adapterId}>
-                  {adapter.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label>
-            <span>Mode</span>
-            <select value={selectedSessionModeId} onChange={(event) => applySessionMode(event.target.value)}>
-              {sessionModePresets.map((mode) => (
-                <option key={mode.id} value={mode.id}>
-                  {mode.label}
-                </option>
-              ))}
-            </select>
-          </label>
+          <div className="settings-controlled-summary session-init-summary">
+            <article>
+              <span>Adapter</span>
+              <strong>{adapters.find((adapter) => adapter.adapterId === selectedSessionAdapterId)?.label || selectedSessionAdapterId}</strong>
+            </article>
+            <article>
+              <span>Mode</span>
+              <strong>{selectedMode.label}</strong>
+            </article>
+            <article>
+              <span>Questions</span>
+              <strong>{autoDeferQuestions ? "auto-defer" : "manual"}</strong>
+            </article>
+            <button type="button" onClick={onOpenSettings}>
+              <Settings size={15} aria-hidden="true" />
+              <span>초기화 설정 변경</span>
+            </button>
+          </div>
           <label>
             <span>Working dir</span>
             <input
@@ -6360,14 +6608,6 @@ function DesktopRuntimePanel({
           <label className="session-prompt-field">
             <span>Initial input</span>
             <textarea value={sessionPrompt} onChange={(event) => setSessionPrompt(event.target.value)} rows={4} />
-          </label>
-          <label className="inline-toggle">
-            <input
-              type="checkbox"
-              checked={autoDeferQuestions}
-              onChange={(event) => setAutoDeferQuestions(event.target.checked)}
-            />
-            <span>Auto-defer questions</span>
           </label>
           <button
             type="button"

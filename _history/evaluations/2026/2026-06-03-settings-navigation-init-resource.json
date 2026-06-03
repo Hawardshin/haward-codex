@@ -1,0 +1,37 @@
+{
+  "schema_version": "2026-06-03",
+  "work_id": "2026-06-03-settings-navigation-init",
+  "request_id": "UR-2026-06-03-041",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    "Python static server on port 3214",
+    "In-app Browser tab",
+    "Next static customer build output",
+    "Generated workspace snapshot files"
+  ],
+  "checks_required": [
+    "Static server stopped before close-out",
+    "No continuing browser automation loop",
+    "Build commands completed",
+    "Screenshot stored under project artifacts"
+  ],
+  "cleanup_results": [
+    {
+      "resource": "Python static server on port 3214",
+      "status": "stopped"
+    },
+    {
+      "resource": "In-app Browser automation",
+      "status": "no_continuing_loop"
+    },
+    {
+      "resource": "Build commands",
+      "status": "completed"
+    },
+    {
+      "resource": "Screenshot artifact",
+      "status": "stored"
+    }
+  ],
+  "status": "passed"
+}
