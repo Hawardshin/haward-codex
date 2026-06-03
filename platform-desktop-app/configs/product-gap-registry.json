@@ -1,0 +1,523 @@
+{
+  "schema_version": "2026-06-03",
+  "name": "product-gap-registry",
+  "purpose": "Track user-request coverage, deferred product slices, and release gates for the installable desktop agent platform so unfinished work cannot be hidden behind completed feature architecture.",
+  "reader_guide": {
+    "summary": "This registry is the durable product gap ledger for the desktop agent platform. It records which recent user requests are covered, partial, or still missing as product slices.",
+    "how_to_read": [
+      "Start with coverage_summary to see whether the user's latest desktop-agent-platform goals are fully closed.",
+      "Read request_coverage to map each user request ID to implemented evidence and remaining gap IDs.",
+      "Read gap_items before planning new desktop work; p0_product_gap items should be implemented before cosmetic or monitoring-heavy work.",
+      "Treat external_release_gate items as release blockers rather than UI feature work."
+    ],
+    "owner": "platform-desktop-app",
+    "last_reviewed": "2026-06-03",
+    "update_triggers": [
+      "A user asks whether deferred or missing work remains.",
+      "A p0 or p1 desktop product slice is implemented, descoped, or superseded.",
+      "Product feature architecture, installer runtime contract, data format, workspace host, or release readiness changes.",
+      "Public distribution readiness changes, including signing, notarization, updater, or clean-machine smoke tests."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "user_requests_2026_06_03",
+      "title": "Structured user request summaries for 2026-06-03",
+      "source_type": "local_history",
+      "path": "_history/user-requests/2026/2026-06-03.ko.md",
+      "used_for": [
+        "Define the request IDs audited by this registry.",
+        "Map product gaps back to the user's stated desktop app and agent-platform goals."
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "product_feature_registry",
+      "title": "Desktop agent platform product feature registry",
+      "source_type": "local_config",
+      "path": "platform-desktop-app/configs/product-feature-registry.json",
+      "used_for": [
+        "Confirm the intended primary product and feature layer roles.",
+        "Separate primary work surfaces from supporting observability."
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "runtime_contract",
+      "title": "Installer shell runtime contract",
+      "source_type": "local_contract",
+      "path": "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+      "used_for": [
+        "Confirm that the installed app owns runtime rules, enforcement gates, and data accumulation targets.",
+        "Identify whether a gap is runtime-contract, UI, data, or release-readiness work."
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "nist_sp_800_53_sa_11",
+      "title": "NIST SP 800-53 SA-11 Developer Testing and Evaluation",
+      "source_type": "official_standard",
+      "url": "https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_1_1/home?element=SA-11",
+      "used_for": [
+        "External check that meaningful software work should preserve testing and evaluation evidence.",
+        "Support keeping validation handles beside product gap records."
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "atlassian_backlog_refinement",
+      "title": "Atlassian Agile backlog refinement guidance",
+      "source_type": "official_vendor_guidance",
+      "url": "https://www.atlassian.com/agile/scrum/backlog-refinement",
+      "used_for": [
+        "External check that deferred work should remain explicit, prioritized, and periodically reviewed.",
+        "Support treating missing product slices as backlog items with acceptance criteria rather than chat-only notes."
+      ],
+      "last_checked": "2026-06-03"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "request_coverage_required",
+      "rule": "Every audited user request must have one request_coverage entry with evidence and remaining_gap_ids.",
+      "reason": "The user explicitly asked to re-evaluate whether any requested work was missed.",
+      "applies_to": [
+        "request_coverage"
+      ]
+    },
+    {
+      "id": "gap_ids_are_stable",
+      "rule": "Gap IDs are stable lower snake_case identifiers and must not be renamed without updating request_coverage and traceability records.",
+      "reason": "Stable IDs let readiness tests and future audits detect stale or silently removed gaps.",
+      "applies_to": [
+        "gap_items",
+        "request_coverage.remaining_gap_ids"
+      ]
+    },
+    {
+      "id": "p0_before_cosmetic",
+      "rule": "p0_product_gap items should be implemented before new cosmetic UI changes or monitoring-heavy additions.",
+      "reason": "The user's product goal is agent orchestration, work environment, development environment, agent factory, and learning improvement, not monitoring polish.",
+      "applies_to": [
+        "gap_items.priority"
+      ]
+    },
+    {
+      "id": "external_gates_not_faked",
+      "rule": "External distribution gates stay open until validated with the required external assets and smoke tests.",
+      "reason": "Public macOS or Windows readiness cannot be claimed without signing, notarization or equivalent packaging validation, updater planning, and clean-machine checks.",
+      "applies_to": [
+        "gap_items.status",
+        "coverage_summary.external_blockers"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "audit_scope",
+      "meaning": "Bounded source inventory, exclusions, and audited request range used for this review.",
+      "required": true
+    },
+    {
+      "field": "coverage_summary",
+      "meaning": "Human-readable count of covered, partial, missing, and externally blocked areas.",
+      "required": true
+    },
+    {
+      "field": "request_coverage",
+      "meaning": "One row per audited user request with implemented evidence and remaining gap IDs.",
+      "required": true
+    },
+    {
+      "field": "gap_items",
+      "meaning": "Prioritized unresolved, partial, structural, test, or external release gaps.",
+      "required": true
+    },
+    {
+      "field": "acceptance_to_close",
+      "meaning": "Concrete conditions that must be true before a gap can be marked covered.",
+      "required": true
+    }
+  ],
+  "audit_scope": {
+    "audit_date": "2026-06-03",
+    "work_mode": "governance",
+    "view_mode": "superadmin_developer",
+    "install_mode_context": "developer",
+    "request_ids": [
+      "UR-2026-06-03-024",
+      "UR-2026-06-03-025",
+      "UR-2026-06-03-026",
+      "UR-2026-06-03-027",
+      "UR-2026-06-03-028",
+      "UR-2026-06-03-029",
+      "UR-2026-06-03-030",
+      "UR-2026-06-03-031",
+      "UR-2026-06-03-032",
+      "UR-2026-06-03-033",
+      "UR-2026-06-03-034",
+      "UR-2026-06-03-035",
+      "UR-2026-06-03-036"
+    ],
+    "repository_file_count_sample": 8182,
+    "audit_target_file_count_sample": 1248,
+    "excluded_paths": [
+      "_private/",
+      "outputs/",
+      "node_modules/",
+      ".next/",
+      "out/",
+      "dist/",
+      "target/"
+    ],
+    "source_inventory_method": [
+      "rg --files with local-only and generated output exclusions",
+      "Targeted review of _history/user-requests, _history/request-traces, platform-desktop-app/specs, platform-desktop-app/configs, readiness tests, and representative runtime/UI source files",
+      "Search for deferred, remaining, Agent Factory, learning loop, PTY, Monaco, workspace host, and release gate terms"
+    ]
+  },
+  "coverage_summary": {
+    "audited_request_count": 13,
+    "covered_request_count": 8,
+    "partial_request_count": 5,
+    "missing_product_slice_count": 2,
+    "structural_debt_count": 1,
+    "test_gap_count": 1,
+    "external_blocker_count": 1,
+    "current_product_readiness": "internal_product_slices_validated_with_known_p0_gaps",
+    "headline": "The desktop shell, source workbench, installer runtime contract, data accumulation, workspace host, folder restructure, feature registry, and operator separation are implemented slices. The real Agent Factory creation wizard and automated learning feedback loop are still not closed as product features."
+  },
+  "request_coverage": [
+    {
+      "request_id": "UR-2026-06-03-024",
+      "coverage": "partial",
+      "covered_evidence": [
+        "Desktop shell with titlebar, activity rail, sidebar, content viewport, settings dialog, task timeline, and decision inbox",
+        "Operator Center separation and user/customer view sections"
+      ],
+      "remaining_gap_ids": [
+        "componentized_desktop_ui_architecture",
+        "native_workspace_git_operations"
+      ],
+      "notes": "The app is no longer a one-screen web dashboard, but the main renderer shell remains too large and some desktop-native interactions are still typed-form based."
+    },
+    {
+      "request_id": "UR-2026-06-03-025",
+      "coverage": "covered_with_test_gap",
+      "covered_evidence": [
+        "Monaco Editor integration for code viewing/editing instead of bundling the full VS Code product",
+        "Copy Current, multi-file draft queue, diff review, save/revert flows"
+      ],
+      "remaining_gap_ids": [
+        "clipboard_browser_qa"
+      ],
+      "notes": "The code editing capability is implemented; browser-level clipboard success remains a QA gap because permissions can block automation."
+    },
+    {
+      "request_id": "UR-2026-06-03-026",
+      "coverage": "covered",
+      "covered_evidence": [
+        "Tauri-first product runtime posture",
+        "Product-grade status and release readiness language in desktop configs and docs"
+      ],
+      "remaining_gap_ids": [
+        "public_distribution_gates"
+      ],
+      "notes": "Internal product posture is corrected; public distribution remains externally gated."
+    },
+    {
+      "request_id": "UR-2026-06-03-027",
+      "coverage": "covered",
+      "covered_evidence": [
+        "Runtime, task pipe, source editor, and service readiness layout hardening",
+        "Generated snapshot fallback chunk removed and performance budget restored"
+      ],
+      "remaining_gap_ids": [],
+      "notes": "No product-blocking gap found in this slice during the audit."
+    },
+    {
+      "request_id": "UR-2026-06-03-028",
+      "coverage": "covered",
+      "covered_evidence": [
+        "Platform templates, path profiles, patch context copy, and workbench editor options added to the Monaco source editor"
+      ],
+      "remaining_gap_ids": [],
+      "notes": "Customization is present as a platform source workbench slice."
+    },
+    {
+      "request_id": "UR-2026-06-03-029",
+      "coverage": "covered",
+      "covered_evidence": [
+        "Runtime workspace file index",
+        "Open editor tabs",
+        "Command toolbar",
+        "Monaco diff review",
+        "Editor settings popup"
+      ],
+      "remaining_gap_ids": [
+        "interactive_pty_terminal_surface"
+      ],
+      "notes": "The code workbench is implemented. PTY/xterm remains a separate terminal UX decision, not a blocker for pipe-first task runs."
+    },
+    {
+      "request_id": "UR-2026-06-03-030",
+      "coverage": "covered",
+      "covered_evidence": [
+        "Installer shell runtime contract",
+        "Bundled contract resources",
+        "Rust runtime command",
+        "Required read targets, enforcement gates, and data accumulation targets"
+      ],
+      "remaining_gap_ids": [],
+      "notes": "The installed app is modeled as the primary host runtime rather than a hard wrapper around one CLI."
+    },
+    {
+      "request_id": "UR-2026-06-03-031",
+      "coverage": "covered",
+      "covered_evidence": [
+        "Accumulated Data surface for task runs, decision inbox, payload audit, support bundle, and agent workspace stores"
+      ],
+      "remaining_gap_ids": [],
+      "notes": "Users can see accumulated data stores with counts, size, latest update, path, and purpose."
+    },
+    {
+      "request_id": "UR-2026-06-03-032",
+      "coverage": "covered",
+      "covered_evidence": [
+        "Versioned accumulated-data-overview.v1.json manifest",
+        "Schema version, storage format version, index path, and migration status in runtime/UI/checks"
+      ],
+      "remaining_gap_ids": [],
+      "notes": "The storage format was changed and persisted."
+    },
+    {
+      "request_id": "UR-2026-06-03-033",
+      "coverage": "partial",
+      "covered_evidence": [
+        "Desktop workspace state persistence",
+        "Import workspace path",
+        "Clone repository command",
+        "Source editor and CLI working directory use app-selected workspace first"
+      ],
+      "remaining_gap_ids": [
+        "native_workspace_git_operations"
+      ],
+      "notes": "Workspace host exists inside the app, but native folder picker, full Git operations, and credential/SSH UX are still not product-complete."
+    },
+    {
+      "request_id": "UR-2026-06-03-034",
+      "coverage": "covered",
+      "covered_evidence": [
+        "Renderer moved under platform-desktop-app/renderer/workspace-monitor",
+        "pnpm workspace, Tauri frontendDist, readiness checks, docs, registry, and maps updated"
+      ],
+      "remaining_gap_ids": [],
+      "notes": "The folder structure now matches desktop app ownership."
+    },
+    {
+      "request_id": "UR-2026-06-03-035",
+      "coverage": "partial",
+      "covered_evidence": [
+        "Product feature registry",
+        "Snapshot productFeatureArchitecture",
+        "Overview product feature panel",
+        "Monitoring marked supporting_observability"
+      ],
+      "remaining_gap_ids": [
+        "agent_factory_creation_wizard",
+        "learning_feedback_automation_loop"
+      ],
+      "notes": "The feature architecture is fixed, but the user's core goal still needs actual Agent Factory creation and automated improvement workflows."
+    },
+    {
+      "request_id": "UR-2026-06-03-036",
+      "coverage": "partial",
+      "covered_evidence": [
+        "Default navigation foregrounds overview, desktop, agents, source, and intent",
+        "Projects, history, structure, documents, and requirements moved to Operator Center"
+      ],
+      "remaining_gap_ids": [
+        "agent_factory_creation_wizard",
+        "componentized_desktop_ui_architecture"
+      ],
+      "notes": "The operator split is implemented and validated, but the primary work surface still needs the Agent Factory product flow to fully match the stated product purpose."
+    }
+  ],
+  "gap_items": [
+    {
+      "gap_id": "agent_factory_creation_wizard",
+      "status": "missing_product_slice",
+      "priority": "p0_product_gap",
+      "source_requests": [
+        "UR-2026-06-03-035",
+        "UR-2026-06-03-036"
+      ],
+      "feature_layer": "agent_factory",
+      "why_it_matters": "The user asked for easy agent creation and automatic agent generation as a primary product capability. Current UI exposes architecture and evidence/promotion signals, but it does not yet guide a user through creating, validating, and registering a new agent.",
+      "current_evidence": [
+        "platform-desktop-app/configs/product-feature-registry.json includes agent_factory as a primary layer",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx includes Agent Factory cards",
+        "agent-platform/configs/orchestration/capability-promotion-registry.json exists as a backend/config foundation"
+      ],
+      "acceptance_to_close": [
+        "Desktop Agent Factory view creates or drafts an agent from goal, role, tools, guardrails, validation, and output contract inputs.",
+        "Wizard writes a bounded agent spec or proposal into the owning project path with traceability and rollback metadata.",
+        "Readiness/test verifies the wizard route, generated schema fields, validation command, and customer-safe UI behavior.",
+        "Request trace for UR-2026-06-03-035 marks this gap closed with verification evidence."
+      ],
+      "recommended_next_slice": "2026-06-03-agent-factory-creation-wizard",
+      "blocked_by": [],
+      "not_blocked_by": [
+        "public code signing",
+        "external CLI credentials"
+      ]
+    },
+    {
+      "gap_id": "learning_feedback_automation_loop",
+      "status": "partial_product_slice",
+      "priority": "p0_product_gap",
+      "source_requests": [
+        "UR-2026-06-03-035"
+      ],
+      "feature_layer": "learning_improvement_loop",
+      "why_it_matters": "The user asked for a platform that continuously learns and improves performance. Data accumulation and evaluation surfaces exist, but automatic feedback from completed work into improvement candidates is not yet a closed product workflow.",
+      "current_evidence": [
+        "Accumulated Data surface and versioned runtime data index exist",
+        "Product feature registry marks Learning & Evaluation Loop as primary",
+        "Capability promotion registry and evaluation records exist as foundations"
+      ],
+      "acceptance_to_close": [
+        "Desktop UI shows improvement candidates generated from task run outcomes, omissions, evaluations, and timing records.",
+        "User can approve, reject, defer, or promote a candidate into a prompt, workflow, tool, skill, agent, or product feature.",
+        "Approved improvement records link to source evidence, validation, rollback or disablement plan, and post-change evaluation.",
+        "Readiness/test verifies candidate ingestion and decision recording."
+      ],
+      "recommended_next_slice": "2026-06-03-learning-feedback-automation-loop",
+      "blocked_by": [],
+      "not_blocked_by": [
+        "public distribution packaging"
+      ]
+    },
+    {
+      "gap_id": "native_workspace_git_operations",
+      "status": "partial_product_slice",
+      "priority": "p1_product_gap",
+      "source_requests": [
+        "UR-2026-06-03-024",
+        "UR-2026-06-03-033"
+      ],
+      "feature_layer": "agent_work_environment",
+      "why_it_matters": "The app owns workspace import/clone state, but desktop users still need native selection and full Git workflows for the clone-and-work model to feel built-in.",
+      "current_evidence": [
+        "get_desktop_workspace_state, set_desktop_workspace_path, and clone_desktop_workspace are implemented",
+        "Workspace Host panel exposes text-path import and clone controls",
+        "Source editor and CLI use app-selected workspace first"
+      ],
+      "acceptance_to_close": [
+        "Native folder picker is available for workspace import.",
+        "Git branch, status, commit, pull, push, and conflict state are visible as desktop workbench actions.",
+        "Credential and SSH key behavior is documented and guarded by the sensitive-file boundary policy.",
+        "Clean workspace smoke test proves import/clone/source/CLI handoff."
+      ],
+      "recommended_next_slice": "2026-06-03-native-workspace-git-operations",
+      "blocked_by": [
+        "credential UX/security decision for private remotes"
+      ],
+      "not_blocked_by": []
+    },
+    {
+      "gap_id": "componentized_desktop_ui_architecture",
+      "status": "structural_debt",
+      "priority": "p1_structural_gap",
+      "source_requests": [
+        "UR-2026-06-03-024",
+        "UR-2026-06-03-036"
+      ],
+      "feature_layer": "desktop_shell",
+      "why_it_matters": "The UI now behaves more like a desktop workbench, but MonitorShell is still a large component. Future feature work will be slower and riskier if shell, dialogs, panels, and workbench surfaces stay merged.",
+      "current_evidence": [
+        "Desktop shell, settings dialog, runtime panel, source workbench, operator center, and product panels are present",
+        "Request traces explicitly name MonitorShell component split as remaining structural work"
+      ],
+      "acceptance_to_close": [
+        "Split DesktopShell, SidebarNavigation, OverviewHome, SettingsDialog, DesktopRuntimePanel, SourceWorkbench, and OperatorCenter ownership into separate components or modules.",
+        "No UI behavior regression in check/test/build/customer snapshot/perf.",
+        "Readiness test verifies key component entry points instead of only MonitorShell token scanning."
+      ],
+      "recommended_next_slice": "2026-06-03-desktop-ui-componentization",
+      "blocked_by": [],
+      "not_blocked_by": []
+    },
+    {
+      "gap_id": "interactive_pty_terminal_surface",
+      "status": "deferred_optional_ui_slice",
+      "priority": "p2_optional_after_p0",
+      "source_requests": [
+        "UR-2026-06-03-029"
+      ],
+      "feature_layer": "agent_work_environment",
+      "why_it_matters": "A PTY/xterm surface can make CLI sessions feel more like a full desktop developer app, but the current bounded pipe-first supervisor is intentionally safer for task-run persistence and decision capture.",
+      "current_evidence": [
+        "start_cli_adapter_session, poll_cli_adapter_session, stdin, defer, cancel, task pipe, and task run store exist",
+        "Historical tasks kept interactive PTY supervisor as a follow-up"
+      ],
+      "acceptance_to_close": [
+        "Product decision chooses whether PTY is required or optional.",
+        "If required, install audit records xterm.js/PTY dependency scope, license, rollback, and validation.",
+        "PTY lifecycle passes resource guard checks for process, file descriptor, timer, and log retention cleanup."
+      ],
+      "recommended_next_slice": "2026-06-03-pty-terminal-decision",
+      "blocked_by": [
+        "product decision on terminal UX risk versus pipe-first orchestration"
+      ],
+      "not_blocked_by": []
+    },
+    {
+      "gap_id": "clipboard_browser_qa",
+      "status": "test_gap",
+      "priority": "p2_test_gap",
+      "source_requests": [
+        "UR-2026-06-03-025"
+      ],
+      "feature_layer": "agent_development_environment",
+      "why_it_matters": "Code copy exists in the UI, but browser automation could not fully prove clipboard success under restricted permissions.",
+      "current_evidence": [
+        "Copy Current and Copy Patch Context actions exist",
+        "Browser render verification covered Monaco presence but not successful clipboard write"
+      ],
+      "acceptance_to_close": [
+        "Add deterministic unit-level clipboard abstraction tests or Tauri clipboard command verification.",
+        "Record manual or automated smoke evidence for copy success in the desktop runtime."
+      ],
+      "recommended_next_slice": "2026-06-03-source-editor-clipboard-qa",
+      "blocked_by": [],
+      "not_blocked_by": []
+    },
+    {
+      "gap_id": "public_distribution_gates",
+      "status": "external_release_gate",
+      "priority": "release_blocker",
+      "source_requests": [
+        "UR-2026-06-03-026",
+        "UR-2026-06-03-034"
+      ],
+      "feature_layer": "distribution",
+      "why_it_matters": "The product can be internally built and validated, but public macOS/Windows readiness cannot be honestly claimed without signing, notarization or equivalent verification, update/rollback, and clean-machine smoke tests.",
+      "current_evidence": [
+        "service-readiness registry marks signed distribution and update/recovery as public blockers",
+        "macOS execution profile separates developer local run, internal test app, and public distribution"
+      ],
+      "acceptance_to_close": [
+        "Developer ID or equivalent signing assets are available and recorded without exposing secrets.",
+        "Hardened runtime, notarization, stapling where applicable, installer/uninstaller, update/rollback, and clean-machine workspace smoke tests pass.",
+        "Release readiness report changes from public_release_blocked to the appropriate release state with evidence."
+      ],
+      "recommended_next_slice": "public-distribution-readiness",
+      "blocked_by": [
+        "signing/notarization assets",
+        "clean-machine test environment"
+      ],
+      "not_blocked_by": []
+    }
+  ]
+}

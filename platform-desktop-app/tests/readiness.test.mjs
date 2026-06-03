@@ -64,6 +64,54 @@ test("product feature registry makes agent platform primary", () => {
   ]);
 });
 
+test("product gap registry keeps unresolved user-request gaps visible", () => {
+  const registry = readJson("configs/product-gap-registry.json");
+  const serialized = JSON.stringify(registry);
+  const requirementsKo = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.ko.md"), "utf8");
+  const requirementsEn = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.en.md"), "utf8");
+
+  assert.equal(registry.name, "product-gap-registry");
+  assert.match(requirementsKo, /PDA-REQ-037/);
+  assert.match(requirementsEn, /PDA-REQ-037/);
+  assert.equal(registry.coverage_summary.audited_request_count, 13);
+  for (const requestId of [
+    "UR-2026-06-03-024",
+    "UR-2026-06-03-025",
+    "UR-2026-06-03-026",
+    "UR-2026-06-03-027",
+    "UR-2026-06-03-028",
+    "UR-2026-06-03-029",
+    "UR-2026-06-03-030",
+    "UR-2026-06-03-031",
+    "UR-2026-06-03-032",
+    "UR-2026-06-03-033",
+    "UR-2026-06-03-034",
+    "UR-2026-06-03-035",
+    "UR-2026-06-03-036"
+  ]) {
+    assert.ok(registry.request_coverage.some((item) => item.request_id === requestId));
+  }
+
+  const agentFactoryGap = registry.gap_items.find((item) => item.gap_id === "agent_factory_creation_wizard");
+  assert.equal(agentFactoryGap.status, "missing_product_slice");
+  assert.equal(agentFactoryGap.priority, "p0_product_gap");
+  assert.match(JSON.stringify(agentFactoryGap.acceptance_to_close), /Desktop Agent Factory view/);
+
+  const learningGap = registry.gap_items.find((item) => item.gap_id === "learning_feedback_automation_loop");
+  assert.equal(learningGap.status, "partial_product_slice");
+  assert.equal(learningGap.priority, "p0_product_gap");
+  assert.match(JSON.stringify(learningGap.acceptance_to_close), /improvement candidates/);
+
+  const request35 = registry.request_coverage.find((item) => item.request_id === "UR-2026-06-03-035");
+  assert.deepEqual(request35.remaining_gap_ids, [
+    "agent_factory_creation_wizard",
+    "learning_feedback_automation_loop"
+  ]);
+  assert.match(serialized, /componentized_desktop_ui_architecture/);
+  assert.match(serialized, /public_distribution_gates/);
+  assert.match(serialized, /monitoring polish/);
+});
+
 test("execution profiles keep optional CLI adapters non-blocking", () => {
   for (const profilePath of ["configs/macos-execution-profile.json", "configs/windows-execution-profile.json"]) {
     const profile = readJson(profilePath);

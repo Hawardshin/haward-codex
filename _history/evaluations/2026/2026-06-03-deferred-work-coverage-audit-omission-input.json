@@ -1,0 +1,125 @@
+{
+  "task": "Deferred work coverage audit",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and local edits.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-deferred-work-coverage-audit.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "large-scope-decomposition",
+      "description": "Use bounded inventory, exclusions, slices, output targets, merge gates, and source provenance for broad audit work.",
+      "source": "_ops/workflows/76-large-scope-decomposition.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/plan.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "request-range",
+      "description": "Audit the recent desktop agent platform request range UR-2026-06-03-024 through UR-2026-06-03-036.",
+      "source": "UR-2026-06-03-037",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/product-gap-registry.json",
+        "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/traceability.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "missing-product-gaps",
+      "description": "Identify whether user-requested core product capabilities remain missing or partial.",
+      "source": "UR-2026-06-03-037",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent_factory_creation_wizard",
+        "learning_feedback_automation_loop",
+        "platform-desktop-app/configs/product-gap-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "readiness-gate",
+      "description": "Make readiness/test verify the product gap registry so unresolved P0 gaps are not silently removed.",
+      "source": "UR-2026-06-03-037",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/scripts/check-readiness.mjs",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "stale-history-cleanup",
+      "description": "Correct stale trace/task records discovered during the audit.",
+      "source": "UR-2026-06-03-037",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/request-traces/2026/2026-06-03-operator-center-separation.ko.md",
+        "_history/request-traces/2026/2026-06-03-accumulated-data-format.ko.md",
+        "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/configs/product-gap-registry.json",
+      "purpose": "Machine-readable product gap and request coverage ledger.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/spec.ko.md",
+      "purpose": "Spec for the audit.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-03-deferred-work-coverage-audit.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "The new product gap registry is self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-gap-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "desktop-readiness",
+      "description": "Desktop tests and readiness checks validate the gap registry.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter platform-desktop-app test",
+        "corepack pnpm --filter platform-desktop-app run check"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "This audit does not implement the Agent Factory wizard; it makes that missing product slice explicit and readiness-checked.",
+    "This audit does not implement the automated learning feedback loop; it records it as a P0 partial product slice."
+  ],
+  "notes": [
+    "The user's latest request was evaluation and coverage checking, not implementation of every remaining P0 slice in the same change set."
+  ]
+}

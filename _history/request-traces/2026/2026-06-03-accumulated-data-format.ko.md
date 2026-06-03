@@ -25,4 +25,8 @@
 
 ## 검증
 
-- 검증은 최종 close-out 시 `validation.ko.md`와 evaluation record에 갱신한다.
+- `platform-desktop-app/specs/2026-06-03-accumulated-data-surface/validation.ko.md`
+- `platform-desktop-app/tests/readiness.test.mjs`
+- `platform-desktop-app/scripts/check-runtime-contract.mjs`
+- `platform-desktop-app/scripts/check-readiness.mjs`
+- 이후 desktop product folder restructure와 operator center separation close-out에서 `corepack pnpm --filter platform-desktop-app test` 및 `corepack pnpm --filter platform-desktop-app run check`가 통과했다.

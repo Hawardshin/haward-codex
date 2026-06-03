@@ -9,6 +9,7 @@ const requiredFiles = [
   "package.json",
   "configs/desktop-distribution-registry.json",
   "configs/product-feature-registry.json",
+  "configs/product-gap-registry.json",
   "configs/claude-code-design-transfer-registry.json",
   "configs/runtime-data-boundary-registry.json",
   "configs/service-readiness-registry.json",
@@ -281,6 +282,78 @@ if (JSON.stringify(productFeatureRegistry.desktop_home_surface?.primary_navigati
 }
 if (JSON.stringify(productFeatureRegistry.desktop_home_surface?.operator_center_sections) !== JSON.stringify(expectedOperatorCenterSections)) {
   failures.push("product-feature-registry desktop_home_surface must keep operator center sections separated");
+}
+
+const productGapRegistry = readJson("configs/product-gap-registry.json");
+const productGapSerialized = JSON.stringify(productGapRegistry);
+const installableRequirementsKo = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.ko.md"), "utf8");
+const installableRequirementsEn = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.en.md"), "utf8");
+if (!installableRequirementsKo.includes("PDA-REQ-037") || !installableRequirementsEn.includes("PDA-REQ-037")) {
+  failures.push("installable desktop requirements must include PDA-REQ-037 for product gap coverage");
+}
+for (const requiredTopLevelField of [
+  "reader_guide",
+  "reference_links",
+  "structure_rules",
+  "field_guide",
+  "audit_scope",
+  "coverage_summary",
+  "request_coverage",
+  "gap_items"
+]) {
+  if (!(requiredTopLevelField in productGapRegistry)) {
+    failures.push(`product-gap-registry must include ${requiredTopLevelField}`);
+  }
+}
+for (const requiredRequestId of [
+  "UR-2026-06-03-024",
+  "UR-2026-06-03-025",
+  "UR-2026-06-03-026",
+  "UR-2026-06-03-027",
+  "UR-2026-06-03-028",
+  "UR-2026-06-03-029",
+  "UR-2026-06-03-030",
+  "UR-2026-06-03-031",
+  "UR-2026-06-03-032",
+  "UR-2026-06-03-033",
+  "UR-2026-06-03-034",
+  "UR-2026-06-03-035",
+  "UR-2026-06-03-036"
+]) {
+  if (!productGapRegistry.request_coverage?.some((item) => item.request_id === requiredRequestId)) {
+    failures.push(`product-gap-registry must include request coverage for ${requiredRequestId}`);
+  }
+}
+for (const requiredGapId of [
+  "agent_factory_creation_wizard",
+  "learning_feedback_automation_loop",
+  "native_workspace_git_operations",
+  "componentized_desktop_ui_architecture",
+  "interactive_pty_terminal_surface",
+  "clipboard_browser_qa",
+  "public_distribution_gates"
+]) {
+  if (!productGapRegistry.gap_items?.some((item) => item.gap_id === requiredGapId)) {
+    failures.push(`product-gap-registry must include gap ${requiredGapId}`);
+  }
+}
+const agentFactoryGap = productGapRegistry.gap_items?.find((item) => item.gap_id === "agent_factory_creation_wizard");
+if (agentFactoryGap?.status !== "missing_product_slice" || agentFactoryGap?.priority !== "p0_product_gap") {
+  failures.push("product-gap-registry must keep agent_factory_creation_wizard as a p0 missing product slice until implemented");
+}
+const learningLoopGap = productGapRegistry.gap_items?.find((item) => item.gap_id === "learning_feedback_automation_loop");
+if (learningLoopGap?.status !== "partial_product_slice" || learningLoopGap?.priority !== "p0_product_gap") {
+  failures.push("product-gap-registry must keep learning_feedback_automation_loop as a p0 partial product slice until implemented");
+}
+const agentFeatureCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === "UR-2026-06-03-035");
+if (!agentFeatureCoverage?.remaining_gap_ids?.includes("agent_factory_creation_wizard")) {
+  failures.push("UR-2026-06-03-035 coverage must keep the Agent Factory creation wizard gap visible");
+}
+if (!agentFeatureCoverage?.remaining_gap_ids?.includes("learning_feedback_automation_loop")) {
+  failures.push("UR-2026-06-03-035 coverage must keep the learning feedback automation gap visible");
+}
+if (!productGapSerialized.includes("monitoring polish") || !productGapSerialized.includes("p0_product_gap")) {
+  failures.push("product-gap-registry must explicitly prioritize p0 product gaps over monitoring or cosmetic work");
 }
 
 const userFlowRegistry = readJson("configs/user-flow-registry.json");

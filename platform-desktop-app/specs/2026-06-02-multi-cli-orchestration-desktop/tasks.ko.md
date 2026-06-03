@@ -23,4 +23,5 @@
 - [x] view mode registry에 `desktop` section 노출
 - [x] history, omission, resource, grounding, evaluation 기록 생성
 - [ ] interactive PTY 기반 CLI task supervisor 구현은 후속 스펙에서 진행
-- [ ] xterm.js/Monaco/PTY dependency 설치는 설치 감사 후 진행
+- [x] Monaco dependency와 code workbench 구현은 `2026-06-03-code-workbench-completion` slice에서 완료
+- [ ] xterm.js/PTY dependency 설치는 PTY terminal UX를 제품 필수로 결정할 때 설치 감사 후 진행

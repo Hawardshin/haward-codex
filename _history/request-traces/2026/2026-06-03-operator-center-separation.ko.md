@@ -3,7 +3,7 @@
 - 요청 ID: UR-2026-06-03-036
 - 날짜: 2026-06-03
 - 소유 프로젝트: `platform-desktop-app/`
-- 결과 상태: ready_to_validate
+- 결과 상태: validated
 
 ## 요청 요약
 
@@ -24,13 +24,13 @@
 
 ## 검증 계획
 
-- `corepack pnpm --filter workspace-monitor run check`
-- `corepack pnpm --filter workspace-monitor test`
-- `corepack pnpm --filter workspace-monitor run build:customer`
-- `corepack pnpm --filter workspace-monitor run perf:budget`
-- `corepack pnpm --filter platform-desktop-app test`
-- `corepack pnpm --filter platform-desktop-app run check`
-- in-app Browser에서 기본 nav와 Operator Center 분리 확인
+- `corepack pnpm --filter workspace-monitor run check` 완료
+- `corepack pnpm --filter workspace-monitor test` 완료
+- `corepack pnpm --filter workspace-monitor run build:customer` 완료
+- `corepack pnpm --filter workspace-monitor run perf:budget` 완료
+- `corepack pnpm --filter platform-desktop-app test` 완료
+- `corepack pnpm --filter platform-desktop-app run check` 완료
+- in-app Browser에서 기본 nav와 Operator Center 분리 확인 완료
 
 ## 결과 요약
 

@@ -1,0 +1,111 @@
+{
+  "initial_instruction": "미뤄진 작업과 모든 구조/히스토리를 다시 평가해 사용자가 요구한 것 중 빠진 것이 있는지 확인하고 처리하라는 요청",
+  "result_summary": "Added a product gap registry, audit spec/history records, readiness/test coverage, and stale trace cleanup that identify implemented slices and keep unresolved P0 product gaps visible: Agent Factory creation wizard and Learning feedback automation loop.",
+  "work_mode": "governance",
+  "changed_files": [
+    "platform-desktop-app/configs/product-gap-registry.json",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/",
+    "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/user-requests/2026/2026-06-03.en.md",
+    "_history/request-traces/2026/2026-06-03-deferred-work-coverage-audit.ko.md",
+    "_history/request-traces/2026/2026-06-03-operator-center-separation.ko.md",
+    "_history/request-traces/2026/2026-06-03-accumulated-data-format.ko.md",
+    "_history/web-searches/2026/2026-06-03-deferred-work-coverage-audit.ko.md",
+    "_history/evaluations/2026/2026-06-03-deferred-work-coverage-audit-omission-input.json",
+    "_history/evaluations/2026/2026-06-03-deferred-work-coverage-audit-omission-result.json",
+    "_history/evaluations/2026/2026-06-03-deferred-work-coverage-audit-evaluation-input.json",
+    "_history/work-timings/2026/2026-06-03-deferred-work-coverage-audit.json",
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.en.md"
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-gap-registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-03-deferred-work-coverage-audit-omission-input.json",
+    "corepack pnpm --filter workspace-monitor run collect -- --snapshot-mode customer",
+    "corepack pnpm --filter platform-desktop-app test",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "git diff --check"
+  ],
+  "references_checked": [
+    "NIST Cybersecurity and Privacy Reference Tool / SP 800-53 SA-11",
+    "Atlassian Backlog Refinement Guide",
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/request-traces/2026/",
+    "platform-desktop-app/specs/",
+    "platform-desktop-app/configs/",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-03-deferred-work-coverage-audit.ko.md",
+    "platform-desktop-app/configs/product-gap-registry.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-03-deferred-work-coverage-audit.ko.md",
+    "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/plan.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/plan.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-deferred-work-coverage-audit-omission-input.json",
+    "_history/evaluations/2026/2026-06-03-deferred-work-coverage-audit-omission-result.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-deferred-work-coverage-audit.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/user-requests/2026/2026-06-03.en.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-deferred-work-coverage-audit.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-deferred-work-coverage-audit.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [
+    "Agent Factory creation wizard",
+    "Learning feedback automation loop",
+    "Native workspace Git operations",
+    "Desktop UI componentization"
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Implement the Agent Factory wizard as the next product slice.",
+    "Add a learning feedback automation surface that turns evaluations, omissions, timings, and task runs into approvable improvement candidates.",
+    "Split MonitorShell into dedicated desktop shell, runtime, source workbench, settings, and operator components."
+  ]
+}
