@@ -1,0 +1,32 @@
+{
+  "schema_version": "2026-06-03",
+  "task": "desktop-release-runbook",
+  "work_mode": "governance",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked Tauri and Apple official distribution, signing, notarization, and updater references."
+    },
+    {
+      "phase": "local_inventory",
+      "status": "completed",
+      "notes": "Read README, package scripts, release docs, readiness tests, and packaging docs."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Added bilingual README/runbook and one-command desktop pipeline scripts."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "desktop:verify, desktop:release:report, desktop:package:internal, artifact verification, platform desktop test/check, omission guard, resource guard, CLI pipeline guard, final work evaluation, and git diff check passed."
+    }
+  ],
+  "bottleneck_candidates": [
+    "Public distribution still needs signing, notarization, signed updater, and clean-machine test assets.",
+    "Long verification commands regenerate snapshots, so final history docs should be written before the last package run."
+  ]
+}

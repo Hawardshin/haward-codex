@@ -18,6 +18,10 @@
     "monitor:test": "corepack pnpm --filter workspace-monitor test",
     "desktop:check": "corepack pnpm --filter platform-desktop-app check",
     "desktop:test": "corepack pnpm --filter platform-desktop-app test",
+    "desktop:setup:verify": "corepack pnpm install --frozen-lockfile && corepack pnpm --filter platform-desktop-app run verify",
+    "desktop:verify": "corepack pnpm --filter platform-desktop-app run verify",
+    "desktop:package:internal": "corepack pnpm --filter platform-desktop-app run package:internal",
+    "desktop:release:report": "corepack pnpm --filter platform-desktop-app run deploy:public:report",
     "presentation:test:browser": "corepack pnpm --filter presentation-agent-browser-validation test:browser"
   }
 }

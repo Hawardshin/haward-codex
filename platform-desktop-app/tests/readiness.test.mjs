@@ -12,6 +12,11 @@ function readJson(relativePath) {
 test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(existsSync(join(root, "src-tauri/tauri.conf.json")), true);
   assert.equal(existsSync(join(root, "src-tauri/src/lib.rs")), true);
+  assert.equal(existsSync(join(root, "README.ko.md")), true);
+  assert.equal(existsSync(join(root, "README.en.md")), true);
+  assert.equal(existsSync(join(root, "docs/release-runbook.ko.md")), true);
+  assert.equal(existsSync(join(root, "docs/release-runbook.en.md")), true);
+  assert.equal(existsSync(join(root, "scripts/desktop-pipeline.mjs")), true);
 
   const config = readJson("src-tauri/tauri.conf.json");
   assert.equal(config.productName, "Agent Workspace Platform");
@@ -20,6 +25,48 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(config.app.withGlobalTauri, true);
   assert.equal(config.bundle.macOS.hardenedRuntime, true);
   assert.equal(config.bundle.resources["../runtime-contracts/installer-shell-runtime-contract.json"], "runtime-contracts/installer-shell-runtime-contract.json");
+});
+
+test("desktop docs expose bilingual one-command build and release paths", () => {
+  const rootPkg = readJson("../package.json");
+  const pkg = readJson("package.json");
+  const readme = readFileSync(join(root, "README.md"), "utf8");
+  const readmeKo = readFileSync(join(root, "README.ko.md"), "utf8");
+  const readmeEn = readFileSync(join(root, "README.en.md"), "utf8");
+  const releaseKo = readFileSync(join(root, "docs/release-runbook.ko.md"), "utf8");
+  const releaseEn = readFileSync(join(root, "docs/release-runbook.en.md"), "utf8");
+  const pipeline = readFileSync(join(root, "scripts/desktop-pipeline.mjs"), "utf8");
+  const requirementsKo = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.ko.md"), "utf8");
+  const requirementsEn = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.en.md"), "utf8");
+
+  assert.match(requirementsKo, /PDA-REQ-038/);
+  assert.match(requirementsEn, /PDA-REQ-038/);
+  for (const scriptName of ["desktop:setup:verify", "desktop:verify", "desktop:package:internal", "desktop:release:report"]) {
+    assert.ok(rootPkg.scripts[scriptName]);
+  }
+  for (const scriptName of ["verify", "package:internal", "deploy:public:report", "pipeline:dry-run"]) {
+    assert.ok(pkg.scripts[scriptName]);
+  }
+  for (const command of [
+    "corepack pnpm run desktop:setup:verify",
+    "corepack pnpm run desktop:verify",
+    "corepack pnpm run desktop:package:internal",
+    "corepack pnpm run desktop:release:report"
+  ]) {
+    const pattern = new RegExp(command.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    assert.match(readme, pattern);
+    assert.match(readmeKo, pattern);
+    assert.match(readmeEn, pattern);
+    assert.match(releaseKo, pattern);
+    assert.match(releaseEn, pattern);
+  }
+  for (const token of ["package-internal", "public-report", "commonVerifySteps", "Tauri internal package build", "codesign", "hdiutil"]) {
+    assert.match(pipeline, new RegExp(token));
+  }
+  assert.match(releaseKo, /Developer ID/);
+  assert.match(releaseKo, /notarization/);
+  assert.match(releaseEn, /Developer ID/);
+  assert.match(releaseEn, /notarization/);
 });
 
 test("desktop registry points to macOS and Windows execution profiles", () => {

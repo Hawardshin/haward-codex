@@ -1,0 +1,139 @@
+{
+  "initial_instruction": "데스크톱 앱 README가 영어라 불편하니 한국어/영어 버전을 모두 만들고, 빌드/테스트/배포법을 명확히 하며, 여러 명령을 하나씩 실행하지 않도록 한 번에 되는 명령을 만들어 달라는 요청.",
+  "result_summary": "Made the platform desktop app README Korean-first with separate Korean and English README files, added bilingual release runbooks, added root one-command scripts for setup verification, developer verification, internal packaging, and public release gate reporting, implemented a Node desktop pipeline that runs workspace-monitor, platform desktop, Rust, Tauri, codesign, and hdiutil checks, extended readiness tests, updated requirements/spec/history, and verified internal macOS app/DMG packaging while keeping public distribution blocked until signing/notarization/updater/clean-machine gates are satisfied.",
+  "work_mode": "governance",
+  "changed_files": [
+    "package.json",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/README.ko.md",
+    "platform-desktop-app/README.en.md",
+    "platform-desktop-app/package.json",
+    "platform-desktop-app/docs/release-runbook.ko.md",
+    "platform-desktop-app/docs/release-runbook.en.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
+    "platform-desktop-app/scripts/desktop-pipeline.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/traceability.ko.md",
+    "_history/web-searches/2026/2026-06-03-desktop-release-runbook.ko.md",
+    "_history/request-traces/2026/2026-06-03-desktop-release-runbook.ko.md",
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/user-requests/2026/2026-06-03.en.md",
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.en.md",
+    "_history/work-timings/2026/2026-06-03-desktop-release-runbook.json",
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-omission-input.json",
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-omission-result.json",
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-grounding.json",
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-resource-input.json",
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-resource-result.json",
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-cli-pipeline.json",
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-cli-pipeline-result.json",
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-evaluation-input.json",
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-evaluation-result.json"
+  ],
+  "verification": [
+    "corepack pnpm --filter platform-desktop-app run pipeline:dry-run: passed",
+    "corepack pnpm run desktop:verify: passed",
+    "corepack pnpm run desktop:release:report: passed and kept public_release_blocked/service_internal_ready_public_blocked",
+    "corepack pnpm run desktop:package:internal: passed, produced macOS .app/DMG, and ran codesign/hdiutil verification",
+    "codesign --verify --deep --strict Agent Workspace Platform.app: passed",
+    "hdiutil verify Agent Workspace Platform_0.1.0_aarch64.dmg: passed",
+    "corepack pnpm --filter platform-desktop-app test: 17 passed",
+    "corepack pnpm --filter platform-desktop-app run check: passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-03-desktop-release-runbook-omission-input.json: coverage_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-03-desktop-release-runbook-resource-input.json: resource_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-03-desktop-release-runbook-cli-pipeline.json: pipeline_ready"
+  ],
+  "references_checked": [
+    "https://v2.tauri.app/distribute/",
+    "https://v2.tauri.app/distribute/sign/macos/",
+    "https://v2.tauri.app/plugin/updater/",
+    "https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/docs/release-runbook.ko.md",
+    "platform-desktop-app/package.json",
+    "platform-desktop-app/scripts/check-readiness.mjs"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-grounding.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-03-desktop-release-runbook.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/plan.ko.md",
+    "platform-desktop-app/docs/release-runbook.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/validation.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/plan.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-omission-input.json",
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-omission-result.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-desktop-release-runbook.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md",
+    "_history/user-requests/2026/2026-06-03.en.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-desktop-release-runbook.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md",
+    "_history/work-summaries/2026/2026-06-03.en.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-desktop-release-runbook.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-resource-input.json",
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-resource-result.json"
+  ],
+  "cli_pipeline_occurred": true,
+  "cli_pipeline_targets": [
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-cli-pipeline.json",
+    "_history/evaluations/2026/2026-06-03-desktop-release-runbook-cli-pipeline-result.json"
+  ],
+  "deferred_improvement_targets": [
+    "platform-desktop-app/docs/release-runbook.ko.md"
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Configure Developer ID signing and Apple notarization credentials in the release environment.",
+    "Add signed updater channel verification when the updater server/channel is selected.",
+    "Run clean-machine macOS smoke tests and Windows installer build lanes before public release."
+  ]
+}

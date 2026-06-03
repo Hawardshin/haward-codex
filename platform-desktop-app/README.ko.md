@@ -1,6 +1,6 @@
 # 플랫폼 데스크톱 앱
 
-한국어 기본 README입니다. 영어 문서는 [README.en.md](./README.en.md)에 따로 있습니다.
+이 파일은 한국어 README입니다. 영어 문서는 [README.en.md](./README.en.md)에 있습니다.
 
 ## 이 프로젝트의 목적
 

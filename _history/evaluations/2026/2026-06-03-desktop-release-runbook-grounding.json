@@ -1,0 +1,33 @@
+{
+  "record_id": "2026-06-03-desktop-release-runbook-grounding",
+  "date": "2026-06-03",
+  "request_id": "UR-2026-06-03-038",
+  "claims_checked": [
+    {
+      "claim": "Tauri v2 uses `tauri build` as the desktop distribution build path.",
+      "support": "Tauri v2 Distribute documentation.",
+      "url": "https://v2.tauri.app/distribute/",
+      "status": "supported"
+    },
+    {
+      "claim": "macOS public distribution requires signing/notarization gates beyond local ad-hoc signing.",
+      "support": "Tauri v2 macOS signing/notarization documentation and Apple app code signing documentation.",
+      "url": "https://v2.tauri.app/distribute/sign/macos/",
+      "status": "supported"
+    },
+    {
+      "claim": "A public updater channel needs signed update artifacts and updater configuration before it can be treated as ready.",
+      "support": "Tauri v2 Updater Plugin documentation.",
+      "url": "https://v2.tauri.app/plugin/updater/",
+      "status": "supported"
+    },
+    {
+      "claim": "This repository's internal package command generated a macOS app bundle and DMG and verified them with codesign/hdiutil.",
+      "support": "`corepack pnpm run desktop:package:internal` command output on 2026-06-03.",
+      "url": "",
+      "status": "supported"
+    }
+  ],
+  "unsupported_claims_removed": [],
+  "public_summary": "The final response can state that internal macOS packaging works locally, while public distribution remains blocked by signing, notarization, updater, and clean-machine gates."
+}

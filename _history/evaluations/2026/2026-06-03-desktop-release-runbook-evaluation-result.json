@@ -1,0 +1,65 @@
+{
+  "status": "ready_to_close",
+  "requires_rework": false,
+  "work_mode": "governance",
+  "required_target_policy": {
+    "required_targets": [
+      "mode_selection_record_targets",
+      "omission_check_targets",
+      "plan_evidence_targets",
+      "references_checked",
+      "request_trace_targets",
+      "requirements_targets",
+      "source_provenance_targets",
+      "spec_targets",
+      "timing_summary_targets",
+      "user_request_summary_targets",
+      "web_search_record_targets",
+      "work_summary_targets"
+    ],
+    "deferred_targets_allowed": []
+  },
+  "alignment_check": {
+    "initial_instruction_present": true,
+    "result_summary_present": true,
+    "work_mode": "governance",
+    "changed_files_count": 35,
+    "verification_count": 11,
+    "references_checked_count": 8,
+    "grounding_checks_count": 1,
+    "source_provenance_targets_count": 3,
+    "plan_evidence_targets_count": 3,
+    "mode_selection_record_targets_count": 1,
+    "omission_check_targets_count": 2,
+    "web_search_record_targets_count": 1,
+    "user_request_summary_targets_count": 2,
+    "requirements_targets_count": 2,
+    "spec_targets_count": 5,
+    "skill_work_occurred": false,
+    "skill_targets_count": 0,
+    "skill_validation_targets_count": 0,
+    "request_trace_targets_count": 1,
+    "work_summary_targets_count": 2,
+    "timing_summary_targets_count": 1,
+    "context_archiving_occurred": false,
+    "context_archive_targets_count": 0,
+    "installation_occurred": false,
+    "installation_record_targets_count": 0,
+    "resource_risk_occurred": true,
+    "resource_check_targets_count": 2,
+    "cli_pipeline_occurred": true,
+    "cli_pipeline_targets_count": 2,
+    "deferred_improvement_targets_count": 1
+  },
+  "gaps": [],
+  "improvements": [
+    "Configure Developer ID signing and Apple notarization credentials in the release environment.",
+    "Add signed updater channel verification when the updater server/channel is selected.",
+    "Run clean-machine macOS smoke tests and Windows installer build lanes before public release."
+  ],
+  "follow_up_actions": [
+    "Consider improvement: Configure Developer ID signing and Apple notarization credentials in the release environment.",
+    "Consider improvement: Add signed updater channel verification when the updater server/channel is selected.",
+    "Consider improvement: Run clean-machine macOS smoke tests and Windows installer build lanes before public release."
+  ]
+}

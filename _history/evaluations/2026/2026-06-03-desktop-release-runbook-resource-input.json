@@ -1,0 +1,70 @@
+{
+  "task": "Desktop release runbook and one-command package pipeline",
+  "work_mode": "governance",
+  "runtime_context": [
+    "node",
+    "pnpm",
+    "rust-cargo",
+    "tauri-cli",
+    "macos-codesign-hdiutil"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "child-process-lifecycle",
+      "category": "process",
+      "description": "The desktop pipeline launches multiple child processes for pnpm, Rust, Tauri, codesign, and hdiutil.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The pipeline uses spawnSync with inherited stdio, checks exit status after each process, and exits immediately on failure instead of leaving background work.",
+      "evidence": [
+        "platform-desktop-app/scripts/desktop-pipeline.mjs",
+        "corepack pnpm run desktop:package:internal"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "build-artifact-growth",
+      "category": "large_data",
+      "description": "Internal packaging creates Tauri release artifacts under src-tauri/target.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Artifacts remain in the Tauri target directory and are not staged as durable repository knowledge; validation records list their paths without tracking generated bundles.",
+      "evidence": [
+        "git status --short",
+        "platform-desktop-app/docs/release-runbook.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "pipeline-process-completion",
+      "resource": "desktop package child processes",
+      "create_path": "corepack pnpm run desktop:package:internal",
+      "cleanup_path": "Each spawnSync child process exits before the next step begins; no detached/background option is used.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm run desktop:package:internal completed with generated .app/DMG and artifact verification"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "tracked-artifact-boundary",
+      "metric": "Generated app bundles are not staged as tracked repository changes.",
+      "tool": "git status --short",
+      "threshold": "Only source/docs/history/snapshot files appear as changed; target bundle artifacts stay untracked or ignored.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "git status --short after internal packaging"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No server, watcher, browser automation, or detached long-running process was started by the final pipeline."
+  ]
+}

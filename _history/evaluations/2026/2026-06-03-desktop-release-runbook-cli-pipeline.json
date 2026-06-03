@@ -1,0 +1,352 @@
+{
+  "pipeline_id": "desktop-release-runbook-package-internal",
+  "purpose": "Run desktop app verification and internal Tauri packaging from one root command instead of requiring scattered manual commands.",
+  "work_mode": "governance",
+  "risk_level": "medium",
+  "processes": [
+    {
+      "process_id": "workspace-monitor-check",
+      "adapter_id": "pnpm",
+      "command": "corepack",
+      "args": [
+        "pnpm",
+        "--dir",
+        "platform-desktop-app/renderer/workspace-monitor",
+        "run",
+        "check"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 200000,
+      "required": true
+    },
+    {
+      "process_id": "workspace-monitor-test",
+      "adapter_id": "pnpm",
+      "command": "corepack",
+      "args": [
+        "pnpm",
+        "--dir",
+        "platform-desktop-app/renderer/workspace-monitor",
+        "test"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 200000,
+      "required": true
+    },
+    {
+      "process_id": "workspace-monitor-build-customer",
+      "adapter_id": "pnpm",
+      "command": "corepack",
+      "args": [
+        "pnpm",
+        "--dir",
+        "platform-desktop-app/renderer/workspace-monitor",
+        "run",
+        "build:customer"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 900,
+      "max_output_bytes": 500000,
+      "required": true
+    },
+    {
+      "process_id": "platform-desktop-test",
+      "adapter_id": "pnpm",
+      "command": "corepack",
+      "args": [
+        "pnpm",
+        "--filter",
+        "platform-desktop-app",
+        "test"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 200000,
+      "required": true
+    },
+    {
+      "process_id": "platform-desktop-check",
+      "adapter_id": "pnpm",
+      "command": "corepack",
+      "args": [
+        "pnpm",
+        "--filter",
+        "platform-desktop-app",
+        "run",
+        "check"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 200000,
+      "required": true
+    },
+    {
+      "process_id": "cargo-test",
+      "adapter_id": "cargo",
+      "command": "cargo",
+      "args": [
+        "test",
+        "--manifest-path",
+        "platform-desktop-app/src-tauri/Cargo.toml"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH",
+        "CARGO_HOME",
+        "RUSTUP_HOME"
+      ],
+      "timeout_seconds": 900,
+      "max_output_bytes": 500000,
+      "required": true
+    },
+    {
+      "process_id": "cargo-build",
+      "adapter_id": "cargo",
+      "command": "cargo",
+      "args": [
+        "build",
+        "--manifest-path",
+        "platform-desktop-app/src-tauri/Cargo.toml"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH",
+        "CARGO_HOME",
+        "RUSTUP_HOME"
+      ],
+      "timeout_seconds": 900,
+      "max_output_bytes": 500000,
+      "required": true
+    },
+    {
+      "process_id": "tauri-build",
+      "adapter_id": "tauri",
+      "command": "corepack",
+      "args": [
+        "pnpm",
+        "--filter",
+        "platform-desktop-app",
+        "run",
+        "tauri:build"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH",
+        "CARGO_HOME",
+        "RUSTUP_HOME",
+        "APPLE_CERTIFICATE",
+        "APPLE_CERTIFICATE_PASSWORD",
+        "APPLE_SIGNING_IDENTITY",
+        "APPLE_ID",
+        "APPLE_PASSWORD",
+        "APPLE_TEAM_ID"
+      ],
+      "timeout_seconds": 1800,
+      "max_output_bytes": 1000000,
+      "required": true
+    },
+    {
+      "process_id": "codesign-verify",
+      "adapter_id": "macos-codesign",
+      "command": "codesign",
+      "args": [
+        "--verify",
+        "--deep",
+        "--strict",
+        "platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": true
+    },
+    {
+      "process_id": "hdiutil-verify",
+      "adapter_id": "macos-hdiutil",
+      "command": "hdiutil",
+      "args": [
+        "verify",
+        "platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg"
+      ],
+      "cwd": ".",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": true
+    }
+  ],
+  "pipes": [
+    {
+      "pipe_id": "workspace-snapshot-to-tauri",
+      "from_process": "workspace-monitor-build-customer",
+      "from_stream": "stdout",
+      "to_process": "tauri-build",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "workspace-snapshot",
+      "required": true
+    },
+    {
+      "pipe_id": "app-bundle-to-codesign",
+      "from_process": "tauri-build",
+      "from_stream": "stdout",
+      "to_process": "codesign-verify",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "app-bundle",
+      "required": true
+    },
+    {
+      "pipe_id": "dmg-to-hdiutil",
+      "from_process": "tauri-build",
+      "from_stream": "stdout",
+      "to_process": "hdiutil-verify",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "dmg-bundle",
+      "required": true
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "workspace-snapshot",
+      "kind": "output_file",
+      "path": "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json",
+      "produced_by": "workspace-monitor-build-customer",
+      "consumed_by": [
+        "tauri-build"
+      ],
+      "required": true,
+      "max_bytes": 1000000,
+      "format": "json",
+      "retention_policy": "tracked generated snapshot that reflects the current repository state",
+      "cleanup_policy": "",
+      "provenance": [
+        "platform-desktop-app/renderer/workspace-monitor package scripts"
+      ],
+      "validation": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build:customer",
+        "corepack pnpm --filter platform-desktop-app run check"
+      ]
+    },
+    {
+      "artifact_id": "app-bundle",
+      "kind": "directory",
+      "path": "platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app",
+      "produced_by": "tauri-build",
+      "consumed_by": [
+        "codesign-verify"
+      ],
+      "required": true,
+      "max_bytes": 1000000000,
+      "format": "macos-app-bundle",
+      "retention_policy": "generated internal test artifact under Tauri target directory, not committed",
+      "cleanup_policy": "",
+      "provenance": [
+        "Tauri build output"
+      ],
+      "validation": [
+        "codesign --verify --deep --strict"
+      ]
+    },
+    {
+      "artifact_id": "dmg-bundle",
+      "kind": "output_file",
+      "path": "platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg",
+      "produced_by": "tauri-build",
+      "consumed_by": [
+        "hdiutil-verify"
+      ],
+      "required": true,
+      "max_bytes": 1000000000,
+      "format": "dmg",
+      "retention_policy": "generated internal test artifact under Tauri target directory, not committed",
+      "cleanup_policy": "",
+      "provenance": [
+        "Tauri build output"
+      ],
+      "validation": [
+        "hdiutil verify"
+      ]
+    }
+  ],
+  "execution_policy": {
+    "shell_allowed": false,
+    "argv_arrays_required": true,
+    "explicit_pipe_graph_required": true,
+    "explicit_cwd_required": true,
+    "adapter_allowlist": [
+      "pnpm",
+      "cargo",
+      "tauri",
+      "macos-codesign",
+      "macos-hdiutil"
+    ]
+  },
+  "safety_controls": [
+    "adapter_allowlist",
+    "argv_arguments",
+    "shell_disabled_by_default",
+    "explicit_cwd_boundary",
+    "environment_allowlist",
+    "secret_redaction",
+    "output_redaction",
+    "permission_scope",
+    "fallback_behavior",
+    "audit_logging"
+  ],
+  "resource_controls": {
+    "timeout_policy": "Each process has an explicit timeout_seconds value in the pipeline record and the implementation exits on failure.",
+    "max_output_bytes": 1000000,
+    "cancellation_policy": "The synchronous pipeline stops at the first failed process and does not start downstream verification.",
+    "cleanup_policy": "Generated app bundles remain under src-tauri/target; no temp directory or detached worker is created by the script.",
+    "orphan_process_policy": "No detached processes are used; each spawnSync child exits before the next step begins.",
+    "backpressure_policy": "stdio is inherited and subprocess output is bounded in the pipeline record for review."
+  },
+  "merge_strategy": "The root script delegates to the platform package script; package scripts delegate to one Node pipeline file, so command order changes happen in one implementation point.",
+  "source_provenance": [
+    "_history/web-searches/2026/2026-06-03-desktop-release-runbook.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/plan.ko.md"
+  ],
+  "plan_evidence": [
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/traceability.ko.md"
+  ],
+  "verification": [
+    "corepack pnpm --filter platform-desktop-app run pipeline:dry-run",
+    "corepack pnpm run desktop:verify",
+    "corepack pnpm run desktop:package:internal",
+    "codesign verification inside desktop:package:internal",
+    "hdiutil verification inside desktop:package:internal"
+  ],
+  "rollback_plan": [
+    "Remove root desktop:* scripts and platform-desktop-app package scripts.",
+    "Remove platform-desktop-app/scripts/desktop-pipeline.mjs.",
+    "Keep release runbook commands expanded manually if the pipeline needs to be disabled."
+  ],
+  "notes": [
+    "Public release remains report-only and is intentionally blocked until external signing, notarization, updater, and clean-machine gates are complete."
+  ]
+}

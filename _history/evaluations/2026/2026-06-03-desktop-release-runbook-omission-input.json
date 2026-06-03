@@ -1,0 +1,117 @@
+{
+  "task": "Desktop release runbook and one-command scripts",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and local edits.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-desktop-release-runbook.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "bilingual-readme",
+      "description": "Provide Korean and English README files, with Korean default README for the user.",
+      "source": "UR-2026-06-03-038",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/README.md",
+        "platform-desktop-app/README.ko.md",
+        "platform-desktop-app/README.en.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "one-command-build-test",
+      "description": "Avoid requiring users to run scattered commands manually for test/build/internal packaging/public gate report.",
+      "source": "UR-2026-06-03-038",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "package.json",
+        "platform-desktop-app/package.json",
+        "platform-desktop-app/scripts/desktop-pipeline.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "release-doc-location",
+      "description": "Make the actual release/deployment procedure easy to find.",
+      "source": "UR-2026-06-03-038",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/docs/release-runbook.ko.md",
+        "platform-desktop-app/docs/release-runbook.en.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "public-gates-not-hidden",
+      "description": "Keep public release gates visible and do not claim public readiness.",
+      "source": "UR-2026-06-03-038",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "corepack pnpm run desktop:release:report",
+        "platform-desktop-app/docs/release-runbook.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/scripts/desktop-pipeline.mjs",
+      "purpose": "One-command desktop verification/package/report pipeline.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-desktop-release-runbook/spec.ko.md",
+      "purpose": "Spec for the release runbook change.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "desktop-verify",
+      "description": "One-shot developer verification command passes.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm run desktop:verify"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "public-report",
+      "description": "One-shot public release report command runs and keeps public blockers visible.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm run desktop:release:report"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "desktop-package-internal",
+      "description": "One-shot internal package command builds internal artifacts.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm run desktop:package:internal"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Public distribution remains blocked because signing/notarization/updater/clean-machine gates require external assets."
+  ],
+  "notes": [
+    "This task changes documentation and scripts; it does not configure public signing credentials."
+  ]
+}
