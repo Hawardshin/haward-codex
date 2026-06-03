@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-03T16:25:17.918Z",
+  "generatedAt": "2026-06-03T16:49:28.311Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -177,12 +177,14 @@
           "Desktop Runtime",
           "Run Board",
           "Search Agent Work Chat",
+          "Provider Accounts",
           "Task Pipe",
           "Process Graph",
           "Decision Inbox"
         ],
         "currentAssets": [],
         "automationTargets": [
+          "provider credential injection into guest CLI sessions",
           "existing search agent work-chat",
           "task intake to multi-lane plan",
           "bounded stdout and stderr capture",

@@ -330,12 +330,14 @@
       "app_data",
       "app_local_data",
       "app_cache",
-      "app_log"
+      "app_log",
+      "provider_credential_store"
     ],
     "macos_direction": "Use app container, Application Support, app group container, or user-selected workspace paths according to signing and sandbox level.",
     "windows_direction": "Use LocalAppData/Roaming app data stores according to update, roaming, and privacy behavior.",
     "tauri_direction": "Prefer Tauri app-specific base directories and permission-scoped filesystem access before custom absolute paths.",
-    "repository_development_direction": "During local development, project artifacts may exist under platform-desktop-app/artifacts/ only when ignored or explicitly tracked as durable fixtures."
+    "repository_development_direction": "During local development, project artifacts may exist under platform-desktop-app/artifacts/ only when ignored or explicitly tracked as durable fixtures.",
+    "provider_credential_direction": "Provider API credentials live under app_config/provider-credentials, are excluded from support bundles, and are injected only into matching guest adapter processes."
   },
   "log_taxonomy": [
     {

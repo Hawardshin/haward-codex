@@ -1,0 +1,21 @@
+{
+  "schema_version": "resource-check.v1",
+  "request_id": "UR-2026-06-04-006",
+  "checked_at": "2026-06-04",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    "Tauri child process environment",
+    "local app config credential file",
+    "system browser URL opener",
+    "temporary static preview server",
+    "in-app browser smoke tab"
+  ],
+  "controls": [
+    "provider URLs are selected from static provider definitions only",
+    "raw secrets are excluded from report structs and support bundles",
+    "saved keys are injected only into matching adapter child process env",
+    "temporary preview server on 127.0.0.1:4173 was stopped before close-out",
+    "no real API key was entered during browser smoke"
+  ],
+  "status": "passed"
+}

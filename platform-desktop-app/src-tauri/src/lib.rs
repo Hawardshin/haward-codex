@@ -42,6 +42,17 @@ struct AdapterDefinition {
     session_args: &'static [&'static str],
 }
 
+struct ProviderCredentialDefinition {
+    provider_id: &'static str,
+    label: &'static str,
+    auth_method: &'static str,
+    env_var: &'static str,
+    setup_url: &'static str,
+    login_url: &'static str,
+    docs_url: &'static str,
+    caution: &'static str,
+}
+
 struct PipelineLaneDefinition {
     lane_id: &'static str,
     adapter_id: &'static str,
@@ -377,6 +388,75 @@ struct DesktopPreferencesReport {
     preferences: DesktopPreferences,
 }
 
+#[derive(Clone, Deserialize, Serialize)]
+#[serde(default, rename_all = "camelCase")]
+struct ProviderCredentialRecord {
+    provider_id: String,
+    auth_method: String,
+    account_hint: String,
+    secret: String,
+    created_at: String,
+    updated_at: String,
+}
+
+#[derive(Clone, Deserialize, Serialize)]
+#[serde(default, rename_all = "camelCase")]
+struct ProviderCredentialStore {
+    schema_version: String,
+    credentials: Vec<ProviderCredentialRecord>,
+}
+
+#[derive(Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+struct ProviderCredentialInput {
+    provider_id: String,
+    auth_method: String,
+    secret: String,
+    account_hint: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ProviderCredentialSummary {
+    provider_id: String,
+    label: String,
+    auth_method: String,
+    env_var: String,
+    configured: bool,
+    environment_available: bool,
+    status: String,
+    account_hint: String,
+    secret_preview: String,
+    last_updated_at: String,
+    storage: String,
+    credential_source: String,
+    setup_url: String,
+    login_url: String,
+    docs_url: String,
+    caution: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ProviderCredentialReport {
+    schema_version: String,
+    status: String,
+    source: String,
+    credential_file_path: String,
+    storage_warning: String,
+    configured_count: usize,
+    providers: Vec<ProviderCredentialSummary>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ProviderAuthUrlOpenReport {
+    provider_id: String,
+    purpose: String,
+    url: String,
+    status: String,
+}
+
 impl Default for DesktopRuntimeInitDefaults {
     fn default() -> Self {
         Self {
@@ -404,6 +484,39 @@ impl Default for DesktopPreferences {
                 "source".to_string(),
                 "intent".to_string(),
             ],
+        }
+    }
+}
+
+impl Default for ProviderCredentialRecord {
+    fn default() -> Self {
+        Self {
+            provider_id: String::new(),
+            auth_method: "api_key".to_string(),
+            account_hint: String::new(),
+            secret: String::new(),
+            created_at: String::new(),
+            updated_at: String::new(),
+        }
+    }
+}
+
+impl Default for ProviderCredentialStore {
+    fn default() -> Self {
+        Self {
+            schema_version: PROVIDER_CREDENTIALS_SCHEMA_VERSION.to_string(),
+            credentials: Vec::new(),
+        }
+    }
+}
+
+impl Default for ProviderCredentialInput {
+    fn default() -> Self {
+        Self {
+            provider_id: String::new(),
+            auth_method: "api_key".to_string(),
+            secret: String::new(),
+            account_hint: String::new(),
         }
     }
 }
@@ -632,6 +745,7 @@ struct RuntimeDataBoundaryReport {
     task_run_store_path: String,
     support_bundle_store_path: String,
     installer_payload_audit_path: String,
+    provider_credential_store_path: String,
 }
 
 #[derive(Serialize)]
@@ -876,6 +990,7 @@ const ACCUMULATED_DATA_INDEX_SCHEMA_VERSION: &str = "accumulated-data-overview.v
 const ACCUMULATED_DATA_STORAGE_FORMAT_VERSION: &str = "file-record-stores+overview-manifest.v1";
 const DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION: &str = "desktop-workspace-state.v1";
 const DESKTOP_PREFERENCES_SCHEMA_VERSION: &str = "desktop-preferences.v1";
+const PROVIDER_CREDENTIALS_SCHEMA_VERSION: &str = "provider-credentials.v1";
 const GIT_CLONE_TIMEOUT_MS: u64 = 120_000;
 const MAX_GIT_CLONE_OUTPUT_BYTES: usize = 24_000;
 const MAX_GIT_REPOSITORY_URL_BYTES: usize = 2_048;
@@ -891,6 +1006,8 @@ const MAX_GIT_HISTORY_COMMITS: usize = 40;
 const MAX_GIT_STASHES: usize = 20;
 const DESKTOP_GIT_STATUS_SCHEMA_VERSION: &str = "desktop-git-status.v1";
 const MAX_WORKSPACE_FOLDER_NAME_BYTES: usize = 120;
+const MAX_PROVIDER_SECRET_BYTES: usize = 8_192;
+const MAX_PROVIDER_ACCOUNT_HINT_CHARS: usize = 160;
 const MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS: usize = 20;
 const MAX_SUPPORT_EVENT_CHARS: usize = 600;
 const MAX_FACTORY_FIELD_CHARS: usize = 4_000;
@@ -954,6 +1071,39 @@ static ADAPTERS: &[AdapterDefinition] = &[
         command: "claw",
         version_args: &["--version"],
         session_args: &[],
+    },
+];
+
+static PROVIDER_CREDENTIALS: &[ProviderCredentialDefinition] = &[
+    ProviderCredentialDefinition {
+        provider_id: "openai",
+        label: "ChatGPT / OpenAI",
+        auth_method: "api_key",
+        env_var: "OPENAI_API_KEY",
+        setup_url: "https://platform.openai.com/api-keys",
+        login_url: "https://chatgpt.com/",
+        docs_url: "https://platform.openai.com/docs/api-reference/authentication/keys",
+        caution: "Use an OpenAI Platform API key for guest CLI/API work; do not embed ChatGPT web session cookies.",
+    },
+    ProviderCredentialDefinition {
+        provider_id: "anthropic",
+        label: "Claude / Anthropic",
+        auth_method: "api_key",
+        env_var: "ANTHROPIC_API_KEY",
+        setup_url: "https://console.anthropic.com/settings/keys",
+        login_url: "https://claude.ai/login",
+        docs_url: "https://platform.claude.com/docs/en/api/authentication/overview",
+        caution: "Use a Claude API key or provider-supported federation; consumer web OAuth tokens are not stored here.",
+    },
+    ProviderCredentialDefinition {
+        provider_id: "google-gemini",
+        label: "Gemini / Google",
+        auth_method: "api_key",
+        env_var: "GEMINI_API_KEY",
+        setup_url: "https://aistudio.google.com/api-keys",
+        login_url: "https://gemini.google.com/",
+        docs_url: "https://ai.google.dev/gemini-api/docs/api-key",
+        caution: "Use a restricted Gemini API key for local adapter work; OAuth desktop setup is handled as a separate provider flow.",
     },
 ];
 
@@ -1236,6 +1386,35 @@ fn save_desktop_preferences(
     preferences: DesktopPreferences,
 ) -> Result<DesktopPreferencesReport, String> {
     save_desktop_preferences_report(&app, preferences)
+}
+
+#[tauri::command]
+fn list_provider_credentials(app: AppHandle) -> Result<ProviderCredentialReport, String> {
+    provider_credentials_report(&app)
+}
+
+#[tauri::command]
+fn save_provider_credential(
+    app: AppHandle,
+    input: ProviderCredentialInput,
+) -> Result<ProviderCredentialReport, String> {
+    save_provider_credential_report(&app, input)
+}
+
+#[tauri::command]
+fn clear_provider_credential(
+    app: AppHandle,
+    provider_id: String,
+) -> Result<ProviderCredentialReport, String> {
+    clear_provider_credential_report(&app, &provider_id)
+}
+
+#[tauri::command]
+fn open_provider_auth_url(
+    provider_id: String,
+    purpose: Option<String>,
+) -> Result<ProviderAuthUrlOpenReport, String> {
+    open_provider_auth_url_report(&provider_id, purpose.as_deref())
 }
 
 #[tauri::command]
@@ -1540,12 +1719,18 @@ fn create_cli_session(
         .ok_or_else(|| format!("Command '{}' was not found on PATH.", adapter.command))?;
     let session_id = new_session_id(adapter.adapter_id);
     let task_run_id = format!("task-run-{session_id}");
-    let mut child = Command::new(&path)
+    let provider_env = provider_env_for_adapter(app, adapter.adapter_id)?;
+    let mut command = Command::new(&path);
+    command
         .args(adapter.session_args)
         .current_dir(&working_dir)
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
-        .stderr(Stdio::piped())
+        .stderr(Stdio::piped());
+    for (key, value) in provider_env {
+        command.env(key, value);
+    }
+    let mut child = command
         .spawn()
         .map_err(|error| format!("Failed to start CLI session: {error}"))?;
 
@@ -2058,6 +2243,10 @@ pub fn run() {
             get_service_readiness_report,
             get_desktop_preferences,
             save_desktop_preferences,
+            list_provider_credentials,
+            save_provider_credential,
+            clear_provider_credential,
+            open_provider_auth_url,
             get_desktop_workspace_state,
             set_desktop_workspace_path,
             choose_desktop_workspace_folder,
@@ -3102,6 +3291,14 @@ fn runtime_data_boundary_report(app: &AppHandle) -> Result<RuntimeDataBoundaryRe
         "Runtime agent scratch and work artifacts separated from reusable agent definitions.",
     )?);
     roots.push(runtime_root_report(
+        "provider_credentials",
+        "Provider Credentials",
+        "provider_credential_store",
+        provider_credentials_base_path(app)?,
+        "user_local_app_config_secret",
+        "Local provider API credentials used to launch guest adapters; excluded from support exports.",
+    )?);
+    roots.push(runtime_root_report(
         "agent_factory_proposals",
         "Agent Factory Proposals",
         "agent_factory_store",
@@ -3139,6 +3336,7 @@ fn runtime_data_boundary_report(app: &AppHandle) -> Result<RuntimeDataBoundaryRe
         task_run_store_path: path_to_string(&task_runs_base_path(app)?),
         support_bundle_store_path: path_to_string(&support_bundles_base_path(app)?),
         installer_payload_audit_path: path_to_string(&payload_audits_base_path(app)?),
+        provider_credential_store_path: path_to_string(&provider_credentials_base_path(app)?),
         roots,
     })
 }
@@ -3569,6 +3767,7 @@ fn service_readiness_report(app: &AppHandle) -> Result<ServiceReadinessReport, S
     let runtime_roots = runtime_data_boundary_report(app)?;
     let payload_audit = run_installer_payload_audit_report(app)?;
     let workspace_state = desktop_workspace_state_report(app, None, None)?;
+    let provider_credentials = provider_credentials_report(app)?;
     let roots_ready = runtime_roots.roots.iter().all(|root| root.exists);
     let has_payload_high_findings = payload_audit
         .findings
@@ -3658,6 +3857,46 @@ fn service_readiness_report(app: &AppHandle) -> Result<ServiceReadinessReport, S
                     "Support export policy is redacted",
                     true,
                     "Support bundle command exports redacted bounded summaries.",
+                    "blocked",
+                    true,
+                    true,
+                ),
+            ],
+        ),
+        service_readiness_group(
+            "provider_accounts",
+            "Provider Accounts",
+            vec![
+                service_readiness_check(
+                    "provider_credential_store_ready",
+                    "Provider credential store is ready",
+                    !runtime_roots.provider_credential_store_path.is_empty(),
+                    &runtime_roots.provider_credential_store_path,
+                    "blocked",
+                    true,
+                    true,
+                ),
+                service_readiness_check(
+                    "provider_account_connected",
+                    "At least one AI provider account is connected",
+                    provider_credentials.configured_count > 0,
+                    &format!(
+                        "{} of {} providers configured.",
+                        provider_credentials.configured_count,
+                        provider_credentials.providers.len()
+                    ),
+                    "warning",
+                    false,
+                    false,
+                ),
+                service_readiness_check(
+                    "provider_credentials_redacted",
+                    "Provider credential reports are redacted",
+                    provider_credentials
+                        .providers
+                        .iter()
+                        .all(|provider| !provider.secret_preview.contains("sk-") || provider.secret_preview.contains("...")),
+                    "Reports expose only configured state and short previews.",
                     "blocked",
                     true,
                     true,
@@ -3951,6 +4190,18 @@ fn desktop_preferences_path(app: &AppHandle) -> Result<PathBuf, String> {
         .app_config_dir()
         .map_err(|error| format!("Failed to resolve app config directory: {error}"))?
         .join("desktop-preferences.v1.json"))
+}
+
+fn provider_credentials_base_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(app
+        .path()
+        .app_config_dir()
+        .map_err(|error| format!("Failed to resolve app config directory: {error}"))?
+        .join("provider-credentials"))
+}
+
+fn provider_credentials_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(provider_credentials_base_path(app)?.join("provider-credentials.v1.json"))
 }
 
 fn accumulated_data_index_path(app: &AppHandle) -> Result<PathBuf, String> {
@@ -4516,6 +4767,46 @@ fn write_pretty_json<T: Serialize>(path: &Path, value: &T) -> Result<(), String>
         .map_err(|error| format!("Failed to serialize JSON artifact: {error}"))?;
     fs::write(path, format!("{formatted}\n"))
         .map_err(|error| format!("Failed to write JSON artifact: {error}"))
+}
+
+fn restrict_secret_file_permissions(path: &Path) -> Result<(), String> {
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+        let permissions = fs::Permissions::from_mode(0o600);
+        fs::set_permissions(path, permissions)
+            .map_err(|error| format!("Failed to restrict secret file permissions: {error}"))?;
+    }
+    #[cfg(not(unix))]
+    {
+        let _ = path;
+    }
+    Ok(())
+}
+
+fn open_url_with_system_browser(url: &str) -> Result<(), String> {
+    #[cfg(target_os = "macos")]
+    let mut command = {
+        let mut command = Command::new("open");
+        command.arg(url);
+        command
+    };
+    #[cfg(target_os = "windows")]
+    let mut command = {
+        let mut command = Command::new("cmd");
+        command.args(["/C", "start", "", url]);
+        command
+    };
+    #[cfg(all(unix, not(target_os = "macos")))]
+    let mut command = {
+        let mut command = Command::new("xdg-open");
+        command.arg(url);
+        command
+    };
+    command
+        .spawn()
+        .map_err(|error| format!("Failed to open provider URL: {error}"))?;
+    Ok(())
 }
 
 fn relative_payload_path(base: &Path, path: &Path) -> String {
@@ -5369,6 +5660,320 @@ fn normalize_pinned_sections(values: Vec<String>, fallback: Vec<String>) -> Vec<
         fallback
     } else {
         normalized
+    }
+}
+
+fn provider_credentials_report(app: &AppHandle) -> Result<ProviderCredentialReport, String> {
+    let path = provider_credentials_path(app)?;
+    let store = read_provider_credential_store(app)?;
+    let providers: Vec<ProviderCredentialSummary> = PROVIDER_CREDENTIALS
+        .iter()
+        .map(|definition| {
+            let record = store
+                .credentials
+                .iter()
+                .find(|credential| credential.provider_id == definition.provider_id);
+            provider_credential_summary(definition, record)
+        })
+        .collect();
+    let configured_count = providers
+        .iter()
+        .filter(|provider| provider.configured)
+        .count();
+    let status = if configured_count > 0 {
+        "provider_credentials_ready"
+    } else {
+        "provider_credentials_required"
+    }
+    .to_string();
+
+    Ok(ProviderCredentialReport {
+        schema_version: PROVIDER_CREDENTIALS_SCHEMA_VERSION.to_string(),
+        status,
+        source: if path.exists() {
+            "app_config_file".to_string()
+        } else {
+            "default_empty".to_string()
+        },
+        credential_file_path: path_to_string(&path),
+        storage_warning: "Secrets are stored only in the local app config credential file and are redacted from reports and support bundles. Replace this storage adapter with OS keychain before public release.".to_string(),
+        configured_count,
+        providers,
+    })
+}
+
+fn save_provider_credential_report(
+    app: &AppHandle,
+    input: ProviderCredentialInput,
+) -> Result<ProviderCredentialReport, String> {
+    let definition = find_provider_credential(&input.provider_id)
+        .ok_or_else(|| format!("Unknown provider id: {}", input.provider_id))?;
+    let auth_method = if input.auth_method.trim().is_empty() {
+        definition.auth_method
+    } else {
+        input.auth_method.trim()
+    };
+    if auth_method != definition.auth_method {
+        return Err(format!(
+            "Unsupported auth method '{}' for provider '{}'.",
+            auth_method, definition.provider_id
+        ));
+    }
+    let secret = normalize_provider_secret(&input.secret)?;
+    let account_hint = truncate_chars(
+        &redact_sensitive_text(input.account_hint.trim()),
+        MAX_PROVIDER_ACCOUNT_HINT_CHARS,
+    );
+    let mut store = read_provider_credential_store(app)?;
+    let now = current_unix_millis_label();
+    let created_at = store
+        .credentials
+        .iter()
+        .find(|credential| credential.provider_id == definition.provider_id)
+        .map(|credential| credential.created_at.clone())
+        .filter(|value| !value.is_empty())
+        .unwrap_or_else(|| now.clone());
+    store
+        .credentials
+        .retain(|credential| credential.provider_id != definition.provider_id);
+    store.credentials.push(ProviderCredentialRecord {
+        provider_id: definition.provider_id.to_string(),
+        auth_method: definition.auth_method.to_string(),
+        account_hint,
+        secret,
+        created_at,
+        updated_at: now,
+    });
+    store = normalize_provider_credential_store(store);
+    write_provider_credential_store(app, &store)?;
+    provider_credentials_report(app)
+}
+
+fn clear_provider_credential_report(
+    app: &AppHandle,
+    provider_id: &str,
+) -> Result<ProviderCredentialReport, String> {
+    let definition = find_provider_credential(provider_id)
+        .ok_or_else(|| format!("Unknown provider id: {provider_id}"))?;
+    let mut store = read_provider_credential_store(app)?;
+    store
+        .credentials
+        .retain(|credential| credential.provider_id != definition.provider_id);
+    store = normalize_provider_credential_store(store);
+    write_provider_credential_store(app, &store)?;
+    provider_credentials_report(app)
+}
+
+fn open_provider_auth_url_report(
+    provider_id: &str,
+    purpose: Option<&str>,
+) -> Result<ProviderAuthUrlOpenReport, String> {
+    let definition = find_provider_credential(provider_id)
+        .ok_or_else(|| format!("Unknown provider id: {provider_id}"))?;
+    let purpose = match purpose.unwrap_or("setup") {
+        "login" => "login",
+        "docs" => "docs",
+        _ => "setup",
+    };
+    let url = match purpose {
+        "login" => definition.login_url,
+        "docs" => definition.docs_url,
+        _ => definition.setup_url,
+    };
+    open_url_with_system_browser(url)?;
+    Ok(ProviderAuthUrlOpenReport {
+        provider_id: definition.provider_id.to_string(),
+        purpose: purpose.to_string(),
+        url: url.to_string(),
+        status: "opened".to_string(),
+    })
+}
+
+fn read_provider_credential_store(app: &AppHandle) -> Result<ProviderCredentialStore, String> {
+    let path = provider_credentials_path(app)?;
+    if !path.exists() {
+        return Ok(ProviderCredentialStore::default());
+    }
+    let content = fs::read_to_string(&path)
+        .map_err(|error| format!("Failed to read provider credentials: {error}"))?;
+    let store: ProviderCredentialStore = serde_json::from_str(&content)
+        .map_err(|error| format!("Failed to parse provider credentials: {error}"))?;
+    Ok(normalize_provider_credential_store(store))
+}
+
+fn write_provider_credential_store(
+    app: &AppHandle,
+    store: &ProviderCredentialStore,
+) -> Result<(), String> {
+    let path = provider_credentials_path(app)?;
+    write_pretty_json(&path, store)?;
+    restrict_secret_file_permissions(&path)
+}
+
+fn normalize_provider_credential_store(
+    store: ProviderCredentialStore,
+) -> ProviderCredentialStore {
+    let mut seen = HashSet::new();
+    let mut credentials = Vec::new();
+    for credential in store.credentials {
+        let Some(definition) = find_provider_credential(&credential.provider_id) else {
+            continue;
+        };
+        if !seen.insert(definition.provider_id.to_string()) {
+            continue;
+        }
+        if credential.secret.trim().is_empty() {
+            continue;
+        }
+        credentials.push(ProviderCredentialRecord {
+            provider_id: definition.provider_id.to_string(),
+            auth_method: definition.auth_method.to_string(),
+            account_hint: truncate_chars(
+                &redact_sensitive_text(credential.account_hint.trim()),
+                MAX_PROVIDER_ACCOUNT_HINT_CHARS,
+            ),
+            secret: credential.secret.trim().to_string(),
+            created_at: credential.created_at,
+            updated_at: credential.updated_at,
+        });
+    }
+    ProviderCredentialStore {
+        schema_version: PROVIDER_CREDENTIALS_SCHEMA_VERSION.to_string(),
+        credentials,
+    }
+}
+
+fn provider_credential_summary(
+    definition: &ProviderCredentialDefinition,
+    record: Option<&ProviderCredentialRecord>,
+) -> ProviderCredentialSummary {
+    let saved_configured = record
+        .map(|credential| !credential.secret.trim().is_empty())
+        .unwrap_or(false);
+    let environment_available = env::var(definition.env_var)
+        .map(|value| !value.trim().is_empty())
+        .unwrap_or(false);
+    let configured = saved_configured || environment_available;
+    let credential_source = if saved_configured {
+        "app_config_file"
+    } else if environment_available {
+        "environment_variable"
+    } else {
+        "not_configured"
+    };
+    let status = if saved_configured {
+        "saved_local"
+    } else if environment_available {
+        "environment_available"
+    } else {
+        "not_connected"
+    };
+    ProviderCredentialSummary {
+        provider_id: definition.provider_id.to_string(),
+        label: definition.label.to_string(),
+        auth_method: definition.auth_method.to_string(),
+        env_var: definition.env_var.to_string(),
+        configured,
+        environment_available,
+        status: status.to_string(),
+        account_hint: record
+            .map(|credential| credential.account_hint.clone())
+            .unwrap_or_default(),
+        secret_preview: if let Some(credential) = record {
+            credential_secret_preview(&credential.secret)
+        } else if environment_available {
+            format!("env:{}", definition.env_var)
+        } else {
+            String::new()
+        },
+        last_updated_at: record
+            .map(|credential| credential.updated_at.clone())
+            .unwrap_or_default(),
+        storage: if saved_configured {
+            "local_app_config_secret_file".to_string()
+        } else if environment_available {
+            "shell_environment".to_string()
+        } else {
+            "not_configured".to_string()
+        },
+        credential_source: credential_source.to_string(),
+        setup_url: definition.setup_url.to_string(),
+        login_url: definition.login_url.to_string(),
+        docs_url: definition.docs_url.to_string(),
+        caution: definition.caution.to_string(),
+    }
+}
+
+fn find_provider_credential(provider_id: &str) -> Option<&'static ProviderCredentialDefinition> {
+    PROVIDER_CREDENTIALS
+        .iter()
+        .find(|definition| definition.provider_id == provider_id)
+}
+
+fn normalize_provider_secret(value: &str) -> Result<String, String> {
+    let secret = value.trim();
+    if secret.is_empty() {
+        return Err("Provider API key is empty.".to_string());
+    }
+    if secret.len() > MAX_PROVIDER_SECRET_BYTES {
+        return Err(format!(
+            "Provider API key is too large. Max input is {MAX_PROVIDER_SECRET_BYTES} bytes."
+        ));
+    }
+    if secret.chars().any(|character| {
+        character == '\n' || character == '\r' || character == '\0' || character.is_control()
+    }) {
+        return Err("Provider API key cannot contain control characters or line breaks.".to_string());
+    }
+    Ok(secret.to_string())
+}
+
+fn credential_secret_preview(secret: &str) -> String {
+    let normalized = secret.trim();
+    let char_count = normalized.chars().count();
+    if char_count <= 8 {
+        return "****".to_string();
+    }
+    let prefix: String = normalized.chars().take(4).collect();
+    let suffix: String = normalized
+        .chars()
+        .skip(char_count.saturating_sub(4))
+        .collect();
+    format!("{prefix}...{suffix}")
+}
+
+fn provider_env_for_adapter(
+    app: &AppHandle,
+    adapter_id: &str,
+) -> Result<Vec<(String, String)>, String> {
+    let store = read_provider_credential_store(app)?;
+    let allowed_providers = provider_ids_for_adapter(adapter_id);
+    let mut env_values = Vec::new();
+    for provider_id in allowed_providers {
+        let Some(definition) = find_provider_credential(provider_id) else {
+            continue;
+        };
+        let Some(credential) = store
+            .credentials
+            .iter()
+            .find(|item| item.provider_id == definition.provider_id)
+        else {
+            continue;
+        };
+        if !credential.secret.trim().is_empty() {
+            env_values.push((definition.env_var.to_string(), credential.secret.clone()));
+        }
+    }
+    Ok(env_values)
+}
+
+fn provider_ids_for_adapter(adapter_id: &str) -> &'static [&'static str] {
+    match adapter_id {
+        "codex-cli" => &["openai"],
+        "claude-code-cli" => &["anthropic"],
+        "gemini-cli" => &["google-gemini"],
+        "opencode-cli" | "claw-code-cli" => &["openai", "anthropic", "google-gemini"],
+        _ => &[],
     }
 }
 

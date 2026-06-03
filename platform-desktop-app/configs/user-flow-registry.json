@@ -752,6 +752,7 @@
       "group": "Capabilities",
       "settings": [
         "optional CLI adapters",
+        "provider account connection for ChatGPT/OpenAI, Claude/Anthropic, and Gemini/Google",
         "MCP servers",
         "desktop extensions",
         "connector status and debug logs",
@@ -858,6 +859,11 @@
       "id": "existing_search_agent_run",
       "priority": "must",
       "purpose": "Run the existing research-insight-planner-agent from the Agents screen and command palette without manual shell setup."
+    },
+    {
+      "id": "provider_account_connection",
+      "priority": "must",
+      "purpose": "Connect ChatGPT/OpenAI, Claude/Anthropic, and Gemini/Google credentials from Settings > Initialize > Provider accounts before running guest AI adapters."
     },
     {
       "id": "guided_task_start",

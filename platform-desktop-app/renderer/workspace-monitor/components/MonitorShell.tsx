@@ -13,12 +13,14 @@ import {
   Code2,
   Copy,
   Database,
+  ExternalLink,
   FileSearch,
   FolderOpen,
   FolderKanban,
   GitBranch,
   History,
   Inbox,
+  KeyRound,
   Layers,
   Languages,
   LayoutDashboard,
@@ -31,6 +33,7 @@ import {
   Settings,
   ShieldCheck,
   SquareTerminal,
+  Trash2,
   X
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -77,6 +80,7 @@ type SettingsSubsectionId =
   | "terminal"
   | "pinned"
   | "quick"
+  | "providers"
   | "adapter"
   | "session"
   | "pipe"
@@ -146,6 +150,40 @@ type DesktopPreferencesReport = {
   source: string;
   preferencesPath: string;
   preferences: DesktopPreferences;
+};
+
+type ProviderCredentialSummary = {
+  providerId: string;
+  label: string;
+  authMethod: string;
+  envVar: string;
+  configured: boolean;
+  environmentAvailable: boolean;
+  status: string;
+  accountHint: string;
+  secretPreview: string;
+  lastUpdatedAt: string;
+  storage: string;
+  credentialSource: string;
+  setupUrl: string;
+  loginUrl: string;
+  docsUrl: string;
+  caution: string;
+};
+
+type ProviderCredentialReport = {
+  schemaVersion: string;
+  status: string;
+  source: string;
+  credentialFilePath: string;
+  storageWarning: string;
+  configuredCount: number;
+  providers: ProviderCredentialSummary[];
+};
+
+type ProviderCredentialInputState = {
+  accountHint: string;
+  secret: string;
 };
 
 type AgentFactoryForm = {
@@ -1533,6 +1571,79 @@ const adapterSetupGuides: Record<string, AdapterSetupGuide> = {
   }
 };
 
+const fallbackProviderCredentialReport: ProviderCredentialReport = {
+  schemaVersion: "provider-credentials.v1",
+  status: "provider_credentials_required",
+  source: "browser_fallback",
+  credentialFilePath: "",
+  storageWarning: "Provider credentials are stored by the native desktop runtime, not by the static browser preview.",
+  configuredCount: 0,
+  providers: [
+    {
+      providerId: "openai",
+      label: "ChatGPT / OpenAI",
+      authMethod: "api_key",
+      envVar: "OPENAI_API_KEY",
+      configured: false,
+      environmentAvailable: false,
+      status: "not_connected",
+      accountHint: "",
+      secretPreview: "",
+      lastUpdatedAt: "",
+      storage: "not_configured",
+      credentialSource: "not_configured",
+      setupUrl: "https://platform.openai.com/api-keys",
+      loginUrl: "https://chatgpt.com/",
+      docsUrl: "https://platform.openai.com/docs/api-reference/authentication/keys",
+      caution: "Use an OpenAI Platform API key for guest CLI/API work; do not embed ChatGPT web session cookies."
+    },
+    {
+      providerId: "anthropic",
+      label: "Claude / Anthropic",
+      authMethod: "api_key",
+      envVar: "ANTHROPIC_API_KEY",
+      configured: false,
+      environmentAvailable: false,
+      status: "not_connected",
+      accountHint: "",
+      secretPreview: "",
+      lastUpdatedAt: "",
+      storage: "not_configured",
+      credentialSource: "not_configured",
+      setupUrl: "https://console.anthropic.com/settings/keys",
+      loginUrl: "https://claude.ai/login",
+      docsUrl: "https://platform.claude.com/docs/en/api/authentication/overview",
+      caution: "Use a Claude API key or provider-supported federation; consumer web OAuth tokens are not stored here."
+    },
+    {
+      providerId: "google-gemini",
+      label: "Gemini / Google",
+      authMethod: "api_key",
+      envVar: "GEMINI_API_KEY",
+      configured: false,
+      environmentAvailable: false,
+      status: "not_connected",
+      accountHint: "",
+      secretPreview: "",
+      lastUpdatedAt: "",
+      storage: "not_configured",
+      credentialSource: "not_configured",
+      setupUrl: "https://aistudio.google.com/api-keys",
+      loginUrl: "https://gemini.google.com/",
+      docsUrl: "https://ai.google.dev/gemini-api/docs/api-key",
+      caution: "Use a restricted Gemini API key for local adapter work; OAuth desktop setup is handled as a separate provider flow."
+    }
+  ]
+};
+
+const providerIdsByAdapter: Record<string, string[]> = {
+  "codex-cli": ["openai"],
+  "claude-code-cli": ["anthropic"],
+  "gemini-cli": ["google-gemini"],
+  "opencode-cli": ["openai", "anthropic", "google-gemini"],
+  "claw-code-cli": ["openai", "anthropic", "google-gemini"]
+};
+
 const researchInsightAgentId = "research-insight-planner-agent";
 const researchInsightAgentConfigPath = "agent-platform/configs/agents/research-insight-planner-agent.json";
 const researchInsightPlanTemplatePath = "agent-platform/configs/planning/research-insight-plan-template.json";
@@ -1721,6 +1832,37 @@ function normalizeDesktopPreferences(preferences: Partial<DesktopPreferences> | 
   };
 }
 
+function providerInputsFromReport(
+  report: ProviderCredentialReport,
+  current: Record<string, ProviderCredentialInputState>
+): Record<string, ProviderCredentialInputState> {
+  const next = { ...current };
+  for (const provider of report.providers) {
+    next[provider.providerId] = {
+      accountHint: next[provider.providerId]?.accountHint ?? provider.accountHint ?? "",
+      secret: next[provider.providerId]?.secret ?? ""
+    };
+  }
+  return next;
+}
+
+function providerAuthStatusForAdapter(
+  adapterId: string,
+  report: ProviderCredentialReport | null | undefined,
+  uiLanguage: UiLanguage
+) {
+  const providerIds = providerIdsByAdapter[adapterId] || [];
+  if (providerIds.length === 0) {
+    return uiLanguage === "ko" ? "인증 선택" : "auth optional";
+  }
+  const providers = report?.providers || [];
+  const matched = providers.filter((provider) => providerIds.includes(provider.providerId));
+  if (matched.some((provider) => provider.configured)) {
+    return uiLanguage === "ko" ? "계정 연결됨" : "account connected";
+  }
+  return uiLanguage === "ko" ? "계정 필요" : "account needed";
+}
+
 export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [section, setSection] = useState<SectionId>("overview");
   const [uiLanguage, setUiLanguage] = useState<UiLanguage>("ko");
@@ -1771,6 +1913,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [desktopPreferencesSource, setDesktopPreferencesSource] = useState("browser-defaults");
   const [desktopPreferencesStatus, setDesktopPreferencesStatus] = useState("default");
   const [desktopPreferencesError, setDesktopPreferencesError] = useState("");
+  const [providerCredentials, setProviderCredentials] = useState<ProviderCredentialReport>(fallbackProviderCredentialReport);
+  const [providerCredentialInputs, setProviderCredentialInputs] = useState<Record<string, ProviderCredentialInputState>>({});
+  const [providerCredentialBusy, setProviderCredentialBusy] = useState("");
+  const [providerCredentialNotice, setProviderCredentialNotice] = useState("");
+  const [providerCredentialError, setProviderCredentialError] = useState("");
   const viewModes = snapshot.viewModeCatalog?.modes?.length ? snapshot.viewModeCatalog.modes : fallbackViewModes;
   const languageModes = useMemo(() => {
     const merged = new Map<string, MonitorLanguageMode>();
@@ -1888,6 +2035,35 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     themeMode,
     uiLanguage
   ]);
+  useEffect(() => {
+    let canceled = false;
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setProviderCredentials(fallbackProviderCredentialReport);
+      return;
+    }
+
+    tauriInvoke<ProviderCredentialReport>("list_provider_credentials")
+      .then((report) => {
+        if (canceled) {
+          return;
+        }
+        setProviderCredentials(report);
+        setProviderCredentialInputs((current) => providerInputsFromReport(report, current));
+        setProviderCredentialError("");
+      })
+      .catch((credentialError) => {
+        if (canceled) {
+          return;
+        }
+        setProviderCredentials(fallbackProviderCredentialReport);
+        setProviderCredentialError(String(credentialError));
+      });
+
+    return () => {
+      canceled = true;
+    };
+  }, []);
   useEffect(() => {
     setRecentSections((previous) => [section, ...previous.filter((item) => item !== section)].slice(0, 5));
   }, [section]);
@@ -2351,6 +2527,12 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         icon: PlayCircle
       },
       {
+        id: "providers",
+        label: uiLanguage === "ko" ? "계정 연결" : "Provider accounts",
+        detail: `${providerCredentials.configuredCount}/${providerCredentials.providers.length || 3}`,
+        icon: KeyRound
+      },
+      {
         id: "adapter",
         label: uiLanguage === "ko" ? "CLI 어댑터" : "CLI adapter",
         detail: runtimeInitDefaults.adapterId,
@@ -2415,6 +2597,118 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       setSettingsSubsectionByTab((current) => ({ ...current, [tabId]: subsectionId }));
     }
     setSettingsOpen(true);
+  };
+  const refreshProviderCredentials = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setProviderCredentials(fallbackProviderCredentialReport);
+      setProviderCredentialError(uiLanguage === "ko" ? "네이티브 런타임에서만 계정을 저장할 수 있습니다." : "Provider credentials can only be saved in the native runtime.");
+      return;
+    }
+    setProviderCredentialBusy("refresh");
+    try {
+      const report = await tauriInvoke<ProviderCredentialReport>("list_provider_credentials");
+      setProviderCredentials(report);
+      setProviderCredentialInputs((current) => providerInputsFromReport(report, current));
+      setProviderCredentialError("");
+      setProviderCredentialNotice(uiLanguage === "ko" ? "계정 연결 상태를 새로고침했습니다." : "Provider account status refreshed.");
+    } catch (credentialError) {
+      setProviderCredentialError(String(credentialError));
+    } finally {
+      setProviderCredentialBusy("");
+    }
+  };
+  const updateProviderCredentialInput = (providerId: string, field: keyof ProviderCredentialInputState, value: string) => {
+    setProviderCredentialInputs((current) => ({
+      ...current,
+      [providerId]: {
+        accountHint: current[providerId]?.accountHint || "",
+        secret: current[providerId]?.secret || "",
+        [field]: value
+      }
+    }));
+  };
+  const saveProviderCredential = async (provider: ProviderCredentialSummary) => {
+    const tauriInvoke = getTauriInvoke();
+    const input = providerCredentialInputs[provider.providerId] || { accountHint: "", secret: "" };
+    if (!tauriInvoke) {
+      setProviderCredentialError(uiLanguage === "ko" ? "네이티브 앱에서만 저장할 수 있습니다." : "Save is available only in the native app.");
+      return;
+    }
+    if (!input.secret.trim()) {
+      setProviderCredentialError(uiLanguage === "ko" ? `${provider.label} API key를 입력하세요.` : `Enter a ${provider.label} API key.`);
+      return;
+    }
+    setProviderCredentialBusy(`save:${provider.providerId}`);
+    try {
+      const report = await tauriInvoke<ProviderCredentialReport>("save_provider_credential", {
+        input: {
+          providerId: provider.providerId,
+          authMethod: provider.authMethod,
+          secret: input.secret,
+          accountHint: input.accountHint
+        }
+      });
+      setProviderCredentials(report);
+      setProviderCredentialInputs((current) => ({
+        ...providerInputsFromReport(report, current),
+        [provider.providerId]: {
+          accountHint: input.accountHint,
+          secret: ""
+        }
+      }));
+      setProviderCredentialError("");
+      setProviderCredentialNotice(uiLanguage === "ko" ? `${provider.label} 연결 정보를 저장했습니다.` : `${provider.label} credentials saved.`);
+    } catch (credentialError) {
+      setProviderCredentialError(String(credentialError));
+    } finally {
+      setProviderCredentialBusy("");
+    }
+  };
+  const clearProviderCredential = async (provider: ProviderCredentialSummary) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setProviderCredentialError(uiLanguage === "ko" ? "네이티브 앱에서만 삭제할 수 있습니다." : "Clear is available only in the native app.");
+      return;
+    }
+    setProviderCredentialBusy(`clear:${provider.providerId}`);
+    try {
+      const report = await tauriInvoke<ProviderCredentialReport>("clear_provider_credential", {
+        providerId: provider.providerId
+      });
+      setProviderCredentials(report);
+      setProviderCredentialInputs((current) => ({
+        ...providerInputsFromReport(report, current),
+        [provider.providerId]: { accountHint: "", secret: "" }
+      }));
+      setProviderCredentialError("");
+      setProviderCredentialNotice(uiLanguage === "ko" ? `${provider.label} 연결을 삭제했습니다.` : `${provider.label} credentials cleared.`);
+    } catch (credentialError) {
+      setProviderCredentialError(String(credentialError));
+    } finally {
+      setProviderCredentialBusy("");
+    }
+  };
+  const openProviderAuthUrl = async (provider: ProviderCredentialSummary, purpose: "setup" | "login" | "docs") => {
+    const tauriInvoke = getTauriInvoke();
+    const fallbackUrl = purpose === "login" ? provider.loginUrl : purpose === "docs" ? provider.docsUrl : provider.setupUrl;
+    if (!tauriInvoke) {
+      window.open(fallbackUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+    setProviderCredentialBusy(`open:${provider.providerId}:${purpose}`);
+    try {
+      await tauriInvoke("open_provider_auth_url", {
+        providerId: provider.providerId,
+        purpose
+      });
+      setProviderCredentialError("");
+    } catch (credentialError) {
+      setProviderCredentialError(String(credentialError));
+      window.open(fallbackUrl, "_blank", "noopener,noreferrer");
+    } finally {
+      setProviderCredentialBusy("");
+    }
   };
   const openTerminalDrawer = () => {
     setTerminalDrawerOpen(true);
@@ -2693,7 +2987,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     {
       id: "execution",
       label: uiLanguage === "ko" ? "초기화" : "Initialize",
-      detail: uiLanguage === "ko" ? "어댑터와 작업 파이프 기본값" : "Adapter and pipe defaults",
+      detail: uiLanguage === "ko" ? "계정, 어댑터, 작업 파이프" : "Accounts, adapters, pipes",
       icon: Network
     },
     {
@@ -2726,6 +3020,19 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       badge: operatorCenterSections.length.toLocaleString("ko-KR"),
       keywords: ["operator", "monitoring", "documents", "history", "requirements", "admin"],
       run: () => setOperatorCenterOpen(true)
+    },
+    {
+      id: "provider-accounts",
+      label: uiLanguage === "ko" ? "제공자 계정 연결" : "Connect Provider Accounts",
+      detail:
+        uiLanguage === "ko"
+          ? "ChatGPT/OpenAI, Claude/Anthropic, Gemini/Google API key를 네이티브 앱 설정에서 관리합니다."
+          : "Manage ChatGPT/OpenAI, Claude/Anthropic, and Gemini/Google API keys in native settings.",
+      group: uiLanguage === "ko" ? "초기화" : "Initialize",
+      icon: KeyRound,
+      badge: `${providerCredentials.configuredCount}/${providerCredentials.providers.length || 3}`,
+      keywords: ["openai", "chatgpt", "claude", "anthropic", "gemini", "google", "api key", "provider", "account"],
+      run: () => openSettingsTab("execution", "providers")
     },
     {
       id: "run-search-agent",
@@ -3282,6 +3589,23 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                     </section>
                     )}
 
+                    {activeSettingsSubsection === "providers" && (
+                      <ProviderAccountsPanel
+                        uiLanguage={uiLanguage}
+                        report={providerCredentials}
+                        inputs={providerCredentialInputs}
+                        busy={providerCredentialBusy}
+                        notice={providerCredentialNotice}
+                        error={providerCredentialError}
+                        runtimeAvailable={Boolean(getTauriInvoke())}
+                        onClear={clearProviderCredential}
+                        onInputChange={updateProviderCredentialInput}
+                        onOpenUrl={openProviderAuthUrl}
+                        onRefresh={refreshProviderCredentials}
+                        onSave={saveProviderCredential}
+                      />
+                    )}
+
                     {activeSettingsSubsection === "adapter" && (
                     <section className="settings-pane wide">
                       <div className="settings-pane-heading">
@@ -3710,10 +4034,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           sourceFiles={visibleSourceFiles}
           uiLanguage={uiLanguage}
           initDefaults={runtimeInitDefaults}
+          providerCredentialReport={providerCredentials}
           launchRequest={runtimeLaunchRequest}
           onLaunchRequestConsumed={() => setRuntimeLaunchRequest(null)}
           onOpenSearchAgentWorkbench={openSearchAgentWorkbench}
-          onOpenSettings={() => openSettingsTab("execution")}
+          onOpenSettings={(subsectionId = "quick") => openSettingsTab("execution", subsectionId)}
           terminalDrawerOpen={terminalDrawerOpen}
           setTerminalDrawerOpen={setTerminalDrawerOpen}
         />
@@ -3987,10 +4312,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           sourceFiles={visibleSourceFiles}
           uiLanguage={uiLanguage}
           initDefaults={runtimeInitDefaults}
+          providerCredentialReport={providerCredentials}
           launchRequest={runtimeLaunchRequest}
           onLaunchRequestConsumed={() => setRuntimeLaunchRequest(null)}
           onOpenSearchAgentWorkbench={openSearchAgentWorkbench}
-          onOpenSettings={() => openSettingsTab("execution")}
+          onOpenSettings={(subsectionId = "quick") => openSettingsTab("execution", subsectionId)}
           terminalDrawerOpen={terminalDrawerOpen}
           setTerminalDrawerOpen={setTerminalDrawerOpen}
           surface="files"
@@ -5189,12 +5515,217 @@ function OpsEventRail({ events }: { events: UnifiedOps["events"] }) {
   );
 }
 
+function ProviderAccountsPanel({
+  uiLanguage,
+  report,
+  inputs,
+  busy,
+  notice,
+  error,
+  runtimeAvailable,
+  onClear,
+  onInputChange,
+  onOpenUrl,
+  onRefresh,
+  onSave
+}: {
+  uiLanguage: UiLanguage;
+  report: ProviderCredentialReport;
+  inputs: Record<string, ProviderCredentialInputState>;
+  busy: string;
+  notice: string;
+  error: string;
+  runtimeAvailable: boolean;
+  onClear: (provider: ProviderCredentialSummary) => void | Promise<void>;
+  onInputChange: (providerId: string, field: keyof ProviderCredentialInputState, value: string) => void;
+  onOpenUrl: (provider: ProviderCredentialSummary, purpose: "setup" | "login" | "docs") => void | Promise<void>;
+  onRefresh: () => void | Promise<void>;
+  onSave: (provider: ProviderCredentialSummary) => void | Promise<void>;
+}) {
+  const copy = uiLanguage === "ko"
+    ? {
+        title: "제공자 계정 연결",
+        status: "연결 상태",
+        connected: "연결됨",
+        needed: "필요함",
+        nativeOnly: "네이티브 앱에서만 저장됩니다.",
+        summary: "저장된 키는 CLI 실행 시 provider별 환경변수로만 주입됩니다.",
+        storage: "저장 위치",
+        refresh: "새로고침",
+        setup: "키 발급",
+        login: "로그인 열기",
+        docs: "공식 문서",
+        save: "저장",
+        saving: "저장 중",
+        clear: "삭제",
+        clearing: "삭제 중",
+        accountHint: "계정 메모",
+        accountPlaceholder: "예: 개인 OpenAI 프로젝트, 회사 Claude Console",
+        apiKey: "API key",
+        apiKeyPlaceholder: "provider API key 붙여넣기",
+        authMethod: "인증 방식",
+        envVar: "실행 변수",
+        source: "source",
+        key: "key",
+        notSaved: "저장 안 됨"
+      }
+    : {
+        title: "Provider Accounts",
+        status: "Connection status",
+        connected: "Connected",
+        needed: "Needed",
+        nativeOnly: "Saving is available only in the native app.",
+        summary: "Saved keys are injected only as provider-specific environment variables when CLI sessions start.",
+        storage: "Storage path",
+        refresh: "Refresh",
+        setup: "Get key",
+        login: "Open login",
+        docs: "Docs",
+        save: "Save",
+        saving: "Saving",
+        clear: "Clear",
+        clearing: "Clearing",
+        accountHint: "Account note",
+        accountPlaceholder: "e.g. personal OpenAI project, company Claude Console",
+        apiKey: "API key",
+        apiKeyPlaceholder: "Paste provider API key",
+        authMethod: "Auth method",
+        envVar: "Runtime env",
+        source: "source",
+        key: "key",
+        notSaved: "Not saved"
+      };
+
+  return (
+    <section className="settings-pane wide provider-accounts-pane">
+      <div className="settings-pane-heading">
+        <KeyRound size={16} aria-hidden="true" />
+        <div>
+          <span>{copy.title}</span>
+          <strong>{report.configuredCount}/{report.providers.length} {copy.status}</strong>
+          <small>{copy.summary}</small>
+        </div>
+      </div>
+
+      <div className="provider-account-summary">
+        <article>
+          <span>{copy.status}</span>
+          <strong>{report.status}</strong>
+        </article>
+        <article>
+          <span>{copy.source}</span>
+          <strong>{report.source}</strong>
+        </article>
+        <article>
+          <span>{copy.storage}</span>
+          <code>{report.credentialFilePath || copy.nativeOnly}</code>
+        </article>
+        <button type="button" onClick={onRefresh} disabled={busy !== ""}>
+          <Activity size={15} aria-hidden="true" />
+          <span>{copy.refresh}</span>
+        </button>
+      </div>
+
+      {!runtimeAvailable && <p className="desktop-error">{copy.nativeOnly}</p>}
+      {notice && <p className="decision-resume-notice">{notice}</p>}
+      {error && <p className="desktop-error">{error}</p>}
+
+      <div className="provider-account-list">
+        {report.providers.map((provider) => {
+          const input = inputs[provider.providerId] || { accountHint: provider.accountHint || "", secret: "" };
+          const saving = busy === `save:${provider.providerId}`;
+          const clearing = busy === `clear:${provider.providerId}`;
+          return (
+            <article key={provider.providerId} className={`provider-account-row ${provider.configured ? "connected" : "missing"}`}>
+              <header>
+                <div>
+                  <span>{provider.providerId}</span>
+                  <strong>{provider.label}</strong>
+                </div>
+                <em>{provider.configured ? copy.connected : copy.needed}</em>
+              </header>
+              <dl>
+                <div>
+                  <dt>{copy.authMethod}</dt>
+                  <dd>{provider.authMethod}</dd>
+                </div>
+                <div>
+                  <dt>{copy.envVar}</dt>
+                  <dd><code>{provider.envVar}</code></dd>
+                </div>
+                <div>
+                  <dt>{copy.key}</dt>
+                  <dd>{provider.secretPreview || copy.notSaved}</dd>
+                </div>
+              </dl>
+              <div className="provider-account-fields">
+                <label>
+                  <span>{copy.accountHint}</span>
+                  <input
+                    value={input.accountHint}
+                    onChange={(event) => onInputChange(provider.providerId, "accountHint", event.target.value)}
+                    placeholder={copy.accountPlaceholder}
+                  />
+                </label>
+                <label>
+                  <span>{copy.apiKey}</span>
+                  <input
+                    type="password"
+                    autoComplete="off"
+                    value={input.secret}
+                    onChange={(event) => onInputChange(provider.providerId, "secret", event.target.value)}
+                    placeholder={copy.apiKeyPlaceholder}
+                  />
+                </label>
+              </div>
+              <div className="provider-account-actions">
+                <button type="button" onClick={() => onOpenUrl(provider, "setup")}>
+                  <ExternalLink size={15} aria-hidden="true" />
+                  <span>{copy.setup}</span>
+                </button>
+                <button type="button" onClick={() => onOpenUrl(provider, "login")}>
+                  <ExternalLink size={15} aria-hidden="true" />
+                  <span>{copy.login}</span>
+                </button>
+                <button type="button" onClick={() => onOpenUrl(provider, "docs")}>
+                  <BookOpenText size={15} aria-hidden="true" />
+                  <span>{copy.docs}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onSave(provider)}
+                  disabled={!runtimeAvailable || busy !== "" || !input.secret.trim()}
+                >
+                  <KeyRound size={15} aria-hidden="true" />
+                  <span>{saving ? copy.saving : copy.save}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onClear(provider)}
+                  disabled={!runtimeAvailable || busy !== "" || provider.credentialSource !== "app_config_file"}
+                >
+                  <Trash2 size={15} aria-hidden="true" />
+                  <span>{clearing ? copy.clearing : copy.clear}</span>
+                </button>
+              </div>
+              <small>{provider.caution}</small>
+            </article>
+          );
+        })}
+      </div>
+
+      <p className="provider-storage-warning">{report.storageWarning}</p>
+    </section>
+  );
+}
+
 function DesktopRuntimePanel({
   agentCatalogCount,
   blockedTaskCount,
   sourceFiles,
   uiLanguage,
   initDefaults,
+  providerCredentialReport,
   launchRequest,
   onLaunchRequestConsumed,
   onOpenSearchAgentWorkbench,
@@ -5208,10 +5739,11 @@ function DesktopRuntimePanel({
   sourceFiles: WorkspaceSourceFile[];
   uiLanguage: UiLanguage;
   initDefaults: RuntimeInitDefaults;
+  providerCredentialReport?: ProviderCredentialReport | null;
   launchRequest?: RuntimeLaunchRequest | null;
   onLaunchRequestConsumed?: (requestId: string) => void;
   onOpenSearchAgentWorkbench?: () => void;
-  onOpenSettings: () => void;
+  onOpenSettings: (subsectionId?: SettingsSubsectionId) => void;
   terminalDrawerOpen: boolean;
   setTerminalDrawerOpen: (open: boolean) => void;
   surface?: "runtime" | "files";
@@ -7650,7 +8182,7 @@ function DesktopRuntimePanel({
                 <span>Question handling</span>
                 <strong>{autoDeferQuestions ? "auto-defer" : "manual"}</strong>
               </article>
-              <button type="button" onClick={onOpenSettings}>
+              <button type="button" onClick={() => onOpenSettings("quick")}>
                 <Settings size={15} aria-hidden="true" />
                 <span>초기화 설정 변경</span>
               </button>
@@ -8251,17 +8783,24 @@ function DesktopRuntimePanel({
                 )}
                 <div className="capability-meta-grid">
                   <span>{adapter.available ? "ready" : "setup-later"}</span>
+                  <span>{providerAuthStatusForAdapter(adapter.adapterId, providerCredentialReport, uiLanguage)}</span>
                   <span>{sessions.filter((session) => session.adapterId === adapter.adapterId).length} lanes</span>
                   <span>{reports.some((item) => item.adapterId === adapter.adapterId) ? "checked" : "unchecked"}</span>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => runSingleHealthCheck(adapter.adapterId)}
-                  disabled={!invoke || runningAdapterId !== "" || !adapter.available}
-                >
-                  <Activity size={15} aria-hidden="true" />
-                  <span>{running ? "Running" : "Health Check"}</span>
-                </button>
+                <div className="adapter-card-actions">
+                  <button
+                    type="button"
+                    onClick={() => runSingleHealthCheck(adapter.adapterId)}
+                    disabled={!invoke || runningAdapterId !== "" || !adapter.available}
+                  >
+                    <Activity size={15} aria-hidden="true" />
+                    <span>{running ? "Running" : "Health Check"}</span>
+                  </button>
+                  <button type="button" onClick={() => onOpenSettings("providers")}>
+                    <KeyRound size={15} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "계정 연결" : "Accounts"}</span>
+                  </button>
+                </div>
                 {report && (
                   <div className="adapter-report">
                     <span>{report.status}</span>

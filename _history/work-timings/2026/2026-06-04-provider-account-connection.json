@@ -1,0 +1,32 @@
+{
+  "schema_version": "work-timing.v1",
+  "request_id": "UR-2026-06-04-006",
+  "work_slug": "provider-account-connection",
+  "date": "2026-06-04",
+  "phases": [
+    {
+      "phase": "web_first_and_local_discovery",
+      "status": "completed"
+    },
+    {
+      "phase": "native_runtime_implementation",
+      "status": "completed"
+    },
+    {
+      "phase": "renderer_ui_implementation",
+      "status": "completed"
+    },
+    {
+      "phase": "contract_and_readiness_updates",
+      "status": "completed"
+    },
+    {
+      "phase": "validation_and_browser_smoke",
+      "status": "completed"
+    }
+  ],
+  "bottleneck_notes": [
+    "The main implementation risk was keeping provider credential storage useful for CLI execution without exposing secrets in UI/support records.",
+    "A CSS readiness guard caught direct overflow-wrap:anywhere in a provider-specific selector and was fixed before close-out."
+  ]
+}

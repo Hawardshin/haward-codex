@@ -291,6 +291,7 @@
         "Desktop Runtime",
         "Run Board",
         "Search Agent Work Chat",
+        "Provider Accounts",
         "Task Pipe",
         "Process Graph",
         "Decision Inbox"
@@ -301,9 +302,11 @@
         "agent-platform/configs/agents/research-insight-planner-agent.json",
         "agent-platform/configs/planning/research-insight-plan-template.json",
         "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+        "platform-desktop-app/configs/user-flow-registry.json",
         "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
       ],
       "automation_targets": [
+        "provider credential injection into guest CLI sessions",
         "existing search agent work-chat",
         "task intake to multi-lane plan",
         "bounded stdout and stderr capture",

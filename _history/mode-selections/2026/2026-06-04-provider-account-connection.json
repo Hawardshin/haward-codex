@@ -1,0 +1,16 @@
+{
+  "schema_version": "mode-selection.v1",
+  "request_id": "UR-2026-06-04-006",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes installable desktop app authentication, settings UX, Tauri command surface, runtime contract, and validation gates.",
+  "gates": [
+    "web_first_intake",
+    "requirements_update",
+    "spec_artifacts",
+    "source_implementation",
+    "readiness_validation",
+    "history_trace"
+  ]
+}

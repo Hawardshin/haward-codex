@@ -929,6 +929,192 @@ main {
   color: rgba(255, 255, 255, 0.72);
 }
 
+.provider-accounts-pane {
+  gap: 12px;
+}
+
+.provider-account-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 0.8fr)) minmax(240px, 1.4fr) auto;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.provider-account-summary article,
+.provider-account-summary button {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 9px;
+}
+
+.provider-account-summary article {
+  display: grid;
+  gap: 4px;
+}
+
+.provider-account-summary button {
+  display: inline-flex;
+  min-height: var(--control-target-size);
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  font-weight: 850;
+}
+
+.provider-account-summary span,
+.provider-account-row header span,
+.provider-account-row dt {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.provider-account-summary strong,
+.provider-account-summary code {
+  min-width: 0;
+  overflow-wrap: var(--text-long-token-wrap);
+}
+
+.provider-account-list {
+  display: grid;
+  gap: 10px;
+}
+
+.provider-account-row {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.provider-account-row:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.provider-account-row header {
+  display: flex;
+  min-width: 0;
+  align-items: start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.provider-account-row header div {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.provider-account-row header strong {
+  overflow-wrap: var(--text-long-token-wrap);
+}
+
+.provider-account-row header em {
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  color: var(--slate);
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.provider-account-row.connected header em {
+  border-color: color-mix(in srgb, var(--green) 35%, var(--line) 65%);
+  color: var(--green);
+}
+
+.provider-account-row dl,
+.provider-account-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.provider-account-fields {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+}
+
+.provider-account-row dl div,
+.provider-account-fields label {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.provider-account-row dd {
+  min-width: 0;
+  margin: 0;
+  color: var(--text);
+  overflow-wrap: var(--text-long-token-wrap);
+}
+
+.provider-account-fields span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.provider-account-fields input {
+  min-height: var(--control-target-size);
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--control-radius);
+  padding: 8px var(--control-padding-x);
+  outline: 0;
+}
+
+.provider-account-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.provider-account-actions button,
+.adapter-card-actions button {
+  display: inline-flex;
+  min-height: var(--control-target-size);
+  align-items: center;
+  gap: var(--control-gap);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--control-radius);
+  padding: 8px var(--control-padding-x);
+  font-weight: 850;
+}
+
+.provider-account-actions button:disabled,
+.adapter-card-actions button:disabled,
+.provider-account-summary button:disabled {
+  opacity: 0.55;
+}
+
+.provider-account-row > small,
+.provider-storage-warning {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+  overflow-wrap: break-word;
+}
+
+.provider-storage-warning {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
 .settings-segment-list,
 .settings-pin-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -5395,6 +5581,16 @@ h3 {
   opacity: 0.55;
 }
 
+.adapter-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.adapter-card-actions button {
+  width: auto;
+}
+
 .adapter-report {
   display: flex;
   flex-wrap: wrap;
@@ -9544,6 +9740,8 @@ h3 {
   .service-group-grid,
   .task-run-detail-meta,
   .pipe-lane-grid,
+  .provider-account-summary,
+  .provider-account-row dl,
   .run-board-strip,
   .process-graph,
   .evidence-grid,
@@ -9587,6 +9785,7 @@ h3 {
   .search-agent-work-chat-layout,
   .agent-factory-layout,
   .learning-feedback-layout,
+  .provider-account-fields,
   .mode-switchboard-layout {
     grid-template-columns: 1fr;
   }

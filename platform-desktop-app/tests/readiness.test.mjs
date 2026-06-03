@@ -303,6 +303,7 @@ test("installer shell runtime contract is bundled and enforceable", () => {
     "support_diagnostic",
     "agent_factory_proposals",
     "learning_feedback_decisions",
+    "provider_credential_state",
     "accumulated_data_index"
   ]) {
     assert.match(serialized, new RegExp(target));
@@ -324,6 +325,19 @@ test("installer shell runtime contract is bundled and enforceable", () => {
     assert.match(lib, new RegExp(preferencesCommand));
     assert.ok(contract.runtime_command_surface.preferences_commands.includes(preferencesCommand));
   }
+  for (const providerCredentialCommand of [
+    "list_provider_credentials",
+    "save_provider_credential",
+    "clear_provider_credential",
+    "open_provider_auth_url"
+  ]) {
+    assert.match(lib, new RegExp(providerCredentialCommand));
+    assert.ok(contract.runtime_command_surface.provider_credential_commands.includes(providerCredentialCommand));
+  }
+  const providerCredentialTarget = contract.data_accumulation_targets.find((target) => target.target_id === "provider_credential_state");
+  assert.equal(providerCredentialTarget.record_type, "local_secret_config");
+  assert.equal(providerCredentialTarget.directory, "app_config/provider-credentials");
+  assert.equal(providerCredentialTarget.support_export_policy, "excluded_and_redacted");
   assert.match(lib, /DesktopPreferencesReport/);
   assert.match(lib, /DESKTOP_PREFERENCES_SCHEMA_VERSION/);
   assert.match(lib, /desktop-preferences\.v1\.json/);
@@ -510,6 +524,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "get_service_readiness_report",
     "get_desktop_preferences",
     "save_desktop_preferences",
+    "list_provider_credentials",
+    "save_provider_credential",
+    "clear_provider_credential",
+    "open_provider_auth_url",
     "start_cli_adapter_session",
     "start_cli_task_pipeline",
     "poll_cli_adapter_session",
@@ -739,6 +757,19 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "desktopPreferencesPath",
     "앱 설정 저장소",
     "native-preferences-pane",
+    "ProviderAccountsPanel",
+    "제공자 계정 연결",
+    "계정 연결",
+    "ProviderCredentialReport",
+    "list_provider_credentials",
+    "save_provider_credential",
+    "clear_provider_credential",
+    "open_provider_auth_url",
+    "fallbackProviderCredentialReport",
+    "providerIdsByAdapter",
+    "OPENAI_API_KEY",
+    "ANTHROPIC_API_KEY",
+    "GEMINI_API_KEY",
     "화면 언어",
     "파일/코드",
     "현재 작업공간",
@@ -908,7 +939,17 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "AccumulatedDataStoreReport",
     "AccumulatedDataOverviewReport",
     "DesktopWorkspaceStateReport",
+    "ProviderCredentialReport",
+    "ProviderCredentialSummary",
     "DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION",
+    "PROVIDER_CREDENTIALS_SCHEMA_VERSION",
+    "provider_credentials_path",
+    "provider_env_for_adapter",
+    "open_provider_auth_url_report",
+    "provider-credentials.v1.json",
+    "OPENAI_API_KEY",
+    "ANTHROPIC_API_KEY",
+    "GEMINI_API_KEY",
     "desktop_workspace_state_path",
     "managed_desktop_workspaces_base_path",
     "workspace_root_for_app",

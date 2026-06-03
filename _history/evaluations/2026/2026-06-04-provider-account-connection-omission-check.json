@@ -1,0 +1,33 @@
+{
+  "schema_version": "omission-check.v1",
+  "request_id": "UR-2026-06-04-006",
+  "checked_at": "2026-06-04",
+  "required_items": [
+    "web_first_intake",
+    "official_auth_boundary",
+    "requirements_update",
+    "spec_artifacts",
+    "tauri_commands",
+    "settings_ui",
+    "adapter_env_injection",
+    "runtime_contract",
+    "readiness_tests",
+    "browser_smoke",
+    "history_trace"
+  ],
+  "covered_items": [
+    "web_first_intake",
+    "official_auth_boundary",
+    "requirements_update",
+    "spec_artifacts",
+    "tauri_commands",
+    "settings_ui",
+    "adapter_env_injection",
+    "runtime_contract",
+    "readiness_tests",
+    "browser_smoke",
+    "history_trace"
+  ],
+  "pending_items": [],
+  "status": "passed"
+}
