@@ -1,0 +1,36 @@
+{
+  "schema_version": "2026-06-02",
+  "request_id": "UR-2026-06-04-007",
+  "status": "resource_ready",
+  "checked_at": "2026-06-04T02:13:00+09:00",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "provider HTTP client",
+      "risk": "network request can hang or return large output",
+      "mitigation": "reqwest client uses PROVIDER_TASK_TIMEOUT_MS and output is bounded by MAX_PROVIDER_TASK_OUTPUT_BYTES",
+      "status": "bounded"
+    },
+    {
+      "resource": "task-run store writes",
+      "risk": "large or secret-bearing output can be persisted",
+      "mitigation": "output/stderr are bounded; provider secrets are not written to record; prompt preview uses redaction helper",
+      "status": "bounded"
+    },
+    {
+      "resource": "browser smoke local server",
+      "risk": "local http.server can remain running",
+      "mitigation": "server on 127.0.0.1:4174 was stopped with keyboard interrupt and lsof returned no process",
+      "status": "closed"
+    },
+    {
+      "resource": "in-app browser tab",
+      "risk": "test tab remains open",
+      "mitigation": "tab is harmless local static app; no external data transmission or sensitive input occurred",
+      "status": "acceptable"
+    }
+  ],
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-04-provider-direct-agent-work-resource.json"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "2026-06-01",
+  "request_id": "UR-2026-06-04-007",
+  "work_title": "Provider direct agent work",
+  "started_at": "2026-06-04T01:20:00+09:00",
+  "updated_at": "2026-06-04T02:14:00+09:00",
+  "phases": [
+    {
+      "phase": "web_first_and_context",
+      "approx_minutes": 8,
+      "notes": "Checked official provider API/auth docs and existing provider-account implementation."
+    },
+    {
+      "phase": "implementation",
+      "approx_minutes": 26,
+      "notes": "Added reqwest dependency, Tauri provider direct command, API calls, task-run persistence, and UI controls."
+    },
+    {
+      "phase": "contracts_and_docs",
+      "approx_minutes": 12,
+      "notes": "Updated runtime contract, user/product/service registries, requirements, specs, installation record, and history."
+    },
+    {
+      "phase": "validation",
+      "approx_minutes": 8,
+      "notes": "Ran cargo, pnpm, config, build, git diff, and browser smoke checks."
+    }
+  ],
+  "bottleneck": "Rust reqwest 0.13 RequestBuilder API mismatch for Gemini query params; resolved by using x-goog-api-key header.",
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-04-provider-direct-agent-work.json"
+  ]
+}

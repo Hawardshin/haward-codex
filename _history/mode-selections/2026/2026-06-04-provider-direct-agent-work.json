@@ -1,0 +1,16 @@
+{
+  "schema_version": "2026-05-31",
+  "request_id": "UR-2026-06-04-007",
+  "selected_mode": "standard",
+  "selected_at": "2026-06-04T02:10:00+09:00",
+  "reason": "The request changes durable desktop runtime behavior, provider credential use, task execution, UI, contracts, dependency records, and validation gates.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "owning_project": "platform-desktop-app",
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-04-provider-direct-agent-work.json"
+  ],
+  "omission_check_required": true,
+  "resource_check_required": true,
+  "installation_record_required": true
+}

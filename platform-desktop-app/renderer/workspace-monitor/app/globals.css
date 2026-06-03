@@ -5859,6 +5859,76 @@ h3 {
   padding: 12px;
 }
 
+.agent-provider-run-controls {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(160px, 1fr) minmax(150px, 0.72fr);
+  gap: 8px;
+  min-width: 0;
+  align-items: end;
+}
+
+.agent-provider-run-controls label {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.agent-provider-run-controls span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.agent-provider-run-controls select,
+.agent-provider-run-controls input {
+  width: 100%;
+  min-width: 0;
+  min-height: 34px;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 7px 9px;
+  font: inherit;
+  font-size: 12px;
+}
+
+.agent-provider-run-state {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  min-height: 34px;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 7px;
+  padding: 6px 9px;
+}
+
+.agent-provider-run-state.connected {
+  border-color: color-mix(in srgb, var(--green) 48%, var(--line));
+}
+
+.agent-provider-run-state.missing {
+  border-color: color-mix(in srgb, var(--amber) 48%, var(--line));
+}
+
+.agent-provider-run-state strong,
+.agent-provider-run-state span {
+  overflow-wrap: var(--text-long-token-wrap);
+}
+
+.agent-provider-run-state strong {
+  color: var(--text);
+  font-size: 12px;
+}
+
+.agent-provider-run-state span {
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: none;
+}
+
 .agent-chat-composer label,
 .agent-chat-context-form label {
   display: grid;
@@ -5877,6 +5947,8 @@ h3 {
 }
 
 .agent-chat-composer textarea,
+.agent-chat-composer input,
+.agent-chat-composer select,
 .agent-chat-context-form textarea {
   width: 100%;
   min-height: 0;
@@ -9783,6 +9855,7 @@ h3 {
   .intent-map-layout,
   .search-agent-run-layout,
   .search-agent-work-chat-layout,
+  .agent-provider-run-controls,
   .agent-factory-layout,
   .learning-feedback-layout,
   .provider-account-fields,

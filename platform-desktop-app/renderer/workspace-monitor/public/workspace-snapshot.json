@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-03T16:49:28.311Z",
+  "generatedAt": "2026-06-03T17:13:34.925Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -170,8 +170,8 @@
         "label": "Agent Orchestration",
         "role": "primary",
         "status": "implemented_slice",
-        "purpose": "Coordinate multiple agent or CLI lanes as a supervised task graph with bounded IO, decision routing, merge gates, and cleanup.",
-        "userOutcome": "The user starts one task and the platform coordinates specialized lanes, pauses only dependent decisions, and keeps independent work moving.",
+        "purpose": "Coordinate connected provider model tasks and optional CLI lanes as a supervised task graph with bounded IO, decision routing, merge gates, and cleanup.",
+        "userOutcome": "The user starts one task from chat and the platform runs the connected provider model or specialized lanes, pauses only dependent decisions, and keeps independent work moving.",
         "primarySection": "desktop",
         "primarySurfaces": [
           "Desktop Runtime",
@@ -184,6 +184,7 @@
         ],
         "currentAssets": [],
         "automationTargets": [
+          "direct provider API task execution from connected OpenAI, Anthropic, or Gemini accounts",
           "provider credential injection into guest CLI sessions",
           "existing search agent work-chat",
           "task intake to multi-lane plan",

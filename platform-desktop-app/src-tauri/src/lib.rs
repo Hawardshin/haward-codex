@@ -47,6 +47,7 @@ struct ProviderCredentialDefinition {
     label: &'static str,
     auth_method: &'static str,
     env_var: &'static str,
+    default_model: &'static str,
     setup_url: &'static str,
     login_url: &'static str,
     docs_url: &'static str,
@@ -422,6 +423,7 @@ struct ProviderCredentialSummary {
     label: String,
     auth_method: String,
     env_var: String,
+    default_model: String,
     configured: bool,
     environment_available: bool,
     status: String,
@@ -455,6 +457,39 @@ struct ProviderAuthUrlOpenReport {
     purpose: String,
     url: String,
     status: String,
+}
+
+#[derive(Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+struct ProviderAgentTaskInput {
+    provider_id: String,
+    model: String,
+    task_kind: String,
+    prompt: String,
+    system_prompt: String,
+    working_dir: Option<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ProviderAgentTaskReport {
+    task_run_id: String,
+    provider_id: String,
+    provider_label: String,
+    model: String,
+    status: String,
+    http_status: Option<u16>,
+    duration_ms: u128,
+    output: String,
+    stderr: String,
+    output_truncated: bool,
+    working_dir: String,
+    task_kind: String,
+    task_record_path: Option<String>,
+    stdout_log_path: Option<String>,
+    stderr_log_path: Option<String>,
+    persistence_error: Option<String>,
+    request_id: String,
 }
 
 impl Default for DesktopRuntimeInitDefaults {
@@ -517,6 +552,19 @@ impl Default for ProviderCredentialInput {
             auth_method: "api_key".to_string(),
             secret: String::new(),
             account_hint: String::new(),
+        }
+    }
+}
+
+impl Default for ProviderAgentTaskInput {
+    fn default() -> Self {
+        Self {
+            provider_id: String::new(),
+            model: String::new(),
+            task_kind: "provider_agent_task".to_string(),
+            prompt: String::new(),
+            system_prompt: String::new(),
+            working_dir: None,
         }
     }
 }
@@ -1008,6 +1056,9 @@ const DESKTOP_GIT_STATUS_SCHEMA_VERSION: &str = "desktop-git-status.v1";
 const MAX_WORKSPACE_FOLDER_NAME_BYTES: usize = 120;
 const MAX_PROVIDER_SECRET_BYTES: usize = 8_192;
 const MAX_PROVIDER_ACCOUNT_HINT_CHARS: usize = 160;
+const MAX_PROVIDER_TASK_OUTPUT_BYTES: usize = 100_000;
+const MAX_PROVIDER_TASK_OUTPUT_TOKENS: u64 = 2_048;
+const PROVIDER_TASK_TIMEOUT_MS: u64 = 120_000;
 const MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS: usize = 20;
 const MAX_SUPPORT_EVENT_CHARS: usize = 600;
 const MAX_FACTORY_FIELD_CHARS: usize = 4_000;
@@ -1080,6 +1131,7 @@ static PROVIDER_CREDENTIALS: &[ProviderCredentialDefinition] = &[
         label: "ChatGPT / OpenAI",
         auth_method: "api_key",
         env_var: "OPENAI_API_KEY",
+        default_model: "gpt-5.2",
         setup_url: "https://platform.openai.com/api-keys",
         login_url: "https://chatgpt.com/",
         docs_url: "https://platform.openai.com/docs/api-reference/authentication/keys",
@@ -1090,6 +1142,7 @@ static PROVIDER_CREDENTIALS: &[ProviderCredentialDefinition] = &[
         label: "Claude / Anthropic",
         auth_method: "api_key",
         env_var: "ANTHROPIC_API_KEY",
+        default_model: "claude-sonnet-4-6",
         setup_url: "https://console.anthropic.com/settings/keys",
         login_url: "https://claude.ai/login",
         docs_url: "https://platform.claude.com/docs/en/api/authentication/overview",
@@ -1100,6 +1153,7 @@ static PROVIDER_CREDENTIALS: &[ProviderCredentialDefinition] = &[
         label: "Gemini / Google",
         auth_method: "api_key",
         env_var: "GEMINI_API_KEY",
+        default_model: "gemini-3.5-flash",
         setup_url: "https://aistudio.google.com/api-keys",
         login_url: "https://gemini.google.com/",
         docs_url: "https://ai.google.dev/gemini-api/docs/api-key",
@@ -1415,6 +1469,14 @@ fn open_provider_auth_url(
     purpose: Option<String>,
 ) -> Result<ProviderAuthUrlOpenReport, String> {
     open_provider_auth_url_report(&provider_id, purpose.as_deref())
+}
+
+#[tauri::command]
+async fn run_provider_agent_task(
+    app: AppHandle,
+    input: ProviderAgentTaskInput,
+) -> Result<ProviderAgentTaskReport, String> {
+    run_provider_agent_task_report(&app, input).await
 }
 
 #[tauri::command]
@@ -2247,6 +2309,7 @@ pub fn run() {
             save_provider_credential,
             clear_provider_credential,
             open_provider_auth_url,
+            run_provider_agent_task,
             get_desktop_workspace_state,
             set_desktop_workspace_path,
             choose_desktop_workspace_folder,
@@ -5873,6 +5936,7 @@ fn provider_credential_summary(
         label: definition.label.to_string(),
         auth_method: definition.auth_method.to_string(),
         env_var: definition.env_var.to_string(),
+        default_model: definition.default_model.to_string(),
         configured,
         environment_available,
         status: status.to_string(),
@@ -5975,6 +6039,459 @@ fn provider_ids_for_adapter(adapter_id: &str) -> &'static [&'static str] {
         "opencode-cli" | "claw-code-cli" => &["openai", "anthropic", "google-gemini"],
         _ => &[],
     }
+}
+
+struct ProviderApiResponse {
+    http_status: u16,
+    body: String,
+    output: String,
+}
+
+async fn run_provider_agent_task_report(
+    app: &AppHandle,
+    input: ProviderAgentTaskInput,
+) -> Result<ProviderAgentTaskReport, String> {
+    if input.prompt.len() > MAX_SESSION_INPUT_BYTES {
+        return Err(format!(
+            "Prompt is too large. Max input is {MAX_SESSION_INPUT_BYTES} bytes."
+        ));
+    }
+
+    let definition = find_provider_credential(&input.provider_id)
+        .ok_or_else(|| format!("Unknown provider id: {}", input.provider_id))?;
+    let secret = provider_secret_for_definition(app, definition)?;
+    let model = normalize_provider_model(definition, &input.model)?;
+    let task_kind = normalize_task_kind(Some(input.task_kind.as_str()), "provider_agent_task")?;
+    let working_dir = resolve_workspace_dir(app, input.working_dir.as_deref())?;
+    let system_prompt = provider_task_system_prompt(&task_kind, &input.system_prompt);
+    let request_id = new_session_id(&format!("provider-{}", definition.provider_id));
+    let task_run_id = format!("task-run-{request_id}");
+    let started_at = current_unix_millis_label();
+    let started = Instant::now();
+
+    let api_result = call_provider_api(definition, &secret, &model, &system_prompt, &input.prompt).await;
+    let duration_ms = started.elapsed().as_millis();
+    let mut http_status = None;
+    let mut output = String::new();
+    let mut stderr = String::new();
+    let status = match api_result {
+        Ok(response) => {
+            http_status = Some(response.http_status);
+            if (200..300).contains(&response.http_status) {
+                output = if response.output.trim().is_empty() {
+                    response.body
+                } else {
+                    response.output
+                };
+                "completed"
+            } else {
+                stderr = response.body;
+                "provider_api_failed"
+            }
+        }
+        Err(error) => {
+            stderr = redact_sensitive_text(&error);
+            "provider_network_error"
+        }
+    }
+    .to_string();
+
+    let (output, output_truncated) = truncate_provider_task_output(&output);
+    let (stderr, stderr_truncated) = truncate_provider_task_output(&redact_sensitive_text(&stderr));
+    let mut report = ProviderAgentTaskReport {
+        task_run_id,
+        provider_id: definition.provider_id.to_string(),
+        provider_label: definition.label.to_string(),
+        model,
+        status,
+        http_status,
+        duration_ms,
+        output,
+        stderr,
+        output_truncated: output_truncated || stderr_truncated,
+        working_dir: path_to_string(&working_dir),
+        task_kind,
+        task_record_path: None,
+        stdout_log_path: None,
+        stderr_log_path: None,
+        persistence_error: None,
+        request_id,
+    };
+
+    match persist_provider_agent_task_run(app, &report, &started_at, &input.prompt) {
+        Ok(paths) => {
+            report.task_record_path = Some(paths.record_path);
+            report.stdout_log_path = Some(paths.stdout_log_path);
+            report.stderr_log_path = Some(paths.stderr_log_path);
+        }
+        Err(error) => {
+            report.persistence_error = Some(error);
+        }
+    }
+
+    Ok(report)
+}
+
+async fn call_provider_api(
+    definition: &ProviderCredentialDefinition,
+    secret: &str,
+    model: &str,
+    system_prompt: &str,
+    prompt: &str,
+) -> Result<ProviderApiResponse, String> {
+    match definition.provider_id {
+        "openai" => call_openai_provider_api(secret, model, system_prompt, prompt).await,
+        "anthropic" => call_anthropic_provider_api(secret, model, system_prompt, prompt).await,
+        "google-gemini" => call_gemini_provider_api(secret, model, system_prompt, prompt).await,
+        _ => Err(format!("Unsupported provider id: {}", definition.provider_id)),
+    }
+}
+
+async fn call_openai_provider_api(
+    secret: &str,
+    model: &str,
+    system_prompt: &str,
+    prompt: &str,
+) -> Result<ProviderApiResponse, String> {
+    let payload = json!({
+        "model": model,
+        "instructions": system_prompt,
+        "input": prompt,
+        "max_output_tokens": MAX_PROVIDER_TASK_OUTPUT_TOKENS,
+        "store": false
+    });
+    let response = provider_http_client()?
+        .post("https://api.openai.com/v1/responses")
+        .bearer_auth(secret)
+        .json(&payload)
+        .send()
+        .await
+        .map_err(|error| format!("OpenAI request failed: {error}"))?;
+    let http_status = response.status().as_u16();
+    let body = response
+        .text()
+        .await
+        .map_err(|error| format!("OpenAI response body read failed: {error}"))?;
+    let output = serde_json::from_str::<Value>(&body)
+        .map(|value| extract_openai_output_text(&value))
+        .unwrap_or_default();
+    Ok(ProviderApiResponse {
+        http_status,
+        body,
+        output,
+    })
+}
+
+async fn call_anthropic_provider_api(
+    secret: &str,
+    model: &str,
+    system_prompt: &str,
+    prompt: &str,
+) -> Result<ProviderApiResponse, String> {
+    let payload = json!({
+        "model": model,
+        "max_tokens": MAX_PROVIDER_TASK_OUTPUT_TOKENS,
+        "system": system_prompt,
+        "messages": [
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
+    });
+    let response = provider_http_client()?
+        .post("https://api.anthropic.com/v1/messages")
+        .header("x-api-key", secret)
+        .header("anthropic-version", "2023-06-01")
+        .json(&payload)
+        .send()
+        .await
+        .map_err(|error| format!("Anthropic request failed: {error}"))?;
+    let http_status = response.status().as_u16();
+    let body = response
+        .text()
+        .await
+        .map_err(|error| format!("Anthropic response body read failed: {error}"))?;
+    let output = serde_json::from_str::<Value>(&body)
+        .map(|value| extract_anthropic_output_text(&value))
+        .unwrap_or_default();
+    Ok(ProviderApiResponse {
+        http_status,
+        body,
+        output,
+    })
+}
+
+async fn call_gemini_provider_api(
+    secret: &str,
+    model: &str,
+    system_prompt: &str,
+    prompt: &str,
+) -> Result<ProviderApiResponse, String> {
+    let model_path = gemini_model_path(model);
+    let endpoint = format!(
+        "https://generativelanguage.googleapis.com/v1beta/{model_path}:generateContent"
+    );
+    let payload = json!({
+        "systemInstruction": {
+            "parts": [
+                {
+                    "text": system_prompt
+                }
+            ]
+        },
+        "contents": [
+            {
+                "role": "user",
+                "parts": [
+                    {
+                        "text": prompt
+                    }
+                ]
+            }
+        ],
+        "generationConfig": {
+            "maxOutputTokens": MAX_PROVIDER_TASK_OUTPUT_TOKENS
+        }
+    });
+    let response = provider_http_client()?
+        .post(endpoint)
+        .header("x-goog-api-key", secret)
+        .json(&payload)
+        .send()
+        .await
+        .map_err(|error| format!("Gemini request failed: {error}"))?;
+    let http_status = response.status().as_u16();
+    let body = response
+        .text()
+        .await
+        .map_err(|error| format!("Gemini response body read failed: {error}"))?;
+    let output = serde_json::from_str::<Value>(&body)
+        .map(|value| extract_gemini_output_text(&value))
+        .unwrap_or_default();
+    Ok(ProviderApiResponse {
+        http_status,
+        body,
+        output,
+    })
+}
+
+fn provider_http_client() -> Result<reqwest::Client, String> {
+    reqwest::Client::builder()
+        .timeout(Duration::from_millis(PROVIDER_TASK_TIMEOUT_MS))
+        .build()
+        .map_err(|error| format!("Failed to create provider HTTP client: {error}"))
+}
+
+fn provider_secret_for_definition(
+    app: &AppHandle,
+    definition: &ProviderCredentialDefinition,
+) -> Result<String, String> {
+    let store = read_provider_credential_store(app)?;
+    if let Some(credential) = store
+        .credentials
+        .iter()
+        .find(|item| item.provider_id == definition.provider_id)
+    {
+        if !credential.secret.trim().is_empty() {
+            return Ok(credential.secret.trim().to_string());
+        }
+    }
+    env::var(definition.env_var)
+        .map(|value| value.trim().to_string())
+        .ok()
+        .filter(|value| !value.is_empty())
+        .ok_or_else(|| {
+            format!(
+                "{} is not connected. Save a key or set {}.",
+                definition.label, definition.env_var
+            )
+        })
+}
+
+fn provider_task_system_prompt(task_kind: &str, value: &str) -> String {
+    let trimmed = value.trim();
+    if !trimmed.is_empty() {
+        return truncate_chars(trimmed, MAX_SESSION_INPUT_BYTES);
+    }
+    format!(
+        "You are running as an Agent Workspace Platform direct provider task. Task kind: {task_kind}. Work from the user's request, return concrete output, separate assumptions from facts, list validation steps, and do not claim that files were edited or commands were run unless the prompt includes that evidence."
+    )
+}
+
+fn normalize_provider_model(
+    definition: &ProviderCredentialDefinition,
+    value: &str,
+) -> Result<String, String> {
+    let candidate = if value.trim().is_empty() {
+        definition.default_model
+    } else {
+        value.trim()
+    };
+    if candidate.len() > 120 {
+        return Err("Provider model id is too long.".to_string());
+    }
+    if !candidate
+        .chars()
+        .all(|character| character.is_ascii_alphanumeric() || matches!(character, '-' | '_' | '.' | ':' | '/'))
+    {
+        return Err("Provider model id contains unsupported characters.".to_string());
+    }
+    Ok(candidate.to_string())
+}
+
+fn gemini_model_path(model: &str) -> String {
+    if model.starts_with("models/") {
+        model.to_string()
+    } else {
+        format!("models/{model}")
+    }
+}
+
+fn truncate_provider_task_output(value: &str) -> (String, bool) {
+    if value.len() <= MAX_PROVIDER_TASK_OUTPUT_BYTES {
+        return (value.to_string(), false);
+    }
+    let mut output = String::new();
+    for character in value.chars() {
+        if output.len() + character.len_utf8() > MAX_PROVIDER_TASK_OUTPUT_BYTES {
+            break;
+        }
+        output.push(character);
+    }
+    (format!("{output}\n[truncated]"), true)
+}
+
+fn extract_openai_output_text(value: &Value) -> String {
+    if let Some(output_text) = value.get("output_text").and_then(Value::as_str) {
+        return output_text.to_string();
+    }
+    let mut chunks = Vec::new();
+    if let Some(items) = value.get("output").and_then(Value::as_array) {
+        for item in items {
+            if let Some(content_items) = item.get("content").and_then(Value::as_array) {
+                for content in content_items {
+                    if let Some(text) = content.get("text").and_then(Value::as_str) {
+                        chunks.push(text.to_string());
+                    }
+                }
+            }
+        }
+    }
+    chunks.join("\n")
+}
+
+fn extract_anthropic_output_text(value: &Value) -> String {
+    let mut chunks = Vec::new();
+    if let Some(items) = value.get("content").and_then(Value::as_array) {
+        for item in items {
+            if let Some(text) = item.get("text").and_then(Value::as_str) {
+                chunks.push(text.to_string());
+            }
+        }
+    }
+    chunks.join("\n")
+}
+
+fn extract_gemini_output_text(value: &Value) -> String {
+    let mut chunks = Vec::new();
+    if let Some(candidates) = value.get("candidates").and_then(Value::as_array) {
+        for candidate in candidates {
+            let Some(parts) = candidate
+                .get("content")
+                .and_then(|content| content.get("parts"))
+                .and_then(Value::as_array)
+            else {
+                continue;
+            };
+            for part in parts {
+                if let Some(text) = part.get("text").and_then(Value::as_str) {
+                    chunks.push(text.to_string());
+                }
+            }
+        }
+    }
+    chunks.join("\n")
+}
+
+fn persist_provider_agent_task_run(
+    app: &AppHandle,
+    report: &ProviderAgentTaskReport,
+    started_at: &str,
+    prompt: &str,
+) -> Result<TaskRunPersistPaths, String> {
+    let root = workspace_root_for_app(Some(app))?;
+    let run_dir = task_run_dir(app, &report.task_run_id)?;
+    fs::create_dir_all(&run_dir)
+        .map_err(|error| format!("Failed to create provider task run directory: {error}"))?;
+
+    let record_path = run_dir.join("record.json");
+    let stdout_log_path = run_dir.join("stdout.log");
+    let stderr_log_path = run_dir.join("stderr.log");
+    fs::write(&stdout_log_path, report.output.as_bytes())
+        .map_err(|error| format!("Failed to write provider task stdout log: {error}"))?;
+    fs::write(&stderr_log_path, report.stderr.as_bytes())
+        .map_err(|error| format!("Failed to write provider task stderr log: {error}"))?;
+
+    let relative_record_path = workspace_relative_display_path(&root, &record_path);
+    let relative_stdout_path = workspace_relative_display_path(&root, &stdout_log_path);
+    let relative_stderr_path = workspace_relative_display_path(&root, &stderr_log_path);
+    let updated_at = current_unix_millis_label();
+    let exit_code = if report.status == "completed" { 0 } else { 1 };
+    let record = json!({
+        "schema_version": 1,
+        "record_id": format!("record-{}", report.request_id),
+        "session_id": report.request_id.clone(),
+        "task_run_id": report.task_run_id.clone(),
+        "task_kind": report.task_kind.clone(),
+        "pipeline_id": Value::Null,
+        "lane_id": Value::Null,
+        "lane_role": Value::Null,
+        "adapter_id": report.provider_id.clone(),
+        "label": format!("{} Direct Task", report.provider_label),
+        "command": "provider_api",
+        "status": report.status.clone(),
+        "exit_code": exit_code,
+        "started_at": started_at,
+        "updated_at": updated_at,
+        "elapsed_ms": u64::try_from(report.duration_ms).unwrap_or(u64::MAX),
+        "working_dir": report.working_dir.clone(),
+        "prompt_preview": prompt_preview(&redact_sensitive_text(prompt)),
+        "stdout_bytes": report.output.len(),
+        "stderr_bytes": report.stderr.len(),
+        "output_truncated": report.output_truncated,
+        "decision_inbox_items": 0,
+        "pending_decision_prompts": 0,
+        "deferred_prompt_count": 0,
+        "auto_defer_questions": false,
+        "auto_defer_triggered": false,
+        "defer_message_sent": false,
+        "bounded": true,
+        "max_output_bytes": MAX_PROVIDER_TASK_OUTPUT_BYTES,
+        "decision_prompts": [],
+        "provider_task": {
+            "provider_id": report.provider_id.clone(),
+            "provider_label": report.provider_label.clone(),
+            "model": report.model.clone(),
+            "http_status": report.http_status,
+            "credential_policy": "secret_not_persisted"
+        },
+        "paths": {
+            "record": relative_record_path,
+            "stdout_log": relative_stdout_path,
+            "stderr_log": relative_stderr_path
+        }
+    });
+    let formatted = serde_json::to_string_pretty(&record)
+        .map_err(|error| format!("Failed to serialize provider task record: {error}"))?;
+    fs::write(&record_path, format!("{formatted}\n"))
+        .map_err(|error| format!("Failed to write provider task record: {error}"))?;
+
+    Ok(TaskRunPersistPaths {
+        record_path: relative_record_path,
+        stdout_log_path: relative_stdout_path,
+        stderr_log_path: relative_stderr_path,
+    })
 }
 
 fn desktop_workspace_state_report(

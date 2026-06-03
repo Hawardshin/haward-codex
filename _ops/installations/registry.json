@@ -428,6 +428,35 @@
       "rollback_path": "cd platform-desktop-app/src-tauri && cargo remove tauri-plugin-dialog; remove dialog:default capability, choose_desktop_workspace_folder command, runtime contract command entry, native folder picker UI, regenerate Cargo.lock, and rerun checks.",
       "installation_record_path": "_history/installations/2026/2026-06-03-tauri-dialog-plugin-native-folder-picker.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-04-provider-direct-api-reqwest",
+      "date": "2026-06-04",
+      "status": "installed",
+      "name": "provider direct API reqwest dependency",
+      "scope": "project",
+      "owning_project": "platform-desktop-app",
+      "package_manager": "cargo",
+      "install_command": "Manual Cargo.toml dependency declaration followed by cd platform-desktop-app/src-tauri && cargo check",
+      "environment_path": "platform-desktop-app/src-tauri/target/",
+      "dependency_record_paths": [
+        "platform-desktop-app/src-tauri/Cargo.toml",
+        "platform-desktop-app/src-tauri/Cargo.lock"
+      ],
+      "version_or_lock_status": "Cargo.toml declares reqwest 0.13.4 with json feature; Cargo.lock records the resolved direct and transitive HTTP/TLS dependencies.",
+      "security_review": "Direct provider API calls use allowlisted provider definitions, do not persist raw secrets, and keep credential reports redacted. Public release still needs OS keychain storage before broader distribution.",
+      "license_review": "reqwest is MIT OR Apache-2.0; transitive dependencies are recorded in Cargo.lock for follow-up SBOM review.",
+      "verification": [
+        "cd platform-desktop-app/src-tauri && cargo check: passed",
+        "corepack pnpm --filter platform-desktop-app test: passed",
+        "corepack pnpm --filter platform-desktop-app run check: passed",
+        "corepack pnpm --filter workspace-monitor test: passed",
+        "corepack pnpm --filter workspace-monitor run build:customer: passed",
+        "git diff --check: passed"
+      ],
+      "rollback_path": "Remove reqwest from Cargo.toml, remove run_provider_agent_task and direct provider API call code, regenerate Cargo.lock as needed, and rerun cargo/pnpm checks.",
+      "installation_record_path": "_history/installations/2026/2026-06-04-provider-direct-api-reqwest.ko.md",
+      "commit": "pending"
     }
   ]
 }

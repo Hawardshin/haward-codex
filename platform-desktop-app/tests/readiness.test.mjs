@@ -329,7 +329,8 @@ test("installer shell runtime contract is bundled and enforceable", () => {
     "list_provider_credentials",
     "save_provider_credential",
     "clear_provider_credential",
-    "open_provider_auth_url"
+    "open_provider_auth_url",
+    "run_provider_agent_task"
   ]) {
     assert.match(lib, new RegExp(providerCredentialCommand));
     assert.ok(contract.runtime_command_surface.provider_credential_commands.includes(providerCredentialCommand));
@@ -376,6 +377,8 @@ test("service readiness registry records production service blockers", () => {
   assert.match(serialized, /Signed Distribution/);
   assert.match(serialized, /Update & Recovery/);
   assert.match(serialized, /Workspace Onboarding/);
+  assert.match(serialized, /Provider Accounts/);
+  assert.match(serialized, /direct model-task execution readiness/);
   assert.match(serialized, /updater_is_a_release_gate/);
 });
 
@@ -489,7 +492,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     assert.match(releaseReadinessCheck, new RegExp(scriptToken));
   }
   const serviceReadinessCheck = readFileSync(join(root, "scripts/check-service-readiness.mjs"), "utf8");
-  for (const scriptToken of ["checkServiceReadiness", "service_internal_ready_public_blocked", "Signed updater channel", "Workspace Onboarding"]) {
+  for (const scriptToken of ["checkServiceReadiness", "service_internal_ready_public_blocked", "Signed updater channel", "Workspace Onboarding", "Direct provider task command exposed"]) {
     assert.match(serviceReadinessCheck, new RegExp(scriptToken));
   }
   for (const token of ["writeClipboardText", "clipboard.writeText", "textarea copy path", "execCommand", "setSelectionRange"]) {
@@ -528,6 +531,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "save_provider_credential",
     "clear_provider_credential",
     "open_provider_auth_url",
+    "run_provider_agent_task",
     "start_cli_adapter_session",
     "start_cli_task_pipeline",
     "poll_cli_adapter_session",
@@ -765,6 +769,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "save_provider_credential",
     "clear_provider_credential",
     "open_provider_auth_url",
+    "run_provider_agent_task",
+    "ProviderAgentTaskReport",
+    "agent-provider-run-controls",
     "fallbackProviderCredentialReport",
     "providerIdsByAdapter",
     "OPENAI_API_KEY",
@@ -946,6 +953,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "provider_credentials_path",
     "provider_env_for_adapter",
     "open_provider_auth_url_report",
+    "run_provider_agent_task_report",
     "provider-credentials.v1.json",
     "OPENAI_API_KEY",
     "ANTHROPIC_API_KEY",

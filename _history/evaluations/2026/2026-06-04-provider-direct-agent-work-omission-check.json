@@ -1,0 +1,77 @@
+{
+  "schema_version": "2026-06-02",
+  "request_id": "UR-2026-06-04-007",
+  "status": "coverage_ready",
+  "checked_at": "2026-06-04T02:12:00+09:00",
+  "required_items": [
+    {
+      "item": "provider credentials are used for actual direct work",
+      "status": "covered",
+      "evidence": [
+        "run_provider_agent_task",
+        "call_provider_api",
+        "SearchAgentWorkChatPanel provider/model controls"
+      ]
+    },
+    {
+      "item": "existing search agent chat starts the work",
+      "status": "covered",
+      "evidence": [
+        "launchSearchAgent",
+        "renderSearchAgentPrompt",
+        "renderSearchAgentSystemPrompt"
+      ]
+    },
+    {
+      "item": "results accumulate as task-run records",
+      "status": "covered",
+      "evidence": [
+        "persist_provider_agent_task_run",
+        "task_runs_base_path",
+        "record.json stdout.log stderr.log"
+      ]
+    },
+    {
+      "item": "secrets are not stored in reports/support bundles",
+      "status": "covered",
+      "evidence": [
+        "credential_policy: secret_not_persisted",
+        "credential_secret_preview",
+        "support export exclusion remains in runtime contract"
+      ]
+    },
+    {
+      "item": "fallback path remains available",
+      "status": "covered",
+      "evidence": [
+        "launchSearchAgent provider try/catch fallback",
+        "start_cli_adapter_session fallback",
+        "capability_missing optional CLI posture"
+      ]
+    },
+    {
+      "item": "documentation and contracts updated",
+      "status": "covered",
+      "evidence": [
+        "REQ-PDA-082..086",
+        "runtime command surface",
+        "user-flow/product-feature/service-readiness registries"
+      ]
+    }
+  ],
+  "open_gaps": [
+    {
+      "gap": "OS keychain storage adapter is still required before public release.",
+      "severity": "known_follow_up",
+      "blocking": false
+    },
+    {
+      "gap": "Live provider API call was not executed because no user API key was supplied for automated validation.",
+      "severity": "environment_dependent",
+      "blocking": false
+    }
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-04-provider-direct-agent-work-omission-check.json"
+  ]
+}

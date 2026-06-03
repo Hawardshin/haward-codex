@@ -12,7 +12,7 @@
       "Treat updater, signing, notarization, privacy, support, and first-run items as release gates rather than optional notes."
     ],
     "owner": "platform-desktop-app",
-    "last_reviewed": "2026-06-03",
+    "last_reviewed": "2026-06-04",
     "update_triggers": [
       "A release channel, updater, signing, notarization, support, privacy, or onboarding behavior changes.",
       "The app starts collecting additional logs, workspace data, or diagnostics.",
@@ -216,7 +216,7 @@
     {
       "id": "provider_accounts",
       "label": "Provider Accounts",
-      "intent": "Provider credential status must be visible in the app and credential reports must stay redacted.",
+      "intent": "Provider credential status and direct model-task execution readiness must be visible in the app, while credential reports and support exports stay redacted.",
       "required_for_public": false
     },
     {

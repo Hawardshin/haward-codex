@@ -43,6 +43,11 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
       check("redacted_support_export", "Support export is redacted", tauriLib.includes("redacted") && tauriLib.includes("task-run-summary.redacted.json"), "Support bundle uses redacted bounded summaries."),
       check("support_ui_surface", "Support controls visible in app", monitorShell.includes("Support Diagnostic Bundle"), "Desktop UI exposes support bundle controls.")
     ]),
+    group("provider_accounts", "Provider Accounts", [
+      check("provider_credentials_redacted", "Provider credential reports are redacted", tauriLib.includes("secret_preview") && tauriLib.includes("credential_secret_preview"), "Credential reports expose only preview/status metadata."),
+      check("provider_direct_task_command", "Direct provider task command exposed", tauriLib.includes("run_provider_agent_task") && tauriLib.includes("ProviderAgentTaskReport"), "Connected provider accounts can run model tasks without a shell command."),
+      check("provider_direct_task_ui", "Direct provider task UI visible", monitorShell.includes("agent-provider-run-controls") && monitorShell.includes("run_provider_agent_task"), "Search Agent Work Chat exposes provider account and model controls.")
+    ]),
     group("workspace_onboarding", "Workspace Onboarding", [
       check("first_run_docs", "First-run onboarding documented", existsSync(path.join(root, "docs/first-run-onboarding.ko.md")), "First-run onboarding document exists."),
       check("workspace_flow_registry", "Workspace flow registered", serializedUserFlow.includes("workspace") && serializedUserFlow.includes("first-run"), "User flow registry includes workspace and first-run language."),

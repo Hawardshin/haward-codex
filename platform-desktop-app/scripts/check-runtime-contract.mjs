@@ -171,6 +171,19 @@ for (const learningFeedbackCommand of ["record_learning_improvement_decision"]) 
   );
   failIf(!tauriLib.includes(learningFeedbackCommand), `src-tauri/src/lib.rs must include ${learningFeedbackCommand}`);
 }
+for (const providerCredentialCommand of [
+  "list_provider_credentials",
+  "save_provider_credential",
+  "clear_provider_credential",
+  "open_provider_auth_url",
+  "run_provider_agent_task"
+]) {
+  failIf(
+    !(contract.runtime_command_surface?.provider_credential_commands ?? []).includes(providerCredentialCommand),
+    `runtime_command_surface.provider_credential_commands must include ${providerCredentialCommand}`
+  );
+  failIf(!tauriLib.includes(providerCredentialCommand), `src-tauri/src/lib.rs must include ${providerCredentialCommand}`);
+}
 for (const workspaceHostCommand of [
   "get_desktop_workspace_state",
   "set_desktop_workspace_path",

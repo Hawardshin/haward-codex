@@ -571,9 +571,11 @@
       "required_behavior": [
         "show the existing research-insight-planner-agent before agent creation",
         "start the run from a chat workbench without requiring the user to type a shell command",
+        "when a provider account is connected, run the selected OpenAI, Anthropic, or Gemini model directly from the chat before falling back to optional CLI lanes",
         "treat the chat as a Codex app-style thread workbench with connected terminal, files, diff, artifacts, decisions, and validation",
         "show Claude Desktop-style connector chips for attached MCP servers, desktop extensions, and guest CLI adapters",
         "keep terminal output, decision prompts, and task-run records connected to the chat request",
+        "persist direct provider API results as task-run records without storing raw provider secrets",
         "persist the run as taskKind research_insight_agent"
       ]
     },
