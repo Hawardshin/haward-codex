@@ -29,6 +29,30 @@ test("desktop registry points to macOS and Windows execution profiles", () => {
   assert.equal(registry.recommended_initial_path.id, "tauri_first_cross_platform_shell");
   assert.match(serialized, /configs\/macos-execution-profile\.json/);
   assert.match(serialized, /configs\/windows-execution-profile\.json/);
+  assert.match(serialized, /configs\/product-feature-registry\.json/);
+});
+
+test("product feature registry makes agent platform primary", () => {
+  const registry = readJson("configs/product-feature-registry.json");
+  const serialized = JSON.stringify(registry);
+
+  assert.equal(registry.product_position.primary_product, "agent_capability_platform");
+  assert.equal(registry.product_position.monitoring_role, "supporting_observability");
+  for (const featureId of [
+    "agent_orchestration",
+    "agent_work_environment",
+    "agent_development_environment",
+    "agent_factory",
+    "learning_improvement_loop"
+  ]) {
+    assert.ok(registry.product_position.primary_feature_ids.includes(featureId));
+    assert.equal(registry.feature_layers.find((feature) => feature.id === featureId)?.role, "primary");
+  }
+  assert.equal(registry.feature_layers.find((feature) => feature.id === "observability_monitoring")?.role, "supporting");
+  assert.match(serialized, /Agent Orchestration/);
+  assert.match(serialized, /Agent Factory/);
+  assert.match(serialized, /Learning & Evaluation Loop/);
+  assert.match(serialized, /supporting observability/);
 });
 
 test("execution profiles keep optional CLI adapters non-blocking", () => {
@@ -184,7 +208,15 @@ test("shared CLI adapter registry defines concrete AI CLI targets", () => {
 test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () => {
   const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
   const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
+  const productFeaturePanel = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
+    "utf8"
+  );
   const monitorCollector = readFileSync(join(root, "renderer/workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
+  const productFeatureCollector = readFileSync(
+    join(root, "renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs"),
+    "utf8"
+  );
   const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
   const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
   const platformPkg = readJson("package.json");
@@ -201,6 +233,15 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(monitorPkg.scripts["build:customer"], /--snapshot-mode customer/);
   for (const collectorToken of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
     assert.match(monitorCollector, new RegExp(collectorToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+  for (const collectorToken of [
+    "collectProductFeatureArchitecture",
+    "productFeatureArchitecture",
+    "sanitizeProductFeatureArchitectureForCustomer",
+    "agent_capability_platform",
+    "supporting_observability"
+  ]) {
+    assert.match(`${monitorCollector}\n${productFeatureCollector}`, new RegExp(collectorToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
   for (const scriptToken of ["auditCustomerSnapshot", "scanCustomerDist", "customer_bundle_ready", "MAX_DIST_SCAN_FILES"]) {
     assert.match(customerBundleCheck, new RegExp(scriptToken));
@@ -317,9 +358,23 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Claude Code Design Transfer",
     "Public sources only",
     "공개 설계 패턴 전이 지도",
-    "선택/위치 열기"
+    "선택/위치 열기",
+    "ProductFeatureArchitecturePanel",
+    "Agent Platform",
+    "Agent Workbench",
+    "Learning Loop",
+    "Observability"
   ]) {
     assert.match(monitorShell, new RegExp(uiString));
+  }
+  for (const uiString of [
+    "Agent Orchestration",
+    "Agent Factory",
+    "Learning & Evaluation Loop",
+    "Observability is support",
+    "Agent Capability Platform"
+  ]) {
+    assert.match(productFeaturePanel, new RegExp(uiString));
   }
   for (const implementationToken of [
     "detectOutputEvents",
@@ -400,7 +455,9 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "openModeFunctionOption",
     "claudeCodeDesignTransfer",
     "ClaudeCodeTransferPanel",
-    "transfer-pattern-grid"
+    "transfer-pattern-grid",
+    "productFeatureArchitecture",
+    "emptyProductFeatureArchitecture"
   ]) {
     assert.match(monitorShell, new RegExp(implementationToken));
   }

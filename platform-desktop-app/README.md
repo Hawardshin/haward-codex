@@ -9,11 +9,13 @@ This is separate from `agent-platform/configs/installations/install-mode-registr
 ## Current Direction
 
 - Treat the first installable product as the platform-first host runtime: the app launches first, owns workspace state, task state, decisions, artifacts, validation, and UI authority, then mounts external AI CLIs as guest adapter lanes.
+- Treat the desktop product as an agent capability platform, not as a monitoring dashboard. `configs/product-feature-registry.json` is the source of truth for primary features: agent orchestration, agent work environment, agent development environment, agent factory, and the learning/evaluation loop. Monitoring and history surfaces support those features through observability.
 - Treat `runtime-contracts/installer-shell-runtime-contract.json` as the bundled contract the installed shell reads before task execution. This contract fixes required read targets, enforcement gates, and structured data accumulation targets so shell behavior is not driven by chat memory or a one-off UI path.
 - Treat this repository as the development source that builds the platform, not as the customer-visible product payload. Installed customers should use the app, their selected workspaces, app-managed data stores, classified logs, and exports without seeing the platform source tree.
 - Keep user workspace data, platform data stores, log stores, cache stores, and agent runtime workspaces separate from platform source code. Use `configs/runtime-data-boundary-registry.json` as the steering source before adding persistent runtime data or log features.
 - Keep reusable agent definitions under `agent-platform/configs/agents/`; runtime agent input/output/log/handoff/temp work belongs in the installed product's scoped agent workspace plane.
 - Keep the Next.js renderer under `platform-desktop-app/renderer/workspace-monitor/` as the selected product UI source instead of duplicating the monitoring interface in a separate root project.
+- Use the selected renderer as a product feature workbench: it must pull from the product feature registry and show sellable feature layers before supporting observability or repository-monitoring details.
 - Design the first-run user flow before implementing installer code: open/create/demo workspace, confirm workspace boundary, select view mode, run required readiness checks, then reach the dashboard.
 - Keep Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, notifications, browser automation, and advanced validators as optional capability cards that can be configured later instead of blocking initial use.
 - Treat Claude Code CLI, Gemini CLI, Codex CLI, and OpenCode as the first concrete AI CLI guest adapter targets for multi-CLI orchestration, while keeping the app usable when any of them is missing.
@@ -69,6 +71,7 @@ platform-desktop-app/
 ## Source Of Truth
 
 - Distribution registry: `configs/desktop-distribution-registry.json`
+- Product feature registry: `configs/product-feature-registry.json`
 - macOS execution profile: `configs/macos-execution-profile.json`
 - Windows execution profile: `configs/windows-execution-profile.json`
 - User flow registry: `configs/user-flow-registry.json`
@@ -117,6 +120,7 @@ python3 -m json.tool platform-desktop-app/configs/claude-code-design-transfer-re
 python3 -m json.tool platform-desktop-app/configs/runtime-data-boundary-registry.json
 python3 -m json.tool platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/desktop-distribution-registry.json
+cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/macos-execution-profile.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/windows-execution-profile.json
 cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/claude-code-design-transfer-registry.json

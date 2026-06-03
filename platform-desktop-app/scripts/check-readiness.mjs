@@ -8,6 +8,7 @@ const requiredFiles = [
   "README.md",
   "package.json",
   "configs/desktop-distribution-registry.json",
+  "configs/product-feature-registry.json",
   "configs/claude-code-design-transfer-registry.json",
   "configs/runtime-data-boundary-registry.json",
   "configs/service-readiness-registry.json",
@@ -236,6 +237,40 @@ if (desktopRegistry.recommended_initial_path?.id !== "tauri_first_cross_platform
 if (!JSON.stringify(desktopRegistry.selected_platform_architecture ?? {}).includes("multi_cli_supervisor")) {
   failures.push("desktop-distribution-registry must record the multi-CLI supervisor contract");
 }
+if (!companionPaths.includes("configs/product-feature-registry.json")) {
+  failures.push("desktop-distribution-registry must reference the product feature registry");
+}
+
+const productFeatureRegistry = readJson("configs/product-feature-registry.json");
+const productFeatureSerialized = JSON.stringify(productFeatureRegistry);
+if (productFeatureRegistry.product_position?.primary_product !== "agent_capability_platform") {
+  failures.push("product-feature-registry must keep agent_capability_platform as the primary product");
+}
+if (productFeatureRegistry.product_position?.monitoring_role !== "supporting_observability") {
+  failures.push("product-feature-registry must keep monitoring as supporting_observability");
+}
+for (const requiredFeatureId of [
+  "agent_orchestration",
+  "agent_work_environment",
+  "agent_development_environment",
+  "agent_factory",
+  "learning_improvement_loop",
+  "observability_monitoring"
+]) {
+  if (!productFeatureSerialized.includes(requiredFeatureId)) {
+    failures.push(`product-feature-registry must include ${requiredFeatureId}`);
+  }
+}
+for (const requiredPrimaryId of productFeatureRegistry.product_position?.primary_feature_ids ?? []) {
+  const feature = productFeatureRegistry.feature_layers?.find((item) => item.id === requiredPrimaryId);
+  if (feature?.role !== "primary") {
+    failures.push(`product feature ${requiredPrimaryId} must be primary`);
+  }
+}
+const observabilityFeature = productFeatureRegistry.feature_layers?.find((item) => item.id === "observability_monitoring");
+if (observabilityFeature?.role !== "supporting") {
+  failures.push("observability_monitoring must be a supporting feature");
+}
 
 const userFlowRegistry = readJson("configs/user-flow-registry.json");
 const userFlowSerialized = JSON.stringify(userFlowRegistry);
@@ -302,13 +337,30 @@ if (!JSON.stringify(viewModeRegistry).includes("desktop")) {
 }
 
 const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
+const productFeaturePanel = readFileSync(
+  join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
+  "utf8"
+);
 const monitorCollector = readFileSync(join(root, "renderer/workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
+const productFeatureCollector = readFileSync(
+  join(root, "renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs"),
+  "utf8"
+);
 const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
 const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
 const serviceReadinessCheck = readFileSync(join(root, "scripts/check-service-readiness.mjs"), "utf8");
 for (const requiredPhrase of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
   if (!monitorCollector.includes(requiredPhrase)) {
     failures.push(`workspace-monitor collector must include customer snapshot token ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of [
+  "collectProductFeatureArchitecture",
+  "productFeatureArchitecture",
+  "sanitizeProductFeatureArchitectureForCustomer"
+]) {
+  if (!monitorCollector.includes(requiredPhrase) && !productFeatureCollector.includes(requiredPhrase)) {
+    failures.push(`workspace-monitor product feature collector must include ${requiredPhrase}`);
   }
 }
 for (const requiredPhrase of ["auditCustomerSnapshot", "scanCustomerDist", "customer_bundle_ready", "MAX_DIST_SCAN_FILES", "frontendDist"]) {
@@ -436,6 +488,18 @@ for (const requiredPhrase of [
 ]) {
   if (!monitorShell.includes(requiredPhrase)) {
     failures.push(`workspace-monitor MonitorShell must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of [
+  "ProductFeatureArchitecturePanel",
+  "Agent Orchestration",
+  "Agent Factory",
+  "Learning & Evaluation Loop",
+  "Observability is support",
+  "Agent Capability Platform"
+]) {
+  if (!monitorShell.includes(requiredPhrase) && !productFeaturePanel.includes(requiredPhrase)) {
+    failures.push(`workspace-monitor product feature panel must include ${requiredPhrase}`);
   }
 }
 

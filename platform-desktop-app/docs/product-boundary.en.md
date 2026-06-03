@@ -23,7 +23,9 @@
 
 ## First Product Assumption
 
-The first version should use `platform-desktop-app/renderer/workspace-monitor/` as the desktop shell's project-owned renderer instead of creating a separate UI. The platform's first user-facing value is browsing history, documents, project structure, and evaluations.
+The first version should use `platform-desktop-app/renderer/workspace-monitor/` as the desktop shell's project-owned renderer instead of creating a separate UI. However, the product identity is an agent capability platform, not a monitoring dashboard. The first screen and feature structure shall surface agent orchestration, the agent work environment, the agent development environment, the agent factory, and the learning/evaluation loop as primary features according to `platform-desktop-app/configs/product-feature-registry.json`.
+
+History, documents, project structure, evaluations, source inventory, and service readiness are supporting observability surfaces for trusting and improving the primary features. They must not replace the product's first promise or central navigation.
 
 Add desktop-specific UI or native behavior later when requirements are concrete:
 
@@ -45,3 +47,4 @@ Add desktop-specific UI or native behavior later when requirements are concrete:
 - Before installing Tauri or Electron, record dependency audit and installation-audit plans.
 - The installable app is not a single CLI wrapper. The platform launches first as the host runtime; external CLIs attach only as guest adapter capabilities registered in `agent-platform/configs/integrations/cli-adapter-registry.json`.
 - Follow `platform-desktop-app/configs/runtime-data-boundary-registry.json` for detailed code/data/log/agent workspace steering.
+- Follow `platform-desktop-app/configs/product-feature-registry.json` for primary/supporting feature roles, desktop home priority, and capability promotion loops.

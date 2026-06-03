@@ -22,6 +22,9 @@ export type WorkspaceStats = {
   intentFeatureNow?: number;
   intentFeatureNext?: number;
   intentFeatureLater?: number;
+  productFeatures?: number;
+  primaryProductFeatures?: number;
+  supportingProductFeatures?: number;
   structurePressurePoints?: number;
   sourceFiles?: number;
   rootFolders: number;
@@ -489,6 +492,53 @@ export type WorkspaceIntentFeatureMap = {
   sourceLimits: string[];
 };
 
+export type WorkspaceProductFeatureArchitecture = {
+  sourcePath: string;
+  productPosition: {
+    primaryProduct: string;
+    productClaim: string;
+    monitoringRole: string;
+  };
+  desktopHomeSurface: {
+    firstViewPriority: string[];
+    supportingSurfaces: string[];
+    homeCopyRule: string;
+    configurationRule: string;
+  };
+  summary: {
+    totalFeatures: number;
+    primaryFeatures: number;
+    supportingFeatures: number;
+    automationLoops: number;
+  };
+  featureLayers: Array<{
+    id: string;
+    label: string;
+    role: string;
+    status: string;
+    purpose: string;
+    userOutcome: string;
+    primarySection: string;
+    primarySurfaces: string[];
+    currentAssets: string[];
+    automationTargets: string[];
+    learningSignals: string[];
+    validationGates: string[];
+  }>;
+  promotionLoop: {
+    stages: string[];
+    recordTargets: string[];
+    improvementRule: string;
+    assetOrder: string[];
+  };
+  qualitySignals: string[];
+  validationGates: Array<{
+    id: string;
+    command: string;
+    validates: string;
+  }>;
+};
+
 export type WorkspaceSnapshot = {
   schemaVersion: string;
   generatedAt: string;
@@ -518,6 +568,7 @@ export type WorkspaceSnapshot = {
   claudeCodeDesignTransfer?: WorkspaceClaudeCodeDesignTransfer;
   philosophyFeatureExtraction?: WorkspacePhilosophyFeatureExtraction;
   intentFeatureMap?: WorkspaceIntentFeatureMap;
+  productFeatureArchitecture?: WorkspaceProductFeatureArchitecture;
   categories: string[];
   publicReview: {
     status: string;

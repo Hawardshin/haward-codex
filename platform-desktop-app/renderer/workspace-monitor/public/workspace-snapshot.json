@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-03T05:51:02.794Z",
+  "generatedAt": "2026-06-03T06:19:28.301Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -26,6 +26,9 @@
     "intentFeatureNow": 0,
     "intentFeatureNext": 0,
     "intentFeatureLater": 0,
+    "productFeatures": 6,
+    "primaryProductFeatures": 5,
+    "supportingProductFeatures": 1,
     "structurePressurePoints": 0,
     "sourceFiles": 0,
     "rootFolders": 0
@@ -131,6 +134,258 @@
       "later": []
     },
     "sourceLimits": []
+  },
+  "productFeatureArchitecture": {
+    "sourcePath": "",
+    "productPosition": {
+      "primaryProduct": "agent_capability_platform",
+      "productClaim": "A desktop platform for orchestrating agents, giving them a real work and development environment, making agents easier to create, and improving them through accumulated task, decision, evidence, validation, and evaluation data.",
+      "monitoringRole": "supporting_observability"
+    },
+    "desktopHomeSurface": {
+      "firstViewPriority": [
+        "agent_orchestration",
+        "agent_work_environment",
+        "agent_development_environment",
+        "agent_factory",
+        "learning_improvement_loop"
+      ],
+      "supportingSurfaces": [
+        "observability_monitoring"
+      ],
+      "homeCopyRule": "The first screen should explain what the user can make agents do, create, and improve; observability appears as a support signal, not the headline.",
+      "configurationRule": "Settings, setup, optional CLI configuration, and editor preferences belong to dedicated settings or capability surfaces rather than the top of the home view."
+    },
+    "summary": {
+      "totalFeatures": 6,
+      "primaryFeatures": 5,
+      "supportingFeatures": 1,
+      "automationLoops": 1
+    },
+    "featureLayers": [
+      {
+        "id": "agent_orchestration",
+        "label": "Agent Orchestration",
+        "role": "primary",
+        "status": "implemented_slice",
+        "purpose": "Coordinate multiple agent or CLI lanes as a supervised task graph with bounded IO, decision routing, merge gates, and cleanup.",
+        "userOutcome": "The user starts one task and the platform coordinates specialized lanes, pauses only dependent decisions, and keeps independent work moving.",
+        "primarySection": "desktop",
+        "primarySurfaces": [
+          "Desktop Runtime",
+          "Run Board",
+          "Task Pipe",
+          "Process Graph",
+          "Decision Inbox"
+        ],
+        "currentAssets": [],
+        "automationTargets": [
+          "task intake to multi-lane plan",
+          "bounded stdout and stderr capture",
+          "human decision defer and resume",
+          "merge gate artifact synthesis",
+          "resource cleanup"
+        ],
+        "learningSignals": [
+          "blocked lane count",
+          "decision replay count",
+          "merge gate outcomes",
+          "task-run records",
+          "resource cleanup results"
+        ],
+        "validationGates": []
+      },
+      {
+        "id": "agent_work_environment",
+        "label": "Agent Work Environment",
+        "role": "primary",
+        "status": "implemented_slice",
+        "purpose": "Host app-selected workspaces, runtime data stores, task-run records, decisions, support diagnostics, and agent work planes.",
+        "userOutcome": "The user no longer has to manually clone and work from a terminal-first folder; the app owns workspace selection and accumulated data access.",
+        "primarySection": "desktop",
+        "primarySurfaces": [
+          "Workspace Host",
+          "Accumulated Data",
+          "Runtime Data & Support",
+          "Task Run Store"
+        ],
+        "currentAssets": [],
+        "automationTargets": [
+          "workspace import",
+          "repository clone",
+          "workspace state persistence",
+          "data store indexing",
+          "support bundle export"
+        ],
+        "learningSignals": [
+          "task-run count",
+          "decision count",
+          "payload audit count",
+          "support diagnostic count",
+          "agent workspace size"
+        ],
+        "validationGates": []
+      },
+      {
+        "id": "agent_development_environment",
+        "label": "Agent Development Environment",
+        "role": "primary",
+        "status": "implemented_slice",
+        "purpose": "Provide the developer workbench for source review, multi-file edits, diffs, templates, requirements, specs, validation, and runtime contracts.",
+        "userOutcome": "The user can shape agent platform behavior inside a desktop workbench instead of bouncing between loose files and terminal-only flows.",
+        "primarySection": "source",
+        "primarySurfaces": [
+          "Source Review",
+          "Diff Review",
+          "Requirements",
+          "Specs",
+          "Validation Records",
+          "Editor Settings"
+        ],
+        "currentAssets": [],
+        "automationTargets": [
+          "scoped workspace file index",
+          "draft queue",
+          "save with backup",
+          "template insertion",
+          "validation handoff"
+        ],
+        "learningSignals": [
+          "dirty draft count",
+          "diff summary",
+          "saved backup path",
+          "requirement trace completeness",
+          "validation command results"
+        ],
+        "validationGates": []
+      },
+      {
+        "id": "agent_factory",
+        "label": "Agent Factory",
+        "role": "primary",
+        "status": "planned_surface_with_existing_sources",
+        "purpose": "Turn repeated work into prompts, workflows, templates, tools, skills, agents, and finally platform features with traceable decisions.",
+        "userOutcome": "The user can create agents and reusable capabilities without repeatedly telling the assistant the same process.",
+        "primarySection": "agents",
+        "primarySurfaces": [
+          "Agents",
+          "Capability Center",
+          "Philosophy Feature Factory",
+          "Mode & Function Switchboard",
+          "Evidence / Promotion"
+        ],
+        "currentAssets": [],
+        "automationTargets": [
+          "capability candidate intake",
+          "smallest asset selection",
+          "skill validation",
+          "agent definition creation",
+          "feature promotion trace"
+        ],
+        "learningSignals": [
+          "candidate backlog",
+          "implemented candidates",
+          "skill activation readiness",
+          "agent definition count",
+          "promotion evaluation"
+        ],
+        "validationGates": []
+      },
+      {
+        "id": "learning_improvement_loop",
+        "label": "Learning & Evaluation Loop",
+        "role": "primary",
+        "status": "implemented_slice",
+        "purpose": "Accumulate work history, timing, evaluations, web searches, intent maps, evidence, and improvement records so platform behavior gets better over time.",
+        "userOutcome": "The user can see why the platform improved, what evidence drove changes, and which gaps remain.",
+        "primarySection": "intent",
+        "primarySurfaces": [
+          "Intent Map",
+          "Learning History",
+          "Evaluations",
+          "Work Timings",
+          "Evidence Trail"
+        ],
+        "currentAssets": [],
+        "automationTargets": [
+          "user request structuring",
+          "intent to feature map",
+          "evaluation record generation",
+          "bottleneck detection",
+          "next improvement selection"
+        ],
+        "learningSignals": [
+          "intent themes",
+          "Now/Next/Later roadmap counts",
+          "evaluation pass rate",
+          "timing bottlenecks",
+          "omission check results"
+        ],
+        "validationGates": []
+      },
+      {
+        "id": "observability_monitoring",
+        "label": "Observability & Monitoring",
+        "role": "supporting",
+        "status": "implemented_slice",
+        "purpose": "Expose structure, history, documents, source inventory, diagnostics, and status so the primary agent platform features can be understood and trusted.",
+        "userOutcome": "The user can inspect accumulated data and platform state without mistaking that inspection layer for the whole product.",
+        "primarySection": "structure",
+        "primarySurfaces": [
+          "Structure",
+          "Documents",
+          "History",
+          "Source Catalog",
+          "Service Readiness"
+        ],
+        "currentAssets": [],
+        "automationTargets": [
+          "snapshot collection",
+          "customer snapshot sanitization",
+          "service readiness reporting",
+          "bundle audit",
+          "source hotspot detection"
+        ],
+        "learningSignals": [
+          "snapshot schema counts",
+          "service blockers",
+          "source hotspot count",
+          "document and evaluation counts",
+          "customer bundle audit status"
+        ],
+        "validationGates": []
+      }
+    ],
+    "promotionLoop": {
+      "stages": [
+        "observe_repetition_or_gap",
+        "structure_input_and_provenance",
+        "compare_asset_options",
+        "select_smallest_useful_asset",
+        "implement_with_validation",
+        "record_evaluation_and_trace",
+        "surface_in_agent_factory_when_reusable"
+      ],
+      "recordTargets": [],
+      "improvementRule": "When repeated human work, agent failures, omitted steps, validation failures, or useful patterns recur, create the smallest durable asset first and promote only when evidence justifies a larger feature.",
+      "assetOrder": [
+        "prompt",
+        "workflow",
+        "template",
+        "tool",
+        "skill",
+        "agent",
+        "project_feature"
+      ]
+    },
+    "qualitySignals": [
+      "The first screen names primary agent platform features before observability.",
+      "Snapshot data includes product feature architecture for developer and customer builds.",
+      "Customer snapshot preserves sellable feature structure but removes internal source paths and validation internals.",
+      "Readiness tests fail if monitoring is positioned as the primary product.",
+      "New feature work updates requirements, specs, validation, history, and request traces."
+    ],
+    "validationGates": []
   },
   "categories": [],
   "publicReview": {

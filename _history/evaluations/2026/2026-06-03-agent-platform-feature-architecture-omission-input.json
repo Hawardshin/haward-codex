@@ -1,0 +1,152 @@
+{
+  "task": "Agent platform feature architecture",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and implementation.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-03-agent-platform-feature-architecture.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "feature-registry",
+      "description": "Create a source of truth that turns the current pieces into product feature layers.",
+      "source": "UR-2026-06-03-035",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/product-feature-registry.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "monitoring-supporting",
+      "description": "Make monitoring supporting observability rather than the main product.",
+      "source": "UR-2026-06-03-035",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "product_position.monitoring_role=supporting_observability",
+        "observability_monitoring role=supporting",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "primary-agent-platform-features",
+      "description": "Expose agent orchestration, agent work environment, development environment, agent factory, and learning/evaluation loop as primary features.",
+      "source": "UR-2026-06-03-035",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/product-feature-registry.json",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "data-structure",
+      "description": "Change the data structure so the feature architecture is part of workspace snapshots.",
+      "source": "UR-2026-06-03-035",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+        "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "actual-ui",
+      "description": "Implement the feature architecture in the desktop UI rather than only documenting it.",
+      "source": "UR-2026-06-03-035",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "customer-boundary",
+      "description": "Keep product feature structure in the customer snapshot while stripping internal source and validation internals.",
+      "source": "PDA-REQ-035",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "sanitizeProductFeatureArchitectureForCustomer",
+        "corepack pnpm --filter workspace-monitor run build:customer"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/specs/2026-06-03-agent-platform-feature-architecture/spec.ko.md",
+      "purpose": "Spec for the feature architecture change.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+      "purpose": "Requirement PDA-REQ-035.",
+      "required": true
+    },
+    {
+      "path": "_history/request-traces/2026/2026-06-03-agent-platform-feature-architecture.ko.md",
+      "purpose": "Request-to-outcome trace.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor",
+      "description": "Workspace Monitor typecheck, tests, customer build, and perf budget pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter workspace-monitor run check",
+        "corepack pnpm --filter workspace-monitor test",
+        "corepack pnpm --filter workspace-monitor run build:customer",
+        "corepack pnpm --filter workspace-monitor run perf:budget"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "desktop-readiness",
+      "description": "Desktop tests and readiness checks validate the feature registry and UI tokens.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter platform-desktop-app test",
+        "corepack pnpm --filter platform-desktop-app run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "config-contract",
+      "description": "Product and desktop distribution registries remain self-documenting configs.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract product-feature-registry",
+        "check-config-contract desktop-distribution-registry"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Agent Factory wizard and automatic learning feedback implementation are next slices, not fully implemented in this feature architecture pass.",
+    "The renderer package name remains workspace-monitor for compatibility even though product positioning changed."
+  ],
+  "notes": [
+    "This change makes current pieces explicit product features and adds tests that fail if monitoring becomes the primary product again."
+  ]
+}

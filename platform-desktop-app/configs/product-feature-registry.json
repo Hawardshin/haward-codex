@@ -1,0 +1,522 @@
+{
+  "schema_version": "2026-06-03",
+  "name": "product-feature-registry",
+  "purpose": "Defines the installable desktop product as an agent capability platform whose primary value is orchestration, agent work, development, creation, and continuous improvement. Monitoring is only a supporting observability layer.",
+  "reader_guide": {
+    "summary": "Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.",
+    "how_to_read": [
+      "Read product_position first to understand what the product is and what it is not.",
+      "Read feature_layers to see which capabilities are primary product features and which capabilities are supporting surfaces.",
+      "Read promotion_loop before adding workflow, prompt, tool, skill, or agent creation features.",
+      "Read structure_rules before naming a feature, tab, data store, or installer shell behavior as monitoring.",
+      "Use validation_gates as the acceptance checklist when making a UI, data, or runtime change around these features."
+    ],
+    "owner": "platform-desktop-app",
+    "last_reviewed": "2026-06-03",
+    "update_triggers": [
+      "The desktop home screen or first-run product promise changes.",
+      "A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.",
+      "A new agent orchestration, workbench, development, factory, learning, or observability capability is added.",
+      "Monitoring starts to look like the main product again instead of a support layer.",
+      "The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "openai_agents_sdk",
+      "title": "OpenAI Agents SDK",
+      "url": "https://openai.github.io/openai-agents-python/",
+      "source_type": "official_docs",
+      "used_for": [
+        "agent loop, tools, guardrails, handoffs, sessions, and tracing as product-level agent platform primitives",
+        "workspace and resumable multi-step execution as desktop product capabilities"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "openai_agents_tracing",
+      "title": "OpenAI Agents SDK Tracing",
+      "url": "https://openai.github.io/openai-agents-python/tracing/",
+      "source_type": "official_docs",
+      "used_for": [
+        "treating traces and monitoring as debugging, evaluation, and improvement support rather than the whole product"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "autogen_docs",
+      "title": "Microsoft AutoGen",
+      "url": "https://microsoft.github.io/autogen/stable/",
+      "source_type": "official_docs",
+      "used_for": [
+        "multi-agent applications, event-driven multi-agent systems, and no-code prototyping surfaces as platform references"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "langgraph_multi_agent",
+      "title": "LangGraph Multi-agent Patterns",
+      "url": "https://langchain-ai.github.io/langgraph/tutorials/multi_agent/multi-agent-collaboration/",
+      "source_type": "official_docs",
+      "used_for": [
+        "subagents, handoffs, skills, routers, custom workflows, context management, and parallel execution trade-offs"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "crewai_docs",
+      "title": "CrewAI Documentation",
+      "url": "https://docs.crewai.com/",
+      "source_type": "official_docs",
+      "used_for": [
+        "crew-style agent orchestration, flow, knowledge, and task abstractions as product reference points"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "installer_shell_runtime_contract",
+      "title": "Installer Shell Runtime Contract",
+      "path": "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+      "source_type": "internal",
+      "used_for": [
+        "installed shell boot sequence",
+        "runtime enforcement gates",
+        "structured data accumulation targets"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
+      "id": "cli_adapter_registry",
+      "title": "CLI Adapter Registry",
+      "path": "agent-platform/configs/integrations/cli-adapter-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "guest adapter lane model",
+        "optional external AI CLI orchestration",
+        "capability_missing fallback behavior"
+      ],
+      "last_checked": "2026-06-03"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "agent_capability_platform_is_primary",
+      "rule": "The desktop product shall be positioned as an agent capability platform, not as a monitoring dashboard.",
+      "reason": "The user explicitly rejected a UI that keeps behaving like a web monitor or PoC.",
+      "applies_to": [
+        "product_position",
+        "feature_layers",
+        "desktop_home_surface",
+        "customer_snapshot"
+      ]
+    },
+    {
+      "id": "current_pieces_become_features",
+      "rule": "Existing shell, source review, runtime data, decision inbox, history, requirements, and monitoring pieces shall be surfaced as named product features with a clear primary or supporting role.",
+      "reason": "The product should stop scattering surfaces as implementation leftovers and should expose them as sellable feature modules.",
+      "applies_to": [
+        "feature_layers",
+        "promotion_loop",
+        "validation_gates"
+      ]
+    },
+    {
+      "id": "monitoring_is_supporting_observability",
+      "rule": "Monitoring, history browsing, structure browsing, source browsing, and diagnostic views shall support orchestration, workbench, development, factory, and learning features; they shall not become the product's main promise.",
+      "reason": "The user said monitoring is not the main function and current UI choices were blocking correct product decisions.",
+      "applies_to": [
+        "product_position",
+        "observability_monitoring",
+        "desktop_home_surface"
+      ]
+    },
+    {
+      "id": "creation_and_learning_are_product_loops",
+      "rule": "Agent creation, capability promotion, evaluation, work history, and improvement records shall be designed as a continuous product loop, not as static documentation.",
+      "reason": "The product must make agents easier to create and continuously improve through accumulated data.",
+      "applies_to": [
+        "agent_factory",
+        "learning_improvement_loop",
+        "promotion_loop"
+      ]
+    },
+    {
+      "id": "config_belongs_to_dedicated_surfaces",
+      "rule": "Configuration and setup should be handled through dedicated settings, capability, or modal surfaces instead of being spread across one dashboard screen.",
+      "reason": "A desktop app should separate work execution, configuration, and review surfaces like mature desktop tools do.",
+      "applies_to": [
+        "desktop_home_surface",
+        "agent_development_environment",
+        "observability_monitoring"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "product_position",
+      "meaning": "The high-level product identity and the explicit role of monitoring.",
+      "required": true
+    },
+    {
+      "field": "feature_layers",
+      "meaning": "Sellable capability layers with role, purpose, user outcome, surfaces, assets, automation targets, learning signals, and validation gates.",
+      "required": true
+    },
+    {
+      "field": "desktop_home_surface",
+      "meaning": "Rules for what the first visible screen should emphasize.",
+      "required": true
+    },
+    {
+      "field": "promotion_loop",
+      "meaning": "How repeated work and accumulated data become prompts, workflows, templates, tools, skills, agents, or platform features.",
+      "required": true
+    },
+    {
+      "field": "quality_signals",
+      "meaning": "Observable signals proving the platform is improving instead of only showing status.",
+      "required": true
+    }
+  ],
+  "product_position": {
+    "primary_product": "agent_capability_platform",
+    "primary_claim": "A desktop platform for orchestrating agents, giving them a real work and development environment, making agents easier to create, and improving them through accumulated task, decision, evidence, validation, and evaluation data.",
+    "monitoring_role": "supporting_observability",
+    "not_primary_claims": [
+      "workspace monitoring dashboard",
+      "static repository browser",
+      "PoC validation surface",
+      "single external CLI wrapper"
+    ],
+    "primary_feature_ids": [
+      "agent_orchestration",
+      "agent_work_environment",
+      "agent_development_environment",
+      "agent_factory",
+      "learning_improvement_loop"
+    ],
+    "supporting_feature_ids": [
+      "observability_monitoring"
+    ]
+  },
+  "desktop_home_surface": {
+    "first_view_priority": [
+      "agent_orchestration",
+      "agent_work_environment",
+      "agent_development_environment",
+      "agent_factory",
+      "learning_improvement_loop"
+    ],
+    "supporting_surfaces": [
+      "observability_monitoring"
+    ],
+    "home_copy_rule": "The first screen should explain what the user can make agents do, create, and improve; observability appears as a support signal, not the headline.",
+    "configuration_rule": "Settings, setup, optional CLI configuration, and editor preferences belong to dedicated settings or capability surfaces rather than the top of the home view."
+  },
+  "feature_layers": [
+    {
+      "id": "agent_orchestration",
+      "label": "Agent Orchestration",
+      "role": "primary",
+      "status": "implemented_slice",
+      "purpose": "Coordinate multiple agent or CLI lanes as a supervised task graph with bounded IO, decision routing, merge gates, and cleanup.",
+      "user_outcome": "The user starts one task and the platform coordinates specialized lanes, pauses only dependent decisions, and keeps independent work moving.",
+      "primary_section": "desktop",
+      "primary_surfaces": [
+        "Desktop Runtime",
+        "Run Board",
+        "Task Pipe",
+        "Process Graph",
+        "Decision Inbox"
+      ],
+      "current_assets": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "agent-platform/configs/integrations/cli-adapter-registry.json",
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "automation_targets": [
+        "task intake to multi-lane plan",
+        "bounded stdout and stderr capture",
+        "human decision defer and resume",
+        "merge gate artifact synthesis",
+        "resource cleanup"
+      ],
+      "learning_signals": [
+        "blocked lane count",
+        "decision replay count",
+        "merge gate outcomes",
+        "task-run records",
+        "resource cleanup results"
+      ],
+      "validation_gates": [
+        "readiness test includes product feature architecture",
+        "resource guard covers long-running lanes",
+        "customer snapshot preserves feature claims without internal source"
+      ]
+    },
+    {
+      "id": "agent_work_environment",
+      "label": "Agent Work Environment",
+      "role": "primary",
+      "status": "implemented_slice",
+      "purpose": "Host app-selected workspaces, runtime data stores, task-run records, decisions, support diagnostics, and agent work planes.",
+      "user_outcome": "The user no longer has to manually clone and work from a terminal-first folder; the app owns workspace selection and accumulated data access.",
+      "primary_section": "desktop",
+      "primary_surfaces": [
+        "Workspace Host",
+        "Accumulated Data",
+        "Runtime Data & Support",
+        "Task Run Store"
+      ],
+      "current_assets": [
+        "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "automation_targets": [
+        "workspace import",
+        "repository clone",
+        "workspace state persistence",
+        "data store indexing",
+        "support bundle export"
+      ],
+      "learning_signals": [
+        "task-run count",
+        "decision count",
+        "payload audit count",
+        "support diagnostic count",
+        "agent workspace size"
+      ],
+      "validation_gates": [
+        "workspace boundary commands reject unsafe paths",
+        "accumulated data manifest is persisted",
+        "customer bundle excludes platform source"
+      ]
+    },
+    {
+      "id": "agent_development_environment",
+      "label": "Agent Development Environment",
+      "role": "primary",
+      "status": "implemented_slice",
+      "purpose": "Provide the developer workbench for source review, multi-file edits, diffs, templates, requirements, specs, validation, and runtime contracts.",
+      "user_outcome": "The user can shape agent platform behavior inside a desktop workbench instead of bouncing between loose files and terminal-only flows.",
+      "primary_section": "source",
+      "primary_surfaces": [
+        "Source Review",
+        "Diff Review",
+        "Requirements",
+        "Specs",
+        "Validation Records",
+        "Editor Settings"
+      ],
+      "current_assets": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md"
+      ],
+      "automation_targets": [
+        "scoped workspace file index",
+        "draft queue",
+        "save with backup",
+        "template insertion",
+        "validation handoff"
+      ],
+      "learning_signals": [
+        "dirty draft count",
+        "diff summary",
+        "saved backup path",
+        "requirement trace completeness",
+        "validation command results"
+      ],
+      "validation_gates": [
+        "Monaco code workbench is not only an embed",
+        "file writes stay within workspace root",
+        "requirements and specs trace product feature changes"
+      ]
+    },
+    {
+      "id": "agent_factory",
+      "label": "Agent Factory",
+      "role": "primary",
+      "status": "planned_surface_with_existing_sources",
+      "purpose": "Turn repeated work into prompts, workflows, templates, tools, skills, agents, and finally platform features with traceable decisions.",
+      "user_outcome": "The user can create agents and reusable capabilities without repeatedly telling the assistant the same process.",
+      "primary_section": "agents",
+      "primary_surfaces": [
+        "Agents",
+        "Capability Center",
+        "Philosophy Feature Factory",
+        "Mode & Function Switchboard",
+        "Evidence / Promotion"
+      ],
+      "current_assets": [
+        "agent-platform/configs/orchestration/capability-promotion-registry.json",
+        "agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json",
+        "agent-platform/configs/agents/",
+        "_skills/"
+      ],
+      "automation_targets": [
+        "capability candidate intake",
+        "smallest asset selection",
+        "skill validation",
+        "agent definition creation",
+        "feature promotion trace"
+      ],
+      "learning_signals": [
+        "candidate backlog",
+        "implemented candidates",
+        "skill activation readiness",
+        "agent definition count",
+        "promotion evaluation"
+      ],
+      "validation_gates": [
+        "candidate has source evidence and rollback plan",
+        "skill or agent validation passes",
+        "promotion selects the smallest useful asset first"
+      ]
+    },
+    {
+      "id": "learning_improvement_loop",
+      "label": "Learning & Evaluation Loop",
+      "role": "primary",
+      "status": "implemented_slice",
+      "purpose": "Accumulate work history, timing, evaluations, web searches, intent maps, evidence, and improvement records so platform behavior gets better over time.",
+      "user_outcome": "The user can see why the platform improved, what evidence drove changes, and which gaps remain.",
+      "primary_section": "intent",
+      "primary_surfaces": [
+        "Intent Map",
+        "Learning History",
+        "Evaluations",
+        "Work Timings",
+        "Evidence Trail"
+      ],
+      "current_assets": [
+        "_history/intent-feature-maps/",
+        "_history/evaluations/",
+        "_history/work-timings/",
+        "_history/web-searches/",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/intent-feature-map.mjs"
+      ],
+      "automation_targets": [
+        "user request structuring",
+        "intent to feature map",
+        "evaluation record generation",
+        "bottleneck detection",
+        "next improvement selection"
+      ],
+      "learning_signals": [
+        "intent themes",
+        "Now/Next/Later roadmap counts",
+        "evaluation pass rate",
+        "timing bottlenecks",
+        "omission check results"
+      ],
+      "validation_gates": [
+        "intent maps show source freshness",
+        "evaluations cite validation outcomes",
+        "new product work creates request trace and work summary"
+      ]
+    },
+    {
+      "id": "observability_monitoring",
+      "label": "Observability & Monitoring",
+      "role": "supporting",
+      "status": "implemented_slice",
+      "purpose": "Expose structure, history, documents, source inventory, diagnostics, and status so the primary agent platform features can be understood and trusted.",
+      "user_outcome": "The user can inspect accumulated data and platform state without mistaking that inspection layer for the whole product.",
+      "primary_section": "structure",
+      "primary_surfaces": [
+        "Structure",
+        "Documents",
+        "History",
+        "Source Catalog",
+        "Service Readiness"
+      ],
+      "current_assets": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+        "platform-desktop-app/configs/service-readiness-registry.json"
+      ],
+      "automation_targets": [
+        "snapshot collection",
+        "customer snapshot sanitization",
+        "service readiness reporting",
+        "bundle audit",
+        "source hotspot detection"
+      ],
+      "learning_signals": [
+        "snapshot schema counts",
+        "service blockers",
+        "source hotspot count",
+        "document and evaluation counts",
+        "customer bundle audit status"
+      ],
+      "validation_gates": [
+        "observability role remains supporting",
+        "customer snapshot removes internal source",
+        "readiness scripts check supporting role"
+      ]
+    }
+  ],
+  "promotion_loop": {
+    "improvement_rule": "When repeated human work, agent failures, omitted steps, validation failures, or useful patterns recur, create the smallest durable asset first and promote only when evidence justifies a larger feature.",
+    "stages": [
+      "observe_repetition_or_gap",
+      "structure_input_and_provenance",
+      "compare_asset_options",
+      "select_smallest_useful_asset",
+      "implement_with_validation",
+      "record_evaluation_and_trace",
+      "surface_in_agent_factory_when_reusable"
+    ],
+    "record_targets": [
+      "_history/user-requests/",
+      "_history/request-traces/",
+      "_history/evaluations/",
+      "_history/work-summaries/",
+      "agent-platform/configs/orchestration/capability-promotion-registry.json",
+      "agent-platform/configs/agents/",
+      "_skills/"
+    ],
+    "asset_order": [
+      "prompt",
+      "workflow",
+      "template",
+      "tool",
+      "skill",
+      "agent",
+      "project_feature"
+    ]
+  },
+  "quality_signals": [
+    "The first screen names primary agent platform features before observability.",
+    "Snapshot data includes product feature architecture for developer and customer builds.",
+    "Customer snapshot preserves sellable feature structure but removes internal source paths and validation internals.",
+    "Readiness tests fail if monitoring is positioned as the primary product.",
+    "New feature work updates requirements, specs, validation, history, and request traces."
+  ],
+  "validation_gates": [
+    {
+      "id": "product_identity_gate",
+      "command": "corepack pnpm --filter platform-desktop-app test",
+      "validates": "Product feature registry keeps agent capability platform as the primary product and monitoring as supporting observability."
+    },
+    {
+      "id": "renderer_contract_gate",
+      "command": "corepack pnpm --filter workspace-monitor test",
+      "validates": "Workspace snapshot collector exposes product feature architecture and customer snapshot sanitization."
+    },
+    {
+      "id": "customer_bundle_gate",
+      "command": "corepack pnpm --filter workspace-monitor run build:customer",
+      "validates": "Customer bundle keeps product feature structure while stripping internal documents, source files, and implementation-only paths."
+    },
+    {
+      "id": "config_contract_gate",
+      "command": "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json",
+      "validates": "Registry remains self-documenting and machine-checkable."
+    }
+  ]
+}

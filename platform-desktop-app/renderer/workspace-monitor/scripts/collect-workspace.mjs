@@ -2,6 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { collectIntentFeatureMap, emptyIntentFeatureMap } from "./lib/intent-feature-map.mjs";
+import {
+  collectProductFeatureArchitecture,
+  emptyProductFeatureArchitecture,
+  sanitizeProductFeatureArchitectureForCustomer
+} from "./lib/product-feature-architecture.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
@@ -92,7 +97,7 @@ const DOCUMENT_FILES = [
   { category: "runtime-adapter", file: "CLAUDE.md" }
 ];
 
-export { collectIntentFeatureMap };
+export { collectIntentFeatureMap, collectProductFeatureArchitecture };
 
 export function main(argv = process.argv.slice(2)) {
   const options = parseArgs(argv);
@@ -128,6 +133,7 @@ export function buildSnapshot(repoRoot) {
   const claudeCodeDesignTransfer = collectClaudeCodeDesignTransfer(repoRoot);
   const philosophyFeatureExtraction = collectPhilosophyFeatureExtraction(repoRoot);
   const intentFeatureMap = collectIntentFeatureMap(repoRoot);
+  const productFeatureArchitecture = collectProductFeatureArchitecture(repoRoot);
   const sourceFiles = collectSourceFiles(repoRoot, projects);
   const folderStructure = buildFolderStructure(repoRoot, projects, documents);
   const structureOverview = buildStructureOverview(repoRoot, projects, documents, folderStructure, sourceFiles);
@@ -172,6 +178,9 @@ export function buildSnapshot(repoRoot) {
       intentFeatureNow: intentFeatureMap.summary.now,
       intentFeatureNext: intentFeatureMap.summary.next,
       intentFeatureLater: intentFeatureMap.summary.later,
+      productFeatures: productFeatureArchitecture.summary.totalFeatures,
+      primaryProductFeatures: productFeatureArchitecture.summary.primaryFeatures,
+      supportingProductFeatures: productFeatureArchitecture.summary.supportingFeatures,
       structurePressurePoints: structureOverview.summary.totalPressurePoints,
       sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
@@ -194,6 +203,7 @@ export function buildSnapshot(repoRoot) {
     claudeCodeDesignTransfer,
     philosophyFeatureExtraction,
     intentFeatureMap,
+    productFeatureArchitecture,
     categories,
     publicReview: {
       status: "review_required_before_public_deploy",
@@ -236,6 +246,9 @@ export function buildCustomerSnapshot(snapshot) {
       intentFeatureNow: 0,
       intentFeatureNext: 0,
       intentFeatureLater: 0,
+      productFeatures: snapshot.productFeatureArchitecture?.summary.totalFeatures ?? 0,
+      primaryProductFeatures: snapshot.productFeatureArchitecture?.summary.primaryFeatures ?? 0,
+      supportingProductFeatures: snapshot.productFeatureArchitecture?.summary.supportingFeatures ?? 0,
       structurePressurePoints: 0,
       sourceFiles: 0,
       rootFolders: 0
@@ -312,6 +325,9 @@ export function buildCustomerSnapshot(snapshot) {
       candidates: []
     },
     intentFeatureMap: emptyIntentFeatureMap(),
+    productFeatureArchitecture: sanitizeProductFeatureArchitectureForCustomer(
+      snapshot.productFeatureArchitecture || emptyProductFeatureArchitecture()
+    ),
     categories: [],
     publicReview: {
       status: "customer_snapshot_sanitized",

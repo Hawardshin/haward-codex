@@ -23,7 +23,9 @@
 
 ## 첫 제품 가정
 
-첫 버전은 새 UI를 따로 만들기보다 `platform-desktop-app/renderer/workspace-monitor/`를 데스크톱 shell의 project-owned renderer로 사용한다. 이유는 현재 플랫폼의 사용자 경험이 히스토리, 문서, 프로젝트 구조, 평가를 보는 것에서 시작하기 때문이다.
+첫 버전은 새 UI를 따로 만들기보다 `platform-desktop-app/renderer/workspace-monitor/`를 데스크톱 shell의 project-owned renderer로 사용한다. 단, 제품 정체성은 모니터링 대시보드가 아니라 에이전트 역량 플랫폼이다. 첫 화면과 기능 구조는 `platform-desktop-app/configs/product-feature-registry.json`에 정의된 agent orchestration, agent work environment, agent development environment, agent factory, learning/evaluation loop를 primary로 드러내야 한다.
+
+히스토리, 문서, 프로젝트 구조, 평가, source inventory, service readiness 같은 화면은 primary 기능을 신뢰하고 개선하기 위한 supporting observability다. 이 표면들이 제품의 첫 약속이나 중심 네비게이션을 대체하면 안 된다.
 
 이후 다음 요구가 확실해지면 별도 데스크톱 UI 또는 native 기능을 추가한다.
 
@@ -45,3 +47,4 @@
 - Tauri/Electron 중 하나를 설치하기 전에는 dependency audit와 설치 감사 계획을 먼저 남긴다.
 - 설치형 앱은 특정 CLI wrapper가 아니다. 플랫폼이 먼저 실행되는 host runtime이며, 외부 CLI는 `agent-platform/configs/integrations/cli-adapter-registry.json`에 등록된 guest adapter capability로만 붙인다.
 - 코드/데이터/로그/에이전트 작업영역의 세부 steering은 `platform-desktop-app/configs/runtime-data-boundary-registry.json`을 따른다.
+- 제품 기능의 primary/supporting 역할, desktop home 우선순위, capability promotion loop는 `platform-desktop-app/configs/product-feature-registry.json`을 따른다.

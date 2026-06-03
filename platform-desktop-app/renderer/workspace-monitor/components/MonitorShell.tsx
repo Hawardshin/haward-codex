@@ -36,6 +36,7 @@ import dynamic from "next/dynamic";
 import type { editor } from "monaco-editor";
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 
+import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFeatureArchitecturePanel";
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot, type WorkspaceSourceFile } from "@/lib/snapshot";
 
 type SectionId =
@@ -293,58 +294,58 @@ const featureGroups: Array<{
 }> = [
   {
     id: "core",
-    label: "핵심 실행",
-    purpose: "상태, 런타임, 의도, 에이전트"
+    label: "Agent Platform",
+    purpose: "오케스트레이션, 작업환경, 개발환경, 에이전트 생성"
   },
   {
     id: "workspace",
-    label: "작업공간",
-    purpose: "프로젝트, 구조, 소스"
+    label: "Agent Workbench",
+    purpose: "워크스페이스, 코드, 요구사항"
   },
   {
     id: "knowledge",
-    label: "근거와 지식",
-    purpose: "히스토리, 문서, 요구사항"
+    label: "Learning Loop",
+    purpose: "의도, 히스토리, 평가, 근거"
   },
   {
     id: "governance",
-    label: "운영 관리",
-    purpose: "정책과 실행 상태"
+    label: "Observability",
+    purpose: "구조, 문서, readiness"
   }
 ];
 
 const sections: Section[] = [
   {
     id: "overview",
-    label: "Overview",
-    shortLabel: "Overview",
+    label: "Platform",
+    shortLabel: "Platform",
     icon: Activity,
     group: "core",
-    purpose: "현재 상태, 다음 행동, 근거를 한 화면에서 확인합니다."
+    purpose: "제품 기능 구조와 다음 실행을 확인합니다."
   },
   {
     id: "desktop",
-    label: "Desktop",
-    shortLabel: "Runtime",
+    label: "Orchestration",
+    shortLabel: "Run",
     icon: Network,
     group: "core",
-    purpose: "로컬 실행, 세션, 데스크톱 제품화 상태를 봅니다."
+    purpose: "에이전트와 optional CLI lane을 조율합니다."
   },
   {
     id: "intent",
-    label: "Intent Map",
-    shortLabel: "Intent",
+    label: "Learning Map",
+    shortLabel: "Learn",
     icon: GitBranch,
-    group: "core",
-    purpose: "사용자 의도에서 기능 후보와 로드맵을 뽑습니다."
+    group: "knowledge",
+    purpose: "사용자 의도에서 기능 후보와 개선 루프를 뽑습니다."
   },
   {
     id: "agents",
-    label: "Agents",
-    shortLabel: "Agents",
+    label: "Agent Factory",
+    shortLabel: "Factory",
     icon: Bot,
     group: "core",
-    purpose: "에이전트, 작업 lane, blocker, handoff를 관리합니다."
+    purpose: "에이전트, 기능 후보, 작업 lane, handoff를 관리합니다."
   },
   {
     id: "projects",
@@ -359,8 +360,8 @@ const sections: Section[] = [
     label: "Structure",
     shortLabel: "Structure",
     icon: Layers,
-    group: "workspace",
-    purpose: "플랫폼 계층, 경계 규칙, 복잡도 압력을 봅니다."
+    group: "governance",
+    purpose: "플랫폼 계층, 경계 규칙, 복잡도 압력을 관측합니다."
   },
   {
     id: "source",
@@ -372,18 +373,18 @@ const sections: Section[] = [
   },
   {
     id: "history",
-    label: "History",
+    label: "Learning History",
     shortLabel: "History",
     icon: History,
     group: "knowledge",
-    purpose: "날짜별 작업 기록과 운영 stream을 추적합니다."
+    purpose: "날짜별 작업 기록과 개선 evidence를 추적합니다."
   },
   {
     id: "documents",
     label: "Documents",
     shortLabel: "Docs",
     icon: BookOpenText,
-    group: "knowledge",
+    group: "governance",
     purpose: "문서, 검색 기록, 평가 근거를 탐색합니다."
   },
   {
@@ -405,6 +406,7 @@ type ClaudeCodeDesignTransfer = NonNullable<WorkspaceSnapshot["claudeCodeDesignT
 type PhilosophyFeatureExtraction = NonNullable<WorkspaceSnapshot["philosophyFeatureExtraction"]>;
 type IntentFeatureMap = NonNullable<WorkspaceSnapshot["intentFeatureMap"]>;
 type StructureOverview = NonNullable<WorkspaceSnapshot["structureOverview"]>;
+type ProductFeatureArchitecture = NonNullable<WorkspaceSnapshot["productFeatureArchitecture"]>;
 
 const fallbackViewModes: MonitorViewMode[] = [
   {
@@ -596,6 +598,128 @@ const emptyStructureOverview: StructureOverview = {
   boundaryRules: [],
   pressurePoints: [],
   sourceHotspots: []
+};
+
+const emptyProductFeatureArchitecture: ProductFeatureArchitecture = {
+  sourcePath: "",
+  productPosition: {
+    primaryProduct: "agent_capability_platform",
+    productClaim:
+      "Agent orchestration, work environment, development environment, factory, and learning loop are primary. Monitoring is supporting observability.",
+    monitoringRole: "supporting_observability"
+  },
+  desktopHomeSurface: {
+    firstViewPriority: [
+      "agent_orchestration",
+      "agent_work_environment",
+      "agent_development_environment",
+      "agent_factory",
+      "learning_improvement_loop"
+    ],
+    supportingSurfaces: ["observability_monitoring"],
+    homeCopyRule: "Show what agents can do, create, and improve before monitoring details.",
+    configurationRule: "Move setup and configuration into dedicated settings or capability surfaces."
+  },
+  summary: {
+    totalFeatures: 6,
+    primaryFeatures: 5,
+    supportingFeatures: 1,
+    automationLoops: 1
+  },
+  featureLayers: [
+    {
+      id: "agent_orchestration",
+      label: "Agent Orchestration",
+      role: "primary",
+      status: "fallback",
+      purpose: "Coordinate agents and optional CLI lanes as supervised work.",
+      userOutcome: "Start one task and let the platform coordinate specialist lanes.",
+      primarySection: "desktop",
+      primarySurfaces: ["Desktop Runtime", "Task Pipe", "Decision Inbox"],
+      currentAssets: [],
+      automationTargets: ["multi-lane task intake", "decision routing", "merge gates"],
+      learningSignals: ["task-run records"],
+      validationGates: []
+    },
+    {
+      id: "agent_work_environment",
+      label: "Agent Work Environment",
+      role: "primary",
+      status: "fallback",
+      purpose: "Host selected workspaces, runtime data, decisions, task runs, and support diagnostics.",
+      userOutcome: "Use an app-owned workspace and accumulated data plane instead of a terminal-first clone.",
+      primarySection: "desktop",
+      primarySurfaces: ["Workspace Host", "Accumulated Data", "Runtime Data"],
+      currentAssets: [],
+      automationTargets: ["workspace import", "runtime data indexing"],
+      learningSignals: ["task-run count"],
+      validationGates: []
+    },
+    {
+      id: "agent_development_environment",
+      label: "Agent Development Environment",
+      role: "primary",
+      status: "fallback",
+      purpose: "Provide a workbench for source, diffs, templates, requirements, specs, and validation.",
+      userOutcome: "Shape agent platform behavior inside one development workbench.",
+      primarySection: "source",
+      primarySurfaces: ["Source Review", "Diff Review", "Requirements"],
+      currentAssets: [],
+      automationTargets: ["file index", "draft queue", "save with backup"],
+      learningSignals: ["diff summary"],
+      validationGates: []
+    },
+    {
+      id: "agent_factory",
+      label: "Agent Factory",
+      role: "primary",
+      status: "fallback",
+      purpose: "Promote repeated work into prompts, workflows, templates, tools, skills, agents, and features.",
+      userOutcome: "Create reusable agents and capabilities without repeating the same instructions.",
+      primarySection: "agents",
+      primarySurfaces: ["Agents", "Capability Center", "Evidence / Promotion"],
+      currentAssets: [],
+      automationTargets: ["candidate intake", "smallest asset selection", "agent definition creation"],
+      learningSignals: ["candidate backlog"],
+      validationGates: []
+    },
+    {
+      id: "learning_improvement_loop",
+      label: "Learning & Evaluation Loop",
+      role: "primary",
+      status: "fallback",
+      purpose: "Accumulate requests, evidence, timings, evaluations, and intent maps into improvement loops.",
+      userOutcome: "See why the platform improved and what should improve next.",
+      primarySection: "intent",
+      primarySurfaces: ["Intent Map", "Evaluations", "Work Timings"],
+      currentAssets: [],
+      automationTargets: ["intent structuring", "evaluation capture", "bottleneck detection"],
+      learningSignals: ["intent themes"],
+      validationGates: []
+    },
+    {
+      id: "observability_monitoring",
+      label: "Observability & Monitoring",
+      role: "supporting",
+      status: "fallback",
+      purpose: "Expose structure, documents, source inventory, service readiness, and status as supporting observability.",
+      userOutcome: "Inspect platform state without treating the monitoring layer as the product.",
+      primarySection: "structure",
+      primarySurfaces: ["Structure", "Documents", "History", "Service Readiness"],
+      currentAssets: [],
+      automationTargets: ["snapshot collection", "customer snapshot sanitization"],
+      learningSignals: ["service blockers"],
+      validationGates: []
+    }
+  ],
+  promotionLoop: {
+    stages: ["observe_repetition_or_gap", "select_smallest_useful_asset", "implement_with_validation"],
+    recordTargets: [],
+    improvementRule: "Promote repeated work into the smallest useful durable asset first.",
+    assetOrder: ["prompt", "workflow", "template", "tool", "skill", "agent", "project_feature"]
+  },
+  qualitySignals: [],
+  validationGates: []
 };
 
 const sectionIds = new Set<SectionId>(sections.map((section) => section.id));
@@ -1149,6 +1273,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const philosophyFeatureExtraction = snapshot.philosophyFeatureExtraction ?? emptyPhilosophyFeatureExtraction;
   const intentFeatureMap = snapshot.intentFeatureMap ?? emptyIntentFeatureMap;
   const structureOverview = snapshot.structureOverview ?? emptyStructureOverview;
+  const productFeatureArchitecture = snapshot.productFeatureArchitecture ?? emptyProductFeatureArchitecture;
   const [selectedModeFunctionGroupId, setSelectedModeFunctionGroupId] = useState(
     modeFunctionCatalog.groups[0]?.id || "view_mode"
   );
@@ -2043,7 +2168,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
             <div className="desktop-home-grid">
               <section className={`workspace-home-panel home-${attentionState.tone}`} aria-label="Workspace home">
                 <div>
-                  <p className="eyebrow">Workspace</p>
+                  <p className="eyebrow">Agent Workspace</p>
                   <h2>{attentionState.title}</h2>
                   <p>{attentionState.detail}</p>
                 </div>
@@ -2062,6 +2187,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                   </button>
                 </div>
               </section>
+
+              <ProductFeatureArchitecturePanel
+                architecture={productFeatureArchitecture}
+                onOpenSection={openSection}
+              />
 
               <section className="run-timeline-panel" aria-label="Run timeline">
                 <div className="panel-heading">

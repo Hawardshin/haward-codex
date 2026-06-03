@@ -183,6 +183,18 @@
       "last_checked": "2026-06-02"
     },
     {
+      "id": "product_feature_registry",
+      "title": "Product Feature Registry",
+      "path": "platform-desktop-app/configs/product-feature-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "positioning the installable app as an agent capability platform rather than a monitoring dashboard",
+        "defining primary feature layers for agent orchestration, agent work environment, agent development environment, agent factory, and learning/evaluation",
+        "keeping monitoring as supporting observability"
+      ],
+      "last_checked": "2026-06-03"
+    },
+    {
       "id": "install_mode_registry",
       "title": "Install Mode Registry",
       "path": "agent-platform/configs/installations/install-mode-registry.json",
@@ -256,11 +268,22 @@
     },
     {
       "id": "desktop_shell_reuses_existing_ui",
-      "rule": "The desktop product shell owns the workspace-monitor renderer under platform-desktop-app/renderer/workspace-monitor/ unless a release-quality migration plan proves a separate UI is cheaper to maintain.",
-      "reason": "The monitor already parses repository history and documents, so duplicating it would add product surface without improving the selected desktop product structure.",
+      "rule": "The desktop product shell owns the workspace-monitor renderer under platform-desktop-app/renderer/workspace-monitor/ unless a release-quality migration plan proves a separate UI is cheaper to maintain; the renderer must behave as an agent platform feature workbench, not as a monitoring-first dashboard.",
+      "reason": "The existing renderer has useful collection and source surfaces, but the product promise now belongs to agent orchestration, work environment, development environment, agent factory, and learning loop features.",
       "applies_to": [
         "runtime_strategy",
         "recommended_initial_path"
+      ]
+    },
+    {
+      "id": "product_features_are_primary",
+      "rule": "The desktop app shall use platform-desktop-app/configs/product-feature-registry.json as the product feature source of truth; monitoring and repository browsing shall remain supporting observability.",
+      "reason": "The installable product should be sellable as an agent capability platform instead of a PoC monitor or static repository viewer.",
+      "applies_to": [
+        "product_boundary",
+        "selected_platform_architecture",
+        "runtime_strategy",
+        "release_gates"
       ]
     },
     {
@@ -330,6 +353,11 @@
       "required": true
     },
     {
+      "field": "product_feature_registry",
+      "meaning": "Companion registry defining the primary agent platform feature layers, supporting observability role, desktop home priority, and capability promotion loop.",
+      "required": true
+    },
+    {
       "field": "candidate_frameworks",
       "meaning": "Framework options to compare before installing or implementing desktop app code.",
       "required": true
@@ -379,6 +407,16 @@
       "user, developer, and superadmin developer views are separated",
       "task run timeline shows phase, time, artifacts, decisions, evidence, and verification",
       "failure recovery exists for unreadable workspace, missing optional CLI, pending decision, stale snapshot, and update failure"
+    ]
+  },
+  "product_feature_registry": {
+    "path": "platform-desktop-app/configs/product-feature-registry.json",
+    "status": "required_before_desktop_home_or_feature_navigation_changes",
+    "required_checks": [
+      "primary product remains agent_capability_platform",
+      "agent orchestration, agent work environment, agent development environment, agent factory, and learning/evaluation loop are primary feature layers",
+      "observability and monitoring are supporting feature layers",
+      "customer snapshot preserves product feature architecture without internal source paths"
     ]
   },
   "macos_execution_profile": {

@@ -13,6 +13,7 @@ import {
   collectClaudeCodeDesignTransfer,
   collectIntentFeatureMap,
   collectPhilosophyFeatureExtraction,
+  collectProductFeatureArchitecture,
   collectLanguageModeCatalog,
   collectModeFunctionCatalog,
   collectSourceFiles,
@@ -208,6 +209,11 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.structureOverview.planes.some((plane) => plane.id === "monitor-ui"), true);
   assert.equal(snapshot.structureOverview.boundaryRules.some((rule) => rule.id === "project-boundary-first"), true);
   assert.equal(snapshot.stats.structurePressurePoints, snapshot.structureOverview.summary.totalPressurePoints);
+  assert.equal(snapshot.productFeatureArchitecture.productPosition.primaryProduct, "agent_capability_platform");
+  assert.equal(snapshot.productFeatureArchitecture.productPosition.monitoringRole, "supporting_observability");
+  assert.equal(snapshot.stats.productFeatures, 6);
+  assert.equal(snapshot.stats.primaryProductFeatures, 5);
+  assert.equal(snapshot.stats.supportingProductFeatures, 1);
   assert.equal(snapshot.documents.some((document) => document.language === "ko"), true);
 });
 
@@ -240,6 +246,9 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       intentFeatureNow: 1,
       intentFeatureNext: 1,
       intentFeatureLater: 1,
+      productFeatures: 6,
+      primaryProductFeatures: 5,
+      supportingProductFeatures: 1,
       structurePressurePoints: 1,
       sourceFiles: 1,
       rootFolders: 1
@@ -270,6 +279,64 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       pressurePoints: [{ id: "large-source" }],
       sourceHotspots: [{ path: "platform-desktop-app/src-tauri/src/lib.rs" }]
     },
+    productFeatureArchitecture: {
+      sourcePath: "platform-desktop-app/configs/product-feature-registry.json",
+      productPosition: {
+        primaryProduct: "agent_capability_platform",
+        productClaim: "Agent platform",
+        monitoringRole: "supporting_observability"
+      },
+      desktopHomeSurface: {
+        firstViewPriority: ["agent_orchestration"],
+        supportingSurfaces: ["observability_monitoring"],
+        homeCopyRule: "features first",
+        configurationRule: "settings surface"
+      },
+      summary: {
+        totalFeatures: 2,
+        primaryFeatures: 1,
+        supportingFeatures: 1,
+        automationLoops: 1
+      },
+      featureLayers: [
+        {
+          id: "agent_orchestration",
+          label: "Agent Orchestration",
+          role: "primary",
+          status: "implemented",
+          purpose: "Run lanes",
+          userOutcome: "Coordinate work",
+          primarySection: "desktop",
+          primarySurfaces: ["Desktop Runtime"],
+          currentAssets: ["platform-desktop-app/src-tauri/src/lib.rs"],
+          automationTargets: ["pipe graph"],
+          learningSignals: ["task-run records"],
+          validationGates: ["internal gate"]
+        },
+        {
+          id: "observability_monitoring",
+          label: "Observability & Monitoring",
+          role: "supporting",
+          status: "implemented",
+          purpose: "Observe",
+          userOutcome: "Inspect state",
+          primarySection: "structure",
+          primarySurfaces: ["Structure"],
+          currentAssets: ["internal"],
+          automationTargets: ["snapshot"],
+          learningSignals: ["service blockers"],
+          validationGates: ["internal gate"]
+        }
+      ],
+      promotionLoop: {
+        stages: ["observe"],
+        recordTargets: ["_history/evaluations/"],
+        improvementRule: "promote smallest asset",
+        assetOrder: ["prompt", "workflow"]
+      },
+      qualitySignals: ["feature first"],
+      validationGates: [{ id: "gate", command: "internal", validates: "internal" }]
+    },
     categories: ["project-doc"],
     publicReview: { status: "review_required_before_public_deploy", checklist: [] }
   };
@@ -281,6 +348,9 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.stats.documents, 0);
   assert.equal(customer.stats.philosophyFeatureCandidates, 0);
   assert.equal(customer.stats.intentFeatureThemes, 0);
+  assert.equal(customer.stats.productFeatures, 2);
+  assert.equal(customer.stats.primaryProductFeatures, 1);
+  assert.equal(customer.stats.supportingProductFeatures, 1);
   assert.equal(customer.stats.structurePressurePoints, 0);
   assert.equal(customer.sourceFiles.length, 0);
   assert.equal(customer.documents.length, 0);
@@ -289,10 +359,86 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.philosophyFeatureExtraction.candidates.length, 0);
   assert.equal(customer.intentFeatureMap.themes.length, 0);
   assert.equal(customer.intentFeatureMap.roadmap.now.length, 0);
+  assert.equal(customer.productFeatureArchitecture.featureLayers.length, 2);
+  assert.equal(customer.productFeatureArchitecture.featureLayers[0].label, "Agent Orchestration");
+  assert.equal(customer.productFeatureArchitecture.featureLayers[0].currentAssets.length, 0);
+  assert.equal(customer.productFeatureArchitecture.featureLayers[0].validationGates.length, 0);
+  assert.equal(customer.productFeatureArchitecture.promotionLoop.recordTargets.length, 0);
+  assert.equal(customer.productFeatureArchitecture.validationGates.length, 0);
   assert.equal(customer.historyDays.length, 0);
   assert.equal(customer.projects.length, 0);
   assert.equal(customer.publicReview.status, "customer_snapshot_sanitized");
   assert.equal(customer.viewModeCatalog.defaultMode, "user");
+});
+
+test("collectProductFeatureArchitecture reads primary features and supporting observability", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-product-features-test-"));
+  fs.mkdirSync(path.join(root, "platform-desktop-app", "configs"), { recursive: true });
+  fs.writeFileSync(
+    path.join(root, "platform-desktop-app", "configs", "product-feature-registry.json"),
+    JSON.stringify({
+      product_position: {
+        primary_product: "agent_capability_platform",
+        primary_claim: "Agent platform",
+        monitoring_role: "supporting_observability"
+      },
+      desktop_home_surface: {
+        first_view_priority: ["agent_orchestration"],
+        supporting_surfaces: ["observability_monitoring"],
+        home_copy_rule: "features first",
+        configuration_rule: "settings"
+      },
+      feature_layers: [
+        {
+          id: "agent_orchestration",
+          label: "Agent Orchestration",
+          role: "primary",
+          status: "implemented",
+          purpose: "Coordinate agents",
+          user_outcome: "Run coordinated work",
+          primary_section: "desktop",
+          primary_surfaces: ["Desktop Runtime"],
+          current_assets: ["platform-desktop-app/src-tauri/src/lib.rs"],
+          automation_targets: ["process graph"],
+          learning_signals: ["task-run records"],
+          validation_gates: ["gate"]
+        },
+        {
+          id: "observability_monitoring",
+          label: "Observability & Monitoring",
+          role: "supporting",
+          status: "implemented",
+          purpose: "Observe state",
+          user_outcome: "Inspect state",
+          primary_section: "structure",
+          primary_surfaces: ["Structure"],
+          current_assets: ["platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs"],
+          automation_targets: ["snapshot"],
+          learning_signals: ["service blockers"],
+          validation_gates: ["support role gate"]
+        }
+      ],
+      promotion_loop: {
+        stages: ["observe_repetition_or_gap"],
+        record_targets: ["_history/request-traces/"],
+        improvement_rule: "promote smallest asset",
+        asset_order: ["prompt", "workflow", "tool"]
+      },
+      quality_signals: ["feature first"],
+      validation_gates: [{ id: "product_identity_gate", command: "test", validates: "identity" }]
+    })
+  );
+
+  const architecture = collectProductFeatureArchitecture(root);
+
+  assert.equal(architecture.productPosition.primaryProduct, "agent_capability_platform");
+  assert.equal(architecture.productPosition.monitoringRole, "supporting_observability");
+  assert.equal(architecture.summary.totalFeatures, 2);
+  assert.equal(architecture.summary.primaryFeatures, 1);
+  assert.equal(architecture.summary.supportingFeatures, 1);
+  assert.equal(architecture.featureLayers[0].label, "Agent Orchestration");
+  assert.equal(architecture.featureLayers[1].role, "supporting");
+  assert.equal(architecture.promotionLoop.assetOrder[2], "tool");
 });
 
 test("collectIntentFeatureMap reads themes and roadmap from history synthesis", () => {

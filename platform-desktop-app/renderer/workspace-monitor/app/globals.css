@@ -81,6 +81,14 @@ button,
     background 140ms ease;
 }
 
+.product-feature-card {
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
 main {
   width: 100%;
   min-height: 100vh;
@@ -528,6 +536,204 @@ main {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
   gap: 14px;
+}
+
+.product-feature-panel {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 12px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.product-feature-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(150px, 0.42fr));
+  gap: 10px;
+  align-items: stretch;
+}
+
+.product-feature-position,
+.product-feature-summary article {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.product-feature-position {
+  display: grid;
+  gap: 9px;
+  align-content: start;
+  background:
+    linear-gradient(135deg, rgba(22, 115, 91, 0.08), rgba(184, 91, 125, 0.08)),
+    #fbfcfd;
+}
+
+.product-feature-position h2 {
+  max-width: 760px;
+  margin: 0;
+  font-size: 23px;
+  line-height: 1.2;
+}
+
+.product-feature-position p,
+.product-feature-summary article p,
+.product-feature-card p,
+.product-loop-strip p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.48;
+  overflow-wrap: anywhere;
+}
+
+.product-feature-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 3px;
+}
+
+.product-feature-actions button {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #9fb0c2;
+  background: #25313f;
+  color: #ffffff;
+  border-radius: 7px;
+  padding: 8px 11px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.product-feature-summary article {
+  display: grid;
+  align-content: start;
+  gap: 5px;
+}
+
+.product-feature-summary article span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.product-feature-summary article strong {
+  font-size: 21px;
+  line-height: 1.15;
+}
+
+.product-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.product-feature-card {
+  display: grid;
+  min-height: 188px;
+  min-width: 0;
+  align-content: start;
+  gap: 9px;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 13px;
+  text-align: left;
+}
+
+.feature-role-primary {
+  border-left: 4px solid var(--green);
+}
+
+.feature-role-supporting {
+  border-left: 4px solid var(--slate);
+  background: #f3f6f9;
+}
+
+.product-feature-card-top,
+.feature-card-signal,
+.feature-tag-row {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+}
+
+.product-feature-card-top {
+  justify-content: space-between;
+  color: var(--blue);
+}
+
+.product-feature-card-top small,
+.feature-card-signal {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.product-feature-card strong {
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.feature-tag-row {
+  flex-wrap: wrap;
+}
+
+.feature-tag-row em {
+  max-width: 100%;
+  border: 1px solid #cfd8e3;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: var(--slate);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.feature-card-signal {
+  margin-top: auto;
+  text-transform: none;
+}
+
+.product-loop-strip {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: #f7f9fb;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.product-loop-strip span {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.product-loop-strip strong {
+  color: var(--slate);
+  font-size: 12px;
+  font-weight: 900;
+  overflow-wrap: anywhere;
 }
 
 .workspace-home-panel,
@@ -5948,7 +6154,9 @@ h3 {
 
   .workspace-home-panel,
   .desktop-run-timeline,
-  .home-metrics-strip {
+  .home-metrics-strip,
+  .product-feature-summary,
+  .product-feature-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -6146,6 +6354,9 @@ h3 {
   .workspace-home-actions,
   .desktop-run-timeline,
   .home-metrics-strip,
+  .product-feature-summary,
+  .product-feature-grid,
+  .product-loop-strip,
   .settings-segment-list,
   .settings-pin-grid {
     grid-template-columns: 1fr;
