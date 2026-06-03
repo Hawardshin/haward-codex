@@ -174,7 +174,9 @@ for (const learningFeedbackCommand of ["record_learning_improvement_decision"]) 
 for (const workspaceHostCommand of [
   "get_desktop_workspace_state",
   "set_desktop_workspace_path",
-  "clone_desktop_workspace"
+  "clone_desktop_workspace",
+  "get_desktop_git_status",
+  "run_desktop_git_action"
 ]) {
   failIf(
     !(contract.runtime_command_surface?.workspace_host_commands ?? []).includes(workspaceHostCommand),

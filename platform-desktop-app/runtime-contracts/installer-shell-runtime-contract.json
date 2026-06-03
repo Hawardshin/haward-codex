@@ -560,7 +560,9 @@
       "get_desktop_workspace_state",
       "set_desktop_workspace_path",
       "choose_desktop_workspace_folder",
-      "clone_desktop_workspace"
+      "clone_desktop_workspace",
+      "get_desktop_git_status",
+      "run_desktop_git_action"
     ],
     "cli_adapter_commands": [
       "list_cli_adapters",

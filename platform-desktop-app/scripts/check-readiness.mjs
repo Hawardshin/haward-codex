@@ -22,6 +22,7 @@ const requiredFiles = [
   "runtime-contracts/installer-shell-bootstrap.ko.md",
   "runtime-contracts/installer-shell-bootstrap.en.md",
   "renderer/workspace-monitor/components/workbench/CoreFeatureTabs.tsx",
+  "renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx",
   "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx",
   "renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx",
   "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx",
@@ -35,6 +36,10 @@ const requiredFiles = [
   "docs/architecture/runtime-data-boundary.en.md",
   "docs/architecture/installer-shell-runtime-contract.ko.md",
   "docs/architecture/installer-shell-runtime-contract.en.md",
+  "docs/architecture/native-git-workbench.ko.md",
+  "docs/architecture/native-git-workbench.en.md",
+  "docs/architecture/pty-terminal-decision.ko.md",
+  "docs/architecture/pty-terminal-decision.en.md",
   "docs/release-runbook.ko.md",
   "docs/release-runbook.en.md",
   "specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
@@ -48,6 +53,8 @@ const requiredFiles = [
   "src-tauri/src/main.rs",
   "src-tauri/src/lib.rs",
   "src-tauri/capabilities/default.json",
+  "renderer/workspace-monitor/lib/clipboard.mjs",
+  "tests/clipboard.test.mjs",
   "scripts/check-runtime-contract.mjs",
   "scripts/check-customer-bundle.mjs",
   "scripts/check-release-readiness.mjs",
@@ -177,6 +184,8 @@ for (const commandName of [
   "set_desktop_workspace_path",
   "choose_desktop_workspace_folder",
   "clone_desktop_workspace",
+  "get_desktop_git_status",
+  "run_desktop_git_action",
   "start_cli_adapter_session",
   "start_cli_task_pipeline",
   "poll_cli_adapter_session",
@@ -383,6 +392,18 @@ const learningLoopGap = productGapRegistry.gap_items?.find((item) => item.gap_id
 if (learningLoopGap?.status !== "implemented_product_slice" || learningLoopGap?.priority !== "p0_product_gap") {
   failures.push("product-gap-registry must mark learning_feedback_automation_loop as an implemented p0 product slice");
 }
+const nativeGitGap = productGapRegistry.gap_items?.find((item) => item.gap_id === "native_workspace_git_operations");
+if (nativeGitGap?.status !== "implemented_product_slice") {
+  failures.push("product-gap-registry must mark native_workspace_git_operations as implemented");
+}
+const clipboardGap = productGapRegistry.gap_items?.find((item) => item.gap_id === "clipboard_browser_qa");
+if (clipboardGap?.status !== "implemented_test_coverage") {
+  failures.push("product-gap-registry must mark clipboard_browser_qa as implemented test coverage");
+}
+const ptyGap = productGapRegistry.gap_items?.find((item) => item.gap_id === "interactive_pty_terminal_surface");
+if (ptyGap?.status !== "closed_by_product_decision") {
+  failures.push("product-gap-registry must close interactive_pty_terminal_surface by product decision");
+}
 const agentFeatureCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === "UR-2026-06-03-035");
 if (agentFeatureCoverage?.coverage !== "covered") {
   failures.push("UR-2026-06-03-035 coverage must be covered after Agent Factory and learning loop implementation");
@@ -392,6 +413,18 @@ if (agentFeatureCoverage?.remaining_gap_ids?.includes("agent_factory_creation_wi
 }
 if (agentFeatureCoverage?.remaining_gap_ids?.includes("learning_feedback_automation_loop")) {
   failures.push("UR-2026-06-03-035 coverage must not keep the learning feedback automation gap after implementation");
+}
+const clipboardCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === "UR-2026-06-03-025");
+if (clipboardCoverage?.coverage !== "covered" || clipboardCoverage?.remaining_gap_ids?.includes("clipboard_browser_qa")) {
+  failures.push("UR-2026-06-03-025 coverage must be covered after clipboard QA implementation");
+}
+const ptyCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === "UR-2026-06-03-029");
+if (ptyCoverage?.coverage !== "covered" || ptyCoverage?.remaining_gap_ids?.includes("interactive_pty_terminal_surface")) {
+  failures.push("UR-2026-06-03-029 coverage must be covered after PTY product decision");
+}
+const nativeGitCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === "UR-2026-06-03-033");
+if (nativeGitCoverage?.coverage !== "covered" || nativeGitCoverage?.remaining_gap_ids?.includes("native_workspace_git_operations")) {
+  failures.push("UR-2026-06-03-033 coverage must be covered after native Git workbench implementation");
 }
 if (!productGapSerialized.includes("monitoring polish") || !productGapSerialized.includes("p0_product_gap")) {
   failures.push("product-gap-registry must explicitly prioritize p0 product gaps over monitoring or cosmetic work");
@@ -527,6 +560,10 @@ const coreFeatureTabs = readFileSync(
   join(root, "renderer/workspace-monitor/components/workbench/CoreFeatureTabs.tsx"),
   "utf8"
 );
+const nativeGitWorkbench = readFileSync(
+  join(root, "renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx"),
+  "utf8"
+);
 const pathDisclosure = readFileSync(
   join(root, "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx"),
   "utf8"
@@ -539,8 +576,14 @@ const workspaceExplorerPane = readFileSync(
   join(root, "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"),
   "utf8"
 );
-const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
+const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
 const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
+const clipboardUtility = readFileSync(join(root, "renderer/workspace-monitor/lib/clipboard.mjs"), "utf8");
+const clipboardTest = readFileSync(join(root, "tests/clipboard.test.mjs"), "utf8");
+const nativeGitWorkbenchKo = readFileSync(join(root, "docs/architecture/native-git-workbench.ko.md"), "utf8");
+const nativeGitWorkbenchEn = readFileSync(join(root, "docs/architecture/native-git-workbench.en.md"), "utf8");
+const ptyDecisionKo = readFileSync(join(root, "docs/architecture/pty-terminal-decision.ko.md"), "utf8");
+const ptyDecisionEn = readFileSync(join(root, "docs/architecture/pty-terminal-decision.en.md"), "utf8");
 const productFeaturePanel = readFileSync(
   join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
   "utf8"
@@ -580,6 +623,26 @@ for (const requiredPhrase of ["checkReleaseReadiness", "public_release_blocked",
 for (const requiredPhrase of ["checkServiceReadiness", "service_internal_ready_public_blocked", "Signed updater channel", "Workspace Onboarding"]) {
   if (!serviceReadinessCheck.includes(requiredPhrase)) {
     failures.push(`check-service-readiness.mjs must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of ["writeClipboardText", "clipboard.writeText", "textarea copy path", "execCommand", "setSelectionRange"]) {
+  if (!clipboardUtility.includes(requiredPhrase)) {
+    failures.push(`clipboard utility must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of ["falls back to textarea copy", "no write path is available", "navigator clipboard"]) {
+  if (!clipboardTest.includes(requiredPhrase)) {
+    failures.push(`clipboard test must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of ["Native Git Workbench", "get_desktop_git_status", "run_desktop_git_action", "Credential / SSH", "bounded command output"]) {
+  if (!nativeGitWorkbenchKo.includes(requiredPhrase) || !nativeGitWorkbenchEn.includes(requiredPhrase)) {
+    failures.push(`native Git workbench docs must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of ["pipe-first CLI supervisor", "optional extension", "xterm.js", "Rust PTY crate"]) {
+  if (!ptyDecisionKo.includes(requiredPhrase) || !ptyDecisionEn.includes(requiredPhrase)) {
+    failures.push(`PTY decision docs must include ${requiredPhrase}`);
   }
 }
 for (const requiredPhrase of [
@@ -693,6 +756,16 @@ for (const requiredPhrase of [
   "set_desktop_workspace_path",
   "choose_desktop_workspace_folder",
   "clone_desktop_workspace",
+  "get_desktop_git_status",
+  "run_desktop_git_action",
+  "DesktopGitStatusReport",
+  "Native Git Workbench",
+  "native-git-panel",
+  "native-git-layout",
+  "Git 상태 새로고침",
+  "전체 변경 커밋",
+  "Pull --ff-only",
+  "writeClipboardText",
   "nativeWorkspaceCopy",
   "native-file-workspace-panel",
   "surface=\"files\"",

@@ -1,0 +1,27 @@
+# Native Git Workbench
+
+## Decision
+
+The installable desktop app provides a Native Git Workbench that runs the system `git` inside the selected workspace. Users choose a workspace first, then manage branches, changes, commits, pull, and push from the same desktop surface instead of scattering Git input across setup forms.
+
+## Scope
+
+- `get_desktop_git_status`: reads the Git root, branch, upstream, ahead/behind counts, changed files, and remotes for the selected workspace.
+- `run_desktop_git_action`: allows `refresh`, `create_branch`, `commit_all`, `pull_ff`, and `push`.
+- Commands run from the Git root under the selected workspace and return redacted bounded command output.
+- Commit messages and branch names are length-limited and reject risky control characters.
+
+## Credential / SSH Boundary
+
+The app does not inspect or store SSH private keys, tokens, cookies, or credential-helper stores. Private remote authentication stays with the user's OS, Git, and SSH configuration. When authentication is missing, the workbench surfaces bounded Git command output as a `capability_missing` or authentication failure state.
+
+These future steps require a separate installation and security audit:
+
+- changing credential-helper settings
+- generating, copying, uploading, or auto-registering SSH keys
+- storing or injecting tokens
+- handling secrets embedded in remote URLs
+
+## User Experience
+
+Native Git Workbench is a support panel for code work. Users can still run direct `git` commands in the bottom Work Console, while the Git buttons shorten common, repeatable actions safely.

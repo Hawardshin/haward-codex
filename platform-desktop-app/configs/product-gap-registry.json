@@ -178,14 +178,14 @@
   },
   "coverage_summary": {
     "audited_request_count": 13,
-    "covered_request_count": 9,
-    "partial_request_count": 4,
+    "covered_request_count": 12,
+    "partial_request_count": 2,
     "missing_product_slice_count": 0,
     "structural_debt_count": 1,
-    "test_gap_count": 1,
+    "test_gap_count": 0,
     "external_blocker_count": 1,
-    "current_product_readiness": "internal_product_slices_validated_with_p0_agent_factory_and_learning_loop_closed",
-    "headline": "The desktop shell, source workbench, installer runtime contract, data accumulation, workspace host, folder restructure, feature registry, operator separation, Agent Factory proposal wizard, and learning feedback decision loop are implemented internal product slices. Remaining gaps are structural debt, native Git depth, clipboard QA, optional PTY UX, and external public distribution gates."
+    "current_product_readiness": "internal_product_slices_validated_with_native_git_clipboard_and_pty_decision_closed",
+    "headline": "The desktop shell, source workbench, installer runtime contract, data accumulation, workspace host, Native Git Workbench, folder restructure, feature registry, operator separation, Agent Factory proposal wizard, learning feedback decision loop, deterministic clipboard QA, and PTY terminal product decision are implemented internal product slices. Remaining gaps are MonitorShell componentization structural debt and external public distribution gates."
   },
   "request_coverage": [
     {
@@ -193,25 +193,24 @@
       "coverage": "partial",
       "covered_evidence": [
         "Desktop shell with titlebar, activity rail, sidebar, content viewport, settings dialog, task timeline, and decision inbox",
-        "Operator Center separation and user/customer view sections"
+        "Operator Center separation and user/customer view sections",
+        "Native Git Workbench exposes branch, changed files, commit, pull, and push actions inside the desktop workspace host"
       ],
       "remaining_gap_ids": [
-        "componentized_desktop_ui_architecture",
-        "native_workspace_git_operations"
+        "componentized_desktop_ui_architecture"
       ],
-      "notes": "The app is no longer a one-screen web dashboard, but the main renderer shell remains too large and some desktop-native interactions are still typed-form based."
+      "notes": "The app is no longer a one-screen web dashboard and the workspace Git flow is now native to the desktop shell. The remaining concern is MonitorShell component ownership."
     },
     {
       "request_id": "UR-2026-06-03-025",
-      "coverage": "covered_with_test_gap",
+      "coverage": "covered",
       "covered_evidence": [
         "Monaco Editor integration for code viewing/editing instead of bundling the full VS Code product",
-        "Copy Current, multi-file draft queue, diff review, save/revert flows"
+        "Copy Current, multi-file draft queue, diff review, save/revert flows",
+        "Deterministic clipboard abstraction and unit tests cover navigator clipboard and textarea fallback paths"
       ],
-      "remaining_gap_ids": [
-        "clipboard_browser_qa"
-      ],
-      "notes": "The code editing capability is implemented; browser-level clipboard success remains a QA gap because permissions can block automation."
+      "remaining_gap_ids": [],
+      "notes": "The code editing capability and clipboard copy behavior are covered by deterministic tests that do not depend on browser permission state."
     },
     {
       "request_id": "UR-2026-06-03-026",
@@ -252,12 +251,11 @@
         "Open editor tabs",
         "Command toolbar",
         "Monaco diff review",
-        "Editor settings popup"
+        "Editor settings popup",
+        "PTY terminal decision keeps the pipe-first CLI supervisor as the product default and records xterm/PTY as an optional audited extension"
       ],
-      "remaining_gap_ids": [
-        "interactive_pty_terminal_surface"
-      ],
-      "notes": "The code workbench is implemented. PTY/xterm remains a separate terminal UX decision, not a blocker for pipe-first task runs."
+      "remaining_gap_ids": [],
+      "notes": "The code workbench is implemented. PTY/xterm was explicitly decided as an optional extension so the current pipe-first supervisor remains the governed desktop terminal model."
     },
     {
       "request_id": "UR-2026-06-03-030",
@@ -292,17 +290,18 @@
     },
     {
       "request_id": "UR-2026-06-03-033",
-      "coverage": "partial",
+      "coverage": "covered",
       "covered_evidence": [
         "Desktop workspace state persistence",
         "Import workspace path",
+        "Native folder picker",
         "Clone repository command",
-        "Source editor and CLI working directory use app-selected workspace first"
+        "Source editor and CLI working directory use app-selected workspace first",
+        "get_desktop_git_status and run_desktop_git_action expose branch, status, commit, pull, and push operations",
+        "Native Git Workbench displays changed files, remotes, ahead/behind state, and bounded command output"
       ],
-      "remaining_gap_ids": [
-        "native_workspace_git_operations"
-      ],
-      "notes": "Workspace host exists inside the app, but native folder picker, full Git operations, and credential/SSH UX are still not product-complete."
+      "remaining_gap_ids": [],
+      "notes": "Workspace host and Git operations are now inside the app. Private remote credentials remain outside the app boundary and are surfaced through bounded Git command results rather than secret inspection."
     },
     {
       "request_id": "UR-2026-06-03-034",
@@ -407,18 +406,21 @@
     },
     {
       "gap_id": "native_workspace_git_operations",
-      "status": "partial_product_slice",
+      "status": "implemented_product_slice",
       "priority": "p1_product_gap",
       "source_requests": [
         "UR-2026-06-03-024",
         "UR-2026-06-03-033"
       ],
       "feature_layer": "agent_work_environment",
-      "why_it_matters": "The app owns workspace import/clone state, but desktop users still need native selection and full Git workflows for the clone-and-work model to feel built-in.",
+      "why_it_matters": "The app owns workspace import/clone state, and desktop users need native Git workflows for the clone-and-work model to feel built-in.",
       "current_evidence": [
-        "get_desktop_workspace_state, set_desktop_workspace_path, and clone_desktop_workspace are implemented",
-        "Workspace Host panel exposes text-path import and clone controls",
-        "Source editor and CLI use app-selected workspace first"
+        "get_desktop_workspace_state, set_desktop_workspace_path, choose_desktop_workspace_folder, and clone_desktop_workspace are implemented",
+        "get_desktop_git_status and run_desktop_git_action are implemented as Tauri commands",
+        "NativeGitWorkbench component exposes status refresh, branch creation, commit all, pull --ff-only, push, file status, remotes, and command output",
+        "Installer shell runtime contract declares the Git workspace host commands",
+        "Native Git Workbench architecture docs record the credential/SSH sensitive-file boundary",
+        "Readiness tests verify the runtime command surface and UI tokens"
       ],
       "acceptance_to_close": [
         "Native folder picker is available for workspace import.",
@@ -426,11 +428,11 @@
         "Credential and SSH key behavior is documented and guarded by the sensitive-file boundary policy.",
         "Clean workspace smoke test proves import/clone/source/CLI handoff."
       ],
-      "recommended_next_slice": "2026-06-03-native-workspace-git-operations",
-      "blocked_by": [
-        "credential UX/security decision for private remotes"
-      ],
-      "not_blocked_by": []
+      "recommended_next_slice": "closed_by_2026-06-03-deferred-native-git-clipboard-pty",
+      "blocked_by": [],
+      "not_blocked_by": [
+        "credential UX for private remotes remains outside app-managed secret storage and is handled through OS/Git/SSH plus bounded command output"
+      ]
     },
     {
       "gap_id": "componentized_desktop_ui_architecture",
@@ -444,6 +446,7 @@
       "why_it_matters": "The UI now behaves more like a desktop workbench, but MonitorShell is still a large component. Future feature work will be slower and riskier if shell, dialogs, panels, and workbench surfaces stay merged.",
       "current_evidence": [
         "Desktop shell, settings dialog, runtime panel, source workbench, operator center, and product panels are present",
+        "New NativeGitWorkbench ownership is split under renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx",
         "Request traces explicitly name MonitorShell component split as remaining structural work"
       ],
       "acceptance_to_close": [
@@ -457,8 +460,8 @@
     },
     {
       "gap_id": "interactive_pty_terminal_surface",
-      "status": "deferred_optional_ui_slice",
-      "priority": "p2_optional_after_p0",
+      "status": "closed_by_product_decision",
+      "priority": "p2_optional_closed",
       "source_requests": [
         "UR-2026-06-03-029"
       ],
@@ -466,22 +469,21 @@
       "why_it_matters": "A PTY/xterm surface can make CLI sessions feel more like a full desktop developer app, but the current bounded pipe-first supervisor is intentionally safer for task-run persistence and decision capture.",
       "current_evidence": [
         "start_cli_adapter_session, poll_cli_adapter_session, stdin, defer, cancel, task pipe, and task run store exist",
-        "Historical tasks kept interactive PTY supervisor as a follow-up"
+        "platform-desktop-app/docs/architecture/pty-terminal-decision.ko.md records pipe-first CLI supervisor as the default product decision",
+        "platform-desktop-app/docs/architecture/pty-terminal-decision.en.md records xterm.js and Rust PTY crate as an optional audited extension"
       ],
       "acceptance_to_close": [
         "Product decision chooses whether PTY is required or optional.",
         "If required, install audit records xterm.js/PTY dependency scope, license, rollback, and validation.",
         "PTY lifecycle passes resource guard checks for process, file descriptor, timer, and log retention cleanup."
       ],
-      "recommended_next_slice": "2026-06-03-pty-terminal-decision",
-      "blocked_by": [
-        "product decision on terminal UX risk versus pipe-first orchestration"
-      ],
+      "recommended_next_slice": "closed_by_2026-06-03-deferred-native-git-clipboard-pty",
+      "blocked_by": [],
       "not_blocked_by": []
     },
     {
       "gap_id": "clipboard_browser_qa",
-      "status": "test_gap",
+      "status": "implemented_test_coverage",
       "priority": "p2_test_gap",
       "source_requests": [
         "UR-2026-06-03-025"
@@ -490,13 +492,15 @@
       "why_it_matters": "Code copy exists in the UI, but browser automation could not fully prove clipboard success under restricted permissions.",
       "current_evidence": [
         "Copy Current and Copy Patch Context actions exist",
-        "Browser render verification covered Monaco presence but not successful clipboard write"
+        "renderer/workspace-monitor/lib/clipboard.mjs abstracts navigator clipboard and textarea fallback copy paths",
+        "tests/clipboard.test.mjs verifies navigator success, navigator failure fallback, and no-write-path behavior",
+        "Readiness tests verify clipboard utility and test coverage tokens"
       ],
       "acceptance_to_close": [
         "Add deterministic unit-level clipboard abstraction tests or Tauri clipboard command verification.",
         "Record manual or automated smoke evidence for copy success in the desktop runtime."
       ],
-      "recommended_next_slice": "2026-06-03-source-editor-clipboard-qa",
+      "recommended_next_slice": "closed_by_2026-06-03-deferred-native-git-clipboard-pty",
       "blocked_by": [],
       "not_blocked_by": []
     },

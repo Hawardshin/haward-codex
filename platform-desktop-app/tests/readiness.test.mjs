@@ -153,9 +153,30 @@ test("product gap registry keeps unresolved user-request gaps visible", () => {
   assert.match(JSON.stringify(learningGap.acceptance_to_close), /improvement candidates/);
   assert.match(JSON.stringify(learningGap.current_evidence), /record_learning_improvement_decision/);
 
+  const nativeGitGap = registry.gap_items.find((item) => item.gap_id === "native_workspace_git_operations");
+  assert.equal(nativeGitGap.status, "implemented_product_slice");
+  assert.match(JSON.stringify(nativeGitGap.current_evidence), /run_desktop_git_action/);
+
+  const clipboardGap = registry.gap_items.find((item) => item.gap_id === "clipboard_browser_qa");
+  assert.equal(clipboardGap.status, "implemented_test_coverage");
+  assert.match(JSON.stringify(clipboardGap.current_evidence), /clipboard\.test\.mjs/);
+
+  const ptyGap = registry.gap_items.find((item) => item.gap_id === "interactive_pty_terminal_surface");
+  assert.equal(ptyGap.status, "closed_by_product_decision");
+  assert.match(JSON.stringify(ptyGap.current_evidence), /pty-terminal-decision/);
+
   const request35 = registry.request_coverage.find((item) => item.request_id === "UR-2026-06-03-035");
   assert.equal(request35.coverage, "covered");
   assert.deepEqual(request35.remaining_gap_ids, []);
+  const request25 = registry.request_coverage.find((item) => item.request_id === "UR-2026-06-03-025");
+  assert.equal(request25.coverage, "covered");
+  assert.deepEqual(request25.remaining_gap_ids, []);
+  const request29 = registry.request_coverage.find((item) => item.request_id === "UR-2026-06-03-029");
+  assert.equal(request29.coverage, "covered");
+  assert.deepEqual(request29.remaining_gap_ids, []);
+  const request33 = registry.request_coverage.find((item) => item.request_id === "UR-2026-06-03-033");
+  assert.equal(request33.coverage, "covered");
+  assert.deepEqual(request33.remaining_gap_ids, []);
   assert.match(serialized, /componentized_desktop_ui_architecture/);
   assert.match(serialized, /public_distribution_gates/);
   assert.match(serialized, /monitoring polish/);
@@ -279,7 +300,9 @@ test("installer shell runtime contract is bundled and enforceable", () => {
     "get_desktop_workspace_state",
     "set_desktop_workspace_path",
     "choose_desktop_workspace_folder",
-    "clone_desktop_workspace"
+    "clone_desktop_workspace",
+    "get_desktop_git_status",
+    "run_desktop_git_action"
   ]) {
     assert.match(lib, new RegExp(workspaceHostCommand));
     assert.ok(contract.runtime_command_surface.workspace_host_commands.includes(workspaceHostCommand));
@@ -343,6 +366,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/components/workbench/CoreFeatureTabs.tsx"),
     "utf8"
   );
+  const nativeGitWorkbench = readFileSync(
+    join(root, "renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx"),
+    "utf8"
+  );
   const pathDisclosure = readFileSync(
     join(root, "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx"),
     "utf8"
@@ -355,8 +382,14 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"),
     "utf8"
   );
-  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
+  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
   const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
+  const clipboardUtility = readFileSync(join(root, "renderer/workspace-monitor/lib/clipboard.mjs"), "utf8");
+  const clipboardTest = readFileSync(join(root, "tests/clipboard.test.mjs"), "utf8");
+  const nativeGitWorkbenchKo = readFileSync(join(root, "docs/architecture/native-git-workbench.ko.md"), "utf8");
+  const nativeGitWorkbenchEn = readFileSync(join(root, "docs/architecture/native-git-workbench.en.md"), "utf8");
+  const ptyDecisionKo = readFileSync(join(root, "docs/architecture/pty-terminal-decision.ko.md"), "utf8");
+  const ptyDecisionEn = readFileSync(join(root, "docs/architecture/pty-terminal-decision.en.md"), "utf8");
   const productFeaturePanel = readFileSync(
     join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
     "utf8"
@@ -402,6 +435,22 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   for (const scriptToken of ["checkServiceReadiness", "service_internal_ready_public_blocked", "Signed updater channel", "Workspace Onboarding"]) {
     assert.match(serviceReadinessCheck, new RegExp(scriptToken));
   }
+  for (const token of ["writeClipboardText", "clipboard.writeText", "textarea copy path", "execCommand", "setSelectionRange"]) {
+    assert.match(clipboardUtility, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+  for (const token of ["falls back to textarea copy", "no write path is available", "navigator clipboard"]) {
+    assert.match(clipboardTest, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+  for (const token of ["Native Git Workbench", "get_desktop_git_status", "run_desktop_git_action", "Credential / SSH", "bounded command output"]) {
+    const pattern = new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    assert.match(nativeGitWorkbenchKo, pattern);
+    assert.match(nativeGitWorkbenchEn, pattern);
+  }
+  for (const token of ["pipe-first CLI supervisor", "optional extension", "xterm.js", "Rust PTY crate"]) {
+    const pattern = new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    assert.match(ptyDecisionKo, pattern);
+    assert.match(ptyDecisionEn, pattern);
+  }
 
   for (const commandName of [
     "list_cli_adapters",
@@ -430,6 +479,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "read_workspace_text_file",
     "write_workspace_text_file",
     "choose_desktop_workspace_folder",
+    "get_desktop_git_status",
+    "run_desktop_git_action",
     "create_agent_factory_proposal",
     "record_learning_improvement_decision",
     "list_human_decision_inbox",
@@ -441,6 +492,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   }
   assert.match(monitorShell, /DesktopRuntimePanel/);
   assert.match(monitorShell, /CoreFeatureTabs/);
+  assert.match(monitorShell, /NativeGitWorkbench/);
+  assert.match(nativeGitWorkbench, /NativeGitWorkbench/);
   assert.match(monitorShell, /PathDisclosure/);
   assert.match(monitorShell, /RuntimeTerminalDrawer/);
   assert.match(monitorShell, /WorkspaceExplorerPane/);
@@ -640,6 +693,14 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "storageFormatVersion",
     "indexPath",
     "formatMigrationStatus",
+    "DesktopGitStatusReport",
+    "Native Git Workbench",
+    "native-git-panel",
+    "native-git-layout",
+    "Git 상태 새로고침",
+    "전체 변경 커밋",
+    "Pull --ff-only",
+    "writeClipboardText",
     "AgentFactoryWizard",
     "Agent proposal 저장",
     "create_agent_factory_proposal",

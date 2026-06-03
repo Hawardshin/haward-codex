@@ -429,6 +429,79 @@ struct DesktopWorkspaceStateReport {
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
+struct DesktopGitFileReport {
+    status: String,
+    path: String,
+    original_path: Option<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DesktopGitRemoteReport {
+    name: String,
+    url: String,
+    direction: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DesktopGitStatusReport {
+    schema_version: String,
+    status: String,
+    workspace_path: String,
+    git_available: bool,
+    git_version: String,
+    repository_root: String,
+    branch: String,
+    upstream: String,
+    ahead: usize,
+    behind: usize,
+    clean: bool,
+    conflicted: bool,
+    staged_count: usize,
+    unstaged_count: usize,
+    untracked_count: usize,
+    files: Vec<DesktopGitFileReport>,
+    remotes: Vec<DesktopGitRemoteReport>,
+    last_command_status: String,
+    last_command_output: String,
+    last_command_error: String,
+    refreshed_at: String,
+    summary: Vec<String>,
+}
+
+#[derive(Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+struct DesktopGitActionInput {
+    action: String,
+    commit_message: String,
+    branch_name: String,
+}
+
+impl Default for DesktopGitActionInput {
+    fn default() -> Self {
+        Self {
+            action: "refresh".to_string(),
+            commit_message: String::new(),
+            branch_name: String::new(),
+        }
+    }
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DesktopGitActionReport {
+    status: String,
+    action: String,
+    command: String,
+    output: String,
+    error: String,
+    refreshed_at: String,
+    git: DesktopGitStatusReport,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 struct HumanDecisionItem {
     id: String,
     status: String,
@@ -754,6 +827,11 @@ const DESKTOP_PREFERENCES_SCHEMA_VERSION: &str = "desktop-preferences.v1";
 const GIT_CLONE_TIMEOUT_MS: u64 = 120_000;
 const MAX_GIT_CLONE_OUTPUT_BYTES: usize = 24_000;
 const MAX_GIT_REPOSITORY_URL_BYTES: usize = 2_048;
+const GIT_OPERATION_TIMEOUT_MS: u64 = 90_000;
+const MAX_GIT_OPERATION_OUTPUT_BYTES: usize = 32_000;
+const MAX_GIT_STATUS_FILES: usize = 160;
+const MAX_GIT_COMMIT_MESSAGE_CHARS: usize = 500;
+const DESKTOP_GIT_STATUS_SCHEMA_VERSION: &str = "desktop-git-status.v1";
 const MAX_WORKSPACE_FOLDER_NAME_BYTES: usize = 120;
 const MAX_SUPPORT_BUNDLE_RECENT_TASK_RUNS: usize = 20;
 const MAX_SUPPORT_EVENT_CHARS: usize = 600;
@@ -1103,6 +1181,19 @@ fn clone_desktop_workspace(
     folder_name: Option<String>,
 ) -> Result<DesktopWorkspaceStateReport, String> {
     clone_desktop_workspace_report(&app, &repository_url, folder_name.as_deref())
+}
+
+#[tauri::command]
+fn get_desktop_git_status(app: AppHandle) -> Result<DesktopGitStatusReport, String> {
+    desktop_git_status_report(&app, None, None, None)
+}
+
+#[tauri::command]
+fn run_desktop_git_action(
+    app: AppHandle,
+    input: DesktopGitActionInput,
+) -> Result<DesktopGitActionReport, String> {
+    run_desktop_git_action_report(&app, input)
 }
 
 #[tauri::command]
@@ -1870,6 +1961,8 @@ pub fn run() {
             set_desktop_workspace_path,
             choose_desktop_workspace_folder,
             clone_desktop_workspace,
+            get_desktop_git_status,
+            run_desktop_git_action,
             create_agent_factory_proposal,
             record_learning_improvement_decision,
             start_cli_adapter_session,
@@ -2071,12 +2164,37 @@ fn run_bounded_command(
     timeout: Duration,
     max_output_bytes: usize,
 ) -> Result<ProcessOutput, String> {
+    run_bounded_command_with_cwd(path, args, None, timeout, max_output_bytes)
+}
+
+fn run_bounded_command_in_dir(
+    path: &PathBuf,
+    args: &[&str],
+    cwd: &Path,
+    timeout: Duration,
+    max_output_bytes: usize,
+) -> Result<ProcessOutput, String> {
+    run_bounded_command_with_cwd(path, args, Some(cwd), timeout, max_output_bytes)
+}
+
+fn run_bounded_command_with_cwd(
+    path: &PathBuf,
+    args: &[&str],
+    cwd: Option<&Path>,
+    timeout: Duration,
+    max_output_bytes: usize,
+) -> Result<ProcessOutput, String> {
     let started = Instant::now();
-    let mut child = Command::new(path)
+    let mut command = Command::new(path);
+    command
         .args(args)
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
-        .stderr(Stdio::piped())
+        .stderr(Stdio::piped());
+    if let Some(cwd) = cwd {
+        command.current_dir(cwd);
+    }
+    let mut child = command
         .spawn()
         .map_err(|error| format!("Failed to spawn command: {error}"))?;
 
@@ -5316,6 +5434,319 @@ fn clone_desktop_workspace_report(
     )
 }
 
+fn desktop_git_status_report(
+    app: &AppHandle,
+    last_command_status: Option<String>,
+    last_command_output: Option<String>,
+    last_command_error: Option<String>,
+) -> Result<DesktopGitStatusReport, String> {
+    let workspace = workspace_root_for_app(Some(app))?;
+    let workspace_path = path_to_string(&workspace);
+    let git_status = git_capability_status();
+    let Some(git_path) = resolve_command("git") else {
+        return Ok(DesktopGitStatusReport {
+            schema_version: DESKTOP_GIT_STATUS_SCHEMA_VERSION.to_string(),
+            status: "capability_missing".to_string(),
+            workspace_path,
+            git_available: false,
+            git_version: git_status.1,
+            repository_root: String::new(),
+            branch: String::new(),
+            upstream: String::new(),
+            ahead: 0,
+            behind: 0,
+            clean: false,
+            conflicted: false,
+            staged_count: 0,
+            unstaged_count: 0,
+            untracked_count: 0,
+            files: Vec::new(),
+            remotes: Vec::new(),
+            last_command_status: last_command_status.unwrap_or_else(|| "not_run".to_string()),
+            last_command_output: last_command_output.unwrap_or_default(),
+            last_command_error: last_command_error.unwrap_or_default(),
+            refreshed_at: current_unix_millis_label(),
+            summary: vec!["Git was not found on PATH. Configure Git to use native workspace operations.".to_string()],
+        });
+    };
+
+    let root_output = run_bounded_command_in_dir(
+        &git_path,
+        &["rev-parse", "--show-toplevel"],
+        &workspace,
+        Duration::from_millis(4_000),
+        MAX_GIT_OPERATION_OUTPUT_BYTES,
+    )?;
+    if root_output.status != "passed" {
+        return Ok(DesktopGitStatusReport {
+            schema_version: DESKTOP_GIT_STATUS_SCHEMA_VERSION.to_string(),
+            status: "not_git_repository".to_string(),
+            workspace_path,
+            git_available: git_status.0,
+            git_version: git_status.1,
+            repository_root: String::new(),
+            branch: String::new(),
+            upstream: String::new(),
+            ahead: 0,
+            behind: 0,
+            clean: false,
+            conflicted: false,
+            staged_count: 0,
+            unstaged_count: 0,
+            untracked_count: 0,
+            files: Vec::new(),
+            remotes: Vec::new(),
+            last_command_status: last_command_status.unwrap_or_else(|| "not_run".to_string()),
+            last_command_output: last_command_output.unwrap_or_default(),
+            last_command_error: last_command_error
+                .unwrap_or_else(|| redact_sensitive_text(&root_output.stderr)),
+            refreshed_at: current_unix_millis_label(),
+            summary: vec![
+                "The active workspace is not a Git repository yet.".to_string(),
+                "Use Clone Workspace or select a repository folder before Git actions.".to_string(),
+            ],
+        });
+    }
+
+    let repository_root = root_output
+        .stdout
+        .lines()
+        .next()
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+        .unwrap_or(&workspace_path)
+        .to_string();
+    let repository_root_path = PathBuf::from(&repository_root);
+    let status_output = run_bounded_command_in_dir(
+        &git_path,
+        &["status", "--porcelain=v1", "--branch"],
+        &repository_root_path,
+        Duration::from_millis(4_000),
+        MAX_GIT_OPERATION_OUTPUT_BYTES,
+    )?;
+    let status_text = redact_sensitive_text(&status_output.stdout);
+    let branch = git_branch_name(&git_path, &repository_root_path);
+    let upstream = git_upstream_name(&git_path, &repository_root_path);
+    let (ahead, behind) = git_ahead_behind(&git_path, &repository_root_path, &upstream);
+    let files = parse_git_status_files(&status_text);
+    let staged_count = files
+        .iter()
+        .filter(|file| git_file_has_staged_change(&file.status))
+        .count();
+    let unstaged_count = files
+        .iter()
+        .filter(|file| git_file_has_unstaged_change(&file.status))
+        .count();
+    let untracked_count = files
+        .iter()
+        .filter(|file| file.status == "??")
+        .count();
+    let conflicted = files.iter().any(|file| git_status_is_conflicted(&file.status));
+    let clean = staged_count == 0 && unstaged_count == 0 && untracked_count == 0 && !conflicted;
+    let status = if status_output.status != "passed" {
+        "status_failed"
+    } else if conflicted {
+        "conflicts_detected"
+    } else if clean {
+        "clean"
+    } else {
+        "changes_detected"
+    }
+    .to_string();
+    let remotes = git_remote_reports(&git_path, &repository_root_path);
+    let mut summary = vec![format!(
+        "Branch {} / {} staged / {} unstaged / {} untracked.",
+        if branch.is_empty() { "detached".to_string() } else { branch.clone() },
+        staged_count,
+        unstaged_count,
+        untracked_count
+    )];
+    if !upstream.is_empty() {
+        summary.push(format!("Upstream {upstream}; ahead {ahead}, behind {behind}."));
+    } else {
+        summary.push("No upstream is configured for the current branch.".to_string());
+    }
+    if conflicted {
+        summary.push("Conflict state is visible; resolve files before commit/pull/push.".to_string());
+    }
+
+    Ok(DesktopGitStatusReport {
+        schema_version: DESKTOP_GIT_STATUS_SCHEMA_VERSION.to_string(),
+        status,
+        workspace_path,
+        git_available: git_status.0,
+        git_version: git_status.1,
+        repository_root: redact_sensitive_text(&repository_root),
+        branch,
+        upstream,
+        ahead,
+        behind,
+        clean,
+        conflicted,
+        staged_count,
+        unstaged_count,
+        untracked_count,
+        files,
+        remotes,
+        last_command_status: last_command_status.unwrap_or_else(|| "not_run".to_string()),
+        last_command_output: last_command_output.unwrap_or_default(),
+        last_command_error: last_command_error.unwrap_or_default(),
+        refreshed_at: current_unix_millis_label(),
+        summary,
+    })
+}
+
+fn run_desktop_git_action_report(
+    app: &AppHandle,
+    input: DesktopGitActionInput,
+) -> Result<DesktopGitActionReport, String> {
+    let action = normalize_one_of(
+        input.action,
+        &["refresh", "create_branch", "commit_all", "pull_ff", "push"],
+        "refresh",
+    );
+    if action == "refresh" {
+        let git = desktop_git_status_report(app, Some("refreshed".to_string()), None, None)?;
+        return Ok(DesktopGitActionReport {
+            status: "refreshed".to_string(),
+            action,
+            command: "git status --porcelain=v1 --branch".to_string(),
+            output: String::new(),
+            error: String::new(),
+            refreshed_at: current_unix_millis_label(),
+            git,
+        });
+    }
+
+    let workspace = workspace_root_for_app(Some(app))?;
+    let Some(git_path) = resolve_command("git") else {
+        let git = desktop_git_status_report(
+            app,
+            Some("capability_missing".to_string()),
+            None,
+            Some("Git was not found on PATH.".to_string()),
+        )?;
+        return Ok(DesktopGitActionReport {
+            status: "capability_missing".to_string(),
+            action,
+            command: "git".to_string(),
+            output: String::new(),
+            error: "Git was not found on PATH.".to_string(),
+            refreshed_at: current_unix_millis_label(),
+            git,
+        });
+    };
+    let root_output = run_bounded_command_in_dir(
+        &git_path,
+        &["rev-parse", "--show-toplevel"],
+        &workspace,
+        Duration::from_millis(4_000),
+        MAX_GIT_OPERATION_OUTPUT_BYTES,
+    )?;
+    if root_output.status != "passed" {
+        let error = redact_sensitive_text(&root_output.stderr);
+        let git = desktop_git_status_report(app, Some("not_git_repository".to_string()), None, Some(error.clone()))?;
+        return Ok(DesktopGitActionReport {
+            status: "not_git_repository".to_string(),
+            action,
+            command: "git rev-parse --show-toplevel".to_string(),
+            output: String::new(),
+            error,
+            refreshed_at: current_unix_millis_label(),
+            git,
+        });
+    }
+    let repository_root_text = root_output
+        .stdout
+        .lines()
+        .next()
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+        .map(ToOwned::to_owned)
+        .unwrap_or_else(|| path_to_string(&workspace));
+    let repository_root_path = PathBuf::from(repository_root_text);
+
+    let (command_label, output) = match action.as_str() {
+        "create_branch" => {
+            let branch = validate_git_branch_name(&input.branch_name)?;
+            let args = ["switch", "-c", branch.as_str()];
+            (
+                format!("git switch -c {branch}"),
+                run_bounded_command_in_dir(
+                    &git_path,
+                    &args,
+                    &repository_root_path,
+                    Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                    MAX_GIT_OPERATION_OUTPUT_BYTES,
+                )?,
+            )
+        }
+        "commit_all" => {
+            let message = validate_git_commit_message(&input.commit_message)?;
+            let add_output = run_bounded_command_in_dir(
+                &git_path,
+                &["add", "-A"],
+                &repository_root_path,
+                Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                MAX_GIT_OPERATION_OUTPUT_BYTES,
+            )?;
+            if add_output.status != "passed" {
+                ("git add -A".to_string(), add_output)
+            } else {
+                let args = ["commit", "-m", message.as_str()];
+                (
+                    "git add -A && git commit -m <message>".to_string(),
+                    run_bounded_command_in_dir(
+                        &git_path,
+                        &args,
+                        &repository_root_path,
+                        Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                        MAX_GIT_OPERATION_OUTPUT_BYTES,
+                    )?,
+                )
+            }
+        }
+        "pull_ff" => (
+            "git pull --ff-only".to_string(),
+            run_bounded_command_in_dir(
+                &git_path,
+                &["pull", "--ff-only"],
+                &repository_root_path,
+                Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                MAX_GIT_OPERATION_OUTPUT_BYTES,
+            )?,
+        ),
+        "push" => (
+            "git push".to_string(),
+            run_bounded_command_in_dir(
+                &git_path,
+                &["push"],
+                &repository_root_path,
+                Duration::from_millis(GIT_OPERATION_TIMEOUT_MS),
+                MAX_GIT_OPERATION_OUTPUT_BYTES,
+            )?,
+        ),
+        _ => unreachable!(),
+    };
+    let output_text = truncate_chars(&redact_sensitive_text(&output.stdout), 1_200);
+    let error_text = truncate_chars(&redact_sensitive_text(&output.stderr), 1_200);
+    let git = desktop_git_status_report(
+        app,
+        Some(output.status.clone()),
+        Some(output_text.clone()),
+        Some(error_text.clone()),
+    )?;
+    Ok(DesktopGitActionReport {
+        status: output.status,
+        action,
+        command: command_label,
+        output: output_text,
+        error: error_text,
+        refreshed_at: current_unix_millis_label(),
+        git,
+    })
+}
+
 fn read_desktop_workspace_state(app: &AppHandle) -> Result<DesktopWorkspaceState, String> {
     let path = desktop_workspace_state_path(app)?;
     if !path.exists() {
@@ -5411,6 +5842,170 @@ fn git_capability_status() -> (bool, String) {
         ),
         Err(error) => (false, error),
     }
+}
+
+fn git_branch_name(git_path: &PathBuf, repository_root: &Path) -> String {
+    let output = run_bounded_command_in_dir(
+        git_path,
+        &["branch", "--show-current"],
+        repository_root,
+        Duration::from_millis(2_000),
+        MAX_GIT_OPERATION_OUTPUT_BYTES,
+    );
+    output
+        .ok()
+        .and_then(|value| first_non_empty_line(&value.stdout))
+        .unwrap_or_else(|| "detached".to_string())
+}
+
+fn git_upstream_name(git_path: &PathBuf, repository_root: &Path) -> String {
+    let output = run_bounded_command_in_dir(
+        git_path,
+        &["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}"],
+        repository_root,
+        Duration::from_millis(2_000),
+        MAX_GIT_OPERATION_OUTPUT_BYTES,
+    );
+    output
+        .ok()
+        .filter(|value| value.status == "passed")
+        .and_then(|value| first_non_empty_line(&value.stdout))
+        .unwrap_or_default()
+}
+
+fn git_ahead_behind(git_path: &PathBuf, repository_root: &Path, upstream: &str) -> (usize, usize) {
+    if upstream.trim().is_empty() {
+        return (0, 0);
+    }
+    let output = run_bounded_command_in_dir(
+        git_path,
+        &["rev-list", "--left-right", "--count", &format!("{upstream}...HEAD")],
+        repository_root,
+        Duration::from_millis(2_000),
+        MAX_GIT_OPERATION_OUTPUT_BYTES,
+    );
+    let Some(line) = output
+        .ok()
+        .filter(|value| value.status == "passed")
+        .and_then(|value| first_non_empty_line(&value.stdout))
+    else {
+        return (0, 0);
+    };
+    let mut parts = line.split_whitespace();
+    let behind = parts.next().and_then(|value| value.parse::<usize>().ok()).unwrap_or(0);
+    let ahead = parts.next().and_then(|value| value.parse::<usize>().ok()).unwrap_or(0);
+    (ahead, behind)
+}
+
+fn git_remote_reports(git_path: &PathBuf, repository_root: &Path) -> Vec<DesktopGitRemoteReport> {
+    let output = run_bounded_command_in_dir(
+        git_path,
+        &["remote", "-v"],
+        repository_root,
+        Duration::from_millis(2_000),
+        MAX_GIT_OPERATION_OUTPUT_BYTES,
+    );
+    let Some(output) = output.ok().filter(|value| value.status == "passed") else {
+        return Vec::new();
+    };
+    let mut seen = HashSet::new();
+    output
+        .stdout
+        .lines()
+        .filter_map(|line| {
+            let mut parts = line.split_whitespace();
+            let name = parts.next()?.to_string();
+            let url = parts.next().unwrap_or_default().to_string();
+            let direction = parts
+                .next()
+                .unwrap_or_default()
+                .trim_matches(|character| character == '(' || character == ')')
+                .to_string();
+            let key = format!("{name}:{direction}:{url}");
+            if !seen.insert(key) {
+                return None;
+            }
+            Some(DesktopGitRemoteReport {
+                name,
+                url: redact_sensitive_text(&redact_repository_url(&url)),
+                direction,
+            })
+        })
+        .take(12)
+        .collect()
+}
+
+fn parse_git_status_files(status_text: &str) -> Vec<DesktopGitFileReport> {
+    status_text
+        .lines()
+        .filter(|line| !line.starts_with("## "))
+        .filter(|line| line.len() >= 3)
+        .take(MAX_GIT_STATUS_FILES)
+        .map(|line| {
+            let status = line.chars().take(2).collect::<String>();
+            let path_text = line.chars().skip(3).collect::<String>();
+            let (path, original_path) = if let Some((left, right)) = path_text.split_once(" -> ") {
+                (right.to_string(), Some(left.to_string()))
+            } else {
+                (path_text, None)
+            };
+            DesktopGitFileReport {
+                status,
+                path,
+                original_path,
+            }
+        })
+        .collect()
+}
+
+fn git_file_has_staged_change(status: &str) -> bool {
+    let mut chars = status.chars();
+    let first = chars.next().unwrap_or(' ');
+    first != ' ' && first != '?'
+}
+
+fn git_file_has_unstaged_change(status: &str) -> bool {
+    let mut chars = status.chars();
+    let _ = chars.next();
+    let second = chars.next().unwrap_or(' ');
+    second != ' ' && second != '?'
+}
+
+fn git_status_is_conflicted(status: &str) -> bool {
+    matches!(status, "DD" | "AU" | "UD" | "UA" | "DU" | "AA" | "UU")
+        || status.chars().any(|character| character == 'U')
+}
+
+fn validate_git_commit_message(value: &str) -> Result<String, String> {
+    let message = truncate_chars(value.trim(), MAX_GIT_COMMIT_MESSAGE_CHARS);
+    if message.is_empty() {
+        return Err("Commit message is required.".to_string());
+    }
+    Ok(message)
+}
+
+fn validate_git_branch_name(value: &str) -> Result<String, String> {
+    let branch = value.trim();
+    if branch.is_empty() {
+        return Err("Branch name is required.".to_string());
+    }
+    if branch.len() > 120 {
+        return Err("Branch name is too long.".to_string());
+    }
+    if branch.starts_with('-')
+        || branch.contains("..")
+        || branch.contains("@{")
+        || branch.ends_with('/')
+        || branch.ends_with(".lock")
+        || branch.chars().any(|character| {
+            character.is_control()
+                || character.is_whitespace()
+                || matches!(character, '~' | '^' | ':' | '?' | '*' | '[' | '\\')
+        })
+    {
+        return Err("Branch name is not safe for desktop Git operations.".to_string());
+    }
+    Ok(branch.to_string())
 }
 
 fn validate_git_repository_url(repository_url: &str) -> Result<String, String> {

@@ -1,0 +1,45 @@
+{
+  "schema_version": "omission-check.v1",
+  "work_id": "2026-06-03-deferred-native-git-clipboard-pty",
+  "checked_at": "2026-06-03",
+  "request": "Implement previously deferred desktop app gaps.",
+  "coverage": [
+    {
+      "item": "Native Git operations inside desktop app",
+      "status": "covered",
+      "evidence": [
+        "get_desktop_git_status",
+        "run_desktop_git_action",
+        "NativeGitWorkbench"
+      ]
+    },
+    {
+      "item": "Clipboard QA for code copy",
+      "status": "covered",
+      "evidence": [
+        "renderer/workspace-monitor/lib/clipboard.mjs",
+        "tests/clipboard.test.mjs"
+      ]
+    },
+    {
+      "item": "PTY terminal deferred decision",
+      "status": "covered_by_product_decision",
+      "evidence": [
+        "docs/architecture/pty-terminal-decision.ko.md",
+        "docs/architecture/pty-terminal-decision.en.md"
+      ]
+    },
+    {
+      "item": "Avoid hiding remaining work",
+      "status": "covered",
+      "evidence": [
+        "product-gap-registry keeps componentized_desktop_ui_architecture and public_distribution_gates open"
+      ]
+    }
+  ],
+  "remaining": [
+    "Full MonitorShell componentization structural debt",
+    "Public release signing/notarization/updater/clean-machine smoke"
+  ],
+  "decision": "No implementable deferred gap from the product-gap registry remains hidden as partial/test gap."
+}

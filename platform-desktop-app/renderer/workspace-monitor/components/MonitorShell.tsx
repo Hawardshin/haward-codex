@@ -39,9 +39,16 @@ import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFeatureArchitecturePanel";
 import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
 import { CoreFeatureTabs, type CoreFeatureTab, type CoreFeatureTabId } from "@/components/workbench/CoreFeatureTabs";
+import {
+  NativeGitWorkbench,
+  type DesktopGitActionReport,
+  type DesktopGitStatusReport,
+  type DesktopGitWorkbenchAction
+} from "@/components/workbench/NativeGitWorkbench";
 import { PathDisclosure } from "@/components/workbench/PathDisclosure";
 import { RuntimeTerminalDrawer } from "@/components/workbench/RuntimeTerminalDrawer";
 import { WorkspaceExplorerPane } from "@/components/workbench/WorkspaceExplorerPane";
+import { writeClipboardText } from "@/lib/clipboard.mjs";
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot, type WorkspaceSourceFile } from "@/lib/snapshot";
 
 type SectionId =
@@ -4845,6 +4852,11 @@ function DesktopRuntimePanel({
   const [workspaceImportPath, setWorkspaceImportPath] = useState("");
   const [workspaceCloneUrl, setWorkspaceCloneUrl] = useState("");
   const [workspaceCloneFolder, setWorkspaceCloneFolder] = useState("");
+  const [desktopGitStatus, setDesktopGitStatus] = useState<DesktopGitStatusReport | null>(null);
+  const [desktopGitBusy, setDesktopGitBusy] = useState("");
+  const [desktopGitNotice, setDesktopGitNotice] = useState("");
+  const [desktopGitCommitMessage, setDesktopGitCommitMessage] = useState("chore(workspace): update workspace files");
+  const [desktopGitBranchName, setDesktopGitBranchName] = useState("codex/workspace-update");
   const [inboxReport, setInboxReport] = useState<HumanDecisionInboxReport | null>(null);
   const [error, setError] = useState("");
   const [runningAdapterId, setRunningAdapterId] = useState("");
@@ -5254,6 +5266,53 @@ function DesktopRuntimePanel({
     }
   };
 
+  const refreshDesktopGitStatus = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setDesktopGitStatus(null);
+      return;
+    }
+    setDesktopGitBusy("refresh");
+    setError("");
+    try {
+      const report = await tauriInvoke<DesktopGitStatusReport>("get_desktop_git_status");
+      setDesktopGitStatus(report);
+      setDesktopGitNotice(report.status);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setDesktopGitBusy("");
+    }
+  };
+
+  const runDesktopGitAction = async (action: DesktopGitWorkbenchAction) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setError(copy.noRuntime);
+      return;
+    }
+    setDesktopGitBusy(action);
+    setError("");
+    try {
+      const report = await tauriInvoke<DesktopGitActionReport>("run_desktop_git_action", {
+        input: {
+          action,
+          commitMessage: desktopGitCommitMessage,
+          branchName: desktopGitBranchName
+        }
+      });
+      setDesktopGitStatus(report.git);
+      setDesktopGitNotice(`${report.command}: ${report.status}`);
+      if (action !== "refresh") {
+        void refreshDesktopWorkspace();
+      }
+    } catch (caught) {
+      setDesktopGitNotice(errorMessage(caught));
+    } finally {
+      setDesktopGitBusy("");
+    }
+  };
+
   const chooseDesktopWorkspaceFolder = async () => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
@@ -5275,6 +5334,7 @@ function DesktopRuntimePanel({
       setWorkspaceHostNotice(report.status === "folder_selection_canceled" ? copy.chooseCanceled : report.activeWorkspacePath ? copy.permissionGranted : report.status);
       if (report.activeWorkspacePath) {
         await refreshRuntimeSourceFiles();
+        await refreshDesktopGitStatus();
         void refreshServiceReadiness();
       }
     } catch (caught) {
@@ -5307,6 +5367,7 @@ function DesktopRuntimePanel({
       }
       setWorkspaceHostNotice(report.status);
       await refreshRuntimeSourceFiles();
+      await refreshDesktopGitStatus();
       void refreshServiceReadiness();
     } catch (caught) {
       setError(errorMessage(caught));
@@ -5340,6 +5401,7 @@ function DesktopRuntimePanel({
       }
       setWorkspaceHostNotice(report.status);
       await refreshRuntimeSourceFiles();
+      await refreshDesktopGitStatus();
       void refreshServiceReadiness();
     } catch (caught) {
       setError(errorMessage(caught));
@@ -6278,9 +6340,12 @@ function DesktopRuntimePanel({
   useEffect(() => {
     if (isFileWorkspaceSurface) {
       void refreshDesktopWorkspace();
+      void refreshDesktopGitStatus();
       void refreshRuntimeSourceFiles();
       return;
     }
+    void refreshDesktopWorkspace();
+    void refreshDesktopGitStatus();
     void refreshAdapters();
   }, [isFileWorkspaceSurface]);
 
@@ -7002,6 +7067,19 @@ function DesktopRuntimePanel({
           </div>
         </div>
       </section>
+
+      <NativeGitWorkbench
+        status={desktopGitStatus}
+        busy={desktopGitBusy}
+        notice={desktopGitNotice}
+        branchName={desktopGitBranchName}
+        commitMessage={desktopGitCommitMessage}
+        runtimeAvailable={Boolean(invoke)}
+        workspacePathFallback={desktopWorkspace?.activeWorkspacePath || ""}
+        onBranchNameChange={setDesktopGitBranchName}
+        onCommitMessageChange={setDesktopGitCommitMessage}
+        onRunAction={(action) => void runDesktopGitAction(action)}
+      />
 
       <section className="panel wide task-pipe-panel">
         <div className="panel-heading">
@@ -8162,41 +8240,6 @@ function getTauriInvoke(): TauriInvoke | null {
     return null;
   }
   return window.__TAURI__?.core?.invoke ?? null;
-}
-
-async function writeClipboardText(value: string) {
-  if (!value) {
-    return false;
-  }
-  try {
-    if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(value);
-      return true;
-    }
-  } catch {
-    // Fall back to a temporary textarea when browser clipboard permissions are unavailable.
-  }
-
-  try {
-    if (typeof document === "undefined") {
-      return false;
-    }
-    const field = document.createElement("textarea");
-    field.value = value;
-    field.setAttribute("readonly", "true");
-    field.style.position = "fixed";
-    field.style.left = "-9999px";
-    field.style.top = "0";
-    document.body.appendChild(field);
-    field.focus();
-    field.select();
-    field.setSelectionRange(0, value.length);
-    const copied = document.execCommand("copy");
-    document.body.removeChild(field);
-    return copied;
-  } catch {
-    return false;
-  }
 }
 
 function monacoLanguageFromPath(relativePath: string) {

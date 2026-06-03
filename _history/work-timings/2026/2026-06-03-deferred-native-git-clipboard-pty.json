@@ -1,0 +1,38 @@
+{
+  "schema_version": "work-timing.v1",
+  "date": "2026-06-03",
+  "work_id": "2026-06-03-deferred-native-git-clipboard-pty",
+  "owner": "platform-desktop-app",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "gap_review_and_web_first_intake",
+      "elapsed_minutes_estimate": 8,
+      "notes": "Reviewed product-gap registry and checked official Tauri, Git, xterm.js, and portable-pty references."
+    },
+    {
+      "phase": "native_git_runtime_and_ui",
+      "elapsed_minutes_estimate": 42,
+      "notes": "Implemented Tauri Git status/action commands and Desktop Git Workbench UI."
+    },
+    {
+      "phase": "clipboard_and_pty_decision",
+      "elapsed_minutes_estimate": 18,
+      "notes": "Added clipboard abstraction/tests and PTY/Native Git architecture docs."
+    },
+    {
+      "phase": "registry_readiness_and_component_split",
+      "elapsed_minutes_estimate": 28,
+      "notes": "Updated product gap registry, readiness scripts/tests, runtime contract, and split NativeGitWorkbench component."
+    },
+    {
+      "phase": "validation_browser_smoke_history",
+      "elapsed_minutes_estimate": 26,
+      "notes": "Ran Rust/type/test/check/build validation and browser smoke; recorded durable history artifacts."
+    }
+  ],
+  "bottlenecks": [
+    "Readiness token drift after moving UI code into a component",
+    "Browser internal scroll container required explicit user-like scroll for visual QA"
+  ]
+}
