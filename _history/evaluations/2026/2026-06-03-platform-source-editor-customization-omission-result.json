@@ -1,0 +1,14 @@
+{
+  "status": "coverage_ready",
+  "requires_rework": false,
+  "work_mode": "ship_first",
+  "coverage_summary": {
+    "expected_items_count": 3,
+    "artifact_checks_count": 4,
+    "acceptance_checks_count": 3,
+    "known_omission_risks_count": 0
+  },
+  "gaps": [],
+  "warnings": [],
+  "follow_up_actions": []
+}

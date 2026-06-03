@@ -3603,13 +3603,15 @@ h3 {
 }
 
 .session-launcher label,
-.source-editor-controls label {
+.source-editor-controls label,
+.source-customization-bar label {
   display: grid;
   gap: 6px;
 }
 
 .session-launcher label span,
-.source-editor-controls label span {
+.source-editor-controls label span,
+.source-customization-bar label span {
   color: var(--muted);
   font-size: 12px;
   font-weight: 800;
@@ -3622,6 +3624,7 @@ h3 {
 .session-input-row input,
 .source-editor-controls input,
 .source-editor-controls select,
+.source-customization-bar select,
 .source-file-browser input {
   width: 100%;
   border: 1px solid var(--line);
@@ -3635,7 +3638,8 @@ h3 {
 .session-launcher select,
 .session-input-row input,
 .source-editor-controls input,
-.source-editor-controls select {
+.source-editor-controls select,
+.source-customization-bar select {
   min-height: 38px;
   padding: 8px 10px;
 }
@@ -3647,7 +3651,8 @@ h3 {
 
 .session-launcher button,
 .session-input-row button,
-.source-editor-controls button {
+.source-editor-controls button,
+.source-customization-bar button {
   display: inline-flex;
   min-height: 38px;
   align-items: center;
@@ -3662,7 +3667,8 @@ h3 {
 
 .session-launcher button:disabled,
 .session-input-row button:disabled,
-.source-editor-controls button:disabled {
+.source-editor-controls button:disabled,
+.source-customization-bar button:disabled {
   opacity: 0.55;
 }
 
@@ -4177,6 +4183,75 @@ h3 {
 
 .source-editor-controls button {
   min-width: 0;
+}
+
+.source-customization-bar {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.95fr) minmax(180px, 0.8fr) minmax(130px, auto) minmax(160px, auto) minmax(150px, 0.55fr);
+  gap: 8px;
+  align-items: stretch;
+  margin: -4px 0 12px;
+}
+
+.source-customization-bar label,
+.source-customization-bar button,
+.source-context-pill {
+  min-width: 0;
+}
+
+.source-context-pill {
+  display: grid;
+  align-content: center;
+  gap: 3px;
+  border: 1px solid var(--line);
+  background: #fbfcfd;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.source-context-pill span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.source-context-pill strong {
+  display: block;
+  min-width: 0;
+  color: var(--slate);
+  font-size: 13px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.source-context-pill.compact {
+  background: var(--surface-muted);
+}
+
+.source-context-governance {
+  border-color: #c8d7e6;
+  background: #f4f9ff;
+}
+
+.source-context-spec {
+  border-color: #d7c9ea;
+  background: #faf7ff;
+}
+
+.source-context-runtime {
+  border-color: #b9d5c9;
+  background: #f2faf6;
+}
+
+.source-context-config {
+  border-color: #f0d394;
+  background: #fff9eb;
+}
+
+.source-context-source {
+  border-color: #cad3dd;
+  background: #f7f9fb;
 }
 
 .source-review-grid {
@@ -5669,6 +5744,7 @@ h3 {
   .session-input-row,
   .source-draft-list,
   .source-editor-controls,
+  .source-customization-bar,
   .mode-option-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -5854,6 +5930,7 @@ h3 {
   .source-review-grid,
   .source-draft-list,
   .source-editor-controls,
+  .source-customization-bar,
   .mode-option-grid,
   .task-lanes > div,
   .requirements-table {

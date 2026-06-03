@@ -1,0 +1,20 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-028",
+  "problem_observed": [
+    "The existing code editor surface used Monaco but still felt like a generic web editor.",
+    "The user needs code copy/editing that supports platform work rather than another UI candidate.",
+    "The previous product-layout work fixed width and performance but did not make the editor workflow platform-specific."
+  ],
+  "accepted_decisions": [
+    "Keep Monaco as the code editing engine because it is already installed and officially exposes editor options and theme APIs.",
+    "Customize the editor around the platform's repeated artifacts: requirements, specs, validation, Tauri commands, agent configs, and decision records.",
+    "Add patch-context copy so the source editor can hand off a structured draft to agent work."
+  ],
+  "rejected_options": [
+    "Clone or install a full open-source editor application for this bounded slice.",
+    "Leave the Monaco panel as a generic editor with only copy/save controls.",
+    "Add pure-browser write capability outside the Tauri scoped backup gate."
+  ],
+  "validation_gate": "Check/build/perf/test/browser smoke must pass before commit."
+}

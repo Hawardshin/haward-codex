@@ -1,0 +1,25 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-028",
+  "local_sources": [
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/specs/2026-06-03-platform-source-editor-customization/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-03-code-editor-surface/spec.ko.md",
+    "workspace-monitor/specs/2026-06-03-desktop-product-layout-hardening/spec.ko.md"
+  ],
+  "external_sources": [
+    "https://github.com/microsoft/monaco-editor",
+    "https://microsoft.github.io/monaco-editor/typedoc/",
+    "https://microsoft.github.io/monaco-editor/typedoc/variables/editor_editor_api.editor.EditorOptions.html"
+  ],
+  "implementation_scope": [
+    "Keep existing Monaco dependencies.",
+    "Add platform templates, path profiles, patch context copy, and custom theme/options.",
+    "Avoid new global installs and avoid cloning a separate editor product in this slice."
+  ],
+  "unsupported_claims_removed": [
+    "No claim was made that the app now includes all VS Code language-server, extension-host, or Git staging capabilities."
+  ]
+}

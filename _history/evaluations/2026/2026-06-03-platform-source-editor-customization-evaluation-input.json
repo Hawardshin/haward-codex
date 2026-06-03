@@ -1,0 +1,93 @@
+{
+  "initial_instruction": "Customize the existing code editing capability so it fits this platform and can be used as product functionality, after prior requests to stop treating the desktop app as a PoC and to include code copy/editing through open-source editor functionality.",
+  "result_summary": "Added platform templates, path-based source editor profiles, patch-context copying, Monaco workbench theme/options, requirements/spec/history records, and validation for the desktop source editor.",
+  "work_mode": "ship_first",
+  "changed_files": [
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "workspace-monitor/specs/2026-06-03-platform-source-editor-customization/",
+    "_history/web-searches/2026/2026-06-03-platform-source-editor-customization.ko.md",
+    "_history/source-provenance/2026/2026-06-03-platform-source-editor-customization.json",
+    "_history/plan-evidence/2026/2026-06-03-platform-source-editor-customization.json",
+    "_history/request-traces/2026/2026-06-03-platform-source-editor-customization.ko.md",
+    "_history/work-summaries/2026/2026-06-03.ko.md"
+  ],
+  "verification": [
+    "git diff --check: passed",
+    "corepack pnpm --filter workspace-monitor run check: passed",
+    "corepack pnpm --filter workspace-monitor test: 16 passed",
+    "corepack pnpm --filter workspace-monitor run build: passed for developer Browser smoke",
+    "corepack pnpm --filter workspace-monitor run build:customer: passed",
+    "corepack pnpm --filter workspace-monitor run perf:budget: within_budget, largest initial chunk 227542 bytes",
+    "corepack pnpm --filter workspace-monitor run check:intent-map: passed",
+    "corepack pnpm --filter workspace-monitor run check:intent-map:customer: passed",
+    "corepack pnpm --filter platform-desktop-app run check: passed",
+    "corepack pnpm --filter platform-desktop-app test: 13 passed",
+    "Browser smoke: source-customization-bar rendered, 6 templates visible, body/viewport overflow 0"
+  ],
+  "references_checked": [
+    "https://github.com/microsoft/monaco-editor",
+    "https://microsoft.github.io/monaco-editor/typedoc/",
+    "https://microsoft.github.io/monaco-editor/typedoc/variables/editor_editor_api.editor.EditorOptions.html",
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/app/globals.css",
+    "platform-desktop-app/specs/2026-06-03-code-editor-surface/spec.ko.md",
+    "workspace-monitor/specs/2026-06-03-desktop-product-layout-hardening/spec.ko.md"
+  ],
+  "grounding_checks": [
+    "_history/source-provenance/2026/2026-06-03-platform-source-editor-customization.json"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-03-platform-source-editor-customization.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plan-evidence/2026/2026-06-03-platform-source-editor-customization.json",
+    "workspace-monitor/specs/2026-06-03-platform-source-editor-customization/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-03-platform-source-editor-customization.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-03-platform-source-editor-customization-omission-result.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-03-platform-source-editor-customization.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-03.ko.md"
+  ],
+  "requirements_targets": [
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md"
+  ],
+  "spec_targets": [
+    "workspace-monitor/specs/2026-06-03-platform-source-editor-customization/spec.ko.md",
+    "workspace-monitor/specs/2026-06-03-platform-source-editor-customization/spec.en.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-03-platform-source-editor-customization.ko.md",
+    "_history/request-traces/2026/2026-06-03-platform-source-editor-customization.en.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-03.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-03-platform-source-editor-customization.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": false,
+  "resource_check_targets": [],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": []
+}

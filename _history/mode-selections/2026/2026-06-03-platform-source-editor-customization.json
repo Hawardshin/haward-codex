@@ -1,0 +1,13 @@
+{
+  "task": "Workspace Monitor platform source editor customization",
+  "selected_mode": "ship_first",
+  "reason": "The user explicitly rejected PoC framing and asked for customization that fits the current product. The work is a bounded implementation slice with required web-first intake, requirements/spec records, validation, and close-out evaluation.",
+  "web_first_completed": true,
+  "memory_bootstrap_completed": true,
+  "view_mode": "superadmin_developer",
+  "install_mode": "not_applicable",
+  "desktop_productization_relevant": true,
+  "installation_occurred": false,
+  "resource_risk_occurred": false,
+  "selected_at": "2026-06-03"
+}

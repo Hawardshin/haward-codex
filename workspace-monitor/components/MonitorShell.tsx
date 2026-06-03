@@ -78,15 +78,22 @@ const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((module) 
 
 const monacoEditorOptions: editor.IStandaloneEditorConstructionOptions = {
   automaticLayout: true,
+  bracketPairColorization: { enabled: true },
+  copyWithSyntaxHighlighting: true,
   cursorBlinking: "smooth",
   fontFamily: "\"SFMono-Regular\", Consolas, \"Liberation Mono\", monospace",
   fontSize: 12,
+  glyphMargin: true,
+  guides: { bracketPairs: true, indentation: true },
   lineHeight: 20,
   minimap: { enabled: true },
+  padding: { bottom: 10, top: 10 },
   renderLineHighlight: "all",
   renderWhitespace: "selection",
+  rulers: [100, 120],
   scrollBeyondLastLine: false,
   smoothScrolling: true,
+  stickyScroll: { enabled: true },
   tabSize: 2,
   wordWrap: "off"
 };
@@ -97,6 +104,168 @@ const monacoReadOnlyOptions: editor.IStandaloneEditorConstructionOptions = {
   minimap: { enabled: false },
   readOnly: true
 };
+
+const platformMonacoTheme = "agent-platform-workbench";
+
+const definePlatformMonacoTheme = (monaco: typeof import("monaco-editor")) => {
+  monaco.editor.defineTheme(platformMonacoTheme, {
+    base: "vs-dark",
+    inherit: true,
+    rules: [
+      { token: "comment", foreground: "8ea6b8" },
+      { token: "keyword", foreground: "7dd3fc" },
+      { token: "string", foreground: "b7e4c7" },
+      { token: "number", foreground: "f4a261" }
+    ],
+    colors: {
+      "editor.background": "#101923",
+      "editor.foreground": "#d7e0ea",
+      "editor.lineHighlightBackground": "#172435",
+      "editorLineNumber.foreground": "#637386",
+      "editorLineNumber.activeForeground": "#d7e0ea",
+      "editorCursor.foreground": "#9bd5ff",
+      "editor.selectionBackground": "#245173",
+      "editorIndentGuide.background1": "#263546",
+      "editorIndentGuide.activeBackground1": "#55677a",
+      "minimap.background": "#101923"
+    }
+  });
+};
+
+type SourceTemplateId =
+  | "requirement-row"
+  | "spec-section"
+  | "validation-record"
+  | "tauri-command"
+  | "agent-config"
+  | "decision-inbox-item";
+
+type SourceTemplate = {
+  id: SourceTemplateId;
+  label: string;
+  detail: string;
+  body: string;
+};
+
+type SourceEditorProfile = {
+  label: string;
+  detail: string;
+  accent: "governance" | "spec" | "runtime" | "config" | "source";
+  templateId: SourceTemplateId;
+};
+
+const sourceTemplates: SourceTemplate[] = [
+  {
+    id: "requirement-row",
+    label: "Requirement Row",
+    detail: "Baselined requirement table row",
+    body:
+      "| REQ-PLATFORM-000 | {{date}} | {{path}} | The platform shall ... | must | planned | spec: TBD | validation: TBD |\n"
+  },
+  {
+    id: "spec-section",
+    label: "Spec Section",
+    detail: "Scope, acceptance, trace",
+    body:
+      "## Goal\n\n- User outcome:\n- Owner surface:\n\n## Scope\n\n- Included:\n- Excluded:\n\n## Acceptance\n\n- [ ] Requirement linked\n- [ ] Implementation path named\n- [ ] Validation command recorded\n- [ ] Rollback or backup path clear\n"
+  },
+  {
+    id: "validation-record",
+    label: "Validation Record",
+    detail: "Command and browser evidence",
+    body:
+      "## Validation\n\n- Static check:\n- Build check:\n- Runtime smoke:\n- Browser viewport check:\n- Regression risk:\n- Evidence path:\n"
+  },
+  {
+    id: "tauri-command",
+    label: "Tauri Command",
+    detail: "Workspace-scoped command stub",
+    body:
+      "#[tauri::command]\nfn command_name() -> Result<(), String> {\n    Ok(())\n}\n"
+  },
+  {
+    id: "agent-config",
+    label: "Agent Config",
+    detail: "Bounded capability config",
+    body:
+      "{\n  \"id\": \"agent-id\",\n  \"label\": \"Agent Label\",\n  \"role\": \"bounded_capability\",\n  \"inputs\": [],\n  \"outputs\": [],\n  \"validation\": {\n    \"required_evidence\": [],\n    \"rollback\": \"\"\n  }\n}\n"
+  },
+  {
+    id: "decision-inbox-item",
+    label: "Decision Item",
+    detail: "Human arbitration packet",
+    body:
+      "{\n  \"id\": \"decision-id\",\n  \"status\": \"open\",\n  \"priority\": \"normal\",\n  \"question\": \"\",\n  \"impact\": \"\",\n  \"options\": [],\n  \"resume_action\": \"\"\n}\n"
+  }
+];
+
+const sourceTemplateById = sourceTemplates.reduce(
+  (lookup, template) => ({ ...lookup, [template.id]: template }),
+  {} as Record<SourceTemplateId, SourceTemplate>
+);
+
+function sourceEditorProfileForPath(relativePath: string): SourceEditorProfile {
+  const normalized = relativePath.toLowerCase();
+  if (normalized.includes("/docs/requirements/") || normalized.includes("_requirements/")) {
+    return {
+      label: "Requirements",
+      detail: "baseline, status, trace",
+      accent: "governance",
+      templateId: "requirement-row"
+    };
+  }
+  if (normalized.includes("/specs/") || normalized.includes("_specs/")) {
+    return {
+      label: "Spec Work",
+      detail: "scope, acceptance, validation",
+      accent: "spec",
+      templateId: "spec-section"
+    };
+  }
+  if (normalized.includes("src-tauri") || normalized.endsWith(".rs")) {
+    return {
+      label: "Runtime Command",
+      detail: "Tauri boundary, Result contract",
+      accent: "runtime",
+      templateId: "tauri-command"
+    };
+  }
+  if (normalized.includes("/configs/") || normalized.endsWith(".json")) {
+    return {
+      label: "Platform Config",
+      detail: "schema, validation, rollback",
+      accent: "config",
+      templateId: "agent-config"
+    };
+  }
+  if (normalized.includes("/validation") || normalized.includes("_history/evaluations/")) {
+    return {
+      label: "Validation",
+      detail: "commands, evidence, risk",
+      accent: "governance",
+      templateId: "validation-record"
+    };
+  }
+  return {
+    label: "Source Patch",
+    detail: "draft, diff, handoff",
+    accent: "source",
+    templateId: "spec-section"
+  };
+}
+
+function renderSourceTemplate(template: SourceTemplate, relativePath: string) {
+  return template.body
+    .split("{{date}}")
+    .join(new Date().toISOString().slice(0, 10))
+    .split("{{path}}")
+    .join(relativePath || "workspace-relative-path");
+}
+
+function appendSourceTemplate(content: string, templateBody: string) {
+  const separator = content.length === 0 ? "" : content.endsWith("\n") ? "\n" : "\n\n";
+  return `${content}${separator}${templateBody}`;
+}
 
 const PINNED_SECTIONS_STORAGE_KEY = "workspace-monitor:pinned-sections";
 const defaultPinnedSections: SectionId[] = ["overview", "desktop", "intent", "agents"];
@@ -2276,12 +2445,13 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                       {sourceCopyNotice && <p className="source-copy-notice">{sourceCopyNotice}</p>}
                       <div className="source-viewer-monaco">
                         <MonacoEditor
+                          beforeMount={definePlatformMonacoTheme}
                           height="100%"
                           language={monacoLanguageFromPath(selectedSource.path)}
                           loading={<div className="monaco-editor-loading">Loading Monaco editor</div>}
                           options={monacoReadOnlyOptions}
                           path={`file:///${selectedSource.path.replace(/^\/+/, "")}`}
-                          theme="vs-dark"
+                          theme={platformMonacoTheme}
                           value={selectedSource.content}
                         />
                       </div>
@@ -3094,8 +3264,10 @@ function DesktopRuntimePanel({
   const [sourceSaveResults, setSourceSaveResults] = useState<WorkspaceWriteReport[]>([]);
   const [writeReport, setWriteReport] = useState<WorkspaceWriteReport | null>(null);
   const [sourceCopyNotice, setSourceCopyNotice] = useState("");
+  const [sourceTemplateId, setSourceTemplateId] = useState<SourceTemplateId>("spec-section");
   const [editorBusy, setEditorBusy] = useState(false);
   const [saveAllBusy, setSaveAllBusy] = useState(false);
+  const sourceEditorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const panelMountedRef = useRef(false);
   const activeSessionPollInFlightRef = useRef(false);
   const lastInboxRefreshAtRef = useRef(0);
@@ -3225,6 +3397,11 @@ function DesktopRuntimePanel({
     }
     return buildSourceDiffSummary(sourceFile.content, sourceDraft);
   }, [sourceDraft, sourceFile]);
+  const sourceEditorProfile = useMemo(
+    () => sourceEditorProfileForPath(sourceFile?.relativePath || selectedSourcePath || sourcePathInput),
+    [selectedSourcePath, sourceFile?.relativePath, sourcePathInput]
+  );
+  const selectedSourceTemplate = sourceTemplateById[sourceTemplateId];
   const evidenceItems = useMemo(() => {
     const items = [
       ...outputEvents.slice(0, 5).map((event) => ({
@@ -3972,6 +4149,60 @@ function DesktopRuntimePanel({
     });
   };
 
+  const handleSourceEditorMount = (editorInstance: editor.IStandaloneCodeEditor) => {
+    sourceEditorRef.current = editorInstance;
+  };
+
+  const insertSourceTemplate = () => {
+    if (!sourceFile) {
+      return;
+    }
+
+    const templateBody = renderSourceTemplate(selectedSourceTemplate, sourceFile.relativePath);
+    const editorInstance = sourceEditorRef.current;
+    const selection = editorInstance?.getSelection() || null;
+    if (editorInstance && selection) {
+      editorInstance.executeEdits("platform-source-template", [
+        {
+          range: selection,
+          text: templateBody,
+          forceMoveMarkers: true
+        }
+      ]);
+      updateSourceDraft(editorInstance.getValue());
+      editorInstance.focus();
+      setSourceCopyNotice(`${selectedSourceTemplate.label} inserted`);
+      return;
+    }
+
+    updateSourceDraft(appendSourceTemplate(sourceDraft, templateBody));
+    setSourceCopyNotice(`${selectedSourceTemplate.label} inserted`);
+  };
+
+  const copySourcePatchContext = async () => {
+    if (!sourceFile) {
+      return;
+    }
+
+    const diffLine = sourceDiff
+      ? `+${sourceDiff.addedLines} / -${sourceDiff.removedLines} / ${sourceDiff.changedLines} changed`
+      : "not computed";
+    const context = [
+      "Platform Source Patch Context",
+      `Path: ${sourceFile.relativePath}`,
+      `Profile: ${sourceEditorProfile.label}`,
+      `Template: ${selectedSourceTemplate.label}`,
+      `Dirty: ${currentSourceDirty ? "yes" : "no"}`,
+      `Diff: ${diffLine}`,
+      "Gate: workspace-scoped backup on save",
+      "",
+      "--- draft ---",
+      sourceDraft
+    ].join("\n");
+    const copied = await writeClipboardText(context);
+    setSourceCopyNotice(copied ? `${sourceFile.relativePath} patch context copied` : "Clipboard unavailable");
+  };
+
   const saveSourceFile = async () => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke || !sourceFile) {
@@ -4123,6 +4354,10 @@ function DesktopRuntimePanel({
     const copied = await writeClipboardText(sourceDraft);
     setSourceCopyNotice(copied ? `${sourceFile.relativePath} copied` : "Clipboard unavailable");
   };
+
+  useEffect(() => {
+    setSourceTemplateId(sourceEditorProfile.templateId);
+  }, [sourceEditorProfile.templateId, sourceFile?.relativePath]);
 
   useEffect(() => {
     panelMountedRef.current = true;
@@ -5345,6 +5580,38 @@ function DesktopRuntimePanel({
           </button>
         </div>
 
+        <div className="source-customization-bar">
+          <div className={`source-context-pill source-context-${sourceEditorProfile.accent}`}>
+            <span>{sourceEditorProfile.label}</span>
+            <strong>{sourceEditorProfile.detail}</strong>
+          </div>
+          <label>
+            <span>Platform Template</span>
+            <select
+              value={sourceTemplateId}
+              onChange={(event) => setSourceTemplateId(event.target.value as SourceTemplateId)}
+            >
+              {sourceTemplates.map((template) => (
+                <option key={template.id} value={template.id}>
+                  {template.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button type="button" onClick={insertSourceTemplate} disabled={!sourceFile}>
+            <Code2 size={15} aria-hidden="true" />
+            <span>Insert Template</span>
+          </button>
+          <button type="button" onClick={copySourcePatchContext} disabled={!sourceFile}>
+            <ClipboardCheck size={15} aria-hidden="true" />
+            <span>Copy Patch Context</span>
+          </button>
+          <div className="source-context-pill compact">
+            <span>Gate</span>
+            <strong>backup before write</strong>
+          </div>
+        </div>
+
         <div className="source-review-grid">
           <aside className="source-file-browser">
             <header>
@@ -5445,13 +5712,15 @@ function DesktopRuntimePanel({
                 )}
                 <div className="monaco-editor-shell">
                   <MonacoEditor
+                    beforeMount={definePlatformMonacoTheme}
                     height="100%"
                     language={monacoLanguageFromPath(sourceFile.relativePath)}
                     loading={<div className="monaco-editor-loading">Loading Monaco editor</div>}
+                    onMount={handleSourceEditorMount}
                     onChange={(value) => updateSourceDraft(value ?? "")}
                     options={monacoEditorOptions}
                     path={`file:///${sourceFile.relativePath.replace(/^\/+/, "")}`}
-                    theme="vs-dark"
+                    theme={platformMonacoTheme}
                     value={sourceDraft}
                   />
                 </div>

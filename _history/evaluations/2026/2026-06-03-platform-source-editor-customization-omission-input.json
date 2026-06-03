@@ -1,0 +1,100 @@
+{
+  "task": "Platform source editor customization",
+  "work_mode": "ship_first",
+  "expected_items": [
+    {
+      "item_id": "customize_for_platform",
+      "description": "Customize the existing code editing surface for this platform rather than leaving it generic.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "workspace-monitor/app/globals.css"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "code_copy_and_editing",
+      "description": "Preserve code copy/editing support using the open-source Monaco editor path.",
+      "source": "prior_user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/components/MonitorShell.tsx",
+        "_history/web-searches/2026/2026-06-03-platform-source-editor-customization.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "product_not_poc",
+      "description": "Treat the slice as product functionality, not a PoC or initial UI candidate.",
+      "source": "prior_user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+        "workspace-monitor/specs/2026-06-03-platform-source-editor-customization/spec.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Platform template/profile/context implementation.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/app/globals.css",
+      "purpose": "Desktop workbench customization bar styling.",
+      "required": true
+    },
+    {
+      "path": "workspace-monitor/specs/2026-06-03-platform-source-editor-customization/spec.ko.md",
+      "purpose": "Spec record for the implementation slice.",
+      "required": true
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-03-platform-source-editor-customization.ko.md",
+      "purpose": "Web-first research record.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace_monitor_validation",
+      "description": "Workspace Monitor type, test, build, perf, and snapshot checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/specs/2026-06-03-platform-source-editor-customization/validation.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "desktop_validation",
+      "description": "Platform desktop check/test pass with customer bundle audit ready.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/specs/2026-06-03-platform-source-editor-customization/validation.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "browser_smoke",
+      "description": "Browser smoke confirms the source customization bar and no horizontal overflow in developer snapshot.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor/specs/2026-06-03-platform-source-editor-customization/validation.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [],
+  "notes": [
+    "Customer snapshot intentionally redacts Source Review; developer snapshot was used for browser validation, then final customer build was restored."
+  ]
+}

@@ -37,6 +37,7 @@
 | REQ-WM-024 | The web UI shall make core function locations visible in the first screen and group monitor section tabs by functional area so users can understand their current location and next navigation path immediately. | must | Check the top `core-feature-rail`, Overview `Core Functions`, grouped `section-tab-groups`, `pnpm test`, `pnpm run check`, `pnpm run build`, and desktop customer bundle |
 | REQ-WM-025 | The web UI should behave more like a real app by letting users run sections, view modes, language modes, document filters, and key actions through a global command palette plus pinned/recent quick controls. | should | Check `app-control-bar`, `command-palette`, pinned/recent controls, keyboard lifecycle cleanup, `pnpm test`, `pnpm run check`, `pnpm run build`, and static export smoke |
 | REQ-WM-026 | The desktop product UI shall render runtime, task pipe, service readiness, and source editor operations as full-width workbench surfaces instead of cramped web cards, and shall not include the large workspace snapshot as a JavaScript fallback chunk. | must | Check `pnpm run perf:budget`, customer bundle audit, Browser smoke with body/viewport overflow 0, and runtime/source panel visual review |
+| REQ-WM-027 | The desktop source editor shall act as a platform-specific editing workbench rather than a generic web editor, providing requirement/spec/validation/Tauri command/agent config/decision item templates, path-based editing profiles, and patch-context copying. | must | Check `source-customization-bar`, Monaco custom theme/options, template insertion, patch context copy, `pnpm run check`, `pnpm run build:customer`, and Browser smoke |
 
 ## Scope
 
@@ -60,6 +61,7 @@
 - A `structureOverview` snapshot object and Structure tab surfaces for platform planes, ownership boundaries, and structural pressure points
 - Core function shortcuts and grouped tab information architecture
 - Global command palette plus pinned/recent quick controls
+- Platform source editor templates, profiles, and patch-context copying that activate only through the Tauri desktop runtime
 - Vercel deployment docs
 
 ## Non-Goals
@@ -67,7 +69,7 @@
 - Authentication, login, or real-time server monitoring
 - Treating client-side view mode as a security boundary
 - Treating client-side language mode as snapshot redaction or a security boundary
-- Editing or saving source code from the browser UI
+- Editing or saving source code from a pure browser without the Tauri desktop runtime and scoped backup gate
 - GitHub API integration
 - Remote database storage
 - Publishing private secrets or full raw conversations
