@@ -269,7 +269,7 @@ export function RuntimeTerminalDrawer({
         </div>
 
         <div className="terminal-drawer-workbench">
-          <aside className="terminal-drawer-sidebar" aria-label={copy.rail}>
+          <aside className="terminal-drawer-sidebar" aria-label={copy.rail} tabIndex={0}>
             <div className="run-board-strip">
               <article>
                 <span>{copy.activeLanes}</span>
@@ -363,7 +363,7 @@ export function RuntimeTerminalDrawer({
             </div>
           </aside>
 
-          <div className="terminal-drawer-main">
+          <div className="terminal-drawer-main" tabIndex={0} aria-label={uiLanguage === "ko" ? "터미널 작업 영역" : "Terminal work area"}>
             {terminalDrawerView === "start" && (
             <div className="terminal-view-panel terminal-start-panel">
         <div className="session-launcher">

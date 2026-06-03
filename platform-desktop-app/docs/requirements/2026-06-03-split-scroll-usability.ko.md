@@ -13,6 +13,7 @@
 | PDA-REQ-061 | 설정 dialog는 header와 tab list가 유지되고 settings content pane만 스크롤되어야 한다. | should | Browser settings smoke |
 | PDA-REQ-062 | 주요 scroll pane은 keyboard focus를 받을 수 있어야 한다. | should | `tabIndex={0}` source/readiness check |
 | PDA-REQ-063 | 작은 화면에서는 고정 split height가 내용을 숨기지 않도록 page flow로 풀려야 한다. | should | responsive CSS check |
+| PDA-REQ-064 | 최상위 desktop app shell, activity rail, viewport가 중첩 `100vh`/고정 `min-height`로 내부 pane 스크롤 접근을 가리면 안 된다. | must | `check-scroll-containers.mjs`, Browser smoke |
 
 ## 비범위
 

@@ -2690,7 +2690,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           </button>
         </aside>
 
-        <section className="desktop-viewport" aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"}>
+        <section className="desktop-viewport" aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"} tabIndex={0}>
           <header className="desktop-titlebar">
             <div className="titlebar-section">
               {currentSection ? <currentSection.icon size={18} aria-hidden="true" /> : <LayoutDashboard size={18} aria-hidden="true" />}

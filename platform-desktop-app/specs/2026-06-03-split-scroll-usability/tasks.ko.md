@@ -7,4 +7,6 @@
 | 터미널 split scroll CSS 개선 | 완료 | `app/globals.css`, `RuntimeTerminalDrawer.tsx` |
 | 설정 dialog content scroll 개선 | 완료 | `app/globals.css`, `MonitorShell.tsx` |
 | focusable scroll pane 추가 | 완료 | `MonitorShell.tsx`, `RuntimeTerminalDrawer.tsx`, `WorkspaceExplorerPane.tsx` |
+| 최상위 앱 shell scroll 접근 회귀 수정 | 완료 | `app/globals.css`, `MonitorShell.tsx`, `RuntimeTerminalDrawer.tsx` |
+| scroll container 회귀 검사 추가 | 완료 | `scripts/check-scroll-containers.mjs`, `package.json` |
 | 검증 | 완료 | `validation.ko.md` |

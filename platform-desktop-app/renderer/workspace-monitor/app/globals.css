@@ -206,7 +206,10 @@ button:disabled {
   transform: translateY(var(--control-active-shift));
 }
 
+.desktop-viewport:focus-visible,
 .settings-tab-panel:focus-visible,
+.terminal-drawer-sidebar:focus-visible,
+.terminal-drawer-main:focus-visible,
 .workspace-explorer-tree:focus-visible,
 .session-list:focus-visible,
 .session-terminal pre:focus-visible,
@@ -264,6 +267,7 @@ button,
 main {
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   padding: 0;
 }
@@ -279,7 +283,8 @@ main {
   display: grid;
   grid-template-columns: 62px minmax(0, 1fr);
   height: 100vh;
-  min-height: 720px;
+  height: 100dvh;
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -304,8 +309,9 @@ main {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto auto;
   gap: 12px;
-  height: 100vh;
-  max-height: 100vh;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
   border-right: 1px solid #cfd8e3;
   background: var(--rail-bg);
   padding: 12px 8px;
@@ -384,8 +390,9 @@ main {
   grid-template-rows: auto auto minmax(0, 1fr) auto;
   gap: 12px;
   min-width: 0;
-  height: 100vh;
-  max-height: 100vh;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
   overflow: hidden;
   border-right: 1px solid var(--line);
   background: color-mix(in srgb, var(--surface-muted) 70%, var(--bg) 30%);
@@ -568,11 +575,14 @@ main {
 .desktop-viewport {
   min-width: 0;
   min-height: 0;
-  height: 100vh;
-  max-height: 100vh;
+  height: 100%;
+  max-height: 100%;
   overflow: auto;
   overflow-x: hidden;
+  overscroll-behavior: contain;
   padding: 0 18px 32px;
+  scrollbar-gutter: stable;
+  scroll-padding-top: 72px;
 }
 
 .desktop-titlebar {
@@ -689,9 +699,10 @@ main {
   inset: 0;
   z-index: 60;
   display: grid;
-  align-items: center;
+  align-items: start;
   justify-items: center;
   overflow: auto;
+  overscroll-behavior: contain;
   background: var(--overlay);
   padding: 18px;
 }
@@ -700,7 +711,10 @@ main {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   width: min(980px, 100%);
-  max-height: min(760px, calc(100vh - 36px));
+  height: min(760px, calc(100vh - 36px));
+  height: min(760px, calc(100dvh - 36px));
+  max-height: calc(100vh - 36px);
+  max-height: calc(100dvh - 36px);
   overflow: hidden;
   border: 1px solid rgba(148, 163, 184, 0.72);
   background: var(--surface);
@@ -5273,7 +5287,8 @@ h3 {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   min-height: 0;
-  max-height: none;
+  max-height: calc(100vh - 64px);
+  max-height: calc(100dvh - 64px);
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--line) 82%, #000000);
   border-right: 0;
@@ -5316,8 +5331,10 @@ h3 {
   grid-template-columns: minmax(258px, 318px) minmax(0, 1fr);
   min-width: 0;
   min-height: 0;
-  overflow: hidden;
+  overflow: auto;
   margin: 0 -12px -12px;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 
 .terminal-drawer-sidebar {
@@ -5326,18 +5343,23 @@ h3 {
   gap: 10px;
   min-width: 0;
   min-height: 0;
-  overflow: hidden;
+  overflow: auto;
   border-right: 1px solid var(--line);
   background: var(--surface-raised);
   padding: 10px;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 
 .terminal-drawer-main {
   display: grid;
+  grid-template-rows: minmax(0, 1fr);
   min-width: 0;
   min-height: 0;
-  overflow: hidden;
+  overflow: auto;
   padding: 12px;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 
 .terminal-drawer-main > .terminal-view-panel,
@@ -6559,7 +6581,8 @@ h3 {
 .monaco-editor-shell {
   min-width: 0;
   height: min(58vh, 620px);
-  min-height: 420px;
+  height: clamp(340px, 58dvh, 620px);
+  min-height: 0;
   overflow: hidden;
   border: 1px solid #263241;
   background: #111827;
@@ -6567,7 +6590,7 @@ h3 {
 }
 
 .monaco-editor-shell.diff-shell {
-  min-height: 500px;
+  min-height: min(500px, 68dvh);
 }
 
 .monaco-editor-loading {
@@ -6961,7 +6984,8 @@ h3 {
   display: grid;
   grid-template-columns: minmax(292px, 0.34fr) minmax(0, 1fr);
   height: calc(100vh - 148px);
-  min-height: 520px;
+  height: clamp(360px, calc(100dvh - 148px), 760px);
+  min-height: 0;
   overflow: hidden;
   border: 1px solid var(--line);
   background: var(--surface);
@@ -8604,18 +8628,20 @@ h3 {
 
   .terminal-drawer-workbench {
     grid-template-columns: 1fr;
-    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-rows: minmax(220px, 0.42fr) minmax(300px, 0.58fr);
     overflow: auto;
   }
 
   .terminal-drawer-sidebar {
     border-right: 0;
     border-bottom: 1px solid var(--line);
-    overflow: visible;
+    overflow: auto;
   }
 
   .terminal-drawer-main {
     min-width: 0;
+    min-height: 0;
+    overflow: auto;
   }
 
   .workspace-home-panel {
@@ -8763,10 +8789,27 @@ h3 {
     border-bottom: 1px solid var(--line);
   }
 
+  .filesystem-editor-pane .panel-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .source-panel-stats {
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 8px;
+    flex-wrap: wrap;
+  }
+
   .filesystem-workbench-shell {
     height: auto;
     min-height: 0;
     overflow: visible;
+  }
+
+  .filesystem-workbench .native-source-controls {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .filesystem-editor-pane,
@@ -8774,6 +8817,13 @@ h3 {
   .native-source-grid,
   .source-edit-workbench {
     overflow: visible;
+  }
+
+  .source-command-toolbar,
+  .source-workbench-switcher {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
   }
 
   .monaco-editor-shell {

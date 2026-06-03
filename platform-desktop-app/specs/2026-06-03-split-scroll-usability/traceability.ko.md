@@ -7,3 +7,4 @@
 | PDA-REQ-061 | `settings-dialog`, `settings-dialog-body`, `settings-tab-panel` scroll split | Browser smoke |
 | PDA-REQ-062 | scroll pane `tabIndex={0}` and aria labels | source/readiness check |
 | PDA-REQ-063 | max-width responsive overflow/height release | CSS check |
+| PDA-REQ-064 | `desktop-app-shell`, `activity-rail`, `desktop-viewport`, terminal drawer pane, filesystem shell dynamic height contract | `check-scroll-containers.mjs`, Browser smoke |

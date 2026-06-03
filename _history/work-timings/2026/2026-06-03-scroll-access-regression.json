@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-03",
+  "work_id": "scroll-access-regression",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "elapsed_minutes": 2,
+      "notes": "Checked MDN and web.dev overflow guidance before editing."
+    },
+    {
+      "phase": "source_inspection",
+      "elapsed_minutes": 8,
+      "notes": "Inspected desktop shell, settings dialog, terminal drawer, source workbench, and mobile media query overflow rules."
+    },
+    {
+      "phase": "implementation",
+      "elapsed_minutes": 22,
+      "notes": "Changed shell/viewport heights, terminal/settings/source scroll containers, JSX focus entry points, and regression checker."
+    },
+    {
+      "phase": "browser_smoke_iterations",
+      "elapsed_minutes": 18,
+      "notes": "Initial smoke found mobile terminal and mobile source overflow regressions; patched both and reran."
+    },
+    {
+      "phase": "validation_and_records",
+      "elapsed_minutes": 14,
+      "notes": "Ran check/test/build/perf/customer audit/platform readiness and updated spec, trace, evaluation, and history records."
+    }
+  ],
+  "total_elapsed_minutes": 64,
+  "bottlenecks": [
+    "Mobile media query overrides can undo desktop scroll contracts; browser smoke must include source/settings/terminal states on mobile."
+  ]
+}
