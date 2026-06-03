@@ -1,0 +1,23 @@
+{
+  "id": "2026-06-03-workbench-split-density",
+  "request_id": "UR-2026-06-03-054",
+  "date": "2026-06-03",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed"
+    },
+    {
+      "phase": "implementation",
+      "status": "completed"
+    },
+    {
+      "phase": "validation",
+      "status": "completed"
+    },
+    {
+      "phase": "commit_push",
+      "status": "pending"
+    }
+  ]
+}
