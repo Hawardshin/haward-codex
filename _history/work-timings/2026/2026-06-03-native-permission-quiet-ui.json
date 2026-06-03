@@ -1,0 +1,19 @@
+{
+  "work_id": "2026-06-03-native-permission-quiet-ui",
+  "request_id": "UR-2026-06-03-053",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed"
+    },
+    {
+      "phase": "local_implementation",
+      "status": "completed"
+    },
+    {
+      "phase": "validation",
+      "status": "completed"
+    }
+  ]
+}

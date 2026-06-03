@@ -616,8 +616,10 @@ const nativeWorkspaceCopy = {
     title: "파일시스템을 끌어와서 처리하기",
     description:
       "VS Code처럼 왼쪽 Explorer가 실제 작업공간 파일시스템을 잡고, 오른쪽 편집기에서 파일을 열어 수정하고 저장합니다.",
-    chooseFolder: "폴더 선택",
-    choosingFolder: "폴더 여는 중",
+    chooseFolder: "작업공간 접근 권한 요청",
+    choosingFolder: "권한 요청 중",
+    permissionDetail: "native 폴더 선택 창에서 허용하면 이 앱이 해당 작업공간을 바로 읽고 저장합니다.",
+    permissionGranted: "작업공간 접근 권한을 받았습니다.",
     refreshWorkspace: "작업공간 새로고침",
     refreshFiles: "파일 목록 새로고침",
     openSelected: "선택 파일 열기",
@@ -630,8 +632,8 @@ const nativeWorkspaceCopy = {
     fileSearch: "파일명, 폴더, 언어 검색",
     fileList: "파일 목록",
     fileTree: "파일 트리",
-    uploadDropzone: "파일을 이 플랫폼으로 올리기",
-    uploadDropzoneDetail: "작업 폴더를 선택한 뒤 파일을 클릭해 열거나, 추후 파일 업로드/처리 queue를 이 영역에서 시작합니다.",
+    uploadDropzone: "작업공간 접근 권한 요청",
+    uploadDropzoneDetail: "native 폴더 선택 창에서 허용하면 Explorer가 실제 파일시스템을 읽고 편집/저장에 바로 사용합니다.",
     explorerHint: "Explorer에서 파일을 누르면 오른쪽 편집기에 열립니다.",
     openedDrafts: "열린 파일",
     editorSettings: "편집 설정",
@@ -658,8 +660,10 @@ const nativeWorkspaceCopy = {
     title: "Bring the filesystem into the platform",
     description:
       "Like VS Code, the left Explorer owns the real workspace filesystem and the editor on the right opens files for processing and saving.",
-    chooseFolder: "Choose Folder",
-    choosingFolder: "Choosing",
+    chooseFolder: "Request Workspace Access",
+    choosingFolder: "Requesting Access",
+    permissionDetail: "Use the native folder picker to grant this app access to the workspace for reading and saving.",
+    permissionGranted: "Workspace access granted.",
     refreshWorkspace: "Refresh Workspace",
     refreshFiles: "Refresh Files",
     openSelected: "Open Selected",
@@ -672,8 +676,8 @@ const nativeWorkspaceCopy = {
     fileSearch: "Search file, folder, or language",
     fileList: "File List",
     fileTree: "File Tree",
-    uploadDropzone: "Add files to this platform",
-    uploadDropzoneDetail: "Choose a workspace folder, then open files from the Explorer. File upload and processing queues start from this area.",
+    uploadDropzone: "Request workspace access",
+    uploadDropzoneDetail: "Grant access from the native folder picker, then the Explorer can read, edit, and save real workspace files.",
     explorerHint: "Click a file in Explorer to open it in the editor.",
     openedDrafts: "Open Files",
     editorSettings: "Editor Settings",
@@ -2210,12 +2214,12 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       icon: FolderOpen,
       metric: `${visibleSourceFiles.length.toLocaleString("ko-KR")} files`,
       cta: uiLanguage === "ko" ? "Explorer 열기" : "Open Explorer",
-      secondaryCta: uiLanguage === "ko" ? "작업 폴더 선택" : "Choose folder",
+      secondaryCta: uiLanguage === "ko" ? "작업공간 권한 요청" : "Request workspace access",
       run: () => openSection("source"),
       secondaryRun: () => openSection("source"),
       steps:
         uiLanguage === "ko"
-          ? ["작업 폴더 선택", "Explorer에서 파일 열기", "수정/저장 후 에이전트 작업에 연결"]
+          ? ["작업공간 접근 허용", "Explorer에서 파일 열기", "수정/저장 후 에이전트 작업에 연결"]
           : ["Choose a workspace folder", "Open files from Explorer", "Edit/save and connect work to agents"]
     },
     {
@@ -4779,6 +4783,9 @@ function DesktopRuntimePanel({
       if (!workspaceImportPath && report.activeWorkspacePath) {
         setWorkspaceImportPath(report.activeWorkspacePath);
       }
+      if (!workingDir.trim() && report.activeWorkspacePath) {
+        setWorkingDir(report.activeWorkspacePath);
+      }
       setWorkspaceHostNotice("");
     } catch (caught) {
       setError(errorMessage(caught));
@@ -4802,7 +4809,10 @@ function DesktopRuntimePanel({
       if (report.activeWorkspacePath) {
         setWorkspaceImportPath(report.activeWorkspacePath);
       }
-      setWorkspaceHostNotice(report.status === "folder_selection_canceled" ? copy.chooseCanceled : report.status);
+      if (!workingDir.trim() && report.activeWorkspacePath) {
+        setWorkingDir(report.activeWorkspacePath);
+      }
+      setWorkspaceHostNotice(report.status === "folder_selection_canceled" ? copy.chooseCanceled : report.activeWorkspacePath ? copy.permissionGranted : report.status);
       if (report.activeWorkspacePath) {
         await refreshRuntimeSourceFiles();
         void refreshServiceReadiness();
@@ -4832,6 +4842,9 @@ function DesktopRuntimePanel({
         path: workspaceImportPath.trim()
       });
       setDesktopWorkspace(report);
+      if (!workingDir.trim() && report.activeWorkspacePath) {
+        setWorkingDir(report.activeWorkspacePath);
+      }
       setWorkspaceHostNotice(report.status);
       await refreshRuntimeSourceFiles();
       void refreshServiceReadiness();
@@ -4862,6 +4875,9 @@ function DesktopRuntimePanel({
       });
       setDesktopWorkspace(report);
       setWorkspaceImportPath(report.activeWorkspacePath);
+      if (!workingDir.trim() && report.activeWorkspacePath) {
+        setWorkingDir(report.activeWorkspacePath);
+      }
       setWorkspaceHostNotice(report.status);
       await refreshRuntimeSourceFiles();
       void refreshServiceReadiness();
@@ -6309,8 +6325,8 @@ function DesktopRuntimePanel({
         <div className="quick-start-flow">
           <button type="button" onClick={chooseDesktopWorkspaceFolder} disabled={!invoke || workspaceHostBusy !== ""}>
             <FolderOpen size={16} aria-hidden="true" />
-            <span>{uiLanguage === "ko" ? "작업 폴더 선택" : "Choose workspace"}</span>
-            <small>{desktopWorkspace?.activeWorkspacePath || "native folder picker"}</small>
+            <span>{workspaceHostBusy === "choose" ? copy.choosingFolder : copy.chooseFolder}</span>
+            <small>{desktopWorkspace?.activeWorkspacePath || (uiLanguage === "ko" ? "native 권한 요청" : "native permission request")}</small>
           </button>
           <button type="button" onClick={runAllHealthChecks} disabled={!invoke || runningAdapterId !== ""}>
             <CheckCircle2 size={16} aria-hidden="true" />
@@ -6437,7 +6453,7 @@ function DesktopRuntimePanel({
           <div className="desktop-actions">
             <button type="button" onClick={chooseDesktopWorkspaceFolder} disabled={!invoke || workspaceHostBusy !== ""}>
               <FolderOpen size={16} aria-hidden="true" />
-              <span>{workspaceHostBusy === "choose" ? "폴더 여는 중" : "폴더 선택"}</span>
+              <span>{workspaceHostBusy === "choose" ? "권한 요청 중" : "작업공간 접근 권한 요청"}</span>
             </button>
             <button type="button" onClick={refreshDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== ""}>
               <Activity size={16} aria-hidden="true" />

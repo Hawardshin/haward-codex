@@ -17,6 +17,7 @@ type WorkspaceExplorerCopy = {
   folderSource: string;
   loading: string;
   noFiles: string;
+  permissionDetail: string;
   refreshFiles: string;
   refreshWorkspace: string;
   runtimeSource: string;
@@ -102,6 +103,7 @@ export function WorkspaceExplorerPane({
         <strong>{workspaceHostBusy === "choose" ? copy.choosingFolder : copy.uploadDropzone}</strong>
         <span>{copy.uploadDropzoneDetail}</span>
       </button>
+      <p className="workspace-permission-hint">{copy.permissionDetail}</p>
 
       <div className="workspace-explorer-actions">
         <button type="button" onClick={onChooseFolder} disabled={!runtimeAvailable || workspaceHostBusy !== ""}>
