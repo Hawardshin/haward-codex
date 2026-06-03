@@ -33,7 +33,7 @@ export function SnapshotLoader() {
               reject(new Error("Snapshot request timed out."));
             }, 7000);
           })
-        ]).catch(() => loadGeneratedSnapshot());
+        ]);
         if (!canceled) {
           setState({ status: "ready", snapshot, error: "" });
         }
@@ -80,11 +80,6 @@ async function fetchPublicSnapshot(controller: AbortController | null) {
     throw new Error(`Snapshot request failed with ${response.status}`);
   }
   return (await response.json()) as WorkspaceSnapshot;
-}
-
-async function loadGeneratedSnapshot() {
-  const module = await import("@/src/generated/workspace-snapshot.json");
-  return module.default as WorkspaceSnapshot;
 }
 
 function SnapshotLoadingShell({ detail, status = "loading" }: { detail: string; status?: "loading" | "error" }) {

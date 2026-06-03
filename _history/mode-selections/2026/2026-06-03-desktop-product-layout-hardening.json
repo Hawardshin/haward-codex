@@ -1,0 +1,9 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-027",
+  "selected_work_mode": "standard",
+  "reason": "The task changed product UI source code, performance behavior, generated customer bundle output, and durable requirements/spec records.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "product_surface": "platform-desktop-app embedded workspace-monitor UI"
+}

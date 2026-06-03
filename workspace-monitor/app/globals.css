@@ -336,6 +336,7 @@ main {
   height: 100vh;
   max-height: 100vh;
   overflow: auto;
+  overflow-x: hidden;
   padding: 0 18px 32px;
 }
 
@@ -2468,6 +2469,7 @@ h3 {
 }
 
 .panel {
+  min-width: 0;
   padding: 18px;
 }
 
@@ -2545,6 +2547,8 @@ h3 {
 .desktop-command-panel,
 .unified-ops-panel,
 .task-pipe-panel,
+.runtime-data-panel,
+.service-readiness-panel,
 .task-run-panel,
 .desktop-control-panel,
 .cli-session-panel,
@@ -2708,7 +2712,7 @@ h3 {
 
 .task-pipe-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+  grid-template-columns: 1fr;
   gap: 12px;
   align-items: start;
   margin-bottom: 14px;
@@ -2716,9 +2720,18 @@ h3 {
 
 .task-pipe-controls {
   display: grid;
-  grid-template-columns: minmax(190px, 0.62fr) minmax(280px, 1.22fr) minmax(170px, 0.52fr) auto;
+  grid-template-columns: minmax(190px, 0.72fr) minmax(320px, 1.28fr);
   gap: 10px;
   align-items: end;
+}
+
+.task-pipe-controls .session-prompt-field {
+  grid-column: span 1;
+}
+
+.task-pipe-controls .inline-toggle,
+.task-pipe-controls button {
+  width: 100%;
 }
 
 .task-pipe-controls label,
@@ -2812,7 +2825,7 @@ h3 {
 
 .task-pipe-summary {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
   gap: 8px;
 }
 
@@ -2832,7 +2845,8 @@ h3 {
 .pipe-lane-grid small {
   display: block;
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .task-pipe-summary strong {
@@ -2888,7 +2902,7 @@ h3 {
 
 .task-run-summary-strip {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 8px;
   margin-bottom: 12px;
 }
@@ -2896,6 +2910,8 @@ h3 {
 .task-run-summary-strip article,
 .task-run-card,
 .session-record-link {
+  display: grid;
+  gap: 4px;
   min-width: 0;
   border: 1px solid var(--line);
   background: #fbfcfd;
@@ -2910,7 +2926,8 @@ h3 {
 .session-record-link strong,
 .session-record-link small {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .task-run-grid {
@@ -3009,7 +3026,7 @@ h3 {
 
 .task-run-detail-meta {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
   gap: 6px;
 }
 
@@ -3019,7 +3036,8 @@ h3 {
   background: var(--surface);
   border-radius: 999px;
   padding: 4px 7px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
   text-align: center;
 }
 
@@ -3047,9 +3065,13 @@ h3 {
 
 .runtime-data-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr) minmax(280px, 0.85fr);
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
   gap: 12px;
   align-items: start;
+}
+
+.runtime-data-layout > .runtime-root-grid {
+  grid-row: span 2;
 }
 
 .runtime-root-grid,
@@ -3061,7 +3083,7 @@ h3 {
 }
 
 .runtime-root-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 .runtime-root-grid article,
@@ -3089,6 +3111,11 @@ h3 {
   justify-content: space-between;
   gap: 8px;
   align-items: start;
+}
+
+.runtime-root-grid header > div,
+.runtime-audit-card header > div {
+  min-width: 0;
 }
 
 .runtime-root-grid header span,
@@ -3125,7 +3152,8 @@ h3 {
 .payload-finding-list code,
 .support-bundle-grid code {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .runtime-root-grid p,
@@ -3232,14 +3260,14 @@ h3 {
 
 .service-readiness-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
   gap: 12px;
   align-items: start;
 }
 
 .service-group-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 10px;
 }
 
@@ -3285,6 +3313,11 @@ h3 {
   align-items: start;
 }
 
+.service-group-card header > div,
+.service-next-actions header > div {
+  min-width: 0;
+}
+
 .service-group-card h3,
 .service-next-actions h3 {
   margin: 3px 0 0;
@@ -3312,21 +3345,27 @@ h3 {
 .service-check-list div,
 .service-blocker-list div {
   display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 4px;
+  align-items: start;
 }
 
 .service-check-list span,
 .service-blocker-list span {
   font-weight: 800;
-  overflow-wrap: anywhere;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .service-check-list p,
 .service-blocker-list p {
+  grid-column: 1 / -1;
   margin: 0;
   color: var(--muted);
   line-height: 1.45;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .service-next-actions code {
@@ -3482,13 +3521,17 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  min-width: 0;
 }
 
 .adapter-report span {
+  max-width: 100%;
   border: 1px solid var(--line);
   background: var(--surface);
   border-radius: 999px;
   padding: 3px 7px;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .capability-meta-grid {
@@ -3544,10 +3587,19 @@ h3 {
 
 .session-launcher {
   display: grid;
-  grid-template-columns: minmax(150px, 0.64fr) minmax(150px, 0.7fr) minmax(170px, 0.72fr) minmax(260px, 1.7fr) minmax(170px, 0.54fr) auto;
+  grid-template-columns: repeat(3, minmax(160px, 1fr));
   gap: 10px;
   align-items: end;
   margin-bottom: 14px;
+}
+
+.session-launcher .session-prompt-field {
+  grid-column: span 2;
+}
+
+.session-launcher .inline-toggle,
+.session-launcher button {
+  width: 100%;
 }
 
 .session-launcher label,
@@ -4107,13 +4159,23 @@ h3 {
 
 .source-editor-controls {
   display: grid;
-  grid-template-columns: minmax(230px, 1.1fr) minmax(220px, 1fr) repeat(5, auto);
+  grid-template-columns: repeat(6, minmax(128px, 1fr));
   gap: 8px;
   align-items: end;
   margin-bottom: 12px;
 }
 
 .source-path-field {
+  min-width: 0;
+  grid-column: span 2;
+}
+
+.source-editor-controls label:not(.source-path-field) {
+  min-width: 0;
+  grid-column: span 2;
+}
+
+.source-editor-controls button {
   min-width: 0;
 }
 
@@ -4377,6 +4439,10 @@ h3 {
 
 .wide {
   min-width: 0;
+}
+
+.desktop-grid > .wide {
+  grid-column: 1 / -1;
 }
 
 .panel-heading {
@@ -5615,6 +5681,14 @@ h3 {
     justify-content: flex-start;
   }
 
+  .runtime-data-layout > .runtime-root-grid {
+    grid-row: auto;
+  }
+
+  .session-launcher .session-prompt-field {
+    grid-column: auto;
+  }
+
   .process-node:not(:last-child)::after {
     display: none;
   }
@@ -5789,6 +5863,11 @@ h3 {
   .service-score-ring {
     width: 72px;
     height: 72px;
+  }
+
+  .source-path-field,
+  .source-editor-controls label:not(.source-path-field) {
+    grid-column: auto;
   }
 
   .monaco-editor-shell {

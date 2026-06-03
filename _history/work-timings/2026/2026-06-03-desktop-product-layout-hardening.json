@@ -1,0 +1,25 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-027",
+  "phases": [
+    {
+      "phase": "browser_diagnosis",
+      "elapsed_minutes": 10,
+      "notes": "Found task pipe/session launcher overflow and service readiness card squeezing."
+    },
+    {
+      "phase": "layout_and_loader_fix",
+      "elapsed_minutes": 25,
+      "notes": "Updated responsive workbench CSS and removed generated snapshot fallback chunk."
+    },
+    {
+      "phase": "validation",
+      "elapsed_minutes": 15,
+      "notes": "Ran build, perf budget, tests, readiness, and Browser smoke."
+    }
+  ],
+  "bottlenecks": [
+    "Generated snapshot fallback hid a large bundle regression behind a dynamic import.",
+    "The `.wide` class name did not itself span desktop-grid columns."
+  ]
+}

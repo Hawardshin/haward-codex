@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-027",
+  "local_sources": [
+    "workspace-monitor/components/MonitorShell.tsx",
+    "workspace-monitor/components/SnapshotLoader.tsx",
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/scripts/check-performance-budget.mjs",
+    "platform-desktop-app/specs/2026-06-03-code-editor-surface/spec.ko.md"
+  ],
+  "external_sources": [
+    "https://github.com/microsoft/monaco-editor",
+    "https://microsoft.github.io/monaco-editor/"
+  ],
+  "generated_outputs": [
+    "workspace-monitor/public/workspace-snapshot.json",
+    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "workspace-monitor/out/"
+  ],
+  "browser_validation": {
+    "url": "http://127.0.0.1:3018/",
+    "body_overflow_x": 0,
+    "desktop_viewport_overflow_x": 0,
+    "has_desktop_shell": true
+  }
+}

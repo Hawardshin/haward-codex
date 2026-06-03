@@ -1,0 +1,14 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-027",
+  "summary": "Harden the embedded desktop product UI so it behaves like a sellable desktop workbench rather than a cramped web dashboard.",
+  "outcome": "ready_to_close",
+  "artifacts": [
+    "workspace-monitor/app/globals.css",
+    "workspace-monitor/components/SnapshotLoader.tsx",
+    "workspace-monitor/specs/2026-06-03-desktop-product-layout-hardening/",
+    "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+  ],
+  "evaluation": "_history/evaluations/2026/2026-06-03-desktop-product-layout-hardening-evaluation.json",
+  "commit": "pending"
+}

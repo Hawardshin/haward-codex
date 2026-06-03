@@ -1,0 +1,20 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-027",
+  "problem_observed": [
+    "Task Pipe summary cards and controls overflowed the desktop viewport.",
+    "Service Readiness content was squeezed into narrow columns and text wrapped vertically.",
+    "Performance budget failed because generated workspace snapshot was bundled as a fallback JavaScript chunk."
+  ],
+  "accepted_decisions": [
+    "Make desktop-grid wide panels span the full runtime workbench width.",
+    "Use responsive grid sizing for task pipe, session launcher, runtime data, service readiness, and source editor controls.",
+    "Remove generated snapshot dynamic fallback and rely on public workspace-snapshot.json fetch for product/static builds."
+  ],
+  "rejected_options": [
+    "Leave overflow hidden without fixing layout.",
+    "Raise the performance budget to allow the generated snapshot chunk.",
+    "Install or clone VS Code instead of using existing Monaco dependencies."
+  ],
+  "validation_gate": "All checks, performance budget, customer bundle audit, and Browser smoke must pass before close-out."
+}

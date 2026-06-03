@@ -36,6 +36,7 @@
 | REQ-WM-023 | 웹 UI는 플랫폼의 운영 메모리, 플랫폼 코어, 데스크톱 제품, 모니터 UI, 도메인 프로젝트, 런타임/로컬 데이터 계층을 한눈에 보여주고 각 계층의 소유 경계, 주요 경로, 금지 경계, 복잡도 압력점을 표시해야 한다. | must | snapshot의 `structureOverview`, Structure 탭의 Architecture Backbone/Boundary Rules/Pressure, customer snapshot sanitization, `pnpm test`, `pnpm run check`, `pnpm run build`, `pnpm run check:intent-map:customer` 확인 |
 | REQ-WM-024 | 웹 UI는 핵심 기능 위치를 첫 화면에서 바로 보여주고, 모니터 섹션 탭을 기능군별로 나눠 사용자가 현재 위치와 다음 이동 경로를 즉시 이해할 수 있어야 한다. | must | 상단 `core-feature-rail`, Overview `Core Functions`, 기능군별 `section-tab-groups`, `pnpm test`, `pnpm run check`, `pnpm run build`, desktop customer bundle 확인 |
 | REQ-WM-025 | 웹 UI는 실제 앱처럼 섹션, 보기 모드, 언어 모드, 문서 필터, 주요 action을 전역 command palette와 pinned/recent quick controls로 실행할 수 있어야 한다. | should | `app-control-bar`, `command-palette`, pinned/recent controls, keyboard lifecycle cleanup, `pnpm test`, `pnpm run check`, `pnpm run build`, static export smoke 확인 |
+| REQ-WM-026 | 데스크톱 제품 UI는 런타임, task pipe, service readiness, source editor 같은 운영 패널을 좁은 웹 카드처럼 찌그러뜨리지 않고 full-width workbench surface로 렌더링해야 하며, 대형 workspace snapshot을 JS fallback chunk로 포함하지 않아야 한다. | must | `pnpm run perf:budget`, customer bundle audit, Browser smoke에서 body/viewport overflow 0, runtime/source panel visual check |
 
 ## 범위
 

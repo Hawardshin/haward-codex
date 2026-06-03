@@ -1,0 +1,19 @@
+{
+  "schema_version": "2026-06-03",
+  "request_id": "UR-2026-06-03-027",
+  "coverage": [
+    "Desktop app-like layout",
+    "Settings/modal behavior already verified",
+    "Code editor surface preserved through Monaco",
+    "Performance budget restored",
+    "Customer bundle audit restored without large asset warning",
+    "Browser visual smoke performed"
+  ],
+  "known_not_covered": [
+    "Public signing/notarization",
+    "Signed updater",
+    "Clean-machine smoke",
+    "Runtime workspace chooser enforcement"
+  ],
+  "status": "coverage_ready"
+}
