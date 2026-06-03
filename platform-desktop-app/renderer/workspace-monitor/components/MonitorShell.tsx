@@ -2470,7 +2470,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 ))}
               </nav>
 
-              <div className="settings-tab-panel">
+              <div className="settings-tab-panel" tabIndex={0} aria-label={uiLanguage === "ko" ? "설정 본문" : "Settings content"}>
                 {settingsTab === "appearance" && (
                   <div className="settings-grid">
                     <section className="settings-pane">
@@ -5931,7 +5931,7 @@ function DesktopRuntimePanel({
             )}
 
             {sourceFile ? (
-              <div className="source-editor-frame">
+              <div className="source-editor-frame" tabIndex={0} aria-label={uiLanguage === "ko" ? "소스 편집 스크롤 영역" : "Source editor scroll region"}>
                 <div className="source-editor-meta">
                   <span>{sourceFile.relativePath}</span>
                   <strong>

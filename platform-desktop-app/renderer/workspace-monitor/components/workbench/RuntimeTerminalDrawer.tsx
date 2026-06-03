@@ -242,7 +242,7 @@ export function RuntimeTerminalDrawer({
           <p className="empty-state">실행 세션이 없습니다. 설치된 adapter를 선택하고 session을 시작하세요.</p>
         ) : (
           <div className="session-grid">
-            <div className="session-list">
+            <div className="session-list" tabIndex={0} aria-label={uiLanguage === "ko" ? "CLI 세션 목록" : "CLI session list"}>
               {sessions.map((session) => (
                 <article key={session.sessionId} className={`session-card status-${session.status}`}>
                   <header>
@@ -300,11 +300,11 @@ export function RuntimeTerminalDrawer({
                 </div>
                 <strong>{selectedSession?.status || "idle"}</strong>
               </header>
-              <pre>
+              <pre tabIndex={0} aria-label={uiLanguage === "ko" ? "선택한 CLI 출력" : "Selected CLI output"}>
                 <code>{selectedSession ? selectedSession.stdout || selectedSession.stderr || "No output yet" : "No session selected"}</code>
               </pre>
               {selectedSession?.stderr && selectedSession.stdout && <small>{selectedSession.stderr}</small>}
-              <div className="terminal-event-rail">
+              <div className="terminal-event-rail" tabIndex={0} aria-label={uiLanguage === "ko" ? "터미널 이벤트 목록" : "Terminal event list"}>
                 {selectedOutputEvents.slice(0, 6).map((event) => (
                   <article key={event.id} className={`event-${event.type}`}>
                     <span>{event.type}</span>

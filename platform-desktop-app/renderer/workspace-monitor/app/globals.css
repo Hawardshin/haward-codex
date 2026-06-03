@@ -165,6 +165,16 @@ button:disabled {
   cursor: default;
 }
 
+.settings-tab-panel:focus-visible,
+.workspace-explorer-tree:focus-visible,
+.session-list:focus-visible,
+.session-terminal pre:focus-visible,
+.terminal-event-rail:focus-visible,
+.source-editor-frame:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--blue) 72%, #ffffff 12%);
+  outline-offset: -2px;
+}
+
 button,
 .metric,
 .record-card,
@@ -646,9 +656,11 @@ main {
 }
 
 .settings-dialog {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   width: min(980px, 100%);
   max-height: min(760px, calc(100vh - 36px));
-  overflow: auto;
+  overflow: hidden;
   border: 1px solid rgba(148, 163, 184, 0.72);
   background: var(--surface);
   border-radius: 8px;
@@ -658,9 +670,11 @@ main {
 
 .settings-dialog-body {
   display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   grid-template-columns: 1fr;
   gap: 12px;
-  min-height: 440px;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .settings-tab-list {
@@ -719,6 +733,11 @@ main {
 
 .settings-tab-panel {
   min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding-right: 2px;
+  scrollbar-gutter: stable;
 }
 
 .settings-dialog header {
@@ -4632,9 +4651,10 @@ h3 {
   bottom: 0;
   z-index: 70;
   display: grid;
-  grid-template-rows: auto auto auto auto minmax(0, 1fr);
+  grid-template-rows: auto auto auto auto auto minmax(0, 1fr);
+  min-height: 0;
   max-height: none;
-  overflow: auto;
+  overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--line) 82%, #000000);
   border-right: 0;
   border-bottom: 0;
@@ -4850,11 +4870,20 @@ h3 {
   display: grid;
   grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
   gap: 12px;
+  min-height: 0;
+  overflow: hidden;
+  align-items: stretch;
 }
 
 .session-list {
   display: grid;
+  align-content: start;
   gap: 10px;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding-right: 2px;
+  scrollbar-gutter: stable;
 }
 
 .session-card,
@@ -4863,6 +4892,13 @@ h3 {
   background: var(--surface-raised);
   border-radius: 8px;
   padding: 12px;
+}
+
+.session-terminal {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto minmax(0, 0.72fr) auto;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .session-card header,
@@ -4918,9 +4954,10 @@ h3 {
 }
 
 .session-terminal pre {
-  min-height: 280px;
-  max-height: 420px;
+  min-height: 0;
+  max-height: none;
   overflow: auto;
+  overscroll-behavior: contain;
   border: 1px solid #263241;
   background: #111827;
   color: #f9fafb;
@@ -4929,6 +4966,7 @@ h3 {
   padding: 12px;
   white-space: pre-wrap;
   word-break: break-word;
+  scrollbar-gutter: stable;
 }
 
 .session-terminal small {
@@ -4941,7 +4979,12 @@ h3 {
 .terminal-event-rail {
   display: grid;
   gap: 6px;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
   margin-bottom: 10px;
+  padding-right: 2px;
+  scrollbar-gutter: stable;
 }
 
 .terminal-event-rail article {
@@ -5420,16 +5463,24 @@ h3 {
   display: grid;
   grid-template-columns: minmax(230px, 0.58fr) minmax(0, 1.42fr);
   gap: 12px;
+  min-height: 0;
   align-items: start;
 }
 
 .source-file-browser,
 .source-draft-queue,
 .source-save-results {
+  min-height: 0;
   border: 1px solid var(--line);
   background: var(--surface-raised);
   border-radius: 8px;
   padding: 10px;
+}
+
+.source-file-browser {
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+  overflow: hidden;
 }
 
 .source-file-browser header,
@@ -5480,9 +5531,12 @@ h3 {
 }
 
 .source-file-browser-list {
-  max-height: 520px;
+  min-height: 0;
+  max-height: none;
   overflow: auto;
+  overscroll-behavior: contain;
   padding-right: 2px;
+  scrollbar-gutter: stable;
 }
 
 .source-file-browser-list button,
@@ -5528,8 +5582,11 @@ h3 {
 
 .source-edit-workbench {
   display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   gap: 10px;
   min-width: 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .source-editor-tabs {
@@ -5648,7 +5705,13 @@ h3 {
 
 .source-editor-frame {
   display: grid;
+  align-content: start;
   gap: 8px;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding-right: 2px;
+  scrollbar-gutter: stable;
 }
 
 .source-editor-meta {
@@ -6087,6 +6150,9 @@ h3 {
 }
 
 .native-source-workbench {
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -6096,6 +6162,9 @@ h3 {
 
 .native-source-grid {
   grid-template-columns: minmax(260px, 0.52fr) minmax(0, 1.48fr);
+  min-height: 0;
+  overflow: hidden;
+  align-items: stretch;
 }
 
 .filesystem-workbench .native-file-hero {
@@ -6105,7 +6174,8 @@ h3 {
 .filesystem-workbench-shell {
   display: grid;
   grid-template-columns: minmax(292px, 0.34fr) minmax(0, 1fr);
-  min-height: calc(100vh - 148px);
+  height: calc(100vh - 148px);
+  min-height: 520px;
   overflow: hidden;
   border: 1px solid var(--line);
   background: var(--surface);
@@ -6116,6 +6186,7 @@ h3 {
   display: grid;
   grid-template-rows: auto auto auto auto auto auto minmax(0, 1fr) auto;
   min-width: 0;
+  min-height: 0;
   overflow: hidden;
   border-right: 1px solid var(--line);
   background: var(--surface-raised);
@@ -6276,10 +6347,12 @@ h3 {
 .workspace-explorer-tree {
   min-height: 0;
   overflow: auto;
+  overscroll-behavior: contain;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   background: var(--surface);
   padding: 6px 0;
+  scrollbar-gutter: stable;
 }
 
 .workspace-tree-directory {
@@ -6404,10 +6477,11 @@ h3 {
 
 .filesystem-editor-pane {
   display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   min-width: 0;
   min-height: 0;
-  overflow: auto;
-  align-content: start;
+  overflow: hidden;
+  align-content: stretch;
   background: var(--surface);
 }
 
@@ -7695,6 +7769,19 @@ h3 {
     max-height: 520px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
+  }
+
+  .filesystem-workbench-shell {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .filesystem-editor-pane,
+  .native-source-workbench,
+  .native-source-grid,
+  .source-edit-workbench {
+    overflow: visible;
   }
 
   .monaco-editor-shell {

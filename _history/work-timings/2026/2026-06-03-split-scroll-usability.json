@@ -1,0 +1,19 @@
+{
+  "work_id": "2026-06-03-split-scroll-usability",
+  "request_id": "UR-2026-06-03-051",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed"
+    },
+    {
+      "phase": "local_implementation",
+      "status": "completed"
+    },
+    {
+      "phase": "validation",
+      "status": "completed"
+    }
+  ]
+}

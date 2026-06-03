@@ -149,7 +149,7 @@ export function WorkspaceExplorerPane({
         </p>
       )}
 
-      <div className="workspace-explorer-tree" role="tree" aria-label={copy.fileTree}>
+      <div className="workspace-explorer-tree" role="tree" aria-label={copy.fileTree} tabIndex={0}>
         {explorerTree.length ? (
           explorerTree.map((directory) => (
             <WorkspaceExplorerDirectoryView

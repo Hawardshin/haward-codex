@@ -724,6 +724,12 @@ for (const requiredPhrase of [
   "terminal-drawer",
   "terminal-drawer-launcher",
   "terminal-drawer-backdrop",
+  "tabIndex={0}",
+  "CLI 세션 목록",
+  "선택한 CLI 출력",
+  "터미널 이벤트 목록",
+  "설정 본문",
+  "소스 편집 스크롤 영역",
   "foldAll",
   "unfoldAll",
   "코드 접기",
@@ -755,6 +761,22 @@ if (monitorShell.includes("localStorage")) {
 for (const forbiddenBackground of ["background: #ffffff", "background: #fbfcfd", "background: white", "background: #fff9eb", "background: #fff4f4", "background: #f4f9ff"]) {
   if (monitorStyles.includes(forbiddenBackground)) {
     failures.push(`workspace-monitor CSS must not use light-only background token ${forbiddenBackground}`);
+  }
+}
+for (const requiredScrollToken of [
+  ".settings-tab-panel",
+  ".filesystem-workbench-shell",
+  ".workspace-explorer-tree",
+  ".source-editor-frame",
+  ".session-grid",
+  ".session-list",
+  ".session-terminal pre",
+  "overscroll-behavior: contain",
+  "scrollbar-gutter: stable",
+  "minmax(0, 1fr)"
+]) {
+  if (!monitorStyles.includes(requiredScrollToken)) {
+    failures.push(`workspace-monitor CSS must preserve split scroll token ${requiredScrollToken}`);
   }
 }
 for (const requiredPhrase of [

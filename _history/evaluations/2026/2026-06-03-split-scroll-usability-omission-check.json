@@ -1,0 +1,15 @@
+{
+  "request_id": "UR-2026-06-03-051",
+  "status": "passed",
+  "checked_items": [
+    "web search first",
+    "file/code split scroll",
+    "terminal split scroll",
+    "settings content scroll",
+    "keyboard focusable scroll panes",
+    "responsive small-screen exception",
+    "requirements/spec/history records"
+  ],
+  "omissions_found": [],
+  "next_validation": []
+}
