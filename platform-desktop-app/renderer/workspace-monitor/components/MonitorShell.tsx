@@ -58,7 +58,7 @@ import {
 } from "@/components/workbench/NativeGitWorkbench";
 import { PathDisclosure } from "@/components/workbench/PathDisclosure";
 import { RuntimeTerminalDrawer } from "@/components/workbench/RuntimeTerminalDrawer";
-import { ToolStudioPanel } from "@/components/workbench/ToolStudioPanel";
+import { ToolStudioPanel, type ToolStudioMode, type ToolStudioModeRequest } from "@/components/workbench/ToolStudioPanel";
 import { WorkspaceExplorerPane } from "@/components/workbench/WorkspaceExplorerPane";
 import { writeClipboardText } from "@/lib/clipboard.mjs";
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot, type WorkspaceSourceFile } from "@/lib/snapshot";
@@ -131,10 +131,17 @@ type TaskIntentItem = {
   badge: string;
   targetSection: SectionId;
   nextStep: string;
-  flowSteps: string[];
+  flowSteps: TaskIntentFlowStep[];
   icon: LucideIcon;
   keywords: string[];
   run: () => void;
+};
+
+type TaskIntentFlowStep = {
+  id: string;
+  label: string;
+  actionLabel?: string;
+  run?: () => void;
 };
 
 type RuntimeInitDefaults = {
@@ -2224,6 +2231,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [pinnedSections, setPinnedSections] = useState<SectionId[]>(defaultPinnedSections);
   const [recentSections, setRecentSections] = useState<SectionId[]>(["overview"]);
   const [activeTaskIntentId, setActiveTaskIntentId] = useState("");
+  const [activeTaskFlowStepId, setActiveTaskFlowStepId] = useState("");
+  const [requestedToolMode, setRequestedToolMode] = useState<ToolStudioModeRequest | null>(null);
   const [desktopPreferencesLoaded, setDesktopPreferencesLoaded] = useState(false);
   const [desktopPreferencesPath, setDesktopPreferencesPath] = useState("");
   const [desktopPreferencesSource, setDesktopPreferencesSource] = useState("browser-defaults");
@@ -2838,8 +2847,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         return item ? currentViewMode.allowedSections.includes(item.id) : false;
       });
   }, [currentViewMode.allowedSections, sectionById]);
-  const openSection = useCallback((targetSection: SectionId, options?: { intentId?: string }) => {
+  const openSection = useCallback((targetSection: SectionId, options?: { intentId?: string; flowStepId?: string }) => {
     setActiveTaskIntentId(options?.intentId || "");
+    setActiveTaskFlowStepId(options?.flowStepId || "");
     if (!currentViewMode.allowedSections.includes(targetSection)) {
       const modeWithSection =
         viewModes.find((mode) => mode.id === "superadmin_developer" && mode.allowedSections.includes(targetSection)) ||
@@ -3661,8 +3671,17 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   );
   const coreReadinessCount = useMemo(() => coreSetupSteps.filter((step) => step.ready).length, [coreSetupSteps]);
   const taskIntentItems = useMemo<TaskIntentItem[]>(
-    () => [
-      {
+    () => {
+      const selectIntentStep = (intentId: string, targetSection: SectionId, flowStepId: string) => () => {
+        openSection(targetSection, { intentId, flowStepId });
+      };
+      const selectToolStep = (mode: ToolStudioMode, flowStepId: string) => () => {
+        setRequestedToolMode((previous) => ({ mode, requestId: (previous?.requestId || 0) + 1 }));
+        openSection("tools", { intentId: "build-tool", flowStepId });
+      };
+
+      return [
+        {
         id: "create-agent",
         label: uiLanguage === "ko" ? "에이전트 만들기" : "Create an agent",
         detail:
@@ -3675,11 +3694,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         nextStep: uiLanguage === "ko" ? "역할과 검증 기준을 확인하고 새 에이전트 초안을 만듭니다." : "Review role and validation, then draft the agent.",
         flowSteps:
           uiLanguage === "ko"
-            ? ["역할 선택", "도구와 기억 연결", "검증 제안 생성"]
-            : ["Choose role", "Connect tools and memory", "Create validation proposal"],
+            ? [
+                { id: "role", label: "역할 선택", actionLabel: "Agent Core", run: selectIntentStep("create-agent", "agents", "role") },
+                { id: "tools", label: "도구와 기억 연결", actionLabel: "Agent Core", run: selectIntentStep("create-agent", "agents", "tools") },
+                { id: "proposal", label: "검증 제안 생성", actionLabel: "Agent Core", run: selectIntentStep("create-agent", "agents", "proposal") }
+              ]
+            : [
+                { id: "role", label: "Choose role", actionLabel: "Agent Core", run: selectIntentStep("create-agent", "agents", "role") },
+                { id: "tools", label: "Connect tools and memory", actionLabel: "Agent Core", run: selectIntentStep("create-agent", "agents", "tools") },
+                { id: "proposal", label: "Create validation proposal", actionLabel: "Agent Core", run: selectIntentStep("create-agent", "agents", "proposal") }
+              ],
         icon: Bot,
         keywords: ["agent", "create", "builder", "subagent", "persona", "에이전트", "만들기", "작업자"],
-        run: () => openSection("agents", { intentId: "create-agent" })
+        run: () => openSection("agents", { intentId: "create-agent", flowStepId: "role" })
       },
       {
         id: "build-tool",
@@ -3694,11 +3721,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         nextStep: uiLanguage === "ko" ? "빌드 모드에서 Python 소스와 입력 스키마부터 선택합니다." : "Start in build mode by choosing Python source and input schema.",
         flowSteps:
           uiLanguage === "ko"
-            ? ["소스 선택", "입력과 venv 확인", "검증 후 배포"]
-            : ["Choose source", "Check input and venv", "Validate then deploy"],
+            ? [
+                { id: "source", label: "소스 선택", actionLabel: "툴 만들기", run: selectToolStep("build", "source") },
+                { id: "venv", label: "입력과 venv 확인", actionLabel: "파이썬 환경", run: selectToolStep("environment", "venv") },
+                { id: "deploy", label: "검증 후 배포", actionLabel: "툴 배포", run: selectToolStep("deploy", "deploy") }
+              ]
+            : [
+                { id: "source", label: "Choose source", actionLabel: "Build Tool", run: selectToolStep("build", "source") },
+                { id: "venv", label: "Check input and venv", actionLabel: "Python Env", run: selectToolStep("environment", "venv") },
+                { id: "deploy", label: "Validate then deploy", actionLabel: "Deploy Tool", run: selectToolStep("deploy", "deploy") }
+              ],
         icon: Wrench,
         keywords: ["tool", "python", "venv", "deploy", "registry", "툴", "파이썬", "가상환경", "배포"],
-        run: () => openSection("tools", { intentId: "build-tool" })
+        run: selectToolStep("build", "source")
       },
       {
         id: "run-work",
@@ -3713,11 +3748,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         nextStep: uiLanguage === "ko" ? "Run Configuration에서 lane을 확인하고 실행을 시작합니다." : "Review the run configuration and start the lane.",
         flowSteps:
           uiLanguage === "ko"
-            ? ["lane 확인", "실행 시작", "결과와 결정 처리"]
-            : ["Review lane", "Start run", "Handle output and decisions"],
+            ? [
+                { id: "lane", label: "lane 확인", actionLabel: "Runtime", run: selectIntentStep("run-work", "desktop", "lane") },
+                { id: "start", label: "실행 시작", actionLabel: "Runtime", run: selectIntentStep("run-work", "desktop", "start") },
+                { id: "result", label: "결과와 결정 처리", actionLabel: "Runtime", run: selectIntentStep("run-work", "desktop", "result") }
+              ]
+            : [
+                { id: "lane", label: "Review lane", actionLabel: "Runtime", run: selectIntentStep("run-work", "desktop", "lane") },
+                { id: "start", label: "Start run", actionLabel: "Runtime", run: selectIntentStep("run-work", "desktop", "start") },
+                { id: "result", label: "Handle output and decisions", actionLabel: "Runtime", run: selectIntentStep("run-work", "desktop", "result") }
+              ],
         icon: PlayCircle,
         keywords: ["run", "runtime", "cli", "terminal", "lane", "실행", "터미널", "작업", "런타임"],
-        run: () => openSection("desktop", { intentId: "run-work" })
+        run: () => openSection("desktop", { intentId: "run-work", flowStepId: "lane" })
       },
       {
         id: "open-files",
@@ -3732,11 +3775,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         nextStep: uiLanguage === "ko" ? "파일 목록에서 작업할 소스를 선택하고 편집 컨텍스트를 엽니다." : "Choose the source file and open its editing context.",
         flowSteps:
           uiLanguage === "ko"
-            ? ["파일 선택", "컨텍스트 확인", "실행에 연결"]
-            : ["Choose file", "Review context", "Connect to run"],
+            ? [
+                { id: "file", label: "파일 선택", actionLabel: "Source", run: selectIntentStep("open-files", "source", "file") },
+                { id: "context", label: "컨텍스트 확인", actionLabel: "Source", run: selectIntentStep("open-files", "source", "context") },
+                { id: "run", label: "실행에 연결", actionLabel: "Source", run: selectIntentStep("open-files", "source", "run") }
+              ]
+            : [
+                { id: "file", label: "Choose file", actionLabel: "Source", run: selectIntentStep("open-files", "source", "file") },
+                { id: "context", label: "Review context", actionLabel: "Source", run: selectIntentStep("open-files", "source", "context") },
+                { id: "run", label: "Connect to run", actionLabel: "Source", run: selectIntentStep("open-files", "source", "run") }
+              ],
         icon: Code2,
         keywords: ["file", "source", "code", "root", "파일", "소스", "코드", "루트"],
-        run: () => openSection("source", { intentId: "open-files" })
+        run: () => openSection("source", { intentId: "open-files", flowStepId: "file" })
       },
       {
         id: "resolve-decisions",
@@ -3751,11 +3802,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         nextStep: uiLanguage === "ko" ? "보류 질문을 확인하고 안전한 항목부터 답합니다." : "Review deferred questions and answer the safe items first.",
         flowSteps:
           uiLanguage === "ko"
-            ? ["보류 질문 확인", "안전한 답변 선택", "작업 재개"]
-            : ["Review pending questions", "Choose safe answers", "Resume work"],
+            ? [
+                { id: "questions", label: "보류 질문 확인", actionLabel: "Inbox", run: selectIntentStep("resolve-decisions", "agents", "questions") },
+                { id: "answer", label: "안전한 답변 선택", actionLabel: "Inbox", run: selectIntentStep("resolve-decisions", "agents", "answer") },
+                { id: "resume", label: "작업 재개", actionLabel: "Inbox", run: selectIntentStep("resolve-decisions", "agents", "resume") }
+              ]
+            : [
+                { id: "questions", label: "Review pending questions", actionLabel: "Inbox", run: selectIntentStep("resolve-decisions", "agents", "questions") },
+                { id: "answer", label: "Choose safe answers", actionLabel: "Inbox", run: selectIntentStep("resolve-decisions", "agents", "answer") },
+                { id: "resume", label: "Resume work", actionLabel: "Inbox", run: selectIntentStep("resolve-decisions", "agents", "resume") }
+              ],
         icon: Inbox,
         keywords: ["decision", "inbox", "blocked", "question", "결정", "보류", "질문", "막힘"],
-        run: () => openSection("agents", { intentId: "resolve-decisions" })
+        run: () => openSection("agents", { intentId: "resolve-decisions", flowStepId: "questions" })
       },
       {
         id: "check-setup",
@@ -3770,16 +3829,26 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         nextStep: uiLanguage === "ko" ? "빠른 설정에서 계정, CLI adapter, 질문 보류 상태를 확인합니다." : "Check accounts, CLI adapter, and question handling in quick setup.",
         flowSteps:
           uiLanguage === "ko"
-            ? ["계정 확인", "CLI adapter 확인", "질문 처리 확인"]
-            : ["Check accounts", "Check CLI adapters", "Check question handling"],
+            ? [
+                { id: "accounts", label: "계정 확인", actionLabel: "설정", run: () => openSettingsTab("execution", "providers") },
+                { id: "adapters", label: "CLI adapter 확인", actionLabel: "설정", run: () => openSettingsTab("execution", "adapter") },
+                { id: "questions", label: "질문 처리 확인", actionLabel: "설정", run: () => openSettingsTab("execution", "questions") }
+              ]
+            : [
+                { id: "accounts", label: "Check accounts", actionLabel: "Settings", run: () => openSettingsTab("execution", "providers") },
+                { id: "adapters", label: "Check CLI adapters", actionLabel: "Settings", run: () => openSettingsTab("execution", "adapter") },
+                { id: "questions", label: "Check question handling", actionLabel: "Settings", run: () => openSettingsTab("execution", "questions") }
+              ],
         icon: Settings,
         keywords: ["setup", "settings", "account", "provider", "adapter", "설정", "계정", "어댑터"],
         run: () => {
           setActiveTaskIntentId("check-setup");
+          setActiveTaskFlowStepId("accounts");
           openSettingsTab("execution", "quick");
         }
       }
-    ],
+      ];
+    },
     [
       agentCatalog.length,
       attentionItems.length,
@@ -3798,6 +3867,12 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     () => taskIntentItems.find((item) => item.id === activeTaskIntentId) || null,
     [activeTaskIntentId, taskIntentItems]
   );
+  const activeTaskFlowStep = useMemo(() => {
+    if (!activeTaskIntent) {
+      return null;
+    }
+    return activeTaskIntent.flowSteps.find((step) => step.id === activeTaskFlowStepId) || activeTaskIntent.flowSteps[0] || null;
+  }, [activeTaskFlowStepId, activeTaskIntent]);
   const ActiveTaskIntentIcon = activeTaskIntent?.icon;
   const workVisibilityItems = useMemo(
     () => [
@@ -4381,9 +4456,17 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               </button>
               <ol className="task-flow-rail" aria-label={uiLanguage === "ko" ? "작업 흐름" : "Task flow"}>
                 {activeTaskIntent.flowSteps.map((step, index) => (
-                  <li key={`${activeTaskIntent.id}-${step}`} className={index === 0 ? "current" : ""}>
-                    <span>{index + 1}</span>
-                    <strong>{step}</strong>
+                  <li key={`${activeTaskIntent.id}-${step.id}`} className={step.id === activeTaskFlowStep?.id ? "current" : ""}>
+                    <button
+                      type="button"
+                      onClick={step.run || (() => setActiveTaskFlowStepId(step.id))}
+                      data-task-flow-step={step.id}
+                      aria-current={step.id === activeTaskFlowStep?.id ? "step" : undefined}
+                    >
+                      <span>{index + 1}</span>
+                      <strong>{step.label}</strong>
+                      {step.actionLabel && <small>{step.actionLabel}</small>}
+                    </button>
                   </li>
                 ))}
               </ol>
@@ -5430,6 +5513,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       {section === "tools" && (
         <ToolStudioPanel
           language={uiLanguage}
+          requestedMode={requestedToolMode}
           agentCount={agentCatalog.length}
           activeTaskCount={collaborationBoard.summary.activeTasks}
           blockedTaskCount={collaborationBoard.summary.blockedTasks}

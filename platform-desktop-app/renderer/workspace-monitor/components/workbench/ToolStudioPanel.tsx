@@ -29,10 +29,15 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-type ToolStudioMode = "build" | "environment" | "deploy" | "registry";
+export type ToolStudioMode = "build" | "environment" | "deploy" | "registry";
+export type ToolStudioModeRequest = {
+  mode: ToolStudioMode;
+  requestId: number;
+};
 
 type ToolStudioPanelProps = {
   language: "ko" | "en";
+  requestedMode?: ToolStudioModeRequest | null;
   agentCount: number;
   activeTaskCount: number;
   blockedTaskCount: number;
@@ -198,6 +203,7 @@ function isFormField(target: EventTarget | null) {
 
 export function ToolStudioPanel({
   language,
+  requestedMode,
   agentCount,
   activeTaskCount,
   blockedTaskCount,
@@ -418,6 +424,12 @@ export function ToolStudioPanel({
       setSelectedToolId(matchingTool.id);
     }
   };
+
+  useEffect(() => {
+    if (requestedMode) {
+      selectMode(requestedMode.mode);
+    }
+  }, [requestedMode]);
 
   return (
     <section className="tool-studio-shell" data-tool-studio data-tool-studio-mode={mode} aria-label={ko ? "툴 스튜디오" : "Tool Studio"}>

@@ -1,0 +1,17 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-core-feature-flow",
+  "outcome": "pass",
+  "summary": "Task flow rail 단계를 클릭 가능한 핵심 기능 action으로 바꾸고, 툴 만들기 단계가 Tool Studio build/environment/deploy mode를 직접 전환하게 했다.",
+  "requirements": ["REQ-WM-047"],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "Browser click-through smoke: venv step -> environment mode, deploy step -> deploy mode",
+    "Playwright mobile viewport smoke: mode transition and overflow 0"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_notes": "로컬 정적 HTTP 서버를 검증 중 실행했고 검증 후 종료했다."
+}

@@ -28,7 +28,7 @@ test("Tool Studio is a first-class monitor section", () => {
   assert.match(monitorShell, /next\.splice\(insertAt, 0, "tools"\)/);
   assert.match(monitorShell, /tools:\s*"Studio"/);
   assert.match(monitorShell, /section === "tools"[\s\S]*?<ToolStudioPanel/);
-  assert.match(monitorShell, /import \{ ToolStudioPanel \} from "@\/components\/workbench\/ToolStudioPanel"/);
+  assert.match(monitorShell, /import \{ ToolStudioPanel, type ToolStudioMode, type ToolStudioModeRequest \} from "@\/components\/workbench\/ToolStudioPanel"/);
   assert.doesNotMatch(monitorShell, /dynamic\(\(\) => import\("@\/components\/workbench\/ToolStudioPanel"\)/);
   assert.match(coreDrilldown, /"files" \| "agents" \| "tools" \| "run" \| "learn"/);
 });
@@ -65,6 +65,10 @@ test("Tool Studio exposes shortcut and interaction contracts", () => {
   assert.match(toolStudio, /data-tool-context-menu/);
   assert.match(toolStudio, /data-tool-mode-button=\{item\.id\}/);
   assert.match(toolStudio, /data-agent-3d-canvas/);
+  assert.match(toolStudio, /export type ToolStudioMode = "build" \| "environment" \| "deploy" \| "registry"/);
+  assert.match(toolStudio, /export type ToolStudioModeRequest = \{[\s\S]*?mode: ToolStudioMode;[\s\S]*?requestId: number;/);
+  assert.match(toolStudio, /requestedMode\?: ToolStudioModeRequest \| null/);
+  assert.match(toolStudio, /if \(requestedMode\) \{[\s\S]*?selectMode\(requestedMode\.mode\);/);
   assert.match(toolStudio, /key === "b"/);
   assert.match(toolStudio, /event\.key === "Enter"/);
   assert.match(toolStudio, /event\.altKey && key === "t"/);
@@ -87,14 +91,21 @@ test("Monitor home exposes task-intent routes before section names", () => {
 
   assert.match(monitorShell, /type TaskIntentItem = \{/);
   assert.match(monitorShell, /const \[activeTaskIntentId, setActiveTaskIntentId\] = useState\(""\)/);
+  assert.match(monitorShell, /const \[activeTaskFlowStepId, setActiveTaskFlowStepId\] = useState\(""\)/);
+  assert.match(monitorShell, /const \[requestedToolMode, setRequestedToolMode\] = useState<ToolStudioModeRequest \| null>\(null\)/);
   assert.match(monitorShell, /const taskIntentItems = useMemo<TaskIntentItem\[\]>/);
   assert.match(monitorShell, /targetSection:\s*"tools"/);
   assert.match(monitorShell, /nextStep:\s*uiLanguage === "ko" \? "빌드 모드에서 Python 소스와 입력 스키마부터 선택합니다\."/);
-  assert.match(monitorShell, /flowSteps:\s*[\s\S]*?\["소스 선택", "입력과 venv 확인", "검증 후 배포"\]/);
-  assert.match(monitorShell, /openSection\("tools", \{ intentId: "build-tool" \}\)/);
+  assert.match(monitorShell, /id: "source", label: "소스 선택", actionLabel: "툴 만들기", run: selectToolStep\("build", "source"\)/);
+  assert.match(monitorShell, /id: "venv", label: "입력과 venv 확인", actionLabel: "파이썬 환경", run: selectToolStep\("environment", "venv"\)/);
+  assert.match(monitorShell, /setRequestedToolMode\(\(previous\) => \(\{ mode, requestId: \(previous\?\.requestId \|\| 0\) \+ 1 \}\)\)/);
+  assert.match(monitorShell, /openSection\("tools", \{ intentId: "build-tool", flowStepId \}\)/);
   assert.match(monitorShell, /id:\s*"build-tool"[\s\S]*?label:\s*uiLanguage === "ko" \? "툴 만들기"/);
+  assert.match(monitorShell, /requestedMode=\{requestedToolMode\}/);
   assert.match(monitorShell, /data-task-intent=\{item\.id\}/);
   assert.match(monitorShell, /data-task-handoff=\{activeTaskIntent\.id\}/);
+  assert.match(monitorShell, /data-task-flow-step=\{step\.id\}/);
+  assert.match(monitorShell, /aria-current=\{step\.id === activeTaskFlowStep\?\.id \? "step" : undefined\}/);
   assert.match(monitorShell, /className="task-flow-rail"/);
   assert.match(monitorShell, /data-active-section=\{section\}/);
   assert.match(monitorShell, /!isPrimaryWorkSurface && section !== "overview" && \(/);
@@ -108,6 +119,7 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(css, /\.workspace-home-actions\.task-intent-grid button \{[\s\S]*?grid-template-columns: auto auto minmax\(0, 1fr\) auto;/);
   assert.match(css, /\.task-handoff-strip \{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\) auto auto;/);
   assert.match(css, /\.task-flow-rail \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.task-flow-rail button \{[\s\S]*?min-height: 44px;/);
   assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.task-flow-rail \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(css, /\.desktop-viewport\[data-active-section="overview"\] \.titlebar-context-strip,[\s\S]*?\.desktop-viewport\[data-active-section="overview"\] \.titlebar-actions,[\s\S]*?\.desktop-viewport\[data-active-section="overview"\] > \.desktop-toolbar \{[\s\S]*?display: none;/);
   assert.match(css, /\.desktop-viewport\[data-active-section="overview"\] \.core-home-status-row \{[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);

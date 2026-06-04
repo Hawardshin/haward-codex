@@ -1,0 +1,9 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-core-feature-flow",
+  "selected_work_mode": "standard",
+  "reason": "사용자-facing 핵심 작업 흐름과 Tool Studio mode 동작을 바꾸는 기능 구현 작업이다.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "installation_occurred": false
+}
