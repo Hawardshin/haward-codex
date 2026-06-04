@@ -112,6 +112,26 @@ type ToolDeployTarget = {
   icon: LucideIcon;
 };
 
+type PythonEnvironmentProfile = {
+  id: string;
+  labelKo: string;
+  labelEn: string;
+  detailKo: string;
+  detailEn: string;
+  interpreter: string;
+  venvPath: string;
+  dependencyFile: string;
+  lockfile: string;
+  installCommand: string;
+  runCommand: string;
+  sandboxKo: string;
+  sandboxEn: string;
+  cacheKo: string;
+  cacheEn: string;
+  healthChecks: string[];
+  icon: LucideIcon;
+};
+
 const toolModes: ToolMode[] = [
   {
     id: "build",
@@ -308,6 +328,66 @@ const toolDeployTargets: ToolDeployTarget[] = [
   }
 ];
 
+const pythonEnvironmentProfiles: PythonEnvironmentProfile[] = [
+  {
+    id: "local-venv",
+    labelKo: "Local venv",
+    labelEn: "Local venv",
+    detailKo: "툴별 `.venv`를 만들고 requirements 파일로 재생성합니다.",
+    detailEn: "Creates a per-tool `.venv` and recreates it from a requirements file.",
+    interpreter: "Python 3.12",
+    venvPath: ".venv",
+    dependencyFile: "requirements.txt",
+    lockfile: "requirements.lock",
+    installCommand: "python -m venv .venv && .venv/bin/python -m pip install -r requirements.txt",
+    runCommand: ".venv/bin/python -m tool --input fixtures/smoke.json",
+    sandboxKo: "로컬 workspace 파일만 읽고 secret, network, 외부 쓰기는 기본 차단",
+    sandboxEn: "Reads local workspace files only; secrets, network, and external writes are blocked by default.",
+    cacheKo: "pip wheel cache는 workspace cache 아래에서 툴별로 분리",
+    cacheEn: "Pip wheel cache is separated per tool under the workspace cache.",
+    healthChecks: ["python -V", "pip check", "pytest tests/smoke_test.py"],
+    icon: FileCode2
+  },
+  {
+    id: "isolated-runner",
+    labelKo: "Isolated runner",
+    labelEn: "Isolated runner",
+    detailKo: "매 실행마다 임시 venv를 준비하고 editable install로 smoke를 통과시킵니다.",
+    detailEn: "Prepares an ephemeral venv per run and validates it with editable install smoke tests.",
+    interpreter: "Python 3.12",
+    venvPath: ".venv-run",
+    dependencyFile: "pyproject.toml",
+    lockfile: "uv.lock",
+    installCommand: "python -m venv .venv-run && .venv-run/bin/python -m pip install -e \".[test]\"",
+    runCommand: ".venv-run/bin/python -m pytest tests/smoke_test.py",
+    sandboxKo: "기본 network off, writable temp만 허용, 실행 뒤 환경 삭제",
+    sandboxEn: "Network off by default, writable temp only, and the environment is removed after the run.",
+    cacheKo: "빌드 산출물은 run cache에 남기고 interpreter와 site-packages는 폐기",
+    cacheEn: "Build artifacts remain in the run cache while interpreter and site-packages are discarded.",
+    healthChecks: ["python -m pip check", "pytest -q", "python -m tool --help"],
+    icon: ShieldCheck
+  },
+  {
+    id: "agent-sandbox",
+    labelKo: "Agent sandbox",
+    labelEn: "Agent sandbox",
+    detailKo: "AgentCore Code Interpreter식 격리 실행 경계를 로컬 툴에 적용합니다.",
+    detailEn: "Applies AgentCore Code Interpreter-style isolation boundaries to local tools.",
+    interpreter: "Python 3.12 sandbox",
+    venvPath: "runtime/sandbox/.venv",
+    dependencyFile: "pyproject.toml",
+    lockfile: "sandbox-report.json",
+    installCommand: "python scripts/run_sandbox.py --prepare --timeout 120 --memory 512",
+    runCommand: "python scripts/run_sandbox.py --invoke fixtures/smoke.json --timeout 120 --memory 512",
+    sandboxKo: "network, secret, browser credential, host path 접근은 명시 승인 전 차단",
+    sandboxEn: "Network, secrets, browser credentials, and host paths are blocked before explicit approval.",
+    cacheKo: "sandbox image hash와 dependency report만 보존하고 실행 파일시스템은 폐기",
+    cacheEn: "Only sandbox image hash and dependency report are kept; the run filesystem is discarded.",
+    healthChecks: ["sandbox-report.json", "stdout/stderr capture", "timeout and memory guard"],
+    icon: Cpu
+  }
+];
+
 const environmentRows = [
   {
     labelKo: "가상 환경",
@@ -368,11 +448,13 @@ export function ToolStudioPanel({
   const [mode, setMode] = useState<ToolStudioMode>("build");
   const [selectedToolId, setSelectedToolId] = useState(toolCards[0].id);
   const [selectedBlueprintId, setSelectedBlueprintId] = useState(toolBuilderBlueprints[0].id);
+  const [selectedEnvironmentId, setSelectedEnvironmentId] = useState(pythonEnvironmentProfiles[0].id);
   const [selectedDeployTargetId, setSelectedDeployTargetId] = useState(toolDeployTargets[0].id);
   const ko = language === "ko";
   const activeMode = toolModes.find((item) => item.id === mode) || toolModes[0];
   const selectedTool = toolCards.find((item) => item.id === selectedToolId) || toolCards[0];
   const selectedBlueprint = toolBuilderBlueprints.find((item) => item.id === selectedBlueprintId) || toolBuilderBlueprints[0];
+  const selectedEnvironment = pythonEnvironmentProfiles.find((item) => item.id === selectedEnvironmentId) || pythonEnvironmentProfiles[0];
   const selectedDeployTarget = toolDeployTargets.find((item) => item.id === selectedDeployTargetId) || toolDeployTargets[0];
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const statusItems = useMemo(
@@ -599,6 +681,21 @@ export function ToolStudioPanel({
       artifact: selectedDeployTarget.artifact,
       preflight: selectedDeployTarget.preflight,
       rollback: selectedDeployTarget.rollback
+    }, null, 2));
+  };
+
+  const copyEnvironmentPlan = () => {
+    void writeClipboardText(JSON.stringify({
+      id: selectedEnvironment.id,
+      interpreter: selectedEnvironment.interpreter,
+      venvPath: selectedEnvironment.venvPath,
+      dependencyFile: selectedEnvironment.dependencyFile,
+      lockfile: selectedEnvironment.lockfile,
+      installCommand: selectedEnvironment.installCommand,
+      runCommand: selectedEnvironment.runCommand,
+      sandbox: labelFor(language, selectedEnvironment.sandboxKo, selectedEnvironment.sandboxEn),
+      cache: labelFor(language, selectedEnvironment.cacheKo, selectedEnvironment.cacheEn),
+      healthChecks: selectedEnvironment.healthChecks
     }, null, 2));
   };
 
@@ -875,6 +972,115 @@ export function ToolStudioPanel({
                   <button type="button" className="tool-builder-copy" onClick={copyBuilderSpec} data-tool-builder-action="copy">
                     <Copy size={16} aria-hidden="true" />
                     <span>{ko ? "명세 복사" : "Copy spec"}</span>
+                  </button>
+                </div>
+              </section>
+            )}
+            {mode === "environment" && (
+              <section className="tool-environment-workbench" data-tool-environment-workbench aria-label={ko ? "Python 실행환경 작업대" : "Python execution environment workbench"}>
+                <div className="tool-environment-profiles" aria-label={ko ? "실행환경 프로필" : "Execution environment profiles"}>
+                  {pythonEnvironmentProfiles.map((profile) => (
+                    <button
+                      key={profile.id}
+                      type="button"
+                      className={profile.id === selectedEnvironment.id ? "active" : ""}
+                      onClick={() => setSelectedEnvironmentId(profile.id)}
+                      aria-pressed={profile.id === selectedEnvironment.id}
+                      data-tool-environment-profile={profile.id}
+                    >
+                      <profile.icon size={16} aria-hidden="true" />
+                      <span>
+                        <strong>{labelFor(language, profile.labelKo, profile.labelEn)}</strong>
+                        <small>{labelFor(language, profile.detailKo, profile.detailEn)}</small>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="tool-environment-canvas">
+                  <article className="tool-environment-runtime" data-tool-environment-runtime>
+                    <header>
+                      <Cpu size={16} aria-hidden="true" />
+                      <span>{ko ? "Runtime" : "Runtime"}</span>
+                    </header>
+                    <dl>
+                      <div>
+                        <dt>{ko ? "Interpreter" : "Interpreter"}</dt>
+                        <dd>{selectedEnvironment.interpreter}</dd>
+                      </div>
+                      <div>
+                        <dt>{ko ? "venv" : "venv"}</dt>
+                        <dd>{selectedEnvironment.venvPath}</dd>
+                      </div>
+                      <div>
+                        <dt>{ko ? "Dependencies" : "Dependencies"}</dt>
+                        <dd>{selectedEnvironment.dependencyFile}</dd>
+                      </div>
+                      <div>
+                        <dt>{ko ? "Lock / Report" : "Lock / Report"}</dt>
+                        <dd>{selectedEnvironment.lockfile}</dd>
+                      </div>
+                    </dl>
+                  </article>
+
+                  <article className="tool-environment-install" data-tool-environment-install>
+                    <header>
+                      <PackageCheck size={16} aria-hidden="true" />
+                      <span>{ko ? "설치 명령" : "Install command"}</span>
+                    </header>
+                    <code>{selectedEnvironment.installCommand}</code>
+                    <small>{labelFor(language, selectedEnvironment.cacheKo, selectedEnvironment.cacheEn)}</small>
+                  </article>
+
+                  <article className="tool-environment-run" data-tool-environment-run>
+                    <header>
+                      <PlayCircle size={16} aria-hidden="true" />
+                      <span>{ko ? "실행 명령" : "Run command"}</span>
+                    </header>
+                    <code>{selectedEnvironment.runCommand}</code>
+                    <small>{ko ? "stdout, stderr, exit code, artifact 경로를 task-run 기록으로 남깁니다." : "Records stdout, stderr, exit code, and artifact paths in a task-run record."}</small>
+                  </article>
+
+                  <article className="tool-environment-sandbox" data-tool-environment-sandbox>
+                    <header>
+                      <ShieldCheck size={16} aria-hidden="true" />
+                      <span>{ko ? "격리 경계" : "Isolation boundary"}</span>
+                    </header>
+                    <p>{labelFor(language, selectedEnvironment.sandboxKo, selectedEnvironment.sandboxEn)}</p>
+                  </article>
+
+                  <article className="tool-environment-health" data-tool-environment-health>
+                    <header>
+                      <CheckCircle2 size={16} aria-hidden="true" />
+                      <span>{ko ? "헬스체크" : "Health checks"}</span>
+                    </header>
+                    <ul>
+                      {selectedEnvironment.healthChecks.map((check) => (
+                        <li key={check}>
+                          <CheckCircle2 size={14} aria-hidden="true" />
+                          <span>{check}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </div>
+
+                <div className="tool-environment-actions">
+                  <button type="button" onClick={onOpenTerminal} data-tool-environment-action="create">
+                    <Cpu size={16} aria-hidden="true" />
+                    <span>{ko ? "venv 생성" : "Create venv"}</span>
+                  </button>
+                  <button type="button" onClick={onOpenTerminal} data-tool-environment-action="install">
+                    <PackageCheck size={16} aria-hidden="true" />
+                    <span>{ko ? "의존성 설치" : "Install deps"}</span>
+                  </button>
+                  <button type="button" onClick={onOpenTerminal} data-tool-environment-action="smoke">
+                    <SquareTerminal size={16} aria-hidden="true" />
+                    <span>{ko ? "Smoke 실행" : "Run smoke"}</span>
+                  </button>
+                  <button type="button" onClick={copyEnvironmentPlan} data-tool-environment-action="copy">
+                    <Copy size={16} aria-hidden="true" />
+                    <span>{ko ? "환경 계획 복사" : "Copy env plan"}</span>
                   </button>
                 </div>
               </section>

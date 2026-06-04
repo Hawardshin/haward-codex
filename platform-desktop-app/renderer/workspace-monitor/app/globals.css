@@ -13629,6 +13629,243 @@ h3 {
   color: var(--action-primary-fg);
 }
 
+.tool-environment-workbench {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-raised);
+  padding: 10px;
+}
+
+.tool-environment-profiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-environment-profiles button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  min-height: 80px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  background: var(--surface);
+  color: var(--text);
+  padding: 9px;
+  text-align: left;
+}
+
+.tool-environment-profiles button.active {
+  border-color: var(--control-selected-border);
+  color: var(--control-selected-fg);
+  background: var(--control-selected-bg);
+}
+
+.tool-environment-profiles button svg {
+  margin-top: 2px;
+  color: var(--accent-primary);
+}
+
+.tool-environment-profiles button.active svg {
+  color: currentColor;
+}
+
+.tool-environment-profiles span,
+.tool-environment-profiles strong,
+.tool-environment-profiles small {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  line-height: 1.32;
+  text-overflow: ellipsis;
+}
+
+.tool-environment-profiles strong {
+  color: inherit;
+  font-size: var(--font-size-caption);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.tool-environment-profiles small {
+  color: var(--text-secondary);
+  font-size: 10px;
+  white-space: normal;
+}
+
+.tool-environment-profiles button.active small {
+  color: currentColor;
+  opacity: 0.82;
+}
+
+.tool-environment-canvas {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-environment-runtime,
+.tool-environment-install,
+.tool-environment-run,
+.tool-environment-sandbox,
+.tool-environment-health {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  min-height: 118px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 10px;
+}
+
+.tool-environment-runtime {
+  grid-row: span 2;
+}
+
+.tool-environment-runtime header,
+.tool-environment-install header,
+.tool-environment-run header,
+.tool-environment-sandbox header,
+.tool-environment-health header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-environment-runtime header span,
+.tool-environment-install header span,
+.tool-environment-run header span,
+.tool-environment-sandbox header span,
+.tool-environment-health header span {
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.tool-environment-runtime dl {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  min-width: 0;
+}
+
+.tool-environment-runtime div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.tool-environment-runtime dt {
+  color: var(--text-tertiary);
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.tool-environment-runtime dd {
+  min-width: 0;
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.tool-environment-install code,
+.tool-environment-run code {
+  display: block;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--terminal-bg);
+  color: var(--terminal-fg);
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  padding: 8px;
+}
+
+.tool-environment-install small,
+.tool-environment-run small,
+.tool-environment-sandbox p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.tool-environment-health ul {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tool-environment-health li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px;
+  align-items: center;
+  min-width: 0;
+  color: var(--text);
+  font-size: var(--font-size-caption);
+  line-height: 1.35;
+}
+
+.tool-environment-health li svg {
+  color: var(--status-success-fg);
+}
+
+.tool-environment-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-environment-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  min-height: var(--control-target-size);
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  background: var(--control-bg);
+  color: var(--text);
+  padding: 8px var(--control-padding-x);
+  white-space: nowrap;
+}
+
+.tool-environment-actions button:not(:disabled):hover {
+  background: var(--control-bg-hover);
+}
+
+.tool-environment-actions button[data-tool-environment-action="create"],
+.tool-environment-actions button[data-tool-environment-action="install"] {
+  border-color: var(--action-primary-border);
+  background: var(--action-primary-bg);
+  color: var(--action-primary-fg);
+}
+
 .tool-deploy-workbench {
   display: grid;
   gap: 10px;
@@ -14016,6 +14253,9 @@ h3 {
   .tool-builder-blueprints,
   .tool-builder-canvas,
   .tool-builder-actions,
+  .tool-environment-profiles,
+  .tool-environment-canvas,
+  .tool-environment-actions,
   .tool-deploy-targets,
   .tool-deploy-canvas,
   .tool-deploy-actions,
@@ -14048,11 +14288,19 @@ h3 {
     grid-row: auto;
   }
 
+  .tool-environment-runtime {
+    grid-row: auto;
+  }
+
   .tool-deploy-release {
     grid-row: auto;
   }
 
   .tool-builder-actions button {
+    width: 100%;
+  }
+
+  .tool-environment-actions button {
     width: 100%;
   }
 

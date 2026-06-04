@@ -106,6 +106,30 @@ test("Tool Studio build mode exposes a dedicated tool builder workbench", () => 
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-builder-blueprints,[\s\S]*?\.tool-builder-canvas,[\s\S]*?\.tool-builder-actions,/);
 });
 
+test("Tool Studio environment mode exposes a Python execution workbench", () => {
+  assert.match(toolStudio, /type PythonEnvironmentProfile = \{/);
+  assert.match(toolStudio, /const pythonEnvironmentProfiles: PythonEnvironmentProfile\[\] = \[/);
+  assert.match(toolStudio, /id:\s*"local-venv"[\s\S]*?id:\s*"isolated-runner"[\s\S]*?id:\s*"agent-sandbox"/);
+  assert.match(toolStudio, /const \[selectedEnvironmentId, setSelectedEnvironmentId\] = useState/);
+  assert.match(toolStudio, /const selectedEnvironment = pythonEnvironmentProfiles\.find/);
+  assert.match(toolStudio, /className="tool-environment-workbench"/);
+  assert.match(toolStudio, /data-tool-environment-profile=\{profile\.id\}/);
+  assert.match(toolStudio, /data-tool-environment-runtime/);
+  assert.match(toolStudio, /data-tool-environment-install/);
+  assert.match(toolStudio, /data-tool-environment-run/);
+  assert.match(toolStudio, /data-tool-environment-sandbox/);
+  assert.match(toolStudio, /data-tool-environment-health/);
+  assert.match(toolStudio, /data-tool-environment-action="create"/);
+  assert.match(toolStudio, /data-tool-environment-action="install"/);
+  assert.match(toolStudio, /data-tool-environment-action="smoke"/);
+  assert.match(toolStudio, /data-tool-environment-action="copy"/);
+  assert.match(toolStudio, /copyEnvironmentPlan/);
+  assert.match(css, /\.tool-environment-profiles \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.tool-environment-canvas \{[\s\S]*?grid-template-columns: minmax\(0, 1\.05fr\) minmax\(0, 0\.95fr\);/);
+  assert.match(css, /\.tool-environment-actions \{[\s\S]*?grid-template-columns: repeat\(4, minmax\(0, 1fr\)\);/);
+  assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-environment-profiles,[\s\S]*?\.tool-environment-canvas,[\s\S]*?\.tool-environment-actions,/);
+});
+
 test("Tool Studio deploy mode exposes a deployment workbench", () => {
   assert.match(toolStudio, /type ToolDeployTarget = \{/);
   assert.match(toolStudio, /const toolDeployTargets: ToolDeployTarget\[\] = \[/);
