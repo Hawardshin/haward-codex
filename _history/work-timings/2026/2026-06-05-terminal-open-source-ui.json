@@ -1,0 +1,37 @@
+{
+  "id": "2026-06-05-terminal-open-source-ui",
+  "date": "2026-06-05",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "phases": [
+    {
+      "name": "web_first_intake",
+      "approx_minutes": 4,
+      "notes": "Checked official xterm.js, VS Code terminal, and GNOME Terminal help references for terminal UI conventions."
+    },
+    {
+      "name": "source_inspection",
+      "approx_minutes": 8,
+      "notes": "Inspected RuntimeTerminalDrawer and MonitorShell terminal open paths."
+    },
+    {
+      "name": "implementation",
+      "approx_minutes": 18,
+      "notes": "Added terminal chrome, tab strip relocation, emulator styling, prompt input, responsive CSS, and global terminal routing."
+    },
+    {
+      "name": "verification",
+      "approx_minutes": 20,
+      "notes": "Ran check/test/build/customer/perf/platform checks, in-app Browser smoke, and static export viewport audits."
+    },
+    {
+      "name": "documentation_trace",
+      "approx_minutes": 12,
+      "notes": "Recorded REQ-WM-040, spec artifacts, web search, request trace, evaluation, omission, resource, and work summary records."
+    }
+  ],
+  "bottleneck_notes": [
+    "The first static viewport smoke needed a different existing Playwright dependency root because root package resolution did not expose Playwright.",
+    "The overview terminal button initially revealed that global open behavior could set drawer state without navigating to a section that mounted the drawer."
+  ],
+  "status": "recorded"
+}

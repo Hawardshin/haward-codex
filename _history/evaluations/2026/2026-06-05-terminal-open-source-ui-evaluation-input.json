@@ -1,0 +1,89 @@
+{
+  "id": "2026-06-05-terminal-open-source-ui",
+  "date": "2026-06-05",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "request_summary": "터미널 UI를 오픈소스 개발 도구의 터미널처럼 익숙한 구조와 모양으로 개선한다.",
+  "requirements": [
+    "REQ-WM-040"
+  ],
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-terminal-open-source-ui/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-terminal-open-source-ui/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-terminal-open-source-ui/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-terminal-open-source-ui/traceability.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-terminal-open-source-ui/validation.ko.md",
+    "_history/web-searches/2026/2026-06-05-terminal-open-source-ui.ko.md",
+    "_history/user-requests/2026/2026-06-05-terminal-open-source-ui.ko.md",
+    "_history/request-traces/2026/2026-06-05-terminal-open-source-ui.ko.md",
+    "_history/work-summaries/2026/2026-06-05.ko.md",
+    "_history/2026/2026-06-05.md"
+  ],
+  "implementation_summary": [
+    "RuntimeTerminalDrawer now exposes a terminal chrome bar with terminal title, selected adapter, tab strip, runtime status, active session count, and cwd.",
+    "Terminal output now uses a dark emulator screen with monospace output, emulator metadata, and prompt-style stdin input.",
+    "Terminal drawer CSS is scoped to dark open-source terminal styling with white foreground and responsive tab layout.",
+    "Global terminal open behavior routes to the Desktop Runtime surface when the current section does not mount the terminal drawer."
+  ],
+  "verification": [
+    {
+      "command": "corepack pnpm --filter workspace-monitor run check",
+      "status": "passed",
+      "notes": "TypeScript, scroll contract, and source control design checks passed."
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor test",
+      "status": "passed",
+      "notes": "17 node tests passed."
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor run build:customer",
+      "status": "passed",
+      "notes": "Customer snapshot and Next static export completed."
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor run perf:budget",
+      "status": "passed",
+      "notes": "Largest initial chunk 328833 bytes under the 1000000 byte budget."
+    },
+    {
+      "command": "corepack pnpm --filter platform-desktop-app run check",
+      "status": "passed",
+      "notes": "Runtime contract, readiness, customer bundle, internal release, and service readiness checks passed; public release remains gated by existing signing/updater/clean-machine warnings."
+    },
+    {
+      "command": "in-app Browser terminal smoke",
+      "status": "passed",
+      "notes": "Overview terminal button routed to #section-desktop and opened terminal drawer with terminal chrome, 4 tabs, dark background, and horizontal overflow 0."
+    },
+    {
+      "command": "Static export viewport smoke",
+      "status": "passed",
+      "notes": "1280x820, 900x720, and 390x720 all opened the terminal drawer with body and drawer horizontal overflow 0."
+    }
+  ],
+  "web_search_targets": [
+    "_history/web-searches/2026/2026-06-05-terminal-open-source-ui.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-terminal-open-source-ui-omission.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-terminal-open-source-ui-resource.json"
+  ],
+  "installation_occurred": false,
+  "generated_snapshot_files_left_unstaged": [
+    "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/customer-workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json"
+  ],
+  "result": "pass"
+}

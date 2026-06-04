@@ -50,6 +50,7 @@
 | REQ-WM-037 | 데스크톱 제품 UI의 주요 섹션은 한 페이지에 진단, 기록, 인벤토리, 생성기, 실행 보조 패널을 동시에 펼쳐 사용자를 압박하지 않아야 하며, 초기 화면은 주 작업 하나와 제한된 보조 요약만 보여주고 나머지는 명명된 세부 disclosure 아래에 둬야 한다. | must | Agents/Desktop 초기 visible panel count audit, disclosure closed-by-default audit, disclosure open interaction, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, 정적 export Playwright audit 확인 |
 | REQ-WM-038 | 에이전트 코어 채팅 UI는 ChatGPT/Claude/Gemini처럼 중앙 대화 로그와 하단 composer를 주 작업면으로 삼고, provider/model 선택은 compact 보조 컨트롤로 낮추며, 작업 컨텍스트와 계약 정보는 대화 입력을 밀어내지 않는 drawer/요약 영역으로 분리해야 한다. | must | Agents 정적 export Playwright chat audit, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `platform-desktop-app check` 확인 |
 | REQ-WM-039 | 주요 탭 간 이동은 닫힌 보조 기능군까지 마운트하느라 느려지면 안 되며, Agents/Desktop Runtime의 section-level disclosure 내부 무거운 패널은 사용자가 열 때까지 React 트리에 붙지 않아야 한다. | must | CPU throttle 6 정적 export tab switch audit, 닫힌 disclosure DOM mount audit, disclosure open interaction, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget`, `platform-desktop-app check` 확인 |
+| REQ-WM-040 | 터미널/CLI 실행 UI는 일반 카드형 패널이 아니라 오픈소스 개발 도구에 익숙한 terminal chrome, tab strip, dark emulator surface, monospace output, prompt input, status/cwd bar를 기본 구조로 사용해야 하며, 전역 터미널 버튼은 어느 화면에서 눌러도 실제 터미널이 마운트된 화면으로 이동해 열려야 한다. | must | xterm.js/VS Code/GNOME Terminal reference 기록, in-app Browser 터미널 버튼 smoke, 1280/900/390px 정적 export terminal overflow audit, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget`, `platform-desktop-app check` 확인 |
 
 ## 범위
 
@@ -85,6 +86,7 @@
 - 어두운 surface 위 흰색 foreground token
 - 에이전트 코어 채팅의 중앙 대화 로그, 하단 composer, compact provider/model selector, 접힌 context drawer
 - 탭 이동 시 닫힌 보조 패널 lazy mount와 전환 지연 audit
+- 오픈소스 개발 도구형 터미널 chrome, 탭 strip, emulator output, prompt input, 전역 터미널 버튼 라우팅
 - Vercel 배포 문서
 
 ## 제외 범위

@@ -3161,8 +3161,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     }
   };
   const openTerminalDrawer = useCallback(() => {
+    if (section !== "desktop" && section !== "source") {
+      openSection("desktop");
+    }
     setTerminalDrawerOpen(true);
-  }, []);
+  }, [openSection, section]);
   const openSearchAgentWorkbench = useCallback(() => {
     openSection("agents");
   }, [openSection]);
@@ -3337,7 +3340,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       }
     }
 
-    setTerminalDrawerOpen(true);
+    openTerminalDrawer();
 
     try {
       const report = await tauriInvoke<CliSessionReport>("start_cli_adapter_session", {
@@ -4406,8 +4409,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         <button
                           className={terminalDrawerOpen ? "active" : ""}
                           onClick={() => {
-                            openSection("desktop");
-                            setTerminalDrawerOpen(true);
+                            openTerminalDrawer();
                           }}
                           type="button"
                         >
@@ -4501,8 +4503,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                           type="button"
                           onClick={() => {
                             setRuntimeInitDefaults(defaultRuntimeInitDefaults);
-                            openSection("desktop");
-                            setTerminalDrawerOpen(true);
+                            openTerminalDrawer();
                             setSettingsOpen(false);
                           }}
                         >

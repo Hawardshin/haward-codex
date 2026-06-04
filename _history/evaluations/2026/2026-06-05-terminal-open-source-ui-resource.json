@@ -1,0 +1,34 @@
+{
+  "id": "2026-06-05-terminal-open-source-ui-resource",
+  "date": "2026-06-05",
+  "resource_risk_occurred": true,
+  "resources_used": [
+    {
+      "kind": "local_static_server",
+      "command": "python3 -m http.server 3224 --bind 127.0.0.1 --directory platform-desktop-app/renderer/workspace-monitor/out",
+      "purpose": "Serve the static customer export for Browser and viewport audits.",
+      "status": "stopped",
+      "cleanup": "Killed the process bound to tcp:3224 after verification."
+    },
+    {
+      "kind": "in_app_browser",
+      "target": "http://127.0.0.1:3224/",
+      "purpose": "Verify overview terminal button routing and terminal drawer DOM/CSS state.",
+      "status": "verified",
+      "cleanup": "No external browser process was started by this tool path."
+    },
+    {
+      "kind": "browser_automation",
+      "command": "node --input-type=module using presentation-agent local Playwright dependency",
+      "purpose": "Verify terminal drawer overflow across 1280x820, 900x720, and 390x720 viewports.",
+      "status": "closed",
+      "cleanup": "The Playwright script closed its Chromium browser instance."
+    }
+  ],
+  "checks": [
+    "No process remains bound to tcp:3224.",
+    "Playwright browser instances closed in scripts.",
+    "No new dependency installation occurred."
+  ],
+  "status": "pass"
+}

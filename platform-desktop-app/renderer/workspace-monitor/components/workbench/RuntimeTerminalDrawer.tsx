@@ -231,6 +231,9 @@ export function RuntimeTerminalDrawer({
   const canWriteToSelectedSession =
     runtimeAvailable && Boolean(selectedSession) && sessionInput.trim() !== "" && Boolean(selectedSession && isWritableSessionStatus(selectedSession.status));
   const copy = terminalCopy[uiLanguage];
+  const selectedAdapter = adapters.find((adapter) => adapter.adapterId === selectedSessionAdapterId);
+  const terminalCwd = selectedSession?.workingDir || workingDir || "workspace root";
+  const selectedSessionOutput = selectedSession ? selectedSession.stdout || selectedSession.stderr || copy.noOutput : copy.noSession;
 
   return (
     <>
@@ -265,6 +268,65 @@ export function RuntimeTerminalDrawer({
               <X size={15} aria-hidden="true" />
               <span>{copy.collapse}</span>
             </button>
+          </div>
+        </div>
+
+        <div className="terminal-chrome-bar" aria-label={uiLanguage === "ko" ? "터미널 탭과 상태" : "Terminal tabs and status"}>
+          <div className="terminal-chrome-title">
+            <SquareTerminal size={15} aria-hidden="true" />
+            <strong>TERMINAL</strong>
+            <span>{selectedAdapter?.label || selectedSessionAdapterId}</span>
+          </div>
+          <div className="terminal-view-switcher terminal-tab-strip" role="tablist" aria-label={uiLanguage === "ko" ? "터미널 보기" : "Terminal views"}>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={terminalDrawerView === "start"}
+              className={terminalDrawerView === "start" ? "active" : ""}
+              onClick={() => setTerminalDrawerView("start")}
+            >
+              <SquareTerminal size={15} aria-hidden="true" />
+              <span>{copy.start}</span>
+              <small>{canStartSession ? copy.ready : copy.blocked}</small>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={terminalDrawerView === "sessions"}
+              className={terminalDrawerView === "sessions" ? "active" : ""}
+              onClick={() => setTerminalDrawerView("sessions")}
+            >
+              <ListFilter size={15} aria-hidden="true" />
+              <span>{copy.sessions}</span>
+              <small>{sessions.length}</small>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={terminalDrawerView === "output"}
+              className={terminalDrawerView === "output" ? "active" : ""}
+              onClick={() => setTerminalDrawerView("output")}
+            >
+              <Activity size={15} aria-hidden="true" />
+              <span>{copy.output}</span>
+              <small>{selectedSession?.status || copy.idle}</small>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={terminalDrawerView === "events"}
+              className={terminalDrawerView === "events" ? "active" : ""}
+              onClick={() => setTerminalDrawerView("events")}
+            >
+              <Inbox size={15} aria-hidden="true" />
+              <span>{copy.events}</span>
+              <small>{selectedOutputEvents.length}</small>
+            </button>
+          </div>
+          <div className="terminal-chrome-meta">
+            <span>{runtimeAvailable ? "runtime" : "offline"}</span>
+            <strong>{sessionStats.active} active</strong>
+            <code>{terminalCwd}</code>
           </div>
         </div>
 
@@ -313,53 +375,6 @@ export function RuntimeTerminalDrawer({
                 <span>{copy.review}</span>
                 <strong>{sourceDirty ? copy.diffPending : copy.clean}</strong>
               </article>
-            </div>
-
-            <div className="terminal-view-switcher" role="tablist" aria-label={uiLanguage === "ko" ? "터미널 보기" : "Terminal views"}>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={terminalDrawerView === "start"}
-                className={terminalDrawerView === "start" ? "active" : ""}
-                onClick={() => setTerminalDrawerView("start")}
-              >
-                <SquareTerminal size={15} aria-hidden="true" />
-                <span>{copy.start}</span>
-                <small>{canStartSession ? copy.ready : copy.blocked}</small>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={terminalDrawerView === "sessions"}
-                className={terminalDrawerView === "sessions" ? "active" : ""}
-                onClick={() => setTerminalDrawerView("sessions")}
-              >
-                <ListFilter size={15} aria-hidden="true" />
-                <span>{copy.sessions}</span>
-                <small>{sessions.length}</small>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={terminalDrawerView === "output"}
-                className={terminalDrawerView === "output" ? "active" : ""}
-                onClick={() => setTerminalDrawerView("output")}
-              >
-                <Activity size={15} aria-hidden="true" />
-                <span>{copy.output}</span>
-                <small>{selectedSession?.status || copy.idle}</small>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={terminalDrawerView === "events"}
-                className={terminalDrawerView === "events" ? "active" : ""}
-                onClick={() => setTerminalDrawerView("events")}
-              >
-                <Inbox size={15} aria-hidden="true" />
-                <span>{copy.events}</span>
-                <small>{selectedOutputEvents.length}</small>
-              </button>
             </div>
           </aside>
 
@@ -481,11 +496,17 @@ export function RuntimeTerminalDrawer({
                 </div>
                 <strong>{selectedSession?.status || copy.idle}</strong>
               </header>
-              <pre tabIndex={0} aria-label={copy.selectedOutput}>
-                <code>{selectedSession ? selectedSession.stdout || selectedSession.stderr || copy.noOutput : copy.noSession}</code>
+              <div className="terminal-emulator-meta">
+                <span>{selectedSession?.adapterId || selectedSessionAdapterId}</span>
+                <code>{terminalCwd}</code>
+                <strong>{selectedSession?.exitCode ?? copy.noCode}</strong>
+              </div>
+              <pre className="terminal-emulator-screen" tabIndex={0} aria-label={copy.selectedOutput}>
+                <code>{selectedSessionOutput}</code>
               </pre>
               {selectedSession?.stderr && selectedSession.stdout && <small>{selectedSession.stderr}</small>}
-              <div className="session-input-row">
+              <div className="session-input-row terminal-command-row">
+                <span className="terminal-prompt-symbol">$</span>
                 <input
                   value={sessionInput}
                   onChange={(event) => onSessionInputChange(event.target.value)}
