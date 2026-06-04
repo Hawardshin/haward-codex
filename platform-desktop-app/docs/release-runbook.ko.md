@@ -10,8 +10,11 @@ repository root에서 실행한다.
 
 | 목적 | 명령 |
 | --- | --- |
+| 처음 설정만 실행 | `corepack pnpm run desktop:setup` |
 | 처음 설정 + 전체 개발 검증 | `corepack pnpm run desktop:setup:verify` |
-| 의존성 설치 후 개발 검증 | `corepack pnpm run desktop:verify` |
+| 빠른 반복 검증 | `corepack pnpm run desktop:verify:quick` |
+| 전체 개발 검증 | `corepack pnpm run desktop:verify` |
+| customer renderer build/audit만 실행 | `corepack pnpm run desktop:renderer:build` |
 | 내부 테스트용 `.app`/DMG 빌드 | `corepack pnpm run desktop:package:internal` |
 | 공개 배포 gate report-only 확인 | `corepack pnpm run desktop:release:report` |
 | 실행될 명령 순서만 확인 | `corepack pnpm --filter platform-desktop-app run pipeline:dry-run` |
@@ -21,11 +24,13 @@ repository root에서 실행한다.
 `desktop:package:internal`은 다음 순서로 실행된다.
 
 1. Workspace Monitor typecheck, test, customer build를 실행한다.
-2. developer/customer snapshot boundary를 검사한다.
+2. customer bundle audit와 developer/customer snapshot boundary를 검사한다.
 3. Desktop app Node test와 readiness check를 실행한다.
 4. Rust `cargo test`와 `cargo build`를 실행한다.
-5. Tauri `tauri build`로 내부 테스트용 `.app`/DMG를 만든다.
+5. 이미 audit된 renderer output을 재사용하는 prepared-renderer Tauri build로 내부 테스트용 `.app`/DMG를 만든다.
 6. macOS에서는 `.app` signature를 `codesign`으로 검증하고 DMG를 `hdiutil verify`로 확인한다.
+
+직접 `corepack pnpm --filter platform-desktop-app run tauri:build`를 실행하면 Tauri `beforeBuildCommand`가 customer renderer build/audit를 먼저 실행한다. `desktop:package:internal`은 `desktop:verify`에서 만든 renderer output을 다시 감사한 뒤 재사용하므로 같은 Next.js build를 두 번 돌리지 않는다.
 
 생성 artifact:
 

@@ -1,0 +1,45 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-install-build-pipeline",
+  "status": "passed",
+  "resource_risks": [
+    "pnpm install subprocess",
+    "Playwright browser install subprocess",
+    "Next.js production build subprocess",
+    "Cargo test/build subprocesses",
+    "Tauri release build and DMG bundling subprocesses",
+    "codesign and hdiutil verification subprocesses"
+  ],
+  "controls": [
+    "All build commands were run synchronously through desktop-pipeline spawnSync or pnpm scripts.",
+    "The long-running package command was polled until it exited with code 0.",
+    "No local dev server was started.",
+    "No browser automation session was left open."
+  ],
+  "measurements": [
+    {
+      "command": "corepack pnpm run desktop:setup",
+      "result": "passed",
+      "observed_duration": "about 2s"
+    },
+    {
+      "command": "corepack pnpm run desktop:verify:quick",
+      "result": "passed",
+      "observed_duration": "about 3s"
+    },
+    {
+      "command": "corepack pnpm run desktop:verify",
+      "result": "passed",
+      "observed_duration": "about 16s"
+    },
+    {
+      "command": "corepack pnpm run desktop:package:internal",
+      "result": "passed",
+      "observed_duration": "about 53s"
+    }
+  ],
+  "cleanup_notes": [
+    "No server process needed cleanup.",
+    "Tauri artifacts and generated snapshots are expected build outputs."
+  ]
+}

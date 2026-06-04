@@ -476,8 +476,12 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   const monitorPkg = readJson("renderer/workspace-monitor/package.json");
   const viewModes = readJson("../agent-platform/configs/access/view-mode-registry.json");
 
-  assert.match(platformPkg.scripts["monitor:build"], /build:customer/);
-  assert.match(platformPkg.scripts["monitor:build"], /customer-bundle:audit/);
+  assert.match(platformPkg.scripts["renderer:build"], /build:customer/);
+  assert.match(platformPkg.scripts["renderer:build"], /customer-bundle:audit/);
+  assert.match(platformPkg.scripts["monitor:build"], /renderer:build/);
+  assert.match(platformPkg.scripts["tauri:build:prepared"], /tauri-build-prepared/);
+  assert.ok(platformPkg.scripts.setup);
+  assert.ok(platformPkg.scripts["verify:quick"]);
   assert.match(platformPkg.scripts.check, /check-customer-bundle\.mjs/);
   assert.match(platformPkg.scripts.check, /check-release-readiness\.mjs/);
   assert.ok(platformPkg.scripts["release:preflight:public"]);

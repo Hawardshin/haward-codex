@@ -10,8 +10,11 @@ Run these from the repository root.
 
 | Purpose | Command |
 | --- | --- |
+| First setup only | `corepack pnpm run desktop:setup` |
 | First setup plus developer verification | `corepack pnpm run desktop:setup:verify` |
-| Developer verification after dependencies are installed | `corepack pnpm run desktop:verify` |
+| Fast repeated verification | `corepack pnpm run desktop:verify:quick` |
+| Full developer verification | `corepack pnpm run desktop:verify` |
+| Customer renderer build/audit only | `corepack pnpm run desktop:renderer:build` |
 | Build local/internal `.app` and DMG | `corepack pnpm run desktop:package:internal` |
 | Check public release gates in report-only mode | `corepack pnpm run desktop:release:report` |
 | Preview the command sequence | `corepack pnpm --filter platform-desktop-app run pipeline:dry-run` |
@@ -21,11 +24,13 @@ Run these from the repository root.
 `desktop:package:internal` runs:
 
 1. Workspace Monitor typecheck, tests, and customer build.
-2. Developer/customer snapshot boundary checks.
+2. Customer bundle audit and developer/customer snapshot boundary checks.
 3. Desktop app Node tests and readiness checks.
 4. Rust `cargo test` and `cargo build`.
-5. Tauri `tauri build` for the internal `.app`/DMG.
+5. Prepared-renderer Tauri build for the internal `.app`/DMG, reusing the already audited renderer output.
 6. On macOS, verify the `.app` signature with `codesign` and the DMG with `hdiutil verify`.
+
+Direct `corepack pnpm --filter platform-desktop-app run tauri:build` still runs the Tauri `beforeBuildCommand`, which builds and audits the customer renderer first. `desktop:package:internal` re-audits and reuses the renderer output produced by `desktop:verify`, avoiding a duplicate Next.js build in the package pipeline.
 
 Expected artifacts:
 

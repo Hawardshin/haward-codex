@@ -1,0 +1,40 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-install-build-pipeline",
+  "status": "passed",
+  "checks": [
+    {
+      "item": "web_first_intake",
+      "status": "passed",
+      "evidence": "_history/web-searches/2026/2026-06-05-desktop-install-build-pipeline.ko.md"
+    },
+    {
+      "item": "install_build_method_changed",
+      "status": "passed",
+      "evidence": "New root scripts desktop:setup, desktop:verify:quick, desktop:renderer:build; desktop-pipeline setup and prepared Tauri modes."
+    },
+    {
+      "item": "backward_compatibility",
+      "status": "passed",
+      "evidence": "monitor:build remains as a compatibility alias for renderer:build."
+    },
+    {
+      "item": "customer_bundle_boundary",
+      "status": "passed",
+      "evidence": "renderer:build and tauri-before-build-prepared both run customer bundle audit."
+    },
+    {
+      "item": "public_release_claim_guard",
+      "status": "passed",
+      "evidence": "Release docs and readiness reports still identify signing, notarization, updater, and clean-machine smoke as remaining gates."
+    },
+    {
+      "item": "validation",
+      "status": "passed",
+      "evidence": "setup, quick verify, full verify, and internal package build passed."
+    }
+  ],
+  "unresolved_items": [
+    "Generated snapshot JSON files remain unstaged build outputs."
+  ]
+}

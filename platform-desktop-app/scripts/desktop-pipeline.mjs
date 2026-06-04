@@ -15,11 +15,42 @@ const macosDmgArtifact = path.join(
   tauriRoot,
   "target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg"
 );
+const preparedTauriBuildConfig = JSON.stringify({
+  build: {
+    beforeBuildCommand: "node scripts/tauri-before-build-prepared.mjs"
+  }
+});
+
+const setupSteps = [
+  step("Install desktop workspace dependencies", "corepack", [
+    "pnpm",
+    "--filter",
+    "platform-desktop-app",
+    "--filter",
+    "workspace-monitor",
+    "install",
+    "--frozen-lockfile"
+  ], repoRoot),
+  step("Install Workspace Monitor Playwright browser", "corepack", [
+    "pnpm",
+    "--filter",
+    "workspace-monitor",
+    "run",
+    "install:browsers"
+  ], repoRoot)
+];
+
+const quickVerifySteps = [
+  step("Workspace Monitor type check", "corepack", ["pnpm", "--filter", "workspace-monitor", "run", "check"], repoRoot),
+  step("Workspace Monitor tests", "corepack", ["pnpm", "--filter", "workspace-monitor", "test"], repoRoot),
+  step("Desktop app tests", "corepack", ["pnpm", "--filter", "platform-desktop-app", "test"], repoRoot),
+  step("Desktop app readiness check", "corepack", ["pnpm", "--filter", "platform-desktop-app", "run", "check"], repoRoot)
+];
 
 const commonVerifySteps = [
   step("Workspace Monitor type check", "corepack", ["pnpm", "--filter", "workspace-monitor", "run", "check"], repoRoot),
   step("Workspace Monitor tests", "corepack", ["pnpm", "--filter", "workspace-monitor", "test"], repoRoot),
-  step("Customer renderer build", "corepack", ["pnpm", "--filter", "workspace-monitor", "run", "build:customer"], repoRoot),
+  step("Customer renderer build and bundle audit", "corepack", ["pnpm", "--filter", "platform-desktop-app", "run", "renderer:build"], repoRoot),
   step("Developer snapshot intent-map check", "corepack", ["pnpm", "--filter", "workspace-monitor", "run", "check:intent-map"], repoRoot),
   step("Customer snapshot intent-map check", "corepack", ["pnpm", "--filter", "workspace-monitor", "run", "check:intent-map:customer"], repoRoot),
   step("Desktop app tests", "corepack", ["pnpm", "--filter", "platform-desktop-app", "test"], repoRoot),
@@ -28,16 +59,30 @@ const commonVerifySteps = [
 ];
 
 const pipelines = {
+  setup: {
+    description: "Install only the dependencies and browser binary needed for the desktop app path.",
+    steps: setupSteps
+  },
+  "verify-quick": {
+    description: "Run the fast developer verification path without rebuilding the renderer or Rust app.",
+    steps: quickVerifySteps
+  },
   verify: {
     description: "Run the developer verification path without producing a new installer.",
     steps: commonVerifySteps
+  },
+  "tauri-build-prepared": {
+    description: "Build the Tauri bundle using an already prepared and audited renderer output.",
+    steps: [
+      tauriPreparedBuildStep("Tauri build with prepared renderer")
+    ]
   },
   "package-internal": {
     description: "Run verification and build the local/internal Tauri app and DMG.",
     steps: [
       ...commonVerifySteps,
       step("Rust build", "cargo", ["build"], tauriRoot),
-      step("Tauri internal package build", "corepack", ["pnpm", "--filter", "platform-desktop-app", "run", "tauri:build"], repoRoot),
+      tauriPreparedBuildStep("Tauri internal package build with prepared renderer"),
       step("macOS app signature verification", "codesign", ["--verify", "--deep", "--strict", macosAppArtifact], repoRoot, {
         onlyPlatform: "darwin"
       }),
@@ -73,6 +118,19 @@ const pipelines = {
 
 function step(label, command, args, cwd, options = {}) {
   return { label, command, args, cwd, ...options };
+}
+
+function tauriPreparedBuildStep(label) {
+  return step(label, "corepack", [
+    "pnpm",
+    "--filter",
+    "platform-desktop-app",
+    "exec",
+    "tauri",
+    "build",
+    "--config",
+    preparedTauriBuildConfig
+  ], repoRoot);
 }
 
 function main(argv = process.argv.slice(2)) {
@@ -152,13 +210,19 @@ function runStep(currentStep, dryRun) {
 
 function printHelp() {
   console.log(`Usage:
+  node scripts/desktop-pipeline.mjs setup [--dry-run]
+  node scripts/desktop-pipeline.mjs verify-quick [--dry-run]
   node scripts/desktop-pipeline.mjs verify [--dry-run]
+  node scripts/desktop-pipeline.mjs tauri-build-prepared [--dry-run]
   node scripts/desktop-pipeline.mjs package-internal [--dry-run]
   node scripts/desktop-pipeline.mjs public-report [--dry-run]
 
 Root shortcuts:
+  corepack pnpm run desktop:setup
+  corepack pnpm run desktop:verify:quick
   corepack pnpm run desktop:setup:verify
   corepack pnpm run desktop:verify
+  corepack pnpm run desktop:renderer:build
   corepack pnpm run desktop:package:internal
   corepack pnpm run desktop:release:report`);
 }

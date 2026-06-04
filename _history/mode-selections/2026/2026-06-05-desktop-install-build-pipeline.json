@@ -1,0 +1,13 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-install-build-pipeline",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selection_reason": "The request changes desktop install and build pipeline behavior, scripts, checks, and documentation. It is implementation work but not public release signing or installer productization.",
+  "mode_policy_notes": [
+    "Web-first intake was performed before local edits.",
+    "Setup, verification, packaging, and resource lifecycle were validated locally.",
+    "Public distribution gates remain separate from local/internal build pipeline work."
+  ]
+}

@@ -60,7 +60,8 @@ const requiredFiles = [
   "scripts/check-customer-bundle.mjs",
   "scripts/check-release-readiness.mjs",
   "scripts/check-service-readiness.mjs",
-  "scripts/desktop-pipeline.mjs"
+  "scripts/desktop-pipeline.mjs",
+  "scripts/tauri-before-build-prepared.mjs"
 ];
 
 function readJson(relativePath) {
@@ -92,7 +93,7 @@ if (!pkg.scripts?.check || !pkg.scripts?.test || !pkg.scripts?.verify || !pkg.sc
 if (!pkg.scripts?.["runtime:contract"]) {
   failures.push("package.json must expose runtime:contract");
 }
-for (const scriptName of ["package:internal", "deploy:public:report", "pipeline:dry-run"]) {
+for (const scriptName of ["setup", "verify:quick", "package:internal", "deploy:public:report", "pipeline:dry-run"]) {
   if (!pkg.scripts?.[scriptName]) {
     failures.push(`package.json must expose ${scriptName}`);
   }
@@ -107,11 +108,17 @@ for (const scriptName of ["service:readiness", "service:readiness:public:report"
     failures.push(`package.json must expose ${scriptName}`);
   }
 }
-if (!pkg.scripts?.["monitor:build"]?.includes("build:customer")) {
-  failures.push("platform-desktop-app monitor:build must use the customer Workspace Monitor build");
+if (!pkg.scripts?.["renderer:build"]?.includes("build:customer")) {
+  failures.push("platform-desktop-app renderer:build must use the customer Workspace Monitor build");
 }
-if (!pkg.scripts?.["monitor:build"]?.includes("customer-bundle:audit")) {
-  failures.push("platform-desktop-app monitor:build must audit the customer bundle after building");
+if (!pkg.scripts?.["renderer:build"]?.includes("customer-bundle:audit")) {
+  failures.push("platform-desktop-app renderer:build must audit the customer bundle after building");
+}
+if (!pkg.scripts?.["monitor:build"]?.includes("renderer:build")) {
+  failures.push("platform-desktop-app monitor:build must remain a compatibility alias for renderer:build");
+}
+if (!pkg.scripts?.["tauri:build:prepared"]?.includes("tauri-build-prepared")) {
+  failures.push("package.json must expose tauri:build:prepared for no-rebuild internal packaging");
 }
 if (!pkg.scripts?.check?.includes("check-customer-bundle.mjs") || !pkg.scripts?.check?.includes("check-release-readiness.mjs")) {
   failures.push("platform-desktop-app check must run customer bundle and release readiness preflight checks");
@@ -126,7 +133,15 @@ if (!pkg.devDependencies?.["@tauri-apps/cli"]) {
   failures.push("package.json must declare @tauri-apps/cli as a project-local devDependency");
 }
 const rootPkg = readJson("../package.json");
-for (const scriptName of ["desktop:setup:verify", "desktop:verify", "desktop:package:internal", "desktop:release:report"]) {
+for (const scriptName of [
+  "desktop:setup",
+  "desktop:setup:verify",
+  "desktop:verify:quick",
+  "desktop:verify",
+  "desktop:renderer:build",
+  "desktop:package:internal",
+  "desktop:release:report"
+]) {
   if (!rootPkg.scripts?.[scriptName]) {
     failures.push(`root package.json must expose ${scriptName}`);
   }

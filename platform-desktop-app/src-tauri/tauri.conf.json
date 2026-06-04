@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "identifier": "com.personalagentplatform.desktop",
   "build": {
-    "beforeBuildCommand": "corepack pnpm run monitor:build",
+    "beforeBuildCommand": "corepack pnpm run renderer:build",
     "beforeDevCommand": "corepack pnpm --dir ../renderer/workspace-monitor run dev",
     "devUrl": "http://localhost:3000",
     "frontendDist": "../renderer/workspace-monitor/out"

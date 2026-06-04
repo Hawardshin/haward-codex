@@ -1,0 +1,57 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-install-build-pipeline",
+  "result_summary": "Split desktop setup, quick verification, full verification, renderer build, and internal package commands. Added a prepared-renderer Tauri package path that reuses audited renderer output instead of running a duplicate Next.js build during packaging.",
+  "changed_paths": [
+    "package.json",
+    "platform-desktop-app/package.json",
+    "platform-desktop-app/scripts/desktop-pipeline.mjs",
+    "platform-desktop-app/scripts/tauri-before-build-prepared.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/scripts/check-service-readiness.mjs",
+    "platform-desktop-app/src-tauri/tauri.conf.json",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/package.json",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/README.ko.md",
+    "platform-desktop-app/README.en.md",
+    "platform-desktop-app/docs/release-runbook.ko.md",
+    "platform-desktop-app/docs/release-runbook.en.md"
+  ],
+  "validation": [
+    "JSON parse check for package/config files: passed",
+    "corepack pnpm --filter platform-desktop-app run pipeline:dry-run: passed",
+    "corepack pnpm run desktop:setup: passed",
+    "corepack pnpm run desktop:verify:quick: passed",
+    "corepack pnpm run desktop:verify: passed",
+    "corepack pnpm run desktop:package:internal: passed"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-desktop-install-build-pipeline.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-05-desktop-install-build-pipeline.ko.md"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-05-desktop-install-build-pipeline.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-05-desktop-install-build-pipeline.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-desktop-install-build-pipeline-omission.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-desktop-install-build-pipeline-resource.json"
+  ],
+  "installation_occurred": true,
+  "installation_notes": "desktop:setup executed filtered pnpm install for platform-desktop-app and workspace-monitor plus the existing workspace-monitor Playwright browser install command. No new package dependency or lockfile change was introduced in this task.",
+  "public_release_claim": "not_ready",
+  "remaining_public_release_gates": [
+    "Developer ID or equivalent public signing credentials",
+    "Apple notarization credentials and release notarization run",
+    "Signed updater endpoint/key",
+    "Clean-machine install/open/update/uninstall smoke"
+  ]
+}

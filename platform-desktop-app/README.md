@@ -10,16 +10,34 @@
 
 ## 바로 쓰는 명령
 
-처음 받았거나 의존성까지 한 번에 맞춰 검증하려면 repository root에서 실행합니다.
+처음 받았거나 의존성/browser runtime만 맞추려면 repository root에서 실행합니다.
+
+```bash
+corepack pnpm run desktop:setup
+```
+
+처음 설정 후 전체 검증까지 한 번에 실행하려면:
 
 ```bash
 corepack pnpm run desktop:setup:verify
+```
+
+반복 개발 중 빠른 검증만 하려면:
+
+```bash
+corepack pnpm run desktop:verify:quick
 ```
 
 이미 의존성이 설치되어 있고 개발 검증만 다시 하려면:
 
 ```bash
 corepack pnpm run desktop:verify
+```
+
+Tauri packaging 없이 customer renderer만 다시 만들고 audit하려면:
+
+```bash
+corepack pnpm run desktop:renderer:build
 ```
 
 내부 테스트용 `.app`/DMG까지 한 번에 만들려면:
@@ -42,15 +60,20 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 
 ## 명령이 하는 일
 
+`desktop:setup`은 desktop app 경로에 필요한 workspace dependency를 lockfile 기준으로 설치하고, Workspace Monitor Playwright Chromium headless shell을 설치합니다.
+
+`desktop:verify:quick`은 renderer/Rust rebuild 없이 Workspace Monitor check/test와 desktop app test/check만 실행합니다.
+
 `desktop:verify`는 다음을 순서대로 실행합니다.
 
-- Workspace Monitor typecheck/test/customer build
+- Workspace Monitor typecheck/test
+- customer renderer build와 customer bundle audit
 - developer/customer snapshot 검사
 - desktop app Node tests
 - runtime contract/readiness/customer bundle/internal release/service readiness check
 - Rust `cargo test`
 
-`desktop:package:internal`은 `desktop:verify`를 통과한 뒤 Rust build, Tauri build, macOS `codesign` verification, DMG `hdiutil verify`를 실행합니다.
+`desktop:package:internal`은 `desktop:verify`를 통과한 뒤 Rust build, prepared-renderer Tauri build, macOS `codesign` verification, DMG `hdiutil verify`를 실행합니다. Tauri 직접 빌드(`corepack pnpm --filter platform-desktop-app run tauri:build`)는 여전히 renderer build를 먼저 실행하지만, pipeline 패키징은 이미 audit된 renderer output을 재사용해서 중복 Next.js build를 피합니다.
 
 생성되는 내부 테스트 artifact는 다음 위치입니다.
 

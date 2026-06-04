@@ -8,6 +8,8 @@
   "scripts": {
     "check": "node scripts/check-runtime-contract.mjs && node scripts/check-readiness.mjs && node scripts/check-customer-bundle.mjs --allow-missing-dist && node scripts/check-release-readiness.mjs --mode internal && node scripts/check-service-readiness.mjs --mode internal",
     "test": "node --test tests/*.test.mjs",
+    "setup": "node scripts/desktop-pipeline.mjs setup",
+    "verify:quick": "node scripts/desktop-pipeline.mjs verify-quick",
     "verify": "node scripts/desktop-pipeline.mjs verify",
     "package:internal": "node scripts/desktop-pipeline.mjs package-internal",
     "deploy:public:report": "node scripts/desktop-pipeline.mjs public-report",
@@ -19,9 +21,11 @@
     "release:preflight:public:report": "node scripts/check-release-readiness.mjs --mode public --report-only",
     "service:readiness": "node scripts/check-service-readiness.mjs --mode internal",
     "service:readiness:public:report": "node scripts/check-service-readiness.mjs --mode public --report-only",
-    "monitor:build": "corepack pnpm --dir renderer/workspace-monitor run build:customer && corepack pnpm run customer-bundle:audit",
+    "renderer:build": "corepack pnpm --dir renderer/workspace-monitor run build:customer && corepack pnpm run customer-bundle:audit",
+    "monitor:build": "corepack pnpm run renderer:build",
     "tauri:dev": "tauri dev",
-    "tauri:build": "tauri build"
+    "tauri:build": "tauri build",
+    "tauri:build:prepared": "node scripts/desktop-pipeline.mjs tauri-build-prepared"
   },
   "devDependencies": {
     "@tauri-apps/cli": "2.11.2"

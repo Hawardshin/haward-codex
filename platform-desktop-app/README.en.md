@@ -10,16 +10,34 @@ The app is not a thin wrapper around one CLI. The app launches first and owns wo
 
 ## One-Shot Commands
 
-For first setup plus verification, run this from the repository root:
+For first setup of dependencies and browser runtime only, run this from the repository root:
+
+```bash
+corepack pnpm run desktop:setup
+```
+
+For first setup plus full verification:
 
 ```bash
 corepack pnpm run desktop:setup:verify
+```
+
+For fast repeated development verification:
+
+```bash
+corepack pnpm run desktop:verify:quick
 ```
 
 If dependencies are already installed and you only want to verify:
 
 ```bash
 corepack pnpm run desktop:verify
+```
+
+To rebuild and audit only the customer renderer without Tauri packaging:
+
+```bash
+corepack pnpm run desktop:renderer:build
 ```
 
 To build the local/internal `.app` and DMG in one command:
@@ -42,15 +60,20 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 
 ## What The Commands Run
 
+`desktop:setup` installs the workspace dependencies needed for the desktop app path from the lockfile, then installs the Workspace Monitor Playwright Chromium headless shell.
+
+`desktop:verify:quick` runs Workspace Monitor check/test and desktop app test/check without rebuilding the renderer or Rust app.
+
 `desktop:verify` runs:
 
-- Workspace Monitor typecheck/test/customer build
+- Workspace Monitor typecheck/test
+- customer renderer build and customer bundle audit
 - developer/customer snapshot checks
 - desktop app Node tests
 - runtime contract/readiness/customer bundle/internal release/service readiness checks
 - Rust `cargo test`
 
-`desktop:package:internal` runs `desktop:verify`, then Rust build, Tauri build, macOS `codesign` verification, and DMG `hdiutil verify`.
+`desktop:package:internal` runs `desktop:verify`, then Rust build, prepared-renderer Tauri build, macOS `codesign` verification, and DMG `hdiutil verify`. Direct Tauri builds (`corepack pnpm --filter platform-desktop-app run tauri:build`) still run the renderer build first, but the packaging pipeline reuses the already audited renderer output to avoid a duplicate Next.js build.
 
 Internal build artifacts are expected at:
 

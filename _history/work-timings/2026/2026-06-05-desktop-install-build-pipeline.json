@@ -1,0 +1,31 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-install-build-pipeline",
+  "timings": [
+    {
+      "phase": "web_first_intake_and_local_inventory",
+      "duration": "about 6m",
+      "notes": "Checked official Tauri, pnpm, and Playwright docs, then inspected package scripts and Tauri config."
+    },
+    {
+      "phase": "implementation",
+      "duration": "about 12m",
+      "notes": "Split setup/verify/package scripts, added prepared renderer hook, and updated checks/tests/docs."
+    },
+    {
+      "phase": "validation",
+      "duration": "about 2m",
+      "notes": "Ran setup, quick verify, full verify, and internal package build."
+    },
+    {
+      "phase": "history_and_closeout",
+      "duration": "about 5m",
+      "notes": "Recorded web search, plan, trace, evaluation, omission, resource, and timing notes."
+    }
+  ],
+  "bottleneck_notes": [
+    "The old setup:verify path forced dependency setup and full verification together.",
+    "The old internal package path could rebuild the Next.js renderer during Tauri build after the verify path already built it.",
+    "The new prepared renderer hook keeps the customer bundle audit while avoiding duplicate Next.js build work during package."
+  ]
+}

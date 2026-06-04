@@ -34,8 +34,8 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
       check("agent_workspace_plane", "Agent workspace plane declared", serializedRuntimeBoundary.includes("agent_workspace"), "Agent runtime work has a plane separate from reusable definitions.")
     ]),
     group("customer_payload", "Customer Payload", [
-      check("customer_snapshot_build", "Customer snapshot build configured", pkg.scripts?.["monitor:build"]?.includes("build:customer"), "Tauri build path uses customer snapshot mode."),
-      check("bundle_audit_gate", "Customer bundle audit gate configured", pkg.scripts?.["monitor:build"]?.includes("customer-bundle:audit"), "Customer bundle audit runs after monitor build."),
+      check("customer_snapshot_build", "Customer snapshot build configured", pkg.scripts?.["renderer:build"]?.includes("build:customer"), "Tauri build path uses customer snapshot mode."),
+      check("bundle_audit_gate", "Customer bundle audit gate configured", pkg.scripts?.["renderer:build"]?.includes("customer-bundle:audit"), "Customer bundle audit runs after renderer build."),
       check("source_payload_rules", "Source/private payload rules declared", serializedRuntimeBoundary.includes("_private/") && serializedRuntimeBoundary.includes("development repository source tree"), "Private and source-tree payloads are disallowed.")
     ]),
     group("support_diagnostics", "Support Diagnostics", [
