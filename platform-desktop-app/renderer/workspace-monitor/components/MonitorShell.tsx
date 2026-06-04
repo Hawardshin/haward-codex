@@ -7285,6 +7285,7 @@ function DesktopRuntimePanel({
   const [sourceWordWrap, setSourceWordWrap] = useState(false);
   const [sourceMinimapEnabled, setSourceMinimapEnabled] = useState(true);
   const [sourceSettingsOpen, setSourceSettingsOpen] = useState(false);
+  const [interactionContentReady, setInteractionContentReady] = useState(false);
   const [editorBusy, setEditorBusy] = useState(false);
   const [saveAllBusy, setSaveAllBusy] = useState(false);
   const [sourceCatalogBusy, setSourceCatalogBusy] = useState(false);
@@ -7297,12 +7298,21 @@ function DesktopRuntimePanel({
 
   const invoke = getTauriInvoke();
   const availableCount = adapters.filter((adapter) => adapter.available).length;
+  const shouldPrepareSourceWorkspace = isFileWorkspaceSurface || runtimeDiagnosticsOpen;
   const sourceCatalogFiles = runtimeSourceFiles.length ? runtimeSourceFiles : sourceFiles;
   const sourceFileCount = sourceCatalogFiles.length;
   const sourceCatalogLabel = runtimeSourceFiles.length ? "runtime" : "snapshot";
-  const editableSourceFiles = useMemo(() => sourceCatalogFiles.filter((file) => !file.truncated).slice(0, 240), [sourceCatalogFiles]);
+  const editableSourceFiles = useMemo(() => {
+    if (!shouldPrepareSourceWorkspace) {
+      return [];
+    }
+    return sourceCatalogFiles.filter((file) => !file.truncated).slice(0, 240);
+  }, [shouldPrepareSourceWorkspace, sourceCatalogFiles]);
   const deferredSourceFilter = useDeferredValue(sourceFilter);
   const filteredEditableSourceFiles = useMemo(() => {
+    if (!shouldPrepareSourceWorkspace) {
+      return [];
+    }
     const normalizedFilter = deferredSourceFilter.trim().toLowerCase();
     if (!normalizedFilter) {
       return editableSourceFiles.slice(0, 80);
@@ -7314,7 +7324,7 @@ function DesktopRuntimePanel({
           .some((value) => value.toLowerCase().includes(normalizedFilter))
       )
       .slice(0, 80);
-  }, [deferredSourceFilter, editableSourceFiles]);
+  }, [deferredSourceFilter, editableSourceFiles, shouldPrepareSourceWorkspace]);
   const workspaceExplorerRootLabel =
     desktopWorkspace?.activeWorkspacePath?.split(/[\\/]/).filter(Boolean).pop() ||
     desktopWorkspace?.fallbackWorkspacePath?.split(/[\\/]/).filter(Boolean).pop() ||
@@ -7454,17 +7464,27 @@ function DesktopRuntimePanel({
     return [...sessionEvents, ...reportEvents].slice(0, 18);
   }, [reports, sessions]);
   const selectedOutputEvents = selectedSession ? outputEvents.filter((event) => event.id.startsWith(selectedSession.sessionId)) : outputEvents;
-  const decisionGroups = useMemo(() => groupDecisions(inboxReport?.decisions || []), [inboxReport]);
+  const decisionGroups = useMemo(() => {
+    if (!runRecordsOpen) {
+      return [];
+    }
+    return groupDecisions(inboxReport?.decisions || []);
+  }, [inboxReport, runRecordsOpen]);
   const sourceDiff = useMemo<SourceDiffSummary | null>(() => {
+    if (!isFileWorkspaceSurface && !runtimeDiagnosticsOpen && !runRecordsOpen && !terminalDrawerOpen) {
+      return null;
+    }
     if (!sourceFile) {
       return null;
     }
     return buildSourceDiffSummary(sourceFile.content, sourceDraft);
-  }, [sourceDraft, sourceFile]);
-  const sourceEditorProfile = useMemo(
-    () => sourceEditorProfileForPath(sourceFile?.relativePath || selectedSourcePath || sourcePathInput),
-    [selectedSourcePath, sourceFile?.relativePath, sourcePathInput]
-  );
+  }, [isFileWorkspaceSurface, runRecordsOpen, runtimeDiagnosticsOpen, sourceDraft, sourceFile, terminalDrawerOpen]);
+  const sourceEditorProfile = useMemo(() => {
+    if (!isFileWorkspaceSurface) {
+      return sourceEditorProfileForPath("");
+    }
+    return sourceEditorProfileForPath(sourceFile?.relativePath || selectedSourcePath || sourcePathInput);
+  }, [isFileWorkspaceSurface, selectedSourcePath, sourceFile?.relativePath, sourcePathInput]);
   const selectedSourceTemplate = sourceTemplateById[sourceTemplateId];
   const activeMonacoEditorOptions = useMemo<editor.IStandaloneEditorConstructionOptions>(
     () => ({
@@ -7475,6 +7495,9 @@ function DesktopRuntimePanel({
     [sourceMinimapEnabled, sourceWordWrap]
   );
   const evidenceItems = useMemo(() => {
+    if (!runRecordsOpen) {
+      return [];
+    }
     const items = [
       ...outputEvents.slice(0, 5).map((event) => ({
         id: `event-${event.id}`,
@@ -7600,7 +7623,7 @@ function DesktopRuntimePanel({
       }))
     ];
     return items.slice(0, 8);
-  }, [accumulatedDataOverview, dirtyDraftEntries.length, openDraftEntries.length, outputEvents, payloadAudit, pipelineStats.latest, runtimeDataBoundary, selectedDecision, serviceReadiness, sourceDiff, sourceFile?.relativePath, sourceSaveResults, supportBundle, taskRunRecords, writeReport]);
+  }, [accumulatedDataOverview, dirtyDraftEntries.length, openDraftEntries.length, outputEvents, payloadAudit, pipelineStats.latest, runRecordsOpen, runtimeDataBoundary, selectedDecision, serviceReadiness, sourceDiff, sourceFile?.relativePath, sourceSaveResults, supportBundle, taskRunRecords, writeReport]);
 
   const replaceTaskRunRecords = (records: CliTaskRunRecordReport[]) => {
     setTaskRunRecords(records);
@@ -8809,6 +8832,11 @@ function DesktopRuntimePanel({
   }, [sourceEditorProfile.templateId, sourceFile?.relativePath]);
 
   useEffect(() => {
+    setInteractionContentReady(false);
+    return scheduleAfterFirstPaint(() => setInteractionContentReady(true), isFileWorkspaceSurface ? 100 : 140);
+  }, [isFileWorkspaceSurface]);
+
+  useEffect(() => {
     panelMountedRef.current = true;
     return () => {
       panelMountedRef.current = false;
@@ -8816,15 +8844,17 @@ function DesktopRuntimePanel({
   }, []);
 
   useEffect(() => {
-    if (isFileWorkspaceSurface) {
+    return scheduleAfterFirstPaint(() => {
+      if (isFileWorkspaceSurface) {
+        void refreshDesktopWorkspace();
+        void refreshDesktopGitStatus();
+        void refreshRuntimeSourceFiles();
+        return;
+      }
       void refreshDesktopWorkspace();
       void refreshDesktopGitStatus();
-      void refreshRuntimeSourceFiles();
-      return;
-    }
-    void refreshDesktopWorkspace();
-    void refreshDesktopGitStatus();
-    void refreshAdapters();
+      void refreshAdapters();
+    });
   }, [isFileWorkspaceSurface]);
 
   useEffect(() => {
@@ -9160,7 +9190,40 @@ function DesktopRuntimePanel({
     { label: "Terminal", value: terminalDrawerOpen ? "open" : "docked" }
   ];
 
-  const sourceWorkspacePanel = (
+  if (isFileWorkspaceSurface && !interactionContentReady) {
+    return (
+      <div className={`content-grid native-file-workspace-panel filesystem-workbench ${invoke ? "runtime-ready" : "runtime-fallback"}`}>
+        <section className="native-file-hero">
+          <div>
+            <p className="eyebrow">{copy.eyebrow}</p>
+            <h2>{copy.title}</h2>
+            <p>{copy.description}</p>
+          </div>
+          <div className="native-workspace-actions">
+            <button type="button" disabled>
+              <FolderOpen size={16} aria-hidden="true" />
+              <span>{copy.chooseFolder}</span>
+            </button>
+            <button type="button" disabled>
+              <Search size={16} aria-hidden="true" />
+              <span>{copy.refreshFiles}</span>
+            </button>
+          </div>
+        </section>
+
+        <section className="filesystem-workbench-shell source-interaction-prerender" aria-busy="true">
+          <div className="desktop-interaction-skeleton" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  if (isFileWorkspaceSurface) {
+    return (
     <div className={`content-grid native-file-workspace-panel filesystem-workbench ${invoke ? "runtime-ready" : "runtime-fallback"}`}>
       <section className="native-file-hero">
         <div>
@@ -9612,10 +9675,46 @@ function DesktopRuntimePanel({
         </div>
       </section>
     </div>
-  );
+    );
+  }
 
-  if (isFileWorkspaceSurface) {
-    return sourceWorkspacePanel;
+  if (!interactionContentReady) {
+    return (
+      <div className="content-grid desktop-grid">
+        <section className="desktop-hero">
+          <div>
+            <p className="eyebrow">Desktop Runtime</p>
+            <h2>Platform-first host</h2>
+            <p>
+              플랫폼을 먼저 실행하고 그 위에 Codex, Gemini CLI, Claude Code CLI, OpenCode, Claw Code 같은 Guest adapters를 올립니다.
+            </p>
+          </div>
+          <div className={`desktop-runtime-state state-${runtimeState}`}>
+            <span>{runtimeState}</span>
+            <strong>{availableCount} / {adapters.length}</strong>
+            <small>available guest adapters</small>
+          </div>
+        </section>
+
+        <section className="panel wide intellij-run-workbench-panel desktop-interaction-prerender" aria-busy="true">
+          <div className="ide-run-toolbar">
+            <div className="ide-run-selector">
+              <span>
+                <PlayCircle size={15} aria-hidden="true" />
+                Run Configuration
+              </span>
+              <strong>{uiLanguage === "ko" ? "실행 작업대 준비 중" : "Preparing runtime workbench"}</strong>
+              <small>{selectedAdapter?.label || selectedSessionAdapterId} / {selectedMode.label}</small>
+            </div>
+          </div>
+          <div className="desktop-interaction-skeleton" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+        </section>
+      </div>
+    );
   }
 
   return (
@@ -11366,6 +11465,33 @@ function isOpenDecisionStatus(status: string) {
 
 function isActiveSessionStatus(status: string) {
   return ["running", "defer_message_sent"].includes(status);
+}
+
+function scheduleAfterFirstPaint(callback: () => void, delayMs = 0) {
+  if (typeof window === "undefined") {
+    callback();
+    return () => undefined;
+  }
+  let canceled = false;
+  let firstFrame = 0;
+  let secondFrame = 0;
+  let timeoutId = 0;
+  const run = () => {
+    if (!canceled) {
+      callback();
+    }
+  };
+  firstFrame = window.requestAnimationFrame(() => {
+    secondFrame = window.requestAnimationFrame(() => {
+      timeoutId = window.setTimeout(run, delayMs);
+    });
+  });
+  return () => {
+    canceled = true;
+    window.cancelAnimationFrame(firstFrame);
+    window.cancelAnimationFrame(secondFrame);
+    window.clearTimeout(timeoutId);
+  };
 }
 
 function formatDuration(ms: number) {

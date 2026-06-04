@@ -1,0 +1,98 @@
+{
+  "id": "2026-06-05-button-interaction-latency",
+  "date": "2026-06-05",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "request_summary": "특정 버튼을 눌렀을 때 느려지는 현상을 주요 버튼군 전반에서 근본적으로 개선한다.",
+  "requirements": [
+    "REQ-WM-041"
+  ],
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-button-interaction-latency/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-button-interaction-latency/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-button-interaction-latency/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-button-interaction-latency/traceability.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-button-interaction-latency/validation.ko.md",
+    "_history/web-searches/2026/2026-06-05-button-interaction-latency.ko.md",
+    "_history/user-requests/2026/2026-06-05-button-interaction-latency.ko.md",
+    "_history/request-traces/2026/2026-06-05-button-interaction-latency.ko.md",
+    "_history/work-summaries/2026/2026-06-05.ko.md",
+    "_history/2026/2026-06-05.md"
+  ],
+  "implementation_summary": [
+    "Added staged Desktop Runtime and Source shells so button first paint is separated from heavy workbench mount.",
+    "Removed runtime-surface construction of the Source workspace JSX by using an early return for Source surface.",
+    "Deferred mount-time native refresh until after first paint.",
+    "Gated source filtering, source diff, decision grouping, and evidence assembly to the surfaces or disclosures that need them."
+  ],
+  "performance_measurement": {
+    "environment": "static export, Chromium headless, viewport 1280x820, CPU throttle 6",
+    "sample_count": 67,
+    "baseline_worst_case_ms": 177.4,
+    "baseline_worst_case_long_task_ms": 122,
+    "final_average_ms": 27.9,
+    "final_p95_ms": 45.4,
+    "final_max_ms": 47.8,
+    "final_long_task_count": 0
+  },
+  "verification": [
+    {
+      "command": "corepack pnpm --filter workspace-monitor run check",
+      "status": "passed",
+      "notes": "TypeScript, scroll contract, and source control design checks passed."
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor test",
+      "status": "passed",
+      "notes": "17 node tests passed."
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor run build:customer",
+      "status": "passed",
+      "notes": "Customer snapshot and Next static export completed."
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor run perf:budget",
+      "status": "passed",
+      "notes": "Largest initial chunk 331633 bytes under the 1000000 byte budget."
+    },
+    {
+      "command": "corepack pnpm --filter platform-desktop-app run check",
+      "status": "passed",
+      "notes": "Runtime contract, readiness, customer bundle, internal release, and service readiness checks passed; public release remains gated by existing signing/updater/clean-machine warnings."
+    },
+    {
+      "command": "CPU throttle 6 static export 67-button audit",
+      "status": "passed",
+      "notes": "Average 27.9ms, p95 45.4ms, max 47.8ms, long task count 0."
+    },
+    {
+      "command": "in-app Browser settled smoke",
+      "status": "passed",
+      "notes": "Agents to Desktop settled at #section-desktop with workbench visible, staged shell removed, and horizontal overflow 0."
+    }
+  ],
+  "web_search_targets": [
+    "_history/web-searches/2026/2026-06-05-button-interaction-latency.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-button-interaction-latency-omission.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-button-interaction-latency-resource.json"
+  ],
+  "installation_occurred": false,
+  "generated_snapshot_files_left_unstaged": [
+    "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/customer-workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json"
+  ],
+  "result": "pass"
+}

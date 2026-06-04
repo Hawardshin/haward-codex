@@ -4369,6 +4369,47 @@ h3 {
   opacity: 0.5;
 }
 
+.desktop-interaction-prerender {
+  min-height: 218px;
+}
+
+.source-interaction-prerender {
+  min-height: min(58vh, 520px);
+  align-content: start;
+  padding: 12px;
+}
+
+.desktop-interaction-skeleton {
+  display: grid;
+  gap: 10px;
+  padding: 18px 12px 20px;
+}
+
+.desktop-interaction-skeleton span {
+  display: block;
+  min-height: 38px;
+  border: 1px solid var(--line);
+  background: linear-gradient(90deg, var(--surface-muted), var(--surface-raised), var(--surface-muted));
+  background-size: 220% 100%;
+  border-radius: 6px;
+  animation: runtime-skeleton-sweep 1200ms ease-in-out infinite;
+}
+
+@keyframes runtime-skeleton-sweep {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-interaction-skeleton span {
+    animation: none;
+  }
+}
+
 .ide-tool-window-layout {
   display: grid;
   grid-template-columns: 74px minmax(0, 1fr) minmax(300px, 0.5fr);

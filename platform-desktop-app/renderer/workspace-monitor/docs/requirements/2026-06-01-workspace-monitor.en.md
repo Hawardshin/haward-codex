@@ -51,6 +51,7 @@
 | REQ-WM-038 | Agent Core chat UI shall use a familiar ChatGPT/Claude/Gemini-style structure with a central conversation log and bottom composer as the primary work surface, compact provider/model controls, and context/contract information separated into a drawer or summary area that does not push the chat input away. | must | Agents static export Playwright chat audit, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `platform-desktop-app check` |
 | REQ-WM-039 | Primary tab switching shall not slow down by mounting closed secondary feature groups; heavy panels inside Agents/Desktop Runtime section-level disclosures shall stay out of the React tree until the user opens them. | must | CPU throttle 6 static export tab switch audit, closed disclosure DOM mount audit, disclosure open interaction, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget`, `platform-desktop-app check` |
 | REQ-WM-040 | The Terminal/CLI execution UI shall use a familiar open-source developer-tool terminal structure instead of a generic card panel: terminal chrome, tab strip, dark emulator surface, monospace output, prompt input, and a status/cwd bar. Global terminal buttons shall route to a mounted terminal surface before opening the drawer. | must | Record xterm.js/VS Code/GNOME Terminal references, in-app Browser terminal-button smoke, 1280/900/390px static-export terminal overflow audit, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget`, `platform-desktop-app check` |
+| REQ-WM-041 | Button clicks shall not block the first response paint with heavy workbench mount, native refresh, source filtering, evidence assembly, or other secondary work. Representative primary-section button samples shall keep p95 click-to-paint at or below 60ms with no long tasks under CPU throttle 6 static-export audit. | must | 67-button click-to-paint sample audit, staged Desktop/Source shell settled smoke, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget`, `platform-desktop-app check` |
 
 ## Scope
 
@@ -87,6 +88,7 @@
 - Agent Core chat with a central conversation log, bottom composer, compact provider/model selector, and collapsed context drawer
 - Lazy mounting of closed secondary panels during tab switching plus tab transition latency audits
 - Open-source developer-tool terminal chrome, tab strip, emulator output, prompt input, and global terminal button routing
+- Separation of button first paint from heavy workbench mount, native refresh, and evidence calculations
 - Vercel deployment docs
 
 ## Non-Goals

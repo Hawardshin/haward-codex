@@ -1,0 +1,38 @@
+{
+  "id": "2026-06-05-button-interaction-latency",
+  "date": "2026-06-05",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "phases": [
+    {
+      "name": "web_first_intake",
+      "approx_minutes": 4,
+      "notes": "Checked official React, Next.js, and web.dev INP/long task references."
+    },
+    {
+      "name": "baseline_measurement",
+      "approx_minutes": 14,
+      "notes": "Built and ran CPU throttle 6 static export button audit across 67 representative visible controls."
+    },
+    {
+      "name": "implementation",
+      "approx_minutes": 24,
+      "notes": "Added staged Desktop/Source shells, source JSX early return, derived data gates, and first-paint-delayed native refresh."
+    },
+    {
+      "name": "verification",
+      "approx_minutes": 24,
+      "notes": "Ran check/test/build/customer/perf/platform checks, repeated button audits, and in-app Browser smoke."
+    },
+    {
+      "name": "documentation_trace",
+      "approx_minutes": 12,
+      "notes": "Recorded REQ-WM-041, spec artifacts, web search, request trace, evaluation, omission, resource, and work summary records."
+    }
+  ],
+  "bottleneck_notes": [
+    "The slowest clicks shared Desktop Runtime or Source heavy workbench mount paths.",
+    "The runtime surface was also constructing Source workspace JSX before branching; early return removed that wasted render path.",
+    "Native refresh calls were moved out of the initial click-to-paint window."
+  ],
+  "status": "recorded"
+}

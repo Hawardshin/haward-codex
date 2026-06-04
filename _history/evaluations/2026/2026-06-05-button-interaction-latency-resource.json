@@ -1,0 +1,34 @@
+{
+  "id": "2026-06-05-button-interaction-latency-resource",
+  "date": "2026-06-05",
+  "resource_risk_occurred": true,
+  "resources_used": [
+    {
+      "kind": "local_static_server",
+      "command": "python3 -m http.server 3225 --bind 127.0.0.1 --directory platform-desktop-app/renderer/workspace-monitor/out",
+      "purpose": "Serve the static customer export for button latency audits and Browser smoke.",
+      "status": "stopped",
+      "cleanup": "Stop the process bound to tcp:3225 after verification."
+    },
+    {
+      "kind": "browser_automation",
+      "command": "node --input-type=module using presentation-agent local Playwright dependency",
+      "purpose": "Measure representative button click-to-paint timings under CPU throttle 6.",
+      "status": "closed",
+      "cleanup": "Each Playwright script closed its Chromium browser instance."
+    },
+    {
+      "kind": "in_app_browser",
+      "target": "http://127.0.0.1:3225/",
+      "purpose": "Verify settled Desktop transition after button click.",
+      "status": "verified",
+      "cleanup": "No external browser process was started by this tool path."
+    }
+  ],
+  "checks": [
+    "Playwright browser instances closed in scripts.",
+    "No new dependency installation occurred.",
+    "The static server must be stopped before final close-out."
+  ],
+  "status": "pass"
+}
