@@ -1,0 +1,20 @@
+{
+  "task": "source loading performance",
+  "resource_risk_occurred": true,
+  "status": "resource_ready",
+  "resources": [
+    {
+      "resource": "Next dev server",
+      "command": "pnpm exec next dev -p 3211",
+      "risk": "Long-running local server could be left active after validation.",
+      "cleanup": "Stopped with Ctrl-C through the exec session.",
+      "evidence": "server session exited after localhost smoke"
+    }
+  ],
+  "runtime_changes": [
+    {
+      "change": "Source catalog scan is no longer triggered by Desktop runtime surface initialization.",
+      "resource_impact": "Reduces unnecessary filesystem scan work outside the Source surface."
+    }
+  ]
+}

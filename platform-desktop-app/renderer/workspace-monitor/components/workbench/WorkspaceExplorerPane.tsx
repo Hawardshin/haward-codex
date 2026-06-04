@@ -197,7 +197,7 @@ function WorkspaceExplorerDirectoryView({
   runtimeAvailable: boolean;
   onOpenFile: (relativePath: string) => Promise<void>;
 }) {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(level === 0);
   const itemCount = directory.children.length + directory.files.length;
 
   return (

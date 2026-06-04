@@ -1,0 +1,43 @@
+{
+  "task": "source loading performance",
+  "work_mode": "ship_first",
+  "status": "coverage_ready",
+  "required_items": [
+    {
+      "item": "Run web-first intake before local planning and edits.",
+      "status": "covered",
+      "evidence": "_history/web-searches/2026/2026-06-05-source-loading-performance.ko.md"
+    },
+    {
+      "item": "Fix the code loading slowdown rather than only document it.",
+      "status": "covered",
+      "evidence": "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+    },
+    {
+      "item": "Avoid touching pre-existing generated snapshot changes.",
+      "status": "covered",
+      "evidence": "git status keeps generated snapshot files unstaged"
+    },
+    {
+      "item": "Verify the Workspace Monitor UI contracts.",
+      "status": "covered",
+      "evidence": "pnpm run check"
+    },
+    {
+      "item": "Verify build and performance budget.",
+      "status": "covered",
+      "evidence": "pnpm exec next build; pnpm run perf:budget"
+    },
+    {
+      "item": "Clean up validation dev server.",
+      "status": "covered",
+      "evidence": "_history/evaluations/2026/2026-06-05-source-loading-performance-resource.json"
+    }
+  ],
+  "deferred_items": [
+    {
+      "item": "Measure native Tauri source scan on a real large workspace.",
+      "reason": "This slice removed visible frontend scan/render waste; runtime scan benchmarking can be a follow-up if still slow."
+    }
+  ]
+}

@@ -6872,7 +6872,9 @@ function DesktopRuntimePanel({
   const [sourceCopyNotice, setSourceCopyNotice] = useState("");
   const [sourceTemplateId, setSourceTemplateId] = useState<SourceTemplateId>("spec-section");
   const [sourceEditorViewMode, setSourceEditorViewMode] = useState<"edit" | "diff">("edit");
-  const [sourceWorkbenchView, setSourceWorkbenchView] = useState<SourceWorkbenchView>("files");
+  const [sourceWorkbenchView, setSourceWorkbenchView] = useState<SourceWorkbenchView>(
+    isFileWorkspaceSurface ? "editor" : "files"
+  );
   const [sourceWordWrap, setSourceWordWrap] = useState(false);
   const [sourceMinimapEnabled, setSourceMinimapEnabled] = useState(true);
   const [sourceSettingsOpen, setSourceSettingsOpen] = useState(false);
@@ -6892,8 +6894,9 @@ function DesktopRuntimePanel({
   const sourceFileCount = sourceCatalogFiles.length;
   const sourceCatalogLabel = runtimeSourceFiles.length ? "runtime" : "snapshot";
   const editableSourceFiles = useMemo(() => sourceCatalogFiles.filter((file) => !file.truncated).slice(0, 240), [sourceCatalogFiles]);
+  const deferredSourceFilter = useDeferredValue(sourceFilter);
   const filteredEditableSourceFiles = useMemo(() => {
-    const normalizedFilter = sourceFilter.trim().toLowerCase();
+    const normalizedFilter = deferredSourceFilter.trim().toLowerCase();
     if (!normalizedFilter) {
       return editableSourceFiles.slice(0, 80);
     }
@@ -6904,7 +6907,7 @@ function DesktopRuntimePanel({
           .some((value) => value.toLowerCase().includes(normalizedFilter))
       )
       .slice(0, 80);
-  }, [editableSourceFiles, sourceFilter]);
+  }, [deferredSourceFilter, editableSourceFiles]);
   const workspaceExplorerRootLabel =
     desktopWorkspace?.activeWorkspacePath?.split(/[\\/]/).filter(Boolean).pop() ||
     desktopWorkspace?.fallbackWorkspacePath?.split(/[\\/]/).filter(Boolean).pop() ||
@@ -7328,7 +7331,9 @@ function DesktopRuntimePanel({
       }
       setWorkspaceHostNotice(report.status === "folder_selection_canceled" ? copy.chooseCanceled : report.activeWorkspacePath ? copy.permissionGranted : report.status);
       if (report.activeWorkspacePath) {
-        await refreshRuntimeSourceFiles();
+        if (isFileWorkspaceSurface) {
+          await refreshRuntimeSourceFiles();
+        }
         await refreshDesktopGitStatus();
         void refreshServiceReadiness();
       }
@@ -7361,7 +7366,9 @@ function DesktopRuntimePanel({
         setWorkingDir(report.activeWorkspacePath);
       }
       setWorkspaceHostNotice(report.status);
-      await refreshRuntimeSourceFiles();
+      if (isFileWorkspaceSurface) {
+        await refreshRuntimeSourceFiles();
+      }
       await refreshDesktopGitStatus();
       void refreshServiceReadiness();
     } catch (caught) {
@@ -7395,7 +7402,9 @@ function DesktopRuntimePanel({
         setWorkingDir(report.activeWorkspacePath);
       }
       setWorkspaceHostNotice(report.status);
-      await refreshRuntimeSourceFiles();
+      if (isFileWorkspaceSurface) {
+        await refreshRuntimeSourceFiles();
+      }
       await refreshDesktopGitStatus();
       void refreshServiceReadiness();
     } catch (caught) {
@@ -7490,7 +7499,9 @@ function DesktopRuntimePanel({
       if (!nextTaskPipePresets.some((preset) => preset.taskKind === selectedTaskPipeKind) && nextTaskPipePresets[0]) {
         setSelectedTaskPipeKind(nextTaskPipePresets[0].taskKind);
       }
-      void refreshRuntimeSourceFiles();
+      if (isFileWorkspaceSurface) {
+        void refreshRuntimeSourceFiles();
+      }
     } catch (caught) {
       if (!panelMountedRef.current) {
         return;
@@ -8852,7 +8863,7 @@ function DesktopRuntimePanel({
                 setSourcePathInput(event.target.value);
               }}
             >
-              {editableSourceFiles.map((file) => (
+              {filteredEditableSourceFiles.map((file) => (
                 <option key={file.id} value={file.path}>
                   {file.path}
                 </option>
@@ -8921,17 +8932,19 @@ function DesktopRuntimePanel({
         </div>
 
         <div className="source-workbench-switcher" role="tablist" aria-label={uiLanguage === "ko" ? "소스 작업 보기" : "Source workbench views"}>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={sourceWorkbenchView === "files"}
-            className={sourceWorkbenchView === "files" ? "active" : ""}
-            onClick={() => setSourceWorkbenchView("files")}
-          >
-            <FolderOpen size={15} aria-hidden="true" />
-            <span>{uiLanguage === "ko" ? "파일" : "Files"}</span>
-            <small>{filteredEditableSourceFiles.length.toLocaleString("ko-KR")}</small>
-          </button>
+          {!isFileWorkspaceSurface && (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={sourceWorkbenchView === "files"}
+              className={sourceWorkbenchView === "files" ? "active" : ""}
+              onClick={() => setSourceWorkbenchView("files")}
+            >
+              <FolderOpen size={15} aria-hidden="true" />
+              <span>{uiLanguage === "ko" ? "파일" : "Files"}</span>
+              <small>{filteredEditableSourceFiles.length.toLocaleString("ko-KR")}</small>
+            </button>
+          )}
           <button
             type="button"
             role="tab"
@@ -8957,7 +8970,7 @@ function DesktopRuntimePanel({
         </div>
 
         <div className={`source-review-grid native-source-grid source-workbench-view-${sourceWorkbenchView}`}>
-          {(sourceWorkbenchView === "files" || sourceWorkbenchView === "editor") && (
+          {!isFileWorkspaceSurface && (sourceWorkbenchView === "files" || sourceWorkbenchView === "editor") && (
           <aside className="source-file-browser">
             <header>
               <div>

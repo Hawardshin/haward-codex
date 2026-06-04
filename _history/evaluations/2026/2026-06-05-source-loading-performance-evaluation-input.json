@@ -1,0 +1,52 @@
+{
+  "task": "source loading performance",
+  "work_mode": "ship_first",
+  "initial_instruction_summary": "Fix the slow code loading path.",
+  "result_summary": "Reduced unnecessary Source catalog scanning and duplicate file-list rendering in Workspace Monitor Source Review.",
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "cli_pipeline_occurred": false,
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-05-source-loading-performance.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-source-loading-performance/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-source-loading-performance/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-source-loading-performance/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-source-loading-performance/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-source-loading-performance/traceability.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-05-source-loading-performance.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-05-source-loading-performance.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-source-loading-performance-omission.json"
+  ],
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-source-loading-performance-resource.json"
+  ],
+  "work_summary_targets": [
+    "_history/2026/2026-06-05.md",
+    "_history/work-summaries/2026/2026-06-05.ko.md"
+  ],
+  "verification": {
+    "check": "passed: pnpm run check",
+    "test": "passed: pnpm test",
+    "build": "passed: pnpm exec next build",
+    "performance_budget": "passed: pnpm run perf:budget",
+    "localhost_smoke": "passed: http://localhost:3211 returned 200; snapshot fetch returned schema 2026-06-03",
+    "browser_tool": "not_available: Browser callable tool was not exposed by tool search"
+  },
+  "evaluation_status": "ready"
+}
