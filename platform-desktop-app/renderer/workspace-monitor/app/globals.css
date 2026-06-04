@@ -7634,6 +7634,120 @@ h3 {
   line-height: 1.55;
 }
 
+.agentcore-capability-bundle {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.agentcore-capability-bundle header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+}
+
+.agentcore-capability-bundle header div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.agentcore-capability-bundle header span,
+.agentcore-capability-bundle header small {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agentcore-capability-bundle header strong {
+  color: var(--text);
+  font-size: var(--font-size-panel-title);
+}
+
+.agentcore-capability-bundle header button,
+.agentcore-capability-grid button {
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  color: var(--text);
+  background: var(--surface-raised);
+}
+
+.agentcore-capability-bundle header button {
+  display: inline-flex;
+  min-height: var(--control-target-size);
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  padding: 8px var(--control-padding-x);
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.agentcore-capability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.agentcore-capability-grid button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  min-height: 58px;
+  padding: 9px;
+  text-align: left;
+}
+
+.agentcore-capability-grid button.active {
+  border-color: var(--accent-primary-border);
+  background: color-mix(in srgb, var(--accent-primary-soft) 76%, var(--surface-raised) 24%);
+}
+
+.agentcore-capability-grid button > svg {
+  margin-top: 2px;
+  color: var(--accent-primary);
+}
+
+.agentcore-capability-grid span,
+.agentcore-capability-grid strong,
+.agentcore-capability-grid small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.agentcore-capability-grid span {
+  display: grid;
+  gap: 2px;
+}
+
+.agentcore-capability-grid strong {
+  color: var(--text);
+  font-size: var(--font-size-caption);
+  font-weight: 900;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.agentcore-capability-grid small {
+  color: var(--text-secondary);
+  font-size: 10px;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
 .agentcore-blueprint-matrix {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -12328,6 +12442,23 @@ h3 {
     white-space: normal;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+  }
+
+  .agentcore-capability-bundle header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .agentcore-capability-bundle header button {
+    width: 100%;
+  }
+
+  .agentcore-capability-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .agentcore-capability-grid strong,
+  .agentcore-capability-grid small {
+    white-space: normal;
   }
 
   .titlebar-actions {

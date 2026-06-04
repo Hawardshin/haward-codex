@@ -58,6 +58,7 @@
 | REQ-WM-045 | 사용자가 Overview 목표 카드를 선택해 다른 작업면으로 이동하면, 대상 화면은 선택한 목표, 다음 행동, 목표 변경/숨기기 제어를 포함한 handoff 피드백을 즉시 보여줘야 한다. | must | task handoff static test, click-through Playwright smoke, desktop/mobile handoff screenshot, `pnpm run check`, `pnpm test`, `pnpm run build:customer` 확인 |
 | REQ-WM-046 | 목표 기반 이동으로 대상 작업면에 도착한 화면은 단일 next step만이 아니라 3개 이하의 짧은 순서형 작업 흐름을 표시해 사용자가 현재 화면에서 어떤 순서로 진행할지 즉시 이해할 수 있어야 하며, 모바일에서는 흐름 단계가 한 열로 쌓여 수평 overflow를 만들면 안 된다. | must | task flow rail static test, desktop/mobile click-through Playwright smoke, screenshot artifact, `pnpm run check`, `pnpm test`, `pnpm run build:customer` 확인 |
 | REQ-WM-047 | 목표 기반 작업 흐름의 단계는 정적인 설명에 머물면 안 되며, 가능한 경우 클릭 가능한 primary flow action으로 실제 대상 작업면의 핵심 mode를 전환해야 한다. `툴 만들기` 흐름의 `소스 선택`, `입력과 venv 확인`, `검증 후 배포`는 각각 Tool Studio의 build, environment, deploy mode를 열어야 한다. | must | task flow action static test, desktop/mobile click-through mode smoke, screenshot artifact, `pnpm run check`, `pnpm test`, `pnpm run build:customer` 확인 |
+| REQ-WM-048 | AgentCore Quick Builder는 하나의 블루프린트만 선택하는 구조에 머물지 않고 Runtime, Memory, Gateway, Browser, Code Interpreter, Identity, Policy, Observability, Evaluations 같은 capability를 여러 개 동시에 선택해 agent proposal 입력, guardrail, output contract에 반영할 수 있어야 한다. | must | multi-capability bundle static test, desktop/mobile bundle smoke, proposal form fill assertion, screenshot artifact, `pnpm run check`, `pnpm test`, `pnpm run build:customer` 확인 |
 
 ## 범위
 
@@ -101,6 +102,7 @@
 - 목표 선택 후 대상 작업면의 task handoff feedback
 - 목표 선택 후 대상 작업면의 3단계 이하 task flow rail
 - 목표 작업 흐름 단계와 Tool Studio 핵심 mode 연결
+- AgentCore Quick Builder의 multi-capability bundle 선택과 proposal form 반영
 - Vercel 배포 문서
 
 ## 제외 범위

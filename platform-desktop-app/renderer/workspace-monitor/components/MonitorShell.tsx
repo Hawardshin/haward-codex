@@ -283,6 +283,17 @@ type AgentCoreBlueprint = {
   defaultNotesEn: string;
 };
 
+type AgentCoreCapabilityOption = {
+  id: string;
+  labelKo: string;
+  labelEn: string;
+  detailKo: string;
+  detailEn: string;
+  localCapability: string;
+  guardrailKo: string;
+  guardrailEn: string;
+};
+
 type SearchAgentChatMessage = {
   id: string;
   role: "agent" | "user" | "system";
@@ -1843,6 +1854,101 @@ const defaultSearchAgentChatMessages: SearchAgentChatMessage[] = [
 
 const agentCoreSampleSourceUrl = "https://github.com/awslabs/agentcore-samples";
 
+const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
+  {
+    id: "runtime",
+    labelKo: "Runtime",
+    labelEn: "Runtime",
+    detailKo: "긴 작업 실행과 상태 기록",
+    detailEn: "Long-running execution and state records",
+    localCapability: "local_agent_runtime",
+    guardrailKo: "긴 실행은 task-run record와 취소/복구 경계를 가져야 합니다",
+    guardrailEn: "Long runs need task-run records plus cancel and recovery boundaries"
+  },
+  {
+    id: "memory",
+    labelKo: "Memory",
+    labelEn: "Memory",
+    detailKo: "작업 기억과 선호 재사용",
+    detailEn: "Reusable task memory and preferences",
+    localCapability: "workspace_memory",
+    guardrailKo: "memory 후보는 출처, 만료, 민감정보 제외 기준을 가져야 합니다",
+    guardrailEn: "Memory candidates need provenance, expiry, and sensitive-data exclusion rules"
+  },
+  {
+    id: "gateway",
+    labelKo: "Gateway",
+    labelEn: "Gateway",
+    detailKo: "MCP/API/CLI 도구 연결",
+    detailEn: "MCP, API, and CLI tool access",
+    localCapability: "tool_gateway_catalog",
+    guardrailKo: "도구 호출은 권한 범위와 호출 trace를 남겨야 합니다",
+    guardrailEn: "Tool calls need scoped authorization and invocation traces"
+  },
+  {
+    id: "browser",
+    labelKo: "Browser",
+    labelEn: "Browser",
+    detailKo: "웹 탐색과 화면 검증",
+    detailEn: "Web browsing and visual verification",
+    localCapability: "browser_verification_lane",
+    guardrailKo: "브라우저 작업은 사용자가 볼 수 있는 상태와 위험 동작 확인을 분리해야 합니다",
+    guardrailEn: "Browser work must separate visible state checks from risky-action confirmation"
+  },
+  {
+    id: "code_interpreter",
+    labelKo: "Code Interpreter",
+    labelEn: "Code Interpreter",
+    detailKo: "Python/JS 실행과 산출물 검증",
+    detailEn: "Python/JS execution and artifact checks",
+    localCapability: "sandboxed_code_execution",
+    guardrailKo: "코드 실행은 sandbox, 입력/출력 기록, resource cleanup 기준을 가져야 합니다",
+    guardrailEn: "Code execution needs sandboxing, I/O records, and resource cleanup rules"
+  },
+  {
+    id: "identity",
+    labelKo: "Identity",
+    labelEn: "Identity",
+    detailKo: "계정/권한/커넥터 범위",
+    detailEn: "Account, permission, and connector scope",
+    localCapability: "scoped_identity_broker",
+    guardrailKo: "계정과 connector 권한은 최소 권한과 revoke 경로를 가져야 합니다",
+    guardrailEn: "Accounts and connector permissions need least privilege and revocation paths"
+  },
+  {
+    id: "policy",
+    labelKo: "Policy",
+    labelEn: "Policy",
+    detailKo: "행동 경계와 승인 규칙",
+    detailEn: "Action boundaries and approval rules",
+    localCapability: "action_policy_gate",
+    guardrailKo: "고위험 action은 정책 gate와 사용자 승인 기록을 통과해야 합니다",
+    guardrailEn: "High-risk actions must pass policy gates and user approval records"
+  },
+  {
+    id: "observability",
+    labelKo: "Observability",
+    labelEn: "Observability",
+    detailKo: "trace, 로그, 병목 관측",
+    detailEn: "Trace, logs, and bottleneck visibility",
+    localCapability: "agent_observability_trace",
+    guardrailKo: "관측 데이터는 민감정보를 숨기고 task/run/evaluation에 연결돼야 합니다",
+    guardrailEn: "Observability data must redact sensitive values and connect to task, run, and evaluation records"
+  },
+  {
+    id: "evaluation",
+    labelKo: "Evaluations",
+    labelEn: "Evaluations",
+    detailKo: "품질 게이트와 재작업 판단",
+    detailEn: "Quality gates and rework decisions",
+    localCapability: "evaluation_quality_gate",
+    guardrailKo: "평가는 검증 명령, 근거 gap, rollback 조건을 함께 남겨야 합니다",
+    guardrailEn: "Evaluations need validation commands, grounding gaps, and rollback conditions"
+  }
+];
+
+const agentCoreCapabilityOptionById = new Map(agentCoreCapabilityOptions.map((option) => [option.id, option]));
+
 const agentCoreBlueprints: AgentCoreBlueprint[] = [
   {
     id: "agentcore_production_research_agent",
@@ -2049,18 +2155,29 @@ const defaultAgentFactoryForm: AgentFactoryForm = {
   rollbackPlan: "생성된 agent spec을 비활성화하거나 삭제하고 proposal record를 archived로 표시합니다."
 };
 
-function buildAgentFactoryFormFromAgentCoreBlueprint(blueprint: AgentCoreBlueprint, language: UiLanguage): AgentFactoryForm {
+function buildAgentFactoryFormFromAgentCoreBlueprint(
+  blueprint: AgentCoreBlueprint,
+  language: UiLanguage,
+  selectedCapabilityIds: string[] = blueprint.capabilities
+): AgentFactoryForm {
   const ko = language === "ko";
+  const selectedCapabilities = selectedCapabilityIds
+    .map((capabilityId) => agentCoreCapabilityOptionById.get(capabilityId))
+    .filter((item): item is AgentCoreCapabilityOption => Boolean(item));
+  const capabilityBundleLabels = selectedCapabilities.map((item) => (ko ? item.labelKo : item.labelEn));
   const localRuntimeCapabilities = [
     ...blueprint.capabilities,
+    ...selectedCapabilityIds,
+    ...selectedCapabilities.map((item) => item.localCapability),
     "local_python_agent_runtime",
     "local_process_execution",
     "local_task_run_store",
     "provider_account_direct_run",
     "optional_agentcore_deployment_adapter"
-  ];
+  ].filter((item, index, source) => source.indexOf(item) === index);
   const guardrails = [
     ...blueprint.safetyGates,
+    ...selectedCapabilities.map((item) => (ko ? item.guardrailKo : item.guardrailEn)),
     ko ? "에이전트와 Python 실행은 로컬 process/runtime에서 시작합니다" : "Agent and Python execution start in the local process/runtime",
     ko ? "원격 API나 cloud function은 도구 connector일 뿐 실행 호스트가 아닙니다" : "Remote APIs or cloud functions are tool connectors, not the execution host",
     ko ? "AWS AgentCore는 선택형 배포 adapter로만 사용합니다" : "Treat AWS AgentCore as an optional deployment adapter",
@@ -2070,13 +2187,15 @@ function buildAgentFactoryFormFromAgentCoreBlueprint(blueprint: AgentCoreBluepri
   return {
     agentId: blueprint.agentId,
     label: blueprint.factoryLabel,
-    goal: ko ? blueprint.factoryGoalKo : blueprint.factoryGoalEn,
+    goal: `${ko ? blueprint.factoryGoalKo : blueprint.factoryGoalEn}\n\n${
+      ko ? "동시 capability bundle" : "Multi-capability bundle"
+    }: ${capabilityBundleLabels.length ? capabilityBundleLabels.join(", ") : ko ? "기본값" : "default"}`,
     role: blueprint.role,
     tools: localRuntimeCapabilities.join("\n"),
     guardrails: guardrails.join("\n"),
     validationCommands:
       "corepack pnpm --filter platform-desktop-app test\ncorepack pnpm --filter workspace-monitor test\ncorepack pnpm --filter workspace-monitor run check",
-    outputContract: `${blueprint.outputRecords.join(", ")} / lifecycle=${blueprint.lifecycle.join(" -> ")}`,
+    outputContract: `${blueprint.outputRecords.join(", ")} / capabilities=${capabilityBundleLabels.join(" + ")} / lifecycle=${blueprint.lifecycle.join(" -> ")}`,
     ownerProject: "agent-platform",
     targetPath: `agent-platform/configs/agents/${blueprint.agentId}.json`,
     rollbackPlan: ko
@@ -3243,10 +3362,14 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     }
     setSearchAgentRunForm((current) => ({ ...current, [field]: value }));
   };
-  const applyAgentCoreBlueprint = (blueprintId: string, mode: "factory" | "preflight" = "factory") => {
+  const applyAgentCoreBlueprint = (
+    blueprintId: string,
+    mode: "factory" | "preflight" = "factory",
+    selectedCapabilityIds?: string[]
+  ) => {
     const blueprint = agentCoreBlueprints.find((item) => item.id === blueprintId) || agentCoreBlueprints[0];
     const ko = uiLanguage === "ko";
-    const proposalForm = buildAgentFactoryFormFromAgentCoreBlueprint(blueprint, uiLanguage);
+    const proposalForm = buildAgentFactoryFormFromAgentCoreBlueprint(blueprint, uiLanguage, selectedCapabilityIds);
     setSelectedAgentCoreBlueprintId(blueprint.id);
     openSection("agents");
     setSearchAgentRunForm((current) => ({
@@ -3274,7 +3397,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           body: ko
             ? `${blueprint.label} 입력을 검색 에이전트와 Agent Core에 채웠습니다. 바로 작업 시작을 누르면 연결된 제공자 계정으로 사전조사/계획을 실행합니다.`
             : `${blueprint.label} filled the Search Agent and Agent Core inputs. Press Start Work to run preflight research and planning through the connected provider account.`,
-          meta: `${blueprint.sourceLabel} / ${mode}`
+          meta: `${blueprint.sourceLabel} / ${mode} / capabilities=${(selectedCapabilityIds || blueprint.capabilities).join(",")}`
         }
       ].slice(-12)
     );
@@ -3484,11 +3607,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       setAgentFactoryBusy(false);
     }
   };
-  const createAgentCoreBlueprintProposal = async (blueprintId: string) => {
+  const createAgentCoreBlueprintProposal = async (blueprintId: string, selectedCapabilityIds?: string[]) => {
     const blueprint = agentCoreBlueprints.find((item) => item.id === blueprintId) || agentCoreBlueprints[0];
     const ko = uiLanguage === "ko";
-    const proposalForm = buildAgentFactoryFormFromAgentCoreBlueprint(blueprint, uiLanguage);
-    applyAgentCoreBlueprint(blueprint.id, "factory");
+    const proposalForm = buildAgentFactoryFormFromAgentCoreBlueprint(blueprint, uiLanguage, selectedCapabilityIds);
+    applyAgentCoreBlueprint(blueprint.id, "factory", selectedCapabilityIds);
     setSearchAgentChatMessages((current) =>
       [
         ...current,
@@ -3499,7 +3622,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           body: ko
             ? `${blueprint.label}를 기반으로 Agent Core proposal 저장을 시작합니다. 설치 앱에서는 proposal이 앱 데이터 저장소에 바로 남습니다.`
             : `Starting an Agent Core proposal from ${blueprint.label}. In the installed app, the proposal is written directly to app data.`,
-          meta: "create_agent_factory_proposal"
+          meta: `create_agent_factory_proposal / capabilities=${(selectedCapabilityIds || blueprint.capabilities).join(",")}`
         }
       ].slice(-12)
     );
@@ -5887,8 +6010,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             providerCredentialReport={providerCredentials}
             language={uiLanguage}
             onSelectBlueprint={setSelectedAgentCoreBlueprintId}
-            onApplyBlueprint={(blueprintId) => applyAgentCoreBlueprint(blueprintId, "factory")}
-            onStartPreflight={(blueprintId) => applyAgentCoreBlueprint(blueprintId, "preflight")}
+            onApplyBlueprint={(blueprintId, capabilityIds) => applyAgentCoreBlueprint(blueprintId, "factory", capabilityIds)}
+            onStartPreflight={(blueprintId, capabilityIds) => applyAgentCoreBlueprint(blueprintId, "preflight", capabilityIds)}
             onCreateProposal={createAgentCoreBlueprintProposal}
             proposalBusy={agentFactoryBusy}
             runtimeAvailable={Boolean(getTauriInvoke())}
@@ -6271,15 +6394,42 @@ function AgentCoreBlueprintPanel({
   providerCredentialReport: ProviderCredentialReport;
   language: UiLanguage;
   onSelectBlueprint: (blueprintId: string) => void;
-  onApplyBlueprint: (blueprintId: string) => void;
-  onStartPreflight: (blueprintId: string) => void;
-  onCreateProposal: (blueprintId: string) => void | Promise<void>;
+  onApplyBlueprint: (blueprintId: string, selectedCapabilityIds: string[]) => void;
+  onStartPreflight: (blueprintId: string, selectedCapabilityIds: string[]) => void;
+  onCreateProposal: (blueprintId: string, selectedCapabilityIds: string[]) => void | Promise<void>;
   proposalBusy: boolean;
   runtimeAvailable: boolean;
 }) {
   const ko = language === "ko";
   const selectedBlueprint = blueprints.find((blueprint) => blueprint.id === selectedBlueprintId) || blueprints[0];
   const connectedProviderCount = providerCredentialReport.providers.filter((provider) => provider.configured).length;
+  const defaultCapabilityIds = useMemo(() => {
+    const blueprintCapabilityIds = agentCoreCapabilityOptions
+      .filter((option) => selectedBlueprint.capabilities.includes(option.id))
+      .map((option) => option.id);
+    return blueprintCapabilityIds.length ? blueprintCapabilityIds : ["runtime", "observability"];
+  }, [selectedBlueprint]);
+  const [selectedCapabilityIds, setSelectedCapabilityIds] = useState<string[]>(defaultCapabilityIds);
+  const selectedCapabilityOptions = useMemo(
+    () => selectedCapabilityIds
+      .map((capabilityId) => agentCoreCapabilityOptionById.get(capabilityId))
+      .filter((item): item is AgentCoreCapabilityOption => Boolean(item)),
+    [selectedCapabilityIds]
+  );
+  const selectedCapabilitySummary = selectedCapabilityOptions.map((item) => (ko ? item.labelKo : item.labelEn)).join(" + ");
+
+  useEffect(() => {
+    setSelectedCapabilityIds(defaultCapabilityIds);
+  }, [defaultCapabilityIds]);
+
+  const toggleCapability = (capabilityId: string) => {
+    setSelectedCapabilityIds((current) => {
+      if (current.includes(capabilityId)) {
+        return current.length > 1 ? current.filter((item) => item !== capabilityId) : current;
+      }
+      return [...current, capabilityId];
+    });
+  };
 
   return (
     <section className="panel wide agentcore-blueprint-panel">
@@ -6343,6 +6493,43 @@ function AgentCoreBlueprintPanel({
           </header>
           <p>{ko ? selectedBlueprint.summaryKo : selectedBlueprint.summaryEn}</p>
 
+          <section className="agentcore-capability-bundle" aria-label={ko ? "AgentCore capability bundle" : "AgentCore capability bundle"}>
+            <header>
+              <div>
+                <span>{ko ? "동시 능력 묶음" : "Capability Bundle"}</span>
+                <strong>
+                  {selectedCapabilityIds.length.toLocaleString("ko-KR")} / {agentCoreCapabilityOptions.length.toLocaleString("ko-KR")}
+                </strong>
+                <small>{selectedCapabilitySummary}</small>
+              </div>
+              <button type="button" onClick={() => setSelectedCapabilityIds(agentCoreCapabilityOptions.map((option) => option.id))} data-agentcore-select-all>
+                <Layers size={15} aria-hidden="true" />
+                <span>{ko ? "전체 선택" : "Select all"}</span>
+              </button>
+            </header>
+            <div className="agentcore-capability-grid">
+              {agentCoreCapabilityOptions.map((option) => {
+                const selected = selectedCapabilityIds.includes(option.id);
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    className={selected ? "active" : ""}
+                    onClick={() => toggleCapability(option.id)}
+                    aria-pressed={selected}
+                    data-agentcore-capability={option.id}
+                  >
+                    <CheckCircle2 size={15} aria-hidden="true" />
+                    <span>
+                      <strong>{ko ? option.labelKo : option.labelEn}</strong>
+                      <small>{ko ? option.detailKo : option.detailEn}</small>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+
           <div className="agentcore-blueprint-matrix">
             <div>
               <span>{ko ? "라이프사이클" : "Lifecycle"}</span>
@@ -6382,17 +6569,17 @@ function AgentCoreBlueprintPanel({
             <button
               type="button"
               className="primary-action-button"
-              onClick={() => onCreateProposal(selectedBlueprint.id)}
+              onClick={() => onCreateProposal(selectedBlueprint.id, selectedCapabilityIds)}
               disabled={!runtimeAvailable || proposalBusy}
             >
               <PlayCircle size={16} aria-hidden="true" />
               <span>{proposalBusy ? (ko ? "제안 저장 중" : "Saving proposal") : ko ? "바로 에이전트 제안 생성" : "Create Agent Proposal"}</span>
             </button>
-            <button type="button" className="primary-action-button" onClick={() => onApplyBlueprint(selectedBlueprint.id)}>
+            <button type="button" className="primary-action-button" onClick={() => onApplyBlueprint(selectedBlueprint.id, selectedCapabilityIds)}>
               <Bot size={16} aria-hidden="true" />
-              <span>{ko ? "에이전트 생성 입력 채우기" : "Fill Agent Core"}</span>
+              <span>{ko ? "선택 능력으로 입력 채우기" : "Fill With Bundle"}</span>
             </button>
-            <button type="button" onClick={() => onStartPreflight(selectedBlueprint.id)}>
+            <button type="button" onClick={() => onStartPreflight(selectedBlueprint.id, selectedCapabilityIds)}>
               <ClipboardCheck size={16} aria-hidden="true" />
               <span>{ko ? "배포 사전점검 작업 만들기" : "Create Deployment Preflight"}</span>
             </button>

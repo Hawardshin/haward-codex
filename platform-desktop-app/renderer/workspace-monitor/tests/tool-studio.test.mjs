@@ -85,6 +85,23 @@ test("Tool Studio CSS keeps split scroll and stable controls", () => {
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-shell \{[\s\S]*?overflow: visible;/);
 });
 
+test("AgentCore builder supports multi-capability bundles", () => {
+  assert.match(monitorShell, /type AgentCoreCapabilityOption = \{/);
+  assert.match(monitorShell, /const agentCoreCapabilityOptions: AgentCoreCapabilityOption\[\] = \[/);
+  assert.match(monitorShell, /id:\s*"runtime"[\s\S]*?id:\s*"memory"[\s\S]*?id:\s*"gateway"[\s\S]*?id:\s*"browser"[\s\S]*?id:\s*"code_interpreter"[\s\S]*?id:\s*"identity"[\s\S]*?id:\s*"policy"[\s\S]*?id:\s*"observability"[\s\S]*?id:\s*"evaluation"/);
+  assert.match(monitorShell, /selectedCapabilityIds: string\[\] = blueprint\.capabilities/);
+  assert.match(monitorShell, /selectedCapabilities\.map\(\(item\) => item\.localCapability\)/);
+  assert.match(monitorShell, /const \[selectedCapabilityIds, setSelectedCapabilityIds\] = useState<string\[\]>\(defaultCapabilityIds\)/);
+  assert.match(monitorShell, /data-agentcore-capability=\{option\.id\}/);
+  assert.match(monitorShell, /aria-pressed=\{selected\}/);
+  assert.match(monitorShell, /data-agentcore-select-all/);
+  assert.match(monitorShell, /onApplyBlueprint\(selectedBlueprint\.id, selectedCapabilityIds\)/);
+  assert.match(monitorShell, /onStartPreflight\(selectedBlueprint\.id, selectedCapabilityIds\)/);
+  assert.match(monitorShell, /onCreateProposal\(selectedBlueprint\.id, selectedCapabilityIds\)/);
+  assert.match(css, /\.agentcore-capability-grid \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.agentcore-capability-grid \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
+});
+
 test("Monitor home exposes task-intent routes before section names", () => {
   const taskIntentIndex = monitorShell.indexOf("workspace-home-actions task-intent-grid");
   const statusRowIndex = monitorShell.indexOf("core-home-status-row");

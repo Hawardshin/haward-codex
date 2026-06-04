@@ -1,0 +1,9 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-agentcore-multi-capability",
+  "selected_work_mode": "standard",
+  "reason": "사용자-facing AgentCore 생성 흐름과 proposal 입력 계약을 바꾸는 기능 구현 작업이다.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "installation_occurred": false
+}

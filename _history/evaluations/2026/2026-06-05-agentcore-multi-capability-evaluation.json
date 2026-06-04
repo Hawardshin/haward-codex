@@ -1,0 +1,17 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-agentcore-multi-capability",
+  "outcome": "pass",
+  "summary": "AgentCore Quick Builder에 9개 capability를 동시에 선택하는 bundle selector를 추가하고, 선택 bundle이 agent proposal tools, guardrails, output contract에 반영되게 했다.",
+  "requirements": ["REQ-WM-048"],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "Browser smoke: AgentCore bundle 9 capabilities, select all, fill form",
+    "Playwright mobile viewport smoke: 1-column capability grid and overflow 0"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_notes": "로컬 정적 HTTP 서버를 검증 중 실행했고 검증 후 종료했다."
+}
