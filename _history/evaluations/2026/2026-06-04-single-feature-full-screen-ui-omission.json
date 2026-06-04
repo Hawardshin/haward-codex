@@ -1,0 +1,54 @@
+{
+  "task": "single-feature full-screen UI principle",
+  "work_mode": "governance",
+  "status": "coverage_ready",
+  "required_items": [
+    {
+      "item": "Run web-first intake before repository planning and edits.",
+      "status": "covered",
+      "evidence": "_history/web-searches/2026/2026-06-04-single-feature-full-screen-ui.ko.md"
+    },
+    {
+      "item": "Run or simulate memory bootstrap before local planning.",
+      "status": "covered",
+      "evidence": "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/plan.ko.md"
+    },
+    {
+      "item": "Select work mode for durable rule change.",
+      "status": "covered",
+      "evidence": "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/plan.ko.md"
+    },
+    {
+      "item": "Persist the UI principle in durable instructions.",
+      "status": "covered",
+      "evidence": "_docs/instructions/persistent-instructions.ko.md"
+    },
+    {
+      "item": "Update directly relevant UI policy.",
+      "status": "covered",
+      "evidence": "_docs/policies/ui-tone-policy.ko.md"
+    },
+    {
+      "item": "Keep runtime adapter thin but aligned.",
+      "status": "covered",
+      "evidence": "AGENTS.md"
+    },
+    {
+      "item": "Update memory bootstrap anchor when durable rule changes.",
+      "status": "covered",
+      "evidence": "agent-platform/configs/memory/bootstrap-manifest.json"
+    },
+    {
+      "item": "Do not implement an unspecified screen by guesswork.",
+      "status": "covered",
+      "evidence": "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/spec.ko.md"
+    }
+  ],
+  "blocked_items": [],
+  "deferred_items": [
+    {
+      "item": "Apply the rule to a concrete screen implementation.",
+      "reason": "The user did not identify the target screen in this request."
+    }
+  ]
+}

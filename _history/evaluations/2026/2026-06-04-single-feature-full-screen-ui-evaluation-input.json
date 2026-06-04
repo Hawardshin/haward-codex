@@ -1,0 +1,54 @@
+{
+  "task": "single-feature full-screen UI principle",
+  "work_mode": "governance",
+  "initial_instruction_summary": "Persist the UI principle that a screen with one primary feature should let that feature fill most of the screen.",
+  "result_summary": "Added the principle to persistent instructions, UI tone policy, AGENTS runtime adapter, and memory bootstrap, with requirements/spec/history trace records.",
+  "installation_occurred": false,
+  "resource_risk_occurred": false,
+  "cli_pipeline_occurred": false,
+  "changed_behavior": [
+    "Future UI design and review should treat a single-primary-feature screen as a full-screen focus surface by default.",
+    "Split layouts now require a comparison, monitoring, or multi-primary-task rationale."
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-04-single-feature-full-screen-ui.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-04-single-feature-full-screen-ui.ko.md",
+    "_requirements/reviews/2026-06-04-single-feature-full-screen-ui.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/spec.ko.md",
+    "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/plan.ko.md",
+    "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/validation.ko.md",
+    "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/traceability.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-04-single-feature-full-screen-ui.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-04-single-feature-full-screen-ui.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-04.ko.md",
+    "_history/2026/2026-06-04.md"
+  ],
+  "mode_selection_record_targets": [
+    "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/plan.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-04-single-feature-full-screen-ui-omission.json"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-04-single-feature-full-screen-ui.json"
+  ],
+  "verification": {
+    "docs_audit": "passed: python3 _tools/docs-audit/src/docs_audit.py --check",
+    "json_validation": "passed: python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json >/dev/null",
+    "config_contract": "passed: PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json",
+    "diff_check": "passed: git diff --check",
+    "diff_review": "reviewed: unrelated pre-existing generated snapshot changes are excluded from this commit"
+  },
+  "evaluation_status": "ready"
+}

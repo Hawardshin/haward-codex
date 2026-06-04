@@ -12,6 +12,8 @@ Platform surfaces should feel fast to scan and trustworthy like operational tool
 - Avoid decorative clutter, emoji-heavy UI, unnecessary animation, reduced information density, and visual noise.
 - Motion must be brief and purposeful, and must respect `prefers-reduced-motion`.
 - Operational and management surfaces should keep card radii aligned with the local design system and avoid feeling like broad marketing UI.
+- When a screen has one primary feature, that feature should own the center and most of the viewport. A layout fails if the feature is small while decoration, empty cards, or unrelated secondary panels consume the screen.
+- Use split layouts, dashboard grids, and side-by-side panels only when the user needs simultaneous comparison, monitoring, or multiple primary tasks.
 
 ## Applies To
 
@@ -29,10 +31,16 @@ Platform surfaces should feel fast to scan and trustworthy like operational tool
   https://m2.material.io/design/motion/understanding-motion.html
 - Don Norman's emotional design discussion supports the idea that usability and pleasure are connected, while this repository still keeps operational readability and verification first.  
   https://ubiquity.acm.org/article.cfm?id=966013
+- Microsoft's Inductive User Interface guidance says screens should focus on one primary task and make screen contents fit that task. This policy applies that principle as a space-allocation rule for platform surfaces.
+  https://learn.microsoft.com/en-us/windows/win32/appuistart/inductive-user-interface
+- VA.gov Design System's One Thing per Page pattern says one logical thing at a time helps users focus and understand the task.
+  https://dev-design.va.gov/5931/patterns/ask-users-for/a-single-response
 
 ## Verification
 
 - Check that delightful details do not weaken information hierarchy.
+- Redesign screens where a single primary feature is small while surrounding chrome, cards, empty space, or decoration is visually dominant.
+- If a split layout is used, verify that simultaneous comparison, monitoring, or multiple primary tasks justify it.
 - Check that buttons, tabs, cards, charts, and code viewers do not create text overlap.
 - Check that repeated interactions do not add unnecessary waiting animations.
 - Check that `prefers-reduced-motion` handling exists.
