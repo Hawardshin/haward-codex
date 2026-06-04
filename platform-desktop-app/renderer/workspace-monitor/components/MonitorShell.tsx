@@ -3,6 +3,7 @@
 import {
   Activity,
   AlertTriangle,
+  ArrowLeft,
   ArrowRight,
   BookOpenText,
   Bot,
@@ -44,7 +45,10 @@ import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 
 import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFeatureArchitecturePanel";
 import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
-import { CoreFeatureTabs, type CoreFeatureTab, type CoreFeatureTabId } from "@/components/workbench/CoreFeatureTabs";
+import {
+  CoreFeatureDrilldown,
+  type CoreFeatureDrilldownItem
+} from "@/components/workbench/CoreFeatureDrilldown";
 import {
   NativeGitWorkbench,
   type DesktopGitActionReport,
@@ -2149,7 +2153,6 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [runtimeInitDefaults, setRuntimeInitDefaults] = useState<RuntimeInitDefaults>(defaultRuntimeInitDefaults);
   const [operatorCenterOpen, setOperatorCenterOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState("");
-  const [activeHomeTab, setActiveHomeTab] = useState<CoreFeatureTabId>("agents");
   const commandInputRef = useRef<HTMLInputElement>(null);
   const [searchAgentRunForm, setSearchAgentRunForm] = useState<SearchAgentRunForm>(defaultSearchAgentRunForm);
   const [searchAgentChatMessages, setSearchAgentChatMessages] =
@@ -3518,7 +3521,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       icon: Bot
     }
   ];
-  const homeMainTabs: CoreFeatureTab[] = [
+  const homeMainFeatures: CoreFeatureDrilldownItem[] = [
     {
       id: "agents",
       label: uiLanguage === "ko" ? "에이전트 코어" : "Agent Core",
@@ -3590,6 +3593,87 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
         uiLanguage === "ko"
           ? ["진행/보류/기록 요약", "결정함에서 답변", "반복 패턴을 개선 후보로 승격"]
           : ["Summarize active/deferred/runs", "Answer in the inbox", "Promote repeated patterns"]
+    }
+  ];
+  const homeDrilldownItems: Array<{
+    id: string;
+    href: string;
+    label: string;
+    detail: string;
+    metric: string;
+    icon: LucideIcon;
+  }> = [
+    ...homeMainFeatures.map((feature) => ({
+      id: `feature-${feature.id}`,
+      href: `#home-depth-feature-${feature.id}`,
+      label: feature.label,
+      detail: feature.title,
+      metric: feature.metric,
+      icon: feature.icon
+    })),
+    {
+      id: "setup",
+      href: "#home-depth-setup",
+      label: uiLanguage === "ko" ? "설정 점검" : "Setup Check",
+      detail: uiLanguage === "ko" ? "계정, CLI, 질문 보류를 하나씩 확인합니다." : "Check accounts, CLI, and question deferral one by one.",
+      metric: `${coreReadinessCount}/${coreSetupSteps.length}`,
+      icon: Settings
+    },
+    {
+      id: "root-tools",
+      href: "#home-depth-root-tools",
+      label: uiLanguage === "ko" ? "루트 툴" : "Root Tools",
+      detail: uiLanguage === "ko" ? "공유 기반 도구와 파일 상태만 봅니다." : "View only shared tool and file state.",
+      metric: rootToolItems.length.toLocaleString("ko-KR"),
+      icon: Code2
+    },
+    {
+      id: "run-sequence",
+      href: "#home-depth-run-sequence",
+      label: uiLanguage === "ko" ? "실행 순서" : "Run Sequence",
+      detail: uiLanguage === "ko" ? "다음 실행 단계만 확인합니다." : "Review only the next run steps.",
+      metric: commandSteps.length.toLocaleString("ko-KR"),
+      icon: Activity
+    },
+    {
+      id: "decision-inbox",
+      href: "#home-depth-decision-inbox",
+      label: uiLanguage === "ko" ? "결정함" : "Decision Inbox",
+      detail: uiLanguage === "ko" ? "보류된 판단만 처리합니다." : "Handle only deferred decisions.",
+      metric: attentionItems.length.toLocaleString("ko-KR"),
+      icon: Inbox
+    },
+    {
+      id: "work-metrics",
+      href: "#home-depth-work-metrics",
+      label: uiLanguage === "ko" ? "작업 지표" : "Work Metrics",
+      detail: uiLanguage === "ko" ? "현재 수치만 봅니다." : "View only current counts.",
+      metric: snapshot.stats.tasks.toLocaleString("ko-KR"),
+      icon: PlayCircle
+    },
+    {
+      id: "product-structure",
+      href: "#home-depth-product-structure",
+      label: uiLanguage === "ko" ? "제품 구조" : "Product Structure",
+      detail: uiLanguage === "ko" ? "기능 아키텍처만 봅니다." : "View only feature architecture.",
+      metric: productFeatureArchitecture.summary.totalFeatures.toLocaleString("ko-KR"),
+      icon: Layers
+    },
+    {
+      id: "recent-trail",
+      href: "#home-depth-recent-trail",
+      label: uiLanguage === "ko" ? "최근 기록" : "Recent Trail",
+      detail: uiLanguage === "ko" ? "최신 작업 신호만 봅니다." : "View only latest work signals.",
+      metric: recentHistory.length.toLocaleString("ko-KR"),
+      icon: History
+    },
+    {
+      id: "option-status",
+      href: "#home-depth-option-status",
+      label: uiLanguage === "ko" ? "옵션 상태" : "Option Status",
+      detail: uiLanguage === "ko" ? "선택 기능 준비 상태만 봅니다." : "View only optional readiness.",
+      metric: snapshot.publicReview.status,
+      icon: ShieldCheck
     }
   ];
   const settingsTabs: Array<{
@@ -4533,118 +4617,180 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
 
           {section === "overview" && (
             <div className="desktop-home-grid">
-              <section className={`workspace-home-panel core-home-panel home-${attentionState.tone}`} aria-label="Workspace home">
-                <div>
-                  <p className="eyebrow">Core Platform</p>
-                  <h2>
-                    {uiLanguage === "ko"
-                      ? "지금 할 일 하나를 고릅니다"
-                      : "Choose one job to do now"}
-                  </h2>
-                  <p>
-                    {uiLanguage === "ko"
-                      ? "첫 화면은 한 번에 하나의 판단만 남깁니다. 핵심 실행, 설정, 파일, 상태 확인은 서로 다른 행동으로 분리됩니다."
-                      : "The first screen keeps one decision at a time. Core runs, setup, files, and status checks stay as separate actions."}
-                  </p>
-                </div>
-                <div className="core-home-status-row" aria-label={uiLanguage === "ko" ? "현재 작업량" : "Current workload"}>
-                  {workVisibilityItems.map((item) => (
-                    <article key={item.id}>
-                      <item.icon size={16} aria-hidden="true" />
-                      <span>{item.label}</span>
-                      <strong>{item.value}</strong>
-                      <small>{item.detail}</small>
-                    </article>
-                  ))}
-                </div>
-                <div className="workspace-home-actions">
-                  <button type="button" onClick={() => openSection("agents")}>
-                    <Bot size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "에이전트 만들기" : "Create Agent"}</span>
-                  </button>
-                  <button type="button" onClick={() => openSection("desktop")}>
-                    <Network size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "CLI 작업 시작" : "Start CLI Run"}</span>
-                  </button>
-                  <button type="button" onClick={() => openSection("source")}>
-                    <Code2 size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "루트 파일 열기" : "Open Root Files"}</span>
-                  </button>
-                  <button type="button" onClick={() => openSettingsTab("execution", "quick")}>
-                    <Settings size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "설정 점검" : "Check Setup"}</span>
-                  </button>
-                </div>
-              </section>
-
-              <CoreFeatureTabs
-                activeTab={activeHomeTab}
-                language={uiLanguage}
-                tabs={homeMainTabs}
-                onSelectTab={setActiveHomeTab}
-              />
-
-              <section className="panel core-setup-panel" aria-label={uiLanguage === "ko" ? "핵심 기능 설정" : "Core feature setup"}>
-                <div className="panel-heading">
+              <span id="overview-home" className="home-route-anchor" aria-hidden="true" />
+              <div className="home-menu-surface">
+                <section className={`workspace-home-panel core-home-panel home-${attentionState.tone}`} aria-label="Workspace home">
                   <div>
-                    <p className="eyebrow">{uiLanguage === "ko" ? "핵심 설정" : "Core Setup"}</p>
+                    <p className="eyebrow">Core Platform</p>
                     <h2>
                       {uiLanguage === "ko"
-                        ? `${coreReadinessCount}/${coreSetupSteps.length} 준비됨`
-                        : `${coreReadinessCount}/${coreSetupSteps.length} ready`}
+                        ? "지금 할 일 하나를 고릅니다"
+                        : "Choose one job to do now"}
                     </h2>
+                    <p>
+                      {uiLanguage === "ko"
+                        ? "첫 화면은 한 번에 하나의 판단만 남깁니다. 핵심 실행, 설정, 파일, 상태 확인은 서로 다른 행동으로 분리됩니다."
+                        : "The first screen keeps one decision at a time. Core runs, setup, files, and status checks stay as separate actions."}
+                    </p>
                   </div>
-                  <button type="button" onClick={() => openSettingsTab("execution", "quick")}>
-                    <Settings size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "설정" : "Settings"}</span>
-                  </button>
-                </div>
-                <div className="core-setup-list">
-                  {coreSetupSteps.map((step) => (
-                    <article key={step.id} className={step.ready ? "ready" : "pending"}>
-                      <step.icon size={16} aria-hidden="true" />
-                      <div>
-                        <span>{step.ready ? (uiLanguage === "ko" ? "준비됨" : "ready") : (uiLanguage === "ko" ? "설정 필요" : "setup needed")}</span>
-                        <strong>{step.label}</strong>
-                        <p>{step.detail}</p>
-                      </div>
-                      <button type="button" onClick={step.action}>
-                        <ArrowRight size={14} aria-hidden="true" />
-                        <span>{step.actionLabel}</span>
-                      </button>
-                    </article>
-                  ))}
-                </div>
-              </section>
+                  <div className="core-home-status-row" aria-label={uiLanguage === "ko" ? "현재 작업량" : "Current workload"}>
+                    {workVisibilityItems.map((item) => (
+                      <article key={item.id}>
+                        <item.icon size={16} aria-hidden="true" />
+                        <span>{item.label}</span>
+                        <strong>{item.value}</strong>
+                        <small>{item.detail}</small>
+                      </article>
+                    ))}
+                  </div>
+                  <div className="workspace-home-actions">
+                    <a href="#home-depth-feature-agents">
+                      <Bot size={16} aria-hidden="true" />
+                      <span>{uiLanguage === "ko" ? "에이전트 만들기" : "Create Agent"}</span>
+                    </a>
+                    <a href="#home-depth-feature-run">
+                      <Network size={16} aria-hidden="true" />
+                      <span>{uiLanguage === "ko" ? "CLI 작업 시작" : "Start CLI Run"}</span>
+                    </a>
+                    <a href="#home-depth-feature-files">
+                      <Code2 size={16} aria-hidden="true" />
+                      <span>{uiLanguage === "ko" ? "루트 파일 열기" : "Open Root Files"}</span>
+                    </a>
+                    <a href="#home-depth-setup">
+                      <Settings size={16} aria-hidden="true" />
+                      <span>{uiLanguage === "ko" ? "설정 점검" : "Check Setup"}</span>
+                    </a>
+                  </div>
+                </section>
 
-              <section className="panel root-tool-panel" aria-label={uiLanguage === "ko" ? "루트 툴 관리" : "Root tool management"}>
-                <div className="panel-heading">
+                <section className="panel home-depth-menu-panel" aria-label={uiLanguage === "ko" ? "홈 기능 선택" : "Home function menu"}>
+                  <div className="panel-heading">
+                    <div>
+                      <p className="eyebrow">{uiLanguage === "ko" ? "깊이 이동" : "Drill Down"}</p>
+                      <h2>{uiLanguage === "ko" ? "하나를 고르면 그 기능만 엽니다" : "Pick one path to open one feature"}</h2>
+                    </div>
+                    <span className="result-count">{homeDrilldownItems.length.toLocaleString("ko-KR")}</span>
+                  </div>
+                  <div className="home-depth-menu">
+                    {homeDrilldownItems.map((item) => (
+                      <a key={item.id} href={item.href}>
+                        <item.icon size={17} aria-hidden="true" />
+                        <span>
+                          <strong>{item.label}</strong>
+                          <small>{item.detail}</small>
+                        </span>
+                        <em>{item.metric}</em>
+                      </a>
+                    ))}
+                  </div>
+                </section>
+              </div>
+
+              {homeMainFeatures.map((feature) => (
+                <div key={feature.id} id={`home-depth-feature-${feature.id}`} className="home-drilldown-surface">
+                  <div className="home-drilldown-header">
+                    <a href="#overview-home">
+                      <ArrowLeft size={16} aria-hidden="true" />
+                      <span>{uiLanguage === "ko" ? "홈 선택으로" : "Back to choices"}</span>
+                    </a>
+                    <div>
+                      <p className="eyebrow">{uiLanguage === "ko" ? "선택한 기능" : "Selected Feature"}</p>
+                      <h2>{feature.label}</h2>
+                    </div>
+                  </div>
+                  <CoreFeatureDrilldown feature={feature} language={uiLanguage} />
+                </div>
+              ))}
+
+              <div id="home-depth-setup" className="home-drilldown-surface">
+                <div className="home-drilldown-header">
+                  <a href="#overview-home">
+                    <ArrowLeft size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "홈 선택으로" : "Back to choices"}</span>
+                  </a>
                   <div>
-                    <p className="eyebrow">{uiLanguage === "ko" ? "루트 툴" : "Root Tools"}</p>
-                    <h2>{uiLanguage === "ko" ? "공유 기반은 작업 밖에 둡니다" : "Shared foundation stays outside each task"}</h2>
+                    <p className="eyebrow">{uiLanguage === "ko" ? "선택한 기능" : "Selected Feature"}</p>
+                    <h2>{uiLanguage === "ko" ? "설정 점검" : "Setup Check"}</h2>
                   </div>
-                  <Code2 size={18} aria-hidden="true" />
                 </div>
-                <div className="root-tool-grid">
-                  {rootToolItems.map((item) => (
-                    <button key={item.id} type="button" onClick={item.action}>
-                      <item.icon size={16} aria-hidden="true" />
-                      <span>{item.label}</span>
-                      <strong>{item.value}</strong>
-                      <small>{item.detail}</small>
-                    </button>
-                  ))}
-                </div>
-              </section>
+                    <section className="panel core-setup-panel home-depth-panel" aria-label={uiLanguage === "ko" ? "핵심 기능 설정" : "Core feature setup"}>
+                      <div className="panel-heading">
+                        <div>
+                          <p className="eyebrow">{uiLanguage === "ko" ? "핵심 설정" : "Core Setup"}</p>
+                          <h2>
+                            {uiLanguage === "ko"
+                              ? `${coreReadinessCount}/${coreSetupSteps.length} 준비됨`
+                              : `${coreReadinessCount}/${coreSetupSteps.length} ready`}
+                          </h2>
+                        </div>
+                        <button type="button" onClick={() => openSettingsTab("execution", "quick")}>
+                          <Settings size={16} aria-hidden="true" />
+                          <span>{uiLanguage === "ko" ? "설정" : "Settings"}</span>
+                        </button>
+                      </div>
+                      <div className="core-setup-list">
+                        {coreSetupSteps.map((step) => (
+                          <article key={step.id} className={step.ready ? "ready" : "pending"}>
+                            <step.icon size={16} aria-hidden="true" />
+                            <div>
+                              <span>{step.ready ? (uiLanguage === "ko" ? "준비됨" : "ready") : (uiLanguage === "ko" ? "설정 필요" : "setup needed")}</span>
+                              <strong>{step.label}</strong>
+                              <p>{step.detail}</p>
+                            </div>
+                            <button type="button" onClick={step.action}>
+                              <ArrowRight size={14} aria-hidden="true" />
+                              <span>{step.actionLabel}</span>
+                            </button>
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+              </div>
 
-              <div className="home-secondary-stack">
-                <details className="home-disclosure-panel">
-                  <summary>
-                    <span>{uiLanguage === "ko" ? "실행 순서" : "Run Sequence"}</span>
-                    <small>{uiLanguage === "ko" ? "다음 실행 단계" : "Next run steps"}</small>
-                  </summary>
-                  <div className="home-disclosure-body">
-                    <section className="run-timeline-panel" aria-label="Run timeline">
+              <div id="home-depth-root-tools" className="home-drilldown-surface">
+                <div className="home-drilldown-header">
+                  <a href="#overview-home">
+                    <ArrowLeft size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "홈 선택으로" : "Back to choices"}</span>
+                  </a>
+                  <div>
+                    <p className="eyebrow">{uiLanguage === "ko" ? "선택한 기능" : "Selected Feature"}</p>
+                    <h2>{uiLanguage === "ko" ? "루트 툴" : "Root Tools"}</h2>
+                  </div>
+                </div>
+                    <section className="panel root-tool-panel home-depth-panel" aria-label={uiLanguage === "ko" ? "루트 툴 관리" : "Root tool management"}>
+                      <div className="panel-heading">
+                        <div>
+                          <p className="eyebrow">{uiLanguage === "ko" ? "루트 툴" : "Root Tools"}</p>
+                          <h2>{uiLanguage === "ko" ? "공유 기반은 작업 밖에 둡니다" : "Shared foundation stays outside each task"}</h2>
+                        </div>
+                        <Code2 size={18} aria-hidden="true" />
+                      </div>
+                      <div className="root-tool-grid">
+                        {rootToolItems.map((item) => (
+                          <button key={item.id} type="button" onClick={item.action}>
+                            <item.icon size={16} aria-hidden="true" />
+                            <span>{item.label}</span>
+                            <strong>{item.value}</strong>
+                            <small>{item.detail}</small>
+                          </button>
+                        ))}
+                      </div>
+                    </section>
+              </div>
+
+              <div id="home-depth-run-sequence" className="home-drilldown-surface">
+                <div className="home-drilldown-header">
+                  <a href="#overview-home">
+                    <ArrowLeft size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "홈 선택으로" : "Back to choices"}</span>
+                  </a>
+                  <div>
+                    <p className="eyebrow">{uiLanguage === "ko" ? "선택한 기능" : "Selected Feature"}</p>
+                    <h2>{uiLanguage === "ko" ? "실행 순서" : "Run Sequence"}</h2>
+                  </div>
+                </div>
+                    <section className="run-timeline-panel home-depth-panel" aria-label="Run timeline">
                       <div className="panel-heading">
                         <div>
                           <p className="eyebrow">Timeline</p>
@@ -4669,16 +4815,20 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         ))}
                       </div>
                     </section>
-                  </div>
-                </details>
+              </div>
 
-                <details className="home-disclosure-panel">
-                  <summary>
-                    <span>{uiLanguage === "ko" ? "결정함" : "Decision Inbox"}</span>
-                    <small>{uiLanguage === "ko" ? "보류된 판단" : "Deferred decisions"}</small>
-                  </summary>
-                  <div className="home-disclosure-body">
-                    <section className="decision-dock-panel" aria-label="Decision inbox">
+              <div id="home-depth-decision-inbox" className="home-drilldown-surface">
+                <div className="home-drilldown-header">
+                  <a href="#overview-home">
+                    <ArrowLeft size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "홈 선택으로" : "Back to choices"}</span>
+                  </a>
+                  <div>
+                    <p className="eyebrow">{uiLanguage === "ko" ? "선택한 기능" : "Selected Feature"}</p>
+                    <h2>{uiLanguage === "ko" ? "결정함" : "Decision Inbox"}</h2>
+                  </div>
+                </div>
+                    <section className="decision-dock-panel home-depth-panel" aria-label="Decision inbox">
                       <div className="panel-heading">
                         <div>
                           <p className="eyebrow">Decision Inbox</p>
@@ -4704,16 +4854,20 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         )}
                       </div>
                     </section>
-                  </div>
-                </details>
+              </div>
 
-                <details className="home-disclosure-panel">
-                  <summary>
-                    <span>{uiLanguage === "ko" ? "작업 지표" : "Work Metrics"}</span>
-                    <small>{uiLanguage === "ko" ? "현재 수치" : "Current counts"}</small>
-                  </summary>
-                  <div className="home-disclosure-body">
-                    <section className="home-metrics-strip" aria-label="Workspace metrics">
+              <div id="home-depth-work-metrics" className="home-drilldown-surface">
+                <div className="home-drilldown-header">
+                  <a href="#overview-home">
+                    <ArrowLeft size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "홈 선택으로" : "Back to choices"}</span>
+                  </a>
+                  <div>
+                    <p className="eyebrow">{uiLanguage === "ko" ? "선택한 기능" : "Selected Feature"}</p>
+                    <h2>{uiLanguage === "ko" ? "작업 지표" : "Work Metrics"}</h2>
+                  </div>
+                </div>
+                    <section className="home-metrics-strip home-depth-panel" aria-label="Workspace metrics">
                       <Metric label="Core Features" value={2} icon={Network} tone="green" />
                       <Metric label="Setup Ready" value={coreReadinessCount} icon={Settings} tone="blue" />
                       <Metric label="Agents" value={agentCatalog.length} icon={Bot} tone="blue" />
@@ -4721,31 +4875,41 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                       <Metric label="Deferred" value={attentionItems.length + collaborationBoard.summary.blockedTasks} icon={Inbox} tone="red" />
                       <Metric label="Root Tools" value={rootToolItems.length} icon={Code2} tone="violet" />
                     </section>
-                  </div>
-                </details>
+              </div>
 
-                <details className="home-disclosure-panel">
-                  <summary>
-                    <span>{uiLanguage === "ko" ? "제품 구조" : "Product Structure"}</span>
-                    <small>{uiLanguage === "ko" ? "기능 아키텍처와 참고 근거" : "Feature architecture and references"}</small>
-                  </summary>
-                  <div className="home-disclosure-body">
-                    <ProductFeatureArchitecturePanel
-                      architecture={productFeatureArchitecture}
-                      referenceAdvantages={referencePlatformAdvantages}
-                      onOpenSection={openSection}
-                      onOpenOperatorCenter={() => setOperatorCenterOpen(true)}
-                    />
+              <div id="home-depth-product-structure" className="home-drilldown-surface">
+                <div className="home-drilldown-header">
+                  <a href="#overview-home">
+                    <ArrowLeft size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "홈 선택으로" : "Back to choices"}</span>
+                  </a>
+                  <div>
+                    <p className="eyebrow">{uiLanguage === "ko" ? "선택한 기능" : "Selected Feature"}</p>
+                    <h2>{uiLanguage === "ko" ? "제품 구조" : "Product Structure"}</h2>
                   </div>
-                </details>
+                </div>
+                    <div className="home-depth-panel">
+                      <ProductFeatureArchitecturePanel
+                        architecture={productFeatureArchitecture}
+                        referenceAdvantages={referencePlatformAdvantages}
+                        onOpenSection={openSection}
+                        onOpenOperatorCenter={() => setOperatorCenterOpen(true)}
+                      />
+                    </div>
+              </div>
 
-                <details className="home-disclosure-panel">
-                  <summary>
-                    <span>{uiLanguage === "ko" ? "최근 기록" : "Recent Trail"}</span>
-                    <small>{uiLanguage === "ko" ? "최신 작업 신호" : "Latest work signals"}</small>
-                  </summary>
-                  <div className="home-disclosure-body">
-                    <section className="panel home-recent-panel">
+              <div id="home-depth-recent-trail" className="home-drilldown-surface">
+                <div className="home-drilldown-header">
+                  <a href="#overview-home">
+                    <ArrowLeft size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "홈 선택으로" : "Back to choices"}</span>
+                  </a>
+                  <div>
+                    <p className="eyebrow">{uiLanguage === "ko" ? "선택한 기능" : "Selected Feature"}</p>
+                    <h2>{uiLanguage === "ko" ? "최근 기록" : "Recent Trail"}</h2>
+                  </div>
+                </div>
+                    <section className="panel home-recent-panel home-depth-panel">
                       <div className="panel-heading">
                         <div>
                           <p className="eyebrow">Work Trail</p>
@@ -4758,16 +4922,20 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                       </div>
                       <DocumentList documents={recentHistory.slice(0, 6)} compact />
                     </section>
-                  </div>
-                </details>
+              </div>
 
-                <details className="home-disclosure-panel">
-                  <summary>
-                    <span>{uiLanguage === "ko" ? "옵션 상태" : "Option Status"}</span>
-                    <small>{uiLanguage === "ko" ? "선택 기능 준비" : "Optional readiness"}</small>
-                  </summary>
-                  <div className="home-disclosure-body">
-                    <section className="panel capability-dock-panel">
+              <div id="home-depth-option-status" className="home-drilldown-surface">
+                <div className="home-drilldown-header">
+                  <a href="#overview-home">
+                    <ArrowLeft size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "홈 선택으로" : "Back to choices"}</span>
+                  </a>
+                  <div>
+                    <p className="eyebrow">{uiLanguage === "ko" ? "선택한 기능" : "Selected Feature"}</p>
+                    <h2>{uiLanguage === "ko" ? "옵션 상태" : "Option Status"}</h2>
+                  </div>
+                </div>
+                    <section className="panel capability-dock-panel home-depth-panel">
                       <div className="panel-heading">
                         <div>
                           <p className="eyebrow">Capabilities</p>
@@ -4796,8 +4964,6 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         </article>
                       </div>
                     </section>
-                  </div>
-                </details>
               </div>
             </div>
           )}

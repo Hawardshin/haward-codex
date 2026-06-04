@@ -1,0 +1,32 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-depth-first-navigation",
+  "work_mode": "governance",
+  "timezone": "Asia/Seoul",
+  "timing_status": "completed",
+  "phases": [
+    {
+      "id": "web_first_intake",
+      "status": "completed",
+      "notes": "W3C/WAI cognitive accessibility and one-thing-per-page design system sources checked before local planning."
+    },
+    {
+      "id": "memory_bootstrap_and_mode_selection",
+      "status": "completed",
+      "notes": "Hot anchors checked; governance mode selected because durable UI navigation policy and implementation changed together."
+    },
+    {
+      "id": "implementation",
+      "status": "completed",
+      "notes": "Overview home moved from multi-panel tab content to hash-based drill-down screens."
+    },
+    {
+      "id": "verification",
+      "status": "completed",
+      "notes": "TypeScript, tests, platform readiness, Next build, perf budget, docs audit, config contract, JSON syntax, git diff check, and Browser responsive drill-down smoke passed."
+    }
+  ],
+  "bottleneck_candidates": [
+    "Browser smoke for drill-down state transitions can dominate elapsed UI validation time."
+  ]
+}

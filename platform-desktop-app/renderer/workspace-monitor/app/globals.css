@@ -95,6 +95,11 @@
 .desktop-app-root.theme-dark .titlebar-search,
 .desktop-app-root.theme-dark .desktop-toolbar button,
 .desktop-app-root.theme-dark .workspace-home-actions button,
+.desktop-app-root.theme-dark .workspace-home-actions a,
+.desktop-app-root.theme-dark .home-depth-menu button,
+.desktop-app-root.theme-dark .home-depth-menu a,
+.desktop-app-root.theme-dark .home-drilldown-header button,
+.desktop-app-root.theme-dark .home-drilldown-header a,
 .desktop-app-root.theme-dark .quick-start-flow button,
 .desktop-app-root.theme-dark .desktop-command-grid button,
 .desktop-app-root.theme-dark .task-pipe-summary article,
@@ -134,6 +139,11 @@
   .desktop-app-root.theme-system .titlebar-search,
   .desktop-app-root.theme-system .desktop-toolbar button,
   .desktop-app-root.theme-system .workspace-home-actions button,
+  .desktop-app-root.theme-system .workspace-home-actions a,
+  .desktop-app-root.theme-system .home-depth-menu button,
+  .desktop-app-root.theme-system .home-depth-menu a,
+  .desktop-app-root.theme-system .home-drilldown-header button,
+  .desktop-app-root.theme-system .home-drilldown-header a,
   .desktop-app-root.theme-system .quick-start-flow button,
   .desktop-app-root.theme-system .desktop-command-grid button,
   .desktop-app-root.theme-system .task-pipe-summary article,
@@ -681,7 +691,8 @@ main {
 .titlebar-actions > button,
 .desktop-toolbar button,
 .settings-dialog header button,
-.workspace-home-actions button {
+.workspace-home-actions button,
+.workspace-home-actions a {
   display: inline-flex;
   min-height: var(--control-target-size);
   align-items: center;
@@ -692,6 +703,7 @@ main {
   color: var(--text);
   border-radius: var(--control-radius);
   padding: 8px var(--control-padding-x);
+  text-decoration: none;
 }
 
 .titlebar-search {
@@ -1705,7 +1717,8 @@ main {
   min-width: 0;
 }
 
-.workspace-home-actions button {
+.workspace-home-actions button,
+.workspace-home-actions a {
   min-height: 42px;
   background: var(--surface-raised);
   font-weight: 800;
@@ -1855,6 +1868,137 @@ main {
 .home-disclosure-grid {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   align-items: start;
+}
+
+.home-route-anchor {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.home-menu-surface {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 16px;
+  min-width: 0;
+}
+
+.home-depth-menu-panel,
+.home-menu-surface,
+.home-drilldown-surface {
+  grid-column: 1 / -1;
+}
+
+.home-depth-menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+}
+
+.home-depth-menu button,
+.home-depth-menu a {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  gap: 6px 9px;
+  min-height: 72px;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: left;
+  text-decoration: none;
+}
+
+.home-depth-menu button svg,
+.home-depth-menu a svg {
+  color: var(--blue);
+}
+
+.home-depth-menu button span,
+.home-depth-menu a span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.home-depth-menu button strong,
+.home-depth-menu button small,
+.home-depth-menu button em,
+.home-depth-menu a strong,
+.home-depth-menu a small,
+.home-depth-menu a em {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.home-depth-menu button small,
+.home-depth-menu a small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.home-depth-menu button em,
+.home-depth-menu a em {
+  color: var(--slate);
+  font-style: normal;
+  font-weight: 850;
+  max-width: 12ch;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-drilldown-surface {
+  display: none;
+  gap: 12px;
+  min-width: 0;
+  scroll-margin-top: 14px;
+}
+
+.home-drilldown-surface:target {
+  display: grid;
+}
+
+.desktop-home-grid:has(.home-drilldown-surface:target) .home-menu-surface {
+  display: none;
+}
+
+.home-drilldown-header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 10px;
+}
+
+.home-drilldown-header button,
+.home-drilldown-header a {
+  display: inline-flex;
+  min-height: var(--control-target-size);
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 8px 10px;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.home-drilldown-header h2 {
+  margin: 2px 0 0;
+  font-size: 18px;
+}
+
+.home-depth-panel {
+  width: 100%;
 }
 
 .core-setup-list {
@@ -2482,118 +2626,9 @@ h3 {
   align-items: center;
 }
 
-.core-feature-rail {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.core-feature-rail button {
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr) auto;
-  gap: 9px;
-  align-items: center;
-  min-height: 76px;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--text);
-  border-radius: 8px;
-  padding: 10px;
-  text-align: left;
-}
-
-.core-feature-rail button.active {
-  border-color: #94a7bb;
-  background:
-    linear-gradient(135deg, rgba(37, 49, 63, 0.95), rgba(47, 61, 78, 0.95)),
-    var(--surface);
-  color: #ffffff;
-}
-
-.core-feature-icon {
-  display: inline-flex;
-  width: 34px;
-  height: 34px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--line);
-  background: var(--surface-muted);
-  border-radius: 8px;
-  color: var(--blue);
-}
-
-.core-feature-copy {
-  display: grid;
-  min-width: 0;
-  gap: 2px;
-}
-
-.core-feature-copy small,
-.core-feature-copy span,
-.section-tab-group-heading small {
-  color: var(--muted);
-}
-
-.core-feature-copy small,
-.section-tab-group-heading span {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.core-feature-copy strong {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 14px;
-}
-
-.core-feature-copy span {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 12px;
-}
-
-.core-feature-metric {
-  align-self: start;
-  min-width: 28px;
-  border: 1px solid var(--line);
-  background: var(--surface-muted);
-  color: var(--muted);
-  border-radius: 999px;
-  padding: 3px 7px;
-  font-size: 11px;
-  font-weight: 800;
-  line-height: 1.35;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.core-feature-rail button.active .core-feature-icon,
-.core-feature-rail button.active .core-feature-metric {
-  border-color: rgba(255, 255, 255, 0.42);
-  background: rgba(255, 255, 255, 0.16);
-  color: #ffffff;
-}
-
-.core-feature-rail button.active .core-feature-copy small,
-.core-feature-rail button.active .core-feature-copy span {
-  color: rgba(255, 255, 255, 0.74);
-}
-
 .main-workbench-panel {
   display: grid;
   gap: 12px;
-}
-
-.main-feature-tabs {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-bottom: 0;
 }
 
 .main-feature-detail {
@@ -10616,7 +10651,6 @@ h3 {
 .desktop-runtime-state span,
 .metric span,
 .result-count,
-.core-feature-metric,
 .feature-card-signal,
 .product-feature-summary article span,
 .product-operator-strip span,
@@ -10678,7 +10712,6 @@ h3 {
   .command-trigger:hover,
   .app-chip-group button:hover,
   .command-palette-results button:hover,
-  .core-feature-rail button:hover,
   .section-tab-group:hover,
   .section-tabs button:hover,
   .panel-heading button:hover,
@@ -10729,6 +10762,9 @@ h3 {
   .settings-pin-grid button:hover,
   .timeline-step:hover,
   .workspace-home-actions button:hover,
+  .workspace-home-actions a:hover,
+  .home-depth-menu button:hover,
+  .home-depth-menu a:hover,
   .desktop-decision-list article:hover,
   .capability-dock-list article:hover {
     transform: none;
@@ -10798,7 +10834,6 @@ h3 {
   .root-tool-grid,
   .root-tool-grid.compact,
   .settings-core-setup-grid,
-  .core-feature-rail,
   .section-tab-groups,
   .metrics-band,
   .history-summary-band,
@@ -11214,7 +11249,6 @@ h3 {
   }
 
   .app-control-bar,
-  .core-feature-rail,
   .core-setup-list article,
   .section-tab-groups,
   .metrics-band,
@@ -11426,12 +11460,4 @@ h3 {
     justify-self: start;
   }
 
-  .core-feature-rail button {
-    grid-template-columns: 34px minmax(0, 1fr);
-  }
-
-  .core-feature-metric {
-    grid-column: 2;
-    justify-self: start;
-  }
 }

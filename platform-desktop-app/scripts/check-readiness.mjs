@@ -22,7 +22,7 @@ const requiredFiles = [
   "runtime-contracts/installer-shell-runtime-contract.json",
   "runtime-contracts/installer-shell-bootstrap.ko.md",
   "runtime-contracts/installer-shell-bootstrap.en.md",
-  "renderer/workspace-monitor/components/workbench/CoreFeatureTabs.tsx",
+  "renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx",
   "renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx",
   "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx",
   "renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx",
@@ -639,8 +639,8 @@ for (const operatorSection of expectedOperatorCenterSections) {
 }
 
 const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
-const coreFeatureTabs = readFileSync(
-  join(root, "renderer/workspace-monitor/components/workbench/CoreFeatureTabs.tsx"),
+const coreFeatureDrilldown = readFileSync(
+  join(root, "renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx"),
   "utf8"
 );
 const nativeGitWorkbench = readFileSync(
@@ -659,7 +659,7 @@ const workspaceExplorerPane = readFileSync(
   join(root, "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"),
   "utf8"
 );
-const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
+const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
 const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
 const clipboardUtility = readFileSync(join(root, "renderer/workspace-monitor/lib/clipboard.mjs"), "utf8");
 const clipboardTest = readFileSync(join(root, "tests/clipboard.test.mjs"), "utf8");
@@ -827,13 +827,13 @@ for (const requiredPhrase of [
   "하단 다중 CLI 터미널",
   "바로 쓰기",
   "핵심 기능",
-  "먼저 무엇을 할지 고르세요",
+  "지금 할 일 하나를 고릅니다",
   "에이전트 코어",
   "CLI 오케스트레이션",
   "루트 툴",
   "작업 가시성",
   "main-workbench-panel",
-  "main-feature-tabs",
+  "home-depth-menu",
   "main-feature-detail",
   "path-disclosure",
   "다크",

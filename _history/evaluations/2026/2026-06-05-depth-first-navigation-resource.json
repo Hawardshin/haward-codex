@@ -1,0 +1,21 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-depth-first-navigation",
+  "resource_risk_occurred": true,
+  "status": "covered",
+  "resources": [
+    {
+      "resource": "Next.js dev server",
+      "risk": "Local development server could remain running after Browser smoke.",
+      "mitigation": "Started on port 3215 and stopped with Ctrl-C after responsive drill-down verification.",
+      "status": "cleaned_up"
+    },
+    {
+      "resource": "in-app Browser viewport override",
+      "risk": "Temporary desktop/tablet/mobile viewport override could persist.",
+      "mitigation": "Called viewport reset after 1280x720, 900x720, and 390x844 smoke checks.",
+      "status": "cleaned_up"
+    }
+  ],
+  "requires_rework": false
+}

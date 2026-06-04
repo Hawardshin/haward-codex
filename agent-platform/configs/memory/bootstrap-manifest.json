@@ -91,7 +91,8 @@
         "continuous behavior-preserving source-structure refactoring gate",
         "user-point-of-view product quality gate",
         "single-primary-feature full-screen UI layout principle",
-        "single-purpose UI controls and panels for cognitive load control"
+        "single-purpose UI controls and panels for cognitive load control",
+        "depth-first tab and drill-down navigation rule"
       ],
       "last_checked": "2026-06-03"
     },
@@ -199,7 +200,8 @@
         "operational trust and scanability limits for delightful details",
         "motion and micro-interaction guardrails",
         "single-primary-feature screens filling the viewport by default",
-        "single-purpose feature, panel, button, and workflow-step UI rule"
+        "single-purpose feature, panel, button, and workflow-step UI rule",
+        "deeper drill-down screens instead of multi-feature tabs"
       ],
       "last_checked": "2026-06-04"
     },
@@ -1602,7 +1604,7 @@
       "id": "persistent_instructions",
       "path": "_docs/instructions/persistent-instructions.md",
       "tier": "hot",
-      "purpose": "Durable user preferences, source-structure quality gate, single-purpose UI controls, and long-running operating rules.",
+      "purpose": "Durable user preferences, source-structure quality gate, single-purpose UI controls, depth-first tab navigation, and long-running operating rules.",
       "required": true,
       "load_order": 2
     },
@@ -1682,7 +1684,7 @@
       "id": "ui_tone_policy",
       "path": "_docs/policies/ui-tone-policy.ko.md",
       "tier": "warm",
-      "purpose": "Subtle cute and quietly delightful UI tone policy that keeps clarity, scanability, accessibility, operational trust, single-primary-feature layout focus, and single-purpose UI controls first.",
+      "purpose": "Subtle cute and quietly delightful UI tone policy that keeps clarity, scanability, accessibility, operational trust, single-primary-feature layout focus, single-purpose UI controls, and depth-first tab navigation first.",
       "required": true,
       "load_order": 8
     },

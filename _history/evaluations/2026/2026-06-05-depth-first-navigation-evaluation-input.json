@@ -1,0 +1,65 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-depth-first-navigation",
+  "work_mode": "governance",
+  "view_mode": "superadmin_developer",
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "cli_pipeline_occurred": false,
+  "skill_work_occurred": false,
+  "context_archiving_occurred": false,
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-05-depth-first-navigation.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-depth-first-home-navigation/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-depth-first-home-navigation/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-depth-first-home-navigation/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-depth-first-home-navigation/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-depth-first-home-navigation/traceability.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-05-depth-first-navigation.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-05-depth-first-navigation.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-05.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-depth-first-home-navigation/plan.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-depth-first-navigation-omission.json"
+  ],
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-depth-first-navigation-resource.json"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-05-depth-first-navigation.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-05-depth-first-navigation.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-depth-first-home-navigation/plan.ko.md"
+  ],
+  "verification": [
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter platform-desktop-app test",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "corepack pnpm --filter workspace-monitor exec next build",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "python3 _tools/docs-audit/src/docs_audit.py --check",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json",
+    "JSON syntax check",
+    "git diff --check",
+    "in-app Browser responsive drill-down smoke"
+  ],
+  "requires_rework": false
+}

@@ -615,14 +615,14 @@
       "user_value_ko": "사용자가 어디서 파일을 보고, 어디서 명령을 실행하고, 어디서 결과를 확인하는지 즉시 이해한다.",
       "current_platform_assets": [
         "renderer/workspace-monitor/components/MonitorShell.tsx",
-        "renderer/workspace-monitor/components/workbench/CoreFeatureTabs.tsx",
+        "renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx",
         "renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx",
         "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"
       ],
       "implementation_targets": [
         "remove duplicated navigation feel",
         "keep CLI drawer as bottom/full overlay",
-        "use compact tabbed subpanels instead of long scroll"
+        "use drill-down child views instead of combining multiple functions in one tab"
       ],
       "risk_controls": [
         "responsive grid tests",

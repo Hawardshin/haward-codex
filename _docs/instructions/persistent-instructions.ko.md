@@ -59,6 +59,7 @@
 - 플랫폼 UI는 명확성, 훑어보기, 접근성, 운영 신뢰를 해치지 않는 선에서 은근히 귀엽고 조용히 기분 좋은 톤을 사용할 수 있다. 작은 색상 accent, 상태 신호, 친근한 empty state, 절제된 micro-interaction을 우선하고 장식 과잉, emoji 남용, 시각적 소음은 피한다.
 - 한 화면의 주 기능이 하나라면 그 기능이 화면 대부분을 차지하는 것이 기본값이다. 보조 navigation, 상태, action은 주 기능을 돕는 수준으로만 두고, 빈 panel, 장식, 무관한 module로 화면을 쪼개지 않는다. 분할 화면은 비교, monitoring, 다중 주 작업처럼 동시에 봐야 할 명확한 이유가 있을 때만 사용한다.
 - 사용자의 인지 용량에는 한계가 있으므로, 보이는 기능, panel, button, workflow step은 명확하게 이름 붙은 한 가지 일만 해야 한다. 서로 다른 결정, 상태, 설정, 이동, 실행을 하나의 control이나 panel에 섞지 말고, 별도 단일 목적 단위로 나누거나 보조 작업은 progressive disclosure 뒤로 보낸다.
+- navigation을 얕게 유지하려고 한 tab 안에 여러 기능을 넣지 않는다. tab 하나가 서로 다른 여러 일을 담기 시작하면 더 깊은 navigation, drill-down 화면, task-specific child view를 만들어 각 tab/view가 하나의 명확한 기능 목적만 갖게 한다.
 - 에이전트는 뭔가를 빼먹을 수 있다고 가정한다. `quick`이 아닌 작업은 `_ops/workflows/68-omission-prevention.md` 또는 동등한 coverage check를 통해 필수 지시, 요구사항, 산출물, acceptance check를 확인하고 `omission_check_targets`를 평가 입력에 포함한다.
 - 이 플랫폼은 메모리 누수와 런타임 리소스 누수를 신뢰성 문제로 다룬다. 장시간 실행 에이전트, 서버, 브라우저 자동화, subprocess, worker, queue, cache, stream, 대용량 처리, 파일 핸들, 네트워크 연결, timer, subscription을 건드리면 `_ops/workflows/69-resource-leak-prevention.md`를 사용하고 `resource_risk_occurred=true`, `resource_check_targets`를 평가 입력에 포함한다.
 - 하나의 작업에서 여러 CLI 프로세스를 실행하거나 stdout/stderr/stdin pipe, 파일/임시 아티팩트/cache/log/report handoff, fan-out/fan-in merge, desktop/monitor/local daemon 기반 CLI orchestration을 설계하면 `_ops/workflows/71-cli-pipeline-orchestration.md`를 사용하고 `cli_pipeline_occurred=true`, `cli_pipeline_targets`를 평가 입력에 포함한다.

@@ -1,0 +1,48 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-depth-first-navigation",
+  "status": "covered",
+  "checks": [
+    {
+      "item": "web_first_intake",
+      "status": "covered",
+      "evidence": "_history/web-searches/2026/2026-06-05-depth-first-navigation.ko.md"
+    },
+    {
+      "item": "memory_bootstrap",
+      "status": "covered",
+      "evidence": "agent-platform/configs/memory/bootstrap-manifest.json"
+    },
+    {
+      "item": "work_mode_selection",
+      "status": "covered",
+      "evidence": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-depth-first-home-navigation/plan.ko.md"
+    },
+    {
+      "item": "requirements",
+      "status": "covered",
+      "evidence": "REQ-WM-033 in platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+    },
+    {
+      "item": "spec_driven_artifacts",
+      "status": "covered",
+      "evidence": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-depth-first-home-navigation/"
+    },
+    {
+      "item": "implementation",
+      "status": "covered",
+      "evidence": "MonitorShell uses #home-depth-* child views and CoreFeatureDrilldown replaces CoreFeatureTabs."
+    },
+    {
+      "item": "validation",
+      "status": "covered",
+      "evidence": "check, tests, platform readiness, build, perf, docs audit, config contract, JSON check, git diff check, and Browser responsive drill-down smoke passed."
+    },
+    {
+      "item": "history_and_trace",
+      "status": "covered",
+      "evidence": "request trace, work timing, web search, user request summary, daily history, and work summary records updated."
+    }
+  ],
+  "requires_rework": false
+}

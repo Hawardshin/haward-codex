@@ -433,8 +433,8 @@ test("shared CLI adapter registry defines concrete AI CLI targets", () => {
 test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () => {
   const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
   const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
-  const coreFeatureTabs = readFileSync(
-    join(root, "renderer/workspace-monitor/components/workbench/CoreFeatureTabs.tsx"),
+  const coreFeatureDrilldown = readFileSync(
+    join(root, "renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx"),
     "utf8"
   );
   const nativeGitWorkbench = readFileSync(
@@ -453,7 +453,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"),
     "utf8"
   );
-  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureTabs}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
+  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
   const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
   const clipboardUtility = readFileSync(join(root, "renderer/workspace-monitor/lib/clipboard.mjs"), "utf8");
   const clipboardTest = readFileSync(join(root, "tests/clipboard.test.mjs"), "utf8");
@@ -573,13 +573,13 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     assert.match(monitorShell, new RegExp(commandName));
   }
   assert.match(monitorShell, /DesktopRuntimePanel/);
-  assert.match(monitorShell, /CoreFeatureTabs/);
+  assert.match(monitorShell, /CoreFeatureDrilldown/);
   assert.match(monitorShell, /NativeGitWorkbench/);
   assert.match(nativeGitWorkbench, /NativeGitWorkbench/);
   assert.match(monitorShell, /PathDisclosure/);
   assert.match(monitorShell, /RuntimeTerminalDrawer/);
   assert.match(monitorShell, /WorkspaceExplorerPane/);
-  assert.match(coreFeatureTabs, /CoreFeatureTabId/);
+  assert.match(coreFeatureDrilldown, /CoreFeatureDrilldownId/);
   assert.match(runtimeTerminalDrawer, /RuntimeTerminalDrawer/);
   assert.match(workspaceExplorerPane, /buildWorkspaceExplorerTree/);
   assert.match(lib, /human-decision-inbox\.json/);
@@ -642,13 +642,13 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "하단 다중 CLI 터미널",
     "바로 쓰기",
     "핵심 기능",
-    "먼저 무엇을 할지 고르세요",
+    "지금 할 일 하나를 고릅니다",
     "에이전트 코어",
     "CLI 오케스트레이션",
     "루트 툴",
     "작업 가시성",
     "main-workbench-panel",
-    "main-feature-tabs",
+    "home-depth-menu",
     "main-feature-detail",
     "path-disclosure",
     "다크",

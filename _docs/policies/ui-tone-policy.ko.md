@@ -14,6 +14,7 @@
 - 운영/관리 화면의 card radius는 기존 디자인 시스템과 맞추고, 과하게 둥근 marketing UI처럼 보이지 않게 한다.
 - 한 화면의 주 기능이 하나이면 그 기능이 viewport의 중심과 대부분의 면적을 차지해야 한다. 기능이 작게 떠 있고 나머지를 장식, 빈 card, 무관한 보조 panel로 채우는 layout은 실패로 본다.
 - 사용자는 한 번에 인지하고 판단할 수 있는 정보량이 제한되어 있으므로, 기능, panel, button, workflow step은 한 가지 목적만 명확히 드러내야 한다.
+- 한 tab은 하나의 기능 목적을 대표해야 한다. 여러 기능을 한 tab에 얹어 navigation을 얕게 만들기보다, 한 단계 더 들어가는 drill-down 화면이나 task-specific child view를 사용한다.
 - 분할 layout, dashboard grid, side-by-side panel은 비교, monitoring, 다중 주 작업처럼 사용자가 동시에 봐야 하는 맥락이 있을 때만 쓴다.
 
 ## 적용 대상
@@ -39,12 +40,16 @@
 - W3C WAI의 cognitive accessibility 패턴은 화면 목적과 control 사용법을 명확히 드러내야 하며, 사용자가 수행 가능한 task와 interactive control을 알아볼 수 있어야 한다고 설명한다.
   https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p01-clear-purpose/
   https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p05-clear-controls/
+- W3C WAI의 cognitive accessibility 패턴은 content를 관리 가능한 조각으로 나누라고 설명하며, GOV.UK Service Manual도 복잡한 form/workflow에서 한 번에 한 가지를 다루는 구조를 권장한다.
+  https://www.w3.org/WAI/WCAG2/supplemental/patterns/o3p01-chunk/
+  https://www.gov.uk/service-manual/design/form-structure#start-with-one-thing-per-page
 
 ## 검증
 
 - 화면에 추가한 귀여움이 정보 hierarchy를 약화하지 않는지 확인한다.
 - 화면에 주 기능이 하나뿐인데 해당 기능이 작고 주변 chrome, card, 빈 공간, 장식이 더 크게 보이면 재설계한다.
 - panel이나 button 하나가 상태 확인, 설정, 이동, 실행, 근거 보기처럼 서로 다른 일을 동시에 시키면 단일 목적 단위로 분리한다.
+- tab 안에서 서로 다른 여러 기능 panel이 동시에 보이면 기본 tab은 선택 메뉴로 낮추고, 각 기능은 더 깊은 단일 기능 화면으로 이동시킨다.
 - 분할 layout을 썼다면 비교, monitoring, 다중 주 작업 중 어떤 이유로 동시에 봐야 하는지 설명 가능해야 한다.
 - 버튼, tab, card, chart, code viewer에서 text overlap이 없는지 확인한다.
 - 반복 interaction에 불필요한 대기 animation이 없는지 확인한다.
