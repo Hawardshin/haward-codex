@@ -1,0 +1,37 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "font-loading",
+  "status": "passed",
+  "checks": [
+    {
+      "item": "web_first_intake",
+      "status": "passed",
+      "evidence": "_history/web-searches/2026/2026-06-05-font-loading.ko.md"
+    },
+    {
+      "item": "korean_font_not_latin_only",
+      "status": "passed",
+      "evidence": "@fontsource/pretendard was rejected after local package inspection showed latin subset only; official pretendard dynamic subset CSS is used instead."
+    },
+    {
+      "item": "actual_font_loading_not_stack_only",
+      "status": "passed",
+      "evidence": "app/layout.tsx imports pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css and tests/font-loading.test.mjs locks it."
+    },
+    {
+      "item": "installation_audit_recorded",
+      "status": "passed",
+      "evidence": "_history/installations/2026/2026-06-05-workspace-monitor-pretendard-font.ko.md and _ops/installations/registry.json"
+    },
+    {
+      "item": "browser_smoke_completed",
+      "status": "passed",
+      "evidence": "Static Playwright smoke confirmed body font-family includes Pretendard Variable and subset woff2 responses returned 200."
+    },
+    {
+      "item": "generated_outputs_not_staged",
+      "status": "passed",
+      "evidence": "Generated snapshot JSON files remain unstaged."
+    }
+  ]
+}

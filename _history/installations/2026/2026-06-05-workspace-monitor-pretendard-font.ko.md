@@ -1,0 +1,29 @@
+# workspace-monitor Pretendard 공식 폰트 설치 감사 기록
+
+- 날짜: 2026-06-05
+- 상태: installed
+- 소유 프로젝트: `platform-desktop-app/renderer/workspace-monitor`
+- 설치 범위: 프로젝트 로컬 의존성
+- 설치 명령: `corepack pnpm --filter workspace-monitor add -E pretendard@1.3.9`
+- 의존성 기록 대상:
+  - `platform-desktop-app/renderer/workspace-monitor/package.json`
+  - `pnpm-lock.yaml`
+- 설치 목적: CSS 폰트 스택에 선언된 Pretendard를 실제 self-hosted 웹폰트로 로딩해 한글 UI 가독성과 플랫폼 간 폰트 일관성을 개선한다.
+- 후보 제외: `@fontsource/pretendard@5.2.5`는 설치 후 package metadata와 파일 목록을 확인한 결과 subset이 `latin`만 제공되어 한글 UI 개선 목적에 맞지 않는다. 최종 의존성에서 제거한다.
+- 보안 검토: 정적 CSS와 폰트 파일을 제공하는 프로젝트 로컬 패키지로 런타임 권한, 네이티브 실행 파일, 네트워크 호출을 추가하지 않는다. `corepack pnpm audit --prod=false` 결과 알려진 취약점이 없다.
+- 라이선스 검토: npm metadata 기준 `pretendard@1.3.9`는 OFL-1.1 라이선스다.
+- 검증 계획:
+  - `corepack pnpm audit --prod=false`: No known vulnerabilities found
+  - `corepack pnpm --filter workspace-monitor test`: 26 tests passed
+  - `corepack pnpm --filter workspace-monitor run check`: passed
+  - `corepack pnpm --filter workspace-monitor run build:customer`: passed
+  - `corepack pnpm --filter workspace-monitor run perf:budget`: within_budget, largest chunk 332555 bytes
+  - `corepack pnpm --filter platform-desktop-app run check`: passed with existing public release gate warnings
+  - `corepack pnpm --filter platform-desktop-app run customer-bundle:audit`: customer_bundle_ready
+  - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/installations/registry.json`: self_documenting
+  - 정적 빌드 Playwright font smoke: body computed `font-family`에 `Pretendard Variable` 포함, `PretendardVariable.subset.*.woff2` 요청 200 확인, horizontal overflow 없음
+  - `git diff --check`: passed
+- 롤백 계획: `corepack pnpm --filter workspace-monitor remove pretendard`를 실행하고 `layout.tsx`의 Pretendard import 및 폰트 로딩 테스트를 제거한 뒤 동일 검증 명령을 재실행한다.
+- 외부 확인:
+  - Pretendard upstream: `https://github.com/orioncactus/pretendard`
+  - npm package metadata: `npm view pretendard version license dist.unpackedSize homepage repository.url`

@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "font-loading",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selection_reason": "The user requested a Workspace Monitor font improvement. The work changes frontend runtime behavior and project-local dependencies but does not change governance policy or public release packaging.",
+  "mode_policy_notes": [
+    "Web-first intake was performed before local edits.",
+    "The work is scoped to bundled font loading and base typography defaults.",
+    "A project-local dependency installation is required and recorded through the installation audit registry.",
+    "Generated snapshot outputs may be touched by validation and must remain unstaged."
+  ]
+}

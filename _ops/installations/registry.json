@@ -489,6 +489,39 @@
       "rollback_path": "corepack pnpm --filter workspace-monitor remove @playwright/test; corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor exec playwright uninstall chromium; rerun workspace-monitor check/test.",
       "installation_record_path": "_history/installations/2026/2026-06-05-workspace-monitor-playwright.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-05-workspace-monitor-pretendard-font",
+      "date": "2026-06-05",
+      "status": "installed",
+      "name": "workspace-monitor Pretendard official font package",
+      "scope": "project",
+      "owning_project": "platform-desktop-app/renderer/workspace-monitor",
+      "package_manager": "pnpm",
+      "install_command": "corepack pnpm --filter workspace-monitor add -E pretendard@1.3.9",
+      "environment_path": "platform-desktop-app/renderer/workspace-monitor/node_modules",
+      "dependency_record_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "version_or_lock_status": "Exact dependency pretendard@1.3.9 recorded in workspace-monitor package.json and pnpm-lock.yaml. @fontsource/pretendard@5.2.5 was rejected after package inspection because it only provides the latin subset.",
+      "security_review": "Project-local static font package only; no global install, native executable, runtime permission, or network client is added. corepack pnpm audit --prod=false reported no known vulnerabilities.",
+      "license_review": "pretendard npm metadata reports OFL-1.1.",
+      "verification": [
+        "corepack pnpm audit --prod=false: No known vulnerabilities found",
+        "corepack pnpm --filter workspace-monitor test: 26 tests passed",
+        "corepack pnpm --filter workspace-monitor run check: passed",
+        "corepack pnpm --filter workspace-monitor run build:customer: passed",
+        "corepack pnpm --filter workspace-monitor run perf:budget: within_budget, largest chunk 332555 bytes",
+        "corepack pnpm --filter platform-desktop-app run check: passed with existing public release gate warnings",
+        "corepack pnpm --filter platform-desktop-app run customer-bundle:audit: customer_bundle_ready",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/installations/registry.json: self_documenting",
+        "Static-build Playwright font smoke: body font-family includes Pretendard Variable and PretendardVariable subset woff2 requests returned 200",
+        "git diff --check: passed"
+      ],
+      "rollback_path": "corepack pnpm --filter workspace-monitor remove pretendard; remove Pretendard import and font loading test; rerun workspace-monitor checks.",
+      "installation_record_path": "_history/installations/2026/2026-06-05-workspace-monitor-pretendard-font.ko.md",
+      "commit": "pending"
     }
   ]
 }

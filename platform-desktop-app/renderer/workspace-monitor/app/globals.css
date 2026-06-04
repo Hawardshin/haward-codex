@@ -339,9 +339,10 @@ body {
   color: var(--text);
   font-family: var(--font-family-sans);
   font-size: var(--font-size-body);
-  line-height: 1.45;
+  line-height: 1.5;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 button,

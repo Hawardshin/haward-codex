@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "font-loading",
+  "resource_risk_occurred": true,
+  "status": "passed",
+  "resources": [
+    {
+      "type": "static_http_server",
+      "port": 3330,
+      "status": "stopped",
+      "notes": "Served platform-desktop-app/renderer/workspace-monitor/out for Playwright font loading smoke."
+    },
+    {
+      "type": "browser_automation",
+      "tooling": "Playwright Chromium",
+      "status": "completed",
+      "notes": "Verified computed font-family, subset woff2 200 responses, and no horizontal overflow at 1280x900."
+    }
+  ],
+  "cleanup_required": []
+}
