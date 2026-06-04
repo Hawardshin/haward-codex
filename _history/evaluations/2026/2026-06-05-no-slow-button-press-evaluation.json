@@ -1,0 +1,36 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-no-slow-button-press",
+  "outcome": "pass",
+  "summary": "Workspace Monitor buttons now receive capture-phase instant pressed feedback before heavy click work, with a CPU-throttled button-response audit added.",
+  "requirements": ["REQ-WM-041", "REQ-WM-055"],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "corepack pnpm --filter workspace-monitor run perf:buttons -- http://127.0.0.1:3348/#section-overview",
+    "in-app Browser smoke: overview/agents/desktop/source/tools actual clicks active and ready, horizontal overflow false"
+  ],
+  "performance_result": {
+    "viewport": "1280x820",
+    "cpu_throttle": 6,
+    "synthetic_sample_count": 67,
+    "synthetic_feedback_average_ms": 0.4,
+    "synthetic_feedback_p95_ms": 1.4,
+    "synthetic_painted_marker_p95_ms": 53.1,
+    "real_nav_click_feedback_average_ms": 14.1,
+    "real_nav_click_feedback_p95_ms": 30.0,
+    "failed_feedback_count": 0
+  },
+  "bugs_found_and_fixed": [
+    "Same-section nav reclick could leave data-section-content-ready=false because section state did not change after pre-activation."
+  ],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": ["_history/resource-checks/2026/2026-06-05-no-slow-button-press.json"],
+  "omission_check_targets": ["_history/omission-checks/2026/2026-06-05-no-slow-button-press.json"],
+  "mode_selection_record_targets": ["_history/mode-selections/2026/2026-06-05-no-slow-button-press.json"],
+  "resource_notes": "Local static HTTP server and in-app Browser session were used for validation; the server was stopped before close-out."
+}

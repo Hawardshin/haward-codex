@@ -2459,6 +2459,13 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     return () => pendingSectionCommitRef.current?.();
   }, []);
   useEffect(() => {
+    if (typeof document === "undefined") {
+      return undefined;
+    }
+    const root = document.querySelector<HTMLElement>(".desktop-app-root");
+    return root ? installInstantButtonFeedback(root) : undefined;
+  }, []);
+  useEffect(() => {
     if (section !== "agents" && agentSignalsOpen) {
       setAgentSignalsOpen(false);
     }
@@ -3028,8 +3035,13 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     }
     const target = sectionById.get(targetSection);
     const viewport = document.querySelector(".desktop-viewport");
+    const alreadyReady =
+      viewport?.getAttribute("data-active-section") === targetSection &&
+      viewport?.getAttribute("data-section-content-ready") === "true";
     viewport?.setAttribute("data-active-section", targetSection);
-    viewport?.setAttribute("data-section-content-ready", "false");
+    if (!alreadyReady) {
+      viewport?.setAttribute("data-section-content-ready", "false");
+    }
     document.querySelectorAll<HTMLElement>("[data-section-id]").forEach((element) => {
       const isTarget = element.getAttribute("data-section-id") === targetSection;
       element.classList.toggle("active", isTarget);
@@ -12168,6 +12180,86 @@ function isOpenDecisionStatus(status: string) {
 
 function isActiveSessionStatus(status: string) {
   return ["running", "defer_message_sent"].includes(status);
+}
+
+function findInstantButtonTarget(root: HTMLElement, eventTarget: EventTarget | null) {
+  if (!(eventTarget instanceof Element)) {
+    return null;
+  }
+  const target = eventTarget.closest<HTMLElement>("button, [role='button'], summary, a[href]");
+  if (!target || !root.contains(target)) {
+    return null;
+  }
+  if (target instanceof HTMLButtonElement && target.disabled) {
+    return null;
+  }
+  if (target.getAttribute("aria-disabled") === "true") {
+    return null;
+  }
+  return target;
+}
+
+function installInstantButtonFeedback(root: HTMLElement) {
+  const cleanupByElement = new WeakMap<HTMLElement, () => void>();
+  let activeFeedbackCount = 0;
+
+  const mark = (target: HTMLElement, inputType: "pointer" | "keyboard") => {
+    cleanupByElement.get(target)?.();
+    activeFeedbackCount += 1;
+    root.setAttribute("data-button-response-active", "true");
+    target.setAttribute("data-instant-button-feedback", "active");
+    target.setAttribute("data-instant-button-input", inputType);
+    target.removeAttribute("data-instant-button-painted");
+
+    let cleaned = false;
+    let clearTimeoutId = 0;
+    let cleanup: () => void = () => undefined;
+    const cancelFrame = scheduleAfterFirstPaint(() => {
+      target.setAttribute("data-instant-button-painted", "true");
+      clearTimeoutId = window.setTimeout(cleanup, inputType === "keyboard" ? 220 : 180);
+    });
+    cleanup = () => {
+      if (cleaned) {
+        return;
+      }
+      cleaned = true;
+      cancelFrame();
+      window.clearTimeout(clearTimeoutId);
+      target.removeAttribute("data-instant-button-feedback");
+      target.removeAttribute("data-instant-button-input");
+      target.removeAttribute("data-instant-button-painted");
+      cleanupByElement.delete(target);
+      activeFeedbackCount = Math.max(0, activeFeedbackCount - 1);
+      if (activeFeedbackCount === 0) {
+        root.removeAttribute("data-button-response-active");
+      }
+    };
+    cleanupByElement.set(target, cleanup);
+  };
+
+  const handlePointerDown = (event: PointerEvent) => {
+    const target = findInstantButtonTarget(root, event.target);
+    if (target) {
+      mark(target, "pointer");
+    }
+  };
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key !== "Enter" && event.key !== " ") {
+      return;
+    }
+    const target = findInstantButtonTarget(root, event.target);
+    if (target) {
+      mark(target, "keyboard");
+    }
+  };
+
+  root.addEventListener("pointerdown", handlePointerDown, true);
+  root.addEventListener("keydown", handleKeyDown, true);
+  return () => {
+    root.removeEventListener("pointerdown", handlePointerDown, true);
+    root.removeEventListener("keydown", handleKeyDown, true);
+    root.removeAttribute("data-button-response-active");
+  };
 }
 
 function scheduleAfterFirstPaint(callback: () => void, delayMs = 0) {

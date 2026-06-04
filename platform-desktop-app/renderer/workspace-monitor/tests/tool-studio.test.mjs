@@ -90,7 +90,9 @@ test("Monitor section switches stage heavy content after first paint", () => {
   assert.match(monitorShell, /const titlebarSectionLabelRef = useRef<HTMLElement>\(null\)/);
   assert.match(monitorShell, /const pendingSectionCommitRef = useRef<\(\(\) => void\) \| null>\(null\)/);
   assert.match(monitorShell, /const primeSectionActivation = useCallback\(\(targetSection: SectionId\) => \{/);
+  assert.match(monitorShell, /const alreadyReady =[\s\S]*?data-section-content-ready"\) === "true"/);
   assert.match(monitorShell, /viewport\?\.setAttribute\("data-active-section", targetSection\)/);
+  assert.match(monitorShell, /if \(!alreadyReady\) \{[\s\S]*?viewport\?\.setAttribute\("data-section-content-ready", "false"\)/);
   assert.match(monitorShell, /element\.classList\.toggle\("active", isTarget\)/);
   assert.match(monitorShell, /titlebarSectionLabelRef\.current\.textContent = target\.label/);
   assert.match(monitorShell, /onPointerDown=\{\(\) => primeSectionActivation\(item\.id\)\}/);
@@ -107,6 +109,18 @@ test("Monitor section switches stage heavy content after first paint", () => {
   assert.match(monitorShell, /\{sectionContentReady && section === "source" && \(/);
   assert.match(monitorShell, /\{sectionContentReady && section === "agents" && \(/);
   assert.match(css, /\.section-transition-shell \{/);
+});
+
+test("Monitor buttons expose instant press feedback before heavy click work", () => {
+  assert.equal(packageJson.scripts["perf:buttons"], "node scripts/audit-button-response.mjs");
+  assert.match(monitorShell, /installInstantButtonFeedback\(root\)/);
+  assert.match(monitorShell, /function installInstantButtonFeedback\(root: HTMLElement\)/);
+  assert.match(monitorShell, /root\.addEventListener\("pointerdown", handlePointerDown, true\)/);
+  assert.match(monitorShell, /root\.addEventListener\("keydown", handleKeyDown, true\)/);
+  assert.match(monitorShell, /data-instant-button-feedback", "active"/);
+  assert.match(monitorShell, /data-instant-button-painted", "true"/);
+  assert.match(monitorShell, /data-button-response-active", "true"/);
+  assert.match(css, /\[data-instant-button-feedback="active"\]/);
 });
 
 test("Tool Studio build mode exposes a dedicated tool builder workbench", () => {

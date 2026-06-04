@@ -1,0 +1,18 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-no-slow-button-press",
+  "status": "pass",
+  "checked_items": [
+    "web_first_intake_recorded",
+    "requirements_updated",
+    "spec_plan_tasks_trace_validation_created",
+    "implementation_scoped_to_workspace_monitor",
+    "static_regression_test_added",
+    "button_performance_audit_added_and_run",
+    "browser_smoke_run",
+    "same_section_reclick_bug_fixed",
+    "generated_snapshot_changes_excluded_from_intentional_stage",
+    "evaluation_and_request_trace_recorded"
+  ],
+  "gaps": []
+}

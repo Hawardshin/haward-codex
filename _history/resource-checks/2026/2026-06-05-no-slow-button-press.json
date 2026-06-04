@@ -1,0 +1,21 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-no-slow-button-press",
+  "status": "pass",
+  "resources_used": [
+    "local_static_http_server_port_3348",
+    "in_app_browser_tab",
+    "headless_chrome_playwright_button_audit"
+  ],
+  "lifecycle": [
+    "static server started before Browser and button audit validation",
+    "perf:buttons completed",
+    "in-app Browser smoke and screenshot completed",
+    "static server stopped before close-out"
+  ],
+  "leak_risks": [
+    "long_running_http_server"
+  ],
+  "cleanup_required": true,
+  "cleanup_status": "completed_server_stopped"
+}

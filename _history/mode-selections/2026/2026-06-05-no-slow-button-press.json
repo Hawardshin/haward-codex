@@ -1,0 +1,12 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-no-slow-button-press",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes a broad user-facing Workspace Monitor interaction contract and requires requirements/spec/history/validation records, but it is bounded to button first-response behavior with no dependency installation.",
+  "web_first_intake": true,
+  "memory_bootstrap": "simulated from hot anchors: AGENTS.md, Workspace Monitor requirements, prior no-slow-tab-switch commit, current MonitorShell button paths.",
+  "large_scope_decomposition": "simulated and scoped to button first-feedback responsiveness instead of all action completion performance.",
+  "installation_occurred": false
+}
