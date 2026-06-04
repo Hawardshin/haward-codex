@@ -1,0 +1,37 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "ui-color-system",
+  "status": "passed",
+  "checks": [
+    {
+      "item": "web_first_intake",
+      "status": "passed",
+      "evidence": "_history/web-searches/2026/2026-06-05-ui-color-system.ko.md"
+    },
+    {
+      "item": "design_reference_applied",
+      "status": "passed",
+      "evidence": "Carbon role tokens, Apple limited color use, WCAG contrast, and Material color role direction informed the implementation."
+    },
+    {
+      "item": "color_roles_separated",
+      "status": "passed",
+      "evidence": "Primary action, status, control, dark, and terminal tokens were separated in globals.css."
+    },
+    {
+      "item": "contrast_regression_test_added",
+      "status": "passed",
+      "evidence": "tests/color-tokens.test.mjs covers light/dark readable token pairs."
+    },
+    {
+      "item": "visual_smoke_completed",
+      "status": "passed",
+      "evidence": "Playwright static export smoke checked light/dark computed tokens and saved outputs/workspace-monitor-color-check.png."
+    },
+    {
+      "item": "generated_outputs_not_staged",
+      "status": "passed",
+      "evidence": "Generated snapshot JSON files remain unstaged."
+    }
+  ]
+}

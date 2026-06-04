@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-06-05",
+  "workId": "ui-color-system",
+  "workMode": "standard",
+  "viewMode": "superadmin_developer",
+  "installMode": "developer",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "userRequest": "UI 색상을 좋은 디자인 레퍼런스와 이론을 참고해 개선한다.",
+  "requirements": ["REQ-WM-014", "REQ-WM-035", "REQ-WM-036", "REQ-WM-040"],
+  "implementationFiles": [
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/color-tokens.test.mjs"
+  ],
+  "requirementsTargets": [
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+  ],
+  "specTargets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/"
+  ],
+  "userRequestSummaryTargets": [
+    "_history/user-requests/2026/2026-06-05-ui-color-system.ko.md"
+  ],
+  "webSearchRecordTargets": [
+    "_history/web-searches/2026/2026-06-05-ui-color-system.ko.md"
+  ],
+  "requestTraceTargets": [
+    "_history/request-traces/2026/2026-06-05-ui-color-system.ko.md"
+  ],
+  "workSummaryTargets": [
+    "_history/work-summaries/2026/2026-06-05.ko.md",
+    "_history/2026/2026-06-05.md"
+  ],
+  "modeSelectionRecordTargets": [
+    "_history/mode-selections/2026/2026-06-05-ui-color-system.json"
+  ],
+  "omissionCheckTargets": [
+    "_history/evaluations/2026/2026-06-05-ui-color-system-omission.json"
+  ],
+  "resourceRiskOccurred": true,
+  "resourceCheckTargets": [
+    "_history/evaluations/2026/2026-06-05-ui-color-system-resource.json"
+  ],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "corepack pnpm --filter platform-desktop-app run customer-bundle:audit",
+    "Playwright static export ui_color_smoke_ok",
+    "git diff --check"
+  ],
+  "installationOccurred": false,
+  "snapshotGeneratedFilesExcludedFromCommit": true
+}

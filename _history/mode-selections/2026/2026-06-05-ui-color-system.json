@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "ui-color-system",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selection_reason": "The user requested design-reference-based UI color improvements for the Workspace Monitor surface. This is meaningful frontend implementation work but does not change durable governance rules or install dependencies.",
+  "mode_policy_notes": [
+    "Web-first intake was performed before local edits.",
+    "The work narrowed the broad UI request to reusable color tokens and high-impact global surfaces.",
+    "No dependency installation or global environment change was performed.",
+    "Generated snapshot outputs were used for validation and left unstaged."
+  ]
+}
