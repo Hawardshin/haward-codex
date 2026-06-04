@@ -1,0 +1,60 @@
+{
+  "schema_version": "2026-06-02",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-05-agent-chat-primary-surface.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-05-agent-chat-primary-surface.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-agent-chat-primary-surface-omission.json"
+  ],
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-agent-chat-primary-surface-resource.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-05-agent-chat-primary-surface.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/traceability.ko.md"
+  ],
+  "implementation_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css"
+  ],
+  "verification": {
+    "workspace_monitor_check": "passed",
+    "workspace_monitor_test": "passed, 17 tests",
+    "workspace_monitor_build_customer": "passed",
+    "in_app_browser_agents_390x844": {
+      "root_overflow": 0,
+      "body_overflow": 0,
+      "visible_operator_strip": 0,
+      "visible_toolbar": 0,
+      "visible_titlebar_search": 0,
+      "visible_metrics": 0,
+      "contract_cards_in_dom": 0,
+      "visible_contract_cards": 0,
+      "visible_messages": 2,
+      "visible_composer": 1,
+      "composer_bottom": 776,
+      "viewport_height": 844,
+      "composer_fully_in_viewport": true,
+      "min_control_height": 44
+    }
+  },
+  "known_warnings": [
+    "Standalone Playwright is not installed in workspace-monitor; in-app Browser was used for static export visual audit.",
+    "Generated snapshot JSON files changed during build and are intentionally not part of the source change set."
+  ]
+}

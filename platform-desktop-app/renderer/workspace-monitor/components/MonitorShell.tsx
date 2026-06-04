@@ -2158,6 +2158,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [terminalDrawerOpen, setTerminalDrawerOpen] = useState(false);
   const [runtimeInitDefaults, setRuntimeInitDefaults] = useState<RuntimeInitDefaults>(defaultRuntimeInitDefaults);
   const [operatorCenterOpen, setOperatorCenterOpen] = useState(false);
+  const [agentSignalsOpen, setAgentSignalsOpen] = useState(false);
   const [agentDetailsOpen, setAgentDetailsOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState("");
   const commandInputRef = useRef<HTMLInputElement>(null);
@@ -2232,10 +2233,13 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     }
   }, [activateSection, initialSection]);
   useEffect(() => {
+    if (section !== "agents" && agentSignalsOpen) {
+      setAgentSignalsOpen(false);
+    }
     if (section !== "agents" && agentDetailsOpen) {
       setAgentDetailsOpen(false);
     }
-  }, [agentDetailsOpen, section]);
+  }, [agentDetailsOpen, agentSignalsOpen, section]);
   useEffect(() => {
     let canceled = false;
     const tauriInvoke = getTauriInvoke();
@@ -2830,6 +2834,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const currentSection = sectionById.get(section);
   const currentFeatureGroup =
     localizedFeatureGroups.find((group) => group.id === currentSection?.group) || localizedFeatureGroups[0];
+  const isPrimaryWorkSurface = section === "agents";
   const currentThemeLabel =
     themeMode === "system"
       ? uiLanguage === "ko" ? "시스템" : "System"
@@ -4090,6 +4095,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
         <section
           className="desktop-viewport"
+          data-primary-work-surface={isPrimaryWorkSurface ? "true" : undefined}
           aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"}
           tabIndex={0}
         >
@@ -4101,37 +4107,41 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 <strong>{currentSectionLabel}</strong>
               </div>
             </div>
-            <div className={`titlebar-context-strip status-${attentionState.tone}`}>
-              <span>
-                <strong>{currentFeatureGroup?.label || (uiLanguage === "ko" ? "작업" : "Work")}</strong>
-                <small>{currentSection?.purpose || (uiLanguage === "ko" ? "선택한 화면의 역할을 보여줍니다." : "Shows the role of the selected surface.")}</small>
-              </span>
-              <button type="button" onClick={() => openSection(attentionState.section)} title={attentionState.title}>
-                <attentionState.icon size={14} aria-hidden="true" />
-                <span>{attentionState.action}</span>
-              </button>
-            </div>
+            {!isPrimaryWorkSurface && (
+              <div className={`titlebar-context-strip status-${attentionState.tone}`}>
+                <span>
+                  <strong>{currentFeatureGroup?.label || (uiLanguage === "ko" ? "작업" : "Work")}</strong>
+                  <small>{currentSection?.purpose || (uiLanguage === "ko" ? "선택한 화면의 역할을 보여줍니다." : "Shows the role of the selected surface.")}</small>
+                </span>
+                <button type="button" onClick={() => openSection(attentionState.section)} title={attentionState.title}>
+                  <attentionState.icon size={14} aria-hidden="true" />
+                  <span>{attentionState.action}</span>
+                </button>
+              </div>
+            )}
             <div className="titlebar-actions">
               <button type="button" onClick={openTerminalDrawer} title={uiLanguage === "ko" ? "하단 터미널 열기" : "Open bottom terminal"}>
                 <SquareTerminal size={15} aria-hidden="true" />
                 <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
               </button>
-              <label className="titlebar-search">
-                <Search size={15} aria-hidden="true" />
-                <input
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder={
-                    section === "source"
-                      ? uiLanguage === "ko"
-                        ? "파일/코드 검색"
-                        : "Search files and code"
-                      : uiLanguage === "ko"
-                        ? "문서 검색"
-                        : "Search documents"
-                  }
-                />
-              </label>
+              {!isPrimaryWorkSurface && (
+                <label className="titlebar-search">
+                  <Search size={15} aria-hidden="true" />
+                  <input
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder={
+                      section === "source"
+                        ? uiLanguage === "ko"
+                          ? "파일/코드 검색"
+                          : "Search files and code"
+                        : uiLanguage === "ko"
+                          ? "문서 검색"
+                          : "Search documents"
+                    }
+                  />
+                </label>
+              )}
               <button type="button" onClick={() => setCommandPaletteOpen(true)} title="Command Palette" aria-label="Command Palette">
                 <Search size={16} aria-hidden="true" />
               </button>
@@ -4760,51 +4770,55 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         />
       )}
 
-          <section className={`operator-strip operator-${attentionState.tone}`} aria-label="Workspace status and actions">
-            <div className="operator-strip-state">
-              <attentionState.icon size={17} aria-hidden="true" />
-              <div>
-                <span>{currentSectionLabel}</span>
-                <strong>{attentionState.title}</strong>
-              </div>
-            </div>
-            <div className="operator-strip-actions">
-              <button type="button" onClick={() => openSection(attentionState.section)}>
-                <ArrowRight size={15} aria-hidden="true" />
-                <span>{attentionState.action}</span>
-              </button>
-              <button type="button" onClick={() => openSection("agents")}>
-                <Inbox size={15} aria-hidden="true" />
-                <span>{uiLanguage === "ko" ? "결정함" : "Inbox"}</span>
-              </button>
-              <button type="button" onClick={() => setOperatorCenterOpen(true)}>
-                <FileSearch size={15} aria-hidden="true" />
-                <span>{uiLanguage === "ko" ? "검증 근거" : "Evidence"}</span>
-              </button>
-              <button type="button" onClick={() => openSection("desktop")}>
-                <SquareTerminal size={15} aria-hidden="true" />
-                <span>Runtime</span>
-              </button>
-            </div>
-          </section>
+          {!isPrimaryWorkSurface && (
+            <>
+              <section className={`operator-strip operator-${attentionState.tone}`} aria-label="Workspace status and actions">
+                <div className="operator-strip-state">
+                  <attentionState.icon size={17} aria-hidden="true" />
+                  <div>
+                    <span>{currentSectionLabel}</span>
+                    <strong>{attentionState.title}</strong>
+                  </div>
+                </div>
+                <div className="operator-strip-actions">
+                  <button type="button" onClick={() => openSection(attentionState.section)}>
+                    <ArrowRight size={15} aria-hidden="true" />
+                    <span>{attentionState.action}</span>
+                  </button>
+                  <button type="button" onClick={() => openSection("agents")}>
+                    <Inbox size={15} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "결정함" : "Inbox"}</span>
+                  </button>
+                  <button type="button" onClick={() => setOperatorCenterOpen(true)}>
+                    <FileSearch size={15} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "검증 근거" : "Evidence"}</span>
+                  </button>
+                  <button type="button" onClick={() => openSection("desktop")}>
+                    <SquareTerminal size={15} aria-hidden="true" />
+                    <span>Runtime</span>
+                  </button>
+                </div>
+              </section>
 
-          <section className="toolbar desktop-toolbar" aria-label="Document filters">
-            {section !== "source" && (
-              <>
-                <label className="select-box">
-                  <ListFilter size={16} aria-hidden="true" />
-                  <select value={category} onChange={(event) => setCategory(event.target.value)}>
-                    <option value="all">모든 문서</option>
-                    {viewCategories.map((item) => (
-                      <option key={item} value={item}>
-                        {categoryLabel(item)}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </>
-            )}
-          </section>
+              <section className="toolbar desktop-toolbar" aria-label="Document filters">
+                {section !== "source" && (
+                  <>
+                    <label className="select-box">
+                      <ListFilter size={16} aria-hidden="true" />
+                      <select value={category} onChange={(event) => setCategory(event.target.value)}>
+                        <option value="all">모든 문서</option>
+                        {viewCategories.map((item) => (
+                          <option key={item} value={item}>
+                            {categoryLabel(item)}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  </>
+                )}
+              </section>
+            </>
+          )}
 
           {section === "overview" && (
             <div className="desktop-home-grid">
@@ -5478,16 +5492,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       )}
 
       {section === "agents" && (
-        <div className="content-grid">
-          <section className="metrics-band">
-            <Metric label="Agent Configs" value={snapshot.stats.agentDefinitions ?? agentCatalog.length} icon={Bot} tone="green" />
-            <Metric label="Runtime Agents" value={snapshot.stats.agents} icon={Activity} tone="blue" />
-            <Metric label="Active Agents" value={snapshot.stats.activeAgents} icon={GitBranch} tone="amber" />
-            <Metric label="Working Tasks" value={collaborationBoard.summary.activeTasks} icon={Network} tone="red" />
-            <Metric label="Handoffs" value={collaborationBoard.summary.handoffs} icon={Layers} tone="slate" />
-            <Metric label="Blocked" value={collaborationBoard.summary.blockedTasks} icon={ShieldCheck} tone="violet" />
-          </section>
-
+        <div className="content-grid agents-workspace-grid">
           <SearchAgentWorkChatPanel
             form={searchAgentRunForm}
             messages={searchAgentChatMessages}
@@ -5506,7 +5511,30 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           />
 
           <details
-            className="section-secondary-disclosure"
+            className="section-secondary-disclosure agent-secondary-disclosure"
+            open={agentSignalsOpen}
+            onToggle={(event) => setAgentSignalsOpen(event.currentTarget.open)}
+          >
+            <summary>
+              <span>{uiLanguage === "ko" ? "에이전트 상태 신호 열기" : "Open agent status signals"}</span>
+              <small>{uiLanguage === "ko" ? "지표는 채팅을 방해하지 않도록 접어둡니다" : "Metrics stay folded away from the chat"}</small>
+            </summary>
+            {agentSignalsOpen && (
+              <div className="section-secondary-stack">
+                <section className="metrics-band agent-secondary-metrics">
+                  <Metric label="Agent Configs" value={snapshot.stats.agentDefinitions ?? agentCatalog.length} icon={Bot} tone="green" />
+                  <Metric label="Runtime Agents" value={snapshot.stats.agents} icon={Activity} tone="blue" />
+                  <Metric label="Active Agents" value={snapshot.stats.activeAgents} icon={GitBranch} tone="amber" />
+                  <Metric label="Working Tasks" value={collaborationBoard.summary.activeTasks} icon={Network} tone="red" />
+                  <Metric label="Handoffs" value={collaborationBoard.summary.handoffs} icon={Layers} tone="slate" />
+                  <Metric label="Blocked" value={collaborationBoard.summary.blockedTasks} icon={ShieldCheck} tone="violet" />
+                </section>
+              </div>
+            )}
+          </details>
+
+          <details
+            className="section-secondary-disclosure agent-secondary-disclosure"
             open={agentDetailsOpen}
             onToggle={(event) => setAgentDetailsOpen(event.currentTarget.open)}
           >
@@ -5661,6 +5689,7 @@ function SearchAgentWorkChatPanel({
   onRefreshModels: (providerId?: string) => void | Promise<void>;
 }) {
   const ko = language === "ko";
+  const [contextOpen, setContextOpen] = useState(false);
   const statusLabel = agentAvailable ? (ko ? "준비됨" : "Ready") : ko ? "설정 확인" : "Check config";
   const connectedProviders = providerCredentialReport.providers.filter((provider) => provider.configured);
   const selectedProvider =
@@ -5802,80 +5831,87 @@ function SearchAgentWorkChatPanel({
             </div>
           </div>
 
-          <details className="agent-chat-details agent-chat-context-drawer">
+          <details
+            className="agent-chat-details agent-chat-context-drawer"
+            open={contextOpen}
+            onToggle={(event) => setContextOpen(event.currentTarget.open)}
+          >
             <summary>
               <Settings size={14} aria-hidden="true" />
-              <span>{ko ? "컨텍스트" : "Context"}</span>
+              <span>{ko ? "컨텍스트와 실행 계약" : "Context and Run Contract"}</span>
             </summary>
-            <div className="agent-chat-context-form">
-              <label>
-                <span>{ko ? "검색 질문" : "Search Questions"}</span>
-                <textarea
-                  rows={6}
-                  value={form.questions}
-                  onChange={(event) => onChange("questions", event.target.value)}
-                />
-              </label>
-              <label>
-                <span>{ko ? "검색 채널" : "Search Channels"}</span>
-                <textarea
-                  rows={5}
-                  value={form.searchChannels}
-                  onChange={(event) => onChange("searchChannels", event.target.value)}
-                />
-              </label>
-              <label>
-                <span>{ko ? "저장 위치" : "Capture Targets"}</span>
-                <textarea
-                  rows={4}
-                  value={form.captureTargets}
-                  onChange={(event) => onChange("captureTargets", event.target.value)}
-                />
-              </label>
-              <label>
-                <span>{ko ? "실행 메모" : "Run Notes"}</span>
-                <textarea
-                  rows={4}
-                  value={form.notes}
-                  onChange={(event) => onChange("notes", event.target.value)}
-                />
-              </label>
-            </div>
+            {contextOpen && (
+              <>
+                <div className="agent-chat-context-form">
+                  <label>
+                    <span>{ko ? "검색 질문" : "Search Questions"}</span>
+                    <textarea
+                      rows={6}
+                      value={form.questions}
+                      onChange={(event) => onChange("questions", event.target.value)}
+                    />
+                  </label>
+                  <label>
+                    <span>{ko ? "검색 채널" : "Search Channels"}</span>
+                    <textarea
+                      rows={5}
+                      value={form.searchChannels}
+                      onChange={(event) => onChange("searchChannels", event.target.value)}
+                    />
+                  </label>
+                  <label>
+                    <span>{ko ? "저장 위치" : "Capture Targets"}</span>
+                    <textarea
+                      rows={4}
+                      value={form.captureTargets}
+                      onChange={(event) => onChange("captureTargets", event.target.value)}
+                    />
+                  </label>
+                  <label>
+                    <span>{ko ? "실행 메모" : "Run Notes"}</span>
+                    <textarea
+                      rows={4}
+                      value={form.notes}
+                      onChange={(event) => onChange("notes", event.target.value)}
+                    />
+                  </label>
+                </div>
+                <div className="agent-chat-contract-grid" aria-label={ko ? "실행 계약" : "Run contract"}>
+                  <div className="agent-chat-contract-card">
+                    <span>{ko ? "실행 계정" : "Run Account"}</span>
+                    <strong>{selectedProvider?.label || (ko ? "계정 없음" : "No account")}</strong>
+                    <small>
+                      {selectedProviderConnected
+                        ? `${selectedProvider?.credentialSource || "credential"} / ${selectedProviderModel}`
+                        : ko
+                          ? "설정 > 초기화 > 계정 연결에서 키를 저장하면 바로 실행됩니다."
+                          : "Save a key in Settings > Init > Account Connections to run directly."}
+                    </small>
+                  </div>
+                  <div className="agent-chat-contract-card">
+                    <span>{ko ? "사용 에이전트" : "Agent"}</span>
+                    <strong>{researchInsightAgentId}</strong>
+                    <small>{researchInsightAgentConfigPath}</small>
+                  </div>
+                  <div className="agent-chat-contract-card">
+                    <span>{ko ? "입력 스키마" : "Input Schema"}</span>
+                    <strong>research-insight-plan-template</strong>
+                    <small>{researchInsightPlanTemplatePath}</small>
+                  </div>
+                  <div className="agent-chat-contract-card">
+                    <span>{ko ? "실행 결과" : "Output"}</span>
+                    <strong>{ko ? "근거, 불확실성, 실행 계획, 검증" : "Evidence, uncertainty, plan, validation"}</strong>
+                    <small>
+                      {ko
+                        ? "질문은 decision inbox로 보류하고, 실행 기록은 task-run store에 남습니다."
+                        : "Questions go to the decision inbox, and runs are stored in the task-run store."}
+                    </small>
+                  </div>
+                </div>
+              </>
+            )}
           </details>
         </div>
-
-        <aside className="agent-chat-context">
-          <div className="agent-chat-contract-card">
-            <span>{ko ? "실행 계정" : "Run Account"}</span>
-            <strong>{selectedProvider?.label || (ko ? "계정 없음" : "No account")}</strong>
-            <small>
-              {selectedProviderConnected
-                ? `${selectedProvider?.credentialSource || "credential"} / ${selectedProviderModel}`
-                : ko
-                  ? "설정 > 초기화 > 계정 연결에서 키를 저장하면 바로 실행됩니다."
-                  : "Save a key in Settings > Init > Account Connections to run directly."}
-            </small>
-          </div>
-          <div className="agent-chat-contract-card">
-            <span>{ko ? "사용 에이전트" : "Agent"}</span>
-            <strong>{researchInsightAgentId}</strong>
-            <small>{researchInsightAgentConfigPath}</small>
-          </div>
-          <div className="agent-chat-contract-card">
-            <span>{ko ? "입력 스키마" : "Input Schema"}</span>
-            <strong>research-insight-plan-template</strong>
-            <small>{researchInsightPlanTemplatePath}</small>
-          </div>
-          <div className="agent-chat-contract-card">
-            <span>{ko ? "실행 결과" : "Output"}</span>
-            <strong>{ko ? "근거, 불확실성, 실행 계획, 검증" : "Evidence, uncertainty, plan, validation"}</strong>
-            <small>
-              {ko
-                ? "질문은 decision inbox로 보류하고, 실행 기록은 task-run store에 남습니다."
-                : "Questions go to the decision inbox, and runs are stored in the task-run store."}
-            </small>
-          </div>
-        </aside>
       </div>
     </section>
   );

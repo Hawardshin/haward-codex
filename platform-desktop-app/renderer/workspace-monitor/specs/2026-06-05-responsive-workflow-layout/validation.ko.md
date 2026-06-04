@@ -42,6 +42,14 @@
   - viewport: 1280x820, 900x720, 720x720, 540x720, 390x720
   - 결과: 5개 조합 모두 failures 없음
   - 확인: root/body horizontal overflow 0, central conversation log visible, message 2개 visible, bottom composer visible, send/terminal visible, provider/model controls inside composer, context drawer 기본 닫힘, visible action/input target 40px 이상
+- Agent Core primary work surface 재검증:
+  - 정적 export `http://localhost:3227/#section-agents`, in-app Browser 390x844
+  - 공통 상태 strip visible 0, document toolbar visible 0, titlebar search visible 0
+  - 지표 visible 0, 계약 카드 DOM 0, visible 계약 카드 0
+  - 채팅 메시지 2개, thread visible 1, composer visible 1
+  - composer `top=566`, `bottom=776`, `height=210`, viewport height `844`, first viewport fit true
+  - root/body horizontal overflow 0
+  - visible composer controls 6개, 최소 control height 44px
 
 ## 확인 기준
 
@@ -55,3 +63,4 @@
 - 어두운 배경 위 visible text는 반투명 회색 foreground가 아니라 흰색 foreground token을 사용해야 한다.
 - Agents/Desktop Runtime의 보조 기능군은 기본 닫힌 section-level disclosure 아래에 있어야 하며, 닫힌 상태에서 해당 보조 패널이 visible로 계산되면 실패다.
 - Agent Core 채팅은 중앙 대화 로그와 하단 composer가 같은 주 작업면에 보여야 하며, provider/model/context 컨트롤이 대화 입력보다 우선 노출되어 화면을 밀어내면 실패다.
+- Agents의 primary work surface에서는 공통 운영 strip/문서 필터/지표/계약 카드가 기본 채팅 first viewport를 밀어내면 실패다.

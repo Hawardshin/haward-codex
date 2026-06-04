@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-01",
+  "work_item": "agent-chat-primary-surface",
+  "date": "2026-06-05",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed"
+    },
+    {
+      "phase": "implementation",
+      "status": "completed"
+    },
+    {
+      "phase": "verification",
+      "status": "completed"
+    },
+    {
+      "phase": "history_and_trace",
+      "status": "completed"
+    }
+  ],
+  "bottleneck_notes": [
+    "Next dev server was not suitable for this static-export configuration, so verification used `build:customer` plus a static HTTP server."
+  ]
+}

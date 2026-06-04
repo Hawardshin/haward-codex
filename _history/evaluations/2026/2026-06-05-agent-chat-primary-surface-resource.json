@@ -1,0 +1,19 @@
+{
+  "schema_version": "2026-06-02",
+  "status": "resource_ready",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "kind": "static_http_server",
+      "port": 3227,
+      "purpose": "in-app Browser static export verification",
+      "cleanup": "kill process listening on tcp:3227 before close-out"
+    },
+    {
+      "kind": "in_app_browser",
+      "purpose": "Agent Core chat UI audit",
+      "cleanup": "no persistent automation session required after final audit"
+    }
+  ],
+  "leak_check": "Run lsof for tcp:3227 before close-out."
+}

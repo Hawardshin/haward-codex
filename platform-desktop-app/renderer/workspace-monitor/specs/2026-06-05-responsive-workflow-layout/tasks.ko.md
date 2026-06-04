@@ -28,3 +28,5 @@
 - [x] Agent Core 채팅 중앙 로그 + 하단 composer 재배치
 - [x] provider/model/context 보조 컨트롤 정리
 - [x] 정적 export Playwright Agent Core chat audit
+- [x] Agents primary work surface에서 공통 상태 strip, 문서 필터, 지표, 계약 카드 기본 노출 제거
+- [x] 390px 모바일 첫 화면에서 Agent Core composer가 보이는지 in-app Browser 정적 export audit
