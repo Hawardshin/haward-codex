@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-06-03",
   "name": "product-feature-registry",
-  "purpose": "Defines the installable desktop product as an agent capability platform whose primary value is orchestration, agent work, development, creation, and continuous improvement. Monitoring is only a supporting observability layer.",
+  "purpose": "Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, workbench, learning, and monitoring are supporting layers.",
   "reader_guide": {
     "summary": "Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.",
     "how_to_read": [
@@ -16,7 +16,7 @@
     "update_triggers": [
       "The desktop home screen or first-run product promise changes.",
       "A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.",
-      "A new agent orchestration, workbench, development, factory, learning, or observability capability is added.",
+      "A new Agent Core, CLI orchestration, root tool, workbench, learning, or observability capability is added.",
       "Monitoring starts to look like the main product again instead of a support layer.",
       "The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated."
     ]
@@ -174,8 +174,19 @@
       ]
     },
     {
+      "id": "two_core_features_are_first",
+      "rule": "The first product surface shall foreground exactly two primary capabilities: Agent Core for easy custom agent and subagent creation, and CLI orchestration for continuous guest CLI work with deferred decisions.",
+      "reason": "The user identified these as the platform's two core functions and asked non-core functions to be visually de-emphasized.",
+      "applies_to": [
+        "product_position",
+        "desktop_home_surface",
+        "feature_layers",
+        "workspace_navigation"
+      ]
+    },
+    {
       "id": "current_pieces_become_features",
-      "rule": "Existing shell, source review, runtime data, decision inbox, history, requirements, and monitoring pieces shall be surfaced as named product features with a clear primary or supporting role.",
+      "rule": "Existing shell, source review, runtime data, decision inbox, history, requirements, and monitoring pieces shall be surfaced as named product features with a clear primary, root-tool, visibility, or supporting role.",
       "reason": "The product should stop scattering surfaces as implementation leftovers and should expose them as sellable feature modules.",
       "applies_to": [
         "feature_layers",
@@ -264,7 +275,7 @@
   ],
   "product_position": {
     "primary_product": "agent_capability_platform",
-    "primary_claim": "A desktop platform for orchestrating agents, giving them a real work and development environment, making agents easier to create, and improving them through accumulated task, decision, evidence, validation, and evaluation data.",
+    "primary_claim": "A desktop platform whose core is Agent Core for easy custom agent and subagent creation plus CLI orchestration for continuous Codex, Claude Code, Gemini, OpenCode, and other guest CLI work with deferred decisions and task-run records. Root tools, workspace workbench, learning, and observability support those two core capabilities.",
     "monitoring_role": "supporting_observability",
     "not_primary_claims": [
       "workspace monitoring dashboard",
@@ -273,31 +284,32 @@
       "single external CLI wrapper"
     ],
     "primary_feature_ids": [
-      "agent_orchestration",
-      "agent_work_environment",
-      "agent_development_environment",
       "agent_factory",
-      "learning_improvement_loop"
+      "agent_orchestration"
     ],
     "supporting_feature_ids": [
+      "root_tool_management",
+      "work_visibility",
+      "agent_work_environment",
+      "agent_development_environment",
+      "learning_improvement_loop",
       "observability_monitoring"
     ]
   },
   "desktop_home_surface": {
     "first_view_priority": [
-      "agent_orchestration",
-      "agent_work_environment",
-      "agent_development_environment",
       "agent_factory",
-      "learning_improvement_loop"
+      "agent_orchestration",
+      "root_tool_management",
+      "work_visibility"
     ],
     "supporting_surfaces": [
       "observability_monitoring"
     ],
     "primary_navigation_sections": [
       "overview",
-      "desktop",
       "agents",
+      "desktop",
       "source",
       "intent"
     ],
@@ -308,13 +320,13 @@
       "documents",
       "requirements"
     ],
-    "home_copy_rule": "The first screen should explain what the user can make agents do, create, and improve; observability appears as a support signal, not the headline.",
-    "configuration_rule": "Settings, setup, optional CLI configuration, and editor preferences belong to dedicated settings or capability surfaces rather than the top of the home view."
+    "home_copy_rule": "The first screen shall emphasize Agent Core, CLI orchestration continuity, shared root tools, and at-a-glance work visibility before workbench, learning, or observability details.",
+    "configuration_rule": "Core setup for provider accounts, CLI adapters, root tools, workspace access, and question deferral shall be visible from Home and collected in the execution settings surface."
   },
   "feature_layers": [
     {
       "id": "agent_orchestration",
-      "label": "Agent Orchestration",
+      "label": "CLI Orchestration",
       "role": "primary",
       "status": "implemented_slice",
       "purpose": "Coordinate local/provider model tasks and optional CLI lanes as a supervised task graph with bounded IO, decision routing, merge gates, and cleanup.",
@@ -383,14 +395,14 @@
         "resource guard covers long-running lanes",
         "customer snapshot preserves feature claims without internal source",
         "Agents screen exposes AgentCore-style production blueprint controls",
-        "Applying a production blueprint fills Search Agent Work Chat and Agent Factory inputs",
-        "Creating an AgentCore-style proposal uses the native Agent Factory proposal writer"
+        "Applying a production blueprint fills Search Agent Work Chat and Agent Core inputs",
+        "Creating an AgentCore-style proposal uses the native Agent Core proposal writer"
       ]
     },
     {
       "id": "agent_work_environment",
       "label": "Agent Work Environment",
-      "role": "primary",
+      "role": "supporting",
       "status": "implemented_slice",
       "purpose": "Host app-selected workspaces, runtime data stores, task-run records, decisions, support diagnostics, and agent work planes.",
       "user_outcome": "The user no longer has to manually clone and work from a terminal-first folder; the app owns workspace selection and accumulated data access.",
@@ -430,7 +442,7 @@
     {
       "id": "agent_development_environment",
       "label": "Agent Development Environment",
-      "role": "primary",
+      "role": "supporting",
       "status": "implemented_slice",
       "purpose": "Provide the developer workbench for source review, multi-file edits, diffs, templates, requirements, specs, validation, and runtime contracts.",
       "user_outcome": "The user can shape agent platform behavior inside a desktop workbench instead of bouncing between loose files and terminal-only flows.",
@@ -470,7 +482,7 @@
     },
     {
       "id": "agent_factory",
-      "label": "Agent Factory",
+      "label": "Agent Core",
       "role": "primary",
       "status": "implemented_slice",
       "purpose": "Turn repeated work into prompts, workflows, templates, tools, skills, agents, and finally platform features with traceable decisions.",
@@ -518,14 +530,14 @@
         "candidate has source evidence and rollback plan",
         "skill or agent validation passes",
         "promotion selects the smallest useful asset first",
-        "Agent Factory can be prefilled from a selected production blueprint",
+        "Agent Core can be prefilled from a selected production blueprint",
         "AgentCore Quick Builder can call the native agent proposal writer from the selected blueprint"
       ]
     },
     {
       "id": "learning_improvement_loop",
       "label": "Learning & Evaluation Loop",
-      "role": "primary",
+      "role": "supporting",
       "status": "implemented_slice",
       "purpose": "Accumulate work history, timing, evaluations, web searches, intent maps, evidence, and improvement records so platform behavior gets better over time.",
       "user_outcome": "The user can see why the platform improved, what evidence drove changes, and which gaps remain.",
@@ -562,6 +574,82 @@
         "intent maps show source freshness",
         "evaluations cite validation outcomes",
         "new product work creates request trace and work summary"
+      ]
+    },
+    {
+      "id": "root_tool_management",
+      "label": "Root Tool Management",
+      "role": "supporting",
+      "status": "implemented_slice",
+      "purpose": "Keep shared provider accounts, CLI adapters, workspace files, source tools, and decision-routing defaults outside individual tasks so every custom agent and guest CLI lane can reuse the same root tool base.",
+      "user_outcome": "The user configures root tools once, then task-specific agents, subagents, and CLI lanes can share them without duplicated setup.",
+      "primary_section": "source",
+      "primary_surfaces": [
+        "Root Tools",
+        "Provider Accounts",
+        "CLI Adapter Settings",
+        "Workspace Explorer",
+        "Decision Inbox Defaults"
+      ],
+      "current_assets": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+        "agent-platform/configs/integrations/cli-adapter-registry.json"
+      ],
+      "automation_targets": [
+        "provider credential setup",
+        "CLI adapter selection",
+        "workspace access setup",
+        "root tool sharing across task-specific agents",
+        "question deferral defaults"
+      ],
+      "learning_signals": [
+        "configured provider count",
+        "selected CLI adapter",
+        "workspace file count",
+        "auto-defer setting"
+      ],
+      "validation_gates": [
+        "Home and execution settings expose root tools separately from Agent Core and CLI orchestration",
+        "root tools stay reusable across task-specific agents and guest CLI lanes"
+      ]
+    },
+    {
+      "id": "work_visibility",
+      "label": "Work Visibility",
+      "role": "supporting",
+      "status": "implemented_slice",
+      "purpose": "Show the amount of active work, deferred decisions, task-run records, and available agents at a glance so work is not forgotten while long-running agent or CLI tasks continue.",
+      "user_outcome": "The user can immediately see what is running, what is blocked, what was recorded, and where to resume.",
+      "primary_section": "overview",
+      "primary_surfaces": [
+        "Core Home Workload Strip",
+        "Decision Inbox",
+        "Task Run Store",
+        "Run Status Bar",
+        "Accumulated Data"
+      ],
+      "current_assets": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
+        "_ops/coordination/human-decision-inbox.json"
+      ],
+      "automation_targets": [
+        "active task summarization",
+        "decision inbox count",
+        "task-run record count",
+        "agent count",
+        "resume target surfacing"
+      ],
+      "learning_signals": [
+        "active task count",
+        "blocked task count",
+        "deferred decision count",
+        "task-run record count"
+      ],
+      "validation_gates": [
+        "Home shows current workload before operator documents",
+        "CLI orchestration surface keeps task-run and decision counts visible"
       ]
     },
     {
@@ -636,7 +724,9 @@
     ]
   },
   "quality_signals": [
-    "The first screen names primary agent platform features before observability.",
+    "The first screen names Agent Core and CLI orchestration before root tools, workbench, learning, or observability.",
+    "Root tools are visually separate from task-specific agent creation and CLI orchestration surfaces.",
+    "Current work volume, deferred decisions, task-run records, and agent count are visible at a glance.",
     "Snapshot data includes product feature architecture for developer and customer builds.",
     "Customer snapshot preserves sellable feature structure but removes internal source paths and validation internals.",
     "Readiness tests fail if monitoring is positioned as the primary product.",

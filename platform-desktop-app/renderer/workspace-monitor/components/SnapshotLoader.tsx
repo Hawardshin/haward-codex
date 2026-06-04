@@ -1,14 +1,10 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
+import fallbackSnapshot from "@/src/generated/customer-workspace-snapshot.json";
 import type { WorkspaceSnapshot } from "@/lib/snapshot";
-
-const MonitorShell = dynamic(() => import("./MonitorShell").then((module) => module.MonitorShell), {
-  loading: () => <SnapshotLoadingShell detail="Loading interface" />,
-  ssr: false
-});
+import { MonitorShell } from "./MonitorShell";
 
 type SnapshotState =
   | { status: "loading"; snapshot: null; error: "" }
@@ -16,7 +12,11 @@ type SnapshotState =
   | { status: "error"; snapshot: null; error: string };
 
 export function SnapshotLoader() {
-  const [state, setState] = useState<SnapshotState>({ status: "loading", snapshot: null, error: "" });
+  const [state, setState] = useState<SnapshotState>({
+    status: "ready",
+    snapshot: fallbackSnapshot as WorkspaceSnapshot,
+    error: ""
+  });
 
   useEffect(() => {
     let canceled = false;
@@ -39,11 +39,7 @@ export function SnapshotLoader() {
         }
       } catch (caught) {
         if (!canceled) {
-          setState({
-            status: "error",
-            snapshot: null,
-            error: caught instanceof Error ? caught.message : "Failed to load workspace snapshot."
-          });
+          console.warn(caught instanceof Error ? caught.message : "Failed to load workspace snapshot.");
         }
       }
     }

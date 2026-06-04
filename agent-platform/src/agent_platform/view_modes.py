@@ -36,7 +36,7 @@ REQUIRED_MODE_FIELDS = {
 
 REQUIRED_VISIBILITY_FIELDS = {"foreground", "collapse", "hide_by_default", "guard"}
 REQUIRED_MODE_BOUNDARY_FIELDS = {"view_mode", "install_mode", "work_mode", "rule"}
-REQUIRED_SECTIONS = {"overview", "projects", "history", "documents"}
+USER_REQUIRED_SECTIONS = {"overview", "agents", "desktop", "source", "intent"}
 SUPERADMIN_REQUIRED_SECTIONS = {
     "overview",
     "projects",
@@ -193,7 +193,7 @@ def _check_allowed_sections(
         gaps.append(f"mode {mode_id}: allowed_sections must contain only strings.")
         return
 
-    missing_required = sorted(REQUIRED_SECTIONS - set(sections))
+    missing_required = sorted(USER_REQUIRED_SECTIONS - set(sections))
     if mode_id == "user" and missing_required:
         gaps.append(f"mode {mode_id}: user view must include sections: {', '.join(missing_required)}.")
 

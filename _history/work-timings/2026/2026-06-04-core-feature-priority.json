@@ -1,0 +1,58 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-04-core-feature-priority",
+  "title": "Core feature priority",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked official OpenAI Agents SDK, Claude Code subagent/MCP/hooks, and LangGraph multi-agent references."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Ran memory bootstrap and selected governance work mode."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added bilingual requirements and spec-driven artifacts for core feature priority."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Updated Home UI, product feature panel, CSS, registries, view mode checks, tests, and snapshots."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Renderer/platform checks and tests passed; Browser and Playwright desktop/mobile smoke passed."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and rework",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Evaluation updated with Browser smoke and validation outcomes."
+    }
+  ],
+  "bottleneck_analysis": {
+    "status": "partial_without_measured_durations",
+    "notes": [
+      "Most time went to aligning product contracts, generated snapshots, and readiness tests rather than UI code alone.",
+      "Future improvement: a deterministic product contract migration tool could update registry, fallback, tests, and snapshot expectations together."
+    ]
+  }
+}

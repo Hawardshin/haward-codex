@@ -17,6 +17,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 const defaultRepoRoot = path.resolve(projectRoot, "..", "..", "..");
 const snapshotPath = path.join(projectRoot, "src", "generated", "workspace-snapshot.json");
+const customerFallbackSnapshotPath = path.join(projectRoot, "src", "generated", "customer-workspace-snapshot.json");
 const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.json");
 
 const IGNORE_DIRS = new Set([".git", ".next", "node_modules", "out", "target", "__pycache__", ".pytest_cache", "_private", "outputs"]);
@@ -119,7 +120,9 @@ export function main(argv = process.argv.slice(2)) {
 
   const snapshot = buildSnapshot(repoRoot);
   const publicSnapshot = options.snapshotMode === "customer" ? buildCustomerSnapshot(snapshot) : snapshot;
+  const customerFallbackSnapshot = buildCustomerSnapshot(snapshot);
   writeJson(snapshotPath, snapshot);
+  writeJson(customerFallbackSnapshotPath, customerFallbackSnapshot);
   writeJson(publicSnapshotPath, publicSnapshot);
   console.log(
     `[workspace-monitor] Wrote ${snapshot.documents.length} documents to ${path.relative(repoRoot, snapshotPath)} (${options.snapshotMode} public snapshot)`
@@ -297,7 +300,7 @@ export function buildCustomerSnapshot(snapshot) {
           id: "user",
           label: "User View",
           intent: "Installed customer workbench for running, editing, creating, and improving agents.",
-          allowedSections: ["overview", "desktop", "agents", "source", "intent"],
+          allowedSections: ["overview", "agents", "desktop", "source", "intent"],
           visibilityRules: {},
           securityNotes: ["Platform source tree is excluded from the customer bundle snapshot."]
         }

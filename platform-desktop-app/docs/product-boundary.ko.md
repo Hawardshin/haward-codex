@@ -23,7 +23,7 @@
 
 ## 첫 제품 가정
 
-첫 버전은 새 UI를 따로 만들기보다 `platform-desktop-app/renderer/workspace-monitor/`를 데스크톱 shell의 project-owned renderer로 사용한다. 단, 제품 정체성은 모니터링 대시보드가 아니라 에이전트 역량 플랫폼이다. 첫 화면과 기능 구조는 `platform-desktop-app/configs/product-feature-registry.json`에 정의된 agent orchestration, agent work environment, agent development environment, agent factory, learning/evaluation loop를 primary로 드러내야 한다.
+첫 버전은 새 UI를 따로 만들기보다 `platform-desktop-app/renderer/workspace-monitor/`를 데스크톱 shell의 project-owned renderer로 사용한다. 단, 제품 정체성은 모니터링 대시보드가 아니라 에이전트 역량 플랫폼이다. 첫 화면과 기능 구조는 `platform-desktop-app/configs/product-feature-registry.json`에 정의된 두 핵심 기능, 즉 커스텀 에이전트와 서브에이전트를 쉽게 만드는 Agent Core, 그리고 Claude Code 같은 guest CLI 작업을 decision inbox와 task-run store로 이어가는 CLI orchestration을 primary로 드러내야 한다. 루트 툴 관리, 작업 가시성, workbench, learning/evaluation loop는 이 두 핵심 기능을 가능하게 하는 supporting layer다.
 
 히스토리, 문서, 프로젝트 구조, 평가, source inventory, service readiness 같은 화면은 primary 기능을 신뢰하고 개선하기 위한 supporting observability다. 이 표면들이 제품의 첫 약속이나 중심 네비게이션을 대체하면 안 된다.
 

@@ -1636,7 +1636,9 @@ main {
 .workspace-home-panel,
 .run-timeline-panel,
 .decision-dock-panel,
-.home-metrics-strip {
+.home-metrics-strip,
+.core-setup-panel,
+.root-tool-panel {
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--text);
@@ -1676,7 +1678,7 @@ main {
 }
 
 .workspace-home-actions {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   width: 100%;
   min-width: 0;
 }
@@ -1685,6 +1687,214 @@ main {
   min-height: 42px;
   background: var(--surface-raised);
   font-weight: 800;
+}
+
+.core-home-panel {
+  grid-column: 1 / -1;
+}
+
+.core-home-status-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.core-home-status-row article {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 4px 8px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.core-home-status-row svg {
+  grid-row: span 3;
+  color: var(--green);
+}
+
+.core-home-status-row span,
+.core-home-status-row small,
+.core-setup-list span,
+.core-setup-list p,
+.root-tool-grid small,
+.settings-core-setup-grid span,
+.settings-core-setup-grid p {
+  color: var(--muted);
+}
+
+.core-home-status-row span,
+.core-setup-list span,
+.root-tool-grid span,
+.settings-core-setup-grid span {
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.core-home-status-row strong {
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.core-home-status-row small {
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: 12px;
+}
+
+.core-setup-panel {
+  grid-column: 1;
+}
+
+.root-tool-panel {
+  grid-column: 2;
+}
+
+.core-setup-list {
+  display: grid;
+  gap: 8px;
+}
+
+.core-setup-list article {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.core-setup-list article.ready {
+  border-left: 4px solid var(--green);
+}
+
+.core-setup-list article.pending {
+  border-left: 4px solid var(--amber);
+}
+
+.core-setup-list svg,
+.settings-core-setup-grid svg {
+  color: var(--green);
+}
+
+.core-setup-list div {
+  min-width: 0;
+}
+
+.core-setup-list strong,
+.settings-core-setup-grid strong {
+  display: block;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.core-setup-list p,
+.settings-core-setup-grid p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  line-height: 1.42;
+  overflow-wrap: break-word;
+}
+
+.core-setup-list button {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 7px 9px;
+  font-size: 12px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.root-tool-grid,
+.settings-core-setup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.root-tool-grid button,
+.settings-core-setup-grid article {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  gap: 4px 8px;
+  min-width: 0;
+  align-items: start;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: left;
+}
+
+.root-tool-grid button svg,
+.settings-core-setup-grid article svg {
+  grid-row: span 3;
+  color: var(--blue);
+}
+
+.root-tool-grid strong {
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: 13px;
+}
+
+.root-tool-grid small {
+  grid-column: 2 / -1;
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.root-tool-grid.compact {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.root-tool-grid.compact button {
+  grid-template-columns: 20px minmax(0, 1fr);
+}
+
+.root-tool-grid.compact strong,
+.root-tool-grid.compact small {
+  grid-column: 2;
+}
+
+.settings-core-setup-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.settings-core-setup-grid article {
+  grid-template-columns: 20px minmax(0, 1fr);
+}
+
+.settings-core-setup-grid article.ready {
+  border-color: #9cc9b6;
+}
+
+.settings-core-setup-grid article.pending {
+  border-color: #dcc27f;
+}
+
+.settings-core-setup-grid strong,
+.settings-core-setup-grid p {
+  grid-column: 2;
 }
 
 .run-timeline-panel,
@@ -10445,6 +10655,8 @@ h3 {
 
   .decision-dock-panel,
   .capability-dock-panel,
+  .core-setup-panel,
+  .root-tool-panel,
   .run-timeline-panel,
   .home-recent-panel {
     grid-column: 1;
@@ -10475,6 +10687,10 @@ h3 {
   }
 
   .app-control-bar,
+  .core-home-status-row,
+  .root-tool-grid,
+  .root-tool-grid.compact,
+  .settings-core-setup-grid,
   .core-feature-rail,
   .section-tab-groups,
   .metrics-band,
@@ -10624,6 +10840,10 @@ h3 {
   .adapter-grid,
   .terminal-report-list,
   .desktop-health-strip,
+  .core-home-status-row,
+  .root-tool-grid,
+  .root-tool-grid.compact,
+  .settings-core-setup-grid,
   .decision-resume-strip,
   .decision-replay-strip,
   .terminal-event-rail article,
@@ -10834,6 +11054,10 @@ h3 {
   }
 
   .workspace-home-actions,
+  .core-home-status-row,
+  .root-tool-grid,
+  .root-tool-grid.compact,
+  .settings-core-setup-grid,
   .search-agent-run-form,
   .agent-chat-actions,
   .agent-chat-context-form,
@@ -10884,6 +11108,7 @@ h3 {
 
   .app-control-bar,
   .core-feature-rail,
+  .core-setup-list article,
   .section-tab-groups,
   .metrics-band,
   .history-summary-band,

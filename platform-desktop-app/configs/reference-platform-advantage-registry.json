@@ -19,7 +19,7 @@
       "A source becomes unavailable, clone-disabled, license-unclear, or contradicted by a stronger source.",
       "Customer snapshot or product navigation changes rely on this reference map."
     ],
-    "product_rule": "모니터링은 운영자 보조면이고, 사용자가 팔 수 있는 가치로 보는 첫 화면은 에이전트 오케스트레이션, 작업 환경, 개발 환경, 에이전트 생성, 학습 개선 루프다."
+    "product_rule": "모니터링은 운영자 보조면이고, 사용자가 팔 수 있는 가치로 보는 첫 화면은 에이전트 코어와 CLI 오케스트레이션 두 핵심 기능, 그리고 이를 가능하게 하는 루트 툴 설정과 작업 가시성이다."
   },
   "source_boundary": {
     "policy": "public_sources_only",
@@ -127,7 +127,7 @@
       "last_checked": "2026-06-03",
       "reliability": "high",
       "limitation": "Subagent details are Claude-specific.",
-      "plan_impact": "Agent Factory must create specialized workers with separate context, explicit tools, permissions, memory, and resume behavior."
+      "plan_impact": "Agent Core must create specialized workers with separate context, explicit tools, permissions, memory, and resume behavior."
     },
     {
       "id": "claude_code_hooks",
@@ -413,7 +413,7 @@
       "last_checked": "2026-06-04",
       "reliability": "high",
       "limitation": "Skill discovery and metadata should be platform-neutral and should not assume only Codex can run reusable workflows.",
-      "plan_impact": "Use progressive disclosure, explicit invocation, repository/user/admin/system scopes, plugin packaging, UI metadata, and dependency declarations for Agent Factory and capability promotion."
+      "plan_impact": "Use progressive disclosure, explicit invocation, repository/user/admin/system scopes, plugin packaging, UI metadata, and dependency declarations for Agent Core and capability promotion."
     },
     {
       "id": "claude_desktop_local_mcp_extensions",
@@ -800,7 +800,7 @@
         "Cline"
       ],
       "observed_strength": "Users understand configuration better when durable rules, auto memory, manual workflows, reusable skills, and agent definitions are not mixed together.",
-      "platform_decision": "The Settings and Agent Factory surfaces must make this taxonomy explicit and save each asset into the correct durable path.",
+      "platform_decision": "The Settings and Agent Core surfaces must make this taxonomy explicit and save each asset into the correct durable path.",
       "product_section": "agents",
       "user_value_ko": "사용자는 뭘 설정해야 하는지 몰라 헤매지 않고, 반복 작업을 올바른 자산으로 승격한다.",
       "current_platform_assets": [
@@ -997,7 +997,7 @@
         "GitHub Copilot custom agents"
       ],
       "observed_strength": "Specialized agents work better when they have narrow prompts, scoped tools, separate context, and clear delegation rules.",
-      "platform_decision": "Agent Factory creates named agents, subagents, skills, tools, prompts, validation gates, and promotion records from repeated human work.",
+      "platform_decision": "Agent Core creates named agents, subagents, skills, tools, prompts, validation gates, and promotion records from repeated human work.",
       "product_section": "agents",
       "user_value_ko": "사용자는 같은 지시를 반복하지 않고 목적별 에이전트를 쉽게 만들고 개선한다.",
       "current_platform_assets": [
@@ -1291,7 +1291,7 @@
       ],
       "priority": "p0_user_requested_reference",
       "status": "implemented_slice",
-      "product_translation": "The Agents screen exposes production blueprints for locally executed Python agents with runtime, memory, gateway/tool, and evaluation-guarded capabilities; applying a blueprint fills the Search Agent Work Chat and Agent Factory inputs, and AgentCore Quick Builder can create a native Agent Factory proposal instead of leaving the reference as documentation.",
+      "product_translation": "The Agents screen exposes production blueprints for locally executed Python agents with runtime, memory, gateway/tool, and evaluation-guarded capabilities; applying a blueprint fills the Search Agent Work Chat and Agent Core inputs, and AgentCore Quick Builder can create a native Agent Core proposal instead of leaving the reference as documentation.",
       "implementation_targets": [
         "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
         "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
@@ -1303,7 +1303,7 @@
         "Lambda or other cloud functions may be remote tool connectors but are not the agent execution host",
         "No AgentCore sample source code is copied into the shipped app",
         "The desktop runtime owns local Python execution, task state, records, and UI authority",
-        "Agent proposal records are written through the app-owned native Agent Factory command",
+        "Agent proposal records are written through the app-owned native Agent Core command",
         "Provider direct-run and task-run persistence remain the first execution path"
       ],
       "validation": [

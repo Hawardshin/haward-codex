@@ -23,7 +23,7 @@
 
 ## First Product Assumption
 
-The first version should use `platform-desktop-app/renderer/workspace-monitor/` as the desktop shell's project-owned renderer instead of creating a separate UI. However, the product identity is an agent capability platform, not a monitoring dashboard. The first screen and feature structure shall surface agent orchestration, the agent work environment, the agent development environment, the agent factory, and the learning/evaluation loop as primary features according to `platform-desktop-app/configs/product-feature-registry.json`.
+The first version should use `platform-desktop-app/renderer/workspace-monitor/` as the desktop shell's project-owned renderer instead of creating a separate UI. However, the product identity is an agent capability platform, not a monitoring dashboard. The first screen and feature structure shall foreground the two primary capabilities defined in `platform-desktop-app/configs/product-feature-registry.json`: Agent Core for easy custom agent and subagent creation, and CLI orchestration for continuous Claude Code-style guest CLI work through the decision inbox and task-run store. Root tool management, work visibility, the workbench, and the learning/evaluation loop are supporting layers for those two core capabilities.
 
 History, documents, project structure, evaluations, source inventory, and service readiness are supporting observability surfaces for trusting and improving the primary features. They must not replace the product's first promise or central navigation.
 

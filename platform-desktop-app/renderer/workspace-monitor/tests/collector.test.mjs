@@ -211,9 +211,9 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.stats.structurePressurePoints, snapshot.structureOverview.summary.totalPressurePoints);
   assert.equal(snapshot.productFeatureArchitecture.productPosition.primaryProduct, "agent_capability_platform");
   assert.equal(snapshot.productFeatureArchitecture.productPosition.monitoringRole, "supporting_observability");
-  assert.equal(snapshot.stats.productFeatures, 6);
-  assert.equal(snapshot.stats.primaryProductFeatures, 5);
-  assert.equal(snapshot.stats.supportingProductFeatures, 1);
+  assert.equal(snapshot.stats.productFeatures, 8);
+  assert.equal(snapshot.stats.primaryProductFeatures, 2);
+  assert.equal(snapshot.stats.supportingProductFeatures, 6);
   assert.equal(snapshot.documents.some((document) => document.language === "ko"), true);
 });
 
@@ -301,7 +301,7 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       featureLayers: [
         {
           id: "agent_orchestration",
-          label: "Agent Orchestration",
+          label: "CLI Orchestration",
           role: "primary",
           status: "implemented",
           purpose: "Run lanes",
@@ -360,7 +360,7 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.intentFeatureMap.themes.length, 0);
   assert.equal(customer.intentFeatureMap.roadmap.now.length, 0);
   assert.equal(customer.productFeatureArchitecture.featureLayers.length, 2);
-  assert.equal(customer.productFeatureArchitecture.featureLayers[0].label, "Agent Orchestration");
+  assert.equal(customer.productFeatureArchitecture.featureLayers[0].label, "CLI Orchestration");
   assert.equal(customer.productFeatureArchitecture.featureLayers[0].currentAssets.length, 0);
   assert.equal(customer.productFeatureArchitecture.featureLayers[0].validationGates.length, 0);
   assert.equal(customer.productFeatureArchitecture.promotionLoop.recordTargets.length, 0);
@@ -369,7 +369,7 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.projects.length, 0);
   assert.equal(customer.publicReview.status, "customer_snapshot_sanitized");
   assert.equal(customer.viewModeCatalog.defaultMode, "user");
-  assert.deepEqual(customer.viewModeCatalog.modes[0].allowedSections, ["overview", "desktop", "agents", "source", "intent"]);
+  assert.deepEqual(customer.viewModeCatalog.modes[0].allowedSections, ["overview", "agents", "desktop", "source", "intent"]);
 });
 
 test("collectProductFeatureArchitecture reads primary features and supporting observability", () => {
@@ -392,7 +392,7 @@ test("collectProductFeatureArchitecture reads primary features and supporting ob
       feature_layers: [
         {
           id: "agent_orchestration",
-          label: "Agent Orchestration",
+          label: "CLI Orchestration",
           role: "primary",
           status: "implemented",
           purpose: "Coordinate agents",
@@ -437,7 +437,7 @@ test("collectProductFeatureArchitecture reads primary features and supporting ob
   assert.equal(architecture.summary.totalFeatures, 2);
   assert.equal(architecture.summary.primaryFeatures, 1);
   assert.equal(architecture.summary.supportingFeatures, 1);
-  assert.equal(architecture.featureLayers[0].label, "Agent Orchestration");
+  assert.equal(architecture.featureLayers[0].label, "CLI Orchestration");
   assert.equal(architecture.featureLayers[1].role, "supporting");
   assert.equal(architecture.promotionLoop.assetOrder[2], "tool");
 });

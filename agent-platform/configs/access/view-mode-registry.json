@@ -166,11 +166,11 @@
       ],
       "visibility_rules": {
         "foreground": [
-          "agent orchestration",
+          "agent core",
+          "CLI orchestration continuity",
+          "root tool setup",
+          "work visibility",
           "desktop runtime status",
-          "agent factory",
-          "source workbench",
-          "learning map",
           "decision inbox"
         ],
         "collapse": [
@@ -197,8 +197,8 @@
       },
       "allowed_sections": [
         "overview",
-        "desktop",
         "agents",
+        "desktop",
         "source",
         "intent"
       ],

@@ -53,6 +53,8 @@ const featureIcons = {
   agent_development_environment: Code2,
   agent_factory: Bot,
   learning_improvement_loop: BrainCircuit,
+  root_tool_management: Code2,
+  work_visibility: Eye,
   observability_monitoring: Eye
 };
 
@@ -74,16 +76,16 @@ export function ProductFeatureArchitecturePanel({
       <div className="product-feature-summary">
         <div className="product-feature-position">
           <p className="eyebrow">Agent Capability Platform</p>
-          <h2>Agent Orchestration, Workbench, Factory, Learning & Evaluation Loop</h2>
+          <h2>Agent Core and CLI Orchestration</h2>
           <p>{architecture.productPosition.productClaim}</p>
           <div className="product-feature-actions">
             <button type="button" onClick={() => onOpenSection("desktop")}>
               <Network size={15} aria-hidden="true" />
-              <span>Open Orchestration</span>
+              <span>Open CLI Orchestration</span>
             </button>
             <button type="button" onClick={() => onOpenSection("agents")}>
               <Bot size={15} aria-hidden="true" />
-              <span>Open Agent Factory</span>
+              <span>Open Agent Core</span>
             </button>
           </div>
         </div>

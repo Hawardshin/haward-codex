@@ -7,7 +7,7 @@ export function emptyProductFeatureArchitecture() {
   const featureLayers = [
     {
       id: "agent_orchestration",
-      label: "Agent Orchestration",
+      label: "CLI Orchestration",
       role: "primary",
       status: "fallback",
       purpose: "Coordinate agents and optional CLI lanes as supervised work.",
@@ -22,7 +22,7 @@ export function emptyProductFeatureArchitecture() {
     {
       id: "agent_work_environment",
       label: "Agent Work Environment",
-      role: "primary",
+      role: "supporting",
       status: "fallback",
       purpose: "Host selected workspaces, runtime data, decisions, task runs, and support diagnostics.",
       userOutcome: "Use an app-owned workspace and accumulated data plane instead of a terminal-first clone.",
@@ -36,7 +36,7 @@ export function emptyProductFeatureArchitecture() {
     {
       id: "agent_development_environment",
       label: "Agent Development Environment",
-      role: "primary",
+      role: "supporting",
       status: "fallback",
       purpose: "Provide a workbench for source, diffs, templates, requirements, specs, and validation.",
       userOutcome: "Shape agent platform behavior inside one development workbench.",
@@ -49,7 +49,7 @@ export function emptyProductFeatureArchitecture() {
     },
     {
       id: "agent_factory",
-      label: "Agent Factory",
+      label: "Agent Core",
       role: "primary",
       status: "fallback",
       purpose: "Promote repeated work into prompts, workflows, templates, tools, skills, agents, and features.",
@@ -64,7 +64,7 @@ export function emptyProductFeatureArchitecture() {
     {
       id: "learning_improvement_loop",
       label: "Learning & Evaluation Loop",
-      role: "primary",
+      role: "supporting",
       status: "fallback",
       purpose: "Accumulate requests, evidence, timings, evaluations, and intent maps into improvement loops.",
       userOutcome: "See why the platform improved and what should improve next.",
@@ -73,6 +73,34 @@ export function emptyProductFeatureArchitecture() {
       currentAssets: [],
       automationTargets: ["intent structuring", "evaluation capture", "bottleneck detection"],
       learningSignals: ["intent themes", "evaluation pass rate", "timing bottlenecks"],
+      validationGates: []
+    },
+    {
+      id: "root_tool_management",
+      label: "Root Tool Management",
+      role: "supporting",
+      status: "fallback",
+      purpose: "Keep shared provider accounts, CLI adapters, workspace files, source tools, and decision defaults outside individual tasks.",
+      userOutcome: "Configure root tools once so custom agents and guest CLI lanes can reuse the same base.",
+      primarySection: "source",
+      primarySurfaces: ["Root Tools", "Provider Accounts", "CLI Adapter Settings", "Workspace Explorer"],
+      currentAssets: [],
+      automationTargets: ["provider setup", "CLI adapter selection", "workspace access setup", "tool sharing"],
+      learningSignals: ["configured provider count", "selected CLI adapter", "workspace file count"],
+      validationGates: []
+    },
+    {
+      id: "work_visibility",
+      label: "Work Visibility",
+      role: "supporting",
+      status: "fallback",
+      purpose: "Show active work, deferred decisions, task-run records, and available agents at a glance.",
+      userOutcome: "Immediately see what is running, blocked, recorded, and ready to resume.",
+      primarySection: "overview",
+      primarySurfaces: ["Core Home Workload Strip", "Decision Inbox", "Task Run Store", "Run Status Bar"],
+      currentAssets: [],
+      automationTargets: ["active task summarization", "decision count", "task-run count", "agent count"],
+      learningSignals: ["active task count", "blocked task count", "deferred decision count"],
       validationGates: []
     },
     {
@@ -95,14 +123,14 @@ export function emptyProductFeatureArchitecture() {
     productPosition: {
       primaryProduct: "agent_capability_platform",
       productClaim:
-        "Agent orchestration, work environment, development environment, factory, and learning loop are primary. Monitoring is supporting observability.",
+        "Agent Core makes custom agents easy to create, and CLI orchestration keeps long-running guest CLI work continuous through deferred decisions and task-run records. Root tools, workbench, learning, and observability support those two core capabilities.",
       monitoringRole: "supporting_observability"
     },
     desktopHomeSurface: {
-      firstViewPriority: featureLayers.filter((feature) => feature.role === "primary").map((feature) => feature.id),
+      firstViewPriority: ["agent_factory", "agent_orchestration", "root_tool_management", "work_visibility"],
       supportingSurfaces: ["observability_monitoring"],
-      homeCopyRule: "Show what agents can do, create, and improve before monitoring details.",
-      configurationRule: "Move setup and configuration into dedicated settings or capability surfaces."
+      homeCopyRule: "Show Agent Core, CLI orchestration continuity, root tool setup, and current workload before monitoring details.",
+      configurationRule: "Expose core setup for accounts, CLI adapters, root tools, and question deferral in dedicated settings."
     },
     featureLayers,
     promotionLoop: {
@@ -112,7 +140,9 @@ export function emptyProductFeatureArchitecture() {
       assetOrder: ["prompt", "workflow", "template", "tool", "skill", "agent", "project_feature"]
     },
     qualitySignals: [
-      "The first screen names primary agent platform features before observability.",
+      "The first screen names Agent Core and CLI orchestration before root tools, workbench, learning, or observability.",
+      "Root tools are visually separate from task-specific agent creation and CLI orchestration surfaces.",
+      "Current work volume, deferred decisions, task-run records, and agent count are visible at a glance.",
       "Readiness tests fail if monitoring becomes the primary product."
     ],
     validationGates: []

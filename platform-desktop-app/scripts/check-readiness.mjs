@@ -323,9 +323,11 @@ if (productFeatureRegistry.product_position?.monitoring_role !== "supporting_obs
 }
 for (const requiredFeatureId of [
   "agent_orchestration",
+  "agent_factory",
+  "root_tool_management",
+  "work_visibility",
   "agent_work_environment",
   "agent_development_environment",
-  "agent_factory",
   "learning_improvement_loop",
   "observability_monitoring"
 ]) {
@@ -343,15 +345,30 @@ const observabilityFeature = productFeatureRegistry.feature_layers?.find((item) 
 if (observabilityFeature?.role !== "supporting") {
   failures.push("observability_monitoring must be a supporting feature");
 }
+for (const requiredSupportingId of [
+  "root_tool_management",
+  "work_visibility",
+  "agent_work_environment",
+  "agent_development_environment",
+  "learning_improvement_loop"
+]) {
+  const feature = productFeatureRegistry.feature_layers?.find((item) => item.id === requiredSupportingId);
+  if (feature?.role !== "supporting") {
+    failures.push(`product feature ${requiredSupportingId} must be supporting`);
+  }
+}
 if (!productFeatureSerialized.includes("operator_surfaces_are_separate")) {
   failures.push("product-feature-registry must require operator surfaces to stay separate");
+}
+if (!productFeatureSerialized.includes("two_core_features_are_first")) {
+  failures.push("product-feature-registry must keep the two core features first");
 }
 for (const requiredPhrase of ["awslabs_agentcore_samples", "Production Agent Blueprints", "agentcore_blueprint_gate"]) {
   if (!productFeatureSerialized.includes(requiredPhrase)) {
     failures.push(`product-feature-registry must include AgentCore production blueprint token ${requiredPhrase}`);
   }
 }
-const expectedPrimaryNavigationSections = ["overview", "desktop", "agents", "source", "intent"];
+const expectedPrimaryNavigationSections = ["overview", "agents", "desktop", "source", "intent"];
 const expectedOperatorCenterSections = ["projects", "history", "structure", "documents", "requirements"];
 if (JSON.stringify(productFeatureRegistry.desktop_home_surface?.primary_navigation_sections) !== JSON.stringify(expectedPrimaryNavigationSections)) {
   failures.push("product-feature-registry desktop_home_surface must keep work-first primary navigation sections");
@@ -436,10 +453,10 @@ if (ptyGap?.status !== "closed_by_product_decision") {
 }
 const agentFeatureCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === "UR-2026-06-03-035");
 if (agentFeatureCoverage?.coverage !== "covered") {
-  failures.push("UR-2026-06-03-035 coverage must be covered after Agent Factory and learning loop implementation");
+  failures.push("UR-2026-06-03-035 coverage must be covered after Agent Core and learning loop implementation");
 }
 if (agentFeatureCoverage?.remaining_gap_ids?.includes("agent_factory_creation_wizard")) {
-  failures.push("UR-2026-06-03-035 coverage must not keep the Agent Factory creation wizard gap after implementation");
+  failures.push("UR-2026-06-03-035 coverage must not keep the Agent Core creation wizard gap after implementation");
 }
 if (agentFeatureCoverage?.remaining_gap_ids?.includes("learning_feedback_automation_loop")) {
   failures.push("UR-2026-06-03-035 coverage must not keep the learning feedback automation gap after implementation");
@@ -811,10 +828,10 @@ for (const requiredPhrase of [
   "바로 쓰기",
   "핵심 기능",
   "먼저 무엇을 할지 고르세요",
-  "파일 가져오기",
-  "에이전트 만들기",
-  "작업 실행",
-  "학습/개선",
+  "에이전트 코어",
+  "CLI 오케스트레이션",
+  "루트 툴",
+  "작업 가시성",
   "main-workbench-panel",
   "main-feature-tabs",
   "main-feature-detail",
@@ -994,8 +1011,8 @@ for (const requiredPhrase of [
   "Claude Code Design Transfer",
   "Public sources only",
   "transfer-pattern-grid",
-  "Work Console",
-  "Files and Code",
+  "핵심 기능",
+  "루트 툴",
   "Operator Center",
   "operatorSectionIds",
   "Open Operator Center"
@@ -1066,9 +1083,10 @@ if (/\.desktop-app-root button > span[\s\S]*?{[^}]*overflow-wrap:\s*anywhere/s.t
 }
 for (const requiredPhrase of [
   "ProductFeatureArchitecturePanel",
-  "Agent Orchestration",
-  "Agent Factory",
-  "Learning & Evaluation Loop",
+  "CLI Orchestration",
+  "Agent Core",
+  "Open CLI Orchestration",
+  "Open Agent Core",
   "Observability is support",
   "Agent Capability Platform",
   "Operator tools are separate",

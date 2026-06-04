@@ -173,7 +173,7 @@
     "source_inventory_method": [
       "rg --files with local-only and generated output exclusions",
       "Targeted review of _history/user-requests, _history/request-traces, platform-desktop-app/specs, platform-desktop-app/configs, readiness tests, and representative runtime/UI source files",
-      "Search for deferred, remaining, Agent Factory, learning loop, PTY, Monaco, workspace host, and release gate terms"
+      "Search for deferred, remaining, Agent Core, learning loop, PTY, Monaco, workspace host, and release gate terms"
     ]
   },
   "coverage_summary": {
@@ -185,7 +185,7 @@
     "test_gap_count": 0,
     "external_blocker_count": 1,
     "current_product_readiness": "internal_product_slices_validated_with_native_git_clipboard_and_pty_decision_closed",
-    "headline": "The desktop shell, source workbench, installer runtime contract, data accumulation, workspace host, Native Git Workbench, folder restructure, feature registry, operator separation, Agent Factory proposal wizard, learning feedback decision loop, deterministic clipboard QA, and PTY terminal product decision are implemented internal product slices. Remaining gaps are MonitorShell componentization structural debt and external public distribution gates."
+    "headline": "The desktop shell, source workbench, installer runtime contract, data accumulation, workspace host, Native Git Workbench, folder restructure, feature registry, operator separation, Agent Core proposal wizard, learning feedback decision loop, deterministic clipboard QA, and PTY terminal product decision are implemented internal product slices. Remaining gaps are MonitorShell componentization structural debt and external public distribution gates."
   },
   "request_coverage": [
     {
@@ -342,14 +342,14 @@
       "request_id": "UR-2026-06-03-036",
       "coverage": "partial",
       "covered_evidence": [
-        "Default navigation foregrounds overview, desktop, agents, source, and intent",
+        "Default navigation foregrounds overview, agents, desktop, source, and intent",
         "Projects, history, structure, documents, and requirements moved to Operator Center",
-        "Agent Factory wizard is now part of the primary Agents surface"
+        "Agent Core wizard is now part of the primary Agents surface"
       ],
       "remaining_gap_ids": [
         "componentized_desktop_ui_architecture"
       ],
-      "notes": "The operator split and primary Agent Factory product flow are implemented. The remaining concern is structural: MonitorShell still needs component ownership split for long-term maintainability."
+      "notes": "The operator split and primary Agent Core product flow are implemented. The remaining concern is structural: MonitorShell still needs component ownership split for long-term maintainability."
     }
   ],
   "gap_items": [
@@ -365,7 +365,7 @@
       "why_it_matters": "The user asked for easy agent creation and automatic agent generation as a primary product capability. The Agents surface now guides a user through creating a bounded proposal before promotion into durable agent assets.",
       "current_evidence": [
         "platform-desktop-app/configs/product-feature-registry.json includes agent_factory as a primary layer",
-        "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx includes Agent Factory cards",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx includes Agent Core cards",
         "agent-platform/configs/orchestration/capability-promotion-registry.json exists as a backend/config foundation",
         "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx includes AgentFactoryWizard and create_agent_factory_proposal invocation",
         "platform-desktop-app/src-tauri/src/lib.rs implements create_agent_factory_proposal and writes app_data/runtime-data/agent-factory/proposals records",
@@ -373,7 +373,7 @@
         "Readiness tests verify the wizard UI, command surface, and accumulated data store tokens"
       ],
       "acceptance_to_close": [
-        "Desktop Agent Factory view creates or drafts an agent from goal, role, tools, guardrails, validation, and output contract inputs.",
+        "Desktop Agent Core view creates or drafts an agent from goal, role, tools, guardrails, validation, and output contract inputs.",
         "Wizard writes a bounded agent proposal into the app-data runtime store with target project path, traceability, and rollback metadata.",
         "Readiness/test verifies the wizard route, generated schema fields, validation command, and customer-safe UI behavior.",
         "Request trace for UR-2026-06-03-035 marks this gap closed with verification evidence."

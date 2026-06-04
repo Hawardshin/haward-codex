@@ -535,7 +535,7 @@ function appendSourceTemplate(content: string, templateBody: string) {
 }
 
 const DESKTOP_PREFERENCES_SCHEMA_VERSION = "desktop-preferences.v1";
-const defaultPinnedSections: SectionId[] = ["overview", "desktop", "agents", "source", "intent"];
+const defaultPinnedSections: SectionId[] = ["overview", "agents", "desktop", "source", "intent"];
 const operatorSectionIds = new Set<SectionId>(["projects", "history", "structure", "documents", "requirements"]);
 
 const featureGroups: Array<{
@@ -547,89 +547,89 @@ const featureGroups: Array<{
 }> = [
   {
     id: "core",
-    label: "작업 콘솔",
-    labelEn: "Work Console",
-    purpose: "작업 시작, 실행, 결정",
-    purposeEn: "Start work, run agents, and handle decisions."
+    label: "핵심 기능",
+    labelEn: "Core Features",
+    purpose: "에이전트 코어와 CLI 작업 연속성",
+    purposeEn: "Agent Core and CLI work continuity."
   },
   {
     id: "workspace",
-    label: "파일과 코드",
-    labelEn: "Files and Code",
-    purpose: "작업공간 파일 보기와 코드 편집",
-    purposeEn: "Browse workspace files and edit code."
+    label: "루트 툴",
+    labelEn: "Root Tools",
+    purpose: "모든 에이전트와 CLI가 공유하는 도구, 계정, 파일",
+    purposeEn: "Shared tools, accounts, and files for every agent and CLI lane."
   },
   {
     id: "knowledge",
-    label: "에이전트 성장",
-    labelEn: "Agent Growth",
-    purpose: "에이전트 생성과 학습",
-    purposeEn: "Create agents and improve them from evidence."
+    label: "개선 루프",
+    labelEn: "Improvement Loop",
+    purpose: "반복 작업을 다음 자동화 후보로 바꿉니다.",
+    purposeEn: "Turn repeated work into the next automation candidate."
   },
   {
     id: "governance",
-    label: "운영 도구",
-    labelEn: "Operator Tools",
-    purpose: "모니터링, 문서, 배포 점검",
-    purposeEn: "Monitoring, documents, and release readiness."
+    label: "운영 보조",
+    labelEn: "Operator Support",
+    purpose: "문서, 히스토리, 요구사항, 배포 점검",
+    purposeEn: "Documents, history, requirements, and release readiness."
   }
 ];
 
 const sections: Section[] = [
   {
     id: "overview",
-    label: "홈",
-    labelEn: "Platform",
+    label: "핵심 홈",
+    labelEn: "Core Home",
     shortLabel: "홈",
-    shortLabelEn: "Platform",
+    shortLabelEn: "Home",
     icon: Activity,
     group: "core",
-    purpose: "지금 할 일과 제품 기능 구조를 봅니다.",
-    purposeEn: "See what to do now and how the product is structured."
-  },
-  {
-    id: "desktop",
-    label: "작업 실행",
-    labelEn: "Orchestration",
-    shortLabel: "실행",
-    shortLabelEn: "Run",
-    icon: Network,
-    group: "core",
-    purpose: "에이전트와 선택형 CLI lane을 조율합니다.",
-    purposeEn: "Coordinate agents and optional CLI lanes."
+    purpose: "핵심 2가지, 설정 상태, 현재 작업량을 한눈에 봅니다.",
+    purposeEn: "See the two core capabilities, setup state, and current workload at a glance."
   },
   {
     id: "agents",
-    label: "에이전트 만들기",
-    labelEn: "Agent Factory",
-    shortLabel: "생성",
-    shortLabelEn: "Factory",
+    label: "에이전트 코어",
+    labelEn: "Agent Core",
+    shortLabel: "에이전트",
+    shortLabelEn: "Agent",
     icon: Bot,
-    group: "knowledge",
-    purpose: "에이전트, 기능 후보, 작업 lane, handoff를 관리합니다.",
-    purposeEn: "Manage agents, capability candidates, lanes, and handoffs."
+    group: "core",
+    purpose: "커스텀 에이전트, 서브에이전트, 작업별 공유 구성을 쉽게 만듭니다.",
+    purposeEn: "Create custom agents, subagents, and per-task shared configurations easily."
+  },
+  {
+    id: "desktop",
+    label: "CLI 오케스트레이션",
+    labelEn: "CLI Orchestration",
+    shortLabel: "CLI",
+    shortLabelEn: "CLI",
+    icon: Network,
+    group: "core",
+    purpose: "Claude Code 같은 guest CLI lane, 결정 보류, 연속 실행을 조율합니다.",
+    purposeEn: "Coordinate guest CLI lanes, deferred decisions, and continuous runs."
   },
   {
     id: "source",
-    label: "파일/코드",
-    labelEn: "Files / Code",
-    shortLabel: "파일",
-    shortLabelEn: "Files",
+    label: "루트 툴/파일",
+    labelEn: "Root Tools / Files",
+    shortLabel: "툴",
+    shortLabelEn: "Tools",
     icon: Code2,
     group: "workspace",
-    purpose: "작업공간 폴더를 고르고 파일을 열어 편집합니다.",
-    purposeEn: "Choose a workspace folder, open files, and edit code."
+    purpose: "모든 에이전트와 CLI가 함께 쓰는 루트 도구, 파일, 소스 작업면입니다.",
+    purposeEn: "Shared root tools, files, and source workspace used by agents and CLI lanes."
   },
   {
     id: "intent",
-    label: "학습/개선",
-    labelEn: "Learning Map",
-    shortLabel: "학습",
-    shortLabelEn: "Learn",
+    label: "개선 루프",
+    labelEn: "Improvement Loop",
+    shortLabel: "개선",
+    shortLabelEn: "Improve",
     icon: GitBranch,
     group: "knowledge",
-    purpose: "사용자 의도에서 기능 후보와 개선 루프를 뽑습니다.",
-    purposeEn: "Extract feature candidates and improvement loops from user intent."
+    purpose: "누적된 실행, 평가, 의도 기록에서 다음 자동화 후보를 뽑습니다.",
+    purposeEn: "Extract the next automation candidates from accumulated runs, evaluations, and intent records."
   },
   {
     id: "projects",
@@ -728,7 +728,7 @@ const fallbackViewModes: MonitorViewMode[] = [
     id: "user",
     label: "User View",
     intent: "Work-first desktop view for running, editing, creating, and improving agents.",
-    allowedSections: ["overview", "desktop", "agents", "source", "intent"],
+    allowedSections: ["overview", "agents", "desktop", "source", "intent"],
     visibilityRules: {},
     securityNotes: []
   },
@@ -1019,31 +1019,30 @@ const emptyProductFeatureArchitecture: ProductFeatureArchitecture = {
   productPosition: {
     primaryProduct: "agent_capability_platform",
     productClaim:
-      "Agent orchestration, work environment, development environment, factory, and learning loop are primary. Monitoring is supporting observability.",
+      "Agent Core makes custom agents easy to create, and CLI orchestration keeps long-running guest CLI work continuous through deferred decisions and task-run records. Root tools, workbench, learning, and observability support those two core capabilities.",
     monitoringRole: "supporting_observability"
   },
   desktopHomeSurface: {
     firstViewPriority: [
-      "agent_orchestration",
-      "agent_work_environment",
-      "agent_development_environment",
       "agent_factory",
-      "learning_improvement_loop"
+      "agent_orchestration",
+      "root_tool_management",
+      "work_visibility"
     ],
     supportingSurfaces: ["observability_monitoring"],
-    homeCopyRule: "Show what agents can do, create, and improve before monitoring details.",
-    configurationRule: "Move setup and configuration into dedicated settings or capability surfaces."
+    homeCopyRule: "Show Agent Core, CLI orchestration continuity, root tool setup, and current workload before monitoring details.",
+    configurationRule: "Expose core setup for accounts, CLI adapters, root tools, and question deferral in dedicated settings."
   },
   summary: {
-    totalFeatures: 6,
-    primaryFeatures: 5,
-    supportingFeatures: 1,
+    totalFeatures: 8,
+    primaryFeatures: 2,
+    supportingFeatures: 6,
     automationLoops: 1
   },
   featureLayers: [
     {
       id: "agent_orchestration",
-      label: "Agent Orchestration",
+      label: "CLI Orchestration",
       role: "primary",
       status: "fallback",
       purpose: "Coordinate agents and optional CLI lanes as supervised work.",
@@ -1058,7 +1057,7 @@ const emptyProductFeatureArchitecture: ProductFeatureArchitecture = {
     {
       id: "agent_work_environment",
       label: "Agent Work Environment",
-      role: "primary",
+      role: "supporting",
       status: "fallback",
       purpose: "Host selected workspaces, runtime data, decisions, task runs, and support diagnostics.",
       userOutcome: "Use an app-owned workspace and accumulated data plane instead of a terminal-first clone.",
@@ -1072,7 +1071,7 @@ const emptyProductFeatureArchitecture: ProductFeatureArchitecture = {
     {
       id: "agent_development_environment",
       label: "Agent Development Environment",
-      role: "primary",
+      role: "supporting",
       status: "fallback",
       purpose: "Provide a workbench for source, diffs, templates, requirements, specs, and validation.",
       userOutcome: "Shape agent platform behavior inside one development workbench.",
@@ -1085,7 +1084,7 @@ const emptyProductFeatureArchitecture: ProductFeatureArchitecture = {
     },
     {
       id: "agent_factory",
-      label: "Agent Factory",
+      label: "Agent Core",
       role: "primary",
       status: "fallback",
       purpose: "Promote repeated work into prompts, workflows, templates, tools, skills, agents, and features.",
@@ -1100,7 +1099,7 @@ const emptyProductFeatureArchitecture: ProductFeatureArchitecture = {
     {
       id: "learning_improvement_loop",
       label: "Learning & Evaluation Loop",
-      role: "primary",
+      role: "supporting",
       status: "fallback",
       purpose: "Accumulate requests, evidence, timings, evaluations, and intent maps into improvement loops.",
       userOutcome: "See why the platform improved and what should improve next.",
@@ -1109,6 +1108,34 @@ const emptyProductFeatureArchitecture: ProductFeatureArchitecture = {
       currentAssets: [],
       automationTargets: ["intent structuring", "evaluation capture", "bottleneck detection"],
       learningSignals: ["intent themes"],
+      validationGates: []
+    },
+    {
+      id: "root_tool_management",
+      label: "Root Tool Management",
+      role: "supporting",
+      status: "fallback",
+      purpose: "Keep shared provider accounts, CLI adapters, workspace files, source tools, and decision defaults outside individual tasks.",
+      userOutcome: "Configure root tools once so custom agents and guest CLI lanes can reuse the same base.",
+      primarySection: "source",
+      primarySurfaces: ["Root Tools", "Provider Accounts", "CLI Adapter Settings", "Workspace Explorer"],
+      currentAssets: [],
+      automationTargets: ["provider setup", "CLI adapter selection", "workspace access setup", "tool sharing"],
+      learningSignals: ["configured provider count", "selected CLI adapter", "workspace file count"],
+      validationGates: []
+    },
+    {
+      id: "work_visibility",
+      label: "Work Visibility",
+      role: "supporting",
+      status: "fallback",
+      purpose: "Show active work, deferred decisions, task-run records, and available agents at a glance.",
+      userOutcome: "Immediately see what is running, blocked, recorded, and ready to resume.",
+      primarySection: "overview",
+      primarySurfaces: ["Core Home Workload Strip", "Decision Inbox", "Task Run Store", "Run Status Bar"],
+      currentAssets: [],
+      automationTargets: ["active task summarization", "decision count", "task-run count", "agent count"],
+      learningSignals: ["active task count", "blocked task count", "deferred decision count"],
       validationGates: []
     },
     {
@@ -2122,7 +2149,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
   const [runtimeInitDefaults, setRuntimeInitDefaults] = useState<RuntimeInitDefaults>(defaultRuntimeInitDefaults);
   const [operatorCenterOpen, setOperatorCenterOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState("");
-  const [activeHomeTab, setActiveHomeTab] = useState<CoreFeatureTabId>("files");
+  const [activeHomeTab, setActiveHomeTab] = useState<CoreFeatureTabId>("agents");
   const commandInputRef = useRef<HTMLInputElement>(null);
   const [searchAgentRunForm, setSearchAgentRunForm] = useState<SearchAgentRunForm>(defaultSearchAgentRunForm);
   const [searchAgentChatMessages, setSearchAgentChatMessages] =
@@ -2668,7 +2695,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     return new Map(localizedSections.map((item) => [item.id, item]));
   }, [localizedSections]);
   const coreFunctionSections = useMemo(() => {
-    return (["overview", "desktop", "agents", "source", "intent"] as SectionId[])
+    return (["overview", "agents", "desktop", "source", "intent"] as SectionId[])
       .map((id) => sectionById.get(id))
       .filter((item): item is Section => {
         return item ? currentViewMode.allowedSections.includes(item.id) : false;
@@ -2763,8 +2790,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     execution: [
       {
         id: "quick",
-        label: uiLanguage === "ko" ? "바로 시작" : "Quick start",
-        detail: uiLanguage === "ko" ? "추천 기본값" : "Recommended",
+        label: uiLanguage === "ko" ? "핵심 설정" : "Core setup",
+        detail: uiLanguage === "ko" ? "우선순위" : "Priority",
         icon: PlayCircle
       },
       {
@@ -3087,8 +3114,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           role: "system" as const,
           title: ko ? "AgentCore 블루프린트 적용" : "AgentCore Blueprint Applied",
           body: ko
-            ? `${blueprint.label} 입력을 검색 에이전트와 Agent Factory에 채웠습니다. 바로 작업 시작을 누르면 연결된 제공자 계정으로 사전조사/계획을 실행합니다.`
-            : `${blueprint.label} filled the Search Agent and Agent Factory inputs. Press Start Work to run preflight research and planning through the connected provider account.`,
+            ? `${blueprint.label} 입력을 검색 에이전트와 Agent Core에 채웠습니다. 바로 작업 시작을 누르면 연결된 제공자 계정으로 사전조사/계획을 실행합니다.`
+            : `${blueprint.label} filled the Search Agent and Agent Core inputs. Press Start Work to run preflight research and planning through the connected provider account.`,
           meta: `${blueprint.sourceLabel} / ${mode}`
         }
       ].slice(-12)
@@ -3312,8 +3339,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
           role: "system" as const,
           title: ko ? "AgentCore Quick Builder" : "AgentCore Quick Builder",
           body: ko
-            ? `${blueprint.label}를 기반으로 Agent Factory proposal 저장을 시작합니다. 설치 앱에서는 proposal이 앱 데이터 저장소에 바로 남습니다.`
-            : `Starting an Agent Factory proposal from ${blueprint.label}. In the installed app, the proposal is written directly to app data.`,
+            ? `${blueprint.label}를 기반으로 Agent Core proposal 저장을 시작합니다. 설치 앱에서는 proposal이 앱 데이터 저장소에 바로 남습니다.`
+            : `Starting an Agent Core proposal from ${blueprint.label}. In the installed app, the proposal is written directly to app data.`,
           meta: "create_agent_factory_proposal"
         }
       ].slice(-12)
@@ -3359,86 +3386,219 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       setLearningDecisionBusy(false);
     }
   };
-  const homeMainTabs: CoreFeatureTab[] = [
+  const rootToolItems = [
     {
-      id: "files",
-      label: uiLanguage === "ko" ? "파일 가져오기" : "Files",
-      kicker: uiLanguage === "ko" ? "작업공간" : "Workspace",
-      title: uiLanguage === "ko" ? "먼저 폴더를 가져오고 파일을 올립니다" : "Bring in a folder first",
+      id: "provider-accounts",
+      label: uiLanguage === "ko" ? "모델 계정" : "Model accounts",
       detail:
         uiLanguage === "ko"
-          ? "왼쪽 Explorer에서 실제 작업공간을 잡고, 파일을 열어 에이전트 작업 입력으로 씁니다."
-          : "Use the left Explorer to own the real workspace, open files, and feed agent work.",
-      icon: FolderOpen,
-      metric: `${visibleSourceFiles.length.toLocaleString("ko-KR")} files`,
-      cta: uiLanguage === "ko" ? "Explorer 열기" : "Open Explorer",
-      secondaryCta: uiLanguage === "ko" ? "작업공간 권한 요청" : "Request workspace access",
-      run: () => openSection("source"),
-      secondaryRun: () => openSection("source"),
-      steps:
-        uiLanguage === "ko"
-          ? ["작업공간 접근 허용", "Explorer에서 파일 열기", "수정/저장 후 에이전트 작업에 연결"]
-          : ["Choose a workspace folder", "Open files from Explorer", "Edit/save and connect work to agents"]
+          ? "OpenAI, Anthropic, Gemini, Ollama 연결 상태"
+          : "OpenAI, Anthropic, Gemini, and Ollama connection state",
+      value: `${providerCredentials.configuredCount}/${providerCredentials.providers.length || 3}`,
+      icon: KeyRound,
+      action: () => openSettingsTab("execution", "providers")
     },
     {
-      id: "agents",
-      label: uiLanguage === "ko" ? "에이전트 만들기" : "Agents",
-      kicker: uiLanguage === "ko" ? "생성" : "Factory",
-      title: uiLanguage === "ko" ? "작업 목적에 맞는 에이전트를 만듭니다" : "Create agents for the work",
+      id: "cli-adapters",
+      label: uiLanguage === "ko" ? "CLI 어댑터" : "CLI adapters",
       detail:
         uiLanguage === "ko"
-          ? "정의, 역할, 실행 환경을 한곳에서 보고 새 에이전트 작업으로 연결합니다."
-          : "Review definitions, roles, and runtime readiness from one place.",
+          ? "Codex, Claude Code, Gemini, OpenCode 같은 guest lane"
+          : "Guest lanes such as Codex, Claude Code, Gemini, and OpenCode",
+      value: runtimeInitDefaults.adapterId,
+      icon: SquareTerminal,
+      action: () => openSettingsTab("execution", "adapter")
+    },
+    {
+      id: "workspace-files",
+      label: uiLanguage === "ko" ? "작업공간 파일" : "Workspace files",
+      detail:
+        uiLanguage === "ko"
+          ? "에이전트와 CLI가 공유하는 루트 파일/소스 표면"
+          : "Root file and source surface shared by agents and CLI lanes",
+      value: visibleSourceFiles.length.toLocaleString("ko-KR"),
+      icon: Code2,
+      action: () => openSection("source")
+    },
+    {
+      id: "decision-routing",
+      label: uiLanguage === "ko" ? "결정함" : "Decision inbox",
+      detail:
+        uiLanguage === "ko"
+          ? "중간 질문을 보류하고 나중에 모아 처리"
+          : "Defer mid-run questions and answer them later in one place",
+      value: runtimeInitDefaults.autoDeferQuestions
+        ? uiLanguage === "ko"
+          ? "자동"
+          : "auto"
+        : uiLanguage === "ko"
+          ? "수동"
+          : "manual",
+      icon: Inbox,
+      action: () => openSettingsTab("execution", "questions")
+    }
+  ];
+  const coreSetupSteps = [
+    {
+      id: "accounts",
+      label: uiLanguage === "ko" ? "모델 계정 연결" : "Connect model accounts",
+      detail:
+        uiLanguage === "ko"
+          ? "에이전트 코어가 직접 모델 작업을 실행하려면 provider 계정을 먼저 연결합니다."
+          : "Connect provider accounts so Agent Core can run model tasks directly.",
+      ready: providerCredentials.configuredCount > 0,
+      actionLabel: uiLanguage === "ko" ? "계정 설정" : "Accounts",
+      icon: KeyRound,
+      action: () => openSettingsTab("execution", "providers")
+    },
+    {
+      id: "agent-core",
+      label: uiLanguage === "ko" ? "에이전트 코어 열기" : "Open Agent Core",
+      detail:
+        uiLanguage === "ko"
+          ? "커스텀 에이전트, 서브에이전트, blueprint, proposal을 같은 흐름에서 만듭니다."
+          : "Create custom agents, subagents, blueprints, and proposals in one flow.",
+      ready: agentCatalog.length > 0,
+      actionLabel: uiLanguage === "ko" ? "에이전트 만들기" : "Create agent",
+      icon: Bot,
+      action: () => openSection("agents")
+    },
+    {
+      id: "cli-lane",
+      label: uiLanguage === "ko" ? "CLI lane 선택" : "Choose CLI lane",
+      detail:
+        uiLanguage === "ko"
+          ? "Claude Code 같은 외부 CLI는 root tool을 공유하는 선택형 guest adapter로 둡니다."
+          : "External CLIs such as Claude Code remain optional guest adapters sharing root tools.",
+      ready: Boolean(runtimeInitDefaults.adapterId),
+      actionLabel: uiLanguage === "ko" ? "어댑터 설정" : "Adapters",
+      icon: SquareTerminal,
+      action: () => openSettingsTab("execution", "adapter")
+    },
+    {
+      id: "questions",
+      label: uiLanguage === "ko" ? "질문 자동 보류" : "Auto-defer questions",
+      detail:
+        uiLanguage === "ko"
+          ? "중간 결정은 작업을 멈추지 않고 결정함에 모아 나중에 처리합니다."
+          : "Route mid-run decisions to the inbox so work can continue where it is safe.",
+      ready: runtimeInitDefaults.autoDeferQuestions,
+      actionLabel: uiLanguage === "ko" ? "질문 처리" : "Questions",
+      icon: Inbox,
+      action: () => openSettingsTab("execution", "questions")
+    }
+  ];
+  const coreReadinessCount = coreSetupSteps.filter((step) => step.ready).length;
+  const workVisibilityItems = [
+    {
+      id: "active-work",
+      label: uiLanguage === "ko" ? "진행 중 작업" : "Active work",
+      value: collaborationBoard.summary.activeTasks.toLocaleString("ko-KR"),
+      detail: uiLanguage === "ko" ? "현재 움직이는 task" : "tasks in motion",
+      icon: Activity
+    },
+    {
+      id: "pending-decisions",
+      label: uiLanguage === "ko" ? "보류 결정" : "Pending decisions",
+      value: (attentionItems.length + collaborationBoard.summary.blockedTasks).toLocaleString("ko-KR"),
+      detail: uiLanguage === "ko" ? "나중에 모아 처리" : "deferred for later",
+      icon: Inbox
+    },
+    {
+      id: "task-runs",
+      label: uiLanguage === "ko" ? "실행 기록" : "Task runs",
+      value: snapshot.stats.tasks.toLocaleString("ko-KR"),
+      detail: uiLanguage === "ko" ? "연속성 저장소" : "continuity store",
+      icon: PlayCircle
+    },
+    {
+      id: "agents-ready",
+      label: uiLanguage === "ko" ? "에이전트" : "Agents",
+      value: agentCatalog.length.toLocaleString("ko-KR"),
+      detail: uiLanguage === "ko" ? "생성/공유 후보" : "created or shareable",
+      icon: Bot
+    }
+  ];
+  const homeMainTabs: CoreFeatureTab[] = [
+    {
+      id: "agents",
+      label: uiLanguage === "ko" ? "에이전트 코어" : "Agent Core",
+      kicker: uiLanguage === "ko" ? "핵심 1" : "Core 1",
+      title: uiLanguage === "ko" ? "커스텀 에이전트를 쉽게 만듭니다" : "Create custom agents easily",
+      detail:
+        uiLanguage === "ko"
+          ? "역할, 도구, guardrail, 검증 명령을 한 번에 묶어 새 에이전트나 작업별 서브에이전트로 저장합니다."
+          : "Bundle role, tools, guardrails, and validation commands into reusable agents or per-task subagents.",
       icon: Bot,
       metric: `${agentCatalog.length.toLocaleString("ko-KR")} agents`,
-      cta: uiLanguage === "ko" ? "에이전트 화면 열기" : "Open agents",
-      secondaryCta: uiLanguage === "ko" ? "생성 후보 보기" : "View candidates",
+      cta: uiLanguage === "ko" ? "에이전트 코어 열기" : "Open Agent Core",
+      secondaryCta: uiLanguage === "ko" ? "AgentCore blueprint" : "AgentCore blueprint",
       run: () => openSection("agents"),
-      secondaryRun: () => openSection("intent"),
+      secondaryRun: () => applyAgentCoreBlueprint(selectedAgentCoreBlueprintId, "factory"),
       steps:
         uiLanguage === "ko"
-          ? ["목표/역할 선택", "필요 도구와 skill 연결", "실행 lane으로 넘기기"]
-          : ["Pick goal and role", "Attach tools and skills", "Send to a run lane"]
+          ? ["목표와 역할 선택", "루트 툴과 검증 연결", "proposal 또는 실행 lane으로 넘기기"]
+          : ["Choose goal and role", "Attach root tools and validation", "Send to proposal or run lane"]
     },
     {
       id: "run",
-      label: uiLanguage === "ko" ? "작업 실행" : "Run",
-      kicker: uiLanguage === "ko" ? "다중 CLI" : "Multi-CLI",
-      title: uiLanguage === "ko" ? "하단 터미널에서 작업을 실행합니다" : "Run work in the bottom terminal",
+      label: uiLanguage === "ko" ? "CLI 오케스트레이션" : "CLI Orchestration",
+      kicker: uiLanguage === "ko" ? "핵심 2" : "Core 2",
+      title: uiLanguage === "ko" ? "CLI 작업을 끊기지 않게 이어갑니다" : "Keep CLI work continuous",
       detail:
         uiLanguage === "ko"
-          ? "Codex CLI 같은 guest adapter를 하단 terminal lane으로 띄우고 질문은 결정함으로 보냅니다."
-          : "Launch guest adapters in bottom terminal lanes and route questions to the decision inbox.",
-      icon: SquareTerminal,
+          ? "Codex, Claude Code 같은 CLI lane을 작업 파이프로 묶고, 중간 질문은 decision inbox에 모아 나중에 처리합니다."
+          : "Bind Codex, Claude Code, and other CLI lanes into task pipes while deferring questions to the decision inbox.",
+      icon: Network,
       metric: runtimeInitDefaults.adapterId,
-      cta: uiLanguage === "ko" ? "하단 터미널 열기" : "Open terminal",
-      secondaryCta: uiLanguage === "ko" ? "실행 설정" : "Run settings",
-      run: openTerminalDrawer,
-      secondaryRun: () => openSettingsTab("execution"),
+      cta: uiLanguage === "ko" ? "CLI 실행 화면" : "Open CLI run",
+      secondaryCta: uiLanguage === "ko" ? "결정함 설정" : "Decision setup",
+      run: () => openSection("desktop"),
+      secondaryRun: () => openSettingsTab("execution", "questions"),
       steps:
         uiLanguage === "ko"
-          ? ["CLI lane 선택", "작업 prompt 입력", "결정/결과를 데이터로 축적"]
-          : ["Pick a CLI lane", "Enter the task prompt", "Accumulate decisions and results"]
+          ? ["작업 intake 입력", "필요 CLI lane fan-out", "질문 보류 후 결과 병합"]
+          : ["Enter task intake", "Fan out to needed CLI lanes", "Defer questions and merge results"]
+    },
+    {
+      id: "files",
+      label: uiLanguage === "ko" ? "루트 툴" : "Root Tools",
+      kicker: uiLanguage === "ko" ? "공유 기반" : "Shared Base",
+      title: uiLanguage === "ko" ? "모든 에이전트와 CLI가 같은 툴을 씁니다" : "Agents and CLIs share the same root tools",
+      detail:
+        uiLanguage === "ko"
+          ? "모델 계정, CLI adapter, 작업공간 파일, decision inbox를 root에서 관리하고 작업별 에이전트가 공유하게 둡니다."
+          : "Manage model accounts, CLI adapters, workspace files, and the decision inbox at root so per-task agents share them.",
+      icon: Code2,
+      metric: `${coreReadinessCount}/${coreSetupSteps.length} setup`,
+      cta: uiLanguage === "ko" ? "루트 파일/툴" : "Root files/tools",
+      secondaryCta: uiLanguage === "ko" ? "핵심 설정" : "Core setup",
+      run: () => openSection("source"),
+      secondaryRun: () => openSettingsTab("execution", "quick"),
+      steps:
+        uiLanguage === "ko"
+          ? ["계정과 CLI 연결", "작업공간 권한 설정", "작업별 에이전트에 공유"]
+          : ["Connect accounts and CLIs", "Grant workspace access", "Share with per-task agents"]
     },
     {
       id: "learn",
-      label: uiLanguage === "ko" ? "학습/개선" : "Learn",
-      kicker: uiLanguage === "ko" ? "루프" : "Loop",
-      title: uiLanguage === "ko" ? "작업 결과를 다음 자동화로 바꿉니다" : "Turn results into the next automation",
+      label: uiLanguage === "ko" ? "작업 가시성" : "Work Visibility",
+      kicker: uiLanguage === "ko" ? "한눈에 보기" : "At a Glance",
+      title: uiLanguage === "ko" ? "지금 얼마나 작업 중인지 바로 봅니다" : "See how much work is happening now",
       detail:
         uiLanguage === "ko"
-          ? "누적된 실행 기록, 결정, 평가를 보고 반복되는 작업을 prompt, workflow, tool, skill 후보로 승격합니다."
-          : "Review accumulated runs, decisions, and evaluations to promote repeatable work.",
-      icon: Database,
-      metric: `${visibleEvaluations.toLocaleString("ko-KR")} evals`,
-      cta: uiLanguage === "ko" ? "학습 지도 열기" : "Open learning map",
-      secondaryCta: uiLanguage === "ko" ? "축적 데이터 보기" : "View accumulated data",
-      run: () => openSection("intent"),
-      secondaryRun: () => openSection("desktop"),
+          ? "진행 중 작업, 막힌 결정, 실행 기록, 에이전트 수를 첫 화면과 CLI 화면에서 계속 보여줍니다."
+          : "Keep active work, blocked decisions, run records, and agent counts visible on the home and CLI surfaces.",
+      icon: Activity,
+      metric: `${collaborationBoard.summary.activeTasks.toLocaleString("ko-KR")} active`,
+      cta: uiLanguage === "ko" ? "CLI 작업량 보기" : "View CLI workload",
+      secondaryCta: uiLanguage === "ko" ? "개선 루프 보기" : "Open improvement loop",
+      run: () => openSection("desktop"),
+      secondaryRun: () => openSection("intent"),
       steps:
         uiLanguage === "ko"
-          ? ["실행 기록 확인", "반복 패턴 찾기", "자동화 후보로 승격"]
-          : ["Review run records", "Find repeated patterns", "Promote automation candidates"]
+          ? ["진행/보류/기록 요약", "결정함에서 답변", "반복 패턴을 개선 후보로 승격"]
+          : ["Summarize active/deferred/runs", "Answer in the inbox", "Promote repeated patterns"]
     }
   ];
   const settingsTabs: Array<{
@@ -3461,8 +3621,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     },
     {
       id: "execution",
-      label: uiLanguage === "ko" ? "초기화" : "Initialize",
-      detail: uiLanguage === "ko" ? "계정, 어댑터, 작업 파이프" : "Accounts, adapters, pipes",
+      label: uiLanguage === "ko" ? "핵심 설정" : "Core Setup",
+      detail: uiLanguage === "ko" ? "계정, CLI, 질문, 루트 툴" : "Accounts, CLI, questions, root tools",
       icon: Network
     },
     {
@@ -3501,9 +3661,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       label: uiLanguage === "ko" ? "제공자 계정 연결" : "Connect Provider Accounts",
       detail:
         uiLanguage === "ko"
-          ? "ChatGPT/OpenAI, Claude/Anthropic, Gemini/Google API key를 네이티브 앱 설정에서 관리합니다."
+          ? "에이전트 코어가 직접 실행할 OpenAI, Anthropic, Gemini, Ollama 계정을 관리합니다."
           : "Manage ChatGPT/OpenAI, Claude/Anthropic, and Gemini/Google API keys in native settings.",
-      group: uiLanguage === "ko" ? "초기화" : "Initialize",
+      group: uiLanguage === "ko" ? "핵심 설정" : "Core Setup",
       icon: KeyRound,
       badge: `${providerCredentials.configuredCount}/${providerCredentials.providers.length || 3}`,
       keywords: ["openai", "chatgpt", "claude", "anthropic", "gemini", "google", "api key", "provider", "account"],
@@ -3534,8 +3694,8 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     },
     {
       id: "settings-execution",
-      label: uiLanguage === "ko" ? "초기화 설정" : "Initialization Settings",
-      detail: uiLanguage === "ko" ? "어댑터, session mode, pipe 기본값을 한 곳에서 정합니다." : "Set adapter, session mode, and pipe defaults in one place.",
+      label: uiLanguage === "ko" ? "핵심 설정" : "Core Setup",
+      detail: uiLanguage === "ko" ? "에이전트 코어와 CLI 오케스트레이션 준비를 한 곳에서 정합니다." : "Set Agent Core and CLI orchestration readiness in one place.",
       group: uiLanguage === "ko" ? "설정" : "Settings",
       icon: Network,
       badge: runtimeInitDefaults.adapterId,
@@ -4034,14 +4194,38 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                       <div className="settings-pane-heading">
                         <PlayCircle size={16} aria-hidden="true" />
                         <div>
-                          <span>{uiLanguage === "ko" ? "바로 시작 기본값" : "Ready-to-run defaults"}</span>
-                          <strong>{uiLanguage === "ko" ? "Codex 기준으로 단순화" : "Simplified for Codex"}</strong>
+                          <span>{uiLanguage === "ko" ? "핵심 기능 설정" : "Core capability setup"}</span>
+                          <strong>
+                            {uiLanguage === "ko"
+                              ? `에이전트 코어와 CLI 오케스트레이션 준비 ${coreReadinessCount}/${coreSetupSteps.length}`
+                              : `Agent Core and CLI Orchestration readiness ${coreReadinessCount}/${coreSetupSteps.length}`}
+                          </strong>
                           <small>
                             {uiLanguage === "ko"
-                              ? "처음에는 이 값으로 시작하고, 필요할 때만 세부 lane을 바꿉니다."
-                              : "Start with these defaults, then change lanes only when needed."}
+                              ? "먼저 계정, CLI lane, 질문 보류, 루트 툴을 맞추면 두 핵심 기능을 바로 쓸 수 있습니다."
+                              : "Set accounts, CLI lanes, question deferral, and root tools first to use the two core features immediately."}
                           </small>
                         </div>
+                      </div>
+                      <div className="settings-core-setup-grid">
+                        {coreSetupSteps.map((step) => (
+                          <article key={step.id} className={step.ready ? "ready" : "pending"}>
+                            <step.icon size={15} aria-hidden="true" />
+                            <span>{step.ready ? (uiLanguage === "ko" ? "준비됨" : "ready") : (uiLanguage === "ko" ? "설정 필요" : "setup needed")}</span>
+                            <strong>{step.label}</strong>
+                            <p>{step.detail}</p>
+                          </article>
+                        ))}
+                      </div>
+                      <div className="root-tool-grid compact">
+                        {rootToolItems.map((item) => (
+                          <button key={item.id} type="button" onClick={item.action}>
+                            <item.icon size={15} aria-hidden="true" />
+                            <span>{item.label}</span>
+                            <strong>{item.value}</strong>
+                            <small>{item.detail}</small>
+                          </button>
+                        ))}
                       </div>
                       <div className="settings-action-row">
                         <button type="button" onClick={() => setRuntimeInitDefaults(defaultRuntimeInitDefaults)}>
@@ -4358,24 +4542,46 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
 
           {section === "overview" && (
             <div className="desktop-home-grid">
-              <section className={`workspace-home-panel home-${attentionState.tone}`} aria-label="Workspace home">
+              <section className={`workspace-home-panel core-home-panel home-${attentionState.tone}`} aria-label="Workspace home">
                 <div>
-                  <p className="eyebrow">Agent Workspace</p>
-                  <h2>{attentionState.title}</h2>
-                  <p>{attentionState.detail}</p>
+                  <p className="eyebrow">Core Platform</p>
+                  <h2>
+                    {uiLanguage === "ko"
+                      ? "에이전트 코어와 CLI 오케스트레이션이 먼저 보입니다"
+                      : "Agent Core and CLI Orchestration come first"}
+                  </h2>
+                  <p>
+                    {uiLanguage === "ko"
+                      ? "커스텀 에이전트를 쉽게 만들고, Claude Code 같은 CLI 작업은 decision inbox와 task-run store로 끊기지 않게 이어갑니다. 루트 툴은 별도 기반으로 관리하고 작업별 에이전트가 공유합니다."
+                      : "Create custom agents easily, then keep Claude Code-style CLI work continuous through the decision inbox and task-run store. Root tools stay separate and are shared by per-task agents."}
+                  </p>
+                </div>
+                <div className="core-home-status-row" aria-label={uiLanguage === "ko" ? "현재 작업량" : "Current workload"}>
+                  {workVisibilityItems.map((item) => (
+                    <article key={item.id}>
+                      <item.icon size={16} aria-hidden="true" />
+                      <span>{item.label}</span>
+                      <strong>{item.value}</strong>
+                      <small>{item.detail}</small>
+                    </article>
+                  ))}
                 </div>
                 <div className="workspace-home-actions">
-                  <button type="button" onClick={() => openSection("desktop")}>
-                    <FolderOpen size={16} aria-hidden="true" />
-                    <span>Open Workspace</span>
-                  </button>
                   <button type="button" onClick={() => openSection("agents")}>
                     <Bot size={16} aria-hidden="true" />
-                    <span>Agent Factory</span>
+                    <span>{uiLanguage === "ko" ? "Agent Core" : "Agent Core"}</span>
                   </button>
-                  <button type="button" onClick={openTerminalDrawer}>
+                  <button type="button" onClick={() => openSection("desktop")}>
+                    <Network size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "CLI Orchestration" : "CLI Orchestration"}</span>
+                  </button>
+                  <button type="button" onClick={() => openSection("agents")}>
                     <PlayCircle size={16} aria-hidden="true" />
-                    <span>Start Task</span>
+                    <span>{uiLanguage === "ko" ? "에이전트 만들기" : "Create Agent"}</span>
+                  </button>
+                  <button type="button" onClick={() => openSettingsTab("execution", "quick")}>
+                    <Settings size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "핵심 설정" : "Core Setup"}</span>
                   </button>
                 </div>
               </section>
@@ -4386,6 +4592,59 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 tabs={homeMainTabs}
                 onSelectTab={setActiveHomeTab}
               />
+
+              <section className="panel core-setup-panel" aria-label={uiLanguage === "ko" ? "핵심 기능 설정" : "Core feature setup"}>
+                <div className="panel-heading">
+                  <div>
+                    <p className="eyebrow">{uiLanguage === "ko" ? "핵심 설정" : "Core Setup"}</p>
+                    <h2>
+                      {uiLanguage === "ko"
+                        ? `${coreReadinessCount}/${coreSetupSteps.length} 준비됨`
+                        : `${coreReadinessCount}/${coreSetupSteps.length} ready`}
+                    </h2>
+                  </div>
+                  <button type="button" onClick={() => openSettingsTab("execution", "quick")}>
+                    <Settings size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "설정" : "Settings"}</span>
+                  </button>
+                </div>
+                <div className="core-setup-list">
+                  {coreSetupSteps.map((step) => (
+                    <article key={step.id} className={step.ready ? "ready" : "pending"}>
+                      <step.icon size={16} aria-hidden="true" />
+                      <div>
+                        <span>{step.ready ? (uiLanguage === "ko" ? "준비됨" : "ready") : (uiLanguage === "ko" ? "설정 필요" : "setup needed")}</span>
+                        <strong>{step.label}</strong>
+                        <p>{step.detail}</p>
+                      </div>
+                      <button type="button" onClick={step.action}>
+                        <ArrowRight size={14} aria-hidden="true" />
+                        <span>{step.actionLabel}</span>
+                      </button>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              <section className="panel root-tool-panel" aria-label={uiLanguage === "ko" ? "루트 툴 관리" : "Root tool management"}>
+                <div className="panel-heading">
+                  <div>
+                    <p className="eyebrow">{uiLanguage === "ko" ? "루트 툴" : "Root Tools"}</p>
+                    <h2>{uiLanguage === "ko" ? "공유 기반은 작업 밖에 둡니다" : "Shared foundation stays outside each task"}</h2>
+                  </div>
+                  <Code2 size={18} aria-hidden="true" />
+                </div>
+                <div className="root-tool-grid">
+                  {rootToolItems.map((item) => (
+                    <button key={item.id} type="button" onClick={item.action}>
+                      <item.icon size={16} aria-hidden="true" />
+                      <span>{item.label}</span>
+                      <strong>{item.value}</strong>
+                      <small>{item.detail}</small>
+                    </button>
+                  ))}
+                </div>
+              </section>
 
               <ProductFeatureArchitecturePanel
                 architecture={productFeatureArchitecture}
@@ -4448,12 +4707,12 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               </section>
 
               <section className="home-metrics-strip" aria-label="Workspace metrics">
-                <Metric label="Primary Features" value={productFeatureArchitecture.summary.primaryFeatures} icon={Network} tone="green" />
+                <Metric label="Core Features" value={2} icon={Network} tone="green" />
+                <Metric label="Setup Ready" value={coreReadinessCount} icon={Settings} tone="blue" />
                 <Metric label="Agents" value={agentCatalog.length} icon={Bot} tone="blue" />
                 <Metric label="Task Runs" value={snapshot.stats.tasks} icon={PlayCircle} tone="amber" />
-                <Metric label="Decisions" value={attentionItems.length} icon={Inbox} tone="red" />
-                <Metric label="Learning Themes" value={intentFeatureMap.summary.totalThemes} icon={GitBranch} tone="violet" />
-                <Metric label="Reference Patterns" value={referencePlatformAdvantages.summary.totalPatterns} icon={Layers} tone="blue" />
+                <Metric label="Deferred" value={attentionItems.length + collaborationBoard.summary.blockedTasks} icon={Inbox} tone="red" />
+                <Metric label="Root Tools" value={rootToolItems.length} icon={Code2} tone="violet" />
               </section>
 
               <section className="panel home-recent-panel">
@@ -5353,7 +5612,7 @@ function AgentCoreBlueprintPanel({
             </button>
             <button type="button" className="primary-action-button" onClick={() => onApplyBlueprint(selectedBlueprint.id)}>
               <Bot size={16} aria-hidden="true" />
-              <span>{ko ? "에이전트 생성 입력 채우기" : "Fill Agent Factory"}</span>
+              <span>{ko ? "에이전트 생성 입력 채우기" : "Fill Agent Core"}</span>
             </button>
             <button type="button" onClick={() => onStartPreflight(selectedBlueprint.id)}>
               <ClipboardCheck size={16} aria-hidden="true" />
@@ -5412,7 +5671,7 @@ function AgentFactoryWizard({
     <section className="panel wide agent-factory-wizard-panel">
       <div className="panel-heading">
         <div>
-          <p className="eyebrow">{ko ? "Agent Factory" : "Agent Factory"}</p>
+          <p className="eyebrow">{ko ? "Agent Core" : "Agent Core"}</p>
           <h2>{ko ? "새 에이전트 만들기" : "Create an Agent"}</h2>
           <p>
             {ko

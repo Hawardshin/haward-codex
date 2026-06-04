@@ -90,17 +90,26 @@ test("product feature registry makes agent platform primary", () => {
   assert.equal(registry.product_position.monitoring_role, "supporting_observability");
   for (const featureId of [
     "agent_orchestration",
-    "agent_work_environment",
-    "agent_development_environment",
-    "agent_factory",
-    "learning_improvement_loop"
+    "agent_factory"
   ]) {
     assert.ok(registry.product_position.primary_feature_ids.includes(featureId));
     assert.equal(registry.feature_layers.find((feature) => feature.id === featureId)?.role, "primary");
   }
+  for (const featureId of [
+    "root_tool_management",
+    "work_visibility",
+    "agent_work_environment",
+    "agent_development_environment",
+    "learning_improvement_loop"
+  ]) {
+    assert.ok(registry.product_position.supporting_feature_ids.includes(featureId));
+    assert.equal(registry.feature_layers.find((feature) => feature.id === featureId)?.role, "supporting");
+  }
   assert.equal(registry.feature_layers.find((feature) => feature.id === "observability_monitoring")?.role, "supporting");
-  assert.match(serialized, /Agent Orchestration/);
-  assert.match(serialized, /Agent Factory/);
+  assert.match(serialized, /CLI Orchestration/);
+  assert.match(serialized, /Agent Core/);
+  assert.match(serialized, /Root Tool Management/);
+  assert.match(serialized, /Work Visibility/);
   assert.match(serialized, /Search Agent Work Chat/);
   assert.match(serialized, /Learning & Evaluation Loop/);
   assert.match(serialized, /Production Agent Blueprints/);
@@ -108,7 +117,7 @@ test("product feature registry makes agent platform primary", () => {
   assert.match(serialized, /agentcore_blueprint_gate/);
   assert.match(serialized, /supporting observability/);
   assert.match(serialized, /operator_surfaces_are_separate/);
-  assert.deepEqual(registry.desktop_home_surface.primary_navigation_sections, ["overview", "desktop", "agents", "source", "intent"]);
+  assert.deepEqual(registry.desktop_home_surface.primary_navigation_sections, ["overview", "agents", "desktop", "source", "intent"]);
   assert.deepEqual(registry.desktop_home_surface.operator_center_sections, [
     "projects",
     "history",
@@ -150,7 +159,7 @@ test("product gap registry keeps unresolved user-request gaps visible", () => {
   const agentFactoryGap = registry.gap_items.find((item) => item.gap_id === "agent_factory_creation_wizard");
   assert.equal(agentFactoryGap.status, "implemented_product_slice");
   assert.equal(agentFactoryGap.priority, "p0_product_gap");
-  assert.match(JSON.stringify(agentFactoryGap.acceptance_to_close), /Desktop Agent Factory view/);
+  assert.match(JSON.stringify(agentFactoryGap.acceptance_to_close), /Desktop Agent Core view/);
   assert.match(JSON.stringify(agentFactoryGap.current_evidence), /create_agent_factory_proposal/);
 
   const learningGap = registry.gap_items.find((item) => item.gap_id === "learning_feedback_automation_loop");
@@ -634,10 +643,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "바로 쓰기",
     "핵심 기능",
     "먼저 무엇을 할지 고르세요",
-    "파일 가져오기",
-    "에이전트 만들기",
-    "작업 실행",
-    "학습/개선",
+    "에이전트 코어",
+    "CLI 오케스트레이션",
+    "루트 툴",
+    "작업 가시성",
     "main-workbench-panel",
     "main-feature-tabs",
     "main-feature-detail",
@@ -677,8 +686,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "공개 설계 패턴 전이 지도",
     "선택/위치 열기",
     "ProductFeatureArchitecturePanel",
-    "Work Console",
-    "Files and Code",
+    "핵심 기능",
+    "루트 툴",
     "Operator Center",
     "operatorSectionIds",
     "Open Operator Center"
@@ -687,9 +696,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   }
   assert.doesNotMatch(monitorShell, /localStorage/);
   for (const uiString of [
-    "Agent Orchestration",
-    "Agent Factory",
-    "Learning & Evaluation Loop",
+    "CLI Orchestration",
+    "Agent Core",
+    "Open CLI Orchestration",
+    "Open Agent Core",
     "Observability is support",
     "Agent Capability Platform",
     "Operator tools are separate",
@@ -987,7 +997,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   }
   assert.ok(viewModes.modes.every((mode) => mode.allowed_sections.includes("desktop")));
   const userMode = viewModes.modes.find((mode) => mode.id === "user");
-  assert.deepEqual(userMode.allowed_sections, ["overview", "desktop", "agents", "source", "intent"]);
+  assert.deepEqual(userMode.allowed_sections, ["overview", "agents", "desktop", "source", "intent"]);
   for (const operatorSection of ["projects", "history", "structure", "documents", "requirements"]) {
     assert.ok(!userMode.allowed_sections.includes(operatorSection));
   }
