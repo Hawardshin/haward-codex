@@ -79,17 +79,17 @@ function assertSourceIncludes(source, label, expectedTokens) {
 const cssContracts = [
   {
     selector: ".desktop-app-shell",
-    includes: ["height: 100dvh;", "min-height: 0;", "overflow: hidden;"],
-    excludes: ["min-height: 720px;"]
+    includes: ["min-height: 100dvh;", "overflow: visible;"],
+    excludes: ["  height: 100dvh;", "overflow: hidden;", "min-height: 720px;"]
   },
   {
     selector: ".activity-rail",
-    includes: ["min-height: 0;", "height: 100%;", "max-height: 100%;"]
+    includes: ["position: sticky;", "min-height: 0;", "height: 100dvh;", "max-height: 100dvh;"]
   },
   {
     selector: ".desktop-viewport",
-    includes: ["height: 100%;", "max-height: 100%;", "overflow: auto;", "overscroll-behavior: contain;", "scrollbar-gutter: stable;"],
-    excludes: ["height: 100vh;", "max-height: 100vh;"]
+    includes: ["min-height: 100dvh;", "height: auto;", "max-height: none;", "overflow: visible;", "overflow-x: hidden;", "scrollbar-gutter: stable;"],
+    excludes: ["  height: 100vh;", "  max-height: 100vh;"]
   },
   {
     selector: ".settings-dialog",

@@ -41,6 +41,7 @@
 | REQ-WM-028 | 데스크톱 Source Review는 runtime workspace file index refresh, open editor tab strip, Monaco command toolbar, edit/diff mode, editor settings popup을 제공해 실제 코드 편집 워크벤치로 동작해야 한다. | must | `Refresh Files`, `Open Editors`, `source-command-toolbar`, `MonacoDiffEditor`, `Editor Settings`, `pnpm run check`, `pnpm test`, Browser smoke 확인 |
 | REQ-WM-029 | 데스크톱 Source Review는 Source 화면 진입 전 불필요한 runtime source catalog scan을 실행하지 않아야 하며, 파일 목록 렌더링은 중복 리스트와 전체 기본 전개 트리를 피해야 한다. | must | `pnpm run check`, `pnpm test`, `pnpm exec next build`, `pnpm run perf:budget`, localhost smoke 확인 |
 | REQ-WM-030 | 데스크톱 제품 UI의 반복 액션 버튼, 세그먼트, 툴바, Source/Explorer 컨트롤은 일관된 클릭 타깃 크기를 사용해야 하며, 터치/모바일 환경에서는 더 큰 타깃으로 올라가야 한다. | must | `globals.css` button token audit, `pnpm run check`, `pnpm test`, `pnpm exec next build`, localhost visual smoke 확인 |
+| REQ-WM-031 | 데스크톱 제품 UI는 전체 화면에서만 동작하는 고정 높이/압축형 배치를 피하고, 핵심 작업을 먼저 보여준 뒤 보조 정보는 접힘/세로 흐름으로 노출해야 한다. | must | `pnpm run check`, `pnpm test`, `pnpm exec next build`, responsive Browser smoke, body/viewport horizontal overflow 확인 |
 
 ## 범위
 
@@ -68,6 +69,7 @@
 - Tauri 데스크톱 런타임 파일 인덱스, open editor tabs, editor command toolbar, Monaco diff/settings surface
 - Source 화면 진입 전 파일 catalog scan 지연, 중복 source list 제거, 접힌 tree 렌더링
 - 반복 액션 버튼과 Source/Explorer/toolbar 컨트롤의 클릭 타깃 크기 체계
+- 전체 화면 의존 고정 높이 shell 제거, 홈 보조 정보 progressive disclosure, responsive reflow
 - Vercel 배포 문서
 
 ## 제외 범위

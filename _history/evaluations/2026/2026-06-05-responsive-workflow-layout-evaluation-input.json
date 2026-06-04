@@ -1,0 +1,72 @@
+{
+  "date": "2026-06-05",
+  "task": "responsive-workflow-layout",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "requirements": [
+    "REQ-WM-031"
+  ],
+  "implementation_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/check-scroll-containers.mjs"
+  ],
+  "validation": [
+    {
+      "command": "pnpm run check",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm test",
+      "status": "passed",
+      "tests": 17
+    },
+    {
+      "command": "pnpm exec next build",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm run perf:budget",
+      "status": "passed",
+      "largest_chunk_bytes": 362384
+    },
+    {
+      "command": "curl -fsS -o /dev/null -w '%{http_code} %{time_total}\\n' http://localhost:3213/",
+      "status": "passed",
+      "result": "200 0.037714"
+    },
+    {
+      "command": "in-app Browser responsive smoke",
+      "status": "passed",
+      "viewports": [
+        {
+          "name": "desktop",
+          "size": "1280x720",
+          "horizontal_overflow": 0,
+          "closed_disclosures": 3
+        },
+        {
+          "name": "tablet",
+          "size": "900x720",
+          "horizontal_overflow": 0,
+          "closed_disclosures": 3
+        },
+        {
+          "name": "mobile",
+          "size": "390x844",
+          "horizontal_overflow": 0,
+          "closed_disclosures": 3
+        }
+      ],
+      "disclosure_open_horizontal_overflow": 0
+    }
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-responsive-workflow-layout-resource.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-responsive-workflow-layout-omission.json"
+  ],
+  "installation_occurred": false,
+  "cli_pipeline_occurred": false
+}

@@ -4646,118 +4646,144 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 </div>
               </section>
 
-              <ProductFeatureArchitecturePanel
-                architecture={productFeatureArchitecture}
-                referenceAdvantages={referencePlatformAdvantages}
-                onOpenSection={openSection}
-                onOpenOperatorCenter={() => setOperatorCenterOpen(true)}
-              />
+              <div className="home-secondary-stack">
+                <details className="home-disclosure-panel">
+                  <summary>
+                    <span>{uiLanguage === "ko" ? "운영 흐름" : "Run Flow"}</span>
+                    <small>{uiLanguage === "ko" ? "타임라인, 결정함, 지표" : "Timeline, inbox, metrics"}</small>
+                  </summary>
+                  <div className="home-disclosure-body home-disclosure-grid">
+                    <section className="run-timeline-panel" aria-label="Run timeline">
+                      <div className="panel-heading">
+                        <div>
+                          <p className="eyebrow">Timeline</p>
+                          <h2>Run Flow</h2>
+                        </div>
+                        <Activity size={18} aria-hidden="true" />
+                      </div>
+                      <div className="desktop-run-timeline">
+                        {commandSteps.map((step, index) => (
+                          <button
+                            key={step.label}
+                            className={`timeline-step step-${step.tone}`}
+                            onClick={() => step.section && openSection(step.section)}
+                            type="button"
+                            disabled={!step.section}
+                          >
+                            <span>{index + 1}</span>
+                            <step.icon size={16} aria-hidden="true" />
+                            <strong>{step.title}</strong>
+                            <small>{step.detail}</small>
+                          </button>
+                        ))}
+                      </div>
+                    </section>
 
-              <section className="run-timeline-panel" aria-label="Run timeline">
-                <div className="panel-heading">
-                  <div>
-                    <p className="eyebrow">Timeline</p>
-                    <h2>Run Flow</h2>
+                    <section className="decision-dock-panel" aria-label="Decision inbox">
+                      <div className="panel-heading">
+                        <div>
+                          <p className="eyebrow">Decision Inbox</p>
+                          <h2>{attentionItems.length ? "Pending" : "Clear"}</h2>
+                        </div>
+                        <button type="button" onClick={() => openSection("agents")}>
+                          <Inbox size={16} aria-hidden="true" />
+                          <span>Open</span>
+                        </button>
+                      </div>
+                      <div className="desktop-decision-list">
+                        {attentionItems.length ? (
+                          attentionItems.map((item) => (
+                            <article key={item.id}>
+                              <span>{item.label}</span>
+                              <strong>{item.title}</strong>
+                              <p>{item.detail}</p>
+                              <small>{item.meta}</small>
+                            </article>
+                          ))
+                        ) : (
+                          <p className="empty-state">현재 blocker나 handoff가 없습니다.</p>
+                        )}
+                      </div>
+                    </section>
+
+                    <section className="home-metrics-strip" aria-label="Workspace metrics">
+                      <Metric label="Core Features" value={2} icon={Network} tone="green" />
+                      <Metric label="Setup Ready" value={coreReadinessCount} icon={Settings} tone="blue" />
+                      <Metric label="Agents" value={agentCatalog.length} icon={Bot} tone="blue" />
+                      <Metric label="Task Runs" value={snapshot.stats.tasks} icon={PlayCircle} tone="amber" />
+                      <Metric label="Deferred" value={attentionItems.length + collaborationBoard.summary.blockedTasks} icon={Inbox} tone="red" />
+                      <Metric label="Root Tools" value={rootToolItems.length} icon={Code2} tone="violet" />
+                    </section>
                   </div>
-                  <Activity size={18} aria-hidden="true" />
-                </div>
-                <div className="desktop-run-timeline">
-                  {commandSteps.map((step, index) => (
-                    <button
-                      key={step.label}
-                      className={`timeline-step step-${step.tone}`}
-                      onClick={() => step.section && openSection(step.section)}
-                      type="button"
-                      disabled={!step.section}
-                    >
-                      <span>{index + 1}</span>
-                      <step.icon size={16} aria-hidden="true" />
-                      <strong>{step.title}</strong>
-                      <small>{step.detail}</small>
-                    </button>
-                  ))}
-                </div>
-              </section>
+                </details>
 
-              <section className="decision-dock-panel" aria-label="Decision inbox">
-                <div className="panel-heading">
-                  <div>
-                    <p className="eyebrow">Decision Inbox</p>
-                    <h2>{attentionItems.length ? "Pending" : "Clear"}</h2>
+                <details className="home-disclosure-panel">
+                  <summary>
+                    <span>{uiLanguage === "ko" ? "제품 구조" : "Product Structure"}</span>
+                    <small>{uiLanguage === "ko" ? "기능 아키텍처와 참고 근거" : "Feature architecture and references"}</small>
+                  </summary>
+                  <div className="home-disclosure-body">
+                    <ProductFeatureArchitecturePanel
+                      architecture={productFeatureArchitecture}
+                      referenceAdvantages={referencePlatformAdvantages}
+                      onOpenSection={openSection}
+                      onOpenOperatorCenter={() => setOperatorCenterOpen(true)}
+                    />
                   </div>
-                  <button type="button" onClick={() => openSection("agents")}>
-                    <Inbox size={16} aria-hidden="true" />
-                    <span>Open</span>
-                  </button>
-                </div>
-                <div className="desktop-decision-list">
-                  {attentionItems.length ? (
-                    attentionItems.map((item) => (
-                      <article key={item.id}>
-                        <span>{item.label}</span>
-                        <strong>{item.title}</strong>
-                        <p>{item.detail}</p>
-                        <small>{item.meta}</small>
-                      </article>
-                    ))
-                  ) : (
-                    <p className="empty-state">현재 blocker나 handoff가 없습니다.</p>
-                  )}
-                </div>
-              </section>
+                </details>
 
-              <section className="home-metrics-strip" aria-label="Workspace metrics">
-                <Metric label="Core Features" value={2} icon={Network} tone="green" />
-                <Metric label="Setup Ready" value={coreReadinessCount} icon={Settings} tone="blue" />
-                <Metric label="Agents" value={agentCatalog.length} icon={Bot} tone="blue" />
-                <Metric label="Task Runs" value={snapshot.stats.tasks} icon={PlayCircle} tone="amber" />
-                <Metric label="Deferred" value={attentionItems.length + collaborationBoard.summary.blockedTasks} icon={Inbox} tone="red" />
-                <Metric label="Root Tools" value={rootToolItems.length} icon={Code2} tone="violet" />
-              </section>
+                <details className="home-disclosure-panel">
+                  <summary>
+                    <span>{uiLanguage === "ko" ? "기록과 선택 설정" : "Trail and Options"}</span>
+                    <small>{uiLanguage === "ko" ? "최근 신호, capability 상태" : "Recent signals and capability state"}</small>
+                  </summary>
+                  <div className="home-disclosure-body home-disclosure-grid">
+                    <section className="panel home-recent-panel">
+                      <div className="panel-heading">
+                        <div>
+                          <p className="eyebrow">Work Trail</p>
+                          <h2>Recent Signals</h2>
+                        </div>
+                        <button type="button" onClick={() => setOperatorCenterOpen(true)}>
+                          <ShieldCheck size={16} aria-hidden="true" />
+                          <span>Operator</span>
+                        </button>
+                      </div>
+                      <DocumentList documents={recentHistory.slice(0, 6)} compact />
+                    </section>
 
-              <section className="panel home-recent-panel">
-                <div className="panel-heading">
-                  <div>
-                    <p className="eyebrow">Work Trail</p>
-                    <h2>Recent Signals</h2>
+                    <section className="panel capability-dock-panel">
+                      <div className="panel-heading">
+                        <div>
+                          <p className="eyebrow">Capabilities</p>
+                          <h2>Optional Setup</h2>
+                        </div>
+                        <button type="button" onClick={() => openSection("desktop")}>
+                          <Settings size={16} aria-hidden="true" />
+                          <span>Runtime</span>
+                        </button>
+                      </div>
+                      <div className="capability-dock-list">
+                        <article>
+                          <SquareTerminal size={16} aria-hidden="true" />
+                          <span>Guest adapters</span>
+                          <strong>{sectionNavMeta.desktop}</strong>
+                        </article>
+                        <article>
+                          <Bot size={16} aria-hidden="true" />
+                          <span>Agents</span>
+                          <strong>{agentCatalog.length.toLocaleString("ko-KR")}</strong>
+                        </article>
+                        <article>
+                          <ShieldCheck size={16} aria-hidden="true" />
+                          <span>Public gate</span>
+                          <strong>{snapshot.publicReview.status}</strong>
+                        </article>
+                      </div>
+                    </section>
                   </div>
-                  <button type="button" onClick={() => setOperatorCenterOpen(true)}>
-                    <ShieldCheck size={16} aria-hidden="true" />
-                    <span>Operator</span>
-                  </button>
-                </div>
-                <DocumentList documents={recentHistory.slice(0, 6)} compact />
-              </section>
-
-              <section className="panel capability-dock-panel">
-                <div className="panel-heading">
-                  <div>
-                    <p className="eyebrow">Capabilities</p>
-                    <h2>Optional Setup</h2>
-                  </div>
-                  <button type="button" onClick={() => openSection("desktop")}>
-                    <Settings size={16} aria-hidden="true" />
-                    <span>Runtime</span>
-                  </button>
-                </div>
-                <div className="capability-dock-list">
-                  <article>
-                    <SquareTerminal size={16} aria-hidden="true" />
-                    <span>Guest adapters</span>
-                    <strong>{sectionNavMeta.desktop}</strong>
-                  </article>
-                  <article>
-                    <Bot size={16} aria-hidden="true" />
-                    <span>Agents</span>
-                    <strong>{agentCatalog.length.toLocaleString("ko-KR")}</strong>
-                  </article>
-                  <article>
-                    <ShieldCheck size={16} aria-hidden="true" />
-                    <span>Public gate</span>
-                    <strong>{snapshot.publicReview.status}</strong>
-                  </article>
-                </div>
-              </section>
+                </details>
+              </div>
             </div>
           )}
 
