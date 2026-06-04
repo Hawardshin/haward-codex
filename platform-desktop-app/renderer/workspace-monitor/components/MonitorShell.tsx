@@ -123,6 +123,17 @@ type CommandItem = {
   run: () => void;
 };
 
+type TaskIntentItem = {
+  id: string;
+  label: string;
+  detail: string;
+  actionLabel: string;
+  badge: string;
+  icon: LucideIcon;
+  keywords: string[];
+  run: () => void;
+};
+
 type RuntimeInitDefaults = {
   adapterId: string;
   sessionModeId: string;
@@ -3644,6 +3655,101 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     ]
   );
   const coreReadinessCount = useMemo(() => coreSetupSteps.filter((step) => step.ready).length, [coreSetupSteps]);
+  const taskIntentItems = useMemo<TaskIntentItem[]>(
+    () => [
+      {
+        id: "create-agent",
+        label: uiLanguage === "ko" ? "에이전트 만들기" : "Create an agent",
+        detail:
+          uiLanguage === "ko"
+            ? "역할, 도구, 검증 기준을 묶어 바로 작업 에이전트로 저장합니다."
+            : "Bundle role, tools, and validation into a runnable work agent.",
+        actionLabel: uiLanguage === "ko" ? "에이전트 코어" : "Agent Core",
+        badge: agentCatalog.length.toLocaleString("ko-KR"),
+        icon: Bot,
+        keywords: ["agent", "create", "builder", "subagent", "persona", "에이전트", "만들기", "작업자"],
+        run: () => openSection("agents")
+      },
+      {
+        id: "build-tool",
+        label: uiLanguage === "ko" ? "툴 만들기" : "Build a tool",
+        detail:
+          uiLanguage === "ko"
+            ? "Python 소스, 입력 스키마, venv, 배포 점검을 단계별로 진행합니다."
+            : "Move through Python source, input schema, venv, and deploy preflight.",
+        actionLabel: uiLanguage === "ko" ? "툴 스튜디오" : "Tool Studio",
+        badge: rootToolItems.length.toLocaleString("ko-KR"),
+        icon: Wrench,
+        keywords: ["tool", "python", "venv", "deploy", "registry", "툴", "파이썬", "가상환경", "배포"],
+        run: () => openSection("tools")
+      },
+      {
+        id: "run-work",
+        label: uiLanguage === "ko" ? "작업 실행" : "Run work",
+        detail:
+          uiLanguage === "ko"
+            ? "선택한 CLI lane이나 에이전트 실행을 끊기지 않는 runtime 흐름으로 시작합니다."
+            : "Start the selected CLI lane or agent run in the runtime workbench.",
+        actionLabel: "Runtime",
+        badge: runtimeInitDefaults.adapterId,
+        icon: PlayCircle,
+        keywords: ["run", "runtime", "cli", "terminal", "lane", "실행", "터미널", "작업", "런타임"],
+        run: () => openSection("desktop")
+      },
+      {
+        id: "open-files",
+        label: uiLanguage === "ko" ? "파일/소스 열기" : "Open files",
+        detail:
+          uiLanguage === "ko"
+            ? "에이전트와 CLI가 공유하는 루트 파일, 소스, 결과를 한 작업면에서 봅니다."
+            : "Open shared root files, source, and results in one work surface.",
+        actionLabel: uiLanguage === "ko" ? "루트 파일" : "Root Files",
+        badge: visibleSourceFiles.length.toLocaleString("ko-KR"),
+        icon: Code2,
+        keywords: ["file", "source", "code", "root", "파일", "소스", "코드", "루트"],
+        run: () => openSection("source")
+      },
+      {
+        id: "resolve-decisions",
+        label: uiLanguage === "ko" ? "막힌 결정 처리" : "Resolve decisions",
+        detail:
+          uiLanguage === "ko"
+            ? "보류 질문과 blocker를 한곳에서 확인하고 안전한 다음 행동으로 넘깁니다."
+            : "Review deferred questions and blockers, then move to the next safe action.",
+        actionLabel: uiLanguage === "ko" ? "결정함" : "Inbox",
+        badge: (attentionItems.length + collaborationBoard.summary.blockedTasks).toLocaleString("ko-KR"),
+        icon: Inbox,
+        keywords: ["decision", "inbox", "blocked", "question", "결정", "보류", "질문", "막힘"],
+        run: () => openSection("agents")
+      },
+      {
+        id: "check-setup",
+        label: uiLanguage === "ko" ? "설정 점검" : "Check setup",
+        detail:
+          uiLanguage === "ko"
+            ? "모델 계정, CLI adapter, 질문 보류 기본값이 준비됐는지 확인합니다."
+            : "Check model accounts, CLI adapters, and question handling defaults.",
+        actionLabel: uiLanguage === "ko" ? "핵심 설정" : "Core Setup",
+        badge: `${coreReadinessCount}/${coreSetupSteps.length}`,
+        icon: Settings,
+        keywords: ["setup", "settings", "account", "provider", "adapter", "설정", "계정", "어댑터"],
+        run: () => openSettingsTab("execution", "quick")
+      }
+    ],
+    [
+      agentCatalog.length,
+      attentionItems.length,
+      collaborationBoard.summary.blockedTasks,
+      coreReadinessCount,
+      coreSetupSteps.length,
+      openSection,
+      openSettingsTab,
+      rootToolItems.length,
+      runtimeInitDefaults.adapterId,
+      uiLanguage,
+      visibleSourceFiles.length
+    ]
+  );
   const workVisibilityItems = useMemo(
     () => [
       {
@@ -3920,6 +4026,16 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   );
   const commandItems = useMemo<CommandItem[]>(
     () => [
+      ...taskIntentItems.map((item) => ({
+        id: `intent-${item.id}`,
+        label: item.label,
+        detail: item.detail,
+        group: uiLanguage === "ko" ? "하고 싶은 일" : "Goal",
+        icon: item.icon,
+        badge: item.actionLabel,
+        keywords: [item.id, item.actionLabel, ...item.keywords],
+        run: item.run
+      })),
       ...workVisibleSections.map((item) => ({
         id: `section-${item.id}`,
         label: item.label,
@@ -4080,6 +4196,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       researchInsightAgent,
       runtimeInitDefaults.adapterId,
       sectionNavMeta,
+      taskIntentItems,
       terminalDrawerOpen,
       uiLanguage,
       viewCategories,
@@ -4143,6 +4260,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
         <section
           className="desktop-viewport"
+          data-active-section={section}
           data-primary-work-surface={isPrimaryWorkSurface ? "true" : undefined}
           aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"}
           tabIndex={0}
@@ -4218,7 +4336,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                     runCommandItem(filteredCommandItems[0]);
                   }
                 }}
-                placeholder="섹션, 설정, 문서 필터, 빠른 실행 검색"
+                placeholder={uiLanguage === "ko" ? "하고 싶은 일 검색: 툴, 에이전트, 실행, 파일, 설정" : "Search goals: tool, agent, run, files, setup"}
               />
               <button type="button" onClick={() => setCommandPaletteOpen(false)}>
                 {uiLanguage === "ko" ? "닫기" : "Close"}
@@ -4896,23 +5014,18 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                       </article>
                     ))}
                   </div>
-                  <div className="workspace-home-actions">
-                    <a href="#home-depth-feature-agents">
-                      <Bot size={16} aria-hidden="true" />
-                      <span>{uiLanguage === "ko" ? "에이전트 만들기" : "Create Agent"}</span>
-                    </a>
-                    <a href="#home-depth-feature-run">
-                      <Network size={16} aria-hidden="true" />
-                      <span>{uiLanguage === "ko" ? "CLI 작업 시작" : "Start CLI Run"}</span>
-                    </a>
-                    <a href="#home-depth-feature-files">
-                      <Code2 size={16} aria-hidden="true" />
-                      <span>{uiLanguage === "ko" ? "루트 파일 열기" : "Open Root Files"}</span>
-                    </a>
-                    <a href="#home-depth-setup">
-                      <Settings size={16} aria-hidden="true" />
-                      <span>{uiLanguage === "ko" ? "설정 점검" : "Check Setup"}</span>
-                    </a>
+                  <div className="workspace-home-actions task-intent-grid" aria-label={uiLanguage === "ko" ? "작업 목표 선택" : "Choose work goal"}>
+                    {taskIntentItems.map((item, index) => (
+                      <button key={item.id} type="button" onClick={item.run} data-task-intent={item.id}>
+                        <span className="task-intent-index">{index + 1}</span>
+                        <item.icon size={16} aria-hidden="true" />
+                        <span>
+                          <strong>{item.label}</strong>
+                          <small>{item.detail}</small>
+                        </span>
+                        <em>{item.badge}</em>
+                      </button>
+                    ))}
                   </div>
                 </section>
 

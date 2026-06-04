@@ -1928,6 +1928,78 @@ main {
   font-weight: 800;
 }
 
+.task-intent-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.workspace-home-actions.task-intent-grid button {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  align-items: center;
+  justify-content: stretch;
+  min-height: 92px;
+  gap: 8px;
+  padding: 11px;
+  text-align: left;
+}
+
+.workspace-home-actions.task-intent-grid button > span:not(.task-intent-index) {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.workspace-home-actions.task-intent-grid strong,
+.workspace-home-actions.task-intent-grid em {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace-home-actions.task-intent-grid small {
+  display: -webkit-box;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  font-weight: 650;
+  line-height: 1.35;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.workspace-home-actions.task-intent-grid em,
+.task-intent-index {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  min-height: 26px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  background: var(--surface-muted);
+  font-size: var(--font-size-caption);
+  font-style: normal;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.workspace-home-actions.task-intent-grid button:hover,
+.workspace-home-actions.task-intent-grid button:focus-visible {
+  border-color: var(--control-selected-border);
+  background: var(--control-selected-bg);
+  color: var(--control-selected-fg);
+}
+
+.workspace-home-actions.task-intent-grid button:hover small,
+.workspace-home-actions.task-intent-grid button:hover em,
+.workspace-home-actions.task-intent-grid button:focus-visible small,
+.workspace-home-actions.task-intent-grid button:focus-visible em {
+  color: var(--control-selected-fg);
+}
+
 .core-home-panel {
   grid-column: 1 / -1;
 }
@@ -12005,22 +12077,45 @@ h3 {
 
   .activity-rail {
     grid-template-columns: auto minmax(0, 1fr) auto auto;
-    grid-template-rows: 1fr;
+    grid-template-rows: auto;
+    align-items: center;
     height: auto;
-    max-height: none;
+    max-height: 64px;
     border-right: 0;
     border-bottom: 1px solid #cfd8e3;
     padding: 8px;
+    overflow: hidden;
   }
 
   .activity-rail nav {
     display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
     overflow-x: auto;
     overflow-y: hidden;
   }
 
   .activity-rail button {
     flex: 0 0 var(--control-target-size);
+  }
+
+  .desktop-app-shell.sidebar-expanded .activity-rail button {
+    width: var(--control-target-size);
+    justify-content: center;
+    padding: 0;
+  }
+
+  .desktop-app-shell.sidebar-expanded .activity-rail button span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .activity-settings {
+    align-self: center;
   }
 
   .settings-dialog-body {
@@ -12045,6 +12140,26 @@ h3 {
     grid-template-columns: 1fr;
     align-items: start;
     padding: 10px 0;
+  }
+
+  .desktop-viewport[data-active-section="overview"] .titlebar-context-strip,
+  .desktop-viewport[data-active-section="overview"] .titlebar-actions,
+  .desktop-viewport[data-active-section="overview"] > .operator-strip,
+  .desktop-viewport[data-active-section="overview"] > .desktop-toolbar {
+    display: none;
+  }
+
+  .desktop-viewport[data-active-section="overview"] .core-home-status-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .desktop-viewport[data-active-section="overview"] .core-home-status-row article {
+    min-height: 62px;
+    padding: 10px;
+  }
+
+  .desktop-viewport[data-active-section="overview"] .core-home-status-row small {
+    display: none;
   }
 
   .titlebar-actions {
@@ -13087,18 +13202,18 @@ h3 {
 @media (max-width: 420px) {
   .activity-rail {
     grid-template-columns: auto minmax(0, 1fr) auto auto;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto;
   }
 
   .activity-rail nav {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    overflow: visible;
+    grid-column: auto;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .activity-rail nav button {
-    width: 100%;
+    width: var(--control-target-size);
     min-width: 0;
   }
 

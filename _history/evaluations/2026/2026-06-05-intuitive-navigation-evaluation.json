@@ -1,0 +1,19 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-intuitive-navigation",
+  "outcome": "pass",
+  "summary": "Overview와 command palette에 목표 기반 진입점을 추가하고, 모바일 Overview에서 목표 카드가 첫 화면 안에 보이도록 compact layout을 적용했다.",
+  "requirements": ["REQ-WM-043"],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "Playwright 1280/390 smoke: intentCount=6, hasBuildTool=true, overflow=0"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_notes": "로컬 정적 HTTP 서버를 검증 중 실행했고 검증 후 종료했다.",
+  "known_residuals": [
+    "workspace snapshot generatedAt류 파일은 빌드 중 갱신될 수 있어 커밋 범위를 따로 판단해야 한다."
+  ]
+}
