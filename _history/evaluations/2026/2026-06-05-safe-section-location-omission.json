@@ -1,0 +1,32 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "safe-section-location",
+  "status": "passed",
+  "checks": [
+    {
+      "item": "web_first_intake",
+      "status": "passed",
+      "evidence": "_history/web-searches/2026/2026-06-05-safe-section-location.ko.md"
+    },
+    {
+      "item": "bug_identified",
+      "status": "passed",
+      "evidence": "Direct decodeURIComponent on hash could throw URIError for malformed percent encoding."
+    },
+    {
+      "item": "regression_test_added",
+      "status": "passed",
+      "evidence": "tests/section-location.test.mjs covers malformed percent encoding."
+    },
+    {
+      "item": "browser_smoke_completed",
+      "status": "passed",
+      "evidence": "Playwright static export smoke with #section-% completed without page errors."
+    },
+    {
+      "item": "generated_outputs_not_staged",
+      "status": "passed",
+      "evidence": "Generated snapshot JSON files remain unstaged."
+    }
+  ]
+}

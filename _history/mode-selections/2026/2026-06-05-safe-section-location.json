@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "safe-section-location",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selection_reason": "The user asked to find and improve a bug. The work fixed a frontend section routing bug and added tests without installing dependencies.",
+  "mode_policy_notes": [
+    "Web-first intake was performed.",
+    "Large-scope decomposition was simulated and narrowed to Workspace Monitor initial section parsing.",
+    "No install command or global environment change was performed.",
+    "Generated snapshot outputs were left unstaged."
+  ]
+}

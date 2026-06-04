@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
+import { readInitialSectionFromParts } from "@/lib/section-location.mjs";
 import type { WorkspaceSnapshot } from "@/lib/snapshot";
 
 type MonitorShellProps = {
@@ -108,15 +109,7 @@ function readInitialSectionFromLocation() {
   if (typeof window === "undefined") {
     return "";
   }
-  const fromQuery = new URLSearchParams(window.location.search).get("section");
-  if (fromQuery) {
-    return fromQuery;
-  }
-  const hash = window.location.hash.replace(/^#/, "");
-  if (!hash) {
-    return "";
-  }
-  return decodeURIComponent(hash).replace(/^section-/, "");
+  return readInitialSectionFromParts(window.location.search, window.location.hash);
 }
 
 async function fetchPublicSnapshot(controller: AbortController | null) {

@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "safe-section-location",
+  "timings": [
+    {
+      "phase": "web_and_local_intake",
+      "duration": "about 3m",
+      "notes": "Checked official MDN, React, and Node docs, then inspected SnapshotLoader section parsing."
+    },
+    {
+      "phase": "implementation",
+      "duration": "about 5m",
+      "notes": "Extracted a testable section-location helper, added safe decode, TypeScript declaration, and regression tests."
+    },
+    {
+      "phase": "validation",
+      "duration": "about 8m",
+      "notes": "Ran tests/checks/build/customer audit/doctor and Playwright malformed hash smoke."
+    },
+    {
+      "phase": "history",
+      "duration": "about 4m",
+      "notes": "Recorded request, plan, trace, evaluation, omission, resource, and timing notes."
+    }
+  ],
+  "bottleneck_notes": [
+    "The helper is .mjs to keep Node tests direct; TypeScript requires the paired .d.mts declaration.",
+    "The first browser smoke used the wrong shell selector; the corrected selector is .desktop-app-shell."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "safe-section-location",
+  "status": "passed",
+  "resource_risks": [
+    "Node test subprocess",
+    "Next.js static build subprocess",
+    "Temporary HTTP server for static export smoke",
+    "Playwright browser subprocess"
+  ],
+  "controls": [
+    "No persistent dev server was started.",
+    "Temporary HTTP server was closed in the Playwright script finally block.",
+    "Browser instance was closed in the Playwright script finally block.",
+    "No install command was run.",
+    "All validation commands exited before close-out."
+  ],
+  "validation_commands": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor check",
+    "corepack pnpm --filter platform-desktop-app test",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "Playwright static export malformed hash smoke",
+    "corepack pnpm --filter platform-desktop-app run customer-bundle:audit",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "corepack pnpm --filter platform-desktop-app run doctor -- --json",
+    "git diff --check"
+  ]
+}
