@@ -1,0 +1,51 @@
+{
+  "date": "2026-06-05",
+  "task": "button-target-sizing",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "requirements": [
+    "REQ-WM-030"
+  ],
+  "implementation_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css"
+  ],
+  "validation": [
+    {
+      "command": "pnpm run check",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm test",
+      "status": "passed",
+      "tests": 17
+    },
+    {
+      "command": "pnpm exec next build",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm run perf:budget",
+      "status": "passed",
+      "largest_chunk_bytes": 361226
+    },
+    {
+      "command": "curl -fsS -o /dev/null -w '%{http_code} %{time_total}\\n' http://localhost:3212/",
+      "status": "passed",
+      "result": "200 0.057559"
+    },
+    {
+      "command": "in-app Browser first-screen control size audit",
+      "status": "passed",
+      "visible_controls": 52,
+      "undersized_controls_below_40px": 0
+    }
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-button-target-sizing-resource.json"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-button-target-sizing-omission.json"
+  ],
+  "installation_occurred": false,
+  "cli_pipeline_occurred": false
+}

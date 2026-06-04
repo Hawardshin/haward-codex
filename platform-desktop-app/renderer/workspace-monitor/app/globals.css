@@ -21,16 +21,29 @@
   --mint-soft: #e8f6ef;
   --peach-soft: #fff1e7;
   --soft-shadow: 0 4px 12px rgba(31, 41, 51, 0.06);
-  --control-hit-size: 32px;
-  --control-target-size: 36px;
+  --control-hit-size: 40px;
+  --control-target-size: 44px;
+  --control-compact-target-size: 40px;
+  --control-dense-target-size: 32px;
   --control-radius: 7px;
   --control-gap: 7px;
-  --control-padding-x: 10px;
+  --control-padding-x: 12px;
   --control-active-shift: 1px;
   --text-natural-wrap: break-word;
   --text-long-token-wrap: anywhere;
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "Apple SD Gothic Neo", "Segoe UI", "Malgun Gothic", system-ui, sans-serif;
+}
+
+@media (pointer: coarse), (max-width: 720px) {
+  :root {
+    --control-hit-size: 44px;
+    --control-target-size: 48px;
+    --control-compact-target-size: 44px;
+    --control-dense-target-size: 40px;
+    --control-gap: 8px;
+    --control-padding-x: 14px;
+  }
 }
 
 .desktop-app-root.theme-dark {
@@ -552,7 +565,7 @@ main {
 
 .sidebar-status-card button {
   justify-content: center;
-  min-height: 34px;
+  min-height: var(--control-target-size);
   border: 1px solid var(--line);
   background: var(--surface-raised);
   color: var(--text);
@@ -679,7 +692,7 @@ main {
   gap: 8px;
   align-items: center;
   width: min(280px, 34vw);
-  min-height: 36px;
+  min-height: var(--control-target-size);
   border: 1px solid var(--line);
   background: var(--surface);
   border-radius: 7px;
@@ -1315,7 +1328,7 @@ main {
 
 .product-feature-actions button {
   display: inline-flex;
-  min-height: 36px;
+  min-height: var(--control-target-size);
   align-items: center;
   gap: 7px;
   border: 1px solid #9fb0c2;
@@ -1595,7 +1608,7 @@ main {
 
 .product-operator-strip button {
   display: inline-flex;
-  min-height: 34px;
+  min-height: var(--control-target-size);
   align-items: center;
   gap: 7px;
   border: 1px solid var(--line);
@@ -1808,7 +1821,7 @@ main {
 
 .core-setup-list button {
   display: inline-flex;
-  min-height: 34px;
+  min-height: var(--control-target-size);
   align-items: center;
   gap: 6px;
   border: 1px solid var(--line);
@@ -2153,7 +2166,7 @@ h3 {
 }
 
 .segmented-control button {
-  min-height: 34px;
+  min-height: var(--control-compact-target-size);
   border: 1px solid var(--line);
   background: var(--surface-raised);
   color: var(--text);
@@ -2241,7 +2254,7 @@ h3 {
 .app-chip-group button {
   display: inline-flex;
   max-width: 142px;
-  min-height: 30px;
+  min-height: var(--control-compact-target-size);
   align-items: center;
   gap: 5px;
   border: 1px solid var(--line);
@@ -2304,7 +2317,7 @@ h3 {
 }
 
 .command-palette-search button {
-  min-height: 30px;
+  min-height: var(--control-compact-target-size);
   border: 1px solid var(--line);
   background: var(--surface-muted);
   color: var(--slate);
@@ -2731,7 +2744,7 @@ h3 {
 
 .operator-strip-actions button {
   display: inline-flex;
-  min-height: 34px;
+  min-height: var(--control-target-size);
   max-width: 220px;
   align-items: center;
   gap: 6px;
@@ -2983,7 +2996,7 @@ h3 {
 
 .command-actions button {
   display: inline-flex;
-  min-height: 38px;
+  min-height: var(--control-target-size);
   align-items: center;
   gap: 7px;
   border: 1px solid #9fb0c2;
@@ -3752,7 +3765,7 @@ h3 {
 .mode-option-grid button {
   display: inline-flex;
   width: fit-content;
-  min-height: 34px;
+  min-height: var(--control-target-size);
   align-items: center;
   gap: 6px;
   border: 1px solid #b7c3cf;
@@ -4101,7 +4114,7 @@ h3 {
   gap: 6px;
   align-items: center;
   justify-content: center;
-  min-height: 32px;
+  min-height: var(--control-compact-target-size);
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--text);
@@ -4846,7 +4859,7 @@ h3 {
 
 .native-git-view-tabs button {
   min-width: 0;
-  min-height: 32px;
+  min-height: var(--control-compact-target-size);
   border: 1px solid var(--line);
   border-radius: 7px;
   background: var(--surface);
@@ -5248,7 +5261,7 @@ h3 {
 
 .inline-toggle {
   display: inline-flex !important;
-  min-height: 38px;
+  min-height: var(--control-target-size);
   align-items: center;
   gap: 8px;
   border: 1px solid var(--line);
@@ -5297,7 +5310,7 @@ h3 {
 }
 
 .task-pipe-controls select {
-  min-height: 38px;
+  min-height: var(--control-target-size);
   padding: 8px 10px;
 }
 
@@ -5308,7 +5321,7 @@ h3 {
 
 .task-pipe-controls button {
   display: inline-flex;
-  min-height: 38px;
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: 6px;
@@ -6281,7 +6294,7 @@ h3 {
 
 .search-agent-actions button {
   display: inline-flex;
-  min-height: 38px;
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
@@ -6475,7 +6488,7 @@ h3 {
 .agent-provider-run-controls input {
   width: 100%;
   min-width: 0;
-  min-height: 34px;
+  min-height: var(--control-compact-target-size);
   border: 1px solid var(--line);
   background: var(--surface-raised);
   color: var(--text);
@@ -6487,16 +6500,16 @@ h3 {
 
 .agent-model-picker {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 34px;
+  grid-template-columns: minmax(0, 1fr) var(--control-compact-target-size);
   gap: 6px;
   min-width: 0;
 }
 
 .agent-model-refresh-button {
   display: inline-flex;
-  width: 34px;
-  min-width: 34px;
-  min-height: 34px;
+  width: var(--control-compact-target-size);
+  min-width: var(--control-compact-target-size);
+  min-height: var(--control-compact-target-size);
   align-items: center;
   justify-content: center;
   border: 1px solid var(--line);
@@ -6602,7 +6615,7 @@ h3 {
 
 .agent-chat-actions button {
   display: inline-flex;
-  min-height: 38px;
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
@@ -6673,7 +6686,7 @@ h3 {
 
 .panel-link-button {
   display: inline-flex;
-  min-height: 34px;
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
@@ -6860,7 +6873,7 @@ h3 {
 
 .agentcore-blueprint-actions button {
   display: inline-flex;
-  min-height: 38px;
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
@@ -7355,7 +7368,7 @@ h3 {
 .source-editor-controls input,
 .source-editor-controls select,
 .source-customization-bar select {
-  min-height: 38px;
+  min-height: var(--control-target-size);
   padding: 8px 10px;
 }
 
@@ -7369,7 +7382,7 @@ h3 {
 .source-editor-controls button,
 .source-customization-bar button {
   display: inline-flex;
-  min-height: 38px;
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
@@ -7918,7 +7931,7 @@ h3 {
 }
 
 .decision-answer-controls select {
-  min-height: 38px;
+  min-height: var(--control-target-size);
   padding: 8px 10px;
 }
 
@@ -7930,7 +7943,7 @@ h3 {
 
 .decision-answer-controls button {
   display: inline-flex;
-  min-height: 38px;
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: 6px;
@@ -8141,7 +8154,7 @@ h3 {
 .source-command-toolbar {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
   margin: -4px 0 12px;
   border: 1px solid color-mix(in srgb, var(--line) 80%, var(--slate) 10%);
@@ -8156,14 +8169,15 @@ h3 {
 .source-command-toolbar button,
 .source-settings-dialog button {
   display: inline-flex;
-  min-height: 34px;
+  min-width: var(--control-compact-target-size);
+  min-height: var(--control-compact-target-size);
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
   border: 1px solid transparent;
   background: transparent;
-  border-radius: 6px;
-  padding: 6px 9px;
+  border-radius: var(--control-radius);
+  padding: 8px 11px;
   color: var(--text);
   white-space: normal;
 }
@@ -8199,7 +8213,7 @@ h3 {
 .source-workbench-switcher {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 8px;
   align-items: center;
   margin: -4px 0 12px;
   border: 1px solid color-mix(in srgb, var(--line) 84%, var(--blue) 10%);
@@ -8211,14 +8225,15 @@ h3 {
 .source-workbench-switcher button {
   position: relative;
   display: inline-flex;
-  min-height: 34px;
+  min-width: var(--control-compact-target-size);
+  min-height: var(--control-compact-target-size);
   align-items: center;
   justify-content: center;
   gap: 6px;
   border: 1px solid transparent;
   background: transparent;
   border-radius: 7px;
-  padding: 7px 10px 8px;
+  padding: 8px 12px 9px;
   color: var(--text);
   white-space: nowrap;
 }
@@ -8357,7 +8372,7 @@ h3 {
 }
 
 .source-file-browser input {
-  min-height: 36px;
+  min-height: var(--control-target-size);
   margin-bottom: 8px;
   padding: 8px 10px;
 }
@@ -8546,7 +8561,8 @@ h3 {
 
 .source-editor-tab-close {
   display: grid;
-  width: 34px;
+  width: var(--control-compact-target-size);
+  min-width: var(--control-compact-target-size);
   place-items: center;
   border-left: 1px solid var(--line);
   color: var(--muted);
@@ -9203,7 +9219,7 @@ h3 {
 
 .native-workspace-actions button {
   display: inline-flex;
-  min-height: 38px;
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
@@ -9385,14 +9401,14 @@ h3 {
 
 .workspace-explorer-actions {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) repeat(2, minmax(34px, auto));
+  grid-template-columns: minmax(0, 1fr) repeat(2, minmax(var(--control-compact-target-size), auto));
   gap: 6px;
   padding: 0 8px 8px;
 }
 
 .workspace-explorer-actions button {
   display: inline-flex;
-  min-height: 32px;
+  min-height: var(--control-compact-target-size);
   align-items: center;
   justify-content: center;
   gap: 5px;
@@ -9400,10 +9416,10 @@ h3 {
   background: var(--surface);
   color: var(--text);
   border-radius: var(--control-radius);
-  padding: 6px;
+  padding: 8px;
   font-size: 11px;
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.25;
   white-space: normal;
 }
 
@@ -9494,8 +9510,8 @@ h3 {
   align-items: center;
   gap: 6px;
   width: 100%;
-  min-height: 26px;
-  padding: 3px 8px;
+  min-height: var(--control-dense-target-size);
+  padding: 5px 8px;
   text-align: left;
 }
 
@@ -9532,8 +9548,8 @@ h3 {
   align-items: center;
   gap: 6px;
   width: 100%;
-  min-height: 28px;
-  padding: 4px 8px;
+  min-height: var(--control-dense-target-size);
+  padding: 5px 8px;
   text-align: left;
 }
 
@@ -9737,7 +9753,8 @@ h3 {
 
 .source-viewer-actions button {
   display: inline-flex;
-  min-height: 32px;
+  min-width: var(--control-compact-target-size);
+  min-height: var(--control-compact-target-size);
   align-items: center;
   justify-content: center;
   gap: 6px;
@@ -9887,7 +9904,7 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  min-height: 36px;
+  min-height: var(--control-target-size);
   border: 1px solid var(--line);
   background: var(--surface);
   border-radius: 8px;
@@ -10925,7 +10942,7 @@ h3 {
   }
 
   .activity-rail button {
-    flex: 0 0 42px;
+    flex: 0 0 var(--control-target-size);
   }
 
   .settings-dialog-body {
