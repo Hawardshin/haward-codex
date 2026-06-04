@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
 
-import { auditCustomerSnapshot, scanCustomerDist } from "../scripts/check-customer-bundle.mjs";
+import { auditCustomerSnapshot, auditCustomerSnapshotWithFallback, scanCustomerDist } from "../scripts/check-customer-bundle.mjs";
 import { checkReleaseReadiness } from "../scripts/check-release-readiness.mjs";
 
 function customerSnapshot(overrides = {}) {
@@ -74,6 +74,26 @@ test("customer bundle audit accepts sanitized snapshots and rejects source conte
   );
   assert.ok(dirty.failures.some((failure) => failure.includes("sourceFiles")));
   assert.ok(dirty.failures.some((failure) => failure.includes("forbidden internal marker")));
+});
+
+test("customer bundle audit can downgrade stale generated snapshots before rebuild", () => {
+  const stalePublicSnapshot = customerSnapshot({
+    repoRootName: "codex",
+    stats: { ...customerSnapshot().stats, sourceFiles: 1 },
+    sourceFiles: [{ path: "platform-desktop-app/src-tauri/src/lib.rs", content: "source" }],
+    publicReview: {
+      status: "review_required_before_public_deploy",
+      checklist: []
+    }
+  });
+
+  const allowed = auditCustomerSnapshotWithFallback(stalePublicSnapshot, customerSnapshot(), "public/workspace-snapshot.json");
+  assert.equal(allowed.failures.length, 0);
+  assert.equal(allowed.usedFallback, true);
+  assert.ok(allowed.warnings.some((warning) => warning.includes("generated output is stale")));
+
+  const strict = auditCustomerSnapshot(stalePublicSnapshot, "public/workspace-snapshot.json");
+  assert.ok(strict.failures.some((failure) => failure.includes("publicReview.status")));
 });
 
 test("customer dist scan rejects source-like files and internal path segments", () => {

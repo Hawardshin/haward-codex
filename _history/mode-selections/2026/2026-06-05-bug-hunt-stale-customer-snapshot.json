@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "bug-hunt-stale-customer-snapshot",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selection_reason": "The user asked to find bugs. The work touched desktop developer checks, customer bundle audit behavior, package scripts, and tests without installing dependencies.",
+  "mode_policy_notes": [
+    "Web-first intake was performed.",
+    "Large-scope decomposition was simulated and narrowed to recent desktop/workspace-monitor build and audit paths.",
+    "Overlapping build commands were not used after the initial lock signal; generated-output validation was serialized.",
+    "No install command or global environment change was performed."
+  ]
+}

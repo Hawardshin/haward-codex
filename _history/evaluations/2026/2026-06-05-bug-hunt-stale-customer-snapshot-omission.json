@@ -1,0 +1,37 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "bug-hunt-stale-customer-snapshot",
+  "status": "passed",
+  "checks": [
+    {
+      "item": "web_first_intake",
+      "status": "passed",
+      "evidence": "_history/web-searches/2026/2026-06-05-bug-hunt-stale-customer-snapshot.ko.md"
+    },
+    {
+      "item": "large_scope_decomposition",
+      "status": "passed",
+      "evidence": "_history/plans/2026/2026-06-05-bug-hunt-stale-customer-snapshot.ko.md"
+    },
+    {
+      "item": "bug_reproduced",
+      "status": "passed",
+      "evidence": "Normal workspace-monitor build produced stale public/out generated snapshots that strict audit rejected."
+    },
+    {
+      "item": "strict_gate_preserved",
+      "status": "passed",
+      "evidence": "Strict customer-bundle audit still rejects stale generated output without the prebuild option."
+    },
+    {
+      "item": "prebuild_gate_unblocked",
+      "status": "passed",
+      "evidence": "Prebuild/readiness audit passed with stale warnings when customer fallback was clean."
+    },
+    {
+      "item": "generated_outputs_not_staged",
+      "status": "passed",
+      "evidence": "Generated snapshot JSON files remain unstaged."
+    }
+  ]
+}

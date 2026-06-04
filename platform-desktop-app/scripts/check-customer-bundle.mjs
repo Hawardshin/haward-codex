@@ -160,14 +160,55 @@ export function scanCustomerDist(distRoot) {
   return { failures, warnings, scannedFiles };
 }
 
-export function runCustomerBundleAudit({ allowMissingDist = false } = {}) {
+export function auditCustomerSnapshotWithFallback(snapshot, fallbackSnapshot, snapshotPath = "workspace-snapshot.json") {
+  const result = auditCustomerSnapshot(snapshot, snapshotPath);
+  if (!result.failures.length) {
+    return {
+      failures: result.failures,
+      warnings: result.warnings,
+      usedFallback: false
+    };
+  }
+
+  if (!fallbackSnapshot) {
+    return {
+      failures: result.failures,
+      warnings: result.warnings,
+      usedFallback: false
+    };
+  }
+
+  const fallbackResult = auditCustomerSnapshot(fallbackSnapshot, `${snapshotPath} fallback`);
+  if (fallbackResult.failures.length) {
+    return {
+      failures: [...result.failures, ...fallbackResult.failures],
+      warnings: [...result.warnings, ...fallbackResult.warnings],
+      usedFallback: false
+    };
+  }
+
+  return {
+    failures: [],
+    warnings: [
+      `${snapshotPath}: generated output is stale, but src/generated/customer-workspace-snapshot.json is customer-safe. Run corepack pnpm run desktop:renderer:build before packaging.`,
+      ...result.warnings,
+      ...fallbackResult.warnings
+    ],
+    usedFallback: true
+  };
+}
+
+export function runCustomerBundleAudit({ allowMissingDist = false, allowStaleGeneratedSnapshots = false } = {}) {
   const failures = [];
   const warnings = [];
   const tauriConfig = readJson(path.join(root, "src-tauri", "tauri.conf.json"));
   const frontendDist = path.resolve(root, "src-tauri", tauriConfig.build?.frontendDist || "");
   const publicSnapshotPath = path.join(root, "renderer", "workspace-monitor", "public", "workspace-snapshot.json");
+  const fallbackSnapshotPath = path.join(root, "renderer", "workspace-monitor", "src", "generated", "customer-workspace-snapshot.json");
   const distSnapshotPath = path.join(frontendDist, "workspace-snapshot.json");
   const checkedSnapshots = [];
+  const staleSnapshots = [];
+  const fallbackSnapshot = existsSync(fallbackSnapshotPath) ? readJson(fallbackSnapshotPath) : null;
 
   for (const snapshotPath of [publicSnapshotPath, distSnapshotPath]) {
     if (!existsSync(snapshotPath)) {
@@ -179,10 +220,16 @@ export function runCustomerBundleAudit({ allowMissingDist = false } = {}) {
       continue;
     }
     const snapshot = readJson(snapshotPath);
-    const result = auditCustomerSnapshot(snapshot, path.relative(workspaceRoot, snapshotPath));
+    const relativeSnapshotPath = path.relative(workspaceRoot, snapshotPath).split(path.sep).join("/");
+    const result = allowStaleGeneratedSnapshots
+      ? auditCustomerSnapshotWithFallback(snapshot, fallbackSnapshot, relativeSnapshotPath)
+      : auditCustomerSnapshot(snapshot, relativeSnapshotPath);
     failures.push(...result.failures);
     warnings.push(...result.warnings);
-    checkedSnapshots.push(path.relative(workspaceRoot, snapshotPath).split(path.sep).join("/"));
+    if (result.usedFallback) {
+      staleSnapshots.push(relativeSnapshotPath);
+    }
+    checkedSnapshots.push(relativeSnapshotPath);
   }
 
   let distScan = { failures: [], warnings: [], scannedFiles: [] };
@@ -201,6 +248,10 @@ export function runCustomerBundleAudit({ allowMissingDist = false } = {}) {
     failures,
     warnings,
     checkedSnapshots,
+    staleSnapshots,
+    fallbackSnapshot: existsSync(fallbackSnapshotPath)
+      ? path.relative(workspaceRoot, fallbackSnapshotPath).split(path.sep).join("/")
+      : "",
     frontendDist: path.relative(workspaceRoot, frontendDist).split(path.sep).join("/"),
     scannedDistFiles: distScan.scannedFiles.length,
     maxDistScanFiles: MAX_DIST_SCAN_FILES,
@@ -215,7 +266,8 @@ function readJson(filePath) {
 
 function parseArgs(argv) {
   return {
-    allowMissingDist: argv.includes("--allow-missing-dist")
+    allowMissingDist: argv.includes("--allow-missing-dist"),
+    allowStaleGeneratedSnapshots: argv.includes("--allow-stale-generated-snapshots")
   };
 }
 

@@ -139,7 +139,7 @@ function checkPlaywrightBrowsers() {
 }
 
 function checkCustomerBundle() {
-  const report = runCustomerBundleAudit({ allowMissingDist: true });
+  const report = runCustomerBundleAudit({ allowMissingDist: true, allowStaleGeneratedSnapshots: true });
   return {
     id: "customer_bundle",
     label: "Customer renderer bundle boundary",

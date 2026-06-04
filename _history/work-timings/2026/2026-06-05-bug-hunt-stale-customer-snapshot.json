@@ -1,0 +1,35 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "bug-hunt-stale-customer-snapshot",
+  "timings": [
+    {
+      "phase": "web_and_scope_intake",
+      "duration": "about 4m",
+      "notes": "Checked official docs and narrowed the broad bug hunt to recent desktop/workspace-monitor build and audit paths."
+    },
+    {
+      "phase": "automated_bug_hunt",
+      "duration": "about 8m",
+      "notes": "Ran existing tests/checks, static builds, doctor, and customer bundle audit paths. Identified stale generated snapshot failure after developer build."
+    },
+    {
+      "phase": "implementation",
+      "duration": "about 8m",
+      "notes": "Added fallback-aware prebuild audit mode while preserving strict customer bundle audit behavior."
+    },
+    {
+      "phase": "validation",
+      "duration": "about 8m",
+      "notes": "Validated stale-state behavior, restored customer build output, and reran tests/checks/doctor/perf/dry-run."
+    },
+    {
+      "phase": "history",
+      "duration": "about 4m",
+      "notes": "Recorded request, plan, trace, evaluation, omission, resource, and timing notes."
+    }
+  ],
+  "bottleneck_notes": [
+    "Next.js build lock appears when two builds touch the same workspace-monitor output concurrently; future validation should serialize overlapping generated-output builds.",
+    "Generated snapshots remain noisy in git status and should stay unstaged unless explicitly promoted."
+  ]
+}

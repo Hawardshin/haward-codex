@@ -1,0 +1,31 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "bug-hunt-stale-customer-snapshot",
+  "status": "passed",
+  "resource_risks": [
+    "Next.js static build subprocess",
+    "Node test subprocess",
+    "Desktop readiness and doctor subprocesses",
+    "Generated snapshot file churn"
+  ],
+  "controls": [
+    "No dev server was started.",
+    "No install command was run.",
+    "After observing a Next build lock from overlapping builds, generated-output build validation was serialized.",
+    "Customer build was rerun before close-out to restore public/out snapshots to customer-safe status.",
+    "All validation commands exited before close-out."
+  ],
+  "validation_commands": [
+    "corepack pnpm --filter workspace-monitor build",
+    "node --input-type=module strict/prebuild customer audit assertion",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter platform-desktop-app test",
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor check",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "corepack pnpm --filter platform-desktop-app run customer-bundle:audit",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "corepack pnpm --filter platform-desktop-app run doctor -- --json",
+    "corepack pnpm --filter platform-desktop-app run pipeline:dry-run"
+  ]
+}
