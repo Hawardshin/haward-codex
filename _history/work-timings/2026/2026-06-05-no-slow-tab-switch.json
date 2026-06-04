@@ -1,0 +1,21 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-no-slow-tab-switch",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "React useTransition/lazy and web.dev INP/long-task guidance checked."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Section staged mount, tab pre-activation, deferred React section commit, and Source query gate implemented."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Static tests, check, customer build, perf budget, in-app Browser smoke, screenshot, and CPU throttle 6 tab-response audit passed."
+    }
+  ]
+}

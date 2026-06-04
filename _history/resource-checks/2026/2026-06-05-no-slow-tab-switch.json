@@ -1,0 +1,21 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-no-slow-tab-switch",
+  "status": "pass",
+  "resources_used": [
+    "local_static_http_server_port_3347",
+    "in_app_browser_tab",
+    "headless_chrome_playwright_timing_audit"
+  ],
+  "lifecycle": [
+    "static server started before Browser validation",
+    "Browser smoke and screenshot completed",
+    "Playwright timing audit completed",
+    "static server scheduled for shutdown before final response"
+  ],
+  "leak_risks": [
+    "long_running_http_server"
+  ],
+  "cleanup_required": true,
+  "cleanup_status": "completed_server_stopped"
+}

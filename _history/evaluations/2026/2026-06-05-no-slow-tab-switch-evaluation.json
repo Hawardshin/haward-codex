@@ -1,0 +1,30 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-no-slow-tab-switch",
+  "outcome": "pass",
+  "summary": "Workspace Monitor tab activation now paints before heavy section body mounts, with React section commit deferred after first paint and Source query gated until content readiness.",
+  "requirements": ["REQ-WM-039", "REQ-WM-041", "REQ-WM-054"],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor exec node scripts/audit-tab-response.mjs http://127.0.0.1:3347/#section-overview",
+    "in-app Browser smoke: overview/agents/desktop/source/tools active and ready, horizontal overflow false"
+  ],
+  "performance_result": {
+    "viewport": "1280x820",
+    "cpu_throttle": 6,
+    "active_average_ms": 18.8,
+    "active_p95_ms": 52.0,
+    "ready_average_ms": 139.4,
+    "ready_p95_ms": 240.3
+  },
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": ["_history/resource-checks/2026/2026-06-05-no-slow-tab-switch.json"],
+  "omission_check_targets": ["_history/omission-checks/2026/2026-06-05-no-slow-tab-switch.json"],
+  "mode_selection_record_targets": ["_history/mode-selections/2026/2026-06-05-no-slow-tab-switch.json"],
+  "resource_notes": "Local static HTTP server and in-app Browser session were used for verification and the server was stopped after validation."
+}

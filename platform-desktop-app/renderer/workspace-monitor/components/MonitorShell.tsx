@@ -2350,7 +2350,9 @@ function providerAuthStatusForAdapter(
 }
 
 export function MonitorShell({ snapshot, initialSection }: { snapshot: WorkspaceSnapshot; initialSection?: string }) {
-  const [section, setSection] = useState<SectionId>(() => normalizeSectionId(initialSection) || "overview");
+  const initialResolvedSection = normalizeSectionId(initialSection) || "overview";
+  const [section, setSection] = useState<SectionId>(() => initialResolvedSection);
+  const [readySection, setReadySection] = useState<SectionId>(() => initialResolvedSection);
   const [uiLanguage, setUiLanguage] = useState<UiLanguage>("ko");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
@@ -2377,7 +2379,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [agentSignalsOpen, setAgentSignalsOpen] = useState(false);
   const [agentDetailsOpen, setAgentDetailsOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState("");
+  const titlebarSectionLabelRef = useRef<HTMLElement>(null);
   const commandInputRef = useRef<HTMLInputElement>(null);
+  const pendingSectionCommitRef = useRef<(() => void) | null>(null);
   const [searchAgentRunForm, setSearchAgentRunForm] = useState<SearchAgentRunForm>(defaultSearchAgentRunForm);
   const [searchAgentChatMessages, setSearchAgentChatMessages] =
     useState<SearchAgentChatMessage[]>(defaultSearchAgentChatMessages);
@@ -2451,6 +2455,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       activateSection(nextSection);
     }
   }, [activateSection, initialSection]);
+  useEffect(() => {
+    return () => pendingSectionCommitRef.current?.();
+  }, []);
   useEffect(() => {
     if (section !== "agents" && agentSignalsOpen) {
       setAgentSignalsOpen(false);
@@ -2667,6 +2674,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
   const deferredQuery = useDeferredValue(query);
   const normalizedQuery = deferredQuery.trim().toLowerCase();
+  const sectionContentReady = readySection === section;
   const viewFilteredDocuments = useMemo(() => {
     return snapshot.documents.filter(
       (document) =>
@@ -2773,7 +2781,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const sourceLanguages = useMemo(() => {
     return Array.from(new Set(visibleSourceFiles.map((file) => file.language))).sort();
   }, [visibleSourceFiles]);
-  const sourceQuery = section === "source" ? normalizedQuery : "";
+  const sourceQuery = sectionContentReady && section === "source" ? normalizedQuery : "";
   const filteredSourceFiles = useMemo(() => {
     return visibleSourceFiles.filter((file) => {
       const projectMatches = sourceProject === "all" || file.project === sourceProject;
@@ -3014,22 +3022,54 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         return item ? currentViewMode.allowedSections.includes(item.id) : false;
       });
   }, [currentViewMode.allowedSections, sectionById]);
-  const openSection = useCallback((targetSection: SectionId, options?: { intentId?: string; flowStepId?: string }) => {
-    setActiveTaskIntentId(options?.intentId || "");
-    setActiveTaskFlowStepId(options?.flowStepId || "");
-    if (!currentViewMode.allowedSections.includes(targetSection)) {
-      const modeWithSection =
-        viewModes.find((mode) => mode.id === "superadmin_developer" && mode.allowedSections.includes(targetSection)) ||
-        viewModes.find((mode) => mode.allowedSections.includes(targetSection));
-      if (modeWithSection) {
-        setViewMode(modeWithSection.id);
+  const primeSectionActivation = useCallback((targetSection: SectionId) => {
+    if (typeof document === "undefined") {
+      return;
+    }
+    const target = sectionById.get(targetSection);
+    const viewport = document.querySelector(".desktop-viewport");
+    viewport?.setAttribute("data-active-section", targetSection);
+    viewport?.setAttribute("data-section-content-ready", "false");
+    document.querySelectorAll<HTMLElement>("[data-section-id]").forEach((element) => {
+      const isTarget = element.getAttribute("data-section-id") === targetSection;
+      element.classList.toggle("active", isTarget);
+      if (isTarget) {
+        element.setAttribute("aria-current", "page");
+      } else {
+        element.removeAttribute("aria-current");
       }
+    });
+    if (target && titlebarSectionLabelRef.current) {
+      titlebarSectionLabelRef.current.textContent = target.label;
     }
-    activateSection(targetSection);
-    if (typeof window !== "undefined") {
-      window.history.replaceState(null, "", `#section-${targetSection}`);
+  }, [sectionById]);
+  const openSection = useCallback((targetSection: SectionId, options?: { intentId?: string; flowStepId?: string }) => {
+    primeSectionActivation(targetSection);
+    pendingSectionCommitRef.current?.();
+    pendingSectionCommitRef.current = scheduleAfterFirstPaint(() => {
+      pendingSectionCommitRef.current = null;
+      setActiveTaskIntentId(options?.intentId || "");
+      setActiveTaskFlowStepId(options?.flowStepId || "");
+      if (!currentViewMode.allowedSections.includes(targetSection)) {
+        const modeWithSection =
+          viewModes.find((mode) => mode.id === "superadmin_developer" && mode.allowedSections.includes(targetSection)) ||
+          viewModes.find((mode) => mode.allowedSections.includes(targetSection));
+        if (modeWithSection) {
+          setViewMode(modeWithSection.id);
+        }
+      }
+      activateSection(targetSection);
+      if (typeof window !== "undefined") {
+        window.history.replaceState(null, "", `#section-${targetSection}`);
+      }
+    });
+  }, [activateSection, currentViewMode.allowedSections, primeSectionActivation, viewModes]);
+  useEffect(() => {
+    if (readySection === section) {
+      return undefined;
     }
-  }, [activateSection, currentViewMode.allowedSections, viewModes]);
+    return scheduleAfterFirstPaint(() => setReadySection(section));
+  }, [readySection, section]);
   const togglePinnedSection = (targetSection: SectionId) => {
     setPinnedSections((previous) => {
       if (previous.includes(targetSection)) {
@@ -3054,6 +3094,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   }, [currentViewMode.allowedSections, recentSections, sectionById]);
   const currentSectionLabel = sectionById.get(section)?.label || "홈";
   const currentSection = sectionById.get(section);
+  const CurrentSectionIcon = currentSection?.icon || LayoutDashboard;
   const currentFeatureGroup =
     localizedFeatureGroups.find((group) => group.id === currentSection?.group) || localizedFeatureGroups[0];
   const isPrimaryWorkSurface = section === "agents" || section === "tools";
@@ -4520,7 +4561,13 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     <main className={`desktop-app-root theme-${themeMode}`}>
       <div className={`desktop-app-shell sidebar-${sidebarMode}`}>
         <aside className="activity-rail" aria-label={uiLanguage === "ko" ? "주요 기능 레일" : "Primary activity rail"}>
-          <button className="activity-brand" type="button" onClick={() => openSection("overview")} title={uiLanguage === "ko" ? "작업공간 홈" : "Workspace Home"}>
+          <button
+            className="activity-brand"
+            type="button"
+            onPointerDown={() => primeSectionActivation("overview")}
+            onClick={() => openSection("overview")}
+            title={uiLanguage === "ko" ? "작업공간 홈" : "Workspace Home"}
+          >
             <Bot size={22} aria-hidden="true" />
           </button>
           <nav aria-label={uiLanguage === "ko" ? "주요 데스크톱 섹션" : "Pinned desktop sections"}>
@@ -4528,6 +4575,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               <button
                 key={item.id}
                 type="button"
+                onPointerDown={() => primeSectionActivation(item.id)}
                 onClick={() => openSection(item.id)}
                 className={section === item.id ? "active" : ""}
                 title={item.label}
@@ -4556,6 +4604,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         <section
           className="desktop-viewport"
           data-active-section={section}
+          data-section-content-ready={sectionContentReady ? "true" : "false"}
           data-primary-work-surface={isPrimaryWorkSurface ? "true" : undefined}
           aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"}
           tabIndex={0}
@@ -4565,7 +4614,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               {currentSection ? <currentSection.icon size={18} aria-hidden="true" /> : <LayoutDashboard size={18} aria-hidden="true" />}
               <div>
                 <span>{currentViewMode.label}</span>
-                <strong>{currentSectionLabel}</strong>
+                <strong ref={titlebarSectionLabelRef}>{currentSectionLabel}</strong>
               </div>
             </div>
             {!isPrimaryWorkSurface && section !== "overview" && (
@@ -5316,7 +5365,22 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             </>
           )}
 
-          {section === "overview" && (
+          {!sectionContentReady && (
+            <section
+              className="section-transition-shell"
+              data-section-transition-shell
+              data-section-transition-target={section}
+              aria-label={uiLanguage === "ko" ? `${currentSectionLabel} 화면 준비 중` : `Preparing ${currentSectionLabel}`}
+            >
+              <div>
+                <CurrentSectionIcon size={24} aria-hidden="true" />
+                <span>{currentSectionLabel}</span>
+                <small>{uiLanguage === "ko" ? "화면 준비 중" : "Preparing"}</small>
+              </div>
+            </section>
+          )}
+
+          {sectionContentReady && section === "overview" && (
             <div className="desktop-home-grid">
               <span id="overview-home" className="home-route-anchor" aria-hidden="true" />
               <div className="home-menu-surface">
@@ -5664,7 +5728,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             </div>
           )}
 
-      {section === "desktop" && (
+      {sectionContentReady && section === "desktop" && (
         <DesktopRuntimePanel
           agentCatalogCount={agentCatalog.length}
           blockedTaskCount={collaborationBoard.summary.blockedTasks}
@@ -5681,7 +5745,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         />
       )}
 
-      {section === "tools" && (
+      {sectionContentReady && section === "tools" && (
         <ToolStudioPanel
           language={uiLanguage}
           requestedMode={requestedToolMode}
@@ -5698,7 +5762,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         />
       )}
 
-      {section === "projects" && (
+      {sectionContentReady && section === "projects" && (
         <section className="records-grid">
           {snapshot.projects.map((project) => (
             <article className="record-card" key={project.name}>
@@ -5723,7 +5787,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         </section>
       )}
 
-      {section === "history" && (
+      {sectionContentReady && section === "history" && (
         <section className="history-board">
           <div className="history-summary-band">
             <Metric label="History Days" value={visibleHistoryDays.length} icon={CalendarDays} tone="green" />
@@ -5789,7 +5853,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         </section>
       )}
 
-      {section === "intent" && (
+      {sectionContentReady && section === "intent" && (
         <div className="content-grid">
           <IntentFeatureMapPanel
             map={intentFeatureMap}
@@ -5803,7 +5867,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         </div>
       )}
 
-      {section === "structure" && (
+      {sectionContentReady && section === "structure" && (
         <section className="structure-grid">
           <StructureBackbonePanel
             overview={structureOverview}
@@ -5943,7 +6007,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         </section>
       )}
 
-      {section === "documents" && (
+      {sectionContentReady && section === "documents" && (
         <section className="document-browser">
           {recentDocuments.map((document) => (
             <article className="doc-preview" key={document.id}>
@@ -5959,7 +6023,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         </section>
       )}
 
-      {section === "source" && (
+      {sectionContentReady && section === "source" && (
         <DesktopRuntimePanel
           agentCatalogCount={agentCatalog.length}
           blockedTaskCount={collaborationBoard.summary.blockedTasks}
@@ -5977,7 +6041,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         />
       )}
 
-      {section === "requirements" && (
+      {sectionContentReady && section === "requirements" && (
         <section className="panel wide">
           <div className="panel-heading">
             <div>
@@ -5999,7 +6063,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         </section>
       )}
 
-      {section === "agents" && (
+      {sectionContentReady && section === "agents" && (
         <div className="content-grid agents-workspace-grid">
           <SearchAgentWorkChatPanel
             form={searchAgentRunForm}

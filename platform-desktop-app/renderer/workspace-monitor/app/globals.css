@@ -790,6 +790,45 @@ main {
   scroll-padding-top: 72px;
 }
 
+.section-transition-shell {
+  display: grid;
+  min-height: min(460px, 58vh);
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(22, 115, 91, 0.08), rgba(60, 79, 97, 0.05)),
+    var(--surface);
+  color: var(--text);
+  padding: clamp(28px, 7vh, 64px) 18px;
+}
+
+.section-transition-shell > div {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  min-width: 0;
+  text-align: center;
+}
+
+.section-transition-shell svg {
+  color: var(--accent-primary);
+}
+
+.section-transition-shell span {
+  max-width: min(420px, 100%);
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-section-title);
+  font-weight: 900;
+  line-height: var(--line-height-tight);
+}
+
+.section-transition-shell small {
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  font-weight: 800;
+}
+
 .desktop-titlebar {
   position: sticky;
   top: 0;

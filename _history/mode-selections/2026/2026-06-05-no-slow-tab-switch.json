@@ -1,0 +1,12 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-no-slow-tab-switch",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes a user-facing desktop monitor performance contract and requires requirements/spec/history/validation records, but it is bounded to Workspace Monitor tab switching with no dependency installation.",
+  "web_first_intake": true,
+  "memory_bootstrap": "simulated from hot anchors: AGENTS.md, Workspace Monitor requirements, prior tab-transition performance spec, current MonitorShell render path.",
+  "large_scope_decomposition": "simulated and scoped to section switching responsiveness instead of all remaining UI performance work.",
+  "installation_occurred": false
+}

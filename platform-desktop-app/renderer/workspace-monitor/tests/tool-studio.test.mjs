@@ -85,6 +85,30 @@ test("Tool Studio CSS keeps split scroll and stable controls", () => {
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-shell \{[\s\S]*?overflow: visible;/);
 });
 
+test("Monitor section switches stage heavy content after first paint", () => {
+  assert.match(monitorShell, /const \[readySection, setReadySection\] = useState<SectionId>/);
+  assert.match(monitorShell, /const titlebarSectionLabelRef = useRef<HTMLElement>\(null\)/);
+  assert.match(monitorShell, /const pendingSectionCommitRef = useRef<\(\(\) => void\) \| null>\(null\)/);
+  assert.match(monitorShell, /const primeSectionActivation = useCallback\(\(targetSection: SectionId\) => \{/);
+  assert.match(monitorShell, /viewport\?\.setAttribute\("data-active-section", targetSection\)/);
+  assert.match(monitorShell, /element\.classList\.toggle\("active", isTarget\)/);
+  assert.match(monitorShell, /titlebarSectionLabelRef\.current\.textContent = target\.label/);
+  assert.match(monitorShell, /onPointerDown=\{\(\) => primeSectionActivation\(item\.id\)\}/);
+  assert.match(monitorShell, /pendingSectionCommitRef\.current\?\.\(\)/);
+  assert.match(monitorShell, /pendingSectionCommitRef\.current = scheduleAfterFirstPaint\(\(\) => \{/);
+  assert.match(monitorShell, /scheduleAfterFirstPaint\(\(\) => setReadySection\(section\)\)/);
+  assert.match(monitorShell, /const sectionContentReady = readySection === section/);
+  assert.match(monitorShell, /data-section-content-ready=\{sectionContentReady \? "true" : "false"\}/);
+  assert.match(monitorShell, /data-section-transition-shell/);
+  assert.match(monitorShell, /data-section-transition-target=\{section\}/);
+  assert.match(monitorShell, /const sourceQuery = sectionContentReady && section === "source" \? normalizedQuery : ""/);
+  assert.match(monitorShell, /\{sectionContentReady && section === "desktop" && \(/);
+  assert.match(monitorShell, /\{sectionContentReady && section === "tools" && \(/);
+  assert.match(monitorShell, /\{sectionContentReady && section === "source" && \(/);
+  assert.match(monitorShell, /\{sectionContentReady && section === "agents" && \(/);
+  assert.match(css, /\.section-transition-shell \{/);
+});
+
 test("Tool Studio build mode exposes a dedicated tool builder workbench", () => {
   assert.match(toolStudio, /type ToolBuilderBlueprint = \{/);
   assert.match(toolStudio, /const toolBuilderBlueprints: ToolBuilderBlueprint\[\] = \[/);
