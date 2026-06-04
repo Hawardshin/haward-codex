@@ -1,0 +1,21 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-single-purpose-ui",
+  "resource_risk_occurred": true,
+  "status": "covered",
+  "resources": [
+    {
+      "resource": "Next.js dev server",
+      "risk": "Long-running local process could remain after Browser smoke.",
+      "mitigation": "Started on port 3214 and stopped with Ctrl-C after verification.",
+      "status": "cleaned_up"
+    },
+    {
+      "resource": "in-app Browser viewport override",
+      "risk": "Temporary mobile/tablet viewport could persist after testing.",
+      "mitigation": "Called viewport reset after responsive smoke.",
+      "status": "cleaned_up"
+    }
+  ],
+  "requires_rework": false
+}

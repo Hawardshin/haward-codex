@@ -1,0 +1,48 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-single-purpose-ui",
+  "status": "covered",
+  "checks": [
+    {
+      "item": "web_first_intake",
+      "status": "covered",
+      "evidence": "_history/web-searches/2026/2026-06-05-single-purpose-ui.ko.md"
+    },
+    {
+      "item": "memory_bootstrap",
+      "status": "covered",
+      "evidence": "Hot anchors inspected before local implementation; bootstrap manifest updated for the new durable UI rule."
+    },
+    {
+      "item": "work_mode_selection",
+      "status": "covered",
+      "evidence": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/plan.ko.md"
+    },
+    {
+      "item": "requirements",
+      "status": "covered",
+      "evidence": "REQ-WM-032 in platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+    },
+    {
+      "item": "spec_driven_artifacts",
+      "status": "covered",
+      "evidence": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/"
+    },
+    {
+      "item": "implementation",
+      "status": "covered",
+      "evidence": "MonitorShell, CoreFeatureTabs, and globals.css split home UI controls into single-purpose units."
+    },
+    {
+      "item": "validation",
+      "status": "covered",
+      "evidence": "check, test, build, perf budget, docs audit, config contract, HTTP smoke, and Browser responsive smoke passed."
+    },
+    {
+      "item": "history_and_trace",
+      "status": "covered",
+      "evidence": "request trace, work timing, web search, user request summary, daily history, and work summary records updated."
+    }
+  ],
+  "requires_rework": false
+}

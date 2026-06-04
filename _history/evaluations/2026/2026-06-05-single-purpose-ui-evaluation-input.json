@@ -1,0 +1,63 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-single-purpose-ui",
+  "work_mode": "governance",
+  "view_mode": "superadmin_developer",
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "cli_pipeline_occurred": false,
+  "skill_work_occurred": false,
+  "context_archiving_occurred": false,
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-05-single-purpose-ui.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/traceability.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-05-single-purpose-ui.ko.md"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-05-single-purpose-ui.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-05.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/plan.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-single-purpose-ui-omission.json"
+  ],
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-single-purpose-ui-resource.json"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-05-single-purpose-ui.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-05-single-purpose-ui.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/plan.ko.md"
+  ],
+  "verification": [
+    "pnpm run check",
+    "pnpm test",
+    "pnpm exec next build",
+    "pnpm run perf:budget",
+    "python3 _tools/docs-audit/src/docs_audit.py --check",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json",
+    "JSON syntax check",
+    "curl localhost HTTP smoke",
+    "in-app Browser responsive smoke"
+  ],
+  "requires_rework": false
+}

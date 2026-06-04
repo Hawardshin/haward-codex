@@ -13,6 +13,7 @@ Platform surfaces should feel fast to scan and trustworthy like operational tool
 - Motion must be brief and purposeful, and must respect `prefers-reduced-motion`.
 - Operational and management surfaces should keep card radii aligned with the local design system and avoid feeling like broad marketing UI.
 - When a screen has one primary feature, that feature should own the center and most of the viewport. A layout fails if the feature is small while decoration, empty cards, or unrelated secondary panels consume the screen.
+- Because users can only perceive and decide on a limited amount of information at once, each feature, panel, button, and workflow step should expose one clear purpose.
 - Use split layouts, dashboard grids, and side-by-side panels only when the user needs simultaneous comparison, monitoring, or multiple primary tasks.
 
 ## Applies To
@@ -35,11 +36,15 @@ Platform surfaces should feel fast to scan and trustworthy like operational tool
   https://learn.microsoft.com/en-us/windows/win32/appuistart/inductive-user-interface
 - VA.gov Design System's One Thing per Page pattern says one logical thing at a time helps users focus and understand the task.
   https://dev-design.va.gov/5931/patterns/ask-users-for/a-single-response
+- W3C WAI cognitive accessibility patterns say page purpose and control use should be clear, and users should be able to identify the tasks they can perform and the controls they can interact with.
+  https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p01-clear-purpose/
+  https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p05-clear-controls/
 
 ## Verification
 
 - Check that delightful details do not weaken information hierarchy.
 - Redesign screens where a single primary feature is small while surrounding chrome, cards, empty space, or decoration is visually dominant.
+- Split any panel or button that mixes status checking, setup, navigation, execution, and evidence review into separate single-purpose units.
 - If a split layout is used, verify that simultaneous comparison, monitoring, or multiple primary tasks justify it.
 - Check that buttons, tabs, cards, charts, and code viewers do not create text overlap.
 - Check that repeated interactions do not add unnecessary waiting animations.

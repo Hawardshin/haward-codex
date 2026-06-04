@@ -2730,7 +2730,6 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     .filter((item): item is Section => {
       return item ? currentViewMode.allowedSections.includes(item.id) : false;
     });
-  const nextActionLabel = collaborationBoard.nextActions[0]?.nextAction || "No pending handoff";
   const currentSectionLabel = sectionById.get(section)?.label || "홈";
   const currentSection = sectionById.get(section);
   const currentFeatureGroup =
@@ -3532,9 +3531,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       icon: Bot,
       metric: `${agentCatalog.length.toLocaleString("ko-KR")} agents`,
       cta: uiLanguage === "ko" ? "에이전트 코어 열기" : "Open Agent Core",
-      secondaryCta: uiLanguage === "ko" ? "AgentCore blueprint" : "AgentCore blueprint",
       run: () => openSection("agents"),
-      secondaryRun: () => applyAgentCoreBlueprint(selectedAgentCoreBlueprintId, "factory"),
       steps:
         uiLanguage === "ko"
           ? ["목표와 역할 선택", "루트 툴과 검증 연결", "proposal 또는 실행 lane으로 넘기기"]
@@ -3552,9 +3549,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       icon: Network,
       metric: runtimeInitDefaults.adapterId,
       cta: uiLanguage === "ko" ? "CLI 실행 화면" : "Open CLI run",
-      secondaryCta: uiLanguage === "ko" ? "결정함 설정" : "Decision setup",
       run: () => openSection("desktop"),
-      secondaryRun: () => openSettingsTab("execution", "questions"),
       steps:
         uiLanguage === "ko"
           ? ["작업 intake 입력", "필요 CLI lane fan-out", "질문 보류 후 결과 병합"]
@@ -3572,9 +3567,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       icon: Code2,
       metric: `${coreReadinessCount}/${coreSetupSteps.length} setup`,
       cta: uiLanguage === "ko" ? "루트 파일/툴" : "Root files/tools",
-      secondaryCta: uiLanguage === "ko" ? "핵심 설정" : "Core setup",
       run: () => openSection("source"),
-      secondaryRun: () => openSettingsTab("execution", "quick"),
       steps:
         uiLanguage === "ko"
           ? ["계정과 CLI 연결", "작업공간 권한 설정", "작업별 에이전트에 공유"]
@@ -3592,9 +3585,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       icon: Activity,
       metric: `${collaborationBoard.summary.activeTasks.toLocaleString("ko-KR")} active`,
       cta: uiLanguage === "ko" ? "CLI 작업량 보기" : "View CLI workload",
-      secondaryCta: uiLanguage === "ko" ? "개선 루프 보기" : "Open improvement loop",
       run: () => openSection("desktop"),
-      secondaryRun: () => openSection("intent"),
       steps:
         uiLanguage === "ko"
           ? ["진행/보류/기록 요약", "결정함에서 답변", "반복 패턴을 개선 후보로 승격"]
@@ -3864,7 +3855,7 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                   }
                 />
               </label>
-              <button type="button" onClick={() => setCommandPaletteOpen(true)} title="Command Palette">
+              <button type="button" onClick={() => setCommandPaletteOpen(true)} title="Command Palette" aria-label="Command Palette">
                 <Search size={16} aria-hidden="true" />
               </button>
             </div>
@@ -4509,11 +4500,11 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               </button>
               <button type="button" onClick={() => openSection("agents")}>
                 <Inbox size={15} aria-hidden="true" />
-                <span>{truncateText(nextActionLabel, 34)}</span>
+                <span>{uiLanguage === "ko" ? "결정함" : "Inbox"}</span>
               </button>
               <button type="button" onClick={() => setOperatorCenterOpen(true)}>
                 <FileSearch size={15} aria-hidden="true" />
-                <span>{visibleWebSearches.toLocaleString("ko-KR")} / {visibleEvaluations.toLocaleString("ko-KR")}</span>
+                <span>{uiLanguage === "ko" ? "검증 근거" : "Evidence"}</span>
               </button>
               <button type="button" onClick={() => openSection("desktop")}>
                 <SquareTerminal size={15} aria-hidden="true" />
@@ -4547,13 +4538,13 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                   <p className="eyebrow">Core Platform</p>
                   <h2>
                     {uiLanguage === "ko"
-                      ? "에이전트 코어와 CLI 오케스트레이션이 먼저 보입니다"
-                      : "Agent Core and CLI Orchestration come first"}
+                      ? "지금 할 일 하나를 고릅니다"
+                      : "Choose one job to do now"}
                   </h2>
                   <p>
                     {uiLanguage === "ko"
-                      ? "커스텀 에이전트를 쉽게 만들고, Claude Code 같은 CLI 작업은 decision inbox와 task-run store로 끊기지 않게 이어갑니다. 루트 툴은 별도 기반으로 관리하고 작업별 에이전트가 공유합니다."
-                      : "Create custom agents easily, then keep Claude Code-style CLI work continuous through the decision inbox and task-run store. Root tools stay separate and are shared by per-task agents."}
+                      ? "첫 화면은 한 번에 하나의 판단만 남깁니다. 핵심 실행, 설정, 파일, 상태 확인은 서로 다른 행동으로 분리됩니다."
+                      : "The first screen keeps one decision at a time. Core runs, setup, files, and status checks stay as separate actions."}
                   </p>
                 </div>
                 <div className="core-home-status-row" aria-label={uiLanguage === "ko" ? "현재 작업량" : "Current workload"}>
@@ -4569,19 +4560,19 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 <div className="workspace-home-actions">
                   <button type="button" onClick={() => openSection("agents")}>
                     <Bot size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "Agent Core" : "Agent Core"}</span>
+                    <span>{uiLanguage === "ko" ? "에이전트 만들기" : "Create Agent"}</span>
                   </button>
                   <button type="button" onClick={() => openSection("desktop")}>
                     <Network size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "CLI Orchestration" : "CLI Orchestration"}</span>
+                    <span>{uiLanguage === "ko" ? "CLI 작업 시작" : "Start CLI Run"}</span>
                   </button>
-                  <button type="button" onClick={() => openSection("agents")}>
-                    <PlayCircle size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "에이전트 만들기" : "Create Agent"}</span>
+                  <button type="button" onClick={() => openSection("source")}>
+                    <Code2 size={16} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "루트 파일 열기" : "Open Root Files"}</span>
                   </button>
                   <button type="button" onClick={() => openSettingsTab("execution", "quick")}>
                     <Settings size={16} aria-hidden="true" />
-                    <span>{uiLanguage === "ko" ? "핵심 설정" : "Core Setup"}</span>
+                    <span>{uiLanguage === "ko" ? "설정 점검" : "Check Setup"}</span>
                   </button>
                 </div>
               </section>
@@ -4649,10 +4640,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
               <div className="home-secondary-stack">
                 <details className="home-disclosure-panel">
                   <summary>
-                    <span>{uiLanguage === "ko" ? "운영 흐름" : "Run Flow"}</span>
-                    <small>{uiLanguage === "ko" ? "타임라인, 결정함, 지표" : "Timeline, inbox, metrics"}</small>
+                    <span>{uiLanguage === "ko" ? "실행 순서" : "Run Sequence"}</span>
+                    <small>{uiLanguage === "ko" ? "다음 실행 단계" : "Next run steps"}</small>
                   </summary>
-                  <div className="home-disclosure-body home-disclosure-grid">
+                  <div className="home-disclosure-body">
                     <section className="run-timeline-panel" aria-label="Run timeline">
                       <div className="panel-heading">
                         <div>
@@ -4678,7 +4669,15 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         ))}
                       </div>
                     </section>
+                  </div>
+                </details>
 
+                <details className="home-disclosure-panel">
+                  <summary>
+                    <span>{uiLanguage === "ko" ? "결정함" : "Decision Inbox"}</span>
+                    <small>{uiLanguage === "ko" ? "보류된 판단" : "Deferred decisions"}</small>
+                  </summary>
+                  <div className="home-disclosure-body">
                     <section className="decision-dock-panel" aria-label="Decision inbox">
                       <div className="panel-heading">
                         <div>
@@ -4705,7 +4704,15 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                         )}
                       </div>
                     </section>
+                  </div>
+                </details>
 
+                <details className="home-disclosure-panel">
+                  <summary>
+                    <span>{uiLanguage === "ko" ? "작업 지표" : "Work Metrics"}</span>
+                    <small>{uiLanguage === "ko" ? "현재 수치" : "Current counts"}</small>
+                  </summary>
+                  <div className="home-disclosure-body">
                     <section className="home-metrics-strip" aria-label="Workspace metrics">
                       <Metric label="Core Features" value={2} icon={Network} tone="green" />
                       <Metric label="Setup Ready" value={coreReadinessCount} icon={Settings} tone="blue" />
@@ -4734,10 +4741,10 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
 
                 <details className="home-disclosure-panel">
                   <summary>
-                    <span>{uiLanguage === "ko" ? "기록과 선택 설정" : "Trail and Options"}</span>
-                    <small>{uiLanguage === "ko" ? "최근 신호, capability 상태" : "Recent signals and capability state"}</small>
+                    <span>{uiLanguage === "ko" ? "최근 기록" : "Recent Trail"}</span>
+                    <small>{uiLanguage === "ko" ? "최신 작업 신호" : "Latest work signals"}</small>
                   </summary>
-                  <div className="home-disclosure-body home-disclosure-grid">
+                  <div className="home-disclosure-body">
                     <section className="panel home-recent-panel">
                       <div className="panel-heading">
                         <div>
@@ -4751,7 +4758,15 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                       </div>
                       <DocumentList documents={recentHistory.slice(0, 6)} compact />
                     </section>
+                  </div>
+                </details>
 
+                <details className="home-disclosure-panel">
+                  <summary>
+                    <span>{uiLanguage === "ko" ? "옵션 상태" : "Option Status"}</span>
+                    <small>{uiLanguage === "ko" ? "선택 기능 준비" : "Optional readiness"}</small>
+                  </summary>
+                  <div className="home-disclosure-body">
                     <section className="panel capability-dock-panel">
                       <div className="panel-heading">
                         <div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Settings } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export type CoreFeatureTabId = "files" | "agents" | "run" | "learn";
@@ -14,9 +14,7 @@ export type CoreFeatureTab = {
   icon: LucideIcon;
   metric: string;
   cta: string;
-  secondaryCta: string;
   run: () => void;
-  secondaryRun: () => void;
   steps: string[];
 };
 
@@ -75,16 +73,11 @@ export function CoreFeatureTabs({ activeTab, language, tabs, onSelectTab }: Core
             </li>
           ))}
         </ol>
-        <div className="main-feature-actions quick-start-flow">
+        <div className="main-feature-actions quick-start-flow single-action-flow">
           <button type="button" onClick={activeFeature.run}>
             <ArrowRight size={16} aria-hidden="true" />
             <span>{activeFeature.cta}</span>
             <small>{activeFeature.label}</small>
-          </button>
-          <button type="button" onClick={activeFeature.secondaryRun}>
-            <Settings size={16} aria-hidden="true" />
-            <span>{activeFeature.secondaryCta}</span>
-            <small>{activeFeature.metric}</small>
           </button>
         </div>
       </div>

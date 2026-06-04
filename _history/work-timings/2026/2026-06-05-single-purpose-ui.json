@@ -1,0 +1,32 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-single-purpose-ui",
+  "work_mode": "governance",
+  "timezone": "Asia/Seoul",
+  "timing_status": "partial",
+  "phases": [
+    {
+      "id": "web_first_intake",
+      "status": "completed",
+      "notes": "W3C/WAI cognitive accessibility and labels/purpose sources checked before local planning."
+    },
+    {
+      "id": "memory_bootstrap_and_mode_selection",
+      "status": "completed",
+      "notes": "Hot anchors checked; governance mode selected because durable UI policy and implementation changed together."
+    },
+    {
+      "id": "implementation",
+      "status": "completed",
+      "notes": "Workspace Monitor home controls and disclosure panels split into single-purpose units."
+    },
+    {
+      "id": "verification",
+      "status": "completed",
+      "notes": "check, test, build, perf budget, docs audit, config contract, JSON syntax, HTTP smoke, and Browser responsive smoke completed."
+    }
+  ],
+  "bottleneck_candidates": [
+    "Browser smoke setup and repeated build checks dominate elapsed time for UI governance work."
+  ]
+}
