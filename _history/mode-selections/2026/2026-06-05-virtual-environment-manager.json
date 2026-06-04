@@ -1,0 +1,12 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-virtual-environment-manager",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes a user-facing platform UI and requires requirements/spec/history/validation records, but the implementation is a bounded Tool Studio virtual-environment management slice with no dependency installation.",
+  "web_first_intake": true,
+  "memory_bootstrap": "simulated from hot anchors: AGENTS.md, Workspace Monitor requirements, Tool Studio tests, Python environment workbench history.",
+  "large_scope_decomposition": "simulated and scoped to virtual-environment lifecycle UI rather than actual environment execution infrastructure.",
+  "installation_occurred": false
+}

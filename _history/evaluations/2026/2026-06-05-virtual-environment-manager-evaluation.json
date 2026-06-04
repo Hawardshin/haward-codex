@@ -1,0 +1,17 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-virtual-environment-manager",
+  "outcome": "pass",
+  "summary": "Tool Studio environment mode에 가상환경 lifecycle 관리 패널을 추가했다.",
+  "requirements": ["REQ-WM-053"],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "in-app Browser desktop smoke: manager, 5 lifecycle steps, 3 actions, freeze/rebuild command and evidence, overflow 0",
+    "Playwright mobile 390x844 smoke: venv heading/steps/actions collapse to one column, overflow 0, action min-height 48px"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_notes": "Browser smoke를 위해 로컬 정적 HTTP 서버를 실행했고 검증 후 종료했다."
+}

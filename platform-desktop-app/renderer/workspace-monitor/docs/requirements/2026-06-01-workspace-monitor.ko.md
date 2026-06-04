@@ -63,6 +63,7 @@
 | REQ-WM-050 | Tool Studio의 `툴 만들기` 화면은 등록 툴 목록이나 환경 상태에 묻히지 않고, 새 툴 제작에 필요한 template 선택, manifest, source path, input schema, 실행 검증 명령, 패키지 점검 명령, 출력 계약, 소스/콘솔/배포/명세 복사 액션을 하나의 전용 제작 작업대로 제공해야 하며 860px 이하에서도 한 열로 접혀야 한다. | must | tool builder workbench static test, desktop/mobile builder smoke, action marker and overflow assertion, screenshot artifact, `pnpm run check`, `pnpm test`, `pnpm run build:customer` 확인 |
 | REQ-WM-051 | Tool Studio의 `툴 배포` 화면은 local registry, AgentCore Gateway, desktop bundle 같은 배포 target 선택, release target, artifact, 배포 명령, preflight checklist, 권한/관측, rollback, 사전점검/패키지/registry/계획 복사 액션을 하나의 전용 배포 작업대로 제공해야 하며 860px 이하에서도 한 열로 접혀야 한다. | must | tool deploy workbench static test, desktop/mobile deploy smoke, action marker and overflow assertion, screenshot artifact, `pnpm run check`, `pnpm test`, `pnpm run build:customer` 확인 |
 | REQ-WM-052 | Tool Studio의 `파이썬 환경` 화면은 local venv, isolated runner, agent sandbox 실행환경 프로필을 선택하게 하고 interpreter, venv path, dependency file, lock/report, 설치 명령, 실행 명령, 격리 경계, cache 정책, health check, venv 생성/의존성 설치/smoke/환경 계획 복사 액션을 하나의 전용 실행환경 작업대로 제공해야 하며 860px 이하에서도 한 열로 접혀야 한다. | must | tool environment workbench static test, desktop/mobile environment smoke, action marker and overflow assertion, screenshot artifact, `pnpm run check`, `pnpm test`, `pnpm run build:customer` 확인 |
+| REQ-WM-053 | Tool Studio의 `파이썬 환경` 화면 안에서 가상환경 관리는 별도 관리 패널로 분리되어야 하며, create/activate/install/freeze/rebuild lifecycle step, 선택 step command, evidence, terminal/copy-command/copy-workflow 액션을 제공하고 860px 이하에서도 단계와 액션이 한 열로 접혀야 한다. | must | virtual environment manager static test, desktop/mobile venv manager smoke, action marker and overflow assertion, screenshot artifact, `pnpm run check`, `pnpm test`, `pnpm run build:customer` 확인 |
 
 ## 범위
 
@@ -108,6 +109,7 @@
 - 목표 작업 흐름 단계와 Tool Studio 핵심 mode 연결
 - AgentCore Quick Builder의 multi-capability bundle 선택과 proposal form 반영
 - Tool Studio `파이썬 환경` 전용 실행환경 작업대
+- Tool Studio `파이썬 환경` 내부 가상환경 lifecycle 관리 패널
 - Vercel 배포 문서
 
 ## 제외 범위

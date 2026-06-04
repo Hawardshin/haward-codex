@@ -132,6 +132,18 @@ type PythonEnvironmentProfile = {
   icon: LucideIcon;
 };
 
+type VirtualEnvironmentLifecycleStep = {
+  id: string;
+  labelKo: string;
+  labelEn: string;
+  detailKo: string;
+  detailEn: string;
+  evidenceKo: string;
+  evidenceEn: string;
+  command: (environment: PythonEnvironmentProfile) => string;
+  icon: LucideIcon;
+};
+
 const toolModes: ToolMode[] = [
   {
     id: "build",
@@ -388,6 +400,68 @@ const pythonEnvironmentProfiles: PythonEnvironmentProfile[] = [
   }
 ];
 
+const virtualEnvironmentLifecycleSteps: VirtualEnvironmentLifecycleStep[] = [
+  {
+    id: "create",
+    labelKo: "생성",
+    labelEn: "Create",
+    detailKo: "base Python 위에 disposable venv를 만듭니다.",
+    detailEn: "Create a disposable venv on top of the base Python.",
+    evidenceKo: "pyvenv.cfg, bin/python, site-packages 경로 확인",
+    evidenceEn: "Check pyvenv.cfg, bin/python, and site-packages paths.",
+    command: (environment) => `python -m venv ${environment.venvPath}`,
+    icon: Cpu
+  },
+  {
+    id: "activate",
+    labelKo: "활성화",
+    labelEn: "Activate",
+    detailKo: "shell PATH를 바꾸거나 venv Python을 직접 호출합니다.",
+    detailEn: "Change shell PATH or call the venv Python directly.",
+    evidenceKo: "sys.prefix와 sys.base_prefix가 다른지 확인",
+    evidenceEn: "Check that sys.prefix differs from sys.base_prefix.",
+    command: (environment) => `source ${environment.venvPath}/bin/activate || ${environment.venvPath}/bin/python -c "import sys; print(sys.prefix)"`,
+    icon: SquareTerminal
+  },
+  {
+    id: "install",
+    labelKo: "설치",
+    labelEn: "Install",
+    detailKo: "requirements 또는 pyproject 기준으로 venv 안에만 설치합니다.",
+    detailEn: "Install only inside the venv from requirements or pyproject.",
+    evidenceKo: "pip check와 smoke test로 충돌을 확인",
+    evidenceEn: "Use pip check and smoke tests to check conflicts.",
+    command: (environment) => environment.dependencyFile === "requirements.txt"
+      ? `${environment.venvPath}/bin/python -m pip install -r ${environment.dependencyFile}`
+      : `${environment.venvPath}/bin/python -m pip install -e ".[test]"`,
+    icon: PackageCheck
+  },
+  {
+    id: "freeze",
+    labelKo: "고정",
+    labelEn: "Freeze",
+    detailKo: "현재 설치 상태를 재현 가능한 lock/report로 남깁니다.",
+    detailEn: "Write the current install state to a reproducible lock or report.",
+    evidenceKo: "lock/report diff와 dependency provenance 확인",
+    evidenceEn: "Review lock/report diff and dependency provenance.",
+    command: (environment) => `${environment.venvPath}/bin/python -m pip freeze > ${environment.lockfile}`,
+    icon: ScrollText
+  },
+  {
+    id: "rebuild",
+    labelKo: "재생성",
+    labelEn: "Rebuild",
+    detailKo: "환경은 옮기지 않고 삭제 후 같은 입력으로 다시 만듭니다.",
+    detailEn: "Do not move the environment; delete and recreate it from the same inputs.",
+    evidenceKo: "새 pyvenv.cfg, pip check, smoke output 확인",
+    evidenceEn: "Check the new pyvenv.cfg, pip check, and smoke output.",
+    command: (environment) => environment.dependencyFile === "requirements.txt"
+      ? `rm -rf ${environment.venvPath} && python -m venv ${environment.venvPath} && ${environment.venvPath}/bin/python -m pip install -r ${environment.dependencyFile}`
+      : `rm -rf ${environment.venvPath} && python -m venv ${environment.venvPath} && ${environment.venvPath}/bin/python -m pip install -e ".[test]"`,
+    icon: ShieldCheck
+  }
+];
+
 const environmentRows = [
   {
     labelKo: "가상 환경",
@@ -449,12 +523,15 @@ export function ToolStudioPanel({
   const [selectedToolId, setSelectedToolId] = useState(toolCards[0].id);
   const [selectedBlueprintId, setSelectedBlueprintId] = useState(toolBuilderBlueprints[0].id);
   const [selectedEnvironmentId, setSelectedEnvironmentId] = useState(pythonEnvironmentProfiles[0].id);
+  const [selectedVenvStepId, setSelectedVenvStepId] = useState(virtualEnvironmentLifecycleSteps[0].id);
   const [selectedDeployTargetId, setSelectedDeployTargetId] = useState(toolDeployTargets[0].id);
   const ko = language === "ko";
   const activeMode = toolModes.find((item) => item.id === mode) || toolModes[0];
   const selectedTool = toolCards.find((item) => item.id === selectedToolId) || toolCards[0];
   const selectedBlueprint = toolBuilderBlueprints.find((item) => item.id === selectedBlueprintId) || toolBuilderBlueprints[0];
   const selectedEnvironment = pythonEnvironmentProfiles.find((item) => item.id === selectedEnvironmentId) || pythonEnvironmentProfiles[0];
+  const selectedVenvStep = virtualEnvironmentLifecycleSteps.find((item) => item.id === selectedVenvStepId) || virtualEnvironmentLifecycleSteps[0];
+  const selectedVenvCommand = selectedVenvStep.command(selectedEnvironment);
   const selectedDeployTarget = toolDeployTargets.find((item) => item.id === selectedDeployTargetId) || toolDeployTargets[0];
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const statusItems = useMemo(
@@ -696,6 +773,25 @@ export function ToolStudioPanel({
       sandbox: labelFor(language, selectedEnvironment.sandboxKo, selectedEnvironment.sandboxEn),
       cache: labelFor(language, selectedEnvironment.cacheKo, selectedEnvironment.cacheEn),
       healthChecks: selectedEnvironment.healthChecks
+    }, null, 2));
+  };
+
+  const copyVirtualEnvironmentCommand = () => {
+    void writeClipboardText(selectedVenvCommand);
+  };
+
+  const copyVirtualEnvironmentWorkflow = () => {
+    void writeClipboardText(JSON.stringify({
+      environmentId: selectedEnvironment.id,
+      venvPath: selectedEnvironment.venvPath,
+      dependencyFile: selectedEnvironment.dependencyFile,
+      lockfile: selectedEnvironment.lockfile,
+      steps: virtualEnvironmentLifecycleSteps.map((step) => ({
+        id: step.id,
+        label: labelFor(language, step.labelKo, step.labelEn),
+        command: step.command(selectedEnvironment),
+        evidence: labelFor(language, step.evidenceKo, step.evidenceEn)
+      }))
     }, null, 2));
   };
 
@@ -1064,6 +1160,62 @@ export function ToolStudioPanel({
                     </ul>
                   </article>
                 </div>
+
+                <section className="tool-venv-manager" data-tool-venv-manager aria-label={ko ? "가상 환경 관리" : "Virtual environment manager"}>
+                  <header className="tool-venv-heading">
+                    <div>
+                      <p className="eyebrow">Virtual Env</p>
+                      <h4>{ko ? "가상 환경만 관리" : "Manage only the virtual environment"}</h4>
+                      <span>
+                        {ko
+                          ? "생성, 활성화, 설치, 고정, 재생성을 분리해서 실행합니다."
+                          : "Run create, activate, install, freeze, and rebuild as separate steps."}
+                      </span>
+                    </div>
+                    <strong>{selectedEnvironment.venvPath}</strong>
+                  </header>
+
+                  <div className="tool-venv-steps" aria-label={ko ? "가상 환경 단계" : "Virtual environment steps"}>
+                    {virtualEnvironmentLifecycleSteps.map((step) => (
+                      <button
+                        key={step.id}
+                        type="button"
+                        className={step.id === selectedVenvStep.id ? "active" : ""}
+                        onClick={() => setSelectedVenvStepId(step.id)}
+                        aria-pressed={step.id === selectedVenvStep.id}
+                        data-tool-venv-step={step.id}
+                      >
+                        <step.icon size={15} aria-hidden="true" />
+                        <span>{labelFor(language, step.labelKo, step.labelEn)}</span>
+                      </button>
+                    ))}
+                  </div>
+
+                  <article className="tool-venv-command" data-tool-venv-command={selectedVenvStep.id}>
+                    <header>
+                      <selectedVenvStep.icon size={16} aria-hidden="true" />
+                      <span>{labelFor(language, selectedVenvStep.labelKo, selectedVenvStep.labelEn)}</span>
+                    </header>
+                    <p>{labelFor(language, selectedVenvStep.detailKo, selectedVenvStep.detailEn)}</p>
+                    <code>{selectedVenvCommand}</code>
+                    <small>{labelFor(language, selectedVenvStep.evidenceKo, selectedVenvStep.evidenceEn)}</small>
+                  </article>
+
+                  <div className="tool-venv-actions">
+                    <button type="button" onClick={onOpenTerminal} data-tool-venv-action="terminal">
+                      <SquareTerminal size={16} aria-hidden="true" />
+                      <span>{ko ? "터미널 열기" : "Open terminal"}</span>
+                    </button>
+                    <button type="button" onClick={copyVirtualEnvironmentCommand} data-tool-venv-action="copy-command">
+                      <Copy size={16} aria-hidden="true" />
+                      <span>{ko ? "명령 복사" : "Copy command"}</span>
+                    </button>
+                    <button type="button" onClick={copyVirtualEnvironmentWorkflow} data-tool-venv-action="copy-workflow">
+                      <ScrollText size={16} aria-hidden="true" />
+                      <span>{ko ? "workflow 복사" : "Copy workflow"}</span>
+                    </button>
+                  </div>
+                </section>
 
                 <div className="tool-environment-actions">
                   <button type="button" onClick={onOpenTerminal} data-tool-environment-action="create">

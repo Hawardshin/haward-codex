@@ -108,10 +108,15 @@ test("Tool Studio build mode exposes a dedicated tool builder workbench", () => 
 
 test("Tool Studio environment mode exposes a Python execution workbench", () => {
   assert.match(toolStudio, /type PythonEnvironmentProfile = \{/);
+  assert.match(toolStudio, /type VirtualEnvironmentLifecycleStep = \{/);
   assert.match(toolStudio, /const pythonEnvironmentProfiles: PythonEnvironmentProfile\[\] = \[/);
+  assert.match(toolStudio, /const virtualEnvironmentLifecycleSteps: VirtualEnvironmentLifecycleStep\[\] = \[/);
   assert.match(toolStudio, /id:\s*"local-venv"[\s\S]*?id:\s*"isolated-runner"[\s\S]*?id:\s*"agent-sandbox"/);
+  assert.match(toolStudio, /id:\s*"create"[\s\S]*?id:\s*"activate"[\s\S]*?id:\s*"install"[\s\S]*?id:\s*"freeze"[\s\S]*?id:\s*"rebuild"/);
   assert.match(toolStudio, /const \[selectedEnvironmentId, setSelectedEnvironmentId\] = useState/);
+  assert.match(toolStudio, /const \[selectedVenvStepId, setSelectedVenvStepId\] = useState/);
   assert.match(toolStudio, /const selectedEnvironment = pythonEnvironmentProfiles\.find/);
+  assert.match(toolStudio, /const selectedVenvStep = virtualEnvironmentLifecycleSteps\.find/);
   assert.match(toolStudio, /className="tool-environment-workbench"/);
   assert.match(toolStudio, /data-tool-environment-profile=\{profile\.id\}/);
   assert.match(toolStudio, /data-tool-environment-runtime/);
@@ -119,15 +124,26 @@ test("Tool Studio environment mode exposes a Python execution workbench", () => 
   assert.match(toolStudio, /data-tool-environment-run/);
   assert.match(toolStudio, /data-tool-environment-sandbox/);
   assert.match(toolStudio, /data-tool-environment-health/);
+  assert.match(toolStudio, /data-tool-venv-manager/);
+  assert.match(toolStudio, /data-tool-venv-step=\{step\.id\}/);
+  assert.match(toolStudio, /data-tool-venv-command=\{selectedVenvStep\.id\}/);
+  assert.match(toolStudio, /data-tool-venv-action="terminal"/);
+  assert.match(toolStudio, /data-tool-venv-action="copy-command"/);
+  assert.match(toolStudio, /data-tool-venv-action="copy-workflow"/);
   assert.match(toolStudio, /data-tool-environment-action="create"/);
   assert.match(toolStudio, /data-tool-environment-action="install"/);
   assert.match(toolStudio, /data-tool-environment-action="smoke"/);
   assert.match(toolStudio, /data-tool-environment-action="copy"/);
   assert.match(toolStudio, /copyEnvironmentPlan/);
+  assert.match(toolStudio, /copyVirtualEnvironmentCommand/);
+  assert.match(toolStudio, /copyVirtualEnvironmentWorkflow/);
   assert.match(css, /\.tool-environment-profiles \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.tool-environment-canvas \{[\s\S]*?grid-template-columns: minmax\(0, 1\.05fr\) minmax\(0, 0\.95fr\);/);
   assert.match(css, /\.tool-environment-actions \{[\s\S]*?grid-template-columns: repeat\(4, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.tool-venv-steps \{[\s\S]*?grid-template-columns: repeat\(5, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.tool-venv-actions \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-environment-profiles,[\s\S]*?\.tool-environment-canvas,[\s\S]*?\.tool-environment-actions,/);
+  assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-venv-heading,[\s\S]*?\.tool-venv-steps,[\s\S]*?\.tool-venv-actions,/);
 });
 
 test("Tool Studio deploy mode exposes a deployment workbench", () => {

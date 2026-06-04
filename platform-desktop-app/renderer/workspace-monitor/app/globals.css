@@ -13866,6 +13866,166 @@ h3 {
   color: var(--action-primary-fg);
 }
 
+.tool-venv-manager {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 10px;
+}
+
+.tool-venv-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+  min-width: 0;
+}
+
+.tool-venv-heading h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--font-size-section-title);
+  line-height: 1.25;
+}
+
+.tool-venv-heading span {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.tool-venv-heading > strong {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-caption);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  padding: 6px 9px;
+}
+
+.tool-venv-steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-venv-steps button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: var(--control-compact-target-size);
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  background: var(--control-bg);
+  color: var(--text);
+  padding: 8px;
+  white-space: nowrap;
+}
+
+.tool-venv-steps button.active {
+  border-color: var(--control-selected-border);
+  background: var(--control-selected-bg);
+  color: var(--control-selected-fg);
+}
+
+.tool-venv-steps button span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tool-venv-command {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-raised);
+  padding: 10px;
+}
+
+.tool-venv-command header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-venv-command header span {
+  color: var(--text);
+  font-size: var(--font-size-caption);
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.tool-venv-command p,
+.tool-venv-command small {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.tool-venv-command code {
+  display: block;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--terminal-bg);
+  color: var(--terminal-fg);
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  padding: 8px;
+}
+
+.tool-venv-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-venv-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  min-height: var(--control-target-size);
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  background: var(--control-bg);
+  color: var(--text);
+  padding: 8px var(--control-padding-x);
+  white-space: nowrap;
+}
+
+.tool-venv-actions button:not(:disabled):hover {
+  background: var(--control-bg-hover);
+}
+
+.tool-venv-actions button[data-tool-venv-action="terminal"] {
+  border-color: var(--action-primary-border);
+  background: var(--action-primary-bg);
+  color: var(--action-primary-fg);
+}
+
 .tool-deploy-workbench {
   display: grid;
   gap: 10px;
@@ -14256,6 +14416,9 @@ h3 {
   .tool-environment-profiles,
   .tool-environment-canvas,
   .tool-environment-actions,
+  .tool-venv-heading,
+  .tool-venv-steps,
+  .tool-venv-actions,
   .tool-deploy-targets,
   .tool-deploy-canvas,
   .tool-deploy-actions,
@@ -14301,6 +14464,11 @@ h3 {
   }
 
   .tool-environment-actions button {
+    width: 100%;
+  }
+
+  .tool-venv-actions button,
+  .tool-venv-steps button {
     width: 100%;
   }
 
