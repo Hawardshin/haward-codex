@@ -1,0 +1,37 @@
+{
+  "id": "2026-06-05-tab-transition-performance",
+  "date": "2026-06-05",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "phases": [
+    {
+      "name": "web_first_intake",
+      "approx_minutes": 4,
+      "notes": "Checked official React and Next performance references for measured rendering, memoization, transition behavior, and lazy loading."
+    },
+    {
+      "name": "source_inspection_and_baseline",
+      "approx_minutes": 12,
+      "notes": "Inspected MonitorShell tab rendering path and measured CPU throttle 6 baseline tab switch timings."
+    },
+    {
+      "name": "implementation",
+      "approx_minutes": 16,
+      "notes": "Added conditional rendering for Agents and Desktop Runtime section disclosures and removed useTransition from direct tab activation."
+    },
+    {
+      "name": "verification",
+      "approx_minutes": 18,
+      "notes": "Ran check/test/build/customer/perf/platform checks plus latency, disclosure, and in-app Browser smoke audits."
+    },
+    {
+      "name": "documentation_trace",
+      "approx_minutes": 14,
+      "notes": "Recorded REQ-WM-039, spec artifacts, web search, request trace, evaluation, omission, resource, and work summary records."
+    }
+  ],
+  "bottleneck_notes": [
+    "The main measured bottleneck was closed disclosure children still being mounted during tab switches.",
+    "useTransition made the click-to-visible metric slightly worse for this specific direct navigation interaction, so it was removed."
+  ],
+  "status": "recorded"
+}

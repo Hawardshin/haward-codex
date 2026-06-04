@@ -1,0 +1,34 @@
+{
+  "id": "2026-06-05-tab-transition-performance-resource",
+  "date": "2026-06-05",
+  "resource_risk_occurred": true,
+  "resources_used": [
+    {
+      "kind": "local_static_server",
+      "command": "python3 -m http.server 3223 --bind 127.0.0.1",
+      "purpose": "Serve the static export for tab transition and disclosure audits.",
+      "status": "stopped",
+      "cleanup": "Stopped the first server with SIGINT and stopped the final verification server by killing the process bound to tcp:3223 after audits completed."
+    },
+    {
+      "kind": "browser_automation",
+      "command": "node --input-type=commonjs with local pnpm-store Playwright package",
+      "purpose": "Measure tab switch latency and disclosure mount behavior.",
+      "status": "closed",
+      "cleanup": "Each Playwright script closed its Chromium browser instance."
+    },
+    {
+      "kind": "in_app_browser",
+      "target": "http://127.0.0.1:3223/",
+      "purpose": "Open the local static monitor in the in-app Browser and verify nav/home/overflow state.",
+      "status": "verified",
+      "cleanup": "No long-running external process remains; the static server was stopped after verification."
+    }
+  ],
+  "checks": [
+    "No required exec server session was left running.",
+    "Playwright browser instances closed in scripts.",
+    "The static server used for local verification was stopped."
+  ],
+  "status": "pass"
+}

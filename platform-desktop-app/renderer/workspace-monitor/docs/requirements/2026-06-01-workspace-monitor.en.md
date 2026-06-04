@@ -49,6 +49,7 @@
 | REQ-WM-036 | Text on dark backgrounds, dark theme, dark rail, primary actions, active tabs, and code/source/terminal surfaces shall use an explicit white foreground token instead of translucent gray text. | must | `globals.css` dark foreground token audit, in-app Browser dark foreground smoke, static export Playwright dark surface audit, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `platform-desktop-app check` |
 | REQ-WM-037 | Primary desktop product sections shall not overwhelm the user by opening diagnostics, records, inventory, builders, execution helpers, and evidence panels at once; the initial screen shall show one primary work surface and limited summaries, with the rest behind named detail disclosures. | must | Agents/Desktop initial visible panel count audit, closed-by-default disclosure audit, disclosure interaction, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, static export Playwright audit |
 | REQ-WM-038 | Agent Core chat UI shall use a familiar ChatGPT/Claude/Gemini-style structure with a central conversation log and bottom composer as the primary work surface, compact provider/model controls, and context/contract information separated into a drawer or summary area that does not push the chat input away. | must | Agents static export Playwright chat audit, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `platform-desktop-app check` |
+| REQ-WM-039 | Primary tab switching shall not slow down by mounting closed secondary feature groups; heavy panels inside Agents/Desktop Runtime section-level disclosures shall stay out of the React tree until the user opens them. | must | CPU throttle 6 static export tab switch audit, closed disclosure DOM mount audit, disclosure open interaction, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget`, `platform-desktop-app check` |
 
 ## Scope
 
@@ -83,6 +84,7 @@
 - Role-based typography scale and explicit small text handling
 - White foreground token on dark surfaces
 - Agent Core chat with a central conversation log, bottom composer, compact provider/model selector, and collapsed context drawer
+- Lazy mounting of closed secondary panels during tab switching plus tab transition latency audits
 - Vercel deployment docs
 
 ## Non-Goals

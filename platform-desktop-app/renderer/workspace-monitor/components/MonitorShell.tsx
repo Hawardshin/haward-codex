@@ -40,7 +40,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import dynamic from "next/dynamic";
 import type { editor } from "monaco-editor";
-import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 
 import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFeatureArchitecturePanel";
 import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
@@ -2158,6 +2158,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [terminalDrawerOpen, setTerminalDrawerOpen] = useState(false);
   const [runtimeInitDefaults, setRuntimeInitDefaults] = useState<RuntimeInitDefaults>(defaultRuntimeInitDefaults);
   const [operatorCenterOpen, setOperatorCenterOpen] = useState(false);
+  const [agentDetailsOpen, setAgentDetailsOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState("");
   const commandInputRef = useRef<HTMLInputElement>(null);
   const [searchAgentRunForm, setSearchAgentRunForm] = useState<SearchAgentRunForm>(defaultSearchAgentRunForm);
@@ -2220,12 +2221,21 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     () => featureGroups.map((group) => featureGroupForLanguage(group, uiLanguage)),
     [uiLanguage]
   );
+  const activateSection = useCallback((nextSection: SectionId) => {
+    setSection(nextSection);
+    setRecentSections((previous) => [nextSection, ...previous.filter((item) => item !== nextSection)].slice(0, 5));
+  }, []);
   useEffect(() => {
     const nextSection = normalizeSectionId(initialSection);
     if (nextSection) {
-      setSection(nextSection);
+      activateSection(nextSection);
     }
-  }, [initialSection]);
+  }, [activateSection, initialSection]);
+  useEffect(() => {
+    if (section !== "agents" && agentDetailsOpen) {
+      setAgentDetailsOpen(false);
+    }
+  }, [agentDetailsOpen, section]);
   useEffect(() => {
     let canceled = false;
     const tauriInvoke = getTauriInvoke();
@@ -2348,9 +2358,6 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     void refreshProviderModels(searchAgentRunForm.providerId);
   }, [providerCredentials.source, providerCredentials.status, searchAgentRunForm.providerId]);
   useEffect(() => {
-    setRecentSections((previous) => [section, ...previous.filter((item) => item !== section)].slice(0, 5));
-  }, [section]);
-  useEffect(() => {
     if (!commandPaletteOpen) {
       return;
     }
@@ -2395,7 +2402,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     const nextMode = viewModes.find((mode) => mode.id === modeId) || currentViewMode;
     setViewMode(nextMode.id);
     if (!nextMode.allowedSections.includes(section)) {
-      setSection((nextMode.allowedSections[0] as SectionId | undefined) || "overview");
+      activateSection((nextMode.allowedSections[0] as SectionId | undefined) || "overview");
     }
   };
   const openModeFunctionOption = (groupId: string, optionId: string) => {
@@ -2456,12 +2463,16 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     });
   }, [category, normalizedQuery, viewFilteredDocuments]);
 
-  const recentHistory = viewFilteredDocuments
-    .filter((document) =>
-      ["work-summary", "intent-feature-map", "request-trace", "user-request", "evaluation"].includes(document.category)
-    )
-    .slice(0, 8);
-  const recentDocuments = filteredDocuments.slice(0, section === "documents" ? 30 : 10);
+  const recentHistory = useMemo(() => {
+    return viewFilteredDocuments
+      .filter((document) =>
+        ["work-summary", "intent-feature-map", "request-trace", "user-request", "evaluation"].includes(document.category)
+      )
+      .slice(0, 8);
+  }, [viewFilteredDocuments]);
+  const recentDocuments = useMemo(() => {
+    return filteredDocuments.slice(0, section === "documents" ? 30 : 10);
+  }, [filteredDocuments, section]);
   const visibleHistoryDays = useMemo(() => {
     return snapshot.historyDays
       .map((day) => {
@@ -2557,11 +2568,34 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     const copied = await writeClipboardText(selectedSource.content);
     setSourceCopyNotice(copied ? `${selectedSource.path} copied` : "Clipboard unavailable");
   };
-  const visibleEvaluations = viewFilteredDocuments.filter((document) => document.category === "evaluation").length;
-  const visibleWebSearches = viewFilteredDocuments.filter((document) => document.category === "web-search").length;
-  const latestEvaluation = viewFilteredDocuments.find((document) => document.category === "evaluation");
-  const latestWebSearch = viewFilteredDocuments.find((document) => document.category === "web-search");
-  const latestWorkSummary = viewFilteredDocuments.find((document) => document.category === "work-summary");
+  const documentSignalSummary = useMemo(() => {
+    let visibleEvaluations = 0;
+    let visibleWebSearches = 0;
+    let latestEvaluation: (typeof viewFilteredDocuments)[number] | undefined;
+    let latestWebSearch: (typeof viewFilteredDocuments)[number] | undefined;
+    let latestWorkSummary: (typeof viewFilteredDocuments)[number] | undefined;
+
+    for (const document of viewFilteredDocuments) {
+      if (document.category === "evaluation") {
+        visibleEvaluations += 1;
+        latestEvaluation ??= document;
+      } else if (document.category === "web-search") {
+        visibleWebSearches += 1;
+        latestWebSearch ??= document;
+      } else if (document.category === "work-summary") {
+        latestWorkSummary ??= document;
+      }
+    }
+
+    return { latestEvaluation, latestWebSearch, latestWorkSummary, visibleEvaluations, visibleWebSearches };
+  }, [viewFilteredDocuments]);
+  const {
+    latestEvaluation,
+    latestWebSearch,
+    latestWorkSummary,
+    visibleEvaluations,
+    visibleWebSearches
+  } = documentSignalSummary;
   const learningImprovementCandidates = useMemo(
     () =>
       buildLearningImprovementCandidates({
@@ -2633,79 +2667,119 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     collaborationBoard.summary.blockedTasks,
     snapshot.publicReview.status
   ]);
-  const commandSteps: Array<{
+  const commandSteps = useMemo<Array<{
     label: string;
     title: string;
     detail: string;
     icon: LucideIcon;
     tone: string;
     section?: SectionId;
-  }> = [
-    {
-      label: "Now",
-      title: attentionState.label,
-      detail: attentionState.title,
-      icon: attentionState.icon,
-      tone: attentionState.tone,
-      section: attentionState.section
-    },
-    {
-      label: "Next",
-      title: collaborationBoard.nextActions[0]?.agent || "No handoff",
-      detail: collaborationBoard.nextActions[0]?.nextAction || "대기 중인 다음 행동이 없습니다.",
-      icon: Clock3,
-      tone: "blue",
-      section: "agents"
-    },
-    {
-      label: "Evidence",
-      title: `${visibleWebSearches.toLocaleString("ko-KR")} searches / ${visibleEvaluations.toLocaleString("ko-KR")} evals`,
-      detail: latestEvaluation?.title || latestWebSearch?.title || "근거 기록을 모아 표시합니다.",
-      icon: FileSearch,
-      tone: "violet"
-    },
-    {
-      label: "Control",
-      title: currentViewMode.label,
-      detail: `${currentLanguageMode.label} / ${visibleSections.length} sections visible`,
-      icon: ShieldCheck,
-      tone: "slate"
-    }
-  ];
-  const attentionItems = [
-    ...collaborationBoard.blockers.slice(0, 3).map((item) => ({
-      id: `blocker-${item.taskId}`,
-      label: "Blocked",
-      title: item.title,
-      detail: item.blockers.join(" / "),
-      meta: item.agent
-    })),
-    ...collaborationBoard.nextActions.slice(0, 3).map((item) => ({
-      id: `next-${item.taskId}`,
-      label: "Next",
-      title: item.title,
-      detail: item.nextAction,
-      meta: item.agent
-    }))
-  ].slice(0, 4);
-  const sectionNavMeta: Record<SectionId, string> = {
-    overview: attentionState.label,
-    desktop: "Runtime",
-    projects: snapshot.stats.projects.toLocaleString("ko-KR"),
-    history: visibleHistoryDays.length.toLocaleString("ko-KR"),
-    intent: intentFeatureMap.summary.totalThemes.toLocaleString("ko-KR"),
-    structure: structureOverview.summary.totalPlanes
-      ? `${structureOverview.summary.totalPlanes}/${structureOverview.summary.totalPressurePoints}`
-      : snapshot.stats.rootFolders.toLocaleString("ko-KR"),
-    documents: viewFilteredDocuments.length.toLocaleString("ko-KR"),
-    source: visibleSourceFiles.length.toLocaleString("ko-KR"),
-    requirements: visibleRequirements.length.toLocaleString("ko-KR"),
-    agents: agentCatalog.length.toLocaleString("ko-KR")
-  };
-  const operatorCenterSections = sections.filter((item) => operatorSectionIds.has(item.id)).map((item) => ({
-    ...sectionForLanguage(item, uiLanguage),
-    meta: sectionNavMeta[item.id]
-  }));
+  }>>(
+    () => [
+      {
+        label: "Now",
+        title: attentionState.label,
+        detail: attentionState.title,
+        icon: attentionState.icon,
+        tone: attentionState.tone,
+        section: attentionState.section
+      },
+      {
+        label: "Next",
+        title: collaborationBoard.nextActions[0]?.agent || "No handoff",
+        detail: collaborationBoard.nextActions[0]?.nextAction || "대기 중인 다음 행동이 없습니다.",
+        icon: Clock3,
+        tone: "blue",
+        section: "agents"
+      },
+      {
+        label: "Evidence",
+        title: `${visibleWebSearches.toLocaleString("ko-KR")} searches / ${visibleEvaluations.toLocaleString("ko-KR")} evals`,
+        detail: latestEvaluation?.title || latestWebSearch?.title || "근거 기록을 모아 표시합니다.",
+        icon: FileSearch,
+        tone: "violet"
+      },
+      {
+        label: "Control",
+        title: currentViewMode.label,
+        detail: `${currentLanguageMode.label} / ${visibleSections.length} sections visible`,
+        icon: ShieldCheck,
+        tone: "slate"
+      }
+    ],
+    [
+      attentionState.icon,
+      attentionState.label,
+      attentionState.section,
+      attentionState.title,
+      attentionState.tone,
+      collaborationBoard.nextActions,
+      currentLanguageMode.label,
+      currentViewMode.label,
+      latestEvaluation?.title,
+      latestWebSearch?.title,
+      visibleEvaluations,
+      visibleSections.length,
+      visibleWebSearches
+    ]
+  );
+  const attentionItems = useMemo(
+    () =>
+      [
+        ...collaborationBoard.blockers.slice(0, 3).map((item) => ({
+          id: `blocker-${item.taskId}`,
+          label: "Blocked",
+          title: item.title,
+          detail: item.blockers.join(" / "),
+          meta: item.agent
+        })),
+        ...collaborationBoard.nextActions.slice(0, 3).map((item) => ({
+          id: `next-${item.taskId}`,
+          label: "Next",
+          title: item.title,
+          detail: item.nextAction,
+          meta: item.agent
+        }))
+      ].slice(0, 4),
+    [collaborationBoard.blockers, collaborationBoard.nextActions]
+  );
+  const sectionNavMeta = useMemo<Record<SectionId, string>>(
+    () => ({
+      overview: attentionState.label,
+      desktop: "Runtime",
+      projects: snapshot.stats.projects.toLocaleString("ko-KR"),
+      history: visibleHistoryDays.length.toLocaleString("ko-KR"),
+      intent: intentFeatureMap.summary.totalThemes.toLocaleString("ko-KR"),
+      structure: structureOverview.summary.totalPlanes
+        ? `${structureOverview.summary.totalPlanes}/${structureOverview.summary.totalPressurePoints}`
+        : snapshot.stats.rootFolders.toLocaleString("ko-KR"),
+      documents: viewFilteredDocuments.length.toLocaleString("ko-KR"),
+      source: visibleSourceFiles.length.toLocaleString("ko-KR"),
+      requirements: visibleRequirements.length.toLocaleString("ko-KR"),
+      agents: agentCatalog.length.toLocaleString("ko-KR")
+    }),
+    [
+      agentCatalog.length,
+      attentionState.label,
+      intentFeatureMap.summary.totalThemes,
+      snapshot.stats.projects,
+      snapshot.stats.rootFolders,
+      structureOverview.summary.totalPlanes,
+      structureOverview.summary.totalPressurePoints,
+      viewFilteredDocuments.length,
+      visibleHistoryDays.length,
+      visibleRequirements.length,
+      visibleSourceFiles.length
+    ]
+  );
+  const operatorCenterSections = useMemo(
+    () =>
+      sections.filter((item) => operatorSectionIds.has(item.id)).map((item) => ({
+        ...sectionForLanguage(item, uiLanguage),
+        meta: sectionNavMeta[item.id]
+      })),
+    [sectionNavMeta, uiLanguage]
+  );
   const sectionById = useMemo(() => {
     return new Map(localizedSections.map((item) => [item.id, item]));
   }, [localizedSections]);
@@ -2716,7 +2790,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         return item ? currentViewMode.allowedSections.includes(item.id) : false;
       });
   }, [currentViewMode.allowedSections, sectionById]);
-  const openSection = (targetSection: SectionId) => {
+  const openSection = useCallback((targetSection: SectionId) => {
     if (!currentViewMode.allowedSections.includes(targetSection)) {
       const modeWithSection =
         viewModes.find((mode) => mode.id === "superadmin_developer" && mode.allowedSections.includes(targetSection)) ||
@@ -2725,11 +2799,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         setViewMode(modeWithSection.id);
       }
     }
-    setSection(targetSection);
+    activateSection(targetSection);
     if (typeof window !== "undefined") {
       window.history.replaceState(null, "", `#section-${targetSection}`);
     }
-  };
+  }, [activateSection, currentViewMode.allowedSections, viewModes]);
   const togglePinnedSection = (targetSection: SectionId) => {
     setPinnedSections((previous) => {
       if (previous.includes(targetSection)) {
@@ -2738,16 +2812,20 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       return [targetSection, ...previous].slice(0, 6);
     });
   };
-  const pinnedVisibleSections = pinnedSections
-    .map((id) => sectionById.get(id))
-    .filter((item): item is Section => {
-      return item ? currentViewMode.allowedSections.includes(item.id) && !operatorSectionIds.has(item.id) : false;
-    });
-  const recentVisibleSections = recentSections
-    .map((id) => sectionById.get(id))
-    .filter((item): item is Section => {
-      return item ? currentViewMode.allowedSections.includes(item.id) : false;
-    });
+  const pinnedVisibleSections = useMemo(() => {
+    return pinnedSections
+      .map((id) => sectionById.get(id))
+      .filter((item): item is Section => {
+        return item ? currentViewMode.allowedSections.includes(item.id) && !operatorSectionIds.has(item.id) : false;
+      });
+  }, [currentViewMode.allowedSections, pinnedSections, sectionById]);
+  const recentVisibleSections = useMemo(() => {
+    return recentSections
+      .map((id) => sectionById.get(id))
+      .filter((item): item is Section => {
+        return item ? currentViewMode.allowedSections.includes(item.id) : false;
+      });
+  }, [currentViewMode.allowedSections, recentSections, sectionById]);
   const currentSectionLabel = sectionById.get(section)?.label || "홈";
   const currentSection = sectionById.get(section);
   const currentFeatureGroup =
@@ -2873,16 +2951,16 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const activeSettingsSubsection = settingsSubsectionItems.some((item) => item.id === settingsSubsectionByTab[settingsTab])
     ? settingsSubsectionByTab[settingsTab]
     : settingsSubsectionItems[0].id;
-  const selectSettingsSubsection = (subsectionId: SettingsSubsectionId) => {
+  const selectSettingsSubsection = useCallback((subsectionId: SettingsSubsectionId) => {
     setSettingsSubsectionByTab((current) => ({ ...current, [settingsTab]: subsectionId }));
-  };
-  const openSettingsTab = (tabId: SettingsTabId = "appearance", subsectionId?: SettingsSubsectionId) => {
+  }, [settingsTab]);
+  const openSettingsTab = useCallback((tabId: SettingsTabId = "appearance", subsectionId?: SettingsSubsectionId) => {
     setSettingsTab(tabId);
     if (subsectionId) {
       setSettingsSubsectionByTab((current) => ({ ...current, [tabId]: subsectionId }));
     }
     setSettingsOpen(true);
-  };
+  }, []);
   async function refreshProviderModels(providerId = searchAgentRunForm.providerId) {
     const provider =
       providerCredentials.providers.find((item) => item.providerId === providerId) ||
@@ -3082,12 +3160,12 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       setProviderCredentialBusy("");
     }
   };
-  const openTerminalDrawer = () => {
+  const openTerminalDrawer = useCallback(() => {
     setTerminalDrawerOpen(true);
-  };
-  const openSearchAgentWorkbench = () => {
-    setSection("agents");
-  };
+  }, []);
+  const openSearchAgentWorkbench = useCallback(() => {
+    openSection("agents");
+  }, [openSection]);
   const updateSearchAgentRunForm = (field: keyof SearchAgentRunForm, value: string) => {
     if (field === "providerId") {
       const provider = providerCredentials.providers.find((item) => item.providerId === value);
@@ -3107,7 +3185,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     const ko = uiLanguage === "ko";
     const proposalForm = buildAgentFactoryFormFromAgentCoreBlueprint(blueprint, uiLanguage);
     setSelectedAgentCoreBlueprintId(blueprint.id);
-    setSection("agents");
+    openSection("agents");
     setSearchAgentRunForm((current) => ({
       ...current,
       objective: mode === "preflight"
@@ -3403,476 +3481,567 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       setLearningDecisionBusy(false);
     }
   };
-  const rootToolItems = [
-    {
-      id: "provider-accounts",
-      label: uiLanguage === "ko" ? "모델 계정" : "Model accounts",
-      detail:
-        uiLanguage === "ko"
-          ? "OpenAI, Anthropic, Gemini, Ollama 연결 상태"
-          : "OpenAI, Anthropic, Gemini, and Ollama connection state",
-      value: `${providerCredentials.configuredCount}/${providerCredentials.providers.length || 3}`,
-      icon: KeyRound,
-      action: () => openSettingsTab("execution", "providers")
-    },
-    {
-      id: "cli-adapters",
-      label: uiLanguage === "ko" ? "CLI 어댑터" : "CLI adapters",
-      detail:
-        uiLanguage === "ko"
-          ? "Codex, Claude Code, Gemini, OpenCode 같은 guest lane"
-          : "Guest lanes such as Codex, Claude Code, Gemini, and OpenCode",
-      value: runtimeInitDefaults.adapterId,
-      icon: SquareTerminal,
-      action: () => openSettingsTab("execution", "adapter")
-    },
-    {
-      id: "workspace-files",
-      label: uiLanguage === "ko" ? "작업공간 파일" : "Workspace files",
-      detail:
-        uiLanguage === "ko"
-          ? "에이전트와 CLI가 공유하는 루트 파일/소스 표면"
-          : "Root file and source surface shared by agents and CLI lanes",
-      value: visibleSourceFiles.length.toLocaleString("ko-KR"),
-      icon: Code2,
-      action: () => openSection("source")
-    },
-    {
-      id: "decision-routing",
-      label: uiLanguage === "ko" ? "결정함" : "Decision inbox",
-      detail:
-        uiLanguage === "ko"
-          ? "중간 질문을 보류하고 나중에 모아 처리"
-          : "Defer mid-run questions and answer them later in one place",
-      value: runtimeInitDefaults.autoDeferQuestions
-        ? uiLanguage === "ko"
-          ? "자동"
-          : "auto"
-        : uiLanguage === "ko"
-          ? "수동"
-          : "manual",
-      icon: Inbox,
-      action: () => openSettingsTab("execution", "questions")
-    }
-  ];
-  const coreSetupSteps = [
-    {
-      id: "accounts",
-      label: uiLanguage === "ko" ? "모델 계정 연결" : "Connect model accounts",
-      detail:
-        uiLanguage === "ko"
-          ? "에이전트 코어가 직접 모델 작업을 실행하려면 provider 계정을 먼저 연결합니다."
-          : "Connect provider accounts so Agent Core can run model tasks directly.",
-      ready: providerCredentials.configuredCount > 0,
-      actionLabel: uiLanguage === "ko" ? "계정 설정" : "Accounts",
-      icon: KeyRound,
-      action: () => openSettingsTab("execution", "providers")
-    },
-    {
-      id: "agent-core",
-      label: uiLanguage === "ko" ? "에이전트 코어 열기" : "Open Agent Core",
-      detail:
-        uiLanguage === "ko"
-          ? "커스텀 에이전트, 서브에이전트, blueprint, proposal을 같은 흐름에서 만듭니다."
-          : "Create custom agents, subagents, blueprints, and proposals in one flow.",
-      ready: agentCatalog.length > 0,
-      actionLabel: uiLanguage === "ko" ? "에이전트 만들기" : "Create agent",
-      icon: Bot,
-      action: () => openSection("agents")
-    },
-    {
-      id: "cli-lane",
-      label: uiLanguage === "ko" ? "CLI lane 선택" : "Choose CLI lane",
-      detail:
-        uiLanguage === "ko"
-          ? "Claude Code 같은 외부 CLI는 root tool을 공유하는 선택형 guest adapter로 둡니다."
-          : "External CLIs such as Claude Code remain optional guest adapters sharing root tools.",
-      ready: Boolean(runtimeInitDefaults.adapterId),
-      actionLabel: uiLanguage === "ko" ? "어댑터 설정" : "Adapters",
-      icon: SquareTerminal,
-      action: () => openSettingsTab("execution", "adapter")
-    },
-    {
-      id: "questions",
-      label: uiLanguage === "ko" ? "질문 자동 보류" : "Auto-defer questions",
-      detail:
-        uiLanguage === "ko"
-          ? "중간 결정은 작업을 멈추지 않고 결정함에 모아 나중에 처리합니다."
-          : "Route mid-run decisions to the inbox so work can continue where it is safe.",
-      ready: runtimeInitDefaults.autoDeferQuestions,
-      actionLabel: uiLanguage === "ko" ? "질문 처리" : "Questions",
-      icon: Inbox,
-      action: () => openSettingsTab("execution", "questions")
-    }
-  ];
-  const coreReadinessCount = coreSetupSteps.filter((step) => step.ready).length;
-  const workVisibilityItems = [
-    {
-      id: "active-work",
-      label: uiLanguage === "ko" ? "진행 중 작업" : "Active work",
-      value: collaborationBoard.summary.activeTasks.toLocaleString("ko-KR"),
-      detail: uiLanguage === "ko" ? "현재 움직이는 task" : "tasks in motion",
-      icon: Activity
-    },
-    {
-      id: "pending-decisions",
-      label: uiLanguage === "ko" ? "보류 결정" : "Pending decisions",
-      value: (attentionItems.length + collaborationBoard.summary.blockedTasks).toLocaleString("ko-KR"),
-      detail: uiLanguage === "ko" ? "나중에 모아 처리" : "deferred for later",
-      icon: Inbox
-    },
-    {
-      id: "task-runs",
-      label: uiLanguage === "ko" ? "실행 기록" : "Task runs",
-      value: snapshot.stats.tasks.toLocaleString("ko-KR"),
-      detail: uiLanguage === "ko" ? "연속성 저장소" : "continuity store",
-      icon: PlayCircle
-    },
-    {
-      id: "agents-ready",
-      label: uiLanguage === "ko" ? "에이전트" : "Agents",
-      value: agentCatalog.length.toLocaleString("ko-KR"),
-      detail: uiLanguage === "ko" ? "생성/공유 후보" : "created or shareable",
-      icon: Bot
-    }
-  ];
-  const homeMainFeatures: CoreFeatureDrilldownItem[] = [
-    {
-      id: "agents",
-      label: uiLanguage === "ko" ? "에이전트 코어" : "Agent Core",
-      kicker: uiLanguage === "ko" ? "핵심 1" : "Core 1",
-      title: uiLanguage === "ko" ? "커스텀 에이전트를 쉽게 만듭니다" : "Create custom agents easily",
-      detail:
-        uiLanguage === "ko"
-          ? "역할, 도구, guardrail, 검증 명령을 한 번에 묶어 새 에이전트나 작업별 서브에이전트로 저장합니다."
-          : "Bundle role, tools, guardrails, and validation commands into reusable agents or per-task subagents.",
-      icon: Bot,
-      metric: `${agentCatalog.length.toLocaleString("ko-KR")} agents`,
-      cta: uiLanguage === "ko" ? "에이전트 코어 열기" : "Open Agent Core",
-      run: () => openSection("agents"),
-      steps:
-        uiLanguage === "ko"
-          ? ["목표와 역할 선택", "루트 툴과 검증 연결", "proposal 또는 실행 lane으로 넘기기"]
-          : ["Choose goal and role", "Attach root tools and validation", "Send to proposal or run lane"]
-    },
-    {
-      id: "run",
-      label: uiLanguage === "ko" ? "CLI 오케스트레이션" : "CLI Orchestration",
-      kicker: uiLanguage === "ko" ? "핵심 2" : "Core 2",
-      title: uiLanguage === "ko" ? "CLI 작업을 끊기지 않게 이어갑니다" : "Keep CLI work continuous",
-      detail:
-        uiLanguage === "ko"
-          ? "Codex, Claude Code 같은 CLI lane을 작업 파이프로 묶고, 중간 질문은 decision inbox에 모아 나중에 처리합니다."
-          : "Bind Codex, Claude Code, and other CLI lanes into task pipes while deferring questions to the decision inbox.",
-      icon: Network,
-      metric: runtimeInitDefaults.adapterId,
-      cta: uiLanguage === "ko" ? "CLI 실행 화면" : "Open CLI run",
-      run: () => openSection("desktop"),
-      steps:
-        uiLanguage === "ko"
-          ? ["작업 intake 입력", "필요 CLI lane fan-out", "질문 보류 후 결과 병합"]
-          : ["Enter task intake", "Fan out to needed CLI lanes", "Defer questions and merge results"]
-    },
-    {
-      id: "files",
-      label: uiLanguage === "ko" ? "루트 툴" : "Root Tools",
-      kicker: uiLanguage === "ko" ? "공유 기반" : "Shared Base",
-      title: uiLanguage === "ko" ? "모든 에이전트와 CLI가 같은 툴을 씁니다" : "Agents and CLIs share the same root tools",
-      detail:
-        uiLanguage === "ko"
-          ? "모델 계정, CLI adapter, 작업공간 파일, decision inbox를 root에서 관리하고 작업별 에이전트가 공유하게 둡니다."
-          : "Manage model accounts, CLI adapters, workspace files, and the decision inbox at root so per-task agents share them.",
-      icon: Code2,
-      metric: `${coreReadinessCount}/${coreSetupSteps.length} setup`,
-      cta: uiLanguage === "ko" ? "루트 파일/툴" : "Root files/tools",
-      run: () => openSection("source"),
-      steps:
-        uiLanguage === "ko"
-          ? ["계정과 CLI 연결", "작업공간 권한 설정", "작업별 에이전트에 공유"]
-          : ["Connect accounts and CLIs", "Grant workspace access", "Share with per-task agents"]
-    },
-    {
-      id: "learn",
-      label: uiLanguage === "ko" ? "작업 가시성" : "Work Visibility",
-      kicker: uiLanguage === "ko" ? "한눈에 보기" : "At a Glance",
-      title: uiLanguage === "ko" ? "지금 얼마나 작업 중인지 바로 봅니다" : "See how much work is happening now",
-      detail:
-        uiLanguage === "ko"
-          ? "진행 중 작업, 막힌 결정, 실행 기록, 에이전트 수를 첫 화면과 CLI 화면에서 계속 보여줍니다."
-          : "Keep active work, blocked decisions, run records, and agent counts visible on the home and CLI surfaces.",
-      icon: Activity,
-      metric: `${collaborationBoard.summary.activeTasks.toLocaleString("ko-KR")} active`,
-      cta: uiLanguage === "ko" ? "CLI 작업량 보기" : "View CLI workload",
-      run: () => openSection("desktop"),
-      steps:
-        uiLanguage === "ko"
-          ? ["진행/보류/기록 요약", "결정함에서 답변", "반복 패턴을 개선 후보로 승격"]
-          : ["Summarize active/deferred/runs", "Answer in the inbox", "Promote repeated patterns"]
-    }
-  ];
-  const homeDrilldownItems: Array<{
+  const rootToolItems = useMemo(
+    () => [
+      {
+        id: "provider-accounts",
+        label: uiLanguage === "ko" ? "모델 계정" : "Model accounts",
+        detail:
+          uiLanguage === "ko"
+            ? "OpenAI, Anthropic, Gemini, Ollama 연결 상태"
+            : "OpenAI, Anthropic, Gemini, and Ollama connection state",
+        value: `${providerCredentials.configuredCount}/${providerCredentials.providers.length || 3}`,
+        icon: KeyRound,
+        action: () => openSettingsTab("execution", "providers")
+      },
+      {
+        id: "cli-adapters",
+        label: uiLanguage === "ko" ? "CLI 어댑터" : "CLI adapters",
+        detail:
+          uiLanguage === "ko"
+            ? "Codex, Claude Code, Gemini, OpenCode 같은 guest lane"
+            : "Guest lanes such as Codex, Claude Code, Gemini, and OpenCode",
+        value: runtimeInitDefaults.adapterId,
+        icon: SquareTerminal,
+        action: () => openSettingsTab("execution", "adapter")
+      },
+      {
+        id: "workspace-files",
+        label: uiLanguage === "ko" ? "작업공간 파일" : "Workspace files",
+        detail:
+          uiLanguage === "ko"
+            ? "에이전트와 CLI가 공유하는 루트 파일/소스 표면"
+            : "Root file and source surface shared by agents and CLI lanes",
+        value: visibleSourceFiles.length.toLocaleString("ko-KR"),
+        icon: Code2,
+        action: () => openSection("source")
+      },
+      {
+        id: "decision-routing",
+        label: uiLanguage === "ko" ? "결정함" : "Decision inbox",
+        detail:
+          uiLanguage === "ko"
+            ? "중간 질문을 보류하고 나중에 모아 처리"
+            : "Defer mid-run questions and answer them later in one place",
+        value: runtimeInitDefaults.autoDeferQuestions
+          ? uiLanguage === "ko"
+            ? "자동"
+            : "auto"
+          : uiLanguage === "ko"
+            ? "수동"
+            : "manual",
+        icon: Inbox,
+        action: () => openSettingsTab("execution", "questions")
+      }
+    ],
+    [
+      openSection,
+      openSettingsTab,
+      providerCredentials.configuredCount,
+      providerCredentials.providers.length,
+      runtimeInitDefaults.adapterId,
+      runtimeInitDefaults.autoDeferQuestions,
+      uiLanguage,
+      visibleSourceFiles.length
+    ]
+  );
+  const coreSetupSteps = useMemo(
+    () => [
+      {
+        id: "accounts",
+        label: uiLanguage === "ko" ? "모델 계정 연결" : "Connect model accounts",
+        detail:
+          uiLanguage === "ko"
+            ? "에이전트 코어가 직접 모델 작업을 실행하려면 provider 계정을 먼저 연결합니다."
+            : "Connect provider accounts so Agent Core can run model tasks directly.",
+        ready: providerCredentials.configuredCount > 0,
+        actionLabel: uiLanguage === "ko" ? "계정 설정" : "Accounts",
+        icon: KeyRound,
+        action: () => openSettingsTab("execution", "providers")
+      },
+      {
+        id: "agent-core",
+        label: uiLanguage === "ko" ? "에이전트 코어 열기" : "Open Agent Core",
+        detail:
+          uiLanguage === "ko"
+            ? "커스텀 에이전트, 서브에이전트, blueprint, proposal을 같은 흐름에서 만듭니다."
+            : "Create custom agents, subagents, blueprints, and proposals in one flow.",
+        ready: agentCatalog.length > 0,
+        actionLabel: uiLanguage === "ko" ? "에이전트 만들기" : "Create agent",
+        icon: Bot,
+        action: () => openSection("agents")
+      },
+      {
+        id: "cli-lane",
+        label: uiLanguage === "ko" ? "CLI lane 선택" : "Choose CLI lane",
+        detail:
+          uiLanguage === "ko"
+            ? "Claude Code 같은 외부 CLI는 root tool을 공유하는 선택형 guest adapter로 둡니다."
+            : "External CLIs such as Claude Code remain optional guest adapters sharing root tools.",
+        ready: Boolean(runtimeInitDefaults.adapterId),
+        actionLabel: uiLanguage === "ko" ? "어댑터 설정" : "Adapters",
+        icon: SquareTerminal,
+        action: () => openSettingsTab("execution", "adapter")
+      },
+      {
+        id: "questions",
+        label: uiLanguage === "ko" ? "질문 자동 보류" : "Auto-defer questions",
+        detail:
+          uiLanguage === "ko"
+            ? "중간 결정은 작업을 멈추지 않고 결정함에 모아 나중에 처리합니다."
+            : "Route mid-run decisions to the inbox so work can continue where it is safe.",
+        ready: runtimeInitDefaults.autoDeferQuestions,
+        actionLabel: uiLanguage === "ko" ? "질문 처리" : "Questions",
+        icon: Inbox,
+        action: () => openSettingsTab("execution", "questions")
+      }
+    ],
+    [
+      agentCatalog.length,
+      openSection,
+      openSettingsTab,
+      providerCredentials.configuredCount,
+      runtimeInitDefaults.adapterId,
+      runtimeInitDefaults.autoDeferQuestions,
+      uiLanguage
+    ]
+  );
+  const coreReadinessCount = useMemo(() => coreSetupSteps.filter((step) => step.ready).length, [coreSetupSteps]);
+  const workVisibilityItems = useMemo(
+    () => [
+      {
+        id: "active-work",
+        label: uiLanguage === "ko" ? "진행 중 작업" : "Active work",
+        value: collaborationBoard.summary.activeTasks.toLocaleString("ko-KR"),
+        detail: uiLanguage === "ko" ? "현재 움직이는 task" : "tasks in motion",
+        icon: Activity
+      },
+      {
+        id: "pending-decisions",
+        label: uiLanguage === "ko" ? "보류 결정" : "Pending decisions",
+        value: (attentionItems.length + collaborationBoard.summary.blockedTasks).toLocaleString("ko-KR"),
+        detail: uiLanguage === "ko" ? "나중에 모아 처리" : "deferred for later",
+        icon: Inbox
+      },
+      {
+        id: "task-runs",
+        label: uiLanguage === "ko" ? "실행 기록" : "Task runs",
+        value: snapshot.stats.tasks.toLocaleString("ko-KR"),
+        detail: uiLanguage === "ko" ? "연속성 저장소" : "continuity store",
+        icon: PlayCircle
+      },
+      {
+        id: "agents-ready",
+        label: uiLanguage === "ko" ? "에이전트" : "Agents",
+        value: agentCatalog.length.toLocaleString("ko-KR"),
+        detail: uiLanguage === "ko" ? "생성/공유 후보" : "created or shareable",
+        icon: Bot
+      }
+    ],
+    [
+      agentCatalog.length,
+      attentionItems.length,
+      collaborationBoard.summary.activeTasks,
+      collaborationBoard.summary.blockedTasks,
+      snapshot.stats.tasks,
+      uiLanguage
+    ]
+  );
+  const homeMainFeatures = useMemo<CoreFeatureDrilldownItem[]>(
+    () => [
+      {
+        id: "agents",
+        label: uiLanguage === "ko" ? "에이전트 코어" : "Agent Core",
+        kicker: uiLanguage === "ko" ? "핵심 1" : "Core 1",
+        title: uiLanguage === "ko" ? "커스텀 에이전트를 쉽게 만듭니다" : "Create custom agents easily",
+        detail:
+          uiLanguage === "ko"
+            ? "역할, 도구, guardrail, 검증 명령을 한 번에 묶어 새 에이전트나 작업별 서브에이전트로 저장합니다."
+            : "Bundle role, tools, guardrails, and validation commands into reusable agents or per-task subagents.",
+        icon: Bot,
+        metric: `${agentCatalog.length.toLocaleString("ko-KR")} agents`,
+        cta: uiLanguage === "ko" ? "에이전트 코어 열기" : "Open Agent Core",
+        run: () => openSection("agents"),
+        steps:
+          uiLanguage === "ko"
+            ? ["목표와 역할 선택", "루트 툴과 검증 연결", "proposal 또는 실행 lane으로 넘기기"]
+            : ["Choose goal and role", "Attach root tools and validation", "Send to proposal or run lane"]
+      },
+      {
+        id: "run",
+        label: uiLanguage === "ko" ? "CLI 오케스트레이션" : "CLI Orchestration",
+        kicker: uiLanguage === "ko" ? "핵심 2" : "Core 2",
+        title: uiLanguage === "ko" ? "CLI 작업을 끊기지 않게 이어갑니다" : "Keep CLI work continuous",
+        detail:
+          uiLanguage === "ko"
+            ? "Codex, Claude Code 같은 CLI lane을 작업 파이프로 묶고, 중간 질문은 decision inbox에 모아 나중에 처리합니다."
+            : "Bind Codex, Claude Code, and other CLI lanes into task pipes while deferring questions to the decision inbox.",
+        icon: Network,
+        metric: runtimeInitDefaults.adapterId,
+        cta: uiLanguage === "ko" ? "CLI 실행 화면" : "Open CLI run",
+        run: () => openSection("desktop"),
+        steps:
+          uiLanguage === "ko"
+            ? ["작업 intake 입력", "필요 CLI lane fan-out", "질문 보류 후 결과 병합"]
+            : ["Enter task intake", "Fan out to needed CLI lanes", "Defer questions and merge results"]
+      },
+      {
+        id: "files",
+        label: uiLanguage === "ko" ? "루트 툴" : "Root Tools",
+        kicker: uiLanguage === "ko" ? "공유 기반" : "Shared Base",
+        title: uiLanguage === "ko" ? "모든 에이전트와 CLI가 같은 툴을 씁니다" : "Agents and CLIs share the same root tools",
+        detail:
+          uiLanguage === "ko"
+            ? "모델 계정, CLI adapter, 작업공간 파일, decision inbox를 root에서 관리하고 작업별 에이전트가 공유하게 둡니다."
+            : "Manage model accounts, CLI adapters, workspace files, and the decision inbox at root so per-task agents share them.",
+        icon: Code2,
+        metric: `${coreReadinessCount}/${coreSetupSteps.length} setup`,
+        cta: uiLanguage === "ko" ? "루트 파일/툴" : "Root files/tools",
+        run: () => openSection("source"),
+        steps:
+          uiLanguage === "ko"
+            ? ["계정과 CLI 연결", "작업공간 권한 설정", "작업별 에이전트에 공유"]
+            : ["Connect accounts and CLIs", "Grant workspace access", "Share with per-task agents"]
+      },
+      {
+        id: "learn",
+        label: uiLanguage === "ko" ? "작업 가시성" : "Work Visibility",
+        kicker: uiLanguage === "ko" ? "한눈에 보기" : "At a Glance",
+        title: uiLanguage === "ko" ? "지금 얼마나 작업 중인지 바로 봅니다" : "See how much work is happening now",
+        detail:
+          uiLanguage === "ko"
+            ? "진행 중 작업, 막힌 결정, 실행 기록, 에이전트 수를 첫 화면과 CLI 화면에서 계속 보여줍니다."
+            : "Keep active work, blocked decisions, run records, and agent counts visible on the home and CLI surfaces.",
+        icon: Activity,
+        metric: `${collaborationBoard.summary.activeTasks.toLocaleString("ko-KR")} active`,
+        cta: uiLanguage === "ko" ? "CLI 작업량 보기" : "View CLI workload",
+        run: () => openSection("desktop"),
+        steps:
+          uiLanguage === "ko"
+            ? ["진행/보류/기록 요약", "결정함에서 답변", "반복 패턴을 개선 후보로 승격"]
+            : ["Summarize active/deferred/runs", "Answer in the inbox", "Promote repeated patterns"]
+      }
+    ],
+    [
+      agentCatalog.length,
+      collaborationBoard.summary.activeTasks,
+      coreReadinessCount,
+      coreSetupSteps.length,
+      openSection,
+      runtimeInitDefaults.adapterId,
+      uiLanguage
+    ]
+  );
+  const homeDrilldownItems = useMemo<Array<{
     id: string;
     href: string;
     label: string;
     detail: string;
     metric: string;
     icon: LucideIcon;
-  }> = [
-    ...homeMainFeatures.map((feature) => ({
-      id: `feature-${feature.id}`,
-      href: `#home-depth-feature-${feature.id}`,
-      label: feature.label,
-      detail: feature.title,
-      metric: feature.metric,
-      icon: feature.icon
-    })),
-    {
-      id: "setup",
-      href: "#home-depth-setup",
-      label: uiLanguage === "ko" ? "설정 점검" : "Setup Check",
-      detail: uiLanguage === "ko" ? "계정, CLI, 질문 보류를 하나씩 확인합니다." : "Check accounts, CLI, and question deferral one by one.",
-      metric: `${coreReadinessCount}/${coreSetupSteps.length}`,
-      icon: Settings
-    },
-    {
-      id: "root-tools",
-      href: "#home-depth-root-tools",
-      label: uiLanguage === "ko" ? "루트 툴" : "Root Tools",
-      detail: uiLanguage === "ko" ? "공유 기반 도구와 파일 상태만 봅니다." : "View only shared tool and file state.",
-      metric: rootToolItems.length.toLocaleString("ko-KR"),
-      icon: Code2
-    },
-    {
-      id: "run-sequence",
-      href: "#home-depth-run-sequence",
-      label: uiLanguage === "ko" ? "실행 순서" : "Run Sequence",
-      detail: uiLanguage === "ko" ? "다음 실행 단계만 확인합니다." : "Review only the next run steps.",
-      metric: commandSteps.length.toLocaleString("ko-KR"),
-      icon: Activity
-    },
-    {
-      id: "decision-inbox",
-      href: "#home-depth-decision-inbox",
-      label: uiLanguage === "ko" ? "결정함" : "Decision Inbox",
-      detail: uiLanguage === "ko" ? "보류된 판단만 처리합니다." : "Handle only deferred decisions.",
-      metric: attentionItems.length.toLocaleString("ko-KR"),
-      icon: Inbox
-    },
-    {
-      id: "work-metrics",
-      href: "#home-depth-work-metrics",
-      label: uiLanguage === "ko" ? "작업 지표" : "Work Metrics",
-      detail: uiLanguage === "ko" ? "현재 수치만 봅니다." : "View only current counts.",
-      metric: snapshot.stats.tasks.toLocaleString("ko-KR"),
-      icon: PlayCircle
-    },
-    {
-      id: "product-structure",
-      href: "#home-depth-product-structure",
-      label: uiLanguage === "ko" ? "제품 구조" : "Product Structure",
-      detail: uiLanguage === "ko" ? "기능 아키텍처만 봅니다." : "View only feature architecture.",
-      metric: productFeatureArchitecture.summary.totalFeatures.toLocaleString("ko-KR"),
-      icon: Layers
-    },
-    {
-      id: "recent-trail",
-      href: "#home-depth-recent-trail",
-      label: uiLanguage === "ko" ? "최근 기록" : "Recent Trail",
-      detail: uiLanguage === "ko" ? "최신 작업 신호만 봅니다." : "View only latest work signals.",
-      metric: recentHistory.length.toLocaleString("ko-KR"),
-      icon: History
-    },
-    {
-      id: "option-status",
-      href: "#home-depth-option-status",
-      label: uiLanguage === "ko" ? "옵션 상태" : "Option Status",
-      detail: uiLanguage === "ko" ? "선택 기능 준비 상태만 봅니다." : "View only optional readiness.",
-      metric: snapshot.publicReview.status,
-      icon: ShieldCheck
-    }
-  ];
-  const settingsTabs: Array<{
+  }>>(
+    () => [
+      ...homeMainFeatures.map((feature) => ({
+        id: `feature-${feature.id}`,
+        href: `#home-depth-feature-${feature.id}`,
+        label: feature.label,
+        detail: feature.title,
+        metric: feature.metric,
+        icon: feature.icon
+      })),
+      {
+        id: "setup",
+        href: "#home-depth-setup",
+        label: uiLanguage === "ko" ? "설정 점검" : "Setup Check",
+        detail: uiLanguage === "ko" ? "계정, CLI, 질문 보류를 하나씩 확인합니다." : "Check accounts, CLI, and question deferral one by one.",
+        metric: `${coreReadinessCount}/${coreSetupSteps.length}`,
+        icon: Settings
+      },
+      {
+        id: "root-tools",
+        href: "#home-depth-root-tools",
+        label: uiLanguage === "ko" ? "루트 툴" : "Root Tools",
+        detail: uiLanguage === "ko" ? "공유 기반 도구와 파일 상태만 봅니다." : "View only shared tool and file state.",
+        metric: rootToolItems.length.toLocaleString("ko-KR"),
+        icon: Code2
+      },
+      {
+        id: "run-sequence",
+        href: "#home-depth-run-sequence",
+        label: uiLanguage === "ko" ? "실행 순서" : "Run Sequence",
+        detail: uiLanguage === "ko" ? "다음 실행 단계만 확인합니다." : "Review only the next run steps.",
+        metric: commandSteps.length.toLocaleString("ko-KR"),
+        icon: Activity
+      },
+      {
+        id: "decision-inbox",
+        href: "#home-depth-decision-inbox",
+        label: uiLanguage === "ko" ? "결정함" : "Decision Inbox",
+        detail: uiLanguage === "ko" ? "보류된 판단만 처리합니다." : "Handle only deferred decisions.",
+        metric: attentionItems.length.toLocaleString("ko-KR"),
+        icon: Inbox
+      },
+      {
+        id: "work-metrics",
+        href: "#home-depth-work-metrics",
+        label: uiLanguage === "ko" ? "작업 지표" : "Work Metrics",
+        detail: uiLanguage === "ko" ? "현재 수치만 봅니다." : "View only current counts.",
+        metric: snapshot.stats.tasks.toLocaleString("ko-KR"),
+        icon: PlayCircle
+      },
+      {
+        id: "product-structure",
+        href: "#home-depth-product-structure",
+        label: uiLanguage === "ko" ? "제품 구조" : "Product Structure",
+        detail: uiLanguage === "ko" ? "기능 아키텍처만 봅니다." : "View only feature architecture.",
+        metric: productFeatureArchitecture.summary.totalFeatures.toLocaleString("ko-KR"),
+        icon: Layers
+      },
+      {
+        id: "recent-trail",
+        href: "#home-depth-recent-trail",
+        label: uiLanguage === "ko" ? "최근 기록" : "Recent Trail",
+        detail: uiLanguage === "ko" ? "최신 작업 신호만 봅니다." : "View only latest work signals.",
+        metric: recentHistory.length.toLocaleString("ko-KR"),
+        icon: History
+      },
+      {
+        id: "option-status",
+        href: "#home-depth-option-status",
+        label: uiLanguage === "ko" ? "옵션 상태" : "Option Status",
+        detail: uiLanguage === "ko" ? "선택 기능 준비 상태만 봅니다." : "View only optional readiness.",
+        metric: snapshot.publicReview.status,
+        icon: ShieldCheck
+      }
+    ],
+    [
+      attentionItems.length,
+      commandSteps.length,
+      coreReadinessCount,
+      coreSetupSteps.length,
+      homeMainFeatures,
+      productFeatureArchitecture.summary.totalFeatures,
+      recentHistory.length,
+      rootToolItems.length,
+      snapshot.publicReview.status,
+      snapshot.stats.tasks,
+      uiLanguage
+    ]
+  );
+  const settingsTabs = useMemo<Array<{
     id: SettingsTabId;
     label: string;
     detail: string;
     icon: LucideIcon;
-  }> = [
-    {
-      id: "appearance",
-      label: uiLanguage === "ko" ? "화면" : "Display",
-      detail: uiLanguage === "ko" ? "언어와 보기 권한" : "Language and view mode",
-      icon: Languages
-    },
-    {
-      id: "navigation",
-      label: uiLanguage === "ko" ? "레이아웃" : "Layout",
-      detail: uiLanguage === "ko" ? "왼쪽 레일과 하단 터미널" : "Left rail and bottom terminal",
-      icon: LayoutDashboard
-    },
-    {
-      id: "execution",
-      label: uiLanguage === "ko" ? "핵심 설정" : "Core Setup",
-      detail: uiLanguage === "ko" ? "계정, CLI, 질문, 루트 툴" : "Accounts, CLI, questions, root tools",
-      icon: Network
-    },
-    {
-      id: "data",
-      label: uiLanguage === "ko" ? "데이터/운영" : "Data",
-      detail: uiLanguage === "ko" ? "필터와 snapshot" : "Filters and snapshot",
-      icon: Database
-    }
-  ];
-  const commandItems: CommandItem[] = [
-    ...workVisibleSections.map((item) => ({
-      id: `section-${item.id}`,
-      label: item.label,
-      detail: item.purpose,
-      group: "Section",
-      icon: item.icon,
-      badge: sectionNavMeta[item.id],
-      keywords: [item.id, item.label, item.shortLabel, item.purpose],
-      run: () => openSection(item.id)
-    })),
-    {
-      id: "operator-center",
-      label: uiLanguage === "ko" ? "운영 센터 열기" : "Open Operator Center",
-      detail:
-        uiLanguage === "ko"
-          ? "모니터링, 문서, 요구사항, 히스토리는 작업 화면과 분리해서 봅니다."
-          : "Monitoring, documents, requirements, history, and admin surfaces are separated here.",
-      group: uiLanguage === "ko" ? "운영" : "Operator",
-      icon: ShieldCheck,
-      badge: operatorCenterSections.length.toLocaleString("ko-KR"),
-      keywords: ["operator", "monitoring", "documents", "history", "requirements", "admin"],
-      run: () => setOperatorCenterOpen(true)
-    },
-    {
-      id: "provider-accounts",
-      label: uiLanguage === "ko" ? "제공자 계정 연결" : "Connect Provider Accounts",
-      detail:
-        uiLanguage === "ko"
-          ? "에이전트 코어가 직접 실행할 OpenAI, Anthropic, Gemini, Ollama 계정을 관리합니다."
-          : "Manage ChatGPT/OpenAI, Claude/Anthropic, and Gemini/Google API keys in native settings.",
-      group: uiLanguage === "ko" ? "핵심 설정" : "Core Setup",
-      icon: KeyRound,
-      badge: `${providerCredentials.configuredCount}/${providerCredentials.providers.length || 3}`,
-      keywords: ["openai", "chatgpt", "claude", "anthropic", "gemini", "google", "api key", "provider", "account"],
-      run: () => openSettingsTab("execution", "providers")
-    },
-    {
-      id: "run-search-agent",
-      label: uiLanguage === "ko" ? "검색 에이전트 작업 채팅" : "Search Agent Work Chat",
-      detail:
-        uiLanguage === "ko"
-          ? "이미 만들어둔 research-insight-planner-agent로 작업을 시작하는 채팅 패널을 엽니다."
-          : "Open the chat workbench for the existing research-insight-planner-agent.",
-      group: uiLanguage === "ko" ? "에이전트 실행" : "Agent Run",
-      icon: Search,
-      badge: researchInsightAgent ? "ready" : "config",
-      keywords: ["search", "research", "agent", "planner", researchInsightAgentId],
-      run: openSearchAgentWorkbench
-    },
-    {
-      id: "settings-appearance",
-      label: uiLanguage === "ko" ? "화면 설정" : "Display Settings",
-      detail: uiLanguage === "ko" ? "화면 언어, 보기 모드, 문서 언어는 설정에서만 바꿉니다." : "Change UI language, view mode, and document language in Settings.",
-      group: uiLanguage === "ko" ? "설정" : "Settings",
-      icon: Languages,
-      badge: currentViewMode.label,
-      keywords: ["settings", "preferences", "view", "language", "display"],
-      run: () => openSettingsTab("appearance")
-    },
-    {
-      id: "settings-execution",
-      label: uiLanguage === "ko" ? "핵심 설정" : "Core Setup",
-      detail: uiLanguage === "ko" ? "에이전트 코어와 CLI 오케스트레이션 준비를 한 곳에서 정합니다." : "Set Agent Core and CLI orchestration readiness in one place.",
-      group: uiLanguage === "ko" ? "설정" : "Settings",
-      icon: Network,
-      badge: runtimeInitDefaults.adapterId,
-      keywords: ["settings", "initialize", "adapter", "session", "task pipe", "auto defer"],
-      run: () => openSettingsTab("execution")
-    },
-    {
-      id: "terminal-drawer-open",
-      label: uiLanguage === "ko" ? "하단 터미널 열기" : "Open Bottom Terminal",
-      detail:
-        uiLanguage === "ko"
-          ? "다중 CLI lane, stdout/stderr, decision event를 아래에서 올라오는 패널로 봅니다."
-          : "Open multi-CLI lanes, stdout/stderr, and decision events in the bottom drawer.",
-      group: uiLanguage === "ko" ? "실행" : "Run",
-      icon: SquareTerminal,
-      badge: terminalDrawerOpen ? "open" : "closed",
-      keywords: ["terminal", "drawer", "panel", "cli", "run board", "bottom"],
-      run: openTerminalDrawer
-    },
-    ...viewCategories.slice(0, 10).map((item) => ({
-      id: `category-${item}`,
-      label: categoryLabel(item),
-      detail: uiLanguage === "ko" ? `문서 필터: ${item}` : `Documents filter: ${item}`,
-      group: uiLanguage === "ko" ? "문서 필터" : "Document Filter",
-      icon: ListFilter,
-      badge: item === category ? "active" : undefined,
-      keywords: [item, categoryLabel(item), "documents", "filter"],
-      run: () => {
-        openSection("documents");
-        setCategory(item);
+  }>>(
+    () => [
+      {
+        id: "appearance",
+        label: uiLanguage === "ko" ? "화면" : "Display",
+        detail: uiLanguage === "ko" ? "언어와 보기 권한" : "Language and view mode",
+        icon: Languages
+      },
+      {
+        id: "navigation",
+        label: uiLanguage === "ko" ? "레이아웃" : "Layout",
+        detail: uiLanguage === "ko" ? "왼쪽 레일과 하단 터미널" : "Left rail and bottom terminal",
+        icon: LayoutDashboard
+      },
+      {
+        id: "execution",
+        label: uiLanguage === "ko" ? "핵심 설정" : "Core Setup",
+        detail: uiLanguage === "ko" ? "계정, CLI, 질문, 루트 툴" : "Accounts, CLI, questions, root tools",
+        icon: Network
+      },
+      {
+        id: "data",
+        label: uiLanguage === "ko" ? "데이터/운영" : "Data",
+        detail: uiLanguage === "ko" ? "필터와 snapshot" : "Filters and snapshot",
+        icon: Database
       }
-    })),
-    {
-      id: "action-settings",
-      label: uiLanguage === "ko" ? "설정" : "Settings",
-      detail: uiLanguage === "ko" ? "테마, 언어, 레이아웃, 초기화 기본값을 조정합니다." : "Adjust theme, language, layout, and initialization defaults.",
-      group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
-      icon: Settings,
-      badge: currentViewMode.label,
-      keywords: ["settings", "preferences", "view", "language", "pinned"],
-      run: () => openSettingsTab("appearance")
-    },
-    {
-      id: "action-attention",
-      label: attentionState.action,
-      detail: attentionState.title,
-      group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
-      icon: attentionState.icon,
-      badge: attentionState.label,
-      keywords: ["attention", "now", attentionState.label, attentionState.title],
-      run: () => openSection(attentionState.section)
-    },
-    {
-      id: "action-evidence",
-      label: uiLanguage === "ko" ? "근거 기록" : "Evidence Trail",
-      detail: `${visibleWebSearches.toLocaleString("ko-KR")} web searches / ${visibleEvaluations.toLocaleString("ko-KR")} evaluations`,
-      group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
-      icon: FileSearch,
-      badge: `${visibleWebSearches}/${visibleEvaluations}`,
-      keywords: ["evidence", "web search", "evaluation", "documents"],
-      run: () => openSection("documents")
-    },
-    {
-      id: "action-reset-filters",
-      label: uiLanguage === "ko" ? "필터 초기화" : "Reset Filters",
-      detail: "검색어, 문서, 히스토리, 소스 필터를 초기화합니다.",
-      group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
-      icon: ListFilter,
-      keywords: ["reset", "filter", "search", "clear"],
-      run: () => {
-        setQuery("");
-        setCategory("all");
-        setHistoryDate("all");
-        setHistoryCategory("all");
-        setSourceProject("all");
-        setSourceLanguage("all");
+    ],
+    [uiLanguage]
+  );
+  const commandItems = useMemo<CommandItem[]>(
+    () => [
+      ...workVisibleSections.map((item) => ({
+        id: `section-${item.id}`,
+        label: item.label,
+        detail: item.purpose,
+        group: "Section",
+        icon: item.icon,
+        badge: sectionNavMeta[item.id],
+        keywords: [item.id, item.label, item.shortLabel, item.purpose],
+        run: () => openSection(item.id)
+      })),
+      {
+        id: "operator-center",
+        label: uiLanguage === "ko" ? "운영 센터 열기" : "Open Operator Center",
+        detail:
+          uiLanguage === "ko"
+            ? "모니터링, 문서, 요구사항, 히스토리는 작업 화면과 분리해서 봅니다."
+            : "Monitoring, documents, requirements, history, and admin surfaces are separated here.",
+        group: uiLanguage === "ko" ? "운영" : "Operator",
+        icon: ShieldCheck,
+        badge: operatorCenterSections.length.toLocaleString("ko-KR"),
+        keywords: ["operator", "monitoring", "documents", "history", "requirements", "admin"],
+        run: () => setOperatorCenterOpen(true)
+      },
+      {
+        id: "provider-accounts",
+        label: uiLanguage === "ko" ? "제공자 계정 연결" : "Connect Provider Accounts",
+        detail:
+          uiLanguage === "ko"
+            ? "에이전트 코어가 직접 실행할 OpenAI, Anthropic, Gemini, Ollama 계정을 관리합니다."
+            : "Manage ChatGPT/OpenAI, Claude/Anthropic, and Gemini/Google API keys in native settings.",
+        group: uiLanguage === "ko" ? "핵심 설정" : "Core Setup",
+        icon: KeyRound,
+        badge: `${providerCredentials.configuredCount}/${providerCredentials.providers.length || 3}`,
+        keywords: ["openai", "chatgpt", "claude", "anthropic", "gemini", "google", "api key", "provider", "account"],
+        run: () => openSettingsTab("execution", "providers")
+      },
+      {
+        id: "run-search-agent",
+        label: uiLanguage === "ko" ? "검색 에이전트 작업 채팅" : "Search Agent Work Chat",
+        detail:
+          uiLanguage === "ko"
+            ? "이미 만들어둔 research-insight-planner-agent로 작업을 시작하는 채팅 패널을 엽니다."
+            : "Open the chat workbench for the existing research-insight-planner-agent.",
+        group: uiLanguage === "ko" ? "에이전트 실행" : "Agent Run",
+        icon: Search,
+        badge: researchInsightAgent ? "ready" : "config",
+        keywords: ["search", "research", "agent", "planner", researchInsightAgentId],
+        run: openSearchAgentWorkbench
+      },
+      {
+        id: "settings-appearance",
+        label: uiLanguage === "ko" ? "화면 설정" : "Display Settings",
+        detail: uiLanguage === "ko" ? "화면 언어, 보기 모드, 문서 언어는 설정에서만 바꿉니다." : "Change UI language, view mode, and document language in Settings.",
+        group: uiLanguage === "ko" ? "설정" : "Settings",
+        icon: Languages,
+        badge: currentViewMode.label,
+        keywords: ["settings", "preferences", "view", "language", "display"],
+        run: () => openSettingsTab("appearance")
+      },
+      {
+        id: "settings-execution",
+        label: uiLanguage === "ko" ? "핵심 설정" : "Core Setup",
+        detail: uiLanguage === "ko" ? "에이전트 코어와 CLI 오케스트레이션 준비를 한 곳에서 정합니다." : "Set Agent Core and CLI orchestration readiness in one place.",
+        group: uiLanguage === "ko" ? "설정" : "Settings",
+        icon: Network,
+        badge: runtimeInitDefaults.adapterId,
+        keywords: ["settings", "initialize", "adapter", "session", "task pipe", "auto defer"],
+        run: () => openSettingsTab("execution")
+      },
+      {
+        id: "terminal-drawer-open",
+        label: uiLanguage === "ko" ? "하단 터미널 열기" : "Open Bottom Terminal",
+        detail:
+          uiLanguage === "ko"
+            ? "다중 CLI lane, stdout/stderr, decision event를 아래에서 올라오는 패널로 봅니다."
+            : "Open multi-CLI lanes, stdout/stderr, and decision events in the bottom drawer.",
+        group: uiLanguage === "ko" ? "실행" : "Run",
+        icon: SquareTerminal,
+        badge: terminalDrawerOpen ? "open" : "closed",
+        keywords: ["terminal", "drawer", "panel", "cli", "run board", "bottom"],
+        run: openTerminalDrawer
+      },
+      ...viewCategories.slice(0, 10).map((item) => ({
+        id: `category-${item}`,
+        label: categoryLabel(item),
+        detail: uiLanguage === "ko" ? `문서 필터: ${item}` : `Documents filter: ${item}`,
+        group: uiLanguage === "ko" ? "문서 필터" : "Document Filter",
+        icon: ListFilter,
+        badge: item === category ? "active" : undefined,
+        keywords: [item, categoryLabel(item), "documents", "filter"],
+        run: () => {
+          openSection("documents");
+          setCategory(item);
+        }
+      })),
+      {
+        id: "action-settings",
+        label: uiLanguage === "ko" ? "설정" : "Settings",
+        detail: uiLanguage === "ko" ? "테마, 언어, 레이아웃, 초기화 기본값을 조정합니다." : "Adjust theme, language, layout, and initialization defaults.",
+        group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
+        icon: Settings,
+        badge: currentViewMode.label,
+        keywords: ["settings", "preferences", "view", "language", "pinned"],
+        run: () => openSettingsTab("appearance")
+      },
+      {
+        id: "action-attention",
+        label: attentionState.action,
+        detail: attentionState.title,
+        group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
+        icon: attentionState.icon,
+        badge: attentionState.label,
+        keywords: ["attention", "now", attentionState.label, attentionState.title],
+        run: () => openSection(attentionState.section)
+      },
+      {
+        id: "action-evidence",
+        label: uiLanguage === "ko" ? "근거 기록" : "Evidence Trail",
+        detail: `${visibleWebSearches.toLocaleString("ko-KR")} web searches / ${visibleEvaluations.toLocaleString("ko-KR")} evaluations`,
+        group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
+        icon: FileSearch,
+        badge: `${visibleWebSearches}/${visibleEvaluations}`,
+        keywords: ["evidence", "web search", "evaluation", "documents"],
+        run: () => openSection("documents")
+      },
+      {
+        id: "action-reset-filters",
+        label: uiLanguage === "ko" ? "필터 초기화" : "Reset Filters",
+        detail: "검색어, 문서, 히스토리, 소스 필터를 초기화합니다.",
+        group: uiLanguage === "ko" ? "빠른 실행" : "Quick Action",
+        icon: ListFilter,
+        keywords: ["reset", "filter", "search", "clear"],
+        run: () => {
+          setQuery("");
+          setCategory("all");
+          setHistoryDate("all");
+          setHistoryCategory("all");
+          setSourceProject("all");
+          setSourceLanguage("all");
+        }
       }
-    }
-  ];
+    ],
+    [
+      attentionState.action,
+      attentionState.icon,
+      attentionState.label,
+      attentionState.section,
+      attentionState.title,
+      category,
+      currentViewMode.label,
+      openSearchAgentWorkbench,
+      openSection,
+      openSettingsTab,
+      openTerminalDrawer,
+      operatorCenterSections.length,
+      providerCredentials.configuredCount,
+      providerCredentials.providers.length,
+      researchInsightAgent,
+      runtimeInitDefaults.adapterId,
+      sectionNavMeta,
+      terminalDrawerOpen,
+      uiLanguage,
+      viewCategories,
+      visibleEvaluations,
+      visibleWebSearches,
+      workVisibleSections
+    ]
+  );
   const normalizedCommandQuery = commandQuery.trim().toLowerCase();
-  const filteredCommandItems = normalizedCommandQuery
-    ? commandItems.filter((item) =>
-        `${item.group} ${item.label} ${item.detail} ${item.keywords.join(" ")}`
-          .toLowerCase()
-          .includes(normalizedCommandQuery)
-      )
-    : commandItems.slice(0, 18);
+  const filteredCommandItems = useMemo(() => {
+    return normalizedCommandQuery
+      ? commandItems.filter((item) =>
+          `${item.group} ${item.label} ${item.detail} ${item.keywords.join(" ")}`
+            .toLowerCase()
+            .includes(normalizedCommandQuery)
+        )
+      : commandItems.slice(0, 18);
+  }, [commandItems, normalizedCommandQuery]);
   const runCommandItem = (item: CommandItem) => {
     item.run();
     setCommandPaletteOpen(false);
@@ -3916,7 +4085,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           </button>
         </aside>
 
-        <section className="desktop-viewport" aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"} tabIndex={0}>
+        <section
+          className="desktop-viewport"
+          aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"}
+          tabIndex={0}
+        >
           <header className="desktop-titlebar">
             <div className="titlebar-section">
               {currentSection ? <currentSection.icon size={18} aria-hidden="true" /> : <LayoutDashboard size={18} aria-hidden="true" />}
@@ -4233,7 +4406,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         <button
                           className={terminalDrawerOpen ? "active" : ""}
                           onClick={() => {
-                            setSection("desktop");
+                            openSection("desktop");
                             setTerminalDrawerOpen(true);
                           }}
                           type="button"
@@ -4328,7 +4501,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                           type="button"
                           onClick={() => {
                             setRuntimeInitDefaults(defaultRuntimeInitDefaults);
-                            setSection("desktop");
+                            openSection("desktop");
                             setTerminalDrawerOpen(true);
                             setSettingsOpen(false);
                           }}
@@ -5331,11 +5504,16 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             onRefreshModels={refreshProviderModels}
           />
 
-          <details className="section-secondary-disclosure">
+          <details
+            className="section-secondary-disclosure"
+            open={agentDetailsOpen}
+            onToggle={(event) => setAgentDetailsOpen(event.currentTarget.open)}
+          >
             <summary>
               <span>{uiLanguage === "ko" ? "에이전트 세부 기능 열기" : "Open agent details"}</span>
               <small>{uiLanguage === "ko" ? "블루프린트, 생성기, 협업판, 인벤토리" : "Blueprints, builder, board, inventory"}</small>
             </summary>
+            {agentDetailsOpen && (
             <div className="section-secondary-stack">
           <AgentCoreBlueprintPanel
             blueprints={agentCoreBlueprints}
@@ -5440,6 +5618,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             </div>
           </section>
             </div>
+            )}
           </details>
         </div>
           )}
@@ -7100,6 +7279,8 @@ function DesktopRuntimePanel({
   const [sourceWorkbenchView, setSourceWorkbenchView] = useState<SourceWorkbenchView>(
     isFileWorkspaceSurface ? "editor" : "files"
   );
+  const [runtimeDiagnosticsOpen, setRuntimeDiagnosticsOpen] = useState(false);
+  const [runRecordsOpen, setRunRecordsOpen] = useState(false);
   const [sourceWordWrap, setSourceWordWrap] = useState(false);
   const [sourceMinimapEnabled, setSourceMinimapEnabled] = useState(true);
   const [sourceSettingsOpen, setSourceSettingsOpen] = useState(false);
@@ -9663,11 +9844,16 @@ function DesktopRuntimePanel({
         </div>
       </section>
 
-      <details className="section-secondary-disclosure">
+      <details
+        className="section-secondary-disclosure"
+        open={runtimeDiagnosticsOpen}
+        onToggle={(event) => setRuntimeDiagnosticsOpen(event.currentTarget.open)}
+      >
         <summary>
           <span>{uiLanguage === "ko" ? "운영 진단 패널 열기" : "Open runtime diagnostics"}</span>
           <small>{uiLanguage === "ko" ? "지표, 빠른 실행, 워크스페이스, task pipe, 데이터 경계" : "Metrics, commands, workspace, task pipe, data boundary"}</small>
         </summary>
+        {runtimeDiagnosticsOpen && (
         <div className="section-secondary-stack">
       <section className="metrics-band">
         <Metric label="Guest Adapters" value={adapters.length} icon={Network} tone="green" />
@@ -10536,6 +10722,7 @@ function DesktopRuntimePanel({
         </div>
       </section>
         </div>
+        )}
       </details>
 
       <RuntimeTerminalDrawer
@@ -10571,11 +10758,16 @@ function DesktopRuntimePanel({
         onWriteSessionInput={writeSessionInput}
       />
 
-      <details className="section-secondary-disclosure">
+      <details
+        className="section-secondary-disclosure"
+        open={runRecordsOpen}
+        onToggle={(event) => setRunRecordsOpen(event.currentTarget.open)}
+      >
         <summary>
           <span>{uiLanguage === "ko" ? "실행 기록과 결정함 열기" : "Open run records and decisions"}</span>
           <small>{uiLanguage === "ko" ? "터미널 출력, decision inbox, 근거 후보" : "Terminal output, decision inbox, evidence candidates"}</small>
         </summary>
+        {runRecordsOpen && (
         <div className="section-secondary-stack">
       <section className="panel wide terminal-output-panel">
         <div className="panel-heading">
@@ -10792,6 +10984,7 @@ function DesktopRuntimePanel({
         )}
       </section>
         </div>
+        )}
       </details>
 
     </div>

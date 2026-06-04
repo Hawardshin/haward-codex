@@ -1,0 +1,115 @@
+{
+  "id": "2026-06-05-tab-transition-performance",
+  "date": "2026-06-05",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "request_summary": "Workspace Monitor 주요 탭 간 이동 지연을 줄인다.",
+  "requirements": [
+    "REQ-WM-031",
+    "REQ-WM-037",
+    "REQ-WM-038",
+    "REQ-WM-039"
+  ],
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tab-transition-performance/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tab-transition-performance/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tab-transition-performance/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tab-transition-performance/traceability.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tab-transition-performance/validation.ko.md",
+    "_history/user-requests/2026/2026-06-05-tab-transition-performance.ko.md",
+    "_history/request-traces/2026/2026-06-05-tab-transition-performance.ko.md",
+    "_history/web-searches/2026/2026-06-05-tab-transition-performance.ko.md",
+    "_history/work-summaries/2026/2026-06-05.ko.md",
+    "_history/2026/2026-06-05.md"
+  ],
+  "implementation_summary": [
+    "Agents secondary details now keep Agent Core blueprint, factory, learning feedback, collaboration, inventory, and runtime visual panels unmounted until the detail disclosure opens.",
+    "Desktop Runtime diagnostics and run-record sections now keep heavy panels unmounted until their separate disclosures open.",
+    "Section activation updates the selected section and recent section list immediately without useTransition scheduling.",
+    "Existing memoized section data and callback stabilization remain in place from the first optimization pass."
+  ],
+  "performance_measurement": {
+    "environment": "static export, Chromium headless, viewport 1280x820, CPU throttle 6",
+    "baseline_ms": {
+      "agents": 311.4,
+      "desktop": 280.9,
+      "source": 182.2,
+      "intent": 133.3,
+      "overview": 133.5,
+      "average": 208.3
+    },
+    "final_ms": {
+      "agents": 194.3,
+      "desktop": 177.9,
+      "source": 136,
+      "intent": 86.5,
+      "overview": 92.5,
+      "average": 137.4
+    },
+    "average_improvement_percent": 34
+  },
+  "verification": [
+    {
+      "command": "corepack pnpm --filter workspace-monitor run check",
+      "status": "passed",
+      "notes": "TypeScript, scroll contract, and source control design checks passed."
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor test",
+      "status": "passed",
+      "notes": "17 node tests passed."
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor run build:customer",
+      "status": "passed",
+      "notes": "Customer snapshot and Next static export completed."
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor run perf:budget",
+      "status": "passed",
+      "notes": "Largest initial chunk 327881 bytes under the 1000000 byte budget."
+    },
+    {
+      "command": "corepack pnpm --filter platform-desktop-app run check",
+      "status": "passed",
+      "notes": "Runtime contract, readiness, customer bundle, internal release, and service readiness checks passed; public release remains gated by existing signing/updater/clean-machine warnings."
+    },
+    {
+      "command": "CPU throttle 6 static export tab switch audit",
+      "status": "passed",
+      "notes": "Average click-to-primary-panel-visible time dropped from 208.3ms to 137.4ms."
+    },
+    {
+      "command": "Disclosure DOM mount audit",
+      "status": "passed",
+      "notes": "Closed Agents/Desktop disclosures mounted 0 heavy secondary panels; opening disclosures mounted expected panels with horizontal overflow 0 at 390x720; Agents detail resets closed after leaving the tab."
+    },
+    {
+      "command": "in-app Browser smoke",
+      "status": "passed",
+      "notes": "Local static page opened at 127.0.0.1:3223 with expected nav IDs, home visible, and horizontal overflow 0."
+    }
+  ],
+  "web_search_targets": [
+    "_history/web-searches/2026/2026-06-05-tab-transition-performance.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-tab-transition-performance-omission.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-tab-transition-performance-resource.json"
+  ],
+  "installation_occurred": false,
+  "generated_snapshot_files_left_unstaged": [
+    "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/customer-workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json"
+  ],
+  "result": "pass"
+}

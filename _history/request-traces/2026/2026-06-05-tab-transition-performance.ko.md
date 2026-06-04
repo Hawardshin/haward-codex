@@ -1,0 +1,23 @@
+# 요청 추적: Tab transition performance
+
+- 날짜: 2026-06-05
+- 요청 요약: Workspace Monitor 주요 탭 간 이동 지연 해결.
+- 결과: 완료
+- 주요 산출물:
+  - `platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx`
+  - `platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md`
+  - `platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md`
+  - `platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tab-transition-performance/`
+  - `_history/web-searches/2026/2026-06-05-tab-transition-performance.ko.md`
+  - `_history/evaluations/2026/2026-06-05-tab-transition-performance-evaluation-input.json`
+- 검증:
+  - `corepack pnpm --filter workspace-monitor run check`
+  - `corepack pnpm --filter workspace-monitor test`
+  - `corepack pnpm --filter workspace-monitor run build:customer`
+  - `corepack pnpm --filter workspace-monitor run perf:budget`
+  - `corepack pnpm --filter platform-desktop-app run check`
+  - CPU throttle 6 static export tab switch audit
+  - disclosure closed/open mount audit
+  - in-app Browser smoke
+- 결과 수치: CPU throttle 6 평균 탭 전환 208.3ms에서 137.4ms로 감소.
+- 제외: 기존 generated workspace snapshot 변경분은 빌드 산출물로 남겼고 커밋 대상에서 제외한다.
