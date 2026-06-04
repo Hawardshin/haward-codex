@@ -1,0 +1,32 @@
+{
+  "schema_version": "2026-06-02",
+  "id": "2026-06-05-tool-studio-ui-resource",
+  "work_id": "2026-06-05-tool-studio-ui",
+  "status": "passed",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "Three.js WebGLRenderer",
+      "risk": "animation frame, ResizeObserver, geometry/material, and renderer resources can leak when switching sections",
+      "mitigation": "ToolStudioPanel cancels animationFrame, disconnects ResizeObserver, recursively disposes scene geometry/materials, removes render-ready attribute, and disposes renderer on unmount.",
+      "evidence": "tests/tool-studio.test.mjs checks cleanup tokens; TypeScript check passed."
+    },
+    {
+      "resource": "static HTTP server",
+      "risk": "local server session can remain running after validation",
+      "mitigation": "Server session is tracked as exec session 68526 and must be stopped before final close-out.",
+      "evidence": "Local validation server served platform-desktop-app/renderer/workspace-monitor/out on port 3331."
+    },
+    {
+      "resource": "Playwright Chromium",
+      "risk": "browser instances can remain open after smoke runs",
+      "mitigation": "Each smoke and screenshot script calls browser.close().",
+      "evidence": "Playwright smoke and screenshot commands completed successfully."
+    }
+  ],
+  "verification": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "Playwright static-export smoke with canvas pixel check and screenshots"
+  ]
+}

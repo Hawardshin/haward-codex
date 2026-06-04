@@ -309,6 +309,7 @@
     "primary_navigation_sections": [
       "overview",
       "agents",
+      "tools",
       "desktop",
       "source",
       "intent"
@@ -320,7 +321,7 @@
       "documents",
       "requirements"
     ],
-    "home_copy_rule": "The first screen shall emphasize Agent Core, CLI orchestration continuity, shared root tools, and at-a-glance work visibility before workbench, learning, or observability details.",
+    "home_copy_rule": "The first screen shall emphasize Agent Core, CLI orchestration continuity, Tool Studio for shared root tools, and at-a-glance work visibility before workbench, learning, or observability details.",
     "configuration_rule": "Core setup for provider accounts, CLI adapters, root tools, workspace access, and question deferral shall be visible from Home and collected in the execution settings surface."
   },
   "feature_layers": [
@@ -583,9 +584,12 @@
       "status": "implemented_slice",
       "purpose": "Keep shared provider accounts, CLI adapters, workspace files, source tools, and decision-routing defaults outside individual tasks so every custom agent and guest CLI lane can reuse the same root tool base.",
       "user_outcome": "The user configures root tools once, then task-specific agents, subagents, and CLI lanes can share them without duplicated setup.",
-      "primary_section": "source",
+      "primary_section": "tools",
       "primary_surfaces": [
+        "Tool Studio",
         "Root Tools",
+        "Python Tool Runtime",
+        "Tool Deploy",
         "Provider Accounts",
         "CLI Adapter Settings",
         "Workspace Explorer",
@@ -725,7 +729,7 @@
   },
   "quality_signals": [
     "The first screen names Agent Core and CLI orchestration before root tools, workbench, learning, or observability.",
-    "Root tools are visually separate from task-specific agent creation and CLI orchestration surfaces.",
+    "Tool Studio gives root tools, Python runtime setup, and deployment their own work-first surface separate from task-specific agent creation and CLI orchestration surfaces.",
     "Current work volume, deferred decisions, task-run records, and agent count are visible at a glance.",
     "Snapshot data includes product feature architecture for developer and customer builds.",
     "Customer snapshot preserves sellable feature structure but removes internal source paths and validation internals.",

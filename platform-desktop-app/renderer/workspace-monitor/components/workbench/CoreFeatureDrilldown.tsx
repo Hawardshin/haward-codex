@@ -3,7 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-export type CoreFeatureDrilldownId = "files" | "agents" | "run" | "learn";
+export type CoreFeatureDrilldownId = "files" | "agents" | "tools" | "run" | "learn";
 
 export type CoreFeatureDrilldownItem = {
   id: CoreFeatureDrilldownId;

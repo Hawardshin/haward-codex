@@ -10,6 +10,7 @@ type ProductSectionId =
   | "structure"
   | "documents"
   | "source"
+  | "tools"
   | "requirements"
   | "agents";
 

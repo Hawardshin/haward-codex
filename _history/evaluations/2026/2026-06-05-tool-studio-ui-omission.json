@@ -1,0 +1,51 @@
+{
+  "schema_version": "2026-06-02",
+  "id": "2026-06-05-tool-studio-ui-omission",
+  "work_id": "2026-06-05-tool-studio-ui",
+  "status": "passed",
+  "checked_at": "2026-06-05",
+  "coverage": [
+    {
+      "item": "speed_improvement",
+      "status": "covered",
+      "evidence": "Tool Studio panel code is statically imported so section switching does not wait for the component chunk; Three.js remains lazy and loads only after the Tools click."
+    },
+    {
+      "item": "single_feature_screen",
+      "status": "covered",
+      "evidence": "New `tools` section has focused Build, Python Env, Deploy, and Registry modes instead of mixing tool creation into Source or Agents."
+    },
+    {
+      "item": "button_dropdown_context_shortcut",
+      "status": "covered",
+      "evidence": "Radix Dropdown Menu, Radix Context Menu, stable button sizes, right-click menu, and keyboard shortcut tests were added."
+    },
+    {
+      "item": "python_runtime_and_venv_surface",
+      "status": "covered",
+      "evidence": "Tool Studio environment panel exposes venv, source, dependency, and run command rows."
+    },
+    {
+      "item": "3d_agent_collaboration_ui",
+      "status": "covered",
+      "evidence": "Three.js scene renders four simple agent characters, lazy-loads, disposes resources, and has browser pixel/screenshot validation."
+    },
+    {
+      "item": "responsive_non_fullscreen_layout",
+      "status": "covered",
+      "evidence": "Playwright static-export smoke passed at 1280x820 and 390x820 with horizontal overflow 0."
+    },
+    {
+      "item": "installation_audit",
+      "status": "covered",
+      "evidence": "_history/installations/2026/2026-06-05-workspace-monitor-tool-studio-ui-libs.ko.md and _ops/installations/registry.json were updated."
+    },
+    {
+      "item": "remaining_full_app_redesign",
+      "status": "deferred",
+      "evidence": "This slice adds a Tool Studio workbench and speed fix. Broader all-screen redesign remains outside this commit and should be handled in follow-up slices."
+    }
+  ],
+  "missing_items": [],
+  "resume_action": "Continue broader UI/UX overhaul in bounded slices after this Tool Studio slice is committed."
+}

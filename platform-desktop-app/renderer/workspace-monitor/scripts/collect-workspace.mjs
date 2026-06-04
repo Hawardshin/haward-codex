@@ -300,7 +300,7 @@ export function buildCustomerSnapshot(snapshot) {
           id: "user",
           label: "User View",
           intent: "Installed customer workbench for running, editing, creating, and improving agents.",
-          allowedSections: ["overview", "agents", "desktop", "source", "intent"],
+          allowedSections: ["overview", "agents", "tools", "desktop", "source", "intent"],
           visibilityRules: {},
           securityNotes: ["Platform source tree is excluded from the customer bundle snapshot."]
         }

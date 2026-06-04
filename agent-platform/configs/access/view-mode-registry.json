@@ -167,6 +167,7 @@
       "visibility_rules": {
         "foreground": [
           "agent core",
+          "tool studio",
           "CLI orchestration continuity",
           "root tool setup",
           "work visibility",
@@ -198,6 +199,7 @@
       "allowed_sections": [
         "overview",
         "agents",
+        "tools",
         "desktop",
         "source",
         "intent"
@@ -229,6 +231,7 @@
           "specs",
           "intent feature map",
           "agent inventory",
+          "tool studio",
           "source code",
           "tests and validation",
           "workspace monitor data"
@@ -250,6 +253,7 @@
       },
       "allowed_sections": [
         "overview",
+        "tools",
         "desktop",
         "projects",
         "history",
@@ -287,6 +291,7 @@
           "requirements and specs",
           "intent feature map",
           "agent inventory and runtime status",
+          "tool studio and Python tool environment",
           "source code",
           "governance docs",
           "source configs",
@@ -310,6 +315,7 @@
       },
       "allowed_sections": [
         "overview",
+        "tools",
         "desktop",
         "projects",
         "history",

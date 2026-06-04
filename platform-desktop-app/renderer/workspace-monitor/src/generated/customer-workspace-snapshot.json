@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-04T09:42:14.509Z",
+  "generatedAt": "2026-06-04T22:06:18.436Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -71,6 +71,7 @@
         "allowedSections": [
           "overview",
           "agents",
+          "tools",
           "desktop",
           "source",
           "intent"
@@ -154,7 +155,7 @@
       "supportingSurfaces": [
         "observability_monitoring"
       ],
-      "homeCopyRule": "The first screen shall emphasize Agent Core, CLI orchestration continuity, shared root tools, and at-a-glance work visibility before workbench, learning, or observability details.",
+      "homeCopyRule": "The first screen shall emphasize Agent Core, CLI orchestration continuity, Tool Studio for shared root tools, and at-a-glance work visibility before workbench, learning, or observability details.",
       "configurationRule": "Core setup for provider accounts, CLI adapters, root tools, workspace access, and question deferral shall be visible from Home and collected in the execution settings surface."
     },
     "summary": {
@@ -365,9 +366,12 @@
         "status": "implemented_slice",
         "purpose": "Keep shared provider accounts, CLI adapters, workspace files, source tools, and decision-routing defaults outside individual tasks so every custom agent and guest CLI lane can reuse the same root tool base.",
         "userOutcome": "The user configures root tools once, then task-specific agents, subagents, and CLI lanes can share them without duplicated setup.",
-        "primarySection": "source",
+        "primarySection": "tools",
         "primarySurfaces": [
+          "Tool Studio",
           "Root Tools",
+          "Python Tool Runtime",
+          "Tool Deploy",
           "Provider Accounts",
           "CLI Adapter Settings",
           "Workspace Explorer",
@@ -477,7 +481,7 @@
     },
     "qualitySignals": [
       "The first screen names Agent Core and CLI orchestration before root tools, workbench, learning, or observability.",
-      "Root tools are visually separate from task-specific agent creation and CLI orchestration surfaces.",
+      "Tool Studio gives root tools, Python runtime setup, and deployment their own work-first surface separate from task-specific agent creation and CLI orchestration surfaces.",
       "Current work volume, deferred decisions, task-run records, and agent count are visible at a glance.",
       "Snapshot data includes product feature architecture for developer and customer builds.",
       "Customer snapshot preserves sellable feature structure but removes internal source paths and validation internals.",
@@ -599,7 +603,7 @@
         "implementationTargets": [
           "remove duplicated navigation feel",
           "keep CLI drawer as bottom/full overlay",
-          "use compact tabbed subpanels instead of long scroll"
+          "use drill-down child views instead of combining multiple functions in one tab"
         ],
         "riskControls": [
           "responsive grid tests",

@@ -1,0 +1,31 @@
+# Tool Studio UI 요청-결과 추적
+
+- 날짜: 2026-06-05
+- 요청 요약: 속도, 직관성, 단일 기능 중심 화면, Tool Studio, Python 실행환경/venv, 툴 제작/배포/관리, Radix식 dropdown/context menu, 단축키, 3D 에이전트 협업 UI, 탭/버튼 지연 개선.
+- 소유 프로젝트: `platform-desktop-app/renderer/workspace-monitor`
+- 결과:
+  - `tools` 섹션을 Workspace Monitor의 사용자/개발자/superadmin 뷰와 고객 스냅샷에 추가했다.
+  - Tool Studio를 Build, Python Env, Deploy, Registry 모드로 분리했다.
+  - Radix Dropdown Menu와 Context Menu를 설치해 primary action dropdown과 tool card right-click menu를 구현했다.
+  - Three.js 기반 3D 에이전트 협업 캐릭터 맵을 추가하고, 렌더 완료 신호, pixel validation, resource cleanup을 구현했다.
+  - Tool Studio 패널 코드는 정적 import로 바꿔 섹션 전환이 패널 chunk 로딩을 기다리지 않게 했고, Three.js만 Tools 진입 후 lazy import한다.
+  - 기존 사용자/고객 스냅샷의 `tools` 누락을 보정했다.
+- 주요 산출물:
+  - `platform-desktop-app/renderer/workspace-monitor/components/workbench/ToolStudioPanel.tsx`
+  - `platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs`
+  - `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-tool-studio-desktop.png`
+  - `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-tool-studio-mobile.png`
+  - `_history/installations/2026/2026-06-05-workspace-monitor-tool-studio-ui-libs.ko.md`
+- 검증:
+  - `corepack pnpm --filter workspace-monitor test`
+  - `corepack pnpm --filter workspace-monitor run check`
+  - `corepack pnpm --filter workspace-monitor run build:customer`
+  - `corepack pnpm --filter workspace-monitor run perf:budget`
+  - `corepack pnpm --filter platform-desktop-app run customer-bundle:audit`
+  - `corepack pnpm --filter platform-desktop-app run check`
+  - `corepack pnpm audit --prod=false`
+  - config contract checks
+  - Playwright static-export smoke and screenshots
+  - `git diff --check`
+- 남은 범위:
+  - 실제 Python subprocess 실행, package upload/deployment, end-to-end tool registry persistence는 후속 slice에서 다룬다.

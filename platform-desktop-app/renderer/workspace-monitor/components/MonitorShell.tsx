@@ -35,6 +35,7 @@ import {
   ShieldCheck,
   SquareTerminal,
   Trash2,
+  Wrench,
   X
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -57,6 +58,7 @@ import {
 } from "@/components/workbench/NativeGitWorkbench";
 import { PathDisclosure } from "@/components/workbench/PathDisclosure";
 import { RuntimeTerminalDrawer } from "@/components/workbench/RuntimeTerminalDrawer";
+import { ToolStudioPanel } from "@/components/workbench/ToolStudioPanel";
 import { WorkspaceExplorerPane } from "@/components/workbench/WorkspaceExplorerPane";
 import { writeClipboardText } from "@/lib/clipboard.mjs";
 import { categoryLabel, formatDate, formatDay, type WorkspaceSnapshot, type WorkspaceSourceFile } from "@/lib/snapshot";
@@ -70,6 +72,7 @@ type SectionId =
   | "structure"
   | "documents"
   | "source"
+  | "tools"
   | "requirements"
   | "agents";
 
@@ -538,7 +541,8 @@ function appendSourceTemplate(content: string, templateBody: string) {
 }
 
 const DESKTOP_PREFERENCES_SCHEMA_VERSION = "desktop-preferences.v1";
-const defaultPinnedSections: SectionId[] = ["overview", "agents", "desktop", "source", "intent"];
+const legacyDefaultPinnedSections: SectionId[] = ["overview", "agents", "desktop", "source", "intent"];
+const defaultPinnedSections: SectionId[] = ["overview", "agents", "tools", "desktop", "source", "intent"];
 const operatorSectionIds = new Set<SectionId>(["projects", "history", "structure", "documents", "requirements"]);
 
 const featureGroups: Array<{
@@ -611,6 +615,17 @@ const sections: Section[] = [
     group: "core",
     purpose: "Claude Code 같은 guest CLI lane, 결정 보류, 연속 실행을 조율합니다.",
     purposeEn: "Coordinate guest CLI lanes, deferred decisions, and continuous runs."
+  },
+  {
+    id: "tools",
+    label: "툴 스튜디오",
+    labelEn: "Tool Studio",
+    shortLabel: "툴스",
+    shortLabelEn: "Studio",
+    icon: Wrench,
+    group: "core",
+    purpose: "툴 제작, 배포, Python 실행환경, venv, 툴 전용 관리를 한 화면 흐름으로 다룹니다.",
+    purposeEn: "Build, deploy, and manage tools, Python runtime, venv, and registry in one focused work surface."
   },
   {
     id: "source",
@@ -731,7 +746,7 @@ const fallbackViewModes: MonitorViewMode[] = [
     id: "user",
     label: "User View",
     intent: "Work-first desktop view for running, editing, creating, and improving agents.",
-    allowedSections: ["overview", "agents", "desktop", "source", "intent"],
+    allowedSections: ["overview", "agents", "tools", "desktop", "source", "intent"],
     visibilityRules: {},
     securityNotes: []
   },
@@ -741,6 +756,7 @@ const fallbackViewModes: MonitorViewMode[] = [
     intent: "Implementation, requirements, specs, agents, and verification surfaces.",
     allowedSections: [
       "overview",
+      "tools",
       "desktop",
       "projects",
       "history",
@@ -760,6 +776,7 @@ const fallbackViewModes: MonitorViewMode[] = [
     intent: "Full owner/operator view for building the platform itself.",
     allowedSections: [
       "overview",
+      "tools",
       "desktop",
       "projects",
       "history",
@@ -2062,15 +2079,26 @@ function desktopPreferencesFromState(input: {
     sidebarMode: input.sidebarMode,
     terminalDrawerOpen: input.terminalDrawerOpen,
     runtimeInitDefaults: input.runtimeInitDefaults,
-    pinnedSections: input.pinnedSections.filter((item) => sectionIds.has(item)).slice(0, 6)
+    pinnedSections: normalizePinnedSections(input.pinnedSections)
   };
+}
+
+function normalizePinnedSections(sectionsToNormalize: unknown): SectionId[] {
+  const next = Array.isArray(sectionsToNormalize)
+    ? sectionsToNormalize.filter((item): item is SectionId => sectionIds.has(item as SectionId))
+    : [];
+  const hasLegacyDefault =
+    next.length > 0 && legacyDefaultPinnedSections.every((sectionId) => next.includes(sectionId));
+  if (hasLegacyDefault && !next.includes("tools")) {
+    const insertAt = Math.max(next.indexOf("agents") + 1, 1);
+    next.splice(insertAt, 0, "tools");
+  }
+  return next.slice(0, 6);
 }
 
 function normalizeDesktopPreferences(preferences: Partial<DesktopPreferences> | null | undefined): DesktopPreferences {
   const runtimeInit = preferences?.runtimeInitDefaults || defaultRuntimeInitDefaults;
-  const pinned = Array.isArray(preferences?.pinnedSections)
-    ? preferences.pinnedSections.filter((item): item is SectionId => sectionIds.has(item as SectionId)).slice(0, 6)
-    : defaultPinnedSections;
+  const pinned = normalizePinnedSections(preferences?.pinnedSections);
   return {
     schemaVersion: DESKTOP_PREFERENCES_SCHEMA_VERSION,
     uiLanguage: preferences?.uiLanguage === "en" ? "en" : "ko",
@@ -2751,6 +2779,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     () => ({
       overview: attentionState.label,
       desktop: "Runtime",
+      tools: "Studio",
       projects: snapshot.stats.projects.toLocaleString("ko-KR"),
       history: visibleHistoryDays.length.toLocaleString("ko-KR"),
       intent: intentFeatureMap.summary.totalThemes.toLocaleString("ko-KR"),
@@ -2788,7 +2817,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     return new Map(localizedSections.map((item) => [item.id, item]));
   }, [localizedSections]);
   const coreFunctionSections = useMemo(() => {
-    return (["overview", "agents", "desktop", "source", "intent"] as SectionId[])
+    return (["overview", "agents", "tools", "desktop", "source", "intent"] as SectionId[])
       .map((id) => sectionById.get(id))
       .filter((item): item is Section => {
         return item ? currentViewMode.allowedSections.includes(item.id) : false;
@@ -2834,7 +2863,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const currentSection = sectionById.get(section);
   const currentFeatureGroup =
     localizedFeatureGroups.find((group) => group.id === currentSection?.group) || localizedFeatureGroups[0];
-  const isPrimaryWorkSurface = section === "agents";
+  const isPrimaryWorkSurface = section === "agents" || section === "tools";
   const currentThemeLabel =
     themeMode === "system"
       ? uiLanguage === "ko" ? "시스템" : "System"
@@ -3676,9 +3705,27 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             : ["Choose goal and role", "Attach root tools and validation", "Send to proposal or run lane"]
       },
       {
+        id: "tools",
+        label: uiLanguage === "ko" ? "툴 스튜디오" : "Tool Studio",
+        kicker: uiLanguage === "ko" ? "핵심 2" : "Core 2",
+        title: uiLanguage === "ko" ? "툴 제작, 배포, Python 환경을 분리해서 다룹니다" : "Build, deploy, and isolate Python tools",
+        detail:
+          uiLanguage === "ko"
+            ? "툴 만들기, 가상 환경, 배포 점검, registry 관리를 한 흐름에 두되 현재 단계만 크게 보여줍니다."
+            : "Keep build, virtual env, deploy preflight, and registry in one flow while showing only the current step prominently.",
+        icon: Wrench,
+        metric: `${rootToolItems.length.toLocaleString("ko-KR")} tool lanes`,
+        cta: uiLanguage === "ko" ? "툴 스튜디오 열기" : "Open Tool Studio",
+        run: () => openSection("tools"),
+        steps:
+          uiLanguage === "ko"
+            ? ["Python 소스와 입력 스키마 선택", "venv와 검증 명령 연결", "배포 전 점검과 rollback 기록"]
+            : ["Choose Python source and input schema", "Attach venv and validation command", "Record preflight and rollback"]
+      },
+      {
         id: "run",
         label: uiLanguage === "ko" ? "CLI 오케스트레이션" : "CLI Orchestration",
-        kicker: uiLanguage === "ko" ? "핵심 2" : "Core 2",
+        kicker: uiLanguage === "ko" ? "핵심 3" : "Core 3",
         title: uiLanguage === "ko" ? "CLI 작업을 끊기지 않게 이어갑니다" : "Keep CLI work continuous",
         detail:
           uiLanguage === "ko"
@@ -3736,6 +3783,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       coreReadinessCount,
       coreSetupSteps.length,
       openSection,
+      rootToolItems.length,
       runtimeInitDefaults.adapterId,
       uiLanguage
     ]
@@ -5187,6 +5235,22 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           onOpenSettings={(subsectionId = "quick") => openSettingsTab("execution", subsectionId)}
           terminalDrawerOpen={terminalDrawerOpen}
           setTerminalDrawerOpen={setTerminalDrawerOpen}
+        />
+      )}
+
+      {section === "tools" && (
+        <ToolStudioPanel
+          language={uiLanguage}
+          agentCount={agentCatalog.length}
+          activeTaskCount={collaborationBoard.summary.activeTasks}
+          blockedTaskCount={collaborationBoard.summary.blockedTasks}
+          sourceFileCount={visibleSourceFiles.length}
+          runtimeAdapterId={runtimeInitDefaults.adapterId}
+          providerConfiguredCount={providerCredentials.configuredCount}
+          onOpenAgents={() => openSection("agents")}
+          onOpenSource={() => openSection("source")}
+          onOpenTerminal={openTerminalDrawer}
+          onOpenProviderSettings={() => openSettingsTab("execution", "providers")}
         />
       )}
 

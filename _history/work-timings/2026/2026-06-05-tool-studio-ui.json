@@ -1,0 +1,34 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-tool-studio-ui",
+  "date": "2026-06-05",
+  "timings": [
+    {
+      "phase": "web_first_intake_and_planning",
+      "elapsed_minutes": 8,
+      "notes": "Checked Radix Dropdown Menu, Three.js cleanup, and IntelliJ shortcut/tool-window references; recorded large-scope plan."
+    },
+    {
+      "phase": "dependency_install_and_audit_setup",
+      "elapsed_minutes": 7,
+      "notes": "Installed Radix Dropdown Menu, Radix Context Menu, Three.js, and @types/three in workspace-monitor."
+    },
+    {
+      "phase": "implementation",
+      "elapsed_minutes": 52,
+      "notes": "Added Tool Studio section, component, CSS, view/product registries, customer snapshot fallback, static panel import, and Three.js cleanup."
+    },
+    {
+      "phase": "validation_and_rework",
+      "elapsed_minutes": 43,
+      "notes": "Fixed readiness contract, customer snapshot omission, canvas sizing/framing/pixel readiness, and static import speed path based on checks."
+    },
+    {
+      "phase": "records_and_closeout",
+      "elapsed_minutes": 18,
+      "notes": "Updated specs, installation audit, request trace, evaluations, screenshots, and summaries."
+    }
+  ],
+  "bottleneck": "Browser smoke rework for customer snapshot and Three.js canvas framing.",
+  "automation_candidate": "Promote static-export Tool Studio smoke into a reusable workspace-monitor Playwright script when similar UI slices repeat."
+}

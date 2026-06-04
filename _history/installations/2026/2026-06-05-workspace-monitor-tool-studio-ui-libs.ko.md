@@ -1,0 +1,34 @@
+# workspace-monitor Tool Studio UI 라이브러리 설치 감사 기록
+
+- 날짜: 2026-06-05
+- 상태: installed
+- 소유 프로젝트: `platform-desktop-app/renderer/workspace-monitor`
+- 설치 범위: 프로젝트 로컬 의존성
+- 설치 명령:
+  - `corepack pnpm --filter workspace-monitor add -E three@0.184.0 @radix-ui/react-dropdown-menu@2.1.16 @radix-ui/react-context-menu@2.2.16`
+  - `corepack pnpm --filter workspace-monitor add -D -E @types/three@0.184.1`
+- 의존성 기록 대상:
+  - `platform-desktop-app/renderer/workspace-monitor/package.json`
+  - `pnpm-lock.yaml`
+- 설치 목적:
+  - Radix Dropdown Menu로 keyboard/typeahead/focus managed 드롭다운을 제공한다.
+  - Radix Context Menu로 IntelliJ식 우클릭 작업 메뉴를 제공한다.
+  - Three.js로 에이전트 협업 상태를 가벼운 3D character scene으로 시각화한다.
+- 보안 검토: 프로젝트 로컬 프론트엔드 패키지이며 global install, native executable, Tauri permission, network client를 추가하지 않았다. `corepack pnpm audit --prod=false` 결과 알려진 취약점 없음.
+- 라이선스 검토: npm metadata 기준 `three`, `@types/three`, `@radix-ui/react-dropdown-menu`, `@radix-ui/react-context-menu` 모두 MIT 라이선스다.
+- 검증 결과:
+  - `corepack pnpm audit --prod=false`: no known vulnerabilities.
+  - `corepack pnpm --filter workspace-monitor test`: pass, 31 tests.
+  - `corepack pnpm --filter workspace-monitor run check`: pass.
+  - `corepack pnpm --filter workspace-monitor run build:customer`: pass.
+  - `corepack pnpm --filter workspace-monitor run perf:budget`: pass, largest lazy chunk 723490 bytes, chunkCount 11.
+  - `corepack pnpm --filter platform-desktop-app run customer-bundle:audit`: pass.
+  - `corepack pnpm --filter platform-desktop-app run check`: pass.
+  - Tool Studio browser smoke: user nav includes `tools`, Radix dropdown/context menu works, shortcut changes mode, Three.js canvas pixelSum 1875, desktop/mobile overflow 0, heavy lazy chunk not loaded before Tools click.
+  - `git diff --check`: pass.
+- 롤백 계획: `corepack pnpm --filter workspace-monitor remove three @types/three @radix-ui/react-dropdown-menu @radix-ui/react-context-menu`를 실행하고 Tool Studio 컴포넌트/import/test를 제거한 뒤 동일 검증 명령을 재실행한다.
+- 외부 확인:
+  - Radix Dropdown Menu: `https://www.radix-ui.com/primitives/docs/components/dropdown-menu`
+  - Three.js cleanup: `https://threejs.org/manual/en/cleanup.html`
+  - IntelliJ keyboard shortcuts: `https://www.jetbrains.com/help/idea/mastering-keyboard-shortcuts.html`
+  - IntelliJ Project tool window/context menu: `https://www.jetbrains.com/help/idea/project-tool-window.html`

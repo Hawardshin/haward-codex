@@ -522,6 +522,38 @@
       "rollback_path": "corepack pnpm --filter workspace-monitor remove pretendard; remove Pretendard import and font loading test; rerun workspace-monitor checks.",
       "installation_record_path": "_history/installations/2026/2026-06-05-workspace-monitor-pretendard-font.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-05-workspace-monitor-tool-studio-ui-libs",
+      "date": "2026-06-05",
+      "status": "installed",
+      "name": "workspace-monitor Tool Studio Radix and Three.js UI libraries",
+      "scope": "project",
+      "owning_project": "platform-desktop-app/renderer/workspace-monitor",
+      "package_manager": "pnpm",
+      "install_command": "corepack pnpm --filter workspace-monitor add -E three@0.184.0 @radix-ui/react-dropdown-menu@2.1.16 @radix-ui/react-context-menu@2.2.16; corepack pnpm --filter workspace-monitor add -D -E @types/three@0.184.1",
+      "environment_path": "platform-desktop-app/renderer/workspace-monitor/node_modules",
+      "dependency_record_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "version_or_lock_status": "Exact dependencies three@0.184.0, @radix-ui/react-dropdown-menu@2.1.16, @radix-ui/react-context-menu@2.2.16, and devDependency @types/three@0.184.1 recorded in workspace-monitor package.json and pnpm-lock.yaml.",
+      "security_review": "Project-local frontend packages only; no global install, native executable, Tauri permission, or network client was added. Final pnpm audit reported no known vulnerabilities.",
+      "license_review": "npm metadata reports MIT for three, @types/three, @radix-ui/react-dropdown-menu, and @radix-ui/react-context-menu.",
+      "verification": [
+        "corepack pnpm audit --prod=false: no known vulnerabilities",
+        "corepack pnpm --filter workspace-monitor test: passed, 31 tests",
+        "corepack pnpm --filter workspace-monitor run check: passed",
+        "corepack pnpm --filter workspace-monitor run build:customer: passed",
+        "corepack pnpm --filter workspace-monitor run perf:budget: within_budget, largest lazy chunk 723490 bytes, chunkCount 11",
+        "corepack pnpm --filter platform-desktop-app run customer-bundle:audit: passed",
+        "corepack pnpm --filter platform-desktop-app run check: passed",
+        "Tool Studio browser smoke: tools nav, dropdown, context menu, shortcut, 3D canvas pixel, desktop/mobile overflow, and lazy chunk checks passed",
+        "git diff --check: passed"
+      ],
+      "rollback_path": "corepack pnpm --filter workspace-monitor remove three @types/three @radix-ui/react-dropdown-menu @radix-ui/react-context-menu; remove Tool Studio component/import/test; rerun workspace-monitor checks.",
+      "installation_record_path": "_history/installations/2026/2026-06-05-workspace-monitor-tool-studio-ui-libs.ko.md",
+      "commit": "pending"
     }
   ]
 }

@@ -52,6 +52,7 @@
 | REQ-WM-039 | 주요 탭 간 이동은 닫힌 보조 기능군까지 마운트하느라 느려지면 안 되며, Agents/Desktop Runtime의 section-level disclosure 내부 무거운 패널은 사용자가 열 때까지 React 트리에 붙지 않아야 한다. | must | CPU throttle 6 정적 export tab switch audit, 닫힌 disclosure DOM mount audit, disclosure open interaction, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget`, `platform-desktop-app check` 확인 |
 | REQ-WM-040 | 터미널/CLI 실행 UI는 일반 카드형 패널이 아니라 오픈소스 개발 도구에 익숙한 terminal chrome, tab strip, dark emulator surface, monospace output, prompt input, status/cwd bar를 기본 구조로 사용해야 하며, 전역 터미널 버튼은 어느 화면에서 눌러도 실제 터미널이 마운트된 화면으로 이동해 열려야 한다. | must | xterm.js/VS Code/GNOME Terminal reference 기록, in-app Browser 터미널 버튼 smoke, 1280/900/390px 정적 export terminal overflow audit, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget`, `platform-desktop-app check` 확인 |
 | REQ-WM-041 | 버튼 클릭은 heavy workbench mount, native refresh, source filtering, evidence assembly 같은 보조 작업 때문에 첫 응답 paint를 막으면 안 되며, 주요 섹션의 대표 버튼 표본은 CPU throttle 6 정적 export audit에서 long task 없이 p95 60ms 이하를 유지해야 한다. | must | 67개 버튼 표본 click-to-paint audit, staged Desktop/Source shell settled smoke, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget`, `platform-desktop-app check` 확인 |
+| REQ-WM-042 | Tool Studio는 툴 제작, 툴 배포, Python 실행환경, 가상 환경, 툴 전용 registry를 Source/Agents와 분리된 독립 작업면으로 제공해야 하며, 드롭다운/우클릭/단축키는 접근성 있는 오픈소스 UI primitive를 사용하고 3D 에이전트 협업 장면은 해당 화면에서만 lazy mount되어야 한다. | must | Tool Studio section smoke, Radix dropdown/context menu interaction, keyboard shortcut audit, Three.js lazy import/cleanup test, canvas nonblank pixel smoke, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget`, `platform-desktop-app check` 확인 |
 
 ## 범위
 
@@ -89,6 +90,7 @@
 - 탭 이동 시 닫힌 보조 패널 lazy mount와 전환 지연 audit
 - 오픈소스 개발 도구형 터미널 chrome, 탭 strip, emulator output, prompt input, 전역 터미널 버튼 라우팅
 - 버튼 클릭 첫 paint와 heavy workbench/native refresh/evidence 계산 분리
+- Tool Studio의 툴 제작/배포/Python venv/registry 전용 작업면, Radix 메뉴, Three.js lazy 3D 협업 장면
 - Vercel 배포 문서
 
 ## 제외 범위

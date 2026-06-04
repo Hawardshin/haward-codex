@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "tool-studio-ui",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selection_reason": "The user requested broad Workspace Monitor UI/UX/performance changes plus project-local open-source UI and 3D libraries. This is meaningful frontend implementation with dependency installation, but the current slice is scoped to a reversible Tool Studio surface.",
+  "mode_policy_notes": [
+    "Web-first intake was performed before local planning and edits.",
+    "Large-scope decomposition was simulated and recorded before implementation.",
+    "Project-local dependency installation is recorded in the installation registry.",
+    "Generated snapshot outputs may be updated during validation and must remain unstaged."
+  ]
+}
