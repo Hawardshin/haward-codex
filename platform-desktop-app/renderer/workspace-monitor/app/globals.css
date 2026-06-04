@@ -902,6 +902,72 @@ main {
   flex: 0 0 auto;
 }
 
+.task-handoff-strip {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  gap: 10px;
+  align-items: center;
+  min-height: 58px;
+  margin: 10px 0 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--accent-primary-border);
+  border-radius: 8px;
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent-primary-soft) 72%, var(--surface) 28%);
+}
+
+.task-handoff-strip > svg {
+  color: var(--accent-primary);
+}
+
+.task-handoff-strip > span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.task-handoff-strip small,
+.task-handoff-strip strong,
+.task-handoff-strip em {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-handoff-strip small {
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.task-handoff-strip strong {
+  color: var(--text);
+  font-size: var(--font-size-body);
+}
+
+.task-handoff-strip em {
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  font-style: normal;
+  line-height: 1.35;
+}
+
+.task-handoff-strip button {
+  display: inline-flex;
+  min-height: var(--control-target-size);
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  color: var(--text);
+  background: var(--surface);
+  padding: 8px var(--control-padding-x);
+  white-space: nowrap;
+}
+
 .titlebar-search {
   display: grid;
   flex: 1 1 260px;
@@ -12160,6 +12226,22 @@ h3 {
 
   .desktop-viewport[data-active-section="overview"] .core-home-status-row small {
     display: none;
+  }
+
+  .task-handoff-strip {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .task-handoff-strip button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .task-handoff-strip em {
+    display: -webkit-box;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   .titlebar-actions {

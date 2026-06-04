@@ -1,0 +1,16 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-task-handoff-ux",
+  "outcome": "pass",
+  "summary": "Overview 목표 카드 선택 후 대상 화면에 선택한 목표, 다음 행동, 목표 변경/숨기기 제어를 제공하는 handoff strip을 추가했다.",
+  "requirements": ["REQ-WM-045"],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "Playwright click-through smoke: build-tool -> tools handoff -> goal change back to overview"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_notes": "로컬 정적 HTTP 서버를 검증 중 실행했고 검증 후 종료했다."
+}

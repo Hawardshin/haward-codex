@@ -129,6 +129,8 @@ type TaskIntentItem = {
   detail: string;
   actionLabel: string;
   badge: string;
+  targetSection: SectionId;
+  nextStep: string;
   icon: LucideIcon;
   keywords: string[];
   run: () => void;
@@ -2220,6 +2222,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [learningDecisionNotice, setLearningDecisionNotice] = useState("");
   const [pinnedSections, setPinnedSections] = useState<SectionId[]>(defaultPinnedSections);
   const [recentSections, setRecentSections] = useState<SectionId[]>(["overview"]);
+  const [activeTaskIntentId, setActiveTaskIntentId] = useState("");
   const [desktopPreferencesLoaded, setDesktopPreferencesLoaded] = useState(false);
   const [desktopPreferencesPath, setDesktopPreferencesPath] = useState("");
   const [desktopPreferencesSource, setDesktopPreferencesSource] = useState("browser-defaults");
@@ -2834,7 +2837,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         return item ? currentViewMode.allowedSections.includes(item.id) : false;
       });
   }, [currentViewMode.allowedSections, sectionById]);
-  const openSection = useCallback((targetSection: SectionId) => {
+  const openSection = useCallback((targetSection: SectionId, options?: { intentId?: string }) => {
+    setActiveTaskIntentId(options?.intentId || "");
     if (!currentViewMode.allowedSections.includes(targetSection)) {
       const modeWithSection =
         viewModes.find((mode) => mode.id === "superadmin_developer" && mode.allowedSections.includes(targetSection)) ||
@@ -3666,9 +3670,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             : "Bundle role, tools, and validation into a runnable work agent.",
         actionLabel: uiLanguage === "ko" ? "에이전트 코어" : "Agent Core",
         badge: agentCatalog.length.toLocaleString("ko-KR"),
+        targetSection: "agents",
+        nextStep: uiLanguage === "ko" ? "역할과 검증 기준을 확인하고 새 에이전트 초안을 만듭니다." : "Review role and validation, then draft the agent.",
         icon: Bot,
         keywords: ["agent", "create", "builder", "subagent", "persona", "에이전트", "만들기", "작업자"],
-        run: () => openSection("agents")
+        run: () => openSection("agents", { intentId: "create-agent" })
       },
       {
         id: "build-tool",
@@ -3679,9 +3685,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             : "Move through Python source, input schema, venv, and deploy preflight.",
         actionLabel: uiLanguage === "ko" ? "툴 스튜디오" : "Tool Studio",
         badge: rootToolItems.length.toLocaleString("ko-KR"),
+        targetSection: "tools",
+        nextStep: uiLanguage === "ko" ? "빌드 모드에서 Python 소스와 입력 스키마부터 선택합니다." : "Start in build mode by choosing Python source and input schema.",
         icon: Wrench,
         keywords: ["tool", "python", "venv", "deploy", "registry", "툴", "파이썬", "가상환경", "배포"],
-        run: () => openSection("tools")
+        run: () => openSection("tools", { intentId: "build-tool" })
       },
       {
         id: "run-work",
@@ -3692,9 +3700,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             : "Start the selected CLI lane or agent run in the runtime workbench.",
         actionLabel: "Runtime",
         badge: runtimeInitDefaults.adapterId,
+        targetSection: "desktop",
+        nextStep: uiLanguage === "ko" ? "Run Configuration에서 lane을 확인하고 실행을 시작합니다." : "Review the run configuration and start the lane.",
         icon: PlayCircle,
         keywords: ["run", "runtime", "cli", "terminal", "lane", "실행", "터미널", "작업", "런타임"],
-        run: () => openSection("desktop")
+        run: () => openSection("desktop", { intentId: "run-work" })
       },
       {
         id: "open-files",
@@ -3705,9 +3715,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             : "Open shared root files, source, and results in one work surface.",
         actionLabel: uiLanguage === "ko" ? "루트 파일" : "Root Files",
         badge: visibleSourceFiles.length.toLocaleString("ko-KR"),
+        targetSection: "source",
+        nextStep: uiLanguage === "ko" ? "파일 목록에서 작업할 소스를 선택하고 편집 컨텍스트를 엽니다." : "Choose the source file and open its editing context.",
         icon: Code2,
         keywords: ["file", "source", "code", "root", "파일", "소스", "코드", "루트"],
-        run: () => openSection("source")
+        run: () => openSection("source", { intentId: "open-files" })
       },
       {
         id: "resolve-decisions",
@@ -3718,9 +3730,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             : "Review deferred questions and blockers, then move to the next safe action.",
         actionLabel: uiLanguage === "ko" ? "결정함" : "Inbox",
         badge: (attentionItems.length + collaborationBoard.summary.blockedTasks).toLocaleString("ko-KR"),
+        targetSection: "agents",
+        nextStep: uiLanguage === "ko" ? "보류 질문을 확인하고 안전한 항목부터 답합니다." : "Review deferred questions and answer the safe items first.",
         icon: Inbox,
         keywords: ["decision", "inbox", "blocked", "question", "결정", "보류", "질문", "막힘"],
-        run: () => openSection("agents")
+        run: () => openSection("agents", { intentId: "resolve-decisions" })
       },
       {
         id: "check-setup",
@@ -3731,9 +3745,14 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             : "Check model accounts, CLI adapters, and question handling defaults.",
         actionLabel: uiLanguage === "ko" ? "핵심 설정" : "Core Setup",
         badge: `${coreReadinessCount}/${coreSetupSteps.length}`,
+        targetSection: "overview",
+        nextStep: uiLanguage === "ko" ? "빠른 설정에서 계정, CLI adapter, 질문 보류 상태를 확인합니다." : "Check accounts, CLI adapter, and question handling in quick setup.",
         icon: Settings,
         keywords: ["setup", "settings", "account", "provider", "adapter", "설정", "계정", "어댑터"],
-        run: () => openSettingsTab("execution", "quick")
+        run: () => {
+          setActiveTaskIntentId("check-setup");
+          openSettingsTab("execution", "quick");
+        }
       }
     ],
     [
@@ -3750,6 +3769,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       visibleSourceFiles.length
     ]
   );
+  const activeTaskIntent = useMemo(
+    () => taskIntentItems.find((item) => item.id === activeTaskIntentId) || null,
+    [activeTaskIntentId, taskIntentItems]
+  );
+  const ActiveTaskIntentIcon = activeTaskIntent?.icon;
   const workVisibilityItems = useMemo(
     () => [
       {
@@ -4313,6 +4337,25 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               </button>
             </div>
           </header>
+
+          {activeTaskIntent && ActiveTaskIntentIcon && section !== "overview" && activeTaskIntent.targetSection === section && (
+            <section className="task-handoff-strip" data-task-handoff={activeTaskIntent.id} aria-label={uiLanguage === "ko" ? "선택한 목표" : "Selected goal"}>
+              <ActiveTaskIntentIcon size={17} aria-hidden="true" />
+              <span>
+                <small>{uiLanguage === "ko" ? "선택한 목표" : "Selected goal"}</small>
+                <strong>{activeTaskIntent.label}</strong>
+                <em>{activeTaskIntent.nextStep}</em>
+              </span>
+              <button type="button" onClick={() => openSection("overview")}>
+                <ArrowLeft size={14} aria-hidden="true" />
+                <span>{uiLanguage === "ko" ? "목표 변경" : "Change goal"}</span>
+              </button>
+              <button type="button" onClick={() => setActiveTaskIntentId("")}>
+                <X size={14} aria-hidden="true" />
+                <span>{uiLanguage === "ko" ? "숨기기" : "Dismiss"}</span>
+              </button>
+            </section>
+          )}
 
       {commandPaletteOpen && (
         <div
