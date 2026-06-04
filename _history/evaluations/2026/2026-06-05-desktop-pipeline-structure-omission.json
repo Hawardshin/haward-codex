@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-pipeline-structure",
+  "status": "passed",
+  "checks": [
+    {
+      "item": "web_first_intake",
+      "status": "passed",
+      "evidence": "_history/web-searches/2026/2026-06-05-desktop-pipeline-structure.ko.md"
+    },
+    {
+      "item": "structure_changed",
+      "status": "passed",
+      "evidence": "desktop-pipeline.mjs split into paths, definitions, and runner modules."
+    },
+    {
+      "item": "behavior_preserved",
+      "status": "passed",
+      "evidence": "pipeline dry-run output and desktop:verify output preserved existing step behavior."
+    },
+    {
+      "item": "checks_updated",
+      "status": "passed",
+      "evidence": "check-readiness and readiness.test now require scripts/desktop-pipeline modules."
+    },
+    {
+      "item": "docs_updated",
+      "status": "passed",
+      "evidence": "README.md, README.ko.md, README.en.md describe build pipeline structure."
+    }
+  ],
+  "unresolved_items": [
+    "Renderer package and path are still named workspace-monitor; migration deferred.",
+    "Generated snapshot JSON files remain unstaged build outputs."
+  ]
+}

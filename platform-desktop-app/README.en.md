@@ -75,6 +75,13 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 
 `desktop:package:internal` runs `desktop:verify`, then Rust build, prepared-renderer Tauri build, macOS `codesign` verification, and DMG `hdiutil verify`. Direct Tauri builds (`corepack pnpm --filter platform-desktop-app run tauri:build`) still run the renderer build first, but the packaging pipeline reuses the already audited renderer output to avoid a duplicate Next.js build.
 
+## Build Pipeline Structure
+
+- `scripts/desktop-pipeline.mjs`: CLI entrypoint
+- `scripts/desktop-pipeline/paths.mjs`: repository, Tauri, artifact, and prepared build config paths
+- `scripts/desktop-pipeline/definitions.mjs`: setup, quick verify, full verify, package, and public report step definitions
+- `scripts/desktop-pipeline/runner.mjs`: dry-run handling, platform skips, subprocess execution, and failure handling
+
 Internal build artifacts are expected at:
 
 ```text

@@ -1,0 +1,44 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-pipeline-structure",
+  "result_summary": "Split desktop-pipeline.mjs into a thin entrypoint plus paths, definitions, and runner modules under scripts/desktop-pipeline. Updated readiness checks, tests, and README docs to treat the new pipeline structure as required.",
+  "changed_paths": [
+    "platform-desktop-app/scripts/desktop-pipeline.mjs",
+    "platform-desktop-app/scripts/desktop-pipeline/paths.mjs",
+    "platform-desktop-app/scripts/desktop-pipeline/definitions.mjs",
+    "platform-desktop-app/scripts/desktop-pipeline/runner.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/README.ko.md",
+    "platform-desktop-app/README.en.md"
+  ],
+  "validation": [
+    "corepack pnpm --filter platform-desktop-app run pipeline:dry-run: passed",
+    "dynamic import smoke for definitions.mjs and runner.mjs: passed",
+    "corepack pnpm run desktop:verify:quick: passed",
+    "corepack pnpm run desktop:verify: passed",
+    "corepack pnpm --filter platform-desktop-app test: passed",
+    "corepack pnpm --filter platform-desktop-app run check: passed"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-desktop-pipeline-structure.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-05-desktop-pipeline-structure.ko.md"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-05-desktop-pipeline-structure.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-05-desktop-pipeline-structure.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-desktop-pipeline-structure-omission.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-desktop-pipeline-structure-resource.json"
+  ],
+  "installation_occurred": false
+}

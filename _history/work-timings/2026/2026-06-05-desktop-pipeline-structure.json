@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-pipeline-structure",
+  "timings": [
+    {
+      "phase": "web_and_local_intake",
+      "duration": "about 3m",
+      "notes": "Checked official Tauri, pnpm, and Node docs; inspected current desktop-pipeline.mjs."
+    },
+    {
+      "phase": "implementation",
+      "duration": "about 8m",
+      "notes": "Created paths, definitions, and runner modules; reduced desktop-pipeline.mjs to an entrypoint."
+    },
+    {
+      "phase": "validation",
+      "duration": "about 4m",
+      "notes": "Ran dry-run, quick verify, full verify, desktop tests, and desktop check."
+    },
+    {
+      "phase": "history",
+      "duration": "about 4m",
+      "notes": "Recorded request, plan, trace, evaluation, omission, resource, and timing notes."
+    }
+  ],
+  "bottleneck_notes": [
+    "The old pipeline monolith mixed path constants, step definitions, runner behavior, and help text in one file.",
+    "The new structure lowers conflict risk for future install/build changes."
+  ]
+}

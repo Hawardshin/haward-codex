@@ -17,6 +17,9 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(existsSync(join(root, "docs/release-runbook.ko.md")), true);
   assert.equal(existsSync(join(root, "docs/release-runbook.en.md")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline.mjs")), true);
+  assert.equal(existsSync(join(root, "scripts/desktop-pipeline/paths.mjs")), true);
+  assert.equal(existsSync(join(root, "scripts/desktop-pipeline/definitions.mjs")), true);
+  assert.equal(existsSync(join(root, "scripts/desktop-pipeline/runner.mjs")), true);
   assert.equal(existsSync(join(root, "configs/reference-platform-advantage-registry.json")), true);
 
   const config = readJson("src-tauri/tauri.conf.json");
@@ -36,7 +39,10 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   const readmeEn = readFileSync(join(root, "README.en.md"), "utf8");
   const releaseKo = readFileSync(join(root, "docs/release-runbook.ko.md"), "utf8");
   const releaseEn = readFileSync(join(root, "docs/release-runbook.en.md"), "utf8");
-  const pipeline = readFileSync(join(root, "scripts/desktop-pipeline.mjs"), "utf8");
+  const pipelineEntrypoint = readFileSync(join(root, "scripts/desktop-pipeline.mjs"), "utf8");
+  const pipelineDefinitions = readFileSync(join(root, "scripts/desktop-pipeline/definitions.mjs"), "utf8");
+  const pipelineRunner = readFileSync(join(root, "scripts/desktop-pipeline/runner.mjs"), "utf8");
+  const pipelineStructure = `${pipelineEntrypoint}\n${pipelineDefinitions}\n${pipelineRunner}`;
   const requirementsKo = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.ko.md"), "utf8");
   const requirementsEn = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.en.md"), "utf8");
 
@@ -44,10 +50,18 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   assert.match(requirementsEn, /PDA-REQ-038/);
   assert.match(requirementsKo, /PDA-REQ-039/);
   assert.match(requirementsEn, /PDA-REQ-039/);
-  for (const scriptName of ["desktop:setup:verify", "desktop:verify", "desktop:package:internal", "desktop:release:report"]) {
+  for (const scriptName of [
+    "desktop:setup",
+    "desktop:setup:verify",
+    "desktop:verify:quick",
+    "desktop:verify",
+    "desktop:renderer:build",
+    "desktop:package:internal",
+    "desktop:release:report"
+  ]) {
     assert.ok(rootPkg.scripts[scriptName]);
   }
-  for (const scriptName of ["verify", "package:internal", "deploy:public:report", "pipeline:dry-run"]) {
+  for (const scriptName of ["setup", "verify:quick", "verify", "package:internal", "deploy:public:report", "pipeline:dry-run"]) {
     assert.ok(pkg.scripts[scriptName]);
   }
   for (const command of [
@@ -63,8 +77,9 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
     assert.match(releaseKo, pattern);
     assert.match(releaseEn, pattern);
   }
+  assert.match(pipelineEntrypoint, /desktop-pipeline\/runner\.mjs/);
   for (const token of ["package-internal", "public-report", "commonVerifySteps", "Tauri internal package build", "codesign", "hdiutil"]) {
-    assert.match(pipeline, new RegExp(token));
+    assert.match(pipelineStructure, new RegExp(token));
   }
   assert.match(releaseKo, /Developer ID/);
   assert.match(releaseKo, /notarization/);

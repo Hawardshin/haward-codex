@@ -75,6 +75,13 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 
 `desktop:package:internal`은 `desktop:verify`를 통과한 뒤 Rust build, prepared-renderer Tauri build, macOS `codesign` verification, DMG `hdiutil verify`를 실행합니다. Tauri 직접 빌드(`corepack pnpm --filter platform-desktop-app run tauri:build`)는 여전히 renderer build를 먼저 실행하지만, pipeline 패키징은 이미 audit된 renderer output을 재사용해서 중복 Next.js build를 피합니다.
 
+## 빌드 Pipeline 구조
+
+- `scripts/desktop-pipeline.mjs`: CLI entrypoint
+- `scripts/desktop-pipeline/paths.mjs`: repository, Tauri, artifact, prepared build config 경로
+- `scripts/desktop-pipeline/definitions.mjs`: setup, quick verify, full verify, package, public report 단계 정의
+- `scripts/desktop-pipeline/runner.mjs`: dry-run, platform skip, subprocess 실행과 실패 처리
+
 생성되는 내부 테스트 artifact는 다음 위치입니다.
 
 ```text

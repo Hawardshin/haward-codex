@@ -1,0 +1,23 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-pipeline-structure",
+  "status": "passed",
+  "resource_risks": [
+    "Build/test subprocesses",
+    "Next.js renderer build during full verify",
+    "Cargo test during full verify"
+  ],
+  "controls": [
+    "No dev server was started.",
+    "No package installation was run.",
+    "All validation commands exited before close-out.",
+    "No browser automation session was opened."
+  ],
+  "validation_commands": [
+    "corepack pnpm --filter platform-desktop-app run pipeline:dry-run",
+    "corepack pnpm run desktop:verify:quick",
+    "corepack pnpm run desktop:verify",
+    "corepack pnpm --filter platform-desktop-app test",
+    "corepack pnpm --filter platform-desktop-app run check"
+  ]
+}

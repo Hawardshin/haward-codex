@@ -1,0 +1,13 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-pipeline-structure",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selection_reason": "The request permits changing desktop build pipeline source structure. The work changes implementation files, readiness checks, tests, and docs but does not install new dependencies or change public release gates.",
+  "mode_policy_notes": [
+    "Web-first intake was performed before local edits.",
+    "The structure change was limited to platform-desktop-app build pipeline ownership.",
+    "Renderer durable path migration was deferred as a separate, higher-risk migration."
+  ]
+}

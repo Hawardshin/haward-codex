@@ -61,6 +61,9 @@ const requiredFiles = [
   "scripts/check-release-readiness.mjs",
   "scripts/check-service-readiness.mjs",
   "scripts/desktop-pipeline.mjs",
+  "scripts/desktop-pipeline/paths.mjs",
+  "scripts/desktop-pipeline/definitions.mjs",
+  "scripts/desktop-pipeline/runner.mjs",
   "scripts/tauri-before-build-prepared.mjs"
 ];
 
@@ -592,7 +595,10 @@ const readmeEn = readFileSync(join(root, "README.en.md"), "utf8");
 const defaultReadme = readFileSync(join(root, "README.md"), "utf8");
 const releaseRunbookKo = readFileSync(join(root, "docs/release-runbook.ko.md"), "utf8");
 const releaseRunbookEn = readFileSync(join(root, "docs/release-runbook.en.md"), "utf8");
-const desktopPipeline = readFileSync(join(root, "scripts/desktop-pipeline.mjs"), "utf8");
+const desktopPipelineEntrypoint = readFileSync(join(root, "scripts/desktop-pipeline.mjs"), "utf8");
+const desktopPipelineDefinitions = readFileSync(join(root, "scripts/desktop-pipeline/definitions.mjs"), "utf8");
+const desktopPipelineRunner = readFileSync(join(root, "scripts/desktop-pipeline/runner.mjs"), "utf8");
+const desktopPipelineStructure = `${desktopPipelineEntrypoint}\n${desktopPipelineDefinitions}\n${desktopPipelineRunner}`;
 if (!installableRequirementsKo.includes("PDA-REQ-038") || !installableRequirementsEn.includes("PDA-REQ-038")) {
   failures.push("installable desktop requirements must include PDA-REQ-038 for bilingual README and one-command release paths");
 }
@@ -634,9 +640,12 @@ for (const requiredPhrase of [
   "hdiutil",
   "Public distribution remains blocked"
 ]) {
-  if (!desktopPipeline.includes(requiredPhrase)) {
-    failures.push(`desktop-pipeline.mjs must include ${requiredPhrase}`);
+  if (!desktopPipelineStructure.includes(requiredPhrase)) {
+    failures.push(`desktop pipeline structure must include ${requiredPhrase}`);
   }
+}
+if (!desktopPipelineEntrypoint.includes("./desktop-pipeline/runner.mjs")) {
+  failures.push("desktop-pipeline.mjs must remain a thin entrypoint to scripts/desktop-pipeline/runner.mjs");
 }
 
 const viewModeRegistry = readJson("../agent-platform/configs/access/view-mode-registry.json");
