@@ -1,0 +1,18 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-tool-deploy-workbench",
+  "outcome": "pass",
+  "summary": "Tool Studio deploy mode에 툴 배포 전용 workbench를 추가했다.",
+  "requirements": ["REQ-WM-051"],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "in-app Browser desktop smoke: workbench, 3 targets, 4 actions, release/preflight/guardrails/rollback, overflow 0",
+    "in-app Browser desktop smoke: AgentCore Gateway target switch includes --tool-schema-file, credential, rollback",
+    "Playwright mobile 390x844 smoke: deploy grids collapse to one column, overflow 0"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_notes": "Browser smoke를 위해 로컬 정적 HTTP 서버를 실행했고 검증 후 종료했다."
+}

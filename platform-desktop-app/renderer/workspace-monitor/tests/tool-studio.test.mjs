@@ -106,6 +106,28 @@ test("Tool Studio build mode exposes a dedicated tool builder workbench", () => 
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-builder-blueprints,[\s\S]*?\.tool-builder-canvas,[\s\S]*?\.tool-builder-actions,/);
 });
 
+test("Tool Studio deploy mode exposes a deployment workbench", () => {
+  assert.match(toolStudio, /type ToolDeployTarget = \{/);
+  assert.match(toolStudio, /const toolDeployTargets: ToolDeployTarget\[\] = \[/);
+  assert.match(toolStudio, /id:\s*"local-registry"[\s\S]*?id:\s*"agentcore-gateway"[\s\S]*?id:\s*"desktop-bundle"/);
+  assert.match(toolStudio, /const \[selectedDeployTargetId, setSelectedDeployTargetId\] = useState/);
+  assert.match(toolStudio, /className="tool-deploy-workbench"/);
+  assert.match(toolStudio, /data-tool-deploy-target=\{target\.id\}/);
+  assert.match(toolStudio, /data-tool-deploy-release/);
+  assert.match(toolStudio, /data-tool-deploy-preflight/);
+  assert.match(toolStudio, /data-tool-deploy-guardrails/);
+  assert.match(toolStudio, /data-tool-deploy-rollback/);
+  assert.match(toolStudio, /data-tool-deploy-action="preflight"/);
+  assert.match(toolStudio, /data-tool-deploy-action="package"/);
+  assert.match(toolStudio, /data-tool-deploy-action="registry"/);
+  assert.match(toolStudio, /data-tool-deploy-action="copy"/);
+  assert.match(toolStudio, /copyDeployPlan/);
+  assert.match(css, /\.tool-deploy-targets \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.tool-deploy-canvas \{[\s\S]*?grid-template-columns: minmax\(0, 1\.15fr\) minmax\(0, 0\.85fr\);/);
+  assert.match(css, /\.tool-deploy-actions \{[\s\S]*?grid-template-columns: repeat\(4, minmax\(0, 1fr\)\);/);
+  assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-deploy-targets,[\s\S]*?\.tool-deploy-canvas,[\s\S]*?\.tool-deploy-actions,/);
+});
+
 test("AgentCore builder supports multi-capability bundles", () => {
   assert.match(monitorShell, /type AgentCoreCapabilityOption = \{/);
   assert.match(monitorShell, /const agentCoreCapabilityOptions: AgentCoreCapabilityOption\[\] = \[/);

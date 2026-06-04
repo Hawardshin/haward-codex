@@ -94,6 +94,24 @@ type ToolBuilderBlueprint = {
   icon: LucideIcon;
 };
 
+type ToolDeployTarget = {
+  id: string;
+  labelKo: string;
+  labelEn: string;
+  detailKo: string;
+  detailEn: string;
+  target: string;
+  command: string;
+  artifact: string;
+  authKo: string;
+  authEn: string;
+  observabilityKo: string;
+  observabilityEn: string;
+  rollback: string;
+  preflight: string[];
+  icon: LucideIcon;
+};
+
 const toolModes: ToolMode[] = [
   {
     id: "build",
@@ -236,6 +254,60 @@ const toolBuilderBlueprints: ToolBuilderBlueprint[] = [
   }
 ];
 
+const toolDeployTargets: ToolDeployTarget[] = [
+  {
+    id: "local-registry",
+    labelKo: "Local Registry",
+    labelEn: "Local Registry",
+    detailKo: "검증된 툴을 로컬 registry에 먼저 게시합니다",
+    detailEn: "Publishes a verified tool to the local registry first.",
+    target: "agent-platform/configs/tools/registry.json",
+    command: "python scripts/tool_deploy.py --target local --preflight",
+    artifact: "artifacts/tool-package.tar.gz",
+    authKo: "로컬 실행 권한만 허용",
+    authEn: "Allows local execution scope only.",
+    observabilityKo: "task-run record와 validation record 연결",
+    observabilityEn: "Links task-run and validation records.",
+    rollback: "restore registry entry + remove package artifact",
+    preflight: ["schema validation", "smoke test", "license review", "rollback plan"],
+    icon: PackageCheck
+  },
+  {
+    id: "agentcore-gateway",
+    labelKo: "AgentCore Gateway",
+    labelEn: "AgentCore Gateway",
+    detailKo: "MCP/OpenAPI target schema와 credential 범위를 점검합니다",
+    detailEn: "Checks MCP/OpenAPI target schema and credential scope.",
+    target: "gateway-target/tools.json",
+    command: "agentcore add gateway-target --tool-schema-file tools.json --dry-run",
+    artifact: "artifacts/gateway-target-preflight.json",
+    authKo: "credential provider, OAuth/API key, least privilege",
+    authEn: "Credential provider, OAuth/API key, least privilege.",
+    observabilityKo: "tool call trace, latency, error metric 기록",
+    observabilityEn: "Records tool-call trace, latency, and error metrics.",
+    rollback: "disable gateway target + revoke credential provider",
+    preflight: ["tool schema file", "credential scope", "invoke dry-run", "trace mapping"],
+    icon: GitBranch
+  },
+  {
+    id: "desktop-bundle",
+    labelKo: "Desktop Bundle",
+    labelEn: "Desktop Bundle",
+    detailKo: "데스크톱 앱에 포함할 툴 package와 업데이트 경계를 만듭니다",
+    detailEn: "Creates a tool package and update boundary for the desktop app.",
+    target: "platform-desktop-app/tool-bundles/",
+    command: "corepack pnpm run desktop:verify:quick && python scripts/package_tool_bundle.py",
+    artifact: "artifacts/desktop-tool-bundle.zip",
+    authKo: "앱 내부 adapter 권한과 workspace boundary 사용",
+    authEn: "Uses app adapter permissions and workspace boundaries.",
+    observabilityKo: "desktop run log, bundle hash, install audit 기록",
+    observabilityEn: "Records desktop run logs, bundle hash, and install audit.",
+    rollback: "restore previous bundle hash + restart adapter",
+    preflight: ["bundle hash", "desktop quick verify", "workspace boundary", "install audit"],
+    icon: Rocket
+  }
+];
+
 const environmentRows = [
   {
     labelKo: "가상 환경",
@@ -296,10 +368,12 @@ export function ToolStudioPanel({
   const [mode, setMode] = useState<ToolStudioMode>("build");
   const [selectedToolId, setSelectedToolId] = useState(toolCards[0].id);
   const [selectedBlueprintId, setSelectedBlueprintId] = useState(toolBuilderBlueprints[0].id);
+  const [selectedDeployTargetId, setSelectedDeployTargetId] = useState(toolDeployTargets[0].id);
   const ko = language === "ko";
   const activeMode = toolModes.find((item) => item.id === mode) || toolModes[0];
   const selectedTool = toolCards.find((item) => item.id === selectedToolId) || toolCards[0];
   const selectedBlueprint = toolBuilderBlueprints.find((item) => item.id === selectedBlueprintId) || toolBuilderBlueprints[0];
+  const selectedDeployTarget = toolDeployTargets.find((item) => item.id === selectedDeployTargetId) || toolDeployTargets[0];
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const statusItems = useMemo(
     () => [
@@ -514,6 +588,17 @@ export function ToolStudioPanel({
       runCommand: selectedBlueprint.runCommand,
       packageCommand: selectedBlueprint.packageCommand,
       outputs: selectedBlueprint.outputs
+    }, null, 2));
+  };
+
+  const copyDeployPlan = () => {
+    void writeClipboardText(JSON.stringify({
+      id: selectedDeployTarget.id,
+      target: selectedDeployTarget.target,
+      command: selectedDeployTarget.command,
+      artifact: selectedDeployTarget.artifact,
+      preflight: selectedDeployTarget.preflight,
+      rollback: selectedDeployTarget.rollback
     }, null, 2));
   };
 
@@ -790,6 +875,110 @@ export function ToolStudioPanel({
                   <button type="button" className="tool-builder-copy" onClick={copyBuilderSpec} data-tool-builder-action="copy">
                     <Copy size={16} aria-hidden="true" />
                     <span>{ko ? "명세 복사" : "Copy spec"}</span>
+                  </button>
+                </div>
+              </section>
+            )}
+            {mode === "deploy" && (
+              <section className="tool-deploy-workbench" data-tool-deploy-workbench aria-label={ko ? "툴 배포 작업대" : "Tool deployment workbench"}>
+                <div className="tool-deploy-targets" aria-label={ko ? "배포 대상" : "Deployment targets"}>
+                  {toolDeployTargets.map((target) => (
+                    <button
+                      key={target.id}
+                      type="button"
+                      className={target.id === selectedDeployTarget.id ? "active" : ""}
+                      onClick={() => setSelectedDeployTargetId(target.id)}
+                      aria-pressed={target.id === selectedDeployTarget.id}
+                      data-tool-deploy-target={target.id}
+                    >
+                      <target.icon size={16} aria-hidden="true" />
+                      <span>
+                        <strong>{labelFor(language, target.labelKo, target.labelEn)}</strong>
+                        <small>{labelFor(language, target.detailKo, target.detailEn)}</small>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="tool-deploy-canvas">
+                  <article className="tool-deploy-release" data-tool-deploy-release>
+                    <header>
+                      <UploadCloud size={16} aria-hidden="true" />
+                      <span>{ko ? "Release target" : "Release target"}</span>
+                    </header>
+                    <dl>
+                      <div>
+                        <dt>{ko ? "Target" : "Target"}</dt>
+                        <dd>{selectedDeployTarget.target}</dd>
+                      </div>
+                      <div>
+                        <dt>{ko ? "Artifact" : "Artifact"}</dt>
+                        <dd>{selectedDeployTarget.artifact}</dd>
+                      </div>
+                      <div>
+                        <dt>{ko ? "Command" : "Command"}</dt>
+                        <dd>{selectedDeployTarget.command}</dd>
+                      </div>
+                    </dl>
+                  </article>
+
+                  <article className="tool-deploy-preflight" data-tool-deploy-preflight>
+                    <header>
+                      <ShieldCheck size={16} aria-hidden="true" />
+                      <span>{ko ? "Preflight" : "Preflight"}</span>
+                    </header>
+                    <ul>
+                      {selectedDeployTarget.preflight.map((item) => (
+                        <li key={item}>
+                          <CheckCircle2 size={14} aria-hidden="true" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+
+                  <article className="tool-deploy-guardrails" data-tool-deploy-guardrails>
+                    <header>
+                      <Settings size={16} aria-hidden="true" />
+                      <span>{ko ? "권한과 관측" : "Auth and observability"}</span>
+                    </header>
+                    <dl>
+                      <div>
+                        <dt>{ko ? "Auth" : "Auth"}</dt>
+                        <dd>{labelFor(language, selectedDeployTarget.authKo, selectedDeployTarget.authEn)}</dd>
+                      </div>
+                      <div>
+                        <dt>{ko ? "Observe" : "Observe"}</dt>
+                        <dd>{labelFor(language, selectedDeployTarget.observabilityKo, selectedDeployTarget.observabilityEn)}</dd>
+                      </div>
+                    </dl>
+                  </article>
+
+                  <article className="tool-deploy-rollback" data-tool-deploy-rollback>
+                    <header>
+                      <ScrollText size={16} aria-hidden="true" />
+                      <span>{ko ? "Rollback" : "Rollback"}</span>
+                    </header>
+                    <code>{selectedDeployTarget.rollback}</code>
+                  </article>
+                </div>
+
+                <div className="tool-deploy-actions">
+                  <button type="button" onClick={onOpenTerminal} data-tool-deploy-action="preflight">
+                    <ShieldCheck size={16} aria-hidden="true" />
+                    <span>{ko ? "사전점검 실행" : "Run preflight"}</span>
+                  </button>
+                  <button type="button" onClick={onOpenTerminal} data-tool-deploy-action="package">
+                    <PackageCheck size={16} aria-hidden="true" />
+                    <span>{ko ? "패키지 빌드" : "Build package"}</span>
+                  </button>
+                  <button type="button" onClick={() => selectMode("registry")} data-tool-deploy-action="registry">
+                    <GitBranch size={16} aria-hidden="true" />
+                    <span>{ko ? "Registry 반영" : "Update registry"}</span>
+                  </button>
+                  <button type="button" onClick={copyDeployPlan} data-tool-deploy-action="copy">
+                    <Copy size={16} aria-hidden="true" />
+                    <span>{ko ? "배포 계획 복사" : "Copy plan"}</span>
                   </button>
                 </div>
               </section>
