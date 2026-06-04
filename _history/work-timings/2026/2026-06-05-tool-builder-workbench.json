@@ -1,0 +1,29 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-tool-builder-workbench",
+  "started_at": "2026-06-05T07:58:00+09:00",
+  "phases": [
+    {
+      "name": "web_first_intake",
+      "duration_minutes": 3,
+      "notes": "Checked AgentCore Gateway and IDE tool window references."
+    },
+    {
+      "name": "implementation",
+      "duration_minutes": 12,
+      "notes": "Added builder templates, workbench canvas, actions, clipboard copy, responsive CSS, and static test assertions."
+    },
+    {
+      "name": "records",
+      "duration_minutes": 7,
+      "notes": "Requirements, specs, web-search, request, mode, plan, trace, and evaluation records created."
+    },
+    {
+      "name": "validation",
+      "duration_minutes": 6,
+      "notes": "Ran test, check, build:customer, in-app Browser desktop smoke, Playwright mobile smoke, and screenshot capture."
+    }
+  ],
+  "finished_at": "2026-06-05T08:10:00+09:00",
+  "bottleneck_notes": "No install required. Browser smoke used a temporary local static server and was cleaned up."
+}

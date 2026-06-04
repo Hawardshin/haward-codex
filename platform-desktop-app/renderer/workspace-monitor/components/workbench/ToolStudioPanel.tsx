@@ -29,6 +29,8 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { writeClipboardText } from "@/lib/clipboard.mjs";
+
 export type ToolStudioMode = "build" | "environment" | "deploy" | "registry";
 export type ToolStudioModeRequest = {
   mode: ToolStudioMode;
@@ -70,6 +72,25 @@ type ToolCard = {
   runtime: string;
   path: string;
   mode: ToolStudioMode;
+  icon: LucideIcon;
+};
+
+type ToolBuilderBlueprint = {
+  id: string;
+  labelKo: string;
+  labelEn: string;
+  detailKo: string;
+  detailEn: string;
+  sourcePath: string;
+  schemaPath: string;
+  runCommand: string;
+  packageCommand: string;
+  gatewayKo: string;
+  gatewayEn: string;
+  riskKo: string;
+  riskEn: string;
+  manifest: string;
+  outputs: string[];
   icon: LucideIcon;
 };
 
@@ -158,6 +179,63 @@ const buildSteps = [
   { labelKo: "배포 전 점검", labelEn: "Preflight", detailKo: "license, rollback, docs", detailEn: "license, rollback, docs", icon: ShieldCheck }
 ];
 
+const toolBuilderBlueprints: ToolBuilderBlueprint[] = [
+  {
+    id: "python-cli-tool",
+    labelKo: "Python CLI Tool",
+    labelEn: "Python CLI Tool",
+    detailKo: "입력 JSON을 받아 stdout artifact를 만드는 기본 툴",
+    detailEn: "Base tool that accepts input JSON and writes stdout artifacts.",
+    sourcePath: "tools/new-python-tool/src/new_python_tool/__main__.py",
+    schemaPath: "tools/new-python-tool/schema/input.schema.json",
+    runCommand: "python -m new_python_tool --input fixtures/smoke.json",
+    packageCommand: "python -m build && pytest tests/smoke_test.py",
+    gatewayKo: "local runtime에서 먼저 검증 후 registry에 등록",
+    gatewayEn: "Validate in local runtime before adding it to the registry.",
+    riskKo: "파일 쓰기, 네트워크, secret 접근은 기본 비활성",
+    riskEn: "File writes, network, and secret access are disabled by default.",
+    manifest: "tool.json",
+    outputs: ["stdout.json", "artifacts/", "validation-record.json"],
+    icon: FileCode2
+  },
+  {
+    id: "mcp-wrapper-tool",
+    labelKo: "MCP Wrapper",
+    labelEn: "MCP Wrapper",
+    detailKo: "승인된 MCP server의 list/call을 로컬 툴로 감쌉니다",
+    detailEn: "Wraps approved MCP server list/call operations as a local tool.",
+    sourcePath: "tools/mcp-wrapper/src/mcp_wrapper/client.py",
+    schemaPath: "tools/mcp-wrapper/schema/tool-call.schema.json",
+    runCommand: "python -m mcp_wrapper smoke --server local",
+    packageCommand: "python scripts/package_mcp_wrapper.py --preflight",
+    gatewayKo: "AgentCore Gateway처럼 tool discovery와 invoke를 분리",
+    gatewayEn: "Separates tool discovery from invocation like AgentCore Gateway.",
+    riskKo: "connector 권한과 호출 trace가 없는 server는 등록 보류",
+    riskEn: "Servers without connector scope and call traces remain blocked.",
+    manifest: "mcp-tool.json",
+    outputs: ["tools-list.json", "call-trace.json", "gateway-preflight.json"],
+    icon: GitBranch
+  },
+  {
+    id: "automation-tool",
+    labelKo: "Automation Tool",
+    labelEn: "Automation Tool",
+    detailKo: "반복 작업을 재사용 가능한 명령/검증 단위로 승격합니다",
+    detailEn: "Promotes repeated work into a reusable command and validation unit.",
+    sourcePath: "tools/automation-tool/src/automation_tool/run.py",
+    schemaPath: "tools/automation-tool/schema/task.schema.json",
+    runCommand: "python -m automation_tool run --dry-run",
+    packageCommand: "python -m automation_tool package --audit",
+    gatewayKo: "agent task-run store와 결과 기록을 기본 출력으로 연결",
+    gatewayEn: "Connects task-run store and result records as default outputs.",
+    riskKo: "반복 실행, 비용, 외부 변경은 승인 gate 뒤에 둠",
+    riskEn: "Repeated runs, cost, and external mutations stay behind approval gates.",
+    manifest: "automation-tool.json",
+    outputs: ["task-run.json", "rollback-plan.md", "operator-summary.md"],
+    icon: Wand2
+  }
+];
+
 const environmentRows = [
   {
     labelKo: "가상 환경",
@@ -217,9 +295,11 @@ export function ToolStudioPanel({
 }: ToolStudioPanelProps) {
   const [mode, setMode] = useState<ToolStudioMode>("build");
   const [selectedToolId, setSelectedToolId] = useState(toolCards[0].id);
+  const [selectedBlueprintId, setSelectedBlueprintId] = useState(toolBuilderBlueprints[0].id);
   const ko = language === "ko";
   const activeMode = toolModes.find((item) => item.id === mode) || toolModes[0];
   const selectedTool = toolCards.find((item) => item.id === selectedToolId) || toolCards[0];
+  const selectedBlueprint = toolBuilderBlueprints.find((item) => item.id === selectedBlueprintId) || toolBuilderBlueprints[0];
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const statusItems = useMemo(
     () => [
@@ -425,6 +505,18 @@ export function ToolStudioPanel({
     }
   };
 
+  const copyBuilderSpec = () => {
+    void writeClipboardText(JSON.stringify({
+      id: selectedBlueprint.id,
+      manifest: selectedBlueprint.manifest,
+      sourcePath: selectedBlueprint.sourcePath,
+      schemaPath: selectedBlueprint.schemaPath,
+      runCommand: selectedBlueprint.runCommand,
+      packageCommand: selectedBlueprint.packageCommand,
+      outputs: selectedBlueprint.outputs
+    }, null, 2));
+  };
+
   useEffect(() => {
     if (requestedMode) {
       selectMode(requestedMode.mode);
@@ -608,6 +700,100 @@ export function ToolStudioPanel({
                 </article>
               ))}
             </div>
+            {mode === "build" && (
+              <section className="tool-builder-workbench" data-tool-builder-workbench aria-label={ko ? "툴 제작 작업대" : "Tool builder workbench"}>
+                <div className="tool-builder-blueprints" aria-label={ko ? "툴 템플릿" : "Tool templates"}>
+                  {toolBuilderBlueprints.map((blueprint) => (
+                    <button
+                      key={blueprint.id}
+                      type="button"
+                      className={blueprint.id === selectedBlueprint.id ? "active" : ""}
+                      onClick={() => setSelectedBlueprintId(blueprint.id)}
+                      aria-pressed={blueprint.id === selectedBlueprint.id}
+                      data-tool-builder-blueprint={blueprint.id}
+                    >
+                      <blueprint.icon size={16} aria-hidden="true" />
+                      <span>
+                        <strong>{labelFor(language, blueprint.labelKo, blueprint.labelEn)}</strong>
+                        <small>{labelFor(language, blueprint.detailKo, blueprint.detailEn)}</small>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="tool-builder-canvas">
+                  <article className="tool-builder-manifest" data-tool-builder-manifest>
+                    <header>
+                      <span>{ko ? "Manifest" : "Manifest"}</span>
+                      <strong>{selectedBlueprint.manifest}</strong>
+                    </header>
+                    <dl>
+                      <div>
+                        <dt>{ko ? "소스" : "Source"}</dt>
+                        <dd>{selectedBlueprint.sourcePath}</dd>
+                      </div>
+                      <div>
+                        <dt>{ko ? "스키마" : "Schema"}</dt>
+                        <dd>{selectedBlueprint.schemaPath}</dd>
+                      </div>
+                      <div>
+                        <dt>{ko ? "Gateway" : "Gateway"}</dt>
+                        <dd>{labelFor(language, selectedBlueprint.gatewayKo, selectedBlueprint.gatewayEn)}</dd>
+                      </div>
+                    </dl>
+                  </article>
+
+                  <article className="tool-builder-command" data-tool-builder-command="run">
+                    <header>
+                      <PlayCircle size={16} aria-hidden="true" />
+                      <span>{ko ? "실행 검증" : "Run validation"}</span>
+                    </header>
+                    <code>{selectedBlueprint.runCommand}</code>
+                    <small>{labelFor(language, selectedBlueprint.riskKo, selectedBlueprint.riskEn)}</small>
+                  </article>
+
+                  <article className="tool-builder-command" data-tool-builder-command="package">
+                    <header>
+                      <PackageCheck size={16} aria-hidden="true" />
+                      <span>{ko ? "패키지 점검" : "Package preflight"}</span>
+                    </header>
+                    <code>{selectedBlueprint.packageCommand}</code>
+                    <small>{ko ? "README, license, rollback, validation record를 함께 묶습니다." : "Bundles README, license, rollback, and validation records."}</small>
+                  </article>
+
+                  <article className="tool-builder-outputs" data-tool-builder-outputs>
+                    <header>
+                      <ScrollText size={16} aria-hidden="true" />
+                      <span>{ko ? "출력 계약" : "Output contract"}</span>
+                    </header>
+                    <ul>
+                      {selectedBlueprint.outputs.map((output) => (
+                        <li key={output}>{output}</li>
+                      ))}
+                    </ul>
+                  </article>
+                </div>
+
+                <div className="tool-builder-actions">
+                  <button type="button" onClick={onOpenSource} data-tool-builder-action="source">
+                    <FileCode2 size={16} aria-hidden="true" />
+                    <span>{ko ? "소스 열기" : "Open source"}</span>
+                  </button>
+                  <button type="button" onClick={onOpenTerminal} data-tool-builder-action="smoke">
+                    <SquareTerminal size={16} aria-hidden="true" />
+                    <span>{ko ? "Smoke 실행" : "Run smoke"}</span>
+                  </button>
+                  <button type="button" onClick={() => selectMode("deploy")} data-tool-builder-action="package">
+                    <UploadCloud size={16} aria-hidden="true" />
+                    <span>{ko ? "배포 점검" : "Deployment check"}</span>
+                  </button>
+                  <button type="button" className="tool-builder-copy" onClick={copyBuilderSpec} data-tool-builder-action="copy">
+                    <Copy size={16} aria-hidden="true" />
+                    <span>{ko ? "명세 복사" : "Copy spec"}</span>
+                  </button>
+                </div>
+              </section>
+            )}
             <div className="tool-shortcut-grid">
               {toolModes.map((item) => (
                 <article key={item.id}>

@@ -85,6 +85,27 @@ test("Tool Studio CSS keeps split scroll and stable controls", () => {
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-shell \{[\s\S]*?overflow: visible;/);
 });
 
+test("Tool Studio build mode exposes a dedicated tool builder workbench", () => {
+  assert.match(toolStudio, /type ToolBuilderBlueprint = \{/);
+  assert.match(toolStudio, /const toolBuilderBlueprints: ToolBuilderBlueprint\[\] = \[/);
+  assert.match(toolStudio, /id:\s*"python-cli-tool"[\s\S]*?id:\s*"mcp-wrapper-tool"[\s\S]*?id:\s*"automation-tool"/);
+  assert.match(toolStudio, /const \[selectedBlueprintId, setSelectedBlueprintId\] = useState/);
+  assert.match(toolStudio, /className="tool-builder-workbench"/);
+  assert.match(toolStudio, /data-tool-builder-blueprint=\{blueprint\.id\}/);
+  assert.match(toolStudio, /data-tool-builder-manifest/);
+  assert.match(toolStudio, /data-tool-builder-command="run"/);
+  assert.match(toolStudio, /data-tool-builder-command="package"/);
+  assert.match(toolStudio, /data-tool-builder-action="source"/);
+  assert.match(toolStudio, /data-tool-builder-action="smoke"/);
+  assert.match(toolStudio, /data-tool-builder-action="package"/);
+  assert.match(toolStudio, /data-tool-builder-action="copy"/);
+  assert.match(toolStudio, /writeClipboardText\(JSON\.stringify/);
+  assert.match(css, /\.tool-builder-blueprints \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.tool-builder-canvas \{[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.tool-builder-actions \{[\s\S]*?grid-template-columns: repeat\(4, minmax\(0, 1fr\)\);/);
+  assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-builder-blueprints,[\s\S]*?\.tool-builder-canvas,[\s\S]*?\.tool-builder-actions,/);
+});
+
 test("AgentCore builder supports multi-capability bundles", () => {
   assert.match(monitorShell, /type AgentCoreCapabilityOption = \{/);
   assert.match(monitorShell, /const agentCoreCapabilityOptions: AgentCoreCapabilityOption\[\] = \[/);

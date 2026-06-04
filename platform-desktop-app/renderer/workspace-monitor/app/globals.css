@@ -13394,6 +13394,241 @@ h3 {
   background: var(--slate);
 }
 
+.tool-builder-workbench {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-raised);
+  padding: 10px;
+}
+
+.tool-builder-blueprints {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-builder-blueprints button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  min-height: 76px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  background: var(--surface);
+  color: var(--text);
+  padding: 9px;
+  text-align: left;
+}
+
+.tool-builder-blueprints button.active {
+  border-color: var(--control-selected-border);
+  color: var(--control-selected-fg);
+  background: var(--control-selected-bg);
+}
+
+.tool-builder-blueprints button svg {
+  margin-top: 2px;
+  color: var(--accent-primary);
+}
+
+.tool-builder-blueprints button.active svg {
+  color: currentColor;
+}
+
+.tool-builder-blueprints span,
+.tool-builder-blueprints strong,
+.tool-builder-blueprints small {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  line-height: 1.32;
+  text-overflow: ellipsis;
+}
+
+.tool-builder-blueprints strong {
+  color: inherit;
+  font-size: var(--font-size-caption);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.tool-builder-blueprints small {
+  color: var(--text-secondary);
+  font-size: 10px;
+  white-space: normal;
+}
+
+.tool-builder-blueprints button.active small {
+  color: currentColor;
+  opacity: 0.82;
+}
+
+.tool-builder-canvas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-builder-manifest,
+.tool-builder-command,
+.tool-builder-outputs {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  min-height: 122px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 10px;
+}
+
+.tool-builder-manifest {
+  grid-row: span 2;
+}
+
+.tool-builder-manifest header,
+.tool-builder-command header,
+.tool-builder-outputs header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-builder-command header,
+.tool-builder-outputs header {
+  justify-content: flex-start;
+}
+
+.tool-builder-manifest header span,
+.tool-builder-command header span,
+.tool-builder-outputs header span {
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.tool-builder-manifest header strong {
+  min-width: 0;
+  color: var(--text);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-caption);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tool-builder-manifest dl {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  min-width: 0;
+}
+
+.tool-builder-manifest div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.tool-builder-manifest dt {
+  color: var(--text-tertiary);
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.tool-builder-manifest dd {
+  min-width: 0;
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.tool-builder-command code {
+  display: block;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--terminal-bg);
+  color: var(--terminal-fg);
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  padding: 8px;
+}
+
+.tool-builder-command small {
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.tool-builder-outputs ul {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  margin: 0;
+  padding-left: 16px;
+}
+
+.tool-builder-outputs li {
+  color: var(--text);
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.tool-builder-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-builder-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  min-height: var(--control-target-size);
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  background: var(--control-bg);
+  color: var(--text);
+  padding: 8px var(--control-padding-x);
+  white-space: nowrap;
+}
+
+.tool-builder-actions button:not(:disabled):hover {
+  background: var(--control-bg-hover);
+}
+
+.tool-builder-actions button[data-tool-builder-action="smoke"],
+.tool-builder-actions button[data-tool-builder-action="package"] {
+  border-color: var(--action-primary-border);
+  background: var(--action-primary-bg);
+  color: var(--action-primary-fg);
+}
+
 .tool-shortcut-grid,
 .tool-env-scroll {
   display: grid;
@@ -13551,6 +13786,9 @@ h3 {
   .tool-studio-workbench,
   .tool-studio-side-pane,
   .tool-build-flow,
+  .tool-builder-blueprints,
+  .tool-builder-canvas,
+  .tool-builder-actions,
   .tool-shortcut-grid {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -13574,6 +13812,14 @@ h3 {
   .tool-env-scroll {
     max-height: none;
     overflow: visible;
+  }
+
+  .tool-builder-manifest {
+    grid-row: auto;
+  }
+
+  .tool-builder-actions button {
+    width: 100%;
   }
 }
 

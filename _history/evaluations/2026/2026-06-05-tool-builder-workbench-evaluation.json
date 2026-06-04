@@ -1,0 +1,17 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-tool-builder-workbench",
+  "outcome": "pass",
+  "summary": "Tool Studio build mode에 새 툴 제작 전용 workbench를 추가했다.",
+  "requirements": ["REQ-WM-050"],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "in-app Browser desktop smoke: workbench, 3 templates, 4 actions, manifest/run/package/output, overflow 0",
+    "Playwright mobile 390x844 smoke: builder grids collapse to one column, overflow 0"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_notes": "Browser smoke를 위해 로컬 정적 HTTP 서버를 실행했고 검증 후 종료했다."
+}

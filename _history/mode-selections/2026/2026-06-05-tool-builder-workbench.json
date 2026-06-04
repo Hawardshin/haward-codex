@@ -1,0 +1,12 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-tool-builder-workbench",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes a user-facing platform UI and requires requirements/spec/history/validation records, but the implementation is a bounded Tool Studio slice with no dependency installation.",
+  "web_first_intake": true,
+  "memory_bootstrap": "simulated from hot anchors: AGENTS.md, Workspace Monitor requirements, Tool Studio tests, prior Tool Studio UI history.",
+  "large_scope_decomposition": "simulated and scoped to the Tool Studio build mode rather than all tool lifecycle surfaces.",
+  "installation_occurred": false
+}
