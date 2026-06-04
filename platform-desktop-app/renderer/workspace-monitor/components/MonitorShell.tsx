@@ -4273,7 +4273,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 <strong>{currentSectionLabel}</strong>
               </div>
             </div>
-            {!isPrimaryWorkSurface && (
+            {!isPrimaryWorkSurface && section !== "overview" && (
               <div className={`titlebar-context-strip status-${attentionState.tone}`}>
                 <span>
                   <strong>{currentFeatureGroup?.label || (uiLanguage === "ko" ? "작업" : "Work")}</strong>
@@ -4290,7 +4290,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 <SquareTerminal size={15} aria-hidden="true" />
                 <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
               </button>
-              {!isPrimaryWorkSurface && (
+              {!isPrimaryWorkSurface && section !== "overview" && (
                 <label className="titlebar-search">
                   <Search size={15} aria-hidden="true" />
                   <input
@@ -4936,7 +4936,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         />
       )}
 
-          {!isPrimaryWorkSurface && (
+          {!isPrimaryWorkSurface && section !== "overview" && (
             <>
               <section className={`operator-strip operator-${attentionState.tone}`} aria-label="Workspace status and actions">
                 <div className="operator-strip-state">
@@ -5004,16 +5004,6 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         : "The first screen keeps one decision at a time. Core runs, setup, files, and status checks stay as separate actions."}
                     </p>
                   </div>
-                  <div className="core-home-status-row" aria-label={uiLanguage === "ko" ? "현재 작업량" : "Current workload"}>
-                    {workVisibilityItems.map((item) => (
-                      <article key={item.id}>
-                        <item.icon size={16} aria-hidden="true" />
-                        <span>{item.label}</span>
-                        <strong>{item.value}</strong>
-                        <small>{item.detail}</small>
-                      </article>
-                    ))}
-                  </div>
                   <div className="workspace-home-actions task-intent-grid" aria-label={uiLanguage === "ko" ? "작업 목표 선택" : "Choose work goal"}>
                     {taskIntentItems.map((item, index) => (
                       <button key={item.id} type="button" onClick={item.run} data-task-intent={item.id}>
@@ -5025,6 +5015,16 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         </span>
                         <em>{item.badge}</em>
                       </button>
+                    ))}
+                  </div>
+                  <div className="core-home-status-row" aria-label={uiLanguage === "ko" ? "현재 작업량" : "Current workload"}>
+                    {workVisibilityItems.map((item) => (
+                      <article key={item.id}>
+                        <item.icon size={16} aria-hidden="true" />
+                        <span>{item.label}</span>
+                        <strong>{item.value}</strong>
+                        <small>{item.detail}</small>
+                      </article>
                     ))}
                   </div>
                 </section>

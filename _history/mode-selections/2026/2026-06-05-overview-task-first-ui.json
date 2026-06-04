@@ -1,0 +1,9 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-overview-task-first-ui",
+  "selected_work_mode": "standard",
+  "reason": "사용자-facing 홈 UI의 시각 계층, 요구사항, 테스트, 스크린샷 artifact가 바뀌는 의미 있는 변경이다.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "installation_occurred": false
+}

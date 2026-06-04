@@ -1,0 +1,16 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-overview-task-first-ui",
+  "outcome": "pass",
+  "summary": "Overview 첫 화면에서 목표 선택 카드를 상태 지표보다 먼저 보이게 하고, 보조 운영 strip과 필터를 Overview에서 제거했다.",
+  "requirements": ["REQ-WM-044"],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "Playwright smoke: desktop/mobile intentCount=6, hasBuildTool=true, overflow=0, auxiliary strip count=0"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_notes": "로컬 정적 HTTP 서버를 검증 중 실행했고 검증 후 종료했다."
+}

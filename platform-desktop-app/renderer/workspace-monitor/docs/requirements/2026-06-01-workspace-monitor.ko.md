@@ -54,6 +54,7 @@
 | REQ-WM-041 | 버튼 클릭은 heavy workbench mount, native refresh, source filtering, evidence assembly 같은 보조 작업 때문에 첫 응답 paint를 막으면 안 되며, 주요 섹션의 대표 버튼 표본은 CPU throttle 6 정적 export audit에서 long task 없이 p95 60ms 이하를 유지해야 한다. | must | 67개 버튼 표본 click-to-paint audit, staged Desktop/Source shell settled smoke, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget`, `platform-desktop-app check` 확인 |
 | REQ-WM-042 | Tool Studio는 툴 제작, 툴 배포, Python 실행환경, 가상 환경, 툴 전용 registry를 Source/Agents와 분리된 독립 작업면으로 제공해야 하며, 드롭다운/우클릭/단축키는 접근성 있는 오픈소스 UI primitive를 사용하고 3D 에이전트 협업 장면은 해당 화면에서만 lazy mount되어야 한다. | must | Tool Studio section smoke, Radix dropdown/context menu interaction, keyboard shortcut audit, Three.js lazy import/cleanup test, canvas nonblank pixel smoke, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget`, `platform-desktop-app check` 확인 |
 | REQ-WM-043 | Overview와 command palette는 섹션 이름을 외운 사용자만 빠르게 이동할 수 있는 구조가 아니라, "에이전트 만들기", "툴 만들기", "작업 실행", "파일/소스 열기", "막힌 결정 처리", "설정 점검" 같은 목표 기반 진입점을 먼저 보여줘야 한다. | must | task-intent route static test, command palette goal item test, responsive home visual smoke, `pnpm run check`, `pnpm test`, `pnpm run build:customer` 확인 |
+| REQ-WM-044 | Overview 첫 화면은 보조 운영 strip, 문서 필터, 상태 숫자보다 사용자가 즉시 실행할 목표 선택 카드를 먼저 보여야 하며, 현재 작업량 지표는 목표 선택 이후의 보조 상태로 낮춰야 한다. | must | Overview render order static test, operator/filter absence smoke, desktop/mobile first intent position smoke, `pnpm run check`, `pnpm test`, `pnpm run build:customer` 확인 |
 
 ## 범위
 
@@ -93,6 +94,7 @@
 - 버튼 클릭 첫 paint와 heavy workbench/native refresh/evidence 계산 분리
 - Tool Studio의 툴 제작/배포/Python venv/registry 전용 작업면, Radix 메뉴, Three.js lazy 3D 협업 장면
 - Overview와 command palette의 목표 기반 task-intent route
+- Overview의 task-first visual hierarchy와 보조 상태 요약
 - Vercel 배포 문서
 
 ## 제외 범위

@@ -82,12 +82,19 @@ test("Tool Studio CSS keeps split scroll and stable controls", () => {
 });
 
 test("Monitor home exposes task-intent routes before section names", () => {
+  const taskIntentIndex = monitorShell.indexOf("workspace-home-actions task-intent-grid");
+  const statusRowIndex = monitorShell.indexOf("core-home-status-row");
+
   assert.match(monitorShell, /type TaskIntentItem = \{/);
   assert.match(monitorShell, /const taskIntentItems = useMemo<TaskIntentItem\[\]>/);
   assert.match(monitorShell, /id:\s*"build-tool"[\s\S]*?label:\s*uiLanguage === "ko" \? "툴 만들기"/);
   assert.match(monitorShell, /data-task-intent=\{item\.id\}/);
   assert.match(monitorShell, /data-active-section=\{section\}/);
+  assert.match(monitorShell, /!isPrimaryWorkSurface && section !== "overview" && \(/);
   assert.match(monitorShell, /taskIntentItems\.map\(\(item\) => \(\{/);
+  assert.ok(taskIntentIndex > -1);
+  assert.ok(statusRowIndex > -1);
+  assert.ok(taskIntentIndex < statusRowIndex);
   assert.match(monitorShell, /group:\s*uiLanguage === "ko" \? "하고 싶은 일" : "Goal"/);
   assert.match(monitorShell, /placeholder=\{uiLanguage === "ko" \? "하고 싶은 일 검색: 툴, 에이전트, 실행, 파일, 설정"/);
   assert.match(css, /\.task-intent-grid \{[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(300px, 1fr\)\);/);
