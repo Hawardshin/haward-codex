@@ -34,4 +34,4 @@
 
 ## 커밋
 
-- pending
+- `df6f6213` (`perf(monitor): make tab activation immediate`)
