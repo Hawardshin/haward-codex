@@ -1,0 +1,12 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-agentcore-resource-topology",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request affects a user-facing platform UI and requires requirements/spec/history/validation records, but the implementation is a bounded Workspace Monitor slice with no dependency installation.",
+  "web_first_intake": true,
+  "memory_bootstrap": "simulated from hot anchors: AGENTS.md, Workspace Monitor requirements, prior AgentCore capability bundle spec, project history records.",
+  "large_scope_decomposition": "simulated and scoped down to the next AgentCore-like UI primitive: resource topology and lifecycle preview.",
+  "installation_occurred": false
+}

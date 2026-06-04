@@ -289,6 +289,10 @@ type AgentCoreCapabilityOption = {
   labelEn: string;
   detailKo: string;
   detailEn: string;
+  resourceKo: string;
+  resourceEn: string;
+  lifecycleKo: string;
+  lifecycleEn: string;
   localCapability: string;
   guardrailKo: string;
   guardrailEn: string;
@@ -1861,6 +1865,10 @@ const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
     labelEn: "Runtime",
     detailKo: "긴 작업 실행과 상태 기록",
     detailEn: "Long-running execution and state records",
+    resourceKo: "Runtime",
+    resourceEn: "Runtime",
+    lifecycleKo: "Create -> Invoke",
+    lifecycleEn: "Create -> Invoke",
     localCapability: "local_agent_runtime",
     guardrailKo: "긴 실행은 task-run record와 취소/복구 경계를 가져야 합니다",
     guardrailEn: "Long runs need task-run records plus cancel and recovery boundaries"
@@ -1871,6 +1879,10 @@ const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
     labelEn: "Memory",
     detailKo: "작업 기억과 선호 재사용",
     detailEn: "Reusable task memory and preferences",
+    resourceKo: "Memory",
+    resourceEn: "Memory",
+    lifecycleKo: "Configure -> Invoke",
+    lifecycleEn: "Configure -> Invoke",
     localCapability: "workspace_memory",
     guardrailKo: "memory 후보는 출처, 만료, 민감정보 제외 기준을 가져야 합니다",
     guardrailEn: "Memory candidates need provenance, expiry, and sensitive-data exclusion rules"
@@ -1881,6 +1893,10 @@ const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
     labelEn: "Gateway",
     detailKo: "MCP/API/CLI 도구 연결",
     detailEn: "MCP, API, and CLI tool access",
+    resourceKo: "Gateway",
+    resourceEn: "Gateway",
+    lifecycleKo: "Configure -> Invoke",
+    lifecycleEn: "Configure -> Invoke",
     localCapability: "tool_gateway_catalog",
     guardrailKo: "도구 호출은 권한 범위와 호출 trace를 남겨야 합니다",
     guardrailEn: "Tool calls need scoped authorization and invocation traces"
@@ -1891,6 +1907,10 @@ const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
     labelEn: "Browser",
     detailKo: "웹 탐색과 화면 검증",
     detailEn: "Web browsing and visual verification",
+    resourceKo: "Built-in Tools",
+    resourceEn: "Built-in Tools",
+    lifecycleKo: "Invoke -> Observe",
+    lifecycleEn: "Invoke -> Observe",
     localCapability: "browser_verification_lane",
     guardrailKo: "브라우저 작업은 사용자가 볼 수 있는 상태와 위험 동작 확인을 분리해야 합니다",
     guardrailEn: "Browser work must separate visible state checks from risky-action confirmation"
@@ -1901,6 +1921,10 @@ const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
     labelEn: "Code Interpreter",
     detailKo: "Python/JS 실행과 산출물 검증",
     detailEn: "Python/JS execution and artifact checks",
+    resourceKo: "Built-in Tools",
+    resourceEn: "Built-in Tools",
+    lifecycleKo: "Invoke -> Validate",
+    lifecycleEn: "Invoke -> Validate",
     localCapability: "sandboxed_code_execution",
     guardrailKo: "코드 실행은 sandbox, 입력/출력 기록, resource cleanup 기준을 가져야 합니다",
     guardrailEn: "Code execution needs sandboxing, I/O records, and resource cleanup rules"
@@ -1911,6 +1935,10 @@ const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
     labelEn: "Identity",
     detailKo: "계정/권한/커넥터 범위",
     detailEn: "Account, permission, and connector scope",
+    resourceKo: "Identity",
+    resourceEn: "Identity",
+    lifecycleKo: "Configure -> Authorize",
+    lifecycleEn: "Configure -> Authorize",
     localCapability: "scoped_identity_broker",
     guardrailKo: "계정과 connector 권한은 최소 권한과 revoke 경로를 가져야 합니다",
     guardrailEn: "Accounts and connector permissions need least privilege and revocation paths"
@@ -1921,6 +1949,10 @@ const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
     labelEn: "Policy",
     detailKo: "행동 경계와 승인 규칙",
     detailEn: "Action boundaries and approval rules",
+    resourceKo: "Policy",
+    resourceEn: "Policy",
+    lifecycleKo: "Authorize -> Govern",
+    lifecycleEn: "Authorize -> Govern",
     localCapability: "action_policy_gate",
     guardrailKo: "고위험 action은 정책 gate와 사용자 승인 기록을 통과해야 합니다",
     guardrailEn: "High-risk actions must pass policy gates and user approval records"
@@ -1931,6 +1963,10 @@ const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
     labelEn: "Observability",
     detailKo: "trace, 로그, 병목 관측",
     detailEn: "Trace, logs, and bottleneck visibility",
+    resourceKo: "Observability",
+    resourceEn: "Observability",
+    lifecycleKo: "Observe -> Debug",
+    lifecycleEn: "Observe -> Debug",
     localCapability: "agent_observability_trace",
     guardrailKo: "관측 데이터는 민감정보를 숨기고 task/run/evaluation에 연결돼야 합니다",
     guardrailEn: "Observability data must redact sensitive values and connect to task, run, and evaluation records"
@@ -1941,6 +1977,10 @@ const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
     labelEn: "Evaluations",
     detailKo: "품질 게이트와 재작업 판단",
     detailEn: "Quality gates and rework decisions",
+    resourceKo: "Evaluations",
+    resourceEn: "Evaluations",
+    lifecycleKo: "Evaluate -> Improve",
+    lifecycleEn: "Evaluate -> Improve",
     localCapability: "evaluation_quality_gate",
     guardrailKo: "평가는 검증 명령, 근거 gap, rollback 조건을 함께 남겨야 합니다",
     guardrailEn: "Evaluations need validation commands, grounding gaps, and rollback conditions"
@@ -1948,6 +1988,14 @@ const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
 ];
 
 const agentCoreCapabilityOptionById = new Map(agentCoreCapabilityOptions.map((option) => [option.id, option]));
+
+const agentCoreResourceLifecycleSteps = [
+  { id: "create", labelKo: "Create", labelEn: "Create" },
+  { id: "configure", labelKo: "Configure", labelEn: "Configure" },
+  { id: "invoke", labelKo: "Invoke", labelEn: "Invoke" },
+  { id: "observe", labelKo: "Observe", labelEn: "Observe" },
+  { id: "evaluate", labelKo: "Evaluate", labelEn: "Evaluate" }
+];
 
 const agentCoreBlueprints: AgentCoreBlueprint[] = [
   {
@@ -6417,6 +6465,7 @@ function AgentCoreBlueprintPanel({
     [selectedCapabilityIds]
   );
   const selectedCapabilitySummary = selectedCapabilityOptions.map((item) => (ko ? item.labelKo : item.labelEn)).join(" + ");
+  const selectedResourceSummary = Array.from(new Set(selectedCapabilityOptions.map((item) => (ko ? item.resourceKo : item.resourceEn)))).join(" / ");
 
   useEffect(() => {
     setSelectedCapabilityIds(defaultCapabilityIds);
@@ -6527,6 +6576,36 @@ function AgentCoreBlueprintPanel({
                   </button>
                 );
               })}
+            </div>
+          </section>
+
+          <section className="agentcore-resource-topology" aria-label={ko ? "AgentCore 리소스 토폴로지" : "AgentCore resource topology"}>
+            <header>
+              <div>
+                <span>{ko ? "AgentCore식 리소스 연결" : "AgentCore-style resource wiring"}</span>
+                <strong>{selectedResourceSummary}</strong>
+                <small>
+                  {ko
+                    ? "선택한 능력을 Runtime, Memory, Gateway, Built-in Tools, Identity, Policy, Observability, Evaluations 흐름으로 배치합니다."
+                    : "Maps the selected capabilities into Runtime, Memory, Gateway, Built-in Tools, Identity, Policy, Observability, and Evaluations lanes."}
+                </small>
+              </div>
+              <Network size={17} aria-hidden="true" />
+            </header>
+            <div className="agentcore-resource-lifecycle" aria-label={ko ? "AgentCore 리소스 생명주기" : "AgentCore resource lifecycle"}>
+              {agentCoreResourceLifecycleSteps.map((step) => (
+                <span key={step.id}>{ko ? step.labelKo : step.labelEn}</span>
+              ))}
+            </div>
+            <div className="agentcore-resource-grid">
+              {selectedCapabilityOptions.map((option) => (
+                <article key={option.id} data-agentcore-resource={option.id}>
+                  <span>{ko ? option.resourceKo : option.resourceEn}</span>
+                  <strong>{ko ? option.labelKo : option.labelEn}</strong>
+                  <small>{option.localCapability}</small>
+                  <em>{ko ? option.lifecycleKo : option.lifecycleEn}</em>
+                </article>
+              ))}
             </div>
           </section>
 

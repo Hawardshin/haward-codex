@@ -7748,6 +7748,151 @@ h3 {
   white-space: nowrap;
 }
 
+.agentcore-resource-topology {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface-raised), var(--surface));
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.agentcore-resource-topology header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+  min-width: 0;
+}
+
+.agentcore-resource-topology header div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.agentcore-resource-topology header svg {
+  color: var(--accent-primary);
+}
+
+.agentcore-resource-topology header span,
+.agentcore-resource-topology header strong,
+.agentcore-resource-topology header small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.agentcore-resource-topology header span {
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.agentcore-resource-topology header strong {
+  color: var(--text);
+  font-size: var(--font-size-body);
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.agentcore-resource-topology header small {
+  display: -webkit-box;
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: 1.38;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.agentcore-resource-lifecycle {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  min-width: 0;
+}
+
+.agentcore-resource-lifecycle span {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.2;
+  overflow: hidden;
+  padding: 6px 7px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agentcore-resource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.agentcore-resource-grid article {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  min-width: 0;
+  min-height: 86px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 9px;
+}
+
+.agentcore-resource-grid span,
+.agentcore-resource-grid strong,
+.agentcore-resource-grid small,
+.agentcore-resource-grid em {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.agentcore-resource-grid span {
+  color: var(--accent-primary);
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.agentcore-resource-grid strong {
+  color: var(--text);
+  font-size: var(--font-size-caption);
+  font-weight: 900;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.agentcore-resource-grid small {
+  color: var(--text-secondary);
+  font-size: 10px;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.agentcore-resource-grid em {
+  color: var(--text);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 850;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
 .agentcore-blueprint-matrix {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -11966,6 +12111,7 @@ h3 {
   .intent-roadmap-grid,
   .structure-plane-grid,
   .agentcore-builder-steps,
+  .agentcore-resource-grid,
   .agentcore-blueprint-matrix,
   .boundary-rule-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -12458,6 +12604,24 @@ h3 {
 
   .agentcore-capability-grid strong,
   .agentcore-capability-grid small {
+    white-space: normal;
+  }
+
+  .agentcore-resource-topology header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .agentcore-resource-lifecycle {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .agentcore-resource-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .agentcore-resource-grid strong,
+  .agentcore-resource-grid small,
+  .agentcore-resource-grid em {
     white-space: normal;
   }
 

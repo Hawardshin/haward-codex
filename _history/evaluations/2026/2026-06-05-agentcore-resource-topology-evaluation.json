@@ -1,0 +1,17 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-agentcore-resource-topology",
+  "outcome": "pass",
+  "summary": "AgentCore Quick Builder에 선택된 capability를 AgentCore-style resource topology와 lifecycle로 표시하는 UI를 추가했다.",
+  "requirements": ["REQ-WM-049"],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "in-app Browser desktop smoke: resource cards 9, selected capability 9, overflow 0",
+    "Playwright mobile 390x844 smoke: resource cards 9, 1-column resource grid, lifecycle 2 columns, overflow 0"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_notes": "Browser smoke를 위해 로컬 정적 HTTP 서버를 실행했고 검증 후 종료했다."
+}
