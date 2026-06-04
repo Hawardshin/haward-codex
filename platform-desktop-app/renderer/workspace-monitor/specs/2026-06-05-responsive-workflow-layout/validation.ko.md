@@ -5,7 +5,7 @@
 - `pnpm run check`: 통과
 - `pnpm test`: 17개 통과
 - `pnpm exec next build`: 통과
-- `pnpm run perf:budget`: 통과, largest chunk 325346 bytes
+- `pnpm run perf:budget`: 통과, largest chunk 326615 bytes
 - `curl http://localhost:3213/`: `200`, 0.037714s
 - in-app Browser responsive smoke:
   - 1280x720: horizontal overflow 0, disclosure 3개 기본 접힘
@@ -30,6 +30,13 @@
   - 대상: `overview`, `agents`, `desktop`, `source`, `intent`
   - viewport: 1280x820, 900x720, 720x720, 540x720, 390x720
   - 결과: 25개 조합 모두 failures 없음, body font stack에 `Pretendard`/`Noto Sans KR` 포함, 어두운 배경 direct text는 computed white, 22px direct text 없음
+- 정적 export Playwright information-density audit:
+  - 대상: `overview`, `agents`, `desktop`, `source`, `intent`
+  - viewport: 1280x820, 900x720, 720x720, 540x720, 390x720
+  - 결과: 25개 조합 모두 failures 없음
+  - 390x720 `agents`: section disclosure 1개 기본 닫힘, 보조 패널 visible 0, top panels 2, agent work context 기본 닫힘, overflow 0
+  - 390x720 `desktop`: section disclosure 2개 기본 닫힘, 보조 패널 visible 0, top panels 4, overflow 0
+  - interaction: 390x720에서 Agents 1개, Desktop 2개 disclosure summary click/open/close 및 overflow 0 확인
 
 ## 확인 기준
 
@@ -41,3 +48,4 @@
 - 초기 JS 성능 예산은 `maxInitialChunkBytes=1000000` 아래에 있어야 한다.
 - 텍스트는 `Pretendard Variable`/`Pretendard` 우선 sans fallback stack과 역할 기반 token으로만 선언하고, 작은 보조 텍스트는 11px small token으로 유지하되 브라우저 기본 `<small>` 축소처럼 scale 밖으로 빠지는 visible text가 없어야 한다.
 - 어두운 배경 위 visible text는 반투명 회색 foreground가 아니라 흰색 foreground token을 사용해야 한다.
+- Agents/Desktop Runtime의 보조 기능군은 기본 닫힌 section-level disclosure 아래에 있어야 하며, 닫힌 상태에서 해당 보조 패널이 visible로 계산되면 실패다.

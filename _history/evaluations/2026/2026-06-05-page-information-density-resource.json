@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-06-05",
+  "workId": "page-information-density",
+  "status": "passed",
+  "resources": [
+    {
+      "kind": "static_server",
+      "target": "workspace-monitor out python http.server on 127.0.0.1:3221",
+      "cleanupRequired": false
+    },
+    {
+      "kind": "browser_automation",
+      "target": "Playwright chromium headless section density audit",
+      "cleanupRequired": false
+    }
+  ],
+  "notes": "Static server was stopped before close-out."
+}

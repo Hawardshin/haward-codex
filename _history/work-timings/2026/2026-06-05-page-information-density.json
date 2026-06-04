@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-06-05",
+  "workId": "page-information-density",
+  "status": "passed",
+  "timings": [
+    {
+      "phase": "web_first_intake",
+      "duration": "not_measured",
+      "notes": "Checked cognitive accessibility, density, and progressive disclosure references."
+    },
+    {
+      "phase": "implementation",
+      "duration": "not_measured",
+      "notes": "Moved Agents and Desktop Runtime secondary panels into closed-by-default section disclosures."
+    },
+    {
+      "phase": "verification",
+      "duration": "not_measured",
+      "notes": "Ran checks, tests, customer build, performance budget, platform check, and Playwright density audit."
+    }
+  ],
+  "bottleneckCandidates": [
+    "Section density audits should become a reusable workspace-monitor script."
+  ]
+}

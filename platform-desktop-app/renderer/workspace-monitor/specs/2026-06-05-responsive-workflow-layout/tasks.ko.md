@@ -22,3 +22,6 @@
 - [x] 기본 `<small>`을 11px small token으로 낮춤
 - [x] dark surface foreground를 흰색 token으로 통일
 - [x] dark theme `--text`/`--muted`를 흰색으로 조정
+- [x] Agents 보조 패널을 기본 접힘 section disclosure로 이동
+- [x] Desktop Runtime 진단/기록/결정함 패널을 기본 접힘 section disclosure로 이동
+- [x] 정적 export Playwright section information-density audit

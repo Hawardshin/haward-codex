@@ -5332,6 +5332,12 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             onRefreshModels={refreshProviderModels}
           />
 
+          <details className="section-secondary-disclosure">
+            <summary>
+              <span>{uiLanguage === "ko" ? "에이전트 세부 기능 열기" : "Open agent details"}</span>
+              <small>{uiLanguage === "ko" ? "블루프린트, 생성기, 협업판, 인벤토리" : "Blueprints, builder, board, inventory"}</small>
+            </summary>
+            <div className="section-secondary-stack">
           <AgentCoreBlueprintPanel
             blueprints={agentCoreBlueprints}
             selectedBlueprintId={selectedAgentCoreBlueprintId}
@@ -5434,6 +5440,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               ))}
             </div>
           </section>
+            </div>
+          </details>
         </div>
           )}
         </section>
@@ -5627,7 +5635,7 @@ function SearchAgentWorkChatPanel({
         </div>
 
         <aside className="agent-chat-context">
-          <details className="agent-chat-details" open>
+          <details className="agent-chat-details">
             <summary>{ko ? "작업 컨텍스트" : "Work Context"}</summary>
             <div className="agent-chat-context-form">
               <label>
@@ -9663,6 +9671,12 @@ function DesktopRuntimePanel({
         </div>
       </section>
 
+      <details className="section-secondary-disclosure">
+        <summary>
+          <span>{uiLanguage === "ko" ? "운영 진단 패널 열기" : "Open runtime diagnostics"}</span>
+          <small>{uiLanguage === "ko" ? "지표, 빠른 실행, 워크스페이스, task pipe, 데이터 경계" : "Metrics, commands, workspace, task pipe, data boundary"}</small>
+        </summary>
+        <div className="section-secondary-stack">
       <section className="metrics-band">
         <Metric label="Guest Adapters" value={adapters.length} icon={Network} tone="green" />
         <Metric label="Available" value={availableCount} icon={CheckCircle2} tone="blue" />
@@ -10529,6 +10543,8 @@ function DesktopRuntimePanel({
           })}
         </div>
       </section>
+        </div>
+      </details>
 
       <RuntimeTerminalDrawer
         adapters={adapters}
@@ -10563,6 +10579,12 @@ function DesktopRuntimePanel({
         onWriteSessionInput={writeSessionInput}
       />
 
+      <details className="section-secondary-disclosure">
+        <summary>
+          <span>{uiLanguage === "ko" ? "실행 기록과 결정함 열기" : "Open run records and decisions"}</span>
+          <small>{uiLanguage === "ko" ? "터미널 출력, decision inbox, 근거 후보" : "Terminal output, decision inbox, evidence candidates"}</small>
+        </summary>
+        <div className="section-secondary-stack">
       <section className="panel wide terminal-output-panel">
         <div className="panel-heading">
           <div>
@@ -10777,6 +10799,8 @@ function DesktopRuntimePanel({
           </div>
         )}
       </section>
+        </div>
+      </details>
 
     </div>
   );

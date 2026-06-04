@@ -3067,6 +3067,81 @@ h3 {
   gap: 16px;
 }
 
+.section-secondary-disclosure {
+  grid-column: 1 / -1;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface-raised) 82%, transparent);
+  border-radius: 8px;
+}
+
+.section-secondary-disclosure summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  min-height: var(--control-target-size);
+  padding: 12px;
+  color: var(--text);
+  cursor: pointer;
+  list-style: none;
+}
+
+.section-secondary-disclosure summary::-webkit-details-marker {
+  display: none;
+}
+
+.section-secondary-disclosure summary::after {
+  content: "+";
+  display: inline-flex;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  font-weight: 850;
+}
+
+.section-secondary-disclosure[open] summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.section-secondary-disclosure[open] summary::after {
+  content: "-";
+}
+
+.section-secondary-disclosure summary span,
+.section-secondary-disclosure summary small {
+  grid-column: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.section-secondary-disclosure summary span {
+  font-weight: 850;
+}
+
+.section-secondary-disclosure summary small {
+  color: var(--muted);
+  font-size: var(--font-size-caption);
+}
+
+.section-secondary-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  min-width: 0;
+  padding: 12px;
+}
+
 .command-center,
 .ux-spine,
 .core-function-panel,

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-06-05",
+  "workId": "page-information-density",
+  "workMode": "standard",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "userRequest": "한 페이지에 너무 많은 정보가 있으면 사용자가 힘들다.",
+  "requirements": ["REQ-WM-031", "REQ-WM-033", "REQ-WM-037"],
+  "implementationFiles": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css"
+  ],
+  "requirementsTargets": [
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+  ],
+  "specTargets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/"
+  ],
+  "webSearchRecordTargets": [
+    "_history/web-searches/2026/2026-06-05-page-information-density.ko.md"
+  ],
+  "userRequestSummaryTargets": [
+    "_history/user-requests/2026/2026-06-05-responsive-workflow-layout.ko.md"
+  ],
+  "requestTraceTargets": [
+    "_history/request-traces/2026/2026-06-05-non-fullscreen-layout.ko.md"
+  ],
+  "workSummaryTargets": [
+    "_history/work-summaries/2026/2026-06-05.ko.md",
+    "_history/2026/2026-06-05.md"
+  ],
+  "omissionCheckTargets": [
+    "_history/evaluations/2026/2026-06-05-page-information-density-omission.json"
+  ],
+  "resourceRiskOccurred": true,
+  "resourceCheckTargets": [
+    "_history/evaluations/2026/2026-06-05-page-information-density-resource.json"
+  ],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "Playwright section information-density audit: agents and desktop secondary disclosures closed by default; open interaction passes"
+  ],
+  "installationOccurred": false,
+  "snapshotGeneratedFilesExcludedFromCommit": true
+}

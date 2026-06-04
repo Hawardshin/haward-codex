@@ -15,6 +15,8 @@
 - 앱 내부 `<small>` 기본값을 11px small token으로 고정해 브라우저 기본 축소로 11px 미만 텍스트가 생기지 않게 했다.
 - `Pretendard Variable`/`Pretendard`/`Noto Sans KR` 우선 fallback stack을 적용하고, 기본 `<small>`은 12px caption이 아니라 11px small token으로 낮췄다.
 - 제품 font stack을 `Pretendard Variable`/`Pretendard` 우선으로 교체하고, dark theme과 dark surface foreground를 흰색 token으로 통일했다.
+- Agents 화면은 검색 에이전트 작업 채팅만 먼저 보이고, 블루프린트/생성기/협업판/인벤토리는 닫힌 `section-secondary-disclosure` 아래로 이동했다.
+- Desktop Runtime 화면은 실행 작업대와 Quick Start만 먼저 보이고, 운영 진단/기록/결정함/근거 후보는 닫힌 `section-secondary-disclosure` 아래로 이동했다.
 
 ## 산출물
 
@@ -23,6 +25,7 @@
 - 구현: `app/globals.css`, `components/MonitorShell.tsx`, `components/SnapshotLoader.tsx`
 - 검증: `_history/evaluations/2026/2026-06-05-non-fullscreen-layout-evaluation-input.json`
 - Typography 검증: `_history/evaluations/2026/2026-06-05-typography-scale-evaluation-input.json`
+- 정보 밀도 검증: `_history/evaluations/2026/2026-06-05-page-information-density-evaluation-input.json`
 
 ## 검증 요약
 
@@ -32,3 +35,4 @@
 - 정적 export Playwright typography audit: 5개 섹션 x 5개 viewport, failures 없음
 - Playwright readable font smoke: 새 font stack 적용, small sample 11px, overflow 0
 - Playwright dark foreground smoke: 어두운 배경 direct text가 computed white foreground를 사용하고 22px direct text 없음
+- 정적 export Playwright information-density audit: Agents/Desktop secondary disclosure 기본 닫힘 및 열기 interaction 확인

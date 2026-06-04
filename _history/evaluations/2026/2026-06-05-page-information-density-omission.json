@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-06-05",
+  "workId": "page-information-density",
+  "status": "passed",
+  "checked": [
+    "web-first intake recorded",
+    "requirement added",
+    "spec/tasks/traceability updated",
+    "Agents section secondary panels moved behind disclosure",
+    "Desktop Runtime secondary panels moved behind disclosure",
+    "generated snapshot files left out of intended commit set"
+  ],
+  "remainingChecks": []
+}

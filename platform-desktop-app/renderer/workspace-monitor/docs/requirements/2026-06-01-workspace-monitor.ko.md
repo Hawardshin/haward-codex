@@ -47,6 +47,7 @@
 | REQ-WM-034 | 데스크톱 제품 UI의 주요 섹션은 전체 화면이 아닌 900px, 720px, 540px, 390px 창에서도 루트 수평 overflow 없이 reflow되어야 하며, 핵심 navigation과 반복 컨트롤은 44px 이상 클릭 타깃을 유지해야 한다. | must | 정적 export Playwright audit 5개 섹션 x 5개 viewport, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `platform-desktop-app check` 확인 |
 | REQ-WM-035 | 데스크톱 제품 UI의 텍스트는 `Pretendard Variable`/`Pretendard` 우선 한/영 혼합 sans fallback stack과 역할 기반 typography scale을 따라야 하며, 작은 보조 텍스트는 명시적 small token으로 작게 유지하되 브라우저 기본 축소나 컴포넌트별 임의 `font-size`로 화면마다 크기가 들쭉날쭉해지면 안 된다. | must | `globals.css` font family/font-size token audit, in-app Browser computed font-family smoke, 정적 export Playwright typography audit 5개 섹션 x 5개 viewport, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `platform-desktop-app check` 확인 |
 | REQ-WM-036 | 데스크톱 제품 UI의 어두운 배경, dark theme, dark rail, primary action, active tab, code/source/terminal surface 위의 텍스트는 회색 반투명 대신 명시적 흰색 foreground token을 사용해야 한다. | must | `globals.css` dark foreground token audit, in-app Browser dark foreground smoke, 정적 export Playwright dark surface audit, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `platform-desktop-app check` 확인 |
+| REQ-WM-037 | 데스크톱 제품 UI의 주요 섹션은 한 페이지에 진단, 기록, 인벤토리, 생성기, 실행 보조 패널을 동시에 펼쳐 사용자를 압박하지 않아야 하며, 초기 화면은 주 작업 하나와 제한된 보조 요약만 보여주고 나머지는 명명된 세부 disclosure 아래에 둬야 한다. | must | Agents/Desktop 초기 visible panel count audit, disclosure closed-by-default audit, disclosure open interaction, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, 정적 export Playwright audit 확인 |
 
 ## 범위
 
