@@ -13,7 +13,8 @@
 - 반복 버튼, Explorer, source toolbar, titlebar/search/select 입력을 44px 이상 target 기준으로 맞췄다.
 - `globals.css`에 typography scale token을 추가하고, 모든 직접 숫자 기반 `font-size` 선언을 token 참조로 바꿨다.
 - 앱 내부 `<small>` 기본값을 11px small token으로 고정해 브라우저 기본 축소로 11px 미만 텍스트가 생기지 않게 했다.
-- `Pretendard GOV`/`Pretendard`/`Noto Sans KR` 우선 fallback stack을 적용하고, 기본 `<small>`은 12px caption이 아니라 11px small token으로 낮췄다.
+- `Pretendard Variable`/`Pretendard`/`Noto Sans KR` 우선 fallback stack을 적용하고, 기본 `<small>`은 12px caption이 아니라 11px small token으로 낮췄다.
+- 제품 font stack을 `Pretendard Variable`/`Pretendard` 우선으로 교체하고, dark theme과 dark surface foreground를 흰색 token으로 통일했다.
 
 ## 산출물
 
@@ -29,4 +30,5 @@
 - `platform-desktop-app test/check`: 통과
 - 정적 export Playwright audit: 5개 섹션 x 5개 viewport, failures 없음
 - 정적 export Playwright typography audit: 5개 섹션 x 5개 viewport, failures 없음
-- in-app Browser readable font smoke: 390x844에서 새 font stack 적용, small sample 11px, overflow 0
+- Playwright readable font smoke: 새 font stack 적용, small sample 11px, overflow 0
+- Playwright dark foreground smoke: 어두운 배경 direct text가 computed white foreground를 사용하고 22px direct text 없음

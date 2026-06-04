@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-06-05",
+  "workId": "dark-foreground-font",
+  "status": "passed",
+  "timings": [
+    {
+      "phase": "web_first_intake",
+      "duration": "not_measured",
+      "notes": "Checked contrast and font-family references before CSS edits."
+    },
+    {
+      "phase": "implementation",
+      "duration": "not_measured",
+      "notes": "Adjusted dark foreground tokens and product font stack in globals.css."
+    },
+    {
+      "phase": "verification",
+      "duration": "not_measured",
+      "notes": "Ran workspace checks, tests, customer build, platform check, performance budget, and multi-viewport Playwright audit."
+    }
+  ],
+  "bottleneckCandidates": [
+    "Dark foreground and font stack audit should become a reusable workspace-monitor script."
+  ]
+}

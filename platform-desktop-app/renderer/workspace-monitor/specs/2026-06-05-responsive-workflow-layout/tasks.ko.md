@@ -20,3 +20,5 @@
 - [x] 정적 export Playwright 5개 섹션 x 5개 viewport typography audit
 - [x] 한/영 혼합 sans fallback stack 적용
 - [x] 기본 `<small>`을 11px small token으로 낮춤
+- [x] dark surface foreground를 흰색 token으로 통일
+- [x] dark theme `--text`/`--muted`를 흰색으로 조정

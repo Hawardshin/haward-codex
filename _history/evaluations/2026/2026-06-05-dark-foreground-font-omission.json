@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-06-05",
+  "workId": "dark-foreground-font",
+  "status": "passed",
+  "checked": [
+    "web-first intake recorded",
+    "requirements updated",
+    "spec/tasks/validation/traceability updated",
+    "dark foreground implementation completed",
+    "product font stack adjusted",
+    "CSS token audit completed",
+    "multi-viewport browser audit completed",
+    "workspace monitor and desktop checks completed",
+    "generated snapshot files left out of intended commit set"
+  ],
+  "remainingRisks": [
+    "Pretendard renders only when installed on the host system; otherwise the UI falls back to Noto Sans KR or system sans."
+  ]
+}

@@ -7,6 +7,7 @@
   --line: #d9e0ea;
   --text: #1f2933;
   --muted: #667085;
+  --text-on-dark: #ffffff;
   --rail-bg: #26313d;
   --rail-active: rgba(255, 255, 255, 0.1);
   --titlebar-bg: rgba(248, 250, 252, 0.94);
@@ -37,12 +38,12 @@
   --font-size-card-title: 0.9375rem;
   --font-size-section-title: 1rem;
   --font-size-panel-title: 1.125rem;
-  --font-size-title-lg: 1.25rem;
+  --font-size-title-lg: 1.125rem;
   --font-size-screen-title: 1.375rem;
   --font-size-display: 1.5rem;
   --font-family-sans:
-    "Pretendard GOV", "Pretendard Variable", Pretendard, "Noto Sans KR",
-    "Apple SD Gothic Neo", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Pretendard Variable", Pretendard, "Noto Sans KR", "Apple SD Gothic Neo",
+    "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Malgun Gothic", ui-sans-serif, system-ui, sans-serif;
   --font-family-mono:
     "SFMono-Regular", "Cascadia Code", "JetBrains Mono", Consolas, "Liberation Mono", Menlo,
@@ -71,8 +72,8 @@
   --surface-muted: #222a33;
   --surface-raised: #1c232c;
   --line: #313b48;
-  --text: #e6edf3;
-  --muted: #9aa8b7;
+  --text: #ffffff;
+  --muted: #ffffff;
   --rail-bg: #111820;
   --rail-active: rgba(125, 211, 252, 0.14);
   --titlebar-bg: rgba(16, 20, 25, 0.94);
@@ -90,8 +91,8 @@
     --surface-muted: #222a33;
     --surface-raised: #1c232c;
     --line: #313b48;
-    --text: #e6edf3;
-    --muted: #9aa8b7;
+    --text: #ffffff;
+    --muted: #ffffff;
     --rail-bg: #111820;
     --rail-active: rgba(125, 211, 252, 0.14);
     --titlebar-bg: rgba(16, 20, 25, 0.94);
@@ -390,7 +391,7 @@ main {
   justify-content: center;
   border: 1px solid transparent;
   background: transparent;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--text-on-dark);
   border-radius: 8px;
 }
 
@@ -426,7 +427,7 @@ main {
 .activity-rail .activity-brand {
   border-color: rgba(255, 255, 255, 0.18);
   background: var(--rail-active);
-  color: #ffffff;
+  color: var(--text-on-dark);
 }
 
 .activity-rail .activity-brand {
@@ -985,11 +986,11 @@ main {
 .settings-pin-grid button.active {
   border-color: #91a7bb;
   background: #26313d;
-  color: #ffffff;
+  color: var(--text-on-dark);
 }
 
 .settings-option-list button.active small {
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--text-on-dark);
 }
 
 .provider-accounts-pane {
@@ -1383,7 +1384,7 @@ main {
   gap: 7px;
   border: 1px solid #9fb0c2;
   background: #25313f;
-  color: #ffffff;
+  color: var(--text-on-dark);
   border-radius: 7px;
   padding: 8px 11px;
   font-size: var(--font-size-body);
@@ -2438,7 +2439,7 @@ h3 {
 .segmented-control button.active {
   border-color: #a8b5c3;
   background: linear-gradient(135deg, #25313f 0%, #2f3d4e 100%);
-  color: #ffffff;
+  color: var(--text-on-dark);
 }
 
 .app-control-bar {
@@ -2535,7 +2536,7 @@ h3 {
 .app-chip-group button.active {
   border-color: #9fb0c2;
   background: #25313f;
-  color: #ffffff;
+  color: var(--text-on-dark);
 }
 
 .command-palette-backdrop {
@@ -2806,7 +2807,7 @@ h3 {
 .section-tabs button.active {
   border-color: #a8b5c3;
   background: linear-gradient(135deg, #25313f 0%, #2f3d4e 100%);
-  color: #ffffff;
+  color: var(--text-on-dark);
 }
 
 .section-tabs button span {
@@ -2833,7 +2834,7 @@ h3 {
 .section-tabs button.active small {
   border-color: rgba(255, 255, 255, 0.42);
   background: rgba(255, 255, 255, 0.16);
-  color: #ffffff;
+  color: var(--text-on-dark);
 }
 
 .operator-strip {
@@ -3157,7 +3158,7 @@ h3 {
   gap: 7px;
   border: 1px solid #9fb0c2;
   background: #25313f;
-  color: #ffffff;
+  color: var(--text-on-dark);
   border-radius: 7px;
   padding: 8px 12px;
 }
@@ -3279,7 +3280,7 @@ h3 {
 .core-function-grid button.active {
   border-color: #9fb0c2;
   background: #25313f;
-  color: #ffffff;
+  color: var(--text-on-dark);
 }
 
 .core-function-grid svg {
@@ -3320,7 +3321,7 @@ h3 {
 .core-function-grid button.active span,
 .core-function-grid button.active small,
 .core-function-grid button.active em {
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--text-on-dark);
 }
 
 .core-function-grid button.active em {
@@ -3813,7 +3814,7 @@ h3 {
 .mode-group-list button.active {
   border-color: #9fb0c2;
   background: #25313f;
-  color: #ffffff;
+  color: var(--text-on-dark);
 }
 
 .mode-group-list button span,
@@ -5309,7 +5310,7 @@ h3 {
   display: block;
   min-width: max-content;
   padding: 2px 12px;
-  color: #d7e0ea;
+  color: var(--text-on-dark);
   font-size: var(--font-size-caption);
   line-height: 1.45;
   white-space: pre;
@@ -5317,16 +5318,16 @@ h3 {
 
 .native-git-diff-line.addition {
   background: rgba(36, 128, 78, 0.22);
-  color: #d5f4df;
+  color: var(--text-on-dark);
 }
 
 .native-git-diff-line.deletion {
   background: rgba(171, 71, 71, 0.22);
-  color: #ffd9d9;
+  color: var(--text-on-dark);
 }
 
 .native-git-diff-line.meta {
-  color: #94b7e5;
+  color: var(--text-on-dark);
 }
 
 .native-git-diff-empty {
@@ -5336,13 +5337,13 @@ h3 {
   align-content: center;
   gap: 6px;
   padding: 18px;
-  color: #d7e0ea;
+  color: var(--text-on-dark);
   text-align: center;
 }
 
 .native-git-diff-empty span {
   max-width: 420px;
-  color: #9cadbd;
+  color: var(--text-on-dark);
   font-size: var(--font-size-caption);
 }
 
@@ -5411,7 +5412,7 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 7px;
   background: #111827;
-  color: #f9fafb;
+  color: var(--text-on-dark);
   padding: 10px;
   font-size: var(--font-size-caption);
 }
@@ -5727,7 +5728,7 @@ h3 {
   overflow: auto;
   border: 1px solid #263241;
   background: #111827;
-  color: #f9fafb;
+  color: var(--text-on-dark);
   border-radius: 7px;
   margin: 0;
   padding: 10px;
@@ -7239,7 +7240,7 @@ h3 {
   border: 1px solid var(--line);
   background: #101923;
   border-radius: 8px;
-  color: #d7e0ea;
+  color: var(--text-on-dark);
   padding: 12px;
   font-size: var(--font-size-caption);
   line-height: 1.5;
@@ -7326,7 +7327,7 @@ h3 {
   overflow: auto;
   border: 1px solid #263241;
   background: #111827;
-  color: #f9fafb;
+  color: var(--text-on-dark);
   border-radius: 7px;
   margin: 10px 0 0;
   padding: 10px;
@@ -7360,7 +7361,7 @@ h3 {
   gap: 8px;
   border: 1px solid #5f7488;
   background: #17212d;
-  color: #f8fafc;
+  color: var(--text-on-dark);
   border-radius: 999px;
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.28);
   padding: 9px 13px;
@@ -7374,7 +7375,7 @@ h3 {
   justify-content: center;
   border-radius: 999px;
   background: #2f67b1;
-  color: #ffffff;
+  color: var(--text-on-dark);
   font-size: var(--font-size-caption);
 }
 
@@ -7822,7 +7823,7 @@ h3 {
   overscroll-behavior: contain;
   border: 1px solid #263241;
   background: #111827;
-  color: #f9fafb;
+  color: var(--text-on-dark);
   border-radius: 7px;
   margin: 10px 0;
   padding: 12px;
@@ -7913,7 +7914,7 @@ h3 {
 .decision-summary-strip strong {
   display: block;
   margin-top: 4px;
-  font-size: var(--font-size-screen-title);
+  font-size: var(--font-size-panel-title);
 }
 
 .decision-inbox-layout {
@@ -8210,7 +8211,7 @@ h3 {
   background:
     linear-gradient(180deg, #2f67b1 0%, #23558e 100%),
     #23558e;
-  color: #ffffff;
+  color: var(--text-on-dark);
 }
 
 .source-action-button.primary::before {
@@ -9073,7 +9074,7 @@ h3 {
   min-height: 220px;
   place-items: center;
   background: #111827;
-  color: #cbd5e1;
+  color: var(--text-on-dark);
   font-size: var(--font-size-body);
   font-weight: 800;
   letter-spacing: 0;
@@ -9392,7 +9393,7 @@ h3 {
 .native-workspace-actions button:first-child {
   border-color: #6b879d;
   background: #172435;
-  color: #f8fafc;
+  color: var(--text-on-dark);
 }
 
 .native-workspace-actions button:disabled {
@@ -9888,7 +9889,7 @@ h3 {
   align-items: start;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   padding: 13px 14px;
-  color: #e5e7eb;
+  color: var(--text-on-dark);
 }
 
 .source-viewer header span,
@@ -9899,19 +9900,19 @@ h3 {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 999px;
   padding: 3px 8px;
-  color: #cbd5e1;
+  color: var(--text-on-dark);
   font-size: var(--font-size-caption);
 }
 
 .source-viewer h3 {
   margin: 6px 0 3px;
   overflow-wrap: break-word;
-  color: #f8fafc;
+  color: var(--text-on-dark);
 }
 
 .source-viewer p {
   margin: 0;
-  color: #cbd5e1;
+  color: var(--text-on-dark);
   font-size: var(--font-size-body);
 }
 
@@ -9932,7 +9933,7 @@ h3 {
   gap: 6px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.08);
-  color: #f8fafc;
+  color: var(--text-on-dark);
   border-radius: 7px;
   padding: 6px 9px;
   font-weight: 800;
@@ -9943,7 +9944,7 @@ h3 {
   margin: 0;
   overflow: auto;
   padding: 16px;
-  color: #e5e7eb;
+  color: var(--text-on-dark);
   font-size: var(--font-size-body);
   line-height: 1.55;
   tab-size: 2;
@@ -10629,7 +10630,7 @@ h3 {
   overflow: auto;
   border: 1px solid var(--line);
   background: #111827;
-  color: #f9fafb;
+  color: var(--text-on-dark);
   border-radius: 7px;
   padding: 10px;
 }
