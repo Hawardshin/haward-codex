@@ -1,0 +1,17 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-easy-flow-ux",
+  "outcome": "pass",
+  "summary": "목표 기반 이동 후 대상 화면 handoff 안에 3단계 이하 task flow rail을 추가해 사용자가 현재 목표의 진행 순서를 바로 이해할 수 있게 했다.",
+  "requirements": ["REQ-WM-046"],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "Browser click-through smoke: build-tool -> tools task flow rail",
+    "Playwright mobile viewport smoke: 390px task flow rail overflow 0"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_notes": "로컬 정적 HTTP 서버를 검증 중 실행했고 검증 후 종료했다."
+}

@@ -131,6 +131,7 @@ type TaskIntentItem = {
   badge: string;
   targetSection: SectionId;
   nextStep: string;
+  flowSteps: string[];
   icon: LucideIcon;
   keywords: string[];
   run: () => void;
@@ -3672,6 +3673,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         badge: agentCatalog.length.toLocaleString("ko-KR"),
         targetSection: "agents",
         nextStep: uiLanguage === "ko" ? "역할과 검증 기준을 확인하고 새 에이전트 초안을 만듭니다." : "Review role and validation, then draft the agent.",
+        flowSteps:
+          uiLanguage === "ko"
+            ? ["역할 선택", "도구와 기억 연결", "검증 제안 생성"]
+            : ["Choose role", "Connect tools and memory", "Create validation proposal"],
         icon: Bot,
         keywords: ["agent", "create", "builder", "subagent", "persona", "에이전트", "만들기", "작업자"],
         run: () => openSection("agents", { intentId: "create-agent" })
@@ -3687,6 +3692,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         badge: rootToolItems.length.toLocaleString("ko-KR"),
         targetSection: "tools",
         nextStep: uiLanguage === "ko" ? "빌드 모드에서 Python 소스와 입력 스키마부터 선택합니다." : "Start in build mode by choosing Python source and input schema.",
+        flowSteps:
+          uiLanguage === "ko"
+            ? ["소스 선택", "입력과 venv 확인", "검증 후 배포"]
+            : ["Choose source", "Check input and venv", "Validate then deploy"],
         icon: Wrench,
         keywords: ["tool", "python", "venv", "deploy", "registry", "툴", "파이썬", "가상환경", "배포"],
         run: () => openSection("tools", { intentId: "build-tool" })
@@ -3702,6 +3711,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         badge: runtimeInitDefaults.adapterId,
         targetSection: "desktop",
         nextStep: uiLanguage === "ko" ? "Run Configuration에서 lane을 확인하고 실행을 시작합니다." : "Review the run configuration and start the lane.",
+        flowSteps:
+          uiLanguage === "ko"
+            ? ["lane 확인", "실행 시작", "결과와 결정 처리"]
+            : ["Review lane", "Start run", "Handle output and decisions"],
         icon: PlayCircle,
         keywords: ["run", "runtime", "cli", "terminal", "lane", "실행", "터미널", "작업", "런타임"],
         run: () => openSection("desktop", { intentId: "run-work" })
@@ -3717,6 +3730,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         badge: visibleSourceFiles.length.toLocaleString("ko-KR"),
         targetSection: "source",
         nextStep: uiLanguage === "ko" ? "파일 목록에서 작업할 소스를 선택하고 편집 컨텍스트를 엽니다." : "Choose the source file and open its editing context.",
+        flowSteps:
+          uiLanguage === "ko"
+            ? ["파일 선택", "컨텍스트 확인", "실행에 연결"]
+            : ["Choose file", "Review context", "Connect to run"],
         icon: Code2,
         keywords: ["file", "source", "code", "root", "파일", "소스", "코드", "루트"],
         run: () => openSection("source", { intentId: "open-files" })
@@ -3732,6 +3749,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         badge: (attentionItems.length + collaborationBoard.summary.blockedTasks).toLocaleString("ko-KR"),
         targetSection: "agents",
         nextStep: uiLanguage === "ko" ? "보류 질문을 확인하고 안전한 항목부터 답합니다." : "Review deferred questions and answer the safe items first.",
+        flowSteps:
+          uiLanguage === "ko"
+            ? ["보류 질문 확인", "안전한 답변 선택", "작업 재개"]
+            : ["Review pending questions", "Choose safe answers", "Resume work"],
         icon: Inbox,
         keywords: ["decision", "inbox", "blocked", "question", "결정", "보류", "질문", "막힘"],
         run: () => openSection("agents", { intentId: "resolve-decisions" })
@@ -3747,6 +3768,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         badge: `${coreReadinessCount}/${coreSetupSteps.length}`,
         targetSection: "overview",
         nextStep: uiLanguage === "ko" ? "빠른 설정에서 계정, CLI adapter, 질문 보류 상태를 확인합니다." : "Check accounts, CLI adapter, and question handling in quick setup.",
+        flowSteps:
+          uiLanguage === "ko"
+            ? ["계정 확인", "CLI adapter 확인", "질문 처리 확인"]
+            : ["Check accounts", "Check CLI adapters", "Check question handling"],
         icon: Settings,
         keywords: ["setup", "settings", "account", "provider", "adapter", "설정", "계정", "어댑터"],
         run: () => {
@@ -4354,6 +4379,14 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 <X size={14} aria-hidden="true" />
                 <span>{uiLanguage === "ko" ? "숨기기" : "Dismiss"}</span>
               </button>
+              <ol className="task-flow-rail" aria-label={uiLanguage === "ko" ? "작업 흐름" : "Task flow"}>
+                {activeTaskIntent.flowSteps.map((step, index) => (
+                  <li key={`${activeTaskIntent.id}-${step}`} className={index === 0 ? "current" : ""}>
+                    <span>{index + 1}</span>
+                    <strong>{step}</strong>
+                  </li>
+                ))}
+              </ol>
             </section>
           )}
 

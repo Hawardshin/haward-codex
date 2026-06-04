@@ -90,10 +90,12 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(monitorShell, /const taskIntentItems = useMemo<TaskIntentItem\[\]>/);
   assert.match(monitorShell, /targetSection:\s*"tools"/);
   assert.match(monitorShell, /nextStep:\s*uiLanguage === "ko" \? "빌드 모드에서 Python 소스와 입력 스키마부터 선택합니다\."/);
+  assert.match(monitorShell, /flowSteps:\s*[\s\S]*?\["소스 선택", "입력과 venv 확인", "검증 후 배포"\]/);
   assert.match(monitorShell, /openSection\("tools", \{ intentId: "build-tool" \}\)/);
   assert.match(monitorShell, /id:\s*"build-tool"[\s\S]*?label:\s*uiLanguage === "ko" \? "툴 만들기"/);
   assert.match(monitorShell, /data-task-intent=\{item\.id\}/);
   assert.match(monitorShell, /data-task-handoff=\{activeTaskIntent\.id\}/);
+  assert.match(monitorShell, /className="task-flow-rail"/);
   assert.match(monitorShell, /data-active-section=\{section\}/);
   assert.match(monitorShell, /!isPrimaryWorkSurface && section !== "overview" && \(/);
   assert.match(monitorShell, /taskIntentItems\.map\(\(item\) => \(\{/);
@@ -105,6 +107,8 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(css, /\.task-intent-grid \{[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(300px, 1fr\)\);/);
   assert.match(css, /\.workspace-home-actions\.task-intent-grid button \{[\s\S]*?grid-template-columns: auto auto minmax\(0, 1fr\) auto;/);
   assert.match(css, /\.task-handoff-strip \{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\) auto auto;/);
+  assert.match(css, /\.task-flow-rail \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.task-flow-rail \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(css, /\.desktop-viewport\[data-active-section="overview"\] \.titlebar-context-strip,[\s\S]*?\.desktop-viewport\[data-active-section="overview"\] \.titlebar-actions,[\s\S]*?\.desktop-viewport\[data-active-section="overview"\] > \.desktop-toolbar \{[\s\S]*?display: none;/);
   assert.match(css, /\.desktop-viewport\[data-active-section="overview"\] \.core-home-status-row \{[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /@media \(max-width: 420px\) \{[\s\S]*?\.activity-rail nav \{[\s\S]*?display: flex;[\s\S]*?overflow-x: auto;/);

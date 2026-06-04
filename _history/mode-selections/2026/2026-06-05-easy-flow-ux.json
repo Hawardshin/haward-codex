@@ -1,0 +1,9 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-easy-flow-ux",
+  "selected_work_mode": "standard",
+  "reason": "사용자-facing 목표 이동 후 작업 흐름과 검증 artifact가 바뀌는 UX 구현 작업이다.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "installation_occurred": false
+}
