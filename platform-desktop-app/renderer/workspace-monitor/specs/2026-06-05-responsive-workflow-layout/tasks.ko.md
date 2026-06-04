@@ -15,3 +15,6 @@
 - [x] SnapshotLoader public JSON fetch + MonitorShell lazy import 적용
 - [x] 정적 export Playwright 5개 섹션 x 5개 viewport overflow/target audit
 - [x] customer export 후 `platform-desktop-app check`
+- [x] typography scale token 추가 및 임의 `font-size` 값 제거
+- [x] `<small>` 기본 축소 방지
+- [x] 정적 export Playwright 5개 섹션 x 5개 viewport typography audit

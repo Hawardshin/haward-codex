@@ -11,6 +11,8 @@
 - 960px 이하에서 복합 grid/workbench/titlebar/toolbar가 1열로 reflow되게 했다.
 - 420px 이하 activity rail은 두 줄 구조로 바꿔 주요 섹션 버튼이 가로 스크롤에 숨지 않게 했다.
 - 반복 버튼, Explorer, source toolbar, titlebar/search/select 입력을 44px 이상 target 기준으로 맞췄다.
+- `globals.css`에 typography scale token을 추가하고, 모든 직접 숫자 기반 `font-size` 선언을 token 참조로 바꿨다.
+- 앱 내부 `<small>` 기본값을 caption token으로 고정해 브라우저 기본 축소로 11px 미만 텍스트가 생기지 않게 했다.
 
 ## 산출물
 
@@ -18,9 +20,11 @@
 - 스펙: `platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/`
 - 구현: `app/globals.css`, `components/MonitorShell.tsx`, `components/SnapshotLoader.tsx`
 - 검증: `_history/evaluations/2026/2026-06-05-non-fullscreen-layout-evaluation-input.json`
+- Typography 검증: `_history/evaluations/2026/2026-06-05-typography-scale-evaluation-input.json`
 
 ## 검증 요약
 
 - `workspace-monitor check/test/build/build:customer/perf:budget`: 통과
 - `platform-desktop-app test/check`: 통과
 - 정적 export Playwright audit: 5개 섹션 x 5개 viewport, failures 없음
+- 정적 export Playwright typography audit: 5개 섹션 x 5개 viewport, failures 없음

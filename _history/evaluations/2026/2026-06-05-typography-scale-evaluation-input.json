@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-06-05",
+  "workId": "typography-scale",
+  "workMode": "standard",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "userRequest": "텍스트 크기가 너무 들쭉날쭉하다.",
+  "requirements": ["REQ-WM-035", "REQ-WM-034", "REQ-WM-031"],
+  "implementationFiles": [
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css"
+  ],
+  "requirementsTargets": [
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+  ],
+  "specTargets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/"
+  ],
+  "userRequestSummaryTargets": [
+    "_history/user-requests/2026/2026-06-05-responsive-workflow-layout.ko.md"
+  ],
+  "webSearchRecordTargets": [
+    "_history/web-searches/2026/2026-06-05-typography-scale.ko.md"
+  ],
+  "requestTraceTargets": [
+    "_history/request-traces/2026/2026-06-05-non-fullscreen-layout.ko.md"
+  ],
+  "workSummaryTargets": [
+    "_history/work-summaries/2026/2026-06-05.ko.md",
+    "_history/2026/2026-06-05.md"
+  ],
+  "modeSelectionRecordTargets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/plan.ko.md"
+  ],
+  "omissionCheckTargets": [
+    "_history/evaluations/2026/2026-06-05-typography-scale-omission.json"
+  ],
+  "resourceRiskOccurred": true,
+  "resourceCheckTargets": [
+    "_history/evaluations/2026/2026-06-05-typography-scale-resource.json"
+  ],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "CSS audit: no direct numeric font-size declarations in globals.css",
+    "in-app Browser typography smoke: 390x844 rendered font sizes in scale, overflowX=0",
+    "Playwright static export typography audit: 5 sections x 5 viewports, failures=[]"
+  ],
+  "installationOccurred": false,
+  "snapshotGeneratedFilesExcludedFromCommit": true
+}

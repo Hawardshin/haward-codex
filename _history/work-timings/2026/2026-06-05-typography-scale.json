@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-06-05",
+  "workId": "typography-scale",
+  "status": "partial",
+  "timings": [
+    {
+      "phase": "web_first_intake",
+      "duration": "not_measured",
+      "notes": "Checked W3C and MDN typography, resize text, and responsive design references before local edits."
+    },
+    {
+      "phase": "implementation",
+      "duration": "not_measured",
+      "notes": "Added typography tokens, tokenized global font-size declarations, and fixed app-level small text default."
+    },
+    {
+      "phase": "verification",
+      "duration": "not_measured",
+      "notes": "Ran check/test/build:customer/perf/platform check plus in-app Browser and Playwright typography audits."
+    }
+  ],
+  "bottleneckCandidates": [
+    "Manual viewport typography audit script is useful enough to consider promoting into a reusable workspace-monitor check."
+  ]
+}

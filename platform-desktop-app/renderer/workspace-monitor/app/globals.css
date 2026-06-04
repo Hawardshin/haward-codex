@@ -29,6 +29,17 @@
   --control-gap: 7px;
   --control-padding-x: 12px;
   --control-active-shift: 1px;
+  --font-size-micro: 0.6875rem;
+  --font-size-overline: 0.6875rem;
+  --font-size-caption: 0.75rem;
+  --font-size-body: 0.8125rem;
+  --font-size-body-strong: 0.875rem;
+  --font-size-card-title: 0.9375rem;
+  --font-size-section-title: 1rem;
+  --font-size-panel-title: 1.125rem;
+  --font-size-title-lg: 1.25rem;
+  --font-size-screen-title: 1.375rem;
+  --font-size-display: 1.5rem;
   --text-natural-wrap: break-word;
   --text-long-token-wrap: anywhere;
   font-family:
@@ -180,7 +191,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-size: 13px;
+  font-size: var(--font-size-body);
   line-height: 1.45;
 }
 
@@ -188,6 +199,10 @@ button,
 input,
 select {
   font: inherit;
+}
+
+.desktop-app-root small {
+  font-size: var(--font-size-caption);
 }
 
 button {
@@ -390,7 +405,7 @@ main {
   height: auto;
   clip: auto;
   color: currentColor;
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   white-space: normal;
 }
@@ -437,7 +452,7 @@ main {
 
 .workspace-switcher h1 {
   margin-bottom: 0;
-  font-size: 22px;
+  font-size: var(--font-size-screen-title);
 }
 
 .workspace-switcher > span,
@@ -453,7 +468,7 @@ main {
 .desktop-decision-list small,
 .capability-dock-list span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .sidebar-command-trigger {
@@ -518,7 +533,7 @@ main {
 .sidebar-context-panel p {
   margin: 0;
   color: var(--text);
-  font-size: 13px;
+  font-size: var(--font-size-body);
   line-height: 1.45;
   overflow-wrap: break-word;
 }
@@ -533,7 +548,7 @@ main {
 }
 
 .sidebar-context-meta strong {
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .sidebar-context-meta em {
@@ -545,7 +560,7 @@ main {
   border-radius: 999px;
   background: var(--surface-muted);
   color: var(--slate);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-style: normal;
   font-weight: 900;
   padding: 0 8px;
@@ -630,7 +645,7 @@ main {
 .titlebar-section strong {
   display: block;
   margin-top: 2px;
-  font-size: 17px;
+  font-size: var(--font-size-section-title);
 }
 
 .titlebar-context-strip {
@@ -661,7 +676,7 @@ main {
 
 .titlebar-context-strip small {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .titlebar-context-strip button {
@@ -820,7 +835,7 @@ main {
 
 .settings-tab-list small {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
 }
 
 .settings-tab-panel {
@@ -883,12 +898,12 @@ main {
 }
 
 .settings-subsection-rail strong {
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .settings-subsection-rail small {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
 }
 
 .settings-dialog header {
@@ -927,7 +942,7 @@ main {
 .settings-pane-heading strong {
   display: block;
   margin-top: 2px;
-  font-size: 14px;
+  font-size: var(--font-size-body-strong);
 }
 
 .settings-option-list,
@@ -1005,7 +1020,7 @@ main {
 .provider-account-row header span,
 .provider-account-row dt {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -1059,7 +1074,7 @@ main {
   color: var(--slate);
   border-radius: 999px;
   padding: 4px 8px;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-style: normal;
   font-weight: 900;
 }
@@ -1097,7 +1112,7 @@ main {
 
 .provider-account-fields span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 850;
 }
 
@@ -1125,7 +1140,7 @@ main {
 
 .provider-local-runtime-note span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -1220,7 +1235,7 @@ main {
 
 .settings-data-list dt {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .settings-data-list dd {
@@ -1228,7 +1243,7 @@ main {
   margin: 0;
   overflow-wrap: break-word;
   color: var(--text);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .settings-controlled-summary {
@@ -1261,7 +1276,7 @@ main {
 
 .settings-controlled-summary span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -1271,7 +1286,7 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .session-init-summary {
@@ -1329,7 +1344,7 @@ main {
 .product-feature-position h2 {
   max-width: 760px;
   margin: 0;
-  font-size: 23px;
+  font-size: var(--font-size-screen-title);
   line-height: 1.2;
 }
 
@@ -1360,7 +1375,7 @@ main {
   color: #ffffff;
   border-radius: 7px;
   padding: 8px 11px;
-  font-size: 13px;
+  font-size: var(--font-size-body);
   font-weight: 800;
 }
 
@@ -1372,14 +1387,14 @@ main {
 
 .product-feature-summary article span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 900;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .product-feature-summary article strong {
-  font-size: 21px;
+  font-size: var(--font-size-title-lg);
   line-height: 1.15;
 }
 
@@ -1429,14 +1444,14 @@ main {
 .product-feature-card-top small,
 .feature-card-signal {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 900;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .product-feature-card strong {
-  font-size: 16px;
+  font-size: var(--font-size-section-title);
   line-height: 1.25;
 }
 
@@ -1451,7 +1466,7 @@ main {
   border-radius: 999px;
   padding: 4px 7px;
   color: var(--slate);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-style: normal;
   font-weight: 800;
   overflow: hidden;
@@ -1484,7 +1499,7 @@ main {
   max-width: 860px;
   margin: 0;
   color: var(--text);
-  font-size: 18px;
+  font-size: var(--font-size-panel-title);
   line-height: 1.28;
 }
 
@@ -1513,7 +1528,7 @@ main {
   border-radius: 999px;
   padding: 5px 9px;
   color: var(--slate);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 900;
   white-space: nowrap;
 }
@@ -1565,14 +1580,14 @@ main {
 
 .reference-advantage-card-top small {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 900;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .reference-advantage-card strong {
-  font-size: 15px;
+  font-size: var(--font-size-card-title);
   line-height: 1.3;
   overflow-wrap: break-word;
 }
@@ -1580,7 +1595,7 @@ main {
 .reference-advantage-card p {
   margin: 0;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.45;
   overflow-wrap: break-word;
 }
@@ -1597,7 +1612,7 @@ main {
   border-radius: 999px;
   padding: 4px 7px;
   color: var(--slate);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-style: normal;
   font-weight: 800;
   overflow: hidden;
@@ -1618,7 +1633,7 @@ main {
 
 .product-operator-strip span {
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -1640,7 +1655,7 @@ main {
   color: var(--text);
   border-radius: 7px;
   padding: 7px 10px;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 900;
   white-space: nowrap;
 }
@@ -1658,14 +1673,14 @@ main {
 
 .product-loop-strip span {
   color: var(--green);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 900;
   text-transform: uppercase;
 }
 
 .product-loop-strip strong {
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 900;
   overflow-wrap: break-word;
 }
@@ -1691,7 +1706,7 @@ main {
 }
 
 .workspace-home-panel h2 {
-  font-size: 24px;
+  font-size: var(--font-size-display);
 }
 
 .workspace-home-panel p {
@@ -1769,7 +1784,7 @@ main {
 .settings-core-setup-grid span {
   min-width: 0;
   overflow-wrap: break-word;
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 850;
   text-transform: uppercase;
 }
@@ -1777,14 +1792,14 @@ main {
 .core-home-status-row strong {
   min-width: 0;
   overflow-wrap: break-word;
-  font-size: 20px;
+  font-size: var(--font-size-title-lg);
   line-height: 1.1;
 }
 
 .core-home-status-row small {
   min-width: 0;
   overflow-wrap: break-word;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .core-setup-panel {
@@ -1836,7 +1851,7 @@ main {
   border-radius: 999px;
   padding: 0;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
 }
 
@@ -1858,7 +1873,7 @@ main {
 
 .home-disclosure-panel summary small {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .home-disclosure-body {
@@ -1940,7 +1955,7 @@ main {
 .home-depth-menu button small,
 .home-depth-menu a small {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.35;
 }
 
@@ -1997,7 +2012,7 @@ main {
 
 .home-drilldown-header h2 {
   margin: 2px 0 0;
-  font-size: 18px;
+  font-size: var(--font-size-panel-title);
 }
 
 .home-depth-panel {
@@ -2048,7 +2063,7 @@ main {
 .core-setup-list p,
 .settings-core-setup-grid p {
   margin: 2px 0 0;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.42;
   overflow-wrap: break-word;
 }
@@ -2063,7 +2078,7 @@ main {
   color: var(--text);
   border-radius: 7px;
   padding: 7px 9px;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 850;
   white-space: nowrap;
 }
@@ -2099,14 +2114,14 @@ main {
 .root-tool-grid strong {
   min-width: 0;
   overflow-wrap: break-word;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .root-tool-grid small {
   grid-column: 2 / -1;
   min-width: 0;
   overflow-wrap: break-word;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.35;
 }
 
@@ -2181,7 +2196,7 @@ main {
   border-radius: 999px;
   background: var(--surface-muted);
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
 }
 
@@ -2286,7 +2301,7 @@ main {
 .eyebrow {
   margin: 0 0 5px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 600;
   text-transform: none;
 }
@@ -2300,7 +2315,7 @@ p {
 
 h1 {
   margin-bottom: 8px;
-  font-size: 26px;
+  font-size: var(--font-size-display);
   font-weight: 650;
   line-height: 1.18;
   letter-spacing: 0;
@@ -2308,7 +2323,7 @@ h1 {
 
 h2 {
   margin-bottom: 8px;
-  font-size: 16px;
+  font-size: var(--font-size-section-title);
   font-weight: 650;
   line-height: 1.3;
   letter-spacing: 0;
@@ -2316,7 +2331,7 @@ h2 {
 
 h3 {
   margin-bottom: 4px;
-  font-size: 14px;
+  font-size: var(--font-size-body-strong);
   font-weight: 650;
   line-height: 1.35;
   letter-spacing: 0;
@@ -2344,12 +2359,12 @@ h3 {
 
 .snapshot-meta span {
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .snapshot-meta strong {
   margin-top: 4px;
-  font-size: 15px;
+  font-size: var(--font-size-card-title);
 }
 
 .view-mode-bar {
@@ -2382,14 +2397,14 @@ h3 {
 
 .view-mode-current span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 700;
   text-transform: uppercase;
 }
 
 .view-mode-current strong {
   margin-top: 2px;
-  font-size: 14px;
+  font-size: var(--font-size-body-strong);
 }
 
 .segmented-control {
@@ -2406,7 +2421,7 @@ h3 {
   color: var(--text);
   border-radius: 7px;
   padding: 7px 10px;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .segmented-control button.active {
@@ -2480,7 +2495,7 @@ h3 {
 
 .app-chip-group > span {
   flex: 0 0 auto;
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -2503,7 +2518,7 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .app-chip-group button.active {
@@ -2547,7 +2562,7 @@ h3 {
   outline: 0;
   background: transparent;
   color: var(--text);
-  font-size: 15px;
+  font-size: var(--font-size-card-title);
 }
 
 .command-palette-search button {
@@ -2557,7 +2572,7 @@ h3 {
   color: var(--slate);
   border-radius: 7px;
   padding: 5px 9px;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
 }
 
@@ -2566,7 +2581,7 @@ h3 {
   justify-content: space-between;
   gap: 10px;
   padding: 8px 3px;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .command-palette-results {
@@ -2593,7 +2608,7 @@ h3 {
 }
 
 .command-palette-results small {
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -2605,7 +2620,7 @@ h3 {
 }
 
 .command-palette-results em {
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-style: normal;
   line-height: 1.35;
 }
@@ -2617,7 +2632,7 @@ h3 {
   color: var(--slate);
   border-radius: 999px;
   padding: 3px 7px;
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   text-align: center;
   white-space: nowrap;
 }
@@ -2647,7 +2662,7 @@ h3 {
 
 .main-feature-detail h3 {
   margin: 4px 0 6px;
-  font-size: 22px;
+  font-size: var(--font-size-screen-title);
   line-height: 1.18;
   word-break: keep-all;
 }
@@ -2688,14 +2703,14 @@ h3 {
   background: var(--surface-muted);
   border-radius: 999px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 900;
 }
 
 .main-feature-steps strong {
   min-width: 0;
   overflow-wrap: break-word;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .main-feature-actions.quick-start-flow {
@@ -2748,7 +2763,7 @@ h3 {
 }
 
 .section-tab-group-heading small {
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.35;
 }
 
@@ -2797,7 +2812,7 @@ h3 {
   color: var(--muted);
   border-radius: 999px;
   padding: 2px 6px;
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   line-height: 1.35;
   text-align: center;
@@ -2841,14 +2856,14 @@ h3 {
 
 .operator-strip-state span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
 
 .operator-strip-state strong {
   margin-top: 2px;
-  font-size: 14px;
+  font-size: var(--font-size-body-strong);
   overflow-wrap: break-word;
 }
 
@@ -2882,7 +2897,7 @@ h3 {
   color: var(--text);
   border-radius: 7px;
   padding: 7px 10px;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .operator-strip-actions button span {
@@ -2956,12 +2971,12 @@ h3 {
 
 .operator-section-card small {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 900;
 }
 
 .operator-section-card strong {
-  font-size: 15px;
+  font-size: var(--font-size-card-title);
 }
 
 .operator-section-card p {
@@ -2973,7 +2988,7 @@ h3 {
 .operator-section-card em {
   margin-top: auto;
   color: var(--blue);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-style: normal;
   font-weight: 900;
 }
@@ -3076,7 +3091,7 @@ h3 {
 .command-card h2 {
   max-width: 760px;
   margin: 14px 0 8px;
-  font-size: 28px;
+  font-size: var(--font-size-display);
   line-height: 1.2;
 }
 
@@ -3096,7 +3111,7 @@ h3 {
   border-radius: 999px;
   padding: 6px 10px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -3154,7 +3169,7 @@ h3 {
 .evidence-trail span,
 .attention-list span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -3188,7 +3203,7 @@ h3 {
 
 .spine-step strong {
   overflow-wrap: break-word;
-  font-size: 15px;
+  font-size: var(--font-size-card-title);
 }
 
 .spine-step small {
@@ -3263,7 +3278,7 @@ h3 {
 .core-function-grid span,
 .core-function-grid em {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-style: normal;
   font-weight: 800;
   text-transform: uppercase;
@@ -3272,7 +3287,7 @@ h3 {
 .core-function-grid strong {
   min-width: 0;
   overflow-wrap: break-word;
-  font-size: 16px;
+  font-size: var(--font-size-section-title);
 }
 
 .core-function-grid small {
@@ -3347,7 +3362,7 @@ h3 {
 .transfer-pattern-grid header span,
 .transfer-pattern-meta span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -3356,7 +3371,7 @@ h3 {
   display: block;
   margin: 6px 0;
   overflow-wrap: break-word;
-  font-size: 19px;
+  font-size: var(--font-size-title-lg);
 }
 
 .claude-transfer-summary p,
@@ -3381,7 +3396,7 @@ h3 {
 }
 
 .claude-transfer-summary dd {
-  font-size: 18px;
+  font-size: var(--font-size-panel-title);
   font-weight: 800;
 }
 
@@ -3405,7 +3420,7 @@ h3 {
 
 .transfer-pattern-grid header strong {
   overflow-wrap: break-word;
-  font-size: 15px;
+  font-size: var(--font-size-card-title);
   line-height: 1.35;
 }
 
@@ -3452,7 +3467,7 @@ h3 {
 .candidate-meta-row span,
 .risk-pill {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -3461,7 +3476,7 @@ h3 {
   display: block;
   margin: 5px 0;
   color: var(--text);
-  font-size: 24px;
+  font-size: var(--font-size-display);
   line-height: 1.1;
 }
 
@@ -3520,7 +3535,7 @@ h3 {
   min-width: 0;
   margin: 0;
   overflow-wrap: break-word;
-  font-size: 15px;
+  font-size: var(--font-size-card-title);
   line-height: 1.35;
 }
 
@@ -3555,7 +3570,7 @@ h3 {
 .philosophy-command-strip {
   margin-top: 12px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .philosophy-command-strip svg {
@@ -3586,7 +3601,7 @@ h3 {
 .intent-roadmap-column header span,
 .intent-source-limits span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -3595,7 +3610,7 @@ h3 {
   display: block;
   margin: 5px 0;
   color: var(--text);
-  font-size: 24px;
+  font-size: var(--font-size-display);
   line-height: 1.1;
 }
 
@@ -3647,7 +3662,7 @@ h3 {
   min-width: 0;
   margin: 0;
   overflow-wrap: break-word;
-  font-size: 15px;
+  font-size: var(--font-size-card-title);
   line-height: 1.35;
 }
 
@@ -3689,7 +3704,7 @@ h3 {
   border-radius: 999px;
   background: var(--surface-muted);
   color: var(--text);
-  font-size: 14px;
+  font-size: var(--font-size-body-strong);
 }
 
 .intent-roadmap-column > div {
@@ -3754,7 +3769,7 @@ h3 {
   border-radius: 999px;
   padding: 5px 8px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
 }
 
@@ -3799,7 +3814,7 @@ h3 {
 .mode-group-list small {
   color: inherit;
   opacity: 0.74;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
 }
 
@@ -3822,14 +3837,14 @@ h3 {
   align-items: center;
   gap: 7px;
   color: var(--blue);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
 
 .mode-location-card h3 {
   margin: 0;
-  font-size: 20px;
+  font-size: var(--font-size-title-lg);
 }
 
 .mode-location-card p,
@@ -3849,7 +3864,7 @@ h3 {
 
 .mode-location-card dt {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -3880,7 +3895,7 @@ h3 {
 
 .mode-option-header span {
   color: var(--green);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 850;
   text-transform: uppercase;
   overflow-wrap: break-word;
@@ -3903,7 +3918,7 @@ h3 {
   color: var(--text);
   border-radius: 7px;
   padding: 7px 10px;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .attention-layout {
@@ -4001,13 +4016,13 @@ h3 {
 .result-count,
 .requirements-table small {
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .metric strong {
   display: block;
   margin-top: 4px;
-  font-size: 28px;
+  font-size: var(--font-size-display);
   line-height: 1;
 }
 
@@ -4029,13 +4044,13 @@ h3 {
 
 .history-latest span {
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .history-latest strong {
   display: block;
   margin: 10px 0 6px;
-  font-size: 18px;
+  font-size: var(--font-size-panel-title);
 }
 
 .history-latest p {
@@ -4125,7 +4140,7 @@ h3 {
 
 .desktop-hero h2 {
   margin-bottom: 8px;
-  font-size: 24px;
+  font-size: var(--font-size-display);
 }
 
 .desktop-hero p {
@@ -4157,7 +4172,7 @@ h3 {
 .decision-resume-strip small,
 .decision-existing-answer span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -4165,7 +4180,7 @@ h3 {
 .desktop-runtime-state strong {
   display: block;
   margin: 6px 0 2px;
-  font-size: 24px;
+  font-size: var(--font-size-display);
 }
 
 .state-available {
@@ -4207,7 +4222,7 @@ h3 {
   align-items: center;
   min-width: 0;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 850;
   text-transform: uppercase;
 }
@@ -4216,7 +4231,7 @@ h3 {
 .ide-window-header strong {
   min-width: 0;
   color: var(--text);
-  font-size: 14px;
+  font-size: var(--font-size-body-strong);
   overflow-wrap: break-word;
 }
 
@@ -4293,7 +4308,7 @@ h3 {
   color: var(--muted);
   border-radius: 6px;
   padding: 8px 4px;
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
 }
 
@@ -4388,7 +4403,7 @@ h3 {
 }
 
 .ide-config-body header span {
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 850;
   text-transform: uppercase;
 }
@@ -4417,7 +4432,7 @@ h3 {
   color: var(--muted);
   border-radius: 999px;
   padding: 3px 7px;
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-style: normal;
   font-weight: 850;
 }
@@ -4514,7 +4529,7 @@ h3 {
   gap: 0;
   border-top: 1px solid var(--line);
   background: var(--surface-raised);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
 }
 
@@ -4668,7 +4683,7 @@ h3 {
 .ops-event span,
 .ops-event small {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -4861,7 +4876,7 @@ h3 {
 .native-git-diff-pane header span,
 .native-git-file-state-strip span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -4874,7 +4889,7 @@ h3 {
   border-radius: 7px;
   padding: 8px 9px;
   font: inherit;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .native-git-actions button {
@@ -4898,7 +4913,7 @@ h3 {
   border-radius: 7px;
   padding: 9px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.45;
 }
 
@@ -4929,7 +4944,7 @@ h3 {
 
 .native-git-file-list h3 {
   margin: 4px 0 0;
-  font-size: 16px;
+  font-size: var(--font-size-section-title);
 }
 
 .native-git-file-list header strong {
@@ -4938,7 +4953,7 @@ h3 {
   background: var(--surface-muted);
   padding: 4px 8px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .native-git-file-list p {
@@ -4995,7 +5010,7 @@ h3 {
   border-radius: 7px;
   background: var(--surface);
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
 }
 
@@ -5025,7 +5040,7 @@ h3 {
   min-width: 0;
   overflow-wrap: break-word;
   color: var(--text);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
 }
 
@@ -5101,7 +5116,7 @@ h3 {
   background: var(--surface-muted);
   border-radius: 999px;
   color: var(--text);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   text-transform: none;
 }
 
@@ -5118,7 +5133,7 @@ h3 {
   display: block;
   margin-top: 4px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .native-git-history-list,
@@ -5157,7 +5172,7 @@ h3 {
 .native-git-history-list span,
 .native-git-stash-list span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -5173,7 +5188,7 @@ h3 {
 .native-git-history-list small,
 .native-git-stash-list small {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .native-git-summary-notes {
@@ -5209,7 +5224,7 @@ h3 {
 .native-git-diff-pane h3 {
   margin: 4px 0 0;
   overflow-wrap: break-word;
-  font-size: 16px;
+  font-size: var(--font-size-section-title);
 }
 
 .native-git-diff-pane header small {
@@ -5230,7 +5245,7 @@ h3 {
   border-radius: 999px;
   background: var(--surface);
   padding: 4px 8px;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
 }
 
@@ -5284,7 +5299,7 @@ h3 {
   min-width: max-content;
   padding: 2px 12px;
   color: #d7e0ea;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.45;
   white-space: pre;
 }
@@ -5317,7 +5332,7 @@ h3 {
 .native-git-diff-empty span {
   max-width: 420px;
   color: #9cadbd;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .native-git-history-detail {
@@ -5352,7 +5367,7 @@ h3 {
 
 .native-git-history-detail span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   white-space: nowrap;
 }
@@ -5387,7 +5402,7 @@ h3 {
   background: #111827;
   color: #f9fafb;
   padding: 10px;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .inline-toggle {
@@ -5425,7 +5440,7 @@ h3 {
 .task-run-card header span,
 .task-run-meta span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -5521,7 +5536,7 @@ h3 {
   border-radius: 999px;
   padding: 3px 8px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .pipe-lane-grid {
@@ -5610,7 +5625,7 @@ h3 {
   border-radius: 999px;
   padding: 3px 8px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .task-run-meta,
@@ -5629,7 +5644,7 @@ h3 {
   border-radius: 7px;
   padding: 6px;
   color: var(--text);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.35;
 }
 
@@ -5654,7 +5669,7 @@ h3 {
 .task-run-detail-meta span,
 .task-run-preview-tabs span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -5665,7 +5680,7 @@ h3 {
   border-radius: 999px;
   padding: 3px 8px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .task-run-detail-meta {
@@ -5761,7 +5776,7 @@ h3 {
 .accumulated-data-map header span,
 .accumulated-store-stats span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -5769,7 +5784,7 @@ h3 {
 .accumulated-store-card h3,
 .accumulated-data-map h3 {
   margin: 3px 0 0;
-  font-size: 15px;
+  font-size: var(--font-size-card-title);
 }
 
 .accumulated-store-card strong {
@@ -5777,7 +5792,7 @@ h3 {
   background: var(--surface-muted);
   border-radius: 999px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   padding: 3px 8px;
   white-space: nowrap;
 }
@@ -5819,7 +5834,7 @@ h3 {
   background: var(--surface);
   border-radius: 7px;
   color: var(--text);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.35;
   padding: 6px;
 }
@@ -5836,7 +5851,7 @@ h3 {
 .path-disclosure summary {
   cursor: pointer;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 850;
 }
 
@@ -5914,7 +5929,7 @@ h3 {
 .runtime-audit-card header span,
 .payload-finding-list span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -5922,7 +5937,7 @@ h3 {
 .runtime-root-grid h3,
 .runtime-audit-card h3 {
   margin: 3px 0 0;
-  font-size: 15px;
+  font-size: var(--font-size-card-title);
 }
 
 .runtime-root-grid strong,
@@ -5932,7 +5947,7 @@ h3 {
   background: var(--surface-muted);
   border-radius: 999px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   padding: 3px 8px;
   white-space: nowrap;
 }
@@ -5962,7 +5977,7 @@ h3 {
   background: var(--surface);
   border-radius: 7px;
   color: var(--text);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.35;
   padding: 6px;
 }
@@ -5996,7 +6011,7 @@ h3 {
   background: var(--surface-muted);
   border-radius: 999px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   padding: 4px 8px;
   white-space: nowrap;
@@ -6006,7 +6021,7 @@ h3 {
 .service-group-card header span,
 .service-next-actions header span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -6014,7 +6029,7 @@ h3 {
 .service-readiness-hero strong {
   display: block;
   margin-top: 3px;
-  font-size: 18px;
+  font-size: var(--font-size-panel-title);
   overflow-wrap: break-word;
 }
 
@@ -6038,14 +6053,14 @@ h3 {
 
 .service-score-ring span {
   color: inherit;
-  font-size: 28px;
+  font-size: var(--font-size-display);
   font-weight: 800;
   line-height: 1;
 }
 
 .service-score-ring small {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -6113,7 +6128,7 @@ h3 {
 .service-group-card h3,
 .service-next-actions h3 {
   margin: 3px 0 0;
-  font-size: 15px;
+  font-size: var(--font-size-card-title);
 }
 
 .service-group-card header strong,
@@ -6123,7 +6138,7 @@ h3 {
   background: var(--surface-muted);
   border-radius: 999px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   padding: 3px 8px;
   white-space: nowrap;
 }
@@ -6166,7 +6181,7 @@ h3 {
   background: var(--surface);
   border-radius: 7px;
   color: var(--text);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.35;
   padding: 6px;
   overflow-wrap: break-word;
@@ -6180,7 +6195,7 @@ h3 {
 
 .session-record-link span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -6270,7 +6285,7 @@ h3 {
   border-radius: 999px;
   padding: 3px 8px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .adapter-card p,
@@ -6355,7 +6370,7 @@ h3 {
   border-radius: 999px;
   padding: 4px 7px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-align: center;
   text-transform: uppercase;
@@ -6397,7 +6412,7 @@ h3 {
 .search-agent-run-form span,
 .search-agent-contract span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -6411,7 +6426,7 @@ h3 {
   border-radius: 7px;
   padding: 9px 10px;
   font: inherit;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.45;
   resize: vertical;
 }
@@ -6515,7 +6530,7 @@ h3 {
   border-radius: 999px;
   padding: 5px 8px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
 }
 
@@ -6574,14 +6589,14 @@ h3 {
 
 .agent-chat-message span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
 }
 
 .agent-chat-message p {
   margin: 0;
   color: var(--text);
-  font-size: 13px;
+  font-size: var(--font-size-body);
   line-height: 1.55;
 }
 
@@ -6610,7 +6625,7 @@ h3 {
 
 .agent-provider-run-controls span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -6626,7 +6641,7 @@ h3 {
   border-radius: 7px;
   padding: 7px 9px;
   font: inherit;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .agent-model-picker {
@@ -6657,7 +6672,7 @@ h3 {
 .agent-model-status {
   min-width: 0;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 750;
   line-height: 1.35;
   overflow-wrap: break-word;
@@ -6694,12 +6709,12 @@ h3 {
 
 .agent-provider-run-state strong {
   color: var(--text);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .agent-provider-run-state span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   text-transform: none;
 }
 
@@ -6715,7 +6730,7 @@ h3 {
 .agent-chat-details summary,
 .agent-chat-contract-card span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -6732,7 +6747,7 @@ h3 {
   border-radius: 7px;
   padding: 9px 10px;
   font: inherit;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.45;
   resize: vertical;
 }
@@ -6826,7 +6841,7 @@ h3 {
   color: var(--text);
   border-radius: var(--control-radius);
   padding: 7px 10px;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-decoration: none;
   white-space: normal;
@@ -6857,7 +6872,7 @@ h3 {
   color: var(--text);
   border-radius: 8px;
   padding: 8px 10px;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   overflow-wrap: var(--text-natural-wrap);
 }
@@ -6893,12 +6908,12 @@ h3 {
 }
 
 .agentcore-blueprint-list strong {
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .agentcore-blueprint-list span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.45;
 }
 
@@ -6934,14 +6949,14 @@ h3 {
 .agentcore-blueprint-matrix span,
 .agentcore-blueprint-contract span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-transform: uppercase;
 }
 
 .agentcore-blueprint-detail header h3 {
   margin: 4px 0 0;
-  font-size: 18px;
+  font-size: var(--font-size-panel-title);
 }
 
 .agentcore-blueprint-detail header strong {
@@ -6950,13 +6965,13 @@ h3 {
   border-radius: 999px;
   padding: 5px 8px;
   color: var(--text);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
 }
 
 .agentcore-blueprint-detail p {
   margin: 0;
   color: var(--text);
-  font-size: 13px;
+  font-size: var(--font-size-body);
   line-height: 1.55;
 }
 
@@ -6990,7 +7005,7 @@ h3 {
 .agentcore-blueprint-matrix li {
   min-width: 0;
   color: var(--text);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.38;
   overflow-wrap: break-word;
 }
@@ -7042,12 +7057,12 @@ h3 {
 
 .agentcore-builder-status strong {
   color: var(--text);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .agentcore-builder-status span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.45;
 }
 
@@ -7072,7 +7087,7 @@ h3 {
 .agentcore-blueprint-contract small {
   min-width: 0;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.45;
   overflow-wrap: break-word;
 }
@@ -7123,7 +7138,7 @@ h3 {
 .learning-evidence-list span,
 .learning-decision-contract dt {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -7139,7 +7154,7 @@ h3 {
   border-radius: 7px;
   padding: 8px 9px;
   font: inherit;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .agent-factory-form textarea,
@@ -7172,7 +7187,7 @@ h3 {
 .learning-decision-editor h3 {
   margin: 4px 0 0;
   overflow-wrap: break-word;
-  font-size: 16px;
+  font-size: var(--font-size-section-title);
 }
 
 .agent-proposal-preview header strong,
@@ -7182,7 +7197,7 @@ h3 {
   border-radius: 999px;
   padding: 4px 8px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .agent-proposal-meta,
@@ -7215,7 +7230,7 @@ h3 {
   border-radius: 8px;
   color: #d7e0ea;
   padding: 12px;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.5;
   scrollbar-gutter: stable;
 }
@@ -7240,14 +7255,14 @@ h3 {
 
 .learning-candidate-list span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 700;
   text-transform: uppercase;
 }
 
 .learning-candidate-list strong {
   overflow-wrap: break-word;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .learning-candidate-list small,
@@ -7349,7 +7364,7 @@ h3 {
   border-radius: 999px;
   background: #2f67b1;
   color: #ffffff;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .terminal-drawer-backdrop {
@@ -7472,7 +7487,7 @@ h3 {
 .source-editor-controls label span,
 .source-customization-bar label span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -7534,7 +7549,7 @@ h3 {
 .session-mode-note {
   margin: -6px 0 14px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--font-size-body);
   line-height: 1.5;
 }
 
@@ -7564,7 +7579,7 @@ h3 {
 .source-diff-review header small,
 .source-diff-preview span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -7572,7 +7587,7 @@ h3 {
 .run-board-strip strong {
   display: block;
   margin-top: 3px;
-  font-size: 18px;
+  font-size: var(--font-size-panel-title);
 }
 
 .process-graph {
@@ -7644,7 +7659,7 @@ h3 {
 
 .terminal-view-switcher small {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
 }
 
@@ -7749,7 +7764,7 @@ h3 {
 .session-terminal header span,
 .source-editor-meta span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -7761,7 +7776,7 @@ h3 {
   border-radius: 999px;
   padding: 3px 8px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .session-card p {
@@ -7783,7 +7798,7 @@ h3 {
   border-radius: 999px;
   padding: 3px 6px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-align: center;
   text-transform: uppercase;
@@ -7887,7 +7902,7 @@ h3 {
 .decision-summary-strip strong {
   display: block;
   margin-top: 4px;
-  font-size: 22px;
+  font-size: var(--font-size-screen-title);
 }
 
 .decision-inbox-layout {
@@ -7921,7 +7936,7 @@ h3 {
 .decision-group header strong {
   min-width: 0;
   overflow-wrap: break-word;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .decision-list button {
@@ -7949,7 +7964,7 @@ h3 {
 }
 
 .decision-list strong {
-  font-size: 14px;
+  font-size: var(--font-size-body-strong);
   line-height: 1.35;
 }
 
@@ -7978,7 +7993,7 @@ h3 {
   border-radius: 999px;
   padding: 3px 8px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .decision-existing-answer {
@@ -8008,7 +8023,7 @@ h3 {
 .decision-resume-strip strong {
   min-width: 0;
   overflow-wrap: break-word;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .decision-resume-notice {
@@ -8018,7 +8033,7 @@ h3 {
   border-radius: 7px;
   padding: 9px;
   color: #166534;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .decision-replay-strip {
@@ -8039,7 +8054,7 @@ h3 {
   display: block;
   min-width: 0;
   margin-top: 4px;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   overflow-wrap: break-word;
 }
 
@@ -8111,7 +8126,7 @@ h3 {
   border-radius: 999px;
   padding: 4px 10px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -8239,7 +8254,7 @@ h3 {
 
 .source-context-pill span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -8248,7 +8263,7 @@ h3 {
   display: block;
   min-width: 0;
   color: var(--slate);
-  font-size: 13px;
+  font-size: var(--font-size-body);
   line-height: 1.35;
   overflow-wrap: break-word;
 }
@@ -8393,7 +8408,7 @@ h3 {
 
 .source-workbench-switcher small {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
 }
 
@@ -8416,7 +8431,7 @@ h3 {
 
 .source-settings-dialog header span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -8490,7 +8505,7 @@ h3 {
 .source-results-summary span,
 .source-inline-save-receipt span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -8511,7 +8526,7 @@ h3 {
 .source-catalog-note {
   margin: -2px 0 8px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.45;
 }
 
@@ -8593,7 +8608,7 @@ h3 {
   display: block;
   min-width: 0;
   overflow-wrap: break-word;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .source-file-browser-list span,
@@ -8604,7 +8619,7 @@ h3 {
   margin-top: 4px;
   color: var(--muted);
   overflow-wrap: break-word;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .source-edit-workbench {
@@ -8677,7 +8692,7 @@ h3 {
 
 .source-editor-tab-main span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -8685,7 +8700,7 @@ h3 {
 .source-editor-tab-main strong {
   min-width: 0;
   overflow: hidden;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -8770,7 +8785,7 @@ h3 {
 .source-results-hero strong {
   display: block;
   margin-top: 3px;
-  font-size: 18px;
+  font-size: var(--font-size-panel-title);
   line-height: 1.2;
 }
 
@@ -8803,7 +8818,7 @@ h3 {
   min-width: 0;
   margin-top: 4px;
   overflow: hidden;
-  font-size: 13px;
+  font-size: var(--font-size-body);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -8866,7 +8881,7 @@ h3 {
 .source-inline-save-receipt strong {
   min-width: 0;
   overflow-wrap: break-word;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .source-result-lozenge {
@@ -8878,7 +8893,7 @@ h3 {
   border-radius: 999px;
   padding: 2px 8px;
   color: color-mix(in srgb, var(--green) 78%, var(--text));
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
 }
 
@@ -8895,7 +8910,7 @@ h3 {
   gap: 5px;
   min-width: 0;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .source-result-backup-path,
@@ -8907,7 +8922,7 @@ h3 {
   border-radius: 6px;
   padding: 6px 7px;
   color: var(--text);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.35;
   overflow-wrap: break-word;
 }
@@ -8931,7 +8946,7 @@ h3 {
 
 .source-results-empty strong {
   color: var(--text);
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .evidence-grid {
@@ -9024,7 +9039,7 @@ h3 {
 .source-diff-preview code {
   white-space: pre-wrap;
   word-break: break-word;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .monaco-editor-shell {
@@ -9048,7 +9063,7 @@ h3 {
   place-items: center;
   background: #111827;
   color: #cbd5e1;
-  font-size: 13px;
+  font-size: var(--font-size-body);
   font-weight: 800;
   letter-spacing: 0;
 }
@@ -9060,7 +9075,7 @@ h3 {
   border-radius: 7px;
   padding: 8px 10px;
   color: var(--green);
-  font-size: 13px;
+  font-size: var(--font-size-body);
   font-weight: 800;
   overflow-wrap: break-word;
 }
@@ -9126,7 +9141,7 @@ h3 {
   border-radius: 999px;
   padding: 3px 8px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .document-list p,
@@ -9180,7 +9195,7 @@ h3 {
 .density-chart span {
   overflow: hidden;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -9214,7 +9229,7 @@ h3 {
   display: block;
   margin-bottom: 3px;
   color: var(--green);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 700;
 }
 
@@ -9233,7 +9248,7 @@ h3 {
   border-radius: 999px;
   padding: 3px 8px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .timeline-docs {
@@ -9260,14 +9275,14 @@ h3 {
   border-radius: 999px;
   padding: 3px 7px;
   color: var(--slate);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   white-space: nowrap;
 }
 
 .timeline-docs strong {
   display: block;
   margin-bottom: 3px;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .timeline-docs p,
@@ -9329,7 +9344,7 @@ h3 {
 
 .native-file-hero h2 {
   margin: 4px 0 6px;
-  font-size: 24px;
+  font-size: var(--font-size-display);
   line-height: 1.18;
   word-break: keep-all;
 }
@@ -9392,7 +9407,7 @@ h3 {
   display: block;
   margin-bottom: 5px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -9403,7 +9418,7 @@ h3 {
   min-width: 0;
   overflow-wrap: break-word;
   color: var(--text);
-  font-size: 13px;
+  font-size: var(--font-size-body);
   line-height: 1.4;
 }
 
@@ -9469,7 +9484,7 @@ h3 {
 .workspace-explorer-header h2 {
   margin: 3px 0 0;
   overflow-wrap: break-word;
-  font-size: 14px;
+  font-size: var(--font-size-body-strong);
   line-height: 1.25;
 }
 
@@ -9480,7 +9495,7 @@ h3 {
   border-radius: 999px;
   padding: 4px 7px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   white-space: nowrap;
 }
@@ -9512,12 +9527,12 @@ h3 {
 }
 
 .workspace-dropzone strong {
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .workspace-dropzone span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   line-height: 1.35;
 }
 
@@ -9529,7 +9544,7 @@ h3 {
 .workspace-permission-hint {
   margin: -2px 8px 8px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   line-height: 1.35;
 }
 
@@ -9551,7 +9566,7 @@ h3 {
   color: var(--text);
   border-radius: var(--control-radius);
   padding: 8px;
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   font-weight: 800;
   line-height: 1.25;
   white-space: normal;
@@ -9576,7 +9591,7 @@ h3 {
   display: block;
   margin-bottom: 3px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--font-size-micro);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -9587,7 +9602,7 @@ h3 {
   min-width: 0;
   overflow-wrap: break-word;
   color: var(--text);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   line-height: 1.35;
 }
 
@@ -9606,7 +9621,7 @@ h3 {
   border-radius: 7px;
   padding: 7px 8px;
   font: inherit;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .workspace-explorer-meta {
@@ -9667,14 +9682,14 @@ h3 {
 .workspace-tree-folder strong {
   min-width: 0;
   overflow: hidden;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .workspace-tree-folder span {
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--font-size-micro);
 }
 
 .workspace-tree-file {
@@ -9691,14 +9706,14 @@ h3 {
 .workspace-tree-file span {
   min-width: 0;
   overflow: hidden;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .workspace-tree-file small {
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--font-size-micro);
   white-space: nowrap;
 }
 
@@ -9730,12 +9745,12 @@ h3 {
 
 .workspace-empty-tree strong {
   color: var(--text);
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .workspace-empty-tree span,
 .workspace-empty-tree small {
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.45;
 }
 
@@ -9743,7 +9758,7 @@ h3 {
   margin: 0;
   padding: 9px 10px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
   line-height: 1.4;
 }
 
@@ -9839,12 +9854,12 @@ h3 {
 
 .source-list strong {
   overflow-wrap: break-word;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .source-list span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .source-viewer {
@@ -9874,7 +9889,7 @@ h3 {
   border-radius: 999px;
   padding: 3px 8px;
   color: #cbd5e1;
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .source-viewer h3 {
@@ -9886,7 +9901,7 @@ h3 {
 .source-viewer p {
   margin: 0;
   color: #cbd5e1;
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .source-viewer-actions {
@@ -9918,7 +9933,7 @@ h3 {
   overflow: auto;
   padding: 16px;
   color: #e5e7eb;
-  font-size: 13px;
+  font-size: var(--font-size-body);
   line-height: 1.55;
   tab-size: 2;
 }
@@ -9965,7 +9980,7 @@ h3 {
   border-radius: 999px;
   padding: 5px 8px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 700;
 }
 
@@ -10000,7 +10015,7 @@ h3 {
   gap: 8px;
   align-items: center;
   color: var(--green);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -10031,7 +10046,7 @@ h3 {
   grid-template-columns: 82px minmax(0, 1fr);
   gap: 6px 8px;
   margin: 2px 0 0;
-  font-size: 13px;
+  font-size: var(--font-size-body);
   line-height: 1.45;
 }
 
@@ -10190,7 +10205,7 @@ h3 {
   gap: 8px;
   justify-content: space-between;
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .bar-group strong {
@@ -10245,7 +10260,7 @@ h3 {
   border-radius: 999px;
   padding: 3px 8px;
   color: var(--slate);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
 }
 
 .agent-map h3 {
@@ -10302,13 +10317,13 @@ h3 {
 .flow-node small,
 .collaboration-lane small {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .collaboration-summary strong {
   display: block;
   margin-top: 8px;
-  font-size: 24px;
+  font-size: var(--font-size-display);
   line-height: 1;
 }
 
@@ -10383,7 +10398,7 @@ h3 {
 .agent-workload-strip p {
   margin-bottom: 0;
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--font-size-body);
   line-height: 1.45;
 }
 
@@ -10395,7 +10410,7 @@ h3 {
 
 .blocker-list span {
   color: var(--red);
-  font-size: 11px;
+  font-size: var(--font-size-overline);
 }
 
 .lane-empty {
@@ -10499,11 +10514,11 @@ h3 {
 
 .task-lanes span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
 }
 
 .task-lanes strong {
-  font-size: 22px;
+  font-size: var(--font-size-screen-title);
 }
 
 .path-list {
@@ -10518,7 +10533,7 @@ h3 {
   border-radius: 6px;
   padding: 4px 7px;
   color: var(--slate);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   word-break: break-word;
 }
 
@@ -10577,14 +10592,14 @@ h3 {
 .markdown-preview h3,
 .markdown-preview h4 {
   margin: 14px 0 8px;
-  font-size: 16px;
+  font-size: var(--font-size-section-title);
 }
 
 .markdown-preview p,
 .markdown-preview li,
 .markdown-preview td,
 .markdown-preview th {
-  font-size: 14px;
+  font-size: var(--font-size-body-strong);
 }
 
 .markdown-preview table {
@@ -10621,7 +10636,7 @@ h3 {
 }
 
 .desktop-app-root {
-  font-size: 13px;
+  font-size: var(--font-size-body);
 }
 
 .desktop-app-root :where(h1, h2, h3, h4, h5, h6, p, li, dt, dd, label, button, span, strong, small, em) {
@@ -10636,7 +10651,7 @@ h3 {
 .workspace-home-panel h2,
 .product-feature-position h2,
 .main-feature-detail h3 {
-  font-size: 18px;
+  font-size: var(--font-size-panel-title);
   font-weight: 650;
   line-height: 1.28;
 }
@@ -10647,7 +10662,7 @@ h3 {
 .collaboration-summary strong,
 .task-lanes strong,
 .service-score-ring strong {
-  font-size: 20px;
+  font-size: var(--font-size-title-lg);
   font-weight: 650;
   line-height: 1.1;
 }
@@ -11609,7 +11624,7 @@ h3 {
   }
 
   .command-card h2 {
-    font-size: 22px;
+    font-size: var(--font-size-screen-title);
   }
 
   .attention-list article {

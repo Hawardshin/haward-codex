@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-06-05",
+  "workId": "typography-scale",
+  "status": "passed",
+  "resources": [
+    {
+      "kind": "static_server",
+      "target": "workspace-monitor out python http.server on 127.0.0.1:3218",
+      "cleanupRequired": true
+    },
+    {
+      "kind": "browser_automation",
+      "target": "in-app Browser typography smoke",
+      "cleanupRequired": false
+    },
+    {
+      "kind": "browser_automation",
+      "target": "Playwright chromium headless typography audit",
+      "cleanupRequired": false
+    }
+  ],
+  "notes": "Static server was used for local verification and must be stopped before close-out."
+}

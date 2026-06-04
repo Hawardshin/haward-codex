@@ -17,6 +17,8 @@
 - 420px 이하에서는 activity rail navigation을 두 줄 구조로 내려 주요 섹션 버튼이 가로 스크롤에 숨지 않아야 한다.
 - 버튼, nav, Explorer, source toolbar, search/select 입력의 보이는 클릭/입력 타깃은 44px 이상이어야 한다.
 - 초기 client shell은 대형 snapshot과 MonitorShell을 동기 import하지 않고 public JSON fetch와 lazy import로 진입해야 한다.
+- 텍스트 크기는 `globals.css`의 역할 기반 typography token만 사용해야 하며, 컴포넌트별 임의 px 값과 브라우저 기본 `<small>` 축소로 인한 11px 미만 텍스트가 없어야 한다.
+- 화면 축소 시 텍스트 크기를 viewport 비율로 줄이지 않고, layout reflow와 progressive disclosure로 정보량을 줄인다.
 
 ## 제외
 
