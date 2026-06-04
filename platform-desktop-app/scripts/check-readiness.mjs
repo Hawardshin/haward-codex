@@ -2,6 +2,11 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
 
+import {
+  checkDesktopBuildPipeline,
+  desktopBuildPipelineRequiredFiles
+} from "./readiness/desktop-build-pipeline.mjs";
+
 const root = new URL("..", import.meta.url).pathname;
 
 const requiredFiles = [
@@ -60,11 +65,8 @@ const requiredFiles = [
   "scripts/check-customer-bundle.mjs",
   "scripts/check-release-readiness.mjs",
   "scripts/check-service-readiness.mjs",
-  "scripts/desktop-pipeline.mjs",
-  "scripts/desktop-pipeline/paths.mjs",
-  "scripts/desktop-pipeline/definitions.mjs",
-  "scripts/desktop-pipeline/runner.mjs",
-  "scripts/tauri-before-build-prepared.mjs"
+  "scripts/readiness/desktop-build-pipeline.mjs",
+  ...desktopBuildPipelineRequiredFiles
 ];
 
 function readJson(relativePath) {
@@ -89,70 +91,7 @@ for (const file of requiredFiles) {
   }
 }
 
-const pkg = readJson("package.json");
-if (!pkg.scripts?.check || !pkg.scripts?.test || !pkg.scripts?.verify || !pkg.scripts?.["tauri:dev"] || !pkg.scripts?.["tauri:build"]) {
-  failures.push("package.json must expose check, test, verify, tauri:dev, and tauri:build scripts");
-}
-if (!pkg.scripts?.["runtime:contract"]) {
-  failures.push("package.json must expose runtime:contract");
-}
-for (const scriptName of ["setup", "verify:quick", "package:internal", "deploy:public:report", "pipeline:dry-run"]) {
-  if (!pkg.scripts?.[scriptName]) {
-    failures.push(`package.json must expose ${scriptName}`);
-  }
-}
-for (const scriptName of ["customer-bundle:audit", "release:preflight", "release:preflight:public", "release:preflight:public:report"]) {
-  if (!pkg.scripts?.[scriptName]) {
-    failures.push(`package.json must expose ${scriptName}`);
-  }
-}
-for (const scriptName of ["service:readiness", "service:readiness:public:report"]) {
-  if (!pkg.scripts?.[scriptName]) {
-    failures.push(`package.json must expose ${scriptName}`);
-  }
-}
-if (!pkg.scripts?.["renderer:build"]?.includes("build:customer")) {
-  failures.push("platform-desktop-app renderer:build must use the customer Workspace Monitor build");
-}
-if (!pkg.scripts?.["renderer:build"]?.includes("customer-bundle:audit")) {
-  failures.push("platform-desktop-app renderer:build must audit the customer bundle after building");
-}
-if (!pkg.scripts?.["monitor:build"]?.includes("renderer:build")) {
-  failures.push("platform-desktop-app monitor:build must remain a compatibility alias for renderer:build");
-}
-if (!pkg.scripts?.["tauri:build:prepared"]?.includes("tauri-build-prepared")) {
-  failures.push("package.json must expose tauri:build:prepared for no-rebuild internal packaging");
-}
-if (!pkg.scripts?.check?.includes("check-customer-bundle.mjs") || !pkg.scripts?.check?.includes("check-release-readiness.mjs")) {
-  failures.push("platform-desktop-app check must run customer bundle and release readiness preflight checks");
-}
-if (!pkg.scripts?.check?.includes("check-runtime-contract.mjs")) {
-  failures.push("platform-desktop-app check must run installer shell runtime contract checks");
-}
-if (!pkg.scripts?.check?.includes("check-service-readiness.mjs")) {
-  failures.push("platform-desktop-app check must run service readiness checks");
-}
-if (!pkg.devDependencies?.["@tauri-apps/cli"]) {
-  failures.push("package.json must declare @tauri-apps/cli as a project-local devDependency");
-}
-const rootPkg = readJson("../package.json");
-for (const scriptName of [
-  "desktop:setup",
-  "desktop:setup:verify",
-  "desktop:verify:quick",
-  "desktop:verify",
-  "desktop:renderer:build",
-  "desktop:package:internal",
-  "desktop:release:report"
-]) {
-  if (!rootPkg.scripts?.[scriptName]) {
-    failures.push(`root package.json must expose ${scriptName}`);
-  }
-}
-const workspaceMonitorPkg = readJson("renderer/workspace-monitor/package.json");
-if (!workspaceMonitorPkg.scripts?.["build:customer"]?.includes("--snapshot-mode customer")) {
-  failures.push("workspace-monitor package.json must expose build:customer with customer snapshot mode");
-}
+failures.push(...checkDesktopBuildPipeline({ root, readJson }));
 
 const tauriConfig = readJson("src-tauri/tauri.conf.json");
 if (tauriConfig.identifier !== "com.personalagentplatform.desktop") {
@@ -588,64 +527,6 @@ for (const requiredPhrase of [
   if (!serviceReadinessSerialized.includes(requiredPhrase)) {
     failures.push(`service-readiness-registry must include ${requiredPhrase}`);
   }
-}
-
-const readmeKo = readFileSync(join(root, "README.ko.md"), "utf8");
-const readmeEn = readFileSync(join(root, "README.en.md"), "utf8");
-const defaultReadme = readFileSync(join(root, "README.md"), "utf8");
-const releaseRunbookKo = readFileSync(join(root, "docs/release-runbook.ko.md"), "utf8");
-const releaseRunbookEn = readFileSync(join(root, "docs/release-runbook.en.md"), "utf8");
-const desktopPipelineEntrypoint = readFileSync(join(root, "scripts/desktop-pipeline.mjs"), "utf8");
-const desktopPipelineDefinitions = readFileSync(join(root, "scripts/desktop-pipeline/definitions.mjs"), "utf8");
-const desktopPipelineRunner = readFileSync(join(root, "scripts/desktop-pipeline/runner.mjs"), "utf8");
-const desktopPipelineStructure = `${desktopPipelineEntrypoint}\n${desktopPipelineDefinitions}\n${desktopPipelineRunner}`;
-if (!installableRequirementsKo.includes("PDA-REQ-038") || !installableRequirementsEn.includes("PDA-REQ-038")) {
-  failures.push("installable desktop requirements must include PDA-REQ-038 for bilingual README and one-command release paths");
-}
-if (!installableRequirementsKo.includes("PDA-REQ-039") || !installableRequirementsEn.includes("PDA-REQ-039")) {
-  failures.push("installable desktop requirements must include PDA-REQ-039 for Korean-first native workspace UX");
-}
-for (const requiredPhrase of [
-  "corepack pnpm run desktop:setup:verify",
-  "corepack pnpm run desktop:verify",
-  "corepack pnpm run desktop:package:internal",
-  "corepack pnpm run desktop:release:report",
-  "docs/release-runbook.ko.md",
-  "README.en.md"
-]) {
-  if (!defaultReadme.includes(requiredPhrase)) {
-    failures.push(`README.md must include ${requiredPhrase}`);
-  }
-}
-for (const requiredPhrase of [
-  "corepack pnpm run desktop:package:internal",
-  "Developer ID",
-  "notarization",
-  "clean-machine",
-  "ad-hoc signing"
-]) {
-  if (!readmeKo.includes(requiredPhrase) || !releaseRunbookKo.includes(requiredPhrase)) {
-    failures.push(`Korean desktop docs must include ${requiredPhrase}`);
-  }
-  if (!readmeEn.includes(requiredPhrase) || !releaseRunbookEn.includes(requiredPhrase)) {
-    failures.push(`English desktop docs must include ${requiredPhrase}`);
-  }
-}
-for (const requiredPhrase of [
-  "package-internal",
-  "public-report",
-  "commonVerifySteps",
-  "Tauri internal package build",
-  "codesign",
-  "hdiutil",
-  "Public distribution remains blocked"
-]) {
-  if (!desktopPipelineStructure.includes(requiredPhrase)) {
-    failures.push(`desktop pipeline structure must include ${requiredPhrase}`);
-  }
-}
-if (!desktopPipelineEntrypoint.includes("./desktop-pipeline/runner.mjs")) {
-  failures.push("desktop-pipeline.mjs must remain a thin entrypoint to scripts/desktop-pipeline/runner.mjs");
 }
 
 const viewModeRegistry = readJson("../agent-platform/configs/access/view-mode-registry.json");

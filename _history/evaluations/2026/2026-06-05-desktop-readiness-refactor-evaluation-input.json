@@ -1,0 +1,35 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-readiness-refactor",
+  "result_summary": "Extracted desktop build pipeline readiness checks from check-readiness.mjs into scripts/readiness/desktop-build-pipeline.mjs, reducing the monolith and preserving behavior through tests/checks.",
+  "changed_paths": [
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/scripts/readiness/desktop-build-pipeline.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs"
+  ],
+  "validation": [
+    "dynamic import smoke for desktop-build-pipeline.mjs: passed",
+    "corepack pnpm --filter platform-desktop-app test: passed",
+    "corepack pnpm --filter platform-desktop-app run check: passed"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-desktop-readiness-refactor.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-05-desktop-readiness-refactor.ko.md"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-05-desktop-readiness-refactor.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-05-desktop-readiness-refactor.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-desktop-readiness-refactor-omission.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-desktop-readiness-refactor-resource.json"
+  ],
+  "installation_occurred": false
+}

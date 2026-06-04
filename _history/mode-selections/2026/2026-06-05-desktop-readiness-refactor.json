@@ -1,0 +1,13 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-readiness-refactor",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selection_reason": "The request asks for refactoring. The selected slice changes desktop readiness source structure and tests without installing dependencies or changing release behavior.",
+  "mode_policy_notes": [
+    "Web-first intake was performed.",
+    "The refactor was scoped to the recent desktop build pipeline/readiness area.",
+    "Generated snapshot outputs were left unstaged."
+  ]
+}

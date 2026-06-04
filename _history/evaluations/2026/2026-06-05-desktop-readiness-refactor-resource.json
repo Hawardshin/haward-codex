@@ -1,0 +1,19 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-readiness-refactor",
+  "status": "passed",
+  "resource_risks": [
+    "Node test subprocess",
+    "Desktop readiness check subprocess"
+  ],
+  "controls": [
+    "No dev server was started.",
+    "No install command was run.",
+    "All validation commands exited before close-out."
+  ],
+  "validation_commands": [
+    "node -e dynamic import smoke",
+    "corepack pnpm --filter platform-desktop-app test",
+    "corepack pnpm --filter platform-desktop-app run check"
+  ]
+}

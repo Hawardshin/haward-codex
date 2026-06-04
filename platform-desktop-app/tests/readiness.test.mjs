@@ -20,6 +20,7 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/paths.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/definitions.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/runner.mjs")), true);
+  assert.equal(existsSync(join(root, "scripts/readiness/desktop-build-pipeline.mjs")), true);
   assert.equal(existsSync(join(root, "configs/reference-platform-advantage-registry.json")), true);
 
   const config = readJson("src-tauri/tauri.conf.json");
@@ -42,6 +43,7 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   const pipelineEntrypoint = readFileSync(join(root, "scripts/desktop-pipeline.mjs"), "utf8");
   const pipelineDefinitions = readFileSync(join(root, "scripts/desktop-pipeline/definitions.mjs"), "utf8");
   const pipelineRunner = readFileSync(join(root, "scripts/desktop-pipeline/runner.mjs"), "utf8");
+  const buildPipelineReadiness = readFileSync(join(root, "scripts/readiness/desktop-build-pipeline.mjs"), "utf8");
   const pipelineStructure = `${pipelineEntrypoint}\n${pipelineDefinitions}\n${pipelineRunner}`;
   const requirementsKo = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.ko.md"), "utf8");
   const requirementsEn = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.en.md"), "utf8");
@@ -78,6 +80,8 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
     assert.match(releaseEn, pattern);
   }
   assert.match(pipelineEntrypoint, /desktop-pipeline\/runner\.mjs/);
+  assert.match(buildPipelineReadiness, /checkDesktopBuildPipeline/);
+  assert.match(buildPipelineReadiness, /desktopBuildPipelineRequiredFiles/);
   for (const token of ["package-internal", "public-report", "commonVerifySteps", "Tauri internal package build", "codesign", "hdiutil"]) {
     assert.match(pipelineStructure, new RegExp(token));
   }

@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-readiness-refactor",
+  "timings": [
+    {
+      "phase": "web_and_local_intake",
+      "duration": "about 3m",
+      "notes": "Checked Node ESM/child_process and pnpm docs, then inspected check-readiness size and desktop build pipeline checks."
+    },
+    {
+      "phase": "implementation",
+      "duration": "about 7m",
+      "notes": "Extracted desktop build pipeline readiness checks to a new module and updated tests."
+    },
+    {
+      "phase": "validation",
+      "duration": "about 2m",
+      "notes": "Ran import smoke, desktop tests, and desktop check."
+    },
+    {
+      "phase": "history",
+      "duration": "about 3m",
+      "notes": "Recorded request, plan, trace, evaluation, omission, resource, and timing notes."
+    }
+  ],
+  "bottleneck_notes": [
+    "check-readiness.mjs remains large but the desktop build pipeline slice is now separately owned.",
+    "Future refactor candidates include Tauri command checks and registry token checks."
+  ]
+}
