@@ -40,6 +40,12 @@ Tauri packaging 없이 customer renderer만 다시 만들고 audit하려면:
 corepack pnpm run desktop:renderer:build
 ```
 
+설치/빌드가 막힌 지점을 빠르게 진단하려면:
+
+```bash
+corepack pnpm run desktop:doctor
+```
+
 내부 테스트용 `.app`/DMG까지 한 번에 만들려면:
 
 ```bash
@@ -63,6 +69,8 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 `desktop:setup`은 desktop app 경로에 필요한 workspace dependency를 lockfile 기준으로 설치하고, Workspace Monitor Playwright Chromium headless shell을 설치합니다.
 
 `desktop:verify:quick`은 renderer/Rust rebuild 없이 Workspace Monitor check/test와 desktop app test/check만 실행합니다.
+
+`desktop:doctor`는 Node, pnpm, Rust/Cargo, Tauri CLI, Playwright browser cache, customer bundle boundary, internal/public release gate 상태를 빠르게 점검합니다. public release signing/notarization/updater/clean-machine smoke는 warning으로 보고하고 local/internal 개발 검증 실패로 취급하지 않습니다.
 
 `desktop:verify`는 다음을 순서대로 실행합니다.
 

@@ -6,7 +6,8 @@ export const desktopBuildPipelineRequiredFiles = [
   "scripts/desktop-pipeline/paths.mjs",
   "scripts/desktop-pipeline/definitions.mjs",
   "scripts/desktop-pipeline/runner.mjs",
-  "scripts/tauri-before-build-prepared.mjs"
+  "scripts/tauri-before-build-prepared.mjs",
+  "scripts/desktop-doctor.mjs"
 ];
 
 export function checkDesktopBuildPipeline({ root, readJson }) {
@@ -27,7 +28,8 @@ export function checkDesktopBuildPipeline({ root, readJson }) {
     "desktop:verify",
     "desktop:renderer:build",
     "desktop:package:internal",
-    "desktop:release:report"
+    "desktop:release:report",
+    "desktop:doctor"
   ], "root package.json", failures);
 
   requireScriptIncludes(pkg, "renderer:build", "build:customer", "platform-desktop-app renderer:build must use the customer Workspace Monitor build", failures);
@@ -90,6 +92,7 @@ function checkDocsAndPipelineStructure(root, failures) {
     "corepack pnpm run desktop:verify",
     "corepack pnpm run desktop:package:internal",
     "corepack pnpm run desktop:release:report",
+    "corepack pnpm run desktop:doctor",
     "docs/release-runbook.ko.md",
     "README.en.md"
   ]) {

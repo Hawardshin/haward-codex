@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-doctor",
+  "timings": [
+    {
+      "phase": "web_and_local_intake",
+      "duration": "about 4m",
+      "notes": "Checked official Tauri, Playwright, pnpm, and Node.js docs, then inspected recent desktop build pipeline scripts and readiness checks."
+    },
+    {
+      "phase": "implementation",
+      "duration": "about 10m",
+      "notes": "Added desktop-doctor.mjs, package scripts, readiness tokens, docs, and tests."
+    },
+    {
+      "phase": "validation",
+      "duration": "about 5m",
+      "notes": "Ran doctor, JSON doctor, desktop tests, desktop check, and pipeline dry-run."
+    },
+    {
+      "phase": "history",
+      "duration": "about 4m",
+      "notes": "Recorded request, plan, trace, evaluation, omission, resource, and timing notes."
+    }
+  ],
+  "bottleneck_notes": [
+    "Doctor currently diagnoses and routes next commands; automatic repair remains a separate follow-up because installs and environment changes need explicit audit/rollback handling.",
+    "Public release remains gated by signing/notarization, signed updater, and clean-machine smoke."
+  ]
+}

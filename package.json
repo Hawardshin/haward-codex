@@ -25,6 +25,7 @@
     "desktop:renderer:build": "corepack pnpm --filter platform-desktop-app run renderer:build",
     "desktop:package:internal": "corepack pnpm --filter platform-desktop-app run package:internal",
     "desktop:release:report": "corepack pnpm --filter platform-desktop-app run deploy:public:report",
+    "desktop:doctor": "corepack pnpm --filter platform-desktop-app run doctor",
     "presentation:test:browser": "corepack pnpm --filter presentation-agent-browser-validation test:browser"
   }
 }

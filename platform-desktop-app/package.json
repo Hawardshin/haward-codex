@@ -8,6 +8,7 @@
   "scripts": {
     "check": "node scripts/check-runtime-contract.mjs && node scripts/check-readiness.mjs && node scripts/check-customer-bundle.mjs --allow-missing-dist && node scripts/check-release-readiness.mjs --mode internal && node scripts/check-service-readiness.mjs --mode internal",
     "test": "node --test tests/*.test.mjs",
+    "doctor": "node scripts/desktop-doctor.mjs",
     "setup": "node scripts/desktop-pipeline.mjs setup",
     "verify:quick": "node scripts/desktop-pipeline.mjs verify-quick",
     "verify": "node scripts/desktop-pipeline.mjs verify",

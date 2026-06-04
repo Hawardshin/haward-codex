@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-doctor",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selection_reason": "The request asks for feature improvement. The selected slice adds a desktop developer doctor command and related tests/docs without installing dependencies or changing release behavior.",
+  "mode_policy_notes": [
+    "Web-first intake was performed against official Tauri, Playwright, pnpm, and Node.js documentation.",
+    "The feature was scoped to setup/build diagnostics because the recent work changed desktop install/build flows.",
+    "No dependency install or global environment change was performed.",
+    "Generated snapshot outputs were left unstaged."
+  ]
+}

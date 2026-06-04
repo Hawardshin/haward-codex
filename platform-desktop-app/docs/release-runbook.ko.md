@@ -15,6 +15,7 @@ repository root에서 실행한다.
 | 빠른 반복 검증 | `corepack pnpm run desktop:verify:quick` |
 | 전체 개발 검증 | `corepack pnpm run desktop:verify` |
 | customer renderer build/audit만 실행 | `corepack pnpm run desktop:renderer:build` |
+| 설치/빌드 상태 빠른 진단 | `corepack pnpm run desktop:doctor` |
 | 내부 테스트용 `.app`/DMG 빌드 | `corepack pnpm run desktop:package:internal` |
 | 공개 배포 gate report-only 확인 | `corepack pnpm run desktop:release:report` |
 | 실행될 명령 순서만 확인 | `corepack pnpm --filter platform-desktop-app run pipeline:dry-run` |

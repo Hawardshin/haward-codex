@@ -1,0 +1,45 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-doctor",
+  "result_summary": "Added a desktop doctor command that checks the local setup/build environment, browser cache, renderer bundle boundary, internal release readiness, and public release gates before users run slower build/package commands.",
+  "changed_paths": [
+    "package.json",
+    "platform-desktop-app/package.json",
+    "platform-desktop-app/scripts/desktop-doctor.mjs",
+    "platform-desktop-app/scripts/desktop-pipeline/definitions.mjs",
+    "platform-desktop-app/scripts/readiness/desktop-build-pipeline.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/README.md",
+    "platform-desktop-app/README.ko.md",
+    "platform-desktop-app/README.en.md",
+    "platform-desktop-app/docs/release-runbook.ko.md",
+    "platform-desktop-app/docs/release-runbook.en.md"
+  ],
+  "validation": [
+    "corepack pnpm run desktop:doctor: passed with 18 passed, 1 warning, 0 failures",
+    "corepack pnpm --filter platform-desktop-app run doctor -- --json: passed",
+    "corepack pnpm --filter platform-desktop-app test: passed, 21 tests",
+    "corepack pnpm --filter platform-desktop-app run check: passed",
+    "corepack pnpm --filter platform-desktop-app run pipeline:dry-run: passed"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-desktop-doctor.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-05-desktop-doctor.ko.md"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-05-desktop-doctor.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-05-desktop-doctor.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-desktop-doctor-omission.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-desktop-doctor-resource.json"
+  ],
+  "installation_occurred": false
+}

@@ -40,6 +40,12 @@ To rebuild and audit only the customer renderer without Tauri packaging:
 corepack pnpm run desktop:renderer:build
 ```
 
+To quickly diagnose a blocked setup or build:
+
+```bash
+corepack pnpm run desktop:doctor
+```
+
 To build the local/internal `.app` and DMG in one command:
 
 ```bash
@@ -63,6 +69,8 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 `desktop:setup` installs the workspace dependencies needed for the desktop app path from the lockfile, then installs the Workspace Monitor Playwright Chromium headless shell.
 
 `desktop:verify:quick` runs Workspace Monitor check/test and desktop app test/check without rebuilding the renderer or Rust app.
+
+`desktop:doctor` checks Node, pnpm, Rust/Cargo, Tauri CLI, the Playwright browser cache, customer bundle boundaries, and internal/public release gates. Public signing, notarization, updater, and clean-machine smoke gaps are reported as warnings rather than local/internal developer verification failures.
 
 `desktop:verify` runs:
 

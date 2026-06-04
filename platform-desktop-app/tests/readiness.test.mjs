@@ -21,6 +21,7 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/definitions.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/runner.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/readiness/desktop-build-pipeline.mjs")), true);
+  assert.equal(existsSync(join(root, "scripts/desktop-doctor.mjs")), true);
   assert.equal(existsSync(join(root, "configs/reference-platform-advantage-registry.json")), true);
 
   const config = readJson("src-tauri/tauri.conf.json");
@@ -59,18 +60,20 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
     "desktop:verify",
     "desktop:renderer:build",
     "desktop:package:internal",
-    "desktop:release:report"
+    "desktop:release:report",
+    "desktop:doctor"
   ]) {
     assert.ok(rootPkg.scripts[scriptName]);
   }
-  for (const scriptName of ["setup", "verify:quick", "verify", "package:internal", "deploy:public:report", "pipeline:dry-run"]) {
+  for (const scriptName of ["doctor", "setup", "verify:quick", "verify", "package:internal", "deploy:public:report", "pipeline:dry-run"]) {
     assert.ok(pkg.scripts[scriptName]);
   }
   for (const command of [
     "corepack pnpm run desktop:setup:verify",
     "corepack pnpm run desktop:verify",
     "corepack pnpm run desktop:package:internal",
-    "corepack pnpm run desktop:release:report"
+    "corepack pnpm run desktop:release:report",
+    "corepack pnpm run desktop:doctor"
   ]) {
     const pattern = new RegExp(command.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
     assert.match(readme, pattern);
@@ -82,6 +85,7 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   assert.match(pipelineEntrypoint, /desktop-pipeline\/runner\.mjs/);
   assert.match(buildPipelineReadiness, /checkDesktopBuildPipeline/);
   assert.match(buildPipelineReadiness, /desktopBuildPipelineRequiredFiles/);
+  assert.match(buildPipelineReadiness, /desktop:doctor/);
   for (const token of ["package-internal", "public-report", "commonVerifySteps", "Tauri internal package build", "codesign", "hdiutil"]) {
     assert.match(pipelineStructure, new RegExp(token));
   }

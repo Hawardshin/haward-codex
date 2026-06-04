@@ -1,0 +1,24 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-doctor",
+  "status": "passed",
+  "resource_risks": [
+    "Doctor subprocess checks for node, corepack pnpm, cargo, rustc, tauri, and playwright",
+    "Node test subprocess",
+    "Desktop readiness check subprocess",
+    "Desktop pipeline dry-run subprocess"
+  ],
+  "controls": [
+    "No dev server was started.",
+    "No install command was run.",
+    "Doctor subprocess checks use bounded timeouts.",
+    "All validation commands exited before close-out."
+  ],
+  "validation_commands": [
+    "corepack pnpm run desktop:doctor",
+    "corepack pnpm --filter platform-desktop-app run doctor -- --json",
+    "corepack pnpm --filter platform-desktop-app test",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "corepack pnpm --filter platform-desktop-app run pipeline:dry-run"
+  ]
+}

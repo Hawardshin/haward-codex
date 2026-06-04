@@ -15,6 +15,7 @@ Run these from the repository root.
 | Fast repeated verification | `corepack pnpm run desktop:verify:quick` |
 | Full developer verification | `corepack pnpm run desktop:verify` |
 | Customer renderer build/audit only | `corepack pnpm run desktop:renderer:build` |
+| Quick setup/build diagnosis | `corepack pnpm run desktop:doctor` |
 | Build local/internal `.app` and DMG | `corepack pnpm run desktop:package:internal` |
 | Check public release gates in report-only mode | `corepack pnpm run desktop:release:report` |
 | Preview the command sequence | `corepack pnpm --filter platform-desktop-app run pipeline:dry-run` |

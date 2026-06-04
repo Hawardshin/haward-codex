@@ -1,0 +1,37 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "desktop-doctor",
+  "status": "passed",
+  "checks": [
+    {
+      "item": "web_first_intake",
+      "status": "passed",
+      "evidence": "_history/web-searches/2026/2026-06-05-desktop-doctor.ko.md"
+    },
+    {
+      "item": "feature_scope_selected",
+      "status": "passed",
+      "evidence": "A desktop setup/build doctor command was selected as a bounded feature improvement."
+    },
+    {
+      "item": "single_command_exposed",
+      "status": "passed",
+      "evidence": "Root package.json exposes corepack pnpm run desktop:doctor and platform-desktop-app exposes doctor."
+    },
+    {
+      "item": "human_and_machine_output",
+      "status": "passed",
+      "evidence": "Doctor supports default human output and --json output."
+    },
+    {
+      "item": "verification_completed",
+      "status": "passed",
+      "evidence": "Doctor, JSON doctor, tests, check, and pipeline dry-run passed."
+    },
+    {
+      "item": "generated_outputs_not_staged",
+      "status": "passed",
+      "evidence": "Generated snapshot JSON files remain unstaged."
+    }
+  ]
+}
