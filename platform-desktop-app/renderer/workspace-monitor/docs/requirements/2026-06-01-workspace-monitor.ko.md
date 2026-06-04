@@ -44,6 +44,7 @@
 | REQ-WM-031 | 데스크톱 제품 UI는 전체 화면에서만 동작하는 고정 높이/압축형 배치를 피하고, 핵심 작업을 먼저 보여준 뒤 보조 정보는 접힘/세로 흐름으로 노출해야 한다. | must | `pnpm run check`, `pnpm test`, `pnpm exec next build`, responsive Browser smoke, body/viewport horizontal overflow 확인 |
 | REQ-WM-032 | 데스크톱 제품 UI의 보이는 기능, 패널, 버튼, workflow step은 한 가지 목적만 명확히 수행해야 하며, 상태/설정/이동/실행/근거 보기를 한 컨트롤이나 패널에 섞지 않아야 한다. | must | Overview home single-purpose control audit, disclosure count/label Browser smoke, `pnpm run check`, `pnpm test`, `pnpm exec next build` 확인 |
 | REQ-WM-033 | 데스크톱 제품 UI는 한 탭에 여러 기능 패널을 얕게 넣지 않아야 하며, 탭이 여러 기능을 담기 시작하면 기본 탭은 선택 메뉴로 낮추고 각 기능은 더 깊은 단일 기능 화면으로 열어야 한다. | must | Overview drill-down smoke, 기본 홈 panel count 확인, drill-down back interaction, `pnpm run check`, `pnpm test`, `pnpm exec next build` 확인 |
+| REQ-WM-034 | 데스크톱 제품 UI의 주요 섹션은 전체 화면이 아닌 900px, 720px, 540px, 390px 창에서도 루트 수평 overflow 없이 reflow되어야 하며, 핵심 navigation과 반복 컨트롤은 44px 이상 클릭 타깃을 유지해야 한다. | must | 정적 export Playwright audit 5개 섹션 x 5개 viewport, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `platform-desktop-app check` 확인 |
 
 ## 범위
 
@@ -74,6 +75,7 @@
 - 전체 화면 의존 고정 높이 shell 제거, 홈 보조 정보 progressive disclosure, responsive reflow
 - 홈 핵심 기능 탭의 단일 CTA, 단일 목적 action 버튼, 한 disclosure panel당 한 정보 역할
 - 홈 탭의 다기능 패널 제거, drill-down 선택 메뉴, 단일 기능 child view
+- 주요 desktop/source/agent/intent 섹션의 비전체화면 reflow와 작은 창 navigation
 - Vercel 배포 문서
 
 ## 제외 범위

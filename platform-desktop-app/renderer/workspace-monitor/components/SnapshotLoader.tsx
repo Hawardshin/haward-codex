@@ -1,10 +1,19 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
-import fallbackSnapshot from "@/src/generated/customer-workspace-snapshot.json";
 import type { WorkspaceSnapshot } from "@/lib/snapshot";
-import { MonitorShell } from "./MonitorShell";
+
+type MonitorShellProps = {
+  snapshot: WorkspaceSnapshot;
+  initialSection?: string;
+};
+
+const MonitorShell = dynamic<MonitorShellProps>(() => import("./MonitorShell").then((module) => module.MonitorShell), {
+  ssr: false,
+  loading: () => <SnapshotLoadingShell detail="Loading workspace monitor" />
+});
 
 type SnapshotState =
   | { status: "loading"; snapshot: null; error: "" }
@@ -13,10 +22,11 @@ type SnapshotState =
 
 export function SnapshotLoader() {
   const [state, setState] = useState<SnapshotState>({
-    status: "ready",
-    snapshot: fallbackSnapshot as WorkspaceSnapshot,
+    status: "loading",
+    snapshot: null,
     error: ""
   });
+  const [initialSection, setInitialSection] = useState("");
 
   useEffect(() => {
     let canceled = false;
@@ -54,8 +64,22 @@ export function SnapshotLoader() {
     };
   }, []);
 
+  useEffect(() => {
+    const syncSectionFromLocation = () => {
+      setInitialSection(readInitialSectionFromLocation());
+    };
+
+    syncSectionFromLocation();
+    window.addEventListener("hashchange", syncSectionFromLocation);
+    window.addEventListener("popstate", syncSectionFromLocation);
+    return () => {
+      window.removeEventListener("hashchange", syncSectionFromLocation);
+      window.removeEventListener("popstate", syncSectionFromLocation);
+    };
+  }, []);
+
   if (state.status === "ready") {
-    return <MonitorShell snapshot={state.snapshot} />;
+    return <MonitorShell snapshot={state.snapshot} initialSection={initialSection} />;
   }
 
   if (state.status === "error") {
@@ -63,6 +87,21 @@ export function SnapshotLoader() {
   }
 
   return <SnapshotLoadingShell detail="Loading workspace snapshot" />;
+}
+
+function readInitialSectionFromLocation() {
+  if (typeof window === "undefined") {
+    return "";
+  }
+  const fromQuery = new URLSearchParams(window.location.search).get("section");
+  if (fromQuery) {
+    return fromQuery;
+  }
+  const hash = window.location.hash.replace(/^#/, "");
+  if (!hash) {
+    return "";
+  }
+  return decodeURIComponent(hash).replace(/^section-/, "");
 }
 
 async function fetchPublicSnapshot(controller: AbortController | null) {

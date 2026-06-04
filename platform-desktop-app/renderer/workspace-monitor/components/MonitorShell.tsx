@@ -1196,6 +1196,13 @@ const emptyReferencePlatformAdvantages: ReferencePlatformAdvantages = {
 };
 
 const sectionIds = new Set<SectionId>(sections.map((section) => section.id));
+function normalizeSectionId(value: string | null | undefined): SectionId | null {
+  if (!value) {
+    return null;
+  }
+  const normalized = value.trim().replace(/^#/, "").replace(/^section-/, "");
+  return sectionIds.has(normalized as SectionId) ? (normalized as SectionId) : null;
+}
 
 type TauriInvoke = <T>(command: string, args?: Record<string, unknown>) => Promise<T>;
 
@@ -2127,8 +2134,8 @@ function providerAuthStatusForAdapter(
   return uiLanguage === "ko" ? "계정 필요" : "account needed";
 }
 
-export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
-  const [section, setSection] = useState<SectionId>("overview");
+export function MonitorShell({ snapshot, initialSection }: { snapshot: WorkspaceSnapshot; initialSection?: string }) {
+  const [section, setSection] = useState<SectionId>(() => normalizeSectionId(initialSection) || "overview");
   const [uiLanguage, setUiLanguage] = useState<UiLanguage>("ko");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
@@ -2214,6 +2221,12 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
     () => featureGroups.map((group) => featureGroupForLanguage(group, uiLanguage)),
     [uiLanguage]
   );
+  useEffect(() => {
+    const nextSection = normalizeSectionId(initialSection);
+    if (nextSection) {
+      setSection(nextSection);
+    }
+  }, [initialSection]);
   useEffect(() => {
     let canceled = false;
     const tauriInvoke = getTauriInvoke();
@@ -2714,6 +2727,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
       }
     }
     setSection(targetSection);
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", `#section-${targetSection}`);
+    }
   };
   const togglePinnedSection = (targetSection: SectionId) => {
     setPinnedSections((previous) => {
@@ -3879,7 +3895,9 @@ export function MonitorShell({ snapshot }: { snapshot: WorkspaceSnapshot }) {
                 onClick={() => openSection(item.id)}
                 className={section === item.id ? "active" : ""}
                 title={item.label}
+                aria-label={item.label}
                 aria-current={section === item.id ? "page" : undefined}
+                data-section-id={item.id}
               >
                 <item.icon size={19} aria-hidden="true" />
                 <span>{item.shortLabel}</span>

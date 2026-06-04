@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-06-05",
+  "workId": "non-fullscreen-layout",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "userRequest": "전체화면이 아닐 때 깨지는 화면이 너무 많다.",
+  "requirements": ["REQ-WM-031", "REQ-WM-034", "REQ-WM-016", "REQ-WM-030"],
+  "implementationFiles": [
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/SnapshotLoader.tsx"
+  ],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor build",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "corepack pnpm --filter platform-desktop-app test",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "Playwright static export audit: 5 sections x 5 viewports, failures=[]"
+  ],
+  "resourceRiskOccurred": true,
+  "resourceCheckTargets": ["_history/evaluations/2026/2026-06-05-non-fullscreen-layout-resource.json"],
+  "omissionCheckTargets": ["_history/evaluations/2026/2026-06-05-non-fullscreen-layout-omission.json"],
+  "installationOccurred": false,
+  "snapshotGeneratedFilesExcludedFromCommit": true
+}

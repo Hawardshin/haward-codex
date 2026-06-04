@@ -12,6 +12,12 @@
   - 900x720: horizontal overflow 0, disclosure 3개 기본 접힘
   - 390x844: horizontal overflow 0, disclosure 3개 기본 접힘
   - disclosure open interaction: 1개 열림, horizontal overflow 0
+- 정적 export Playwright audit:
+  - 대상: `overview`, `agents`, `desktop`, `source`, `intent`
+  - viewport: 1280x820, 900x720, 720x720, 540x720, 390x720
+  - 결과: 25개 조합 모두 `rootOverflow=0`, `bodyOverflow=0`, viewport 밖 offender 0, 44px 미만 visible target 0
+- `pnpm run build:customer`: 통과
+- `platform-desktop-app run check`: 통과, customer bundle ready
 
 ## 확인 기준
 
@@ -19,3 +25,5 @@
 - `.desktop-viewport`는 자연스러운 page reflow를 허용한다.
 - 첫 화면의 secondary panel은 기본 접힘 상태다.
 - desktop/tablet/mobile viewport에서 body horizontal overflow가 없다.
+- 비전체화면 주요 섹션에서 한 화면에 여러 기능을 압축하지 않고 1열/깊이 기반으로 reflow한다.
+- 초기 JS 성능 예산은 `maxInitialChunkBytes=1000000` 아래에 있어야 한다.

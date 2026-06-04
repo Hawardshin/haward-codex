@@ -9,3 +9,9 @@
 - [x] `pnpm exec next build`
 - [x] `pnpm run perf:budget`
 - [x] responsive Browser smoke
+- [x] 960px 이하 복합 workbench grid 1열 reflow 적용
+- [x] 420px 이하 activity rail 2줄 navigation 적용
+- [x] Explorer/source/titlebar 컨트롤 44px 타깃 보강
+- [x] SnapshotLoader public JSON fetch + MonitorShell lazy import 적용
+- [x] 정적 export Playwright 5개 섹션 x 5개 viewport overflow/target audit
+- [x] customer export 후 `platform-desktop-app check`

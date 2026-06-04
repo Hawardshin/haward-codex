@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-06-05",
+  "workId": "non-fullscreen-layout",
+  "phases": [
+    {
+      "name": "web_first_and_local_audit",
+      "status": "completed"
+    },
+    {
+      "name": "implementation",
+      "status": "completed"
+    },
+    {
+      "name": "validation",
+      "status": "completed"
+    },
+    {
+      "name": "history_and_trace",
+      "status": "completed"
+    }
+  ],
+  "bottlenecks": [
+    "Next dev rendered the static shell but did not expose reliable hydrated click behavior in Playwright; production static export was used for authoritative UI verification."
+  ]
+}

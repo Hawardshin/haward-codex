@@ -192,8 +192,8 @@ select {
 
 button {
   max-width: 100%;
-  min-width: var(--control-hit-size);
-  min-height: var(--control-hit-size);
+  min-width: var(--control-target-size);
+  min-height: var(--control-target-size);
   line-height: 1.2;
   overflow-wrap: var(--text-natural-wrap);
   word-break: keep-all;
@@ -359,7 +359,7 @@ main {
 .activity-rail button {
   display: inline-flex;
   width: 46px;
-  min-height: 42px;
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   border: 1px solid transparent;
@@ -666,7 +666,8 @@ main {
 
 .titlebar-context-strip button {
   display: inline-flex;
-  min-height: var(--control-hit-size);
+  min-width: var(--control-target-size);
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
@@ -694,6 +695,7 @@ main {
 .workspace-home-actions button,
 .workspace-home-actions a {
   display: inline-flex;
+  min-width: var(--control-target-size);
   min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
@@ -722,6 +724,7 @@ main {
 
 .titlebar-search input {
   min-width: 0;
+  min-height: var(--control-target-size);
   border: 0;
   outline: 0;
   background: transparent;
@@ -1719,7 +1722,7 @@ main {
 
 .workspace-home-actions button,
 .workspace-home-actions a {
-  min-height: 42px;
+  min-height: var(--control-target-size);
   background: var(--surface-raised);
   font-weight: 800;
 }
@@ -3004,7 +3007,7 @@ h3 {
 .search-box,
 .select-box {
   display: inline-flex;
-  min-height: 40px;
+  min-height: var(--control-target-size);
   align-items: center;
   gap: 8px;
   border: 1px solid var(--line);
@@ -3020,6 +3023,7 @@ h3 {
 .search-box input,
 .select-box select {
   min-width: 0;
+  min-height: var(--control-target-size);
   border: 0;
   outline: 0;
   background: transparent;
@@ -4240,7 +4244,8 @@ h3 {
   gap: 6px;
   align-items: center;
   justify-content: center;
-  min-height: var(--control-compact-target-size);
+  min-width: var(--control-target-size);
+  min-height: var(--control-target-size);
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--text);
@@ -7324,7 +7329,7 @@ h3 {
   bottom: 18px;
   z-index: 52;
   display: inline-flex;
-  min-height: 42px;
+  min-height: var(--control-target-size);
   align-items: center;
   gap: 8px;
   border: 1px solid #5f7488;
@@ -8295,8 +8300,8 @@ h3 {
 .source-command-toolbar button,
 .source-settings-dialog button {
   display: inline-flex;
-  min-width: var(--control-compact-target-size);
-  min-height: var(--control-compact-target-size);
+  min-width: var(--control-target-size);
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
@@ -8351,8 +8356,8 @@ h3 {
 .source-workbench-switcher button {
   position: relative;
   display: inline-flex;
-  min-width: var(--control-compact-target-size);
-  min-height: var(--control-compact-target-size);
+  min-width: var(--control-target-size);
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: 6px;
@@ -9427,6 +9432,8 @@ h3 {
 .filesystem-workbench-shell {
   display: grid;
   grid-template-columns: minmax(292px, 0.34fr) minmax(0, 1fr);
+  width: 100%;
+  max-width: 100%;
   height: calc(100vh - 148px);
   height: clamp(360px, calc(100dvh - 148px), 760px);
   min-height: 0;
@@ -9483,6 +9490,7 @@ h3 {
   grid-template-columns: auto minmax(0, 1fr);
   gap: 4px 8px;
   align-items: center;
+  min-height: var(--control-target-size);
   margin: 8px;
   border: 1px dashed color-mix(in srgb, var(--line) 70%, var(--blue) 28%);
   background: color-mix(in srgb, var(--surface-muted) 78%, var(--surface) 22%);
@@ -9527,14 +9535,14 @@ h3 {
 
 .workspace-explorer-actions {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) repeat(2, minmax(var(--control-compact-target-size), auto));
+  grid-template-columns: minmax(0, 1fr);
   gap: 6px;
   padding: 0 8px 8px;
 }
 
 .workspace-explorer-actions button {
   display: inline-flex;
-  min-height: var(--control-compact-target-size);
+  min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: 5px;
@@ -9591,6 +9599,7 @@ h3 {
 
 .workspace-explorer-search input {
   width: 100%;
+  min-height: var(--control-target-size);
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--text);
@@ -9742,6 +9751,7 @@ h3 {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   min-width: 0;
+  max-width: 100%;
   min-height: 0;
   overflow: hidden;
   align-content: stretch;
@@ -9753,9 +9763,19 @@ h3 {
 }
 
 .filesystem-editor-pane .native-source-workbench {
+  min-width: 0;
+  max-width: 100%;
   border: 0;
   border-top: 1px solid var(--line);
   border-radius: 0;
+}
+
+.filesystem-editor-pane .panel-heading,
+.filesystem-editor-pane .native-source-controls,
+.filesystem-editor-pane .source-command-toolbar,
+.filesystem-editor-pane .source-workbench-switcher {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .filesystem-workbench .source-file-browser {
@@ -11036,6 +11056,192 @@ h3 {
   }
 }
 
+@media (max-width: 960px) {
+  .desktop-titlebar,
+  .titlebar-context-strip,
+  .titlebar-actions,
+  .desktop-toolbar,
+  .workspace-home-actions,
+  .home-menu-surface,
+  .home-depth-menu,
+  .desktop-run-timeline,
+  .home-metrics-strip,
+  .main-feature-detail,
+  .product-feature-summary,
+  .product-feature-grid,
+  .reference-advantage-grid,
+  .operator-section-grid,
+  .metrics-band,
+  .history-summary-band,
+  .collaboration-summary,
+  .records-grid,
+  .document-browser,
+  .timeline-docs,
+  .folder-table,
+  .project-home-grid,
+  .agent-map,
+  .agent-workload-strip,
+  .agent-bars,
+  .adapter-grid,
+  .desktop-command-grid,
+  .quick-start-flow,
+  .ops-summary-strip,
+  .ops-unified-grid,
+  .task-pipe-summary,
+  .task-pipe-report-grid,
+  .task-run-summary-strip,
+  .task-run-grid,
+  .accumulated-store-grid,
+  .runtime-root-grid,
+  .service-group-grid,
+  .task-run-detail-meta,
+  .pipe-lane-grid,
+  .provider-account-summary,
+  .provider-account-row dl,
+  .run-board-strip,
+  .process-graph,
+  .evidence-grid,
+  .transfer-pattern-grid,
+  .philosophy-feature-hero,
+  .philosophy-candidate-grid,
+  .core-function-grid,
+  .intent-map-hero,
+  .intent-theme-list,
+  .intent-roadmap-grid,
+  .structure-plane-grid,
+  .agentcore-builder-steps,
+  .agentcore-blueprint-matrix,
+  .boundary-rule-grid,
+  .terminal-report-list,
+  .desktop-health-strip,
+  .core-home-status-row,
+  .root-tool-grid,
+  .root-tool-grid.compact,
+  .settings-core-setup-grid,
+  .decision-resume-strip,
+  .decision-replay-strip,
+  .terminal-event-rail article,
+  .decision-answer-controls,
+  .session-input-row,
+  .source-results-summary,
+  .source-draft-list,
+  .source-editor-controls,
+  .source-customization-bar,
+  .source-settings-grid,
+  .agentcore-builder-status,
+  .search-agent-run-form,
+  .agent-chat-actions,
+  .agent-chat-context-form,
+  .agent-factory-form,
+  .learning-decision-controls,
+  .mode-option-grid,
+  .agent-provider-run-controls,
+  .provider-account-fields,
+  .mode-switchboard-layout,
+  .content-grid,
+  .structure-grid,
+  .history-visual-grid,
+  .agent-visual-grid,
+  .agent-flow-map article,
+  .source-layout,
+  .command-center,
+  .decision-inbox-layout,
+  .ops-event,
+  .task-pipe-layout,
+  .task-pipe-controls,
+  .native-git-layout,
+  .task-run-store-layout,
+  .accumulated-data-layout,
+  .runtime-data-layout,
+  .service-readiness-layout,
+  .session-launcher,
+  .session-grid,
+  .source-review-grid,
+  .desktop-hero,
+  .ide-run-toolbar,
+  .ide-tool-window-layout,
+  .attention-layout,
+  .claude-transfer-layout,
+  .philosophy-feature-layout,
+  .intent-map-layout,
+  .search-agent-run-layout,
+  .search-agent-work-chat-layout,
+  .agentcore-blueprint-layout,
+  .agent-factory-layout,
+  .learning-feedback-layout,
+  .native-file-hero,
+  .native-workspace-actions,
+  .native-workspace-state-strip,
+  .filesystem-workbench-shell,
+  .workspace-explorer-actions,
+  .native-source-controls,
+  .native-source-grid,
+  .source-edit-workbench,
+  .source-workbench-shell,
+  .agent-workbench-shell,
+  .agent-blueprint-shell,
+  .search-agent-workbench,
+  .native-git-workbench,
+  .terminal-drawer-layout,
+  .requirements-table {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .desktop-titlebar {
+    align-items: stretch;
+  }
+
+  .titlebar-context-strip {
+    align-items: start;
+  }
+
+  .titlebar-context-strip button,
+  .titlebar-actions > button,
+  .titlebar-search,
+  .desktop-toolbar .select-box,
+  .desktop-toolbar button {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .desktop-toolbar {
+    justify-content: stretch;
+  }
+
+  .source-command-toolbar,
+  .source-workbench-switcher,
+  .terminal-view-switcher,
+  .section-tabs,
+  .settings-segment-list,
+  .settings-pin-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    overflow: visible;
+  }
+
+  .source-command-toolbar button,
+  .source-workbench-switcher button,
+  .terminal-view-switcher button,
+  .section-tabs button,
+  .settings-segment-list button,
+  .settings-pin-grid button {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .filesystem-workbench-shell,
+  .source-workbench-shell,
+  .agent-workbench-shell,
+  .terminal-drawer-layout {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+}
+
 @media (max-width: 720px) {
   main {
     width: 100%;
@@ -11460,4 +11666,23 @@ h3 {
     justify-self: start;
   }
 
+}
+
+@media (max-width: 420px) {
+  .activity-rail {
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    grid-template-rows: auto auto;
+  }
+
+  .activity-rail nav {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    overflow: visible;
+  }
+
+  .activity-rail nav button {
+    width: 100%;
+    min-width: 0;
+  }
 }
