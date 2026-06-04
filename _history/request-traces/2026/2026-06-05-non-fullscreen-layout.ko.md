@@ -17,6 +17,7 @@
 - 제품 font stack을 `Pretendard Variable`/`Pretendard` 우선으로 교체하고, dark theme과 dark surface foreground를 흰색 token으로 통일했다.
 - Agents 화면은 검색 에이전트 작업 채팅만 먼저 보이고, 블루프린트/생성기/협업판/인벤토리는 닫힌 `section-secondary-disclosure` 아래로 이동했다.
 - Desktop Runtime 화면은 실행 작업대와 Quick Start만 먼저 보이고, 운영 진단/기록/결정함/근거 후보는 닫힌 `section-secondary-disclosure` 아래로 이동했다.
+- 에이전트 코어 채팅은 익숙한 AI 채팅 구조에 맞춰 중앙 대화 로그, 하단 composer, compact provider/model selector, 기본 닫힘 context drawer로 재배치했다.
 
 ## 산출물
 
@@ -26,6 +27,7 @@
 - 검증: `_history/evaluations/2026/2026-06-05-non-fullscreen-layout-evaluation-input.json`
 - Typography 검증: `_history/evaluations/2026/2026-06-05-typography-scale-evaluation-input.json`
 - 정보 밀도 검증: `_history/evaluations/2026/2026-06-05-page-information-density-evaluation-input.json`
+- Agent Core 채팅 검증: `_history/evaluations/2026/2026-06-05-agent-chat-familiar-ui-evaluation-input.json`
 
 ## 검증 요약
 

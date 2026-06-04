@@ -37,6 +37,11 @@
   - 390x720 `agents`: section disclosure 1개 기본 닫힘, 보조 패널 visible 0, top panels 2, agent work context 기본 닫힘, overflow 0
   - 390x720 `desktop`: section disclosure 2개 기본 닫힘, 보조 패널 visible 0, top panels 4, overflow 0
   - interaction: 390x720에서 Agents 1개, Desktop 2개 disclosure summary click/open/close 및 overflow 0 확인
+- Agent Core chat audit:
+  - 대상: `agents`
+  - viewport: 1280x820, 900x720, 720x720, 540x720, 390x720
+  - 결과: 5개 조합 모두 failures 없음
+  - 확인: root/body horizontal overflow 0, central conversation log visible, message 2개 visible, bottom composer visible, send/terminal visible, provider/model controls inside composer, context drawer 기본 닫힘, visible action/input target 40px 이상
 
 ## 확인 기준
 
@@ -49,3 +54,4 @@
 - 텍스트는 `Pretendard Variable`/`Pretendard` 우선 sans fallback stack과 역할 기반 token으로만 선언하고, 작은 보조 텍스트는 11px small token으로 유지하되 브라우저 기본 `<small>` 축소처럼 scale 밖으로 빠지는 visible text가 없어야 한다.
 - 어두운 배경 위 visible text는 반투명 회색 foreground가 아니라 흰색 foreground token을 사용해야 한다.
 - Agents/Desktop Runtime의 보조 기능군은 기본 닫힌 section-level disclosure 아래에 있어야 하며, 닫힌 상태에서 해당 보조 패널이 visible로 계산되면 실패다.
+- Agent Core 채팅은 중앙 대화 로그와 하단 composer가 같은 주 작업면에 보여야 하며, provider/model/context 컨트롤이 대화 입력보다 우선 노출되어 화면을 밀어내면 실패다.

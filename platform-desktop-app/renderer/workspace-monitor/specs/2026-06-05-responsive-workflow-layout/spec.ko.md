@@ -23,6 +23,7 @@
 - 화면 축소 시 텍스트 크기를 viewport 비율로 줄이지 않고, layout reflow와 progressive disclosure로 정보량을 줄인다.
 - Agents와 Desktop Runtime은 첫 화면에 주 작업대만 노출하고, 생성기/블루프린트/협업판/진단/기록/결정함/근거 후보는 section-level disclosure에 기본 접힘으로 둔다.
 - 세부 disclosure summary는 포함된 정보군을 명확히 이름 붙이고, 닫힌 상태에서도 다음 깊이로 들어가는 선택지만 보이게 한다.
+- 에이전트 코어 채팅은 중앙 대화 로그와 하단 composer를 주 작업면으로 삼고, provider/model 선택은 입력창 하단의 compact 컨트롤로 낮추며, 작업 컨텍스트는 기본 닫힌 drawer로 분리한다.
 
 ## 제외
 

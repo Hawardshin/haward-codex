@@ -25,3 +25,6 @@
 - [x] Agents 보조 패널을 기본 접힘 section disclosure로 이동
 - [x] Desktop Runtime 진단/기록/결정함 패널을 기본 접힘 section disclosure로 이동
 - [x] 정적 export Playwright section information-density audit
+- [x] Agent Core 채팅 중앙 로그 + 하단 composer 재배치
+- [x] provider/model/context 보조 컨트롤 정리
+- [x] 정적 export Playwright Agent Core chat audit

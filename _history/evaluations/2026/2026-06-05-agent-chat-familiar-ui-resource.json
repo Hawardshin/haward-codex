@@ -1,0 +1,27 @@
+{
+  "id": "2026-06-05-agent-chat-familiar-ui-resource",
+  "date": "2026-06-05",
+  "resource_risk_occurred": true,
+  "resources_used": [
+    {
+      "kind": "local_static_server",
+      "command": "python3 -m http.server 3222 --bind 127.0.0.1",
+      "purpose": "Serve the static export for browser layout audit.",
+      "status": "stopped",
+      "cleanup": "Sent SIGINT to the exec session after Playwright audit completed."
+    },
+    {
+      "kind": "browser_automation",
+      "command": "node --input-type=commonjs with local pnpm-store Playwright package",
+      "purpose": "Inspect Agents chat layout at five viewport sizes.",
+      "status": "closed",
+      "cleanup": "Each Playwright page and the Chromium browser instance were closed in the script."
+    }
+  ],
+  "checks": [
+    "No required exec session was left running.",
+    "The local static server was stopped after audit.",
+    "Playwright browser lifecycle closed in a finally block."
+  ],
+  "status": "pass"
+}

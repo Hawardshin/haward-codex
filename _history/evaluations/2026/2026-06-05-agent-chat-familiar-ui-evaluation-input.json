@@ -1,0 +1,90 @@
+{
+  "id": "2026-06-05-agent-chat-familiar-ui",
+  "date": "2026-06-05",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "request_summary": "에이전트 코어 채팅 UI를 ChatGPT/Claude/Gemini처럼 익숙한 대화 중심 구조로 바꾼다.",
+  "requirements": [
+    "REQ-WM-031",
+    "REQ-WM-034",
+    "REQ-WM-035",
+    "REQ-WM-037",
+    "REQ-WM-038"
+  ],
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/traceability.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-responsive-workflow-layout/validation.ko.md",
+    "_history/user-requests/2026/2026-06-05-responsive-workflow-layout.ko.md",
+    "_history/request-traces/2026/2026-06-05-non-fullscreen-layout.ko.md",
+    "_history/work-summaries/2026/2026-06-05.ko.md",
+    "_history/2026/2026-06-05.md",
+    "_history/web-searches/2026/2026-06-05-agent-chat-familiar-ui.ko.md"
+  ],
+  "implementation_summary": [
+    "Agent Core chat heading was reduced to a compact conversation header.",
+    "The conversation log is now the central work surface.",
+    "The composer moved to the bottom of the chat surface with the message textarea first.",
+    "Provider and model controls moved into compact controls inside the composer footer.",
+    "Work context moved into a closed-by-default drawer below the composer.",
+    "Contract cards moved below the chat surface so they do not compete with the input flow.",
+    "Responsive CSS keeps controls and cards stable across 1280px, 900px, 720px, 540px, and 390px widths."
+  ],
+  "verification": [
+    {
+      "command": "corepack pnpm --filter workspace-monitor run check",
+      "status": "passed",
+      "notes": "TypeScript, scroll contract, and source control design checks passed."
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor test",
+      "status": "passed",
+      "notes": "17 node tests passed."
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor run build:customer",
+      "status": "passed",
+      "notes": "Customer snapshot and Next static export completed."
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor run perf:budget",
+      "status": "passed",
+      "notes": "Largest initial chunk 325959 bytes under the 1000000 byte budget."
+    },
+    {
+      "command": "corepack pnpm --filter platform-desktop-app run check",
+      "status": "passed",
+      "notes": "Runtime contract, readiness, customer bundle, internal release, and service readiness checks passed; public release remains gated by existing signing/updater/clean-machine warnings."
+    },
+    {
+      "command": "Static export Playwright Agent chat audit",
+      "status": "passed",
+      "notes": "Agents section passed at 1280x820, 900x720, 720x720, 540x720, and 390x720 with horizontal overflow 0, visible central log, visible bottom composer, compact provider/model controls inside composer, closed context drawer, and no visible target below 40px."
+    }
+  ],
+  "web_search_targets": [
+    "_history/web-searches/2026/2026-06-05-agent-chat-familiar-ui.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-agent-chat-familiar-ui-omission.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-agent-chat-familiar-ui-resource.json"
+  ],
+  "installation_occurred": false,
+  "generated_snapshot_files_left_unstaged": [
+    "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/customer-workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json"
+  ],
+  "result": "pass"
+}

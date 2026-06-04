@@ -26,7 +26,6 @@ import {
   Languages,
   LayoutDashboard,
   ListFilter,
-  MessageSquare,
   Network,
   PlayCircle,
   RefreshCw,
@@ -5516,41 +5515,29 @@ function SearchAgentWorkChatPanel({
 
   return (
     <section className="panel wide search-agent-work-chat-panel">
-      <div className="panel-heading">
-        <div>
-          <p className="eyebrow">{ko ? "기존 에이전트 작업대" : "Existing Agent Workbench"}</p>
-          <h2>{ko ? "검색 에이전트 작업 채팅" : "Search Agent Work Chat"}</h2>
-          <p>
-            {ko
-              ? "여기에서 작업을 입력하면 연결된 제공자 계정으로 research-insight-planner-agent가 바로 작업하고, 필요한 경우 CLI lane으로 이어집니다."
-              : "Type the work here and the existing research-insight-planner-agent runs through the connected provider account, with CLI lanes available as a fallback."}
-          </p>
-        </div>
-        <span className="result-count">{providerTaskBusy ? (ko ? "작업 중" : "Running") : runtimeLaunchQueued ? (ko ? "실행 준비 중" : "Queued") : statusLabel}</span>
-      </div>
-
       <div className="search-agent-work-chat-layout">
         <div className="agent-chat-workspace" aria-label={ko ? "검색 에이전트 작업 채팅" : "Search agent work chat"}>
-          <div className="agent-chat-toolbar" aria-label={ko ? "작업 연결 상태" : "Work connection status"}>
-            <span>
-              <MessageSquare size={14} aria-hidden="true" />
-              {ko ? "채팅에서 작업 시작" : "Start in chat"}
-            </span>
-            <span>
-              <KeyRound size={14} aria-hidden="true" />
-              {selectedProviderLocal
-                ? `${selectedProvider?.label} ${ko ? "로컬" : "local"}`
-                : selectedProviderConnected
-                  ? selectedProvider?.label
-                  : ko
-                    ? "계정 연결 필요"
-                    : "Account needed"}
-            </span>
-            <span>
-              <FileSearch size={14} aria-hidden="true" />
-              {ko ? "근거와 파일 컨텍스트 사용" : "Evidence and files"}
-            </span>
-          </div>
+          <header className="agent-chat-conversation-header">
+            <div>
+              <span className="agent-chat-kicker">Agent Core</span>
+              <h2>{ko ? "에이전트 코어 채팅" : "Agent Core Chat"}</h2>
+            </div>
+            <div className="agent-chat-header-meta" aria-label={ko ? "채팅 상태" : "Chat status"}>
+              <span className={`agent-chat-status-pill ${selectedProviderConnected || selectedProviderLocal ? "ready" : "missing"}`}>
+                {providerTaskBusy ? (ko ? "작업 중" : "Running") : runtimeLaunchQueued ? (ko ? "대기 중" : "Queued") : statusLabel}
+              </span>
+              <span>
+                <KeyRound size={14} aria-hidden="true" />
+                {selectedProviderLocal
+                  ? `${selectedProvider?.label} ${ko ? "로컬" : "local"}`
+                  : selectedProviderConnected
+                    ? selectedProvider?.label
+                    : ko
+                      ? "계정 연결 필요"
+                      : "Account needed"}
+              </span>
+            </div>
+          </header>
 
           <div className="agent-chat-thread" role="log" aria-label={ko ? "검색 에이전트 대화" : "Search agent conversation"}>
             {messages.map((message) => (
@@ -5565,78 +5552,81 @@ function SearchAgentWorkChatPanel({
           </div>
 
           <div className="agent-chat-composer">
-            <div className="agent-provider-run-controls" aria-label={ko ? "제공자 실행 설정" : "Provider run settings"}>
-              <label>
-                <span>{ko ? "실행 계정" : "Run Account"}</span>
-                <select value={form.providerId} onChange={(event) => onChange("providerId", event.target.value)}>
-                  {providerCredentialReport.providers.map((provider) => (
-                    <option key={provider.providerId} value={provider.providerId}>
-                      {provider.label} {provider.authMethod === "local_http" ? (ko ? "로컬" : "local") : provider.configured ? (ko ? "연결됨" : "connected") : (ko ? "미연결" : "not connected")}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label>
-                <span>{ko ? "모델" : "Model"}</span>
-                <div className="agent-model-picker">
-                  <input
-                    list="search-agent-model-options"
-                    value={selectedProviderModel}
-                    placeholder={selectedProvider?.defaultModel || "model"}
-                    onChange={(event) => onChange("model", event.target.value)}
-                  />
-                  <datalist id="search-agent-model-options">
-                    {modelOptions.map((model) => (
-                      <option key={`${model.providerId}-${model.id}`} value={model.id}>
-                        {model.label}
-                      </option>
-                    ))}
-                  </datalist>
-                  <button
-                    type="button"
-                    className="agent-model-refresh-button"
-                    onClick={() => onRefreshModels(selectedProvider?.providerId)}
-                    disabled={providerModelBusy || !selectedProvider}
-                    aria-label={ko ? "모델 목록 새로고침" : "Refresh model list"}
-                    title={ko ? "모델 목록 새로고침" : "Refresh model list"}
-                  >
-                    <RefreshCw size={15} aria-hidden="true" />
-                  </button>
-                </div>
-                <small className={providerModelError ? "agent-model-status warning" : "agent-model-status"}>
-                  {modelStatusText}
-                </small>
-              </label>
-              <div className={`agent-provider-run-state ${selectedProviderConnected ? "connected" : "missing"}`}>
-                <strong>{selectedProviderRuntimeLabel}</strong>
-                <span>{selectedProviderRuntimeSource}</span>
-              </div>
-            </div>
-            <label>
-              <span>{ko ? "작업 입력" : "Work Request"}</span>
+            <label className="agent-chat-prompt-field">
+              <span>{ko ? "메시지" : "Message"}</span>
               <textarea
-                rows={5}
+                rows={3}
                 value={form.objective}
-                placeholder={ko ? "검색 에이전트가 처리할 일을 입력하세요." : "Describe the work for the search agent."}
+                placeholder={ko ? "에이전트에게 맡길 일을 입력하세요." : "Message the agent."}
                 onChange={(event) => onChange("objective", event.target.value)}
               />
             </label>
-            <div className="agent-chat-actions">
-              <button type="button" className="primary-action-button" onClick={onRun} disabled={providerTaskBusy}>
-                <Send size={16} aria-hidden="true" />
-                <span>{providerTaskBusy ? (ko ? "작업 중" : "Running") : ko ? "작업 시작" : "Start Work"}</span>
-              </button>
-              <button type="button" onClick={onOpenTerminal}>
-                <SquareTerminal size={16} aria-hidden="true" />
-                <span>{ko ? "터미널 보기" : "Open Terminal"}</span>
-              </button>
+            <div className="agent-chat-composer-footer">
+              <div className="agent-provider-run-controls" aria-label={ko ? "제공자 실행 설정" : "Provider run settings"}>
+                <label>
+                  <span>{ko ? "계정" : "Account"}</span>
+                  <select value={form.providerId} onChange={(event) => onChange("providerId", event.target.value)}>
+                    {providerCredentialReport.providers.map((provider) => (
+                      <option key={provider.providerId} value={provider.providerId}>
+                        {provider.label} {provider.authMethod === "local_http" ? (ko ? "로컬" : "local") : provider.configured ? (ko ? "연결됨" : "connected") : (ko ? "미연결" : "not connected")}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  <span>{ko ? "모델" : "Model"}</span>
+                  <div className="agent-model-picker">
+                    <input
+                      list="search-agent-model-options"
+                      value={selectedProviderModel}
+                      placeholder={selectedProvider?.defaultModel || "model"}
+                      onChange={(event) => onChange("model", event.target.value)}
+                    />
+                    <datalist id="search-agent-model-options">
+                      {modelOptions.map((model) => (
+                        <option key={`${model.providerId}-${model.id}`} value={model.id}>
+                          {model.label}
+                        </option>
+                      ))}
+                    </datalist>
+                    <button
+                      type="button"
+                      className="agent-model-refresh-button"
+                      onClick={() => onRefreshModels(selectedProvider?.providerId)}
+                      disabled={providerModelBusy || !selectedProvider}
+                      aria-label={ko ? "모델 목록 새로고침" : "Refresh model list"}
+                      title={ko ? "모델 목록 새로고침" : "Refresh model list"}
+                    >
+                      <RefreshCw size={15} aria-hidden="true" />
+                    </button>
+                  </div>
+                  <small className={providerModelError ? "agent-model-status warning" : "agent-model-status"}>
+                    {modelStatusText}
+                  </small>
+                </label>
+                <div className={`agent-provider-run-state ${selectedProviderConnected || selectedProviderLocal ? "connected" : "missing"}`}>
+                  <strong>{selectedProviderRuntimeLabel}</strong>
+                  <span>{selectedProviderRuntimeSource}</span>
+                </div>
+              </div>
+              <div className="agent-chat-actions">
+                <button type="button" onClick={onOpenTerminal}>
+                  <SquareTerminal size={16} aria-hidden="true" />
+                  <span>{ko ? "터미널" : "Terminal"}</span>
+                </button>
+                <button type="button" className="primary-action-button agent-chat-send-button" onClick={onRun} disabled={providerTaskBusy}>
+                  <Send size={16} aria-hidden="true" />
+                  <span>{providerTaskBusy ? (ko ? "작업 중" : "Running") : ko ? "전송" : "Send"}</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <aside className="agent-chat-context">
-          <details className="agent-chat-details">
-            <summary>{ko ? "작업 컨텍스트" : "Work Context"}</summary>
+          <details className="agent-chat-details agent-chat-context-drawer">
+            <summary>
+              <Settings size={14} aria-hidden="true" />
+              <span>{ko ? "컨텍스트" : "Context"}</span>
+            </summary>
             <div className="agent-chat-context-form">
               <label>
                 <span>{ko ? "검색 질문" : "Search Questions"}</span>
@@ -5672,7 +5662,9 @@ function SearchAgentWorkChatPanel({
               </label>
             </div>
           </details>
+        </div>
 
+        <aside className="agent-chat-context">
           <div className="agent-chat-contract-card">
             <span>{ko ? "실행 계정" : "Run Account"}</span>
             <strong>{selectedProvider?.label || (ko ? "계정 없음" : "No account")}</strong>
