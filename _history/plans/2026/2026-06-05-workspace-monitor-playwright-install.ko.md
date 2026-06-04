@@ -1,0 +1,25 @@
+# 계획: Workspace Monitor Playwright Install
+
+- work_mode: `standard`
+- install_mode: `developer`
+- view_mode: `superadmin_developer`
+- install scope: `platform-desktop-app/renderer/workspace-monitor`
+- exact commands:
+  - `corepack pnpm --filter workspace-monitor add -D -E @playwright/test@1.60.0`
+  - `corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor exec playwright install chromium --only-shell`
+- dependency records:
+  - `platform-desktop-app/renderer/workspace-monitor/package.json`
+  - `pnpm-lock.yaml`
+- installation audit:
+  - `_history/installations/2026/2026-06-05-workspace-monitor-playwright.ko.md`
+- verification:
+  - Playwright CLI/version/import/Chromium launch smoke
+  - `corepack pnpm audit --prod=false`
+  - `corepack pnpm --filter workspace-monitor run check`
+  - `corepack pnpm --filter workspace-monitor test`
+  - `corepack pnpm --filter workspace-monitor run build:customer`
+  - `corepack pnpm --filter workspace-monitor run perf:budget`
+  - `corepack pnpm --filter platform-desktop-app run check`
+- rollback:
+  - `corepack pnpm --filter workspace-monitor remove @playwright/test`
+  - `corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor exec playwright uninstall chromium`

@@ -1,0 +1,17 @@
+{
+  "schema_version": "2026-06-02",
+  "status": "resource_ready",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "kind": "project_node_dependency",
+      "path": "platform-desktop-app/renderer/workspace-monitor/node_modules",
+      "result": "updated by pnpm install"
+    },
+    {
+      "kind": "playwright_browser_cache",
+      "result": "Chromium headless shell installed by Playwright"
+    }
+  ],
+  "cleanup": "No long-running process left by installation. Rollback commands recorded in installation audit."
+}

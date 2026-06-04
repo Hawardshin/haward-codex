@@ -1,0 +1,19 @@
+{
+  "schema_version": "2026-06-02",
+  "status": "coverage_ready",
+  "checked_items": [
+    "web-first intake recorded",
+    "install_mode selected as developer",
+    "installation audit record created before install",
+    "registry entry created and updated after install",
+    "exact dependency version installed",
+    "browser runtime installed",
+    "security audit run",
+    "license recorded",
+    "rollback path recorded",
+    "existing workspace checks rerun"
+  ],
+  "remaining_gaps": [
+    "public release signing/notarization, updater endpoint/signing key, and clean-machine smoke remain outside this install-only task"
+  ]
+}
