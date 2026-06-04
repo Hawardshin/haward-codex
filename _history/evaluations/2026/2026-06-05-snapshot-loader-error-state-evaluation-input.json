@@ -1,0 +1,41 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "snapshot-loader-error-state",
+  "result_summary": "Fixed SnapshotLoader so failed or timed-out workspace snapshot fetches render the error screen instead of staying in loading forever, and added a regression test plus static-export browser verification.",
+  "changed_paths": [
+    "platform-desktop-app/renderer/workspace-monitor/components/SnapshotLoader.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/snapshot-loader.test.mjs"
+  ],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test: passed, 18 tests",
+    "corepack pnpm --filter workspace-monitor check: passed",
+    "corepack pnpm --filter platform-desktop-app test: passed, 22 tests",
+    "corepack pnpm --filter workspace-monitor run build:customer: passed",
+    "corepack pnpm --filter workspace-monitor run perf:budget: passed",
+    "corepack pnpm --filter platform-desktop-app run customer-bundle:audit: passed",
+    "corepack pnpm --filter platform-desktop-app run check: passed",
+    "corepack pnpm --filter platform-desktop-app run doctor -- --json: passed",
+    "Playwright static export 404 smoke: passed",
+    "git diff --check: passed"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-snapshot-loader-error-state.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-05-snapshot-loader-error-state.ko.md"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-05-snapshot-loader-error-state.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-05-snapshot-loader-error-state.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-snapshot-loader-error-state-omission.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-05-snapshot-loader-error-state-resource.json"
+  ],
+  "installation_occurred": false
+}

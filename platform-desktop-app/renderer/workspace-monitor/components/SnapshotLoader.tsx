@@ -32,6 +32,14 @@ export function SnapshotLoader() {
     let canceled = false;
     const controller = typeof AbortController === "function" ? new AbortController() : null;
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    let timedOut = false;
+
+    const clearSnapshotTimeout = () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = undefined;
+      }
+    };
 
     async function loadSnapshot() {
       try {
@@ -39,6 +47,7 @@ export function SnapshotLoader() {
           fetchPublicSnapshot(controller),
           new Promise<WorkspaceSnapshot>((_, reject) => {
             timeoutId = setTimeout(() => {
+              timedOut = true;
               controller?.abort();
               reject(new Error("Snapshot request timed out."));
             }, 7000);
@@ -49,17 +58,23 @@ export function SnapshotLoader() {
         }
       } catch (caught) {
         if (!canceled) {
-          console.warn(caught instanceof Error ? caught.message : "Failed to load workspace snapshot.");
+          const errorMessage = timedOut
+            ? "Snapshot request timed out."
+            : caught instanceof Error
+              ? caught.message
+              : "Failed to load workspace snapshot.";
+          console.warn(errorMessage);
+          setState({ status: "error", snapshot: null, error: errorMessage });
         }
+      } finally {
+        clearSnapshotTimeout();
       }
     }
 
     void loadSnapshot();
     return () => {
       canceled = true;
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
+      clearSnapshotTimeout();
       controller?.abort();
     };
   }, []);

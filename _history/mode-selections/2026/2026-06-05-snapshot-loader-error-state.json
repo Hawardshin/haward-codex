@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "snapshot-loader-error-state",
+  "selected_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selection_reason": "The user asked for bug improvement. The work fixed a frontend loading/error-state bug and added tests without installing dependencies.",
+  "mode_policy_notes": [
+    "Web-first intake was performed.",
+    "Large-scope decomposition was simulated and narrowed to the Workspace Monitor snapshot loader.",
+    "No install command or global environment change was performed.",
+    "Generated snapshot outputs were left unstaged."
+  ]
+}
