@@ -18,3 +18,5 @@
 - [x] typography scale token 추가 및 임의 `font-size` 값 제거
 - [x] `<small>` 기본 축소 방지
 - [x] 정적 export Playwright 5개 섹션 x 5개 viewport typography audit
+- [x] 한/영 혼합 sans fallback stack 적용
+- [x] 기본 `<small>`을 11px small token으로 낮춤

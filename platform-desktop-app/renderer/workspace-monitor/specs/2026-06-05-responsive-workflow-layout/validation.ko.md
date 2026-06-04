@@ -21,10 +21,13 @@
 - `globals.css` typography token audit: 직접 숫자 기반 `font-size: <number>` 선언 없음
 - in-app Browser typography smoke:
   - 390x844: rendered font sizes `11/12/13/14/16/18/20px`, horizontal overflow 0
+- in-app Browser readable font smoke:
+  - 390x844: body/root font family에 `Pretendard GOV`, `Pretendard`, `Noto Sans KR` fallback 포함
+  - small samples: 11px, line-height 15.95px 이상, horizontal overflow 0
 - 정적 export Playwright typography audit:
   - 대상: `overview`, `agents`, `desktop`, `source`, `intent`
   - viewport: 1280x820, 900x720, 720x720, 540x720, 390x720
-  - 결과: 25개 조합 모두 failures 없음, visible text font size는 11px 이상 24px 이하의 typography scale 안에 있음
+  - 결과: 25개 조합 모두 failures 없음, body font stack에 `Pretendard`/`Noto Sans KR` 포함, visible text font size는 11px 이상 24px 이하의 typography scale 안에 있음
 
 ## 확인 기준
 
@@ -34,4 +37,4 @@
 - desktop/tablet/mobile viewport에서 body horizontal overflow가 없다.
 - 비전체화면 주요 섹션에서 한 화면에 여러 기능을 압축하지 않고 1열/깊이 기반으로 reflow한다.
 - 초기 JS 성능 예산은 `maxInitialChunkBytes=1000000` 아래에 있어야 한다.
-- 텍스트 크기는 역할 기반 token으로만 선언하고, 브라우저 기본 `<small>` 축소처럼 scale 밖으로 빠지는 visible text가 없어야 한다.
+- 텍스트는 읽기 좋은 sans fallback stack과 역할 기반 token으로만 선언하고, 작은 보조 텍스트는 11px small token으로 유지하되 브라우저 기본 `<small>` 축소처럼 scale 밖으로 빠지는 visible text가 없어야 한다.

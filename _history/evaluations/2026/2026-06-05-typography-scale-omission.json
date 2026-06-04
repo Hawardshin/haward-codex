@@ -12,6 +12,7 @@
     "implementation completed",
     "CSS token audit completed",
     "in-app Browser smoke completed",
+    "readable font stack and explicit small text behavior checked",
     "static export multi-viewport typography audit completed",
     "workspace monitor and desktop checks completed",
     "generated snapshot files left out of intended commit set"

@@ -6,7 +6,7 @@
   "resources": [
     {
       "kind": "static_server",
-      "target": "workspace-monitor out python http.server on 127.0.0.1:3218",
+      "target": "workspace-monitor out python http.server on 127.0.0.1:3219",
       "cleanupRequired": true
     },
     {

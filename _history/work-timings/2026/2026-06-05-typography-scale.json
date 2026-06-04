@@ -12,7 +12,7 @@
     {
       "phase": "implementation",
       "duration": "not_measured",
-      "notes": "Added typography tokens, tokenized global font-size declarations, and fixed app-level small text default."
+      "notes": "Added typography tokens, tokenized global font-size declarations, applied a readable Korean/English fallback font stack, and fixed app-level small text default."
     },
     {
       "phase": "verification",

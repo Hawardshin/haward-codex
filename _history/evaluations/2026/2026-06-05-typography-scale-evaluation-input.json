@@ -4,7 +4,7 @@
   "workId": "typography-scale",
   "workMode": "standard",
   "project": "platform-desktop-app/renderer/workspace-monitor",
-  "userRequest": "텍스트 크기가 너무 들쭉날쭉하다.",
+  "userRequest": "텍스트 크기가 너무 들쭉날쭉하고, 더 가독성 높은 폰트를 쓰되 작은 보조 텍스트는 작게 유지해야 한다.",
   "requirements": ["REQ-WM-035", "REQ-WM-034", "REQ-WM-031"],
   "implementationFiles": [
     "platform-desktop-app/renderer/workspace-monitor/app/globals.css"
@@ -46,7 +46,8 @@
     "corepack pnpm --filter platform-desktop-app run check",
     "CSS audit: no direct numeric font-size declarations in globals.css",
     "in-app Browser typography smoke: 390x844 rendered font sizes in scale, overflowX=0",
-    "Playwright static export typography audit: 5 sections x 5 viewports, failures=[]"
+    "in-app Browser readable font smoke: 390x844 body/root font-family includes Pretendard and Noto Sans KR fallback, small samples 11px",
+    "Playwright static export typography audit: 5 sections x 5 viewports, fontStackOk=true, failures=[]"
   ],
   "installationOccurred": false,
   "snapshotGeneratedFilesExcludedFromCommit": true
