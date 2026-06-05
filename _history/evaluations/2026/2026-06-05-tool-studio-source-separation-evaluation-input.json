@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "tool-studio-source-separation",
+  "project": "workspace-monitor",
+  "installation_occurred": false,
+  "resource_risk_occurred": false,
+  "requirements": [
+    "REQ-WM-071"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-tool-studio-source-separation.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-05-tool-studio-source-separation.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tool-studio-source-separation/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tool-studio-source-separation/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tool-studio-source-separation/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tool-studio-source-separation/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tool-studio-source-separation/traceability.ko.md"
+  ],
+  "validation_commands": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor exec tsc --noEmit",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "git diff --check"
+  ],
+  "validation_result": "passed",
+  "known_exclusions": [
+    "Generated workspace snapshot JSON files were modified by existing build scripts and intentionally excluded from the commit."
+  ]
+}

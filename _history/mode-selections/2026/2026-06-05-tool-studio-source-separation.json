@@ -1,0 +1,8 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "tool-studio-source-separation",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "Meaningful source refactor in the desktop monitor without dependency installation."
+}

@@ -12,6 +12,14 @@ const toolStudio = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "ToolStudioPanel.tsx"),
   "utf8"
 );
+const toolStudioData = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "tool-studio", "data.ts"),
+  "utf8"
+);
+const toolStudioTypes = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "tool-studio", "types.ts"),
+  "utf8"
+);
 const agentCollaborationScene = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "AgentCollaborationScene.tsx"),
   "utf8"
@@ -161,6 +169,9 @@ test("Three.js scene is lazy-loaded and cleans up WebGL resources", () => {
 });
 
 test("Tool Studio exposes shortcut and interaction contracts", () => {
+  assert.match(toolStudio, /from "\.\/tool-studio\/data"/);
+  assert.match(toolStudio, /from "\.\/tool-studio\/types"/);
+  assert.match(toolStudio, /export type \{ ToolStudioMode, ToolStudioModeRequest \} from "\.\/tool-studio\/types"/);
   assert.match(toolStudio, /data-tool-primary-menu/);
   assert.match(toolStudio, /className="tool-studio-primary-action tool-dropdown-trigger"/);
   assert.match(toolStudio, /aria-haspopup="menu"/);
@@ -179,11 +190,11 @@ test("Tool Studio exposes shortcut and interaction contracts", () => {
   assert.match(toolStudio, /data-tool-context-menu/);
   assert.match(toolStudio, /data-tool-stage-context-menu=\{item\.id\}/);
   assert.match(toolStudio, /data-tool-mode-context-menu=\{item\.id\}/);
-  assert.match(toolStudio, /type ToolStudioStage = "create" \| "ship"/);
+  assert.match(toolStudioTypes, /export type ToolStudioStage = "create" \| "ship"/);
   assert.match(toolStudio, /const \[stage, setStage\] = useState<ToolStudioStage>\("create"\)/);
-  assert.match(toolStudio, /const toolStudioStages: ToolStage\[\] = \[/);
-  assert.match(toolStudio, /stage: "create"/);
-  assert.match(toolStudio, /stage: "ship"/);
+  assert.match(toolStudioData, /export const toolStudioStages: ToolStage\[\] = \[/);
+  assert.match(toolStudioData, /stage: "create"/);
+  assert.match(toolStudioData, /stage: "ship"/);
   assert.match(toolStudio, /const currentStageModes = toolModes\.filter\(\(item\) => item\.stage === activeStage\.id\)/);
   assert.match(toolStudio, /const selectStage = useCallback\(/);
   assert.match(toolStudio, /data-tool-stage-rail/);
@@ -191,8 +202,8 @@ test("Tool Studio exposes shortcut and interaction contracts", () => {
   assert.match(toolStudio, /data-tool-mode-depth=\{stage\}/);
   assert.match(toolStudio, /data-tool-mode-button=\{item\.id\}/);
   assert.match(toolStudio, /data-agent-3d-canvas/);
-  assert.match(toolStudio, /export type ToolStudioMode = "build" \| "environment" \| "deploy" \| "registry"/);
-  assert.match(toolStudio, /export type ToolStudioModeRequest = \{[\s\S]*?mode: ToolStudioMode;[\s\S]*?requestId: number;/);
+  assert.match(toolStudioTypes, /export type ToolStudioMode = "build" \| "environment" \| "deploy" \| "registry"/);
+  assert.match(toolStudioTypes, /export type ToolStudioModeRequest = \{[\s\S]*?mode: ToolStudioMode;[\s\S]*?requestId: number;/);
   assert.match(toolStudio, /requestedMode\?: ToolStudioModeRequest \| null/);
   assert.match(toolStudio, /if \(requestedMode\) \{[\s\S]*?selectMode\(requestedMode\.mode\);/);
   assert.match(toolStudio, /const selectAdjacentMode = useCallback/);
@@ -285,18 +296,18 @@ test("Monitor buttons expose instant press feedback before heavy click work", ()
 });
 
 test("Tool Studio build mode exposes a dedicated tool builder workbench", () => {
-  assert.match(toolStudio, /type ToolBuilderBlueprint = \{/);
-  assert.match(toolStudio, /packageName: string;/);
-  assert.match(toolStudio, /moduleName: string;/);
-  assert.match(toolStudio, /entrypoint: string;/);
-  assert.match(toolStudio, /pyprojectPath: string;/);
-  assert.match(toolStudio, /testPath: string;/);
-  assert.match(toolStudio, /initCommand: string;/);
-  assert.match(toolStudio, /editTargets: string\[\];/);
-  assert.match(toolStudio, /sourceChecklistKo: string\[\];/);
-  assert.match(toolStudio, /sourceChecklistEn: string\[\];/);
-  assert.match(toolStudio, /const toolBuilderBlueprints: ToolBuilderBlueprint\[\] = \[/);
-  assert.match(toolStudio, /id:\s*"python-cli-tool"[\s\S]*?id:\s*"mcp-wrapper-tool"[\s\S]*?id:\s*"automation-tool"/);
+  assert.match(toolStudioTypes, /export type ToolBuilderBlueprint = \{/);
+  assert.match(toolStudioTypes, /packageName: string;/);
+  assert.match(toolStudioTypes, /moduleName: string;/);
+  assert.match(toolStudioTypes, /entrypoint: string;/);
+  assert.match(toolStudioTypes, /pyprojectPath: string;/);
+  assert.match(toolStudioTypes, /testPath: string;/);
+  assert.match(toolStudioTypes, /initCommand: string;/);
+  assert.match(toolStudioTypes, /editTargets: string\[\];/);
+  assert.match(toolStudioTypes, /sourceChecklistKo: string\[\];/);
+  assert.match(toolStudioTypes, /sourceChecklistEn: string\[\];/);
+  assert.match(toolStudioData, /export const toolBuilderBlueprints: ToolBuilderBlueprint\[\] = \[/);
+  assert.match(toolStudioData, /id:\s*"python-cli-tool"[\s\S]*?id:\s*"mcp-wrapper-tool"[\s\S]*?id:\s*"automation-tool"/);
   assert.match(toolStudio, /const \[selectedBlueprintId, setSelectedBlueprintId\] = useState/);
   assert.match(toolStudio, /const \[selectedSourceTarget, setSelectedSourceTarget\] = useState/);
   assert.match(toolStudio, /const selectedSourceChecklist = ko \? selectedBlueprint\.sourceChecklistKo : selectedBlueprint\.sourceChecklistEn/);
@@ -334,12 +345,12 @@ test("Tool Studio build mode exposes a dedicated tool builder workbench", () => 
 });
 
 test("Tool Studio environment mode exposes a Python execution workbench", () => {
-  assert.match(toolStudio, /type PythonEnvironmentProfile = \{/);
-  assert.match(toolStudio, /type VirtualEnvironmentLifecycleStep = \{/);
-  assert.match(toolStudio, /const pythonEnvironmentProfiles: PythonEnvironmentProfile\[\] = \[/);
-  assert.match(toolStudio, /const virtualEnvironmentLifecycleSteps: VirtualEnvironmentLifecycleStep\[\] = \[/);
-  assert.match(toolStudio, /id:\s*"local-venv"[\s\S]*?id:\s*"isolated-runner"[\s\S]*?id:\s*"agent-sandbox"/);
-  assert.match(toolStudio, /id:\s*"create"[\s\S]*?id:\s*"activate"[\s\S]*?id:\s*"install"[\s\S]*?id:\s*"freeze"[\s\S]*?id:\s*"rebuild"/);
+  assert.match(toolStudioTypes, /export type PythonEnvironmentProfile = \{/);
+  assert.match(toolStudioTypes, /export type VirtualEnvironmentLifecycleStep = \{/);
+  assert.match(toolStudioData, /export const pythonEnvironmentProfiles: PythonEnvironmentProfile\[\] = \[/);
+  assert.match(toolStudioData, /export const virtualEnvironmentLifecycleSteps: VirtualEnvironmentLifecycleStep\[\] = \[/);
+  assert.match(toolStudioData, /id:\s*"local-venv"[\s\S]*?id:\s*"isolated-runner"[\s\S]*?id:\s*"agent-sandbox"/);
+  assert.match(toolStudioData, /id:\s*"create"[\s\S]*?id:\s*"activate"[\s\S]*?id:\s*"install"[\s\S]*?id:\s*"freeze"[\s\S]*?id:\s*"rebuild"/);
   assert.match(toolStudio, /const \[selectedEnvironmentId, setSelectedEnvironmentId\] = useState/);
   assert.match(toolStudio, /const \[selectedVenvStepId, setSelectedVenvStepId\] = useState/);
   assert.match(toolStudio, /const selectedEnvironment = pythonEnvironmentProfiles\.find/);
@@ -374,9 +385,9 @@ test("Tool Studio environment mode exposes a Python execution workbench", () => 
 });
 
 test("Tool Studio deploy mode exposes a deployment workbench", () => {
-  assert.match(toolStudio, /type ToolDeployTarget = \{/);
-  assert.match(toolStudio, /const toolDeployTargets: ToolDeployTarget\[\] = \[/);
-  assert.match(toolStudio, /id:\s*"local-registry"[\s\S]*?id:\s*"agentcore-gateway"[\s\S]*?id:\s*"desktop-bundle"/);
+  assert.match(toolStudioTypes, /export type ToolDeployTarget = \{/);
+  assert.match(toolStudioData, /export const toolDeployTargets: ToolDeployTarget\[\] = \[/);
+  assert.match(toolStudioData, /id:\s*"local-registry"[\s\S]*?id:\s*"agentcore-gateway"[\s\S]*?id:\s*"desktop-bundle"/);
   assert.match(toolStudio, /const \[selectedDeployTargetId, setSelectedDeployTargetId\] = useState/);
   assert.match(toolStudio, /className="tool-deploy-workbench"/);
   assert.match(toolStudio, /data-tool-deploy-target=\{target\.id\}/);
