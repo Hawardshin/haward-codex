@@ -638,6 +638,7 @@
         "Core Home Workload Strip",
         "Decision Inbox",
         "Task Run Store",
+        "Run Timeline",
         "Run Status Bar",
         "Accumulated Data"
       ],
@@ -650,6 +651,7 @@
         "active task summarization",
         "decision inbox count",
         "task-run record count",
+        "run timeline grouping",
         "agent count",
         "resume target surfacing"
       ],
@@ -661,7 +663,8 @@
       ],
       "validation_gates": [
         "Home shows current workload before operator documents",
-        "CLI orchestration surface keeps task-run and decision counts visible"
+        "CLI orchestration surface keeps task-run and decision counts visible",
+        "Desktop Runtime run records and decisions are grouped into a timeline before raw logs"
       ]
     },
     {

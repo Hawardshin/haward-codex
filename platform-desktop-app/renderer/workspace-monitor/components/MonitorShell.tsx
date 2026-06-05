@@ -2239,6 +2239,20 @@ type OutputEvent = {
   detail: string;
 };
 
+type RuntimeRunTimelineItem = {
+  id: string;
+  title: string;
+  detail: string;
+  meta: string;
+  status: string;
+  tone: "green" | "blue" | "amber" | "red" | "slate" | "violet";
+  icon: LucideIcon;
+  priority: number;
+  timeMs: number;
+  actionLabel?: string;
+  onAction?: () => void;
+};
+
 type DecisionGroup = {
   id: string;
   label: string;
@@ -10035,6 +10049,142 @@ function DesktopRuntimePanel({
     }
   };
 
+  const runtimeRunTimelineItems = useMemo<RuntimeRunTimelineItem[]>(() => {
+    if (!runRecordsOpen) {
+      return [];
+    }
+
+    const items: RuntimeRunTimelineItem[] = [];
+    const laneLabel = (laneId?: string | null, pipelineId?: string | null) =>
+      laneId || pipelineId || (uiLanguage === "ko" ? "단일 실행 경로" : "single lane");
+    const statusTone = (status: string, fallback: RuntimeRunTimelineItem["tone"] = "blue") => {
+      const normalized = status.toLowerCase();
+      if (isActiveSessionStatus(normalized)) {
+        return "green";
+      }
+      if (/defer|pending|open|question|waiting|resum/.test(normalized)) {
+        return "amber";
+      }
+      if (/fail|error|cancel|panic|blocked/.test(normalized)) {
+        return "red";
+      }
+      if (/pass|success|complete|ready|answered/.test(normalized)) {
+        return "blue";
+      }
+      return fallback;
+    };
+
+    for (const decision of openInboxDecisions.slice(0, 5)) {
+      items.push({
+        id: `decision-${decision.id}`,
+        title: decision.question,
+        detail: decision.resumeAction || decision.impact || (uiLanguage === "ko" ? "재개 조건 확인 필요" : "Resume condition needs review"),
+        meta: `${decision.priority} / ${formatTimeLabel(decision.createdAt)}`,
+        status: decision.status,
+        tone: "amber",
+        icon: Inbox,
+        priority: 0,
+        timeMs: parseTimeMs(decision.createdAt),
+        actionLabel: uiLanguage === "ko" ? "결정 선택" : "Select decision",
+        onAction: () => setSelectedDecisionId(decision.id)
+      });
+    }
+
+    for (const session of sessions.filter((item) => isActiveSessionStatus(item.status)).slice(0, 4)) {
+      items.push({
+        id: `session-${session.sessionId}`,
+        title: session.taskKind,
+        detail: `${session.label} / ${laneLabel(session.laneId, session.pipelineId)} / ${session.adapterId}`,
+        meta: `${formatDuration(session.elapsedMs)} / ${formatBytes(session.stdout.length + session.stderr.length)}`,
+        status: session.status,
+        tone: statusTone(session.status, "green"),
+        icon: SquareTerminal,
+        priority: 1,
+        timeMs: 0,
+        actionLabel: uiLanguage === "ko" ? "터미널 열기" : "Open terminal",
+        onAction: () => {
+          setSelectedSessionId(session.sessionId);
+          setTerminalDrawerOpen(true);
+        }
+      });
+    }
+
+    for (const record of taskRunRecords.slice(0, 6)) {
+      const outputBytes = record.stdoutBytes + record.stderrBytes;
+      const decisionCount = record.decisionInboxItems + record.pendingDecisionPrompts + record.deferredPromptCount;
+      items.push({
+        id: `task-run-${record.recordId}`,
+        title: record.taskKind,
+        detail: `${record.label} / ${record.adapterId} / ${laneLabel(record.laneId, record.pipelineId)}`,
+        meta: `${formatTimeLabel(record.updatedAt || record.startedAt)} / ${formatDuration(record.elapsedMs)} / ${formatBytes(outputBytes)}${
+          decisionCount ? ` / ${decisionCount} ${uiLanguage === "ko" ? "결정" : "decisions"}` : ""
+        }`,
+        status: record.status,
+        tone: decisionCount ? "amber" : statusTone(record.status, record.outputTruncated ? "slate" : "blue"),
+        icon: FileSearch,
+        priority: decisionCount ? 2 : 3,
+        timeMs: parseTimeMs(record.updatedAt || record.startedAt),
+        actionLabel: uiLanguage === "ko" ? "로그 열기" : "Open logs",
+        onAction: () => {
+          setSelectedTaskRunId(record.taskRunId);
+          void loadTaskRunDetail(record.taskRunId);
+        }
+      });
+    }
+
+    if (pipelineStats.latest) {
+      items.push({
+        id: `pipeline-${pipelineStats.latest.pipelineId}`,
+        title: pipelineStats.latest.label,
+        detail: `${pipelineStats.latest.startedSessions} ${uiLanguage === "ko" ? "개 실행 경로" : "lanes"} / ${pipelineStats.latest.pipes.length} pipe edges / ${pipelineStats.latest.mergeGate}`,
+        meta: pipelineStats.latest.workingDir || (uiLanguage === "ko" ? "작업공간 경로 없음" : "No workspace path"),
+        status: pipelineStats.latest.status,
+        tone: statusTone(pipelineStats.latest.status, "violet"),
+        icon: GitBranch,
+        priority: 4,
+        timeMs: 0
+      });
+    }
+
+    for (const event of outputEvents.slice(0, 4)) {
+      const tone =
+        event.type === "error"
+          ? "red"
+          : event.type === "warning" || event.type === "question"
+            ? "amber"
+            : event.type === "test"
+              ? "green"
+              : "slate";
+      items.push({
+        id: `event-${event.id}`,
+        title: event.label,
+        detail: event.detail,
+        meta: event.lane,
+        status: event.type,
+        tone,
+        icon: event.type === "error" || event.type === "warning" ? AlertTriangle : Activity,
+        priority: event.type === "error" || event.type === "question" ? 2 : 5,
+        timeMs: 0,
+        actionLabel: uiLanguage === "ko" ? "터미널 보기" : "View terminal",
+        onAction: () => setTerminalDrawerOpen(true)
+      });
+    }
+
+    return items
+      .sort((left, right) => left.priority - right.priority || right.timeMs - left.timeMs || left.title.localeCompare(right.title))
+      .slice(0, 12);
+  }, [
+    loadTaskRunDetail,
+    openInboxDecisions,
+    outputEvents,
+    pipelineStats.latest,
+    runRecordsOpen,
+    sessions,
+    setTerminalDrawerOpen,
+    taskRunRecords,
+    uiLanguage
+  ]);
+
   const refreshRuntimeDataBoundary = async () => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
@@ -13358,6 +13508,62 @@ function DesktopRuntimePanel({
         </summary>
         {runRecordsOpen && (
         <div className="section-secondary-stack">
+      <section className="panel wide runtime-run-timeline-panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Run Timeline</p>
+            <h2>{uiLanguage === "ko" ? "작업 실행 타임라인" : "Task run timeline"}</h2>
+          </div>
+          <Activity size={18} aria-hidden="true" />
+        </div>
+        <div className="runtime-run-timeline-summary">
+          <article>
+            <span>{uiLanguage === "ko" ? "열린 결정" : "open decisions"}</span>
+            <strong>{openInboxDecisions.length}</strong>
+          </article>
+          <article>
+            <span>{uiLanguage === "ko" ? "활성 세션" : "active sessions"}</span>
+            <strong>{sessionStats.active}</strong>
+          </article>
+          <article>
+            <span>{uiLanguage === "ko" ? "실행 기록" : "task runs"}</span>
+            <strong>{taskRunRecords.length}</strong>
+          </article>
+          <article>
+            <span>{uiLanguage === "ko" ? "출력 신호" : "output signals"}</span>
+            <strong>{outputEvents.length}</strong>
+          </article>
+        </div>
+        {runtimeRunTimelineItems.length === 0 ? (
+          <p className="empty-state">
+            {uiLanguage === "ko"
+              ? "아직 타임라인으로 묶을 실행 기록, 결정, 세션, 출력 신호가 없습니다."
+              : "No run records, decisions, sessions, or output signals are ready for the timeline yet."}
+          </p>
+        ) : (
+          <div className="runtime-run-timeline" aria-label={uiLanguage === "ko" ? "작업 실행 타임라인" : "Task run timeline"}>
+            {runtimeRunTimelineItems.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                className={`runtime-run-timeline-item tone-${item.tone}`}
+                onClick={item.onAction}
+                disabled={!item.onAction}
+                title={item.actionLabel || item.title}
+              >
+                <span>{index + 1}</span>
+                <item.icon size={16} aria-hidden="true" />
+                <div>
+                  <strong>{item.title}</strong>
+                  <p>{item.detail}</p>
+                  <small>{item.meta}</small>
+                </div>
+                <em>{item.status}</em>
+              </button>
+            ))}
+          </div>
+        )}
+      </section>
       <section className="panel wide terminal-output-panel">
         <div className="panel-heading">
           <div>
@@ -14439,6 +14645,16 @@ function formatTimeLabel(value: string) {
     return value;
   }
   return date.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
+}
+
+function parseTimeMs(value?: string | null) {
+  if (!value) {
+    return 0;
+  }
+  const numericValue = Number(value);
+  const date = Number.isFinite(numericValue) && value.trim() !== "" ? new Date(numericValue) : new Date(value);
+  const timeMs = date.getTime();
+  return Number.isNaN(timeMs) ? 0 : timeMs;
 }
 
 function countBy<T>(items: T[], getKey: (item: T) => string) {

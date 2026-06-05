@@ -1,0 +1,76 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-06-runtime-run-timeline",
+  "title": "Develop Desktop Runtime run timeline",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": "2026-06-06T07:54:58+0900",
+  "measurement_note": "Timing record was created after the task began, so phases are recorded as completed or pending but not measured.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Searched current agent workbench and work visibility patterns."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Ran memory bootstrap check and read hot anchor output."
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Selected standard mode and platform-desktop-app ownership."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Created requirement, spec, plan, tasks, validation, and traceability records."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Added RuntimeRunTimelineItem computation, UI panel, CSS, product registry, and readiness tokens."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "TypeScript, collect/check, platform tests, config contract, customer build, Browser smoke, and package:internal passed. Initial stale snapshot failure exposed a pipeline self-prepare gap that was fixed."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and close-out records",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Created omission, evaluation, work summary, request trace, and daily history records."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "pending",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Pending final verified commit and push."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "renderer_and_tauri_package",
+    "interpretation": "No measured durations are available because timing started late. The observed slow path was full package:internal, including Next customer build and Tauri release bundle.",
+    "improvement_candidates": [
+      "Keep timeline calculation guarded by runRecordsOpen so tab switching does not add new eager work.",
+      "Regenerate developer snapshots at the start of verification/package paths so customer snapshot residue cannot break subsequent builds."
+    ]
+  }
+}

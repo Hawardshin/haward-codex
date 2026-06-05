@@ -103,9 +103,18 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   assert.match(buildPipelineReadiness, /checkDesktopBuildPipeline/);
   assert.match(buildPipelineReadiness, /desktopBuildPipelineRequiredFiles/);
   assert.match(buildPipelineReadiness, /desktop:doctor/);
-  for (const token of ["package-internal", "package-public", "public-report", "commonVerifySteps", "Public release preflight", "Tauri internal package build", "Tauri public package build", "create-updater-manifest", "codesign", "hdiutil"]) {
+  for (const token of ["package-internal", "package-public", "public-report", "commonVerifySteps", "Workspace Monitor developer snapshot collect", "Public release preflight", "Tauri internal package build", "Tauri public package build", "create-updater-manifest", "codesign", "hdiutil"]) {
     assert.match(pipelineStructure, new RegExp(token));
   }
+  const commonVerifyDefinition = pipelineDefinitions.slice(pipelineDefinitions.indexOf("const commonVerifySteps"));
+  const developerCollectIndex = commonVerifyDefinition.indexOf("developerSnapshotCollectStep");
+  const workspaceCheckIndex = commonVerifyDefinition.indexOf("Workspace Monitor type check");
+  assert.notEqual(developerCollectIndex, -1);
+  assert.notEqual(workspaceCheckIndex, -1);
+  assert.ok(
+    developerCollectIndex < workspaceCheckIndex,
+    "common verification must regenerate the developer snapshot before checking history payload contracts"
+  );
   const packagePublicDefinition = pipelineDefinitions.slice(pipelineDefinitions.indexOf('"package-public"'));
   const packagePublicPreflightIndex = packagePublicDefinition.indexOf("Public release preflight");
   const packagePublicVerifyIndex = packagePublicDefinition.indexOf("...commonVerifySteps");
@@ -794,6 +803,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Task Pipe Init",
     "Task Run Store",
     "저장된 실행 기록과 로그",
+    "Run Timeline",
+    "작업 실행 타임라인",
     "Runtime Data & Support",
     "Accumulated Data",
     "축적 데이터 인덱스",
@@ -928,6 +939,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "task-run-panel",
     "taskRunRecords",
     "taskRunDetail",
+    "runtimeRunTimelineItems",
+    "runtime-run-timeline-panel",
     "loadTaskRunDetail",
     "pruneTaskRunRecords",
     "refreshTaskRunRecords",

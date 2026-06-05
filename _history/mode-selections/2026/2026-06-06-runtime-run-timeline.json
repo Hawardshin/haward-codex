@@ -1,0 +1,24 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-runtime-run-timeline",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request asks for development and this slice changes the desktop runtime product UI, product registry, tests, generated snapshots, and package validation without changing durable workspace policy.",
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-06-runtime-run-timeline.json"
+  ],
+  "non_quick_gates": [
+    "web_first_intake",
+    "memory_bootstrap",
+    "requirements",
+    "spec_artifacts",
+    "open_source_reference_inspection",
+    "implementation",
+    "omission_check",
+    "renderer_check_build",
+    "package_internal",
+    "evaluation",
+    "commit_push"
+  ]
+}

@@ -15,6 +15,13 @@ function pnpmWorkspaceStep(label, args, options = {}) {
   return step(label, "corepack", ["pnpm", ...args], repoRoot, options);
 }
 
+const developerSnapshotCollectStep = pnpmWorkspaceStep("Workspace Monitor developer snapshot collect", [
+  "--filter",
+  "workspace-monitor",
+  "run",
+  "collect"
+]);
+
 function tauriPreparedBuildStep(label) {
   return pnpmWorkspaceStep(label, [
     "--filter",
@@ -45,6 +52,7 @@ const setupSteps = [
 ];
 
 const quickVerifySteps = [
+  developerSnapshotCollectStep,
   pnpmWorkspaceStep("Workspace Monitor type check", ["--filter", "workspace-monitor", "run", "check"]),
   pnpmWorkspaceStep("Workspace Monitor tests", ["--filter", "workspace-monitor", "test"]),
   pnpmWorkspaceStep("Desktop app tests", ["--filter", "platform-desktop-app", "test"]),
@@ -52,6 +60,7 @@ const quickVerifySteps = [
 ];
 
 const commonVerifySteps = [
+  developerSnapshotCollectStep,
   pnpmWorkspaceStep("Workspace Monitor type check", ["--filter", "workspace-monitor", "run", "check"]),
   pnpmWorkspaceStep("Workspace Monitor tests", ["--filter", "workspace-monitor", "test"]),
   pnpmWorkspaceStep("Customer renderer build and bundle audit", [

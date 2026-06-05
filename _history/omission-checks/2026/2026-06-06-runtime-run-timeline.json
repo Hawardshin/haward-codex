@@ -1,0 +1,42 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-runtime-run-timeline",
+  "checked_items": [
+    {
+      "item": "Run web search before implementation",
+      "status": "done",
+      "evidence": "_history/web-searches/2026/2026-06-06-runtime-run-timeline.ko.md"
+    },
+    {
+      "item": "Inspect open-source references before product UI implementation",
+      "status": "done",
+      "evidence": "_research/topics/platform-desktop-app/2026-06-06-runtime-run-timeline-open-source-inspection.ko.md"
+    },
+    {
+      "item": "Implement a desktop runtime work-visibility slice, not only a plan",
+      "status": "done",
+      "evidence": "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+    },
+    {
+      "item": "Keep tab switching cost bounded",
+      "status": "done",
+      "evidence": "Runtime timeline calculation is guarded by runRecordsOpen and reuses existing runtime records."
+    },
+    {
+      "item": "Run automatic build/package after implementation",
+      "status": "done",
+      "evidence": "corepack pnpm --dir platform-desktop-app run package:internal"
+    },
+    {
+      "item": "Prevent the discovered package rerun failure",
+      "status": "done",
+      "evidence": "Workspace Monitor developer snapshot collect now runs before verification checks in the desktop pipeline."
+    },
+    {
+      "item": "Record requirements, spec, validation, evaluation, and request trace",
+      "status": "done",
+      "evidence": "platform-desktop-app/specs/2026-06-06-runtime-run-timeline/ and _history/evaluations/2026/2026-06-06-runtime-run-timeline.ko.md"
+    }
+  ],
+  "status": "passed"
+}

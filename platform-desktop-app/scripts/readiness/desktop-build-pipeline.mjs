@@ -129,6 +129,7 @@ function checkDocsAndPipelineStructure(root, failures) {
     "package-public",
     "public-report",
     "commonVerifySteps",
+    "Workspace Monitor developer snapshot collect",
     "Public release preflight",
     "Tauri internal package build",
     "Tauri public package build",

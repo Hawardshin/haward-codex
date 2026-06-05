@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T22:25:01.572Z",
+  "generatedAt": "2026-06-05T22:53:55.362Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -436,6 +436,7 @@
           "Core Home Workload Strip",
           "Decision Inbox",
           "Task Run Store",
+          "Run Timeline",
           "Run Status Bar",
           "Accumulated Data"
         ],
@@ -444,6 +445,7 @@
           "active task summarization",
           "decision inbox count",
           "task-run record count",
+          "run timeline grouping",
           "agent count",
           "resume target surfacing"
         ],
@@ -1527,7 +1529,7 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-05T22:24:44.187Z"
+      "latestInsightAt": "2026-06-05T22:53:18.502Z"
     },
     "inferenceStages": [],
     "signalGroups": []
@@ -1542,7 +1544,7 @@
       "totalImprovementPackages": 0,
       "totalFitnessChecks": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-05T22:24:44.187Z"
+      "latestInsightAt": "2026-06-05T22:53:18.502Z"
     },
     "operatingModel": [],
     "structuralPrinciples": [],
