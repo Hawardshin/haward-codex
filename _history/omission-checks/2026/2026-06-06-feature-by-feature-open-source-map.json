@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-06",
+  "project": "platform-desktop-app",
+  "request": "Find open-source references by each feature.",
+  "checklist": [
+    {
+      "item": "web_first_intake",
+      "status": "passed",
+      "evidence": "_history/web-searches/2026/2026-06-06-feature-by-feature-open-source-map.ko.md"
+    },
+    {
+      "item": "local_feature_axis",
+      "status": "passed",
+      "evidence": "platform-desktop-app/configs/product-feature-registry.json feature_layers were used as the classification basis."
+    },
+    {
+      "item": "feature_by_feature_matrix",
+      "status": "passed",
+      "evidence": "_research/topics/platform-desktop-app/2026-06-06-feature-by-feature-open-source-map.ko.md"
+    },
+    {
+      "item": "source_quality_notes",
+      "status": "passed",
+      "evidence": "The research record distinguishes official/GitHub sources from discovery-only landing/community signals."
+    }
+  ],
+  "open_items": [
+    "Before implementing any slice, clone and inspect the selected feature-specific repositories directly."
+  ]
+}

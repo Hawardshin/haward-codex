@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T22:01:49.192Z",
+  "generatedAt": "2026-06-05T22:09:32.149Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 472,
-    "evaluations": 20,
-    "webSearches": 13,
+    "evaluations": 17,
+    "webSearches": 14,
     "timingRecords": 14,
     "historyDays": 1,
-    "adminHistoryDocuments": 2485,
+    "adminHistoryDocuments": 2491,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7505,6 +7505,22 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: 기능별 오픈소스 맵",
+      "excerpt": "평가: 기능별 오픈소스 맵 판정 요청 충족. 현재 플랫폼의 기능 layer별로 오픈소스 후보를 나누고, 각 후보에서 봐야 할 부분과 현재 플랫폼 적용 포인트를 기록했다. 산출물 검색 기록: history/web searches/2026/2026 06 06 feature by feature open source map.ko.md 연구 문서: research/topics/platform desktop app/2026 06 06 feature by feature open source map.ko.md ",
+      "html": "<p>평가: 기능별 오픈소스 맵 판정 요청 충족. 현재 플랫폼의 기능 layer별로 오픈소스 후보를 나누고, 각 후보에서 봐야 할 부분과 현재 플랫폼 적용 포인트를 기록했다. 산출물 검색 기록: history/web searches/2026/2026 06 06 feature by feature open source map.ko.md 연구 문서: research/topics/platform desktop app/2026 06 06 feature by feature open source map.ko.md 요청 요약: history/user requests/2026/2026 06 06 feature by feature open source map.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1359,
+      "updatedAt": "2026-06-05T22:09:24.228Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
       "id": "history-2026-2026-06-06-md",
       "path": "_history/2026/2026-06-06.md",
       "category": "daily-history",
@@ -7514,11 +7530,91 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 10333,
-      "updatedAt": "2026-06-05T22:01:29.686Z",
+      "sourceBytes": 11028,
+      "updatedAt": "2026-06-05T22:07:25.312Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 기능별 오픈소스 맵",
+      "excerpt": "요청 결과 추적: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 프로젝트: platform desktop app/ 입력 앞선 유사 플랫폼 조사에서 전체적으로 비슷한 오픈소스를 봤으나, 사용자는 각 기능 단위로도 오픈소스를 찾으라고 요청했다. 결정 현재 제품의 feature layers 를 기준 분류로 사용했다. 기능 layer는 CLI Orchestration, Agent Work Environment, Agent Development Environment",
+      "html": "<p>요청 결과 추적: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 프로젝트: platform desktop app/ 입력 앞선 유사 플랫폼 조사에서 전체적으로 비슷한 오픈소스를 봤으나, 사용자는 각 기능 단위로도 오픈소스를 찾으라고 요청했다. 결정 현재 제품의 feature layers 를 기준 분류로 사용했다. 기능 layer는 CLI Orchestration, Agent Work Environment, Agent Development Environment, Agent Core, Learning &amp; Evaluation Loop, Root Tool Management, Work Visibility,</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 986,
+      "updatedAt": "2026-06-05T22:07:25.312Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 기능별 오픈소스 맵",
+      "excerpt": "작업 요약: 기능별 오픈소스 맵 2026 06 06에 platform desktop app 의 기능 layer별 오픈소스 레퍼런스 맵을 만들었다. CLI orchestration, work environment, development workbench, Agent Core, learning/evaluation, root tools, work visibility, observability, native runtime별로 후보 repo와 적용 포인트를 정리했다. GitHub API 메타데이터는 403",
+      "html": "<p>작업 요약: 기능별 오픈소스 맵 2026 06 06에 platform desktop app 의 기능 layer별 오픈소스 레퍼런스 맵을 만들었다. CLI orchestration, work environment, development workbench, Agent Core, learning/evaluation, root tools, work visibility, observability, native runtime별로 후보 repo와 적용 포인트를 정리했다. GitHub API 메타데이터는 403으로 막혔지만, 공식 GitHub 페이지와 git ls remote 로 repo 존재를 확인했다. 구현 전에는 선택 후보를 직접 clone해 s</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 583,
+      "updatedAt": "2026-06-05T22:07:25.312Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-feature-by-feature-open-source-map-json",
+      "path": "_history/work-timings/2026/2026-06-06-feature-by-feature-open-source-map.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Feature By Feature Open Source Map",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"phases\": { \"phase\": \"web search\", \"status\": \"completed\", \"notes\": \"Searched feature specific open source references for CLI orchestration, agent builders, observability, MCP/provider tools, human approval, and native run",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web search&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Searched feature specific open source references for CLI orchestration, agent builders, observability, MCP/provider tools, human approval, and native runtime.&quot; }, { &quot;phase&quot;: &quot;local feature axis&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Read</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 844,
+      "updatedAt": "2026-06-05T22:07:25.312Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 기능별 오픈소스 조사",
+      "excerpt": "사용자 요청 요약: 기능별 오픈소스 조사 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 앞선 유사 오픈소스 조사에 이어, 플랫폼의 각 기능별로도 참고할 오픈소스를 찾아보라고 요청했다. 처리 제품 기능 registry의 8개 feature layer와 native runtime 축을 기준으로 오픈소스 후보를 정리했다. 각 후보는 볼 부분과 현재 플랫폼 적용 포인트를 함께 기록했다.",
+      "html": "<p>사용자 요청 요약: 기능별 오픈소스 조사 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 앞선 유사 오픈소스 조사에 이어, 플랫폼의 각 기능별로도 참고할 오픈소스를 찾아보라고 요청했다. 처리 제품 기능 registry의 8개 feature layer와 native runtime 축을 기준으로 오픈소스 후보를 정리했다. 각 후보는 볼 부분과 현재 플랫폼 적용 포인트를 함께 기록했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 490,
+      "updatedAt": "2026-06-05T22:07:25.311Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 기능별 오픈소스 맵",
+      "excerpt": "웹 검색 기록: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 대상: platform desktop app/ 검색 질의 open source agent platform feature categories CLI orchestration desktop AI workbench task run decision inbox provider settings 2026 GitHub open source desktop AI agent workbench terminal pro",
+      "html": "<p>웹 검색 기록: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 대상: platform desktop app/ 검색 질의 open source agent platform feature categories CLI orchestration desktop AI workbench task run decision inbox provider settings 2026 GitHub open source desktop AI agent workbench terminal provider settings task management GitHub open source AI agent workflow builder eval</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2374,
+      "updatedAt": "2026-06-05T22:07:25.311Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-agent-cli-cockpit-ko-md",
@@ -10031,102 +10127,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-public-release-updater-automation-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-public-release-updater-automation.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "2026 06 06 Request Trace: Public Release Updater Automation",
-      "excerpt": "2026 06 06 Request Trace: Public Release Updater Automation 요청 사용자의 “다해” 후속 지시. 산출물 platform desktop app/scripts/public release config.mjs platform desktop app/scripts/public release build.mjs platform desktop app/scripts/create updater manifest.mjs platform desktop app/src tauri",
-      "html": "<p>2026 06 06 Request Trace: Public Release Updater Automation 요청 사용자의 “다해” 후속 지시. 산출물 platform desktop app/scripts/public release config.mjs platform desktop app/scripts/public release build.mjs platform desktop app/scripts/create updater manifest.mjs platform desktop app/src tauri/Entitlements.plist platform desktop app/src tauri/Cargo.toml , Cargo.lock platf</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1185,
-      "updatedAt": "2026-06-05T19:16:23.530Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "2026 06 06 평가: Public Release Updater Automation",
-      "excerpt": "2026 06 06 평가: Public Release Updater Automation 결과 public release updater automation lane을 구현했다. internal build path는 유지했고, public build path는 외부 signing/updater/notarization env가 없으면 실패하도록 만들었다. updater private key와 Apple credential은 repository에 쓰지 않는 구조로 구현했다. 검증 node scripts/",
-      "html": "<p>2026 06 06 평가: Public Release Updater Automation 결과 public release updater automation lane을 구현했다. internal build path는 유지했고, public build path는 외부 signing/updater/notarization env가 없으면 실패하도록 만들었다. updater private key와 Apple credential은 repository에 쓰지 않는 구조로 구현했다. 검증 node scripts/public release config.mjs report only : 통과. corepack pnpm filter platform deskto</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1155,
-      "updatedAt": "2026-06-05T19:16:01.194Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Public Release Updater Automation Evaluation Input",
-      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"user request summary\": \" history/user requests/2026/2026 06 06 public release updater automation.ko.md\", \"requirements targets\": \"platform desktop app/docs/requirements/2026 06 06 public",
-      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release updater automation&quot;, &quot;user request summary&quot;: &quot; history/user requests/2026/2026 06 06 public release updater automation.ko.md&quot;, &quot;requirements targets&quot;: &quot;platform desktop app/docs/requirements/2026 06 06 public release updater automation.ko.md&quot; , &quot;spec targets&quot;: &quot;platform desktop app/specs</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2499,
-      "updatedAt": "2026-06-05T19:15:55.461Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-resource-json",
-      "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-resource.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Public Release Updater Automation Resource",
-      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"resource check targets\": \" history/resource checks/2026/2026 06 06 public release updater automation.json\" , \"resource risk occurred\": true, \"result\": \"secret boundary recorded\" }",
-      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release updater automation&quot;, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 public release updater automation.json&quot; , &quot;resource risk occurred&quot;: true, &quot;result&quot;: &quot;secret boundary recorded&quot; }</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 293,
-      "updatedAt": "2026-06-05T19:12:17.395Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-omission-json",
-      "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-omission.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Public Release Updater Automation Omission",
-      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"omission check targets\": \" history/omission checks/2026/2026 06 06 public release updater automation.json\" , \"result\": \"covered with external blockers\", \"notes\": \"Implementation covers p",
-      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release updater automation&quot;, &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 06 public release updater automation.json&quot; , &quot;result&quot;: &quot;covered with external blockers&quot;, &quot;notes&quot;: &quot;Implementation covers public release automation except credentials and clean machine smoke, which requi</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 414,
-      "updatedAt": "2026-06-05T19:12:10.576Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-public-release-updater-automation-json",
-      "path": "_history/work-timings/2026/2026-06-06-public-release-updater-automation.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Public Release Updater Automation",
-      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"phases\": { \"phase\": \"web first intake and local inventory\", \"elapsed\": \"short\" }, { \"phase\": \"implementation\", \"elapsed\": \"medium\" }, { \"phase\": \"validation\", \"elapsed\": \"medium\" }, { \"p",
-      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release updater automation&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake and local inventory&quot;, &quot;elapsed&quot;: &quot;short&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;elapsed&quot;: &quot;medium&quot; }, { &quot;phase&quot;: &quot;validation&quot;, &quot;elapsed&quot;: &quot;medium&quot; }, { &quot;phase&quot;: &quot;history and evaluation&quot;, &quot;elapsed&quot;: &quot;short&quot; } , &quot;bottleneck notes&quot;: &quot;Ext</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 685,
-      "updatedAt": "2026-06-05T19:12:04.536Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-public-release-updater-automation-plan-ko-md",
@@ -17913,27 +17913,27 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 20
+          "count": 17
         },
         {
           "category": "request-trace",
           "count": 14
         },
         {
-          "category": "work-timing",
+          "category": "user-request",
           "count": 14
         },
         {
-          "category": "user-request",
-          "count": 13
-        },
-        {
           "category": "web-search",
-          "count": 13
+          "count": 14
         },
         {
           "category": "work-summary",
-          "count": 13
+          "count": 14
+        },
+        {
+          "category": "work-timing",
+          "count": 14
         },
         {
           "category": "plan",
@@ -17952,7 +17952,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-          "updatedAt": "2026-06-05T22:01:29.686Z",
+          "updatedAt": "2026-06-05T22:07:25.312Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -17983,6 +17983,16 @@
           "title": "평가: 쉬운 AI 로그인 설정",
           "excerpt": "평가: 쉬운 AI 로그인 설정 결과 사용자의 “AI 세팅을 로그인으로 쉽게” 요구를 공식 provider 흐름에 맞춰 구현했다. 가짜 WebView/OAuth가 아니라 공식 로그인/키 발급 링크, 앱 저장, 연결 상태, 모델 확인, 작업 기본값 선택을 한 설정 화면으로 묶었다. 버튼은 기존 기본 버튼 느낌을 줄이고 choice 계층, 상태 pill, model chip으로 구분했다. 검증 corepack pnpm filter workspace monitor test passed corepack p",
           "updatedAt": "2026-06-05T20:11:28.464Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: 기능별 오픈소스 맵",
+          "excerpt": "평가: 기능별 오픈소스 맵 판정 요청 충족. 현재 플랫폼의 기능 layer별로 오픈소스 후보를 나누고, 각 후보에서 봐야 할 부분과 현재 플랫폼 적용 포인트를 기록했다. 산출물 검색 기록: history/web searches/2026/2026 06 06 feature by feature open source map.ko.md 연구 문서: research/topics/platform desktop app/2026 06 06 feature by feature open source map.ko.md ",
+          "updatedAt": "2026-06-05T22:09:24.228Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18106,46 +18116,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Public Release Updater Automation Evaluation Input",
-          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"user request summary\": \" history/user requests/2026/2026 06 06 public release updater automation.ko.md\", \"requirements targets\": \"platform desktop app/docs/requirements/2026 06 06 public",
-          "updatedAt": "2026-06-05T19:15:55.461Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-omission-json",
-          "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-omission.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Public Release Updater Automation Omission",
-          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"omission check targets\": \" history/omission checks/2026/2026 06 06 public release updater automation.json\" , \"result\": \"covered with external blockers\", \"notes\": \"Implementation covers p",
-          "updatedAt": "2026-06-05T19:12:10.576Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-resource-json",
-          "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-resource.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Public Release Updater Automation Resource",
-          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"resource check targets\": \" history/resource checks/2026/2026 06 06 public release updater automation.json\" , \"resource risk occurred\": true, \"result\": \"secret boundary recorded\" }",
-          "updatedAt": "2026-06-05T19:12:17.395Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "2026 06 06 평가: Public Release Updater Automation",
-          "excerpt": "2026 06 06 평가: Public Release Updater Automation 결과 public release updater automation lane을 구현했다. internal build path는 유지했고, public build path는 외부 signing/updater/notarization env가 없으면 실패하도록 만들었다. updater private key와 Apple credential은 repository에 쓰지 않는 구조로 구현했다. 검증 node scripts/",
-          "updatedAt": "2026-06-05T19:16:01.194Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-ui-theory-foundation-refactor-json",
           "path": "_history/evaluations/2026/2026-06-06-ui-theory-foundation-refactor.json",
           "category": "evaluation",
@@ -18266,6 +18236,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: 기능별 오픈소스 맵",
+          "excerpt": "요청 결과 추적: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 프로젝트: platform desktop app/ 입력 앞선 유사 플랫폼 조사에서 전체적으로 비슷한 오픈소스를 봤으나, 사용자는 각 기능 단위로도 오픈소스를 찾으라고 요청했다. 결정 현재 제품의 feature layers 를 기준 분류로 사용했다. 기능 layer는 CLI Orchestration, Agent Work Environment, Agent Development Environment",
+          "updatedAt": "2026-06-05T22:07:25.312Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-fundamental-improvement-structure-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-fundamental-improvement-structure.ko.md",
           "category": "request-trace",
@@ -18356,16 +18336,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-public-release-updater-automation-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-public-release-updater-automation.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "2026 06 06 Request Trace: Public Release Updater Automation",
-          "excerpt": "2026 06 06 Request Trace: Public Release Updater Automation 요청 사용자의 “다해” 후속 지시. 산출물 platform desktop app/scripts/public release config.mjs platform desktop app/scripts/public release build.mjs platform desktop app/scripts/create updater manifest.mjs platform desktop app/src tauri",
-          "updatedAt": "2026-06-05T19:16:23.530Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
           "category": "request-trace",
@@ -18403,6 +18373,16 @@
           "title": "사용자 요청 요약: 쉬운 AI 로그인 설정",
           "excerpt": "사용자 요청 요약: 쉬운 AI 로그인 설정 날짜: 2026 06 06 대상: platform desktop app 요약: 사용자가 AI provider 설정 기능을 더 늘리고, 로그인/계정 설정을 쉽게 할 수 있도록 데스크톱 앱 설정 화면 개선을 요청했다. 해석: 공식 provider 로그인/콘솔 링크, API key 발급/저장, 연결 상태, 모델 확인, 작업 기본값 선택을 한 설정 흐름으로 묶는다. 제외: 민감한 key 원문을 읽거나 기록하지 않는다. 비공식 웹 세션 cookie 기반 로그인을 ",
           "updatedAt": "2026-06-05T20:06:32.066Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: 기능별 오픈소스 조사",
+          "excerpt": "사용자 요청 요약: 기능별 오픈소스 조사 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 앞선 유사 오픈소스 조사에 이어, 플랫폼의 각 기능별로도 참고할 오픈소스를 찾아보라고 요청했다. 처리 제품 기능 registry의 8개 feature layer와 native runtime 축을 기준으로 오픈소스 후보를 정리했다. 각 후보는 볼 부분과 현재 플랫폼 적용 포인트를 함께 기록했다.",
+          "updatedAt": "2026-06-05T22:07:25.311Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18536,6 +18516,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-web-searches-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: 기능별 오픈소스 맵",
+          "excerpt": "웹 검색 기록: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 대상: platform desktop app/ 검색 질의 open source agent platform feature categories CLI orchestration desktop AI workbench task run decision inbox provider settings 2026 GitHub open source desktop AI agent workbench terminal pro",
+          "updatedAt": "2026-06-05T22:07:25.311Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-06-fundamental-improvement-structure-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-fundamental-improvement-structure.ko.md",
           "category": "web-search",
@@ -18663,6 +18653,16 @@
           "title": "작업 요약: 쉬운 AI 로그인 설정",
           "excerpt": "작업 요약: 쉬운 AI 로그인 설정 platform desktop app Settings provider accounts 화면을 AI 로그인/API key 설정 센터로 개선했다. Provider 설정 화면에 guide, filter, status pill, official login/key/docs actions, model check, agent work default selection을 추가했다. OpenAI/Anthropic/Gemini는 공식 콘솔/API key 흐름으로, Ollama는 l",
           "updatedAt": "2026-06-05T20:11:28.463Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: 기능별 오픈소스 맵",
+          "excerpt": "작업 요약: 기능별 오픈소스 맵 2026 06 06에 platform desktop app 의 기능 layer별 오픈소스 레퍼런스 맵을 만들었다. CLI orchestration, work environment, development workbench, Agent Core, learning/evaluation, root tools, work visibility, observability, native runtime별로 후보 repo와 적용 포인트를 정리했다. GitHub API 메타데이터는 403",
+          "updatedAt": "2026-06-05T22:07:25.312Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18796,6 +18796,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-feature-by-feature-open-source-map-json",
+          "path": "_history/work-timings/2026/2026-06-06-feature-by-feature-open-source-map.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Feature By Feature Open Source Map",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"phases\": { \"phase\": \"web search\", \"status\": \"completed\", \"notes\": \"Searched feature specific open source references for CLI orchestration, agent builders, observability, MCP/provider tools, human approval, and native run",
+          "updatedAt": "2026-06-05T22:07:25.312Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-fundamental-improvement-structure-json",
           "path": "_history/work-timings/2026/2026-06-06-fundamental-improvement-structure.json",
           "category": "work-timing",
@@ -18886,16 +18896,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-public-release-updater-automation-json",
-          "path": "_history/work-timings/2026/2026-06-06-public-release-updater-automation.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Public Release Updater Automation",
-          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"phases\": { \"phase\": \"web first intake and local inventory\", \"elapsed\": \"short\" }, { \"phase\": \"implementation\", \"elapsed\": \"medium\" }, { \"phase\": \"validation\", \"elapsed\": \"medium\" }, { \"p",
-          "updatedAt": "2026-06-05T19:12:04.536Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-ui-theory-foundation-refactor-json",
           "path": "_history/work-timings/2026/2026-06-06-ui-theory-foundation-refactor.json",
           "category": "work-timing",
@@ -18914,16 +18914,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2485,
+      "documents": 2491,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 990
+          "count": 991
         },
         {
           "category": "web-search",
-          "count": 395
+          "count": 396
         },
         {
           "category": "plan",
@@ -18931,19 +18931,19 @@
         },
         {
           "category": "request-trace",
-          "count": 323
+          "count": 324
         },
         {
           "category": "work-timing",
-          "count": 245
+          "count": 246
         },
         {
           "category": "user-request",
-          "count": 108
+          "count": 109
         },
         {
           "category": "work-summary",
-          "count": 75
+          "count": 76
         },
         {
           "category": "daily-history",
@@ -18954,7 +18954,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6372698,
+      "totalSourceBytes": 6380029,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18979,11 +18979,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 33,
+      "evidenceEvents": 31,
       "decisionEvents": 0,
-      "openSignals": 23,
+      "openSignals": 22,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T22:01:29.686Z",
+      "latestEventAt": "2026-06-05T22:09:24.228Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18995,7 +18995,22 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 20
+        "count": 17
+      },
+      {
+        "id": "delivery",
+        "label": "delivery",
+        "count": 14
+      },
+      {
+        "id": "evidence",
+        "label": "evidence",
+        "count": 14
+      },
+      {
+        "id": "intake",
+        "label": "intake",
+        "count": 14
       },
       {
         "id": "monitoring",
@@ -19006,21 +19021,6 @@
         "id": "traceability",
         "label": "traceability",
         "count": 14
-      },
-      {
-        "id": "delivery",
-        "label": "delivery",
-        "count": 13
-      },
-      {
-        "id": "evidence",
-        "label": "evidence",
-        "count": 13
-      },
-      {
-        "id": "intake",
-        "label": "intake",
-        "count": 13
       },
       {
         "id": "planning",
@@ -19042,7 +19042,17 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 20
+        "count": 17
+      },
+      {
+        "id": "intake",
+        "label": "intake",
+        "count": 14
+      },
+      {
+        "id": "summary",
+        "label": "summary",
+        "count": 14
       },
       {
         "id": "timing",
@@ -19055,19 +19065,9 @@
         "count": 14
       },
       {
-        "id": "intake",
-        "label": "intake",
-        "count": 13
-      },
-      {
-        "id": "summary",
-        "label": "summary",
-        "count": 13
-      },
-      {
         "id": "web-search",
         "label": "web search",
-        "count": 13
+        "count": 14
       },
       {
         "id": "plan",
@@ -19094,6 +19094,51 @@
     ],
     "events": [
       {
+        "id": "history-history-evaluations-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "평가: 기능별 오픈소스 맵",
+        "detail": "평가: 기능별 오픈소스 맵 판정 요청 충족. 현재 플랫폼의 기능 layer별로 오픈소스 후보를 나누고, 각 후보에서 봐야 할 부분과 현재 플랫폼 적용 포인트를 기록했다. 산출물 검색 기록: history/web searches/2026/2026 06 06 feature by feature open source map.ko.md 연구 문서: research/topics/platform desktop app/2026 06 06 feature by feature open source map.ko.md ",
+        "path": "_history/evaluations/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:09:24.228Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-feature-by-feature-open-source-map-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 Feature By Feature Open Source Map",
+        "detail": "{ \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"phases\": { \"phase\": \"web search\", \"status\": \"completed\", \"notes\": \"Searched feature specific open source references for CLI orchestration, agent builders, observability, MCP/provider tools, human approval, and native run",
+        "path": "_history/work-timings/2026/2026-06-06-feature-by-feature-open-source-map.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:07:25.312Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적: 기능별 오픈소스 맵",
+        "detail": "요청 결과 추적: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 프로젝트: platform desktop app/ 입력 앞선 유사 플랫폼 조사에서 전체적으로 비슷한 오픈소스를 봤으나, 사용자는 각 기능 단위로도 오픈소스를 찾으라고 요청했다. 결정 현재 제품의 feature layers 를 기준 분류로 사용했다. 기능 layer는 CLI Orchestration, Agent Work Environment, Agent Development Environment",
+        "path": "_history/request-traces/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:07:25.312Z"
+      },
+      {
         "id": "history-history-2026-2026-06-06-md",
         "sourceType": "history",
         "signalType": "history",
@@ -19106,7 +19151,52 @@
         "category": "daily-history",
         "language": "unknown",
         "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:01:29.686Z"
+        "timestamp": "2026-06-05T22:07:25.312Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: 기능별 오픈소스 맵",
+        "detail": "작업 요약: 기능별 오픈소스 맵 2026 06 06에 platform desktop app 의 기능 layer별 오픈소스 레퍼런스 맵을 만들었다. CLI orchestration, work environment, development workbench, Agent Core, learning/evaluation, root tools, work visibility, observability, native runtime별로 후보 repo와 적용 포인트를 정리했다. GitHub API 메타데이터는 403",
+        "path": "_history/work-summaries/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:07:25.312Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: 기능별 오픈소스 맵",
+        "detail": "웹 검색 기록: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 대상: platform desktop app/ 검색 질의 open source agent platform feature categories CLI orchestration desktop AI workbench task run decision inbox provider settings 2026 GitHub open source desktop AI agent workbench terminal pro",
+        "path": "_history/web-searches/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:07:25.311Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: 기능별 오픈소스 조사",
+        "detail": "사용자 요청 요약: 기능별 오픈소스 조사 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 앞선 유사 오픈소스 조사에 이어, 플랫폼의 각 기능별로도 참고할 오픈소스를 찾아보라고 요청했다. 처리 제품 기능 registry의 8개 feature layer와 native runtime 축을 기준으로 오픈소스 후보를 정리했다. 각 후보는 볼 부분과 현재 플랫폼 적용 포인트를 함께 기록했다.",
+        "path": "_history/user-requests/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:07:25.311Z"
       },
       {
         "id": "history-history-work-timings-2026-2026-06-06-agent-cli-cockpit-json",
@@ -20442,96 +20532,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T19:21:53.357Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-public-release-updater-automation-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "2026 06 06 Request Trace: Public Release Updater Automation",
-        "detail": "2026 06 06 Request Trace: Public Release Updater Automation 요청 사용자의 “다해” 후속 지시. 산출물 platform desktop app/scripts/public release config.mjs platform desktop app/scripts/public release build.mjs platform desktop app/scripts/create updater manifest.mjs platform desktop app/src tauri",
-        "path": "_history/request-traces/2026/2026-06-06-public-release-updater-automation.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:16:23.530Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-public-release-updater-automation-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "needs_attention",
-        "title": "2026 06 06 평가: Public Release Updater Automation",
-        "detail": "2026 06 06 평가: Public Release Updater Automation 결과 public release updater automation lane을 구현했다. internal build path는 유지했고, public build path는 외부 signing/updater/notarization env가 없으면 실패하도록 만들었다. updater private key와 Apple credential은 repository에 쓰지 않는 구조로 구현했다. 검증 node scripts/",
-        "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:16:01.194Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-public-release-updater-automation-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Public Release Updater Automation Evaluation Input",
-        "detail": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"user request summary\": \" history/user requests/2026/2026 06 06 public release updater automation.ko.md\", \"requirements targets\": \"platform desktop app/docs/requirements/2026 06 06 public",
-        "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:15:55.461Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-public-release-updater-automation-resource-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 06 Public Release Updater Automation Resource",
-        "detail": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"resource check targets\": \" history/resource checks/2026/2026 06 06 public release updater automation.json\" , \"resource risk occurred\": true, \"result\": \"secret boundary recorded\" }",
-        "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-resource.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:12:17.395Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-public-release-updater-automation-omission-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Public Release Updater Automation Omission",
-        "detail": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"omission check targets\": \" history/omission checks/2026/2026 06 06 public release updater automation.json\" , \"result\": \"covered with external blockers\", \"notes\": \"Implementation covers p",
-        "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-omission.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:12:10.576Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-public-release-updater-automation-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Public Release Updater Automation",
-        "detail": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"phases\": { \"phase\": \"web first intake and local inventory\", \"elapsed\": \"short\" }, { \"phase\": \"implementation\", \"elapsed\": \"medium\" }, { \"phase\": \"validation\", \"elapsed\": \"medium\" }, { \"p",
-        "path": "_history/work-timings/2026/2026-06-06-public-release-updater-automation.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:12:04.536Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23509,12 +23509,12 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 13
+        "documentsCount": 14
       },
       {
         "category": "user-request",
         "root": "_history/user-requests",
-        "documentsCount": 13
+        "documentsCount": 14
       },
       {
         "category": "intent-feature-map",
@@ -23529,7 +23529,7 @@
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 13
+        "documentsCount": 14
       },
       {
         "category": "work-timing",
@@ -23544,7 +23544,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 20
+        "documentsCount": 17
       },
       {
         "category": "daily-history",
@@ -26801,13 +26801,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3517,
+      "sourceDocuments": 3523,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-05T22:01:29.686Z"
+      "latestInsightAt": "2026-06-05T22:09:24.228Z"
     },
     "inferenceStages": [
       {
@@ -26930,7 +26930,7 @@
           "최종 평가",
           "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브"
         ],
-        "latestEvidenceAt": "2026-06-05T22:01:29.686Z"
+        "latestEvidenceAt": "2026-06-05T22:07:25.312Z"
       },
       {
         "id": "web-research-to-spec",
@@ -26944,11 +26944,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1626,
+        "signalCount": 1630,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 456
+            "count": 457
           },
           {
             "category": "project-spec",
@@ -26956,7 +26956,7 @@
           },
           {
             "category": "web-search",
-            "count": 396
+            "count": 397
           },
           {
             "category": "plan",
@@ -26964,11 +26964,11 @@
           },
           {
             "category": "request-trace",
-            "count": 101
+            "count": 102
           },
           {
             "category": "work-timing",
-            "count": 26
+            "count": 27
           },
           {
             "category": "daily-history",
@@ -26995,7 +26995,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-05T21:59:44.775Z"
+        "latestEvidenceAt": "2026-06-05T22:09:24.228Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27068,7 +27068,7 @@
           "계획: Desktop CLI Supervisor MVP",
           "2026 06 02 큰 범위 작업 분해 평가"
         ],
-        "latestEvidenceAt": "2026-06-05T22:01:29.686Z"
+        "latestEvidenceAt": "2026-06-05T22:07:25.312Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -27082,7 +27082,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 619,
+        "signalCount": 620,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -27102,7 +27102,7 @@
           },
           {
             "category": "work-summary",
-            "count": 27
+            "count": 28
           },
           {
             "category": "request-trace",
@@ -27141,7 +27141,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-05T22:01:29.686Z"
+        "latestEvidenceAt": "2026-06-05T22:07:25.312Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -27214,7 +27214,7 @@
           "사용자 요청 요약: Activity Rail Intuitiveness",
           "Tool Studio UI 요청 결과 추적"
         ],
-        "latestEvidenceAt": "2026-06-05T22:01:29.686Z"
+        "latestEvidenceAt": "2026-06-05T22:07:25.312Z"
       },
       {
         "id": "release-blocker-gate",
@@ -27290,14 +27290,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3517,
+      "sourceDocuments": 3523,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-05T22:01:29.686Z"
+      "latestInsightAt": "2026-06-05T22:09:24.228Z"
     },
     "operatingModel": [
       {
@@ -27355,13 +27355,13 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 2976,
+        "signalCount": 2980,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1626
+            "signalCount": 1630
           },
           {
             "id": "large-scope-slicing",
@@ -27401,7 +27401,7 @@
           "계획: 질문 보류 기능",
           "계획: Unified Ops Timeline"
         ],
-        "latestEvidenceAt": "2026-06-05T22:01:29.686Z",
+        "latestEvidenceAt": "2026-06-05T22:09:24.228Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -27430,13 +27430,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 728,
+        "signalCount": 729,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 619
+            "signalCount": 620
           },
           {
             "id": "release-blocker-gate",
@@ -27470,7 +27470,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-05T22:01:29.686Z",
+        "latestEvidenceAt": "2026-06-05T22:07:25.312Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -27539,7 +27539,7 @@
           "계획: 질문 보류 기능",
           "계획: Unified Ops Timeline"
         ],
-        "latestEvidenceAt": "2026-06-05T22:01:29.686Z",
+        "latestEvidenceAt": "2026-06-05T22:07:25.312Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -27608,7 +27608,7 @@
           "2026 06 06 User Request: Public Release Developer Repatch",
           "Public Release Updater Automation Spec"
         ],
-        "latestEvidenceAt": "2026-06-05T22:01:29.686Z",
+        "latestEvidenceAt": "2026-06-05T22:07:25.312Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -27637,7 +27637,7 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2577,
+        "signalCount": 2581,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
@@ -27649,7 +27649,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1626
+            "signalCount": 1630
           }
         ],
         "missingPatternIds": [],
@@ -27677,7 +27677,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-05T22:01:29.686Z",
+        "latestEvidenceAt": "2026-06-05T22:09:24.228Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -27706,7 +27706,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1735,
+        "signalCount": 1739,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -27718,7 +27718,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1626
+            "signalCount": 1630
           }
         ],
         "missingPatternIds": [],
@@ -27746,7 +27746,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-05T21:59:44.775Z",
+        "latestEvidenceAt": "2026-06-05T22:09:24.228Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

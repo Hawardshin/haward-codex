@@ -1,0 +1,13 @@
+{
+  "date": "2026-06-06",
+  "request": "Find open-source references by each platform feature.",
+  "project": "platform-desktop-app",
+  "work_mode": "research",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The work is research and planning support for future implementation slices, not a source-code change.",
+  "artifacts": [
+    "_history/web-searches/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
+    "_research/topics/platform-desktop-app/2026-06-06-feature-by-feature-open-source-map.ko.md"
+  ]
+}
