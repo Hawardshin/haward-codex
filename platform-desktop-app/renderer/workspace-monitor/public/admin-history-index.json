@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T17:31:01.591Z",
+  "generatedAt": "2026-06-05T17:45:08.892Z",
   "summary": {
-    "documents": 2326,
+    "documents": 2345,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 947
+        "count": 954
       },
       {
         "category": "web-search",
-        "count": 374
+        "count": 376
       },
       {
         "category": "plan",
-        "count": 328
+        "count": 330
       },
       {
         "category": "request-trace",
-        "count": 303
+        "count": 305
       },
       {
         "category": "work-timing",
-        "count": 225
+        "count": 227
       },
       {
         "category": "user-request",
-        "count": 87
+        "count": 89
       },
       {
         "category": "work-summary",
-        "count": 54
+        "count": 56
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6140870,
+    "totalSourceBytes": 6183340,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,310 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가: startup resident prewarm 속도 최적화",
+      "excerpt": "최종 평가: startup resident prewarm 속도 최적화 결론 작업은 닫을 수 있다. 사용자 요구였던 속도 최적화, bounded memory/resource 사용, 자동 build/package 실행을 모두 수행했다. 결과 p95 section switch latency: 827.8ms에서 652.7ms로 개선. average section settle time: 430ms에서 482ms로 악화. max resident/mounted panel count: 5 유지. internal",
+      "html": "<p>최종 평가: startup resident prewarm 속도 최적화 결론 작업은 닫을 수 있다. 사용자 요구였던 속도 최적화, bounded memory/resource 사용, 자동 build/package 실행을 모두 수행했다. 결과 p95 section switch latency: 827.8ms에서 652.7ms로 개선. average section settle time: 430ms에서 482ms로 악화. max resident/mounted panel count: 5 유지. internal .app 와 .dmg 패키징 및 검증 통과. 검증 상태 omission check: coverage ready , rework 불필요. res</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 955,
+      "updatedAt": "2026-06-05T17:44:48.242Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Startup Resident Prewarm Speed Evaluation Input",
+      "excerpt": "{ \"initial instruction\": \"Optimize desktop app speed, especially tab switching, and build/package automatically after implementation.\", \"result summary\": \"Added bounded startup resident prewarm for core Workspace Monitor tabs, excluded inactive overview from resident retention, m",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;Optimize desktop app speed, especially tab switching, and build/package automatically after implementation.&quot;, &quot;result summary&quot;: &quot;Added bounded startup resident prewarm for core Workspace Monitor tabs, excluded inactive overview from resident retention, memoized Tool Studio with stable callbacks, updated tests, measured section switc</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4856,
+      "updatedAt": "2026-06-05T17:44:13.225Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-startup-resident-prewarm-speed-json",
+      "path": "_history/work-timings/2026/2026-06-06-startup-resident-prewarm-speed.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Startup Resident Prewarm Speed",
+      "excerpt": "{ \"task id\": \"2026 06 06 startup resident prewarm speed\", \"title\": \"Startup resident prewarm speed optimization\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration s",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 startup resident prewarm speed&quot;, &quot;title&quot;: &quot;Startup resident prewarm speed optimization&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 120, &quot;measurement&quot;: &quot;estimated&quot;, &quot;bottleneck notes&quot;: &quot;Official React, N</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1705,
+      "updatedAt": "2026-06-05T17:44:13.225Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-omission-json",
+      "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Startup Resident Prewarm Speed Omission",
+      "excerpt": "{ \"task\": \"Startup resident prewarm speed optimization for Workspace Monitor.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"reduce tab lag\", \"description\": \"Address continued slow tab switching with a performance change.\", \"source\": \"user request\", \"required\": true, ",
+      "html": "<p>{ &quot;task&quot;: &quot;Startup resident prewarm speed optimization for Workspace Monitor.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;reduce tab lag&quot;, &quot;description&quot;: &quot;Address continued slow tab switching with a performance change.&quot;, &quot;source&quot;: &quot;user request&quot;, &quot;required&quot;: true, &quot;status&quot;: &quot;covered&quot;, &quot;evidence&quot;: &quot;platform desktop app/renderer/workspace monito</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3371,
+      "updatedAt": "2026-06-05T17:44:13.224Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-resource-json",
+      "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-resource.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Startup Resident Prewarm Speed Resource",
+      "excerpt": "{ \"task\": \"Startup resident prewarm speed optimization for Workspace Monitor.\", \"work mode\": \"standard\", \"runtime context\": \"React renderer\", \"Next.js static build\", \"Playwright Chromium\", \"Python static server\", \"Tauri/Rust build\", \"renderer memory cache\" , \"resource risks\": { \"",
+      "html": "<p>{ &quot;task&quot;: &quot;Startup resident prewarm speed optimization for Workspace Monitor.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;runtime context&quot;: &quot;React renderer&quot;, &quot;Next.js static build&quot;, &quot;Playwright Chromium&quot;, &quot;Python static server&quot;, &quot;Tauri/Rust build&quot;, &quot;renderer memory cache&quot; , &quot;resource risks&quot;: { &quot;risk id&quot;: &quot;startup prewarm memory&quot;, &quot;category&quot;: &quot;memory&quot;, &quot;description&quot;: &quot;Startu</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4313,
+      "updatedAt": "2026-06-05T17:44:13.224Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: startup resident prewarm 속도 최적화",
+      "excerpt": "요청 결과 추적: startup resident prewarm 속도 최적화 요청 사용자는 \"속도 최적화\"를 요청했으며, 앞선 맥락에서 탭 전환 지연과 데스크톱 자원 활용 부족을 반복 지적했다. 결과 startup idle resident prewarm을 추가했다. resident cap 5와 source state retention을 유지했다. overview hidden retention을 제외했다. Tool Studio rerender 비용을 줄이는 memo/stable callback을 추가",
+      "html": "<p>요청 결과 추적: startup resident prewarm 속도 최적화 요청 사용자는 &quot;속도 최적화&quot;를 요청했으며, 앞선 맥락에서 탭 전환 지연과 데스크톱 자원 활용 부족을 반복 지적했다. 결과 startup idle resident prewarm을 추가했다. resident cap 5와 source state retention을 유지했다. overview hidden retention을 제외했다. Tool Studio rerender 비용을 줄이는 memo/stable callback을 추가했다. 내부 .app 와 .dmg 패키징까지 완료했다. 연결 파일 구현: platform desktop app/renderer/workspace</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1404,
+      "updatedAt": "2026-06-05T17:44:13.224Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
+      "path": "_history/plans/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획: startup resident prewarm 속도 최적화",
+      "excerpt": "작업 계획: startup resident prewarm 속도 최적화 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 근거 사용자는 탭 이동 지연을 다시 지적했고, 데스크톱 앱의 RAM/CPU 활용을 요구했다. 기존 bounded resident work는 hidden mounted panel cap을 세웠지만, 첫 전환의 mount 비용은 여전히 남았다. 실",
+      "html": "<p>작업 계획: startup resident prewarm 속도 최적화 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 근거 사용자는 탭 이동 지연을 다시 지적했고, 데스크톱 앱의 RAM/CPU 활용을 요구했다. 기존 bounded resident work는 hidden mounted panel cap을 세웠지만, 첫 전환의 mount 비용은 여전히 남았다. 실행 계획 1. 공식 React/Next/MDN 문서로 memo, lazy/preload, idle task 근거를 확인한다. 2. residen</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1128,
+      "updatedAt": "2026-06-05T17:44:13.223Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: startup resident prewarm 속도 최적화",
+      "excerpt": "작업 요약: startup resident prewarm 속도 최적화 완료 내용 Workspace Monitor 시작 직후 핵심 섹션을 idle 시간에 bounded resident set으로 prewarm하도록 변경했다. overview 는 active가 아닐 때 resident retention에서 제외해 무거운 home surface가 장기 hidden tree로 남는 비용을 줄였다. Tool Studio panel을 memoized component로 감싸고 Shell에서 전달하는 이동 c",
+      "html": "<p>작업 요약: startup resident prewarm 속도 최적화 완료 내용 Workspace Monitor 시작 직후 핵심 섹션을 idle 시간에 bounded resident set으로 prewarm하도록 변경했다. overview 는 active가 아닐 때 resident retention에서 제외해 무거운 home surface가 장기 hidden tree로 남는 비용을 줄였다. Tool Studio panel을 memoized component로 감싸고 Shell에서 전달하는 이동 callback들을 stable callback으로 바꿨다. resident/prewarm 계약 테스트를 업데이트했다. renderer build</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1187,
+      "updatedAt": "2026-06-05T17:44:13.223Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-speed-optimization-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-speed-optimization.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 속도 최적화",
+      "excerpt": "사용자 요청 요약: 속도 최적화 원 요청 사용자는 데스크톱 앱의 탭 전환이 여전히 느리며, OS/CPU/RAM 같은 데스크톱 자원을 적극적으로 활용해 근본적으로 속도를 개선하라고 요청했다. 구현 후 매번 사용자가 직접 빌드하지 않도록 자동으로 빌드와 패키징까지 끝내는 것도 지속 요구사항이다. 해석한 수용 기준 탭 전환 시 첫 mount 지연을 줄인다. 모든 탭을 무제한 마운트해 장기 메모리 비용을 키우지 않는다. 핵심 탭은 시작 후 유휴 시간에 미리 준비한다. 불필요한 hidden rerender",
+      "html": "<p>사용자 요청 요약: 속도 최적화 원 요청 사용자는 데스크톱 앱의 탭 전환이 여전히 느리며, OS/CPU/RAM 같은 데스크톱 자원을 적극적으로 활용해 근본적으로 속도를 개선하라고 요청했다. 구현 후 매번 사용자가 직접 빌드하지 않도록 자동으로 빌드와 패키징까지 끝내는 것도 지속 요구사항이다. 해석한 수용 기준 탭 전환 시 첫 mount 지연을 줄인다. 모든 탭을 무제한 마운트해 장기 메모리 비용을 키우지 않는다. 핵심 탭은 시작 후 유휴 시간에 미리 준비한다. 불필요한 hidden rerender를 줄인다. renderer test/check/build, section performance audit, desktop test/check,</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 792,
+      "updatedAt": "2026-06-05T17:44:13.221Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: startup resident prewarm 속도 최적화",
+      "excerpt": "웹 검색 기록: startup resident prewarm 속도 최적화 목적 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해, React tree 상주 수를 다시 늘리지 않으면서 시작 직후 핵심 탭을 미리 준비하는 구현 근거를 공식 문서로 확인했다. 검색어 site:react.dev/reference/react memo React official docs performance memo site:react.dev/reference/react/Profiler React off",
+      "html": "<p>웹 검색 기록: startup resident prewarm 속도 최적화 목적 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해, React tree 상주 수를 다시 늘리지 않으면서 시작 직후 핵심 탭을 미리 준비하는 구현 근거를 공식 문서로 확인했다. 검색어 site:react.dev/reference/react memo React official docs performance memo site:react.dev/reference/react/Profiler React official docs performance site:nextjs.org/docs lazy loading dynamic import Next.js </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2848,
+      "updatedAt": "2026-06-05T17:44:13.220Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Bounded Tab Resident Performance Evaluation Input",
+      "excerpt": "{ \"initial instruction\": \"The desktop app still feels slow when switching tabs; fix the underlying performance issue and build automatically.\", \"result summary\": \"Replaced unbounded visible section resident mounting with a capped resident section window, retained source editor st",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;The desktop app still feels slow when switching tabs; fix the underlying performance issue and build automatically.&quot;, &quot;result summary&quot;: &quot;Replaced unbounded visible section resident mounting with a capped resident section window, retained source editor state, kept heavy module/data prewarm, memoized desktop/source runtime panels, add</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4477,
+      "updatedAt": "2026-06-05T17:33:53.969Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-resource-json",
+      "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-resource.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Bounded Tab Resident Performance Resource",
+      "excerpt": "{ \"task\": \"Bounded tab resident performance correction for Workspace Monitor.\", \"work mode\": \"standard\", \"runtime context\": \"React renderer\", \"Next.js static build\", \"Playwright Chromium\", \"Python static server\", \"Tauri/Rust build\", \"renderer memory cache\" , \"resource risks\": { \"",
+      "html": "<p>{ &quot;task&quot;: &quot;Bounded tab resident performance correction for Workspace Monitor.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;runtime context&quot;: &quot;React renderer&quot;, &quot;Next.js static build&quot;, &quot;Playwright Chromium&quot;, &quot;Python static server&quot;, &quot;Tauri/Rust build&quot;, &quot;renderer memory cache&quot; , &quot;resource risks&quot;: { &quot;risk id&quot;: &quot;hidden react tree growth&quot;, &quot;category&quot;: &quot;memory&quot;, &quot;description&quot;: &quot;Hidd</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3579,
+      "updatedAt": "2026-06-05T17:33:53.968Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-bounded-tab-resident-performance-json",
+      "path": "_history/work-timings/2026/2026-06-06-bounded-tab-resident-performance.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Bounded Tab Resident Performance",
+      "excerpt": "{ \"task id\": \"2026 06 06 bounded tab resident performance\", \"title\": \"Bounded tab resident performance correction\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 bounded tab resident performance&quot;, &quot;title&quot;: &quot;Bounded tab resident performance correction&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 90, &quot;measurement&quot;: &quot;estimated&quot;, &quot;bottleneck notes&quot;: &quot;Official React/N</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1631,
+      "updatedAt": "2026-06-05T17:33:34.653Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-omission-json",
+      "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Bounded Tab Resident Performance Omission",
+      "excerpt": "{ \"task\": \"Bounded tab resident performance correction for Workspace Monitor.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"reduce tab lag\", \"description\": \"Address continued slow tab switching with a structural fix, not only cosmetic changes.\", \"source\": \"user reque",
+      "html": "<p>{ &quot;task&quot;: &quot;Bounded tab resident performance correction for Workspace Monitor.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;reduce tab lag&quot;, &quot;description&quot;: &quot;Address continued slow tab switching with a structural fix, not only cosmetic changes.&quot;, &quot;source&quot;: &quot;user request&quot;, &quot;required&quot;: true, &quot;status&quot;: &quot;covered&quot;, &quot;evidence&quot;: &quot;platform desktop app/re</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3041,
+      "updatedAt": "2026-06-05T17:33:34.652Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: bounded tab resident 성능 보정",
+      "excerpt": "요청 결과 추적: bounded tab resident 성능 보정 요청 사용자는 이전 최적화 이후에도 데스크톱 앱 탭 전환이 아직 느리다고 보고했다. 결과 무제한 visible section idle resident mount 제거 source 보존 우선의 최대 5개 resident section cap 적용 admin history data preload 추가 source/runtime panel memo와 stable callback 적용 section switch latency audit 추",
+      "html": "<p>요청 결과 추적: bounded tab resident 성능 보정 요청 사용자는 이전 최적화 이후에도 데스크톱 앱 탭 전환이 아직 느리다고 보고했다. 결과 무제한 visible section idle resident mount 제거 source 보존 우선의 최대 5개 resident section cap 적용 admin history data preload 추가 source/runtime panel memo와 stable callback 적용 section switch latency audit 추가 내부 packaging build까지 완료 산출물 요구사항: platform desktop app/docs/requirements/2026 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1135,
+      "updatedAt": "2026-06-05T17:33:34.652Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: bounded tab resident 성능 보정",
+      "excerpt": "작업 요약: bounded tab resident 성능 보정 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해 이전의 전체 visible section resident 선마운트를 보정했다. 무제한 hidden React tree 누적을 제거하고, active/source/최근 섹션만 최대 5개까지 resident로 유지하도록 바꿨다. 변경 MonitorShell.tsx : resident section cap, source retained section, hidden runt",
+      "html": "<p>작업 요약: bounded tab resident 성능 보정 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해 이전의 전체 visible section resident 선마운트를 보정했다. 무제한 hidden React tree 누적을 제거하고, active/source/최근 섹션만 최대 5개까지 resident로 유지하도록 바꿨다. 변경 MonitorShell.tsx : resident section cap, source retained section, hidden runtime memo, stable callbacks 추가 useAdminHistoryIndex.ts : admin history index prel</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1315,
+      "updatedAt": "2026-06-05T17:33:34.652Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
+      "path": "_history/plans/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획 기록: bounded tab resident 성능 보정",
+      "excerpt": "작업 계획 기록: bounded tab resident 성능 보정 모드 선택 work mode: standard 선택 이유: UI 성능 구현, resource lifecycle, build/package verification이 포함된 의미 있는 변경이다. view mode: superadmin developer install mode: developer hot anchors agent platform/configs/memory/bootstrap manifest.json agent platform",
+      "html": "<p>작업 계획 기록: bounded tab resident 성능 보정 모드 선택 work mode: standard 선택 이유: UI 성능 구현, resource lifecycle, build/package verification이 포함된 의미 있는 변경이다. view mode: superadmin developer install mode: developer hot anchors agent platform/configs/memory/bootstrap manifest.json agent platform/configs/workflows/work mode registry.json ops/workflows/05 web first intake.md </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 910,
+      "updatedAt": "2026-06-05T17:33:34.651Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-still-slow-tab-switch-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-still-slow-tab-switch.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 탭 전환이 아직 느림",
+      "excerpt": "사용자 요청 요약: 탭 전환이 아직 느림 요약 사용자가 현재 데스크톱 앱의 Workspace Monitor 탭 전환이 여전히 느리다고 보고했다. 이전의 전체 탭 resident/preload 구현 이후에도 체감 지연이 남아 있으므로 근본 원인을 다시 보고 성능 구조를 보정해야 한다. 요구사항 후보 탭 이동 시 hidden 탭의 불필요한 렌더 비용을 줄인다. 데스크톱 앱의 장점인 Rust/native resource warmup과 renderer memory preload는 유지한다. 구현 후 사용",
+      "html": "<p>사용자 요청 요약: 탭 전환이 아직 느림 요약 사용자가 현재 데스크톱 앱의 Workspace Monitor 탭 전환이 여전히 느리다고 보고했다. 이전의 전체 탭 resident/preload 구현 이후에도 체감 지연이 남아 있으므로 근본 원인을 다시 보고 성능 구조를 보정해야 한다. 요구사항 후보 탭 이동 시 hidden 탭의 불필요한 렌더 비용을 줄인다. 데스크톱 앱의 장점인 Rust/native resource warmup과 renderer memory preload는 유지한다. 구현 후 사용자가 직접 빌드하지 않아도 되도록 자동 build/package 검증을 수행한다. 결과 연결 요구사항: platform desktop app/d</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 962,
+      "updatedAt": "2026-06-05T17:33:34.649Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: bounded tab resident 성능 보정",
+      "excerpt": "웹 검색 기록: bounded tab resident 성능 보정 목적 Workspace Monitor 탭 전환이 여전히 느리다는 피드백에 대해 React/Next 성능 기준을 다시 확인하고, 이전의 무제한 resident 선마운트가 남기는 hidden tree 비용을 보정했다. 검색어 React official docs Profiler memo useMemo rendering performance hidden components state preservation Next.js official do",
+      "html": "<p>웹 검색 기록: bounded tab resident 성능 보정 목적 Workspace Monitor 탭 전환이 여전히 느리다는 피드백에 대해 React/Next 성능 기준을 다시 확인하고, 이전의 무제한 resident 선마운트가 남기는 hidden tree 비용을 보정했다. 검색어 React official docs Profiler memo useMemo rendering performance hidden components state preservation Next.js official docs lazy loading dynamic imports client components performance MDN requestIdleCal</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2861,
+      "updatedAt": "2026-06-05T17:33:34.649Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-work-timings-2026-2026-06-06-native-pty-terminal-runtime-ko-md",
       "path": "_history/work-timings/2026/2026-06-06-native-pty-terminal-runtime.ko.md",
@@ -37283,31 +37587,35 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 54,
+      "documentsCount": 73,
       "categories": [
         {
           "category": "evaluation",
-          "count": 14
+          "count": 21
         },
         {
           "category": "request-trace",
-          "count": 8
+          "count": 10
         },
         {
           "category": "user-request",
-          "count": 8
+          "count": 10
         },
         {
           "category": "web-search",
-          "count": 8
+          "count": 10
         },
         {
           "category": "work-summary",
-          "count": 8
+          "count": 10
         },
         {
           "category": "work-timing",
-          "count": 8
+          "count": 10
+        },
+        {
+          "category": "plan",
+          "count": 2
         }
       ],
       "documents": []

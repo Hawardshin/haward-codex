@@ -1,0 +1,100 @@
+{
+  "task": "Startup resident prewarm speed optimization for Workspace Monitor.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "reduce-tab-lag",
+      "description": "Address continued slow tab switching with a performance change.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/specs/2026-06-06-startup-resident-prewarm-speed/spec.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "use-desktop-resources-with-bounds",
+      "description": "Use RAM/CPU opportunistically without unbounded hidden React tree growth.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "startupResidentPreloadSections",
+        "perf:sections maxObservedResidentCount=5"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "auto-build-package",
+      "description": "Run build and package verification automatically after implementation.",
+      "source": "persistent_user_preference",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build",
+        "corepack pnpm --dir platform-desktop-app run package:internal"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Resident startup prewarm and Tool Studio memoization implementation.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app",
+      "purpose": "Internal macOS app package artifact.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg",
+      "purpose": "Internal DMG package artifact.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "section-p95",
+      "description": "Section switch p95 improves over previous bounded resident baseline.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "previous p95 827.8ms",
+        "current p95 652.7ms"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "resident-cap",
+      "description": "Mounted and resident panel count remains bounded.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "maxObservedResidentCount=5",
+        "maxObservedMountedPanelCount=5"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "package-internal",
+      "description": "Internal package build passes.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app run package:internal"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Average section settle time worsened from 430ms to 482ms; follow-up structural section splitting is still needed.",
+    "Public release signing, notarization, updater, and clean-machine smoke remain outside this internal speed optimization."
+  ],
+  "notes": [
+    "The requested implementation and automatic build/package path were completed."
+  ]
+}

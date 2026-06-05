@@ -94,13 +94,19 @@ type SectionId =
 
 const maxResidentSectionPanels = 5;
 const retainedResidentSections: SectionId[] = ["source"];
+const nonRetainedResidentSections: SectionId[] = ["overview"];
+const startupResidentPreloadSections: SectionId[] = ["agents", "desktop", "source", "tools", "overview"];
 
 function normalizeResidentSectionIds(candidates: SectionId[], activeSection: SectionId) {
   const ordered = [activeSection, ...retainedResidentSections, ...candidates];
+  const nonRetained = new Set(nonRetainedResidentSections);
   const seen = new Set<SectionId>();
   const normalized: SectionId[] = [];
   for (const candidate of ordered) {
     if (!sectionIds.has(candidate) || seen.has(candidate)) {
+      continue;
+    }
+    if (candidate !== activeSection && nonRetained.has(candidate)) {
       continue;
     }
     seen.add(candidate);
@@ -617,6 +623,8 @@ const MonacoDiffEditor = dynamic(() => import("@monaco-editor/react").then((modu
   ssr: false,
   loading: () => <div className="monaco-editor-loading">Loading Monaco diff</div>
 });
+
+const MemoizedToolStudioPanel = memo(ToolStudioPanel);
 
 const AgentCollaborationScene = dynamic(
   () => import("@/components/workbench/AgentCollaborationScene").then((module) => module.AgentCollaborationScene),
@@ -2692,6 +2700,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const titlebarSectionLabelRef = useRef<HTMLElement>(null);
   const commandInputRef = useRef<HTMLInputElement>(null);
   const pendingAgentDetailCommitRef = useRef<(() => void) | null>(null);
+  const residentStartupPreloadDoneRef = useRef(false);
   const [searchAgentRunForm, setSearchAgentRunForm] = useState<SearchAgentRunForm>(defaultSearchAgentRunForm);
   const [searchAgentChatMessages, setSearchAgentChatMessages] =
     useState<SearchAgentChatMessage[]>(defaultSearchAgentChatMessages);
@@ -3009,6 +3018,48 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     const allowed = new Set(currentViewMode.allowedSections);
     return localizedSections.filter((item) => allowed.has(item.id));
   }, [currentViewMode, localizedSections]);
+  useEffect(() => {
+    if (residentStartupPreloadDoneRef.current || typeof window === "undefined" || visibleSections.length === 0) {
+      return undefined;
+    }
+    const allowed = new Set(visibleSections.map((item) => item.id));
+    const preloadSections = startupResidentPreloadSections.filter((item) => allowed.has(item));
+    if (preloadSections.length === 0) {
+      return undefined;
+    }
+
+    const idleWindow = window as typeof window & {
+      cancelIdleCallback?: (handle: number) => void;
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+    };
+    let timeoutId: number | null = null;
+    let idleId: number | null = null;
+    const preloadResidentPanels = () => {
+      if (residentStartupPreloadDoneRef.current) {
+        return;
+      }
+      residentStartupPreloadDoneRef.current = true;
+      setResidentSectionIds((current) => {
+        const next = normalizeResidentSectionIds([...preloadSections, ...current], section);
+        return next.length === current.length && next.every((item, index) => item === current[index]) ? current : next;
+      });
+    };
+
+    if (idleWindow.requestIdleCallback) {
+      idleId = idleWindow.requestIdleCallback(preloadResidentPanels, { timeout: 900 });
+    } else {
+      timeoutId = window.setTimeout(preloadResidentPanels, 240);
+    }
+
+    return () => {
+      if (idleId !== null) {
+        idleWindow.cancelIdleCallback?.(idleId);
+      }
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId);
+      }
+    };
+  }, [section, visibleSections]);
   const workVisibleSections = useMemo(() => {
     return visibleSections.filter((item) => !operatorSectionIds.has(item.id));
   }, [visibleSections]);
@@ -3823,6 +3874,15 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const openSearchAgentWorkbench = useCallback(() => {
     openSection("agents");
   }, [openSection]);
+  const openAgentsSection = useCallback(() => {
+    openSection("agents");
+  }, [openSection]);
+  const openSourceSection = useCallback(() => {
+    openSection("source");
+  }, [openSection]);
+  const openProviderSettings = useCallback(() => {
+    openSettingsTab("execution", "providers");
+  }, [openSettingsTab]);
   const updateSearchAgentRunForm = (field: keyof SearchAgentRunForm, value: string) => {
     if (field === "providerId") {
       const provider = providerCredentials.providers.find((item) => item.providerId === value);
@@ -6191,7 +6251,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
       {shouldRenderSection("tools") && (
         <MountedSectionPanel id="tools" active={section === "tools"}>
-          <ToolStudioPanel
+          <MemoizedToolStudioPanel
             language={uiLanguage}
             requestedMode={requestedToolMode}
             agentCount={agentCatalog.length}
@@ -6200,10 +6260,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             sourceFileCount={visibleSourceFiles.length}
             runtimeAdapterId={runtimeInitDefaults.adapterId}
             providerConfiguredCount={providerCredentials.configuredCount}
-            onOpenAgents={() => openSection("agents")}
-            onOpenSource={() => openSection("source")}
+            onOpenAgents={openAgentsSection}
+            onOpenSource={openSourceSection}
             onOpenTerminal={openTerminalDrawer}
-            onOpenProviderSettings={() => openSettingsTab("execution", "providers")}
+            onOpenProviderSettings={openProviderSettings}
           />
         </MountedSectionPanel>
       )}

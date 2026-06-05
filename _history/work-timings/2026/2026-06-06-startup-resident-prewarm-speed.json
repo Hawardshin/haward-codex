@@ -1,0 +1,47 @@
+{
+  "task_id": "2026-06-06-startup-resident-prewarm-speed",
+  "title": "Startup resident prewarm speed optimization",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "duration_seconds": 120,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official React, Next.js, and MDN references were checked before implementation."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "duration_seconds": 720,
+      "measurement": "estimated",
+      "bottleneck_notes": "Most implementation time went into changing MonitorShell resident lifecycle without reopening unbounded hidden tree growth."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification and package build",
+      "status": "completed",
+      "duration_seconds": 2100,
+      "measurement": "estimated",
+      "bottleneck_notes": "Renderer build, Playwright performance audit, and Tauri package build dominated elapsed time."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation records",
+      "status": "completed",
+      "duration_seconds": 420,
+      "measurement": "estimated",
+      "bottleneck_notes": "Required spec, omission, resource, evaluation, and trace records were created."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "verification",
+    "notes": "Package build is intentionally expensive and required by the user's automatic build preference."
+  },
+  "evidence": [
+    "platform-desktop-app/specs/2026-06-06-startup-resident-prewarm-speed/validation.ko.md"
+  ]
+}

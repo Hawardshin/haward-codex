@@ -1,0 +1,89 @@
+{
+  "initial_instruction": "Optimize desktop app speed, especially tab switching, and build/package automatically after implementation.",
+  "result_summary": "Added bounded startup resident prewarm for core Workspace Monitor tabs, excluded inactive overview from resident retention, memoized Tool Studio with stable callbacks, updated tests, measured section switch latency, and completed internal Tauri packaging.",
+  "work_mode": "standard",
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "verification": [
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test: passed, 59 tests",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check: passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build: passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:sections -- http://127.0.0.1:3348/#section-overview: passed, average 482ms, p95 652.7ms, max resident/mounted 5",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:budget: passed, largest chunk 734386 bytes",
+    "corepack pnpm --dir platform-desktop-app test: passed, 22 tests",
+    "corepack pnpm --dir platform-desktop-app run check: passed",
+    "corepack pnpm --dir platform-desktop-app run package:internal: passed, app and dmg built and verified",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort: developer snapshot restored",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check: passed after snapshot restore"
+  ],
+  "references_checked": [
+    "https://react.dev/reference/react/memo",
+    "https://react.dev/reference/react/Profiler",
+    "https://nextjs.org/docs/pages/building-your-application/optimizing/lazy-loading",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Background_Tasks_API",
+    "platform-desktop-app/specs/2026-06-06-bounded-tab-resident-performance/spec.ko.md"
+  ],
+  "grounding_checks": [
+    "Local tests, performance audit, build, and internal package verification passed.",
+    "Performance result is reported with both improvement and tradeoff: p95 improved from 827.8ms to 652.7ms while average worsened from 430ms to 482ms."
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
+    "_history/plans/2026/2026-06-06-startup-resident-prewarm-speed.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
+    "platform-desktop-app/specs/2026-06-06-startup-resident-prewarm-speed/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-06-startup-resident-prewarm-speed.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-06-startup-resident-prewarm-speed.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-06-speed-optimization.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-06-startup-resident-prewarm-speed.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-06-startup-resident-prewarm-speed/spec.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-06-startup-resident-prewarm-speed.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-06-startup-resident-prewarm-speed.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-06-startup-resident-prewarm-speed.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-resource.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [
+    "Consider splitting MonitorShell into memoized per-section components to reduce average settle time.",
+    "Consider collecting multiple perf:sections runs and comparing median/p95 by section before further resident tuning."
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Move large section components into explicit memoized section boundaries after the startup prewarm path is stable.",
+    "Add repeated-run performance reporting so a single run's average/p95 tradeoff is easier to interpret."
+  ]
+}
