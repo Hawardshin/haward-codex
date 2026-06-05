@@ -66,6 +66,7 @@
 | REQ-WM-065 | The default Tool Studio dropdown button shall clearly show the selected detail function, parent flow, menu affordance, and open state in one control while preserving `aria-haspopup="menu"`, Radix open state, at least a 44px target, text ellipsis, and overflow-free width below 860px. | must | dropdown trigger static test, Radix `aria-expanded`/`data-state` Browser smoke, desktop/mobile overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-066 | Default desktop product buttons shall use a library-backed shared Button primitive instead of ad hoc CSS combinations, unifying variants, sizes, icon-only controls, `asChild`, loading/disabled states, and representative primary actions in the titlebar, task handoff, and Tool Studio surfaces. | must | Radix Slot/CVA dependency audit, Button component static test, representative action import/use test, desktop/mobile Browser smoke, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-067 | Repeated desktop product action groups shall not recreate ad hoc flex/div structures on each screen. They shall use a shared ActionGroup primitive for alignment, spacing, wrapping, role, and density, and representative titlebar, task handoff, command palette, and Tool Studio action groups shall use that structure. | must | ActionGroup static test, representative action group Browser smoke, desktop/mobile overflow assertion, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
+| REQ-WM-068 | Tool Studio depth and detail functions shall not be expanded all at once. They shall use IntelliJ-style action access: users can reach the same functions through the primary dropdown, an `Alt+Enter` quick action menu, right-click context menus on parent flows/detail modes, `Alt+1/2`, `Alt+←/→`, and existing mode shortcuts. Left-click shall directly select; right-click shall open context actions for the current location. | must | Tool Studio action access static test, Radix dropdown/context menu Browser smoke, keyboard shortcut smoke, desktop/mobile overflow assertion, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 
 ## Scope
 
@@ -115,6 +116,7 @@
 - Tool Studio dropdown trigger state, current selection, parent flow, and mobile-safe width
 - Radix Slot/CVA shared Button primitive and representative default action-button migration
 - Shared ActionGroup primitive alignment, spacing, wrapping, role, and density for repeated action clusters
+- Tool Studio detail access through primary dropdown, quick action menu, right-click context menu, and keyboard shortcuts
 - Vercel deployment docs
 
 ## Non-Goals

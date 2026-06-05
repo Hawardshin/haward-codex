@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "ide-action-navigation",
+  "requirements": [
+    "REQ-WM-068"
+  ],
+  "implementation_paths": [
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/ToolStudioPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "validation": {
+    "test": "passed",
+    "tsc_no_emit": "passed",
+    "check": "passed",
+    "build": "passed",
+    "build_customer": "passed",
+    "perf_budget": {
+      "status": "passed",
+      "largest_initial_chunk_bytes": 734386,
+      "budget_bytes": 1000000
+    },
+    "browser_smoke": "passed",
+    "playwright_keyboard_context_smoke": "passed",
+    "desktop_mobile_overflow_x": 0
+  },
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-ide-action-navigation.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-05-ide-action-navigation.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-ide-action-navigation.json"
+  ]
+}

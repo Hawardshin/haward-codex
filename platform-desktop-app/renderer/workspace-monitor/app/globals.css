@@ -14001,6 +14001,21 @@ h3 {
   box-shadow: var(--control-shadow);
 }
 
+.tool-action-menu-trigger {
+  gap: 8px;
+}
+
+.tool-action-menu-trigger kbd {
+  padding: 2px 5px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--text-secondary);
+  background: var(--surface-muted);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-caption);
+  font-weight: 760;
+}
+
 .tool-dropdown-trigger-icon,
 .tool-dropdown-trigger-caret {
   display: grid;
@@ -14041,6 +14056,12 @@ h3 {
 
 .tool-dropdown-trigger[data-state="open"] .tool-dropdown-trigger-caret {
   transform: rotate(180deg);
+}
+
+.tool-menu-separator {
+  height: 1px;
+  margin: 6px;
+  background: var(--line);
 }
 
 .tool-studio-status-grid {
@@ -15607,6 +15628,10 @@ h3 {
   .tool-studio-actions .tool-dropdown-trigger {
     width: 100%;
     min-width: 0;
+  }
+
+  .tool-action-menu-trigger {
+    width: 100%;
   }
 
   .tool-studio-status-grid {

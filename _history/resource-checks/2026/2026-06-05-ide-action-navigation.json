@@ -1,0 +1,15 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "ide-action-navigation",
+  "resource_risk_occurred": true,
+  "risks": [
+    "Static export server and browser automation must be closed after smoke verification.",
+    "Keyboard listeners must not remain attached after Tool Studio unmount."
+  ],
+  "checks": [
+    "Typecheck passed after keyboard effect and cleanup changes.",
+    "Local static server on port 3359 was stopped after Browser smoke.",
+    "Desktop/mobile Playwright smoke passed with rootOverflowX 0 and bodyOverflowX 0."
+  ],
+  "status": "passed"
+}

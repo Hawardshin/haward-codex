@@ -78,6 +78,7 @@
 | REQ-WM-065 | Tool Studio의 기본 드롭다운 버튼은 현재 선택된 세부 기능, 상위 흐름, 메뉴 affordance, 열림 상태를 한 컨트롤 안에서 명확히 보여줘야 하며 `aria-haspopup="menu"`, Radix open state, 44px 이상 타깃, 텍스트 ellipsis, 860px 이하 overflow 없는 폭 조정을 유지해야 한다. | must | dropdown trigger static test, Radix `aria-expanded`/`data-state` Browser smoke, desktop/mobile overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-066 | 데스크톱 제품 UI의 기본 버튼은 임의 CSS 조합이 아니라 라이브러리 기반 공통 Button primitive를 통해 variant, size, icon-only, `asChild`, loading/disabled 상태를 통일해야 하며, titlebar/작업 handoff/Tool Studio 같은 대표 기본 액션은 이 Button을 사용해야 한다. | must | Radix Slot/CVA dependency audit, Button component static test, 대표 액션 import/use test, desktop/mobile Browser smoke, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-067 | 데스크톱 제품 UI의 반복 액션 묶음은 화면마다 임의 flex/div 구조를 새로 만들지 않고 공통 ActionGroup primitive로 정렬, 간격, wrap, role, density를 통일해야 하며 titlebar, task handoff, command palette, Tool Studio 대표 액션 묶음은 이 구조를 사용해야 한다. | must | ActionGroup static test, representative action group Browser smoke, desktop/mobile overflow assertion, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
+| REQ-WM-068 | Tool Studio의 depth와 상세 기능은 한 화면에 모두 펼치지 않고 IntelliJ식 action access로 접근해야 한다. 사용자는 primary dropdown, `Alt+Enter` 빠른 액션 메뉴, 상위 흐름/세부 기능 우클릭 context menu, `Alt+1/2`, `Alt+←/→`, 기존 mode 단축키로 같은 기능에 도달할 수 있어야 하며 좌클릭은 직접 선택, 우클릭은 해당 위치의 context action을 열어야 한다. | must | Tool Studio action access static test, Radix dropdown/context menu Browser smoke, keyboard shortcut smoke, desktop/mobile overflow assertion, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 
 ## 범위
 
@@ -136,6 +137,7 @@
 - Tool Studio 드롭다운 버튼의 현재 선택값, 상위 흐름, 메뉴 상태, 모바일 안전 폭
 - Radix Slot/CVA 기반 공통 Button primitive와 대표 기본 액션 버튼 migration
 - 공통 ActionGroup primitive 기반 반복 액션 묶음 정렬, 간격, wrap, role, density 통일
+- Tool Studio 상세 기능의 primary dropdown, 빠른 액션 메뉴, 우클릭 context menu, 키보드 단축키 접근
 - Vercel 배포 문서
 
 ## 제외 범위

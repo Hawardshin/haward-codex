@@ -27,7 +27,7 @@ import {
   Wand2
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { ActionGroup } from "@/components/ui/ActionGroup";
 import { Button } from "@/components/ui/Button";
@@ -638,6 +638,7 @@ export function ToolStudioPanel({
   const [selectedEnvironmentId, setSelectedEnvironmentId] = useState(pythonEnvironmentProfiles[0].id);
   const [selectedVenvStepId, setSelectedVenvStepId] = useState(virtualEnvironmentLifecycleSteps[0].id);
   const [selectedDeployTargetId, setSelectedDeployTargetId] = useState(toolDeployTargets[0].id);
+  const [actionMenuOpen, setActionMenuOpen] = useState(false);
   const ko = language === "ko";
   const activeMode = toolModes.find((item) => item.id === mode) || toolModes[0];
   const activeStage = toolStudioStages.find((item) => item.id === stage) || toolStudioStages[0];
@@ -680,35 +681,110 @@ export function ToolStudioPanel({
     [activeTaskCount, agentCount, blockedTaskCount, ko, sourceFileCount]
   );
 
+  const selectMode = useCallback((nextMode: ToolStudioMode) => {
+    const nextModeItem = toolModes.find((item) => item.id === nextMode) || toolModes[0];
+    setStage(nextModeItem.stage);
+    setMode(nextMode);
+    const matchingTool = toolCards.find((item) => item.mode === nextMode);
+    if (matchingTool) {
+      setSelectedToolId(matchingTool.id);
+    }
+  }, []);
+
+  const selectStage = useCallback(
+    (nextStage: ToolStudioStage) => {
+      if (stage === nextStage) {
+        return;
+      }
+      const firstMode = toolModes.find((item) => item.stage === nextStage) || toolModes[0];
+      selectMode(firstMode.id);
+    },
+    [selectMode, stage]
+  );
+
+  const selectAdjacentMode = useCallback(
+    (direction: 1 | -1) => {
+      const currentIndex = Math.max(0, toolModes.findIndex((item) => item.id === mode));
+      const nextIndex = (currentIndex + direction + toolModes.length) % toolModes.length;
+      selectMode(toolModes[nextIndex].id);
+    },
+    [mode, selectMode]
+  );
+
+  const copyActionMap = useCallback(() => {
+    void writeClipboardText(JSON.stringify({
+      activeMode: mode,
+      activeStage: stage,
+      mouse: {
+        leftClick: ko ? "상위 흐름 또는 세부 기능을 바로 선택" : "Select a parent flow or detail mode directly",
+        rightClick: ko ? "현재 위치의 컨텍스트 액션 메뉴 열기" : "Open context actions for the current surface"
+      },
+      shortcuts: [
+        { keys: "Alt+Enter", action: ko ? "빠른 액션 메뉴" : "Quick action menu" },
+        { keys: "Alt+1 / Alt+2", action: ko ? "상위 흐름 선택" : "Choose parent flow" },
+        { keys: "Alt+← / Alt+→", action: ko ? "이전/다음 세부 기능" : "Previous/next detail mode" },
+        ...toolModes.map((item) => ({
+          keys: item.shortcut,
+          action: labelFor(language, item.labelKo, item.labelEn)
+        }))
+      ]
+    }, null, 2));
+  }, [ko, language, mode, stage]);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (isFormField(event.target)) {
         return;
       }
       const key = event.key.toLowerCase();
+      if (event.altKey && event.key === "Enter") {
+        event.preventDefault();
+        setActionMenuOpen(true);
+        return;
+      }
+      if (event.altKey && key === "1") {
+        event.preventDefault();
+        selectStage("create");
+        return;
+      }
+      if (event.altKey && key === "2") {
+        event.preventDefault();
+        selectStage("ship");
+        return;
+      }
+      if (event.altKey && event.key === "ArrowLeft") {
+        event.preventDefault();
+        selectAdjacentMode(-1);
+        return;
+      }
+      if (event.altKey && event.key === "ArrowRight") {
+        event.preventDefault();
+        selectAdjacentMode(1);
+        return;
+      }
       if ((event.metaKey || event.ctrlKey) && key === "b") {
         event.preventDefault();
-        setMode("build");
+        selectMode("build");
         return;
       }
       if ((event.metaKey || event.ctrlKey) && event.shiftKey && key === "e") {
         event.preventDefault();
-        setMode("environment");
+        selectMode("environment");
         return;
       }
       if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
         event.preventDefault();
-        setMode("deploy");
+        selectMode("deploy");
         return;
       }
       if ((event.metaKey || event.ctrlKey) && event.altKey && key === "t") {
         event.preventDefault();
-        setMode("registry");
+        selectMode("registry");
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [selectAdjacentMode, selectMode, selectStage]);
 
   useEffect(() => {
     let disposed = false;
@@ -846,24 +922,6 @@ export function ToolStudioPanel({
     };
   }, []);
 
-  const selectMode = (nextMode: ToolStudioMode) => {
-    const nextModeItem = toolModes.find((item) => item.id === nextMode) || toolModes[0];
-    setStage(nextModeItem.stage);
-    setMode(nextMode);
-    const matchingTool = toolCards.find((item) => item.mode === nextMode);
-    if (matchingTool) {
-      setSelectedToolId(matchingTool.id);
-    }
-  };
-
-  const selectStage = (nextStage: ToolStudioStage) => {
-    if (stage === nextStage) {
-      return;
-    }
-    const firstMode = toolModes.find((item) => item.stage === nextStage) || toolModes[0];
-    selectMode(firstMode.id);
-  };
-
   useEffect(() => {
     const nextBlueprint = toolBuilderBlueprints.find((item) => item.id === selectedBlueprintId) || toolBuilderBlueprints[0];
     setSelectedSourceTarget(nextBlueprint.editTargets[0] || nextBlueprint.sourcePath);
@@ -955,7 +1013,7 @@ export function ToolStudioPanel({
     if (requestedMode) {
       selectMode(requestedMode.mode);
     }
-  }, [requestedMode]);
+  }, [requestedMode, selectMode]);
 
   return (
     <section className="tool-studio-shell" data-tool-studio data-tool-studio-mode={mode} aria-label={ko ? "툴 스튜디오" : "Tool Studio"}>
@@ -997,24 +1055,90 @@ export function ToolStudioPanel({
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>
               <DropdownMenu.Content className="tool-menu-content" sideOffset={8} align="end">
+                {toolStudioStages.map((stageItem) => (
+                  <DropdownMenu.Group key={stageItem.id}>
+                    <DropdownMenu.Label className="tool-menu-label">
+                      {labelFor(language, stageItem.labelKo, stageItem.labelEn)}
+                    </DropdownMenu.Label>
+                    {toolModes.filter((item) => item.stage === stageItem.id).map((item) => (
+                      <DropdownMenu.Item
+                        key={item.id}
+                        className="tool-menu-item"
+                        onSelect={() => selectMode(item.id)}
+                        data-tool-menu-item={item.id}
+                      >
+                        <item.icon size={15} aria-hidden="true" />
+                        <span>
+                          <strong>{labelFor(language, item.labelKo, item.labelEn)}</strong>
+                          <small>{labelFor(language, item.detailKo, item.detailEn)}</small>
+                        </span>
+                        <kbd>{item.shortcut}</kbd>
+                      </DropdownMenu.Item>
+                    ))}
+                    {stageItem.id === "create" && <DropdownMenu.Separator className="tool-menu-separator" />}
+                  </DropdownMenu.Group>
+                ))}
+              </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Root>
+          <DropdownMenu.Root open={actionMenuOpen} onOpenChange={setActionMenuOpen}>
+            <DropdownMenu.Trigger asChild>
+              <Button
+                variant="secondary"
+                className="tool-action-menu-trigger"
+                data-tool-action-menu-trigger
+                aria-haspopup="menu"
+                title={ko ? "Alt+Enter 빠른 액션" : "Alt+Enter quick actions"}
+              >
+                <Keyboard size={16} aria-hidden="true" />
+                <span>{ko ? "액션" : "Actions"}</span>
+                <kbd>⌥↵</kbd>
+              </Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Portal>
+              <DropdownMenu.Content className="tool-menu-content" sideOffset={8} align="end" data-tool-action-menu>
                 <DropdownMenu.Label className="tool-menu-label">
-                  {ko ? "작업 선택" : "Choose action"}
+                  {ko ? "빠른 액션" : "Quick actions"}
                 </DropdownMenu.Label>
-                {toolModes.map((item) => (
+                <DropdownMenu.Item className="tool-menu-item" onSelect={() => selectAdjacentMode(-1)} data-tool-action-menu-item="previous-mode">
+                  <ChevronDown size={15} aria-hidden="true" />
+                  <span>{ko ? "이전 세부 기능" : "Previous detail mode"}</span>
+                  <kbd>⌥←</kbd>
+                </DropdownMenu.Item>
+                <DropdownMenu.Item className="tool-menu-item" onSelect={() => selectAdjacentMode(1)} data-tool-action-menu-item="next-mode">
+                  <ChevronDown size={15} aria-hidden="true" />
+                  <span>{ko ? "다음 세부 기능" : "Next detail mode"}</span>
+                  <kbd>⌥→</kbd>
+                </DropdownMenu.Item>
+                <DropdownMenu.Separator className="tool-menu-separator" />
+                {toolStudioStages.map((item, index) => (
                   <DropdownMenu.Item
                     key={item.id}
                     className="tool-menu-item"
-                    onSelect={() => selectMode(item.id)}
-                    data-tool-menu-item={item.id}
+                    onSelect={() => selectStage(item.id)}
+                    data-tool-action-stage={item.id}
                   >
                     <item.icon size={15} aria-hidden="true" />
                     <span>
                       <strong>{labelFor(language, item.labelKo, item.labelEn)}</strong>
                       <small>{labelFor(language, item.detailKo, item.detailEn)}</small>
                     </span>
-                    <kbd>{item.shortcut}</kbd>
+                    <kbd>{`⌥${index + 1}`}</kbd>
                   </DropdownMenu.Item>
                 ))}
+                <DropdownMenu.Separator className="tool-menu-separator" />
+                <DropdownMenu.Item className="tool-menu-item" onSelect={onOpenSource} data-tool-action-menu-item="source">
+                  <FileCode2 size={15} aria-hidden="true" />
+                  <span>{ko ? "소스 열기" : "Open source"}</span>
+                </DropdownMenu.Item>
+                <DropdownMenu.Item className="tool-menu-item" onSelect={onOpenTerminal} data-tool-action-menu-item="terminal">
+                  <SquareTerminal size={15} aria-hidden="true" />
+                  <span>{ko ? "터미널 열기" : "Open terminal"}</span>
+                </DropdownMenu.Item>
+                <DropdownMenu.Item className="tool-menu-item" onSelect={copyActionMap} data-tool-action-menu-item="copy-action-map">
+                  <Copy size={15} aria-hidden="true" />
+                  <span>{ko ? "액션 맵 복사" : "Copy action map"}</span>
+                </DropdownMenu.Item>
               </DropdownMenu.Content>
             </DropdownMenu.Portal>
           </DropdownMenu.Root>
@@ -1042,38 +1166,99 @@ export function ToolStudioPanel({
 
       <nav className="tool-studio-depth-rail" aria-label={ko ? "툴 스튜디오 상위 흐름" : "Tool Studio parent stages"} data-tool-stage-rail>
         {toolStudioStages.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            className={stage === item.id ? "active" : ""}
-            onClick={() => selectStage(item.id)}
-            aria-current={stage === item.id ? "step" : undefined}
-            data-tool-stage-button={item.id}
-          >
-            <item.icon size={16} aria-hidden="true" />
-            <span>
-              <strong>{labelFor(language, item.labelKo, item.labelEn)}</strong>
-              <small>{labelFor(language, item.detailKo, item.detailEn)}</small>
-            </span>
-          </button>
+          <ContextMenu.Root key={item.id}>
+            <ContextMenu.Trigger asChild>
+              <button
+                type="button"
+                className={stage === item.id ? "active" : ""}
+                onClick={() => selectStage(item.id)}
+                aria-current={stage === item.id ? "step" : undefined}
+                data-tool-stage-button={item.id}
+              >
+                <item.icon size={16} aria-hidden="true" />
+                <span>
+                  <strong>{labelFor(language, item.labelKo, item.labelEn)}</strong>
+                  <small>{labelFor(language, item.detailKo, item.detailEn)}</small>
+                </span>
+              </button>
+            </ContextMenu.Trigger>
+            <ContextMenu.Portal>
+              <ContextMenu.Content className="tool-context-content" data-tool-stage-context-menu={item.id}>
+                <ContextMenu.Label className="tool-menu-label">
+                  {labelFor(language, item.labelKo, item.labelEn)}
+                </ContextMenu.Label>
+                <ContextMenu.Item className="tool-menu-item" onSelect={() => selectStage(item.id)}>
+                  <item.icon size={15} aria-hidden="true" />
+                  <span>{ko ? "이 흐름으로 이동" : "Go to this flow"}</span>
+                </ContextMenu.Item>
+                {toolModes.filter((modeItem) => modeItem.stage === item.id).map((modeItem) => (
+                  <ContextMenu.Item key={modeItem.id} className="tool-menu-item" onSelect={() => selectMode(modeItem.id)}>
+                    <modeItem.icon size={15} aria-hidden="true" />
+                    <span>{labelFor(language, modeItem.labelKo, modeItem.labelEn)}</span>
+                    <kbd>{modeItem.shortcut}</kbd>
+                  </ContextMenu.Item>
+                ))}
+                <ContextMenu.Separator className="tool-menu-separator" />
+                <ContextMenu.Item className="tool-menu-item" onSelect={() => setActionMenuOpen(true)}>
+                  <Keyboard size={15} aria-hidden="true" />
+                  <span>{ko ? "빠른 액션 메뉴" : "Quick action menu"}</span>
+                  <kbd>⌥↵</kbd>
+                </ContextMenu.Item>
+              </ContextMenu.Content>
+            </ContextMenu.Portal>
+          </ContextMenu.Root>
         ))}
       </nav>
 
       <nav className="tool-studio-mode-rail" aria-label={ko ? "툴 스튜디오 세부 단계" : "Tool Studio detail modes"} data-tool-mode-depth={stage}>
         {currentStageModes.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            className={mode === item.id ? "active" : ""}
-            onClick={() => selectMode(item.id)}
-            data-tool-mode-button={item.id}
-          >
-            <item.icon size={16} aria-hidden="true" />
-            <span>
-              <strong>{labelFor(language, item.labelKo, item.labelEn)}</strong>
-              <small>{item.shortcut}</small>
-            </span>
-          </button>
+          <ContextMenu.Root key={item.id}>
+            <ContextMenu.Trigger asChild>
+              <button
+                type="button"
+                className={mode === item.id ? "active" : ""}
+                onClick={() => selectMode(item.id)}
+                data-tool-mode-button={item.id}
+              >
+                <item.icon size={16} aria-hidden="true" />
+                <span>
+                  <strong>{labelFor(language, item.labelKo, item.labelEn)}</strong>
+                  <small>{item.shortcut}</small>
+                </span>
+              </button>
+            </ContextMenu.Trigger>
+            <ContextMenu.Portal>
+              <ContextMenu.Content className="tool-context-content" data-tool-mode-context-menu={item.id}>
+                <ContextMenu.Label className="tool-menu-label">
+                  {labelFor(language, item.labelKo, item.labelEn)}
+                </ContextMenu.Label>
+                <ContextMenu.Item className="tool-menu-item" onSelect={() => selectMode(item.id)}>
+                  <item.icon size={15} aria-hidden="true" />
+                  <span>{ko ? "이 세부 기능 열기" : "Open this detail mode"}</span>
+                  <kbd>{item.shortcut}</kbd>
+                </ContextMenu.Item>
+                <ContextMenu.Item className="tool-menu-item" onSelect={() => selectAdjacentMode(-1)}>
+                  <ChevronDown size={15} aria-hidden="true" />
+                  <span>{ko ? "이전 세부 기능" : "Previous detail mode"}</span>
+                  <kbd>⌥←</kbd>
+                </ContextMenu.Item>
+                <ContextMenu.Item className="tool-menu-item" onSelect={() => selectAdjacentMode(1)}>
+                  <ChevronDown size={15} aria-hidden="true" />
+                  <span>{ko ? "다음 세부 기능" : "Next detail mode"}</span>
+                  <kbd>⌥→</kbd>
+                </ContextMenu.Item>
+                <ContextMenu.Separator className="tool-menu-separator" />
+                <ContextMenu.Item className="tool-menu-item" onSelect={onOpenSource}>
+                  <FileCode2 size={15} aria-hidden="true" />
+                  <span>{ko ? "소스 보기" : "View source"}</span>
+                </ContextMenu.Item>
+                <ContextMenu.Item className="tool-menu-item" onSelect={copyActionMap}>
+                  <Copy size={15} aria-hidden="true" />
+                  <span>{ko ? "액션 맵 복사" : "Copy action map"}</span>
+                </ContextMenu.Item>
+              </ContextMenu.Content>
+            </ContextMenu.Portal>
+          </ContextMenu.Root>
         ))}
       </nav>
 

@@ -1,0 +1,11 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "ide-action-navigation",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "Workspace Monitor frontend interaction changes with requirements, specs, tests, browser validation, and commit/push; no new installation required.",
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-ide-action-navigation.json"
+  ]
+}

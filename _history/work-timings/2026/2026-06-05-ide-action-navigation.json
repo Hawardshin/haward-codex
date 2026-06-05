@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "ide-action-navigation",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked JetBrains, WAI-ARIA APG, and Radix references."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Added quick action dropdown, context menus, and shortcut navigation to Tool Studio."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Ran test, typecheck, check, build, customer build, perf budget, in-app Browser smoke, Playwright desktop/mobile smoke, and git diff check."
+    }
+  ]
+}
