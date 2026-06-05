@@ -1,0 +1,66 @@
+{
+  "task": "Expand workbench lazy boundaries and verify desktop app performance/package output.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "continue-followups",
+      "description": "Continue the previous root-boundary follow-up items rather than stopping at the first split.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/workbench/AgentDetailPanels.tsx"
+      ]
+    },
+    {
+      "item_id": "performance-verification",
+      "description": "Verify tab and button performance after implementation.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "perf:sections average=487.8ms p95=713.2ms",
+        "perf:buttons realClickP95=54.8ms failedFeedbackCount=0"
+      ]
+    },
+    {
+      "item_id": "auto-build-package",
+      "description": "Run build/package automatically after implementation.",
+      "source": "persistent_user_preference",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "corepack pnpm --filter platform-desktop-app run package:internal"
+      ]
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "internal-package",
+      "description": "Internal app and DMG were built and verified.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Agent Workspace Platform.app",
+        "Agent Workspace Platform_0.1.0_aarch64.dmg",
+        "codesign verification passed",
+        "hdiutil verify passed"
+      ]
+    },
+    {
+      "check_id": "resource-cleanup",
+      "description": "Performance audit server was stopped.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "lsof -tiTCP:3348 -sTCP:LISTEN returned no process after kill"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Full MonitorShell route-level decomposition remains a larger future migration.",
+    "Public release blockers remain by design."
+  ],
+  "status": "passed"
+}

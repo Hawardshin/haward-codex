@@ -18,7 +18,7 @@ export type CoreFeatureDrilldownItem = {
   steps: string[];
 };
 
-type CoreFeatureDrilldownProps = {
+export type CoreFeatureDrilldownProps = {
   feature: CoreFeatureDrilldownItem;
   language: "ko" | "en";
 };

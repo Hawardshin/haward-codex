@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-workbench-lazy-boundary-expansion",
+  "resources_touched": [
+    "Next.js production build output",
+    "Playwright Chromium process",
+    "python3 http.server on 127.0.0.1:3348",
+    "Tauri release build",
+    "macOS app bundle and DMG"
+  ],
+  "checks": [
+    {
+      "item": "Static server cleanup",
+      "status": "passed",
+      "evidence": "No listener remained on port 3348."
+    },
+    {
+      "item": "Resident panel cap",
+      "status": "passed",
+      "evidence": "maxObservedResidentCount=5, maxObservedMountedPanelCount=5"
+    },
+    {
+      "item": "Package subprocess completion",
+      "status": "passed",
+      "evidence": "package:internal completed and hdiutil verified the DMG."
+    }
+  ],
+  "status": "passed"
+}

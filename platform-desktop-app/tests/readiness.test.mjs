@@ -490,7 +490,15 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"),
     "utf8"
   );
-  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
+  const agentBuilderPanels = readFileSync(
+    join(root, "renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx"),
+    "utf8"
+  );
+  const agentDetailPanels = readFileSync(
+    join(root, "renderer/workspace-monitor/components/workbench/AgentDetailPanels.tsx"),
+    "utf8"
+  );
+  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}\n${agentBuilderPanels}\n${agentDetailPanels}`;
   const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
   const clipboardUtility = readFileSync(join(root, "renderer/workspace-monitor/lib/clipboard.mjs"), "utf8");
   const clipboardTest = readFileSync(join(root, "tests/clipboard.test.mjs"), "utf8");
@@ -628,6 +636,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(monitorShell, /PathDisclosure/);
   assert.match(monitorShell, /RuntimeTerminalDrawer/);
   assert.match(monitorShell, /WorkspaceExplorerPane/);
+  assert.match(agentBuilderPanels, /AgentCoreBlueprintPanel/);
+  assert.match(agentBuilderPanels, /AgentFactoryWizard/);
+  assert.match(agentBuilderPanels, /LearningFeedbackLoopPanel/);
+  assert.match(agentDetailPanels, /AgentRuntimeOverviewPanel/);
   assert.match(coreFeatureDrilldown, /CoreFeatureDrilldownId/);
   assert.match(runtimeTerminalDrawer, /RuntimeTerminalDrawer/);
   assert.match(workspaceExplorerPane, /buildWorkspaceExplorerTree/);

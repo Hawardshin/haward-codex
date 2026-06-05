@@ -110,7 +110,7 @@ export type DesktopGitWorkbenchActionPayload = {
 
 type NativeGitView = "changes" | "history" | "stashes";
 
-type NativeGitWorkbenchProps = {
+export type NativeGitWorkbenchProps = {
   status: DesktopGitStatusReport | null;
   busy: string;
   notice: string;

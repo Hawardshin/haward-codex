@@ -15,7 +15,7 @@ import {
 
 import type { WorkspaceProductFeatureArchitecture, WorkspaceReferencePlatformAdvantages } from "@/lib/snapshot";
 
-type ProductSectionId =
+export type ProductSectionId =
   | "overview"
   | "desktop"
   | "projects"
@@ -27,7 +27,7 @@ type ProductSectionId =
   | "requirements"
   | "agents";
 
-type ProductFeatureArchitecturePanelProps = {
+export type ProductFeatureArchitecturePanelProps = {
   architecture: WorkspaceProductFeatureArchitecture;
   referenceAdvantages?: WorkspaceReferencePlatformAdvantages;
   onOpenSection: (section: ProductSectionId) => void;

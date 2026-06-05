@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T17:55:28.099Z",
+  "generatedAt": "2026-06-05T18:30:41.578Z",
   "summary": {
-    "documents": 2355,
+    "documents": 2365,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 958
+        "count": 962
       },
       {
         "category": "web-search",
-        "count": 377
+        "count": 378
       },
       {
         "category": "plan",
-        "count": 331
+        "count": 332
       },
       {
         "category": "request-trace",
-        "count": 306
+        "count": 307
       },
       {
         "category": "work-timing",
-        "count": 228
+        "count": 229
       },
       {
         "category": "user-request",
-        "count": 90
+        "count": 91
       },
       {
         "category": "work-summary",
-        "count": 57
+        "count": 58
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6207350,
+    "totalSourceBytes": 6226415,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,166 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-work-timings-2026-2026-06-06-workbench-lazy-boundary-expansion-json",
+      "path": "_history/work-timings/2026/2026-06-06-workbench-lazy-boundary-expansion.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Workbench Lazy Boundary Expansion",
+      "excerpt": "{ \"task id\": \"2026 06 06 workbench lazy boundary expansion\", \"title\": \"Workbench lazy boundary expansion\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\"",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 workbench lazy boundary expansion&quot;, &quot;title&quot;: &quot;Workbench lazy boundary expansion&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 180, &quot;measurement&quot;: &quot;estimated&quot;, &quot;bottleneck notes&quot;: &quot;Official React, Next.js,</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1707,
+      "updatedAt": "2026-06-05T18:29:48.846Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-resource-json",
+      "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion-resource.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Workbench Lazy Boundary Expansion Resource",
+      "excerpt": "{ \"task\": \"Expand workbench lazy boundaries and verify desktop app performance/package output.\", \"work mode\": \"standard\", \"runtime context\": \"Next.js static renderer build\", \"React dynamic imports\", \"Playwright Chromium performance probes\", \"Python static file server\", \"Rust/Taur",
+      "html": "<p>{ &quot;task&quot;: &quot;Expand workbench lazy boundaries and verify desktop app performance/package output.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;runtime context&quot;: &quot;Next.js static renderer build&quot;, &quot;React dynamic imports&quot;, &quot;Playwright Chromium performance probes&quot;, &quot;Python static file server&quot;, &quot;Rust/Tauri build and bundling&quot;, &quot;macOS codesign and hdiutil&quot; , &quot;resource risks&quot;: { &quot;risk </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1990,
+      "updatedAt": "2026-06-05T18:29:48.845Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Workbench Lazy Boundary Expansion Evaluation Input",
+      "excerpt": "{ \"initial instruction\": \"Continue and implement all remaining desktop app performance follow up items from the previous root boundary review.\", \"result summary\": \"Expanded Workspace Monitor heavy workbench panels into Next dynamic boundaries, split Agents detail/build panels int",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;Continue and implement all remaining desktop app performance follow up items from the previous root boundary review.&quot;, &quot;result summary&quot;: &quot;Expanded Workspace Monitor heavy workbench panels into Next dynamic boundaries, split Agents detail/build panels into separate modules, staggered prewarm imports, stabilized button feedback auditi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 5275,
+      "updatedAt": "2026-06-05T18:29:48.844Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-omission-json",
+      "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Workbench Lazy Boundary Expansion Omission",
+      "excerpt": "{ \"task\": \"Expand workbench lazy boundaries and verify desktop app performance/package output.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"continue followups\", \"description\": \"Continue the previous root boundary follow up items rather than stopping at the first spl",
+      "html": "<p>{ &quot;task&quot;: &quot;Expand workbench lazy boundaries and verify desktop app performance/package output.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;continue followups&quot;, &quot;description&quot;: &quot;Continue the previous root boundary follow up items rather than stopping at the first split.&quot;, &quot;source&quot;: &quot;user request&quot;, &quot;required&quot;: true, &quot;status&quot;: &quot;covered&quot;, &quot;evidence</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2179,
+      "updatedAt": "2026-06-05T18:29:48.844Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가: Workbench lazy boundary 확장",
+      "excerpt": "최종 평가: Workbench lazy boundary 확장 결론 작업은 닫을 수 있다. 사용자의 남은 성능 후속 요청에 대해 Shell local heavy panels를 lazy boundaries로 확장했고, renderer build, internal package build, section/button performance audits가 모두 통과했다. 결과 Agents detail/build panels가 별도 modules로 분리됐다. Desktop/runtime/home featur",
+      "html": "<p>최종 평가: Workbench lazy boundary 확장 결론 작업은 닫을 수 있다. 사용자의 남은 성능 후속 요청에 대해 Shell local heavy panels를 lazy boundaries로 확장했고, renderer build, internal package build, section/button performance audits가 모두 통과했다. 결과 Agents detail/build panels가 별도 modules로 분리됐다. Desktop/runtime/home feature panels도 runtime static import 대신 dynamic boundary로 연결됐다. startup prewarm은 순차 분</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1294,
+      "updatedAt": "2026-06-05T18:29:48.844Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Workbench lazy boundary 확장",
+      "excerpt": "요청 결과 추적: Workbench lazy boundary 확장 요청 사용자는 이전 성능 개선 후속으로 “그것들 다”라고 요청했다. 결과 남은 Shell local heavy panels를 lazy boundaries로 확장했다. Agents detail/build panels를 별도 파일로 분리했다. prewarm과 button feedback 측정을 안정화했다. 내부 .app 와 .dmg 패키징을 완료했다. 연결 파일 구현: platform desktop app/renderer/workspa",
+      "html": "<p>요청 결과 추적: Workbench lazy boundary 확장 요청 사용자는 이전 성능 개선 후속으로 “그것들 다”라고 요청했다. 결과 남은 Shell local heavy panels를 lazy boundaries로 확장했다. Agents detail/build panels를 별도 파일로 분리했다. prewarm과 button feedback 측정을 안정화했다. 내부 .app 와 .dmg 패키징을 완료했다. 연결 파일 구현: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx 구현: platform desktop app/renderer/workspa</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1259,
+      "updatedAt": "2026-06-05T18:29:48.843Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Workbench lazy boundary 확장",
+      "excerpt": "사용자 요청 요약: Workbench lazy boundary 확장 요약 사용자는 이전 성능 개선의 후속으로 남은 것들을 모두 처리하라고 요청했다. 맥락상 탭 전환 지연, renderer mount/import 비용, 데스크톱 자원 활용, 자동 build/package 요구를 포함한다. 해석 이전 MonitorShell root boundary 평가에서 후속으로 남긴 Desktop runtime 및 Agents panel boundary를 구현 대상으로 삼는다. 단순 스타일 변경이 아니라 lazy",
+      "html": "<p>사용자 요청 요약: Workbench lazy boundary 확장 요약 사용자는 이전 성능 개선의 후속으로 남은 것들을 모두 처리하라고 요청했다. 맥락상 탭 전환 지연, renderer mount/import 비용, 데스크톱 자원 활용, 자동 build/package 요구를 포함한다. 해석 이전 MonitorShell root boundary 평가에서 후속으로 남긴 Desktop runtime 및 Agents panel boundary를 구현 대상으로 삼는다. 단순 스타일 변경이 아니라 lazy chunk, resident/prewarm, button feedback 측정을 포함한 구조 변경으로 처리한다. 구현 후 build/packa</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 655,
+      "updatedAt": "2026-06-05T18:29:48.843Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Workbench lazy boundary 확장",
+      "excerpt": "작업 요약: Workbench lazy boundary 확장 완료 내용 DesktopRuntimePanel , home feature panels, workspace/native/runtime panels, Agents detail/build panels를 next/dynamic boundary로 연결했다. Agents collaboration/inventory/runtime overview를 AgentDetailPanels.tsx 로 분리했다. AgentCore blueprint, agent f",
+      "html": "<p>작업 요약: Workbench lazy boundary 확장 완료 내용 DesktopRuntimePanel , home feature panels, workspace/native/runtime panels, Agents detail/build panels를 next/dynamic boundary로 연결했다. Agents collaboration/inventory/runtime overview를 AgentDetailPanels.tsx 로 분리했다. AgentCore blueprint, agent factory, learning feedback panels를 AgentBuilderPanels.tsx 로 분리했다. startup prewarm</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1124,
+      "updatedAt": "2026-06-05T18:29:48.843Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "_history/plans/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획: Workbench lazy boundary 확장",
+      "excerpt": "작업 계획: Workbench lazy boundary 확장 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 계획 이전 root boundary 작업에서 다음 병목으로 남긴 DesktopRuntimePanel 과 Agents detail panels를 대상으로 한다. 목표는 모든 탭을 한 번에 재작성하는 것이 아니라, Shell local heavy UI를 실",
+      "html": "<p>작업 계획: Workbench lazy boundary 확장 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 계획 이전 root boundary 작업에서 다음 병목으로 남긴 DesktopRuntimePanel 과 Agents detail panels를 대상으로 한다. 목표는 모든 탭을 한 번에 재작성하는 것이 아니라, Shell local heavy UI를 실제 dynamic chunk boundary로 옮기고 prewarm을 분산해 탭 전환과 버튼 feedback을 개선하는 것이다. 수용 기준 in</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 804,
+      "updatedAt": "2026-06-05T18:29:48.842Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Workbench lazy boundary 확장",
+      "excerpt": "웹 검색 기록: Workbench lazy boundary 확장 목적 사용자의 “그것들 다” 요청을 이전 root boundary 후속 작업으로 해석하고, React/Next renderer code splitting, main thread responsiveness, long task 완화 기준을 다시 확인했다. 검색어 React official docs lazy memo Profiler startTransition performance Next.js official docs dynamic im",
+      "html": "<p>웹 검색 기록: Workbench lazy boundary 확장 목적 사용자의 “그것들 다” 요청을 이전 root boundary 후속 작업으로 해석하고, React/Next renderer code splitting, main thread responsiveness, long task 완화 기준을 다시 확인했다. 검색어 React official docs lazy memo Profiler startTransition performance Next.js official docs dynamic import lazy loading client components web.dev optimize long tasks main thread resp</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2778,
+      "updatedAt": "2026-06-05T18:29:48.842Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-evaluation-input-json",
       "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-evaluation-input.json",
@@ -37747,35 +37907,35 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 83,
+      "documentsCount": 93,
       "categories": [
         {
           "category": "evaluation",
-          "count": 25
+          "count": 29
         },
         {
           "category": "request-trace",
-          "count": 11
+          "count": 12
         },
         {
           "category": "user-request",
-          "count": 11
+          "count": 12
         },
         {
           "category": "web-search",
-          "count": 11
+          "count": 12
         },
         {
           "category": "work-summary",
-          "count": 11
+          "count": 12
         },
         {
           "category": "work-timing",
-          "count": 11
+          "count": 12
         },
         {
           "category": "plan",
-          "count": 3
+          "count": 4
         }
       ],
       "documents": []

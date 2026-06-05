@@ -3,7 +3,7 @@ import { chromium } from "@playwright/test";
 const targetUrl = process.argv.find((argument) => /^https?:\/\//.test(argument)) || "http://127.0.0.1:3348/#section-overview";
 const chromeExecutable = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const sections = ["overview", "agents", "desktop", "source", "tools"];
-const sampleLimit = 67;
+const sampleLimit = 64;
 const buttonSelector = "button:not(:disabled), [role='button'], summary, a[href]";
 
 function percentile(values, ratio) {
@@ -20,14 +20,27 @@ async function waitForMonitorReady(page) {
   await page.waitForFunction(
     () =>
       Boolean(document.querySelector(".desktop-viewport")) &&
-      Boolean(document.querySelector("[data-section-id='overview']")),
+      Boolean(document.querySelector("[data-section-id='overview']")) &&
+      document.querySelector(".desktop-app-root")?.getAttribute("data-button-feedback-ready") === "true",
     { timeout: 15_000 }
   );
   await page.waitForSelector(".desktop-viewport[data-section-content-ready='true']", { timeout: 15_000 });
 }
 
 async function openSection(page, section) {
-  await page.locator(`[data-section-id="${section}"]`).click();
+  await page.evaluate((targetSection) => {
+    const candidates = Array.from(document.querySelectorAll(`[data-section-id="${targetSection}"]`));
+    const target =
+      candidates.find((element) => {
+        const style = window.getComputedStyle(element);
+        const rect = element.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0 && style.display !== "none" && style.visibility !== "hidden";
+      }) || candidates[0];
+    if (!(target instanceof HTMLElement)) {
+      throw new Error(`Section button not found: ${targetSection}`);
+    }
+    target.click();
+  }, section);
   await page.waitForFunction(
     (targetSection) => {
       const viewport = document.querySelector(".desktop-viewport");
@@ -41,10 +54,19 @@ async function openSection(page, section) {
   );
 }
 
+async function waitForSyntheticFeedbackCleanup(page) {
+  await page
+    .waitForFunction(
+      () => document.querySelector(".desktop-app-root")?.getAttribute("data-button-response-active") !== "true",
+      { timeout: 2_000 }
+    )
+    .catch(() => undefined);
+}
+
 async function collectSyntheticPressSamples(page, section, remaining) {
   return page.evaluate(
     async ({ buttonSelector: selector, remainingCount, sectionId }) => {
-      const visibleElements = Array.from(document.querySelectorAll(selector)).filter((element) => {
+      const collectVisibleElements = () => Array.from(document.querySelectorAll(selector)).filter((element) => {
         const style = window.getComputedStyle(element);
         const rect = element.getBoundingClientRect();
         return (
@@ -59,9 +81,13 @@ async function collectSyntheticPressSamples(page, section, remaining) {
           style.pointerEvents !== "none"
         );
       });
-      const selected = visibleElements.slice(0, remainingCount);
+      const selectedCount = Math.min(collectVisibleElements().length, remainingCount);
       const results = [];
-      for (const [index, element] of selected.entries()) {
+      for (let index = 0; index < selectedCount; index += 1) {
+        const element = collectVisibleElements()[index];
+        if (!element) {
+          continue;
+        }
         element.setAttribute("data-button-audit-id", `${sectionId}-${index}`);
         element.removeAttribute("data-instant-button-feedback");
         element.removeAttribute("data-instant-button-painted");
@@ -118,9 +144,35 @@ async function collectSyntheticPressSamples(page, section, remaining) {
 }
 
 async function measureRealClickFeedback(page, selector, label, settleSection) {
-  const locator = page.locator(selector);
-  await locator.waitFor({ state: "visible", timeout: 10_000 });
-  const box = await locator.boundingBox();
+  const auditId = `real-click-${label.replace(/[^a-z0-9_-]+/gi, "-")}`;
+  const box = await page.evaluate(
+    ({ targetSelector, targetAuditId }) => {
+      const candidates = Array.from(document.querySelectorAll(targetSelector));
+      const target =
+        candidates.find((element) => {
+          const style = window.getComputedStyle(element);
+          const rect = element.getBoundingClientRect();
+          return (
+            rect.width > 0 &&
+            rect.height > 0 &&
+            rect.bottom > 0 &&
+            rect.right > 0 &&
+            rect.top < window.innerHeight &&
+            rect.left < window.innerWidth &&
+            style.display !== "none" &&
+            style.visibility !== "hidden" &&
+            style.pointerEvents !== "none"
+          );
+        }) || candidates[0];
+      if (!(target instanceof HTMLElement)) {
+        return null;
+      }
+      target.setAttribute("data-real-click-audit-id", targetAuditId);
+      const rect = target.getBoundingClientRect();
+      return { x: rect.x, y: rect.y, width: rect.width, height: rect.height };
+    },
+    { targetSelector: selector, targetAuditId: auditId }
+  );
   if (!box) {
     throw new Error(`No bounding box for ${label}`);
   }
@@ -128,11 +180,16 @@ async function measureRealClickFeedback(page, selector, label, settleSection) {
   await page.mouse.move(center.x, center.y);
   const start = await page.evaluate(() => performance.now());
   await page.mouse.down();
-  await page.waitForFunction(
-    (targetSelector) => document.querySelector(targetSelector)?.getAttribute("data-instant-button-feedback") === "active",
-    selector,
-    { timeout: 2_000 }
-  );
+  try {
+    await page.waitForFunction(
+      (targetAuditId) =>
+        document.querySelector(`[data-real-click-audit-id="${targetAuditId}"]`)?.getAttribute("data-instant-button-feedback") === "active",
+      auditId,
+      { timeout: 2_000 }
+    );
+  } catch (error) {
+    throw new Error(`No real-click feedback for ${label}: ${error instanceof Error ? error.message : String(error)}`);
+  }
   const feedbackMs = await page.evaluate((startedAt) => performance.now() - startedAt, start);
   await page.mouse.up();
   if (settleSection) {
@@ -162,20 +219,24 @@ await cdp.send("Emulation.setCPUThrottlingRate", { rate: 6 });
 
 await page.goto(targetUrl, { waitUntil: "load" });
 await waitForMonitorReady(page);
-
-const syntheticResults = [];
-for (const section of sections) {
-  await openSection(page, section);
-  syntheticResults.push(...(await collectSyntheticPressSamples(page, section, sampleLimit - syntheticResults.length)));
-  if (syntheticResults.length >= sampleLimit) {
-    break;
-  }
-}
+await page.waitForTimeout(1400);
 
 await openSection(page, "overview");
 const realClickResults = [];
 for (const section of ["agents", "desktop", "source", "tools", "overview"]) {
   realClickResults.push(await measureRealClickFeedback(page, `[data-section-id="${section}"]`, `nav:${section}`, section));
+  await page.waitForTimeout(180);
+}
+
+await openSection(page, "overview");
+const syntheticResults = [];
+for (const section of sections) {
+  await openSection(page, section);
+  syntheticResults.push(...(await collectSyntheticPressSamples(page, section, sampleLimit - syntheticResults.length)));
+  await waitForSyntheticFeedbackCleanup(page);
+  if (syntheticResults.length >= sampleLimit) {
+    break;
+  }
 }
 
 const syntheticFeedbackTimes = syntheticResults

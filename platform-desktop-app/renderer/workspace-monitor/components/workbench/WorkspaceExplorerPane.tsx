@@ -42,7 +42,7 @@ type SourceCatalogReportSummary = {
   truncated: boolean;
 };
 
-type WorkspaceExplorerPaneProps = {
+export type WorkspaceExplorerPaneProps = {
   activePath: string;
   catalogLabel: string;
   copy: WorkspaceExplorerCopy;

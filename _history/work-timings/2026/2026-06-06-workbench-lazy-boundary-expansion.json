@@ -1,0 +1,47 @@
+{
+  "task_id": "2026-06-06-workbench-lazy-boundary-expansion",
+  "title": "Workbench lazy boundary expansion",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "duration_seconds": 180,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official React, Next.js, and web.dev performance references were checked before implementation."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Lazy boundary expansion",
+      "status": "completed",
+      "duration_seconds": 1800,
+      "measurement": "estimated",
+      "bottleneck_notes": "Most time went to moving Agents panels and preserving type contracts."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Build, package, and performance verification",
+      "status": "completed",
+      "duration_seconds": 3600,
+      "measurement": "estimated",
+      "bottleneck_notes": "Renderer build, Tauri package build, and Playwright audits dominated elapsed time."
+    },
+    {
+      "phase_id": "records",
+      "label": "Trace and evaluation records",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "Requirements, spec, validation, omission, resource, and evaluation records were created."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "verification",
+    "notes": "Automatic internal package build remains the longest phase and is expected under the user's build preference."
+  },
+  "evidence": [
+    "platform-desktop-app/specs/2026-06-06-workbench-lazy-boundary-expansion/validation.ko.md"
+  ]
+}

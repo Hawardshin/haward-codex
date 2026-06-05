@@ -1,0 +1,27 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-workbench-lazy-boundary-expansion",
+  "checked_items": [
+    {
+      "item": "Run web search before implementation",
+      "status": "done",
+      "evidence": "_history/web-searches/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md"
+    },
+    {
+      "item": "Implement remaining root-boundary follow-up panels",
+      "status": "done",
+      "evidence": "AgentBuilderPanels.tsx and AgentDetailPanels.tsx"
+    },
+    {
+      "item": "Run automatic build/package after implementation",
+      "status": "done",
+      "evidence": "corepack pnpm --filter platform-desktop-app run package:internal"
+    },
+    {
+      "item": "Verify speed, memory cap, and button response",
+      "status": "done",
+      "evidence": "perf:sections, perf:buttons, perf:budget"
+    }
+  ],
+  "status": "passed"
+}

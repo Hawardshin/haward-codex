@@ -1,7 +1,7 @@
 import { ArrowRight, ShieldCheck, X } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-type ProductSectionId =
+export type OperatorCenterSectionId =
   | "overview"
   | "desktop"
   | "projects"
@@ -14,8 +14,8 @@ type ProductSectionId =
   | "requirements"
   | "agents";
 
-type OperatorCenterSection = {
-  id: ProductSectionId;
+export type OperatorCenterSection = {
+  id: OperatorCenterSectionId;
   label: string;
   shortLabel: string;
   purpose: string;
@@ -23,11 +23,11 @@ type OperatorCenterSection = {
   meta: string;
 };
 
-type OperatorCenterDialogProps = {
+export type OperatorCenterDialogProps = {
   sections: OperatorCenterSection[];
   language?: "ko" | "en";
   onClose: () => void;
-  onOpenSection: (section: ProductSectionId) => void;
+  onOpenSection: (section: OperatorCenterSectionId) => void;
 };
 
 export function OperatorCenterDialog({ sections, language = "ko", onClose, onOpenSection }: OperatorCenterDialogProps) {

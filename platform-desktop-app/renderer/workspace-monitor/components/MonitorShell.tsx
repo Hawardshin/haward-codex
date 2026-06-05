@@ -43,32 +43,39 @@ import {
 import type { LucideIcon } from "lucide-react";
 import dynamic from "next/dynamic";
 import type { editor } from "monaco-editor";
-import { memo, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { memo, useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
-import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFeatureArchitecturePanel";
-import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
+import type { ProductFeatureArchitecturePanelProps } from "@/components/features/ProductFeatureArchitecturePanel";
+import type { OperatorCenterDialogProps } from "@/components/features/OperatorCenterDialog";
 import { preloadAdminHistoryIndex, useAdminHistoryIndex } from "@/components/history/useAdminHistoryIndex";
 import { ActionGroup } from "@/components/ui/ActionGroup";
 import { Button } from "@/components/ui/Button";
-import {
-  CoreFeatureDrilldown,
-  type CoreFeatureDrilldownItem
-} from "@/components/workbench/CoreFeatureDrilldown";
-import {
-  NativeGitWorkbench,
-  type DesktopGitActionReport,
-  type DesktopGitStatusReport,
-  type DesktopGitWorkbenchActionPayload,
-  type DesktopGitWorkbenchAction
+import type {
+  AgentCoreBlueprintPanelProps,
+  AgentFactoryWizardProps,
+  LearningFeedbackLoopPanelProps
+} from "@/components/workbench/AgentBuilderPanels";
+import type {
+  AgentCollaborationBoardPanelProps,
+  AgentInventoryPanelProps,
+  AgentRuntimeOverviewPanelProps
+} from "@/components/workbench/AgentDetailPanels";
+import type { CoreFeatureDrilldownItem, CoreFeatureDrilldownProps } from "@/components/workbench/CoreFeatureDrilldown";
+import type {
+  DesktopGitActionReport,
+  DesktopGitStatusReport,
+  DesktopGitWorkbenchActionPayload,
+  DesktopGitWorkbenchAction,
+  NativeGitWorkbenchProps
 } from "@/components/workbench/NativeGitWorkbench";
 import { PathDisclosure } from "@/components/workbench/PathDisclosure";
-import {
-  RuntimeTerminalDrawer,
-  type RuntimeNativePtySession,
-  type RuntimeTextChoice
+import type {
+  RuntimeNativePtySession,
+  RuntimeTerminalDrawerProps,
+  RuntimeTextChoice
 } from "@/components/workbench/RuntimeTerminalDrawer";
 import type { ToolStudioMode, ToolStudioModeRequest, ToolStudioPanelProps } from "@/components/workbench/ToolStudioPanel";
-import { WorkspaceExplorerPane } from "@/components/workbench/WorkspaceExplorerPane";
+import type { WorkspaceExplorerPaneProps } from "@/components/workbench/WorkspaceExplorerPane";
 import { writeClipboardText } from "@/lib/clipboard.mjs";
 import { installInstantButtonFeedback, scheduleAfterFirstPaint } from "@/lib/motion";
 import {
@@ -640,6 +647,138 @@ const MemoizedToolStudioPanel = memo(ToolStudioPanel);
 
 function preloadToolStudioPanel() {
   void import("@/components/workbench/ToolStudioPanel");
+}
+
+const OperatorCenterDialog = dynamic<OperatorCenterDialogProps>(
+  () => import("@/components/features/OperatorCenterDialog").then((module) => module.OperatorCenterDialog),
+  {
+    ssr: false,
+    loading: () => null
+  }
+);
+
+const ProductFeatureArchitecturePanel = dynamic<ProductFeatureArchitecturePanelProps>(
+  () => import("@/components/features/ProductFeatureArchitecturePanel").then((module) => module.ProductFeatureArchitecturePanel),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="panel wide product-feature-panel" data-product-feature-loading>
+        Loading product structure
+      </div>
+    )
+  }
+);
+
+const CoreFeatureDrilldown = dynamic<CoreFeatureDrilldownProps>(
+  () => import("@/components/workbench/CoreFeatureDrilldown").then((module) => module.CoreFeatureDrilldown),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="panel wide quick-start-panel main-workbench-panel" data-core-feature-drilldown-loading>
+        Loading feature
+      </div>
+    )
+  }
+);
+
+const WorkspaceExplorerPane = dynamic<WorkspaceExplorerPaneProps>(
+  () => import("@/components/workbench/WorkspaceExplorerPane").then((module) => module.WorkspaceExplorerPane),
+  {
+    ssr: false,
+    loading: () => (
+      <aside className="workspace-explorer-pane" data-workspace-explorer-loading>
+        Loading workspace explorer
+      </aside>
+    )
+  }
+);
+
+const NativeGitWorkbench = dynamic<NativeGitWorkbenchProps>(
+  () => import("@/components/workbench/NativeGitWorkbench").then((module) => module.NativeGitWorkbench),
+  {
+    ssr: false,
+    loading: () => (
+      <section className="native-git-workbench-loading" data-native-git-workbench-loading>
+        Loading Git workbench
+      </section>
+    )
+  }
+);
+
+const RuntimeTerminalDrawer = dynamic<RuntimeTerminalDrawerProps>(
+  () => import("@/components/workbench/RuntimeTerminalDrawer").then((module) => module.RuntimeTerminalDrawer),
+  {
+    ssr: false,
+    loading: () => null
+  }
+);
+
+const AgentCollaborationBoardPanel = dynamic<AgentCollaborationBoardPanelProps>(
+  () => import("@/components/workbench/AgentDetailPanels").then((module) => module.AgentCollaborationBoardPanel),
+  {
+    ssr: false,
+    loading: () => <p className="empty-state">Loading collaboration board</p>
+  }
+);
+
+const AgentInventoryPanel = dynamic<AgentInventoryPanelProps>(
+  () => import("@/components/workbench/AgentDetailPanels").then((module) => module.AgentInventoryPanel),
+  {
+    ssr: false,
+    loading: () => <p className="empty-state">Loading agent inventory</p>
+  }
+);
+
+const AgentRuntimeOverviewPanel = dynamic<AgentRuntimeOverviewPanelProps>(
+  () => import("@/components/workbench/AgentDetailPanels").then((module) => module.AgentRuntimeOverviewPanel),
+  {
+    ssr: false,
+    loading: () => <p className="empty-state">Loading runtime overview</p>
+  }
+);
+
+const AgentCoreBlueprintPanel = dynamic<AgentCoreBlueprintPanelProps>(
+  () => import("@/components/workbench/AgentBuilderPanels").then((module) => module.AgentCoreBlueprintPanel),
+  {
+    ssr: false,
+    loading: () => <p className="empty-state">Loading blueprint builder</p>
+  }
+);
+
+const AgentFactoryWizard = dynamic<AgentFactoryWizardProps>(
+  () => import("@/components/workbench/AgentBuilderPanels").then((module) => module.AgentFactoryWizard),
+  {
+    ssr: false,
+    loading: () => <p className="empty-state">Loading agent factory</p>
+  }
+);
+
+const LearningFeedbackLoopPanel = dynamic<LearningFeedbackLoopPanelProps>(
+  () => import("@/components/workbench/AgentBuilderPanels").then((module) => module.LearningFeedbackLoopPanel),
+  {
+    ssr: false,
+    loading: () => <p className="empty-state">Loading learning loop</p>
+  }
+);
+
+function preloadDesktopRuntimePanels() {
+  void import("@/components/workbench/WorkspaceExplorerPane");
+  void import("@/components/workbench/NativeGitWorkbench");
+  void import("@/components/workbench/RuntimeTerminalDrawer");
+}
+
+function preloadHomeFeaturePanels() {
+  void import("@/components/features/OperatorCenterDialog");
+  void import("@/components/features/ProductFeatureArchitecturePanel");
+  void import("@/components/workbench/CoreFeatureDrilldown");
+}
+
+function preloadAgentDetailPanels() {
+  void import("@/components/workbench/AgentDetailPanels");
+}
+
+function preloadAgentBuilderPanels() {
+  void import("@/components/workbench/AgentBuilderPanels");
 }
 
 const AgentCollaborationScene = dynamic(
@@ -2328,14 +2467,6 @@ const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
 
 const agentCoreCapabilityOptionById = new Map(agentCoreCapabilityOptions.map((option) => [option.id, option]));
 
-const agentCoreResourceLifecycleSteps = [
-  { id: "create", labelKo: "Create", labelEn: "Create" },
-  { id: "configure", labelKo: "Configure", labelEn: "Configure" },
-  { id: "invoke", labelKo: "Invoke", labelEn: "Invoke" },
-  { id: "observe", labelKo: "Observe", labelEn: "Observe" },
-  { id: "evaluate", labelKo: "Evaluate", labelEn: "Evaluate" }
-];
-
 const agentCoreBlueprints: AgentCoreBlueprint[] = [
   {
     id: "agentcore_production_research_agent",
@@ -2713,6 +2844,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [agentDetailView, setAgentDetailView] = useState<AgentDetailViewId>("collaboration");
   const [agentDetailRenderView, setAgentDetailRenderView] = useState<AgentDetailViewId>("collaboration");
   const [commandQuery, setCommandQuery] = useState("");
+  const [buttonFeedbackReady, setButtonFeedbackReady] = useState(false);
   const titlebarSectionLabelRef = useRef<HTMLElement>(null);
   const commandInputRef = useRef<HTMLInputElement>(null);
   const pendingAgentDetailCommitRef = useRef<(() => void) | null>(null);
@@ -2815,12 +2947,17 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       pendingAgentDetailCommitRef.current?.();
     };
   }, []);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof document === "undefined") {
       return undefined;
     }
     const root = document.querySelector<HTMLElement>(".desktop-app-root");
-    return root ? installInstantButtonFeedback(root) : undefined;
+    if (!root) {
+      return undefined;
+    }
+    const cleanup = installInstantButtonFeedback(root);
+    setButtonFeedbackReady(true);
+    return cleanup;
   }, []);
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -2833,11 +2970,26 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     };
     let timeoutId: number | null = null;
     let idleId: number | null = null;
+    let canceled = false;
+    const prewarmTasks = [
+      () => void import("@monaco-editor/react"),
+      () => void import("@/components/workbench/AgentCollaborationScene"),
+      preloadToolStudioPanel,
+      preloadDesktopRuntimePanels,
+      preloadHomeFeaturePanels,
+      preloadAgentDetailPanels,
+      preloadAgentBuilderPanels,
+      () => void preloadAdminHistoryIndex()
+    ];
+    const runPrewarmTask = (index = 0) => {
+      if (canceled || index >= prewarmTasks.length) {
+        return;
+      }
+      prewarmTasks[index]();
+      timeoutId = window.setTimeout(() => runPrewarmTask(index + 1), 90);
+    };
     const prewarmWorkSurfaces = () => {
-      void import("@monaco-editor/react");
-      void import("@/components/workbench/AgentCollaborationScene");
-      preloadToolStudioPanel();
-      void preloadAdminHistoryIndex();
+      runPrewarmTask();
     };
 
     if (idleWindow.requestIdleCallback) {
@@ -2847,6 +2999,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     }
 
     return () => {
+      canceled = true;
       if (idleId !== null) {
         idleWindow.cancelIdleCallback?.(idleId);
       }
@@ -3126,7 +3279,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
   const deferredQuery = useDeferredValue(query);
   const normalizedQuery = deferredQuery.trim().toLowerCase();
-  const sectionContentReady = true;
+  const sectionContentReady = buttonFeedbackReady;
   const shouldRenderSection = useCallback(
     (targetSection: SectionId) => sectionContentReady && residentSectionSet.has(targetSection),
     [residentSectionSet, sectionContentReady]
@@ -6719,7 +6872,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                       <div className="agent-collaboration-theater" data-agent-collaboration-theater>
                         <AgentCollaborationScene board={collaborationBoard} language={uiLanguage} />
                       </div>
-                      <AgentCollaborationBoard board={collaborationBoard} />
+                      <AgentCollaborationBoardPanel board={collaborationBoard} />
                     </section>
                   )}
 
@@ -6785,46 +6938,15 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                     </section>
                   )}
 
-                  {agentDetailRenderView === "inventory" && (
-                    <section className="panel wide">
-                      <div className="panel-heading">
-                        <div>
-                          <p className="eyebrow">Inventory</p>
-                          <h2>에이전트 구성 맵</h2>
-                        </div>
-                        <Bot size={18} aria-hidden="true" />
-                      </div>
-                      <AgentInventory agents={agentCatalog} />
-                    </section>
-                  )}
+                  {agentDetailRenderView === "inventory" && <AgentInventoryPanel agents={agentCatalog} />}
 
                   {agentDetailRenderView === "runtime" && (
-                    <section className="panel wide">
-                      <div className="panel-heading">
-                        <div>
-                          <p className="eyebrow">Runtime</p>
-                          <h2>상태와 작업 흐름</h2>
-                        </div>
-                        <Layers size={18} aria-hidden="true" />
-                      </div>
-                      <div className="agent-visual-grid">
-                        <AgentRuntimeBars runtimeCounts={agentRuntimeCounts} statusCounts={agentStatusCounts} />
-                        <TaskStatusLanes taskStatusCounts={taskStatusCounts} />
-                      </div>
-                      <div className="task-table">
-                        {snapshot.tasks.slice(0, 28).map((task) => (
-                          <article key={task.id}>
-                            <strong>{task.title || task.id}</strong>
-                            <span>{task.status}</span>
-                            <p>
-                              {task.timing_summary
-                                ? `시간 ${task.timing_summary.total || "unknown"} / 병목 ${task.timing_summary.bottleneck || "unknown"}`
-                                : task.next_action || task.evaluation_report || "No next action"}
-                            </p>
-                          </article>
-                        ))}
-                      </div>
-                    </section>
+                    <AgentRuntimeOverviewPanel
+                      runtimeCounts={agentRuntimeCounts}
+                      statusCounts={agentStatusCounts}
+                      taskStatusCounts={taskStatusCounts}
+                      tasks={snapshot.tasks}
+                    />
                   )}
                 </div>
               </div>
@@ -7170,546 +7292,6 @@ function SearchAgentWorkChatPanel({
             )}
           </details>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function AgentCoreBlueprintPanel({
-  blueprints,
-  selectedBlueprintId,
-  providerCredentialReport,
-  language,
-  onSelectBlueprint,
-  onApplyBlueprint,
-  onStartPreflight,
-  onCreateProposal,
-  proposalBusy,
-  runtimeAvailable
-}: {
-  blueprints: AgentCoreBlueprint[];
-  selectedBlueprintId: string;
-  providerCredentialReport: ProviderCredentialReport;
-  language: UiLanguage;
-  onSelectBlueprint: (blueprintId: string) => void;
-  onApplyBlueprint: (blueprintId: string, selectedCapabilityIds: string[]) => void;
-  onStartPreflight: (blueprintId: string, selectedCapabilityIds: string[]) => void;
-  onCreateProposal: (blueprintId: string, selectedCapabilityIds: string[]) => void | Promise<void>;
-  proposalBusy: boolean;
-  runtimeAvailable: boolean;
-}) {
-  const ko = language === "ko";
-  const selectedBlueprint = blueprints.find((blueprint) => blueprint.id === selectedBlueprintId) || blueprints[0];
-  const connectedProviderCount = providerCredentialReport.providers.filter((provider) => provider.configured).length;
-  const defaultCapabilityIds = useMemo(() => {
-    const blueprintCapabilityIds = agentCoreCapabilityOptions
-      .filter((option) => selectedBlueprint.capabilities.includes(option.id))
-      .map((option) => option.id);
-    return blueprintCapabilityIds.length ? blueprintCapabilityIds : ["runtime", "observability"];
-  }, [selectedBlueprint]);
-  const [selectedCapabilityIds, setSelectedCapabilityIds] = useState<string[]>(defaultCapabilityIds);
-  const selectedCapabilityOptions = useMemo(
-    () => selectedCapabilityIds
-      .map((capabilityId) => agentCoreCapabilityOptionById.get(capabilityId))
-      .filter((item): item is AgentCoreCapabilityOption => Boolean(item)),
-    [selectedCapabilityIds]
-  );
-  const selectedCapabilitySummary = selectedCapabilityOptions.map((item) => (ko ? item.labelKo : item.labelEn)).join(" + ");
-  const selectedResourceSummary = Array.from(new Set(selectedCapabilityOptions.map((item) => (ko ? item.resourceKo : item.resourceEn)))).join(" / ");
-
-  useEffect(() => {
-    setSelectedCapabilityIds(defaultCapabilityIds);
-  }, [defaultCapabilityIds]);
-
-  const toggleCapability = (capabilityId: string) => {
-    setSelectedCapabilityIds((current) => {
-      if (current.includes(capabilityId)) {
-        return current.length > 1 ? current.filter((item) => item !== capabilityId) : current;
-      }
-      return [...current, capabilityId];
-    });
-  };
-
-  return (
-    <section className="panel wide agentcore-blueprint-panel">
-      <div className="panel-heading">
-        <div>
-          <p className="eyebrow">AgentCore Quick Builder</p>
-	          <h2>{ko ? "Production 에이전트 블루프린트" : "Production Agent Blueprints"}</h2>
-          <p>
-            {ko
-	              ? "AWS AgentCore 샘플의 런타임, 메모리, 게이트웨이, 평가 구조를 로컬 Python 실행 중심의 데스크톱 에이전트 생성 흐름으로 바꿉니다."
-              : "Translates AWS AgentCore sample runtime, memory, gateway, and evaluation patterns into a desktop agent creation flow centered on local Python execution."}
-          </p>
-        </div>
-        <a href={selectedBlueprint.sourceUrl} target="_blank" rel="noreferrer" className="panel-link-button">
-          <ExternalLink size={15} aria-hidden="true" />
-          <span>{ko ? "원본 보기" : "Open Source"}</span>
-        </a>
-      </div>
-
-      <div className="agentcore-builder-steps" aria-label={ko ? "AgentCore 빠른 생성 단계" : "AgentCore quick builder steps"}>
-        <span>
-          <CheckCircle2 size={14} aria-hidden="true" />
-          {ko ? "1 목적 선택" : "1 Choose purpose"}
-        </span>
-        <span>
-          <Layers size={14} aria-hidden="true" />
-          {ko ? "2 능력 추가" : "2 Add capabilities"}
-        </span>
-        <span>
-          <Bot size={14} aria-hidden="true" />
-          {ko ? "3 제안 생성" : "3 Create proposal"}
-        </span>
-        <span>
-          <ClipboardCheck size={14} aria-hidden="true" />
-          {ko ? "4 검증 준비" : "4 Prepare validation"}
-        </span>
-      </div>
-
-      <div className="agentcore-blueprint-layout">
-        <div className="agentcore-blueprint-list" role="tablist" aria-label={ko ? "AgentCore 블루프린트" : "AgentCore blueprints"}>
-          {blueprints.map((blueprint) => (
-            <button
-              key={blueprint.id}
-              type="button"
-              className={blueprint.id === selectedBlueprint.id ? "active" : ""}
-              onClick={() => onSelectBlueprint(blueprint.id)}
-            >
-              <strong>{blueprint.label}</strong>
-              <span>{ko ? blueprint.primaryUseKo : blueprint.primaryUseEn}</span>
-            </button>
-          ))}
-        </div>
-
-        <article className="agentcore-blueprint-detail">
-          <header>
-            <div>
-              <span>{selectedBlueprint.sourceLabel}</span>
-              <h3>{selectedBlueprint.label}</h3>
-            </div>
-            <strong>{connectedProviderCount > 0 ? (ko ? "직접 실행 가능" : "Direct run ready") : ko ? "계정 연결 필요" : "Account needed"}</strong>
-          </header>
-          <p>{ko ? selectedBlueprint.summaryKo : selectedBlueprint.summaryEn}</p>
-
-	            <section className="agentcore-capability-bundle" aria-label={ko ? "AgentCore 능력 묶음" : "AgentCore capability bundle"}>
-            <header>
-              <div>
-                <span>{ko ? "동시 능력 묶음" : "Capability Bundle"}</span>
-                <strong>
-                  {selectedCapabilityIds.length.toLocaleString("ko-KR")} / {agentCoreCapabilityOptions.length.toLocaleString("ko-KR")}
-                </strong>
-                <small>{selectedCapabilitySummary}</small>
-              </div>
-              <button type="button" onClick={() => setSelectedCapabilityIds(agentCoreCapabilityOptions.map((option) => option.id))} data-agentcore-select-all>
-                <Layers size={15} aria-hidden="true" />
-                <span>{ko ? "전체 선택" : "Select all"}</span>
-              </button>
-            </header>
-            <div className="agentcore-capability-grid">
-              {agentCoreCapabilityOptions.map((option) => {
-                const selected = selectedCapabilityIds.includes(option.id);
-                return (
-                  <button
-                    key={option.id}
-                    type="button"
-                    className={selected ? "active" : ""}
-                    onClick={() => toggleCapability(option.id)}
-                    aria-pressed={selected}
-                    data-agentcore-capability={option.id}
-                  >
-                    <CheckCircle2 size={15} aria-hidden="true" />
-                    <span>
-                      <strong>{ko ? option.labelKo : option.labelEn}</strong>
-                      <small>{ko ? option.detailKo : option.detailEn}</small>
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </section>
-
-          <section className="agentcore-resource-topology" aria-label={ko ? "AgentCore 리소스 토폴로지" : "AgentCore resource topology"}>
-            <header>
-              <div>
-                <span>{ko ? "AgentCore식 리소스 연결" : "AgentCore-style resource wiring"}</span>
-                <strong>{selectedResourceSummary}</strong>
-                <small>
-	                  {ko
-	                    ? "선택한 능력을 런타임, 메모리, 게이트웨이, 기본 제공 도구, 계정/권한, 정책, 관측, 평가 흐름으로 배치합니다."
-                    : "Maps the selected capabilities into Runtime, Memory, Gateway, Built-in Tools, Identity, Policy, Observability, and Evaluations lanes."}
-                </small>
-              </div>
-              <Network size={17} aria-hidden="true" />
-            </header>
-            <div className="agentcore-resource-lifecycle" aria-label={ko ? "AgentCore 리소스 생명주기" : "AgentCore resource lifecycle"}>
-              {agentCoreResourceLifecycleSteps.map((step) => (
-                <span key={step.id}>{ko ? step.labelKo : step.labelEn}</span>
-              ))}
-            </div>
-            <div className="agentcore-resource-grid">
-              {selectedCapabilityOptions.map((option) => (
-                <article key={option.id} data-agentcore-resource={option.id}>
-                  <span>{ko ? option.resourceKo : option.resourceEn}</span>
-                  <strong>{ko ? option.labelKo : option.labelEn}</strong>
-                  <small>{option.localCapability}</small>
-                  <em>{ko ? option.lifecycleKo : option.lifecycleEn}</em>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <div className="agentcore-blueprint-matrix">
-            <div>
-              <span>{ko ? "라이프사이클" : "Lifecycle"}</span>
-              <ol>
-                {selectedBlueprint.lifecycle.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ol>
-            </div>
-            <div>
-              <span>{ko ? "능력" : "Capabilities"}</span>
-              <ul>
-                {selectedBlueprint.capabilities.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <span>{ko ? "저장 기록" : "Stored Records"}</span>
-              <ul>
-                {selectedBlueprint.outputRecords.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <span>{ko ? "게이트" : "Gates"}</span>
-              <ul>
-                {selectedBlueprint.safetyGates.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="agentcore-blueprint-actions">
-            <button
-              type="button"
-              className="primary-action-button"
-              onClick={() => onCreateProposal(selectedBlueprint.id, selectedCapabilityIds)}
-              disabled={!runtimeAvailable || proposalBusy}
-            >
-              <PlayCircle size={16} aria-hidden="true" />
-              <span>{proposalBusy ? (ko ? "제안 저장 중" : "Saving proposal") : ko ? "바로 에이전트 제안 생성" : "Create Agent Proposal"}</span>
-            </button>
-            <button type="button" className="primary-action-button" onClick={() => onApplyBlueprint(selectedBlueprint.id, selectedCapabilityIds)}>
-              <Bot size={16} aria-hidden="true" />
-              <span>{ko ? "에이전트 생성 입력 채우기" : "Fill With Bundle"}</span>
-            </button>
-            <button type="button" onClick={() => onStartPreflight(selectedBlueprint.id, selectedCapabilityIds)}>
-              <ClipboardCheck size={16} aria-hidden="true" />
-              <span>{ko ? "배포 사전점검 작업 만들기" : "Create Deployment Preflight"}</span>
-            </button>
-          </div>
-
-          <div className={`agentcore-builder-status ${runtimeAvailable ? "ready" : "preview"}`}>
-            <strong>{runtimeAvailable ? (ko ? "native 저장 준비됨" : "Native save ready") : ko ? "브라우저 미리보기" : "Browser preview"}</strong>
-            <span>
-              {runtimeAvailable
-                ? ko
-	                  ? "선택한 블루프린트는 에이전트 제안 기록으로 저장되고, 이후 설정/검증/실행 단계에서 다시 열 수 있습니다."
-                  : "The selected blueprint is saved as an agent proposal record and can be reopened for setup, validation, and execution."
-                : ko
-	                  ? "설치 앱에서는 같은 버튼이 에이전트 제안 생성 작업을 호출해 앱 데이터 저장소에 바로 기록합니다."
-                  : "In the installed app, the same button calls create_agent_factory_proposal and writes to app data."}
-            </span>
-          </div>
-
-          <div className="agentcore-blueprint-contract">
-            <span>Local Python runtime / Apache-2.0 / optional AWS adapter</span>
-            <small>
-              {ko
-	                ? "원본 코드를 제품에 복사하지 않고 구조만 이전합니다. 실제 에이전트와 Python 실행은 로컬 런타임이 맡고, AgentCore CLI와 AWS 자격증명은 선택형 배포/도구 어댑터입니다."
-                : "The app transfers structure without copying source code. Actual agent and Python execution belong to the local runtime; AgentCore CLI and AWS credentials stay optional deployment/tool adapters."}
-            </small>
-          </div>
-        </article>
-      </div>
-    </section>
-  );
-}
-
-function AgentFactoryWizard({
-  form,
-  proposal,
-  busy,
-  notice,
-  runtimeAvailable,
-  language,
-  onChange,
-  onCreateProposal
-}: {
-  form: AgentFactoryForm;
-  proposal: AgentFactoryProposalReport | null;
-  busy: boolean;
-  notice: string;
-  runtimeAvailable: boolean;
-  language: UiLanguage;
-  onChange: (field: keyof AgentFactoryForm, value: string) => void;
-  onCreateProposal: () => void | Promise<void>;
-}) {
-  const ko = language === "ko";
-  return (
-    <section className="panel wide agent-factory-wizard-panel">
-      <div className="panel-heading">
-        <div>
-          <p className="eyebrow">{ko ? "Agent Core" : "Agent Core"}</p>
-          <h2>{ko ? "새 에이전트 만들기" : "Create an Agent"}</h2>
-          <p>
-            {ko
-	              ? "목표, 역할, 도구, 안전장치, 검증 기준을 입력하면 앱 데이터 저장소에 에이전트 제안을 남깁니다."
-              : "Enter goal, role, tools, guardrails, and validation to write an agent proposal into app data."}
-          </p>
-        </div>
-        <div className="desktop-actions">
-          <button type="button" onClick={onCreateProposal} disabled={!runtimeAvailable || busy}>
-            <Bot size={16} aria-hidden="true" />
-            <span>{busy ? (ko ? "저장 중" : "Saving") : ko ? "Agent proposal 저장" : "Save proposal"}</span>
-          </button>
-        </div>
-      </div>
-
-      <div className="agent-factory-layout">
-        <div className="agent-factory-form" aria-label={ko ? "에이전트 생성 입력" : "Agent factory input"}>
-          <label>
-            <span>{ko ? "Agent ID" : "Agent ID"}</span>
-            <input value={form.agentId} onChange={(event) => onChange("agentId", event.target.value)} />
-          </label>
-          <label>
-            <span>{ko ? "이름" : "Label"}</span>
-            <input value={form.label} onChange={(event) => onChange("label", event.target.value)} />
-          </label>
-          <label className="wide-field">
-            <span>{ko ? "목표" : "Goal"}</span>
-            <textarea value={form.goal} onChange={(event) => onChange("goal", event.target.value)} rows={3} />
-          </label>
-          <label className="wide-field">
-            <span>{ko ? "역할" : "Role"}</span>
-            <textarea value={form.role} onChange={(event) => onChange("role", event.target.value)} rows={2} />
-          </label>
-          <label>
-            <span>{ko ? "도구/입력" : "Tools / Inputs"}</span>
-            <textarea value={form.tools} onChange={(event) => onChange("tools", event.target.value)} rows={5} />
-          </label>
-          <label>
-            <span>{ko ? "가드레일" : "Guardrails"}</span>
-            <textarea value={form.guardrails} onChange={(event) => onChange("guardrails", event.target.value)} rows={5} />
-          </label>
-          <label>
-            <span>{ko ? "검증 명령" : "Validation Commands"}</span>
-            <textarea value={form.validationCommands} onChange={(event) => onChange("validationCommands", event.target.value)} rows={5} />
-          </label>
-          <label>
-            <span>{ko ? "출력 계약" : "Output Contract"}</span>
-            <textarea value={form.outputContract} onChange={(event) => onChange("outputContract", event.target.value)} rows={5} />
-          </label>
-          <label>
-            <span>{ko ? "소유 프로젝트" : "Owner Project"}</span>
-            <input value={form.ownerProject} onChange={(event) => onChange("ownerProject", event.target.value)} />
-          </label>
-          <label>
-            <span>{ko ? "대상 경로" : "Target Path"}</span>
-            <input value={form.targetPath} onChange={(event) => onChange("targetPath", event.target.value)} />
-          </label>
-          <label className="wide-field">
-            <span>{ko ? "Rollback" : "Rollback"}</span>
-            <textarea value={form.rollbackPlan} onChange={(event) => onChange("rollbackPlan", event.target.value)} rows={2} />
-          </label>
-        </div>
-
-        <article className="agent-proposal-preview">
-          <header>
-            <div>
-              <span>{proposal?.status || (runtimeAvailable ? "ready" : "runtime missing")}</span>
-              <h3>{proposal?.label || form.label}</h3>
-            </div>
-            <strong>{proposal?.agentId || form.agentId}</strong>
-          </header>
-          <div className="agent-proposal-meta">
-            <span>agent_factory_proposals</span>
-            <span>{proposal?.targetPath || form.targetPath}</span>
-            <span>{proposal?.validationCommand || linesFromText(form.validationCommands)[0] || "validation pending"}</span>
-            <span>{proposal?.rollbackPlan || form.rollbackPlan}</span>
-          </div>
-          {notice && <p className="decision-resume-notice">{notice}</p>}
-          <pre tabIndex={0} aria-label={ko ? "Agent proposal JSON preview" : "Agent proposal JSON preview"}>
-            <code>{JSON.stringify(proposal?.spec || agentFactoryPreviewSpec(form), null, 2)}</code>
-          </pre>
-        </article>
-      </div>
-    </section>
-  );
-}
-
-function LearningFeedbackLoopPanel({
-  candidates,
-  selectedCandidate,
-  selectedCandidateId,
-  action,
-  assetType,
-  notes,
-  report,
-  busy,
-  notice,
-  runtimeAvailable,
-  language,
-  onSelectCandidate,
-  onActionChange,
-  onAssetTypeChange,
-  onNotesChange,
-  onRecordDecision
-}: {
-  candidates: LearningImprovementCandidate[];
-  selectedCandidate: LearningImprovementCandidate | null;
-  selectedCandidateId: string;
-  action: string;
-  assetType: string;
-  notes: string;
-  report: LearningImprovementDecisionReport | null;
-  busy: boolean;
-  notice: string;
-  runtimeAvailable: boolean;
-  language: UiLanguage;
-  onSelectCandidate: (candidateId: string) => void;
-  onActionChange: (action: string) => void;
-  onAssetTypeChange: (assetType: string) => void;
-  onNotesChange: (notes: string) => void;
-  onRecordDecision: () => void;
-}) {
-  const ko = language === "ko";
-  const learningActionOptions: AppChoiceOption[] = [
-    { value: "promote", label: ko ? "승격" : "Promote", detail: ko ? "자산으로 만들기" : "Create asset" },
-    { value: "approve", label: ko ? "승인" : "Approve", detail: ko ? "진행 허용" : "Allow work" },
-    { value: "defer", label: ko ? "보류" : "Defer", detail: ko ? "나중에 검토" : "Review later" },
-    { value: "reject", label: ko ? "거절" : "Reject", detail: ko ? "후보 제외" : "Drop candidate" }
-  ];
-  const learningAssetTypeOptions: AppChoiceOption[] = [
-    { value: "prompt", label: "prompt" },
-    { value: "workflow", label: "workflow" },
-    { value: "template", label: "template" },
-    { value: "tool", label: "tool" },
-    { value: "skill", label: "skill" },
-    { value: "agent", label: "agent" },
-    { value: "project_feature", label: "project feature" }
-  ];
-
-  return (
-    <section className="panel wide learning-feedback-panel">
-      <div className="panel-heading">
-        <div>
-          <p className="eyebrow">{ko ? "Learning Loop" : "Learning Loop"}</p>
-          <h2>{ko ? "누적 근거에서 개선 후보 만들기" : "Create Improvement Candidates from Evidence"}</h2>
-          <p>
-            {ko
-	              ? "평가, 작업 요약, 요청 추적, 차단 요소, 의도 지도를 후보로 묶고 승인/보류/거절/승격 기록을 앱 데이터에 저장합니다."
-              : "Group evaluations, summaries, traces, blockers, and intent maps into decisions stored in app data."}
-          </p>
-        </div>
-        <div className="desktop-actions">
-          <button type="button" onClick={onRecordDecision} disabled={!runtimeAvailable || busy || !selectedCandidate}>
-            <GitBranch size={16} aria-hidden="true" />
-            <span>{busy ? (ko ? "기록 중" : "Recording") : ko ? "Decision 저장" : "Save decision"}</span>
-          </button>
-        </div>
-      </div>
-
-      <div className="learning-feedback-layout">
-        <div className="learning-candidate-list" aria-label={ko ? "개선 후보 목록" : "Improvement candidates"}>
-          {candidates.length ? (
-            candidates.map((candidate) => (
-              <button
-                key={candidate.id}
-                type="button"
-                className={selectedCandidateId === candidate.id ? "active" : ""}
-                onClick={() => onSelectCandidate(candidate.id)}
-              >
-                <span>{candidate.source}</span>
-                <strong>{candidate.label}</strong>
-                <small>{candidate.impact}</small>
-              </button>
-            ))
-          ) : (
-            <p className="empty-state">{ko ? "아직 개선 후보가 없습니다." : "No improvement candidates yet."}</p>
-          )}
-        </div>
-
-        <article className="learning-decision-editor">
-          {selectedCandidate ? (
-            <>
-              <header>
-                <div>
-                  <span>{selectedCandidate.source}</span>
-                  <h3>{selectedCandidate.label}</h3>
-                </div>
-                <strong>{selectedCandidate.assetType}</strong>
-              </header>
-              <p>{selectedCandidate.impact}</p>
-              <div className="learning-evidence-list">
-                {selectedCandidate.evidence.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </div>
-              <div className="learning-decision-controls">
-                <div className="learning-choice-field">
-                  <span>{ko ? "처리" : "Action"}</span>
-                  <AppChoiceButtonGroup
-                    className="learning-action-choice-grid"
-                    density="compact"
-                    label={ko ? "처리 선택" : "Action choices"}
-                    value={action}
-                    options={learningActionOptions}
-                    onChange={onActionChange}
-                  />
-                </div>
-                <div className="learning-choice-field">
-                  <span>{ko ? "자산 유형" : "Asset Type"}</span>
-                  <AppChoiceButtonGroup
-                    className="learning-asset-choice-grid"
-                    density="compact"
-                    label={ko ? "자산 유형 선택" : "Asset type choices"}
-                    value={assetType}
-                    options={learningAssetTypeOptions}
-                    onChange={onAssetTypeChange}
-                  />
-                </div>
-                <label className="wide-field">
-                  <span>{ko ? "메모" : "Notes"}</span>
-                  <textarea value={notes} onChange={(event) => onNotesChange(event.target.value)} rows={3} />
-                </label>
-              </div>
-              <dl className="learning-decision-contract">
-                <dt>{ko ? "저장소" : "Store"}</dt>
-                <dd>learning_feedback_decisions</dd>
-                <dt>{ko ? "대상 경로" : "Target"}</dt>
-                <dd>{selectedCandidate.targetPath}</dd>
-                <dt>{ko ? "검증" : "Validation"}</dt>
-                <dd>{selectedCandidate.validationCommand}</dd>
-                <dt>Rollback</dt>
-                <dd>{selectedCandidate.rollbackPlan}</dd>
-              </dl>
-              {notice && <p className="decision-resume-notice">{notice}</p>}
-              {report && (
-                <pre tabIndex={0} aria-label="Learning decision JSON">
-                  <code>{JSON.stringify(report.record, null, 2)}</code>
-                </pre>
-              )}
-            </>
-          ) : (
-            <p className="empty-state">{ko ? "선택된 개선 후보가 없습니다." : "No selected candidate."}</p>
-          )}
-        </article>
       </div>
     </section>
   );
@@ -13813,131 +13395,6 @@ function Metric({ label, value, icon: Icon, tone }: { label: string; value: numb
   );
 }
 
-function AgentRuntimeBars({
-  runtimeCounts,
-  statusCounts
-}: {
-  runtimeCounts: Array<{ key: string; count: number }>;
-  statusCounts: Array<{ key: string; count: number }>;
-}) {
-  return (
-    <div className="agent-bars">
-      <BarGroup title="Runtime" items={runtimeCounts} />
-      <BarGroup title="Status" items={statusCounts} />
-    </div>
-  );
-}
-
-function AgentInventory({ agents }: { agents: NonNullable<WorkspaceSnapshot["agentCatalog"]> }) {
-  if (!agents.length) {
-    return <p className="empty-state">등록된 에이전트 설정을 찾지 못했습니다.</p>;
-  }
-
-  return (
-    <div className="agent-map">
-      {agents.map((agent) => (
-        <article key={agent.id}>
-          <header>
-            <div>
-              <span>{agent.runtime}</span>
-              <h3>{agent.name}</h3>
-            </div>
-            <strong>{agent.definitionStatus}</strong>
-          </header>
-          <p>{agent.description}</p>
-          <div className="agent-signal-row">
-            <span>{agent.runtimeStatus}</span>
-            <span>{agent.tools.length} tools</span>
-            <span>{agent.skills.length} skills</span>
-            <span>{agent.docPaths.length} docs</span>
-          </div>
-          {agent.trigger && <small>{agent.trigger}</small>}
-        </article>
-      ))}
-    </div>
-  );
-}
-
-function AgentCollaborationBoard({ board }: { board: CollaborationBoard }) {
-  if (!board.lanes.length) {
-    return <p className="empty-state">표시할 에이전트 협업 데이터가 없습니다.</p>;
-  }
-
-  return (
-    <div className="collaboration-board">
-      <div className="collaboration-summary">
-        <article>
-          <span>agents</span>
-          <strong>{board.summary.agents}</strong>
-        </article>
-        <article>
-          <span>active</span>
-          <strong>{board.summary.activeTasks}</strong>
-        </article>
-        <article>
-          <span>queued</span>
-          <strong>{board.summary.queuedTasks}</strong>
-        </article>
-        <article>
-          <span>blocked</span>
-          <strong>{board.summary.blockedTasks}</strong>
-        </article>
-      </div>
-      <div className="collaboration-lanes">
-        {board.lanes.map((lane) => (
-          <section key={lane.id} className={`collaboration-lane lane-${lane.id}`}>
-            <header>
-              <h3>{lane.label}</h3>
-              <span>{lane.tasks.length}</span>
-            </header>
-            {lane.tasks.length === 0 ? (
-              <p className="lane-empty">현재 항목 없음</p>
-            ) : (
-              lane.tasks.slice(0, 8).map((task) => (
-                <article key={task.id}>
-                  <div className="task-card-heading">
-                    <strong>{task.title}</strong>
-                    <span>{task.priority || task.status}</span>
-                  </div>
-                  <p>
-                    {task.agent} / {task.project}
-                  </p>
-                  {(task.timingTotal || task.bottleneck) && (
-                    <small>
-                      {task.timingTotal || "unknown"} {task.bottleneck ? `/ ${task.bottleneck}` : ""}
-                    </small>
-                  )}
-                  {task.nextAction && <small>{task.nextAction}</small>}
-                  {task.blockers.length > 0 && (
-                    <div className="blocker-list">
-                      {task.blockers.slice(0, 2).map((blocker) => (
-                        <span key={blocker}>{blocker}</span>
-                      ))}
-                    </div>
-                  )}
-                </article>
-              ))
-            )}
-          </section>
-        ))}
-      </div>
-      <div className="agent-workload-strip">
-        {board.agents.slice(0, 10).map((agent) => (
-          <article key={agent.id}>
-            <div>
-              <strong>{agent.name}</strong>
-              <span>{agent.status}</span>
-            </div>
-            <p>
-              active {agent.activeTaskCount} / blocked {agent.blockedTaskCount} / total {agent.taskCount}
-            </p>
-          </article>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function AgentFlowMap({ flows }: { flows: CollaborationBoard["flows"] }) {
   if (!flows.length) {
     return <p className="empty-state">표시할 에이전트 작업 흐름이 없습니다.</p>;
@@ -13968,22 +13425,6 @@ function AgentFlowMap({ flows }: { flows: CollaborationBoard["flows"] }) {
           </div>
         </article>
       ))}
-    </div>
-  );
-}
-
-function TaskStatusLanes({ taskStatusCounts }: { taskStatusCounts: Array<{ key: string; count: number }> }) {
-  return (
-    <div className="task-lanes" aria-label="Task status visualization">
-      <h3>작업 상태</h3>
-      <div>
-        {taskStatusCounts.map((item) => (
-          <article key={item.key}>
-            <span>{item.key}</span>
-            <strong>{item.count}</strong>
-          </article>
-        ))}
-      </div>
     </div>
   );
 }

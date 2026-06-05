@@ -45,6 +45,7 @@ function findInstantButtonTarget(root: HTMLElement, eventTarget: EventTarget | n
 export function installInstantButtonFeedback(root: HTMLElement) {
   const cleanupByElement = new WeakMap<HTMLElement, () => void>();
   let activeFeedbackCount = 0;
+  root.setAttribute("data-button-feedback-ready", "true");
 
   const mark = (target: HTMLElement, inputType: "pointer" | "keyboard") => {
     cleanupByElement.get(target)?.();
@@ -102,5 +103,6 @@ export function installInstantButtonFeedback(root: HTMLElement) {
     root.removeEventListener("pointerdown", handlePointerDown, true);
     root.removeEventListener("keydown", handleKeyDown, true);
     root.removeAttribute("data-button-response-active");
+    root.removeAttribute("data-button-feedback-ready");
   };
 }

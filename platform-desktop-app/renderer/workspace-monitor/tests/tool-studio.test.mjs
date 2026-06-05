@@ -41,6 +41,14 @@ const agentCollaborationScene = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "AgentCollaborationScene.tsx"),
   "utf8"
 );
+const agentBuilderPanels = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "AgentBuilderPanels.tsx"),
+  "utf8"
+);
+const agentDetailPanels = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "AgentDetailPanels.tsx"),
+  "utf8"
+);
 const coreDrilldown = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "CoreFeatureDrilldown.tsx"),
   "utf8"
@@ -52,6 +60,10 @@ const scrollCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-scr
 const surfaceAudit = fs.readFileSync(path.join(projectRoot, "scripts", "audit-monitor-surfaces.mjs"), "utf8");
 const sourceControlsSmoke = fs.readFileSync(
   path.join(projectRoot, "scripts", "check-source-controls-playwright.mjs"),
+  "utf8"
+);
+const buttonResponseAudit = fs.readFileSync(
+  path.join(projectRoot, "scripts", "audit-button-response.mjs"),
   "utf8"
 );
 const historyPayloadCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-history-payload.mjs"), "utf8");
@@ -134,7 +146,7 @@ test("Runtime text defaults expose selectable choices", () => {
   assert.match(runtimeTerminalDrawer, /runtime-text-choice-grid/);
   assert.match(runtimeTerminalDrawer, /onSessionPromptChange\(choice\.value\)/);
   assert.match(runtimeTerminalDrawer, /onWorkingDirChange\(choice\.value\)/);
-  assert.match(monitorShell, /type RuntimeTextChoice/);
+  assert.match(monitorShell, /RuntimeTextChoice/);
   assert.match(monitorShell, /const sessionPromptChoices = useMemo<RuntimeTextChoice\[\]>/);
   assert.match(monitorShell, /const workingDirOptions = useMemo<RuntimeTextChoice\[\]>/);
   assert.match(monitorShell, /const taskPipePromptChoices = useMemo<RuntimeTextChoice\[\]>/);
@@ -179,7 +191,7 @@ test("Workspace monitor replaces native select dropdowns with styled app choices
   assert.match(monitorShell, /function AppChoiceButtonGroup/);
   assert.match(monitorShell, /document-filter-choice/);
   assert.match(monitorShell, /history-date-choice/);
-  assert.match(monitorShell, /learning-action-choice-grid/);
+  assert.match(agentBuilderPanels, /learning-action-choice-grid/);
   assert.match(monitorShell, /decision-answer-type-choices/);
   assert.match(css, /\.app-choice-menu-trigger \{/);
   assert.match(css, /\.app-choice-button-group button\.active \{/);
@@ -396,6 +408,10 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
   assert.match(monitorShell, /void import\("@monaco-editor\/react"\)/);
   assert.match(monitorShell, /void import\("@\/components\/workbench\/AgentCollaborationScene"\)/);
   assert.match(monitorShell, /preloadToolStudioPanel\(\)/);
+  assert.match(monitorShell, /preloadDesktopRuntimePanels\(\)/);
+  assert.match(monitorShell, /preloadHomeFeaturePanels\(\)/);
+  assert.match(monitorShell, /preloadAgentDetailPanels\(\)/);
+  assert.match(monitorShell, /preloadAgentBuilderPanels\(\)/);
   assert.match(monitorShell, /void preloadAdminHistoryIndex\(\)/);
   assert.match(monitorShell, /const primeSectionActivation = useCallback\(\(targetSection: SectionId\) => \{/);
   assert.match(monitorShell, /viewport\?\.setAttribute\("data-active-section", targetSection\)/);
@@ -406,7 +422,9 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
   assert.doesNotMatch(monitorShell, /pendingSectionCommitRef\.current\?\.\(\)/);
   assert.doesNotMatch(monitorShell, /pendingSectionCommitRef\.current = scheduleAfterFirstPaint\(\(\) => \{/);
   assert.doesNotMatch(monitorShell, /scheduleAfterFirstPaint\(\(\) => setReadySection\(section\)\)/);
-  assert.match(monitorShell, /const sectionContentReady = true/);
+  assert.match(monitorShell, /const \[buttonFeedbackReady, setButtonFeedbackReady\] = useState\(false\)/);
+  assert.match(monitorShell, /setButtonFeedbackReady\(true\)/);
+  assert.match(monitorShell, /const sectionContentReady = buttonFeedbackReady/);
   assert.match(monitorShell, /data-section-content-ready=\{sectionContentReady \? "true" : "false"\}/);
   assert.match(monitorShell, /const maxResidentSectionPanels = 5/);
   assert.match(monitorShell, /const retainedResidentSections: SectionId\[\] = \["source"\]/);
@@ -435,6 +453,33 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
   assert.match(monitorShell, /<MountedSectionPanel id="agents" active=\{section === "agents"\}>/);
   assert.match(monitorShell, /const MemoizedToolStudioPanel = memo\(ToolStudioPanel\)/);
   assert.match(monitorShell, /function preloadToolStudioPanel\(\) \{/);
+  assert.match(monitorShell, /const WorkspaceExplorerPane = dynamic<WorkspaceExplorerPaneProps>/);
+  assert.match(monitorShell, /const NativeGitWorkbench = dynamic<NativeGitWorkbenchProps>/);
+  assert.match(monitorShell, /const RuntimeTerminalDrawer = dynamic<RuntimeTerminalDrawerProps>/);
+  assert.match(monitorShell, /function preloadDesktopRuntimePanels\(\) \{[\s\S]*?WorkspaceExplorerPane[\s\S]*?NativeGitWorkbench[\s\S]*?RuntimeTerminalDrawer/);
+  assert.match(monitorShell, /const OperatorCenterDialog = dynamic<OperatorCenterDialogProps>/);
+  assert.match(monitorShell, /const ProductFeatureArchitecturePanel = dynamic<ProductFeatureArchitecturePanelProps>/);
+  assert.match(monitorShell, /const CoreFeatureDrilldown = dynamic<CoreFeatureDrilldownProps>/);
+  assert.match(monitorShell, /function preloadHomeFeaturePanels\(\) \{[\s\S]*?OperatorCenterDialog[\s\S]*?ProductFeatureArchitecturePanel[\s\S]*?CoreFeatureDrilldown/);
+  assert.match(monitorShell, /const AgentCollaborationBoardPanel = dynamic<AgentCollaborationBoardPanelProps>/);
+  assert.match(monitorShell, /const AgentInventoryPanel = dynamic<AgentInventoryPanelProps>/);
+  assert.match(monitorShell, /const AgentRuntimeOverviewPanel = dynamic<AgentRuntimeOverviewPanelProps>/);
+  assert.match(monitorShell, /const AgentCoreBlueprintPanel = dynamic<AgentCoreBlueprintPanelProps>/);
+  assert.match(monitorShell, /const AgentFactoryWizard = dynamic<AgentFactoryWizardProps>/);
+  assert.match(monitorShell, /const LearningFeedbackLoopPanel = dynamic<LearningFeedbackLoopPanelProps>/);
+  assert.match(monitorShell, /function preloadAgentDetailPanels\(\) \{[\s\S]*?AgentDetailPanels/);
+  assert.match(monitorShell, /function preloadAgentBuilderPanels\(\) \{[\s\S]*?AgentBuilderPanels/);
+  assert.match(agentDetailPanels, /export function AgentCollaborationBoardPanel/);
+  assert.match(agentDetailPanels, /export function AgentInventoryPanel/);
+  assert.match(agentDetailPanels, /export function AgentRuntimeOverviewPanel/);
+  assert.match(agentBuilderPanels, /export function AgentCoreBlueprintPanel/);
+  assert.match(agentBuilderPanels, /export function AgentFactoryWizard/);
+  assert.match(agentBuilderPanels, /export function LearningFeedbackLoopPanel/);
+  assert.doesNotMatch(monitorShell, /function AgentCollaborationBoard\(/);
+  assert.doesNotMatch(monitorShell, /function AgentInventory\(/);
+  assert.doesNotMatch(monitorShell, /function AgentCoreBlueprintPanel\(/);
+  assert.doesNotMatch(monitorShell, /function AgentFactoryWizard\(/);
+  assert.doesNotMatch(monitorShell, /function LearningFeedbackLoopPanel\(/);
   assert.match(monitorShell, /<MemoizedToolStudioPanel/);
   assert.match(monitorShell, /const openAgentsSection = useCallback\(\(\) => \{/);
   assert.match(monitorShell, /const openSourceSection = useCallback\(\(\) => \{/);
@@ -575,6 +620,8 @@ test("Monitor buttons expose instant press feedback before heavy click work", ()
   assert.match(motionHelpers, /data-instant-button-feedback", "active"/);
   assert.match(motionHelpers, /data-instant-button-painted", "true"/);
   assert.match(motionHelpers, /data-button-response-active", "true"/);
+  assert.match(motionHelpers, /data-button-feedback-ready", "true"/);
+  assert.match(buttonResponseAudit, /data-button-feedback-ready/);
   assert.match(css, /\[data-instant-button-feedback="active"\]/);
 });
 
@@ -772,23 +819,23 @@ test("Tool Studio deploy mode exposes a deployment workbench", () => {
 });
 
 test("AgentCore builder supports multi-capability bundles", () => {
-  assert.match(monitorShell, /type AgentCoreCapabilityOption = \{/);
-  assert.match(monitorShell, /const agentCoreCapabilityOptions: AgentCoreCapabilityOption\[\] = \[/);
-  assert.match(monitorShell, /id:\s*"runtime"[\s\S]*?id:\s*"memory"[\s\S]*?id:\s*"gateway"[\s\S]*?id:\s*"browser"[\s\S]*?id:\s*"code_interpreter"[\s\S]*?id:\s*"identity"[\s\S]*?id:\s*"policy"[\s\S]*?id:\s*"observability"[\s\S]*?id:\s*"evaluation"/);
-  assert.match(monitorShell, /resourceKo:\s*"런타임"[\s\S]*?resourceKo:\s*"메모리"[\s\S]*?resourceKo:\s*"게이트웨이"[\s\S]*?resourceKo:\s*"기본 제공 도구"/);
-  assert.match(monitorShell, /const agentCoreResourceLifecycleSteps = \[/);
+  assert.match(agentBuilderPanels, /type AgentCoreCapabilityOption = \{/);
+  assert.match(agentBuilderPanels, /const agentCoreCapabilityOptions: AgentCoreCapabilityOption\[\] = \[/);
+  assert.match(agentBuilderPanels, /id:\s*"runtime"[\s\S]*?id:\s*"memory"[\s\S]*?id:\s*"gateway"[\s\S]*?id:\s*"browser"[\s\S]*?id:\s*"code_interpreter"[\s\S]*?id:\s*"identity"[\s\S]*?id:\s*"policy"[\s\S]*?id:\s*"observability"[\s\S]*?id:\s*"evaluation"/);
+  assert.match(agentBuilderPanels, /resourceKo:\s*"런타임"[\s\S]*?resourceKo:\s*"메모리"[\s\S]*?resourceKo:\s*"게이트웨이"[\s\S]*?resourceKo:\s*"기본 제공 도구"/);
+  assert.match(agentBuilderPanels, /const agentCoreResourceLifecycleSteps = \[/);
   assert.match(monitorShell, /selectedCapabilityIds: string\[\] = blueprint\.capabilities/);
   assert.match(monitorShell, /selectedCapabilities\.map\(\(item\) => item\.localCapability\)/);
-  assert.match(monitorShell, /const \[selectedCapabilityIds, setSelectedCapabilityIds\] = useState<string\[\]>\(defaultCapabilityIds\)/);
-  assert.match(monitorShell, /data-agentcore-capability=\{option\.id\}/);
-  assert.match(monitorShell, /aria-pressed=\{selected\}/);
-  assert.match(monitorShell, /data-agentcore-select-all/);
-  assert.match(monitorShell, /className="agentcore-resource-topology"/);
-  assert.match(monitorShell, /data-agentcore-resource=\{option\.id\}/);
-  assert.match(monitorShell, /option\.localCapability/);
-  assert.match(monitorShell, /onApplyBlueprint\(selectedBlueprint\.id, selectedCapabilityIds\)/);
-  assert.match(monitorShell, /onStartPreflight\(selectedBlueprint\.id, selectedCapabilityIds\)/);
-  assert.match(monitorShell, /onCreateProposal\(selectedBlueprint\.id, selectedCapabilityIds\)/);
+  assert.match(agentBuilderPanels, /const \[selectedCapabilityIds, setSelectedCapabilityIds\] = useState<string\[\]>\(defaultCapabilityIds\)/);
+  assert.match(agentBuilderPanels, /data-agentcore-capability=\{option\.id\}/);
+  assert.match(agentBuilderPanels, /aria-pressed=\{selected\}/);
+  assert.match(agentBuilderPanels, /data-agentcore-select-all/);
+  assert.match(agentBuilderPanels, /className="agentcore-resource-topology"/);
+  assert.match(agentBuilderPanels, /data-agentcore-resource=\{option\.id\}/);
+  assert.match(agentBuilderPanels, /option\.localCapability/);
+  assert.match(agentBuilderPanels, /onApplyBlueprint\(selectedBlueprint\.id, selectedCapabilityIds\)/);
+  assert.match(agentBuilderPanels, /onStartPreflight\(selectedBlueprint\.id, selectedCapabilityIds\)/);
+  assert.match(agentBuilderPanels, /onCreateProposal\(selectedBlueprint\.id, selectedCapabilityIds\)/);
   assert.match(css, /\.agentcore-capability-grid \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.agentcore-resource-grid \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.agentcore-resource-lifecycle \{[\s\S]*?grid-template-columns: repeat\(5, minmax\(0, 1fr\)\);/);

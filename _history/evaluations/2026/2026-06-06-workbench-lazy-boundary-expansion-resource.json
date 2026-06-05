@@ -1,0 +1,60 @@
+{
+  "task": "Expand workbench lazy boundaries and verify desktop app performance/package output.",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Next.js static renderer build",
+    "React dynamic imports",
+    "Playwright Chromium performance probes",
+    "Python static file server",
+    "Rust/Tauri build and bundling",
+    "macOS codesign and hdiutil"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "prewarm-main-thread-spike",
+      "category": "cpu",
+      "description": "Prewarming all lazy chunks at once can block startup interactions.",
+      "status": "mitigated",
+      "mitigation": "Prewarm functions run sequentially with 90ms gaps."
+    },
+    {
+      "risk_id": "resident-memory-growth",
+      "category": "memory",
+      "description": "Keeping tabs resident can grow mounted UI memory.",
+      "status": "mitigated",
+      "mitigation": "Resident and mounted sections remain capped at 5."
+    },
+    {
+      "risk_id": "static-server-leak",
+      "category": "process",
+      "description": "Performance audits start a local http server.",
+      "status": "mitigated",
+      "mitigation": "The server on port 3348 was killed and no listener remained."
+    },
+    {
+      "risk_id": "package-subprocesses",
+      "category": "process",
+      "description": "Tauri package build launches cargo, codesign, hdiutil, and bundler subprocesses.",
+      "status": "mitigated",
+      "mitigation": "package:internal completed with app signature and DMG verification."
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "section-latency",
+      "status": "passed",
+      "evidence": "average=487.8ms p95=713.2ms maxResident=5 maxMounted=5"
+    },
+    {
+      "check_id": "button-feedback",
+      "status": "passed",
+      "evidence": "syntheticP95=1.5ms realClickP95=54.8ms failedFeedbackCount=0"
+    },
+    {
+      "check_id": "bundle-budget",
+      "status": "passed",
+      "evidence": "largestChunk=734386 chunkCount=38"
+    }
+  ],
+  "status": "passed"
+}

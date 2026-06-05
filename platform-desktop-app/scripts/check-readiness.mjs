@@ -28,6 +28,8 @@ const requiredFiles = [
   "runtime-contracts/installer-shell-bootstrap.ko.md",
   "runtime-contracts/installer-shell-bootstrap.en.md",
   "renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx",
+  "renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx",
+  "renderer/workspace-monitor/components/workbench/AgentDetailPanels.tsx",
   "renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx",
   "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx",
   "renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx",
@@ -575,7 +577,15 @@ const workspaceExplorerPane = readFileSync(
   join(root, "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"),
   "utf8"
 );
-const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}`;
+const agentBuilderPanels = readFileSync(
+  join(root, "renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx"),
+  "utf8"
+);
+const agentDetailPanels = readFileSync(
+  join(root, "renderer/workspace-monitor/components/workbench/AgentDetailPanels.tsx"),
+  "utf8"
+);
+const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}\n${agentBuilderPanels}\n${agentDetailPanels}`;
 const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
 const clipboardUtility = readFileSync(join(root, "renderer/workspace-monitor/lib/clipboard.mjs"), "utf8");
 const clipboardTest = readFileSync(join(root, "tests/clipboard.test.mjs"), "utf8");

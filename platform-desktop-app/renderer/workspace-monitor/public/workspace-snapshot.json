@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T17:55:28.097Z",
+  "generatedAt": "2026-06-05T18:30:41.576Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 453,
-    "evaluations": 28,
-    "webSearches": 13,
+    "evaluations": 30,
+    "webSearches": 12,
     "timingRecords": 13,
     "historyDays": 2,
-    "adminHistoryDocuments": 2355,
+    "adminHistoryDocuments": 2365,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7386,6 +7386,262 @@
   ],
   "documents": [
     {
+      "id": "history-work-timings-2026-2026-06-06-workbench-lazy-boundary-expansion-json",
+      "path": "_history/work-timings/2026/2026-06-06-workbench-lazy-boundary-expansion.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Workbench Lazy Boundary Expansion",
+      "excerpt": "{ \"task id\": \"2026 06 06 workbench lazy boundary expansion\", \"title\": \"Workbench lazy boundary expansion\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\"",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 workbench lazy boundary expansion&quot;, &quot;title&quot;: &quot;Workbench lazy boundary expansion&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 180, &quot;measurement&quot;: &quot;estimated&quot;, &quot;bottleneck notes&quot;: &quot;Official React, Next.js,</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1707,
+      "updatedAt": "2026-06-05T18:29:48.846Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-resource-json",
+      "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion-resource.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Workbench Lazy Boundary Expansion Resource",
+      "excerpt": "{ \"task\": \"Expand workbench lazy boundaries and verify desktop app performance/package output.\", \"work mode\": \"standard\", \"runtime context\": \"Next.js static renderer build\", \"React dynamic imports\", \"Playwright Chromium performance probes\", \"Python static file server\", \"Rust/Taur",
+      "html": "<p>{ &quot;task&quot;: &quot;Expand workbench lazy boundaries and verify desktop app performance/package output.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;runtime context&quot;: &quot;Next.js static renderer build&quot;, &quot;React dynamic imports&quot;, &quot;Playwright Chromium performance probes&quot;, &quot;Python static file server&quot;, &quot;Rust/Tauri build and bundling&quot;, &quot;macOS codesign and hdiutil&quot; , &quot;resource risks&quot;: { &quot;risk </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1990,
+      "updatedAt": "2026-06-05T18:29:48.845Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Workbench Lazy Boundary Expansion Evaluation Input",
+      "excerpt": "{ \"initial instruction\": \"Continue and implement all remaining desktop app performance follow up items from the previous root boundary review.\", \"result summary\": \"Expanded Workspace Monitor heavy workbench panels into Next dynamic boundaries, split Agents detail/build panels int",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;Continue and implement all remaining desktop app performance follow up items from the previous root boundary review.&quot;, &quot;result summary&quot;: &quot;Expanded Workspace Monitor heavy workbench panels into Next dynamic boundaries, split Agents detail/build panels into separate modules, staggered prewarm imports, stabilized button feedback auditi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 5275,
+      "updatedAt": "2026-06-05T18:29:48.844Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-omission-json",
+      "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Workbench Lazy Boundary Expansion Omission",
+      "excerpt": "{ \"task\": \"Expand workbench lazy boundaries and verify desktop app performance/package output.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"continue followups\", \"description\": \"Continue the previous root boundary follow up items rather than stopping at the first spl",
+      "html": "<p>{ &quot;task&quot;: &quot;Expand workbench lazy boundaries and verify desktop app performance/package output.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;continue followups&quot;, &quot;description&quot;: &quot;Continue the previous root boundary follow up items rather than stopping at the first split.&quot;, &quot;source&quot;: &quot;user request&quot;, &quot;required&quot;: true, &quot;status&quot;: &quot;covered&quot;, &quot;evidence</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2179,
+      "updatedAt": "2026-06-05T18:29:48.844Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가: Workbench lazy boundary 확장",
+      "excerpt": "최종 평가: Workbench lazy boundary 확장 결론 작업은 닫을 수 있다. 사용자의 남은 성능 후속 요청에 대해 Shell local heavy panels를 lazy boundaries로 확장했고, renderer build, internal package build, section/button performance audits가 모두 통과했다. 결과 Agents detail/build panels가 별도 modules로 분리됐다. Desktop/runtime/home featur",
+      "html": "<p>최종 평가: Workbench lazy boundary 확장 결론 작업은 닫을 수 있다. 사용자의 남은 성능 후속 요청에 대해 Shell local heavy panels를 lazy boundaries로 확장했고, renderer build, internal package build, section/button performance audits가 모두 통과했다. 결과 Agents detail/build panels가 별도 modules로 분리됐다. Desktop/runtime/home feature panels도 runtime static import 대신 dynamic boundary로 연결됐다. startup prewarm은 순차 분</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1294,
+      "updatedAt": "2026-06-05T18:29:48.844Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Workbench lazy boundary 확장",
+      "excerpt": "요청 결과 추적: Workbench lazy boundary 확장 요청 사용자는 이전 성능 개선 후속으로 “그것들 다”라고 요청했다. 결과 남은 Shell local heavy panels를 lazy boundaries로 확장했다. Agents detail/build panels를 별도 파일로 분리했다. prewarm과 button feedback 측정을 안정화했다. 내부 .app 와 .dmg 패키징을 완료했다. 연결 파일 구현: platform desktop app/renderer/workspa",
+      "html": "<p>요청 결과 추적: Workbench lazy boundary 확장 요청 사용자는 이전 성능 개선 후속으로 “그것들 다”라고 요청했다. 결과 남은 Shell local heavy panels를 lazy boundaries로 확장했다. Agents detail/build panels를 별도 파일로 분리했다. prewarm과 button feedback 측정을 안정화했다. 내부 .app 와 .dmg 패키징을 완료했다. 연결 파일 구현: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx 구현: platform desktop app/renderer/workspa</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1259,
+      "updatedAt": "2026-06-05T18:29:48.843Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Workbench lazy boundary 확장",
+      "excerpt": "사용자 요청 요약: Workbench lazy boundary 확장 요약 사용자는 이전 성능 개선의 후속으로 남은 것들을 모두 처리하라고 요청했다. 맥락상 탭 전환 지연, renderer mount/import 비용, 데스크톱 자원 활용, 자동 build/package 요구를 포함한다. 해석 이전 MonitorShell root boundary 평가에서 후속으로 남긴 Desktop runtime 및 Agents panel boundary를 구현 대상으로 삼는다. 단순 스타일 변경이 아니라 lazy",
+      "html": "<p>사용자 요청 요약: Workbench lazy boundary 확장 요약 사용자는 이전 성능 개선의 후속으로 남은 것들을 모두 처리하라고 요청했다. 맥락상 탭 전환 지연, renderer mount/import 비용, 데스크톱 자원 활용, 자동 build/package 요구를 포함한다. 해석 이전 MonitorShell root boundary 평가에서 후속으로 남긴 Desktop runtime 및 Agents panel boundary를 구현 대상으로 삼는다. 단순 스타일 변경이 아니라 lazy chunk, resident/prewarm, button feedback 측정을 포함한 구조 변경으로 처리한다. 구현 후 build/packa</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 655,
+      "updatedAt": "2026-06-05T18:29:48.843Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Workbench lazy boundary 확장",
+      "excerpt": "작업 요약: Workbench lazy boundary 확장 완료 내용 DesktopRuntimePanel , home feature panels, workspace/native/runtime panels, Agents detail/build panels를 next/dynamic boundary로 연결했다. Agents collaboration/inventory/runtime overview를 AgentDetailPanels.tsx 로 분리했다. AgentCore blueprint, agent f",
+      "html": "<p>작업 요약: Workbench lazy boundary 확장 완료 내용 DesktopRuntimePanel , home feature panels, workspace/native/runtime panels, Agents detail/build panels를 next/dynamic boundary로 연결했다. Agents collaboration/inventory/runtime overview를 AgentDetailPanels.tsx 로 분리했다. AgentCore blueprint, agent factory, learning feedback panels를 AgentBuilderPanels.tsx 로 분리했다. startup prewarm</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1124,
+      "updatedAt": "2026-06-05T18:29:48.843Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "_history/plans/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획: Workbench lazy boundary 확장",
+      "excerpt": "작업 계획: Workbench lazy boundary 확장 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 계획 이전 root boundary 작업에서 다음 병목으로 남긴 DesktopRuntimePanel 과 Agents detail panels를 대상으로 한다. 목표는 모든 탭을 한 번에 재작성하는 것이 아니라, Shell local heavy UI를 실",
+      "html": "<p>작업 계획: Workbench lazy boundary 확장 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 계획 이전 root boundary 작업에서 다음 병목으로 남긴 DesktopRuntimePanel 과 Agents detail panels를 대상으로 한다. 목표는 모든 탭을 한 번에 재작성하는 것이 아니라, Shell local heavy UI를 실제 dynamic chunk boundary로 옮기고 prewarm을 분산해 탭 전환과 버튼 feedback을 개선하는 것이다. 수용 기준 in</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 804,
+      "updatedAt": "2026-06-05T18:29:48.842Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Workbench lazy boundary 확장",
+      "excerpt": "웹 검색 기록: Workbench lazy boundary 확장 목적 사용자의 “그것들 다” 요청을 이전 root boundary 후속 작업으로 해석하고, React/Next renderer code splitting, main thread responsiveness, long task 완화 기준을 다시 확인했다. 검색어 React official docs lazy memo Profiler startTransition performance Next.js official docs dynamic im",
+      "html": "<p>웹 검색 기록: Workbench lazy boundary 확장 목적 사용자의 “그것들 다” 요청을 이전 root boundary 후속 작업으로 해석하고, React/Next renderer code splitting, main thread responsiveness, long task 완화 기준을 다시 확인했다. 검색어 React official docs lazy memo Profiler startTransition performance Next.js official docs dynamic import lazy loading client components web.dev optimize long tasks main thread resp</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2778,
+      "updatedAt": "2026-06-05T18:29:48.842Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-workbench-lazy-boundary-expansion-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-workbench-lazy-boundary-expansion/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적: Workbench lazy boundary 확장",
+      "excerpt": "추적: Workbench lazy boundary 확장 | 요구 | 구현 | 검증 | | | | | | Heavy panels를 Shell static runtime import에서 제거 | MonitorShell.tsx , AgentBuilderPanels.tsx , AgentDetailPanels.tsx | tool studio.test.mjs , readiness.test.mjs , check readiness.mjs | | Dynamic boundary type safety 유지 | pro",
+      "html": "<h1>추적: Workbench lazy boundary 확장</h1>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>Heavy panels를 Shell static runtime import에서 제거</td><td><code>MonitorShell.tsx</code>, <code>AgentBuilderPanels.tsx</code>, <code>AgentDetailPanels.tsx</code></td><td><code>tool-studio.test.mjs</code>, <code>readiness.test.mjs</code>, <code>check-readiness.mjs</code></td></tr><tr><td>Dynamic boundary type safety 유지</td><td>props type exports in feature/workbench components</td><td><code>workspace-monitor check</code>, <code>platform-desktop-app test</code></td></tr><tr><td>Startup prewarm 분산</td><td><code>prewarmWorkSurfaces</code> staggered execution</td><td><code>perf:sections</code>, <code>perf:buttons</code></td></tr><tr><td>버튼 즉시 feedback 검증 안정화</td><td><code>motion.ts</code>, <code>audit-button-response.mjs</code></td><td><code>perf:buttons</code></td></tr><tr><td>Customer-safe build/package</td><td>customer snapshot build and Tauri package pipeline</td><td><code>package:internal</code>, <code>customer-bundle:audit</code>, <code>codesign</code>, <code>hdiutil verify</code></td></tr></tbody></table>\n<h2>연결 기록</h2>\n<ul>\n<li>요구사항: <code>platform-desktop-app/docs/requirements/2026-06-06-workbench-lazy-boundary-expansion.ko.md</code></li>\n<li>계획: <code>_history/plans/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md</code></li>\n<li>웹 검색: <code>_history/web-searches/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md</code></li>\n<li>평가: <code>_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1207,
+      "updatedAt": "2026-06-05T18:29:48.842Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-workbench-lazy-boundary-expansion-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-workbench-lazy-boundary-expansion/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: Workbench lazy boundary 확장",
+      "excerpt": "검증: Workbench lazy boundary 확장 통과한 명령 corepack pnpm filter platform desktop app check 결과: 통과 내부 서비스 readiness: service internal ready public blocked 남은 public blockers: signing/notarization, signed updater, clean machine smoke corepack pnpm filter platform desktop app test 결과: 통과",
+      "html": "<h1>검증: Workbench lazy boundary 확장</h1>\n<h2>통과한 명령</h2>\n<ul>\n<li><code>corepack pnpm --filter platform-desktop-app check</code></li>\n<li>결과: 통과</li>\n<li>내부 서비스 readiness: <code>service_internal_ready_public_blocked</code></li>\n<li>남은 public blockers: signing/notarization, signed updater, clean-machine smoke</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li>결과: 통과, 22개 테스트 pass</li>\n<li><code>corepack pnpm --filter platform-desktop-app run package:internal</code></li>\n<li>결과: 통과</li>\n<li>포함 검증: workspace-monitor check, workspace-monitor 59 tests, customer renderer build, customer bundle audit, desktop 22 tests, desktop check, Rust test, Rust build, Tauri build</li>\n<li>산출물:</li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li><code>codesign --verify --deep --strict</code>: 통과</li>\n<li><code>hdiutil verify</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:budget</code></li>\n<li>결과: 통과</li>\n<li>largest chunk: 734,386 bytes</li>\n<li>chunk count: 38</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:sections</code></li>\n<li>결과: 통과</li>\n<li>CPU throttle: 6</li>\n<li>average: 487.8ms</li>\n<li>p95: 713.2ms</li>\n<li>max resident panels: 5</li>\n<li>max mounted panels: 5</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:buttons</code></li>\n<li>결과: 통과</li>\n<li>synthetic sample count: 64</li>\n<li>synthetic feedback p95: 1.5ms</li>\n<li>synthetic painted p95: 49.6ms</li>\n<li>real click feedback p95: 54.8ms</li>\n<li>failed feedback count: 0</li>\n</ul>\n<h2>패키징 메모</h2>\n<p>내부 <code>.app</code>와 <code>.dmg</code>는 생성 및 검증됐다. 공개 배포 readiness는 기존 정책대로 Developer ID signing, notarization, updater, clean-machine smoke가 필요하다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1815,
+      "updatedAt": "2026-06-05T18:29:48.842Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-workbench-lazy-boundary-expansion-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-workbench-lazy-boundary-expansion/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "계획: Workbench lazy boundary 확장",
+      "excerpt": "계획: Workbench lazy boundary 확장 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 평가 이전 resident/prewarm 최적화는 mount cost를 줄였지만, MonitorShell.tsx 가 여전히 많은 heavy panel runtime imports와 JSX를 한 client module에 보유했다. 다음 병목은 Desktop ",
+      "html": "<h1>계획: Workbench lazy boundary 확장</h1>\n<h2>분류</h2>\n<ul>\n<li>소유 프로젝트: <code>platform-desktop-app</code></li>\n<li>작업 모드: <code>standard</code></li>\n<li>view mode: <code>superadmin_developer</code></li>\n<li>install mode: <code>developer</code></li>\n</ul>\n<h2>평가</h2>\n<p>이전 resident/prewarm 최적화는 mount cost를 줄였지만, <code>MonitorShell.tsx</code>가 여전히 많은 heavy panel runtime imports와 JSX를 한 client module에 보유했다. 다음 병목은 Desktop runtime, home feature drilldown, Agents detail/build panels가 같은 Shell 평가 경로에 남아 있는 것이다.</p>\n<h2>실행 계획</h2>\n<p>1. <code>MonitorShell.tsx</code>의 heavy panel imports와 inline Agents panels를 조사한다.</p>\n<p>2. Agents detail/build panels를 별도 workbench modules로 이동한다.</p>\n<p>3. 기존 feature/workbench components의 props type을 export한다.</p>\n<p>4. <code>MonitorShell.tsx</code>에서 <code>dynamic()</code> boundaries와 staggered preload를 연결한다.</p>\n<p>5. button response audit를 실제 DOM readiness 기준으로 안정화한다.</p>\n<p>6. readiness/test 계약을 새 module boundary에 맞게 갱신한다.</p>\n<p>7. build, package, performance audits를 실행한다.</p>\n<h2>위험 관리</h2>\n<ul>\n<li>lazy split이 첫 진입 지연으로만 바뀌지 않도록 idle preload를 유지한다.</li>\n<li>prewarm이 startup main thread를 막지 않도록 순차 분산한다.</li>\n<li>static server와 package subprocess는 close-out 전에 종료/완료를 확인한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1343,
+      "updatedAt": "2026-06-05T18:29:48.841Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-workbench-lazy-boundary-expansion-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-workbench-lazy-boundary-expansion/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: Workbench lazy boundary 확장",
+      "excerpt": "스펙: Workbench lazy boundary 확장 목표 Workspace Monitor의 남은 Shell local heavy panels를 lazy chunk boundary로 분리하고, 탭 이동/버튼 반응성 검증을 통해 사용자가 느끼는 지연을 줄인다. 언어/런타임 선택 옵션 A: React/Next dynamic boundary. 현재 병목은 renderer code evaluation, hydration, mount cost가 같은 client module에 집중되는 문제이므로 선택한다",
+      "html": "<h1>스펙: Workbench lazy boundary 확장</h1>\n<h2>목표</h2>\n<p>Workspace Monitor의 남은 Shell-local heavy panels를 lazy chunk boundary로 분리하고, 탭 이동/버튼 반응성 검증을 통해 사용자가 느끼는 지연을 줄인다.</p>\n<h2>언어/런타임 선택</h2>\n<ul>\n<li>옵션 A: React/Next dynamic boundary. 현재 병목은 renderer code evaluation, hydration, mount cost가 같은 client module에 집중되는 문제이므로 선택한다.</li>\n<li>옵션 B: Rust/Tauri cache 확대. OS resource warmup은 이미 사용 중이나 Shell JS 평가 비용을 직접 줄이지 못하므로 보조 수단으로 둔다.</li>\n<li>옵션 C: 전체 route 재작성. 가장 근본적이지만 회귀 범위가 커서 이번 slice에서는 panel boundary 확장으로 위험을 제한한다.</li>\n</ul>\n<h2>아키텍처 선택</h2>\n<ul>\n<li>옵션 A: 큰 workbench panels를 별도 module로 분리하고 <code>dynamic()</code> + idle preload를 사용한다. 변경 범위와 검증이 명확해 선택한다.</li>\n<li>옵션 B: 모든 탭을 한 번에 route-level로 나눈다. 장기적으로 가능하지만 현 시점에서는 state coupling이 많아 위험하다.</li>\n<li>옵션 C: Web Worker를 추가한다. UI component parse/evaluation 문제에는 직접 효과가 작다.</li>\n</ul>\n<h2>설계</h2>\n<ul>\n<li><code>AgentBuilderPanels.tsx</code>는 <code>AgentCoreBlueprintPanel</code>, <code>AgentFactoryWizard</code>, <code>LearningFeedbackLoopPanel</code>을 담는다.</li>\n<li><code>AgentDetailPanels.tsx</code>는 collaboration, inventory, runtime overview panels를 담는다.</li>\n<li>기존 feature/workbench components는 props type을 export하여 dynamic boundary type safety를 유지한다.</li>\n<li><code>MonitorShell.tsx</code>는 heavy panels를 runtime static import하지 않고 type-only import와 <code>dynamic()</code>으로 연결한다.</li>\n<li><code>prewarmWorkSurfaces</code>는 prewarm functions를 90ms 간격으로 순차 실행한다.</li>\n<li><code>installInstantButtonFeedback</code>는 DOM readiness attribute를 설정해 버튼 감사가 실제 feedback hook 설치 후 시작되게 한다.</li>\n<li>readiness와 tests는 <code>MonitorShell</code> 하나가 아니라 lazy panel sources를 포함한 workbench source 계약을 검사한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>workspace-monitor check/test/build</code>가 통과한다.</li>\n<li><code>platform-desktop-app check/test/package:internal</code>이 통과한다.</li>\n<li><code>perf:sections</code>는 p95 1400ms 이하, resident/mounted max 5 이하를 유지한다.</li>\n<li><code>perf:buttons</code>는 feedback 누락 0건이고 real click p95가 즉시 feedback 수준으로 유지된다.</li>\n<li><code>perf:budget</code>은 largest chunk 1,000,000 bytes 이하를 유지한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2457,
+      "updatedAt": "2026-06-05T18:29:48.841Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-workbench-lazy-boundary-expansion-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-workbench-lazy-boundary-expansion/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업: Workbench lazy boundary 확장",
+      "excerpt": "작업: Workbench lazy boundary 확장 x Desktop runtime/home/Agents heavy panel import 경계 조사 x AgentDetailPanels.tsx 추가 x AgentBuilderPanels.tsx 추가 x 기존 dynamic 대상 components의 props type export x MonitorShell.tsx dynamic imports 전환 x work surface preload 순차 분산 x instant button feedback ",
+      "html": "<h1>작업: Workbench lazy boundary 확장</h1>\n<ul>\n<li>[x] Desktop runtime/home/Agents heavy panel import 경계 조사</li>\n<li>[x] <code>AgentDetailPanels.tsx</code> 추가</li>\n<li>[x] <code>AgentBuilderPanels.tsx</code> 추가</li>\n<li>[x] 기존 dynamic 대상 components의 props type export</li>\n<li>[x] <code>MonitorShell.tsx</code> dynamic imports 전환</li>\n<li>[x] work surface preload 순차 분산</li>\n<li>[x] instant button feedback readiness attribute 추가</li>\n<li>[x] button response audit 안정화</li>\n<li>[x] workspace-monitor tests/check/build 실행</li>\n<li>[x] platform desktop tests/check 실행</li>\n<li>[x] Tauri internal package build 실행</li>\n<li>[x] performance budget/section/button audits 실행</li>\n<li>[x] 요구사항, spec, trace, evaluation 기록</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 666,
+      "updatedAt": "2026-06-05T18:29:48.841Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Workbench lazy boundary 확장",
+      "excerpt": "요구사항: Workbench lazy boundary 확장 사용자 요구 사용자는 탭 전환이 아직 느리고, 데스크톱 앱이므로 메모리와 OS 자원을 적극 활용해 근본적인 성능 구조를 개선하라고 요청했다. 이전 resident/prewarm 및 Tool Studio 분리 이후 남은 Shell local heavy panels도 계속 분리해야 한다. 기능 요구사항 DesktopRuntimePanel , home feature panels, Agents detail/build panels처럼 탭 진입 때 ",
+      "html": "<h1>요구사항: Workbench lazy boundary 확장</h1>\n<h2>사용자 요구</h2>\n<p>사용자는 탭 전환이 아직 느리고, 데스크톱 앱이므로 메모리와 OS 자원을 적극 활용해 근본적인 성능 구조를 개선하라고 요청했다. 이전 resident/prewarm 및 Tool Studio 분리 이후 남은 Shell-local heavy panels도 계속 분리해야 한다.</p>\n<h2>기능 요구사항</h2>\n<ul>\n<li><code>DesktopRuntimePanel</code>, home feature panels, Agents detail/build panels처럼 탭 진입 때 큰 비용을 만드는 workbench UI는 <code>MonitorShell.tsx</code> runtime static import에서 제거한다.</li>\n<li>lazy 분리된 panel은 <code>next/dynamic</code> top-level boundary와 명시적 props type export를 가져야 한다.</li>\n<li>startup/idle prewarm은 heavy imports를 한 번에 몰아 실행하지 않고 순차적으로 분산해야 한다.</li>\n<li>버튼 반응성 측정은 실제 click feedback과 synthetic press feedback을 모두 안정적으로 측정해야 한다.</li>\n<li>readiness/check/test 계약은 새 lazy panel source 위치를 인식해야 한다.</li>\n</ul>\n<h2>비기능 요구사항</h2>\n<ul>\n<li>resident/mounted panel cap 5를 유지한다.</li>\n<li>기존 source editor state, terminal drawer, provider/runtime command 연결은 유지한다.</li>\n<li>customer snapshot과 내부 패키징 산출물은 build 후 customer-safe 상태여야 한다.</li>\n<li>구현 후 <code>check</code>, <code>test</code>, renderer build, performance audits, Tauri internal package build를 자동으로 실행한다.</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>공개 배포용 Developer ID signing, notarization, signed updater, clean-machine smoke는 기존 public release blocker로 유지한다.</li>\n<li>전체 <code>MonitorShell.tsx</code> route-level 재작성은 다음 큰 migration 후보로 남긴다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1665,
+      "updatedAt": "2026-06-05T18:29:48.840Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-evaluation-input-json",
       "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-evaluation-input.json",
       "category": "evaluation",
@@ -9770,54 +10026,6 @@
       "workspaceArea": "_history/request-traces"
     },
     {
-      "id": "history-user-requests-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-      "path": "_history/user-requests/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브",
-      "excerpt": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 요지: 소스 작업 화면의 버튼과 선택 드롭다운이 기본 브라우저 컨트롤처럼 보여 이상하므로 고쳐 달라는 요청. 지속 조건: 구현 후 사용자가 직접 빌드하지 않도록 자동 빌드까지 수행. 해석 최근 소스 편집 UX 작업의 후속 수정으로 보았다. 핵심 범위는 파일 선택 드롭다운, 소스 작업 버튼, 편집기 툴바 버튼, 워크스페이스 탐색기 명령 버튼이다. 전체 앱의 모든 <select 제거는 이번 요청의 직접 범위 밖으로 두었다.",
-      "html": "<p>사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 요지: 소스 작업 화면의 버튼과 선택 드롭다운이 기본 브라우저 컨트롤처럼 보여 이상하므로 고쳐 달라는 요청. 지속 조건: 구현 후 사용자가 직접 빌드하지 않도록 자동 빌드까지 수행. 해석 최근 소스 편집 UX 작업의 후속 수정으로 보았다. 핵심 범위는 파일 선택 드롭다운, 소스 작업 버튼, 편집기 툴바 버튼, 워크스페이스 탐색기 명령 버튼이다. 전체 앱의 모든 &lt;select 제거는 이번 요청의 직접 범위 밖으로 두었다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 664,
-      "updatedAt": "2026-06-05T13:52:28.065Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: 소스 워크벤치 컨트롤 프리미티브",
-      "excerpt": "작업 요약: 소스 워크벤치 컨트롤 프리미티브 MonitorShell.tsx 에서 소스 파일 목록 native <select 를 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 소스 열기/저장/전체 저장/복사 액션, 편집기 툴바, 소스 워크벤치 탭을 공용 Button / ActionGroup 으로 바꿨다. WorkspaceExplorerPane.tsx 의 폴더 선택/새로고침 명령 버튼도 공용 버튼 프리미티브로 통일했다. 드롭다운 메뉴, 선택 항목, 액션 그룹 레이아웃 CSS와",
-      "html": "<p>작업 요약: 소스 워크벤치 컨트롤 프리미티브 MonitorShell.tsx 에서 소스 파일 목록 native &lt;select 를 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 소스 열기/저장/전체 저장/복사 액션, 편집기 툴바, 소스 워크벤치 탭을 공용 Button / ActionGroup 으로 바꿨다. WorkspaceExplorerPane.tsx 의 폴더 선택/새로고침 명령 버튼도 공용 버튼 프리미티브로 통일했다. 드롭다운 메뉴, 선택 항목, 액션 그룹 레이아웃 CSS와 check source control design 계약을 갱신했다. 구현 후 내부 패키지 빌드까지 실행해 .app 와 .dmg 를 다시 만들었</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 921,
-      "updatedAt": "2026-06-05T13:52:28.065Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-      "path": "_history/web-searches/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브",
-      "excerpt": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 작업: Workspace Monitor 소스 작업 화면의 네이티브 파일 선택 드롭다운과 기본 버튼 느낌 제거 검색 Radix UI Dropdown Menu React docs DropdownMenu.Trigger Content Item official MDN HTML select element styling customizable select limitations 확인한 출처 Radix UI Dropdown Menu 공식 ",
-      "html": "<p>웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 작업: Workspace Monitor 소스 작업 화면의 네이티브 파일 선택 드롭다운과 기본 버튼 느낌 제거 검색 Radix UI Dropdown Menu React docs DropdownMenu.Trigger Content Item official MDN HTML select element styling customizable select limitations 확인한 출처 Radix UI Dropdown Menu 공식 문서: https://www.radix ui.com/primitives/docs/components/dropdown menu MDN Custom</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1523,
-      "updatedAt": "2026-06-05T13:52:28.064Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/tasks.ko.md",
       "category": "project-spec",
@@ -9880,102 +10088,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Workspace Monitor 공격적 네이티브 메모리 워밍",
-      "excerpt": "평가: Workspace Monitor 공격적 네이티브 메모리 워밍 판정 요청 충족. 기존 Rust cache를 더 공격적인 데스크톱 네이티브 경로로 확장했고, 앱 시작 시점부터 OS thread가 워크스페이스 자원을 읽어 앱 메모리에 올리도록 했다. 증거 warm workspace os resources 명령 추가. workspace resource warmup background thread 추가. Tauri setup startup warmup 추가. preload 한도 512 files/1",
-      "html": "<p>평가: Workspace Monitor 공격적 네이티브 메모리 워밍 판정 요청 충족. 기존 Rust cache를 더 공격적인 데스크톱 네이티브 경로로 확장했고, 앱 시작 시점부터 OS thread가 워크스페이스 자원을 읽어 앱 메모리에 올리도록 했다. 증거 warm workspace os resources 명령 추가. workspace resource warmup background thread 추가. Tauri setup startup warmup 추가. preload 한도 512 files/128MB, scan entry 40,000. renderer bootstrap과 workspace 변경/저장 후 background warmup</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1344,
-      "updatedAt": "2026-06-05T13:37:12.427Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-json",
-      "path": "_history/work-timings/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 05 Workspace Monitor Aggressive Native Warmup",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"2026 06 05 workspace monitor aggressive native warmup\", \"timings\": { \"phase\": \"research and inspection\", \"duration\": \"approximately 8 minutes\" }, { \"phase\": \"implementation\", \"duration\": \"approximately 20 minutes\" }, { \"phase\": \"verification",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request id&quot;: &quot;2026 06 05 workspace monitor aggressive native warmup&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;research and inspection&quot;, &quot;duration&quot;: &quot;approximately 8 minutes&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration&quot;: &quot;approximately 20 minutes&quot; }, { &quot;phase&quot;: &quot;verification and package build&quot;, &quot;duration&quot;: &quot;approximately 12 minutes&quot; }, { &quot;phase&quot;: &quot;recor</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 499,
-      "updatedAt": "2026-06-05T13:37:12.427Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-      "path": "_history/request-traces/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: Workspace Monitor 공격적 네이티브 메모리 워밍",
-      "excerpt": "요청 결과 추적: Workspace Monitor 공격적 네이티브 메모리 워밍 요청 메모리를 실제로 쓰고 운영체제 자원을 최대한 활용해 데스크톱 앱의 장점을 더 살릴 것. 결과 Tauri startup background warmup 추가. renderer bootstrap background warmup 추가. Rust shared memory cache를 512 files/128MB로 확장. source workbench UI에 memory budget/warming 상태 추가. 내부 패키지 ",
-      "html": "<p>요청 결과 추적: Workspace Monitor 공격적 네이티브 메모리 워밍 요청 메모리를 실제로 쓰고 운영체제 자원을 최대한 활용해 데스크톱 앱의 장점을 더 살릴 것. 결과 Tauri startup background warmup 추가. renderer bootstrap background warmup 추가. Rust shared memory cache를 512 files/128MB로 확장. source workbench UI에 memory budget/warming 상태 추가. 내부 패키지 빌드 완료. 연결 산출물 요구사항: platform desktop app/docs/requirements/2026 06 05 workspace </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 901,
-      "updatedAt": "2026-06-05T13:37:12.426Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-      "path": "_history/user-requests/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 실제 메모리와 OS 자원을 더 적극적으로 사용",
-      "excerpt": "사용자 요청 요약: 실제 메모리와 OS 자원을 더 적극적으로 사용 날짜: 2026 06 05 요약: 사용자는 기존 OS cache 구현도 충분히 공격적이지 않다고 보고, 데스크톱 앱의 장점을 살려 실제 앱 메모리와 운영체제 자원을 최대한 활용하라고 요구했다. 반영: Tauri startup background warmup, renderer bootstrap warmup, 512 files/128MB bounded memory preload, UI memory status. 지속 지시: 구현 완료 ",
-      "html": "<p>사용자 요청 요약: 실제 메모리와 OS 자원을 더 적극적으로 사용 날짜: 2026 06 05 요약: 사용자는 기존 OS cache 구현도 충분히 공격적이지 않다고 보고, 데스크톱 앱의 장점을 살려 실제 앱 메모리와 운영체제 자원을 최대한 활용하라고 요구했다. 반영: Tauri startup background warmup, renderer bootstrap warmup, 512 files/128MB bounded memory preload, UI memory status. 지속 지시: 구현 완료 후 자동 빌드까지 수행.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 517,
-      "updatedAt": "2026-06-05T13:37:12.426Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Workspace Monitor 공격적 네이티브 메모리 워밍",
-      "excerpt": "작업 요약: Workspace Monitor 공격적 네이티브 메모리 워밍 완료 Rust cache store를 Arc shared inner state로 바꿔 background OS thread가 cache를 갱신할 수 있게 했다. warm workspace os resources 명령과 WorkspaceResourceWarmupReport 를 추가했다. Tauri setup에서 앱 시작 즉시 workspace resource warmup thread를 시작한다. renderer bootstra",
-      "html": "<p>작업 요약: Workspace Monitor 공격적 네이티브 메모리 워밍 완료 Rust cache store를 Arc shared inner state로 바꿔 background OS thread가 cache를 갱신할 수 있게 했다. warm workspace os resources 명령과 WorkspaceResourceWarmupReport 를 추가했다. Tauri setup에서 앱 시작 즉시 workspace resource warmup thread를 시작한다. renderer bootstrap, workspace 변경, 저장 후 background warmup을 요청한다. preload 예산을 512개 파일/128MB로 늘리고 sc</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 845,
-      "updatedAt": "2026-06-05T13:37:12.426Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-      "path": "_history/web-searches/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Workspace Monitor 공격적 네이티브 메모리 워밍",
-      "excerpt": "웹 검색 기록: Workspace Monitor 공격적 네이티브 메모리 워밍 목적 사용자가 “메모리를 실제로 쓰고 운영체제 자원을 최대한 쓰라”고 지시했다. Tauri managed state, Rust command bridge, Rust OS thread 사용 경로를 공식 문서 기준으로 재확인했다. 검색어 Tauri 2 official setup app state background task Rust spawn managed state documentation Tauri 2 official a",
-      "html": "<p>웹 검색 기록: Workspace Monitor 공격적 네이티브 메모리 워밍 목적 사용자가 “메모리를 실제로 쓰고 운영체제 자원을 최대한 쓰라”고 지시했다. Tauri managed state, Rust command bridge, Rust OS thread 사용 경로를 공식 문서 기준으로 재확인했다. 검색어 Tauri 2 official setup app state background task Rust spawn managed state documentation Tauri 2 official async commands state management Rust app handle setup docs Rust std thread spawn </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1807,
-      "updatedAt": "2026-06-05T13:37:12.425Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-aggressive-native-warmup-traceability-ko-md",
@@ -10072,22 +10184,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-workspace-monitor-os-resource-cache-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-os-resource-cache.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Workspace Monitor OS 자원 기반 캐시",
-      "excerpt": "평가: Workspace Monitor OS 자원 기반 캐시 판정 요청 충족. 이전 렌더러 중심 최적화에서 빠졌던 네이티브 OS 자원 사용을 Tauri/Rust managed state와 filesystem scan/read cache로 보강했고, 내부 데스크톱 패키지 빌드까지 완료했다. 증거 WorkspaceResourceStore 와 prepare workspace os resources 추가. list workspace text files / read workspace text file 이 ",
-      "html": "<p>평가: Workspace Monitor OS 자원 기반 캐시 판정 요청 충족. 이전 렌더러 중심 최적화에서 빠졌던 네이티브 OS 자원 사용을 Tauri/Rust managed state와 filesystem scan/read cache로 보강했고, 내부 데스크톱 패키지 빌드까지 완료했다. 증거 WorkspaceResourceStore 와 prepare workspace os resources 추가. list workspace text files / read workspace text file 이 cache aware로 변경됨. workspace 선택/import/clone/write에서 cache invalidation 수행. Works</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1602,
-      "updatedAt": "2026-06-05T13:27:32.750Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-os-resource-cache-tasks-ko-md",
@@ -17688,137 +17784,41 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-service-readiness-spec-en-md",
-      "path": "platform-desktop-app/specs/2026-06-03-service-readiness/spec.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Spec: Real Service Readiness Surface",
-      "excerpt": "Spec: Real Service Readiness Surface Purpose Feature breadth is not enough for a real service. Operators must be able to see release, support, update, privacy, and onboarding risks inside the app. This improvement keeps internal builds usable while mechanically reporting public s",
-      "html": "<h1>Spec: Real Service Readiness Surface</h1>\n<h2>Purpose</h2>\n<p>Feature breadth is not enough for a real service. Operators must be able to see release, support, update, privacy, and onboarding risks inside the app. This improvement keeps internal builds usable while mechanically reporting public service release blockers.</p>\n<h2>Feature Scope</h2>\n<ul>\n<li>Add <code>platform-desktop-app/configs/service-readiness-registry.json</code>.</li>\n<li>Add <code>scripts/check-service-readiness.mjs</code> to report service readiness score, group status, blockers, warnings, and next actions in internal/public modes.</li>\n<li>Add <code>service:readiness</code> and <code>service:readiness:public:report</code> package scripts, and include internal service readiness in the default <code>check</code>.</li>\n<li>Add the Tauri <code>get_service_readiness_report</code> command.</li>\n<li>Add a Workspace Monitor Desktop <code>Service Readiness</code> panel with domain chips, score, public blockers, group checks, and next actions.</li>\n</ul>\n<h2>Non-Goals</h2>\n<ul>\n<li>Do not issue Developer ID certificates, store notarization secrets, or operate updater endpoints in this slice.</li>\n<li>Do not claim public release readiness.</li>\n<li>Do not claim clean-machine workspace smoke or native OS folder picker completion yet.</li>\n</ul>\n<h2>Acceptance Criteria</h2>\n<ul>\n<li>Internal readiness passes without internal blockers while reporting public blockers.</li>\n<li>Public readiness report shows signing/notarization, signed updater, and clean-machine smoke blockers.</li>\n<li>Desktop UI shows Service Readiness, Public blockers, Signed Distribution, and Update &amp; Recovery.</li>\n<li>Node, TypeScript, Rust, and Tauri validation pass.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1518,
-      "updatedAt": "2026-06-03T05:02:29.340Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-service-readiness-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-service-readiness/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: 실제 서비스 준비도 표면",
-      "excerpt": "스펙: 실제 서비스 준비도 표면 목적 기능이 있어도 실제 서비스라고 부르려면 운영자가 출시/지원/업데이트/개인정보 위험을 앱 안에서 볼 수 있어야 한다. 이번 개선은 internal build는 계속 개발 가능하게 유지하면서, public service release blocker를 숨기지 않고 기계적으로 보고하는 서비스 준비도 표면을 추가한다. 기능 범위 platform desktop app/configs/service readiness registry.json 를 추가한다. scripts/ch",
-      "html": "<h1>스펙: 실제 서비스 준비도 표면</h1>\n<h2>목적</h2>\n<p>기능이 있어도 실제 서비스라고 부르려면 운영자가 출시/지원/업데이트/개인정보 위험을 앱 안에서 볼 수 있어야 한다. 이번 개선은 internal build는 계속 개발 가능하게 유지하면서, public service release blocker를 숨기지 않고 기계적으로 보고하는 서비스 준비도 표면을 추가한다.</p>\n<h2>기능 범위</h2>\n<ul>\n<li><code>platform-desktop-app/configs/service-readiness-registry.json</code>를 추가한다.</li>\n<li><code>scripts/check-service-readiness.mjs</code>는 internal/public 모드에서 서비스 준비도 score, group status, blocker, warning, next action을 보고한다.</li>\n<li><code>package.json</code>은 <code>service:readiness</code>, <code>service:readiness:public:report</code>를 제공하고 기본 <code>check</code>에 internal service readiness를 포함한다.</li>\n<li>Tauri는 <code>get_service_readiness_report</code> command를 제공한다.</li>\n<li>Workspace Monitor Desktop은 <code>Service Readiness</code> 패널에서 도메인 chip, score, public blockers, group checks, next actions를 표시한다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>Developer ID 인증서 발급, notarization secret 저장, updater endpoint 운영은 이번 slice에서 수행하지 않는다.</li>\n<li>public release ready라고 주장하지 않는다.</li>\n<li>clean-machine workspace smoke와 OS별 native folder picker까지 완료했다고 주장하지 않는다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>internal readiness는 blocker 없이 통과하되 public blockers를 보고한다.</li>\n<li>public readiness report는 signing/notarization, signed updater, clean-machine smoke blocker를 표시한다.</li>\n<li>Desktop UI는 Service Readiness, Public blockers, Signed Distribution, Update &amp; Recovery를 표시한다.</li>\n<li>Node/TypeScript/Rust/Tauri 검증이 통과한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1731,
-      "updatedAt": "2026-06-03T05:02:02.509Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-03-service-readiness-en-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-03-service-readiness.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Service Readiness Requirements",
-      "excerpt": "Service Readiness Requirements | ID | Requirement | Priority | Verification | | | | | | | REQ PDA 048 | The desktop platform shall maintain a service readiness registry that distinguishes internal/local builds, customer test builds, and public service releases. | must | service r",
-      "html": "<h1>Service Readiness Requirements</h1>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Verification</th></tr></thead><tbody><tr><td>REQ-PDA-048</td><td>The desktop platform shall maintain a service-readiness registry that distinguishes internal/local builds, customer test builds, and public service releases.</td><td>must</td><td><code>service-readiness-registry.json</code>, config contract</td></tr><tr><td>REQ-PDA-049</td><td>Service readiness shall evaluate runtime data, customer payload, support diagnostics, workspace onboarding, privacy/logging, signed distribution, and update/recovery by group.</td><td>must</td><td><code>check-service-readiness.mjs</code>, <code>get_service_readiness_report</code></td></tr><tr><td>REQ-PDA-050</td><td>Public release blockers shall not block internal development checks, but shall be visible in the public service readiness report and UI.</td><td>must</td><td><code>service:readiness</code>, <code>service:readiness:public:report</code>, Desktop Service Readiness UI</td></tr><tr><td>REQ-PDA-051</td><td>The installed app shall let operators inspect service score, blockers, warnings, and next actions without reading the source repository.</td><td>must</td><td>Workspace Monitor Desktop <code>Service Readiness</code> panel</td></tr><tr><td>REQ-PDA-052</td><td>Missing signed updater, Developer ID signing/notarization, or clean-machine smoke shall keep public service release blocked.</td><td>must</td><td>service readiness public report</td></tr><tr><td>REQ-PDA-053</td><td>Workspace onboarding shall provide import, clone, and active workspace persistence through in-app workspace host commands and UI.</td><td>must</td><td><code>get_desktop_workspace_state</code>, Workspace Host panel</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1466,
-      "updatedAt": "2026-06-03T05:01:52.437Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-03-service-readiness-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-03-service-readiness.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "Service Readiness 요구사항",
-      "excerpt": "Service Readiness 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | REQ PDA 048 | 데스크톱 플랫폼은 internal/local build, customer test build, public service release를 구분하는 서비스 준비도 registry를 가져야 한다. | must | service readiness registry.json , config contract | | REQ PDA 049 | 서비스 준비도는 runtime dat",
-      "html": "<h1>Service Readiness 요구사항</h1>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-048</td><td>데스크톱 플랫폼은 internal/local build, customer test build, public service release를 구분하는 서비스 준비도 registry를 가져야 한다.</td><td>must</td><td><code>service-readiness-registry.json</code>, config contract</td></tr><tr><td>REQ-PDA-049</td><td>서비스 준비도는 runtime data, customer payload, support diagnostics, workspace onboarding, privacy/logging, signed distribution, update/recovery를 그룹별로 평가해야 한다.</td><td>must</td><td><code>check-service-readiness.mjs</code>, <code>get_service_readiness_report</code></td></tr><tr><td>REQ-PDA-050</td><td>public release blocker는 내부 개발 check를 막지 않되, 공개 서비스 readiness report와 UI에서 명확히 보여야 한다.</td><td>must</td><td><code>service:readiness</code>, <code>service:readiness:public:report</code>, Desktop Service Readiness UI</td></tr><tr><td>REQ-PDA-051</td><td>설치형 앱은 운영자가 source repository를 읽지 않아도 서비스 score, blocker, warning, next action을 확인할 수 있어야 한다.</td><td>must</td><td>Workspace Monitor Desktop <code>Service Readiness</code> panel</td></tr><tr><td>REQ-PDA-052</td><td>signed updater, Developer ID signing/notarization, clean-machine smoke가 없으면 public service release는 blocked로 남아야 한다.</td><td>must</td><td>service readiness public report</td></tr><tr><td>REQ-PDA-053</td><td>workspace onboarding은 앱 내부 workspace host command와 UI로 import/clone/active workspace persistence를 제공해야 한다.</td><td>must</td><td><code>get_desktop_workspace_state</code>, Workspace Host panel</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1509,
-      "updatedAt": "2026-06-03T05:01:42.856Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-accumulated-data-surface-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-accumulated-data-surface/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Accumulated Data Surface 검증",
-      "excerpt": "Accumulated Data Surface 검증 현재 통과 cargo fmt : 통과. cargo check from platform desktop app/src tauri/ : 통과. corepack pnpm filter workspace monitor run check : 통과. corepack pnpm filter platform desktop app test : 통과, 14 tests. corepack pnpm filter platform desktop app run runtime:con",
-      "html": "<h1>Accumulated Data Surface 검증</h1>\n<h2>현재 통과</h2>\n<ul>\n<li><code>cargo fmt</code>: 통과.</li>\n<li><code>cargo check</code> from <code>platform-desktop-app/src-tauri/</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 14 tests.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run runtime:contract</code>: 통과, 9 accumulation targets.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 16 tests.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: <code>within_budget</code>, largest initial chunk 227542 bytes.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run customer-bundle:audit</code>: 통과.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/runtime-data-boundary-registry.json</code>: 통과.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code>: 통과.</li>\n<li>Browser smoke: Runtime 화면에서 <code>축적 데이터 인덱스</code> 패널, command button, store grid 렌더링 확인. body/doc width 1280/1280, horizontal overflow false.</li>\n<li>Browser smoke: Accumulated Data panel에서 <code>format</code>, <code>manifest-pending</code>, <code>Refresh Index</code>, <code>.accumulated-store-grid</code>, <code>.accumulated-data-panel</code> 확인. body/doc width 1280/1280, horizontal overflow false.</li>\n<li>Storage format smoke: readiness/runtime contract checks가 <code>runtime_data_index_manifest</code>, <code>accumulated-data-overview.v1.json</code>, <code>schemaVersion</code>, <code>storageFormatVersion</code>, <code>indexPath</code>, <code>formatMigrationStatus</code>를 검증.</li>\n<li><code>git diff --check</code>: 통과.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1721,
-      "updatedAt": "2026-06-03T04:43:17.132Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-architecture-installer-shell-runtime-contract-en-md",
-      "path": "platform-desktop-app/docs/architecture/installer-shell-runtime-contract.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Installer Shell Runtime Contract",
-      "excerpt": "Installer Shell Runtime Contract Decision The core purpose of platform desktop app/ is to build the installer and the installed desktop app shell/runtime. That shell must not interpret this repository as a loose document bundle; it reads the bundled runtime contracts/installer sh",
-      "html": "<h1>Installer Shell Runtime Contract</h1>\n<h2>Decision</h2>\n<p>The core purpose of <code>platform-desktop-app/</code> is to build the installer and the installed desktop app shell/runtime. That shell must not interpret this repository as a loose document bundle; it reads the bundled <code>runtime-contracts/installer-shell-runtime-contract.json</code> before starting work.</p>\n<h2>Structure</h2>\n<ul>\n<li><code>runtime-contracts/installer-shell-runtime-contract.json</code>: shell-readable source of truth defining required read targets, enforcement gates, and data accumulation targets.</li>\n<li><code>runtime-contracts/installer-shell-bootstrap.en.md</code>: human-readable shell bootstrap sequence.</li>\n<li><code>scripts/check-runtime-contract.mjs</code>: validates the contract file, Tauri resource mapping, Rust command, required gates, and data accumulation targets.</li>\n<li><code>src-tauri/tauri.conf.json</code>: bundles the runtime contract and bootstrap documents as app resources.</li>\n<li><code>src-tauri/src/lib.rs</code>: exposes <code>get_installer_shell_runtime_contract</code> to read the contract from bundled resources or the development repository.</li>\n</ul>\n<h2>Execution Principle</h2>\n<p>The shell/runtime launched by the installed app is the platform-first host. External tools such as Codex CLI, Claude Code CLI, Gemini CLI, and OpenCode are guest adapter lanes; missing CLIs degrade as <code>capability_missing</code>. The platform owns task state, decision inbox, evidence, validation, evaluation, and UI authority.</p>\n<h2>Data Accumulation</h2>\n<p>Work results are not kept only as shell output. The platform accumulates user requests, request traces, decision inbox items, task run records, structured evidence, validation/evaluation records, work timing, and support diagnostic bundles. Each record needs provenance plus retention and visibility boundaries.</p>\n<p>The user-facing accumulated data overview is not only a raw store scan. <code>get_accumulated_data_overview</code> persists a versioned manifest at <code>app_data/runtime-data/indexes/accumulated-data-overview.v1.json</code>, and the Desktop UI shows schema version, storage format version, migration status, and index path.</p>\n<h2>Distribution Boundary</h2>\n<p>The contract is bundled as a Tauri resource, but <code>_private/</code>, <code>outputs/</code>, <code>.git/</code>, and the full development source tree are not product payloads. Public readiness still requires signing, updater, clean-machine smoke, privacy review, and dependency review gates.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2302,
-      "updatedAt": "2026-06-03T04:35:23.307Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 83,
+      "documentsCount": 93,
       "categories": [
         {
           "category": "evaluation",
-          "count": 25
+          "count": 29
         },
         {
           "category": "request-trace",
-          "count": 11
+          "count": 12
         },
         {
           "category": "user-request",
-          "count": 11
+          "count": 12
         },
         {
           "category": "web-search",
-          "count": 11
+          "count": 12
         },
         {
           "category": "work-summary",
-          "count": 11
+          "count": 12
         },
         {
           "category": "work-timing",
-          "count": 11
+          "count": 12
         },
         {
           "category": "plan",
-          "count": 3
+          "count": 4
         }
       ],
       "documents": [
@@ -18073,6 +18073,46 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Workbench Lazy Boundary Expansion Evaluation Input",
+          "excerpt": "{ \"initial instruction\": \"Continue and implement all remaining desktop app performance follow up items from the previous root boundary review.\", \"result summary\": \"Expanded Workspace Monitor heavy workbench panels into Next dynamic boundaries, split Agents detail/build panels int",
+          "updatedAt": "2026-06-05T18:29:48.844Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-omission-json",
+          "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion-omission.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Workbench Lazy Boundary Expansion Omission",
+          "excerpt": "{ \"task\": \"Expand workbench lazy boundaries and verify desktop app performance/package output.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"continue followups\", \"description\": \"Continue the previous root boundary follow up items rather than stopping at the first spl",
+          "updatedAt": "2026-06-05T18:29:48.844Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-resource-json",
+          "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion-resource.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Workbench Lazy Boundary Expansion Resource",
+          "excerpt": "{ \"task\": \"Expand workbench lazy boundaries and verify desktop app performance/package output.\", \"work mode\": \"standard\", \"runtime context\": \"Next.js static renderer build\", \"React dynamic imports\", \"Playwright Chromium performance probes\", \"Python static file server\", \"Rust/Taur",
+          "updatedAt": "2026-06-05T18:29:48.845Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "최종 평가: Workbench lazy boundary 확장",
+          "excerpt": "최종 평가: Workbench lazy boundary 확장 결론 작업은 닫을 수 있다. 사용자의 남은 성능 후속 요청에 대해 Shell local heavy panels를 lazy boundaries로 확장했고, renderer build, internal package build, section/button performance audits가 모두 통과했다. 결과 Agents detail/build panels가 별도 modules로 분리됐다. Desktop/runtime/home featur",
+          "updatedAt": "2026-06-05T18:29:48.844Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-plans-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
           "path": "_history/plans/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
           "category": "plan",
@@ -18100,6 +18140,16 @@
           "title": "작업 계획: startup resident prewarm 속도 최적화",
           "excerpt": "작업 계획: startup resident prewarm 속도 최적화 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 근거 사용자는 탭 이동 지연을 다시 지적했고, 데스크톱 앱의 RAM/CPU 활용을 요구했다. 기존 bounded resident work는 hidden mounted panel cap을 세웠지만, 첫 전환의 mount 비용은 여전히 남았다. 실",
           "updatedAt": "2026-06-05T17:44:13.223Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-plans-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+          "path": "_history/plans/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "작업 계획: Workbench lazy boundary 확장",
+          "excerpt": "작업 계획: Workbench lazy boundary 확장 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 계획 이전 root boundary 작업에서 다음 병목으로 남긴 DesktopRuntimePanel 과 Agents detail panels를 대상으로 한다. 목표는 모든 탭을 한 번에 재작성하는 것이 아니라, Shell local heavy UI를 실",
+          "updatedAt": "2026-06-05T18:29:48.842Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18213,6 +18263,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: Workbench lazy boundary 확장",
+          "excerpt": "요청 결과 추적: Workbench lazy boundary 확장 요청 사용자는 이전 성능 개선 후속으로 “그것들 다”라고 요청했다. 결과 남은 Shell local heavy panels를 lazy boundaries로 확장했다. Agents detail/build panels를 별도 파일로 분리했다. prewarm과 button feedback 측정을 안정화했다. 내부 .app 와 .dmg 패키징을 완료했다. 연결 파일 구현: platform desktop app/renderer/workspa",
+          "updatedAt": "2026-06-05T18:29:48.843Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-button-tonal-hierarchy-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-button-tonal-hierarchy.ko.md",
           "category": "user-request",
@@ -18320,6 +18380,16 @@
           "title": "사용자 요청 요약: 탭 상주 선마운트 최적화",
           "excerpt": "사용자 요청 요약: 탭 상주 선마운트 최적화 사용자는 Workspace Monitor 탭 이동이 여전히 매우 느리다고 보고했다. 원인 후보로 탭 이동 때마다 많은 화면이 새로 불러오고 마운트되는 구조를 지적했고, 앱 시작 시 미리 모든 탭을 불러와 메모리에 두거나 전역적으로 보관해 탭 전환 비용을 줄이는 근본적 해결을 요청했다. 수용 기준 클릭 시점의 탭 mount 비용을 줄인다. 데스크톱 앱답게 RAM 사용을 더 허용한다. 구현 완료 후 사용자가 직접 빌드하지 않도록 빌드까지 자동 실행한다.",
           "updatedAt": "2026-06-05T16:46:46.755Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: Workbench lazy boundary 확장",
+          "excerpt": "사용자 요청 요약: Workbench lazy boundary 확장 요약 사용자는 이전 성능 개선의 후속으로 남은 것들을 모두 처리하라고 요청했다. 맥락상 탭 전환 지연, renderer mount/import 비용, 데스크톱 자원 활용, 자동 build/package 요구를 포함한다. 해석 이전 MonitorShell root boundary 평가에서 후속으로 남긴 Desktop runtime 및 Agents panel boundary를 구현 대상으로 삼는다. 단순 스타일 변경이 아니라 lazy",
+          "updatedAt": "2026-06-05T18:29:48.843Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18433,6 +18503,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-web-searches-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: Workbench lazy boundary 확장",
+          "excerpt": "웹 검색 기록: Workbench lazy boundary 확장 목적 사용자의 “그것들 다” 요청을 이전 root boundary 후속 작업으로 해석하고, React/Next renderer code splitting, main thread responsiveness, long task 완화 기준을 다시 확인했다. 검색어 React official docs lazy memo Profiler startTransition performance Next.js official docs dynamic im",
+          "updatedAt": "2026-06-05T18:29:48.842Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
           "category": "work-summary",
@@ -18540,6 +18620,16 @@
           "title": "작업 요약: 탭 상주 선마운트 최적화",
           "excerpt": "작업 요약: 탭 상주 선마운트 최적화 Workspace Monitor의 주요 탭을 클릭할 때마다 새로 마운트하지 않도록 resident section 상태와 idle 선마운트 계획을 추가했다. 탭 pointerdown과 activation 시 대상 섹션을 즉시 resident로 표시하고, 이후 idle 시간에 나머지 visible section을 순차적으로 메모리에 올린다. 변경 MonitorShell.tsx : residentSectionIds , residentSectionMountPlan ,",
           "updatedAt": "2026-06-05T16:50:32.195Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Workbench lazy boundary 확장",
+          "excerpt": "작업 요약: Workbench lazy boundary 확장 완료 내용 DesktopRuntimePanel , home feature panels, workspace/native/runtime panels, Agents detail/build panels를 next/dynamic boundary로 연결했다. Agents collaboration/inventory/runtime overview를 AgentDetailPanels.tsx 로 분리했다. AgentCore blueprint, agent f",
+          "updatedAt": "2026-06-05T18:29:48.843Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18651,37 +18741,35 @@
           "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 tab resident preload\", \"phases\": { \"phase\": \"web first intake\", \"duration minutes estimate\": 5 }, { \"phase\": \"source inspection\", \"duration minutes estimate\": 10 }, { \"phase\": \"implementation\", \"duration minutes estimate\": 25 }, {",
           "updatedAt": "2026-06-05T16:50:32.195Z",
           "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-workbench-lazy-boundary-expansion-json",
+          "path": "_history/work-timings/2026/2026-06-06-workbench-lazy-boundary-expansion.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Workbench Lazy Boundary Expansion",
+          "excerpt": "{ \"task id\": \"2026 06 06 workbench lazy boundary expansion\", \"title\": \"Workbench lazy boundary expansion\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\"",
+          "updatedAt": "2026-06-05T18:29:48.846Z",
+          "historyDate": "2026-06-06"
         }
       ]
     },
     {
       "date": "2026-06-05",
       "year": "2026",
-      "documentsCount": 13,
+      "documentsCount": 3,
       "categories": [
         {
           "category": "evaluation",
-          "count": 3
+          "count": 1
         },
         {
           "category": "request-trace",
-          "count": 2
-        },
-        {
-          "category": "user-request",
-          "count": 2
-        },
-        {
-          "category": "web-search",
-          "count": 2
-        },
-        {
-          "category": "work-summary",
-          "count": 2
+          "count": 1
         },
         {
           "category": "work-timing",
-          "count": 2
+          "count": 1
         }
       ],
       "documents": [
@@ -18696,26 +18784,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-evaluations-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Workspace Monitor 공격적 네이티브 메모리 워밍",
-          "excerpt": "평가: Workspace Monitor 공격적 네이티브 메모리 워밍 판정 요청 충족. 기존 Rust cache를 더 공격적인 데스크톱 네이티브 경로로 확장했고, 앱 시작 시점부터 OS thread가 워크스페이스 자원을 읽어 앱 메모리에 올리도록 했다. 증거 warm workspace os resources 명령 추가. workspace resource warmup background thread 추가. Tauri setup startup warmup 추가. preload 한도 512 files/1",
-          "updatedAt": "2026-06-05T13:37:12.427Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-workspace-monitor-os-resource-cache-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-os-resource-cache.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Workspace Monitor OS 자원 기반 캐시",
-          "excerpt": "평가: Workspace Monitor OS 자원 기반 캐시 판정 요청 충족. 이전 렌더러 중심 최적화에서 빠졌던 네이티브 OS 자원 사용을 Tauri/Rust managed state와 filesystem scan/read cache로 보강했고, 내부 데스크톱 패키지 빌드까지 완료했다. 증거 WorkspaceResourceStore 와 prepare workspace os resources 추가. list workspace text files / read workspace text file 이 ",
-          "updatedAt": "2026-06-05T13:27:32.750Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-05-source-workbench-control-primitives-ko-md",
           "path": "_history/request-traces/2026/2026-06-05-source-workbench-control-primitives.ko.md",
           "category": "request-trace",
@@ -18723,76 +18791,6 @@
           "title": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브",
           "excerpt": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브 요청 기본 버튼/기본 선택 드롭다운처럼 보이는 소스 작업 UI를 수정. 구현 완료 후 자동 빌드. 결과 소스 파일 선택 드롭다운은 Radix DropdownMenu로 교체. 파일 작업/툴바/워크벤치 탭/탐색기 명령 버튼은 공용 Button / ActionGroup 사용. 기존 소스 편집 UX 요구사항과 스펙에 새 요구사항 REQ DESKTOP UX 2026 06 05 004 추가. 고객용 렌더러 빌드와 내부 Tauri .app / .dmg 패키지 ",
           "updatedAt": "2026-06-05T13:52:28.066Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-          "path": "_history/request-traces/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: Workspace Monitor 공격적 네이티브 메모리 워밍",
-          "excerpt": "요청 결과 추적: Workspace Monitor 공격적 네이티브 메모리 워밍 요청 메모리를 실제로 쓰고 운영체제 자원을 최대한 활용해 데스크톱 앱의 장점을 더 살릴 것. 결과 Tauri startup background warmup 추가. renderer bootstrap background warmup 추가. Rust shared memory cache를 512 files/128MB로 확장. source workbench UI에 memory budget/warming 상태 추가. 내부 패키지 ",
-          "updatedAt": "2026-06-05T13:37:12.426Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-          "path": "_history/user-requests/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브",
-          "excerpt": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 요지: 소스 작업 화면의 버튼과 선택 드롭다운이 기본 브라우저 컨트롤처럼 보여 이상하므로 고쳐 달라는 요청. 지속 조건: 구현 후 사용자가 직접 빌드하지 않도록 자동 빌드까지 수행. 해석 최근 소스 편집 UX 작업의 후속 수정으로 보았다. 핵심 범위는 파일 선택 드롭다운, 소스 작업 버튼, 편집기 툴바 버튼, 워크스페이스 탐색기 명령 버튼이다. 전체 앱의 모든 <select 제거는 이번 요청의 직접 범위 밖으로 두었다.",
-          "updatedAt": "2026-06-05T13:52:28.065Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-          "path": "_history/user-requests/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: 실제 메모리와 OS 자원을 더 적극적으로 사용",
-          "excerpt": "사용자 요청 요약: 실제 메모리와 OS 자원을 더 적극적으로 사용 날짜: 2026 06 05 요약: 사용자는 기존 OS cache 구현도 충분히 공격적이지 않다고 보고, 데스크톱 앱의 장점을 살려 실제 앱 메모리와 운영체제 자원을 최대한 활용하라고 요구했다. 반영: Tauri startup background warmup, renderer bootstrap warmup, 512 files/128MB bounded memory preload, UI memory status. 지속 지시: 구현 완료 ",
-          "updatedAt": "2026-06-05T13:37:12.426Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-          "path": "_history/web-searches/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브",
-          "excerpt": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 작업: Workspace Monitor 소스 작업 화면의 네이티브 파일 선택 드롭다운과 기본 버튼 느낌 제거 검색 Radix UI Dropdown Menu React docs DropdownMenu.Trigger Content Item official MDN HTML select element styling customizable select limitations 확인한 출처 Radix UI Dropdown Menu 공식 ",
-          "updatedAt": "2026-06-05T13:52:28.064Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-          "path": "_history/web-searches/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: Workspace Monitor 공격적 네이티브 메모리 워밍",
-          "excerpt": "웹 검색 기록: Workspace Monitor 공격적 네이티브 메모리 워밍 목적 사용자가 “메모리를 실제로 쓰고 운영체제 자원을 최대한 쓰라”고 지시했다. Tauri managed state, Rust command bridge, Rust OS thread 사용 경로를 공식 문서 기준으로 재확인했다. 검색어 Tauri 2 official setup app state background task Rust spawn managed state documentation Tauri 2 official a",
-          "updatedAt": "2026-06-05T13:37:12.425Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: 소스 워크벤치 컨트롤 프리미티브",
-          "excerpt": "작업 요약: 소스 워크벤치 컨트롤 프리미티브 MonitorShell.tsx 에서 소스 파일 목록 native <select 를 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 소스 열기/저장/전체 저장/복사 액션, 편집기 툴바, 소스 워크벤치 탭을 공용 Button / ActionGroup 으로 바꿨다. WorkspaceExplorerPane.tsx 의 폴더 선택/새로고침 명령 버튼도 공용 버튼 프리미티브로 통일했다. 드롭다운 메뉴, 선택 항목, 액션 그룹 레이아웃 CSS와",
-          "updatedAt": "2026-06-05T13:52:28.065Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Workspace Monitor 공격적 네이티브 메모리 워밍",
-          "excerpt": "작업 요약: Workspace Monitor 공격적 네이티브 메모리 워밍 완료 Rust cache store를 Arc shared inner state로 바꿔 background OS thread가 cache를 갱신할 수 있게 했다. warm workspace os resources 명령과 WorkspaceResourceWarmupReport 를 추가했다. Tauri setup에서 앱 시작 즉시 workspace resource warmup thread를 시작한다. renderer bootstra",
-          "updatedAt": "2026-06-05T13:37:12.426Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18804,16 +18802,6 @@
           "excerpt": "{ \"task\": \"source workbench control primitives\", \"date\": \"2026 06 05\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first and local inspection\", \"approx minutes\": 12 }, { \"phase\": \"implementation\", \"approx minutes\": 28 }, { \"phase\": \"tests and package build\", \"approx minut",
           "updatedAt": "2026-06-05T13:52:28.067Z",
           "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-json",
-          "path": "_history/work-timings/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 05 Workspace Monitor Aggressive Native Warmup",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"2026 06 05 workspace monitor aggressive native warmup\", \"timings\": { \"phase\": \"research and inspection\", \"duration\": \"approximately 8 minutes\" }, { \"phase\": \"implementation\", \"duration\": \"approximately 20 minutes\" }, { \"phase\": \"verification",
-          "updatedAt": "2026-06-05T13:37:12.427Z",
-          "historyDate": "2026-06-05"
         }
       ]
     }
@@ -18824,36 +18812,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2355,
+      "documents": 2365,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 958
+          "count": 962
         },
         {
           "category": "web-search",
-          "count": 377
+          "count": 378
         },
         {
           "category": "plan",
-          "count": 331
+          "count": 332
         },
         {
           "category": "request-trace",
-          "count": 306
+          "count": 307
         },
         {
           "category": "work-timing",
-          "count": 228
+          "count": 229
         },
         {
           "category": "user-request",
-          "count": 90
+          "count": 91
         },
         {
           "category": "work-summary",
-          "count": 57
+          "count": 58
         },
         {
           "category": "daily-history",
@@ -18864,7 +18852,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6207350,
+      "totalSourceBytes": 6226415,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18889,11 +18877,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 41,
+      "evidenceEvents": 42,
       "decisionEvents": 0,
       "openSignals": 21,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T17:55:21.496Z",
+      "latestEventAt": "2026-06-05T18:29:48.846Z",
       "historyDays": 2
     },
     "lanes": [
@@ -18905,22 +18893,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 28
-      },
-      {
-        "id": "delivery",
-        "label": "delivery",
-        "count": 13
-      },
-      {
-        "id": "evidence",
-        "label": "evidence",
-        "count": 13
-      },
-      {
-        "id": "intake",
-        "label": "intake",
-        "count": 13
+        "count": 30
       },
       {
         "id": "monitoring",
@@ -18933,9 +18906,24 @@
         "count": 13
       },
       {
+        "id": "delivery",
+        "label": "delivery",
+        "count": 12
+      },
+      {
+        "id": "evidence",
+        "label": "evidence",
+        "count": 12
+      },
+      {
+        "id": "intake",
+        "label": "intake",
+        "count": 12
+      },
+      {
         "id": "planning",
         "label": "planning",
-        "count": 3
+        "count": 4
       }
     ],
     "signalTypes": [
@@ -18947,17 +18935,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 28
-      },
-      {
-        "id": "intake",
-        "label": "intake",
-        "count": 13
-      },
-      {
-        "id": "summary",
-        "label": "summary",
-        "count": 13
+        "count": 30
       },
       {
         "id": "timing",
@@ -18970,14 +18948,24 @@
         "count": 13
       },
       {
+        "id": "intake",
+        "label": "intake",
+        "count": 12
+      },
+      {
+        "id": "summary",
+        "label": "summary",
+        "count": 12
+      },
+      {
         "id": "web-search",
         "label": "web search",
-        "count": 13
+        "count": 12
       },
       {
         "id": "plan",
         "label": "plan",
-        "count": 3
+        "count": 4
       }
     ],
     "sourceTypes": [
@@ -18993,6 +18981,156 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-workbench-lazy-boundary-expansion-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 Workbench Lazy Boundary Expansion",
+        "detail": "{ \"task id\": \"2026 06 06 workbench lazy boundary expansion\", \"title\": \"Workbench lazy boundary expansion\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\"",
+        "path": "_history/work-timings/2026/2026-06-06-workbench-lazy-boundary-expansion.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:29:48.846Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-resource-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Workbench Lazy Boundary Expansion Resource",
+        "detail": "{ \"task\": \"Expand workbench lazy boundaries and verify desktop app performance/package output.\", \"work mode\": \"standard\", \"runtime context\": \"Next.js static renderer build\", \"React dynamic imports\", \"Playwright Chromium performance probes\", \"Python static file server\", \"Rust/Taur",
+        "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion-resource.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:29:48.845Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Workbench Lazy Boundary Expansion Evaluation Input",
+        "detail": "{ \"initial instruction\": \"Continue and implement all remaining desktop app performance follow up items from the previous root boundary review.\", \"result summary\": \"Expanded Workspace Monitor heavy workbench panels into Next dynamic boundaries, split Agents detail/build panels int",
+        "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:29:48.844Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-omission-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Workbench Lazy Boundary Expansion Omission",
+        "detail": "{ \"task\": \"Expand workbench lazy boundaries and verify desktop app performance/package output.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"continue followups\", \"description\": \"Continue the previous root boundary follow up items rather than stopping at the first spl",
+        "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion-omission.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:29:48.844Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "최종 평가: Workbench lazy boundary 확장",
+        "detail": "최종 평가: Workbench lazy boundary 확장 결론 작업은 닫을 수 있다. 사용자의 남은 성능 후속 요청에 대해 Shell local heavy panels를 lazy boundaries로 확장했고, renderer build, internal package build, section/button performance audits가 모두 통과했다. 결과 Agents detail/build panels가 별도 modules로 분리됐다. Desktop/runtime/home featur",
+        "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:29:48.844Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 추적: Workbench lazy boundary 확장",
+        "detail": "요청 결과 추적: Workbench lazy boundary 확장 요청 사용자는 이전 성능 개선 후속으로 “그것들 다”라고 요청했다. 결과 남은 Shell local heavy panels를 lazy boundaries로 확장했다. Agents detail/build panels를 별도 파일로 분리했다. prewarm과 button feedback 측정을 안정화했다. 내부 .app 와 .dmg 패키징을 완료했다. 연결 파일 구현: platform desktop app/renderer/workspa",
+        "path": "_history/request-traces/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:29:48.843Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: Workbench lazy boundary 확장",
+        "detail": "사용자 요청 요약: Workbench lazy boundary 확장 요약 사용자는 이전 성능 개선의 후속으로 남은 것들을 모두 처리하라고 요청했다. 맥락상 탭 전환 지연, renderer mount/import 비용, 데스크톱 자원 활용, 자동 build/package 요구를 포함한다. 해석 이전 MonitorShell root boundary 평가에서 후속으로 남긴 Desktop runtime 및 Agents panel boundary를 구현 대상으로 삼는다. 단순 스타일 변경이 아니라 lazy",
+        "path": "_history/user-requests/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:29:48.843Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약: Workbench lazy boundary 확장",
+        "detail": "작업 요약: Workbench lazy boundary 확장 완료 내용 DesktopRuntimePanel , home feature panels, workspace/native/runtime panels, Agents detail/build panels를 next/dynamic boundary로 연결했다. Agents collaboration/inventory/runtime overview를 AgentDetailPanels.tsx 로 분리했다. AgentCore blueprint, agent f",
+        "path": "_history/work-summaries/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:29:48.843Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: Workbench lazy boundary 확장",
+        "detail": "웹 검색 기록: Workbench lazy boundary 확장 목적 사용자의 “그것들 다” 요청을 이전 root boundary 후속 작업으로 해석하고, React/Next renderer code splitting, main thread responsiveness, long task 완화 기준을 다시 확인했다. 검색어 React official docs lazy memo Profiler startTransition performance Next.js official docs dynamic im",
+        "path": "_history/web-searches/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:29:48.842Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "작업 계획: Workbench lazy boundary 확장",
+        "detail": "작업 계획: Workbench lazy boundary 확장 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 계획 이전 root boundary 작업에서 다음 병목으로 남긴 DesktopRuntimePanel 과 Agents detail panels를 대상으로 한다. 목표는 모든 탭을 한 번에 재작성하는 것이 아니라, Shell local heavy UI를 실",
+        "path": "_history/plans/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:29:48.842Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-06-monitor-shell-root-boundary-json",
         "sourceType": "history",
@@ -20282,156 +20420,6 @@
         "language": "ko",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T13:52:28.066Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브",
-        "detail": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 요지: 소스 작업 화면의 버튼과 선택 드롭다운이 기본 브라우저 컨트롤처럼 보여 이상하므로 고쳐 달라는 요청. 지속 조건: 구현 후 사용자가 직접 빌드하지 않도록 자동 빌드까지 수행. 해석 최근 소스 편집 UX 작업의 후속 수정으로 보았다. 핵심 범위는 파일 선택 드롭다운, 소스 작업 버튼, 편집기 툴바 버튼, 워크스페이스 탐색기 명령 버튼이다. 전체 앱의 모든 <select 제거는 이번 요청의 직접 범위 밖으로 두었다.",
-        "path": "_history/user-requests/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:52:28.065Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: 소스 워크벤치 컨트롤 프리미티브",
-        "detail": "작업 요약: 소스 워크벤치 컨트롤 프리미티브 MonitorShell.tsx 에서 소스 파일 목록 native <select 를 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 소스 열기/저장/전체 저장/복사 액션, 편집기 툴바, 소스 워크벤치 탭을 공용 Button / ActionGroup 으로 바꿨다. WorkspaceExplorerPane.tsx 의 폴더 선택/새로고침 명령 버튼도 공용 버튼 프리미티브로 통일했다. 드롭다운 메뉴, 선택 항목, 액션 그룹 레이아웃 CSS와",
-        "path": "_history/work-summaries/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:52:28.065Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브",
-        "detail": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 작업: Workspace Monitor 소스 작업 화면의 네이티브 파일 선택 드롭다운과 기본 버튼 느낌 제거 검색 Radix UI Dropdown Menu React docs DropdownMenu.Trigger Content Item official MDN HTML select element styling customizable select limitations 확인한 출처 Radix UI Dropdown Menu 공식 ",
-        "path": "_history/web-searches/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:52:28.064Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 05 Workspace Monitor Aggressive Native Warmup",
-        "detail": "{ \"date\": \"2026 06 05\", \"request id\": \"2026 06 05 workspace monitor aggressive native warmup\", \"timings\": { \"phase\": \"research and inspection\", \"duration\": \"approximately 8 minutes\" }, { \"phase\": \"implementation\", \"duration\": \"approximately 20 minutes\" }, { \"phase\": \"verification",
-        "path": "_history/work-timings/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:37:12.427Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "평가: Workspace Monitor 공격적 네이티브 메모리 워밍",
-        "detail": "평가: Workspace Monitor 공격적 네이티브 메모리 워밍 판정 요청 충족. 기존 Rust cache를 더 공격적인 데스크톱 네이티브 경로로 확장했고, 앱 시작 시점부터 OS thread가 워크스페이스 자원을 읽어 앱 메모리에 올리도록 했다. 증거 warm workspace os resources 명령 추가. workspace resource warmup background thread 추가. Tauri setup startup warmup 추가. preload 한도 512 files/1",
-        "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:37:12.427Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: Workspace Monitor 공격적 네이티브 메모리 워밍",
-        "detail": "요청 결과 추적: Workspace Monitor 공격적 네이티브 메모리 워밍 요청 메모리를 실제로 쓰고 운영체제 자원을 최대한 활용해 데스크톱 앱의 장점을 더 살릴 것. 결과 Tauri startup background warmup 추가. renderer bootstrap background warmup 추가. Rust shared memory cache를 512 files/128MB로 확장. source workbench UI에 memory budget/warming 상태 추가. 내부 패키지 ",
-        "path": "_history/request-traces/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:37:12.426Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "ready",
-        "title": "사용자 요청 요약: 실제 메모리와 OS 자원을 더 적극적으로 사용",
-        "detail": "사용자 요청 요약: 실제 메모리와 OS 자원을 더 적극적으로 사용 날짜: 2026 06 05 요약: 사용자는 기존 OS cache 구현도 충분히 공격적이지 않다고 보고, 데스크톱 앱의 장점을 살려 실제 앱 메모리와 운영체제 자원을 최대한 활용하라고 요구했다. 반영: Tauri startup background warmup, renderer bootstrap warmup, 512 files/128MB bounded memory preload, UI memory status. 지속 지시: 구현 완료 ",
-        "path": "_history/user-requests/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:37:12.426Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "작업 요약: Workspace Monitor 공격적 네이티브 메모리 워밍",
-        "detail": "작업 요약: Workspace Monitor 공격적 네이티브 메모리 워밍 완료 Rust cache store를 Arc shared inner state로 바꿔 background OS thread가 cache를 갱신할 수 있게 했다. warm workspace os resources 명령과 WorkspaceResourceWarmupReport 를 추가했다. Tauri setup에서 앱 시작 즉시 workspace resource warmup thread를 시작한다. renderer bootstra",
-        "path": "_history/work-summaries/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:37:12.426Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Workspace Monitor 공격적 네이티브 메모리 워밍",
-        "detail": "웹 검색 기록: Workspace Monitor 공격적 네이티브 메모리 워밍 목적 사용자가 “메모리를 실제로 쓰고 운영체제 자원을 최대한 쓰라”고 지시했다. Tauri managed state, Rust command bridge, Rust OS thread 사용 경로를 공식 문서 기준으로 재확인했다. 검색어 Tauri 2 official setup app state background task Rust spawn managed state documentation Tauri 2 official a",
-        "path": "_history/web-searches/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:37:12.425Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-workspace-monitor-os-resource-cache-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "평가: Workspace Monitor OS 자원 기반 캐시",
-        "detail": "평가: Workspace Monitor OS 자원 기반 캐시 판정 요청 충족. 이전 렌더러 중심 최적화에서 빠졌던 네이티브 OS 자원 사용을 Tauri/Rust managed state와 filesystem scan/read cache로 보강했고, 내부 데스크톱 패키지 빌드까지 완료했다. 증거 WorkspaceResourceStore 와 prepare workspace os resources 추가. list workspace text files / read workspace text file 이 ",
-        "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-os-resource-cache.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:27:32.750Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -22663,11 +22651,11 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 42055,
-      "lineCount": 1068,
-      "updatedAt": "2026-06-05T17:06:39.620Z",
+      "sizeBytes": 42531,
+      "lineCount": 1078,
+      "updatedAt": "2026-06-05T18:23:38.051Z",
       "truncated": true,
-      "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx\",\n  \"rend",
+      "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx\",\n  \"rend",
       "previewBytes": 1200
     },
     {
@@ -22702,11 +22690,11 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 13031,
-      "lineCount": 201,
-      "updatedAt": "2026-06-04T18:31:30.371Z",
+      "sizeBytes": 13289,
+      "lineCount": 203,
+      "updatedAt": "2026-06-05T18:24:00.811Z",
       "truncated": true,
-      "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport path from \"node:path\";\nimport { fileURLToPath } from \"node:url\";\n\nimport { checkReleaseReadiness } from \"./check-release-readiness.mjs\";\n\nconst root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), \"..\");\n\nexport function checkServiceReadiness({ mode = \"internal\", reportOnly = false } = {}) {\n  const registry = readJson(\"configs/service-readiness-registry.json\");\n  const tauriConfig = readJson(\"src-tauri/tauri.conf.json\");\n  const pkg = readJson(\"package.json\");\n  const runtimeBoundary = readJson(\"configs/runtime-data-boundary-registry.json\");\n  const userFlow = readJson(\"configs/user-flow-registry.json\");\n  const releaseInternal = checkReleaseReadiness({ mode: \"internal\", reportOnly: true });\n  const releasePublic = checkReleaseReadiness({ mode: \"public\", reportOnly: true });\n  const serializedRuntimeBoundary = JSON.stringify(runtimeBoundary);\n  const serializedUserFlow = JSON.stringify(userFlow);\n  const serializedRegistry = JSON.stringify(registry);\n  const tauriLib = readText(\"src-tauri/src/lib.rs\");\n  const monitorShell = readText(\"renderer/workspace-monitor/components/MonitorShell.tsx\");\n  const workspaceP",
+      "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport path from \"node:path\";\nimport { fileURLToPath } from \"node:url\";\n\nimport { checkReleaseReadiness } from \"./check-release-readiness.mjs\";\n\nconst root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), \"..\");\n\nexport function checkServiceReadiness({ mode = \"internal\", reportOnly = false } = {}) {\n  const registry = readJson(\"configs/service-readiness-registry.json\");\n  const tauriConfig = readJson(\"src-tauri/tauri.conf.json\");\n  const pkg = readJson(\"package.json\");\n  const runtimeBoundary = readJson(\"configs/runtime-data-boundary-registry.json\");\n  const userFlow = readJson(\"configs/user-flow-registry.json\");\n  const releaseInternal = checkReleaseReadiness({ mode: \"internal\", reportOnly: true });\n  const releasePublic = checkReleaseReadiness({ mode: \"public\", reportOnly: true });\n  const serializedRuntimeBoundary = JSON.stringify(runtimeBoundary);\n  const serializedUserFlow = JSON.stringify(userFlow);\n  const serializedRegistry = JSON.stringify(registry);\n  const tauriLib = readText(\"src-tauri/src/lib.rs\");\n  const monitorShell = readText(\"renderer/workspace-monitor/components/MonitorShell.tsx\");\n  const agentBuild",
       "previewBytes": 1200
     },
     {
@@ -22897,9 +22885,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 46101,
-      "lineCount": 1060,
-      "updatedAt": "2026-06-05T17:06:31.534Z",
+      "sizeBytes": 46692,
+      "lineCount": 1072,
+      "updatedAt": "2026-06-05T18:24:31.633Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts",
       "previewBytes": 1200
@@ -23357,12 +23345,12 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 13
+        "documentsCount": 12
       },
       {
         "category": "user-request",
         "root": "_history/user-requests",
-        "documentsCount": 13
+        "documentsCount": 12
       },
       {
         "category": "intent-feature-map",
@@ -23377,7 +23365,7 @@
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 13
+        "documentsCount": 12
       },
       {
         "category": "work-timing",
@@ -23387,12 +23375,12 @@
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 3
+        "documentsCount": 4
       },
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 28
+        "documentsCount": 30
       },
       {
         "category": "daily-history",
@@ -23486,7 +23474,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 75,
+        "documentCount": 73,
         "sourceFileCount": 5
       },
       {
@@ -23627,7 +23615,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-scripts-check-readiness-mjs",
         "label": "Large source surface",
-        "signal": "1,068 lines in platform-desktop-app/scripts/check-readiness.mjs",
+        "signal": "1,078 lines in platform-desktop-app/scripts/check-readiness.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23636,7 +23624,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,060 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,072 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23674,16 +23662,16 @@
         "path": "platform-desktop-app/scripts/check-readiness.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1068,
-        "sizeBytes": 42055,
+        "lineCount": 1078,
+        "sizeBytes": 42531,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1060,
-        "sizeBytes": 46101,
+        "lineCount": 1072,
+        "sizeBytes": 46692,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]

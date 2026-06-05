@@ -19,6 +19,8 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
   const serializedRegistry = JSON.stringify(registry);
   const tauriLib = readText("src-tauri/src/lib.rs");
   const monitorShell = readText("renderer/workspace-monitor/components/MonitorShell.tsx");
+  const agentBuilderPanels = readText("renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx");
+  const monitorWorkbenchSource = `${monitorShell}\n${agentBuilderPanels}`;
   const workspacePersistenceReady = [
     "get_desktop_workspace_state",
     "set_desktop_workspace_path",
@@ -50,10 +52,10 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
       check("provider_direct_task_ui", "Direct provider task UI visible", monitorShell.includes("agent-provider-run-controls") && monitorShell.includes("agent-model-picker") && monitorShell.includes("list_provider_models") && monitorShell.includes("run_provider_agent_task"), "Search Agent Work Chat exposes provider account and model controls.")
     ]),
     group("production_agent_blueprints", "Production Agent Blueprints", [
-      check("agentcore_blueprint_ui", "AgentCore-style blueprint UI visible", monitorShell.includes("AgentCoreBlueprintPanel") && monitorShell.includes("agentcore-blueprint-panel"), "Agents screen exposes production blueprints derived from public AgentCore references."),
+      check("agentcore_blueprint_ui", "AgentCore-style blueprint UI visible", monitorWorkbenchSource.includes("AgentCoreBlueprintPanel") && monitorWorkbenchSource.includes("agentcore-blueprint-panel"), "Agents screen exposes production blueprints derived from public AgentCore references."),
       check("agentcore_blueprint_prefill", "Blueprints fill runnable inputs", monitorShell.includes("applyAgentCoreBlueprint") && monitorShell.includes("setAgentFactoryForm") && monitorShell.includes("setSearchAgentRunForm"), "Blueprint application fills Search Agent Work Chat and Agent Core inputs."),
-      check("agentcore_quick_builder_proposal", "Blueprints create proposals directly", monitorShell.includes("AgentCore Quick Builder") && monitorShell.includes("createAgentCoreBlueprintProposal") && monitorShell.includes("create_agent_factory_proposal"), "AgentCore-style blueprint selection can call the native Agent Core proposal writer."),
-      check("local_python_execution_boundary", "Agent execution stays local", monitorShell.includes("local_python_agent_runtime") && monitorShell.includes("local_process_execution") && serializedRegistry.includes("local Python execution"), "AgentCore-style proposals declare local Python/process execution as the host boundary."),
+      check("agentcore_quick_builder_proposal", "Blueprints create proposals directly", monitorWorkbenchSource.includes("AgentCore Quick Builder") && monitorWorkbenchSource.includes("createAgentCoreBlueprintProposal") && monitorWorkbenchSource.includes("create_agent_factory_proposal"), "AgentCore-style blueprint selection can call the native Agent Core proposal writer."),
+      check("local_python_execution_boundary", "Agent execution stays local", monitorWorkbenchSource.includes("local_python_agent_runtime") && monitorWorkbenchSource.includes("local_process_execution") && serializedRegistry.includes("local Python execution"), "AgentCore-style proposals declare local Python/process execution as the host boundary."),
       check("agentcore_reference_recorded", "AgentCore reference recorded", serializedRegistry.includes("production_agent_blueprints") && serializedUserFlow.includes("awslabs_agentcore_samples"), "Service and user-flow registries record AgentCore-style production blueprint behavior.")
     ]),
     group("workspace_onboarding", "Workspace Onboarding", [

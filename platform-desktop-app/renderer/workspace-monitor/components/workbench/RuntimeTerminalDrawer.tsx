@@ -79,7 +79,7 @@ export type RuntimeTerminalEvent = {
   detail: string;
 };
 
-type RuntimeTerminalDrawerProps = {
+export type RuntimeTerminalDrawerProps = {
   adapters: RuntimeTerminalAdapter[];
   autoDeferQuestions: boolean;
   open: boolean;
