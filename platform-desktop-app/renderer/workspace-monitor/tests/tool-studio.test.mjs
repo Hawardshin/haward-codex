@@ -218,6 +218,24 @@ test("Choice and search controls have compact tonal hierarchy", () => {
   assert.match(css, /\.desktop-command-grid button \{[\s\S]*?min-height: 66px;/);
 });
 
+test("Workspace monitor encodes theory-backed desktop visual hierarchy tokens", () => {
+  assert.match(monitorShell, /data-ui-foundation="gestalt-hierarchy-density"/);
+  assert.match(css, /--grid-unit: 4px;/);
+  assert.match(css, /--space-4: 16px;/);
+  assert.match(css, /--surface-depth-focus:/);
+  assert.match(css, /--surface-depth-selected:/);
+  assert.match(css, /--hierarchy-border:/);
+  assert.match(css, /--state-hover-surface:/);
+  assert.match(css, /--focus-halo-size: 4px;/);
+  assert.match(css, /--font-size-lg: 1\.0625rem;/);
+  assert.match(css, /\.desktop-app-root :where\(button, a, input, textarea, \[role="button"\], \[role="tab"\], \[tabindex\]\):focus-visible \{[\s\S]*?box-shadow: 0 0 0 var\(--focus-halo-size\) var\(--focus-halo\);/);
+  assert.match(css, /\.ui-button:hover:not\(:disabled\) \{[\s\S]*?background: var\(--state-hover-surface\);/);
+  assert.match(css, /\.desktop-app-root :where\([\s\S]*?\.settings-dialog,[\s\S]*?\.adapter-card,[\s\S]*?\.home-navigation-dock[\s\S]*?\) \{[\s\S]*?box-shadow: var\(--surface-shadow-low\), var\(--hairline-shadow\);/);
+  assert.match(css, /\.settings-tab-list button:hover:not\(:disabled\):not\(\.active\) \{[\s\S]*?background: var\(--state-hover-surface\);/);
+  assert.match(css, /\.task-flow-rail button:hover:not\(:disabled\) \{[\s\S]*?border-color: var\(--state-hover-border\);/);
+  assert.match(css, /@media \(hover: hover\) \{[\s\S]*?\.desktop-app-root button:not\(:disabled\):hover \{[\s\S]*?border-color: var\(--state-hover-border\);/);
+});
+
 test("Workspace monitor replaces native select dropdowns with styled app choices", () => {
   assert.doesNotMatch(monitorShell, /<select\b/);
   assert.match(monitorShell, /function AppChoiceMenu/);
@@ -976,7 +994,7 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(css, /\.home-focus-command \{[\s\S]*?min-height: 252px;/);
   assert.match(css, /\.home-focus-command::before \{[\s\S]*?height: 3px;/);
   assert.match(css, /\.home-focus-copy h2 \{[\s\S]*?font-size: var\(--font-size-work-title\);/);
-  assert.match(css, /\.home-focus-card \{[\s\S]*?box-shadow: var\(--focus-shadow\);/);
+  assert.match(css, /\.home-focus-card \{[\s\S]*?background: var\(--surface-depth-focus\);[\s\S]*?box-shadow: var\(--surface-shadow-medium\), var\(--hairline-shadow\);/);
   assert.match(css, /\.home-focus-flow \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.home-focus-card button \{[\s\S]*?min-height: 48px;/);
   assert.match(css, /\.home-navigation-dock \{/);

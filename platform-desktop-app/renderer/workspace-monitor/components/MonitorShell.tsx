@@ -5394,7 +5394,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
   return (
     <main className={`desktop-app-root theme-${themeMode}`}>
-      <div className={`desktop-app-shell sidebar-${sidebarMode}`}>
+      <div className={`desktop-app-shell sidebar-${sidebarMode}`} data-ui-foundation="gestalt-hierarchy-density">
         <aside className="activity-rail" aria-label={uiLanguage === "ko" ? "주요 기능 레일" : "Primary activity rail"}>
           <button
             className="activity-brand"

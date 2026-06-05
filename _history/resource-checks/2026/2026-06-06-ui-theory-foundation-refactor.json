@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-06",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    "local static HTTP server on 127.0.0.1:4173",
+    "in-app browser tab",
+    "Next build workers",
+    "Tauri internal packaging build"
+  ],
+  "cleanup": [
+    "Closed the browser tab used for validation.",
+    "Stopped the temporary HTTP server with Ctrl-C."
+  ],
+  "observed_browser_results": {
+    "home_page_inline_overflow": 0,
+    "settings_page_inline_overflow": 0,
+    "major_button_inline_overflow": 0,
+    "dark_system_surface_depth_1_after_fix": "#1b2029"
+  },
+  "remaining_resource_notes": []
+}

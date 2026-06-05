@@ -1027,6 +1027,7 @@ for (const requiredPhrase of [
   "quick-start-flow",
   "desktop-app-root theme-",
   "desktop-app-shell sidebar-",
+  "data-ui-foundation=\"gestalt-hierarchy-density\"",
   "ClaudeCodeTransferPanel",
   "claudeCodeDesignTransfer",
   "Claude Code Design Transfer",
@@ -1080,6 +1081,10 @@ for (const requiredScrollToken of [
 for (const requiredButtonToken of [
   "--control-hit-size",
   "--control-target-size",
+  "--grid-unit: 4px",
+  "--surface-depth-focus",
+  "--state-hover-surface",
+  "--focus-halo-size",
   "--text-natural-wrap",
   "--text-long-token-wrap",
   "touch-action: manipulation",

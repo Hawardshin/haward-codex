@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T20:27:42.105Z",
+  "generatedAt": "2026-06-05T20:45:17.126Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 462,
-    "evaluations": 30,
+    "evaluations": 27,
     "webSearches": 12,
     "timingRecords": 12,
     "historyDays": 1,
-    "adminHistoryDocuments": 2435,
+    "adminHistoryDocuments": 2442,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7440,6 +7440,102 @@
   ],
   "documents": [
     {
+      "id": "history-work-summaries-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링",
+      "excerpt": "작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링 완료 workspace monitor 전역 CSS에 spacing, depth, hierarchy, hover, focus halo token을 추가했다. 홈/설정/어댑터/주요 버튼 표면을 새 token으로 연결했다. data ui foundation=\"gestalt hierarchy density\" shell marker를 추가했다. dark/system 테마의 depth token 누락을 브라우저 검증으로 발견하고 수정했다. 정적 테스트와",
+      "html": "<p>작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링 완료 workspace monitor 전역 CSS에 spacing, depth, hierarchy, hover, focus halo token을 추가했다. 홈/설정/어댑터/주요 버튼 표면을 새 token으로 연결했다. data ui foundation=&quot;gestalt hierarchy density&quot; shell marker를 추가했다. dark/system 테마의 depth token 누락을 브라우저 검증으로 발견하고 수정했다. 정적 테스트와 readiness 검사를 보강했다. 검증 workspace monitor test 통과 platform desktop app test 통과 w</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 737,
+      "updatedAt": "2026-06-05T20:44:11.178Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-ui-theory-foundation-refactor-json",
+      "path": "_history/evaluations/2026/2026-06-06-ui-theory-foundation-refactor.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Ui Theory Foundation Refactor",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 ui theory foundation refactor.json\" , \"omission check targets\": \" history/omission checks/2",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;installation occurred&quot;: false, &quot;installation record targets&quot;: , &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 ui theory foundation refactor.json&quot; , &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 06 ui theory foundation refactor.json&quot; , &quot;mode selection record targ</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 773,
+      "updatedAt": "2026-06-05T20:44:06.525Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링",
+      "excerpt": "요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링 요청 UI 디자인 전문가 관점에서 이론을 조사하고 데스크톱 앱 UI를 리팩토링. 결과 산출물 platform desktop app/docs/requirements/2026 06 06 ui theory foundation refactor.ko.md platform desktop app/specs/2026 06 06 ui theory foundation refactor/ platform desktop app/renderer/workspace",
+      "html": "<p>요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링 요청 UI 디자인 전문가 관점에서 이론을 조사하고 데스크톱 앱 UI를 리팩토링. 결과 산출물 platform desktop app/docs/requirements/2026 06 06 ui theory foundation refactor.ko.md platform desktop app/specs/2026 06 06 ui theory foundation refactor/ platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/compone</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 828,
+      "updatedAt": "2026-06-05T20:44:06.525Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-ui-theory-foundation-refactor-json",
+      "path": "_history/work-timings/2026/2026-06-06-ui-theory-foundation-refactor.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Ui Theory Foundation Refactor",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Checked NN/g, Apple HIG, Material, WCAG, Fluent, and Carbon references.\" }, { \"name\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added CSS foundation tokens, shell marker, a",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;phases&quot;: { &quot;name&quot;: &quot;web first research&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Checked NN/g, Apple HIG, Material, WCAG, Fluent, and Carbon references.&quot; }, { &quot;name&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Added CSS foundation tokens, shell marker, and readiness/test coverage.&quot; }, { &quot;name&quot;: &quot;browser validation&quot;, &quot;status&quot;: &quot;compl</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 693,
+      "updatedAt": "2026-06-05T20:44:06.524Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-ui-theory-foundation-refactor-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-ui-theory-foundation-refactor/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "UI 이론 기반 디자인 파운데이션 리팩토링 검증",
+      "excerpt": "UI 이론 기반 디자인 파운데이션 리팩토링 검증 완료한 검증 corepack pnpm filter workspace monitor test 결과: 통과, 62개 테스트 corepack pnpm filter platform desktop app test 결과: 통과, 24개 테스트 corepack pnpm filter workspace monitor build 결과: 통과 브라우저 렌더 검증 http://127.0.0.1:4173/ 홈: data ui foundation=\"gestalt hierar",
+      "html": "<h1>UI 이론 기반 디자인 파운데이션 리팩토링 검증</h1>\n<h2>완료한 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li>결과: 통과, 62개 테스트</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li>결과: 통과, 24개 테스트</li>\n<li><code>corepack pnpm --filter workspace-monitor build</code></li>\n<li>결과: 통과</li>\n<li>브라우저 렌더 검증</li>\n<li><code>http://127.0.0.1:4173/</code></li>\n<li>홈: <code>data-ui-foundation=&quot;gestalt-hierarchy-density&quot;</code>, <code>--grid-unit: 4px</code>, <code>--focus-halo-size: 4px</code> 확인</li>\n<li>홈/설정 viewport 수평 overflow: 0</li>\n<li>주요 버튼 inline overflow: 0</li>\n<li>settings dark/system <code>--surface-depth-1</code> 재검증: <code>#1b2029</code></li>\n<li><code>corepack pnpm --filter workspace-monitor check</code></li>\n<li>결과: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app check</code></li>\n<li>결과: 통과</li>\n<li>참고: 패키징 전 stale customer snapshot 경고는 최종 <code>desktop:package:internal</code>에서 다시 생성될 예정</li>\n<li><code>corepack pnpm run desktop:package:internal</code></li>\n<li>결과: 통과</li>\n<li>생성/검증:</li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li><code>codesign --verify --deep --strict</code> 통과</li>\n<li><code>hdiutil verify</code> 통과</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li>없음</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1310,
+      "updatedAt": "2026-06-05T20:44:06.524Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-ui-theory-foundation-refactor-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-ui-theory-foundation-refactor/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "UI 이론 기반 디자인 파운데이션 리팩토링 작업",
+      "excerpt": "UI 이론 기반 디자인 파운데이션 리팩토링 작업 x web first UI 이론 근거 수집 x 전역 spacing/depth/state/focus token 추가 x dark/system depth token 누락 수정 x 홈/설정/어댑터/버튼 표면 token 연결 x shell foundation marker 추가 x workspace monitor 정적 테스트 추가 x platform readiness token 추가 x 브라우저 렌더 검증 x 테스트/check 실행 x 내부 패키징 빌드 실행",
+      "html": "<h1>UI 이론 기반 디자인 파운데이션 리팩토링 작업</h1>\n<ul>\n<li>[x] web-first UI 이론 근거 수집</li>\n<li>[x] 전역 spacing/depth/state/focus token 추가</li>\n<li>[x] dark/system depth token 누락 수정</li>\n<li>[x] 홈/설정/어댑터/버튼 표면 token 연결</li>\n<li>[x] shell foundation marker 추가</li>\n<li>[x] workspace-monitor 정적 테스트 추가</li>\n<li>[x] platform readiness token 추가</li>\n<li>[x] 브라우저 렌더 검증</li>\n<li>[x] 테스트/check 실행</li>\n<li>[x] 내부 패키징 빌드 실행</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 478,
+      "updatedAt": "2026-06-05T20:44:06.523Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-2026-2026-06-06-md",
       "path": "_history/2026/2026-06-06.md",
       "category": "daily-history",
@@ -7449,11 +7545,123 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 5140,
-      "updatedAt": "2026-06-05T20:26:24.795Z",
+      "sourceBytes": 5812,
+      "updatedAt": "2026-06-05T20:42:41.069Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+      "path": "_history/plans/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 계획 기록",
+      "excerpt": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 계획 기록 범위 desktop app workspace monitor의 전역 CSS foundation 홈/설정/어댑터/버튼 대표 표면 정적 테스트, readiness, 브라우저 렌더, 내부 패키징 제외 전체 화면별 정보 구조 재설계 별도 design system package 생성 Rust 런타임 변경 Merge gate 테스트 2종 통과 check 2종 통과 브라우저 렌더 overflow 0 내부 패키징 빌드 통과",
+      "html": "<p>2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 계획 기록 범위 desktop app workspace monitor의 전역 CSS foundation 홈/설정/어댑터/버튼 대표 표면 정적 테스트, readiness, 브라우저 렌더, 내부 패키징 제외 전체 화면별 정보 구조 재설계 별도 design system package 생성 Rust 런타임 변경 Merge gate 테스트 2종 통과 check 2종 통과 브라우저 렌더 overflow 0 내부 패키징 빌드 통과</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 508,
+      "updatedAt": "2026-06-05T20:42:28.581Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: UI 이론 기반 리팩토링",
+      "excerpt": "사용자 요청 요약: UI 이론 기반 리팩토링 사용자는 UI 디자인 전문가 관점에서 세상에 있는 디자인 이론을 깊게 학습한 뒤 데스크톱 앱 UI를 리팩토링하라고 요청했다. 이전 맥락상 기본 버튼/선택 UI, 버튼 크기, 시각 위계, 설정 접근성, 빌드 자동 실행 요구가 함께 적용된다.",
+      "html": "<p>사용자 요청 요약: UI 이론 기반 리팩토링 사용자는 UI 디자인 전문가 관점에서 세상에 있는 디자인 이론을 깊게 학습한 뒤 데스크톱 앱 UI를 리팩토링하라고 요청했다. 이전 맥락상 기본 버튼/선택 UI, 버튼 크기, 시각 위계, 설정 접근성, 빌드 자동 실행 요구가 함께 적용된다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 366,
+      "updatedAt": "2026-06-05T20:42:28.581Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 웹 검색",
+      "excerpt": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 웹 검색 질의 Nielsen Norman Group visual hierarchy usability UI design principles Apple Human Interface Guidelines desktop app layout controls feedback Material Design 3 interaction states visual hierarchy accessibility WCAG 2.2 visual presentation f",
+      "html": "<p>2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 웹 검색 질의 Nielsen Norman Group visual hierarchy usability UI design principles Apple Human Interface Guidelines desktop app layout controls feedback Material Design 3 interaction states visual hierarchy accessibility WCAG 2.2 visual presentation focus appearance target size status messages site:nngroup.com/articles ten usabil</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2069,
+      "updatedAt": "2026-06-05T20:42:28.580Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-ui-theory-foundation-refactor-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-ui-theory-foundation-refactor/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "UI 이론 기반 디자인 파운데이션 리팩토링 추적",
+      "excerpt": "UI 이론 기반 디자인 파운데이션 리팩토링 추적 | 요구사항 | 구현 | 검증 | | | | | | REQ UI THEORY 001 | globals.css spacing/depth/state/focus token | Workspace monitor encodes theory backed desktop visual hierarchy tokens | | REQ UI THEORY 002 | settings , workspace home , adapter card token 연결 | 브라우저 렌더 검증",
+      "html": "<h1>UI 이론 기반 디자인 파운데이션 리팩토링 추적</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-UI-THEORY-001</td><td><code>globals.css</code> spacing/depth/state/focus token</td><td><code>Workspace monitor encodes theory-backed desktop visual hierarchy tokens</code></td></tr><tr><td>REQ-UI-THEORY-002</td><td><code>settings-*</code>, <code>workspace-home-*</code>, <code>adapter-card</code> token 연결</td><td>브라우저 렌더 검증, CSS 정적 테스트</td></tr><tr><td>REQ-UI-THEORY-003</td><td><code>.desktop-app-root :where(...):focus-visible</code> halo</td><td>CSS 정적 테스트</td></tr><tr><td>REQ-UI-THEORY-004</td><td>dark/system <code>--surface-depth-0/1</code> 재정의</td><td>브라우저 settings 재검증</td></tr><tr><td>REQ-UI-THEORY-005</td><td>visible explanatory text 미추가, CSS/속성 중심</td><td>코드 리뷰</td></tr><tr><td>REQ-UI-THEORY-006</td><td>테스트/check/browser/package 절차</td><td><code>validation.ko.md</code></td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 782,
+      "updatedAt": "2026-06-05T20:42:28.580Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-ui-theory-foundation-refactor-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-ui-theory-foundation-refactor.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "UI 이론 기반 디자인 파운데이션 리팩토링 요구사항",
+      "excerpt": "UI 이론 기반 디자인 파운데이션 리팩토링 요구사항 배경 사용자는 데스크톱 앱 UI를 단순 취향 수정이 아니라 UI 디자인 전문가 관점에서 이론을 학습한 뒤 리팩토링하라고 요청했다. 기존 화면은 일부 버튼, 선택 상태, 설정/홈 표면의 시각 위계가 기능별로 흩어져 있어 화면 간 일관성이 약해질 위험이 있었다. 요구사항 REQ UI THEORY 001: 전역 UI foundation은 4px spacing, 표면 depth, hover/active/focus 상태를 명시적인 CSS 토큰으로 제공해야",
+      "html": "<h1>UI 이론 기반 디자인 파운데이션 리팩토링 요구사항</h1>\n<h2>배경</h2>\n<p>사용자는 데스크톱 앱 UI를 단순 취향 수정이 아니라 UI 디자인 전문가 관점에서 이론을 학습한 뒤 리팩토링하라고 요청했다. 기존 화면은 일부 버튼, 선택 상태, 설정/홈 표면의 시각 위계가 기능별로 흩어져 있어 화면 간 일관성이 약해질 위험이 있었다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-UI-THEORY-001: 전역 UI foundation은 4px spacing, 표면 depth, hover/active/focus 상태를 명시적인 CSS 토큰으로 제공해야 한다.</li>\n<li>REQ-UI-THEORY-002: 홈, 설정, 어댑터 카드, 주요 선택/버튼 표면은 같은 hierarchy/depth 토큰을 사용해 시각 위계를 공유해야 한다.</li>\n<li>REQ-UI-THEORY-003: 키보드 포커스는 버튼뿐 아니라 링크, 입력, 탭, 커스텀 버튼 역할에도 보이는 halo와 outline을 제공해야 한다.</li>\n<li>REQ-UI-THEORY-004: dark/system 테마에서 depth 토큰이 light surface로 계산되지 않아야 한다.</li>\n<li>REQ-UI-THEORY-005: 리팩토링은 화면에 디자인 이론 설명 문구를 추가하지 않고 실제 조작/표면 상태로만 반영해야 한다.</li>\n<li>REQ-UI-THEORY-006: 구현 후 정적 테스트, check 게이트, 브라우저 렌더 검증, 내부 패키징 빌드를 실행해야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>전체 제품 정보 구조를 새로 설계하지 않는다.</li>\n<li>모든 상세 화면의 개별 컴포넌트를 한 번에 재작성하지 않는다.</li>\n<li>모바일 중심 UI를 추가하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1542,
+      "updatedAt": "2026-06-05T20:42:28.578Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-ui-theory-foundation-refactor-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-ui-theory-foundation-refactor/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "UI 이론 기반 디자인 파운데이션 리팩토링 계획",
+      "excerpt": "UI 이론 기반 디자인 파운데이션 리팩토링 계획 실행 순서 1. 공신력 있는 UI/UX 이론 출처를 확인하고 현재 앱 문제와 매핑한다. 2. 전역 CSS token을 spacing, depth, state, focus 중심으로 확장한다. 3. 홈/설정/어댑터 카드/버튼 표면을 새 token으로 연결한다. 4. shell marker와 정적 테스트/readiness token을 추가한다. 5. 테스트, check, 브라우저 렌더 검증, 내부 패키징 빌드를 실행한다. 설계 판단 앱 구조를 갈아엎기보다",
+      "html": "<h1>UI 이론 기반 디자인 파운데이션 리팩토링 계획</h1>\n<h2>실행 순서</h2>\n<p>1. 공신력 있는 UI/UX 이론 출처를 확인하고 현재 앱 문제와 매핑한다.</p>\n<p>2. 전역 CSS token을 spacing, depth, state, focus 중심으로 확장한다.</p>\n<p>3. 홈/설정/어댑터 카드/버튼 표면을 새 token으로 연결한다.</p>\n<p>4. shell marker와 정적 테스트/readiness token을 추가한다.</p>\n<p>5. 테스트, check, 브라우저 렌더 검증, 내부 패키징 빌드를 실행한다.</p>\n<h2>설계 판단</h2>\n<ul>\n<li>앱 구조를 갈아엎기보다 foundation token과 대표 표면을 먼저 맞춘다.</li>\n<li>사용자가 볼 수 있는 설명 문구는 추가하지 않고, 조작 가능성/위계/상태 피드백으로 개선을 표현한다.</li>\n<li>CSS 중심 리팩토링을 선택해 React 상태 구조와 Rust 런타임 안정성을 건드리지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 853,
+      "updatedAt": "2026-06-05T20:42:28.578Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-ui-theory-foundation-refactor-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-ui-theory-foundation-refactor/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "UI 이론 기반 디자인 파운데이션 리팩토링 스펙",
+      "excerpt": "UI 이론 기반 디자인 파운데이션 리팩토링 스펙 목표 데스크톱 앱의 홈/설정/카드/버튼 표면이 같은 시각 위계, spacing, 상태 피드백 규칙을 사용하도록 전역 CSS foundation을 강화한다. 변경 대상 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app",
+      "html": "<h1>UI 이론 기반 디자인 파운데이션 리팩토링 스펙</h1>\n<h2>목표</h2>\n<p>데스크톱 앱의 홈/설정/카드/버튼 표면이 같은 시각 위계, spacing, 상태 피드백 규칙을 사용하도록 전역 CSS foundation을 강화한다.</p>\n<h2>변경 대상</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n<li><code>platform-desktop-app/scripts/check-readiness.mjs</code></li>\n<li><code>platform-desktop-app/tests/readiness.test.mjs</code></li>\n</ul>\n<h2>구현 계약</h2>\n<ul>\n<li>CSS 토큰:</li>\n<li><code>--grid-unit</code></li>\n<li><code>--space-*</code></li>\n<li><code>--surface-depth-*</code></li>\n<li><code>--hierarchy-border*</code></li>\n<li><code>--state-hover-*</code></li>\n<li><code>--surface-shadow-*</code></li>\n<li><code>--focus-halo*</code></li>\n<li>쉘 계약:</li>\n<li><code>.desktop-app-shell</code>은 <code>data-ui-foundation=&quot;gestalt-hierarchy-density&quot;</code> 속성을 가진다.</li>\n<li>표면 계약:</li>\n<li>설정 dialog/pane/tab rail, home focus card/navigation dock, adapter card는 hierarchy/depth token을 사용한다.</li>\n<li>hover/focus 상태는 기본 브라우저 버튼처럼 보이지 않도록 app token을 사용한다.</li>\n<li>테마 계약:</li>\n<li>explicit dark와 system dark 모두 <code>--surface-depth-0</code> 및 <code>--surface-depth-1</code>을 dark surface로 재정의한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>정적 테스트가 foundation token, shell marker, hover/focus 상태 규칙을 검증한다.</li>\n<li>readiness check가 foundation token과 shell marker 누락을 잡는다.</li>\n<li>브라우저 검증에서 홈과 설정 주요 표면이 렌더되고 수평 overflow가 0이어야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1572,
+      "updatedAt": "2026-06-05T20:42:28.578Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-request-traces-2026-2026-06-06-provider-button-error-status-ko-md",
@@ -9808,22 +10016,6 @@
       "workspaceArea": "_history/user-requests"
     },
     {
-      "id": "history-web-searches-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: MonitorShell 근본 boundary 재검토",
-      "excerpt": "웹 검색 기록: MonitorShell 근본 boundary 재검토 목적 사용자가 “근본적인 부분부터 다시 살펴봐”라고 요청해, Workspace Monitor의 남은 성능 병목을 main thread, React render tree, lazy loading/code splitting 관점에서 재검토했다. 검색어 Tauri official documentation performance state commands async Rust desktop app best practices React off",
-      "html": "<p>웹 검색 기록: MonitorShell 근본 boundary 재검토 목적 사용자가 “근본적인 부분부터 다시 살펴봐”라고 요청해, Workspace Monitor의 남은 성능 병목을 main thread, React render tree, lazy loading/code splitting 관점에서 재검토했다. 검색어 Tauri official documentation performance state commands async Rust desktop app best practices React official documentation performance memo Profiler startTransition useDeferredValue w</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3254,
-      "updatedAt": "2026-06-05T17:55:21.492Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-docs-requirements-2026-06-06-monitor-shell-root-boundary-ko-md",
       "path": "platform-desktop-app/docs/requirements/2026-06-06-monitor-shell-root-boundary.ko.md",
       "category": "project-doc",
@@ -9838,102 +10030,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "최종 평가: startup resident prewarm 속도 최적화",
-      "excerpt": "최종 평가: startup resident prewarm 속도 최적화 결론 작업은 닫을 수 있다. 사용자 요구였던 속도 최적화, bounded memory/resource 사용, 자동 build/package 실행을 모두 수행했다. 결과 p95 section switch latency: 827.8ms에서 652.7ms로 개선. average section settle time: 430ms에서 482ms로 악화. max resident/mounted panel count: 5 유지. internal",
-      "html": "<p>최종 평가: startup resident prewarm 속도 최적화 결론 작업은 닫을 수 있다. 사용자 요구였던 속도 최적화, bounded memory/resource 사용, 자동 build/package 실행을 모두 수행했다. 결과 p95 section switch latency: 827.8ms에서 652.7ms로 개선. average section settle time: 430ms에서 482ms로 악화. max resident/mounted panel count: 5 유지. internal .app 와 .dmg 패키징 및 검증 통과. 검증 상태 omission check: coverage ready , rework 불필요. res</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 955,
-      "updatedAt": "2026-06-05T17:44:48.242Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Startup Resident Prewarm Speed Evaluation Input",
-      "excerpt": "{ \"initial instruction\": \"Optimize desktop app speed, especially tab switching, and build/package automatically after implementation.\", \"result summary\": \"Added bounded startup resident prewarm for core Workspace Monitor tabs, excluded inactive overview from resident retention, m",
-      "html": "<p>{ &quot;initial instruction&quot;: &quot;Optimize desktop app speed, especially tab switching, and build/package automatically after implementation.&quot;, &quot;result summary&quot;: &quot;Added bounded startup resident prewarm for core Workspace Monitor tabs, excluded inactive overview from resident retention, memoized Tool Studio with stable callbacks, updated tests, measured section switc</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 4856,
-      "updatedAt": "2026-06-05T17:44:13.225Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-startup-resident-prewarm-speed-json",
-      "path": "_history/work-timings/2026/2026-06-06-startup-resident-prewarm-speed.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Startup Resident Prewarm Speed",
-      "excerpt": "{ \"task id\": \"2026 06 06 startup resident prewarm speed\", \"title\": \"Startup resident prewarm speed optimization\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration s",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 startup resident prewarm speed&quot;, &quot;title&quot;: &quot;Startup resident prewarm speed optimization&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 120, &quot;measurement&quot;: &quot;estimated&quot;, &quot;bottleneck notes&quot;: &quot;Official React, N</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1705,
-      "updatedAt": "2026-06-05T17:44:13.225Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-omission-json",
-      "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-omission.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Startup Resident Prewarm Speed Omission",
-      "excerpt": "{ \"task\": \"Startup resident prewarm speed optimization for Workspace Monitor.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"reduce tab lag\", \"description\": \"Address continued slow tab switching with a performance change.\", \"source\": \"user request\", \"required\": true, ",
-      "html": "<p>{ &quot;task&quot;: &quot;Startup resident prewarm speed optimization for Workspace Monitor.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;reduce tab lag&quot;, &quot;description&quot;: &quot;Address continued slow tab switching with a performance change.&quot;, &quot;source&quot;: &quot;user request&quot;, &quot;required&quot;: true, &quot;status&quot;: &quot;covered&quot;, &quot;evidence&quot;: &quot;platform desktop app/renderer/workspace monito</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3371,
-      "updatedAt": "2026-06-05T17:44:13.224Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-resource-json",
-      "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-resource.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Startup Resident Prewarm Speed Resource",
-      "excerpt": "{ \"task\": \"Startup resident prewarm speed optimization for Workspace Monitor.\", \"work mode\": \"standard\", \"runtime context\": \"React renderer\", \"Next.js static build\", \"Playwright Chromium\", \"Python static server\", \"Tauri/Rust build\", \"renderer memory cache\" , \"resource risks\": { \"",
-      "html": "<p>{ &quot;task&quot;: &quot;Startup resident prewarm speed optimization for Workspace Monitor.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;runtime context&quot;: &quot;React renderer&quot;, &quot;Next.js static build&quot;, &quot;Playwright Chromium&quot;, &quot;Python static server&quot;, &quot;Tauri/Rust build&quot;, &quot;renderer memory cache&quot; , &quot;resource risks&quot;: { &quot;risk id&quot;: &quot;startup prewarm memory&quot;, &quot;category&quot;: &quot;memory&quot;, &quot;description&quot;: &quot;Startu</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 4313,
-      "updatedAt": "2026-06-05T17:44:13.224Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: startup resident prewarm 속도 최적화",
-      "excerpt": "요청 결과 추적: startup resident prewarm 속도 최적화 요청 사용자는 \"속도 최적화\"를 요청했으며, 앞선 맥락에서 탭 전환 지연과 데스크톱 자원 활용 부족을 반복 지적했다. 결과 startup idle resident prewarm을 추가했다. resident cap 5와 source state retention을 유지했다. overview hidden retention을 제외했다. Tool Studio rerender 비용을 줄이는 memo/stable callback을 추가",
-      "html": "<p>요청 결과 추적: startup resident prewarm 속도 최적화 요청 사용자는 &quot;속도 최적화&quot;를 요청했으며, 앞선 맥락에서 탭 전환 지연과 데스크톱 자원 활용 부족을 반복 지적했다. 결과 startup idle resident prewarm을 추가했다. resident cap 5와 source state retention을 유지했다. overview hidden retention을 제외했다. Tool Studio rerender 비용을 줄이는 memo/stable callback을 추가했다. 내부 .app 와 .dmg 패키징까지 완료했다. 연결 파일 구현: platform desktop app/renderer/workspace</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1404,
-      "updatedAt": "2026-06-05T17:44:13.224Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-startup-resident-prewarm-speed-traceability-ko-md",
@@ -17742,102 +17838,6 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-agent-platform-feature-architecture-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-agent-platform-feature-architecture/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "에이전트 플랫폼 기능 아키텍처 작업 목록",
-      "excerpt": "에이전트 플랫폼 기능 아키텍처 작업 목록 | ID | 작업 | 상태 | | | | | | TASK APFA 001 | product feature registry와 요구사항/문서 연결 | done | | TASK APFA 002 | collector와 snapshot schema 확장 | done | | TASK APFA 003 | Overview product feature panel 구현 | done | | TASK APFA 004 | readiness/test/check script 보강 |",
-      "html": "<h1>에이전트 플랫폼 기능 아키텍처 작업 목록</h1>\n<table><thead><tr><th>ID</th><th>작업</th><th>상태</th></tr></thead><tbody><tr><td>TASK-APFA-001</td><td>product feature registry와 요구사항/문서 연결</td><td>done</td></tr><tr><td>TASK-APFA-002</td><td>collector와 snapshot schema 확장</td><td>done</td></tr><tr><td>TASK-APFA-003</td><td>Overview product feature panel 구현</td><td>done</td></tr><tr><td>TASK-APFA-004</td><td>readiness/test/check script 보강</td><td>done</td></tr><tr><td>TASK-APFA-005</td><td>customer snapshot/build/browser 검증</td><td>done</td></tr><tr><td>TASK-APFA-006</td><td>history/evaluation/request trace 기록</td><td>done</td></tr><tr><td>TASK-APFA-007</td><td>기본 작업 네비게이션과 Operator Center 분리</td><td>done</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 593,
-      "updatedAt": "2026-06-03T06:38:13.236Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-agent-platform-feature-architecture-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-agent-platform-feature-architecture/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "에이전트 플랫폼 기능 아키텍처 스펙",
-      "excerpt": "에이전트 플랫폼 기능 아키텍처 스펙 목표 설치형 데스크톱 앱의 제품 정체성을 모니터링 대시보드가 아니라 에이전트 역량 플랫폼으로 고정한다. 현재 shell, source review, runtime data, decision inbox, history, requirements, monitoring 조각을 명명된 제품 기능 레이어로 재구성한다. 고객용 snapshot에서도 제품 기능 구조는 보이되 내부 source path와 검증 세부는 제거한다. 기본 네비게이션은 작업/생성/개발/학습 섹션을 전면",
-      "html": "<h1>에이전트 플랫폼 기능 아키텍처 스펙</h1>\n<h2>목표</h2>\n<ul>\n<li>설치형 데스크톱 앱의 제품 정체성을 모니터링 대시보드가 아니라 에이전트 역량 플랫폼으로 고정한다.</li>\n<li>현재 shell, source review, runtime data, decision inbox, history, requirements, monitoring 조각을 명명된 제품 기능 레이어로 재구성한다.</li>\n<li>고객용 snapshot에서도 제품 기능 구조는 보이되 내부 source path와 검증 세부는 제거한다.</li>\n<li>기본 네비게이션은 작업/생성/개발/학습 섹션을 전면에 두고 운영/모니터링/문서/거버넌스 섹션은 Operator Center로 분리한다.</li>\n</ul>\n<h2>기능 레이어</h2>\n<table><thead><tr><th>ID</th><th>역할</th><th>요약</th></tr></thead><tbody><tr><td><code>agent_orchestration</code></td><td>primary</td><td>task pipe, process graph, lane, decision inbox, merge gate를 묶는 실행 조율 기능</td></tr><tr><td><code>agent_work_environment</code></td><td>primary</td><td>app-selected workspace, runtime data, task-run store, support bundle, accumulated data 기능</td></tr><tr><td><code>agent_development_environment</code></td><td>primary</td><td>source review, multi-file editor, diff, templates, requirements/spec/validation workbench</td></tr><tr><td><code>agent_factory</code></td><td>primary</td><td>반복 작업을 prompt/workflow/template/tool/skill/agent/feature로 승격하는 기능</td></tr><tr><td><code>learning_improvement_loop</code></td><td>primary</td><td>intent map, history, timings, evaluations, evidence를 학습 루프로 축적하는 기능</td></tr><tr><td><code>observability_monitoring</code></td><td>supporting</td><td>구조, 문서, 히스토리, source inventory, readiness를 보는 보조 관측 기능</td></tr></tbody></table>\n<h2>요구</h2>\n<ul>\n<li><code>platform-desktop-app/configs/product-feature-registry.json</code>가 primary/supporting feature source of truth가 되어야 한다.</li>\n<li>Workspace snapshot은 <code>productFeatureArchitecture</code>를 포함해야 한다.</li>\n<li>Overview 첫 화면은 feature architecture를 먼저 보여야 한다.</li>\n<li>user view와 customer snapshot은 <code>overview</code>, <code>desktop</code>, <code>agents</code>, <code>source</code>, <code>intent</code>를 기본 작업 섹션으로 써야 한다.</li>\n<li><code>projects</code>, <code>history</code>, <code>structure</code>, <code>documents</code>, <code>requirements</code>는 기본 작업 네비게이션이 아니라 Operator Center에서 열려야 한다.</li>\n<li>readiness/test는 monitoring이 primary product로 되돌아가는 경우 실패해야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>새 agent runtime framework 설치.</li>\n<li>public signing/notarization.</li>\n<li><code>renderer/workspace-monitor</code> package rename.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2314,
-      "updatedAt": "2026-06-03T06:38:13.235Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-agent-platform-feature-architecture-plan-en-md",
-      "path": "platform-desktop-app/specs/2026-06-03-agent-platform-feature-architecture/plan.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Agent Platform Feature Architecture Plan",
-      "excerpt": "Agent Platform Feature Architecture Plan Sequence 1. Add the product feature registry and connect requirements, product boundary, README, and distribution registry. 2. Extend the Workspace Monitor collector so feature layers enter developer and customer snapshots. 3. Add the Prod",
-      "html": "<h1>Agent Platform Feature Architecture Plan</h1>\n<h2>Sequence</h2>\n<p>1. Add the product feature registry and connect requirements, product boundary, README, and distribution registry.</p>\n<p>2. Extend the Workspace Monitor collector so feature layers enter developer and customer snapshots.</p>\n<p>3. Add the Product Feature Architecture panel to Overview as a separate component.</p>\n<p>4. Strengthen readiness, tests, and config-contract checks around primary/supporting feature roles.</p>\n<p>5. Record history, evaluation, request trace, and work summary before commit and push.</p>\n<h2>Structure Decision</h2>\n<ul>\n<li>UI goes under <code>components/features/</code>.</li>\n<li>Collection logic goes under <code>scripts/lib/product-feature-architecture.mjs</code>.</li>\n<li>Monitoring sections remain available but are labeled and presented as supporting observability.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 782,
-      "updatedAt": "2026-06-03T06:04:42.628Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-agent-platform-feature-architecture-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-agent-platform-feature-architecture/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "에이전트 플랫폼 기능 아키텍처 계획",
-      "excerpt": "에이전트 플랫폼 기능 아키텍처 계획 순서 1. 제품 기능 레지스트리를 추가하고 요구사항/제품 경계/README/배포 레지스트리에 연결한다. 2. Workspace Monitor collector를 확장해 기능 레이어를 snapshot과 customer snapshot에 넣는다. 3. Overview에 Product Feature Architecture 패널을 별도 컴포넌트로 추가한다. 4. readiness/test/check config contract를 통해 primary/supporting ",
-      "html": "<h1>에이전트 플랫폼 기능 아키텍처 계획</h1>\n<h2>순서</h2>\n<p>1. 제품 기능 레지스트리를 추가하고 요구사항/제품 경계/README/배포 레지스트리에 연결한다.</p>\n<p>2. Workspace Monitor collector를 확장해 기능 레이어를 snapshot과 customer snapshot에 넣는다.</p>\n<p>3. Overview에 Product Feature Architecture 패널을 별도 컴포넌트로 추가한다.</p>\n<p>4. readiness/test/check-config-contract를 통해 primary/supporting 역할을 검증한다.</p>\n<p>5. 운영 기록, 평가, 요청 추적, work summary를 남긴 뒤 커밋/푸시한다.</p>\n<h2>구조 결정</h2>\n<ul>\n<li>UI 컴포넌트는 <code>components/features/</code> 아래로 분리한다.</li>\n<li>collector 기능은 <code>scripts/lib/product-feature-architecture.mjs</code>로 분리한다.</li>\n<li>모니터링은 기존 섹션을 유지하되 label/purpose와 첫 화면에서 supporting observability로 내려 표현한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 872,
-      "updatedAt": "2026-06-03T06:04:42.627Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-product-folder-restructure-traceability-en-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/traceability.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Desktop Product Folder Restructure Traceability",
-      "excerpt": "Desktop Product Folder Restructure Traceability | Item | Path | | | | | Requirement | platform desktop app/docs/requirements/2026 06 02 installable desktop.en.md | | Spec | platform desktop app/specs/2026 06 03 desktop product folder restructure/spec.en.md | | Plan | platform des",
-      "html": "<h1>Desktop Product Folder Restructure Traceability</h1>\n<table><thead><tr><th>Item</th><th>Path</th></tr></thead><tbody><tr><td>Requirement</td><td><code>platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md</code></td></tr><tr><td>Spec</td><td><code>platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/spec.en.md</code></td></tr><tr><td>Plan</td><td><code>platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/plan.en.md</code></td></tr><tr><td>Tasks</td><td><code>platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/tasks.en.md</code></td></tr><tr><td>Validation</td><td><code>platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/validation.en.md</code></td></tr><tr><td>Renderer source</td><td><code>platform-desktop-app/renderer/workspace-monitor/</code></td></tr><tr><td>Desktop shell config</td><td><code>platform-desktop-app/src-tauri/tauri.conf.json</code>, <code>platform-desktop-app/package.json</code></td></tr><tr><td>Build/readiness gates</td><td><code>platform-desktop-app/scripts/</code>, <code>platform-desktop-app/tests/readiness.test.mjs</code></td></tr><tr><td>Operational boundary</td><td><code>_ops/projects/registry.json</code>, <code>_ops/projects/root-structure-policy.json</code>, <code>_ops/maps/repository-map.md</code></td></tr><tr><td>Records</td><td><code>_history/request-traces/2026/2026-06-03-desktop-product-folder-restructure.ko.md</code></td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1103,
-      "updatedAt": "2026-06-03T05:42:54.397Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-product-folder-restructure-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "데스크톱 제품 폴더 구조 재편 추적성",
-      "excerpt": "데스크톱 제품 폴더 구조 재편 추적성 | 항목 | 경로 | | | | | 요구사항 | platform desktop app/docs/requirements/2026 06 02 installable desktop.ko.md | | 스펙 | platform desktop app/specs/2026 06 03 desktop product folder restructure/spec.ko.md | | 계획 | platform desktop app/specs/2026 06 03 desktop product ",
-      "html": "<h1>데스크톱 제품 폴더 구조 재편 추적성</h1>\n<table><thead><tr><th>항목</th><th>경로</th></tr></thead><tbody><tr><td>요구사항</td><td><code>platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md</code></td></tr><tr><td>스펙</td><td><code>platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/spec.ko.md</code></td></tr><tr><td>계획</td><td><code>platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/plan.ko.md</code></td></tr><tr><td>작업</td><td><code>platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/tasks.ko.md</code></td></tr><tr><td>검증</td><td><code>platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/validation.ko.md</code></td></tr><tr><td>renderer source</td><td><code>platform-desktop-app/renderer/workspace-monitor/</code></td></tr><tr><td>desktop shell config</td><td><code>platform-desktop-app/src-tauri/tauri.conf.json</code>, <code>platform-desktop-app/package.json</code></td></tr><tr><td>build/readiness gates</td><td><code>platform-desktop-app/scripts/</code>, <code>platform-desktop-app/tests/readiness.test.mjs</code></td></tr><tr><td>운영 경계</td><td><code>_ops/projects/registry.json</code>, <code>_ops/projects/root-structure-policy.json</code>, <code>_ops/maps/repository-map.md</code></td></tr><tr><td>기록</td><td><code>_history/request-traces/2026/2026-06-03-desktop-product-folder-restructure.ko.md</code></td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1104,
-      "updatedAt": "2026-06-03T05:42:54.397Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -17848,22 +17848,22 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 30
+          "count": 27
+        },
+        {
+          "category": "user-request",
+          "count": 13
+        },
+        {
+          "category": "work-summary",
+          "count": 13
         },
         {
           "category": "request-trace",
           "count": 12
         },
         {
-          "category": "user-request",
-          "count": 12
-        },
-        {
           "category": "web-search",
-          "count": 12
-        },
-        {
-          "category": "work-summary",
           "count": 12
         },
         {
@@ -17872,7 +17872,7 @@
         },
         {
           "category": "plan",
-          "count": 5
+          "count": 6
         },
         {
           "category": "daily-history",
@@ -17887,7 +17887,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-          "updatedAt": "2026-06-05T20:26:24.795Z",
+          "updatedAt": "2026-06-05T20:42:41.069Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18111,43 +18111,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-evaluation-input.json",
+          "id": "history-evaluations-2026-2026-06-06-ui-theory-foundation-refactor-json",
+          "path": "_history/evaluations/2026/2026-06-06-ui-theory-foundation-refactor.json",
           "category": "evaluation",
           "language": "unknown",
-          "title": "2026 06 06 Startup Resident Prewarm Speed Evaluation Input",
-          "excerpt": "{ \"initial instruction\": \"Optimize desktop app speed, especially tab switching, and build/package automatically after implementation.\", \"result summary\": \"Added bounded startup resident prewarm for core Workspace Monitor tabs, excluded inactive overview from resident retention, m",
-          "updatedAt": "2026-06-05T17:44:13.225Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-omission-json",
-          "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-omission.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Startup Resident Prewarm Speed Omission",
-          "excerpt": "{ \"task\": \"Startup resident prewarm speed optimization for Workspace Monitor.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"reduce tab lag\", \"description\": \"Address continued slow tab switching with a performance change.\", \"source\": \"user request\", \"required\": true, ",
-          "updatedAt": "2026-06-05T17:44:13.224Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-resource-json",
-          "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-resource.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Startup Resident Prewarm Speed Resource",
-          "excerpt": "{ \"task\": \"Startup resident prewarm speed optimization for Workspace Monitor.\", \"work mode\": \"standard\", \"runtime context\": \"React renderer\", \"Next.js static build\", \"Playwright Chromium\", \"Python static server\", \"Tauri/Rust build\", \"renderer memory cache\" , \"resource risks\": { \"",
-          "updatedAt": "2026-06-05T17:44:13.224Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "최종 평가: startup resident prewarm 속도 최적화",
-          "excerpt": "최종 평가: startup resident prewarm 속도 최적화 결론 작업은 닫을 수 있다. 사용자 요구였던 속도 최적화, bounded memory/resource 사용, 자동 build/package 실행을 모두 수행했다. 결과 p95 section switch latency: 827.8ms에서 652.7ms로 개선. average section settle time: 430ms에서 482ms로 악화. max resident/mounted panel count: 5 유지. internal",
-          "updatedAt": "2026-06-05T17:44:48.242Z",
+          "title": "2026 06 06 Ui Theory Foundation Refactor",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 ui theory foundation refactor.json\" , \"omission check targets\": \" history/omission checks/2",
+          "updatedAt": "2026-06-05T20:44:06.525Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18228,6 +18198,16 @@
           "title": "계획 기록: Provider 버튼 오류 상태",
           "excerpt": "계획 기록: Provider 버튼 오류 상태 범위 Provider 설정에서 오류/완료/정보 상태를 버튼 내부에 표시한다. 상태 텍스트가 provider row 아래에 삽입되어 버튼 위치를 밀지 않게 한다. 기존 provider credential/model command 동작은 유지한다. 실행 순서 1. 웹 접근성/레이아웃 근거와 기존 provider panel을 확인한다. 2. 요구사항, 스펙, tasks, validation, traceability를 작성한다. 3. provider actio",
           "updatedAt": "2026-06-05T20:21:59.755Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-plans-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+          "path": "_history/plans/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 계획 기록",
+          "excerpt": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 계획 기록 범위 desktop app workspace monitor의 전역 CSS foundation 홈/설정/어댑터/버튼 대표 표면 정적 테스트, readiness, 브라우저 렌더, 내부 패키징 제외 전체 화면별 정보 구조 재설계 별도 design system package 생성 Rust 런타임 변경 Merge gate 테스트 2종 통과 check 2종 통과 브라우저 렌더 overflow 0 내부 패키징 빌드 통과",
+          "updatedAt": "2026-06-05T20:42:28.581Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18341,13 +18321,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
+          "id": "history-request-traces-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
           "category": "request-trace",
           "language": "ko",
-          "title": "요청 결과 추적: startup resident prewarm 속도 최적화",
-          "excerpt": "요청 결과 추적: startup resident prewarm 속도 최적화 요청 사용자는 \"속도 최적화\"를 요청했으며, 앞선 맥락에서 탭 전환 지연과 데스크톱 자원 활용 부족을 반복 지적했다. 결과 startup idle resident prewarm을 추가했다. resident cap 5와 source state retention을 유지했다. overview hidden retention을 제외했다. Tool Studio rerender 비용을 줄이는 memo/stable callback을 추가",
-          "updatedAt": "2026-06-05T17:44:13.224Z",
+          "title": "요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링",
+          "excerpt": "요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링 요청 UI 디자인 전문가 관점에서 이론을 조사하고 데스크톱 앱 UI를 리팩토링. 결과 산출물 platform desktop app/docs/requirements/2026 06 06 ui theory foundation refactor.ko.md platform desktop app/specs/2026 06 06 ui theory foundation refactor/ platform desktop app/renderer/workspace",
+          "updatedAt": "2026-06-05T20:44:06.525Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18461,6 +18441,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: UI 이론 기반 리팩토링",
+          "excerpt": "사용자 요청 요약: UI 이론 기반 리팩토링 사용자는 UI 디자인 전문가 관점에서 세상에 있는 디자인 이론을 깊게 학습한 뒤 데스크톱 앱 UI를 리팩토링하라고 요청했다. 이전 맥락상 기본 버튼/선택 UI, 버튼 크기, 시각 위계, 설정 접근성, 빌드 자동 실행 요구가 함께 적용된다.",
+          "updatedAt": "2026-06-05T20:42:28.581Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-wide-scope-instruction-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-wide-scope-instruction.ko.md",
           "category": "user-request",
@@ -18508,16 +18498,6 @@
           "title": "웹 검색 기록: Monitor 성능 가드레일 완성",
           "excerpt": "웹 검색 기록: Monitor 성능 가드레일 완성 검색 시각 2026 06 06 질의 Next.js official docs dynamic import lazy loading client components React official docs Profiler startTransition useDeferredValue memo performance web.dev optimize long tasks Interaction to Next Paint INP main thread JavaScript Goog",
           "updatedAt": "2026-06-05T18:43:48.363Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: MonitorShell 근본 boundary 재검토",
-          "excerpt": "웹 검색 기록: MonitorShell 근본 boundary 재검토 목적 사용자가 “근본적인 부분부터 다시 살펴봐”라고 요청해, Workspace Monitor의 남은 성능 병목을 main thread, React render tree, lazy loading/code splitting 관점에서 재검토했다. 검색어 Tauri official documentation performance state commands async Rust desktop app best practices React off",
-          "updatedAt": "2026-06-05T17:55:21.492Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18578,6 +18558,16 @@
           "title": "2026 06 06 Web Search: Public Release Updater Automation",
           "excerpt": "2026 06 06 Web Search: Public Release Updater Automation Query Tauri v2 official updater plugin signing key public key endpoints configuration docs Tauri v2 official macOS code signing notarization DMG Developer ID docs Apple official notarizing macOS software notarytool Develope",
           "updatedAt": "2026-06-05T19:11:01.558Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 웹 검색",
+          "excerpt": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 웹 검색 질의 Nielsen Norman Group visual hierarchy usability UI design principles Apple Human Interface Guidelines desktop app layout controls feedback Material Design 3 interaction states visual hierarchy accessibility WCAG 2.2 visual presentation f",
+          "updatedAt": "2026-06-05T20:42:28.580Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18701,6 +18691,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링",
+          "excerpt": "작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링 완료 workspace monitor 전역 CSS에 spacing, depth, hierarchy, hover, focus halo token을 추가했다. 홈/설정/어댑터/주요 버튼 표면을 새 token으로 연결했다. data ui foundation=\"gestalt hierarchy density\" shell marker를 추가했다. dark/system 테마의 depth token 누락을 브라우저 검증으로 발견하고 수정했다. 정적 테스트와",
+          "updatedAt": "2026-06-05T20:44:11.178Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-06-wide-scope-instruction-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-wide-scope-instruction.ko.md",
           "category": "work-summary",
@@ -18821,13 +18821,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-startup-resident-prewarm-speed-json",
-          "path": "_history/work-timings/2026/2026-06-06-startup-resident-prewarm-speed.json",
+          "id": "history-work-timings-2026-2026-06-06-ui-theory-foundation-refactor-json",
+          "path": "_history/work-timings/2026/2026-06-06-ui-theory-foundation-refactor.json",
           "category": "work-timing",
           "language": "unknown",
-          "title": "2026 06 06 Startup Resident Prewarm Speed",
-          "excerpt": "{ \"task id\": \"2026 06 06 startup resident prewarm speed\", \"title\": \"Startup resident prewarm speed optimization\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration s",
-          "updatedAt": "2026-06-05T17:44:13.225Z",
+          "title": "2026 06 06 Ui Theory Foundation Refactor",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Checked NN/g, Apple HIG, Material, WCAG, Fluent, and Carbon references.\" }, { \"name\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added CSS foundation tokens, shell marker, a",
+          "updatedAt": "2026-06-05T20:44:06.524Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18849,36 +18849,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2435,
+      "documents": 2442,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 980
+          "count": 981
         },
         {
           "category": "web-search",
-          "count": 388
+          "count": 389
         },
         {
           "category": "plan",
-          "count": 335
+          "count": 336
         },
         {
           "category": "request-trace",
-          "count": 316
+          "count": 317
         },
         {
           "category": "work-timing",
-          "count": 238
+          "count": 239
         },
         {
           "category": "user-request",
-          "count": 101
+          "count": 102
         },
         {
           "category": "work-summary",
-          "count": 68
+          "count": 69
         },
         {
           "category": "daily-history",
@@ -18889,7 +18889,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6307350,
+      "totalSourceBytes": 6313996,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18914,11 +18914,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 42,
+      "evidenceEvents": 39,
       "decisionEvents": 0,
       "openSignals": 22,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T20:26:24.795Z",
+      "latestEventAt": "2026-06-05T20:44:11.178Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18930,21 +18930,21 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 30
+        "count": 27
       },
       {
         "id": "delivery",
         "label": "delivery",
-        "count": 12
-      },
-      {
-        "id": "evidence",
-        "label": "evidence",
-        "count": 12
+        "count": 13
       },
       {
         "id": "intake",
         "label": "intake",
+        "count": 13
+      },
+      {
+        "id": "evidence",
+        "label": "evidence",
         "count": 12
       },
       {
@@ -18960,7 +18960,7 @@
       {
         "id": "planning",
         "label": "planning",
-        "count": 5
+        "count": 6
       },
       {
         "id": "history",
@@ -18977,17 +18977,17 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 30
+        "count": 27
       },
       {
         "id": "intake",
         "label": "intake",
-        "count": 12
+        "count": 13
       },
       {
         "id": "summary",
         "label": "summary",
-        "count": 12
+        "count": 13
       },
       {
         "id": "timing",
@@ -19007,7 +19007,7 @@
       {
         "id": "plan",
         "label": "plan",
-        "count": 5
+        "count": 6
       },
       {
         "id": "history",
@@ -19029,19 +19029,64 @@
     ],
     "events": [
       {
-        "id": "history-history-request-traces-2026-2026-06-06-provider-button-error-status-ko-md",
+        "id": "history-history-work-summaries-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링",
+        "detail": "작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링 완료 workspace monitor 전역 CSS에 spacing, depth, hierarchy, hover, focus halo token을 추가했다. 홈/설정/어댑터/주요 버튼 표면을 새 token으로 연결했다. data ui foundation=\"gestalt hierarchy density\" shell marker를 추가했다. dark/system 테마의 depth token 누락을 브라우저 검증으로 발견하고 수정했다. 정적 테스트와",
+        "path": "_history/work-summaries/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:44:11.178Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-ui-theory-foundation-refactor-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 06 Ui Theory Foundation Refactor",
+        "detail": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 ui theory foundation refactor.json\" , \"omission check targets\": \" history/omission checks/2",
+        "path": "_history/evaluations/2026/2026-06-06-ui-theory-foundation-refactor.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:44:06.525Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
         "sourceType": "history",
         "signalType": "trace",
         "lane": "traceability",
         "severity": "evidence",
-        "status": "ready",
-        "title": "요청 결과 추적: Provider 버튼 오류 상태",
-        "detail": "요청 결과 추적: Provider 버튼 오류 상태 요청 오류 텍스트 때문에 버튼 위치가 밀리지 않고, 오류가 났을 때 버튼 자체에 표기되게 해달라는 요청. 결과 Provider action feedback state를 추가했다. Provider 액션 버튼에 오류/완료/정보 badge를 표시한다. provider 설정의 visible error/notice paragraph 삽입을 hidden live region으로 대체했다. Renderer test와 readiness token을 갱신했다. B",
-        "path": "_history/request-traces/2026/2026-06-06-provider-button-error-status.ko.md",
+        "status": "request-trace",
+        "title": "요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링",
+        "detail": "요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링 요청 UI 디자인 전문가 관점에서 이론을 조사하고 데스크톱 앱 UI를 리팩토링. 결과 산출물 platform desktop app/docs/requirements/2026 06 06 ui theory foundation refactor.ko.md platform desktop app/specs/2026 06 06 ui theory foundation refactor/ platform desktop app/renderer/workspace",
+        "path": "_history/request-traces/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
         "category": "request-trace",
         "language": "ko",
         "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:26:24.795Z"
+        "timestamp": "2026-06-05T20:44:06.525Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-ui-theory-foundation-refactor-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 Ui Theory Foundation Refactor",
+        "detail": "{ \"date\": \"2026 06 06\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Checked NN/g, Apple HIG, Material, WCAG, Fluent, and Carbon references.\" }, { \"name\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added CSS foundation tokens, shell marker, a",
+        "path": "_history/work-timings/2026/2026-06-06-ui-theory-foundation-refactor.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:44:06.524Z"
       },
       {
         "id": "history-history-2026-2026-06-06-md",
@@ -19055,6 +19100,66 @@
         "path": "_history/2026/2026-06-06.md",
         "category": "daily-history",
         "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:42:41.069Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "ready",
+        "title": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 계획 기록",
+        "detail": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 계획 기록 범위 desktop app workspace monitor의 전역 CSS foundation 홈/설정/어댑터/버튼 대표 표면 정적 테스트, readiness, 브라우저 렌더, 내부 패키징 제외 전체 화면별 정보 구조 재설계 별도 design system package 생성 Rust 런타임 변경 Merge gate 테스트 2종 통과 check 2종 통과 브라우저 렌더 overflow 0 내부 패키징 빌드 통과",
+        "path": "_history/plans/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:42:28.581Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: UI 이론 기반 리팩토링",
+        "detail": "사용자 요청 요약: UI 이론 기반 리팩토링 사용자는 UI 디자인 전문가 관점에서 세상에 있는 디자인 이론을 깊게 학습한 뒤 데스크톱 앱 UI를 리팩토링하라고 요청했다. 이전 맥락상 기본 버튼/선택 UI, 버튼 크기, 시각 위계, 설정 접근성, 빌드 자동 실행 요구가 함께 적용된다.",
+        "path": "_history/user-requests/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:42:28.581Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 웹 검색",
+        "detail": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 웹 검색 질의 Nielsen Norman Group visual hierarchy usability UI design principles Apple Human Interface Guidelines desktop app layout controls feedback Material Design 3 interaction states visual hierarchy accessibility WCAG 2.2 visual presentation f",
+        "path": "_history/web-searches/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:42:28.580Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-provider-button-error-status-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 추적: Provider 버튼 오류 상태",
+        "detail": "요청 결과 추적: Provider 버튼 오류 상태 요청 오류 텍스트 때문에 버튼 위치가 밀리지 않고, 오류가 났을 때 버튼 자체에 표기되게 해달라는 요청. 결과 Provider action feedback state를 추가했다. Provider 액션 버튼에 오류/완료/정보 badge를 표시한다. provider 설정의 visible error/notice paragraph 삽입을 hidden live region으로 대체했다. Renderer test와 readiness token을 갱신했다. B",
+        "path": "_history/request-traces/2026/2026-06-06-provider-button-error-status.ko.md",
+        "category": "request-trace",
+        "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T20:26:24.795Z"
       },
@@ -20349,21 +20454,6 @@
         "timestamp": "2026-06-05T17:55:21.494Z"
       },
       {
-        "id": "history-history-web-searches-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: MonitorShell 근본 boundary 재검토",
-        "detail": "웹 검색 기록: MonitorShell 근본 boundary 재검토 목적 사용자가 “근본적인 부분부터 다시 살펴봐”라고 요청해, Workspace Monitor의 남은 성능 병목을 main thread, React render tree, lazy loading/code splitting 관점에서 재검토했다. 검색어 Tauri official documentation performance state commands async Rust desktop app best practices React off",
-        "path": "_history/web-searches/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:55:21.492Z"
-      },
-      {
         "id": "history-history-user-requests-2026-2026-06-06-root-review-ko-md",
         "sourceType": "history",
         "signalType": "intake",
@@ -20377,96 +20467,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T17:55:21.492Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "최종 평가: startup resident prewarm 속도 최적화",
-        "detail": "최종 평가: startup resident prewarm 속도 최적화 결론 작업은 닫을 수 있다. 사용자 요구였던 속도 최적화, bounded memory/resource 사용, 자동 build/package 실행을 모두 수행했다. 결과 p95 section switch latency: 827.8ms에서 652.7ms로 개선. average section settle time: 430ms에서 482ms로 악화. max resident/mounted panel count: 5 유지. internal",
-        "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:44:48.242Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-startup-resident-prewarm-speed-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Startup Resident Prewarm Speed",
-        "detail": "{ \"task id\": \"2026 06 06 startup resident prewarm speed\", \"title\": \"Startup resident prewarm speed optimization\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration s",
-        "path": "_history/work-timings/2026/2026-06-06-startup-resident-prewarm-speed.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:44:13.225Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Startup Resident Prewarm Speed Evaluation Input",
-        "detail": "{ \"initial instruction\": \"Optimize desktop app speed, especially tab switching, and build/package automatically after implementation.\", \"result summary\": \"Added bounded startup resident prewarm for core Workspace Monitor tabs, excluded inactive overview from resident retention, m",
-        "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:44:13.225Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-resource-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 06 Startup Resident Prewarm Speed Resource",
-        "detail": "{ \"task\": \"Startup resident prewarm speed optimization for Workspace Monitor.\", \"work mode\": \"standard\", \"runtime context\": \"React renderer\", \"Next.js static build\", \"Playwright Chromium\", \"Python static server\", \"Tauri/Rust build\", \"renderer memory cache\" , \"resource risks\": { \"",
-        "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-resource.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:44:13.224Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-startup-resident-prewarm-speed-omission-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Startup Resident Prewarm Speed Omission",
-        "detail": "{ \"task\": \"Startup resident prewarm speed optimization for Workspace Monitor.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"reduce tab lag\", \"description\": \"Address continued slow tab switching with a performance change.\", \"source\": \"user request\", \"required\": true, ",
-        "path": "_history/evaluations/2026/2026-06-06-startup-resident-prewarm-speed-omission.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:44:13.224Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: startup resident prewarm 속도 최적화",
-        "detail": "요청 결과 추적: startup resident prewarm 속도 최적화 요청 사용자는 \"속도 최적화\"를 요청했으며, 앞선 맥락에서 탭 전환 지연과 데스크톱 자원 활용 부족을 반복 지적했다. 결과 startup idle resident prewarm을 추가했다. resident cap 5와 source state retention을 유지했다. overview hidden retention을 제외했다. Tool Studio rerender 비용을 줄이는 memo/stable callback을 추가",
-        "path": "_history/request-traces/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:44:13.224Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -22698,9 +22698,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 45909,
-      "lineCount": 1161,
-      "updatedAt": "2026-06-05T20:20:06.635Z",
+      "sizeBytes": 46062,
+      "lineCount": 1166,
+      "updatedAt": "2026-06-05T20:37:10.631Z",
       "truncated": true,
       "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx\",\n  \"rend",
       "previewBytes": 1200
@@ -22984,9 +22984,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 50834,
-      "lineCount": 1144,
-      "updatedAt": "2026-06-05T20:20:10.465Z",
+      "sizeBytes": 50997,
+      "lineCount": 1149,
+      "updatedAt": "2026-06-05T20:37:13.809Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts",
       "previewBytes": 1200
@@ -23444,12 +23444,12 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 12
+        "documentsCount": 13
       },
       {
         "category": "user-request",
         "root": "_history/user-requests",
-        "documentsCount": 12
+        "documentsCount": 13
       },
       {
         "category": "intent-feature-map",
@@ -23474,12 +23474,12 @@
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 5
+        "documentsCount": 6
       },
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 30
+        "documentsCount": 27
       },
       {
         "category": "daily-history",
@@ -23573,7 +23573,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 70,
+        "documentCount": 71,
         "sourceFileCount": 5
       },
       {
@@ -23714,7 +23714,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-scripts-check-readiness-mjs",
         "label": "Large source surface",
-        "signal": "1,161 lines in platform-desktop-app/scripts/check-readiness.mjs",
+        "signal": "1,166 lines in platform-desktop-app/scripts/check-readiness.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23723,7 +23723,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,144 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,149 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23761,16 +23761,16 @@
         "path": "platform-desktop-app/scripts/check-readiness.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1161,
-        "sizeBytes": 45909,
+        "lineCount": 1166,
+        "sizeBytes": 46062,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1144,
-        "sizeBytes": 50834,
+        "lineCount": 1149,
+        "sizeBytes": 50997,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]

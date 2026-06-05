@@ -1,0 +1,79 @@
+{
+  "date": "2026-06-06",
+  "topic": "UI theory-backed desktop app design foundation refactor",
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/workflows/work-mode-registry.json"
+  ],
+  "technology_stack": [
+    "Next.js workspace monitor",
+    "React",
+    "CSS custom properties",
+    "Tauri desktop shell"
+  ],
+  "technology_official_docs": [
+    "https://developer.apple.com/design/human-interface-guidelines",
+    "https://m3.material.io/foundations/interaction/states",
+    "https://www.w3.org/TR/WCAG22/",
+    "https://fluent2.microsoft.design/",
+    "https://carbondesignsystem.com/guidelines/2x-grid/overview/"
+  ],
+  "stack_version_constraints": [
+    "Do not replace the existing Next/React renderer architecture.",
+    "Keep the Tauri runtime untouched for a CSS/UI foundation slice."
+  ],
+  "source_types": [
+    "official_platform_guidelines",
+    "accessibility_standard",
+    "design_system_docs",
+    "local_source_code",
+    "local_tests"
+  ],
+  "issue_discussion_sources": [],
+  "issue_discussion_notes": "No high-signal issue thread was needed for this CSS foundation slice; the change was governed by established design systems and local regression tests.",
+  "community_signal_notes": "Design-system convergence across Apple, Material, Fluent, Carbon, NN/g, and WCAG was used as evidence direction, not as direct proof of local fit.",
+  "language_options": [
+    "CSS custom properties and selectors",
+    "React component restructuring",
+    "Rust native UI/runtime changes"
+  ],
+  "selected_language": "CSS custom properties with one React marker",
+  "language_decision_notes": "CSS tokens solve the visual hierarchy problem with lower blast radius. React restructuring would risk state behavior, and Rust is not the right layer for surface styling.",
+  "architecture_reference_sources": [
+    "Apple HIG desktop layout/control guidance",
+    "Material Design state/foundation model",
+    "Fluent 2 and Carbon token/grid guidance"
+  ],
+  "architecture_options": [
+    "Global visual foundation token slice",
+    "Per-screen redesign",
+    "Full design-system package extraction"
+  ],
+  "architecture_decision_notes": "Selected global token slice because it improves repeated surfaces immediately and gives tests a stable contract without freezing future screen-level redesign.",
+  "architecture_theory_sources": [
+    "NN/g visual hierarchy and heuristics",
+    "WCAG 2.2 focus and accessibility requirements"
+  ],
+  "architecture_practitioner_sources": [
+    "Apple HIG",
+    "Material Design 3",
+    "Fluent 2",
+    "IBM Carbon"
+  ],
+  "architecture_tradeoff_notes": "Theory sources guide grouping, feedback, and accessibility; practitioner systems guide tokenization and density. Local browser validation remains the acceptance gate.",
+  "code_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs"
+  ],
+  "code_reference_notes": "Existing CSS already uses design tokens and static tests, so the refactor extends that pattern instead of introducing a new styling framework.",
+  "folder_structure_options": [
+    "Keep CSS/test changes inside workspace-monitor and platform checks",
+    "Create a new design-system package",
+    "Move tokens into shared JSON"
+  ],
+  "folder_structure_decision_notes": "Kept changes in current renderer CSS and tests because the project has no separate design-system package yet and the user asked for implementation momentum.",
+  "folder_semantics_notes": "Requirements and specs live in platform-desktop-app because this is a project-specific desktop UI change.",
+  "maintainability_notes": "Static tests and readiness tokens preserve the foundation contract until a future shared design-system extraction is justified."
+}

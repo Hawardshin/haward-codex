@@ -1,0 +1,19 @@
+{
+  "date": "2026-06-06",
+  "request_coverage": {
+    "study_ui_theory": "covered by web-first research record",
+    "refactor_ui": "covered by CSS foundation and shell marker changes",
+    "desktop_app_context": "covered by desktop minimum width and browser desktop viewport validation",
+    "avoid_basic_buttons": "covered by state/depth button token updates",
+    "automatic_build": "completed by desktop:package:internal"
+  },
+  "validation_coverage": [
+    "workspace-monitor test",
+    "platform-desktop-app test",
+    "workspace-monitor check",
+    "platform-desktop-app check",
+    "browser render audit",
+    "internal package build"
+  ],
+  "omissions": []
+}
