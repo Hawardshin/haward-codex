@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T12:45:54.991Z",
+  "generatedAt": "2026-06-05T12:56:21.670Z",
   "summary": {
-    "documents": 2238,
+    "documents": 2247,
     "days": 6,
     "categories": [
       {
         "category": "evaluation",
-        "count": 926
+        "count": 929
       },
       {
         "category": "web-search",
-        "count": 361
+        "count": 362
       },
       {
         "category": "plan",
-        "count": 326
+        "count": 327
       },
       {
         "category": "request-trace",
-        "count": 290
+        "count": 291
       },
       {
         "category": "work-timing",
-        "count": 212
+        "count": 213
       },
       {
         "category": "user-request",
-        "count": 74
+        "count": 75
       },
       {
         "category": "work-summary",
-        "count": 41
+        "count": 42
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6036405,
+    "totalSourceBytes": 6055949,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,166 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-input-json",
+      "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 05 Auto Build After Implementation Input",
+      "excerpt": "{ \"initial instruction\": \"매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.\", \"result summary\": \"Added a durable close out rule requiring meaningful implementation work to run the owning project's build or package command before final response, with explicit exception handling when no appropri",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.&quot;, &quot;result summary&quot;: &quot;Added a durable close out rule requiring meaningful implementation work to run the owning project&#039;s build or package command before final response, with explicit exception handling when no appropriate build applies.&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;changed files&quot;: &quot;AGENTS.md&quot;, &quot; </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 5887,
+      "updatedAt": "2026-06-05T12:55:35.485Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: 구현 완료 후 자동 빌드 규칙",
+      "excerpt": "평가: 구현 완료 후 자동 빌드 규칙 결과 사용자의 지속 지시를 durable instruction과 Codex runtime adapter에 반영했다. 의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build/package 명령을 실행해야 한다. build 명령이 없거나 부적절한 경우 이유와 가장 강한 대체 검증을 기록하도록 예외 조건을 명시했다. memory bootstrap manifest에 이 규칙을 persistent instruction hot context로 연결했다. 검증 ",
+      "html": "<p>평가: 구현 완료 후 자동 빌드 규칙 결과 사용자의 지속 지시를 durable instruction과 Codex runtime adapter에 반영했다. 의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build/package 명령을 실행해야 한다. build 명령이 없거나 부적절한 경우 이유와 가장 강한 대체 검증을 기록하도록 예외 조건을 명시했다. memory bootstrap manifest에 이 규칙을 persistent instruction hot context로 연결했다. 검증 python3 tools/docs audit/src/docs audit.py check : 통과 PYTHONPATH=src python3 m a</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1843,
+      "updatedAt": "2026-06-05T12:55:26.168Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-2026-2026-06-05-md",
+      "path": "_history/2026/2026-06-05.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 05",
+      "excerpt": "2026 06 05 구현 완료 후 자동 빌드 규칙 사용자가 매번 직접 빌드하지 않도록, 의미 있는 구현 작업 close out에서 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 지시를 추가했다. build 명령이 없거나 안전하지 않거나 비용이 과도하거나 변경 범위 밖이면 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/평가 기록을 연결했다. W",
+      "html": "<p>2026 06 05 구현 완료 후 자동 빌드 규칙 사용자가 매번 직접 빌드하지 않도록, 의미 있는 구현 작업 close out에서 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 지시를 추가했다. build 명령이 없거나 안전하지 않거나 비용이 과도하거나 변경 범위 밖이면 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/평가 기록을 연결했다. Workspace Monitor Fixed the slow code loading path in Source Review by limiting r</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 28480,
+      "updatedAt": "2026-06-05T12:54:26.573Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-omission-json",
+      "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 05 Auto Build After Implementation Omission",
+      "excerpt": "{ \"task\": \"Auto build after implementation durable rule.\", \"work mode\": \"governance\", \"expected items\": { \"item id\": \"persist user rule\", \"description\": \"Persist the user's future instruction that implementation work should run build/package before close out.\", \"source\": \" histor",
+      "html": "<p>{ &quot;task&quot;: &quot;Auto build after implementation durable rule.&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;persist user rule&quot;, &quot;description&quot;: &quot;Persist the user&#039;s future instruction that implementation work should run build/package before close out.&quot;, &quot;source&quot;: &quot; history/user requests/2026/2026 06 05 auto build after implementation.ko.md&quot;, &quot;require</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4288,
+      "updatedAt": "2026-06-05T12:54:26.572Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-05-auto-build-after-implementation-json",
+      "path": "_history/work-timings/2026/2026-06-05-auto-build-after-implementation.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 05 Auto Build After Implementation",
+      "excerpt": "{ \"task id\": \"2026 06 05 auto build after implementation\", \"title\": \"Auto build after implementation durable rule\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"created at\": \"2026 06 05\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"s",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 05 auto build after implementation&quot;, &quot;title&quot;: &quot;Auto build after implementation durable rule&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;created at&quot;: &quot;2026 06 05&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;notes&quot;: &quot;Checked general bu</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2581,
+      "updatedAt": "2026-06-05T12:54:26.572Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 구현 완료 후 자동 빌드",
+      "excerpt": "요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instruction",
+      "html": "<p>요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instructions/persistent instructions.ko.md docs/instructions/persistent instructions.en.md </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 920,
+      "updatedAt": "2026-06-05T12:53:58.423Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_history/user-requests/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 구현 완료 후 자동 빌드",
+      "excerpt": "사용자 요청 요약: 구현 완료 후 자동 빌드 요청 구현이 끝날 때마다 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동으로 수행하라는 지속 지시. 해석 의미 있는 구현 작업의 close out에는 담당 프로젝트의 build 또는 package 검증이 포함되어야 한다. build가 없거나 부적절한 작업은 예외 사유와 대체 검증을 기록해야 한다. 이번 변경은 실제 제품 코드 구현이 아니라 workspace 운영 규칙 변경이다.",
+      "html": "<p>사용자 요청 요약: 구현 완료 후 자동 빌드 요청 구현이 끝날 때마다 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동으로 수행하라는 지속 지시. 해석 의미 있는 구현 작업의 close out에는 담당 프로젝트의 build 또는 package 검증이 포함되어야 한다. build가 없거나 부적절한 작업은 예외 사유와 대체 검증을 기록해야 한다. 이번 변경은 실제 제품 코드 구현이 아니라 workspace 운영 규칙 변경이다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 552,
+      "updatedAt": "2026-06-05T12:53:58.423Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 구현 완료 후 자동 빌드",
+      "excerpt": "작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다.",
+      "html": "<p>작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 414,
+      "updatedAt": "2026-06-05T12:53:58.423Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-plans-2026-2026-06-05-auto-build-after-implementation-mode-ko-md",
+      "path": "_history/plans/2026/2026-06-05-auto-build-after-implementation-mode.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 모드 선택: 구현 완료 후 자동 빌드 규칙",
+      "excerpt": "작업 모드 선택: 구현 완료 후 자동 빌드 규칙 선택 work mode: governance 이유 사용자의 지시는 앞으로 모든 구현 작업의 close out 행동을 바꾸는 지속 운영 규칙이다. persistent instructions , AGENTS.md , memory bootstrap anchor, 요구사항, 스펙, 평가 기록에 영향을 준다. 소스 기능 구현은 아니므로 빌드 실행 규칙 자체는 문서화하고, 이번 변경은 docs/config 검증으로 닫는다. 범위 포함: durable instr",
+      "html": "<p>작업 모드 선택: 구현 완료 후 자동 빌드 규칙 선택 work mode: governance 이유 사용자의 지시는 앞으로 모든 구현 작업의 close out 행동을 바꾸는 지속 운영 규칙이다. persistent instructions , AGENTS.md , memory bootstrap anchor, 요구사항, 스펙, 평가 기록에 영향을 준다. 소스 기능 구현은 아니므로 빌드 실행 규칙 자체는 문서화하고, 이번 변경은 docs/config 검증으로 닫는다. 범위 포함: durable instruction, memory bootstrap, 요구사항/스펙/히스토리/평가 기록 제외: CI 시스템 변경, 새 build runner 구현, 특</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 851,
+      "updatedAt": "2026-06-05T12:53:35.043Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_history/web-searches/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 구현 완료 후 자동 빌드 규칙",
+      "excerpt": "웹 검색 기록: 구현 완료 후 자동 빌드 규칙 요청 사용자가 매번 직접 빌드하지 않도록, 구현이 끝나면 에이전트가 빌드까지 자동으로 실행하라는 지속 지시를 남기는 작업. 검색 software development best practice run build before delivery after implementation 확인한 출처 Octopus Deploy, \"Do You Build Your Binaries Once?\", https://octopus.com/blog/build your binar",
+      "html": "<p>웹 검색 기록: 구현 완료 후 자동 빌드 규칙 요청 사용자가 매번 직접 빌드하지 않도록, 구현이 끝나면 에이전트가 빌드까지 자동으로 실행하라는 지속 지시를 남기는 작업. 검색 software development best practice run build before delivery after implementation 확인한 출처 Octopus Deploy, &quot;Do You Build Your Binaries Once?&quot;, https://octopus.com/blog/build your binaries once AWS Well Architected Framework, &quot;Test and validate changes&quot;, https://do</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1676,
+      "updatedAt": "2026-06-05T12:53:35.042Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
       "path": "_history/evaluations/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
@@ -237,22 +397,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-2026-2026-06-05-md",
-      "path": "_history/2026/2026-06-05.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 05",
-      "excerpt": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
-      "html": "<p>2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted Workspace Monitor button target sizing tokens and repeated action controls for mo</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 27948,
-      "updatedAt": "2026-06-05T12:24:06.562Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-evaluations-2026-2026-06-05-local-history-hook-componentization-ko-md",
@@ -35875,35 +36019,35 @@
     {
       "date": "2026-06-05",
       "year": "2026",
-      "documentsCount": 457,
+      "documentsCount": 466,
       "categories": [
         {
           "category": "evaluation",
-          "count": 136
+          "count": 139
         },
         {
           "category": "web-search",
-          "count": 65
+          "count": 66
         },
         {
           "category": "work-timing",
-          "count": 63
+          "count": 64
         },
         {
           "category": "request-trace",
-          "count": 61
+          "count": 62
         },
         {
           "category": "user-request",
-          "count": 60
+          "count": 61
         },
         {
           "category": "plan",
-          "count": 43
+          "count": 44
         },
         {
           "category": "work-summary",
-          "count": 28
+          "count": 29
         },
         {
           "category": "daily-history",

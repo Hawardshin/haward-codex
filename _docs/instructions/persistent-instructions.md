@@ -35,6 +35,7 @@
 - Commit every completed meaningful change set.
 - Push completed commits to `origin/main` immediately unless explicitly told not to push.
 - Before closing meaningful work, evaluate the result against the initial user instruction and rework real gaps.
+- After completing meaningful implementation work, run the owning project's build or package command before final response so the user does not have to build manually. If no build command exists, or the build is unsafe, too costly, or outside the touched project boundary, record the reason and run the strongest available equivalent verification instead.
 - Before evaluation, summarize completed work and check prior internal work or strong references for related tasks.
 - Treat user work and instructions as requirement candidates; define, review, update, and baseline relevant requirements before implementation.
 - Save shared requirements under `_requirements/`; save project-specific requirements under the owning project's `docs/requirements/`.

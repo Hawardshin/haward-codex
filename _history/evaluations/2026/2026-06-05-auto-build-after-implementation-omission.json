@@ -1,0 +1,169 @@
+{
+  "task": "Auto-build after implementation durable rule.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "persist-user-rule",
+      "description": "Persist the user's future instruction that implementation work should run build/package before close-out.",
+      "source": "_history/user-requests/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_docs/instructions/persistent-instructions.md",
+        "_docs/instructions/persistent-instructions.ko.md",
+        "_docs/instructions/persistent-instructions.en.md",
+        "AGENTS.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "build-exception-rule",
+      "description": "Clarify what to do when a build command is missing, unsafe, too costly, or outside the project boundary.",
+      "source": "REQ-WS-091",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/changes/2026-06-05-auto-build-after-implementation.ko.md",
+        "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/spec.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "memory-bootstrap",
+      "description": "Keep the new durable rule discoverable in future startup memory.",
+      "source": "_docs/instructions/persistent-instructions.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "current-build-applicability",
+      "description": "Decide whether this task itself needs a product build.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/spec.ko.md"
+      ],
+      "rationale": "This task changes docs and memory config, not product source implementation. It uses docs/config/evaluator validation instead of a project build."
+    },
+    {
+      "item_id": "generated-snapshot-consistency",
+      "description": "Regenerate and verify Workspace Monitor snapshots after adding durable history records.",
+      "source": "_history/work-summaries/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/public/admin-history-index.json",
+        "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+        "corepack pnpm --filter workspace-monitor run collect",
+        "corepack pnpm --filter workspace-monitor run check"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "_docs/instructions/persistent-instructions.md",
+      "purpose": "Common durable instruction.",
+      "required": true
+    },
+    {
+      "path": "_docs/instructions/persistent-instructions.ko.md",
+      "purpose": "Korean durable instruction.",
+      "required": true
+    },
+    {
+      "path": "_docs/instructions/persistent-instructions.en.md",
+      "purpose": "English durable instruction.",
+      "required": true
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Codex runtime adapter close-out rule.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/memory/bootstrap-manifest.json",
+      "purpose": "Future startup memory anchor.",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/spec.ko.md",
+      "purpose": "Spec record.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/public/admin-history-index.json",
+      "purpose": "Developer admin history index regenerated after new history records.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+      "purpose": "Developer public snapshot regenerated after new history records.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "docs-audit",
+      "description": "Docs registry remains valid after instruction edits.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 _tools/docs-audit/src/docs_audit.py --check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "memory-bootstrap",
+      "description": "Memory bootstrap remains ready.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "config-contract",
+      "description": "Changed memory config remains self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Workspace Monitor generated snapshot remains valid.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter workspace-monitor run collect",
+        "corepack pnpm --filter workspace-monitor run check"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "platform-desktop-check",
+      "description": "Desktop platform readiness checks remain valid.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter platform-desktop-app run check"
+      ],
+      "rationale": "The check passed with allowed stale public snapshot warnings for prebuild/customer fallback context."
+    }
+  ],
+  "known_omission_risks": [
+    "A future agent might treat docs-only work as requiring a product build; the rule explicitly allows strongest equivalent verification when no owning project build applies."
+  ],
+  "notes": [
+    "This coverage record is for a governance/documentation rule change, not a product implementation."
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "initial_instruction": "매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.",
+  "result_summary": "Added a durable close-out rule requiring meaningful implementation work to run the owning project's build or package command before final response, with explicit exception handling when no appropriate build applies.",
+  "work_mode": "governance",
+  "changed_files": [
+    "AGENTS.md",
+    "_docs/instructions/persistent-instructions.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "platform-desktop-app/renderer/workspace-monitor/public/admin-history-index.json",
+    "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/customer-workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json",
+    "_history/2026/2026-06-05.md",
+    "_history/web-searches/2026/2026-06-05-auto-build-after-implementation.ko.md",
+    "_history/plans/2026/2026-06-05-auto-build-after-implementation-mode.ko.md",
+    "_requirements/changes/2026-06-05-auto-build-after-implementation.ko.md",
+    "_requirements/reviews/2026-06-05-auto-build-after-implementation.ko.md",
+    "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/spec.ko.md",
+    "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/plan.ko.md",
+    "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/tasks.ko.md",
+    "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/validation.ko.md",
+    "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/traceability.ko.md",
+    "_history/user-requests/2026/2026-06-05-auto-build-after-implementation.ko.md",
+    "_history/work-summaries/2026/2026-06-05-auto-build-after-implementation.ko.md",
+    "_history/request-traces/2026/2026-06-05-auto-build-after-implementation.ko.md",
+    "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json",
+    "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json",
+    "_history/evaluations/2026/2026-06-05-auto-build-after-implementation.ko.md",
+    "_history/work-timings/2026/2026-06-05-auto-build-after-implementation.json"
+  ],
+  "verification": [
+    "python3 _tools/docs-audit/src/docs_audit.py --check: docs_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json: ready_to_bootstrap",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json: self_documenting",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json: coverage_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json: ready_to_close",
+    "python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-05-auto-build-after-implementation.json: ready with partial timing warnings",
+    "corepack pnpm --filter workspace-monitor run collect: wrote 650 inline documents and 2247 admin history records",
+    "corepack pnpm --filter workspace-monitor run check: passed",
+    "corepack pnpm --filter platform-desktop-app run check: passed with allowed stale public snapshot warnings",
+    "git diff --check: passed",
+    "Build/package: not applicable because this task changed durable instructions, history, and generated monitor snapshots, not product source implementation; used docs/config/evaluator and monitor/platform checks as equivalent verification."
+  ],
+  "references_checked": [
+    "_docs/instructions/persistent-instructions.md",
+    "AGENTS.md",
+    "agent-platform/configs/memory/bootstrap-manifest.json",
+    "agent-platform/configs/workflows/work-mode-registry.json",
+    "_history/web-searches/2026/2026-06-05-auto-build-after-implementation.ko.md",
+    "AWS Well-Architected Framework test and validate changes",
+    "CloudBees continuous integration best practices",
+    "The Twelve-Factor App build-release-run"
+  ],
+  "grounding_checks": [
+    "Final claims are grounded in local changed files and command verification outputs; external build-practice claims are limited to the recorded web search summary."
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-05-auto-build-after-implementation.ko.md",
+    "_history/plans/2026/2026-06-05-auto-build-after-implementation-mode.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-05-auto-build-after-implementation-mode.ko.md",
+    "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-05-auto-build-after-implementation-mode.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-05-auto-build-after-implementation.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-05-auto-build-after-implementation.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-05-auto-build-after-implementation.ko.md",
+    "_requirements/reviews/2026-06-05-auto-build-after-implementation.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/spec.ko.md",
+    "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/validation.ko.md",
+    "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-05-auto-build-after-implementation.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-05-auto-build-after-implementation.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-05-auto-build-after-implementation.json"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "resource_risk_occurred": false,
+  "cli_pipeline_occurred": false,
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Consider a reusable governance-rule-change scaffold if similar durable instruction updates remain frequent."
+  ]
+}

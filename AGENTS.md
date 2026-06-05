@@ -50,6 +50,7 @@ This repository is the workspace for building and tracking a personal agent-buil
 - Do not rewrite history, reset, or discard user changes unless explicitly requested.
 - Update the relevant history log before committing when the work changes project direction, repository rules, or meaningful artifacts.
 - Before final close-out of meaningful work, evaluate the result against the user's initial instruction and rework any real gaps before committing or final response.
+- After completing meaningful implementation work, run the owning project's build or package command before final response so the user does not have to build manually. If no build command exists, or the build is unsafe, too costly, or outside the touched project boundary, record the reason and run the strongest available equivalent verification instead.
 - Before evaluation, summarize completed work and check prior internal work or strong external references relevant to the task.
 - Treat the user's work and instructions as requirement candidates; define, review, update, and baseline relevant requirements before implementation.
 - Save shared requirements under `_requirements/`; save project-specific requirements under the owning project's `docs/requirements/`.

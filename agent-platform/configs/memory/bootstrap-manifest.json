@@ -92,9 +92,10 @@
         "user-point-of-view product quality gate",
         "single-primary-feature full-screen UI layout principle",
         "single-purpose UI controls and panels for cognitive load control",
-        "depth-first tab and drill-down navigation rule"
+        "depth-first tab and drill-down navigation rule",
+        "post-implementation automatic build or package verification rule"
       ],
-      "last_checked": "2026-06-03"
+      "last_checked": "2026-06-05"
     },
     {
       "id": "docs_registry",
@@ -1604,7 +1605,7 @@
       "id": "persistent_instructions",
       "path": "_docs/instructions/persistent-instructions.md",
       "tier": "hot",
-      "purpose": "Durable user preferences, source-structure quality gate, single-purpose UI controls, depth-first tab navigation, and long-running operating rules.",
+      "purpose": "Durable user preferences, source-structure quality gate, single-purpose UI controls, depth-first tab navigation, post-implementation build verification, and long-running operating rules.",
       "required": true,
       "load_order": 2
     },

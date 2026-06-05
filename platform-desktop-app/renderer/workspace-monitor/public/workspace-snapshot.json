@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T12:45:54.988Z",
+  "generatedAt": "2026-06-05T12:56:21.668Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 444,
-    "evaluations": 25,
+    "evaluations": 26,
     "webSearches": 13,
     "timingRecords": 11,
     "historyDays": 1,
-    "adminHistoryDocuments": 2238,
+    "adminHistoryDocuments": 2247,
     "adminHistoryDays": 6,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7332,6 +7332,342 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-input-json",
+      "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 05 Auto Build After Implementation Input",
+      "excerpt": "{ \"initial instruction\": \"매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.\", \"result summary\": \"Added a durable close out rule requiring meaningful implementation work to run the owning project's build or package command before final response, with explicit exception handling when no appropri",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.&quot;, &quot;result summary&quot;: &quot;Added a durable close out rule requiring meaningful implementation work to run the owning project&#039;s build or package command before final response, with explicit exception handling when no appropriate build applies.&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;changed files&quot;: &quot;AGENTS.md&quot;, &quot; </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 5887,
+      "updatedAt": "2026-06-05T12:55:35.485Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: 구현 완료 후 자동 빌드 규칙",
+      "excerpt": "평가: 구현 완료 후 자동 빌드 규칙 결과 사용자의 지속 지시를 durable instruction과 Codex runtime adapter에 반영했다. 의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build/package 명령을 실행해야 한다. build 명령이 없거나 부적절한 경우 이유와 가장 강한 대체 검증을 기록하도록 예외 조건을 명시했다. memory bootstrap manifest에 이 규칙을 persistent instruction hot context로 연결했다. 검증 ",
+      "html": "<p>평가: 구현 완료 후 자동 빌드 규칙 결과 사용자의 지속 지시를 durable instruction과 Codex runtime adapter에 반영했다. 의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build/package 명령을 실행해야 한다. build 명령이 없거나 부적절한 경우 이유와 가장 강한 대체 검증을 기록하도록 예외 조건을 명시했다. memory bootstrap manifest에 이 규칙을 persistent instruction hot context로 연결했다. 검증 python3 tools/docs audit/src/docs audit.py check : 통과 PYTHONPATH=src python3 m a</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1843,
+      "updatedAt": "2026-06-05T12:55:26.168Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "specs-workspace-platform-2026-06-05-auto-build-after-implementation-validation-ko-md",
+      "path": "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/validation.ko.md",
+      "category": "shared-spec",
+      "language": "ko",
+      "title": "검증: 구현 완료 후 자동 빌드 규칙",
+      "excerpt": "검증: 구현 완료 후 자동 빌드 규칙 검증 계획 python3 tools/docs audit/src/docs audit.py check PYTHONPATH=src python3 m agent platform.cli check memory bootstrap configs/memory/bootstrap manifest.json PYTHONPATH=src python3 m agent platform.cli check config contract configs/memory/bootstrap manifes",
+      "html": "<h1>검증: 구현 완료 후 자동 빌드 규칙</h1>\n<h2>검증 계획</h2>\n<ul>\n<li><code>python3 _tools/docs-audit/src/docs_audit.py --check</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json</code></li>\n<li><code>python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-05-auto-build-after-implementation.json</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li><code>python3 _tools/docs-audit/src/docs_audit.py --check</code>: <code>docs_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json</code>: <code>ready_to_bootstrap</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json</code>: <code>self_documenting</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json</code>: <code>coverage_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json</code>: <code>ready_to_close</code></li>\n<li><code>python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-05-auto-build-after-implementation.json</code>: <code>ready</code>, timing은 사후 partial 기록이라 phase duration 경고 있음</li>\n<li><code>git diff --check</code>: 통과</li>\n</ul>\n<h2>빌드 적용성</h2>\n<ul>\n<li>이번 변경은 제품 source implementation이 아니라 durable instruction과 memory config 변경이다.</li>\n<li>owning project build/package 대상이 없으므로 전체 제품 빌드 대신 docs audit, memory bootstrap, config contract, omission guard, evaluator를 대체 검증으로 사용한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2031,
+      "updatedAt": "2026-06-05T12:55:26.168Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_specs/workspace-platform"
+    },
+    {
+      "id": "specs-workspace-platform-2026-06-05-auto-build-after-implementation-tasks-ko-md",
+      "path": "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/tasks.ko.md",
+      "category": "shared-spec",
+      "language": "ko",
+      "title": "작업 목록: 구현 완료 후 자동 빌드 규칙",
+      "excerpt": "작업 목록: 구현 완료 후 자동 빌드 규칙 x 웹 검색 기록 생성 x memory bootstrap 확인 x work mode 선택 기록 생성 x persistent instruction 한국어/영어/공통 문서 갱신 x AGENTS.md close out rule 갱신 x memory bootstrap manifest 갱신 x 요구사항 변경/검토 기록 생성 x 스펙/계획/검증/추적성 기록 생성 x 검증 명령 실행 x 평가 기록 생성 커밋 및 푸시",
+      "html": "<h1>작업 목록: 구현 완료 후 자동 빌드 규칙</h1>\n<ul>\n<li>[x] 웹 검색 기록 생성</li>\n<li>[x] memory bootstrap 확인</li>\n<li>[x] work_mode 선택 기록 생성</li>\n<li>[x] persistent instruction 한국어/영어/공통 문서 갱신</li>\n<li>[x] <code>AGENTS.md</code> close-out rule 갱신</li>\n<li>[x] memory bootstrap manifest 갱신</li>\n<li>[x] 요구사항 변경/검토 기록 생성</li>\n<li>[x] 스펙/계획/검증/추적성 기록 생성</li>\n<li>[x] 검증 명령 실행</li>\n<li>[x] 평가 기록 생성</li>\n<li>[ ] 커밋 및 푸시</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 477,
+      "updatedAt": "2026-06-05T12:55:26.167Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_specs/workspace-platform"
+    },
+    {
+      "id": "history-2026-2026-06-05-md",
+      "path": "_history/2026/2026-06-05.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 05",
+      "excerpt": "2026 06 05 구현 완료 후 자동 빌드 규칙 사용자가 매번 직접 빌드하지 않도록, 의미 있는 구현 작업 close out에서 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 지시를 추가했다. build 명령이 없거나 안전하지 않거나 비용이 과도하거나 변경 범위 밖이면 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/평가 기록을 연결했다. W",
+      "html": "<p>2026 06 05 구현 완료 후 자동 빌드 규칙 사용자가 매번 직접 빌드하지 않도록, 의미 있는 구현 작업 close out에서 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 지시를 추가했다. build 명령이 없거나 안전하지 않거나 비용이 과도하거나 변경 범위 밖이면 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/평가 기록을 연결했다. Workspace Monitor Fixed the slow code loading path in Source Review by limiting r</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 28480,
+      "updatedAt": "2026-06-05T12:54:26.573Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-omission-json",
+      "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 05 Auto Build After Implementation Omission",
+      "excerpt": "{ \"task\": \"Auto build after implementation durable rule.\", \"work mode\": \"governance\", \"expected items\": { \"item id\": \"persist user rule\", \"description\": \"Persist the user's future instruction that implementation work should run build/package before close out.\", \"source\": \" histor",
+      "html": "<p>{ &quot;task&quot;: &quot;Auto build after implementation durable rule.&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;persist user rule&quot;, &quot;description&quot;: &quot;Persist the user&#039;s future instruction that implementation work should run build/package before close out.&quot;, &quot;source&quot;: &quot; history/user requests/2026/2026 06 05 auto build after implementation.ko.md&quot;, &quot;require</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4288,
+      "updatedAt": "2026-06-05T12:54:26.572Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-05-auto-build-after-implementation-json",
+      "path": "_history/work-timings/2026/2026-06-05-auto-build-after-implementation.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 05 Auto Build After Implementation",
+      "excerpt": "{ \"task id\": \"2026 06 05 auto build after implementation\", \"title\": \"Auto build after implementation durable rule\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"created at\": \"2026 06 05\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"s",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 05 auto build after implementation&quot;, &quot;title&quot;: &quot;Auto build after implementation durable rule&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;created at&quot;: &quot;2026 06 05&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;notes&quot;: &quot;Checked general bu</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2581,
+      "updatedAt": "2026-06-05T12:54:26.572Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 구현 완료 후 자동 빌드",
+      "excerpt": "요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instruction",
+      "html": "<p>요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instructions/persistent instructions.ko.md docs/instructions/persistent instructions.en.md </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 920,
+      "updatedAt": "2026-06-05T12:53:58.423Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_history/user-requests/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 구현 완료 후 자동 빌드",
+      "excerpt": "사용자 요청 요약: 구현 완료 후 자동 빌드 요청 구현이 끝날 때마다 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동으로 수행하라는 지속 지시. 해석 의미 있는 구현 작업의 close out에는 담당 프로젝트의 build 또는 package 검증이 포함되어야 한다. build가 없거나 부적절한 작업은 예외 사유와 대체 검증을 기록해야 한다. 이번 변경은 실제 제품 코드 구현이 아니라 workspace 운영 규칙 변경이다.",
+      "html": "<p>사용자 요청 요약: 구현 완료 후 자동 빌드 요청 구현이 끝날 때마다 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동으로 수행하라는 지속 지시. 해석 의미 있는 구현 작업의 close out에는 담당 프로젝트의 build 또는 package 검증이 포함되어야 한다. build가 없거나 부적절한 작업은 예외 사유와 대체 검증을 기록해야 한다. 이번 변경은 실제 제품 코드 구현이 아니라 workspace 운영 규칙 변경이다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 552,
+      "updatedAt": "2026-06-05T12:53:58.423Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 구현 완료 후 자동 빌드",
+      "excerpt": "작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다.",
+      "html": "<p>작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 414,
+      "updatedAt": "2026-06-05T12:53:58.423Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "specs-workspace-platform-2026-06-05-auto-build-after-implementation-traceability-ko-md",
+      "path": "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/traceability.ko.md",
+      "category": "shared-spec",
+      "language": "ko",
+      "title": "추적성: 구현 완료 후 자동 빌드 규칙",
+      "excerpt": "추적성: 구현 완료 후 자동 빌드 규칙 | 항목 | 연결 | | | | | 사용자 요청 | history/user requests/2026/2026 06 05 auto build after implementation.ko.md | | 요구사항 | REQ WS 091 | | 변경 기록 | requirements/changes/2026 06 05 auto build after implementation.ko.md | | 검토 기록 | requirements/reviews/2026 06 05 auto ",
+      "html": "<h1>추적성: 구현 완료 후 자동 빌드 규칙</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>사용자 요청</td><td><code>_history/user-requests/2026/2026-06-05-auto-build-after-implementation.ko.md</code></td></tr><tr><td>요구사항</td><td><code>REQ-WS-091</code></td></tr><tr><td>변경 기록</td><td><code>_requirements/changes/2026-06-05-auto-build-after-implementation.ko.md</code></td></tr><tr><td>검토 기록</td><td><code>_requirements/reviews/2026-06-05-auto-build-after-implementation.ko.md</code></td></tr><tr><td>스펙</td><td><code>_specs/workspace-platform/2026-06-05-auto-build-after-implementation/spec.ko.md</code></td></tr><tr><td>구현 문서</td><td><code>AGENTS.md</code>, <code>_docs/instructions/persistent-instructions*.md</code></td></tr><tr><td>메모리 anchor</td><td><code>agent-platform/configs/memory/bootstrap-manifest.json</code></td></tr><tr><td>평가</td><td><code>_history/evaluations/2026/2026-06-05-auto-build-after-implementation.ko.md</code></td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 753,
+      "updatedAt": "2026-06-05T12:53:58.422Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_specs/workspace-platform"
+    },
+    {
+      "id": "specs-workspace-platform-2026-06-05-auto-build-after-implementation-plan-ko-md",
+      "path": "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/plan.ko.md",
+      "category": "shared-spec",
+      "language": "ko",
+      "title": "계획: 구현 완료 후 자동 빌드 규칙",
+      "excerpt": "계획: 구현 완료 후 자동 빌드 규칙 1. 웹 우선 확인과 memory bootstrap을 수행한다. 2. work mode를 governance 로 선택하고 이유를 기록한다. 3. persistent instruction, Codex adapter, memory bootstrap manifest를 갱신한다. 4. 요구사항 변경/검토와 스펙 산출물을 남긴다. 5. omission guard, docs audit, memory/config 검증, evaluator, diff check를 실행한다. ",
+      "html": "<h1>계획: 구현 완료 후 자동 빌드 규칙</h1>\n<p>1. 웹 우선 확인과 memory bootstrap을 수행한다.</p>\n<p>2. work_mode를 <code>governance</code>로 선택하고 이유를 기록한다.</p>\n<p>3. persistent instruction, Codex adapter, memory bootstrap manifest를 갱신한다.</p>\n<p>4. 요구사항 변경/검토와 스펙 산출물을 남긴다.</p>\n<p>5. omission guard, docs audit, memory/config 검증, evaluator, diff check를 실행한다.</p>\n<p>6. 커밋하고 <code>origin/main</code>에 푸시한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 465,
+      "updatedAt": "2026-06-05T12:53:58.421Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_specs/workspace-platform"
+    },
+    {
+      "id": "specs-workspace-platform-2026-06-05-auto-build-after-implementation-spec-ko-md",
+      "path": "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/spec.ko.md",
+      "category": "shared-spec",
+      "language": "ko",
+      "title": "스펙: 구현 완료 후 자동 빌드 규칙",
+      "excerpt": "스펙: 구현 완료 후 자동 빌드 규칙 목표 사용자가 직접 빌드하지 않아도 되도록, 에이전트가 의미 있는 구현 작업을 끝낼 때 담당 프로젝트의 build 또는 package 검증까지 수행한다. 요구사항 REQ WS 091 범위 durable instruction에 build/package close out rule 추가 Codex adapter인 AGENTS.md 에 실행 규칙 추가 memory bootstrap에서 해당 규칙을 hot persistent instruction anchor로 유지 요",
+      "html": "<h1>스펙: 구현 완료 후 자동 빌드 규칙</h1>\n<h2>목표</h2>\n<p>사용자가 직접 빌드하지 않아도 되도록, 에이전트가 의미 있는 구현 작업을 끝낼 때 담당 프로젝트의 build 또는 package 검증까지 수행한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-WS-091</code></li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li>durable instruction에 build/package close-out rule 추가</li>\n<li>Codex adapter인 <code>AGENTS.md</code>에 실행 규칙 추가</li>\n<li>memory bootstrap에서 해당 규칙을 hot persistent instruction anchor로 유지</li>\n<li>요청, 계획, 검증, 평가 기록 생성</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>CI/CD pipeline 변경</li>\n<li>새 build runner 구현</li>\n<li>특정 프로젝트의 build script 변경</li>\n<li>docs-only 작업에 전체 제품 빌드 강제</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>향후 의미 있는 구현 작업은 최종 응답 전에 owning project build/package 명령을 실행한다.</li>\n<li>build가 불가능하거나 부적절하면 이유와 대체 검증을 기록한다.</li>\n<li>이번 governance 변경은 docs/config/evaluator 검증을 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 994,
+      "updatedAt": "2026-06-05T12:53:58.421Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_specs/workspace-platform"
+    },
+    {
+      "id": "history-plans-2026-2026-06-05-auto-build-after-implementation-mode-ko-md",
+      "path": "_history/plans/2026/2026-06-05-auto-build-after-implementation-mode.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 모드 선택: 구현 완료 후 자동 빌드 규칙",
+      "excerpt": "작업 모드 선택: 구현 완료 후 자동 빌드 규칙 선택 work mode: governance 이유 사용자의 지시는 앞으로 모든 구현 작업의 close out 행동을 바꾸는 지속 운영 규칙이다. persistent instructions , AGENTS.md , memory bootstrap anchor, 요구사항, 스펙, 평가 기록에 영향을 준다. 소스 기능 구현은 아니므로 빌드 실행 규칙 자체는 문서화하고, 이번 변경은 docs/config 검증으로 닫는다. 범위 포함: durable instr",
+      "html": "<p>작업 모드 선택: 구현 완료 후 자동 빌드 규칙 선택 work mode: governance 이유 사용자의 지시는 앞으로 모든 구현 작업의 close out 행동을 바꾸는 지속 운영 규칙이다. persistent instructions , AGENTS.md , memory bootstrap anchor, 요구사항, 스펙, 평가 기록에 영향을 준다. 소스 기능 구현은 아니므로 빌드 실행 규칙 자체는 문서화하고, 이번 변경은 docs/config 검증으로 닫는다. 범위 포함: durable instruction, memory bootstrap, 요구사항/스펙/히스토리/평가 기록 제외: CI 시스템 변경, 새 build runner 구현, 특</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 851,
+      "updatedAt": "2026-06-05T12:53:35.043Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "requirements-changes-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_requirements/changes/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "requirement",
+      "language": "ko",
+      "title": "요구사항 변경: 구현 완료 후 자동 빌드",
+      "excerpt": "요구사항 변경: 구현 완료 후 자동 빌드 사용자 지시 구현이 끝날 때마다 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동으로 실행해야 한다. 변경 REQ WS 091 을 추가한다. 의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build 또는 package 명령을 실행해야 한다. build 명령이 없거나, 안전하지 않거나, 비용이 과도하거나, 변경 범위 밖이면 이유와 대체 검증을 기록해야 한다. 영향 범위 AGENTS.md docs/instructions/persistent ins",
+      "html": "<h1>요구사항 변경: 구현 완료 후 자동 빌드</h1>\n<h2>사용자 지시</h2>\n<ul>\n<li>구현이 끝날 때마다 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동으로 실행해야 한다.</li>\n</ul>\n<h2>변경</h2>\n<ul>\n<li><code>REQ-WS-091</code>을 추가한다.</li>\n<li>의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build 또는 package 명령을 실행해야 한다.</li>\n<li>build 명령이 없거나, 안전하지 않거나, 비용이 과도하거나, 변경 범위 밖이면 이유와 대체 검증을 기록해야 한다.</li>\n</ul>\n<h2>영향 범위</h2>\n<ul>\n<li><code>AGENTS.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.ko.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.en.md</code></li>\n<li><code>agent-platform/configs/memory/bootstrap-manifest.json</code></li>\n</ul>\n<h2>검증 기준</h2>\n<ul>\n<li>향후 구현 작업 close-out에서 build/package 실행 결과가 최종 응답 또는 평가 기록에 포함되어야 한다.</li>\n<li>docs-only 또는 build 대상이 없는 작업은 예외 사유와 대체 검증을 기록해야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1042,
+      "updatedAt": "2026-06-05T12:53:35.043Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_requirements/changes"
+    },
+    {
+      "id": "requirements-reviews-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_requirements/reviews/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "requirement",
+      "language": "ko",
+      "title": "요구사항 검토: 구현 완료 후 자동 빌드",
+      "excerpt": "요구사항 검토: 구현 완료 후 자동 빌드 결정 승인: REQ WS 091 은 workspace/platform 공통 운영 요구사항으로 적합하다. 이유 사용자의 반복 수동 빌드 작업을 줄이는 명확한 지속 지시다. 기존 close out gate와 검증 중심 운영 원칙에 부합한다. 프로젝트별 build command가 서로 다를 수 있으므로 특정 명령을 고정하지 않고 owning project의 build/package 명령을 찾는 방식이 유지보수에 맞다. 비범위 모든 docs only 작업에 무조건",
+      "html": "<h1>요구사항 검토: 구현 완료 후 자동 빌드</h1>\n<h2>결정</h2>\n<ul>\n<li>승인: <code>REQ-WS-091</code>은 workspace/platform 공통 운영 요구사항으로 적합하다.</li>\n</ul>\n<h2>이유</h2>\n<ul>\n<li>사용자의 반복 수동 빌드 작업을 줄이는 명확한 지속 지시다.</li>\n<li>기존 close-out gate와 검증 중심 운영 원칙에 부합한다.</li>\n<li>프로젝트별 build command가 서로 다를 수 있으므로 특정 명령을 고정하지 않고 owning project의 build/package 명령을 찾는 방식이 유지보수에 맞다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>모든 docs-only 작업에 무조건 전체 제품 빌드를 강제하지 않는다.</li>\n<li>CI/CD 시스템이나 새 빌드 자동화 도구 구현은 이번 범위가 아니다.</li>\n</ul>\n<h2>후속 검증</h2>\n<ul>\n<li>향후 구현 작업 close-out 기록은 build/package 결과 또는 명시적 예외 사유를 포함해야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 843,
+      "updatedAt": "2026-06-05T12:53:35.043Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_requirements/reviews"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_history/web-searches/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 구현 완료 후 자동 빌드 규칙",
+      "excerpt": "웹 검색 기록: 구현 완료 후 자동 빌드 규칙 요청 사용자가 매번 직접 빌드하지 않도록, 구현이 끝나면 에이전트가 빌드까지 자동으로 실행하라는 지속 지시를 남기는 작업. 검색 software development best practice run build before delivery after implementation 확인한 출처 Octopus Deploy, \"Do You Build Your Binaries Once?\", https://octopus.com/blog/build your binar",
+      "html": "<p>웹 검색 기록: 구현 완료 후 자동 빌드 규칙 요청 사용자가 매번 직접 빌드하지 않도록, 구현이 끝나면 에이전트가 빌드까지 자동으로 실행하라는 지속 지시를 남기는 작업. 검색 software development best practice run build before delivery after implementation 확인한 출처 Octopus Deploy, &quot;Do You Build Your Binaries Once?&quot;, https://octopus.com/blog/build your binaries once AWS Well Architected Framework, &quot;Test and validate changes&quot;, https://do</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1676,
+      "updatedAt": "2026-06-05T12:53:35.042Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "docs-instructions-persistent-instructions-en-md",
+      "path": "_docs/instructions/persistent-instructions.en.md",
+      "category": "workspace-doc",
+      "language": "en",
+      "title": "Persistent Instructions",
+      "excerpt": "Persistent Instructions This document records durable user instructions in English. Active Instructions Manage this repository as a monorepo for a personal agent building platform. The platform's top level purpose is to keep reducing repetitive human work and elapsed work time. R",
+      "html": "<h1>Persistent Instructions</h1>\n<p>This document records durable user instructions in English.</p>\n<h2>Active Instructions</h2>\n<ul>\n<li>Manage this repository as a monorepo for a personal agent-building platform.</li>\n<li>The platform&#039;s top-level purpose is to keep reducing repetitive human work and elapsed work time. Repeated research, comparison, judgment, execution, and verification should first be modeled as the process a human actually performs; when automation value is confirmed, promote the repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.</li>\n<li>Automation must not hide human-judgment checkpoints, validation criteria, or rollback boundaries. Automation candidates should be checked through work timing records, bottleneck records, and evaluator results to confirm that they actually reduce repetition and time.</li>\n<li>&quot;Like a human directly doing the work&quot; means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.</li>\n<li>Treat source structure quality as a product quality gate. Keep refactoring continuously while working, but keep each refactor behavior-preserving, scoped, tested, and tied to clearer ownership boundaries.</li>\n<li>Keep the user&#039;s point of view as a product quality gate. For every meaningful product, UI, workflow, documentation, setup, or automation change, identify the user&#039;s goal, first action, expected next feedback, likely confusion points, and success evidence; rework any result that is technically correct but unclear, hard to start, hard to recover from, or not aligned with the user&#039;s actual workflow.</li>\n<li>When the platform detects repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns while doing work, use <code>capability-promotion-agent</code> and <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code> to create automatic capability candidates. This is allowed only as bounded black-box processing: the user-facing experience may feel automatic, but internal observations, candidates, evidence, risk, rejected lighter options, validation, rollback or disablement, documentation, evaluation, and commit/push traces must remain auditable.</li>\n<li>Capability promotion must record the direct human work model before idea generation. Generated ideas should reduce or stabilize concrete human process steps, not merely react to the user phrase.</li>\n<li>Capability promotion separates idea generation from idea evaluation. For non-trivial problems, generate several improvement ideas, score them by repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit, then record selected, rejected, or queued reasons.</li>\n<li>Capability promotion must check the smallest asset first in this order: <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code>. Destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes must not auto-execute without a human checkpoint and rollback plan.</li>\n<li>Sensitive files must be centrally routed to <code>_private/sensitive/</code> or an external secret manager, while AI agents must not read or index <code>_private/</code> contents by default. Ask for a redacted extract first; direct inspection requires explicit one-time permission for the exact path and operation.</li>\n<li>The source of truth for this boundary is <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, and <code>_ops/security/README.ko.md</code>. Run <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code> after changing <code>.gitignore</code>, maps, snapshots, collectors, public artifacts, installer payload rules, or sensitive-file handling rules.</li>\n<li>Keep the workspace operating principles usable from Claude Code, Cursor, Antigravity, Codex, or another AI coding tool the user prefers.</li>\n<li>All agents shall strongly adhere to durable principles. Principles are execution contracts and close-out gates, not decoration; speed, profit, optimism, convenience, or user pressure must not silently bypass required evidence, safety, privacy, legality, quality, provenance, validation, or evaluation.</li>\n<li>Keep <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code> and <code>_ops/assistant-runtimes/adapter-registry.json</code> as the source of truth for tool-agnostic runtime decisions.</li>\n<li>Treat <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, and <code>.agents/rules/</code> as runtime adapters. Do not copy common policy into separate divergent sources.</li>\n<li>Keep separate projects as root-level <code>kebab-case</code> folders.</li>\n<li>Keep project-specific files inside the owning project folder.</li>\n<li>When a new interest has an independent lifecycle, create a new root project and register it under <code>_ops/projects/</code>.</li>\n<li>Commit every completed meaningful change set.</li>\n<li>Push completed commits to <code>origin/main</code> immediately unless explicitly told not to push.</li>\n<li>Before closing meaningful work, evaluate the result against the initial user instruction and rework real gaps.</li>\n<li>After completing meaningful implementation work, run the o</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 34112,
+      "updatedAt": "2026-06-05T12:52:56.551Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "_docs/instructions"
+    },
+    {
+      "id": "docs-instructions-persistent-instructions-ko-md",
+      "path": "_docs/instructions/persistent-instructions.ko.md",
+      "category": "workspace-doc",
+      "language": "ko",
+      "title": "지속 지시",
+      "excerpt": "지속 지시 이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 한국어로 정리한다. 활성 지시 이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다. 플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다. 자동화는 인간 판단 지점, 검증 기준, ",
+      "html": "<h1>지속 지시</h1>\n<p>이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 한국어로 정리한다.</p>\n<h2>활성 지시</h2>\n<ul>\n<li>이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다.</li>\n<li>플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다.</li>\n<li>자동화는 인간 판단 지점, 검증 기준, rollback 경계를 숨기지 않는다. 자동화 후보는 실제 반복 감소와 시간 절감 효과를 작업 시간 기록, 병목 기록, evaluator 결과로 확인한다.</li>\n<li>“직접 사람이 하는 것처럼”은 사람 말투를 흉내 내는 것이 아니라 유능한 사람이 실제로 일할 때의 목표, 맥락, 출처, 가정, 선택지 비교, 결정, 실행 메모, 검증, 인수인계, 리뷰 순서와 산출물을 먼저 모델링한다는 뜻이다.</li>\n<li>소스 구조 품질을 제품 품질 gate로 다룬다. 작업 중 계속 리팩터링하되, 각 리팩터링은 동작 보존, 작은 범위, 테스트, 더 명확한 소유 경계와 연결되어야 한다.</li>\n<li>사용자 관점을 제품 품질 gate로 계속 적용한다. 의미 있는 제품, UI, workflow, 문서, setup, 자동화 변경마다 사용자의 목표, 첫 행동, 다음에 받아야 할 피드백, 헷갈릴 지점, 성공 근거를 확인하고, 기술적으로는 맞더라도 시작하기 어렵거나 이해하기 어렵거나 복구하기 어렵거나 실제 사용자 흐름과 어긋나는 결과는 재작업한다.</li>\n<li>플랫폼이 작업 중 반복, 병목, 누락, 검증 실패, 수동 재작업, 자주 쓰는 조사/프롬프트/도구 패턴을 발견하면 <code>capability-promotion-agent</code>와 <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code>을 사용해 자동 기능 후보로 만들 수 있다. 이 흐름은 bounded black-box로만 허용한다. 사용자 경험은 자동 개선처럼 보일 수 있지만 내부 observation, candidate, evidence, risk, rejected lighter options, validation, rollback 또는 disablement, documentation, evaluation, commit/push trace는 감사 가능해야 한다.</li>\n<li>capability promotion은 아이디어 생성 전에 사람이 직접 수행하는 작업 모델을 먼저 기록한다. 생성된 아이디어는 사용자 문구만이 아니라 구체적인 human process step을 줄이거나 안정화해야 한다.</li>\n<li>capability promotion은 아이디어 생성과 아이디어 평가를 분리한다. 사소하지 않은 문제는 여러 개선 아이디어를 만들고, 반복 감소, 시간 절감, 유지보수 비용, 근거 강도, 위험 적합성, 가장 작은 자산 적합성으로 평가한 뒤 선택/기각/대기 이유를 남긴다.</li>\n<li>capability promotion은 <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code> 순서로 가장 작은 자산을 먼저 검토한다. destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, irreversible change는 human checkpoint와 rollback 계획 없이 자동 실행하지 않는다.</li>\n<li>민감 파일은 <code>_private/sensitive/</code> 또는 외부 secret manager로 중앙 라우팅하되, AI 에이전트는 <code>_private/</code> 내부를 기본적으로 직접 읽거나 색인하지 않는다. 필요한 정보는 redacted extract를 먼저 요청하고, 직접 열람은 특정 경로와 작업에 대한 명시적 1회 허가가 있을 때만 허용한다.</li>\n<li>민감 파일 경계의 원본은 <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, <code>_ops/security/README.ko.md</code>에 둔다. <code>.gitignore</code>, map, snapshot, collector, public artifact, installer 규칙을 바꾸면 <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code>를 실행한다.</li>\n<li>이 저장소의 운영 원칙은 Codex에만 묶지 않고 Claude Code, Cursor, Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 재사용할 수 있게 유지한다.</li>\n<li>도구 독립형 원칙의 원본은 <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code>와 <code>_ops/assistant-runtimes/adapter-registry.json</code>에 둔다.</li>\n<li>모든 에이전트는 영속 원칙을 강하게 고수한다. 원칙은 장식 문구가 아니라 실행 계약과 close-out gate이며, 속도, 돈, 낙관, 편의, 사용자 압박은 필요한 근거, 안전, 개인정보, 법, 품질, provenance, 검증, 평가를 무단 생략하는 이유가 될 수 없다.</li>\n<li><code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, <code>.agents/rules/</code>는 도구별 adapter로 취급하고, 공통 정책을 길게 복사해 서로 다른 원본으로 갈라지게 하지 않는다.</li>\n<li>별도 프로젝트는 루트의 <code>kebab-case</code> 폴더로 관리한다.</li>\n<li>프로젝트별 파일은 해당 프로젝트 폴더 안에만 둔다.</li>\n<li>새 관심사나 독립 라이프사이클이 생기면 새 루트 프로젝트로 만들고 <code>_ops/projects/</code>에 등록한다.</li>\n<li>의미 있는 변경 단위가 끝날 때마다 커밋한다.</li>\n<li>커밋 후 별도 지시가 없으면 즉시 <code>origin/main</code>에 push한다.</li>\n<li>의미 있는 작업을 닫기 전 초기 사용자 지시와 결과를 평가하고, 실제 gap은 재작업한다.</li>\n<li>의미 있는 구현 작업을 완료하면 최종 응답 전에 해당 프로젝트의 build 또는 package 명령을 자동으로 실행해 사용자가 직접 빌드하지 않아도 되게 한다. build 명령이 없거나, 안전하지 않거나, 비용이 과도하거나, 변경한 프로젝트 경계 밖이면 그 이유를 기록하고 가능한 가장 강한 대체 검증을 실행한다.</li>\n<li>평가 전에는 완료 작업을 요약하고 관련 이전 작업이나 강한 레퍼런스를 확인한다.</li>\n<li>사용자의 작업과 지시는 요구사항 후보로 보고, 구현 전 관련 요구사항을 정의/검토/수정/기준선화한다.</li>\n<li>공통 요구사항은 <code>_requirements/</code>에, 프로젝트별 요구사항은 해당 프로젝트의 <code>docs/requirements/</code>에 저장한다.</li>\n<li>의미 있는 구현 작업은 spec-driven 구조로 진행해 요구사항을 스펙, 계획, 작업 목록, 검증, traceability 산출물로 바꾼 뒤 코딩한다.</li>\n<li>공통 스펙은 <code>_specs/</code>에, 프로젝트별 스펙은 해당 프로젝트의 <code>specs/</code>에 저장한다.</li>\n<li>활성 프로젝트 스펙이 애매하거나 현재 소스, 테스트, 생성 산출물과 다를 때는 어느 쪽도 바로 수정하지 말고 스펙/소스 조정 workflow를 먼저 실행한다. 이슈를 <code>update_spec</code>, <code>update_source</code>, <code>ask_user</code>, <code>defer</code>로 분류하고, <code>ask_user</code>는 안정적인 질문 ID와 답변 형식이 포함된 <code>clarification_needed</code> 알림으로 사용자에게 질문한 뒤 답변이 기록되기 전까지 관련 스펙이나 소스를 수정하지 않는다.</li>\n<li>커스텀 스킬 생성/수정은 명시적으로 관리하며 <code>_skills/</code> 원본, 검증, 필요한 전진 테스트, 개선 아이디어를 남긴다.</li>\n<li>의미 있는 작업의 최종 평가는 <code>_history/evaluations/YYYY/</code> 아래 파일로 저장한다.</li>\n<li>중요한 계획을 세우는 과정은 <code>_history/plans/YYYY/</code> 아래 파일로 저장한다.</li>\n<li>의미 있는 사용자 요청은 원문 전체가 아니라 요약으로 <code>_history/user-requests/YYYY/</code> 아래에 저장한다.</li>\n<li>의미 있는 요청은 <code>_history/request-traces/YYYY/</code> 아래에서 요청, 결과, 산출물, 평가, 커밋을 연결해 저장한다.</li>\n<li>작업 히스토리는 <code>_history/YYYY/YYYY-MM-DD.md</code>에 기록한다.</li>\n<li>나중에 문서만 보고도 한 일을 쉽게 파악할 수 있도록 <code>_history/work-summaries/YYYY/</code> 아래 빠른 작업 요약을 유지한다.</li>\n<li><code>_ops/</code>를 프롬프트, 워크플로, 맵을 위한 운영 허브로 사용한다.</li>\n<li><code>_docs/</code>는 <code>_docs/registry.json</code>의 카테고리 규칙으로 관리하고, 허용된 index 파일을 제외한 Markdown 문서를 <code>_docs</code> 루트에 직접 두지 않는다. 문서 구조나 필수 문서 경로를 바꾸면 <code>python3 _tools/docs-audit/src/docs_audit.py --check</code>를 실행한다.</li>\n<li>진행 중인 에이전트와 병렬 작업은 <code>_ops/coordination/</code>에서 추적한다.</li>\n<li>인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용은 <code>_research/</code>에 기록한다.</li>\n<li>에이전트와 플랫폼 운영의 근본 철학은 <code>_philosophy/</code>에 기록한다.</li>\n<li>모든 새 사용자 지시는 계획, 저장소 탐색, 파일 수정 전에 웹 검색을 먼저 수행한다.</li>\n<li><code>_ops/prompts/</code>의 모든 재사용 프롬프트 실행도 웹 검색을 먼저 수행한다.</li>\n<li>의미 있는 웹 검색 기록은 <code>_history/web-searches/YYYY/</code>에 저장하고 작업 평가 입력에 <code>web_search_record_targets</code>를 포함한다.</li>\n<li>검색 판단 과정은 검색어, 확인한 출처, 제외한 약한 출처, 계획에 반영한 인사이트, 남은 불확실성 형태의 공개 판단 요약으로 텍스트에 남긴다. 내부 추론 원문은 저장하지 않는다.</li>\n<li>웹 검색이 무관하거나 불가능하면 그 사실을 기록하고 로컬 검증을 강화해 진행한다.</li>\n<li>웹 검색 후 로컬 계획 전에 <code>memory-bootstrap-agent</code>로 필수 메모리 anchor를 확인하고 hot context를 읽는다.</li>\n<li>웹 검색과 메모리 부트스트랩 후에는 `agent-platform/configs/workflows/work-</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 36451,
+      "updatedAt": "2026-06-05T12:52:56.550Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "_docs/instructions"
+    },
+    {
+      "id": "docs-instructions-persistent-instructions-md",
+      "path": "_docs/instructions/persistent-instructions.md",
+      "category": "workspace-doc",
+      "language": "unknown",
+      "title": "Persistent Instructions",
+      "excerpt": "Persistent Instructions 이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다. 병렬 문서: 한국어: docs/instructions/persistent instructions.ko.md persistent instructions.ko.md 영어: docs/instructions/persistent instructions.en.md persistent instructions.en.md",
+      "html": "<h1>Persistent Instructions</h1>\n<p>이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다.</p>\n<p>병렬 문서:</p>\n<ul>\n<li>한국어: <span class=\"doc-link\">_docs/instructions/persistent-instructions.ko.md</span></li>\n<li>영어: <span class=\"doc-link\">_docs/instructions/persistent-instructions.en.md</span></li>\n</ul>\n<h2>Active Instructions</h2>\n<ul>\n<li>Manage this repository as a monorepo for a personal agent-building platform.</li>\n<li>The platform&#039;s top-level purpose is to keep reducing repetitive human work and elapsed work time by modeling real human research, comparison, judgment, execution, and verification processes, then promoting automation-worthy repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.</li>\n<li>Automation must preserve human-judgment checkpoints, validation criteria, and rollback boundaries, and should be checked with timing, bottleneck, and evaluator records when the work is meaningful.</li>\n<li>&quot;Like a human directly doing the work&quot; means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.</li>\n<li>Treat source structure quality as a product quality gate. Keep refactoring continuously while working, but keep each refactor behavior-preserving, scoped, tested, and tied to clearer ownership boundaries.</li>\n<li>Keep the user&#039;s point of view as a product quality gate. For every meaningful product, UI, workflow, documentation, setup, or automation change, identify the user&#039;s goal, first action, expected next feedback, likely confusion points, and success evidence; rework any result that is technically correct but unclear, hard to start, hard to recover from, or not aligned with the user&#039;s actual workflow.</li>\n<li>When the platform detects repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns, use <code>capability-promotion-agent</code> and <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code> to create automatic capability candidates. This is bounded black-box processing: user-facing automation may feel smooth, but internal observations, candidates, evidence, risk, rejected lighter options, validation, rollback or disablement, documentation, evaluation, and commit/push traces must remain auditable.</li>\n<li>Capability promotion must record the direct human work model before idea generation. Generated ideas should reduce or stabilize concrete human process steps, not merely react to the user phrase.</li>\n<li>Capability promotion separates idea generation from idea evaluation. For non-trivial problems, generate several improvement ideas, score them by repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit, then record selected, rejected, or queued reasons.</li>\n<li>Capability promotion checks the smallest asset first in this order: <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code>. Destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes must not auto-execute without a human checkpoint and rollback plan.</li>\n<li>Sensitive files must be centrally routed to <code>_private/sensitive/</code> or an external secret manager, while AI agents must not read or index <code>_private/</code> contents by default. Ask for a redacted extract first; direct inspection requires explicit one-time permission for the exact path and operation.</li>\n<li>The source of truth for this boundary is <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, and <code>_ops/security/README.ko.md</code>. Run <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code> after changing <code>.gitignore</code>, maps, snapshots, collectors, public artifacts, installer payload rules, or sensitive-file handling rules.</li>\n<li>Keep the workspace operating principles tool-agnostic so the same structure can be used from Codex, Claude Code, Cursor, Antigravity, or another user-preferred AI coding tool.</li>\n<li>Treat the installable platform as the primary host runtime. It launches first and owns task state, durable memory, decisions, artifacts, validation, and UI authority; Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or other commercial/external AI tools attach only as guest adapters through explicit CLI/runtime adapter contracts.</li>\n<li>Treat this repository as the development source that builds the platform, not as the customer-visible product payload. Installed customers should use the app, customer-selected workspaces, app-managed data stores, classified logs, and exports without seeing the platform source tree.</li>\n<li>Separate platform source code from runtime data planes: user workspace data, platform data stores, log stores, cache stores, and agent runtime workspaces. Use <code>platform-desktop-app/configs/runtime-data-boundary-registry.json</code> before adding persistent runtime data, logs, support exports, installer payload behavior, or agent work directories.</li>\n<li>Keep reusable agent definitions grouped under <code>agent-platform/configs/agents/</code>; runtime agent input/output/log/handoff/temp work belongs in the install</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 33841,
+      "updatedAt": "2026-06-05T12:52:56.550Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "_docs/instructions"
+    },
+    {
+      "id": "agents-md",
+      "path": "AGENTS.md",
+      "category": "runtime-adapter",
+      "language": "unknown",
+      "title": "Repository Instructions",
+      "excerpt": "Repository Instructions This repository is the workspace for building and tracking a personal agent building platform and related projects. Workspace Rules Treat each root level non reserved directory as a separate project. Create new project directories at the repository root us",
+      "html": "<h1>Repository Instructions</h1>\n<p>This repository is the workspace for building and tracking a personal agent-building platform and related projects.</p>\n<h2>Workspace Rules</h2>\n<ul>\n<li>Treat each root-level non-reserved directory as a separate project.</li>\n<li>Create new project directories at the repository root using <code>kebab-case</code>.</li>\n<li>Use <code>_ops/naming/naming-policy.json</code> as the source of truth for durable naming rules.</li>\n<li>For new durable paths, use lower <code>kebab-case</code> for project/tool/skill/workflow/prompt/spec slugs, <code>snake_case</code> for Python packages and modules, <code>YYYY-MM-DD-&lt;slug&gt;</code> for dated records, and <code>name.ko.md</code>/<code>name.en.md</code> for important bilingual docs.</li>\n<li>Do not rename existing durable paths without a migration plan, trace update, and validation run.</li>\n<li>Reserve underscore-prefixed root directories for workspace operations:</li>\n<li><code>_docs/</code> for workspace-level documentation and decision records; keep it categorized through <code>_docs/registry.json</code></li>\n<li><code>_docs/instructions/</code> for durable instructions and baseline workspace rules</li>\n<li><code>_docs/policies/</code> for execution policies</li>\n<li><code>_docs/operating-models/</code> for conceptual operating models</li>\n<li><code>_docs/governance/</code> for cross-workspace governance documents</li>\n<li><code>_philosophy/</code> for foundational agent and platform operating philosophy</li>\n<li><code>_requirements/</code> for shared requirements baselines, change records, and review records</li>\n<li><code>_specs/</code> for shared spec-driven artifacts, implementation plans, task lists, validation, and traceability</li>\n<li><code>_history/</code> for dated work history and compressed context summaries</li>\n<li><code>_ops/</code> for operations navigation, prompts, workflows, and maps</li>\n<li><code>_research/</code> for reusable internet research and external reference notes</li>\n<li><code>_skills/</code> for tracked source copies of custom Codex skills</li>\n<li><code>_templates/</code> for reusable project scaffolds</li>\n<li><code>_tools/</code> for reusable local tools and scripts</li>\n<li><code>_archive/</code> for paused or retired projects</li>\n<li>Treat <code>_private/</code> and <code>outputs/</code> as local-only ignored folders, not durable repository knowledge:</li>\n<li><code>_private/</code> is the protected local vault for private scratch state and sensitive local files.</li>\n<li>Store real sensitive local files under <code>_private/sensitive/</code> or an external secret manager; track only policies, env var names, secret references, and redacted metadata.</li>\n<li>Agents must not recursively list, search, open, read, summarize, index, snapshot, embed, or use <code>_private/</code> contents by default. If sensitive content is needed, ask for a redacted extract first; direct inspection requires explicit one-time user permission for the exact path and operation.</li>\n<li><code>outputs/</code> is for transient one-off tool output only.</li>\n<li>Durable project artifacts must move into the owning project&#039;s <code>artifacts/</code> folder.</li>\n<li>Keep project-specific code, docs, tests, and assets inside that project folder.</li>\n<li>Keep project-specific configs, artifacts, tools, and decisions inside that project folder as well.</li>\n<li>Do not move or delete unrelated files unless the user explicitly asks.</li>\n<li>Prefer creating a project folder for substantial work instead of placing loose files at the repository root.</li>\n<li>Register root projects and their boundaries in <code>_ops/projects/registry.json</code>.</li>\n<li>Keep durable AI assistant operating principles tool-agnostic. Use <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code> and <code>_ops/assistant-runtimes/adapter-registry.json</code> as the shared source for adapting this workspace to Codex, Claude Code, Cursor, Antigravity, or another assistant runtime.</li>\n<li>All agents shall strongly adhere to durable principles. Treat principles as execution contracts and close-out gates, not motivational language; speed, profit, optimism, convenience, or user pressure must not silently bypass required evidence, safety, privacy, legality, quality, provenance, validation, or evaluation.</li>\n<li>Treat <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, and <code>.agents/rules/</code> as runtime adapters or entrypoints. Do not fork durable policy across them; update shared docs/configs first and keep adapters thin.</li>\n</ul>\n<h2>Git Rules</h2>\n<ul>\n<li>Check <code>git status</code> before editing and before committing.</li>\n<li>Commit every completed meaningful change set.</li>\n<li>Use commit messages in the form <code>type(scope): summary</code>.</li>\n<li>Keep commits scoped to the work just completed.</li>\n<li>Push completed commits to <code>origin/main</code> immediately after committing unless the user explicitly says not to push.</li>\n<li>Do not rewrite history, reset, or discard user changes unless explicitly requested.</li>\n<li>Update the relevant history log before committing when the work changes project direction, repository rules, or meaningful artifacts.</li>\n<li>Before final close-out of meaningful work, evaluate the result against the user&#039;s initial instruction and rework any real gaps before committing or final response.</li>\n<li>After completing meaningful implementation work, run the owning project&#039;s build or package command before final response so the user does not have to build manually. If no build command exists, or the build is unsafe, too costly, or outside the touched project boundary, record the reason and run the strongest available equivalent verification instead.</li>\n<li>Before evaluation, summarize completed work and check prior internal work or strong external references r</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 51437,
+      "updatedAt": "2026-06-05T12:52:56.549Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "AGENTS.md"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
       "path": "_history/evaluations/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
       "category": "evaluation",
@@ -7538,22 +7874,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-2026-2026-06-05-md",
-      "path": "_history/2026/2026-06-05.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 05",
-      "excerpt": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
-      "html": "<p>2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted Workspace Monitor button target sizing tokens and repeated action controls for mo</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 27948,
-      "updatedAt": "2026-06-05T12:24:06.562Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "platform-desktop-app-docs-requirements-2026-06-02-installable-desktop-ko-md",
@@ -9316,70 +9636,6 @@
       "workspaceArea": "_history/evaluations"
     },
     {
-      "id": "history-request-traces-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-      "path": "_history/request-traces/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: Scroll Scope Color Speed",
-      "excerpt": "요청 결과 추적: Scroll Scope Color Speed 요청 요약 사용자는 스크롤을 범위별로 나누고, 화면 색상을 단정하면서도 세련되게 정리하며, 버튼/탭/스크롤 상호작용의 느려짐을 줄이라고 요청했다. 결과 REQ WM 070 을 추가해 scope separated scrolling, restrained scrollbar color, offscreen animation pause를 요구사항으로 기준화했다. globals.css 에 scoped scroll token, stable scrol",
-      "html": "<p>요청 결과 추적: Scroll Scope Color Speed 요청 요약 사용자는 스크롤을 범위별로 나누고, 화면 색상을 단정하면서도 세련되게 정리하며, 버튼/탭/스크롤 상호작용의 느려짐을 줄이라고 요청했다. 결과 REQ WM 070 을 추가해 scope separated scrolling, restrained scrollbar color, offscreen animation pause를 요구사항으로 기준화했다. globals.css 에 scoped scroll token, stable scrollbar gutter, overscroll containment, 제한된 paint containment를 추가했다. ToolStudioPane</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1635,
-      "updatedAt": "2026-06-05T02:38:30.243Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Scroll Scope Color Speed",
-      "excerpt": "작업 요약: Scroll Scope Color Speed Workspace Monitor에 범위별 스크롤 계약을 추가했다. Tool Studio 내부 목록/상세/환경 영역은 독립 스크롤과 절제된 scrollbar 색상을 갖도록 정리했다. 고비용 3D canvas는 화면 밖, 문서 숨김, reduced motion 상황에서 animation loop를 정지한다. 테스트, 타입 체크, scroll check, build, customer build, perf budget, Browser/Playwri",
-      "html": "<p>작업 요약: Scroll Scope Color Speed Workspace Monitor에 범위별 스크롤 계약을 추가했다. Tool Studio 내부 목록/상세/환경 영역은 독립 스크롤과 절제된 scrollbar 색상을 갖도록 정리했다. 고비용 3D canvas는 화면 밖, 문서 숨김, reduced motion 상황에서 animation loop를 정지한다. 테스트, 타입 체크, scroll check, build, customer build, perf budget, Browser/Playwright smoke를 통과했다. 검증 스크린샷은 platform desktop app/renderer/workspace monitor/artifa</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 583,
-      "updatedAt": "2026-06-05T02:38:30.243Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-scroll-scope-color-speed-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-05-scroll-scope-color-speed-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 05 Scroll Scope Color Speed Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"scroll scope color speed\", \"project\": \"workspace monitor\", \"installation occurred\": false, \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 05 scroll scope color speed.json\" , \"omission check",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;scroll scope color speed&quot;, &quot;project&quot;: &quot;workspace monitor&quot;, &quot;installation occurred&quot;: false, &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 05 scroll scope color speed.json&quot; , &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 05 scroll scope color speed.ko</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2094,
-      "updatedAt": "2026-06-05T02:38:30.242Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-05-scroll-scope-color-speed-json",
-      "path": "_history/work-timings/2026/2026-06-05-scroll-scope-color-speed.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 05 Scroll Scope Color Speed",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"scroll scope color speed\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Official MDN, WCAG, Material, and web.dev references checked before local edits.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;scroll scope color speed&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;note&quot;: &quot;Official MDN, WCAG, Material, and web.dev references checked before local edits.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;note&quot;: &quot;Scroll scope CSS tokens/contracts and Tool Studio offscreen animation pa</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 809,
-      "updatedAt": "2026-06-05T02:37:57.336Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-scroll-scope-color-speed-spec-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-scroll-scope-color-speed/spec.ko.md",
       "category": "project-spec",
@@ -9412,54 +9668,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-plans-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-      "path": "_history/plans/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "작업 계획: Scroll Scope Color Speed",
-      "excerpt": "작업 계획: Scroll Scope Color Speed 계획 1. 웹 기준을 먼저 확인한다. 2. 현재 Workspace Monitor scroll container, 색상 token, animation 경로를 확인한다. 3. scroll scope token과 공통 CSS contract를 추가한다. 4. Tool Studio 3D canvas offscreen/reduced motion pause를 구현한다. 5. 요구사항과 스펙/검증/추적 기록을 갱신한다. 6. 테스트, 타입체크, chec",
-      "html": "<p>작업 계획: Scroll Scope Color Speed 계획 1. 웹 기준을 먼저 확인한다. 2. 현재 Workspace Monitor scroll container, 색상 token, animation 경로를 확인한다. 3. scroll scope token과 공통 CSS contract를 추가한다. 4. Tool Studio 3D canvas offscreen/reduced motion pause를 구현한다. 5. 요구사항과 스펙/검증/추적 기록을 갱신한다. 6. 테스트, 타입체크, check, build, customer build, performance budget을 실행한다. 7. 정적 export Browser smoke와 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 624,
-      "updatedAt": "2026-06-05T02:26:34.002Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-      "path": "_history/user-requests/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Scroll Scope Color Speed",
-      "excerpt": "사용자 요청 요약: Scroll Scope Color Speed 요약 사용자는 스크롤을 범위별로 나눠서 할 수 있게 하고, 색상을 깔끔하고 단정하지만 세련되게 적용하며, 속도도 개선하길 요청했다. 해석한 완료 기준 주요 작업면과 내부 목록/터미널/소스/Tool Studio 영역이 서로 독립된 scroll scope를 가진다. 스크롤 가능한 영역은 시각적으로 과하지 않은 scrollbar color와 경계로 식별된다. 화면 밖 3D animation은 pause되어 스크롤/버튼 반응을 방해하지 않는",
-      "html": "<p>사용자 요청 요약: Scroll Scope Color Speed 요약 사용자는 스크롤을 범위별로 나눠서 할 수 있게 하고, 색상을 깔끔하고 단정하지만 세련되게 적용하며, 속도도 개선하길 요청했다. 해석한 완료 기준 주요 작업면과 내부 목록/터미널/소스/Tool Studio 영역이 서로 독립된 scroll scope를 가진다. 스크롤 가능한 영역은 시각적으로 과하지 않은 scrollbar color와 경계로 식별된다. 화면 밖 3D animation은 pause되어 스크롤/버튼 반응을 방해하지 않는다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 589,
-      "updatedAt": "2026-06-05T02:26:34.002Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-      "path": "_history/web-searches/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Scroll Scope Color Speed",
-      "excerpt": "웹 검색 기록: Scroll Scope Color Speed 검색 날짜: 2026 06 05 목적: 범위별 스크롤, 절제된 색상 역할, 상호작용 속도 개선 기준 확인 질의 WCAG 2.2 reflow scrollable regions horizontal scrolling official Material Design 3 color system roles surface primary secondary official web.dev INP optimize interaction latency avoid ",
-      "html": "<p>웹 검색 기록: Scroll Scope Color Speed 검색 날짜: 2026 06 05 목적: 범위별 스크롤, 절제된 색상 역할, 상호작용 속도 개선 기준 확인 질의 WCAG 2.2 reflow scrollable regions horizontal scrolling official Material Design 3 color system roles surface primary secondary official web.dev INP optimize interaction latency avoid long tasks official MDN CSS overflow scroll container overscroll behavior offici</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1972,
-      "updatedAt": "2026-06-05T02:26:34.001Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-scroll-scope-color-speed-traceability-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-scroll-scope-color-speed/traceability.ko.md",
       "category": "project-spec",
@@ -9490,38 +9698,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-text-wrapping-contract-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-text-wrapping-contract.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Text Wrapping Contract",
-      "excerpt": "평가: Text Wrapping Contract 결과 REQ WM 069 충족: 문장형 텍스트, 버튼/컨트롤 라벨, 긴 경로/명령/코드 토큰을 분리한 공통 줄바꿈 계약을 globals.css 에 추가했다. 한글/한영 prose는 word break: keep all 과 자연 줄바꿈을 사용하고, 긴 토큰은 overflow wrap: anywhere 계열로 레이아웃을 밀지 않게 했다. 버튼 자식 텍스트는 max width: 100% 를 갖도록 고정했다. 새 설치 없음. 검증 corepack pnpm ",
-      "html": "<p>평가: Text Wrapping Contract 결과 REQ WM 069 충족: 문장형 텍스트, 버튼/컨트롤 라벨, 긴 경로/명령/코드 토큰을 분리한 공통 줄바꿈 계약을 globals.css 에 추가했다. 한글/한영 prose는 word break: keep all 과 자연 줄바꿈을 사용하고, 긴 토큰은 overflow wrap: anywhere 계열로 레이아웃을 밀지 않게 했다. 버튼 자식 텍스트는 max width: 100% 를 갖도록 고정했다. 새 설치 없음. 검증 corepack pnpm filter workspace monitor test : 통과, 44개 테스트 corepack pnpm filter workspace monit</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1270,
-      "updatedAt": "2026-06-05T02:20:06.774Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-05-text-wrapping-contract-ko-md",
-      "path": "_history/request-traces/2026/2026-06-05-text-wrapping-contract.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: Text Wrapping Contract",
-      "excerpt": "요청 결과 추적: Text Wrapping Contract 요청 텍스트가 줄바꿈으로 이상해지지 않게 개선. 결과 REQ WM 069 추가. globals.css 에 prose, label, long token, button child text wrapping contract 추가. font loading.test.mjs 에 static regression test 추가. desktop/mobile Browser smoke와 screenshot artifact 생성. 산출물 platform desk",
-      "html": "<p>요청 결과 추적: Text Wrapping Contract 요청 텍스트가 줄바꿈으로 이상해지지 않게 개선. 결과 REQ WM 069 추가. globals.css 에 prose, label, long token, button child text wrapping contract 추가. font loading.test.mjs 에 static regression test 추가. desktop/mobile Browser smoke와 screenshot artifact 생성. 산출물 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1202,
-      "updatedAt": "2026-06-05T02:20:06.774Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-text-wrapping-contract-validation-ko-md",
@@ -12244,54 +12420,6 @@
       "workspaceArea": "_docs/policies"
     },
     {
-      "id": "docs-instructions-persistent-instructions-en-md",
-      "path": "_docs/instructions/persistent-instructions.en.md",
-      "category": "workspace-doc",
-      "language": "en",
-      "title": "Persistent Instructions",
-      "excerpt": "Persistent Instructions This document records durable user instructions in English. Active Instructions Manage this repository as a monorepo for a personal agent building platform. The platform's top level purpose is to keep reducing repetitive human work and elapsed work time. R",
-      "html": "<h1>Persistent Instructions</h1>\n<p>This document records durable user instructions in English.</p>\n<h2>Active Instructions</h2>\n<ul>\n<li>Manage this repository as a monorepo for a personal agent-building platform.</li>\n<li>The platform&#039;s top-level purpose is to keep reducing repetitive human work and elapsed work time. Repeated research, comparison, judgment, execution, and verification should first be modeled as the process a human actually performs; when automation value is confirmed, promote the repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.</li>\n<li>Automation must not hide human-judgment checkpoints, validation criteria, or rollback boundaries. Automation candidates should be checked through work timing records, bottleneck records, and evaluator results to confirm that they actually reduce repetition and time.</li>\n<li>&quot;Like a human directly doing the work&quot; means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.</li>\n<li>Treat source structure quality as a product quality gate. Keep refactoring continuously while working, but keep each refactor behavior-preserving, scoped, tested, and tied to clearer ownership boundaries.</li>\n<li>Keep the user&#039;s point of view as a product quality gate. For every meaningful product, UI, workflow, documentation, setup, or automation change, identify the user&#039;s goal, first action, expected next feedback, likely confusion points, and success evidence; rework any result that is technically correct but unclear, hard to start, hard to recover from, or not aligned with the user&#039;s actual workflow.</li>\n<li>When the platform detects repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns while doing work, use <code>capability-promotion-agent</code> and <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code> to create automatic capability candidates. This is allowed only as bounded black-box processing: the user-facing experience may feel automatic, but internal observations, candidates, evidence, risk, rejected lighter options, validation, rollback or disablement, documentation, evaluation, and commit/push traces must remain auditable.</li>\n<li>Capability promotion must record the direct human work model before idea generation. Generated ideas should reduce or stabilize concrete human process steps, not merely react to the user phrase.</li>\n<li>Capability promotion separates idea generation from idea evaluation. For non-trivial problems, generate several improvement ideas, score them by repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit, then record selected, rejected, or queued reasons.</li>\n<li>Capability promotion must check the smallest asset first in this order: <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code>. Destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes must not auto-execute without a human checkpoint and rollback plan.</li>\n<li>Sensitive files must be centrally routed to <code>_private/sensitive/</code> or an external secret manager, while AI agents must not read or index <code>_private/</code> contents by default. Ask for a redacted extract first; direct inspection requires explicit one-time permission for the exact path and operation.</li>\n<li>The source of truth for this boundary is <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, and <code>_ops/security/README.ko.md</code>. Run <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code> after changing <code>.gitignore</code>, maps, snapshots, collectors, public artifacts, installer payload rules, or sensitive-file handling rules.</li>\n<li>Keep the workspace operating principles usable from Claude Code, Cursor, Antigravity, Codex, or another AI coding tool the user prefers.</li>\n<li>All agents shall strongly adhere to durable principles. Principles are execution contracts and close-out gates, not decoration; speed, profit, optimism, convenience, or user pressure must not silently bypass required evidence, safety, privacy, legality, quality, provenance, validation, or evaluation.</li>\n<li>Keep <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code> and <code>_ops/assistant-runtimes/adapter-registry.json</code> as the source of truth for tool-agnostic runtime decisions.</li>\n<li>Treat <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, and <code>.agents/rules/</code> as runtime adapters. Do not copy common policy into separate divergent sources.</li>\n<li>Keep separate projects as root-level <code>kebab-case</code> folders.</li>\n<li>Keep project-specific files inside the owning project folder.</li>\n<li>When a new interest has an independent lifecycle, create a new root project and register it under <code>_ops/projects/</code>.</li>\n<li>Commit every completed meaningful change set.</li>\n<li>Push completed commits to <code>origin/main</code> immediately unless explicitly told not to push.</li>\n<li>Before closing meaningful work, evaluate the result against the initial user instruction and rework real gaps.</li>\n<li>Before evaluation, summarize completed work and check prio</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 33756,
-      "updatedAt": "2026-06-04T15:41:19.567Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/instructions"
-    },
-    {
-      "id": "docs-instructions-persistent-instructions-ko-md",
-      "path": "_docs/instructions/persistent-instructions.ko.md",
-      "category": "workspace-doc",
-      "language": "ko",
-      "title": "지속 지시",
-      "excerpt": "지속 지시 이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 한국어로 정리한다. 활성 지시 이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다. 플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다. 자동화는 인간 판단 지점, 검증 기준, ",
-      "html": "<h1>지속 지시</h1>\n<p>이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 한국어로 정리한다.</p>\n<h2>활성 지시</h2>\n<ul>\n<li>이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다.</li>\n<li>플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다.</li>\n<li>자동화는 인간 판단 지점, 검증 기준, rollback 경계를 숨기지 않는다. 자동화 후보는 실제 반복 감소와 시간 절감 효과를 작업 시간 기록, 병목 기록, evaluator 결과로 확인한다.</li>\n<li>“직접 사람이 하는 것처럼”은 사람 말투를 흉내 내는 것이 아니라 유능한 사람이 실제로 일할 때의 목표, 맥락, 출처, 가정, 선택지 비교, 결정, 실행 메모, 검증, 인수인계, 리뷰 순서와 산출물을 먼저 모델링한다는 뜻이다.</li>\n<li>소스 구조 품질을 제품 품질 gate로 다룬다. 작업 중 계속 리팩터링하되, 각 리팩터링은 동작 보존, 작은 범위, 테스트, 더 명확한 소유 경계와 연결되어야 한다.</li>\n<li>사용자 관점을 제품 품질 gate로 계속 적용한다. 의미 있는 제품, UI, workflow, 문서, setup, 자동화 변경마다 사용자의 목표, 첫 행동, 다음에 받아야 할 피드백, 헷갈릴 지점, 성공 근거를 확인하고, 기술적으로는 맞더라도 시작하기 어렵거나 이해하기 어렵거나 복구하기 어렵거나 실제 사용자 흐름과 어긋나는 결과는 재작업한다.</li>\n<li>플랫폼이 작업 중 반복, 병목, 누락, 검증 실패, 수동 재작업, 자주 쓰는 조사/프롬프트/도구 패턴을 발견하면 <code>capability-promotion-agent</code>와 <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code>을 사용해 자동 기능 후보로 만들 수 있다. 이 흐름은 bounded black-box로만 허용한다. 사용자 경험은 자동 개선처럼 보일 수 있지만 내부 observation, candidate, evidence, risk, rejected lighter options, validation, rollback 또는 disablement, documentation, evaluation, commit/push trace는 감사 가능해야 한다.</li>\n<li>capability promotion은 아이디어 생성 전에 사람이 직접 수행하는 작업 모델을 먼저 기록한다. 생성된 아이디어는 사용자 문구만이 아니라 구체적인 human process step을 줄이거나 안정화해야 한다.</li>\n<li>capability promotion은 아이디어 생성과 아이디어 평가를 분리한다. 사소하지 않은 문제는 여러 개선 아이디어를 만들고, 반복 감소, 시간 절감, 유지보수 비용, 근거 강도, 위험 적합성, 가장 작은 자산 적합성으로 평가한 뒤 선택/기각/대기 이유를 남긴다.</li>\n<li>capability promotion은 <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code> 순서로 가장 작은 자산을 먼저 검토한다. destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, irreversible change는 human checkpoint와 rollback 계획 없이 자동 실행하지 않는다.</li>\n<li>민감 파일은 <code>_private/sensitive/</code> 또는 외부 secret manager로 중앙 라우팅하되, AI 에이전트는 <code>_private/</code> 내부를 기본적으로 직접 읽거나 색인하지 않는다. 필요한 정보는 redacted extract를 먼저 요청하고, 직접 열람은 특정 경로와 작업에 대한 명시적 1회 허가가 있을 때만 허용한다.</li>\n<li>민감 파일 경계의 원본은 <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, <code>_ops/security/README.ko.md</code>에 둔다. <code>.gitignore</code>, map, snapshot, collector, public artifact, installer 규칙을 바꾸면 <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code>를 실행한다.</li>\n<li>이 저장소의 운영 원칙은 Codex에만 묶지 않고 Claude Code, Cursor, Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 재사용할 수 있게 유지한다.</li>\n<li>도구 독립형 원칙의 원본은 <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code>와 <code>_ops/assistant-runtimes/adapter-registry.json</code>에 둔다.</li>\n<li>모든 에이전트는 영속 원칙을 강하게 고수한다. 원칙은 장식 문구가 아니라 실행 계약과 close-out gate이며, 속도, 돈, 낙관, 편의, 사용자 압박은 필요한 근거, 안전, 개인정보, 법, 품질, provenance, 검증, 평가를 무단 생략하는 이유가 될 수 없다.</li>\n<li><code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, <code>.agents/rules/</code>는 도구별 adapter로 취급하고, 공통 정책을 길게 복사해 서로 다른 원본으로 갈라지게 하지 않는다.</li>\n<li>별도 프로젝트는 루트의 <code>kebab-case</code> 폴더로 관리한다.</li>\n<li>프로젝트별 파일은 해당 프로젝트 폴더 안에만 둔다.</li>\n<li>새 관심사나 독립 라이프사이클이 생기면 새 루트 프로젝트로 만들고 <code>_ops/projects/</code>에 등록한다.</li>\n<li>의미 있는 변경 단위가 끝날 때마다 커밋한다.</li>\n<li>커밋 후 별도 지시가 없으면 즉시 <code>origin/main</code>에 push한다.</li>\n<li>의미 있는 작업을 닫기 전 초기 사용자 지시와 결과를 평가하고, 실제 gap은 재작업한다.</li>\n<li>평가 전에는 완료 작업을 요약하고 관련 이전 작업이나 강한 레퍼런스를 확인한다.</li>\n<li>사용자의 작업과 지시는 요구사항 후보로 보고, 구현 전 관련 요구사항을 정의/검토/수정/기준선화한다.</li>\n<li>공통 요구사항은 <code>_requirements/</code>에, 프로젝트별 요구사항은 해당 프로젝트의 <code>docs/requirements/</code>에 저장한다.</li>\n<li>의미 있는 구현 작업은 spec-driven 구조로 진행해 요구사항을 스펙, 계획, 작업 목록, 검증, traceability 산출물로 바꾼 뒤 코딩한다.</li>\n<li>공통 스펙은 <code>_specs/</code>에, 프로젝트별 스펙은 해당 프로젝트의 <code>specs/</code>에 저장한다.</li>\n<li>활성 프로젝트 스펙이 애매하거나 현재 소스, 테스트, 생성 산출물과 다를 때는 어느 쪽도 바로 수정하지 말고 스펙/소스 조정 workflow를 먼저 실행한다. 이슈를 <code>update_spec</code>, <code>update_source</code>, <code>ask_user</code>, <code>defer</code>로 분류하고, <code>ask_user</code>는 안정적인 질문 ID와 답변 형식이 포함된 <code>clarification_needed</code> 알림으로 사용자에게 질문한 뒤 답변이 기록되기 전까지 관련 스펙이나 소스를 수정하지 않는다.</li>\n<li>커스텀 스킬 생성/수정은 명시적으로 관리하며 <code>_skills/</code> 원본, 검증, 필요한 전진 테스트, 개선 아이디어를 남긴다.</li>\n<li>의미 있는 작업의 최종 평가는 <code>_history/evaluations/YYYY/</code> 아래 파일로 저장한다.</li>\n<li>중요한 계획을 세우는 과정은 <code>_history/plans/YYYY/</code> 아래 파일로 저장한다.</li>\n<li>의미 있는 사용자 요청은 원문 전체가 아니라 요약으로 <code>_history/user-requests/YYYY/</code> 아래에 저장한다.</li>\n<li>의미 있는 요청은 <code>_history/request-traces/YYYY/</code> 아래에서 요청, 결과, 산출물, 평가, 커밋을 연결해 저장한다.</li>\n<li>작업 히스토리는 <code>_history/YYYY/YYYY-MM-DD.md</code>에 기록한다.</li>\n<li>나중에 문서만 보고도 한 일을 쉽게 파악할 수 있도록 <code>_history/work-summaries/YYYY/</code> 아래 빠른 작업 요약을 유지한다.</li>\n<li><code>_ops/</code>를 프롬프트, 워크플로, 맵을 위한 운영 허브로 사용한다.</li>\n<li><code>_docs/</code>는 <code>_docs/registry.json</code>의 카테고리 규칙으로 관리하고, 허용된 index 파일을 제외한 Markdown 문서를 <code>_docs</code> 루트에 직접 두지 않는다. 문서 구조나 필수 문서 경로를 바꾸면 <code>python3 _tools/docs-audit/src/docs_audit.py --check</code>를 실행한다.</li>\n<li>진행 중인 에이전트와 병렬 작업은 <code>_ops/coordination/</code>에서 추적한다.</li>\n<li>인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용은 <code>_research/</code>에 기록한다.</li>\n<li>에이전트와 플랫폼 운영의 근본 철학은 <code>_philosophy/</code>에 기록한다.</li>\n<li>모든 새 사용자 지시는 계획, 저장소 탐색, 파일 수정 전에 웹 검색을 먼저 수행한다.</li>\n<li><code>_ops/prompts/</code>의 모든 재사용 프롬프트 실행도 웹 검색을 먼저 수행한다.</li>\n<li>의미 있는 웹 검색 기록은 <code>_history/web-searches/YYYY/</code>에 저장하고 작업 평가 입력에 <code>web_search_record_targets</code>를 포함한다.</li>\n<li>검색 판단 과정은 검색어, 확인한 출처, 제외한 약한 출처, 계획에 반영한 인사이트, 남은 불확실성 형태의 공개 판단 요약으로 텍스트에 남긴다. 내부 추론 원문은 저장하지 않는다.</li>\n<li>웹 검색이 무관하거나 불가능하면 그 사실을 기록하고 로컬 검증을 강화해 진행한다.</li>\n<li>웹 검색 후 로컬 계획 전에 <code>memory-bootstrap-agent</code>로 필수 메모리 anchor를 확인하고 hot context를 읽는다.</li>\n<li>웹 검색과 메모리 부트스트랩 후에는 <code>agent-platform/configs/workflows/work-mode-registry.json</code>에서 <code>quick</code>, <code>standard</code>, <code>ship_first</code>, <code>research</code>, <code>governance</code> 중 하나의 <code>work_mode</code>를 선택한다.</li>\n<li>위험도와 지속성에 맞는 가장 가벼운 작업 모드를 사용하고, 선택한 모드가 비차단으로 둔 요구사항, 스펙, 요청 추적, 전체</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 36049,
-      "updatedAt": "2026-06-04T15:41:19.567Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/instructions"
-    },
-    {
-      "id": "docs-instructions-persistent-instructions-md",
-      "path": "_docs/instructions/persistent-instructions.md",
-      "category": "workspace-doc",
-      "language": "unknown",
-      "title": "Persistent Instructions",
-      "excerpt": "Persistent Instructions 이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다. 병렬 문서: 한국어: docs/instructions/persistent instructions.ko.md persistent instructions.ko.md 영어: docs/instructions/persistent instructions.en.md persistent instructions.en.md",
-      "html": "<h1>Persistent Instructions</h1>\n<p>이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다.</p>\n<p>병렬 문서:</p>\n<ul>\n<li>한국어: <span class=\"doc-link\">_docs/instructions/persistent-instructions.ko.md</span></li>\n<li>영어: <span class=\"doc-link\">_docs/instructions/persistent-instructions.en.md</span></li>\n</ul>\n<h2>Active Instructions</h2>\n<ul>\n<li>Manage this repository as a monorepo for a personal agent-building platform.</li>\n<li>The platform&#039;s top-level purpose is to keep reducing repetitive human work and elapsed work time by modeling real human research, comparison, judgment, execution, and verification processes, then promoting automation-worthy repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.</li>\n<li>Automation must preserve human-judgment checkpoints, validation criteria, and rollback boundaries, and should be checked with timing, bottleneck, and evaluator records when the work is meaningful.</li>\n<li>&quot;Like a human directly doing the work&quot; means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.</li>\n<li>Treat source structure quality as a product quality gate. Keep refactoring continuously while working, but keep each refactor behavior-preserving, scoped, tested, and tied to clearer ownership boundaries.</li>\n<li>Keep the user&#039;s point of view as a product quality gate. For every meaningful product, UI, workflow, documentation, setup, or automation change, identify the user&#039;s goal, first action, expected next feedback, likely confusion points, and success evidence; rework any result that is technically correct but unclear, hard to start, hard to recover from, or not aligned with the user&#039;s actual workflow.</li>\n<li>When the platform detects repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns, use <code>capability-promotion-agent</code> and <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code> to create automatic capability candidates. This is bounded black-box processing: user-facing automation may feel smooth, but internal observations, candidates, evidence, risk, rejected lighter options, validation, rollback or disablement, documentation, evaluation, and commit/push traces must remain auditable.</li>\n<li>Capability promotion must record the direct human work model before idea generation. Generated ideas should reduce or stabilize concrete human process steps, not merely react to the user phrase.</li>\n<li>Capability promotion separates idea generation from idea evaluation. For non-trivial problems, generate several improvement ideas, score them by repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit, then record selected, rejected, or queued reasons.</li>\n<li>Capability promotion checks the smallest asset first in this order: <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code>. Destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes must not auto-execute without a human checkpoint and rollback plan.</li>\n<li>Sensitive files must be centrally routed to <code>_private/sensitive/</code> or an external secret manager, while AI agents must not read or index <code>_private/</code> contents by default. Ask for a redacted extract first; direct inspection requires explicit one-time permission for the exact path and operation.</li>\n<li>The source of truth for this boundary is <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, and <code>_ops/security/README.ko.md</code>. Run <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code> after changing <code>.gitignore</code>, maps, snapshots, collectors, public artifacts, installer payload rules, or sensitive-file handling rules.</li>\n<li>Keep the workspace operating principles tool-agnostic so the same structure can be used from Codex, Claude Code, Cursor, Antigravity, or another user-preferred AI coding tool.</li>\n<li>Treat the installable platform as the primary host runtime. It launches first and owns task state, durable memory, decisions, artifacts, validation, and UI authority; Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or other commercial/external AI tools attach only as guest adapters through explicit CLI/runtime adapter contracts.</li>\n<li>Treat this repository as the development source that builds the platform, not as the customer-visible product payload. Installed customers should use the app, customer-selected workspaces, app-managed data stores, classified logs, and exports without seeing the platform source tree.</li>\n<li>Separate platform source code from runtime data planes: user workspace data, platform data stores, log stores, cache stores, and agent runtime workspaces. Use <code>platform-desktop-app/configs/runtime-data-boundary-registry.json</code> before adding persistent runtime data, logs, support exports, installer payload behavior, or agent work directories.</li>\n<li>Keep reusable agent definitions grouped under <code>agent-platform/configs/agents/</code>; runtime agent input/output/log/handoff/temp work belongs in the install</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 33485,
-      "updatedAt": "2026-06-04T15:41:19.566Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/instructions"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-single-purpose-home-ui-tasks-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/tasks.ko.md",
       "category": "project-spec",
@@ -12642,22 +12770,6 @@
       "historyDate": "2026-06-04",
       "historyYear": "2026",
       "workspaceArea": "_requirements/reviews"
-    },
-    {
-      "id": "agents-md",
-      "path": "AGENTS.md",
-      "category": "runtime-adapter",
-      "language": "unknown",
-      "title": "Repository Instructions",
-      "excerpt": "Repository Instructions This repository is the workspace for building and tracking a personal agent building platform and related projects. Workspace Rules Treat each root level non reserved directory as a separate project. Create new project directories at the repository root us",
-      "html": "<h1>Repository Instructions</h1>\n<p>This repository is the workspace for building and tracking a personal agent-building platform and related projects.</p>\n<h2>Workspace Rules</h2>\n<ul>\n<li>Treat each root-level non-reserved directory as a separate project.</li>\n<li>Create new project directories at the repository root using <code>kebab-case</code>.</li>\n<li>Use <code>_ops/naming/naming-policy.json</code> as the source of truth for durable naming rules.</li>\n<li>For new durable paths, use lower <code>kebab-case</code> for project/tool/skill/workflow/prompt/spec slugs, <code>snake_case</code> for Python packages and modules, <code>YYYY-MM-DD-&lt;slug&gt;</code> for dated records, and <code>name.ko.md</code>/<code>name.en.md</code> for important bilingual docs.</li>\n<li>Do not rename existing durable paths without a migration plan, trace update, and validation run.</li>\n<li>Reserve underscore-prefixed root directories for workspace operations:</li>\n<li><code>_docs/</code> for workspace-level documentation and decision records; keep it categorized through <code>_docs/registry.json</code></li>\n<li><code>_docs/instructions/</code> for durable instructions and baseline workspace rules</li>\n<li><code>_docs/policies/</code> for execution policies</li>\n<li><code>_docs/operating-models/</code> for conceptual operating models</li>\n<li><code>_docs/governance/</code> for cross-workspace governance documents</li>\n<li><code>_philosophy/</code> for foundational agent and platform operating philosophy</li>\n<li><code>_requirements/</code> for shared requirements baselines, change records, and review records</li>\n<li><code>_specs/</code> for shared spec-driven artifacts, implementation plans, task lists, validation, and traceability</li>\n<li><code>_history/</code> for dated work history and compressed context summaries</li>\n<li><code>_ops/</code> for operations navigation, prompts, workflows, and maps</li>\n<li><code>_research/</code> for reusable internet research and external reference notes</li>\n<li><code>_skills/</code> for tracked source copies of custom Codex skills</li>\n<li><code>_templates/</code> for reusable project scaffolds</li>\n<li><code>_tools/</code> for reusable local tools and scripts</li>\n<li><code>_archive/</code> for paused or retired projects</li>\n<li>Treat <code>_private/</code> and <code>outputs/</code> as local-only ignored folders, not durable repository knowledge:</li>\n<li><code>_private/</code> is the protected local vault for private scratch state and sensitive local files.</li>\n<li>Store real sensitive local files under <code>_private/sensitive/</code> or an external secret manager; track only policies, env var names, secret references, and redacted metadata.</li>\n<li>Agents must not recursively list, search, open, read, summarize, index, snapshot, embed, or use <code>_private/</code> contents by default. If sensitive content is needed, ask for a redacted extract first; direct inspection requires explicit one-time user permission for the exact path and operation.</li>\n<li><code>outputs/</code> is for transient one-off tool output only.</li>\n<li>Durable project artifacts must move into the owning project&#039;s <code>artifacts/</code> folder.</li>\n<li>Keep project-specific code, docs, tests, and assets inside that project folder.</li>\n<li>Keep project-specific configs, artifacts, tools, and decisions inside that project folder as well.</li>\n<li>Do not move or delete unrelated files unless the user explicitly asks.</li>\n<li>Prefer creating a project folder for substantial work instead of placing loose files at the repository root.</li>\n<li>Register root projects and their boundaries in <code>_ops/projects/registry.json</code>.</li>\n<li>Keep durable AI assistant operating principles tool-agnostic. Use <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code> and <code>_ops/assistant-runtimes/adapter-registry.json</code> as the shared source for adapting this workspace to Codex, Claude Code, Cursor, Antigravity, or another assistant runtime.</li>\n<li>All agents shall strongly adhere to durable principles. Treat principles as execution contracts and close-out gates, not motivational language; speed, profit, optimism, convenience, or user pressure must not silently bypass required evidence, safety, privacy, legality, quality, provenance, validation, or evaluation.</li>\n<li>Treat <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, and <code>.agents/rules/</code> as runtime adapters or entrypoints. Do not fork durable policy across them; update shared docs/configs first and keep adapters thin.</li>\n</ul>\n<h2>Git Rules</h2>\n<ul>\n<li>Check <code>git status</code> before editing and before committing.</li>\n<li>Commit every completed meaningful change set.</li>\n<li>Use commit messages in the form <code>type(scope): summary</code>.</li>\n<li>Keep commits scoped to the work just completed.</li>\n<li>Push completed commits to <code>origin/main</code> immediately after committing unless the user explicitly says not to push.</li>\n<li>Do not rewrite history, reset, or discard user changes unless explicitly requested.</li>\n<li>Update the relevant history log before committing when the work changes project direction, repository rules, or meaningful artifacts.</li>\n<li>Before final close-out of meaningful work, evaluate the result against the user&#039;s initial instruction and rework any real gaps before committing or final response.</li>\n<li>Before evaluation, summarize completed work and check prior internal work or strong external references relevant to the task.</li>\n<li>Treat the user&#039;s work and instructions as requirement candidates; define, review, update, and baseline relevant requirements before implementation.</li>\n<li>Save shared requirements under <code>_requirements/</code>; save project-specific requirements under the owning project&#039;s <code>docs/requirements/</code>.</li>\n<li>For meaningful implementation work, convert acti</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 51081,
-      "updatedAt": "2026-06-04T14:56:10.881Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "AGENTS.md"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-04-core-feature-priority-tasks-ko-md",
@@ -17618,118 +17730,6 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "_requirements/changes"
-    },
-    {
-      "id": "requirements-changes-2026-06-03-pnpm-workspace-migration-ko-md",
-      "path": "_requirements/changes/2026-06-03-pnpm-workspace-migration.ko.md",
-      "category": "requirement",
-      "language": "ko",
-      "title": "요구사항 변경: pnpm workspace migration",
-      "excerpt": "요구사항 변경: pnpm workspace migration 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | REQ WS 088 | 저장소의 JavaScript/TypeScript 프로젝트는 pnpm workspace와 루트 pnpm lock.yaml 을 기준으로 의존성을 설치하고 검증해야 한다. | must | corepack pnpm install frozen lockfile , 프로젝트별 pnpm test/check/build | | REQ WS 089 | pac",
-      "html": "<h1>요구사항 변경: pnpm workspace migration</h1>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-WS-088</td><td>저장소의 JavaScript/TypeScript 프로젝트는 pnpm workspace와 루트 <code>pnpm-lock.yaml</code>을 기준으로 의존성을 설치하고 검증해야 한다.</td><td>must</td><td><code>corepack pnpm install --frozen-lockfile</code>, 프로젝트별 pnpm test/check/build</td></tr><tr><td>REQ-WS-089</td><td>package manager 버전은 Corepack이 읽을 수 있도록 <code>packageManager</code>로 고정되어야 한다.</td><td>must</td><td><code>corepack pnpm --version</code>이 고정 버전 출력</td></tr><tr><td>REQ-WS-090</td><td>실행 문서와 durable config는 현재 설치/검증 명령을 npm이 아니라 pnpm으로 안내해야 한다.</td><td>must</td><td>npm 명령 참조 audit</td></tr></tbody></table>\n<h2>이유</h2>\n<ul>\n<li>여러 Node 프로젝트가 분산된 구조에서는 루트 workspace lockfile이 유지보수와 재현성에 더 적합하다.</li>\n<li>사용자가 pnpm 전환을 명시적으로 요청했다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 950,
-      "updatedAt": "2026-06-02T22:57:41.892Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "_requirements/changes"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-03-pnpm-workspace-migration-spec-ko-md",
-      "path": "_specs/workspace-platform/2026-06-03-pnpm-workspace-migration/spec.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "스펙: pnpm workspace migration",
-      "excerpt": "스펙: pnpm workspace migration 목표 npm lockfile 기반 Node 프로젝트들을 pnpm workspace 기반으로 전환한다. 현재 검증 명령과 설치 문서가 pnpm을 기준으로 동작하게 한다. 범위 추가: 루트 package.json , pnpm workspace.yaml , pnpm lock.yaml . 변경: workspace monitor , platform desktop app , presentation agent package manifest와 실행 문서/con",
-      "html": "<h1>스펙: pnpm workspace migration</h1>\n<h2>목표</h2>\n<ul>\n<li>npm lockfile 기반 Node 프로젝트들을 pnpm workspace 기반으로 전환한다.</li>\n<li>현재 검증 명령과 설치 문서가 pnpm을 기준으로 동작하게 한다.</li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li>추가: 루트 <code>package.json</code>, <code>pnpm-workspace.yaml</code>, <code>pnpm-lock.yaml</code>.</li>\n<li>변경: <code>workspace-monitor</code>, <code>platform-desktop-app</code>, <code>presentation-agent</code> package manifest와 실행 문서/config.</li>\n<li>제거: project별 <code>package-lock.json</code>.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>새 런타임 dependency 추가.</li>\n<li>Rust/Cargo dependency 변경.</li>\n<li>과거 히스토리 문서의 명령어 전면 소급 수정.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>corepack pnpm install --frozen-lockfile</code>이 통과한다.</li>\n<li><code>workspace-monitor</code> test/check/build/perf/customer checks가 pnpm으로 통과한다.</li>\n<li><code>platform-desktop-app</code> test/check/monitor build가 pnpm으로 통과한다.</li>\n<li><code>presentation-agent</code>는 package resolution이 pnpm으로 가능하고 browser harness 명령은 pnpm 기준으로 문서화된다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 992,
-      "updatedAt": "2026-06-02T22:57:41.892Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-app-like-command-controls-validation-en-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-app-like-command-controls/validation.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Validation: App Like Command Controls",
-      "excerpt": "Validation: App Like Command Controls Commands npm prefix workspace monitor test npm prefix workspace monitor run check npm prefix workspace monitor run build npm prefix workspace monitor run perf:budget npm prefix workspace monitor run check:intent map npm prefix platform deskto",
-      "html": "<h1>Validation: App-Like Command Controls</h1>\n<h2>Commands</h2>\n<ul>\n<li><code>npm --prefix workspace-monitor test</code></li>\n<li><code>npm --prefix workspace-monitor run check</code></li>\n<li><code>npm --prefix workspace-monitor run build</code></li>\n<li><code>npm --prefix workspace-monitor run perf:budget</code></li>\n<li><code>npm --prefix workspace-monitor run check:intent-map</code></li>\n<li><code>npm --prefix platform-desktop-app run monitor:build</code></li>\n<li><code>npm --prefix workspace-monitor run check:intent-map:customer</code></li>\n<li><code>npm --prefix platform-desktop-app run check</code></li>\n<li><code>npm --prefix platform-desktop-app test</code></li>\n<li>static export smoke</li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>Results</h2>\n<ul>\n<li><code>npm --prefix workspace-monitor test</code>: passed, 16 tests.</li>\n<li><code>npm --prefix workspace-monitor run check</code>: passed.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-03-app-like-command-controls-resource-input.json</code>: <code>resource_ready</code>.</li>\n<li><code>npm --prefix platform-desktop-app test</code>: passed, 13 tests.</li>\n<li><code>npm --prefix workspace-monitor run build</code>: passed, developer snapshot with 1200 documents.</li>\n<li><code>npm --prefix workspace-monitor run perf:budget</code>: passed, largest initial chunk 227537 bytes.</li>\n<li><code>npm --prefix workspace-monitor run check:intent-map</code>: passed, developer intent map has 155 intents / 12 themes.</li>\n<li>Static export smoke: <code>app-control-bar</code>, <code>command-palette</code>, and <code>workspace-monitor:pinned-sections</code> are present in built JS/CSS.</li>\n<li>Playwright availability check: Playwright is not installed in the current workspace.</li>\n<li><code>npm --prefix platform-desktop-app run monitor:build</code>: passed, customer bundle audit ready.</li>\n<li><code>npm --prefix workspace-monitor run check:intent-map:customer</code>: passed, customer intent map redacted to 0.</li>\n<li><code>npm --prefix platform-desktop-app run check</code>: passed, internal service ready with existing public blockers retained.</li>\n<li><code>npm --prefix workspace-monitor run collect</code>: passed, tracked snapshot restored to the developer public snapshot.</li>\n<li><code>git diff --check</code>: passed.</li>\n<li><code>check-omissions</code>: <code>coverage_ready</code>.</li>\n<li><code>evaluate-work</code>: <code>ready_to_close</code>.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1971,
-      "updatedAt": "2026-06-02T20:18:16.164Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-app-like-command-controls-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-app-like-command-controls/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: 앱형 Command Controls",
-      "excerpt": "검증: 앱형 Command Controls 명령 npm prefix workspace monitor test npm prefix workspace monitor run check npm prefix workspace monitor run build npm prefix workspace monitor run perf:budget npm prefix workspace monitor run check:intent map npm prefix platform desktop app run monitor:bu",
-      "html": "<h1>검증: 앱형 Command Controls</h1>\n<h2>명령</h2>\n<ul>\n<li><code>npm --prefix workspace-monitor test</code></li>\n<li><code>npm --prefix workspace-monitor run check</code></li>\n<li><code>npm --prefix workspace-monitor run build</code></li>\n<li><code>npm --prefix workspace-monitor run perf:budget</code></li>\n<li><code>npm --prefix workspace-monitor run check:intent-map</code></li>\n<li><code>npm --prefix platform-desktop-app run monitor:build</code></li>\n<li><code>npm --prefix workspace-monitor run check:intent-map:customer</code></li>\n<li><code>npm --prefix platform-desktop-app run check</code></li>\n<li><code>npm --prefix platform-desktop-app test</code></li>\n<li>static export smoke</li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li><code>npm --prefix workspace-monitor test</code>: 통과, 16개 테스트 pass.</li>\n<li><code>npm --prefix workspace-monitor run check</code>: 통과.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-03-app-like-command-controls-resource-input.json</code>: <code>resource_ready</code>.</li>\n<li><code>npm --prefix platform-desktop-app test</code>: 통과, 13개 테스트 pass.</li>\n<li><code>npm --prefix workspace-monitor run build</code>: 통과, developer snapshot 1200 documents.</li>\n<li><code>npm --prefix workspace-monitor run perf:budget</code>: 통과, largest initial chunk 227537 bytes.</li>\n<li><code>npm --prefix workspace-monitor run check:intent-map</code>: 통과, developer intent map 155 intents / 12 themes.</li>\n<li>static export smoke: <code>app-control-bar</code>, <code>command-palette</code>, <code>workspace-monitor:pinned-sections</code>가 build JS/CSS에 포함됨.</li>\n<li>Playwright availability check: 현재 workspace에 Playwright는 설치되어 있지 않음.</li>\n<li><code>npm --prefix platform-desktop-app run monitor:build</code>: 통과, customer bundle audit ready.</li>\n<li><code>npm --prefix workspace-monitor run check:intent-map:customer</code>: 통과, customer intent map redacted to 0.</li>\n<li><code>npm --prefix platform-desktop-app run check</code>: 통과, internal service ready and existing public blockers retained.</li>\n<li><code>npm --prefix workspace-monitor run collect</code>: 통과, 추적 snapshot을 developer public snapshot으로 복원.</li>\n<li><code>git diff --check</code>: 통과.</li>\n<li><code>check-omissions</code>: <code>coverage_ready</code>.</li>\n<li><code>evaluate-work</code>: <code>ready_to_close</code>.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1980,
-      "updatedAt": "2026-06-02T20:18:16.163Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-app-like-command-controls-plan-en-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-app-like-command-controls/plan.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Plan: App Like Command Controls",
-      "excerpt": "Plan: App Like Command Controls Work Mode Selected mode: standard Reason: This changes meaningful Workspace Monitor UI interaction and requirements, but does not add a new policy, installation, server store, or cross workspace runtime contract. View mode: superadmin developer Ins",
-      "html": "<h1>Plan: App-Like Command Controls</h1>\n<h2>Work Mode</h2>\n<ul>\n<li>Selected mode: <code>standard</code></li>\n<li>Reason: This changes meaningful Workspace Monitor UI interaction and requirements, but does not add a new policy, installation, server store, or cross-workspace runtime contract.</li>\n<li>View mode: <code>superadmin_developer</code></li>\n<li>Install mode: not applicable</li>\n<li>Resource risk: low. The keyboard listener has cleanup, and no long-lived resource beyond localStorage is introduced.</li>\n</ul>\n<h2>Evidence</h2>\n<ul>\n<li>Grafana uses a command palette for global search and key action execution.</li>\n<li>Basis Design System describes saved/persisted views as useful for repeated configurations in complex data screens.</li>\n<li>UAE Design System describes actions and inputs as standardized elements that change user flow or system state.</li>\n</ul>\n<h2>Implementation Order</h2>\n<p>1. Define command item type, pinned-section storage key, and default pinned sections.</p>\n<p>2. Add command palette open/query, pinned, and recent state to <code>MonitorShell</code>.</p>\n<p>3. Add keyboard listener, focus, recent update, and localStorage persistence lifecycles.</p>\n<p>4. Build the command item list and execution function.</p>\n<p>5. Render <code>app-control-bar</code> and the command palette dialog.</p>\n<p>6. Add CSS and responsive rules.</p>\n<p>7. Update requirements, history, validation, and evaluation records.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1262,
-      "updatedAt": "2026-06-02T20:14:30.627Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-app-like-command-controls-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-app-like-command-controls/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "계획: 앱형 Command Controls",
-      "excerpt": "계획: 앱형 Command Controls 작업 모드 선택 모드: standard 이유: Workspace Monitor의 meaningful UI 상호작용과 요구사항을 바꾸지만 새 정책, 설치, 서버 저장소, cross workspace runtime 계약을 추가하지 않는다. view mode: superadmin developer install mode: 해당 없음 resource risk: 낮음. keyboard listener는 cleanup되고, localStorage 외 새 장기 리소스",
-      "html": "<h1>계획: 앱형 Command Controls</h1>\n<h2>작업 모드</h2>\n<ul>\n<li>선택 모드: <code>standard</code></li>\n<li>이유: Workspace Monitor의 meaningful UI 상호작용과 요구사항을 바꾸지만 새 정책, 설치, 서버 저장소, cross-workspace runtime 계약을 추가하지 않는다.</li>\n<li>view mode: <code>superadmin_developer</code></li>\n<li>install mode: 해당 없음</li>\n<li>resource risk: 낮음. keyboard listener는 cleanup되고, localStorage 외 새 장기 리소스를 만들지 않는다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>Grafana는 command palette를 전역 검색과 주요 action 실행에 사용한다.</li>\n<li>Basis Design System은 복잡한 데이터 화면에서 saved/persisted view가 반복 설정 전환에 유용하다고 설명한다.</li>\n<li>UAE Design System은 actions/input이 사용자의 flow와 state 변화를 일으키는 표준화된 요소라고 설명한다.</li>\n</ul>\n<h2>구현 순서</h2>\n<p>1. command item 타입, pinned section storage key, default pinned sections를 정의한다.</p>\n<p>2. <code>MonitorShell</code>에 command palette open/query, pinned, recent state를 추가한다.</p>\n<p>3. keyboard listener, focus, recent update, localStorage persistence lifecycle을 추가한다.</p>\n<p>4. command item list와 실행 함수를 구성한다.</p>\n<p>5. <code>app-control-bar</code>와 command palette dialog를 렌더링한다.</p>\n<p>6. CSS와 responsive rules를 추가한다.</p>\n<p>7. 요구사항, 히스토리, 검증, 평가 기록을 갱신한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1352,
-      "updatedAt": "2026-06-02T20:14:30.627Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-app-like-command-controls-spec-en-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-app-like-command-controls/spec.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Spec: App Like Command Controls",
-      "excerpt": "Spec: App Like Command Controls Purpose Workspace Monitor should behave more like a real application: many functions should be quick to find and execute. A core rail and grouped tabs help, but repeated movement gets slower as features grow, so the UI needs a global command palett",
-      "html": "<h1>Spec: App-Like Command Controls</h1>\n<h2>Purpose</h2>\n<p>Workspace Monitor should behave more like a real application: many functions should be quick to find and execute. A core rail and grouped tabs help, but repeated movement gets slower as features grow, so the UI needs a global command palette plus pinned and recent quick controls.</p>\n<h2>Scope</h2>\n<ul>\n<li>Add an <code>app-control-bar</code> with a command palette trigger, pinned sections, and recent sections.</li>\n<li>The command palette searches and runs sections, view modes, language modes, document category filters, and key quick actions.</li>\n<li>Pinned sections persist in browser <code>localStorage</code>, while unavailable storage degrades silently.</li>\n<li>Recent sections live in current session state.</li>\n<li>The keyboard listener is registered on mount and removed on unmount.</li>\n<li>Sections disallowed by the current view mode are hidden from pinned/recent controls.</li>\n</ul>\n<h2>Non-Goals</h2>\n<ul>\n<li>Do not add a server store or remote user settings store.</li>\n<li>Do not replace customer snapshot redaction with client-side UI hiding.</li>\n<li>Do not install a separate command palette library.</li>\n<li>Do not split every panel module in this slice.</li>\n</ul>\n<h2>Acceptance Criteria</h2>\n<ul>\n<li><code>app-control-bar</code> renders the command trigger, pinned controls, and recent controls.</li>\n<li>The command palette can run section, view, language, category, and quick action commands.</li>\n<li>The keyboard event listener has cleanup.</li>\n<li>Local storage failure does not break the app.</li>\n<li><code>npm test</code>, <code>npm run check</code>, <code>npm run build</code>, <code>npm run perf:budget</code>, customer bundle validation, and static export smoke pass.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1542,
-      "updatedAt": "2026-06-02T20:14:30.627Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -17740,11 +17740,11 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 25
+          "count": 26
         },
         {
           "category": "request-trace",
-          "count": 14
+          "count": 13
         },
         {
           "category": "user-request",
@@ -17778,8 +17778,8 @@
           "category": "daily-history",
           "language": "unknown",
           "title": "2026 06 05",
-          "excerpt": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
-          "updatedAt": "2026-06-05T12:24:06.562Z",
+          "excerpt": "2026 06 05 구현 완료 후 자동 빌드 규칙 사용자가 매번 직접 빌드하지 않도록, 의미 있는 구현 작업 close out에서 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 지시를 추가했다. build 명령이 없거나 안전하지 않거나 비용이 과도하거나 변경 범위 밖이면 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/평가 기록을 연결했다. W",
+          "updatedAt": "2026-06-05T12:54:26.573Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -17820,6 +17820,36 @@
           "title": "평가: Agent Identity Labels",
           "excerpt": "평가: Agent Identity Labels 결론 통과. 캐릭터는 더 작아졌고, desktop/mobile에서 어떤 에이전트나 모드인지 식별할 수 있는 label/legend가 추가되었다. 확인 Agents desktop은 캐릭터 위에 112px compact label을 표시한다. Agents mobile은 캐릭터 위 label을 28px code chip으로 줄이고, horizontal identity strip에서 code와 compact name을 연결한다. Tool Studio는 캐릭터",
           "updatedAt": "2026-06-05T04:28:36.841Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-input-json",
+          "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 05 Auto Build After Implementation Input",
+          "excerpt": "{ \"initial instruction\": \"매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.\", \"result summary\": \"Added a durable close out rule requiring meaningful implementation work to run the owning project's build or package command before final response, with explicit exception handling when no appropri",
+          "updatedAt": "2026-06-05T12:55:35.485Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-omission-json",
+          "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 05 Auto Build After Implementation Omission",
+          "excerpt": "{ \"task\": \"Auto build after implementation durable rule.\", \"work mode\": \"governance\", \"expected items\": { \"item id\": \"persist user rule\", \"description\": \"Persist the user's future instruction that implementation work should run build/package before close out.\", \"source\": \" histor",
+          "updatedAt": "2026-06-05T12:54:26.572Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-ko-md",
+          "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: 구현 완료 후 자동 빌드 규칙",
+          "excerpt": "평가: 구현 완료 후 자동 빌드 규칙 결과 사용자의 지속 지시를 durable instruction과 Codex runtime adapter에 반영했다. 의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build/package 명령을 실행해야 한다. build 명령이 없거나 부적절한 경우 이유와 가장 강한 대체 검증을 기록하도록 예외 조건을 명시했다. memory bootstrap manifest에 이 규칙을 persistent instruction hot context로 연결했다. 검증 ",
+          "updatedAt": "2026-06-05T12:55:26.168Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -17963,16 +17993,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-evaluations-2026-2026-06-05-scroll-scope-color-speed-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-05-scroll-scope-color-speed-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 05 Scroll Scope Color Speed Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"scroll scope color speed\", \"project\": \"workspace monitor\", \"installation occurred\": false, \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 05 scroll scope color speed.json\" , \"omission check",
-          "updatedAt": "2026-06-05T02:38:30.242Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-05-scroll-scope-color-speed-ko-md",
           "path": "_history/evaluations/2026/2026-06-05-scroll-scope-color-speed.ko.md",
           "category": "evaluation",
@@ -18000,16 +18020,6 @@
           "title": "평가: Smooth Redesign Maintenance",
           "excerpt": "평가: Smooth Redesign Maintenance 결과 통과. 여러 탭과 메뉴/다이얼로그/모바일 화면을 열어 실제 UI QA를 수행했고, Tools 탭의 29px 아이콘 버튼을 발견해 최소 너비를 보정했다. history snapshot 문서 payload는 2,291,477 bytes로 2,800,000 bytes 예산 안에 들어왔다. 검증 workspace monitor test : 통과, 49개. workspace monitor check : 통과. workspace monitor b",
           "updatedAt": "2026-06-05T06:09:51.369Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-text-wrapping-contract-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-text-wrapping-contract.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Text Wrapping Contract",
-          "excerpt": "평가: Text Wrapping Contract 결과 REQ WM 069 충족: 문장형 텍스트, 버튼/컨트롤 라벨, 긴 경로/명령/코드 토큰을 분리한 공통 줄바꿈 계약을 globals.css 에 추가했다. 한글/한영 prose는 word break: keep all 과 자연 줄바꿈을 사용하고, 긴 토큰은 overflow wrap: anywhere 계열로 레이아웃을 밀지 않게 했다. 버튼 자식 텍스트는 max width: 100% 를 갖도록 고정했다. 새 설치 없음. 검증 corepack pnpm ",
-          "updatedAt": "2026-06-05T02:20:06.774Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18053,6 +18063,16 @@
           "historyDate": "2026-06-05"
         },
         {
+          "id": "history-plans-2026-2026-06-05-auto-build-after-implementation-mode-ko-md",
+          "path": "_history/plans/2026/2026-06-05-auto-build-after-implementation-mode.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "작업 모드 선택: 구현 완료 후 자동 빌드 규칙",
+          "excerpt": "작업 모드 선택: 구현 완료 후 자동 빌드 규칙 선택 work mode: governance 이유 사용자의 지시는 앞으로 모든 구현 작업의 close out 행동을 바꾸는 지속 운영 규칙이다. persistent instructions , AGENTS.md , memory bootstrap anchor, 요구사항, 스펙, 평가 기록에 영향을 준다. 소스 기능 구현은 아니므로 빌드 실행 규칙 자체는 문서화하고, 이번 변경은 docs/config 검증으로 닫는다. 범위 포함: durable instr",
+          "updatedAt": "2026-06-05T12:53:35.043Z",
+          "historyDate": "2026-06-05"
+        },
+        {
           "id": "history-plans-2026-2026-06-05-character-design-refinement-ko-md",
           "path": "_history/plans/2026/2026-06-05-character-design-refinement.ko.md",
           "category": "plan",
@@ -18070,16 +18090,6 @@
           "title": "계획: Premium Apple Design System",
           "excerpt": "계획: Premium Apple Design System 목표 Workspace Monitor visual system을 Apple HIG의 hierarchy, harmony, consistency 방향에 맞춰 더 고급스럽고 일관되게 만든다. 단계 1. 공식 Apple 디자인 기준을 검색해 hierarchy, control consistency, typography/font resource 기준을 확인한다. 2. 대범위 요청을 CSS token/material pass 중심으로 분해하고 제외 범위",
           "updatedAt": "2026-06-05T05:40:28.697Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-plans-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-          "path": "_history/plans/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "작업 계획: Scroll Scope Color Speed",
-          "excerpt": "작업 계획: Scroll Scope Color Speed 계획 1. 웹 기준을 먼저 확인한다. 2. 현재 Workspace Monitor scroll container, 색상 token, animation 경로를 확인한다. 3. scroll scope token과 공통 CSS contract를 추가한다. 4. Tool Studio 3D canvas offscreen/reduced motion pause를 구현한다. 5. 요구사항과 스펙/검증/추적 기록을 갱신한다. 6. 테스트, 타입체크, chec",
-          "updatedAt": "2026-06-05T02:26:34.002Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18110,6 +18120,16 @@
           "title": "요청 추적: Agent Identity Labels",
           "excerpt": "요청 추적: Agent Identity Labels 요청 캐릭터 디자인에서 어떤 에이전트인지 쉽게 알 수 있게 한다. 캐릭터를 더 작은 크기로 조정한다. 결과 REQ WM 074 추가. Agents 3D character scale을 active 0.86 , idle 0.78 로 축소했다. desktop에는 code + compact name label을 추가했다. mobile에는 28px code chip과 code/name identity strip을 추가했다. Tool Studio chara",
           "updatedAt": "2026-06-05T04:28:36.842Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-05-auto-build-after-implementation-ko-md",
+          "path": "_history/request-traces/2026/2026-06-05-auto-build-after-implementation.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: 구현 완료 후 자동 빌드",
+          "excerpt": "요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instruction",
+          "updatedAt": "2026-06-05T12:53:58.423Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18193,16 +18213,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-request-traces-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-          "path": "_history/request-traces/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: Scroll Scope Color Speed",
-          "excerpt": "요청 결과 추적: Scroll Scope Color Speed 요청 요약 사용자는 스크롤을 범위별로 나누고, 화면 색상을 단정하면서도 세련되게 정리하며, 버튼/탭/스크롤 상호작용의 느려짐을 줄이라고 요청했다. 결과 REQ WM 070 을 추가해 scope separated scrolling, restrained scrollbar color, offscreen animation pause를 요구사항으로 기준화했다. globals.css 에 scoped scroll token, stable scrol",
-          "updatedAt": "2026-06-05T02:38:30.243Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
           "path": "_history/request-traces/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
           "category": "request-trace",
@@ -18210,16 +18220,6 @@
           "title": "요청 결과 추적: Smooth Redesign Maintenance",
           "excerpt": "요청 결과 추적: Smooth Redesign Maintenance 요청 여러 탭을 열어 덜 된 부분을 찾고 UI/UX, 속도, 코드 분리, history 관리, 번역을 개선한다. 결과 motion helper를 lib/motion.ts 로 분리했다. motion token과 enter keyframes를 탭, 다이얼로그, command palette, Tool Studio menu, agent detail workspace에 적용했다. history 계열 문서를 full HTML 대신 bound",
           "updatedAt": "2026-06-05T06:09:51.370Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-05-text-wrapping-contract-ko-md",
-          "path": "_history/request-traces/2026/2026-06-05-text-wrapping-contract.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: Text Wrapping Contract",
-          "excerpt": "요청 결과 추적: Text Wrapping Contract 요청 텍스트가 줄바꿈으로 이상해지지 않게 개선. 결과 REQ WM 069 추가. globals.css 에 prose, label, long token, button child text wrapping contract 추가. font loading.test.mjs 에 static regression test 추가. desktop/mobile Browser smoke와 screenshot artifact 생성. 산출물 platform desk",
-          "updatedAt": "2026-06-05T02:20:06.774Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18250,6 +18250,16 @@
           "title": "사용자 요청 요약: Agent Identity Labels",
           "excerpt": "사용자 요청 요약: Agent Identity Labels 사용자는 캐릭터 디자인에서 어떤 에이전트인지 쉽게 알 수 있어야 하며, 더 작은 크기로 조정하라고 요청했다. 범위는 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 캐릭터 크기, 식별 label, mode legend로 정했다.",
           "updatedAt": "2026-06-05T04:28:36.839Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-05-auto-build-after-implementation-ko-md",
+          "path": "_history/user-requests/2026/2026-06-05-auto-build-after-implementation.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: 구현 완료 후 자동 빌드",
+          "excerpt": "사용자 요청 요약: 구현 완료 후 자동 빌드 요청 구현이 끝날 때마다 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동으로 수행하라는 지속 지시. 해석 의미 있는 구현 작업의 close out에는 담당 프로젝트의 build 또는 package 검증이 포함되어야 한다. build가 없거나 부적절한 작업은 예외 사유와 대체 검증을 기록해야 한다. 이번 변경은 실제 제품 코드 구현이 아니라 workspace 운영 규칙 변경이다.",
+          "updatedAt": "2026-06-05T12:53:58.423Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18333,16 +18343,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-user-requests-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-          "path": "_history/user-requests/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Scroll Scope Color Speed",
-          "excerpt": "사용자 요청 요약: Scroll Scope Color Speed 요약 사용자는 스크롤을 범위별로 나눠서 할 수 있게 하고, 색상을 깔끔하고 단정하지만 세련되게 적용하며, 속도도 개선하길 요청했다. 해석한 완료 기준 주요 작업면과 내부 목록/터미널/소스/Tool Studio 영역이 서로 독립된 scroll scope를 가진다. 스크롤 가능한 영역은 시각적으로 과하지 않은 scrollbar color와 경계로 식별된다. 화면 밖 3D animation은 pause되어 스크롤/버튼 반응을 방해하지 않는",
-          "updatedAt": "2026-06-05T02:26:34.002Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
           "path": "_history/user-requests/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
           "category": "user-request",
@@ -18380,6 +18380,16 @@
           "title": "웹 검색 기록: Agent Identity Labels",
           "excerpt": "웹 검색 기록: Agent Identity Labels 검색 Material Design avatar badge label UI identify user role icon label official Apple Human Interface Guidelines labels icons badges identify controls official Nielsen Norman Group icon labels usability recognition interface site:nngroup.com icon la",
           "updatedAt": "2026-06-05T04:28:36.839Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-05-auto-build-after-implementation-ko-md",
+          "path": "_history/web-searches/2026/2026-06-05-auto-build-after-implementation.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: 구현 완료 후 자동 빌드 규칙",
+          "excerpt": "웹 검색 기록: 구현 완료 후 자동 빌드 규칙 요청 사용자가 매번 직접 빌드하지 않도록, 구현이 끝나면 에이전트가 빌드까지 자동으로 실행하라는 지속 지시를 남기는 작업. 검색 software development best practice run build before delivery after implementation 확인한 출처 Octopus Deploy, \"Do You Build Your Binaries Once?\", https://octopus.com/blog/build your binar",
+          "updatedAt": "2026-06-05T12:53:35.042Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18463,16 +18473,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-web-searches-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-          "path": "_history/web-searches/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: Scroll Scope Color Speed",
-          "excerpt": "웹 검색 기록: Scroll Scope Color Speed 검색 날짜: 2026 06 05 목적: 범위별 스크롤, 절제된 색상 역할, 상호작용 속도 개선 기준 확인 질의 WCAG 2.2 reflow scrollable regions horizontal scrolling official Material Design 3 color system roles surface primary secondary official web.dev INP optimize interaction latency avoid ",
-          "updatedAt": "2026-06-05T02:26:34.001Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
           "path": "_history/web-searches/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
           "category": "web-search",
@@ -18510,6 +18510,16 @@
           "title": "작업 요약: Agent Identity Labels",
           "excerpt": "작업 요약: Agent Identity Labels 3D 에이전트 캐릭터를 더 작은 크기로 조정했다. Agents desktop에는 agent code와 compact name label을 추가했다. Agents mobile에는 code chip과 horizontal identity strip을 추가해 겹침을 줄였다. Tool Studio 캐릭터 맵에는 모드별 color dot과 label legend를 추가했다. 테스트, 타입 체크, check, 일반 빌드, 고객 빌드, 성능 예산, screen",
           "updatedAt": "2026-06-05T04:28:36.842Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-05-auto-build-after-implementation-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-05-auto-build-after-implementation.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: 구현 완료 후 자동 빌드",
+          "excerpt": "작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다.",
+          "updatedAt": "2026-06-05T12:53:58.423Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18593,16 +18603,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Scroll Scope Color Speed",
-          "excerpt": "작업 요약: Scroll Scope Color Speed Workspace Monitor에 범위별 스크롤 계약을 추가했다. Tool Studio 내부 목록/상세/환경 영역은 독립 스크롤과 절제된 scrollbar 색상을 갖도록 정리했다. 고비용 3D canvas는 화면 밖, 문서 숨김, reduced motion 상황에서 animation loop를 정지한다. 테스트, 타입 체크, scroll check, build, customer build, perf budget, Browser/Playwri",
-          "updatedAt": "2026-06-05T02:38:30.243Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
           "path": "_history/work-summaries/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
           "category": "work-summary",
@@ -18640,6 +18640,16 @@
           "title": "2026 06 05 Agent Identity Labels",
           "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"agent identity labels\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Checked avatar label, icon, and recognition rather than recall guidance before local edits.\" }, { \"phase\": \"implementation\", \"status\": \"compl",
           "updatedAt": "2026-06-05T04:28:36.840Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-05-auto-build-after-implementation-json",
+          "path": "_history/work-timings/2026/2026-06-05-auto-build-after-implementation.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 05 Auto Build After Implementation",
+          "excerpt": "{ \"task id\": \"2026 06 05 auto build after implementation\", \"title\": \"Auto build after implementation durable rule\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"created at\": \"2026 06 05\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"s",
+          "updatedAt": "2026-06-05T12:54:26.572Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18703,16 +18713,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-timings-2026-2026-06-05-scroll-scope-color-speed-json",
-          "path": "_history/work-timings/2026/2026-06-05-scroll-scope-color-speed.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 05 Scroll Scope Color Speed",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"scroll scope color speed\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Official MDN, WCAG, Material, and web.dev references checked before local edits.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"",
-          "updatedAt": "2026-06-05T02:37:57.336Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-05-smooth-redesign-maintenance-json",
           "path": "_history/work-timings/2026/2026-06-05-smooth-redesign-maintenance.json",
           "category": "work-timing",
@@ -18741,36 +18741,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2238,
+      "documents": 2247,
       "days": 6,
       "categories": [
         {
           "category": "evaluation",
-          "count": 926
+          "count": 929
         },
         {
           "category": "web-search",
-          "count": 361
+          "count": 362
         },
         {
           "category": "plan",
-          "count": 326
+          "count": 327
         },
         {
           "category": "request-trace",
-          "count": 290
+          "count": 291
         },
         {
           "category": "work-timing",
-          "count": 212
+          "count": 213
         },
         {
           "category": "user-request",
-          "count": 74
+          "count": 75
         },
         {
           "category": "work-summary",
-          "count": 41
+          "count": 42
         },
         {
           "category": "daily-history",
@@ -18781,7 +18781,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6036405,
+      "totalSourceBytes": 6055949,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18806,11 +18806,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 38,
+      "evidenceEvents": 39,
       "decisionEvents": 0,
-      "openSignals": 17,
+      "openSignals": 16,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T12:45:23.211Z",
+      "latestEventAt": "2026-06-05T12:55:35.485Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18822,12 +18822,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 25
-      },
-      {
-        "id": "traceability",
-        "label": "traceability",
-        "count": 14
+        "count": 26
       },
       {
         "id": "delivery",
@@ -18842,6 +18837,11 @@
       {
         "id": "intake",
         "label": "intake",
+        "count": 13
+      },
+      {
+        "id": "traceability",
+        "label": "traceability",
         "count": 13
       },
       {
@@ -18869,12 +18869,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 25
-      },
-      {
-        "id": "trace",
-        "label": "trace",
-        "count": 14
+        "count": 26
       },
       {
         "id": "intake",
@@ -18884,6 +18879,11 @@
       {
         "id": "summary",
         "label": "summary",
+        "count": 13
+      },
+      {
+        "id": "trace",
+        "label": "trace",
         "count": 13
       },
       {
@@ -18920,6 +18920,156 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-05-auto-build-after-implementation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 05 Auto Build After Implementation Input",
+        "detail": "{ \"initial instruction\": \"매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.\", \"result summary\": \"Added a durable close out rule requiring meaningful implementation work to run the owning project's build or package command before final response, with explicit exception handling when no appropri",
+        "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:55:35.485Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-05-auto-build-after-implementation-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "평가: 구현 완료 후 자동 빌드 규칙",
+        "detail": "평가: 구현 완료 후 자동 빌드 규칙 결과 사용자의 지속 지시를 durable instruction과 Codex runtime adapter에 반영했다. 의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build/package 명령을 실행해야 한다. build 명령이 없거나 부적절한 경우 이유와 가장 강한 대체 검증을 기록하도록 예외 조건을 명시했다. memory bootstrap manifest에 이 규칙을 persistent instruction hot context로 연결했다. 검증 ",
+        "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:55:26.168Z"
+      },
+      {
+        "id": "history-history-2026-2026-06-05-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "ready",
+        "title": "2026 06 05",
+        "detail": "2026 06 05 구현 완료 후 자동 빌드 규칙 사용자가 매번 직접 빌드하지 않도록, 의미 있는 구현 작업 close out에서 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 지시를 추가했다. build 명령이 없거나 안전하지 않거나 비용이 과도하거나 변경 범위 밖이면 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/평가 기록을 연결했다. W",
+        "path": "_history/2026/2026-06-05.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:54:26.573Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-05-auto-build-after-implementation-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 05 Auto Build After Implementation",
+        "detail": "{ \"task id\": \"2026 06 05 auto build after implementation\", \"title\": \"Auto build after implementation durable rule\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"created at\": \"2026 06 05\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"s",
+        "path": "_history/work-timings/2026/2026-06-05-auto-build-after-implementation.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:54:26.572Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-05-auto-build-after-implementation-omission-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 05 Auto Build After Implementation Omission",
+        "detail": "{ \"task\": \"Auto build after implementation durable rule.\", \"work mode\": \"governance\", \"expected items\": { \"item id\": \"persist user rule\", \"description\": \"Persist the user's future instruction that implementation work should run build/package before close out.\", \"source\": \" histor",
+        "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:54:26.572Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-05-auto-build-after-implementation-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 추적: 구현 완료 후 자동 빌드",
+        "detail": "요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instruction",
+        "path": "_history/request-traces/2026/2026-06-05-auto-build-after-implementation.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:53:58.423Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-05-auto-build-after-implementation-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "ready",
+        "title": "사용자 요청 요약: 구현 완료 후 자동 빌드",
+        "detail": "사용자 요청 요약: 구현 완료 후 자동 빌드 요청 구현이 끝날 때마다 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동으로 수행하라는 지속 지시. 해석 의미 있는 구현 작업의 close out에는 담당 프로젝트의 build 또는 package 검증이 포함되어야 한다. build가 없거나 부적절한 작업은 예외 사유와 대체 검증을 기록해야 한다. 이번 변경은 실제 제품 코드 구현이 아니라 workspace 운영 규칙 변경이다.",
+        "path": "_history/user-requests/2026/2026-06-05-auto-build-after-implementation.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:53:58.423Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-05-auto-build-after-implementation-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약: 구현 완료 후 자동 빌드",
+        "detail": "작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다.",
+        "path": "_history/work-summaries/2026/2026-06-05-auto-build-after-implementation.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:53:58.423Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-05-auto-build-after-implementation-mode-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 모드 선택: 구현 완료 후 자동 빌드 규칙",
+        "detail": "작업 모드 선택: 구현 완료 후 자동 빌드 규칙 선택 work mode: governance 이유 사용자의 지시는 앞으로 모든 구현 작업의 close out 행동을 바꾸는 지속 운영 규칙이다. persistent instructions , AGENTS.md , memory bootstrap anchor, 요구사항, 스펙, 평가 기록에 영향을 준다. 소스 기능 구현은 아니므로 빌드 실행 규칙 자체는 문서화하고, 이번 변경은 docs/config 검증으로 닫는다. 범위 포함: durable instr",
+        "path": "_history/plans/2026/2026-06-05-auto-build-after-implementation-mode.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:53:35.043Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-05-auto-build-after-implementation-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "웹 검색 기록: 구현 완료 후 자동 빌드 규칙",
+        "detail": "웹 검색 기록: 구현 완료 후 자동 빌드 규칙 요청 사용자가 매번 직접 빌드하지 않도록, 구현이 끝나면 에이전트가 빌드까지 자동으로 실행하라는 지속 지시를 남기는 작업. 검색 software development best practice run build before delivery after implementation 확인한 출처 Octopus Deploy, \"Do You Build Your Binaries Once?\", https://octopus.com/blog/build your binar",
+        "path": "_history/web-searches/2026/2026-06-05-auto-build-after-implementation.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:53:35.042Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
         "sourceType": "history",
@@ -19084,21 +19234,6 @@
         "language": "ko",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T12:27:23.071Z"
-      },
-      {
-        "id": "history-history-2026-2026-06-05-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 05",
-        "detail": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
-        "path": "_history/2026/2026-06-05.md",
-        "category": "daily-history",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:24:06.562Z"
       },
       {
         "id": "history-history-request-traces-2026-2026-06-05-local-history-hook-componentization-ko-md",
@@ -20224,141 +20359,6 @@
         "language": "ko",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T02:38:30.243Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: Scroll Scope Color Speed",
-        "detail": "요청 결과 추적: Scroll Scope Color Speed 요청 요약 사용자는 스크롤을 범위별로 나누고, 화면 색상을 단정하면서도 세련되게 정리하며, 버튼/탭/스크롤 상호작용의 느려짐을 줄이라고 요청했다. 결과 REQ WM 070 을 추가해 scope separated scrolling, restrained scrollbar color, offscreen animation pause를 요구사항으로 기준화했다. globals.css 에 scoped scroll token, stable scrol",
-        "path": "_history/request-traces/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:38:30.243Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: Scroll Scope Color Speed",
-        "detail": "작업 요약: Scroll Scope Color Speed Workspace Monitor에 범위별 스크롤 계약을 추가했다. Tool Studio 내부 목록/상세/환경 영역은 독립 스크롤과 절제된 scrollbar 색상을 갖도록 정리했다. 고비용 3D canvas는 화면 밖, 문서 숨김, reduced motion 상황에서 animation loop를 정지한다. 테스트, 타입 체크, scroll check, build, customer build, perf budget, Browser/Playwri",
-        "path": "_history/work-summaries/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:38:30.243Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-scroll-scope-color-speed-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 05 Scroll Scope Color Speed Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"scroll scope color speed\", \"project\": \"workspace monitor\", \"installation occurred\": false, \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 05 scroll scope color speed.json\" , \"omission check",
-        "path": "_history/evaluations/2026/2026-06-05-scroll-scope-color-speed-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:38:30.242Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-05-scroll-scope-color-speed-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 05 Scroll Scope Color Speed",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"scroll scope color speed\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Official MDN, WCAG, Material, and web.dev references checked before local edits.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"",
-        "path": "_history/work-timings/2026/2026-06-05-scroll-scope-color-speed.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:37:57.336Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "ready",
-        "title": "사용자 요청 요약: Scroll Scope Color Speed",
-        "detail": "사용자 요청 요약: Scroll Scope Color Speed 요약 사용자는 스크롤을 범위별로 나눠서 할 수 있게 하고, 색상을 깔끔하고 단정하지만 세련되게 적용하며, 속도도 개선하길 요청했다. 해석한 완료 기준 주요 작업면과 내부 목록/터미널/소스/Tool Studio 영역이 서로 독립된 scroll scope를 가진다. 스크롤 가능한 영역은 시각적으로 과하지 않은 scrollbar color와 경계로 식별된다. 화면 밖 3D animation은 pause되어 스크롤/버튼 반응을 방해하지 않는",
-        "path": "_history/user-requests/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:26:34.002Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "작업 계획: Scroll Scope Color Speed",
-        "detail": "작업 계획: Scroll Scope Color Speed 계획 1. 웹 기준을 먼저 확인한다. 2. 현재 Workspace Monitor scroll container, 색상 token, animation 경로를 확인한다. 3. scroll scope token과 공통 CSS contract를 추가한다. 4. Tool Studio 3D canvas offscreen/reduced motion pause를 구현한다. 5. 요구사항과 스펙/검증/추적 기록을 갱신한다. 6. 테스트, 타입체크, chec",
-        "path": "_history/plans/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:26:34.002Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Scroll Scope Color Speed",
-        "detail": "웹 검색 기록: Scroll Scope Color Speed 검색 날짜: 2026 06 05 목적: 범위별 스크롤, 절제된 색상 역할, 상호작용 속도 개선 기준 확인 질의 WCAG 2.2 reflow scrollable regions horizontal scrolling official Material Design 3 color system roles surface primary secondary official web.dev INP optimize interaction latency avoid ",
-        "path": "_history/web-searches/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:26:34.001Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-text-wrapping-contract-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "평가: Text Wrapping Contract",
-        "detail": "평가: Text Wrapping Contract 결과 REQ WM 069 충족: 문장형 텍스트, 버튼/컨트롤 라벨, 긴 경로/명령/코드 토큰을 분리한 공통 줄바꿈 계약을 globals.css 에 추가했다. 한글/한영 prose는 word break: keep all 과 자연 줄바꿈을 사용하고, 긴 토큰은 overflow wrap: anywhere 계열로 레이아웃을 밀지 않게 했다. 버튼 자식 텍스트는 max width: 100% 를 갖도록 고정했다. 새 설치 없음. 검증 corepack pnpm ",
-        "path": "_history/evaluations/2026/2026-06-05-text-wrapping-contract.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:20:06.774Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-05-text-wrapping-contract-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: Text Wrapping Contract",
-        "detail": "요청 결과 추적: Text Wrapping Contract 요청 텍스트가 줄바꿈으로 이상해지지 않게 개선. 결과 REQ WM 069 추가. globals.css 에 prose, label, long token, button child text wrapping contract 추가. font loading.test.mjs 에 static regression test 추가. desktop/mobile Browser smoke와 screenshot artifact 생성. 산출물 platform desk",
-        "path": "_history/request-traces/2026/2026-06-05-text-wrapping-contract.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:20:06.774Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23171,7 +23171,7 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 14
+        "documentsCount": 13
       },
       {
         "category": "web-search",
@@ -23191,7 +23191,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 25
+        "documentsCount": 26
       },
       {
         "category": "daily-history",
@@ -23235,7 +23235,7 @@
           "transient tool output"
         ],
         "uiEntry": "Overview, History, Documents, Requirements",
-        "documentCount": 140,
+        "documentCount": 145,
         "sourceFileCount": 0
       },
       {
