@@ -29,6 +29,8 @@ export type WorkspaceStats = {
   supportingProductFeatures?: number;
   referencePlatforms?: number;
   referenceTransferPatterns?: number;
+  openSourceReferenceLayers?: number;
+  openSourceReferenceRepos?: number;
   historyInsightPatterns?: number;
   historyInsightRecommendations?: number;
   fundamentalImprovementPrinciples?: number;
@@ -643,6 +645,50 @@ export type WorkspaceReferencePlatformAdvantages = {
   }>;
 };
 
+export type WorkspaceOpenSourceFeatureReferences = {
+  sourcePath: string;
+  sourceBoundary: {
+    policy?: string;
+    customerVisibility?: string;
+    excludedSources?: string[];
+    acceptedSourceTypes?: string[];
+  };
+  summary: {
+    totalLayers: number;
+    totalRepositories: number;
+    installReady: number;
+    directExplorationRequired: number;
+    highPriority: number;
+  };
+  referenceLinks: Array<{
+    id: string;
+    title: string;
+    url: string;
+    path: string;
+    sourceType: string;
+    usedFor: string[];
+    lastChecked: string;
+  }>;
+  featureReferenceLayers: Array<{
+    featureId: string;
+    label: string;
+    priority: string;
+    primarySection: string;
+    installPolicy: string;
+    installNeededNow: boolean;
+    directExplorationRequired: boolean;
+    implementationTargets: string[];
+    candidateRepos: Array<{
+      id: string;
+      title: string;
+      url: string;
+      verifiedBy: string;
+      watchTargets: string[];
+      patternsToExtract: string[];
+    }>;
+  }>;
+};
+
 export type WorkspaceHistoryInsightLoop = {
   sourcePath: string;
   summary: {
@@ -792,6 +838,7 @@ export type WorkspaceSnapshot = {
   intentFeatureMap?: WorkspaceIntentFeatureMap;
   productFeatureArchitecture?: WorkspaceProductFeatureArchitecture;
   referencePlatformAdvantages?: WorkspaceReferencePlatformAdvantages;
+  openSourceFeatureReferences?: WorkspaceOpenSourceFeatureReferences;
   historyInsightLoop?: WorkspaceHistoryInsightLoop;
   fundamentalImprovementStructure?: WorkspaceFundamentalImprovementStructure;
   categories: string[];

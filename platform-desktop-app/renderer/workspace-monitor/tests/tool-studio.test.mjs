@@ -17,6 +17,10 @@ const operatorCenterDialog = fs.readFileSync(
   path.join(projectRoot, "components", "features", "OperatorCenterDialog.tsx"),
   "utf8"
 );
+const productFeatureArchitecturePanel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "ProductFeatureArchitecturePanel.tsx"),
+  "utf8"
+);
 const toolStudio = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "ToolStudioPanel.tsx"),
   "utf8"
@@ -614,6 +618,28 @@ test("Monitor enforces lazy workbench boundaries and long-task performance telem
   assert.match(sectionSwitchAudit, /longTaskMaxMs/);
   assert.match(sectionSwitchAudit, /longTaskTotalP95Ms/);
   assert.match(sectionSwitchAudit, /sectionStats/);
+});
+
+test("Product feature surface exposes open-source feature radar and install policy", () => {
+  assert.match(collector, /collectOpenSourceFeatureReferences/);
+  assert.match(collector, /sanitizeOpenSourceFeatureReferencesForCustomer/);
+  assert.match(monitorShell, /type OpenSourceFeatureReferences = NonNullable<WorkspaceSnapshot\["openSourceFeatureReferences"\]>/);
+  assert.match(monitorShell, /const emptyOpenSourceFeatureReferences: OpenSourceFeatureReferences =/);
+  assert.match(monitorShell, /const openSourceFeatureReferences = snapshot\.openSourceFeatureReferences \?\? emptyOpenSourceFeatureReferences/);
+  assert.match(monitorShell, /openSourceFeatureReferences=\{openSourceFeatureReferences\}/);
+  assert.match(productFeatureArchitecturePanel, /WorkspaceOpenSourceFeatureReferences/);
+  assert.match(productFeatureArchitecturePanel, /openSourceFeatureReferences\?: WorkspaceOpenSourceFeatureReferences/);
+  assert.match(productFeatureArchitecturePanel, /data-open-source-feature-radar="feature-reference-install-policy"/);
+  assert.match(productFeatureArchitecturePanel, /installNeededNow/);
+  assert.match(productFeatureArchitecturePanel, /installPolicy\.replaceAll\("_", " "\)/);
+  assert.match(productFeatureArchitecturePanel, /\| "tools"/);
+  assert.match(productFeatureArchitecturePanel, /"tools",\s+"agents"/);
+  assert.match(css, /\.open-source-feature-board \{/);
+  assert.match(css, /\.open-source-feature-summary span,[\s\S]*?\.open-source-install-policy \{/);
+  assert.match(css, /\.open-source-feature-grid \{[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(260px, 1fr\)\);/);
+  assert.match(css, /\.open-source-feature-card \{[\s\S]*?box-shadow:/);
+  assert.match(css, /\.open-source-feature-card:hover \{/);
+  assert.match(css, /\.open-source-repo-row em \{/);
 });
 
 test("Desktop source workbench prepares native OS workspace resources", () => {

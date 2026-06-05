@@ -16,6 +16,7 @@ import {
   collectFundamentalImprovementStructure,
   collectHistoryInsightLoop,
   collectIntentFeatureMap,
+  collectOpenSourceFeatureReferences,
   collectPhilosophyFeatureExtraction,
   collectProductFeatureArchitecture,
   collectLanguageModeCatalog,
@@ -109,6 +110,7 @@ test("buildSnapshot reads minimal repository shape", () => {
   fs.mkdirSync(path.join(root, "agent-platform", "configs", "agents"), { recursive: true });
   fs.mkdirSync(path.join(root, "agent-platform", "configs", "orchestration"), { recursive: true });
   fs.mkdirSync(path.join(root, "agent-platform", "docs"), { recursive: true });
+  fs.mkdirSync(path.join(root, "platform-desktop-app", "configs"), { recursive: true });
   fs.mkdirSync(path.join(root, "demo", "src"), { recursive: true });
 
   fs.writeFileSync(
@@ -199,6 +201,49 @@ test("buildSnapshot reads minimal repository shape", () => {
       ]
     })
   );
+  fs.writeFileSync(
+    path.join(root, "platform-desktop-app", "configs", "open-source-feature-reference-registry.json"),
+    JSON.stringify({
+      source_boundary: {
+        policy: "public_sources_only",
+        customer_visibility: "summary_allowed",
+        excluded_sources: ["private repos"],
+        accepted_source_types: ["official GitHub repository"]
+      },
+      reference_links: [
+        {
+          id: "research",
+          title: "Research",
+          path: "_research/topics/demo.ko.md",
+          source_type: "internal_research",
+          used_for: ["feature mapping"],
+          last_checked: "2026-06-06"
+        }
+      ],
+      feature_reference_layers: [
+        {
+          feature_id: "agent_orchestration",
+          label: "CLI Orchestration",
+          priority: "p0",
+          primary_section: "desktop",
+          install_policy: "no_new_dependency_now",
+          install_needed_now: false,
+          direct_exploration_required: true,
+          implementation_targets: ["Agent CLI Cockpit", "process graph"],
+          candidate_repos: [
+            {
+              id: "openhands",
+              title: "OpenHands",
+              url: "https://github.com/OpenHands/OpenHands",
+              verified_by: "official_github_page",
+              watch_targets: ["runtime"],
+              patterns_to_extract: ["agent workbench"]
+            }
+          ]
+        }
+      ]
+    })
+  );
   fs.writeFileSync(path.join(root, "agent-platform", "docs", "demo-agent.ko.md"), "# Demo Agent\n\n설명");
   fs.writeFileSync(
     path.join(root, "_docs", "registry.json"),
@@ -224,7 +269,7 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.stats.completedTasks, 1);
   assert.equal(snapshot.collaborationBoard.summary.completedTasks, 1);
   assert.equal(snapshot.collaborationBoard.flows.length, 1);
-  assert.equal(snapshot.documents.length, 7);
+  assert.equal(snapshot.documents.length, 8);
   assert.equal(snapshot.stats.sourceFiles, 1);
   assert.equal(snapshot.adminHistory.summary.documents, 1);
   assert.equal(snapshot.adminHistory.inlineHistoryDocuments, 1);
@@ -263,6 +308,10 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.stats.productFeatures, 8);
   assert.equal(snapshot.stats.primaryProductFeatures, 2);
   assert.equal(snapshot.stats.supportingProductFeatures, 6);
+  assert.equal(snapshot.openSourceFeatureReferences.summary.totalLayers, 1);
+  assert.equal(snapshot.openSourceFeatureReferences.featureReferenceLayers.some((layer) => layer.featureId === "agent_orchestration"), true);
+  assert.equal(snapshot.stats.openSourceReferenceLayers, snapshot.openSourceFeatureReferences.summary.totalLayers);
+  assert.equal(snapshot.stats.openSourceReferenceRepos, snapshot.openSourceFeatureReferences.summary.totalRepositories);
   assert.equal(snapshot.stats.historyInsightPatterns >= 1, true);
   assert.equal(snapshot.historyInsightLoop.signalGroups.some((group) => group.id === "build-closeout-gate"), true);
   assert.equal(snapshot.stats.fundamentalImprovementPrinciples >= 1, true);
@@ -305,6 +354,8 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       productFeatures: 6,
       primaryProductFeatures: 5,
       supportingProductFeatures: 1,
+      openSourceReferenceLayers: 1,
+      openSourceReferenceRepos: 1,
       historyInsightPatterns: 1,
       historyInsightRecommendations: 1,
       fundamentalImprovementPrinciples: 1,
@@ -397,6 +448,55 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       },
       qualitySignals: ["feature first"],
       validationGates: [{ id: "gate", command: "internal", validates: "internal" }]
+    },
+    openSourceFeatureReferences: {
+      sourcePath: "platform-desktop-app/configs/open-source-feature-reference-registry.json",
+      sourceBoundary: {
+        policy: "public_sources_only",
+        customerVisibility: "summary_allowed",
+        excludedSources: ["private repos"],
+        acceptedSourceTypes: ["official GitHub repository"]
+      },
+      summary: {
+        totalLayers: 1,
+        totalRepositories: 1,
+        installReady: 0,
+        directExplorationRequired: 1,
+        highPriority: 1
+      },
+      referenceLinks: [
+        {
+          id: "research",
+          title: "Internal research",
+          url: "",
+          path: "_research/topics/demo.ko.md",
+          sourceType: "internal_research",
+          usedFor: ["feature mapping"],
+          lastChecked: "2026-06-06"
+        }
+      ],
+      featureReferenceLayers: [
+        {
+          featureId: "agent_orchestration",
+          label: "CLI Orchestration",
+          priority: "p0",
+          primarySection: "desktop",
+          installPolicy: "no_new_dependency_now",
+          installNeededNow: false,
+          directExplorationRequired: true,
+          implementationTargets: ["Agent CLI Cockpit"],
+          candidateRepos: [
+            {
+              id: "openhands",
+              title: "OpenHands",
+              url: "https://github.com/OpenHands/OpenHands",
+              verifiedBy: "official",
+              watchTargets: ["runtime"],
+              patternsToExtract: ["agent workbench", "runtime separation", "local GUI"]
+            }
+          ]
+        }
+      ]
     },
     historyInsightLoop: {
       sourcePath: "_history/",
@@ -523,6 +623,8 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.stats.productFeatures, 2);
   assert.equal(customer.stats.primaryProductFeatures, 1);
   assert.equal(customer.stats.supportingProductFeatures, 1);
+  assert.equal(customer.stats.openSourceReferenceLayers, 1);
+  assert.equal(customer.stats.openSourceReferenceRepos, 1);
   assert.equal(customer.stats.historyInsightPatterns, 0);
   assert.equal(customer.stats.historyInsightRecommendations, 0);
   assert.equal(customer.stats.fundamentalImprovementPrinciples, 0);
@@ -542,6 +644,13 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.productFeatureArchitecture.featureLayers[0].validationGates.length, 0);
   assert.equal(customer.productFeatureArchitecture.promotionLoop.recordTargets.length, 0);
   assert.equal(customer.productFeatureArchitecture.validationGates.length, 0);
+  assert.equal(customer.openSourceFeatureReferences.sourcePath, "");
+  assert.equal(customer.openSourceFeatureReferences.referenceLinks.length, 0);
+  assert.equal(customer.openSourceFeatureReferences.featureReferenceLayers[0].candidateRepos[0].watchTargets.length, 0);
+  assert.deepEqual(customer.openSourceFeatureReferences.featureReferenceLayers[0].candidateRepos[0].patternsToExtract, [
+    "agent workbench",
+    "runtime separation"
+  ]);
   assert.equal(customer.historyInsightLoop.signalGroups.length, 0);
   assert.equal(customer.historyInsightLoop.inferenceStages.length, 0);
   assert.equal(customer.fundamentalImprovementStructure.structuralPrinciples.length, 0);
@@ -559,6 +668,61 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
     "source",
     "intent"
   ]);
+});
+
+test("collectOpenSourceFeatureReferences maps feature layers to install policy and candidate repos", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-open-source-feature-test-"));
+  fs.mkdirSync(path.join(root, "platform-desktop-app", "configs"), { recursive: true });
+  fs.writeFileSync(
+    path.join(root, "platform-desktop-app", "configs", "open-source-feature-reference-registry.json"),
+    JSON.stringify({
+      source_boundary: {
+        policy: "public_sources_only",
+        customer_visibility: "summary_allowed"
+      },
+      reference_links: [
+        {
+          id: "feature-map",
+          title: "Feature map",
+          path: "_research/topics/platform-desktop-app/map.ko.md",
+          source_type: "internal_research",
+          used_for: ["implementation priority"],
+          last_checked: "2026-06-06"
+        }
+      ],
+      feature_reference_layers: [
+        {
+          feature_id: "root_tool_management",
+          label: "Root Tool Management",
+          priority: "p0",
+          primary_section: "tools",
+          install_policy: "optional_tools_need_user_confirmed_audit",
+          install_needed_now: false,
+          direct_exploration_required: true,
+          implementation_targets: ["CLI adapter setup doctor", "MCP manager"],
+          candidate_repos: [
+            {
+              id: "open_webui",
+              title: "Open WebUI",
+              url: "https://github.com/open-webui/open-webui",
+              verified_by: "official",
+              watch_targets: ["provider setup"],
+              patterns_to_extract: ["model catalog", "provider settings"]
+            }
+          ]
+        }
+      ]
+    })
+  );
+
+  const references = collectOpenSourceFeatureReferences(root);
+
+  assert.equal(references.summary.totalLayers, 1);
+  assert.equal(references.summary.totalRepositories, 1);
+  assert.equal(references.summary.installReady, 0);
+  assert.equal(references.featureReferenceLayers[0].primarySection, "tools");
+  assert.equal(references.featureReferenceLayers[0].installPolicy, "optional_tools_need_user_confirmed_audit");
+  assert.equal(references.featureReferenceLayers[0].candidateRepos[0].title, "Open WebUI");
 });
 
 test("collectFundamentalImprovementStructure promotes history patterns into structural packages", () => {

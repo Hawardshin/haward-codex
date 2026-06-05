@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T22:09:32.152Z",
+  "generatedAt": "2026-06-05T22:25:01.572Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -33,6 +33,8 @@
     "supportingProductFeatures": 6,
     "referencePlatforms": 5,
     "referenceTransferPatterns": 19,
+    "openSourceReferenceLayers": 7,
+    "openSourceReferenceRepos": 24,
     "historyInsightPatterns": 0,
     "historyInsightRecommendations": 0,
     "fundamentalImprovementPrinciples": 0,
@@ -1147,6 +1149,375 @@
       }
     ]
   },
+  "openSourceFeatureReferences": {
+    "sourcePath": "",
+    "sourceBoundary": {
+      "policy": "public_sources_only",
+      "customerVisibility": "summary_allowed",
+      "excludedSources": [],
+      "acceptedSourceTypes": []
+    },
+    "summary": {
+      "totalLayers": 7,
+      "totalRepositories": 24,
+      "installReady": 0,
+      "directExplorationRequired": 7,
+      "highPriority": 7
+    },
+    "referenceLinks": [],
+    "featureReferenceLayers": [
+      {
+        "featureId": "agent_orchestration",
+        "label": "CLI Orchestration",
+        "priority": "p0",
+        "primarySection": "desktop",
+        "installPolicy": "no_new_dependency_now",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "Agent CLI Cockpit",
+          "process graph",
+          "task pipe",
+          "defer/resume",
+          "multi-lane merge gate"
+        ],
+        "candidateRepos": [
+          {
+            "id": "openhands",
+            "title": "OpenHands",
+            "url": "https://github.com/OpenHands/OpenHands",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "agent workbench",
+              "local GUI"
+            ]
+          },
+          {
+            "id": "cli_agent_orchestrator",
+            "title": "CLI Agent Orchestrator",
+            "url": "https://github.com/awslabs/cli-agent-orchestrator",
+            "verifiedBy": "direct_clone_and_git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "isolated CLI sessions",
+              "assign/send_message"
+            ]
+          },
+          {
+            "id": "opencode",
+            "title": "opencode",
+            "url": "https://github.com/anomalyco/opencode",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "terminal-first agent loop",
+              "provider-agnostic command surface"
+            ]
+          }
+        ]
+      },
+      {
+        "featureId": "agent_factory",
+        "label": "Agent Core / Agent Factory",
+        "priority": "p0",
+        "primarySection": "agents",
+        "installPolicy": "no_new_dependency_now",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "AgentCore blueprint wizard",
+          "capability promotion",
+          "prompt/workflow/tool/skill/agent creation"
+        ],
+        "candidateRepos": [
+          {
+            "id": "dify",
+            "title": "Dify",
+            "url": "https://github.com/langgenius/dify",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "visual workflow builder",
+              "app publishing"
+            ]
+          },
+          {
+            "id": "langflow",
+            "title": "Langflow",
+            "url": "https://github.com/langflow-ai/langflow",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "graph builder",
+              "component palette"
+            ]
+          },
+          {
+            "id": "flowise",
+            "title": "Flowise",
+            "url": "https://github.com/FlowiseAI/Flowise",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "node graph UX",
+              "credential-aware agent templates"
+            ]
+          }
+        ]
+      },
+      {
+        "featureId": "root_tool_management",
+        "label": "Root Tool Management",
+        "priority": "p0",
+        "primarySection": "tools",
+        "installPolicy": "optional_tools_need_user_confirmed_audit",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "Provider Account Center",
+          "CLI adapter setup doctor",
+          "MCP manager",
+          "root tool reuse"
+        ],
+        "candidateRepos": [
+          {
+            "id": "open_webui",
+            "title": "Open WebUI",
+            "url": "https://github.com/open-webui/open-webui",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "model catalog",
+              "provider settings"
+            ]
+          },
+          {
+            "id": "anything_llm",
+            "title": "AnythingLLM",
+            "url": "https://github.com/Mintplex-Labs/anything-llm",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "local-first workspace tools",
+              "document/tool settings"
+            ]
+          },
+          {
+            "id": "jan",
+            "title": "Jan",
+            "url": "https://github.com/janhq/jan",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "offline-first provider UX",
+              "local runtime status"
+            ]
+          }
+        ]
+      },
+      {
+        "featureId": "work_visibility",
+        "label": "Work Visibility",
+        "priority": "p1",
+        "primarySection": "overview",
+        "installPolicy": "no_new_dependency_now",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "Decision Inbox",
+          "task-run timeline",
+          "run status bar",
+          "decision lineage"
+        ],
+        "candidateRepos": [
+          {
+            "id": "temporal",
+            "title": "Temporal",
+            "url": "https://github.com/temporalio/temporal",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "durable workflow state",
+              "retry visibility"
+            ]
+          },
+          {
+            "id": "kestra",
+            "title": "Kestra",
+            "url": "https://github.com/kestra-io/kestra",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "workflow run graph",
+              "execution timeline"
+            ]
+          },
+          {
+            "id": "prefect",
+            "title": "Prefect",
+            "url": "https://github.com/PrefectHQ/prefect",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "run state taxonomy",
+              "work queue view"
+            ]
+          }
+        ]
+      },
+      {
+        "featureId": "learning_improvement_loop",
+        "label": "Learning & Evaluation Loop",
+        "priority": "p1",
+        "primarySection": "intent",
+        "installPolicy": "no_new_dependency_now",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "Evaluation cockpit",
+          "evidence trail",
+          "prompt regression gates",
+          "provider cost/latency records"
+        ],
+        "candidateRepos": [
+          {
+            "id": "langfuse",
+            "title": "Langfuse",
+            "url": "https://github.com/langfuse/langfuse",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "trace schema",
+              "evaluation dataset"
+            ]
+          },
+          {
+            "id": "phoenix",
+            "title": "Phoenix",
+            "url": "https://github.com/Arize-ai/phoenix",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "LLM trace view",
+              "eval debugging"
+            ]
+          },
+          {
+            "id": "promptfoo",
+            "title": "promptfoo",
+            "url": "https://github.com/promptfoo/promptfoo",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "prompt regression test",
+              "provider comparison"
+            ]
+          }
+        ]
+      },
+      {
+        "featureId": "agent_development_environment",
+        "label": "Agent Development Environment",
+        "priority": "p1",
+        "primarySection": "source",
+        "installPolicy": "no_new_dependency_now",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "Source workbench",
+          "scoped file index",
+          "draft queue",
+          "diff preview"
+        ],
+        "candidateRepos": [
+          {
+            "id": "cline",
+            "title": "Cline",
+            "url": "https://github.com/cline/cline",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "approval-first edits",
+              "tool call cards"
+            ]
+          },
+          {
+            "id": "continue",
+            "title": "Continue",
+            "url": "https://github.com/continuedev/continue",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "editor-agnostic context",
+              "source action UX"
+            ]
+          },
+          {
+            "id": "gitbutler",
+            "title": "GitButler",
+            "url": "https://github.com/gitbutlerapp/gitbutler",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "change grouping",
+              "review-first Git surface"
+            ]
+          }
+        ]
+      },
+      {
+        "featureId": "desktop_native_runtime",
+        "label": "Desktop Shell / Native Runtime",
+        "priority": "p1",
+        "primarySection": "desktop",
+        "installPolicy": "install_only_after_runtime_audit",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "Rust/Tauri runtime",
+          "native PTY drawer",
+          "resource telemetry",
+          "package release gates"
+        ],
+        "candidateRepos": [
+          {
+            "id": "tauri",
+            "title": "Tauri",
+            "url": "https://github.com/tauri-apps/tauri",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "native command boundary",
+              "permission model"
+            ]
+          },
+          {
+            "id": "xtermjs",
+            "title": "xterm.js",
+            "url": "https://github.com/xtermjs/xterm.js",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "terminal rendering",
+              "bounded scrollback"
+            ]
+          },
+          {
+            "id": "node_pty",
+            "title": "node-pty",
+            "url": "https://github.com/microsoft/node-pty",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "PTY process model",
+              "resize semantics"
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "historyInsightLoop": {
     "sourcePath": "",
     "summary": {
@@ -1156,7 +1527,7 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-05T22:09:24.228Z"
+      "latestInsightAt": "2026-06-05T22:24:44.187Z"
     },
     "inferenceStages": [],
     "signalGroups": []
@@ -1171,7 +1542,7 @@
       "totalImprovementPackages": 0,
       "totalFitnessChecks": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-05T22:09:24.228Z"
+      "latestInsightAt": "2026-06-05T22:24:44.187Z"
     },
     "operatingModel": [],
     "structuralPrinciples": [],

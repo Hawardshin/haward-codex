@@ -1,0 +1,22 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-open-source-feature-radar",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Search queries captured in web-search record."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Config, collector, snapshot type, UI, CSS, and tests added."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Config contract, renderer/platform tests, check, perf, static smoke, and internal package build passed."
+    }
+  ]
+}

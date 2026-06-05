@@ -1,0 +1,25 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-open-source-feature-radar",
+  "status": "complete",
+  "coverage": [
+    {
+      "request": "possible features should be added",
+      "coverage": "Product Structure now exposes open-source feature radar."
+    },
+    {
+      "request": "install if needed",
+      "coverage": "No dependency was required; install policy and audit boundary are visible."
+    },
+    {
+      "request": "open-source feature-by-feature research should feed implementation",
+      "coverage": "Feature reference registry maps feature layers to candidate repos and implementation targets."
+    },
+    {
+      "request": "build automatically after implementation",
+      "coverage": "desktop:package:internal completed and produced verified .app/.dmg artifacts."
+    }
+  ],
+  "blocked_items": [],
+  "next_gate": "Commit and push."
+}

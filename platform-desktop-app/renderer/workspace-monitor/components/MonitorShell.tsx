@@ -1209,6 +1209,7 @@ type IntentFeatureMap = NonNullable<WorkspaceSnapshot["intentFeatureMap"]>;
 type StructureOverview = NonNullable<WorkspaceSnapshot["structureOverview"]>;
 type ProductFeatureArchitecture = NonNullable<WorkspaceSnapshot["productFeatureArchitecture"]>;
 type ReferencePlatformAdvantages = NonNullable<WorkspaceSnapshot["referencePlatformAdvantages"]>;
+type OpenSourceFeatureReferences = NonNullable<WorkspaceSnapshot["openSourceFeatureReferences"]>;
 type HistoryInsightLoop = NonNullable<WorkspaceSnapshot["historyInsightLoop"]>;
 type FundamentalImprovementStructure = NonNullable<WorkspaceSnapshot["fundamentalImprovementStructure"]>;
 
@@ -1680,6 +1681,25 @@ const emptyReferencePlatformAdvantages: ReferencePlatformAdvantages = {
   referenceLinks: [],
   platformGroups: [],
   transferPatterns: []
+};
+
+const emptyOpenSourceFeatureReferences: OpenSourceFeatureReferences = {
+  sourcePath: "",
+  sourceBoundary: {
+    policy: "public_sources_only",
+    customerVisibility: "summary_allowed",
+    excludedSources: [],
+    acceptedSourceTypes: []
+  },
+  summary: {
+    totalLayers: 0,
+    totalRepositories: 0,
+    installReady: 0,
+    directExplorationRequired: 0,
+    highPriority: 0
+  },
+  referenceLinks: [],
+  featureReferenceLayers: []
 };
 
 const emptyHistoryInsightLoop: HistoryInsightLoop = {
@@ -2994,6 +3014,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const structureOverview = snapshot.structureOverview ?? emptyStructureOverview;
   const productFeatureArchitecture = snapshot.productFeatureArchitecture ?? emptyProductFeatureArchitecture;
   const referencePlatformAdvantages = snapshot.referencePlatformAdvantages ?? emptyReferencePlatformAdvantages;
+  const openSourceFeatureReferences = snapshot.openSourceFeatureReferences ?? emptyOpenSourceFeatureReferences;
   const historyInsightLoop = snapshot.historyInsightLoop ?? emptyHistoryInsightLoop;
   const fundamentalImprovementStructure =
     snapshot.fundamentalImprovementStructure ?? emptyFundamentalImprovementStructure;
@@ -6596,6 +6617,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                       <ProductFeatureArchitecturePanel
                         architecture={productFeatureArchitecture}
                         referenceAdvantages={referencePlatformAdvantages}
+                        openSourceFeatureReferences={openSourceFeatureReferences}
                         historyInsights={historyInsightLoop}
                         fundamentalImprovement={fundamentalImprovementStructure}
                         onOpenSection={openSection}

@@ -18,6 +18,7 @@ import {
 import type {
   WorkspaceFundamentalImprovementStructure,
   WorkspaceHistoryInsightLoop,
+  WorkspaceOpenSourceFeatureReferences,
   WorkspaceProductFeatureArchitecture,
   WorkspaceReferencePlatformAdvantages
 } from "@/lib/snapshot";
@@ -32,11 +33,13 @@ export type ProductSectionId =
   | "documents"
   | "source"
   | "requirements"
+  | "tools"
   | "agents";
 
 export type ProductFeatureArchitecturePanelProps = {
   architecture: WorkspaceProductFeatureArchitecture;
   referenceAdvantages?: WorkspaceReferencePlatformAdvantages;
+  openSourceFeatureReferences?: WorkspaceOpenSourceFeatureReferences;
   historyInsights?: WorkspaceHistoryInsightLoop;
   fundamentalImprovement?: WorkspaceFundamentalImprovementStructure;
   onOpenSection: (section: ProductSectionId) => void;
@@ -53,6 +56,7 @@ const sectionIds = new Set<ProductSectionId>([
   "documents",
   "source",
   "requirements",
+  "tools",
   "agents"
 ]);
 
@@ -70,6 +74,7 @@ const featureIcons = {
 export function ProductFeatureArchitecturePanel({
   architecture,
   referenceAdvantages,
+  openSourceFeatureReferences,
   historyInsights,
   fundamentalImprovement,
   onOpenSection,
@@ -80,6 +85,10 @@ export function ProductFeatureArchitecturePanel({
   const referencePatterns = referenceAdvantages?.transferPatterns ?? [];
   const visibleReferencePatterns = referencePatterns
     .filter((pattern) => pattern.priority === "p0" || pattern.status !== "queued_p1")
+    .slice(0, 6);
+  const openSourceFeatureLayers = openSourceFeatureReferences?.featureReferenceLayers ?? [];
+  const visibleOpenSourceLayers = openSourceFeatureLayers
+    .filter((layer) => layer.priority === "p0" || layer.priority === "p1")
     .slice(0, 6);
   const visibleHistoryInsights = (historyInsights?.signalGroups ?? [])
     .filter((insight) => insight.priority === "p0" || insight.priority === "p1")
@@ -201,6 +210,66 @@ export function ProductFeatureArchitecturePanel({
                   <span className="reference-source-row">
                     {pattern.sourcePlatforms.slice(0, 3).map((source) => (
                       <em key={source}>{source}</em>
+                    ))}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {openSourceFeatureReferences && visibleOpenSourceLayers.length > 0 && (
+        <div className="open-source-feature-board" data-open-source-feature-radar="feature-reference-install-policy">
+          <header>
+            <div>
+              <p className="eyebrow">오픈소스 기능 레이더</p>
+              <h3>기능별로 직접 탐구할 repo와 설치 정책을 고정</h3>
+              <p>
+                {openSourceFeatureReferences.summary.totalLayers}개 기능 layer에{" "}
+                {openSourceFeatureReferences.summary.totalRepositories}개 후보 repo를 연결했습니다. 현재 단계에서 새 설치가 필요한
+                layer는 {openSourceFeatureReferences.summary.installReady}개입니다.
+              </p>
+            </div>
+            <div className="open-source-feature-summary">
+              <span>
+                <Layers3 size={14} aria-hidden="true" />
+                {openSourceFeatureReferences.summary.totalLayers} layers
+              </span>
+              <span>
+                <GitBranch size={14} aria-hidden="true" />
+                {openSourceFeatureReferences.summary.totalRepositories} repos
+              </span>
+              <span>
+                <ShieldCheck size={14} aria-hidden="true" />
+                install audit {openSourceFeatureReferences.summary.installReady}
+              </span>
+            </div>
+          </header>
+          <div className="open-source-feature-grid">
+            {visibleOpenSourceLayers.map((layer) => {
+              const section = sectionIds.has(layer.primarySection as ProductSectionId)
+                ? (layer.primarySection as ProductSectionId)
+                : "overview";
+              return (
+                <button
+                  type="button"
+                  key={layer.featureId}
+                  className="open-source-feature-card"
+                  onClick={() => onOpenSection(section)}
+                >
+                  <span className="open-source-feature-card-top">
+                    <FileSearch size={15} aria-hidden="true" />
+                    <small>{layer.priority}</small>
+                  </span>
+                  <strong>{layer.label}</strong>
+                  <p>{layer.implementationTargets.slice(0, 3).join(" · ")}</p>
+                  <span className="open-source-install-policy">
+                    {layer.installNeededNow ? "installation audit required" : layer.installPolicy.replaceAll("_", " ")}
+                  </span>
+                  <span className="open-source-repo-row">
+                    {layer.candidateRepos.slice(0, 3).map((repo) => (
+                      <em key={repo.id}>{repo.title}</em>
                     ))}
                   </span>
                 </button>

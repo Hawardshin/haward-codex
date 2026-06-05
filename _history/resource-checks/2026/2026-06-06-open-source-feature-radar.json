@@ -1,0 +1,18 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-open-source-feature-radar",
+  "resource_risk_occurred": true,
+  "risk_reason": "Validation starts local build, static server, browser automation, and desktop packaging processes.",
+  "lifecycle_controls": [
+    "No new long-running app process added to source.",
+    "Static smoke server must be terminated after Playwright check.",
+    "No new dependency or global install was performed.",
+    "Customer snapshot removes internal reference links and watch targets."
+  ],
+  "status": "complete",
+  "verification": [
+    "Static smoke server on 127.0.0.1:3248 was terminated after Playwright verification.",
+    "No source code adds a new worker, timer, pipe, subprocess, or persistent cache.",
+    "desktop:package:internal completed without lingering tracked tool sessions."
+  ]
+}

@@ -13,6 +13,11 @@ import {
   sanitizeReferencePlatformAdvantagesForCustomer
 } from "./lib/reference-platform-advantages.mjs";
 import {
+  collectOpenSourceFeatureReferences,
+  emptyOpenSourceFeatureReferences,
+  sanitizeOpenSourceFeatureReferencesForCustomer
+} from "./lib/open-source-feature-references.mjs";
+import {
   collectHistoryInsightLoop,
   emptyHistoryInsightLoop,
   sanitizeHistoryInsightLoopForCustomer
@@ -122,6 +127,7 @@ export {
   collectFundamentalImprovementStructure,
   collectHistoryInsightLoop,
   collectIntentFeatureMap,
+  collectOpenSourceFeatureReferences,
   collectProductFeatureArchitecture,
   collectReferencePlatformAdvantages
 };
@@ -170,6 +176,7 @@ export function buildSnapshot(repoRoot) {
   const intentFeatureMap = collectIntentFeatureMap(repoRoot);
   const productFeatureArchitecture = collectProductFeatureArchitecture(repoRoot);
   const referencePlatformAdvantages = collectReferencePlatformAdvantages(repoRoot);
+  const openSourceFeatureReferences = collectOpenSourceFeatureReferences(repoRoot);
   const historyInsightLoop = collectHistoryInsightLoop(allDocuments);
   const fundamentalImprovementStructure = collectFundamentalImprovementStructure(historyInsightLoop);
   const sourceFiles = collectSourceFiles(repoRoot, projects);
@@ -223,6 +230,8 @@ export function buildSnapshot(repoRoot) {
       supportingProductFeatures: productFeatureArchitecture.summary.supportingFeatures,
       referencePlatforms: referencePlatformAdvantages.summary.platformGroups,
       referenceTransferPatterns: referencePlatformAdvantages.summary.totalPatterns,
+      openSourceReferenceLayers: openSourceFeatureReferences.summary.totalLayers,
+      openSourceReferenceRepos: openSourceFeatureReferences.summary.totalRepositories,
       historyInsightPatterns: historyInsightLoop.summary.totalPatterns,
       historyInsightRecommendations: historyInsightLoop.summary.activeRecommendations,
       fundamentalImprovementPrinciples: fundamentalImprovementStructure.summary.totalStructuralPrinciples,
@@ -261,6 +270,7 @@ export function buildSnapshot(repoRoot) {
     intentFeatureMap,
     productFeatureArchitecture,
     referencePlatformAdvantages,
+    openSourceFeatureReferences,
     historyInsightLoop,
     fundamentalImprovementStructure,
     categories,
@@ -313,6 +323,8 @@ export function buildCustomerSnapshot(snapshot) {
       supportingProductFeatures: snapshot.productFeatureArchitecture?.summary.supportingFeatures ?? 0,
       referencePlatforms: snapshot.referencePlatformAdvantages?.summary.platformGroups ?? 0,
       referenceTransferPatterns: snapshot.referencePlatformAdvantages?.summary.totalPatterns ?? 0,
+      openSourceReferenceLayers: snapshot.openSourceFeatureReferences?.summary.totalLayers ?? 0,
+      openSourceReferenceRepos: snapshot.openSourceFeatureReferences?.summary.totalRepositories ?? 0,
       historyInsightPatterns: 0,
       historyInsightRecommendations: 0,
       fundamentalImprovementPrinciples: 0,
@@ -416,6 +428,9 @@ export function buildCustomerSnapshot(snapshot) {
     ),
     referencePlatformAdvantages: sanitizeReferencePlatformAdvantagesForCustomer(
       snapshot.referencePlatformAdvantages || emptyReferencePlatformAdvantages()
+    ),
+    openSourceFeatureReferences: sanitizeOpenSourceFeatureReferencesForCustomer(
+      snapshot.openSourceFeatureReferences || emptyOpenSourceFeatureReferences()
     ),
     historyInsightLoop: sanitizeHistoryInsightLoopForCustomer(snapshot.historyInsightLoop || emptyHistoryInsightLoop()),
     fundamentalImprovementStructure: sanitizeFundamentalImprovementStructureForCustomer(

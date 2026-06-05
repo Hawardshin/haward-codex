@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T22:09:32.149Z",
+  "generatedAt": "2026-06-05T22:25:01.569Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 472,
+    "requirements": 477,
     "evaluations": 17,
     "webSearches": 14,
     "timingRecords": 14,
     "historyDays": 1,
-    "adminHistoryDocuments": 2491,
+    "adminHistoryDocuments": 2497,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -33,6 +33,8 @@
     "supportingProductFeatures": 6,
     "referencePlatforms": 5,
     "referenceTransferPatterns": 19,
+    "openSourceReferenceLayers": 7,
+    "openSourceReferenceRepos": 24,
     "historyInsightPatterns": 6,
     "historyInsightRecommendations": 6,
     "fundamentalImprovementPrinciples": 6,
@@ -7449,6 +7451,36 @@
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-native-select-replacement.ko.md"
     },
     {
+      "id": "REQ-OSR-001",
+      "requirement": "플랫폼은 제품 기능 layer별 오픈소스 후보 repo, 직접 탐구 대상, 이식 후보 기능을 self documenting config로 관리해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-open-source-feature-radar.ko.md"
+    },
+    {
+      "id": "REQ-OSR-002",
+      "requirement": "Workspace Monitor snapshot은 오픈소스 기능 레이더 데이터를 수집하고 developer/customer snapshot에 안전하게 전달해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-open-source-feature-radar.ko.md"
+    },
+    {
+      "id": "REQ-OSR-003",
+      "requirement": "Product Structure 화면은 기능별 오픈소스 후보와 설치 정책을 카드형 UI로 보여줘야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-open-source-feature-radar.ko.md"
+    },
+    {
+      "id": "REQ-OSR-004",
+      "requirement": "설치는 필요한 경우에만 수행하며, 새 dependency/CLI/MCP/server 설치 전 install audit와 rollback 계획이 있어야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-open-source-feature-radar.ko.md"
+    },
+    {
+      "id": "REQ-OSR-005",
+      "requirement": "구현 완료 후 테스트, snapshot 수집, check, package build를 자동 실행해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-open-source-feature-radar.ko.md"
+    },
+    {
       "id": "REQ-PPL-001",
       "requirement": "CLI 세션은 cancel, timeout, error, store cleanup, drop 경로에서 child process를 wait 또는 kill/wait해야 한다.",
       "priority": "must",
@@ -7505,6 +7537,230 @@
   ],
   "documents": [
     {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 11648,
+      "updatedAt": "2026-06-05T22:24:44.187Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-open-source-feature-radar-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-open-source-feature-radar.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Open Source Feature Radar",
+      "excerpt": "작업 요약: Open Source Feature Radar 기능별 오픈소스 후보를 Product Structure 화면에서 볼 수 있는 오픈소스 기능 레이더 로 구현했다. open source feature reference registry.json 에 기능 layer별 candidate repo, 이식 패턴, 설치 정책을 self documenting config로 기록했다. Workspace Monitor collector, snapshot type, customer sanitizer, Pro",
+      "html": "<p>작업 요약: Open Source Feature Radar 기능별 오픈소스 후보를 Product Structure 화면에서 볼 수 있는 오픈소스 기능 레이더 로 구현했다. open source feature reference registry.json 에 기능 layer별 candidate repo, 이식 패턴, 설치 정책을 self documenting config로 기록했다. Workspace Monitor collector, snapshot type, customer sanitizer, Product Feature UI, CSS, tests를 갱신했다. 새 dependency 설치는 필요하지 않아 수행하지 않았다. Browser/Pl</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 647,
+      "updatedAt": "2026-06-05T22:24:44.186Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-open-source-feature-radar-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-open-source-feature-radar.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Open Source Feature Radar",
+      "excerpt": "평가: Open Source Feature Radar 결과 요청한 “가능하면 기능 추가, 설치 필요하면 설치”에 대해 기능별 오픈소스 research를 Product Structure 안의 오픈소스 기능 레이더 로 승격했다. 새 dependency 설치는 필요하지 않았다. 구현 평가 오픈소스 후보 repo와 install policy가 open source feature reference registry.json 에 self documenting config로 고정됐다. Workspace Moni",
+      "html": "<p>평가: Open Source Feature Radar 결과 요청한 “가능하면 기능 추가, 설치 필요하면 설치”에 대해 기능별 오픈소스 research를 Product Structure 안의 오픈소스 기능 레이더 로 승격했다. 새 dependency 설치는 필요하지 않았다. 구현 평가 오픈소스 후보 repo와 install policy가 open source feature reference registry.json 에 self documenting config로 고정됐다. Workspace Monitor snapshot에 openSourceFeatureReferences 가 추가되어 developer/customer snapshot 모두에</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1599,
+      "updatedAt": "2026-06-05T22:24:44.185Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-open-source-feature-radar-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-open-source-feature-radar.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Open Source Feature Radar",
+      "excerpt": "요청 결과 추적: Open Source Feature Radar 요청 기능별 오픈소스 조사 결과를 실제 기능으로 추가하고, 설치가 필요하면 설치하라는 요청. 결과 Product Structure에 오픈소스 기능 레이더 추가. 기능 layer별 candidate repo, implementation targets, install policy 표시. 새 dependency 설치는 불필요해 설치하지 않음. 산출물 platform desktop app/configs/open source feature r",
+      "html": "<p>요청 결과 추적: Open Source Feature Radar 요청 기능별 오픈소스 조사 결과를 실제 기능으로 추가하고, 설치가 필요하면 설치하라는 요청. 결과 Product Structure에 오픈소스 기능 레이더 추가. 기능 layer별 candidate repo, implementation targets, install policy 표시. 새 dependency 설치는 불필요해 설치하지 않음. 산출물 platform desktop app/configs/open source feature reference registry.json platform desktop app/renderer/workspace monitor/scripts/l</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1135,
+      "updatedAt": "2026-06-05T22:24:44.185Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-open-source-feature-radar-json",
+      "path": "_history/work-timings/2026/2026-06-06-open-source-feature-radar.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Open Source Feature Radar",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 open source feature radar\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Search queries captured in web search record.\" }, { \"phase\": \"implementation\", \"status\": \"compl",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 open source feature radar&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Search queries captured in web search record.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Config, collector, snapshot type, UI, CSS, and tests added.&quot; },</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 620,
+      "updatedAt": "2026-06-05T22:24:44.183Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-open-source-feature-radar-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-open-source-feature-radar/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록",
+      "excerpt": "작업 목록 x 오픈소스 기능 레이더 요구사항 작성 x open source feature reference registry 추가 x collector와 customer sanitizer 추가 x snapshot type과 stats 확장 x Product Structure panel에 레이더 보드 추가 x MonitorShell fallback과 prop 연결 x UI CSS 추가 x collector/static UI tests 추가 x config contract와 renderer test 1",
+      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] 오픈소스 기능 레이더 요구사항 작성</li>\n<li>[x] open-source feature reference registry 추가</li>\n<li>[x] collector와 customer sanitizer 추가</li>\n<li>[x] snapshot type과 stats 확장</li>\n<li>[x] Product Structure panel에 레이더 보드 추가</li>\n<li>[x] MonitorShell fallback과 prop 연결</li>\n<li>[x] UI CSS 추가</li>\n<li>[x] collector/static UI tests 추가</li>\n<li>[x] config contract와 renderer test 1차 통과</li>\n<li>[x] generated snapshot 재수집</li>\n<li>[x] renderer/platform check와 package build 실행</li>\n<li>[x] Browser/Playwright smoke 기록</li>\n<li>[x] evaluation, trace, work summary 작성</li>\n<li>[ ] commit/push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 606,
+      "updatedAt": "2026-06-05T22:24:44.182Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-open-source-feature-radar-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-open-source-feature-radar/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증 기록",
+      "excerpt": "검증 기록 완료된 검증 PYTHONPATH=src python3 m agent platform.cli check config contract ../platform desktop app/configs/open source feature reference registry.json 통과 git diff check 통과 corepack pnpm filter workspace monitor test 통과 corepack pnpm filter workspace monitor run collect 통과, de",
+      "html": "<h1>검증 기록</h1>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/open-source-feature-reference-registry.json</code> - 통과</li>\n<li><code>git diff --check</code> - 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code> - 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code> - 통과, developer snapshot 650 inline documents / 2494 admin history records</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code> - 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code> - 통과, largest chunk 734386 bytes</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code> - 통과, 24 tests</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code> - 통과, internal ready / public release blockers remain signing, updater, clean-machine smoke</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code> - 통과</li>\n<li>Browser/in-app DOM smoke - 통과, <code>data-open-source-feature-radar=&quot;feature-reference-install-policy&quot;</code> 발견, 6 cards / 6 install policy badges</li>\n<li>Playwright static visual smoke - 통과, screenshot: <code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-06-open-source-feature-radar-desktop.png</code></li>\n<li><code>corepack pnpm run desktop:package:internal</code> - 통과, <code>.app</code>와 <code>.dmg</code> 생성 및 codesign/hdiutil verify 통과</li>\n</ul>\n<h2>설치 여부</h2>\n<ul>\n<li><code>installation_occurred=false</code></li>\n<li>새 dependency, CLI, MCP server, global tool 설치 없음.</li>\n<li>기존 React/collector/CSS/Tauri package stack으로 구현 가능했다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1499,
+      "updatedAt": "2026-06-05T22:24:44.182Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-open-source-feature-radar-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-open-source-feature-radar.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Open Source Feature Radar",
+      "excerpt": "사용자 요청 요약: Open Source Feature Radar 사용자는 유사 오픈소스와 기능별 후보를 더 조사하고, 가능하면 플랫폼에 기능으로 추가하며, 설치가 필요하면 설치하라고 요청했다. 이번 slice는 기능별 오픈소스 후보와 설치 정책을 앱 안에서 확인할 수 있는 Product Structure 기능으로 구현한다. 원문 전체는 저장하지 않고 요약만 보존한다.",
+      "html": "<p>사용자 요청 요약: Open Source Feature Radar 사용자는 유사 오픈소스와 기능별 후보를 더 조사하고, 가능하면 플랫폼에 기능으로 추가하며, 설치가 필요하면 설치하라고 요청했다. 이번 slice는 기능별 오픈소스 후보와 설치 정책을 앱 안에서 확인할 수 있는 Product Structure 기능으로 구현한다. 원문 전체는 저장하지 않고 요약만 보존한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 442,
+      "updatedAt": "2026-06-05T22:19:40.811Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-open-source-feature-radar-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-open-source-feature-radar.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Open Source Feature Radar",
+      "excerpt": "웹 검색 기록: Open Source Feature Radar 검색 시각 2026 06 06 쿼리 open source AI agent desktop feature radar provider setup CLI adapter cockpit GitHub 2026 open source agent platform feature reference explorer Dify Langflow n8n Langfuse OpenHands desktop UI open source AI agent workbench MC",
+      "html": "<p>웹 검색 기록: Open Source Feature Radar 검색 시각 2026 06 06 쿼리 open source AI agent desktop feature radar provider setup CLI adapter cockpit GitHub 2026 open source agent platform feature reference explorer Dify Langflow n8n Langfuse OpenHands desktop UI open source AI agent workbench MCP provider settings run history decision inbox GitHub open source AI agent deskt</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1921,
+      "updatedAt": "2026-06-05T22:19:40.811Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-open-source-feature-radar-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-open-source-feature-radar/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적성",
+      "excerpt": "추적성 | 요구사항 | 구현 | 검증 | | | | | | REQ OSR 001 | platform desktop app/configs/open source feature reference registry.json | check config contract | | REQ OSR 002 | scripts/lib/open source feature references.mjs , collect workspace.mjs , snapshot.ts | collector.test.mjs | | REQ OSR ",
+      "html": "<h1>추적성</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-OSR-001</td><td><code>platform-desktop-app/configs/open-source-feature-reference-registry.json</code></td><td><code>check-config-contract</code></td></tr><tr><td>REQ-OSR-002</td><td><code>scripts/lib/open-source-feature-references.mjs</code>, <code>collect-workspace.mjs</code>, <code>snapshot.ts</code></td><td><code>collector.test.mjs</code></td></tr><tr><td>REQ-OSR-003</td><td><code>ProductFeatureArchitecturePanel.tsx</code>, <code>MonitorShell.tsx</code>, <code>globals.css</code></td><td><code>tool-studio.test.mjs</code>, smoke</td></tr><tr><td>REQ-OSR-004</td><td>install policy fields, evaluation record</td><td>installation_occurred=false</td></tr><tr><td>REQ-OSR-005</td><td>package validation record</td><td><code>desktop:package:internal</code></td></tr></tbody></table>\n<h2>요청 연결</h2>\n<ul>\n<li>“그런거 가능하면 기능 추가” -&gt; 기능별 오픈소스 research를 Product Structure 기능으로 승격.</li>\n<li>“설치 필요하면 설치” -&gt; 설치 필요 여부와 audit 정책을 기능 layer별로 표시하고, 이번 구현은 새 설치 없이 완료.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 897,
+      "updatedAt": "2026-06-05T22:19:40.810Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-open-source-feature-radar-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-open-source-feature-radar.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "오픈소스 기능 레이더 요구사항",
+      "excerpt": "오픈소스 기능 레이더 요구사항 배경 사용자는 유사 오픈소스를 기능별로 더 조사하고, 가능하면 기능을 추가하며, 설치가 필요하면 설치하라고 요청했다. 직전 작업에서 기능별 오픈소스 맵은 research 기록으로 남았지만, 앱 안에서 다음 구현 후보와 설치 정책을 볼 수 있는 제품 기능은 없었다. 요구사항 | ID | 요구사항 | 우선순위 | 판정 기준 | | | | | | | REQ OSR 001 | 플랫폼은 제품 기능 layer별 오픈소스 후보 repo, 직접 탐구 대상, 이식 후보 기능을 sel",
+      "html": "<h1>오픈소스 기능 레이더 요구사항</h1>\n<h2>배경</h2>\n<p>사용자는 유사 오픈소스를 기능별로 더 조사하고, 가능하면 기능을 추가하며, 설치가 필요하면 설치하라고 요청했다. 직전 작업에서 기능별 오픈소스 맵은 research 기록으로 남았지만, 앱 안에서 다음 구현 후보와 설치 정책을 볼 수 있는 제품 기능은 없었다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>판정 기준</th></tr></thead><tbody><tr><td>REQ-OSR-001</td><td>플랫폼은 제품 기능 layer별 오픈소스 후보 repo, 직접 탐구 대상, 이식 후보 기능을 self-documenting config로 관리해야 한다.</td><td>must</td><td><code>open-source-feature-reference-registry.json</code>이 <code>reader_guide</code>, <code>reference_links</code>, <code>structure_rules</code>, <code>field_guide</code>를 포함하고 config contract를 통과한다.</td></tr><tr><td>REQ-OSR-002</td><td>Workspace Monitor snapshot은 오픈소스 기능 레이더 데이터를 수집하고 developer/customer snapshot에 안전하게 전달해야 한다.</td><td>must</td><td><code>openSourceFeatureReferences</code>와 stats가 생성되고 customer sanitizer가 내부 reference link와 watch target을 제거한다.</td></tr><tr><td>REQ-OSR-003</td><td>Product Structure 화면은 기능별 오픈소스 후보와 설치 정책을 카드형 UI로 보여줘야 한다.</td><td>must</td><td><code>data-open-source-feature-radar=&quot;feature-reference-install-policy&quot;</code> 보드가 표시되고 카드 클릭이 관련 section으로 이동한다.</td></tr><tr><td>REQ-OSR-004</td><td>설치는 필요한 경우에만 수행하며, 새 dependency/CLI/MCP/server 설치 전 install audit와 rollback 계획이 있어야 한다.</td><td>must</td><td>이번 변경은 새 dependency가 필요 없으므로 <code>installation_occurred=false</code>로 평가 기록을 남긴다.</td></tr><tr><td>REQ-OSR-005</td><td>구현 완료 후 테스트, snapshot 수집, check, package build를 자동 실행해야 한다.</td><td>must</td><td>validation record에 renderer/platform tests, check, package build 결과가 남는다.</td></tr></tbody></table>\n<h2>범위 제외</h2>\n<ul>\n<li>외부 repo를 source tree에 vendoring하지 않는다.</li>\n<li>새 package를 필요 없이 설치하지 않는다.</li>\n<li>candidate repo의 라이선스/보안 검토 없이 코드를 복사하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2158,
+      "updatedAt": "2026-06-05T22:19:40.809Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-open-source-feature-radar-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-open-source-feature-radar/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "구현 계획",
+      "excerpt": "구현 계획 1. Web first intake로 오픈소스 기능 후보와 설치 정책 요구를 확인한다. 2. 기존 Workspace Monitor snapshot, Product Structure, customer sanitizer 구조를 확인한다. 3. self documenting open source feature registry를 추가한다. 4. collector와 snapshot type에 openSourceFeatureReferences 를 연결한다. 5. Product Structure 화",
+      "html": "<h1>구현 계획</h1>\n<p>1. Web-first intake로 오픈소스 기능 후보와 설치 정책 요구를 확인한다.</p>\n<p>2. 기존 Workspace Monitor snapshot, Product Structure, customer sanitizer 구조를 확인한다.</p>\n<p>3. self-documenting open-source feature registry를 추가한다.</p>\n<p>4. collector와 snapshot type에 <code>openSourceFeatureReferences</code>를 연결한다.</p>\n<p>5. Product Structure 화면에 Open Source Feature Radar 보드를 추가한다.</p>\n<p>6. CSS를 추가해 기본 버튼 느낌을 줄이고 compact desktop card로 보이게 한다.</p>\n<p>7. collector/static UI tests를 추가한다.</p>\n<p>8. config contract, renderer tests/check/perf/build, platform tests/check, package build, smoke를 실행한다.</p>\n<p>9. history, validation, evaluation, request trace를 기록하고 commit/push한다.</p>\n<h2>언어와 구조 결정</h2>\n<ul>\n<li>선택 언어: TypeScript/React + Node ESM collector.</li>\n<li>대안: Rust/Tauri command로 candidate repo registry를 읽는 방법이 있으나, 현재 데이터는 build-time snapshot 성격이라 renderer collector가 더 작고 유지보수 비용이 낮다.</li>\n<li>폴더 구조: config는 <code>platform-desktop-app/configs/</code>, collector는 기존 <code>scripts/lib/</code>, UI는 기존 <code>components/features/</code>, tests는 기존 <code>tests/</code>에 둔다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1233,
+      "updatedAt": "2026-06-05T22:19:40.809Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-open-source-feature-radar-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-open-source-feature-radar/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "오픈소스 기능 레이더 스펙",
+      "excerpt": "오픈소스 기능 레이더 스펙 목표 기능별 오픈소스 리서치 결과를 platform desktop app 제품 화면으로 승격한다. 사용자는 Product Structure에서 기능 layer별 후보 repo, 이식할 패턴, 설치 필요 여부, audit 정책을 확인하고 관련 섹션으로 바로 이동할 수 있어야 한다. 데이터 계약 Config: platform desktop app/configs/open source feature reference registry.json Collector: collectOp",
+      "html": "<h1>오픈소스 기능 레이더 스펙</h1>\n<h2>목표</h2>\n<p>기능별 오픈소스 리서치 결과를 <code>platform-desktop-app</code> 제품 화면으로 승격한다. 사용자는 Product Structure에서 기능 layer별 후보 repo, 이식할 패턴, 설치 필요 여부, audit 정책을 확인하고 관련 섹션으로 바로 이동할 수 있어야 한다.</p>\n<h2>데이터 계약</h2>\n<ul>\n<li>Config: <code>platform-desktop-app/configs/open-source-feature-reference-registry.json</code></li>\n<li>Collector: <code>collectOpenSourceFeatureReferences(repoRoot)</code></li>\n<li>Snapshot field: <code>openSourceFeatureReferences</code></li>\n<li>Stats:</li>\n<li><code>openSourceReferenceLayers</code></li>\n<li><code>openSourceReferenceRepos</code></li>\n</ul>\n<p><code>openSourceFeatureReferences</code>는 다음 구조를 가진다.</p>\n<ul>\n<li><code>sourceBoundary</code>: public source policy와 customer visibility.</li>\n<li><code>summary</code>: layer 수, repo 수, install audit 필요 layer 수, 직접 탐구 필요 layer 수.</li>\n<li><code>referenceLinks</code>: 내부 research/config reference. customer snapshot에서는 제거한다.</li>\n<li><code>featureReferenceLayers</code>: <code>featureId</code>, <code>label</code>, <code>priority</code>, <code>primarySection</code>, <code>installPolicy</code>, <code>installNeededNow</code>, <code>directExplorationRequired</code>, <code>implementationTargets</code>, <code>candidateRepos</code>.</li>\n</ul>\n<h2>UI 계약</h2>\n<ul>\n<li>Product Structure 화면에 <code>오픈소스 기능 레이더</code> 보드를 표시한다.</li>\n<li>보드는 <code>data-open-source-feature-radar=&quot;feature-reference-install-policy&quot;</code> marker를 가진다.</li>\n<li>각 카드는 기능 layer의 우선순위, 구현 대상, 설치 정책, 상위 후보 repo를 보여준다.</li>\n<li>카드 클릭은 <code>primarySection</code>으로 이동한다.</li>\n<li><code>tools</code> section도 product feature panel의 target section으로 인정한다.</li>\n</ul>\n<h2>설치 정책</h2>\n<p>현재 구현은 기존 React, CSS, snapshot collector로 충분하므로 새 dependency를 설치하지 않는다. 후보 repo를 직접 clone하거나 package/CLI/MCP/server를 설치해야 하는 후속 작업은 설치 범위, 명령, dependency record, security/license review, verification, rollback plan을 먼저 기록해야 한다.</p>\n<h2>Customer Snapshot</h2>\n<p>Customer snapshot은 내부 <code>sourcePath</code>, <code>referenceLinks</code>, candidate repo <code>watchTargets</code>를 제거한다. 후보 repo title, URL, install policy, 제한된 <code>patternsToExtract</code>는 public summary로 유지한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2189,
+      "updatedAt": "2026-06-05T22:19:40.809Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-configs-open-source-feature-reference-registry-json",
+      "path": "platform-desktop-app/configs/open-source-feature-reference-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Open Source Feature Reference Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"name\": \"open source feature reference registry\", \"purpose\": \"Maps each desktop product feature layer to directly inspectable open source references before implementation. This keeps open source research actionable inside the app instead of burie",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-06&quot;,\n  &quot;name&quot;: &quot;open-source-feature-reference-registry&quot;,\n  &quot;purpose&quot;: &quot;Maps each desktop product feature layer to directly inspectable open-source references before implementation. This keeps open-source research actionable inside the app instead of buried in notes.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before implementing a feature slice inspired by external open-source platforms.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Start with feature_reference_layers and pick the current feature layer.&quot;,\n      &quot;Read candidate_repos to decide which repositories should be cloned and inspected before implementation.&quot;,\n      &quot;Use implementation_targets to connect external patterns to current platform surfaces.&quot;,\n      &quot;Use install_policy before adding dependencies or auto-installing optional tools.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A feature slice moves from research to implementation.&quot;,\n      &quot;A new external open-source reference becomes a stronger fit.&quot;,\n      &quot;A dependency, CLI adapter, MCP server, or package installation is proposed.&quot;,\n      &quot;An existing reference becomes archived, unavailable, or legally risky.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;feature_map_research&quot;,\n      &quot;title&quot;: &quot;Feature-by-feature open-source map&quot;,\n      &quot;path&quot;: &quot;_research/topics/platform-desktop-app/2026-06-06-feature-by-feature-open-source-map.ko.md&quot;,\n      &quot;source_type&quot;: &quot;internal_research&quot;,\n      &quot;used_for&quot;: [\n        &quot;initial feature-layer to repository mapping&quot;,\n        &quot;implementation priority&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;\n    },\n    {\n      &quot;id&quot;: &quot;product_feature_registry&quot;,\n      &quot;title&quot;: &quot;Product Feature Registry&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/product-feature-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal_config&quot;,\n      &quot;used_for&quot;: [\n        &quot;feature layer ownership&quot;,\n        &quot;product surface mapping&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;clone_before_implementation&quot;,\n      &quot;rule&quot;: &quot;Before implementing an open-source-inspired feature, clone and inspect at least two relevant candidate repositories unless the feature is purely presentational.&quot;,\n      &quot;reason&quot;: &quot;Search snippets are discovery signals, not implementation evidence.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;feature_reference_layers&quot;,\n        &quot;candidate_repos&quot;,\n        &quot;implementation_targets&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;install_only_when_needed&quot;,\n      &quot;rule&quot;: &quot;Do not install a dependency just because a reference project uses it; install only when the current feature cannot be implemented cleanly with existing platform dependencies.&quot;,\n      &quot;reason&quot;: &quot;The desktop app already carries runtime, UI, and packaging complexity.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;install_policy&quot;,\n        &quot;install_needed_now&quot;,\n        &quot;candidate_repos&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;record_install_audit&quot;,\n      &quot;rule&quot;: &quot;Any new package, CLI, MCP server, or global tool install needs an installation audit, license/security review, verification command, and rollback plan.&quot;,\n      &quot;reason&quot;: &quot;Open-source reuse must stay auditable and reversible.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;install_policy&quot;,\n        &quot;install_needed_now&quot;,\n        &quot;_history/installations&quot;\n      ]\n    }\n  ],\n  &quot;field_guide&quot;: [\n    {\n      &quot;field&quot;: &quot;feature_id&quot;,\n      &quot;meaning&quot;: &quot;Matches product-feature-registry feature layer ids where possible.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;priority&quot;,\n      &quot;meaning&quot;: &quot;p0 is next implementation reference, p1 is near-term, p2 is background research.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;install_policy&quot;,\n      &quot;meaning&quot;: &quot;Declares whether a new dependency is currently needed and what audit boundary applies.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;candidate_repos&quot;,\n      &quot;meaning&quot;: &quot;Directly inspectable GitHub repositories or strong official project references.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;verified_by&quot;,\n      &quot;meaning&quot;: &quot;How the repository existence or source was checked in this research pass.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;watch_targets&quot;,\n      &quot;meaning&quot;: &quot;Files, folders, or product behavior to inspect after cloning.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;patterns_to_extract&quot;,\n      &quot;meaning&quot;: &quot;Reference patterns that may be transferred into this platform.&quot;,\n      &quot;required&quot;: true\n    }\n  ],\n  &quot;source_boundary&quot;: {\n    &quot;policy&quot;: &quot;public_sources_only&quot;,\n    &quot;customer_visibility&quot;: &quot;summary_allowed&quot;,\n    &quot;excluded_sources&quot;: [\n      &quot;private repos&quot;,\n      &quot;leaked source&quot;,\n      &quot;screenshots without source provenance&quot;,\n      &quot;license-incompatible source copy&quot;\n    ],\n    &quot;accepted_source_types&quot;: [\n      &quot;official GitHub repository&quot;,\n      &quot;official documentation&quot;,\n      &quot;internal research record&quot;,\n      &quot;direct local clone inspection&quot;\n    ]\n  },\n  &quot;feature_reference_layers&quot;: [\n    {\n      &quot;feature_id&quot;: &quot;agent_orchestration&quot;,\n      &quot;label&quot;: &quot;CLI Orchestration&quot;,\n      &quot;priority&quot;: &quot;p0&quot;,\n      &quot;primary_section&quot;: &quot;desktop&quot;,\n      &quot;install_policy&quot;: &quot;no_new_dependency_now&quot;,\n      &quot;insta</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 17099,
+      "updatedAt": "2026-06-05T22:18:25.476Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
       "category": "evaluation",
@@ -7519,22 +7775,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-2026-2026-06-06-md",
-      "path": "_history/2026/2026-06-06.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 06",
-      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 11028,
-      "updatedAt": "2026-06-05T22:07:25.312Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-request-traces-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
@@ -10028,102 +10268,6 @@
       "htmlTruncated": true,
       "sourceBytes": 1235,
       "updatedAt": "2026-06-05T19:29:25.445Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-public-release-retry-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-public-release-retry.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "2026 06 06 평가: Public Release Retry",
-      "excerpt": "2026 06 06 평가: Public Release Retry 결과 public package를 실제로 재시도했다. 실패 지점은 구현 누락이 아니라 현재 로컬 환경의 Apple/Tauri public release credential 부재로 확인했다. 재시도에서 발견한 pipeline 비효율을 수정했다: public preflight가 expensive verification 전에 실행된다. 검증 corepack pnpm filter platform desktop app test : 통과, 22",
-      "html": "<p>2026 06 06 평가: Public Release Retry 결과 public package를 실제로 재시도했다. 실패 지점은 구현 누락이 아니라 현재 로컬 환경의 Apple/Tauri public release credential 부재로 확인했다. 재시도에서 발견한 pipeline 비효율을 수정했다: public preflight가 expensive verification 전에 실행된다. 검증 corepack pnpm filter platform desktop app test : 통과, 22 tests. corepack pnpm filter platform desktop app run check : 통과. developer snap</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1487,
-      "updatedAt": "2026-06-05T19:26:37.257Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-public-release-retry-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-public-release-retry.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "2026 06 06 Work Summary: Public Release Retry",
-      "excerpt": "2026 06 06 Work Summary: Public Release Retry desktop:package:public 을 다시 실행했다. public preflight 전 단계의 Workspace Monitor/Rust 검증은 통과했다. 실패 원인은 외부 public release env/credential 부재로 확인했다. package public pipeline에서 public preflight를 commonVerifySteps 앞에 배치해 fail fast로 수정했다. desktop:",
-      "html": "<p>2026 06 06 Work Summary: Public Release Retry desktop:package:public 을 다시 실행했다. public preflight 전 단계의 Workspace Monitor/Rust 검증은 통과했다. 실패 원인은 외부 public release env/credential 부재로 확인했다. package public pipeline에서 public preflight를 commonVerifySteps 앞에 배치해 fail fast로 수정했다. desktop:package:internal 을 실행해 내부 .app 와 DMG 생성, codesign verify, hdiutil verify까지 통과했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 501,
-      "updatedAt": "2026-06-05T19:26:37.257Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-public-release-retry-json",
-      "path": "_history/work-timings/2026/2026-06-06-public-release-retry.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Public Release Retry",
-      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release retry\", \"phases\": { \"phase\": \"web first intake and credential inventory\", \"elapsed\": \"short\" }, { \"phase\": \"public package retry before fix\", \"elapsed\": \"long\" }, { \"phase\": \"fail fast pipeline fix\", \"elapsed",
-      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release retry&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake and credential inventory&quot;, &quot;elapsed&quot;: &quot;short&quot; }, { &quot;phase&quot;: &quot;public package retry before fix&quot;, &quot;elapsed&quot;: &quot;long&quot; }, { &quot;phase&quot;: &quot;fail fast pipeline fix&quot;, &quot;elapsed&quot;: &quot;short&quot; }, { &quot;phase&quot;: &quot;validation and history&quot;, &quot;elapsed&quot;: &quot;medium&quot; } , &quot;bott</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 676,
-      "updatedAt": "2026-06-05T19:24:18.507Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-public-release-retry-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-public-release-retry.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "2026 06 06 Request Trace: Public Release Retry",
-      "excerpt": "2026 06 06 Request Trace: Public Release Retry 요청 “다시 해봐” 실행 최신 Tauri updater/signing 문서를 다시 확인했다. local env와 Keychain Developer ID identity 존재 여부를 값 노출 없이 확인했다. corepack pnpm run desktop:package:public 을 실제 실행했다. 결과 Workspace Monitor check/test/build, desktop tests/check, Rust t",
-      "html": "<p>2026 06 06 Request Trace: Public Release Retry 요청 “다시 해봐” 실행 최신 Tauri updater/signing 문서를 다시 확인했다. local env와 Keychain Developer ID identity 존재 여부를 값 노출 없이 확인했다. corepack pnpm run desktop:package:public 을 실제 실행했다. 결과 Workspace Monitor check/test/build, desktop tests/check, Rust tests는 통과했다. public preflight에서 Apple signing/notarization env, Tauri updater key</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 885,
-      "updatedAt": "2026-06-05T19:22:32.673Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-public-release-retry-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-public-release-retry.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "2026 06 06 사용자 요청 요약: Public Release Retry",
-      "excerpt": "2026 06 06 사용자 요청 요약: Public Release Retry 사용자가 “다시 해봐”라고 지시했다. 직전 작업의 public release blocker를 실제 명령으로 다시 확인하고, 실패 지점이 외부 credential/env인지 검증한 뒤 pipeline 순서를 개선하는 작업으로 처리했다.",
-      "html": "<p>2026 06 06 사용자 요청 요약: Public Release Retry 사용자가 “다시 해봐”라고 지시했다. 직전 작업의 public release blocker를 실제 명령으로 다시 확인하고, 실패 지점이 외부 credential/env인지 검증한 뒤 pipeline 순서를 개선하는 작업으로 처리했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 315,
-      "updatedAt": "2026-06-05T19:22:06.280Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-public-release-retry-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-public-release-retry.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "2026 06 06 Web Search: Public Release Retry",
-      "excerpt": "2026 06 06 Web Search: Public Release Retry Query Tauri v2 updater signing private key environment variable createUpdaterArtifacts latest.json official docs Tauri v2 macOS signing notarization APPLE ID APPLE API KEY stapler official docs Tauri v2 signer generate updater private k",
-      "html": "<p>2026 06 06 Web Search: Public Release Retry Query Tauri v2 updater signing private key environment variable createUpdaterArtifacts latest.json official docs Tauri v2 macOS signing notarization APPLE ID APPLE API KEY stapler official docs Tauri v2 signer generate updater private key official docs 확인한 출처 Tauri updater plugin: https://v2.tauri.app/plugin/update</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1158,
-      "updatedAt": "2026-06-05T19:21:53.357Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/web-searches"
@@ -17791,118 +17935,6 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-theme-terminal-folding-ux-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-theme-terminal-folding-ux/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Traceability: Theme, Terminal Overlay, Code Folding UX",
-      "excerpt": "Traceability: Theme, Terminal Overlay, Code Folding UX | 요구사항 | 구현 | 검증 | | | | | | PDA REQ 054 | app/globals.css hard coded light background tokenization, dark soft accent variables | CSS scan, Browser dark smoke | | PDA REQ 055 | surface , surface raised , surface muted , accen",
-      "html": "<h1>Traceability: Theme, Terminal Overlay, Code Folding UX</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>PDA-REQ-054</td><td><code>app/globals.css</code> hard-coded light background tokenization, dark soft accent variables</td><td>CSS scan, Browser dark smoke</td></tr><tr><td>PDA-REQ-055</td><td><code>--surface</code>, <code>--surface-raised</code>, <code>--surface-muted</code>, accent <code>color-mix</code> usage</td><td>CSS scan, Browser light smoke</td></tr><tr><td>PDA-REQ-056</td><td><code>RuntimeTerminalDrawer.tsx</code> backdrop, full workbench overlay CSS</td><td>Browser terminal smoke</td></tr><tr><td>PDA-REQ-057</td><td><code>MonitorShell.tsx</code> <code>foldAll</code>/<code>unfoldAll</code> Monaco actions and toolbar buttons</td><td>Type check, Browser source toolbar smoke</td></tr><tr><td>PDA-REQ-058</td><td><code>WorkspaceExplorerPane.tsx</code> folder expanded state, chevron, <code>aria-expanded</code></td><td>Type check, Browser Explorer smoke</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 752,
-      "updatedAt": "2026-06-03T11:30:35.909Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-03-theme-terminal-folding-ux-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-03-theme-terminal-folding-ux.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "요구사항: Theme, Terminal Overlay, Code Folding UX",
-      "excerpt": "요구사항: Theme, Terminal Overlay, Code Folding UX 배경 사용자는 다크모드에서 흰 배경이 많이 튀고, 다중 CLI 터미널이 올라올 때 화면을 애매하게 가리며, 코드 에디팅 모드에 접기 기능이 없다고 지적했다. 설치형 데스크톱 앱의 작업감에 맞게 테마 표면, 터미널 오버레이, 코드 편집 접기 동작을 개선한다. 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | PDA REQ 054 | 다크모드와 시스템 다크모드에서 주요 카드, dialog, ",
-      "html": "<h1>요구사항: Theme, Terminal Overlay, Code Folding UX</h1>\n<h2>배경</h2>\n<p>사용자는 다크모드에서 흰 배경이 많이 튀고, 다중 CLI 터미널이 올라올 때 화면을 애매하게 가리며, 코드 에디팅 모드에 접기 기능이 없다고 지적했다. 설치형 데스크톱 앱의 작업감에 맞게 테마 표면, 터미널 오버레이, 코드 편집 접기 동작을 개선한다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>PDA-REQ-054</td><td>다크모드와 시스템 다크모드에서 주요 카드, dialog, 파일/코드, 운영/의사결정, 구조 패널은 라이트 전용 흰 배경을 직접 쓰지 않아야 한다.</td><td>must</td><td>CSS hard-coded light background scan, Browser dark smoke</td></tr><tr><td>PDA-REQ-055</td><td>라이트모드에서는 기존 밝은 workbench 표면을 유지하되, 표면색은 theme token을 통해 관리해야 한다.</td><td>must</td><td>CSS token scan, Browser light smoke</td></tr><tr><td>PDA-REQ-056</td><td>다중 CLI 터미널이 열리면 작업 화면을 확실히 덮는 오버레이로 동작하고, 배경 클릭 또는 접기 버튼으로 닫을 수 있어야 한다.</td><td>must</td><td>Browser terminal drawer smoke</td></tr><tr><td>PDA-REQ-057</td><td>코드 에디팅 모드에는 Monaco 코드 접기/펼치기 명령이 사용자에게 노출되어야 한다.</td><td>must</td><td>Type check, toolbar token check, Browser source toolbar smoke</td></tr><tr><td>PDA-REQ-058</td><td>파일 Explorer의 폴더는 접고 펼 수 있어야 하며, 접힌 상태가 시각적으로 드러나야 한다.</td><td>should</td><td>Type check, Browser Explorer smoke</td></tr></tbody></table>\n<h2>비범위</h2>\n<ul>\n<li>새 editor engine 도입.</li>\n<li>실제 CLI PTY multiplexing 재구현.</li>\n<li>public release signing/notarization gate 해소.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1694,
-      "updatedAt": "2026-06-03T11:30:35.908Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-theme-terminal-folding-ux-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-theme-terminal-folding-ux/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Plan: Theme, Terminal Overlay, Code Folding UX",
-      "excerpt": "Plan: Theme, Terminal Overlay, Code Folding UX 단계 1. 웹 근거와 현재 CSS/컴포넌트 구조를 확인한다. 2. 라이트 전용 background 값을 theme token으로 치환하고 다크 soft accent 변수를 추가한다. 3. RuntimeTerminalDrawer 에 backdrop을 추가하고 open 상태를 작업영역 overlay로 바꾼다. 4. Monaco source toolbar에 fold/unfold command를 추가한다. 5. Works",
-      "html": "<h1>Plan: Theme, Terminal Overlay, Code Folding UX</h1>\n<h2>단계</h2>\n<p>1. 웹 근거와 현재 CSS/컴포넌트 구조를 확인한다.</p>\n<p>2. 라이트 전용 background 값을 theme token으로 치환하고 다크 soft accent 변수를 추가한다.</p>\n<p>3. <code>RuntimeTerminalDrawer</code>에 backdrop을 추가하고 open 상태를 작업영역 overlay로 바꾼다.</p>\n<p>4. Monaco source toolbar에 fold/unfold command를 추가한다.</p>\n<p>5. <code>WorkspaceExplorerPane</code> directory row에 local expanded state와 chevron/folder icon을 추가한다.</p>\n<p>6. TypeScript, tests, customer build, Browser smoke, CSS scan으로 검증한다.</p>\n<h2>선택한 접근</h2>\n<ul>\n<li>새 UI library나 editor library를 추가하지 않는다.</li>\n<li>기존 Monaco/Tauri/React 구조를 유지하면서 사용자 불편이 드러난 surface만 좁게 고친다.</li>\n<li>다크모드 수정은 개별 selector override보다 token migration을 우선한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 881,
-      "updatedAt": "2026-06-03T11:30:35.908Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-theme-terminal-folding-ux-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-theme-terminal-folding-ux/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Spec: Theme, Terminal Overlay, Code Folding UX",
-      "excerpt": "Spec: Theme, Terminal Overlay, Code Folding UX 목표 platform desktop app renderer의 데스크톱 workbench UX에서 다크모드 표면 불일치, 터미널 drawer 가림 방식, 코드 편집 접기 기능 누락을 한 slice로 해결한다. 결정 CSS는 MDN color scheme / prefers color scheme 의 원칙에 맞춰 라이트 전용 배경값을 theme token으로 이동한다. Monaco는 이미 프로젝트에 포함되어 있으므로 새",
-      "html": "<h1>Spec: Theme, Terminal Overlay, Code Folding UX</h1>\n<h2>목표</h2>\n<p><code>platform-desktop-app</code> renderer의 데스크톱 workbench UX에서 다크모드 표면 불일치, 터미널 drawer 가림 방식, 코드 편집 접기 기능 누락을 한 slice로 해결한다.</p>\n<h2>결정</h2>\n<ul>\n<li>CSS는 MDN <code>color-scheme</code>/<code>prefers-color-scheme</code>의 원칙에 맞춰 라이트 전용 배경값을 theme token으로 이동한다.</li>\n<li>Monaco는 이미 프로젝트에 포함되어 있으므로 새 editor library를 도입하지 않고 기존 <code>IStandaloneCodeEditor</code> action surface를 사용한다.</li>\n<li>터미널 drawer는 fixed overlay로 유지하되 열린 상태에서 작업 영역 대부분을 덮고 backdrop을 제공한다.</li>\n<li>Explorer folder folding은 React local state로 처리한다. 폴더 접기는 저장 대상이 아닌 화면 탐색 상태다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>app/globals.css</code>에 <code>background: #ffffff</code>, <code>background: #fbfcfd</code>, <code>background: white</code>가 남지 않는다.</li>\n<li>다크모드 Browser smoke에서 설정/홈/파일/터미널 표면에 큰 흰 패널이 보이지 않는다.</li>\n<li>터미널 open 상태에서 <code>.terminal-drawer-backdrop</code>과 <code>.terminal-drawer.open</code>이 존재한다.</li>\n<li>코드 편집 toolbar에 <code>코드 접기</code>/<code>코드 펼치기</code>가 노출된다.</li>\n<li>Explorer folder tree item은 <code>aria-expanded</code>를 바꾸며 접고 펼 수 있다.</li>\n</ul>\n<h2>잔여 후보</h2>\n<ul>\n<li>실제 packaged Tauri app에서 OS theme 전환과 persisted theme 전환을 반복 smoke한다.</li>\n<li>Monaco command palette와 folding shortcuts를 네이티브 menu/shortcut로 연결한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1545,
-      "updatedAt": "2026-06-03T11:30:35.908Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-native-first-renderer-reduction-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-native-first-renderer-reduction/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: Native first renderer reduction",
-      "excerpt": "검증: Native first renderer reduction 결과 상태: passed 명령 cargo fmt : passed cargo test : passed cargo build : passed corepack pnpm filter workspace monitor run check : passed corepack pnpm filter workspace monitor test : 17 tests passed corepack pnpm filter workspace monitor run buil",
-      "html": "<h1>검증: Native-first renderer reduction</h1>\n<h2>결과</h2>\n<ul>\n<li>상태: <code>passed</code></li>\n</ul>\n<h2>명령</h2>\n<ul>\n<li><code>cargo fmt</code>: passed</li>\n<li><code>cargo test</code>: passed</li>\n<li><code>cargo build</code>: passed</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: passed</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 17 tests passed</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: passed</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 17 tests passed</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: passed</li>\n<li>Browser smoke on <code>http://127.0.0.1:3240/</code>: settings dialog opened, <code>데이터/운영</code> tab showed <code>앱 설정 저장소</code>, console error count <code>0</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code>: passed</li>\n<li><code>git diff --check</code>: passed</li>\n</ul>\n<h2>정적 검증</h2>\n<ul>\n<li><code>MonitorShell.tsx</code>에 <code>localStorage</code> reference가 남아 있지 않다.</li>\n<li><code>check-readiness.mjs</code>는 <code>localStorage</code>가 다시 등장하면 실패한다.</li>\n<li><code>readiness.test.mjs</code>는 <code>get_desktop_preferences</code>, <code>save_desktop_preferences</code>, <code>DesktopPreferencesReport</code>, <code>desktop-preferences.v1.json</code>, <code>native-preferences-pane</code>을 검증한다.</li>\n<li>runtime contract는 <code>preferences_commands</code>를 포함한다.</li>\n<li>정적 customer build에서 설정 저장소 UI가 렌더링되며, Tauri가 없는 미리보기에서는 <code>browser_fallback</code>으로 명시된다.</li>\n</ul>\n<h2>잔여 위험</h2>\n<ul>\n<li>Tauri packaged app 재실행 후 persistence smoke는 다음 packaging slice에서 추가로 확인해야 한다.</li>\n<li>Rust native code는 아직 <code>lib.rs</code>에 모여 있으므로 다음 slice에서 module split이 필요하다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1636,
-      "updatedAt": "2026-06-03T11:22:26.235Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-native-first-renderer-reduction-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-native-first-renderer-reduction/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Traceability: Native first renderer reduction",
-      "excerpt": "Traceability: Native first renderer reduction Request UR 2026 06 03 049 : native를 더 많이 건드리고 프론트 코드가 앱 책임을 과하게 들고 있는 부분을 덜어내는 방향을 고려하라고 지시했다. Requirements PDA REQ 049 : native app config preference storage PDA REQ 050 : renderer as thin client PDA REQ 051 : theme/language/rail/ter",
-      "html": "<h1>Traceability: Native-first renderer reduction</h1>\n<h2>Request</h2>\n<ul>\n<li><code>UR-2026-06-03-049</code>: native를 더 많이 건드리고 프론트 코드가 앱 책임을 과하게 들고 있는 부분을 덜어내는 방향을 고려하라고 지시했다.</li>\n</ul>\n<h2>Requirements</h2>\n<ul>\n<li><code>PDA-REQ-049</code>: native app config preference storage</li>\n<li><code>PDA-REQ-050</code>: renderer as thin client</li>\n<li><code>PDA-REQ-051</code>: theme/language/rail/terminal/runtime defaults/pinned sections schema</li>\n<li><code>PDA-REQ-052</code>: user-visible preference store status/path</li>\n<li><code>PDA-REQ-053</code>: no-localStorage regression guard</li>\n</ul>\n<h2>Implementation</h2>\n<ul>\n<li><code>platform-desktop-app/src-tauri/src/lib.rs</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code></li>\n<li><code>platform-desktop-app/scripts/check-readiness.mjs</code></li>\n<li><code>platform-desktop-app/scripts/check-runtime-contract.mjs</code></li>\n<li><code>platform-desktop-app/tests/readiness.test.mjs</code></li>\n</ul>\n<h2>Validation</h2>\n<ul>\n<li><code>platform-desktop-app/specs/2026-06-03-native-first-renderer-reduction/validation.ko.md</code></li>\n<li><code>_history/evaluations/2026/2026-06-03-native-first-renderer-reduction.ko.md</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1191,
-      "updatedAt": "2026-06-03T11:16:56.429Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-03-native-first-renderer-reduction-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-03-native-first-renderer-reduction.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "Native first renderer reduction 요구사항",
-      "excerpt": "Native first renderer reduction 요구사항 배경 사용자는 데스크톱 앱다운 제품을 만들려면 native runtime을 더 많이 건드려야 하며, 프론트 코드가 앱 상태와 실행 책임을 과하게 들고 있는 구조를 덜어내야 한다고 지시했다. 이 요구는 “웹 UI를 Tauri로 감싼 앱”이 아니라 설치 앱이 설정, 파일, 프로세스, 작업공간, 데이터 저장을 소유하고 renderer는 화면과 전문 editor UI를 담당하는 구조를 목표로 한다. 요구사항 PDA REQ 049 : 설치형",
-      "html": "<h1>Native-first renderer reduction 요구사항</h1>\n<h2>배경</h2>\n<p>사용자는 데스크톱 앱다운 제품을 만들려면 native runtime을 더 많이 건드려야 하며, 프론트 코드가 앱 상태와 실행 책임을 과하게 들고 있는 구조를 덜어내야 한다고 지시했다. 이 요구는 “웹 UI를 Tauri로 감싼 앱”이 아니라 설치 앱이 설정, 파일, 프로세스, 작업공간, 데이터 저장을 소유하고 renderer는 화면과 전문 editor UI를 담당하는 구조를 목표로 한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>PDA-REQ-049</code>: 설치형 데스크톱 앱의 사용자 설정은 브라우저 <code>localStorage</code>가 아니라 Tauri native command와 앱 config 경로에서 관리해야 한다.</li>\n<li><code>PDA-REQ-050</code>: renderer는 설정값을 영구 저장하지 않고 native preference command를 읽고 변경 요청을 보내는 얇은 클라이언트로 동작해야 한다.</li>\n<li><code>PDA-REQ-051</code>: 테마, 화면 언어, 좌측 rail, 하단 터미널 열림 상태, CLI/session/task pipe 초기화 기본값, pinned section은 native preference schema로 저장해야 한다.</li>\n<li><code>PDA-REQ-052</code>: 설정 UI는 사용자가 native app config 저장 상태와 경로를 확인할 수 있게 해야 한다.</li>\n<li><code>PDA-REQ-053</code>: readiness/test는 다시 <code>localStorage</code> 기반 desktop preference persistence로 회귀하지 못하게 검증해야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>이번 slice에서 React/Next renderer 전체를 제거하지 않는다.</li>\n<li>Monaco editor, workbench layout, terminal drawer 같은 전문 UI는 renderer에 남긴다.</li>\n<li>macOS public signing, notarization, updater gate 완료를 주장하지 않는다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1631,
-      "updatedAt": "2026-06-03T11:16:56.428Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -17952,7 +17984,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-          "updatedAt": "2026-06-05T22:07:25.312Z",
+          "updatedAt": "2026-06-05T22:24:44.187Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18056,6 +18088,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-evaluations-2026-2026-06-06-open-source-feature-radar-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-open-source-feature-radar.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: Open Source Feature Radar",
+          "excerpt": "평가: Open Source Feature Radar 결과 요청한 “가능하면 기능 추가, 설치 필요하면 설치”에 대해 기능별 오픈소스 research를 Product Structure 안의 오픈소스 기능 레이더 로 승격했다. 새 dependency 설치는 필요하지 않았다. 구현 평가 오픈소스 후보 repo와 install policy가 open source feature reference registry.json 에 self documenting config로 고정됐다. Workspace Moni",
+          "updatedAt": "2026-06-05T22:24:44.185Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-evaluations-2026-2026-06-06-process-pipe-leak-guard-evaluation-input-json",
           "path": "_history/evaluations/2026/2026-06-06-process-pipe-leak-guard-evaluation-input.json",
           "category": "evaluation",
@@ -18103,16 +18145,6 @@
           "title": "2026 06 06 Evaluation: Public Release Repeat Retry",
           "excerpt": "2026 06 06 Evaluation: Public Release Repeat Retry 검증 corepack pnpm filter platform desktop app run release:preflight:public:report : 통과 기준 충족. report only로 public blocker를 값 노출 없이 보고했다. corepack pnpm run desktop:package:public : 의도된 실패. public preflight에서 즉시 실패했고 expensive verif",
           "updatedAt": "2026-06-05T19:29:25.448Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-public-release-retry-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-public-release-retry.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "2026 06 06 평가: Public Release Retry",
-          "excerpt": "2026 06 06 평가: Public Release Retry 결과 public package를 실제로 재시도했다. 실패 지점은 구현 누락이 아니라 현재 로컬 환경의 Apple/Tauri public release credential 부재로 확인했다. 재시도에서 발견한 pipeline 비효율을 수정했다: public preflight가 expensive verification 전에 실행된다. 검증 corepack pnpm filter platform desktop app test : 통과, 22",
-          "updatedAt": "2026-06-05T19:26:37.257Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18286,6 +18318,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-open-source-feature-radar-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-open-source-feature-radar.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: Open Source Feature Radar",
+          "excerpt": "요청 결과 추적: Open Source Feature Radar 요청 기능별 오픈소스 조사 결과를 실제 기능으로 추가하고, 설치가 필요하면 설치하라는 요청. 결과 Product Structure에 오픈소스 기능 레이더 추가. 기능 layer별 candidate repo, implementation targets, install policy 표시. 새 dependency 설치는 불필요해 설치하지 않음. 산출물 platform desktop app/configs/open source feature r",
+          "updatedAt": "2026-06-05T22:24:44.185Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-process-pipe-leak-guard-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-process-pipe-leak-guard.ko.md",
           "category": "request-trace",
@@ -18323,16 +18365,6 @@
           "title": "2026 06 06 Request Trace: Public Release Repeat Retry",
           "excerpt": "2026 06 06 Request Trace: Public Release Repeat Retry 실행 최신 Tauri updater/signing 및 Apple notarization 공식 문서를 다시 확인했다. 공개 릴리스 관련 env 변수 존재 여부를 값 노출 없이 확인했다. Keychain의 Developer ID Application identity 개수를 확인했다. corepack pnpm filter platform desktop app run release:preflight:publi",
           "updatedAt": "2026-06-05T19:29:25.446Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-public-release-retry-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-public-release-retry.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "2026 06 06 Request Trace: Public Release Retry",
-          "excerpt": "2026 06 06 Request Trace: Public Release Retry 요청 “다시 해봐” 실행 최신 Tauri updater/signing 문서를 다시 확인했다. local env와 Keychain Developer ID identity 존재 여부를 값 노출 없이 확인했다. corepack pnpm run desktop:package:public 을 실제 실행했다. 결과 Workspace Monitor check/test/build, desktop tests/check, Rust t",
-          "updatedAt": "2026-06-05T19:22:32.673Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18426,6 +18458,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-open-source-feature-radar-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-open-source-feature-radar.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: Open Source Feature Radar",
+          "excerpt": "사용자 요청 요약: Open Source Feature Radar 사용자는 유사 오픈소스와 기능별 후보를 더 조사하고, 가능하면 플랫폼에 기능으로 추가하며, 설치가 필요하면 설치하라고 요청했다. 이번 slice는 기능별 오픈소스 후보와 설치 정책을 앱 안에서 확인할 수 있는 Product Structure 기능으로 구현한다. 원문 전체는 저장하지 않고 요약만 보존한다.",
+          "updatedAt": "2026-06-05T22:19:40.811Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-process-pipe-leak-guard-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-process-pipe-leak-guard.ko.md",
           "category": "user-request",
@@ -18463,16 +18505,6 @@
           "title": "2026 06 06 User Request: Public Release Repeat Retry",
           "excerpt": "2026 06 06 User Request: Public Release Repeat Retry User requested another retry with: “다시”. Interpreted as rerunning the public desktop package path after the prior fail fast fix.",
           "updatedAt": "2026-06-05T19:29:25.445Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-public-release-retry-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-public-release-retry.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "2026 06 06 사용자 요청 요약: Public Release Retry",
-          "excerpt": "2026 06 06 사용자 요청 요약: Public Release Retry 사용자가 “다시 해봐”라고 지시했다. 직전 작업의 public release blocker를 실제 명령으로 다시 확인하고, 실패 지점이 외부 credential/env인지 검증한 뒤 pipeline 순서를 개선하는 작업으로 처리했다.",
-          "updatedAt": "2026-06-05T19:22:06.280Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18566,6 +18598,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-web-searches-2026-2026-06-06-open-source-feature-radar-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-open-source-feature-radar.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: Open Source Feature Radar",
+          "excerpt": "웹 검색 기록: Open Source Feature Radar 검색 시각 2026 06 06 쿼리 open source AI agent desktop feature radar provider setup CLI adapter cockpit GitHub 2026 open source agent platform feature reference explorer Dify Langflow n8n Langfuse OpenHands desktop UI open source AI agent workbench MC",
+          "updatedAt": "2026-06-05T22:19:40.811Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-06-process-pipe-leak-guard-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-process-pipe-leak-guard.ko.md",
           "category": "web-search",
@@ -18603,16 +18645,6 @@
           "title": "2026 06 06 Web Search: Public Release Repeat Retry",
           "excerpt": "2026 06 06 Web Search: Public Release Repeat Retry Queries Tauri v2 updater createUpdaterArtifacts TAURI SIGNING PRIVATE KEY official docs 2026 Tauri v2 macOS signing notarization environment variables APPLE API KEY PATH official docs 2026 Apple notarytool Developer ID notarizati",
           "updatedAt": "2026-06-05T19:29:25.445Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-public-release-retry-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-public-release-retry.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "2026 06 06 Web Search: Public Release Retry",
-          "excerpt": "2026 06 06 Web Search: Public Release Retry Query Tauri v2 updater signing private key environment variable createUpdaterArtifacts latest.json official docs Tauri v2 macOS signing notarization APPLE ID APPLE API KEY stapler official docs Tauri v2 signer generate updater private k",
-          "updatedAt": "2026-06-05T19:21:53.357Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18706,6 +18738,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-06-open-source-feature-radar-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-open-source-feature-radar.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Open Source Feature Radar",
+          "excerpt": "작업 요약: Open Source Feature Radar 기능별 오픈소스 후보를 Product Structure 화면에서 볼 수 있는 오픈소스 기능 레이더 로 구현했다. open source feature reference registry.json 에 기능 layer별 candidate repo, 이식 패턴, 설치 정책을 self documenting config로 기록했다. Workspace Monitor collector, snapshot type, customer sanitizer, Pro",
+          "updatedAt": "2026-06-05T22:24:44.186Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-06-process-pipe-leak-guard-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-process-pipe-leak-guard.ko.md",
           "category": "work-summary",
@@ -18743,16 +18785,6 @@
           "title": "2026 06 06 Work Summary: Public Release Repeat Retry",
           "excerpt": "2026 06 06 Work Summary: Public Release Repeat Retry desktop:package:public 을 다시 실행했다. 현재 로컬 공개 릴리스 env/keychain 상태가 여전히 비어 있음을 확인했다. public package는 fail fast preflight에서 즉시 실패했다. 새 코드 변경은 필요하지 않았다.",
           "updatedAt": "2026-06-05T19:29:25.446Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-public-release-retry-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-public-release-retry.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "2026 06 06 Work Summary: Public Release Retry",
-          "excerpt": "2026 06 06 Work Summary: Public Release Retry desktop:package:public 을 다시 실행했다. public preflight 전 단계의 Workspace Monitor/Rust 검증은 통과했다. 실패 원인은 외부 public release env/credential 부재로 확인했다. package public pipeline에서 public preflight를 commonVerifySteps 앞에 배치해 fail fast로 수정했다. desktop:",
-          "updatedAt": "2026-06-05T19:26:37.257Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18846,6 +18878,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-open-source-feature-radar-json",
+          "path": "_history/work-timings/2026/2026-06-06-open-source-feature-radar.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Open Source Feature Radar",
+          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 open source feature radar\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Search queries captured in web search record.\" }, { \"phase\": \"implementation\", \"status\": \"compl",
+          "updatedAt": "2026-06-05T22:24:44.183Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-process-pipe-leak-guard-json",
           "path": "_history/work-timings/2026/2026-06-06-process-pipe-leak-guard.json",
           "category": "work-timing",
@@ -18886,16 +18928,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-public-release-retry-json",
-          "path": "_history/work-timings/2026/2026-06-06-public-release-retry.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Public Release Retry",
-          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release retry\", \"phases\": { \"phase\": \"web first intake and credential inventory\", \"elapsed\": \"short\" }, { \"phase\": \"public package retry before fix\", \"elapsed\": \"long\" }, { \"phase\": \"fail fast pipeline fix\", \"elapsed",
-          "updatedAt": "2026-06-05T19:24:18.507Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-ui-theory-foundation-refactor-json",
           "path": "_history/work-timings/2026/2026-06-06-ui-theory-foundation-refactor.json",
           "category": "work-timing",
@@ -18914,16 +18946,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2491,
+      "documents": 2497,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 991
+          "count": 992
         },
         {
           "category": "web-search",
-          "count": 396
+          "count": 397
         },
         {
           "category": "plan",
@@ -18931,19 +18963,19 @@
         },
         {
           "category": "request-trace",
-          "count": 324
+          "count": 325
         },
         {
           "category": "work-timing",
-          "count": 246
+          "count": 247
         },
         {
           "category": "user-request",
-          "count": 109
+          "count": 110
         },
         {
           "category": "work-summary",
-          "count": 76
+          "count": 77
         },
         {
           "category": "daily-history",
@@ -18954,7 +18986,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6380029,
+      "totalSourceBytes": 6387013,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18981,9 +19013,9 @@
       "monitorEvents": 64,
       "evidenceEvents": 31,
       "decisionEvents": 0,
-      "openSignals": 22,
+      "openSignals": 20,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T22:09:24.228Z",
+      "latestEventAt": "2026-06-05T22:24:44.187Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19094,6 +19126,111 @@
     ],
     "events": [
       {
+        "id": "history-history-2026-2026-06-06-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 06",
+        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
+        "path": "_history/2026/2026-06-06.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:24:44.187Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-open-source-feature-radar-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: Open Source Feature Radar",
+        "detail": "작업 요약: Open Source Feature Radar 기능별 오픈소스 후보를 Product Structure 화면에서 볼 수 있는 오픈소스 기능 레이더 로 구현했다. open source feature reference registry.json 에 기능 layer별 candidate repo, 이식 패턴, 설치 정책을 self documenting config로 기록했다. Workspace Monitor collector, snapshot type, customer sanitizer, Pro",
+        "path": "_history/work-summaries/2026/2026-06-06-open-source-feature-radar.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:24:44.186Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-open-source-feature-radar-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "평가: Open Source Feature Radar",
+        "detail": "평가: Open Source Feature Radar 결과 요청한 “가능하면 기능 추가, 설치 필요하면 설치”에 대해 기능별 오픈소스 research를 Product Structure 안의 오픈소스 기능 레이더 로 승격했다. 새 dependency 설치는 필요하지 않았다. 구현 평가 오픈소스 후보 repo와 install policy가 open source feature reference registry.json 에 self documenting config로 고정됐다. Workspace Moni",
+        "path": "_history/evaluations/2026/2026-06-06-open-source-feature-radar.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:24:44.185Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-open-source-feature-radar-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적: Open Source Feature Radar",
+        "detail": "요청 결과 추적: Open Source Feature Radar 요청 기능별 오픈소스 조사 결과를 실제 기능으로 추가하고, 설치가 필요하면 설치하라는 요청. 결과 Product Structure에 오픈소스 기능 레이더 추가. 기능 layer별 candidate repo, implementation targets, install policy 표시. 새 dependency 설치는 불필요해 설치하지 않음. 산출물 platform desktop app/configs/open source feature r",
+        "path": "_history/request-traces/2026/2026-06-06-open-source-feature-radar.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:24:44.185Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-open-source-feature-radar-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 Open Source Feature Radar",
+        "detail": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 open source feature radar\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Search queries captured in web search record.\" }, { \"phase\": \"implementation\", \"status\": \"compl",
+        "path": "_history/work-timings/2026/2026-06-06-open-source-feature-radar.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:24:44.183Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-open-source-feature-radar-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: Open Source Feature Radar",
+        "detail": "웹 검색 기록: Open Source Feature Radar 검색 시각 2026 06 06 쿼리 open source AI agent desktop feature radar provider setup CLI adapter cockpit GitHub 2026 open source agent platform feature reference explorer Dify Langflow n8n Langfuse OpenHands desktop UI open source AI agent workbench MC",
+        "path": "_history/web-searches/2026/2026-06-06-open-source-feature-radar.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:19:40.811Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-open-source-feature-radar-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: Open Source Feature Radar",
+        "detail": "사용자 요청 요약: Open Source Feature Radar 사용자는 유사 오픈소스와 기능별 후보를 더 조사하고, 가능하면 플랫폼에 기능으로 추가하며, 설치가 필요하면 설치하라고 요청했다. 이번 slice는 기능별 오픈소스 후보와 설치 정책을 앱 안에서 확인할 수 있는 Product Structure 기능으로 구현한다. 원문 전체는 저장하지 않고 요약만 보존한다.",
+        "path": "_history/user-requests/2026/2026-06-06-open-source-feature-radar.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T22:19:40.811Z"
+      },
+      {
         "id": "history-history-evaluations-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
         "sourceType": "history",
         "signalType": "evaluation",
@@ -19135,21 +19272,6 @@
         "path": "_history/request-traces/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
         "category": "request-trace",
         "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:07:25.312Z"
-      },
-      {
-        "id": "history-history-2026-2026-06-06-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 06",
-        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-        "path": "_history/2026/2026-06-06.md",
-        "category": "daily-history",
-        "language": "unknown",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T22:07:25.312Z"
       },
@@ -20442,96 +20564,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T19:29:25.445Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-public-release-retry-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "warning",
-        "status": "ready",
-        "title": "2026 06 06 Work Summary: Public Release Retry",
-        "detail": "2026 06 06 Work Summary: Public Release Retry desktop:package:public 을 다시 실행했다. public preflight 전 단계의 Workspace Monitor/Rust 검증은 통과했다. 실패 원인은 외부 public release env/credential 부재로 확인했다. package public pipeline에서 public preflight를 commonVerifySteps 앞에 배치해 fail fast로 수정했다. desktop:",
-        "path": "_history/work-summaries/2026/2026-06-06-public-release-retry.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:26:37.257Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-public-release-retry-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 평가: Public Release Retry",
-        "detail": "2026 06 06 평가: Public Release Retry 결과 public package를 실제로 재시도했다. 실패 지점은 구현 누락이 아니라 현재 로컬 환경의 Apple/Tauri public release credential 부재로 확인했다. 재시도에서 발견한 pipeline 비효율을 수정했다: public preflight가 expensive verification 전에 실행된다. 검증 corepack pnpm filter platform desktop app test : 통과, 22",
-        "path": "_history/evaluations/2026/2026-06-06-public-release-retry.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:26:37.257Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-public-release-retry-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "warning",
-        "status": "work-timing",
-        "title": "2026 06 06 Public Release Retry",
-        "detail": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release retry\", \"phases\": { \"phase\": \"web first intake and credential inventory\", \"elapsed\": \"short\" }, { \"phase\": \"public package retry before fix\", \"elapsed\": \"long\" }, { \"phase\": \"fail fast pipeline fix\", \"elapsed",
-        "path": "_history/work-timings/2026/2026-06-06-public-release-retry.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:24:18.507Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-public-release-retry-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "2026 06 06 Request Trace: Public Release Retry",
-        "detail": "2026 06 06 Request Trace: Public Release Retry 요청 “다시 해봐” 실행 최신 Tauri updater/signing 문서를 다시 확인했다. local env와 Keychain Developer ID identity 존재 여부를 값 노출 없이 확인했다. corepack pnpm run desktop:package:public 을 실제 실행했다. 결과 Workspace Monitor check/test/build, desktop tests/check, Rust t",
-        "path": "_history/request-traces/2026/2026-06-06-public-release-retry.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:22:32.673Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-public-release-retry-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "needs_attention",
-        "title": "2026 06 06 사용자 요청 요약: Public Release Retry",
-        "detail": "2026 06 06 사용자 요청 요약: Public Release Retry 사용자가 “다시 해봐”라고 지시했다. 직전 작업의 public release blocker를 실제 명령으로 다시 확인하고, 실패 지점이 외부 credential/env인지 검증한 뒤 pipeline 순서를 개선하는 작업으로 처리했다.",
-        "path": "_history/user-requests/2026/2026-06-06-public-release-retry.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:22:06.280Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-public-release-retry-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "2026 06 06 Web Search: Public Release Retry",
-        "detail": "2026 06 06 Web Search: Public Release Retry Query Tauri v2 updater signing private key environment variable createUpdaterArtifacts latest.json official docs Tauri v2 macOS signing notarization APPLE ID APPLE API KEY stapler official docs Tauri v2 signer generate updater private k",
-        "path": "_history/web-searches/2026/2026-06-06-public-release-retry.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:21:53.357Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -26798,16 +26830,560 @@
       }
     ]
   },
+  "openSourceFeatureReferences": {
+    "sourcePath": "platform-desktop-app/configs/open-source-feature-reference-registry.json",
+    "sourceBoundary": {
+      "policy": "public_sources_only",
+      "customerVisibility": "summary_allowed",
+      "excludedSources": [
+        "private repos",
+        "leaked source",
+        "screenshots without source provenance",
+        "license-incompatible source copy"
+      ],
+      "acceptedSourceTypes": [
+        "official GitHub repository",
+        "official documentation",
+        "internal research record",
+        "direct local clone inspection"
+      ]
+    },
+    "summary": {
+      "totalLayers": 7,
+      "totalRepositories": 24,
+      "installReady": 0,
+      "directExplorationRequired": 7,
+      "highPriority": 7
+    },
+    "referenceLinks": [
+      {
+        "id": "feature_map_research",
+        "title": "Feature-by-feature open-source map",
+        "url": "",
+        "path": "_research/topics/platform-desktop-app/2026-06-06-feature-by-feature-open-source-map.ko.md",
+        "sourceType": "internal_research",
+        "usedFor": [
+          "initial feature-layer to repository mapping",
+          "implementation priority"
+        ],
+        "lastChecked": "2026-06-06"
+      },
+      {
+        "id": "product_feature_registry",
+        "title": "Product Feature Registry",
+        "url": "",
+        "path": "platform-desktop-app/configs/product-feature-registry.json",
+        "sourceType": "internal_config",
+        "usedFor": [
+          "feature layer ownership",
+          "product surface mapping"
+        ],
+        "lastChecked": "2026-06-06"
+      }
+    ],
+    "featureReferenceLayers": [
+      {
+        "featureId": "agent_orchestration",
+        "label": "CLI Orchestration",
+        "priority": "p0",
+        "primarySection": "desktop",
+        "installPolicy": "no_new_dependency_now",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "Agent CLI Cockpit",
+          "process graph",
+          "task pipe",
+          "defer/resume",
+          "multi-lane merge gate"
+        ],
+        "candidateRepos": [
+          {
+            "id": "openhands",
+            "title": "OpenHands",
+            "url": "https://github.com/OpenHands/OpenHands",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [
+              "agent runtime",
+              "local GUI",
+              "CLI",
+              "evaluation infrastructure"
+            ],
+            "patternsToExtract": [
+              "agent workbench",
+              "local GUI",
+              "runtime separation"
+            ]
+          },
+          {
+            "id": "cli_agent_orchestrator",
+            "title": "CLI Agent Orchestrator",
+            "url": "https://github.com/awslabs/cli-agent-orchestrator",
+            "verifiedBy": "direct_clone_and_git_ls_remote",
+            "watchTargets": [
+              "session lifecycle",
+              "supervisor-worker routing",
+              "handoff commands"
+            ],
+            "patternsToExtract": [
+              "isolated CLI sessions",
+              "assign/send_message",
+              "session restore"
+            ]
+          },
+          {
+            "id": "opencode",
+            "title": "opencode",
+            "url": "https://github.com/anomalyco/opencode",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [
+              "tool loop",
+              "CLI UX",
+              "provider handling"
+            ],
+            "patternsToExtract": [
+              "terminal-first agent loop",
+              "provider-agnostic command surface"
+            ]
+          },
+          {
+            "id": "goose",
+            "title": "Goose",
+            "url": "https://github.com/aaif-goose/goose",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [
+              "extensions",
+              "local execution",
+              "tool permissions"
+            ],
+            "patternsToExtract": [
+              "local agent extension model",
+              "safe action prompts"
+            ]
+          }
+        ]
+      },
+      {
+        "featureId": "agent_factory",
+        "label": "Agent Core / Agent Factory",
+        "priority": "p0",
+        "primarySection": "agents",
+        "installPolicy": "no_new_dependency_now",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "AgentCore blueprint wizard",
+          "capability promotion",
+          "prompt/workflow/tool/skill/agent creation"
+        ],
+        "candidateRepos": [
+          {
+            "id": "dify",
+            "title": "Dify",
+            "url": "https://github.com/langgenius/dify",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [
+              "workflow designer",
+              "agent node",
+              "dataset/provider setup"
+            ],
+            "patternsToExtract": [
+              "visual workflow builder",
+              "app publishing",
+              "provider setup"
+            ]
+          },
+          {
+            "id": "langflow",
+            "title": "Langflow",
+            "url": "https://github.com/langflow-ai/langflow",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [
+              "component graph",
+              "agent workflows",
+              "deployment"
+            ],
+            "patternsToExtract": [
+              "graph builder",
+              "component palette",
+              "testable flows"
+            ]
+          },
+          {
+            "id": "flowise",
+            "title": "Flowise",
+            "url": "https://github.com/FlowiseAI/Flowise",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [
+              "agent builder",
+              "node canvas",
+              "credentials"
+            ],
+            "patternsToExtract": [
+              "node graph UX",
+              "credential-aware agent templates"
+            ]
+          },
+          {
+            "id": "n8n",
+            "title": "n8n",
+            "url": "https://github.com/n8n-io/n8n",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [
+              "workflow execution",
+              "approval nodes",
+              "run history"
+            ],
+            "patternsToExtract": [
+              "node workflow",
+              "execution log",
+              "integrations"
+            ]
+          }
+        ]
+      },
+      {
+        "featureId": "root_tool_management",
+        "label": "Root Tool Management",
+        "priority": "p0",
+        "primarySection": "tools",
+        "installPolicy": "optional_tools_need_user_confirmed_audit",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "Provider Account Center",
+          "CLI adapter setup doctor",
+          "MCP manager",
+          "root tool reuse"
+        ],
+        "candidateRepos": [
+          {
+            "id": "open_webui",
+            "title": "Open WebUI",
+            "url": "https://github.com/open-webui/open-webui",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [
+              "provider setup",
+              "Ollama integration",
+              "tool/server management"
+            ],
+            "patternsToExtract": [
+              "model catalog",
+              "provider settings",
+              "local model UX"
+            ]
+          },
+          {
+            "id": "anything_llm",
+            "title": "AnythingLLM",
+            "url": "https://github.com/Mintplex-Labs/anything-llm",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [
+              "workspace settings",
+              "agent skills",
+              "connector setup"
+            ],
+            "patternsToExtract": [
+              "local-first workspace tools",
+              "document/tool settings"
+            ]
+          },
+          {
+            "id": "jan",
+            "title": "Jan",
+            "url": "https://github.com/janhq/jan",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [
+              "local model runtime",
+              "provider settings",
+              "desktop packaging"
+            ],
+            "patternsToExtract": [
+              "offline-first provider UX",
+              "local runtime status"
+            ]
+          },
+          {
+            "id": "mcp_servers",
+            "title": "Model Context Protocol servers",
+            "url": "https://github.com/modelcontextprotocol/servers",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [
+              "server catalog",
+              "config shape",
+              "tool descriptions"
+            ],
+            "patternsToExtract": [
+              "MCP catalog",
+              "server setup",
+              "tool provenance"
+            ]
+          }
+        ]
+      },
+      {
+        "featureId": "work_visibility",
+        "label": "Work Visibility",
+        "priority": "p1",
+        "primarySection": "overview",
+        "installPolicy": "no_new_dependency_now",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "Decision Inbox",
+          "task-run timeline",
+          "run status bar",
+          "decision lineage"
+        ],
+        "candidateRepos": [
+          {
+            "id": "temporal",
+            "title": "Temporal",
+            "url": "https://github.com/temporalio/temporal",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [
+              "workflow history",
+              "retry semantics",
+              "state transitions"
+            ],
+            "patternsToExtract": [
+              "durable workflow state",
+              "retry visibility"
+            ]
+          },
+          {
+            "id": "kestra",
+            "title": "Kestra",
+            "url": "https://github.com/kestra-io/kestra",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [
+              "execution graph",
+              "logs",
+              "retry UI"
+            ],
+            "patternsToExtract": [
+              "workflow run graph",
+              "execution timeline"
+            ]
+          },
+          {
+            "id": "prefect",
+            "title": "Prefect",
+            "url": "https://github.com/PrefectHQ/prefect",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [
+              "flow runs",
+              "state model",
+              "work queues"
+            ],
+            "patternsToExtract": [
+              "run state taxonomy",
+              "work queue view"
+            ]
+          }
+        ]
+      },
+      {
+        "featureId": "learning_improvement_loop",
+        "label": "Learning & Evaluation Loop",
+        "priority": "p1",
+        "primarySection": "intent",
+        "installPolicy": "no_new_dependency_now",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "Evaluation cockpit",
+          "evidence trail",
+          "prompt regression gates",
+          "provider cost/latency records"
+        ],
+        "candidateRepos": [
+          {
+            "id": "langfuse",
+            "title": "Langfuse",
+            "url": "https://github.com/langfuse/langfuse",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [
+              "traces",
+              "datasets",
+              "scores",
+              "prompt management"
+            ],
+            "patternsToExtract": [
+              "trace schema",
+              "evaluation dataset",
+              "prompt versioning"
+            ]
+          },
+          {
+            "id": "phoenix",
+            "title": "Phoenix",
+            "url": "https://github.com/Arize-ai/phoenix",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [
+              "observability",
+              "evaluation",
+              "OpenInference"
+            ],
+            "patternsToExtract": [
+              "LLM trace view",
+              "eval debugging"
+            ]
+          },
+          {
+            "id": "promptfoo",
+            "title": "promptfoo",
+            "url": "https://github.com/promptfoo/promptfoo",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [
+              "prompt tests",
+              "providers",
+              "assertions"
+            ],
+            "patternsToExtract": [
+              "prompt regression test",
+              "provider comparison"
+            ]
+          }
+        ]
+      },
+      {
+        "featureId": "agent_development_environment",
+        "label": "Agent Development Environment",
+        "priority": "p1",
+        "primarySection": "source",
+        "installPolicy": "no_new_dependency_now",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "Source workbench",
+          "scoped file index",
+          "draft queue",
+          "diff preview"
+        ],
+        "candidateRepos": [
+          {
+            "id": "cline",
+            "title": "Cline",
+            "url": "https://github.com/cline/cline",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [
+              "approval UX",
+              "diff handling",
+              "tool calls"
+            ],
+            "patternsToExtract": [
+              "approval-first edits",
+              "tool call cards"
+            ]
+          },
+          {
+            "id": "continue",
+            "title": "Continue",
+            "url": "https://github.com/continuedev/continue",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [
+              "context engine",
+              "IDE integration",
+              "assistant actions"
+            ],
+            "patternsToExtract": [
+              "editor-agnostic context",
+              "source action UX"
+            ]
+          },
+          {
+            "id": "gitbutler",
+            "title": "GitButler",
+            "url": "https://github.com/gitbutlerapp/gitbutler",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [
+              "desktop Git UI",
+              "branch/change grouping",
+              "review flow"
+            ],
+            "patternsToExtract": [
+              "change grouping",
+              "review-first Git surface"
+            ]
+          }
+        ]
+      },
+      {
+        "featureId": "desktop_native_runtime",
+        "label": "Desktop Shell / Native Runtime",
+        "priority": "p1",
+        "primarySection": "desktop",
+        "installPolicy": "install_only_after_runtime_audit",
+        "installNeededNow": false,
+        "directExplorationRequired": true,
+        "implementationTargets": [
+          "Rust/Tauri runtime",
+          "native PTY drawer",
+          "resource telemetry",
+          "package release gates"
+        ],
+        "candidateRepos": [
+          {
+            "id": "tauri",
+            "title": "Tauri",
+            "url": "https://github.com/tauri-apps/tauri",
+            "verifiedBy": "official_github_page_and_git_ls_remote",
+            "watchTargets": [
+              "command bridge",
+              "permissions",
+              "bundling"
+            ],
+            "patternsToExtract": [
+              "native command boundary",
+              "permission model",
+              "packaging"
+            ]
+          },
+          {
+            "id": "xtermjs",
+            "title": "xterm.js",
+            "url": "https://github.com/xtermjs/xterm.js",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [
+              "terminal renderer",
+              "addons",
+              "scrollback"
+            ],
+            "patternsToExtract": [
+              "terminal rendering",
+              "bounded scrollback"
+            ]
+          },
+          {
+            "id": "node_pty",
+            "title": "node-pty",
+            "url": "https://github.com/microsoft/node-pty",
+            "verifiedBy": "git_ls_remote",
+            "watchTargets": [
+              "PTY lifecycle",
+              "platform differences",
+              "process cleanup"
+            ],
+            "patternsToExtract": [
+              "PTY process model",
+              "resize semantics"
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3523,
+      "sourceDocuments": 3535,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-05T22:09:24.228Z"
+      "latestInsightAt": "2026-06-05T22:24:44.187Z"
     },
     "inferenceStages": [
       {
@@ -26930,7 +27506,7 @@
           "최종 평가",
           "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브"
         ],
-        "latestEvidenceAt": "2026-06-05T22:07:25.312Z"
+        "latestEvidenceAt": "2026-06-05T22:24:44.187Z"
       },
       {
         "id": "web-research-to-spec",
@@ -26944,19 +27520,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1630,
+        "signalCount": 1640,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 457
+            "count": 458
           },
           {
             "category": "project-spec",
-            "count": 440
+            "count": 445
           },
           {
             "category": "web-search",
-            "count": 397
+            "count": 398
           },
           {
             "category": "plan",
@@ -26964,18 +27540,18 @@
           },
           {
             "category": "request-trace",
-            "count": 102
+            "count": 103
           },
           {
             "category": "work-timing",
-            "count": 27
-          },
-          {
-            "category": "daily-history",
-            "count": 2
+            "count": 28
           },
           {
             "category": "project-doc",
+            "count": 3
+          },
+          {
+            "category": "daily-history",
             "count": 2
           }
         ],
@@ -26995,7 +27571,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-05T22:09:24.228Z"
+        "latestEvidenceAt": "2026-06-05T22:24:44.185Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27068,7 +27644,7 @@
           "계획: Desktop CLI Supervisor MVP",
           "2026 06 02 큰 범위 작업 분해 평가"
         ],
-        "latestEvidenceAt": "2026-06-05T22:07:25.312Z"
+        "latestEvidenceAt": "2026-06-05T22:24:44.187Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -27141,7 +27717,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-05T22:07:25.312Z"
+        "latestEvidenceAt": "2026-06-05T22:24:44.187Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -27155,11 +27731,11 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1376,
+        "signalCount": 1377,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 590
+            "count": 591
           },
           {
             "category": "evaluation",
@@ -27214,7 +27790,7 @@
           "사용자 요청 요약: Activity Rail Intuitiveness",
           "Tool Studio UI 요청 결과 추적"
         ],
-        "latestEvidenceAt": "2026-06-05T22:07:25.312Z"
+        "latestEvidenceAt": "2026-06-05T22:24:44.187Z"
       },
       {
         "id": "release-blocker-gate",
@@ -27290,14 +27866,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3523,
+      "sourceDocuments": 3535,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-05T22:09:24.228Z"
+      "latestInsightAt": "2026-06-05T22:24:44.187Z"
     },
     "operatingModel": [
       {
@@ -27355,13 +27931,13 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 2980,
+        "signalCount": 2990,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1630
+            "signalCount": 1640
           },
           {
             "id": "large-scope-slicing",
@@ -27401,7 +27977,7 @@
           "계획: 질문 보류 기능",
           "계획: Unified Ops Timeline"
         ],
-        "latestEvidenceAt": "2026-06-05T22:09:24.228Z",
+        "latestEvidenceAt": "2026-06-05T22:24:44.187Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -27470,7 +28046,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-05T22:07:25.312Z",
+        "latestEvidenceAt": "2026-06-05T22:24:44.187Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -27499,13 +28075,13 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2327,
+        "signalCount": 2328,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1376
+            "signalCount": 1377
           },
           {
             "id": "large-scope-slicing",
@@ -27539,7 +28115,7 @@
           "계획: 질문 보류 기능",
           "계획: Unified Ops Timeline"
         ],
-        "latestEvidenceAt": "2026-06-05T22:07:25.312Z",
+        "latestEvidenceAt": "2026-06-05T22:24:44.187Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -27608,7 +28184,7 @@
           "2026 06 06 User Request: Public Release Developer Repatch",
           "Public Release Updater Automation Spec"
         ],
-        "latestEvidenceAt": "2026-06-05T22:07:25.312Z",
+        "latestEvidenceAt": "2026-06-05T22:24:44.187Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -27637,7 +28213,7 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2581,
+        "signalCount": 2591,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
@@ -27649,7 +28225,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1630
+            "signalCount": 1640
           }
         ],
         "missingPatternIds": [],
@@ -27677,7 +28253,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-05T22:09:24.228Z",
+        "latestEvidenceAt": "2026-06-05T22:24:44.187Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -27706,7 +28282,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1739,
+        "signalCount": 1749,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -27718,7 +28294,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1630
+            "signalCount": 1640
           }
         ],
         "missingPatternIds": [],
@@ -27746,7 +28322,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-05T22:09:24.228Z",
+        "latestEvidenceAt": "2026-06-05T22:24:44.185Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
